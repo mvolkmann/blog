@@ -2,4 +2,4 @@
 
 Content is coming soon!
 
-Testing time to deploy.
+Testing streamlined deploy.
