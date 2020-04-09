@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "eleventy",
+    "add": "git add .",
     "commit": "git commit -av",
     "push": "git push origin master",
     "deploy": "gh-pages -d _site",
-    "start": "npm-run-all build commit push deploy"
+    "start": "npm-run-all build add commit push deploy"
   },
   "repository": {
     "type": "git",
