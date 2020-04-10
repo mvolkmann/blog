@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nunjucks</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <h1>Mark Volkmann's Blog</h1>
+    <main>
+      <nav> <!-- for accessible page navigation -->
+        <h3>Intro. Topics</h3>
+        <ul><li><a href="/ssgs/">Static site generators</a></li><li><a href="/why-11ty/">Why 11ty?</a></li><li><a href="/11ty-overview/">11ty Overview</a></li><li><a href="/getting-started/">Getting Started</a></li><li><a href="/github-pages/">GitHub Pages</a></li></ul>
+
+        <hr>
+
+        <h3>More Topics</h3>
+        <ul><li><a href="/collection-sorting/">Collection Sorting</a></li><li><a href="/collections/">Collections</a></li><li><a href="/data-cascade/">Data Cascade</a></li><li><a href="/debugging-tips/">Debugging Tips</a></li><li><a href="/front-matter/">Front Matter</a></li><li><a href="/global-data/">Global Data</a></li><li><a href="/internationalization/">Internationalization</a></li><li><a href="/markdown/">Markdown</a></li><li><a href="/nunjucks/">Nunjucks</a></li><li><a href="/pagination/">Pagination</a></li><li><a href="/permalinks/">Permalinks</a></li><li><a href="/rest-services/">REST Services</a></li><li><a href="/shortcodes/">Shortcodes</a></li><li><a href="/styling/">Styling</a></li><li><a href="/styling-with-sass/">Styling with Sass</a></li><li><a href="/syntax-highlighting/">Syntax Highlighting</a></li><li><a href="/templating-languages/">Templating Languages</a></li><li><a href="/yaml/">YAML</a></li></ul>
+      </nav>
+      
+      <section>
+        <h2>Nunjucks</h2> <!-- uses a variable defined in front matter -->
+        <!-- Page content is inserted here. -->
+        <p>Nunjucks is a template language implemented in JavaScript.
+It supports features seen in most programming languages.</p>
+<h2>VS Code extensions</h2>
+<p>The VS Code extension &quot;Nunjucks&quot; (ronnidc.nunjucks)
+applies syntax highlighting in <code>.njk</code> files.</p>
+<p>The VS Code extension &quot;Nunjucks Snippets&quot;
+(luwenjiechn.nunjucks-vscode-snippets) defines Nunjucks snippets
+to simplifying writing Nunjucks constructs in <code>.njk</code> files.</p>
+<h2>Configuration</h2>
+<p>TODO: Cover other nunjucks-specific configuration.</p>
+<h2>Data types</h2>
+<p>Nunjucks essential supports the same data types as JavaScript.
+These include:</p>
+<ul>
+<li>Boolean: true, false</li>
+<li>Numbers: 2, 3.4</li>
+<li>Strings: &quot;in double-quotes&quot;, 'in single-quotes'</li>
+<li>Arrays: [true, 2, 'test']</li>
+<li>Dicts: { key1: true, key2: 'text' }</li>
+</ul>
+<h2>Operators</h2>
+<p>Nunjucks supports these mathematical operators:</p>
+<ul>
+<li>+, -, *, /</li>
+<li>// (integer division)</li>
+<li>% (modulo)</li>
+<li>** (exponentiation)</li>
+</ul>
+<p>Nunjucks supports these comparison operators from JavaScript:</p>
+<ul>
+<li>==, ===</li>
+<li>!=, !==</li>
+<li>&lt;, &lt;=, &gt;=, &gt;</li>
+</ul>
+<p>Nunjucks supports these logical operators:</p>
+<ul>
+<li>and, or, not</li>
+<li>parentheses to group expressions</li>
+</ul>
+<h2>Comments</h2>
+<p>The syntax for comments is:</p>
+<pre><code class="language-njk">{# some comment #}
+</code></pre>
+<h2>Variables</h2>
+<p>To define or modify a variable:</p>
+<pre><code class="language-njk">{% set name = value %}
+</code></pre>
+<p>Variables defined at the top-level are global.
+Otherwise they are scoped to the construct in which they are defined.</p>
+<h2>Rendering</h2>
+<p>To render an expression, enclose it in double-curly braces.
+For example:</p>
+<pre><code class="language-njk">{{ dog.name }}
+</code></pre>
+<h2>Filters</h2>
+<p>Nunjucks can render the result of passing a value through a filter.
+There are many provided filters and custom filters can be implemented.
+The provided filters are listed
+<a href="https://mozilla.github.io/nunjucks/templating.html#builtin-filters">here</a>.
+They include <code>abs</code>, <code>batch</code>, <code>capitalize</code>, <code>center</code>, <code>default</code>,
+<code>dictsort</code>, <code>dump</code>, <code>escape</code>, <code>first</code>, <code>float</code>, <code>forceescape</code>,
+<code>groupby</code>, <code>indent</code>, <code>int</code>, <code>join</code>, <code>last</code>, <code>length</code>, <code>list</code>,
+<code>lower</code>, <code>nl2br</code>, <code>random</code>, <code>rejectattr</code>, <code>replace</code>, <code>reverse</code>,
+<code>round</code>, <code>safe</code>, <code>selectattr</code>, <code>slice</code>, <code>sort</code>, <code>string</code>, <code>striptags</code>,
+<code>sum</code>, <code>title</code>, <code>trim</code>, <code>truncate</code>, <code>upper</code>, <code>urlencode</code>, <code>urlize</code>,
+and <code>wordcount</code>.</p>
+<p>There are too many to describe, but here are some highlights:</p>
+<ul>
+<li><code>dump</code> calls <code>JSON.stringify</code> on a value and is useful for debugging.</li>
+<li><code>first</code> returns the first element of an array or the first character of a string.</li>
+<li><code>last</code> returns the last element of an array or the last character of a string.</li>
+<li><code>groupby</code> creates an array of arrays of objects from an array of objects
+based on a common property value.</li>
+<li><code>join</code> concatenates an array of values, separated by a delimiter</li>
+<li><code>nl2br</code> replaces newline characters with HTML <code>&lt;br /&gt;</code> elements</li>
+<li><code>random</code> returns a random element from an array</li>
+<li><code>rejectattr</code> filters an array of objects, rejecting those where a given property passes a test</li>
+<li><code>selectattr</code> filters an array of objects, keeping those where a given property passes a test</li>
+<li><code>sort</code> sorts a data array. It is called as a function with three arguments.
+The first is a boolean indicating whether the sort should be in reverse order.
+The second is a boolean indicating whether the sort should be case insensitive.
+The third is the string name of the property on which the objects should be sorted.
+For example,  <code>{% for team in hockey | sort(false, false, 'city') %}</code> .</li>
+<li><code>urlencode</code> encodes a URL using UTF-8.</li>
+<li><code>urlize</code> turns URLs in a string into links.
+The string can contain any number of URLs.
+The result must be passed to the <code>safe</code> filter.
+Otherwise the resulting HTML is escaped and presented as plain text.
+For example, before <a href="http://foo.bar">http://foo.bar</a> after
+renders <code>before &lt;a href=&quot;http://foo.bar&quot;&gt;http://foo.bar&lt;/a&gt; after</code>.</li>
+</ul>
+<p>Here is an example of applying the <code>upper</code> filter to a string:</p>
+<pre><code class="language-njk">{{ dog.name | upper }}
+</code></pre>
+<p>Another syntax is available for applying a filter
+to a large amount of content.
+For example:</p>
+<pre><code class="language-njk">{% filter upper %}
+  Mark is a software engineer at Object Computing, Inc.
+{% endfilter %}
+</code></pre>
+<p>This form can only contain literal content, not other Nunjucks constructs.</p>
+<p>Nunjucks also supports defining custom filters.
+When using 11ty, they can be defined in the <code>.eleventy.js</code>.
+For example, this filter writes the value of an expression
+to the devtools console.</p>
+<pre><code class="language-js">eleventyConfig.addFilter('log', console.log);
+</code></pre>
+<p>TODO: Try this!</p>
+<h2>Conditional logic</h2>
+<p>Content can be conditionally included using an <code>if</code> statement.
+For example:</p>
+<p>TODO: Change this rather than just copying from the official docs.</p>
+<pre><code class="language-njk">{% if hungry %}
+  I am hungry.
+{% elif tired %}
+  I am tired.
+{% else %}
+  I am good!
+{% endif %}
+</code></pre>
+<p>Nunjucks supports using and <code>if</code> for an odd kind of ternary operator.
+For example, this outputs &quot;yellow&quot; if <code>happy</code> is true.</p>
+<pre><code class="language-njk">{{ &quot;happy&quot; if happy }}
+</code></pre>
+<p>This is similar, but outputs &quot;gray&quot; if <code>happy</code> is false.</p>
+<pre><code class="language-njk">{{ &quot;yellow&quot; if happy else &quot;gray&quot; }}
+</code></pre>
+<h2>Iteration</h2>
+<p>A <code>for</code> loop iterates over the elements of an array
+or the properties of an object.</p>
+<p>If the variable <code>dogs</code> holds an array of objects,
+we can iterate over the array as follows:</p>
+<pre><code class="language-njk">{% for dog in dogs %}
+  &lt;p&gt;{{ dog.name }} is a {{ dog.breed }}.&lt;/p&gt;
+{% else %}
+  &lt;p&gt;Who let the dogs out?&lt;/p&gt;
+{% endfor %}
+</code></pre>
+<p>The current loop index is available in
+<code>loop.index</code> (starts from 1) and <code>loop.index0</code> (starts from 0).</p>
+<p>If the variable <code>dog</code> holds an object,
+we can iterate over its properties as follows:</p>
+<pre><code class="language-njk">{% for key, value in dog %}
+  &lt;p&gt;{{key}} = {{value}}&lt;/p&gt;
+{% endfor %}
+</code></pre>
+<p>There is also support for asynchronous versions of this
+(<code>asyncEach</code> and <code>asyncAll</code>) that most sites will not need.
+It is documented
+<a href="https://mozilla.github.io/nunjucks/api.html#asynchronous-support">here</a>.</p>
+<h2>Function calls</h2>
+<p>JavaScript functions can be called using the same syntax as JavaScript.
+For example, this calls a function and renders its result:</p>
+<pre><code class="language-njk">{{ someFunction(arg1, arg2) }}
+</code></pre>
+<h2>Regular expressions</h2>
+<p>Regular expressions are defined by beginning with <code>r/</code>.
+For example:</p>
+<pre><code class="language-njk">{% set re = r/^a.*z$/i %}
+{% if re.test(dog.name) %}
+  This dog goes from a to z!
+{% endif %}
+</code></pre>
+<p>The <code>i</code> option at the end of the regular expression
+signifies case-insensitive matching.</p>
+<h2>Sanitizing</h2>
+<p>When rendering HTML from a potentially untrusted source,
+use the <code>safe</code> filter to sanitize it.
+For example:</p>
+<pre><code class="language-njk">{{ someHtml | save }}
+</code></pre>
+<h2>Includes</h2>
+<p>One template can include another.
+This allows a template to be reused in many places.
+The syntax is  <code>{% include &quot;</code><em><code>file-path</code></em><code>&quot; %}</code> .</p>
+<p>For example:</p>
+<pre><code class="language-njk">{% include &quot;snippet.html&quot; %}
+</code></pre>
+<p>This is useful when the content to be included
+doesn't require any data to be supplied.
+When data is required, consider using Nunjucks macros
+which are described next.</p>
+<h2>Macros</h2>
+<p>Macros are like functions that have parameters
+and render something based on those.
+Parameters can have default values that are used when a value is not provided.
+For example:</p>
+<pre><code class="language-njk">{% macro dogP(name, breed, gender='unknown') %}
+&lt;p&gt;{{name}} is a {{gender}} {{breed}}.&lt;/p&gt;
+{% endmacro %}
+</code></pre>
+<p>A macro call looks like a function call.
+For example:</p>
+<pre><code class="language-njk">{% for dog in collections.dogsByName %}
+  {{ dogP(dog.data.name, dog.data.breed, dog.data.gender) }}
+{% endfor %}
+</code></pre>
+<p>Arguments can be specified positionally or by name.
+For example:</p>
+<pre><code class="language-njk">{% for dog in collections.dogsByName %}
+  {{ dogP(gender=dog.data.gender, breed=dog.data.breed, name=dog.data.name) }}
+{% endfor %}
+</code></pre>
+<p>TODO: Maybe Nunjucks macros can be used as an alternative to 11ty shortcodes.
+TODO: Can they be defined globally?</p>
+<h2>Blocks</h2>
+<p>Blocks in Nunjucks are like named slots in Svelte.
+They allow a template to pass content into another template.
+This is described <a href="https://mozilla.github.io/nunjucks/templating.html#template-inheritance">here</a>.</p>
+<h2>Whitespace</h2>
+<p>By default all whitespace is retained.
+To trim whitespace before a construct, begin with <code>{%-</code> instead of <code>{%</code>.
+To trim whitespace after a construct, end with <code>-%}</code> instead of <code>%}</code>.
+Zach Leatherman recommends only using <code>{%-</code>.</p>
+<h2>Global functions</h2>
+<p>Nunjucks provides some predefined functions
+that address common needs.</p>
+<ul>
+<li><code>range</code> is used to iterate over a range of integer values.</li>
+<li><code>cycler</code> rotates through a set of values.</li>
+<li><code>joiner</code> returns a function that outputs a given string
+each time it is called except for the first</li>
+</ul>
+<h2>Other topics</h2>
+<p>I haven't described these topics yet:
+call, extends, import, raw, super, verbatim</p>
+
+      </section>
+    </main>
+    <footer>
+      &copy; R. Mark Volkmann, 2020
+    </footer>
+  </body>
+</html>

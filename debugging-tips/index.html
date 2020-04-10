@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome!</title>
+    <title>Debugging Tips</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
@@ -20,9 +20,16 @@
       </nav>
       
       <section>
-        <h2>Welcome!</h2> <!-- uses a variable defined in front matter -->
+        <h2>Debugging Tips</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Choose a topic in the left nav.</p>
+        <p>To see the value of a variable in the devtools console,
+use the 11ty <code>log</code> filter.
+For example:</p>
+<pre><code class="language-njk">
+</code></pre>
+<p>To see the content of an array or object within a page,
+use the Nunjucks <code>dump</code> filter which calls <code>JSON.stringify</code>.
+For example, <code>&lt;div&gt;myVariable =</code>.</p>
 
       </section>
     </main>

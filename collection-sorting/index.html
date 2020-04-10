@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collection Sorting</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <h1>Mark Volkmann's Blog</h1>
+    <main>
+      <nav> <!-- for accessible page navigation -->
+        <h3>Intro. Topics</h3>
+        <ul><li><a href="/ssgs/">Static site generators</a></li><li><a href="/why-11ty/">Why 11ty?</a></li><li><a href="/11ty-overview/">11ty Overview</a></li><li><a href="/getting-started/">Getting Started</a></li><li><a href="/github-pages/">GitHub Pages</a></li></ul>
+
+        <hr>
+
+        <h3>More Topics</h3>
+        <ul><li><a href="/collection-sorting/">Collection Sorting</a></li><li><a href="/collections/">Collections</a></li><li><a href="/data-cascade/">Data Cascade</a></li><li><a href="/debugging-tips/">Debugging Tips</a></li><li><a href="/front-matter/">Front Matter</a></li><li><a href="/global-data/">Global Data</a></li><li><a href="/internationalization/">Internationalization</a></li><li><a href="/markdown/">Markdown</a></li><li><a href="/nunjucks/">Nunjucks</a></li><li><a href="/pagination/">Pagination</a></li><li><a href="/permalinks/">Permalinks</a></li><li><a href="/rest-services/">REST Services</a></li><li><a href="/shortcodes/">Shortcodes</a></li><li><a href="/styling/">Styling</a></li><li><a href="/styling-with-sass/">Styling with Sass</a></li><li><a href="/syntax-highlighting/">Syntax Highlighting</a></li><li><a href="/templating-languages/">Templating Languages</a></li><li><a href="/yaml/">YAML</a></li></ul>
+      </nav>
+      
+      <section>
+        <h2>Collection Sorting</h2> <!-- uses a variable defined in front matter -->
+        <!-- Page content is inserted here. -->
+        <p>Collections are sorted on the creation date of their documents.
+To iterate over a collection in a different order,
+add code in <code>.eleventy.js</code> that adds
+a new collection that is sorted in the desired way.</p>
+<p>For example:</p>
+<pre><code class="language-js">eleventyConfig.addCollection('dogsByName', collection =&gt; {
+  // Get only the documents that have a tag of &quot;dog&quot;.
+  const dogs = collection.getFilteredByTag('dog');
+  // Sort the dogs on their name.
+  dogs.sort((dog1, dog2) =&gt; dog1.data.name.localeCompare(dog2.data.name));
+  return dogs;
+});
+</code></pre>
+<p>Use the collection <code>dogsByName</code> in a <code>for</code> loop
+to iterate in the new sorted order.</p>
+<p>This can be used allow each of the templates in the <code>nav</code> collection
+described above to specify its order in the list of nav links.
+To do this, add a <code>navOrder</code> variable to the front matter of each of these templates.
+For example:</p>
+<pre><code class="language-yaml">navOrder: 3
+</code></pre>
+<p>Add a collection in <code>.eleventy.js</code> that holds
+all the items in the <code>nav</code> collection,
+but sorted on the <code>navOrder</code> values.
+For example:</p>
+<pre><code class="language-js">eleventyConfig.addCollection('orderedNav', collection =&gt; {
+  // Get only the documents that have a tag of &quot;dog&quot;.
+  const navs = collection.getFilteredByTag('nav');
+  navs.sort((nav1, nav2) =&gt; nav1.data.navOrder - nav2.data.navOrder);
+  return navs;
+});
+</code></pre>
+<p>Finally, change the layout that renders the nav links
+to iterate over <code>collections.orderedNav</code> instead of <code>collections.nav</code>.</p>
+
+      </section>
+    </main>
+    <footer>
+      &copy; R. Mark Volkmann, 2020
+    </footer>
+  </body>
+</html>

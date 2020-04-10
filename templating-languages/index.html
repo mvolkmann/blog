@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome!</title>
+    <title>Templating Languages</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
@@ -20,9 +20,41 @@
       </nav>
       
       <section>
-        <h2>Welcome!</h2> <!-- uses a variable defined in front matter -->
+        <h2>Templating Languages</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Choose a topic in the left nav.</p>
+        <p>The default templating language available for use in Markdown files is Liquid.
+Liquid was created by Shopify.
+It is implemented in Ruby.</p>
+<p>Another popular option is Nunjucks.
+It was created by Mozilla and is implemented in JavaScript.
+Nunjucks is very similar to Liquid.
+Much of the syntax is identical.
+But Nunjucks has many features that are not present in Liquid.</p>
+<p>For details on Nunjucks syntax, see my notes file <code>NunjucksNotes.md</code> and
+<a href="https://mozilla.github.io/nunjucks/templating.html">Nunjucks Templating</a>
+It's a pretty extensive language!</p>
+<p>It is not necessary to install Nunjucks in order to use it in 11ty.
+However, it must be enabled.
+To enable use of Nunjucks in a particular Markdown file,
+add the following front matter:</p>
+<pre><code class="language-yaml">templateEngineOverride: njk,md
+</code></pre>
+<p>To enable use of Nunjucks in all Markdown files,
+configure it in <code>.eleventy.js</code> using one of these approaches:</p>
+<pre><code class="language-js">module.exports = {
+  markdownTemplateEngine: 'njk'
+};
+</code></pre>
+<p>or</p>
+<pre><code class="language-js">module.exports = eleventyConfig =&gt; {
+  // Call methods on eleventyConfig here.
+
+  return {
+    markdownTemplateEngine: 'njk'
+  };
+};
+</code></pre>
+<p>All the code examples that follow assume the use of Nunjucks.</p>
 
       </section>
     </main>

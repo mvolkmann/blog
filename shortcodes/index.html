@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shortcodes</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <h1>Mark Volkmann's Blog</h1>
+    <main>
+      <nav> <!-- for accessible page navigation -->
+        <h3>Intro. Topics</h3>
+        <ul><li><a href="/ssgs/">Static site generators</a></li><li><a href="/why-11ty/">Why 11ty?</a></li><li><a href="/11ty-overview/">11ty Overview</a></li><li><a href="/getting-started/">Getting Started</a></li><li><a href="/github-pages/">GitHub Pages</a></li></ul>
+
+        <hr>
+
+        <h3>More Topics</h3>
+        <ul><li><a href="/collection-sorting/">Collection Sorting</a></li><li><a href="/collections/">Collections</a></li><li><a href="/data-cascade/">Data Cascade</a></li><li><a href="/debugging-tips/">Debugging Tips</a></li><li><a href="/front-matter/">Front Matter</a></li><li><a href="/global-data/">Global Data</a></li><li><a href="/internationalization/">Internationalization</a></li><li><a href="/markdown/">Markdown</a></li><li><a href="/nunjucks/">Nunjucks</a></li><li><a href="/pagination/">Pagination</a></li><li><a href="/permalinks/">Permalinks</a></li><li><a href="/rest-services/">REST Services</a></li><li><a href="/shortcodes/">Shortcodes</a></li><li><a href="/styling/">Styling</a></li><li><a href="/styling-with-sass/">Styling with Sass</a></li><li><a href="/syntax-highlighting/">Syntax Highlighting</a></li><li><a href="/templating-languages/">Templating Languages</a></li><li><a href="/yaml/">YAML</a></li></ul>
+      </nav>
+      
+      <section>
+        <h2>Shortcodes</h2> <!-- uses a variable defined in front matter -->
+        <!-- Page content is inserted here. -->
+        <p>Shortcodes define snippets of reusable content.
+This is the closest thing 11ty provides to components
+in web frameworks like React, Vue, Angular, and Svelte.
+For example, here is a &quot;dog&quot; shortcode definition that is
+defined in <code>.eleventy.js</code> to make it globally available.
+When defined this way they are referred to as &quot;universal shortcodes&quot;.</p>
+<pre><code class="language-js">eleventyConfig.addShortcode(
+  'dog',
+  (breed, name) =&gt; `
+    &lt;div class=&quot;dog&quot;&gt;
+      &lt;div class=&quot;name&quot;&gt;Name: ${name}&lt;/div&gt;
+      &lt;div class=&quot;breed&quot;&gt;Breed: ${breed}&lt;/div&gt;
+    &lt;/div&gt;
+  `
+);
+</code></pre>
+<p>To use this shortcode:</p>
+<pre><code class="language-njk">{% for dog in collections.dogsByName %}
+  {{ dog dog.data.breed, dog.data.name }}
+{% endfor %}
+</code></pre>
+<p>Shortcodes can be defined in any <code>.js</code> file.
+For example, to define a shortcode that is only available
+in and below the <code>company</code> directory,
+define it in the file <code>company/company.11tydata.js</code>
+as follows:</p>
+<pre><code class="language-js">module.exports = function ({firstName, lastName}) {
+  return `&lt;h1&gt;${this.user(firstName, lastName)}&lt;/h1&gt;`;
+};
+</code></pre>
+<p>Shortcodes return a string of HTML that is often constructed
+using a JavaScript template literal.
+A downside of this approach is that it limits
+the ability of tooling to detect syntax errors in the HTML.</p>
+<p>TODO: Cover non-universal shortcodes?
+TODO: Are these just plain JS functions that return a string of HTML?</p>
+<p>TODO: Cover &quot;paired shortcodes&quot;?</p>
+<p>If a snippet doesn't require any data to be supplied, a Nunjucks
+<a href="https://mozilla.github.io/nunjucks/templating.html#include">include</a>
+can used as an alternative.</p>
+<p>Another alternative is to use Nunjucks
+<a href="https://mozilla.github.io/nunjucks/templating.html#macro">macros</a>.</p>
+<p>Unlike web framework components, 11ty &quot;components&quot;
+don’t have runtime behavior.
+This makes them far simpler to implement.
+All they do is render something based on data passed to them.</p>
+<p>Two options to consider for implementing 11ty &quot;components&quot; are
+JavaScript-focused shortcodes and markup focused Nunjucks macros.
+TODO: See your svg.njk example in &quot;my-project&quot; and include that here.
+TODO: Also see the &quot;circle&quot; shortcode defined in .eleventy.js.</p>
+
+      </section>
+    </main>
+    <footer>
+      &copy; R. Mark Volkmann, 2020
+    </footer>
+  </body>
+</html>

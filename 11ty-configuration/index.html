@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11ty Configuration</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <h1>Mark Volkmann's Blog</h1>
+    <main>
+      <nav> <!-- for accessible page navigation -->
+        <h3>Intro. Topics</h3>
+        <ul><li><a href="/ssgs/">Static site generators</a></li><li><a href="/why-11ty/">Why 11ty?</a></li><li><a href="/11ty-overview/">11ty Overview</a></li><li><a href="/getting-started/">Getting Started</a></li><li><a href="/github-pages/">GitHub Pages</a></li></ul>
+
+        <hr>
+
+        <h3>More Topics</h3>
+        <ul><li><a href="/collection-sorting/">Collection Sorting</a></li><li><a href="/collections/">Collections</a></li><li><a href="/data-cascade/">Data Cascade</a></li><li><a href="/debugging-tips/">Debugging Tips</a></li><li><a href="/front-matter/">Front Matter</a></li><li><a href="/global-data/">Global Data</a></li><li><a href="/internationalization/">Internationalization</a></li><li><a href="/markdown/">Markdown</a></li><li><a href="/nunjucks/">Nunjucks</a></li><li><a href="/pagination/">Pagination</a></li><li><a href="/permalinks/">Permalinks</a></li><li><a href="/rest-services/">REST Services</a></li><li><a href="/shortcodes/">Shortcodes</a></li><li><a href="/styling/">Styling</a></li><li><a href="/styling-with-sass/">Styling with Sass</a></li><li><a href="/syntax-highlighting/">Syntax Highlighting</a></li><li><a href="/templating-languages/">Templating Languages</a></li><li><a href="/yaml/">YAML</a></li></ul>
+      </nav>
+      
+      <section>
+        <h2>11ty Configuration</h2> <!-- uses a variable defined in front matter -->
+        <!-- Page content is inserted here. -->
+        <p>Configuration options for 11ty are documented
+<a href="https://www.11ty.dev/docs/config/">here</a>.</p>
+<p>By default the file <code>.eleventy.js</code> is used
+to specify configuration options for 11ty.
+This file makes its default export
+either an object or a function.
+When it is a function, it has the structure shown below.
+When it is an object, it is like the return value of this function.</p>
+<p>This example configuration explicitly
+sets each option to its the default value.</p>
+<pre><code class="language-js">module.exports = eleventyConfig =&gt; {
+  //TODO: Add examples of adding filters, shortcodes, custom tags,
+  //TODO: JavaScript functions, custom collections, and plugins.
+
+  eleventyConfig.addLinter('linter-name', (content, inputPath, outputPath =&gt; {
+    // Add code to lint template output
+    // in &quot;content&quot; that came from &quot;inputPath&quot;.
+    // Error messages can include &quot;inputPath&quot;.
+    // Presumably if anything is fixed,
+    // updated content should be written to &quot;outputPath&quot;.
+  });
+
+  // Copies files in a given directory to output directory
+  // without performing any processing on them.
+  eleventyConfig.addPassthroughCopy('assets');
+
+  eleventyConfig.addTransform('transform-name', (content, outputPath =&gt; {
+    // Add code to transform template output in content
+    // and write the result to outputPath.
+    // For example, this can be used to format or minify output HTML.
+  });
+
+  // Rebuilds the site if any files in a watch target directory change.
+  //TODO: What directories are watched by default?
+  //TODO: Probably the data, includes, input, and layouts directories.
+  // This is an example, not the default value.
+  eleventyConfig.addWatchTarget(&quot;./scss/&quot;);
+
+  // Overrides BrowserSync default configuration options.
+  // None are overridden by default.
+  eleventyConfig.setBrowserSyncConfig({ options });
+
+  // Performs deep merge of data from sources in data cascade.
+  // This currently defaults to false, but may change to true soon.
+  eleventyConfig.setDataDeepMerge(false);
+
+  // Override default configuration options of the gray-matter package
+  // which is used to parse front matter.
+  // See https://github.com/jonschlinkert/gray-matter.
+  eleventyConfig.setFrontMatterParsingOptions({
+    options
+  });
+
+  // Suppresses output of the paths of all generated files.
+  eleventyConfig.setQuietMode(false);
+
+  // Watches all JavaScript templates and data files
+  // and rebuilds the site if they change.
+  eleventyConfig.setWatchJavaScriptDependencies(true);
+
+  return {
+    dataTemplateEngine: 'liquid', // used in global data files
+    dir: { // specifies the directory for various kinds of files
+      data: '_data', // for global data files
+      includes: '_includes', // for layouts and more
+      input: '.',
+      layouts: // defaults to the includes value
+      output: '_site'
+    },
+    htmlOutputSuffix: '-o', // rarely useful
+    htmlTemplateEngine: 'liquid', // used in HTML files
+    jsDataFileSuffix: '.11tydata', // for template &amp; directory data files
+    // No processing is allowed in JSON files,
+    // so no template engine can be specified.
+    markdownTemplateEngine: 'liquid', // used in Markdown files
+    pathPrefix: '/', // prepended to all URL paths
+    templateFormats: [
+      '11ty.js', 'ejb', 'haml', 'hbs', 'html',
+      'liquid', 'md', 'mustache', 'njk', 'pug'
+    ]
+  };
+};
+</code></pre>
+<p>TODO: Why goes in the &quot;includes&quot; directory besides layout files?
+ANSWER: include files, extends files, partials, and macros
+TODO: But what are these?</p>
+
+      </section>
+    </main>
+    <footer>
+      &copy; R. Mark Volkmann, 2020
+    </footer>
+  </body>
+</html>

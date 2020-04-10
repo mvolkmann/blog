@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome!</title>
+    <title>Getting Started</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
@@ -20,9 +20,33 @@
       </nav>
       
       <section>
-        <h2>Welcome!</h2> <!-- uses a variable defined in front matter -->
+        <h2>Getting Started</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Choose a topic in the left nav.</p>
+        <p>Here are the most basic steps to create and build an 11ty site.</p>
+<ol>
+<li>Create a new directory and cd to it.</li>
+<li>Enter <code>npm init -y</code>.</li>
+<li>Enter <code>npm install -D @11ty/eleventy</code>.</li>
+<li>Create the file <code>index.md</code> file and add any Markdown content.</li>
+<li>Enter <code>npx eleventy --serve</code></li>
+<li>Browse localhost:8080 to see the site.</li>
+</ol>
+<p>This automatically watches the current directory for file changes.
+When they are detected, it rebuilds the site and
+attempts to refresh the browser (using BrowserSync).
+NOTE: BrowserSync does not currently work with 11ty!
+See https://github.com/11ty/eleventy/issues/701.</p>
+<p>If the project is placed in a Git repository,
+add <code>_site/</code> to the <code>.gitignore</code> file
+since that only contains generated code.</p>
+<p>Optionally add these npm scripts in <code>package.json</code>
+that can be used to build and serve the site:</p>
+<pre><code class="language-json">&quot;build&quot;: &quot;eleventy&quot;,
+&quot;clean&quot;: &quot;rm -rf _site&quot;,
+&quot;start&quot;: &quot;eleventy --serve&quot;
+</code></pre>
+<p>To deploy an 11ty site to GitHub Pages,
+see <a href="/github-pages">here</a>.</p>
 
       </section>
     </main>

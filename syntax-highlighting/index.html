@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome!</title>
+    <title>Syntax Highlighting</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
@@ -20,9 +20,37 @@
       </nav>
       
       <section>
-        <h2>Welcome!</h2> <!-- uses a variable defined in front matter -->
+        <h2>Syntax Highlighting</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Choose a topic in the left nav.</p>
+        <p>Install the plugin.</p>
+<pre><code class="language-bash">npm install -D @11ty/eleventy-plugin-syntaxhighlight
+</code></pre>
+<p>Modify .eleventy.js:</p>
+<pre><code class="language-js">const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
+module.exports = eleventyConfig =&gt; {
+  ...
+  eleventyConfig.addPlugin(syntaxHighlight);
+};
+</code></pre>
+<p>Download a Prism theme <code>.css</code> file from
+<a href="https://github.com/PrismJS/prism-themes">Prism themes</a>
+and place it in the <code>assets</code> directory.
+For example, <code>prism-vs.css</code>.</p>
+<p>Add a <code>link</code> tag for this in all layout files whose pages need it.
+For example, this can be added in <code>_includes/layout.njk</code>.</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/prism-vs.css&quot; /&gt;
+</code></pre>
+<p>Surround code to have syntax highlighting with fences.
+For example:</p>
+<pre><code class="language-text"> ```js
+ code goes here
+ ```
+</code></pre>
+<p>For more details, see the documentation <a href="https://www.11ty.dev/docs/plugins/syntaxhighlight/">here</a>.</p>
+<p>There is also a way to trigger syntax highlighting
+with Nunjucks, but some editors like VS Code
+will change the indentation in code blocks
+when using this approach.</p>
 
       </section>
     </main>

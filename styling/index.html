@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome!</title>
+    <title>Styling</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
@@ -20,9 +20,45 @@
       </nav>
       
       <section>
-        <h2>Welcome!</h2> <!-- uses a variable defined in front matter -->
+        <h2>Styling</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Choose a topic in the left nav.</p>
+        <p>To add CSS styling, configure the build process as shown above
+and create <code>.css</code> files in the <code>assets/css</code> directory.</p>
+<p>For example, to style nav links:</p>
+<pre><code class="language-css">nav {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+li {
+  margin-right: 1rem;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  padding: 0.5rem;
+}
+</code></pre>
+<p>One way to use the <code>.css</code> files is to add <code>link</code> tags in layout files.
+Each layout file can include different <code>.css</code> files.
+For example:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/css/layout.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/css/about.css&quot; /&gt;
+</code></pre>
+<p>Another approach is the set a variable in template files
+whose value is the path to a CSS file.
+The variable can be used in a layout to include a <code>link</code> tag to the CSS file.
+This allows each page template to include a different CSS file.</p>
+<p>For example, a template can have this front matter:</p>
+<pre><code class="language-yaml">css: '/assets/css/about.css'
+layout: layout.njk
+</code></pre>
+<p>A layout can use the variable like this:</p>
+<pre><code class="language-njk">
+</code></pre>
+<p>There is no need to &quot;scope&quot; CSS to specific pages since each page
+is built separately and loaded separately into the browser.</p>
 
       </section>
     </main>

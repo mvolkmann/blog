@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome!</title>
+    <title>Global Data</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
@@ -20,9 +20,19 @@
       </nav>
       
       <section>
-        <h2>Welcome!</h2> <!-- uses a variable defined in front matter -->
+        <h2>Global Data</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Choose a topic in the left nav.</p>
+        <p>Global data can be defined in <code>.js</code> or <code>.json</code> files in the <code>_data</code> directory.
+When defined in a <code>.js</code> file, it should export a function that returns the data.
+For example, the file <code>_data/hockey.js</code> could contain:</p>
+<pre><code class="language-js">module.exports = () =&gt; [
+  {city: 'Chicago', name: 'Blackhawks'},
+  {city: 'St. Louis', name: 'Blues'}
+];
+</code></pre>
+<p>TODO: Can the JavaScript code call a REST service to get the data?</p>
+<p>To render this data in a template:</p>
+<p><code>njk</code></p>
 
       </section>
     </main>

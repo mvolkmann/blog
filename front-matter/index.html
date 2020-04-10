@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome!</title>
+    <title>Front Matter</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
@@ -20,9 +20,53 @@
       </nav>
       
       <section>
-        <h2>Welcome!</h2> <!-- uses a variable defined in front matter -->
+        <h2>Front Matter</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Choose a topic in the left nav.</p>
+        <p>Files processed by 11ty can begin with front matter.
+This starts with a line containing only three dashes
+and ends with the same kind of line.
+Lines between these define variables.
+Variables can be used other files and can represent many kinds of values
+including CSS property values, icons, URLs, ...</p>
+<p>By default this expects YAML syntax.
+For example:</p>
+<pre><code class="language-yaml">---
+layout: layout.njk
+title: Dogs
+---
+
+</code></pre>
+<p>To use JavaScript syntax instead, add <code>js</code> after the opening dashes.
+For example:</p>
+<pre><code class="language-js">---js
+{
+  layout: 'layout.njk',
+  title: 'Dogs'
+}
+---
+</code></pre>
+<p>Some special variables recognized by 11ty include:</p>
+<ul>
+<li>layout:
+uses a layout template found in the <code>_includes</code> directory</li>
+<li>tags:
+single string or array of collection names to which this data belongs</li>
+<li>date: overrides the default file creation date to change sort order</li>
+<li>pagination:
+enables iteration over data in front matter to
+output multiple HTML files from this template</li>
+<li>permalink:
+changes the output target of the template</li>
+<li>dynamicPermalink:
+enables or disables template syntax in permalink values (default is true)</li>
+<li>templateEngineOverride:
+overrides the template engine used for this file</li>
+<li>eleventyExcludeFromCollections:
+true to exclude this content from collections</li>
+</ul>
+<p>TODO: Are there any Nunjucks-specific variables?
+TODO: See your front matter question at
+TODO: https://github.com/11ty/eleventy/issues/916#issuecomment-583764086.</p>
 
       </section>
     </main>

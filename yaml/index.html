@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome!</title>
+    <title>YAML</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
@@ -20,9 +20,36 @@
       </nav>
       
       <section>
-        <h2>Welcome!</h2> <!-- uses a variable defined in front matter -->
+        <h2>YAML</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Choose a topic in the left nav.</p>
+        <p><a href="https://yaml.org/">YAML</a> stands for &quot;YAML Ain't Markup Language&quot;.
+In is an alternative to markup languages like JSON and XML.</p>
+<p>YAML supports the same basic data types as JavaScript,
+booleans, numbers, strings, arrays, and objects (a.k.a hash or dictionary).
+Boolean values are <code>true</code> and <code>false</code>.
+Number values are written as expected.
+Strings containing no spaces or special characters do not require quotes.
+When quotes are needed, they can be single or double quotes.</p>
+<p>Arrays are specified by listing each element preceded by a dash and a space.
+For example:</p>
+<pre><code class="language-yaml">colors:
+  - red
+  - green
+  - blue
+</code></pre>
+<p>Objects (a.k.a dicts) are written as key/value pairs
+on separate, indented lines where keys are followed by a colon.
+For example:</p>
+<pre><code class="language-yaml">address:
+  street: 123 Some Lane
+  city: Somewhere
+  state: CA
+  zip: 12345
+</code></pre>
+<p>Arrays can hold objects and other arrays..
+Object property values can be arrays and other objects.</p>
+<p>Comments begin with <code>#</code> and extend to the end of the line.
+Multi-line comments are not supported.</p>
 
       </section>
     </main>
