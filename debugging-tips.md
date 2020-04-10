@@ -1,5 +1,6 @@
 ---
 layout: layout.njk
+tags: navItem
 title: Debugging Tips
 ---
 

@@ -1,11 +1,15 @@
 {
   "cSpell.words": [
+    "Haml",
+    "Marko",
     "Passthrough",
     "Permalinks",
+    "SSGs",
     "Shortcodes",
     "enddraw",
     "endfilter",
     "endraw",
-    "shortcode"
+    "shortcode",
+    "staticgen"
   ]
 }

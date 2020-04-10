@@ -1,5 +1,6 @@
 ---
 layout: layout.njk
+tags: navItem
 title: Getting Started
 ---
 
@@ -32,4 +33,4 @@ that can be used to build and serve the site:
 ```
 
 To deploy an 11ty site to GitHub Pages,
-see <a href="./github-pages.html">here</a>.
+see <a href="/github-pages">here</a>.

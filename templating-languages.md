@@ -1,5 +1,6 @@
 ---
 layout: layout.njk
+tags: navItem
 title: Templating Languages
 ---
 
@@ -31,18 +32,18 @@ configure it in `.eleventy.js` using one of these approaches:
 
 ```js
 module.exports = {
-  markdownTemplateEngine: 'njk',
+  markdownTemplateEngine: 'njk'
 };
 ```
 
 or
 
 ```js
-module.exports = (eleventyConfig) => {
+module.exports = eleventyConfig => {
   // Call methods on eleventyConfig here.
 
   return {
-    markdownTemplateEngine: 'njk',
+    markdownTemplateEngine: 'njk'
   };
 };
 ```

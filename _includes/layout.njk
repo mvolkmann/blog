@@ -11,8 +11,9 @@
     <main>
       <nav> <!-- for accessible page navigation -->
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
+         {%- for navItem in collections.navItemsSorted -%}
+           <li><a href="{{ navItem.url}}">{{ navItem.data.title }}</a></li>
+         {%- endfor -%}
         </ul>
       </nav>
       <section>
@@ -22,7 +23,7 @@
       </section>
     </main>
     <footer>
-      My footer goes here!
+      &copy; R. Mark Volkmann, 2020
     </footer>
   </body>
 </html>

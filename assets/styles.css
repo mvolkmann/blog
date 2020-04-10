@@ -1,4 +1,6 @@
 body {
+  --accent-color: cornflowerblue;
+
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
@@ -7,13 +9,13 @@ body {
 }
 
 body > footer {
-  background-color: yellow;
-  color: blue;
+  background-color: black;
+  color: var(--accent-color);
   padding: 1rem;
 }
 
 body > h1 {
-  background-color: cornflowerblue;
+  background-color: var(--accent-color);
   color: white;
   margin: 0;
   padding: 1rem;
@@ -30,12 +32,22 @@ body > main > nav {
   background-color: linen;
   overflow: auto;
   padding: 1rem;
-  width: 200px;
+  /*width: fit-content;*/
+  width: 450px;
 }
 
 body > main > nav > ul {
   list-style: none;
   padding-left: 0;
+}
+
+body > main > nav li {
+  margin-bottom: 0.5rem;
+}
+
+body > main > nav a {
+  color: var(--accent-color);
+  text-decoration: none;
 }
 
 body > main > section {

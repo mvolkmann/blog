@@ -1,5 +1,6 @@
 ---
 layout: layout.njk
+tags: navItem
 title: 11ty Overview
 ---
 

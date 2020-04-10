@@ -1,9 +1,11 @@
 ---
 layout: layout.njk
-title: Static site generators (SSGs)
+tags: navItem
+title: Static site generators
 ---
 
-SSGs are an alternative to CMS tools (like WordPress and Drupal)
+Static site generators (SSGs) are an alternative
+to CMS tools (like WordPress and Drupal)
 and graphical site builders (like Squarespace and Wix).
 
 The primary benefits of SSGs are:
