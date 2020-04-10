@@ -10,12 +10,23 @@
     <h1>Mark Volkmann's Blog</h1>
     <main>
       <nav> <!-- for accessible page navigation -->
+        <h3>Intro. Topics</h3>
         <ul>
-         {%- for navItem in collections.navItemsSorted -%}
-           <li><a href="{{ navItem.url}}">{{ navItem.data.title }}</a></li>
-         {%- endfor -%}
+          {%- for navItem in collections.introNavItemsSorted -%}
+            <li><a href="{{ navItem.url}}">{{ navItem.data.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+
+        <hr>
+
+        <h3>More Topics</h3>
+        <ul>
+          {%- for navItem in collections.advancedNavItemsSorted -%}
+            <li><a href="{{ navItem.url}}">{{ navItem.data.title }}</a></li>
+          {%- endfor -%}
         </ul>
       </nav>
+      
       <section>
         <h2>{{title}}</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->

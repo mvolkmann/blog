@@ -1,8 +1,20 @@
+const itemHasTag = (item, tag) => item.data.tags.includes(tag);
+const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
+
 module.exports = eleventyConfig => {
-  // Create a custom collection of sorted nav items.
-  eleventyConfig.addCollection('navItemsSorted', collection =>
+  // Create a custom collection of sorted, intro nav items.
+  eleventyConfig.addCollection('introNavItemsSorted', collection =>
     collection
       .getFilteredByTag('navItem')
+      .filter(item => itemHasTag(item, 'intro'))
+      .sort((item1, item2) => item1.data.order - item2.data.order)
+  );
+
+  // Create a custom collection of sorted, non-intro nav items.
+  eleventyConfig.addCollection('advancedNavItemsSorted', collection =>
+    collection
+      .getFilteredByTag('navItem')
+      .filter(item => itemDoesNotHaveTag(item, 'intro'))
       .sort((item1, item2) => item1.data.title.localeCompare(item2.data.title))
   );
 

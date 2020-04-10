@@ -1,6 +1,7 @@
 ---
 layout: layout.njk
-tags: navItem
+order: 3
+tags: ['navItem', 'intro']
 title: 11ty Overview
 ---
 
