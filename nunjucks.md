@@ -120,7 +120,7 @@ There are too many to describe, but here are some highlights:
   The first is a boolean indicating whether the sort should be in reverse order.
   The second is a boolean indicating whether the sort should be case insensitive.
   The third is the string name of the property on which the objects should be sorted.
-  For example, `{% for team in hockey | sort(false, false, 'city') %}`.
+  For example, {% raw %} `{% for team in hockey | sort(false, false, 'city') %}` {% endraw %}.
 - `urlencode` encodes a URL using UTF-8.
 - `urlize` turns URLs in a string into links.
   The string can contain any number of URLs.
@@ -299,7 +299,7 @@ For example:
 
 One template can include another.
 This allows a template to be reused in many places.
-The syntax is `{% include "`_`file-path`_`" %}`.
+The syntax is {% raw %} `{% include "`_`file-path`_`" %}` {% endraw %}.
 
 For example:
 
@@ -370,10 +370,12 @@ This is described [here](https://mozilla.github.io/nunjucks/templating.html#temp
 
 ## Whitespace
 
+{% raw %}
 By default all whitespace is retained.
 To trim whitespace before a construct, begin with `{%-` instead of `{%`.
 To trim whitespace after a construct, end with `-%}` instead of `%}`.
 Zach Leatherman recommends only using `{%-`.
+{% endraw %}
 
 ## Global functions
 
