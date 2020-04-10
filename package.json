@@ -4,12 +4,14 @@
   "description": "Mark Volkmann's blog using 11ty",
   "main": "index.js",
   "scripts": {
-    "build": "eleventy",
     "add": "git add .",
+    "all": "npm-run-all build add commit push deploy",
+    "build": "eleventy",
+    "clean": "rm -rf _site",
     "commit": "git commit -av",
-    "push": "git push origin master",
     "deploy": "gh-pages -d _site",
-    "start": "npm-run-all build add commit push deploy"
+    "push": "git push origin master",
+    "start": "eleventy --serve"
   },
   "repository": {
     "type": "git",
