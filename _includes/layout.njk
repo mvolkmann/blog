@@ -8,14 +8,21 @@
   </head>
   <body>
     <h1>Mark Volkmann's Blog</h1>
-    <nav> <!-- for accessible page navigation -->
-      <ol>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-      </ol>
-    </nav>
-    <h2>{{title}}</h2> <!-- uses a variable defined in front matter -->
-    <!-- Page content is inserted here. -->
-    {{content | safe}}
+    <main>
+      <nav> <!-- for accessible page navigation -->
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </nav>
+      <section>
+        <h2>{{title}}</h2> <!-- uses a variable defined in front matter -->
+        <!-- Page content is inserted here. -->
+        {{content | safe}}
+      </section>
+    </main>
+    <footer>
+      My footer goes here!
+    </footer>
   </body>
 </html>
