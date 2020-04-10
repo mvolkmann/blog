@@ -31,6 +31,7 @@ module.exports = eleventyConfig => {
 
   return {
     markdownTemplateEngine: 'njk', // used in Markdown files
+    pathPrefix: '/blog/', // prepended to all URL paths
     templateFormats: ['11ty.js', 'html', 'md', 'njk']
   };
 };
