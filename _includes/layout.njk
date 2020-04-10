@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="/blog/assets/styles.css" />
   </head>
   <body>
     <h1>Mark Volkmann's Blog</h1>
@@ -13,7 +13,7 @@
         <h3>Intro. Topics</h3>
         <ul>
           {%- for navItem in collections.introNavItemsSorted -%}
-            <li><a href="{{ navItem.url}}">{{ navItem.data.title }}</a></li>
+            <li><a href="/blog{{ navItem.url}}">{{ navItem.data.title }}</a></li>
           {%- endfor -%}
         </ul>
 
@@ -22,7 +22,7 @@
         <h3>More Topics</h3>
         <ul>
           {%- for navItem in collections.advancedNavItemsSorted -%}
-            <li><a href="{{ navItem.url}}">{{ navItem.data.title }}</a></li>
+            <li><a href="/blog{{ navItem.url}}">{{ navItem.data.title }}</a></li>
           {%- endfor -%}
         </ul>
       </nav>
