@@ -1,5 +1,6 @@
-# Mark Volkmann's first blog page
+---
+layout: layout.njk
+title: Welcome!
+---
 
-Content is coming soon!
-
-changed again
+Choose a topic in the left nav.

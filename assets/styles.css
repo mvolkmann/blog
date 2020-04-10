@@ -1,5 +1,6 @@
 body {
-  --accent-color: cornflowerblue;
+  /*--accent-color: cornflowerblue;*/
+  --accent-color: #3265dc;
 
   display: flex;
   flex-direction: column;
@@ -9,8 +10,8 @@ body {
 }
 
 body > footer {
-  background-color: black;
-  color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: white;
   padding: 1rem;
 }
 
@@ -33,7 +34,8 @@ body > main > nav {
   overflow: auto;
   padding: 0 1rem;
   /*width: fit-content;*/
-  width: 450px;
+  min-width: 200px; /* Why is this needed? */
+  width: 200px;
 }
 
 body > main > nav > ul {
