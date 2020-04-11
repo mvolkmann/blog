@@ -1,7 +1,14 @@
+const pluginPWA = require('eleventy-plugin-pwa');
+
 const itemHasTag = (item, tag) => item.data.tags.includes(tag);
 const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
 
 module.exports = eleventyConfig => {
+  eleventyConfig.addPlugin(pluginPWA, {
+    swDest: './_site/service-worker.js',
+    globDirectory: './_site'
+  });
+
   // Create a custom collection of sorted, intro nav items.
   eleventyConfig.addCollection('introNavItemsSorted', collection =>
     collection
@@ -20,7 +27,7 @@ module.exports = eleventyConfig => {
 
   // Copies files in a given directory to output directory
   // without performing any processing on them.
-  eleventyConfig.addPassthroughCopy('assets');
+  eleventyConfig.addPassthroughCopy('input/assets');
 
   // Suppresses output of the paths of all generated files.
   //eleventyConfig.setQuietMode(false);
@@ -30,6 +37,9 @@ module.exports = eleventyConfig => {
   //eleventyConfig.setWatchJavaScriptDependencies(true);
 
   return {
+    dir: {
+      input: 'input'
+    },
     markdownTemplateEngine: 'njk', // used in Markdown files
     pathPrefix: '/blog/', // prepended to all URL paths
     templateFormats: ['11ty.js', 'html', 'md', 'njk']

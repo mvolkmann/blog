@@ -18,6 +18,8 @@
     "endraw",
     "favicon",
     "jstl",
+    "precache",
+    "precaching",
     "shortcode",
     "staticgen",
     "tydata"
