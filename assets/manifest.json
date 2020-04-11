@@ -1,0 +1,22 @@
+{
+  "short_name": "blog",
+  "name": "Mark Volkmann's blog",
+  "description": "Mark Volkmann's blog",
+  "icons": [
+    {
+      "src": "/blog/assets/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/blog/assets/images/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "cornflowerblue",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "cornflowerblue"
+}
