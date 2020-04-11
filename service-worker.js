@@ -27,10 +27,6 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "_eleventy_redirect/index.html",
-    "revision": "ea95efa440aabf0ea14e76837c5e7e68"
-  },
-  {
     "url": "11ty-configuration/index.html",
     "revision": "e026c1e14e3bb9107c385ae6c213665e"
   },
