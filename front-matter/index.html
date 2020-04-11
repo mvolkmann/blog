@@ -11,10 +11,9 @@
 
     <script>
       if ("serviceWorker" in navigator) {
-        console.log('index.html: adding load listener');
         window.addEventListener('load', () => {
-          console.log('index.html: registering service worker');
-          navigator.serviceWorker.register('/blog/assets/service-worker.js');
+          console.log('registering service worker');
+          navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
     </script> 
