@@ -49,11 +49,15 @@ layout: layout.njk
 
 A layout can use the variable like this:
 
-```njk
+{% raw %}
+
+```liquid
 {% if css %}
   <link rel="stylesheet" href="{{css}}" />
 {% endif %}
 ```
+
+{% endraw %}
 
 There is no need to "scope" CSS to specific pages since each page
 is built separately and loaded separately into the browser.

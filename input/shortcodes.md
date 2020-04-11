@@ -27,7 +27,7 @@ To use this shortcode:
 
 {% raw %}
 
-```njk
+```liquid
 {% for dog in collections.dogsByName %}
   {{ dog dog.data.breed, dog.data.name }}
 {% endfor %}

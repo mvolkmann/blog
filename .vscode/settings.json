@@ -17,12 +17,15 @@
     "endfilter",
     "endraw",
     "favicon",
+    "ghcolors",
     "jstl",
     "precache",
     "precaching",
     "preload",
+    "prismjs",
     "shortcode",
     "staticgen",
+    "syntaxhighlight",
     "tydata"
   ]
 }

@@ -57,7 +57,7 @@ The syntax for comments is:
 
 {% raw %}
 
-```njk
+```liquid
 {# some comment #}
 ```
 
@@ -69,7 +69,7 @@ To define or modify a variable:
 
 {% raw %}
 
-```njk
+```liquid
 {% set name = value %}
 ```
 
@@ -85,7 +85,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {{ dog.name }}
 ```
 
@@ -134,7 +134,7 @@ Here is an example of applying the `upper` filter to a string:
 
 {% raw %}
 
-```njk
+```liquid
 {{ dog.name | upper }}
 ```
 
@@ -146,7 +146,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {% filter upper %}
   Mark is a software engineer at Object Computing, Inc.
 {% endfilter %}
@@ -176,7 +176,7 @@ TODO: Change this example instead of copying from the official docs.
 
 {% raw %}
 
-```njk
+```liquid
 {% if hungry %}
   I am hungry.
 {% elif tired %}
@@ -193,7 +193,7 @@ For example, this outputs "yellow" if `happy` is true.
 
 {% raw %}
 
-```njk
+```liquid
 {{ "happy" if happy }}
 ```
 
@@ -203,7 +203,7 @@ This is similar, but outputs "gray" if `happy` is false.
 
 {% raw %}
 
-```njk
+```liquid
 {{ "yellow" if happy else "gray" }}
 ```
 
@@ -219,7 +219,7 @@ we can iterate over the array as follows:
 
 {% raw %}
 
-```njk
+```liquid
 {% for dog in dogs %}
   <p>{{ dog.name }} is a {{ dog.breed }}.</p>
 {% else %}
@@ -237,7 +237,7 @@ we can iterate over its properties as follows:
 
 {% raw %}
 
-```njk
+```liquid
 {% for key, value in dog %}
   <p>{{key}} = {{value}}</p>
 {% endfor %}
@@ -257,7 +257,7 @@ For example, this calls a function and renders its result:
 
 {% raw %}
 
-```njk
+```liquid
 {{ someFunction(arg1, arg2) }}
 ```
 
@@ -270,7 +270,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {% set re = r/^a.*z$/i %}
 {% if re.test(dog.name) %}
   This dog goes from a to z!
@@ -290,7 +290,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {{ someHtml | save }}
 ```
 
@@ -306,7 +306,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {% include "snippet.html" %}
 ```
 
@@ -326,7 +326,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {% macro dogP(name, breed, gender='unknown') %}
 <p>{{name}} is a {{gender}} {{breed}}.</p>
 {% endmacro %}
@@ -339,7 +339,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {% for dog in collections.dogsByName %}
   {{ dogP(dog.data.name, dog.data.breed, dog.data.gender) }}
 {% endfor %}
@@ -352,7 +352,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {% for dog in collections.dogsByName %}
   {{ dogP(gender=dog.data.gender, breed=dog.data.breed, name=dog.data.name) }}
 {% endfor %}

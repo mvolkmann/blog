@@ -1,5 +1,6 @@
 const inclusiveLangPlugin = require('@11ty/eleventy-plugin-inclusive-language');
 const pwaPlugin = require('eleventy-plugin-pwa');
+const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
 
 const itemHasTag = (item, tag) => item.data.tags.includes(tag);
 const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
@@ -18,6 +19,8 @@ module.exports = eleventyConfig => {
     //mode: 'production'
   });
   */
+
+  eleventyConfig.addPlugin(syntaxHighlightPlugin);
 
   // Create a custom collection of sorted, intro nav items.
   eleventyConfig.addCollection('introNavItemsSorted', collection =>

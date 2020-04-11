@@ -30,11 +30,15 @@ module.exports = async () => {
 
 The employees can be rendered on a page like this:
 
-```njk
+{% raw %}
+
+```liquid
 {% for employee in employees %}
   <p>{{ employee.employee_name}} is {{employee.employee_age}} years old.</p>
 {% endfor %}
 ```
+
+{% endraw %}
 
 We can also make data from a REST service available to
 only a single template or only templates in and below a given directory.

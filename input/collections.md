@@ -32,7 +32,7 @@ For example:
 
 {% raw %}
 
-```njk
+```liquid
 {%- for dog in collections.dog -%}
   <p>{{ dog.data.name}} is a {{dog.data.breed}}.</p>
 {%- endfor -%}
@@ -77,7 +77,7 @@ Then generate navigation links in the main layout as follows:
 
 {% raw %}
 
-```njk
+```liquid
 <nav>
   <ol>
     {% for nav in collections.nav %}
@@ -95,11 +95,13 @@ The order of items in each collection is based on the creation timestamp
 of the associated template file, from oldest to newest.
 To iterate in reverse order use the `reverse` filter as follows:
 
-```njk
-{# This is commented out to prevent Nunjucks processing.
+{% raw %}
+
+```liquid
 {% for nav in collections.nav | reverse %}
-#}
 ```
+
+{% endraw %}
 
 For more information on 11ty collections,
 see [collections](https://www.11ty.dev/docs/collections/).

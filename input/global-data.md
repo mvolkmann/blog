@@ -19,8 +19,12 @@ TODO: Can the JavaScript code call a REST service to get the data?
 
 To render this data in a template:
 
-```njk
+{% raw %}
+
+```liquid
 {%- for team in hockey -%}
   <p>The {{team.name}} play in {{team.city}}.</p>
 {%- endfor -%}
 ```
+
+{% endraw %}

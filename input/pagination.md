@@ -67,16 +67,22 @@ instead of `pagination.items` to render all the items on the current page.
 
 To display "Page m of n":
 
-```njk
+{% raw %}
+
+```liquid
 <div>
   Page {{pagination.pageNumber + 1}} of {{pagination.pages.length}}
 </div>
 ```
 
+{% endraw %}
+
 To render links to the first, previous, next, and last pages
 so each is only rendered when it makes sense:
 
-```njk
+{% raw %}
+
+```liquid
 <nav class="pagination">
   <ol>
     {% if pagination.pageNumber > 0 %}
@@ -95,9 +101,13 @@ so each is only rendered when it makes sense:
 </nav>
 ```
 
+{% endraw %}
+
 To render links to all the pages except the current by number:
 
-```njk
+{% raw %}
+
+```liquid
 <nav class="pagination">
   <ol>
     {% for href in pagination.hrefs %}
@@ -108,6 +118,8 @@ To render links to all the pages except the current by number:
   </ol>
 </nav>
 ```
+
+{% endraw %}
 
 Note that Nunjucks provides the variable `loop` that holds
 an object with the properties `index` (1-based) and `index0` (0-based).
@@ -138,12 +150,16 @@ To style the anchor for the current page differently that the others,
 define a CSS rule for `a.current` and
 set the `class` on the `a` elements as follows:
 
-```njk
+{% raw %}
+
+```liquid
 <a
   class="{{'current' if loop.index0 === pagination.pageNumber else ''}}"
   href="{{href}}"
 >
 ```
+
+{% endraw %}
 
 To paginate data in reverse order,
 add the `reverse` property to the `pagination` front matter.
