@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="11ty site documenting 11ty" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon.png">
+    <link rel="stylesheet" href="/blog/assets/styles.css" />
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        console.log('index.html: adding load listener');
+        window.addEventListener('load', () => {
+          console.log('index.html: registering service worker');
+          navigator.serviceWorker.register('/blog/assets/service-worker.js');
+        })
+      }
+    </script> 
+  </head>
+  <body>
+    <h1>Mark Volkmann's Blog</h1>
+    <main>
+      <nav> <!-- for accessible page navigation -->
+        <h3>Intro. Topics</h3>
+        <ul>
+          {%- for navItem in collections.introNavItemsSorted -%}
+            <li><a href="/blog{{ navItem.url}}">{{ navItem.data.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+
+        <hr>
+
+        <h3>More Topics</h3>
+        <ul>
+          {%- for navItem in collections.advancedNavItemsSorted -%}
+            <li><a href="/blog{{ navItem.url}}">{{ navItem.data.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+      
+      <section>
+        <h2>{{title}}</h2> <!-- uses a variable defined in front matter -->
+        <!-- Page content is inserted here. -->
+        {{content | safe}}
+      </section>
+    </main>
+    <footer>
+      &copy; R. Mark Volkmann, 2020
+    </footer>
+  </body>
+</html>
