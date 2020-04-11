@@ -5,18 +5,17 @@ title: Collections
 ---
 
 Collections are defined by specifying tags in front matter.
-They are represented by an array of objects
+They are represented by an array of objects representing pages
 whose properties are the non-tag front matter values
 and some page-related properties added by 11ty.
-
-TODO: How is the order of the objects in a collection determined?
+By default their order is based on creation date from oldest to newest.
 
 For example, documents that each describe a specific dog
 can have front matter similar to the following.
 
 ```yaml
 tags: dog,
-name: dasher,
+name: dasher
 breed: whippet
 ```
 
@@ -24,17 +23,22 @@ Multiple tags can be specified by listing them
 in square brackets separated by commas.
 This allows the data from a template to be in more than one collection.
 For example, `tags: [dog, pet]`.
+Quotes are only required around tag names that contain special characters.
 
 All templates can access `collections.dog` to
 iterate over all the data related to dogs.
 
 For example:
 
-```js
+{% raw %}
+
+```njk
 {%- for dog in collections.dog -%}
   <p>{{ dog.data.name}} is a {{dog.data.breed}}.</p>
 {%- endfor -%}
 ```
+
+{% endraw %}
 
 Note the use of `.data` to access the variables specified for a dog.
 
@@ -50,8 +54,8 @@ Page-related properties that are added to collection objects by 11ty include:
 - filePathStem: the file path in the page URL that uniquely identifies it
 - inputPath: relative file path to the source template file
 - outputPath: path to the output HTML file relative to the top of the project
-- template: an object holds lots of 11ty-specific data
-- templateContent: a string of HTML produced from the template
+- template: an object that holds lots of 11ty-specific data
+- templateContent: the string of HTML produced from the template
 - url: the page URL
 
 Storing the front matter variables in the `data` object
@@ -71,6 +75,8 @@ title: About
 
 Then generate navigation links in the main layout as follows:
 
+{% raw %}
+
 ```njk
 <nav>
   <ol>
@@ -82,6 +88,8 @@ Then generate navigation links in the main layout as follows:
   </ol>
 </nav>
 ```
+
+{% endraw %}
 
 The order of items in each collection is based on the creation timestamp
 of the associated template file, from oldest to newest.

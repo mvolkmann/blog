@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
 order: 1
-tags: ['navItem', 'intro']
+tags: [navItem, intro]
 title: Static site generators
 ---
 

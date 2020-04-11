@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
 order: 3
-tags: ['navItem', 'intro']
+tags: [navItem, intro]
 title: 11ty Overview
 ---
 
@@ -15,6 +15,7 @@ The rationale for the name "11ty" is explained
 It is related to how Zach Leatherman learned to count as a child.
 
 The 11ty mascot is a possum attached to a helium balloon.
+It was contributed by James Williamson in May 2018.
 
 11ty is the most popular SSG that supports multiple template languages.
 
@@ -38,7 +39,7 @@ See <https://www.11ty.dev/docs/testimonials/>.
 - JavaScript Template Literals in `.jstl` files
 - [Liquid](https://shopify.github.io/liquid/) in `.liquid` files
 - [Mustache](https://mustache.github.io/) in `.mustache` files
-- [Nunjucks](https://mozilla.github.io/nunjucks/) in `.njk` files (by Mozilla)
+- [Nunjucks](https://mozilla.github.io/nunjucks/) by Mozilla in `.njk` files
 - [Pug](https://pugjs.org/) in `.pug` files
 
 11ty does not currently support AsciiDoc.

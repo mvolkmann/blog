@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
 order: 4
-tags: ['navItem', 'intro']
+tags: [navItem, intro]
 title: Getting Started
 ---
 

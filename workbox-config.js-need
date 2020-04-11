@@ -1,0 +1,5 @@
+module.exports = {
+  globDirectory: '_site/',
+  globPatterns: ['**/*.{html,ico,png,js,css}'],
+  swDest: 'input/assets/sw.js'
+};

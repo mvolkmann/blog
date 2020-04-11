@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
 order: 2
-tags: ['navItem', 'intro']
+tags: [navItem, intro]
 title: Why 11ty?
 ---
 
