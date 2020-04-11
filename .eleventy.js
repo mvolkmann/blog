@@ -9,6 +9,7 @@ module.exports = eleventyConfig => {
   eleventyConfig.addPlugin(pwaPlugin, {
     swDest: './_site/service-worker.js',
     globDirectory: './_site'
+    //mode: 'production'
   });
 
   // Create a custom collection of sorted, intro nav items.
