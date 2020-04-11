@@ -16,13 +16,16 @@
     <link rel="preload" as="style" href="/blog/assets/styles.css">
     <link rel="stylesheet" href="/blog/assets/styles.css">
 
-    <script>
+    <!-- I commented this out during testing so all files
+         are loaded from the network instead of the cache.
+         See https://github.com/okitavera/eleventy-plugin-pwa/issues/5. -->
+    <!--script>
       if ("serviceWorker" in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
-    </script> 
+    </script--> 
   </head>
   <body>
     <h1>Mark Volkmann's Blog</h1>

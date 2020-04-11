@@ -6,11 +6,18 @@ const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
 
 module.exports = eleventyConfig => {
   eleventyConfig.addPlugin(inclusiveLangPlugin);
+
+  // I commented this out during testing so all files
+  // are loaded from the network instead of the cache.
+  // See https://github.com/okitavera/eleventy-plugin-pwa/issues/5.
+  /*
   eleventyConfig.addPlugin(pwaPlugin, {
+    cleanupOutdatedCaches: true,
     swDest: './_site/service-worker.js',
     globDirectory: './_site'
     //mode: 'production'
   });
+  */
 
   // Create a custom collection of sorted, intro nav items.
   eleventyConfig.addCollection('introNavItemsSorted', collection =>
