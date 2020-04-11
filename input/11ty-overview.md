@@ -10,8 +10,8 @@ It is targeted at building static "sites", not web "apps".
 11ty is mostly written and maintained by Zach Leatherman.
 It is implemented in JavaScript.
 
-The rationale for the name "11ty" is explained
-[here](https://www.zachleat.com/web/eleventy-birthday/#project-naming).
+The rationale for the name "11ty" is in the 11ty docs under
+[project naming](https://www.zachleat.com/web/eleventy-birthday/#project-naming).
 It is related to how Zach Leatherman learned to count as a child.
 
 The 11ty mascot is a possum attached to a helium balloon.
