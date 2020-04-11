@@ -4,12 +4,12 @@
   "description": "Mark Volkmann's blog",
   "icons": [
     {
-      "src": "/blog/assets/icons-192.png",
+      "src": "/blog/assets/mark-volkmann-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/blog/assets/images/icons-512.png",
+      "src": "/blog/assets/images/mark-volkmann-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
