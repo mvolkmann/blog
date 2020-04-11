@@ -31,6 +31,6 @@ will know JavaScript than other programming languages.
 
 11ty supports a wide variety of templating languages listed earlier
 and use of these can be mixed within the same site.
-All the supported templating languages are easy to learn,
-much easier than learning a new web framework or programming language.
+All the supported templating languages require less effort to learn
+than learning a new web framework or programming language.
 This increases the pool of potential contributors to a site.

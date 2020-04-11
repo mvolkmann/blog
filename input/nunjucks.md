@@ -172,7 +172,7 @@ TODO: Try this!
 Content can be conditionally included using an `if` statement.
 For example:
 
-TODO: Change this rather than just copying from the official docs.
+TODO: Change this example instead of copying from the official docs.
 
 {% raw %}
 

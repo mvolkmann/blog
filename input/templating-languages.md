@@ -18,8 +18,8 @@ For details on Nunjucks syntax, see my notes file `NunjucksNotes.md` and
 [Nunjucks Templating](https://mozilla.github.io/nunjucks/templating.html)
 It's a pretty extensive language!
 
-It is not necessary to install Nunjucks in order to use it in 11ty.
-However, it must be enabled.
+It is not necessary to install Nunjucks in order to use it in 11ty,
+but it must be enabled.
 To enable use of Nunjucks in a particular Markdown file,
 add the following front matter:
 

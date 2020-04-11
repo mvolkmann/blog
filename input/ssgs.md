@@ -38,7 +38,7 @@ Key differentiators between SSGs include:
 For static sites that obtain data from API services,
 a common strategy is to automatically regenerate them
 on a scheduled basis such as every night.
-This is typically quite easy to implement.
+This is not typically difficult to implement.
 
 Another strategy is to store all the files for a site
 in a repository such as GitHub and automatically

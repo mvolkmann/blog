@@ -53,7 +53,7 @@ A downside of this approach is that it limits
 the ability of tooling to detect syntax errors in the HTML.
 
 TODO: Cover non-universal shortcodes?
-TODO: Are these just plain JS functions that return a string of HTML?
+TODO: Are these plain JS functions that return a string of HTML?
 
 TODO: Cover "paired shortcodes"?
 

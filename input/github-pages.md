@@ -5,8 +5,8 @@ tags: [navItem, intro]
 title: GitHub Pages
 ---
 
-GitHub Pages is a great option to consider
-for hosting an 11ty site because it is free and easy to use.
+GitHub Pages is a great option to consider for hosting an 11ty site
+because it is free and simple to use.
 
 Here are the steps to create and deploy an 11ty site to GitHub Pages.
 

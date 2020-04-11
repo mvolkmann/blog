@@ -1,10 +1,12 @@
-const pluginPWA = require('eleventy-plugin-pwa');
+const inclusiveLangPlugin = require('@11ty/eleventy-plugin-inclusive-language');
+const pwaPlugin = require('eleventy-plugin-pwa');
 
 const itemHasTag = (item, tag) => item.data.tags.includes(tag);
 const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
 
 module.exports = eleventyConfig => {
-  eleventyConfig.addPlugin(pluginPWA, {
+  eleventyConfig.addPlugin(inclusiveLangPlugin);
+  eleventyConfig.addPlugin(pwaPlugin, {
     swDest: './_site/service-worker.js',
     globDirectory: './_site'
   });

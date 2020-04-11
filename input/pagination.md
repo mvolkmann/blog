@@ -47,7 +47,7 @@ The global variable `pagination` holds related data.
 - `pagination.hrefs` holds an array of all the page hrefs.
 
 The URL for each page is `/{pagination.data}/{zero-based-index}`.
-The URL for the first page page is simply `/{data-name}`.
+The URL for the first page page is `/{data-name}`, omitting an index.
 The URL `/{data-name}/0` is not valid.
 
 `pagination.items` holds the current page item when the size is 1
