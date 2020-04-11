@@ -28,11 +28,11 @@ workbox.core.clientsClaim();
 self.__precacheManifest = [
   {
     "url": "11ty-configuration/index.html",
-    "revision": "4e31c79a443fa1952de43bee8dec130f"
+    "revision": "f2bc57a2d9ae8f20cad8dc705207c0e2"
   },
   {
     "url": "11ty-overview/index.html",
-    "revision": "da0cdedf2de7c48c2b51689ed57a1e4f"
+    "revision": "2e3025a62add99a6840b7f3b162138de"
   },
   {
     "url": "assets/favicon.png",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
   },
   {
     "url": "assets/manifest.json",
-    "revision": "882aa37ac8ac693c733f8789c906bc4b"
+    "revision": "19700f859bdd76b7a9d9183fc14e926e"
   },
   {
     "url": "assets/mark-volkmann-192.png",
@@ -56,95 +56,95 @@ self.__precacheManifest = [
   },
   {
     "url": "collection-sorting/index.html",
-    "revision": "3a3f5317a1b46c65c0d56b245140871f"
+    "revision": "12c373bd806af1e70e9eea6d5e7a5562"
   },
   {
     "url": "collections/index.html",
-    "revision": "ae1f761cf81e8a740d30e93a4aee6680"
+    "revision": "c71114a2d740912c9cedacc246922406"
   },
   {
     "url": "data-cascade/index.html",
-    "revision": "82831c120c318fdd9a45ef997b64b6ba"
+    "revision": "0a7dd5171de11fb6f2487f1157ff9a3b"
   },
   {
     "url": "debugging-tips/index.html",
-    "revision": "c5a51bea2e9e390a432f8d080b89eaa4"
+    "revision": "962b72e449af2d8cd532c16f2d5e59d2"
   },
   {
     "url": "front-matter/index.html",
-    "revision": "63e0cd0d11867d41339045a0caf2ae1f"
+    "revision": "b19caf1c77e5216c458890b8771caad8"
   },
   {
     "url": "getting-started/index.html",
-    "revision": "254d530a81b3a84619875478dc995545"
+    "revision": "25be7ed87b2b67b5af7132fde57f280a"
   },
   {
     "url": "github-pages/index.html",
-    "revision": "e9165f481673b59d0ee092eec0d0135a"
+    "revision": "67a635a8968392efc4b8b60c9323b74d"
   },
   {
     "url": "global-data/index.html",
-    "revision": "535abf839b9a487a834d423d2e3d80e0"
+    "revision": "307ea685a234cc7f3630ac4a951de6b1"
   },
   {
     "url": "index.html",
-    "revision": "544f16bf0dcd9bd1e3bc2d876d01a125"
+    "revision": "8b8711b494af5943fc1e2221de0581c6"
   },
   {
     "url": "internationalization/index.html",
-    "revision": "b145a4bd0c6964a23bf444669bbbe1bd"
+    "revision": "258d33c6f6dcaff9f3bbc5917678bc1f"
   },
   {
     "url": "markdown/index.html",
-    "revision": "51d64d7f3bfc7c8a864529dc97efb616"
+    "revision": "15274933d0fbdb6900a5d9f6a773d44a"
   },
   {
     "url": "nunjucks/index.html",
-    "revision": "1db469c6459dcc2df97c49f38df281cf"
+    "revision": "576603de54264ed63dbe7a96c1f0f3a8"
   },
   {
     "url": "pagination/index.html",
-    "revision": "e49cc75a45ea0f738e0a9bfcfd34c631"
+    "revision": "fa74235626dcc30ecc7925206da51850"
   },
   {
     "url": "permalinks/index.html",
-    "revision": "e814489d96720a607f2b78cf6995e4d6"
+    "revision": "cb0900630df58e59776c9316e7f161d9"
   },
   {
     "url": "rest-services/index.html",
-    "revision": "3e20fa6f571fb5771094df29c94102ce"
+    "revision": "2bdedb3c565d16a5bb051aa14e721c81"
   },
   {
     "url": "shortcodes/index.html",
-    "revision": "30305bb1d2cf302ba81d6c8098523d17"
+    "revision": "451eb6d33a60fce928f825b6f72da525"
   },
   {
     "url": "ssgs/index.html",
-    "revision": "dcecba3ca69060aa2fc3068483d51f6e"
+    "revision": "bfbb0cfe2d833d4d8c5e83e77869add1"
   },
   {
     "url": "styling-with-sass/index.html",
-    "revision": "11b808711534f2d175bb3fbe7f214aec"
+    "revision": "3201506c63634fb086219421431ffc4a"
   },
   {
     "url": "styling/index.html",
-    "revision": "64b6b7d74e26654a109b0120c01be0aa"
+    "revision": "f9dca57d9152cc77f744dacaab96f19f"
   },
   {
     "url": "syntax-highlighting/index.html",
-    "revision": "a22ed74c3e6fb84878d85cc45faa5e35"
+    "revision": "d8ccf9423f2bf2977f74e5d1f3c7fa93"
   },
   {
     "url": "templating-languages/index.html",
-    "revision": "00ff571f6ec93e46959cd20d33b9440a"
+    "revision": "4f703f1c408ba0433993ce6de82d2fad"
   },
   {
     "url": "why-11ty/index.html",
-    "revision": "70517137d6bf4e497dc27362e83003a2"
+    "revision": "0dcb1acff7db18397b8c2128889a689c"
   },
   {
     "url": "yaml/index.html",
-    "revision": "272c9a476d664ffd048ae56fd64b0088"
+    "revision": "f8feaf28d25117f5ad34ee14fa55f12d"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
