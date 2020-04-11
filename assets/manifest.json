@@ -14,7 +14,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/blog",
+  "start_url": ".",
   "background_color": "cornflowerblue",
   "display": "standalone",
   "scope": "/",

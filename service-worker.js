@@ -40,7 +40,7 @@ self.__precacheManifest = [
   },
   {
     "url": "assets/manifest.json",
-    "revision": "19700f859bdd76b7a9d9183fc14e926e"
+    "revision": "ed1092892abb47dde79888e3671c7d86"
   },
   {
     "url": "assets/mark-volkmann-192.png",
