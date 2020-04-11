@@ -27,12 +27,20 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
+    "url": "_eleventy_redirect/index.html",
+    "revision": "ea95efa440aabf0ea14e76837c5e7e68"
+  },
+  {
     "url": "11ty-configuration/index.html",
     "revision": "db4214fdfd07204b565f87f0f8b5c298"
   },
   {
     "url": "11ty-overview/index.html",
     "revision": "bc97f3791ed501bba6c19a6a6af47c5c"
+  },
+  {
+    "url": "assets/favicon.ico",
+    "revision": "4b10e3585f82c916af922d259afb3602"
   },
   {
     "url": "assets/favicon.png",
@@ -80,7 +88,7 @@ self.__precacheManifest = [
   },
   {
     "url": "github-pages/index.html",
-    "revision": "b2988e024718388b5d5257b3781cd36a"
+    "revision": "5a7c435b991ac120a8c393ca3679ba9b"
   },
   {
     "url": "global-data/index.html",
@@ -100,11 +108,11 @@ self.__precacheManifest = [
   },
   {
     "url": "nunjucks/index.html",
-    "revision": "74ae91440eb4b8afbc19063c38408689"
+    "revision": "d495753635b14daa0bd52686a97106df"
   },
   {
     "url": "pagination/index.html",
-    "revision": "55b1d7ae272268e1f797e948a298c9f7"
+    "revision": "b578dfcfff60ac02b8828d86ddab3f93"
   },
   {
     "url": "permalinks/index.html",
@@ -116,11 +124,11 @@ self.__precacheManifest = [
   },
   {
     "url": "shortcodes/index.html",
-    "revision": "66049eaa5e42bf135c651d0910478e51"
+    "revision": "2414b0e79bc267bb0b56b3f448430a49"
   },
   {
     "url": "ssgs/index.html",
-    "revision": "0dbbec7308592ecde0f6e0a6b2a11a92"
+    "revision": "b2fe7c309f3dd5fae3b29c1646e28e6a"
   },
   {
     "url": "styling-with-sass/index.html",
@@ -136,11 +144,15 @@ self.__precacheManifest = [
   },
   {
     "url": "templating-languages/index.html",
-    "revision": "97d8b05942db9c4f1be2a5ef6f0fda18"
+    "revision": "5339adf4e1ed71bb821bde23fd84ff63"
+  },
+  {
+    "url": "TODO/index.html",
+    "revision": "18a66c4f8b5697844340d6af17c07182"
   },
   {
     "url": "why-11ty/index.html",
-    "revision": "da8cbe0305d8099bc794311d7d7f20fd"
+    "revision": "2dd5469f7489750fe226743ed3abe300"
   },
   {
     "url": "yaml/index.html",
