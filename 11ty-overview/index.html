@@ -12,12 +12,11 @@
     <link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon.png">
     <link rel="manifest" href="/blog/assets/manifest.json">
-    <link rel="stylesheet" href="/blog/assets/styles.css">
+    <link rel="preload" as="style" href="/blog/assets/styles.css">
 
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener('load', () => {
-          console.log('registering service worker');
           navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
@@ -43,8 +42,8 @@
 It is targeted at building static &quot;sites&quot;, not web &quot;apps&quot;.
 11ty is mostly written and maintained by Zach Leatherman.
 It is implemented in JavaScript.</p>
-<p>The rationale for the name &quot;11ty&quot; is explained
-<a href="https://www.zachleat.com/web/eleventy-birthday/#project-naming">here</a>.
+<p>The rationale for the name &quot;11ty&quot; is in the 11ty docs under
+<a href="https://www.zachleat.com/web/eleventy-birthday/#project-naming">project naming</a>.
 It is related to how Zach Leatherman learned to count as a child.</p>
 <p>The 11ty mascot is a possum attached to a helium balloon.
 It was contributed by James Williamson in May 2018.</p>

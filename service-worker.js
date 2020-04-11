@@ -32,11 +32,11 @@ self.__precacheManifest = [
   },
   {
     "url": "11ty-configuration/index.html",
-    "revision": "f2bc57a2d9ae8f20cad8dc705207c0e2"
+    "revision": "e026c1e14e3bb9107c385ae6c213665e"
   },
   {
     "url": "11ty-overview/index.html",
-    "revision": "f946d86fc471477881cc2dfb586e0303"
+    "revision": "c2b1ac802fafc0835edf18c75cb07f0a"
   },
   {
     "url": "assets/favicon.png",
@@ -60,95 +60,95 @@ self.__precacheManifest = [
   },
   {
     "url": "collection-sorting/index.html",
-    "revision": "12c373bd806af1e70e9eea6d5e7a5562"
+    "revision": "f2cda940bdfb6d2f4bc6779cd02c270d"
   },
   {
     "url": "collections/index.html",
-    "revision": "17dc76cc9b2e6d7c7ad7d42f66c00523"
+    "revision": "2984bac3b241cb9ebda9bd87c7442373"
   },
   {
     "url": "data-cascade/index.html",
-    "revision": "0a7dd5171de11fb6f2487f1157ff9a3b"
+    "revision": "e918348417ad4469686be7ac24a75342"
   },
   {
     "url": "debugging-tips/index.html",
-    "revision": "962b72e449af2d8cd532c16f2d5e59d2"
+    "revision": "d4accd6c5d29ffab6621d851999ea15b"
   },
   {
     "url": "front-matter/index.html",
-    "revision": "b19caf1c77e5216c458890b8771caad8"
+    "revision": "bf60621340c2a7d9188a46f6d61d794c"
   },
   {
     "url": "getting-started/index.html",
-    "revision": "25be7ed87b2b67b5af7132fde57f280a"
+    "revision": "a2f70eba503ed6d74c5d16b13fccbcf2"
   },
   {
     "url": "github-pages/index.html",
-    "revision": "0fb9f4e44c7e57550826c93895279dc9"
+    "revision": "230dfb04d4e8829d62ec466598a8dde4"
   },
   {
     "url": "global-data/index.html",
-    "revision": "307ea685a234cc7f3630ac4a951de6b1"
+    "revision": "13e55ae34d6d08e999107f68505d4dfc"
   },
   {
     "url": "index.html",
-    "revision": "8b8711b494af5943fc1e2221de0581c6"
+    "revision": "d5468aea642205f4c04d9d94f4ee1730"
   },
   {
     "url": "internationalization/index.html",
-    "revision": "258d33c6f6dcaff9f3bbc5917678bc1f"
+    "revision": "f6a319a1cdf89987cd8894982119ffad"
   },
   {
     "url": "markdown/index.html",
-    "revision": "15274933d0fbdb6900a5d9f6a773d44a"
+    "revision": "e8fa43b17f87643c81fd107a4c677522"
   },
   {
     "url": "nunjucks/index.html",
-    "revision": "576603de54264ed63dbe7a96c1f0f3a8"
+    "revision": "97a1d9fbb9c9f4b1af0c540f25056959"
   },
   {
     "url": "pagination/index.html",
-    "revision": "fa74235626dcc30ecc7925206da51850"
+    "revision": "d98465902c1964e357fbf41520cd6f4e"
   },
   {
     "url": "permalinks/index.html",
-    "revision": "cb0900630df58e59776c9316e7f161d9"
+    "revision": "b4396deb37cb07a2f4fc2c929b9ef906"
   },
   {
     "url": "rest-services/index.html",
-    "revision": "2bdedb3c565d16a5bb051aa14e721c81"
+    "revision": "c04ee8356bacbc047be7605eb5c064c9"
   },
   {
     "url": "shortcodes/index.html",
-    "revision": "451eb6d33a60fce928f825b6f72da525"
+    "revision": "462b3cad5bd9ae5f6bcc6bfc4408d947"
   },
   {
     "url": "ssgs/index.html",
-    "revision": "bfbb0cfe2d833d4d8c5e83e77869add1"
+    "revision": "24b4b1e9463e690c59ba7f5391834ab3"
   },
   {
     "url": "styling-with-sass/index.html",
-    "revision": "3201506c63634fb086219421431ffc4a"
+    "revision": "92b12a2ad1d793fe746c8ff8c61e4bbf"
   },
   {
     "url": "styling/index.html",
-    "revision": "f9dca57d9152cc77f744dacaab96f19f"
+    "revision": "4971eadbb1de1b6c192f8bcc3c5705e8"
   },
   {
     "url": "syntax-highlighting/index.html",
-    "revision": "d8ccf9423f2bf2977f74e5d1f3c7fa93"
+    "revision": "021bbf981d4d515640459b70c2710b7e"
   },
   {
     "url": "templating-languages/index.html",
-    "revision": "4f703f1c408ba0433993ce6de82d2fad"
+    "revision": "2117ced2e198d5a03cdb36b82a6a8615"
   },
   {
     "url": "why-11ty/index.html",
-    "revision": "0dcb1acff7db18397b8c2128889a689c"
+    "revision": "ceb97e8983a0b293bddf9c3137eaf8a7"
   },
   {
     "url": "yaml/index.html",
-    "revision": "f8feaf28d25117f5ad34ee14fa55f12d"
+    "revision": "548cffa13414edab731212e6e647f610"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
