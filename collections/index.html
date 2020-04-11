@@ -40,24 +40,28 @@
         <h2>Collections</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
         <p>Collections are defined by specifying tags in front matter.
-They are represented by an array of objects
+They are represented by an array of objects representing pages
 whose properties are the non-tag front matter values
-and some page-related properties added by 11ty.</p>
-<p>TODO: How is the order of the objects in a collection determined?</p>
+and some page-related properties added by 11ty.
+By default their order is based on creation date from oldest to newest.</p>
 <p>For example, documents that each describe a specific dog
 can have front matter similar to the following.</p>
 <pre><code class="language-yaml">tags: dog,
-name: dasher,
+name: dasher
 breed: whippet
 </code></pre>
 <p>Multiple tags can be specified by listing them
 in square brackets separated by commas.
 This allows the data from a template to be in more than one collection.
-For example, <code>tags: [dog, pet]</code>.</p>
+For example, <code>tags: [dog, pet]</code>.
+Quotes are only required around tag names that contain special characters.</p>
 <p>All templates can access <code>collections.dog</code> to
 iterate over all the data related to dogs.</p>
 <p>For example:</p>
-<p><code>js</code></p>
+<pre><code class="language-njk">{%- for dog in collections.dog -%}
+  &lt;p&gt;{{ dog.data.name}} is a {{dog.data.breed}}.&lt;/p&gt;
+{%- endfor -%}
+</code></pre>
 <p>Note the use of <code>.data</code> to access the variables specified for a dog.</p>
 <p>A layout can specify tags that become the default tags
 for all pages that use the layout.
@@ -70,8 +74,8 @@ These can be overridden by specifying a different value for <code>tags</code> in
 <li>filePathStem: the file path in the page URL that uniquely identifies it</li>
 <li>inputPath: relative file path to the source template file</li>
 <li>outputPath: path to the output HTML file relative to the top of the project</li>
-<li>template: an object holds lots of 11ty-specific data</li>
-<li>templateContent: a string of HTML produced from the template</li>
+<li>template: an object that holds lots of 11ty-specific data</li>
+<li>templateContent: the string of HTML produced from the template</li>
 <li>url: the page URL</li>
 </ul>
 <p>Storing the front matter variables in the <code>data</code> object
@@ -88,7 +92,11 @@ title: About
 <p>Then generate navigation links in the main layout as follows:</p>
 <pre><code class="language-njk">&lt;nav&gt;
   &lt;ol&gt;
-    
+    {% for nav in collections.nav %}
+      &lt;li&gt;
+        &lt;a href=&quot;{{nav.url}}&quot;&gt;{{nav.data.title}}&lt;/a&gt;&lt;/li&gt;
+      &lt;/li&gt;
+    {% endfor %}
   &lt;/ol&gt;
 &lt;/nav&gt;
 </code></pre>

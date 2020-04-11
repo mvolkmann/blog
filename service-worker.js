@@ -27,12 +27,16 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
+    "url": "_eleventy_redirect/index.html",
+    "revision": "ea95efa440aabf0ea14e76837c5e7e68"
+  },
+  {
     "url": "11ty-configuration/index.html",
     "revision": "f2bc57a2d9ae8f20cad8dc705207c0e2"
   },
   {
     "url": "11ty-overview/index.html",
-    "revision": "2e3025a62add99a6840b7f3b162138de"
+    "revision": "f946d86fc471477881cc2dfb586e0303"
   },
   {
     "url": "assets/favicon.png",
@@ -60,7 +64,7 @@ self.__precacheManifest = [
   },
   {
     "url": "collections/index.html",
-    "revision": "c71114a2d740912c9cedacc246922406"
+    "revision": "17dc76cc9b2e6d7c7ad7d42f66c00523"
   },
   {
     "url": "data-cascade/index.html",
@@ -80,7 +84,7 @@ self.__precacheManifest = [
   },
   {
     "url": "github-pages/index.html",
-    "revision": "67a635a8968392efc4b8b60c9323b74d"
+    "revision": "0fb9f4e44c7e57550826c93895279dc9"
   },
   {
     "url": "global-data/index.html",
