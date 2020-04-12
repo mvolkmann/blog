@@ -19,9 +19,6 @@ Here are the steps to create and deploy an 11ty site to GitHub Pages.
 1. Create a GitHub account if you don't already have one.
    Browse <https://github.com/> and click the "Sign up" button.
 1. Create a new GitHub repository.
-   Check the checkbox "Initialize this repository with a README".
-   Having a `README.md` file is required
-   to enable some options in gh-pages (Which? Is this even true?).
 1. Clone the repository to create a local repository.
 1. cd to the directory of the local repository.
 1. Enter `npm init -y` to create a `package.json` file.
@@ -35,13 +32,13 @@ Here are the steps to create and deploy an 11ty site to GitHub Pages.
 
    ```json
    "add": "git add .",
-   "all": "npm-run-all build add commit push deploy"
+   "all": "npm-run-all build add commit push deploy",
    "build": "eleventy",
    "clean": "rm -rf _site",
    "commit": "git commit -av",
    "deploy": "gh-pages -d _site",
    "push": "git push origin master",
-   "start": "eleventy --serve",
+   "start": "eleventy --serve"
    ```
 
 1. Create the directory `_includes`.
