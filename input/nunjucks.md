@@ -328,7 +328,7 @@ For example:
 
 ```liquid
 {% macro dogP(name, breed, gender='unknown') %}
-<p>{{name}} is a {{gender}} {{breed}}.</p>
+  <p>{{name}} is a {{gender}} {{breed}}.</p>
 {% endmacro %}
 ```
 
@@ -360,8 +360,31 @@ For example:
 
 {% endraw %}
 
+Macros can be defined in a `.njk` file and imported where needed.
+For example, the following imports the file `_includes/macros.njk`:
+
+{% raw %}
+
+```liquid
+{% import 'macros.njk' as macros with context %}
+```
+
+{% endraw %}
+
+To call a macro named "demo" that is defined in `macros.njk`,
+
+{% raw %}
+
+```liquid
+{{ macros.demo(arguments) }}
+```
+
+{% endraw %}
+
+For an example of using this approach,
+see how `_includes/layout.njk` uses macros to render the left nav.
+
 TODO: Maybe Nunjucks macros can be used as an alternative to 11ty shortcodes.
-TODO: Can they be defined globally?
 
 ## Blocks
 

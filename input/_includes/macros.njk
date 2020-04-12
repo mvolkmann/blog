@@ -1,3 +1,8 @@
+{#
+This renders a single nav item in an li element.
+It calls renderNavItem recursively if the nav item has children
+in order to create a tree of links.
+#}
 {% macro renderNavItem(entry) %}
   {% set class = "active" if entry.url == page.url else "" %}
   <li class={{ class }}>
@@ -8,6 +13,9 @@
   </li>
 {% endmacro %}
 
+{#
+This renders a list of nav items inside a ul element.
+#}
 {% macro renderNavList(entries) %}
   <ul>
     {% for entry in entries %}
