@@ -69,4 +69,4 @@ To make changes to the site:
 1. Browse the site to verify the changes.
    In can take 30 seconds or more for changes to appear on the site.
    Running deployments can be viewed at
-   https://github.com/{username}/{repo-name}/deployments.
+   <https://github.com/{username}/{repo-name}/deployments>.
