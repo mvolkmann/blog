@@ -127,7 +127,14 @@ There are too many to describe, but here are some highlights:
   The string can contain any number of URLs.
   The result must be passed to the `safe` filter.
   Otherwise the resulting HTML is escaped and presented as plain text.
-  For example, {{ 'before http://foo.bar after' | urlize | safe }}
+  For example,
+  {% raw %}
+
+  ```liquid
+  {{ 'before http://foo.bar after' | urlize | safe }}
+  ```
+
+  {% endraw %}
   renders `before <a href="http://foo.bar">http://foo.bar</a> after`.
 
 Here is an example of applying the `upper` filter to a string:
