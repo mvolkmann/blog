@@ -127,12 +127,11 @@ To render breadcrumbs to the key of the currently selected document:
 {% raw %}
 
 ```liquid
-{{
-  collections.all |
-  eleventyNavigationBreadcrumb('currentKey') |
-  eleventyNavigationToHtml |
-  safe
-}}
+{% set crumbs = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
+{% for crumb in crumbs %}
+  <a class="crumb" href="{{ crumb.url | url }}">{{ crumb.title }}</a>
+  ...
+{% endfor %}
 ```
 
 {% endraw %}

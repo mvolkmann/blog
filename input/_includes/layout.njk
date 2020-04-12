@@ -33,7 +33,8 @@
   <body>
     <header>
       <h1>Mark Volkmann's Blog</h1>
-      {% set crumbs = collections.all | eleventyNavigationBreadcrumb("Navigation Plugin") %}
+      {% set crumbs = collections.all |
+        eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
       {% for crumb in crumbs %}
         <a class="crumb" href="{{ crumb.url | url }}">{{ crumb.title }}</a>
         ...
