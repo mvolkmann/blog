@@ -1,8 +1,9 @@
 ---
 eleventyNavigation:
   key: Static Site Generators
+  order: 1
+intro: true
 layout: layout.njk
-order: 1
 tags: [navItem, intro]
 title: Static Site Generators
 ---

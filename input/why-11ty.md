@@ -1,8 +1,9 @@
 ---
 eleventyNavigation:
   key: Why 11ty?
+  order: 2
+intro: true
 layout: layout.njk
-order: 2
 tags: [navItem, intro]
 title: Why 11ty?
 ---

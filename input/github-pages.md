@@ -1,8 +1,9 @@
 ---
 eleventyNavigation:
   key: GitHub Pages
+  order: 6
+intro: true
 layout: layout.njk
-order: 6
 tags: [navItem, intro]
 title: GitHub Pages
 ---

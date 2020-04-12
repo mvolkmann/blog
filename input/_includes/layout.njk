@@ -35,14 +35,8 @@
     <main>
       <nav> <!-- for accessible page navigation -->
         <h3>Intro. Topics</h3>
-        <ul>
-          {%- for navItem in collections.introNavItemsSorted -%}
-            <li><a href="/blog{{ navItem.url}}">{{ navItem.data.title }}</a></li>
-          {%- endfor -%}
-        </ul>
-
+        {{ collections.all | filter('intro', true) | eleventyNavigation | eleventyNavigationToHtml | safe }}
         <hr>
-
         <h3>More Topics</h3>
         {{ collections.all | eleventyNavigation | sort('title') | eleventyNavigationToHtml | safe }}
       </nav>

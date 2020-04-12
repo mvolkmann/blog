@@ -1,8 +1,9 @@
 ---
 eleventyNavigation:
   key: Getting Started
+  order: 4
+intro: true
 layout: layout.njk
-order: 4
 tags: [navItem, intro]
 title: Getting Started
 ---

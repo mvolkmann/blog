@@ -1,8 +1,9 @@
 ---
 eleventyNavigation:
   key: 11ty Configuration
+  order: 5
+intro: true
 layout: layout.njk
-order: 5
 tags: [navItem, intro]
 title: 11ty Configuration
 ---

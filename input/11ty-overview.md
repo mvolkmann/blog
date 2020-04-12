@@ -1,8 +1,9 @@
 ---
 eleventyNavigation:
   key: 11ty Overview
+  order: 3
+intro: true
 layout: layout.njk
-order: 3
 tags: [navItem, intro]
 title: 11ty Overview
 ---
