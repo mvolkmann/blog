@@ -8,33 +8,67 @@
     <meta name="theme-color" content="cornflowerblue">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png">
     <link rel="manifest" href="/blog/assets/manifest.json">
     
     <link rel="preload" as="style" href="/blog/assets/styles.css">
     <link rel="stylesheet" href="/blog/assets/styles.css">
 
-    <script>
+    <!-- This is for use with eleventy-plugin-syntaxhighlight. -->
+    <link rel="preload" as="style" href="/blog/assets/prism-default.css">
+    <link rel="stylesheet" href="/blog/assets/prism-default.css" />
+
+    <!-- I commented this out during testing so all files
+         are loaded from the network instead of the cache.
+         See https://github.com/okitavera/eleventy-plugin-pwa/issues/5. -->
+    <!--script>
       if ("serviceWorker" in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
-    </script> 
+    </script--> 
   </head>
   <body>
     <h1>Mark Volkmann's Blog</h1>
     <main>
       <nav> <!-- for accessible page navigation -->
         <h3>Intro. Topics</h3>
-        <ul><li><a href="/blog/ssgs/">Static site generators</a></li><li><a href="/blog/why-11ty/">Why 11ty?</a></li><li><a href="/blog/11ty-overview/">11ty Overview</a></li><li><a href="/blog/getting-started/">Getting Started</a></li><li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
-
+        <ul><li><a href="/blog/ssgs/">Static Site Generators</a></li>
+<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
+<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
+<li><a href="/blog/getting-started/">Getting Started</a></li>
+<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
+<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
         <hr>
-
         <h3>More Topics</h3>
-        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li><li><a href="/blog/collections/">Collections</a></li><li><a href="/blog/data-cascade/">Data Cascade</a></li><li><a href="/blog/debugging-tips/">Debugging Tips</a></li><li><a href="/blog/front-matter/">Front Matter</a></li><li><a href="/blog/global-data/">Global Data</a></li><li><a href="/blog/internationalization/">Internationalization</a></li><li><a href="/blog/markdown/">Markdown</a></li><li><a href="/blog/nunjucks/">Nunjucks</a></li><li><a href="/blog/pagination/">Pagination</a></li><li><a href="/blog/permalinks/">Permalinks</a></li><li><a href="/blog/rest-services/">REST Services</a></li><li><a href="/blog/shortcodes/">Shortcodes</a></li><li><a href="/blog/styling/">Styling</a></li><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li><li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li><li><a href="/blog/templating-languages/">Templating Languages</a></li><li><a href="/blog/yaml/">YAML</a></li></ul>
+        <!-- This uses the sort filter in Nunjucks. -->
+        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li>
+<li><a href="/blog/collections/">Collection Sorting</a></li>
+<li><a href="/blog/data-cascade/">Data Cascade</a></li>
+<li><a href="/blog/debugging-tips/">Debugging Tips</a></li>
+<li><a href="/blog/front-matter/">Front Matter</a></li>
+<li><a href="/blog/global-data/">Global Data</a></li>
+<li><a href="/blog/internationalization/">Internationalization</a></li>
+<li><a href="/blog/markdown/">Markdown</a></li>
+<li><a href="/blog/pagination/">Pagination</a></li>
+<li><a href="/blog/permalinks/">Permalinks</a></li>
+<li><a href="/blog/rest-services/">REST Services</a></li>
+<li><a href="/blog/shortcodes/">Shortcodes</a></li>
+<li><a href="/blog/styling/">Styling</a><ul><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li></ul></li>
+<li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
+<li><a href="/blog/templating-languages/">Templating Languages</a></li>
+<li><a href="/blog/yaml/">YAML</a></li>
+<li><a href="/blog/nunjucks/">Nunjucks</a></li>
+<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li>
+<li><a href="/blog/filters/">Filters</a></li>
+<li><a href="/blog/ssgs/">Static Site Generators</a></li>
+<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
+<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
+<li><a href="/blog/getting-started/">Getting Started</a></li>
+<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
+<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
       </nav>
       
       <section>
@@ -50,20 +84,11 @@ Strings containing no spaces or special characters do not require quotes.
 When quotes are needed, they can be single or double quotes.</p>
 <p>Arrays are specified by listing each element preceded by a dash and a space.
 For example:</p>
-<pre><code class="language-yaml">colors:
-  - red
-  - green
-  - blue
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">colors</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> red<br>  <span class="token punctuation">-</span> green<br>  <span class="token punctuation">-</span> blue</code></pre>
 <p>Objects (a.k.a dicts) are written as key/value pairs
 on separate, indented lines where keys are followed by a colon.
 For example:</p>
-<pre><code class="language-yaml">address:
-  street: 123 Some Lane
-  city: Somewhere
-  state: CA
-  zip: 12345
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">address</span><span class="token punctuation">:</span><br>  <span class="token key atrule">street</span><span class="token punctuation">:</span> 123 Some Lane<br>  <span class="token key atrule">city</span><span class="token punctuation">:</span> Somewhere<br>  <span class="token key atrule">state</span><span class="token punctuation">:</span> CA<br>  <span class="token key atrule">zip</span><span class="token punctuation">:</span> <span class="token number">12345</span></code></pre>
 <p>Arrays can hold objects and other arrays..
 Object property values can be arrays and other objects.</p>
 <p>Comments begin with <code>#</code> and extend to the end of the line.

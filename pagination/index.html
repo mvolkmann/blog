@@ -8,33 +8,67 @@
     <meta name="theme-color" content="cornflowerblue">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png">
     <link rel="manifest" href="/blog/assets/manifest.json">
     
     <link rel="preload" as="style" href="/blog/assets/styles.css">
     <link rel="stylesheet" href="/blog/assets/styles.css">
 
-    <script>
+    <!-- This is for use with eleventy-plugin-syntaxhighlight. -->
+    <link rel="preload" as="style" href="/blog/assets/prism-default.css">
+    <link rel="stylesheet" href="/blog/assets/prism-default.css" />
+
+    <!-- I commented this out during testing so all files
+         are loaded from the network instead of the cache.
+         See https://github.com/okitavera/eleventy-plugin-pwa/issues/5. -->
+    <!--script>
       if ("serviceWorker" in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
-    </script> 
+    </script--> 
   </head>
   <body>
     <h1>Mark Volkmann's Blog</h1>
     <main>
       <nav> <!-- for accessible page navigation -->
         <h3>Intro. Topics</h3>
-        <ul><li><a href="/blog/ssgs/">Static site generators</a></li><li><a href="/blog/why-11ty/">Why 11ty?</a></li><li><a href="/blog/11ty-overview/">11ty Overview</a></li><li><a href="/blog/getting-started/">Getting Started</a></li><li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
-
+        <ul><li><a href="/blog/ssgs/">Static Site Generators</a></li>
+<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
+<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
+<li><a href="/blog/getting-started/">Getting Started</a></li>
+<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
+<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
         <hr>
-
         <h3>More Topics</h3>
-        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li><li><a href="/blog/collections/">Collections</a></li><li><a href="/blog/data-cascade/">Data Cascade</a></li><li><a href="/blog/debugging-tips/">Debugging Tips</a></li><li><a href="/blog/front-matter/">Front Matter</a></li><li><a href="/blog/global-data/">Global Data</a></li><li><a href="/blog/internationalization/">Internationalization</a></li><li><a href="/blog/markdown/">Markdown</a></li><li><a href="/blog/nunjucks/">Nunjucks</a></li><li><a href="/blog/pagination/">Pagination</a></li><li><a href="/blog/permalinks/">Permalinks</a></li><li><a href="/blog/rest-services/">REST Services</a></li><li><a href="/blog/shortcodes/">Shortcodes</a></li><li><a href="/blog/styling/">Styling</a></li><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li><li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li><li><a href="/blog/templating-languages/">Templating Languages</a></li><li><a href="/blog/yaml/">YAML</a></li></ul>
+        <!-- This uses the sort filter in Nunjucks. -->
+        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li>
+<li><a href="/blog/collections/">Collection Sorting</a></li>
+<li><a href="/blog/data-cascade/">Data Cascade</a></li>
+<li><a href="/blog/debugging-tips/">Debugging Tips</a></li>
+<li><a href="/blog/front-matter/">Front Matter</a></li>
+<li><a href="/blog/global-data/">Global Data</a></li>
+<li><a href="/blog/internationalization/">Internationalization</a></li>
+<li><a href="/blog/markdown/">Markdown</a></li>
+<li><a href="/blog/pagination/">Pagination</a></li>
+<li><a href="/blog/permalinks/">Permalinks</a></li>
+<li><a href="/blog/rest-services/">REST Services</a></li>
+<li><a href="/blog/shortcodes/">Shortcodes</a></li>
+<li><a href="/blog/styling/">Styling</a><ul><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li></ul></li>
+<li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
+<li><a href="/blog/templating-languages/">Templating Languages</a></li>
+<li><a href="/blog/yaml/">YAML</a></li>
+<li><a href="/blog/nunjucks/">Nunjucks</a></li>
+<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li>
+<li><a href="/blog/filters/">Filters</a></li>
+<li><a href="/blog/ssgs/">Static Site Generators</a></li>
+<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
+<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
+<li><a href="/blog/getting-started/">Getting Started</a></li>
+<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
+<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
       </nav>
       
       <section>
@@ -48,10 +82,7 @@ Often it is set to 1 to render each element on a separate page.
 The array data can come from anywhere in the data cascade.</p>
 <p>By default the URL for each page produced ends with a slash and a page number.</p>
 <p>For example:</p>
-<pre><code class="language-yaml">pagination:
-  data: employees # data over which to paginate
-  size: 7 # number of employees per page
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">pagination</span><span class="token punctuation">:</span><br>  <span class="token key atrule">data</span><span class="token punctuation">:</span> employees <span class="token comment"># data over which to paginate</span><br>  <span class="token key atrule">size</span><span class="token punctuation">:</span> <span class="token number">7</span> <span class="token comment"># number of employees per page</span></code></pre>
 <p>The global variable <code>pagination</code> holds related data.</p>
 <ul>
 <li><code>pagination.data</code> holds the value of the
@@ -85,78 +116,33 @@ or an array of the current page items when size is greater than 1.
 To add an alias for this add an <code>alias</code> property
 to the <code>pagination</code> front matter.
 For example:</p>
-<pre><code class="language-yaml">pagination:
-  ...
-  alias: items
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">pagination</span><span class="token punctuation">:</span><br>  <span class="token punctuation">...</span><br>  <span class="token key atrule">alias</span><span class="token punctuation">:</span> items</code></pre>
 <p>With this alias in place, we can iterate over <code>items</code>
 instead of <code>pagination.items</code> to render all the items on the current page.</p>
 <p>To display &quot;Page m of n&quot;:</p>
-<pre><code class="language-njk">&lt;div&gt;
-  Page NaN of 
-&lt;/div&gt;
-</code></pre>
+<pre class="language-liquid"><code class="language-liquid"><span class="token operator">&lt;</span>div<span class="token operator">></span><br>  Page {{pagination.pageNumber <span class="token operator">+</span> <span class="token number">1</span>}} of {{pagination.pages.length}}<br><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span></code></pre>
 <p>To render links to the first, previous, next, and last pages
 so each is only rendered when it makes sense:</p>
-<pre><code class="language-njk">&lt;nav class=&quot;pagination&quot;&gt;
-  &lt;ol&gt;
-    
-    
-    
-    
-  &lt;/ol&gt;
-&lt;/nav&gt;
-</code></pre>
+<pre class="language-liquid"><code class="language-liquid"><span class="token operator">&lt;</span>nav class<span class="token operator">=</span>"pagination"<span class="token operator">></span><br>  <span class="token operator">&lt;</span>ol<span class="token operator">></span><br>    {<span class="token operator">%</span> <span class="token keyword">if</span> pagination.pageNumber <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">%</span>}<br>      <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span>a href<span class="token operator">=</span>"{{pagination.href.first}}"<span class="token operator">></span>First<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span><br>    {<span class="token operator">%</span> <span class="token keyword">endif</span> <span class="token operator">%</span>}<br>    {<span class="token operator">%</span> <span class="token keyword">if</span> pagination.href.previous <span class="token operator">%</span>}<br>      <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span>a href<span class="token operator">=</span>"{{pagination.href.previous}}"<span class="token operator">></span>Prev<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span><br>    {<span class="token operator">%</span> <span class="token keyword">endif</span> <span class="token operator">%</span>}<br>    {<span class="token operator">%</span> <span class="token keyword">if</span> pagination.href.next <span class="token operator">%</span>}<br>      <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span>a href<span class="token operator">=</span>"{{pagination.href.next}}"<span class="token operator">></span>Next<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span><br>    {<span class="token operator">%</span> <span class="token keyword">endif</span> <span class="token operator">%</span>}<br>    {<span class="token operator">%</span> <span class="token keyword">if</span> pagination.pageNumber <span class="token operator">&lt;</span> pagination.pages.length <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">%</span>}<br>      <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span>a href<span class="token operator">=</span>"{{pagination.href.last}}"<span class="token operator">></span>Last<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span><br>    {<span class="token operator">%</span> <span class="token keyword">endif</span> <span class="token operator">%</span>}<br>  <span class="token operator">&lt;</span><span class="token operator">/</span>ol<span class="token operator">></span><br><span class="token operator">&lt;</span><span class="token operator">/</span>nav<span class="token operator">></span></code></pre>
 <p>To render links to all the pages except the current by number:</p>
-<pre><code class="language-njk">&lt;nav class=&quot;pagination&quot;&gt;
-  &lt;ol&gt;
-    
-  &lt;/ol&gt;
-&lt;/nav&gt;
-</code></pre>
+<pre class="language-liquid"><code class="language-liquid"><span class="token operator">&lt;</span>nav class<span class="token operator">=</span>"pagination"<span class="token operator">></span><br>  <span class="token operator">&lt;</span>ol<span class="token operator">></span><br>    {<span class="token operator">%</span> <span class="token keyword">for</span> href <span class="token keyword">in</span> pagination.hrefs <span class="token operator">%</span>}<br>      {<span class="token operator">%</span><span class="token keyword">if</span> loop.index0 <span class="token operator">!=</span><span class="token operator">=</span> pagination.pageNumber <span class="token operator">%</span>}<br>        <span class="token operator">&lt;</span>li<span class="token operator">></span><span class="token operator">&lt;</span>a href<span class="token operator">=</span>"{{href}}"<span class="token operator">></span>Page {{ loop.index }}<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span><br>      {<span class="token operator">%</span> <span class="token keyword">endif</span> <span class="token operator">%</span>}<br>    {<span class="token operator">%</span> <span class="token keyword">endfor</span> <span class="token operator">%</span>}<br>  <span class="token operator">&lt;</span><span class="token operator">/</span>ol<span class="token operator">></span><br><span class="token operator">&lt;</span><span class="token operator">/</span>nav<span class="token operator">></span></code></pre>
 <p>Note that Nunjucks provides the variable <code>loop</code> that holds
 an object with the properties <code>index</code> (1-based) and <code>index0</code> (0-based).
 These hold the current loop index.</p>
 <p>To style the anchor tags as buttons:</p>
-<pre><code class="language-css">.pagination {
-  background-color: transparent;
-}
-
-.pagination ol {
-  display: flex;
-  list-style: none;
-  padding: 0.5rem 0; /* to match &quot;a&quot; padding below */
-}
-
-.pagination a {
-  border: solid gray 1px;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  text-decoration: none;
-}
-</code></pre>
+<pre class="language-css"><code class="language-css"><span class="token selector">.pagination</span> <span class="token punctuation">{</span><br>  <span class="token property">background-color</span><span class="token punctuation">:</span> transparent<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token selector">.pagination ol</span> <span class="token punctuation">{</span><br>  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span><br>  <span class="token property">list-style</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span><br>  <span class="token property">padding</span><span class="token punctuation">:</span> 0.5rem 0<span class="token punctuation">;</span> <span class="token comment">/* to match "a" padding below */</span><br><span class="token punctuation">}</span><br><br><span class="token selector">.pagination a</span> <span class="token punctuation">{</span><br>  <span class="token property">border</span><span class="token punctuation">:</span> solid gray 1px<span class="token punctuation">;</span><br>  <span class="token property">border-radius</span><span class="token punctuation">:</span> 0.5rem<span class="token punctuation">;</span><br>  <span class="token property">padding</span><span class="token punctuation">:</span> 0.5rem<span class="token punctuation">;</span><br>  <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 <p>To style the anchor for the current page differently that the others,
 define a CSS rule for <code>a.current</code> and
 set the <code>class</code> on the <code>a</code> elements as follows:</p>
-<pre><code class="language-njk">&lt;a
-  class=&quot;current&quot;
-  href=&quot;&quot;
-&gt;
-</code></pre>
+<pre class="language-liquid"><code class="language-liquid"><span class="token operator">&lt;</span>a<br>  class<span class="token operator">=</span>"{{'current' <span class="token keyword">if</span> loop.index0 <span class="token operator">==</span><span class="token operator">=</span> pagination.pageNumber <span class="token keyword">else</span> ''}}"<br>  href<span class="token operator">=</span>"{{href}}"<br><span class="token operator">></span></code></pre>
 <p>To paginate data in reverse order,
 add the <code>reverse</code> property to the <code>pagination</code> front matter.</p>
-<pre><code class="language-yaml">pagination:
-  ...
-  reverse: true
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">pagination</span><span class="token punctuation">:</span><br>  <span class="token punctuation">...</span><br>  <span class="token key atrule">reverse</span><span class="token punctuation">:</span> <span class="token boolean important">true</span></code></pre>
 <p>When <code>data</code> is an object rather than an array,
 the items will be keys instead of items.
 To change this so the items are the property values,
 add the <code>resolve</code> property to the <code>pagination</code> front matter.</p>
-<pre><code class="language-yaml">pagination:
-  ...
-  resolve: values
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">pagination</span><span class="token punctuation">:</span><br>  <span class="token punctuation">...</span><br>  <span class="token key atrule">resolve</span><span class="token punctuation">:</span> values</code></pre>
 <p>To produce different data to be paginated from existing data,
 use the <code>before</code> front matter property whose value is
 a JavaScript function that takes the data and returns new data.
@@ -166,34 +152,14 @@ to be converted from YAML to JavaScript.
 For example, the following filters the employees
 so only those age 50 and older are retained
 and it makes their names all uppercase:</p>
-<pre><code class="language-yaml">---js
-{
-  layout: 'employees-layout.njk',
-  title: 'Employees',
-  pagination: {
-    data: 'employees',
-    size: 7,
-    alias: 'items',
-    before(employees) {
-      return employees.
-        filter(emp =&gt; emp.employee_age &gt;= 50).
-        map(emp =&gt; ({
-          ...emp,
-          employee_name: emp.employee_name.toUpperCase()
-        }));
-    }
-  }
-}
----
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">---</span>js<br><span class="token punctuation">{</span><br>  <span class="token key atrule">layout</span><span class="token punctuation">:</span> <span class="token string">'employees-layout.njk'</span><span class="token punctuation">,</span><br>  <span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">'Employees'</span><span class="token punctuation">,</span><br>  <span class="token key atrule">pagination</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><br>    <span class="token key atrule">data</span><span class="token punctuation">:</span> <span class="token string">'employees'</span><span class="token punctuation">,</span><br>    <span class="token key atrule">size</span><span class="token punctuation">:</span> <span class="token number">7</span><span class="token punctuation">,</span><br>    <span class="token key atrule">alias</span><span class="token punctuation">:</span> <span class="token string">'items'</span><span class="token punctuation">,</span><br>    before(employees) <span class="token punctuation">{</span><br>      return employees.<br>        filter(emp =<span class="token punctuation">></span> emp.employee_age <span class="token punctuation">></span>= 50).<br>        map(emp =<span class="token punctuation">></span> (<span class="token punctuation">{</span><br>          <span class="token punctuation">...</span>emp<span class="token punctuation">,</span><br>          <span class="token key atrule">employee_name</span><span class="token punctuation">:</span> emp.employee_name.toUpperCase()<br>        <span class="token punctuation">}</span>));<br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span><br><span class="token punctuation">---</span></code></pre>
 <p>To change the paths of the files produced for each page, specify a permalink.
 For example, if the file <code>employees.njk</code> uses pagination then
 it would normally generate files like <code>_site/employees/2/index.html</code>
 where 2 is a page number.
 To change this so it generates files like
 <code>_site/workers/group-2/index.html</code>, add the following front matter:</p>
-<pre><code class="language-yaml">permalink: 'workers/group-/index.html'
-</code></pre>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">permalink</span><span class="token punctuation">:</span> <span class="token string">'workers/group-/index.html'</span></code></pre>
 <p>When a template uses pagination and gets data from a REST service
 as shown above, the REST service is invoked once,
 then again for each page.

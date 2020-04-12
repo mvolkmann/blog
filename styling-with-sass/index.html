@@ -8,33 +8,67 @@
     <meta name="theme-color" content="cornflowerblue">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png">
     <link rel="manifest" href="/blog/assets/manifest.json">
     
     <link rel="preload" as="style" href="/blog/assets/styles.css">
     <link rel="stylesheet" href="/blog/assets/styles.css">
 
-    <script>
+    <!-- This is for use with eleventy-plugin-syntaxhighlight. -->
+    <link rel="preload" as="style" href="/blog/assets/prism-default.css">
+    <link rel="stylesheet" href="/blog/assets/prism-default.css" />
+
+    <!-- I commented this out during testing so all files
+         are loaded from the network instead of the cache.
+         See https://github.com/okitavera/eleventy-plugin-pwa/issues/5. -->
+    <!--script>
       if ("serviceWorker" in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
-    </script> 
+    </script--> 
   </head>
   <body>
     <h1>Mark Volkmann's Blog</h1>
     <main>
       <nav> <!-- for accessible page navigation -->
         <h3>Intro. Topics</h3>
-        <ul><li><a href="/blog/ssgs/">Static site generators</a></li><li><a href="/blog/why-11ty/">Why 11ty?</a></li><li><a href="/blog/11ty-overview/">11ty Overview</a></li><li><a href="/blog/getting-started/">Getting Started</a></li><li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
-
+        <ul><li><a href="/blog/ssgs/">Static Site Generators</a></li>
+<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
+<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
+<li><a href="/blog/getting-started/">Getting Started</a></li>
+<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
+<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
         <hr>
-
         <h3>More Topics</h3>
-        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li><li><a href="/blog/collections/">Collections</a></li><li><a href="/blog/data-cascade/">Data Cascade</a></li><li><a href="/blog/debugging-tips/">Debugging Tips</a></li><li><a href="/blog/front-matter/">Front Matter</a></li><li><a href="/blog/global-data/">Global Data</a></li><li><a href="/blog/internationalization/">Internationalization</a></li><li><a href="/blog/markdown/">Markdown</a></li><li><a href="/blog/nunjucks/">Nunjucks</a></li><li><a href="/blog/pagination/">Pagination</a></li><li><a href="/blog/permalinks/">Permalinks</a></li><li><a href="/blog/rest-services/">REST Services</a></li><li><a href="/blog/shortcodes/">Shortcodes</a></li><li><a href="/blog/styling/">Styling</a></li><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li><li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li><li><a href="/blog/templating-languages/">Templating Languages</a></li><li><a href="/blog/yaml/">YAML</a></li></ul>
+        <!-- This uses the sort filter in Nunjucks. -->
+        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li>
+<li><a href="/blog/collections/">Collection Sorting</a></li>
+<li><a href="/blog/data-cascade/">Data Cascade</a></li>
+<li><a href="/blog/debugging-tips/">Debugging Tips</a></li>
+<li><a href="/blog/front-matter/">Front Matter</a></li>
+<li><a href="/blog/global-data/">Global Data</a></li>
+<li><a href="/blog/internationalization/">Internationalization</a></li>
+<li><a href="/blog/markdown/">Markdown</a></li>
+<li><a href="/blog/pagination/">Pagination</a></li>
+<li><a href="/blog/permalinks/">Permalinks</a></li>
+<li><a href="/blog/rest-services/">REST Services</a></li>
+<li><a href="/blog/shortcodes/">Shortcodes</a></li>
+<li><a href="/blog/styling/">Styling</a><ul><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li></ul></li>
+<li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
+<li><a href="/blog/templating-languages/">Templating Languages</a></li>
+<li><a href="/blog/yaml/">YAML</a></li>
+<li><a href="/blog/nunjucks/">Nunjucks</a></li>
+<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li>
+<li><a href="/blog/filters/">Filters</a></li>
+<li><a href="/blog/ssgs/">Static Site Generators</a></li>
+<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
+<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
+<li><a href="/blog/getting-started/">Getting Started</a></li>
+<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
+<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
       </nav>
       
       <section>
@@ -54,12 +88,7 @@ and place all <code>.scss</code> in it.</li>
 <li>Enter <code>npm install -D node-sass npm-run-all</code>.</li>
 <li>Modify <code>package.json</code> to contain the following npm scripts:</li>
 </ol>
-<pre><code class="language-json">&quot;build&quot;: &quot;npm run sass &amp;&amp; eleventy&quot;,
-&quot;sass&quot;: &quot;node-sass sass --output assets/css&quot;,
-&quot;start&quot;: &quot;npm-run-all sass --parallel watch:*&quot;,
-&quot;watch:eleventy&quot;: &quot;eleventy --serve&quot;,
-&quot;watch:sass&quot;: &quot;npm run sass -- --watch&quot;
-</code></pre>
+<pre class="language-json"><code class="language-json"><span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"npm run sass &amp;&amp; eleventy"</span><span class="token punctuation">,</span><br><span class="token property">"sass"</span><span class="token operator">:</span> <span class="token string">"node-sass sass --output assets/css"</span><span class="token punctuation">,</span><br><span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"npm-run-all sass --parallel watch:*"</span><span class="token punctuation">,</span><br><span class="token property">"watch:eleventy"</span><span class="token operator">:</span> <span class="token string">"eleventy --serve"</span><span class="token punctuation">,</span><br><span class="token property">"watch:sass"</span><span class="token operator">:</span> <span class="token string">"npm run sass -- --watch"</span></code></pre>
 <p>This assumes that all <code>.css</code> files will be
 stored in the <code>assets/css</code> directory.
 Now when <code>npm run build</code> is used to build the site
