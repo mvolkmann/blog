@@ -1,6 +1,7 @@
 ---
 eleventyNavigation:
   key: Styling with Sass
+  parent: Styling
 layout: layout.njk
 title: Styling with Sass
 ---

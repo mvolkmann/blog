@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png">
     <link rel="manifest" href="/blog/assets/manifest.json">
     
     <link rel="preload" as="style" href="/blog/assets/styles.css">
@@ -18,7 +18,6 @@
     <!-- This is for use with eleventy-plugin-syntaxhighlight. -->
     <link rel="preload" as="style" href="/blog/assets/prism-default.css">
     <link rel="stylesheet" href="/blog/assets/prism-default.css" />
-
 
     <!-- I commented this out during testing so all files
          are loaded from the network instead of the cache.
@@ -45,7 +44,7 @@
         <hr>
 
         <h3>More Topics</h3>
-        {{ collections.all | eleventyNavigation | eleventyNavigationToHtml | safe }}
+        {{ collections.all | eleventyNavigation | sort('title') | eleventyNavigationToHtml | safe }}
       </nav>
       
       <section>

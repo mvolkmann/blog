@@ -21,6 +21,19 @@ module.exports = eleventyConfig => {
   });
   */
 
+  // This filter is being added in v0.11.0.
+  eleventyConfig.addFilter('log', value => {
+    console.log('.eleventy.js log: value =', value);
+    return value;
+  });
+
+  eleventyConfig.addFilter('sort', (value, property) => {
+    value.sort((item1, item2) =>
+      item1[property].localeCompare(item2[property])
+    );
+    return value;
+  });
+
   eleventyConfig.addPlugin(navigationPlugin);
 
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
