@@ -36,6 +36,9 @@ Nunjucks provides the following filters documented at
 `safe`, `selectattr`, `slice`, `sort`, `string`, `sum`, `title`,
 `trim`, `truncate`, `upper`, `urlencode`, `urlize`, and `wordcount`.
 
+Note that the Nunjucks `sort` filter can only sort on top-level properties.
+See <https://github.com/11ty/eleventy/issues/911>.
+
 You can implemented custom filters in the 11ty configuration file,
 typically `.eleventy.js`.
 Here is a filter that doesn't do or change anything:
