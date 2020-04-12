@@ -67,5 +67,6 @@ h3 {
 }
 
 li.active a {
+  color: purple;
   font-weight: bold;
 }
