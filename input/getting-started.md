@@ -21,7 +21,7 @@ This automatically watches the current directory for file changes.
 When they are detected, it rebuilds the site and
 attempts to refresh the browser (using BrowserSync).
 NOTE: BrowserSync does not currently work with 11ty!
-See https://github.com/11ty/eleventy/issues/701.
+See <https://github.com/11ty/eleventy/issues/701>.
 
 If the project is placed in a Git repository,
 add `_site/` to the `.gitignore` file
@@ -37,4 +37,4 @@ that can be used to build and serve the site:
 ```
 
 To deploy an 11ty site to GitHub Pages,
-see <a href="/github-pages">here</a>.
+see [here](/blog/github-pages).
