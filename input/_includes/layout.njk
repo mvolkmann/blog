@@ -39,7 +39,21 @@
         <hr>
         <h3>More Topics</h3>
         <!-- This uses the sort filter in Nunjucks. -->
+        <!--
         {{ collections.all | filterNot('intro', true) | eleventyNavigation | sort('title') | eleventyNavigationToHtml | safe }}
+        -->
+        {% set nonIntroDocs = collections.all | filterNot('intro', true) %}
+        {% set foo = nonIntroDocs | eleventyNavigation | log %}
+        <!-- TODO: WHY IS THIS SORT NOT WORKING? -->
+        {% set navPages = nonIntroDocs | eleventyNavigation | sort(false, false, 'title') %}
+        {% set bar = navPages | log %}
+        <ul>
+          {% for entry in navPages %}
+            <li{% if entry.url == page.url %} class="active"{% endif %}>
+              <a href="{{ entry.url | url }}">{{ entry.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
       </nav>
       
       <section>

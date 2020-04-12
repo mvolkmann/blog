@@ -65,3 +65,7 @@ h2 {
 h3 {
   color: gray;
 }
+
+li.active a {
+  font-weight: bold;
+}

@@ -36,7 +36,11 @@ Nunjucks provides the following filters documented at
 `safe`, `selectattr`, `slice`, `sort`, `string`, `sum`, `title`,
 `trim`, `truncate`, `upper`, `urlencode`, `urlize`, and `wordcount`.
 
-Note that the Nunjucks `sort` filter can only sort on top-level properties.
+The Nunjucks `sort` filter requires three arguments.
+The first is boolean indicating whether the sort should be in reverse order.
+The second is a boolean indicating whether the comparisons should be case-sensitive.
+The third is the property on which to sort.
+It can only sort on top-level properties.
 See <https://github.com/11ty/eleventy/issues/911>.
 
 You can implemented custom filters in the 11ty configuration file,
@@ -49,25 +53,15 @@ eleventyConfig.addFilter('myFilter', value => {
 });
 ```
 
-Here is a custom filter for sorting.
+Here is a custom filter for sorting that is
+an alternative to using the one provided by Nunjucks.
 It expects its value to be an array of objects.
 It takes an argument that specifies the property in the objects
 that should be used for sorting.
 
 ```js
-eleventyConfig.addFilter('sort', (value, property) => {
+eleventyConfig.addFilter('mySort', (value, property) => {
   value.sort((item1, item2) => item1[property].localeCompare(item2[property]));
   return value;
 });
 ```
-
-This can be used in conjunction with the navigation plugin.
-For example:
-
-{% raw %}
-
-```liquid
-{{ collections.all | eleventyNavigation | sort('title') | eleventyNavigationToHtml | safe }}
-```
-
-{% endraw %}
