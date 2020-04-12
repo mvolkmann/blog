@@ -44,8 +44,7 @@
         <hr>
         <h3>More Topics</h3>
         <!-- This uses the sort filter in Nunjucks. -->
-        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li>
-<li><a href="/blog/collections/">Collections</a></li>
+        <ul><li><a href="/blog/collections/">Collections</a></li>
 <li><a href="/blog/data-cascade/">Data Cascade</a></li>
 <li><a href="/blog/debugging-tips/">Debugging Tips</a></li>
 <li><a href="/blog/front-matter/">Front Matter</a></li>
@@ -57,30 +56,26 @@
 <li><a href="/blog/rest-services/">REST Services</a></li>
 <li><a href="/blog/shortcodes/">Shortcodes</a></li>
 <li><a href="/blog/styling/">Styling</a><ul><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li></ul></li>
-<li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
 <li><a href="/blog/templating-languages/">Templating Languages</a></li>
 <li><a href="/blog/yaml/">YAML</a></li>
 <li><a href="/blog/nunjucks/">Nunjucks</a></li>
-<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li>
 <li><a href="/blog/filters/">Filters</a></li>
-<li><a href="/blog/ssgs/">Static Site Generators</a></li>
-<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
-<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
-<li><a href="/blog/getting-started/">Getting Started</a></li>
-<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
-<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
+<li><a href="/blog/">Welcome!</a></li>
+<li><a href="/blog/plugins/">Plugins</a><ul><li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
+<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li></ul></li></ul>
       </nav>
       
       <section>
         <h2>Debugging Tips</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
         <p>To see the value of a variable in the devtools console,
-use the 11ty <code>log</code> filter.
-For example:</p>
-<pre class="language-liquid"><code class="language-liquid">{{myVariable <span class="token operator">|</span> log}}</code></pre>
+use the 11ty <code>log</code> filter which calls <code>console.log</code>.</p>
+<p>For example:</p>
+<pre class="language-liquid"><code class="language-liquid">{{ myVariable <span class="token operator">|</span> log }}</code></pre>
 <p>To see the content of an array or object within a page,
-use the Nunjucks <code>dump</code> filter which calls <code>JSON.stringify</code>.
-For example, <code>&lt;div&gt;myVariable =</code>.</p>
+use the Nunjucks <code>dump</code> filter which calls <code>JSON.stringify</code>.</p>
+<p>For example:</p>
+<pre class="language-liquid"><code class="language-liquid">{{ myVariable <span class="token operator">|</span> dump }}</code></pre>
 
       </section>
     </main>

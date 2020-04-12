@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Styling with Sass</title>
+    <title>Plugins</title>
 
     <meta charset="utf-8">
     <meta name="description" content="11ty site documenting 11ty">
@@ -66,38 +66,10 @@
       </nav>
       
       <section>
-        <h2>Styling with Sass</h2> <!-- uses a variable defined in front matter -->
+        <h2>Plugins</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Sass provides a modified CSS syntax that can be compiled to plain CSS.
-Sass provides many benefits over CSS including
-more compact variable assignment and usage,
-nested rules, mixins, and provided functions.
-For more details, see the <a href="https://sass-lang.com/">Sass home page</a>.</p>
-<p>We can make converting <code>.scss</code> files to <code>.css</code> files
-an automated part of the 11ty build process
-by following these steps:</p>
-<ol>
-<li>Create a <code>sass</code> directory at the top of the project
-and place all <code>.scss</code> in it.</li>
-<li>Enter <code>npm install -D node-sass npm-run-all</code>.</li>
-<li>Modify <code>package.json</code> to contain the following npm scripts:</li>
-</ol>
-<pre class="language-json"><code class="language-json"><span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"npm run sass &amp;&amp; eleventy"</span><span class="token punctuation">,</span><br><span class="token property">"sass"</span><span class="token operator">:</span> <span class="token string">"node-sass sass --output assets/css"</span><span class="token punctuation">,</span><br><span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"npm-run-all sass --parallel watch:*"</span><span class="token punctuation">,</span><br><span class="token property">"watch:eleventy"</span><span class="token operator">:</span> <span class="token string">"eleventy --serve"</span><span class="token punctuation">,</span><br><span class="token property">"watch:sass"</span><span class="token operator">:</span> <span class="token string">"npm run sass -- --watch"</span></code></pre>
-<p>This assumes that all <code>.css</code> files will be
-stored in the <code>assets/css</code> directory.
-Now when <code>npm run build</code> is used to build the site
-or when <code>npm start</code> is used to serve and watch the site,
-<code>.scss</code> files in the <code>sass</code> directory will be
-compiled to <code>.css</code> files in the <code>assets/css</code> directory.
-Changes made to <code>.scss</code> files while <code>npm start</code> is running
-will automatically be compiled to <code>.css</code> files
-and the browser will reload to show the results.</p>
-<p>The reason <code>.scss</code> files are not placed under the <code>assets</code> directory
-is that <code>eleventyConfig.addPassthroughCopy</code> is being used to
-copy the contents of the <code>assets</code> directory to <code>_site</code>.
-We do not want to copy <code>.scss</code> files there
-because they are not needed by the running site.</p>
-<p>Optionally include the <code>--quiet</code> option on the <code>eleventy</code> commands.</p>
+        <p>Eleventy provides some plugins and there are many third party plugins.</p>
+<p>FINISH THIS!</p>
 
       </section>
     </main>

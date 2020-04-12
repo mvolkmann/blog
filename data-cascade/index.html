@@ -44,8 +44,7 @@
         <hr>
         <h3>More Topics</h3>
         <!-- This uses the sort filter in Nunjucks. -->
-        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li>
-<li><a href="/blog/collections/">Collections</a></li>
+        <ul><li><a href="/blog/collections/">Collections</a></li>
 <li><a href="/blog/data-cascade/">Data Cascade</a></li>
 <li><a href="/blog/debugging-tips/">Debugging Tips</a></li>
 <li><a href="/blog/front-matter/">Front Matter</a></li>
@@ -57,18 +56,13 @@
 <li><a href="/blog/rest-services/">REST Services</a></li>
 <li><a href="/blog/shortcodes/">Shortcodes</a></li>
 <li><a href="/blog/styling/">Styling</a><ul><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li></ul></li>
-<li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
 <li><a href="/blog/templating-languages/">Templating Languages</a></li>
 <li><a href="/blog/yaml/">YAML</a></li>
 <li><a href="/blog/nunjucks/">Nunjucks</a></li>
-<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li>
 <li><a href="/blog/filters/">Filters</a></li>
-<li><a href="/blog/ssgs/">Static Site Generators</a></li>
-<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
-<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
-<li><a href="/blog/getting-started/">Getting Started</a></li>
-<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
-<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
+<li><a href="/blog/">Welcome!</a></li>
+<li><a href="/blog/plugins/">Plugins</a><ul><li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
+<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li></ul></li></ul>
       </nav>
       
       <section>
@@ -160,19 +154,14 @@ whose value is an array of dogs.</p>
 It defines an array of dogs using YAML syntax.</p>
 <pre class="language-md"><code class="language-md"><span class="token hr punctuation">---</span><br>dogs:<br>  <span class="token list punctuation">-</span> name: Dasher<br>    breed: Whippet<br>  <span class="token list punctuation">-</span> name: Maisey<br>    breed: Treeing Walker Coonhound<br>  <span class="token list punctuation">-</span> name: Ramsey<br>    breed: Native American Indian Dog<br>  <span class="token list punctuation">-</span> name: Oscar<br>    breed: German Shorthaired Pointer<br><span class="token title important">layout: layout.njk<br><span class="token punctuation">---</span></span></code></pre>
 <h1>Dogs</h1>
-<pre><code>
-The set of variables obtained from these sources is merged,
+<pre class="language-liquid"><code class="language-liquid">{<span class="token operator">%</span> <span class="token keyword">for</span> dog <span class="token keyword">in</span> dogs <span class="token operator">%</span>}<br>  {{dog.name}} is a {{dog.breed}}.<br>{<span class="token operator">%</span> <span class="token keyword">endfor</span> <span class="token operator">%</span>}</code></pre>
+<p>The set of variables obtained from these sources is merged,
 but their values are not.
-For example, if a template defines `tags` to be `['dog', 'pet']`
-and its layout defines `tags` to be `['canine', 'creature', 'pet']`
-the result will be `['dog', 'pet']`.
-
-As another example, consider a template with the following front matter:
-
-```yaml
-layout: myLayout.njk
-title: 'Template Title'
-</code></pre>
+For example, if a template defines <code>tags</code> to be <code>['dog', 'pet']</code>
+and its layout defines <code>tags</code> to be <code>['canine', 'creature', 'pet']</code>
+the result will be <code>['dog', 'pet']</code>.</p>
+<p>As another example, consider a template with the following front matter:</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">layout</span><span class="token punctuation">:</span> myLayout.njk<br><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">'Template Title'</span></code></pre>
 <p>Suppose <code>myLayout.njk</code> contains the following front matter:</p>
 <pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">score</span><span class="token punctuation">:</span> <span class="token number">7</span><br><span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">'Layout Title'</span></code></pre>
 <p>The data available in the template will be:</p>

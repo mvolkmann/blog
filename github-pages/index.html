@@ -44,8 +44,7 @@
         <hr>
         <h3>More Topics</h3>
         <!-- This uses the sort filter in Nunjucks. -->
-        <ul><li><a href="/blog/collection-sorting/">Collection Sorting</a></li>
-<li><a href="/blog/collections/">Collections</a></li>
+        <ul><li><a href="/blog/collections/">Collections</a></li>
 <li><a href="/blog/data-cascade/">Data Cascade</a></li>
 <li><a href="/blog/debugging-tips/">Debugging Tips</a></li>
 <li><a href="/blog/front-matter/">Front Matter</a></li>
@@ -57,18 +56,13 @@
 <li><a href="/blog/rest-services/">REST Services</a></li>
 <li><a href="/blog/shortcodes/">Shortcodes</a></li>
 <li><a href="/blog/styling/">Styling</a><ul><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li></ul></li>
-<li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
 <li><a href="/blog/templating-languages/">Templating Languages</a></li>
 <li><a href="/blog/yaml/">YAML</a></li>
 <li><a href="/blog/nunjucks/">Nunjucks</a></li>
-<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li>
 <li><a href="/blog/filters/">Filters</a></li>
-<li><a href="/blog/ssgs/">Static Site Generators</a></li>
-<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
-<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
-<li><a href="/blog/getting-started/">Getting Started</a></li>
-<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
-<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
+<li><a href="/blog/">Welcome!</a></li>
+<li><a href="/blog/plugins/">Plugins</a><ul><li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
+<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li></ul></li></ul>
       </nav>
       
       <section>
@@ -79,8 +73,8 @@ because it is free and simple to use.</p>
 <p>Here are the steps to create and deploy an 11ty site to GitHub Pages.</p>
 <ol>
 <li>
-<p>Install Node.js if not already installed by browsing
-<a href="http://nodejs.org">nodejs.org</a>.</p>
+<p>Install Node.js if not already installed.
+See <a href="http://nodejs.org">nodejs.org</a>.</p>
 </li>
 <li>
 <p>Install git if not already installed.
@@ -107,7 +101,7 @@ to enable some options in gh-pages (Which? Is this even true?).</p>
 </li>
 <li>
 <p>Enter <code>npm install -D @11ty/eleventy gh-pages npm-run-all</code>.
-The <code>gh-pages</code> command creates a Git branch named &quot;gh-pages&quot;
+The installed <code>gh-pages</code> command creates a Git branch named &quot;gh-pages&quot;
 that contains only a given directory, in this case the
 &quot;_site&quot; directory created by the <code>eleventy</code> command.</p>
 </li>
@@ -115,11 +109,21 @@ that contains only a given directory, in this case the
 <p>Create a <code>.gitignore</code> file containing the lines <code>/node_modules</code> and <code>/_site</code>.</p>
 </li>
 <li>
-<p>Edit <code>package.json</code> and replace the &quot;test&quot; script with the following:</p>
+<p>Edit <code>package.json</code> and replace the &quot;test&quot; script with the following
+npm scripts, most of which are just conveniences:</p>
 <pre class="language-json"><code class="language-json"><span class="token property">"add"</span><span class="token operator">:</span> <span class="token string">"git add ."</span><span class="token punctuation">,</span><br><span class="token property">"all"</span><span class="token operator">:</span> <span class="token string">"npm-run-all build add commit push deploy"</span><br><span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"eleventy"</span><span class="token punctuation">,</span><br><span class="token property">"clean"</span><span class="token operator">:</span> <span class="token string">"rm -rf _site"</span><span class="token punctuation">,</span><br><span class="token property">"commit"</span><span class="token operator">:</span> <span class="token string">"git commit -av"</span><span class="token punctuation">,</span><br><span class="token property">"deploy"</span><span class="token operator">:</span> <span class="token string">"gh-pages -d _site"</span><span class="token punctuation">,</span><br><span class="token property">"push"</span><span class="token operator">:</span> <span class="token string">"git push origin master"</span><span class="token punctuation">,</span><br><span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"eleventy --serve"</span><span class="token punctuation">,</span></code></pre>
 </li>
 <li>
-<p>Create an <code>index.md</code> file with some basic Markdown content.</p>
+<p>Create the directory <code>_includes</code>.</p>
+</li>
+<li>
+<p>Add the file <code>layout.md</code> in the <code>_includes</code>
+directory containing the following:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br>    {{content | safe}}<br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+</li>
+<li>
+<p>Create the file <code>index.md</code> file containing the following:</p>
+<pre class="language-html"><code class="language-html">---<br>layout: layout.md<br>---<br><br># Welcome to my site!</code></pre>
 </li>
 <li>
 <p>To build and test the site locally, enter <code>npm start</code>.</p>
@@ -134,7 +138,7 @@ Press &quot;:&quot; to go into command-line mode.
 Type &quot;wq&quot; and press return to write the changes and quit.</p>
 </li>
 <li>
-<p>Browse the web UI for the GitHub repository.</p>
+<p>Browse the web UI for the GitHub repository, not the deployed site.</p>
 </li>
 <li>
 <p>Click &quot;Settings&quot; near the upper-right.</p>
@@ -149,11 +153,16 @@ Type &quot;wq&quot; and press return to write the changes and quit.</p>
 <p>Click the link after &quot;Your site is ready to be published at&quot;
 to view the site.</p>
 </li>
+<li>
+<p>Considering bookmarking this URL.</p>
+</li>
 </ol>
 <p>To make changes to the site:</p>
 <ol>
 <li>Edit site source files.</li>
-<li>Enter <code>npm start</code> to rebuild and test the site locally.</li>
+<li>Start the local eleventy server if it isn't already running
+by entering <code>npm start</code>.
+This will provide hot reload when changes are detected.</li>
 <li>Enter <code>npm run all</code> to rebuild and redeploy the site.
 This will prompt for a commit message that must be entered using Vim.</li>
 <li>Browse the site to verify the changes.
