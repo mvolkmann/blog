@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Pagination
 layout: layout.njk
-tags: navItem
 title: Pagination
 ---
 

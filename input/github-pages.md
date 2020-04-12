@@ -1,6 +1,8 @@
 ---
+eleventyNavigation:
+  key: GitHub Pages
 layout: layout.njk
-order: 5
+order: 6
 tags: [navItem, intro]
 title: GitHub Pages
 ---

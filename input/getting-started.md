@@ -1,4 +1,6 @@
 ---
+eleventyNavigation:
+  key: Getting Started
 layout: layout.njk
 order: 4
 tags: [navItem, intro]

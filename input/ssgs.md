@@ -1,8 +1,10 @@
 ---
+eleventyNavigation:
+  key: Static Site Generators
 layout: layout.njk
 order: 1
 tags: [navItem, intro]
-title: Static site generators
+title: Static Site Generators
 ---
 
 Static site generators (SSGs) are an alternative

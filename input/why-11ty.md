@@ -1,4 +1,6 @@
 ---
+eleventyNavigation:
+  key: Why 11ty?
 layout: layout.njk
 order: 2
 tags: [navItem, intro]

@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Syntax Highlighting
 layout: layout.njk
-tags: navItem
 title: Syntax Highlighting
 ---
 

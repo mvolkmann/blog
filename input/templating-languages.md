@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Templating Languages
 layout: layout.njk
-tags: navItem
 title: Templating Languages
 ---
 

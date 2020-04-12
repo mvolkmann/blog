@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Global Data
 layout: layout.njk
-tags: navItem
 title: Global Data
 ---
 

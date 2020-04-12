@@ -1,4 +1,6 @@
 ---
+eleventyNavigation:
+  key: 11ty Overview
 layout: layout.njk
 order: 3
 tags: [navItem, intro]

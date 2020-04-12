@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Nunjucks
 layout: layout.njk
-tags: navItem
 title: Nunjucks
 ---
 

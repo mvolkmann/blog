@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: REST Services
 layout: layout.njk
-tags: navItem
 title: REST Services
 ---
 

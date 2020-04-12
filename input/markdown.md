@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Markdown
 layout: layout.njk
-tags: navItem
 title: Markdown
 ---
 

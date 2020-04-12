@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Styling
 layout: layout.njk
-tags: navItem
 title: Styling
 ---
 

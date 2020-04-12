@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Styling with Sass
 layout: layout.njk
-tags: navItem
 title: Styling with Sass
 ---
 

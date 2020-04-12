@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Debugging Tips
 layout: layout.njk
-tags: navItem
 title: Debugging Tips
 ---
 

@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Collection Sorting
 layout: layout.njk
-tags: navItem
 title: Collection Sorting
 ---
 

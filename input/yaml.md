@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: YAML
 layout: layout.njk
-tags: navItem
 title: YAML
 ---
 

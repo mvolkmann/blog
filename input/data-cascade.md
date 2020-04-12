@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Data Cascade
 layout: layout.njk
-tags: navItem
 title: Data Cascade
 ---
 

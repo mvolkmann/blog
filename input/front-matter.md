@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Front Matter
 layout: layout.njk
-tags: navItem
 title: Front Matter
 ---
 

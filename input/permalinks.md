@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Permalinks
 layout: layout.njk
-tags: navItem
 title: Permalinks
 ---
 

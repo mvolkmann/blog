@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Shortcodes
 layout: layout.njk
-tags: navItem
 title: Shortcodes
 ---
 

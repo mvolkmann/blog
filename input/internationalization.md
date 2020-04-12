@@ -1,6 +1,7 @@
 ---
+eleventyNavigation:
+  key: Internationalization
 layout: layout.njk
-tags: navItem
 title: Internationalization
 ---
 

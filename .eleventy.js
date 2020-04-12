@@ -1,4 +1,5 @@
 const inclusiveLangPlugin = require('@11ty/eleventy-plugin-inclusive-language');
+const navigationPlugin = require('@11ty/eleventy-navigation');
 const pwaPlugin = require('eleventy-plugin-pwa');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
 
@@ -19,6 +20,8 @@ module.exports = eleventyConfig => {
     //mode: 'production'
   });
   */
+
+  eleventyConfig.addPlugin(navigationPlugin);
 
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
 
