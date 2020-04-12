@@ -7,40 +7,6 @@ const itemHasTag = (item, tag) => item.data.tags.includes(tag);
 const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
 
 module.exports = eleventyConfig => {
-  eleventyConfig.addPlugin(inclusiveLangPlugin);
-
-  // I commented this out during testing so all files
-  // are loaded from the network instead of the cache.
-  // See https://github.com/okitavera/eleventy-plugin-pwa/issues/5.
-  /*
-  eleventyConfig.addPlugin(pwaPlugin, {
-    cleanupOutdatedCaches: true,
-    swDest: './_site/service-worker.js',
-    globDirectory: './_site'
-    //mode: 'production'
-  });
-  */
-
-  eleventyConfig.addFilter('filter', (arr, property, value) => {
-    return arr.filter(obj => obj.data[property] === value);
-  });
-
-  // This filter is being added in v0.11.0.
-  eleventyConfig.addFilter('log', value => {
-    console.log('.eleventy.js log: value =', value);
-    return value;
-  });
-
-  //TODO: Does this filter already exist in Nunjucks?
-  eleventyConfig.addFilter('sort', (arr, property) => {
-    arr.sort((obj1, obj2) => obj1[property].localeCompare(obj2[property]));
-    return arr;
-  });
-
-  eleventyConfig.addPlugin(navigationPlugin);
-
-  eleventyConfig.addPlugin(syntaxHighlightPlugin);
-
   // Create a custom collection of sorted, intro nav items.
   eleventyConfig.addCollection('introNavItemsSorted', collection =>
     collection
@@ -57,9 +23,38 @@ module.exports = eleventyConfig => {
       .sort((item1, item2) => item1.data.title.localeCompare(item2.data.title))
   );
 
+  // This filters page objects based on a data property value.
+  eleventyConfig.addFilter('filter', (arr, property, value) => {
+    return arr.filter(obj => obj.data[property] === value);
+  });
+
+  // This filter is being added in v0.11.0.
+  eleventyConfig.addFilter('log', value => {
+    console.log('.eleventy.js log: value =', value);
+    return value;
+  });
+
+  eleventyConfig.addPlugin(inclusiveLangPlugin);
+
+  // I commented this out during testing so all files
+  // are loaded from the network instead of the cache.
+  // See https://github.com/okitavera/eleventy-plugin-pwa/issues/5.
+  /*
+  eleventyConfig.addPlugin(pwaPlugin, {
+    cleanupOutdatedCaches: true,
+    swDest: './_site/service-worker.js',
+    globDirectory: './_site'
+    //mode: 'production'
+  });
+  */
+
   // Copies files in a given directory to output directory
   // without performing any processing on them.
   eleventyConfig.addPassthroughCopy('input/assets');
+
+  eleventyConfig.addPlugin(navigationPlugin);
+
+  eleventyConfig.addPlugin(syntaxHighlightPlugin);
 
   // Suppresses output of the paths of all generated files.
   //eleventyConfig.setQuietMode(false);

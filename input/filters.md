@@ -27,6 +27,15 @@ The provided universal filters are
 Note that the `get*CollectionItem` and `log` filters
 are coming in version 0.11.0.
 
+Nunjucks provides the following filters documented at
+<https://mozilla.github.io/nunjucks/templating.html#builtin-filters>:
+`abs`, `batch`, `capitalize`, `center`, `default`, `dictsort`,
+`dump`, `escape`, `first`, `float`, `forceescape`, `groupby`,
+`indent`, `int`, `join`, `last`, `length`, `list`, `lower`,
+`nl2br`, `random`, `rejectattr`, `replace`, `reverse`, `round`,
+`safe`, `selectattr`, `slice`, `sort`, `string`, `sum`, `title`,
+`trim`, `truncate`, `upper`, `urlencode`, `urlize`, and `wordcount`.
+
 You can implemented custom filters in the 11ty configuration file,
 typically `.eleventy.js`.
 Here is a filter that doesn't do or change anything:

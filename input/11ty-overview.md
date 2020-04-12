@@ -40,9 +40,9 @@ See <https://www.11ty.dev/docs/testimonials/>.
 - [Handlebars](https://handlebarsjs.com/) in `.hbs` files
 - JavaScript in `.11ty.js` files
 - JavaScript Template Literals in `.jstl` files
-- [Liquid](https://shopify.github.io/liquid/) in `.liquid` files
+- [Liquid](https://shopify.github.io/liquid/) from Shopify in `.liquid` files
 - [Mustache](https://mustache.github.io/) in `.mustache` files
-- [Nunjucks](https://mozilla.github.io/nunjucks/) by Mozilla in `.njk` files
+- [Nunjucks](https://mozilla.github.io/nunjucks/) from Mozilla in `.njk` files
 - [Pug](https://pugjs.org/) in `.pug` files
 
 11ty does not currently support AsciiDoc.

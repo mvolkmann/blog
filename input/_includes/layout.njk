@@ -38,6 +38,7 @@
         {{ collections.all | filter('intro', true) | eleventyNavigation | eleventyNavigationToHtml | safe }}
         <hr>
         <h3>More Topics</h3>
+        <!-- This uses the sort filter in Nunjucks. -->
         {{ collections.all | eleventyNavigation | sort('title') | eleventyNavigationToHtml | safe }}
       </nav>
       
