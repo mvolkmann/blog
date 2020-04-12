@@ -46,8 +46,6 @@ Here are the steps to create and deploy an 11ty site to GitHub Pages.
 
 1. Create an `index.md` file with some basic Markdown content.
 1. To build and test the site locally, enter `npm start`.
-   NOTE: BrowserSync does not currently work with 11ty!
-   See https://github.com/11ty/eleventy/issues/701.
 1. To build and deploy the site, enter `npm run all`.
    This will prompt for a commit message that must be entered using Vim.
    Press the "i" key to go into insert mode.
