@@ -94,6 +94,8 @@ are coming in version 0.11.0.</p>
 <code>nl2br</code>, <code>random</code>, <code>rejectattr</code>, <code>replace</code>, <code>reverse</code>, <code>round</code>,
 <code>safe</code>, <code>selectattr</code>, <code>slice</code>, <code>sort</code>, <code>string</code>, <code>sum</code>, <code>title</code>,
 <code>trim</code>, <code>truncate</code>, <code>upper</code>, <code>urlencode</code>, <code>urlize</code>, and <code>wordcount</code>.</p>
+<p>Note that the Nunjucks <code>sort</code> filter can only sort on top-level properties.
+See <a href="https://github.com/11ty/eleventy/issues/911">https://github.com/11ty/eleventy/issues/911</a>.</p>
 <p>You can implemented custom filters in the 11ty configuration file,
 typically <code>.eleventy.js</code>.
 Here is a filter that doesn't do or change anything:</p>
