@@ -73,7 +73,7 @@ h3 {
   color: gray;
 }
 
-li.active a {
+li.active > a {
   color: purple;
   font-weight: bold;
 }

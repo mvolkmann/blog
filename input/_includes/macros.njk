@@ -1,0 +1,17 @@
+{% macro renderNavItem(entry) %}
+  {% set class = "active" if entry.url == page.url else "" %}
+  <li class={{ class }}>
+    <a href="{{ entry.url | url }}">{{ entry.title }}</a>
+    {% if entry.children.length %}
+      {{ renderNavList(entry.children) }}
+    {% endif %}
+  </li>
+{% endmacro %}
+
+{% macro renderNavList(entries) %}
+  <ul>
+    {% for entry in entries %}
+      {{ renderNavItem(entry) }}
+    {% endfor %}
+  </ul>
+{% endmacro %}

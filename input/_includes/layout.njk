@@ -34,35 +34,19 @@
     <h1>Mark Volkmann's Blog</h1>
     <main>
       <nav>
-        {% macro renderNavList(entries) %}
-          <ul>
-            {% for entry in entries %}
-              {{ renderNavItem(entry) }}
-            {% endfor %}
-          </ul>
-        {% endmacro %}
-
-        {% macro renderNavItem(entry) %}
-          {% set class = "active" if entry.url == page.url else "" %}
-          <li class={{ class }}>
-            <a href="{{ entry.url | url }}">{{ entry.title }}</a>
-            {% if entry.children.length %}
-              {{ renderNavList(entry.children) }}
-            {% endif %}
-          </li>
-        {% endmacro %}
+        {% import 'macros.njk' as macros with context %}
 
         <h3>Intro. Topics</h3>
         {% set introDocs = collections.all | filter('intro', true) %}
         {% set entries = introDocs | eleventyNavigation %}
-        {{ renderNavList(entries) }}
+        {{ macros.renderNavList(entries) }}
 
         <hr>
 
         <h3>More Topics</h3>
         {% set moreDocs = collections.all | filterNot('intro', true) %}
         {% set entries = moreDocs | eleventyNavigation | sort(false, false, 'title') %}
-        {{ renderNavList(entries) }}
+        {{ macros.renderNavList(entries) }}
       </nav>
       
       <section>
