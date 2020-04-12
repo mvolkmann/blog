@@ -33,32 +33,36 @@
   <body>
     <h1>Mark Volkmann's Blog</h1>
     <main>
-      <nav> <!-- for accessible page navigation -->
+      <nav>
+        {% macro renderNavList(entries) %}
+          <ul>
+            {% for entry in entries %}
+              {{ renderNavItem(entry) }}
+            {% endfor %}
+          </ul>
+        {% endmacro %}
+
+        {% macro renderNavItem(entry) %}
+          {% set class = "active" if entry.url == page.url else "" %}
+          <li class={{ class }}>
+            <a href="{{ entry.url | url }}">{{ entry.title }}</a>
+            {% if entry.children.length %}
+              {{ renderNavList(entry.children) }}
+            {% endif %}
+          </li>
+        {% endmacro %}
+
         <h3>Intro. Topics</h3>
         {% set introDocs = collections.all | filter('intro', true) %}
-        {% set navPages = introDocs | eleventyNavigation %}
-        <ul>
-          {% for entry in navPages %}
-            {% set class = "active" if entry.url == page.url else "" %}
-            <li class={{class}}>
-              <a href="{{ entry.url | url }}">{{ entry.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
+        {% set entries = introDocs | eleventyNavigation %}
+        {{ renderNavList(entries) }}
 
         <hr>
 
         <h3>More Topics</h3>
         {% set moreDocs = collections.all | filterNot('intro', true) %}
-        {% set navPages = moreDocs | eleventyNavigation | sort(false, false, 'title') %}
-        <ul>
-          {% for entry in navPages %}
-            {% set class = "active" if entry.url == page.url else "" %}
-            <li class={{class}}>
-              <a href="{{ entry.url | url }}">{{ entry.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
+        {% set entries = moreDocs | eleventyNavigation | sort(false, false, 'title') %}
+        {{ renderNavList(entries) }}
       </nav>
       
       <section>

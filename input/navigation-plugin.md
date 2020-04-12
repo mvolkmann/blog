@@ -92,7 +92,12 @@ add the following in a layout file:
 {% raw %}
 
 ```liquid
-{{ collections.all | eleventyNavigation | eleventyNavigationToHtml | safe }}
+{{
+  collections.all |
+  eleventyNavigation |
+  eleventyNavigationToHtml |
+  safe
+}}
 ```
 
 {% endraw %}
@@ -107,20 +112,27 @@ pass the parent key to the `eleventyNavigation` filter as follows:
 {% raw %}
 
 ```liquid
-{{ collections.all | eleventyNavigation('myParentKey') | eleventyNavigationToHtml | safe }}
+{{
+  collections.all |
+  eleventyNavigation('myParentKey') |
+  eleventyNavigationToHtml |
+  safe
+}}
 ```
 
 {% endraw %}
-
-For more details, see
-[Navigation Plugin](https://www.11ty.dev/docs/plugins/navigation).
 
 To render breadcrumbs to the key of the currently selected document:
 
 {% raw %}
 
 ```liquid
-{{ collections.all | eleventyNavigationBreadcrumb('currentKey') | eleventyNavigationToHtml | safe }}
+{{
+  collections.all |
+  eleventyNavigationBreadcrumb('currentKey') |
+  eleventyNavigationToHtml |
+  safe
+}}
 ```
 
 {% endraw %}
@@ -146,3 +158,30 @@ to be a different color than the others:
 ```
 
 {% endraw %}
+
+To add descriptive text to links, add the `excerpt` property
+in document front matter.
+To render this when using `eleventyNavigationToHtml`
+pass the `showExcerpt` option as follows:
+
+{% raw %}
+
+```liquid
+{{
+  collections.all |
+  eleventyNavigation |
+  eleventyNavigationToHtml({ showExcerpt: true }) |
+  safe
+}}
+```
+
+This adds colon and the excerpt text after
+each navigation link that has an `excerpt` value.
+
+To display `excerpt` values in a different way,
+use a `for` loop to iterate over the navigation entry
+and render `entry.excerpt` however you would like.
+
+{% endraw %}
+For more details, see
+[Navigation Plugin](https://www.11ty.dev/docs/plugins/navigation).
