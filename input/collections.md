@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Collection Sorting
+  key: Collections
 layout: layout.njk
 title: Collections
 ---

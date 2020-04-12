@@ -8,8 +8,8 @@ tags: [navItem, intro]
 title: 11ty Configuration
 ---
 
-Configuration options for 11ty are documented
-[here](https://www.11ty.dev/docs/config/).
+Configuration options for 11ty are documented on the 11ty
+[Configuration](https://www.11ty.dev/docs/config/) page.
 
 By default the file `.eleventy.js` is used
 to specify configuration options for 11ty.

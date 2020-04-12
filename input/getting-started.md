@@ -17,6 +17,8 @@ Here are the most basic steps to create and build an 11ty site.
 1. Add the file `layout.md` in the `_includes`
    directory containing the following:
 
+   {% raw %}
+
    ```html
    <html lang="en">
      <body>
@@ -24,6 +26,8 @@ Here are the most basic steps to create and build an 11ty site.
      </body>
    </html>
    ```
+
+   {% endraw %}
 
 1. Create the file `index.md` file containing the following:
 
