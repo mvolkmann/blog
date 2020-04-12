@@ -1,8 +1,8 @@
 ---
 eleventyNavigation:
   key: Navigation Plugin
+  parent: Plugins
 layout: layout.njk
-tags: plugin
 ---
 
 Eleventy provides a plugin that implements page navigation.

@@ -1,8 +1,8 @@
 ---
 eleventyNavigation:
   key: Syntax Highlighting
+  parent: Plugins
 layout: layout.njk
-tags: plugin
 ---
 
 To uses the syntax highlighting plugin, install it as follows:
