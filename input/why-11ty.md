@@ -5,7 +5,6 @@ eleventyNavigation:
 intro: true
 layout: layout.njk
 tags: [navItem, intro]
-title: Why 11ty?
 ---
 
 11ty competes with:

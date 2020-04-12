@@ -5,7 +5,6 @@ eleventyNavigation:
 intro: true
 layout: layout.njk
 tags: [navItem, intro]
-title: 11ty Configuration
 ---
 
 Configuration options for 11ty are documented on the 11ty

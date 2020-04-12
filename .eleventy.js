@@ -3,29 +3,18 @@ const navigationPlugin = require('@11ty/eleventy-navigation');
 const pwaPlugin = require('eleventy-plugin-pwa');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
 
-const itemHasTag = (item, tag) => item.data.tags.includes(tag);
-const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
+//const itemHasTag = (item, tag) => item.data.tags.includes(tag);
+//const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
 
 module.exports = eleventyConfig => {
-  // Create a custom collection of sorted, intro nav items.
-  eleventyConfig.addCollection('introNavItemsSorted', collection =>
-    collection
-      .getFilteredByTag('navItem')
-      .filter(item => itemHasTag(item, 'intro'))
-      .sort((item1, item2) => item1.data.order - item2.data.order)
-  );
-
-  // Create a custom collection of sorted, non-intro nav items.
-  eleventyConfig.addCollection('advancedNavItemsSorted', collection =>
-    collection
-      .getFilteredByTag('navItem')
-      .filter(item => itemDoesNotHaveTag(item, 'intro'))
-      .sort((item1, item2) => item1.data.title.localeCompare(item2.data.title))
-  );
-
   // This filters page objects based on a data property value.
   eleventyConfig.addFilter('filter', (arr, property, value) => {
     return arr.filter(obj => obj.data[property] === value);
+  });
+
+  // This filters page objects based on a data property value.
+  eleventyConfig.addFilter('filterNot', (arr, property, value) => {
+    return arr.filter(obj => obj.data[property] !== value);
   });
 
   // This filter is being added in v0.11.0.

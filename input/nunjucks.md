@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Nunjucks
 layout: layout.njk
-title: Nunjucks
 ---
 
 Nunjucks is a template language implemented in JavaScript.

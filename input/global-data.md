@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Global Data
 layout: layout.njk
-title: Global Data
 ---
 
 Global data can be defined in `.js` or `.json` files in the `_data` directory.

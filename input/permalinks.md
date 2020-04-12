@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Permalinks
 layout: layout.njk
-title: Permalinks
 ---
 
 11ty permalinks specified in front matter change

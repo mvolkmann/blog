@@ -5,7 +5,6 @@ eleventyNavigation:
 intro: true
 layout: layout.njk
 tags: [navItem, intro]
-title: 11ty Overview
 ---
 
 11ty is "a simple static style generator" (SSG).

@@ -5,7 +5,6 @@ eleventyNavigation:
 intro: true
 layout: layout.njk
 tags: [navItem, intro]
-title: Static Site Generators
 ---
 
 Static site generators (SSGs) are an alternative

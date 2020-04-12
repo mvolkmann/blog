@@ -5,13 +5,12 @@ eleventyNavigation:
 intro: true
 layout: layout.njk
 tags: [navItem, intro]
-title: Getting Started
 ---
 
 Here are the most basic steps to create and build an 11ty site.
 
 1. Create a new directory and cd to it.
-1. Enter `npm init -y`.
+1. Enter `npm init -y` to create a `package.json` file.
 1. Enter `npm install -D @11ty/eleventy`.
 1. Create the directory `_includes`.
 1. Add the file `layout.md` in the `_includes`

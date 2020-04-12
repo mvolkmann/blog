@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: REST Services
 layout: layout.njk
-title: REST Services
 ---
 
 One way to make data from REST services available to templates

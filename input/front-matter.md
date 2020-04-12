@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Front Matter
 layout: layout.njk
-title: Front Matter
 ---
 
 Files processed by 11ty can begin with front matter.

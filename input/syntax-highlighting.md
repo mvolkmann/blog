@@ -2,16 +2,16 @@
 eleventyNavigation:
   key: Syntax Highlighting
 layout: layout.njk
-title: Syntax Highlighting
+tags: plugin
 ---
 
-Install the plugin.
+To uses the syntax highlighting plugin, install it as follows:
 
 ```bash
 npm install -D @11ty/eleventy-plugin-syntaxhighlight
 ```
 
-Modify .eleventy.js:
+Then register it in `.eleventy.js` as follows:
 
 ```js
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');

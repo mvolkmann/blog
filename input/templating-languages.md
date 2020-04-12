@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Templating Languages
 layout: layout.njk
-title: Templating Languages
 ---
 
 The default templating language available for use in Markdown files is Liquid.

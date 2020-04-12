@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Pagination
 layout: layout.njk
-title: Pagination
 ---
 
 Pagination is the 11ty term for producing multiple files from one input file.

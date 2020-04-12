@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Shortcodes
 layout: layout.njk
-title: Shortcodes
 ---
 
 Shortcodes define snippets of reusable content.

@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Data Cascade
 layout: layout.njk
-title: Data Cascade
 ---
 
 Data in an 11ty project is held in variables.
@@ -138,11 +137,15 @@ layout: layout.njk
 
 # Dogs
 
-{% for dog in dogs %}
-{{dog.name}} is a {{dog.breed}}.
-{% endfor %}
+{% raw %}
 
-````
+```liquid
+{% for dog in dogs %}
+  {{dog.name}} is a {{dog.breed}}.
+{% endfor %}
+```
+
+{% endraw %}
 
 The set of variables obtained from these sources is merged,
 but their values are not.
@@ -155,7 +158,7 @@ As another example, consider a template with the following front matter:
 ```yaml
 layout: myLayout.njk
 title: 'Template Title'
-````
+```
 
 Suppose `myLayout.njk` contains the following front matter:
 

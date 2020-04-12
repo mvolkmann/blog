@@ -5,7 +5,6 @@ eleventyNavigation:
 intro: true
 layout: layout.njk
 tags: [navItem, intro]
-title: GitHub Pages
 ---
 
 GitHub Pages is a great option to consider for hosting an 11ty site
@@ -13,8 +12,8 @@ because it is free and simple to use.
 
 Here are the steps to create and deploy an 11ty site to GitHub Pages.
 
-1. Install Node.js if not already installed by browsing
-   [nodejs.org](http://nodejs.org).
+1. Install Node.js if not already installed.
+   See [nodejs.org](http://nodejs.org).
 1. Install git if not already installed.
    See <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>.
 1. Create a GitHub account if you don't already have one.
@@ -27,11 +26,12 @@ Here are the steps to create and deploy an 11ty site to GitHub Pages.
 1. cd to the directory of the local repository.
 1. Enter `npm init -y` to create a `package.json` file.
 1. Enter `npm install -D @11ty/eleventy gh-pages npm-run-all`.
-   The `gh-pages` command creates a Git branch named "gh-pages"
+   The installed `gh-pages` command creates a Git branch named "gh-pages"
    that contains only a given directory, in this case the
    "\_site" directory created by the `eleventy` command.
 1. Create a `.gitignore` file containing the lines `/node_modules` and `/_site`.
-1. Edit `package.json` and replace the "test" script with the following:
+1. Edit `package.json` and replace the "test" script with the following
+   npm scripts, most of which are just conveniences:
 
    ```json
    "add": "git add .",
@@ -44,7 +44,32 @@ Here are the steps to create and deploy an 11ty site to GitHub Pages.
    "start": "eleventy --serve",
    ```
 
-1. Create an `index.md` file with some basic Markdown content.
+1. Create the directory `_includes`.
+1. Add the file `layout.md` in the `_includes`
+   directory containing the following:
+
+   {% raw %}
+
+   ```html
+   <html lang="en">
+     <body>
+       {{content | safe}}
+     </body>
+   </html>
+   ```
+
+   {% endraw %}
+
+1. Create the file `index.md` file containing the following:
+
+   ```html
+   ---
+   layout: layout.md
+   ---
+
+   # Welcome to my site!
+   ```
+
 1. To build and test the site locally, enter `npm start`.
 1. To build and deploy the site, enter `npm run all`.
    This will prompt for a commit message that must be entered using Vim.
@@ -53,17 +78,20 @@ Here are the steps to create and deploy an 11ty site to GitHub Pages.
    Press the esc key to exit insert mode.
    Press ":" to go into command-line mode.
    Type "wq" and press return to write the changes and quit.
-1. Browse the web UI for the GitHub repository.
+1. Browse the web UI for the GitHub repository, not the deployed site.
 1. Click "Settings" near the upper-right.
 1. Scroll to the "GitHub Pages" section.
 1. Under "Source", "gh-pages branch" should already be selected.
 1. Click the link after "Your site is ready to be published at"
    to view the site.
+1. Considering bookmarking this URL.
 
 To make changes to the site:
 
 1. Edit site source files.
-1. Enter `npm start` to rebuild and test the site locally.
+1. Start the local eleventy server if it isn't already running
+   by entering `npm start`.
+   This will provide hot reload when changes are detected.
 1. Enter `npm run all` to rebuild and redeploy the site.
    This will prompt for a commit message that must be entered using Vim.
 1. Browse the site to verify the changes.
