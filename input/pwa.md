@@ -1,3 +1,43 @@
+---
+eleventyNavigation:
+  key: Progressive Web Apps
+layout: layout.njk
+---
+
+Progressive web apps support offline operation using a service worker.
+11ty sites can also use a service worker
+so their pages are accessible when offline.
+
+One approach is to cache all asset files
+(including images and stylesheets)
+and cache each page only when it is visited.
+
+We also want to start over with a new cache
+every time a new version of a site is deployed.
+
+To do this we need to write some data to a JSON file
+when a site is built.
+The `.eleventy.js` file is a good place to do this
+because that is executed when a site is built.
+
+Here is a snippet of relevant code from `.eleventy.js`:
+
+```js
+module.exports = eleventyConfig => {
+  // Create JSON file that is read by service-worker.js.
+  const serviceWorkerData = {
+    assets: fs.readdirSync('_site/assets'),
+    timestamp: Date.now()
+  };
+  fs.writeFileSync(
+    '_site/service-worker-data.json',
+    JSON.stringify(serviceWorkerData)
+  );
+```
+
+Here is a service worker implementation that uses this JSON file:
+
+```js
 let cacheName;
 
 async function getServiceWorkerData() {
@@ -72,3 +112,19 @@ self.addEventListener('fetch', async event => {
 
   event.respondWith(getResponsePromise());
 });
+```
+
+The main layout file that produces the outer HTML
+should register the service worker.
+Place the following inside the `head` element to do this:
+
+```html
+<script>
+  // Only register the service worker when not on localhost.
+  if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/blog/service-worker.js');
+    });
+  }
+</script>
+```

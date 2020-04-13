@@ -1,6 +1,5 @@
 const inclusiveLangPlugin = require('@11ty/eleventy-plugin-inclusive-language');
 const navigationPlugin = require('@11ty/eleventy-navigation');
-const pwaPlugin = require('eleventy-plugin-pwa');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
 const fs = require('fs');
 
@@ -9,7 +8,6 @@ const fs = require('fs');
 
 module.exports = eleventyConfig => {
   // Create JSON file that is read by service-worker.js.
-  const files = fs.readdirSync('_site/assets');
   const serviceWorkerData = {
     assets: fs.readdirSync('_site/assets'),
     timestamp: Date.now()
@@ -36,18 +34,6 @@ module.exports = eleventyConfig => {
   });
 
   eleventyConfig.addPlugin(inclusiveLangPlugin);
-
-  // I commented this out during testing so all files
-  // are loaded from the network instead of the cache.
-  // See https://github.com/okitavera/eleventy-plugin-pwa/issues/5.
-  /*
-  eleventyConfig.addPlugin(pwaPlugin, {
-    cleanupOutdatedCaches: true,
-    swDest: './_site/service-worker.js',
-    globDirectory: './_site'
-    //mode: 'production'
-  });
-  */
 
   // Copies files in a given directory to output directory
   // without performing any processing on them.
