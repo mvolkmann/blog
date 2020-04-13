@@ -54,7 +54,7 @@ self.addEventListener('fetch', event => {
     }
 
     const response = caches.match(request) || fetch(request);
-    event.respondWith(await response);
+    event.respondWith(response);
   });
 
   //const url = new URL(urlString);
@@ -75,7 +75,6 @@ self.addEventListener('fetch', event => {
     return;
   }
   */
-
 
   /*
   event.respondWith(async () => {
