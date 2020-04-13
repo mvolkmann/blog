@@ -42,7 +42,7 @@ self.addEventListener('activate', async event => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', async event => {
   const {request} = event;
   const urlString = request.url;
   console.info('service-worker.js fetch: urlString =', urlString);
@@ -75,24 +75,20 @@ self.addEventListener('fetch', event => {
     );
   }
 
-  // Try the network first, falling back to cache if offline.
-  event.respondWith(
-    caches.open(cacheName).then(async cache => {
-      try {
-        const response = await fetch(request);
-        cache.put(request, response.clone());
-        //console.log(
-        //  'service-worker.js fetch: got response from network and cached'
-        //);
-        return response;
-      } catch (err) {
-        const response = await cache.match(request);
-        if (response) {
-          //console.log('service-worker.js fetch: got response from cache');
-          return response;
-        }
-        throw err;
-      }
-    })
-  );
+  try {
+    const cache = await caches.open(cacheName);
+    const response = await cache.match(request);
+    console.log('service-worker.js x: response from cache =', response);
+    console.log('service-worker.js fetch: got from cache');
+    event.respondWith(response);
+  } catch (err) {
+    const response = await fetch(request);
+    console.log('service-worker.js x: response from network =', response);
+    if (response) {
+      cache.put(request, response.clone());
+      event.respondWith(response);
+    } else {
+      throw err;
+    }
+  }
 });
