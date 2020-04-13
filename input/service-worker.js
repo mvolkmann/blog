@@ -41,7 +41,7 @@ self.addEventListener('activate', async event => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', async event => {
   const {request} = event;
   const url = new URL(request.url);
 
@@ -54,17 +54,15 @@ self.addEventListener('fetch', event => {
   // Don't handle non-http requires such as data: URIs.
   if (!url.protocol.startsWith('http')) return;
 
-  event.respondWith(
-    caches.open(cacheName).then(cache => {
-      return cache.match(request).then(response => {
-        return (
-          response ||
-          fetch(request).then(response => {
-            cache.put(request, response.clone());
-            return response;
-          })
-        );
-      });
-    })
-  );
+  async function getResponse() {
+    const cache = await caches.open(cacheName);
+    let response = await cache.match(request);
+    if (!response) {
+      response = await fetch(request);
+      cache.put(request, response.clone());
+    }
+    return response;
+  }
+
+  event.respondWith(getResponse());
 });
