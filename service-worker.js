@@ -57,6 +57,8 @@ self.addEventListener('fetch', async event => {
     // Try to find a response in the cache.
     let response = await cache.match(request);
     if (!response) {
+      if (request.cache === 'only-if-cached') return;
+
       // Get the response from the network.
       // We will get a 404 error if not found.
       response = await fetch(request);
