@@ -76,13 +76,16 @@ self.addEventListener('fetch', async event => {
   }
 
   event.respondWith(async () => {
+    console.log('service-worker.js fetch: request =', request);
     try {
       const cache = await caches.open(cacheName);
-      let response = await cache.match(request);
+      console.log('service-worker.js fetch: trying cache');
+      let response = cache.match(request);
       if (response) {
         console.log('service-worker.js fetch: got from cache');
         return response;
       }
+      console.log('service-worker.js fetch: trying network');
       response = await fetch(request);
       if (response) {
         console.log('service-worker.js x: got from network');
