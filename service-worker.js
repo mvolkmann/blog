@@ -42,28 +42,28 @@ self.addEventListener('activate', async event => {
 });
 
 self.addEventListener('fetch', event => {
+  const {request} = event;
+  const {url} = request;
+  console.info('service-worker.js fetch: url =', url);
+
+  if (request.method !== 'GET') {
+    console.info(
+      'service-worker.js fetch: skipped request with method',
+      request.method
+    );
+    return;
+  }
+
+  // Don't try to handle non-http requires such as data: URIs.
+  if (!url.protocol.startsWith('http')) {
+    console.info(
+      'service-worker.js fetch: skipped request with protocol',
+      url.protocol
+    );
+    return;
+  }
+
   event.waitUntil(async () => {
-    const {request} = event;
-    const {url} = request;
-    console.info('service-worker.js fetch: url =', url);
-
-    if (request.method !== 'GET') {
-      console.info(
-        'service-worker.js fetch: skipped request with method',
-        request.method
-      );
-      return;
-    }
-
-    // Don't try to handle non-http requires such as data: URIs.
-    if (!url.protocol.startsWith('http')) {
-      console.info(
-        'service-worker.js fetch: skipped request with protocol',
-        url.protocol
-      );
-      return;
-    }
-
     // Try to get response from cache.
     const cache = await caches.open(cacheName);
     let response = cache.match(request);
