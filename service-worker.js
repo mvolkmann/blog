@@ -69,20 +69,26 @@ self.addEventListener('fetch', event => {
     console.log('service-worker.js fetch: checking cache');
     const cache = await caches.open(cacheName);
     console.log('service-worker.js fetch: cache =', cache);
-    let response = await cache.match(request);
+    let responsePromise = cache.match(request);
+    console.log(
+      'service-worker.js fetch: cache responsePromise =',
+      responsePromise
+    );
+    let response = await responsePromise;
     console.log('service-worker.js fetch: cache response =', response);
     if (!response) {
       // Try to get response from network:.
       console.log('service-worker.js fetch: checking network');
-      response = await fetch(request);
-      console.log('service-worker.js fetch: network response =', response);
+      responsePromise = fetch(request);
 
       // Cache the response in the background.
+      response = await responsePromise;
+      console.log('service-worker.js fetch: network response =', response);
       event.waitUntil(cache.put(request, response.clone()));
       console.info('service-worker.js fetch: cached', request.url);
     }
-    console.log('service-worker.js fetch: response =', response);
-    return response;
+    console.log('service-worker.js fetch: returning responsePromise');
+    return responsePromise;
   });
 
   /*
