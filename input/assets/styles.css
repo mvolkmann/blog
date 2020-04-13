@@ -109,4 +109,8 @@ nav ul {
     left: -232px;
     transition: left 0.5s;
   }
+
+  nav li {
+    margin: 1rem 0;
+  }
 }
