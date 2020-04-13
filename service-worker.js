@@ -48,13 +48,19 @@ self.addEventListener('fetch', event => {
     console.info('service-worker.js fetch: url =', url);
 
     if (request.method !== 'GET') {
-      console.info('service-worker.js fetch: skipped request with method', request.method);
+      console.info(
+        'service-worker.js fetch: skipped request with method',
+        request.method
+      );
       return;
     }
 
     // Don't try to handle non-http requires such as data: URIs.
     if (!url.protocol.startsWith('http')) {
-      console.info('service-worker.js fetch: skipped request with protocol', url.protocol);
+      console.info(
+        'service-worker.js fetch: skipped request with protocol',
+        url.protocol
+      );
       return;
     }
 
@@ -74,7 +80,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(response);
   });
 
-  // Serve assets from cache.
+  /*
   //TODO: Why check host?
   if (url.host === self.location.host && cachedSet.has(url.pathname)) {
     console.log('service-worker.js fetch: getting', url.pathname, 'from cache');
