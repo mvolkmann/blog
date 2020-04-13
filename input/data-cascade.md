@@ -38,7 +38,7 @@ Directory files that are closer to a template file
 take precedence over those higher in the directory hierarchy.
 TODO: It seems layout front matter is given the lowest precedences,
 TODO: but that does not match the docs.
-TODO: See this issue you created: https://github.com/11ty/eleventy/issues/915
+TODO: See this issue you created at <https://github.com/11ty/eleventy/issues/915>.
 
 Let's walk through a comprehensive example to demonstrate
 all the possible sources of data for a template.
