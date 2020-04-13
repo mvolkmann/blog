@@ -18,7 +18,6 @@ self.addEventListener('install', async event => {
     const data = await getServiceWorkerData();
     cacheName = 'cache-' + data.timestamp;
     const toCache = data.assets.map(file => '/blog/assets/' + file);
-    console.log('service-worker.js install: toCache =', toCache);
     cachedSet = new Set(toCache);
 
     // Precache asset files.
@@ -59,6 +58,7 @@ self.addEventListener('fetch', event => {
     let response = cache.match(request);
     if (!response) {
       response = fetch(request);
+      cache.put(request, response.clone());
     }
     event.respondWith(response);
   });
