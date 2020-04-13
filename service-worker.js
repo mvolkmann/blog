@@ -71,10 +71,12 @@ self.addEventListener('fetch', async event => {
   }
 
   event.respondWith(async () => {
+    console.log('service-worker.js fetch: checking caches');
     const cachedResponse = await caches.match(request);
     // Return it if we found one.
     if (cachedResponse) return cachedResponse;
     // If we didn't find a match in the cache, use the network.
+    console.log('service-worker.js fetch: checking network');
     return fetch(request);
   });
   /*
