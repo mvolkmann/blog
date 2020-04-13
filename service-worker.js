@@ -43,7 +43,7 @@ self.addEventListener('activate', async event => {
 
 self.addEventListener('fetch', event => {
   const {request} = event;
-  const {url} = request;
+  const url = new URL(request.url);
   console.info('service-worker.js fetch: url =', url);
 
   if (request.method !== 'GET') {
