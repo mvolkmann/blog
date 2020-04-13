@@ -41,100 +41,36 @@ self.addEventListener('activate', async event => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', async event => {
   const {request} = event;
   const url = new URL(request.url);
-  console.info('service-worker.js fetch: url =', url);
 
-  if (request.method !== 'GET') {
-    console.info(
-      'service-worker.js fetch: skipped request with method',
-      request.method
-    );
-    return;
-  }
+  // Only handle GET requests.
+  if (request.method !== 'GET') return;
 
-  // Don't try to handle non-http requires such as data: URIs.
-  if (!url.protocol.startsWith('http')) {
-    console.info(
-      'service-worker.js fetch: skipped request with protocol',
-      url.protocol
-    );
-    return;
-  }
+  // Don't handle BrowserSync requests.
+  if (url.pathname.startsWith('/browser-sync/')) return;
 
-  console.log('service-worker.js fetch: calling event.waitUntil');
-  event.respondWith(async () => {
-    // Try to get response from cache.
-    console.log('service-worker.js fetch: checking cache');
+  // Don't handle non-http requires such as data: URIs.
+  if (!url.protocol.startsWith('http')) return;
+
+  async function getResponsePromise() {
     const cache = await caches.open(cacheName);
-    console.log('service-worker.js fetch: cache =', cache);
-    let responsePromise = cache.match(request);
-    console.log(
-      'service-worker.js fetch: cache responsePromise =',
-      responsePromise
-    );
-    let response = await responsePromise;
-    console.log('service-worker.js fetch: cache response =', response);
+    // Try to find a response in the cache.
+    let response = await cache.match(request);
     if (!response) {
-      // Try to get response from network:.
-      console.log('service-worker.js fetch: checking network');
-      responsePromise = fetch(request);
-
-      // Cache the response in the background.
-      response = await responsePromise;
-      console.log('service-worker.js fetch: network response =', response);
-      event.waitUntil(cache.put(request, response.clone()));
-      console.info('service-worker.js fetch: cached', request.url);
-    }
-    console.log('service-worker.js fetch: returning responsePromise');
-    return responsePromise;
-  });
-
-  /*
-  //TODO: Why check host?
-  if (url.host === self.location.host && cachedSet.has(url.pathname)) {
-    console.log('service-worker.js fetch: getting', url.pathname, 'from cache');
-    event.respondWith(caches.match(event.request));
-    return;
-  }
-  */
-
-  /*
-  event.respondWith(async () => {
-    console.log('service-worker.js fetch: checking caches');
-    const cachedResponse = await caches.match(request);
-    // Return it if we found one.
-    if (cachedResponse) return cachedResponse;
-    // If we didn't find a match in the cache, use the network.
-    console.log('service-worker.js fetch: checking network');
-    const response = await fetch(request);
-    cache.put(request, response.clone());
-    return response;
-  });
-  */
-
-  /*
-    try {
-      const cache = await caches.open(cacheName);
-      console.log('service-worker.js fetch: trying cache');
-      let response = await cache.match(request);
-      console.log('service-worker.js fetch: cache response =', response);
-      if (response) {
-        console.log('service-worker.js fetch: got from cache');
-        return response;
-      }
-      console.log('service-worker.js fetch: trying network');
+      // Get the response from the network.
+      // We will get a 404 error if not found.
       response = await fetch(request);
-      console.log('service-worker.js fetch: network response =', response);
-      if (response) {
-        console.log('service-worker.js x: got from network');
-        cache.put(request, response.clone());
-        return response;
-      }
-    } catch (err) {
-      console.error('service-worker.js fetch: error =', err);
+      console.log('service-worker.js got', url.pathname, 'from network');
+
+      // Cache the response.
+      cache.put(request, response.clone());
+    } else {
+      console.log('service-worker.js got', url.pathname, 'from cache');
     }
-  });
-  */
+    return response;
+  }
+
+  event.respondWith(getResponsePromise());
 });
