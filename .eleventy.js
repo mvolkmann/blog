@@ -8,8 +8,11 @@ const fs = require('fs');
 
 module.exports = eleventyConfig => {
   // Create JSON file that is read by service-worker.js.
+  let files = fs.readdirSync('_site/assets');
+  files = files.map(file => '/blog/assets/' + file);
+  files.push('/blog/'); // cache the start URL (Lighthouse wants this)
   const serviceWorkerData = {
-    assets: fs.readdirSync('_site/assets'),
+    files,
     timestamp: Date.now()
   };
   fs.writeFileSync(

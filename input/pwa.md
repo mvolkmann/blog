@@ -25,8 +25,11 @@ Here is a snippet of relevant code from `.eleventy.js`:
 ```js
 module.exports = eleventyConfig => {
   // Create JSON file that is read by service-worker.js.
+  let files = fs.readdirSync('_site/assets');
+  files = files.map(file => '/blog/assets/' + file);
+  files.push('/blog/'); // cache the start URL (Lighthouse wants this)
   const serviceWorkerData = {
-    assets: fs.readdirSync('_site/assets'),
+    assets: files,
     timestamp: Date.now()
   };
   fs.writeFileSync(
@@ -56,11 +59,10 @@ self.addEventListener('install', async event => {
   try {
     const data = await getServiceWorkerData();
     cacheName = 'cache-' + data.timestamp;
-    const toCache = data.assets.map(file => '/blog/assets/' + file);
 
     // Precache asset files.
     const cache = await caches.open(cacheName);
-    await cache.addAll(toCache);
+    await cache.addAll(data.files);
     //self.skipWaiting();
   } catch (e) {
     console.error('service-worker.js install: error', e);
@@ -97,6 +99,8 @@ self.addEventListener('fetch', async event => {
     // Try to find a response in the cache.
     let response = await cache.match(request);
     if (!response) {
+      if (request.cache === 'only-if-cached') return;
+
       // Get the response from the network.
       // We will get a 404 error if not found.
       response = await fetch(request);
@@ -119,6 +123,8 @@ should register the service worker.
 Place the following inside the `head` element to do this:
 
 ```html
+<link rel="manifest" href="/blog/assets/manifest.json" />
+
 <script>
   // Only register the service worker when not on localhost.
   if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
@@ -127,4 +133,32 @@ Place the following inside the `head` element to do this:
     });
   }
 </script>
+```
+
+Here is the content for `manifest.json` that should
+get copied to `_site/assets` by the site build process:
+
+```json
+{
+  "short_name": "blog",
+  "name": "Mark Volkmann's blog",
+  "description": "Mark Volkmann's blog",
+  "icons": [
+    {
+      "src": "/blog/assets/mark-volkmann-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/blog/assets/mark-volkmann-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/blog/",
+  "background_color": "cornflowerblue",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "cornflowerblue"
+}
 ```

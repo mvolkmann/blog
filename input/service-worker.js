@@ -16,11 +16,10 @@ self.addEventListener('install', async event => {
   try {
     const data = await getServiceWorkerData();
     cacheName = 'cache-' + data.timestamp;
-    const toCache = data.assets.map(file => '/blog/assets/' + file);
 
     // Precache asset files.
     const cache = await caches.open(cacheName);
-    await cache.addAll(toCache);
+    await cache.addAll(data.files);
     //self.skipWaiting();
   } catch (e) {
     console.error('service-worker.js install: error', e);
@@ -57,6 +56,8 @@ self.addEventListener('fetch', async event => {
     // Try to find a response in the cache.
     let response = await cache.match(request);
     if (!response) {
+      if (request.cache === 'only-if-cached') return;
+
       // Get the response from the network.
       // We will get a 404 error if not found.
       response = await fetch(request);
