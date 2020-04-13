@@ -43,7 +43,7 @@ self.addEventListener('activate', async event => {
 });
 
 self.addEventListener('fetch', event => {
-  event.waitUntil(() => {
+  event.waitUntil(async () => {
     const {request} = event;
     console.info('service-worker.js fetch: request.url =', request.url);
 
@@ -53,8 +53,10 @@ self.addEventListener('fetch', event => {
       return;
     }
 
+    const cache = await caches.open(cacheName);
+
     //const response = caches.match(request) || fetch(request);
-    let response = caches.match(request);
+    let response = cache.match(request);
     if (!response) {
       response = fetch(request);
     }
