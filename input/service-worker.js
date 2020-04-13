@@ -60,14 +60,14 @@ self.addEventListener('fetch', async event => {
     let response = await cache.match(request);
     if (!response) {
       // Get the response from the network.
+      // We will get a 404 error if not found.
       response = await fetch(request);
-      //TODO: What happens if this fails?
-      console.log('service-worker.js fetch: got', url.pathname, 'from network');
+      console.log('service-worker.js got', url.pathname, 'from network');
 
       // Cache the response.
       cache.put(request, response.clone());
     } else {
-      console.log('service-worker.js fetch: found', url.pathname, 'in cache');
+      console.log('service-worker.js got', url.pathname, 'from cache');
     }
     return response;
   }
