@@ -54,15 +54,23 @@ self.addEventListener('fetch', async event => {
   // Don't handle non-http requires such as data: URIs.
   if (!url.protocol.startsWith('http')) return;
 
-  async function getResponse() {
+  async function getResponsePromise() {
     const cache = await caches.open(cacheName);
+    // Try to find a response in the cache.
     let response = await cache.match(request);
     if (!response) {
+      // Get the response from the network.
       response = await fetch(request);
+      //TODO: What happens if this fails?
+      console.log('service-worker.js fetch: got', url.pathname, 'from network');
+
+      // Cache the response.
       cache.put(request, response.clone());
+    } else {
+      console.log('service-worker.js fetch: found', url.pathname, 'in cache');
     }
     return response;
   }
 
-  event.respondWith(getResponse());
+  event.respondWith(getResponsePromise());
 });
