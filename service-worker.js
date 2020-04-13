@@ -75,18 +75,22 @@ self.addEventListener('fetch', async event => {
     );
   }
 
-  let cache;
-  try {
-    cache = await caches.open(cacheName);
-    event.respondWith(cache.match(request));
-    console.log('service-worker.js fetch: got from cache');
-  } catch (err) {
-    if (!cache) throw err;
-    event.respondWith(async () => {
-      const response = await fetch(request);
-      console.log('service-worker.js x: response from network =', response);
-      if (response) cache.put(request, response.clone());
-      return response;
-    });
-  }
+  event.respondWith(async () => {
+    try {
+      const cache = await caches.open(cacheName);
+      let response = await cache.match(request);
+      if (response) {
+        console.log('service-worker.js fetch: got from cache');
+        return response;
+      }
+      response = await fetch(request);
+      if (response) {
+        console.log('service-worker.js x: got from network');
+        cache.put(request, response.clone());
+        return response;
+      }
+    } catch (err) {
+      console.error('service-worker.js fetch: error =', err);
+    }
+  });
 });
