@@ -42,14 +42,14 @@
       <nav>
         {% import 'macros.njk' as macros with context %}
 
-        <h3>Intro. Topics</h3>
+        <h2>Intro. Topics</h2>
         {% set introDocs = collections.all | filter('intro', true) %}
         {% set entries = introDocs | eleventyNavigation %}
         {{ macros.renderNavList(entries) }}
 
         <hr>
 
-        <h3>More Topics</h3>
+        <h2>More Topics</h2>
         {% set moreDocs = collections.all | filterNot('intro', true) %}
         {% set entries = moreDocs | eleventyNavigation | sort(false, false, 'title') %}
         {{ macros.renderNavList(entries) }}
