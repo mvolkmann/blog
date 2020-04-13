@@ -22,47 +22,280 @@
     <!-- I commented this out during testing so all files
          are loaded from the network instead of the cache.
          See https://github.com/okitavera/eleventy-plugin-pwa/issues/5. -->
-    <!--script>
-      if ("serviceWorker" in navigator) {
+    <script>
+      // Only register the service worker when not on localhost.
+      if (location.hostname !== 'localhost' && "serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
-    </script--> 
+    </script> 
   </head>
   <body>
-    <h1>Mark Volkmann's Blog</h1>
+    <header>
+      <h1>Mark Volkmann's Blog</h1>
+      
+      
+    </header>
     <main>
-      <nav> <!-- for accessible page navigation -->
+      <nav>
+        
+
         <h3>Intro. Topics</h3>
-        <ul><li><a href="/blog/ssgs/">Static Site Generators</a></li>
-<li><a href="/blog/why-11ty/">Why 11ty?</a></li>
-<li><a href="/blog/11ty-overview/">11ty Overview</a></li>
-<li><a href="/blog/getting-started/">Getting Started</a></li>
-<li><a href="/blog/11ty-configuration/">11ty Configuration</a></li>
-<li><a href="/blog/github-pages/">GitHub Pages</a></li></ul>
+        
+        
+        
+  <ul>
+    
+      
+  
+  <li class=>
+    <a href="/blog/ssgs/">Static Site Generators</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/why-11ty/">Why 11ty?</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/11ty-overview/">11ty Overview</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/getting-started/">Getting Started</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=active>
+    <a href="/blog/11ty-configuration/">11ty Configuration</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/github-pages/">GitHub Pages</a>
+    
+  </li>
+
+    
+  </ul>
+
+
         <hr>
+
         <h3>More Topics</h3>
-        <!-- This uses the sort filter in Nunjucks. -->
-        <ul><li><a href="/blog/collections/">Collections</a></li>
-<li><a href="/blog/data-cascade/">Data Cascade</a></li>
-<li><a href="/blog/debugging-tips/">Debugging Tips</a></li>
-<li><a href="/blog/front-matter/">Front Matter</a></li>
-<li><a href="/blog/global-data/">Global Data</a></li>
-<li><a href="/blog/internationalization/">Internationalization</a></li>
-<li><a href="/blog/markdown/">Markdown</a></li>
-<li><a href="/blog/pagination/">Pagination</a></li>
-<li><a href="/blog/permalinks/">Permalinks</a></li>
-<li><a href="/blog/rest-services/">REST Services</a></li>
-<li><a href="/blog/shortcodes/">Shortcodes</a></li>
-<li><a href="/blog/styling/">Styling</a><ul><li><a href="/blog/styling-with-sass/">Styling with Sass</a></li></ul></li>
-<li><a href="/blog/templating-languages/">Templating Languages</a></li>
-<li><a href="/blog/yaml/">YAML</a></li>
-<li><a href="/blog/nunjucks/">Nunjucks</a></li>
-<li><a href="/blog/filters/">Filters</a></li>
-<li><a href="/blog/">Welcome!</a></li>
-<li><a href="/blog/plugins/">Plugins</a><ul><li><a href="/blog/syntax-highlighting/">Syntax Highlighting</a></li>
-<li><a href="/blog/navigation-plugin/">Navigation Plugin</a></li></ul></li></ul>
+        
+        
+        
+  <ul>
+    
+      
+  
+  <li class=>
+    <a href="/blog/collections/">Collections</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/data-cascade/">Data Cascade</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/debugging-tips/">Debugging Tips</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="https://11ty.dev/">Eleventy web site</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/filters/">Filters</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/front-matter/">Front Matter</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/global-data/">Global Data</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/internationalization/">Internationalization</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/markdown/">Markdown</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/nunjucks/">Nunjucks</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/pagination/">Pagination</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/permalinks/">Permalinks</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/plugins/">Plugins</a>
+    
+      
+  <ul>
+    
+      
+  
+  <li class=>
+    <a href="/blog/syntax-highlighting/">Syntax Highlighting</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/navigation-plugin/">Navigation Plugin</a>
+    
+  </li>
+
+    
+  </ul>
+
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/rest-services/">REST Services</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/shortcodes/">Shortcodes</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/styling/">Styling</a>
+    
+      
+  <ul>
+    
+      
+  
+  <li class=>
+    <a href="/blog/styling-with-sass/">Styling with Sass</a>
+    
+  </li>
+
+    
+  </ul>
+
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/templating-languages/">Templating Languages</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/">Welcome!</a>
+    
+  </li>
+
+    
+      
+  
+  <li class=>
+    <a href="/blog/yaml/">YAML</a>
+    
+  </li>
+
+    
+  </ul>
+
       </nav>
       
       <section>
@@ -79,8 +312,11 @@ When it is an object, it is like the return value of this function.</p>
 <p>This example configuration explicitly
 sets each option to its the default value.</p>
 <pre class="language-js"><code class="language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token parameter">eleventyConfig</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>  <span class="token comment">//TODO: Add examples of adding filters, shortcodes, custom tags,</span><br>  <span class="token comment">//TODO: JavaScript functions, custom collections, and plugins.</span><br><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addLinter</span><span class="token punctuation">(</span><span class="token string">'linter-name'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>content<span class="token punctuation">,</span> inputPath<span class="token punctuation">,</span> <span class="token parameter">outputPath</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>    <span class="token comment">// Add code to lint template output</span><br>    <span class="token comment">// in "content" that came from "inputPath".</span><br>    <span class="token comment">// Error messages can include "inputPath".</span><br>    <span class="token comment">// Presumably if anything is fixed,</span><br>    <span class="token comment">// updated content should be written to "outputPath".</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Copies files in a given directory to output directory</span><br>  <span class="token comment">// without performing any processing on them.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token string">'assets'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addTransform</span><span class="token punctuation">(</span><span class="token string">'transform-name'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>content<span class="token punctuation">,</span> <span class="token parameter">outputPath</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>    <span class="token comment">// Add code to transform template output in content</span><br>    <span class="token comment">// and write the result to outputPath.</span><br>    <span class="token comment">// For example, this can be used to format or minify output HTML.</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Rebuilds the site if any files in a watch target directory change.</span><br>  <span class="token comment">//TODO: What directories are watched by default?</span><br>  <span class="token comment">//TODO: Probably the data, includes, input, and layouts directories.</span><br>  <span class="token comment">// This is an example, not the default value.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addWatchTarget</span><span class="token punctuation">(</span><span class="token string">"./scss/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Overrides BrowserSync default configuration options.</span><br>  <span class="token comment">// None are overridden by default.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">setBrowserSyncConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span> options <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Performs deep merge of data from sources in data cascade.</span><br>  <span class="token comment">// This currently defaults to false, but may change to true soon.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">setDataDeepMerge</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Override default configuration options of the gray-matter package</span><br>  <span class="token comment">// which is used to parse front matter.</span><br>  <span class="token comment">// See https://github.com/jonschlinkert/gray-matter.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">setFrontMatterParsingOptions</span><span class="token punctuation">(</span><span class="token punctuation">{</span><br>    options<br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Suppresses output of the paths of all generated files.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">setQuietMode</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Watches all JavaScript templates and data files</span><br>  <span class="token comment">// and rebuilds the site if they change.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">setWatchJavaScriptDependencies</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token keyword">return</span> <span class="token punctuation">{</span><br>    dataTemplateEngine<span class="token operator">:</span> <span class="token string">'liquid'</span><span class="token punctuation">,</span> <span class="token comment">// used in global data files</span><br>    dir<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// specifies the directory for various kinds of files</span><br>      data<span class="token operator">:</span> <span class="token string">'_data'</span><span class="token punctuation">,</span> <span class="token comment">// for global data files</span><br>      includes<span class="token operator">:</span> <span class="token string">'_includes'</span><span class="token punctuation">,</span> <span class="token comment">// for layouts and more</span><br>      input<span class="token operator">:</span> <span class="token string">'.'</span><span class="token punctuation">,</span><br>      layouts<span class="token operator">:</span> <span class="token comment">// defaults to the includes value</span><br>      output<span class="token operator">:</span> <span class="token string">'_site'</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    htmlOutputSuffix<span class="token operator">:</span> <span class="token string">'-o'</span><span class="token punctuation">,</span> <span class="token comment">// rarely useful</span><br>    htmlTemplateEngine<span class="token operator">:</span> <span class="token string">'liquid'</span><span class="token punctuation">,</span> <span class="token comment">// used in HTML files</span><br>    jsDataFileSuffix<span class="token operator">:</span> <span class="token string">'.11tydata'</span><span class="token punctuation">,</span> <span class="token comment">// for template &amp; directory data files</span><br>    <span class="token comment">// No processing is allowed in JSON files,</span><br>    <span class="token comment">// so no template engine can be specified.</span><br>    markdownTemplateEngine<span class="token operator">:</span> <span class="token string">'liquid'</span><span class="token punctuation">,</span> <span class="token comment">// used in Markdown files</span><br>    pathPrefix<span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token comment">// prepended to all URL paths</span><br>    templateFormats<span class="token operator">:</span> <span class="token punctuation">[</span><br>      <span class="token string">'11ty.js'</span><span class="token punctuation">,</span> <span class="token string">'ejb'</span><span class="token punctuation">,</span> <span class="token string">'haml'</span><span class="token punctuation">,</span> <span class="token string">'hbs'</span><span class="token punctuation">,</span> <span class="token string">'html'</span><span class="token punctuation">,</span><br>      <span class="token string">'liquid'</span><span class="token punctuation">,</span> <span class="token string">'md'</span><span class="token punctuation">,</span> <span class="token string">'mustache'</span><span class="token punctuation">,</span> <span class="token string">'njk'</span><span class="token punctuation">,</span> <span class="token string">'pug'</span><br>    <span class="token punctuation">]</span><br>  <span class="token punctuation">}</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>TODO: Why goes in the &quot;includes&quot; directory besides layout files?
-ANSWER: include files, extends files, partials, and macros
+<p>Another kind of file that can be placed in the <code>_include</code> directory
+is <code>.njk</code> files that define macros.
+See an example in <a href="/blog/navigation-plugin">navigation plugin</a>.</p>
+<p>TODO: What else goes in the &quot;includes&quot; directory besides layout files?
+ANSWER: include files, extends files, and partials
 TODO: But what are these?</p>
 
       </section>
