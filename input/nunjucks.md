@@ -4,7 +4,8 @@ eleventyNavigation:
 layout: layout.njk
 ---
 
-Nunjucks is a template language implemented in JavaScript.
+[Nunjucks](https://mozilla.github.io/nunjucks/)
+is a template language implemented in JavaScript.
 It supports features seen in most programming languages.
 
 ## VS Code extensions
@@ -400,13 +401,22 @@ To call a macro named "demo" that is defined in `macros.njk`,
 For an example of using this approach,
 see how `_includes/layout.njk` uses macros to render the left nav.
 
+A `call` block enables passing enclosed text to a macro.
+
 TODO: Maybe Nunjucks macros can be used as an alternative to 11ty shortcodes.
 
-## Blocks
+## Template inheritance
 
-Blocks in Nunjucks are like named slots in Svelte.
-They allow a template to pass content into another template.
-This is described at
+Blocks define named locations in a template where content can be inserted.
+They can contain default content that a using template can override.
+
+The `extends` tag inherits another template.
+This is followed by `block` tags that supply content to be inserted.
+
+The `super` function is used in conjunction with template inheritance
+to render the contents of a parent block.
+
+For more detail, see
 [Template Inheritance](https://mozilla.github.io/nunjucks/templating.html#template-inheritance).
 
 ## Whitespace
@@ -427,7 +437,25 @@ Nunjucks provides some predefined functions that address common needs.
 - `joiner` returns a function that outputs a given string
   each time it is called except for the first.
 
-## Other topics
+## Documenting Nunjucks syntax
 
-These topics have not been described yet:
-call, extends, import, raw, super, verbatim
+To escape Nunjucks syntax so it is rendered as-is instead of being evaluated,
+wrap it in a `raw` block.
+It may also be desirable to wrap the text in a Markdown fenced block.
+There is no support for Nunjucks syntax, but Liquid syntax is close enough.
+In the example below, the apostrophe characters should really be backticks.
+
+{% raw %}
+
+```liquid
+{% raw %}
+'''liquid
+Some Nunjucks syntax goes here.
+'''
+{% endraw %}
+
+```
+
+{% endraw %}
+
+`verbatim` is an alias for `raw`.
