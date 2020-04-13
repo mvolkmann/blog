@@ -1,4 +1,4 @@
-let cachedSet;
+let cachedSet = new Set();
 let cacheName;
 
 async function getServiceWorkerData() {
