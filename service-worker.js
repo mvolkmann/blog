@@ -44,34 +44,35 @@ self.addEventListener('activate', async event => {
 self.addEventListener('fetch', event => {
   event.waitUntil(async () => {
     const {request} = event;
-    console.info('service-worker.js fetch: request.url =', request.url);
+    const {url} = request;
+    console.info('service-worker.js fetch: url =', url);
 
     if (request.method !== 'GET') {
-      console.info('service-worker.js fetch: method =', request.method);
-      console.info('service-worker.js fetch: skipped request');
+      console.info('service-worker.js fetch: skipped request with method', request.method);
       return;
     }
 
-    const cache = await caches.open(cacheName);
+    // Don't try to handle non-http requires such as data: URIs.
+    if (!url.protocol.startsWith('http')) {
+      console.info('service-worker.js fetch: skipped request with protocol', url.protocol);
+      return;
+    }
 
-    //const response = caches.match(request) || fetch(request);
+    // Try to get response from cache.
+    const cache = await caches.open(cacheName);
     let response = cache.match(request);
+    console.log('service-worker.js fetch: cache response =', response);
     if (!response) {
+      // Try to get response from network:.
       response = fetch(request);
+      console.log('service-worker.js fetch: network response =', response);
+
+      // Cache the response.
       cache.put(request, response.clone());
+      console.info('service-worker.js fetch: cached', request.url);
     }
     event.respondWith(response);
   });
-
-  //const url = new URL(urlString);
-
-  /*
-  // Don't try to handle non-http requires such as data: URIs.
-  if (!url.protocol.startsWith('http')) {
-    console.info('service-worker.js fetch: protocol =', url.protocol);
-    console.log('service-worker.js fetch: skipped request');
-    return;
-  }
 
   // Serve assets from cache.
   //TODO: Why check host?
