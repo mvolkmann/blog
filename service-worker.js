@@ -62,17 +62,12 @@ self.addEventListener('fetch', async event => {
     return;
   }
 
-  // Serve from cache if possible.
+  // Serve assets from cache.
+  //TODO: Why check host?
   if (url.host === self.location.host && cachedSet.has(url.pathname)) {
     console.log('service-worker.js fetch: getting', url.pathname, 'from cache');
     event.respondWith(caches.match(event.request));
     return;
-  } else {
-    console.log(
-      'service-worker.js fetch: NOT getting',
-      url.pathname,
-      'from cache'
-    );
   }
 
   event.respondWith(async () => {
@@ -80,7 +75,7 @@ self.addEventListener('fetch', async event => {
     try {
       const cache = await caches.open(cacheName);
       console.log('service-worker.js fetch: trying cache');
-      let response = cache.match(request);
+      let response = await cache.match(request);
       if (response) {
         console.log('service-worker.js fetch: got from cache');
         return response;
