@@ -64,7 +64,7 @@ self.addEventListener('fetch', event => {
   }
 
   console.log('service-worker.js fetch: calling event.waitUntil');
-  event.waitUntil(async () => {
+  event.respondWith(async () => {
     // Try to get response from cache.
     console.log('service-worker.js fetch: checking cache');
     const cache = await caches.open(cacheName);
@@ -81,8 +81,8 @@ self.addEventListener('fetch', event => {
       cache.put(request, response.clone());
       console.info('service-worker.js fetch: cached', request.url);
     }
-    event.respondWith(response);
-    console.log('service-worker.js fetch: called event.respondWith');
+    console.log('service-worker.js fetch: response =', response);
+    return response;
   });
 
   /*
