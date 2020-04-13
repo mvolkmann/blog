@@ -44,18 +44,15 @@ self.addEventListener('activate', async event => {
 
 self.addEventListener('fetch', event => {
   const {request} = event;
-  const urlString = request.url;
-  console.info('service-worker.js fetch: urlString =', urlString);
+  console.info('service-worker.js fetch: request.url =', request.url);
 
-  /*
-  if (request.method !== 'GET' || request.headers.has('range')) {
+  if (request.method !== 'GET') {
     console.info('service-worker.js fetch: method =', request.method);
     console.info('service-worker.js fetch: skipped request');
     return;
   }
-  */
 
-  const url = new URL(urlString);
+  //const url = new URL(urlString);
 
   /*
   // Don't try to handle non-http requires such as data: URIs.
@@ -74,7 +71,7 @@ self.addEventListener('fetch', event => {
   }
   */
 
-  const response = caches.match(url) || fetch(request);
+  const response = caches.match(request) || fetch(request);
   event.respondWith(await response);
 
   /*
