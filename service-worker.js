@@ -63,13 +63,17 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  console.log('service-worker.js fetch: calling event.waitUntil');
   event.waitUntil(async () => {
     // Try to get response from cache.
+    console.log('service-worker.js fetch: checking cache');
     const cache = await caches.open(cacheName);
+    console.log('service-worker.js fetch: cache =', cache);
     let response = cache.match(request);
     console.log('service-worker.js fetch: cache response =', response);
     if (!response) {
       // Try to get response from network:.
+      console.log('service-worker.js fetch: checking network');
       response = fetch(request);
       console.log('service-worker.js fetch: network response =', response);
 
@@ -78,6 +82,7 @@ self.addEventListener('fetch', event => {
       console.info('service-worker.js fetch: cached', request.url);
     }
     event.respondWith(response);
+    console.log('service-worker.js fetch: called event.respondWith');
   });
 
   /*
