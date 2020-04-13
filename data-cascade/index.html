@@ -26,11 +26,25 @@
           navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
+
+      let navOpen = false;
+
+      function toggleMenu() {
+        const nav = document.querySelector('nav');
+        navOpen = !navOpen;
+        nav.style.left = navOpen ?
+          0 :
+          '-' + nav.getBoundingClientRect().width + 'px';
+        nav
+      }
     </script> 
   </head>
   <body>
     <header>
-      <h1>Mark Volkmann's Blog</h1>
+      <h1>
+        <button class="hamburger" onclick="toggleMenu()">&#x2630;</button>
+        Mark Volkmann's Blog
+      </h1>
       
       
     </header>
@@ -102,6 +116,14 @@
         
         
   <ul>
+    
+      
+  
+  <li class=>
+    <a href="/blog/accessibility/">Accessibility Testing</a>
+    
+  </li>
+
     
       
   
@@ -336,7 +358,7 @@ is available in all template files in the same directory and below.</p>
 take precedence over those higher in the directory hierarchy.
 TODO: It seems layout front matter is given the lowest precedences,
 TODO: but that does not match the docs.
-TODO: See this issue you created: https://github.com/11ty/eleventy/issues/915</p>
+TODO: See this issue you created at <a href="https://github.com/11ty/eleventy/issues/915">https://github.com/11ty/eleventy/issues/915</a>.</p>
 <p>Let's walk through a comprehensive example to demonstrate
 all the possible sources of data for a template.
 Consider the following directory structure.

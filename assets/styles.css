@@ -9,20 +9,6 @@ body {
   margin: 0;
 }
 
-body > footer {
-  background-color: var(--accent-color);
-  color: white;
-  padding: 1rem;
-}
-
-body > header {
-  background-color: var(--accent-color);
-  color: white;
-  margin: 0;
-  padding: 1rem;
-  text-align: center;
-}
-
 body > main {
   display: flex;
   flex-grow: 1;
@@ -48,13 +34,6 @@ body > main > nav > ul {
   text-decoration: none;
 }
 
-nav ul {
-  list-style: none;
-  margin-left: 1rem;
-  margin-top: 0.5rem;
-  padding-left: 0;
-}
-
 body > main > nav li {
   margin-bottom: 0.5rem;
 }
@@ -78,7 +57,60 @@ h2 {
   color: gray;
 }
 
+footer {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem;
+}
+
+header {
+  background-color: var(--accent-color);
+  color: white;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.hamburger {
+  display: none;
+}
+
 li.active > a {
   color: purple;
   font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  padding-left: 0;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  .hamburger {
+    background-color: transparent;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-size: 32px;
+  }
+
+  header {
+    text-align: left;
+  }
+
+  nav {
+    position: absolute;
+    left: -232px;
+    transition: left 0.5s;
+  }
+
+  nav li {
+    margin: 1rem 0;
+  }
 }

@@ -26,11 +26,25 @@
           navigator.serviceWorker.register('/blog/service-worker.js');
         })
       }
+
+      let navOpen = false;
+
+      function toggleMenu() {
+        const nav = document.querySelector('nav');
+        navOpen = !navOpen;
+        nav.style.left = navOpen ?
+          0 :
+          '-' + nav.getBoundingClientRect().width + 'px';
+        nav
+      }
     </script> 
   </head>
   <body>
     <header>
-      <h1>Mark Volkmann's Blog</h1>
+      <h1>
+        <button class="hamburger" onclick="toggleMenu()">&#x2630;</button>
+        Mark Volkmann's Blog
+      </h1>
       
       
     </header>
@@ -102,6 +116,14 @@
         
         
   <ul>
+    
+      
+  
+  <li class=>
+    <a href="/blog/accessibility/">Accessibility Testing</a>
+    
+  </li>
+
     
       
   

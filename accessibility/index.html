@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Front Matter</title>
+    <title>Accessibility Testing</title>
 
     <meta charset="utf-8">
     <meta name="description" content="11ty site documenting 11ty">
@@ -119,7 +119,7 @@
     
       
   
-  <li class=>
+  <li class=active>
     <a href="/blog/accessibility/">Accessibility Testing</a>
     
   </li>
@@ -167,7 +167,7 @@
     
       
   
-  <li class=active>
+  <li class=>
     <a href="/blog/front-matter/">Front Matter</a>
     
   </li>
@@ -326,42 +326,47 @@
       </nav>
       
       <section>
-        <h2>Front Matter</h2> <!-- uses a variable defined in front matter -->
+        <h2>Accessibility Testing</h2> <!-- uses a variable defined in front matter -->
         <!-- Page content is inserted here. -->
-        <p>Files processed by 11ty can begin with front matter.
-This starts with a line containing only three dashes
-and ends with the same kind of line.
-Lines between these define variables.
-Variables can be used other files and can represent many kinds of values
-including CSS property values, icons, URLs, ...</p>
-<p>By default this expects YAML syntax.
-For example:</p>
-<pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">---</span><br><span class="token key atrule">layout</span><span class="token punctuation">:</span> layout.njk<br><span class="token key atrule">title</span><span class="token punctuation">:</span> Dogs<br><span class="token punctuation">---</span><br></code></pre>
-<p>To use JavaScript syntax instead, add <code>js</code> after the opening dashes.
-For example:</p>
-<pre class="language-js"><code class="language-js"><span class="token operator">--</span><span class="token operator">-</span>js<br><span class="token punctuation">{</span><br>  layout<span class="token operator">:</span> <span class="token string">'layout.njk'</span><span class="token punctuation">,</span><br>  title<span class="token operator">:</span> <span class="token string">'Dogs'</span><br><span class="token punctuation">}</span><br><span class="token operator">--</span><span class="token operator">-</span></code></pre>
-<p>Some special variables recognized by 11ty include:</p>
-<ul>
-<li>layout:
-uses a layout template found in the <code>_includes</code> directory</li>
-<li>tags:
-single string or array of collection names to which this data belongs</li>
-<li>date: overrides the default file creation date to change sort order</li>
-<li>pagination:
-enables iteration over data in front matter to
-output multiple HTML files from this template</li>
-<li>permalink:
-changes the output target of the template</li>
-<li>dynamicPermalink:
-enables or disables template syntax in permalink values (default is true)</li>
-<li>templateEngineOverride:
-overrides the template engine used for this file</li>
-<li>eleventyExcludeFromCollections:
-true to exclude this content from collections</li>
-</ul>
-<p>TODO: Are there any Nunjucks-specific variables?
-TODO: See your front matter question at
-TODO: https://github.com/11ty/eleventy/issues/916#issuecomment-583764086.</p>
+        <p>It is recommended to perform accessibility testing on all sites.
+Two recommended tools are Lighthouse and axe.</p>
+<p>Lighthouse is built into the Chrome browser.
+To run it on a site:</p>
+<ol>
+<li>Browse the site.</li>
+<li>Open the browser DevTools.</li>
+<li>Click the &quot;Audits&quot; tab.</li>
+<li>Press the &quot;Generate report&quot; button.</li>
+<li>Fix all issues that are identified.</li>
+<li>To rerun the audit, click the icon of a circle with a diagonal slash
+to clear the current report and press the &quot;Generate Report&quot; button again.</li>
+<li>Run the audit with the &quot;Device&quot; radio button set to &quot;Desktop&quot;
+and then again with &quot;Mobile&quot;.</li>
+<li>Keep going until you get a score of 100 in every category
+for both &quot;Desktop&quot; and &quot;Mobile&quot;.</li>
+</ol>
+<p>The axe tool is available as a Chrome extension.
+To install it in Chrome:</p>
+<ol>
+<li>Browse <a href="https://www.deque.com/axe/">https://www.deque.com/axe/</a>.</li>
+<li>Click the &quot;Download axe&quot; button.</li>
+<li>Click the &quot;Add to Chrome&quot; button.</li>
+</ol>
+<p>To run Axe on a web site:</p>
+<p>. Browse the web site to be tested.
+. Open the browser DevTools.
+. Click the axe tab.
+. Click the &quot;Analyze&quot; button.
+. Click each issue identified in the left nav
+to see a detailed description on the right.</p>
+<p>To navigate between multiple instances of the same issue type,
+click the &quot;&lt;&quot; and &quot;&gt;&quot; buttons in the upper-right.</p>
+<p>To see the rendered element associated with the issue,
+click &quot;Highlight&quot;.</p>
+<p>To see the DOM element associated with the issue,
+click &quot;&lt;/&gt; Inspect Node&quot;.</p>
+<p>To rerun the tests after code changes,
+press &quot;Run again&quot;.</p>
 
       </section>
     </main>
