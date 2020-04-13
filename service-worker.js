@@ -71,7 +71,6 @@ self.addEventListener('fetch', async event => {
   }
 
   console.log('service-worker.js fetch: calling event.respondWith');
-  const url = new URL(request.url);
   const response = caches.match(url) || fetch(event.request);
   console.log('service-worker.js fetch: response =', response);
   event.respondWith(await response);
