@@ -70,6 +70,7 @@ self.addEventListener('fetch', async event => {
     return;
   }
 
+  console.log('service-worker.js fetch: calling event.respondWith');
   event.respondWith(async () => {
     console.log('service-worker.js fetch: checking caches');
     const cachedResponse = await caches.match(request);
