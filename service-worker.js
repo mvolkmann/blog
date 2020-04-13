@@ -53,7 +53,11 @@ self.addEventListener('fetch', event => {
       return;
     }
 
-    const response = caches.match(request) || fetch(request);
+    //const response = caches.match(request) || fetch(request);
+    let response = caches.match(request);
+    if (!response) {
+      response = fetch(request);
+    }
     event.respondWith(response);
   });
 
