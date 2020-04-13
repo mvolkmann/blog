@@ -74,7 +74,7 @@ self.addEventListener('fetch', event => {
     if (!response) {
       // Try to get response from network:.
       console.log('service-worker.js fetch: checking network');
-      response = fetch(request);
+      response = await fetch(request);
       console.log('service-worker.js fetch: network response =', response);
 
       // Cache the response in the background.
