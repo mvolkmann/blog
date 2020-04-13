@@ -71,6 +71,12 @@ self.addEventListener('fetch', async event => {
   }
 
   console.log('service-worker.js fetch: calling event.respondWith');
+  const url = new URL(request.url);
+  const response = caches.match(url) || fetch(event.request);
+  console.log('service-worker.js fetch: response =', response);
+  event.respondWith(await response);
+
+  /*
   event.respondWith(async () => {
     console.log('service-worker.js fetch: checking caches');
     const cachedResponse = await caches.match(request);
@@ -78,8 +84,12 @@ self.addEventListener('fetch', async event => {
     if (cachedResponse) return cachedResponse;
     // If we didn't find a match in the cache, use the network.
     console.log('service-worker.js fetch: checking network');
-    return fetch(request);
+    const response = await fetch(request);
+    cache.put(request, response.clone());
+    return response;
   });
+  */
+
   /*
     try {
       const cache = await caches.open(cacheName);
