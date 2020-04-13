@@ -71,7 +71,7 @@ header {
   text-align: center;
 }
 
-header > button {
+.hamburger {
   display: none;
 }
 
@@ -87,19 +87,21 @@ nav ul {
   padding-left: 0;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
   h1 {
     font-size: 24px;
   }
 
-  header {
-    text-align: left;
-  }
-
-  header button {
+  .hamburger {
+    background-color: transparent;
+    border: none;
     color: white;
     display: inline-block;
     font-size: 32px;
+  }
+
+  header {
+    text-align: left;
   }
 
   nav {
