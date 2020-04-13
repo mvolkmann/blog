@@ -75,8 +75,9 @@ self.addEventListener('fetch', async event => {
     );
   }
 
+  let cache;
   try {
-    const cache = await caches.open(cacheName);
+    cache = await caches.open(cacheName);
     const response = await cache.match(request);
     console.log('service-worker.js x: response from cache =', response);
     console.log('service-worker.js fetch: got from cache');
