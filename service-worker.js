@@ -1,4 +1,3 @@
-let cachedSet = new Set();
 let cacheName;
 
 async function getServiceWorkerData() {
@@ -18,7 +17,6 @@ self.addEventListener('install', async event => {
     const data = await getServiceWorkerData();
     cacheName = 'cache-' + data.timestamp;
     const toCache = data.assets.map(file => '/blog/assets/' + file);
-    cachedSet = new Set(toCache);
 
     // Precache asset files.
     const cache = await caches.open(cacheName);
