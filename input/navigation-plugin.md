@@ -179,7 +179,7 @@ each navigation link that has an `excerpt` value.
 
 To display `excerpt` values in a different way,
 use a `for` loop to iterate over the navigation entry
-and render `entry.excerpt` however you would like.
+and render `entry.excerpt` any way you like.
 
 {% endraw %}
 For more details, see

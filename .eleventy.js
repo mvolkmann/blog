@@ -2,11 +2,23 @@ const inclusiveLangPlugin = require('@11ty/eleventy-plugin-inclusive-language');
 const navigationPlugin = require('@11ty/eleventy-navigation');
 const pwaPlugin = require('eleventy-plugin-pwa');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
+const fs = require('fs');
 
 //const itemHasTag = (item, tag) => item.data.tags.includes(tag);
 //const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
 
 module.exports = eleventyConfig => {
+  // Create JSON file that is read by service-worker.js.
+  const files = fs.readdirSync('_site/assets');
+  const serviceWorkerData = {
+    assets: fs.readdirSync('_site/assets'),
+    timestamp: Date.now()
+  };
+  fs.writeFileSync(
+    '_site/service-worker-data.json',
+    JSON.stringify(serviceWorkerData)
+  );
+
   // This filters page objects based on a data property value.
   eleventyConfig.addFilter('filter', (arr, property, value) => {
     return arr.filter(obj => obj.data[property] === value);
@@ -40,6 +52,8 @@ module.exports = eleventyConfig => {
   // Copies files in a given directory to output directory
   // without performing any processing on them.
   eleventyConfig.addPassthroughCopy('input/assets');
+
+  eleventyConfig.addPassthroughCopy('input/service-worker.js');
 
   eleventyConfig.addPlugin(navigationPlugin);
 

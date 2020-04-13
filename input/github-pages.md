@@ -28,7 +28,7 @@ Here are the steps to create and deploy an 11ty site to GitHub Pages.
    "\_site" directory created by the `eleventy` command.
 1. Create a `.gitignore` file containing the lines `/node_modules` and `/_site`.
 1. Edit `package.json` and replace the "test" script with the following
-   npm scripts, most of which are just conveniences:
+   npm scripts, most of which are only conveniences:
 
    ```json
    "add": "git add .",

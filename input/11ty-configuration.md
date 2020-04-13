@@ -95,6 +95,10 @@ module.exports = eleventyConfig => {
 };
 ```
 
-TODO: Why goes in the "includes" directory besides layout files?
-ANSWER: include files, extends files, partials, and macros
+Another kind of file that can be placed in the `_include` directory
+is `.njk` files that define macros.
+See an example in [navigation plugin](/blog/navigation-plugin).
+
+TODO: What else goes in the "includes" directory besides layout files?
+ANSWER: include files, extends files, and partials
 TODO: But what are these?
