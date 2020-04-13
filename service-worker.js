@@ -42,7 +42,7 @@ self.addEventListener('activate', async event => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', async event => {
+self.addEventListener('fetch', event => {
   const {request} = event;
   const urlString = request.url;
   console.info('service-worker.js fetch: urlString =', urlString);
