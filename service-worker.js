@@ -47,14 +47,17 @@ self.addEventListener('fetch', async event => {
   const urlString = request.url;
   console.info('service-worker.js fetch: urlString =', urlString);
 
+  /*
   if (request.method !== 'GET' || request.headers.has('range')) {
     console.info('service-worker.js fetch: method =', request.method);
     console.info('service-worker.js fetch: skipped request');
     return;
   }
+  */
 
   const url = new URL(urlString);
 
+  /*
   // Don't try to handle non-http requires such as data: URIs.
   if (!url.protocol.startsWith('http')) {
     console.info('service-worker.js fetch: protocol =', url.protocol);
@@ -69,11 +72,13 @@ self.addEventListener('fetch', async event => {
     event.respondWith(caches.match(event.request));
     return;
   }
+  */
 
   console.log('service-worker.js fetch: calling event.respondWith');
-  const response = caches.match(url) || fetch(event.request);
+  const response = caches.match(url) || fetch(request);
   console.log('service-worker.js fetch: response =', response);
-  event.respondWith(await response);
+  //event.respondWith(await response);
+  event.respondWith(response);
 
   /*
   event.respondWith(async () => {
