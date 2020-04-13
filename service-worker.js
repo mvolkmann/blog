@@ -43,14 +43,19 @@ self.addEventListener('activate', async event => {
 });
 
 self.addEventListener('fetch', event => {
-  const {request} = event;
-  console.info('service-worker.js fetch: request.url =', request.url);
+  event.waitUntil(() => {
+    const {request} = event;
+    console.info('service-worker.js fetch: request.url =', request.url);
 
-  if (request.method !== 'GET') {
-    console.info('service-worker.js fetch: method =', request.method);
-    console.info('service-worker.js fetch: skipped request');
-    return;
-  }
+    if (request.method !== 'GET') {
+      console.info('service-worker.js fetch: method =', request.method);
+      console.info('service-worker.js fetch: skipped request');
+      return;
+    }
+
+    const response = caches.match(request) || fetch(request);
+    event.respondWith(await response);
+  });
 
   //const url = new URL(urlString);
 
@@ -71,8 +76,6 @@ self.addEventListener('fetch', event => {
   }
   */
 
-  const response = caches.match(request) || fetch(request);
-  event.respondWith(await response);
 
   /*
   event.respondWith(async () => {
