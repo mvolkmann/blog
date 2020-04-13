@@ -16,11 +16,10 @@ self.addEventListener('install', async event => {
   try {
     const data = await getServiceWorkerData();
     cacheName = 'cache-' + data.timestamp;
-    const toCache = data.assets.map(file => '/blog/assets/' + file);
 
     // Precache asset files.
     const cache = await caches.open(cacheName);
-    await cache.addAll(toCache);
+    await cache.addAll(data.files);
     //self.skipWaiting();
   } catch (e) {
     console.error('service-worker.js install: error', e);
