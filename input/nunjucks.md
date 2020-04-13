@@ -22,7 +22,7 @@ TODO: Cover other nunjucks-specific configuration.
 
 ## Data types
 
-Nunjucks essential supports the same data types as JavaScript.
+Nunjucks essentially supports the same data types as JavaScript.
 These include:
 
 - Boolean: true, false
@@ -95,8 +95,8 @@ For example:
 
 Nunjucks can render the result of passing a value through a filter.
 There are many provided filters and custom filters can be implemented.
-The provided filters are listed
-[here](https://mozilla.github.io/nunjucks/templating.html#builtin-filters).
+The provided filters are documented at
+[Builtin Filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters).
 They include `abs`, `batch`, `capitalize`, `center`, `default`,
 `dictsort`, `dump`, `escape`, `first`, `float`, `forceescape`,
 `groupby`, `indent`, `int`, `join`, `last`, `length`, `list`,
@@ -117,7 +117,7 @@ There are too many to describe, but here are some highlights:
 - `random` returns a random element from an array
 - `rejectattr` filters an array of objects, rejecting those where a given property passes a test
 - `selectattr` filters an array of objects, keeping those where a given property passes a test
-- `sort` sorts a data array. It is called as a function with three arguments.
+- `sort` sorts an array. It is called as a function with three arguments.
   The first is a boolean indicating whether the sort should be in reverse order.
   The second is a boolean indicating whether the sort should be case insensitive.
   The third is the string name of the property on which the objects should be sorted.
@@ -172,24 +172,22 @@ to the devtools console.
 eleventyConfig.addFilter('log', console.log);
 ```
 
-TODO: Try this!
+This filter will be added to 11ty in version 11.
 
 ## Conditional logic
 
 Content can be conditionally included using an `if` statement.
 For example:
 
-TODO: Change this example instead of copying from the official docs.
-
 {% raw %}
 
 ```liquid
-{% if hungry %}
-  I am hungry.
-{% elif tired %}
-  I am tired.
+{% if color === 'yellow' %}
+  sunny
+{% elif color === 'blue' %}
+  rainy
 {% else %}
-  I am good!
+  unknown
 {% endif %}
 ```
 
@@ -201,7 +199,7 @@ For example, this outputs "yellow" if `happy` is true.
 {% raw %}
 
 ```liquid
-{{ "happy" if happy }}
+{{ "yellow" if happy }}
 ```
 
 {% endraw %}
@@ -219,7 +217,9 @@ This is similar, but outputs "gray" if `happy` is false.
 ## Iteration
 
 A `for` loop iterates over the elements of an array
-or the properties of an object.
+or the properties of an object
+and renders content for each element.
+An optional `else` block specifies content to render if the array is empty.
 
 If the variable `dogs` holds an array of objects,
 we can iterate over the array as follows:
@@ -254,8 +254,8 @@ we can iterate over its properties as follows:
 
 There is also support for asynchronous versions of this
 (`asyncEach` and `asyncAll`) that most sites will not need.
-It is documented
-[here](https://mozilla.github.io/nunjucks/api.html#asynchronous-support).
+It is documented at
+[Asynchronous Support](https://mozilla.github.io/nunjucks/api.html#asynchronous-support).
 
 ## Function calls
 
@@ -266,6 +266,16 @@ For example, this calls a function and renders its result:
 
 ```liquid
 {{ someFunction(arg1, arg2) }}
+```
+
+{% endraw %}
+
+This calls a function and assigns its result to a variable:
+
+{% raw %}
+
+```liquid
+{% set name = someFunction(arg1, arg2) }}
 ```
 
 {% endraw %}
@@ -298,7 +308,7 @@ For example:
 {% raw %}
 
 ```liquid
-{{ someHtml | save }}
+{{ someHtml | safe }}
 ```
 
 {% endraw %}
@@ -307,8 +317,6 @@ For example:
 
 One template can include another.
 This allows a template to be reused in many places.
-The syntax is {% raw %} `{% include "`_`file-path`_`" %}` {% endraw %}.
-
 For example:
 
 {% raw %}
@@ -355,7 +363,8 @@ For example:
 {% endraw %}
 
 Arguments can be specified positionally or by name.
-For example:
+The previous example used positional arguments.
+The next example uses named arguments.
 
 {% raw %}
 
@@ -397,7 +406,8 @@ TODO: Maybe Nunjucks macros can be used as an alternative to 11ty shortcodes.
 
 Blocks in Nunjucks are like named slots in Svelte.
 They allow a template to pass content into another template.
-This is described [here](https://mozilla.github.io/nunjucks/templating.html#template-inheritance).
+This is described at
+[Template Inheritance](https://mozilla.github.io/nunjucks/templating.html#template-inheritance).
 
 ## Whitespace
 
@@ -410,15 +420,14 @@ Zach Leatherman recommends only using `{%-`.
 
 ## Global functions
 
-Nunjucks provides some predefined functions
-that address common needs.
+Nunjucks provides some predefined functions that address common needs.
 
 - `range` is used to iterate over a range of integer values.
 - `cycler` rotates through a set of values.
 - `joiner` returns a function that outputs a given string
-  each time it is called except for the first
+  each time it is called except for the first.
 
 ## Other topics
 
-I haven't described these topics yet:
+These topics have not been described yet:
 call, extends, import, raw, super, verbatim

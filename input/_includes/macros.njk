@@ -4,8 +4,8 @@ It calls renderNavItem recursively if the nav item has children
 in order to create a tree of links.
 #}
 {% macro renderNavItem(entry) %}
-  {% set class = "active" if entry.url == page.url else "" %}
-  <li class={{ class }}>
+  {% set active = entry.url === page.url %}
+  <li{% if active %} class="active"{% endif %}>
     <a href="{{ entry.url | url }}">{{ entry.title }}</a>
     {% if entry.children.length %}
       {{ renderNavList(entry.children) }}

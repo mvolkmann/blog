@@ -162,3 +162,6 @@ get copied to `_site/assets` by the site build process:
   "theme_color": "cornflowerblue"
 }
 ```
+
+For more information, see
+[Every website deserves a service worker](https://blog.logrocket.com/every-website-deserves-a-service-worker/).
