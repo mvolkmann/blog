@@ -78,21 +78,15 @@ self.addEventListener('fetch', async event => {
   let cache;
   try {
     cache = await caches.open(cacheName);
-    const response = await cache.match(request);
-    console.log('service-worker.js x: response from cache =', response);
+    event.respondWith(cache.match(request));
     console.log('service-worker.js fetch: got from cache');
-    event.respondWith(response);
   } catch (err) {
-    if (cache) {
+    if (!cache) throw err;
+    event.respondWith(async () => {
       const response = await fetch(request);
       console.log('service-worker.js x: response from network =', response);
-      if (response) {
-        cache.put(request, response.clone());
-        event.respondWith(response);
-      }
-      return;
-    }
-
-    throw err;
+      if (response) cache.put(request, response.clone());
+      return response;
+    });
   }
 });
