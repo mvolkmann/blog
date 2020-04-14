@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: layout.njk
 ---
 
+See https://alexcarpenter.me/screencasts/2020/04/eleventy-paired-shortcodes/.
+
 Shortcodes define snippets of reusable content.
 This is the closest thing 11ty provides to components
 in web frameworks like React, Vue, Angular, and Svelte.
