@@ -16,6 +16,7 @@ self.addEventListener('install', async event => {
   try {
     const data = await getServiceWorkerData();
     cacheName = 'cache-' + data.timestamp;
+    console.log('service-worker.js install: cacheName =', cacheName);
 
     // Precache asset files.
     const cache = await caches.open(cacheName);
