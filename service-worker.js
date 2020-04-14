@@ -3,7 +3,9 @@ let cacheName;
 async function getServiceWorkerData() {
   try {
     // .eleventy.js writes this file.
-    const res = await fetch('service-worker-data.json');
+    // We are avoiding reading it from the cache in order to
+    // always get updated versions from the network.
+    const res = await fetch('service-worker-data.json', {cache: 'no-store'});
     if (res.ok) return res.json();
     const text = await res.text();
     throw new Error(text);
