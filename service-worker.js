@@ -10,46 +10,36 @@ async function getServiceWorkerData() {
     const text = await res.text();
     throw new Error(text);
   } catch (e) {
-    console.error('error getting service-worker.json:', e);
+    console.error(
+      'service-worker.js error fetching service-worker-data.json:',
+      e
+    );
+    return {files: [], timestamp: 'error'};
   }
 }
 
 self.addEventListener('install', async event => {
-  // Get data written by .eleventy.js that describes
-  // files to cache initially and a build timestamp.
-  /*
-  event.waitUntil(async () => {
-    data = await getServiceWorkerData();
-    console.log('service-worker.js install: data =', data);
-  });
-  */
-  /*
-  // Precache asset files.
-  const cache = await caches.open(cacheName);
-  await cache.addAll(data.files);
-  //self.skipWaiting();
-  */
+  // There is no need to do anything here.
 });
 
 self.addEventListener('activate', async event => {
-  const data = await getServiceWorkerData();
-  console.log('service-worker.js activate: data =', data);
+  // We are getting this data in the activate handler
+  // because if we do it in the install handler
+  // it sometimes isn't available yet here.
+  const {files, timestamp} = await getServiceWorkerData();
+
+  cacheName = 'cache-' + timestamp;
+  console.info('service-worker.js using cache', cacheName);
+
   // Delete all old caches.
-  cacheName = 'cache-' + data.timestamp;
-  console.log('service-worker.js install: cacheName =', cacheName);
   const keys = await caches.keys();
   for (const key of keys) {
-    if (key !== cacheName) {
-      console.log('service-worker.js activate: deleting cache', key);
-      await caches.delete(key);
-      console.log('service-worker.js activate: deleted cache', key);
-    }
+    if (key !== cacheName) await caches.delete(key);
   }
 
   // Precache asset files.
   const cache = await caches.open(cacheName);
-  await cache.addAll(data.files);
-  //self.skipWaiting();
+  await cache.addAll(files);
 
   self.clients.claim();
 });
@@ -69,26 +59,21 @@ self.addEventListener('fetch', async event => {
 
   async function getResponsePromise() {
     const cache = await caches.open(cacheName);
-    console.log(
-      'service-worker.js fetch: getting',
-      url.pathname,
-      'from cache',
-      cacheName
-    );
-    // Try to find a response in the cache.
+
+    // Try to find response in the cache.
     let response = await cache.match(request);
     if (!response) {
       if (request.cache === 'only-if-cached') return;
 
-      // Get the response from the network.
+      // Try to fetch response from the network.
       // We will get a 404 error if not found.
       response = await fetch(request, {cache: 'no-store'});
-      console.log('service-worker.js got', url.pathname, 'from network');
+      console.info('service-worker.js got', url.pathname, 'from network');
 
       // Cache the response.
       cache.put(request, response.clone());
     } else {
-      console.log(
+      console.info(
         'service-worker.js got',
         url.pathname,
         'from cache',
