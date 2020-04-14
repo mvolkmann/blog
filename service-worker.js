@@ -5,7 +5,7 @@ async function getServiceWorkerData() {
     // .eleventy.js writes this file.
     // We are avoiding reading it from the cache in order to
     // always get updated versions from the network.
-    const res = await fetch('service-worker-data.json', {cache: 'no-store'});
+    const res = await fetch('service-worker-data.json', {cache: 'reload'});
     if (res.ok) return res.json();
     const text = await res.text();
     throw new Error(text);
@@ -63,7 +63,7 @@ self.addEventListener('fetch', async event => {
 
       // Get the response from the network.
       // We will get a 404 error if not found.
-      response = await fetch(request, {cache: 'no-store'});
+      response = await fetch(request, {cache: 'reload'});
       console.log('service-worker.js got', url.pathname, 'from network');
 
       // Cache the response.
