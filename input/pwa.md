@@ -16,7 +16,7 @@ We also want to start over with a new cache
 every time a new version of a site is deployed.
 
 To do this we need to write some data to a JSON file
-when a site is built.
+when the site is built.
 The `.eleventy.js` file is a good place to do this
 because that is executed when a site is built.
 
@@ -28,14 +28,13 @@ module.exports = eleventyConfig => {
   let files = fs.readdirSync('_site/assets');
   files = files.map(file => '/blog/assets/' + file);
   files.push('/blog/'); // cache the start URL (Lighthouse wants this)
-  const serviceWorkerData = {
-    assets: files,
-    timestamp: Date.now()
-  };
+  const timestamp = Date.now();
+  const serviceWorkerData = {files, timestamp};
   fs.writeFileSync(
     '_site/service-worker-data.json',
     JSON.stringify(serviceWorkerData)
   );
+  console.log('wrote service-worker-data.json with timestamp', timestamp);
 ```
 
 Here is a service worker implementation that uses this JSON file:
@@ -46,37 +45,43 @@ let cacheName;
 async function getServiceWorkerData() {
   try {
     // .eleventy.js writes this file.
-    const res = await fetch('service-worker-data.json');
+    // We are avoiding reading it from the cache in order to
+    // always get updated versions from the network.
+    const res = await fetch('service-worker-data.json', {cache: 'no-store'});
     if (res.ok) return res.json();
     const text = await res.text();
     throw new Error(text);
   } catch (e) {
-    console.error('error getting service-worker.json:', e);
+    console.error(
+      'service-worker.js error fetching service-worker-data.json:',
+      e
+    );
+    return {files: [], timestamp: 'error'};
   }
 }
 
 self.addEventListener('install', async event => {
-  try {
-    const data = await getServiceWorkerData();
-    cacheName = 'cache-' + data.timestamp;
-
-    // Precache asset files.
-    const cache = await caches.open(cacheName);
-    await cache.addAll(data.files);
-    //self.skipWaiting();
-  } catch (e) {
-    console.error('service-worker.js install: error', e);
-  }
+  // There is no need to do anything here.
 });
 
 self.addEventListener('activate', async event => {
-  // Get all the current cache keys.
-  const keys = await caches.keys();
+  // We are getting this data in the activate handler
+  // because if we do it in the install handler
+  // it sometimes isn't available yet here.
+  const {files, timestamp} = await getServiceWorkerData();
+
+  cacheName = 'cache-' + timestamp;
+  console.info('service-worker.js using cache', cacheName);
 
   // Delete all old caches.
+  const keys = await caches.keys();
   for (const key of keys) {
     if (key !== cacheName) await caches.delete(key);
   }
+
+  // Precache asset files.
+  const cache = await caches.open(cacheName);
+  await cache.addAll(files);
 
   self.clients.claim();
 });
@@ -96,21 +101,24 @@ self.addEventListener('fetch', async event => {
 
   async function getResponsePromise() {
     const cache = await caches.open(cacheName);
-    // Try to find a response in the cache.
+
+    // Try to find response in the cache.
     let response = await cache.match(request);
+
     if (!response) {
       if (request.cache === 'only-if-cached') return;
 
-      // Get the response from the network.
+      // Try to fetch response from the network.
       // We will get a 404 error if not found.
-      response = await fetch(request);
-      console.log('service-worker.js got', url.pathname, 'from network');
+      response = await fetch(request, {cache: 'no-store'});
+      console.info('service-worker.js got', url.pathname, 'from network');
 
       // Cache the response.
       cache.put(request, response.clone());
     } else {
-      console.log('service-worker.js got', url.pathname, 'from cache');
+      console.info('service-worker.js got', url.pathname, 'from', cacheName);
     }
+
     return response;
   }
 
@@ -135,8 +143,8 @@ Place the following inside the `head` element to do this:
 </script>
 ```
 
-Here is the content for `manifest.json` that should
-get copied to `_site/assets` by the site build process:
+Here is sample content for `assets/manifest.json` that should
+be copied to `_site/assets` by the site build process:
 
 ```json
 {

@@ -8,19 +8,6 @@ const fs = require('fs');
 //const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
 
 module.exports = eleventyConfig => {
-  // Create JSON file that is read by service-worker.js.
-  let files = fs.readdirSync('_site/assets');
-  files = files.map(file => '/blog/assets/' + file);
-  files.push('/blog/'); // cache the start URL (Lighthouse wants this)
-  const serviceWorkerData = {
-    files,
-    timestamp: Date.now()
-  };
-  fs.writeFileSync(
-    '_site/service-worker-data.json',
-    JSON.stringify(serviceWorkerData)
-  );
-
   // This filters page objects based on a data property value.
   eleventyConfig.addFilter('filter', (arr, property, value) => {
     return arr.filter(obj => obj.data[property] === value);
@@ -60,11 +47,23 @@ module.exports = eleventyConfig => {
   });
 
   // Suppresses output of the paths of all generated files.
-  //eleventyConfig.setQuietMode(false);
+  eleventyConfig.setQuietMode(true);
 
   // Watches all JavaScript templates and data files
   // and rebuilds the site if they change.
   //eleventyConfig.setWatchJavaScriptDependencies(true);
+
+  // Create JSON file that is read by service-worker.js.
+  let files = fs.readdirSync('_site/assets');
+  files = files.map(file => '/blog/assets/' + file);
+  files.push('/blog/'); // cache the start URL (Lighthouse wants this)
+  const timestamp = Date.now();
+  const serviceWorkerData = {files, timestamp};
+  fs.writeFileSync(
+    '_site/service-worker-data.json',
+    JSON.stringify(serviceWorkerData)
+  );
+  console.log('wrote service-worker-data.json with timestamp', timestamp);
 
   return {
     dir: {
