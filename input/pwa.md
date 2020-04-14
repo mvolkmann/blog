@@ -5,8 +5,7 @@ layout: layout.njk
 ---
 
 Progressive web apps support offline operation using a service worker.
-11ty sites can also use a service worker
-so their pages are accessible when offline.
+11ty sites do this too so their pages are accessible when offline.
 
 One approach is to cache all asset files
 (including images and stylesheets)
