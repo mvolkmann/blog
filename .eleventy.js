@@ -1,3 +1,4 @@
+const htmlmin = require('html-minifier');
 const inclusiveLangPlugin = require('@11ty/eleventy-plugin-inclusive-language');
 const navigationPlugin = require('@11ty/eleventy-navigation');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
@@ -47,6 +48,16 @@ module.exports = eleventyConfig => {
   eleventyConfig.addPlugin(navigationPlugin);
 
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
+
+  // Minify generated HTML.
+  eleventyConfig.addTransform('htmlmin', (content, outputPath) => {
+    if (!outputPath || !outputPath.endsWith('.html')) return content;
+    return htmlmin.minify(content, {
+      useShortDoctype: true,
+      removeComments: true,
+      collapseWhitespace: true
+    });
+  });
 
   // Suppresses output of the paths of all generated files.
   //eleventyConfig.setQuietMode(false);
