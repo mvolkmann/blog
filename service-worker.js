@@ -63,7 +63,7 @@ self.addEventListener('fetch', async event => {
 
       // Get the response from the network.
       // We will get a 404 error if not found.
-      response = await fetch(request);
+      response = await fetch(request, {cache: 'no-store'});
       console.log('service-worker.js got', url.pathname, 'from network');
 
       // Cache the response.
