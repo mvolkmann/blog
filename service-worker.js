@@ -62,6 +62,7 @@ self.addEventListener('fetch', async event => {
 
     // Try to find response in the cache.
     let response = await cache.match(request);
+
     if (!response) {
       if (request.cache === 'only-if-cached') return;
 
@@ -73,13 +74,9 @@ self.addEventListener('fetch', async event => {
       // Cache the response.
       cache.put(request, response.clone());
     } else {
-      console.info(
-        'service-worker.js got',
-        url.pathname,
-        'from cache',
-        cacheName
-      );
+      console.info('service-worker.js got', url.pathname, 'from', cacheName);
     }
+
     return response;
   }
 
