@@ -11,9 +11,12 @@ more compact variable assignment and usage,
 nested rules, mixins, and provided functions.
 For more details, see the [Sass home page](https://sass-lang.com/).
 
-We can make converting `.scss` files to `.css` files
-an automated part of the 11ty build process
-by following these steps:
+One option for adding the use of Sass to an 11ty project is to use
+[eleventy-plugin-sass](https://www.npmjs.com/package/eleventy-plugin-sass).
+However, there are currently several issues with this plugin.
+
+Another way we can make converting `.scss` files to `.css` files
+an automated part of the 11ty build process is to follow these steps:
 
 1. Place all `.scss` files in the `assets` directory.
 1. Enter `npm install -D node-sass npm-run-all`.
