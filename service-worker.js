@@ -38,6 +38,7 @@ self.addEventListener('activate', async event => {
     if (key !== cacheName) {
       console.log('service-worker.js activate: deleting cache', key);
       await caches.delete(key);
+      console.log('service-worker.js activate: deleted cache', key);
     }
   }
 
@@ -78,7 +79,12 @@ self.addEventListener('fetch', async event => {
       // Cache the response.
       cache.put(request, response.clone());
     } else {
-      console.log('service-worker.js got', url.pathname, 'from cache');
+      console.log(
+        'service-worker.js got',
+        url.pathname,
+        'from cache',
+        cacheName
+      );
     }
     return response;
   }
