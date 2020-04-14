@@ -18,8 +18,10 @@ async function getServiceWorkerData() {
 self.addEventListener('install', async event => {
   // Get data written by .eleventy.js that describes
   // files to cache initially and a build timestamp.
-  data = await getServiceWorkerData();
-  console.log('service-worker.js install: data =', data);
+  event.waitUntil(async () => {
+    data = await getServiceWorkerData();
+    console.log('service-worker.js install: data =', data);
+  });
 
   /*
   // Precache asset files.
