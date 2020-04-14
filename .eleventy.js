@@ -33,7 +33,6 @@ module.exports = eleventyConfig => {
   eleventyConfig.addPassthroughCopy('input/service-worker.js');
 
   eleventyConfig.addPlugin(navigationPlugin);
-
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
 
   // Minify generated HTML.
@@ -46,6 +45,12 @@ module.exports = eleventyConfig => {
     });
   });
 
+  eleventyConfig.addWatchTarget('_site/assets/*.css');
+
+  eleventyConfig.setBrowserSyncConfig({
+    files: ['_site/assets/*.css']
+  });
+
   // Suppresses output of the paths of all generated files.
   eleventyConfig.setQuietMode(true);
 
@@ -54,16 +59,21 @@ module.exports = eleventyConfig => {
   //eleventyConfig.setWatchJavaScriptDependencies(true);
 
   // Create JSON file that is read by service-worker.js.
-  let files = fs.readdirSync('_site/assets');
-  files = files.map(file => '/blog/assets/' + file);
-  files.push('/blog/'); // cache the start URL (Lighthouse wants this)
-  const timestamp = Date.now();
-  const serviceWorkerData = {files, timestamp};
-  fs.writeFileSync(
-    '_site/service-worker-data.json',
-    JSON.stringify(serviceWorkerData)
-  );
-  console.log('wrote service-worker-data.json with timestamp', timestamp);
+  try {
+    let files = fs.readdirSync('_site/assets');
+    files = files.map(file => '/blog/assets/' + file);
+    files.push('/blog/'); // cache the start URL (Lighthouse wants this)
+    const timestamp = Date.now();
+    const serviceWorkerData = {files, timestamp};
+    fs.writeFileSync(
+      '_site/service-worker-data.json',
+      JSON.stringify(serviceWorkerData)
+    );
+    console.log('wrote service-worker-data.json with timestamp', timestamp);
+  } catch (e) {
+    // Don't treat it as an error if the _site/assets directory doesn't exist.
+    if (e.code !== 'ENOENT') throw e;
+  }
 
   return {
     dir: {
