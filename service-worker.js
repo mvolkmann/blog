@@ -19,6 +19,7 @@ self.addEventListener('install', async event => {
   // Get data written by .eleventy.js that describes
   // files to cache initially and a build timestamp.
   data = await getServiceWorkerData();
+  console.log('service-worker.js install: data =', data);
 
   /*
   // Precache asset files.
@@ -29,6 +30,7 @@ self.addEventListener('install', async event => {
 });
 
 self.addEventListener('activate', async event => {
+  console.log('service-worker.js activate: data =', data);
   // Delete all old caches.
   cacheName = 'cache-' + data.timestamp;
   console.log('service-worker.js install: cacheName =', cacheName);
