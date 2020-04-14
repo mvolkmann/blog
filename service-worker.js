@@ -1,4 +1,5 @@
 let cacheName;
+let data;
 
 async function getServiceWorkerData() {
   try {
@@ -15,25 +16,23 @@ async function getServiceWorkerData() {
 }
 
 self.addEventListener('install', async event => {
-  try {
-    const data = await getServiceWorkerData();
-    cacheName = 'cache-' + data.timestamp;
-    console.log('service-worker.js install: cacheName =', cacheName);
+  // Get data written by .eleventy.js that describes
+  // files to cache initially and a build timestamp.
+  const data = await getServiceWorkerData();
+  cacheName = 'cache-' + data.timestamp;
+  console.log('service-worker.js install: cacheName =', cacheName);
 
-    // Precache asset files.
-    const cache = await caches.open(cacheName);
-    await cache.addAll(data.files);
-    //self.skipWaiting();
-  } catch (e) {
-    console.error('service-worker.js install: error', e);
-  }
+  /*
+  // Precache asset files.
+  const cache = await caches.open(cacheName);
+  await cache.addAll(data.files);
+  //self.skipWaiting();
+  */
 });
 
 self.addEventListener('activate', async event => {
-  // Get all the current cache keys.
-  const keys = await caches.keys();
-
   // Delete all old caches.
+  const keys = await caches.keys();
   for (const key of keys) {
     if (key !== cacheName) {
       console.log('service-worker.js activate: deleting cache', key);
@@ -41,6 +40,11 @@ self.addEventListener('activate', async event => {
       console.log('service-worker.js activate: deleted cache', key);
     }
   }
+
+  // Precache asset files.
+  const cache = await caches.open(cacheName);
+  await cache.addAll(data.files);
+  //self.skipWaiting();
 
   self.clients.claim();
 });
