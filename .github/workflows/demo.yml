@@ -6,9 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello
+        id: hello
         uses: actions/hello-world-javascript-action@master
         with:
           who-to-greet: 'Wayne Gretzky'
-          id: hello
       - name: Time
         run: echo 'The time was ${{ steps.hello.outputs.time }}.'
