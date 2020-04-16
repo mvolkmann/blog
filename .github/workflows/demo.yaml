@@ -1,4 +1,4 @@
-name: Mark's Demo
+name: My Demo
 on: [push]
 jobs:
   build:
