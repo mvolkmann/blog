@@ -1,0 +1,14 @@
+name: Mark's Demo
+on: [push]
+jobs:
+  build:
+    name: DemoJob
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: 'Wayne Gretzky'
+          id: hello
+      - name: Time
+        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
