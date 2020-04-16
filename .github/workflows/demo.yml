@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        uses: actions/hello-world-javascript-action@v1
+        uses: actions/hello-world-javascript-action@master
         with:
           who-to-greet: 'Wayne Gretzky'
           id: hello
