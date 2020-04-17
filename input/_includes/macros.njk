@@ -4,6 +4,10 @@ It calls renderNavItem recursively if the nav item has children
 in order to create a tree of links.
 #}
 {% macro renderNavItem(entry) %}
+  {#
+  <p>renderNavItem: entry.url = {{ entry.url }}</p>
+  <p>renderNavItem: page.url = {{ page.url }}</p>
+  #}
   {% set active = entry.url === page.url %}
   {% set hasOrder = entry.url === page.url %}
   <li
@@ -11,8 +15,11 @@ in order to create a tree of links.
     {% if entry.order %} class="ordered"{% endif %}
     {% if not entry.parent %} class="top"{% endif %}
   >
-    <a href="{{ entry.url | url }}">{{ entry.title }}</a>
-    {% if entry.children.length %}
+    <a href="{{ entry.url | url }}">
+      {{ entry.title }}
+      {% if entry.children.length %} >{% endif %}
+    </a>
+    {% if entry.url in page.url and entry.children.length %}
       {{ renderNavList(entry.children) }}
     {% endif %}
   </li>

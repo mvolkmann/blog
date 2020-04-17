@@ -6,6 +6,6 @@ layout: layout.njk
 tags: eleventy
 ---
 
-Choose a topic in the left nav.
+Select an Eleventy topic in the left nav.
 
 ![11ty logo](/blog/assets/11ty-logo.png '11ty logo')
