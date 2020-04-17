@@ -9,6 +9,6 @@ jobs:
         id: hello
         uses: actions/hello-world-javascript-action@master
         with:
-          who-to-greet: 'Wayne Gretzky'
+          who-to-greet: 'Mark Volkmann'
       - name: Time
         run: echo 'The time was ${{ steps.hello.outputs.time }}.'
