@@ -80,6 +80,15 @@ li.active > a {
   font-weight: bold;
 }
 
+li.ordered > a {
+  color: green;
+}
+
+li.top > a {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 nav ul {
   list-style: none;
   margin-left: 1rem;
@@ -89,7 +98,7 @@ nav ul {
 
 @media (max-width: 600px) {
   h1 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .hamburger {
@@ -97,7 +106,7 @@ nav ul {
     border: none;
     color: white;
     display: inline-block;
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   header {

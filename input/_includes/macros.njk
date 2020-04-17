@@ -5,7 +5,12 @@ in order to create a tree of links.
 #}
 {% macro renderNavItem(entry) %}
   {% set active = entry.url === page.url %}
-  <li{% if active %} class="active"{% endif %}>
+  {% set hasOrder = entry.url === page.url %}
+  <li
+    {% if active %} class="active"{% endif %}
+    {% if entry.order %} class="ordered"{% endif %}
+    {% if not entry.parent %} class="top"{% endif %}
+  >
     <a href="{{ entry.url | url }}">{{ entry.title }}</a>
     {% if entry.children.length %}
       {{ renderNavList(entry.children) }}
