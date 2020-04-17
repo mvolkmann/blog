@@ -2,9 +2,9 @@
 eleventyNavigation:
   key: GitHub Pages
   order: 6
-intro: true
+  parent: Eleventy
 layout: layout.njk
-tags: [navItem, intro]
+tags: eleventy
 ---
 
 GitHub Pages is a great option to consider for hosting an 11ty site

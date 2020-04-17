@@ -1,8 +1,9 @@
 ---
 eleventyNavigation:
   key: Filters
+  parent: Eleventy
 layout: layout.njk
-title: Filters
+tags: eleventy
 ---
 
 See <https://www.11ty.dev/docs/filters/>.

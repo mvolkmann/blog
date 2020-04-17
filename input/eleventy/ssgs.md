@@ -2,9 +2,9 @@
 eleventyNavigation:
   key: Static Site Generators
   order: 1
-intro: true
+  parent: Eleventy
 layout: layout.njk
-tags: [navItem, intro]
+tags: eleventy
 ---
 
 Static site generators (SSGs) are an alternative

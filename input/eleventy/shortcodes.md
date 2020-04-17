@@ -1,7 +1,9 @@
 ---
 eleventyNavigation:
   key: Shortcodes
+  parent: Eleventy
 layout: layout.njk
+tags: eleventy
 ---
 
 See https://alexcarpenter.me/screencasts/2020/04/eleventy-paired-shortcodes/.

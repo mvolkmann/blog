@@ -59,17 +59,7 @@
     <main>
       <nav>
         {% import 'macros.njk' as macros with context %}
-
-        <h2>Intro. Topics</h2>
-        {% set introDocs = collections.all | filter('intro', true) %}
-        {% set entries = introDocs | eleventyNavigation %}
-        {{ macros.renderNavList(entries) }}
-
-        <hr>
-
-        <h2>More Topics</h2>
-        {% set moreDocs = collections.all | filterNot('intro', true) %}
-        {% set entries = moreDocs | eleventyNavigation | sort(false, false, 'title') %}
+        {% set entries = collections.all | eleventyNavigation | navSort() %}
         {{ macros.renderNavList(entries) }}
       </nav>
       

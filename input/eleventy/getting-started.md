@@ -2,9 +2,9 @@
 eleventyNavigation:
   key: Getting Started
   order: 4
-intro: true
+  parent: Eleventy
 layout: layout.njk
-tags: [navItem, intro]
+tags: eleventy
 ---
 
 Here are the most basic steps to create and build an 11ty site.

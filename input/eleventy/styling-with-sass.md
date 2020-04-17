@@ -3,6 +3,7 @@ eleventyNavigation:
   key: Styling with Sass
   parent: Styling
 layout: layout.njk
+tags: eleventy
 ---
 
 Sass provides a modified CSS syntax that can be compiled to plain CSS.

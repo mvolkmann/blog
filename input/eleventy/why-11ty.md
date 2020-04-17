@@ -2,9 +2,9 @@
 eleventyNavigation:
   key: Why 11ty?
   order: 2
-intro: true
+  parent: Eleventy
 layout: layout.njk
-tags: [navItem, intro]
+tags: eleventy
 ---
 
 11ty competes with:

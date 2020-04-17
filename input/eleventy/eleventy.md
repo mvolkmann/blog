@@ -1,8 +1,9 @@
 ---
 css: '/blog/assets/welcome.css'
 eleventyNavigation:
-  key: Welcome!
+  key: Eleventy
 layout: layout.njk
+tags: eleventy
 ---
 
 Choose a topic in the left nav.

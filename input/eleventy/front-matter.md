@@ -1,7 +1,9 @@
 ---
 eleventyNavigation:
   key: Front Matter
+  parent: Eleventy
 layout: layout.njk
+tags: eleventy
 ---
 
 Files processed by 11ty can begin with front matter.

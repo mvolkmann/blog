@@ -1,7 +1,9 @@
 ---
 eleventyNavigation:
   key: Data Cascade
+  parent: Eleventy
 layout: layout.njk
+tags: eleventy
 ---
 
 Data in an 11ty project is held in variables.

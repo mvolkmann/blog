@@ -1,7 +1,8 @@
 ---
 eleventyNavigation:
-  key: Eleventy
-  title: Eleventy web site
+  key: Eleventy web site
+  parent: Eleventy
   url: https://11ty.dev/
 permalink: false
+tags: eleventy
 ---

@@ -1,7 +1,9 @@
 ---
 eleventyNavigation:
   key: Minify HTML
+  parent: Eleventy
 layout: layout.njk
+tags: eleventy
 ---
 
 To minify the HTML produced for each page,

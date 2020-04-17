@@ -1,7 +1,9 @@
 ---
 eleventyNavigation:
   key: Accessibility Testing
+  parent: Eleventy
 layout: layout.njk
+tags: eleventy
 ---
 
 It is recommended to perform accessibility testing on all sites.

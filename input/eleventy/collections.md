@@ -1,7 +1,9 @@
 ---
 eleventyNavigation:
   key: Collections
+  parent: Eleventy
 layout: layout.njk
+tags: eleventy
 ---
 
 Collections of documents are defined by specifying tags in front matter.

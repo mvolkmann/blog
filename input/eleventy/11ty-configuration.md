@@ -2,9 +2,10 @@
 eleventyNavigation:
   key: 11ty Configuration
   order: 5
+  parent: Eleventy
 intro: true
 layout: layout.njk
-tags: [navItem, intro]
+tags: eleventy
 ---
 
 Configuration options for 11ty are documented on the 11ty

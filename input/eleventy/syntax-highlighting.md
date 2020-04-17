@@ -3,6 +3,7 @@ eleventyNavigation:
   key: Syntax Highlighting
   parent: Plugins
 layout: layout.njk
+tags: eleventy
 ---
 
 To use the syntax highlighting plugin, install it as follows:

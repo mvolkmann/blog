@@ -1,7 +1,9 @@
 ---
 eleventyNavigation:
   key: Progressive Web Apps
+  parent: Eleventy
 layout: layout.njk
+tags: eleventy
 ---
 
 Progressive web apps support offline operation using a service worker.
