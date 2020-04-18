@@ -177,6 +177,45 @@ Do a "git pull" to get the new workflow file in your local repository.
 The new workflow will be scheduled to run immediately.
 Click the "Actions" tab to see the results.
 
+Two events trigger this workflow to execute.
+The first is a push to the master branch.
+The second is a pull request to the master branch.
+
+Setting `strategy.matrix.node-version` to an array of version numbers
+causes it to execute the steps in each version of Node.
+This is useful to run tests in multiple versions of node.
+To only use the latest version of version 12,
+change it to just `12.x`.
+
+This workflow runs the following commands:
+
+- `actions/checkout@v2` is a predefined action that checks out
+  the most recent commit to a given branch which defaults to "master".
+  See <https://github.com/actions/checkout> for options.
+- `actions/setup-node@v1` is a predefined action that
+  sets the Node environment to be used by actions.
+  It uses a version specified in `strategy.matrix.node-version`
+  unless the `node-version` property is specified.
+  When the matrix property specifies Node versions,
+  the version used in a particular run becomes part of the step name.
+  See <https://github.com/actions/setup-node> for options.
+- `npm ci` does a clean install of all dependencies.
+  It is similar to `npm install`, but differs in that
+  - if the `node_modules` directory exists, it is deleted
+  - `package-lock.json` must exist
+  - it is an error if `package.json` specifies different
+    dependencies or versions than `package-lock.json`
+  - `package-lock.json` will not be updated
+- `npm run build --if-present` runs the `build` script if it is defined,
+  but it is not treated as an error if it is missing.
+- `npm test` runs tests using the commands in the `test` script.
+  This sets the `CI` environment variable to `true`
+  which means that warnings from tests will be treated as errors
+  and cause the build to fail.
+
+TODO: Is there an issue with having more than one workflow file?
+TODO: It seems only one gets executed.
+
 ## Executing Shell Commands
 
 GitHub Actions do not have to use an existing action
