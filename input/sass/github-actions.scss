@@ -2,3 +2,14 @@ img {
   display: block;
   width: 800px;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: solid gray 1px;
+  padding: 4px;
+  text-align: left;
+}
