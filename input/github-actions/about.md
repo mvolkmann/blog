@@ -183,9 +183,10 @@ The second is a pull request to the master branch.
 
 Setting `strategy.matrix.node-version` to an array of version numbers
 causes it to execute the steps in each version of Node.
-This is useful to run tests in multiple versions of node.
+This is useful to run tests in multiple versions of Node.
 To only use the latest version of version 12,
-change it to just `12.x`.
+remove `strategy.matrix.node-version` and
+change the `node-version` property for the `setup-node` step to just `12.x`.
 
 This workflow runs the following commands:
 
