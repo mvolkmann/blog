@@ -31,15 +31,25 @@
         })
       }
 
+      let nav;
       let navOpen = false;
 
       function toggleMenu() {
-        const nav = document.querySelector('nav');
         navOpen = !navOpen;
         nav.style.left = navOpen ?
           0 :
           '-' + nav.getBoundingClientRect().width + 'px';
         nav
+      }
+
+      window.onload = () => {
+        nav = document.querySelector('nav');
+        const scrollTop = sessionStorage.getItem('navScroll');
+        if (scrollTop) nav.scrollTop = scrollTop;
+
+        nav.onscroll = () => {
+          sessionStorage.setItem('navScroll', nav.scrollTop);
+        };
       }
     </script> 
   </head>
@@ -57,7 +67,7 @@
       {% endfor %}
     </header>
     <main>
-      <nav>
+      <nav onScroll="navScrolled()">
         {% import 'macros.njk' as macros with context %}
         {% set entries = collections.all | eleventyNavigation | navSort() %}
         {{ macros.renderNavList(entries) }}
