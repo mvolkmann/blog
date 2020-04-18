@@ -223,4 +223,20 @@ GitHub Actions do not have to use an existing action
 such "hello-world-javascript-action".
 They can also execute shell commands.
 
+## Pushing to GitHub from an Action
+
+This requires configuration Git information including your
+full name, email address, username, and GitHub token.
+
+The token can be obtained from secrets.
+To add it,
+
+- browse the GitHub repo
+- click the "Settings" tab
+- click "Secrets" in the left nav
+- click "Add a new secret"
+- for the name, enter "GH_TOKEN"
+- for the value, paste in your GitHub personal access token
+- click "Add secret"
+
 ## Defining Actions

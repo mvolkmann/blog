@@ -26,6 +26,7 @@ jobs:
           name: 'R. Mark Volkmann'
           email: 'r.mark.volkmann@gmail.com'
           actor: 'mvolkmann'
+          token: '${{ secrets.GH_TOKEN }}'
       - run: npm run deploy
         env:
           CI: true
