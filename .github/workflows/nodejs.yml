@@ -22,10 +22,10 @@ jobs:
       - run: npm ci
       - run: npm run build
       - uses: oleksiyrudenko/gha-git-credentials@v1
-      with:
-        name: 'R. Mark Volkmann'
-        email: 'r.mark.volkmann@gmail.com'
-        actor: 'mvolkmann'
+        with:
+          name: 'R. Mark Volkmann'
+          email: 'r.mark.volkmann@gmail.com'
+          actor: 'mvolkmann'
       - run: npm run deploy
         env:
           CI: true
