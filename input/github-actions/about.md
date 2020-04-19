@@ -437,6 +437,24 @@ Currently there is no way to manually trigger a workflow
 from the GitHub web UI. However, workarounds are possible.
 One workaround is to configure a workflow to be triggered
 when the repository is starred.
+This is done as follows:
+
+```json
+  watch:
+    types: [started]
+```
+
+## Conditional Steps
+
+A step can include an `if` property to make its execution conditional.
+For example, a step can only execute if the workflow was triggered
+by a particular event.
+
+```yaml
+- name: manual trigger
+  if: github.event.action == 'manual_trigger'
+  run: echo "I was manually triggered."
+```
 
 ## Defining Actions
 
