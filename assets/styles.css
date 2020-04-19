@@ -10,7 +10,7 @@ body > main > nav > ul { margin-left: 0; margin-top: 0; }
 
 body > main > nav a { color: var(--accent-color); text-decoration: none; }
 
-body > main > nav li { margin-bottom: 0.5rem; }
+body > main > nav li { margin-top: 0.5rem; }
 
 body > main > section { flex-grow: 1; overflow: auto; padding: 1rem; }
 
@@ -26,10 +26,14 @@ header { background-color: var(--accent-color); color: white; margin: 0; padding
 
 li.active > a { color: purple; font-weight: bold; }
 
+li.ordered > a { color: green; }
+
+li.top > a { font-size: 1.2rem; font-weight: bold; }
+
 nav ul { list-style: none; margin-left: 1rem; margin-top: 0.5rem; padding-left: 0; }
 
-@media (max-width: 600px) { h1 { font-size: 24px; }
-  .hamburger { background-color: transparent; border: none; color: white; display: inline-block; font-size: 24px; }
+@media (max-width: 600px) { h1 { font-size: 1.5rem; }
+  .hamburger { background-color: transparent; border: none; color: white; display: inline-block; font-size: 1.5rem; }
   header { text-align: left; }
   nav { position: absolute; left: -232px; transition: left 0.5s; }
   nav li { margin: 1rem 0; } }
