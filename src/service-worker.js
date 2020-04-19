@@ -1,7 +1,5 @@
 let cacheName;
 
-ESLINT ERROR HERE
-
 async function getServiceWorkerData() {
   try {
     // .eleventy.js writes this file.

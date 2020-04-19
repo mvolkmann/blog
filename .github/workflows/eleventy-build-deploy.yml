@@ -12,6 +12,8 @@ jobs:
         if: github.event_name == 'watch'
         run: echo "I was manually triggered."
       - uses: actions/checkout@v2
+      - name: run shell script
+        run: . ./bin/example.sh
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x

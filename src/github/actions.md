@@ -252,7 +252,9 @@ The action sets this to the time at which it was executed.
 
 ## Viewing Action Results
 
-The "Actions" tab of a GitHub repository is shown below.
+After a workflow is triggered, click the "Actions" tab of the
+GitHub repository to refresh the list of triggered workflows.
+This can be done repeated until the workflow appears.
 
 ![GitHub Actions web UI #1](/blog/assets/github-actions-web-ui-1.png)
 
@@ -268,10 +270,17 @@ Clicking a workflow row displays details about its execution.
 
 Click a job name (ex. "DemoJob") in the left nav to see details.
 This displays information about the steps
-"Set up job", "Complete Job", and
+"Set up job", "Complete job", and
 each named step in the workflow, "Hello" and "Time" in this example.
 Click the disclosure triangle in front of a step name
 to see its detail.
+
+The "Set up job" step sets up
+the cloud environment where the workflow will execute and
+downloads all predefined actions that will executed.
+
+The "Complete job" step tears down the cloud environment,
+stopping any processes that were started.
 
 Here we see the "Set up job" and "Hello" steps expanded.
 
@@ -404,6 +413,13 @@ as follows:
 GitHub Actions do not have to use an existing action
 such "hello-world-javascript-action".
 They can also execute shell commands.
+
+## Step Errors
+
+If a workflow step results in an error,
+subsequent steps will not be executed.
+For example, this could happen if there is
+a code linting error, a compiler error, or a test failure.
 
 ## Using Secrets
 
