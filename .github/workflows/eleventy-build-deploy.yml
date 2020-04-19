@@ -10,6 +10,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: hello world
+        run: echo Hello, World!
       - name: report event
         run: echo github.event_name = ${{ github.event_name}}
       - name: manual trigger
