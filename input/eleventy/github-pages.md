@@ -83,7 +83,7 @@ Here are the steps to create and deploy an 11ty site to GitHub Pages.
    to view the site.
 1. Considering bookmarking this URL.
 
-To make changes to the site:
+To make local changes to the site:
 
 1. Edit site source files.
 1. Start the local eleventy server if it isn't already running
@@ -95,3 +95,17 @@ To make changes to the site:
    In can take 30 seconds or more for changes to appear on the site.
    Running deployments can be viewed at
    <https://github.com/{username}/{repo-name}/deployments>.
+
+To make changes to the site from the GitHub web UI
+and automatically build and deploy the site:
+
+1. Configure GitHub Actions to do the build and deploy on every push.
+   See <https://github/mvolkmann/blog/github/actions>.
+1. Browse the GitHub repository.
+1. Click the "Code" tab.
+1. Navigate to a file to edit.
+1. Click the pencil icon in te upper-right of the file content.
+1. Make changes.
+1. Enter a commit message.
+1. Optionally enter an extended description.
+1. Press the "Commit changes" button.
