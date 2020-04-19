@@ -10,9 +10,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "::set-output name=foo::barnaby"
-        id: setFoo
-      - run: echo ${{steps.setFoo.outputs.foo}}
+      - run: echo "::set-output name=foo::bar"
+        id: generate_qmkpid
+      - run: echo ${{steps.generate_qmkpid.outputs.foo}}
       - name: hello world
         run: echo "Hello, World!"
       - name: report event
