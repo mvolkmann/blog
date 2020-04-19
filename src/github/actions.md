@@ -376,6 +376,29 @@ This workflow runs the following commands:
 TODO: Is there an issue with having more than one workflow file?
 TODO: It seems only one gets executed.
 
+## Multi-line Commands
+
+In this example, there are multiple, consecutive steps
+that each run one command.
+
+```yaml
+- run: npm ci
+- run: npm run lint
+- run: npm run format
+- run: npm run build
+```
+
+Alternatively, this can be written as a single step with multiple commands
+as follows:
+
+```yaml
+- run: |
+    npm ci
+    npm run lint
+    npm run format
+    npm run build
+```
+
 ## Executing Shell Commands
 
 GitHub Actions do not have to use an existing action
