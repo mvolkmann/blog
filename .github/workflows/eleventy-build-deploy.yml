@@ -8,30 +8,21 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: hello world
-        run: echo "Hello, World!"
-      - name: report event
-        run: echo github.event_name = ${{ github.event_name}}
       - name: manual trigger
         if: github.event_name == 'watch'
         run: echo "I was manually triggered."
-      - name: set some output
-        run: echo "::set-output name=foo::bar"
-        id: my_id
-      - name: use some output
-        run: echo ${{steps.my_id.outputs.foo}}
-      #- name: git checkout
-      #  uses: actions/checkout@v2
-      #- name: Node.js setup
-      #  uses: actions/setup-node@v1
-      #  with:
-      #    node-version: 12.x
-      #- name: npm clean install
-      #  run: npm ci
-      #- name: site build
-      #  run: npm run build
-      #- name: site deploy
-      #  uses: peaceiris/actions-gh-pages@v3
-      #  with:
-      #    github_token: ${{ secrets.GH_TOKEN }}
-      #    publish_dir: ./_site
+      - name: git checkout
+        uses: actions/checkout@v2
+      - name: Node.js setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm clean install
+        run: npm ci
+      - name: site build
+        run: npm run build
+      - name: site deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./_site

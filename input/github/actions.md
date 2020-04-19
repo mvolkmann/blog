@@ -444,11 +444,30 @@ This is done as follows:
     types: [started]
 ```
 
+## Output with echo
+
+When running in a Linux environment,
+a step can use the `echo` command to produce output.
+For example:
+
+```yaml
+- name: hello world
+  run: echo "Hello, World!"
+```
+
 ## Conditional Steps
 
 A step can include an `if` property to make its execution conditional.
 For a list of available variables that can be used in the condition,
 see <https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts>.
+
+One example is the name of the event that triggered the workflow.
+The following step outputs this:
+
+```yaml
+- name: report event
+  run: echo github.event_name = ${{ github.event_name}}
+```
 
 For example, a step can execute only if the workflow was triggered
 by a particular event.
@@ -472,14 +491,23 @@ jobs:
 To trigger this workflow, star the repo.
 To trigger it again, unstar and star the repo.
 
+The reported action name will be the workflow name rather than
+a commit message since it was not triggered by a commit.
+
 ## Setting Output
 
 A set can set output that can be used in subsequent steps.
 For example:
 
 ```yaml
-
+- name: set some output
+  run: echo "::set-output name=foo::bar"
+  id: my_id
+- name: use some output
+  run: echo ${{steps.my_id.outputs.foo}}
 ```
+
+This outputs "bar".
 
 ## Defining Actions
 
