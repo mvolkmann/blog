@@ -433,8 +433,12 @@ For more details, see <https://github.com/peaceiris/actions-gh-pages>.
 
 ## Manually Triggering
 
-Currently there is no way to manually trigger a workflow
-from the GitHub web UI. However, workarounds are possible.
+Currently there is no way to manually
+trigger a workflow from the GitHub web UI.
+It is a frequently requested feature, as indicated at
+<https://github.community/t5/GitHub-Actions/GitHub-Actions-Manual-Trigger-Approvals/td-p/31504>.
+
+However, workarounds are possible.
 One workaround is to configure a workflow to be triggered
 when the repository is starred.
 This is done as follows:
