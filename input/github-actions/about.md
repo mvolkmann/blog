@@ -447,7 +447,10 @@ This is done as follows:
 ## Conditional Steps
 
 A step can include an `if` property to make its execution conditional.
-For example, a step can only execute if the workflow was triggered
+For a list of available variables that can be used in the condition,
+see <https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts>.
+
+For example, a step can execute only if the workflow was triggered
 by a particular event.
 
 ```yaml

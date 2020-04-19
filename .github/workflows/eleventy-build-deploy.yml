@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: report event
-        run: echo github.event.action = ${{ github.event.action }}
+        env:
+          GITHUB_EVENT: ${{ toJson(github.event) }}
+        run: echo github.event = ${{ GITHUB_EVENT }}
       - name: manual trigger
         if: github.event.action == 'watch'
         run: echo "I was manually triggered."
