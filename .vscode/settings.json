@@ -24,6 +24,7 @@
     "favicon",
     "forceescape",
     "ghcolors",
+    "gollum",
     "groupby",
     "jstl",
     "luwenjiechn",
@@ -46,6 +47,7 @@
     "tydata",
     "urlencode",
     "urlize",
+    "webhook",
     "webp",
     "wordcount"
   ]

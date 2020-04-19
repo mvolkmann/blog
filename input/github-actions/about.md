@@ -49,6 +49,48 @@ jobs:
 
 This executes on every push to the repository.
 
+The `on` property can be set to one webhook event name or an array of them.
+There are many webhook events that can trigger a workflow to run.
+These are documented at
+<https://help.github.com/en/actions/reference/events-that-trigger-workflows>.
+Some events are triggered by more than one kind of activity.
+When this is the case, a particular activity type can be specified.
+
+| Webhook Event               | Triggered By                                                                                                                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| check_run                   | the "check runs" API that can check code in various ways (ex. linting) is invoked                                                                                                                                  |
+| check_suite                 | a suite of check runs is executed                                                                                                                                                                                  |
+| create                      | a branch or tag is created                                                                                                                                                                                         |
+| delete                      | a branch or tag is deleted                                                                                                                                                                                         |
+| deployment                  | a request to deploy a branch, SHA, or tag is received                                                                                                                                                              |
+| deployment_status           | a deployment status is provided by an HTTP POST request to a GitHub API                                                                                                                                            |
+| fork                        | a repository is forked                                                                                                                                                                                             |
+| gollum                      | a wiki page is created or updated                                                                                                                                                                                  |
+| issue_comment               | an issue comment is created, edited, or deleted                                                                                                                                                                    |
+| issues                      | an issue is opened, edited, deleted, transferred, pinned, unpinned, closed, reopened, assigned, unassigned, labeled, unlabeled, locked, unlocked, milestoned, or demilestoned                                      |
+| label                       | a label is created, edited, or deleted                                                                                                                                                                             |
+| milestone                   | a milestone is created, closed, opened, edited, or deleted                                                                                                                                                         |
+| page_build                  | a GitHub Pages-enabled branch is pushed                                                                                                                                                                            |
+| project                     | a project within a repo is created, updated, closed, reopened, edited, or deleted (see the "Projects tab in a GitHub repo to manage project tasks)                                                                 |
+| project_card                | a project card is created, moved, convered to an issue, edited, or deleted                                                                                                                                         |
+| project_column              | a project column is created, updated, moved, or deleted                                                                                                                                                            |
+| public                      | a private repo is changed to a pull request is opened, assigned, unassigned, labeled, unlabeled, closed, reopened, synchronize(d), ready_for_review, locked, unlocked, review_requested, or review_request_removed |
+| pull_request                | TODO                                                                                                                                                                                                               |
+| pull_request_review         | a pull request review is submitted, edited, or dismissed                                                                                                                                                           |
+| pull_request_review_comment | a pull request review comment is created, edited, or deleted                                                                                                                                                       |
+| push                        | a commit is pushed                                                                                                                                                                                                 |
+| registry_package            | a registry package (?) is published or updated                                                                                                                                                                     |
+| release                     | a release is created, published, unpublished, edited, prereleased, or deleted                                                                                                                                      |
+| status                      | the status of a commit changes                                                                                                                                                                                     |
+| watch                       | a watch (?) is started                                                                                                                                                                                             |
+
+You can also create a "scheduled event" which
+schedules a workflow to run at a certain time interval.
+
+You can also trigger a workflow to run by creating a
+`repository-dispatch` event that is created by
+sending an HTTP POST request to a GitHub API endpoint.
+
 For workflows that will run on a GitHub-hosted server (a.k.a. runner),
 the operating system of the server can be specified.
 This can be the latest version of a particular OS or a specific version.
@@ -80,16 +122,23 @@ Each step (a.k.a. action) is defined by a number of properties.
 | Property Name | Meaning                                                          |
 | ------------- | ---------------------------------------------------------------- |
 | `name`        | step name that appears in the web UI that shows workflow results |
+| `run`         | a shell command to run                                           |
 | `uses`        | a predefined action to use                                       |
 | `with`        | arguments to pass to the action                                  |
 | `id`          | name that will be used to refer to action result properties      |
 
-The property with the name specified by `id`
-is an object with an `outputs` property
+Specify `run` or `uses`, but not both.
+If a step does not have a `name` property,
+a name is created from the value of `run` or `uses`.
+
+The `id` property specifies a property name
+whose value will be an object with an `outputs` property
 that is an object that holds all the output values.
 Actions typically document their outputs.
-In this case the only output is a `time` property
-which is the time at which the action executed.
+In the example above, the action creates an output named `time`
+which can be accessed with `steps.hello.outputs.time`
+because the value of `id` is `hello`.
+The action sets this to the time at which it was executed.
 
 ## Viewing Action Results
 
