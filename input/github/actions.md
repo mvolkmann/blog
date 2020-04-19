@@ -26,6 +26,9 @@ A step is a single task runs a predefined action or a shell command.
 
 Workflows for a repository are configured by YAML files
 in the `.github/workflows` directory.
+For details on the syntax of these files, see
+<https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions>.
+
 Here is a simple example defined in a file named `demo.yml`.
 It uses an action defined at
 <https://github.com/actions/hello-world-javascript-action>.
