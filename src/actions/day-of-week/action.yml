@@ -3,7 +3,7 @@ description: 'outputs the day of the week for today or a given date'
 author: 'mvolkmann'
 inputs:
   date:
-    description: 'a date in the format mm/dd/yyyy'
+    description: 'a date in the format "yyyy-mm-dd" or the string "today"'
     default: 'today'
 outputs:
   dayOfWeek:

@@ -650,5 +650,9 @@ can be defined in that repository.
 When a workflow uses an action, it specify the version to use by
 semantic versioning (major.minor.patch) or just a major version number.
 
-Here is a JavaScript action that outputs the day of the week
+Let's define a JavaScript action that outputs the day of the week
 for the current date or date provided by an input.
+For details on doing this, see
+<https://help.github.com/en/actions/building-actions/creating-a-javascript-action>.
+
+TODO: Add steps and code here.

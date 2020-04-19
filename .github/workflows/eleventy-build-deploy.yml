@@ -18,6 +18,10 @@ jobs:
       - run: npm ci
       - name: get day of week
         uses: ./src/actions/day-of-week
+      - name: get day of week
+        uses: ./src/actions/day-of-week
+        with:
+          date: '1961-4-16'
       #- run: npm run lint
       #- run: npm run format
       #- run: npm run build
