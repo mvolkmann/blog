@@ -22,6 +22,8 @@ A job defines a set up steps
 to run in a given environment (ex. `ubuntu-latest');
 A step is a single task runs a predefined action or a shell command.
 
+A shell command could run a shell script or an `npm` command.
+
 There are over 3,000 predefined actions to choose from,
 cataloged at <https://github.com/actions>
 and <https://github.com/marketplace?type=actions>.
