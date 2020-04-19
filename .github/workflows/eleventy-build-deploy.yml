@@ -8,8 +8,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: get day of week
-        uses: ./src/actions/day-of-week
       - name: manual trigger
         if: github.event_name == 'watch'
         run: echo "I was manually triggered."
@@ -19,12 +17,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run format
-      - run: npm run build
-      - name: site deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./_site
+      - name: get day of week
+        uses: ./src/actions/day-of-week
+      #- run: npm ci
+      #- run: npm run lint
+      #- run: npm run format
+      #- run: npm run build
+      #- name: site deploy
+      #  uses: peaceiris/actions-gh-pages@v3
+      #  with:
+      #    github_token: ${{ secrets.GH_TOKEN }}
+      #    publish_dir: ./_site
