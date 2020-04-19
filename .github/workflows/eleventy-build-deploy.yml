@@ -15,9 +15,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+      - run: npm ci
       - name: get day of week
         uses: ./src/actions/day-of-week
-      #- run: npm ci
       #- run: npm run lint
       #- run: npm run format
       #- run: npm run build
