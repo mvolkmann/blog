@@ -454,9 +454,31 @@ For example, a step can execute only if the workflow was triggered
 by a particular event.
 
 ```yaml
-- name: manual trigger
-  if: github.event.action == 'manual_trigger'
-  run: echo "I was manually triggered."
+name: Demo trigger on watch
+on:
+  push:
+    branches: [master]
+  watch:
+    types: [started]
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: manual trigger
+        if: github.event_name == 'watch'
+        run: echo "I was manually triggered."
+```
+
+To trigger this workflow, star the repo.
+To trigger it again, unstar and star the repo.
+
+## Setting Output
+
+A set can set output that can be used in subsequent steps.
+For example:
+
+```yaml
+
 ```
 
 ## Defining Actions

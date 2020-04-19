@@ -2,17 +2,12 @@ name: Eleventy build and deploy
 on:
   push:
     branches: [master]
-  repository_dispatch:
-    branches: [master]
   watch:
     types: [started]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      #- run: echo "::set-output name=foo::bar"
-      #  id: generate_qmkpid
-      #- run: echo ${{steps.generate_qmkpid.outputs.foo}}
       - name: hello world
         run: echo "Hello, World!"
       - name: report event
@@ -20,6 +15,11 @@ jobs:
       - name: manual trigger
         if: github.event_name == 'watch'
         run: echo "I was manually triggered."
+      - name: set some output
+        run: echo "::set-output name=foo::bar"
+        id: my_id
+      - name: use some output
+        run: echo ${{steps.my_id.outputs.foo}}
       #- name: git checkout
       #  uses: actions/checkout@v2
       #- name: Node.js setup
