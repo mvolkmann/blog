@@ -80,12 +80,15 @@ Let's review the most commonly used parts of Markdown syntax.
 ## Enabling HTML
 
 Markdownlint reports errors for HTML tags in Markdown files.
-This can be disabled by creating the file `.markdownlint.json`
+It also reports an error if the first line in the file is not an `h1`,
+represented by starting with `#` in Markdown.
+These can be disabled by creating the file `.markdownlint.json`
 containing the following:
 
 ```json
 {
   "default": true,
-  "MD033": false
+  "MD033": false,
+  "MD041": false
 }
 ```
