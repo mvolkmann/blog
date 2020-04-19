@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: report event
         env:
-          GITHUB_EVENT: ${{ toJson(github.event) }}
-        run: echo github.event = ${{ GITHUB_EVENT }}
+          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+        run: echo github.event = ${{ GITHUB_CONTEXT }}
       - name: manual trigger
         if: github.event.action == 'watch'
         run: echo "I was manually triggered."
