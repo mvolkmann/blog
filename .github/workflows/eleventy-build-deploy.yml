@@ -13,14 +13,13 @@ jobs:
       #- run: echo "::set-output name=foo::bar"
       #  id: generate_qmkpid
       #- run: echo ${{steps.generate_qmkpid.outputs.foo}}
-      #- run: echo "Hello, Mark!"
       - name: hello world
         run: echo "Hello, World!"
       - name: report event
         run: echo github.event_name = ${{ github.event_name}}
-      #- name: manual trigger
-      #  if: github.event.action == 'watch'
-      #  run: echo "I was manually triggered."
+      - name: manual trigger
+        if: github.event_name == 'watch'
+        run: echo "I was manually triggered."
       #- name: git checkout
       #  uses: actions/checkout@v2
       #- name: Node.js setup
