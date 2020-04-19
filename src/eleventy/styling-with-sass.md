@@ -23,11 +23,11 @@ an automated part of the 11ty build process is to follow these steps:
 1. Enter `npm install -D node-sass npm-run-all`.
 1. Modify `package.json` to contain the following npm scripts.
    This assumes that the input directory configured in `.eleventy.js`
-   is named `input`.
+   is named `src`.
 
 ```json
 "build": "npm run sass && eleventy",
-"sass": "node-sass -o _site/assets --output-style compact input/sass",
+"sass": "node-sass -o _site/assets --output-style compact src/sass",
 "serve": "npm-run-all sass --parallel watch:*",
 "watch:eleventy": "eleventy --serve",
 "watch:sass": "npm run sass -- --watch"

@@ -23,10 +23,10 @@
     "clean": "rm -rf _site",
     "commit": "git commit -av",
     "deploy": "gh-pages -d _site",
-    "format": "prettier --write 'input/**/*.{css,html,js}'",
-    "lint": "eslint --fix --quiet input --ext .js",
+    "format": "prettier --write 'src/**/*.{css,html,js}'",
+    "lint": "eslint --fix --quiet src --ext .js",
     "push": "git push origin master",
-    "sass": "node-sass -o _site/assets --output-style compact input/sass",
+    "sass": "node-sass -o _site/assets --output-style compact src/sass",
     "serve": "npm-run-all sass --parallel watch:*",
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "npm run sass -- --watch"

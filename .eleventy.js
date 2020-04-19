@@ -64,9 +64,9 @@ module.exports = eleventyConfig => {
 
   // Copies files in a given directory to output directory
   // without performing any processing on them.
-  eleventyConfig.addPassthroughCopy('input/assets');
+  eleventyConfig.addPassthroughCopy('src/assets');
 
-  eleventyConfig.addPassthroughCopy('input/service-worker.js');
+  eleventyConfig.addPassthroughCopy('src/service-worker.js');
 
   eleventyConfig.addPlugin(navigationPlugin);
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
@@ -112,9 +112,7 @@ module.exports = eleventyConfig => {
   }
 
   return {
-    dir: {
-      input: 'input'
-    },
+    dir: {input: 'src'},
     markdownTemplateEngine: 'njk', // used in Markdown files
     pathPrefix: '/blog/', // prepended to all URL paths
     templateFormats: ['11ty.js', 'html', 'md', 'njk']
