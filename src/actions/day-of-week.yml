@@ -1,0 +1,13 @@
+name: 'Day of Week'
+description: 'outputs the day of the week for today or a given date'
+author 'mvolkmann'
+inputs:
+  date:
+    description: 'a date in the format mm/dd/yyyy'
+    default: 'today'
+outputs:
+  dayOfWeek:
+    description: 'a day of the week'
+runs:
+  using: 'node12'
+  main: 'day-of-week.js'

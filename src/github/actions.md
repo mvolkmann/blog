@@ -21,6 +21,14 @@ A "workflow" defines a set of jobs using a YAML file.
 A job defines a set up steps
 to run in a given environment (ex. `ubuntu-latest');
 A step is a single task runs a predefined action or a shell command.
+
+There are over 3,000 predefined actions to choose from,
+cataloged at <https://github.com/actions>
+and <https://github.com/marketplace?type=actions>.
+Many of these are commercial, but their are over 200 that have a free tier.
+
+TODO: Are there some outside of the marketplace that are totally free?
+
 A shell command can execute a shell script that exists in the repository.
 
 ## Configuring Workflows
@@ -295,6 +303,40 @@ In this example the "Time" step shows the
 time at which the "Hello" step was executed.
 
 ![GitHub Actions web UI #2](/blog/assets/github-actions-web-ui-4.png)
+
+## Popular Predefined Actions
+
+Used by many workflows:
+
+- `actions/checkout@v2`
+
+Used by the "Go" workflow:
+
+- `actions/setup-go@v1`
+
+Used by the "Java with Gradle" and "Java with Maven" workflows:
+
+- `actions/setup-java@v1`
+
+Used by the "Node.js" and "Publish Node.js package" workflows:
+
+- `actions/setup-node@v1`
+
+Used by the "Python application", "Python package",
+and "Publish Python package" workflows:
+
+- `actions/setup-python@v1`
+
+Used by the "Deploy to Amazon ECS" workflow for AWS:
+
+- `aws-actions/configure-aws-credentials@v1`
+- `aws-actions/amazon-ecr-login@v1`
+- `aws-actions/amazon-ecs-render-task-definition@v1`
+- `aws-actions/amazon-ecs-deploy-task-definition@v1`
+
+Used by the "Build and Deploy to GKE" workflow for GCP:
+
+- `GoogleCloudPlatform/github-actions/setup-gcloud@master`
 
 ## Workflow Templates
 
@@ -577,4 +619,28 @@ Click them one at a time to see their results.
 
 ## Defining Actions
 
-Content for this topic is coming soon!
+An action is defined by a YAML file
+that describes an object with the following properties:
+
+- `name`: the action name
+- `description`: a description of the action
+- `author`: GitHub username of the action author
+- `inputs`: an object where the keys are input names and
+  the values are objects with `description` and `default` properties
+- `runs`: an object with `using` (describes the runtime for `main`)
+  and `main` (provides the code to execute) properties
+
+Actions can be implemented in a Docker container
+using any programming language supported by Docker.
+They can also be implemented outside of a Docker container using JavaScript.
+
+Actions that are intended to be shared across projects
+should be defined in their own GitHub repository.
+Actions that are intended to be used by only a single repository
+can be defined in that repository.
+
+When a workflow uses an action, it specify the version to use by
+semantic versioning (major.minor.patch) or just a major version number.
+
+Here is a JavaScript action that outputs the day of the week
+for the current date or date provided by an input.

@@ -8,6 +8,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: get day of week
+        uses: ./src/actions/day-of-week
       - name: manual trigger
         if: github.event_name == 'watch'
         run: echo "I was manually triggered."
