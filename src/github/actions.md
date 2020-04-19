@@ -29,8 +29,6 @@ Many of these are commercial, but their are over 200 that have a free tier.
 
 TODO: Are there some outside of the marketplace that are totally free?
 
-A shell command can execute a shell script that exists in the repository.
-
 ## Configuring Workflows
 
 Workflows for a repository are configured by YAML files
@@ -549,6 +547,16 @@ For example:
 ```yaml
 - name: hello world
   run: echo "Hello, World!"
+```
+
+## Shell Scripts
+
+A step execute a shell script that exists in the repository.
+For example:
+
+```yaml
+- name: run shell script
+  run: . ./bin/example.sh
 ```
 
 ## Conditional Steps
