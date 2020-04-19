@@ -223,13 +223,11 @@ GitHub Actions do not have to use an existing action
 such "hello-world-javascript-action".
 They can also execute shell commands.
 
-## Pushing to GitHub from an Action
+## Using Secrets
 
-This requires configuration Git information including your
-full name, email address, username, and GitHub token.
-
-The token can be obtained from secrets.
-To add it,
+To use secret information like passwords and tokens in a workflow,
+create GitHub secrets.
+To add a secret to a GitHub repo:
 
 - browse the GitHub repo
 - click the "Settings" tab
@@ -238,5 +236,43 @@ To add it,
 - for the name, enter "GH_TOKEN"
 - for the value, paste in your GitHub personal access token
 - click "Add secret"
+
+Secrets can then be referenced by name in a workflow
+with the syntax `${{ secrets.name }}`
+where `name` is the secret name.
+This is used in the following workflow.
+
+## Building and Publishing an Eleventy Site
+
+Here is a workflow file that builds and deploys an Eleventy site
+on every push.
+
+```yaml
+name: Eleventy build and deploy
+on:
+  push:
+    branches: [master]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v2
+      - name: Node.js setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm clean install
+        run: npm ci
+      - name: site build
+        run: npm run build
+      - name: site deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./_site
+```
+
+For more details, see <https://github.com/peaceiris/actions-gh-pages>.
 
 ## Defining Actions
