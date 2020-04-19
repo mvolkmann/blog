@@ -1,5 +1,5 @@
 name: My Demo
-on: [push]
+on: push
 jobs:
   build:
     name: DemoJob

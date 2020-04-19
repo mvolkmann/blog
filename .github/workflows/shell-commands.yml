@@ -5,9 +5,8 @@ jobs:
     name: ShellJob
     runs-on: ubuntu-latest
     steps:
-      - id: working-dir
+      - name: show working directory
         run: pwd
-      - id: list-files
+      - name: list files
         run: ls -l
-      - id: date
-        run: date
+      - run: date

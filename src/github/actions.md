@@ -21,6 +21,7 @@ A "workflow" defines a set of jobs using a YAML file.
 A job defines a set up steps
 to run in a given environment (ex. `ubuntu-latest');
 A step is a single task runs a predefined action or a shell command.
+A shell command can execute a shell script that exists in the repository.
 
 ## Configuring Workflows
 
@@ -414,12 +415,19 @@ GitHub Actions do not have to use an existing action
 such "hello-world-javascript-action".
 They can also execute shell commands.
 
-## Step Errors
+## Workflow Errors
 
 If a workflow step results in an error,
 subsequent steps will not be executed.
 For example, this could happen if there is
 a code linting error, a compiler error, or a test failure.
+
+If there are any errors, the repository owner
+will receive an email with the subject
+"[{username}/{repo-name}] Run failed: {workflow-name} - {branch-name}".
+The email will links to see the results.
+The link containing the failed job name is more informative
+than the link containing "View results".
 
 ## Using Secrets
 
