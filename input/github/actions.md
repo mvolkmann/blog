@@ -1,8 +1,8 @@
 ---
 css: '/blog/assets/github-actions.css'
 eleventyNavigation:
-  key: About
-  parent: GitHub Actions
+  key: GitHub Actions
+  parent: GitHub
 layout: layout.njk
 ---
 
