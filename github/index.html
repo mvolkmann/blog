@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><title>GitHub</title><meta charset="utf-8"><meta name="description" content="11ty site documenting 11ty"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><script>// Only register the service worker when not on localhost.
+      if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/blog/service-worker.js');
+        })
+      }
+
+      let nav;
+      let navOpen = false;
+
+      function toggleMenu() {
+        navOpen = !navOpen;
+        nav.style.left = navOpen ?
+          0 :
+          '-' + nav.getBoundingClientRect().width + 'px';
+        nav
+      }
+
+      window.onload = () => {
+        nav = document.querySelector('nav');
+        const scrollTop = sessionStorage.getItem('navScroll');
+        if (scrollTop) nav.scrollTop = scrollTop;
+
+        nav.onscroll = () => {
+          sessionStorage.setItem('navScroll', nav.scrollTop);
+        };
+      }</script></head><body><header><h1><button class="hamburger" onclick="toggleMenu()">&#x2630;</button> Mark Volkmann's Blog</h1></header><main><nav onscroll="navScrolled()"><ul><li class="ordered" class="top"><a href="/blog/">Welcome</a></li><li class="top"><a href="/blog/eleventy/">Eleventy ></a></li><li class="active" class="top"><a href="/blog/github/">GitHub ></a><ul><li><a href="/blog/github/actions/">GitHub Actions</a></li><li><a href="/blog/github/projects/">GitHub Projects</a></li></ul></li><li class="top"><a href="/blog/markdown/">Markdown</a></li><li class="top"><a href="/blog/yaml/">YAML</a></li></ul></nav><section><h2>GitHub</h2></section></main><footer>&copy; R. Mark Volkmann, 2020</footer></body></html>
