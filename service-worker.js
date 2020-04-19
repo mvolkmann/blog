@@ -18,11 +18,11 @@ async function getServiceWorkerData() {
   }
 }
 
-self.addEventListener('install', async event => {
+self.addEventListener('install', async () => {
   // There is no need to do anything here.
 });
 
-self.addEventListener('activate', async event => {
+self.addEventListener('activate', async () => {
   // We are getting this data in the activate handler
   // because if we do it in the install handler
   // it sometimes isn't available yet here.
