@@ -76,3 +76,16 @@ Let's review the most commonly used parts of Markdown syntax.
 - task list:
   - `- [ ] some uncompleted task`
   - `- [x] some completed task`
+
+## Enabling HTML
+
+Markdownlint reports errors for HTML tags in Markdown files.
+This can be disabled by creating the file `.markdownlint.json`
+containing the following:
+
+```json
+{
+  "default": true,
+  "MD033": false
+}
+```

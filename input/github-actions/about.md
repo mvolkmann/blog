@@ -56,33 +56,140 @@ These are documented at
 Some events are triggered by more than one kind of activity.
 When this is the case, a particular activity type can be specified.
 
-| Webhook Event               | Triggered By                                                                                                                                                                                                       |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| check_run                   | the "check runs" API that can check code in various ways (ex. linting) is invoked                                                                                                                                  |
-| check_suite                 | a suite of check runs is executed                                                                                                                                                                                  |
-| create                      | a branch or tag is created                                                                                                                                                                                         |
-| delete                      | a branch or tag is deleted                                                                                                                                                                                         |
-| deployment                  | a request to deploy a branch, SHA, or tag is received                                                                                                                                                              |
-| deployment_status           | a deployment status is provided by an HTTP POST request to a GitHub API                                                                                                                                            |
-| fork                        | a repository is forked                                                                                                                                                                                             |
-| gollum                      | a wiki page is created or updated                                                                                                                                                                                  |
-| issue_comment               | an issue comment is created, edited, or deleted                                                                                                                                                                    |
-| issues                      | an issue is opened, edited, deleted, transferred, pinned, unpinned, closed, reopened, assigned, unassigned, labeled, unlabeled, locked, unlocked, milestoned, or demilestoned                                      |
-| label                       | a label is created, edited, or deleted                                                                                                                                                                             |
-| milestone                   | a milestone is created, closed, opened, edited, or deleted                                                                                                                                                         |
-| page_build                  | a GitHub Pages-enabled branch is pushed                                                                                                                                                                            |
-| project                     | a project within a repo is created, updated, closed, reopened, edited, or deleted (see the "Projects tab in a GitHub repo to manage project tasks)                                                                 |
-| project_card                | a project card is created, moved, convered to an issue, edited, or deleted                                                                                                                                         |
-| project_column              | a project column is created, updated, moved, or deleted                                                                                                                                                            |
-| public                      | a private repo is changed to a pull request is opened, assigned, unassigned, labeled, unlabeled, closed, reopened, synchronize(d), ready_for_review, locked, unlocked, review_requested, or review_request_removed |
-| pull_request                | TODO                                                                                                                                                                                                               |
-| pull_request_review         | a pull request review is submitted, edited, or dismissed                                                                                                                                                           |
-| pull_request_review_comment | a pull request review comment is created, edited, or deleted                                                                                                                                                       |
-| push                        | a commit is pushed                                                                                                                                                                                                 |
-| registry_package            | a registry package (?) is published or updated                                                                                                                                                                     |
-| release                     | a release is created, published, unpublished, edited, prereleased, or deleted                                                                                                                                      |
-| status                      | the status of a commit changes                                                                                                                                                                                     |
-| watch                       | a user watches or stars the repository?                                                                                                                                                                            |
+<table>
+  <tr>
+    <th>Webhook Event</th>
+    <th>Triggered By</th>
+  </tr>
+  <tr>
+    <td>check_run</td>
+    <td>
+      the "check runs" API that can check code in various ways
+      (ex. linting) is invoked
+    </td>
+  </tr>
+  <tr>
+    <td>check_suite</td>
+    <td>a suite of check runs is executed</td>
+  </tr>
+  <tr>
+    <td>create</td>
+    <td>a branch or tag is created</td>
+  </tr>
+  <tr>
+    <td>delete</td>
+    <td>a branch or tag is deleted</td>
+  </tr>
+  <tr>
+    <td>deployment</td>
+    <td>a request to deploy a branch, SHA, or tag is received</td>
+  </tr>
+  <tr>
+    <td>deployment_status</td>
+    <td>
+      a deployment status is provided by an HTTP POST request to a GitHub API
+    </td>
+  </tr>
+  <tr>
+    <td>fork</td>
+    <td>a repository is forked</td>
+  </tr>
+  <tr>
+    <td>gollum</td>
+    <td>a wiki page is created or updated</td>
+  </tr>
+  <tr>
+    <td>issue_comment</td>
+    <td>an issue comment is created, edited, or deleted</td>
+  </tr>
+  <tr>
+    <td>issues</td>
+    <td>
+      an issue is opened, edited, deleted, transferred, pinned, unpinned,
+      closed, reopened, assigned, unassigned, labeled, unlabeled,
+      locked, unlocked, milestoned, or demilestoned
+    </td>
+  </tr>
+  <tr>
+    <td>label</td>
+    <td>a label is created, edited, or deleted</td>
+  </tr>
+  <tr>
+    <td>milestone</td>
+    <td>a milestone is created, closed, opened, edited, or deleted</td>
+  </tr>
+  <tr>
+    <td>page_build</td>
+    <td>a GitHub Pages-enabled branch is pushed</td>
+  </tr>
+  <tr>
+    <td>project</td>
+    <td>
+      a project within a repo is created, updated,
+      closed, reopened, edited, or deleted
+      (see the "Projects tab in a GitHub repo to manage project tasks)
+    </td>
+  </tr>
+  <tr>
+    <td>project_card</td>
+    <td>
+      a project card is created, moved, converted to an issue,
+      edited, or deleted
+    </td>
+  </tr>
+  <tr>
+    <td>project_column</td>
+    <td>a project column is created, updated, moved, or deleted</td>
+  </tr>
+  <tr>
+    <td>public</td>
+    <td>
+      a private repo is changed to a pull request is opened,
+      assigned, unassigned, labeled, unlabeled, closed, reopened,
+      synchronize(d), ready_for_review, locked, unlocked,
+      review_requested, or review_request_removed
+    </td>
+  </tr>
+  <tr>
+    <td>pull_request</td>
+    <td>
+      a pull request is opened, assigned, unassigned, labeled, unlabeled,
+      edited, closed, reopened, synchronize(d), ready_for_review,
+      locked, unlocked, review_requested, or review_request_removed
+    </td>
+  </tr>
+  <tr>
+    <td>pull_request_review</td>
+    <td>a pull request review is submitted, edited, or dismissed</td>
+  </tr>
+  <tr>
+    <td>pull_request_review_comment</td>
+    <td>a pull request review comment is created, edited, or deleted</td>
+  </tr>
+  <tr>
+    <td>push</td>
+    <td>a commit is pushed</td>
+  </tr>
+  <tr>
+    <td>registry_package</td>
+    <td>a registry package (?) is published or updated</td>
+  </tr>
+  <tr>
+    <td>release</td>
+    <td>
+      a release is created, published, unpublished, edited,
+      prereleased, or deleted
+    </td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>the status of a commit changes</td>
+  </tr>
+  <tr>
+    <td>watch</td>
+    <td>a user watches or stars the repository?</td>
+  </tr>
+</table>
 
 You can also create a "scheduled event" which
 schedules a workflow to run at a certain time interval.
@@ -323,6 +430,13 @@ jobs:
 ```
 
 For more details, see <https://github.com/peaceiris/actions-gh-pages>.
+
+## Manually Triggering
+
+Currently there is no way to manually trigger a workflow
+from the GitHub web UI. However, workarounds are possible.
+One workaround is to configure a workflow to be triggered
+when the repository is starred.
 
 ## Defining Actions
 
