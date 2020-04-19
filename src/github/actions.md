@@ -563,6 +563,18 @@ For example:
 
 This outputs "bar".
 
+## Multiple Workflows
+
+A repository can define any number of workflows
+by creating multiple YAML files in the `.github/workflows` directory.
+
+An event can trigger any number of workflows.
+Each triggered workflow appears in the "Actions" tab
+of the GitHub web UI for the repository as a separate entry.
+They will all have the same title which is the commit comment.
+Below each title is the workflow name which is what distinguishes them.
+Click them one at a time to see their results.
+
 ## Defining Actions
 
 Content for this topic is coming soon!
