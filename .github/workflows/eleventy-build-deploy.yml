@@ -1,6 +1,8 @@
 name: Eleventy build and deploy
 on:
-  [push, repository_dispatch]:
+  push:
+    branches: [master]
+  repository_dispatch:
     branches: [master]
 jobs:
   build-and-deploy:
