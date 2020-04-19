@@ -655,4 +655,8 @@ for the current date or date provided by an input.
 For details on doing this, see
 <https://help.github.com/en/actions/building-actions/creating-a-javascript-action>.
 
+TODO: See the part where you are supposed to check-in the node_modules directory
+in order to have access to packages like @actions/core and @actions/github.
+TODO: What other @actions packages are available?
+
 TODO: Add steps and code here.
