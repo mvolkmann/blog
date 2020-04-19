@@ -82,7 +82,7 @@ When this is the case, a particular activity type can be specified.
 | registry_package            | a registry package (?) is published or updated                                                                                                                                                                     |
 | release                     | a release is created, published, unpublished, edited, prereleased, or deleted                                                                                                                                      |
 | status                      | the status of a commit changes                                                                                                                                                                                     |
-| watch                       | a watch (?) is started                                                                                                                                                                                             |
+| watch                       | a user watches or stars the repository?                                                                                                                                                                            |
 
 You can also create a "scheduled event" which
 schedules a workflow to run at a certain time interval.
