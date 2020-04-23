@@ -22,11 +22,11 @@ jobs:
         uses: ./src/actions/day-of-week
         with:
           date: '1961-4-16'
-      #- run: npm run lint
-      #- run: npm run format
-      #- run: npm run build
-      #- name: site deploy
-      #  uses: peaceiris/actions-gh-pages@v3
-      #  with:
-      #    github_token: ${{ secrets.GH_TOKEN }}
-      #    publish_dir: ./_site
+      - run: npm run lint
+      - run: npm run format
+      - run: npm run build
+      - name: site deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./_site
