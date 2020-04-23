@@ -1,4 +1,5 @@
 ---
+css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: GitHub Extensions
   parent: GitHub
@@ -17,3 +18,7 @@ Recommended extensions to achieve this include:
 1. npmhub - introspects dependencies in package.json and display links and description for each dependency below the package.json content
 
 To download and install these, browse <https://chrome.google.com/webstore/>.
+
+The end result is that browsing a GitHub repo can look like the following:
+
+![GitHub with extensions](/blog/assets/github-with-extensions.png)
