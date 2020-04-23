@@ -238,13 +238,14 @@ to run on a server that uses a different operating system.
 
 Each step (a.k.a. action) is defined by a number of properties.
 
-| Property Name | Meaning                                                          |
-| ------------- | ---------------------------------------------------------------- |
-| `name`        | step name that appears in the web UI that shows workflow results |
-| `run`         | a shell command to run                                           |
-| `uses`        | a predefined action to use                                       |
-| `with`        | arguments to pass to the action                                  |
-| `id`          | name that will be used to refer to action result properties      |
+| Property Name | Meaning                                                                  |
+| ------------- | ------------------------------------------------------------------------ |
+| `name`        | step name that appears in the web UI that shows workflow results         |
+| `run`         | a shell command to run                                                   |
+| `uses`        | a predefined action to use                                               |
+| `with`        | arguments to pass to the action                                          |
+| `id`          | name that will be used to refer to action result properties              |
+| `needs`       | step name (or array of them) that must completed before this step begins |
 
 Specify `run` or `uses`, but not both.
 If a step does not have a `name` property,
