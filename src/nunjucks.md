@@ -1,7 +1,6 @@
 ---
 eleventyNavigation:
   key: Nunjucks
-  parent: Eleventy
 layout: layout.njk
 tags: eleventy
 ---

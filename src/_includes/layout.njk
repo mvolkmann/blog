@@ -74,7 +74,7 @@
       </nav>
       
       <section>
-        <h2>{{ eleventyNavigation.key }}</h2> <!-- uses a variable defined in front matter -->
+        <h2>{{ eleventyNavigation.key }} {{extraTitle}}</h2>
         <!-- Page content is inserted here. -->
         {{ content | safe }}
       </section>

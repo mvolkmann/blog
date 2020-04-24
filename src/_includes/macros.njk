@@ -10,11 +10,19 @@ in order to create a tree of links.
   #}
   {% set active = entry.url === page.url %}
   {% set hasOrder = entry.url === page.url %}
-  <li
-    {% if active %} class="active"{% endif %}
-    {% if entry.order %} class="ordered"{% endif %}
-    {% if not entry.parent %} class="top"{% endif %}
-  >
+
+  {% set class = "" %}
+  {% if active %}
+    {% set class = class + " active" %}
+  {% endif %}
+  {% if entry.order %}
+    {% set class = class + " ordered" %}
+  {% endif %}
+  {% if not entry.parent %}
+    {% set class = class + " top" %}
+  {% endif %}
+
+  <li class="{{class}}">
     <a href="{{ entry.url | url }}">
       {{ entry.title }}
       {% if entry.children.length %} >{% endif %}
