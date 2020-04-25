@@ -1,0 +1,18 @@
+name: GitHub Project changes
+on: project
+jobs:
+  project-change:
+    runs-on: ubuntu-latest
+    steps:
+      - name: email on project change
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: blog project change
+          body: A change was detected in the project board of ${{github.repository}}. See <a href="https://github.com/mvolkmann/blog/projects/3">here</a>.
+          to: r.mark.volkmann@gmail.com
+          from: Mark Volkmann
+          content_type: text/html
