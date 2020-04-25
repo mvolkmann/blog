@@ -560,6 +560,58 @@ For example:
   run: . ./bin/example.sh
 ```
 
+## Sending Email
+
+A step can send an email.
+For example, this workflow sends an email
+when a project in the repository changes.
+
+```yaml
+name: GitHub Project changes
+on: [project, project_card, project_column]
+jobs:
+  project-change:
+    runs-on: ubuntu-latest
+    steps:
+      - name: email on project change
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: blog project change
+          body: A change was detected in the project board of ${{github.repository}}. See <a href="https://github.com/mvolkmann/blog/projects/3">here</a>.
+          to: r.mark.volkmann@gmail.com
+          from: Mark Volkmann
+          content_type: text/html
+```
+
+The requires adding secrets with the names `MAIL_USERNAME` and `MAIL_PASSWORD`.
+These steps assume that GMail is being used.
+
+1. Browse <https://myaccount.google.com/>.
+1. Click "Security" in the left nav.
+1. In the "Signing in to Google" panel, click "App passwords".
+1. In the "Select app" drop-down at the bottom, select "Mail".
+1. In the "Select device" drop-down, select your current device type.
+1. Press the "GENERATE" button.
+1. Copy the displayed password.
+1. Browse the GitHub repository for the workflow being created.
+1. Click the "Settings" tab.
+1. Click "Secrets" in the left nav.
+1. Click "Add a new secret".
+1. Enter "MAIL_USERNAME" for the name.
+1. Enter your Google username.
+1. Press the "Add secret" button.
+1. Click "Add a new secret".
+1. Enter "MAIL_PASSWORD" for the name.
+1. Paste the generated password for the value.
+1. Press the "Add secret" button.
+
+For more detail in the `action-send-mail` action,
+see <https://github.com/dawidd6/action-send-mail>.
+
 ## Conditional Steps
 
 A step can include an `if` property to make its execution conditional.

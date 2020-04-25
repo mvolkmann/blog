@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: email on project change
+        id: projectChange
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
@@ -12,7 +13,11 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           subject: blog project change
-          body: A change was detected in the project board of ${{github.repository}}. See <a href="https://github.com/mvolkmann/blog/projects/3">here</a>.
+          body: >
+            A change was detected in the project board of ${{github.repository}}.
+            See <a href="https://github.com/mvolkmann/blog/projects/3">here</a>.
+
+            Outputs are ${{ steps.projectChange.outputs }}.
           to: r.mark.volkmann@gmail.com
           from: Mark Volkmann
           content_type: text/html
