@@ -4,7 +4,9 @@ jobs:
   project-change:
     runs-on: ubuntu-latest
     steps:
-      - name: email on project change
+      - name: echo details
+        run: echo ${{ toJson(github)) }}
+      - name: email summary
         id: projectChange
         uses: dawidd6/action-send-mail@v2
         with:
@@ -18,19 +20,15 @@ jobs:
             <a href="https://github.com/mvolkmann/blog/projects/3">project board</a>
             of the GitHub repository ${{github.repository}}.
             <br>
-            The event name was ${{ github.event_name }}.
+            updated by ${{ github.actor }} at ${{ github.event.project_card.updated_at }}
             <br>
-            event.action = ${{ github.event.action}}.
+            event name = ${{ github.event_name }}
             <br>
-            event.changes = ${{ toJson(github.event.changes) }}.
+            event action = ${{ github.event.action}}
             <br>
-            event.project_card.note = ${{ toJson(github.event.project_card.note) }}.
+            card note = ${{ github.event.project_card.note }}
             <br>
-            event.project_card.updated_at = ${{ toJson(github.event.project_card.updated_at) }}.
-            <br>
-            updated by ${{ github.actor }}
-            <br>
-            github = ${{ toJson(github) }}
+            event changes = ${{ toJson(github.event.changes) }}
           to: r.mark.volkmann@gmail.com
           from: Mark Volkmann
           content_type: text/html
