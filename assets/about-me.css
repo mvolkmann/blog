@@ -1,3 +1,7 @@
-img { float: left; margin-right: 1rem; width: 300px; }
+.head-shot { height: 250px; }
 
-p { font-size: 1.5rem; }
+img { float: left; margin-right: 1rem; height: 30px; }
+
+main { display: block !important; overflow: scroll !important; }
+
+p { font-size: 1.2rem; }
