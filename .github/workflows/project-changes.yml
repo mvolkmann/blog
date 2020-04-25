@@ -4,8 +4,10 @@ jobs:
   project-change:
     runs-on: ubuntu-latest
     steps:
-      - name: echo details
-        run: echo "${{ toJson(github) }}"
+      - name: dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: email summary
         id: projectChange
         uses: dawidd6/action-send-mail@v2

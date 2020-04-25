@@ -560,6 +560,28 @@ For example:
   run: . ./bin/example.sh
 ```
 
+## Contexts
+
+A large amount of context information is available in workflows.
+It is stored in the following context objects:
+`env`, `github`, `job`, `matrix`, `needs`,
+`runner`, `secrets`, `steps`, and `strategy`.
+To learn more about these, see
+<https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts>.
+
+To output the data in a particular context using a GitHub Actions step,
+use the `toJson` function to put the JSON representation of the object
+in an environment variable
+and then use an `echo` shell command to output it.
+For example:
+
+```yaml
+- name: Dump GitHub context
+  env:
+    GITHUB_CONTEXT: ${{ toJson(github) }}
+  run: echo "$GITHUB_CONTEXT"
+```
+
 ## Sending Email
 
 A step can send an email.
