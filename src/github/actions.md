@@ -7,29 +7,30 @@ layout: topic-layout.njk
 ---
 
 GitHub Actions enable registering "jobs" to run on a cloud server
-in response to GitHub commands completing.
+in response to GitHub events.
 The cloud server must have the GitHub Actions runner application is installed.
 GitHub provides these servers for free,
 but it is also possible to use your on servers.
 
-For example, an workflow can build an application after every push.
+For example, a workflow can build an application
+after every push to given branches.
 This can include running linters, code formatters, and tests.
 Executed workflows and their output appear in the
-"Actions" tab of the GitHub repository.
+"Actions" tab of each GitHub repository.
 
 A "workflow" defines a set of jobs using a YAML file.
-A job defines a set up steps
-to run in a given environment (ex. `ubuntu-latest');
-A step is a single task runs a predefined action or a shell command.
+A "job" defines a set up steps to run
+in given environments (ex. `ubuntu-latest`);
+A "step" is a single task runs a predefined action or a shell command.
 
-A shell command could run a shell script or an `npm` command.
+A shell command can run a shell script or
+a CLI command such as those provided by `npm`.
 
 There are over 3,000 predefined actions to choose from,
 cataloged at <https://github.com/actions>
 and <https://github.com/marketplace?type=actions>.
-Many of these are commercial, but their are over 200 that have a free tier.
-
-TODO: Are there some outside of the marketplace that are totally free?
+Many of these are commercial,
+but there are over 200 that have a free tier.
 
 ## Configuring Workflows
 
@@ -41,25 +42,27 @@ For details on the syntax of these files, see
 Here is a simple example defined in a file named `demo.yml`.
 It uses an action defined at
 <https://github.com/actions/hello-world-javascript-action>.
+The code that implements actions is automatically retrieved
+from their GitHub repositories.
 
 ```yaml
-name: My Demo
+name: My Demo # workflow name
 on: [push]
 jobs:
-  build: # a job id
-    name: DemoJob # a job name
+  build: # job id
+    name: DemoJob # job name
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        id: hello
+        id: hello # used to refer to output
         uses: actions/hello-world-javascript-action@master
-        with:
+        with: # specifies arguments to the action
           who-to-greet: 'Mark Volkmann'
       - name: Time
         run: echo 'The time was ${{ steps.hello.outputs.time }}.'
 ```
 
-This executes on every push to the repository.
+This executes on every push to the repository on any branch.
 
 The `on` property can be set to one webhook event name or an array of them.
 There are many webhook events that can trigger a workflow to run.
@@ -74,48 +77,48 @@ When this is the case, a particular activity type can be specified.
     <th>Triggered By</th>
   </tr>
   <tr>
-    <td>check_run</td>
+    <td class="bold">check_run</td>
     <td>
-      the "check runs" API that can check code in various ways
-      (ex. linting) is invoked
+      the "check runs" API is invoked;
+      can check code in various ways (ex. linting)
     </td>
   </tr>
   <tr>
-    <td>check_suite</td>
+    <td class="bold">check_suite</td>
     <td>a suite of check runs is executed</td>
   </tr>
   <tr>
-    <td>create</td>
+    <td class="bold">create</td>
     <td>a branch or tag is created</td>
   </tr>
   <tr>
-    <td>delete</td>
+    <td class="bold">delete</td>
     <td>a branch or tag is deleted</td>
   </tr>
   <tr>
-    <td>deployment</td>
+    <td class="bold">deployment</td>
     <td>a request to deploy a branch, SHA, or tag is received</td>
   </tr>
   <tr>
-    <td>deployment_status</td>
+    <td class="bold">deployment_status</td>
     <td>
       a deployment status is provided by an HTTP POST request to a GitHub API
     </td>
   </tr>
   <tr>
-    <td>fork</td>
+    <td class="bold">fork</td>
     <td>a repository is forked</td>
   </tr>
   <tr>
-    <td>gollum</td>
+    <td class="bold">gollum</td>
     <td>a wiki page is created or updated</td>
   </tr>
   <tr>
-    <td>issue_comment</td>
+    <td class="bold">issue_comment</td>
     <td>an issue comment is created, edited, or deleted</td>
   </tr>
   <tr>
-    <td>issues</td>
+    <td class="bold">issues</td>
     <td>
       an issue is opened, edited, deleted, transferred, pinned, unpinned,
       closed, reopened, assigned, unassigned, labeled, unlabeled,
@@ -123,47 +126,42 @@ When this is the case, a particular activity type can be specified.
     </td>
   </tr>
   <tr>
-    <td>label</td>
+    <td class="bold">label</td>
     <td>a label is created, edited, or deleted</td>
   </tr>
   <tr>
-    <td>milestone</td>
+    <td class="bold">milestone</td>
     <td>a milestone is created, closed, opened, edited, or deleted</td>
   </tr>
   <tr>
-    <td>page_build</td>
+    <td class="bold">page_build</td>
     <td>a GitHub Pages-enabled branch is pushed</td>
   </tr>
   <tr>
-    <td>project</td>
+    <td class="bold">project</td>
     <td>
       a project within a repo is created, updated,
       closed, reopened, edited, or deleted
-      (see the "Projects tab in a GitHub repo to manage project tasks)
+      (see the "Projects" tab in a GitHub repo to manage project tasks)
     </td>
   </tr>
   <tr>
-    <td>project_card</td>
+    <td class="bold">project_card</td>
     <td>
       a project card is created, moved, converted to an issue,
       edited, or deleted
     </td>
   </tr>
   <tr>
-    <td>project_column</td>
+    <td class="bold">project_column</td>
     <td>a project column is created, updated, moved, or deleted</td>
   </tr>
   <tr>
-    <td>public</td>
-    <td>
-      a private repo is changed to a pull request is opened,
-      assigned, unassigned, labeled, unlabeled, closed, reopened,
-      synchronize(d), ready_for_review, locked, unlocked,
-      review_requested, or review_request_removed
-    </td>
+    <td class="bold">public</td>
+    <td>a private repo is changed to public</td>
   </tr>
   <tr>
-    <td>pull_request</td>
+    <td class="bold">pull_request</td>
     <td>
       a pull request is opened, assigned, unassigned, labeled, unlabeled,
       edited, closed, reopened, synchronize(d), ready_for_review,
@@ -171,35 +169,35 @@ When this is the case, a particular activity type can be specified.
     </td>
   </tr>
   <tr>
-    <td>pull_request_review</td>
+    <td class="bold">pull_request_review</td>
     <td>a pull request review is submitted, edited, or dismissed</td>
   </tr>
   <tr>
-    <td>pull_request_review_comment</td>
+    <td class="bold">pull_request_review_comment</td>
     <td>a pull request review comment is created, edited, or deleted</td>
   </tr>
   <tr>
-    <td>push</td>
+    <td class="bold">push</td>
     <td>a commit is pushed</td>
   </tr>
   <tr>
-    <td>registry_package</td>
-    <td>a registry package (?) is published or updated</td>
+    <td class="bold">registry_package</td>
+    <td>a registry package (npm alternative) is published or updated</td>
   </tr>
   <tr>
-    <td>release</td>
+    <td class="bold">release</td>
     <td>
       a release is created, published, unpublished, edited,
       prereleased, or deleted
     </td>
   </tr>
   <tr>
-    <td>status</td>
+    <td class="bold">status</td>
     <td>the status of a commit changes</td>
   </tr>
   <tr>
-    <td>watch</td>
-    <td>a user watches or stars the repository?</td>
+    <td class="bold">watch</td>
+    <td>a user watches or stars the repository</td>
   </tr>
 </table>
 
