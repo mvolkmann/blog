@@ -4,7 +4,6 @@ jobs:
   project-change:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello, world!"
       - name: dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}

@@ -550,9 +550,11 @@ For example:
   run: echo "Hello, World!"
 ```
 
-To see the output, browse the workflow results,
-click the ellipsis in the upper-right,
-and select "View raw logs".
+To see the output, browse the GitHub repository,
+click the "Actions" tab, select the workflow,
+select the job, and click the disclosure triangle for the step.
+If the step has no disclosure triangle,
+click the ellipsis in the upper-right and select "View raw logs".
 
 ## Shell Scripts
 
