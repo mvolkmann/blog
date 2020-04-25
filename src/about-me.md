@@ -6,7 +6,10 @@ layout: top-layout.njk
 
 ## About Me
 
-![Mark Volkmann](https://avatars0.githubusercontent.com/u/79312?s=460&v=4 'Mark Volkmann')
+<img
+alt="head-shot"
+class="head-shot"
+src="https://avatars0.githubusercontent.com/u/79312?s=460&v=4">
 
 I am a partner at Object Computing, Inc. (OCI) in St. Louis
 where I have provided software consulting and training since 1996.
@@ -31,3 +34,11 @@ These can be found at
 In my spare time I do a lot of running.
 So far I have run 49 marathons in 39 states,
 including the Boston Marathon in 2013.
+
+[![GitHub](/blog/assets/github.svg)](https://github.com/mvolkmann)
+
+[![Twitter](/blog/assets/twitter.svg)](https://twitter.com/mark_volkmann)
+
+[![Facebook](/blog/assets/facebook.svg)](https://www.facebook.com/mark.volkmann)
+
+[![GMail](/blog/assets/gmail.svg)](mailto://r.mark.volkmann@gmail.com)

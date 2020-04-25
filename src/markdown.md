@@ -35,14 +35,15 @@ Let's review the most commonly used parts of Markdown syntax.
 - **image with tooltip**: `![alt-text](url "tooltip")`
 
 - **link displaying url**: `<url>`
-- **link displaying text**: `[text](url)`
-- **link displaying text with tooltip**: `[text](url "tooltip")`
+- **link displaying text**: `[text](link-url)`
+- **link displaying an image**: `[![alt-text](image-url)](link-url)`
+- **link displaying text with tooltip**: `[text](link-url "tooltip")`
 
 - **unordered list**: precede each list item with `*`, `-`, or `+`
 - **ordered list**: precede each list item with `1.`
-  or uses a specific number to begin there
+  or use a specific number to begin there
 
-  - lists of any type can be nested by indenting two spaces
+> lists of any type can be nested by indenting two spaces
 
 - **tables**
 
@@ -77,7 +78,7 @@ Let's review the most commonly used parts of Markdown syntax.
   - `- [ ] some uncompleted task`
   - `- [x] some completed task`
 
-## Enabling HTML
+### Enabling HTML
 
 Markdownlint reports errors for HTML tags in Markdown files.
 It also reports an error if the first line in the file is not an `h1`,

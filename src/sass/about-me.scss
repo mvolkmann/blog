@@ -1,9 +1,18 @@
+.head-shot {
+  height: 250px;
+}
+
 img {
   float: left;
   margin-right: 1rem;
-  width: 300px;
+  height: 30px;
+}
+
+main {
+  display: block !important;
+  overflow: scroll !important;
 }
 
 p {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
