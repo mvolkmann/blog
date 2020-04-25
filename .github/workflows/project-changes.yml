@@ -20,7 +20,7 @@ jobs:
           subject: blog project change
           body: >
             A change was detected in the
-            <a href="https://github.com/mvolkmann/blog/projects/3">project board</a>
+            <a href="${{ github.repository.html_url }}/projects/3">project board</a>
             of the GitHub repository ${{github.repository}}.
             <br>
             updated by ${{ github.actor }}

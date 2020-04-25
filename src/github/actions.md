@@ -550,6 +550,10 @@ For example:
   run: echo "Hello, World!"
 ```
 
+To see the output, browse the workflow results,
+click the ellipsis in the upper-right,
+and select "View raw logs".
+
 ## Shell Scripts
 
 A step execute a shell script that exists in the repository.
