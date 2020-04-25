@@ -16,6 +16,14 @@ booleans, numbers, strings, arrays, and objects (a.k.a hash or dictionary).
 
 **Strings** containing no spaces or special characters do not require quotes.
 When quotes are needed, they can be single or double quotes.
+Multi-line strings start with `>` and continue until the end of their indentation.
+For example:
+
+```yaml
+lifeStory: >
+  Come and listen to my story `bout a man named Jed.
+  A poor mountaineer, barely kept his family fed.
+```
 
 **Arrays** are specified by listing each element preceded by a dash and a space.
 For example:
