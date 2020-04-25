@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: Syntax Highlighting
   parent: Plugins
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

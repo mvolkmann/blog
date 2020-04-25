@@ -3,7 +3,7 @@ eleventyNavigation:
   key: Static Site Generators
   order: 1
   parent: Eleventy
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

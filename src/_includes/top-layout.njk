@@ -59,6 +59,11 @@
         <button class="hamburger" onclick="toggleMenu()">&#x2630;</button>
         Mark Volkmann's Blog
       </h1>
+      <div class="main-links">
+        <a href="/blog/about-me">About Me</a>
+        <a href="/blog/quotes">Quotes</a>
+        <a href="/blog/topics">Topics</a>
+      </div>
       {% set crumbs = collections.all |
         eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
       {% for crumb in crumbs %}
@@ -67,17 +72,7 @@
       {% endfor %}
     </header>
     <main>
-      <nav onScroll="navScrolled()">
-        {% import 'macros.njk' as macros with context %}
-        {% set entries = collections.all | eleventyNavigation | navSort() %}
-        {{ macros.renderNavList(entries) }}
-      </nav>
-      
-      <section>
-        <h2>{{ eleventyNavigation.key }} {{extraTitle}}</h2>
-        <!-- Page content is inserted here. -->
-        {{ content | safe }}
-      </section>
+      {{ content | safe }}
     </main>
     <footer>
       &copy; R. Mark Volkmann, 2020

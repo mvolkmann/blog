@@ -3,7 +3,7 @@ css: '/blog/assets/github-actions.css'
 eleventyNavigation:
   key: GitHub Actions
   parent: GitHub
-layout: layout.njk
+layout: topic-layout.njk
 ---
 
 GitHub Actions enable registering "jobs" to run on a cloud server

@@ -3,7 +3,7 @@ eleventyNavigation:
   key: Why 11ty?
   order: 2
   parent: Eleventy
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

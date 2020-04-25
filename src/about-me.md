@@ -1,9 +1,10 @@
 ---
 css: '/blog/assets/about-me.css'
-eleventyNavigation:
-  key: About Me
-layout: layout.njk
+title: About Me
+layout: top-layout.njk
 ---
+
+## About Me
 
 ![Mark Volkmann](https://avatars0.githubusercontent.com/u/79312?s=460&v=4 'Mark Volkmann')
 

@@ -1,0 +1,17 @@
+---
+layout: top-layout.njk
+---
+
+<link rel="stylesheet" href="/blog/assets/topic-layout.css">
+
+<nav onScroll="navScrolled()">
+  {% import 'macros.njk' as macros with context %}
+  {% set entries = collections.all | eleventyNavigation | navSort() %}
+  {{ macros.renderNavList(entries) }}
+</nav>
+
+<section class="topic-content">
+  <h2>{{ eleventyNavigation.key }} {{extraTitle}}</h2>
+  <!-- Page content is inserted here. -->
+  {{ content | safe }}
+</section>

@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Nunjucks
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: Styling
   parent: Eleventy
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 
@@ -46,7 +46,7 @@ For example, a template can have this front matter:
 
 ```yaml
 css: '/assets/css/about.css'
-layout: layout.njk
+layout: topic-layout.njk
 ```
 
 A layout can use the variable like this:

@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: Styling with Sass
   parent: Styling
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

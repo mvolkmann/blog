@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: Filters
   parent: Eleventy
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

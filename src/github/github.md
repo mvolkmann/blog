@@ -1,5 +1,5 @@
 ---
 eleventyNavigation:
   key: GitHub
-layout: layout.njk
+layout: topic-layout.njk
 ---

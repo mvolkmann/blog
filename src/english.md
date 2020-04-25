@@ -3,7 +3,7 @@ css: '/blog/assets/english.css'
 eleventyNavigation:
   key: English
 extraTitle: "... and how I'd change it"
-layout: layout.njk
+layout: topic-layout.njk
 ---
 
 This page presents my thoughts on issues with the English language.

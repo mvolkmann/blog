@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: YAML
-layout: layout.njk
+layout: topic-layout.njk
 ---
 
 [YAML](https://yaml.org/) stands for "YAML Ain't Markup Language".

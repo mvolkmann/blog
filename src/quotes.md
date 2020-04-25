@@ -1,9 +1,10 @@
 ---
 css: '/blog/assets/quotes.css'
-eleventyNavigation:
-  key: Quotes
-layout: layout.njk
+title: Quotes
+layout: top-layout.njk
 ---
+
+## Quotes
 
 "I hope that I may always desire more than I can accomplish." - Michelangelo
 

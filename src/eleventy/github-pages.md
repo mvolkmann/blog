@@ -3,7 +3,7 @@ eleventyNavigation:
   key: GitHub Pages
   order: 6
   parent: Eleventy
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

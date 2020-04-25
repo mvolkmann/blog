@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Markdown
-layout: layout.njk
+layout: topic-layout.njk
 ---
 
 Markdown is a syntax for specifying HTML in a simpler way.

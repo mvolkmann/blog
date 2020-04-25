@@ -2,7 +2,7 @@
 css: '/blog/assets/welcome.css'
 eleventyNavigation:
   key: Eleventy
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

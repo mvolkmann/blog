@@ -10,41 +10,11 @@ body {
 
   & > main {
     display: flex;
+    flex-direction: column;
     flex-grow: 1;
     overflow: hidden;
-
-    & > nav {
-      background-color: linen;
-      overflow: auto;
-      padding: 0 1rem;
-      /*width: fit-content;*/
-      min-width: 200px; /* Why is this needed? */
-      width: 200px;
-
-      h2 {
-        color: gray;
-      }
-
-      & > ul {
-        margin-left: 0;
-        margin-top: 0;
-      }
-
-      a {
-        color: var(--accent-color);
-        text-decoration: none;
-      }
-
-      li {
-        margin-top: 0.5rem;
-      }
-    }
-
-    & > section {
-      flex-grow: 1;
-      overflow: auto;
-      padding: 1rem;
-    }
+    //overflow: scroll;
+    padding: 1rem;
   }
 }
 
@@ -53,14 +23,16 @@ body {
   text-decoration: none;
 }
 
-h2 {
-  color: purple;
-}
-
 footer {
   background-color: var(--accent-color);
   color: white;
   padding: 1rem;
+}
+
+h2 {
+  color: purple;
+  font-size: 2rem;
+  margin-block-start: 0;
 }
 
 .hamburger {
@@ -75,25 +47,26 @@ header {
   text-align: center;
 }
 
-li.active > a {
-  color: purple;
+header > h1 {
+  margin-top: 0;
+}
+
+.main-links > a {
+  color: transparent;
+  display: inline-block;
+  font-size: 2rem;
   font-weight: bold;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  -webkit-text-stroke: yellow 1px;
+
+  &:hover {
+    color: yellow;
+  }
 }
 
-li.ordered > a {
-  color: green;
-}
-
-li.top > a {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-nav ul {
-  list-style: none;
-  margin-left: 1rem;
-  margin-top: 0.5rem;
-  padding-left: 0;
+p {
+  margin-block-start: 0;
 }
 
 @media (max-width: 600px) {
@@ -111,15 +84,5 @@ nav ul {
 
   header {
     text-align: left;
-  }
-
-  nav {
-    position: absolute;
-    left: -232px;
-    transition: left 0.5s;
-
-    li {
-      margin: 1rem 0;
-    }
   }
 }

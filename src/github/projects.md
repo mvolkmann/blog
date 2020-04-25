@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: GitHub Projects
   parent: GitHub
-layout: layout.njk
+layout: topic-layout.njk
 ---
 
 GitHub Projects provided a free alternative to project tracking solutions

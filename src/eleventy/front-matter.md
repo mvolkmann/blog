@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: Front Matter
   parent: Eleventy
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 
@@ -18,7 +18,7 @@ For example:
 
 ```yaml
 ---
-layout: layout.njk
+layout: topic-layout.njk
 title: Dogs
 ---
 

@@ -4,7 +4,7 @@ eleventyNavigation:
   order: 5
   parent: Eleventy
 intro: true
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 

@@ -3,7 +3,7 @@ css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: GitHub Extensions
   parent: GitHub
-layout: layout.njk
+layout: topic-layout.njk
 ---
 
 Extensions for the Google Chrome browser can change

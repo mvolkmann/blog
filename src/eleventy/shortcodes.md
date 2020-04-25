@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: Shortcodes
   parent: Eleventy
-layout: layout.njk
+layout: topic-layout.njk
 tags: eleventy
 ---
 
