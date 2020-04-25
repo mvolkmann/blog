@@ -1,5 +1,5 @@
 name: GitHub Project changes
-on: project
+on: [project, project_card, project_column]
 jobs:
   project-change:
     runs-on: ubuntu-latest
