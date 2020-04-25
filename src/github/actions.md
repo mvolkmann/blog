@@ -595,7 +595,12 @@ jobs:
   project-change:
     runs-on: ubuntu-latest
     steps:
-      - name: email on project change
+      - name: dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: email summary
+        id: projectChange
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com
@@ -603,7 +608,21 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           subject: blog project change
-          body: A change was detected in the project board of ${{github.repository}}. See <a href="https://github.com/mvolkmann/blog/projects/3">here</a>.
+          body: >
+            A change was detected in the
+            <a href="https://github.com/mvolkmann/blog/projects/3">project board</a>
+            of the GitHub repository ${{github.repository}}.
+            <br>
+            updated by ${{ github.actor }}
+            at ${{ github.event.project_card.updated_at }}
+            <br>
+            event name = ${{ github.event_name }}
+            <br>
+            event action = ${{ github.event.action}}
+            <br>
+            event changes = ${{ toJson(github.event.changes) }}
+            <br>
+            card note = ${{ github.event.project_card.note }}
           to: r.mark.volkmann@gmail.com
           from: Mark Volkmann
           content_type: text/html

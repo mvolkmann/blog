@@ -4,10 +4,11 @@ jobs:
   project-change:
     runs-on: ubuntu-latest
     steps:
+      - run: Hello, world!
       - name: dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: echo "github = $GITHUB_CONTEXT"
       - name: email summary
         id: projectChange
         uses: dawidd6/action-send-mail@v2
@@ -22,15 +23,16 @@ jobs:
             <a href="https://github.com/mvolkmann/blog/projects/3">project board</a>
             of the GitHub repository ${{github.repository}}.
             <br>
-            updated by ${{ github.actor }} at ${{ github.event.project_card.updated_at }}
+            updated by ${{ github.actor }}
+            at ${{ github.event.project_card.updated_at }}
             <br>
             event name = ${{ github.event_name }}
             <br>
             event action = ${{ github.event.action}}
             <br>
-            card note = ${{ github.event.project_card.note }}
-            <br>
             event changes = ${{ toJson(github.event.changes) }}
+            <br>
+            card note = ${{ github.event.project_card.note }}
           to: r.mark.volkmann@gmail.com
           from: Mark Volkmann
           content_type: text/html
