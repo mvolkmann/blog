@@ -581,6 +581,8 @@ in an environment variable
 and then use an `echo` shell command to output it.
 For example:
 
+{% raw %}
+
 ```yaml
 - name: Dump GitHub context
   env:
@@ -588,11 +590,15 @@ For example:
   run: echo "$GITHUB_CONTEXT"
 ```
 
+{% endraw %}
+
 ## Sending Email
 
 A step can send an email.
 For example, this workflow sends an email
 when a project in the repository changes.
+
+{% raw %}
 
 ```yaml
 name: GitHub Project changes
@@ -633,6 +639,8 @@ jobs:
           from: Mark Volkmann
           content_type: text/html
 ```
+
+{% endraw %}
 
 The requires adding secrets with the names `MAIL_USERNAME` and `MAIL_PASSWORD`.
 These steps assume that GMail is being used.
