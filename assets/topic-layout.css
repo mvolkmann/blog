@@ -21,6 +21,4 @@ body > main li.top > a { font-size: 1.2rem; font-weight: bold; }
 body > main nav ul { list-style: none; margin-left: 1rem; margin-top: 0.5rem; padding-left: 0; }
 
 @media (max-width: 600px) { body > main nav { position: absolute; left: -232px; transition: left 0.5s; }
-  body > main nav li { margin: 1rem 0; }
-  body > main nav { position: absolute; left: -232px; transition: left 0.5s; }
   body > main nav li { margin: 1rem 0; } }
