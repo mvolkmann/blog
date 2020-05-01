@@ -8,12 +8,27 @@ body {
   height: 100vh;
   margin: 0;
 
+  & > footer {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 1rem;
+  }
+
+  & > header {
+    background-color: var(--accent-color);
+    color: white;
+    margin: 0;
+    padding: 1rem;
+    text-align: center;
+
+    & > h1 {
+      margin-top: 0;
+    }
+  }
+
   & > main {
-    display: flex;
-    flex-direction: column;
     flex-grow: 1;
     overflow: hidden;
-    //overflow: scroll;
     padding: 1rem;
   }
 }
@@ -25,12 +40,6 @@ body {
 .crumb {
   color: white;
   text-decoration: none;
-}
-
-footer {
-  background-color: var(--accent-color);
-  color: white;
-  padding: 1rem;
 }
 
 h2 {
@@ -45,18 +54,6 @@ h3 {
 
 .hamburger {
   display: none;
-}
-
-header {
-  background-color: var(--accent-color);
-  color: white;
-  margin: 0;
-  padding: 1rem;
-  text-align: center;
-}
-
-header > h1 {
-  margin-top: 0;
 }
 
 .main-links > a {

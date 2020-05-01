@@ -23,6 +23,8 @@
       <link rel="stylesheet" href="{{css}}" />
     {% endif %}
 
+    <script src="/blog/assets/blog.js"></script>
+
     <script>
       // Only register the service worker when not on localhost.
       if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
@@ -44,12 +46,6 @@
 
       window.onload = () => {
         nav = document.querySelector('nav');
-        const scrollTop = sessionStorage.getItem('navScroll');
-        if (scrollTop) nav.scrollTop = scrollTop;
-
-        nav.onscroll = () => {
-          sessionStorage.setItem('navScroll', nav.scrollTop);
-        };
       }
     </script> 
   </head>

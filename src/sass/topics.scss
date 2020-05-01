@@ -6,7 +6,7 @@ body > main {
 
   & > nav {
     background-color: linen;
-    height: 100vh;
+    height: 100%;
     overflow: auto;
     padding: 0 1rem;
     /*width: fit-content;*/
@@ -32,10 +32,17 @@ body > main {
     }
   }
 
-  & > .topic-content {
+  & > section {
     flex-grow: 1;
     overflow: auto;
-    padding: 1rem;
+
+    iframe {
+      border: none;
+      box-sizing: border-box;
+      height: 100%;
+      padding: 1rem;
+      width: 100%;
+    }
   }
 
   li.active > a {

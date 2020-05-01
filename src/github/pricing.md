@@ -34,6 +34,8 @@ your software development workflows.
 Write tasks and combine them to build, test,
 and deploy any code project on GitHub.
 Minutes are free for public repositories."
+If minutes in a month are exhausted, more can be purchased ala carte.
+It is not necessary to upgrade to the next tier.
 
 **Packages** are used to "host your own software packages or
 use them as dependencies in other projects.

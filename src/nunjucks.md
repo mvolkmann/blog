@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Nunjucks
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 [Nunjucks](https://mozilla.github.io/nunjucks/)

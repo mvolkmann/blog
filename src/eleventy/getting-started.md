@@ -61,4 +61,4 @@ that can be used to build and serve the site:
 ```
 
 To deploy an 11ty site to GitHub Pages,
-see [here](/blog/github-pages).
+see [here](/blog/github/github-pages).
