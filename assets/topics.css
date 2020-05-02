@@ -20,7 +20,7 @@ body > main > nav li { margin-top: 0.5rem; }
 
 body > main > section { flex-grow: 1; overflow: auto; }
 
-body > main > section iframe { border: none; box-sizing: border-box; height: 100%; padding: 1rem; width: 100%; }
+body > main > section > iframe { border: none; box-sizing: border-box; height: 100%; padding: 1rem; transition-duration: 500ms; transition-property: opacity; width: 100%; }
 
 body > main li.ordered > a:not(.active) { color: green; }
 
