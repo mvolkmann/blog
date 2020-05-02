@@ -9,9 +9,7 @@ body > main {
     height: 100%;
     overflow: auto;
     padding-right: 1rem;
-    /*width: fit-content;*/
-    min-width: 200px; /* Why is this needed? */
-    width: 220px;
+    width: fit-content;
 
     h2 {
       color: gray;
