@@ -34,6 +34,6 @@ body > main nav .expanded + ul { display: block; }
 
 body > main nav ul { list-style: none; margin-left: 1rem; margin-top: 0.5rem; padding-left: 0; }
 
-@media (max-width: 600px) { body > main .hamburger { position: absolute; left: 0; top: 0; background-color: transparent; border: none; color: white; display: inline-block; font-size: 2rem; }
+@media (max-width: 800px) { body > main .hamburger { position: absolute; left: 0; top: 0; background-color: transparent; border: none; color: white; display: inline-block; font-size: 2rem; }
   body > main nav { left: -100%; position: absolute; transition-duration: 0.5s; }
   body > main nav li { margin: 1rem 0; } }

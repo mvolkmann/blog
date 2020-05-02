@@ -5,7 +5,7 @@
  * as the click handler for anchor elements.
  */
 // eslint-disable-next-line no-unused-vars
-function handleClick(link) {
+function handleLinkClick(link) {
   // We only need to toggle the "expanded" class for non-leaf links.
   // Links for leaf nodes do not have a next sibling.
   if (link.nextSibling) link.classList.toggle('expanded');
@@ -26,7 +26,7 @@ function handleClick(link) {
     location.hash = href.startsWith(origin)
       ? href.substring(origin.length)
       : href;
-
-    toggleHamburgerMenu();
   }
+
+  toggleHamburgerMenu();
 }

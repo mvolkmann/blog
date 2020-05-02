@@ -27,4 +27,10 @@
           navLeftWhenClosed = '-' + nav.getBoundingClientRect().width + 'px';
           nav.style.left = navLeftWhenClosed; // to initially hide it
         }
-      }</script></head><body><header><h1>Mark Volkmann's Blog</h1><div class="main-links"><a href="/blog/about-me">About Me</a> <a href="/blog/quotes">Quotes</a> <a href="/blog/topics">Topics</a></div></header><main><h2>Welcome to my blog</h2></main><footer>&copy; R. Mark Volkmann, 2020</footer></body></html>
+
+        const mainLinks =
+          Array.from(document.querySelectorAll('.main-links > a'));
+        for (const a of mainLinks) {
+          if (a.href === location.href) a.classList.add('selected');
+        }
+      }</script></head><body><header><h1>Mark Volkmann's Blog</h1><div class="main-links"><a href="/blog/about-me/">About Me</a> <a href="/blog/quotes/">Quotes</a> <a href="/blog/topics/">Topics</a></div></header><main><h2>Welcome to my blog</h2></main><footer>&copy; R. Mark Volkmann, 2020</footer></body></html>
