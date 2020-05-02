@@ -6,8 +6,9 @@
  */
 // eslint-disable-next-line no-unused-vars
 function handleClick(link) {
-  //TODO: Really only need to do this for links with children.
-  link.classList.toggle('expanded');
+  // We only need to toggle the "expanded" class for non-leaf links.
+  // Links for leaf nodes do not have a next sibling.
+  if (link.nextSibling) link.classList.toggle('expanded');
 
   const activeLink = document.querySelector('.active');
 
