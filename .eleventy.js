@@ -4,9 +4,6 @@ const navigationPlugin = require('@11ty/eleventy-navigation');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
 const fs = require('fs');
 
-//const itemHasTag = (item, tag) => item.data.tags.includes(tag);
-//const itemDoesNotHaveTag = (item, tag) => !item.data.tags.includes(tag);
-
 /**
 This recursively sorts an array of documents.
 The primary sort is on the "order" property.
@@ -45,12 +42,13 @@ module.exports = eleventyConfig => {
     for (const item of navItems) {
       const {data, url: url1} = item;
       const {eleventyNavigation} = data;
+      //TODO: Can you simplify this?
       const {
         key,
         order,
         parent,
         title: optionalTitle,
-        url: url2 # used to refer to a page outside this site
+        url: url2 // used to refer to a page outside this site
       } = eleventyNavigation;
 
       const obj = {
