@@ -3,7 +3,6 @@ eleventyNavigation:
   key: Shortcodes
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 See https://alexcarpenter.me/screencasts/2020/04/eleventy-paired-shortcodes/.

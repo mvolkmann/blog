@@ -4,7 +4,6 @@ eleventyNavigation:
   order: 4
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 Here are the most basic steps to create and build an 11ty site.

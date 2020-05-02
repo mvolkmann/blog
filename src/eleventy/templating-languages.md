@@ -3,7 +3,6 @@ eleventyNavigation:
   key: Templating Languages
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 The default templating language available for use in Markdown files is Liquid.

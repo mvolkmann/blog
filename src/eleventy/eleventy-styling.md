@@ -1,9 +1,8 @@
 ---
 eleventyNavigation:
-  key: Styling
+  key: Eleventy Styling
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 To add CSS styling, configure the build process as shown above

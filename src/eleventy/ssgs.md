@@ -4,7 +4,6 @@ eleventyNavigation:
   order: 1
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 Static site generators (SSGs) are an alternative

@@ -3,7 +3,6 @@ eleventyNavigation:
   key: Navigation Plugin
   parent: Plugins
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 Eleventy provides a plugin that implements page navigation.

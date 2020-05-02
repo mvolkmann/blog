@@ -4,5 +4,4 @@ eleventyNavigation:
   parent: Eleventy
   url: https://11ty.dev/
 permalink: false
-tags: eleventy
 ---

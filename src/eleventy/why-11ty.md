@@ -4,7 +4,6 @@ eleventyNavigation:
   order: 2
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 11ty competes with:

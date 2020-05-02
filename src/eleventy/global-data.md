@@ -3,7 +3,6 @@ eleventyNavigation:
   key: Global Data
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 Global data can be defined in `.js` or `.json` files in the `_data` directory.

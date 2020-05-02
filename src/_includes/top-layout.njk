@@ -23,8 +23,6 @@
       <link rel="stylesheet" href="{{css}}" />
     {% endif %}
 
-    <script src="/blog/assets/blog.js"></script>
-
     <script>
       // Only register the service worker when not on localhost.
       if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
@@ -45,7 +43,35 @@
       }
 
       window.onload = () => {
+        // If the URL contains a hash, use it to
+        // restore the proper page in the iframe.
+        const {hash} = location;
+        if (hash) {
+          const iframe = document.querySelector('iframe');
+          iframe.src = hash.substring(1); // removes leading #
+        }
+        
         nav = document.querySelector('nav');
+
+        // Add a click listener to all the nav links.
+        const links = document.querySelectorAll('.nav-link');
+        Array.from(links).forEach(link => {
+          link.addEventListener('click', () => {
+            // If there's a previous active link, style it as no longer active.
+            const activeLink = document.querySelector('.active');
+            if (activeLink) activeLink.classList.remove('active');
+
+            // Style the clicked link as active.
+            link.classList.add('active');
+
+            //TODO: Why is this delay helpful in getting proper page rendering?
+            setTimeout(() => {
+              // Put new page URL in URL hash so it can be bookmarked.
+              const newHash = link.href.substring(location.origin.length);
+              location.hash = newHash;
+            });
+          });
+        });
       }
     </script> 
   </head>

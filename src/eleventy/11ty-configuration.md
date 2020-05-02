@@ -3,9 +3,7 @@ eleventyNavigation:
   key: 11ty Configuration
   order: 5
   parent: Eleventy
-intro: true
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 Configuration options for 11ty are documented on the 11ty

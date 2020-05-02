@@ -3,7 +3,6 @@ css: '/blog/assets/welcome.css'
 eleventyNavigation:
   key: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 Select an Eleventy topic in the left nav.

@@ -3,7 +3,6 @@ eleventyNavigation:
   key: Debugging Tips
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 To see the value of a variable in the devtools console,

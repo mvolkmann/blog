@@ -4,7 +4,6 @@ eleventyNavigation:
   order: 6
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 GitHub Pages is a great option to consider for hosting an 11ty site

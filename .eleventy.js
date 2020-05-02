@@ -21,7 +21,7 @@ function sortDocuments(arr) {
     if (order1) {
       return order2 ? order1 - order2 : -1;
     } else if (order2) {
-      return -1;
+      return 1;
     } else {
       return doc1.title.localeCompare(doc2.title);
     }
@@ -31,6 +31,60 @@ function sortDocuments(arr) {
 }
 
 module.exports = eleventyConfig => {
+  eleventyConfig.addCollection('nav', collection => {
+    const keyMap = {};
+    const navMap = {};
+
+    // Create an array of item objects that contain
+    // "eleventyNavigation" front matter.
+    const navItems = collection.items.filter(
+      item => item.data.eleventyNavigation
+    );
+
+    // Create a mapping from item keys to objects that describe them.
+    for (const item of navItems) {
+      const {data, url: url1} = item;
+      const {eleventyNavigation} = data;
+      const {
+        key,
+        order,
+        parent,
+        title: optionalTitle,
+        url: url2 # used to refer to a page outside this site
+      } = eleventyNavigation;
+
+      const obj = {
+        key,
+        order,
+        parent,
+        title: optionalTitle || key,
+        url: url2 || url1
+      };
+      keyMap[key] = obj;
+    }
+
+    // Turn the items into a tree structure based on parent relationships.
+    for (const obj of Object.values(keyMap)) {
+      const {parent} = obj;
+      if (parent) {
+        parentObj = keyMap[parent];
+        let {children} = parentObj;
+        if (!children) children = parentObj.children = [];
+        children.push(obj);
+      } else {
+        navMap[obj.key] = obj;
+      }
+    }
+
+    // Get an array of the top-level items.
+    const navColl = Object.values(navMap);
+
+    // Sort the items within their parent.
+    sortDocuments(navColl);
+
+    return navColl;
+  });
+
   // This filters page objects based on a data property value.
   eleventyConfig.addFilter('filter', (arr, property, value) => {
     return arr.filter(obj => obj.data[property] === value);

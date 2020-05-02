@@ -3,7 +3,6 @@ eleventyNavigation:
   key: REST Services
   parent: Eleventy
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 One way to make data from REST services available to templates

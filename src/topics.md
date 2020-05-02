@@ -6,8 +6,7 @@ layout: top-layout.njk
 
 <nav>
   {% import 'macros.njk' as macros with context %}
-  {% set entries = collections.all | eleventyNavigation | navSort() %}
-  {{ macros.renderNavList(entries) }}
+  {{ macros.renderNavList(collections.nav) }}
 </nav>
 
 <section class="topic-content">

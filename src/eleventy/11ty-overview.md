@@ -3,9 +3,7 @@ eleventyNavigation:
   key: 11ty Overview
   order: 3
   parent: Eleventy
-intro: true
 layout: topic-layout.njk
-tags: eleventy
 ---
 
 11ty is "a simple static style generator" (SSG).
