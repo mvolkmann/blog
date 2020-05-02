@@ -43,9 +43,11 @@ function renderNavList(entries) {
 //TODO: Is the eleventy-navigation package still needed?
 exports.render = data => {
   const {nav} = data.collections;
+  // toggleHamburgerMenu is defined in _includes/top-layout.njk.
   return `
     <link rel="stylesheet" href="/blog/assets/topics.css">
     <script src="/blog/assets/topics.js"></script>
+    <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button>
     <nav>
       ${renderNavList(nav)}
     </nav>

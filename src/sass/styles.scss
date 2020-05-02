@@ -52,10 +52,6 @@ h3 {
   color: var(--accent-color);
 }
 
-.hamburger {
-  display: none;
-}
-
 .main-links > a {
   color: transparent;
   display: inline-block;
@@ -88,23 +84,5 @@ table {
   th {
     background-color: var(--accent-color);
     color: white;
-  }
-}
-
-@media (max-width: 600px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .hamburger {
-    background-color: transparent;
-    border: none;
-    color: white;
-    display: inline-block;
-    font-size: 1.5rem;
-  }
-
-  header {
-    text-align: left;
   }
 }

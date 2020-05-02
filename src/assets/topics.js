@@ -1,9 +1,12 @@
+/* global toggleHamburgerMenu: false */
+
 /**
  * This function is used in src/_includes/topics.11ty.js
  * as the click handler for anchor elements.
  */
 // eslint-disable-next-line no-unused-vars
 function handleClick(link) {
+  //TODO: Really only need to do this for links with children.
   link.classList.toggle('expanded');
 
   const activeLink = document.querySelector('.active');
@@ -24,6 +27,8 @@ function handleClick(link) {
       location.hash = href.startsWith(origin)
         ? href.substring(origin.length)
         : href;
+
+      toggleHamburgerMenu();
     });
   }
 }

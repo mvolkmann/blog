@@ -32,14 +32,11 @@
       }
 
       let nav;
-      let navOpen = false;
+      let navLeftWhenClosed;
 
-      function toggleMenu() {
-        navOpen = !navOpen;
-        nav.style.left = navOpen ?
-          0 :
-          '-' + nav.getBoundingClientRect().width + 'px';
-        nav
+      function toggleHamburgerMenu() {
+        const isOpen = nav.style.left === '0px';
+        nav.style.left = isOpen ? navLeftWhenClosed : 0;
       }
 
       window.onload = () => {
@@ -52,15 +49,16 @@
         }
         
         nav = document.querySelector('nav');
+        if (nav) {
+          navLeftWhenClosed = '-' + nav.getBoundingClientRect().width + 'px';
+          nav.style.left = navLeftWhenClosed; // to initially hide it
+        }
       }
     </script> 
   </head>
   <body>
     <header>
-      <h1>
-        <button class="hamburger" onclick="toggleMenu()">&#x2630;</button>
-        Mark Volkmann's Blog
-      </h1>
+      <h1>Mark Volkmann's Blog</h1>
       <div class="main-links">
         <a href="/blog/about-me">About Me</a>
         <a href="/blog/quotes">Quotes</a>

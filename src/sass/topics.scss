@@ -91,10 +91,22 @@ body > main {
   }
 
   @media (max-width: 600px) {
-    nav {
+    .hamburger {
       position: absolute;
-      left: -232px;
-      transition: left 0.5s;
+      left: 0;
+      top: 0;
+
+      background-color: transparent;
+      border: none;
+      color: white;
+      display: inline-block;
+      font-size: 2rem;
+    }
+
+    nav {
+      left: -100%; // so it is initially hidden
+      position: absolute;
+      transition-duration: 0.5s;
 
       li {
         margin: 1rem 0;
