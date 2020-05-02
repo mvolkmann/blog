@@ -19,16 +19,13 @@ function handleClick(link) {
     // Style the clicked link as active.
     link.classList.add('active');
 
-    //TODO: Why is this delay helpful in getting proper page rendering?
-    setTimeout(() => {
-      // Put new page URL in URL hash so it can be bookmarked.
-      const {href} = link;
-      const {origin} = location;
-      location.hash = href.startsWith(origin)
-        ? href.substring(origin.length)
-        : href;
+    // Put new page URL in URL hash so it can be bookmarked.
+    const {href} = link;
+    const {origin} = location;
+    location.hash = href.startsWith(origin)
+      ? href.substring(origin.length)
+      : href;
 
-      toggleHamburgerMenu();
-    });
+    toggleHamburgerMenu();
   }
 }

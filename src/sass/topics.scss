@@ -4,6 +4,10 @@ body > main {
   overflow: hidden;
   padding: 0;
 
+  .hamburger {
+    display: none;
+  }
+
   & > nav {
     background-color: linen;
     height: 100%;
