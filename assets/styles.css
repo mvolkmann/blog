@@ -16,8 +16,6 @@ h2 { color: purple; font-size: 2rem; margin-block-start: 0; }
 
 h3 { color: var(--accent-color); }
 
-.hamburger { display: none; }
-
 .main-links > a { color: transparent; display: inline-block; font-size: 2rem; font-weight: bold; margin: 0 0.5rem; text-decoration: none; -webkit-text-stroke: yellow 1px; }
 
 .main-links > a:hover { color: yellow; }
@@ -29,7 +27,3 @@ table { border-collapse: collapse; margin-bottom: 1rem; }
 table td, table th { border: solid lightgray 1px; padding: 5px; }
 
 table th { background-color: var(--accent-color); color: white; }
-
-@media (max-width: 600px) { h1 { font-size: 1.5rem; }
-  .hamburger { background-color: transparent; border: none; color: white; display: inline-block; font-size: 1.5rem; }
-  header { text-align: left; } }

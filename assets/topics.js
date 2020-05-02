@@ -1,10 +1,14 @@
+/* global toggleHamburgerMenu: false */
+
 /**
  * This function is used in src/_includes/topics.11ty.js
  * as the click handler for anchor elements.
  */
 // eslint-disable-next-line no-unused-vars
 function handleClick(link) {
-  link.classList.toggle('expanded');
+  // We only need to toggle the "expanded" class for non-leaf links.
+  // Links for leaf nodes do not have a next sibling.
+  if (link.nextSibling) link.classList.toggle('expanded');
 
   const activeLink = document.querySelector('.active');
 
@@ -16,14 +20,13 @@ function handleClick(link) {
     // Style the clicked link as active.
     link.classList.add('active');
 
-    //TODO: Why is this delay helpful in getting proper page rendering?
-    setTimeout(() => {
-      // Put new page URL in URL hash so it can be bookmarked.
-      const {href} = link;
-      const {origin} = location;
-      location.hash = href.startsWith(origin)
-        ? href.substring(origin.length)
-        : href;
-    });
+    // Put new page URL in URL hash so it can be bookmarked.
+    const {href} = link;
+    const {origin} = location;
+    location.hash = href.startsWith(origin)
+      ? href.substring(origin.length)
+      : href;
+
+    toggleHamburgerMenu();
   }
 }
