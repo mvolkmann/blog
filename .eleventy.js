@@ -40,25 +40,14 @@ module.exports = eleventyConfig => {
 
     // Create a mapping from item keys to objects that describe them.
     for (const item of navItems) {
-      const {data, url: url1} = item;
+      const {data, url} = item;
       const {eleventyNavigation} = data;
-      //TODO: Can you simplify this?
-      const {
-        key,
-        order,
-        parent,
-        title: optionalTitle,
-        url: url2 // used to refer to a page outside this site
-      } = eleventyNavigation;
+      const {key, title} = eleventyNavigation;
 
-      const obj = {
-        key,
-        order,
-        parent,
-        title: optionalTitle || key,
-        url: url2 || url1
-      };
-      keyMap[key] = obj;
+      if (!title) eleventyNavigation.title = key;
+      if (url) eleventyNavigation.url = url;
+
+      keyMap[key] = eleventyNavigation;
     }
 
     // Turn the items into a tree structure based on parent relationships.
