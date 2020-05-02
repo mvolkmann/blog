@@ -14,12 +14,13 @@ function renderNavItem(entry) {
   let classes = '';
   if (entry.order) classes += ' ordered';
   if (!entry.parent) classes += ' top';
+  // handleLinkClick is defined in assets/topics.js.
   return `
     <li class="${classes}">
       <a
         class="nav-link"
         href="${entry.url}"
-        onclick="handleClick(this)"
+        onclick="handleLinkClick(this)"
         target="frame"
       >
         ${entry.title}

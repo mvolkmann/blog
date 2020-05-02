@@ -64,6 +64,11 @@ h3 {
   &:hover {
     color: yellow;
   }
+
+  &.selected {
+    color: lightgreen;
+    -webkit-text-stroke: lightgreen;
+  }
 }
 
 p {

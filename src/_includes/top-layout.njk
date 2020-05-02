@@ -53,6 +53,12 @@
           navLeftWhenClosed = '-' + nav.getBoundingClientRect().width + 'px';
           nav.style.left = navLeftWhenClosed; // to initially hide it
         }
+
+        const mainLinks =
+          Array.from(document.querySelectorAll('.main-links > a'));
+        for (const a of mainLinks) {
+          if (a.href === location.href) a.classList.add('selected');
+        }
       }
     </script> 
   </head>
@@ -60,9 +66,9 @@
     <header>
       <h1>Mark Volkmann's Blog</h1>
       <div class="main-links">
-        <a href="/blog/about-me">About Me</a>
-        <a href="/blog/quotes">Quotes</a>
-        <a href="/blog/topics">Topics</a>
+        <a href="/blog/about-me/">About Me</a>
+        <a href="/blog/quotes/">Quotes</a>
+        <a href="/blog/topics/">Topics</a>
       </div>
       {% set crumbs = collections.all |
         eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
