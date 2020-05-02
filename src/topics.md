@@ -1,16 +1,3 @@
 ---
-layout: top-layout.njk
+layout: topics # refers to _includes/topics.11ty.js
 ---
-
-<link rel="stylesheet" href="/blog/assets/topics.css">
-
-{# TODO: Is the eleventy-navigation package still needed? #}
-
-<nav>
-  {% import 'macros.njk' as macros with context %}
-  {{ macros.renderNavList(collections.nav) }}
-</nav>
-
-<section class="topic-content">
-  <iframe name="frame" src="../welcome/" title="topic content"></iframe>
-</section>

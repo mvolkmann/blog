@@ -41,14 +41,13 @@ module.exports = eleventyConfig => {
     // Create a mapping from item keys to objects that describe them.
     for (const item of navItems) {
       const {data, url} = item;
-      const {eleventyNavigation} = data;
-      const {key, title} = eleventyNavigation;
+      const {eleventyNavigation: nav} = data;
+      const {key, title} = nav;
 
-      if (!title) eleventyNavigation.title = key;
-      if (url) eleventyNavigation.url = url;
-      eleventyNavigation.leaf = true; // assume for now
+      if (!title) nav.title = key;
+      if (url) nav.url = '/blog' + url;
 
-      keyMap[key] = eleventyNavigation;
+      keyMap[key] = nav;
     }
 
     // Turn the items into a tree structure based on parent relationships.
@@ -56,7 +55,6 @@ module.exports = eleventyConfig => {
       const {parent} = obj;
       if (parent) {
         parentObj = keyMap[parent];
-        parentObj.leaf = false;
         let {children} = parentObj;
         if (!children) children = parentObj.children = [];
         children.push(obj);
@@ -64,7 +62,6 @@ module.exports = eleventyConfig => {
         navMap[obj.key] = obj;
       }
     }
-    console.log('.eleventy.js x: keyMap =', keyMap);
 
     // Get an array of the top-level items.
     const navColl = Object.values(navMap);
@@ -125,6 +122,7 @@ module.exports = eleventyConfig => {
     });
   });
 
+  eleventyConfig.addWatchTarget('_includes/*.js');
   eleventyConfig.addWatchTarget('_site/assets/*.css');
 
   eleventyConfig.setBrowserSyncConfig({

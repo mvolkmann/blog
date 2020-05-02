@@ -8,10 +8,10 @@ body > main {
     background-color: linen;
     height: 100%;
     overflow: auto;
-    padding: 0 1rem;
+    padding-right: 1rem;
     /*width: fit-content;*/
     min-width: 200px; /* Why is this needed? */
-    width: 200px;
+    width: 220px;
 
     h2 {
       color: gray;
@@ -25,6 +25,23 @@ body > main {
     a {
       color: var(--accent-color);
       text-decoration: none;
+
+      &.active {
+        color: purple;
+        font-weight: bold;
+      }
+
+      &.expanded > .triangle {
+        transform: rotate(90deg);
+      }
+
+      .triangle {
+        display: inline-block;
+        margin-left: 0.5rem;
+        transform: rotate(0);
+        transition-duration: 0.5s;
+        transition-property: transform;
+      }
     }
 
     li {
@@ -45,12 +62,7 @@ body > main {
     }
   }
 
-  a.active {
-    color: purple;
-    font-weight: bold;
-  }
-
-  li.ordered > a {
+  li.ordered > a:not(.active) {
     color: green;
   }
 
@@ -59,11 +71,25 @@ body > main {
     font-weight: bold;
   }
 
-  nav ul {
-    list-style: none;
-    margin-left: 1rem;
-    margin-top: 0.5rem;
-    padding-left: 0;
+  nav {
+    & > ul {
+      display: block;
+
+      ul {
+        display: none;
+      }
+    }
+
+    .expanded + ul {
+      display: block;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+      padding-left: 0;
+    }
   }
 
   @media (max-width: 600px) {

@@ -15,12 +15,8 @@ in order to create a tree of links.
   <li class="{{ class }}">
     <a class="nav-link" href="{{ entry.url | url }}" target="frame">
       {{ entry.title }}
-      {% if entry.title %}<span class="triangle">&#x25b6;</span>{% endif %}
+      {% if entry.children %}<span class="triangle">&#x25b6;</span>{% endif %}
     </a>
-      {# {% if not entry.leaf %}<span class="triangle">&#x25b6;</span>{% endif %} #}
-      {#% if entry.children %}
-        <span class="triangle">&#x25b6;</span>
-      {% endif %#}
     {{ renderNavList(entry.children) }}
   </li>
 {% endmacro %}
