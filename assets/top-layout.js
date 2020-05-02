@@ -26,7 +26,6 @@ window.onload = () => {
   if (hash) {
     const iframe = document.querySelector('iframe');
     iframe.src = hash.substring(1); // removes leading #
-    console.log('top-layout.js set iframe src to', hash);
   }
 
   nav = document.querySelector('nav');
