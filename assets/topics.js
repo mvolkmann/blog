@@ -6,12 +6,6 @@
  */
 // eslint-disable-next-line no-unused-vars
 function handleLinkClick(link, url) {
-  const iframe = document.querySelector('iframe');
-  iframe.style.opacity = 0;
-  setTimeout(() => {
-    iframe.src = url;
-  }, 500); // matches transition-duration in topics.scss
-
   // We only need to toggle the "expanded" class for non-leaf links.
   // Links for leaf nodes do not have a next sibling.
   if (link.nextSibling) link.classList.toggle('expanded');
@@ -20,6 +14,10 @@ function handleLinkClick(link, url) {
 
   // If the clicked link is not already the active one ...
   if (link !== activeLink) {
+    const iframe = document.querySelector('iframe');
+    iframe.style.opacity = 0;
+    setTimeout(() => (iframe.src = url), 500); // matches transition-duration in topics.scss
+
     // If there's a previous active link, style it as no longer active.
     if (activeLink) activeLink.classList.remove('active');
 
