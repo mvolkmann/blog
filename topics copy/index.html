@@ -1,0 +1,87 @@
+<!doctype html><html lang="en"><head><title></title><meta charset="utf-8"><meta name="description" content="11ty site documenting 11ty"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><script>// Only register the service worker when not on localhost.
+      if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/blog/service-worker.js');
+        })
+      }
+
+      let nav;
+      let navOpen = false;
+
+      function toggleMenu() {
+        navOpen = !navOpen;
+        nav.style.left = navOpen ?
+          0 :
+          '-' + nav.getBoundingClientRect().width + 'px';
+        nav
+      }
+
+      window.onload = () => {
+        // If the URL contains a hash, use it to
+        // restore the proper page in the iframe.
+        const {hash} = location;
+        if (hash) {
+          const iframe = document.querySelector('iframe');
+          iframe.src = hash.substring(1); // removes leading #
+        }
+        
+        nav = document.querySelector('nav');
+
+        // Add a click listener to all the nav links.
+        const links = document.querySelectorAll('.nav-link');
+        Array.from(links).forEach(link => {
+          link.addEventListener('click', () => {
+            // If there's a previous active link, style it as no longer active.
+            const activeLink = document.querySelector('.active');
+            if (activeLink) activeLink.classList.remove('active');
+
+            // Style the clicked link as active.
+            link.classList.add('active');
+            console.log('link =', link);
+
+            //TODO: Why is this delay helpful in getting proper page rendering?
+            setTimeout(() => {
+              // Put new page URL in URL hash so it can be bookmarked.
+              const {href} = link;
+              const {origin} = location;
+              location.hash = href.startsWith(origin) ?
+                href.substring(origin.length) :
+                href;
+            });
+          });
+        });
+      }</script></head><body><header><h1><button class="hamburger" onclick="toggleMenu()">&#x2630;</button> Mark Volkmann's Blog</h1><div class="main-links"><a href="/blog/about-me">About Me</a> <a href="/blog/quotes">Quotes</a> <a href="/blog/topics">Topics</a></div></header><main><link rel="stylesheet" href="/blog/assets/topics.css"><nav><ul><li class="top"><a class="nav-link" href="/blog/eleventy/" target="frame">Eleventy <span class="triangle">&#x25b6;</span></a><ul><li class="ordered"><a class="nav-link" href="/blog/eleventy/ssgs/" target="frame">Static Site Generators<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="ordered"><a class="nav-link" href="/blog/eleventy/why-11ty/" target="frame">Why 11ty?<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="ordered"><a class="nav-link" href="/blog/eleventy/11ty-overview/" target="frame">11ty Overview<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="ordered"><a class="nav-link" href="/blog/eleventy/getting-started/" target="frame">Getting Started<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="ordered"><a class="nav-link" href="/blog/eleventy/11ty-configuration/" target="frame">11ty Configuration<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="ordered"><a class="nav-link" href="/blog/eleventy/github-pages/" target="frame">GitHub Pages<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/accessibility/" target="frame">Accessibility Testing<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/collections/" target="frame">Collections<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/data-cascade/" target="frame">Data Cascade<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/debugging-tips/" target="frame">Debugging Tips<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/eleventy-styling/" target="frame">Eleventy Styling <span class="triangle">&#x25b6;</span></a><ul><li class=""><a class="nav-link" href="/blog/eleventy/styling-with-sass/" target="frame">Styling with Sass<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li></ul></li><li class=""><a class="nav-link" href="https://11ty.dev/" target="frame">Eleventy web site<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/filters/" target="frame">Filters<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/front-matter/" target="frame">Front Matter<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/global-data/" target="frame">Global Data<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/internationalization/" target="frame">Internationalization<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/minify-html/" target="frame">Minify HTML<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/pagination/" target="frame">Pagination<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/permalinks/" target="frame">Permalinks<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/plugins/" target="frame">Plugins <span class="triangle">&#x25b6;</span></a><ul><li class=""><a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/" target="frame">Navigation Plugin<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/" target="frame">Syntax Highlighting<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li></ul></li><li class=""><a class="nav-link" href="/blog/eleventy/pwa/" target="frame">Progressive Web Apps<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/rest-services/" target="frame">REST Services<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/shortcodes/" target="frame">Shortcodes<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/eleventy/templating-languages/" target="frame">Templating Languages<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li></ul></li><li class="top"><a class="nav-link" href="/blog/english/" target="frame">English<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="top"><a class="nav-link" href="/blog/github/" target="frame">GitHub <span class="triangle">&#x25b6;</span></a><ul><li class=""><a class="nav-link" href="/blog/github/actions/" target="frame">GitHub Actions<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/github/extensions/" target="frame">GitHub Extensions<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/github/pricing/" target="frame">GitHub Pricing<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class=""><a class="nav-link" href="/blog/github/projects/" target="frame">GitHub Projects<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li></ul></li><li class="top"><a class="nav-link" href="/blog/html-css/holy-grail/" target="frame">HTML/CSS Holy Grail<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="top"><a class="nav-link" href="/blog/markdown/" target="frame">Markdown<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="top"><a class="nav-link" href="/blog/nunjucks/" target="frame">Nunjucks<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li><li class="top"><a class="nav-link" href="/blog/yaml/" target="frame">YAML<pre><code>&lt;/a&gt;
+</code></pre><ul></ul></a></li></ul></nav><section class="topic-content"><iframe name="frame" src="../welcome/" title="topic content"></iframe></section></main><footer>&copy; R. Mark Volkmann, 2020</footer></body></html>

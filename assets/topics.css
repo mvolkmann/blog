@@ -1,0 +1,36 @@
+body > main { display: flex; flex-direction: row; overflow: hidden; padding: 0; }
+
+body > main > nav { background-color: linen; height: 100%; overflow: auto; padding-right: 1rem; width: fit-content; }
+
+body > main > nav h2 { color: gray; }
+
+body > main > nav > ul { margin-left: 0; margin-top: 0; }
+
+body > main > nav a { color: var(--accent-color); text-decoration: none; }
+
+body > main > nav a.active { color: purple; font-weight: bold; }
+
+body > main > nav a.expanded > .triangle { transform: rotate(90deg); }
+
+body > main > nav a .triangle { display: inline-block; margin-left: 0.5rem; transform: rotate(0); transition-duration: 0.5s; transition-property: transform; }
+
+body > main > nav li { margin-top: 0.5rem; }
+
+body > main > section { flex-grow: 1; overflow: auto; }
+
+body > main > section iframe { border: none; box-sizing: border-box; height: 100%; padding: 1rem; width: 100%; }
+
+body > main li.ordered > a:not(.active) { color: green; }
+
+body > main li.top > a { font-size: 1.2rem; font-weight: bold; }
+
+body > main nav > ul { display: block; }
+
+body > main nav > ul ul { display: none; }
+
+body > main nav .expanded + ul { display: block; }
+
+body > main nav ul { list-style: none; margin-left: 1rem; margin-top: 0.5rem; padding-left: 0; }
+
+@media (max-width: 600px) { body > main nav { position: absolute; left: -232px; transition: left 0.5s; }
+  body > main nav li { margin: 1rem 0; } }

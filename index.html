@@ -17,11 +17,13 @@
       }
 
       window.onload = () => {
+        // If the URL contains a hash, use it to
+        // restore the proper page in the iframe.
+        const {hash} = location;
+        if (hash) {
+          const iframe = document.querySelector('iframe');
+          iframe.src = hash.substring(1); // removes leading #
+        }
+        
         nav = document.querySelector('nav');
-        const scrollTop = sessionStorage.getItem('navScroll');
-        if (scrollTop) nav.scrollTop = scrollTop;
-
-        nav.onscroll = () => {
-          sessionStorage.setItem('navScroll', nav.scrollTop);
-        };
       }</script></head><body><header><h1><button class="hamburger" onclick="toggleMenu()">&#x2630;</button> Mark Volkmann's Blog</h1><div class="main-links"><a href="/blog/about-me">About Me</a> <a href="/blog/quotes">Quotes</a> <a href="/blog/topics">Topics</a></div></header><main><h2>Welcome to my blog</h2></main><footer>&copy; R. Mark Volkmann, 2020</footer></body></html>
