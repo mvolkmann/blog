@@ -55,11 +55,13 @@ body > main {
     flex-grow: 1;
     overflow: auto;
 
-    iframe {
+    & > iframe {
       border: none;
       box-sizing: border-box;
       height: 100%;
       padding: 1rem;
+      transition-duration: 500ms; // matches setTimeout in topics.js
+      transition-property: opacity;
       width: 100%;
     }
   }

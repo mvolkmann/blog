@@ -14,13 +14,15 @@ function renderNavItem(entry) {
   let classes = '';
   if (entry.order) classes += ' ordered';
   if (!entry.parent) classes += ' top';
+
   // handleLinkClick is defined in assets/topics.js.
+  // It sets the iframe url instead of having
+  // an href attribute on the a element so we can animate opacity.
   return `
     <li class="${classes}">
       <a
         class="nav-link"
-        href="${entry.url}"
-        onclick="handleLinkClick(this)"
+        onclick="handleLinkClick(this, '${entry.url}')"
         target="frame"
       >
         ${entry.title}
@@ -44,7 +46,8 @@ function renderNavList(entries) {
 //TODO: Is the eleventy-navigation package still needed?
 exports.render = data => {
   const {nav} = data.collections;
-  // toggleHamburgerMenu is defined in _includes/top-layout.njk.
+  // toggleHamburgerMenu and iframeLoaded are
+  // defined in _includes/top-layout.js.
   return `
     <link rel="stylesheet" href="/blog/assets/topics.css">
     <script src="/blog/assets/topics.js"></script>
@@ -53,7 +56,11 @@ exports.render = data => {
       ${renderNavList(nav)}
     </nav>
     <section class="topic-content">
-      <iframe name="frame" src="../welcome/" title="topic content"></iframe>
+      <iframe
+        name="frame"
+        onLoad={iframeLoaded(this)}
+        src="../welcome/"
+        title="topic content"></iframe>
     </section>
   `;
 };

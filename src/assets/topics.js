@@ -2,10 +2,16 @@
 
 /**
  * This function is used in src/_includes/topics.11ty.js
- * as the click handler for anchor elements.
+ * as the click handler for anchor elements in the topic nav.
  */
 // eslint-disable-next-line no-unused-vars
-function handleLinkClick(link) {
+function handleLinkClick(link, url) {
+  const iframe = document.querySelector('iframe');
+  iframe.style.opacity = 0;
+  setTimeout(() => {
+    iframe.src = url;
+  }, 500); // matches transition-duration in topics.scss
+
   // We only need to toggle the "expanded" class for non-leaf links.
   // Links for leaf nodes do not have a next sibling.
   if (link.nextSibling) link.classList.toggle('expanded');
