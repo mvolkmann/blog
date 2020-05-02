@@ -4,9 +4,10 @@ layout: top-layout.njk
 
 <link rel="stylesheet" href="/blog/assets/topics.css">
 
+{# TODO: Is the eleventy-navigation package still needed? #}
+
 <nav>
   {% import 'macros.njk' as macros with context %}
-  {# TODO: Is the eleventy-navigation package still needed? #}
   {{ macros.renderNavList(collections.nav) }}
 </nav>
 

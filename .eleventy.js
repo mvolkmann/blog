@@ -46,6 +46,7 @@ module.exports = eleventyConfig => {
 
       if (!title) eleventyNavigation.title = key;
       if (url) eleventyNavigation.url = url;
+      eleventyNavigation.leaf = true; // assume for now
 
       keyMap[key] = eleventyNavigation;
     }
@@ -55,6 +56,7 @@ module.exports = eleventyConfig => {
       const {parent} = obj;
       if (parent) {
         parentObj = keyMap[parent];
+        parentObj.leaf = false;
         let {children} = parentObj;
         if (!children) children = parentObj.children = [];
         children.push(obj);
@@ -62,6 +64,7 @@ module.exports = eleventyConfig => {
         navMap[obj.key] = obj;
       }
     }
+    console.log('.eleventy.js x: keyMap =', keyMap);
 
     // Get an array of the top-level items.
     const navColl = Object.values(navMap);
