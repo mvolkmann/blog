@@ -33,14 +33,6 @@
         <a href="/blog/quotes/">Quotes</a>
         <a href="/blog/topics/">Topics</a>
       </div>
-      {#
-      {% set crumbs = collections.all |
-        eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
-      {% for crumb in crumbs %}
-        <a class="crumb" href="{{ crumb.url | url }}">{{ crumb.title }}</a>
-        ...
-      {% endfor %}
-      #}
     </header>
     <main>
       {{ content | safe }}

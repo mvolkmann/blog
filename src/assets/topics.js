@@ -25,11 +25,8 @@ function handleLinkClick(link, url) {
     link.classList.add('active');
 
     // Put new page URL in URL hash so it can be bookmarked.
-    const {href} = link;
     const {origin} = location;
-    location.hash = href.startsWith(origin)
-      ? href.substring(origin.length)
-      : href;
+    location.hash = url.startsWith(origin) ? url.substring(origin.length) : url;
   }
 
   toggleHamburgerMenu();
