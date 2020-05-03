@@ -32,7 +32,7 @@ To use this shortcode:
 
 ```liquid
 {% for dog in collections.dogsByName %}
-  {{ dog dog.data.breed, dog.data.name }}
+  {% dog dog.data.breed, dog.data.name %}
 {% endfor %}
 ```
 
