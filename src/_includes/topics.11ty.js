@@ -11,10 +11,9 @@ exports.data = {
 exports.render = data => {
   const {nav} = data.collections;
   // toggleHamburgerMenu and iframeLoaded are
-  // defined in _includes/top-layout.js.
+  // defined in src/top-layout.js.
   return `
     <link rel="stylesheet" href="/blog/assets/topics.css">
-    <script src="/blog/assets/topics.js"></script>
     <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button>
     <nav>
       ${data.renderNavList(nav)}
