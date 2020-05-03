@@ -1,0 +1,16 @@
+---
+layout: top-layout
+---
+
+<link rel="stylesheet" href="/blog/assets/topics.css">
+<button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button>
+<nav>
+  {{ renderNavList(collections.nav) | safe }}
+</nav>
+<section class="topic-content">
+  <iframe
+    name="frame"
+    onLoad="iframeLoaded(this)"
+    src="../welcome/"
+    title="topic content"></iframe>
+</section>

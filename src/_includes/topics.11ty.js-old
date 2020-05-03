@@ -1,5 +1,6 @@
 // This is a layout implemented in JavaScript instead of Nunjucks.
 // It is used by src/topics.md.
+// It is an alternative to topics-layout.njk.
 
 // This describes front-matter.
 exports.data = {
