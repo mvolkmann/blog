@@ -22,9 +22,8 @@ It was contributed by James Williamson in May 2018.
 
 A lot of big names in the web community love 11ty, including
 Mathias Bynens, Chris Coyier, Rob Dodson, Brian Leroux,
-Addy Osmani, Dave Rupert, and Sara Soueidan.
-
-See <https://www.11ty.dev/docs/testimonials/>.
+Addy Osmani, Dave Rupert, and Sara Soueidan. See
+{% aTargetBlank "https://www.11ty.dev/docs/testimonials/", "testimonials" %}.
 
 11ty supports many markup languages including:
 
