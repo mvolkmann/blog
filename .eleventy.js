@@ -106,8 +106,7 @@ module.exports = eleventyConfig => {
   // Copies files in a given directory to output directory
   // without performing any processing on them.
   eleventyConfig.addPassthroughCopy('src/assets');
-  eleventyConfig.addPassthroughCopy('src/top-layout.js');
-  eleventyConfig.addPassthroughCopy('src/service-worker.js');
+  eleventyConfig.addPassthroughCopy('src/js');
 
   eleventyConfig.addPlugin(navigationPlugin);
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
