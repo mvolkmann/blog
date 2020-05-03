@@ -22,8 +22,9 @@ The primary benefits of SSGs are:
 - Development of an SSG site can start from
   a pre-built site to speed development.
 
-See [staticgen.com](https://www.staticgen.com/) for a list
-of SSGs that can be sorted on various criteria.
+See {#{ aTargetBlank "https://www.staticgen.com", "staticgen.com" }#}
+<a href="https://www.staticgen.com" target="_blank">staticgen.com</a>
+for a list of SSGs that can be sorted on various criteria.
 
 Key differentiators between SSGs include:
 

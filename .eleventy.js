@@ -112,6 +112,11 @@ module.exports = eleventyConfig => {
   eleventyConfig.addPlugin(navigationPlugin);
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
 
+  eleventyConfig.addShortcode(
+    'aTargetBlank',
+    (url, text) => `<a href="${url}" target="_blank">${text}</a>`
+  );
+
   // Minify generated HTML.
   eleventyConfig.addTransform('htmlmin', (content, outputPath) => {
     if (!outputPath || !outputPath.endsWith('.html')) return content;

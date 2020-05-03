@@ -2,6 +2,7 @@
 eleventyNavigation:
   key: Eleventy Styling
   parent: Eleventy
+  title: Styling
 layout: topic-layout.njk
 ---
 
