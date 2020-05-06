@@ -112,6 +112,11 @@ module.exports = eleventyConfig => {
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
 
   eleventyConfig.addShortcode(
+    'aInternal',
+    (url, text) => `<a href="${url}" target="frame">${text}</a>`
+  );
+
+  eleventyConfig.addShortcode(
     'aTargetBlank',
     (url, text) => `<a href="${url}" target="_blank">${text}</a>`
   );

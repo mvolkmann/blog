@@ -28,11 +28,11 @@ JavaScript files can generate data and
 retrieve it from REST services.
 The use of the directory `_data` was inspired by Jekyll.
 
-Data from a file whose name starts with `{template-name}.11tydata.`
+Data from a file whose name starts with `{template-name}.11tydata.{extension}`
 is only available in template files in the same directory
-whose name starts with `{template-name}.`.
+whose name starts with `{template-name}.{extension}`.
 
-Data from a file whose name starts with `{dir-name}.11tydata.`
+Data from a file whose name starts with `{dir-name}.11tydata.{extension}`
 is available in all template files in the same directory and below.
 
 Directory files that are closer to a template file
@@ -106,8 +106,7 @@ module.exports = {
 
 Here is example content from `level1/level1.11tydata.json`,
 `level1/level2/level2.11tydata.json`, and `level1/level2/dogs.11tydata.json`.
-They all define an object with a `dogs` property
-whose value is an array of dogs.
+They all define an array of dogs.
 
 ```json
 [
@@ -137,6 +136,8 @@ layout: layout.njk
 ```
 
 # Dogs
+
+To render the dog array:
 
 {% raw %}
 

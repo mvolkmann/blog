@@ -6,6 +6,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+11ty is "a simple static style generator" (SSG).
+It is targeted at building static "sites", not web "apps".
+
 11ty competes with:
 
 - Gatsby (React)
@@ -30,7 +33,8 @@ but they only need to know basic JavaScript.
 For contributors that are programmers, it's more likely they
 will know JavaScript than other programming languages.
 
-11ty supports a wide variety of templating languages listed earlier
+11ty supports a wide variety of templating languages
+{% aInternal 'listed earlier', '/blog/eleventy/ssgs/' %}
 and use of these can be mixed within the same site.
 All the supported templating languages require less effort to learn
 than learning a new web framework or programming language.

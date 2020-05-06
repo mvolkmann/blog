@@ -18,9 +18,9 @@ For example, documents that each describe a specific dog
 can have front matter similar to the following.
 
 ```yaml
-tags: dog
-name: Dasher
 breed: whippet
+name: Dasher
+tags: dog
 ```
 
 Multiple tags can be specified by listing them
@@ -37,9 +37,9 @@ For example:
 {% raw %}
 
 ```liquid
-{%- for dog in collections.dog -%}
+{% for dog in collections.dog %}
   <p>{{ dog.data.name}} is a {{dog.data.breed}}.</p>
-{%- endfor -%}
+{% endfor %}
 ```
 
 {% endraw %}
@@ -48,26 +48,27 @@ Note the use of `.data` to access the front matter variables
 specified for a dog.
 
 A layout can specify tags that become the default tags
-for all pages that use the layout.
-These can be overridden by specifying a different value for `tags` in a page.
+for all documents that use the layout.
+These can be overridden by specifying
+a different value for `tags` in a document.
 
-Page-related properties that are added to collection objects by 11ty include:
+Document-related properties that are added to collection objects by 11ty include:
 
 - `data`: an object that holds the front matter variables
 - `date`: the date and time at which the template file was created, not modified
-- `fileSlug`: the part of the page URL that uniquely identifies it
-- `filePathStem`: the file path in the page URL that uniquely identifies it
+- `fileSlug`: the part of the document URL that uniquely identifies it
+- `filePathStem`: the file path in the document URL that uniquely identifies it
 - `inputPath`: the relative file path to the source template file
 - `outputPath`: the path to the output HTML file relative to the top of the project
 - `template`: an object that holds lots of 11ty-specific data
 - `templateContent`: the string of HTML produced from the template
-- `url`: the page URL
+- `url`: the document URL
 
 Storing the front matter variables in the `data` object
-avoids name collisions with other page-related properties.
+avoids name collisions with other document-related properties.
 
-A good way to implement page navigation in an 11ty site is to use
-the [navigation plugin](/blog/navigation-plugin).
+A good way to implement page navigation in an 11ty site is to use the
+{% aInternal '/blog/eleventy/plugins/navigation-plugin', 'navigation plugin' %}.
 Another way is to add a tag to each template that represents
 a document that should be reachable from a nav link.
 Also add a `title` variable to each of these templates.
@@ -127,5 +128,5 @@ eleventyConfig.addCollection('dogsByName', collection => {
 
 Use the collection `dogsByName` in a `for` loop
 to iterate in the new sorted order.
-For more information on 11ty collections,
-see [collections](https://www.11ty.dev/docs/collections/).
+For more information on 11ty collections, see
+{% aTargetBlank 'https://www.11ty.dev/docs/collections/', 'collections' %}.

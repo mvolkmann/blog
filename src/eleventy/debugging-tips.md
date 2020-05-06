@@ -5,7 +5,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-To see the value of a variable in the devtools console,
+To see the value of a variable,
 use the 11ty `log` filter which calls `console.log`.
 This writes to the terminal window where the Eleventy server is running,
 not to the DevTools console.

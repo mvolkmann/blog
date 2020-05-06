@@ -7,7 +7,7 @@ layout: topic-layout.njk
 ---
 
 Configuration options for 11ty are documented on the 11ty
-[Configuration](https://www.11ty.dev/docs/config/) page.
+{% aTargetBlank 'https://www.11ty.dev/docs/config/', 'Configuration' %} page.
 
 By default the file `.eleventy.js` is used
 to specify configuration options for 11ty.
@@ -32,7 +32,7 @@ module.exports = eleventyConfig => {
     // updated content should be written to "outputPath".
   });
 
-  // Copies files in a given directory to output directory
+  // Copies files in a given directory to the output directory
   // without performing any processing on them.
   eleventyConfig.addPassthroughCopy('assets');
 
@@ -94,10 +94,14 @@ module.exports = eleventyConfig => {
 };
 ```
 
-Another kind of file that can be placed in the `_include` directory
-is `.njk` files that define macros.
-See an example in [navigation plugin](/blog/navigation-plugin).
-
 TODO: What else goes in the "includes" directory besides layout files?
 ANSWER: include files, extends files, and partials
 TODO: But what are these?
+
+Another kind of file that can be placed in the `_include` directory
+is `.njk` files that define macros.
+An example can be found in
+{% aInternal
+  '/blog/eleventy/plugins/navigation-plugin/',
+  'navigation plugin'
+%}.

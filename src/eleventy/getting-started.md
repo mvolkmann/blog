@@ -13,12 +13,24 @@ Here are the most basic steps to create and build an 11ty site.
 1. Enter `npm install -D @11ty/eleventy`.
 1. Create the directory `_includes`.
 1. Add the file `layout.md` in the `_includes`
-   directory containing the following:
+   directory containing the following.
+   The `meta` tags are necessary to get a perfect
+   {% aTargetBlank
+     'https://developers.google.com/web/tools/lighthouse',
+     'Lighthouse'
+   %} score.
 
    {% raw %}
 
    ```html
+   <!DOCTYPE html>
    <html lang="en">
+     <head>
+       <title>My Site</title>
+       <meta charset="utf-8" />
+       <meta name="description" content="My Site" />
+       <meta name="viewport" content="width=device-width, initial-scale=1" />
+     </head>
      <body>
        {{content | safe}}
      </body>
@@ -60,4 +72,4 @@ that can be used to build and serve the site:
 ```
 
 To deploy an 11ty site to GitHub Pages,
-see [here](/blog/github/github-pages).
+see [here](/blog/github/pages/).

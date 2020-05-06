@@ -30,22 +30,22 @@ To install it in Chrome:
 1. Click the "Download axe" button.
 1. Click the "Add to Chrome" button.
 
-To run Axe on a web site:
+To run axe on a web site:
 
-. Browse the web site to be tested.
-. Open the browser DevTools.
-. Click the axe tab.
-. Click the "Analyze" button.
-. Click each issue identified in the left nav
-to see a detailed description on the right.
+1. Browse the web site to be tested.
+1. Open the browser DevTools.
+1. Click the axe tab.
+1. Click the "Analyze" button.
+1. Click each issue identified in the left nav
+   to see a detailed description on the right.
 
 To navigate between multiple instances of the same issue type,
 click the "<" and ">" buttons in the upper-right.
 
-To see the rendered element associated with the issue,
+To see the rendered element associated with an issue,
 click "Highlight".
 
-To see the DOM element associated with the issue,
+To see the DOM element associated with an issue,
 click "</> Inspect Node".
 
 To rerun the tests after code changes,
