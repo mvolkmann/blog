@@ -8,6 +8,8 @@ if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
 var navLeftWhenClosed;
 
 window.onload = () => {
+  console.log('top-layout.js: navigator.share =', navigator.share);
+
   // If the URL contains a hash, use it to
   // restore the proper page in the iframe.
   const {hash} = location;
