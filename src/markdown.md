@@ -21,7 +21,7 @@ Let's review the most commonly used parts of Markdown syntax.
 - **bold and italic**: `**_text_**` or `__*text*__`
 - **strikethrough**: `~~text~~`
 
-- **block quotes**: precede each line with `>`; text is automatically wrapped
+- **block quotes**: precede each line with `>`, text is automatically wrapped
 
 - **code in a line**: surround with single backticks
 - **code on multiple lines**: surround with lines containing three backticks; follow first line of backticks with a language identifier; ex. `---js`

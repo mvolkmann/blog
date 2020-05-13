@@ -2,6 +2,7 @@
 eleventyNavigation:
   key: GitHub Pricing
   parent: GitHub
+  title: Pricing
 layout: topic-layout.njk
 ---
 

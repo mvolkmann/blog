@@ -2,6 +2,7 @@
 eleventyNavigation:
   key: GitHub Projects
   parent: GitHub
+  title: Projects
 layout: topic-layout.njk
 ---
 

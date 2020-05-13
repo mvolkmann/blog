@@ -3,6 +3,7 @@ css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: GitHub Extensions
   parent: GitHub
+  title: Extensions
 layout: topic-layout.njk
 ---
 

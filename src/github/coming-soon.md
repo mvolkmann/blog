@@ -3,6 +3,7 @@ css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: GitHub Upcoming Features
   parent: GitHub
+  title: Coming Soon
 layout: topic-layout.njk
 ---
 

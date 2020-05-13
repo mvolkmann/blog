@@ -3,14 +3,22 @@ css: '/blog/assets/github-actions.css'
 eleventyNavigation:
   key: GitHub Actions
   parent: GitHub
+  title: Actions
 layout: topic-layout.njk
 ---
+
+### Overview
 
 GitHub Actions enable registering "jobs" to run on a cloud server
 in response to GitHub events.
 The cloud server must have the GitHub Actions runner application is installed.
 GitHub provides these servers for free,
-but it is also possible to use your on servers.
+but it is also possible to run jobs on your own servers.
+
+- A "workflow" defines a set of jobs using a YAML file.
+- A "job" defines a set up steps to run
+  in given environments (ex. `ubuntu-latest`).
+- A "step" is a single task that runs a predefined action or a shell command.
 
 For example, a workflow can build an application
 after every push to given branches.
@@ -18,13 +26,9 @@ This can include running linters, code formatters, and tests.
 Executed workflows and their output appear in the
 "Actions" tab of each GitHub repository.
 
-A "workflow" defines a set of jobs using a YAML file.
-A "job" defines a set up steps to run
-in given environments (ex. `ubuntu-latest`);
-A "step" is a single task runs a predefined action or a shell command.
-
 A shell command can run a shell script or
 a CLI command such as those provided by `npm`.
+Examples include `npm install`, `npm run lint`, and `npm test`.
 
 There are over 3,000 predefined actions to choose from,
 cataloged at <https://github.com/actions>
@@ -32,7 +36,7 @@ and <https://github.com/marketplace?type=actions>.
 Many of these are commercial,
 but there are over 200 that have a free tier.
 
-## Configuring Workflows
+### Configuring Workflows
 
 Workflows for a repository are configured by YAML files
 in the `.github/workflows` directory.
@@ -47,20 +51,22 @@ from their GitHub repositories.
 
 ```yaml
 name: My Demo # workflow name
-on: [push]
+on: push
 jobs:
   build: # job id
     name: DemoJob # job name
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        id: hello # used to refer to output
+        id: hello # used below to refer to output from this step
         uses: actions/hello-world-javascript-action@master
         with: # specifies arguments to the action
           who-to-greet: 'Mark Volkmann'
       - name: Time
-        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+        run: echo 'The time was ${\{ steps.hello.outputs.time }}.'
 ```
+
+> Note: Remove the backslash in the previous line.
 
 This executes on every push to the repository on any branch.
 
@@ -71,20 +77,56 @@ These are documented at
 Some events are triggered by more than one kind of activity.
 When this is the case, a particular activity type can be specified.
 
+### Workflow Jobs
+
+In the workflow defined above, `build` is a job id.
+This workflow defines a single job.
+Defining multiple jobs is useful to allow some steps
+to run on a server that uses a different operating system.
+
+### Workflow Steps
+
+Each step (a.k.a. action) within a job is defined by a number of properties.
+
+| Property Name | Meaning                                                                  |
+| ------------- | ------------------------------------------------------------------------ |
+| `name`        | step name that appears in the web UI that shows workflow results         |
+| `run`         | a shell command to run                                                   |
+| `uses`        | a predefined action to use                                               |
+| `with`        | arguments to pass to the action                                          |
+| `id`          | name that will be used to refer to action result properties              |
+| `needs`       | step name (or array of them) that must completed before this step begins |
+
+Specify `run` or `uses`, but not both.
+
+If a step does not have a `name` property,
+a name is created from the value of `run` or `uses`.
+
+The `id` property specifies a property name
+whose value will be an object with an `outputs` property
+that is an object that holds all the output values.
+Actions typically document their outputs.
+In the example above, the action creates an output named `time`
+which can be accessed with `steps.hello.outputs.time`
+because the value of `id` is `hello`.
+The action sets this to the time at which it was executed.
+
+### Supported Webhook Events
+
 <table>
   <tr>
     <th>Webhook Event</th>
     <th>Triggered By</th>
   </tr>
   <tr>
-    <td class="bold">check_run</td>
+    <td>check_run</td>
     <td>
       the "check runs" API is invoked;
       can check code in various ways (ex. linting)
     </td>
   </tr>
   <tr>
-    <td class="bold">check_suite</td>
+    <td>check_suite</td>
     <td>a suite of check runs is executed</td>
   </tr>
   <tr>
@@ -96,11 +138,11 @@ When this is the case, a particular activity type can be specified.
     <td>a branch or tag is deleted</td>
   </tr>
   <tr>
-    <td class="bold">deployment</td>
+    <td>deployment</td>
     <td>a request to deploy a branch, SHA, or tag is received</td>
   </tr>
   <tr>
-    <td class="bold">deployment_status</td>
+    <td>deployment_status</td>
     <td>
       a deployment status is provided by an HTTP POST request to a GitHub API
     </td>
@@ -126,11 +168,11 @@ When this is the case, a particular activity type can be specified.
     </td>
   </tr>
   <tr>
-    <td class="bold">label</td>
+    <td>label</td>
     <td>a label is created, edited, or deleted</td>
   </tr>
   <tr>
-    <td class="bold">milestone</td>
+    <td>milestone</td>
     <td>a milestone is created, closed, opened, edited, or deleted</td>
   </tr>
   <tr>
@@ -157,7 +199,7 @@ When this is the case, a particular activity type can be specified.
     <td>a project column is created, updated, moved, or deleted</td>
   </tr>
   <tr>
-    <td class="bold">public</td>
+    <td>public</td>
     <td>a private repo is changed to public</td>
   </tr>
   <tr>
@@ -181,7 +223,7 @@ When this is the case, a particular activity type can be specified.
     <td>a commit is pushed</td>
   </tr>
   <tr>
-    <td class="bold">registry_package</td>
+    <td>registry_package</td>
     <td>a registry package (npm alternative) is published or updated</td>
   </tr>
   <tr>
@@ -192,7 +234,7 @@ When this is the case, a particular activity type can be specified.
     </td>
   </tr>
   <tr>
-    <td class="bold">status</td>
+    <td>status</td>
     <td>the status of a commit changes</td>
   </tr>
   <tr>
@@ -201,12 +243,49 @@ When this is the case, a particular activity type can be specified.
   </tr>
 </table>
 
-You can also create a "scheduled event" which
-schedules a workflow to run at a certain time interval.
+### Scheduled Workflows
 
-You can also trigger a workflow to run by creating a
-`repository-dispatch` event that is created by
-sending an HTTP POST request to a GitHub API endpoint.
+A workflow can be scheduled to run at a certain time interval
+by defining a "scheduled event".
+For example, adding the following in a workflow YAML file
+causes the jobs that follow it to run every five minutes:
+
+```yaml
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+```
+
+The parts of the `cron` value, in order, are
+minutes (0-59), hours (0-23), day of month (1-31),
+month (1-12), and day of week (0-6).
+An asterisk is treated as a wildcard character, allowing any value.
+Specifying a minute value with `*/n` means to run at every nth interval,
+so `*/5` runs every five minutes.
+
+### Manually Triggered Workflows
+
+A workflow can be triggered to run by dispatching a `repository_dispatch` event.
+This is done by sending an HTTP POST request to a GitHub API endpoint.
+
+Define the events that should trigger a workflow
+in a workflow YAML file as follows:
+
+```yaml
+on:
+  repository_dispatch:
+    types: [start-my-workflow]
+```
+
+For details on sending a POST request for the specified event type
+in order to trigger the workflow, see
+<https://developer.github.com/v3/repos/#create-a-repository-dispatch-event> and
+<https://dev.to/teamhive/triggering-github-actions-using-repository-dispatches-39d1>.
+These describe the required request headers
+(including an `Authorization` header containing a personal access token)
+and body.
+
+### Operating System
 
 For workflows that will run on a GitHub-hosted server (a.k.a. runner),
 the operating system of the server can be specified.
@@ -228,37 +307,7 @@ An example of specifying this is:
 runs-on: [self-hosted, linux]
 ```
 
-In the example above, `build` is a job id.
-TODO: Where are job ids displayed in the web UI?
-This workflow only defines one job.
-Defining multiple jobs is useful to allow some steps
-to run on a server that uses a different operating system.
-
-Each step (a.k.a. action) is defined by a number of properties.
-
-| Property Name | Meaning                                                                  |
-| ------------- | ------------------------------------------------------------------------ |
-| `name`        | step name that appears in the web UI that shows workflow results         |
-| `run`         | a shell command to run                                                   |
-| `uses`        | a predefined action to use                                               |
-| `with`        | arguments to pass to the action                                          |
-| `id`          | name that will be used to refer to action result properties              |
-| `needs`       | step name (or array of them) that must completed before this step begins |
-
-Specify `run` or `uses`, but not both.
-If a step does not have a `name` property,
-a name is created from the value of `run` or `uses`.
-
-The `id` property specifies a property name
-whose value will be an object with an `outputs` property
-that is an object that holds all the output values.
-Actions typically document their outputs.
-In the example above, the action creates an output named `time`
-which can be accessed with `steps.hello.outputs.time`
-because the value of `id` is `hello`.
-The action sets this to the time at which it was executed.
-
-## Viewing Action Results
+### Viewing Action Results
 
 After a workflow is triggered, click the "Actions" tab of the
 GitHub repository to refresh the list of triggered workflows.
@@ -303,7 +352,7 @@ time at which the "Hello" step was executed.
 
 ![GitHub Actions web UI #2](/blog/assets/github-actions-web-ui-4.png)
 
-## Popular Predefined Actions
+### Popular Predefined Actions
 
 Used by many workflows:
 
@@ -337,7 +386,7 @@ Used by the "Build and Deploy to GKE" workflow for GCP:
 
 - `GoogleCloudPlatform/github-actions/setup-gcloud@master`
 
-## Workflow Templates
+### Workflow Templates
 
 A workflow can be created from the GitHub web UI.
 Click the "Actions" tab and press the "New workflow" button.
@@ -427,7 +476,7 @@ This workflow runs the following commands:
 TODO: Is there an issue with having more than one workflow file?
 TODO: It seems only one gets executed.
 
-## Multi-line Commands
+### Multi-line Commands
 
 In this example, there are multiple, consecutive steps
 that each run one command.
@@ -450,13 +499,13 @@ as follows:
     npm run build
 ```
 
-## Executing Shell Commands
+### Executing Shell Commands
 
 GitHub Actions do not have to use an existing action
 such "hello-world-javascript-action".
 They can also execute shell commands.
 
-## Workflow Errors
+### Workflow Errors
 
 If a workflow step results in an error,
 subsequent steps will not be executed.
@@ -470,7 +519,7 @@ The email will links to see the results.
 The link containing the failed job name is more informative
 than the link containing "View results".
 
-## Using Secrets
+### Using Secrets
 
 To use secret information like passwords and tokens in a workflow,
 create GitHub secrets.
@@ -479,7 +528,7 @@ To add a secret to a GitHub repo:
 - browse the GitHub repo
 - click the "Settings" tab
 - click "Secrets" in the left nav
-- click "Add a new secret"
+  -click "Add a new secret"
 - for the name, enter "GH_TOKEN"
 - for the value, paste in your GitHub personal access token
 - click "Add secret"
@@ -489,7 +538,7 @@ with the syntax `${{ secrets.name }}`
 where `name` is the secret name.
 This is used in the following workflow.
 
-## Building and Publishing an Eleventy Site
+### Building and Publishing an Eleventy Site
 
 Here is a workflow file that builds and deploys an Eleventy site
 on every push.
@@ -522,7 +571,7 @@ jobs:
 
 For more details, see <https://github.com/peaceiris/actions-gh-pages>.
 
-## Manually Triggering
+### Manually Triggering
 
 Currently there is no way to manually
 trigger a workflow from the GitHub web UI.
@@ -539,7 +588,7 @@ This is done as follows:
     types: [started]
 ```
 
-## Output with echo
+### Output with echo
 
 When running in a Linux environment,
 a step can use the `echo` command to produce output.
@@ -556,7 +605,7 @@ select the job, and click the disclosure triangle for the step.
 If the step has no disclosure triangle,
 click the ellipsis in the upper-right and select "View raw logs".
 
-## Shell Scripts
+### Shell Scripts
 
 A step execute a shell script that exists in the repository.
 For example:
@@ -566,7 +615,7 @@ For example:
   run: . ./bin/example.sh
 ```
 
-## Contexts
+### Contexts
 
 A large amount of context information is available in workflows.
 It is stored in the following context objects:
@@ -592,7 +641,7 @@ For example:
 
 {% endraw %}
 
-## Sending Email
+### Sending Email
 
 A step can send an email.
 For example, this workflow sends an email
@@ -667,7 +716,7 @@ These steps assume that GMail is being used.
 For more detail in the `action-send-mail` action,
 see <https://github.com/dawidd6/action-send-mail>.
 
-## Conditional Steps
+### Conditional Steps
 
 A step can include an `if` property to make its execution conditional.
 For a list of available variables that can be used in the condition,
@@ -706,7 +755,7 @@ To trigger it again, unstar and star the repo.
 The reported action name will be the workflow name rather than
 a commit message since it was not triggered by a commit.
 
-## Setting Output
+### Setting Output
 
 A set can set output that can be used in subsequent steps.
 For example:
@@ -721,7 +770,7 @@ For example:
 
 This outputs "bar".
 
-## Multiple Workflows
+### Multiple Workflows
 
 A repository can define any number of workflows
 by creating multiple YAML files in the `.github/workflows` directory.
@@ -733,7 +782,7 @@ They will all have the same title which is the commit comment.
 Below each title is the workflow name which is what distinguishes them.
 Click them one at a time to see their results.
 
-## Defining Actions
+### Defining Actions
 
 An action is defined by a YAML file
 that describes an object with the following properties:

@@ -1,3 +1,23 @@
+blockquote {
+  border: solid lightgray 1px;
+  color: gray;
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0;
+  margin-top: 0;
+  padding: 0 1rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+h3 {
+  border-top: solid lightgray 1px;
+  padding-top: 1rem;
+}
+
 img {
   display: block;
   width: 800px;
