@@ -7,13 +7,14 @@ tags: eleventy
 ---
 
 Files processed by 11ty can begin with front matter.
-This starts with a line containing only three dashes
+This starts with a line containing three dashes
 and ends with the same kind of line.
 Lines between these define variables.
-Variables can be used other files and can represent many kinds of values
-including CSS property values, icons, URLs, ...
+Variables can be used in this and other files
+and can represent many kinds of values
+including text, numbers, URLs, CSS property values, icons, ...
 
-By default this expects YAML syntax.
+By default front matter is treated as YAML syntax.
 For example:
 
 ```yaml
@@ -38,21 +39,21 @@ For example:
 
 Some special variables recognized by 11ty include:
 
-- layout:
+- `layout`:
   uses a layout template found in the `_includes` directory
-- tags:
+- `tags`:
   single string or array of collection names to which this data belongs
-- date: overrides the default file creation date to change sort order
-- pagination:
+- `date`: overrides the default file creation date to change sort order
+- `pagination`:
   enables iteration over data in front matter to
   output multiple HTML files from this template
-- permalink:
+- `permalink`:
   changes the output target of the template
-- dynamicPermalink:
+- `dynamicPermalink`:
   enables or disables template syntax in permalink values (default is true)
-- templateEngineOverride:
+- `templateEngineOverride`:
   overrides the template engine used for this file
-- eleventyExcludeFromCollections:
+- `eleventyExcludeFromCollections`:
   true to exclude this content from collections
 
 TODO: Are there any Nunjucks-specific variables?
