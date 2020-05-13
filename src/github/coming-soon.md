@@ -7,7 +7,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-## Codespaces
+### Codespaces
 
 Codespaces is VS Code on the web.
 It can be launched directly from a GitHub repo
@@ -19,7 +19,7 @@ It supports an integrated terminal for executing shell commands.
 This is currently in beta (as of 5/13/20), but early access can be requested
 at <https://github.com/features/codespaces>.
 
-## Discussions
+### Discussions
 
 "Discussions" provides a way to host a forum associated with a repository.
 This is a better place to ask and answer questions
@@ -31,7 +31,7 @@ only selected repositories have been allowed to use it.
 It is expected that all repositories will have the ability to
 add a discussion forum in summer 2020 by enabling the feature in Settings.
 
-## Security
+### Security
 
 A new tab labeled "Security" in the web UI of GitHub repos reports
 "common vulnerabilities and coding errors".

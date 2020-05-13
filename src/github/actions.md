@@ -40,6 +40,7 @@ but there are over 200 that have a free tier.
 
 Workflows for a repository are configured by YAML files
 in the `.github/workflows` directory.
+Any number of workflows can be triggered by a single GitHub event.
 For details on the syntax of these files, see
 <https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions>.
 
@@ -442,9 +443,6 @@ This workflow runs the following commands:
   which means that warnings from tests will be treated as errors
   and cause the build to fail.
 
-TODO: Is there an issue with having more than one workflow file?
-TODO: It seems only one gets executed.
-
 ### Popular Predefined Actions
 
 The following action checks out the repository in the cloud environment.
@@ -453,12 +451,12 @@ The following action checks out the repository in the cloud environment.
   This is used by many predefined workflows.
 
 The following actions setup the environment
-for a particular programming language.
+to use a particular programming language.
 
 - `actions/setup-go@v1`  
   This is used by the "Go" workflow.
 
-* `actions/setup-java@v1`  
+- `actions/setup-java@v1`  
   This is used by the "Java with Gradle" and "Java with Maven" workflows.
 
 - `actions/setup-node@v1`  
@@ -479,7 +477,7 @@ The following action is used by the "Build and Deploy to GKE" workflow for GCP.
 
 - `GoogleCloudPlatform/github-actions/setup-gcloud@master`
 
-### Multi-line Commands
+### Multi-line Steps
 
 In this example, there are multiple, consecutive steps
 that each run one command.
@@ -502,12 +500,6 @@ as follows:
     npm run build
 ```
 
-### Executing Shell Commands
-
-GitHub Actions do not have to use an existing action
-such "hello-world-javascript-action".
-They can also execute shell commands.
-
 ### Workflow Errors
 
 If a workflow step results in an error,
@@ -518,7 +510,7 @@ a code linting error, a compiler error, or a test failure.
 If there are any errors, the repository owner
 will receive an email with the subject
 "[{username}/{repo-name}] Run failed: {workflow-name} - {branch-name}".
-The email will links to see the results.
+The email will include two links that can be clicked to see the results.
 The link containing the failed job name is more informative
 than the link containing "View results".
 
@@ -526,20 +518,23 @@ than the link containing "View results".
 
 To use secret information like passwords and tokens in a workflow,
 create GitHub secrets.
+
 To add a secret to a GitHub repo:
 
-- browse the GitHub repo
-- click the "Settings" tab
-- click "Secrets" in the left nav
-  -click "Add a new secret"
-- for the name, enter "GH_TOKEN"
-- for the value, paste in your GitHub personal access token
-- click "Add secret"
+- Browse the GitHub repo.
+- Click the "Settings" tab.
+- Click "Secrets" in the left nav.
+- Click "Add a new secret".
+- For the name, enter "GH_TOKEN".
+- For the value, paste in your GitHub personal access token.
+- Click "Add secret".
 
 Secrets can then be referenced by name in a workflow
-with the syntax `${{ secrets.name }}`
+with the syntax `${\{ secrets.name }}`
 where `name` is the secret name.
-This is used in the following workflow.
+This is used in the workflow in the next section.
+
+> Note: Remove the backslash in the syntax above.
 
 ### Building and Publishing an Eleventy Site
 
@@ -555,16 +550,14 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: git checkout
-        uses: actions/checkout@v2
-      - name: Node.js setup
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          node-version: 12.x
-      - name: npm clean install
-        run: npm ci
-      - name: site build
-        run: npm run build
+          node-version: 14.x
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format
+      - run: npm run build
       - name: site deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -572,7 +565,8 @@ jobs:
           publish_dir: ./_site
 ```
 
-For more details, see <https://github.com/peaceiris/actions-gh-pages>.
+For more details on the "site deploy" step,
+see <https://github.com/peaceiris/actions-gh-pages>.
 
 ### Manually Triggering
 
