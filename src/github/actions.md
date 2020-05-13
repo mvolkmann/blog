@@ -50,6 +50,8 @@ It uses an action defined at
 The code that implements actions is automatically retrieved
 from their GitHub repositories.
 
+{% raw %}
+
 ```yaml
 name: My Demo # workflow name
 on: push
@@ -64,10 +66,10 @@ jobs:
         with: # specifies arguments to the action
           who-to-greet: 'Mark Volkmann'
       - name: Time
-        run: echo 'The time was ${\{ steps.hello.outputs.time }}.'
+        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
 ```
 
-> Note: Remove the backslash in the previous line.
+{% endraw %}
 
 This executes on every push to the repository on any branch.
 
@@ -529,12 +531,14 @@ To add a secret to a GitHub repo:
 - For the value, paste in your GitHub personal access token.
 - Click "Add secret".
 
+{% raw %}
+
 Secrets can then be referenced by name in a workflow
-with the syntax `${\{ secrets.name }}`
+with the syntax `${{ secrets.name }}`
 where `name` is the secret name.
 This is used in the workflow in the next section.
 
-> Note: Remove the backslash in the syntax above.
+{% endraw %}
 
 ### Building and Publishing an Eleventy Site
 
@@ -568,21 +572,28 @@ jobs:
 For more details on the "site deploy" step,
 see <https://github.com/peaceiris/actions-gh-pages>.
 
-### Manually Triggering
+### Manually Triggering a Workflow
 
 Currently there is no way to manually
 trigger a workflow from the GitHub web UI.
 It is a frequently requested feature, as indicated at
-<https://github.community/t5/GitHub-Actions/GitHub-Actions-Manual-Trigger-Approvals/td-p/31504>.
+{% aTargetBlank
+  'https://github.community/t5/GitHub-Actions/GitHub-Actions-Manual-Trigger-Approvals/td-p/31504',
+  'feature request'
+%}.
 
 However, workarounds are possible.
 One workaround is to configure a workflow to be triggered
 when the repository is starred.
-This is done as follows:
+This is done by changing the `on` property
+at the top of a workflow file to the following:
 
 ```json
-  watch:
-    types: [started]
+on:
+  push: # existing event
+    branches: [master]
+  watch: # newly added event
+    types: [started] # triggered by staring the repo
 ```
 
 ### Output with echo
@@ -604,7 +615,7 @@ click the ellipsis in the upper-right and select "View raw logs".
 
 ### Shell Scripts
 
-A step execute a shell script that exists in the repository.
+A step can execute a shell script that exists in the repository.
 For example:
 
 ```yaml
@@ -619,9 +630,12 @@ It is stored in the following context objects:
 `env`, `github`, `job`, `matrix`, `needs`,
 `runner`, `secrets`, `steps`, and `strategy`.
 To learn more about these, see
-<https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts>.
+{% aTargetBlank
+  'https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts',
+  'contexts'
+%}.
 
-To output the data in a particular context using a GitHub Actions step,
+To output the data in a particular context in a step,
 use the `toJson` function to put the JSON representation of the object
 in an environment variable
 and then use an `echo` shell command to output it.
@@ -653,7 +667,7 @@ jobs:
   project-change:
     runs-on: ubuntu-latest
     steps:
-      - name: dump GitHub context
+      - name: dump GitHub context to discover available data
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
