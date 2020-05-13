@@ -311,7 +311,7 @@ runs-on: [self-hosted, linux]
 
 After a workflow is triggered, click the "Actions" tab of the
 GitHub repository to refresh the list of triggered workflows.
-This can be done repeated until the workflow appears.
+This can be done repeatedly until the workflow appears.
 
 ![GitHub Actions web UI #1](/blog/assets/github-actions-web-ui-1.png)
 
@@ -346,45 +346,11 @@ Here we see the "Set up job" and "Hello" steps expanded.
 The "Set up job" step shows the operating system that was used
 and actions that were downloaded (ex. "hello-world-javascript-action").
 
-Here we see the "Time" and "Complete Job" steps expanded.
+Next, we see the "Time" and "Complete Job" steps expanded.
 In this example the "Time" step shows the
 time at which the "Hello" step was executed.
 
 ![GitHub Actions web UI #2](/blog/assets/github-actions-web-ui-4.png)
-
-### Popular Predefined Actions
-
-Used by many workflows:
-
-- `actions/checkout@v2`
-
-Used by the "Go" workflow:
-
-- `actions/setup-go@v1`
-
-Used by the "Java with Gradle" and "Java with Maven" workflows:
-
-- `actions/setup-java@v1`
-
-Used by the "Node.js" and "Publish Node.js package" workflows:
-
-- `actions/setup-node@v1`
-
-Used by the "Python application", "Python package",
-and "Publish Python package" workflows:
-
-- `actions/setup-python@v1`
-
-Used by the "Deploy to Amazon ECS" workflow for AWS:
-
-- `aws-actions/configure-aws-credentials@v1`
-- `aws-actions/amazon-ecr-login@v1`
-- `aws-actions/amazon-ecs-render-task-definition@v1`
-- `aws-actions/amazon-ecs-deploy-task-definition@v1`
-
-Used by the "Build and Deploy to GKE" workflow for GCP:
-
-- `GoogleCloudPlatform/github-actions/setup-gcloud@master`
 
 ### Workflow Templates
 
@@ -394,8 +360,7 @@ This presents a series of boxes that describe workflow templates.
 Click the "Set up this workflow" button inside one of the boxes
 to create a workflow based on that template.
 
-Here is an example workflow file that does this.
-For example, the "Node.js" template contains the following:
+Here is an example workflow file created from the "Node.js" template:
 
 ```yaml
 name: Node.js CI
@@ -427,8 +392,10 @@ jobs:
           CI: true
 ```
 
-It offers to save this a `.github/workflows/nodejs.yml` in your repository.
+After clicking the button, it offers to save this workflow file
+in `.github/workflows/nodejs.yml` within your repository.
 You can customize the file name and the workflow definition if desired.
+
 When ready to save it, press the "Start Commit" button in the upper-right.
 A dialog will appear.
 Optionally enter a commit comment and press the "Commit new file" button.
@@ -438,34 +405,36 @@ Click the "Actions" tab to see the results.
 
 Two events trigger this workflow to execute.
 The first is a push to the master branch.
-The second is a pull request to the master branch.
+The second is creating a pull request on the master branch.
 
 Setting `strategy.matrix.node-version` to an array of version numbers
 causes it to execute the steps in each version of Node.
 This is useful to run tests in multiple versions of Node.
 To only use the latest version of version 12,
 remove `strategy.matrix.node-version` and
-change the `node-version` property for the `setup-node` step to just `12.x`.
+change the `node-version` property for the `setup-node` step
+to `12.x` instead of `${{ matrix.node-version }}`.
 
 This workflow runs the following commands:
 
 - `actions/checkout@v2` is a predefined action that checks out
   the most recent commit to a given branch which defaults to "master".
-  See <https://github.com/actions/checkout> for options.
-- `actions/setup-node@v1` is a predefined action that
-  sets the Node environment to be used by actions.
+  See {% aTargetBlank 'https://github.com/actions/checkout', 'checkout' %}
+  for options.
+- `actions/setup-node@v1` is a predefined action that sets the Node environment.
   It uses a version specified in `strategy.matrix.node-version`
   unless the `node-version` property is specified.
   When the matrix property specifies Node versions,
   the version used in a particular run becomes part of the step name.
-  See <https://github.com/actions/setup-node> for options.
+  See {% aTargetBlank 'https://github.com/actions/setup-node', 'setup-node' %}
+  for options.
 - `npm ci` does a clean install of all dependencies.
-  It is similar to `npm install`, but differs in that
-  - if the `node_modules` directory exists, it is deleted
-  - `package-lock.json` must exist
-  - it is an error if `package.json` specifies different
-    dependencies or versions than `package-lock.json`
-  - `package-lock.json` will not be updated
+  It is similar to `npm install`, but differs the following ways:
+  - If the `node_modules` directory exists, it is deleted.
+  - The file `package-lock.json` must exist.
+  - It is an error if `package.json` specifies different
+    dependencies or versions than `package-lock.json`.
+  - The `package-lock.json` file is not be updated.
 - `npm run build --if-present` runs the `build` script if it is defined,
   but it is not treated as an error if it is missing.
 - `npm test` runs tests using the commands in the `test` script.
@@ -475,6 +444,40 @@ This workflow runs the following commands:
 
 TODO: Is there an issue with having more than one workflow file?
 TODO: It seems only one gets executed.
+
+### Popular Predefined Actions
+
+The following action checks out the repository in the cloud environment.
+
+- `actions/checkout@v2`  
+  This is used by many predefined workflows.
+
+The following actions setup the environment
+for a particular programming language.
+
+- `actions/setup-go@v1`  
+  This is used by the "Go" workflow.
+
+* `actions/setup-java@v1`  
+  This is used by the "Java with Gradle" and "Java with Maven" workflows.
+
+- `actions/setup-node@v1`  
+  This is used by the "Node.js" and "Publish Node.js package" workflows.
+
+- `actions/setup-python@v1`  
+  This is used by the "Python application", "Python package",
+  and "Publish Python package" workflows.
+
+The following actions are used by the "Deploy to Amazon ECS" workflow for AWS.
+
+- `aws-actions/configure-aws-credentials@v1`
+- `aws-actions/amazon-ecr-login@v1`
+- `aws-actions/amazon-ecs-render-task-definition@v1`
+- `aws-actions/amazon-ecs-deploy-task-definition@v1`
+
+The following action is used by the "Build and Deploy to GKE" workflow for GCP.
+
+- `GoogleCloudPlatform/github-actions/setup-gcloud@master`
 
 ### Multi-line Commands
 
