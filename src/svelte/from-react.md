@@ -6,8 +6,8 @@ layout: topic-layout.njk
 ---
 
 When converting a React component to a Svelte component
-there are common changes that are needed.
-This page summarizes the most common one.
+there are many common changes that are needed.
+This page summarizes the most common of these.
 
 {% raw %}
 - Copy the JavaScript code into a `<script>` element.
