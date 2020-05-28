@@ -411,9 +411,8 @@ The first is a push to the master branch.
 The second is creating a pull request on the master branch.
 
 Setting `strategy.matrix.node-version` to an array of version numbers
-causes it to execute the steps in each version of Node.
-This is useful to run tests in multiple versions of Node.
-To only use the latest version of version 12,
+causes it to execute the steps in each listed version of Node.
+To only use the latest version starting with 12,
 remove `strategy.matrix.node-version` and
 change the `node-version` property for the `setup-node` step
 to `12.x` instead of `${{ matrix.node-version }}`.
@@ -476,6 +475,8 @@ The following actions are used by the "Deploy to Amazon ECS" workflow for AWS.
 - `aws-actions/amazon-ecs-deploy-task-definition@v1`
 
 The following action is used by the "Build and Deploy to GKE" workflow for GCP.
+GKE stands for "Google Kubernetes Engine".
+GCP stands for "Google Cloud Platform".
 
 - `GoogleCloudPlatform/github-actions/setup-gcloud@master`
 
@@ -527,8 +528,8 @@ To add a secret to a GitHub repo:
 - Click the "Settings" tab.
 - Click "Secrets" in the left nav.
 - Click "Add a new secret".
-- For the name, enter "GH_TOKEN".
-- For the value, paste in your GitHub personal access token.
+- Enter a name (ex. GH_TOKEN).
+- Enter a value (ex. paste your GitHub personal access token).
 - Click "Add secret".
 
 {% raw %}
@@ -544,6 +545,8 @@ This is used in the workflow in the next section.
 
 Here is a workflow file that builds and deploys an Eleventy site
 on every push.
+
+{% raw %}
 
 ```yaml
 name: Eleventy build and deploy
@@ -569,6 +572,8 @@ jobs:
           publish_dir: ./_site
 ```
 
+{% endraw %}
+
 For more details on the "site deploy" step,
 see <https://github.com/peaceiris/actions-gh-pages>.
 
@@ -593,7 +598,7 @@ on:
   push: # existing event
     branches: [master]
   watch: # newly added event
-    types: [started] # triggered by staring the repo
+    types: [starred] # triggered by starring the repo
 ```
 
 ### Output with echo

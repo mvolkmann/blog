@@ -19,6 +19,8 @@ It supports an integrated terminal for executing shell commands.
 This is currently in beta (as of 5/13/20), but early access can be requested
 at <https://github.com/features/codespaces>.
 
+There may be features that are not free.
+
 ### Discussions
 
 "Discussions" provides a way to host a forum associated with a repository.
@@ -26,7 +28,7 @@ This is a better place to ask and answer questions
 about a repository than creating issues.
 It can also be used to announce work in progress and new releases.
 
-Currently this feature is in beta (as of 5/13/20) and
+This is currently in beta (as of 5/13/20) and
 only selected repositories have been allowed to use it.
 It is expected that all repositories will have the ability to
 add a discussion forum in summer 2020 by enabling the feature in Settings.

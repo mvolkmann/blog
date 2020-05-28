@@ -36,6 +36,10 @@ with a perfect Lighthouse score for both desktop and mobile.
 </html>
 ```
 
-To make changes to the site, modify existing files, add new ones,
-commit the changes, and push them to the master branch.
+To make changes to the site:
+
+1. Modify existing files and add new ones.
+1. Commit the changes.
+1. Push changes to the master branch.
+
 The site will update automatically in about 30 seconds.
