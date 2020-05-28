@@ -3,7 +3,7 @@ on:
   push:
     branches: [master]
   watch:
-    types: [starred] # to trigger by starring the repo
+    types: [started] # to trigger by starring the repo - why "started"?
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
