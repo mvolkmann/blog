@@ -598,7 +598,8 @@ on:
   push: # existing event
     branches: [master]
   watch: # newly added event
-    types: [starred] # triggered by starring the repo
+    types: [started] # triggered by starring the repo
+    # Why is the event name "started"?  Looks like a typo.
 ```
 
 ### Output with echo
@@ -708,7 +709,7 @@ jobs:
 {% endraw %}
 
 The requires adding secrets with the names `MAIL_USERNAME` and `MAIL_PASSWORD`.
-These steps assume that GMail is being used.
+These steps assume that Gmail is being used.
 
 1. Browse <https://myaccount.google.com/>.
 1. Click "Security" in the left nav.
@@ -738,13 +739,18 @@ A step can include an `if` property to make its execution conditional.
 For a list of available variables that can be used in the condition,
 see <https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts>.
 
-One example is the name of the event that triggered the workflow.
+One variable that can be used holds
+the name of the event that triggered the workflow.
 The following step outputs this:
+
+{% raw %}
 
 ```yaml
 - name: report event
   run: echo github.event_name = ${{ github.event_name}}
 ```
+
+{% endraw %}
 
 For example, a step can execute only if the workflow was triggered
 by a particular event.
@@ -766,14 +772,15 @@ jobs:
 ```
 
 To trigger this workflow, star the repo.
-To trigger it again, unstar and star the repo.
+To trigger it again, unstar and star the repo again.
 
 The reported action name will be the workflow name rather than
 a commit message since it was not triggered by a commit.
 
 ### Setting Output
 
-A set can set output that can be used in subsequent steps.
+A step can set output that can be used in subsequent steps.
+It uses some crazy syntax to do this.
 For example:
 
 ```yaml
@@ -794,7 +801,8 @@ by creating multiple YAML files in the `.github/workflows` directory.
 An event can trigger any number of workflows.
 Each triggered workflow appears in the "Actions" tab
 of the GitHub web UI for the repository as a separate entry.
-They will all have the same title which is the commit comment.
+When triggered by a push, they will all have
+the same title which is a commit comment.
 Below each title is the workflow name which is what distinguishes them.
 Click them one at a time to see their results.
 
@@ -808,28 +816,87 @@ that describes an object with the following properties:
 - `author`: GitHub username of the action author
 - `inputs`: an object where the keys are input names and
   the values are objects with `description` and `default` properties
-- `runs`: an object with `using` (describes the runtime for `main`)
-  and `main` (provides the code to execute) properties
+- `outputs`: an object where the keys are output names and
+  the values are objects with a `description` property
+- `runs`: an object with `using` and `main` properties
+  The value of `main` is the code to execute.
+  The value of `using` describes the runtime to use for `main`
+  such as `node12`.
 
 Actions can be implemented in a Docker container
 using any programming language supported by Docker.
 They can also be implemented outside of a Docker container using JavaScript.
 
-Actions that are intended to be shared across projects
-should be defined in their own GitHub repository.
 Actions that are intended to be used by only a single repository
 can be defined in that repository.
+Actions that are intended to be shared across projects
+should be defined in their own GitHub repository.
 
-When a workflow uses an action, it specify the version to use by
+When a workflow uses an action, it can specify the version to use with
 semantic versioning (major.minor.patch) or just a major version number.
 
 Let's define a JavaScript action that outputs the day of the week
-for the current date or date provided by an input.
-For details on doing this, see
+for the current date or a provided date.
+
+Create the directory `src/actions/day-week`.
+In this directory, create the file `action.yml`
+with the following content to describe the action:
+
+```yaml
+name: 'Day of Week'
+description: 'outputs the day of the week for today or a given date'
+author: 'mvolkmann'
+inputs:
+  date:
+    description: 'a date in the format "yyyy-mm-dd" or the string "today"'
+    default: 'today'
+outputs:
+  dayOfWeek:
+    description: 'a day of the week'
+runs:
+  using: 'node12'
+  main: 'index.js'
+```
+
+In the same directory, create the file `index.js` that implements the action.
+
+```js
+const core = require('@actions/core');
+
+// Can access information about the
+// GitHub repository that is using this action.
+//const github = require('@actions/github');
+
+const days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];
+
+try {
+  const dateString = core.getInput('date');
+  const date = dateString === 'today' ? new Date() : new Date(dateString);
+  const dayOfWeek = days[date.getDay()];
+  console.log(dateString, 'is on a', dayOfWeek);
+} catch (error) {
+  core.setFailed(error.message);
+}
+```
+
+To use this action, add the following steps to a workflow:
+
+```yaml
+- name: get day of week for today
+  uses: ./src/actions/day-of-week
+- name: get day of week for my birthday
+  uses: ./src/actions/day-of-week
+  with:
+    date: '1961-4-16'
+```
+
+For more details on defining JavaScript actions, see
 <https://help.github.com/en/actions/building-actions/creating-a-javascript-action>.
-
-TODO: See the part where you are supposed to check-in the node_modules directory
-in order to have access to packages like @actions/core and @actions/github.
-TODO: What other @actions packages are available?
-
-TODO: Add steps and code here.
