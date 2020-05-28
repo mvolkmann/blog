@@ -1,9 +1,11 @@
 // Only register the service worker when not on localhost.
+/*
 if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/blog/js/service-worker.js');
   });
 }
+*/
 
 var navLeftWhenClosed;
 

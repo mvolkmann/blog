@@ -146,6 +146,7 @@ module.exports = eleventyConfig => {
   //eleventyConfig.setWatchJavaScriptDependencies(true);
 
   // Create JSON file that is read by service-worker.js.
+  /*
   try {
     let files = fs.readdirSync('_site/assets');
     files = files.map(file => '/blog/assets/' + file);
@@ -161,6 +162,7 @@ module.exports = eleventyConfig => {
     // Don't treat it as an error if the _site/assets directory doesn't exist.
     if (e.code !== 'ENOENT') throw e;
   }
+  */
 
   return {
     dir: {input: 'src'},
