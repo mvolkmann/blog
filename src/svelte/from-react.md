@@ -35,5 +35,7 @@ This page summarizes the most common of these.
   on mount and update to use `onMount` and `afterUpdate`.
 - Change uses of the `useEffect` hook that should only run
   when certain variables change to a reactive statement.
+- If something isn't updating properly after a prop value change,
+  you probably forgot to use `$:` somewhere.
 
 {% endraw %}
