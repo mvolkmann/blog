@@ -17,7 +17,7 @@ Recommended extensions to achieve this include:
 1. **Octotree** - provides an "easy-to-navigate code tree, just like in IDEs"
 1. **Wide GitHub** - "Change all Github repository and gist pages
    to be full width and dynamically sized."
-1. **npmhub** - introspects dependencies in package.json and
+1. **npmhub** - introspects dependencies in `package.json` and
    displays a link and description for each dependency
    below `package.json` content
 
