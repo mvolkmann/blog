@@ -366,6 +366,8 @@ to create a workflow based on that template.
 
 Here is an example workflow file created from the "Node.js" template:
 
+{% raw %}
+
 ```yaml
 name: Node.js CI
 
@@ -395,6 +397,8 @@ jobs:
         env:
           CI: true
 ```
+
+{% endraw %}
 
 After clicking the button, it offers to save this workflow file
 in `.github/workflows/nodejs.yml` within your repository.
@@ -786,6 +790,8 @@ A step can set output that can be used in subsequent steps.
 It uses some crazy syntax to do this.
 For example:
 
+{% raw %}
+
 ```yaml
 - name: set some output
   run: echo "::set-output name=foo::bar"
@@ -793,6 +799,8 @@ For example:
 - name: use some output
   run: echo ${{steps.my_id.outputs.foo}}
 ```
+
+{% endraw %}
 
 This outputs "bar".
 
