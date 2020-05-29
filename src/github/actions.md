@@ -15,10 +15,10 @@ The cloud server must have the GitHub Actions runner application is installed.
 GitHub provides these servers for free,
 but it is also possible to run jobs on your own servers.
 
-- A "workflow" defines a set of jobs using a YAML file.
-- A "job" defines a set up steps to run
+- A "**workflow**" defines a set of jobs using a YAML file.
+- A "**job**" defines a set up steps to run
   in given environments (ex. `ubuntu-latest`).
-- A "step" is a single task that runs a predefined action or a shell command.
+- A "**step**" is a single task that runs a predefined action or a shell command.
 
 For example, a workflow can build an application
 after every push to given branches.
@@ -91,14 +91,15 @@ to run on a server that uses a different operating system.
 
 Each step (a.k.a. action) within a job is defined by a number of properties.
 
-| Property Name | Meaning                                                                  |
-| ------------- | ------------------------------------------------------------------------ |
-| `name`        | step name that appears in the web UI that shows workflow results         |
-| `run`         | a shell command to run                                                   |
-| `uses`        | a predefined action to use                                               |
-| `with`        | arguments to pass to the action                                          |
-| `id`          | name that will be used to refer to action result properties              |
-| `needs`       | step name (or array of them) that must completed before this step begins |
+| Property Name | Meaning                                                                   |
+| ------------- | ------------------------------------------------------------------------- |
+| `name`        | optional step name that appears in the web UI that shows workflow results |
+| `run`         | a shell command to run                                                    |
+| `uses`        | a predefined action to use                                                |
+| `with`        | arguments to pass to the action                                           |
+| `id`          | name that will be used to refer to action result properties               |
+| `needs`       | step name (or array of them) that must completed before this step begins  |
+| `if`          | for conditional execution                                                 |
 
 Specify `run` or `uses`, but not both.
 
@@ -297,11 +298,11 @@ Current options include:
 
 - `ubuntu-latest`
 - `windows-latest`
-- `macos-latest`.
+- `macos-latest`
 - `ubuntu-18.04`
 - `ubuntu-16.04`
 - `windows-2019`
-- `macos-10.15`.
+- `macos-10.15`
 
 Workflows can also be self-hosted.
 An example of specifying this is:
@@ -410,12 +411,14 @@ Two events trigger this workflow to execute.
 The first is a push to the master branch.
 The second is creating a pull request on the master branch.
 
+{% raw %}
 Setting `strategy.matrix.node-version` to an array of version numbers
 causes it to execute the steps in each listed version of Node.
 To only use the latest version starting with 12,
 remove `strategy.matrix.node-version` and
 change the `node-version` property for the `setup-node` step
 to `12.x` instead of `${{ matrix.node-version }}`.
+{% endraw %}
 
 This workflow runs the following commands:
 
@@ -662,7 +665,7 @@ For example:
 
 A step can send an email.
 For example, this workflow sends an email
-when a project in the repository changes.
+when a project board in the repository changes.
 
 {% raw %}
 
@@ -708,7 +711,7 @@ jobs:
 
 {% endraw %}
 
-The requires adding secrets with the names `MAIL_USERNAME` and `MAIL_PASSWORD`.
+This requires adding secrets with the names `MAIL_USERNAME` and `MAIL_PASSWORD`.
 These steps assume that Gmail is being used.
 
 1. Browse <https://myaccount.google.com/>.

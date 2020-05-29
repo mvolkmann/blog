@@ -9,7 +9,7 @@ layout: topic-layout.njk
 
 ### Codespaces
 
-Codespaces is VS Code on the web.
+Codespaces is **VS Code on the web**.
 It can be launched directly from a GitHub repo
 to edit and commit code in that repo.
 It supports running and debugging web applications.
@@ -23,7 +23,7 @@ There may be features that are not free.
 
 ### Discussions
 
-"Discussions" provides a way to host a forum associated with a repository.
+"Discussions" provides a way to **host a forum** associated with a repository.
 This is a better place to ask and answer questions
 about a repository than creating issues.
 It can also be used to announce work in progress and new releases.
@@ -35,8 +35,8 @@ add a discussion forum in summer 2020 by enabling the feature in Settings.
 
 ### Security
 
-A new tab labeled "Security" in the web UI of GitHub repos reports
-"common vulnerabilities and coding errors".
+A new tab labeled "Security" in the web UI of GitHub repos **reports
+"common vulnerabilities and coding errors"**.
 These are listed in three categories,
 "Security advisories", "Dependency alerts",
 and "Code scanning alerts" (in beta as of 5/13/20).

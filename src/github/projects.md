@@ -8,7 +8,7 @@ layout: topic-layout.njk
 
 GitHub Projects provided a free alternative to project tracking solutions
 such as Jira, Rally, and Trello.
-Each is represented by a board with multiple columns that contain cards.
+Each project is represented by a board with multiple columns that contain cards.
 
 ![cover](/blog/assets/github-projects.png)
 
@@ -34,7 +34,7 @@ To create a repository project:
 1. Optionally select a project template such as "Basic kanban".
 1. Press the "Create project" button.
 
-To create a user project,
+**To create a user project**,
 browse github.com/{username} instead of a specific repository
 and then follow the same steps as above.
 
@@ -42,19 +42,19 @@ The "Basic kanban" project template provides three columns
 named "To do", "In progress", and "Done"
 with a few sample cards already in the "To do" column.
 
-To add a column, click "+ Add column" to the right of the last column.
+**To add a column**, click "+ Add column" to the right of the last column.
 
-To delete a card, click the ellipsis in its upper-right
+**To delete a card**, click the ellipsis in its upper-right
 and select "Delete note".
 
-To add a card in a column, click the "+" in the upper-right of the column.
+**To add a card in a column**, click the "+" in the upper-right of the column.
 
-To edit a card, click the ellipsis in the upper-right of the card
+**To edit a card**, click the ellipsis in the upper-right of the card
 and select "Edit note". A dialog will open where changes can be made.
 
-To move a card to a different column, drag it.
+**To move a card** to a different column, drag it.
 
-To link a repository to a user project so it is shared by them:
+**To link a repository** to a user project so it is shared by them:
 
 1. Click the "Projects" tab.
 1. Click a user project name.

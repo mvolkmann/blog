@@ -6,14 +6,14 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-As of April 14, 2020, GitHub is free
-for both public AND private repositories.
+As of April 14, 2020, GitHub is **free
+for both public AND private repositories**.
 There is no limit on the number of repositories
 or the size of teams (collaborators)
 that can access private repositories for free.
 
 Advanced features require using a paid plan.
-There are four tiers named "Free", "Team", "Enterprise", and "GitHub One".
+There are **four tiers** named "Free", "Team", "Enterprise", and "GitHub One".
 These are summarized at <https://github.com/pricing>.
 
 | Feature                        |   Free   |   Team   | Enterprise |  GitHub One   |
