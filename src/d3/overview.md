@@ -451,4 +451,4 @@ Discuss the `csv` and `json` methods.
 
 ## Geo
 
-See https://github.com/d3/d3-geo.
+See <https://github.com/d3/d3-geo>.
