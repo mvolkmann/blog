@@ -456,9 +456,11 @@ Pass an empty string to render an empty tick label for all of them.
 
 The `tickSize` method specifies the length of each tick.
 It defaults to 6.
+Set it to a negative number to draw lines across the chart.
+For example, `.tickSize(-usableHeight)`.
 
-The `tickPadding` method specifies the space between each tick and corresponding label.
-It defaults to 3.
+The `tickPadding` method specifies the space between each tick
+and corresponding label. It defaults to 3.
 
 The `tickValues` method takes an array of labels to be rendered for the ticks.
 By default the data value is rendered.
@@ -475,14 +477,15 @@ By default the data value is rendered.
     <style>
       .bar text {
         fill: white;
+        pointer-events: none;
       }
 
       body {
         font-family: sans-serif;
       }
 
-      .major-x-axis {
-        color: blue;
+      .major-x-axis > .tick > line {
+        stroke-width: 2;
       }
 
       .minor-x-axis {
@@ -495,6 +498,16 @@ By default the data value is rendered.
 
       svg {
         background-color: linen;
+      }
+
+      .tooltip {
+        position: absolute;
+        background: pink;
+        border: solid gray 1px;
+        border-radius: 5px;
+        opacity: 0; /* initially hidden */
+        padding: 0.5rem;
+        pointer-events: none;
       }
 
       .y-axis .domain {
@@ -547,6 +560,8 @@ const svg = d3
   .attr('width', SVG_WIDTH)
   .attr('height', svgHeight);
 
+const tooltip = d3.select('body').append('div').classed('tooltip', true);
+
 // Create a selection containing one SVG group for each data value
 // that are translated in the y-direction so they are visually separated.
 const barGroups = svg
@@ -564,7 +579,28 @@ const barGroups = svg
 barGroups
   .append('rect')
   .attr('width', player => widthScale(player.score))
-  .attr('height', BAR_HEIGHT);
+  .attr('height', BAR_HEIGHT)
+  // Cannot use an arrow function because we need the value of "this".
+  .on('mouseenter', function (player) {
+    // Configure the tooltip.
+    tooltip
+      .text(player.score)
+      .style('left', d3.event.pageX + 'px')
+      .style('top', d3.event.pageY + 'px');
+    // Show the tooltip.
+    tooltip.transition().style('opacity', 1);
+    // Fade the bar.
+    d3.select(this).style('opacity', 0.5);
+    d3.select(this).style('outline', 'solid red 1px');
+  })
+  // Cannot use an arrow function because we need the value of "this".
+  .on('mouseout', function () {
+    // Hide the tooltip.
+    tooltip.transition().style('opacity', 0);
+    // Restore the bar opacity.
+    d3.select(this).style('opacity', 1);
+    d3.select(this).style('outline', 'none');
+  });
 
 // Create text for each data value that displays a player score.
 barGroups
@@ -582,12 +618,13 @@ const xAxisMinor = d3
   .ticks(highScore) // show a tick at every 1
   .tickFormat('') // hides labels
   .tickSize(5); // length of each tick (default is 6)
-//.tickPadding(3); // space between end of tick and label; default is 3
 const xAxisMajor = d3
   .axisBottom(xAxisScale)
   .ticks(highScore / 10) // show a tick at every multiple of 10
   // highStore is guaranteed to be a multiple of 10.
+  .tickPadding(10) // space between end of tick and label; default is 3
   .tickSize(10);
+//.tickSize(-usableHeight); // to draw across chart
 const xAxisTransform = `translate(${LEFT_PADDING}, ${
   PADDING + players.length * barTotal
 })`;
