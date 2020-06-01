@@ -443,7 +443,25 @@ But they do not position the axes relative to a chart.
 That part is up to you.
 
 There are four methods for creating an axis.
-They are
+They are `axisBottom`, `axisLeft`, `axisTop`, and `axisRight`.
+The differ in the orientation of the axis (horizontal or vertical)
+and the side of the axis on where tick marks appear.
+
+The `ticks` method specifies the number of ticks to display.
+They will be spaced evenly across the axis.
+
+The `tickFormat` method can be set to a function that takes a tick index
+and returns the label to render for that tick.
+Pass an empty string to render an empty tick label for all of them.
+
+The `tickSize` method specifies the length of each tick.
+It defaults to 6.
+
+The `tickPadding` method specifies the space between each tick and corresponding label.
+It defaults to 3.
+
+The `tickValues` method takes an array of labels to be rendered for the ticks.
+By default the data value is rendered.
 
 ![SVG bar chart with axes](/blog/assets/d3-svg-bar-chart-with-axes.png)
 
