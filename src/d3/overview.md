@@ -44,13 +44,75 @@ In this respect it has overlap with jQuery functionality.
 
 ## API Basics
 
-To set an attribute on an HTML element  
-`.attr(__property__, _name_)`  
-For example, to translate an element such as an SVG `g` (for group),  
-`.attr('transform', 'translate(100, 50))`
+To select the first occurrence of an element with a given name
+inside a parent element  
+<code>.select(<i>childElementName</i>)`</code>
 
-To set a CSS style property on an HTML element  
-`.style(_property_, _name_)`
+To select all occurrences of elements with a given name
+inside a parent element  
+<code>.selectAll(<i>childElementName</i>)`</code>
+
+To append a new element with a given name to a parent element  
+<code>.append(<i>elementName</i>)`</code>
+
+To set an attribute on an element  
+<code>.attr(<i>property</i>, <i>name</i>)`</code>
+
+For example, to translate an element such as an SVG `g`(for group),  
+<code>.attr('transform', 'translate(100, 50))`</code>
+
+To set a CSS style property on an element  
+<code>.style(<i>property</i>, <i>name</i>)</code>
+
+To add a CSS class to an element  
+<code>.classed(<i>className</i>, true)</code>
+
+To set the text content of an element  
+<code>.text(<i>textValue</i>, true)</code>
+
+To set the HTML content of an element  
+<code>.html(<i>htmlString</i>, true)</code>
+
+For example:
+
+![DOM Basics](/blog/assets/d3-dom-basics.png)
+
+```html
+<html>
+  <head>
+    <title>D3 DOM basics</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <style>
+      .bordered {
+        border: solid orange 3px;
+        border-radius: 10px;
+        padding: 0.5rem;
+      }
+
+      button {
+        font-size: 2rem;
+      }
+
+      button:disabled {
+        border-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const lockUnicode = '&#x1F512;';
+      d3.select('body')
+        .append('button')
+        .attr('disabled', 'true')
+        .classed('bordered', true)
+        .style('background-color', 'cornflowerblue')
+        .style('color', 'white')
+        .html('<i>Hello, World!</i> ' + lockUnicode);
+    </script>
+  </body>
+</html>
+```
 
 ## data method
 
@@ -233,106 +295,160 @@ see <https://medium.com/@c_behrens/enter-update-exit-6cafc6014c36>,
 
 ## Basic SVG Drawing
 
-```js
-import * as d3 from 'd3';
+![SVG Basics](/blog/assets/d3-svg-basics.png)
 
-const svg = d3
-  .select('body')
-  .append('svg')
-  .attr('width', 400)
-  .attr('height', 300);
+```html
+<html>
+  <head>
+    <title>D3 SVG basics</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <script>
+      const svg = d3
+        .select('body')
+        .append('svg')
+        .attr('width', 400)
+        .attr('height', 300);
 
-svg
-  .append('rect')
-  .attr('x', 10)
-  .attr('y', 10)
-  .attr('width', 100)
-  .attr('height', 200)
-  .attr('fill', 'red')
-  .attr('stroke', 'green')
-  .attr('stroke-width', 5);
+      svg
+        .append('rect')
+        .attr('x', 10)
+        .attr('y', 10)
+        .attr('width', 100)
+        .attr('height', 200)
+        .attr('fill', 'red')
+        .attr('stroke', 'green')
+        .attr('stroke-width', 5);
 
-svg
-  .append('circle')
-  .attr('cx', 100)
-  .attr('cy', 100)
-  .attr('r', 75)
-  .attr('fill', 'yellow')
-  .attr('stroke', 'blue')
-  .attr('stroke-width', 5);
+      svg
+        .append('circle')
+        .attr('cx', 100)
+        .attr('cy', 100)
+        .attr('r', 75)
+        .attr('fill', 'yellow')
+        .attr('stroke', 'blue')
+        .attr('stroke-width', 5);
 
-svg
-  .append('line')
-  .attr('x1', 100)
-  .attr('y1', 100)
-  .attr('x2', 300)
-  .attr('y2', 200)
-  .attr('stroke', 'blue')
-  .attr('stroke-linecap', 'round') // other values are 'butt' and 'square'
-  .attr('stroke-width', 5);
+      svg
+        .append('line')
+        .attr('x1', 100)
+        .attr('y1', 100)
+        .attr('x2', 300)
+        .attr('y2', 200)
+        .attr('stroke', 'purple')
+        .attr('stroke-linecap', 'round') // other values are 'butt' and 'square'
+        .attr('stroke-width', 5);
+    </script>
+  </body>
+</html>
 ```
 
-## Using Data
+## Basic Bar Charts
 
 ![basic SVG bar chart](/blog/assets/d3-svg-bar-chart.png)
 
+### index.html
+
+```html
+<html>
+  <head>
+    <title>D3 SVG Bar Chart</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      rect {
+        fill: cornflowerblue;
+      }
+
+      text {
+        fill: white;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="barchart.js"></script>
+  </body>
+</html>
+```
+
+### barchart.js
+
 ```js
-import * as d3 from 'd3';
-
 const barHeight = 20;
-const barMargin = 4;
+const barMargin = 4; // vertical spacing between
 const barTotal = barHeight + barMargin;
+const players = [
+  {name: 'Mark', score: 20},
+  {name: 'Tami', score: 40},
+  {name: 'Amanda', score: 50},
+  {name: 'Jeremy', score: 70}
+];
+const svgWidth = 400;
+const svgHeight = 300;
 
-const data = [20, 40, 50];
-const width = 400;
-const height = 300;
+// Get the highest score.
+const highScore = d3.max(players, player => player.score);
 
+// Create a linear scale that maps values from zero to the maximum score
+// to values from zero to the width of the SVG.
+const widthScale = d3.scaleLinear().domain([0, highScore]).range([0, svgWidth]);
+
+// Create an SVG element.
 const svg = d3
   .select('body')
   .append('svg')
-  .attr('width', width)
-  .attr('height', height);
+  .attr('width', svgWidth)
+  .attr('height', svgHeight);
 
-function getMinMax(data, getValue = v => v) {
-  let max = Number.NEGATIVE_INFINITY;
-  let min = Number.POSITIVE_INFINITY;
-  for (const element of data) {
-    const value = getValue(element);
-    if (value > max) max = value;
-    if (value < min) min = value;
-  }
-  return [min, max];
-}
-
-function getLinearScale(width, data, min = 0, getValue = v => v) {
-  const [, max] = getMinMax(data, getValue);
-  console.log('SvgDemo.svelte x: max =', max);
-  return d3.scaleLinear().domain([min, max]).range([0, width]);
-}
-
-const widthScale = getLinearScale(width, data);
-
-// Create a selection containing one group for each data value
+// Create a selection containing one SVG group for each data value
 // that are translated in the y-direction so they are visually separated.
-const bar = svg
+const barGroups = svg
   .selectAll('g')
-  .data(data)
+  .data(players)
   .enter()
   .append('g')
   .attr('transform', (_, i) => `translate(0, ${i * barTotal})`);
 
 // Create a rect for each data value.
-bar
+barGroups
   .append('rect')
-  .attr('width', widthScale) // just scaling the values
-  .attr('height', barHeight)
-  .attr('fill', 'cornflowerblue');
+  .attr('width', player => widthScale(player.score))
+  .attr('height', barHeight);
 
-// Create a text for each data value.
-bar
+// Create text for each data value that displays a player name.
+barGroups
   .append('text')
-  .text(d => d)
-  .attr('x', d => d * 4 - 24)
-  .attr('y', barTotal / 2 + 4)
-  .attr('fill', 'white');
+  .text(player => player.name)
+  .attr('x', 6) // at beginning of bar
+  .attr('y', barTotal / 2 + 3); // centered vertically
+
+// Create text for each data value that displays a player score.
+barGroups
+  .append('text')
+  .text(player => player.score)
+  .attr('x', player => widthScale(player.score) - 24) // at end of bar
+  .attr('y', barTotal / 2 + 3); // centered vertically
 ```
+
+## Adding Axes
+
+The D3 methods to create axes do so by mapping a data range
+to a width to a pixel range.
+They draw an axis containing tick marks and values.
+But they do not position the axes relative to a chart.
+That part is up to you.
+
+There are four methods for creating an axis.
+They are
+
+## Loading Data
+
+Discuss the `csv` and `json` methods.
+
+## Geo
+
+See https://github.com/d3/d3-geo.

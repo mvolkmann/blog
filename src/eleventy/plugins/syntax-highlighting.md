@@ -21,11 +21,17 @@ module.exports = eleventyConfig => {
 };
 ```
 
-Download a Prism theme `.css` file from
-[Prism themes](https://github.com/PrismJS/prism-themes)
+Download a Prism theme `.css` file from {% aTargetBlank
+  'https://github.com/PrismJS/prism-themes/',
+  'Prism themes'
+%}.
+
 and place it in the `assets` directory.
 For example, `prism-ghcolors.css`.
-More themes can be found at [prismjs.com](https://prismjs.com/).
+More themes can be found at {% aTargetBlank
+  'https://prismjs.com/',
+  'prismjs.com'
+%}.
 
 Add a `link` tag for this in all layout files whose pages need it.
 For example, this can be added in `_includes/layout.njk`.
@@ -47,7 +53,10 @@ For example:
  ```
 ````
 
-For more details, see the documentation [here](https://www.11ty.dev/docs/plugins/syntaxhighlight/).
+For more details, see the documentation {% aTargetBlank
+  'https://www.11ty.dev/docs/plugins/syntaxhighlight/',
+  'here'
+%}.
 
 There is also a way to trigger syntax highlighting
 with Nunjucks, but some editors like VS Code
@@ -55,4 +64,7 @@ will change the indentation in code blocks
 when using this approach.
 
 It appears that showing line numbers is not supported yet.
-See <https://github.com/11ty/eleventy-plugin-syntaxhighlight/issues/10>.
+See {% aTargetBlank
+  'https://github.com/11ty/eleventy-plugin-syntaxhighlight/issues/10',
+  'line numbers issue'
+%}.
