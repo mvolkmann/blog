@@ -346,6 +346,55 @@ see <https://medium.com/@c_behrens/enter-update-exit-6cafc6014c36>,
 
 ## Bar Charts
 
+It is common to need to "scale" data values to fit in a range of values
+that correspond to the width or height of an element such as `svg`.
+D3 provides several methods that create a function for doing this.
+The most commonly used is the `scaleLinear` method.
+
+The `scaleLinear` method returns an object
+that supports `domain` and `range` methods.
+The domain represents the bounds (min to max)
+of data values that need to be scaled.
+The range represents the bounds to which they will be mapped.
+
+For example, suppose our data is an array of objects that have
+the properties `countryName` and `population`.
+We want to represent values as low as zero
+and as high as the highest population value.
+
+To determine the minimum and maximum data values,
+we can use the `min` and `max` methods.
+These take an array of data and an optional function
+the will be passed a data element and returns a value
+to be considered for determining the minimum or maximum value.
+For example, we can determine the maximum population in our data
+with the following:
+
+```js
+const maxPopulation = d3.max(data, d => d.population);
+```
+
+If we want to show the values as horizontal bars in an SVG that
+has a width of 800, the following code creates a function to do this:
+
+```js
+const myScale = d3.scaleLinear().domain([0, maxPopulaton]).range([0, 800]);
+```
+
+The `myScale` function we have created
+takes a number between 0 and `maxPopulation`
+and it returns a number between 0 and 800.
+
+When rendering SVG `rect` elements for each of the bars,
+we can use this function as follows to set their widths:
+
+```js
+  .attr('width', d => myScale(d.population))
+```
+
+Here is HTML and JavaScript code for creating a simple bar chart
+using D3 and SVG.
+
 ![SVG bar chart](/blog/assets/d3-svg-bar-chart.png)
 
 ### index.html
