@@ -378,7 +378,7 @@ If we want to show the values as horizontal bars in an SVG that
 has a width of 800, the following code creates a function to do this:
 
 ```js
-const myScale = d3.scaleLinear().domain([0, maxPopulaton]).range([0, 800]);
+const myScale = d3.scaleLinear().domain([0, maxPopulation]).range([0, 800]);
 ```
 
 The `myScale` function we have created
