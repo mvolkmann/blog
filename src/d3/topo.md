@@ -18,11 +18,16 @@ The button in the center of the arrow buttons resets the pan and zoom.
 Dragging the map moves it.
 Double-clicking the map zooms in, or zooms out if the shift key is down.
 
-To see this in action, browse <https://world-map.rmarkvolkmann.now.sh/>.
+To see this in action, browse
+{% aTargetBlank
+  'https://world-map.rmarkvolkmann.now.sh',
+  'Country Populations' %}.
 
 This uses two input files, world-countries.json and world-population.tsv.
-These files can be obtained from
-<https://gist.github.com/jeremycflin/b43ab253f3ae02dced07>.
+These files can be obtained from a
+{% aTargetBlank
+  'https://gist.github.com/jeremycflin/b43ab253f3ae02dced07',
+  'gist from Jeremy Lin' %}.
 
 ### index.html
 
