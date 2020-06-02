@@ -19,7 +19,8 @@ Dragging the map moves it.
 Double-clicking the map zooms in, or zooms out if the shift key is down.
 
 This uses two input files, world-countries.json and world-population.tsv.
-These files can be obtained from ?.
+These files can be obtained from
+<https://gist.github.com/jeremycflin/b43ab253f3ae02dced07>.
 
 ### index.html
 
