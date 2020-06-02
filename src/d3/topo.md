@@ -13,7 +13,7 @@ Here is an example of a world map.
 Countries are assigned a shade of blue based on their population.
 Hovering over a country displays a tooltip
 that shows the country name and its population.
-Buttons at the button support panning and zooming.
+Buttons at the bottom support panning and zooming.
 The button in the center of the arrow buttons resets the pan and zoom.
 Dragging the map moves it.
 Double-clicking the map zooms in, or zooms out if the shift key is down.
@@ -27,7 +27,7 @@ This uses two input files, world-countries.json and world-population.tsv.
 These files can be obtained from a
 {% aTargetBlank
   'https://gist.github.com/jeremycflin/b43ab253f3ae02dced07',
-  'gist from Jeremy Lin' %}.
+  'gist by Jeremy Lin' %}.
 
 ### index.html
 
