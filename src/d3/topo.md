@@ -29,8 +29,6 @@ These files can be obtained from a
   'https://gist.github.com/jeremycflin/b43ab253f3ae02dced07',
   'gist by Jeremy Lin' %}.
 
-TODO: UPDATE THIS WITH THE NEW CODE!
-
 ### index.html
 
 ```html
