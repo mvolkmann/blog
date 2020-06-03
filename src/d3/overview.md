@@ -8,6 +8,8 @@ layout: topic-layout.njk
 ---
 
 D3 stands for Data-Driven Documents.
+It renders, and re-renders, HTML elements (including `svg`)
+based on data and changes to the data.
 The main website is at <https://d3js.org>.
 To see examples, click the "Examples" link near the top.
 
@@ -57,6 +59,9 @@ To append a new element with a given name to a parent element
 
 To set an attribute on an element  
 <code>.attr(<i>property</i>, <i>name</i>)`</code>
+
+To get the value of an attribute on an element  
+<code>.attr(<i>property</i>>)`</code>
 
 For example, to translate an element such as an SVG `g`(for group),  
 <code>.attr('transform', 'translate(100, 50))`</code>
