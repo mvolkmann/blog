@@ -40,7 +40,6 @@ These files can be obtained from a
     <link rel="stylesheet" href="world-map.css" />
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
-    <!-- <script src="pan-zoom.js" type="module"></script> -->
     <script src="world-map.js" defer type="module"></script>
   </head>
   <body>
