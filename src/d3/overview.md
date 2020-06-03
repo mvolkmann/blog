@@ -70,6 +70,10 @@ To set a CSS style property on an element
 <code>.style(<i>property</i>, <i>name</i>)</code>
 
 To add a CSS class to an element  
+// replaces value of class attribute
+<code>.attr('class', '<i>className</i>')</code>
+or
+// updates value of class attribute
 <code>.classed(<i>className</i>, true)</code>
 
 To set the text content of an element  
