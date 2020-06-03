@@ -37,6 +37,9 @@ These files can be obtained from a
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="world-map.css" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="world-map.js" defer></script>
   </head>
   <body>
     <svg />
@@ -53,15 +56,15 @@ These files can be obtained from a
     <div class="controls">
       <div class="pan">
         <div>
-          <button id="up" onclick="panUp()">&#x2191;</button>
+          <button id="up" onclick="panUp()">&#x25b2;</button>
         </div>
         <div>
-          <button id="left" onclick="panLeft()">&#x2190;</button>
+          <button id="left" onclick="panLeft()">&#x25c0;</button>
           <button id="reset" onclick="reset()">&#x21ba;</button>
-          <button id="right" onclick="panRight()">&#x2192;</button>
+          <button id="right" onclick="panRight()">&#x25b6;</button>
         </div>
         <div>
-          <button id="down" onclick="panDown()">&#x2193;</button>
+          <button id="down" onclick="panDown()">&#x25bc;</button>
         </div>
       </div>
       <div class="zoom">
@@ -69,10 +72,6 @@ These files can be obtained from a
         <button id="out" onclick="zoomOut()">&#x2796;</button>
       </div>
     </div>
-
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://d3js.org/topojson.v2.min.js"></script>
-    <script src="world-map.js"></script>
   </body>
 </html>
 ```

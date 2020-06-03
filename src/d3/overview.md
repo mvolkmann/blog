@@ -404,6 +404,7 @@ using D3 and SVG.
   <head>
     <title>D3 SVG Bar Chart</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="bar-chart.js" defer></script>
     <style>
       body {
         font-family: sans-serif;
@@ -418,9 +419,7 @@ using D3 and SVG.
       }
     </style>
   </head>
-  <body>
-    <script src="bar-chart.js"></script>
-  </body>
+  <body></body>
 </html>
 ```
 
@@ -523,6 +522,7 @@ By default the data value is rendered.
   <head>
     <title>D3 SVG Bar Chart</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="bar-chart.js" defer></script>
     <style>
       .bar text {
         fill: white;
@@ -564,9 +564,7 @@ By default the data value is rendered.
       }
     </style>
   </head>
-  <body>
-    <script src="bar-chart.js"></script>
-  </body>
+  <body></body>
 </html>
 ```
 
