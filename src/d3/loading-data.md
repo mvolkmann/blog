@@ -2,7 +2,7 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 Loading Data
-  order: 7
+  order: 8
   parent: D3
   title: Loading Data
 layout: topic-layout.njk

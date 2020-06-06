@@ -2,7 +2,7 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 SVG
-  order: 2
+  order: 3
   parent: D3
   title: SVG Basics
 layout: topic-layout.njk

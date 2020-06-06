@@ -2,6 +2,7 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 data/entry/exit
+  order: 2
   parent: D3
   title: data, entry, & exit
 layout: topic-layout.njk
