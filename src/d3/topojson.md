@@ -1,9 +1,10 @@
 ---
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
-  key: D3 Topo
+  key: D3 topojson Library
+  order: 5
   parent: D3
-  title: topojson library
+  title: topojson Library
 layout: topic-layout.njk
 ---
 
