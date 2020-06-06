@@ -23,7 +23,7 @@ To see this in action, browse
   'https://world-map.rmarkvolkmann.now.sh',
   'Country Populations' %}.
 
-This uses two input files, world-countries.json and world-population.tsv.
+This uses two input files, `world-countries.json` and `world-population.tsv`.
 These files can be obtained from a
 {% aTargetBlank
   'https://gist.github.com/jeremycflin/b43ab253f3ae02dced07',
