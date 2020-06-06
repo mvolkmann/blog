@@ -49,6 +49,8 @@ The `myScale` function we have created
 takes a number between 0 and `maxPopulation`
 and it returns a number between 0 and 800.
 
+## Using SVG rect elements to create a bar chart
+
 When rendering SVG `rect` elements for each of the bars,
 we can use this function as follows to set their widths:
 

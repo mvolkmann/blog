@@ -19,6 +19,8 @@ The button in the center of the arrow buttons resets the pan and zoom.
 Dragging the map moves it.
 Double-clicking the map zooms in, or zooms out if the shift key is down.
 
+![D3 World Map](/blog/assets/d3-world-map.png)
+
 To see this in action, browse
 {% aTargetBlank
   'https://world-map.rmarkvolkmann.now.sh',
@@ -258,8 +260,8 @@ function addControlButtons(svg, svgWidth, svgHeight) {
   function addButton(parent, html, onClick) {
     parent
       .append('button')
-      .on('click', () => onClick(svg))
-      .html(html);
+      .html(html)
+      .on('click', () => onClick(svg));
   }
 
   // This resets the SVG viewBox to its original values
