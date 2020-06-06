@@ -1,16 +1,19 @@
 ---
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
-  key: D3 data/entry/exit
+  key: D3 data/enter/exit
   order: 2
   parent: D3
-  title: data, entry, & exit
+  title: data, enter, & exit
 layout: topic-layout.njk
 ---
 
 ## data method
 
-The data method "joins" data values to DOM elements.
+The data method "joins" data values in an array to DOM elements.
+By default it does this by index.
+The first data array value is joined to the first target DOM element, and so on.
+
 For example, the following HTML contains an ordered list
 with three empty list items.
 The variable `letters` is an array holding three letters.
@@ -156,13 +159,13 @@ If the `exit` method is not used, excess DOM elements will be retained.
       function populateList() {
         const lis = d3
           .select('ol')
-          .selectAll('li')
+          .selectAll('li') // A - see B below
           .data(letters)
           .text(d => d);
 
         lis
           .enter()
-          .append('li')
+          .append('li') // B - should match element at A above
           .text(d => d.toUpperCase());
 
         lis.exit().remove();
@@ -184,5 +187,100 @@ If the `exit` method is not used, excess DOM elements will be retained.
 </html>
 ```
 
+In the example above, we call `selectAll` with "li"
+and also call `append` with "li".
+The important thing is that we select elements that match those we will create.
+Another option is to select elements with certain CSS class,
+perhaps using `'.my-class'`, and create elements that have that class,
+perhaps using `.append('div').attr('class', 'my-class')`.
+
+The `data` method can be passed a second argument that is a function.
+This takes a data value and returns
+a string that uniquely identifies the data value.
+This provides an alternative to joining data values to DOM elements by index.
+When this approach is used, changes to data that is already joined
+to a DOM element result in the same DOM elements being updated
+and their order within their parent element is maintained.
+
+Here is an example that demonstrates this:
+
+```html
+<html>
+  <head>
+    <title>D3 enter/exit demo</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <ol></ol>
+
+    <button onclick="addOne()">Add One</button>
+    <button onclick="removeFirst()">Remove First</button>
+    <button onclick="removeLast()">Remove Last</button>
+
+    <script>
+      const people = [
+        {name: 'Mark', color: 'yellow'},
+        {name: 'Tami', color: 'blue'},
+        {name: 'Amanda', color: 'purple'},
+        {name: 'Jeremy', color: 'black'}
+      ];
+
+      const toString = person => person.name + ' likes ' + person.color;
+
+      function populateList() {
+        const lis = d3
+          .select('ol')
+          .selectAll('li')
+
+          // With no key function, this uses the existing li elements.
+          //.data(people)
+
+          // With a key function, this doesn't use
+          // existing li elements because keys don't match.
+          // The person argument is undefined when the empty
+          // li elements are processed in the first call.
+          .data(people, person => (person ? person.name : ''))
+
+          .text(toString);
+
+        lis
+          .enter()
+          .append('li')
+          .text(person => toString(person).toUpperCase());
+
+        lis.exit().remove();
+      }
+
+      function addOne() {
+        people.push({name: 'Joe', color: 'brown'});
+        populateList();
+      }
+
+      function removeFirst() {
+        people.shift();
+        // Passing a key function to the data method above
+        // allows the exiting li elements that match data
+        // to retain their position in the list despite this sort.
+        // If the key function is not passed, the list will be reordered
+        // to match this sorted order.
+        people.sort((p1, p2) => p1.name.localeCompare(p2.name));
+        console.log('enter-exit-people.html removeFirst: people =', people);
+        populateList();
+      }
+
+      function removeLast() {
+        people.pop();
+        populateList();
+      }
+
+      populateList();
+    </script>
+  </body>
+</html>
+```
+
 For another explanation of the `data`, `enter`, and `exit` methods,
 see <https://medium.com/@c_behrens/enter-update-exit-6cafc6014c36>,
+
+For a detailed explanation of the internals, see Mike Bostock's article
+"How Selections Work" at <https://bost.ocks.org/mike/selection/>.
