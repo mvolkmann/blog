@@ -56,5 +56,8 @@ Here are the steps required:
 
 1. Remove all use of CSS variables.
 
+1. Test all uses of CSS flexbox and grid layout.
+   There are some bugs in the IE11 implementation of these.
+
 Unfortunately all the polyfills make the generated `bundle.js` file much bigger.
 For one app the size changed from 52K to 410K.
