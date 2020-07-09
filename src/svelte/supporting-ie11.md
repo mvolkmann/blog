@@ -53,6 +53,13 @@ Here are the steps required:
    - @babel/runtime
    - @rollup/plugin-babel
    - corejs
+   - whatwg-fetch
+
+1. In each source file where the Fetch API is being used, add the following:
+
+   ```js
+   import 'whatwg-fetch';
+   ```
 
 1. Remove all use of CSS variables.
 
