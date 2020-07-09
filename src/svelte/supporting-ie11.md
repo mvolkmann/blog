@@ -15,7 +15,7 @@ Here are the steps required:
    <script defer src="https://polyfill.io/v3/polyfill.min.js"></script>
    ```
 
-1. Add the following in `rollup.config.js` just before the line "production && terser()":
+1. Add the following in `rollup.config.js` just before the line `production && terser()`:
 
    ```js
    babel({
