@@ -115,6 +115,8 @@ Many D3 tutorials start with a bar chart and so will we.
 But ours will include more features than typically shown in tutorials
 in order to introduce more D3 concepts.
 
+You are encouraged to copy the code in the article and try it in a web browser!
+
 ### SVG Basics
 
 SVG stands for Scalable Vector Graphics.
@@ -252,7 +254,8 @@ Here is an example that demonstrates using the `select` and `selectAll` methods.
 </html>
 ```
 
-Here is the output from the `console.log` calls from the DevTools console.
+Here is the output from the `console.log` calls found in the DevTools console.
+
 ![selection objects in console](/blog/assets/d3-selections-in-console.png)
 
 Each selection object has the following properties:
@@ -292,86 +295,259 @@ that are descendants of their respective parent element.
 
 Selection objects have a `data` method that associates data in an array
 with the DOM elements in the selection.
-It does this by adding a `_data_` property to them.
+It does this by adding a `__data__` property to them.
+
+Here is an example that demonstrates calling the `data` method on a selection.
+
+```html
+<html>
+  <head>
+    <title>D3 data method</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <script>
+      const values = [7, 13, 2];
+      const bars = d3.selectAll('.bar').data(values);
+      console.log('bars =', bars);
+    </script>
+  </body>
+</html>
+```
+
+Here is the output from the `console.log` call found in the DevTools console.
+
+![selection from data method in console](/blog/assets/d3-selection-from-data.png)
+
+If the values in the array passed to the `data` method are objects,
+a second argument which is a function can be passed.
+This is responsible for extracting or computing a value
+from each object in the array.
+For example, suppose we have an array in a variable names `paintings`
+that contains objects that describe paintings and
+they have properties like `paintingName`, `width`, and `height`.
+We can use the area of each painting as the values as follows:
+
+```js
+someSelection.data(paintings, p => p.width * p.height);
+```
 
 The `data` method returns a new selection that contains three sub-selections
 referred to as "update", "enter", and "exit".
-"update" contains all the DOM elements in the selection
-that CAN be associated with data value.
-"enter" contains a placeholder for each DOM element
+
+The update sub-selection is held in the `_groups` property
+and contains all the DOM elements in the selection
+that can be _updated_ with a data value.
+
+The enter sub-selection is held in the `_enter` property
+and contains a placeholder for each DOM element
 that must be created in order to associated a data value.
-"exit" contains all the DOM elements in the selection
+These elements will _enter_ the DOM.
+Note the `__data__` property values in each of these placeholder objects.
+
+The "exit" sub-selection is held in the `_exit` property
+and contains all the DOM elements in the selection
 for which no data will be assigned.
-Typically these DOM elements are removed.
+Typically these elements _exit_ the DOM by being removed.
 
-Let's look at three scenarios.
+There are three scenarios to consider.
 
-#### Scenario #1
+1. There are no DOM elements in the selection.
+1. There are DOM elements in the selection,
+   but fewer than the number of data values.
+1. There are DOM elements in the selection,
+   but more than the number of data values.
 
-Often the first time the `data` method is called,
-the selection does not yet contain an DOM elements.
-So update and exit will be empty, and enter will contain
-a placeholder for each of the data values.
-These placeholder objects will contain a `_data_` property
-whose value is one of the values from the data array.
-The enter sub-selection can then be used to create
-a new DOM element for each placeholder object.
-We will see how to do this later.
+We have already seen the first scenario in previous code example.
 
-For example:
+To see the second scenario, add the following to the HTML.
 
-```js
-const values = [7, 13, 2];
-const bars = d3.selectAll('.bar').data(values);
+```html
+<div class="bar"></div>
+<div class="bar"></div>
 ```
 
-#### Scenario #2
+Reloading the page in the browser, we see that
+the update sub-selection holds these two elements with the values 7 and 13.
+The enter sub-selection now contains a single placeholder with the value 2.
+The exit sub-selection is empty.
 
-The `data` method can be called again later on a new selection
-using a new data array.
-Suppose that in the previous call to `data` there were 3 data values
-and in this call there are 5 data values.
-The update sub-selection will contain all three of the existing DOM elements,
-the enter sub-selection will contain two placeholders,
-and the exit sub-selection will be empty.
-Like in scenario #1, these placeholder objects
-will have an associated data value.
-The enter sub-selection can then be used to create
-a new DOM element for each placeholder object.
+To see the third scenario, add three more `div` elements
+with a class of "bar" so there are a total of five.
+Reloading the page in the browser, we see that
+the update sub-selection holds three elements with the values 7, 13, and 2.
+The enter sub-selection is empty.
+The exit sub-selection holds two elements that can be removed.
 
-#### Scenario #3
+In order to support changing data, both values and the number of values,
+we need to handle all three sub-selections.
+This means we need a way to iterate over the elements in each.
 
-Suppose that in the previous run there were 5 data values
-and in this run there are 3 data values.
-The update sub-selection will contain three of the five existing DOM elements,
-the enter sub-selection will be empty, and
-the exit sub-selection will contain two DOM elements that can be removed.
+To iterate over all the elements in the update sub-selection
+call methods such as `text` directly on the selection object.
+To get the enter sub-selection, call the `enter` method.
+To get the exit sub-selection, call the `exit` method.
+
+The following example demonstrates each of these.
+It generates an array containing a random number of random integers.
+These are used to display values in `div` elements
+that have a CSS class of "bar".
+Their text indicate whether the element was updated or just entered the DOM.
+Each time the "Update" button is pressed, the process repeats
+and previously created `div` elements are reused.
 
 Selection objects support many methods,
 some which act on all the DOM elements they encapsulate.
+An example used in the code below is the `text` method.
 These methods take a function that is invoked
 once for each encapsulated DOM element.
-The function is passed the value of the DOM element _data_ property
+The function is passed the value of the DOM element **data** property
 and the index of the DOM element within the selection.
 Just like in jQuery, it is not an error to call such a method on a
 selection that is empty, meaning it doesn't encapsulate any DOM elements.
-TODO: Add an example.
+
+```html
+<html>
+  <head>
+    <title>D3 data method</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <button onclick="update()">Update</button>
+
+    <div id="chart"></div>
+
+    <script>
+      // Gets a random integer between 1 and max inclusive.
+      const randomInt = max => Math.floor(Math.random() * max) + 1;
+
+      // Generates an array containing a random number of random integers.
+      function getValues() {
+        const count = randomInt(7);
+        const values = [];
+        for (let i = 0; i < count; i++) {
+          values.push(randomInt(10));
+        }
+        return values;
+      }
+
+      function update() {
+        const values = getValues();
+        console.log('values =', values);
+
+        // Create a D3 selection representing the bars
+        // which are div elements with a CSS class of "bar"
+        // and associate data values with them.
+        const bars = d3.select('#chart').selectAll('.bar').data(values);
+
+        // Update the text of .bar elements that are already in the DOM.
+        bars.text(d => 'update ' + d);
+
+        // Create new .bar elements that need to enter the DOM
+        // and set their text.
+        bars
+          .enter()
+          .append('div')
+          .attr('class', 'bar')
+          .text(d => 'enter ' + d);
+
+        // Remove .bar elements that need to exit the DOM.
+        bars.exit().remove();
+      }
+
+      update(); // initial call
+    </script>
+  </body>
+</html>
+```
+
+This is a common D3 pattern referred to as the "general update pattern".
+It can be simplified in a couple of ways.
+
+The first simplification is the use the `merge` method.
+This is called after appending elements to the enter sub-selection.
+It creates a new selection by combining elements in the
+selection on which it is called (the enter sub-selection in this case)
+with the selection passed to it (the update sub-selection in this case).
+The call that follow this operates on this new selection.
+This approach allows us to replace the
+"Update" and "Create" sections above with the following:
+
+```js
+bars
+  .enter() // returns the enter sub-selection
+  .append('div') // returns the enter sub-selection
+  .attr('class', 'bar') // returns the enter sub-selection
+  .merge(bars) // returns a new selection
+  .text(d => 'value ' + d);
+```
+
+We have lost the ability to specify different text for
+updated and entered elements, but that is not typically needed.
+
+The second simplification is to use the `join` method.
+This takes three functions, one to handle each sub-selection.
+They must be in the order enter, update, and exit.
+Using this approach, the code above, including the code for
+handling the exit sub-selection, can be replaced by the following.
+
+```js
+bars.join(
+  enter =>
+    enter
+      .append('div')
+      .attr('class', 'bar')
+      .text(d => 'enter ' + d),
+  update => update.text(d => 'update ' + d),
+  // This is the default behavior for the exit sub-selection
+  // and can be omitted.
+  exit => exit.remove()
+);
+```
+
+This regains the ability to have different text
+for updated and entered elements.
+But if that is not needed, we can shorten the code even more like this:
+
+```js
+bars.join(enter =>
+  enter
+    .append('div')
+    .attr('class', 'bar')
+    .text(d => 'value ' + d)
+);
+```
+
+We can even take this one step farther and pass the name of the element to be created for each element in the enter sub-selection like this:
+
+```js
+bars
+  .join('div')
+  .attr('class', 'bar')
+  .text(d => 'value ' + d);
+```
 
 Selection objects are immutable, meaning
 the set of DOM elements they encapsulate cannot be changed.
-However, there are many methods on selection objects that return a new selection,
-including `map` and `filter`.
+However, there are many methods on selection objects that return
+a new selection, including `map` and `filter`.
 
-The selection object `join` method ...
-Is this method supposed to be used instead of `data` or in conjunction with it?
+That's a lot to take in!
+But if you're feeling somewhat comfortable with the notion of selection objects,
+their three sub-selections, and the general update pattern,
+you are ready to put that knowledge to use for creating your first chart.
 
 ### Drawing Bars
 
-Now that we know how to draw on bar,
-let's draw one for each piece of data in an array.
+Earlier we learned how to draw a single bar.
+Let's combine that with what we have learned about selections
+to draw one bar for each piece of data in an array.
 We will create a bar chart like the following:
 
 ![D3 Bar Chart](/blog/assets/bar-chart.png)
+
+To see this in action, browse
+{% aTargetBlank 'https://bar-chart.vercel.app/', 'Bar Chart on Vercel' %}.
 
 The "Update" button generates new, random data
 and updates the bars.
@@ -522,6 +698,8 @@ function updateData() {
   // the SVG origin being in the upper left corner.
   // Like xScale, this is a function that takes a value in the "domain"
   // and returns a value in the "range".
+  // The d3.max function computes the largest data value in a given array
+  // where values are computed by the 2nd argument function.
   const max = d3.max(data, d => d.score);
   yScale = d3.scaleLinear().domain([0, max]).range([usableHeight, 0]);
 
@@ -530,41 +708,26 @@ function updateData() {
   const svg = d3.select('#chart').attr('width', WIDTH).attr('height', HEIGHT);
 
   // This is the most critical part to understand!
-  //
-  // The data method ...
-  //
-  // The join method ...
+  // You learned about about selections and the general update pattern
+  // in the previous section.
   const groups = svg
     .selectAll('.bar')
     .data(data, d => d.name)
-    .join(
-      enter => {
-        // Create a new SVG group element for each placeholder
-        // to represent a new bar.
-        const groups = enter.append('g').attr('class', 'bar');
+    .join(enter => {
+      // Create a new SVG group element for each placeholder
+      // to represent a new bar.
+      // For now the only thing in each group will be a rect element,
+      // but later we will add a text element to display the value.
+      const groups = enter.append('g').attr('class', 'bar');
 
-        // Create a new SVG rect element for each group.
-        groups
-          .append('rect')
-          .attr('height', 0)
-          .attr('y', TOP_PADDING + usableHeight);
+      // Create a new SVG rect element for each group.
+      groups
+        .append('rect')
+        .attr('height', 0)
+        .attr('y', TOP_PADDING + usableHeight);
 
-        // Create a new SVG text element for each group.
-        groups.append('text').attr('y', TOP_PADDING + usableHeight);
-
-        return groups;
-      },
-      update => update,
-      exit => {
-        // Shrink the height of the exiting rects gradually
-        // and then remove them them.
-        exit
-          .select('rect')
-          .attr('height', 0)
-          .attr('y', TOP_PADDING + usableHeight)
-          .on('end', () => exit.remove());
-      }
-    );
+      return groups;
+    });
 
   // The join method call above returns a selection that combines
   // the update and enter sub-selections into its update selection.
@@ -573,11 +736,9 @@ function updateData() {
 
   // Translate the groups for each bar to their
   // appropriate x coordinate based on its index.
-  groups.call(group =>
-    group.attr('transform', (_, i) => `translate(${xScale(i)}, 0)`)
-  );
+  groups.attr('transform', (_, i) => `translate(${xScale(i)}, 0)`);
 
-  // Update all the rects using their newly associated data.
+  // Update all the rect elements using their newly associated data.
   groups.select('rect').call(updateRect);
 }
 
@@ -587,10 +748,74 @@ updateData();
 
 ## Adding Y Axis
 
-This covers `d3.max`, scales, and axis methods.
-This includes adding left and top padding to the chart.
+Now let's add a y axis to the chart the indicates the bar values.
+We want this to be dynamic so that the highest value
+matches the highest value of any of the bars that are present.
+
+Here are the steps:
+
+1. Increase the value of `LEFT_PADDING` from 10 to 25
+   to leave room of the axis.
+
+1. Add the variable `yAxisGroup` to the `let` statement near the top
+   as follows:
+
+   ```js
+   let barPadding, barWidth, xScale, yAxisGroup, yScale;
+   ```
+
+1. Add the function `updateYAxis` shown below:
+
+   ```js
+   function updateYAxis(svg, data, max) {
+     if (!yAxisGroup) {
+       // Create an SVG group that will hold the y axis and
+       // translate the group to the appropriate position in the SVG.
+       yAxisGroup = svg
+         .append('g')
+         .attr('class', 'y-axis')
+         .attr('transform', `translate(${LEFT_PADDING}, ${TOP_PADDING})`);
+     }
+
+     // Create an array with values from zero to max
+     // that will be used as the tick values on the y axis.
+     const tickValues = Array.from(Array(max + 1).keys());
+
+     // Create an axis generator function that renders the yAxis.
+     const yAxis = d3
+       .axisLeft(yScale)
+       .tickValues(tickValues)
+       .tickFormat(n => n.toFixed(0));
+
+     // Pass the selection for the group to the
+     // axis generator function to render it.
+     yAxis(yAxisGroup);
+     // An equivalent way to do this is yAxisGroup.call(yAxis);
+   }
+   ```
+
+1. Add the following at the bottom of the `updateData` function:
+
+   ```js
+   updateYAxis(svg, data, max);
+   ```
+
+The result looks like this:
+
+![D3 bar chart with y axis](/blog/assets/d3-bar-chart-with-y-axis.png)
 
 ## Adding X Axis
+
+Now let's add an x axis to the chart whose values
+are labels associated with each bar.
+In our example the labels are names of fruits
+and the values represent scores in a poll
+where respondents name their favorite fruit.
+Of course all our data is randomly generated.
+
+Here are the steps:
+
+---
 
 This includes translating and rotating axis labels using the
 CSS `transform` property with the `translate` and `rotate` functions.
