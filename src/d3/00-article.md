@@ -202,6 +202,169 @@ group
   .attr('y', HEIGHT - barHeight + 20); // just below top
 ```
 
+### D3 Selection Objects
+
+A D3 selection object encapsulates a set of DOM elements,
+similar to a jQuery object.
+To create one, use the d3 methods `select` and `selectAll`.
+For example, `d3.select('.bar')` returns a selection object that
+encapsulates the first element in the DOM with a CSS class of "bar".
+`d3.selectAll('.bar')` is similar, but the returned selection object
+encapsulates all the matching DOM elements.
+
+The `select` and `selectAll` methods can also be called on a selection
+to find elements that are descendants of the elements in the selection
+within the DOM tree.
+
+Here is an example that demonstrates using the `select` and `selectAll` methods.
+
+```html
+<html>
+  <head>
+    <title>D3 Selections</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  </head>
+  <body>
+    <div class="chart" id="chart1">
+      <div class="bar">Bar #1</div>
+      <div class="bar">Bar #2</div>
+      <div class="bar">Bar #3</div>
+    </div>
+
+    <div class="chart" id="chart2">
+      <div class="bar">Bar #4</div>
+      <div class="bar">Bar #5</div>
+    </div>
+
+    <script>
+      const bars1 = d3.selectAll('.bar');
+      console.log('bars1 =', bars1);
+
+      const chart1 = d3.select('#chart1');
+      const bars2 = chart1.selectAll('.bar');
+      console.log('bars2 =', bars2);
+
+      const charts = d3.selectAll('.chart');
+      const bars3 = charts.selectAll('.bar');
+      console.log('bars3 =', bars3);
+    </script>
+  </body>
+</html>
+```
+
+Here is the output from the `console.log` calls from the DevTools console.
+![selection objects in console](/blog/assets/d3-selections-in-console.png)
+
+Each selection object has the following properties:
+
+- `_parents`
+  This is an array of the DOM elements that were searched
+  When the `select` and `selectAll` methods are called on the `d3` object,
+  this array will contain only the `html` element of the current document.
+  When these methods are called on an existing selection,
+  this array will contain all the DOM elements in that selection.
+- `_groups`
+  This is an array of DOM NodeList objects, one per parent element.
+  These NodeList objects contain the matching DOM elements.
+
+In the `bars1` selection, `_parents` contains only the `html` element,
+indicating that the entire document was searched.
+`_groups` holds a single `NodeList` that
+contains every DOM element with a CSS class of "bar".
+
+In the `bars2` selection, `_parents`
+contains only the element with an id of "chart1".
+This happens because the search was performed on
+a selection that only contains that element.
+`_groups` holds a single `NodeList` that
+only contains the DOM elements with a CSS class of "bar"
+that are descendants of the element with an id of "chart1".
+
+In the `bars3` selection, `_parents`
+contains the two elements with a CSS class of "chart"
+because the search was performed on a selection
+that only contains those elements.
+`_groups` holds two `NodeList` objects, one for each parent element.
+Each of these contains the DOM elements with a CSS class of "bar"
+that are descendants of their respective parent element.
+
+### The `data` method
+
+Selection objects have a `data` method that associates data in an array
+with the DOM elements in the selection.
+It does this by adding a `_data_` property to them.
+
+The `data` method returns a new selection that contains three sub-selections
+referred to as "update", "enter", and "exit".
+"update" contains all the DOM elements in the selection
+that CAN be associated with data value.
+"enter" contains a placeholder for each DOM element
+that must be created in order to associated a data value.
+"exit" contains all the DOM elements in the selection
+for which no data will be assigned.
+Typically these DOM elements are removed.
+
+Let's look at three scenarios.
+
+#### Scenario #1
+
+Often the first time the `data` method is called,
+the selection does not yet contain an DOM elements.
+So update and exit will be empty, and enter will contain
+a placeholder for each of the data values.
+These placeholder objects will contain a `_data_` property
+whose value is one of the values from the data array.
+The enter sub-selection can then be used to create
+a new DOM element for each placeholder object.
+We will see how to do this later.
+
+For example:
+
+```js
+const values = [7, 13, 2];
+const bars = d3.selectAll('.bar').data(values);
+```
+
+#### Scenario #2
+
+The `data` method can be called again later on a new selection
+using a new data array.
+Suppose that in the previous call to `data` there were 3 data values
+and in this call there are 5 data values.
+The update sub-selection will contain all three of the existing DOM elements,
+the enter sub-selection will contain two placeholders,
+and the exit sub-selection will be empty.
+Like in scenario #1, these placeholder objects
+will have an associated data value.
+The enter sub-selection can then be used to create
+a new DOM element for each placeholder object.
+
+#### Scenario #3
+
+Suppose that in the previous run there were 5 data values
+and in this run there are 3 data values.
+The update sub-selection will contain three of the five existing DOM elements,
+the enter sub-selection will be empty, and
+the exit sub-selection will contain two DOM elements that can be removed.
+
+Selection objects support many methods,
+some which act on all the DOM elements they encapsulate.
+These methods take a function that is invoked
+once for each encapsulated DOM element.
+The function is passed the value of the DOM element _data_ property
+and the index of the DOM element within the selection.
+Just like in jQuery, it is not an error to call such a method on a
+selection that is empty, meaning it doesn't encapsulate any DOM elements.
+TODO: Add an example.
+
+Selection objects are immutable, meaning
+the set of DOM elements they encapsulate cannot be changed.
+However, there are many methods on selection objects that return a new selection,
+including `map` and `filter`.
+
+The selection object `join` method ...
+Is this method supposed to be used instead of `data` or in conjunction with it?
+
 ### Drawing Bars
 
 Now that we know how to draw on bar,
@@ -367,31 +530,6 @@ function updateData() {
   const svg = d3.select('#chart').attr('width', WIDTH).attr('height', HEIGHT);
 
   // This is the most critical part to understand!
-  //
-  // svg.selectAll('.bar') returns a new D3 selection.
-  // A D3 selection contains three sub-selections
-  // referred to as "update", "enter", and "exit".
-  // "update" contains all the existing .bar elements for which data exists.
-  // "enter" contains a placeholder for each .bar element
-  // that needs to be created to accommodate a data value.
-  // "exit" contains all the existing .bar elements
-  // for which no data will be assigned.
-  //
-  // The first time this runs, there are no existing
-  // DOM elements with a CSS class of "bar".
-  // So update and exit will be empty, and enter will contain
-  // a placeholder for each of the data values.
-  //
-  // Suppose that in the previous run there were 3 data values
-  // and in this run there are 5 data values.
-  // update will contain all three of the existing .bar elements,
-  // enter will contain two placeholders, and exit will be empty.
-  //
-  // Suppose that in the previous run there were 5 data values
-  // and in this run there are 3 data values.
-  // update will contain three of the five existing .bar elements,
-  // enter will be empty, and exit will contain two .bar elements
-  // that can be removed.
   //
   // The data method ...
   //
