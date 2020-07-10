@@ -755,7 +755,7 @@ matches the highest value of any of the bars that are present.
 Here are the steps:
 
 1. Increase the value of `LEFT_PADDING` from 10 to 25
-   to leave room of the axis.
+   to leave room for the y axis.
 
 1. Add the variable `yAxisGroup` to the `let` statement near the top
    as follows:
@@ -815,11 +815,56 @@ Of course all our data is randomly generated.
 
 Here are the steps:
 
----
+1. Add the following to `bar-chart.css` to position and rotate
+   the x-axis labels:
 
-This includes translating and rotating axis labels using the
-CSS `transform` property with the `translate` and `rotate` functions.
-This includes adding bottom and right padding to the chart.
+```css
+.x-axis > .tick > text {
+  /* Rotate labels so they fit below bars better. */
+  transform: translate(-8px, 15px) rotate(-45deg);
+}
+```
+
+1. Increase the value of `BOTTOM` from 10 to 50
+   to leave room for the x axis.
+
+1. Add the variable `yAxisGroup` to the `let` statement near the top
+   as follows:
+
+   ```js
+   let barPadding, barWidth, xAxisGroup, xScale, yAxisGroup, yScale;
+   ```
+
+1. Add the function `updateXAxis` shown below:
+
+   ```js
+   function updateXAxis(svg, data) {
+     if (!xAxisGroup) {
+       // Create the x-axis that displays fruit names.
+       xAxisGroup = svg
+         .append('g')
+         .attr('class', 'x-axis')
+         .attr('transform', `translate(0, ${TOP_PADDING + usableHeight})`);
+     }
+
+     const xAxisScale = d3
+       .scaleBand()
+       .domain(data.map(item => item.name)) // fruit names
+       .range([LEFT_PADDING, LEFT_PADDING + usableWidth]);
+     const xAxis = d3.axisBottom(xAxisScale).ticks(data.length);
+     xAxisGroup.call(xAxis);
+   }
+   ```
+
+1. Add the following at the bottom of the `updateData` function:
+
+   ```js
+   updateXAxis(svg, data);
+   ```
+
+The result looks like this:
+
+![D3 bar chart with x axis](/blog/assets/d3-bar-chart-with-x-axis.png)
 
 ## Adding Text on Bars
 
@@ -838,3 +883,7 @@ See the `random` and `getRandomData` functions.
 
 This includes using `transition`, `duration`, and `easing` methods.
 It also explains use of the `myTransition` function.
+
+```
+
+```
