@@ -783,7 +783,7 @@ function updateData() {
 updateData();
 ```
 
-To see this in action, browse
+To see this in action, click
 {% aTargetBlank 'https://bar-chart.vercel.app/', 'Basic Bar Chart' %}.
 
 ## Adding Y Axis
@@ -844,7 +844,7 @@ The result looks like this:
 
 ![D3 bar chart with y axis](/blog/assets/d3-bar-chart-with-y-axis.png)
 
-To see this in action, browse
+To see this in action, click
 {% aTargetBlank
   'https://bar-chart-with-y-axis.vercel.app/',
   'Bar Chart with y axis' %}.
@@ -914,7 +914,7 @@ The result looks like this:
 
 ![D3 bar chart with x axis](/blog/assets/d3-bar-chart-with-x-axis.png)
 
-To see this in action, browse
+To see this in action, click
 {% aTargetBlank
   'https://bar-chart-with-x-axis.vercel.app/',
   'Bar Chart with x axis' %}.
@@ -1002,7 +1002,7 @@ The result looks like this:
 
 Note how some bars have white text, while others have black text.
 
-To see this in action, browse
+To see this in action, click
 {% aTargetBlank
   'https://bar-chart-with-text.vercel.app/',
   'Bar Chart with text' %}.
@@ -1099,7 +1099,7 @@ but now when the "Update" button is pressed,
 changes to the data cause everything in the bar chart
 to transition from its previous state to its new state.
 
-To see this in action, browse
+To see this in action, click
 {% aTargetBlank
   'https://bar-chart-with-transitions.vercel.app/',
   'Bar Chart with transitions' %}.
