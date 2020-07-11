@@ -874,16 +874,7 @@ See the `getTextColor` function.
 This includes horizontal centering with the
 CSS `text-anchor` property set to `middle`.
 
-## Responding to Data Updates
-
-This includes generating random data.
-See the `random` and `getRandomData` functions.
-
 ## Adding Animation
 
 This includes using `transition`, `duration`, and `easing` methods.
 It also explains use of the `myTransition` function.
-
-```
-
-```
