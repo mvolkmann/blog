@@ -560,9 +560,6 @@ We will create a bar chart like the following:
 
 ![D3 Bar Chart](/blog/assets/bar-chart.png)
 
-To see this in action, browse
-{% aTargetBlank 'https://bar-chart.vercel.app/', 'Bar Chart on Vercel' %}.
-
 The "Update" button generates new, random data
 and updates the bars.
 This is implemented by the files
@@ -760,6 +757,9 @@ function updateData() {
 updateData();
 ```
 
+To see this in action, browse
+{% aTargetBlank 'https://bar-chart.vercel.app/', 'Basic Bar Chart' %}.
+
 ## Adding Y Axis
 
 Now let's add a y axis to the chart the indicates the bar values.
@@ -817,6 +817,11 @@ Here are the steps:
 The result looks like this:
 
 ![D3 bar chart with y axis](/blog/assets/d3-bar-chart-with-y-axis.png)
+
+To see this in action, browse
+{% aTargetBlank
+  'https://bar-chart-with-y-axis.vercel.app/',
+  'Bar Chart with y axis' %}.
 
 ## Adding X Axis
 
@@ -879,6 +884,11 @@ Here are the steps:
 The result looks like this:
 
 ![D3 bar chart with x axis](/blog/assets/d3-bar-chart-with-x-axis.png)
+
+To see this in action, browse
+{% aTargetBlank
+  'https://bar-chart-with-x-axis.vercel.app/',
+  'Bar Chart with x axis' %}.
 
 ## Adding Text on Bars
 
@@ -961,6 +971,11 @@ The result looks like this:
 ![D3 bar chart with text](/blog/assets/d3-bar-chart-with-text.png)
 
 Note how some bars have white text, while others have black text.
+
+To see this in action, browse
+{% aTargetBlank
+  'https://bar-chart-with-text.vercel.app/',
+  'Bar Chart with text' %}.
 
 ## Adding Transitions
 
@@ -1052,14 +1067,27 @@ but now when the "Update" button is pressed,
 changes to the data cause everything in the bar chart
 to transition from its previous state to its new state.
 
+To see this in action, browse
+{% aTargetBlank
+  'https://bar-chart-with-transitions.vercel.app/',
+  'Bar Chart with transitions' %}.
+
 ## Conclusion
 
 There is much more to learn about D3, including creating
-more kinds charts such a pie charts and geo charts (maps).
+additional kinds charts such as
+pie charts, line charts, scatter plots, geographic maps, and more.
 What you have learned here about D3 selections and
-the general update pattern will serve you well
-as you dig in further.
+the general update pattern will serve you well as you dig in further.
 
-Check out the API documentation at
-<https://github.com/d3/d3/blob/master/API.md>
-TODO: Add more references.
+## References
+
+Official introduction to D3: <https://d3js.org/>
+
+Examples of D3 creations: <https://observablehq.com/@d3/gallery>
+
+D3 API documentation: <https://github.com/d3/d3/blob/master/API.md>
+
+For a good book on D3, check out the O'Reilly book
+"Interactive Data Visualization for the Web, 2nd Edition" by Scott Murray at
+<https://www.oreilly.com/library/view/interactive-data-visualization/9781491921296/>.
