@@ -204,7 +204,7 @@ group
   .attr('y', HEIGHT - barHeight + 20); // just below top
 ```
 
-### D3 Selection Objects
+## D3 Selection Objects
 
 A D3 selection object encapsulates a set of DOM elements,
 similar to a jQuery object.
@@ -291,7 +291,7 @@ that only contains those elements.
 Each of these contains the DOM elements with a CSS class of "bar"
 that are descendants of their respective parent element.
 
-### The `data` method
+## The `data` method
 
 Selection objects have a `data` method that associates data in an array
 with the DOM elements in the selection.
@@ -485,7 +485,10 @@ bars
 We have lost the ability to specify different text for
 updated and entered elements, but that is not typically needed.
 
-The second simplification is to use the `join` method.
+## The `join` method
+
+A second simplification that can be made to the code above
+is to use the `join` method.
 This takes three functions, one to handle each sub-selection.
 They must be in the order enter, update, and exit.
 Using this approach, the code above, including the code for
@@ -527,17 +530,28 @@ bars
   .text(d => 'value ' + d);
 ```
 
+## More on selection objects
+
+There are many methods on selection objects that iteration over the elements
+in the NodeList values found in the `_groups` array.
+These include `attr`, `text`, and many more.
+A function is passed to these methods that is passed
+the value of the `__data__` property of the current element
+and its index within the selection.
+Inside these function, the current element
+can be access using the `this` keyword.
+In order to use `this`, the function must not be an arrow function.
+
 Selection objects are immutable, meaning
 the set of DOM elements they encapsulate cannot be changed.
 However, there are many methods on selection objects that return
 a new selection, including `map` and `filter`.
 
-That's a lot to take in!
-But if you're feeling somewhat comfortable with the notion of selection objects,
+If you're feeling somewhat comfortable now with the notion of selection objects,
 their three sub-selections, and the general update pattern,
 you are ready to put that knowledge to use for creating your first chart.
 
-### Drawing Bars
+## Drawing Bars
 
 Earlier we learned how to draw a single bar.
 Let's combine that with what we have learned about selections
@@ -868,13 +882,184 @@ The result looks like this:
 
 ## Adding Text on Bars
 
-This includes selecting a text color based on the bar color
-using relative luminance.
-See the `getTextColor` function.
-This includes horizontal centering with the
-CSS `text-anchor` property set to `middle`.
+Now let's add the value of each bar as text
+that is positioned near the top of each bar.
 
-## Adding Animation
+The bars have a variety of fill colors.
+Using white text will look good on top of some colors,
+but using black text is better for others.
+We can choose between white and black text by calculating
+the relative luminance of the bar fill color.
+A formula for this can be found in Wikipedia at
+<https://en.wikipedia.org/wiki/Relative_luminance>.
+This is used in the `getTextColor` function below.
 
-This includes using `transition`, `duration`, and `easing` methods.
-It also explains use of the `myTransition` function.
+Here are the steps:
+
+1. Add the following CSS rule in `bar-chart.css`
+   to center the text for a bar horizontally within the bar.
+
+   ```css
+   .bar > text {
+     text-anchor: middle;
+   }
+   ```
+
+1. Add the following function for choosing the text color
+   to use on a bar with a given fill color.
+
+   ```js
+   // This returns a text color to use on a given background color.
+   function getTextColor(bgColor) {
+     // Convert the hex background color to its decimal components.
+     const red = parseInt(bgColor.substring(1, 3), 16);
+     const green = parseInt(bgColor.substring(3, 5), 16);
+     const blue = parseInt(bgColor.substring(5, 7), 16);
+
+     // Compute the "relative luminance".
+     const luminance = (0.2126 * red + 0.7152 * green + 0.0722 * blue) / 255;
+
+     // Use dark text on light backgrounds and vice versa.
+     return luminance > 0.5 ? 'black' : 'white';
+   }
+   ```
+
+1. Add the following function for updating the text for a specific bar:
+
+   ```js
+   // This updates the attributes of an SVG text element
+   // that displays the score for a bar.
+   function updateText(text) {
+     text
+       .attr('fill', d => {
+         const barColor = colorScale(d.colorIndex);
+         return getTextColor(barColor);
+       })
+       .text(d => d.score)
+       .attr('x', barWidth / 2) // center horizontally in bar
+       .attr('y', d => TOP_PADDING + yScale(d.score) + 20); // just below top
+   }
+   ```
+
+1. Add the following inside the `updateData` function after the line
+   that appends a `rect` element to the SVG group for a bar:
+
+   ```js
+   // Create a new SVG text element for each group.
+   groups.append('text').attr('y', TOP_PADDING + usableHeight);
+   ```
+
+1. Add the following after the call to `updateRect`:
+
+   ```js
+   // Update all the text elements using their newly associated data.
+   groups.select('text').call(updateText);
+   ```
+
+The result looks like this:
+
+![D3 bar chart with text](/blog/assets/d3-bar-chart-with-text.png)
+
+Note how some bars have white text, while others have black text.
+
+## Adding Transitions
+
+D3 transitions animate changes to DOM and SVG properties.
+
+Let's add code to animate the following:
+
+- changes to the position, width, and height of bars
+- changes to the position of text on bars
+- changes to the y-axis
+- changes to the x-axis
+- bars being removed
+
+We can define a transition function that
+applies a specified transition to any selection.
+This function can be used to add all of the transitions listed above.
+Ours will only specify a duration for the transitions,
+but it is also possible to specify
+an amount of time to delay before the transition begins and
+an easing function which controls the speed of the transition
+at various times throughout its duration.
+When these are not specified, the delay defaults to zero
+and the easing function defaults to `d3.easeCubic`.
+For descriptions of the provided easing functions and
+graphs that show their effect, see <https://github.com/d3/d3-ease>.
+
+Here are the steps:
+
+1. Add the following constant:
+
+   ```js
+   const DURATION = 500; // of transitions
+   ```
+
+1. Add the following function:
+
+   ```js
+   // You cannot invoke this with the call method on selections
+   // because that will return the selection
+   // instead of the result of the last call made here.
+   const myTransition = selection => selection.transition().duration(DURATION);
+   ```
+
+1. In the `updateRect` function, replace the first line which is just `rect`
+   with `myTransition(rect)`.
+
+1. In the `updateText` function, replace the first line which is just `text`
+   with `myTransition(text)`.
+
+1. Add the following line at the end of the `updateXAxis` function:
+
+   ```js
+   xAxisGroup = myTransition(xAxisGroup);
+   ```
+
+1. Add the following line at the end of the `updateYAxis` function:
+
+   ```js
+   yAxisGroup = myTransition(yAxisGroup);
+   ```
+
+1. In the `updateData` function, currently only
+   one function is passed to the `join` method.
+   It processes the enter sub-selection.
+   Add two more arguments to the `join` method using the following code.
+   This processes the exit sub-selection by animate bars leaving the DOM.
+
+   ```js
+   // This is only needed so we can specify
+   // an exit function as the third argument.
+   update => update,
+     exit => {
+       // Remove the score text from the
+       // exiting rect elements immediately.
+       exit.selectAll('text').remove();
+
+       // Shrink the height of the exiting rects gradually
+       // and then remove them them.
+       myTransition(exit)
+         .select('rect')
+         .attr('height', 0)
+         .attr('y', TOP_PADDING + usableHeight)
+         .on('end', () => exit.remove());
+     };
+   ```
+
+The result looks the same as before,
+but now when the "Update" button is pressed,
+changes to the data cause everything in the bar chart
+to transition from its previous state to its new state.
+
+## Conclusion
+
+There is much more to learn about D3, including creating
+more kinds charts such a pie charts and geo charts (maps).
+What you have learned here about D3 selections and
+the general update pattern will serve you well
+as you dig in further.
+
+Check out the API documentation at
+<https://github.com/d3/d3/blob/master/API.md>
+TODO: Add more references.
