@@ -14,7 +14,7 @@ It renders, and re-renders, HTML elements (including `svg`) in a web browser
 based on data and changes to the data.
 D3 is primarily used for data visualizations such as
 bar charts, pie charts, line charts, scatter plots, geographic maps, and more.
-But as we will see, it has quite a bit of overlap with jQuery
+But as you will see, it has quite a bit of overlap with jQuery
 and can be used for many kinds of DOM manipulations
 that are not related to data visualization.
 
@@ -109,7 +109,7 @@ The D3 modules include:
 - Zooming
 
 Let's learn D3 by example.
-Many D3 tutorials start with a bar chart and so will we.
+Many D3 tutorials start with a bar chart and so will this one.
 But ours will include more features than typically shown in tutorials
 in order to introduce more D3 concepts.
 
@@ -125,9 +125,12 @@ SVG elements include `svg`, `line`, `polygon`, `rect`, `circle`, `path`,
 `text`, `image`, `g` (for group), and many more.
 For our bar chart will will only need `svg`, `g`, `rect`, and `text`.
 
-Let's start by drawing a rectangle and putting some text on it.
+Let's start by drawing a rectangle and placing text on it as shown below.
 
 ![D3 SVG demo](/blog/assets/d3-svg-demo.png)
+
+We will implement this with separate HTML, CSS, and JavaScript files,
+but all of this could be combined into one HTML file if that's your style.
 
 ### `svg-demo.html`
 
@@ -188,10 +191,15 @@ const score = 7; // out of 10
 const barHeight = HEIGHT * (score / 10);
 const barWidth = 50;
 
+// Find the DOM element with an id of "chart" and set its width and height.
+// This happens to be an svg element.
 const svg = d3.select('#chart').attr('width', WIDTH).attr('height', HEIGHT);
 
+// Append a group element to the svg and add a CSS class of "bar".
 const group = svg.append('g').attr('class', 'bar');
 
+// Append a rect element to the group and set its properties.
+// The background color of an SVG element is set using the "fill" property.
 group
   .append('rect')
   .attr('height', barHeight)
@@ -200,12 +208,16 @@ group
   .attr('y', HEIGHT - barHeight)
   .attr('fill', 'cornflowerblue');
 
+// Append a text element to the group and set its properties.
 group
   .append('text')
   .text(score)
   .attr('x', barWidth / 2) // center horizontally in bar
   .attr('y', HEIGHT - barHeight + 20); // just below top
 ```
+
+That's the very basics of working with SVG.
+But it's all you need to know to draw additions bars in a bar chart later.
 
 ## D3 Selection Objects
 
@@ -326,10 +338,10 @@ If the values in the array passed to the `data` method are objects,
 a second argument which is a function can be passed.
 This is responsible for extracting or computing a value
 from each object in the array.
-For example, suppose we have an array in a variable names `paintings`
+For example, suppose you have an array in a variable names `paintings`
 that contains objects that describe paintings and
 they have properties like `paintingName`, `width`, and `height`.
-We can use the area of each painting as the values as follows:
+You can use the area of each painting as the values as follows:
 
 ```js
 someSelection.data(paintings, p => p.width * p.height);
@@ -361,7 +373,7 @@ There are three scenarios to consider.
 1. There are DOM elements in the selection,
    but more than the number of data values.
 
-We have already seen the first scenario in previous code example.
+You have already seen the first scenario in previous code example.
 
 To see the second scenario, add the following to the HTML.
 
@@ -370,21 +382,21 @@ To see the second scenario, add the following to the HTML.
 <div class="bar"></div>
 ```
 
-Reloading the page in the browser, we see that
+Reloading the page in the browser, you will see that
 the update sub-selection holds these two elements with the values 7 and 13.
 The enter sub-selection now contains a single placeholder with the value 2.
 The exit sub-selection is empty.
 
 To see the third scenario, add three more `div` elements
 with a class of "bar" so there are a total of five.
-Reloading the page in the browser, we see that
+Reloading the page in the browser, you will see that
 the update sub-selection holds three elements with the values 7, 13, and 2.
 The enter sub-selection is empty.
 The exit sub-selection holds two elements that can be removed.
 
 In order to support changing data, both values and the number of values,
-we need to handle all three sub-selections.
-This means we need a way to iterate over the elements in each.
+you need to handle all three sub-selections.
+This means you need a way to iterate over the elements in each.
 
 To iterate over all the elements in the update sub-selection
 call methods such as `text` directly on the selection object.
@@ -513,7 +525,7 @@ bars.join(
 
 This regains the ability to have different text
 for updated and entered elements.
-But if that is not needed, we can shorten the code even more like this:
+But if that is not needed, you can shorten the code even more like this:
 
 ```js
 bars.join(enter =>
@@ -524,7 +536,8 @@ bars.join(enter =>
 );
 ```
 
-We can even take this one step farther and pass the name of the element to be created for each element in the enter sub-selection like this:
+You can even take this one step farther and pass the name
+of the element to be created to the `join` method like this:
 
 ```js
 bars
@@ -556,8 +569,8 @@ you are ready to put that knowledge to use for creating your first chart.
 
 ## Drawing Bars
 
-Earlier we learned how to draw a single bar.
-Let's combine that with what we have learned about selections
+Earlier you learned how to draw a single bar.
+Let's combine that with what you have learned about selections
 to draw one bar for each piece of data in an array.
 We will create a bar chart like the following:
 
@@ -1075,6 +1088,11 @@ To see this in action, browse
   'https://bar-chart-with-transitions.vercel.app/',
   'Bar Chart with transitions' %}.
 
+The final code can be found in GitHub at
+{% aTargetBlank
+  'https://github.com/mvolkmann/d3-bar-chart-with-transitions',
+  'd3-bar-chart-with-transitions' %}.
+
 ## Conclusion
 
 There is much more to learn about D3, including creating
@@ -1082,6 +1100,14 @@ additional kinds charts such as
 pie charts, line charts, scatter plots, geographic maps, and more.
 What you have learned here about D3 selections and
 the general update pattern will serve you well as you dig in further.
+
+Feel free to email comments and questions about this article to
+<a
+  href="mailto:mark@objectcomputing.com?subject=Your D3 article"
+  target="_blank"
+  rel="noopener noreferrer">
+me
+</a>.
 
 ## References
 
