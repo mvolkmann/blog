@@ -9,7 +9,7 @@ layout: topic-layout.njk
 
 ## Introduction
 
-D3 (<https:/>/d3js.org>) stands for Data-Driven Documents.
+D3 (<https://d3js.org>) stands for Data-Driven Documents.
 It renders, and re-renders, HTML elements (including `svg`) in a web browser
 based on data and changes to the data.
 D3 is primarily used for data visualizations such as
