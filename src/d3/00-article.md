@@ -18,19 +18,19 @@ But as we will see, it has quite a bit of overlap with jQuery
 and can be used for many kinds of DOM manipulations
 that are not related to data visualization.
 
-So why should I write about D3 now.
-After all, it has been around for since February 2011.
+So why should I write about D3 now?
+After all, it has been around since February 2011.
 Many tutorial articles already exist.
 But many of those describe older versions of D3
 and each major version included breaking changes.
 Version 5 of D3 was released in January, 2018.
 So this is my chance to write an up-to-date D3 tutorial
-and try to make it very easily to understand.
+and try to make it easy to understand.
 Of course you will be the judge of whether I am successful.
 
 JavaScript has been my primary programming language
 for the entirety of the life of D3.
-I have know of its existence for quite a while,
+I have known of the existence of D3 for quite a while,
 but have ignored it because I was more focused on other JavaScript-based
 topics including jQuery, Angular, React, Vue, Svelte, and TypeScript.
 It was time for me to stop ignoring D3 and dig in.
@@ -40,28 +40,26 @@ It is open source and uses a BSD license.
 
 D3 uses HTML, CSS, JavaScript, the DOM, and SVG,
 so knowledge of those topics is helpful.
-To see examples of using D3, click the "Examples" link
-near the top of <https://d3.js.org>.
 
 There are 3 levels of D3 usage, using higher-level libraries,
-copying and modifying examples, and coding from scratch.
+copying and modifying D3 examples, and coding from scratch.
 
 An example of a library that uses D3 is C3 (<https://c3js.org/>).
 It uses D3 under the hood to render many kinds of charts.
-These charts are customizable,
-but not to the extent that coding from scratch provides.
-But charts can be implemented quickly this way
+These charts are customizable, but not
+to the extent that can be achieved when coding from scratch.
+However, charts can be implemented quickly using C3,
 and the requirement to have deep knowledge of D3 is removed.
-They respond well to changes in data,
+C3 charts respond well to changes in data by default,
 including transitions from old to new values.
 
-There are many sites that provided examples of charts implemented with D3.
-Perhaps you can find an example that almost exactly what you want.
+There are many sites that provide examples of charts implemented with D3.
+Perhaps you can find an example that renders almost exactly what you want.
 Copying and customizing the code will often require far less time
 than implementing a chart from scratch.
 
 My hope is that by the time you finish reading this article,
-you will know enough about D3 to enable a final option
+you will know enough about D3 to enable the final option,
 which is implementing an entire chart from scratch.
 This provides the most flexibility, but requires the most effort.
 
@@ -72,11 +70,11 @@ set attributes, and modify text content.
 In this respect it has overlap with jQuery functionality.
 
 The functionality of D3 is divided into modules.
-A default build includes a collection of commonly used modules.
-Custom builds can omit unneeded modules and add ones not in the default build
-in order to minimize the amount of code that must be downloaded to browsers.
+The default build of D3 includes all of the modules.
+Custom builds can omit unneeded modules in order to
+minimize the amount of code that must be downloaded to browsers.
 
-These modules include:
+The D3 modules include:
 
 - Arrays
 - Axes
@@ -120,18 +118,23 @@ You are encouraged to copy the code in the article and try it in a web browser!
 ### SVG Basics
 
 SVG stands for Scalable Vector Graphics.
-It is an XML-based syntax for specifying vector graphics
-and is supported by all modern web browsers.
+It is an XML-based syntax for specifying vector graphics.
+SVG is supported by all modern web browsers, even back to IE9.
 
 SVG elements include `svg`, `line`, `polygon`, `rect`, `circle`, `path`,
 `text`, `image`, `g` (for group), and many more.
 For our bar chart will will only need `svg`, `g`, `rect`, and `text`.
 
-Let's get started by drawing a rectangle and putting some text on it.
+Let's start by drawing a rectangle and putting some text on it.
 
 ![D3 SVG demo](/blog/assets/d3-svg-demo.png)
 
 ### `svg-demo.html`
+
+This HTML includes all the bells and whistles to give a good Lighthouse score,
+including a `DOCTYPE`, language specification, and meta tags.
+To learn about Lighthouse,
+see <https://developers.google.com/web/tools/lighthouse>.
 
 ```html
 <!DOCTYPE html>
