@@ -430,7 +430,8 @@ Selection objects support many methods,
 some which act on all the DOM elements they encapsulate.
 They do this by iterating over the elements in the
 NodeList values found in their `_groups` array.
-Examples include the `attr` and `text` (used below) methods.
+Examples include the `attr`, `style`, and `text` methods,
+two of which are used below.
 
 These methods take a function that is invoked
 once for each encapsulated DOM element.
@@ -680,7 +681,7 @@ const allData = [
 
 let barPadding, barWidth, xScale, yScale;
 
-// This is used to select bar colors based on their score.
+// This is used to select bar colors based on their value.
 const colorScale = d3.scaleOrdinal(d3.schemePaired); // 12 colors
 
 // This returns a random integer from 1 to max inclusive.
@@ -1136,3 +1137,17 @@ D3 API documentation: <https://github.com/d3/d3/blob/master/API.md>
 For a good book on D3, check out the O'Reilly book
 "Interactive Data Visualization for the Web, 2nd Edition" by Scott Murray at
 <https://www.oreilly.com/library/view/interactive-data-visualization/9781491921296/>.
+
+## Bonus Material
+
+The same bar chart has been implemented using the C3 library.
+To see how this differs from using D3 directly,
+see <https://github.com/mvolkmann/c3-bar-chart>.
+The text for the values of each bar are always black in this version.
+It seems very difficult to make this dynamic in C3.
+
+Also, the same bar chart has been implemented using the Svelte web framework.
+This can be found at <https://github.com/mvolkmann/svelte-bar-chart>.
+It required manually implementing the x and y axes
+which is much more work than letting C3 provide those
+or even asking D3 to render them.
