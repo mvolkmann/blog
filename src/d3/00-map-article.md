@@ -1,7 +1,6 @@
 ---
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
-  order: 16
   parent: D3
   title: D3 Maps SETT Article
 layout: topic-layout.njk
@@ -17,6 +16,33 @@ This article expands on that knowledge to render geographic maps.
 
 SVG `path` and `polygon` elements can be used to draw
 the outline of a geographic area such as a country, state, or city.
+
+The `path` element supports a large number of attributes,
+the most commonly used are the following:
+
+- `d` - a string of space-separated commands that describe what will be drawn
+- `fill` - the color to be used to fill the shape
+- `stroke` - the line color
+- `stroke-width` - the line width
+
+There are many commands that can be specified in the value of the `d` attribute.
+Each command name is a single letter followed by one or more numbers.
+Uppercase commands specify absolute locations.
+Lowercase commands specify relative locations.
+
+The M command moves to a given x and y location.
+The h command draws a horizontal line with a given dx.
+The v command draws a vertical line with a given dy.
+The l command draws a line with a given dx and dy.
+
+By default the origin is the upper-left corner.
+The coordinate system can be flipped so the origin is in the lower-left corner
+by placing the SVG elements inside a group (`g`) element like the following
+that uses the `translate` and `scale` functions:
+
+```html
+<g transform="translate(0 12) scale(1 -1)"></g>
+```
 
 ## Latitude and Longitude
 
