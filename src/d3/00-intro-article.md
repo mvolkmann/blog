@@ -566,7 +566,7 @@ creating new `div` elements with a class of "bar".
 It handles both the enter and update sub-selections
 by setting the text of those elements.
 Finally, it handles the exit sub-selection
-by removing those element from the DOM.
+by removing those elements from the DOM.
 
 ```js
 bars
