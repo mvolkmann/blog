@@ -55,7 +55,7 @@ eleventyNavigation:
   key: My Page Title
   order: 7
 ---
-
+If `order` is set to zero, the document will not be added to the site.
 ```
 
 If a document should appear as a child of another in the navigation,

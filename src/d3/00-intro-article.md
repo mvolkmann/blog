@@ -1,7 +1,7 @@
 ---
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
-  order: 0
+  order: 1
   parent: D3
   title: D3 SETT Article
 layout: topic-layout.njk
