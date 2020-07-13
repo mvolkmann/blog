@@ -1148,6 +1148,6 @@ It seems very difficult to make this dynamic in C3.
 
 Also, the same bar chart has been implemented using the Svelte web framework.
 This can be found at <https://github.com/mvolkmann/svelte-bar-chart>.
-It required manually implementing the x and y axes
+This required manually implementing the x and y axes
 which is much more work than letting C3 provide those
 or even asking D3 to render them.
