@@ -2,7 +2,7 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 Pie Charts
-  order: 5
+  order: 12
   parent: D3
   title: Pie Charts
 layout: topic-layout.njk

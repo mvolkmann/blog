@@ -2,7 +2,7 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 and the DOM
-  order: 1
+  order: 2
   parent: D3
   title: D3 and the DOM
 layout: topic-layout.njk

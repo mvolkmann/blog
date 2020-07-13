@@ -2,7 +2,7 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 topojson Library
-  order: 6
+  order: 14
   parent: D3
   title: topojson Library
 layout: topic-layout.njk

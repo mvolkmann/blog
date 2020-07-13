@@ -2,7 +2,7 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 Bar Charts
-  order: 4
+  order: 5
   parent: D3
   title: Bar Charts
 layout: topic-layout.njk

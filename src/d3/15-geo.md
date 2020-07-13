@@ -2,7 +2,7 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 Geo Library
-  order: 7
+  order: 15
   parent: D3
   title: d3-geo Library
 layout: topic-layout.njk
