@@ -1,8 +1,9 @@
 ---
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
+  key: D3 Maps Article
+  order: 1
   parent: D3
-  title: D3 Maps SETT Article
 layout: topic-layout.njk
 ---
 
