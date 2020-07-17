@@ -70,6 +70,9 @@ Examples in include population and number of corona virus cases.
 See https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html.
 See http://www.naturalearthdata.com/
 
+TopoJSON is an efficient format for representing outlines of countries, states, and cities.
+It is more compact than GeoJSON which serves the same purpose.
+
 ## Using Data for Colors
 
 ## Using Data for Tooltips

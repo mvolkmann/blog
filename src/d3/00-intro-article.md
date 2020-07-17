@@ -26,11 +26,11 @@ and each major version included breaking changes.
 Version 5 of D3 was released in January, 2018.
 So this is my chance to write an up-to-date D3 tutorial
 and try to make it easy to understand.
-Of course you will be the judge of whether I am successful.
+Of course, you will be the judge of whether I am successful.
 
 JavaScript has been my primary programming language
 for the entirety of the life of D3.
-I have known of the existence of D3 for quite a while,
+I have known of the existence of D3 for quite a while
 but have ignored it because I was more focused on other JavaScript-based
 topics including jQuery, Angular, React, Vue, Svelte, and TypeScript.
 It was time for me to stop ignoring D3 and dig in.
@@ -41,12 +41,12 @@ It is open source and uses a BSD license.
 D3 uses HTML, CSS, JavaScript, the DOM, and SVG,
 so knowledge of those topics is helpful.
 
-There are 3 levels of D3 usage, using higher-level libraries,
+There are three levels of D3 usage, using higher-level libraries,
 copying and modifying D3 examples, and coding from scratch.
 
 An example of a library that uses D3 is C3 (<https://c3js.org/>).
 It uses D3 under the hood to render many kinds of charts.
-These charts are customizable, but not
+These charts are customizable but not
 to the extent that can be achieved when coding from scratch.
 However, charts can be implemented quickly using C3,
 and the requirement to have deep knowledge of D3 is removed.
@@ -61,7 +61,7 @@ than implementing a chart from scratch.
 My hope is that by the time you finish reading this article,
 you will know enough about D3 to enable the final option,
 which is implementing an entire chart from scratch.
-This provides the most flexibility, but requires the most effort.
+This provides the most flexibility but requires the most effort.
 
 The D3 JavaScript API uses CSS selectors
 to find elements in the DOM that it modifies.
@@ -86,7 +86,7 @@ The D3 modules include:
 - Contours
 - Dispatches
 - Dragging
-- Delimiter-Separated Values
+- Delimiter-separated Values
 - Easings
 - Fetches
 - Forces
@@ -348,7 +348,7 @@ If the values in the array passed to the `data` method are objects,
 a second argument which is a function can be passed.
 This is responsible for extracting or computing a value
 from each object in the array.
-For example, suppose you have an array in a variable names `paintings`
+For example, suppose you have an array in a variable named `paintings`
 that contains objects that describe paintings and
 they have the properties `paintingName`, `width`, and `height`.
 You can use the area of each painting as the values as follows:
@@ -370,7 +370,7 @@ that must be created in order to associate a data value.
 These elements will _enter_ the DOM.
 Note the `__data__` property values in each of these placeholder objects.
 
-The "exit" sub-selection is held in the `_exit` property
+The exit sub-selection is held in the `_exit` property
 and contains all the DOM elements in the selection
 for which no data will be assigned.
 Typically these elements _exit_ the DOM by being removed.
@@ -378,12 +378,12 @@ Typically these elements _exit_ the DOM by being removed.
 There are three scenarios to consider.
 
 1. There are no DOM elements in the selection.
-1. There are DOM elements in the selection,
+1. There are DOM elements in the selection
    but fewer than the number of data values.
-1. There are DOM elements in the selection,
+1. There are DOM elements in the selection
    but more than the number of data values.
 
-You have already seen the first scenario in previous code example
+You have already seen the first scenario in the previous code example
 where there were three data values and no elements with a CSS class of "bar".
 
 To see the second scenario, add the following to that HTML.
@@ -787,7 +787,7 @@ updateData();
 To see this in action, click
 {% aTargetBlank 'https://bar-chart.vercel.app/', 'Basic Bar Chart' %}.
 
-## Adding Y Axis
+## Adding a Y Axis
 
 Now let's add a y axis to the chart the indicates the bar values.
 We want this to be dynamic so that the highest value
@@ -850,7 +850,7 @@ To see this in action, click
   'https://bar-chart-with-y-axis.vercel.app/',
   'Bar Chart with y axis' %}.
 
-## Adding X Axis
+## Adding an X Axis
 
 Now let's add an x axis to the chart whose values are
 labels that are the fruit names associated with each bar.
@@ -1149,5 +1149,5 @@ It seems very difficult to make this dynamic in C3.
 Also, the same bar chart has been implemented using the Svelte web framework.
 This can be found at <https://github.com/mvolkmann/svelte-bar-chart>.
 This required manually implementing the x and y axes
-which is much more work than letting C3 provide those
+which was much more work than letting C3 provide those
 or even asking D3 to render them.
