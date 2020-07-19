@@ -6,5 +6,12 @@
   <link rel="stylesheet" href="{{css}}" />
 {% endif %}
 
+<!-- Need to load MathJax here so it is available in the iframe
+     created in topics-layout.njk. -->
+<script
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+></script>
+
 <h2>{{ eleventyNavigation.key }} {{extraTitle}}</h2>
 {{ content | safe }}

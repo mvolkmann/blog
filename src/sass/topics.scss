@@ -51,6 +51,10 @@ body > main {
     }
   }
 
+  .MathJax {
+    font-size: 200%;
+  }
+
   & > section {
     flex-grow: 1;
     overflow: auto;

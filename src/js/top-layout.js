@@ -27,10 +27,8 @@ window.onload = () => {
   // Make "Topics" be the default page.
   if (location.pathname === '/blog/') location.href += 'topics/';
 
-  console.log('top-layout.js x: location.href =', location.href);
   const mainLinks = Array.from(document.querySelectorAll('.main-links > a'));
   for (const a of mainLinks) {
-    console.log('top-layout.js x: a.href =', a.href);
     if (location.href.startsWith(a.href)) a.classList.add('selected');
   }
 };
