@@ -7,5 +7,11 @@ h2 {
 }
 
 .MathJax {
+  // This doesn't work because the mjx-container element
+  // sets font-size inline in its style attribute.
+  // Instead wrap MathJax expressions in size{...}
+  // where size is tiny, scriptsize, small,
+  // normalsize (default), large, or huge.
+  // Of these, only large and huge are reasonable sizes.
   font-size: 200%;
 }

@@ -8,4 +8,4 @@ layout: topic-layout.njk
 
 The letter "i" is defined by: ...
 
-$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$
+$\large{x = {-b \pm \sqrt{b^2-4ac} \over 2a}.}$
