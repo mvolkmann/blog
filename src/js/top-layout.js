@@ -24,6 +24,9 @@ window.onload = () => {
     nav.style.left = navLeftWhenClosed; // to initially hide it
   }
 
+  // Make "Topics" be the default page.
+  if (location.pathname === '/blog/') location.href += 'topics/';
+
   const mainLinks = Array.from(document.querySelectorAll('.main-links > a'));
   for (const a of mainLinks) {
     if (a.href === location.href) a.classList.add('selected');

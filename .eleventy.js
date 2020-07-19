@@ -4,6 +4,29 @@ const navigationPlugin = require('@11ty/eleventy-navigation');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
 const fs = require('fs');
 
+/*
+// Configure use of Katex for rendering math equations.
+const markdownIt = require('markdown-it');
+const markdownItKatex = require('markdown-it-katex');
+const options = {breaks: false, html: true, linkify: true};
+//const markdownLib = markdownIt(options).use(markdownItKatex);
+const markdownLib = markdownIt(options);
+markdownLib.use(markdownItKatex);
+*/
+
+// Configure use of MathJAX for rendering math equations.
+const markdownIt = require('markdown-it');
+const options = {breaks: true, html: true, linkify: true};
+const mathJax = require('markdown-it-mathjax');
+const sups = require('markdown-it-sup');
+const subs = require('markdown-it-sub');
+const footnotes = require('markdown-it-footnote');
+const markdownLib = markdownIt(options)
+  .use(mathJax)
+  .use(subs)
+  .use(sups)
+  .use(footnotes);
+
 /**
 This recursively sorts an array of documents.
 The primary sort is on the "order" property.
@@ -28,6 +51,8 @@ function sortDocuments(arr) {
 }
 
 module.exports = eleventyConfig => {
+  eleventyConfig.setLibrary('md', markdownLib);
+
   eleventyConfig.addCollection('nav', collection => {
     const keyMap = {};
     const navMap = {};
