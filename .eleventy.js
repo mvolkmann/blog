@@ -22,7 +22,7 @@ const sups = require('markdown-it-sup');
 const subs = require('markdown-it-sub');
 const footnotes = require('markdown-it-footnote');
 const markdownLib = markdownIt(options)
-  .use(mathJax)
+  .use(mathJax()) // https://github.com/classeur/markdown-it-mathjax shows need for ()
   .use(subs)
   .use(sups)
   .use(footnotes);
