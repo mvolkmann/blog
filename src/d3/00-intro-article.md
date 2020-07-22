@@ -217,7 +217,7 @@ group
 ```
 
 That's the very basics of working with SVG.
-But it's all you need to know to draw additions bars in a bar chart later.
+But it's all you need to know to draw additional bars in a bar chart later.
 
 ## D3 Selection Objects
 
