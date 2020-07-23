@@ -789,7 +789,7 @@ To see this in action, click
 
 ## Adding a Y Axis
 
-Now let's add a y axis to the chart the indicates the bar values.
+Now let's add a y axis to the chart that indicates the bar values.
 We want this to be dynamic so that the highest value
 matches the highest value of any of the bars that are present.
 
@@ -1074,7 +1074,7 @@ Here are the steps to add transitions to the bar chart:
    It processes the enter sub-selection.
    Add two more arguments to the `join` method shown below.
    The last argument is a function that processes the exit sub-selection
-   by animate bars leaving the DOM.
+   by animating bars leaving the DOM.
 
    ```js
    // This is only needed so we can specify
