@@ -681,7 +681,7 @@ const allData = [
 
 let barPadding, barWidth, xScale, yScale;
 
-// This is used to select bar colors based on their value.
+// This is used to select bar colors based on their colorIndex.
 const colorScale = d3.scaleOrdinal(d3.schemePaired); // 12 colors
 
 // This returns a random integer from 1 to max inclusive.
@@ -873,7 +873,7 @@ Here are the steps to add an x axis:
 1. Increase the value of `BOTTOM` from 10 to 50
    to leave room for the x axis.
 
-1. Add the variable `yAxisGroup` to the `let` statement near the top
+1. Add the variable `xAxisGroup` to the `let` statement near the top
    as follows:
 
    ```js
