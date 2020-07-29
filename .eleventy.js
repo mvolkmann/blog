@@ -143,7 +143,7 @@ module.exports = eleventyConfig => {
 
   eleventyConfig.addShortcode(
     'aTargetBlank',
-    (url, text) => `<a href="${url}" target="_blank">${text}</a>`
+    (url, text) => `<a href="${url}" rel="noopener" target="_blank">${text}</a>`
   );
 
   // Minify generated HTML.
