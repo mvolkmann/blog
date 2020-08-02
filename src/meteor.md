@@ -548,6 +548,7 @@ this ensures that they are built using the same C libraries.
 
      ```json
      {
+       "MAIL_NAME": "Your Name",
        "MAIL_USER": "some-user",
        "MAIL_PASSWORD": "some-password",
        "MAIL_USER_DOMAIN": "some-company.com",
@@ -566,9 +567,11 @@ this ensures that they are built using the same C libraries.
 
      ```js
      import {Accounts} from 'meteor/accounts-base';
+     import secrets from '../secrets.json';
 
-     Accounts.emailTemplates.siteName = 'Your App Name';
-     Accounts.emailTemplates.from = 'Your Name<your-email>';
+     Accounts.emailTemplates.siteName = 'Todos by Mark V.';
+     const from = `${secrets.MAIL_NAME}<${secrets.MAIL_USER}@${secrets.MAIL_USER_DOMAIN}>`;
+     Accounts.emailTemplates.from = from;
      ```
 
    - Modify the file `server/main.js` to match the following:
