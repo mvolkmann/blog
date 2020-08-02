@@ -230,7 +230,7 @@ this ensures that they are built using the same C libraries.
    </script>
    <div class="container">
      <header>
-       <h1>Todo List</h1>
+       <h1>Todo App</h1>
      </header>
      <ul>
        {#each getTasks() as task}
@@ -378,10 +378,10 @@ this ensures that they are built using the same C libraries.
      $: remaining = $tasks.filter(t => !t.done).length;
      ```
 
-   - Change the `h1` tag to the following:
+   - Add the following after the `header` tag:
 
      ```html
-     <h1>Todo List ({remaining} of {$tasks.length} remaining)</h1>
+     <p>{remaining} of {$tasks.length} remaining</p>
      ```
 
 1. Add the ability to only display tasks that are not done
@@ -419,3 +419,111 @@ this ensures that they are built using the same C libraries.
    - Enter `meteor add accounts-ui accounts-password`
 
    - Enter `meteor add svelte:blaze-integration`
+
+   - Create the file `imports/account-config.js` with the following content:
+
+     ```js
+     import {Accounts} from 'meteor/accounts-base';
+
+     Accounts.ui.config({
+       passwordSignupFields: 'USERNAME_ONLY'
+     });
+     ```
+
+   - Add the following near the top of `client/main.js`:
+
+     ```js
+     import '../imports/accounts-config.js';
+     ```
+
+   - Modify the `client/App.svelte` file to match the following:
+
+     ```html
+     <script>
+       import {Meteor} from 'meteor/meteor';
+       import {useTracker} from 'meteor/rdb:svelte-meteor-data';
+       import {BlazeTemplate} from 'meteor/svelte:blaze-integration';
+       import {Tasks} from '../imports/tasks.js';
+       import Task from './Task.svelte';
+
+       let hideCompleted = false;
+       let text = '';
+       let user;
+
+       // user is a store
+       $: user = useTracker(() => Meteor.user());
+
+       const query = {};
+       const projection = {sort: {createdAt: -1}};
+       // tasks is a store
+       $: tasks = useTracker(() => Tasks.find(query, projection).fetch());
+
+       $: remaining = $tasks.filter(t => !t.done).length;
+
+       function addTodo() {
+         Tasks.insert({
+           text,
+           createdAt: new Date(),
+           owner: Meteor.userId(),
+           username: $user.username
+         });
+         text = '';
+       }
+     </script>
+
+     <div class="container">
+       <BlazeTemplate template="loginButtons" />
+
+       <header>
+         <h1>Todo App</h1>
+       </header>
+
+       {#if $user}
+       <p>{remaining} of {$tasks.length} remaining</p>
+
+       <form on:submit|preventDefault="{addTodo}">
+         <input placeholder="todo text" bind:value="{text}" />
+         <button>Add</button>
+
+         <label className="hide-completed">
+           <input type="checkbox" bind:checked="{hideCompleted}" />
+           Hide Completed Tasks
+         </label>
+       </form>
+
+       <ul>
+         {#each $tasks as task} {#if !hideCompleted || !task.done}
+         <Task {task} />
+         {/if} {/each}
+       </ul>
+       {/if}
+     </div>
+
+     <style>
+       form {
+         margin-top: 0;
+         padding: 1rem;
+       }
+
+       :global(#login-buttons) {
+         padding: 0.5rem;
+         text-align: right;
+       }
+
+       :global(#login-buttons a) {
+         text-decoration: none;
+       }
+
+       :global(#login-dropdown-list) {
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+       }
+     </style>
+     ```
+
+     We now have the ability to create accounts, sign in,
+     change the password of the signed in user, and sign out.
+     We do not yet have to ability to help users
+     that have forgotten their password.
