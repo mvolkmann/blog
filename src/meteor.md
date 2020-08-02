@@ -188,6 +188,8 @@ this ensures that they are built using the same C libraries.
    import {Meteor} from 'meteor/meteor';
    import App from '../imports/ui/App.svelte';
 
+   console.log('meteor.md x: Meteor =', Meteor);
+
    Meteor.startup(() => {
      new App({target: document.getElementById('app')});
    });
@@ -425,8 +427,9 @@ this ensures that they are built using the same C libraries.
      ```js
      import {Accounts} from 'meteor/accounts-base';
 
+     // Email is needed for the next step.
      Accounts.ui.config({
-       passwordSignupFields: 'USERNAME_ONLY'
+       passwordSignupFields: 'USERNAME_AND_EMAIL'
      });
      ```
 
@@ -437,6 +440,8 @@ this ensures that they are built using the same C libraries.
      ```
 
    - Modify the `client/App.svelte` file to match the following:
+
+     {% raw %}
 
      ```html
      <script>
@@ -523,7 +528,69 @@ this ensures that they are built using the same C libraries.
      </style>
      ```
 
+     {% endraw %}
+
      We now have the ability to create accounts, sign in,
      change the password of the signed in user, and sign out.
-     We do not yet have to ability to help users
-     that have forgotten their password.
+
+1. Add support for "forgot password" emails.
+   This will allow users to click a "Forgot password" link
+   in the "Sign in" dialog which changes the dialog content
+   to prompt for an email address.
+   If a user account exists for the email address,
+   it is sent an email containing a link that the user can click
+   to reset their password.
+   After doing so they are immediately signed in.
+
+   - Enter `meteor add email`.
+   - Create the file `secrets.json` in the project root directory
+     with content like the following:
+
+     ```json
+     {
+       "MAIL_USER": "some-user",
+       "MAIL_PASSWORD": "some-password",
+       "MAIL_USER_DOMAIN": "some-company.com",
+       "MAIL_SERVER_DOMAIN": "smtp.gmail.com",
+       "MAIL_SERVER_PORT": 587
+     }
+     ```
+
+     Note that the last two values above are specific to using
+     a Google G Suite account for sending email.
+
+   - If using Git, add `secrets.json` to the `.gitignore` file
+     so it is not added to the repository for others to see.
+
+   - Create the file `server/accounts-setup.js` with the following content:
+
+     ```js
+     import {Accounts} from 'meteor/accounts-base';
+
+     Accounts.emailTemplates.siteName = 'Your App Name';
+     Accounts.emailTemplates.from = 'Your Name<your-email>';
+     ```
+
+   - Modify the file `server/main.js` to match the following:
+
+     ```js
+     import {Meteor} from 'meteor/meteor';
+     import '../imports/tasks.js';
+     import './accounts-setup.js';
+     import secrets from '../secrets.json';
+
+     Meteor.startup(() => {
+       // code to run on server at startup
+       process.env.MAIL_URL =
+         'smtp://' +
+         secrets.MAIL_USER +
+         '%40' +
+         secrets.MAIL_USER_DOMAIN +
+         ':' +
+         secrets.MAIL_PASSWORD +
+         '@' +
+         secrets.MAIL_SERVER_DOMAIN +
+         ':' +
+         secrets.MAIL_SERVER_PORT;
+     });
+     ```
