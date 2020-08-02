@@ -303,7 +303,7 @@ this ensures that they are built using the same C libraries.
 1. Add the following in `client/App.svelte` after the `header` element:
 
    ```html
-   <form on:submit|preventDefault="{addTodo}">
+   <form on:submit|preventDefault="{addTask}">
      <input placeholder="todo text" bind:value="{text}" />
      <button>Add</button>
    </form>
@@ -314,7 +314,7 @@ this ensures that they are built using the same C libraries.
    ```js
    let text = '';
 
-   function addTodo() {
+   function addTask() {
      Tasks.insert({text, createdAt: new Date()});
      text = '';
    }
@@ -357,13 +357,13 @@ this ensures that they are built using the same C libraries.
          year: 'numeric'
        });
 
-     function toggleTask() {
+     function toggleDone() {
        Tasks.update(task._id, {$set: {done: !task.done}});
      }
    </script>
 
    <li>
-     <input type="checkbox" checked="{task.done}" on:click="{toggleTask}" />
+     <input type="checkbox" checked="{task.done}" on:click="{toggleDone}" />
      <span class:done="{task.done}">
        {task.text} - added {formatDate(task.createdAt)}
      </span>
@@ -478,7 +478,7 @@ this ensures that they are built using the same C libraries.
 
        $: remaining = $tasks.filter(t => !t.done).length;
 
-       function addTodo() {
+       function addTask() {
          Tasks.insert({
            text,
            createdAt: new Date(),
@@ -499,7 +499,7 @@ this ensures that they are built using the same C libraries.
        {#if $user}
        <p>{remaining} of {$tasks.length} remaining</p>
 
-       <form on:submit|preventDefault="{addTodo}">
+       <form on:submit|preventDefault="{addTask}">
          <input placeholder="todo text" bind:value="{text}" />
          <button>Add</button>
 
@@ -610,3 +610,103 @@ this ensures that they are built using the same C libraries.
          secrets.MAIL_SERVER_PORT;
      });
      ```
+
+1. Make the app more secure by moving database interactions to the server.
+   This is accomplished by implemented "methods"
+   that are invoked by client-side code.
+   Client code invokes them using `Meteor.call(name, data, callback)`
+   which makes a Remote Procedure Call (RPC) using WebSockets,
+   not by sending an HTTP request.
+   The callback function is passed an error description and a result.
+   If the call succeeds, the error description is undefined
+   and the result is set to whatever value the method returns.
+   If the call fails, the error description is set to an object
+   that contains the properties `error` (HTTP status code),
+   `reason` (concise message), `message` (long message), and more.
+   It does not throw a JavaScript Error, so try/catch cannot be used.
+   An issue with using Meteor Methods instead of REST services
+   is that they really can only be called from Meteor apps.
+   Methods that throw should do so using
+   `throw new Meteor.error(methodName, message)`.
+   Throwing a normal JavaScript Error will not return the message to the client.
+
+   - Enter `meteor remove insecure`
+
+   - Define server-side methods by modifying `server/tasks.js`
+     to match the following:
+
+     ```js
+     import {check} from 'meteor/check';
+     import {Meteor} from 'meteor/meteor';
+     import {Mongo} from 'meteor/mongo';
+
+     export const Tasks = new Mongo.Collection('tasks');
+
+     Meteor.methods({
+       addTask(text) {
+         check(text, String); // argument type validation
+
+         // Make sure the user is logged in before inserting a task.
+         if (!this.userId) throw new Meteor.Error('add-task', 'not-authorized');
+
+         const {username} = Meteor.users.findOne(this.userId);
+         const id = Tasks.insert({
+           text,
+           createdAt: new Date(),
+           owner: this.userId,
+           username
+         });
+         return id;
+       },
+
+       deleteTask(taskId) {
+         check(taskId, String); // argument type validation
+         Tasks.remove(taskId);
+       },
+
+       setDone(taskId, done) {
+         check(taskId, String); // argument type validation
+         check(done, Boolean); // argument type validation
+         Tasks.update(taskId, {$set: {done}});
+       }
+     });
+     ```
+
+   - Create the file `client/util.js` containing the following:
+
+     ```js
+     export function handleError(err) {
+       // Replace this will better error handling.
+       if (err) alert(err.message);
+     }
+     ```
+
+   - Add the following `imports` in `client/App.svelte` and `client/Task.svelte`:
+
+     ```js
+     import {handleError} from './util';
+     ```
+
+   - Change the call to `Tasks.insert` in the `addTask` function
+     of `client/App.svelte` to the following:
+
+     ```js
+     Meteor.call('addTask', text, handleError);
+     ```
+
+   - Change the call to `Tasks.remove` in the `deleteTask` function
+     of `client/Task.svelte` to the following:
+
+     ```js
+     Meteor.call('deleteTask', task._id, handleError);
+     ```
+
+   - Change the call to `Tasks.update` in the `toggleDone` function
+     of `client/Task.svelte` to the following:
+
+     ```js
+     Meteor.call('setDone', task._id, !task.done, handleError);
+     ```
+
+   - Remove the import of `Tasks` from `client/Task.svelte`
+     since it is no longer used.
