@@ -131,12 +131,15 @@ but they can still be modified.
 | Topic                       | Python                                                                 | JavaScript                            |
 | --------------------------- | ---------------------------------------------------------------------- | ------------------------------------- |
 | named definition            | def name(params):                                                      | function name(params) { definition }  |
-| anonymous definition        | lambda params: definition                                              | const name = (params) => definition   |
+| anonymous definition        | lambda params: expression                                              | const name = (params) => definition   |
 | anonymous single parameter  | same as above                                                          | const name = param => { ... }         |
 | anonymous single expression | same as above                                                          | const name = (params) => expr         |
 | variable arguments          | def name(p1, p2, \*rest):                                              | function name(p1, p2, ...rest) { ...} |
 | return type                 | not specified; return a single value<br>that can be an object or array | same as Python                        |
 | calling                     | name(args)                                                             | name(args)                            |
+
+Note that unlike JS arrow functions, Python lambdas
+can only use a single expression, not a block of code.
 
 ## Classes
 
