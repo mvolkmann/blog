@@ -16,7 +16,7 @@ markdownLib.use(markdownItKatex);
 
 // Configure use of MathJAX for rendering math equations.
 const markdownIt = require('markdown-it');
-const options = {breaks: true, html: true, linkify: true};
+const options = {breaks: false, html: true, linkify: true};
 const mathJax = require('markdown-it-mathjax');
 const sups = require('markdown-it-sup');
 const subs = require('markdown-it-sub');
