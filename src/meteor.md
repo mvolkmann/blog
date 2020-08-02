@@ -121,6 +121,19 @@ to send data in both directions.
 Client code can update a collection on the server using a
 "method" which uses Meteor remote procedure call (RPC).
 
+### ESLint
+
+ESLint will give "Unable to resolve path to module" errors
+on all imports that begin with "meteor/".
+However, the Meteor build system is able to resolve these.
+To suppress these errors, add the following to your `.eslintrc.json` file:
+
+```json
+  "rules": {
+    "import/no-unresolved": ["error", {"ignore": ["^meteor/"]}]
+  }
+```
+
 ### Tutorials
 
 The Meteor web site contains several tutorials
