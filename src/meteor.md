@@ -154,17 +154,35 @@ One use for this is updating collections.
 To implement a method in server-side code,
 pass an object literal to `Meteor.methods`
 where the properties are method definitions.
+This registers the methods with Meteor's DDP system.
+
 The methods can have any number of parameters with any JavaScript types.
+
 The `check` function in the `meteor/check` package
 can be used to check the types of the parameters.
 It returns an error if unexpected types are passed.
+
 To throw an error, use `throw new Meteor.Error(methodName, message)`.
 
 To call a method from client code,
 import `Meteor` from the `meteor/meteor` package
 and call `Meteor.call` passing it the name of a Method,
 arguments, and a callback function.
-The callback is passed an error description and a result.
+This triggers the method call lifecycle which has six parts.
+
+1. The method call is simulated on the client
+   and corresponding UI updates are made.
+   This is why Meteor Methods must be defined
+   on both the client and server sides!
+1. A JSON-based DDP message is constructed and sent to the server.
+   This includes the method name, arguments, and generated method id.
+1. The method executes on the server, possibly updating MongoDB.
+1. A return value is sent to the client in a "result" message
+   that includes the previously generated method id and the result.
+1. Any affected data in Minimongo is updated, but the UI is not yet updated.
+1. The callback function passed to `Meteor.call` is passed
+   an error description (if there was an error) and the result.
+   Now the UI can be updated using data from Minimongo.
 
 Here is an example of a trivial method that simply adds two numbers.
 
@@ -246,10 +264,6 @@ To view the messages that are sent use WebSockets in Chrome:
 Each message is an array of JSON objects that have
 a `msg` property and other properties that may include
 `collection`, `fields`, `id`, `method`, `methods`, `msg`, and `params`.
-
-### Distributed Data Protocol (DDP)
-
-TODO: Add content
 
 ### Optimistic UI
 
@@ -938,7 +952,8 @@ this ensures that they are built using the same C libraries.
    If the call succeeds, the error description is undefined
    and the result is set to whatever value the method returns.
    If the call fails, the error description is set to an object
-   that contains the properties `error` (HTTP status code),
+   that contains the properties
+   `error` (an HTTP status code even though HTTP isn't used),
    `reason` (concise message), `message` (long message), and more.
    It does not throw a JavaScript Error, so try/catch cannot be used.
    An issue with using Meteor Methods instead of REST services
