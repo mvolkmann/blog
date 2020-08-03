@@ -629,6 +629,8 @@ this ensures that they are built using the same C libraries.
    Methods that throw should do so using
    `throw new Meteor.error(methodName, message)`.
    Throwing a normal JavaScript Error will not return the message to the client.
+   Add information about "optimistic UI" and "method retries" in Meteor!
+   See <https://blog.meteor.com/optimistic-ui-with-meteor-67b5a78c3fcf>.
 
    - Enter `meteor remove insecure`
 
@@ -710,3 +712,36 @@ this ensures that they are built using the same C libraries.
 
    - Remove the import of `Tasks` from `client/Task.svelte`
      since it is no longer used.
+
+1. Explicitly specify what data the server sends to the client
+   so we can separate todos by user.
+   They will still be stored in the same MongoDB collection,
+   but each user will only see and operate on the todos they created.
+
+   - Enter `meteor remove autopublish`
+
+   - Add the following after the imports in `server/tasks.js`
+     to publish only tasks that belong to the logged in user:
+
+     ```js
+     if (Meteor.isServer) {
+       // This is only run on the server.
+       // An arrow function cannot be used here
+       // because we need to use the "this" keyword.
+       Meteor.publish('tasks', function () {
+         return Tasks.find({owner: this.userId});
+       });
+     }
+     ```
+
+   - Add the following `import` in `client/App.js`:
+
+     ```js
+     import {onMount} from 'svelte';
+     ```
+
+   - Add the following in the `script` tag of `client/App.js`:
+
+     ```js
+     onMount(() => Meteor.subscribe('tasks'));
+     ```
