@@ -1,5 +1,9 @@
 body { font-family: sans-serif; }
 
-h2 { margin-top: 0; }
-
 .MathJax { font-size: 200%; }
+
+p > code { font-size: 1.2rem; }
+
+table { border-collapse: collapse; }
+
+td, th { border: solid lightgray 1px; padding: 0.5rem; }
