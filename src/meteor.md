@@ -42,10 +42,6 @@ had transitioned to working on Apollo GraphQL.
 The new Meteor company supports both Meteor and Galaxy.
 Galaxy is a commercial cloud hosting platform for Meteor applications.
 
-The use of WebSockets to support the Meteor pub/sub model
-has been replaced by the use of the Apollo framework and GraphQL.
-TODO: Has it been completely replaced?
-
 Companies that use Meteor include
 Qualcomm, Mazda, IKEA, and Honeywell.
 
@@ -236,7 +232,57 @@ try {
 }
 ```
 
+To view the messages that are sent use WebSockets in Chrome:
+
+1. Open the Chrome DevTools.
+1. Select the "Network" tab.
+1. Click "WS" to filter on WebSockets.
+1. Refresh the browser.
+1. Click the WebSocket connection that is displayed.
+1. Click the "Messages" tab to see all the WebSocket messages,
+   updated as new ones are received.
+1. Click a message to see its details.
+
+Each message is an array of JSON objects that have
+a `msg` property and other properties that may include
+`collection`, `fields`, `id`, `method`, `methods`, `msg`, and `params`.
+
 ### Distributed Data Protocol (DDP)
+
+TODO: Add content
+
+### Optimistic UI
+
+Optimistic UI is a feature of Meteor that enables a UI to
+respond to user interactions without waiting for server responses.
+This is satisfied by four elements.
+
+1. The UI is rendered on the client rather than
+   waiting for the server to return HTML or data.
+   This requires predicting the result of operations
+   based on data that has been cached on the client.
+1. This cached data is in a global cache rather than
+   being associated with specific components,
+   so it is not possible for them to disagree on the state
+   and all affected components can re-render.
+   Meteor uses Minimongo for this.
+   When a MongoDB query is executed using a Meteor Method,
+   it is first run against Minimongo on the client
+   and then against MongoDB on the server.
+1. The client subscribes to data using DDP to keep
+   Minimongo on the client in sync with MongoDB on the server.
+   Updates are made in real time, not using polling.
+1. When the server returns the actual result of an operation,
+   Meteor verifies that it matches what the client predicted.
+   If they differ, Meteor rolls back
+   all the changes made from that point forward and
+   replays them with the correct results from the server.
+   UI changes triggered by Meteor Method calls are tracked
+   and this supports the ability to rollback.
+
+All of this functionality is provided by default.
+The only requirement is for the client to
+use Meteor Methods to request data changes.
 
 ### Tracker
 
@@ -297,9 +343,11 @@ Popular Atmosphere packages include:
 - react-meteor-data - "React hook for reactively tracking Meteor data"
 - static-html - "define static page content in .html files"; alternative to Blaze
 - svelte:compiler - compiles `.svelte` files to JavaScript
-- svelte:blaze-integration - "render Blaze templates inside your Svelte components and vice versa"
+- svelte:blaze-integration - "render Blaze templates
+  inside your Svelte components and vice versa"
 - tracker - "dependency tracker to allow reactive callbacks"
-- typescript - "compiler plugin that compiles TypeScript and ECMAScript in .ts and .tsx files"
+- typescript - "compiler plugin that compiles TypeScript and ECMAScript
+  in .ts and .tsx files"
 
 ### ESLint
 
@@ -397,13 +445,15 @@ For details on the features included by default and with each option
 see <https://docs.meteor.com/commandline.html#meteorcreate>.
 
 Enter `cd todos`.
-
 Run the app by entering `meteor`.
-
 Browse localhost:3000.
 The following page will be rendered.
 
 ![cover](/blog/assets/meteor-default-page.png)
+
+Press the "Click Me" button.
+The text "You've pressed the button n times."
+will update to display the number of times it was clicked.
 
 The UI is defined by the following files in the `client` directory:
 `main.html`, `main.css`, and `main.js`.
@@ -500,7 +550,9 @@ this ensures that they are built using the same C libraries.
 
    {% endraw %}
 
-1. Copy the CSS from [here](https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css) into `client/main.css`.
+1. Copy the CSS from
+   [here](https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css)
+   into `client/main.css`.
 
 1. Create `imports/tasks.js` containing the following:
 
