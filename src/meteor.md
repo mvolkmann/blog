@@ -10,28 +10,30 @@ Meteor (<https://www.meteor.com/>) is an open-source, full-stack, JavaScript
 platform for building web and mobile (Android and iOS) applications.
 It is referred to as a platform instead of a framework
 because it works with other frameworks.
-It is used to host client-side and server-side code.
+It is used to host both client-side and server-side code.
 
 Meteor is built on Node.js.
 It has good integration with the MongoDB NoSQL database.
 It supports a publish and subscribe mechanism to synchronize
 user interfaces with backend data, providing real-time updates.
 
-A significant benefit of Meteor is the ability to implement
+A big benefit of Meteor is the ability to implement
 significant functionality in a small amount of code.
 One example of this is user sign up and authentication.
+This is demonstrated in the sample app below.
 
 Meteor has its own frontend framework called Blaze.
-But it also supports popular options such as
-Angular, React, Svelte, Vue, and Cordova.
+But it also supports other popular options that can be used in its place
+such as Angular, React, Svelte, Vue, and Cordova.
 
 Meteor was initially released in 2012.
 It gained immediate attention for its novel use of WebSockets
-as an alternative to HTTP.
+as an alternative to HTTP to achieve real-time updates.
 But the attention faded quickly as other frameworks garnered more notice.
 It is seeing some resurgence in 2020.
 
-Galaxy is a cloud hosting platform for Meteor applications.
+The "Meteor Software" company supports both Meteor and Galaxy.
+Galaxy is a commercial cloud hosting platform for Meteor applications.
 
 The use of WebSockets to support the Meteor pub/sub model
 has been replaced by the use of the Apollo framework and GraphQL.
@@ -49,7 +51,8 @@ Enter `meteor help` for help on using these.
 
 ### Installing Meteor
 
-See <https://www.meteor.com/install>.
+See <https://www.meteor.com/install> for
+platform-specific instructions on installing Meteor.
 In Linux or macOS, enter `curl https://install.meteor.com | sh`.
 In Windows, install Chocolatey and enter `choco install meteor`.
 
@@ -66,19 +69,22 @@ is described below.
   - `main.js`
 - `server`
   - `main.js`
-- `imports` (legacy)
+- `imports`
   - `client`
     - `\*.js`
   - `server`
     - `\*.js`
 
+All client-side files can be placed in the `client` directory
+and all server-side files can be placed in the `server` directory.
+
 In the past Meteor eagerly loaded files outside the `imports` directory
 and lazily loaded files inside the `imports` directory.
 As of Meteor 1.7 it no longer makes this distinction
 and all code is lazily loaded.
-So there is no longer a need to have an `imports` directory.
-All client-side files can be placed in the `client` directory
-and all server-side files can be placed in the `server` directory.
+So there is no longer a requirement to have an `imports` directory.
+However, it is still a useful location for
+files that are shared between client and server code.
 
 ### Blaze Web Framework
 
@@ -91,9 +97,11 @@ client-side and server-side code.
 When data is added to a collection or existing data is modified,
 client code that uses it updates automatically.
 
-Typically collections are associated with a MongoDB collection,
-but it's also possible to use other databases such as
-PostgreSQL and RethinkDB.
+Collections are associated with a MongoDB collection.
+Meteor apps can access other databases (such as PostgreSQL)
+through calls to REST services,
+but real-time updates only occur through collections
+and those only use MongoDB.
 
 The following code demonstrates
 creating a MongoDB collection named "Todos",
