@@ -278,23 +278,68 @@ so references to them should have a `$` prefix.
 
 ### Meteor Packages
 
-Meteor can uses packages from npm and
+Meteor can use packages from npm and
 from its own package repository called "Atmosphere".
 To see the available packages in Atmosphere, browse <https://atmospherejs.com/>.
-This page lists trending packages, recent packages, and most used packages.
+This page lists trending, recent, and most used packages.
 To install a package from Atmosphere in your current Meteor project,
 enter `meteor add {package-name}`.
 This writes information about the installed packages to `.meteor/packages`
 to track dependencies similar to how npm uses the `package-lock.json` file.
 
 Popular Atmosphere packages include:
-meteor-base, mongo, typescript, tracker,
-react-meteor-data, svelte-compiler, and rdb:svelte-meteor-data
-static-html
-accounts-ui, accounts-password
-svelte:blaze-integration
+
+- accounts-password - "login service that enables secure password-based login"
+- accounts-ui - "turn-key user interface for Meteor Accounts" using Blaze
+- meteor-base - "default set of packages that almost every app will have"
+- mongo - "adaptor for using MongoDB and Minimongo over DDP"
+- rdb:svelte-meteor-data - "reactively track Meteor data inside Svelte components"
+- react-meteor-data - "React hook for reactively tracking Meteor data"
+- static-html - "define static page content in .html files"; alternative to Blaze
+- svelte:compiler - compiles `.svelte` files to JavaScript
+- svelte:blaze-integration - "render Blaze templates inside your Svelte components and vice versa"
+- tracker - "dependency tracker to allow reactive callbacks"
+- typescript - "compiler plugin that compiles TypeScript and ECMAScript in .ts and .tsx files"
 
 ### ESLint
+
+To use ESLint in a Meteor project that uses Svelte:
+
+- Enter `npm install eslint eslint-plugin-import eslint-plugin-svelte3`
+
+- Add the following script in `package.json`:
+
+  ```json
+  "lint": "eslint --fix --quiet '{client,imports,server}/**/*.{js,svelte}'",
+  ```
+
+- Create the file `.eslintrc.json` containing the following:
+
+  ```json
+  {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true,
+      "node": true
+    },
+    "extends": ["eslint:recommended", "plugin:import/recommended"],
+    "overrides": [
+      {
+        "files": ["**/*.svelte"],
+        "processor": "svelte3/svelte3"
+      }
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2019,
+      "sourceType": "module"
+    },
+    "plugins": ["import", "svelte3"],
+    "rules": {
+      "import/no-unresolved": ["error", {"ignore": ["^meteor/"]}]
+    }
+  }
+  ```
 
 ESLint will give "Unable to resolve path to module" errors
 on all imports that begin with "meteor/".
@@ -306,6 +351,30 @@ To suppress these errors, add the following to your `.eslintrc.json` file:
     "import/no-unresolved": ["error", {"ignore": ["^meteor/"]}]
   }
 ```
+
+### Prettier
+
+To use Prettier in a Meteor project that uses Svelte:
+
+- Enter `npm install prettier prettier-plugin-svelte`
+
+- Add the following script in `package.json`:
+
+  ```json
+  "format": "prettier --write '{client,imports,server}/**/*.{css,html,js,svelte}'",
+  ```
+
+- Create the file `.prettierrc` containing the following:
+
+  ```json
+  {
+    "arrowParens": "avoid",
+    "bracketSpacing": false,
+    "singleQuote": true,
+    "svelteSortOrder": "scripts-markup-styles",
+    "trailingComma": "none"
+  }
+  ```
 
 ### Tutorials
 
@@ -670,30 +739,38 @@ this ensures that they are built using the same C libraries.
          <h1>Todo App</h1>
        </header>
 
-       {#if $user}
-       <p>{remaining} of {$tasks.length} remaining</p>
+       <section>
+         {#if $user}
+         <p>{remaining} of {$tasks.length} remaining</p>
 
-       <form on:submit|preventDefault="{addTask}">
-         <input placeholder="todo text" bind:value="{text}" />
-         <button>Add</button>
+         <form on:submit|preventDefault="{addTask}">
+           <input placeholder="todo text" bind:value="{text}" />
+           <button>Add</button>
 
-         <label className="hide-completed">
-           <input type="checkbox" bind:checked="{hideCompleted}" />
-           Hide Completed Tasks
-         </label>
-       </form>
+           <label className="hide-completed">
+             <input type="checkbox" bind:checked="{hideCompleted}" />
+             Hide Completed Tasks
+           </label>
+         </form>
 
-       <ul>
-         {#each $tasks as task} {#if !hideCompleted || !task.done}
-         <Task {task} />
-         {/if} {/each}
-       </ul>
-       {/if}
+         <ul>
+           {#each $tasks as task} {#if !hideCompleted || !task.done}
+           <Task {task} />
+           {/if} {/each}
+         </ul>
+         {:else}
+         <p>Please sign in.</p>
+         {/if}
+       </section>
      </div>
 
      <style>
        form {
          margin-top: 0;
+         padding-bottom: 1rem;
+       }
+
+       section {
          padding: 1rem;
        }
 
@@ -962,7 +1039,7 @@ this ensures that they are built using the same C libraries.
    {% raw %}
 
    - Change `{#if user}` to `{#if $user && emailVerified}`
-   - Add the following before `{/if}`:
+   - Add the following before `{:else}`:
 
      ```js
      {:else if $user && !emailVerified}
