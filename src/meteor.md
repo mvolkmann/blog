@@ -569,7 +569,7 @@ this ensures that they are built using the same C libraries.
    <style>
      form {
        margin-top: 0;
-       padding: 1rem;
+       padding-bottom: 1rem;
      }
    </style>
    ```
@@ -639,7 +639,15 @@ this ensures that they are built using the same C libraries.
    - Add the following after the `header` tag:
 
      ```html
-     <p>{remaining} of {$tasks.length} remaining</p>
+     <p class="stats">{remaining} of {$tasks.length} remaining</p>
+     ```
+
+   - Add the following inside the `style` tag:
+
+     ```css
+     .stats {
+       margin-top: 0;
+     }
      ```
 
 1. Add the ability to only display tasks that are not done
@@ -741,7 +749,7 @@ this ensures that they are built using the same C libraries.
 
        <section>
          {#if $user}
-         <p>{remaining} of {$tasks.length} remaining</p>
+         <p class="stats>{remaining} of {$tasks.length} remaining</p>
 
          <form on:submit|preventDefault="{addTask}">
            <input placeholder="todo text" bind:value="{text}" />
@@ -772,6 +780,10 @@ this ensures that they are built using the same C libraries.
 
        section {
          padding: 1rem;
+       }
+
+       .stats {
+         margin-top: 0;
        }
 
        :global(#login-buttons) {
