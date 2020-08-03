@@ -32,7 +32,11 @@ as an alternative to HTTP to achieve real-time updates.
 But the attention faded quickly as other frameworks garnered more notice.
 It is seeing some resurgence in 2020.
 
-The "Meteor Software" company supports both Meteor and Galaxy.
+Tiny (<https://www.tinycapital.com/>), a Canadian technology holding company,
+acquired Meteor from the Meteor Development Group in October, 2019.
+This occurred after most of the Meteor Development Group team
+had transitioned to working on Apollo GraphQL.
+The new Meteor company supports both Meteor and Galaxy.
 Galaxy is a commercial cloud hosting platform for Meteor applications.
 
 The use of WebSockets to support the Meteor pub/sub model
@@ -126,8 +130,144 @@ with a subset of the data on the server.
 It uses the Meteor Distributed Data Protocol (DDP)
 to send data in both directions.
 
-Client code can update a collection on the server using a
-"method" which uses Meteor remote procedure call (RPC).
+### MongoDB
+
+To see a list of all the databases, enter `show dbs`.
+
+To use the MongoDB console, enter `meteor mongo`.
+
+To use the Meteor database, enter `use meteor`.
+
+To see a list of collections in this database, enter `show collections`.
+
+To see the first 20 documents in a given collection,
+enter `db.{coll-name}.find()`.
+
+To delete all the documents in a collection, enter `db.{coll-name}.drop()`.
+
+### Methods
+
+Meteor Methods are server-side functions
+that can be called from client-side code.
+This is done with a Remote Procedure Call (RPC) that uses WebSockets.
+One use for this is updating collections.
+
+To implement a method in server-side code,
+pass an object literal to `Meteor.methods`
+where the properties are method definitions.
+The methods can have any number of parameters with any JavaScript types.
+The `check` function in the `meteor/check` package
+can be used to check the types of the parameters.
+It returns an error if unexpected types are passed.
+To throw an error, use `throw new Meteor.Error(methodName, message)`.
+
+To call a method from client code,
+import `Meteor` from the `meteor/meteor` package
+and call `Meteor.call` passing it the name of a Method,
+arguments, and a callback function.
+The callback is passed an error description and a result.
+
+Here is an example of a trivial method that simply adds two numbers.
+
+Create the file `server/methods.js` containing the following:
+
+```js
+import {check} from 'meteor/check';
+import {Meteor} from 'meteor/meteor';
+
+Meteor.methods({
+  sum(n1, n2) {
+    check(n1, Number);
+    check(n2, Number);
+    return n1 + n2;
+  }
+});
+```
+
+Add the following near the top of `server/main.js` to invoke the code above:
+
+```js
+import './methods';
+```
+
+To call the `sum` method from client code, add the following:
+
+```js
+const number1 = 2;
+const number2 = 3;
+Meteor.call('sum', number1, number2, (err, result) => {
+  if (err) {
+    // Handle the error.
+  } else {
+    console.log('sum =', result); // 5
+  }
+});
+```
+
+If you prefer to use promises, create a utility function
+that wraps calls in a `Promise` as follows:
+
+```js
+export function call(name, ...args) {
+  return new Promise((resolve, reject) => {
+    Meteor.call(name, ...args, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+```
+
+Using this new `call` function, our `sum` Meteor method
+can be called from an `async` function as follows:
+
+```js
+try {
+  const sum = await call('sum', 2, 3);
+  console.log('App.svelte addTask: sum =', sum);
+} catch (e) {
+  // Handle the error.
+}
+```
+
+### Distributed Data Protocol (DDP)
+
+### Tracker
+
+Tracker is a dependency tracking system used by Meteor to
+update user interfaces when session variables and data sources change.
+From <https://docs.meteor.com/api/tracker.html>,
+"When you call a function that supports reactive updates
+(such as a database query),
+it automatically saves the current Computation object, if any
+(representing, for example, the current template being rendered).
+Later, when the data changes, the function can "invalidate" the Computation,
+causing it to rerun (re-rendering the template)."
+
+There is a React hook called `useTracker` for responding to tracker changes.
+There is a corresponding `useTracker` function for Svelte
+at <https://atmospherejs.com/rdb/svelte-meteor-data>.
+This takes a function that returns the result of a MongoDB query.
+It returns a Svelte store that is updated whenever
+the database is updated in a way that affects the query results.
+
+To always get the current user in a Svelte component:
+
+```js
+$: user = useTracker(() => Meteor.user());
+```
+
+To always get the latest tasks from a Task collection:
+
+```js
+$: tasks = useTracker(() => Tasks.find(query, projection).fetch());
+```
+
+Note that both `user` and `tasks` are stores,
+so references to them should have a `$` prefix.
 
 ### ESLint
 
@@ -590,7 +730,9 @@ this ensures that they are built using the same C libraries.
      import {Accounts} from 'meteor/accounts-base';
      import secrets from '../secrets.json';
 
-     Accounts.emailTemplates.siteName = 'Todos by Mark V.';
+     const siteName = 'Todos by Mark V.';
+     Accounts.emailTemplates.siteName = siteName;
+
      const from = `${secrets.MAIL_NAME}<${secrets.MAIL_USER}@${secrets.MAIL_USER_DOMAIN}>`;
      Accounts.emailTemplates.from = from;
      ```
@@ -642,15 +784,13 @@ this ensures that they are built using the same C libraries.
 
    - Enter `meteor remove insecure`
 
-   - Define server-side methods by modifying `server/tasks.js`
+   - Define server-side methods by modifying `server/methods.js`
      to match the following:
 
      ```js
      import {check} from 'meteor/check';
      import {Meteor} from 'meteor/meteor';
-     import {Mongo} from 'meteor/mongo';
-
-     export const Tasks = new Mongo.Collection('tasks');
+     import {Tasks} from '../imports/tasks';
 
      Meteor.methods({
        addTask(text) {
@@ -680,6 +820,13 @@ this ensures that they are built using the same C libraries.
          Tasks.update(taskId, {$set: {done}});
        }
      });
+     ```
+
+   - Add the following near the top of `server/main.js`
+     to invoke the code above:
+
+     ```js
+     import './methods';
      ```
 
    - Create the file `client/util.js` containing the following:
@@ -752,4 +899,47 @@ this ensures that they are built using the same C libraries.
 
      ```js
      onMount(() => Meteor.subscribe('tasks'));
+     ```
+
+1. Require account email validation before tasks can be entered.
+
+   - Add the following at the bottom of `server/account-setup.js`:
+
+     ```js
+     Accounts.onLogin(({user}) => {
+       const [email] = user.emails;
+       if (!email.verified) {
+         Accounts.sendVerificationEmail(user._id, email.address);
+       }
+     });
+
+     Accounts.emailTemplates.verifyEmail = {
+       subject() {
+         return `Activate your ${siteName} account.`;
+       },
+       text(user, url) {
+         return (
+           `Hey ${user.username}, click the following link ` +
+           `to verify your email address: ${url}.`
+         );
+       }
+     };
+     ```
+
+   - Add the following in `client/App.svelte` after the `$: user =` line
+     to determine if the logged in user has a verified email address:
+
+     ```js
+     $: emailVerified = $user && $user.emails[0].verified;
+     ```
+
+   - Change `{#if user}` to `{#if $user && emailVerified}`
+   - Add the following before `{/if}`:
+
+     ```js
+     {:else if $user && !emailVerified}
+       <p>
+         You have been sent an email containing a link to verify your account.
+         Please click that link in order to start adding tasks.
+       </p>
      ```
