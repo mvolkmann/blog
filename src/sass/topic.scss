@@ -2,10 +2,6 @@ body {
   font-family: sans-serif;
 }
 
-h2 {
-  margin-top: 0;
-}
-
 .MathJax {
   // This doesn't work because the mjx-container element
   // sets font-size inline in its style attribute.
@@ -14,4 +10,18 @@ h2 {
   // normalsize (default), large, or huge.
   // Of these, only large and huge are reasonable sizes.
   font-size: 200%;
+}
+
+p > code {
+  font-size: 1.2rem;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: solid lightgray 1px;
+  padding: 0.5rem;
 }
