@@ -933,6 +933,8 @@ this ensures that they are built using the same C libraries.
      $: emailVerified = $user && $user.emails[0].verified;
      ```
 
+   {% raw %}
+
    - Change `{#if user}` to `{#if $user && emailVerified}`
    - Add the following before `{/if}`:
 
@@ -943,3 +945,5 @@ this ensures that they are built using the same C libraries.
          Please click that link in order to start adding tasks.
        </p>
      ```
+
+   {% endraw %}
