@@ -17,6 +17,9 @@ It has good integration with the MongoDB NoSQL database.
 It supports a publish and subscribe mechanism to synchronize
 user interfaces with backend data, providing real-time updates.
 
+Meteor uses its own build systems and JavaScript bundler.
+It does not use Webpack, Rollup, or Parcel.
+
 A big benefit of Meteor is the ability to implement
 significant functionality in a small amount of code.
 One example of this is user sign up and authentication.
@@ -247,8 +250,12 @@ it automatically saves the current Computation object, if any
 Later, when the data changes, the function can "invalidate" the Computation,
 causing it to rerun (re-rendering the template)."
 
-There is a React hook called `useTracker` for responding to tracker changes.
-There is a corresponding `useTracker` function for Svelte
+There is a low-level API for using Tracker,
+but there are easier ways to use it in React and Svelte.
+
+For React there is hook called `useTracker` for responding to tracker changes.
+
+For Svelte there is a corresponding `useTracker` function
 at <https://atmospherejs.com/rdb/svelte-meteor-data>.
 This takes a function that returns the result of a MongoDB query.
 It returns a Svelte store that is updated whenever
@@ -268,6 +275,24 @@ $: tasks = useTracker(() => Tasks.find(query, projection).fetch());
 
 Note that both `user` and `tasks` are stores,
 so references to them should have a `$` prefix.
+
+### Meteor Packages
+
+Meteor can uses packages from npm and
+from its own package repository called "Atmosphere".
+To see the available packages in Atmosphere, browse <https://atmospherejs.com/>.
+This page lists trending packages, recent packages, and most used packages.
+To install a package from Atmosphere in your current Meteor project,
+enter `meteor add {package-name}`.
+This writes information about the installed packages to `.meteor/packages`
+to track dependencies similar to how npm uses the `package-lock.json` file.
+
+Popular Atmosphere packages include:
+meteor-base, mongo, typescript, tracker,
+react-meteor-data, svelte-compiler, and rdb:svelte-meteor-data
+static-html
+accounts-ui, accounts-password
+svelte:blaze-integration
 
 ### ESLint
 
@@ -328,7 +353,8 @@ When packages have binary dependencies,
 this ensures that they are built using the same C libraries.
 
 1. Enter `meteor npm install svelte`
-1. Add some Meteor packages by entering `meteor add svelte:compiler rdb:svelte-meteor-data`
+1. Add some Meteor packages by entering
+   `meteor add svelte:compiler rdb:svelte-meteor-data`
 1. Remove a package that will not be used by entering
    `meteor remove blaze-html-templates`
 1. Add a replacement Meteor package by entering `meteor add static-html`
@@ -947,3 +973,31 @@ this ensures that they are built using the same C libraries.
      ```
 
    {% endraw %}
+
+### Building and Deploying
+
+To build the app for deployment, enter `meteor build {dir-name}`.
+This creates the specified directory if it doesn't exist
+and creates a TAR file inside it named `{project-name}.tar.gz`.
+This contains a single directory named `bundle` which contains
+all the files for the client-side and server-side of the application.
+
+Include the `--architecture` option to build for a specific architecture.
+
+For help on the build command, enter `meteor help build`.
+
+To deploy the app:
+
+1. Copy the TAR file to a server.
+1. SSH to the server.
+1. Verify that a recent version of Node.js is installed.
+1. Un-tar the file by entering `tar zxf {project-name}.tar.gz`
+1. Enter `cd {project-name}/programs/server`
+1. Enter `npm install`
+1. Set the `MONGO_URL` environment variable to `mongodb://localhost:27017/myapp`
+1. Set the `ROOT_URL` environment variable to `http://my-app.com`
+1. Enter `node main.js` to start the server.
+
+Other alternatives for deploying Meteor apps include Galaxy and Meteor Up.
+Meteor Up (<http://meteor-up.com/>), a.k.a mup, can be used to
+deploy a Meteor app to any server to which you can ssh.
