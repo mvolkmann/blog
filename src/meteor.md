@@ -6,7 +6,8 @@ layout: topic-layout.njk
 
 ### Overview
 
-Meteor (<https://www.meteor.com/>) is an open-source, full-stack, JavaScript
+Meteor ({% aTargetBlank 'https://meteor.com/', 'meteor.com' %})
+is an open-source, full-stack, JavaScript
 platform for building web and mobile (Android and iOS) applications.
 It is referred to as a platform instead of a framework
 because it works with other frameworks.
@@ -30,7 +31,8 @@ as an alternative to HTTP to achieve real-time updates.
 But the attention faded quickly as other frameworks garnered more notice.
 It is seeing some resurgence in 2020.
 
-Tiny (<https://www.tinycapital.com/>), a Canadian technology holding company,
+Tiny ({% aTargetBlank 'https://www.tinycapital.com/', 'tinycapital.com' %})
+a Canadian technology holding company,
 acquired Meteor from the Meteor Development Group in October, 2019.
 This occurred after most of the Meteor Development Group team
 transitioned to working on Apollo GraphQL.
@@ -42,8 +44,8 @@ Companies that use Meteor include Qualcomm, Mazda, IKEA, and Honeywell.
 Enterprise support is available in order to have
 guaranteed support response times and service-level agreements (SLAs).
 
-Meteor provides many command-line tools.
-These are summarized at <https://docs.meteor.com/commandline.html>.
+Meteor provides many command-line tools. These are summarized
+{% aTargetBlank 'https://docs.meteor.com/commandline.html', 'here' %}.
 Enter `meteor help` for help on using these.
 
 ### Key Benefits
@@ -69,8 +71,8 @@ in a small amount of code.
 
 ### Installing Meteor
 
-See <https://www.meteor.com/install> for
-platform-specific instructions on installing Meteor.
+See {% aTargetBlank 'https://www.meteor.com/install', 'here' %}
+for platform-specific instructions on installing Meteor.
 In Linux or macOS, enter `curl https://install.meteor.com | sh`.
 In Windows, install Chocolatey and enter `choco install meteor`.
 
@@ -201,7 +203,8 @@ can be used to check the types of parameters at runtime.
 Note that TypeScript types are only checked at compile-time.
 The `check` function throws a `Match.Error` if unexpected types are passed.
 For details on the `check` function,
-see <https://docs.meteor.com/api/check.html>.
+see {% aTargetBlank 'https://docs.meteor.com/api/check.html', 'here' %}.
+
 To report other kinds of parameter validation errors,
 use `throw new ValidationError(message)`.
 
@@ -244,7 +247,8 @@ a `console.log` call is added.
 It will be output in the DevTools console AND
 in the terminal window where the server is running.
 
-Create the file `imports/methods.js` containing the following:
+Create the directory `imports` and
+the file `imports/methods.js` containing the following:
 
 ```js
 import {check} from 'meteor/check';
@@ -445,7 +449,8 @@ if (Meteor.isServer) {
 
 Tracker is a dependency tracking system used by Meteor to
 update UIs when session variables and data sources change.
-From <https://docs.meteor.com/api/tracker.html>,
+From the Meteor
+{% aTargetBlank 'https://docs.meteor.com/api/tracker.html', 'Tracker docs' %},
 "When you call a function that supports reactive updates
 (such as a database query),
 it automatically saves the current `Computation` object, if any
@@ -458,8 +463,10 @@ but there are easier ways to use it in React and Svelte.
 
 For React there is hook called `useTracker` for responding to tracker changes.
 
-For Svelte there is a corresponding `useTracker` function in the
-package described at <https://atmospherejs.com/rdb/svelte-meteor-data>.
+For Svelte there is a corresponding `useTracker` function
+in the package described
+{% aTargetBlank 'https://atmospherejs.com/rdb/svelte-meteor-data', 'here' %}.
+
 This takes a function that returns the result of a MongoDB query.
 It returns a Svelte store that is updated whenever
 the database is updated in a way that affects the query results.
@@ -491,7 +498,9 @@ Meteor can use packages from npm and
 from its own package repository called "Atmosphere".
 Atmosphere contains packages that are specific to Meteor.
 
-To see the available packages in Atmosphere, browse <https://atmospherejs.com/>.
+To see the available packages in Atmosphere,
+browse {% aTargetBlank 'https://atmospherejs.com/', 'atmosphere.com' %}.
+
 This page lists trending, recent, and most used packages.
 
 To install a package from Atmosphere in your current Meteor project,
@@ -598,26 +607,26 @@ When this is not the case, the Svelte-specific parts can be omitted.
 ### Tutorials
 
 The Meteor web site contains several tutorials
-that provide an introduction to using Meteor.
-See <https://www.meteor.com/tutorials>.
+{% aTargetBlank 'https://www.meteor.com/tutorials', 'here' %}
+that provide introductions to using Meteor.
 
 Let's walk through the steps to build a Todo app using Meteor.
+Code for the final version of the app can be found in
+{% aTargetBlank 'https://github.com/mvolkmann/meteor-svelte-todos', 'GitHub' %}.
 
-Create the app starting point by entering
-`meteor create todos`.
-To use a non-default app templates, add one of the following options
+Create the app starting point by entering `meteor create todos`.
+To use a non-default app template, add one of the following options
 after `create`:
-`--bare`, `--minimal`, `--full`, `--react`, or `--typescript`
+`--bare`, `--minimal`, `--full`, `--react`, or `--typescript`.
 Interestingly none of these options corresponds to the default.
 The default option produces applications that are insecure
 and are therefore only for prototyping.
 They allow all MongoDB updates to be initiated from clients.
-For details on the features included by default and with each option
-see <https://docs.meteor.com/commandline.html#meteorcreate>.
+For details on the Meteor packages included by default and with each option see
+{% aTargetBlank 'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
 
-Enter `cd todos`.
-Run the app by entering `meteor`.
-Browse localhost:3000.
+Enter `cd todos`, start the server by entering `meteor`,
+and browse localhost:3000.
 The following page will be rendered.
 
 ![cover](/blog/assets/meteor-default-page.png)
@@ -630,12 +639,14 @@ The UI is defined by the following files in the `client` directory:
 `main.html`, `main.css`, and `main.js`.
 
 Try editing the file `client/main.html`.
-The browser will updated automatically.
+The browser will updated automatically when the changes are saved.
 Meteor refers to this as "hot code push".
 
 Now let's configure the app to use Svelte as its web framework,
 instead of the default Blaze framework.
 Svelte is a good choice due to its use of reactive statements.
+For more information about Svelte, see
+{% aTargetBlank 'https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte', 'my article' %}.
 
 It is recommended to use the command `meteor npm` instead of `npm`
 when installing npm packages in a Meteor app.
@@ -645,7 +656,7 @@ this ensures that they are built using the same C libraries.
 1. Enter `meteor npm install svelte`
 1. Add some Meteor packages by entering
    `meteor add svelte:compiler rdb:svelte-meteor-data`
-1. Remove a package that will not be used by entering
+1. Remove a package that will no longer be used by entering
    `meteor remove blaze-html-templates`
 1. Add a replacement Meteor package by entering `meteor add static-html`
 1. Replace the content of `client/main.html` with the following:
@@ -665,16 +676,12 @@ this ensures that they are built using the same C libraries.
    import {Meteor} from 'meteor/meteor';
    import App from '../imports/ui/App.svelte';
 
-   console.log('meteor.md x: Meteor =', Meteor);
-
    Meteor.startup(() => {
      new App({target: document.getElementById('app')});
    });
    ```
 
-1. Create a top-level project directory named `imports`.
-1. Create a directory inside `imports` named `ui`.
-1. Create the file `imports/ui/Task.svelte` containing the following:
+1. Create the file `client/Task.svelte` containing the following:
 
    ```html
    <script>
@@ -691,7 +698,7 @@ this ensures that they are built using the same C libraries.
    <li>{task.text} - added {formatDate(task.createdAt)}</li>
    ```
 
-1. Create the file `imports/ui/App.svelte` containing the following:
+1. Create the file `client/App.svelte` containing the following:
 
    {% raw %}
 
@@ -722,8 +729,12 @@ this ensures that they are built using the same C libraries.
    {% endraw %}
 
 1. Copy the CSS from
-   [here](https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css)
+   {% aTargetBlank
+    'https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css',
+    'here' %}.
    into `client/main.css`.
+
+1. Create a top-level project directory named `imports`.
 
 1. Create `imports/tasks.js` containing the following:
 
@@ -1118,94 +1129,94 @@ this ensures that they are built using the same C libraries.
    Methods that throw should do so using
    `throw new Meteor.error(methodName, message)`.
    Throwing a normal JavaScript Error will not return the message to the client.
-   Add information about "optimistic UI" and "method retries" in Meteor!
-   See <https://blog.meteor.com/optimistic-ui-with-meteor-67b5a78c3fcf>.
 
-   - Enter `meteor remove insecure`
+   TODO: Add information about "method retries" from <https://guide.meteor.com/methods.html#retries>.
 
-   - Define server-side Methods by modifying `imports/task.js`
-     to match the following:
+- Enter `meteor remove insecure`
 
-     ```js
-     import {check} from 'meteor/check';
-     import {Meteor} from 'meteor/meteor';
-     import {Tasks} from '../imports/tasks';
+- Define server-side Methods by modifying `imports/task.js`
+  to match the following:
 
-     Meteor.methods({
-       addTask(text) {
-         check(text, String); // argument type validation
+  ```js
+  import {check} from 'meteor/check';
+  import {Meteor} from 'meteor/meteor';
+  import {Tasks} from '../imports/tasks';
 
-         // Make sure the user is logged in before inserting a task.
-         if (!this.userId) throw new Meteor.Error('add-task', 'not-authorized');
+  Meteor.methods({
+    addTask(text) {
+      check(text, String); // argument type validation
 
-         const {username} = Meteor.users.findOne(this.userId);
-         const id = Tasks.insert({
-           text,
-           createdAt: new Date(),
-           owner: this.userId,
-           username
-         });
-         return id;
-       },
+      // Make sure the user is logged in before inserting a task.
+      if (!this.userId) throw new Meteor.Error('add-task', 'not-authorized');
 
-       deleteTask(taskId) {
-         check(taskId, String); // argument type validation
-         Tasks.remove(taskId);
-       },
+      const {username} = Meteor.users.findOne(this.userId);
+      const id = Tasks.insert({
+        text,
+        createdAt: new Date(),
+        owner: this.userId,
+        username
+      });
+      return id;
+    },
 
-       setDone(taskId, done) {
-         check(taskId, String); // argument type validation
-         check(done, Boolean); // argument type validation
-         Tasks.update(taskId, {$set: {done}});
-       }
-     });
-     ```
+    deleteTask(taskId) {
+      check(taskId, String); // argument type validation
+      Tasks.remove(taskId);
+    },
 
-   - Add the following near the top of `server/main.js`
-     to invoke the code above:
+    setDone(taskId, done) {
+      check(taskId, String); // argument type validation
+      check(done, Boolean); // argument type validation
+      Tasks.update(taskId, {$set: {done}});
+    }
+  });
+  ```
 
-     ```js
-     import './methods';
-     ```
+- Add the following near the top of `server/main.js`
+  to invoke the code above:
 
-   - Create the file `client/util.js` containing the following:
+  ```js
+  import './methods';
+  ```
 
-     ```js
-     export function handleError(err) {
-       // Replace this will better error handling.
-       if (err) alert(err.message);
-     }
-     ```
+- Create the file `client/util.js` containing the following:
 
-   - Add the following `imports` in `client/App.svelte` and `client/Task.svelte`:
+  ```js
+  export function handleError(err) {
+    // Replace this will better error handling.
+    if (err) alert(err.message);
+  }
+  ```
 
-     ```js
-     import {handleError} from './util';
-     ```
+- Add the following `imports` in `client/App.svelte` and `client/Task.svelte`:
 
-   - Change the call to `Tasks.insert` in the `addTask` function
-     of `client/App.svelte` to the following:
+  ```js
+  import {handleError} from './util';
+  ```
 
-     ```js
-     Meteor.call('addTask', text, handleError);
-     ```
+- Change the call to `Tasks.insert` in the `addTask` function
+  of `client/App.svelte` to the following:
 
-   - Change the call to `Tasks.remove` in the `deleteTask` function
-     of `client/Task.svelte` to the following:
+  ```js
+  Meteor.call('addTask', text, handleError);
+  ```
 
-     ```js
-     Meteor.call('deleteTask', task._id, handleError);
-     ```
+- Change the call to `Tasks.remove` in the `deleteTask` function
+  of `client/Task.svelte` to the following:
 
-   - Change the call to `Tasks.update` in the `toggleDone` function
-     of `client/Task.svelte` to the following:
+  ```js
+  Meteor.call('deleteTask', task._id, handleError);
+  ```
 
-     ```js
-     Meteor.call('setDone', task._id, !task.done, handleError);
-     ```
+- Change the call to `Tasks.update` in the `toggleDone` function
+  of `client/Task.svelte` to the following:
 
-   - Remove the import of `Tasks` from `client/Task.svelte`
-     since it is no longer used.
+  ```js
+  Meteor.call('setDone', task._id, !task.done, handleError);
+  ```
+
+- Remove the import of `Tasks` from `client/Task.svelte`
+  since it is no longer used.
 
 1. Explicitly specify what data the server sends to the client
    so we can separate todos by user.
@@ -1313,7 +1324,7 @@ To deploy the app:
 TODO: What should the value of "myapp" be in the environment variables.
 
 Other alternatives for deploying Meteor apps include
-Galaxy (<https://www.meteor.com/hosting>
-and Meteor Up (<http://meteor-up.com/>).
+Galaxy ({% aTargetBlank 'https://www.meteor.com/hosting', 'here' %})
+and Meteor Up ({% aTargetBlank 'http://meteor-up.com/', 'here' %}).
 Meteor Up, a.k.a mup, can be used to deploy a Meteor app
 to any server to which you can `ssh`.
