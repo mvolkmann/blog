@@ -15,19 +15,14 @@ It is used to host both client-side and server-side code.
 Meteor is built on Node.js.
 It has good integration with the MongoDB NoSQL database.
 It supports a publish and subscribe mechanism to synchronize
-user interfaces with backend data, providing real-time updates.
+user interfaces (UIs) with backend data, providing real-time updates.
 
 Meteor uses its own build systems and JavaScript bundler.
 It does not use Webpack, Rollup, or Parcel.
 
-A big benefit of Meteor is the ability to implement
-significant functionality in a small amount of code.
-One example of this is user sign up and authentication.
-This is demonstrated in the sample app below.
-
 Meteor has its own frontend framework called Blaze.
 But it also supports other popular options that can be used in its place
-such as Angular, React, Svelte, Vue, and Cordova.
+such as Angular, React, Svelte, Vue, and Cordova (for Android and iOS apps).
 
 Meteor was initially released in 2012.
 It gained immediate attention for its novel use of WebSockets
@@ -38,19 +33,39 @@ It is seeing some resurgence in 2020.
 Tiny (<https://www.tinycapital.com/>), a Canadian technology holding company,
 acquired Meteor from the Meteor Development Group in October, 2019.
 This occurred after most of the Meteor Development Group team
-had transitioned to working on Apollo GraphQL.
+transitioned to working on Apollo GraphQL.
 The new Meteor company supports both Meteor and Galaxy.
 Galaxy is a commercial cloud hosting platform for Meteor applications.
 
-Companies that use Meteor include
-Qualcomm, Mazda, IKEA, and Honeywell.
+Companies that use Meteor include Qualcomm, Mazda, IKEA, and Honeywell.
 
 Enterprise support is available in order to have
-guaranteed support response times and SLAs.
+guaranteed support response times and service-level agreements (SLAs).
 
 Meteor provides many command-line tools.
 These are summarized at <https://docs.meteor.com/commandline.html>.
 Enter `meteor help` for help on using these.
+
+### Key Benefits
+
+The key benefits of using Meteor are:
+
+- The UI can be implemented using any popular web framework.
+- There is no need to implement user account management and authentication
+  if using the Meteor account-ui and accounts-password packages
+  is acceptable.
+- There is no need to install and configure a database
+  if using MongoDB is acceptable.
+- Changes to data in MongoDB collections are published to all
+  connected clients using WebSockets so all the UIs can stay in sync.
+- There is no need to install and configure an HTTP server library.
+- There is no need to implement REST services or GraphQL queries
+  if using Meteor Methods with WebSockets is acceptable.
+  Meteor Methods are implemented in JavaScript or TypeScript
+  and are described in detail later.
+
+All of this enables implementing significant functionality
+in a small amount of code.
 
 ### Installing Meteor
 
@@ -73,10 +88,7 @@ is described below.
 - `server`
   - `main.js`
 - `imports`
-  - `client`
-    - `\*.js`
-  - `server`
-    - `\*.js`
+  - `\*.js`
 
 All client-side files can be placed in the `client` directory
 and all server-side files can be placed in the `server` directory.
@@ -95,20 +107,25 @@ TODO: Learn something about this
 
 ### Collections
 
-Meteor stores data in "collections" that can be accessed from both
-client-side and server-side code.
-When data is added to a collection or existing data is modified,
-client code that uses it updates automatically.
+The client-side of Meteor applications can obtain data in many ways
+including REST calls and GraphQL queries
+that connect to any kind of database.
+The data can be stored in clients in many ways including
+JavaScript variables, session storage, and local storage.
 
-Collections are associated with a MongoDB collection.
-Meteor apps can access other databases (such as PostgreSQL)
-through calls to REST services,
-but real-time updates only occur through collections
-and those only use MongoDB.
+The most common way for a Meteor application to store data is in "collections".
+Meteor collections are associated with a MongoDB collection.
+They can be accessed from both client and server code.
+When data is added to a collection, updated, or deleted,
+client code that uses it typically updates automatically.
+This is a significant benefit over using REST services
+that require the use of polling to get data updates.
 
 The following code demonstrates
 creating a MongoDB collection named "Todos",
 inserting a document into the collection, and finding it.
+MongoDB prefers for the unique id of each document
+to be held in property named `_id`.
 
 ```js
 const Todos = new Mongo.Collection('todos');
@@ -116,28 +133,35 @@ Todos.insert({_id: 't1', text: 'buy milk'});
 const todo = Todos.findOne({_id: 't1'});
 ```
 
-The same code can be used in server-side or client-side code.
-When run server-side, it actually creates a collection and populates it.
+The same code can be used in client or server code
+when the Meteor "insecure" package is installed.
+(Later we will look at securing Meteor applications.)
+When run server-side, this code creates a MongoDB collection and populates it.
 When run client-side, it creates a client-side cache
 using the "Minimonogo" library which provides an
 in-memory JavaScript implementation of the MongoDB API.
 
 Client code must subscribe to a publication
 in order to receive updates from the server.
-This keeps the client-side cache in sync
-with a subset of the data on the server.
-It uses the Meteor Distributed Data Protocol (DDP)
-to send data in both directions.
+This keeps the client-side cache (implemented by Minimongo)
+in sync with a subset of the data in MongoDB on the server.
+This is accomplished by using the Meteor Distributed Data Protocol (DDP)
+to send WebSocket messages in both directions.
 
 ### MongoDB
 
-To see a list of all the databases, enter `show dbs`.
+MongoDB is a popular, powerful NoSQL database.
+There are many commands and options to master,
+but the following presents some of the basics
+for using the MongoDB console in conjunction with Meteor.
 
-To use the MongoDB console, enter `meteor mongo`.
+To start the MongoDB console, enter `meteor mongo`.
+
+To see a list of all the databases, enter `show dbs`.
 
 To use the Meteor database, enter `use meteor`.
 
-To see a list of collections in this database, enter `show collections`.
+To see a list of collections in the current database, enter `show collections`.
 
 To see the first 20 documents in a given collection,
 enter `db.{coll-name}.find()`.
@@ -148,65 +172,74 @@ To delete all the documents in a collection, enter `db.{coll-name}.drop()`.
 
 Meteor Methods are functions that typically
 reside on both the client-side and server-side.
-They are meant to be called from client-side code.
+By convention, "Method" is written with a capital "M"
+to distinguish it from normal JavaScript methods.
+Methods are meant to be called from client-side code.
 Server-side implementations are invoked using a
-Remote Procedure Call (RPC) that uses WebSockets.
+Remote Procedure Call (RPC) that utilizes WebSockets.
 This is alternative to REST calls implemented using HTTP.
 
-Common uses for methods include
-inserting documents in collections,
-deleting documents from collections,
-and updating documents in collection.
+Common uses for Methods include
+inserting a document in a collection,
+deleting a document from a collection,
+and updating a document in a collection.
 Retrieving documents from collections
 is typically done by subscribing to them.
 
-To implement a method in server-side code,
-pass an object literal to `Meteor.methods`
-where the properties are method definitions.
-This registers the methods with Meteor's DDP system.
-It can be called any number of times to register additional methods.
+To implement a Method,
+import `Meteor` from the `meteor/meteor` package
+and pass an object literal to `Meteor.methods`.
+The properties of the object are Method definitions.
+This registers the Methods with Meteor's DDP system.
+The `Meteor.methods` function can be called any number of times
+to register additional Methods.
 
-The methods can have any number of parameters with any JavaScript types.
+The Methods can accept any number of parameters with any JavaScript types.
 
 The `check` function in the `meteor/check` package
-can be used to check the types of parameters and runtime.
+can be used to check the types of parameters at runtime.
 Note that TypeScript types are only checked at compile-time.
-It throws a `Match.Error` if unexpected types are passed.
+The `check` function throws a `Match.Error` if unexpected types are passed.
 For details on the `check` function,
 see <https://docs.meteor.com/api/check.html>.
-To report other parameter validation errors,
+To report other kinds of parameter validation errors,
 use `throw new ValidationError(message)`.
 
-For most other errors, use
+To report most other errors, use
 `throw new Meteor.Error(errorId, message[, details])`.
-The error id is typically the method name
+The error id is typically the Method name
 followed by a period and an error name.
-If instead a generic JavaScript error is thrown using
+If a generic JavaScript error is thrown instead using
 `throw new Error(message)`, the details will only appear on the server
 and clients will only be notified that an internal server error occurred.
 
-To call a method from client code,
+To call a Method from client code,
 import `Meteor` from the `meteor/meteor` package
 and call `Meteor.call` passing it the name of a Method,
-arguments, and a callback function.
-This triggers the method call lifecycle which has six parts.
+any number of arguments, and a callback function.
+This triggers the Method call lifecycle which has six parts.
 
-1. If the method is defined on the client, it is executed there,
-   typically updating Minimongo,
-   and corresponding UI updates are made.
+1. If the Method is defined on the client, it is executed there.
+   This typically updates Minimongo and corresponding UI updates are made.
 1. A JSON-based DDP message is constructed and sent to the server.
-   This includes the method name, arguments, and a generated method id.
-1. The method executes on the server, possibly updating MongoDB.
-1. A return value is sent to the client in a "result" message
-   that includes the previously generated method id and the result.
+   This includes a message name (`msg` property set to "method"),
+   Method name (in the `method` property),
+   arguments (in the `params` property),
+   and a generated Method id (in the `id` property).
+1. The Method executes on the server, possibly updating MongoDB.
+1. A return value is sent to the client in a message that includes
+   a message name (`msg` property set to "result"),
+   the previously generated Method id (in the `id` property),
+   and the result (in the `result` property).
 1. Any affected data in Minimongo is updated, but the UI is not yet updated.
 1. The callback function passed to `Meteor.call` is passed
-   an error description (if there was an error) and the result.
+   an error description (if there was an error) and the result value.
    Now the UI is updated using data from Minimongo.
 
-Here is an example of a trivial method that simply adds two numbers.
-This is not a typical method because it does not update a collection.
-To verify that it is called on both the client and server side,
+Let's implement a simple Method that just adds two numbers.
+It is not a typical Method because it does not update a collection.
+We will see several examples of Methods that update a collection later.
+To verify that the Method is called on both the client and server side,
 a `console.log` call is added.
 It will be output in the DevTools console AND
 in the terminal window where the server is running.
@@ -233,21 +266,22 @@ Add the following near the top of `server/main.js` to invoke the code above:
 import '../imports/methods';
 ```
 
-To call the `sum` method from client code, add the following:
+To call the `sum` Method from client code, add the following
+in any client JavaScript file such as `client/main.js`:
 
 ```js
 const number1 = 2;
 const number2 = 3;
 Meteor.call('sum', number1, number2, (err, result) => {
   if (err) {
-    // Handle the error.
+    alert(err);
   } else {
     console.log('sum =', result); // 5
   }
 });
 ```
 
-If you prefer to use promises, create a utility function
+If you prefer to use promises, implement a utility function
 that wraps calls in a `Promise` as follows:
 
 ```js
@@ -264,11 +298,11 @@ export function call(name, ...args) {
 }
 ```
 
-An advantage of calling methods in this way is that
+An advantage of calling Methods in this way is that
 the result of one call can be used to form the arguments of another call
 without resorting to nested callback functions.
 
-Using this new `call` function, our `sum` Meteor method
+Using this new `call` function, our `sum` Method
 can be called from an `async` function as follows:
 
 ```js
@@ -276,21 +310,21 @@ try {
   const sum = await call('sum', 2, 3);
   console.log('App.svelte addTask: sum =', sum);
 } catch (e) {
-  // Handle the error.
+  alert(e);
 }
 ```
 
-A Meteor Method can return a `Promise`.
-It will wait for the `Promise` to resolve or reject
-before returning a result or error to the client.
+A Method can return a `Promise`.
+Meteor will wait for the `Promise` to resolve or reject
+before returning a result or an error to the client.
 
 ### Viewing WebSocket Messages
 
 Chrome DevTools can be used to view the WebSocket messages
 that are sent by Meteor.
 Like HTTP messages, they appear on the Network tab.
-But unlike HTTP messages where there is a separate entry for each
-request/response pair,
+But unlike HTTP messages where there is
+a separate entry for each request/response pair,
 there is only a single WebSocket entry per connection.
 Selecting a connection displays all the messages sent over that connection.
 
@@ -299,58 +333,62 @@ To view WebSocket messages:
 1. Open the Chrome DevTools.
 1. Select the "Network" tab.
 1. Click "WS" to filter on WebSockets.
-1. Refresh the browser.
+1. Refresh the browser to get a new WebSocket connection.
 1. Click the WebSocket connection that is displayed.
-1. Click the "Messages" tab to see all the WebSocket messages,
-   updated as new ones are received.
+1. Click the "Messages" tab to see all the WebSocket messages.
+   This list is updated as new ones are received.
 1. Click a message to see its details.
 
 Each message is an array of JSON objects that have
-a `msg` property and other properties that may include
+a `msg` property and other properties such as
 `collection`, `fields`, `id`, `method`, `methods`, `msg`, and `params`.
+Typically each message array contains a single object.
 
 ### Optimistic UI
 
-Optimistic UI is a feature of Meteor, and also of Apollo GraphQL,
+Optimistic UI is a feature of Meteor Methods, and also of Apollo GraphQL,
 that enables a UI to respond to user interactions
 without waiting for server responses.
-This is satisfied by the following sequence.
+This is satisfied by the following properties.
 
 1. The UI is rendered on the client rather than
    waiting for the server to return HTML or data.
-   This requires predicting the result of operations
+   This requires predicting the result of Method calls
    based on data that has been cached on the client.
-1. This cached data is in a global cache rather than
+
+1. The client-side cache (implemented by Minimongo)
+   is a global cache rather than
    being associated with specific components,
-   so it is not possible for them to disagree on the state
-   and all affected components can re-render.
-   Meteor uses Minimongo for this.
+   so it is not possible for components to disagree on the state.
+   All affected components can re-render using the same data.
    When a MongoDB query is executed using a Meteor Method,
    it is first run against Minimongo on the client
    and then against MongoDB on the server.
+
 1. The client subscribes to data using DDP to keep
    Minimongo on the client in sync with MongoDB on the server.
    Updates are made in real time, not using polling.
-1. When the server returns the actual result of an operation,
+
+1. When the server returns the actual result of a Method call,
    Meteor verifies that it matches what the client predicted.
    If they differ, Meteor rolls back
    all the changes made from that point forward and
    replays them with the correct results from the server.
-   UI changes triggered by Meteor Method calls are tracked
-   and this supports the ability to rollback.
+   UI changes triggered by Method calls are tracked
+   in order to support the ability to rollback changes.
 
 All of this functionality is provided by default.
 The only requirement is for the client to
 use Meteor Methods to request data changes.
 
-To see this in action, we can modify a Meteor Method to
+To see rollback in action, we can modify a Meteor Method to
 return a different result when run on the client versus the server.
 This is not typical, but it is useful to demonstrate optimistic UI.
 
 Here is a simplified example from the upcoming Todo app.
 It inserts a document in the "tasks" collection.
-When run on the client it uses the text passed as an argument.
-When run on the server it waits three seconds
+When run on the client updates Minimongo using the text passed as an argument.
+When run on the server uses a timeout to wait three seconds
 and then uses the uppercase version of the text.
 The Method first runs on the client and
 the UI renders a new task with the entered text.
@@ -365,6 +403,8 @@ Meteor.methods({
     check(text, String);
     return new Promise(resolve => {
       if (Meteor.isServer) {
+        // Meteor requires using this version of setTimeout.
+        // See https://docs.meteor.com/api/timers.html.
         Meteor.setTimeout(() => {
           // Tasks is a collection.
           const id = Tasks.insert({text: text.toUpperCase()});
@@ -386,7 +426,8 @@ and sends back a result message.
 This is because Minimongo will not be updated
 until the result message is received.
 
-Here is an example from the upcoming Todo app.
+Here is an example of defining a Method on the server
+taken from the upcoming Todo app.
 It deletes a task with a given id.
 
 ```js
@@ -403,13 +444,13 @@ if (Meteor.isServer) {
 ### Tracker
 
 Tracker is a dependency tracking system used by Meteor to
-update user interfaces when session variables and data sources change.
+update UIs when session variables and data sources change.
 From <https://docs.meteor.com/api/tracker.html>,
 "When you call a function that supports reactive updates
 (such as a database query),
-it automatically saves the current Computation object, if any
+it automatically saves the current `Computation` object, if any
 (representing, for example, the current template being rendered).
-Later, when the data changes, the function can "invalidate" the Computation,
+Later, when the data changes, the function can "invalidate" the `Computation`,
 causing it to rerun (re-rendering the template)."
 
 There is a low-level API for using Tracker,
@@ -417,8 +458,8 @@ but there are easier ways to use it in React and Svelte.
 
 For React there is hook called `useTracker` for responding to tracker changes.
 
-For Svelte there is a corresponding `useTracker` function
-at <https://atmospherejs.com/rdb/svelte-meteor-data>.
+For Svelte there is a corresponding `useTracker` function in the
+package described at <https://atmospherejs.com/rdb/svelte-meteor-data>.
 This takes a function that returns the result of a MongoDB query.
 It returns a Svelte store that is updated whenever
 the database is updated in a way that affects the query results.
@@ -435,15 +476,24 @@ To always get the latest tasks from a Task collection:
 $: tasks = useTracker(() => Tasks.find(query, projection).fetch());
 ```
 
-Note that both `user` and `tasks` are stores,
+TODO: How does this differ from the following:
+
+```js
+$: tasks = Tasks.find(query, projection);
+```
+
+Note that both `user` and `tasks` are Svelte stores,
 so references to them should have a `$` prefix.
 
 ### Meteor Packages
 
 Meteor can use packages from npm and
 from its own package repository called "Atmosphere".
+Atmosphere contains packages that are specific to Meteor.
+
 To see the available packages in Atmosphere, browse <https://atmospherejs.com/>.
 This page lists trending, recent, and most used packages.
+
 To install a package from Atmosphere in your current Meteor project,
 enter `meteor add {package-name}`.
 This writes information about the installed packages to `.meteor/packages`
@@ -460,14 +510,18 @@ Popular Atmosphere packages include:
 - static-html - "define static page content in .html files"; alternative to Blaze
 - svelte:compiler - compiles `.svelte` files to JavaScript
 - svelte:blaze-integration - "render Blaze templates
-  inside your Svelte components and vice versa"
+  inside your Svelte components and vice versa";
+  useful when using the account-ui package in a Svelte app
 - tracker - "dependency tracker to allow reactive callbacks"
 - typescript - "compiler plugin that compiles TypeScript and ECMAScript
   in .ts and .tsx files"
 
 ### ESLint
 
-To use ESLint in a Meteor project that uses Svelte:
+The steps to install and configure the ESLint linting tool
+for use in a Meteor project are listed below.
+They assume using Svelte as the web framework.
+When this is not the case, the Svelte-specific parts can be omitted.
 
 - Enter `npm install eslint eslint-plugin-import eslint-plugin-svelte3`
 
@@ -498,10 +552,7 @@ To use ESLint in a Meteor project that uses Svelte:
       "ecmaVersion": 2019,
       "sourceType": "module"
     },
-    "plugins": ["import", "svelte3"],
-    "rules": {
-      "import/no-unresolved": ["error", {"ignore": ["^meteor/"]}]
-    }
+    "plugins": ["import", "svelte3"]
   }
   ```
 
@@ -511,14 +562,17 @@ However, the Meteor build system is able to resolve these.
 To suppress these errors, add the following to your `.eslintrc.json` file:
 
 ```json
-  "rules": {
-    "import/no-unresolved": ["error", {"ignore": ["^meteor/"]}]
-  }
+"rules": {
+  "import/no-unresolved": ["error", {"ignore": ["^meteor/"]}]
+}
 ```
 
 ### Prettier
 
-To use Prettier in a Meteor project that uses Svelte:
+The steps to install and configure the Prettier code formatting tool
+for use in a Meteor project are listed below.
+They assume using Svelte as the web framework.
+When this is not the case, the Svelte-specific parts can be omitted.
 
 - Enter `npm install prettier prettier-plugin-svelte`
 
@@ -528,7 +582,8 @@ To use Prettier in a Meteor project that uses Svelte:
   "format": "prettier --write '{client,imports,server}/**/*.{css,html,js,svelte}'",
   ```
 
-- Create the file `.prettierrc` containing the following:
+- Create the file `.prettierrc` containing
+  personal preferences like the following:
 
   ```json
   {
@@ -1045,14 +1100,14 @@ this ensures that they are built using the same C libraries.
      ```
 
 1. Make the app more secure by moving database interactions to the server.
-   This is accomplished by implemented "methods"
+   This is accomplished by implementing Methods
    that are invoked by client-side code.
    Client code invokes them using `Meteor.call(name, data, callback)`
    which makes a Remote Procedure Call (RPC) using WebSockets,
    not by sending an HTTP request.
    The callback function is passed an error description and a result.
    If the call succeeds, the error description is undefined
-   and the result is set to whatever value the method returns.
+   and the result is set to whatever value the Method returns.
    If the call fails, the error description is set to an object
    that contains the properties
    `error` (an HTTP status code even though HTTP isn't used),
@@ -1068,7 +1123,7 @@ this ensures that they are built using the same C libraries.
 
    - Enter `meteor remove insecure`
 
-   - Define server-side methods by modifying `imports/task.js`
+   - Define server-side Methods by modifying `imports/task.js`
      to match the following:
 
      ```js
@@ -1234,28 +1289,31 @@ this ensures that they are built using the same C libraries.
 
 ### Building and Deploying
 
-To build the app for deployment, enter `meteor build {dir-name}`.
+To build a Meteor app for deployment,
+cd to the root project directory and enter `meteor build {dir-name}`.
 This creates the specified directory if it doesn't exist
-and creates a TAR file inside it named `{project-name}.tar.gz`.
-This contains a single directory named `bundle` which contains
+and creates a TAR file inside the directory named `{project-name}.tar.gz`.
+The TAR file contains a single directory named `bundle` which contains
 all the files for the client-side and server-side of the application.
-
 Include the `--architecture` option to build for a specific architecture.
-
 For help on the build command, enter `meteor help build`.
 
 To deploy the app:
 
-1. Copy the TAR file to a server.
-1. SSH to the server.
+1. Copy the TAR file to a server, perhaps using the `scp` command.
+1. Start a terminal session on the server using the `ssh` command.
 1. Verify that a recent version of Node.js is installed.
 1. Un-tar the file by entering `tar zxf {project-name}.tar.gz`
 1. Enter `cd {project-name}/programs/server`
 1. Enter `npm install`
 1. Set the `MONGO_URL` environment variable to `mongodb://localhost:27017/myapp`
-1. Set the `ROOT_URL` environment variable to `http://my-app.com`
+1. Set the `ROOT_URL` environment variable to `http://myapp.com`
 1. Enter `node main.js` to start the server.
 
-Other alternatives for deploying Meteor apps include Galaxy and Meteor Up.
-Meteor Up (<http://meteor-up.com/>), a.k.a mup, can be used to
-deploy a Meteor app to any server to which you can ssh.
+TODO: What should the value of "myapp" be in the environment variables.
+
+Other alternatives for deploying Meteor apps include
+Galaxy (<https://www.meteor.com/hosting>
+and Meteor Up (<http://meteor-up.com/>).
+Meteor Up, a.k.a mup, can be used to deploy a Meteor app
+to any server to which you can `ssh`.
