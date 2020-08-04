@@ -169,7 +169,8 @@ It can be called any number of times to register additional methods.
 The methods can have any number of parameters with any JavaScript types.
 
 The `check` function in the `meteor/check` package
-can be used to check the types of parameters.
+can be used to check the types of parameters and runtime.
+Note that TypeScript types are only checked at compile-time.
 It throws a `Match.Error` if unexpected types are passed.
 For details on the `check` function,
 see <https://docs.meteor.com/api/check.html>.
