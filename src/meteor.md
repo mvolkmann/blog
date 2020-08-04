@@ -267,7 +267,7 @@ Meteor.methods({
 Add the following near the top of `server/main.js` to invoke the code above:
 
 ```js
-import '../imports/methods';
+import '../imports/methods.js';
 ```
 
 To call the `sum` Method from client code, add the following
@@ -654,11 +654,12 @@ When packages have binary dependencies,
 this ensures that they are built using the same C libraries.
 
 1. Enter `meteor npm install svelte`
-1. Add some Meteor packages by entering
+1. Add some Meteor packages by entering  
    `meteor add svelte:compiler rdb:svelte-meteor-data`
-1. Remove a package that will no longer be used by entering
+1. Remove a package that will no longer be used by entering  
    `meteor remove blaze-html-templates`
-1. Add a replacement Meteor package by entering `meteor add static-html`
+1. Add a replacement Meteor package by entering  
+   `meteor add static-html`
 1. Replace the content of `client/main.html` with the following:
 
    ```html
@@ -718,21 +719,26 @@ this ensures that they are built using the same C libraries.
      <header>
        <h1>Todo App</h1>
      </header>
-     <ul>
-       {#each getTasks() as task}
-       <Task task="{task}" />
-       {/each}
-     </ul>
+     <section>
+       <ul>
+         {#each getTasks() as task}
+         <Task {task} />
+         {/each}
+       </ul>
+     </section>
    </div>
    ```
 
    {% endraw %}
+
+   At this point the app should display a basic task list.
 
 1. Copy the CSS from
    {% aTargetBlank
     'https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css',
     'here' %}.
    into `client/main.css`.
+   Now the task list looks nice.
 
 1. Create a top-level project directory named `imports`.
 
@@ -755,7 +761,7 @@ this ensures that they are built using the same C libraries.
 
    ```js
    import {useTracker} from 'meteor/rdb:svelte-meteor-data';
-   import {Tasks} from '../imports/tasks.js'; // creates local collection cache
+   import {Tasks} from '../imports/tasks.js';
    ```
 
 1. Replace the `getTasks` function in `client/App.svelte` with the following:
@@ -768,16 +774,21 @@ this ensures that they are built using the same C libraries.
 
 1. Replace the call to `getTasks()` in `client/App.svelte` with `$tasks`.
 
+   The UI will no longer display any tasks because tasks are being
+   retrieved from MongoDB and it does not currently contain any tasks.
+
 1. Insert some tasks using the MongoDB console by entering the following:
 
    ```bash
    meteor mongo
    db.tasks.insert({ text: "buy milk" })
+   db.tasks.insert({ text: "take out trash" })
    ```
 
-   Note that the UI updates automatically to show this todo item.
+   Note that the UI updates automatically to show these new tasks.
 
-1. Add the following in `client/App.svelte` after the `header` element:
+1. Add the following in `client/App.svelte` as the first child of
+   the `section` element to prepare for adding tasks in the UI:
 
    ```html
    <form on:submit|preventDefault="{addTask}">
@@ -786,7 +797,7 @@ this ensures that they are built using the same C libraries.
    </form>
    ```
 
-1. Add the following inside the `script` tag in `client/App.svelte`:
+1. Add the following inside the `script` element in `client/App.svelte`:
 
    ```js
    let text = '';
@@ -810,10 +821,11 @@ this ensures that they are built using the same C libraries.
 
    Now new tasks can be added by entering text in the input and
    either pressing the "Add" button or pressing the return key.
+
    Meteor keeps all clients in sync. To see this,
    open a second web browser or another window in the same web browser
    and browse localhost:3000.
-   Add a todo in either browser window and notice that it appears in both.
+   Add a task in either browser window and notice that it appears in both.
 
 1. Add the ability to mark tasks as done and delete them
    by changing `client/Task.svelte` to match the following:
@@ -861,22 +873,24 @@ this ensures that they are built using the same C libraries.
    </style>
    ```
 
+   Now tasks can be marked as done and they can be deleted.
+
 1. Show the number of remaining tasks and total tasks in the heading
    by making the following changes in `client/App.svelte`:
 
-   - Add the following in the `script` tag:
+   - Add the following in the `script` element:
 
      ```js
      $: remaining = $tasks.filter(t => !t.done).length;
      ```
 
-   - Add the following after the `header` tag:
+   - Add the following as the new first child of the `section` element:
 
      ```html
      <p class="stats">{remaining} of {$tasks.length} remaining</p>
      ```
 
-   - Add the following inside the `style` tag:
+   - Add the following inside the `style` element:
 
      ```css
      .stats {
@@ -884,10 +898,13 @@ this ensures that they are built using the same C libraries.
      }
      ```
 
+     Now when tasks are added, toggled between done and not done, and
+     deleted, the number of remaining tasks and total tasks is updated.
+
 1. Add the ability to only display tasks that are not done
    by making the following changes in `client/App.svelte`:
 
-   - Add the following variable declaration in the `script` tag:
+   - Add the following variable declaration in the `script` element:
 
      ```js
      let hideCompleted = false;
@@ -914,13 +931,15 @@ this ensures that they are built using the same C libraries.
 
      {% endraw %}
 
+     Now when the "Hide Completed Tasks" checkbox is checked,
+     only tasks that are not done are displayed.
+
 1. Add support for user accounts by doing the following:
 
-   - Enter `meteor add accounts-ui accounts-password`
+   - Add some Meteor packages by entering
+     `meteor add accounts-ui accounts-password svelte:blaze-integration`
 
-   - Enter `meteor add svelte:blaze-integration`
-
-   - Create the file `imports/account-config.js` with the following content:
+   - Create the file `client/account-config.js` with the following content:
 
      ```js
      import {Accounts} from 'meteor/accounts-base';
@@ -934,7 +953,7 @@ this ensures that they are built using the same C libraries.
    - Add the following near the top of `client/main.js`:
 
      ```js
-     import '../imports/accounts-config.js';
+     import './accounts-config.js';
      ```
 
    - Modify the `client/App.svelte` file to match the following:
@@ -960,6 +979,8 @@ this ensures that they are built using the same C libraries.
        const projection = {sort: {createdAt: -1}};
        // tasks is a store
        $: tasks = useTracker(() => Tasks.find(query, projection).fetch());
+       //TODO: Can you use this instead?
+       //TODO: $: tasks = Tasks.find(query, projection);
 
        $: remaining = $tasks.filter(t => !t.done).length;
 
@@ -985,12 +1006,12 @@ this ensures that they are built using the same C libraries.
          {#if $user}
          <p class="stats>{remaining} of {$tasks.length} remaining</p>
 
-         <form on:submit|preventDefault="{addTask}">
-           <input placeholder="todo text" bind:value="{text}" />
+         <form on:submit|preventDefault={addTask}>
+           <input placeholder="todo text" bind:value={text} />
            <button>Add</button>
 
            <label className="hide-completed">
-             <input type="checkbox" bind:checked="{hideCompleted}" />
+             <input type="checkbox" bind:checked={hideCompleted} />
              Hide Completed Tasks
            </label>
          </form>
@@ -1040,19 +1061,23 @@ this ensures that they are built using the same C libraries.
 
      {% endraw %}
 
-     We now have the ability to create accounts, sign in,
-     change the password of the signed in user, and sign out.
+     Now users must create an account and sign in before they can
+     view, add, and modify tasks.
+     They can also change their password and sign out.
 
 1. Add support for "forgot password" emails.
+
    This will allow users to click a "Forgot password" link
    in the "Sign in" dialog which changes the dialog content
    to prompt for an email address.
    If a user account exists for the email address,
-   it is sent an email containing a link that the user can click
+   an email is sent containing a link that the user can click
    to reset their password.
    After doing so they are immediately signed in.
 
-   - Enter `meteor add email`.
+   - Add another Meteor packages by entering  
+     `meteor add email`.
+
    - Create the file `secrets.json` in the project root directory
      with content like the following:
 
@@ -1069,8 +1094,12 @@ this ensures that they are built using the same C libraries.
 
      Note that the last two values above are specific to using
      a Google G Suite account for sending email.
+     The values will differ if you are using a different email service.
+     Another service to consider is
+     {% aTargetBlank 'https://mailchimp.com/', 'MailChimp' %}.
 
-   - If using Git, add `secrets.json` to the `.gitignore` file
+   - If you are saving the project in a Git repository,
+     add `secrets.json` to the `.gitignore` file
      so it is not added to the repository for others to see.
 
    - Create the file `server/accounts-setup.js` with the following content:
@@ -1079,7 +1108,7 @@ this ensures that they are built using the same C libraries.
      import {Accounts} from 'meteor/accounts-base';
      import secrets from '../secrets.json';
 
-     const siteName = 'Todos by Mark V.';
+     const siteName = 'Todos by Mark';
      Accounts.emailTemplates.siteName = siteName;
 
      const from = `${secrets.MAIL_NAME}<${secrets.MAIL_USER}@${secrets.MAIL_USER_DOMAIN}>`;
@@ -1111,36 +1140,44 @@ this ensures that they are built using the same C libraries.
      ```
 
 1. Make the app more secure by moving database interactions to the server.
+
    This is accomplished by implementing Methods
    that are invoked by client-side code.
-   Client code invokes them using `Meteor.call(name, data, callback)`
+   It does this by calling `Meteor.call(name, data, callback)`
    which makes a Remote Procedure Call (RPC) using WebSockets,
    not by sending an HTTP request.
+
    The callback function is passed an error description and a result.
-   If the call succeeds, the error description is undefined
+   If the call succeeds, the error description is `undefined`
    and the result is set to whatever value the Method returns.
    If the call fails, the error description is set to an object
    that contains the properties
    `error` (an HTTP status code even though HTTP isn't used),
    `reason` (concise message), `message` (long message), and more.
-   It does not throw a JavaScript Error, so try/catch cannot be used.
+   It does not throw a JavaScript `Error`, so try/catch cannot be used.
+
    An issue with using Meteor Methods instead of REST services
-   is that they really can only be called from Meteor apps.
+   is that they can only be called from Meteor apps.
+
    Methods that throw should do so using
    `throw new Meteor.error(methodName, message)`.
-   Throwing a normal JavaScript Error will not return the message to the client.
+   Throwing a normal JavaScript `Error` will not
+   return a detailed error message to the client.
 
    TODO: Add information about "method retries" from <https://guide.meteor.com/methods.html#retries>.
 
-- Enter `meteor remove insecure`
+- Remove a Meteor package by entering  
+  `meteor remove insecure`
 
-- Define server-side Methods by modifying `imports/task.js`
+- Define Methods by modifying `imports/tasks.js`
   to match the following:
 
   ```js
   import {check} from 'meteor/check';
   import {Meteor} from 'meteor/meteor';
-  import {Tasks} from '../imports/tasks';
+  import {Tasks} from '../imports/tasks.js';
+
+  export const Tasks = new Mongo.Collection('tasks');
 
   Meteor.methods({
     addTask(text) {
@@ -1176,14 +1213,14 @@ this ensures that they are built using the same C libraries.
   to invoke the code above:
 
   ```js
-  import './methods';
+  import '../imports/tasks.js';
   ```
 
 - Create the file `client/util.js` containing the following:
 
   ```js
   export function handleError(err) {
-    // Replace this will better error handling.
+    // Replace this will better error handling later.
     if (err) alert(err.message);
   }
   ```
@@ -1191,7 +1228,7 @@ this ensures that they are built using the same C libraries.
 - Add the following `imports` in `client/App.svelte` and `client/Task.svelte`:
 
   ```js
-  import {handleError} from './util';
+  import {handleError} from './util.js';
   ```
 
 - Change the call to `Tasks.insert` in the `addTask` function
@@ -1215,15 +1252,17 @@ this ensures that they are built using the same C libraries.
   Meteor.call('setDone', task._id, !task.done, handleError);
   ```
 
-- Remove the import of `Tasks` from `client/Task.svelte`
-  since it is no longer used.
+- Remove the import of `Meteor` and `Tasks` from `client/Task.svelte`
+  since they are no longer used.
 
 1. Explicitly specify what data the server sends to the client
-   so we can separate todos by user.
-   They will still be stored in the same MongoDB collection,
-   but each user will only see and operate on the todos they created.
+   so we can separate tasks by user.
 
-   - Enter `meteor remove autopublish`
+   The tasks will still be stored in the same MongoDB collection,
+   but each user will only see and operate on the tasks they created.
+
+   - Remove a Meteor package by entering  
+     `meteor remove autopublish`
 
    - Add the following after the imports in `server/tasks.js`
      to publish only tasks that belong to the logged in user:
@@ -1239,19 +1278,22 @@ this ensures that they are built using the same C libraries.
      }
      ```
 
-   - Add the following `import` in `client/App.js`:
+   - Add the following `import` in `client/App.svelte`:
 
      ```js
      import {onMount} from 'svelte';
      ```
 
-   - Add the following in the `script` tag of `client/App.js`:
+   - Add the following in the `script` element of `client/App.svelte`:
 
      ```js
      onMount(() => Meteor.subscribe('tasks'));
      ```
 
-1. Require account email validation before tasks can be entered.
+   Now users only see and operate on their own tasks.
+
+1. Require account email validation before users
+   can view and operate on their tasks.
 
    - Add the following at the bottom of `server/account-setup.js`:
 
@@ -1286,7 +1328,7 @@ this ensures that they are built using the same C libraries.
    {% raw %}
 
    - Change `{#if user}` to `{#if $user && emailVerified}`
-   - Add the following before `{:else}`:
+   - Add the following before the `{:else}` line:
 
      ```js
      {:else if $user && !emailVerified}
@@ -1298,7 +1340,20 @@ this ensures that they are built using the same C libraries.
 
    {% endraw %}
 
+   Now after a user creates a new account,
+   they must verify their email address by clicking a link
+   in an email they receive before they can start adding tasks.
+
+   That's it! We now have a functioning Todo app
+   that supports user accounts and
+   tasks are persisted in a database.
+   I can't imagine doing all of this in less code
+   using anything other than Meteor!
+
 ### Building and Deploying
+
+Now that we have our app running locally,
+we are ready to deploy it to a server for real users can access it.
 
 To build a Meteor app for deployment,
 cd to the root project directory and enter `meteor build {dir-name}`.
