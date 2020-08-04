@@ -146,23 +146,43 @@ To delete all the documents in a collection, enter `db.{coll-name}.drop()`.
 
 ### Methods
 
-Meteor Methods are server-side functions
-that can be called from client-side code.
-This is done with a Remote Procedure Call (RPC) that uses WebSockets.
-One use for this is updating collections.
+Meteor Methods are functions that typically
+reside on both the client-side and server-side.
+They are meant to be called from client-side code.
+Server-side implementations are invoked using a
+Remote Procedure Call (RPC) that uses WebSockets.
+This is alternative to REST calls implemented using HTTP.
+
+Common uses for methods include
+inserting documents in collections,
+deleting documents from collections,
+and updating documents in collection.
+Retrieving documents from collections
+is typically done by subscribing to them.
 
 To implement a method in server-side code,
 pass an object literal to `Meteor.methods`
 where the properties are method definitions.
 This registers the methods with Meteor's DDP system.
+It can be called any number of times to register additional methods.
 
 The methods can have any number of parameters with any JavaScript types.
 
 The `check` function in the `meteor/check` package
-can be used to check the types of the parameters.
-It returns an error if unexpected types are passed.
+can be used to check the types of parameters.
+It throws a `Match.Error` if unexpected types are passed.
+For details on the `check` function,
+see <https://docs.meteor.com/api/check.html>.
+To report other parameter validation errors,
+use `throw new ValidationError(message)`.
 
-To throw an error, use `throw new Meteor.Error(methodName, message)`.
+For most other errors, use
+`throw new Meteor.Error(errorId, message[, details])`.
+The error id is typically the method name
+followed by a period and an error name.
+If instead a generic JavaScript error is thrown using
+`throw new Error(message)`, the details will only appear on the server
+and clients will only be notified that an internal server error occurred.
 
 To call a method from client code,
 import `Meteor` from the `meteor/meteor` package
@@ -170,23 +190,27 @@ and call `Meteor.call` passing it the name of a Method,
 arguments, and a callback function.
 This triggers the method call lifecycle which has six parts.
 
-1. The method call is simulated on the client
+1. If the method is defined on the client, it is executed there,
+   typically updating Minimongo,
    and corresponding UI updates are made.
-   This is why Meteor Methods must be defined
-   on both the client and server sides!
 1. A JSON-based DDP message is constructed and sent to the server.
-   This includes the method name, arguments, and generated method id.
+   This includes the method name, arguments, and a generated method id.
 1. The method executes on the server, possibly updating MongoDB.
 1. A return value is sent to the client in a "result" message
    that includes the previously generated method id and the result.
 1. Any affected data in Minimongo is updated, but the UI is not yet updated.
 1. The callback function passed to `Meteor.call` is passed
    an error description (if there was an error) and the result.
-   Now the UI can be updated using data from Minimongo.
+   Now the UI is updated using data from Minimongo.
 
 Here is an example of a trivial method that simply adds two numbers.
+This is not a typical method because it does not update a collection.
+To verify that it is called on both the client and server side,
+a `console.log` call is added.
+It will be output in the DevTools console AND
+in the terminal window where the server is running.
 
-Create the file `server/methods.js` containing the following:
+Create the file `imports/methods.js` containing the following:
 
 ```js
 import {check} from 'meteor/check';
@@ -194,7 +218,8 @@ import {Meteor} from 'meteor/meteor';
 
 Meteor.methods({
   sum(n1, n2) {
-    check(n1, Number);
+    console.log('sum called; on server?', Meteor.isServer);
+    check(n1, Number); // argument type validation
     check(n2, Number);
     return n1 + n2;
   }
@@ -204,7 +229,7 @@ Meteor.methods({
 Add the following near the top of `server/main.js` to invoke the code above:
 
 ```js
-import './methods';
+import '../imports/methods';
 ```
 
 To call the `sum` method from client code, add the following:
@@ -238,6 +263,10 @@ export function call(name, ...args) {
 }
 ```
 
+An advantage of calling methods in this way is that
+the result of one call can be used to form the arguments of another call
+without resorting to nested callback functions.
+
 Using this new `call` function, our `sum` Meteor method
 can be called from an `async` function as follows:
 
@@ -250,7 +279,21 @@ try {
 }
 ```
 
-To view the messages that are sent use WebSockets in Chrome:
+A Meteor Method can return a `Promise`.
+It will wait for the `Promise` to resolve or reject
+before returning a result or error to the client.
+
+### Viewing WebSocket Messages
+
+Chrome DevTools can be used to view the WebSocket messages
+that are sent by Meteor.
+Like HTTP messages, they appear on the Network tab.
+But unlike HTTP messages where there is a separate entry for each
+request/response pair,
+there is only a single WebSocket entry per connection.
+Selecting a connection displays all the messages sent over that connection.
+
+To view WebSocket messages:
 
 1. Open the Chrome DevTools.
 1. Select the "Network" tab.
@@ -267,9 +310,10 @@ a `msg` property and other properties that may include
 
 ### Optimistic UI
 
-Optimistic UI is a feature of Meteor that enables a UI to
-respond to user interactions without waiting for server responses.
-This is satisfied by four elements.
+Optimistic UI is a feature of Meteor, and also of Apollo GraphQL,
+that enables a UI to respond to user interactions
+without waiting for server responses.
+This is satisfied by the following sequence.
 
 1. The UI is rendered on the client rather than
    waiting for the server to return HTML or data.
@@ -297,6 +341,63 @@ This is satisfied by four elements.
 All of this functionality is provided by default.
 The only requirement is for the client to
 use Meteor Methods to request data changes.
+
+To see this in action, we can modify a Meteor Method to
+return a different result when run on the client versus the server.
+This is not typical, but it is useful to demonstrate optimistic UI.
+
+Here is a simplified example from the upcoming Todo app.
+It inserts a document in the "tasks" collection.
+When run on the client it uses the text passed as an argument.
+When run on the server it waits three seconds
+and then uses the uppercase version of the text.
+The Method first runs on the client and
+the UI renders a new task with the entered text.
+The Method then runs on the server.
+After the timeout it sends a message to the client that
+tells it to update Minimongo using the uppercase version of the text.
+The UI then updates to show the uppercase text.
+
+```js
+Meteor.methods({
+  addTask(text) {
+    check(text, String);
+    return new Promise(resolve => {
+      if (Meteor.isServer) {
+        Meteor.setTimeout(() => {
+          // Tasks is a collection.
+          const id = Tasks.insert({text: text.toUpperCase()});
+          resolve(id);
+        }, 3000);
+      } else {
+        const id = Tasks.insert({text});
+        resolve(id);
+      }
+    });
+  }
+});
+```
+
+It is possible to define a Method only on the server-side,
+thereby opting out of optimistic UI.
+The UI will not update until the Method finishes executing on the server
+and sends back a result message.
+This is because Minimongo will not be updated
+until the result message is received.
+
+Here is an example from the upcoming Todo app.
+It deletes a task with a given id.
+
+```js
+if (Meteor.isServer) {
+  Meteor.methods({
+    deleteTask(taskId) {
+      check(taskId, String);
+      Tasks.remove(taskId);
+    }
+  });
+}
+```
 
 ### Tracker
 
@@ -966,7 +1067,7 @@ this ensures that they are built using the same C libraries.
 
    - Enter `meteor remove insecure`
 
-   - Define server-side methods by modifying `server/methods.js`
+   - Define server-side methods by modifying `imports/task.js`
      to match the following:
 
      ```js
