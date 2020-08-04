@@ -322,6 +322,34 @@ A Method can return a `Promise`.
 Meteor will wait for the `Promise` to resolve or reject
 before returning a result or an error to the client.
 
+### Method Retries
+
+If a client calls a Method and their internet connection is lost
+before a result is returned, Meteor will remember this
+and will make the call again when connectivity is restored.
+This presents an issue when Methods are not idempotent.
+Being idempotent means that the when a call is repeated,
+no additional changes are made in the database.
+
+Consider typical CRUD operations.
+
+- Creating a new document in a collection using the same data multiple times
+  is typically problematic and it's up to you to guard against this.
+  For example, in a Todo app we could reject attempts
+  to add multiple tasks with the same text.
+
+- Retrieving a document from a collection multiple times is not a problem.
+
+- Updating a document multiple times is not a problem as long as
+  the document hasn't been modified using different data in the interim.
+  This can be addressed by adding the last update timestamp to each document
+  and verifying that it matches what is in the data for an update.
+  When the timestamp does not match, we can assume the document
+  has been updated since we last retrieved it and reject the update.
+
+- Deleting a document multiple times is not a problem as long as
+  attempts to delete a non-existent document are not treated as errors.
+
 ### Viewing WebSocket Messages
 
 Chrome DevTools can be used to view the WebSocket messages
@@ -1163,8 +1191,6 @@ this ensures that they are built using the same C libraries.
    `throw new Meteor.error(methodName, message)`.
    Throwing a normal JavaScript `Error` will not
    return a detailed error message to the client.
-
-   TODO: Add information about "method retries" from <https://guide.meteor.com/methods.html#retries>.
 
 - Remove a Meteor package by entering  
   `meteor remove insecure`
