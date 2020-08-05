@@ -655,7 +655,7 @@ For details on the Meteor packages included by default and with each option see
 
 Enter `cd todos`, start the server by entering `meteor`,
 and browse localhost:3000.
-The following page will be rendered.
+The following page will be rendered:
 
 ![cover](/blog/assets/meteor-default-page.png)
 
@@ -703,7 +703,7 @@ this ensures that they are built using the same C libraries.
 
    ```js
    import {Meteor} from 'meteor/meteor';
-   import App from '../imports/ui/App.svelte';
+   import App from './App.svelte';
 
    Meteor.startup(() => {
      new App({target: document.getElementById('app')});
@@ -722,9 +722,19 @@ this ensures that they are built using the same C libraries.
          day: 'numeric',
          year: 'numeric'
        });
+
+     // These are Svelte "reactive declarations".
+     $: ({createdAt, text} = task);
+     $: item = text + (createdAt ? ` - added ${formatDate(createdAt)}` : '');
    </script>
 
-   <li>{task.text} - added {formatDate(task.createdAt)}</li>
+   <li>{item}</li>
+
+   <style>
+     li {
+       padding-left: 0;
+     }
+   </style>
    ```
 
 1. Create the file `client/App.svelte` containing the following:
@@ -736,10 +746,11 @@ this ensures that they are built using the same C libraries.
      import Task from './Task.svelte';
 
      function getTasks() {
+       const createdAt = new Date();
        return [
-         {_id: 1, text: 'This is task 1'},
-         {_id: 2, text: 'This is task 2'},
-         {_id: 3, text: 'This is task 3'}
+         {_id: 1, text: 'This is task 1', createdAt},
+         {_id: 2, text: 'This is task 2', createdAt},
+         {_id: 3, text: 'This is task 3', createdAt}
        ];
      }
    </script>
@@ -759,18 +770,21 @@ this ensures that they are built using the same C libraries.
 
    {% endraw %}
 
-   At this point the app should display a basic task list.
+   At this point the app should display the following basic task list:
 
-1. Copy the CSS from
+   ![Todo App after step 8](/blog/assets/meteor-todo-1.png)
+
+1. Replace the contents of `client/main.css` with what is found at
    {% aTargetBlank
     'https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css',
     'here' %}.
-   into `client/main.css`.
    Now the task list looks nice.
+
+   ![Todo App after step 9](/blog/assets/meteor-todo-2.png)
 
 1. Create a top-level project directory named `imports`.
 
-1. Create `imports/tasks.js` containing the following:
+1. Create the file `imports/tasks.js` containing the following:
 
    ```js
    import {Mongo} from 'meteor/mongo';
@@ -815,15 +829,7 @@ this ensures that they are built using the same C libraries.
 
    Note that the UI updates automatically to show these new tasks.
 
-1. Add the following in `client/App.svelte` as the first child of
-   the `section` element to prepare for adding tasks in the UI:
-
-   ```html
-   <form on:submit|preventDefault="{addTask}">
-     <input placeholder="todo text" bind:value="{text}" />
-     <button>Add</button>
-   </form>
-   ```
+   ![Todo App after step 16](/blog/assets/meteor-todo-3.png)
 
 1. Add the following inside the `script` element in `client/App.svelte`:
 
@@ -836,6 +842,16 @@ this ensures that they are built using the same C libraries.
    }
    ```
 
+1. Add the following in `client/App.svelte` as the first child of
+   the `section` element to prepare for adding tasks in the UI:
+
+   ```html
+   <form on:submit|preventDefault="{addTask}">
+     <input placeholder="todo text" bind:value="{text}" />
+     <button>Add</button>
+   </form>
+   ```
+
 1. Add the following after the HTML in `client/App.svelte`:
 
    ```css
@@ -844,11 +860,17 @@ this ensures that they are built using the same C libraries.
        margin-top: 0;
        padding-bottom: 1rem;
      }
+
+     section {
+       padding: 1rem;
+     }
    </style>
    ```
 
    Now new tasks can be added by entering text in the input and
    either pressing the "Add" button or pressing the return key.
+
+   ![Todo App after step 19](/blog/assets/meteor-todo-4.png)
 
    Meteor keeps all clients in sync. To see this,
    open a second web browser or another window in the same web browser
@@ -877,13 +899,14 @@ this ensures that they are built using the same C libraries.
      function toggleDone() {
        Tasks.update(task._id, {$set: {done: !task.done}});
      }
+
+     $: ({createdAt, text} = task);
+     $: item = text + (createdAt ? ` - added ${formatDate(createdAt)}` : '');
    </script>
 
    <li>
      <input type="checkbox" checked="{task.done}" on:click="{toggleDone}" />
-     <span class:done="{task.done}">
-       {task.text} - added {formatDate(task.createdAt)}
-     </span>
+     <span class:done="{task.done}">{item}</span>
      <!-- Using Unicode trash can -->
      <button on:click="{deleteTask}">&#x1f5d1;</button>
    </li>
@@ -898,10 +921,17 @@ this ensures that they are built using the same C libraries.
        opacity: 0.3;
        text-decoration: line-through;
      }
+
+     li {
+       padding-left: 0;
+     }
    </style>
    ```
 
-   Now tasks can be marked as done and they can be deleted.
+   Now tasks can be marked as done by clicking the checkbox in front of them
+   and they can be deleted by clicking the trash can icon after them.
+
+   ![Todo App after step 20](/blog/assets/meteor-todo-5.png)
 
 1. Show the number of remaining tasks and total tasks in the heading
    by making the following changes in `client/App.svelte`:
@@ -926,8 +956,10 @@ this ensures that they are built using the same C libraries.
      }
      ```
 
-     Now when tasks are added, toggled between done and not done, and
-     deleted, the number of remaining tasks and total tasks is updated.
+   Now when tasks are added, toggled between done and not done, and
+   deleted, the number of remaining tasks and total tasks is updated.
+
+   ![Todo App after step 21](/blog/assets/meteor-todo-6.png)
 
 1. Add the ability to only display tasks that are not done
    by making the following changes in `client/App.svelte`:
@@ -938,7 +970,7 @@ this ensures that they are built using the same C libraries.
      let hideCompleted = false;
      ```
 
-   - Add the following in side the `form` element:
+   - Add the following inside the `form` element after the "Add" button:
 
      ```html
      <label className="hide-completed">
@@ -959,8 +991,10 @@ this ensures that they are built using the same C libraries.
 
      {% endraw %}
 
-     Now when the "Hide Completed Tasks" checkbox is checked,
-     only tasks that are not done are displayed.
+   Now when the "Hide Completed Tasks" checkbox is checked,
+   only tasks that are not done are displayed.
+
+   ![Todo App after step 22](/blog/assets/meteor-todo-7.png)
 
 1. Add support for user accounts by doing the following:
 
