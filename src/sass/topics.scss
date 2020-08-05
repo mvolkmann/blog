@@ -26,6 +26,7 @@ body > main {
 
     a {
       color: var(--accent-color);
+      cursor: pointer;
       text-decoration: none;
 
       &.active {

@@ -103,10 +103,6 @@ So there is no longer a requirement to have an `imports` directory.
 However, it is still a useful location for
 files that are shared between client and server code.
 
-### Blaze Web Framework
-
-TODO: Learn something about this
-
 ### Collections
 
 The client-side of Meteor applications can obtain data in many ways
