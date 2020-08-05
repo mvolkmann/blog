@@ -179,7 +179,10 @@ to distinguish it from normal JavaScript methods.
 Methods are meant to be called from client-side code.
 Server-side implementations are invoked using a
 Remote Procedure Call (RPC) that utilizes WebSockets.
-This is alternative to REST calls implemented using HTTP.
+
+Meteor Methods are an alternative to REST calls implemented using HTTP.
+An issue with using Meteor Methods instead of REST
+is that they can only be called from Meteor apps.
 
 Common uses for Methods include
 inserting a document in a collection,
@@ -224,7 +227,8 @@ This triggers the Method call lifecycle which has six parts.
 
 1. If the Method is defined on the client, it is executed there.
    This typically updates Minimongo and corresponding UI updates are made.
-1. A JSON-based DDP message is constructed and sent to the server.
+1. A JSON-based DDP message is constructed and sent to the server
+   using a WebSocket connection.
    This includes a message name (`msg` property set to "method"),
    Method name (in the `method` property),
    arguments (in the `params` property),
@@ -238,6 +242,19 @@ This triggers the Method call lifecycle which has six parts.
 1. The callback function passed to `Meteor.call` is passed
    an error description (if there was an error) and the result value.
    Now the UI is updated using data from Minimongo.
+
+If the call succeeds, the error description is `undefined`
+and the result is set to whatever value the Method returns.
+If the call fails, the error description is set to an object
+that contains the properties
+`error` (an HTTP status code even though HTTP isn't used),
+`reason` (concise message), `message` (long message), and more.
+It does not throw a JavaScript `Error`, so try/catch cannot be used.
+
+Methods that throw should do so using
+`throw new Meteor.error(methodName, message)`.
+Throwing a normal JavaScript `Error` will not
+return a detailed error message to the client.
 
 Let's implement a simple Method that just adds two numbers.
 It is not a typical Method because it does not update a collection.
@@ -639,55 +656,65 @@ The Meteor web site contains several tutorials
 that provide introductions to using Meteor.
 
 Let's walk through the steps to build a Todo app using Meteor.
-Code for the final version of the app can be found in
+This is a modified version of the Todo app presented at the Meteor site
+that demonstrates additional features.
+Code for the final version of this app can be found in
 {% aTargetBlank 'https://github.com/mvolkmann/meteor-svelte-todos', 'GitHub' %}.
 
-Create the app starting point by entering `meteor create todos`.
-To use a non-default app template, add one of the following options
-after `create`:
-`--bare`, `--minimal`, `--full`, `--react`, or `--typescript`.
-Interestingly none of these options corresponds to the default.
-The default option produces applications that are insecure
-and are therefore only for prototyping.
-They allow all MongoDB updates to be initiated from clients.
-For details on the Meteor packages included by default and with each option see
-{% aTargetBlank 'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
+1. Create the app starting point by entering `meteor create todos`.
 
-Enter `cd todos`, start the server by entering `meteor`,
-and browse localhost:3000.
-The following page will be rendered:
+   To use a non-default app template, add one of the following options
+   after `create`:
+   `--bare`, `--minimal`, `--full`, `--react`, or `--typescript`.
+   Interestingly none of these options corresponds to the default.
+   The default option produces applications that are insecure
+   and are therefore only for prototyping.
+   They allow all MongoDB updates to be initiated from clients.
+   For details on the Meteor packages included by default and with each option see
+   {% aTargetBlank 'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
 
-![cover](/blog/assets/meteor-default-page.png)
+1. Enter `cd todos`, start the server by entering `meteor`.
 
-Press the "Click Me" button.
-The text "You've pressed the button n times."
-will update to display the number of times it was clicked.
+1. Browse localhost:3000.
 
-The UI is defined by the following files in the `client` directory:
-`main.html`, `main.css`, and `main.js`.
+   The following page will be rendered:
 
-Try editing the file `client/main.html`.
-The browser will updated automatically when the changes are saved.
-Meteor refers to this as "hot code push".
+   ![default Meteor app](/blog/assets/meteor-default-page.png)
 
-Now let's configure the app to use Svelte as its web framework,
-instead of the default Blaze framework.
-Svelte is a good choice due to its use of reactive statements.
-For more information about Svelte, see
-{% aTargetBlank 'https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte', 'my article' %}.
+1. `Press the "Click Me" button multiple times.
 
-It is recommended to use the command `meteor npm` instead of `npm`
-when installing npm packages in a Meteor app.
-When packages have binary dependencies,
-this ensures that they are built using the same C libraries.
+   The text "You've pressed the button n times."
+   will update to display the number of times it was clicked.
+
+   The UI is defined by the following files in the `client` directory:
+   `main.html`, `main.css`, and `main.js`.
+
+1. Try editing the file `client/main.html`.
+   The browser will updated automatically when the changes are saved.
+   Meteor refers to this as "hot code push".
+
+1. Configure the app to use Svelte as its web framework,
+   instead of the default Blaze framework.
+   Svelte is a good choice due to its use of reactive statements.
+   For more information about Svelte, see
+   {% aTargetBlank 'https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte', 'my article' %}.
 
 1. Enter `meteor npm install svelte`
+
+   It is recommended to use the command `meteor npm` instead of `npm`
+   when installing npm packages in a Meteor app.
+   When packages have binary dependencies,
+   this ensures that they are built using the same C libraries.
+
 1. Add some Meteor packages by entering  
    `meteor add svelte:compiler rdb:svelte-meteor-data`
+
 1. Remove a package that will no longer be used by entering  
    `meteor remove blaze-html-templates`
+
 1. Add a replacement Meteor package by entering  
    `meteor add static-html`
+
 1. Replace the content of `client/main.html` with the following:
 
    ```html
@@ -772,7 +799,7 @@ this ensures that they are built using the same C libraries.
 
    At this point the app should display the following basic task list:
 
-   ![Todo App after step 8](/blog/assets/meteor-todo-1.png)
+   ![Todo App after step 14](/blog/assets/meteor-todo-1.png)
 
 1. Replace the contents of `client/main.css` with what is found at
    {% aTargetBlank
@@ -780,7 +807,7 @@ this ensures that they are built using the same C libraries.
     'here' %}.
    Now the task list looks nice.
 
-   ![Todo App after step 9](/blog/assets/meteor-todo-2.png)
+   ![Todo App after step 15](/blog/assets/meteor-todo-2.png)
 
 1. Create a top-level project directory named `imports`.
 
@@ -829,7 +856,7 @@ this ensures that they are built using the same C libraries.
 
    Note that the UI updates automatically to show these new tasks.
 
-   ![Todo App after step 16](/blog/assets/meteor-todo-3.png)
+   ![Todo App after step 22](/blog/assets/meteor-todo-3.png)
 
 1. Add the following inside the `script` element in `client/App.svelte`:
 
@@ -870,7 +897,7 @@ this ensures that they are built using the same C libraries.
    Now new tasks can be added by entering text in the input and
    either pressing the "Add" button or pressing the return key.
 
-   ![Todo App after step 19](/blog/assets/meteor-todo-4.png)
+   ![Todo App after step 25](/blog/assets/meteor-todo-4.png)
 
    Meteor keeps all clients in sync. To see this,
    open a second web browser or another window in the same web browser
@@ -883,6 +910,7 @@ this ensures that they are built using the same C libraries.
    ```html
    <script>
      import {Tasks} from '../imports/tasks.js';
+
      export let task;
 
      function deleteTask() {
@@ -931,7 +959,7 @@ this ensures that they are built using the same C libraries.
    Now tasks can be marked as done by clicking the checkbox in front of them
    and they can be deleted by clicking the trash can icon after them.
 
-   ![Todo App after step 20](/blog/assets/meteor-todo-5.png)
+   ![Todo App after step 26](/blog/assets/meteor-todo-5.png)
 
 1. Show the number of remaining tasks and total tasks in the heading
    by making the following changes in `client/App.svelte`:
@@ -959,7 +987,7 @@ this ensures that they are built using the same C libraries.
    Now when tasks are added, toggled between done and not done, and
    deleted, the number of remaining tasks and total tasks is updated.
 
-   ![Todo App after step 21](/blog/assets/meteor-todo-6.png)
+   ![Todo App after step 27](/blog/assets/meteor-todo-6.png)
 
 1. Add the ability to only display tasks that are not done
    by making the following changes in `client/App.svelte`:
@@ -994,7 +1022,7 @@ this ensures that they are built using the same C libraries.
    Now when the "Hide Completed Tasks" checkbox is checked,
    only tasks that are not done are displayed.
 
-   ![Todo App after step 22](/blog/assets/meteor-todo-7.png)
+   ![Todo App after step 28](/blog/assets/meteor-todo-7.png)
 
 1. Add support for user accounts by doing the following:
 
@@ -1163,7 +1191,7 @@ this ensures that they are built using the same C libraries.
 
    TODO: How can password rules be specified?
 
-1) Add support for "forgot password" emails.
+1. Add support for "forgot password" emails.
 
    This will allow users to click the "Forgot password" link
    in the "Sign in" dialog which changes the dialog content
@@ -1262,117 +1290,98 @@ this ensures that they are built using the same C libraries.
 
 1. Make the app more secure by moving database interactions to the server.
 
-   This is accomplished by implementing Methods
+   This is accomplished by implementing Meteor Methods
    that are invoked by client-side code.
-   It does this by calling `Meteor.call(name, data, callback)`
-   which makes a Remote Procedure Call (RPC) using WebSockets,
-   not by sending an HTTP request.
+   It does this by calling `Meteor.call(name, data, callback)`.
 
-   The callback function is passed an error description and a result.
-   If the call succeeds, the error description is `undefined`
-   and the result is set to whatever value the Method returns.
-   If the call fails, the error description is set to an object
-   that contains the properties
-   `error` (an HTTP status code even though HTTP isn't used),
-   `reason` (concise message), `message` (long message), and more.
-   It does not throw a JavaScript `Error`, so try/catch cannot be used.
+   - Remove a Meteor package by entering  
+     `meteor remove insecure`
 
-   An issue with using Meteor Methods instead of REST services
-   is that they can only be called from Meteor apps.
+   - Define Methods by modifying `imports/tasks.js`
+     to match the following:
 
-   Methods that throw should do so using
-   `throw new Meteor.error(methodName, message)`.
-   Throwing a normal JavaScript `Error` will not
-   return a detailed error message to the client.
+     ```js
+     import {check} from 'meteor/check';
+     import {Meteor} from 'meteor/meteor';
+     import {Mongo} from 'meteor/mongo';
 
-- Remove a Meteor package by entering  
-  `meteor remove insecure`
+     export const Tasks = new Mongo.Collection('tasks');
 
-- Define Methods by modifying `imports/tasks.js`
-  to match the following:
+     Meteor.methods({
+       addTask(text) {
+         check(text, String); // argument type validation
 
-  ```js
-  import {check} from 'meteor/check';
-  import {Meteor} from 'meteor/meteor';
-  import {Tasks} from '../imports/tasks.js';
+         // Make sure the user is logged in before inserting a task.
+         if (!this.userId) throw new Meteor.Error('add-task', 'not-authorized');
 
-  export const Tasks = new Mongo.Collection('tasks');
+         const {username} = Meteor.users.findOne(this.userId);
+         const id = Tasks.insert({
+           text,
+           createdAt: new Date(),
+           owner: this.userId,
+           username
+         });
+         return id;
+       },
 
-  Meteor.methods({
-    addTask(text) {
-      check(text, String); // argument type validation
+       deleteTask(taskId) {
+         check(taskId, String); // argument type validation
+         Tasks.remove(taskId);
+       },
 
-      // Make sure the user is logged in before inserting a task.
-      if (!this.userId) throw new Meteor.Error('add-task', 'not-authorized');
+       setDone(taskId, done) {
+         check(taskId, String); // argument type validation
+         check(done, Boolean); // argument type validation
+         Tasks.update(taskId, {$set: {done}});
+       }
+     });
+     ```
 
-      const {username} = Meteor.users.findOne(this.userId);
-      const id = Tasks.insert({
-        text,
-        createdAt: new Date(),
-        owner: this.userId,
-        username
-      });
-      return id;
-    },
+   - Create the file `client/util.js` containing the following:
 
-    deleteTask(taskId) {
-      check(taskId, String); // argument type validation
-      Tasks.remove(taskId);
-    },
+     ```js
+     export function handleError(err) {
+       // Replace this will better error handling later.
+       if (err) alert(err.message);
+     }
+     ```
 
-    setDone(taskId, done) {
-      check(taskId, String); // argument type validation
-      check(done, Boolean); // argument type validation
-      Tasks.update(taskId, {$set: {done}});
-    }
-  });
-  ```
+   - Add the following `import` in `client/App.svelte` and `client/Task.svelte`:
 
-- Add the following near the top of `server/main.js`
-  to invoke the code above:
+     ```js
+     import {handleError} from './util.js';
+     ```
 
-  ```js
-  import '../imports/tasks.js';
-  ```
+   - Change the call to `Tasks.insert` in the `addTask` function
+     of `client/App.svelte` to the following:
 
-- Create the file `client/util.js` containing the following:
+     ```js
+     Meteor.call('addTask', text, handleError);
+     ```
 
-  ```js
-  export function handleError(err) {
-    // Replace this will better error handling later.
-    if (err) alert(err.message);
-  }
-  ```
+   - Remove the import of `Tasks` from `client/Task.svelte`
+     since it is no longer used and add the following import:
 
-- Add the following `imports` in `client/App.svelte` and `client/Task.svelte`:
+     ```js
+     import {Meteor} from 'meteor/meteor';
+     ```
 
-  ```js
-  import {handleError} from './util.js';
-  ```
+   - Change the call to `Tasks.remove` in the `deleteTask` function
+     of `client/Task.svelte` to the following:
 
-- Change the call to `Tasks.insert` in the `addTask` function
-  of `client/App.svelte` to the following:
+     ```js
+     Meteor.call('deleteTask', task._id, handleError);
+     ```
 
-  ```js
-  Meteor.call('addTask', text, handleError);
-  ```
+   - Change the call to `Tasks.update` in the `toggleDone` function
+     of `client/Task.svelte` to the following:
 
-- Change the call to `Tasks.remove` in the `deleteTask` function
-  of `client/Task.svelte` to the following:
+     ```js
+     Meteor.call('setDone', task._id, !task.done, handleError);
+     ```
 
-  ```js
-  Meteor.call('deleteTask', task._id, handleError);
-  ```
-
-- Change the call to `Tasks.update` in the `toggleDone` function
-  of `client/Task.svelte` to the following:
-
-  ```js
-  Meteor.call('setDone', task._id, !task.done, handleError);
-  ```
-
-- Remove the import of `Meteor` and `Tasks` from `client/Task.svelte`
-  since they are no longer used.
+   Nothing will change in the UI. But client-side code
+   can no longer directly modify the MongoDB database.
 
 1. Explicitly specify what data the server sends to the client
    so we can separate tasks by user.
@@ -1383,7 +1392,8 @@ this ensures that they are built using the same C libraries.
    - Remove a Meteor package by entering  
      `meteor remove autopublish`
 
-   - Add the following after the imports in `server/tasks.js`
+   - Add the following in `imports/tasks.js`
+     after the line that starts with `export const Tasks`
      to publish only tasks that belong to the logged in user:
 
      ```js
@@ -1403,7 +1413,8 @@ this ensures that they are built using the same C libraries.
      import {onMount} from 'svelte';
      ```
 
-   - Add the following in the `script` element of `client/App.svelte`:
+   - Add the following in the `script` element of `client/App.svelte`
+     to subscribe to all tasks that are published:
 
      ```js
      onMount(() => Meteor.subscribe('tasks'));
