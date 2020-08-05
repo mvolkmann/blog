@@ -69,16 +69,16 @@ The key benefits of using Meteor are:
 All of this enables implementing significant functionality
 in a small amount of code.
 
-### Installing Meteor
+### Installing
 
-See {% aTargetBlank 'https://www.meteor.com/install', 'here' %}
-for platform-specific instructions on installing Meteor.
-In Linux or macOS, enter `curl https://install.meteor.com | sh`.
-In Windows, install Chocolatey and enter `choco install meteor`.
+For platform-specific instructions on installing Meteor,
+see {% aTargetBlank 'https://www.meteor.com/install', 'here' %}.
+On Linux or macOS, enter `curl https://install.meteor.com | sh`.
+On Windows, install Chocolatey and enter `choco install meteor`.
 
 This installs several tools used by Meteor including MongoDB and TypeScript.
 
-### Application Directory Structure
+### Directory Structure
 
 The recommended directory structure for Meteor applications
 is described below.
@@ -112,7 +112,7 @@ The data can be stored in clients in many ways including
 JavaScript variables, session storage, and local storage.
 
 The most common way for a Meteor application to store data is in "collections".
-Meteor collections are associated with a MongoDB collection.
+These are associated with a MongoDB collection.
 They can be accessed from both client and server code.
 When data is added to a collection, updated, or deleted,
 client code that uses it typically updates automatically.
