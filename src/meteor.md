@@ -1479,9 +1479,21 @@ Code for the final version of this app can be found in
 
    {% endraw %}
 
-   Now after a user creates a new account,
-   they must verify their email address by clicking a link
-   in an email they receive before they can start adding tasks.
+   Now after a user creates a new account, they will see the following:
+
+   ![Todo App verify email sent](/blog/assets/meteor-todo-verify-email-sent.png)
+
+   The user must must verify their email address by clicking a link
+   in an email they receive like the following
+   before they can start adding tasks.
+
+   ![Todo App verify email](/blog/assets/meteor-todo-verify-email.png)
+
+   Clicking the link in the email opens a browser tab containing the following:
+
+   ![Todo App email verified](/blog/assets/meteor-todo-email-verified.png)
+
+   The user can dismiss the dialog and proceed with using the app.
 
    That's it! We now have a functioning Todo app
    that supports user accounts and tasks are persisted in a database.
