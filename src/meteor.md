@@ -389,6 +389,117 @@ a `msg` property and other properties such as
 `collection`, `fields`, `id`, `method`, `methods`, `msg`, and `params`.
 Typically each message array contains a single object.
 
+Each message is preceded by an arrow.
+Outgoing messages have a green arrow pointing up
+and are sent from the client to the server.
+Incoming messages have a red arrow pointing down
+and are sent from the server to the client.
+
+Periodically, about every 45 seconds, each side sends
+a "ping" message to verify that the other side is still reachable.
+The other side replies with a "pong" message.
+
+### Meteor WebSocket Messages
+
+When a client initially connects to the server,
+a series of messages are sent from the server to the client.
+While I can't describe the purpose of each of these messages,
+I can describe the pattern observed.
+These messages include:
+
+- one matching
+
+  ```json
+  {
+    "msg": "connect",
+    "version": "{some-version}",
+    "support": [?]
+  }
+  ```
+
+- several matching
+
+  ```json
+  {
+    "msg": "sub",
+    "id": "{some-id}",
+    "name": "{some-name}",
+    "params": [?]
+  }
+  ```
+
+- one matching `{"server_id": "{some-id}"}`
+
+- one matching `{"msg": "connected", "session": "{session-id}"}`
+
+- several matching `{"msg": "ready", "subs": [?]}`
+
+- several matching
+
+  ```json
+  {
+    "msg": "added",
+    "collection": "meteor_autoupdate_clientversions",
+    "id": "version",
+    "fields": {"version": "outdated}
+  }
+  ```
+
+If the Meteor accounts packages are used
+to support account creation and sign in,
+a sign in request triggers a message from the client to the server
+containing the following JSON:
+
+```json
+{
+  "msg": "method",
+  "method": "login",
+  "params": [
+    {
+      "user": "{username}",
+      "password": "{hashed-password}",
+      "algorithm": "sha-256"
+    }
+  ]
+}
+```
+
+A successful sign in triggers a message from the server to the client
+containing the following JSON:
+
+```json
+{
+  "msg": "result",
+  "id": "{message-id}",
+  "result": {
+    "id": "{result-id}",
+    "token": "{token}",
+    "token-expires": {"$date": "{timestamp}"},
+    "type": "password"
+  }
+}
+```
+
+Updates to the MongoDB database trigger additional JSON messages
+from the server to the client that describe the changes.
+This allows Minimongo in the client to stay in sync.
+Each message has a `msg` property that specifies the type of update,
+a `collection` property set to the name of the collection,
+and an `id` property set to the `_id` value of the affected document.
+
+When a document is added to a collection, `msg` is set to "added"
+and `fields` set to a JSON object containing
+all the properties of the document.
+
+When a document is updated, `msg` is set to "changed"
+and `fields` set to a JSON object containing
+only the properties of the document that were modified.
+
+When a document is deleted from a collection, `msg` is set to "remove".
+
+If a client subscribes to a collection, "added" messages described above
+are sent from the server to initially populate Minimongo.
+
 ### Optimistic UI
 
 Optimistic UI is a feature of Meteor Methods, and also of Apollo GraphQL,
