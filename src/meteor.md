@@ -663,43 +663,43 @@ Code for the final version of this app can be found in
 
 1. Create the app starting point by entering `meteor create todos`.
 
-   To use a non-default app template, add one of the following options
-   after `create`:
+   We are using the default app template here.
+   To use a non-default app template,
+   add one of the following options after `create`:
    `--bare`, `--minimal`, `--full`, `--react`, or `--typescript`.
    Interestingly none of these options corresponds to the default.
    The default option produces applications that are insecure
    and are therefore only for prototyping.
-   They allow all MongoDB updates to be initiated from clients.
+   Such applications allow all MongoDB updates to be initiated from clients.
    For details on the Meteor packages included by default and with each option see
    {% aTargetBlank 'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
 
-1. Enter `cd todos`, start the server by entering `meteor`.
+1. Start the server by entering `cd todos` and `meteor`.
 
-1. Browse localhost:3000.
-
-   The following page will be rendered:
+1. Browse localhost:3000 to see the following page:
 
    ![default Meteor app](/blog/assets/meteor-default-page.png)
 
-1. `Press the "Click Me" button multiple times.
+1. Press the "Click Me" button multiple times.
 
    The text "You've pressed the button n times."
    will update to display the number of times it was clicked.
 
+1. Exercise "hot code push".
+
    The UI is defined by the following files in the `client` directory:
    `main.html`, `main.css`, and `main.js`.
-
-1. Try editing the file `client/main.html`.
+   Try editing the file `client/main.html`.
    The browser will updated automatically when the changes are saved.
-   Meteor refers to this as "hot code push".
 
-1. Configure the app to use Svelte as its web framework,
+1. Configure the app to use the Svelte web framework,
    instead of the default Blaze framework.
+
    Svelte is a good choice due to its use of reactive statements.
    For more information about Svelte, see
    {% aTargetBlank 'https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte', 'my article' %}.
 
-1. Enter `meteor npm install svelte`
+1. Install Svelte by entering `meteor npm install svelte`
 
    It is recommended to use the command `meteor npm` instead of `npm`
    when installing npm packages in a Meteor app.
@@ -805,13 +805,14 @@ Code for the final version of this app can be found in
    {% aTargetBlank
     'https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css',
     'here' %}.
-   Now the task list looks nice.
+   Now the task list is styled nicely.
 
    ![Todo App after step 15](/blog/assets/meteor-todo-2.png)
 
 1. Create a top-level project directory named `imports`.
 
-1. Create the file `imports/tasks.js` containing the following:
+1. Create the file `imports/tasks.js` containing the following
+   which will create a MongoDB collection named "tasks":
 
    ```js
    import {Mongo} from 'meteor/mongo';
@@ -819,8 +820,7 @@ Code for the final version of this app can be found in
    export const Tasks = new Mongo.Collection('tasks');
    ```
 
-1. Add the following near the top of `server/main.js`
-   to create the MongoDB collection:
+1. Add the following import near the top of `server/main.js`.
 
    ```js
    import '../imports/tasks.js';
@@ -833,7 +833,8 @@ Code for the final version of this app can be found in
    import {Tasks} from '../imports/tasks.js';
    ```
 
-1. Replace the `getTasks` function in `client/App.svelte` with the following:
+1. Replace the `getTasks` function in `client/App.svelte` with the following
+   in order to get tasks from MongoDB:
 
    ```js
    const query = {};
@@ -843,8 +844,10 @@ Code for the final version of this app can be found in
 
 1. Replace the call to `getTasks()` in `client/App.svelte` with `$tasks`.
 
-   The UI will no longer display any tasks because tasks are being
-   retrieved from MongoDB and it does not currently contain any tasks.
+   This is a reference to a Svelte store that is kept in sync
+   with the MongoDB "tasks" collection.
+   The UI will no longer display any tasks because
+   this collection does not currently contain any tasks.
 
 1. Insert some tasks using the MongoDB console by entering the following:
 
@@ -858,48 +861,52 @@ Code for the final version of this app can be found in
 
    ![Todo App after step 22](/blog/assets/meteor-todo-3.png)
 
-1. Add the following inside the `script` element in `client/App.svelte`:
+1. Enable adding tasks in the UI.
 
-   ```js
-   let text = '';
+   - Add the following inside the `script` element in `client/App.svelte`:
 
-   function addTask() {
-     Tasks.insert({text, createdAt: new Date()});
-     text = '';
-   }
-   ```
+     ```js
+     let text = '';
 
-1. Add the following in `client/App.svelte` as the first child of
-   the `section` element to prepare for adding tasks in the UI:
-
-   ```html
-   <form on:submit|preventDefault="{addTask}">
-     <input placeholder="todo text" bind:value="{text}" />
-     <button>Add</button>
-   </form>
-   ```
-
-1. Add the following after the HTML in `client/App.svelte`:
-
-   ```css
-   <style>
-     form {
-       margin-top: 0;
-       padding-bottom: 1rem;
+     function addTask() {
+       Tasks.insert({text, createdAt: new Date()});
+       text = '';
      }
+     ```
 
-     section {
-       padding: 1rem;
-     }
-   </style>
-   ```
+   - Add the following in `client/App.svelte` as the first child of
+     the `section` element to prepare for adding tasks in the UI:
+
+     ```html
+     <form on:submit|preventDefault="{addTask}">
+       <input placeholder="todo text" bind:value="{text}" />
+       <button>Add</button>
+     </form>
+     ```
+
+   - Add the following after the HTML in `client/App.svelte`:
+
+     ```css
+     <style>
+       form {
+         margin-top: 0;
+         padding-bottom: 1rem;
+       }
+
+       section {
+         padding: 1rem;
+       }
+     </style>
+     ```
 
    Now new tasks can be added by entering text in the input and
    either pressing the "Add" button or pressing the return key.
 
    ![Todo App after step 25](/blog/assets/meteor-todo-4.png)
 
-   Meteor keeps all clients in sync. To see this,
+1. Note how Meteor keeps all clients in sync.
+
+   To see this,
    open a second web browser or another window in the same web browser
    and browse localhost:3000.
    Add a task in either browser window and notice that it appears in both.
@@ -1291,14 +1298,13 @@ Code for the final version of this app can be found in
 1. Make the app more secure by moving database interactions to the server.
 
    This is accomplished by implementing Meteor Methods
-   that are invoked by client-side code.
-   It does this by calling `Meteor.call(name, data, callback)`.
+   that are invoked by client-side code
+   with calls to `Meteor.call(name, data, callback)`.
 
-   - Remove a Meteor package by entering  
-     `meteor remove insecure`
+   - Remove the Meteor package that allows client code to
+     interact with MongoDB by entering `meteor remove insecure`
 
-   - Define Methods by modifying `imports/tasks.js`
-     to match the following:
+   - Define Methods by modifying `imports/tasks.js` to match the following:
 
      ```js
      import {check} from 'meteor/check';
@@ -1337,7 +1343,7 @@ Code for the final version of this app can be found in
      });
      ```
 
-   - Create the file `client/util.js` containing the following:
+   - Create the file `client/util.js` containing the following error handling:
 
      ```js
      export function handleError(err) {
@@ -1386,15 +1392,17 @@ Code for the final version of this app can be found in
 1. Explicitly specify what data the server sends to the client
    so we can separate tasks by user.
 
-   The tasks will still be stored in the same MongoDB collection,
+   Tasks will still be stored in the same MongoDB collection,
    but each user will only see and operate on the tasks they created.
 
-   - Remove a Meteor package by entering  
-     `meteor remove autopublish`
+   - Remove the ability for the server to send any MongoDB content
+     requested by clients.
 
-   - Add the following in `imports/tasks.js`
+     Enter `meteor remove autopublish`
+
+   - Publish only tasks that belong to the logged in user
+     by adding the following in `imports/tasks.js`
      after the line that starts with `export const Tasks`
-     to publish only tasks that belong to the logged in user:
 
      ```js
      if (Meteor.isServer) {
@@ -1425,7 +1433,7 @@ Code for the final version of this app can be found in
 1. Require account email validation before users
    can view and operate on their tasks.
 
-   - Add the following at the bottom of `server/account-setup.js`:
+   - Add the following at the bottom of `server/accounts-setup.js`:
 
      ```js
      Accounts.onLogin(({user}) => {
@@ -1448,8 +1456,8 @@ Code for the final version of this app can be found in
      };
      ```
 
-   - Add the following in `client/App.svelte` after the `$: user =` line
-     to determine if the logged in user has a verified email address:
+   - Determine if the logged in user has a verified email address by
+     adding the following in `client/App.svelte` after the `$: user =` line:
 
      ```js
      $: emailVerified = $user && $user.emails[0].verified;
@@ -1457,7 +1465,8 @@ Code for the final version of this app can be found in
 
    {% raw %}
 
-   - Change `{#if user}` to `{#if $user && emailVerified}`
+   - Change `{#if $user}` to `{#if $user && emailVerified}`
+
    - Add the following before the `{:else}` line:
 
      ```js
@@ -1475,8 +1484,7 @@ Code for the final version of this app can be found in
    in an email they receive before they can start adding tasks.
 
    That's it! We now have a functioning Todo app
-   that supports user accounts and
-   tasks are persisted in a database.
+   that supports user accounts and tasks are persisted in a database.
    I can't imagine doing all of this in less code
    using anything other than Meteor!
 
