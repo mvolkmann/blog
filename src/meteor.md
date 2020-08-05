@@ -52,6 +52,8 @@ Enter `meteor help` for help on using these.
 
 The key benefits of using Meteor are:
 
+- Client and server code can be developed in a single language,
+  JavaScript or TypeScript.
 - The UI can be implemented using any popular web framework.
 - There is no need to implement user account management and authentication
   if using the Meteor account-ui and accounts-password packages
@@ -615,27 +617,22 @@ but there are easier ways to use it in React and Svelte.
 
 For React there is hook called `useTracker` for responding to tracker changes.
 
-For Svelte there is a corresponding `useTracker` function
-in the package described
-{% aTargetBlank 'https://atmospherejs.com/rdb/svelte-meteor-data', 'here' %}.
+For Svelte, the
+{% aTargetBlank 'https://atmospherejs.com/rdb/svelte-meteor-data', 'rdb/svelte-meteor-data' %}
+provides a `useTracker` function.
 
-This takes a function that returns the result of a MongoDB query.
-It returns a Svelte store that is updated whenever
-the database is updated in a way that affects the query results.
-
-To always get the current user in a Svelte component:
+For example, to always get the current user in a Svelte component:
 
 ```js
 $: user = useTracker(() => Meteor.user());
 ```
 
-To always get the latest tasks from a Task collection:
+The rdb/svelte-meteor-data package
+also turns MongoDB cursor objects into Svelte stores
+that automatically update whenever the database is updated
+in a way that affects the query results.
 
-```js
-$: tasks = useTracker(() => Tasks.find(query, projection).fetch());
-```
-
-TODO: How does this differ from the following:
+For example, to always get the latest tasks from a `Task` collection:
 
 ```js
 $: tasks = Tasks.find(query, projection);
@@ -781,7 +778,8 @@ Code for the final version of this app can be found in
    and are therefore only for prototyping.
    Such applications allow all MongoDB updates to be initiated from clients.
    For details on the Meteor packages included by default and with each option see
-   {% aTargetBlank 'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
+   {% aTargetBlank
+     'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
 
 1. Start the server by entering `cd todos` and `meteor`.
 
@@ -938,7 +936,6 @@ Code for the final version of this app can be found in
 1. Add the following imports near the top of `client/App.svelte`:
 
    ```js
-   import {useTracker} from 'meteor/rdb:svelte-meteor-data';
    import {Tasks} from '../imports/tasks.js';
    ```
 
@@ -948,7 +945,8 @@ Code for the final version of this app can be found in
    ```js
    const query = {};
    const projection = {sort: {createdAt: -1}}; // newest first
-   $: tasks = useTracker(() => Tasks.find(query, projection).fetch());
+   // This is a MongoDB cursor which is also a Svelte store.
+   $: tasks = Tasks.find(query, projection);
    ```
 
 1. Replace the call to `getTasks()` in `client/App.svelte` with `$tasks`.
@@ -1183,10 +1181,8 @@ Code for the final version of this app can be found in
 
        const query = {};
        const projection = {sort: {createdAt: -1}}; // newest first
-       // tasks is a store
-       $: tasks = useTracker(() => Tasks.find(query, projection).fetch());
-       //TODO: Can you use this instead?
-       //TODO: $: tasks = Tasks.find(query, projection);
+       // This is a MongoDB cursor which is also a Svelte store.
+       $: tasks = Tasks.find(query, projection);
 
        $: remaining = $tasks.filter(t => !t.done).length;
 
@@ -1642,3 +1638,13 @@ Galaxy ({% aTargetBlank 'https://www.meteor.com/hosting', 'here' %})
 and Meteor Up ({% aTargetBlank 'http://meteor-up.com/', 'here' %}).
 Meteor Up, a.k.a mup, can be used to deploy a Meteor app
 to any server to which you can `ssh`.
+
+### Resources
+
+- ({% aTargetBlank 'https://meteor.com/', 'Meteor home page' %})
+- ({% aTargetBlank 'https://docs.meteor.com/', 'Meteor API docs' %})
+- {% aTargetBlank 'https://github.com/Urigo/awesome-meteor', 'Awesome Meteor' %}
+  curated list of packages and libraries
+- {% aTargetBlank 'https://atmospherejs.com/', 'Atmosphere Meteor package repository' %}
+- {% aTargetBlank 'https://forums.meteor.com/', 'Meteor Forum' %}
+- {% aTargetBlank 'https://stackoverflow.com/questions/tagged/meteor', 'Stack Overflow' %}
