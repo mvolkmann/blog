@@ -1165,7 +1165,7 @@ this ensures that they are built using the same C libraries.
 
 1) Add support for "forgot password" emails.
 
-   This will allow users to click a "Forgot password" link
+   This will allow users to click the "Forgot password" link
    in the "Sign in" dialog which changes the dialog content
    to prompt for an email address.
    If a user account exists for the email address,
@@ -1237,7 +1237,30 @@ this ensures that they are built using the same C libraries.
      });
      ```
 
-1) Make the app more secure by moving database interactions to the server.
+   Now when I use clicks the "Forgot password" link in the sign in dialog,
+   they can enter their email address and press the "Reset password" button.
+
+   ![Todo App forgot password](/blog/assets/meteor-todo-forgot-password.png)
+
+   When the email is sent, the dialog changes to include the text "Email sent".
+
+   ![Todo App forgot password email sent](/blog/assets/meteor-todo-forgot-password-email-sent.png)
+
+   The user will receive an email like the following:
+
+   ![Todo App password reset email](/blog/assets/meteor-todo-password-reset-email.png)
+
+   Clicking the link opens the app in a new browser tab
+   and displays a dialog for resetting the password.
+
+   ![Todo App password reset](/blog/assets/meteor-todo-password-reset.png)
+
+   After entering a new password, the user is notified that it has been reset
+   and that they are now logged in.
+
+   ![Todo App after password reset](/blog/assets/meteor-todo-after-password-reset.png)
+
+1. Make the app more secure by moving database interactions to the server.
 
    This is accomplished by implementing Methods
    that are invoked by client-side code.
