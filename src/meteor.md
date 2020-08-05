@@ -998,10 +998,10 @@ this ensures that they are built using the same C libraries.
 
 1. Add support for user accounts by doing the following:
 
-   - Add some Meteor packages by entering
+   - Add some Meteor packages by entering  
      `meteor add accounts-ui accounts-password svelte:blaze-integration`
 
-   - Create the file `client/account-config.js` with the following content:
+   - Create the file `client/accounts-config.js` with the following content:
 
      ```js
      import {Accounts} from 'meteor/accounts-base';
@@ -1038,7 +1038,7 @@ this ensures that they are built using the same C libraries.
        $: user = useTracker(() => Meteor.user());
 
        const query = {};
-       const projection = {sort: {createdAt: -1}};
+       const projection = {sort: {createdAt: -1}}; // newest first
        // tasks is a store
        $: tasks = useTracker(() => Tasks.find(query, projection).fetch());
        //TODO: Can you use this instead?
@@ -1066,14 +1066,13 @@ this ensures that they are built using the same C libraries.
 
        <section>
          {#if $user}
-         <p class="stats>{remaining} of {$tasks.length} remaining</p>
+         <p class="stats">{remaining} of {$tasks.length} remaining</p>
 
-         <form on:submit|preventDefault={addTask}>
-           <input placeholder="todo text" bind:value={text} />
+         <form on:submit|preventDefault="{addTask}">
+           <input placeholder="todo text" bind:value="{text}" />
            <button>Add</button>
-
            <label className="hide-completed">
-             <input type="checkbox" bind:checked={hideCompleted} />
+             <input type="checkbox" bind:checked="{hideCompleted}" />
              Hide Completed Tasks
            </label>
          </form>
@@ -1123,11 +1122,48 @@ this ensures that they are built using the same C libraries.
 
      {% endraw %}
 
-     Now users must create an account and sign in before they can
-     view, add, and modify tasks.
-     They can also change their password and sign out.
+   Now users must create an account and sign in before they can
+   view, add, and modify tasks.
 
-1. Add support for "forgot password" emails.
+   Before a user signs in, they see a "Sign in" link in the upper-right.
+
+   ![Todo App before sign in](/blog/assets/meteor-todo-before-sign-in.png)
+
+   Clicking "Sign in" displays a dialog that
+   contains a link to create an account.
+
+   ![Todo App before sign in](/blog/assets/meteor-todo-sign-in.png)
+
+   Clicking "Create account" changes the dialog
+   to prompt for account information.
+
+   ![Todo App before sign in](/blog/assets/meteor-todo-create-account.png)
+
+   After creating an account, or
+   entering username and password for an existing account,
+   the user is signed in and
+   the "Sign in" link in the upper-right is replaced by their username.
+
+   ![Todo App before sign in](/blog/assets/meteor-todo-after-sign-in.png)
+
+   Clicking the username link in the upper-right
+   presents a dialog for signing out or changing the password.
+
+   ![Todo App before sign in](/blog/assets/meteor-todo-click-username.png)
+
+   Clicking "Change password" changes the dialog to
+   prompt for the current and new passwords.
+
+   ![Todo App before sign in](/blog/assets/meteor-todo-change-password.png)
+
+   After successfully changing the password,
+   the dialog changes to notify the user.
+
+   ![Todo App before sign in](/blog/assets/meteor-todo-password-changed.png)
+
+   TODO: How can password rules be specified?
+
+1) Add support for "forgot password" emails.
 
    This will allow users to click a "Forgot password" link
    in the "Sign in" dialog which changes the dialog content
@@ -1201,7 +1237,7 @@ this ensures that they are built using the same C libraries.
      });
      ```
 
-1. Make the app more secure by moving database interactions to the server.
+1) Make the app more secure by moving database interactions to the server.
 
    This is accomplished by implementing Methods
    that are invoked by client-side code.
