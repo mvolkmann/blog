@@ -38,21 +38,23 @@
     "@11ty/eleventy-plugin-inclusive-language": "^1.0.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
     "acorn": "^7.2.0",
+    "eleventy-plugin-toc": "^1.0.4",
     "eslint": "^7.0.0",
     "eslint-plugin-import": "^2.20.2",
     "gh-pages": "^3.0.0",
     "html-minifier": "^4.0.0",
+    "markdown-it-anchor": "^5.3.0",
+    "markdown-it-footnote": "^3.0.2",
+    "markdown-it-katex": "^2.0.3",
+    "markdown-it-mathjax": "^2.0.0",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
     "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5"
   },
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "@actions/github": "^2.2.0",
-    "markdown-it-footnote": "^3.0.2",
-    "markdown-it-katex": "^2.0.3",
-    "markdown-it-mathjax": "^2.0.0",
-    "markdown-it-sub": "^1.0.0",
-    "markdown-it-sup": "^1.0.0"
+    "@actions/github": "^2.2.0"
   }
 }

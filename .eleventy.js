@@ -3,6 +3,8 @@ const htmlmin = require('html-minifier');
 const navigationPlugin = require('@11ty/eleventy-navigation');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
 const fs = require('fs');
+const markdownItAnchor = require('markdown-it-anchor');
+const tocPlugin = require('eleventy-plugin-toc');
 
 /*
 // Configure use of Katex for rendering math equations.
@@ -25,7 +27,8 @@ const markdownLib = markdownIt(options)
   .use(mathJax()) // https://github.com/classeur/markdown-it-mathjax shows need for ()
   .use(subs)
   .use(sups)
-  .use(footnotes);
+  .use(footnotes)
+  .use(markdownItAnchor);
 
 /**
 This recursively sorts an array of documents.
@@ -134,6 +137,7 @@ module.exports = eleventyConfig => {
   eleventyConfig.addPassthroughCopy('src/js');
 
   eleventyConfig.addPlugin(navigationPlugin);
+  eleventyConfig.addPlugin(tocPlugin);
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
 
   eleventyConfig.addShortcode(

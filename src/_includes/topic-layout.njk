@@ -14,4 +14,10 @@
 ></script>
 
 <h2>{{ eleventyNavigation.key }} {{extraTitle}}</h2>
-{{ content | safe }}
+
+<aside>
+  {{ content | toc | safe }}
+</aside>
+<article>
+  {{ content | safe }}
+</article>

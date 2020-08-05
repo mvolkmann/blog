@@ -78,7 +78,7 @@ In Windows, install Chocolatey and enter `choco install meteor`.
 
 This installs several tools used by Meteor including MongoDB and TypeScript.
 
-## Meteor Application Directory Structure
+### Application Directory Structure
 
 The recommended directory structure for Meteor applications
 is described below.
@@ -761,6 +761,8 @@ When this is not the case, the Svelte-specific parts can be omitted.
 The Meteor web site contains several tutorials
 {% aTargetBlank 'https://www.meteor.com/tutorials', 'here' %}
 that provide introductions to using Meteor.
+
+### Todo App
 
 Let's walk through the steps to build a Todo app using Meteor.
 This is a modified version of the Todo app presented at the Meteor site

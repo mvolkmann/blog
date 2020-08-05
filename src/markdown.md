@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+### Overview
+
 Markdown is a syntax for specifying HTML in a simpler way.
 It was created by John Gruber and is
 defined [here](https://daringfireball.net/projects/markdown/).
@@ -11,6 +13,8 @@ defined [here](https://daringfireball.net/projects/markdown/).
 There are many Markdown parsers.
 The one that 11ty uses by default is
 [markdown-it](https://github.com/markdown-it/markdown-it).
+
+### Syntax
 
 Let's review the most commonly used parts of Markdown syntax.
 
