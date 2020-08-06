@@ -170,24 +170,31 @@ To delete all the documents in a collection, enter `db.{coll-name}.drop()`.
 
 ### Methods
 
-Meteor Methods are functions that typically
-reside on both the client-side and server-side.
+Meteor Methods are functions that can reside only on the server
+or on both the client and server.
+They are meant to be called from client code.
+The server instance is invoked using a
+Remote Procedure Call (RPC) that utilizes WebSockets.
 By convention, "Method" is written with a capital "M"
 to distinguish it from normal JavaScript methods.
-Methods are meant to be called from client-side code.
-Server-side implementations are invoked using a
-Remote Procedure Call (RPC) that utilizes WebSockets.
 
 Meteor Methods are an alternative to REST calls implemented using HTTP.
 An issue with using Meteor Methods instead of REST
-is that they can only be called from Meteor apps.
+is that they can only be called from the same Meteor app.
 
 Common uses for Methods include
 inserting a document in a collection,
 deleting a document from a collection,
 and updating a document in a collection.
+There is typically no need to return anything to the client
+because changes in the MongoDB database are communicated back to the client
+through WebSocket messages that keep Minimongo in the client synchronized.
 Retrieving documents from collections
 is typically done by subscribing to them.
+
+Methods can also be used to perform CRUD operations on SQL databases.
+It this case it makes sense for the methods on only reside on the server
+and for them to return data needed by the client.
 
 To implement a Method,
 import `Meteor` from the `meteor/meteor` package
@@ -640,6 +647,9 @@ $: tasks = Tasks.find(query, projection);
 
 Note that both `user` and `tasks` are Svelte stores,
 so references to them should have a `$` prefix.
+
+For more information on rdb/svelte-meteor-data, see this
+{% aTargetBlank 'https://github.com/rdb/svelte-meteor-data/issues/6', 'issue' %}.
 
 ### Meteor Packages
 
@@ -1276,6 +1286,9 @@ Code for the final version of this app can be found in
 
    Clicking "Create account" changes the dialog
    to prompt for account information.
+   By default, passwords must contain at least six characters,
+   but there are not restrictions on the characters.
+   TODO: How can password rules be specified?
 
    ![Todo App before sign in](/blog/assets/meteor-todo-create-account.png)
 
@@ -1300,8 +1313,6 @@ Code for the final version of this app can be found in
    the dialog changes to notify the user.
 
    ![Todo App before sign in](/blog/assets/meteor-todo-password-changed.png)
-
-   TODO: How can password rules be specified?
 
 1. Add support for "forgot password" emails.
 
