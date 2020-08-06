@@ -546,6 +546,10 @@ All of this functionality is provided by default.
 The only requirement is for the client to
 use Meteor Methods to request data changes.
 
+The following sequence diagram illustrates the order of these operations:
+
+![Meteor Method flow](/blog/assets/meteor-method-flow.png)
+
 To see rollback in action, we can modify a Meteor Method to
 return a different result when run on the client versus the server.
 This is not typical, but it is useful to demonstrate optimistic UI.

@@ -1,0 +1,18 @@
+title Meteor Method Flow
+
+participant client
+participant "client\nMethod" as cMethod
+participant "Minimongo\nin client" as Minimongo
+participant "server\nMethod" as sMethod
+participant "MongoDB\non server" as MongoDB
+
+client->cMethod:call
+cMethod->Minimongo:update
+client<-cMethod:return data
+client<-Minimongo:update Svelte store
+note over client:update\nUI
+client-->sMethod:call via WS
+sMethod->MongoDB:update
+client<--sMethod:return data via WS
+client<--MongoDB:return changes via WS
+note over client:verify matching\nresult and update\nUI if different
