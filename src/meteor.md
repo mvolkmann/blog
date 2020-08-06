@@ -57,7 +57,7 @@ The key benefits of using Meteor are:
 - The UI can be implemented using any popular web framework.
 - There is no need to implement user account management and authentication
   if using the Meteor account-ui and accounts-password packages
-  is acceptable.
+  is acceptable. It even supports OAuth logins.
 - There is no need to install and configure a database
   if using MongoDB is acceptable.
 - Changes to data in MongoDB collections are published to all
@@ -1291,8 +1291,13 @@ Code for the final version of this app can be found in
    Clicking "Create account" changes the dialog
    to prompt for account information.
    By default, passwords must contain at least six characters,
-   but there are not restrictions on the characters.
-   TODO: How can password rules be specified?
+   but there are no restrictions on the characters.
+   There is not currently an easy way to customize password validation
+   in order to enforce different rules.
+   For possible solutions, see
+   {% aTargetBlank
+     'https://stackoverflow.com/questions/32651151/personalize-password-validation-function-used-by-accounts-ui',
+     'here' %}.
 
    ![Todo App before sign in](/blog/assets/meteor-todo-create-account.png)
 
