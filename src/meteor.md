@@ -52,17 +52,14 @@ Enter `meteor help` for help on using these.
 
 The key benefits of using Meteor are:
 
+- One install provides client, server (Node.js), and database (MongoDB) setup.
 - Client and server code can be developed in a single language,
   JavaScript or TypeScript.
 - The UI can be implemented using any popular web framework.
-- There is no need to implement user account management and authentication
-  if using the Meteor account-ui and accounts-password packages
-  is acceptable. It even supports OAuth logins.
-- There is no need to install and configure a database
-  if using MongoDB is acceptable.
+- User account management and authentication is provided.
+  It even supports OAuth logins.
 - Changes to data in MongoDB collections are published to all
   connected clients using WebSockets so all the UIs can stay in sync.
-- There is no need to install and configure an HTTP server library.
 - There is no need to implement REST services or GraphQL queries
   if using Meteor Methods with WebSockets is acceptable.
   Meteor Methods are implemented in JavaScript or TypeScript
@@ -1658,6 +1655,68 @@ Galaxy ({% aTargetBlank 'https://www.meteor.com/hosting', 'here' %})
 and Meteor Up ({% aTargetBlank 'http://meteor-up.com/', 'here' %}).
 Meteor Up, a.k.a mup, can be used to deploy a Meteor app
 to any server to which you can `ssh`.
+
+#### Galaxy
+
+Galaxy provides a free, one-month trial.
+
+Galaxy does not provided MongoDB hosting.
+They recommend using
+{% aTargetBlank 'https://www.mongodb.com/cloud/atlas', 'MongoDB Atlas' %}
+for that, which has an endless free tier referred to as "Shared Clusters"
+that does not provide backup.
+
+To use MongoDB Atlas:
+
+- Browse
+  {% aTargetBlank 'https://www.mongodb.com/cloud/atlas', 'MongoDB Atlas' %}.
+- Choose between AWS, GCP, and Azure for the cloud provider.
+- Create a cluster.
+- In the left nav. under "SECURITY", click "Database Access"
+  and press "Add New Database User".
+- Optionally change the default username and password.
+- Select "Database User Privileges" from the drop-down.
+  You will likely want "Read and write to any database".
+- Press "Add User".
+- In the left nav. under "SECURITY", click "Network Access"
+  and press "ADD IP ADDRESS".
+- Enter IP addresses that should have access.
+  You will likely want the IP address of your machine
+  AND the IP address of the Galaxy server.
+- To connect from the mongo shell:
+  - In the left nav. under "DATA STORAGE", click "Clusters".
+  - Press "CONNECT".
+  - Click "Connect with the mongo shell".
+  - If you do not already have the mongo shell installed,
+    click "I do not have the mongo shell installed"
+    and follow the platform-specific instructions to install it.
+  - Otherwise, click "I have the mongo shell installed".
+  - Press "Copy" after the supplied connection string.
+  - Open a terminal window.
+  - Paste the connection string.
+  - Replace "<dbname>" with the name of an existing database and press return.
+  - Enter the password.
+  - Enter "show collections" to list the collections within the database.
+- To connect from the MongoDB Compass app:
+  - In the left nav. under "DATA STORAGE", click "Clusters".
+  - Press "CONNECT".
+  - Click "Connect using MongoDB Compass".
+  - If you do not already have MongoDB Compass installed,
+    click "I do not have MongoDB Compass"
+    and follow the platform-specific instructions to install it.
+  - Otherwise, click "I have MongoDB Compass".
+  - Press "Copy" after the supplied connection string.
+  - Open the MongoDB Compass app.
+  - Paste the connection string.
+  - Replace "<password>" with the password and press "CONNECT".
+  - Click a database name to see the collections inside it.
+
+To use Galaxy:
+
+- Browse {% aTargetBlank 'https://galaxy.meteor.com', 'galaxy.meteor.com' %}
+- Sign in
+- Create a free trial account
+- Choose a region (ex. "US-East-1")
 
 ### Resources
 
