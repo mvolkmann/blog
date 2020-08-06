@@ -1714,9 +1714,27 @@ To use MongoDB Atlas:
 To use Galaxy:
 
 - Browse {% aTargetBlank 'https://galaxy.meteor.com', 'galaxy.meteor.com' %}
-- Sign in
+- Press "SIGN IN WITH METEOR" and authenticate.
 - Create a free trial account
 - Choose a region (ex. "US-East-1")
+- Open a terminal window and cd to the root project directory.
+- Create the file `settings.json` containing the following:
+
+  ```json
+  {
+    "galaxy.meteor.com": {
+      "env": {
+        "MONGO_URL": "mongodb+srv://{username}:{password}@{mongo-host}/meteor",
+        "MAIL_URL": "smtp://volkmannm@objectcomputing.com:$&oBDvwWTTms9d6dxYDG@smtp.gmail.com:587"
+      }
+    }
+  }
+  ```
+
+- Add `settings.json` to `.gitignore`.
+- Enter `DEPLOY_HOSTNAME=us-east-1.galaxy-deploy.meteor.com \`
+  `meteor deploy {hostname} --settings settings.json`
+  where `{hostname}` is "galaxy.meteor.com" for the US-East-1 region.
 
 ### Resources
 
