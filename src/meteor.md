@@ -1625,51 +1625,23 @@ Code for the final version of this app can be found in
 ### Building and Deploying
 
 Now that we have our app running locally,
-we are ready to deploy it to a server for real users can access it.
+we are ready to deploy it to a server so real users can access it.
 
-To build a Meteor app for deployment,
-cd to the root project directory and enter `meteor build {dir-name}`.
-This creates the specified directory if it doesn't exist
-and creates a TAR file inside the directory named `{project-name}.tar.gz`.
-The TAR file contains a single directory named `bundle` which contains
-all the files for the client-side and server-side of the application.
-Include the `--architecture` option to build for a specific architecture.
-For help on the build command, enter `meteor help build`.
+#### MongoDB Hosting
 
-To deploy the app:
+If your Meteor app uses MongoDB, and most do,
+the first step is to select a hosting platform.
+One option is
+{% aTargetBlank 'https://www.mongodb.com/cloud/atlas', 'MongoDB Atlas' %}.
+Another option is {% aTargetBlank 'https://mlab.com/', 'mLab' %}.
 
-1. Copy the TAR file to a server, perhaps using the `scp` command.
-1. Start a terminal session on the server using the `ssh` command.
-1. Verify that a recent version of Node.js is installed.
-1. Un-tar the file by entering `tar zxf {project-name}.tar.gz`
-1. Enter `cd {project-name}/programs/server`
-1. Enter `npm install`
-1. Set the `MONGO_URL` environment variable to `mongodb://localhost:27017/myapp`
-1. Set the `ROOT_URL` environment variable to `http://myapp.com`
-1. Enter `node main.js` to start the server.
-
-TODO: What should the value of "myapp" be in the environment variables.
-
-Other alternatives for deploying Meteor apps include
-Galaxy ({% aTargetBlank 'https://www.meteor.com/hosting', 'here' %})
-and Meteor Up ({% aTargetBlank 'http://meteor-up.com/', 'here' %}).
-Meteor Up, a.k.a mup, can be used to deploy a Meteor app
-to any server to which you can `ssh`.
-
-#### Galaxy
-
-Galaxy provides a free, one-month trial.
-
-Galaxy does not provided MongoDB hosting.
-They recommend using
-{% aTargetBlank 'https://www.mongodb.com/cloud/atlas', 'MongoDB Atlas' %}
-for that, which has an endless free tier referred to as "Shared Clusters"
+MongoDB Atlas has an endless free tier referred to as "Shared Clusters"
 that does not provide backup.
 
-To use MongoDB Atlas:
+To configure MongoDB Atlas:
 
 - Browse
-  {% aTargetBlank 'https://www.mongodb.com/cloud/atlas', 'MongoDB Atlas' %}.
+  {% aTargetBlank 'https://www.mongodb.com/cloud/atlas', 'here' %}.
 - Choose between AWS, GCP, and Azure for the cloud provider.
 - Create a cluster.
 - In the left nav. under "SECURITY", click "Database Access"
@@ -1681,35 +1653,155 @@ To use MongoDB Atlas:
 - In the left nav. under "SECURITY", click "Network Access"
   and press "ADD IP ADDRESS".
 - Enter IP addresses that should have access.
-  You will likely want the IP address of your machine
+  You will likely want to add the IP address of your machine
   AND the IP address of the Galaxy server.
-- To connect from the mongo shell:
-  - In the left nav. under "DATA STORAGE", click "Clusters".
-  - Press "CONNECT".
-  - Click "Connect with the mongo shell".
-  - If you do not already have the mongo shell installed,
-    click "I do not have the mongo shell installed"
-    and follow the platform-specific instructions to install it.
-  - Otherwise, click "I have the mongo shell installed".
-  - Press "Copy" after the supplied connection string.
-  - Open a terminal window.
-  - Paste the connection string.
-  - Replace "<dbname>" with the name of an existing database and press return.
-  - Enter the password.
-  - Enter "show collections" to list the collections within the database.
-- To connect from the MongoDB Compass app:
-  - In the left nav. under "DATA STORAGE", click "Clusters".
-  - Press "CONNECT".
-  - Click "Connect using MongoDB Compass".
-  - If you do not already have MongoDB Compass installed,
-    click "I do not have MongoDB Compass"
-    and follow the platform-specific instructions to install it.
-  - Otherwise, click "I have MongoDB Compass".
-  - Press "Copy" after the supplied connection string.
-  - Open the MongoDB Compass app.
-  - Paste the connection string.
-  - Replace "<password>" with the password and press "CONNECT".
-  - Click a database name to see the collections inside it.
+
+To connect from the mongo shell:
+
+- In the left nav. under "DATA STORAGE", click "Clusters".
+- Press "CONNECT".
+- Click "Connect with the mongo shell".
+- If you do not already have the mongo shell installed,
+  click "I do not have the mongo shell installed"
+  and follow the platform-specific instructions to install it.
+- Otherwise, click "I have the mongo shell installed".
+- Press "Copy" after the supplied connection string.
+- Open a terminal window.
+- Paste the connection string.
+- Replace "<dbname>" with the name of an existing database and press return.
+- Enter the password.
+- Enter "show collections" to list the collections within the database.
+
+To connect from the MongoDB Compass app:
+
+- In the left nav. under "DATA STORAGE", click "Clusters".
+- Press "CONNECT".
+- Click "Connect using MongoDB Compass".
+- If you do not already have MongoDB Compass installed,
+  click "I do not have MongoDB Compass"
+  and follow the platform-specific instructions to install it.
+- Otherwise, click "I have MongoDB Compass".
+- Press "Copy" after the supplied connection string.
+- Open the MongoDB Compass app.
+- Paste the connection string.
+- Replace "<password>" with the password and press "CONNECT".
+- Click a database name to see the collections inside it.
+
+#### Configuring a Cloud Server
+
+There are many options to choose from including
+AWS, Google Cloud Platform (GCP), and Azure.
+An option that is fairly simple with a low cost is DigitalOcean.
+
+After ssh'ing to your instance for the first time,
+it is helping to edit your `.bashrc` file.
+Some things you may want to add include:
+
+```bash
+# Make it easier to clear the screen.
+alias cls='clear'
+
+# Ask for confirmation before overwriting or deleting files.
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="rm -i"
+
+# Make the delete key work.
+export TERM=xterm-256color
+
+# Set environment variables that the Meteor server will need.
+export MONGO_URL='{your-mongodb-url}'
+export ROOT_URL=https://{ip-address-of-this-server}:{port-of-meteor-server}
+```
+
+#### Manual Deploy
+
+To build a Meteor app for deployment:
+
+- cd to the root project directory.
+- You may need to enter `meteor remove-platform ios`
+  before running the next command.
+- Enter `meteor build {dir-name} --architecture {a-name}`
+  where `{a-name}` is replaced by the target architecture
+  such as `os.linux.x86_64`.
+
+This creates the specified directory if it doesn't exist and creates
+a TAR file named `{project-name}.tar.gz` inside it.
+The TAR file contains a single directory named `bundle` which contains
+all the files for the client-side and server-side of the application.
+
+For help on the build command, enter `meteor help build`.
+
+To deploy the app:
+
+1. Copy the TAR file to a server, perhaps using the `scp` command.
+   For example, `scp {project-name}.tar.gz root@{server-ip-address}:.`
+1. Start a terminal session on the server using the `ssh` command.
+   For example, `ssh root@{server-ip-address}`.
+1. Verify that a recent version of Node.js is installed
+   by entering `node -v`.
+1. Create a directory to receive the contents of the tar file
+   by entering `mkdir {project-name}`
+1. Un-tar the file by entering `tar zxf {project-name}.tar.gz -C {project-name}`
+1. Enter `cd {project-name}/bundle/programs/server`
+1. Enter `npm install`
+1. Enter `cd ../..`
+1. Set the `MONGO_URL` environment variable to your MongoDB server URL.
+   For example, `mongodb+srv://{username}:{password}@cluster0.tqq7g.mongodb.net/meteor`
+1. Set the `ROOT_URL` environment variable to your HTTP server URL.
+   For example, `http://{server-ip-address}:{server-port}`
+   For example, `http://{server-ip-address}:4000`
+1. Expose the port that will be used.
+   With DigitalOcean this is done by entering `sudo ufw allow {port}/tcp`.
+   Meteor uses port 3000 by default, but my DigitalOcean instance
+   has an HTTP server that is always listening on that port,
+   so choose another such as 4000.
+1. Enter `node main.js` to start the server.
+   TODO: Do you need to do something to tell it to use port 4000
+   TODO: or does it get that from the ROOT_URL environment variable?
+
+This gives the error MongoNetworkError: failed to connect to server
+[cluster0-shard-00-00.tqq7g.mongodb.net:27017] on first connect
+[MongoNetworkError: connection 5 to
+cluster0-shard-00-00.tqq7g.mongodb.net:27017 closed
+
+Other alternatives for deploying Meteor apps include
+Galaxy ({% aTargetBlank 'https://www.meteor.com/hosting', 'here' %})
+and Meteor Up ({% aTargetBlank 'http://meteor-up.com/', 'here' %}).
+Meteor Up, a.k.a mup, can be used to deploy a Meteor app
+to any server to which you can `ssh`.
+
+#### Meteor Up (mup)
+
+The steps to deploy a Meteor app using Meteor Up are:
+
+- Enter `npm install -g mup`
+- cd to the root project directory.
+- Enter `mup init` to create the files `mup.json` and `settings.json`
+  in the `./deploy` directory.
+- Add `.deploy/mup.js` and `.deploy/settings.json` to `.gitignore`.
+- Edit `.deploy/mup.js`.
+  - Set `servers.one.host` to the IP address of the server.
+  - Set `servers.one.username` to an account username, possibly `'root'`.
+  - Set `servers.one.password` to an account password.
+  - Set `app.name` to the app name.
+  - Set `app.path` to `'../'`
+  - Set `app.env.ROOT_URL` to the app URL.
+    For example, `'http://{server-ip-address}.{server-port}'`
+  - See `app.env.MONGO_URL` to the URL of your MongoDB server.
+  - Delete the top-level `mongo` property.
+- Enter `cd .deploy`
+- Enter `mup setup`
+- Enter `mup deploy`
+  (This works in Node 12, but may not yet work in newer versions.)
+
+THIS HANGS FOREVER!
+
+#### Galaxy
+
+Galaxy provides a free, one-month trial.
+
+Galaxy does not provided MongoDB hosting.
 
 To use Galaxy:
 
@@ -1731,10 +1823,12 @@ To use Galaxy:
   }
   ```
 
+```
+
 - Add `settings.json` to `.gitignore`.
 - Enter `DEPLOY_HOSTNAME=us-east-1.galaxy-deploy.meteor.com \`
   `meteor deploy {hostname} --settings settings.json`
-  where `{hostname}` is "galaxy.meteor.com" for the US-East-1 region.
+  where `{hostname}` can be "{username}.meteorapp.com".
 
 ### Resources
 
@@ -1745,3 +1839,4 @@ To use Galaxy:
 - {% aTargetBlank 'https://atmospherejs.com/', 'Atmosphere Meteor package repository' %}
 - {% aTargetBlank 'https://forums.meteor.com/', 'Meteor Forum' %}
 - {% aTargetBlank 'https://stackoverflow.com/questions/tagged/meteor', 'Stack Overflow' %}
+```
