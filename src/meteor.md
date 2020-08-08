@@ -1703,7 +1703,26 @@ To connect from the MongoDB Compass app:
 
 There are many options to choose from including
 AWS, Google Cloud Platform (GCP), and Azure.
+
 An option that is fairly simple with a low cost is DigitalOcean.
+
+You will want to associate a domain name with your DigitalOcean server
+so you can enable SSL encryption later.
+There are many domain registrars to choose from.
+A popular, low cost option is
+{% aTargetBlank 'https://hover.com', 'hover.com' %}.
+You can also get a free domain name from
+{% aTargetBlank 'https://www.freenom.com/', 'freenom.com' %}.
+
+To associate a domain name with a DigitalOcean project, browse
+{% aTargetBlank 'https://cloud.digitalocean.com', 'cloud.digitalocean.com' %},
+sign in, click "Networking" in the left nav., enter a domain for a project,
+and press "Add Domain".
+Then under "Create new record", select "A", enter "@" for "HOSTNAME",
+enter your DigitalOcean server IP address for "WILL DIRECT TO",
+and press "Create Record".
+Repeat this using "www" instead of "@" for "HOSTNAME".
+You can also create A records from the domain registrar site such as Hover.
 
 After ssh'ing to your instance for the first time,
 it is helping to edit your `.bashrc` file.
@@ -1741,6 +1760,94 @@ To enable accessing you MongoDB Atlas server:
 TODO: mup works now! Try to get it to use HTTPS!
 TODO: Get Galaxy to work.
 TODO: Get manual deploy to work.
+
+#### Enabling HTTPS
+
+To determine the version of Ubuntu you are using, enter `lsb_release -a`.
+For me this is 20.04.
+
+Setup nginx "server blocks" by following the steps
+{% aTargetBlank
+  'https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended)',
+  'here' %} which are summaries below:
+
+1. Enter `sudo mkdir -p /var/www/{your-domain}/html`
+1. Enter `sudo chown -R $USER:$USER /var/www/{your-domain}/html`
+1. Enter `sudo chmod -R 755 /var/www/{your-domain}`
+1. Enter `vim /var/www/{your-domain}/html/index.html`
+1. Add content like the following for testing your site:
+
+   ```html
+   <html>
+     <head>
+       <title>Welcome to {your-site}!</title>
+     </head>
+     <body>
+       <h1>Success, the {your-site} server block is working!</h1>
+     </body>
+   </html>
+   ```
+
+1. Enter `sudo vim /etc/nginx/sites-available/{your-domain}`
+1. Add content like the following to serve your site:
+
+   ```text
+   server {
+     listen 80;
+     listen [::]:80;
+
+     root /var/www/your_domain/html;
+     index index.html index.htm index.nginx-debian.html;
+
+     server_name your_domain www.your_domain;
+
+     location / {
+       try_files $uri $uri/ =404;
+     }
+   }
+   ```
+
+1. Enter `sudo ln -s /etc/nginx/sites-available/{your-domain} /etc/nginx/sites-enabled/`
+1. Enter `sudo vim /etc/nginx/nginx.conf`
+1. Uncomment the line `server_names_hash_bucket_size 64;`
+1. Enter `sudo nginx -t` to verify that there are
+   no syntax errors in the edited files.
+1. Enter `sudo systemctl restart nginx` to restart nginx.
+1. Browse http://{your-domain} to verify that nginx can server the earlier HTML.
+
+Enable SSL by following the steps
+{% aTargetBlank
+  'https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04',
+  'here' %}.
+These instructions specific to Ubuntu version 20.04.
+It uses a "certbot" which will automatically renew the certificate
+before it expires.
+
+1. Enter `sudo apt install python3-certbot-nginx`
+1. Enter `sudo ufw status` to see that network traffic is currently allowed.
+1. If "Nginx FULL" is not set to "ALLOW" ...
+   - Enter `sudo ufw allow 'Nginx Full'`
+   - Enter `sudo ufw delete allow 'Nginx HTTP'`
+     because it is implied by `Nginx Full`.
+1. Enter `cd` to change to your home directory.
+1. Enter `sudo certbot --nginx -d {your-site} -d www.{your-site}`
+   to obtain an SSL certificate.
+   You will be prompted to enter your email,
+   agree to the LetsEncrypt terms of service,
+   optionally receive email from the Electronic Freedom Foundation,
+   and whether HTTP requests should be redirected to HTTPS.
+
+Your certificate and chain are saved at
+`/etc/letsencrypt/live/{your-site}/fullchain.pem`.
+Your key file is saved at `/etc/letsencrypt/live/mvolkmann.site/privkey.pem`.
+Normally your cert will expire in three months any you need to obtain a
+new version by running the `certbot` command again with the `--certonly` option.
+You can also non-interactively renew all of your certificates
+by entering `certbot renew`.
+But certbot makes this unnecessary and will automatically renew your cert.
+Make a backup of the `/etc/letsencrypt` directory.
+
+You can now browse `https://{your-domain}`.
 
 #### Manual Deploy
 
@@ -1816,8 +1923,15 @@ The steps to deploy a Meteor app using Meteor Up are:
   - Set `app.path` to `'../'`
   - Set `app.env.ROOT_URL` to the app URL.
     For example, `'http://{server-ip-address}.{server-port}'`
-  - See `app.env.MONGO_URL` to the URL of your MongoDB server.
-  - See `app.env.PORT` to the value of `server-port`.
+  - Set `app.env.MONGO_URL` to the URL of your MongoDB server.
+  - Set `app.env.PORT` to the value of `server-port`.
+  - To enable SSL:
+    - See {% aTargetBlank
+        'https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04',
+        'How to Secure Nginx' %}
+    - This requires a domain name, not just an ip address.
+    - Set `proxy.domains` to `'https://{server-ip-address}:80'`, // nginx proxy
+    - Set `proxy.ssl.letsEncryptEmail` to `'email@domain.com'`.
   - Delete the top-level `mongo` property.
 - Enter `cd .deploy`
 - Enter `mup setup`
