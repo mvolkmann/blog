@@ -1656,6 +1656,18 @@ To configure MongoDB Atlas:
   You will likely want to add the IP address of your machine
   AND the IP address of the Galaxy server.
 
+To view databases and collections:
+
+- In the left nav. under "DATA STORAGE", click "Clusters".
+- Press "COLLECTIONS".
+- Select a database names to see the collections in it.
+- Select a collection name to see the documents in it.
+- Hover over a document and click the pencil icon to modify the document.
+  Press the "UPDATE" button when finished.
+  It can take about five seconds for Meteor apps that use the document
+  to update.
+- Hover over a document and click the trash can icon to delete the document.
+
 To connect from the mongo shell:
 
 - In the left nav. under "DATA STORAGE", click "Clusters".
@@ -1713,6 +1725,22 @@ export TERM=xterm-256color
 export MONGO_URL='{your-mongodb-url}'
 export ROOT_URL=https://{ip-address-of-this-server}:{port-of-meteor-server}
 ```
+
+To find processes that are listening on ports, enter `netstat -tulpn`.
+My DigitalOcean server had nginx listening on port 80
+and node listening on port 3000.
+A different port can be used for the Meteor server.
+
+To enable accessing you MongoDB Atlas server:
+
+- Browse cloud.mongodb.com and log in.
+- In the left nav. under "SECURITY", click "Network Access".
+- Press "ADD IP ADDRESS".
+- Add the IP address of your cloud server.
+
+TODO: mup works now! Try to get it to use HTTPS!
+TODO: Get Galaxy to work.
+TODO: Get manual deploy to work.
 
 #### Manual Deploy
 
@@ -1789,6 +1817,7 @@ The steps to deploy a Meteor app using Meteor Up are:
   - Set `app.env.ROOT_URL` to the app URL.
     For example, `'http://{server-ip-address}.{server-port}'`
   - See `app.env.MONGO_URL` to the URL of your MongoDB server.
+  - See `app.env.PORT` to the value of `server-port`.
   - Delete the top-level `mongo` property.
 - Enter `cd .deploy`
 - Enter `mup setup`
