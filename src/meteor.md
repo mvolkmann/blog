@@ -1766,6 +1766,33 @@ TODO: Get manual deploy to work.
 To determine the version of Ubuntu you are using, enter `lsb_release -a`.
 For me this is 20.04.
 
+DigitalOcean provides an nginx proxy that is started by default.
+
+To enable nginx to act as a proxy for a server that listens on a particular port:
+
+- Enter `sudo touch /etc/nginx/conf.d/sysmon.conf`
+- Enter `sudo vim /etc/nginx/conf.d/sysmon.conf`
+- Add the following:
+
+  ```text
+  server {
+    listen 1919; # node port
+    server_name sysmon.{your-domain};
+
+    location / {
+      proxy_set_header   X-Forwarded-For $remote_addr;
+      proxy_set_header   Host $http_host;
+      proxy_pass         http://{node-ip}:{node-port};
+    }
+  }
+  ```
+
+- Enter `sudo systemctl restart nginx`
+- Now you should be able to browse https://{your-domain}:{node-port}
+- TODO: THIS DID NOT WORK!
+  There is a probably a conflict with
+  `/etc/nginx/sites-available/{your-domain}` below.
+
 Setup nginx "server blocks" by following the steps
 {% aTargetBlank
   'https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended)',
@@ -1787,6 +1814,8 @@ Setup nginx "server blocks" by following the steps
      </body>
    </html>
    ```
+
+````
 
 1. Enter `sudo vim /etc/nginx/sites-available/{your-domain}`
 1. Add content like the following to serve your site:
@@ -1983,3 +2012,4 @@ To use Galaxy:
 - {% aTargetBlank 'https://forums.meteor.com/', 'Meteor Forum' %}
 - {% aTargetBlank 'https://stackoverflow.com/questions/tagged/meteor', 'Stack Overflow' %}
 ```
+````
