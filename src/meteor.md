@@ -1709,9 +1709,10 @@ Meteor `Session` is a single global, reactive data store
 that holds key/value pairs.
 It can be used to share data between all components.
 Each session key is identified by a name and
-values can be any kind of JavaScript value.
+values can be any kind of JavaScript value that can be converted to JSON.
+Other values can be made compatible by calling `EJSON.addType(name, factory)`.
 
-To uses this feature, add the `session` package
+To use this feature, add the `session` package
 by entering `meteor add session`.
 
 To use `Session` in a component, import it with
@@ -1737,7 +1738,7 @@ Tracker.autorun(() => {
 Session data survives hot code pushes, but not browser refreshes.
 It cannot be shared between users or between browser tabs.
 
-Here is a Svelte component that demonstrates using a Session key/value pair:
+Here is a Svelte component that demonstrates using a `Session`:
 
 ```html
 <script>
@@ -1761,13 +1762,75 @@ Here is a Svelte component that demonstrates using a Session key/value pair:
 </div>
 ```
 
-### ReactiveVar
-
-TODO: Investigate this.
+The `Session` object is really a `ReactiveDict`
+which is described below.
 
 ### ReactiveDict
 
-TODO: Investigate this.
+The `Session` object described earlier is a `ReactiveDict` object,
+so they have the same API.
+Creating `ReactiveDict` objects is only necessary if you wish to
+maintain separate groups of reactive key/value pairs.
+
+To use this feature, add the `reactive-dict` package
+by entering `meteor add reactive-dict`.
+
+To create a new `ReactiveDict` object:
+
+```js
+import {ReactiveDict} from 'meteor/reactive-dict';
+
+const myDict = new ReactiveDict(dictName, initialKeyValuePairs);
+```
+
+Both constructor arguments are optionally.
+Providing a name allows the key/value pairs to survive hot code pushes.
+Providing an initial value avoids starting with no key/value pairs.
+
+To get all the current key/value pairs, call `myDict.all()`.
+To remove all the key/value pairs, call `myDict.clear()`.
+These methods can also be called on the `Session` object.
+
+### ReactiveVar
+
+A `ReactiveVar` holds a single value, rather than
+a set of key/value pairs like `Session` and `ReactiveDict`.
+They are meant to be used inside a single component,
+not as a way to share data across components.
+
+To use this feature, add the `reactive-var` package
+by entering `meteor add reactive-var`.
+
+To create a new `ReactiveVar` object:
+
+```js
+import {ReactiveVar} from 'meteor/reactive-var';
+
+const myVar = new ReactiveVar(initialValue);
+```
+
+To change the value, call `myVar.set(newValue)`.
+
+To get the value, call `myVar.get()`.
+
+Here is a Svelte component that demonstrates using a `ReactiveVar`:
+
+```js
+<script>
+  import {ReactiveVar} from 'meteor/reactive-var';
+
+  const myRV = new ReactiveVar(0);
+  let counter;
+  Tracker.autorun(() => {
+    counter = myRV.get();
+  });
+</script>
+
+<div>
+  counter = {counter}
+  <button on:click={() => myRV.set(counter + 1)}>Increment</button>
+</div>
+```
 
 ### Meteor Shell
 
