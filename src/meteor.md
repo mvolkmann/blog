@@ -1735,6 +1735,7 @@ Tracker.autorun(() => {
 ```
 
 Session data survives hot code pushes, but not browser refreshes.
+It cannot be shared between users or between browser tabs.
 
 Here is a Svelte component that demonstrates using a Session key/value pair:
 
@@ -1767,6 +1768,12 @@ TODO: Investigate this.
 ### ReactiveDict
 
 TODO: Investigate this.
+
+### Meteor Shell
+
+The `meteor shell` command launches a REPL that is used to
+examine and interact with the server side of a Meteor app.
+TODO: How is it used?
 
 ### Building and Deploying
 
