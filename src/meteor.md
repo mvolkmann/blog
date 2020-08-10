@@ -1705,25 +1705,68 @@ For apps that need client-side page routing there are two popular libraries:
 
 ### Session
 
-A Meteor `Session` is global, reactive data store.
-It can be used to share between all components.
+Meteor `Session` is a single global, reactive data store
+that holds key/value pairs.
+It can be used to share data between all components.
+Each session key is identified by a name and
+values can be any kind of JavaScript value.
 
-To use Session, `import { Session } from 'meteor/session'`
+To uses this feature, add the `session` package
+by entering `meteor add session`.
 
-To set a value, `Session.set(name, value);`
+To use `Session` in a component, import it with
+`import {Session} from 'meteor/session;`
 
-To get a value, `Session.get(name)`
+To set the default value of a session key, call
+`Session.setDefault(key, value)`.
 
-To make session data reactive when using Svelte:
+To set a new value for a session key, call `Session.set(key, value)`.
+
+To get the value of a session key, call `Session.get(key)`.
+
+To make session reactive so code is executed whenever
+the value for a given key changes, use `Tracker.autorun` as follows:
 
 ```js
 let someValue;
-$: value = Tracker.autorun(() => {
-  someValue = Session.get(name);
+Tracker.autorun(() => {
+  someValue = Session.get(key);
 });
 ```
 
 Session data survives hot code pushes, but not browser refreshes.
+
+Here is a Svelte component that demonstrates using a Session key/value pair:
+
+```html
+<script>
+  import {Session} from 'meteor/session';
+  import {Tracker} from 'meteor/tracker';
+
+  let counter;
+  Tracker.autorun(() => {
+    counter = Session.get('counter');
+  });
+  Session.setDefault('counter', 0);
+
+  function increment() {
+    Session.set('counter', counter + 1);
+  }
+</script>
+
+<div class="container">
+  {counter}
+  <button on:click="{increment}">Increment</button>
+</div>
+```
+
+### ReactiveVar
+
+TODO: Investigate this.
+
+### ReactiveDict
+
+TODO: Investigate this.
 
 ### Building and Deploying
 
