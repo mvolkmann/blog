@@ -82,6 +82,7 @@ This installs several tools used by Meteor including MongoDB and TypeScript.
 The recommended directory structure for Meteor applications
 is described below.
 
+- `public` - holds static assets such as images and fonts
 - `client`
   - `main.html`
   - `main.css`
@@ -90,9 +91,16 @@ is described below.
   - `main.js`
 - `imports`
   - `\*.js`
+- `.meteor`
 
-All client-side files can be placed in the `client` directory
-and all server-side files can be placed in the `server` directory.
+Additional files can be added to all the directories listed above
+expect `.meteor`.
+All client-side files should be placed in the `client` directory
+and all server-side files should be placed in the `server` directory.
+Files that are shared by client and server code
+should be placed in the `imports` directory.
+The `.meteor` directory holds files that Meteor uses for bookkeeping
+and these files should not be manually modified.
 
 In the past Meteor eagerly loaded files outside the `imports` directory
 and lazily loaded files inside the `imports` directory.
@@ -164,6 +172,11 @@ To see the first 20 documents in a given collection,
 enter `db.{coll-name}.find()`.
 
 To delete all the documents in a collection, enter `db.{coll-name}.drop()`.
+
+To reset the "meteor" MongoDB database,
+deleting all documents in all collections,
+stop the Meteor server and enter `meteor reset`.
+This can be useful to start an app in a pristine state.
 
 ### Methods
 
@@ -643,6 +656,14 @@ in a way that affects the query results.
 For example, to always get the latest tasks from a `Task` collection:
 
 ```js
+// A query can limit the documents returned,
+// instead of getting all documents in the collection.
+// It is not typically desirable to
+// copy a large amount of data into Minimongo.
+const query = {};
+// A projection can limit the document properties returned
+// and/or specify a sort order.
+const projection = {sort: {createdAt: -1}}; // newest first
 $: tasks = Tasks.find(query, projection);
 ```
 
@@ -660,6 +681,8 @@ Atmosphere contains packages that are specific to Meteor.
 
 To see the available packages in Atmosphere,
 browse {% aTargetBlank 'https://atmospherejs.com/', 'atmosphere.com' %}.
+Packages without an author prefix followed by a colon
+are official Meteor packages.
 
 This page lists trending, recent, and most used packages.
 
@@ -667,6 +690,21 @@ To install a package from Atmosphere in your current Meteor project,
 enter `meteor add {package-name}`.
 This writes information about the installed packages to `.meteor/packages`
 to track dependencies similar to how npm uses the `package-lock.json` file.
+It also installs any CSS and JS files in the app
+and does a "hot code push" so the effect is seen immediately,
+unlike installing npm packages.
+
+There are five types of packages:
+
+1. `meteor-base`: This is a specific package that contains core components.
+2. first-party packages: These are bundled with Meteor.
+   Some are included by default, but can be removed.
+   Others are not, but can be added.
+3. local-packages: These are specific to your app
+   and reside in the `packages` directory.
+4. Atmosphere packages: These follow the `author:package` naming convention
+   and are listed in the file `.meteor/packages`.
+5. npm packages: These are listed as dependencies in `package.json`.
 
 Popular Atmosphere packages include:
 
@@ -764,6 +802,16 @@ When this is not the case, the Svelte-specific parts can be omitted.
   }
   ```
 
+### Meteor DevTools Evolved
+
+The Chrome extension Meteor DevTools Evolved displays
+DDP messages, Minimongo contents, and subscriptions.
+
+To install it, browse
+{% aTargetBlank
+  'https://chrome.google.com/webstore/category/extensions', 'here' %}
+and search by name.
+
 ### Tutorials
 
 The Meteor web site contains several tutorials
@@ -792,7 +840,14 @@ Code for the final version of this app can be found in
    {% aTargetBlank
      'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
 
-1. Start the server by entering `cd todos` and `meteor`.
+1. Modify the `start` script in `package.json` as follows
+   if you are not targeting older browsers or mobile devices:
+
+   ```json
+   "start": "meteor run --exclude-archs 'web.browser.legacy, web.cordova'",
+   ```
+
+1. Start the server by entering `cd todos` and `npm start`.
 
 1. Browse localhost:3000 to see the following page:
 
@@ -1275,6 +1330,8 @@ Code for the final version of this app can be found in
 
    Now users must create an account and sign in before they can
    view, add, and modify tasks.
+   Information about user accounts is stored in the
+   MongoDB database "meteor" inside the collection "users".
 
    Before a user signs in, they see a "Sign in" link in the upper-right.
 
@@ -1517,8 +1574,12 @@ Code for the final version of this app can be found in
    Tasks will still be stored in the same MongoDB collection,
    but each user will only see and operate on the tasks they created.
 
-   - Remove the ability for the server to send any MongoDB content
-     requested by clients.
+   - Remove the ability for the server to
+     send any MongoDB content requested by clients.
+     Currently the app includes the `autopublish` package.
+     This shares every collection and every document in these
+     with every connected client.
+     This is convenient for prototyping, but not desired for production.
 
      Enter `meteor remove autopublish`
 
@@ -1531,6 +1592,11 @@ Code for the final version of this app can be found in
        // This is only run on the server.
        // An arrow function cannot be used here
        // because we need to use the "this" keyword.
+       // If no query is provided, the entire collection is published.
+       // A second argument can be passed to the find method which is
+       // an object where the keys are names of properties.
+       // The values are booleans that either specify which properties
+       // to include (true) or which to exclude (false), but not both.
        Meteor.publish('tasks', function () {
          return Tasks.find({owner: this.userId});
        });
@@ -1547,8 +1613,15 @@ Code for the final version of this app can be found in
      to subscribe to all tasks that are published:
 
      ```js
+     // The name passed to subscribe must match a name passed to publish.
      onMount(() => Meteor.subscribe('tasks'));
      ```
+
+     Additional arguments can be passed to `Meteor.subscribe`.
+     These are passed the function passed to `Meteor.publish` in the server
+     and it can uses them to decide which documents to publish.
+     This is useful to limit the amount of data that is
+     copied into Minimongo on the client.
 
    Now users only see and operate on their own tasks.
 
@@ -1621,6 +1694,36 @@ Code for the final version of this app can be found in
    that supports user accounts and tasks are persisted in a database.
    I can't imagine doing all of this in less code
    using anything other than Meteor!
+
+### Routing
+
+For apps that need client-side page routing there are two popular libraries:
+
+- {% aTargetBlank 'https://github.com/kadirahq/flow-router', 'FlowRouter' %}
+  (with flow-router-extra)
+- {% aTargetBlank 'https://github.com/iron-meteor/iron-router', 'Iron.Router' %}
+
+### Session
+
+A Meteor `Session` is global, reactive data store.
+It can be used to share between all components.
+
+To use Session, `import { Session } from 'meteor/session'`
+
+To set a value, `Session.set(name, value);`
+
+To get a value, `Session.get(name)`
+
+To make session data reactive when using Svelte:
+
+```js
+let someValue;
+$: value = Tracker.autorun(() => {
+  someValue = Session.get(name);
+});
+```
+
+Session data survives hot code pushes, but not browser refreshes.
 
 ### Building and Deploying
 
@@ -1937,6 +2040,8 @@ to any server to which you can `ssh`.
 
 #### Meteor Up (mup)
 
+Meteor Up uses Docker to deploy Meteor apps.
+
 The steps to deploy a Meteor app using Meteor Up are:
 
 - Enter `npm install -g mup`
@@ -1960,10 +2065,15 @@ The steps to deploy a Meteor app using Meteor Up are:
         'How to Secure Nginx' %}
     - This requires a domain name, not just an ip address.
     - Set `proxy.domains` to `'https://{server-ip-address}:80'`, // nginx proxy
+    - Set `proxy.ssl.forceSSL` to `true`.
     - Set `proxy.ssl.letsEncryptEmail` to `'email@domain.com'`.
   - Delete the top-level `mongo` property.
 - Enter `cd .deploy`
 - Enter `mup setup`
+- If you get the error "endpoint mup-nginx-proxy not found",
+  this is not your first time running `mup` for this project,
+  and you have made certain changes to your `mup.js` file,
+  you may need to enter `mup stop` and `mup reconfig` instead of `mup setup`.
 - Enter `mup deploy`
   (This works in Node 12, but may not yet work in newer versions.)
 
@@ -1988,7 +2098,7 @@ To use Galaxy:
   {
     "galaxy.meteor.com": {
       "env": {
-        "MONGO_URL": "mongodb+srv://{username}:{password}@{mongo-host}/meteor",
+        "MONGO_URL": "mongodb://{username}:{password}@{mongo-host}:27017/meteor?authSource=admin&ssl=true",
         "MAIL_URL": "smtp://volkmannm@objectcomputing.com:$&oBDvwWTTms9d6dxYDG@smtp.gmail.com:587"
       }
     }
