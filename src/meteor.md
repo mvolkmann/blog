@@ -24,6 +24,8 @@ It does not use Webpack, Rollup, or Parcel.
 Meteor has its own frontend framework called Blaze.
 But it also supports other popular options that can be used in its place
 such as Angular, React, Svelte, Vue, and Cordova (for Android and iOS apps).
+(Note that on August 10, 2020 Adobe announced they
+will no longer support development of Cordova.)
 
 Meteor was initially released in 2012.
 It gained immediate attention for its novel use of WebSockets
@@ -678,9 +680,9 @@ For more information on rdb/svelte-meteor-data, see this
 ### ReactiveVar
 
 A `ReactiveVar` object holds a single value.
-They are meant to be used inside a single component,
-not as a way to share data across components.
-TODO: Can you pass one as a prop to share data?
+They can be created and exported from `.js` files
+so they can be imported by multiple components.
+They can also be passed as a prop to components.
 
 To use this feature, add the `reactive-var` package
 by entering `meteor add reactive-var`.
@@ -719,8 +721,9 @@ Here is a Svelte component that demonstrates using a `ReactiveVar`:
 ### ReactiveDict
 
 A `ReactiveDict` is a reactive data store that holds key/value pairs.
-They can be used to share data between components.
-Values can be any kind of JavaScript value that can be converted to JSON.
+They are used in the same ways a `ReactiveVar` objects,
+but they can hold multiple values instead of just one.
+The values can be any kind of JavaScript value that can be converted to JSON.
 Other values can be made compatible by calling `EJSON.addType(name, factory)`.
 
 Multiple instances can be created to
@@ -737,28 +740,28 @@ import {ReactiveDict} from 'meteor/reactive-dict';
 const myDict = new ReactiveDict(name, initialKeyValuePairs);
 ```
 
-To set the default value of a `ReactiveDict` key, call
-`Session.setDefault(key, value)`.
-
-To set a new value for a `ReactiveDict` key, call `Session.set(key, value)`.
-
-To get the value of a `ReactiveDict` key, call `Session.get(key)`.
-
-Both constructor arguments are optionally.
+Both constructor arguments are optional.
 Providing a name allows the key/value pairs to survive hot code pushes,
 but not browser refreshes.
 Providing an initial value avoids starting with no key/value pairs.
+
+To set the default value of a `ReactiveDict` key,
+call `ReactiveDict.setDefault(key, value)`.
+Only the first call is processed. Subsequent calls are ignored.
+
+To set a new value of a `ReactiveDict` key, call `Session.set(key, value)`.
+
+To get the value of a `ReactiveDict` key, call `Session.get(key)`.
 
 To get all the current key/value pairs, call `myDict.all()`.
 To remove all the key/value pairs, call `myDict.clear()`.
 These methods can also be called on the `Session` object.
 
-`ReactiveDict` objects cannot be shared between users or between browser tabs.
-
 ### Session
 
 The `Session` object is global `ReactiveDict` object with the same API.
 It is typically used to share data between components.
+The `Session` object cannot be shared between users or between browser tabs.
 
 To use this feature, add the `session` package
 by entering `meteor add session`.
@@ -806,6 +809,10 @@ Here is a Svelte component that demonstrates using a `Session`:
   <button on:click="{increment}">Increment</button>
 </div>
 ```
+
+### Email
+
+TODO: Document the Meteor API for sending email.
 
 ### Meteor Packages
 
