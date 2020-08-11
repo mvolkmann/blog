@@ -58,6 +58,8 @@ The key benefits of using Meteor are:
 - The UI can be implemented using any popular web framework.
 - User account management and authentication is provided.
   It even supports OAuth logins.
+- Reactivity through the use of `Tracker`, `ReactiveVar`,
+  `ReactiveDict`, and `Session`.
 - Changes to data in MongoDB collections are published to all
   connected clients using WebSockets so all the UIs can stay in sync.
 - There is no need to implement REST services or GraphQL queries
@@ -623,7 +625,7 @@ if (Meteor.isServer) {
 ### Tracker
 
 Tracker is a dependency tracking system used by Meteor to
-update UIs when session variables and data sources change.
+update UIs when reactive variables and data sources change.
 From the Meteor
 {% aTargetBlank 'https://docs.meteor.com/api/tracker.html', 'Tracker docs' %},
 "When you call a function that supports reactive updates
@@ -672,6 +674,138 @@ so references to them should have a `$` prefix.
 
 For more information on rdb/svelte-meteor-data, see this
 {% aTargetBlank 'https://github.com/rdb/svelte-meteor-data/issues/6', 'issue' %}.
+
+### ReactiveVar
+
+A `ReactiveVar` object holds a single value.
+They are meant to be used inside a single component,
+not as a way to share data across components.
+TODO: Can you pass one as a prop to share data?
+
+To use this feature, add the `reactive-var` package
+by entering `meteor add reactive-var`.
+
+To create a new `ReactiveVar` object:
+
+```js
+import {ReactiveVar} from 'meteor/reactive-var';
+
+const myVar = new ReactiveVar(initialValue);
+```
+
+To change the value, call `myVar.set(newValue)`.
+
+To get the value, call `myVar.get()`.
+
+Here is a Svelte component that demonstrates using a `ReactiveVar`:
+
+```js
+<script>
+  import {ReactiveVar} from 'meteor/reactive-var';
+
+  const myRV = new ReactiveVar(0);
+  let counter;
+  Tracker.autorun(() => {
+    counter = myRV.get();
+  });
+</script>
+
+<div>
+  counter = {counter}
+  <button on:click={() => myRV.set(counter + 1)}>Increment</button>
+</div>
+```
+
+### ReactiveDict
+
+A `ReactiveDict` is a reactive data store that holds key/value pairs.
+They can be used to share data between components.
+Values can be any kind of JavaScript value that can be converted to JSON.
+Other values can be made compatible by calling `EJSON.addType(name, factory)`.
+
+Multiple instances can be created to
+maintain separate groups of related key/value pairs.
+
+To use this feature, add the `reactive-dict` package
+by entering `meteor add reactive-dict`.
+
+To create a new `ReactiveDict` object:
+
+```js
+import {ReactiveDict} from 'meteor/reactive-dict';
+
+const myDict = new ReactiveDict(name, initialKeyValuePairs);
+```
+
+To set the default value of a `ReactiveDict` key, call
+`Session.setDefault(key, value)`.
+
+To set a new value for a `ReactiveDict` key, call `Session.set(key, value)`.
+
+To get the value of a `ReactiveDict` key, call `Session.get(key)`.
+
+Both constructor arguments are optionally.
+Providing a name allows the key/value pairs to survive hot code pushes,
+but not browser refreshes.
+Providing an initial value avoids starting with no key/value pairs.
+
+To get all the current key/value pairs, call `myDict.all()`.
+To remove all the key/value pairs, call `myDict.clear()`.
+These methods can also be called on the `Session` object.
+
+`ReactiveDict` objects cannot be shared between users or between browser tabs.
+
+### Session
+
+The `Session` object is global `ReactiveDict` object with the same API.
+It is typically used to share data between components.
+
+To use this feature, add the `session` package
+by entering `meteor add session`.
+
+To use `Session` in a component, import it with
+`import {Session} from 'meteor/session;`
+
+To set the default value of a session key, call
+`Session.setDefault(key, value)`.
+
+To set a new value for a session key, call `Session.set(key, value)`.
+
+To get the value of a session key, call `Session.get(key)`.
+
+To make session reactive so code is executed whenever
+the value for a given key changes, use `Tracker.autorun` as follows:
+
+```js
+let someValue;
+Tracker.autorun(() => {
+  someValue = Session.get(key);
+});
+```
+
+Here is a Svelte component that demonstrates using a `Session`:
+
+```html
+<script>
+  import {Session} from 'meteor/session';
+  import {Tracker} from 'meteor/tracker';
+
+  let counter;
+  Tracker.autorun(() => {
+    counter = Session.get('counter');
+  });
+  Session.setDefault('counter', 0);
+
+  function increment() {
+    Session.set('counter', counter + 1);
+  }
+</script>
+
+<div class="container">
+  {counter}
+  <button on:click="{increment}">Increment</button>
+</div>
+```
 
 ### Meteor Packages
 
@@ -1702,135 +1836,6 @@ For apps that need client-side page routing there are two popular libraries:
 - {% aTargetBlank 'https://github.com/kadirahq/flow-router', 'FlowRouter' %}
   (with flow-router-extra)
 - {% aTargetBlank 'https://github.com/iron-meteor/iron-router', 'Iron.Router' %}
-
-### Session
-
-Meteor `Session` is a single global, reactive data store
-that holds key/value pairs.
-It can be used to share data between all components.
-Each session key is identified by a name and
-values can be any kind of JavaScript value that can be converted to JSON.
-Other values can be made compatible by calling `EJSON.addType(name, factory)`.
-
-To use this feature, add the `session` package
-by entering `meteor add session`.
-
-To use `Session` in a component, import it with
-`import {Session} from 'meteor/session;`
-
-To set the default value of a session key, call
-`Session.setDefault(key, value)`.
-
-To set a new value for a session key, call `Session.set(key, value)`.
-
-To get the value of a session key, call `Session.get(key)`.
-
-To make session reactive so code is executed whenever
-the value for a given key changes, use `Tracker.autorun` as follows:
-
-```js
-let someValue;
-Tracker.autorun(() => {
-  someValue = Session.get(key);
-});
-```
-
-Session data survives hot code pushes, but not browser refreshes.
-It cannot be shared between users or between browser tabs.
-
-Here is a Svelte component that demonstrates using a `Session`:
-
-```html
-<script>
-  import {Session} from 'meteor/session';
-  import {Tracker} from 'meteor/tracker';
-
-  let counter;
-  Tracker.autorun(() => {
-    counter = Session.get('counter');
-  });
-  Session.setDefault('counter', 0);
-
-  function increment() {
-    Session.set('counter', counter + 1);
-  }
-</script>
-
-<div class="container">
-  {counter}
-  <button on:click="{increment}">Increment</button>
-</div>
-```
-
-The `Session` object is really a `ReactiveDict`
-which is described below.
-
-### ReactiveDict
-
-The `Session` object described earlier is a `ReactiveDict` object,
-so they have the same API.
-Creating `ReactiveDict` objects is only necessary if you wish to
-maintain separate groups of reactive key/value pairs.
-
-To use this feature, add the `reactive-dict` package
-by entering `meteor add reactive-dict`.
-
-To create a new `ReactiveDict` object:
-
-```js
-import {ReactiveDict} from 'meteor/reactive-dict';
-
-const myDict = new ReactiveDict(dictName, initialKeyValuePairs);
-```
-
-Both constructor arguments are optionally.
-Providing a name allows the key/value pairs to survive hot code pushes.
-Providing an initial value avoids starting with no key/value pairs.
-
-To get all the current key/value pairs, call `myDict.all()`.
-To remove all the key/value pairs, call `myDict.clear()`.
-These methods can also be called on the `Session` object.
-
-### ReactiveVar
-
-A `ReactiveVar` holds a single value, rather than
-a set of key/value pairs like `Session` and `ReactiveDict`.
-They are meant to be used inside a single component,
-not as a way to share data across components.
-
-To use this feature, add the `reactive-var` package
-by entering `meteor add reactive-var`.
-
-To create a new `ReactiveVar` object:
-
-```js
-import {ReactiveVar} from 'meteor/reactive-var';
-
-const myVar = new ReactiveVar(initialValue);
-```
-
-To change the value, call `myVar.set(newValue)`.
-
-To get the value, call `myVar.get()`.
-
-Here is a Svelte component that demonstrates using a `ReactiveVar`:
-
-```js
-<script>
-  import {ReactiveVar} from 'meteor/reactive-var';
-
-  const myRV = new ReactiveVar(0);
-  let counter;
-  Tracker.autorun(() => {
-    counter = myRV.get();
-  });
-</script>
-
-<div>
-  counter = {counter}
-  <button on:click={() => myRV.set(counter + 1)}>Increment</button>
-</div>
-```
 
 ### Meteor Shell
 
