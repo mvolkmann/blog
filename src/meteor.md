@@ -700,7 +700,7 @@ This is satisfied by the following properties.
    Minimongo on the client in sync with MongoDB on the server.
    Updates are made in real time, not using polling.
 
-1. When the server returns the actual result of a Method call,
+1. When the server returns the actual results of a Method call,
    Meteor verifies that it matches what the client predicted.
    If they differ, Meteor rolls back
    all the changes made in Minimongo from that point forward and
@@ -711,7 +711,9 @@ All of this functionality is provided by default.
 The only requirement is for the client to
 use Meteor Methods to request data changes.
 
-The following sequence diagram illustrates the order of these operations:
+The following sequence diagram illustrates the order of these operations.
+It assumes that Svelte is being used to implement the UI
+and that data retrieved from Minimongo is placed in a Svelte store.
 
 ![Meteor Method flow](/blog/assets/meteor-method-flow.png)
 
@@ -723,8 +725,8 @@ This is not typical, but it is useful to demonstrate optimistic UI.
 
 Here is a simplified example from the upcoming Todo app.
 It inserts a document in the "tasks" collection.
-When run on the client updates Minimongo using the text passed as an argument.
-When run on the server uses a timeout to wait three seconds
+When run on the client it updates Minimongo using the text passed as an argument.
+When run on the server it uses a timeout to wait three seconds
 and then uses the uppercase version of the text.
 The Method first runs on the client and
 the UI renders a new task with the entered text.
@@ -794,10 +796,14 @@ There is a low-level API for using Tracker,
 but there are easier ways to use it in React and Svelte.
 
 For React there is hook called `useTracker` for responding to tracker changes.
+This is provided by the Meteor package
+{% aTargetBlank 'https://atmospherejs.com/meteor/react-meteor-data',
+'react-meteor-data' %}.
 
-For Svelte, the
-{% aTargetBlank 'https://atmospherejs.com/rdb/svelte-meteor-data', 'rdb/svelte-meteor-data' %}
-provides a `useTracker` function.
+For Svelte, there is a `useTracker` function.
+This is provided by the Meteor package
+{% aTargetBlank 'https://atmospherejs.com/rdb/svelte-meteor-data',
+'rdb/svelte-meteor-data' %}.
 
 For example, to always get the current user in a Svelte component:
 
@@ -810,7 +816,7 @@ also turns MongoDB cursor objects into Svelte stores
 that automatically update whenever the database is updated
 in a way that affects the query results.
 
-For example, to always get the latest tasks from a `Task` collection:
+For example, to always get the latest tasks from a `task` collection:
 
 ```js
 // A query can limit the documents returned,
@@ -903,13 +909,13 @@ To set the default value of a `ReactiveDict` key,
 call `ReactiveDict.setDefault(key, value)`.
 Only the first call is processed. Subsequent calls are ignored.
 
-To set a new value of a `ReactiveDict` key, call `Session.set(key, value)`.
+To set a new value of a `ReactiveDict` key, call `ReactiveDict.set(key, value)`.
 
-To get the value of a `ReactiveDict` key, call `Session.get(key)`.
+To get the value of a `ReactiveDict` key, call `ReactiveDict.get(key)`.
 
 To get all the current key/value pairs, call `myDict.all()`.
+
 To remove all the key/value pairs, call `myDict.clear()`.
-These methods can also be called on the `Session` object.
 
 ### Session
 
