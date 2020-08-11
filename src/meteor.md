@@ -369,10 +369,27 @@ that contains the properties
 `reason` (concise message), `message` (long message), and more.
 It does not throw a JavaScript `Error`, so try/catch cannot be used.
 
+If a Method inserts new documents in a collection,
+Meteor uses the same random generator seed on the client and server
+in order to guarantee that the document created by client calls
+are assigned the same `_id` values as documents created by server calls.
+
 Methods that throw should do so using
 `throw new Meteor.error(methodName, message)`.
 Throwing a normal JavaScript `Error` will not
 return a detailed error message to the client.
+
+When multiple Methods are called without
+waiting for the result of each before calling the next,
+Meteor guarantees that they will execute
+in the order in which they are called and
+that the results will be processed in the same order.
+In some cases you may wish to allow multiple methods to execute concurrently.
+Call `this.unblock()` in a Method implementation
+to allow another Method to begin executing before that one finishes.
+
+While it is not commonly needed,
+Meteor supports Method implementations that call other Methods.
 
 Let's implement a simple Method that just adds two numbers.
 It is not a typical Method because it does not update a collection.
