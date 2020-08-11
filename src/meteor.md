@@ -248,24 +248,26 @@ see the Meteor package
 {% aTargetBlank 'https://atmospherejs.com/cultofcoders/grapher',
 'cultofcoders:grapher' %}.
 
-### Collections Schemas
+### Collection Schemas
 
 A schema can be associated with a collection
 in order to provide validation when documents are added or updated.
 Schemas can be described using the npm package
 {% aTargetBlank 'https://github.com/aldeed/simpl-schema', 'simpl-schema' %},
-which must be installed by entering `npm install simpl-schema`.
+which can be installed by entering `npm install simpl-schema`.
 
 For example, a `tasks` collection can be associated with a schema as follows:
 
 ```js
 import SimpleSchema from 'simpl-schema';
+
+const Tasks = new Mongo.Collection('tasks');
 Tasks.schema = new SimpleSchema({
-  createdAt: {type: Date, defaultValue: new Date()},
+  createdAt: {type: Date, defaultValue: new Date(), optional: true},
   done: {type: Boolean, defaultValue: false, optional: true},
   owner: {type: String},
   text: {type: String},
-  username: {type: String, optional: true}
+  username: {type: String}
 });
 ```
 
