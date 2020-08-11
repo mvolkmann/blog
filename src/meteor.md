@@ -334,7 +334,7 @@ Methods can also be used to perform CRUD operations on SQL databases.
 In this case it makes sense for the methods on only reside on the server
 and for them to return data needed by the client.
 
-To implement a Method,
+To implement Methods,
 import `Meteor` from the `meteor/meteor` package
 and pass an object literal to `Meteor.methods`.
 The properties of the object are Method definitions.
@@ -342,16 +342,17 @@ This registers the Methods with Meteor's DDP system.
 The `Meteor.methods` function can be called any number of times
 to register additional Methods.
 
-The Methods can accept any number of parameters with any JavaScript types.
+Methods can accept any number of parameters with any JavaScript types.
 
 The `check` function in the `meteor/check` package
 can be used to check the types of parameters at runtime.
 Note that TypeScript types are only checked at compile-time.
-The `check` function throws a `Match.Error` if unexpected types are passed.
+The `check` function throws a `Match.Error` error if unexpected types are passed.
 For details on the `check` function,
 see {% aTargetBlank 'https://docs.meteor.com/api/check.html', 'here' %}.
 
-To report other kinds of parameter validation errors,
+To report other kinds of parameter validation errors
+that are based on values rather than types,
 use `throw new ValidationError(message)`.
 
 To report most other errors, use
@@ -363,12 +364,12 @@ If a generic JavaScript error is thrown instead using
 and clients will only be notified that an internal server error occurred.
 
 To call a Method from client code,
-import `Meteor` from the `meteor/meteor` package
-and call `Meteor.call` passing it the name of a Method,
-any number of arguments, and a callback function.
+import `Meteor` from the `meteor/meteor` package and call `Meteor.call`,
+passing it the name of a Method, any number of arguments,
+and a callback function.
 This triggers the Method call lifecycle which has six parts.
 
-1. If the Method is defined on the client, it is executed there.
+1. If the Method is defined in the client, it is executed there.
    This typically updates Minimongo and corresponding UI updates are made.
 1. A JSON-based DDP message is constructed and sent to the server
    using a WebSocket connection.
@@ -381,8 +382,11 @@ This triggers the Method call lifecycle which has six parts.
    a message name (`msg` property set to "result"),
    the previously generated Method id (in the `id` property),
    and the result (in the `result` property).
-1. Any affected data in Minimongo is updated, but the UI is not yet updated.
-1. The callback function passed to `Meteor.call` is passed
+1. DDP messages that describe changes made in MongoDB in the server
+   are received in the client and used to
+   make corresponding changes in Minimongo,
+   but the UI is not yet updated.
+1. The callback function passed to `Meteor.call` is invoked, passing it
    an error description (if there was an error) and the result value.
    Now the UI is updated using data from Minimongo.
 
@@ -396,7 +400,7 @@ It does not throw a JavaScript `Error`, so try/catch cannot be used.
 
 If a Method inserts new documents in a collection,
 Meteor uses the same random generator seed on the client and server
-in order to guarantee that the document created by client calls
+in order to guarantee that documents created by client calls
 are assigned the same `_id` values as documents created by server calls.
 
 Methods that throw should do so using
@@ -441,14 +445,14 @@ Meteor.methods({
 });
 ```
 
-Add the following near the top of `server/main.js` to invoke the code above:
+Add the following near the top of `client/main.js` and `server/main.js`
+to invoke the code above in the client and server:
 
 ```js
 import '../imports/methods.js';
 ```
 
-To call the `sum` Method from client code, add the following
-in any client JavaScript file such as `client/main.js`:
+Add the following in `client/main.js` to call the `sum` Method:
 
 ```js
 const number1 = 2;
@@ -462,8 +466,8 @@ Meteor.call('sum', number1, number2, (err, result) => {
 });
 ```
 
-If you prefer to use promises, implement a utility function
-that wraps calls in a `Promise` as follows:
+If you prefer to use promises instead of callback functions,
+implement a utility function that wraps calls in a `Promise` as follows:
 
 ```js
 export function call(name, ...args) {
@@ -495,7 +499,7 @@ try {
 }
 ```
 
-A Method can return a `Promise`.
+If a Method returns a `Promise`,
 Meteor will wait for the `Promise` to resolve or reject
 before returning a result or an error to the client.
 
@@ -504,7 +508,7 @@ Two alternate ways to define Methods are
 'Advanced Method boilerplate' %} and
 {% aTargetBlank 'https://guide.meteor.com/methods.html#validated-method',
 'mdg:validated-method' %}.
-These provides additional features, but may be overkill for most Methods.
+These provide additional features, but may be overkill for most Methods.
 
 ### Method Retries
 
@@ -512,7 +516,7 @@ If a client calls a Method and their internet connection is lost
 before a result is returned, Meteor will remember this
 and will make the call again when connectivity is restored.
 This presents an issue when Methods are not idempotent.
-Being idempotent means that the when a call is repeated,
+In this context, being idempotent means that the when a call is repeated
 no additional changes are made in the database.
 
 Consider typical CRUD operations.
@@ -532,7 +536,7 @@ Consider typical CRUD operations.
   has been updated since we last retrieved it and reject the update.
 
 - Deleting a document multiple times is not a problem as long as
-  attempts to delete a non-existent document are not treated as errors.
+  an attempt to delete a non-existent document is not treated as an error.
 
 ### Viewing WebSocket Messages
 
