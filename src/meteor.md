@@ -139,6 +139,55 @@ So there is no longer a requirement to have an `imports` directory.
 However, it is still a useful location for
 files that are shared between client and server code.
 
+### Meteor Packages
+
+Meteor can use packages from npm and
+from its own package repository called "Atmosphere".
+Atmosphere contains packages that are specific to Meteor.
+
+To see the available packages in Atmosphere,
+browse {% aTargetBlank 'https://atmospherejs.com/', 'atmosphere.com' %}.
+Packages without an author prefix followed by a colon
+are official Meteor packages.
+This page lists trending, recent, and most used packages.
+
+To install a package from Atmosphere in your current Meteor project,
+enter `meteor add {package-name}`.
+This writes information about the installed packages to `.meteor/packages`
+to track dependencies similar to how npm uses the `package-lock.json` file.
+It also installs any CSS and JS files in the app
+and does a "hot code push" so the effect is seen immediately,
+unlike installing npm packages.
+
+There are five types of packages:
+
+1. `meteor-base`: This is a specific package that contains core components.
+2. first-party packages: These are bundled with Meteor.
+   Some are included by default, but can be removed.
+   Others are not, but can be added.
+3. local-packages: These are specific to your app
+   and reside in the `packages` directory.
+4. Atmosphere packages: Many of these follow the `author:package`
+   naming convention and all in use are listed in the file `.meteor/packages`.
+5. npm packages: These are listed as dependencies in `package.json`.
+
+Popular Atmosphere packages include:
+
+- accounts-password - "login service that enables secure password-based login"
+- accounts-ui - "turn-key user interface for Meteor Accounts" using Blaze
+- meteor-base - "default set of packages that almost every app will have"
+- mongo - "adaptor for using MongoDB and Minimongo over DDP"
+- rdb:svelte-meteor-data - "reactively track Meteor data inside Svelte components"
+- react-meteor-data - "React hook for reactively tracking Meteor data"
+- static-html - "define static page content in `.html` files"; alternative to Blaze
+- svelte:compiler - compiles `.svelte` files to JavaScript
+- svelte:blaze-integration - "render Blaze templates
+  inside your Svelte components and vice versa";
+  useful when using the account-ui package in a Svelte app
+- tracker - "dependency tracker to allow reactive callbacks"
+- typescript - "compiler plugin that compiles TypeScript and ECMAScript
+  in `.ts` and `.tsx` files"
+
 ### MongoDB
 
 MongoDB is a popular, powerful NoSQL database.
@@ -929,14 +978,10 @@ by entering `meteor add session`.
 To use `Session` in a component, import it with
 `import {Session} from 'meteor/session;`
 
-To set the default value of a session key, call
-`Session.setDefault(key, value)`.
+The API for the `Session` object is identical to
+that of `ReactiveDict` objects since it is one.
 
-To set a new value for a session key, call `Session.set(key, value)`.
-
-To get the value of a session key, call `Session.get(key)`.
-
-To make session reactive so code is executed whenever
+To make the `Session` reactive so code is executed whenever
 the value for a given key changes, use `Tracker.autorun` as follows:
 
 ```js
@@ -980,56 +1025,6 @@ Disable this ESLint rule if you decide to use `Session`.
 
 TODO: Document the Meteor API for sending email.
 
-### Meteor Packages
-
-Meteor can use packages from npm and
-from its own package repository called "Atmosphere".
-Atmosphere contains packages that are specific to Meteor.
-
-To see the available packages in Atmosphere,
-browse {% aTargetBlank 'https://atmospherejs.com/', 'atmosphere.com' %}.
-Packages without an author prefix followed by a colon
-are official Meteor packages.
-
-This page lists trending, recent, and most used packages.
-
-To install a package from Atmosphere in your current Meteor project,
-enter `meteor add {package-name}`.
-This writes information about the installed packages to `.meteor/packages`
-to track dependencies similar to how npm uses the `package-lock.json` file.
-It also installs any CSS and JS files in the app
-and does a "hot code push" so the effect is seen immediately,
-unlike installing npm packages.
-
-There are five types of packages:
-
-1. `meteor-base`: This is a specific package that contains core components.
-2. first-party packages: These are bundled with Meteor.
-   Some are included by default, but can be removed.
-   Others are not, but can be added.
-3. local-packages: These are specific to your app
-   and reside in the `packages` directory.
-4. Atmosphere packages: These follow the `author:package` naming convention
-   and are listed in the file `.meteor/packages`.
-5. npm packages: These are listed as dependencies in `package.json`.
-
-Popular Atmosphere packages include:
-
-- accounts-password - "login service that enables secure password-based login"
-- accounts-ui - "turn-key user interface for Meteor Accounts" using Blaze
-- meteor-base - "default set of packages that almost every app will have"
-- mongo - "adaptor for using MongoDB and Minimongo over DDP"
-- rdb:svelte-meteor-data - "reactively track Meteor data inside Svelte components"
-- react-meteor-data - "React hook for reactively tracking Meteor data"
-- static-html - "define static page content in .html files"; alternative to Blaze
-- svelte:compiler - compiles `.svelte` files to JavaScript
-- svelte:blaze-integration - "render Blaze templates
-  inside your Svelte components and vice versa";
-  useful when using the account-ui package in a Svelte app
-- tracker - "dependency tracker to allow reactive callbacks"
-- typescript - "compiler plugin that compiles TypeScript and ECMAScript
-  in .ts and .tsx files"
-
 ### ESLint
 
 The steps to install and configure the ESLint linting tool
@@ -1070,14 +1065,15 @@ When this is not the case, the Svelte-specific parts can be omitted.
       "ecmaVersion": 2019,
       "sourceType": "module"
     },
-    "plugins": ["import", "svelte3"]
+    "plugins": ["import", "meteor", "svelte3"]
   }
   ```
 
 ESLint will give "Unable to resolve path to module" errors
 on all imports that begin with "meteor/".
 However, the Meteor build system is able to resolve these.
-To suppress these errors, add the following to your `.eslintrc.json` file:
+To suppress these errors, add the following top level property
+to your `.eslintrc.json` file:
 
 ```json
 "rules": {
@@ -1113,15 +1109,15 @@ When this is not the case, the Svelte-specific parts can be omitted.
   }
   ```
 
-### Meteor DevTools Evolved
+### DevTools
 
 The Chrome extension Meteor DevTools Evolved displays
 DDP messages, Minimongo contents, and subscriptions.
 
 To install it, browse
 {% aTargetBlank
-  'https://chrome.google.com/webstore/category/extensions', 'here' %}
-and search by name.
+  'https://chrome.google.com/webstore/search/meteor%20devtools%20evolved',
+  'here' %}.
 
 ### Tutorials
 
@@ -1146,7 +1142,9 @@ Code for the final version of this app can be found in
    Interestingly none of these options corresponds to the default.
    The default option produces applications that are insecure
    and are therefore only for prototyping.
-   Such applications allow all MongoDB updates to be initiated from clients.
+   Such applications allow all MongoDB updates to be initiated from clients
+   and all documents are synced from MongoDB on the server
+   to Minimongo in the client.
    For details on the Meteor packages included by default and with each option see
    {% aTargetBlank
      'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
@@ -1158,7 +1156,7 @@ Code for the final version of this app can be found in
    "start": "meteor run --exclude-archs 'web.browser.legacy, web.cordova'",
    ```
 
-1. Start the server by entering `cd todos` and `npm start`.
+1. Start the server by entering `cd todos`, `npm install`, and `npm start`.
 
 1. Browse localhost:3000 to see the following page:
 
@@ -1183,7 +1181,7 @@ Code for the final version of this app can be found in
    For more information about Svelte, see
    {% aTargetBlank 'https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte', 'my article' %}.
 
-1. Install Svelte by entering `meteor npm install svelte`
+   Install Svelte by entering `meteor npm install svelte`.
 
    It is recommended to use the command `meteor npm` instead of `npm`
    when installing npm packages in a Meteor app.
@@ -1206,6 +1204,7 @@ Code for the final version of this app can be found in
      <title>Todo App</title>
    </head>
    <body>
+     <!-- Svelte will insert content in this div. -->
      <div id="app"></div>
    </body>
    ```
@@ -1225,7 +1224,7 @@ Code for the final version of this app can be found in
 
    ```html
    <script>
-     export let task;
+     export let task; // Parent components pass this value as a prop.
 
      const formatDate = date =>
        date.toLocaleDateString('en-us', {
@@ -1234,7 +1233,8 @@ Code for the final version of this app can be found in
          year: 'numeric'
        });
 
-     // These are Svelte "reactive declarations".
+     // These are Svelte "reactive declarations" which are
+     // re-executed any time a variable they depend on changes.
      $: ({createdAt, text} = task);
      $: item = text + (createdAt ? ` - added ${formatDate(createdAt)}` : '');
    </script>
@@ -1242,6 +1242,7 @@ Code for the final version of this app can be found in
    <li>{item}</li>
 
    <style>
+     /* This styling is scoped to this component. */
      li {
        padding-left: 0;
      }
@@ -1310,7 +1311,7 @@ Code for the final version of this app can be found in
    import '../imports/tasks.js';
    ```
 
-1. Add the following imports near the top of `client/App.svelte`:
+1. Add the following import near the top of `client/App.svelte`:
 
    ```js
    import {Tasks} from '../imports/tasks.js';
