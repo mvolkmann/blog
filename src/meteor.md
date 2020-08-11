@@ -15,17 +15,17 @@ It is used to host both client-side and server-side code.
 
 Meteor is built on Node.js.
 It has good integration with the MongoDB NoSQL database.
-It supports a publish and subscribe mechanism to synchronize
+It also supports a publish and subscribe mechanism to synchronize
 user interfaces (UIs) with backend data, providing real-time updates.
 
 Meteor uses its own build systems and JavaScript bundler.
-It does not use Webpack, Rollup, or Parcel.
+It does not use an external bundler such as Webpack, Rollup, or Parcel.
 
 Meteor has its own frontend framework called Blaze.
 But it also supports other popular options that can be used in its place
 such as Angular, React, Svelte, Vue, and Cordova (for Android and iOS apps).
-(Note that on August 10, 2020 Adobe announced they
-will no longer support development of Cordova.)
+Note that on August 10, 2020 Adobe announced they
+will no longer support development of Cordova.
 
 Meteor was initially released in 2012.
 It gained immediate attention for its novel use of WebSockets
@@ -33,7 +33,7 @@ as an alternative to HTTP to achieve real-time updates.
 But the attention faded quickly as other frameworks garnered more notice.
 It is seeing some resurgence in 2020.
 
-Tiny ({% aTargetBlank 'https://www.tinycapital.com/', 'tinycapital.com' %})
+Tiny ({% aTargetBlank 'https://www.tinycapital.com/', 'tinycapital.com' %}),
 a Canadian technology holding company,
 acquired Meteor from the Meteor Development Group in October, 2019.
 This occurred after most of the Meteor Development Group team
@@ -58,9 +58,9 @@ The key benefits of using Meteor are:
 - Client and server code can be developed in a single language,
   JavaScript or TypeScript.
 - The UI can be implemented using any popular web framework.
-- User account management and authentication is provided.
-  It even supports OAuth logins.
-- Reactivity is provided through the use of
+- User account management and authentication is provided,
+  including OAuth logins.
+- Reactivity is provided through the use of the JavaScript classes
   `Tracker`, `ReactiveVar`, `ReactiveDict`, and `Session`.
 - Changes to data in MongoDB collections can be published to all
   connected clients using WebSockets so UIs can stay in sync.
@@ -80,12 +80,14 @@ see {% aTargetBlank 'https://www.meteor.com/install', 'here' %}.
 On Linux or macOS, enter `curl https://install.meteor.com | sh`.
 On Windows, install Chocolatey and enter `choco install meteor`.
 
-This installs several tools used by Meteor including MongoDB and TypeScript.
+This installs several tools used by Meteor
+including MongoDB and TypeScript.
+{% aTargetBlank 'https://nodejs.org/', 'Node.js' %}
+must be installed separately and that includes npm.
 
 ### Directory Structure
 
-To create the initial directory structure for a new Meteor app
-and run the starter app:
+To create the initial directory structure for a new Meteor app and run it:
 
 - Enter `meteor create {app-name}`
 - Enter `cd {app-name}`
@@ -94,38 +96,40 @@ and run the starter app:
 
 This is covered in more detail later in the "Todo App" section.
 
-The recommended directory structure for Meteor applications
-is described below.
+The recommended directory structure for Meteor applications is:
 
-- `client`
+- `client`  
+  This holds files that are only used in the browser.
+
   - `main.html`
   - `main.css`
   - `main.js`
-- `server`
-  - `main.js`
-- `imports`
-  - `\*.js`
-- `public`
 
+- `server`  
+  This holds files that are only used in the server.
+
+  - `main.js`
+
+- `imports`  
+  This holds files that are used in both the browser and server.
+
+  - `*.js`
+
+- `public`  
   This holds static assets such as images and fonts.
   When referencing these files, do so as if they were at the top level,
   not including `public/`.
 
-- `private`
-
+- `private`  
   This holds files that are only accessible from server code
   using the Assets API.
 
-- `.meteor`
+- `.meteor`  
+  This holds files that Meteor uses for bookkeeping.
+  These files should not be manually modified.
 
 Additional files can be added to all the directories listed above
-expect `.meteor`.
-All client-side files should be placed in the `client` directory
-and all server-side files should be placed in the `server` directory.
-Files that are shared by client and server code
-should be placed in the `imports` directory.
-The `.meteor` directory holds files that Meteor uses for bookkeeping
-and these files should not be manually modified.
+except `.meteor`.
 
 In the past Meteor eagerly loaded files outside the `imports` directory
 and lazily loaded files inside the `imports` directory.
