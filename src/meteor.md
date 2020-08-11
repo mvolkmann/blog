@@ -60,8 +60,8 @@ The key benefits of using Meteor are:
 - The UI can be implemented using any popular web framework.
 - User account management and authentication is provided.
   It even supports OAuth logins.
-- Reactivity through the use of `Tracker`, `ReactiveVar`,
-  `ReactiveDict`, and `Session`.
+- Reactivity is provided through the use of
+  `Tracker`, `ReactiveVar`, `ReactiveDict`, and `Session`.
 - Changes to data in MongoDB collections are published to all
   connected clients using WebSockets so all the UIs can stay in sync.
 - There is no need to implement REST services or GraphQL queries
@@ -82,6 +82,16 @@ On Windows, install Chocolatey and enter `choco install meteor`.
 This installs several tools used by Meteor including MongoDB and TypeScript.
 
 ### Directory Structure
+
+To create the initial directory structure for a new Meteor app
+and run the starter app:
+
+- Enter `meteor create {app-name}`
+- Enter `cd {app-name}`
+- Enter `meteor npm install`
+- Enter `meteor`
+
+This is covered in more detail later in the "Todo App" section.
 
 The recommended directory structure for Meteor applications
 is described below.
@@ -2002,6 +2012,8 @@ To enable nginx to act as a proxy for a server that listens on a particular port
 - Enter `sudo vim /etc/nginx/conf.d/sysmon.conf`
 - Add the following:
 
+  {% raw %}
+
   ```text
   server {
     listen 1919; # node port
@@ -2014,6 +2026,8 @@ To enable nginx to act as a proxy for a server that listens on a particular port
     }
   }
   ```
+
+  {% endraw %}
 
 - Enter `sudo systemctl restart nginx`
 - Now you should be able to browse https://{your-domain}:{node-port}
@@ -2032,6 +2046,8 @@ Setup nginx "server blocks" by following the steps
 1. Enter `vim /var/www/{your-domain}/html/index.html`
 1. Add content like the following for testing your site:
 
+   {% raw %}
+
    ```html
    <html>
      <head>
@@ -2043,7 +2059,7 @@ Setup nginx "server blocks" by following the steps
    </html>
    ```
 
-````
+   {% endraw %}
 
 1. Enter `sudo vim /etc/nginx/sites-available/{your-domain}`
 1. Add content like the following to serve your site:
@@ -2219,6 +2235,8 @@ To use Galaxy:
 - Open a terminal window and cd to the root project directory.
 - Create the file `settings.json` containing the following:
 
+  {% raw %}
+
   ```json
   {
     "galaxy.meteor.com": {
@@ -2230,7 +2248,7 @@ To use Galaxy:
   }
   ```
 
-```
+  {% endraw %}
 
 - Add `settings.json` to `.gitignore`.
 - Enter `DEPLOY_HOSTNAME=us-east-1.galaxy-deploy.meteor.com \`
@@ -2239,12 +2257,19 @@ To use Galaxy:
 
 ### Resources
 
-- ({% aTargetBlank 'https://meteor.com/', 'Meteor home page' %})
-- ({% aTargetBlank 'https://docs.meteor.com/', 'Meteor API docs' %})
+- {% aTargetBlank 'https://meteor.com/', 'Meteor home page' %}
+- {% aTargetBlank 'https://guide.meteor.com/', 'Meteor Guide' %}
+- {% aTargetBlank 'https://docs.meteor.com/', 'Meteor API docs' %}
 - {% aTargetBlank 'https://github.com/Urigo/awesome-meteor', 'Awesome Meteor' %}
   curated list of packages and libraries
 - {% aTargetBlank 'https://atmospherejs.com/', 'Atmosphere Meteor package repository' %}
 - {% aTargetBlank 'https://forums.meteor.com/', 'Meteor Forum' %}
 - {% aTargetBlank 'https://stackoverflow.com/questions/tagged/meteor', 'Stack Overflow' %}
+
 ```
-````
+
+```
+
+```
+
+```
