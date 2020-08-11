@@ -96,7 +96,6 @@ This is covered in more detail later in the "Todo App" section.
 The recommended directory structure for Meteor applications
 is described below.
 
-- `public` - holds static assets such as images and fonts
 - `client`
   - `main.html`
   - `main.css`
@@ -105,6 +104,17 @@ is described below.
   - `main.js`
 - `imports`
   - `\*.js`
+- `public`
+
+  This holds static assets such as images and fonts.
+  When referencing these files, do so as if they were at the top level,
+  not including `public/`.
+
+- `private`
+
+  This holds files that are only accessible from server code
+  using the Assets API.
+
 - `.meteor`
 
 Additional files can be added to all the directories listed above
@@ -123,49 +133,6 @@ and all code is lazily loaded.
 So there is no longer a requirement to have an `imports` directory.
 However, it is still a useful location for
 files that are shared between client and server code.
-
-### Collections
-
-The client-side of Meteor applications can obtain data in many ways
-including REST calls and GraphQL queries
-that connect to any kind of database.
-The data can be stored in clients in many ways including
-JavaScript variables, session storage, and local storage.
-
-The most common way for a Meteor application to store data is in "collections".
-These are associated with a MongoDB collection.
-They can be accessed from both client and server code.
-When data is added to a collection, updated, or deleted,
-client code that uses it typically updates automatically.
-This is a significant benefit over using REST services
-that require the use of polling to get data updates.
-
-The following code demonstrates
-creating a MongoDB collection named "Todos",
-inserting a document into the collection, and finding it.
-MongoDB prefers for the unique id of each document
-to be held in property named `_id`.
-
-```js
-const Todos = new Mongo.Collection('todos');
-Todos.insert({_id: 't1', text: 'buy milk'});
-const todo = Todos.findOne({_id: 't1'});
-```
-
-The same code can be used in client or server code
-when the Meteor "insecure" package is installed.
-(Later we will look at securing Meteor applications.)
-When run server-side, this code creates a MongoDB collection and populates it.
-When run client-side, it creates a client-side cache
-using the "Minimonogo" library which provides an
-in-memory JavaScript implementation of the MongoDB API.
-
-Client code must subscribe to a publication
-in order to receive updates from the server.
-This keeps the client-side cache (implemented by Minimongo)
-in sync with a subset of the data in MongoDB on the server.
-This is accomplished by using the Meteor Distributed Data Protocol (DDP)
-to send WebSocket messages in both directions.
 
 ### MongoDB
 
@@ -191,6 +158,110 @@ To reset the "meteor" MongoDB database,
 deleting all documents in all collections,
 stop the Meteor server and enter `meteor reset`.
 This can be useful to start an app in a pristine state.
+
+### Collections
+
+The client-side of Meteor applications can obtain data in many ways
+including REST calls and GraphQL queries
+that connect to any kind of database.
+The data can be stored in clients in many ways including
+JavaScript variables, session storage, and local storage.
+
+The most common way for a Meteor application to store data is in "collections".
+These are associated with a MongoDB collection.
+They can be accessed from both client and server code.
+When data is added to a collection, updated, or deleted,
+client code that uses it typically updates automatically.
+This is a significant benefit over using REST services
+that require the use of polling to get data updates.
+
+The following code demonstrates
+creating a MongoDB collection named "Tasks",
+inserting a document into the collection, and finding it.
+MongoDB prefers for the unique id of each document
+to be held in property named `_id`.
+
+```js
+const Tasks = new Mongo.Collection('tasks');
+Tasks.insert({_id: 't1', text: 'buy milk'});
+const task = Tasks.findOne({_id: 't1'});
+```
+
+The same code can be used in client or server code
+when the Meteor "insecure" package is installed.
+(Later we will look at securing Meteor applications.)
+When run server-side, this code creates a MongoDB collection and populates it.
+When run client-side, it creates a client-side cache
+using the "Minimonogo" library which provides an
+in-memory JavaScript implementation of the MongoDB API.
+
+Client code must subscribe to a publication
+in order to receive updates from the server.
+This keeps the client-side cache (implemented by Minimongo)
+in sync with a subset of the data in MongoDB on the server.
+This is accomplished by using the Meteor Distributed Data Protocol (DDP)
+to send WebSocket messages in both directions.
+
+It is also possible to create a "local collection"
+that only exists on the client or on the server.
+These are Minimongo collections that are
+not synchronized with a MongoDB collection.
+They are useful for data that only resides in memory
+in cases where using the MongoDB API to access it is convenient.
+An alternative is to use a `ReactiveVar` or `ReactiveDict`.
+
+To create a local collection:
+
+```js
+const myCollection = new Mongo.Collection(null);
+```
+
+or
+
+```js
+const myCollection = new Mongo.Collection('some-name', {connection: null});
+```
+
+### Schemas for Collections
+
+A schema can be associated with a collection
+in order to provide validation when documents are added or updated.
+They use the npm package
+{% aTargetBlank 'https://github.com/aldeed/simpl-schema', 'simpl-schema' %}
+which must be installed by entering `npm install simpl-schema`.
+
+For example, a Tasks collection can be associated with a schema as follows:
+
+```js
+import SimpleSchema from 'simpl-schema';
+Tasks.schema = new SimpleSchema({
+  createdAt: {type: Date, defaultValue: new Date()},
+  done: {type: Boolean, defaultValue: false, optional: true},
+  owner: {type: String},
+  text: {type: String},
+  username: {type: String, optional: true}
+});
+```
+
+Note that specifying a `defaultValue` for a property
+does not imply that it is `optional`.
+That must also be specified.
+
+Schema validation is not performed automatically.
+It is done by explicitly passing an object to the `validate` method.
+For example, `Tasks.schema.validate(newTask)`.
+If the object passed to `validate` does not match the schema,
+this throws a `ValidationError` which describes the difference.
+Note that extra properties not specified in the schema are not allowed.
+
+Creating collections whose documents can be deeply nested
+or can contain large arrays is not recommended.
+This is because DDP, which is used to send messages to clients
+that describe new and updated documents,
+is only able to describe top-level properties and their values.
+For example, if a document contains a property whose value is a large array
+and a single element is modified, DDP will send the entire array to clients.
+This works fine, but is inefficient.
 
 ### Methods
 
@@ -689,7 +760,7 @@ For more information on rdb/svelte-meteor-data, see this
 
 ### ReactiveVar
 
-A `ReactiveVar` object holds a single value.
+A `ReactiveVar` is a client-side object holds a single value.
 They can be created and exported from `.js` files
 so they can be imported by multiple components.
 They can also be passed as a prop to components.
@@ -730,7 +801,8 @@ Here is a Svelte component that demonstrates using a `ReactiveVar`:
 
 ### ReactiveDict
 
-A `ReactiveDict` is a reactive data store that holds key/value pairs.
+A `ReactiveDict` is a client-side reactive data store
+that holds key/value pairs.
 They are used in the same ways a `ReactiveVar` objects,
 but they can hold multiple values instead of just one.
 The values can be any kind of JavaScript value that can be converted to JSON.
@@ -769,7 +841,7 @@ These methods can also be called on the `Session` object.
 
 ### Session
 
-The `Session` object is global `ReactiveDict` object with the same API.
+The `Session` is a client-side, global `ReactiveDict` object.
 It is typically used to share data between components.
 The `Session` object cannot be shared between users or between browser tabs.
 
@@ -2275,11 +2347,3 @@ To use Galaxy:
 - {% aTargetBlank 'https://atmospherejs.com/', 'Atmosphere Meteor package repository' %}
 - {% aTargetBlank 'https://forums.meteor.com/', 'Meteor Forum' %}
 - {% aTargetBlank 'https://stackoverflow.com/questions/tagged/meteor', 'Stack Overflow' %}
-
-```
-
-```
-
-```
-
-```
