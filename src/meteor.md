@@ -277,18 +277,19 @@ That must also be specified.
 
 Schema validation is not performed automatically.
 It is done by explicitly passing an object to the `validate` method.
-For example, `Tasks.schema.validate(newTask)`.
-If the object passed to `validate` does not match the schema,
-this throws a `ValidationError` which describes the difference.
-Note that extra properties not specified in the schema are not allowed.
+For example, if `Tasks.schema.validate(newTask)` is called
+and the object referred to by `newTask` does not match the schema,
+a `ValidationError` which describes the difference is thrown.
+Extra properties in the object that are
+not specified in the schema are not allowed.
 
-The `collection2` Meteor package can be used to automatically validate
-every insert, update, and upsert performed for a given collection.
+The `aldeed:collection2` Meteor package can be used to automatically validate
+every insert, update, and upsert performed on a given collection.
 In addition it coerces values to the expected types when possible,
 removes properties not in the schema, and
 assigns default values specified with the `defaultValue` property.
-To install `collection2`, enter `meteor add aldeed:collection2`.
-To use `collection2` on our `Tasks` collection:
+To install this package, enter `meteor add aldeed:collection2`.
+To use this on our `Tasks` collection:
 
 ```js
 Tasks.attachSchema(Tasks.schema);
@@ -316,6 +317,7 @@ to distinguish it from normal JavaScript methods.
 Meteor Methods are an alternative to REST calls implemented using HTTP.
 An issue with using Meteor Methods instead of REST
 is that they can only be called from the same Meteor app.
+In many cases the Methods are specific to the app and this is a non-issue.
 
 Common uses for Methods include
 inserting a document in a collection,
@@ -324,11 +326,12 @@ and updating a document in a collection.
 There is typically no need to return anything to the client
 because changes in the MongoDB database are communicated back to the client
 through WebSocket messages that keep Minimongo in the client synchronized.
-Retrieving documents from collections
-is typically done by subscribing to them.
+Retrieving documents from collections is typically done by
+subscribing to them rather than through methods calls,
+but Methods can also be used for this purpose.
 
 Methods can also be used to perform CRUD operations on SQL databases.
-It this case it makes sense for the methods on only reside on the server
+In this case it makes sense for the methods on only reside on the server
 and for them to return data needed by the client.
 
 To implement a Method,
