@@ -820,6 +820,12 @@ Here is a Svelte component that demonstrates using a `Session`:
 </div>
 ```
 
+The ESLint plugin eslint-plugin-meteor will complain about
+the use of `Session` based on the {% aTargetBlank
+'https://github.com/dferber90/eslint-plugin-meteor/blob/master/docs/rules/no-session.md',
+'meteor/no-session' %} rule.
+Disable this ESLint rule if you decide to use `Session`.
+
 ### Email
 
 TODO: Document the Meteor API for sending email.
@@ -881,7 +887,7 @@ for use in a Meteor project are listed below.
 They assume using Svelte as the web framework.
 When this is not the case, the Svelte-specific parts can be omitted.
 
-- Enter `npm install eslint eslint-plugin-import eslint-plugin-svelte3`
+- Enter `npm install eslint eslint-plugin-import eslint-plugin-meteor eslint-plugin-svelte3`
 
 - Add the following script in `package.json`:
 
@@ -899,7 +905,11 @@ When this is not the case, the Svelte-specific parts can be omitted.
       "jest": true,
       "node": true
     },
-    "extends": ["eslint:recommended", "plugin:import/recommended"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:import/recommended",
+      "plugin:meteor/recommended"
+    ],
     "overrides": [
       {
         "files": ["**/*.svelte"],
