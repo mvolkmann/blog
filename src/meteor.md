@@ -457,6 +457,13 @@ A Method can return a `Promise`.
 Meteor will wait for the `Promise` to resolve or reject
 before returning a result or an error to the client.
 
+Two alternate ways to define Methods are
+{% aTargetBlank 'https://guide.meteor.com/methods.html#advanced-boilerplate',
+'Advanced Method boilerplate' %} and
+{% aTargetBlank 'https://guide.meteor.com/methods.html#validated-method',
+'mdg:validated-method' %}.
+These provides additional features, but may be overkill for most Methods.
+
 ### Method Retries
 
 If a client calls a Method and their internet connection is lost
@@ -650,10 +657,9 @@ This is satisfied by the following properties.
 1. When the server returns the actual result of a Method call,
    Meteor verifies that it matches what the client predicted.
    If they differ, Meteor rolls back
-   all the changes made from that point forward and
-   replays them with the correct results from the server.
-   UI changes triggered by Method calls are tracked
-   in order to support the ability to rollback changes.
+   all the changes made in Minimongo from that point forward and
+   applies the correct changes from the server.
+   The UI can then update using the new data in Minimongo.
 
 All of this functionality is provided by default.
 The only requirement is for the client to
@@ -662,6 +668,8 @@ use Meteor Methods to request data changes.
 The following sequence diagram illustrates the order of these operations:
 
 ![Meteor Method flow](/blog/assets/meteor-method-flow.png)
+
+If the client method throws an error, the server method is not called.
 
 To see rollback in action, we can modify a Meteor Method to
 return a different result when run on the client versus the server.
