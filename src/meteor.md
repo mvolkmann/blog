@@ -150,7 +150,8 @@ To start the MongoDB console, enter `meteor mongo`.
 
 To see a list of all the databases, enter `show dbs`.
 
-To use the Meteor database, enter `use meteor`.
+Meteor uses the database named "meteor".
+To use this database, enter `use meteor`.
 
 To see a list of collections in the current database, enter `show collections`.
 
@@ -173,18 +174,21 @@ The data can be stored in clients in many ways including
 JavaScript variables, session storage, and local storage.
 
 The most common way for a Meteor application to store data is in "collections".
-These are associated with a MongoDB collection.
+These are typically associated with a MongoDB collection.
 They can be accessed from both client and server code.
 When data is added to a collection, updated, or deleted,
 client code that uses it typically updates automatically.
-This is a significant benefit over using REST services
+This provides a significant benefit over using REST services
 that require the use of polling to get data updates.
 
 The following code demonstrates
-creating a MongoDB collection named "Tasks",
+creating a MongoDB collection named "tasks",
 inserting a document into the collection, and finding it.
-MongoDB prefers for the unique id of each document
-to be held in property named `_id`.
+By convention, variable names that refer to collections
+have CamelCase names that start uppercase.
+By default MongoDB stores the unique id of each document
+in property named `_id`.
+If no value is provided, MongoDB will generate a unique value.
 
 ```js
 const Tasks = new Mongo.Collection('tasks');
@@ -194,18 +198,29 @@ const task = Tasks.findOne({_id: 't1'});
 
 The same code can be used in client or server code
 when the Meteor "insecure" package is installed.
-(Later we will look at securing Meteor applications.)
-When run server-side, this code creates a MongoDB collection and populates it.
-When run client-side, it creates a client-side cache
+The starter app includes this.
+Later we will look at securing Meteor applications.
+
+If the code above is run in the server,
+it creates a MongoDB collection and populates it.
+If the code above is run in the client, it creates a client-side cache
 using the "Minimonogo" library which provides an
 in-memory JavaScript implementation of the MongoDB API.
 
-Client code must subscribe to a publication
-in order to receive updates from the server.
+Minimongo in the client is automatically kept in sync with
+MongoDB in the server when the "autopublish" package is installed.
+The starter app includes this.
+Later we will look at removing this.
+When "autopublish" is not installed,
+the server must publish documents from collections
+and the client must subscribe documents of interest.
 This keeps the client-side cache (implemented by Minimongo)
 in sync with a subset of the data in MongoDB on the server.
-This is accomplished by using the Meteor Distributed Data Protocol (DDP)
-to send WebSocket messages in both directions.
+The underlying mechanism that supports this
+is the Meteor Distributed Data Protocol (DDP)
+which sends WebSocket messages in both directions.
+
+### Local Collections
 
 It is also possible to create a "local collection"
 that only exists on the client or on the server.
@@ -213,7 +228,8 @@ These are Minimongo collections that are
 not synchronized with a MongoDB collection.
 They are useful for data that only resides in memory
 in cases where using the MongoDB API to access it is convenient.
-An alternative is to use a `ReactiveVar` or `ReactiveDict`.
+An alternative is to use a `ReactiveVar`, `ReactiveDict`,
+or the `Session` object, all of which are described later.
 
 To create a local collection:
 
@@ -232,15 +248,15 @@ see the Meteor package
 {% aTargetBlank 'https://atmospherejs.com/cultofcoders/grapher',
 'cultofcoders:grapher' %}.
 
-### Schemas for Collections
+### Collections Schemas
 
 A schema can be associated with a collection
 in order to provide validation when documents are added or updated.
-They use the npm package
-{% aTargetBlank 'https://github.com/aldeed/simpl-schema', 'simpl-schema' %}
+Schemas can be described using the npm package
+{% aTargetBlank 'https://github.com/aldeed/simpl-schema', 'simpl-schema' %},
 which must be installed by entering `npm install simpl-schema`.
 
-For example, a Tasks collection can be associated with a schema as follows:
+For example, a `tasks` collection can be associated with a schema as follows:
 
 ```js
 import SimpleSchema from 'simpl-schema';
