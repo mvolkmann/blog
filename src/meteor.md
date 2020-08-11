@@ -1653,6 +1653,14 @@ Code for the final version of this app can be found in
 
    ![Todo App before sign in](/blog/assets/meteor-todo-password-changed.png)
 
+   For information on users and accounts features and ways to customize them,
+   see {% aTargetBlank 'https://guide.meteor.com/accounts.html', 'here' %}.
+   This includes adding support for OAuth logins
+   and changing password validation rules.
+   To give users role-based permissions and per-document permissions, see
+   {% aTargetBlank
+     'https://guide.meteor.com/accounts.html#roles-and-permissions', 'here' %}.
+
 1. Add support for "forgot password" emails.
 
    This will allow users to click the "Forgot password" link
@@ -1986,7 +1994,7 @@ Code for the final version of this app can be found in
 For apps that need client-side page routing there are two popular libraries:
 
 - {% aTargetBlank 'https://github.com/kadirahq/flow-router', 'FlowRouter' %}
-  (with flow-router-extra)
+  (with flow-router-extra) - recommended by the Meteor Guide
 - {% aTargetBlank 'https://github.com/iron-meteor/iron-router', 'Iron.Router' %}
 
 ### Meteor Shell
