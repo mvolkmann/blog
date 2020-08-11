@@ -62,8 +62,9 @@ The key benefits of using Meteor are:
   It even supports OAuth logins.
 - Reactivity is provided through the use of
   `Tracker`, `ReactiveVar`, `ReactiveDict`, and `Session`.
-- Changes to data in MongoDB collections are published to all
-  connected clients using WebSockets so all the UIs can stay in sync.
+- Changes to data in MongoDB collections can be published to all
+  connected clients using WebSockets so UIs can stay in sync.
+  Clients subscribe to publications of interest.
 - There is no need to implement REST services or GraphQL queries
   if using Meteor Methods with WebSockets is acceptable.
   Meteor Methods are implemented in JavaScript or TypeScript
@@ -221,6 +222,11 @@ or
 ```js
 const myCollection = new Mongo.Collection('some-name', {connection: null});
 ```
+
+To support associates between documents in different collections,
+see the Meteor package
+{% aTargetBlank 'https://atmospherejs.com/cultofcoders/grapher',
+'cultofcoders:grapher' %}.
 
 ### Schemas for Collections
 
@@ -1861,6 +1867,16 @@ Code for the final version of this app can be found in
      // The name passed to subscribe must match a name passed to publish.
      onMount(() => Meteor.subscribe('tasks'));
      ```
+
+     The `Meteor.subscribe` method returns an object
+     that can be useful to capture in a variable.
+     It has three properties.
+     `stop` is a method that can be called to cancel the subscription.
+     Typically the subscription is retained for the duration of the session.
+     `ready` is a method that is called when the server
+     has completed the initial publication of data.
+     `subscriptionId` is a unique id for the subscription
+     that is not typically needed.
 
      Additional arguments can be passed to `Meteor.subscribe`.
      These are passed the function passed to `Meteor.publish` in the server
