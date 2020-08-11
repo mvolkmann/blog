@@ -1181,21 +1181,21 @@ Code for the final version of this app can be found in
    For more information about Svelte, see
    {% aTargetBlank 'https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte', 'my article' %}.
 
-   Install Svelte by entering `meteor npm install svelte`.
+   - Install Svelte by entering `meteor npm install svelte`.
 
-   It is recommended to use the command `meteor npm` instead of `npm`
-   when installing npm packages in a Meteor app.
-   When packages have binary dependencies,
-   this ensures that they are built using the same C libraries.
+     It is recommended to use the command `meteor npm` instead of `npm`
+     when installing npm packages in a Meteor app.
+     When packages have binary dependencies,
+     this ensures that they are built using the same C libraries.
 
-1. Add some Meteor packages by entering  
-   `meteor add svelte:compiler rdb:svelte-meteor-data`
+   - Add some Meteor packages by entering  
+     `meteor add svelte:compiler rdb:svelte-meteor-data`
 
-1. Remove a package that will no longer be used by entering  
-   `meteor remove blaze-html-templates`
+   - Remove a package that will no longer be used by entering  
+     `meteor remove blaze-html-templates`
 
-1. Add a replacement Meteor package by entering  
-   `meteor add static-html`
+   - Add a replacement Meteor package by entering  
+     `meteor add static-html`
 
 1. Replace the content of `client/main.html` with the following:
 
