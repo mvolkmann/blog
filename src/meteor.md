@@ -1427,7 +1427,7 @@ Code for the final version of this app can be found in
    <li>
      <input type="checkbox" checked="{task.done}" on:click="{toggleDone}" />
      <span class:done="{task.done}">{item}</span>
-     <!-- Using Unicode trash can -->
+     <!-- using Unicode trash can -->
      <button on:click="{deleteTask}">&#x1f5d1;</button>
    </li>
 
@@ -1620,6 +1620,7 @@ Code for the final version of this app can be found in
          margin-top: 0;
        }
 
+       /* This is a way to define global styles from a Svelte component. */
        :global(#login-buttons) {
          padding: 0.5rem;
          text-align: right;
