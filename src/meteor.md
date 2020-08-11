@@ -254,6 +254,18 @@ If the object passed to `validate` does not match the schema,
 this throws a `ValidationError` which describes the difference.
 Note that extra properties not specified in the schema are not allowed.
 
+The `collection2` Meteor package can be used to automatically validate
+every insert, update, and upsert performed for a given collection.
+In addition it coerces values to the expected types when possible,
+removes properties not in the schema, and
+assigns default values specified with the `defaultValue` property.
+To install `collection2`, enter `meteor add aldeed:collection2`.
+To use `collection2` on our `Tasks` collection:
+
+```js
+Tasks.attachSchema(Tasks.schema);
+```
+
 Creating collections whose documents can be deeply nested
 or can contain large arrays is not recommended.
 This is because DDP, which is used to send messages to clients
