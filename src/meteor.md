@@ -487,7 +487,7 @@ import {Meteor} from 'meteor/meteor';
 Meteor.methods({
   sum(n1, n2) {
     console.log('sum called; on server?', Meteor.isServer);
-    check(n1, Number); // argument type validation
+    check(n1, Number); // parameter type validation
     check(n2, Number);
     return n1 + n2;
   }
@@ -1659,17 +1659,11 @@ Code for the final version of this app can be found in
    to prompt for account information.
    By default, passwords must contain at least six characters,
    but there are no restrictions on the characters.
-   There is not currently an easy way to customize password validation
-   in order to enforce different rules.
-   For possible solutions, see
-   {% aTargetBlank
-     'https://stackoverflow.com/questions/32651151/personalize-password-validation-function-used-by-accounts-ui',
-     'here' %}.
 
    ![Todo App before sign in](/blog/assets/meteor-todo-create-account.png)
 
    After creating an account, or
-   entering username and password for an existing account,
+   entering a username and password for an existing account,
    the user is signed in and
    the "Sign in" link in the upper-right is replaced by their username.
 
@@ -1690,8 +1684,9 @@ Code for the final version of this app can be found in
 
    ![Todo App before sign in](/blog/assets/meteor-todo-password-changed.png)
 
-   For information on users and accounts features and ways to customize them,
-   see {% aTargetBlank 'https://guide.meteor.com/accounts.html', 'here' %}.
+   For more information on users and accounts features
+   and ways to customize them, see
+   {% aTargetBlank 'https://guide.meteor.com/accounts.html', 'here' %}.
    This includes adding support for OAuth logins
    and changing password validation rules.
    To give users role-based permissions and per-document permissions, see
@@ -1772,7 +1767,7 @@ Code for the final version of this app can be found in
      });
      ```
 
-   Now when I use clicks the "Forgot password" link in the sign in dialog,
+   Now when a user clicks the "Forgot password" link in the sign in dialog,
    they can enter their email address and press the "Reset password" button.
 
    ![Todo App forgot password](/blog/assets/meteor-todo-forgot-password.png)
@@ -1802,7 +1797,7 @@ Code for the final version of this app can be found in
    with calls to `Meteor.call(name, data, callback)`.
 
    - Remove the Meteor package that allows client code to
-     interact with MongoDB by entering `meteor remove insecure`
+     interact with MongoDB by entering `meteor remove insecure`.
 
    - Define Methods by modifying `imports/tasks.js` to match the following:
 
@@ -1815,7 +1810,7 @@ Code for the final version of this app can be found in
 
      Meteor.methods({
        addTask(text) {
-         check(text, String); // argument type validation
+         check(text, String); // parameter type validation
 
          // Make sure the user is logged in before inserting a task.
          if (!this.userId) throw new Meteor.Error('add-task', 'not-authorized');
@@ -1831,13 +1826,13 @@ Code for the final version of this app can be found in
        },
 
        deleteTask(taskId) {
-         check(taskId, String); // argument type validation
+         check(taskId, String); // parameter type validation
          Tasks.remove(taskId);
        },
 
        setDone(taskId, done) {
-         check(taskId, String); // argument type validation
-         check(done, Boolean); // argument type validation
+         check(taskId, String); // parameter type validation
+         check(done, Boolean); // parameter type validation
          Tasks.update(taskId, {$set: {done}});
        }
      });
@@ -1858,8 +1853,8 @@ Code for the final version of this app can be found in
      import {handleError} from './util.js';
      ```
 
-   - Change the call to `Tasks.insert` in the `addTask` function
-     of `client/App.svelte` to the following:
+   - Replace the call to `Tasks.insert` in the `addTask` function
+     of `client/App.svelte` with the following:
 
      ```js
      Meteor.call('addTask', text, handleError);
@@ -1872,15 +1867,15 @@ Code for the final version of this app can be found in
      import {Meteor} from 'meteor/meteor';
      ```
 
-   - Change the call to `Tasks.remove` in the `deleteTask` function
-     of `client/Task.svelte` to the following:
+   - Replace the call to `Tasks.remove` in the `deleteTask` function
+     of `client/Task.svelte` with the following:
 
      ```js
      Meteor.call('deleteTask', task._id, handleError);
      ```
 
-   - Change the call to `Tasks.update` in the `toggleDone` function
-     of `client/Task.svelte` to the following:
+   - Replace the call to `Tasks.update` in the `toggleDone` function
+     of `client/Task.svelte` with the following:
 
      ```js
      Meteor.call('setDone', task._id, !task.done, handleError);
@@ -1892,21 +1887,21 @@ Code for the final version of this app can be found in
 1. Explicitly specify what data the server sends to the client
    so we can separate tasks by user.
 
-   Tasks will still be stored in the same MongoDB collection,
+   Tasks for all users will still be stored in the same MongoDB collection,
    but each user will only see and operate on the tasks they created.
 
    - Remove the ability for the server to
      send any MongoDB content requested by clients.
      Currently the app includes the `autopublish` package.
-     This shares every collection and every document in these
+     It shares every collection and every document in them
      with every connected client.
      This is convenient for prototyping, but not desired for production.
 
-     Enter `meteor remove autopublish`
+     Enter `meteor remove autopublish`.
 
    - Publish only tasks that belong to the logged in user
      by adding the following in `imports/tasks.js`
-     after the line that starts with `export const Tasks`
+     after the line that starts with `export const Tasks`.
 
      ```js
      if (Meteor.isServer) {
@@ -1938,21 +1933,21 @@ Code for the final version of this app can be found in
      onMount(() => Meteor.subscribe('tasks'));
      ```
 
-     The `Meteor.subscribe` method returns an object
-     that can be useful to capture in a variable.
-     It has three properties.
-     `stop` is a method that can be called to cancel the subscription.
-     Typically the subscription is retained for the duration of the session.
-     `ready` is a method that is called when the server
-     has completed the initial publication of data.
-     `subscriptionId` is a unique id for the subscription
-     that is not typically needed.
-
      Additional arguments can be passed to `Meteor.subscribe`.
      These are passed the function passed to `Meteor.publish` in the server
      and it can uses them to decide which documents to publish.
      This is useful to limit the amount of data that is
      copied into Minimongo on the client.
+
+     The `Meteor.subscribe` method returns an object
+     that can be captured in a variable.
+     It has three properties.
+     `stop` is a method that can be called to cancel the subscription.
+     Typically the subscription is retained for the duration of the session.
+     `ready` is a method returns a boolean that is `true` when
+     the server has completed the initial publication of data.
+     `subscriptionId` is a unique id for the subscription
+     that is not typically needed.
 
    Now users only see and operate on their own tasks.
 
