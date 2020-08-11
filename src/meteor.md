@@ -556,7 +556,7 @@ To view WebSocket messages:
 1. Refresh the browser to get a new WebSocket connection.
 1. Click the WebSocket connection that is displayed.
 1. Click the "Messages" tab to see all the WebSocket messages.
-   This list is updated as new ones are received.
+   This list is updated as new messages are received.
 1. Click a message to see its details.
 
 Each message is an array of JSON objects that have
@@ -663,16 +663,16 @@ a `collection` property set to the name of the collection,
 and an `id` property set to the `_id` value of the affected document.
 
 When a document is added to a collection, `msg` is set to "added"
-and `fields` set to a JSON object containing
+and `fields` is set to a JSON object containing
 all the properties of the document.
 
 When a document is updated, `msg` is set to "changed"
-and `fields` set to a JSON object containing
+and `fields` is set to a JSON object containing
 only the properties of the document that were modified.
 
 When a document is deleted from a collection, `msg` is set to "remove".
 
-If a client subscribes to a collection, "added" messages described above
+When a client subscribes to a collection, "added" messages described above
 are sent from the server to initially populate Minimongo.
 
 ### Optimistic UI
