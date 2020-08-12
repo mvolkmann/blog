@@ -2067,7 +2067,7 @@ To configure MongoDB Atlas:
   and press "ADD IP ADDRESS".
 - Enter IP addresses that should have access.
   You will likely want to add the IP address of your machine
-  AND the IP address of the Galaxy server.
+  AND the IP address of your cloud or Galaxy server.
 
 To view databases and collections:
 
@@ -2330,7 +2330,7 @@ To deploy the app:
 1. Enter `npm install`
 1. Enter `cd ../..`
 1. Set the `MONGO_URL` environment variable to your MongoDB server URL.
-   For example, `mongodb+srv://{username}:{password}@cluster0.tqq7g.mongodb.net/meteor`
+   For example, `mongodb+srv://{username}:{password}@{mongo-host}/meteor`
 1. Set the `ROOT_URL` environment variable to your HTTP server URL.
    For example, `http://{server-ip-address}:{server-port}`
    For example, `http://{server-ip-address}:4000`
@@ -2416,7 +2416,7 @@ To use Galaxy:
   {
     "galaxy.meteor.com": {
       "env": {
-        "MONGO_URL": "mongodb://{username}:{password}@{mongo-host}:27017/meteor?authSource=admin&ssl=true",
+        "MONGO_URL": "mongodb+srv://{username}:{password}@{mongo-host}/meteor",
         "MAIL_URL": "smtp://volkmannm@objectcomputing.com:$&oBDvwWTTms9d6dxYDG@smtp.gmail.com:587"
       }
     }
@@ -2429,6 +2429,19 @@ To use Galaxy:
 - Enter `DEPLOY_HOSTNAME=us-east-1.galaxy-deploy.meteor.com \`
   `meteor deploy {hostname} --settings settings.json`
   where `{hostname}` can be "{username}.meteorapp.com".
+
+This will output the following:
+
+```text
+Talking to Galaxy servers at {some-url}
+Preparing to deploy your app...
+Uploaded app bundle to upgrade {username}.meteorapp.com to version 3.
+Galaxy is building the app into a native image.
+Building app image...
+Deploying app...
+```
+
+That last step hangs for a very long time!
 
 ### Resources
 
