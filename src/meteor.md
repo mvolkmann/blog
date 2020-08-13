@@ -2441,7 +2441,12 @@ Building app image...
 Deploying app...
 ```
 
-That last step hangs for a very long time!
+The last step will fail if it cannot connect to the MongoDB server.
+Note that Galaxy-provided servers have dynamic IP addresses.
+For this reason, the MongoDB server must accept requests from
+an IP address range, not specific IP addresses.
+The free tier of MongoDB Atlas does not support whitelisting IP address ranges,
+so upgrading to a paid tier is required to connect to it from a Galaxy server.
 
 ### Resources
 
