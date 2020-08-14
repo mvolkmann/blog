@@ -2374,12 +2374,19 @@ The steps to deploy a Meteor app using Meteor Up are:
   - Set `servers.one.username` to an account username, possibly `'root'`.
   - Set `servers.one.password` to an account password.
   - Set `app.name` to the app name.
+    If you change this value later, you will have to ssh to the server,
+    run `docker ps` to find the container started for the old name,
+    and stop it with `docker stop {container-id}`
+    before you can run `mup deploy` again.
   - Set `app.path` to `'../'`
   - Set `app.env.ROOT_URL` to the app URL.
     For example, `'http://{server-ip-address}:{server-port}'`
     or `'http://{domain-name}:{server-port}'`
   - Set `app.env.PORT` to the value of `server-port`.
-    The deploy will fail if this port is already configured for another use.
+    The deploy will fail if this port is already in use.
+    Before redeploying the app, kill the existing process
+    that is listening on this port.
+    Also kill the process for MongoDB listening on port 27017.
   - Set `app.env.MONGO_URL` to the URL of your MongoDB server.
   - To enable SSL:
     - See {% aTargetBlank
