@@ -1813,7 +1813,7 @@ Code for the final version of this app can be found in
          check(text, String); // parameter type validation
 
          // Make sure the user is logged in before inserting a task.
-         if (!this.userId) throw new Meteor.Error('add-task', 'not-authorized');
+         if (!this.userId) throw new Meteor.Error('addTask', 'not-authorized');
 
          const {username} = Meteor.users.findOne(this.userId);
          const id = Tasks.insert({
