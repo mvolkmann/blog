@@ -214,6 +214,10 @@ deleting all documents in all collections,
 stop the Meteor server and enter `meteor reset`.
 This can be useful to start an app in a pristine state.
 
+Multiple Meteor apps can use the same MongoDB database to share data.
+Search for "Multiple apps use the same database" in the
+{% aTargetBlank 'http://meteor-up.com/docs.html', 'Meteor Up' %} docs.
+
 ### Collections
 
 The client-side of Meteor applications can obtain data in many ways
@@ -1704,7 +1708,7 @@ Code for the final version of this app can be found in
    After doing so they are immediately signed in.
 
    - Add another Meteor packages by entering  
-     `meteor add email`.
+     `meteor add email`
 
    - Create the file `secrets.json` in the project root directory
      with content like the following:
@@ -2372,9 +2376,11 @@ The steps to deploy a Meteor app using Meteor Up are:
   - Set `app.name` to the app name.
   - Set `app.path` to `'../'`
   - Set `app.env.ROOT_URL` to the app URL.
-    For example, `'http://{server-ip-address}.{server-port}'`
-  - Set `app.env.MONGO_URL` to the URL of your MongoDB server.
+    For example, `'http://{server-ip-address}:{server-port}'`
+    or `'http://{domain-name}:{server-port}'`
   - Set `app.env.PORT` to the value of `server-port`.
+    The deploy will fail if this port is already configured for another use.
+  - Set `app.env.MONGO_URL` to the URL of your MongoDB server.
   - To enable SSL:
     - See {% aTargetBlank
         'https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04',
@@ -2393,7 +2399,8 @@ The steps to deploy a Meteor app using Meteor Up are:
 - Enter `mup deploy`
   (This works in Node 12, but may not yet work in newer versions.)
 
-THIS HANGS FOREVER!
+If the last step is successful, browse the URL in `app.env.ROOT_URL`.
+This defaults to use a MongoDB database named "test", not "meteor".
 
 #### Galaxy
 
