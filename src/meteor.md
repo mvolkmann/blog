@@ -85,6 +85,8 @@ including MongoDB and TypeScript.
 {% aTargetBlank 'https://nodejs.org/', 'Node.js' %}
 must be installed separately and that includes npm.
 
+Repeating the install command will update the existing installation.
+
 ### Directory Structure
 
 To create the initial directory structure for a new Meteor app and run it:
