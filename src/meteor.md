@@ -1185,7 +1185,9 @@ Code for the final version of this app can be found in
 
    Svelte is a good choice due to its use of reactive statements.
    For more information about Svelte, see
-   {% aTargetBlank 'https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte', 'my article' %}.
+   {% aTargetBlank
+   'https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte',
+   'my article' %}.
 
    - Install Svelte by entering `meteor npm install svelte`.
 
@@ -2211,7 +2213,7 @@ To enable nginx to act as a proxy for a server that listens on a particular port
   {% endraw %}
 
 - Enter `sudo systemctl restart nginx`
-- Now you should be able to browse https://{your-domain}:{node-port}
+- Now you should be able to browse <https://{your-domain}:{node-port}>
 - TODO: THIS DID NOT WORK!
   There is a probably a conflict with
   `/etc/nginx/sites-available/{your-domain}` below.
@@ -2267,7 +2269,7 @@ Setup nginx "server blocks" by following the steps
 1. Enter `sudo nginx -t` to verify that there are
    no syntax errors in the edited files.
 1. Enter `sudo systemctl restart nginx` to restart nginx.
-1. Browse http://{your-domain} to verify that nginx can server the earlier HTML.
+1. Browse <http://{your-domain}> to verify that nginx can server the earlier HTML.
 
 Enable SSL by following the steps
 {% aTargetBlank
@@ -2471,6 +2473,8 @@ so upgrading to a paid tier is required to connect to it from a Galaxy server.
 - {% aTargetBlank 'https://docs.meteor.com/', 'Meteor API docs' %}
 - {% aTargetBlank 'https://github.com/Urigo/awesome-meteor', 'Awesome Meteor' %}
   curated list of packages and libraries
-- {% aTargetBlank 'https://atmospherejs.com/', 'Atmosphere Meteor package repository' %}
+- {% aTargetBlank 'https://atmospherejs.com/',
+  'Atmosphere Meteor package repository' %}
 - {% aTargetBlank 'https://forums.meteor.com/', 'Meteor Forum' %}
-- {% aTargetBlank 'https://stackoverflow.com/questions/tagged/meteor', 'Stack Overflow' %}
+- {% aTargetBlank 'https://stackoverflow.com/questions/tagged/meteor',
+  'Stack Overflow' %}
