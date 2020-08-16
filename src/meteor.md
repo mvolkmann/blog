@@ -311,6 +311,13 @@ Schemas can be described using the npm package
 {% aTargetBlank 'https://github.com/aldeed/simpl-schema', 'simpl-schema' %},
 which can be installed by entering `npm install simpl-schema`.
 
+The type of each property can be specified with either a shorthand or longhand definition.
+Shorthand definitions only specify a type.
+Longhand definitions can also specify that
+a property is optional, a default value, a max length,
+a regular expression (`regEx`) to be matched, and more.
+Both kinds of definitions can be used in the same schema, one per property.
+
 For example, a `tasks` collection can be associated with a schema as follows:
 
 ```js
@@ -320,15 +327,36 @@ const Tasks = new Mongo.Collection('tasks');
 Tasks.schema = new SimpleSchema({
   createdAt: {type: Date, defaultValue: new Date(), optional: true},
   done: {type: Boolean, defaultValue: false, optional: true},
-  owner: {type: String},
-  text: {type: String},
-  username: {type: String}
+  owner: String,
+  text: String,
+  username: String
 });
 ```
 
 Note that specifying a `defaultValue` for a property
 does not imply that it is `optional`.
 That must also be specified.
+
+Here is another example where a property (`topics`) is an array of objects:
+
+```js
+import SimpleSchema from 'simpl-schema';
+
+export const Meetings = new Mongo.Collection('meetings');
+const topicSchema = new SimpleSchema({
+  description: {type: String, defaultValue: ''},
+  presenter: {type: String, defaultValue: ''},
+  minutes: {type: Number, defaultValue: 0}
+});
+Meetings.schema = new SimpleSchema({
+  name: {type: String, defaultValue: ''},
+  date: String,
+  time: String,
+  duration: SimpleSchema.Integer,
+  topics: [topicSchema]
+});
+Meetings.attachSchema(Meetings.schema);
+```
 
 Schema validation is not performed automatically.
 It is done by explicitly passing an object to the `validate` method.
@@ -349,6 +377,9 @@ To use this on our `Tasks` collection:
 ```js
 Tasks.attachSchema(Tasks.schema);
 ```
+
+For more detail on schema definitions, see
+{% aTargetBlank 'https://github.com/aldeed/simpl-schema', 'simpl-schema' %}.
 
 Creating collections whose documents can be deeply nested
 or can contain large arrays is not recommended.
