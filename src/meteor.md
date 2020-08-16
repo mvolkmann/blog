@@ -98,6 +98,14 @@ To create the initial directory structure for a new Meteor app and run it:
 
 This is covered in more detail later in the "Todo App" section.
 
+Meteor provides "hot code pushes"
+so the browser doesn't need to be manually refreshed
+and the server doesn't need to be manually restarted.
+After making changes to client code, the message "Client modified -- refreshing"
+will appear in the terminal window where the server is running.
+After making changes to server code, the message "Meteor server restarted"
+will appear in the same place.
+
 The recommended directory structure for Meteor applications is:
 
 - `client`  
@@ -2415,8 +2423,8 @@ The steps to deploy a Meteor app using Meteor Up are:
     before you can run `mup deploy` again.
   - Set `app.path` to `'../'`
   - Set `app.env.ROOT_URL` to the app URL.
-    For example, `'http://{server-ip-address}:{server-port}'`
-    or `'http://{domain-name}:{server-port}'`
+    For example, `'https://{server-ip-address}:{server-port}'`
+    or `'https://{domain-name}:{server-port}'`
   - Set `app.env.PORT` to the value of `server-port`.
     The deploy will fail if this port is already in use.
     Before redeploying the app, kill the existing process
