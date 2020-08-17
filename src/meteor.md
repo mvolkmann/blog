@@ -1585,6 +1585,10 @@ Code for the final version of this app can be found in
      import './accounts-config.js';
      ```
 
+     Alternatively, this can be imported from a `.svelte` file,
+     perhaps the one that renders `<BlazeTemplate template="loginButtons" />`
+     which is described later.
+
    - Modify the `client/App.svelte` file to match the following:
 
      {% raw %}
