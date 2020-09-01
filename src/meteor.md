@@ -172,14 +172,20 @@ unlike installing npm packages.
 There are five types of packages:
 
 1. `meteor-base`: This is a specific package that contains core components.
-2. first-party packages: These are bundled with Meteor.
+2. first-party (core) packages: These are bundled with Meteor.
    Some are included by default, but can be removed.
    Others are not, but can be added.
+   Their names do not have an author prefix.
 3. local-packages: These are specific to your app
    and reside in the `packages` directory.
-4. Atmosphere packages: Many of these follow the `author:package`
+4. Atmosphere (community) packages: Many of these follow the `author:package`
    naming convention and all in use are listed in the file `.meteor/packages`.
 5. npm packages: These are listed as dependencies in `package.json`.
+
+New Meteor apps typically include three core packages by default
+which are meteor-platform, autopublish, and insecure.
+The meteor-platform package has many dependencies that are also installed
+including blaze, check, ddp, jquery, mongo, session, tracker, and underscore.
 
 Popular Atmosphere packages include:
 
@@ -2210,7 +2216,7 @@ export ROOT_URL=https://{ip-address-of-this-server}:{port-of-meteor-server}
 ```
 
 To find processes that are listening on ports, enter `netstat -tulpn`.
-My DigitalOcean server had nginx listening on port 80
+My DigitalOcean server has nginx listening on port 80
 and node listening on port 3000.
 A different port can be used for the Meteor server.
 
@@ -2372,6 +2378,7 @@ To deploy the app:
    For example, `scp {project-name}.tar.gz root@{server-ip-address}:.`
 1. Start a terminal session on the server using the `ssh` command.
    For example, `ssh root@{server-ip-address}`.
+   (I store the IP address and password in 1Password.)
 1. Verify that a recent version of Node.js is installed
    by entering `node -v`.
 1. Create a directory to receive the contents of the tar file
