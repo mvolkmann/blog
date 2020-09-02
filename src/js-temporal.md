@@ -63,6 +63,158 @@ The primary classes that support the functionality of `Temporal` are:
 - `Duration` represents a duration of time rather than a date or time of day.
 - `Calendar` implements a calendar system used by the other classes.
 
+### Common Features
+
+The classes provided by `Temporal` have many common features.
+
+There are multiple ways to create instances.
+
+1. constructor  
+   Instances can be created by using the `new` keyword
+   to invoke the constructor of any of these classes.
+   For example:
+
+   ```js
+   const lunch = new Temporal.Time(11, 30); // 11:30 AM
+   ```
+
+2. `from` static method  
+   All of these classes have a `from` static method
+   that can be passed a string or an object
+   that describes the properties the instance should have.
+   For example:
+
+   ```js
+   const lunch = Temporal.Time.from({hour: 11, minute: 30});
+   // or
+   const lunch = Temporal.Time.from('11:30');
+   ```
+
+3. `with` instance method  
+   All of these classes except `Calendar`, `Duration`, and `TimeZone`
+   have a `with` instance method that makes a copy of an existing instance
+   and sets specified properties to the values in an object that is passed.
+   For example:
+
+   ```js
+   const lateLunch = lunch.with({hour: 12}); // 12:30 PM
+   ```
+
+Most of the classes create instances that have read-only properties.
+They are read-only because they have getters, but no setters.
+In addition to accessing their values directly by property name,
+all of these classes except `Calendar`, `Duration`, and `TimeZone`
+have a `getFields` instance method that returns an object
+that contains the value of each read-only property.
+For example:
+
+```js
+console.log(lunch.minute); // 30
+console.log(lunch.getFields());
+/* Output is
+{
+  hour: 11,
+  microsecond: 0,
+  millisecond: 0,
+  minute: 30,
+  nanosecond: 0,
+  second: 0
+}
+*/
+```
+
+All of these classes provide a `toString` instance method.
+All but `Calendar` provide a `toJSON` instance method
+that returns the same value as `toString`,
+typically by just delegating to that method.
+All but `Calendar` and `TimeZone` provide a `toLocaleString` instance method
+that accepts formatting arguments that are passed to `Intl.DateTimeFormat`.
+For example:
+
+```js
+console.log(lunch.toString()); // 11:30
+console.log(lunch.toLocaleString()); // 11:30:00 AM
+console.log(lunch.toLocaleString('en-AU')); // 11:30:00 am
+
+const now = Temporal.now.dateTime();
+console.log(now.toString()); // 2020-09-02T12:01:13.886073869
+console.log(now.toLocaleString()); // 9/2/2020, 11:51:06 AM
+console.log(now.toLocaleString('en-GB')); // 02/09/2020, 11:51:06
+```
+
+All of these classes except `Calendar`, `Duration`, and `TimeZone`
+provide an `equals` instance method that returns a boolean indicating
+whether a given object is from the same class as the receiver object
+and their properties are equal. For example:
+
+```js
+console.log(lunch.equals(dinner)); // false
+```
+
+All of these classes except `Calendar`, `Duration`, `TimeZone`, and `MonthDay`
+provide a `compare` static method that compares two objects from the same class
+and returns -1, 0, or 1.
+It is suitable for passing to the `Array` `sort` method
+for sorting arrays of instances.
+(Why doesn't `MonthDay` support the static method `compare`?)
+
+For example:
+
+```js
+const times = [
+  new Temporal.Time(11, 30),
+  new Temporal.Time(15),
+  new Temporal.Time(7, 45)
+];
+times.sort(Temporal.Time.compare);
+for (const time of times) {
+  console.log(time.toString()); // 07:45, 11:30, 15:00
+}
+```
+
+All of these classes except `Calendar`, `TimeZone`, and `MonthDay`
+provide `plus` and `minus` instance methods
+that take a `Duration` or an object describing one
+and return a new instance from the same class as the receiver object.
+For example:
+
+```js
+const meeting = new Temporal.DateTime(2020, 9, 2, 13); // Sep 2, 2020, 1 PM
+const reschedule = meeting.plus({hours: 2}); // 2 hours later
+// reschedule is a Temporal.DateTime object.
+console.log(reschedule.toString()); // 2020-09-02T15:00
+```
+
+The `plus` and `minus` methods correctly adjust for
+unit underflows and overflows. For example:
+
+```js
+// Create a DateTime that is one minute before midnight.
+const beforeMidnight = new Temporal.DateTime(2020, 9, 2, 23, 59);
+// Create a new DateTime that is two minutes later.
+const afterMidnight = beforeMidnight.plus({minutes: 2});
+// Note how the day has incremented.
+console.log(afterMidnight.toString()); // 2020-09-03T00:01
+
+const inMarch = new Temporal.Date(1981, 3, 1);
+const inFebruary = inMarch.minus({days: 1});
+// Note how the month and day were properly adjusted.
+console.log(inFebruary.toString()); // 1981-02-28
+```
+
+All of these classes except `Calendar`, `Duration`, `TimeZone`, and `MonthDay`
+provide a `difference` instance method that takes
+another object from the same class and
+returns a `Duration` that represents their difference.
+For example:
+
+```js
+const lunch = new Temporal.Time(11, 30); // 11:30 AM
+const dinner = new Temporal.Time(18, 0); // 6:00 PM
+const timeBetween = dinner.difference(lunch);
+console.log('lunch to dinner =', timeBetween.toString()); // PT6H30M
+```
+
 ### Temporal.now
 
 `Temporal.now` is a object with methods that return an object
@@ -99,6 +251,9 @@ that is a given number of nanoseconds from the epoch:
 const abs = new Temporal.Absolute(0n); // pass a BigInt
 // or from a string
 const abs = Temporal.Absolute.from('1961-04-16T10:19:20Z');
+// or from a Java Date object
+const date = new Date('1961-04-16');
+const abs = Temporal.Absolute.from(date.toISOString());
 ```
 
 Instances of this class have no read-only properties.
@@ -108,31 +263,20 @@ by calling one of the instance methods `getEpochSeconds`,
 `getEpochMilliseconds`, `getEpochMicroseconds`, or `getEpochNanoseconds`
 and passing no arguments.
 
-Other instance methods include:
-
-- `plus(duration)` returns a new `Absolute`
-- `minus(duration)` returns a new `Absolute`
-- `difference(other)` returns a `Duration`
-- `equals(other)` returns a `boolean`
-- `toString()` - ex. "2020-09-01T22:31:22.956482956Z";
-  can be passed an optional time zone
-- `toLocaleString()` can be passed optional formatting arguments
+The `toString` instance method returns strings like
+`2020-09-01T22:31:22.956482956Z`.
+It can be passed an optional time zone.
 
 To create a `DateTime` from an `Absolute` and a `TimeZone`,
 `absolute.toDateTime(timeZone)`.
 
-Class methods to create an instance include:
+Class methods that create an instance include:
 
 - `Absolute.fromEpochSeconds(seconds)`
 - `Absolute.fromEpochMilliseconds(milliseconds)`
 - `Absolute.fromEpochMicroseconds(microseconds)`
 - `Absolute.fromEpochNanoseconds(nanoseconds)`
 - `Absolute.from(item)`
-
-To compare two instances, use the static method
-`Temporal.Absolute.compare(abs1, abs2)`.
-This function can be passed to the JavaScript `Array` `sort` method
-to sort instances of this class.
 
 ### Temporal.TimeZone
 
@@ -146,7 +290,7 @@ To create an instance that represents a specific time zone:
 
 ```js
 const laTz = new Temporal.TimeZone('America/Los_Angeles');
-// or using the static method from ...
+// or using the static method "from" ...
 const laTz = Temporal.TimeZone.from('America/Los_Angeles');
 ```
 
@@ -227,13 +371,8 @@ Instances of this class have the read-only properties
 
 Instance methods include:
 
-- `plus(duration)` returns a new `DateTime`
-- `minus(duration)` returns a new `DateTime`
-- `difference(other)` returns a `Duration`
-- `equals(other)` returns a `boolean`
-- `toString()` - ex. "2020-09-01T17:55:23.700923686"
-- `toLocaleString()` can be passed optional formatting arguments
-- `getFields()` returns an object containing all the read-only properties
+The `toString` instance method returns strings
+like `2020-09-01T17:55:23.700923686`.
 
 To create an `Absolute` from a `DateTime` and a `TimeZone`,
 `dateTime.toAbsolute(timeZone)`.
@@ -245,11 +384,6 @@ To create a `YearMonth`, `dateTime.toYearMonth()`.
 To create a `MonthDay`, `dateTime.toMonthDay()`.
 
 To create a `Time`, `dateTime.toTime()`.
-
-To compare two instances, use the static method
-`Temporal.DateTime.compare(dt1, dt2)`.
-This function can be passed to the JavaScript `Array` `sort` method
-to sort instances of this class.
 
 ### Temporal.Date
 
@@ -321,20 +455,7 @@ To create a `YearMonth` from a `Date`, `date.toYearMonth()`.
 
 To create a `MonthDay` from a `Date`, `date.toMonthDay()`.
 
-Other instance methods include:
-
-- `plus(duration)` returns a new `Date`
-- `minus(duration)` returns a new `Date`
-- `difference(other)` returns a `Duration`
-- `equals(other)` returns a `boolean`
-- `toString()` - ex. "2020-09-01"
-- `toLocaleString()` can be passed optional formatting arguments
-- `getFields()` returns an object containing all the read-only properties
-
-To compare two instances, use the static method
-`Temporal.Date.compare(d1, d2)`.
-This function can be passed to the JavaScript `Array` `sort` method
-to sort instances of this class.
+The `toString` instance method returns strings like `2020-09-01`.
 
 ### Temporal.YearMonth
 
@@ -365,15 +486,7 @@ Instances of this class have the read-only properties
 
 console.log('year/month =', ym.toString()); // 1961-04
 
-Instance methods include:
-
-- `plus(duration)` returns a new `YearMonth`
-- `minus(duration)` returns a new `YearMonth`
-- `difference(other)` returns a `Duration`
-- `equals(other)` returns a `boolean`
-- `toString()` - ex. "1961-04"
-- `toLocaleString()` can be passed optional formatting arguments
-- `getFields()` returns an object containing all the read-only properties
+The `toString` instance method returns strings like `1961-04`.
 
 To create a `Date` for a given day within the `YearMonth`,
 `yearMonth.toDateOnDay(day)`. For example:
@@ -381,11 +494,6 @@ To create a `Date` for a given day within the `YearMonth`,
 ```js
 console.log('date on 16th =', ym.toDateOnDay(16).toString()); // 1961-04-16
 ```
-
-To compare two instances, use the static method
-`Temporal.YearMonth.compare(ym1, ym2)`.
-This function can be passed to the JavaScript `Array` `sort` method
-to sort instances of this class.
 
 ### Temporal.MonthDay
 
@@ -423,15 +531,7 @@ To create a `Date` from a `MonthDay` and a year number,
 console.log('date in year =', md.toDateInYear(1961).toString()); // 1961-04-16
 ```
 
-Other instance methods include:
-
-- `equals(other)` returns a `boolean`
-- `toString()` - ex. "04-16"
-- `toLocaleString()` can be passed optional formatting arguments
-- `getFields()` returns an object containing all the read-only properties
-
-Why doesn't this class support the static method `compare`
-for comparing two instances?
+The `toString` instance method returns strings like `04-16`.
 
 ### Temporal.Time
 
@@ -467,18 +567,7 @@ Instances of this class have the read-only properties
 console.log('time =', t.toString());
 console.log('time =', t.toString()); // 01:02:03
 
-Instance methods include:
-
-- `plus(duration)` returns a new `Time`
-- `minus(duration)` returns a new `Time`
-- `difference(other)` returns a `Duration`
-- `equals(other)` returns a `boolean`
-- `toString()` - ex. "01:02:03"
-- `toLocaleString()` can be passed optional formatting arguments
-- `getFields()` returns an object containing all the read-only properties
-
-To compare two instances, use the static method
-`Temporal.Time.compare(ym1, ym2)`.
+The `toString` instance method returns strings like `01:02:03`.
 
 ### Temporal.Duration
 
@@ -504,6 +593,8 @@ const extraHour = dur.with({hours: dur.hours + 1}); // 3 hours 57 minutes 11 sec
 Instances of this class have the read-only properties
 `years`, `months`, `weeks`, `days`, `hours`, `minutes`, `seconds`,
 `milliseconds`, `microseconds`, `nanoseconds`, and `sign`.
+Note that these property names (with the exception of `sign`) are plural,
+unlike the property names in the other `Temporal` classes.
 
 To add one `Duration` to another, creating a new `Duration`:
 
@@ -520,14 +611,8 @@ To create a negated instance, `duration.negated()`.
 
 To create a non-negated instance, `duration.abs()`.
 
-Other instance methods include:
-
-- `plus(duration)` returns a new `Duration`
-- `minus(duration)` returns a new `Duration`
-- `equals(other)` returns a `boolean`
-- `toString()` - ex. "PT2H57M11S" (2 hrs 57 min 11 sec)
-- `toLocaleString()` can be passed optional formatting arguments
-- `getFields()` returns an object containing all the read-only properties
+The `toString` instance method returns strings
+like `PT2H57M11S` (2 hrs 57 min 11 sec).
 
 ### Temporal.Calendar
 
