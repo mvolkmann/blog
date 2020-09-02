@@ -99,6 +99,8 @@ that is a given number of nanoseconds from the epoch:
 
 ```js
 const abs = new Temporal.Absolute(0n); // pass a BigInt
+// or from a string
+const abs = Temporal.Absolute.from('1961-04-16T10:19:20Z');
 ```
 
 Instances of this class have no read-only properties.
@@ -130,7 +132,9 @@ Class methods to create an instance include:
 - `Absolute.from(item)`
 
 To compare two instances, use the static method
-`Absolute.compare(abs1, abs2)`.
+`Temporal.Absolute.compare(abs1, abs2)`.
+This function can be passed to the JavaScript `Array` `sort` method
+to sort instances of this class.
 
 ### Temporal.TimeZone
 
@@ -144,6 +148,8 @@ To create an instance that represents a specific time zone:
 
 ```js
 const laTz = new Temporal.TimeZone('America/Los_Angeles');
+// or using the static method from ...
+const laTz = Temporal.TimeZone.from('America/Los_Angeles');
 ```
 
 Valid time zone identifiers are listed at
@@ -179,7 +185,7 @@ const nextDst = tz.getNextTransition(nowAbs).toString(); // 2020-11-01T07:00Z
 ```
 
 To get the time zone identifier string from an instance,
-`timeZone.toString()`.
+use `timeZone.toString()` which returns the value of the `name` property.
 
 ### Temporal.DateTime
 
@@ -226,7 +232,9 @@ To create a `MonthDay`, `dateTime.toMonthDay()`.
 To create a `Time`, `dateTime.toTime()`.
 
 To compare two instances, use the static method
-`Date.compare(dt1, dt2)`.
+`Temporal.DateTime.compare(dt1, dt2)`.
+This function can be passed to the JavaScript `Array` `sort` method
+to sort instances of this class.
 
 ### Temporal.Date
 
@@ -242,6 +250,8 @@ To create an instance that represents a specific date:
 // Must pass year, month, and day.
 // Can optionally pass calendar.
 const birthday = new Temporal.Date(1961, 4, 16);
+// or create from a string
+const birthday = Temporal.Date.from('1961-04-16');
 ```
 
 Instances of this class have the read-only properties
@@ -294,7 +304,10 @@ Other instance methods include:
 - `toLocaleString()` can be passed optional formatting arguments
 - `getFields()` returns an object containing all the read-only properties
 
-To compare two instances, use the static method `Date.compare(d1, d2)`.
+To compare two instances, use the static method
+`Temporal.Date.compare(d1, d2)`.
+This function can be passed to the JavaScript `Array` `sort` method
+to sort instances of this class.
 
 ### Temporal.YearMonth
 
@@ -328,6 +341,11 @@ To create a `Date` for a given day within the `YearMonth`,
 ```js
 console.log('date on 16th =', ym.toDateOnDay(16).toString()); // 1961-04-16
 ```
+
+To compare two instances, use the static method
+`Temporal.YearMonth.compare(ym1, ym2)`.
+This function can be passed to the JavaScript `Array` `sort` method
+to sort instances of this class.
 
 ### Temporal.MonthDay
 
@@ -391,6 +409,9 @@ Instance methods include:
 - `toString()` - ex. "01:02:03"
 - `toLocaleString()` can be passed optional formatting arguments
 - `getFields()` returns an object containing all the read-only properties
+
+To compare two instances, use the static method
+`Temporal.Time.compare(ym1, ym2)`.
 
 ### Temporal.Duration
 
