@@ -84,8 +84,6 @@ To use a different calendar system, pass that as the second argument.
 `Temporal.now.time()` returns a `Time` object.
 To use a different time zone, pass that as the first argument.
 
-//TODO: Need to understand the static `from` method in most of these classes.
-
 ### Temporal.Absolute
 
 To create an instance that represents the current system date/time:
@@ -201,7 +199,24 @@ To create an instance that represents a specific date/time:
 // Must pass year, month, and day.
 // Can optionally pass hour, minute, second,
 // millisecond, microsecond, nanosecond, and calendar.
-const dateTime = new Temporal.DateTime(1961, 4, 16);
+const dateTime = new Temporal.DateTime(1961, 4, 16, 10, 19, 20);
+// or
+const dateTime = Temporal.DateTime.from({
+  year: 1961,
+  month: 4,
+  day: 16,
+  hour: 10,
+  minute: 19,
+  second: 20
+});
+// or
+const dateTime = Temporal.DateTime.from('1961-04-16T10:19:20');
+```
+
+To create a copy of an instance where certain properties are modified:
+
+```js
+const hourLater = dateTime.with({hour: dateTime.hour + 1});
 ```
 
 Instances of this class have the read-only properties
@@ -250,9 +265,21 @@ To create an instance that represents a specific date:
 // Must pass year, month, and day.
 // Can optionally pass calendar.
 const birthday = new Temporal.Date(1961, 4, 16);
+// or from an object containing properties
+const birthday = Temporal.Date.from({year: 1961, month: 4, day: 16});
 // or create from a string
 const birthday = Temporal.Date.from('1961-04-16');
 ```
+
+To create a copy of an instance where certain properties are modified:
+
+```js
+const dayLater = birthday.with({day: birthday.day + 1});
+```
+
+This doesn't wrap values into the next unit. It just stops at the upper limit.
+For example, if 30 is added to the day,
+the day is set to the last day in the month.
 
 Instances of this class have the read-only properties
 `year` (4-digit), `month` (1-based), `day` (0=Monday, ..., 6=Sunday),
@@ -317,7 +344,20 @@ To create an instance that represents a specific year/month:
 // Must pass year and month.
 // Can optionally pass calendar.
 const ym = new Temporal.YearMonth(1961, 4);
+// or
+const ym = Temporal.YearMonth.from({year: 1961, month: 4});
+// or
+const ym = Temporal.YearMonth.from('1961-04');
 ```
+
+To create a copy of an instance where certain properties are modified:
+
+```js
+const monthLater = ym.with({month: ym.month + 1});
+```
+
+This doesn't wrap values into the next unit. It just stops at the upper limit.
+For example, if 11 is added to the month, the month is set to 12.
 
 Instances of this class have the read-only properties
 `year`, `month`, `calendar`, `era`,
@@ -355,7 +395,21 @@ To create an instance that represents a specific year/month:
 // Must pass month and day.
 // Can optionally pass calendar.
 const md = new Temporal.MonthDay(4, 16);
+// or
+const md = Temporal.MonthDay.from({month: 4, day: 16});
+// or
+const md = Temporal.MonthDay.from('04-16');
 ```
+
+To create a copy of an instance where certain properties are modified:
+
+```js
+const dayLater = md.with({day: md.day + 1});
+```
+
+This doesn't wrap values into the next unit. It just stops at the upper limit.
+For example, if 30 is added to the day,
+the day is set to the last day in the month.
 
 Instances of this class have the read-only properties
 `month`, `day`, and `calendar`.
@@ -392,7 +446,20 @@ To create an instance that represents a specific time:
 ```js
 // Can pass hour, minute, second, millisecond, microsecond, and nanosecond.
 const t = new Temporal.Time(1, 2, 3);
+// or
+const t = Temporal.Time.from({hour: 1, minute: 2, second: 3});
+// or
+const t = Temporal.Time.from('01:02:03');
 ```
+
+To create a copy of an instance where certain properties are modified:
+
+```js
+const minuteLater = t.with({day: t.minute + 1});
+```
+
+This doesn't wrap values into the next unit. It just stops at the upper limit.
+For example, if 59 is added to the minute, the minute is set to 60.
 
 Instances of this class have the read-only properties
 `hour`, `minute`, `second`, `millisecond`, `microsecond`, and `nanosecond`.
@@ -420,27 +487,34 @@ To create an instance:
 ```js
 // Can pass years, months, weeks, days, hours, minutes, seconds,
 // milliseconds, microseconds, and nanoseconds.
-const dur = new Temporal.Duration(19); // 19 hours
+// 2 hours 57 minutes 11 seconds
+const dur = new Temporal.Duration(0, 0, 0, 0, 2, 57, 11);
+// or
+const dur = Temporal.Duration.from({hours: 2, minutes: 57, seconds: 11});
+// or
+const dur = Temporal.Duration.from('PT02H57M11S');
+```
+
+To create a copy of an instance where certain properties are modified:
+
+```js
+const extraHour = dur.with({hours: dur.hours + 1}); // 3 hours 57 minutes 11 seconds
 ```
 
 Instances of this class have the read-only properties
 `years`, `months`, `weeks`, `days`, `hours`, `minutes`, `seconds`,
 `milliseconds`, `microseconds`, `nanoseconds`, and `sign`.
 
-It's tedious when you don't need all of the arguments.
-For example, here is a duration of 30 seconds:
-
-```js
-const dur = new Temporal.Duration(0, 0, 0, 0, 0, 0, 30);
-```
-
 To add one `Duration` to another, creating a new `Duration`:
 
 ```js
-const newDur = dur.plus(new Temporal.Duration(0, 0, 0, 0, 0, 0, 45));
-// The result is 75 seconds, not 1 minute and 15 seconds.
-// This seems unexpected.
+const newDur = dur.plus(Temporal.Duration.from({seconds: 45}));
+// or
+const newDur = dur.plus({seconds: 45}); // better
 ```
+
+Either way the result is 75 seconds, not 1 minute and 15 seconds.
+This seems unexpected.
 
 To create a negated instance, `duration.negated()`.
 
@@ -451,7 +525,7 @@ Other instance methods include:
 - `plus(duration)` returns a new `Duration`
 - `minus(duration)` returns a new `Duration`
 - `equals(other)` returns a `boolean`
-- `toString()` - ex. "P19Y" (19 years) and "P30S" (30 seconds)
+- `toString()` - ex. "PT2H57M11S" (2 hrs 57 min 11 sec)
 - `toLocaleString()` can be passed optional formatting arguments
 - `getFields()` returns an object containing all the read-only properties
 
