@@ -132,10 +132,6 @@ that accepts formatting arguments that are passed to `Intl.DateTimeFormat`.
 For example:
 
 ```js
-console.log(lunch.toString()); // 11:30
-console.log(lunch.toLocaleString()); // 11:30:00 AM
-console.log(lunch.toLocaleString('en-AU')); // 11:30:00 am
-
 const now = Temporal.now.dateTime();
 console.log(now.toString()); // 2020-09-02T12:01:13.886073869
 console.log(now.toLocaleString()); // 9/2/2020, 11:51:06 AM
