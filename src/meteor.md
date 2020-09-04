@@ -104,6 +104,11 @@ and run it, enter the following commands:
 
 This is covered in more detail later in the "Todo App" section.
 
+It is recommended to use the command `meteor npm` instead of `npm`
+when installing npm packages in a Meteor app.
+When packages have binary dependencies,
+this ensures that they are built using the same C libraries.
+
 Meteor provides "hot code pushes"
 so the browser doesn't need to be manually refreshed
 and the server doesn't need to be manually restarted.
@@ -570,7 +575,7 @@ Meteor.methods({
   sum(n1, n2) {
     console.log('sum called; on server?', Meteor.isServer);
     check(n1, Number); // parameter type validation
-    check(n2, Number);
+    check(n2, Number); // parameter type validation
     return n1 + n2;
   }
 });
@@ -1262,24 +1267,26 @@ Code for the final version of this app can be found in
    To use a non-default app template,
    add one of the following options after `create`:
    `--bare`, `--minimal`, `--full`, `--react`, or `--typescript`.
-   Interestingly none of these options corresponds to the default.
-   The default option produces applications that are insecure
-   and are therefore only for prototyping.
+   None of these options corresponds to the default which
+   produces applications that are insecure.
    Such applications allow all MongoDB updates to be initiated from clients
    and all documents are synced from MongoDB on the server
    to Minimongo in the client.
-   For details on the Meteor packages included by default and with each option see
+   We will learn how to fix this later.
+   For details on the Meteor packages included by default
+   and with each of the options see
    {% aTargetBlank
      'https://docs.meteor.com/commandline.html#meteorcreate', 'here' %}.
 
 1. Modify the `start` script in `package.json` as follows
-   if you are not targeting older browsers or mobile devices:
+   if you are not targeting older browsers or mobile devices
+   in order to avoid generating unnecessary code:
 
    ```json
    "start": "meteor run --exclude-archs 'web.browser.legacy, web.cordova'",
    ```
 
-1. Start the server by entering `cd todos`, `npm install`, and `npm start`.
+1. Start the server by entering `cd todos`, `meteor npm install`, and `npm start`.
 
 1. Browse localhost:3000 to see the following page:
 
@@ -1307,11 +1314,6 @@ Code for the final version of this app can be found in
    'my article' %}.
 
    - Install Svelte by entering `meteor npm install svelte`.
-
-     It is recommended to use the command `meteor npm` instead of `npm`
-     when installing npm packages in a Meteor app.
-     When packages have binary dependencies,
-     this ensures that they are built using the same C libraries.
 
    - Add some Meteor packages by entering  
      `meteor add svelte:compiler rdb:svelte-meteor-data`
@@ -1382,6 +1384,7 @@ Code for the final version of this app can be found in
    <script>
      import Task from './Task.svelte';
 
+     // Later we will replace this with a way to get the tasks from MongoDB.
      function getTasks() {
        const createdAt = new Date();
        return [
@@ -1457,7 +1460,7 @@ Code for the final version of this app can be found in
    This is a reference to a Svelte store that is kept in sync
    with the MongoDB "tasks" collection.
    The UI will no longer display any tasks because
-   this collection does not currently contain any tasks.
+   this collection does not yet contain any tasks.
 
 1. Insert some tasks using the MongoDB console by entering the following:
 
@@ -1634,7 +1637,7 @@ Code for the final version of this app can be found in
      {/if}
      ```
 
-     {% endraw %}
+   {% endraw %}
 
    Now when the "Hide Completed Tasks" checkbox is checked,
    only tasks that are not done are displayed.
@@ -1664,8 +1667,8 @@ Code for the final version of this app can be found in
      ```
 
      Alternatively, this can be imported from a `.svelte` file,
-     perhaps the one that renders `<BlazeTemplate template="loginButtons" />`
-     which is described later.
+     perhaps the one that renders `<BlazeTemplate template="loginButtons" />`,
+     which is described next.
 
    - Modify the `client/App.svelte` file to match the following:
 
@@ -1705,6 +1708,7 @@ Code for the final version of this app can be found in
      </script>
 
      <div class="container">
+       <!-- This provides the UI for user account management. -->
        <BlazeTemplate template="loginButtons" />
 
        <header>
@@ -1967,7 +1971,8 @@ Code for the final version of this app can be found in
      });
      ```
 
-   - Create the file `client/util.js` containing the following error handling:
+   - Create the file `client/util.js` containing
+     the following error handling function:
 
      ```js
      export function handleError(err) {
@@ -2017,7 +2022,7 @@ Code for the final version of this app can be found in
    so we can separate tasks by user.
 
    Tasks for all users will still be stored in the same MongoDB collection,
-   but each user will only see and operate on the tasks they created.
+   but each user will only see and operate on the tasks they add.
 
    - Remove the ability for the server to
      send any MongoDB content requested by clients.
@@ -2063,8 +2068,8 @@ Code for the final version of this app can be found in
      ```
 
      Additional arguments can be passed to `Meteor.subscribe`.
-     These are passed the function passed to `Meteor.publish` in the server
-     and it can uses them to decide which documents to publish.
+     These are passed to the function that is passed to `Meteor.publish`
+     in the server and it can uses them to decide which documents to publish.
      This is useful to limit the amount of data that is
      copied into Minimongo on the client.
 
@@ -2073,7 +2078,7 @@ Code for the final version of this app can be found in
      It has three properties.
      `stop` is a method that can be called to cancel the subscription.
      Typically the subscription is retained for the duration of the session.
-     `ready` is a method returns a boolean that is `true` when
+     `ready` is a method returns the boolean `true` when
      the server has completed the initial publication of data.
      `subscriptionId` is a unique id for the subscription
      that is not typically needed.
@@ -2145,10 +2150,10 @@ Code for the final version of this app can be found in
 
    The user can dismiss the dialog and proceed with using the app.
 
-   That's it! We now have a functioning Todo app
-   that supports user accounts and tasks are persisted in a database.
-   I can't imagine doing all of this in less code
-   using anything other than Meteor!
+That's it! We now have a functioning Todo app
+that supports user accounts and tasks are persisted in a database.
+I can't imagine doing all of this in less code
+using anything other than Meteor!
 
 ### Routing
 
@@ -2157,6 +2162,10 @@ For apps that need client-side page routing there are two popular libraries:
 - {% aTargetBlank 'https://github.com/kadirahq/flow-router', 'FlowRouter' %}
   (with flow-router-extra) - recommended by the Meteor Guide
 - {% aTargetBlank 'https://github.com/iron-meteor/iron-router', 'Iron.Router' %}
+
+Typically these are used with the Blaze framework.
+When using a different web framework such a Svelte or React,
+routing approaches for those can be used instead.
 
 ### Meteor Shell
 
