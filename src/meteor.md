@@ -55,19 +55,21 @@ Enter `meteor help` for help on using these.
 The key benefits of using Meteor are:
 
 - One install provides client, server (Node.js), and database (MongoDB) setup.
+- Provides simple integration with MongoDB out of the box.
 - Client and server code can be developed in a single language,
   JavaScript or TypeScript.
 - The UI can be implemented using any popular web framework.
+- Real-time UI updates across clients are easy to implement.
+  Changes to data in MongoDB collections can be published to all
+  connected clients using WebSockets so UIs can stay in sync.
+  Clients subscribe to publications of interest.
 - User account management and authentication is provided,
   including OAuth logins.
 - Reactivity is provided through the use of the JavaScript classes
   `Tracker`, `ReactiveVar`, `ReactiveDict`, and `Session`.
-- Changes to data in MongoDB collections can be published to all
-  connected clients using WebSockets so UIs can stay in sync.
-  Clients subscribe to publications of interest.
 - There is no need to implement REST services or GraphQL queries
   if using Meteor Methods with WebSockets is acceptable.
-  Meteor Methods are implemented in JavaScript or TypeScript
+  Meteor Methods are much easier to implement
   and are described in detail later.
 
 All of this enables implementing significant functionality
@@ -154,6 +156,8 @@ files that are shared between client and server code.
 Meteor can use packages from npm and
 from its own package repository called "Atmosphere".
 Atmosphere contains packages that are specific to Meteor.
+These are referred to as "Isopacks" because they are typically
+isomorphic, meaning that the code can run on the client or server.
 
 To see the available packages in Atmosphere,
 browse {% aTargetBlank 'https://atmospherejs.com/', 'atmosphere.com' %}.
@@ -168,6 +172,19 @@ to track dependencies similar to how npm uses the `package-lock.json` file.
 It also installs any CSS and JS files in the app
 and does a "hot code push" so the effect is seen immediately,
 unlike installing npm packages.
+
+After adding packages to a project, to update to the latest version of each,
+enter `meteor update`. This also updates to the latest version of Meteor.
+To only update packages and not Meteor, enter `meteor update --packages-only`.
+The version of each package being used
+can be found in the file `.meteor/versions`.
+
+To import functions, classes, and other values from a Meteor package,
+use an import with the following syntax:
+
+```js
+import {name1, name2} from 'meteor/{package-prefix}:{package-name}';
+```
 
 There are five types of packages:
 
@@ -2169,6 +2186,9 @@ To connect from the MongoDB Compass app:
 - Replace "<password>" with the password and press "CONNECT".
 - Click a database name to see the collections inside it.
 
+For more detail on using MongoDB Atlas with Meteor, see
+<https://medium.com/@cfnelson/mongodb-atlas-with-meteor-a-step-by-step-guide-da34093665f4>.
+
 #### Configuring a Cloud Server
 
 There are many options to choose from including
@@ -2515,6 +2535,64 @@ For this reason, the MongoDB server must accept requests from
 an IP address range, not specific IP addresses.
 The free tier of MongoDB Atlas does not support whitelisting IP address ranges,
 so upgrading to a paid tier is required to connect to it from a Galaxy server.
+
+### Creating Meteor Packages
+
+Early in the "Meteor Packages" section we discussed Isopacks
+which are packages containing code that often can run on the client or server.
+You can create your own Isopacks.
+They can existing locally, only for use by your applications.
+You can also publish them so anyone can use them, similar to npm packages.
+
+To create an Isopack:
+
+1. Register as a Meteor developer.
+   Your username will be the prefix be used to identify packages you author.
+1. Enter `meteor create --package {your-prefix}:{package-name}`  
+   This creates a directory using the package name
+   containing the files `README.md` (empty), `{package-name}.js`,
+   `{package-name}-tests.js`, and `package.js`.
+1. Edit `{package-name}.js` to add functions.
+   Keep the export of the constant `name`.
+   Add exports of functions, classes, and other values.
+1. Edit `{package-name}-test.js` to add tests for code in `{package-name}.js`.  
+   Follow the naming convention used in the
+   example test provided for the package name.
+   The `test` object passed to each test function
+   supports the following methods for making assertions:
+   `equal`, `notEqual`, `instanceOf`, `isTrue`, `isFalse`,
+   `isNull`, `isNotNull`, `isUndefined`, `isNan`, `matches`, and `length`.
+1. Run tests by entering `meteor test-packages ./`.  
+   The names of tests run in the server are preceded by "S:".
+   Those run in the client are preceded by "C:".
+1. Browse localhost:3000 to see test results.
+1. Modify code until tests pass.
+   Tests rerun automatically when changes are detected and browser refreshes.
+1. Create a Git repository for the package.
+1. Push the code to the Git repository.
+1. Modify `package.js` to set version and add summary and git URL.
+1. Publish the package by entering `meteor publish --create`.  
+   It can take 5-10 minutes for the package to appear on atmosphere.js,
+   but it should be found by `meteor search` immediately.
+1. To publish changes after the initial publish,
+   bump the version in `package.js`,
+   push changes to the Git repository,
+   and enter `meteor publish`.
+   These changes will appear on atmosphere.js immediately.
+
+See the earlier "Meteor Packages" section for details on
+adding the use of packages to a project and importing values from them.
+
+### Building a Mobile App
+
+- Create a new Meteor app following the steps described earlier.
+- See <http://guide.meteor.com/cordova.html#installing-prerequisites>.
+- `meteor add-platform android`
+- `meteor add-platform ios`
+- `meteor run ios` to run in a simulator
+- `meteor run android` to run in a simulator
+- `meteor run ios-device` to run on an iOS device
+- `meteor run android-device` to run on an Android device
 
 ### Resources
 
