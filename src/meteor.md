@@ -14,18 +14,21 @@ because it works with other frameworks.
 It is used to host both client-side and server-side code.
 
 Meteor is built on Node.js.
-It has good integration with the MongoDB NoSQL database.
+It has great integration with the MongoDB NoSQL database.
 It also supports a publish and subscribe mechanism to synchronize
 user interfaces (UIs) with backend data, providing real-time updates.
 
 Meteor uses its own build systems and JavaScript bundler.
 It does not use an external bundler such as Webpack, Rollup, or Parcel.
+This is partially because Meteor was created
+before those tools were created or became mature.
 
 Meteor has its own frontend framework called Blaze.
 But it also supports other popular options that can be used in its place
 such as Angular, React, Svelte, Vue, and Cordova (for Android and iOS apps).
-Note that on August 10, 2020 Adobe announced they
-will no longer support development of Cordova.
+(Cordova is an open source fork of PhoneGap which was created by Adobe.
+On August 10, 2020 Adobe announced they will no longer support development
+of PhoneGap. Development of Cordova continues under Apache.)
 
 Meteor was initially released in 2012.
 It gained immediate attention for its novel use of WebSockets
@@ -46,16 +49,16 @@ Companies that use Meteor include Qualcomm, Mazda, IKEA, and Honeywell.
 Enterprise support is available in order to have
 guaranteed support response times and service-level agreements (SLAs).
 
-Meteor provides many command-line tools. These are summarized
+Meteor provides many command-line tools summarized
 {% aTargetBlank 'https://docs.meteor.com/commandline.html', 'here' %}.
-Enter `meteor help` for help on using these.
+After installing Meteor, enter `meteor help` for help on using these.
 
 ### Key Benefits
 
 The key benefits of using Meteor are:
 
 - One install provides client, server (Node.js), and database (MongoDB) setup.
-- Provides simple integration with MongoDB out of the box.
+- Simple integration with MongoDB is provided out of the box.
 - Client and server code can be developed in a single language,
   JavaScript or TypeScript.
 - The UI can be implemented using any popular web framework.
@@ -82,21 +85,22 @@ see {% aTargetBlank 'https://www.meteor.com/install', 'here' %}.
 On Linux or macOS, enter `curl https://install.meteor.com | sh`.
 On Windows, install Chocolatey and enter `choco install meteor`.
 
-This installs several tools used by Meteor
+Install Meteor also installs several tools used by it
 including MongoDB and TypeScript.
 {% aTargetBlank 'https://nodejs.org/', 'Node.js' %}
-must be installed separately and that includes npm.
+must be installed separately and that includes the npm tool.
 
 Repeating the install command will update the existing installation.
 
-### Directory Structure
+### Creating a Project
 
-To create the initial directory structure for a new Meteor app and run it:
+To create the initial directory structure for a new Meteor project
+and run it, enter the following commands:
 
-- Enter `meteor create {app-name}`
-- Enter `cd {app-name}`
-- Enter `meteor npm install`
-- Enter `meteor`
+- `meteor create {app-name}`
+- `cd {app-name}`
+- `meteor npm install`
+- `meteor`
 
 This is covered in more detail later in the "Todo App" section.
 
@@ -108,7 +112,10 @@ will appear in the terminal window where the server is running.
 After making changes to server code, the message "Meteor server restarted"
 will appear in the same place.
 
-The recommended directory structure for Meteor applications is:
+### Directory Structure
+
+The recommended directory structure for Meteor applications
+and the initial set of files inside them is:
 
 - `client`  
   This holds files that are only used in the browser.
@@ -153,7 +160,7 @@ files that are shared between client and server code.
 
 ### Meteor Packages
 
-Meteor can use packages from npm and
+Meteor projects can use packages from npm and
 from its own package repository called "Atmosphere".
 Atmosphere contains packages that are specific to Meteor.
 These are referred to as "Isopacks" because they are typically
@@ -163,18 +170,23 @@ To see the available packages in Atmosphere,
 browse {% aTargetBlank 'https://atmospherejs.com/', 'atmosphere.com' %}.
 Packages without an author prefix followed by a colon
 are official Meteor packages.
-This page lists trending, recent, and most used packages.
+This page lists packages that are trending, recently added/updated,
+and most frequently used.
 
 To install a package from Atmosphere in your current Meteor project,
 enter `meteor add {package-name}`.
-This writes information about the installed packages to `.meteor/packages`
-to track dependencies similar to how npm uses the `package-lock.json` file.
-It also installs any CSS and JS files in the app
-and does a "hot code push" so the effect is seen immediately,
+This writes information about the installed package
+to `.meteor/packages` in order to track dependencies,
+similar to how npm uses the `package-lock.json` file.
+It also installs packages on which this one depends.
+If the app is running, Meteor performs a
+"hot code push" of the CSS and JS files in the package
+so the effect is seen immediately,
 unlike installing npm packages.
 
-After adding packages to a project, to update to the latest version of each,
-enter `meteor update`. This also updates to the latest version of Meteor.
+After adding packages to a project, to update to
+the latest version of each, enter `meteor update`.
+This also updates to the latest version of Meteor.
 To only update packages and not Meteor, enter `meteor update --packages-only`.
 The version of each package being used
 can be found in the file `.meteor/versions`.
@@ -188,16 +200,20 @@ import {name1, name2} from 'meteor/{package-prefix}:{package-name}';
 
 There are five types of packages:
 
-1. `meteor-base`: This is a specific package that contains core components.
-2. first-party (core) packages: These are bundled with Meteor.
+1. `meteor-base`  
+   This is a specific package that contains core components.
+2. first-party (core) packages  
+   These are bundled with Meteor.
    Some are included by default, but can be removed.
    Others are not, but can be added.
    Their names do not have an author prefix.
-3. local-packages: These are specific to your app
-   and reside in the `packages` directory.
-4. Atmosphere (community) packages: Many of these follow the `author:package`
-   naming convention and all in use are listed in the file `.meteor/packages`.
-5. npm packages: These are listed as dependencies in `package.json`.
+3. local-packages  
+   These are specific to your app and reside in the `packages` directory.
+4. Atmosphere (community) packages  
+   Many of these follow the `author:package` naming convention
+   and all that are in use are listed in the file `.meteor/packages`.
+5. npm packages  
+   These are listed as dependencies in the file `package.json`.
 
 New Meteor apps typically include three core packages by default
 which are meteor-platform, autopublish, and insecure.
@@ -223,7 +239,7 @@ Popular Atmosphere packages include:
 
 ### MongoDB
 
-MongoDB is a popular, powerful NoSQL database.
+MongoDB is a popular NoSQL database.
 There are many commands and options to master,
 but the following presents some of the basics
 for using the MongoDB console in conjunction with Meteor.
@@ -233,7 +249,7 @@ To start the MongoDB console, enter `meteor mongo`.
 To see a list of all the databases, enter `show dbs`.
 
 Meteor uses the database named "meteor".
-To use this database, enter `use meteor`.
+To interact with this database, enter `use meteor`.
 
 To see a list of collections in the current database, enter `show collections`.
 
@@ -272,23 +288,22 @@ creating a MongoDB collection named "tasks",
 inserting a document into the collection, and finding it.
 By convention, variable names that refer to collections
 have CamelCase names that start uppercase.
-By default MongoDB stores the unique id of each document
-in property named `_id`.
+MongoDB stores the unique id of each document in property named `_id`.
 If no value is provided, MongoDB will generate a unique value.
 
 ```js
 const Tasks = new Mongo.Collection('tasks');
-Tasks.insert({_id: 't1', text: 'buy milk'});
-const task = Tasks.findOne({_id: 't1'});
+const id = Tasks.insert({text: 'buy milk'}); // returns assigned id
+const task = Tasks.findOne({_id: id});
 ```
 
 The same code can be used in client or server code
 when the Meteor "insecure" package is installed.
 The starter app includes this.
-Later we will look at securing Meteor applications.
+Later we will look at securing Meteor applications by removing this package.
 
 If the code above is run in the server,
-it creates a MongoDB collection and populates it.
+it creates a MongoDB collection (if it doesn't already exist) and populates it.
 If the code above is run in the client, it creates a client-side cache
 using the "Minimonogo" library which provides an
 in-memory JavaScript implementation of the MongoDB API.
@@ -297,6 +312,7 @@ Minimongo in the client is automatically kept in sync with
 MongoDB in the server when the "autopublish" package is installed.
 The starter app includes this.
 Later we will look at removing this.
+
 When "autopublish" is not installed,
 the server must publish documents from collections
 and the client must subscribe documents of interest.
@@ -329,7 +345,7 @@ or
 const myCollection = new Mongo.Collection('some-name', {connection: null});
 ```
 
-To support associates between documents in different collections,
+To support associations between documents in different collections,
 see the Meteor package
 {% aTargetBlank 'https://atmospherejs.com/cultofcoders/grapher',
 'cultofcoders:grapher' %}.
@@ -340,9 +356,10 @@ A schema can be associated with a collection
 in order to provide validation when documents are added or updated.
 Schemas can be described using the npm package
 {% aTargetBlank 'https://github.com/aldeed/simpl-schema', 'simpl-schema' %},
-which can be installed by entering `npm install simpl-schema`.
+which is installed by entering `npm install simpl-schema`.
 
-The type of each property can be specified with either a shorthand or longhand definition.
+The type of each property can be specified with
+either a shorthand or longhand definition.
 Shorthand definitions only specify a type.
 Longhand definitions can also specify that
 a property is optional, a default value, a max length,
@@ -386,7 +403,6 @@ Meetings.schema = new SimpleSchema({
   duration: SimpleSchema.Integer,
   topics: [topicSchema]
 });
-Meetings.attachSchema(Meetings.schema);
 ```
 
 Schema validation is not performed automatically.
@@ -403,10 +419,11 @@ In addition it coerces values to the expected types when possible,
 removes properties not in the schema, and
 assigns default values specified with the `defaultValue` property.
 To install this package, enter `meteor add aldeed:collection2`.
-To use this on our `Tasks` collection:
+To use this on our `Tasks` and `Meetings` collections:
 
 ```js
 Tasks.attachSchema(Tasks.schema);
+Meetings.attachSchema(Meetings.schema);
 ```
 
 For more detail on schema definitions, see
