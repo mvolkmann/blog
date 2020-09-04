@@ -438,7 +438,7 @@ For example, if a document contains a property whose value is a large array
 and a single element is modified, DDP will send the entire array to clients.
 This works fine, but is inefficient.
 
-### Methods
+### Meteor Methods
 
 Meteor Methods are functions that can reside only on the server
 or on both the client and server.
@@ -454,7 +454,7 @@ is that they can only be called from the same Meteor app.
 In many cases the Methods are specific to the app and this is a non-issue.
 
 Common uses for Methods include
-inserting a document in a collection,
+inserting a document into a collection,
 deleting a document from a collection,
 and updating a document in a collection.
 There is typically no need to return anything to the client
@@ -465,7 +465,7 @@ subscribing to them rather than through methods calls,
 but Methods can also be used for this purpose.
 
 Methods can also be used to perform CRUD operations on SQL databases.
-In this case it makes sense for the methods on only reside on the server
+In this case it makes sense for the methods to only reside on the server
 and for them to return data needed by the client.
 
 To implement Methods,
@@ -481,7 +481,8 @@ Methods can accept any number of parameters with any JavaScript types.
 The `check` function in the `meteor/check` package
 can be used to check the types of parameters at runtime.
 Note that TypeScript types are only checked at compile-time.
-The `check` function throws a `Match.Error` error if unexpected types are passed.
+The `check` function throws a `Match.Error` error
+if unexpected types are passed.
 For details on the `check` function,
 see {% aTargetBlank 'https://docs.meteor.com/api/check.html', 'here' %}.
 
@@ -504,7 +505,8 @@ and a callback function.
 This triggers the Method call lifecycle which has six parts.
 
 1. If the Method is defined in the client, it is executed there.
-   This typically updates Minimongo and corresponding UI updates are made.
+   This typically updates Minimongo and corresponding UI updates
+   are made in response to these changes.
 1. A JSON-based DDP message is constructed and sent to the server
    using a WebSocket connection.
    This includes a message name (`msg` property set to "method"),
@@ -536,11 +538,6 @@ If a Method inserts new documents in a collection,
 Meteor uses the same random generator seed on the client and server
 in order to guarantee that documents created by client calls
 are assigned the same `_id` values as documents created by server calls.
-
-Methods that throw should do so using
-`throw new Meteor.error(methodName, message)`.
-Throwing a normal JavaScript `Error` will not
-return a detailed error message to the client.
 
 When multiple Methods are called without
 waiting for the result of each before calling the next,
@@ -600,6 +597,11 @@ Meteor.call('sum', number1, number2, (err, result) => {
 });
 ```
 
+In this case there is no benefit to
+invoking the method on both the client and server
+because it doesn't rely on any server resources.
+Later in the "Optimistic UI" section we will learn why this can be useful.
+
 If you prefer to use promises instead of callback functions,
 implement a utility function that wraps calls in a `Promise` as follows:
 
@@ -644,13 +646,29 @@ Two alternate ways to define Methods are
 'mdg:validated-method' %}.
 These provide additional features, but may be overkill for most Methods.
 
+Typically client code only invokes methods that
+are registered in the server of the same Meteor application.
+However, it is also possible to invoke methods
+defined in the server of a different Meteor application.
+To do this:
+
+```js
+import {DDP} from 'meteor/ddp-client';
+
+const connection = DDP.connect(serverUrl);
+connection.call(methodName, arguments, callback);
+```
+
+For more details, see
+<https://docs.meteor.com/api/connections.html#DDP-connect>.
+
 ### Method Retries
 
 If a client calls a Method and their internet connection is lost
 before a result is returned, Meteor will remember this
 and will make the call again when connectivity is restored.
 This presents an issue when Methods are not idempotent.
-In this context, being idempotent means that the when a call is repeated
+In this context, being idempotent means that when a call is repeated
 no additional changes are made in the database.
 
 Consider typical CRUD operations.
@@ -671,6 +689,113 @@ Consider typical CRUD operations.
 
 - Deleting a document multiple times is not a problem as long as
   an attempt to delete a non-existent document is not treated as an error.
+
+### Optimistic UI
+
+Optimistic UI is a feature of Meteor Methods, and also of Apollo GraphQL,
+that enables a UI to respond to user interactions
+without waiting for server responses.
+This is satisfied by the following properties.
+
+1. The UI is rendered on the client rather than
+   waiting for the server to return HTML or data.
+   This requires predicting the result of Method calls
+   based on data that has been cached on the client.
+
+1. The client-side cache (stored in Minimongo)
+   is a global cache rather than
+   being associated with specific components,
+   so it is not possible for components to disagree on the state.
+   All affected components can re-render using the same data.
+   When a MongoDB query is executed using a Meteor Method,
+   it is first run against Minimongo on the client
+   and then against MongoDB on the server.
+
+1. The client subscribes to data using DDP to keep
+   Minimongo on the client in sync with MongoDB on the server.
+   Updates are made in real time, not using polling.
+
+1. When the server returns the actual results of a Method call,
+   Meteor verifies that it matches what the client predicted.
+   If they differ, Meteor rolls back
+   all the changes made in Minimongo from that point forward and
+   applies the correct changes from the server.
+   The UI can then update using the new data in Minimongo.
+
+All of this functionality is provided by default.
+The only requirement is for the client to
+use Meteor Methods to request data changes.
+
+The following sequence diagram illustrates the order of these operations.
+It assumes that Svelte is being used to implement the UI
+and that data retrieved from Minimongo is placed in a Svelte store.
+
+![Meteor Method flow](/blog/assets/meteor-method-flow.png)
+
+If the Method throws an error when run on the client,
+it is not called on the server.
+
+To see rollback in action, we can modify a Meteor Method to
+return a different result when run on the client versus the server.
+This is not typical, but it is useful to demonstrate optimistic UI.
+
+Here is a simplified example from the upcoming Todo app.
+It inserts a document in the "tasks" collection.
+When run on the client it updates Minimongo
+using the text passed as an argument.
+When run on the server it uses a timeout to wait three seconds
+and then uses the uppercase version of the text.
+The Method first runs on the client and
+the UI renders a new task with the entered text.
+The Method then runs on the server.
+After the timeout it sends a message to the client that
+tells it to update Minimongo using the uppercase version of the text.
+The UI then updates to show the uppercase text.
+
+```js
+Meteor.methods({
+  addTask(text) {
+    check(text, String);
+    return new Promise(resolve => {
+      if (Meteor.isServer) {
+        // Meteor requires using this version of setTimeout.
+        // See https://docs.meteor.com/api/timers.html.
+        Meteor.setTimeout(() => {
+          // Tasks is a collection.
+          const id = Tasks.insert({text: text.toUpperCase()});
+          resolve(id);
+        }, 3000);
+      } else {
+        // in client
+        const id = Tasks.insert({text});
+        resolve(id);
+      }
+    });
+  }
+});
+```
+
+It is possible to define a Method only on the server-side,
+thereby opting out of optimistic UI.
+The UI will not update until the Method finishes executing on the server
+and sends back a result message.
+This is because Minimongo will not be updated
+until the result message is received.
+
+Here is an example of defining a Method on the server
+taken from the upcoming Todo app.
+It deletes a task with a given id.
+
+```js
+if (Meteor.isServer) {
+  Meteor.methods({
+    deleteTask(taskId) {
+      check(taskId, String);
+      Tasks.remove(taskId);
+    }
+  });
+}
+```
 
 ### Viewing WebSocket Messages
 
@@ -693,22 +818,18 @@ To view WebSocket messages:
    This list is updated as new messages are received.
 1. Click a message to see its details.
 
-Each message is an array of JSON objects that have
-a `msg` property and other properties such as
-`collection`, `fields`, `id`, `method`, `methods`, `msg`, and `params`.
-Typically each message array contains a single object.
-
 Each message is preceded by an arrow.
 Outgoing messages have a green arrow pointing up
 and are sent from the client to the server.
 Incoming messages have a red arrow pointing down
 and are sent from the server to the client.
 
-Periodically, about every 45 seconds, each side sends
-a "ping" message to verify that the other side is still reachable.
-The other side replies with a "pong" message.
-
 ### Meteor WebSocket Messages
+
+Each Meteor WebSocket message contains an array of JSON objects that have
+a `msg` property and other properties such as
+`collection`, `fields`, `id`, `method`, `methods`, `msg`, and `params`.
+Typically each message array contains a single object.
 
 When a client initially connects to the server,
 a series of messages are sent from the server to the client.
@@ -753,6 +874,10 @@ These messages include:
     "fields": {"version": "outdated}
   }
   ```
+
+Periodically, about every 45 seconds, each side sends
+a "ping" message to verify that the other side is still reachable.
+The other side replies with a "pong" message.
 
 If the Meteor accounts packages are used
 to support account creation and sign in,
@@ -809,110 +934,6 @@ When a document is deleted from a collection, `msg` is set to "remove".
 When a client subscribes to a collection, "added" messages described above
 are sent from the server to initially populate Minimongo.
 
-### Optimistic UI
-
-Optimistic UI is a feature of Meteor Methods, and also of Apollo GraphQL,
-that enables a UI to respond to user interactions
-without waiting for server responses.
-This is satisfied by the following properties.
-
-1. The UI is rendered on the client rather than
-   waiting for the server to return HTML or data.
-   This requires predicting the result of Method calls
-   based on data that has been cached on the client.
-
-1. The client-side cache (implemented by Minimongo)
-   is a global cache rather than
-   being associated with specific components,
-   so it is not possible for components to disagree on the state.
-   All affected components can re-render using the same data.
-   When a MongoDB query is executed using a Meteor Method,
-   it is first run against Minimongo on the client
-   and then against MongoDB on the server.
-
-1. The client subscribes to data using DDP to keep
-   Minimongo on the client in sync with MongoDB on the server.
-   Updates are made in real time, not using polling.
-
-1. When the server returns the actual results of a Method call,
-   Meteor verifies that it matches what the client predicted.
-   If they differ, Meteor rolls back
-   all the changes made in Minimongo from that point forward and
-   applies the correct changes from the server.
-   The UI can then update using the new data in Minimongo.
-
-All of this functionality is provided by default.
-The only requirement is for the client to
-use Meteor Methods to request data changes.
-
-The following sequence diagram illustrates the order of these operations.
-It assumes that Svelte is being used to implement the UI
-and that data retrieved from Minimongo is placed in a Svelte store.
-
-![Meteor Method flow](/blog/assets/meteor-method-flow.png)
-
-If the client method throws an error, the server method is not called.
-
-To see rollback in action, we can modify a Meteor Method to
-return a different result when run on the client versus the server.
-This is not typical, but it is useful to demonstrate optimistic UI.
-
-Here is a simplified example from the upcoming Todo app.
-It inserts a document in the "tasks" collection.
-When run on the client it updates Minimongo using the text passed as an argument.
-When run on the server it uses a timeout to wait three seconds
-and then uses the uppercase version of the text.
-The Method first runs on the client and
-the UI renders a new task with the entered text.
-The Method then runs on the server.
-After the timeout it sends a message to the client that
-tells it to update Minimongo using the uppercase version of the text.
-The UI then updates to show the uppercase text.
-
-```js
-Meteor.methods({
-  addTask(text) {
-    check(text, String);
-    return new Promise(resolve => {
-      if (Meteor.isServer) {
-        // Meteor requires using this version of setTimeout.
-        // See https://docs.meteor.com/api/timers.html.
-        Meteor.setTimeout(() => {
-          // Tasks is a collection.
-          const id = Tasks.insert({text: text.toUpperCase()});
-          resolve(id);
-        }, 3000);
-      } else {
-        const id = Tasks.insert({text});
-        resolve(id);
-      }
-    });
-  }
-});
-```
-
-It is possible to define a Method only on the server-side,
-thereby opting out of optimistic UI.
-The UI will not update until the Method finishes executing on the server
-and sends back a result message.
-This is because Minimongo will not be updated
-until the result message is received.
-
-Here is an example of defining a Method on the server
-taken from the upcoming Todo app.
-It deletes a task with a given id.
-
-```js
-if (Meteor.isServer) {
-  Meteor.methods({
-    deleteTask(taskId) {
-      check(taskId, String);
-      Tasks.remove(taskId);
-    }
-  });
-}
-```
-
 ### Tracker
 
 Tracker is a dependency tracking system used by Meteor to
@@ -939,7 +960,8 @@ This is provided by the Meteor package
 {% aTargetBlank 'https://atmospherejs.com/rdb/svelte-meteor-data',
 'rdb/svelte-meteor-data' %}.
 
-For example, to always get the current user in a Svelte component:
+For example, to always get the current user in a Svelte component
+when the accounts-password package is used:
 
 ```js
 $: user = useTracker(() => Meteor.user());
@@ -967,7 +989,8 @@ $: tasks = Tasks.find(query, projection);
 Note that both `user` and `tasks` are Svelte stores,
 so references to them should have a `$` prefix.
 
-For more information on rdb/svelte-meteor-data, see this
+For more information on the relationship between
+`useTracker` and Svelte stores, see this
 {% aTargetBlank 'https://github.com/rdb/svelte-meteor-data/issues/6', 'issue' %}.
 
 ### ReactiveVar
@@ -1011,6 +1034,10 @@ Here is a Svelte component that demonstrates using a `ReactiveVar`:
 </div>
 ```
 
+Since Svelte components already support reactive variables within components
+and stores to achieve reactivity across components,
+there is little reason to use `ReactiveVar` in Svelte components.
+
 ### ReactiveDict
 
 A `ReactiveDict` is a client-side reactive data store
@@ -1037,7 +1064,8 @@ const myDict = new ReactiveDict(name, initialKeyValuePairs);
 Both constructor arguments are optional.
 Providing a name allows the key/value pairs to survive hot code pushes,
 but not browser refreshes.
-Providing an initial value avoids starting with no key/value pairs.
+Providing an initial value is an alternative
+to starting with no key/value pairs.
 
 To set the default value of a `ReactiveDict` key,
 call `ReactiveDict.setDefault(key, value)`.
@@ -1050,6 +1078,9 @@ To get the value of a `ReactiveDict` key, call `ReactiveDict.get(key)`.
 To get all the current key/value pairs, call `myDict.all()`.
 
 To remove all the key/value pairs, call `myDict.clear()`.
+
+For the same reasons explained in the previous section on `ReactiveVar`,
+there is little reason to use `ReactiveDict` in Svelte components.
 
 ### Session
 
@@ -1106,6 +1137,9 @@ the use of `Session` based on the {% aTargetBlank
 'meteor/no-session' %} rule.
 Disable this ESLint rule if you decide to use `Session`.
 
+For the same reasons explained in the previous section on `ReactiveVar`,
+there is little reason to use `Session` in Svelte components.
+
 ### Email
 
 TODO: Document the Meteor API for sending email.
@@ -1154,11 +1188,13 @@ When this is not the case, the Svelte-specific parts can be omitted.
   }
   ```
 
+To run ESLint, enter `npm run lint`.
+
 ESLint will give "Unable to resolve path to module" errors
 on all imports that begin with "meteor/".
 However, the Meteor build system is able to resolve these.
 To suppress these errors, add the following top level property
-to your `.eslintrc.json` file:
+in the `.eslintrc.json` file:
 
 ```json
 "rules": {
@@ -1194,9 +1230,11 @@ When this is not the case, the Svelte-specific parts can be omitted.
   }
   ```
 
+To run Prettier, enter `npm run format`.
+
 ### DevTools
 
-The Chrome extension Meteor DevTools Evolved displays
+The Chrome extension "Meteor DevTools Evolved" displays
 DDP messages, Minimongo contents, and subscriptions.
 
 To install it, browse
