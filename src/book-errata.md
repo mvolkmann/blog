@@ -51,6 +51,8 @@ p. 35 Add the following as a new second paragraph:
 "To use TypeScript instead of JavaScript inside a `script` element,
 change the opening tag to `<script lang="ts">`."
 
+p. 36 In step 4, change "listing 2.4" to "listing 2.5".
+
 ### Chapter 5
 
 p. 87 Replace the first paragraph with the following:
