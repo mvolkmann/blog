@@ -34,11 +34,17 @@ take advantage of Svelte reactivity for updating the DOM."
 p. 29 In the first bullet of section 2.1.6,
 change "next section" to "section 2.1.8".
 
+p. 31 In section 2.2.1 at the end of the paragraph about using Webpack,
+"app-name" should be in italic.
+
 p. 32 Add the following after "Enter `npm install`
 to install all the required dependencies from npm."
 
 "To use TypeScript instead of JavaScript, enter `node scripts/setupTypeScript.js`.
 This will modify the project to use TypeScript and delete the `scripts` directory."
+
+p. 32 The sentence that starts with "Note that the default Webpack"
+belongs with step 5 above it.
 
 p. 35 Add the following as a new second paragraph:
 
