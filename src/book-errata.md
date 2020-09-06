@@ -59,6 +59,13 @@ add a space between "TodoList" and "component".
 p. 36 In the last sentence of the same paragraph,
 change "component" to "components".
 
+### Chapter 3
+
+p. 45 In the last paragraph, change "this component" to "the Person component".
+
+p. 48 In section 3.4 in the paragraph that starts with "The following example",
+change "always" to "only".
+
 ### Chapter 5
 
 p. 87 Replace the first paragraph with the following:
