@@ -6,6 +6,8 @@ layout: topic-layout.njk
 
 This is an errata for the book
 "[Svelte and Sapper in Action](https://www.manning.com/books/svelte-and-sapper-in-action)".
+If you find additional issues, please email them to
+<a href="mailto:r.mark.volkmann@gmail.com>me</a>.
 
 ### Chapter 1
 
