@@ -91,6 +91,11 @@ p. 87 Replace the first paragraph with the following:
 catch errors in passing props to components at compile time.
 If TypeScript is not used, prop types can be checked at run time."
 
+### Chapter 6
+
+p. 85 In the paragraph that begins with "The value of Boolean props",
+change "listing 5.4" to "listing 5.5".
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
