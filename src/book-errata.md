@@ -53,6 +53,12 @@ change the opening tag to `<script lang="ts">`."
 
 p. 36 In step 4, change "listing 2.4" to "listing 2.5".
 
+p. 36 In the paragraph that starts with "The TodoList",
+add a space between "TodoList" and "component".
+
+p. 36 In the last sentence of the same paragraph,
+change "component" to "components".
+
 ### Chapter 5
 
 p. 87 Replace the first paragraph with the following:
