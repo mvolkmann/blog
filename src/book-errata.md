@@ -74,9 +74,14 @@ p. 56 In the first sentence, "average" should be in code font.
 p. 58 Change the title of Listing 3.5 to
 "Using module context in src/Demo.svelte".
 
-p. 58 Add the following line after the opening script tag:
+p. 58 In listing 3.6, add the following line after the opening script tag:
 
 import {onMount} from 'svelte';
+
+p. 58 In the call to "console.log" in listing 3.6,
+remove "home.svelte on Mount: ".
+
+p. 59 In the second paragraph of section 3.12, "Todo" should be in code font.
 
 ### Chapter 5
 
