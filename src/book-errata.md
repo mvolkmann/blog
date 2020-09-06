@@ -106,6 +106,13 @@ p. 106 Change the description of "Readable stores" to
 "do not allow components to change their data"
 because the store itself can change its own data.
 
+p. 112 The "key" attribute on the "option" element is not needed.
+
+### Chapter 7
+
+p. 125 The closing brace after "{@html expression" can be on the same line
+and the book intended to show it that way.
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
