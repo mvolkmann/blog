@@ -31,6 +31,9 @@ take advantage of Svelte reactivity for updating the DOM."
 
 ### Chapter 2
 
+p. 29 In the first bullet of section 2.1.6,
+change "next section" to "section 2.1.8".
+
 p. 32 Add the following after "Enter `npm install`
 to install all the required dependencies from npm."
 
