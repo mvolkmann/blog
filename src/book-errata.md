@@ -66,6 +66,18 @@ p. 45 In the last paragraph, change "this component" to "the Person component".
 p. 48 In section 3.4 in the paragraph that starts with "The following example",
 change "always" to "only".
 
+p. 54 In section 3.9 near the end of the first paragraph,
+change "these" to "interpolations".
+
+p. 56 In the first sentence, "average" should be in code font.
+
+p. 58 Change the title of Listing 3.5 to
+"Using module context in src/Demo.svelte".
+
+p. 58 Add the following line after the opening script tag:
+
+import {onMount} from 'svelte';
+
 ### Chapter 5
 
 p. 87 Replace the first paragraph with the following:
