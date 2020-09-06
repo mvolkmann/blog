@@ -85,16 +85,26 @@ p. 59 In the second paragraph of section 3.12, "Todo" should be in code font.
 
 ### Chapter 5
 
+p. 85 In the paragraph that begins with "The value of Boolean props",
+change "listing 5.4" to "listing 5.5".
+
 p. 87 Replace the first paragraph with the following:
 
 "TypeScript can be used to define the types of props and
 catch errors in passing props to components at compile time.
 If TypeScript is not used, prop types can be checked at run time."
 
+p. 93 Remove two spaces of indentation
+from the line "\$: triple = cValue \* 3;".
+
+p. 103 Steps 1 and 2 for Checklist.svelte are not really needed
+until before step 1 for Checklist.svelte on p. 104.
+
 ### Chapter 6
 
-p. 85 In the paragraph that begins with "The value of Boolean props",
-change "listing 5.4" to "listing 5.5".
+p. 106 Change the description of "Readable stores" to
+"do not allow components to change their data"
+because the store itself can change its own data.
 
 ### Index
 
