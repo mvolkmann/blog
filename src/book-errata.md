@@ -113,6 +113,13 @@ p. 112 The "key" attribute on the "option" element is not needed.
 p. 125 The closing brace after "{@html expression" can be on the same line
 and the book intended to show it that way.
 
+### Chapter 8
+
+p. 146 Change "Here is the Color component" to "Here is the ColorCycle"
+component for consistency with the previous version on p. 145.
+
+p. 146 In the title of Listing 8.6, change "Color" to "ColorCycle".
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
