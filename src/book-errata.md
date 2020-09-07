@@ -128,6 +128,24 @@ export let text
 p. 146 In Listing 8.6, change "Some Title" to "{text}"
 to match code in Listing 8.4.
 
+p. 149 Code indentation in Listing 8.9 is wrong.
+All indentation should use two spaces like this:
+
+```js
+import {onMount} from 'svelte';
+
+export function onMountFocus() {
+  onMount(() => {
+    const input = document.querySelector('input'); <1>
+    input.focus();
+  });
+}
+
+export function onMountLog(name) {
+  onMount(() => console.log(name, 'mounted'));
+}
+```
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
