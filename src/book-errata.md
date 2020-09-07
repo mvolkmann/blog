@@ -163,6 +163,20 @@ since it isn't doing anything.
 p. 160 In Listing 9.9 at the bottom of the page, the content of the h1
 should be "Page Not Found".
 
+### Chapter 12
+
+p. 202 Add the following to the end of the annotation in Listing 12.4
+that begins with "This waits":
+
+It returns a Promise.
+
+p. 204 In the second to last annotation in Listing 12.6,
+change "fond" to "found".
+
+p. 208 Near the end of the test output shown in Listing 12.11,
+change the indentation of the numbers after "Tests:", "Snapshots:",
+and "Time:" to match that of "Test Suites:".
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
