@@ -146,6 +146,9 @@ export function onMountLog(name) {
 }
 ```
 
+p. 150 In the sentence that starts with "The following listing",
+add a space between "AgeEntry" and "or".
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
