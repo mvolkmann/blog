@@ -120,6 +120,14 @@ component for consistency with the previous version on p. 145.
 
 p. 146 In the title of Listing 8.6, change "Color" to "ColorCycle".
 
+p. 146 In Listing 8.6, add the following after the import statement
+to match code in Listing 8.4:
+
+export let text
+
+p. 146 In Listing 8.6, change "Some Title" to "{text}"
+to match code in Listing 8.4.
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
