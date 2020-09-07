@@ -149,6 +149,20 @@ export function onMountLog(name) {
 p. 150 In the sentence that starts with "The following listing",
 add a space between "AgeEntry" and "or".
 
+### Chapter 9
+
+p. 156 The closing brace of the else block near the top of the page
+is indented one space too far.
+
+p. 157 The tr element inside tfoot should have an empty td inserted between
+the two currently there to leave an empty cell in the Quantity column.
+
+p. 157 The style tag and its content should be removed
+since it isn't doing anything.
+
+p. 160 In Listing 9.9 at the bottom of the page, the content of the h1
+should be "Page Not Found".
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
