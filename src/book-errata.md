@@ -177,6 +177,15 @@ p. 208 Near the end of the test output shown in Listing 12.11,
 change the indentation of the numbers after "Tests:", "Snapshots:",
 and "Time:" to match that of "Test Suites:".
 
+p. 220 in the second paragraph, change all letters in color hex codes
+to lowercase for consistency.
+
+p. 223 Add a new first step in the list after the sentence that starts with
+"To run WAVE" that is "Browse to the website to be tested."
+
+p. 226 At the end of the bullet "It adds the following npm scripts",
+add "in package.json" with "package.json" in code font.
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
