@@ -97,7 +97,7 @@ catch errors in passing props to components at compile time.
 If TypeScript is not used, prop types can be checked at run time."
 
 p. 93 Remove two spaces of indentation
-from the line `$: triple = cValue \* 3;`.
+from the line "\$: triple = cValue \* 3;".
 
 p. 103 Steps 1 and 2 for Checklist.svelte are not really needed
 until before step 1 for Checklist.svelte on p. 104.
@@ -112,7 +112,7 @@ p. 112 The "key" attribute on the "option" element is not needed.
 
 ### Chapter 7
 
-p. 125 The closing brace after `{@html expression` can be on the same line
+p. 125 The closing brace after "{@html expression" can be on the same line
 and the book intended to show it that way.
 
 ### Chapter 8
@@ -201,9 +201,7 @@ to match the Vercel website.
 p. 245 Delete the first comment in Listing 14.1 which just duplicates
 the annotation on the following line.
 
-{% raw %}
-p. 245 Indent the `<label>` element inside the `{#each}` block by two spaces.
-{% endraw %}
+p. 245 Indent the <label> element inside the {#each} block by two spaces.
 
 p. 250 In the first sentence of section 14.3,
 add a space between "name" and "props".
@@ -219,9 +217,7 @@ delete the period before "src/Checklist.svelte".
 p. 253 Indent the NOTE so it appears to belong with
 the paragraph that precedes it.
 
-{% raw %}
-p. 256 In Listing 14.4, change `options={options}` to `{options}`.
-{% endraw %}
+p. 256 In Listing 14.4, change "options={options}" to "{options}".
 
 p. 259 Indent the Note so it appears to belong with step #5
 that begins on the previous page.
@@ -251,7 +247,7 @@ p. 292 In Figure 17.1, change "Ramsey" to "Ramsay".
 p. 292 In the first bullet after the line "With this UI we can",
 change "a database" to "the database".
 
-p. 294 In the second annotation, change the last word from `dogs` to `dogMap`.
+p. 294 In the second annotation, change the last word from "dogs" to "dogMap".
 
 p. 296 In the two button elements near the top of the page, change
 `on:click|preventDefault={saveDog}`
@@ -262,8 +258,8 @@ p. 296 Delete the annotation that says
 "Using preventDefault prevents a form submission."
 because setting the button types to "button" removes the need for this.
 
-p. 301 In step 7, change `routes/checklist.svelte`
-to `components/Category.svelte`.
+p. 301 In step 7, change "routes/checklist.svelte"
+to "components/Category.svelte".
 
 p. 301 In the list under the bullet for "src directory"
 all the indentation was lost. It should be:
@@ -285,7 +281,7 @@ p. 306 In second paragraph, change "that would be" to "that is".
 
 p. 316 In code near the top of the page, change
 
-`<div class="left">` to `<div>`
+<div class="left"> to <div>
 
 ### Chapter 19
 
@@ -296,8 +292,6 @@ removing the dash. These are separate words.
 p. 325 For consistency with other code comments,
 near the bottom of the page change
 
-{% raw %}
-
 ```text
 ...use online in JavaScript code and {#if} blocks...
 ```
@@ -307,8 +301,6 @@ to
 ```js
 // use online in JavaScript code and {#if} blocks
 ```
-
-{% endraw %}
 
 p. 327 In section 19.4, step 1, change "cache" to code font.
 
@@ -326,7 +318,7 @@ Change 5 to 8.
 ### Chapter 20
 
 p. 344 In the first paragraph of section 20.1, add a space between
-`String` and `replace`.
+"String" and "replace".
 
 ### Index
 
