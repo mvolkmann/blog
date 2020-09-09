@@ -186,6 +186,125 @@ p. 223 Add a new first step in the list after the sentence that starts with
 p. 226 At the end of the bullet "It adds the following npm scripts",
 add "in package.json" with "package.json" in code font.
 
+### Chapter 13
+
+p. 240 In the second sentence, change "Create-React-App" to "Create React App"
+to match the Vercel website.
+
+### Chapter 14
+
+p. 245 Delete the first comment in Listing 14.1 which just duplicates
+the annotation on the following line.
+
+p. 245 Indent the <label> element inside the {#each} block by two spaces.
+
+p. 250 In the first sentence of section 14.3,
+add a space between "name" and "props".
+
+p. 250 In the last sentence, change "manual" to "hash".
+
+p. 251 The NOTE should be indented so it appears to
+belong with the second bullet.
+
+p. 252 In the sentence that begins with "Add the following",
+delete the period before "src/Checklist.svelte".
+
+p. 253 Indent the NOTE so it appears to belong with
+the paragraph that precedes it.
+
+p. 256 In Listing 14.4, change "options={options}" to "{options}".
+
+p. 259 Indent the Note so it appears to belong with step #5
+that begins on the previous page.
+
+p. 259 Step numbering should not have restarted.
+Change step 1 to step 6.
+Change step 2 to step 7.
+Change step 3 to step 8.
+
+p. 259 Indent the gray box so it appears to belong with what is now step #6.
+
+p. 259 The last two paragraphs should be combined into one paragraph
+because they address the same subject.
+
+### Chapter 16
+
+p. 279 In Listing 16.3, line 3, delete ", preloading, session"
+because those variables are not used.
+
+p. 287 Fix the indentation of the code in step 13.
+All but the first line are indented two spaces too far.
+
+### Chapter 17
+
+p. 292 In Figure 17.1, change "Ramsey" to "Ramsay".
+
+p. 292 In the first bullet after the line "With this UI we can",
+change "a database" to "the database".
+
+p. 294 In the second annotation, change the last word from "dogs" to "dogMap".
+
+p. 296 In the two button elements near the top of the page, change
+on:click|preventDefault={saveDog}
+to
+on:click={saveDog} type="button"
+
+p. 296 Delete the annotation that says
+"Using preventDefault prevents a form submission."
+because setting the button types to "button" removes the need for this.
+
+p. 301 In step 7, change "routes/checklist.svelte"
+to "components/Category.svelte".
+
+p. 301 In the list under the bullet for "src directory"
+all the indentation was lost. It should be:
+
+```text
+- `routes` directory
+  - `categories` directory
+    - `index.json.js`—`get` and `post` category
+    - `[categoryId]` directory
+      - `index.json.js`—`put` and `del` category
+      - `items` directory
+        - `index.json.js`—`post` item
+        - `[itemId].json.js`—`put` and `del` item
+```
+
+p. 306 In second paragraph, change "that would be" to "that is".
+
+### Chapter 18
+
+p. 316 In code near the top of the page, change
+
+<div class="left">
+to
+<div>
+
+### Chapter 19
+
+p. 323 In the paragraph that begins with "Service workers do not",
+change "Worker-postMessage" (split across lines) to "Worker postMessage",
+removing the dash. These are separate words.
+
+p. 325 For consistency with other code comments,
+near the bottom of the page change
+...use online in JavaScript code and {#if} blocks...
+to
+// use online in JavaScript code and {#if} blocks
+
+p. 327 In section 19.4, step 1, change "cache" to code font.
+
+p. 333 Indent the NOTE so it appears to belong to step 3.
+
+p. 333 Step numbers should not reset to 1 after the NOTE.
+Change 1 to 4.
+
+p. 334
+Change 2 to 5.
+Change 3 to 6.
+Change 4 to 7.
+Change 5 to 8.
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
