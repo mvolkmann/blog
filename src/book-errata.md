@@ -276,9 +276,12 @@ p. 306 In second paragraph, change "that would be" to "that is".
 
 p. 316 In code near the top of the page, change
 
+{% raw %}
+
 <div class="left">
 to
 <div>
+{% endraw %}
 
 ### Chapter 19
 
@@ -288,9 +291,11 @@ removing the dash. These are separate words.
 
 p. 325 For consistency with other code comments,
 near the bottom of the page change
+{% raw %}
 ...use online in JavaScript code and {#if} blocks...
 to
 // use online in JavaScript code and {#if} blocks
+{% endraw %}
 
 p. 327 In section 19.4, step 1, change "cache" to code font.
 
