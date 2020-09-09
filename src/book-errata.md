@@ -305,6 +305,11 @@ Change 3 to 6.
 Change 4 to 7.
 Change 5 to 8.
 
+### Chapter 20
+
+p. 344 In the first paragraph of section 20.1, add a space between
+"String" and "replace".
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
