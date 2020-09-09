@@ -328,6 +328,80 @@ Change 5 to 8.
 p. 344 In the first paragraph of section 20.1, add a space between
 `String` and `replace`.
 
+p. 350 Replace the 2nd, 3rd, and 4th paragraphs in section 20.2.5
+with the following:
+
+There are two ways to enable TypeScript support in a Svelte project.
+The easiest option is to use `npx degit sveltejs/template {project-name}`
+to start a project. Then cd to the directory created
+and enter `node scripts/setupTypeScript.js`.
+This configures the use of svelte-preprocess and a TypeScript plugin for Rollup.
+It also installs the svelte-check tool and adds a "validate" script
+in `package.json` to run it.
+
+The svelte-check tool (<http://mng.bz/4Agj>)
+checks all `.svelte` files in a project
+and reports many kinds of errors, including TypeScript errors.
+To run it, enter `npm run validate`.
+
+For existing Svelte applications,
+the use of TypeScript can be manually configured
+by following these steps:
+
+- Install the required npm packages by entering the following:
+
+  ```text
+  npm install -D @rollup/plugin-typescript svelte-check tslib typescript
+  ```
+
+- Edit `rollup.config.js`:
+
+  - Add the following `import` near the top:
+
+    ```js
+    import typescript from '@rollup/plugin-typescript';
+    ```
+
+  - Add a call to `typescript()` in the `plugins` array:
+
+    ```json
+    plugins: [
+      svelte({
+        ...
+        preprocess: sveltePreprocess()
+      }),
+      typescript(),
+      ...
+    ]
+    ```
+
+- Edit `package.json` and add the following script:
+
+  ```json
+  "validate": "svelte-check"
+  ```
+
+If using VS Code, also install the Svelte for VS Code extension
+described in appendix F which catches TypeScript errors
+in opened `.svelte` files.
+
+p. 350 Change the following sentence:
+
+Here is a simple example of using TypeScript inside a component
+that illustrates where type checking occurs:
+
+to
+
+Here is a simple example of using TypeScript inside a component:
+
+p. 350 Change the second code annotation to "The same type error occurs here."
+
+p. 351 Delete the sentence starting with "To enable importing"
+and delete all the text for steps 1 and 2 because all of this
+is now closer to the beginning of this section.
+
+p. 351 Change the second code annotation to "The same type error occurs here."
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
@@ -336,3 +410,7 @@ p. 419 Swap and correct the page numbers for
 action function 128-129
 
 actions in Storybook 227-231
+
+```
+
+```
