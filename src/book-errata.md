@@ -338,6 +338,8 @@ and enter `node scripts/setupTypeScript.js`.
 This configures the use of svelte-preprocess and a TypeScript plugin for Rollup.
 It also installs the svelte-check tool and adds a "validate" script
 in `package.json` to run it.
+Finally, it deletes the `setupTypeScript.js` file and
+also the `scripts` directory if there are no other files in it.
 
 The svelte-check tool (<http://mng.bz/4Agj>)
 checks all `.svelte` files in a project
@@ -401,6 +403,22 @@ and delete all the text for steps 1 and 2 because all of this
 is now closer to the beginning of this section.
 
 p. 351 Change the second code annotation to "The same type error occurs here."
+
+### Chapter 21
+
+p. 357 In the last sentence of section 21.1,
+change "section 21.6" to "section 21.7".
+
+p. 363 In the last sentence of section 21.1.6,
+change "section 21.7" to "section 21.8".
+
+### Appendix E
+
+p. 409 Move the paragraph starting with "Add the following",
+the line containing the "format" script, and
+the sentence starting with "To run Prettier"
+all to after Listing E.1 on the next page
+to be consistent with the placement in Appendix D.
 
 ### Index
 
