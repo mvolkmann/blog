@@ -412,6 +412,22 @@ change "section 21.6" to "section 21.7".
 p. 363 In the last sentence of section 21.1.6,
 change "section 21.7" to "section 21.8".
 
+p. 386 In the last code annotation on the page, change "300" to "200".
+
+p. 388 In the annotation in Listing 21.13,
+change "This function can be preceded by"
+to "This function name can appear at the beginning of"
+
+### Appendix A
+
+p. 395 Remove the line for "Gatsby" because
+it would not be used in conjunction with Svelte.
+
+### Appendix B
+
+p. 397 In the paragraph that starts with "Let's walk through",
+change "These functions" to "These services".
+
 ### Appendix E
 
 p. 409 Move the paragraph starting with "Add the following",
@@ -420,15 +436,24 @@ the sentence starting with "To run Prettier"
 all to after Listing E.1 on the next page
 to be consistent with the placement in Appendix D.
 
+### Appendix F
+
+p. 413 In Table F.1, in the description for "s-if-else-block",
+change ":else" to "{:else}".
+
+p. 414 In the paragraph that begins with "Completions for",
+change "props" to "directives" in the first AND second sentence.
+
 ### Index
 
 p. 419 Swap and correct the page numbers for
-"action function" and "actions in Storybook:
+"action function" and "actions in Storybook" to match the following:
 
 action function 128-129
 
 actions in Storybook 227-231
 
-```
-
-```
+p. 419 Under "block structures", delete the entry for "Travel Packing app"
+and all the entries nested below that.
+These can be found under "Travel Packing app" on p. 427
+and do not need to be repeated here.
