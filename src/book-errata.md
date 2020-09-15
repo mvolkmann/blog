@@ -155,6 +155,9 @@ add a space between "AgeEntry" and "or".
 
 ### Chapter 9
 
+p. 156 The comment before `} else if (newQuantity`
+is indented one space too far.
+
 p. 156 The closing brace of the else block near the top of the page
 is indented one space too far.
 
@@ -253,10 +256,15 @@ change "a database" to "the database".
 
 p. 294 In the second annotation, change the last word from `dogs` to `dogMap`.
 
-p. 296 In the two button elements near the top of the page, change
+p. 296 In the first button element near the top of the page, change
 `on:click|preventDefault={saveDog}`
 to
 `on:click={saveDog} type="button"`
+
+p. 296 In the second button element near the top of the page, change
+`on:click|preventDefault={clearState}`
+to
+`on:click={clearState} type="button"`
 
 p. 296 Delete the annotation that says
 "Using preventDefault prevents a form submission."

@@ -22,6 +22,41 @@ Lesser used features are omitted.
 Once source of performance benchmarks can be found at
 <https://benchmarksgame-team.pages.debian.net/benchmarksgame/which-programs-are-fastest.html>.
 
+## Pros and Cons
+
+### JavaScript
+
+pros:
+
+- performance
+- ability to run in web browsers (clients) and from command-line (servers)
+- more compact syntax for functional programming (ex. functools vs. reduce)
+- great support for asynchronous code
+
+cons:
+
+- still in transition from require to import syntax in Node.js
+
+Python:
+
+pros:
+
+- quantity and maturity of libraries for machine learning
+- multiple number types
+- some syntax is easier for beginners
+  - ex. "and" vs. "&&".
+  - ex. "println" vs. "console.log"
+  - fewer parentheses and no curly braces or semicolons
+
+cons:
+
+- poor performance
+- magic methods such as ...
+- operator overloading
+- lots of documentation and examples are still for V2 instead of V3
+- anonymous functions are limited to a single expression
+- no built-in support for asynchronous code
+
 ## Comments
 
 | Type        | Python | JavaScript |
