@@ -30,12 +30,13 @@ pros:
 
 - performance
 - ability to run in web browsers (clients) and from command-line (servers)
-- more compact syntax for functional programming (ex. functools vs. reduce)
 - great support for asynchronous code
+- more compact syntax for functional programming (ex. functools vs. reduce)
 
 cons:
 
 - still in transition from require to import syntax in Node.js
+- type coercions can result in surprising results if not familiar with them
 
 Python:
 
@@ -278,33 +279,33 @@ the JS Promise methods `then` and `catch`.
 Some Python sequence operations apply to all three of kinds of sequences
 (list, tuple, and range).
 
-| Operation         | Python                                                                      | JavaScript                                         |
-| ----------------- | --------------------------------------------------------------------------- | -------------------------------------------------- |
-| is array/sequence | hasattr(type(obj), '\_\_iter\_\_')                                          | Array.isArray(expression)                          |
-| length            | len(seq)                                                                    | arr.length                                         |
-| lookup            | value = seq[index]                                                          | const value = arr[index];                          |
-| subset            | newSeq = seq[startIndex:endIndex]                                           | const newArr = arr.slice(startIndex[, endIndex]);  |
-| concat            | newSeq = seq1 + seq2                                                        | const newArr = arr1.concat(arr2, arr3, ...);       |
-| find              | next(filter(predicate, iterable))                                           | const value = arr.find(predicate);                 |
-| find index        | see note below this table                                                   | const index = arr.findIndex(predicate);            |
-| for each          | for item in seq:                                                            | arr.forEach(value => { ... });                     |
-| includes          | value in seq                                                                | arr.includes(value) returns boolean                |
-| not includes      | value not in seq                                                            | !arr.includes(value) returns boolean               |
-| index of          | seq.index(value[, start[, end]])                                            | const index = arr.indexOf(value[, fromIndex])      |
-| last index of     | not builtin; have to reverse list                                           | const index = arr.lastIndexOf(value[, fromIndex])  |
-| join              | delimiter.join(iterable)                                                    | arr.join(delimiter) returns string                 |
-| map               | map(function, iterable)                                                     | const newArr = arr.map(value => newValue);         |
-| filter            | filter(predicate, iterable)                                                 | const newArr = arr.filter(predicate);              |
-| reduce            | from functools import reduce<br>reduce(lambda acc, item: ..., seq, initial) | const value = arr.reduce((acc, value) => { ... }); |
-| any/some          | any(map(predicate, iterable))                                               | arr.some(predicate) returns boolean                |
-| all/every         | all(map(predicate, iterable))                                               | arr.every(predicate) returns boolean               |
-| add to end        | seq.append(value)                                                           | arr.push(value);                                   |
-| remove from end   | seq.pop()                                                                   | const value = arr.pop();                           |
-| add to start      | seq.insert(0, item)                                                         | arr.unshift(value);                                |
-| remove from start | del seq[0]                                                                  | const value = arr.shift();                         |
-| remove all        | seq.clear()                                                                 | arr = [];                                          |
-| sort              | list.sort(key=vef)                                                          | arr.sort(comparator);                              |
-| change            | combine del and insert above                                                | arr.splice(start, delCount, v1, v2, ...);          |
+| Operation         | Python                                                                              | JavaScript                                         |
+| ----------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------- |
+| is array/sequence | hasattr(type(obj), '\_\_iter\_\_')                                                  | Array.isArray(expression)                          |
+| length            | len(seq)                                                                            | arr.length                                         |
+| lookup            | value = seq[index]                                                                  | const value = arr[index];                          |
+| subset            | newSeq = seq[startIndex:endIndex]                                                   | const newArr = arr.slice(startIndex[, endIndex]);  |
+| concat            | newSeq = seq1 + seq2                                                                | const newArr = arr1.concat(arr2, arr3, ...);       |
+| find              | next(filter(predicate, iterable))                                                   | const value = arr.find(predicate);                 |
+| find index        | see note below this table                                                           | const index = arr.findIndex(predicate);            |
+| for each          | for item in seq:                                                                    | arr.forEach(value => { ... });                     |
+| includes          | value in seq                                                                        | arr.includes(value) returns boolean                |
+| not includes      | value not in seq                                                                    | !arr.includes(value) returns boolean               |
+| index of          | seq.index(value[, start[, end]])                                                    | const index = arr.indexOf(value[, fromIndex])      |
+| last index of     | not builtin; have to reverse list                                                   | const index = arr.lastIndexOf(value[, fromIndex])  |
+| join              | delimiter.join(iterable)                                                            | arr.join(delimiter) returns string                 |
+| map               | iterator = map(function, iterable)                                                  | const newArr = arr.map(value => newValue);         |
+| filter            | iterator = filter(predicate, iterable)                                              | const newArr = arr.filter(predicate);              |
+| reduce            | from functools import reduce<br>value = reduce(lambda acc, item: ..., seq, initial) | const value = arr.reduce((acc, value) => { ... }); |
+| any/some          | any(map(predicate, iterable))                                                       | arr.some(predicate) returns boolean                |
+| all/every         | all(map(predicate, iterable))                                                       | arr.every(predicate) returns boolean               |
+| add to end        | seq.append(value)                                                                   | arr.push(value);                                   |
+| remove from end   | seq.pop()                                                                           | const value = arr.pop();                           |
+| add to start      | seq.insert(0, item)                                                                 | arr.unshift(value);                                |
+| remove from start | del seq[0]                                                                          | const value = arr.shift();                         |
+| remove all        | seq.clear()                                                                         | arr = [];                                          |
+| sort              | list.sort(key=vef)                                                                  | arr.sort(comparator);                              |
+| change            | combine del and insert above                                                        | arr.splice(start, delCount, v1, v2, ...);          |
 
 In the Python list `sort` method, "vef" is short for value extract function.
 
