@@ -20,7 +20,9 @@ Lesser used features are omitted.
 | type coercion           | must be explicit                                                                                                                       | implicit                                                                                                  |
 
 Once source of performance benchmarks can be found at
-<https://benchmarksgame-team.pages.debian.net/benchmarksgame/which-programs-are-fastest.html>.
+{% aTargetBlank
+"https://benchmarksgame-team.pages.debian.net/benchmarksgame/which-programs-are-fastest.html",
+"The Computer Language Benchmarks Game" %}.
 
 ## Pros and Cons
 
