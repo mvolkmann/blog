@@ -102,14 +102,15 @@ For example, "mdn regexp".
 | boolean              | `true`, `false`                                      | `True`, `False`                                    |
 | number               | default is double precision float; also `BigInt`     | `int`, `float`, `complex`                          |
 | character            | use string type                                      | use string type                                    |
-| string               | 'text' or "text"                                     | 'text', "text", '''text''', or """text"""          |
-| string interpolation | \`prefix\${expr}suffix\`                             | f'prefix{expr}suffix'                              |
+| string               | `'text'` or `"text"`                                 | same                                               |
+| multi-line string    | `` `text` ``                                         | `"""text"""` or `'''text'''`                       |
+| string interpolation | `` `prefix${expr}suffix` ``                          | `f'prefix{expr}suffix'`                            |
 | array                | `Array`, `[v1, v2, ...]`                             | see list, tuple, and range                         |
 | list                 | see `Array`                                          | `[v1, v2, ...]`; mutable and homogeneous           |
 | tuple                | no equivalent                                        | `(v1, v2, ...)`; immutable and heterogeneous       |
 | range                | no equivalent                                        | range range(start, stop[, step])                   |
 | key/value pairs      | Object in the form `{k1: v1, k2: v2, ...}` and `Map` | dictionary in the form `{'k1': v1, 'k2': v2, ...}` |
-| set                  | `new Set()`                                          | `set(v1, v2, ...)` or `{v1, v2, ...}`              |
+| set                  | `new Set()`                                          | `{v1, v2, ...}` or `set(v1, v2, ...)`              |
 | function             | see "Function" section below                         | see "Function" section below                       |
 | class                | `class Name { ... }`                                 | `class Name:`                                      |
 | no value             | `undefined` or `null`                                | `None`                                             |
@@ -198,11 +199,17 @@ are created when a value is assigned to them.
 
 ## Conditional Logic
 
-| Topic   | JavaScript                                   | Python                              |
-| ------- | -------------------------------------------- | ----------------------------------- |
-| if      | `if (cond) stmtOrBlock`                      | `if cond:`                          |
-| if/else | `if (cond) { trueBlock } else { falseBlock}` | `if cond: else:`                    |
-| ternary | `cond ? trueValue : falseValue`              | `trueValue if cond else falseValue` |
+In the JavaScript syntax below, `sOrB` is short for "statement or block".
+It can be a single statement or a set of statements surrounded by curly braces.
+
+A Python `if` statement can contain any number of `elif` parts.
+
+| Topic   | JavaScript                                          | Python                                            |
+| ------- | --------------------------------------------------- | ------------------------------------------------- |
+| if      | `if (cond) sOrB`                                    | `if cond: block`                                  |
+| if/else | `if (cond) sOrB1 else sOrB2`                        | `if cond: block1 else: block2`                    |
+| if/else | `if (cond1) sOrB1 else if (cond2) sOrB2 else sOrB3` | `if cond: block1 elif cond2: block2 else: block3` |
+| ternary | `cond ? trueValue : falseValue`                     | `trueValue if cond else falseValue`               |
 
 ## Iteration
 
@@ -219,6 +226,8 @@ or the `Map` class (described later).
 | over object/dict keys and values | `for (const [key, value] of Object.entries(obj))`                    | `for key, value in dict.items():`        |
 | top-tested                       | `while (cond)`                                                       | `while cond:`                            |
 | bottom-tested                    | `do { ... } while (cond);`                                           | `while True: ... if !cond: break`        |
+| break out of closes loop         | `break`                                                              | same                                     |
+| continue to next iteration       | `continue`                                                           | same                                     |
 
 ## Functions
 
@@ -241,7 +250,7 @@ the parentheses around it are optional.
 If an anonymous function simply returns the value of a single expression,
 The curly braces around the body and the `return` keyword are optional.
 
-In Python, functions can be defined in two days.
+In Python, functions can be defined in two ways.
 
 ```python
 # Named function
@@ -255,6 +264,14 @@ lambda args: expression
 Python lambda functions can only return the value of a single expression.
 They cannot contain additional statements.
 
+Python named functions can have a docstring as their first line.
+This is used by tools that generate documentation from code.
+It is typically delimited by triple quotes.
+For guidelines on the content of docstrings, see
+{% aTargetBlank
+  "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
+  "PEP-8 documentation strings" %}.
+
 | Operation                             | JavaScript                                        | Python                                                                    |
 | ------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------- |
 | define named                          | `function name(params) { definition }`            | `def name(params):`                                                       |
@@ -262,6 +279,8 @@ They cannot contain additional statements.
 | define anonymous w/ single parameter  | `const name = param => { ... }`                   | same as above                                                             |
 | define anonymous w/ single expression | `const name = (params) => expr`                   | same as above                                                             |
 | use variable arguments                | `function name(p1, p2, ...rest) { ...}`           | `def name(p1, p2, \*rest):`                                               |
+| return a value                        | `return value;`                                   | `return value`                                                            |
+| default return value when no `return` | `undefined`                                       | `None`                                                                    | value` |
 | call                                  | `name(args)`                                      | same                                                                      |
 | get name                              | `fn.name`                                         | `fn.__name__`                                                             |
 | required parameter count              | `fn.length`                                       | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`    |
@@ -416,7 +435,7 @@ asyncio.run(main())
 | Operation           | JavaScript                                      | Python                                      |
 | ------------------- | ----------------------------------------------- | ------------------------------------------- |
 | literal single line | `'text'` or `"text"`                            | same                                        |
-| literal multi-line  | `` `text` ``                                    | `'''text'''` or `"""text"""`                |
+| literal multi-line  | `` `text` ``                                    | `"""text"""` or `'''text'''`                |
 | length              | `s.length`                                      | `len(s)`                                    |
 | concatenate         | `s1 + n1`                                       | `s1 + str(n1)` or `s1 str(n1)`              |
 | lowercase           | `s.toLowerCase()`                               | `s.lower()`                                 |
