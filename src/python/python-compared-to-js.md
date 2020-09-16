@@ -147,10 +147,12 @@ JavaScript and Python class names
 
 ## Printing
 
-| Operation    | JavaScript                  | Python                                                |
-| ------------ | --------------------------- | ----------------------------------------------------- |
-| print values | `console.log(v1, v2, ...);` | `print(v1, v2, ..)`                                   |
-| print error  | `console.error(message);`   | `import sys`<br>`print(v1, v2, ..., file=sys.stderr)` |
+| Operation                | JavaScript                                                                               | Python                                                |
+| ------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| print values             | `console.log(v1, v2, ...);`                                                              | `print(v1, v2, ..)`                                   |
+| print error              | `console.error(message);`                                                                | `import sys`<br>`print(v1, v2, ..., file=sys.stderr)` |
+| print with interpolation | `console.log(`Hello, ${name}, today is ${dayOfWeek}.`);`                                 | print(f'Hello, {name}, today is {dayOfWeek}.')        |
+| print without newline    | in Node<br>`const process = require('process');`<br>`process.stdout.write(v1, v2, ...);` | `print(v1, v2, ..., end='')`                          |
 
 ## Variables and Assignment
 
