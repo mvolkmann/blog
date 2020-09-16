@@ -190,18 +190,55 @@ or the `Map` class (described later).
 
 ## Functions
 
-| Topic                       | JavaScript                              | Python                                                                 |
-| --------------------------- | --------------------------------------- | ---------------------------------------------------------------------- |
-| named definition            | `function name(params) { definition }`  | `def name(params):`                                                    |
-| anonymous definition        | `const name = (params) => definition`   | `lambda params: expression`                                            |
-| anonymous single parameter  | `const name = param => { ... }`         | same as above                                                          |
-| anonymous single expression | `const name = (params) => expr`         | same as above                                                          |
-| variable arguments          | `function name(p1, p2, ...rest) { ...}` | `def name(p1, p2, \*rest):`                                            |
-| return type                 | same as Python                          | not specified; return a single value<br>that can be an object or array |
-| calling                     | `name(args)`                            | `name(args)`                                                           |
+In JavaScript, functions can be defined in two ways.
 
-Note that unlike JavaScript arrow functions, Python lambdas
-can only use a single expression, not a block of code.
+```js
+// Named function
+function myFn(args) {
+  body;
+}
+
+// Anonymous function (a.k.a. arrow function)
+const myFn = args => {
+  body;
+};
+```
+
+If an anonymous function has exactly one named argument,
+the parentheses around it are optional.
+If an anonymous function simply returns the value of a single expression,
+The curly braces around the body and the `return` keyword are optional.
+
+In Python, functions can be defined in two days.
+
+```python
+# Named function
+def myFn:
+  body
+
+# Lambda function
+lambda args: expression
+```
+
+Python lambda functions can only return the value of a single expression.
+They cannot contain additional statements.
+
+| Operation                             | JavaScript                                        | Python                                                                    |
+| ------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------- |
+| define named                          | `function name(params) { definition }`            | `def name(params):`                                                       |
+| define anonymous                      | `const name = (params) => definition`             | `lambda params: expression`                                               |
+| define anonymous w/ single parameter  | `const name = param => { ... }`                   | same as above                                                             |
+| define anonymous w/ single expression | `const name = (params) => expr`                   | same as above                                                             |
+| use variable arguments                | `function name(p1, p2, ...rest) { ...}`           | `def name(p1, p2, \*rest):`                                               |
+| call                                  | `name(args)`                                      | same                                                                      |
+| get name                              | `fn.name`                                         | `fn.__name__`                                                             |
+| required parameter count              | `fn.length`                                       | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`    |
+| get implementation code               | `fn.toString()`                                   | `from inspect import getsource`<br>`getsource(fn)`                        |
+| bind                                  | `const newFn = fn.bind(thisArg, arg1, arg2, ...)` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)` |
+| call                                  | `fn.call(thisArg, arg1, arg2, ...)`               | `method(obj, arg1, arg2, ...)`                                            |
+| apply                                 | `fn.apply(thisArg, argArray)`                     | `method(obj, *argList)`                                                   |
+
+The Python `partial` function can only be used on functions, not methods of a class.
 
 ## Classes
 
@@ -224,7 +261,7 @@ In addition to the `@staticmethod` decorator, Python also supports the
 `@classmethod` decorator. The difference is that methods defined with
 the latter are passed the class as the first argument.
 
-## Asynchronous Operations
+## Asynchronous Functions
 
 In Python 3.4+, asynchronous functions are supported by the asyncio library.
 
@@ -364,10 +401,15 @@ asyncio.run(main())
 | trim end      | `s.trimEnd()`                                   | `s.rstrip()`                                |
 | trim both     | `s.trim()`                                      | `s.strip()`                                 |
 
-## Array/Sequence Operations
+## Sequences
 
-Some Python sequence operations apply to all three of kinds of sequences
-(list, tuple, and range).
+JavaScript stores sequences of values in arrays.
+
+Python has three sequence types which are list, tuple, and range.
+Lists are mutable and are typically homogeneous (elements have the same type).
+Tuples are immutable and are typically heterogeneous
+(elements can have different types).
+Ranges are immutable sequences of numbers and are often used in `for` loops.
 
 | Operation         | JavaScript                                           | Python                                                                                  |
 | ----------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
@@ -465,19 +507,6 @@ const multipleOf3 = filter(n => n % 3 === 0, range(10));
 console.log([...multipleOf3]); // [ 0, 3, 6, 9 ]
 ```
 
-## Function Operations
-
-| Operation                | JavaScript                                        | Python                                                                    |
-| ------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------- |
-| name                     | `fn.name`                                         | `fn.__name__`                                                             |
-| required parameter count | `fn.length`                                       | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`    |
-| get implementation code  | `fn.toString()`                                   | `from inspect import getsource`<br>`getsource(fn)`                        |
-| bind                     | `const newFn = fn.bind(thisArg, arg1, arg2, ...)` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)` |
-| call                     | `fn.call(thisArg, arg1, arg2, ...)`               | `method(obj, arg1, arg2, ...)`                                            |
-| apply                    | `fn.apply(thisArg, argArray)`                     | `method(obj, *argList)`                                                   |
-
-The Python `partial` function cannot be used on methods, only functions.
-
 ## Error Handling
 
 Python refers to errors as exceptions.
@@ -487,7 +516,7 @@ Python refers to errors as exceptions.
 | throw error | `throw new Error(message);`                     | `raise ExClass(args)`          |
 | catch error | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ...` |
 
-## JSON Operations
+## JSON
 
 | Operation | JavaScript                                 | Python                           |
 | --------- | ------------------------------------------ | -------------------------------- |
@@ -498,7 +527,7 @@ In Python, you must `import json`.
 There are many builtin Python exception classes.
 The base class of all of them is Error.
 
-## Dict/Object/Map Operations
+## Key/Value Collections
 
 To store associations between keys and values, Python uses "dictionaries".
 
@@ -535,7 +564,7 @@ but keys in `Map` instances can be any type.
 | delete all keys         | `obj = {}`                                | `map.clear()`                           |
 | iterate over            | `for (const prop in obj)`                 | `map.forEach((value, key) => { ... });` |
 
-## Set Operations
+## Sets
 
 | Operation             | JavaScript                     | Python                              |
 | --------------------- | ------------------------------ | ----------------------------------- |
@@ -548,7 +577,7 @@ but keys in `Map` instances can be any type.
 | iterate over          | `s.forEach(value => { ... });` | `for value in set:`                 |
 | convert to list/array | `a = s.values();`              | `l = list(s)`                       |
 
-## Regular Expression Operations
+## Regular Expressions
 
 In Python, import the `re` library. It supports the following methods:
 
