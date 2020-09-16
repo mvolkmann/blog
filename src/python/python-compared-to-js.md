@@ -34,6 +34,7 @@ pros:
 - ability to run in web browsers (clients) and from command-line (servers)
 - great support for asynchronous code
 - more compact syntax for functional programming (ex. functools vs. `reduce`)
+- can use TypeScript, a superset of JavaScript, to add type checking
 
 cons:
 
@@ -51,6 +52,7 @@ pros:
   - ex. `and` vs. `&&`.
   - ex. `print` vs. `console.log`
   - fewer parentheses and no curly braces or semicolons
+- can add functions implemented in C/C++ or any language callable from C
 
 cons:
 
@@ -63,6 +65,13 @@ cons:
 - no built-in support for asynchronous code
   until the asyncio module was added in Python 3.4
   (some features require Python 3.7+)
+- ternary operator is not supported; for example:
+
+  ```python
+  name = len(sys.argv) > 1 ? sys.argv[1] : 'World' # not supported
+  name = sys.argv[1] || 'World' # doesn't work
+  name = sys.argv[1] if len(sys.argv) > 1 else 'World' # works
+  ```
 
 ## Getting Help
 
@@ -122,13 +131,31 @@ Python dict keys can e any immutable type.
 
 ## Variables and Assignment
 
+JavaScript variables should be declared
+using either the `const` or `let` keyword.
+Python variables are not declared and
+are created when a value is assigned to them.
+
 | Topic    | JavaScript            | Python         |
 | -------- | --------------------- | -------------- |
 | constant | `const NAME = value;` | `NAME = value` |
 | variable | `let name = value;`   | `name = value` |
 
+## Naming Conventions
+
+| Kind                        | JavaScript   | Python         |
+| --------------------------- | ------------ | -------------- |
+| constant                    | UNDER_SCORES | same           |
+| variable                    | camelCase    | under_scores   |
+| function                    | camelCase    | under_scores   |
+| class                       | CamelCase    | same           |
+| method                      | camelCase    | under_scores   |
+| public instance properties  | camelCase    | under_scores   |
+| private instance properties | camelCase    | \_under_scores |
+
 Python uses a naming convention (all uppercase) to identify constants,
 but they can still be modified.
+JavaScript and Python class names
 
 ## More Assignments
 
@@ -381,25 +408,27 @@ asyncio.run(main())
 
 ## String Operations
 
-| Operation     | JavaScript                                      | Python                                      |
-| ------------- | ----------------------------------------------- | ------------------------------------------- |
-| concatenation | `s1 + n1`                                       | `s1 + str(n1)`                              |
-| lowercase     | `s.toLowerCase()`                               | `s.lower()`                                 |
-| uppercase     | `s.toUpperCase()`                               | `s.upper()`                                 |
-| substring     | `s1.substring(start[, end])`                    | `s[start:end]` or `s[start:]` or `s[:end]`  |
-| slice         | like `substring`, but supports negative indexes | same as above                               |
-| split         | `s.split(delimiter)` returns array              | `s.split(delimiter)` returns list           |
-| starts with   | `s.startsWith(sub)` returns boolean             | `s.startswith(sub)` returns boolean         |
-| ends with     | `s.endsWith(sub)` returns boolean               | `s.endswith(sub)` returns boolean           |
-| contains      | `s.includes(sub)` returns boolean               | `sub in s` returns boolean                  |
-| index of      | `s.indexOf(sub)` returns number                 | `s.index(sub[, start[, end]])` returns int  |
-| last index of | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub[, start[, end]])` returns int |
-| compare       | `s.localeCompare(sub)` returns -1, 0, or 1      | not supported                               |
-| replace first | `s.replace(oldSub, newSub)`                     | `s.replace(old, new, 1)`                    |
-| replace all   | `s.replaceAll(oldSub, newSub)`                  | `s.replace(old, new)`                       |
-| trim start    | `s.trimStart()`                                 | `s.lstrip()`                                |
-| trim end      | `s.trimEnd()`                                   | `s.rstrip()`                                |
-| trim both     | `s.trim()`                                      | `s.strip()`                                 |
+| Operation           | JavaScript                                      | Python                                      |
+| ------------------- | ----------------------------------------------- | ------------------------------------------- |
+| literal single line | `'text'` or `"text"`                            | same                                        |
+| literal multi-line  | `` `text` ``                                    | `'''text'''` or `"""text"""`                |
+| concatenate         | `s1 + n1`                                       | `s1 + str(n1)`                              |
+| lowercase           | `s.toLowerCase()`                               | `s.lower()`                                 |
+| uppercase           | `s.toUpperCase()`                               | `s.upper()`                                 |
+| substring           | `s1.substring(start[, end])`                    | `s[start:end]` or `s[start:]` or `s[:end]`  |
+| slice               | like `substring`, but supports negative indexes | same as above                               |
+| split               | `s.split(delimiter)` returns array              | `s.split(delimiter)` returns list           |
+| starts with         | `s.startsWith(sub)` returns boolean             | `s.startswith(sub)` returns boolean         |
+| ends with           | `s.endsWith(sub)` returns boolean               | `s.endswith(sub)` returns boolean           |
+| contains            | `s.includes(sub)` returns boolean               | `sub in s` returns boolean                  |
+| index of            | `s.indexOf(sub)` returns number                 | `s.index(sub[, start[, end]])` returns int  |
+| last index of       | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub[, start[, end]])` returns int |
+| compare             | `s.localeCompare(sub)` returns -1, 0, or 1      | not supported                               |
+| replace first       | `s.replace(oldSub, newSub)`                     | `s.replace(old, new, 1)`                    |
+| replace all         | `s.replaceAll(oldSub, newSub)`                  | `s.replace(old, new)`                       |
+| trim start          | `s.trimStart()`                                 | `s.lstrip()`                                |
+| trim end            | `s.trimEnd()`                                   | `s.rstrip()`                                |
+| trim both           | `s.trim()`                                      | `s.strip()`                                 |
 
 ## Sequences
 
