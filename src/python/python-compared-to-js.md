@@ -129,18 +129,6 @@ A range is an immutable sequence of numbers that can be used for looping.
 JavaScript object keys must be strings.
 Python dict keys can e any immutable type.
 
-## Variables and Assignment
-
-JavaScript variables should be declared
-using either the `const` or `let` keyword.
-Python variables are not declared and
-are created when a value is assigned to them.
-
-| Topic    | JavaScript            | Python         |
-| -------- | --------------------- | -------------- |
-| constant | `const NAME = value;` | `NAME = value` |
-| variable | `let name = value;`   | `name = value` |
-
 ## Naming Conventions
 
 | Kind                        | JavaScript   | Python         |
@@ -157,10 +145,25 @@ Python uses a naming convention (all uppercase) to identify constants,
 but they can still be modified.
 JavaScript and Python class names
 
-## More Assignments
+## Printing
+
+| Operation    | JavaScript                  | Python                                                |
+| ------------ | --------------------------- | ----------------------------------------------------- |
+| print values | `console.log(v1, v2, ...);` | `print(v1, v2, ..)`                                   |
+| print error  | `console.error(message);`   | `import sys`<br>`print(v1, v2, ..., file=sys.stderr)` |
+
+## Variables and Assignment
+
+JavaScript variables should be declared
+using either the `const` or `let` keyword.
+Python variables are not declared and
+are created when a value is assigned to them.
 
 | Topic                | JavaScript                      | Python           |
 | -------------------- | ------------------------------- | ---------------- |
+| constant declaration | `const NAME = value;`           | `NAME = value`   |
+| variable declaration | `let name = value;`             | `name = value`   |
+| multiple assignment  | const [a, b] = [1, 2]           | a, b = 1, 2      |
 | spread of array/list | `const [v1, v2, ...] = array;`  | `v1, v2 = array` |
 | spread of object     | `const {k1, k2, ...} = object;` | not supported    |
 | addition             | `name += expr`                  | same             |
@@ -412,6 +415,7 @@ asyncio.run(main())
 | ------------------- | ----------------------------------------------- | ------------------------------------------- |
 | literal single line | `'text'` or `"text"`                            | same                                        |
 | literal multi-line  | `` `text` ``                                    | `'''text'''` or `"""text"""`                |
+| length              | `s.length`                                      | `len(s)`                                    |
 | concatenate         | `s1 + n1`                                       | `s1 + str(n1)` or `s1 str(n1)`              |
 | lowercase           | `s.toLowerCase()`                               | `s.lower()`                                 |
 | uppercase           | `s.toUpperCase()`                               | `s.upper()`                                 |
@@ -460,10 +464,11 @@ myRange = range(start, end, step)
 | Operation         | JavaScript                                                                            | Python                                                                                    |
 | ----------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | is array/sequence | `Array.isArray(expression)`                                                           | `hasattr(type(obj), '\_\_iter\_\_')`                                                      |
+| append            | `arr.push(v1, v2, ...)`                                                               | `seq.append(v)`                                                                           |
 | length            | `arr.length`                                                                          | `len(seq)`                                                                                |
 | lookup            | `const value = arr[index];`                                                           | `value = seq[index]`                                                                      |
 | subset            | `const newArr = arr.slice(startIndex[, endIndex]);`                                   | `newSeq = seq[startIndex:endIndex]`                                                       |
-| concat            | `const newArr = arr1.concat(arr2, arr3, ...);`                                        | `newSeq = seq1 + seq2`                                                                    |
+| concatenate       | `const newArr = arr1.concat(arr2, arr3, ...);`                                        | `newSeq = seq1 + seq2`                                                                    |
 | find              | `const value = arr.find(predicate);`                                                  | `next(filter(predicate, iterable))`                                                       |
 | find index        | `const index = arr.findIndex(predicate);`                                             | see note below this table                                                                 |
 | for each          | `arr.forEach(value => { ... });`                                                      | `for item in seq:`                                                                        |
@@ -658,13 +663,6 @@ In Python, import the `re` library. It supports the following methods:
 | get first match          | `str.match(re)`                                                           | `regex.search(str)`                          |
 | get all matches          | `str.matchAll(re)` or `re.exec(str)`                                      | `regex.finditer(str)`                        |
 | split string on re       | `str.split(re)`                                                           | `regex.split(str)`                           |
-
-## Printing
-
-| Operation    | JavaScript                  | Python                                              |
-| ------------ | --------------------------- | --------------------------------------------------- |
-| print values | `console.log(v1, v2, ...);` | `print(v1, v2, ..)`                                 |
-| print error  | `console.error(message);`   | `import sys`<br>print(v1, v2, ..., file=sys.stderr) |
 
 ## Error Handling
 
