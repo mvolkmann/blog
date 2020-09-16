@@ -61,6 +61,10 @@ The key benefits of using Meteor are:
 - Simple integration with MongoDB is provided out of the box.
 - Client and server code can be developed in a single language,
   JavaScript or TypeScript.
+- There is no need to implement REST services or GraphQL queries
+  if using Meteor Methods with WebSockets is acceptable.
+  Meteor Methods are much easier to implement
+  and are described in detail later.
 - The UI can be implemented using any popular web framework.
 - Real-time UI updates across clients are easy to implement.
   Changes to data in MongoDB collections can be published to all
@@ -70,10 +74,6 @@ The key benefits of using Meteor are:
   including OAuth logins.
 - Reactivity is provided through the use of the JavaScript classes
   `Tracker`, `ReactiveVar`, `ReactiveDict`, and `Session`.
-- There is no need to implement REST services or GraphQL queries
-  if using Meteor Methods with WebSockets is acceptable.
-  Meteor Methods are much easier to implement
-  and are described in detail later.
 
 All of this enables implementing significant functionality
 in a small amount of code.
