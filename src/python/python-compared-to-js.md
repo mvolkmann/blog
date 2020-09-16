@@ -431,7 +431,39 @@ def index(aList, predicate):
 
 Python supports list comprehensions, but JavaScript does not.
 Here are some examples.
-TODO: Add these!
+
+```py
+squares = [n**2 for n in range(5)]
+print(squares) # [0, 1, 4, 9, 16]
+
+multipleOf3 = [n for n in range(10) if n % 3 == 0]
+print(multipleOf3) # [0, 3, 6, 9]
+```
+
+JavaScript generator functions can be used to do the same thing,
+but some utility generator functions must be written.
+
+```js
+function* range(n) {
+  for (i = 0; i < n; i++) yield i;
+}
+
+function* map(fn, iter) {
+  for (const element of iter) yield fn(element);
+}
+
+const squared = map(n => n ** 2, range(5));
+console.log([...squared]); // [0, 1, 4, 9, 16 ]
+
+function* filter(predicate, obj) {
+  for (const element of obj) {
+    if (predicate(element)) yield element;
+  }
+}
+
+const multipleOf3 = filter(n => n % 3 === 0, range(10));
+console.log([...multipleOf3]); // [ 0, 3, 6, 9 ]
+```
 
 ## Function Operations
 
