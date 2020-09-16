@@ -411,6 +411,23 @@ Tuples are immutable and are typically heterogeneous
 (elements can have different types).
 Ranges are immutable sequences of numbers and are often used in `for` loops.
 
+To create a JavaScript array:
+
+```js
+const arr = [element1, element2, ...];
+```
+
+To create a Python list, tuple, and range:
+
+```python
+myList = [element1, element2, ...]
+
+# Parentheses around a tuple are optional.
+myTuple = (element1, element2, ...)
+
+myRange = range(start, end, step)
+```
+
 | Operation         | JavaScript                                           | Python                                                                                  |
 | ----------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | is array/sequence | `Array.isArray(expression)`                          | `hasattr(type(obj), '\_\_iter\_\_')`                                                    |
@@ -507,26 +524,6 @@ const multipleOf3 = filter(n => n % 3 === 0, range(10));
 console.log([...multipleOf3]); // [ 0, 3, 6, 9 ]
 ```
 
-## Error Handling
-
-Python refers to errors as exceptions.
-
-| Operation   | JavaScript                                      | Python                         |
-| ----------- | ----------------------------------------------- | ------------------------------ |
-| throw error | `throw new Error(message);`                     | `raise ExClass(args)`          |
-| catch error | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ...` |
-
-## JSON
-
-| Operation | JavaScript                                 | Python                           |
-| --------- | ------------------------------------------ | -------------------------------- |
-| create    | `const jsonString = JSON.stringify(expr);` | `jsonString = json.dumps(expr)`  |
-| parse     | `const value = JSON.parse(jsonString);`    | `value = json.loads(jsonString)` |
-
-In Python, you must `import json`.
-There are many builtin Python exception classes.
-The base class of all of them is Error.
-
 ## Key/Value Collections
 
 To store associations between keys and values, Python uses "dictionaries".
@@ -550,32 +547,34 @@ to store associations between keys and values.
 The keys in JavaScript objects must be must be strings, integers, or symbols,
 but keys in `Map` instances can be any type.
 
-| Operation               | JavaScript Object                         | JavaScript Map                          |
-| ----------------------- | ----------------------------------------- | --------------------------------------- |
-| create                  | `const obj = {};`                         | `const map = new Map();`                |
-| get length              | `Object.keys(obj).length`                 | `map.size`                              |
-| set value of key        | `obj.key = value` or `obj[key] = value`   | `map.set(key, value)`                   |
-| get value of key        | `obj.key` or `obj[key]`                   | `map.get(key)`                          |
-| get all keys            | `Object.keys(obj)`                        | `map.keys()`                            |
-| get all values          | `Object.values(obj)`                      | `map.values()`                          |
-| get all keys and values | `Object.entries(obj)`                     | `map.entries()`                         |
-| test if key present     | `key in obj` or `obj.hasOwnProperty(key)` | `map.has(key)`                          |
-| delete key              | `delete obj.key` or `delete obj[key]`     | `map.delete(key)`                       |
-| delete all keys         | `obj = {}`                                | `map.clear()`                           |
-| iterate over            | `for (const prop in obj)`                 | `map.forEach((value, key) => { ... });` |
+| Operation               | JavaScript Object                                        | JavaScript Map                                                     |
+| ----------------------- | -------------------------------------------------------- | ------------------------------------------------------------------ |
+| create                  | `const obj = {};`<br>can include initial key/value pairs | `const map = new Map();`<br>cannot specify initial key/value pairs |
+| get length              | `Object.keys(obj).length`                                | `map.size`                                                         |
+| set value of key        | `obj.key = value` or `obj[key] = value`                  | `map.set(key, value)`                                              |
+| get value of key        | `obj.key` or `obj[key]`                                  | `map.get(key)`                                                     |
+| get all keys            | `Object.keys(obj)`                                       | `map.keys()`                                                       |
+| get all values          | `Object.values(obj)`                                     | `map.values()`                                                     |
+| get all keys and values | `Object.entries(obj)`                                    | `map.entries()`                                                    |
+| test if key present     | `key in obj` or `obj.hasOwnProperty(key)`                | `map.has(key)`                                                     |
+| delete key              | `delete obj.key` or `delete obj[key]`                    | `map.delete(key)`                                                  |
+| delete all keys         | `obj = {}`                                               | `map.clear()`                                                      |
+| iterate over            | `for (const prop in obj)`                                | `map.forEach((value, key) => { ... });`                            |
 
 ## Sets
 
-| Operation             | JavaScript                     | Python                              |
-| --------------------- | ------------------------------ | ----------------------------------- |
-| create                | `const s = new Set();`         | `s = {values}` or `s = set(values)` |
-| length                | `s.size`                       | `len(s)`                            |
-| includes              | `s.has(value)`                 | `value in s`                        |
-| add                   | `s.add(value)`                 | same                                |
-| remove                | `s.delete(value);`             | `s.remove(value)`                   |
-| remove all            | `s.clear()`                    | same                                |
-| iterate over          | `s.forEach(value => { ... });` | `for value in set:`                 |
-| convert to list/array | `a = s.values();`              | `l = list(s)`                       |
+Sets are unordered collections with no duplicate values.
+
+| Operation             | JavaScript                                       | Python                                  |
+| --------------------- | ------------------------------------------------ | --------------------------------------- |
+| create                | `const s = new Set();` - cannot specify elements | `s = {elements}` or `s = set(elements)` |
+| length                | `s.size`                                         | `len(s)`                                |
+| includes              | `s.has(value)`                                   | `value in s`                            |
+| add                   | `s.add(value)`                                   | same                                    |
+| remove                | `s.delete(value);`                               | `s.remove(value)`                       |
+| remove all            | `s.clear()`                                      | same                                    |
+| iterate over          | `s.forEach(value => { ... });`                   | `for value in set:`                     |
+| convert to list/array | `a = s.values();`                                | `l = list(s)`                           |
 
 ## Regular Expressions
 
@@ -597,6 +596,26 @@ In Python, import the `re` library. It supports the following methods:
 | ------------ | --------------------------- | --------------------------------------------------- |
 | print values | `console.log(v1, v2, ...);` | `print(v1, v2, ..)`                                 |
 | print error  | `console.error(message);`   | `import sys`<br>print(v1, v2, ..., file=sys.stderr) |
+
+## Error Handling
+
+Python refers to errors as exceptions.
+
+| Operation   | JavaScript                                      | Python                         |
+| ----------- | ----------------------------------------------- | ------------------------------ |
+| throw error | `throw new Error(message);`                     | `raise ExClass(args)`          |
+| catch error | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ...` |
+
+## JSON
+
+| Operation | JavaScript                                 | Python                           |
+| --------- | ------------------------------------------ | -------------------------------- |
+| create    | `const jsonString = JSON.stringify(expr);` | `jsonString = json.dumps(expr)`  |
+| parse     | `const value = JSON.parse(jsonString);`    | `value = json.loads(jsonString)` |
+
+In Python, you must `import json`.
+There are many builtin Python exception classes.
+The base class of all of them is Error.
 
 ## Check for running as main
 
