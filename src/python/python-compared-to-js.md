@@ -81,30 +81,29 @@ For example, "mdn regexp".
 
 ## Comments
 
-| Type        | Python | JavaScript |
-| ----------- | ------ | ---------- |
-| single-line | #      | //         |
-| multi-line  | none   | /\* \*/    |
+| Type        | JavaScript | Python |
+| ----------- | ---------- | ------ |
+| single-line | //         | #      |
+| multi-line  | /\* \*/    | none   |
 
 ## Types
 
-| Type                 | Python                                             | JavaScript                                           |
-| -------------------- | -------------------------------------------------- | ---------------------------------------------------- |
-| boolean              | `True`, `False`                                    | `true`, `false`                                      |
-| number               | `int`, `float`, `complex`                          | default is double precision float; also `BigInt`     |
-| character            | use string type                                    | use string type                                      |
-| string               | 'text', "text", '''text''', or """text"""          | 'text' or "text"                                     |
-| string interpolation | f'prefix{expr}suffix'                              | \`prefix\${expr}suffix\`                             |
-| array                | see list, tuple, and range                         | `Array`, `[v1, v2, ...]`                             |
-| list                 | `[v1, v2, ...]`; mutable and homogeneous           | see `Array`                                          |
-| tuple                | `(v1, v2, ...)`; immutable and heterogeneous       | no equivalent                                        |
-| range                | range range(start, stop[, step])                   | no equivalent                                        |
-| key/value pairs      | dictionary in the form `{'k1': v1, 'k2': v2, ...}` | Object in the form `{k1: v1, k2: v2, ...}` and `Map` |
-| set                  | `set(v1, v2, ...)` or `{v1, v2, ...}`              | `new Set()`                                          |
-| function             | see "Function" section below                       | see "Function" section below                         |
-| class                | `class Name:`                                      | `class Name { ... }`                                 |
-| regular expression   | `re.compile(pattern)`                              | `/pattern/flags` or `new RegExp(pattern)`            |
-| no value             | `None`                                             | `undefined` or `null`                                |
+| Type                 | JavaScript                                           | Python                                             |
+| -------------------- | ---------------------------------------------------- | -------------------------------------------------- |
+| boolean              | `true`, `false`                                      | `True`, `False`                                    |
+| number               | default is double precision float; also `BigInt`     | `int`, `float`, `complex`                          |
+| character            | use string type                                      | use string type                                    |
+| string               | 'text' or "text"                                     | 'text', "text", '''text''', or """text"""          |
+| string interpolation | \`prefix\${expr}suffix\`                             | f'prefix{expr}suffix'                              |
+| array                | `Array`, `[v1, v2, ...]`                             | see list, tuple, and range                         |
+| list                 | see `Array`                                          | `[v1, v2, ...]`; mutable and homogeneous           |
+| tuple                | no equivalent                                        | `(v1, v2, ...)`; immutable and heterogeneous       |
+| range                | no equivalent                                        | range range(start, stop[, step])                   |
+| key/value pairs      | Object in the form `{k1: v1, k2: v2, ...}` and `Map` | dictionary in the form `{'k1': v1, 'k2': v2, ...}` |
+| set                  | `new Set()`                                          | `set(v1, v2, ...)` or `{v1, v2, ...}`              |
+| function             | see "Function" section below                         | see "Function" section below                       |
+| class                | `class Name { ... }`                                 | `class Name:`                                      |
+| no value             | `undefined` or `null`                                | `None`                                             |
 
 In Python, the following values are treated as false when used
 in a boolean context: False, None, 0, '', and empty sequences.
@@ -123,55 +122,55 @@ Python dict keys can e any immutable type.
 
 ## Variables and Assignment
 
-| Topic    | Python         | JavaScript            |
-| -------- | -------------- | --------------------- |
-| constant | `NAME = value` | `const NAME = value;` |
-| variable | `name = value` | `let name = value;`   |
+| Topic    | JavaScript            | Python         |
+| -------- | --------------------- | -------------- |
+| constant | `const NAME = value;` | `NAME = value` |
+| variable | `let name = value;`   | `name = value` |
 
 Python uses a naming convention (all uppercase) to identify constants,
 but they can still be modified.
 
 ## More Assignments
 
-| Topic                | Python                      | JavaScript                      |
-| -------------------- | --------------------------- | ------------------------------- |
-| spread of array/list | `v1, v2 = array`            | `const [v1, v2, ...] = array;`  |
-| spread of object     | not supported               | `const {k1, k2, ...} = object;` |
-| addition             | `name += expr`              | same                            |
-| subtraction          | `name -= expr`              | same                            |
-| multiplication       | `name \*= expr`             | same                            |
-| division             | `name /= expr`              | same                            |
-| exponentiation       | `name \*\*= expr`           | same                            |
-| mod (remainder)      | `name %= expr`              | same                            |
-| logical and          | not supported               | `name &&= expr`                 |
-| logical or           | not supported               | `name \|\|= expr`               |
-| logical xor          | not supported               | `name ^= expr`                  |
-| bitwise and          | `name &= expr`              | same                            |
-| bitwise or           | `name \|= expr`             | same                            |
-| bitwise xor          | `name ^= expr`              | same                            |
-| signed bit shift     | `<<=` (left), `>>=` (right) | same                            |
-| unsigned bit shift   | not supported               | `<<<=` (left), `>>>=` (right)   |
+| Topic                | JavaScript                      | Python           |
+| -------------------- | ------------------------------- | ---------------- |
+| spread of array/list | `const [v1, v2, ...] = array;`  | `v1, v2 = array` |
+| spread of object     | `const {k1, k2, ...} = object;` | not supported    |
+| addition             | `name += expr`                  | same             |
+| subtraction          | `name -= expr`                  | same             |
+| multiplication       | `name \*= expr`                 | same             |
+| division             | `name /= expr`                  | same             |
+| exponentiation       | `name \*\*= expr`               | same             |
+| mod (remainder)      | `name %= expr`                  | same             |
+| logical and          | `name &&= expr`                 | not supported    |
+| logical or           | `name \|\|= expr`               | not supported    |
+| logical xor          | `name ^= expr`                  | not supported    |
+| bitwise and          | `name &= expr`                  | same             |
+| bitwise or           | `name \|= expr`                 | same             |
+| bitwise xor          | `name ^= expr`                  | same             |
+| signed bit shift     | `<<=` (left), `>>=` (right)     | same             |
+| unsigned bit shift   | `<<<=` (left), `>>>=` (right)   | not supported    |
 
 ## Comparison
 
-| Topic                 | Python   | JavaScript                              |
-| --------------------- | -------- | --------------------------------------- |
-| equal for non-objects | `==`     | `==` (with coercion) or `===` (without) |
-| equal of objects      | `is`     | `===`                                   |
-| not equal of objects  | `is not` | `!==`                                   |
-| not equal             | `!=`     | `!=` (with coercion) or `!==` (without) |
-| less than             | `<`      | same                                    |
-| less than or equal    | `<=`     | same                                    |
-| greater than          | `>`      | same                                    |
-| greater than or equal | `>=`     | same                                    |
+| Topic                 | JavaScript                              | Python   |
+| --------------------- | --------------------------------------- | -------- |
+| equal for non-objects | `==` (with coercion) or `===` (without) | `==`     |
+| equal of objects      | `===`                                   | `is`     |
+| not equal of objects  | `!==`                                   | `is not` |
+| not equal             | `!=` (with coercion) or `!==` (without) | `!=`     |
+| less than             | `<`                                     | same     |
+| less than or equal    | `<=`                                    | same     |
+| greater than          | `>`                                     | same     |
+| greater than or equal | `>=`                                    | same     |
 
 ## Conditional Logic
 
-| Topic   | Python                              | JavaScript                                   |
-| ------- | ----------------------------------- | -------------------------------------------- |
-| if      | `if cond:`                          | `if (cond) stmtOrBlock`                      |
-| if/else | `if cond: else:`                    | `if (cond) { trueBlock } else { falseBlock}` |
-| ternary | `trueValue if cond else falseValue` | `cond ? trueValue : falseValue`              |
+| Topic   | JavaScript                                   | Python                              |
+| ------- | -------------------------------------------- | ----------------------------------- |
+| if      | `if (cond) stmtOrBlock`                      | `if cond:`                          |
+| if/else | `if (cond) { trueBlock } else { falseBlock}` | `if cond: else:`                    |
+| ternary | `cond ? trueValue : falseValue`              | `trueValue if cond else falseValue` |
 
 ## Iteration
 
@@ -179,46 +178,46 @@ Python "dictionaries" (or dicts) are used to store key/value pairs.
 In JavaScript this is done with plain objects
 or the `Map` class (described later).
 
-| Topic                            | Python                                   | JavaScript                                                           |
-| -------------------------------- | ---------------------------------------- | -------------------------------------------------------------------- |
-| classic                          | `for var in range(start, stop[, step]):` | `for (let var = initial; cond; statements)`                          |
-| over collection                  | `for value in sequence:`                 | `for (const value of iterable)`                                      |
-| over object/dict keys            | `for key in dict.keys():`                | `for (const key of Object.keys(obj))`<br>or `for (const key in obj)` |
-| over object/dict values          | `for value in dict.values():`            | `for (const value of Object.values(obj))`                            |
-| over object/dict keys and values | `for key, value in dict.items():`        | `for (const [key, value] of Object.entries(obj))`                    |
-| top-tested                       | `while cond:`                            | `while (cond)`                                                       |
-| bottom-tested                    | `while True: ... if !cond: break`        | `do { ... } while (cond);`                                           |
+| Topic                            | JavaScript                                                           | Python                                   |
+| -------------------------------- | -------------------------------------------------------------------- | ---------------------------------------- |
+| classic                          | `for (let var = initial; cond; statements)`                          | `for var in range(start, stop[, step]):` |
+| over collection                  | `for (const value of iterable)`                                      | `for value in sequence:`                 |
+| over object/dict keys            | `for (const key of Object.keys(obj))`<br>or `for (const key in obj)` | `for key in dict.keys():`                |
+| over object/dict values          | `for (const value of Object.values(obj))`                            | `for value in dict.values():`            |
+| over object/dict keys and values | `for (const [key, value] of Object.entries(obj))`                    | `for key, value in dict.items():`        |
+| top-tested                       | `while (cond)`                                                       | `while cond:`                            |
+| bottom-tested                    | `do { ... } while (cond);`                                           | `while True: ... if !cond: break`        |
 
 ## Functions
 
-| Topic                       | Python                                                                 | JavaScript                              |
-| --------------------------- | ---------------------------------------------------------------------- | --------------------------------------- |
-| named definition            | `def name(params):`                                                    | `function name(params) { definition }`  |
-| anonymous definition        | `lambda params: expression`                                            | `const name = (params) => definition`   |
-| anonymous single parameter  | same as above                                                          | `const name = param => { ... }`         |
-| anonymous single expression | same as above                                                          | `const name = (params) => expr`         |
-| variable arguments          | `def name(p1, p2, \*rest):`                                            | `function name(p1, p2, ...rest) { ...}` |
-| return type                 | not specified; return a single value<br>that can be an object or array | same as Python                          |
-| calling                     | `name(args)`                                                           | `name(args)`                            |
+| Topic                       | JavaScript                              | Python                                                                 |
+| --------------------------- | --------------------------------------- | ---------------------------------------------------------------------- |
+| named definition            | `function name(params) { definition }`  | `def name(params):`                                                    |
+| anonymous definition        | `const name = (params) => definition`   | `lambda params: expression`                                            |
+| anonymous single parameter  | `const name = param => { ... }`         | same as above                                                          |
+| anonymous single expression | `const name = (params) => expr`         | same as above                                                          |
+| variable arguments          | `function name(p1, p2, ...rest) { ...}` | `def name(p1, p2, \*rest):`                                            |
+| return type                 | same as Python                          | not specified; return a single value<br>that can be an object or array |
+| calling                     | `name(args)`                            | `name(args)`                                                           |
 
 Note that unlike JavaScript arrow functions, Python lambdas
 can only use a single expression, not a block of code.
 
 ## Classes
 
-| Topic                             | Python                                                  | JavaScript                                 |
-| --------------------------------- | ------------------------------------------------------- | ------------------------------------------ |
-| defining                          | `class Name:`                                           | `class Name { ... }`                       |
-| inheritance                       | `class Sub(Super1, Super2, ...)`                        | `class Sub extends Super { ... }`          |
-| constructor                       | `def \_\_init\_\_(self, params):`                       | `constructor(params) { ... }`              |
-| instance property declaration     | not declared; set in \_\_init\_\_ on `self`             | not declared; set in constructor on `this` |
-| instance property reference       | `self.propName`                                         | `this.propName`                            |
-| class/static property declaration | `propName = value;`                                     | `static propName = value;`                 |
-| class/static property reference   | `CName.propName` or `instance.propName`                 | `CName.propName`                           |
-| instance method                   | `def name(params):`                                     | `name(params) { ... }`                     |
-| class/static method declaration   | `@staticmethod`<br>`def methodName(params):`            | `static methodName(params) { ... }`        |
-| class/static method call          | `CName.methodName(params)` or `inst.methodName(params)` | `CName.methodName(params)`                 |
-| instantiating                     | `object = CName(args)`                                  | `const object = new CName(args);`          |
+| Topic                             | JavaScript                                 | Python                                                  |
+| --------------------------------- | ------------------------------------------ | ------------------------------------------------------- |
+| defining                          | `class Name { ... }`                       | `class Name:`                                           |
+| inheritance                       | `class Sub extends Super { ... }`          | `class Sub(Super1, Super2, ...)`                        |
+| constructor                       | `constructor(params) { ... }`              | `def \_\_init\_\_(self, params):`                       |
+| instance property declaration     | not declared; set in constructor on `this` | not declared; set in \_\_init\_\_ on `self`             |
+| instance property reference       | `this.propName`                            | `self.propName`                                         |
+| class/static property declaration | `static propName = value;`                 | `propName = value;`                                     |
+| class/static property reference   | `CName.propName`                           | `CName.propName` or `instance.propName`                 |
+| instance method                   | `name(params) { ... }`                     | `def name(params):`                                     |
+| class/static method declaration   | `static methodName(params) { ... }`        | `@staticmethod`<br>`def methodName(params):`            |
+| class/static method call          | `CName.methodName(params)`                 | `CName.methodName(params)` or `inst.methodName(params)` |
+| instantiating                     | `const object = new CName(args);`          | `object = CName(args)`                                  |
 
 JavaScript does not support multiple inheritance, but Python does.
 In addition to the `@staticmethod` decorator, Python also supports the
@@ -229,12 +228,12 @@ the latter are passed the class as the first argument.
 
 In Python 3.4+, asynchronous functions are supported by the asyncio library.
 
-| Topic                    | Python                      | JavaScript                               |
-| ------------------------ | --------------------------- | ---------------------------------------- |
-| async named function     | `async def name(params):`   | `async function name(params) { ... }`    |
-| async anonymous function | not supported               | `const name = async (params) => { ... }` |
-| async call with await    | `result = await name(args)` | `const result = await name(args);`       |
-| async call with then     | n/a                         | `name(args).then(result => { ... });`    |
+| Topic                    | JavaScript                               | Python                      |
+| ------------------------ | ---------------------------------------- | --------------------------- |
+| async named function     | `async function name(params) { ... }`    | `async def name(params):`   |
+| async anonymous function | `const name = async (params) => { ... }` | not supported               |
+| async call with await    | `const result = await name(args);`       | `result = await name(args)` |
+| async call with then     | `name(args).then(result => { ... });`    | n/a                         |
 
 In JavaScript, async functions return a Promise.
 Here is an example of running tasks that
@@ -305,98 +304,98 @@ asyncio.run(main())
 
 ## Modules
 
-| Topic          | Python                               | JavaScript                                 |
-| -------------- | ------------------------------------ | ------------------------------------------ |
-| defining       | content of file                      | content of file                            |
-| export         | everything is automatically exported | `export name = value;`                     |
-| default export | not supported                        | `export default name = value;`             |
-| import default | not supported                        | `import name from 'path';`                 |
-| import named   | from moduleName import name1, name2  | `import {name1, name2} from 'path';`       |
-| import both    | n/a                                  | `import name, {name1, name2} from 'path';` |
-| where to find  | pip                                  | npm                                        |
+| Topic          | JavaScript                                 | Python                               |
+| -------------- | ------------------------------------------ | ------------------------------------ |
+| defining       | content of file                            | content of file                      |
+| export         | `export name = value;`                     | everything is automatically exported |
+| default export | `export default name = value;`             | not supported                        |
+| import default | `import name from 'path';`                 | not supported                        |
+| import named   | `import {name1, name2} from 'path';`       | from moduleName import name1, name2  |
+| import both    | `import name, {name1, name2} from 'path';` | n/a                                  |
+| where to find  | npm                                        | pip                                  |
 
 ## Boolean Operations
 
-| Operation   | Python      | JavaScript   |
-| ----------- | ----------- | ------------ |
-| and         | `b1 and b2` | `b1 && b2`   |
-| or          | `b1 or b2`  | `b1 \|\| b2` |
-| not         | `not b`     | `!b`         |
-| bitwise and | `b1 & b2`   | same         |
-| bitwise or  | `b1 \| b2`  | same         |
-| bitwise not | `~b`        | same         |
-| bitwise xor | `b1 & b2`   | `b1 ^ b2`    |
+| Operation   | JavaScript   | Python      |
+| ----------- | ------------ | ----------- |
+| and         | `b1 && b2`   | `b1 and b2` |
+| or          | `b1 \|\| b2` | `b1 or b2`  |
+| not         | `!b`         | `not b`     |
+| bitwise and | `b1 & b2`    | same        |
+| bitwise or  | `b1 \| b2`   | same        |
+| bitwise not | `~b`         | same        |
+| bitwise xor | `b1 ^ b2`    | `b1 & b2`   |
 
 ## Numeric Operations
 
-| Operation                                     | Python               | JavaScript                         |
-| --------------------------------------------- | -------------------- | ---------------------------------- |
-| basic                                         | `+`, `-`, `\*`, `/`  | same                               |
-| exponentiation                                | `*\*`                | same                               |
-| increment                                     | `v += 1`             | `++n1` (pre) or `n1++` (post)      |
-| decrement                                     | `v -= 1`             | `--n1` (pre) or `n1--` (post)      |
-| mod (remainder)                               | `%`                  | same                               |
-| convert to string                             | `str(n)`             | `n.toString()`                     |
-| convert to string with fixed decimals (ex. 2) | `"{:.2f}".format(n)` | `n.toFixed(2)`                     |
-| convert to hex                                | `hex(n)`             | `n.toString(16)`                   |
-| convert from hex                              | `int(hexString, 16)` | `parseInt(hexString, 16)`          |
-| constants                                     | see math module      | see Math and Number global objects |
-| functions                                     | see math module      | see Math and Number global objects |
+| Operation                                     | JavaScript                         | Python               |
+| --------------------------------------------- | ---------------------------------- | -------------------- |
+| basic                                         | `+`, `-`, `\*`, `/`                | same                 |
+| exponentiation                                | `*\*`                              | same                 |
+| increment                                     | `++n1` (pre) or `n1++` (post)      | `v += 1`             |
+| decrement                                     | `--n1` (pre) or `n1--` (post)      | `v -= 1`             |
+| mod (remainder)                               | `%`                                | same                 |
+| convert to string                             | `n.toString()`                     | `str(n)`             |
+| convert to string with fixed decimals (ex. 2) | `n.toFixed(2)`                     | `"{:.2f}".format(n)` |
+| convert to hex                                | `n.toString(16)`                   | `hex(n)`             |
+| convert from hex                              | `parseInt(hexString, 16)`          | `int(hexString, 16)` |
+| constants                                     | see Math and Number global objects | see math module      |
+| functions                                     | see Math and Number global objects | see math module      |
 
 ## String Operations
 
-| Operation     | Python                                      | JavaScript                                      |
-| ------------- | ------------------------------------------- | ----------------------------------------------- |
-| concatenation | `s1 + str(n1)`                              | `s1 + n1`                                       |
-| lowercase     | `s.lower()`                                 | `s.toLowerCase()`                               |
-| uppercase     | `s.upper()`                                 | `s.toUpperCase()`                               |
-| substring     | `s[start:end]` or `s[start:]` or `s[:end]`  | `s1.substring(start[, end])`                    |
-| slice         | same as above                               | like `substring`, but supports negative indexes |
-| split         | `s.split(delimiter)` returns list           | `s.split(delimiter)` returns array              |
-| starts with   | `s.startswith(sub)` returns boolean         | `s.startsWith(sub)` returns boolean             |
-| ends with     | `s.endswith(sub)` returns boolean           | `s.endsWith(sub)` returns boolean               |
-| contains      | `sub in s` returns boolean                  | `s.includes(sub)` returns boolean               |
-| index of      | `s.index(sub[, start[, end]])` returns int  | `s.indexOf(sub)` returns number                 |
-| last index of | `s.rindex(sub[, start[, end]])` returns int | `s.lastIndexOf(sub)` returns number             |
-| compare       | not supported                               | `s.localeCompare(sub)` returns -1, 0, or 1      |
-| replace first | `s.replace(old, new, 1)`                    | `s.replace(oldSub, newSub)`                     |
-| replace all   | `s.replace(old, new)`                       | `s.replaceAll(oldSub, newSub)`                  |
-| trim start    | `s.lstrip()`                                | `s.trimStart()`                                 |
-| trim end      | `s.rstrip()`                                | `s.trimEnd()`                                   |
-| trim both     | `s.strip()`                                 | `s.trim()`                                      |
+| Operation     | JavaScript                                      | Python                                      |
+| ------------- | ----------------------------------------------- | ------------------------------------------- |
+| concatenation | `s1 + n1`                                       | `s1 + str(n1)`                              |
+| lowercase     | `s.toLowerCase()`                               | `s.lower()`                                 |
+| uppercase     | `s.toUpperCase()`                               | `s.upper()`                                 |
+| substring     | `s1.substring(start[, end])`                    | `s[start:end]` or `s[start:]` or `s[:end]`  |
+| slice         | like `substring`, but supports negative indexes | same as above                               |
+| split         | `s.split(delimiter)` returns array              | `s.split(delimiter)` returns list           |
+| starts with   | `s.startsWith(sub)` returns boolean             | `s.startswith(sub)` returns boolean         |
+| ends with     | `s.endsWith(sub)` returns boolean               | `s.endswith(sub)` returns boolean           |
+| contains      | `s.includes(sub)` returns boolean               | `sub in s` returns boolean                  |
+| index of      | `s.indexOf(sub)` returns number                 | `s.index(sub[, start[, end]])` returns int  |
+| last index of | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub[, start[, end]])` returns int |
+| compare       | `s.localeCompare(sub)` returns -1, 0, or 1      | not supported                               |
+| replace first | `s.replace(oldSub, newSub)`                     | `s.replace(old, new, 1)`                    |
+| replace all   | `s.replaceAll(oldSub, newSub)`                  | `s.replace(old, new)`                       |
+| trim start    | `s.trimStart()`                                 | `s.lstrip()`                                |
+| trim end      | `s.trimEnd()`                                   | `s.rstrip()`                                |
+| trim both     | `s.trim()`                                      | `s.strip()`                                 |
 
 ## Array/Sequence Operations
 
 Some Python sequence operations apply to all three of kinds of sequences
 (list, tuple, and range).
 
-| Operation         | Python                                                                                  | JavaScript                                           |
-| ----------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| is array/sequence | `hasattr(type(obj), '\_\_iter\_\_')`                                                    | `Array.isArray(expression)`                          |
-| length            | `len(seq)`                                                                              | `arr.length`                                         |
-| lookup            | `value = seq[index]`                                                                    | `const value = arr[index];`                          |
-| subset            | `newSeq = seq[startIndex:endIndex]`                                                     | `const newArr = arr.slice(startIndex[, endIndex]);`  |
-| concat            | `newSeq = seq1 + seq2`                                                                  | `const newArr = arr1.concat(arr2, arr3, ...);`       |
-| find              | `next(filter(predicate, iterable))`                                                     | `const value = arr.find(predicate);`                 |
-| find index        | see note below this table                                                               | `const index = arr.findIndex(predicate);`            |
-| for each          | `for item in seq:`                                                                      | `arr.forEach(value => { ... });`                     |
-| includes          | `value in seq`                                                                          | `arr.includes(value)` returns boolean                |
-| not includes      | `value not in seq`                                                                      | `!arr.includes(value)` returns boolean               |
-| index of          | `seq.index(value[, start[, end]])`                                                      | `const index = arr.indexOf(value[, fromIndex])`      |
-| last index of     | not builtin; have to reverse list                                                       | `const index = arr.lastIndexOf(value[, fromIndex])`  |
-| join              | `delimiter.join(iterable)`                                                              | `arr.join(delimiter)` returns string                 |
-| map               | `iterator = map(function, iterable)`                                                    | `const newArr = arr.map(value => newValue);`         |
-| filter            | `iterator = filter(predicate, iterable)`                                                | `const newArr = arr.filter(predicate);`              |
-| reduce            | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)` | `const value = arr.reduce((acc, value) => { ... });` |
-| any/some          | `any(map(predicate, iterable))`                                                         | `arr.some(predicate)` returns boolean                |
-| all/every         | `all(map(predicate, iterable))`                                                         | `arr.every(predicate)` returns boolean               |
-| add to end        | `seq.append(value)`                                                                     | `arr.push(value);`                                   |
-| remove from end   | `seq.pop()`                                                                             | `const value = arr.pop();`                           |
-| add to start      | `seq.insert(0, item)`                                                                   | `arr.unshift(value);`                                |
-| remove from start | `del seq[0]`                                                                            | `const value = arr.shift();`                         |
-| remove all        | `seq.clear()`                                                                           | `arr = [];`                                          |
-| sort              | `list.sort(key=fn)` where `fn` returns a value for the key                              | `arr.sort(comparator);`                              |
-| change            | combine `del` and `insert` above                                                        | `arr.splice(start, delCount, v1, v2, ...);`          |
+| Operation         | JavaScript                                           | Python                                                                                  |
+| ----------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| is array/sequence | `Array.isArray(expression)`                          | `hasattr(type(obj), '\_\_iter\_\_')`                                                    |
+| length            | `arr.length`                                         | `len(seq)`                                                                              |
+| lookup            | `const value = arr[index];`                          | `value = seq[index]`                                                                    |
+| subset            | `const newArr = arr.slice(startIndex[, endIndex]);`  | `newSeq = seq[startIndex:endIndex]`                                                     |
+| concat            | `const newArr = arr1.concat(arr2, arr3, ...);`       | `newSeq = seq1 + seq2`                                                                  |
+| find              | `const value = arr.find(predicate);`                 | `next(filter(predicate, iterable))`                                                     |
+| find index        | `const index = arr.findIndex(predicate);`            | see note below this table                                                               |
+| for each          | `arr.forEach(value => { ... });`                     | `for item in seq:`                                                                      |
+| includes          | `arr.includes(value)` returns boolean                | `value in seq`                                                                          |
+| not includes      | `!arr.includes(value)` returns boolean               | `value not in seq`                                                                      |
+| index of          | `const index = arr.indexOf(value[, fromIndex])`      | `seq.index(value[, start[, end]])`                                                      |
+| last index of     | `const index = arr.lastIndexOf(value[, fromIndex])`  | not builtin; have to reverse list                                                       |
+| join              | `arr.join(delimiter)` returns string                 | `delimiter.join(iterable)`                                                              |
+| map               | `const newArr = arr.map(value => newValue);`         | `iterator = map(function, iterable)`                                                    |
+| filter            | `const newArr = arr.filter(predicate);`              | `iterator = filter(predicate, iterable)`                                                |
+| reduce            | `const value = arr.reduce((acc, value) => { ... });` | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)` |
+| any/some          | `arr.some(predicate)` returns boolean                | `any(map(predicate, iterable))`                                                         |
+| all/every         | `arr.every(predicate)` returns boolean               | `all(map(predicate, iterable))`                                                         |
+| add to end        | `arr.push(value);`                                   | `seq.append(value)`                                                                     |
+| remove from end   | `const value = arr.pop();`                           | `seq.pop()`                                                                             |
+| add to start      | `arr.unshift(value);`                                | `seq.insert(0, item)`                                                                   |
+| remove from start | `const value = arr.shift();`                         | `del seq[0]`                                                                            |
+| remove all        | `arr = [];`                                          | `seq.clear()`                                                                           |
+| sort              | `arr.sort(comparator);`                              | `list.sort(key=fn)` where `fn` returns a value for the key                              |
+| change            | `arr.splice(start, delCount, v1, v2, ...);`          | combine `del` and `insert` above                                                        |
 
 In the Python list `sort` method, "vef" is short for value extract function.
 
@@ -436,14 +435,14 @@ TODO: Add these!
 
 ## Function Operations
 
-| Operation                | Python                                                                    | JavaScript                                        |
-| ------------------------ | ------------------------------------------------------------------------- | ------------------------------------------------- |
-| name                     | `fn.__name__`                                                             | `fn.name`                                         |
-| required parameter count | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`    | `fn.length`                                       |
-| get implementation code  | `from inspect import getsource`<br>`getsource(fn)`                        | `fn.toString()`                                   |
-| bind                     | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)` | `const newFn = fn.bind(thisArg, arg1, arg2, ...)` |
-| call                     | `method(obj, arg1, arg2, ...)`                                            | `fn.call(thisArg, arg1, arg2, ...)`               |
-| apply                    | `method(obj, *argList)`                                                   | `fn.apply(thisArg, argArray)`                     |
+| Operation                | JavaScript                                        | Python                                                                    |
+| ------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------- |
+| name                     | `fn.name`                                         | `fn.__name__`                                                             |
+| required parameter count | `fn.length`                                       | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`    |
+| get implementation code  | `fn.toString()`                                   | `from inspect import getsource`<br>`getsource(fn)`                        |
+| bind                     | `const newFn = fn.bind(thisArg, arg1, arg2, ...)` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)` |
+| call                     | `fn.call(thisArg, arg1, arg2, ...)`               | `method(obj, arg1, arg2, ...)`                                            |
+| apply                    | `fn.apply(thisArg, argArray)`                     | `method(obj, *argList)`                                                   |
 
 The Python `partial` function cannot be used on methods, only functions.
 
@@ -451,17 +450,17 @@ The Python `partial` function cannot be used on methods, only functions.
 
 Python refers to errors as exceptions.
 
-| Operation   | Python                         | JavaScript                                      |
-| ----------- | ------------------------------ | ----------------------------------------------- |
-| throw error | `raise exClass(args)`          | `throw new Error(message);`                     |
-| catch error | `try: ... except exClass: ...` | `try { ... } catch (e) { ... } finally { ... }` |
+| Operation   | JavaScript                                      | Python                         |
+| ----------- | ----------------------------------------------- | ------------------------------ |
+| throw error | `throw new Error(message);`                     | `raise ExClass(args)`          |
+| catch error | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ...` |
 
 ## JSON Operations
 
-| Operation | Python                           | JavaScript                                 |
-| --------- | -------------------------------- | ------------------------------------------ |
-| create    | `jsonString = json.dumps(expr)`  | `const jsonString = JSON.stringify(expr);` |
-| parse     | `value = json.loads(jsonString)` | `const value = JSON.parse(jsonString);`    |
+| Operation | JavaScript                                 | Python                           |
+| --------- | ------------------------------------------ | -------------------------------- |
+| create    | `const jsonString = JSON.stringify(expr);` | `jsonString = json.dumps(expr)`  |
+| parse     | `const value = JSON.parse(jsonString);`    | `value = json.loads(jsonString)` |
 
 In Python, you must `import json`.
 There are many builtin Python exception classes.
@@ -506,42 +505,37 @@ but keys in `Map` instances can be any type.
 
 ## Set Operations
 
-| Operation             | Python                              | JavaScript                     |
-| --------------------- | ----------------------------------- | ------------------------------ |
-| create                | `s = {values}` or `s = set(values)` | `const s = new Set();`         |
-| length                | `len(s)`                            | `s.size`                       |
-| includes              | `value in s`                        | `s.has(value)`                 |
-| add                   | `s.add(value)`                      | same                           |
-| remove                | `s.remove(value)`                   | `s.delete(value);`             |
-| remove all            | `s.clear()`                         | same                           |
-| iterate over          | `for value in set:`                 | `s.forEach(value => { ... });` |
-| convert to list/array | `l = list(s)`                       | `a = s.values();`              |
+| Operation             | JavaScript                     | Python                              |
+| --------------------- | ------------------------------ | ----------------------------------- |
+| create                | `const s = new Set();`         | `s = {values}` or `s = set(values)` |
+| length                | `s.size`                       | `len(s)`                            |
+| includes              | `s.has(value)`                 | `value in s`                        |
+| add                   | `s.add(value)`                 | same                                |
+| remove                | `s.delete(value);`             | `s.remove(value)`                   |
+| remove all            | `s.clear()`                    | same                                |
+| iterate over          | `s.forEach(value => { ... });` | `for value in set:`                 |
+| convert to list/array | `a = s.values();`              | `l = list(s)`                       |
 
 ## Regular Expression Operations
 
 In Python, import the `re` library. It supports the following methods:
 
-- match: Match a regular expression pattern to the beginning of a string.
-- fullmatch: Match a regular expression pattern to all of a string.
-- search: Search a string for the presence of a pattern.
-- sub: Substitute occurrences of a pattern found in a string.
-- subn: Same as sub, but also return the number of substitutions made.
 - split: Split a string by the occurrences of a pattern.
-- findall: Find all occurrences of a pattern in a string.
 
-| Operation                | Python                                       | JavaScript                                                                |
-| ------------------------ | -------------------------------------------- | ------------------------------------------------------------------------- |
-| create                   | `import re`<br>`regex = re.compile(pattern)` | `const re = /pattern/flags` or<br>`const re = new RegExp(pattern, flags)` |
-| test if a string matches | `if pattern.search(str):`                    | `if (re.test(str))`                                                       |
-| get first match          | `pattern.search(str)`                        | `str.match(re)`                                                           |
-| get all matches          | `pattern.finditer(str)`                      | `str.matchAll(re)` or `re.exec(str)`                                      |
+| Operation                | JavaScript                                                                | Python                                       |
+| ------------------------ | ------------------------------------------------------------------------- | -------------------------------------------- |
+| create                   | `const re = /pattern/flags` or<br>`const re = new RegExp(pattern, flags)` | `import re`<br>`regex = re.compile(pattern)` |
+| test if a string matches | `if (re.test(str))`                                                       | `if regex.search(str):`                      |
+| get first match          | `str.match(re)`                                                           | `regex.search(str)`                          |
+| get all matches          | `str.matchAll(re)` or `re.exec(str)`                                      | `regex.finditer(str)`                        |
+| split string on re       | `str.split(re)`                                                           | `regex.split(str)`                           |
 
 ## Printing
 
-| Operation    | Python                                              | JavaScript                  |
-| ------------ | --------------------------------------------------- | --------------------------- |
-| print values | `print(v1, v2, ..)`                                 | `console.log(v1, v2, ...);` |
-| print error  | `import sys`<br>print(v1, v2, ..., file=sys.stderr) | `console.error(message);`   |
+| Operation    | JavaScript                  | Python                                              |
+| ------------ | --------------------------- | --------------------------------------------------- |
+| print values | `console.log(v1, v2, ...);` | `print(v1, v2, ..)`                                 |
+| print error  | `console.error(message);`   | `import sys`<br>print(v1, v2, ..., file=sys.stderr) |
 
 ## Check for running as main
 
@@ -550,16 +544,16 @@ In Node.js, use `if (require.main === module) {`.
 
 ## Popular Tools/Libraries/Frameworks
 
-| Topic            | Python                                        | JavaScript                          |
-| ---------------- | --------------------------------------------- | ----------------------------------- |
-| command-line     | `python` interpreter                          | Node.js                             |
-| utilities        | pydash                                        | Lodash, Ramda                       |
-| web server       | Flask                                         | Express                             |
-| web framework    | Flask                                         | React, Vue, Svelte                  |
-| dates and times  | datetime (in standard library)                | date.fns, Moment.js, Temporal       |
-| unit tests       | unittest (in standard library), nose2, pytest | Jest, Mocha, Chai, @testing-library |
-| end-to-end tests |                                               | Cypress                             |
-| math             | math (in standard library)                    | mathjs                              |
+| Topic            | JavaScript                          | Python                                        |
+| ---------------- | ----------------------------------- | --------------------------------------------- |
+| command-line     | Node.js                             | `python` interpreter                          |
+| utilities        | Lodash, Ramda                       | pydash                                        |
+| web server       | Express                             | Flask                                         |
+| web framework    | React, Vue, Svelte                  | Flask                                         |
+| dates and times  | date.fns, Moment.js, Temporal       | datetime (in standard library)                |
+| unit tests       | Jest, Mocha, Chai, @testing-library | unittest (in standard library), nose2, pytest |
+| end-to-end tests | Cypress                             |                                               |
+| math             | mathjs                              | math (in standard library)                    |
 
 ## Python Magic Methods
 
