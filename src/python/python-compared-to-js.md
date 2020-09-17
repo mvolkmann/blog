@@ -127,6 +127,20 @@ A list is a mutable sequence of values that have the same type.
 A tuple is an immutable sequence of values that have varying types.
 A range is an immutable sequence of numbers that can be used for looping.
 
+A named tuple gives a name to a tuple type and
+supports accessing elements in instances by name.
+For example:
+
+```python
+from collections import namedtuple
+# Internally, this generate a class named Person.
+Dog = namedtuple('Dog', 'name breed')
+dog = Dog('Comet', 'Whippet')
+print(dog.name) # Comet
+print(dog[1]) # Whippet
+print(len(dog)) # 2
+```
+
 JavaScript object keys must be strings.
 Python dict keys can e any immutable type.
 
@@ -267,7 +281,10 @@ They cannot contain additional statements.
 Python named functions can have a docstring as their first line.
 This is used by tools that generate documentation from code.
 It is typically delimited by triple quotes.
-For guidelines on the content of docstrings, see
+For guidelines on the content of docstrings, see the
+{% aTargetBlank
+  "https://docs.python.org/3/tutorial/controlflow.html#documentation-strings",
+  "Python Tutorial" %} and
 {% aTargetBlank
   "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
   "PEP-8 documentation strings" %}.
@@ -276,8 +293,8 @@ In Python:
 
 - Function parameters with a default value must follows those without one.
 - Function parameters that do not begin with `*` or `**` are positional.
-- Function parameters that have a default value can be
-  specified with a positional or named argument.
+- Function parameters can be specified positionally or by name,
+  but positional ones must be specified before named ones.
 - The `partial` function (shown in the table below)
   can only be used on functions, not methods of a class.
 
@@ -289,8 +306,8 @@ In Python:
 | define anonymous w/ single expression                               | `const fnName = (params) => expr`                            | same as above                                                                                                    |
 | use variable arguments                                              | `function fnName(p1, p2, ...rest) {...}`                     | `def fnName(p1, p2, *rest):`<br>`rest` is set to a tuple                                                         |
 | specify default argument values                                     | `function fnName(p1=v1, p2=v2) {...}`                        | `def fnName(p1=v1, p2=v2):`                                                                                      |
-| use keyword arguments                                               | `function fnName({p1, p2}) {...}` - pass an object           | same as above<br>any parameter with a default value can be specified by name<br>call with `fnName(p1=v2, p2=v2)` |
-| gather arguments as key/value pairs                                 | not supported                                                | `def fnName(**args):`<br>call with `fnName(p1=v2, p2=v2)`                                                        |
+| use named/keyword arguments                                         | `function fnName({p1, p2}) {...}` - pass an object           | same as above<br>any parameter with a default value can be specified by name<br>call with `fnName(p1=v2, p2=v2)` |
+| gather arguments as key/value pairs                                 | not supported                                                | `def fnName(**args):`<br>call with `fnName(p1=v2, p2=v2)`<br>or `fnName(**dict)`                                 |
 | return a value                                                      | `return value;`                                              | `return value`                                                                                                   |
 | default return value when no `return`                               | `undefined`                                                  | `None`                                                                                                           | value` |
 | call                                                                | `fnName(args)`                                               | same                                                                                                             |
@@ -302,6 +319,7 @@ In Python:
 | create partial                                                      | `const newFn = fnName.bind(thisArg, arg1, arg2, ...)`        | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)`                                        |
 | call                                                                | `fnName.call(thisArg, arg1, arg2, ...)`                      | `method(obj, arg1, arg2, ...)`                                                                                   |
 | apply                                                               | `fnName.apply(thisArg, argArray)`                            | `method(obj, *argList)`                                                                                          |
+| spreading arguments                                                 | fnName(...arr)                                               | fnName(\*seq)                                                                                                    |
 
 ## Classes
 
@@ -466,6 +484,7 @@ asyncio.run(main())
 | trim start          | `s.trimStart()`                                 | `s.lstrip()`                                |
 | trim end            | `s.trimEnd()`                                   | `s.rstrip()`                                |
 | trim both           | `s.trim()`                                      | `s.strip()`                                 |
+| repeat n times      | `s.repeat(n)`                                   | `s * n` or `n * s`                          |
 
 ## Sequences
 
@@ -528,6 +547,7 @@ JavaScript generators can be used to implement lazy evaluations
 where code is not executed until results are needed.
 See examples in the "List Comprehensions" section.
 
+Python also supports generator functions and the `yield` keyword.
 The Python `filter` and `map` functions are lazy.
 To get values from them, pass the result to a function like `list` or `set`.
 For example:
@@ -777,3 +797,87 @@ This is a partial list of the magic methods that a Python class can be implement
 | `__setstate__`                      | self             | unpickles an object                                   |
 | other                               |                  |                                                       |
 | `__call__`                          | self, ...        | treats an object as a function; can change state      |
+
+## Types
+
+For JavaScript, use the TypeScript compiler.
+
+For Python, use the mypy tool which
+performs type checking on Python source files.
+
+Primitive types supported by mypy are:
+
+| Type Name | Meaning                                              |
+| --------- | ---------------------------------------------------- |
+| `bool`    | Boolean                                              |
+| `bytes`   | array of bytes                                       |
+| `complex` | complex number with `float` real and imaginary parts |
+| `float`   | double precision floating point number               |
+| `int`     | unlimited precision integer                          |
+| `str`     | string                                               |
+
+Collection types supported by mypy are:
+
+| Type Name            | Meaning                                               |
+| -------------------- | ----------------------------------------------------- |
+| `Dict[KT, VT]`       | dict with keys of type KT and values of type VT       |
+| `List[T]`            | list with elements of type T                          |
+| `Sequence[T]`        | any kind of sequence whose elements are all of type T |
+| `Set[T]`             | set with elements of type T                           |
+| `Tuple[T1, T2, ...]` | tuple whose elements have specified types             |
+
+Other types supported by mypy are:
+
+| Type Name                                           | Meaning                                                                 |
+| --------------------------------------------------- | ----------------------------------------------------------------------- |
+| `Any`                                               | any value                                                               |
+| any class name                                      | instance of the class or subclass                                       |
+| `Callable[[P1, P2, ...], RT]`                       | function that takes parameters of types P1, P2, ... and returns type RT |
+| `Callable[...], RT]`                                | function that takes any parameters and returns type RT                  |
+| `Generator[YieldType, SendType, ReturnType]`        | generator function;<br>`SendType` and `ReturnType` can be `None`        |
+| `NamedType('Name', [('name1', T1), ('name2', T2)])` | named tuple                                                             |
+| `Optional[T]`                                       | matches `None` or the type T<br> same as `Union[None, T]`               |
+| `Type[C]`                                           | matches a class object for class C or a subclass                        |
+| `Union[T1, T2, ...]`                                | matches any of the specified types                                      |
+
+Aliases can be defined for long type descriptions.
+This is useful when the same type description is used in many places.
+For example, `IntToStringMap = Dict[int, str]`.
+
+To add a type hint to a variable or function parameter,
+follow its name with a colon, a space, and the type.
+
+To add a return type hint to a function,
+follow the argument list right parenthesis with `->` and the type.
+
+For example:
+
+```python
+def orderIceCream(flavor: str, scoops: int, add_sprinkles: bool) -> IceCream:
+```
+
+mypy cannot perform type checking on function arguments that correspond to
+parameters with default values or
+parameters that collect variadic arguments in a tuple or dict.
+
+The `python` interpreter ignores type hints,
+but they make startup time take slightly longer.
+They are useful as documentation even without using mypy.
+IDEs can use them to flag type issues.
+
+To install mypy, enter `pip install mypy`.
+On a Mac, add the following directory to the `PATH` environment variable:
+`/Library/Frameworks/Python.framework/Versions/3.8/bin`.
+
+To run mypy on a source file and all the files it imports,
+enter `mypy {filename}.py`.
+
+## VS Code
+
+The VS Code extension "Python" from Microsoft adds
+"IntelliSense, linting, debugging, code navigation, code formatting,
+Jupyter notebook support, refactoring, variable explorer, test explorer,
+snippets, and more".
+
+Other useful VS Code extensions for Python code include
+autopep8 and pylint.
