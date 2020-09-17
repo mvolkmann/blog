@@ -272,24 +272,31 @@ For guidelines on the content of docstrings, see
   "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
   "PEP-8 documentation strings" %}.
 
-| Operation                             | JavaScript                                        | Python                                                                    |
-| ------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------- |
-| define named                          | `function name(params) { definition }`            | `def name(params):`                                                       |
-| define anonymous                      | `const name = (params) => definition`             | `lambda params: expression`                                               |
-| define anonymous w/ single parameter  | `const name = param => { ... }`                   | same as above                                                             |
-| define anonymous w/ single expression | `const name = (params) => expr`                   | same as above                                                             |
-| use variable arguments                | `function name(p1, p2, ...rest) { ...}`           | `def name(p1, p2, \*rest):`                                               |
-| return a value                        | `return value;`                                   | `return value`                                                            |
-| default return value when no `return` | `undefined`                                       | `None`                                                                    | value` |
-| call                                  | `name(args)`                                      | same                                                                      |
-| get name                              | `fn.name`                                         | `fn.__name__`                                                             |
-| required parameter count              | `fn.length`                                       | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`    |
-| get implementation code               | `fn.toString()`                                   | `from inspect import getsource`<br>`getsource(fn)`                        |
-| bind                                  | `const newFn = fn.bind(thisArg, arg1, arg2, ...)` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)` |
-| call                                  | `fn.call(thisArg, arg1, arg2, ...)`               | `method(obj, arg1, arg2, ...)`                                            |
-| apply                                 | `fn.apply(thisArg, argArray)`                     | `method(obj, *argList)`                                                   |
+| Operation                             | JavaScript                                            | Python                                                                                                           |
+| ------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| define named                          | `function fnName(params) { definition }`              | `def fnName(params):`                                                                                            |
+| define anonymous                      | `const fnName = (params) => definition`               | `lambda params: expression`                                                                                      |
+| define anonymous w/ single parameter  | `const fnName = param => {...}`                       | same as above                                                                                                    |
+| define anonymous w/ single expression | `const fnName = (params) => expr`                     | same as above                                                                                                    |
+| use variable arguments                | `function fnName(p1, p2, ...rest) {...}`              | `def fnName(p1, p2, *rest):`                                                                                     |
+| specify default argument values       | `function fnName(p1=v1, p2=v2) {...}`                 | `def fnName(p1=v1, p2=v2):`                                                                                      |
+| j use keyword arguments               | `function fnName({p1, p2}) {...}` - pass an object    | same as above<br>any parameter with a default value can be specified by name<br>call with `fnName(p1=v2, p2=v2)` |
+| gather arguments as key/value pairs   | not supported                                         | `def fnName(**args):`<br>call with `fnName(p1=v2, p2=v2)`                                                        |
+| return a value                        | `return value;`                                       | `return value`                                                                                                   |
+| default return value when no `return` | `undefined`                                           | `None`                                                                                                           | value` |
+| call                                  | `fnName(args)`                                        | same                                                                                                             |
+| get name                              | `fnName.name`                                         | `fnName.__name__`                                                                                                |
+| required parameter count              | `fnName.length`                                       | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`                                           |
+| get implementation code               | `fnName.toString()`                                   | `from inspect import getsource`<br>`getsource(fn)`                                                               |
+| create partial                        | `const newFn = fnName.bind(thisArg, arg1, arg2, ...)` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)`                                        |
+| call                                  | `fnName.call(thisArg, arg1, arg2, ...)`               | `method(obj, arg1, arg2, ...)`                                                                                   |
+| apply                                 | `fnName.apply(thisArg, argArray)`                     | `method(obj, *argList)`                                                                                          |
 
-The Python `partial` function can only be used on functions, not methods of a class.
+In Python, function parameters with a default value
+must follows those without one.
+
+The Python `partial` function can only be used on functions,
+not methods of a class.
 
 ## Classes
 
@@ -302,7 +309,7 @@ The Python `partial` function can only be used on functions, not methods of a cl
 | instance property reference       | `this.propName`                            | `self.propName`                                         |
 | class/static property declaration | `static propName = value;`                 | `propName = value;`                                     |
 | class/static property reference   | `CName.propName`                           | `CName.propName` or `instance.propName`                 |
-| instance method                   | `name(params) { ... }`                     | `def name(params):`                                     |
+| instance method                   | `name(params) { ... }`                     | `def fnName(params):`                                   |
 | class/static method declaration   | `static methodName(params) { ... }`        | `@staticmethod`<br>`def methodName(params):`            |
 | class/static method call          | `CName.methodName(params)`                 | `CName.methodName(params)` or `inst.methodName(params)` |
 | instantiating                     | `const object = new CName(args);`          | `object = CName(args)`                                  |
@@ -316,12 +323,12 @@ the latter are passed the class as the first argument.
 
 In Python 3.4+, asynchronous functions are supported by the asyncio library.
 
-| Topic                    | JavaScript                               | Python                      |
-| ------------------------ | ---------------------------------------- | --------------------------- |
-| async named function     | `async function name(params) { ... }`    | `async def name(params):`   |
-| async anonymous function | `const name = async (params) => { ... }` | not supported               |
-| async call with await    | `const result = await name(args);`       | `result = await name(args)` |
-| async call with then     | `name(args).then(result => { ... });`    | n/a                         |
+| Topic                    | JavaScript                                 | Python                      |
+| ------------------------ | ------------------------------------------ | --------------------------- |
+| async named function     | `async function fnName(params) { ... }`    | `async def fnName(params):` |
+| async anonymous function | `const fnName = async (params) => { ... }` | not supported               |
+| async call with await    | `const result = await name(args);`         | `result = await name(args)` |
+| async call with then     | `name(args).then(result => { ... });`      | n/a                         |
 
 In JavaScript, async functions return a Promise.
 Here is an example of running tasks that
