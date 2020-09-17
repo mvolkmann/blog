@@ -323,24 +323,98 @@ In Python:
 
 ## Classes
 
-| Topic                             | JavaScript                                 | Python                                                  |
-| --------------------------------- | ------------------------------------------ | ------------------------------------------------------- |
-| defining                          | `class Name { ... }`                       | `class Name:`                                           |
-| inheritance                       | `class Sub extends Super { ... }`          | `class Sub(Super1, Super2, ...)`                        |
-| constructor                       | `constructor(params) { ... }`              | `def \_\_init\_\_(self, params):`                       |
-| instance property declaration     | not declared; set in constructor on `this` | not declared; set in \_\_init\_\_ on `self`             |
-| instance property reference       | `this.propName`                            | `self.propName`                                         |
-| class/static property declaration | `static propName = value;`                 | `propName = value;`                                     |
-| class/static property reference   | `CName.propName`                           | `CName.propName` or `instance.propName`                 |
-| instance method                   | `name(params) { ... }`                     | `def fnName(params):`                                   |
-| class/static method declaration   | `static methodName(params) { ... }`        | `@staticmethod`<br>`def methodName(params):`            |
-| class/static method call          | `CName.methodName(params)`                 | `CName.methodName(params)` or `inst.methodName(params)` |
-| instantiating                     | `const object = new CName(args);`          | `object = CName(args)`                                  |
+| Topic                             | JavaScript                                 | Python                                                      |
+| --------------------------------- | ------------------------------------------ | ----------------------------------------------------------- |
+| defining                          | `class Name { ... }`                       | `class Name:`                                               |
+| inheritance                       | `class Sub extends Super { ... }`          | `class Sub(Super1, Super2, ...)`                            |
+| constructor                       | `constructor(params) { ... }`              | `def \_\_init\_\_(self, params):`                           |
+| instance property declaration     | not declared; set in constructor on `this` | not declared; set in \_\_init\_\_ on `self`                 |
+| instance property reference       | `this.propName`                            | `self.propName`                                             |
+| class/static property declaration | `static propName = value;`                 | `propName = value;`                                         |
+| class/static property reference   | `CName.propName`                           | `CName.propName` or `instance.propName`                     |
+| instance method                   | `name(params) { ... }`                     | `def fnName(self, params):`                                 |
+| class/static method declaration   | `static methodName(params) { ... }`        | `@staticmethod`<br>`def methodName(params):`                |
+| class/static method call          | `CName.methodName(params)`                 | `CName.methodName(params)` or `instance.methodName(params)` |
+| instantiate (create instance)     | `const instance = new CName(args);`        | `instance = CName(args)`                                    |
 
 JavaScript does not support multiple inheritance, but Python does.
 In addition to the `@staticmethod` decorator, Python also supports the
 `@classmethod` decorator. The difference is that methods defined with
 the latter are passed the class as the first argument.
+
+Here is an example of a JavaScript class:
+
+```js
+class Statistics {
+  constructor(...numbers) {
+    this.numbers = numbers;
+    this.min = Math.min(...this.numbers);
+    this.max = Math.max(...this.numbers);
+    this.sum = this.numbers.reduce((acc, n) => acc + n, 0);
+  }
+
+  add(number) {
+    this.numbers.push(number);
+    this.sum += number;
+    if (number < this.min) {
+      this.min = number;
+    } else if (number > this.max) {
+      this.max = number;
+    }
+  }
+
+  mean() {
+    return this.sum / this.numbers.length;
+  }
+
+  report() {
+    console.log('min =', this.min);
+    console.log('max =', this.max);
+    console.log('mean =', this.mean());
+  }
+}
+
+const stats = new Statistics(1, 2, 3, 4);
+stats.report();
+stats.add(5);
+stats.report();
+```
+
+Here is the same class implemented in Python:
+
+```python
+from functools import reduce
+
+class Statistics:
+    def __init__(self, *numbers):
+        self.numbers = list(numbers)
+        self.min = min(*self.numbers)
+        self.max = max(*self.numbers)
+        self.sum = reduce(lambda acc, n: acc + n, self.numbers, 0)
+
+    def add(self, number):
+        self.numbers.append(number)
+        self.sum += number
+        if number < self.min:
+            self.min = number
+        elif number > self.max:
+            self.max = number
+
+    def mean(self):
+        return self.sum / len(self.numbers)
+
+    def report(self):
+        print('min =', self.min)
+        print('max =', self.max)
+        print('mean =', self.mean())
+
+stats = Statistics(1, 2, 3, 4)
+stats.report()
+stats.add(5)
+stats.report()
+```
+
+Note how in Python the first parameter in all instance methods must be `self`.
 
 ## Asynchronous Functions
 
@@ -516,7 +590,7 @@ myRange = range(start, end, step)
 | Operation         | JavaScript                                                                            | Python                                                                                    |
 | ----------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | is array/sequence | `Array.isArray(expression)`                                                           | `hasattr(type(obj), '\_\_iter\_\_')`                                                      |
-| append            | `arr.push(v1, v2, ...)`                                                               | `seq.append(v)`                                                                           |
+| append            | `arr.push(v1, v2, ...)`                                                               | `seq.append(v)` and<br>`seq.extend(iterable)` to add more than one element                |
 | length            | `arr.length`                                                                          | `len(seq)`                                                                                |
 | lookup            | `const value = arr[index];`                                                           | `value = seq[index]`                                                                      |
 | subset            | `const newArr = arr.slice(startIndex[, endIndex]);`                                   | `newSeq = seq[startIndex:endIndex]`                                                       |
