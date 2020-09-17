@@ -702,7 +702,7 @@ print(people)
 
 ## List Comprehensions
 
-Python supports list comprehensions, but JavaScript does not.
+Python supports list comprehensions that create a list, but JavaScript does not.
 Here are some examples.
 
 ```py
@@ -736,6 +736,35 @@ function* filter(predicate, obj) {
 
 const multipleOf3 = filter(n => n % 3 === 0, range(10));
 console.log([...multipleOf3]); // [ 0, 3, 6, 9 ]
+```
+
+## Sets
+
+Sets are unordered collections with no duplicate values.
+
+| Operation             | JavaScript                                       | Python                                  |
+| --------------------- | ------------------------------------------------ | --------------------------------------- |
+| create                | `const s = new Set();` - cannot specify elements | `s = {elements}` or `s = set(elements)` |
+| length                | `s.size`                                         | `len(s)`                                |
+| includes              | `s.has(value)`                                   | `value in s`                            |
+| add                   | `s.add(value)`                                   | same                                    |
+| remove                | `s.delete(value);`                               | `s.remove(value)`                       |
+| remove all            | `s.clear()`                                      | same                                    |
+| iterate over          | `s.forEach(value => { ... });`                   | `for value in set:`                     |
+| convert to list/array | `a = s.values();`                                | `l = list(s)`                           |
+
+## Set Comprehensions
+
+Python supports set comprehensions that create a set, but JavaScript does not.
+Here are some examples.
+
+```py
+from random import randint
+
+# Pick 10 random integers from 1 to 10
+# and keep only the unique values.
+# Being a set enforces unique values.
+numbers = {randint(1, 11) for n in range(10)}
 ```
 
 ## Key/Value Collections
@@ -774,21 +803,6 @@ but keys in `Map` instances can be any type.
 | delete key              | `delete obj.key` or `delete obj[key]`                    | `map.delete(key)`                                                  |
 | delete all keys         | `obj = {}`                                               | `map.clear()`                                                      |
 | iterate over            | `for (const prop in obj)`                                | `map.forEach((value, key) => { ... });`                            |
-
-## Sets
-
-Sets are unordered collections with no duplicate values.
-
-| Operation             | JavaScript                                       | Python                                  |
-| --------------------- | ------------------------------------------------ | --------------------------------------- |
-| create                | `const s = new Set();` - cannot specify elements | `s = {elements}` or `s = set(elements)` |
-| length                | `s.size`                                         | `len(s)`                                |
-| includes              | `s.has(value)`                                   | `value in s`                            |
-| add                   | `s.add(value)`                                   | same                                    |
-| remove                | `s.delete(value);`                               | `s.remove(value)`                       |
-| remove all            | `s.clear()`                                      | same                                    |
-| iterate over          | `s.forEach(value => { ... });`                   | `for value in set:`                     |
-| convert to list/array | `a = s.values();`                                | `l = list(s)`                           |
 
 ## Regular Expressions
 
