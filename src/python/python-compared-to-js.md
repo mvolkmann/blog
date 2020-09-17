@@ -176,27 +176,29 @@ using either the `const` or `let` keyword.
 Python variables are not declared and
 are created when a value is assigned to them.
 
-| Topic                | JavaScript                      | Python           |
-| -------------------- | ------------------------------- | ---------------- |
-| constant declaration | `const NAME = value;`           | `NAME = value`   |
-| variable declaration | `let name = value;`             | `name = value`   |
-| multiple assignment  | const [a, b] = [1, 2]           | a, b = 1, 2      |
-| spread of array/list | `const [v1, v2, ...] = array;`  | `v1, v2 = array` |
-| spread of object     | `const {k1, k2, ...} = object;` | not supported    |
-| addition             | `name += expr`                  | same             |
-| subtraction          | `name -= expr`                  | same             |
-| multiplication       | `name \*= expr`                 | same             |
-| division             | `name /= expr`                  | same             |
-| exponentiation       | `name \*\*= expr`               | same             |
-| mod (remainder)      | `name %= expr`                  | same             |
-| logical and          | `name &&= expr`                 | not supported    |
-| logical or           | `name \|\|= expr`               | not supported    |
-| logical xor          | `name ^= expr`                  | not supported    |
-| bitwise and          | `name &= expr`                  | same             |
-| bitwise or           | `name \|= expr`                 | same             |
-| bitwise xor          | `name ^= expr`                  | same             |
-| signed bit shift     | `<<=` (left), `>>=` (right)     | same             |
-| unsigned bit shift   | `<<<=` (left), `>>>=` (right)   | not supported    |
+| Topic                | JavaScript                                | Python           |
+| -------------------- | ----------------------------------------- | ---------------- |
+| constant declaration | `const NAME = value;`                     | `NAME = value`   |
+| variable declaration | `let name = value;`                       | `name = value`   |
+| get type of variable | `typeof name` and `name.constructor.name` | `type name`      |
+| multiple assignment  | const [a, b] = [1, 2]                     | a, b = 1, 2      |
+| spread of array/list | `const [v1, v2, ...] = array;`            | `v1, v2 = array` |
+| spread of object     | `const {k1, k2, ...} = object;`           | not supported    |
+| undeclare            | `name = undefined` - just removes value   | `del name`       |
+| addition             | `name += expr`                            | same             |
+| subtraction          | `name -= expr`                            | same             |
+| multiplication       | `name \*= expr`                           | same             |
+| division             | `name /= expr`                            | same             |
+| exponentiation       | `name \*\*= expr`                         | same             |
+| mod (remainder)      | `name %= expr`                            | same             |
+| logical and          | `name &&= expr`                           | not supported    |
+| logical or           | `name \|\|= expr`                         | not supported    |
+| logical xor          | `name ^= expr`                            | not supported    |
+| bitwise and          | `name &= expr`                            | same             |
+| bitwise or           | `name \|= expr`                           | same             |
+| bitwise xor          | `name ^= expr`                            | same             |
+| signed bit shift     | `<<=` (left), `>>=` (right)               | same             |
+| unsigned bit shift   | `<<<=` (left), `>>>=` (right)             | not supported    |
 
 ## Comparison
 
@@ -587,39 +589,45 @@ myTuple = (element1, element2, ...)
 myRange = range(start, end, step)
 ```
 
-| Operation            | JavaScript                                                                            | Python                                                                                    |
-| -------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| is array/sequence    | `Array.isArray(expression)`                                                           | `hasattr(type(obj), '\_\_iter\_\_')`                                                      |
-| add to end           | `arr.push(v1, v2, ...);`                                                              | `seq.append(v)` and<br>`seq.extend(iterable)` to add more than one element                |
-| remove from end      | `const value = arr.pop();`                                                            | `seq.pop()`                                                                               |
-| add to start         | `arr.unshift(value);`                                                                 | `seq.insert(0, value)`                                                                    |
-| remove from start    | `const value = arr.shift();`                                                          | `del seq[0]`                                                                              |
-| insert               | `arr.splice(index, numberToRemove, v1, v2, ...)`                                      | `seq.insert(index, value)`                                                                |
-| remove item at index | `arr.splice(index, 1)`                                                                | `del seq[index]` - not supported for tuples                                               |
-| remove value         | `arr.splice(arr.findIndex(value), 1)`                                                 | `seq.remove(value)` - error if not found                                                  |
-| remove all           | `arr = [];`                                                                           | `seq.clear()`                                                                             |
-| length               | `arr.length`                                                                          | `len(seq)`                                                                                |
-| lookup               | `const value = arr[index];`                                                           | `value = seq[index]`                                                                      |
-| subset               | `arr.slice(start, end)`<br>can omit end<br>can use negative indexes to count from end | `seq[start:end]`<br>can omit start and/or end; can use negative indexes to count from end |
-| concatenate          | `const newArr = arr1.concat(arr2, arr3, ...);`                                        | `newSeq = seq1 + seq2`                                                                    |
-| copy (shallow)       | `[...arr]` or `arr.slice()`                                                           | `list.copy()` - not supported for tuples                                                  |
-| find                 | `const value = arr.find(predicate);`                                                  | `next(filter(predicate, iterable))`                                                       |
-| find index           | `const index = arr.findIndex(predicate);`                                             | `index = seq.index(value, start?, end?)` - see note below this table                      |
-| for each             | `arr.forEach(value => { ... });`                                                      | `for item in seq:`                                                                        |
-| includes             | `arr.includes(value)` returns boolean                                                 | `value in seq`                                                                            |
-| not includes         | `!arr.includes(value)` returns boolean                                                | `value not in seq`                                                                        |
-| index of             | `const index = arr.indexOf(value[, fromIndex])`                                       | `seq.index(value[, start[, end]])`                                                        |
-| last index of        | `const index = arr.lastIndexOf(value[, fromIndex])`                                   | not builtin; have to reverse list                                                         | TODO |
-| count occurrences    | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                              | `seq.count(value)`                                                                        |
-| join                 | `arr.join(delimiter)` returns string                                                  | `delimiter.join(iterable)`                                                                |
-| map                  | `const newArr = arr.map(value => newValue);`                                          | `iterator = map(function, iterable)`                                                      |
-| filter               | `const newArr = arr.filter(predicate);`                                               | `iterator = filter(predicate, iterable)`                                                  |
-| reduce               | `const value = arr.reduce((acc, value) => { ... });`                                  | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`   |
-| any/some             | `arr.some(predicate)` returns boolean                                                 | `any(map(predicate, iterable))`                                                           |
-| all/every            | `arr.every(predicate)` returns boolean                                                | `all(map(predicate, iterable))`                                                           |
-| sort                 | `arr.sort(comparator);`                                                               | `list.sort(key=fn, reverse?)` where `fn` returns a value for the key                      |
-| reverse              | `arr.reverse()`                                                                       | `list.reverse()` - not supported for tuples                                               |
-| change               | `arr.splice(start, delCount, v1, v2, ...);`                                           | combine `del` and `insert` above                                                          |
+All of these types can be nested within each other.
+For example, the elements of a list can be tuples
+and the elements of a tuple can be ranges.
+One exception is the elements of a range can only be integers.
+
+| Operation                   | JavaScript                                                                            | Python                                                                                                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| is array/sequence           | `Array.isArray(expression)`                                                           | `hasattr(type(obj), '\_\_iter\_\_')`<br>`isinstance(v, dict)`<br>`isinstance(v, list)`<br>`isinstance(v, range)`<br>`isinstance(v, set)`<br>`isinstance(v, tuple)` |
+| add to end                  | `arr.push(v1, v2, ...);`                                                              | `seq.append(v)` and<br>`seq.extend(iterable)` to add more than one element                                                                                         |
+| remove from end             | `const value = arr.pop();`                                                            | `seq.pop()`                                                                                                                                                        |
+| add to start                | `arr.unshift(value);`                                                                 | `seq.insert(0, value)`                                                                                                                                             |
+| remove from start           | `const value = arr.shift();`                                                          | `del seq[0]`                                                                                                                                                       |
+| insert                      | `arr.splice(index, numberToRemove, v1, v2, ...)`                                      | `seq.insert(index, value)`                                                                                                                                         |
+| remove item at index        | `arr.splice(index, 1)`                                                                | `del seq[index]` - not supported for tuples                                                                                                                        |
+| remove items at index range | `arr.splice(start, count)`                                                            | `del seq[start:end+1]` - not supported for tuples                                                                                                                  |
+| remove value                | `arr.splice(arr.findIndex(value), 1)`                                                 | `seq.remove(value)` - error if not found                                                                                                                           |
+| remove all                  | `arr = [];`                                                                           | `seq.clear()`                                                                                                                                                      |
+| length                      | `arr.length`                                                                          | `len(seq)`                                                                                                                                                         |
+| lookup                      | `const value = arr[index];`                                                           | `value = seq[index]`                                                                                                                                               |
+| subset                      | `arr.slice(start, end)`<br>can omit end<br>can use negative indexes to count from end | `seq[start:end]`<br>can omit start and/or end; can use negative indexes to count from end                                                                          |
+| concatenate                 | `const newArr = arr1.concat(arr2, arr3, ...);`                                        | `newSeq = seq1 + seq2`                                                                                                                                             |
+| copy (shallow)              | `[...arr]` or `arr.slice()`                                                           | `list.copy()` - not supported for tuples                                                                                                                           |
+| find                        | `const value = arr.find(predicate);`                                                  | `next(filter(predicate, iterable))`                                                                                                                                |
+| find index                  | `const index = arr.findIndex(predicate);`                                             | `index = seq.index(value, start?, end?)` - see note below this table                                                                                               |
+| for each                    | `arr.forEach(value => { ... });`                                                      | `for item in seq:`                                                                                                                                                 |
+| includes                    | `arr.includes(value)` returns boolean                                                 | `value in seq`                                                                                                                                                     |
+| not includes                | `!arr.includes(value)` returns boolean                                                | `value not in seq`                                                                                                                                                 |
+| index of                    | `const index = arr.indexOf(value[, fromIndex])`                                       | `seq.index(value[, start[, end]])`                                                                                                                                 |
+| last index of               | `const index = arr.lastIndexOf(value[, fromIndex])`                                   | not builtin; have to reverse list                                                                                                                                  | TODO |
+| count occurrences           | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                              | `seq.count(value)`                                                                                                                                                 |
+| join                        | `arr.join(delimiter)` returns string                                                  | `delimiter.join(iterable)`                                                                                                                                         |
+| map                         | `const newArr = arr.map(value => newValue);`                                          | `iterator = map(function, iterable)`                                                                                                                               |
+| filter                      | `const newArr = arr.filter(predicate);`                                               | `iterator = filter(predicate, iterable)`                                                                                                                           |
+| reduce                      | `const value = arr.reduce((acc, value) => { ... });`                                  | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                                                            |
+| any/some                    | `arr.some(predicate)` returns boolean                                                 | `any(map(predicate, iterable))`                                                                                                                                    |
+| all/every                   | `arr.every(predicate)` returns boolean                                                | `all(map(predicate, iterable))`                                                                                                                                    |
+| sort                        | `arr.sort(comparator);`                                                               | `list.sort(key=fn, reverse?)` where `fn` returns a value for the key                                                                                               |
+| reverse                     | `arr.reverse()`                                                                       | `list.reverse()` - not supported for tuples                                                                                                                        |
+| change                      | `arr.splice(start, delCount, v1, v2, ...);`                                           | combine `del` and `insert` above                                                                                                                                   |
 
 Python doesn't have a simple, builtin way to find the first item in a list
 that matches some criteria. This naive approach is probably the most efficient.
