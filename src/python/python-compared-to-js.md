@@ -590,32 +590,45 @@ myRange = range(start, end, step)
 | Operation         | JavaScript                                                                            | Python                                                                                    |
 | ----------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | is array/sequence | `Array.isArray(expression)`                                                           | `hasattr(type(obj), '\_\_iter\_\_')`                                                      |
-| append            | `arr.push(v1, v2, ...)`                                                               | `seq.append(v)` and<br>`seq.extend(iterable)` to add more than one element                |
+| add to end        | `arr.push(v1, v2, ...);`                                                              | `seq.append(v)` and<br>`seq.extend(iterable)` to add more than one element                |
+| remove from end   | `const value = arr.pop();`                                                            | `seq.pop()`                                                                               |
+| add to start      | `arr.unshift(value);`                                                                 | `seq.insert(0, value)`                                                                    |
+| remove from start | `const value = arr.shift();`                                                          | `del seq[0]`                                                                              |
+| insert            | `arr.splice(index, numberToRemove, v1, v2, ...)`                                      | `seq.insert(index, value)`                                                                |
+| remove value      | `arr.splice(arr.findIndex(value), 1)`                                                 | `seq.remove(value)` - error if not found                                                  |
+| remove all        | `arr = [];`                                                                           | `seq.clear()`                                                                             |
 | length            | `arr.length`                                                                          | `len(seq)`                                                                                |
 | lookup            | `const value = arr[index];`                                                           | `value = seq[index]`                                                                      |
 | subset            | `const newArr = arr.slice(startIndex[, endIndex]);`                                   | `newSeq = seq[startIndex:endIndex]`                                                       |
 | concatenate       | `const newArr = arr1.concat(arr2, arr3, ...);`                                        | `newSeq = seq1 + seq2`                                                                    |
 | find              | `const value = arr.find(predicate);`                                                  | `next(filter(predicate, iterable))`                                                       |
-| find index        | `const index = arr.findIndex(predicate);`                                             | see note below this table                                                                 |
+| find index        | `const index = arr.findIndex(predicate);`                                             | `index = seq.index(value, start?, end?)` - see note below this table                      |
 | for each          | `arr.forEach(value => { ... });`                                                      | `for item in seq:`                                                                        |
 | includes          | `arr.includes(value)` returns boolean                                                 | `value in seq`                                                                            |
 | not includes      | `!arr.includes(value)` returns boolean                                                | `value not in seq`                                                                        |
 | index of          | `const index = arr.indexOf(value[, fromIndex])`                                       | `seq.index(value[, start[, end]])`                                                        |
-| last index of     | `const index = arr.lastIndexOf(value[, fromIndex])`                                   | not builtin; have to reverse list                                                         |
+| last index of     | `const index = arr.lastIndexOf(value[, fromIndex])`                                   | not builtin; have to reverse list                                                         | TODO |
+| count occurrences |                                                                                       | `seq.count(value)`                                                                        |
 | join              | `arr.join(delimiter)` returns string                                                  | `delimiter.join(iterable)`                                                                |
 | map               | `const newArr = arr.map(value => newValue);`                                          | `iterator = map(function, iterable)`                                                      |
 | filter            | `const newArr = arr.filter(predicate);`                                               | `iterator = filter(predicate, iterable)`                                                  |
 | reduce            | `const value = arr.reduce((acc, value) => { ... });`                                  | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`   |
 | any/some          | `arr.some(predicate)` returns boolean                                                 | `any(map(predicate, iterable))`                                                           |
 | all/every         | `arr.every(predicate)` returns boolean                                                | `all(map(predicate, iterable))`                                                           |
-| add to end        | `arr.push(value);`                                                                    | `seq.append(value)`                                                                       |
-| remove from end   | `const value = arr.pop();`                                                            | `seq.pop()`                                                                               |
-| add to start      | `arr.unshift(value);`                                                                 | `seq.insert(0, item)`                                                                     |
-| remove from start | `const value = arr.shift();`                                                          | `del seq[0]`                                                                              |
-| remove all        | `arr = [];`                                                                           | `seq.clear()`                                                                             |
 | sort              | `arr.sort(comparator);`                                                               | `list.sort(key=fn)` where `fn` returns a value for the key                                |
 | change            | `arr.splice(start, delCount, v1, v2, ...);`                                           | combine `del` and `insert` above                                                          |
 | slice             | `arr.slice(start, end)`<br>can omit end<br>can use negative indexes to count from end | `seq[start:end]`<br>can omit start and/or end; can use negative indexes to count from end |
+
+Python doesn't have a simple, builtin way to find the first item in a list
+that matches some criteria. This naive approach is probably the most efficient.
+
+```python
+def index(aList, predicate):
+  for index in range(0, len(aList) - 1):
+      if predicate(aList[index]):
+          return index
+  return None
+```
 
 JavaScript generators can be used to implement lazy evaluations
 where code is not executed until results are needed.
@@ -636,17 +649,6 @@ To join non-string values, use `map`. For example:
 
 ```python
 '-'.join(map(str, numberList))
-```
-
-Python doesn't have a simple, builtin way to find the first item in a list
-that matches some criteria. This naive approach is probably the most efficient.
-
-```python
-def index(aList, predicate):
-  for index in range(0, len(aList) - 1):
-      if predicate(aList[index]):
-          return index
-  return None
 ```
 
 ## Sorting
