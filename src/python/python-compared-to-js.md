@@ -272,6 +272,15 @@ For guidelines on the content of docstrings, see
   "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
   "PEP-8 documentation strings" %}.
 
+In Python:
+
+- Function parameters with a default value must follows those without one.
+- Function parameters that do not begin with `*` or `**` are positional.
+- Function parameters that have a default value can be
+  specified with a positional or named argument.
+- The `partial` function (shown in the table below)
+  can only be used on functions, not methods of a class.
+
 | Operation                                                           | JavaScript                                                   | Python                                                                                                           |
 | ------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | define named                                                        | `function fnName(params) { definition }`                     | `def fnName(params):`                                                                                            |
@@ -293,14 +302,6 @@ For guidelines on the content of docstrings, see
 | create partial                                                      | `const newFn = fnName.bind(thisArg, arg1, arg2, ...)`        | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)`                                        |
 | call                                                                | `fnName.call(thisArg, arg1, arg2, ...)`                      | `method(obj, arg1, arg2, ...)`                                                                                   |
 | apply                                                               | `fnName.apply(thisArg, argArray)`                            | `method(obj, *argList)`                                                                                          |
-
-In Python:
-
-- Function parameters with a default value must follows those without one.
-- Function parameters that do not begin with `*` or `**` are positional.
-- Function parameters that have a default value can be
-  specified with a positional or named argument.
-- The `partial` function can only be used on functions, not methods of a class.
 
 ## Classes
 
