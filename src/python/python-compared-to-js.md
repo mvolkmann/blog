@@ -90,6 +90,12 @@ To run a Python script:
 
 In both cases, command-line arguments can be passed to the script.
 
+To make a Python source file directly executable in UNIX systems:
+
+- Add this as the first line: `#!/usr/bin/env python3`
+- Make the file executable by entering `chmod a+x {file-name}.py`
+- To run it from a terminal, enter `./{file-name}.py`
+
 ## Getting Help
 
 In Python, enter the `python` command to start the REPL and enter `help`.
