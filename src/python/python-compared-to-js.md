@@ -54,7 +54,7 @@ pros:
 
 cons:
 
-- poor performance
+- poor performance -
   For one example of benchmark results, see {% aTargetBlank
   "https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html",
   "The Computer Language Benchmark Game" %}).
@@ -773,6 +773,8 @@ console.log(people);
 Here is how this can be done in Python:
 
 ```python
+from operator import itemgetter
+
 people = [
   {'firstName': 'Tami', 'lastName': 'Volkmann'},
   {'firstName': 'Mark', 'lastName': 'Volkmann'},
@@ -780,10 +782,7 @@ people = [
   {'firstName': 'Guido', 'lastName': 'van Rossum'}
 ]
 
-def personKey(person):
-  return person.get('lastName').lower() + person.get('firstName').lower()
-
-people.sort(key=personKey)
+people.sort(key=itemgetter('lastName', 'firstName'))
 print(people)
 ```
 

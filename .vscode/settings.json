@@ -97,6 +97,7 @@
     "groupby",
     "hasattr",
     "isinstance",
+    "itemgetter",
     "jstl",
     "kanban",
     "katex",
