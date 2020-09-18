@@ -125,7 +125,7 @@ For example, "mdn regexp".
 Python uses a naming convention (all uppercase) to identify constants,
 but they can still be modified.
 
-## Types
+## Builtin Types
 
 | Type                 | JavaScript                                           | Python                                             |
 | -------------------- | ---------------------------------------------------- | -------------------------------------------------- |
@@ -203,7 +203,7 @@ These are subdirectories whose names are the package name
 and contain a `__init__.py` file.
 These files can be empty or contain initialization code for the package.
 Add `.py` files in the package directories that define modules.
-Then in `.py` files in anscestor directories,
+Then in `.py` files in ancestor directories,
 use `from package-name import module-name`.
 To import specific things from modules in subdirectories,
 use `from package-name.module-name import name1, name2`
@@ -242,7 +242,7 @@ Python variable assignments cannot appear inside expressions.
 | multiple assignment  | const [a, b] = [1, 2]                     | a, b = 1, 2      |
 | spread of array/list | `const [v1, v2, ...] = array;`            | `v1, v2 = array` |
 | spread of object     | `const {k1, k2, ...} = object;`           | not supported    |
-| undeclare            | `name = undefined` - just removes value   | `del name`       |
+| un-declare           | `name = undefined` - just removes value   | `del name`       |
 | addition             | `name += expr`                            | same             |
 | subtraction          | `name -= expr`                            | same             |
 | multiplication       | `name \*= expr`                           | same             |
@@ -272,7 +272,7 @@ Python variable assignments cannot appear inside expressions.
 | greater than or equal | `>=`                                    | same     |
 
 Python comparisons can be chained, but JavaScript comparison cannot.
-For example, to determine whether thevalue of a variable
+For example, to determine whether the value of a variable
 is between 10 and 20 inclusive:
 
 - in JavaScript, `10 <= n && n <= 20`
@@ -376,7 +376,7 @@ In Python:
 | use named/keyword arguments                                         | `function fnName({p1, p2}) {...}` - pass an object           | same as above<br>any parameter with a default value can be specified by name<br>call with `fnName(p1=v2, p2=v2)` |
 | gather arguments as key/value pairs                                 | not supported                                                | `def fnName(**args):`<br>call with `fnName(p1=v2, p2=v2)`<br>or `fnName(**dict)`                                 |
 | return a value                                                      | `return value;`                                              | `return value`                                                                                                   |
-| default return value when no `return`                               | `undefined`                                                  | `None`                                                                                                           | value` |
+| default return value when no `return`                               | `undefined`                                                  | `None`                                                                                                           |
 | call                                                                | `fnName(args)`                                               | same                                                                                                             |
 | get required parameter count                                        | `fnName.length`                                              | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`                                           |
 | passing fewer arguments than positional parameters                  | remaining are assigned `undefined`                           | results in an error                                                                                              |
