@@ -1165,6 +1165,7 @@ autopep8 and pylint.
 
 ## More Python Resources
 
+- {% aTargetBlank "https://www.python.org/", "Python home page" %}
 - {% aTargetBlank "https://docs.python.org/3/tutorial/", "Python Tutorial" %}
 - {% aTargetBlank "https://docs.python.org/3/library/", "Python Standard Library" %}
 - {% aTargetBlank "https://docs.python.org/3/reference/", "Python Language Reference" %}
