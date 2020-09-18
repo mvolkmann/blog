@@ -573,15 +573,16 @@ asyncio.run(main())
 
 ## Modules
 
-| Topic          | JavaScript                                 | Python                               |
-| -------------- | ------------------------------------------ | ------------------------------------ |
-| defining       | content of file                            | content of file                      |
-| export         | `export name = value;`                     | everything is automatically exported |
-| default export | `export default name = value;`             | not supported                        |
-| import default | `import name from 'path';`                 | not supported                        |
-| import named   | `import {name1, name2} from 'path';`       | from moduleName import name1, name2  |
-| import both    | `import name, {name1, name2} from 'path';` | n/a                                  |
-| where to find  | npm                                        | pip                                  |
+| Topic           | JavaScript                                 | Python                               |
+| --------------- | ------------------------------------------ | ------------------------------------ |
+| defining        | content of file                            | content of file                      |
+| export          | `export name = value;`                     | everything is automatically exported |
+| default export  | `export default name = value;`             | not supported                        |
+| import default  | `import name from 'path';`                 | not supported                        |
+| import named    | `import {name1, name2} from 'path';`       | from moduleName import name1, name2  |
+| import both     | `import name, {name1, name2} from 'path';` | n/a                                  |
+| where to find   | https://www.npmjs.com/                     | https://pypi.org/                    |
+| tool to install | npm                                        | pip                                  |
 
 ## Boolean Operations
 
