@@ -5,19 +5,19 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-This compares the most commonly used features of Python and JavaScript.
-Lesser used features are omitted.
+This document provides a comparison of the most commonly used features
+of Python and JavaScript. Lesser used features are omitted.
 
 ## Overview
 
-| Topic                   | Python                                                                                                                                 | JavaScript                                                                                                |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| standard                | {% aTargetBlank "https://docs.python.org/3/", "Python 3 documentation" %}                                                              | {% aTargetBlank "https://www.ecma-international.org/publications/standards/Ecma-262.htm", "ECMAScript" %} |
-| evaluation              | dynamic                                                                                                                                | dynamic                                                                                                   |
-| performance             | slow                                                                                                                                   | fast                                                                                                      |
-| style guide             | {% aTargetBlank "https://www.python.org/dev/peps/pep-0008/", "PEP 8" %}, {% aTargetBlank "https://pypi.org/project/black/", "Black" %} | {% aTargetBlank "https://prettier.io/", "Prettier" %}                                                     |
-| most common indentation | 4 spaces                                                                                                                               | 2 spaces                                                                                                  |
-| type coercion           | must be explicit                                                                                                                       | implicit                                                                                                  |
+| Topic                   | JavaScript                                                                                                | Python                                                                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| standard                | {% aTargetBlank "https://www.ecma-international.org/publications/standards/Ecma-262.htm", "ECMAScript" %} | {% aTargetBlank "https://docs.python.org/3/", "Python 3 documentation" %}                                                              |
+| evaluation              | dynamic                                                                                                   | dynamic                                                                                                                                |
+| performance             | fast                                                                                                      | slow                                                                                                                                   |
+| style guide             | {% aTargetBlank "https://prettier.io/", "Prettier" %}                                                     | {% aTargetBlank "https://www.python.org/dev/peps/pep-0008/", "PEP 8" %}, {% aTargetBlank "https://pypi.org/project/black/", "Black" %} |
+| most common indentation | 2 spaces                                                                                                  | 4 spaces                                                                                                                               |
+| type coercion           | implicit                                                                                                  | explicit except between number types                                                                                                   |
 
 Note: PEP stands for Python Enhancement Proposal.
 
@@ -27,10 +27,10 @@ Note: PEP stands for Python Enhancement Proposal.
 
 pros:
 
-- performance
 - ability to run in web browsers (clients) and from command-line (servers)
 - great support for asynchronous code
-- more compact syntax for functional programming (ex. functools vs. `reduce`)
+- performance
+- compact syntax for functional programming (ex. functools vs. `reduce`)
 - can use TypeScript, a superset of JavaScript, to add type checking
 
 cons:
@@ -50,16 +50,17 @@ pros:
   - ex. `and` vs. `&&`.
   - ex. `print` vs. `console.log`
 - can add functions implemented in C/C++ or any language callable from C
+- can use type hints and tools like mypy to add type checking
 
 cons:
 
 - poor performance
-  For one example of benchmark results, see
-  {% aTargetBlank
+  For one example of benchmark results, see {% aTargetBlank
   "https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html",
   "The Computer Language Benchmark Game" %}).
   Python does well with regular expressions.
-- magic methods (a.k.a. "dunder" for double underscore) such as `__init__`
+- magic methods such as `__init__` that use
+  "dunder" names (for double underscore)
   (see list in "Python Magic Methods" section)
 - operator overloading (supported by magic methods)
 - lots of documentation and examples are still for V2 instead of V3
@@ -67,9 +68,9 @@ cons:
 - no built-in support for asynchronous code
   until the asyncio module was added in Python 3.4
   (some features require Python 3.7+)
-- ternary operator is not supported; for example:
 - lambda functions are more verbose than JavaScript arrow functions
   (lambda vs. ->)
+- ternary operator is not supported; for example:
 
   ```python
   name = len(sys.argv) > 1 ? sys.argv[1] : 'World' # not supported
