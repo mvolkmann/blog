@@ -19,6 +19,8 @@ Lesser used features are omitted.
 | most common indentation | 4 spaces                                                                                                                               | 2 spaces                                                                                                  |
 | type coercion           | must be explicit                                                                                                                       | implicit                                                                                                  |
 
+Note: PEP stands for Python Enhancement Proposal.
+
 ## Pros and Cons
 
 ### JavaScript
