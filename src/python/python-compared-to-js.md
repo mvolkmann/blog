@@ -66,6 +66,8 @@ cons:
   until the asyncio module was added in Python 3.4
   (some features require Python 3.7+)
 - ternary operator is not supported; for example:
+- lambda functions are more verbose than JavaScript arrow functions
+  (lambda vs. ->)
 
   ```python
   name = len(sys.argv) > 1 ? sys.argv[1] : 'World' # not supported
@@ -716,12 +718,8 @@ def index(aList, predicate):
   return None
 ```
 
-JavaScript generators can be used to implement lazy evaluations
-where code is not executed until results are needed.
-See examples in the "List Comprehensions" section.
-
-Python also supports generator functions and the `yield` keyword.
-The Python `filter` and `map` functions are lazy.
+The Python `filter` and `map` functions are lazy
+which means they are not executed until their results are needed.
 To get values from them, pass the result to a function like `list` or `set`.
 For example:
 
@@ -736,6 +734,10 @@ To join non-string values, use `map`. For example:
 ```python
 '-'.join(map(str, numberList))
 ```
+
+JavaScript can implement lazy functions using generator functions
+(see the "List Comprehension" section),
+but no builtin generator functions are provided.
 
 ## Sorting
 
@@ -811,6 +813,28 @@ function* filter(predicate, obj) {
 
 const multipleOf3 = filter(n => n % 3 === 0, range(10));
 console.log([...multipleOf3]); // [ 0, 3, 6, 9 ]
+```
+
+Python also supports generator functions and the `yield` keyword.
+The JavaScript example above could be implemented as follows in Python:
+
+```python
+def map(fn, iter):
+    for element in iter:
+        yield fn(element)
+
+squared = map(lambda n: n**2, range(5))
+print(list(squared)); # [ 0, 1, 4, 9, 16 ]
+print([n**2 for n in range(5)]) # same using list comprehension
+
+def filter(predicate, seq):
+    for element in seq:
+        if predicate(element):
+            yield element
+
+multipleOf3 = filter(lambda n: n % 3 == 0, range(10))
+print(list(multipleOf3)); # [ 0, 3, 6, 9 ]
+print([n for n in range(10) if n % 3 == 0]) # same using list comprehesion
 ```
 
 ## Sets
