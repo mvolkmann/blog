@@ -1024,6 +1024,39 @@ In Python, you must `import json`.
 There are many builtin Python exception classes.
 The base class of all of them is Error.
 
+## Decorators
+
+Python supports decorators which are annotations placed before
+functions and classes to alter their behavior.
+The TC39 committee that controls the ECMAScript standard for JavaScript
+has been discussing adding decorators for many years,
+but they have not yet been added.
+
+Here is a simple example of a decorator that logs the return value
+of every invocation value of a function:
+
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+def log_return(fn):
+    def wrapper(*args):
+        result = fn(*args)
+        logging.debug(f'{fn.__name__} was passed {str(args)} and returned {result}')
+        return result
+
+    return wrapper
+
+@log_return
+def add(n1, n2):
+    return n1 + n2
+
+add(1, 2)
+add(2, 3)
+```
+
+TODO: Builtin decorators include ?
+
 ## Check for running as main
 
 In Python, use `if __name__ == '__main__':`.
@@ -1177,3 +1210,4 @@ autopep8 and pylint.
 - {% aTargetBlank "https://docs.python.org/3/reference/", "Python Language Reference" %}
 - {% aTargetBlank "https://docs.python.org/3/howto/", "Python HOWTOs" %}
 - {% aTargetBlank "https://docs.python.org/3/faq/", "Python FAQ" %}
+- {% aTargetBlank "https://realpython.com/start-here/", "Real Python" %}
