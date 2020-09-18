@@ -97,11 +97,12 @@ To make a Python source file directly executable in UNIX systems:
 
 - Add this as the first line: `#!/usr/bin/env python3`
 - Make the file executable by entering `chmod a+x {file-name}.py`
-- To run it from a terminal, enter `./{file-name}.py`
+- To run it from a terminal, enter `./{name}.py`
 
 ## Getting Help
 
-In Python, enter the `python` command to start the REPL and enter `help`.
+For Python, see the list of resources at the end.
+You can also enter the `python` command to start the REPL and enter `help`.
 To get help on a particular library, import it and pass the name to help.
 For example:
 
@@ -116,45 +117,47 @@ For example, "mdn regexp".
 
 ## Comments
 
-| Type        | JavaScript | Python |
-| ----------- | ---------- | ------ |
-| single-line | //         | #      |
-| multi-line  | /\* \*/    | none   |
+| Type        | JavaScript  | Python |
+| ----------- | ----------- | ------ |
+| single-line | `//`        | `#`    |
+| multi-line  | `/* ... */` | none   |
 
 ## Naming Conventions
 
-| Kind                        | JavaScript   | Python         |
-| --------------------------- | ------------ | -------------- |
-| constant                    | UNDER_SCORES | same           |
-| variable                    | camelCase    | under_scores   |
-| function                    | camelCase    | under_scores   |
-| class                       | CamelCase    | same           |
-| method                      | camelCase    | under_scores   |
-| public instance properties  | camelCase    | under_scores   |
-| private instance properties | camelCase    | \_under_scores |
+| Kind                        | JavaScript    | Python         |
+| --------------------------- | ------------- | -------------- |
+| constant                    | UNDER_SCORES  | same           |
+| variable                    | camelCase     | under_scores   |
+| function                    | camelCase     | under_scores   |
+| class                       | CamelCase     | same           |
+| method                      | camelCase     | under_scores   |
+| public instance properties  | camelCase     | under_scores   |
+| private instance properties | no convention | \_under_scores |
 
-Python uses a naming convention (all uppercase) to identify constants,
-but they can still be modified.
+While Python uses a naming convention (all uppercase) to identify constants,
+they can still be modified.
+And the naming convention for private instance variables
+(start with an underscore), doesn't prevent access from outside the class.
 
 ## Builtin Types
 
-| Type                 | JavaScript                                           | Python                                             |
-| -------------------- | ---------------------------------------------------- | -------------------------------------------------- |
-| boolean              | `true`, `false`                                      | `True`, `False`                                    |
-| number               | default is double precision float; also `BigInt`     | `int`, `float`, `complex`                          |
-| character            | use string type                                      | use string type                                    |
-| string               | `'text'` or `"text"`                                 | same                                               |
-| multi-line string    | `` `text` ``                                         | `"""text"""` or `'''text'''`                       |
-| string interpolation | `` `prefix${expr}suffix` ``                          | `f'prefix{expr}suffix'`                            |
-| array                | `Array`, `[v1, v2, ...]`                             | see list, tuple, and range                         |
-| list                 | see `Array`                                          | `[v1, v2, ...]`; mutable and homogeneous           |
-| tuple                | no equivalent                                        | `(v1, v2, ...)`; immutable and heterogeneous       |
-| range                | no equivalent                                        | range range(start, stop[, step])                   |
-| key/value pairs      | Object in the form `{k1: v1, k2: v2, ...}` and `Map` | dictionary in the form `{'k1': v1, 'k2': v2, ...}` |
-| set                  | `new Set()`                                          | `{v1, v2, ...}` or `set(v1, v2, ...)`              |
-| function             | see "Function" section below                         | see "Function" section below                       |
-| class                | `class Name { ... }`                                 | `class Name:`                                      |
-| no value             | `undefined` or `null`                                | `None`                                             |
+| Type                 | JavaScript                                           | Python                                                   |
+| -------------------- | ---------------------------------------------------- | -------------------------------------------------------- |
+| boolean              | `true`, `false`                                      | `True`, `False`                                          |
+| number               | default is double precision float; also `BigInt`     | `int`, `float`, `complex`                                |
+| character            | use string type                                      | use string type                                          |
+| string               | `'text'` or `"text"`                                 | same                                                     |
+| multi-line string    | `` `text` ``                                         | `"""text"""` or `'''text'''`                             |
+| string interpolation | `` `prefix${expr}suffix` ``                          | `f'prefix{expr}suffix'`                                  |
+| array                | `Array` class, literal syntax `[v1, v2, ...]`        | see list, tuple, and range                               |
+| list                 | see `Array`                                          | `[v1, v2, ...]`<br>mutable and typically homogeneous     |
+| tuple                | no equivalent                                        | `(v1, v2, ...)`<br>immutable and typically heterogeneous |
+| range                | no equivalent                                        | `range(start, stop[, step])`                             |
+| key/value pairs      | Object in the form `{k1: v1, k2: v2, ...}` and `Map` | dictionary literal syntax `{'k1': v1, 'k2': v2, ...}`    |
+| set                  | `new Set()`                                          | `{v1, v2, ...}` or `set(v1, v2, ...)`                    |
+| function             | see "Function" section below                         | see "Function" section below                             |
+| class                | `class Name { ... }`                                 | `class Name:`                                            |
+| no value             | `undefined` or `null`                                | `None`                                                   |
 
 Everything is an object in Python,
 even primitive values like boolean, number, and string.
