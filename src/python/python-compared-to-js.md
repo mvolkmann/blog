@@ -19,11 +19,6 @@ Lesser used features are omitted.
 | most common indentation | 4 spaces                                                                                                                               | 2 spaces                                                                                                  |
 | type coercion           | must be explicit                                                                                                                       | implicit                                                                                                  |
 
-Once source of performance benchmarks can be found at
-{% aTargetBlank
-"https://benchmarksgame-team.pages.debian.net/benchmarksgame/which-programs-are-fastest.html",
-"The Computer Language Benchmarks Game" %}.
-
 ## Pros and Cons
 
 ### JavaScript
@@ -57,6 +52,11 @@ pros:
 cons:
 
 - poor performance
+  For one example of benchmark results, see
+  {% aTargetBlank
+  "https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html",
+  "The Computer Language Benchmark Game" %}).
+  Python does well with regular expressions.
 - magic methods (a.k.a. "dunder" for double underscore) such as `__init__`
   (see list in "Python Magic Methods" section)
 - operator overloading (supported by magic methods)
