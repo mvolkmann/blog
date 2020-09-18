@@ -44,9 +44,9 @@ pros:
 - quantity and maturity of libraries for machine learning
 - multiple number types
 - some syntax is easier for beginners
+  - no curly braces or semicolons, and fewer parentheses
   - ex. `and` vs. `&&`.
   - ex. `print` vs. `console.log`
-  - fewer parentheses and no curly braces or semicolons
 - can add functions implemented in C/C++ or any language callable from C
 
 cons:
@@ -1042,7 +1042,8 @@ logging.basicConfig(level=logging.DEBUG)
 def log_return(fn):
     def wrapper(*args):
         result = fn(*args)
-        logging.debug(f'{fn.__name__} was passed {str(args)} and returned {result}')
+        logging.debug(
+            f'{fn.__name__} was passed {str(args)} and returned {result}')
         return result
 
     return wrapper
@@ -1055,7 +1056,20 @@ add(1, 2)
 add(2, 3)
 ```
 
-TODO: Builtin decorators include ?
+The builtin Python decorators include:
+
+- `@classmethod` - transforms a method into a class method
+  which receives a class object as its first parameter
+  and can use it to access class state
+- `@property` - used to define getter, setter, and deleter methods
+  for a class instance property
+- `@staticmethod` - transforms a method into a static method
+  which does not receive a class object as its first parameter
+  and cannot access class state; useful for utility functions
+
+For more information, see {% aTargetBlank
+"https://realpython.com/primer-on-python-decorators/#decorating-classes",
+"Real Python Primer on Python Decorators" %}.
 
 ## Check for running as main
 
