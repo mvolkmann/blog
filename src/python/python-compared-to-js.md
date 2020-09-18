@@ -73,6 +73,21 @@ cons:
   name = sys.argv[1] if len(sys.argv) > 1 else 'World' # works
   ```
 
+## Running Scripts
+
+To run a JavaScript script outside a web browser:
+
+- install {% aTargetBlank "https://nodejs.org/", "Node.js" %}.
+- enter `node {name}.js`
+
+To run a Python script:
+
+- install the Python interpreter from
+  {% aTargetBlank "https://www.python.org/downloads/", "python.org" %}
+- enter `python {name}.py`
+
+In both cases, command-line arguments can be passed to the script.
+
 ## Getting Help
 
 In Python, enter the `python` command to start the REPL and enter `help`.
@@ -94,6 +109,21 @@ For example, "mdn regexp".
 | ----------- | ---------- | ------ |
 | single-line | //         | #      |
 | multi-line  | /\* \*/    | none   |
+
+## Naming Conventions
+
+| Kind                        | JavaScript   | Python         |
+| --------------------------- | ------------ | -------------- |
+| constant                    | UNDER_SCORES | same           |
+| variable                    | camelCase    | under_scores   |
+| function                    | camelCase    | under_scores   |
+| class                       | CamelCase    | same           |
+| method                      | camelCase    | under_scores   |
+| public instance properties  | camelCase    | under_scores   |
+| private instance properties | camelCase    | \_under_scores |
+
+Python uses a naming convention (all uppercase) to identify constants,
+but they can still be modified.
 
 ## Types
 
@@ -142,23 +172,50 @@ print(len(dog)) # 2
 ```
 
 JavaScript object keys must be strings.
-Python dict keys can e any immutable type.
+Python dict keys can be any immutable type.
 
-## Naming Conventions
+## Modules and Packages
 
-| Kind                        | JavaScript   | Python         |
-| --------------------------- | ------------ | -------------- |
-| constant                    | UNDER_SCORES | same           |
-| variable                    | camelCase    | under_scores   |
-| function                    | camelCase    | under_scores   |
-| class                       | CamelCase    | same           |
-| method                      | camelCase    | under_scores   |
-| public instance properties  | camelCase    | under_scores   |
-| private instance properties | camelCase    | \_under_scores |
+In both JavaScript and Python, modules are defined by a single source file.
+When a source file is executed as a script,
+it can import modules and those can import more modules.
 
-Python uses a naming convention (all uppercase) to identify constants,
-but they can still be modified.
-JavaScript and Python class names
+| Operation              | JavaScript                                                                                              | Python                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| import entire module   | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *` |
+| import specific values | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name as other`    |
+
+In Python each module is only imported once.
+If its code is modified, the script must be re-run to interpret the changes.
+
+Python searches for modules in this order:
+
+- built-in modules
+- directory relative to importing file
+- directories listed in the `PYTHONPATH` environment variable
+- installation-specific directories
+
+To see the directories that will be searched,
+`import sys` and `print(sys.path)`.
+
+In Python, packages are used to enable importing modules from subdirectories.
+These are subdirectories whose names are the package name
+and contain a `__init__.py` file.
+These files can be empty or contain initialization code for the package.
+Add `.py` files in the package directories that define modules.
+Then in `.py` files in anscestor directories,
+use `from package-name import module-name`.
+To import specific things from modules in subdirectories,
+use `from package-name.module-name import name1, name2`
+The directory structure can be as deep as you like
+with each subdirectory containing a `__init__.py` file.
+When there are nested packages, imports look like
+`from pkg1.pkg2 import module-name` or
+`from pkg1.pkg2.module-name import name1, name2`.
+
+For more information on Python packages, see the
+{% aTargetBlank "https://docs.python.org/3/tutorial/modules.html#packages",
+"Python Tutorial" %}.
 
 ## Printing
 
@@ -175,6 +232,7 @@ JavaScript variables should be declared
 using either the `const` or `let` keyword.
 Python variables are not declared and
 are created when a value is assigned to them.
+Python variable assignments cannot appear inside expressions.
 
 | Topic                | JavaScript                                | Python           |
 | -------------------- | ----------------------------------------- | ---------------- |
@@ -212,6 +270,13 @@ are created when a value is assigned to them.
 | less than or equal    | `<=`                                    | same     |
 | greater than          | `>`                                     | same     |
 | greater than or equal | `>=`                                    | same     |
+
+Python comparisons can be chained, but JavaScript comparison cannot.
+For example, to determine whether thevalue of a variable
+is between 10 and 20 inclusive:
+
+- in JavaScript, `10 <= n && n <= 20`
+- in Python, `10 <= n <= 20`
 
 ## Conditional Logic
 
@@ -594,41 +659,43 @@ For example, the elements of a list can be tuples
 and the elements of a tuple can be ranges.
 One exception is the elements of a range can only be integers.
 
-| Operation                   | JavaScript                                                                                 | Python                                                                                                                                                             |
-| --------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| is array/sequence           | `Array.isArray(expression)`                                                                | `hasattr(type(obj), '\_\_iter\_\_')`<br>`isinstance(v, dict)`<br>`isinstance(v, list)`<br>`isinstance(v, range)`<br>`isinstance(v, set)`<br>`isinstance(v, tuple)` |
-| add to end                  | `arr.push(v1, v2, ...);`                                                                   | `seq.append(v)` and<br>`seq.extend(iterable)` to add more than one element                                                                                         |
-| remove from end             | `const value = arr.pop();`                                                                 | `seq.pop()`                                                                                                                                                        |
-| add to start                | `arr.unshift(value);`                                                                      | `seq.insert(0, value)`                                                                                                                                             |
-| remove from start           | `const value = arr.shift();`                                                               | `del seq[0]`                                                                                                                                                       |
-| insert                      | `arr.splice(index, numberToRemove, v1, v2, ...)`                                           | `seq.insert(index, value)`                                                                                                                                         |
-| remove item at index        | `arr.splice(index, 1)`                                                                     | `del seq[index]` - not supported for tuples                                                                                                                        |
-| remove items at index range | `arr.splice(start, count)`                                                                 | `del seq[start:end+1]` - not supported for tuples                                                                                                                  |
-| remove value                | `arr.splice(arr.findIndex(value), 1)`                                                      | `seq.remove(value)` - error if not found                                                                                                                           |
-| remove all                  | `arr = [];`                                                                                | `seq.clear()`                                                                                                                                                      |
-| length                      | `arr.length`                                                                               | `len(seq)`                                                                                                                                                         |
-| lookup                      | `const value = arr[index];`                                                                | `value = seq[index]`                                                                                                                                               |
-| subset                      | `arr.slice(start, end)`<br>can omit end<br>can use negative indexes to count from end      | `seq[start:end]`<br>can omit start and/or end; can use negative indexes to count from end                                                                          |
-| concatenate                 | `const newArr = arr1.concat(arr2, arr3, ...);`                                             | `newSeq = seq1 + seq2`                                                                                                                                             |
-| copy (shallow)              | `[...arr]` or `arr.slice()`                                                                | `list.copy()` - not supported for tuples                                                                                                                           |
-| find                        | `const value = arr.find(predicate);`                                                       | `next(filter(predicate, iterable))`                                                                                                                                |
-| find index                  | `const index = arr.findIndex(predicate);`                                                  | `index = seq.index(value, start?, end?)` - see note below this table                                                                                               |
-| for each                    | `arr.forEach(value => { ... });`                                                           | `for item in seq:`                                                                                                                                                 |
-| includes                    | `arr.includes(value)` returns boolean                                                      | `value in seq`                                                                                                                                                     |
-| not includes                | `!arr.includes(value)` returns boolean                                                     | `value not in seq`                                                                                                                                                 |
-| index of                    | `const index = arr.indexOf(value[, fromIndex])`                                            | `seq.index(value[, start[, end]])`                                                                                                                                 |
-| last index of               | `const index = arr.lastIndexOf(value[, fromIndex])`                                        | not builtin; have to reverse list                                                                                                                                  | TODO |
-| count occurrences           | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                                   | `seq.count(value)`                                                                                                                                                 |
-| join                        | `arr.join(delimiter)` returns string                                                       | `delimiter.join(iterable)`                                                                                                                                         |
-| map                         | `const newArr = arr.map(value => newValue);`                                               | `iterator = map(function, iterable)`                                                                                                                               |
-| filter                      | `const newArr = arr.filter(predicate);`                                                    | `iterator = filter(predicate, iterable)`                                                                                                                           |
-| reduce                      | `const value = arr.reduce((acc, value) => { ... });`                                       | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                                                            |
-| any/some                    | `arr.some(predicate)` returns boolean                                                      | `any(map(predicate, iterable))`                                                                                                                                    |
-| all/every                   | `arr.every(predicate)` returns boolean                                                     | `all(map(predicate, iterable))`                                                                                                                                    |
-| sort                        | `arr.sort(comparator);`                                                                    | `list.sort(key=fn, reverse?)` where `fn` returns a value for the key                                                                                               |
-| reverse                     | `arr.reverse()`                                                                            | `list.reverse()` - not supported for tuples                                                                                                                        |
-| change                      | `arr.splice(start, delCount, v1, v2, ...);`                                                | combine `del` and `insert` above                                                                                                                                   |
-| destructure/unpack          | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of elements in array | `v1, v2, v3 = seq`<br># of variables on left must match # of elements in sequence                                                                                  |
+| Operation                    | JavaScript                                                                                 | Python                                                                                                                                                             |
+| ---------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| is array/sequence            | `Array.isArray(expression)`                                                                | `hasattr(type(obj), '\_\_iter\_\_')`<br>`isinstance(v, dict)`<br>`isinstance(v, list)`<br>`isinstance(v, range)`<br>`isinstance(v, set)`<br>`isinstance(v, tuple)` |
+| add to end                   | `arr.push(v1, v2, ...);`                                                                   | `seq.append(v)` and<br>`seq.extend(iterable)` to add more than one element                                                                                         |
+| remove from end              | `const value = arr.pop();`                                                                 | `seq.pop()`                                                                                                                                                        |
+| add to start                 | `arr.unshift(value);`                                                                      | `seq.insert(0, value)`                                                                                                                                             |
+| remove from start            | `const value = arr.shift();`                                                               | `del seq[0]`                                                                                                                                                       |
+| insert                       | `arr.splice(index, numberToRemove, v1, v2, ...)`                                           | `seq.insert(index, value)`                                                                                                                                         |
+| remove item at index         | `arr.splice(index, 1)`                                                                     | `del seq[index]` - not supported for tuples                                                                                                                        |
+| remove items at index range  | `arr.splice(start, count)`                                                                 | `del seq[start:end+1]` - not supported for tuples                                                                                                                  |
+| remove value                 | `arr.splice(arr.findIndex(value), 1)`                                                      | `seq.remove(value)` - error if not found                                                                                                                           |
+| remove all                   | `arr = [];`                                                                                | `seq.clear()`                                                                                                                                                      |
+| length                       | `arr.length`                                                                               | `len(seq)`                                                                                                                                                         |
+| lookup                       | `const value = arr[index];`                                                                | `value = seq[index]`                                                                                                                                               |
+| subset                       | `arr.slice(start, end)`<br>can omit end<br>can use negative indexes to count from end      | `seq[start:end]`<br>can omit start and/or end; can use negative indexes to count from end                                                                          |
+| concatenate                  | `const newArr = arr1.concat(arr2, arr3, ...);`                                             | `newSeq = seq1 + seq2`                                                                                                                                             |
+| copy (shallow)               | `[...arr]` or `arr.slice()`                                                                | `list.copy()` - not supported for tuples                                                                                                                           |
+| find                         | `const value = arr.find(predicate);`                                                       | `next(filter(predicate, iterable))`                                                                                                                                |
+| find index                   | `const index = arr.findIndex(predicate);`                                                  | `index = seq.index(value, start?, end?)` - see note below this table                                                                                               |
+| iterate over                 | `for (const value of arr)` or<br>`arr.forEach((value, index) => { ... });`                 | `for item in seq:` or<br>`for index, item in enumerate(seq):`                                                                                                      |
+| iterate over in reverse      | iterate over `arr.reverse()`                                                               | `for item in reversed(seq):`                                                                                                                                       |
+| iterate over in sorted order | create a sorted copy and iterate over it                                                   | `for item in sorted(seq):`                                                                                                                                         |
+| includes                     | `arr.includes(value)` returns boolean                                                      | `value in seq`                                                                                                                                                     |
+| not includes                 | `!arr.includes(value)` returns boolean                                                     | `value not in seq`                                                                                                                                                 |
+| index of                     | `const index = arr.indexOf(value[, fromIndex])`                                            | `seq.index(value[, start[, end]])`                                                                                                                                 |
+| last index of                | `const index = arr.lastIndexOf(value[, fromIndex])`                                        | not builtin; have to reverse list                                                                                                                                  | TODO |
+| count occurrences            | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                                   | `seq.count(value)`                                                                                                                                                 |
+| join                         | `arr.join(delimiter)` returns string                                                       | `delimiter.join(iterable)`                                                                                                                                         |
+| map                          | `const newArr = arr.map(value => newValue);`                                               | `iterator = map(function, iterable)`                                                                                                                               |
+| filter                       | `const newArr = arr.filter(predicate);`                                                    | `iterator = filter(predicate, iterable)`                                                                                                                           |
+| reduce                       | `const value = arr.reduce((acc, value) => { ... });`                                       | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                                                            |
+| any/some                     | `arr.some(predicate)` returns boolean                                                      | `any(map(predicate, iterable))`                                                                                                                                    |
+| all/every                    | `arr.every(predicate)` returns boolean                                                     | `all(map(predicate, iterable))`                                                                                                                                    |
+| sort                         | `arr.sort(comparator);`                                                                    | `list.sort(key=fn, reverse?)` where `fn` returns a value for the key                                                                                               |
+| reverse                      | `arr.reverse()`                                                                            | `list.reverse()` - not supported for tuples                                                                                                                        |
+| change                       | `arr.splice(start, delCount, v1, v2, ...);`                                                | combine `del` and `insert` above                                                                                                                                   |
+| destructure/unpack           | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of elements in array | `v1, v2, v3 = seq`<br># of variables on left must match # of elements in sequence                                                                                  |
 
 Python doesn't have a simple, builtin way to find the first item in a list
 that matches some criteria. This naive approach is probably the most efficient.
@@ -705,7 +772,7 @@ print(people)
 Python supports list comprehensions that create a list, but JavaScript does not.
 Here are some examples.
 
-```py
+```python
 squares = [n**2 for n in range(5)]
 print(squares) # [0, 1, 4, 9, 16]
 
@@ -758,7 +825,7 @@ Sets are unordered collections with no duplicate values.
 Python supports set comprehensions that create a set, but JavaScript does not.
 Here are some examples.
 
-```py
+```python
 from random import randint
 
 # Pick 10 random integers from 1 to 10
@@ -769,25 +836,29 @@ numbers = {randint(1, 11) for n in range(10)}
 
 ## Key/Value Collections
 
-To store associations between keys and values, Python uses "dictionaries".
+To store associations between keys and values (key/value pairs),
+Python uses "dictionaries".
+Keys in dictionaries must be immutable types like
+strings, numbers, and tuples containing these.
 
-| Operation               | Python                         |
-| ----------------------- | ------------------------------ |
-| create                  | `dict = {}`                    |
-| get length              | `len(dict)`                    |
-| set value of key        | `dict[key] = value`            |
-| get value of key        | `dict[key]` or `dict.get(key)` |
-| get all keys            | `dict.keys()` or `list(dict)`  |
-| get all values          | `dict.values()`                |
-| get all keys and values | `dict.items()`                 |
-| test if key present     | `key in dict`                  |
-| delete key              | `del dict[key]`                |
-| delete all keys         | `dict.clear()`                 |
-| iterate over            | `for item in dict.items():`    |
+| Operation               | Python                                                                             |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| create                  | `dict = {}`<br>`dict = {k1: v1, k2: v2, ...}`<br>`dict([(k1, v1), (k2, v2), ...])` |
+| get length              | `len(dict)`                                                                        |
+| set value of key        | `dict[key] = value`                                                                |
+| get value of key        | `dict[key]` or `dict.get(key)`<br>error if key doesn't exist                       |
+| get all keys            | `dict.keys()` or `list(dict)` or<br>`sorted(dict)` to get keys in sorted order     |
+| get all values          | `dict.values()`                                                                    |
+| get all pairs           | `dict.items()`                                                                     |
+| test if key present     | `key in dict`                                                                      |
+| test if key not present | `key not in dict`                                                                  |
+| delete pair             | `del dict[key]`                                                                    |
+| delete all pairs        | `dict.clear()`                                                                     |
+| iterate over            | `for item in dict.items():`                                                        |
 
 JavaScript uses plain objects or instances of the `Map` class
 to store associations between keys and values.
-The keys in JavaScript objects must be must be strings, integers, or symbols,
+Keys in JavaScript objects must be must be strings, integers, or symbols,
 but keys in `Map` instances can be any type.
 
 | Operation               | JavaScript Object                                        | JavaScript Map                                                     |
@@ -803,6 +874,21 @@ but keys in `Map` instances can be any type.
 | delete key              | `delete obj.key` or `delete obj[key]`                    | `map.delete(key)`                                                  |
 | delete all keys         | `obj = {}`                                               | `map.clear()`                                                      |
 | iterate over            | `for (const prop in obj)`                                | `map.forEach((value, key) => { ... });`                            |
+
+## Dictionary Comprehensions
+
+Python supports dictionary comprehensions that create a dictionary.
+Here are some examples.
+
+```python
+names = ['Mark Volkmann', 'Dorian Yeager']
+
+def getInitials(name):
+  return ''.join(map(lambda s: s[0], name.split(' ')))
+
+myDict = {name: getInitials(name) for name in names}
+print(myDict) # {'Mark Volkmann': 'MV', 'Dorian Yeager': 'DY'}
+```
 
 ## Regular Expressions
 
