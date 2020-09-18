@@ -404,7 +404,6 @@ In Python:
 | class/static method call          | `CName.methodName(params)`                 | `CName.methodName(params)` or `instance.methodName(params)` |
 | instantiate (create instance)     | `const instance = new CName(args);`        | `instance = CName(args)`                                    |
 
-JavaScript does not support multiple inheritance, but Python does.
 In addition to the `@staticmethod` decorator, Python also supports the
 `@classmethod` decorator. The difference is that methods defined with
 the latter are passed the class as the first argument.
@@ -482,6 +481,12 @@ stats.report()
 ```
 
 Note how in Python the first parameter in all instance methods must be `self`.
+
+JavaScript does not support multiple inheritance, but Python does.
+To implement a class that inherits from another:
+
+- in JavaScript, `class Subclass extends Superclass`
+- in Python, `class Subclass(Superclass1, Superclass2)`
 
 ## Asynchronous Functions
 
@@ -912,6 +917,32 @@ Python refers to errors as exceptions.
 | ----------- | ----------------------------------------------- | ------------------------------ |
 | throw error | `throw new Error(message);`                     | `raise ExClass(args)`          |
 | catch error | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ...` |
+
+In JavaScript:
+
+```js
+try {
+  // code to try executing
+} catch (e) {
+  // code to handle all exceptions
+} finally {
+  // code to run at end regardless of whether an exception was thrown
+}
+```
+
+In Python:
+
+```python
+try:
+  # code to try executing
+except ExClass1:
+  # code to handle a specific exception class
+except (ExClass2, ExClass3):
+  # code to handle other exception classes listed in a tuple
+```
+
+To ignore an exception in Python,
+include a `pass` statement in an `except` block.
 
 ## JSON
 
