@@ -928,13 +928,48 @@ In Python, import the `re` library. It supports the following methods:
 
 - split: Split a string by the occurrences of a pattern.
 
-| Operation                | JavaScript                                                                | Python                                       |
-| ------------------------ | ------------------------------------------------------------------------- | -------------------------------------------- |
-| create                   | `const re = /pattern/flags` or<br>`const re = new RegExp(pattern, flags)` | `import re`<br>`regex = re.compile(pattern)` |
-| test if a string matches | `if (re.test(str))`                                                       | `if regex.search(str):`                      |
-| get first match          | `str.match(re)`                                                           | `regex.search(str)`                          |
-| get all matches          | `str.matchAll(re)` or `re.exec(str)`                                      | `regex.finditer(str)`                        |
-| split string on re       | `str.split(re)`                                                           | `regex.split(str)`                           |
+| e Operation              | JavaScript                                                                | Python                                                                 |
+| ------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| create                   | `const re = /pattern/flags` or<br>`const re = new RegExp(pattern, flags)` | `import re`<br>`regex = re.compile(pattern)`                           |
+| test if a string matches | `if (re.test(str))`                                                       | `regex.search(str)`<br>returns a match object or `None` if not matched |
+| get first match          | `str.match(re)`                                                           | `regex.search(str)`                                                    |
+| get all matches          | `str.matchAll(re)` or `re.exec(str)`                                      | `regex.finditer(str)`<br>returns an iterable over match objects        |
+| split string on re       | `str.split(re)`                                                           | `regex.split(str)`                                                     |
+
+Python match objects have the following methods:
+
+- `group()` - returns the matching string
+- `start()` - returns the start index of the match (inclusive)
+- `end()` - returns the end index of the match (exclusive)
+- `span()` - returns a tuple containing the start and end indexes
+
+Python regular expressions that will be used multiple times should be compiled.
+Otherwise they can be used inline.
+The following example demonstrate the two ways in which
+every regular expression method can be used,
+calling it on the `re` module or on a compiled regular expression.
+
+```python
+# This pattern matches Canadian postal codes.
+# Using the string literal prefix "r" prevents the "\" character
+# from being treated as an escape character inside a regular expression.
+pattern = r'^[A-Z]\d[A-Z] \d[A-Z]\d$'
+
+pc = 'A1B 2C3'
+
+# For one-time use ...
+if (not re.search(pattern, pc)):
+    print('not a Canadian postal code')
+
+# For repeated usage ...
+canadianPostalCode = re.compile(pattern)
+if (not canadianPostalCode.search(pc)):
+    print('not a Canadian postal code')
+```
+
+For more information on regular expression support in Python, see the
+{% aTargetBlank "https://docs.python.org/3/library/re.html",
+"Python Standard Library Documentation" %}.
 
 ## Error Handling
 
