@@ -1162,3 +1162,11 @@ snippets, and more".
 
 Other useful VS Code extensions for Python code include
 autopep8 and pylint.
+
+## More Python Resources
+
+- {% aTargetBlank "https://docs.python.org/3/tutorial/", "Python Tutorial" %}
+- {% aTargetBlank "https://docs.python.org/3/library/", "Python Standard Library" %}
+- {% aTargetBlank "https://docs.python.org/3/reference/", "Python Language Reference" %}
+- {% aTargetBlank "https://docs.python.org/3/howto/", "Python HOWTOs" %}
+- {% aTargetBlank "https://docs.python.org/3/faq/", "Python FAQ" %}
