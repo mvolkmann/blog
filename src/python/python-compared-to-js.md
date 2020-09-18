@@ -145,6 +145,9 @@ but they can still be modified.
 | class                | `class Name { ... }`                                 | `class Name:`                                      |
 | no value             | `undefined` or `null`                                | `None`                                             |
 
+Everything is an object in Python,
+even primitive values like boolean, number, and string.
+
 In Python, the following values are treated as false when used
 in a boolean context: False, None, 0, '', and empty sequences.
 
