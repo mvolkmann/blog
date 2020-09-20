@@ -194,21 +194,22 @@ If its code is modified, the script must be re-run to interpret the changes.
 Python searches for modules in this order
 
 - built-in modules
-- directory relative to importing file
+- directory relative to importing file (using dotted module names)
 - directories listed in the `PYTHONPATH` environment variable
 - installation-specific directories
 
 To see the directories that will be searched,
-`import sys` and `print(sys.path)`.
+`import sys` and execute `print(sys.path)`.
 
-In Python, packages are used to enable importing modules from subdirectories.
-These are subdirectories whose names are the package name
+In Python, "packages" are used to enable importing modules from subdirectories.
+These are subdirectories whose names are a package name
 and contain a `__init__.py` file.
 These files can be empty or contain initialization code for the package.
 Add `.py` files in the package directories that define modules.
-Then in `.py` files in ancestor directories,
+Then in `.py` files that wish to use a module in a package
+(located in ancestor directories),
 use `from package-name import module-name`.
-To import specific things from modules in subdirectories,
+To import specific things from package modules,
 use `from package-name.module-name import name1, name2`
 The directory structure can be as deep as you like
 with each subdirectory containing a `__init__.py` file.
@@ -222,12 +223,12 @@ For more information on Python packages, see the
 
 ## Printing
 
-| Operation                | JavaScript                                                                               | Python                                                |
-| ------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| print values             | `console.log(v1, v2, ...);`                                                              | `print(v1, v2, ..)`                                   |
-| print error              | `console.error(message);`                                                                | `import sys`<br>`print(v1, v2, ..., file=sys.stderr)` |
-| print with interpolation | `console.log(`Hello, ${name}, today is ${dayOfWeek}.`);`                                 | print(f'Hello, {name}, today is {dayOfWeek}.')        |
-| print without newline    | in Node<br>`const process = require('process');`<br>`process.stdout.write(v1, v2, ...);` | `print(v1, v2, ..., end='')`                          |
+| Operation                              | JavaScript                                                                                  | Python                                                |
+| -------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| print space-separated values to stdout | `console.log(v1, v2, ...);`                                                                 | `print(v1, v2, ..)`                                   |
+| print space-separated values to stderr | `console.error(v1, v2, ...);`                                                               | `import sys`<br>`print(v1, v2, ..., file=sys.stderr)` |
+| print with interpolation               | `` console.log(`Hello, ${name}, today is ${dayOfWeek}.`); ``                                | `print(f'Hello, {name}, today is {dayOfWeek}.')`      |
+| print without newline                  | in Node.js<br>`const process = require('process');`<br>`process.stdout.write(v1, v2, ...);` | `print(v1, v2, ..., end='')`                          |
 
 ## Variables and Assignment
 
@@ -235,44 +236,47 @@ JavaScript variables should be declared
 using either the `const` or `let` keyword.
 Python variables are not declared and
 are created when a value is assigned to them.
-Python variable assignments cannot appear inside expressions.
 
-| Topic                | JavaScript                                | Python           |
-| -------------------- | ----------------------------------------- | ---------------- |
-| constant declaration | `const NAME = value;`                     | `NAME = value`   |
-| variable declaration | `let name = value;`                       | `name = value`   |
-| get type of variable | `typeof name` and `name.constructor.name` | `type name`      |
-| multiple assignment  | const [a, b] = [1, 2]                     | a, b = 1, 2      |
-| spread of array/list | `const [v1, v2, ...] = array;`            | `v1, v2 = array` |
-| spread of object     | `const {k1, k2, ...} = object;`           | not supported    |
-| un-declare           | `name = undefined` - just removes value   | `del name`       |
-| addition             | `name += expr`                            | same             |
-| subtraction          | `name -= expr`                            | same             |
-| multiplication       | `name \*= expr`                           | same             |
-| division             | `name /= expr`                            | same             |
-| exponentiation       | `name \*\*= expr`                         | same             |
-| mod (remainder)      | `name %= expr`                            | same             |
-| logical and          | `name &&= expr`                           | not supported    |
-| logical or           | `name \|\|= expr`                         | not supported    |
-| logical xor          | `name ^= expr`                            | not supported    |
-| bitwise and          | `name &= expr`                            | same             |
-| bitwise or           | `name \|= expr`                           | same             |
-| bitwise xor          | `name ^= expr`                            | same             |
-| signed bit shift     | `<<=` (left), `>>=` (right)               | same             |
-| unsigned bit shift   | `<<<=` (left), `>>>=` (right)             | not supported    |
+JavaScript variable assignments can appear inside expressions
+such as an `if` or loop condition, which many developers find confusing.
+This is not allowed in Python.
+
+| Topic                         | JavaScript                                                                     | Python                                                    |
+| ----------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| constant declaration          | `const NAME = value;`                                                          | `NAME = value`                                            |
+| variable declaration          | `let name = value;`                                                            | `name = value`                                            |
+| get type of value in variable | `typeof name` and `name.constructor.name`                                      | `type name`                                               |
+| multiple assignment           | `const [a, b] = [1, 2]`                                                        | `a, b = 1, 2`                                             |
+| spread of array/list          | `const [v1, v2, ...] = array;`<br># of variables can differ from # of elements | `v1, v2 = seq`<br># of variables must match # of elements |
+| spread of object              | `const {k1, k2, ...} = object;`                                                | not supported                                             |
+| un-declare variable           | `name = undefined` - just removes value                                        | `del name`                                                |
+| addition                      | `name += expr`                                                                 | same                                                      |
+| subtraction                   | `name -= expr`                                                                 | same                                                      |
+| multiplication                | `name *= expr`                                                                 | same                                                      |
+| division                      | `name /= expr`                                                                 | same                                                      |
+| exponentiation                | `name **= expr`                                                                | same                                                      |
+| mod (remainder)               | `name %= expr`                                                                 | same                                                      |
+| logical and                   | `name &&= expr`                                                                | not supported                                             |
+| logical or                    | `name ||= expr`                                                                | not supported                                             |
+| logical xor                   | `name ^= expr`                                                                 | not supported                                             |
+| bitwise and                   | `name &= expr`                                                                 | same                                                      |
+| bitwise or                    | `name |= expr`                                                                 | same                                                      |
+| bitwise xor                   | `name ^= expr`                                                                 | same                                                      |
+| signed bit shift              | `<<=` (left), `>>=` (right)                                                    | same                                                      |
+| unsigned bit shift            | `<<<=` (left), `>>>=` (right)                                                  | not supported                                             |
 
 ## Comparison
 
-| Topic                 | JavaScript                              | Python   |
-| --------------------- | --------------------------------------- | -------- |
-| equal for non-objects | `==` (with coercion) or `===` (without) | `==`     |
-| equal of objects      | `===`                                   | `is`     |
-| not equal of objects  | `!==`                                   | `is not` |
-| not equal             | `!=` (with coercion) or `!==` (without) | `!=`     |
-| less than             | `<`                                     | same     |
-| less than or equal    | `<=`                                    | same     |
-| greater than          | `>`                                     | same     |
-| greater than or equal | `>=`                                    | same     |
+| Topic                 | JavaScript                              | Python                  |
+| --------------------- | --------------------------------------- | ----------------------- |
+| equal                 | `==` (with coercion) or `===` (without) | `==` (without coercion) |
+| not equal             | `!=` (with coercion) or `!==` (without) | `!=` (without coercion) |
+| same object           | `===`                                   | `is`                    |
+| different object      | `!==`                                   | `is not`                |
+| less than             | `<`                                     | same                    |
+| less than or equal    | `<=`                                    | same                    |
+| greater than          | `>`                                     | same                    |
+| greater than or equal | `>=`                                    | same                    |
 
 Python comparisons can be chained, but JavaScript comparison cannot.
 For example, to determine whether the value of a variable
@@ -286,32 +290,35 @@ is between 10 and 20 inclusive:
 In the JavaScript syntax below, `sOrB` is short for "statement or block".
 It can be a single statement or a set of statements surrounded by curly braces.
 
+A JavaScript `if` statement can contain any number of `else if` parts.
 A Python `if` statement can contain any number of `elif` parts.
+Python blocks must start on a new line and be indented.
 
-| Topic   | JavaScript                                          | Python                                            |
-| ------- | --------------------------------------------------- | ------------------------------------------------- |
-| if      | `if (cond) sOrB`                                    | `if cond: block`                                  |
-| if/else | `if (cond) sOrB1 else sOrB2`                        | `if cond: block1 else: block2`                    |
-| if/else | `if (cond1) sOrB1 else if (cond2) sOrB2 else sOrB3` | `if cond: block1 elif cond2: block2 else: block3` |
-| ternary | `cond ? trueValue : falseValue`                     | `trueValue if cond else falseValue`               |
+| Topic           | JavaScript                                          | Python                                            |
+| --------------- | --------------------------------------------------- | ------------------------------------------------- |
+| if              | `if (cond) sOrB`                                    | `if cond: block`                                  |
+| if/else         | `if (cond) sOrB1 else sOrB2`                        | `if cond: block1 else: block2`                    |
+| if/else if/else | `if (cond1) sOrB1 else if (cond2) sOrB2 else sOrB3` | `if cond: block1 elif cond2: block2 else: block3` |
+| ternary         | `cond ? trueValue : falseValue`                     | `trueValue if cond else falseValue`               |
 
 ## Iteration
 
-Python "dictionaries" (or dicts) are used to store key/value pairs.
-In JavaScript this is done with plain objects
-or the `Map` class (described later).
+As we will see in the "Key/Value Collections" section later,
+JavaScript can store key/value pairs in plain objects
+or in instances of the `Map` class.
+Python uses "dictionaries" (or dicts) to store key/value pairs.
 
-| Topic                            | JavaScript                                                           | Python                                   |
-| -------------------------------- | -------------------------------------------------------------------- | ---------------------------------------- |
-| classic                          | `for (let var = initial; cond; statements)`                          | `for var in range(start, stop[, step]):` |
-| over collection                  | `for (const value of iterable)`                                      | `for value in sequence:`                 |
-| over object/dict keys            | `for (const key of Object.keys(obj))`<br>or `for (const key in obj)` | `for key in dict.keys():`                |
-| over object/dict values          | `for (const value of Object.values(obj))`                            | `for value in dict.values():`            |
-| over object/dict keys and values | `for (const [key, value] of Object.entries(obj))`                    | `for key, value in dict.items():`        |
-| top-tested                       | `while (cond)`                                                       | `while cond:`                            |
-| bottom-tested                    | `do { ... } while (cond);`                                           | `while True: ... if !cond: break`        |
-| break out of closes loop         | `break`                                                              | same                                     |
-| continue to next iteration       | `continue`                                                           | same                                     |
+| Topic                            | JavaScript                                                           | Python                                    |
+| -------------------------------- | -------------------------------------------------------------------- | ----------------------------------------- |
+| classic for loop                 | `for (let value = initial; cond; statements)`                        | `for value in range(start, stop, step?):` |
+| over collection                  | `for (const value of iterable)`                                      | `for value in sequence:`                  |
+| over object/dict keys            | `for (const key of Object.keys(obj))`<br>or `for (const key in obj)` | `for key in dict.keys():`                 |
+| over object/dict values          | `for (const value of Object.values(obj))`                            | `for value in dict.values():`             |
+| over object/dict keys and values | `for (const [key, value] of Object.entries(obj))`                    | `for key, value in dict.items():`         |
+| top-tested                       | `while (cond)`                                                       | `while cond:`                             |
+| bottom-tested                    | `do { ... } while (cond);`                                           | `while True: ... if !cond: break`         |
+| break out of closest loop        | `break`                                                              | same                                      |
+| continue to next iteration       | `continue`                                                           | same                                      |
 
 ## Functions
 
@@ -319,13 +326,13 @@ In JavaScript, functions can be defined in two ways.
 
 ```js
 // Named function
-function myFn(args) {
-  body;
+function myFn(p1, p2, ...) {
+  body
 }
 
 // Anonymous function (a.k.a. arrow function)
-const myFn = args => {
-  body;
+const myFn = (p1, p2, ...) => {
+  body
 };
 ```
 
@@ -334,7 +341,7 @@ the parentheses around it are optional.
 If an anonymous function simply returns the value of a single expression,
 The curly braces around the body and the `return` keyword are optional.
 
-In Python, functions can be defined in two ways.
+In Python, functions can also be defined in two ways.
 
 ```python
 # Named function
@@ -359,37 +366,36 @@ For guidelines on the content of docstrings, see the
   "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
   "PEP-8 documentation strings" %}.
 
+| Operation                                                           | JavaScript                                                                           | Python                                                                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| define named                                                        | `function fnName(params) { ... }`                                                    | `def fnName(params): ...`                                                                                          |
+| define anonymous                                                    | `const fnName = (params) => definition`                                              | `lambda params: expression`                                                                                        |
+| define anonymous w/ single parameter                                | `const fnName = param => {...}`                                                      | same as above                                                                                                      |
+| define anonymous w/ single expression                               | `const fnName = (params) => expr`                                                    | same as above                                                                                                      |
+| specify default parameter values                                    | `function fnName(p1=v1, p2=v2) {...}`                                                | `def fnName(p1=v1, p2=v2): ...`                                                                                    |
+| gather variable number of arguments                                 | `function fnName(p1, p2, ...rest) {...}`<br>`rest` is set to an `Array`              | `def fnName(p1, p2, *rest): ...`<br>`rest` is set to a tuple                                                       |
+| gather arguments as key/value pairs                                 | not supported                                                                        | `def fnName(**args): ...`<br>call with `fnName(p1=v2, p2=v2)`<br>or `fnName(**dict)`                               |
+| use named/keyword arguments                                         | `function fnName({p1, p2}) {...}`<br>pass an object                                  | same as above;<br>any parameter with a default value can be specified by name;<br>call with `fnName(p1=v2, p2=v2)` |
+| return a value                                                      | `return value;`                                                                      | `return value`                                                                                                     |
+| default return value when no `return`                               | `undefined`                                                                          | `None`                                                                                                             |
+| call                                                                | `fnName(args)`                                                                       | same                                                                                                               |
+| get required argument count                                         | `fnName.length`                                                                      | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`                                             |
+| passing fewer arguments than positional parameters                  | remaining are assigned `undefined`                                                   | results in an error                                                                                                |
+| passing more arguments than positional parameters with no gathering | all arguments are available in `arguments` array-like object                         | results in an error                                                                                                |
+| get name                                                            | `fnName.name`                                                                        | `fnName.__name__`                                                                                                  |
+| get implementation code                                             | `fnName.toString()`                                                                  | `from inspect import getsource`<br>`getsource(fn)`                                                                 |
+| create partial                                                      | `const newFn = fnName.bind(thisValue, arg1, arg2, ...)`<br>`thisValue` can be `null` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)`                                          |
+| call                                                                | `fnName.call(thisValue, arg1, arg2, ...)`<br>`thisValue` can be `null`               | `class.method(obj, arg1, arg2, ...)`                                                                               |
+| apply                                                               | `fnName.apply(thisValue, argArray)`<br>`thisValue` can be `null`                     | `class.method(obj, *argList)`                                                                                      |
+| spread arguments                                                    | `fnName(...arr)`                                                                     | `fnName(*seq)`                                                                                                     |
+
 In Python:
 
 - Function parameters with a default value must follows those without one.
-- Function parameters that do not begin with `*` or `**` are positional.
-- Function parameters can be specified positionally or by name,
-  but positional ones must be specified before named ones.
-- The `partial` function (shown in the table below)
+- Function parameters listed after one that begins with `*`
+  must be specified by name.
+- The `partial` function (shown in the table above)
   can only be used on functions, not methods of a class.
-
-| Operation                                                           | JavaScript                                                   | Python                                                                                                           |
-| ------------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| define named                                                        | `function fnName(params) { definition }`                     | `def fnName(params):`                                                                                            |
-| define anonymous                                                    | `const fnName = (params) => definition`                      | `lambda params: expression`                                                                                      |
-| define anonymous w/ single parameter                                | `const fnName = param => {...}`                              | same as above                                                                                                    |
-| define anonymous w/ single expression                               | `const fnName = (params) => expr`                            | same as above                                                                                                    |
-| use variable arguments                                              | `function fnName(p1, p2, ...rest) {...}`                     | `def fnName(p1, p2, *rest):`<br>`rest` is set to a tuple                                                         |
-| specify default argument values                                     | `function fnName(p1=v1, p2=v2) {...}`                        | `def fnName(p1=v1, p2=v2):`                                                                                      |
-| use named/keyword arguments                                         | `function fnName({p1, p2}) {...}` - pass an object           | same as above<br>any parameter with a default value can be specified by name<br>call with `fnName(p1=v2, p2=v2)` |
-| gather arguments as key/value pairs                                 | not supported                                                | `def fnName(**args):`<br>call with `fnName(p1=v2, p2=v2)`<br>or `fnName(**dict)`                                 |
-| return a value                                                      | `return value;`                                              | `return value`                                                                                                   |
-| default return value when no `return`                               | `undefined`                                                  | `None`                                                                                                           |
-| call                                                                | `fnName(args)`                                               | same                                                                                                             |
-| get required parameter count                                        | `fnName.length`                                              | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`                                           |
-| passing fewer arguments than positional parameters                  | remaining are assigned `undefined`                           | results in an error                                                                                              |
-| passing more arguments than positional parameters with no gathering | all arguments are available in `arguments` array-like object | results in an error                                                                                              |
-| get name                                                            | `fnName.name`                                                | `fnName.__name__`                                                                                                |
-| get implementation code                                             | `fnName.toString()`                                          | `from inspect import getsource`<br>`getsource(fn)`                                                               |
-| create partial                                                      | `const newFn = fnName.bind(thisArg, arg1, arg2, ...)`        | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)`                                        |
-| call                                                                | `fnName.call(thisArg, arg1, arg2, ...)`                      | `method(obj, arg1, arg2, ...)`                                                                                   |
-| apply                                                               | `fnName.apply(thisArg, argArray)`                            | `method(obj, *argList)`                                                                                          |
-| spreading arguments                                                 | fnName(...arr)                                               | fnName(\*seq)                                                                                                    |
 
 ## Classes
 
