@@ -860,7 +860,7 @@ def filter(predicate, seq):
 
 multipleOf3 = filter(lambda n: n % 3 == 0, range(10))
 print(list(multipleOf3)); # [ 0, 3, 6, 9 ]
-print([n for n in range(10) if n % 3 == 0]) # same using list comprehesion
+print([n for n in range(10) if n % 3 == 0]) # same using list comprehension
 ```
 
 ## Sets
