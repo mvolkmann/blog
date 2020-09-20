@@ -124,72 +124,58 @@ For example, "mdn regexp".
 
 ## Naming Conventions
 
-| Kind                        | JavaScript    | Python         |
-| --------------------------- | ------------- | -------------- |
-| constant                    | UNDER_SCORES  | same           |
-| variable                    | camelCase     | under_scores   |
-| function                    | camelCase     | under_scores   |
-| class                       | CamelCase     | same           |
-| method                      | camelCase     | under_scores   |
-| public instance properties  | camelCase     | under_scores   |
-| private instance properties | no convention | \_under_scores |
+| Kind                        | JavaScript     | Python          |
+| --------------------------- | -------------- | --------------- |
+| constant                    | `UNDER_SCORES` | same            |
+| variable                    | `camelCase`    | `under_scores`  |
+| function                    | `camelCase`    | `under_scores`  |
+| class                       | `CamelCase`    | same            |
+| method                      | `camelCase`    | `under_scores`  |
+| public instance properties  | `camelCase`    | `under_scores`  |
+| private instance properties | no convention  | `_under_scores` |
 
-While Python uses a naming convention (all uppercase) to identify constants,
+While Python uses a naming convention to identify constants (all uppercase),
 they can still be modified.
 And the naming convention for private instance variables
 (start with an underscore), doesn't prevent access from outside the class.
 
 ## Builtin Types
 
-| Type                 | JavaScript                                           | Python                                                   |
-| -------------------- | ---------------------------------------------------- | -------------------------------------------------------- |
-| boolean              | `true`, `false`                                      | `True`, `False`                                          |
-| number               | default is double precision float; also `BigInt`     | `int`, `float`, `complex`                                |
-| character            | use string type                                      | use string type                                          |
-| string               | `'text'` or `"text"`                                 | same                                                     |
-| multi-line string    | `` `text` ``                                         | `"""text"""` or `'''text'''`                             |
-| string interpolation | `` `prefix${expr}suffix` ``                          | `f'prefix{expr}suffix'`                                  |
-| array                | `Array` class, literal syntax `[v1, v2, ...]`        | see list, tuple, and range                               |
-| list                 | see `Array`                                          | `[v1, v2, ...]`<br>mutable and typically homogeneous     |
-| tuple                | no equivalent                                        | `(v1, v2, ...)`<br>immutable and typically heterogeneous |
-| range                | no equivalent                                        | `range(start, stop[, step])`                             |
-| key/value pairs      | Object in the form `{k1: v1, k2: v2, ...}` and `Map` | dictionary literal syntax `{'k1': v1, 'k2': v2, ...}`    |
-| set                  | `new Set()`                                          | `{v1, v2, ...}` or `set(v1, v2, ...)`                    |
-| function             | see "Function" section below                         | see "Function" section below                             |
-| class                | `class Name { ... }`                                 | `class Name:`                                            |
-| no value             | `undefined` or `null`                                | `None`                                                   |
+| Type                 | JavaScript                                           | Python                                                                  |
+| -------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------- |
+| boolean              | `true`, `false`                                      | `True`, `False`                                                         |
+| number               | default is double precision float, `BigInt`          | `int`, `float`, `complex`                                               |
+| character            | use strings                                          | same                                                                    |
+| string               | `'text'` or `"text"`                                 | same                                                                    |
+| multi-line string    | `` `text` ``                                         | `"""text"""` or `'''text'''`                                            |
+| string interpolation | `` `prefix${expr1}suffix${expr2}` ``                 | `f'prefix{expr1}suffix{expr2}'`                                         |
+| array                | `Array` class, literal syntax `[v1, v2, ...]`        | `array` module                                                          |
+| list                 | use `Array` type                                     | literal syntax `[v1, v2, ...]`<br>mutable and typically homogeneous     |
+| tuple                | no equivalent                                        | literal syntax `(v1, v2, ...)`<br>immutable and typically heterogeneous |
+| range                | no equivalent                                        | `range(start, stop[, step])`                                            |
+| key/value pairs      | Object in the form `{k1: v1, k2: v2, ...}` and `Map` | dictionary (a.k.a. dict) literal syntax<br>`{'k1': v1, 'k2': v2, ...}`  |
+| set                  | `new Set()`                                          | literal syntax `{v1, v2, ...}`<br>or `set(v1, v2, ...)`                 |
+| function             | see "Functions" section below                        | see "Functions" section below                                           |
+| class                | `class Name { ... }`<br>see "Classes" section below  | `class Name:`<br>see "Classes" section below                            |
+| no value             | `undefined` or `null`                                | `None`                                                                  |
 
-Everything is an object in Python,
-even primitive values like boolean, number, and string.
+Everything is an object in Python, even values that are
+primitives in JavaScript like booleans, numbers, and strings.
 
-In Python, the following values are treated as false when used
-in a boolean context: False, None, 0, '', and empty sequences.
-
-In JavaScript, the following values are treated as false when used
-in a boolean context: false, 0, '', undefined, null.
-
-Python has sequences whereas JavaScript has arrays.
+Python has "sequences" whereas JavaScript has arrays.
 There are three kinds of sequences: list, tuple, and range.
-A list is a mutable sequence of values that have the same type.
-A tuple is an immutable sequence of values that have varying types.
-A range is an immutable sequence of numbers that can be used for looping.
-
-A named tuple gives a name to a tuple type and
-supports accessing elements in instances by name.
-For example:
-
-```python
-from collections import namedtuple
-# Internally, this generate a class named Person.
-Dog = namedtuple('Dog', 'name breed')
-dog = Dog('Comet', 'Whippet')
-print(dog.name) # Comet
-print(dog[1]) # Whippet
-print(len(dog)) # 2
-```
+A list is a mutable sequence of values that typically have the same type.
+A tuple is an immutable sequence of values that can have varying types.
+A range is an immutable sequence of numbers that is often be used for looping.
 
 JavaScript object keys must be strings.
 Python dict keys can be any immutable type.
+
+In Python, the following values are treated as false when used
+in a boolean context: `False`, `None`, `0`, empty strings, and empty sequences.
+
+In JavaScript, the following values are treated as false when used
+in a boolean context: `false`, `0`, empty strings, `undefined`, and `null`.
 
 ## Modules and Packages
 
@@ -197,15 +183,15 @@ In both JavaScript and Python, modules are defined by a single source file.
 When a source file is executed as a script,
 it can import modules and those can import more modules.
 
-| Operation              | JavaScript                                                                                              | Python                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| import entire module   | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *` |
-| import specific values | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name as other`    |
+| Operation              | JavaScript                                                                                              | Python                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| import entire module   | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *`                 |
+| import specific values | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name1 as other1, name2 as other2` |
 
-In Python each module is only imported once.
+In JavaScript and Python each module is only imported once.
 If its code is modified, the script must be re-run to interpret the changes.
 
-Python searches for modules in this order:
+Python searches for modules in this order
 
 - built-in modules
 - directory relative to importing file
@@ -653,17 +639,20 @@ asyncio.run(main())
 ## Sequences
 
 JavaScript stores sequences of values in arrays.
+Python primarily uses the three sequence types list, tuple, and range
+for this purpose.
 
-Python has three sequence types which are list, tuple, and range.
-Lists are mutable and are typically homogeneous (elements have the same type).
-Tuples are immutable and are typically heterogeneous
+Python lists are mutable and are typically homogeneous
+(elements have the same type).
+Python tuples are immutable and are typically heterogeneous
 (elements can have different types).
-Ranges are immutable sequences of numbers and are often used in `for` loops.
+Python ranges are immutable sequences of numbers
+and are often used in `for` loops.
 
 To create a JavaScript array:
 
 ```js
-const arr = [element1, element2, ...];
+const myArray = [element1, element2, ...];
 ```
 
 To create a Python list, tuple, and range:
@@ -680,7 +669,21 @@ myRange = range(start, end, step)
 All of these types can be nested within each other.
 For example, the elements of a list can be tuples
 and the elements of a tuple can be ranges.
-One exception is the elements of a range can only be integers.
+One exception is that the elements of a range can only be integers.
+
+A named tuple gives a name to a tuple type and
+supports accessing elements in instances by name and index.
+For example:
+
+```python
+from collections import namedtuple
+# Internally, this generate a class named Person.
+Dog = namedtuple('Dog', 'name breed')
+dog = Dog('Comet', 'Whippet')
+print(dog.name) # Comet
+print(dog[1]) # Whippet
+print(len(dog)) # 2
+```
 
 | Operation                    | JavaScript                                                                                 | Python                                                                                                                                                             |
 | ---------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
