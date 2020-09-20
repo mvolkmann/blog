@@ -595,57 +595,57 @@ Note how in Python the first parameter in all instance methods must be `self`.
 
 ## Boolean Operations
 
-| Operation   | JavaScript   | Python      |
-| ----------- | ------------ | ----------- |
-| and         | `b1 && b2`   | `b1 and b2` |
-| or          | `b1 \|\| b2` | `b1 or b2`  |
-| not         | `!b`         | `not b`     |
-| bitwise and | `b1 & b2`    | same        |
-| bitwise or  | `b1 \| b2`   | same        |
-| bitwise not | `~b`         | same        |
-| bitwise xor | `b1 ^ b2`    | `b1 & b2`   |
+| Operation   | JavaScript | Python      |
+| ----------- | ---------- | ----------- |
+| and         | `b1 && b2` | `b1 and b2` |
+| or          | `b1 || b2` | `b1 or b2`  |
+| not         | `!b`       | `not b`     |
+| bitwise and | `b1 & b2`  | same        |
+| bitwise or  | `b1 | b2`  | same        |
+| bitwise not | `~b`       | same        |
+| bitwise xor | `b1 ^ b2`  | same        |
 
 ## Numeric Operations
 
-| Operation                                     | JavaScript                         | Python               |
-| --------------------------------------------- | ---------------------------------- | -------------------- |
-| basic                                         | `+`, `-`, `\*`, `/`                | same                 |
-| exponentiation                                | `*\*`                              | same                 |
-| increment                                     | `++n1` (pre) or `n1++` (post)      | `v += 1`             |
-| decrement                                     | `--n1` (pre) or `n1--` (post)      | `v -= 1`             |
-| mod (remainder)                               | `%`                                | same                 |
-| convert to string                             | `n.toString()`                     | `str(n)`             |
-| convert to string with fixed decimals (ex. 2) | `n.toFixed(2)`                     | `"{:.2f}".format(n)` |
-| convert to hex                                | `n.toString(16)`                   | `hex(n)`             |
-| convert from hex                              | `parseInt(hexString, 16)`          | `int(hexString, 16)` |
-| constants                                     | see Math and Number global objects | see math module      |
-| functions                                     | see Math and Number global objects | see math module      |
+| Operation                                     | JavaScript                             | Python               |
+| --------------------------------------------- | -------------------------------------- | -------------------- |
+| basic                                         | `+`, `-`, `*`, `/`                     | same                 |
+| exponentiation                                | `**`                                   | same                 |
+| increment                                     | `++v` (pre) or `v++` (post)            | `v += 1`             |
+| decrement                                     | `--v` (pre) or `v--` (post)            | `v -= 1`             |
+| mod (remainder)                               | `%`                                    | same                 |
+| convert to string                             | `n.toString()`                         | `str(n)`             |
+| convert to string with fixed decimals (ex. 2) | `n.toFixed(2)`                         | `'{:.2f}'.format(n)` |
+| convert to hex                                | `n.toString(16)`                       | `hex(n)`             |
+| convert from hex                              | `parseInt(hexString, 16)`              | `int(hexString, 16)` |
+| constants                                     | see `Math` and `Number` global objects | see `math` module    |
+| functions                                     | see `Math` and `Number` global objects | see `math` module    |
 
 ## String Operations
 
-| Operation           | JavaScript                                      | Python                                      |
-| ------------------- | ----------------------------------------------- | ------------------------------------------- |
-| literal single line | `'text'` or `"text"`                            | same                                        |
-| literal multi-line  | `` `text` ``                                    | `"""text"""` or `'''text'''`                |
-| length              | `s.length`                                      | `len(s)`                                    |
-| concatenate         | `s1 + n1`                                       | `s1 + str(n1)` or `s1 str(n1)`              |
-| lowercase           | `s.toLowerCase()`                               | `s.lower()`                                 |
-| uppercase           | `s.toUpperCase()`                               | `s.upper()`                                 |
-| substring           | `s1.substring(start[, end])`                    | `s[start:end]` or `s[start:]` or `s[:end]`  |
-| slice               | like `substring`, but supports negative indexes | same as above                               |
-| split               | `s.split(delimiter)` returns array              | `s.split(delimiter)` returns list           |
-| starts with         | `s.startsWith(sub)` returns boolean             | `s.startswith(sub)` returns boolean         |
-| ends with           | `s.endsWith(sub)` returns boolean               | `s.endswith(sub)` returns boolean           |
-| contains            | `s.includes(sub)` returns boolean               | `sub in s` returns boolean                  |
-| index of            | `s.indexOf(sub)` returns number                 | `s.index(sub[, start[, end]])` returns int  |
-| last index of       | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub[, start[, end]])` returns int |
-| compare             | `s.localeCompare(sub)` returns -1, 0, or 1      | not supported                               |
-| replace first       | `s.replace(oldSub, newSub)`                     | `s.replace(old, new, 1)`                    |
-| replace all         | `s.replaceAll(oldSub, newSub)`                  | `s.replace(old, new)`                       |
-| trim start          | `s.trimStart()`                                 | `s.lstrip()`                                |
-| trim end            | `s.trimEnd()`                                   | `s.rstrip()`                                |
-| trim both           | `s.trim()`                                      | `s.strip()`                                 |
-| repeat n times      | `s.repeat(n)`                                   | `s * n` or `n * s`                          |
+| Operation           | JavaScript                                      | Python                                                                             |
+| ------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
+| literal single line | `'text'` or `"text"`                            | same                                                                               |
+| literal multi-line  | `` `text` ``                                    | `"""text"""` or `'''text'''`                                                       |
+| length              | `s.length`                                      | `len(s)`                                                                           |
+| concatenate         | `s1 + n1`                                       | `s1 + str(n1)` or<br>`s1 str(n1)` with only a space between them                   |
+| lowercase           | `s.toLowerCase()`                               | `s.lower()`                                                                        |
+| uppercase           | `s.toUpperCase()`                               | `s.upper()`                                                                        |
+| substring           | `s1.substring(start, end?)`                     | `s[start:end]` or `s[start:]` or `s[:end]`                                         |
+| slice               | like `substring`, but supports negative indexes | same as above                                                                      |
+| split               | `s.split(delimiter)` returns array              | `s.split(delimiter)` returns list                                                  |
+| starts with         | `s.startsWith(sub)` returns boolean             | `s.startswith(sub)` returns boolean                                                |
+| ends with           | `s.endsWith(sub)` returns boolean               | `s.endswith(sub)` returns boolean                                                  |
+| contains            | `s.includes(sub)` returns boolean               | `sub in s` returns boolean                                                         |
+| index of            | `s.indexOf(sub)` returns number                 | `s.index(sub, start?, end?)` returns int                                           |
+| last index of       | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub, start?, end?)` returns int                                          |
+| compare             | `s1.localeCompare(s2)` returns -1, 0, or 1      | `import locale`<br>`locale.strcoll(s1, s2)`<br>returns negative, zero, or positive |
+| replace first       | `s.replace(oldSub, newSub)`                     | `s.replace(old, new, 1)`                                                           |
+| replace all         | `s.replaceAll(oldSub, newSub)`                  | `s.replace(old, new)`                                                              |
+| trim start          | `s.trimStart()`                                 | `s.lstrip()`                                                                       |
+| trim end            | `s.trimEnd()`                                   | `s.rstrip()`                                                                       |
+| trim both ends      | `s.trim()`                                      | `s.strip()`                                                                        |
+| repeat n times      | `s.repeat(n)`                                   | `s * n` or `n * s`                                                                 |
 
 ## Sequences
 
