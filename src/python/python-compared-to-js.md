@@ -177,18 +177,12 @@ in a boolean context: `False`, `None`, `0`, empty strings, and empty sequences.
 In JavaScript, the following values are treated as false when used
 in a boolean context: `false`, `0`, empty strings, `undefined`, and `null`.
 
-## Modules and Packages
+## Modules
 
 In both JavaScript and Python, modules are defined by a single source file.
-When a source file is executed as a script,
-it can import modules and those can import more modules.
+A source file can import other modules and those can import more modules.
 
-| Operation              | JavaScript                                                                                              | Python                                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| import entire module   | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *`                 |
-| import specific values | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name1 as other1, name2 as other2` |
-
-In JavaScript and Python each module is only imported once.
+In both JavaScript and Python each module is only imported once.
 If its code is modified, the script must be re-run to interpret the changes.
 
 Python searches for modules in this order
@@ -201,16 +195,32 @@ Python searches for modules in this order
 To see the directories that will be searched,
 `import sys` and execute `print(sys.path)`.
 
-In Python, "packages" are used to enable importing modules from subdirectories.
-These are subdirectories whose names are a package name
-and contain a `__init__.py` file.
-These files can be empty or contain initialization code for the package.
+| Topic                    | JavaScript                                                                                              | Python                                                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| define                   | content of file                                                                                         | same                                                                                                 |
+| export                   | `export name = value;`                                                                                  | everything is automatically exported;<br>indicate private values by starting name with an underscore |
+| default export           | `export default name = value;`                                                                          | not supported                                                                                        |
+| import default           | `import name from 'path';`                                                                              | not supported                                                                                        |
+| import entire module     | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *`                      |
+| import specific values   | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name1 as other1, name2 as other2`      |
+| import default and named | `import name, {name1, name2} from 'path';`                                                              | not supported                                                                                        |
+| open source catalog      | https://www.npmjs.com/                                                                                  | https://pypi.org/                                                                                    |
+| tool to install          | `npm` (installed with Node.js)                                                                          | `pip` (installed with Python)                                                                        |
+
+## Python Packages
+
+Python "packages" enable importing modules from subdirectories.
+These are subdirectories whose names are a package name.
+The subdirectories must contain a `__init__.py` file
+that can be empty or contain initialization code for the package.
+
 Add `.py` files in the package directories that define modules.
 Then in `.py` files that wish to use a module in a package
 (located in ancestor directories),
 use `from package-name import module-name`.
 To import specific things from package modules,
-use `from package-name.module-name import name1, name2`
+use `from package-name.module-name import name1, name2`.
+
 The directory structure can be as deep as you like
 with each subdirectory containing a `__init__.py` file.
 When there are nested packages, imports look like
@@ -227,7 +237,7 @@ For more information on Python packages, see the
 | -------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | print space-separated values to stdout | `console.log(v1, v2, ...);`                                                                 | `print(v1, v2, ..)`                                   |
 | print space-separated values to stderr | `console.error(v1, v2, ...);`                                                               | `import sys`<br>`print(v1, v2, ..., file=sys.stderr)` |
-| print with interpolation               | `` console.log(`Hello, ${name}, today is ${dayOfWeek}.`); ``                                | `print(f'Hello, {name}, today is {dayOfWeek}.')`      |
+| print with interpolation               | `` console.log(`Hello ${name}, today is ${dayOfWeek}.`); ``                                 | `print(f'Hello {name}, today is {dayOfWeek}.')`       |
 | print without newline                  | in Node.js<br>`const process = require('process');`<br>`process.stdout.write(v1, v2, ...);` | `print(v1, v2, ..., end='')`                          |
 
 ## Variables and Assignment
@@ -366,7 +376,7 @@ For guidelines on the content of docstrings, see the
   "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
   "PEP-8 documentation strings" %}.
 
-| Operation                                                           | JavaScript                                                                           | Python                                                                                                             |
+| Topic                                                               | JavaScript                                                                           | Python                                                                                                             |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | define named                                                        | `function fnName(params) { ... }`                                                    | `def fnName(params): ...`                                                                                          |
 | define anonymous                                                    | `const fnName = (params) => definition`                                              | `lambda params: expression`                                                                                        |
@@ -397,21 +407,100 @@ In Python:
 - The `partial` function (shown in the table above)
   can only be used on functions, not methods of a class.
 
+## Asynchronous Functions
+
+In Python 3.4+, asynchronous functions are supported by the asyncio library.
+
+| Topic                              | JavaScript                                                                                     | Python                      |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------------- |
+| define async named function        | `async function fnName(params) { ... }`                                                        | `async def fnName(params):` |
+| define async anonymous function    | `const fnName = async (params) => { ... }`                                                     | not supported               |
+| async call with `await`            | `const result = await name(args);`<br>often wrapped in a `try` block                           | `result = await name(args)` |
+| async call with `then` and `catch` | `name(args).`<br>&nbsp;&nbsp;`then(result => { ... }).`<br>&nbsp;&nbsp;`catch(err => { ...});` | n/a                         |
+
+In JavaScript, async functions return a `Promise` object.
+Here is an example of running tasks that
+take a simulated amount of time to complete.
+The first takes 3 seconds, the second takes 2, and the third takes 1.
+Each tasks outputs its "starting" message immediately.
+The "ending" messages appear in reverse order
+due to their differing sleep durations.
+
+```js
+const sleep = async ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function doIt(name, sleepMs) {
+  console.log('starting', name);
+  await sleep(sleepMs);
+  console.log('ending', name);
+}
+
+async function main() {
+  const task1 = doIt('alpha', 3000);
+  const task2 = doIt('beta', 2000);
+  const task3 = doIt('gamma', 1000);
+  await Promise.all([task1, task2, task3]);
+  console.log('finished');
+}
+
+main();
+```
+
+The output is:
+
+```text
+starting alpha
+starting beta
+starting gamma
+ending gamma
+ending beta
+ending alpha
+finished
+```
+
+In Python 3.4, the
+{% aTargetBlank "https://docs.python.org/3.8/library/asyncio.html", "asyncio" %}
+library was added.
+It can be used to create coroutines which are similar to JavaScript Promises.
+The Python language doesn't provide the equivalent of the JavaScript promises,
+but {% aTargetBlank "https://pypi.org/project/promise/", "libraries" %} do.
+
+Here is an implementation of the previous JavaScript example in Python
+that produces the same output:
+
+```python
+from asyncio import create_task, gather, run, sleep
+
+async def doIt(name, sleepMs):
+    print('starting', name)
+    await sleep(sleepMs / 1000)
+    print('ending', name)
+
+async def main():
+    task1 = create_task(doIt('alpha', 3000))
+    task2 = create_task(doIt('beta', 2000))
+    task3 = create_task(doIt('gamma', 1000))
+    await gather(task1, task2, task2)
+    print('finished')
+
+run(main())
+```
+
 ## Classes
 
-| Topic                             | JavaScript                                 | Python                                                      |
-| --------------------------------- | ------------------------------------------ | ----------------------------------------------------------- |
-| defining                          | `class Name { ... }`                       | `class Name:`                                               |
-| inheritance                       | `class Sub extends Super { ... }`          | `class Sub(Super1, Super2, ...)`                            |
-| constructor                       | `constructor(params) { ... }`              | `def \_\_init\_\_(self, params):`                           |
-| instance property declaration     | not declared; set in constructor on `this` | not declared; set in \_\_init\_\_ on `self`                 |
-| instance property reference       | `this.propName`                            | `self.propName`                                             |
-| class/static property declaration | `static propName = value;`                 | `propName = value;`                                         |
-| class/static property reference   | `CName.propName`                           | `CName.propName` or `instance.propName`                     |
-| instance method                   | `name(params) { ... }`                     | `def fnName(self, params):`                                 |
-| class/static method declaration   | `static methodName(params) { ... }`        | `@staticmethod`<br>`def methodName(params):`                |
-| class/static method call          | `CName.methodName(params)`                 | `CName.methodName(params)` or `instance.methodName(params)` |
-| instantiate (create instance)     | `const instance = new CName(args);`        | `instance = CName(args)`                                    |
+| Topic                             | JavaScript                                                                | Python                                                                |
+| --------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| define                            | `class Name { ... }`                                                      | `class Name: ...`                                                     |
+| inheritance                       | `class Sub extends Super { ... }`<br>only single inheritance is supported | `class Sub(Super1, Super2, ...)`<br>multiple inheritance is supported |
+| constructor                       | `constructor(params) { ... }`                                             | `def __init__(self, params):`                                         |
+| instantiate (create instance)     | `const instance = new CName(args);`                                       | `instance = CName(args)`                                              |
+| instance property declaration     | not declared; set in constructor on `this` object                         | not declared; set in \_\_init\_\_ on `self` object                    |
+| instance property reference       | `this.propName`                                                           | `self.propName`                                                       |
+| class/static property declaration | `static propName = value;`                                                | `propName = value;`                                                   |
+| class/static property reference   | `CName.propName`                                                          | `CName.propName` or `instance.propName`                               |
+| instance method                   | `name(params) { ... }`                                                    | `def name(self, params): ...`                                         |
+| class/static method declaration   | `static name(params) { ... }`                                             | `@staticmethod`<br>`def name(params): ...`                            |
+| class/static method call          | `CName.name(params)`                                                      | `CName.name(params)` or `instance.name(params)`                       |
 
 In addition to the `@staticmethod` decorator, Python also supports the
 `@classmethod` decorator. The difference is that methods defined with
@@ -455,6 +544,17 @@ stats.add(5);
 stats.report();
 ```
 
+The output is:
+
+```text
+min = 1
+max = 4
+mean = 2.5
+min = 1
+max = 5
+mean = 3
+```
+
 Here is the same class implemented in Python:
 
 ```python
@@ -489,104 +589,9 @@ stats.add(5)
 stats.report()
 ```
 
+The output is the same as above.
+
 Note how in Python the first parameter in all instance methods must be `self`.
-
-JavaScript does not support multiple inheritance, but Python does.
-To implement a class that inherits from another:
-
-- in JavaScript, `class Subclass extends Superclass`
-- in Python, `class Subclass(Superclass1, Superclass2)`
-
-## Asynchronous Functions
-
-In Python 3.4+, asynchronous functions are supported by the asyncio library.
-
-| Topic                    | JavaScript                                 | Python                      |
-| ------------------------ | ------------------------------------------ | --------------------------- |
-| async named function     | `async function fnName(params) { ... }`    | `async def fnName(params):` |
-| async anonymous function | `const fnName = async (params) => { ... }` | not supported               |
-| async call with await    | `const result = await name(args);`         | `result = await name(args)` |
-| async call with then     | `name(args).then(result => { ... });`      | n/a                         |
-
-In JavaScript, async functions return a Promise.
-Here is an example of running tasks that
-take a simulated amount of time to complete.
-The first takes 3 seconds, the second takes 2, and the third takes 1.
-Each tasks outputs its "starting" message immediately.
-The "ending" messages appear in reverse order
-due to their differing sleep durations.
-
-```js
-const sleep = async ms => new Promise(resolve => setTimeout(resolve, ms));
-
-async function doIt(name, sleepMs) {
-  console.log('starting', name);
-  await sleep(sleepMs);
-  console.log('ending', name);
-}
-
-async function main() {
-  const task1 = doIt('alpha', 3000);
-  const task2 = doIt('beta', 2000);
-  const task3 = doIt('gamma', 1000);
-  await Promise.all([task1, task2, task3]);
-  console.log('finished');
-}
-
-main();
-```
-
-The output is:
-
-```text
-starting alpha
-starting beta
-starting gamma
-ending gamma
-ending beta
-ending alpha
-finished
-```
-
-In Python 3.4, the `asyncio` library was added.
-It can be used to create coroutines which are similar to JavaScript Promises.
-See {% aTargetBlank "https://docs.python.org/3.8/library/asyncio.html", "asyncio docs" %}
-Python doesn't seem to have to equivalent of
-the JavaScript Promise methods `then` and `catch`.
-
-Here is an implementation of the previous JavaScript example in Python.
-It produces the same output.
-
-```python
-import asyncio
-
-async def doIt(name, sleepMs):
-    print('starting', name)
-    await asyncio.sleep(sleepMs / 1000)
-    print('ending', name)
-
-async def main():
-    task1 = asyncio.create_task(doIt('alpha', 3000))
-    task2 = asyncio.create_task(doIt('beta', 2000))
-    task3 = asyncio.create_task(doIt('gamma', 1000))
-    await asyncio.gather(task1, task2, task2)
-    print('finished')
-
-asyncio.run(main())
-```
-
-## Modules
-
-| Topic           | JavaScript                                 | Python                               |
-| --------------- | ------------------------------------------ | ------------------------------------ |
-| defining        | content of file                            | content of file                      |
-| export          | `export name = value;`                     | everything is automatically exported |
-| default export  | `export default name = value;`             | not supported                        |
-| import default  | `import name from 'path';`                 | not supported                        |
-| import named    | `import {name1, name2} from 'path';`       | from moduleName import name1, name2  |
-| import both     | `import name, {name1, name2} from 'path';` | n/a                                  |
-| where to find   | https://www.npmjs.com/                     | https://pypi.org/                    |
-| tool to install | npm                                        | pip                                  |
 
 ## Boolean Operations
 
@@ -1239,3 +1244,7 @@ autopep8 and pylint.
 - {% aTargetBlank "https://docs.python.org/3/howto/", "Python HOWTOs" %}
 - {% aTargetBlank "https://docs.python.org/3/faq/", "Python FAQ" %}
 - {% aTargetBlank "https://realpython.com/start-here/", "Real Python" %}
+
+```
+
+```
