@@ -90,6 +90,10 @@ select Settings ...Text Editor Theme ... {theme name}.
 At last check there were 15 themes that include
 "solarized dark" and "solarized light".
 
+When editing Markdown files, to see a preview
+right-click and select "Show Markdown Preview".
+This opens a new tab for the preview to the right of the Markdown tab.
+
 ## Jupyter Notebooks
 
 To create a notebook, click the commands icon in the left sidebar
@@ -345,3 +349,36 @@ axes.set_xlabel('Name')
 axes.set_ylabel('Score')
 plt.show()
 ```
+
+To save a plot in a `.png` file:
+
+```python
+file_path = 'game-scores.png'
+figure.savefig(file_path, bbox_inches='tight', dpi=600)
+```
+
+## Vega
+
+{% aTargetBlank "https://vega.github.io/vega/", "Vega" %}
+is a JSON format for describing data visualizations.
+Jupyter has builtin support for rendering Vega files
+with a `.vg` or `.vg.json` file extension.
+There are many examples at the Vega website linked above.
+Copy the JSON for one into a `.vg` file
+and open it in Jupyter to see the result.
+
+Click the circled ellipsis in the upper-right
+to display a menu where you can select
+"Save as SVG", "Save as PNG",
+"View Source" (displays read-only text in a new browser tab),
+or "Open in Vega Editor" (opens Vega online editor in a new browser tab).
+Changes made in the Vega editor can be exported as JSON and reopened in Jupyter.
+
+## Resources
+
+For help, join the Jupyter Discourse by browsing the
+{% aTargetBlank "https://jupyter.org/community", "Community" %} page
+and clicking the "View" button for "Jupyter Discourse".
+
+For data analysis, see
+{% aTargetBlank "https://pandas.pydata.org/", "pandas" %}.
