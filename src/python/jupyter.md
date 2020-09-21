@@ -27,8 +27,6 @@ To run JupyterLab, enter `jupyter lab`.
 This starts a local notebook server that listens on port 8888
 and opens a browser tab to return the user interface
 for a browser-based IDE.
-{% aTargetBlank "https://github.com/lambdalisue/jupyter-vim-binding",
-"jupyter-vim-binding" %} is an extension that supports Vim key bindings.
 
 The left sidebar can contain many things depending on
 which of the icons on the left is activated.
@@ -62,6 +60,9 @@ To see them sooner, press the reload icon at the top of the file browser.
 Right-click in the file browser to
 copy, create, delete, download, open, or rename a file or folder.
 
+Tabs can be dragged to a new location similar to VS Code.
+This includes dragging them so that multiple tabs are visible at the same time.
+
 Many image formats are supported and can be opened in a tab.
 Scroll to position the visible portion of the image.
 Press the "=" and "-" keys to zoom in and out.
@@ -81,6 +82,8 @@ open the file browser in the left sidebar and double-click the file.
 To edit using preferred key bindings,
 select Settings ... Text Editor Key Map ... {key map name}
 where the options are default, Sublime Text, vim, and emacs.
+There are also extensions that enable use of Vim key bindings in
+notebook cells, but I haven't been able to install one without errors.
 
 To change the editor color theme,
 select Settings ...Text Editor Theme ... {theme name}.
@@ -112,23 +115,38 @@ The current cell is highlighted with ?.
 Keyboard shortcuts, many of which are borrowed from Vim, include:
 
 - return - edit current cell
-- shift-return - stop editing current cell and execute it
+- shift-return - stop editing current cell, execute it,
+  and advance to the next cell
+- ctrl-return - stop editing current cell, execute it,
+  and remain on the current cell
 - esc - stop editing current cell and do not execute it
 - a - add a cell above current one
 - b - add a cell below current one
-- c - copy the current cell
-- dd - delete the current cell
+- c or press copy icon - copy the current cell
+- dd or press scissors icon - delete the current cell
 - j or down arrow - move down one cell
 - shift-j or shift down arrow - select current cell and next one down
 - k or up arrow - move up one cell
 - shift-k or shift up arrow - select current cell and previous one up
 - m - change format of current cell to Markdown
-- v - pasted copied cell into current cell
+- v or press paste icon (clipboard) -
+  paste copied cell into current cell
 - x - cut current cell
 - y - change format of current cell to code
 - z - undo last action
 - shift-z - redo last undo
 - ctrl-shift-minus - split current cell into two
+
+Another way to select multiple cells starting from the current one
+is to shift-click the cell at the other end of the range
+(above or below the current one).
+
+To collapse a cell or the output of a code cell,
+click the vertical blue bar to its left.
+There is one blue bar for the cell and one for its output.
+To expand, click the blue vertical line again.
+The View menu contains many menu items that
+collapse and expand sets of cells and outputs.
 
 To select multiple cells,
 
@@ -174,9 +192,25 @@ Their output is displayed below the cell.
 If no output appears, look for error messages in the terminal
 where the Jupyter server is running.
 
+To toggle the display of line numbers inside cells,
+select View ... Show Line Numbers.
+
 The number in square brackets to the left of a cell
 indicates to the order in which the cell was executed
 relative to the other code cells.
+The number will be preceded by "\*" while the code is running.
+This will only be visible for long running code.
+While it is running, the kernel is locked and no other cells can run.
+To stop execution of a long-running cell, generate a KeyboardInterrupt
+by clicking the black square at the top or pressing the "i" key twice.
+To demonstrate this, enter the following code in a cell and execute it:
+
+```python
+from time import sleep
+for i in range(10):
+    print(i)
+    sleep(1) # sleeps for one second
+```
 
 To execute a cell again without going into edit mode,
 select the cell and click the triangle at the top of the notebook.
@@ -187,8 +221,6 @@ Variables defined in preceding code cells are available in cells that follow.
 Ending a cell with a variable name causes its value to be output
 without using a `print` statement.
 
-TODO: How do you move the current cell up or down to re-order them?
-
 A code cell can import and use modules. For example:
 
 ```python
@@ -197,7 +229,31 @@ stats = Statistics(1, 2, 3, 4, 5, 6)
 stats.report()
 ```
 
-See tips at https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts.
+To view a notebook in multiple tabs,
+each of which can be scrolled to a different position,
+select File ... New View for Notebook.
+Cells can be dragged from one view to another
+and even between notebooks.
+
+To export a notebook to a `.py` file,
+select File ... Export Notebook As ... Export Notebook to Executable Script.
+Select a directory, enter a file name, and press "Save".
+Markdown cells will appear as Python comments.
+Code cells will be preceded by a comment that reads "# In[number]".
+
+To export a notebook as a PDF file,
+select File ... Export Notebook As ... Export Notebook to PDF.
+This requires nbconvert and Pandoc be installed.
+To install nbconvert, enter `pip install nbconvert`.
+To install Pandoc in macOS, enter `brew install pandoc xelatex`.
+Also see {% aTargetBlank
+"https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex.",
+"Install TeX" %} for platform-specific install instructions.
+This is a very large install! I did not try this.
+
+See tips at {% aTargetBlank
+"https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts",
+"Jupyter Notebook Tips, Tricks, & Shortcuts" %}.
 
 ## JavaScript Kernel
 
@@ -206,6 +262,25 @@ Additional language kernels can be installed
 to support other programming languages.
 These implement the Jupyter messaging protocol.
 
-{% aTargetBlank "https://github.com/n-riesco/ijavascript", "IJavascript"}
+{% aTargetBlank "https://github.com/n-riesco/ijavascript", "IJavascript" %}
 is a Jupyter kernel for JavaScript.
 To install it:
+
+- install {% aTargetBlank "https://nodejs.org/", "Node.js" %}
+- see the instructions at the IJavascript web site above
+  (note that this library consistency uses the wrong case for the "S" in JavaScript)
+- on macOS:
+  - brew install pkg-config zeromq
+  - sudo easy_install pip
+  - pip install --upgrade pyzmq jupyter
+  - npm install -g ijavascript
+  - ijsinstall
+- for other operating systems, see
+  {% aTargetBlank "https://github.com/n-riesco/ijavascript#installation",
+  "Installation" %}
+
+To create a "Javascript (Node.js)" notebook,
+click the File Explorer icon in the left sidebar,
+click the "+" at the top of the left sidebar,
+and click the "JS" box under "Notebook".
+Cells that have a type of "Code" can contain and execute JavaScript code.

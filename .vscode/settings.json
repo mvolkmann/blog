@@ -98,6 +98,7 @@
     "grapher",
     "groupby",
     "hasattr",
+    "ipynb",
     "isinstance",
     "itemgetter",
     "jstl",
@@ -121,9 +122,11 @@
     "myapp",
     "mypy",
     "namedtuple",
+    "nbconvert",
     "noopener",
     "npmhub",
     "onclick",
+    "pandoc",
     "peaceiris",
     "precache",
     "precaching",
@@ -170,6 +173,7 @@
     "webfontloader",
     "webhook",
     "webp",
-    "wordcount"
+    "wordcount",
+    "xelatex"
   ]
 }
