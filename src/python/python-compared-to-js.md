@@ -70,12 +70,15 @@ cons:
   (some features require Python 3.7+)
 - lambda functions are more verbose than JavaScript arrow functions
   (lambda vs. ->)
-- ternary operator is not supported; for example:
+- the classic ternary operator using a `?` and `:` is not supported;
+  for example:
 
   ```python
   name = len(sys.argv) > 1 ? sys.argv[1] : 'World' # not supported
   name = sys.argv[1] || 'World' # doesn't work
-  name = sys.argv[1] if len(sys.argv) > 1 else 'World' # works
+
+  # The Python version of ternary does work.
+  name = sys.argv[1] if len(sys.argv) > 1 else 'World'
   ```
 
 ## Running Scripts

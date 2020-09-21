@@ -198,3 +198,14 @@ stats.report()
 ```
 
 See tips at https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts.
+
+## JavaScript Kernel
+
+Jupyter supports Python out of the box.
+Additional language kernels can be installed
+to support other programming languages.
+These implement the Jupyter messaging protocol.
+
+{% aTargetBlank "https://github.com/n-riesco/ijavascript", "IJavascript"}
+is a Jupyter kernel for JavaScript.
+To install it:
