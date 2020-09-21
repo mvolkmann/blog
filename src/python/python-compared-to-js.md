@@ -1237,6 +1237,29 @@ In most cases, using normal methods and parameters
 instead of the `__getattr__` method results in
 code that is easier to understand and maintain.
 
+JavaScript can do something similar using "proxies".
+
+```js
+const demo = new Proxy(
+  {},
+  {
+    get(object, methodName) {
+      const prefix = 'add';
+      if (methodName.startsWith(prefix)) {
+        n1 = Number(methodName.substring(prefix.length));
+        return n2 => n1 + n2;
+      } else {
+        throw new ReferenceError('object has no method ' + methodName);
+      }
+    }
+  }
+);
+
+console.log(demo.add3(4)); // 7
+console.log(demo.add4(1)); // 5
+console.log(demo.subtract5(7)); // ReferenceError: object has no method subtract5
+```
+
 ## Types
 
 To gain type checking for JavaScript, use the TypeScript compiler.
