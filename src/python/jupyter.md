@@ -27,6 +27,8 @@ To run JupyterLab, enter `jupyter lab`.
 This starts a local notebook server that listens on port 8888
 and opens a browser tab to return the user interface
 for a browser-based IDE.
+If you close the browser tab and wish to open a new one
+to connect to the running server, browse localhost:8888.
 
 The left sidebar can contain many things depending on
 which of the icons on the left is activated.
@@ -71,8 +73,10 @@ Press the "0" key to reset the zoom and rotation.
 
 Other document formats that are supported include
 CSV, HTML, JSON, Jupyter Notebooks, PDF, and Latex.
-For CSV files, the delimiter can be changed to
-comma, semicolon, tab, pipe, or hash.
+
+CSV parsing is highly performant and a table view is lazily rendered,
+enabling processing of very large CSV files.
+The delimiter can be changed to comma, semicolon, tab, pipe, or hash.
 
 ## Text Editor
 
@@ -374,6 +378,28 @@ to display a menu where you can select
 or "Open in Vega Editor" (opens Vega online editor in a new browser tab).
 Changes made in the Vega editor can be exported as JSON and reopened in Jupyter.
 
+## GeoJSON
+
+To render GeoJSON data in Jupyter:
+
+- `jupyter labextension install @jupyterlab/geojson-extension`
+- may need to restart the Jupyter server
+- enter code like the following in a cell of a Python notebook
+
+```python
+from IPython.display import GeoJSON
+
+GeoJSON({
+    'type': 'Feature',
+    'geometry': {
+        'type': 'Point',
+        #'coordinates': [-118.4563712, 34.0163116]
+        'coordinates': [-90.594482, 38.709419]
+        TODO: How do you set the zoom level?
+    }
+})
+```
+
 ## Resources
 
 For help, join the Jupyter Discourse by browsing the
@@ -382,3 +408,4 @@ and clicking the "View" button for "Jupyter Discourse".
 
 For data analysis, see
 {% aTargetBlank "https://pandas.pydata.org/", "pandas" %}.
+TODO: Learn more about Pandas!
