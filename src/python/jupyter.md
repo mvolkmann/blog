@@ -234,6 +234,7 @@ each of which can be scrolled to a different position,
 select File ... New View for Notebook.
 Cells can be dragged from one view to another
 and even between notebooks.
+TODO: This copies the cell. Is there a way to move it instead?
 
 To export a notebook to a `.py` file,
 select File ... Export Notebook As ... Export Notebook to Executable Script.
@@ -247,7 +248,7 @@ This requires nbconvert and Pandoc be installed.
 To install nbconvert, enter `pip install nbconvert`.
 To install Pandoc in macOS, enter `brew install pandoc xelatex`.
 Also see {% aTargetBlank
-"https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex.",
+"https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex",
 "Install TeX" %} for platform-specific install instructions.
 This is a very large install! I did not try this.
 
@@ -268,7 +269,8 @@ To install it:
 
 - install {% aTargetBlank "https://nodejs.org/", "Node.js" %}
 - see the instructions at the IJavascript web site above
-  (note that this library consistency uses the wrong case for the "S" in JavaScript)
+  (note that this library consistently uses
+  the wrong case for the "S" in JavaScript)
 - on macOS:
   - brew install pkg-config zeromq
   - sudo easy_install pip
@@ -284,3 +286,62 @@ click the File Explorer icon in the left sidebar,
 click the "+" at the top of the left sidebar,
 and click the "JS" box under "Notebook".
 Cells that have a type of "Code" can contain and execute JavaScript code.
+
+## Plots
+
+There are many libraries that can be used to create plots inside Jupyter.
+A popular option is {% aTargetBlank "https://matplotlib.org/", "matplotlib" %}.
+To install it, enter `pip install matplotlib`.
+
+To draw a line chart, enter the following in a cell and execute it:
+
+```python
+%matplotlib inline
+from matplotlib import pyplot
+points = [[0,0], [1,4], [2,2], [3,1], [4,6]]
+pyplot.plot(points, linewidth=1)
+pyplot.show()
+```
+
+To plot a function, enter the following in a cell and execute it:
+
+```python
+from matplotlib import pyplot as plt
+import numpy as np
+import math # for pi
+step_size = 0.05
+min_x = 0
+#min_x = -5 #0
+max_x = math.pi * 2
+#max_x = 5
+x = np.arange(min_x, max_x, step_size)
+y = np.sin(x)
+#y = x**2
+plt.plot(x, y, color='red')
+plt.axhline(0, color='black', linestyle="dotted", linewidth=1) # x axis
+plt.axvline(0, color='black', linestyle="dotted", linewidth=1) # y axis
+plt.xlabel('angle in radians')
+plt.ylabel('sine')
+plt.title('sine wave')
+plt.show()
+```
+
+To draw a bar chart, enter the following in a cell and execute it:
+
+```python
+%matplotlib inline
+from matplotlib import pyplot as plt
+figure = plt.figure()
+axes = figure.add_axes([0,0,1,1])
+names = ['Mark', 'Tami', 'Amanda', 'Jeremy']
+scores = [100, 200, 150, 300]
+axes.bar(
+    names,
+    scores,
+    color=['red', 'orange', 'yellow', 'green'],
+    edgecolor='black')
+axes.set_title('Game Scores')
+axes.set_xlabel('Name')
+axes.set_ylabel('Score')
+plt.show()
+```

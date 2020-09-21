@@ -1364,7 +1364,3 @@ autopep8 and pylint.
 - {% aTargetBlank "https://docs.python.org/3/howto/", "Python HOWTOs" %}
 - {% aTargetBlank "https://docs.python.org/3/faq/", "Python FAQ" %}
 - {% aTargetBlank "https://realpython.com/start-here/", "Real Python" %}
-
-```
-
-```
