@@ -1233,12 +1233,17 @@ print(demo.add4(1)) # 5
 print(demo.subtract5(7)) # AttributeError: MethodMissingDemo object has no method 'subtract5'
 ```
 
+In most cases, using normal methods and parameters
+instead of the `__getattr__` method results in
+code that is easier to understand and maintain.
+
 ## Types
 
-For JavaScript, use the TypeScript compiler.
+To gain type checking for JavaScript, use the TypeScript compiler.
+TypeScript is a superset of JavaScript that adds types.
 
-For Python, use the mypy tool which
-performs type checking on Python source files.
+To gain type checking for Python, use the mypy tool.
+It performs type checking on Python source files.
 
 Primitive types supported by mypy are:
 
