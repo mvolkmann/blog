@@ -1268,18 +1268,18 @@ TypeScript is a superset of JavaScript that adds types.
 To gain type checking for Python, use the mypy tool.
 It performs type checking on Python source files.
 
-Primitive types supported by mypy are:
+The primitive types supported by mypy are:
 
 | Type Name | Meaning                                              |
 | --------- | ---------------------------------------------------- |
 | `bool`    | Boolean                                              |
-| `bytes`   | array of bytes                                       |
+| `bytes`   | immutable sequence of integers from 0 to 255         |
 | `complex` | complex number with `float` real and imaginary parts |
 | `float`   | double precision floating point number               |
 | `int`     | unlimited precision integer                          |
 | `str`     | string                                               |
 
-Collection types supported by mypy are:
+The collection types supported by mypy are:
 
 | Type Name            | Meaning                                               |
 | -------------------- | ----------------------------------------------------- |
@@ -1294,30 +1294,44 @@ Other types supported by mypy are:
 | Type Name                                           | Meaning                                                                 |
 | --------------------------------------------------- | ----------------------------------------------------------------------- |
 | `Any`                                               | any value                                                               |
-| any class name                                      | instance of the class or subclass                                       |
+| any class name                                      | instance of the class or instance of a subclass                         |
 | `Callable[[P1, P2, ...], RT]`                       | function that takes parameters of types P1, P2, ... and returns type RT |
 | `Callable[...], RT]`                                | function that takes any parameters and returns type RT                  |
 | `Generator[YieldType, SendType, ReturnType]`        | generator function;<br>`SendType` and `ReturnType` can be `None`        |
-| `NamedType('Name', [('name1', T1), ('name2', T2)])` | named tuple                                                             |
-| `Optional[T]`                                       | matches `None` or the type T<br> same as `Union[None, T]`               |
+| `NamedType('Name', [('name1', T1), ('name2', T2)])` | named tuple where elements have times T1, T2, ...                       |
+| `Optional[T]`                                       | matches `None` or the type T<br>same as `Union[None, T]`                |
 | `Type[C]`                                           | matches a class object for class C or a subclass                        |
 | `Union[T1, T2, ...]`                                | matches any of the specified types                                      |
+
+All types above whose names begin with a capital letter
+must be imported from the "typing" module.
+For example, `from typing import Any, List`.
+
+The `Union` type can be used in collection types
+to allow elements to have one of a set of types.
 
 Aliases can be defined for long type descriptions.
 This is useful when the same type description is used in many places.
 For example, `IntToStringMap = Dict[int, str]`.
 
-To add a type hint to a variable or function parameter,
+To add a "type hint" to a variable or function parameter,
 follow its name with a colon, a space, and the type.
 
 To add a return type hint to a function,
 follow the argument list right parenthesis with `->` and the type.
 
-For example:
+For example, if `IceCream` is a class we have defined:
 
 ```python
-def orderIceCream(flavor: str, scoops: int, add_sprinkles: bool) -> IceCream:
+def order_ice_cream(flavor: str, scoops: int, add_sprinkles: bool) -> IceCream:
 ```
+
+To install mypy, enter `pip install mypy`.
+On a Mac, add the following directory to the `PATH` environment variable:
+`/Library/Frameworks/Python.framework/Versions/3.8/bin`.
+
+To run mypy on a source file and all the files it imports,
+enter `mypy {filename}.py`.
 
 mypy cannot perform type checking on function arguments that correspond to
 parameters with default values or
@@ -1327,13 +1341,6 @@ The `python` interpreter ignores type hints,
 but they make startup time take slightly longer.
 They are useful as documentation even without using mypy.
 IDEs can use them to flag type issues.
-
-To install mypy, enter `pip install mypy`.
-On a Mac, add the following directory to the `PATH` environment variable:
-`/Library/Frameworks/Python.framework/Versions/3.8/bin`.
-
-To run mypy on a source file and all the files it imports,
-enter `mypy {filename}.py`.
 
 ## VS Code
 
