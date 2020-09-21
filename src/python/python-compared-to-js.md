@@ -615,6 +615,8 @@ Note how in Python the first parameter in all instance methods must be `self`.
 | decrement                                     | `--v` (pre) or `v--` (post)            | `v -= 1`             |
 | mod (remainder)                               | `%`                                    | same                 |
 | convert to string                             | `n.toString()`                         | `str(n)`             |
+| convert from string to integer                | `Number(s)` or `parseInt(s)`           | `int(s)`             |
+| convert from string to float                  | `Number(s)` or `parseFloat(s)`         | `float(s)`           |
 | convert to string with fixed decimals (ex. 2) | `n.toFixed(2)`                         | `'{:.2f}'.format(n)` |
 | convert to hex                                | `n.toString(16)`                       | `hex(n)`             |
 | convert from hex                              | `parseInt(hexString, 16)`              | `int(hexString, 16)` |
@@ -666,21 +668,30 @@ To create a JavaScript array:
 const myArray = [element1, element2, ...];
 ```
 
-To create a Python list, tuple, and range:
+To create a Python list:
 
 ```python
 myList = [element1, element2, ...]
+```
 
+To create a Python tuple:
+
+```python
 # Parentheses around a tuple are optional.
 myTuple = (element1, element2, ...)
+```
 
-myRange = range(start, end, step)
+To create a Python range:
+
+```python
+myRange = range(end) # 0 to end-1
+myRange = range(start, end, step?) # start to end-1 where step defaults to 1
 ```
 
 All of these types can be nested within each other.
 For example, the elements of a list can be tuples
 and the elements of a tuple can be ranges.
-One exception is that the elements of a range can only be integers.
+An exception is that the elements of a range can only be integers.
 
 A named tuple gives a name to a tuple type and
 supports accessing elements in instances by name and index.
@@ -688,78 +699,87 @@ For example:
 
 ```python
 from collections import namedtuple
-# Internally, this generate a class named Person.
+# Internally, this generate a class named Dog.
 Dog = namedtuple('Dog', 'name breed')
 dog = Dog('Comet', 'Whippet')
 print(dog.name) # Comet
+print(dog[0]) # Comet
+print(dog.breed) # Whippet
 print(dog[1]) # Whippet
 print(len(dog)) # 2
 ```
 
-| Operation                    | JavaScript                                                                                 | Python                                                                                                                                                             |
-| ---------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| is array/sequence            | `Array.isArray(expression)`                                                                | `hasattr(type(obj), '\_\_iter\_\_')`<br>`isinstance(v, dict)`<br>`isinstance(v, list)`<br>`isinstance(v, range)`<br>`isinstance(v, set)`<br>`isinstance(v, tuple)` |
-| add to end                   | `arr.push(v1, v2, ...);`                                                                   | `seq.append(v)` and<br>`seq.extend(iterable)` to add more than one element                                                                                         |
-| remove from end              | `const value = arr.pop();`                                                                 | `seq.pop()`                                                                                                                                                        |
-| add to start                 | `arr.unshift(value);`                                                                      | `seq.insert(0, value)`                                                                                                                                             |
-| remove from start            | `const value = arr.shift();`                                                               | `del seq[0]`                                                                                                                                                       |
-| insert                       | `arr.splice(index, numberToRemove, v1, v2, ...)`                                           | `seq.insert(index, value)`                                                                                                                                         |
-| remove item at index         | `arr.splice(index, 1)`                                                                     | `del seq[index]` - not supported for tuples                                                                                                                        |
-| remove items at index range  | `arr.splice(start, count)`                                                                 | `del seq[start:end+1]` - not supported for tuples                                                                                                                  |
-| remove value                 | `arr.splice(arr.findIndex(value), 1)`                                                      | `seq.remove(value)` - error if not found                                                                                                                           |
-| remove all                   | `arr = [];`                                                                                | `seq.clear()`                                                                                                                                                      |
-| length                       | `arr.length`                                                                               | `len(seq)`                                                                                                                                                         |
-| lookup                       | `const value = arr[index];`                                                                | `value = seq[index]`                                                                                                                                               |
-| subset                       | `arr.slice(start, end)`<br>can omit end<br>can use negative indexes to count from end      | `seq[start:end]`<br>can omit start and/or end; can use negative indexes to count from end                                                                          |
-| concatenate                  | `const newArr = arr1.concat(arr2, arr3, ...);`                                             | `newSeq = seq1 + seq2`                                                                                                                                             |
-| copy (shallow)               | `[...arr]` or `arr.slice()`                                                                | `list.copy()` - not supported for tuples                                                                                                                           |
-| find                         | `const value = arr.find(predicate);`                                                       | `next(filter(predicate, iterable))`                                                                                                                                |
-| find index                   | `const index = arr.findIndex(predicate);`                                                  | `index = seq.index(value, start?, end?)` - see note below this table                                                                                               |
-| iterate over                 | `for (const value of arr)` or<br>`arr.forEach((value, index) => { ... });`                 | `for item in seq:` or<br>`for index, item in enumerate(seq):`                                                                                                      |
-| iterate over in reverse      | iterate over `arr.reverse()`                                                               | `for item in reversed(seq):`                                                                                                                                       |
-| iterate over in sorted order | create a sorted copy and iterate over it                                                   | `for item in sorted(seq):`                                                                                                                                         |
-| includes                     | `arr.includes(value)` returns boolean                                                      | `value in seq`                                                                                                                                                     |
-| not includes                 | `!arr.includes(value)` returns boolean                                                     | `value not in seq`                                                                                                                                                 |
-| index of                     | `const index = arr.indexOf(value[, fromIndex])`                                            | `seq.index(value[, start[, end]])`                                                                                                                                 |
-| last index of                | `const index = arr.lastIndexOf(value[, fromIndex])`                                        | not builtin; have to reverse list                                                                                                                                  | TODO |
-| count occurrences            | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                                   | `seq.count(value)`                                                                                                                                                 |
-| join                         | `arr.join(delimiter)` returns string                                                       | `delimiter.join(iterable)`                                                                                                                                         |
-| map                          | `const newArr = arr.map(value => newValue);`                                               | `iterator = map(function, iterable)`                                                                                                                               |
-| filter                       | `const newArr = arr.filter(predicate);`                                                    | `iterator = filter(predicate, iterable)`                                                                                                                           |
-| reduce                       | `const value = arr.reduce((acc, value) => { ... });`                                       | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                                                            |
-| any/some                     | `arr.some(predicate)` returns boolean                                                      | `any(map(predicate, iterable))`                                                                                                                                    |
-| all/every                    | `arr.every(predicate)` returns boolean                                                     | `all(map(predicate, iterable))`                                                                                                                                    |
-| sort                         | `arr.sort(comparator);`                                                                    | `list.sort(key=fn, reverse?)` where `fn` returns a value for the key                                                                                               |
-| reverse                      | `arr.reverse()`                                                                            | `list.reverse()` - not supported for tuples                                                                                                                        |
-| change                       | `arr.splice(start, delCount, v1, v2, ...);`                                                | combine `del` and `insert` above                                                                                                                                   |
-| destructure/unpack           | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of elements in array | `v1, v2, v3 = seq`<br># of variables on left must match # of elements in sequence                                                                                  |
+| Operation                    | JavaScript                                                                                          | Python                                                                                                                         |
+| ---------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| is array/sequence            | `Array.isArray(expr)`                                                                               | `hasattr(type(expr), '\_\_iter\_\_')`<br>`isinstance(expr, list)`<br>`isinstance(expr, tuple)`<br>`isinstance(expr, range)`    |
+| add to end                   | `arr.push(v1, v2, ...);`                                                                            | `seq.append(v)` to add one and<br>`seq.extend(iterable)` to add more than one                                                  |
+| remove from end              | `const value = arr.pop();`                                                                          | `value = seq.pop()`                                                                                                            |
+| add to start                 | `arr.unshift(value);`                                                                               | `seq.insert(0, value)`                                                                                                         |
+| remove from start            | `const value = arr.shift();`                                                                        | `del seq[0]`                                                                                                                   |
+| insert                       | `arr.splice(index, delCount, v1, v2, ...)`                                                          | `seq.insert(index, value)`                                                                                                     |
+| remove item at index         | `arr.splice(index, 1)`                                                                              | `del seq[index]` - only for lists                                                                                              |
+| remove items at index range  | `arr.splice(start, count)`                                                                          | `del seq[start:start+count]` - only for lists                                                                                  |
+| remove value                 | `arr.splice(arr.findIndex(value), 1)`                                                               | `seq.remove(value)` - error if not found                                                                                       |
+| remove all                   | `arr = [];`                                                                                         | `seq.clear()`                                                                                                                  |
+| change                       | `arr.splice(start, delCount, v1, v2, ...);`                                                         | combine `del` and `insert` above                                                                                               |
+| length                       | `arr.length`                                                                                        | `len(seq)`                                                                                                                     |
+| lookup                       | `const value = arr[index];`                                                                         | `value = seq[index]`                                                                                                           |
+| subset                       | `arr.slice(start, end)`<br>can omit end and start and<br>can use negative indexes to count from end | `seq[start:end]`<br>can omit start and/or end and<br>can use negative indexes to count from end                                |
+| concatenate                  | `const newArr = arr1.concat(arr2, arr3, ...);`                                                      | `newSeq = seq1 + seq2 + seq3`                                                                                                  |
+| copy (shallow)               | `[...arr]` or `arr.slice()`                                                                         | `list.copy()` - only for lists                                                                                                 |
+| find                         | `arr.find(predicate);`                                                                              | `next(filter(predicate, seq))` - see note below this table                                                                     |
+| find index                   | `arr.findIndex(predicate);`                                                                         | `index = seq.index(value, start?, end?)` - see note below this table                                                           |
+| iterate over                 | `for (const value of arr)` or<br>`arr.forEach((value, index) => { ... });`                          | `for item in seq:` or<br>`for index, item in enumerate(seq):`                                                                  |
+| iterate over in reverse      | iterate over `arr.reverse()`                                                                        | `for item in reversed(seq):`                                                                                                   |
+| iterate over in sorted order | create a sorted copy and iterate over it                                                            | `for item in sorted(seq):`                                                                                                     |
+| includes (boolean)           | `arr.includes(value)`                                                                               | `value in seq`                                                                                                                 |
+| not includes (boolean)       | `!arr.includes(value)`                                                                              | `value not in seq`                                                                                                             |
+| index of                     | `arr.indexOf(value[, fromIndex])`                                                                   | `seq.index(value[, start[, end]])`                                                                                             |
+| last index of                | `arr.lastIndexOf(value[, fromIndex])`                                                               | not builtin; have to reverse list                                                                                              | TODO |
+| count occurrences            | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                                            | `seq.count(value)`                                                                                                             |
+| join                         | `arr.join(delimiter)` returns string                                                                | `delimiter.join(seq)`                                                                                                          |
+| map                          | `const newArr = arr.map(value => newValue);`                                                        | `iterator = map(function, seq)`                                                                                                |
+| filter                       | `const newArr = arr.filter(predicate);`                                                             | `iterator = filter(predicate, seq)`                                                                                            |
+| reduce                       | `const value = arr.reduce((acc, value) => { ... });`                                                | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                        |
+| some/any (boolean)           | `arr.some(predicate)` - short circuits                                                              | `any(map(predicate, seq))` - no short circuit                                                                                  |
+| every/all (boolean)          | `arr.every(predicate)` - short circuits                                                             | `all(map(predicate, seq))` - no short circuit                                                                                  |
+| sort                         | `arr.sort(comparator);`<br>`comparator` is a function that compares two elements                    | `list.sort(key=k, reverse?)`<br>`k` is an attribute name or a function that takes<br>an element and returns a value to sort on |
+| reverse                      | `arr.reverse()`                                                                                     | `list.reverse()` - only for lists                                                                                              |
+| destructure/unpack           | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of array elements             | `v1, v2, v3 = seq`<br># of variables on left must match # of sequence elements<br>which limits usefulness                      |
 
 Python doesn't have a simple, builtin way to find the first item in a list
 that matches some criteria. This naive approach is probably the most efficient.
 
 ```python
-def index(aList, predicate):
-  for index in range(0, len(aList) - 1):
-      if predicate(aList[index]):
+def index(predicate, seq):
+  for index in range(0, len(seq) - 1):
+      if predicate(seq[index]):
           return index
   return None
 ```
 
 The Python `filter` and `map` functions are lazy
 which means they are not executed until their results are needed.
-To get values from them, pass the result to a function like `list` or `set`.
+To get values from them, repeatedly pass the result to `next` or
+pass the result to a function like `list` or `set` to get all the values.
 For example:
 
 ```python
 numbers = [1, 2, 3]
-doubled = list(map(lambda n: n * 2, numbers))
+
+iter = map(lambda n: n * 2, numbers)
+print(next(iter)) # 2
+print(next(iter)) # 4
+
+print(list(map(lambda n: n * 2, numbers))) # [2, 4, 6]
 ```
 
 The string `join` method takes an iterable over strings.
-To join non-string values, use `map`. For example:
+To join non-string values, use `map` and the `str` function
+to convert values to strings. For example:
 
 ```python
-'-'.join(map(str, numberList))
+'-'.join(map(str, numbers)) # '1-2-3'
 ```
 
 JavaScript can implement lazy functions using generator functions
@@ -782,7 +802,7 @@ const people = [
 ];
 people.sort((p1, p2) => {
   const compare = p1.lastName.localeCompare(p2.lastName);
-  return compare ? compare : p1.firstName.localeCompare(p2.lastName);
+  return compare ? compare : p1.firstName.localeCompare(p2.firstName);
 });
 console.log(people);
 ```
@@ -799,6 +819,8 @@ people = [
   {'firstName': 'Guido', 'lastName': 'van Rossum'}
 ]
 
+# Issue: This sorts lowercase last names like "van Rossum" to the end!
+# TODO: What is the easiest fix for this?
 people.sort(key=itemgetter('lastName', 'firstName'))
 print(people)
 ```
@@ -809,11 +831,9 @@ Python supports list comprehensions that create a list, but JavaScript does not.
 Here are some examples.
 
 ```python
-squares = [n**2 for n in range(5)]
-print(squares) # [0, 1, 4, 9, 16]
+squares = [n**2 for n in range(5)] # [0, 1, 4, 9, 16]
 
-multipleOf3 = [n for n in range(10) if n % 3 == 0]
-print(multipleOf3) # [0, 3, 6, 9]
+multipleOf3 = [n for n in range(10) if n % 3 == 0] # [0, 3, 6, 9]
 ```
 
 JavaScript generator functions can be used to do the same thing,
@@ -828,8 +848,7 @@ function* map(fn, iter) {
   for (const element of iter) yield fn(element);
 }
 
-const squared = map(n => n ** 2, range(5));
-console.log([...squared]); // [0, 1, 4, 9, 16 ]
+const squared = map(n => n ** 2, range(5)); // [0, 1, 4, 9, 16 ]
 
 function* filter(predicate, obj) {
   for (const element of obj) {
@@ -837,8 +856,7 @@ function* filter(predicate, obj) {
   }
 }
 
-const multipleOf3 = filter(n => n % 3 === 0, range(10));
-console.log([...multipleOf3]); // [ 0, 3, 6, 9 ]
+const multipleOf3 = filter(n => n % 3 === 0, range(10)); // [ 0, 3, 6, 9 ]
 ```
 
 Python also supports generator functions and the `yield` keyword.
@@ -849,18 +867,16 @@ def map(fn, iter):
     for element in iter:
         yield fn(element)
 
-squared = map(lambda n: n**2, range(5))
-print(list(squared)); # [ 0, 1, 4, 9, 16 ]
-print([n**2 for n in range(5)]) # same using list comprehension
+squared = map(lambda n: n**2, range(5)) # [ 0, 1, 4, 9, 16 ]
+squared = [n**2 for n in range(5)] # same using list comprehension
 
 def filter(predicate, seq):
     for element in seq:
         if predicate(element):
             yield element
 
-multipleOf3 = filter(lambda n: n % 3 == 0, range(10))
-print(list(multipleOf3)); # [ 0, 3, 6, 9 ]
-print([n for n in range(10) if n % 3 == 0]) # same using list comprehension
+multipleOf3 = filter(lambda n: n % 3 == 0, range(10)) # [ 0, 3, 6, 9 ]
+multipleOf3 = [n for n in range(10) if n % 3 == 0] # same using list comprehension
 ```
 
 ## Sets
@@ -869,69 +885,70 @@ Sets are unordered collections with no duplicate values.
 
 | Operation             | JavaScript                                       | Python                                  |
 | --------------------- | ------------------------------------------------ | --------------------------------------- |
+| is set                | `expr instanceof Set`                            | `isinstance(expr, set)`                 |
 | create                | `const s = new Set();` - cannot specify elements | `s = {elements}` or `s = set(elements)` |
-| length                | `s.size`                                         | `len(s)`                                |
-| includes              | `s.has(value)`                                   | `value in s`                            |
 | add                   | `s.add(value)`                                   | same                                    |
 | remove                | `s.delete(value);`                               | `s.remove(value)`                       |
 | remove all            | `s.clear()`                                      | same                                    |
-| iterate over          | `s.forEach(value => { ... });`                   | `for value in set:`                     |
-| convert to list/array | `a = s.values();`                                | `l = list(s)`                           |
+| length                | `s.size`                                         | `len(s)`                                |
+| includes              | `s.has(value)`                                   | `value in s`                            |
+| iterate over          | `s.forEach(value => { ... });`                   | `for value in set: ...`                 |
+| convert to array/list | `a = s.values();`                                | `l = list(s)`                           |
 
 ## Set Comprehensions
 
 Python supports set comprehensions that create a set, but JavaScript does not.
-Here are some examples.
+Here is an example.
 
 ```python
 from random import randint
 
 # Pick 10 random integers from 1 to 10
 # and keep only the unique values.
-# Being a set enforces unique values.
+# Placing the values in a set enforces unique values.
 numbers = {randint(1, 11) for n in range(10)}
 ```
 
 ## Key/Value Collections
-
-To store associations between keys and values (key/value pairs),
-Python uses "dictionaries".
-Keys in dictionaries must be immutable types like
-strings, numbers, and tuples containing these.
-
-| Operation               | Python                                                                             |
-| ----------------------- | ---------------------------------------------------------------------------------- |
-| create                  | `dict = {}`<br>`dict = {k1: v1, k2: v2, ...}`<br>`dict([(k1, v1), (k2, v2), ...])` |
-| get length              | `len(dict)`                                                                        |
-| set value of key        | `dict[key] = value`                                                                |
-| get value of key        | `dict[key]` or `dict.get(key)`<br>error if key doesn't exist                       |
-| get all keys            | `dict.keys()` or `list(dict)` or<br>`sorted(dict)` to get keys in sorted order     |
-| get all values          | `dict.values()`                                                                    |
-| get all pairs           | `dict.items()`                                                                     |
-| test if key present     | `key in dict`                                                                      |
-| test if key not present | `key not in dict`                                                                  |
-| delete pair             | `del dict[key]`                                                                    |
-| delete all pairs        | `dict.clear()`                                                                     |
-| iterate over            | `for item in dict.items():`                                                        |
 
 JavaScript uses plain objects or instances of the `Map` class
 to store associations between keys and values.
 Keys in JavaScript objects must be must be strings, integers, or symbols,
 but keys in `Map` instances can be any type.
 
-| Operation               | JavaScript Object                                        | JavaScript Map                                                     |
-| ----------------------- | -------------------------------------------------------- | ------------------------------------------------------------------ |
-| create                  | `const obj = {};`<br>can include initial key/value pairs | `const map = new Map();`<br>cannot specify initial key/value pairs |
-| get length              | `Object.keys(obj).length`                                | `map.size`                                                         |
-| set value of key        | `obj.key = value` or `obj[key] = value`                  | `map.set(key, value)`                                              |
-| get value of key        | `obj.key` or `obj[key]`                                  | `map.get(key)`                                                     |
-| get all keys            | `Object.keys(obj)`                                       | `map.keys()`                                                       |
-| get all values          | `Object.values(obj)`                                     | `map.values()`                                                     |
-| get all keys and values | `Object.entries(obj)`                                    | `map.entries()`                                                    |
-| test if key present     | `key in obj` or `obj.hasOwnProperty(key)`                | `map.has(key)`                                                     |
-| delete key              | `delete obj.key` or `delete obj[key]`                    | `map.delete(key)`                                                  |
-| delete all keys         | `obj = {}`                                               | `map.clear()`                                                      |
-| iterate over            | `for (const prop in obj)`                                | `map.forEach((value, key) => { ... });`                            |
+| Operation           | JavaScript Object                                                           | JavaScript Map                                                     |
+| ------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| is object/dict      | `typeof expr === 'object'`                                                  | `expr instanceof Map`                                              |
+| create              | `const obj = {};`<br>can include initial key/value pairs                    | `const map = new Map();`<br>cannot specify initial key/value pairs |
+| length              | `Object.keys(obj).length`                                                   | `map.size`                                                         |
+| set value of key    | `obj.key = value` or `obj[key] = value`                                     | `map.set(key, value)`                                              |
+| get value of key    | `obj.key` or `obj[key]`                                                     | `map.get(key)`                                                     |
+| get all keys        | `Object.keys(obj)`                                                          | `map.keys()`                                                       |
+| get all values      | `Object.values(obj)`                                                        | `map.values()`                                                     |
+| get all pairs       | `Object.entries(obj)`<br>returns array of arrays containing a key and value | `map.entries()`<br>returns the same                                |
+| test if key present | `key in obj` or `obj.hasOwnProperty(key)`                                   | `map.has(key)`                                                     |
+| delete pair         | `delete obj.key` or `delete obj[key]`                                       | `map.delete(key)`                                                  |
+| delete all pairs    | `obj = {}`                                                                  | `map.clear()`                                                      |
+| iterate over keys   | `for (const key in obj)` or<br>`for (const key of Object.keys(obj))`        | `map.forEach((value, key) => { ... });`                            |
+
+Python uses dictionaries to store associations between keys and values.
+The keys must be immutable types like strings, numbers, and tuples containing these.
+
+| Operation               | Python                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------ |
+| is dict                 | `isinstance(expr, dict)`                                                                               |
+| create                  | `dict = {}`<br>`dict = {k1: v1, k2: v2, ...}`<br>`dict([(k1, v1), (k2, v2), ...])`                     |
+| length                  | `len(dict)`                                                                                            |
+| set value of key        | `dict[key] = value`                                                                                    |
+| get value of key        | `dict[key]` or `dict.get(key)`<br>error if key doesn't exist                                           |
+| get all keys            | `dict.keys()` or `list(dict)` or<br>`sorted(dict)` to get keys in sorted order                         |
+| get all values          | `dict.values()`                                                                                        |
+| get all pairs           | `dict.items()`<br>returns a live view that provides a<br>sequence of tuples containing a key and value |
+| test if key present     | `key in dict`                                                                                          |
+| test if key not present | `key not in dict`                                                                                      |
+| delete pair             | `del dict[key]`                                                                                        |
+| delete all pairs        | `dict.clear()`                                                                                         |
+| iterate over            | `for item in dict.items(): ...`                                                                        |
 
 ## Dictionary Comprehensions
 
@@ -944,38 +961,35 @@ names = ['Mark Volkmann', 'Dorian Yeager']
 def getInitials(name):
   return ''.join(map(lambda s: s[0], name.split(' ')))
 
-myDict = {name: getInitials(name) for name in names}
-print(myDict) # {'Mark Volkmann': 'MV', 'Dorian Yeager': 'DY'}
+my_dict = {name: getInitials(name) for name in names}
+# {'Mark Volkmann': 'MV', 'Dorian Yeager': 'DY'}
 ```
 
 ## Regular Expressions
 
-In Python, import the `re` library. It supports the following methods:
+In JavaScript, regular expressions are a builtin type.
+An instance can be created in two ways:
 
-- split: Split a string by the occurrences of a pattern.
+```js
+// This pattern matches Canadian postal codes.
+const re = /^[A-Z]\d[A-Z] \d[A-Z]\d$/;
+// Alternative
+//const re = new RegExp('^[A-Z]\\d[A-Z] \\d[A-Z]\\d$');
 
-| e Operation              | JavaScript                                                                | Python                                                                 |
-| ------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| create                   | `const re = /pattern/flags` or<br>`const re = new RegExp(pattern, flags)` | `import re`<br>`regex = re.compile(pattern)`                           |
-| test if a string matches | `if (re.test(str))`                                                       | `regex.search(str)`<br>returns a match object or `None` if not matched |
-| get first match          | `str.match(re)`                                                           | `regex.search(str)`                                                    |
-| get all matches          | `str.matchAll(re)` or `re.exec(str)`                                      | `regex.finditer(str)`<br>returns an iterable over match objects        |
-| split string on re       | `str.split(re)`                                                           | `regex.split(str)`                                                     |
+const pc = 'A1B 2C3';
+if (!re.test(pc)) console.log('not a Canadian postal code');
+```
 
-Python match objects have the following methods:
-
-- `group()` - returns the matching string
-- `start()` - returns the start index of the match (inclusive)
-- `end()` - returns the end index of the match (exclusive)
-- `span()` - returns a tuple containing the start and end indexes
-
-Python regular expressions that will be used multiple times should be compiled.
+In Python, import the `re` library to use regular expressions.
+Those that will be used multiple times should be compiled.
 Otherwise they can be used inline.
 The following example demonstrate the two ways in which
 every regular expression method can be used,
 calling it on the `re` module or on a compiled regular expression.
 
 ```python
+import re
+
 # This pattern matches Canadian postal codes.
 # Using the string literal prefix "r" prevents the "\" character
 # from being treated as an escape character inside a regular expression.
@@ -993,6 +1007,21 @@ if (not canadianPostalCode.search(pc)):
     print('not a Canadian postal code')
 ```
 
+| Operation                | JavaScript                                                                | Python                                                                 |
+| ------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| create                   | `const re = /pattern/flags` or<br>`const re = new RegExp(pattern, flags)` | `import re`<br>`regex = re.compile(pattern)`                           |
+| test if a string matches | `if (re.test(str))`                                                       | `regex.search(str)`<br>returns a match object or `None` if not matched |
+| get first match          | `str.match(re)`                                                           | same as above                                                          |
+| get all matches          | `str.matchAll(re)` or `re.exec(str)`                                      | `regex.finditer(str)`<br>returns an iterable over match objects        |
+| split string on re       | `str.split(re)`<br>returns an array of strings                            | `regex.split(str)`<br>returns a list of strings                        |
+
+Python match objects have the following methods:
+
+- `group()` - returns the matching string
+- `start()` - returns the start index of the match (inclusive)
+- `end()` - returns the end index of the match (exclusive)
+- `span()` - returns a tuple containing the start and end indexes
+
 For more information on regular expression support in Python, see the
 {% aTargetBlank "https://docs.python.org/3/library/re.html",
 "Python Standard Library Documentation" %}.
@@ -1001,10 +1030,11 @@ For more information on regular expression support in Python, see the
 
 Python refers to errors as exceptions.
 
-| Operation   | JavaScript                                      | Python                         |
-| ----------- | ----------------------------------------------- | ------------------------------ |
-| throw error | `throw new Error(message);`                     | `raise ExClass(args)`          |
-| catch error | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ...` |
+| Operation | JavaScript                                      | Python                         |
+| --------- | ----------------------------------------------- | ------------------------------ |
+| throw     | `throw new Error(message);`                     | `raise ExClass(args)`          |
+| catch     | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ...` |
+| rethrow   | `throw e;`                                      | `raise e`                      |
 
 In JavaScript:
 
@@ -1014,6 +1044,7 @@ try {
 } catch (e) {
   // code to handle all exceptions
 } finally {
+  // optional
   // code to run at end regardless of whether an exception was thrown
 }
 ```
@@ -1027,21 +1058,30 @@ except ExClass1:
   # code to handle a specific exception class
 except (ExClass2, ExClass3):
   # code to handle other exception classes listed in a tuple
+else: # optional
+  # code to run if no exception was thrown
+  # Placing code here means that exceptions it throws
+  # will not be handled by the "except" blocks above.
+finally: # optional
+  # code to run at end regardless of whether an exception was thrown
 ```
 
 To ignore an exception in Python,
 include a `pass` statement in an `except` block.
 
+There are many builtin Python exception classes.
+The base class of all of them is `Exception`.
+Names of builtin exception classes end in "Error".
+Custom exception classes should do the same.
+
 ## JSON
+
+In Python, in order to use JSON methods include `import json`.
 
 | Operation | JavaScript                                 | Python                           |
 | --------- | ------------------------------------------ | -------------------------------- |
 | create    | `const jsonString = JSON.stringify(expr);` | `jsonString = json.dumps(expr)`  |
 | parse     | `const value = JSON.parse(jsonString);`    | `value = json.loads(jsonString)` |
-
-In Python, you must `import json`.
-There are many builtin Python exception classes.
-The base class of all of them is Error.
 
 ## Decorators
 
@@ -1051,14 +1091,15 @@ The TC39 committee that controls the ECMAScript standard for JavaScript
 has been discussing adding decorators for many years,
 but they have not yet been added.
 
-Here is a simple example of a decorator that logs the return value
-of every invocation value of a function:
+Here is a simple example of a decorator that logs the
+arguments and return value of every invocation value
+of functions to which it is applied:
 
 ```python
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-def log_return(fn):
+def log(fn):
     def wrapper(*args):
         result = fn(*args)
         logging.debug(
@@ -1067,24 +1108,28 @@ def log_return(fn):
 
     return wrapper
 
-@log_return
+@log
 def add(n1, n2):
     return n1 + n2
 
-add(1, 2)
-add(2, 3)
+add(1, 2) # DEBUG:root:add was passed (1, 2) and returned 3
+add(2, 3) # DEBUG:root:add was passed (2, 3) and returned 5
 ```
 
 The builtin Python decorators include:
 
-- `@classmethod` - transforms a method into a class method
+- `@classmethod`  
+  This transforms a method into a class method
   which receives a class object as its first parameter
-  and can use it to access class state
-- `@property` - used to define getter, setter, and deleter methods
-  for a class instance property
-- `@staticmethod` - transforms a method into a static method
+  and can use it to access class state.
+- `@property`  
+  This defines getter, setter, and deleter methods
+  for a class instance property.
+- `@staticmethod`  
+  This transforms a method into a static method
   which does not receive a class object as its first parameter
-  and cannot access class state; useful for utility functions
+  and cannot access class state.
+  It is useful for utility functions.
 
 For more information, see {% aTargetBlank
 "https://realpython.com/primer-on-python-decorators/#decorating-classes",
@@ -1092,64 +1137,101 @@ For more information, see {% aTargetBlank
 
 ## Check for running as main
 
-In Python, use `if __name__ == '__main__':`.
-In Node.js, use `if (require.main === module) {`.
+Some source files can be used as both the starting point of a script
+and a module imported by others.
+To include code that is only run when the file is executed as a script,
+wrap it in one of the following `if` statements.
+
+In Node.js, use `if (require.main === module) { ... }`
+
+In Python, use `if __name__ == '__main__': ...`
 
 ## Popular Tools/Libraries/Frameworks
 
 | Topic            | JavaScript                          | Python                                        |
 | ---------------- | ----------------------------------- | --------------------------------------------- |
-| command-line     | Node.js                             | `python` interpreter                          |
+| command-line     | Node.js `node` command              | `python` command                              |
 | utilities        | Lodash, Ramda                       | pydash                                        |
 | web server       | Express                             | Flask                                         |
-| web framework    | React, Vue, Svelte                  | Flask                                         |
+| web framework    | React, Svelte, Vue                  | Flask                                         |
 | dates and times  | date.fns, Moment.js, Temporal       | datetime (in standard library)                |
 | unit tests       | Jest, Mocha, Chai, @testing-library | unittest (in standard library), nose2, pytest |
-| end-to-end tests | Cypress                             |                                               |
+| end-to-end tests | Cypress                             | same                                          |
 | math             | mathjs                              | math (in standard library)                    |
 
 ## Python Magic Methods
 
-Python magic methods support operator overloading for custom classes.
-This is a partial list of the magic methods that a Python class can be implement.
+Python magic methods support many operations on classes and class instances.
+These include operator overloading.
+The following table provides a categorized, partial list of
+the magic methods that a Python class can be implement.
 
-| Method                              | Parameters       | Purpose                                               |
-| ----------------------------------- | ---------------- | ----------------------------------------------------- |
-| object lifecycle                    |                  |                                                       |
-| `__new__`                           | cls, ...         | creates a new object                                  |
-| `__init__`                          | self, ...        | initializes a new object                              |
-| `__del__`                           | self             | destroys an object                                    |
-| string representation               |                  |                                                       |
-| `__repr__`                          | self             | returns a string representations useful to developers |
-| `__str__`                           | self             | returns a string representation useful to users       |
-| comparisons                         |                  |                                                       |
-| `__cmp__`                           | self, other      | removed in Python 3                                   |
-| `__ne__`                            | self, other      | determines if this object is not equal to another     |
-| `__eq__`                            | self, other      | determines if this object is equal to another         |
-| `__lt__`                            | self, other      | determines if this object is < another                |
-| `__le__`                            | self, other      | determines if this object is <= to another            |
-| `__gt__`                            | self, other      | determines if this object is > another                |
-| `__ge__`                            | self, other      | determines if this object is >= to another            |
-| also see functools.total_ordering() |                  |                                                       |
-| list-like operations                |                  |                                                       |
-| `__getitem__`                       | self, key        | gets an item from a list by index                     |
-| `__setitem__`                       | self, key, value | sets an item in a list by index                       |
-| `__delitem__`                       | self, key        | deletes an item from a list by index                  |
-| `__iter__`                          | self             | returns an iterator                                   |
-| `__contains__`                      | self, item       | determines if a given item is contained               |
-| dict operations                     |                  |                                                       |
-| `__missing__`                       | self, key        | returns value to use when key is not present          |
-| math operations                     |                  |                                                       |
-| `__add__`                           | self, other      | adds an object to another                             |
-| `__sub__`                           | self, other      | subtracts an object from another                      |
-| `__mul__`                           | self, other      | multiplies an object by another                       |
-| `__div__`                           | self, other      | divides an object by another                          |
-| `__mod__`                           | self, other      | mods an object by another                             |
-| pickling (serialization)            |                  |                                                       |
-| `__getstate__`                      | self             | pickles an object                                     |
-| `__setstate__`                      | self             | unpickles an object                                   |
-| other                               |                  |                                                       |
-| `__call__`                          | self, ...        | treats an object as a function; can change state      |
+| Method                                | Parameters       | Purpose                                                                        |
+| ------------------------------------- | ---------------- | ------------------------------------------------------------------------------ |
+| **Object Lifecycle**                  |
+| `__new__`                             | cls, ...         | creates a new object                                                           |
+| `__init__`                            | self, ...        | initializes a new object                                                       |
+| `__del__`                             | self             | destroys an object                                                             |
+| `__getattr__`                         | self, name       | can be used to implement the "method missing" pattern<br>(see example below)   |
+| **String Representation**             |                  |                                                                                |
+| `__repr__`                            | self             | returns a string representations useful to developers                          |
+| `__str__`                             | self             | returns a string representation useful to users                                |
+| **Comparisons**                       |                  |                                                                                |
+| `__eq__`                              | self, other      | determines if this object is equal to another                                  |
+| `__ne__`                              | self, other      | determines if this object is not equal to another                              |
+| `__lt__`                              | self, other      | determines if this object is < another                                         |
+| `__le__`                              | self, other      | determines if this object is <= to another                                     |
+| `__gt__`                              | self, other      | determines if this object is > another                                         |
+| `__ge__`                              | self, other      | determines if this object is >= to another                                     |
+| also see `functools.total_ordering()` |
+| **List-like Operations**              |
+| `__getitem__`                         | self, key        | gets an item from a list by index                                              |
+| `__setitem__`                         | self, key, value | sets an item in a list by index                                                |
+| `__delitem__`                         | self, key        | deletes an item from a list by index                                           |
+| `__iter__`                            | self             | returns an iterator                                                            |
+| `__contains__`                        | self, item       | determines if a given item is contained                                        |
+| **Dict Operations**                   |
+| `__missing__`                         | self, key        | returns value to use when key is not present<br>class must inherit from `dict` |
+| **Math Operations**                   |
+| `__add__`                             | self, other      | adds an object to another                                                      |
+| `__sub__`                             | self, other      | subtracts an object from another                                               |
+| `__mul__`                             | self, other      | multiplies an object by another                                                |
+| `__div__`                             | self, other      | divides an object by another                                                   |
+| `__mod__`                             | self, other      | mods an object by another                                                      |
+| **Pickling (serialization)**          |
+| `__getstate__`                        | self             | pickles an object                                                              |
+| `__setstate__`                        | self             | unpickles an object                                                            |
+| **Other**                             |
+| `__call__`                            | self, ...        | treats an object as a function; can change state                               |
+
+The "method missing" pattern supports calling non-existent methods
+on an object and inferring meaning at runtime.
+This is frequently used in the "Ruby on Rails" framework
+in the implementation of "Active Record".
+
+For example, suppose we want to implement a class whose objects
+support methods whose names begin with "add" and end with a number.
+These methods accept another number as an argument
+and return the sum of the numbers.
+This could be implemented as follows:
+
+```python
+class MethodMissingDemo:
+
+    def __getattr__(self, method_name):
+        prefix = 'add'
+        if method_name.startswith(prefix):
+            n1 = int(method_name[len(prefix)])
+            return lambda n2: n1 + n2
+        else:
+            class_name = self.__class__.__name__
+            raise AttributeError(f"{class_name} object has no method '{method_name}'")
+
+demo = MethodMissingDemo()
+print(demo.add3(4)) # 7
+print(demo.add4(1)) # 5
+print(demo.subtract5(7)) # AttributeError: MethodMissingDemo object has no method 'subtract5'
+```
 
 ## Types
 
