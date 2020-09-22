@@ -18,7 +18,7 @@ equations, visualizations and narrative text."
 It is frequently used to experiment with snippets of Python code.
 
 JupyterLab is "Jupyter’s Next-Generation Notebook Interface".
-It is a web-based IDE that is somewhat similar to VS Code,
+et is a web-based IDE that is somewhat similar to VS Code,
 but has many additional features such as support for Jupyter Notebooks
 and many file formats including CSV, GeoJSON, and Vega.
 The "Jupyter Notebook" web UI will be deprecated.
@@ -428,6 +428,27 @@ will render it in a new VS Code tab.
 When rendering data visualizations,
 VS Code will ask if `ipykernel` should be installed.
 Press the "Yes" button.
+
+The user interface is slightly different than the Jupyter Lab web UI.
+
+- Cells and their output cannot be collapsed.
+- To add a new cell after an existing one,
+  click the "+" to its left or the "+" at the top of the window.
+- To delete a cell, click the trash can icon in its upper-right.
+- Cells cannot be dragged to a new location.
+  Instead the up and down angles to the left of each cell can be clicked
+  to move the cell up or down.
+- To run the code in a cell, click the green triangle at the top of the cell.
+- To step through the code in a cell, executing one line at a time,
+  repeatedly click the icon containing
+  a small green triangle at the top of the cell.
+- To stop a long running cell, click the red square at the top of the cell
+  or the one at the top of the window.
+- To clear the output of all cells, click the icon with
+  three cells and a small red "x" at the top of the window.
+
+Methods in matplotlab that save plots to files
+do not seem to work when called inside VS Code.
 
 For more details, see {% aTargetBlank
 "https://code.visualstudio.com/docs/python/jupyter-support",
