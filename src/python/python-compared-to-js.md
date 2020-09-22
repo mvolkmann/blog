@@ -1317,7 +1317,10 @@ We want the servers to:
 
 ### Python Flask REST Server
 
-1. Install the required dependencies by entering `pip install flask`.
+1. Install the required dependencies by entering `pip install flask flask-cors`.
+   Flask provides minimal request logging by default.
+   {% aTargetBlank "https://flask-cors.readthedocs.io/en/latest/", "Flask-CORS" %}
+   supports enabling CORS in Flask servers.
 1. If running in a UNIX environment, create the script file `start` shown below
    and make it executable by entering `chmod a+x start`:
 
@@ -1336,12 +1339,14 @@ We want the servers to:
 1. Create the file `server.py` containing the following:
 
    ```py
-   # To configure CORS, see approaches at https://stackoverflow.com/questions/25594893/how-to-enable-cors-in-flask.
    from flask import Flask, abort, request
+   from flask_cors import CORS
+
    import time
 
    # Serve static files found in the public directory.
-   app = Flask(__name__, static_folder='public')
+   app = Flask(__name__, static_folder='public', static_url_path='')
+   CORS(app)
 
    dogs = {
        1: {
