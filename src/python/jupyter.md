@@ -437,6 +437,8 @@ data = {
 GeoJSON(data, layer_options={'minZoom': 2, 'maxZoom': 19})
 ```
 
+![GeoJSON map](/blog/assets/GeoJSON.png)
+
 ## VS Code
 
 VS Code supports creating, rendering, and editing Jupyter Notebooks.
