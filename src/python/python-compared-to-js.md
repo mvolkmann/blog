@@ -225,27 +225,30 @@ by entering `npm init` and answering some questions.
 
 Python "packages" are managed using the `pip` tool
 which is install with Python is installed.
+To upgrade the version of `pip` being used, enter
+`python -m pip install --upgrade pip`.
+
 To allow each project to use different versions of packages
 and make it easy for other developers to install the same set of packages,
 create a virtual environment by entering `python -m venv env`
-while in the top project directory.
-This creates an `env` directory.
+while in the project root directory.
+This creates an `env` subdirectory.
 
 To activate this virtual environment, run the `activate` script
 in the `env/bin` directory.
 In Windows, enter `env\bin\activate.bat`.
 In UNIX environments, enter `source env/bin/activate`.
 (When using the Fish shell, add the `.fish` extension.)
-This changes the environment to use versions of tools and libraries
-found in the `env` directory instead of global ones.
-It also changes the shell prompt to indicate the
+
+Activating a virtual environment changes the environment to use versions of
+tools and libraries found in the `env` directory instead of global ones.
+Note that rather than including a copy of a specific version of
+the Python interpreter, a symbolic link to it is created.
+This also changes the shell prompt to indicate the
 environment directory being used, `env` in this case.
 
-To deactivate this virtual environment and return to
+To deactivate a virtual environment and return to
 using global versions of tools and libraries, enter `deactivate`.
-
-To upgrade the version of `pip` being used, enter
-`python -m pip install --upgrade pip`.
 
 ### Package Comparisons
 
