@@ -60,7 +60,7 @@ cons:
   "The Computer Language Benchmark Game" %}).
   Python does well with regular expressions.
 - magic methods such as `__init__` that use
-  "dunder" names (for double underscore)
+  "dunder" names (for double underscore) which is odd and verbose
   (see list in "Python Magic Methods" section)
 - operator overloading (supported by magic methods)
 - lots of documentation and examples are still for V2 instead of V3
@@ -68,6 +68,7 @@ cons:
 - no built-in support for asynchronous code
   until the asyncio module was added in Python 3.4
   (some features require Python 3.7+)
+- single-word dictionary keys require quotes unlike JavaScript object keys
 - lambda functions are more verbose than JavaScript arrow functions
   (lambda vs. ->)
 - the classic ternary operator using a `?` and `:` is not supported;

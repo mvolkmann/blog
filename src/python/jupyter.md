@@ -395,8 +395,15 @@ There are many examples at the Vega website linked above.
 Copy the JSON for one into a `.vg` file
 and open it in Jupyter to see the result.
 
-Click the circled ellipsis in the upper-right
-to display a menu where you can select
+An example of a Vega line chart can be found at
+{% aTargetBlank "https://vega.github.io/vega/examples/line-chart/",
+"Line Chart Example" %}.
+It produces the following chart:
+
+![Vega chart](/blog/assets/vega.png)
+
+Click the circled ellipsis in the upper-right corner of the chart
+(not shown above) to display a menu where you can select
 "Save as SVG", "Save as PNG",
 "View Source" (displays read-only text in a new browser tab),
 or "Open in Vega Editor" (opens Vega online editor in a new browser tab).
@@ -406,46 +413,52 @@ Changes made in the Vega editor can be exported as JSON and reopened in Jupyter.
 
 To render GeoJSON data in Jupyter:
 
-- `jupyter labextension install @jupyterlab/geojson-extension`
-- may need to restart the Jupyter server
-- enter code like the following in a cell of a Python notebook
+- Install an extension by entering
+  `jupyter labextension install @jupyterlab/geojson-extension`
+- You may need to restart the Jupyter server.
+- Enter code like the following in a cell of a Python notebook:
 
 ```python
 from IPython.display import GeoJSON
-
-GeoJSON({
+data = {
     'type': 'Feature',
     'geometry': {
         'type': 'Point',
-        #'coordinates': [-118.4563712, 34.0163116]
-        'coordinates': [-90.594482, 38.709419]
-        TODO: How do you set the zoom level?
+        'coordinates': [-118.4563712, 34.0163116]
+        #'coordinates': [-90.594482, 38.709419]
     }
-})
+}
+# minZoom defaults to 0 and maxZoom defaults to 18.
+# When minZoom is 0 or 1, parts of the world are visible more than once,
+# so setting it to 2 or above is recommended.
+# When maxZoom is >= 20, no map is rendered,
+# so setting it to 19 or below is recommended.
+# The map starts at maxZoom.
+GeoJSON(data, layer_options={'minZoom': 2, 'maxZoom': 19})
 ```
 
 ## VS Code
 
-VS Code supports working with Jupyter Notebooks.
-To do this, open the Command Palette and select
+VS Code supports creating, rendering, and editing Jupyter Notebooks.
+To enable this, open the Command Palette and select
 "Python: Select Python Interpreter to start Jupyter server"
 and select an installed Python interpreter.
 
 To create a new notebook, open the Command Palette and select
 "Python: Create Blank New Jupyter Notebook".
 
-Opening an existing `.ipynb` file that describes a notebook
-will render it in a new VS Code tab.
+Opening an existing `.ipynb` notebook file renders it in a new VS Code tab.
 
 When rendering data visualizations,
 VS Code will ask if `ipykernel` should be installed.
 Press the "Yes" button.
 
-The user interface is slightly different than the Jupyter Lab web UI.
+The user interface is slightly different than the JupyterLab web UI.
 
 - Cells and their output cannot be collapsed.
-- To add a new cell after an existing one,
-  click the "+" to its left or the "+" at the top of the window.
+- To add a new cell after an existing one, click the "+" to its left.
+  The "+" at the top of the window can be clicked
+  to add a new cell after the currently selected cell.
 - To delete a cell, click the trash can icon in its upper-right.
 - Cells cannot be dragged to a new location.
   Instead the up and down angles to the left of each cell can be clicked
@@ -458,6 +471,8 @@ The user interface is slightly different than the Jupyter Lab web UI.
   or the one at the top of the window.
 - To clear the output of all cells, click the icon with
   three cells and a small red "x" at the top of the window.
+- To run the code in all cells,
+  click the double triangle icon at the top of the window.
 
 Methods in matplotlab that save plots to files
 do not seem to work when called inside VS Code.
