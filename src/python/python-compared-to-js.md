@@ -1215,7 +1215,7 @@ In Python, a popular option is to use the
 
 To demonstrate these options, we will implement HTTP servers that:
 
-- server static files in a "public" directory
+- serve static files in a "public" directory
 - implement REST services that provide CRUD operations
   on a collection of dogs
 
@@ -1229,166 +1229,162 @@ We want the servers to:
 - provide request logging
 - support cross-origin resource sharing (CORS) so web apps
   that are served from a different domain can invoke them
-- handle GET /dog requests by returning all the dogs as JSON
-- handle POST /dog requests by adding the dog described in the request body
-- handle PUT /dog/id requests by updating the dog with the given id
+- handle `GET /dog` requests by returning all the dogs as JSON
+- handle `POST /dog` requests by adding the dog described in the request body
+- handle `PUT /dog/id` requests by updating the dog with the given id
   using the data in the request body
-- handle DELETE /dog/id requests by deleting the dog with the given id
+- handle `DELETE /dog/id` requests by deleting the dog with the given id
 
 ### JavaScript Express REST Server
 
-Create a directory for the project and cd to it.
-Create a `package.json` file for the project by
-entering `npm init` and answering the questions it asks.
+1. Create a directory for the project and cd to it.
+1. Create a `package.json` file for the project by
+   entering `npm init` and answering the questions it asks.
+1. Install the required dependencies by entering
+   `npm install cors express pino-http` and
+   `npm install -D nodemon`.
+1. Replace the "test" script in `package.json` with
+   `"start": "nodemon server.js"`.
+   The `nodemon` command provides automatic file watch and server restart.
+1. Create the file `server.js` containing the following:
 
-To install the required dependencies,
-enter `npm install cors express pino-http` and
-`npm install -D nodemon`.
+   ```js
+   const express = require('express');
+   const cors = require('cors');
+   const path = require('path');
+   const pino = require('pino-http')();
 
-Replace the "test" script in `package.json` with
-`"start": "nodemon server.js"`.
-The `nodemon` command provides automatic file watch and server restart.
+   const dogs = {
+     1: {id: 1, breed: 'Whippet', name: 'Comet'}
+   };
 
-Create the file `server.js` shown below:
+   const app = express();
+   app.use(pino); // for logging
+   app.use(cors()); // for cross-origin resource sharing
+   app.use(express.json()); // to parse JSON bodies
 
-```js
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const pino = require('pino-http')();
+   // Serve static files found in the public directory.
+   app.use(express.static(path.resolve(__dirname, 'public')));
 
-const dogs = {
-  1: {id: 1, breed: 'Whippet', name: 'Comet'}
-};
+   app.get('/dog', (req, res) => {
+     res.end(JSON.stringify(dogs));
+   });
 
-const app = express();
-app.use(pino); // for logging
-app.use(cors()); // for cross-origin resource sharing
-app.use(express.json()); // to parse JSON bodies
+   app.get('/dog/:id', (req, res) => {
+     const {id} = req.params;
+     const dog = dogs[id];
+     if (dog) {
+       res.end(JSON.stringify(dog));
+     } else {
+       res.status(404).end('dog not found');
+     }
+   });
 
-// Serve static files found in the public directory.
-app.use(express.static(path.resolve(__dirname, 'public')));
+   app.post('/dog', (req, res) => {
+     const dog = req.body;
+     dog.id = Date.now();
+     dogs[dog.id] = dog;
+     res.end(String(dog.id));
+   });
 
-app.get('/dog', (req, res) => {
-  res.end(JSON.stringify(dogs));
-});
+   app.put('/dog/:id', (req, res) => {
+     const {id} = req.params;
+     if (dogs[id]) {
+       const dog = req.body;
+       dog.id = id;
+       dogs[id] = dog;
+       res.end();
+     } else {
+       res.status(404).end('dog not found');
+     }
+   });
 
-app.get('/dog/:id', (req, res) => {
-  const {id} = req.params;
-  const dog = dogs[id];
-  if (dog) {
-    res.end(JSON.stringify(dog));
-  } else {
-    res.status(404).end('dog not found');
-  }
-});
+   app.delete('/dog/:id', (req, res) => {
+     const {id} = req.params;
+     if (dogs[id]) {
+       delete dogs[id];
+       res.end();
+     } else {
+       res.status(404).end('dog not found');
+     }
+   });
 
-app.post('/dog', (req, res) => {
-  const dog = req.body;
-  dog.id = Date.now();
-  dogs[dog.id] = dog;
-  res.end(String(dog.id));
-});
+   const PORT = 1919;
+   app.listen(PORT, () => console.log('ready'));
+   ```
 
-app.put('/dog/:id', (req, res) => {
-  const {id} = req.params;
-  if (dogs[id]) {
-    const dog = req.body;
-    dog.id = id;
-    dogs[id] = dog;
-    res.end();
-  } else {
-    res.status(404).end('dog not found');
-  }
-});
-
-app.delete('/dog/:id', (req, res) => {
-  const {id} = req.params;
-  if (dogs[id]) {
-    delete dogs[id];
-    res.end();
-  } else {
-    res.status(404).end('dog not found');
-  }
-});
-
-const PORT = 1919;
-app.listen(PORT, () => console.log('ready'));
-```
-
-To run the server, enter `npm start`.
+1. Run the server by entering `npm start`.
 
 ### Python Flask REST Server
 
-To install the required dependencies, enter `pip install flask`.
+1. Install the required dependencies by entering `pip install flask`.
+1. If running in a UNIX environment, create the script file `start` shown below
+   and make it executable by entering `chmod a+x start`:
 
-If running in a UNIX environment, create the script file `start` shown below
-and make it executable by entering `chmod a+x start`:
+   ```bash
+   #!/usr/local/bin/bash
+   export FLASK_APP=server.py
+   export FLASK_ENV=development
+   flask run --port=1919
+   ```
 
-```bash
-#!/usr/local/bin/bash
-export FLASK_APP=server.py
-export FLASK_ENV=development
-flask run --port=1919
-```
+   Setting `FLASK_ENV` to `development`
+   provides automatic file watch and server restart.
 
-Setting `FLASK_ENV` to `development`
-provides automatic file watch and server restart.
+   If running in Windows, create a similar `start.bat` file.
 
-If running in Windows, create a similar `start.bat` file.
+1. Create the file `server.py` containing the following:
 
-Create the file `server.py` shown below:
+   ```py
+   # To configure CORS, see approaches at https://stackoverflow.com/questions/25594893/how-to-enable-cors-in-flask.
+   from flask import Flask, abort, request
+   import time
 
-```py
-# To configure CORS, see approaches at https://stackoverflow.com/questions/25594893/how-to-enable-cors-in-flask.
-from flask import Flask, abort, request
-import time
+   # Serve static files found in the public directory.
+   app = Flask(__name__, static_folder='public')
 
-# Serve static files found in the public directory.
-app = Flask(__name__, static_folder='public')
+   dogs = {
+       1: {
+           'id': 1, 'breed': 'Whippet', 'name': 'Comet'
+       }
+   }
 
-dogs = {
-    1: {
-        'id': 1, 'breed': 'Whippet', 'name': 'Comet'
-    }
-}
+   @app.route('/dog')
+   def all_dogs():
+       return dogs
 
-@app.route('/dog')
-def all_dogs():
-    return dogs
+   @app.route('/dog', methods=['POST'])
+   def create_dog():
+       dog = request.get_json() # from body
+       print('dog =', dog)
+       id = round(time.time() * 1000)
+       print('id =', id)
+       dog['id'] = id
+       dogs[id] = dog
+       return str(id)
 
-@app.route('/dog', methods=['POST'])
-def create_dog():
-    dog = request.get_json() # from body
-    print('dog =', dog)
-    id = round(time.time() * 1000)
-    print('id =', id)
-    dog['id'] = id
-    dogs[id] = dog
-    return str(id)
+   @app.route('/dog/<id>', methods=['PUT'])
+   def update_dog(id):
+       id = int(id)
+       if id in dogs:
+           dog = request.get_json() # from body
+           dog['id'] = id
+           dogs[id] = dog
+           return ''
+       else:
+           abort(404)
 
-@app.route('/dog/<id>', methods=['PUT'])
-def update_dog(id):
-    id = int(id)
-    if id in dogs:
-        dog = request.get_json() # from body
-        dog['id'] = id
-        dogs[id] = dog
-        return ''
-    else:
-        abort(404)
+   @app.route('/dog/<id>', methods=['DELETE'])
+   def delete_dog(id):
+       id = int(id)
+       if id in dogs:
+           del dogs[id]
+           return ''
+       else:
+           abort(404)
+   ```
 
-@app.route('/dog/<id>', methods=['DELETE'])
-def delete_dog(id):
-    id = int(id)
-    if id in dogs:
-        del dogs[id]
-        return ''
-    else:
-        abort(404)
-```
-
-To run the server, enter `./start`.
+1. Run the server by entering `./start`.
 
 ## Python Magic Methods
 
