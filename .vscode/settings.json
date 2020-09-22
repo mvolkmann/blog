@@ -140,6 +140,7 @@
     "onclick",
     "pandoc",
     "peaceiris",
+    "pino",
     "precache",
     "precaching",
     "preload",
