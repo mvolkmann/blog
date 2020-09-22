@@ -185,6 +185,7 @@
     "unstar",
     "urlencode",
     "urlize",
+    "virtualenv",
     "webfontloader",
     "webhook",
     "webp",

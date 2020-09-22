@@ -210,9 +210,62 @@ To see the directories that will be searched,
 | open source catalog      | https://www.npmjs.com/                                                                                  | https://pypi.org/                                                                                    |
 | tool to install          | `npm` (installed with Node.js)                                                                          | `pip` (installed with Python)                                                                        |
 
-## Python Packages
+## Packages
 
-Python "packages" enable importing modules from subdirectories.
+### JavaScript Packages
+
+JavaScript "packages" are managed using the `npm` tool
+which is install with Node.js is installed.
+To allow each project to use different versions of packages
+and make it easy for other developers to install the same set of packages,
+create a `package.json` file in each project
+by entering `npm init` and answering some questions.
+
+### Python Packages
+
+Python "packages" are managed using the `pip` tool
+which is install with Python is installed.
+To allow each project to use different versions of packages
+and make it easy for other developers to install the same set of packages,
+create a virtual environment by entering `python -m venv env`
+while in the top project directory.
+This creates an `env` directory.
+
+To activate this virtual environment, run the `activate` script
+in the `env/bin` directory.
+In Windows, enter `env\bin\activate.bat`.
+In UNIX environments, enter `source env/bin/activate`.
+(When using the Fish shell, add the `.fish` extension.)
+This changes the environment to use versions of tools and libraries
+found in the `env` directory instead of global ones.
+It also changes the shell prompt to indicate the
+environment directory being used, `env` in this case.
+
+To deactivate this virtual environment and return to
+using global versions of tools and libraries, enter `deactivate`.
+
+To upgrade the version of `pip` being used, enter
+`python -m pip install --upgrade pip`.
+
+### Package Comparisons
+
+| Operation                                       | JavaScript                                                          | Python                                            |
+| ----------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------- |
+| prepare a project                               | `npm init`                                                          | `python -m venv env`                              |
+| install a package globally                      | `npm install -g {pkg-name}`                                         | `pip install {pkg-name}`                          |
+| install a package locally                       | `npm install {pkg-name}`                                            | `pip install {pkg-name}`                          |
+| install a specific version of a package         | `npm install {pkg-name}@{version}`                                  | `pip install {pkg-name}=={version}`               |
+| update to latest versiono of a specific package | `npm update {pkg-name}@{version}`                                   | `pip install --upgrade {pkg-name}`                |
+| see where global packages are installed         | `npm -g root`                                                       | with no environment activated, `pip list -v`      |
+| see where local packages are installed          | `npm root`                                                          | with an environment activated, `pip list -v`      |
+| location of local packages                      | `{project-dir}/node_modules`                                        | `{project-dir}/lib/python{version}/site-packages` |
+| see list of locally installed packages          | open `package.json` and see<br>`dependencies` and `devDependencies` | with environment activated, `pip list`            |
+| create list of project package versions         | automatically maintained in `package.json`                          | `pip freeze > requirements.txt`                   |
+| install project package versions                | `npm install`                                                       | `pip install -r requirements.txt`                 |
+
+### Project Python Packages
+
+Project Python packages enable importing modules from subdirectories.
 These are subdirectories whose names are a package name.
 The subdirectories must contain a `__init__.py` file
 that can be empty or contain initialization code for the package.
