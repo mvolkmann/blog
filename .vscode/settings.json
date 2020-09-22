@@ -106,6 +106,7 @@
     "hasattr",
     "ijavascript",
     "ijsinstall",
+    "ipykernel",
     "ipynb",
     "isinstance",
     "itemgetter",

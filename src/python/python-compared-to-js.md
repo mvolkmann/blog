@@ -252,19 +252,19 @@ using global versions of tools and libraries, enter `deactivate`.
 
 ### Package Comparisons
 
-| Operation                                       | JavaScript                                                          | Python                                            |
-| ----------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------- |
-| prepare a project                               | `npm init`                                                          | `python -m venv env`                              |
-| install a package globally                      | `npm install -g {pkg-name}`                                         | `pip install {pkg-name}`                          |
-| install a package locally                       | `npm install {pkg-name}`                                            | `pip install {pkg-name}`                          |
-| install a specific version of a package         | `npm install {pkg-name}@{version}`                                  | `pip install {pkg-name}=={version}`               |
-| update to latest versiono of a specific package | `npm update {pkg-name}@{version}`                                   | `pip install --upgrade {pkg-name}`                |
-| see where global packages are installed         | `npm -g root`                                                       | with no environment activated, `pip list -v`      |
-| see where local packages are installed          | `npm root`                                                          | with an environment activated, `pip list -v`      |
-| location of local packages                      | `{project-dir}/node_modules`                                        | `{project-dir}/lib/python{version}/site-packages` |
-| see list of locally installed packages          | open `package.json` and see<br>`dependencies` and `devDependencies` | with environment activated, `pip list`            |
-| create list of project package versions         | automatically maintained in `package.json`                          | `pip freeze > requirements.txt`                   |
-| install project package versions                | `npm install`                                                       | `pip install -r requirements.txt`                 |
+| Operation                                      | JavaScript                                                                         | Python                                                                       |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| prepare a project                              | `npm init [-y]`                                                                    | `python -m venv env`<br>where `env` is the directory name used by convention |
+| install a package globally                     | `npm install -g {pkg-name}`                                                        | with no environment activated,<br>`pip install {pkg-name}`                   |
+| install a package locally                      | `npm install {pkg-name}`                                                           | with an environment activated,<br>`pip install {pkg-name}`                   |
+| install a specific version of a package        | `npm install {pkg-name}@{version}`                                                 | `pip install {pkg-name}=={version}`                                          |
+| update to latest version of a specific package | `npm update {pkg-name}@{version}`                                                  | `pip install --upgrade {pkg-name}`                                           |
+| see where global packages are installed        | `npm -g root`                                                                      | with no environment activated,<br>`pip list -v`                              |
+| see where local packages are installed         | `npm root`                                                                         | with an environment activated,<br>`pip list -v`                              |
+| location of local packages                     | `{project-dir}/node_modules`                                                       | `{project-dir}/lib/python{version}/site-packages`                            |
+| see list of locally installed packages         | `npm ls` or<br>open `package.json` and see<br>`dependencies` and `devDependencies` | with environment activated, `pip list`                                       |
+| create list of project package versions        | automatically maintained in `package.json`                                         | `pip freeze > requirements.txt`                                              |
+| install project package versions               | `npm install`                                                                      | `pip install -r requirements.txt`                                            |
 
 ### Project Python Packages
 

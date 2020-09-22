@@ -18,6 +18,14 @@ equations, visualizations and narrative text."
 It is frequently used to experiment with snippets of Python code.
 
 JupyterLab is "Jupyter’s Next-Generation Notebook Interface".
+It is a web-based IDE that is somewhat similar to VS Code,
+but has many additional features such as support for Jupyter Notebooks
+and many file formats including CSV, GeoJSON, and Vega.
+The "Jupyter Notebook" web UI will be deprecated.
+
+{% aTargetBlank "https://jupyter.org/hub", "JupyterHub" %}
+allows groups of users to collaborate on Notebooks
+over the web without installing any software.
 
 ## Getting Started
 
@@ -301,14 +309,18 @@ There are many libraries that can be used to create plots inside Jupyter.
 A popular option is {% aTargetBlank "https://matplotlib.org/", "matplotlib" %}.
 To install it, enter `pip install matplotlib`.
 
-To draw a line chart, enter the following in a cell and execute it:
+To draw a line chart, save it to a PNG file, and display it,
+enter the following in a cell and execute it:
 
 ```python
 %matplotlib inline
-from matplotlib import pyplot
-points = [[0,0], [1,4], [2,2], [3,1], [4,6]]
-pyplot.plot(points, linewidth=1)
-pyplot.show()
+import matplotlib.pyplot as plt
+y_values = [0, 4, 1, 2, 0.5]
+x_values = range(len(y_values))
+plt.plot(x_values, y_values, linewidth=1)
+file_path = 'line-plot.png'
+plt.savefig(file_path, bbox_inches='tight', dpi=600)
+plt.show()
 ```
 
 To plot a function, enter the following in a cell and execute it:
@@ -399,6 +411,27 @@ GeoJSON({
     }
 })
 ```
+
+## VS Code
+
+VS Code supports working with Jupyter Notebooks.
+To do this, open the Command Palette and select
+"Python: Select Python Interpreter to start Jupyter server"
+and select an installed Python interpreter.
+
+To create a new notebook, open the Command Palette and select
+"Python: Create Blank New Jupyter Notebook".
+
+Opening an existing `.ipynb` file that describes a notebook
+will render it in a new VS Code tab.
+
+When rendering data visualizations,
+VS Code will ask if `ipykernel` should be installed.
+Press the "Yes" button.
+
+For more details, see {% aTargetBlank
+"https://code.visualstudio.com/docs/python/jupyter-support",
+"Working with Jupyter Notebooks in Visual Studio Code" %}.
 
 ## Resources
 
