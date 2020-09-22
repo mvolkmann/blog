@@ -1346,7 +1346,7 @@ We want the servers to:
 
    # Serve static files found in the public directory.
    app = Flask(__name__, static_folder='public', static_url_path='')
-   CORS(app)
+   CORS(app) # for cross-origin resource sharing
 
    dogs = {
        1: {
