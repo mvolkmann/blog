@@ -329,10 +329,12 @@ import matplotlib.pyplot as plt
 y_values = [0, 4, 1, 2, 0.5]
 x_values = range(len(y_values))
 plt.plot(x_values, y_values, linewidth=1)
-file_path = 'line-plot.png'
-plt.savefig(file_path, bbox_inches='tight', dpi=600)
+# Save plot as a PNG file.
+plt.savefig('line-plot.png', bbox_inches='tight', dpi=600)
 plt.show()
 ```
+
+![line chart](/blog/assets/line-chart.png)
 
 To plot a function, enter the following in a cell and execute it:
 
@@ -354,8 +356,11 @@ plt.axvline(0, color='black', linestyle="dotted", linewidth=1) # y axis
 plt.xlabel('angle in radians')
 plt.ylabel('sine')
 plt.title('sine wave')
+plt.savefig('sine-wave.png', bbox_inches='tight', dpi=600)
 plt.show()
 ```
+
+![sine wave](/blog/assets/sine-wave.png)
 
 To draw a bar chart, enter the following in a cell and execute it:
 
@@ -374,15 +379,11 @@ axes.bar(
 axes.set_title('Game Scores')
 axes.set_xlabel('Name')
 axes.set_ylabel('Score')
+plt.savefig('game-scores.png', bbox_inches='tight', dpi=600)
 plt.show()
 ```
 
-To save a plot in a `.png` file:
-
-```python
-file_path = 'game-scores.png'
-figure.savefig(file_path, bbox_inches='tight', dpi=600)
-```
+![bar chart](/blog/assets/game-scores.png)
 
 ## Vega
 
