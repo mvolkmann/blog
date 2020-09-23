@@ -1381,7 +1381,8 @@ We want the servers to:
 
 ### Python Flask REST Server
 
-Key benefits of Flask are:
+Key benefits of
+{% aTargetBlank "https://flask.palletsprojects.com/", "Flask" %} are:
 
 - ability to implement REST APIs
 - server-side HTML generation
@@ -1463,7 +1464,8 @@ Key benefits of Flask are:
 
 ### Python FastAPI REST Server
 
-Key benefits of FastAPI are:
+Key benefits of
+{% aTargetBlank "https://fastapi.tiangolo.com/", "FastAPI" %} are:
 
 - type validation of request/response bodies and path/query parameters
 - automatic generation of Open API documentation
