@@ -1143,6 +1143,61 @@ In Python, in order to use JSON methods include `import json`.
 | create    | `const jsonString = JSON.stringify(expr);` | `jsonString = json.dumps(expr)`  |
 | parse     | `const value = JSON.parse(jsonString);`    | `value = json.loads(jsonString)` |
 
+## Reading and Writing Files
+
+Node.js and Python can both read and write files containing text or binary data.
+For details on how this works in Node.js, see the
+{% aTargetBlank "https://nodejs.org/dist/latest-v14.x/docs/api/fs.html",
+"Node.js File system docs" %}.
+For details on how this works in Python, see
+{% aTargetBlank "https://realpython.com/read-write-files-python/",
+"Reading and Writing Files in Python" %}.
+
+Here are basic examples that write a JSON file
+and then read it back in to verify that it worked.
+
+### JavaScript File Handling
+
+```js
+const fs = require('fs'); // file system
+
+const dog = {
+  breed: 'Whippet',
+  name: 'Comet'
+};
+const filePath = 'dog.json';
+
+fs.writeFile(filePath, JSON.stringify(dog), err => {
+  if (err) throw err;
+
+  fs.readFile(filePath, (err, buffer) => {
+    if (err) throw err;
+
+    const newDog = JSON.parse(buffer.toString());
+    console.log(newDog);
+  });
+});
+```
+
+### Python File Handling
+
+```python
+import json
+
+file_path = 'dog.json'
+dog = {
+  "breed": 'Whippet',
+  "name": 'Comet'
+}
+
+with open(file_path, 'w') as writer:
+    writer.write(json.dumps(dog))
+
+with open('x' + file_path, 'r') as reader:
+    new_dog = json.loads(reader.read())
+    print(new_dog)
+```
+
 ## Decorators
 
 Python supports decorators which are annotations placed before
