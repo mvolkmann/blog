@@ -63,8 +63,7 @@ cons:
 - magic methods such as `__init__` that use
   "dunder" names (for double underscore) which is odd and verbose
   (see list in "Python Magic Methods" section)
-- operator overloading (supported by magic methods)
-- lots of documentation and examples are still for V2 instead of V3
+- use of operator overloading (supported by magic methods) can be confusing
 - anonymous functions are limited to a single expression
 - no built-in support for asynchronous code
   until the asyncio module was added in Python 3.4
@@ -72,6 +71,9 @@ cons:
 - single-word dictionary keys require quotes unlike JavaScript object keys
 - lambda functions are more verbose than JavaScript arrow functions
   (lambda vs. ->)
+- even though Python convention is to separate words in multi-word
+  variable, function, and method names with an underscore,
+  there are many examples where no separate is used
 - the classic ternary operator using a `?` and `:` is not supported;
   for example:
 
@@ -82,6 +84,8 @@ cons:
   # The Python version of ternary does work.
   name = sys.argv[1] if len(sys.argv) > 1 else 'World'
   ```
+
+- lots of documentation and examples are still for V2 instead of V3
 
 ## Running Scripts
 
