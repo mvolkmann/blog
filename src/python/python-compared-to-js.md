@@ -1158,8 +1158,12 @@ and then read it back in to verify that it worked.
 
 ### JavaScript File Handling
 
+The following code uses top-level awaits.
+This requires the code to be in an ES module.
+One way to satisfy this is to give the file a `.mjs` file extension.
+
 ```js
-const fs = require('fs'); // file system
+import fs from 'fs/promises';
 
 const dog = {
   breed: 'Whippet',
@@ -1167,16 +1171,11 @@ const dog = {
 };
 const filePath = 'dog.json';
 
-fs.writeFile(filePath, JSON.stringify(dog), err => {
-  if (err) throw err;
+await fs.writeFile(filePath, JSON.stringify(dog));
 
-  fs.readFile(filePath, (err, buffer) => {
-    if (err) throw err;
-
-    const newDog = JSON.parse(buffer.toString());
-    console.log(newDog);
-  });
-});
+const buffer = await fs.readFile(filePath);
+const newDog = JSON.parse(buffer.toString());
+console.log(newDog);
 ```
 
 ### Python File Handling
@@ -1184,11 +1183,11 @@ fs.writeFile(filePath, JSON.stringify(dog), err => {
 ```python
 import json
 
-file_path = 'dog.json'
 dog = {
   "breed": 'Whippet',
   "name": 'Comet'
 }
+file_path = 'dog.json'
 
 with open(file_path, 'w') as writer:
     writer.write(json.dumps(dog))
