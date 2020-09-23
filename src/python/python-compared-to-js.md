@@ -226,7 +226,10 @@ by entering `npm init` and answering some questions.
 ### Python Packages
 
 Python "packages" are managed using the `pip` tool
-which is install with Python is installed.
+which is installed when Python is installed.
+The name is an acronym for "Pip Installs Packages".
+It installs packages from the
+{% aTargetBlank "https://pypi.org/", "Python Package Index" %}.
 To upgrade the version of `pip` being used, enter
 `python -m pip install --upgrade pip`.
 
