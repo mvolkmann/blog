@@ -1,10 +1,12 @@
 ---
 eleventyNavigation:
   key: Pandas
+  order: 3
   parent: Python
 layout: topic-layout.njk
 ---
 
 ## Overview
 
-Pandas is a Python library for data analysis.
+{% aTargetBlank "https://pandas.pydata.org/", "Pandas" %}
+is a Python library for data analysis.

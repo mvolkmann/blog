@@ -1,6 +1,7 @@
 ---
 eleventyNavigation:
   key: Jupyter
+  order: 2
   parent: Python
 layout: topic-layout.njk
 ---
@@ -465,6 +466,8 @@ To create a new notebook, open the Command Palette and select
 
 Opening an existing `.ipynb` notebook file renders it in a new VS Code tab.
 
+![VS Code with Jupyter](/blog/assets/VS-Code-Jupyter.png)
+
 When rendering data visualizations,
 VS Code will ask if `ipykernel` should be installed.
 Press the "Yes" button.
@@ -502,7 +505,3 @@ For more details, see {% aTargetBlank
 For help, join the Jupyter Discourse by browsing the
 {% aTargetBlank "https://jupyter.org/community", "Community" %} page
 and clicking the "View" button for "Jupyter Discourse".
-
-For data analysis, see
-{% aTargetBlank "https://pandas.pydata.org/", "pandas" %}.
-TODO: Learn more about Pandas!
