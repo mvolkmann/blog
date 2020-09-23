@@ -1471,6 +1471,10 @@ We want the servers to:
    from typing import Optional
    import time
 
+   # JSON in request bodies of POST and PUT requests
+   # is validated against this type definition.
+   # When validation fails, the response status
+   # is set to 422 Unprocessable Entity.
    class Dog(BaseModel):
        id: Optional[int] = None
        breed: str
