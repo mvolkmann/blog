@@ -1273,8 +1273,9 @@ In Python, use `if __name__ == '__main__': ...`
 HTTP servers can be implemented in both Node.js and Python.
 In Node.js, a popular option is to use the
 {% aTargetBlank "https://expressjs.com/", "Express" %} package.
-In Python, a popular option is to use the
-{% aTargetBlank "https://flask.palletsprojects.com/", "Flask" %} package.
+In Python, popular options include
+{% aTargetBlank "https://flask.palletsprojects.com/", "Flask" %} and
+{% aTargetBlank "https://fastapi.tiangolo.com/", "FastAPI" %}.
 
 To demonstrate these options, we will implement HTTP servers that:
 
@@ -1453,6 +1454,78 @@ We want the servers to:
    ```
 
 1. Run the server by entering `./start`.
+
+### Python FastAPI REST Server
+
+1. Install the required dependencies by entering
+   `pip install fastapi pydantic uvicorn`.
+   FastAPI provides minimal request logging by default.
+   It also provides middleware to enable CORS.
+
+1. Create the file `server.py` containing the following:
+
+   ```py
+   from fastapi import FastAPI
+   from fastapi.middleware.cors import CORSMiddleware
+   from pydantic import BaseModel
+   from typing import Optional
+   import time
+
+   class Dog(BaseModel):
+       id: Optional[int] = None
+       breed: str
+       name: str
+
+   dogs = {
+       1: {
+           'id': 1, 'breed': 'Whippet', 'name': 'Comet'
+       }
+   }
+
+   app = FastAPI()
+   app.add_middleware(CORSMiddleware, allow_origins='*')
+
+   @app.get('/dog')
+   def all_dogs():
+       return dogs
+
+   @app.post('/dog', response_model=str)
+   def create_dog(dog: Dog):
+       id = round(time.time() * 1000)
+       #dog['id'] = id # Why can't the dog object be modified?
+       dict = dog.dict()
+       dict['id'] = id
+       dogs[id] = dict
+       return str(id)
+
+   @app.put('/dog/{id}', response_model=str)
+   def update_dog(dog: Dog, id: int):
+       if id in dogs:
+           #dog['id'] = id # Why can't the dog object be modified?
+           dict = dog.dict()
+           dict['id'] = id
+           dogs[id] = dict
+           return ''
+       else:
+           abort(404)
+
+   @app.delete('/dog/{id}')
+   def delete_dog(id: int):
+       id = int(id)
+       if id in dogs:
+           del dogs[id]
+           return ''
+       else:
+           abort(404)
+   ```
+
+1. Run the server by entering `uvicorn server:app --port 1919 --reload`.
+   Including the `--reload` option provides
+   automatic file watch and server restart.
+
+1. Check out the Open API docs that are provided for free!
+   Browse localhost:1919/docs to see API documentation
+   and try each API from the browser.
 
 ## Python Magic Methods
 
@@ -1636,6 +1709,11 @@ The `python` interpreter ignores type hints,
 but they make startup time take slightly longer.
 They are useful as documentation even without using mypy.
 IDEs can use them to flag type issues.
+
+## Testing
+
+Packages that support implementing tests for Python code include
+pytest, codecov, and coverage (Jordan Walker uses these).
 
 ## Popular Tools/Libraries/Frameworks
 
