@@ -1381,8 +1381,14 @@ We want the servers to:
 
 ### Python Flask REST Server
 
+Key benefits of Flask are:
+
+- ability to implement REST APIs
+- server-side HTML generation
+- provided request logging
+- provided file watch and server restart
+
 1. Install the required dependencies by entering `pip install flask flask-cors`.
-   Flask provides minimal request logging by default.
    {% aTargetBlank "https://flask-cors.readthedocs.io/en/latest/", "Flask-CORS" %}
    supports enabling CORS in Flask servers.
 1. If running in a UNIX environment, create the script file `start` shown below
@@ -1457,10 +1463,16 @@ We want the servers to:
 
 ### Python FastAPI REST Server
 
+Key benefits of FastAPI are:
+
+- type validation of request/response bodies and path/query parameters
+- automatic generation of Open API documentation
+- provided request logging
+- provided CORS middleware
+- provided file watch and server restart
+
 1. Install the required dependencies by entering
    `pip install fastapi pydantic uvicorn`.
-   FastAPI provides minimal request logging by default.
-   It also provides middleware to enable CORS.
 
 1. Create the file `server.py` containing the following:
 
