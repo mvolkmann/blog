@@ -40,17 +40,19 @@ and opens a browser tab to render the user interface.
 If you close the browser tab and wish to open a new one
 to connect to the running server, browse localhost:8888.
 
+![JupyterLab](/blog/assets/JupyterLab.png)
+
 The left sidebar can contain many things depending on
 which of the icons on the left is activated.
 
-| Icon Description                         | Sidebar Content          |
-| ---------------------------------------- | ------------------------ |
-| dark gray folder icon                    | file browser             |
-| circle containing a square               | list of opened terminals |
-| document with a magnifying glass over it | command palette          |
-| two gears                                | property inspector       |
-| white folder icon                        | list of opened tabs      |
-| puzzle piece                             | extensions manager       |
+| Icon Description               | Sidebar Content          |
+| ------------------------------ | ------------------------ |
+| dark gray folder icon          | file browser             |
+| circle containing a square     | list of opened terminals |
+| document with magnifying glass | command palette          |
+| two gears                      | property inspector       |
+| white folder icon              | list of opened tabs      |
+| puzzle piece                   | extensions manager       |
 
 To open a file in a new tab,
 display the file browser in the left sidebar and double-click the file.
@@ -62,13 +64,17 @@ To see them sooner, press the reload icon at the top of the file browser.
 
 To open a terminal tab,
 display the file browser in the left sidebar,
-click "+" in the upper left,
+click "+" in the upper left to open a Launcher tab,
 and click the "Terminal" button.
 These appear next to file tabs.
 The tab title shows the current working directory,
 but it is truncated and hovering over it does not show the complete path.
 Terminal tabs uses the default shell.
 A text-based editor such as Vim can be used in a terminal tab to edit files.
+
+![JupyterLab Terminal](/blog/assets/JupyterLab-Terminal.png)
+
+The terminal above uses the Fish Shell and the theme has been changed to "Dark".
 
 To change the terminal theme,
 select Settings ... Terminal Theme ... {theme}
@@ -109,14 +115,19 @@ right-click and select "Show Markdown Preview".
 This opens a new tab for the preview
 to the right of the tab containing Markdown text.
 
+![JupyterLab Markdown](/blog/assets/JupyterLab-Markdown.png)
+
 ## Jupyter Notebooks
 
-To create a notebook, click the command palette icon in the left sidebar
-and type or select "New Notebook".
-A dialog opens to select a kernel.
-By default the only available options are "Python 3" and "No Kernel",
+To create a new notebook,
+display the file browser in the left sidebar,
+click "+" in the upper left to open a Launcher tab,
+and click the "Python 3" in the Notebook category.
+Alternatively, display the command palette in the left sidebar,
+type or select "New Notebook", select the "Python 3" kernel in a dialog,
+and press the "Select" button.
+By default the only available kernel options are "Python 3" and "No Kernel",
 but a JavaScript kernel and others can be added.
-Select a kernel and press the "Select" button.
 
 The new notebook will have the name "Untitled" followed by a number
 and the file extension ".ipynb" for "Interactive Python Notebook".
@@ -126,6 +137,8 @@ Their "cells" property is an array of objects that describe each cell.
 To rename a notebook, right-click its tab and select "Rename Notebook".
 
 To open an existing notebook, double-click it in the file browser.
+
+![JupyterLab Notebook](/blog/assets/JupyterLab-Notebook.png)
 
 Notebooks open in command mode
 which supports navigating and changing the order of the cells.
@@ -230,6 +243,7 @@ This is a very large install! I did not try this.
 Markdown cells can contain equations surrounded by $ characters
 that will be nicely rendered.
 For example, "The Pythagorean theorem is $ x^2 + y^2 = r^2 \$."
+The previous screenshot shows how this is rendered.
 
 URLs in Markdown cells are automatically converted to hyperlinks.
 
