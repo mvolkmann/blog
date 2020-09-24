@@ -163,6 +163,7 @@
     "pyzmq",
     "randint",
     "readdir",
+    "readline",
     "reconfig",
     "rects",
     "rejectattr",

@@ -1151,7 +1151,7 @@ In Python, in order to use JSON methods include `import json`.
 | create    | `const jsonString = JSON.stringify(expr);` | `jsonString = json.dumps(expr)`  |
 | parse     | `const value = JSON.parse(jsonString);`    | `value = json.loads(jsonString)` |
 
-## Reading and Writing Files
+## Writing and Reading Files
 
 Node.js and Python can both read and write files containing text or binary data.
 For details on how this works in Node.js, see the
@@ -1161,13 +1161,19 @@ For details on how this works in Python, see
 {% aTargetBlank "https://realpython.com/read-write-files-python/",
 "Reading and Writing Files in Python" %}.
 
-Here are basic examples that write a JSON file
-and then read it back in to verify that it worked.
+One case to consider is when the file can easily fit in memory.
+We will see an example using JSON that demonstrates this.
+Another case is when it cannot and therefore
+must be processed using streams, perhaps one line at a time.
+We will see an example using CSV that demonstrates this.
 
-### JavaScript File Handling
+### Writing and Reading Small Files
 
-The following code uses top-level awaits.
-This requires the code to be in an ES module.
+Let's write a JSON file and then read it back in to verify that it worked.
+
+Here is a JavaScript version:
+Note that it uses top-level awaits
+which requires the code to be in an ES module.
 One way to satisfy this is to give the file a `.mjs` file extension.
 
 ```js
@@ -1186,7 +1192,7 @@ const newDog = JSON.parse(buffer.toString());
 console.log(newDog);
 ```
 
-### Python File Handling
+And here is a Python version:
 
 ```python
 import json
@@ -1203,6 +1209,57 @@ with open(file_path, 'w') as writer:
 with open('x' + file_path, 'r') as reader:
     new_dog = json.loads(reader.read())
     print(new_dog)
+```
+
+### Writing and Reading Large Files
+
+Let's write a CSV file and then read it back in to verify that it worked.
+Rather than write the entire file at once, we will write one line at a time.
+Likewise we will read the file one line at a time.
+
+Here is a JavaScript version:
+
+```js
+import fs from 'fs';
+import readline from 'readline';
+
+const filePath = 'dogs.csv';
+
+const ws = fs.createWriteStream(filePath);
+ws.write('Maisey,Treeing Walker Coonhound\n');
+ws.write('Ramsay,Native American Indian Dog\n');
+ws.write('Oscar Wilde,German Shorthaired Pointer\n');
+ws.write('Comet,Whippet\n');
+ws.close();
+
+const rl = readline.createInterface({
+  input: fs.createReadStream('dogs.csv')
+});
+
+for await (const line of rl) {
+  console.log(line);
+}
+
+rl.close();
+```
+
+And here is a Python version:
+
+```python
+file_path = 'dog.csv'
+
+with open(file_path, 'w') as writer:
+    writer.write('Maisey,Treeing Walker Coonhound\n');
+    writer.write('Ramsay,Native American Indian Dog\n');
+    writer.write('Oscar Wilde,German Shorthaired Pointer\n');
+    writer.write('Comet,Whippet\n');
+
+with open(file_path, 'r') as reader:
+    while True:
+        line = reader.readline()
+        if not line:
+            break
+        print(line, end='')
 ```
 
 ## Decorators
