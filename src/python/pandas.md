@@ -77,3 +77,5 @@ To sort in place, add `inplace=True`.
 | Operation                            | Code            |
 | ------------------------------------ | --------------- |
 | get basic statistics for all columns | `df.describe()` |
+
+More detail is coming soon!
