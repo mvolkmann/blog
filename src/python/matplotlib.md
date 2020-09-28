@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: mapplotlib
-  order: 5
+  order: 6
   parent: Python
 layout: topic-layout.njk
 ---

@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Jupyter
-  order: 2
+  order: 3
   parent: Python
 layout: topic-layout.njk
 ---
