@@ -100,9 +100,10 @@ Column index values below are abbreviated as `ci`.
 | Operation                                                                     | Code                                 |
 | ----------------------------------------------------------------------------- | ------------------------------------ |
 | get column names                                                              | `df.columns`                         |
+| get column names as a list                                                    | `list(df.columns)`                   |
 | get column data types                                                         | `df.dtypes`                          |
 | get cell value                                                                | `df.at[ri, cn]` or `df.iloc[ri, ci]` |
-| get all rows <sup>1</sup>                                                     | `df`                                 |
+| get all rows <sub>[1](#fn1)</sub>                                             | `df`                                 |
 | get first n rows                                                              | `df.head(n)` where n defaults to 5   |
 | get last n rows                                                               | `df.tail(n)` where n defaults to 5   |
 | get one row                                                                   | `df.iloc[ri]`                        |
@@ -114,15 +115,32 @@ Column index values below are abbreviated as `ci`.
 | get rows matching criteria                                                    | `df.loc(criteria)`                   |
 | get statistics of numeric columns<br>including count, min, max, mean, and std | `df.describe()`                      |
 
-<sup>1</sup> By default the number of rows displayed is limited.
+<a name="fn1">1</a>: By default the number of rows displayed is limited.
 To remove the limit `pd.set_option('display.max_rows', None)`.
 
-Criteria use bitwise operators for and (`&`), or (`|`), and not (`~`).
+Criteria use logical operators like `==`, `!=`, `<`, `<=`, `>=`, and `>`.
+Criteria can also use bitwise operators for and (`&`), or (`|`), and not (`~`).
+
 The example below gets all rows where the `name` column contains the letter "a"
 and the `breed` column consists of three words.
 
 ```python
 df.loc[df.name.str.contains('a') & (df.breed.str.split(' ').apply(len) == 3)]
+```
+
+The example below gets all rows where the `breed` column
+does not contain the word "Dog".
+
+```python
+df.loc[~df.breed.str.contains('Dog')]
+```
+
+The example below uses a regular expression to get rows
+where the breed starts with "w" or "W" (case insensitive).
+
+```python
+import re
+df.loc[df.breed.str.contains('^W', regex=True, flags=re.I)]
 ```
 
 To treat `Series` values as strings, add `.str`.
@@ -137,16 +155,28 @@ for index, row in df.iterrows():
 
 ## Modifying Data
 
-| Operation                                     | Code                                           |
-| --------------------------------------------- | ---------------------------------------------- |
-| set cell value                                | `df.at[ri, cn] = value`                        |
-| add column computed from others               | `df['new_cn'] = expression`                    |
-| add column that is sum of others <sup>1</sup> | `df['my sum'] = df.iloc[:, si:ei].sum(axis=1)` |
-| delete columns                                | `df = df.drop(columns=['cn1', 'cn2', ...])`    |
+| Operation                                             | Code                                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
+| set cell value                                        | `df.at[ri, cn] = value`                                      |
+| conditionally set cell value                          | `df.loc[criteria, cn] = value`                               |
+| conditionally set multiple cell values                | `df.loc[criteria, [cn1, cn2]] = [value1, value2]`            |
+| add column computed from others                       | `df['new_cn'] = expression`                                  |
+| add column that is sum of others <sub>[2](#fn2)</sub> | `df['my sum'] = df.iloc[:, si:ei].sum(axis=1)`               |
+| delete columns                                        | `df = df.drop(columns=['cn1', 'cn2', ...])`                  |
+| delete columns and ignore errors if not present       | `df = df.drop(columns=['cn1', 'cn2', ...], errors='ignore')` |
+| reorder and remove columns                            | `df = df[['cn1', 'cn2', ...]]`                               |
+| change column names (must specify all)                | `df.columns = cn1, cn2, ...`                                 |
 
-<sup>1</sup> The first slice (colon) with no number on either side means "all rows".
+<a name="fn2">2</a>: The first slice (colon) with no number on either side means "all rows".
 The second slice specifies a column range.
 Specifying `axis=1` means horizontal and `axis=0` means vertical.
+
+Suppose we want to change the "name" column value to be uppercase
+for all rows where the "breed" column value is "Whippet".
+
+```python
+df.loc[df.breed == 'Whippet', 'name'] = df.name.str.upper()
+```
 
 Suppose we want to add a column named "name length"
 that holds the length of each "name" value.
@@ -184,16 +214,76 @@ Including `drop=True` removes the original index column.
 
 To sort in place, add `inplace=True`.
 
+## Aggregating Data
+
+The `DataFrame` `groupby` method is used to aggregate data.
+It automatically sorts groups alphabetically.
+Statistics are often computed from the aggregated data
+using the methods `count`, `sum`, and `mean`.
+
+For example, suppose we have a `DataFrame` where each row represents a dog
+and the columns are "name", "breed", and "weight".
+We can find the number of dogs from each breed
+and the average weight of each breed as follows.
+
+```python
+# Group data by breed and compute the
+# mean of every numeric column within each breed.
+df.groupby(['breed']).mean()
+
+# Group data by breed and compute the
+# mean of only the "weight" column within each breed.
+df.groupby(['breed'])['weight'].mean()
+
+df['count'] = 0 # create new column to hold counts
+# Group data by breed and compute the count of each breed.
+df.groupby(['breed']).count()['count']
+```
+
+We can aggregate across multiple columns. For example:
+
+```python
+players = pd.DataFrame([
+    {'sport': 'hockey', 'team': 'Oilers', 'name': 'Wayne Gretzky'},
+    {'sport': 'hockey', 'team': 'Oilers', 'name': 'Marty McSorley'},
+    {'sport': 'hockey', 'team': 'Oilers', 'name': 'Grant Fuhr'},
+    {'sport': 'hockey', 'team': 'Bruins', 'name': 'Phil Esposito'},
+    {'sport': 'hockey', 'team': 'Bruins', 'name': 'Bobby Orr'},
+    {'sport': 'baseball', 'team': 'Cardinals', 'name': 'Bob Gibson'}
+])
+players.groupby(['sport', 'team']).count()
+```
+
+The output is:
+
+```text
+   sport      team
+baseball Cardinals    1
+hockey   Bruins       2
+         Oilers       3
+```
+
 ## Creating Other Representations
 
 | Operation          | Code            |
 | ------------------ | --------------- |
 | create NumPy array | `df.to_numpy()` |
 
-## Statistics
+## Writing Data
 
-| Operation                            | Code            |
-| ------------------------------------ | --------------- |
-| get basic statistics for all columns | `df.describe()` |
+To create a CSV file from a `DataFrame`:
+
+```python
+df.to_csv(file_path) # comma-separated
+df.to_csv(file_path, index=False) # to omit index column
+df.to_csv(file_path, sep='\t') # tab-separated
+```
+
+To create an Excel file from a `DataFrame`:
+
+```python
+df.to_excel(file_path)
+df.to_excel(file_path, index=False) # to omit index column
+```
 
 More detail is coming soon!
