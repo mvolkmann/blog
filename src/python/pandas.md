@@ -206,11 +206,20 @@ or
 `new_df.reset_index(drop=True, inplace=True)`.
 Including `drop=True` removes the original index column.
 
-| Operation                | Code                                                       |
-| ------------------------ | ---------------------------------------------------------- |
-| sort on one column       | `df.sort_values('cn', ascending=Bool)`                     |
-| sort on multiple columns | `df.sort_values(['cn1', 'cn2'], ascending=[Bool1, Bool2])` |
-| transpose                | `df.T`                                                     |
+| Operation                                   | Code                                                       |
+| ------------------------------------------- | ---------------------------------------------------------- |
+| change column datatype <sub>[3](#fn3)</sub> | `df = df['cn'].astype(type)`                               |
+| sort on one column                          | `df.sort_values('cn', ascending=Bool)`                     |
+| sort on multiple columns                    | `df.sort_values(['cn1', 'cn2'], ascending=[Bool1, Bool2])` |
+| transpose                                   | `df.T`                                                     |
+
+<a name="fn3">3</a>: When the values of a column
+can be used to segregate rows into categories and
+the number of distinct categories is small compared to the number of rows,
+set the type to 'category'.
+This allows the data to be stored more efficiently because
+those column values can be replaced internally with integers.
+It also supports custom sort orders such as 'small' < 'medium' < 'large'.
 
 To sort in place, add `inplace=True`.
 

@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
-  key: conda
-  order: 8
+  key: Anaconda
+  order: 7
   parent: Python
 layout: topic-layout.njk
 ---
