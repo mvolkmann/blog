@@ -67,6 +67,7 @@
     "choco",
     "classmethod",
     "cond",
+    "conda",
     "corejs",
     "covid",
     "cultofcoders",
@@ -110,11 +111,13 @@
     "hasattr",
     "ijavascript",
     "ijsinstall",
+    "iloc",
     "inplace",
     "ipykernel",
     "ipynb",
     "isinstance",
     "itemgetter",
+    "iterrows",
     "jstl",
     "jupyterlab",
     "kanban",
@@ -207,5 +210,6 @@
     "xticklabels",
     "ylabel",
     "zeromq"
-  ]
+  ],
+  "python.pythonPath": "/Users/mark/opt/anaconda3/envs/blog-env/bin/python"
 }

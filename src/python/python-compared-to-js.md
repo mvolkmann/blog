@@ -990,7 +990,7 @@ but keys in `Map` instances can be any type.
 | create              | `const obj = {};`<br>can include initial key/value pairs                    | `const map = new Map();`<br>cannot specify initial key/value pairs |
 | length              | `Object.keys(obj).length`                                                   | `map.size`                                                         |
 | set value of key    | `obj.key = value` or `obj[key] = value`                                     | `map.set(key, value)`                                              |
-| get value of key    | `obj.key` or `obj[key]`                                                     | `map.get(key)`                                                     |
+| get value of key    | `obj.key` or `obj[key]`<br>use 2nd form if key contains special characters  | `map.get(key)`                                                     |
 | get all keys        | `Object.keys(obj)`                                                          | `map.keys()`                                                       |
 | get all values      | `Object.values(obj)`                                                        | `map.values()`                                                     |
 | get all pairs       | `Object.entries(obj)`<br>returns array of arrays containing a key and value | `map.entries()`<br>returns the same                                |
