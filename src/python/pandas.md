@@ -32,6 +32,18 @@ It is used more frequently than `Series`.
 which provide a more efficient way to store and process numbers
 than Python lists.
 
+## Abbreviations
+
+In the tables that following, some abbreviations are used for arguments.
+
+- Column name values below are abbreviated as `cn`.
+- Row index values below are abbreviated as `ri`.
+- Column index values below are abbreviated as `ci`.
+- Row start indexes (`rsi`) and column start indexes (`csi`)
+  are inclusive and default to zero.
+- Row end indexes (`rei`) and column end indexes (`cei`)
+  are exclusive and default to length.
+
 ## Loading Data
 
 A `DataFrame` can be created from many sources.
@@ -56,12 +68,26 @@ df = pd.read_csv('file-name.csv', delimiter='\t') # for tab-separate
 
 # If the first line contains data rather than column names ...
 df = pd.read_csv('file-name.csv', names=['colName1', 'colName2', ...])
+
+# Read only specific columns ...
+df = pd.read_csv('file-name.csv', usecols=['cn1', 'cn2'])
+
+# Specify data types for some columns ...
+df = pd.read_csv('file-name.csv', dtype={'cn1': 'type1', 'cn2': 'type2', ...})
+# A common type is 'category'.
 ```
 
 To create a `DataFrame` from an Excel spreadsheet:
 
 ```python
 df = pd.read_excel('file-name.xlsx', sheet_name='name')
+```
+
+To create a `DataFrame` from clipboard contents,
+such as copying from a selected Excel or Numbers range:
+
+```python
+df = pd.read_clipboard()
 ```
 
 To create a `DataFrame` from a NumPy array:
@@ -89,15 +115,6 @@ For more detail, see {% aTargetBlank "https://pbpython.com/pandas_dtypes.html",
 Note that these just return data.
 To print it, pass the result to the `print` function.
 
-In the tables that following, some abbreviations are used for arguments.
-Column name values below are abbreviated as `cn`.
-Row index values below are abbreviated as `ri`.
-Column index values below are abbreviated as `ci`.
-Row start indexes (`rsi`) and column start indexes (`csi`)
-are inclusive and default to zero.
-Row end indexes (`rei`) and column end indexes (`cei`)
-are exclusive and default to length.
-
 | Operation                                                                     | Code                                    |
 | ----------------------------------------------------------------------------- | --------------------------------------- |
 | get column names                                                              | `df.columns`                            |
@@ -118,6 +135,7 @@ are exclusive and default to length.
 | get multiple columns in specified order                                       | `df[[cn1, cn2, ...]]`                   |
 | get rows matching criteria                                                    | `df.loc(criteria)`                      |
 | get statistics of numeric columns<br>including count, min, max, mean, and std | `df.describe()`                         |
+| display `DataFrame` memory usage                                              | `df.info(memory_usage='deep')`          |
 
 <a name="fn1">1</a>: By default the number of rows displayed is limited.
 To remove the limit `pd.set_option('display.max_rows', None)`.
@@ -170,24 +188,28 @@ for index, row in df.iterrows():
 
 ## Modifying Data
 
-| Operation                                             | Code                                                          |
-| ----------------------------------------------------- | ------------------------------------------------------------- |
-| set cell value by column name                         | `df.at[ri, cn] = value`                                       |
-| set cell value by column index                        | `df.iat[ri, ci] = value`                                      |
-| conditionally set cell value                          | `df.loc[criteria, cn] = value`                                |
-| conditionally set multiple cell values                | `df.loc[criteria, [cn1, cn2]] = [value1, value2]`             |
-| add column computed from others                       | `df['new_cn'] = expression`                                   |
-| add column that is sum of others <sub>[2](#fn2)</sub> | `df['my sum'] = df.iloc[:, si:ei].sum(axis=1)`                |
-| delete columns                                        | `df = df.drop(columns=['cn1', 'cn2', ...])`                   |
-| delete columns and ignore errors if not present       | `df = df.drop(columns=['cn1', 'cn2', ...], errors='ignore')`  |
-| reorder and remove columns                            | `df = df[['cn1', 'cn2', ...]]`                                |
-| rename specific columns                               | `df = df.rename({'old-cn1': 'new-cn1', ...}, axis='columns')` |
-| rename all columns (must specify all names)           | `df.columns = cn1, cn2, ...`                                  |
-| convert strings to numbers in a column                | `df.cn = pd.to_numeric(df.cn, errors='coerce').fillna(0)`     |
+| Operation                                                   | Code                                                                        |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------- |
+| set cell value by column name                               | `df.at[ri, cn] = value`                                                     |
+| set cell value by column index                              | `df.iat[ri, ci] = value`                                                    |
+| conditionally set cell value                                | `df.loc[criteria, cn] = value`                                              |
+| conditionally set multiple cell values                      | `df.loc[criteria, [cn1, cn2]] = [value1, value2]`                           |
+| add column computed from others                             | `df['new_cn'] = expression`                                                 |
+| add column that is sum of others <sub>[2](#fn2)</sub>       | `df['my sum'] = df.iloc[:, si:ei].sum(axis=1)`                              |
+| delete columns                                              | `df = df.drop(columns=['cn1', 'cn2', ...])`                                 |
+| delete columns and ignore errors if not present             | `df = df.drop(columns=['cn1', 'cn2', ...], errors='ignore')`                |
+| reorder and remove columns                                  | `df = df[['cn1', 'cn2', ...]]`                                              |
+| rename specific columns                                     | `df = df.rename({'old-cn1': 'new-cn1', ...}, axis='columns')`               |
+| rename all columns (must specify all names)                 | `df.columns = cn1, cn2, ...`                                                |
+| convert strings to numbers in a column <sub>[3](#fn3)</sub> | `df.cn = pd.to_numeric(df.cn, errors='coerce').fillna(0, downcast='infer')` |
+| convert strings to numbers in all columns                   | `df = df.apply(pd.to_numeric, errors='coerce').fillna(0, downcast='infer')` |
 
 <a name="fn2">2</a>: The first slice (colon) with no number on either side means "all rows".
 The second slice specifies a column range.
 Specifying `axis=1` means horizontal and `axis=0` means vertical.
+
+<a name="fn3">3</a>: `errors='coerce'` changes non-numeric strings to NaN
+and `.fillna(0)` changes NaN values to zero.
 
 Suppose we want to change the "name" column value to be uppercase
 for all rows where the "breed" column value is "Whippet".
@@ -226,12 +248,12 @@ Including `drop=True` removes the original index column.
 
 | Operation                                   | Code                                                       |
 | ------------------------------------------- | ---------------------------------------------------------- |
-| change column datatype <sub>[3](#fn3)</sub> | `df = df['cn'].astype(type)`                               |
+| change column datatype <sub>[4](#fn4)</sub> | `df = df['cn'].astype(type)`                               |
 | sort on one column                          | `df.sort_values('cn', ascending=Bool)`                     |
 | sort on multiple columns                    | `df.sort_values(['cn1', 'cn2'], ascending=[Bool1, Bool2])` |
 | transpose                                   | `df.T`                                                     |
 
-<a name="fn3">3</a>: When the values of a column
+<a name="fn4">4</a>: When the values of a column
 can be used to segregate rows into categories and
 the number of distinct categories is small compared to the number of rows,
 set the type to 'category'.
