@@ -91,29 +91,35 @@ For more detail, see {% aTargetBlank "https://pbpython.com/pandas_dtypes.html",
 Note that these just return data.
 To print it, pass the result to the `print` function.
 
-Start indexes (`si`) are inclusive and default to zero.
-End indexes (`ei`) are exclusive and default to length.
+In the tables that following, some abbreviations are used for arguments.
 Column name values below are abbreviated as `cn`.
 Row index values below are abbreviated as `ri`.
 Column index values below are abbreviated as `ci`.
+Row start indexes (`rsi`) and column start indexes (`csi`)
+are inclusive and default to zero.
+Row end indexes (`rei`) and column end indexes (`cei`)
+are exclusive and default to length.
 
-| Operation                                                                     | Code                                 |
-| ----------------------------------------------------------------------------- | ------------------------------------ |
-| get column names                                                              | `df.columns`                         |
-| get column names as a list                                                    | `list(df.columns)`                   |
-| get column data types                                                         | `df.dtypes`                          |
-| get cell value                                                                | `df.at[ri, cn]` or `df.iloc[ri, ci]` |
-| get all rows <sub>[1](#fn1)</sub>                                             | `df`                                 |
-| get first n rows                                                              | `df.head(n)` where n defaults to 5   |
-| get last n rows                                                               | `df.tail(n)` where n defaults to 5   |
-| get one row                                                                   | `df.iloc[ri]`                        |
-| get row range                                                                 | `df.iloc[si:ei]`                     |
-| get row index values                                                          | `df.index`                           |
-| get one column as a `Series` object                                           | `df.cn` or `df[cn]`                  |
-| get one column of specified rows                                              | `df[col_name][si:ei]`                |
-| get multiple columns in specified order                                       | `df[[cn1, cn2, ...]]`                |
-| get rows matching criteria                                                    | `df.loc(criteria)`                   |
-| get statistics of numeric columns<br>including count, min, max, mean, and std | `df.describe()`                      |
+| Operation                                                                     | Code                                    |
+| ----------------------------------------------------------------------------- | --------------------------------------- |
+| get column names                                                              | `df.columns`                            |
+| get column names as a list                                                    | `list(df.columns)`                      |
+| get column data types                                                         | `df.dtypes`                             |
+| get cell value                                                                | `df.at[ri, cn]` or `df.iloc[ri, ci]`    |
+| get all rows <sub>[1](#fn1)</sub>                                             | `df`                                    |
+| get first n rows                                                              | `df.head(n)` where n defaults to 5      |
+| get last n rows                                                               | `df.tail(n)` where n defaults to 5      |
+| get one row                                                                   | `df.iloc[ri]`                           |
+| get row range with all columns                                                | `df[rsi:rei]` or `df.iloc[rsi:rei]`     |
+| get row range with a subset of columns by name                                | `df.iloc[rsi:rei, ['cn1', 'cn2', ...]]` |
+| get row range with a subset of columns by index range                         | `df.iloc[rsi:rei, csi:cei]`             |
+| get row range with a subset of columns by index list                          | `df.iloc[rsi:rei, [ci1, ci2, ...]]`     |
+| get row index values                                                          | `df.index`                              |
+| get one column as a `Series` object                                           | `df.cn` or `df[cn]`                     |
+| get one column of specified rows                                              | `df[col_name][rsi:rei]`                 |
+| get multiple columns in specified order                                       | `df[[cn1, cn2, ...]]`                   |
+| get rows matching criteria                                                    | `df.loc(criteria)`                      |
+| get statistics of numeric columns<br>including count, min, max, mean, and std | `df.describe()`                         |
 
 <a name="fn1">1</a>: By default the number of rows displayed is limited.
 To remove the limit `pd.set_option('display.max_rows', None)`.
@@ -127,6 +133,10 @@ and the `breed` column consists of three words.
 ```python
 df.loc[df.name.str.contains('a') & (df.breed.str.split(' ').apply(len) == 3)]
 ```
+
+In the code above, `df.breed.str.split(' ')` returns a `Series` object.
+The `Series` `apply` method creates a new `Series` that contains the
+results of calling the `len` function on each value in the original `Series`.
 
 The example below gets all rows where the `breed` column
 does not contain the word "Dog".
@@ -143,6 +153,13 @@ import re
 df.loc[df.breed.str.contains('^W', regex=True, flags=re.I)]
 ```
 
+The example below gets all rows where the `breed` column value
+is "Vizsla" or "Weimaraner".
+
+```python
+df.loc[df.breed.isin(['Vizsla', 'Weimaraner'])
+```
+
 To treat `Series` values as strings, add `.str`.
 For example, `df.name.str`.
 
@@ -157,7 +174,8 @@ for index, row in df.iterrows():
 
 | Operation                                             | Code                                                         |
 | ----------------------------------------------------- | ------------------------------------------------------------ |
-| set cell value                                        | `df.at[ri, cn] = value`                                      |
+| set cell value by column name                         | `df.at[ri, cn] = value`                                      |
+| set cell value by column index                        | `df.iat[ri, ci] = value`                                     |
 | conditionally set cell value                          | `df.loc[criteria, cn] = value`                               |
 | conditionally set multiple cell values                | `df.loc[criteria, [cn1, cn2]] = [value1, value2]`            |
 | add column computed from others                       | `df['new_cn'] = expression`                                  |
@@ -272,12 +290,6 @@ hockey   Bruins       2
          Oilers       3
 ```
 
-## Creating Other Representations
-
-| Operation          | Code            |
-| ------------------ | --------------- |
-| create NumPy array | `df.to_numpy()` |
-
 ## Writing Data
 
 To create a CSV file from a `DataFrame`:
@@ -294,6 +306,12 @@ To create an Excel file from a `DataFrame`:
 df.to_excel(file_path)
 df.to_excel(file_path, index=False) # to omit index column
 ```
+
+## Creating Other Representations
+
+| Operation          | Code            |
+| ------------------ | --------------- |
+| create NumPy array | `df.to_numpy()` |
 
 ## Processing Large Datasets
 
