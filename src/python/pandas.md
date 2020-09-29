@@ -102,6 +102,7 @@ Column index values below are abbreviated as `ci`.
 | get column names                                                              | `df.columns`                         |
 | get column data types                                                         | `df.dtypes`                          |
 | get cell value                                                                | `df.at[ri, cn]` or `df.iloc[ri, ci]` |
+| get all rows <sup>1</sup>                                                     | `df`                                 |
 | get first n rows                                                              | `df.head(n)` where n defaults to 5   |
 | get last n rows                                                               | `df.tail(n)` where n defaults to 5   |
 | get one row                                                                   | `df.iloc[ri]`                        |
@@ -112,6 +113,9 @@ Column index values below are abbreviated as `ci`.
 | get multiple columns in specified order                                       | `df[[cn1, cn2, ...]]`                |
 | get rows matching criteria                                                    | `df.loc(criteria)`                   |
 | get statistics of numeric columns<br>including count, min, max, mean, and std | `df.describe()`                      |
+
+<sup>1</sup> By default the number of rows displayed is limited.
+To remove the limit `pd.set_option('display.max_rows', None)`.
 
 Criteria use bitwise operators for and (`&`), or (`|`), and not (`~`).
 The example below gets all rows where the `name` column contains the letter "a"
@@ -133,9 +137,31 @@ for index, row in df.iterrows():
 
 ## Modifying Data
 
-| Operation      | Code                    |
-| -------------- | ----------------------- |
-| set cell value | `df.at[ri, cn] = value` |
+| Operation                                     | Code                                           |
+| --------------------------------------------- | ---------------------------------------------- |
+| set cell value                                | `df.at[ri, cn] = value`                        |
+| add column computed from others               | `df['new_cn'] = expression`                    |
+| add column that is sum of others <sup>1</sup> | `df['my sum'] = df.iloc[:, si:ei].sum(axis=1)` |
+| delete columns                                | `df = df.drop(columns=['cn1', 'cn2', ...])`    |
+
+<sup>1</sup> The first slice (colon) with no number on either side means "all rows".
+The second slice specifies a column range.
+Specifying `axis=1` means horizontal and `axis=0` means vertical.
+
+Suppose we want to add a column named "name length"
+that holds the length of each "name" value.
+
+```python
+df['name length'] = df['name'].apply(len)
+```
+
+Suppose we have the columns `width`, `depth`, and `height`
+that represent refrigerator dimensions and we want to
+add a new `volume` column.
+
+```python
+df['volume'] = df.width * df.depth * df.height
+```
 
 ## Creating New DataFrames
 
