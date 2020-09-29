@@ -286,4 +286,29 @@ df.to_excel(file_path)
 df.to_excel(file_path, index=False) # to omit index column
 ```
 
-More detail is coming soon!
+## Processing Large Datasets
+
+Some datasets are too large to fit in memory.
+One way to work around this limitation is to process the data in chunks of rows.
+To demonstrate this, we will use data from the
+{% aTargetBlank "https://www.kaggle.com/tmdb/tmdb-movie-metadata",
+"TMBD 5000 Movie Dataset" %}.
+This is found at the {% aTargetBlank "https://www.kaggle.com/datasets",
+"Kaggle" %} website which is a good source for public datasets.
+
+For example:
+
+```python
+# Create a new, empty DataFrame.
+subset_df = pd.DataFrame()
+
+# Process a large CSV file this many rows at a time.
+row_count = 100
+for df in pd.read_csv('./movies/tmdb_5000_movies.csv', chunksize=row_count):
+    # Only keep rows for movies with a high "vote_average".
+    filtered_df = df[df['vote_average'] >= 8]
+    subset_df = pd.concat([subset_df, filtered_df])
+
+# Now only the retained rows are available in subset_df
+# and we can operate on that.
+```
