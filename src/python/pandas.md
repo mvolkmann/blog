@@ -6,15 +6,6 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-## Outstanding Questions
-
-Is a DataFrame a collection of Series objects?
-Do DataFrame methods always return a new DataFrame?
-Do the new DataFrame objects share Series and cells
-with ones they were created from?
-
-Pandas DataFrames use Numpy arrays.
-
 ## Overview
 
 {% aTargetBlank "https://pandas.pydata.org/", "pandas" %}
@@ -23,6 +14,9 @@ For details, see the
 {% aTargetBlank "https://pandas.pydata.org/docs/reference/", "API Reference" %}.
 
 To install pandas, enter `pip install pandas`.
+To see the version that is installed, print `pd.__version__`.
+To see the version of pandas, all of its dependencies, and more,
+enter `pd.show_versions()` in a Python environment.
 
 To import the pandas library, use `import pandas as pd`.
 By convention, "pd" is the name used to refer to the library in code.
@@ -33,6 +27,10 @@ and can be thought of as a single-column spreadsheet.
 The `DataFrame` class is used to represent a table of data values
 and can be thought of as a multi-column spreadsheet.
 It is used more frequently than `Series`.
+
+`Series` and `DataFrame` objects use Numpy arrays
+which provide a more efficient way to store and process numbers
+than Python lists.
 
 ## Loading Data
 
@@ -172,18 +170,20 @@ for index, row in df.iterrows():
 
 ## Modifying Data
 
-| Operation                                             | Code                                                         |
-| ----------------------------------------------------- | ------------------------------------------------------------ |
-| set cell value by column name                         | `df.at[ri, cn] = value`                                      |
-| set cell value by column index                        | `df.iat[ri, ci] = value`                                     |
-| conditionally set cell value                          | `df.loc[criteria, cn] = value`                               |
-| conditionally set multiple cell values                | `df.loc[criteria, [cn1, cn2]] = [value1, value2]`            |
-| add column computed from others                       | `df['new_cn'] = expression`                                  |
-| add column that is sum of others <sub>[2](#fn2)</sub> | `df['my sum'] = df.iloc[:, si:ei].sum(axis=1)`               |
-| delete columns                                        | `df = df.drop(columns=['cn1', 'cn2', ...])`                  |
-| delete columns and ignore errors if not present       | `df = df.drop(columns=['cn1', 'cn2', ...], errors='ignore')` |
-| reorder and remove columns                            | `df = df[['cn1', 'cn2', ...]]`                               |
-| change column names (must specify all)                | `df.columns = cn1, cn2, ...`                                 |
+| Operation                                             | Code                                                          |
+| ----------------------------------------------------- | ------------------------------------------------------------- |
+| set cell value by column name                         | `df.at[ri, cn] = value`                                       |
+| set cell value by column index                        | `df.iat[ri, ci] = value`                                      |
+| conditionally set cell value                          | `df.loc[criteria, cn] = value`                                |
+| conditionally set multiple cell values                | `df.loc[criteria, [cn1, cn2]] = [value1, value2]`             |
+| add column computed from others                       | `df['new_cn'] = expression`                                   |
+| add column that is sum of others <sub>[2](#fn2)</sub> | `df['my sum'] = df.iloc[:, si:ei].sum(axis=1)`                |
+| delete columns                                        | `df = df.drop(columns=['cn1', 'cn2', ...])`                   |
+| delete columns and ignore errors if not present       | `df = df.drop(columns=['cn1', 'cn2', ...], errors='ignore')`  |
+| reorder and remove columns                            | `df = df[['cn1', 'cn2', ...]]`                                |
+| rename specific columns                               | `df = df.rename({'old-cn1': 'new-cn1', ...}, axis='columns')` |
+| rename all columns (must specify all names)           | `df.columns = cn1, cn2, ...`                                  |
+| convert strings to numbers in a column                | `df.cn = pd.to_numeric(df.cn, errors='coerce').fillna(0)`     |
 
 <a name="fn2">2</a>: The first slice (colon) with no number on either side means "all rows".
 The second slice specifies a column range.
@@ -339,3 +339,10 @@ for df in pd.read_csv('./movies/tmdb_5000_movies.csv', chunksize=row_count):
 # Now only the retained rows are available in subset_df
 # and we can operate on that.
 ```
+
+## Outstanding Questions
+
+- Is a DataFrame a collection of Series objects?
+- Do DataFrame methods always return a new DataFrame?
+- Do the new DataFrame objects share Series and cells
+  with ones they were created from?
