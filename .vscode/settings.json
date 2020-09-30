@@ -134,6 +134,7 @@
     "keydown",
     "labextension",
     "letsencrypt",
+    "linalg",
     "linecap",
     "linestyle",
     "linewidth",

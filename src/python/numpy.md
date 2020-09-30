@@ -10,7 +10,7 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://numpy.org/", "NumPy" %}
 is a Python library for scientific computing.
-It is an alternative to MatLab.
+It is an alternative to MatLab for use in Python.
 
 NumPy is a dependency of the pandas package,
 so if you have installed that, you already have NumPy.
@@ -50,6 +50,7 @@ any number of dimension sizes can be specified, including one.
 
 | To create ...                                                | Use ...                                                                                                                                                                                           |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| array from CSV file                                          | `a = np.genfromtxt(file_path, delimiter=',')`                                                                                                                                                     |
 | 1D array from a list                                         | `a = np.array([v1, v2, ...])`                                                                                                                                                                     |
 | 1D array from a tuple                                        | `a = np.array((v1, v2, ...))`                                                                                                                                                                     |
 | 2+D array from lists                                         | `a = np.array([[v1, v2, ...], [w1, w2, ...]])`                                                                                                                                                    |
@@ -65,6 +66,7 @@ any number of dimension sizes can be specified, including one.
 | array with random integer values                             | `a = np.random.randint(min, max, size=(rows, cols))`<br>`min` defaults to zero and is inclusive.<br>`max` has no default and is exclusive.                                                        |
 | identity matrix (creates n x n array)                        | `a = np.identity(n, dtype=np.type)`                                                                                                                                                               |
 | copy of existing array                                       | `b = a.copy()`                                                                                                                                                                                    |
+| copy of existing array, but use specified data type          | `b = a.astype(np.type)`<br>truncates if necessary                                                                                                                                                 |
 | repeated copies elements in existing array                   | `b = np.repeat(a, times, axis={0|1})`<br>axis is 0 for vertical and 1 for horizontal.                                                                                                             |
 
 ## Getting Information About an Array
@@ -111,34 +113,41 @@ In the tables that follow, some abbreviations are used for arguments.
 
 ## Operations on One Array
 
-NumPy supports hundreds of operations that produce new arrays
+NumPy supports many operations that produce new arrays
 from the elements in existing arrays.
 
 Here is a sampling of some that create a new array
 from the elements of an existing array.
 
-| Operation                  | Code                                                          |
-| -------------------------- | ------------------------------------------------------------- |
-| add and create new array   | `b = a + v`                                                   |
-| add in place               | `a += v`                                                      |
-| subtract                   | `b = a - v`                                                   |
-| multiply                   | `b = a \* v`                                                  |
-| divide                     | `b = a / v`                                                   |
-| reciprocal                 | `b = np.reciprocal(a)`<br>works with floats, but not integers |
-| exponentiation             | `b = a \*\* v`                                                |
-| square                     | `b = np.square(a)`                                            |
-| square root                | `b = np.sqrt(a)`                                              |
-| sine                       | `b = np.sin(a)`                                               |
-| cosine                     | `b = np.cos(a)`                                               |
-| tangent                    | `b = np.tan(a)`                                               |
-| absolute value             | `b = np.absolute(a)` or<br>`b = np.fabs(a)`                   |
-| round to nearest integer   | `b = np.rint(a)`                                              |
-| floor                      | `b = np.floor(a)`                                             |
-| ceiling                    | `b = np.ceil(a)`                                              |
-| truncate                   | `b = np.trunc(a)`                                             |
-| sign (-1, 0, or 1)         | `b = np.sign(a)`                                              |
-| convert degrees to radians | `b = np.radians(a)` or `b = np.deg2rad(a)`                    |
-| convert radians to degrees | `b = np.degrees(a)` or `b = np.rad2deg(a)`                    |
+| Operation                                                         | Code                                                                                                                                          |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| add and create new array                                          | `b = a + v`                                                                                                                                   |
+| add in place                                                      | `a += v`                                                                                                                                      |
+| subtract                                                          | `b = a - v`                                                                                                                                   |
+| multiply                                                          | `b = a \* v`                                                                                                                                  |
+| divide                                                            | `b = a / v`                                                                                                                                   |
+| reciprocal                                                        | `b = np.reciprocal(a)`<br>works with floats, but not integers                                                                                 |
+| exponentiation                                                    | `b = a \*\* v`                                                                                                                                |
+| square                                                            | `b = np.square(a)`                                                                                                                            |
+| square root                                                       | `b = np.sqrt(a)`                                                                                                                              |
+| sine                                                              | `b = np.sin(a)`                                                                                                                               |
+| cosine                                                            | `b = np.cos(a)`                                                                                                                               |
+| tangent                                                           | `b = np.tan(a)`                                                                                                                               |
+| absolute value                                                    | `b = np.absolute(a)` or<br>`b = np.fabs(a)`                                                                                                   |
+| round to nearest integer                                          | `b = np.rint(a)`                                                                                                                              |
+| floor                                                             | `b = np.floor(a)`                                                                                                                             |
+| ceiling                                                           | `b = np.ceil(a)`                                                                                                                              |
+| truncate                                                          | `b = np.trunc(a)`                                                                                                                             |
+| sign (-1, 0, or 1)                                                | `b = np.sign(a)`                                                                                                                              |
+| convert degrees to radians                                        | `b = np.radians(a)` or `b = np.deg2rad(a)`                                                                                                    |
+| convert radians to degrees                                        | `b = np.degrees(a)` or `b = np.rad2deg(a)`                                                                                                    |
+| create array of same shape<br>containing boolean values           | `b = {condition involving a}`<br>can use all relational and logical operators<br>example: `b = a > 50`<br>example: `b = (a > 50) & (a < 100)` |
+| create 1D array of elements that meet criteria                    | `b = a[{condition involving a}]`<br>example: `b = a[a > 50]`                                                                                  |
+| create 1D array of elements<br>in a 1D array at specified indexes | `b = a[[i1, i2, ...]]`                                                                                                                        |
+| determine if any value in a row meets criteria                    | `b = np.any({condition involving a}, axis=1)`<br>returns 1D array of booleans for each row                                                    |
+| determine if any value in a column meets criteria                 | `b = np.any({condition involving a}, axis=0)`<br>returns 1D array of booleans for each column                                                 |
+| determine if all values in a row meets criteria                   | `b = np.all({condition involving a}, axis=1)`<br>returns 1D array of booleans for each row                                                    |
+| determine if all values in a column meets criteria                | `b = np.all({condition involving a}, axis=0)`<br>returns 1D array of booleans for each column                                                 |
 
 ## Operations on Two Arrays
 
@@ -161,6 +170,13 @@ Here is a sampling of other operations on two arrays.
 
 | Operation             | Code                                                                                               |
 | --------------------- | -------------------------------------------------------------------------------------------------- |
+| minimum element       | `v = np.min(a)`                                                                                    |
+| maximum element       | `v = np.max(a)`                                                                                    |
+| sum of elements       | `v = np.sum(a)`                                                                                    |
+| determinant           | `v = np.linalg.det(a)`                                                                             |
 | matrix multiplication | `b = np.matmul(a1, a2)`<br>The number of columns in `a1` must<br>equal the number of rows in `a2`. |
 
-More detail is coming soon!
+The `np.linalg` package provides many more functions in addition to `det`.
+See {% aTargetBlank
+"https://numpy.org/doc/stable/reference/routines.linalg.html",
+"Linear algebra (numpy.linalg)" %}.
