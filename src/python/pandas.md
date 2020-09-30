@@ -26,11 +26,12 @@ The `Series` class is used to represent a series of data values
 and can be thought of as a single-column spreadsheet.
 The `DataFrame` class is used to represent a table of data values
 and can be thought of as a multi-column spreadsheet.
-It is used more frequently than `Series`.
+`DataFrame` objects hold their data in a collection of `Series` objects.
 
-`Series` and `DataFrame` objects use Numpy arrays
-which provide a more efficient way to store and process numbers
-than Python lists.
+While `Series` and `DataFrame` objects do not store their data in a Numpy array,
+a NumPy array can easily be created from them using their `to_numpy` methods.
+`Series` and `DataFrame` objects can be created from a NumPy array by
+invoking their constructors with the `data` argument set to a NumPy array.
 
 ## Abbreviations
 
