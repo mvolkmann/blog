@@ -24,7 +24,9 @@ To use it, `import numpy as np`.
 
 A primary feature of NumPy is that it uses NumPy arrays
 to store and operate on data.
-These have many advantages over Python lists including:
+Typically the data in these arrays is numbers,
+but it can also be any other type.
+NumPy arrays have many advantages over Python lists including:
 
 - Type checking of each element is not needed
   because NumPy arrays are homogeneous.
