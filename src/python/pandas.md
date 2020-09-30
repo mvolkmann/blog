@@ -177,6 +177,21 @@ is "Vizsla" or "Weimaraner".
 df.loc[df.breed.isin(['Vizsla', 'Weimaraner'])
 ```
 
+Lookups by a specific column can be made faster
+by setting that column as the index.
+This changes the column to no longer be seen as a normal column.
+For example:
+
+```python
+df.set_index('name', inplace=True)
+start = time.time() # to show that lookup by index is faster
+dog = df.loc['Comet']
+# When the "name" column is not the index, do the lookup this way.
+#dog = df[df['name'] == 'Comet']
+end = time.time()
+print('elapsed =', end - start)
+```
+
 To treat `Series` values as strings, add `.str`.
 For example, `df.name.str`.
 
