@@ -10,11 +10,17 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://numpy.org/", "NumPy" %}
 is a Python library for scientific computing.
+It is primarily implemented in optimized C code.
 It is an alternative to MatLab for use in Python.
 
-NumPy is a dependency of the pandas package,
-so if you have installed that, you already have NumPy.
+NumPy supports many operations on matrices.
+{% aTargetBlank "https://www.scipy.org/", "SciPy" %}
+builds on NumPy to add support for even more mathematical operations.
+NumPy is also a dependency of the pandas package.
+
+If you have installed either SciPy or pandas, you already have NumPy.
 Otherwise, install it by entering `pip install numpy`.
+To use it, `import numpy as np`.
 
 A primary feature of NumPy is that it uses NumPy arrays
 to store and operate on data.
@@ -29,15 +35,6 @@ These have many advantages over Python lists including:
   advantage of Single Instruction, Multiple Data (SIMD) vector processing.
 - Memory caching can be more effective utilized
   which results in faster element access.
-
-NumPy supports many operations on matrices.
-SciPy supports even more. Is it seen as a superset of NumPy?
-
-## Using NumPy
-
-```python
-import numpy as np
-```
 
 ## Creating a NumPy Array
 
