@@ -34,7 +34,7 @@ than Python lists.
 
 ## Abbreviations
 
-In the tables that following, some abbreviations are used for arguments.
+In the tables that follow, some abbreviations are used for arguments.
 
 - Column name values below are abbreviated as `cn`.
 - Row index values below are abbreviated as `ri`.

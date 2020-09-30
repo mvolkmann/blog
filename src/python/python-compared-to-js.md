@@ -108,6 +108,13 @@ To make a Python source file directly executable in UNIX systems:
 - Make the file executable by entering `chmod a+x {file-name}.py`
 - To run it from a terminal, enter `./{name}.py`
 
+To automatically restart a script when it or a file it imports is modified:
+
+1. Install Node.js.
+1. `npm install -g nodemon`
+1. If running a JavaScript script, enter `nodemon {name}.js`
+1. If running a Python script, enter `nodemon --exec python3 {name}.py`.
+
 ## Getting Help
 
 For Python, see the list of resources at the end.
