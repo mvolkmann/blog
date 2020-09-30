@@ -134,6 +134,7 @@
     "itemgetter",
     "itemsize",
     "iterrows",
+    "itertools",
     "jstl",
     "jupyterlab",
     "kanban",

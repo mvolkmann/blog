@@ -223,6 +223,18 @@ To see the directories that will be searched,
 | open source catalog      | {% aTargetBlank "https://www.npmjs.com/", "https://www.npmjs.com/" %}                                   | {% aTargetBlank "https://pypi.org/", "https://pypi.org/" %}                                          |
 | tool to install          | `npm` (installed with Node.js)                                                                          | `pip` (installed with Python)                                                                        |
 
+In Python it is common to assign aliases to commonly used packages.
+The community has landed on using the aliases shown in the imports below.
+
+| Package                            | Recommended Import                     |
+| ---------------------------------- | -------------------------------------- |
+| collections<br>in standard library | `import collections as co`             |
+| functools<br>in standard library   | `import functools as ft`               |
+| itertools<br>in standard library   | `import itertools as it`               |
+| matplotlib                         | `from matplotlib import pyplot as plt` |
+| NumPy                              | `import numpy as np`                   |
+| pandas                             | `import pandas as pd`                  |
+
 ## Packages
 
 ### JavaScript Packages
