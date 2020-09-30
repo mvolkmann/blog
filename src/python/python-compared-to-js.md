@@ -220,7 +220,7 @@ To see the directories that will be searched,
 | import entire module     | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *`                      |
 | import specific values   | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name1 as other1, name2 as other2`      |
 | import default and named | `import name, {name1, name2} from 'path';`                                                              | not supported                                                                                        |
-| open source catalog      | https://www.npmjs.com/                                                                                  | https://pypi.org/                                                                                    |
+| open source catalog      | {% aTargetBlank "https://www.npmjs.com/", "https://www.npmjs.com/" %}                                   | {% aTargetBlank "https://pypi.org/", "https://pypi.org/" %}                                          |
 | tool to install          | `npm` (installed with Node.js)                                                                          | `pip` (installed with Python)                                                                        |
 
 ## Packages
