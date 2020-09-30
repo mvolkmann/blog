@@ -10,6 +10,7 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://numpy.org/", "NumPy" %}
 is a Python library for scientific computing.
+It is an alternative to MatLab.
 
 NumPy is a dependency of the pandas package,
 so if you have installed that, you already have NumPy.
@@ -107,5 +108,59 @@ In the tables that follow, some abbreviations are used for arguments.
 | set all elements in a column to values      | `a[:, ci] = [v1, v2, ...]`<br>must provide all values |
 | set range of elements in a row to values    | `a[ri, csi:cei] = [v1, v2, ...]`                      |
 | set range of elements in a column to values | `a[rsi:rei, ci] = [v1, v2, ...]`                      |
+
+## Operations on One Array
+
+NumPy supports hundreds of operations that produce new arrays
+from the elements in existing arrays.
+
+Here is a sampling of some that create a new array
+from the elements of an existing array.
+
+| Operation                  | Code                                                          |
+| -------------------------- | ------------------------------------------------------------- |
+| add and create new array   | `b = a + v`                                                   |
+| add in place               | `a += v`                                                      |
+| subtract                   | `b = a - v`                                                   |
+| multiply                   | `b = a \* v`                                                  |
+| divide                     | `b = a / v`                                                   |
+| reciprocal                 | `b = np.reciprocal(a)`<br>works with floats, but not integers |
+| exponentiation             | `b = a \*\* v`                                                |
+| square                     | `b = np.square(a)`                                            |
+| square root                | `b = np.sqrt(a)`                                              |
+| sine                       | `b = np.sin(a)`                                               |
+| cosine                     | `b = np.cos(a)`                                               |
+| tangent                    | `b = np.tan(a)`                                               |
+| absolute value             | `b = np.absolute(a)` or<br>`b = np.fabs(a)`                   |
+| round to nearest integer   | `b = np.rint(a)`                                              |
+| floor                      | `b = np.floor(a)`                                             |
+| ceiling                    | `b = np.ceil(a)`                                              |
+| truncate                   | `b = np.trunc(a)`                                             |
+| sign (-1, 0, or 1)         | `b = np.sign(a)`                                              |
+| convert degrees to radians | `b = np.radians(a)` or `b = np.deg2rad(a)`                    |
+| convert radians to degrees | `b = np.degrees(a)` or `b = np.rad2deg(a)`                    |
+
+## Operations on Two Arrays
+
+Here is a sampling of operations that
+combine corresponding elements of two arrays
+to create elements in a new array.
+
+| Operation               | Code                                                                                    |
+| ----------------------- | --------------------------------------------------------------------------------------- |
+| add elements            | `b = np.add(a1, a2)`                                                                    |
+| subtract elements       | `b = np.subtract(a1, a2)`                                                               |
+| multiply elements       | `b = np.multiply(a1, a2)`                                                               |
+| divide elements         | `b = np.divide(a1, a2)`                                                                 |
+| maximum                 | `b = np.maximum(a1, a2)` or<br>`b = np.fmax(a1, a2)`<br>element-wise only for 1D arrays |
+| minimum                 | `b = np.minimum(a1, a2)` or<br>`b = np.fmin(a1, a2)`<br>element-wise only for 1D arrays |
+| greatest common divisor | `b = np.gcd(a1, a2)`<br>can also pass two numbers                                       |
+| lowest common multiple  | `b = np.lcm(a1, a2)`<br>can also pass two numbers                                       |
+
+Here is a sampling of other operations on two arrays.
+
+| Operation             | Code                                                                                               |
+| --------------------- | -------------------------------------------------------------------------------------------------- |
+| matrix multiplication | `b = np.matmul(a1, a2)`<br>The number of columns in `a1` must<br>equal the number of rows in `a2`. |
 
 More detail is coming soon!
