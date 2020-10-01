@@ -9,6 +9,11 @@ This is an errata for the book
 If you find additional issues, please email them to
 <a href="mailto:r.mark.volkmann@gmail.com?subject=Svelte book errata" target="_blank">me</a>.
 
+Unless otherwise noted, all of these corrections have been made
+to all versions of the book as of 9/28/2020.
+The second printing of the book will contain this corrections,
+but the first does not.
+
 ### Chapter 1
 
 p. 11 Change the second paragraph in section 1.1.3 to:
