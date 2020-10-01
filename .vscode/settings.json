@@ -36,6 +36,7 @@
     "Passthrough",
     "Permalinks",
     "Pylance",
+    "Pyright",
     "Quadtrees",
     "Rossum",
     "SIMD",

@@ -1727,8 +1727,9 @@ console.log(demo.subtract5(7)); // ReferenceError: object has no method subtract
 To gain type checking for JavaScript, use the TypeScript compiler.
 TypeScript is a superset of JavaScript that adds types.
 
-To gain type checking for Python, use the mypy tool.
-It performs type checking on Python source files.
+Two popular tools that provide type checking on Python source files
+are mypy and Pyright. mypy begin in 2014 and Pyright began in 2019.
+Pyright is used by the VS Code extension Pylance.
 
 The primitive types supported by mypy are:
 
@@ -1788,6 +1789,8 @@ For example, if `IceCream` is a class we have defined:
 def order_ice_cream(flavor: str, scoops: int, add_sprinkles: bool) -> IceCream:
 ```
 
+### mypy
+
 To install mypy, enter `pip install mypy`.
 On a Mac, add the following directory to the `PATH` environment variable:
 `/Library/Frameworks/Python.framework/Versions/3.8/bin`.
@@ -1803,6 +1806,24 @@ The `python` interpreter ignores type hints,
 but they make startup time take slightly longer.
 They are useful as documentation even without using mypy.
 IDEs can use them to flag type issues.
+
+### Pyright
+
+Pyright is implemented in TypeScript and is installed using npm.
+To install Pyright, install Node.js and enter `npm install -g pyright`.
+
+To run Pyright on a source file and all the files it imports,
+enter `pyright`.
+To run in watch mode, enter `pyright -w`.
+See {% aTargetBlank
+"https://github.com/microsoft/pyright/issues/330", "this issue" %}.
+
+In answer to the question "What is the long-term plan for Pyright?"
+the Pyright FAQ says:
+
+"Pyright is a side project with no dedicated team.
+There is no guarantee of continued development on the project.
+If you find it useful, feel free to use it and contribute to the code base."
 
 ### Stub Files
 
