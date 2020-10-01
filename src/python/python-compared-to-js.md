@@ -1823,10 +1823,20 @@ and can also be run from the command-line.
 To install Pyright, install Node.js and enter `npm install -g pyright`.
 
 To run Pyright on a source file and all the files it imports,
-enter `pyright`.
+enter `pyright {filename}.py`.
 To run in watch mode, enter `pyright -w`.
 See {% aTargetBlank
 "https://github.com/microsoft/pyright/issues/330", "this issue" %}.
+
+To configure options for Pyright, create a `pyrightconfig.json` file
+in the project root directory. For example, the following content
+configures strict type checking for all files in the current directory.
+
+```json
+{
+  "strict": ["."]
+}
+```
 
 In answer to the question "What is the long-term plan for Pyright?"
 the Pyright FAQ says:

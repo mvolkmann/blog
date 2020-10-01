@@ -187,6 +187,7 @@
     "pydash",
     "pylint",
     "pyplot",
+    "pyrightconfig",
     "pytest",
     "pyzmq",
     "randint",
