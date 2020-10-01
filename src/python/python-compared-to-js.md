@@ -1804,6 +1804,73 @@ but they make startup time take slightly longer.
 They are useful as documentation even without using mypy.
 IDEs can use them to flag type issues.
 
+### Stub Files
+
+Types can be specified in "stub files" with a `.pyi` extension
+instead of directly in `.py` files.
+Stub files for popular Python libraries can be downloaded from
+{% aTargetBlank "https://github.com/python/typeshed", "typeshed" %}.
+These are included as a submodule of mypy.
+See the typeshed link for instructions on installing them.
+
+When creating your own stub files, create `.pyi` files
+with the same names as the `.py` files whose types they describe.
+Stub files can be placed in the same directory as the module definition
+or in a separate directory with a name like "stubs".
+If they are in a separate directory,
+define the `MYPYPATH` environment variable to point to the directory.
+
+If a stub file for a module is present,
+its type definitions override any found in the corresponding `.py` file.
+
+To define the type of a variable in a stub file,
+use the syntax `name: type`.
+
+To define types for a function in a stub file,
+use the syntax `def name(p1: type1, p2: type2, ...) -> return_type: ...`.
+Note that the `...` is actual syntax.
+
+A stub files can be automatically generated from `.py` files
+using the `stubgen` command that is installed with mypy.
+By default it places the generated stub files in a subdirectory named `out`,
+but this can be changes using the `-o` option.
+For example, `stubgen -o . math.py`
+generates `math.pyi` in the current directory.
+Many of the types will be `Any`, so manual editing of the
+generated files is desirable to make the types more strict.
+
+Here is a example module in `math.py` that omits type hints:
+
+```python
+PI = 3.1415928
+
+def add(n1, n2):
+    return n1 + n2
+```
+
+Here is a stub file in `math.pyi` that provides type hints:
+
+```python
+PI: float
+
+def add(n1: float, n2: float) -> float: ...
+```
+
+Here is code that uses this module:
+
+```python
+from math import PI, add
+
+print(add('2', PI))
+```
+
+Running the `mypy` command reports ...
+
+```text
+demo.py:3: error: Argument 1 to "add" has incompatible type "str"; expected "float"
+Found 1 error in 1 file (checked 1 source file)
+```
+
 ## Testing
 
 Packages that support implementing tests for Python code include
