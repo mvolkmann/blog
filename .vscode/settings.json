@@ -155,6 +155,7 @@
     "macos",
     "markdownlint",
     "mathjax",
+    "mathplotlib",
     "matmul",
     "matplotlab",
     "matplotlib",

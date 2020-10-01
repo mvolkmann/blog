@@ -1808,10 +1808,14 @@ IDEs can use them to flag type issues.
 
 Types can be specified in "stub files" with a `.pyi` extension
 instead of directly in `.py` files.
+
 Stub files for popular Python libraries can be downloaded from
 {% aTargetBlank "https://github.com/python/typeshed", "typeshed" %}.
 These are included as a submodule of mypy.
 See the typeshed link for instructions on installing them.
+Note that the number of libraries represented here is currently small
+and it does not contain stub files for many popular libraries
+including mathplotlib, numpy, and pandas.
 
 When creating your own stub files, create `.pyi` files
 with the same names as the `.py` files whose types they describe.
