@@ -14,9 +14,16 @@ In macOS this is installed in ~/opt/anaconda3.
 To use commands such as `conda`, add the `~/opt/anaconda3/bin` directory
 to the `PATH` environment variable.
 
+For help, enter `conda --help`.
+
 ## Environments
 
-To create a new environment, enter a command like:
+To list the available environments, enter `conda env list`.
+The currently activate environment will have an asterisk after its name.
+
+To create a new environment, enter a command like the following
+which specifies a name for the environment, a version of Python to use,
+and packages that should be initially installed:
 
 ```bash
 conda create -n my-env python=3.8 pandas jupyter
@@ -31,6 +38,16 @@ close this shell and open a new one.
 To activate this environment, enter `conda activate my-env`.
 
 To deactivate the active environment, enter `conda deactivate`.
+
+To install a package in the current environment,
+enter `conda install {package-name}`.
+If it is not found, browse
+{% aTargetBlank "https://anaconda.org/", "anaconda.org" %}
+and search for the package to determine
+what non-default "channels" might host it.
+Then include the channel name in the install command.
+For example, to install the matplotlib package,
+enter `conda install -c conda-forge matplotlib`.
 
 ## VS Code
 
