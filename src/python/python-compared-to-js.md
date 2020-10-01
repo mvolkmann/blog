@@ -1728,12 +1728,18 @@ To gain type checking for JavaScript, use the TypeScript compiler.
 TypeScript is a superset of JavaScript that adds types.
 
 Two popular tools that provide type checking on Python source files
-are %{ aTargetBlank "http://mypy-lang.org/", "mypy" %} and
+are {% aTargetBlank "http://mypy-lang.org/", "mypy" %} and
 {% aTargetBlank "https://github.com/microsoft/pyright", "Pyright" %}.
-mypy begin in 2014 and Pyright began in 2019.
-Pyright is used by the VS Code extension Pylance.
 
-The primitive types supported by mypy are:
+The remainder of this section focuses on Python type checking.
+
+Python type specifications are referred to as "type hints".
+The `python` interpreter ignores type hints,
+but they make startup time take slightly longer.
+They are useful as documentation even without using a type checker.
+IDEs can use them to flag type issues.
+
+The primitive types supported are:
 
 | Type Name | Meaning                                              |
 | --------- | ---------------------------------------------------- |
@@ -1744,7 +1750,7 @@ The primitive types supported by mypy are:
 | `int`     | unlimited precision integer                          |
 | `str`     | string                                               |
 
-The collection types supported by mypy are:
+The collection types supported are:
 
 | Type Name            | Meaning                                               |
 | -------------------- | ----------------------------------------------------- |
@@ -1754,7 +1760,7 @@ The collection types supported by mypy are:
 | `Set[T]`             | set with elements of type T                           |
 | `Tuple[T1, T2, ...]` | tuple whose elements have specified types             |
 
-Other types supported by mypy are:
+Other types supported are:
 
 | Type Name                                           | Meaning                                                                 |
 | --------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -1793,6 +1799,9 @@ def order_ice_cream(flavor: str, scoops: int, add_sprinkles: bool) -> IceCream:
 
 ### mypy
 
+%{ aTargetBlank "http://mypy-lang.org/", "mypy" %} is implemented in Python.
+Development began in 2014.
+
 To install mypy, enter `pip install mypy`.
 On a Mac, add the following directory to the `PATH` environment variable:
 `/Library/Frameworks/Python.framework/Versions/3.8/bin`.
@@ -1804,15 +1813,13 @@ mypy cannot perform type checking on function arguments that correspond to
 parameters with default values or
 parameters that collect variadic arguments in a tuple or dict.
 
-The `python` interpreter ignores type hints,
-but they make startup time take slightly longer.
-They are useful as documentation even without using mypy.
-IDEs can use them to flag type issues.
-
 ### Pyright
 
 {% aTargetBlank "https://github.com/microsoft/pyright", "Pyright" %}
-is implemented in TypeScript and is installed using npm.
+is implemented in TypeScript. Development began in 2019.
+It is used by the VS Code extension Pylance
+and can also be run from the command-line.
+
 To install Pyright, install Node.js and enter `npm install -g pyright`.
 
 To run Pyright on a source file and all the files it imports,
