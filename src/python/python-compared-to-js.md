@@ -1728,7 +1728,9 @@ To gain type checking for JavaScript, use the TypeScript compiler.
 TypeScript is a superset of JavaScript that adds types.
 
 Two popular tools that provide type checking on Python source files
-are mypy and Pyright. mypy begin in 2014 and Pyright began in 2019.
+are %{ aTargetBlank "http://mypy-lang.org/", "mypy" %} and
+{% aTargetBlank "https://github.com/microsoft/pyright", "Pyright" %}.
+mypy begin in 2014 and Pyright began in 2019.
 Pyright is used by the VS Code extension Pylance.
 
 The primitive types supported by mypy are:
@@ -1809,7 +1811,8 @@ IDEs can use them to flag type issues.
 
 ### Pyright
 
-Pyright is implemented in TypeScript and is installed using npm.
+{% aTargetBlank "https://github.com/microsoft/pyright", "Pyright" %}
+is implemented in TypeScript and is installed using npm.
 To install Pyright, install Node.js and enter `npm install -g pyright`.
 
 To run Pyright on a source file and all the files it imports,
