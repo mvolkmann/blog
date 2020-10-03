@@ -168,6 +168,7 @@ plt.savefig(file_path)
 ```
 
 It's easy to plot functions.
+TODO: Discuss how numpy is able to apply a function to an array of numbers.
 For example:
 
 ```python

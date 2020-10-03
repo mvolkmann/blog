@@ -9,10 +9,10 @@ This is an errata for the book
 If you find additional issues, please email them to
 <a href="mailto:r.mark.volkmann@gmail.com?subject=Svelte book errata" target="_blank">me</a>.
 
-Unless otherwise noted, all of these corrections have been made
-to all versions of the book as of 9/28/2020.
-The second printing of the book will contain this corrections,
-but the first does not.
+Most of these corrections were published on 9/28/2020.
+They are included in the second printing, not the first.
+Errors discovered after this date are marked with
+a target printing in the form "printing n" where n > 2.
 
 ### Chapter 1
 
@@ -175,6 +175,15 @@ since it isn't doing anything.
 
 p. 160 In Listing 9.9 at the bottom of the page, the content of the h1
 should be "Page Not Found".
+
+### Chapter 10
+
+p. 171 The last paragraph, starting with "Easing endings" is wrong.
+It should say
+"Easings ending in In are applied at the beginning of a transition.
+Easings ending in Out are applied to the ending of a transition.
+Easings ending in InOut are applied at both ends of a transition."
+(printing 3)
 
 ### Chapter 12
 
