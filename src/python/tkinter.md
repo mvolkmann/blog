@@ -93,22 +93,66 @@ and those that do not.
 
 ### Non-container Widgets
 
-| Name                                                                                        | Description                                                                                   | Nearest DOM/HTML Equivalent                            |
-| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_button", "`Button`" %}           | button that can be pressed;<br>`command` option specifies function to call when clicked.      | `<button>`                                             |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_canvas", "`Canvas`" %}           | for drawing lines and shapes                                                                  | `<canvas>` or `<svg>`                                  |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_checkbutton", "`Checkbutton`" %} | checkbox                                                                                      | `<input type="checkbox">`                              |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_entry", "`Entry`" %}             | single-line text input<br>`command` option specifies function to call when user changes value | `<input type="text">`                                  |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_label", "`Label`" %}             | label                                                                                         | `<label>`                                              |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_listbox", "`Listbox`" %}         | drop-down selection                                                                           | `<select>` with `<option>` children                    |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_menu", "`Menu`" %}               | menu bar or menu                                                                              | none                                                   |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_menubutton", "`Menubutton`" %}   | menu item                                                                                     | none                                                   |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_radiobutton", "`Radiobutton`" %} | radio button                                                                                  | `<input type="radio">`<br>See example at link to left. |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_scale", "`Scale`" %}             | slider                                                                                        | `<input type="range">`                                 |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_scrollbar", "`Scrollbar`" %}     | scrollbar                                                                                     | `<div>` with CSS `overflow` set to `scroll`            |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_text", "`Text`" %}               | multi-line text input                                                                         | `<textarea>`                                           |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_spinbox", "`Spinbox`" %}         | number input                                                                                  | `<input type="number">`                                |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_messagebox", "`tkMessageBox`" %} | dialog box                                                                                    | `alert`, `confirm`, `prompt`, and `<dialog>`           |
+| Name                                                                                        | Description                                                                                      | Nearest DOM/HTML Equivalent                            |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_button", "`Button`" %}           | button that can be pressed;<br>`command` option specifies function to call when clicked.         | `<button>`                                             |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_canvas", "`Canvas`" %}           | for drawing lines and shapes                                                                     | `<canvas>` or `<svg>`                                  |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_checkbutton", "`Checkbutton`" %} | checkbox                                                                                         | `<input type="checkbox">`                              |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_entry", "`Entry`" %}             | single-line text input<br>`command` option specifies function to call<br>when user changes value | `<input type="text">`                                  |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_label", "`Label`" %}             | label                                                                                            | `<label>`                                              |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_listbox", "`Listbox`" %}         | drop-down selection                                                                              | `<select>` with `<option>` children                    |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_menu", "`Menu`" %}               | menu bar or menu;<br>call `add_*` methods to add menu items<br>with a `label` and a `command`    | none                                                   |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_menubutton", "`Menubutton`" %}   | menu name that can be clicked to open a menu                                                     | none                                                   |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_radiobutton", "`Radiobutton`" %} | radio button                                                                                     | `<input type="radio">`<br>See example at link to left. |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_scale", "`Scale`" %}             | slider                                                                                           | `<input type="range">`                                 |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_scrollbar", "`Scrollbar`" %}     | scrollbar                                                                                        | `<div>` with CSS `overflow` set to `scroll`            |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_text", "`Text`" %}               | multi-line text input                                                                            | `<textarea>`                                           |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_spinbox", "`Spinbox`" %}         | number input                                                                                     | `<input type="number">`                                |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_messagebox", "`tkMessageBox`" %} | dialog box;<br>see `ask*` and `show*` methods                                                    | `alert`, `confirm`, `prompt`, and `<dialog>`           |
+
+The following components accept a `command` option that specifies a function
+to be called when the user clicks them or changes their value:
+`Button`, `Checkbutton`, `Entry`, `Radiobutton`,
+`Scale`, `Scrollbar`, and `Spinbox`.
+
+The `Listbox` widget does not support the `command` option.
+To trigger a call to a function when the selected lines change,
+listen for a virtual event as follows:
+
+```python
+def print_selected_indexes(event):
+    selected_indexes = myListbox.curselection() # a tuple
+    print('selected_indexes =', selected_indexes)
+
+myListbox.bind('<<ListboxSelect>>', print_selected_indexes)
+```
+
+The `Text` widget also does not support the `command` option.
+To trigger a call to a function when the selected lines change,
+listen for a virtual even as follows:
+
+```python
+def print_text(event):
+    # '-1c' removes newline from end
+    value = text.get('1.0', 'end-1c') + event.char
+    print('value =', value)
+
+myText.bind('<Key>', print_text)
+```
+
+The following components accept a `state` option that defaults to `NORMAL`,
+but has the value `ACTIVE` when the mouse is over it
+and can be set to `DISABLED` to disable it:
+`Button`, `Checkbutton`, `Entry`, `Menubutton`, `Radiobutton`,
+`Scale`, `Text`, and `Spinbox`.
+
+The `Listbox` widget does not support the `state` option.
+However, the `configure` method can be called on any widget to set its options.
+This can be used to set the `state` of a `Listbox` as follows:
+
+```python
+myListbox.configure(state=DISABLED)
+```
 
 ## Layout Methods
 
