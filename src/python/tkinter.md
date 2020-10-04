@@ -135,6 +135,32 @@ The {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_pack.htm",
 | `fill`   | similar to `expand`, but can retain minimal dimensions;<br>`NONE` (default), `X`, `Y`, or `BOTH` |
 | `side`   | `TOP` (default), `BOTTOM`, `LEFT`, or `RIGHT`                                                    |
 
+Here is a simple example of using `pack`:
+
+```python
+from tkinter import *
+
+root = Tk()
+root.geometry('300x200')
+
+bg = 'yellow'
+relief = RAISED
+
+Label(text='One', bg=bg, relief=RAISED).pack(side=TOP)
+Label(text='Two', bg=bg, relief=RAISED).pack(side=RIGHT)
+Label(text='Three', bg=bg, relief=RAISED).pack(side=BOTTOM)
+Label(text='Four', bg=bg, relief=RAISED).pack(side=LEFT)
+
+Label(text='Five', bg=bg, relief=RAISED).pack(side=TOP)
+Label(text='Six', bg=bg, relief=RAISED).pack(side=RIGHT)
+Label(text='Seven', bg=bg, relief=RAISED).pack(side=BOTTOM)
+Label(text='Eight', bg=bg, relief=RAISED).pack(side=LEFT)
+
+root.mainloop()
+```
+
+![pack example](/blog/assets/tkinter-pack.png)
+
 ### `place`
 
 The {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_place.htm",
