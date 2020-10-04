@@ -60,9 +60,10 @@ cons:
   "https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html",
   "The Computer Language Benchmark Game" %}).
   Python does well with regular expressions.
-- magic methods such as `__init__` that use
-  "dunder" names (for double underscore) which is odd and verbose
-  (see list in "Python Magic Methods" section)
+- magic methods such as `__init__` use "dunder" names (for double underscore)
+  which is an odd and verbose way to distinguish special values
+  (Other programming languages typically use a single special character prefix.
+  See a list in the "Python Magic Methods" section.)
 - use of operator overloading (supported by magic methods) can be confusing
 - anonymous functions are limited to a single expression
 - no built-in support for asynchronous code
@@ -679,6 +680,15 @@ stats.report()
 The output is the same as above.
 
 Note how in Python the first parameter in all instance methods must be `self`.
+
+Here is a function takes a class and prints its inheritance hierarchy:
+
+```python
+def print_inheritance(cls, level = 0):
+    print(' ' * 2 * level, cls.__name__)
+    for base in cls.__bases__:
+        print_class_tree(base, level + 1)
+```
 
 ## Boolean Operations
 
