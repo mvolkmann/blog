@@ -93,22 +93,22 @@ and those that do not.
 
 ### Non-container Widgets
 
-| Name                                                                                        | Description                  | Nearest DOM/HTML Equivalent                 |
-| ------------------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------- |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_button", "`Button`" %}           | button that can be pressed   | `<button>`                                  |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_canvas", "`Canvas`" %}           | for drawing lines and shapes | `<canvas>` or `<svg>`                       |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_checkbutton", "`Checkbutton`" %} | checkbox                     | `<input type="checkbox">`                   |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_entry", "`Entry`" %}             | single-line text input       | `<input type="text">`                       |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_label", "`Label`" %}             | label                        | `<label>`                                   |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_listbox", "`Listbox`" %}         | drop-down selection          | `<select>` with `<option>` children         |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_menu", "`Menu`" %}               | menu bar or menu             | none                                        |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_menubutton", "`Menubutton`" %}   | menu item                    | none                                        |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_radiobutton", "`Radiobutton`" %} | radio button                 | `<input type="radio">`                      |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_scale", "`Scale`" %}             | slider                       | `<input type="range">`                      |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_scrollbar", "`Scrollbar`" %}     | scrollbar                    | `<div>` with CSS `overflow` set to `scroll` |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_text", "`Text`" %}               | multi-line text input        | `<textarea>`                                |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_spinbox", "`Spinbox`" %}         | number input                 | `<input type="number">`                     |
-| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_messagebox", "`tkMessageBox`" %} | dialog box                   | `alert`, `confirm`, `prompt`                |
+| Name                                                                                        | Description                  | Nearest DOM/HTML Equivalent                  |
+| ------------------------------------------------------------------------------------------- | ---------------------------- | -------------------------------------------- |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_button", "`Button`" %}           | button that can be pressed   | `<button>`                                   |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_canvas", "`Canvas`" %}           | for drawing lines and shapes | `<canvas>` or `<svg>`                        |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_checkbutton", "`Checkbutton`" %} | checkbox                     | `<input type="checkbox">`                    |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_entry", "`Entry`" %}             | single-line text input       | `<input type="text">`                        |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_label", "`Label`" %}             | label                        | `<label>`                                    |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_listbox", "`Listbox`" %}         | drop-down selection          | `<select>` with `<option>` children          |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_menu", "`Menu`" %}               | menu bar or menu             | none                                         |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_menubutton", "`Menubutton`" %}   | menu item                    | none                                         |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_radiobutton", "`Radiobutton`" %} | radio button                 | `<input type="radio">`                       |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_scale", "`Scale`" %}             | slider                       | `<input type="range">`                       |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_scrollbar", "`Scrollbar`" %}     | scrollbar                    | `<div>` with CSS `overflow` set to `scroll`  |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_text", "`Text`" %}               | multi-line text input        | `<textarea>`                                 |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_spinbox", "`Spinbox`" %}         | number input                 | `<input type="number">`                      |
+| {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_messagebox", "`tkMessageBox`" %} | dialog box                   | `alert`, `confirm`, `prompt`, and `<dialog>` |
 
 ## Layout Methods
 
