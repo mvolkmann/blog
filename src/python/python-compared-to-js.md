@@ -464,6 +464,10 @@ For guidelines on the content of docstrings, see the
   "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
   "PEP-8 documentation strings" %}.
 
+Neither JavaScript nor Python support function overloading
+where the same function name can be defined multiple times
+with different numbers and/or types of arguments.
+
 | Topic                                                               | JavaScript                                                                           | Python                                                                                                              |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | define named                                                        | `function fnName(params) { ... }`                                                    | `def fnName(params): ...`                                                                                           |
