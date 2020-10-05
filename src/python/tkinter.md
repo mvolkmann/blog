@@ -161,7 +161,8 @@ myListbox.configure(state=DISABLED)
 
 ### Variable Wrappers
 
-Variable wrappers are classes provided by tkinter
+{% aTargetBlank "https://effbot.org/tkinterbook/variable.htm",
+"Variable wrappers" %} are classes provided by tkinter
 that track changes to Python variables that hold primitive values.
 The classes are `BooleanVar`, `DoubleVar`, `IntVar`, and `StringVar`.
 For example, an `IntVar` can be used to track the state of a `Checkbutton`.
@@ -182,6 +183,9 @@ cb.pack()
 
 root.mainloop()
 ```
+
+A similar approach is used to get the value of a `Radiobutton`
+using its `variable` or `textvariable` option.
 
 ## Layout Methods
 
