@@ -275,3 +275,24 @@ The {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_grid.htm",
 | `row`        | row index; default is 0                                                                                             |
 | `rowspan`    | # of rows to occupy; default is 1                                                                                   |
 | `sticky`     | position if cell is larger; centered by default;<br>compass direction `N`, `S`, `E`, `W`, `NE`, `NW`, `SE`, or `SW` |
+
+## Images
+
+To render images in a tkinter app, use the pillow library
+which can be installed by entering `pip install pillow`.
+An image can be added as the background of nearly any widget.
+Often a `Label` is used as shown in the following example.
+
+```python
+from tkinter import *
+from PIL import Image, ImageTk
+
+root = Tk()
+
+image = Image.open('Boston-2013.jpg')
+photo_image = ImageTk.PhotoImage(image)
+label = Label(root, image=photo_image)
+label.pack()
+
+root.mainloop()
+```
