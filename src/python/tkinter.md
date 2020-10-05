@@ -110,6 +110,8 @@ and those that do not.
 | {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_spinbox", "`Spinbox`" %}         | number input                                                                                     | `<input type="number">`                                |
 | {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_messagebox", "`tkMessageBox`" %} | dialog box;<br>see `ask*` and `show*` methods                                                    | `alert`, `confirm`, `prompt`, and `<dialog>`           |
 
+### `command` Option
+
 The following components accept a `command` option that specifies a function
 to be called when the user clicks them or changes their value:
 `Button`, `Checkbutton`, `Entry`, `Radiobutton`,
@@ -140,11 +142,14 @@ def print_text(event):
 myText.bind('<Key>', print_text)
 ```
 
+### `state` Option
+
 The following components accept a `state` option that defaults to `NORMAL`,
 but has the value `ACTIVE` when the mouse is over it
 and can be set to `DISABLED` to disable it:
 `Button`, `Checkbutton`, `Entry`, `Menubutton`, `Radiobutton`,
 `Scale`, `Text`, and `Spinbox`.
+Widgets whose `state` is `DISABLED` are "grayed out".
 
 The `Listbox` widget does not support the `state` option.
 However, the `configure` method can be called on any widget to set its options.
@@ -152,6 +157,30 @@ This can be used to set the `state` of a `Listbox` as follows:
 
 ```python
 myListbox.configure(state=DISABLED)
+```
+
+### Variable Wrappers
+
+Variable wrappers are classes provided by tkinter
+that track changes to Python variables that hold primitive values.
+The classes are `BooleanVar`, `DoubleVar`, `IntVar`, and `StringVar`.
+For example, an `IntVar` can be used to track the state of a `Checkbutton`.
+Note that `Checkbutton` does not have a method to get its current state.
+
+```python
+from tkinter import *
+
+root = Tk()
+
+cb_wrapper = IntVar(value=1) # initially checked
+
+def report():
+    print('checked?', cb_wrapper.get() == 1)
+
+cb = Checkbutton(root, command=report, text='My Label', variable=cb_wrapper)
+cb.pack()
+
+root.mainloop()
 ```
 
 ## Layout Methods
