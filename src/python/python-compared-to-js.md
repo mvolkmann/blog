@@ -1638,6 +1638,8 @@ This is built into modern web browsers and
 can be used in Node applications by installing the `node-fetch` package
 with `npm install node-fetch`.
 
+Here is an example were we fetch an image of a given dog breed.
+
 ```js
 const fetch = require('node-fetch');
 
@@ -1663,6 +1665,8 @@ Python applications often use the
 {% aTargetBlank "https://requests.readthedocs.io/en/master/", "`requests`" %}
 package to send HTTP requests.
 It can be installed by entering `pip install requests`.
+
+Here is the same example using Python.
 
 ```python
 import requests
