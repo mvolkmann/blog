@@ -195,6 +195,14 @@ using its `variable` or `textvariable` option.
 | {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_place.htm", "`place`" %} | places widgets and specific positions in container  |
 | {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_grid.htm", "`grid`"  %}  | places widgets at row/column positions in container |
 
+The layout method is specified on a widget, not on a container.
+This means it is possible for a container to contain widgets
+that use different layout methods.
+An error will be reported if there is an attempt
+to use `grid` and `pack` in the same container.
+It is not an error to use `place` along with either `grid` or `pack`,
+but typically this should be avoided.
+
 In the tables below:
 
 - Values that are all uppercase are constants defined by tkinter, not strings.
