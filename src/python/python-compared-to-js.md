@@ -345,8 +345,8 @@ This is not allowed in Python.
 | variable declaration          | `let name = value;`                                                            | `name = value`                                            |
 | get type of value in variable | `typeof name` and `name.constructor.name`                                      | `type name`                                               |
 | multiple assignment           | `const [a, b] = [1, 2]`                                                        | `a, b = 1, 2`                                             |
-| spread of array/list          | `const [v1, v2, ...] = array;`<br># of variables can differ from # of elements | `v1, v2 = seq`<br># of variables must match # of elements |
-| spread of object              | `const {k1, k2, ...} = object;`                                                | not supported                                             |
+| destructure of array/list     | `const [v1, v2, ...] = array;`<br># of variables can differ from # of elements | `v1, v2 = seq`<br># of variables must match # of elements |
+| destructure of object         | `const {k1, k2, ...} = object;`                                                | not supported                                             |
 | un-declare variable           | `name = undefined` - just removes value                                        | `del name`                                                |
 | addition                      | `name += expr`                                                                 | same                                                      |
 | subtraction                   | `name -= expr`                                                                 | same                                                      |
@@ -489,7 +489,8 @@ with different numbers and/or types of arguments.
 | create partial                                                      | `const newFn = fnName.bind(thisValue, arg1, arg2, ...)`<br>`thisValue` can be `null` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)`                                           |
 | call                                                                | `fnName.call(thisValue, arg1, arg2, ...)`<br>`thisValue` can be `null`               | `class.method(obj, arg1, arg2, ...)`                                                                                |
 | apply                                                               | `fnName.apply(thisValue, argArray)`<br>`thisValue` can be `null`                     | `class.method(obj, *argList)`                                                                                       |
-| spread arguments                                                    | `fnName(...arr)`                                                                     | `fnName(*seq)`                                                                                                      |
+| spread array to positional arguments                                | `fnName(...arr)`                                                                     | `fnName(*seq)`                                                                                                      |
+| spread object to keyword arguments                                  | not supported                                                                        | `fnName(**dict)`                                                                                                    |
 
 In Python:
 

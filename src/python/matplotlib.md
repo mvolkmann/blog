@@ -134,11 +134,25 @@ Let's try some of these enhancements.
 
 ```python
 from matplotlib import pyplot as plt
-import numpy as np
 
-student_ids = np.arange(1, 5) # [1, 2, 3, 4]
-test1_scores = [75, 90, 65, 95]
-test2_scores = [80, 85, 80, 100]
+students = [
+    {'id': 1, 'name': 'Mark', 'scores': [75, 80]},
+    {'id': 2, 'name': 'Tami', 'scores': [90, 85]},
+    {'id': 3, 'name': 'Amanda', 'scores': [65, 95]},
+    {'id': 4, 'name': 'Jeremy', 'scores': [95, 100]}
+]
+
+student_ids = [s['id'] for s in students]
+student_names = [s['name'] for s in students]
+test1_scores = [s['scores'][0] for s in students]
+test2_scores = [s['scores'][1] for s in students]
+
+#plt.xkcd()  # for xkcd sketch-style drawing mode
+plt.title(
+    'Test Scores',
+    fontdict={'fontname': 'Comic Sans MS','fontsize': 24})
+plt.xlabel('Student')
+plt.ylabel('Score')
 plt.plot(
     student_ids, test1_scores, color='red',
     label='test #1', linestyle='--', linewidth=3, marker='o',
@@ -147,19 +161,81 @@ plt.plot(
     student_ids, test2_scores, color='blue',
     label='test #2', linestyle=':',
     marker='s', markerfacecolor='white')
-plt.title(
-    'Test Scores',
-    fontdict={'fontname': 'Comic Sans MS','fontsize': 24})
-plt.xlabel('Student')
-plt.ylabel('Score')
 plt.legend()
-plt.xticks(student_ids)
+plt.xticks(ticks=student_ids, labels=student_names, rotation='vertical')
+figure = plt.gcf()
+figure.tight_layout() # adjusts padding around plots to fit tick labels
+figure.canvas.set_window_title('Test Scores')
+figure.axes[0].set_facecolor('linen')  # background color inside chart
+figure.patch.set_facecolor('skyblue') # background color outside chart
 plt.show()
 ```
 
 With all of these enhancements in place, the chart becomes the following:
 
 ![line chart #2](/blog/assets/line-chart-2.png)
+
+We can also create this same chart using a pandas `DataFrame` as follows:
+
+```python
+from matplotlib import pyplot as plt
+import pandas as pd
+
+students = pd.DataFrame([
+    {'id': 1, 'name': 'Mark', 'scores': [75, 80]},
+    {'id': 2, 'name': 'Tami', 'scores': [90, 85]},
+    {'id': 3, 'name': 'Amanda', 'scores': [65, 95]},
+    {'id': 4, 'name': 'Jeremy', 'scores': [95, 100]}
+])
+
+def get_score(scores, index):
+    return scores[i] if i < len(scores) else 0
+
+# Add a column of scores to the DataFrame for each test.
+test_count = students.scores.apply(len).max()
+for i in range(test_count):
+    students[f'test{i + 1}'] = students.scores.apply(get_score, index=i)
+
+# Plot a line for each test.
+# This approach doesn't enable customizing each line.
+#students.plot(x='name', y=[f'test{i + 1}' for i in range(test_count)])
+
+figure, axes = plt.subplots()
+line_options = [
+    {
+        'color': 'red',
+        'linestyle': '--',
+        'linewidth': 3,
+        'marker': 'o'
+    },
+    {
+        'color': 'blue',
+        'linestyle': ':',
+        'linewidth': 1,
+        'marker': 's'
+    }
+]
+for i in range(test_count):
+    students.plot(
+        ax=axes, # required to plot multiple lines
+        label=f'test #{i + 1}',
+        markerfacecolor='white',
+        x='name', # source of x values
+        y=f'test{i + 1}', # source of y values
+        **line_options[i])
+
+plt.title(
+    'Test Scores',
+    fontdict={'fontname': 'Comic Sans MS','fontsize': 24})
+plt.xlabel('Student')
+plt.ylabel('Score')
+plt.xticks(
+    ticks=range(len(students)),
+    labels=students.name,
+    rotation='vertical')
+plt.gcf().tight_layout() # adjusts padding around plots to fit tick labels
+plt.show()
+```
 
 To save a plot in a PNG file:
 
@@ -168,7 +244,8 @@ plt.savefig(file_path)
 ```
 
 It's easy to plot functions.
-TODO: Discuss how numpy is able to apply a function to an array of numbers.
+Using NumPy enables applying a function to
+an array of numbers to obtain the values to plot.
 For example:
 
 ```python
@@ -187,13 +264,5 @@ plt.plot()
 ```
 
 ![line chart #3](/blog/assets/line-chart-3.png)
-
-TODO: Add something on `plt.gcf().tight_layout()`
-which adjusts the padding between and around subplots.
-What is a subplot?
-
-TODO: How do you change the chart background color?
-
-TODO: Cover xkcd theme.
 
 More detail is coming soon!
