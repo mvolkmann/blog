@@ -497,7 +497,7 @@ In Python:
 
 ## Asynchronous Functions
 
-In Python 3.4+, asynchronous functions are supported by the asyncio library.
+In Python 3.4+, asynchronous functions are supported by the `asyncio` library.
 
 | Topic                              | JavaScript                                                                                     | Python                      |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------------- |
@@ -1954,7 +1954,15 @@ snippets, and more".
 Other useful VS Code extensions for Python code include
 autopep8 and pylint.
 
-## More Python Resources
+## Resources
+
+### JavaScript Resources
+
+- {% aTargetBlank "https://nodejs.org/dist/latest-v14.x/docs/api/", "Node API docs" %}
+- {% aTargetBlank "https://npmjs.com/", "npm" %}
+- {% aTargetBlank "https://developer.mozilla.org/en-US/", "Mozilla Developer Network" %}
+
+### Python Resources
 
 - {% aTargetBlank "https://www.python.org/", "Python home page" %}
 - {% aTargetBlank "https://docs.python.org/3/tutorial/", "Python Tutorial" %}
