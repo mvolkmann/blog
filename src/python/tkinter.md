@@ -63,6 +63,7 @@ from tkinter import *
 root = Tk() # a kind of window that inherits from Wm (window manager)
 root.geometry('800x600') # sets initial window size to width x height
 root.title('My Window Title')
+root.iconbitmap('school-rulers.ico') # can't see in macOS
 
 label = Label(text='Hello, World!') # one of the many supported widgets
 label.pack() # simplest of the three layout methods

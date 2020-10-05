@@ -139,6 +139,7 @@
     "grapher",
     "groupby",
     "hasattr",
+    "iconbitmap",
     "ijavascript",
     "ijsinstall",
     "iloc",
