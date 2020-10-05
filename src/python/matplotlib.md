@@ -46,6 +46,8 @@ This produces the chart below:
 The chart automatically scales to accommodate the data
 and the x and y tick marks are automatically determined.
 
+### Line Chart Enhancements
+
 There are many ways to enhance this chart as shown in the table below.
 
 | Enhancement         | Code                                            |
@@ -78,6 +80,8 @@ plt.title('Test Scores', fontdict={'fontname': 'Comic Sans MS','fontsize': 24})
 Colors can be specified by name or by hex code following by a pound sign.
 To specify the color of a line, add a `color` argument.
 
+### Line Styles
+
 The lines are solid by default.
 To specify another line style, add a `linestyle` argument.
 Supported line styles include:
@@ -92,6 +96,8 @@ Supported line styles include:
 For more line style variations, see {% aTargetBlank
 "https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html",
 "matplotlib Linestyles" %}.
+
+### Markers
 
 Markers are shapes that can be rendered at data points.
 The data points on the lines do not include markers by default.
@@ -129,6 +135,8 @@ Markers are composed of two parts, an edge (border) and a face (interior).
 By default, both have the same color as the line on which they appear.
 To change the marker color, specify the
 `markeredgecolor` and/or `markerfacecolor` arguments.
+
+### Enhancements Demo
 
 Let's try some of these enhancements.
 
@@ -237,11 +245,15 @@ plt.gcf().tight_layout() # adjusts padding around plots to fit tick labels
 plt.show()
 ```
 
+### Saving Plots
+
 To save a plot in a PNG file:
 
 ```python
 plt.savefig(file_path)
 ```
+
+### Plotting Functions
 
 It's easy to plot functions.
 Using NumPy enables applying a function to
@@ -265,4 +277,143 @@ plt.plot()
 
 ![line chart #3](/blog/assets/line-chart-3.png)
 
-More detail is coming soon!
+## Bar Charts
+
+We can create a bar chart showing one test result per student
+with the following:
+
+```python
+from matplotlib import pyplot as plt
+
+students = [
+    {'id': 1, 'name': 'Mark', 'scores': [75, 80]},
+    {'id': 2, 'name': 'Tami', 'scores': [90, 85]},
+    {'id': 3, 'name': 'Amanda', 'scores': [65, 95]},
+    {'id': 4, 'name': 'Jeremy', 'scores': [95, 100]}
+]
+
+student_ids = [s['id'] for s in students]
+student_names = [s['name'] for s in students]
+test_index = 0
+test_scores = [s['scores'][test_index] for s in students]
+indexes = range(len(students))
+
+colors = ['red', 'orange', 'yellow', 'green']
+hatches = ['/', 'O', '*', '+']
+horizontal = False # change to True for horizontal
+
+figure, axes = plt.subplots()
+
+if horizontal:
+    bars = axes.barh(width=test_scores, y=indexes)
+else:
+    bars = axes.bar(height=test_scores, x=indexes)
+
+for index, bar in enumerate(bars):
+    bar.set_hatch(hatches[index])
+    bar.set_edgecolor('blue')  # also sets hatch color
+    bar.set_facecolor(colors[index])
+    score = test_scores[index]
+    score_x = score + 1 if horizontal else index - 0.05
+    score_y = index - 0.05 if horizontal else score + 1
+    axes.text(score_x, score_y, str(score), color='black', fontweight='bold')
+
+plt.title(
+    'Test Scores',
+    fontdict={'fontname': 'Comic Sans MS', 'fontsize': 24})
+plt.xlabel('Score' if horizontal else 'Student')
+plt.ylabel('Student' if horizontal else 'Score')
+
+if horizontal:
+    plt.yticks(indexes, student_names)
+else:
+    plt.xticks(indexes, student_names)
+
+plt.show()
+```
+
+![bar chart #1](/blog/assets/bar-chart-1.png)
+
+It's a bit more complicated to show a bar for each test taken by each student.
+
+```python
+from functools import reduce
+from matplotlib import pyplot as plt
+
+colors = ['red', 'orange', 'yellow', 'green']
+horizontal = False  # change to True for horizontal
+students = [
+    {'id': 1, 'name': 'Mark', 'scores': [75, 80, 10, 30]},
+    {'id': 2, 'name': 'Tami', 'scores': [90, 85, 20, 40]},
+    {'id': 3, 'name': 'Amanda', 'scores': [65, 95, 30, 50]},
+    {'id': 4, 'name': 'Jeremy', 'scores': [95, 100, 40, 60]}
+]
+
+text_delta = 0.065 if horizontal else 0.08
+student_count = len(students)
+student_indexes = range(student_count)
+test_count = reduce(lambda acc, s: max(acc, len(s['scores'])), students, 0)
+student_ids = [s['id'] for s in students]
+student_names = [s['name'] for s in students]
+
+bar_margin = 0.1
+bar_width = (1 - bar_margin * 2) / test_count
+bar_start_dx = -0.5 + bar_margin + bar_width / 2
+
+figure, axes = plt.subplots()
+
+for test_index in range(test_count):
+    label = f'test #{test_index + 1}'
+    test_scores = [s['scores'][test_index] for s in students]
+    bar_dx = bar_start_dx + bar_width * test_index
+    locations = [i + bar_dx for i in student_indexes]
+    if horizontal:
+        bars = axes.barh(
+            width=test_scores,
+            label=label,
+            height=bar_width,
+            y=locations)
+    else:
+        bars = axes.bar(
+            height=test_scores,
+            label=label,
+            width=bar_width,
+            x=locations)
+
+    for index, bar in enumerate(bars):
+        bar.set_edgecolor('black')
+        bar.set_facecolor(colors[test_index])
+        score = test_scores[index]
+
+        text_position_major = index + bar_dx - text_delta
+        text_position_minor = score + 1
+        score_x = text_position_minor if horizontal else text_position_major
+        score_y = text_position_major if horizontal else text_position_minor
+        axes.text(score_x, score_y, str(score),
+                  color='black', fontweight='bold')
+
+plt.title(
+    'Test Scores',
+    fontdict={'fontname': 'Comic Sans MS', 'fontsize': 24})
+plt.xlabel('Score' if horizontal else 'Student')
+plt.ylabel('Student' if horizontal else 'Score')
+
+if horizontal:
+    plt.yticks(student_indexes, student_names)
+else:
+    plt.xticks(student_indexes, student_names)
+
+plt.legend()
+plt.show()
+```
+
+![bar chart #2](/blog/assets/bar-chart-2.png)
+
+## Pie Charts
+
+Coming soon!
+
+## Annotations
+
+See {% aTargetBlank "https://github.com/joferkington/mpldatacursor", "mpldatacursor" %}
+and {% aTargetBlank "https://mplcursors.readthedocs.io/en/stable/", "mplcursors" %}.
