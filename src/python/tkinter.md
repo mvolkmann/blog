@@ -62,6 +62,7 @@ from tkinter import *
 
 root = Tk() # a kind of window that inherits from Wm (window manager)
 root.geometry('800x600') # sets initial window size to width x height
+root.title('My Window Title')
 label = Label(text='Hello, World!') # one of the many supported widgets
 label.pack() # simplest of three layout methods
 root.mainloop()
@@ -220,7 +221,9 @@ The {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_pack.htm",
 | `fill`   | similar to `expand`, but can retain minimal dimensions;<br>`NONE` (default), `X`, `Y`, or `BOTH` |
 | `side`   | `TOP` (default), `BOTTOM`, `LEFT`, or `RIGHT`                                                    |
 
-Here is a simple example of using `pack`:
+Here is a simple example of using `pack`.
+It demonstrates that if multiple widgets are packed to the same side,
+they line up in the order they were packed.
 
 ```python
 from tkinter import *
@@ -249,24 +252,6 @@ TODO: Why is centering off here?
 
 ![pack example](/blog/assets/tkinter-pack.png)
 
-### `place`
-
-The {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_place.htm",
-"`place`" %} method accepts the following options:
-
-| Option       | Values                                                                                |
-| ------------ | ------------------------------------------------------------------------------------- |
-| `anchor`     | compass direction<br>`N`, `S`, `E`, `W`, `NE`, `NW` (default), `SE`, or `SW`          |
-| `bordermode` | `INSIDE` or `OUTSIDE`;indicates whether<br>border is included in `height` and `width` |
-| `height`     | in pixels                                                                             |
-| `width`      | in pixels                                                                             |
-| `relheight`  | percentage of parent height                                                           |
-| `relwidth`   | percentage of parent width                                                            |
-| `relx`       | location as percentage of parent width                                                |
-| `rely`       | location as percentage of parent height                                               |
-| `x`          | location in pixels                                                                    |
-| `y`          | location in pixels                                                                    |
-
 ### `grid`
 
 The {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_grid.htm",
@@ -276,13 +261,42 @@ The {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_grid.htm",
 | ------------ | ------------------------------------------------------------------------------------------------------------------- |
 | `column`     | column index; default is 0                                                                                          |
 | `columnspan` | # of columns to occupy; default is 1                                                                                |
-| `ipadx`      | internal x padding; default is 0                                                                                    |
-| `ipady`      | internal y padding; default is 0                                                                                    |
-| `padx`       | external x padding (margin); default is 0                                                                           |
-| `pady`       | external y padding (margins); default is 0                                                                          |
+| `ipadx`      | internal x padding in pixels; default is 0                                                                          |
+| `ipady`      | internal y padding in pixels; default is 0                                                                          |
+| `padx`       | external x padding in pixels (margin); default is 0                                                                 |
+| `pady`       | external y padding in pixels (margin); default is 0                                                                 |
 | `row`        | row index; default is 0                                                                                             |
 | `rowspan`    | # of rows to occupy; default is 1                                                                                   |
 | `sticky`     | position if cell is larger; centered by default;<br>compass direction `N`, `S`, `E`, `W`, `NE`, `NW`, `SE`, or `SW` |
+
+Skipped rows and columns do not occupy any space.
+
+### `place`
+
+The {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_place.htm",
+"`place`" %} method accepts the following options.
+
+| Option       | Values                                                                                 |
+| ------------ | -------------------------------------------------------------------------------------- |
+| `anchor`     | compass direction<br>`N`, `S`, `E`, `W`, `NE`, `NW` (default), `SE`, or `SW`           |
+| `bordermode` | `INSIDE` or `OUTSIDE`; indicates whether<br>border is included in `height` and `width` |
+| `height`     | in pixels                                                                              |
+| `width`      | in pixels                                                                              |
+| `relheight`  | percentage of parent height                                                            |
+| `relwidth`   | percentage of parent width                                                             |
+| `relx`       | location as percentage of parent width                                                 |
+| `rely`       | location as percentage of parent height                                                |
+| `x`          | location in pixels                                                                     |
+| `y`          | location in pixels                                                                     |
+
+Options that accept percentage values support creating responsive layouts
+that respond to resizing the window.
+
+To center a widget horizontally, set options so that
+`relwidth + 2 * relx == 1`.
+
+To center a widget vertically, set options so that
+`relheight + 2 * rely == 1`.
 
 ## Images
 
@@ -293,7 +307,7 @@ Often a `Label` is used as shown in the following example.
 
 ```python
 from tkinter import *
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk # stands for Python Imaging Library
 
 root = Tk()
 

@@ -1631,6 +1631,63 @@ Key benefits of
    Browse localhost:1919/docs to see API documentation
    and try each API from the browser.
 
+## HTTP Clients
+
+JavaScript applications often use the Fetch API to send HTTP requests.
+This is built into modern web browsers and
+can be used in Node applications by installing the `node-fetch` package
+with `npm install node-fetch`.
+
+```js
+const fetch = require('node-fetch');
+
+const breed = 'whippet';
+const url = `https://dog.ceo/api/breed/${breed}/images/random/1`;
+
+async function doIt() {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(await res.text());
+    const obj = await res.json();
+    const [imageUrl] = obj.message; // get first array element
+    console.log('image url =', imageUrl);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+doIt();
+```
+
+Python applications often use the
+{% aTargetBlank "https://requests.readthedocs.io/en/master/", "`requests`" %}
+package to send HTTP requests.
+It can be installed by entering `pip install requests`.
+
+```python
+import requests
+from requests.exceptions import ConnectionError
+import sys
+
+breed = 'whippet'
+url = f'https://dog.ceo/api/breed/{breed}/images/random/1'
+
+try:
+    res = requests.get(url)
+    if res.status_code != 200:
+        raise Exception('bad status ' + str(res.status_code))
+
+    obj = res.json()
+    print('is dict?', type(obj) is dict)
+    #image_url = obj.message[0] # TODO: Why doesn't this work?
+    image_url = obj['message'][0] # get first array element
+    print('image url =', image_url)
+except ConnectionError as e:
+    print('failed to connect to', url)
+except Exception as e:
+    print(e)
+```
+
 ## Python Magic Methods
 
 Python magic methods support many operations on classes and class instances.
