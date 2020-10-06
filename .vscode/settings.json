@@ -126,6 +126,7 @@
     "facecolor",
     "fastapi",
     "favicon",
+    "figsize",
     "fillna",
     "finditer",
     "fmax",

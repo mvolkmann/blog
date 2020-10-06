@@ -252,8 +252,14 @@ plt.show()
 To save a plot in a PNG file:
 
 ```python
-plt.savefig(file_path)
+plt.savefig(file_path, dpi=300)
 ```
+
+If no directory is specified, the file is saved in the current directory.
+
+The `dpi` argument (dots per inch) can be omitted,
+in which case it defaults to 100.
+Higher DPI values create larger files.
 
 ### Plotting Functions
 
@@ -295,7 +301,10 @@ import matplotlib.pyplot as plt
 # animation is missing from Pylance bundled type stub files.
 import matplotlib.animation as animation
 
+# Can pass figsize=(width,height) in inches.
+# Can specify dots per inch with dpi=number (ex. 300).
 fig = plt.figure()
+
 ax = fig.add_subplot(1, 1, 1)
 last_data = ''  # used to determine if file contents have changed
 x_values = []
@@ -357,7 +366,8 @@ colors = ['red', 'orange', 'yellow', 'green']
 hatches = ['/', 'O', '*', '+']
 horizontal = False # change to True for horizontal
 
-figure, axes = plt.subplots()
+# Create plot with width=10" and height=4".
+figure, axes = plt.subplots(figsize=(10, 4))
 
 if horizontal:
     bars = axes.barh(width=test_scores, y=indexes)
@@ -458,7 +468,7 @@ if horizontal:
 else:
     plt.xticks(student_indexes, student_names)
 
-plt.legend()
+plt.legend(loc='upper right') # location defaults to "best" guess
 plt.show()
 ```
 
