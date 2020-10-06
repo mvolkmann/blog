@@ -43,7 +43,7 @@ plt.show()
 
 This produces the chart below:
 
-![line chart #1](/blog/assets/line-chart-1.png)
+![line chart #1](/blog/assets/matplotlib-line-chart-1.png)
 
 The chart automatically scales to accommodate the data
 and the x and y tick marks are automatically determined.
@@ -183,7 +183,7 @@ plt.show()
 
 With all of these enhancements in place, the chart becomes the following:
 
-![line chart #2](/blog/assets/line-chart-2.png)
+![line chart #2](/blog/assets/matplotlib-line-chart-2.png)
 
 We can also create this same chart using a pandas `DataFrame` as follows:
 
@@ -283,7 +283,7 @@ plt.legend()
 plt.plot()
 ```
 
-![line chart #3](/blog/assets/line-chart-3.png)
+![line chart #3](/blog/assets/matplotlib-line-chart-3.png)
 
 ## Animating Plots
 
@@ -397,7 +397,7 @@ else:
 plt.show()
 ```
 
-![bar chart #1](/blog/assets/bar-chart-1.png)
+![bar chart #1](/blog/assets/matplotlib-bar-chart-1.png)
 
 It's a bit more complicated to show a bar for each test taken by each student.
 
@@ -472,7 +472,7 @@ plt.legend(loc='upper right') # location defaults to "best" guess
 plt.show()
 ```
 
-![bar chart #2](/blog/assets/bar-chart-2.png)
+![bar chart #2](/blog/assets/matplotlib-bar-chart-2.png)
 
 ## Pie Charts
 
