@@ -6,6 +6,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 This document provides a comparison of the most commonly used features
 of Python and JavaScript. Lesser used features are omitted.
 

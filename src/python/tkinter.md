@@ -6,6 +6,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 ## Overview
 
 The name "tkinter" is short for "Tk interface".

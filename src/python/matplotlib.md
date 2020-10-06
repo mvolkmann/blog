@@ -1,10 +1,12 @@
 ---
 eleventyNavigation:
-  key: mapplotlib
+  key: matplotlib
   order: 6
   parent: Python
 layout: topic-layout.njk
 ---
+
+<!-- markdownlint-disable MD013 -->
 
 ## Overview
 
@@ -13,7 +15,7 @@ is a Python library for data visualization.
 
 To install this package, enter `pip install matplotlib`.
 
-The most commonly used submodule in matplotlib is `pylot`.
+The most commonly used submodule in matplotlib is `pyplot`.
 To import this, use one of the following:
 
 ```python
