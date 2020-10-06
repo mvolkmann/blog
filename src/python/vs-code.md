@@ -32,4 +32,12 @@ To avoid adding two blank lines before and after each function definition:
   "python.formatting.autopep8Args": ["--ignore=E302,E305"],
 ```
 
+To enable the Pyright type checker to use type stub files
+that you have downloaded, add the following
+(THIS DID NOT WORK!):
+
+```json
+  "pyright.stubPath": "{directory-path}",
+```
+
 More detail is coming soon!

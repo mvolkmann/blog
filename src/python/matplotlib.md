@@ -277,6 +277,59 @@ plt.plot()
 
 ![line chart #3](/blog/assets/line-chart-3.png)
 
+## Animating Plots
+
+The `matplotlib.animation` package supports creating animated plots.
+The following example reads from the file `data.csv` every second.
+In the first pass and any time the data changes,
+it clears the plot and plots the new data.
+
+```python
+# Disable pylint rule that treats all module-level variables as constants.
+# pylint: disable=C0103
+
+from random import randint
+import matplotlib.pyplot as plt
+# animation is missing from Pylance bundled type stub files.
+import matplotlib.animation as animation
+
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+last_data = ''  # used to determine if file contents have changed
+x_values = []
+y_values = []
+
+def animate(_: int) -> None:
+    """Plots data found in the file data.csv."""
+
+    global last_data, x_values, y_values
+
+    data = open('data.csv', 'r').read()
+    if data == last_data:
+        # Could just return here if we only want updates from the file.
+        # For fun, randomly pick a point to change.
+        index = randint(0, len(x_values) - 1)
+        y_values[index] = randint(0, 10)
+    else:
+        last_data = data
+        lines = data.split('\n')
+        x_values = []
+        y_values = []
+        for line in lines:
+            if len(line) > 1:
+                x, y = line.split(',')
+                x_values.append(int(x))
+                y_values.append(int(y))
+
+    ax.clear()  # this method is missing from Pylance bundled type stub files
+    ax.plot(x_values, y_values)
+
+# TODO: Why do I have to capture the return value in order for this to work?
+ani = animation.FuncAnimation(fig, animate, interval=1000)
+
+plt.show()
+```
+
 ## Bar Charts
 
 We can create a bar chart showing one test result per student
