@@ -261,8 +261,8 @@ To allow each project to use different versions of packages
 and make it easy for other developers to install the same set of packages,
 create a virtual environment.
 There are several tools that can be used to do this.
-Options include {% aTargetBlank "topics/#/blog/python/anaconda/", "Anaconda" %},
-and `venv`.
+Options include <a href="../anaconda/">Anaconda</a> and
+{% aTargetBlank "https://docs.python.org/3/library/venv.html", "`venv`" %}.
 
 To create a virtual environment using `venv`,
 enter `python -m venv env`

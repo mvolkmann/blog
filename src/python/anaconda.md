@@ -44,16 +44,22 @@ For help, enter `conda --help`.
 
 ## Anaconda Navigator
 
-Anaconda Navigator is a GUI tool for launching various Python tools
-such as JupyterLab, Jupyter Notebook, VS Code, and more.
-It also provides a way to see the packages that are installed in each
-virtual environment that has been created.
+Anaconda Navigator is a GUI tool that displays for tabs in the left nav.
+These are "Home", "Environments", "Learning", and "Community".
+Each is described below.
+
+### Home Tab
+
+The Home tab displays buttons that can be clicked to launch various
+Python tools such as JupyterLab, Jupyter Notebook, VS Code, and more.
+
+### Environments Tab
+
+The Environments tab displays a list of
+the virtual environments that have been created.
+Selecting an environment displays the packages installed in it.
 By default a virtual environment named "base" is defined.
 This includes a large number of pre-installed packages.
-To see them, click "Environments" in the left nav, and select "base".
-
-To change the packages included in an environment,
-click "Environments" in the left nav, select an environment.
 
 To create a new environment,
 press "Create" at the bottom of the environments list,
@@ -82,7 +88,8 @@ press "Remove" at the bottom of the environments list.
 A confirmation dialog will be displayed.
 Press "Remove" to confirm.
 
-To add packages, select "Not installed" from the drop-down.
+To add packages to the selected environment,
+select "Not installed" from the drop-down.
 The search input can be used to filter the list.
 Click the checkbox in front of each package to be installed.
 To install a specific version, right-click the checkbox,
@@ -126,42 +133,34 @@ When an update to Anaconda Navigator becomes available,
 an "Upgrade Now" button will appear in the upper-right corner.
 Click this to upgrade.
 
+### Learning
+
+### Community
+
 ## conda
 
 The `conda` command can be used from a terminal to work with environments.
 
-| Action                                                                                                     | Command                                 |
-| ---------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| get detailed information about `conda` installation                                                        | `conda info`                            |
-| update version of `conda`                                                                                  | `conda update conda`                    |
-| initialize conda to work with a specific shell;<br>for change to take effect, close shell and open new one | `conda init {shell-name}`<br>ex. `fish` |
-| list available environments;<br>current will have asterisk after name                                      | `conda env list`                        |
-| activate different environment                                                                             | `conda activate {name}`                 |
+| Action                                                                                                                                                    | Command                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| get detailed information about `conda` installation                                                                                                       | `conda info`                                                            |
+| update version of `conda`                                                                                                                                 | `conda update conda`                                                    |
+| initialize conda to work with a specific shell;<br>for change to take effect, close shell and open new one                                                | `conda init {shell-name}`<br>ex. `bash`, `fish`, `powershell`, or `zsh` |
+| list available environments;<br>active one will have asterisk after name                                                                                  | `conda env list`                                                        |
+| activate different environment                                                                                                                            | `conda activate {name}`                                                 |
+| get version of Python used by active environment                                                                                                          | `python --version`                                                      |
+| create new environment with some packages;<br>uses latest Python version by default;<br>installs no packages by default;<br>does not activate environment | `conda create --name my-env python=3.8 pandas jupyter`                  |
+| clone existing environment                                                                                                                                | `conda create --clone {old-env} --name {new-env}`                       |
+| deactivate active environment;<br>activates `base` environment                                                                                            | `conda deactivate`                                                      |
+| list all packages in active environment                                                                                                                   | `conda list`                                                            |
+| install package in active environment                                                                                                                     | `conda install {package-name}`                                          |
+| update package in active environment                                                                                                                      | `conda update {pkg}`                                                    |
+| remove packages from active environment                                                                                                                   | `conda remove {pkg1} {pkg2} ...`                                        |
+| remove an environment                                                                                                                                     | `conda remove --name {env} --all`                                       |
+| create YAML file that describes active environment                                                                                                        | `conda env export > {env}.yml`                                          |
+| create new environment from YAML file                                                                                                                     | `conda env create -f {env}.yaml`                                        |
 
-To create a new environment, enter a command like the following
-which specifies a name for the environment (`my-env`),
-a version of Python to use (3.8), and
-packages that should be initially installed (pandas and jupyter):
-
-```bash
-conda create --name my-env python=3.8 pandas jupyter
-```
-
-Note that creating a new environment does not activate it.
-
-To clone an existing environment,
-enter `conda create --clone {old-env} --name {new-env}`.
-
-To deactivate the active environment, enter `conda deactivate`.
-Since there is always some active environment,
-this will activate the "base" environment.
-
-To list all packages in the active environment,
-enter `conda list`.
-
-To install a package in the active environment,
-enter `conda install {package-name}`.
-If it is not found, browse
+When installing a package, if it is not found browse
 {% aTargetBlank "https://anaconda.org/", "anaconda.org" %}
 and search for the package to determine
 what non-default "channels" might host it.
@@ -172,21 +171,6 @@ To specify a version to install other than the latest,
 see "Specifying version numbers" in the {% aTargetBlank
 "https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf",
 "Conda Cheat Sheet" %}.
-
-To update a package in the active environment,
-enter `conda update {pkg}`.
-
-To remove packages from the active environment,
-enter `conda remove {pkg1} {pkg2} ...`.
-
-To create a YAML file that describes the active environment,
-enter `conda env export > {env}.yml`.
-
-To create a new environment from a YAML file,
-enter `conda env create -f {env}.yaml`.
-
-To remove an environment,
-enter `conda remove --name {env} --all`.
 
 ## VS Code
 
