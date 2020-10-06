@@ -9,9 +9,10 @@ layout: topic-layout.njk
 <!-- markdownlint-disable MD013 -->
 
 {% aTargetBlank "https://www.anaconda.com/", "Anaconda" %}
-is data science platform that provides a Python distribution and
-a tool for managing Python virtual environments.
-There are three editions, Individual (free),
+is data science platform that provides a Python distribution,
+a GUI application for managing Python virtual environments,
+and a command-line command for doing the same.
+Anaconda comes in three editions, Individual (free),
 Team (\$10K+), and Enterprise (contact sales).
 
 To install the Individual Edition of Anaconda, browse the {% aTargetBlank
