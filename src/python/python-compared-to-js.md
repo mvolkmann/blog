@@ -1934,6 +1934,10 @@ Note that the number of libraries represented here is currently small
 and it does not contain stub files for many popular libraries
 including mathplotlib, numpy, and pandas.
 
+Type stub files for matplotlib, numpy, and pandas can be found at
+{% aTargetBlank "https://pypi.org/project/data-science-types/",
+"data-science-types" %}.
+
 When creating your own stub files, create `.pyi` files
 with the same names as the `.py` files whose types they describe.
 Stub files can be placed in the same directory as the module definition
