@@ -259,7 +259,13 @@ To upgrade the version of `pip` being used, enter
 
 To allow each project to use different versions of packages
 and make it easy for other developers to install the same set of packages,
-create a virtual environment by entering `python -m venv env`
+create a virtual environment.
+There are several tools that can be used to do this.
+Options include {% aTargetBlank "topics/#/blog/python/anaconda/", "Anaconda" %},
+and `venv`.
+
+To create a virtual environment using `venv`,
+enter `python -m venv env`
 while in the project root directory.
 This creates an `env` subdirectory.
 
@@ -338,6 +344,11 @@ are created when a value is assigned to them.
 JavaScript variable assignments can appear inside expressions
 such as an `if` or loop condition, which many developers find confusing.
 This is not allowed in Python.
+
+The pylint Python linting tool treats module-level variables as constants.
+It will output warnings if functions modify their values.
+To avoid this, list all such variables to be modified after
+the `global` keyword inside functions that modify them.
 
 | Topic                         | JavaScript                                                                     | Python                                                    |
 | ----------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- |
