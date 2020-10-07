@@ -1904,7 +1904,7 @@ def order_ice_cream(flavor: str, scoops: int, add_sprinkles: bool) -> IceCream:
 
 ### mypy
 
-%{ aTargetBlank "http://mypy-lang.org/", "mypy" %} is implemented in Python.
+{% aTargetBlank "http://mypy-lang.org/", "mypy" %} is implemented in Python.
 Development began in 2014.
 
 To install mypy, enter `pip install mypy`.
