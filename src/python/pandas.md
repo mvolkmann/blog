@@ -330,6 +330,29 @@ hockey   Bruins       2
          Oilers       3
 ```
 
+To get the number of players for each team in the `DataFrame`,
+use `players.team.value_counts()` which outputs:
+
+```text
+Oilers       3
+Bruins       2
+Cardinals    1
+Name: team, dtype: int64
+```
+
+To get only the top counts, in this case the top 2, use
+`players.team.value_counts().nlargest(2)` which outputs:
+
+```text
+Oilers    3
+Bruins    2
+Name: team, dtype: int64
+```
+
+To get all the rows for players on the teams with the highest number of players,
+use `players[players.team.isin(counts.nlargest(2).index)]`.
+This gives all the rows where the team is "Oilers" or "Bruins".
+
 ## Writing Data
 
 To create a CSV file from a `DataFrame`:

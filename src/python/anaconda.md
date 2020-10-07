@@ -22,7 +22,9 @@ Then double-click the downloaded installer and follow the instructions.
 This installs the "Anaconda Navigator" app and
 the `conda` command for managing virtual environments.
 
-> In macOS this is installed in ~/opt/anaconda3.
+> In macOS this app is installed in ~/opt/anaconda3.
+> Consider creating an alias to this
+> inside the Applications folder for easy access.
 > To use commands such as `conda`, add the `~/opt/anaconda3/bin` directory
 > to the `PATH` environment variable.
 >
@@ -54,11 +56,11 @@ Anaconda Navigator is a GUI application that displays for tabs in the left nav.
 These are "Home", "Environments", "Learning", and "Community".
 Each is described below.
 
-| Operating System | To Launch                                                         |
-| ---------------- | ----------------------------------------------------------------- |
-| Linux            | open a terminal and enter `anaconda-navigator`                    |
-| macOS            | open Finder, navigate to Applications folder, and double-click it |
-| Windows          | select it from Start menu                                         |
+| Operating System | To Launch                                             |
+| ---------------- | ----------------------------------------------------- |
+| Linux            | open a terminal and enter `anaconda-navigator`        |
+| macOS            | open Finder, navigate to the app, and double-click it |
+| Windows          | select it from Start menu                             |
 
 The "Documentation" button in the left nav can be clicked to
 browse documentation on Anaconda Navigator in your default web browser.
