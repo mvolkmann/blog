@@ -883,7 +883,7 @@ that matches some criteria. This naive approach is probably the most efficient.
 
 ```python
 def index(predicate, seq):
-  for index in range(0, len(seq) - 1):
+  for index in range(0, len(seq)):
       if predicate(seq[index]):
           return index
   return None
