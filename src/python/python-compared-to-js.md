@@ -263,8 +263,11 @@ To allow each project to use different versions of packages
 and make it easy for other developers to install the same set of packages,
 create a virtual environment.
 There are several tools that can be used to do this.
-Options include <a href="../anaconda/">Anaconda</a> and
-{% aTargetBlank "https://docs.python.org/3/library/venv.html", "`venv`" %}.
+Options include <a href="../anaconda/">Anaconda</a>,
+{% aTargetBlank "https://virtualenv.pypa.io/en/latest/", "`virtualenv`" %}
+(primarily for Python 2), and
+{% aTargetBlank "https://docs.python.org/3/library/venv.html", "`venv`" %}
+(a subset of `virtualenv` for Python 3).
 
 To create a virtual environment using `venv`,
 enter `python -m venv env`
@@ -286,6 +289,11 @@ environment directory being used, `env` in this case.
 
 To deactivate a virtual environment and return to
 using global versions of tools and libraries, enter `deactivate`.
+
+Note that Python virtual environments must be activated to take effect.
+This differs from Node.js where simply changing to the directory
+of a project causes its dependencies versions to be used
+based on the contents of the `node_modules` subdirectory.
 
 ### Package Comparisons
 
