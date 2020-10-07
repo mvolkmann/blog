@@ -63,7 +63,6 @@ Running the following code opens a window that displays text.
 from tkinter import *
 
 root = Tk() # a kind of window that inherits from Wm (window manager)
-root.geometry('800x600') # sets initial window size to width x height
 root.title('My Window Title')
 root.iconbitmap('school-rulers.ico') # can't see in macOS
 root.configure(background='linen') # sets background color
@@ -76,6 +75,18 @@ Button(text='Quit', command=root.quit).pack()
 
 # Start the event loop.
 mainloop()
+```
+
+To specify the initial window size and screen location,
+pass a specially formatted string to the `geometry` method.
+For example:
+
+```python
+width = 800
+height = 600
+initial_x = 100
+initial_y = 300
+root.geometry(f'{width}x{height}+{initial_x}+{initial_y}')
 ```
 
 Windows are resizable by default.
