@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: tkinter
-  order: 7
+  order: 8
   parent: Python
 layout: topic-layout.njk
 ---

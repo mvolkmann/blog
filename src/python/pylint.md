@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: pylint
-  order: 8
+  order: 10
   parent: Python
 layout: topic-layout.njk
 ---

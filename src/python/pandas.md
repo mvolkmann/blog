@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Pandas
-  order: 4
+  order: 6
   parent: Python
 layout: topic-layout.njk
 ---
