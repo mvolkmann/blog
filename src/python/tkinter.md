@@ -66,6 +66,7 @@ root = Tk() # a kind of window that inherits from Wm (window manager)
 root.geometry('800x600') # sets initial window size to width x height
 root.title('My Window Title')
 root.iconbitmap('school-rulers.ico') # can't see in macOS
+root.configure(background='linen') # sets background color
 
 label = Label(text='Hello, World!') # one of the many supported widgets
 label.pack() # simplest of the three layout methods
@@ -73,10 +74,10 @@ label.pack() # simplest of the three layout methods
 # Add a button for quitting the app.
 Button(text='Quit', command=root.quit).pack()
 
-root.mainloop()
+mainloop()
 ```
 
-The `mainloop` method starts an event loop which
+The `mainloop` function starts an event loop which
 blocks code that follows from executing.
 The event loop processes user interface events.
 Closing the window causes the event loop to terminate
@@ -191,7 +192,7 @@ def report():
 cb = Checkbutton(root, command=report, text='My Label', variable=cb_wrapper)
 cb.pack()
 
-root.mainloop()
+mainloop()
 ```
 
 A similar approach is used to get the value of a `Radiobutton`
@@ -254,7 +255,7 @@ add_button('Six', RIGHT)
 add_button('Seven', BOTTOM)
 add_button('Eight', LEFT)
 
-root.mainloop()
+mainloop()
 ```
 
 TODO: Why is centering off here?
@@ -325,5 +326,5 @@ photo_image = ImageTk.PhotoImage(image)
 label = Label(root, image=photo_image)
 label.pack()
 
-root.mainloop()
+mainloop()
 ```
