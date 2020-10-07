@@ -72,6 +72,46 @@ When multiple databases are attached,
 the tables in all of them are accessible and
 reporting commands such as `.tables` report on all the databases.
 
+By default, output from `select` statements uses `list` mode
+where each record is output on a single line
+with `|` characters separating column values.
+
+Here is an example of `list` mode output:
+
+```text
+Maisey|Treeing Walker Coonhound|11
+Ramsay|Native American Indian Dog|8
+```
+
+The `.mode {mode}` command can be used to change this output.
+Supported modes include `list`, `csv`, `line`, and `column`.
+
+Here is an example of `csv` mode output:
+
+```text
+Maisey,"Treeing Walker Coonhound",11
+Ramsay,"Native American Indian Dog",8
+```
+
+Here is an example of `line` mode output:
+
+```text
+ name = Maisey
+breed = Treeing Walker Coonhound
+  age = 11
+
+ name = Ramsay
+breed = Native American Indian Dog
+  age = 8
+```
+
+Here is an example of `column` mode output:
+
+```text
+Maisey      Treeing Walker Coonhound  11
+Ramsay      Native American Indian D  8
+```
+
 ## Column Types
 
 SQLite supports a small set of column types that include:
