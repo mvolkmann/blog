@@ -476,7 +476,41 @@ plt.show()
 
 ## Pie Charts
 
-Coming soon!
+TODO: Add more detail!
+
+```python
+import matplotlib.pyplot as plt
+
+day = {
+    'Sleep': 8,
+    'Run': 1.5,
+    'Work': 8,
+    'Eat': 2,  # total for all meals
+    'Play': 0  # will compute
+}
+day['Play'] = 24 - sum(day.values())
+
+explode = [0] * len(day)  # start with no slices pulled out
+explode[1] = 0.15  # pull out 2nd slice by this percentage
+
+fig, ax = plt.subplots()
+
+# Create a pie chart where the slices are
+# ordered and plotted counter-clockwise.
+ax.pie(
+    day.values(),
+    explode=explode,
+    labels=day.keys(),
+    autopct='%1.1f%%',  # adds value text to slices
+    # shadow=True, # gives 3D effect
+    startangle=90)  # first slice begins here
+
+# Equal aspect ratio causes pie to be drawn as a circle.
+# This doesn't seem to be necessary.
+# ax.axis('equal')
+
+plt.show()
+```
 
 ## Annotations
 

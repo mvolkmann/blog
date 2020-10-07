@@ -17,7 +17,7 @@ of Python and JavaScript. Lesser used features are omitted.
 | ----------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | standard                | {% aTargetBlank "https://www.ecma-international.org/publications/standards/Ecma-262.htm", "ECMAScript" %} | {% aTargetBlank "https://docs.python.org/3/", "Python 3 documentation" %}                                                              |
 | evaluation              | dynamic                                                                                                   | dynamic                                                                                                                                |
-| performance             | fast                                                                                                      | slow                                                                                                                                   |
+| performance             | fast                                                                                                      | slow unless libraries call C/C++ functions                                                                                             |
 | style guide             | {% aTargetBlank "https://prettier.io/", "Prettier" %}                                                     | {% aTargetBlank "https://www.python.org/dev/peps/pep-0008/", "PEP 8" %}, {% aTargetBlank "https://pypi.org/project/black/", "Black" %} |
 | most common indentation | 2 spaces                                                                                                  | 4 spaces                                                                                                                               |
 | type coercion           | implicit                                                                                                  | explicit except between number types                                                                                                   |
@@ -92,10 +92,18 @@ cons:
 
 ## Running Scripts
 
+JavaScript source files have an extension of `.js`
+or `.mjs` (for ECMAScript modules).
+
 To run a JavaScript script outside a web browser:
 
 - install {% aTargetBlank "https://nodejs.org/", "Node.js" %}.
 - enter `node {name}.js`
+
+Python source files have an extension of `.py`.
+Multiple words in file names should be separated by underscores
+rather than hyphens because the file name becomes the module name
+and hyphens are not valid in module names.
 
 To run a Python script:
 
