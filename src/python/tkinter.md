@@ -74,7 +74,15 @@ label.pack() # simplest of the three layout methods
 # Add a button for quitting the app.
 Button(text='Quit', command=root.quit).pack()
 
+# Start the event loop.
 mainloop()
+```
+
+Windows are resizable by default.
+To prevent resizing on both the x and y directions, add the following:
+
+```python
+root.resizable(False, False)
 ```
 
 The `mainloop` function starts an event loop which
