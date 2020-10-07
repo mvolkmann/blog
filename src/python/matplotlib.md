@@ -519,7 +519,10 @@ plt.show()
 
 ## Pie Charts
 
-TODO: Add more detail!
+We can create a pie chart indicating percentages of a whole
+that categories represent.
+For example, we can show percentages of a day when certain activities occur
+assuming that no two activities can occur at the same time.
 
 ```python
 import matplotlib.pyplot as plt
