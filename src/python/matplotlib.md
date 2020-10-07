@@ -25,6 +25,49 @@ import matplotlib.pyplot as plt
 
 Note that by convention the `plt` alias is used to refer to `pyplot`.
 
+## Navigation
+
+Plots created by matplotlib typically have a navigation bar at the bottom
+that includes the following buttons:
+
+![navigation buttons](/blog/assets/matplotlib-navigation.png)
+
+| Button           | Action                                                          | Keyboard Shortcut |
+| ---------------- | --------------------------------------------------------------- | ----------------- |
+| house            | returns to original view,<br>similar to web browser home button | h or r            |
+| left arrow       | goes to previous view,<br>similar to web browser back button    | left arrow or c   |
+| right arrow      | goes to next view,<br>similar to web browser forward button     | right arrow or v  |
+| four arrows      | toggles "pan and zoom" mode                                     | p                 |
+| magnifying glass | toggles "zoom to rectangle" mode                                | o                 |
+| sliders          | opens dialog of sliders to adjust plot                          | none              |
+| floppy           | opens a file save dialog to save current view to a PNG file     | ctrl-s            |
+
+After activating "pan and zoom" mode,
+hold left mouse button down and drag to pan in any direction
+or hold right mouse button down and drag to zoom in or out,
+creating a new view.
+
+After activating "zoom to rectangle" mode,
+use the mouse to drag a rectangle
+and the plot will zoom to that rectangle,
+creating a new view.
+
+In the dialog of sliders, left, bottom, right, and top
+adjust the size of the margin on those sides of the plot.
+The wspace and hspace slides seem to have no effect.
+
+Other keyboard shortcuts include:
+
+| Action                                                                        | Keyboard Shortcut |
+| ----------------------------------------------------------------------------- | ----------------- |
+| toggle full screen;<br>doesn't work in macOS                                  | f or ctrl-f       |
+| close window                                                                  | ctrl-w            |
+| constraint pan to x direction                                                 | hold x            |
+| constraint pan to y direction                                                 | hold y            |
+| toggle grid lines (none, major, major and minor, minor)                       | g or G            |
+| toggle x-axis scale between linear and log;<br>mouse cursor must be over plot | L or k            |
+| toggle y-axis scale between linear and log;<br>mouse cursor must be over plot | l (lowercase L)   |
+
 ## Line Charts
 
 To create a basic line chart:
@@ -511,6 +554,8 @@ ax.pie(
 
 plt.show()
 ```
+
+![pie chart](/blog/assets/matplotlib-pie-chart.png)
 
 ## Annotations
 
