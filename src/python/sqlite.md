@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: sqllite
+  key: SQLite
   order: 9
   parent: Python
 layout: topic-layout.njk
