@@ -378,7 +378,9 @@ def animate(_: int) -> None:
     ax.clear()  # this method is missing from Pylance bundled type stub files
     ax.plot(x_values, y_values)
 
-# TODO: Why do I have to capture the return value in order for this to work?
+# We must hold a reference to the Animation object returned here
+# to allow the timer to update the animations.  If not held,
+# that object is garbage collected and the animation will not work.
 ani = animation.FuncAnimation(fig, animate, interval=1000)
 
 plt.show()
@@ -448,8 +450,8 @@ It's a bit more complicated to show a bar for each test taken by each student.
 from functools import reduce
 from matplotlib import pyplot as plt
 
-colors = ['red', 'orange', 'yellow', 'green']
 horizontal = False  # change to True for horizontal
+colors = ['red', 'orange', 'yellow', 'green']
 students = [
     {'id': 1, 'name': 'Mark', 'scores': [75, 80, 10, 30]},
     {'id': 2, 'name': 'Tami', 'scores': [90, 85, 20, 40]},
@@ -457,7 +459,7 @@ students = [
     {'id': 4, 'name': 'Jeremy', 'scores': [95, 100, 40, 60]}
 ]
 
-text_delta = 0.065 if horizontal else 0.08
+text_delta = 0.08 if horizontal else 0.04
 student_count = len(students)
 student_indexes = range(student_count)
 test_count = reduce(lambda acc, s: max(acc, len(s['scores'])), students, 0)
@@ -468,7 +470,7 @@ bar_margin = 0.1
 bar_width = (1 - bar_margin * 2) / test_count
 bar_start_dx = -0.5 + bar_margin + bar_width / 2
 
-figure, axes = plt.subplots()
+figure, axes = plt.subplots(figsize=(10, 4))
 
 for test_index in range(test_count):
     label = f'test #{test_index + 1}'
@@ -489,16 +491,17 @@ for test_index in range(test_count):
             x=locations)
 
     for index, bar in enumerate(bars):
+        print('height =', bar.get_height())
         bar.set_edgecolor('black')
         bar.set_facecolor(colors[test_index])
         score = test_scores[index]
 
+        size = bar.get_width() if horizontal else bar.get_height()
         text_position_major = index + bar_dx - text_delta
-        text_position_minor = score + 1
+        text_position_minor = size + 1
         score_x = text_position_minor if horizontal else text_position_major
         score_y = text_position_major if horizontal else text_position_minor
-        axes.text(score_x, score_y, str(score),
-                  color='black', fontweight='bold')
+        axes.annotate(text=str(test_scores[index]), xy=(score_x, score_y))
 
 plt.title(
     'Test Scores',
@@ -511,7 +514,8 @@ if horizontal:
 else:
     plt.xticks(student_indexes, student_names)
 
-plt.legend(loc='upper right') # location defaults to "best" guess
+plt.legend(loc='upper right')
+figure.tight_layout()
 plt.show()
 ```
 

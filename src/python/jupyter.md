@@ -146,29 +146,32 @@ which supports navigating and changing the order of the cells.
 Press the up and down arrow keys to navigate between cells.
 The current cell is highlighted with a vertical blue bar.
 
+### Keyboard shortcuts
+
 Keyboard shortcuts, many of which are borrowed from Vim, include:
 
-- return - edit current cell
-- shift-return - stop editing current cell, execute it,
-  and advance to the next cell
-- ctrl-return - stop editing current cell, execute it,
-  and remain on the current cell
-- esc - stop editing current cell and do not execute it
-- a - add a cell above current one
-- b - add a cell below current one
-- c or press copy icon - copy current cell
-- dd or press scissors icon - delete current cell
-- j or down arrow - move down one cell
-- shift-j or shift down arrow - select current cell and next one down
-- k or up arrow - move up one cell
-- shift-k or shift up arrow - select current cell and previous one up
-- m - change format of current cell to Markdown
-- v or press paste icon (clipboard) - paste copied cell into current cell
-- x - cut current cell
-- y - change format of current cell to code
-- z - undo last action
-- shift-z - redo last undo
-- ctrl-shift-minus - split current cell into two at cursor location
+| Action                                                                   | Keyboard Shortcut                 |
+| ------------------------------------------------------------------------ | --------------------------------- |
+| edit current cell                                                        | return                            |
+| stop editing current cell, execute it,<br>and advance to the next cell   | shift-return                      |
+| stop editing current cell, execute it,<br>and remain on the current cell | ctrl-return                       |
+| stop editing current cell and do not execute it                          | esc                               |
+| add a cell above current one                                             | a                                 |
+| add a cell below current one                                             | b                                 |
+| copy current cell                                                        | c or press copy icon              |
+| delete current cell                                                      | dd or press scissors icon         |
+| move down one cell                                                       | j or down arrow                   |
+| select current cell and next one down                                    | shift-j or shift down arrow       |
+| move up one cell                                                         | k or up arrow                     |
+| select current cell and previous one up                                  | shift-k or shift up arrow         |
+| change format of current cell to Markdown                                | m                                 |
+| paste copied cell into current cell                                      | v or press paste icon (clipboard) |
+| cut current cell                                                         | x                                 |
+| change format of current cell to code                                    | y                                 |
+| undo last action                                                         | z                                 |
+| redo last undo                                                           | shift-z                           |
+| split current cell into two at cursor location                           | ctrl-shift-minus                  |
+| see popup help for function after typing name                            | shift-tab                         |
 
 Another way to select multiple cells starting from the current one
 is to shift-click the cell at the other end of the range,

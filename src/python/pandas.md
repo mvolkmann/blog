@@ -136,7 +136,7 @@ To print it, pass the result to the `print` function.
 | get one column as a `Series` object                                           | `df.cn` or `df[cn]`                     |
 | get one column of specified rows                                              | `df[col_name][rsi:rei]`                 |
 | get multiple columns in specified order                                       | `df[[cn1, cn2, ...]]`                   |
-| get rows matching criteria                                                    | `df.loc(criteria)`                      |
+| get rows matching criteria                                                    | `df.loc[criteria]`                      |
 | get statistics of numeric columns<br>including count, min, max, mean, and std | `df.describe()`                         |
 | display `DataFrame` memory usage                                              | `df.info(memory_usage='deep')`          |
 
