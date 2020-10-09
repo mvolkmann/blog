@@ -68,6 +68,34 @@ Other keyboard shortcuts include:
 | toggle x-axis scale between linear and log;<br>mouse cursor must be over plot | L or k            |
 | toggle y-axis scale between linear and log;<br>mouse cursor must be over plot | l (lowercase L)   |
 
+## Legends
+
+To add a legend to a plot, call `plt.legend()`.
+By default, matplotlib takes its best guess on where to place the legend.
+To override this with a specific location,
+add the `loc` argument set to a string or a number.
+
+| String         | Code |
+| -------------- | ---- |
+| 'best'         | 0    |
+| 'upper right'  | 1    |
+| 'upper left'   | 2    |
+| 'lower left'   | 3    |
+| 'lower right'  | 4    |
+| 'right'        | 5    |
+| 'center left'  | 6    |
+| 'center right' | 7    |
+| 'lower center' | 8    |
+| 'upper center' | 9    |
+| 'center'       | 10   |
+
+All of these options place the legend inside the plot.
+To display the legend outside of the plot, add the `bbox_to_anchor` argument
+set to a tuple that specifies its x and y location
+with percentages of the plot width and height.
+For example, `bbox_to_anchor=(1, 1)` places the upper-left corner
+of the legend at the top-right corner of the plot.
+
 ## Line Charts
 
 To create a basic line chart:

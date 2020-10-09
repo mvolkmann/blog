@@ -156,7 +156,8 @@ The default context is “notebook”.
 Other contexts are “paper”, “talk”, and “poster”,
 which scale values used by "notebook" by 0.8, 1.3, and 1.6, respectively.
 
-Explicitly setting the context to "notebook" makes everything much larger than expected!
+Explicitly setting the context to "notebook"
+makes everything much larger than expected!
 
 ## Removing/Moving Spines
 
@@ -185,7 +186,7 @@ By default, Seaborn supports six variations of matplotlib palettes.
 These are "deep", "muted", "pastel", "bright", "dark", and "colorblind".
 The colors in each palette can be viewed at
 {% aTargetBlank "https://seaborn.pydata.org/tutorial/color_palettes.html",
-{color palettes" %}.
+"color palettes" %}.
 
 One of these color palettes is used in the next example.
 
@@ -303,7 +304,7 @@ print('For cars in 1971, min =', year_71_df['mpg'].min(),
 plt.figure(figsize=(16,8))
 # This will render one box for each hue value within each x value.
 # Statistics are gathered from the y values.
-ax = sns.boxplot(data=subset_df, x='model_year', y='mpg', hue='cylinders')
+sns.boxplot(data=subset_df, x='model_year', y='mpg')
 ```
 
 The `print` call above outputs:
@@ -312,9 +313,18 @@ The `print` call above outputs:
 For cars in 1971, min = 12.0 , max = 35.0 , mean = 21.25 , and median = 19.0
 ```
 
-Examine the box for 71 below to verify what is plotted.
+Examine the box for the year 1971 below to verify what is plotted.
 
 ![boxplot](/blog/assets/seaborn-12-boxplot.png)
+
+To plot a separate box for each cylinder value within each year,
+add the `hue` argument as follows:
+
+```python
+sns.boxplot(data=subset_df, x='model_year', y='mpg', hue='cylinders')
+```
+
+![boxplot](/blog/assets/seaborn-12-boxplot2.png)
 
 ## Strip Plot
 
@@ -322,26 +332,25 @@ From the docs, this draws "a scatterplot where one variable is categorical."
 
 In the example below, the categorical variable "model_year".
 
-- Add `dodge=True` to place the dots for each `hue` value in its own column.
-- Add `jitter=True` to spread the dots horizontally a bit farther to reduce overlap.
+Add `dodge=True` to place the dots for each `hue` value in its own column.
+
+Add `jitter=True` to spread the dots horizontally a bit farther to reduce overlap.
 
 ```python
 plt.figure(figsize=(16,8))
-# Setting jitter to True spreads the data points horizontally a bit farther.
 sns.stripplot(data=df, x='model_year', y='mpg', hue='cylinders')
 plt.xlabel('Model Year')
 plt.ylabel('Miles Per Gallon')
 ```
 
-    Text(0, 0.5, 'Miles Per Gallon')
-
 ![stripplot](/blog/assets/seaborn-13-stripplot.png)
 
 ## Colormaps
 
-For options, see {% aTargetBlank
+The matplotlib package provides many pre-built colormaps
+whose names can be used as the value of the `palette` option.
+To see a list of colormap names, see {% aTargetBlank
 "https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html", "colormaps" %}.
-To choose one, add `palette` argument set to a colormap name.
 For example, here is the previous plot using the "hsv" colormap.
 
 ```python
@@ -350,32 +359,6 @@ sns.stripplot(data=df, x='model_year', y='mpg', hue='cylinders', palette='hsv')
 ```
 
 ![colormaps](/blog/assets/seaborn-14-colormaps.png)
-
-## Legend Location
-
-To add a legend to a plot, call `plt.legend()`.
-By default, matplotlib takes its best guess on where to place the legend.
-To override this with a specific location, add the `loc` argument set to a string or a number.
-
-| String | Code |
-| 'best' | 0 |
-| 'upper right' | 1 |
-| 'upper left' | 2 |
-| 'lower left' | 3 |
-| 'lower right' | 4 |
-| 'right' | 5 |
-| 'center left' | 6 |
-| 'center right' | 7 |
-| 'lower center' | 8 |
-| 'upper center' | 9 |
-| 'center' | 10 |
-
-All of these options place the legend inside the plot.
-To display the legend outside of the plot, add the `bbox_to_anchor` argument
-set to a tuple that specifies its x and y location
-with percentages of the plot width and height.
-For example, `bbox_to_anchor=(1, 1)` places the upper-left corner
-of the legend at the top-right corner of the plot.
 
 ## Swarm Plot
 
@@ -398,21 +381,20 @@ Create a matrix `DataFrame` from the original one that contains the correlation 
 and pass this to the `heatmap` method.
 Set the `annot` argument to `True` to display correlation values in the cells.
 Every column has strong correlation with itself, receiving a value of 1.
-Cells with darker colors indicate strong correlation between
-the column name to the left of the cell and the column name below the cell.
+Depending on the colormap, cells with darker colors typically indicate
+strong correlation between the column name to the left of the cell
+and the column name below the cell.
 
-The example below shows the following:
-
-- The value that most affects `mpg` is `model_year`.
-- There is a strong correlation between `displacement` and `cylinders`.
-- There is a weak correlation between `horsepower` and `acceleration`.
+We can build a correlation matrix by call the `corr` method on the `DataFrame`.
 
 ```python
 matrix = df.corr()
 print(matrix)
-sns.heatmap(matrix, annot=True, cmap='YlOrRd', linecolor='white', linewidth=1)
 ```
 
+This outputs the following correlation values:
+
+```text
                        mpg  cylinders  displacement  horsepower    weight  \
     mpg           1.000000  -0.775396     -0.804203   -0.778427 -0.831741
     cylinders    -0.775396   1.000000      0.950721    0.842983  0.896017
@@ -430,17 +412,31 @@ sns.heatmap(matrix, annot=True, cmap='YlOrRd', linecolor='white', linewidth=1)
     weight           -0.417457   -0.306564
     acceleration      1.000000    0.288137
     model_year        0.288137    1.000000
+```
+
+We can use this correlation matrix to
+produce a heat map plot with the following:
+
+```python
+sns.heatmap(matrix, annot=True, cmap='YlOrRd', linecolor='white', linewidth=1)
+```
 
 ![heatmap from correlation](/blog/assets/seaborn-16-heatmap-from-correlation.png)
 
+This heat map shows the following:
+
+- The value that most affects `mpg` is `model_year`.
+- There is a strong correlation between `displacement` and `cylinders`.
+- There is a weak correlation between `horsepower` and `acceleration`.
+
 ## Heatmap Plot from a Pivot Table
 
-This approach to creating a heat map is useful when the correlation we wish to show is between specific values of a given column.
+Creating a heat map from a pivot table is useful when the correlation
+we wish to show is between specific values of a given column.
+
 For example, we can correlate `model_year` and `cylinders` to `mpg`.
 Note that some cells have no value because there are no cars in the dataset
 for that combination of `model_year` and `cylinders`.
-The example below shows that in this dataset
-the highest `mpg` comes from 1980 cars with 5 cylinders.
 
 ```python
 matrix = df.pivot_table(columns='model_year', index='cylinders', values='mpg')
@@ -449,15 +445,15 @@ sns.heatmap(matrix, annot=True, cmap='YlOrRd')
 
 ![heatmap from pivot table](/blog/assets/seaborn-17-heatmap-from-pivot-table.png)
 
+This plot shows that in this dataset
+the highest `mpg` comes from 1980 cars with 5 cylinders.
+
 ## Cluster Map
 
-From the docs, this plots "a matrix dataset as a hierarchically-clustered heatmap."
-It is very similar to the "Heat map from correlation data" example above,
+From the docs, this plots
+"a matrix dataset as a hierarchically-clustered heatmap."
+It is very similar to the "Heat Map from Correlation Data" example above,
 but it clusters like data points by reordering the rows and columns.
-
-The meaning of the grouping brackets on the left and top sides of the plot
-are not clear to me.
-I know they represent clusters of data, but what does that mean?
 
 ```python
 matrix = df.corr()
@@ -466,38 +462,52 @@ sns.clustermap(matrix, annot=True, cmap='YlOrRd')
 
 ![clustermap](/blog/assets/seaborn-18-clustermap.png)
 
+The meaning of the grouping brackets on the left and top sides of the plot
+are not clear to me.
+I know they represent clusters of data,
+but what is the criteria for clustering?
+
 ## PairGrid Plot
 
-The creates many plots of a specific kind for each combination of two columns.
+A `PairGrid` plot creates many plots of a specific kind
+for each combination of two columns.
+
+To limit the columns in the `DataFrame` that are mapped to plot columns,
+add the `x_vars` argument whose value is a list of column names.
+
+To limit the columns in the `DataFrame` that are mapped to plot rows,
+add the `y_vars` argument whose value is a list of column names.
+
 For example, we can choose to create scatter plots where
 the color of each dot is determined by the `mpg` value.
-Focusing on one of the generated plots, the one in the lower-left shows
-the `mpg` using colors for combinations of `cylinder` and `model_year` values.
-It shows that for a given number of cylinders, the mpg average
-has tended to increase for newer model years.
-
-To limit the columns that are mapped to columns, add the `x_vars` argument whose value is a list of column names.
-
-To limit the columns that are mapped to rows, add the `y_vars` argument whose value is a list of column names.
-
-Compare this to Pair plot described earlier.
 
 ```python
 mpg_grid = sns.PairGrid(
     df, hue='mpg', palette='YlOrRd',
     x_vars=['cylinders', 'horsepower', 'model_year'],
-    y_vars=['horsepower', 'weight', 'acceleration'])
+    y_vars=['horsepower', 'weight', 'model_year'])
 mpg_grid.map(plt.scatter)
 ```
 
 ![PairGrid](/blog/assets/seaborn-19-PairGrid.png)
 
+Compare this to Pair plot described earlier.
+
+Focusing on one of the generated plots below, the one in the lower-left
+shows `mpg` values using various colors
+for combinations of `cylinder` and `model_year` values.
+It shows that for a given number of cylinders, the mpg average
+has tended to increase for newer model years.
+
 ## FacetGrid Plot
 
-From the docs, this is a "multi-plot grid for plotting conditional relationships."
+From the docs, this is a
+"multi-plot grid for plotting conditional relationships."
 
-In the example below there is one plot for each combination of `cylinders` and `model_year`.
-Each plot is a scatter plot where the x-axis is `horsepower` and the y-axis is mpg`.
+In the example below there is one plot for
+each combination of `cylinders` and `model_year`.
+Each plot is a scatter plot where
+the x-axis is `horsepower` and the y-axis is `mpg`.
 
 ```python
 # Get the subset of the data that excludes 3 and 5 cylinder cars
@@ -519,8 +529,6 @@ In the example below we plot a point for each car
 where the x-axis is `model_year` and the y-axis is `mpg`.
 The color of each point is based its `cylinders` value.
 Each regression line shows the change in `mpg` for a given `cylinders` value.
-This shows that `mpg` has improved more rapidly for 4 cylinder cars
-than for cars with more cylinders.
 
 ```python
 cylinders = [4, 6, 8] # not interested in 3 or 5 cylinder cars
@@ -530,8 +538,13 @@ sns.lmplot(data=subset_df, x='model_year', y='mpg', hue='cylinders')
 
 ![lmplot](/blog/assets/seaborn-21-lmplot.png)
 
+This shows that `mpg` has improved more rapidly for 4 cylinder cars
+than for cars with more cylinders.
+
 To show separate plots for each unique value of a given column,
 add the `col` argument set to that column name.
+For example, the following renders a separate plot
+for each value found in the `cylinders` column.
 
 ```python
 sns.lmplot(data=subset_df, x='model_year', y='mpg', hue='cylinders', col='cylinders')
