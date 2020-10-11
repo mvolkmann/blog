@@ -68,7 +68,11 @@ root.title('My Window Title')
 root.iconbitmap('school-rulers.ico') # can't see in macOS
 root.configure(background='linen') # sets background color
 
-label = Label(text='Hello, World!') # one of the many supported widgets
+print(font.families()) # prints list of available fonts
+my_font = font.Font(family='Chalkboard', size=72, weight='bold')
+
+# Label and Button are two of the many supported widgets.
+label = Label(bg='systemTransparent', font=my_font, text='Hello, World!')
 label.pack() # simplest of the three layout methods
 
 # Add a button for quitting the app.
