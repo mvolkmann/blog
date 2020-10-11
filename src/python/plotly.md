@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  # key: Plotly
+  key: Plotly
   order: 7
   parent: Python
 layout: topic-layout.njk

@@ -171,6 +171,7 @@ and those that do not.
 
 Tk has some platform-specific styling limitations. For example,
 in macOS the background color and relief of a button cannot be changed.
+This makes it difficult to implement hover effects.
 One option for macOS is to use {% aTargetBlank
 "https://github.com/Saadmairaj/tkmacosx", "tkmacos" %}.
 Another may be to use {% aTargetBlank
@@ -180,8 +181,13 @@ Another may be to use {% aTargetBlank
 
 The following components accept a `command` option that specifies a function
 to be called when the user clicks them or changes their value:
-`Button`, `Checkbutton`, `Entry`, `Radiobutton`,
-`Scale`, `Scrollbar`, and `Spinbox`.
+`Button`, `Checkbutton`, `Radiobutton`, `Scale`, `Scrollbar`, and `Spinbox`.
+
+The `Entry` widget does not support the `command` option.
+To trigger a call to a function when the value changes,
+listen for a virtual event as follows:
+
+TODO: FINISH THIS!
 
 The `Listbox` widget does not support the `command` option.
 To trigger a call to a function when the selected lines change,
@@ -437,3 +443,116 @@ label.pack()
 
 mainloop()
 ```
+
+## Custom Widgets
+
+One way to implement custom widgets is to define a new class
+that inherits from the class of an existing widget.
+For example, we can defined a widget named `EntryPlus`
+that inherits from `Entry` and adds support for a `placeholder` option.
+
+Here is that class definition from the file `entry_plus.py`:
+
+```python
+from tkinter import Entry, StringVar
+from typing import Any, Dict
+
+class EntryPlus(Entry):
+    """
+    This is a Tk widget that inherits from the `Entry` widget
+    and adds support for placeholder text.
+    It requires specifying the textvariable option.
+    """
+
+    def __init__(self, **options: Dict[str, Any]):
+        # Require the `textvariable` option.
+        var: StringVar = options.get('textvariable')
+        self.var = var
+        if not var:
+            raise Exception('must supply textvariable option')
+
+        # If there is a placeholder and
+        # the `textvariable` is currently empty,
+        # set the `textvariable` value to the placeholder.
+        self.placeholder = str(options.get('placeholder'))
+        value = str(var.get())
+        if self.placeholder and not value:
+            var.set(self.placeholder)
+
+        # Remove the `placedholder` option before passing options
+        # to the superclass, because it isn't valid for `Entry`.
+        del options['placeholder']
+        Entry.__init__(self, **options)
+
+        # Listen for `FocusIn` and `FocusOut` events.
+        self.bind('<FocusIn>', self.focused)
+        self.bind('<FocusOut>', self.blurred)
+
+    # When focus moves out, if the value
+    # is empty, set it to the placeholder.
+    def blurred(self, _) -> None:
+        if self.var.get() == '':
+            self.var.set(self.placeholder)
+
+    # When retrieving the value, if it matches
+    # the placeholder then return an empty string.
+    def get(self) -> str:
+        value = self.var.get()
+        return '' if value == self.placeholder else value
+
+    # When focus moves in, if the value
+    # matches the placeholder then remove it.
+    def focused(self, _) -> None:
+        if self.var.get() == self.placeholder:
+            self.var.set('')
+```
+
+Here is an example application that uses the `EntryPlus` widget:
+
+```python
+from tkinter import *
+from entry_plus import EntryPlus
+
+root = Tk()
+root.geometry('400x300')
+root.title('Entry Demo')
+
+first_name_var = StringVar()
+last_name_var = StringVar()
+
+row = 0
+Label(text='First Name').grid(row=row, column=0)
+first_name_entry = EntryPlus(
+    placeholder='First Name', textvariable=first_name_var)
+first_name_entry.grid(row=row, column=1)
+
+row += 1
+Label(text='Last Name').grid(row=row, column=0)
+last_name_entry = EntryPlus(
+    placeholder='Last Name', textvariable=last_name_var)
+last_name_entry.grid(row=row, column=1)
+
+def update_label(*_):
+    fn = first_name_entry.get()
+    ln = last_name_entry.get()
+    text = f'Hello, {fn} {ln}!' if fn and ln else 'waiting'
+    label.configure(text=text)
+
+first_name_var.trace_add('write', update_label)
+last_name_var.trace_add('write', update_label)
+
+row += 1
+label = Label()
+label.grid(row=row, column=0, columnspan=2, sticky=W)
+update_label()
+
+row += 1
+btn = Button(text='Quit', command=root.quit, padx=10, pady=10)
+btn.grid(row=row, column=0, columnspan=2)
+
+# first_name_entry.focus()
+
+mainloop()
+```
+
+![Entry with placeholder](/blog/assets/python-tkinter-entry-demo.png)
