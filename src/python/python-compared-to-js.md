@@ -24,6 +24,11 @@ of Python and JavaScript. Lesser used features are omitted.
 
 Note: PEP stands for Python Enhancement Proposal.
 
+Some oddities about Python code formatting include:
+
+- leaving two blank lines before and after every function and class definition
+- leaving two spaces before every comment that appears on the same line as code
+
 ## Pros and Cons
 
 ### JavaScript
@@ -1081,18 +1086,32 @@ The keys must be immutable types like strings, numbers, and tuples containing th
 | delete all pairs        | `dict.clear()`                                                                                         |
 | iterate over            | `for item in dict.items(): ...`                                                                        |
 
-## Dictionary Comprehensions
+### Creating a dictionary object
 
-Python supports dictionary comprehensions that create a dictionary.
-Here are some examples.
+There are four ways to create a Python dictionary:
 
 ```python
-names = ['Mark Volkmann', 'Dorian Yeager']
+# 1) Use the literal syntax.
+person = {'name': 'Mark', 'hungry': True}
+# person = {'name': 'Mark', 'hungry': True}
 
-def getInitials(name):
+# 2) Pass keyword arguments to the `dict` function.
+# This has the advantage that single word keys
+# do not need to be enclosed in quotes.
+person = dict(name='Mark', hungry=True)
+# person = {'name': 'Mark', 'hungry': True}
+
+# 3) Pass a list of key/value tuples to the `dict` function.
+kv_tuples = [('name', 'Mark'), ('hungry', True)]
+person = dict(kv_tuples)
+# person = {'name': 'Mark', 'hungry': True}
+
+# 4) Use a dictionary comprehension.
+def get_initials(name):
   return ''.join(map(lambda s: s[0], name.split(' ')))
 
-my_dict = {name: getInitials(name) for name in names}
+names = ['Mark Volkmann', 'Dorian Yeager']
+my_dict = {name: get_initials(name) for name in names}
 # {'Mark Volkmann': 'MV', 'Dorian Yeager': 'DY'}
 ```
 
