@@ -49,6 +49,7 @@
     "Pyright",
     "Quadtrees",
     "Rossum",
+    "SIGINT",
     "SIMD",
     "SLAs",
     "SSGs",

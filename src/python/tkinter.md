@@ -60,6 +60,7 @@ Let's create a GUI app that just renders a label.
 Running the following code opens a window that displays text.
 
 ```python
+import sys
 from tkinter import *
 
 root = Tk() # a kind of window that inherits from Wm (window manager)
@@ -72,6 +73,10 @@ label.pack() # simplest of the three layout methods
 
 # Add a button for quitting the app.
 Button(text='Quit', command=root.quit).pack()
+
+# Enable exiting the app by pressing ctrl-c
+# when the terminal window where it was started has focus.
+signal.signal(signal.SIGINT, lambda *args: root.quit())
 
 # Start the event loop.
 mainloop()
