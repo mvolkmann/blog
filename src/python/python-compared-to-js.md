@@ -2089,3 +2089,4 @@ autopep8 and pylint.
 - {% aTargetBlank "https://docs.python.org/3/howto/", "Python HOWTOs" %}
 - {% aTargetBlank "https://docs.python.org/3/faq/", "Python FAQ" %}
 - {% aTargetBlank "https://realpython.com/start-here/", "Real Python" %}
+- {% aTargetBlank "https://www.tutorialspoint.com/python/", "tutororialspoint Learn Python 3" %}

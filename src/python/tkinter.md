@@ -24,6 +24,11 @@ Better documentation can be found at {% aTargetBlank
 "tutorialspoint" %}.
 Many of the links on this page are to pages of the tutorialspoint site.
 
+Tk 8.5 added themed widgets.
+These are not yet covered here.
+See {% aTargetBlank "https://docs.python.org/3/library/tkinter.ttk.html",
+"Tk themed widgets" %}.
+
 ## Alternatives
 
 Alternative GUI libraries for Python include:
@@ -67,13 +72,18 @@ root = Tk() # a kind of window that inherits from Wm (window manager)
 root.title('My Window Title')
 root.iconbitmap('school-rulers.ico') # can't see in macOS
 root.configure(background='linen') # sets background color
+# Some examples use the config method which is just an alias.
 
 print(font.families()) # prints list of available fonts
 my_font = font.Font(family='Chalkboard', size=72, weight='bold')
 
 # Label and Button are two of the many supported widgets.
 label = Label(bg='systemTransparent', font=my_font, text='Hello, World!')
-label.pack() # simplest of the three layout methods
+# One of three layout methods must be called on each widget
+# in order for them to be rendered.
+# The pack method is the simplest layout method.
+# Others are described later.
+label.pack()
 
 # Add a button for quitting the app.
 Button(text='Quit', command=root.quit).pack()
@@ -85,6 +95,14 @@ signal.signal(signal.SIGINT, lambda *args: root.quit())
 # Start the event loop.
 mainloop()
 ```
+
+In this example widgets are added directly to the main window.
+However, it is more typically to add multiple nested Frame objects
+to the main window and and add widgets to those
+in order to achieve desired layouts.
+The parent container of a widget is specified by the
+first argument to it constructor.
+When this is omitted, it defaults to the root window.
 
 To specify the initial window size and screen location,
 pass a specially formatted string to the `geometry` method.
@@ -148,6 +166,15 @@ and those that do not.
 | {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_text", "`Text`" %}               | multi-line text input                                                                            | `<textarea>`                                           |
 | {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_spinbox", "`Spinbox`" %}         | number input                                                                                     | `<input type="number">`                                |
 | {% aTargetBlank "https://www.tutorialspoint.com/python3/tk_messagebox", "`tkMessageBox`" %} | dialog box;<br>see `ask*` and `show*` methods                                                    | `alert`, `confirm`, `prompt`, and `<dialog>`           |
+
+## Styling Limitations
+
+Tk has some platform-specific styling limitations. For example,
+in macOS the background color and relief of a button cannot be changed.
+One option for macOS is to use {% aTargetBlank
+"https://github.com/Saadmairaj/tkmacosx", "tkmacos" %}.
+Another may be to use {% aTargetBlank
+"https://docs.python.org/3/library/tkinter.ttk.html", "Tk themed widgets" %}.
 
 ### `command` Option
 
@@ -225,6 +252,60 @@ mainloop()
 
 A similar approach is used to get the value of a `Radiobutton`
 using its `variable` or `textvariable` option.
+
+## Canvas
+
+The `Canvas` widget provides many methods for drawing on the canvas including
+`create_arc`, `create_bitmap`, `create_image`, `create_line`, `create_oval`,
+`create_polygon`, `create_rectangle`, `create_text`, and `create_window`.
+The `create_window` method paces another widget on the canvas.
+
+The `Canvas` widget can be used to implement custom widgets
+by using the `bind` method to listen to events such as clicks.
+
+Here's a simple example of using a `Canvas` widget:
+
+```python
+from tkinter import *
+from tkinter import font
+
+root = Tk()
+root.geometry('400x300')
+root.title('Canvas Demo')
+
+height = 200
+width = 300
+canvas = Canvas(height=height, width=width)
+canvas.create_rectangle(0, 0, width, height, fill='cornflowerblue', width=0)
+
+outline_width = 10
+fudge = 2
+canvas.create_rectangle(
+    outline_width - fudge, outline_width - fudge2,
+    width - outline_width/2, height - outline_width/2,
+    outline='orange', width=10) # width is the outline width
+
+canvas.create_line(
+    0, 125, width - outline_width / 2, 125,
+    fill='orange', width=outline_width)
+
+my_font = font.Font(family='Chalkboard', size=24)
+canvas.create_text(
+    width/2, height/2, fill='white', font=my_font, text='Hello, Canvas!')
+
+canvas.pack()
+
+def canvas_click(event):
+    print('canvas_click: x, y =', event.x, event.y)
+
+canvas.bind("<Button-1>", canvas_click)
+
+Button(text='Quit', command=root.quit, padx=10, pady=10).pack()
+
+mainloop()
+```
+
+![tkinter Canvas](/blog/assets/python-tkinter-canvas.png)
 
 ## Layout Methods
 
