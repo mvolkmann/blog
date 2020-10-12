@@ -28,32 +28,16 @@ cannot override the styling they specify.
 For this reason, some developers tend to only use Tailwind classes
 for layout, not styling such as fonts and colors.
 
-## Alphabetical List
+## Breakpoints
 
-| Name Prefix          | Description                                                                      | Values | Example        |
-| -------------------- | -------------------------------------------------------------------------------- | ------ | -------------- |
-| `box-border`         | `box-sizing: border-box;`                                                        | none   |                |
-| `box-content`        | `box-sizing: content-box;`                                                       | none   |                |
-| `container`          | sets max-width to breakpoint size or<br>width to 100% if no breakpoint specified | none   | `lg:container` |
-| `mx-*`               | margin left and right                                                            |        |
-| `my-*`               | margin top and bottom                                                            |        |
-| `px-*`               | padding left and right                                                           |        |
-| `py-*`               | padding top and bottom                                                           |        |
-| `m-*`                | margin on all sides                                                              |        |
-| `p-*`                | padding on all sides                                                             |        |
-| `text-*`             | text color (sets CSS `color` property)                                           |        |
-| `block`              | `display: block;`                                                                | none   |
-| `inline-block`       | `display: inline-block;`                                                         | none   |
-| `inline`             | `display: inline;`                                                               | none   |
-| `flex`               | `display: flex;`                                                                 | none   |
-| `inline-flex`        | `display: inline-flex;`                                                          | none   |
-| `table`              | `display: table;`                                                                | none   |
-| `table-caption`      | `display: table-caption;`                                                        | none   |
-| `table-cell`         | `display: table-cell;`                                                           | none   |
-| `table-column-group` | `display: table-column-group;`                                                   | none   |
-| `table-footer-group` | `display: table-footer-group;`                                                   | none   |
-| `table-header-group` | `display: table-header-group;`                                                   | none   |
-| `name`               | description                                                                      | none   |                |
+By default Tailwind uses the following responsive breakpoints:
+
+| Name | Width  |
+| ---- | ------ |
+| `sm` | 640px  |
+| `md` | 768px  |
+| `lg` | 1024px |
+| `xl` | 1280px |
 
 ## Categorized Lists
 
@@ -63,11 +47,135 @@ This same information is available in the official docs at
 It is included here in a more compact manner that is
 more easily searchable because they are all on a single page.
 
-### Accessibility
+In class names that include `-color`, `color` should be replaced by one of
+gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 
 ### Backgrounds
 
+| Name Prefix         | Description                                                                            |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| `bg-fixed`          | `background-attachment: fixed;`                                                        |
+| `bg-local`          | `background-attachment: local;`                                                        |
+| `bg-scroll`         | `background-attachment: scroll;`                                                       |
+|                     |                                                                                        |
+| `bg-clip-border`    | `background-clip: border-box;`                                                         |
+| `bg-clip-content`   | `background-clip: content-box;`                                                        |
+| `bg-clip-padding`   | `background-clip: padding-box;`                                                        |
+| `bg-clip-text`      | `background-clip: text;`                                                               |
+|                     |                                                                                        |
+| `bg-transparent`    | `background-color: transparent;`                                                       |
+| `bg-current`        | `background-color: currentColor;`                                                      |
+| `bg-black`          | `background-color: #000;`                                                              |
+| `bg-white`          | `background-color: #fff;`                                                              |
+| `bg-color-n`        | `background-color: color-hex-code;`<br>where n is 100 to 900 in increments of 100      |
+|                     |                                                                                        |
+| `bg-opacity-n`      | `--bg-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                              |
+|                     |                                                                                        |
+| `bg-bottom`         | `background-position: bottom;`                                                         |
+| `bg-center`         | `background-position: center;`                                                         |
+| `bg-left`           | `background-position: left;`                                                           |
+| `bg-left-bottom`    | `background-position: left bottom;`                                                    |
+| `bg-left-top`       | `background-position: left top;`                                                       |
+| `bg-right`          | `background-position: right;`                                                          |
+| `bg-right-bottom`   | `background-position: right bottom;`                                                   |
+| `bg-right-top`      | `background-position: right top;`                                                      |
+| `bg-top`            | `background-position: top;`                                                            |
+|                     |                                                                                        |
+| `bg-repeat`         | `background-repeat: repeat;`                                                           |
+| `bg-no-repeat`      | `background-repeat: no-repeat;`                                                        |
+| `bg-repeat-x`       | `background-repeat: repeat-x;`                                                         |
+| `bg-repeat-y`       | `background-repeat: repeat-y;`                                                         |
+| `bg-repeat-round`   | `background-repeat: round;`                                                            |
+| `bg-repeat-space`   | `background-repeat: space;`                                                            |
+|                     |                                                                                        |
+| `bg-auto`           | `background-size: auto;`                                                               |
+| `bg-contain`        | `background-size: contain;`                                                            |
+| `bg-cover`          | `background-size: cover;`                                                              |
+|                     |                                                                                        |
+| `bg-none`           | `background-image: none;`                                                              |
+| `bg-gradient-to-t`  | `background-image: linear-gradient(to top, var(--gradient-color-stops));`              |
+| `bg-gradient-to-tr` | `background-image: linear-gradient(to top right, var(--gradient-color-stops));`        |
+| `bg-gradient-to-r`  | `background-image: linear-gradient(to right, var(--gradient-color-stops));`            |
+| `bg-gradient-to-br` | `background-image: linear-gradient(to bottom right, var(--gradient-color-stops));`     |
+| `bg-gradient-to-b`  | `background-image: linear-gradient(to bottom, var(--gradient-color-stops));`           |
+| `bg-gradient-to-bl` | `background-image: linear-gradient(to bottom left, var(--gradient-color-stops));`      |
+| `bg-gradient-to-l`  | `background-image: linear-gradient(to left, var(--gradient-color-stops));`             |
+| `bg-gradient-to-tl` | `background-image: linear-gradient(to top left, var(--gradient-color-stops));`         |
+|                     |                                                                                        |
+| `from-transparent`  | `--gradient-from-color: transparent`                                                   |
+| `from-current`      | `--gradient-from-color: currentColor`                                                  |
+| `from-black`        | `--gradient-from-color: #000`                                                          |
+| `from-white`        | `--gradient-from-color: #fff`                                                          |
+| `from-color-n`      | `--gradient-from-color: color-hex-code;`<br>where n is 100 to 900 in increments of 100 |
+|                     |                                                                                        |
+| `via-transparent`   | `--gradient-via-color: transparent`                                                    |
+| `via-current`       | `--gradient-via-color: currentColor`                                                   |
+| `via-black`         | `--gradient-via-color: #000`                                                           |
+| `via-white`         | `--gradient-via-color: #fff`                                                           |
+| `via-color-n`       | `--gradient-via-color: color-hex-code;`<br>where n is 100 to 900 in increments of 100  |
+|                     |                                                                                        |
+| `to-transparent`    | `--gradient-to-color: transparent`                                                     |
+| `to-current`        | `--gradient-to-color: currentColor`                                                    |
+| `to-black`          | `--gradient-to-color: #000`                                                            |
+| `to-white`          | `--gradient-to-color: #fff`                                                            |
+| `to-color-n`        | `--gradient-to-color: color-hex-code;`<br>where n is 100 to 900 in increments of 100   |
+
 ### Borders
+
+| Name Prefix          | Description                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- |
+| `rounded-none`       | `border-radius: 0;`                                                          |
+| `rounded-sm`         | `border-radius: 0.125rem;`                                                   |
+| `rounded`            | `border-radius: 0.25rem;`                                                    |
+| `rounded-md`         | `border-radius: 0.375rem;`                                                   |
+| `rounded-lg`         | `border-radius: 0.5rem;`                                                     |
+| `rounded-full:`      | `border-radius: 9999px;`                                                     |
+| `rounded-b-none`     | `border-bottom-left-radius: 0; border-bottom-right-radius: 0;`               |
+| `rounded-l-none`     | `border-top-left-radius: 0; border-bottom-left-radius: 0;`                   |
+| `rounded-r-none`     | `border-top-right-radius: 0; border-bottom-right-radius: 0;`                 |
+| `rounded-t-none`     | `border-top-left-radius: 0; border-top-right-radius: 0;`                     |
+|                      |                                                                              |
+| `border`             | `border-width: 1px;`                                                         |
+| `border-n`           | `border-width: n*2px;`<br>where n = 0, 2, 4, or 8                            |
+| `border-b-n`         | `border-bottom-width: npx;`<br>where n = 0 or 2                              |
+| `border-l-n`         | `border-left-width: npx;`<br>where n = 0 or 2                                |
+| `border-r-n`         | `border-right-width: npx;`<br>where n = 0 or 2                               |
+| `border-t-n`         | `border-top-width: npx;`<br>where n = 0 or 2                                 |
+|                      |                                                                              |
+| `border-transparent` | `border-color: transparent;`                                                 |
+| `border-current`     | `border-color: currentColor;`                                                |
+| `border-black`       | `border-color: #000;`                                                        |
+| `border-white`       | `border-color: #fff;`                                                        |
+| `border-gray-n`      | `border-color: shade-of-gray;`<br>where n is 100 to 800 in increments of 100 |
+|                      |                                                                              |
+| `border-opacity-n`   | `--border-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                |
+|                      |                                                                              |
+| `border-dashed`      | `border-style: dashed;`                                                      |
+| `border-dotted`      | `border-style: dotted;`                                                      |
+| `border-double`      | `border-style: double;`                                                      |
+| `border-none`        | `border-style: none;`                                                        |
+| `border-solid`       | `border-style: solid;`                                                       |
+|                      |                                                                              |
+| `divide-x`           | `border-left-width: 1px;`                                                    |
+| `divide-x-n`         | `border-left-width: npx;`<br>where n = 0, 2, 4, or 8                         |
+| `divide-x-reverse`   | `--divide-x-reverse: 1;`                                                     |
+| `divide-y`           | `border-top-width: 1px;`                                                     |
+| `divide-y-n`         | `border-top-width: npx;`<br>where n = 0, 2, 4, or 8                          |
+| `divide-y-reverse`   | `--divide-y-reverse: 1;`                                                     |
+|                      |                                                                              |
+| `divide-transparent` | `border-color: transparent;`                                                 |
+| `divide-current`     | `border-color: currentColor;`                                                |
+| `divide-black`       | `border-color: #000;`                                                        |
+| `divide-white`       | `border-color: #fff;`                                                        |
+| `divide-gray-n`      | `border-color: shade-of-gray;`<br>where n is 100 to 800 in increments of 100 |
+|                      |                                                                              |
+| `divide-opacity-n`   | `--divide-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                |
+|                      |                                                                              |
+| `divide-dashed`      | `border-style: dashed;`                                                      |
+| `divide-dotted`      | `border-style: dotted;`                                                      |
+| `divide-double`      | `border-style: double;`                                                      |
+| `divide-none`        | `border-style: none;`                                                        |
+| `divide-solid`       | `border-style: solid;`                                                       |
 
 ### Box Alignment
 
@@ -140,9 +248,9 @@ more easily searchable because they are all on a single page.
 
 ### Container
 
-| Name Prefix | Description                                                                      | Values | Example        |
-| ----------- | -------------------------------------------------------------------------------- | ------ | -------------- |
-| `container` | sets max-width to breakpoint size or<br>width to 100% if no breakpoint specified | none   | `lg:container` |
+| Name Prefix | Description                                                                      | Example        |
+| ----------- | -------------------------------------------------------------------------------- | -------------- |
+| `container` | sets max-width to breakpoint size or<br>width to 100% if no breakpoint specified | `lg:container` |
 
 ### Display
 
@@ -161,6 +269,10 @@ more easily searchable because they are all on a single page.
 | `table-header-group` | `display: table-header-group;` |
 
 ### Effects
+
+| Name Prefix | Description |
+| ----------- | ----------- |
+|             |             |
 
 ### Flexbox
 
@@ -215,6 +327,10 @@ more easily searchable because they are all on a single page.
 | `row-start-n`         | `grid-row-start: n`<br>where n is 1 to 5                                  |
 
 ### Interactivity
+
+| Name Prefix | Description |
+| ----------- | ----------- |
+|             |             |
 
 ### Object Fit
 
@@ -324,20 +440,40 @@ more easily searchable because they are all on a single page.
 
 ### Spacing
 
-| Name Prefix | Description                                                     |
-| ----------- | --------------------------------------------------------------- |
-| `m-n`       | `margin: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20  |
-| `p-n`       | `padding: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20 |
-| `space-x-n` | `margin-left: n * 0.25rem;`<br>where n is 0 to 5                |
-| `space-y-n` | `margin-top: n * 0.25rem;`<br>where n is 0 to 5                 |
+| Name Prefix | Description                                                                      |
+| ----------- | -------------------------------------------------------------------------------- |
+| `m-n`       | `margin: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                   |
+| `mx-*`      | `margin-left: n * 0.25rem; margin-right: n * 0.25rem;`<br>where n = 0, 1, or 2   |
+| `my-*`      | `margin-bottom: n * 0.25rem; margin-top: n * 0.25rem;`<br>where n = 0, 1, or 2   |
+| `p-n`       | `padding: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                  |
+| `px-*`      | `padding-left: n * 0.25rem; padding-right: n * 0.25rem;`<br>where n = 0, 1, or 2 |
+| `py-*`      | `padding-bottom: n * 0.25rem; padding-top: n * 0.25rem;`<br>where n = 0, 1, or 2 |
+| `space-x-n` | `margin-left: n * 0.25rem;`<br>where n is 0 to 5                                 |
+| `space-y-n` | `margin-top: n * 0.25rem;`<br>where n is 0 to 5                                  |
 
 ### SVG
 
+| Name Prefix | Description |
+| ----------- | ----------- |
+|             |             |
+
 ### Tables
+
+| Name Prefix | Description |
+| ----------- | ----------- |
+|             |             |
 
 ### Transforms
 
+| Name Prefix | Description |
+| ----------- | ----------- |
+|             |             |
+
 ### Transitions and Animation
+
+| Name Prefix | Description |
+| ----------- | ----------- |
+|             |             |
 
 ### Typography
 
@@ -415,9 +551,49 @@ more easily searchable because they are all on a single page.
 | `placeholder-current`     | `color: currentColor;`                                                  |
 | `placeholder-black`       | `color: #000;`                                                          |
 | `placeholder-white`       | `color: #fff;`                                                          |
-| `placeholder-gray-n`      | `color: shade-of-gray;`<br>where ne is 100 to 800 in increments of 100  |
+| `placeholder-gray-n`      | `color: shade-of-gray;`<br>where n is 100 to 800 in increments of 100   |
 |                           |                                                                         |
 | `placeholder-opacity-n`   | `--placeholder-opacity: n*0.25;`<br>where n = 0, 25, 50, 75, or 100     |
+|                           |                                                                         |
+| `text-center`             | `text-align: center;`                                                   |
+| `text-justify`            | `text-align: justify;`                                                  |
+| `text-left`               | `text-align: left;`                                                     |
+| `text-right`              | `text-align: right;`                                                    |
+|                           |                                                                         |
+| `text-black`              | `color: #000;`                                                          |
+| `text-current`            | `color: currentColor;`                                                  |
+| `text-gray-n`             | `color: shade-of-gray;`<br>where n is 100 to 800 in increments of 100   |
+| `text-transparent`        | `color: transparent;`                                                   |
+| `text-white`              | `color: #fff;`                                                          |
+|                           |                                                                         |
+| `text-opacity-n`          | `--text-opacity: n/100;`<br>where n is 0, 25, 50, 75, or 100            |
+|                           |                                                                         |
+| `line-through`            | `text-decoration: line-through;`                                        |
+| `no-underline`            | `text-decoration: none;`                                                |
+| `underline`               | `text-decoration: underline;`                                           |
+|                           |                                                                         |
+| `capitalize`              | `text-transform: capitalize;`                                           |
+| `lowercase`               | `text-transform: lowercase;`                                            |
+| `normal-case`             | `text-transform: none;`                                                 |
+| `uppercase`               | `text-transform: uppercase;`                                            |
+|                           |                                                                         |
+| `align-baseline`          | `vertical-align: baseline;`                                             |
+| `align-bottom`            | `vertical-align: bottom;`                                               |
+| `align-middle`            | `vertical-align: middle;`                                               |
+| `align-text-bottom`       | `vertical-align: text-bottom;`                                          |
+| `align-text-top`          | `vertical-align: text-top;`                                             |
+| `align-top`               | `vertical-align: top;`                                                  |
+|                           |                                                                         |
+| `whitespace-no-wrap`      | `white-space: nowrap;`                                                  |
+| `whitespace-normal`       | `white-space: normal;`                                                  |
+| `whitespace-pre-line`     | `white-space: pre-line;`                                                |
+| `whitespace-pre-wrap`     | `white-space: pre-wrap;`                                                |
+| `whitespace-pre`          | `white-space: pre;`                                                     |
+|                           |                                                                         |
+| `break-all`               | `word-break: break-all;`                                                |
+| `break-normal`            | `overflow-wrap: normal; word-break: normal;`                            |
+| `break-words`             | `overflow-wrap: break-word;`                                            |
+| `truncate`                | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`       |
 
 | Name Prefix | Description            |
 | ----------- | ---------------------- |
