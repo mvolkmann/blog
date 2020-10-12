@@ -52,130 +52,148 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 
 ### Backgrounds
 
-| Name Prefix         | Description                                                                            |
-| ------------------- | -------------------------------------------------------------------------------------- |
-| `bg-fixed`          | `background-attachment: fixed;`                                                        |
-| `bg-local`          | `background-attachment: local;`                                                        |
-| `bg-scroll`         | `background-attachment: scroll;`                                                       |
-|                     |                                                                                        |
-| `bg-clip-border`    | `background-clip: border-box;`                                                         |
-| `bg-clip-content`   | `background-clip: content-box;`                                                        |
-| `bg-clip-padding`   | `background-clip: padding-box;`                                                        |
-| `bg-clip-text`      | `background-clip: text;`                                                               |
-|                     |                                                                                        |
-| `bg-transparent`    | `background-color: transparent;`                                                       |
-| `bg-current`        | `background-color: currentColor;`                                                      |
-| `bg-black`          | `background-color: #000;`                                                              |
-| `bg-white`          | `background-color: #fff;`                                                              |
-| `bg-color-n`        | `background-color: color-hex-code;`<br>where n is 100 to 900 in increments of 100      |
-|                     |                                                                                        |
-| `bg-opacity-n`      | `--bg-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                              |
-|                     |                                                                                        |
-| `bg-bottom`         | `background-position: bottom;`                                                         |
-| `bg-center`         | `background-position: center;`                                                         |
-| `bg-left`           | `background-position: left;`                                                           |
-| `bg-left-bottom`    | `background-position: left bottom;`                                                    |
-| `bg-left-top`       | `background-position: left top;`                                                       |
-| `bg-right`          | `background-position: right;`                                                          |
-| `bg-right-bottom`   | `background-position: right bottom;`                                                   |
-| `bg-right-top`      | `background-position: right top;`                                                      |
-| `bg-top`            | `background-position: top;`                                                            |
-|                     |                                                                                        |
-| `bg-repeat`         | `background-repeat: repeat;`                                                           |
-| `bg-no-repeat`      | `background-repeat: no-repeat;`                                                        |
-| `bg-repeat-x`       | `background-repeat: repeat-x;`                                                         |
-| `bg-repeat-y`       | `background-repeat: repeat-y;`                                                         |
-| `bg-repeat-round`   | `background-repeat: round;`                                                            |
-| `bg-repeat-space`   | `background-repeat: space;`                                                            |
-|                     |                                                                                        |
-| `bg-auto`           | `background-size: auto;`                                                               |
-| `bg-contain`        | `background-size: contain;`                                                            |
-| `bg-cover`          | `background-size: cover;`                                                              |
-|                     |                                                                                        |
-| `bg-none`           | `background-image: none;`                                                              |
-| `bg-gradient-to-t`  | `background-image: linear-gradient(to top, var(--gradient-color-stops));`              |
-| `bg-gradient-to-tr` | `background-image: linear-gradient(to top right, var(--gradient-color-stops));`        |
-| `bg-gradient-to-r`  | `background-image: linear-gradient(to right, var(--gradient-color-stops));`            |
-| `bg-gradient-to-br` | `background-image: linear-gradient(to bottom right, var(--gradient-color-stops));`     |
-| `bg-gradient-to-b`  | `background-image: linear-gradient(to bottom, var(--gradient-color-stops));`           |
-| `bg-gradient-to-bl` | `background-image: linear-gradient(to bottom left, var(--gradient-color-stops));`      |
-| `bg-gradient-to-l`  | `background-image: linear-gradient(to left, var(--gradient-color-stops));`             |
-| `bg-gradient-to-tl` | `background-image: linear-gradient(to top left, var(--gradient-color-stops));`         |
-|                     |                                                                                        |
-| `from-transparent`  | `--gradient-from-color: transparent`                                                   |
-| `from-current`      | `--gradient-from-color: currentColor`                                                  |
-| `from-black`        | `--gradient-from-color: #000`                                                          |
-| `from-white`        | `--gradient-from-color: #fff`                                                          |
-| `from-color-n`      | `--gradient-from-color: color-hex-code;`<br>where n is 100 to 900 in increments of 100 |
-|                     |                                                                                        |
-| `via-transparent`   | `--gradient-via-color: transparent`                                                    |
-| `via-current`       | `--gradient-via-color: currentColor`                                                   |
-| `via-black`         | `--gradient-via-color: #000`                                                           |
-| `via-white`         | `--gradient-via-color: #fff`                                                           |
-| `via-color-n`       | `--gradient-via-color: color-hex-code;`<br>where n is 100 to 900 in increments of 100  |
-|                     |                                                                                        |
-| `to-transparent`    | `--gradient-to-color: transparent`                                                     |
-| `to-current`        | `--gradient-to-color: currentColor`                                                    |
-| `to-black`          | `--gradient-to-color: #000`                                                            |
-| `to-white`          | `--gradient-to-color: #fff`                                                            |
-| `to-color-n`        | `--gradient-to-color: color-hex-code;`<br>where n is 100 to 900 in increments of 100   |
+| Name Prefix         | Description                                                                              |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `bg-fixed`          | `background-attachment: fixed;`                                                          |
+| `bg-local`          | `background-attachment: local;`                                                          |
+| `bg-scroll`         | `background-attachment: scroll;`                                                         |
+|                     |                                                                                          |
+| `bg-clip-border`    | `background-clip: border-box;`                                                           |
+| `bg-clip-content`   | `background-clip: content-box;`                                                          |
+| `bg-clip-padding`   | `background-clip: padding-box;`                                                          |
+| `bg-clip-text`      | `background-clip: text;`                                                                 |
+|                     |                                                                                          |
+| `bg-transparent`    | `background-color: transparent;`                                                         |
+| `bg-current`        | `background-color: currentColor;`                                                        |
+| `bg-black`          | `background-color: #000;`                                                                |
+| `bg-white`          | `background-color: #fff;`                                                                |
+| `bg-{color}-{n}`    | `background-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100      |
+|                     |                                                                                          |
+| `bg-opacity-{n}`    | `--bg-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                                |
+|                     |                                                                                          |
+| `bg-bottom`         | `background-position: bottom;`                                                           |
+| `bg-center`         | `background-position: center;`                                                           |
+| `bg-left`           | `background-position: left;`                                                             |
+| `bg-left-bottom`    | `background-position: left bottom;`                                                      |
+| `bg-left-top`       | `background-position: left top;`                                                         |
+| `bg-right`          | `background-position: right;`                                                            |
+| `bg-right-bottom`   | `background-position: right bottom;`                                                     |
+| `bg-right-top`      | `background-position: right top;`                                                        |
+| `bg-top`            | `background-position: top;`                                                              |
+|                     |                                                                                          |
+| `bg-repeat`         | `background-repeat: repeat;`                                                             |
+| `bg-no-repeat`      | `background-repeat: no-repeat;`                                                          |
+| `bg-repeat-x`       | `background-repeat: repeat-x;`                                                           |
+| `bg-repeat-y`       | `background-repeat: repeat-y;`                                                           |
+| `bg-repeat-round`   | `background-repeat: round;`                                                              |
+| `bg-repeat-space`   | `background-repeat: space;`                                                              |
+|                     |                                                                                          |
+| `bg-auto`           | `background-size: auto;`                                                                 |
+| `bg-contain`        | `background-size: contain;`                                                              |
+| `bg-cover`          | `background-size: cover;`                                                                |
+|                     |                                                                                          |
+| `bg-none`           | `background-image: none;`                                                                |
+| `bg-gradient-to-t`  | `background-image: linear-gradient(to top, var(--gradient-color-stops));`                |
+| `bg-gradient-to-tr` | `background-image: linear-gradient(to top right, var(--gradient-color-stops));`          |
+| `bg-gradient-to-r`  | `background-image: linear-gradient(to right, var(--gradient-color-stops));`              |
+| `bg-gradient-to-br` | `background-image: linear-gradient(to bottom right, var(--gradient-color-stops));`       |
+| `bg-gradient-to-b`  | `background-image: linear-gradient(to bottom, var(--gradient-color-stops));`             |
+| `bg-gradient-to-bl` | `background-image: linear-gradient(to bottom left, var(--gradient-color-stops));`        |
+| `bg-gradient-to-l`  | `background-image: linear-gradient(to left, var(--gradient-color-stops));`               |
+| `bg-gradient-to-tl` | `background-image: linear-gradient(to top left, var(--gradient-color-stops));`           |
+|                     |                                                                                          |
+| `from-transparent`  | `--gradient-from-color: transparent`                                                     |
+| `from-current`      | `--gradient-from-color: currentColor`                                                    |
+| `from-black`        | `--gradient-from-color: #000`                                                            |
+| `from-white`        | `--gradient-from-color: #fff`                                                            |
+| `from-{color}-{n}`  | `--gradient-from-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
+|                     |                                                                                          |
+| `via-transparent`   | `--gradient-via-color: transparent`                                                      |
+| `via-current`       | `--gradient-via-color: currentColor`                                                     |
+| `via-black`         | `--gradient-via-color: #000`                                                             |
+| `via-white`         | `--gradient-via-color: #fff`                                                             |
+| `via-{color}-{n}`   | `--gradient-via-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100  |
+|                     |                                                                                          |
+| `to-transparent`    | `--gradient-to-color: transparent`                                                       |
+| `to-current`        | `--gradient-to-color: currentColor`                                                      |
+| `to-black`          | `--gradient-to-color: #000`                                                              |
+| `to-white`          | `--gradient-to-color: #fff`                                                              |
+| `to-{color}-{n}`    | `--gradient-to-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100   |
 
 ### Borders
 
-| Name Prefix          | Description                                                                  |
-| -------------------- | ---------------------------------------------------------------------------- |
-| `rounded-none`       | `border-radius: 0;`                                                          |
-| `rounded-sm`         | `border-radius: 0.125rem;`                                                   |
-| `rounded`            | `border-radius: 0.25rem;`                                                    |
-| `rounded-md`         | `border-radius: 0.375rem;`                                                   |
-| `rounded-lg`         | `border-radius: 0.5rem;`                                                     |
-| `rounded-full:`      | `border-radius: 9999px;`                                                     |
-| `rounded-b-none`     | `border-bottom-left-radius: 0; border-bottom-right-radius: 0;`               |
-| `rounded-l-none`     | `border-top-left-radius: 0; border-bottom-left-radius: 0;`                   |
-| `rounded-r-none`     | `border-top-right-radius: 0; border-bottom-right-radius: 0;`                 |
-| `rounded-t-none`     | `border-top-left-radius: 0; border-top-right-radius: 0;`                     |
-|                      |                                                                              |
-| `border`             | `border-width: 1px;`                                                         |
-| `border-n`           | `border-width: n*2px;`<br>where n = 0, 2, 4, or 8                            |
-| `border-b-n`         | `border-bottom-width: npx;`<br>where n = 0 or 2                              |
-| `border-l-n`         | `border-left-width: npx;`<br>where n = 0 or 2                                |
-| `border-r-n`         | `border-right-width: npx;`<br>where n = 0 or 2                               |
-| `border-t-n`         | `border-top-width: npx;`<br>where n = 0 or 2                                 |
-|                      |                                                                              |
-| `border-transparent` | `border-color: transparent;`                                                 |
-| `border-current`     | `border-color: currentColor;`                                                |
-| `border-black`       | `border-color: #000;`                                                        |
-| `border-white`       | `border-color: #fff;`                                                        |
-| `border-gray-n`      | `border-color: shade-of-gray;`<br>where n is 100 to 800 in increments of 100 |
-|                      |                                                                              |
-| `border-opacity-n`   | `--border-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                |
-|                      |                                                                              |
-| `border-dashed`      | `border-style: dashed;`                                                      |
-| `border-dotted`      | `border-style: dotted;`                                                      |
-| `border-double`      | `border-style: double;`                                                      |
-| `border-none`        | `border-style: none;`                                                        |
-| `border-solid`       | `border-style: solid;`                                                       |
-|                      |                                                                              |
-| `divide-x`           | `border-left-width: 1px;`                                                    |
-| `divide-x-n`         | `border-left-width: npx;`<br>where n = 0, 2, 4, or 8                         |
-| `divide-x-reverse`   | `--divide-x-reverse: 1;`                                                     |
-| `divide-y`           | `border-top-width: 1px;`                                                     |
-| `divide-y-n`         | `border-top-width: npx;`<br>where n = 0, 2, 4, or 8                          |
-| `divide-y-reverse`   | `--divide-y-reverse: 1;`                                                     |
-|                      |                                                                              |
-| `divide-transparent` | `border-color: transparent;`                                                 |
-| `divide-current`     | `border-color: currentColor;`                                                |
-| `divide-black`       | `border-color: #000;`                                                        |
-| `divide-white`       | `border-color: #fff;`                                                        |
-| `divide-gray-n`      | `border-color: shade-of-gray;`<br>where n is 100 to 800 in increments of 100 |
-|                      |                                                                              |
-| `divide-opacity-n`   | `--divide-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                |
-|                      |                                                                              |
-| `divide-dashed`      | `border-style: dashed;`                                                      |
-| `divide-dotted`      | `border-style: dotted;`                                                      |
-| `divide-double`      | `border-style: double;`                                                      |
-| `divide-none`        | `border-style: none;`                                                        |
-| `divide-solid`       | `border-style: solid;`                                                       |
+In the class names below, `side` can be one of the following:
+
+| Side Abbreviation | Side Name | CSS Properties Affected                        |
+| ----------------- | --------- | ---------------------------------------------- |
+| `b`               | bottom    | `border-bottom-left` and `border-bottom-right` |
+| `l`               | left      | `border-bottom-left` and `border-top-left`     |
+| `r`               | right     | `border-bottom-right` and `border-top-right`   |
+| `t`               | top       | `border-top-left` and `border-top-right`       |
+
+In the class names below, `corner` can be one of the following:
+
+| Corner Abbreviation | Corner Name  | CSS Properties Affected |
+| ------------------- | ------------ | ----------------------- |
+| `bl`                | bottom left  | `border-bottom-left`    |
+| `br`                | bottom right | `border-bottom-right`   |
+| `tl`                | top left     | `border-top-left`       |
+| `tr`                | top right    | `border-top-right`      |
+
+| Name Prefix                  | Description                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------- |
+| `rounded-none`               | `border-radius: 0;`                                                             |
+| `rounded-sm`                 | `border-radius: 0.125rem;`                                                      |
+| `rounded`                    | `border-radius: 0.25rem;`                                                       |
+| `rounded-md`                 | `border-radius: 0.375rem;`                                                      |
+| `rounded-lg`                 | `border-radius: 0.5rem;`                                                        |
+| `rounded-full:`              | `border-radius: 9999px;`                                                        |
+| `rounded-{side/corner}-none` | sets affected properties to `0`                                                 |
+| `rounded-{side/corner}-sm`   | sets affected properties to `0.125rem`                                          |
+| `rounded-{side/corner}`      | sets affected properties to `0.25rem`                                           |
+| `rounded-{side/corner}-md`   | sets affected properties to `0.375rem`                                          |
+| `rounded-{side/corner}-lg`   | sets affected properties to `0.5rem`                                            |
+| `rounded-{side/corner}-full` | sets affected properties to `9999px`                                            |
+|                              |                                                                                 |
+| `border`                     | `border-width: 1px;`                                                            |
+| `border-{n}`                 | `border-width: npx;`<br>where n = 0, 2, 4, or 8                                 |
+| `border-side`                | sets affected property: to `1px;`                                               |
+| `border-side-{n}`            | sets affected property: to `npx;`<br>where n = 0, 2, 4, or 8                    |
+|                              |                                                                                 |
+| `border-transparent`         | `border-color: transparent;`                                                    |
+| `border-current`             | `border-color: currentColor;`                                                   |
+| `border-black`               | `border-color: #000;`                                                           |
+| `border-white`               | `border-color: #fff;`                                                           |
+| `border-{color}-{n}`         | `border-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
+|                              |                                                                                 |
+| `border-opacity-{n}`         | `--border-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                   |
+|                              |                                                                                 |
+| `border-dashed`              | `border-style: dashed;`                                                         |
+| `border-dotted`              | `border-style: dotted;`                                                         |
+| `border-double`              | `border-style: double;`                                                         |
+| `border-none`                | `border-style: none;`                                                           |
+| `border-solid`               | `border-style: solid;`                                                          |
+|                              |                                                                                 |
+| `divide-x`                   | `border-left-width: 1px;`                                                       |
+| `divide-x-{n}`               | `border-left-width: npx;`<br>where n = 0, 2, 4, or 8                            |
+| `divide-x-reverse`           | `--divide-x-reverse: 1;`                                                        |
+| `divide-y`                   | `border-top-width: 1px;`                                                        |
+| `divide-y-{n}`               | `border-top-width: npx;`<br>where n = 0, 2, 4, or 8                             |
+| `divide-y-reverse`           | `--divide-y-reverse: 1;`                                                        |
+|                              |                                                                                 |
+| `divide-transparent`         | `border-color: transparent;`                                                    |
+| `divide-current`             | `border-color: currentColor;`                                                   |
+| `divide-black`               | `border-color: #000;`                                                           |
+| `divide-white`               | `border-color: #fff;`                                                           |
+| `divide-{color}-{n}`         | `border-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
+|                              |                                                                                 |
+| `divide-opacity-{n}`         | `--divide-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                   |
+|                              |                                                                                 |
+| `divide-dashed`              | `border-style: dashed;`                                                         |
+| `divide-dotted`              | `border-style: dotted;`                                                         |
+| `divide-double`              | `border-style: double;`                                                         |
+| `divide-none`                | `border-style: none;`                                                           |
+| `divide-solid`               | `border-style: solid;`                                                          |
 
 ### Box Alignment
 
@@ -270,9 +288,20 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 
 ### Effects
 
-| Name Prefix | Description |
-| ----------- | ----------- |
-|             |             |
+| Name Prefix      | Description                                          |
+| ---------------- | ---------------------------------------------------- |
+| `opacity-n`      | `opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100 |
+|                  |                                                      |
+| `shadow-none`    | `box-shadow: none`                                   |
+| `shadow-inner`   | `box-shadow: ...`; see docs                          |
+| `shadow-outline` | `box-shadow: ...`; see docs                          |
+| `shadow`         | `box-shadow: ...`; see docs                          |
+| `shadow-xs`      | `box-shadow: ...`; see docs                          |
+| `shadow-sm`      | `box-shadow: ...`; see docs                          |
+| `shadow-md`      | `box-shadow: ...`; see docs                          |
+| `shadow-lg`      | `box-shadow: ...`; see docs                          |
+| `shadow-xl`      | `box-shadow: ...`; see docs                          |
+| `shadow-2xl`     | `box-shadow: ...`; see docs                          |
 
 ### Flexbox
 
@@ -293,7 +322,7 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 | `flex-grow-0`       | `flex-grow: 0;`                   |
 | `flex-shrink`       | `flex-shrink: 1;`                 |
 | `flex-shrink-0`     | `flex-shrink: 0;`                 |
-| `order-n`           | `order: n;`<br>where n is 1 to 12 |
+| `order-{n}`         | `order: n;`<br>where n is 1 to 12 |
 
 ### Floats and Clear
 
@@ -313,18 +342,18 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 | Name Prefix           | Description                                                               |
 | --------------------- | ------------------------------------------------------------------------- |
 | `col-auto`            | `grid-column: auto`                                                       |
-| `col-span-n`          | `grid-column: span n / span n`<br>where n is 1 to 11                      |
-| `gap-n`               | `gap: n`<br>where n is 0 to 8, 10, 12, 16, or 20                          |
-| `grid-cols-n`         | `grid-template-columns: repeat(n, minmax(0, 1fr));`<br>where n is 1 to 12 |
-| `grid-rows-n`         | `grid-template-rows: repeat(n, minmax(0, 1fr));`<br>where n is 1 to 6     |
+| `col-span-{n}`        | `grid-column: span n / span n`<br>where n is 1 to 11                      |
+| `gap-{n}`             | `gap: n`<br>where n is 0 to 8, 10, 12, 16, or 20                          |
+| `grid-cols-{n}`       | `grid-template-columns: repeat(n, minmax(0, 1fr));`<br>where n is 1 to 12 |
+| `grid-rows-{n}`       | `grid-template-rows: repeat(n, minmax(0, 1fr));`<br>where n is 1 to 6     |
 | `grid-rows-none`      | `grid-template-rows: none;`                                               |
 | `grid-flow-col`       | `grid-auto-flow: column`                                                  |
 | `grid-flow-col-dense` | `grid-auto-flow: column dense`                                            |
 | `grid-flow-row`       | `grid-auto-flow: row`                                                     |
 | `grid-flow-row-dense` | `grid-auto-flow: row dense`                                               |
 | `row-auto`            | `grid-row: auto`                                                          |
-| `row-span-n`          | `grid-row: span n / span n`<br>where n is 1 to 6                          |
-| `row-start-n`         | `grid-row-start: n`<br>where n is 1 to 5                                  |
+| `row-span-{n}`        | `grid-row: span n / span n`<br>where n is 1 to 6                          |
+| `row-start-{n}`       | `grid-row-start: n`<br>where n is 1 to 5                                  |
 
 ### Interactivity
 
@@ -412,8 +441,8 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 
 | Name Prefix    | Description                                                    |
 | -------------- | -------------------------------------------------------------- |
-| `h-n`          | `height: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20 |
-| `w-n`          | `width: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20  |
+| `h-{n}`        | `height: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20 |
+| `w-{n}`        | `width: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20  |
 |                |                                                                |
 | `max-h-full`   | `max-height: 100%;`                                            |
 | `max-h-screen` | `max-height: 100vh;`                                           |
@@ -440,16 +469,16 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 
 ### Spacing
 
-| Name Prefix | Description                                                                      |
-| ----------- | -------------------------------------------------------------------------------- |
-| `m-n`       | `margin: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                   |
-| `mx-*`      | `margin-left: n * 0.25rem; margin-right: n * 0.25rem;`<br>where n = 0, 1, or 2   |
-| `my-*`      | `margin-bottom: n * 0.25rem; margin-top: n * 0.25rem;`<br>where n = 0, 1, or 2   |
-| `p-n`       | `padding: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                  |
-| `px-*`      | `padding-left: n * 0.25rem; padding-right: n * 0.25rem;`<br>where n = 0, 1, or 2 |
-| `py-*`      | `padding-bottom: n * 0.25rem; padding-top: n * 0.25rem;`<br>where n = 0, 1, or 2 |
-| `space-x-n` | `margin-left: n * 0.25rem;`<br>where n is 0 to 5                                 |
-| `space-y-n` | `margin-top: n * 0.25rem;`<br>where n is 0 to 5                                  |
+| Name Prefix   | Description                                                                      |
+| ------------- | -------------------------------------------------------------------------------- |
+| `m-{n}`       | `margin: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                   |
+| `mx-*`        | `margin-left: n * 0.25rem; margin-right: n * 0.25rem;`<br>where n = 0, 1, or 2   |
+| `my-*`        | `margin-bottom: n * 0.25rem; margin-top: n * 0.25rem;`<br>where n = 0, 1, or 2   |
+| `p-{n}`       | `padding: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                  |
+| `px-*`        | `padding-left: n * 0.25rem; padding-right: n * 0.25rem;`<br>where n = 0, 1, or 2 |
+| `py-*`        | `padding-bottom: n * 0.25rem; padding-top: n * 0.25rem;`<br>where n = 0, 1, or 2 |
+| `space-x-{n}` | `margin-left: n * 0.25rem;`<br>where n is 0 to 5                                 |
+| `space-y-{n}` | `margin-top: n * 0.25rem;`<br>where n is 0 to 5                                  |
 
 ### SVG
 
@@ -459,9 +488,13 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 
 ### Tables
 
-| Name Prefix | Description |
-| ----------- | ----------- |
-|             |             |
+| Name Prefix       | Description                  |
+| ----------------- | ---------------------------- |
+| `border-collapse` | `border-collapse: collapse;` |
+| `border-separate` | `border-collapse: separate;` |
+|                   |                              |
+| `table-auto`      | `table-layout: auto;`        |
+| `table-fixed`     | `table-layout: fixed;`       |
 
 ### Transforms
 
@@ -477,123 +510,123 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 
 ### Typography
 
-| Name Prefix               | Description                                                             |
-| ------------------------- | ----------------------------------------------------------------------- |
-| `font-sans`               | `font-family: boat load of san serif fonts;`<br>includes Arial          |
-| `font-serif`              | `font-family: boat load of serif fonts;`<br>includes Times New Roman    |
-| `font-mono`               | `font-family: boat load of monospace fonts;`<br>includes Courier New    |
-|                           |                                                                         |
-| `text-xs`                 | `font-size: 0.75rem;`                                                   |
-| `text-sm`                 | `font-size: 0.875rem;`                                                  |
-| `text-base`               | `font-size: 1rem;`<br>Why not named `text-md`?                          |
-| `text-lg`                 | `font-size: 1.125rem;`                                                  |
-| `text-xl`                 | `font-size: 1.25rem;`                                                   |
-| `text-2xl`                | `font-size: 1.5rem;`                                                    |
-| `text-3xl`                | `font-size: 1.875rem;`                                                  |
-| `text-4xl`                | `font-size: 2.25rem;`                                                   |
-| `text-5xl`                | `font-size: 3rem;`                                                      |
-| `text-6xl`                | `font-size: 4rem;`                                                      |
-|                           |                                                                         |
-| `antialiased`             | `font-smoothing` with vendor-specific prefixes and values               |
-| `subpixel-antialiased`    | `font-smoothing: antialiased;` with vendor-specific prefixes and values |
-|                           |                                                                         |
-| `italic`                  | `font-style: italic;`                                                   |
-| `not-italic`              | `font-style: normal;`<br>weird class name!                              |
-|                           |                                                                         |
-| `font-hairline`           | `font-weight: 100;`                                                     |
-| `font-thin`               | `font-weight: 200;`                                                     |
-| `font-light`              | `font-weight: 300;`                                                     |
-| `font-normal`             | `font-weight: 400;`                                                     |
-| `font-medium`             | `font-weight: 500;`                                                     |
-| `font-semibold`           | `font-weight: 600;`                                                     |
-| `font-bold`               | `font-weight: 700;`                                                     |
-| `font-extrabold`          | `font-weight: 800;`                                                     |
-| `font-black`              | `font-weight: 900;`                                                     |
-|                           |                                                                         |
-| `normal-nums`             | `font-variant-numeric: normal;`                                         |
-| `ordinal`                 | `font-variant-numeric: ordinal;`                                        |
-| `slashed-zero`            | `font-variant-numeric: slashed-zero;`                                   |
-| `lining-nums`             | `font-variant-numeric: lining-nums;`                                    |
-| `oldstyle-nums`           | `font-variant-numeric: oldstyle-nums;`                                  |
-| `proportional-nums`       | `font-variant-numeric: proportional-nums;`                              |
-| `tabular-nums`            | `font-variant-numeric: tabular-nums;`                                   |
-| `diagonal-fractions`      | `font-variant-numeric: diagonal-fractions;`                             |
-| `stacked-fractions`       | `font-variant-numeric: stacked-fractions;`                              |
-|                           |                                                                         |
-| `tracking-tighter`        | `letter-spacing: -0.05em;`                                              |
-| `tracking-tight`          | `letter-spacing: -0.025em;`                                             |
-| `tracking-normal`         | `letter-spacing: 0em;`                                                  |
-| `tracking-wide`           | `letter-spacing: 0.025em;`                                              |
-| `tracking-wider`          | `letter-spacing: 0.05em;`                                               |
-| `tracking-widest`         | `letter-spacing: 0.1em;`                                                |
-|                           |                                                                         |
-| `leading-3`               | `line-height: 0.75rem;`                                                 |
-| `leading-4`               | `line-height: 1rem;`                                                    |
-| `leading-5`               | `line-height: 1.25rem;`                                                 |
-| `leading-6`               | `line-height: 1.5rem;`                                                  |
-| `leading-7`               | `line-height: 1.75rem;`                                                 |
-| `leading-8`               | `line-height: 2rem;`                                                    |
-| `leading-9`               | `line-height: 2.25rem;`                                                 |
-| `leading-10`              | `line-height: 2.5rem;`                                                  |
-| `leading-none`            | `line-height: 1;`                                                       |
-| `leading-tight`           | `line-height: 1.25rem;`                                                 |
-| `leading-snug`            | `line-height: 1.375rem;`                                                |
-| `leading-normal`          | `line-height: 1.5rem;`                                                  |
-|                           |                                                                         |
-| `list-none`               | `list-style-type: none;`                                                |
-| `list-disc`               | `list-style-type: disc;`                                                |
-| `list-decimal`            | `list-style-type: decimal;`                                             |
-|                           |                                                                         |
-| `list-inside`             | `list-style-position: inside;`                                          |
-| `list-outside`            | `list-style-position: outside;`                                         |
-|                           |                                                                         |
-| `placeholder-transparent` | `color: transparent;`                                                   |
-| `placeholder-current`     | `color: currentColor;`                                                  |
-| `placeholder-black`       | `color: #000;`                                                          |
-| `placeholder-white`       | `color: #fff;`                                                          |
-| `placeholder-gray-n`      | `color: shade-of-gray;`<br>where n is 100 to 800 in increments of 100   |
-|                           |                                                                         |
-| `placeholder-opacity-n`   | `--placeholder-opacity: n*0.25;`<br>where n = 0, 25, 50, 75, or 100     |
-|                           |                                                                         |
-| `text-center`             | `text-align: center;`                                                   |
-| `text-justify`            | `text-align: justify;`                                                  |
-| `text-left`               | `text-align: left;`                                                     |
-| `text-right`              | `text-align: right;`                                                    |
-|                           |                                                                         |
-| `text-black`              | `color: #000;`                                                          |
-| `text-current`            | `color: currentColor;`                                                  |
-| `text-gray-n`             | `color: shade-of-gray;`<br>where n is 100 to 800 in increments of 100   |
-| `text-transparent`        | `color: transparent;`                                                   |
-| `text-white`              | `color: #fff;`                                                          |
-|                           |                                                                         |
-| `text-opacity-n`          | `--text-opacity: n/100;`<br>where n is 0, 25, 50, 75, or 100            |
-|                           |                                                                         |
-| `line-through`            | `text-decoration: line-through;`                                        |
-| `no-underline`            | `text-decoration: none;`                                                |
-| `underline`               | `text-decoration: underline;`                                           |
-|                           |                                                                         |
-| `capitalize`              | `text-transform: capitalize;`                                           |
-| `lowercase`               | `text-transform: lowercase;`                                            |
-| `normal-case`             | `text-transform: none;`                                                 |
-| `uppercase`               | `text-transform: uppercase;`                                            |
-|                           |                                                                         |
-| `align-baseline`          | `vertical-align: baseline;`                                             |
-| `align-bottom`            | `vertical-align: bottom;`                                               |
-| `align-middle`            | `vertical-align: middle;`                                               |
-| `align-text-bottom`       | `vertical-align: text-bottom;`                                          |
-| `align-text-top`          | `vertical-align: text-top;`                                             |
-| `align-top`               | `vertical-align: top;`                                                  |
-|                           |                                                                         |
-| `whitespace-no-wrap`      | `white-space: nowrap;`                                                  |
-| `whitespace-normal`       | `white-space: normal;`                                                  |
-| `whitespace-pre-line`     | `white-space: pre-line;`                                                |
-| `whitespace-pre-wrap`     | `white-space: pre-wrap;`                                                |
-| `whitespace-pre`          | `white-space: pre;`                                                     |
-|                           |                                                                         |
-| `break-all`               | `word-break: break-all;`                                                |
-| `break-normal`            | `overflow-wrap: normal; word-break: normal;`                            |
-| `break-words`             | `overflow-wrap: break-word;`                                            |
-| `truncate`                | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`       |
+| Name Prefix               | Description                                                              |
+| ------------------------- | ------------------------------------------------------------------------ |
+| `font-sans`               | `font-family: boat load of san serif fonts;`<br>includes Arial           |
+| `font-serif`              | `font-family: boat load of serif fonts;`<br>includes Times New Roman     |
+| `font-mono`               | `font-family: boat load of monospace fonts;`<br>includes Courier New     |
+|                           |                                                                          |
+| `text-xs`                 | `font-size: 0.75rem;`                                                    |
+| `text-sm`                 | `font-size: 0.875rem;`                                                   |
+| `text-base`               | `font-size: 1rem;`<br>Why not named `text-md`?                           |
+| `text-lg`                 | `font-size: 1.125rem;`                                                   |
+| `text-xl`                 | `font-size: 1.25rem;`                                                    |
+| `text-2xl`                | `font-size: 1.5rem;`                                                     |
+| `text-3xl`                | `font-size: 1.875rem;`                                                   |
+| `text-4xl`                | `font-size: 2.25rem;`                                                    |
+| `text-5xl`                | `font-size: 3rem;`                                                       |
+| `text-6xl`                | `font-size: 4rem;`                                                       |
+|                           |                                                                          |
+| `antialiased`             | `font-smoothing` with vendor-specific prefixes and values                |
+| `subpixel-antialiased`    | `font-smoothing: antialiased;` with vendor-specific prefixes and values  |
+|                           |                                                                          |
+| `italic`                  | `font-style: italic;`                                                    |
+| `not-italic`              | `font-style: normal;`<br>weird class name!                               |
+|                           |                                                                          |
+| `font-hairline`           | `font-weight: 100;`                                                      |
+| `font-thin`               | `font-weight: 200;`                                                      |
+| `font-light`              | `font-weight: 300;`                                                      |
+| `font-normal`             | `font-weight: 400;`                                                      |
+| `font-medium`             | `font-weight: 500;`                                                      |
+| `font-semibold`           | `font-weight: 600;`                                                      |
+| `font-bold`               | `font-weight: 700;`                                                      |
+| `font-extrabold`          | `font-weight: 800;`                                                      |
+| `font-black`              | `font-weight: 900;`                                                      |
+|                           |                                                                          |
+| `normal-nums`             | `font-variant-numeric: normal;`                                          |
+| `ordinal`                 | `font-variant-numeric: ordinal;`                                         |
+| `slashed-zero`            | `font-variant-numeric: slashed-zero;`                                    |
+| `lining-nums`             | `font-variant-numeric: lining-nums;`                                     |
+| `oldstyle-nums`           | `font-variant-numeric: oldstyle-nums;`                                   |
+| `proportional-nums`       | `font-variant-numeric: proportional-nums;`                               |
+| `tabular-nums`            | `font-variant-numeric: tabular-nums;`                                    |
+| `diagonal-fractions`      | `font-variant-numeric: diagonal-fractions;`                              |
+| `stacked-fractions`       | `font-variant-numeric: stacked-fractions;`                               |
+|                           |                                                                          |
+| `tracking-tighter`        | `letter-spacing: -0.05em;`                                               |
+| `tracking-tight`          | `letter-spacing: -0.025em;`                                              |
+| `tracking-normal`         | `letter-spacing: 0em;`                                                   |
+| `tracking-wide`           | `letter-spacing: 0.025em;`                                               |
+| `tracking-wider`          | `letter-spacing: 0.05em;`                                                |
+| `tracking-widest`         | `letter-spacing: 0.1em;`                                                 |
+|                           |                                                                          |
+| `leading-3`               | `line-height: 0.75rem;`                                                  |
+| `leading-4`               | `line-height: 1rem;`                                                     |
+| `leading-5`               | `line-height: 1.25rem;`                                                  |
+| `leading-6`               | `line-height: 1.5rem;`                                                   |
+| `leading-7`               | `line-height: 1.75rem;`                                                  |
+| `leading-8`               | `line-height: 2rem;`                                                     |
+| `leading-9`               | `line-height: 2.25rem;`                                                  |
+| `leading-10`              | `line-height: 2.5rem;`                                                   |
+| `leading-none`            | `line-height: 1;`                                                        |
+| `leading-tight`           | `line-height: 1.25rem;`                                                  |
+| `leading-snug`            | `line-height: 1.375rem;`                                                 |
+| `leading-normal`          | `line-height: 1.5rem;`                                                   |
+|                           |                                                                          |
+| `list-none`               | `list-style-type: none;`                                                 |
+| `list-disc`               | `list-style-type: disc;`                                                 |
+| `list-decimal`            | `list-style-type: decimal;`                                              |
+|                           |                                                                          |
+| `list-inside`             | `list-style-position: inside;`                                           |
+| `list-outside`            | `list-style-position: outside;`                                          |
+|                           |                                                                          |
+| `placeholder-transparent` | `color: transparent;`                                                    |
+| `placeholder-current`     | `color: currentColor;`                                                   |
+| `placeholder-black`       | `color: #000;`                                                           |
+| `placeholder-white`       | `color: #fff;`                                                           |
+| `placeholder-{color}-{n}` | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
+|                           |                                                                          |
+| `placeholder-opacity-{n}` | `--placeholder-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100       |
+|                           |                                                                          |
+| `text-center`             | `text-align: center;`                                                    |
+| `text-justify`            | `text-align: justify;`                                                   |
+| `text-left`               | `text-align: left;`                                                      |
+| `text-right`              | `text-align: right;`                                                     |
+|                           |                                                                          |
+| `text-black`              | `color: #000;`                                                           |
+| `text-current`            | `color: currentColor;`                                                   |
+| `text-{color}-{n}`        | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
+| `text-transparent`        | `color: transparent;`                                                    |
+| `text-white`              | `color: #fff;`                                                           |
+|                           |                                                                          |
+| `text-opacity-{n}`        | `--text-opacity: n/100;`<br>where n is 0, 25, 50, 75, or 100             |
+|                           |                                                                          |
+| `line-through`            | `text-decoration: line-through;`                                         |
+| `no-underline`            | `text-decoration: none;`                                                 |
+| `underline`               | `text-decoration: underline;`                                            |
+|                           |                                                                          |
+| `capitalize`              | `text-transform: capitalize;`                                            |
+| `lowercase`               | `text-transform: lowercase;`                                             |
+| `normal-case`             | `text-transform: none;`                                                  |
+| `uppercase`               | `text-transform: uppercase;`                                             |
+|                           |                                                                          |
+| `align-baseline`          | `vertical-align: baseline;`                                              |
+| `align-bottom`            | `vertical-align: bottom;`                                                |
+| `align-middle`            | `vertical-align: middle;`                                                |
+| `align-text-bottom`       | `vertical-align: text-bottom;`                                           |
+| `align-text-top`          | `vertical-align: text-top;`                                              |
+| `align-top`               | `vertical-align: top;`                                                   |
+|                           |                                                                          |
+| `whitespace-no-wrap`      | `white-space: nowrap;`                                                   |
+| `whitespace-normal`       | `white-space: normal;`                                                   |
+| `whitespace-pre-line`     | `white-space: pre-line;`                                                 |
+| `whitespace-pre-wrap`     | `white-space: pre-wrap;`                                                 |
+| `whitespace-pre`          | `white-space: pre;`                                                      |
+|                           |                                                                          |
+| `break-all`               | `word-break: break-all;`                                                 |
+| `break-normal`            | `overflow-wrap: normal; word-break: normal;`                             |
+| `break-words`             | `overflow-wrap: break-word;`                                             |
+| `truncate`                | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`        |
 
 | Name Prefix | Description            |
 | ----------- | ---------------------- |
@@ -604,7 +637,7 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 
 | Name Prefix | Description                                          |
 | ----------- | ---------------------------------------------------- |
-| `z-n`       | `z-index: n;`<br>where n is 0, 10, 20, 30, 40, or 50 |
+| `z-{n}`     | `z-index: n;`<br>where n is 0, 10, 20, 30, 40, or 50 |
 | `z-auto`    | `z-index: auto;`                                     |
 
 ## Responsive Variants
