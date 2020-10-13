@@ -26,6 +26,8 @@ body > main li.ordered > a:not(.active) { color: green; }
 
 body > main li.top > a { font-size: 1.2rem; font-weight: bold; }
 
+body > main nav > a { display: block; margin-left: 1rem; margin-top: 1rem; text-decoration: underline; }
+
 body > main nav > ul { display: block; }
 
 body > main nav > ul ul { display: none; }
