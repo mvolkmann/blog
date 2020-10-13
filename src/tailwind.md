@@ -184,7 +184,7 @@ any time a file in the `src` directory changes:
 To see all the Tailwind properties that can be customized,
 create a new configuration file by entering `npx tailwindcss init --full`.
 This creates the file `tailwind.config.js`.
-You may wish to save this file for later reference rather.
+You may wish to save this file for later reference.
 It's best not to edit this version of the file because it will be
 difficult to find properties that have been modified from their default values.
 Consider renaming it to `tailwind.config-full.js`.
@@ -194,26 +194,31 @@ and add customizations here.
 This file will be much shorter than the full version,
 making it easier to find your customizations.
 The values used by the provided CSS classes
-can be customized to change many things
+can be customized to change many styling aspects
 including colors, breakpoints, fonts, and more.
 
 To change the actual colors used when `white` and `black` are specified,
-modify the hex color values shown below::
+add a `color` property to the `extend` property as follows:
 
 ```js
   theme: {
-    colors: {
-      black: "#000",
-      white: "#fff",
+    extend: {
+      colors: {
+        black: "#222", // very dark gray
+        white: "#ddd" // very light gray
+      }
 ```
 
-New, custom color names can be added. For example:
+To define new, custom colors,
+add a `color` property to the `extend` property as follows:
 
 ```js
   theme: {
-    colors: {
-      primary: "cornflowerblue",
-      secondary: "orange",
+    extend: {
+      colors: {
+        primary: "cornflowerblue",
+        secondary: "orange"
+      }
 ```
 
 With these in place, we can use CSS class names like
