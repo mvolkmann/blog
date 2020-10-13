@@ -8,11 +8,16 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://tailwindcss.com/", "Tailwind" %}
 is a CSS utility framework.
-It provides pre-built CSS classes that typically set a single CSS property.
-These can be listed as the values of the `class` attribute on HTML elements.
+It provides a large number of pre-built CSS classes
+that typically set a single CSS property.
+These can be used as values of the `class` attribute on HTML elements.
+They can also be customized in each application that uses them.
 
-Other CSS frameworks such as Bootstrap, Bulma, Foundation, and Material-UI define
-styling for components rather than the low level approach used by Tailwind.
+Other CSS frameworks such as Bootstrap, Bulma, Foundation, and Material-UI
+define styling for components.
+Tailwind takes a different approach,
+providing lower level styling that can be combined
+in order to create custom looks.
 
 Tailwind is not a replacement for CSS.
 It is still necessary for developers to be familiar with
@@ -20,13 +25,195 @@ CSS properties and their supported values.
 
 ## Pros
 
+- Tailwind enables styling HTML elements without
+  giving them an `id` attribute or CSS `class` name.
+  This could already be done with the `style` attribute,
+  but using Tailwind CSS classes is much more concise.
+- Placing styles with the elements they affect makes it easier
+  to visualize the result while looking at the HTML.
+  Using custom CSS classes requires assigning a name and
+  looking up the CSS properties, often in another source file
+- Responsive UIs can be created without writing any media queries.
+  This is done by prefixing Tailwind class names
+  with a breakpoint name followed by a colon.
+  For example: `md:flex-col` changes the `flex-direction` to `column`
+  when the screen width is at or above the medium breakpoint.
+
 ## Cons
+
+- The HTML becomes more cluttered.
+- Developers that haven't been exposed to Tailwind will have to
+  learn about it in order to contribute to UI development.
+- When Tailwind classes are used in components of frameworks
+  like React, Vue, Svelte, and Angular, parent components
+  cannot override the styling.
+  For this reason it may be advisable to primary use Tailwind
+  for element layout and not for properties more likely
+  to be overridden such as fonts and colors.
 
 When Tailwind classes are used in component definitions,
 parent components that use those components
 cannot override the styling they specify.
 For this reason, some developers tend to only use Tailwind classes
 for layout, not styling such as fonts and colors.
+
+## Basic Build Process
+
+To install Tailwind in a project that has a `package.json` file,
+enter `npm install -D tailwindcss`.
+
+A build process is required to use Tailwind.
+Many approaches can be taken, but the simplest is to
+create a `public` directory and add the following
+to the `scripts` section in the `package.json` file:
+
+```json
+  "build:css": "tailwind build src/style.css -o public/style.css",
+```
+
+The file `src/style.css` should, at a minimum, contain the following:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+The build process will replace these directives with generated CSS.
+The generated CSS file will contain:
+
+- the contents of {% aTargetBlank
+  "https://github.com/necolas/normalize.css", "normalize.css" %}
+- Tailwind custom reset styles
+- all Tailwind utility class definitions in the categories referenced
+  by the `@tailwind` directive in `src/styles.css`
+
+For details on configuring various build tools to support Tailwind
+{% aTargetBlank "https://tailwindcss.com/docs/installation",
+"Tailwind installation" %}
+
+TODO: How can you use Tailwind in a Svelte app?
+
+## PostCSS Build Process
+
+Building with PostCSS is only slightly more complicated.
+
+1. Enter `npm install -D postcss-cli autoprefixer@9.8.6`
+
+1. Create the file `postcss.config.js` containing:
+
+   ```js
+   module.exports = {
+     plugins: [require('tailwindcss'), require('autoprefixer')]
+   };
+   ```
+
+1. Change the `build:css` script in `package.json` to:
+
+   ```json
+   "build:css": "postcss src/style.css -o public/style.css"
+   ```
+
+## Watching For Changes
+
+To automatically run the `build:css` script
+any time a file in the `src` directory changes:
+
+1. Enter `npm install -D watch`
+
+1. Add the following script in `package.json`:
+
+   ```json
+   "watch": "watch 'npm run build:css' ./src"
+   ```
+
+## Configuration
+
+To configure aspects of Tailwind,
+generate the file `tailwind.config.js` by entering `npx tailwindcss init`.
+For example, the provided classes can be customized to change
+colors, border sizes, breakpoints, font weights, shadows, and more.
+
+This file will define a `future` property whose value is an object
+with boolean properties that are commented out.
+Uncomment these to get warnings about usage of features
+that will break in future releases.
+
+## Purging Unused CSS
+
+The `purge` configuration property can be modified to purge unused CSS classes.
+It should be set to an array of glob patterns
+for file paths that can contain references to CSS classes.
+For example, `purge: ['./public/**/*.html']`.
+Tailwind will automatically check for
+references to Tailwind CSS classes in CSS files.
+
+By default, unused CSS classes are only removed when
+the`NODE_ENV`environment variable is set to`production`.
+To remove them regardless of this setting,
+change the `purge` property in`tailwind.config.js` to the following:
+
+```json
+  purge: {
+    content: ['./public/**/*.html'],
+    enabled: true
+  },
+```
+
+## Minimizing CSS
+
+To minimize the generated CSS, including removing comments,
+in order to make it smaller:
+
+1. Enter `npm install -D cssnano @fullhuman/postcss-purgecss`
+
+1. Change the content of the `postcss.config.js` file to the following::
+
+   ```js
+   const cssnano = require('cssnano');
+   const purgecss = require('@fullhuman/postcss-purgecss');:
+
+   module.exports = {
+     plugins: [
+       require('tailwindcss'),
+       require('autoprefixer')
+       cssnano({
+         preset: 'default'
+       }),
+       purgecss({
+         content: ['./layouts/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
+         defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
+       });
+     ]
+   };
+   ```
+
+It may be desirable to only minimize CSS in production.
+To modify `postcss.config.js` to do this, see the end of {% aTargetBlank
+"https://flaviocopes.com/tailwind-setup/",
+"How to setup Tailwind with PurgeCSS and PostCSS" %}.
+
+## VS Code Support
+
+The VS Code extension "Tailwind CSS IntelliSense"
+provides autocomplete, syntax highlighting, and linting.
+
+While entering Tailwind CSS class names,
+a popup displays all matching names and their definitions.
+For example, entering "upp" displays "uppercase text-transform: uppercase".
+
+To see the definition of a Tailwind CSS class that has already been entered,
+hover over its name.
+
+A small color swatch is displayed in front of each
+Tailwind class name that represents a color.
+
+To enable Emmett completions of Tailwind CSS class names,
+add the following in the VS Code `settings.json` file:
+
+```json
+  "tailwindCSS.emmetCompletions": true
+```
 
 ## Breakpoints
 
@@ -39,16 +226,112 @@ By default Tailwind uses the following responsive breakpoints:
 | `lg` | 1024px |
 | `xl` | 1280px |
 
-## Categorized Lists
+These can be overridden by modifying the `tailwind.config.js` file.
+
+Precede Tailwind CSS class names with a breakpoint name and colon
+to only apply the CSS class with the screen width matches
+a given breakpoint or is larger.
+
+## Directives
+
+Tailwind supports several directives.
+
+### `@apply`
+
+The {% aTargetBlank
+"https://tailwindcss.com/docs/functions-and-directives#apply",
+"`@apply`" %} directive is used in a CSS rule to
+include properties from any number of Tailwind classes
+in a custom CSS rule.
+This enables a set of Tailwind classes to be reused on several elements
+without repeating them.
+
+For example:
+TODO: Test this!
+
+````css
+.my-alert {
+  @apply bg-red, rounded, text-white;
+}
+
+### `@layer`
+
+The {% aTargetBlank
+"https://tailwindcss.com/docs/functions-and-directives#layer",
+"`@layer`" %} directive is used to add custom CSS rules
+to a specific bucket of Tailwind CSS rules.
+TODO: Why is this useful?
+
+### `@responsive`
+
+The {% aTargetBlank
+"https://tailwindcss.com/docs/functions-and-directives#responsive",
+"`@responsive`" %} directive is used ...
+
+### `@screen`
+
+The {% aTargetBlank
+"https://tailwindcss.com/docs/functions-and-directives#screen",
+"`@screen`" %} directive is used ...
+
+### `@tailwind`
+
+The {% aTargetBlank
+"https://tailwindcss.com/docs/functions-and-directives#tailwind",
+"`@tailwind`" %} directive is used to inject Tailwind CSS class definitions
+into the content of a CSS file.
+Earlier we saw this used in the `src/style.css` file.
+
+### `@variants`
+
+The {% aTargetBlank
+"https://tailwindcss.com/docs/functions-and-directives#variants",
+"`@variants`" %} directive is used to
+generate variants of your own CSS classes that are responsive or
+are only used when an element is hovered over, has focus, or is active.
+
+## Functions
+
+### `theme` function
+
+The {% aTargetBlank
+"https://tailwindcss.com/docs/functions-and-directives#theme",
+"`theme`" %} function is used obtain values from the Tailwind config
+in CSS property values.
+For example, to use a shade of yellow from Tailwind
+in a custom CSS rule:
+
+```css
+.warning {
+  background-color: theme('colors.yellow.600');
+}
+````
+
+The rule above could also be written using the the `@apply` directive
+as follows:
+
+```css
+.warning {
+  @apply bg-yellow-600;
+}
+```
+
+The `theme` function is primarily useful when
+a value will be used in a calculation using the CSS `calc` function.
+
+## Provided CSS Classes
 
 The following sections list all the provided Tailwind CSS classes.
+There are a large number of them!
+
 This same information is available in the official docs at
 {% aTargetBlank "https://tailwindcss.com/docs/", "tailwindcss.com/docs" %}.
 It is included here in a more compact manner that is
 more easily searchable because they are all on a single page.
 
 In class names that include `-color`, `color` should be replaced by one of
-gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
+`gray`, `red`, `orange`, `yellow`, `green`,
+`teal`, `blue`, `indigo`, `purple`, or `pink`.
 
 ### Backgrounds
 
@@ -69,7 +352,7 @@ gray, red, orange, yellow, green, teal, blue, indigo, purple, or pink.
 | `bg-white`          | `background-color: #fff;`                                                                |
 | `bg-{color}-{n}`    | `background-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100      |
 |                     |                                                                                          |
-| `bg-opacity-{n}`    | `--bg-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                                |
+| `bg-opacity-{n}`    | `--bg-opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100                              |
 |                     |                                                                                          |
 | `bg-bottom`         | `background-position: bottom;`                                                           |
 | `bg-center`         | `background-position: center;`                                                           |
@@ -156,9 +439,9 @@ In the class names below, `corner` can be one of the following:
 | `rounded-{side/corner}-full` | sets affected properties to `9999px`                                            |
 |                              |                                                                                 |
 | `border`                     | `border-width: 1px;`                                                            |
-| `border-{n}`                 | `border-width: npx;`<br>where n = 0, 2, 4, or 8                                 |
+| `border-{n}`                 | `border-width: {n}px;`<br>where n = 0, 2, 4, or 8                               |
 | `border-side`                | sets affected property: to `1px;`                                               |
-| `border-side-{n}`            | sets affected property: to `npx;`<br>where n = 0, 2, 4, or 8                    |
+| `border-side-{n}`            | sets affected property: to `{n}px;`<br>where n = 0, 2, 4, or 8                  |
 |                              |                                                                                 |
 | `border-transparent`         | `border-color: transparent;`                                                    |
 | `border-current`             | `border-color: currentColor;`                                                   |
@@ -166,7 +449,7 @@ In the class names below, `corner` can be one of the following:
 | `border-white`               | `border-color: #fff;`                                                           |
 | `border-{color}-{n}`         | `border-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
 |                              |                                                                                 |
-| `border-opacity-{n}`         | `--border-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                   |
+| `border-opacity-{n}`         | `--border-opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100                 |
 |                              |                                                                                 |
 | `border-dashed`              | `border-style: dashed;`                                                         |
 | `border-dotted`              | `border-style: dotted;`                                                         |
@@ -175,10 +458,10 @@ In the class names below, `corner` can be one of the following:
 | `border-solid`               | `border-style: solid;`                                                          |
 |                              |                                                                                 |
 | `divide-x`                   | `border-left-width: 1px;`                                                       |
-| `divide-x-{n}`               | `border-left-width: npx;`<br>where n = 0, 2, 4, or 8                            |
+| `divide-x-{n}`               | `border-left-width: {n}px;`<br>where n = 0, 2, 4, or 8                          |
 | `divide-x-reverse`           | `--divide-x-reverse: 1;`                                                        |
 | `divide-y`                   | `border-top-width: 1px;`                                                        |
-| `divide-y-{n}`               | `border-top-width: npx;`<br>where n = 0, 2, 4, or 8                             |
+| `divide-y-{n}`               | `border-top-width: {n}px;`<br>where n = 0, 2, 4, or 8                           |
 | `divide-y-reverse`           | `--divide-y-reverse: 1;`                                                        |
 |                              |                                                                                 |
 | `divide-transparent`         | `border-color: transparent;`                                                    |
@@ -187,7 +470,7 @@ In the class names below, `corner` can be one of the following:
 | `divide-white`               | `border-color: #fff;`                                                           |
 | `divide-{color}-{n}`         | `border-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
 |                              |                                                                                 |
-| `divide-opacity-{n}`         | `--divide-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100                   |
+| `divide-opacity-{n}`         | `--divide-opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100                 |
 |                              |                                                                                 |
 | `divide-dashed`              | `border-style: dashed;`                                                         |
 | `divide-dotted`              | `border-style: dotted;`                                                         |
@@ -266,9 +549,11 @@ In the class names below, `corner` can be one of the following:
 
 ### Container
 
-| Name Prefix | Description                                                                      | Example        |
-| ----------- | -------------------------------------------------------------------------------- | -------------- |
-| `container` | sets max-width to breakpoint size or<br>width to 100% if no breakpoint specified | `lg:container` |
+| Name Prefix | Description                                                                      |
+| ----------- | -------------------------------------------------------------------------------- |
+| `container` | sets max-width to breakpoint size or<br>width to 100% if no breakpoint specified |
+
+For example, `lg:container`.
 
 ### Display
 
@@ -288,41 +573,41 @@ In the class names below, `corner` can be one of the following:
 
 ### Effects
 
-| Name Prefix      | Description                                          |
-| ---------------- | ---------------------------------------------------- |
-| `opacity-n`      | `opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100 |
-|                  |                                                      |
-| `shadow-none`    | `box-shadow: none`                                   |
-| `shadow-inner`   | `box-shadow: ...`; see docs                          |
-| `shadow-outline` | `box-shadow: ...`; see docs                          |
-| `shadow`         | `box-shadow: ...`; see docs                          |
-| `shadow-xs`      | `box-shadow: ...`; see docs                          |
-| `shadow-sm`      | `box-shadow: ...`; see docs                          |
-| `shadow-md`      | `box-shadow: ...`; see docs                          |
-| `shadow-lg`      | `box-shadow: ...`; see docs                          |
-| `shadow-xl`      | `box-shadow: ...`; see docs                          |
-| `shadow-2xl`     | `box-shadow: ...`; see docs                          |
+| Name Prefix      | Description                                            |
+| ---------------- | ------------------------------------------------------ |
+| `opacity-n`      | `opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100 |
+|                  |                                                        |
+| `shadow-none`    | `box-shadow: none`                                     |
+| `shadow-inner`   | `box-shadow: ...`; see docs                            |
+| `shadow-outline` | `box-shadow: ...`; see docs                            |
+| `shadow`         | `box-shadow: ...`; see docs                            |
+| `shadow-xs`      | `box-shadow: ...`; see docs                            |
+| `shadow-sm`      | `box-shadow: ...`; see docs                            |
+| `shadow-md`      | `box-shadow: ...`; see docs                            |
+| `shadow-lg`      | `box-shadow: ...`; see docs                            |
+| `shadow-xl`      | `box-shadow: ...`; see docs                            |
+| `shadow-2xl`     | `box-shadow: ...`; see docs                            |
 
 ### Flexbox
 
-| Name Prefix         | Description                       |
-| ------------------- | --------------------------------- |
-| `flex-1`            | `flex: 1 1 0%;`                   |
-| `flex-auto`         | `flex: 1 1 auto;`                 |
-| `flex-initial`      | `flex: 0 1 auto;`                 |
-| `flex-none`         | `flex: none;`                     |
-| `flex-col`          | `flex-direction: column;`         |
-| `flex-col-reverse`  | `flex-direction: column-reverse;` |
-| `flex-row`          | `flex-direction: row;`            |
-| `flex-row-reverse`  | `flex-direction: row-reverse;`    |
-| `flex-wrap`         | `flex-wrap: wrap;`                |
-| `flex-wrap-reverse` | `flex-wrap: wrap-reverse;`        |
-| `flex-no-wrap`      | `flex-wrap: nowrap;`              |
-| `flex-grow`         | `flex-grow: 1;`                   |
-| `flex-grow-0`       | `flex-grow: 0;`                   |
-| `flex-shrink`       | `flex-shrink: 1;`                 |
-| `flex-shrink-0`     | `flex-shrink: 0;`                 |
-| `order-{n}`         | `order: n;`<br>where n is 1 to 12 |
+| Name Prefix         | Description                         |
+| ------------------- | ----------------------------------- |
+| `flex-1`            | `flex: 1 1 0%;`                     |
+| `flex-auto`         | `flex: 1 1 auto;`                   |
+| `flex-initial`      | `flex: 0 1 auto;`                   |
+| `flex-none`         | `flex: none;`                       |
+| `flex-col`          | `flex-direction: column;`           |
+| `flex-col-reverse`  | `flex-direction: column-reverse;`   |
+| `flex-row`          | `flex-direction: row;`              |
+| `flex-row-reverse`  | `flex-direction: row-reverse;`      |
+| `flex-wrap`         | `flex-wrap: wrap;`                  |
+| `flex-wrap-reverse` | `flex-wrap: wrap-reverse;`          |
+| `flex-no-wrap`      | `flex-wrap: nowrap;`                |
+| `flex-grow`         | `flex-grow: 1;`                     |
+| `flex-grow-0`       | `flex-grow: 0;`                     |
+| `flex-shrink`       | `flex-shrink: 1;`                   |
+| `flex-shrink-0`     | `flex-shrink: 0;`                   |
+| `order-{n}`         | `order: {n};`<br>where n is 1 to 12 |
 
 ### Floats and Clear
 
@@ -339,27 +624,50 @@ In the class names below, `corner` can be one of the following:
 
 ### Grid
 
-| Name Prefix           | Description                                                               |
-| --------------------- | ------------------------------------------------------------------------- |
-| `col-auto`            | `grid-column: auto`                                                       |
-| `col-span-{n}`        | `grid-column: span n / span n`<br>where n is 1 to 11                      |
-| `gap-{n}`             | `gap: n`<br>where n is 0 to 8, 10, 12, 16, or 20                          |
-| `grid-cols-{n}`       | `grid-template-columns: repeat(n, minmax(0, 1fr));`<br>where n is 1 to 12 |
-| `grid-rows-{n}`       | `grid-template-rows: repeat(n, minmax(0, 1fr));`<br>where n is 1 to 6     |
-| `grid-rows-none`      | `grid-template-rows: none;`                                               |
-| `grid-flow-col`       | `grid-auto-flow: column`                                                  |
-| `grid-flow-col-dense` | `grid-auto-flow: column dense`                                            |
-| `grid-flow-row`       | `grid-auto-flow: row`                                                     |
-| `grid-flow-row-dense` | `grid-auto-flow: row dense`                                               |
-| `row-auto`            | `grid-row: auto`                                                          |
-| `row-span-{n}`        | `grid-row: span n / span n`<br>where n is 1 to 6                          |
-| `row-start-{n}`       | `grid-row-start: n`<br>where n is 1 to 5                                  |
+| Name Prefix           | Description                                                                 |
+| --------------------- | --------------------------------------------------------------------------- |
+| `col-auto`            | `grid-column: auto`                                                         |
+| `col-span-{n}`        | `grid-column: span {n} / span {n}`<br>where n is 1 to 11                    |
+| `gap-{n}`             | `gap: {n}`<br>where n is 0 to 8, 10, 12, 16, or 20                          |
+| `grid-cols-{n}`       | `grid-template-columns: repeat({n}, minmax(0, 1fr));`<br>where n is 1 to 12 |
+| `grid-rows-{n}`       | `grid-template-rows: repeat({n}, minmax(0, 1fr));`<br>where n is 1 to 6     |
+| `grid-rows-none`      | `grid-template-rows: none;`                                                 |
+| `grid-flow-col`       | `grid-auto-flow: column`                                                    |
+| `grid-flow-col-dense` | `grid-auto-flow: column dense`                                              |
+| `grid-flow-row`       | `grid-auto-flow: row`                                                       |
+| `grid-flow-row-dense` | `grid-auto-flow: row dense`                                                 |
+| `row-auto`            | `grid-row: auto`                                                            |
+| `row-span-{n}`        | `grid-row: span {n} / span {n}`<br>where n is 1 to 6                        |
+| `row-start-{n}`       | `grid-row-start: {n}`<br>where n is 1 to 5                                  |
 
 ### Interactivity
 
-| Name Prefix | Description |
-| ----------- | ----------- |
-|             |             |
+| Name Prefix           | Description             |
+| --------------------- | ----------------------- |
+| `appearance-none`     | `appearance: none;`     |
+|                       |                         |
+| `cursor-auto`         | `cursor: auto;`         |
+| `cursor-default`      | `cursor: default;`      |
+| `cursor-pointer`      | `cursor: pointer;`      |
+| `cursor-wait`         | `cursor: wait;`         |
+| `cursor-text`         | `cursor: text;`         |
+| `cursor-move`         | `cursor: move;`         |
+| `cursor-not-allowed`  | `cursor: not-allowed;`  |
+|                       |                         |
+| `outline-none`        | `outline: none;`        |
+|                       |                         |
+| `pointer-events-auto` | `pointer-events: auto;` |
+| `pointer-events-none` | `pointer-events: none;` |
+|                       |                         |
+| `resize-none`         | `resize: none;`         |
+| `resize-x`            | `resize: horizontal;`   |
+| `resize-y`            | `resize: vertical;`     |
+| `resize`              | `resize: both;`         |
+|                       |                         |
+| `select-none`         | `user-select: none;`    |
+| `select-all`          | `user-select: all;`     |
+| `select-auto`         | `user-select: auto;`    |
+| `select-text`         | `user-select: text;`    |
 
 ### Object Fit
 
@@ -441,8 +749,8 @@ In the class names below, `corner` can be one of the following:
 
 | Name Prefix    | Description                                                    |
 | -------------- | -------------------------------------------------------------- |
-| `h-{n}`        | `height: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20 |
-| `w-{n}`        | `width: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20  |
+| `h-{n}`        | `height: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20 |
+| `w-{n}`        | `width: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20  |
 |                |                                                                |
 | `max-h-full`   | `max-height: 100%;`                                            |
 | `max-h-screen` | `max-height: 100vh;`                                           |
@@ -471,20 +779,22 @@ In the class names below, `corner` can be one of the following:
 
 | Name Prefix   | Description                                                                      |
 | ------------- | -------------------------------------------------------------------------------- |
-| `m-{n}`       | `margin: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                   |
-| `mx-*`        | `margin-left: n * 0.25rem; margin-right: n * 0.25rem;`<br>where n = 0, 1, or 2   |
-| `my-*`        | `margin-bottom: n * 0.25rem; margin-top: n * 0.25rem;`<br>where n = 0, 1, or 2   |
-| `p-{n}`       | `padding: n * 0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                  |
-| `px-*`        | `padding-left: n * 0.25rem; padding-right: n * 0.25rem;`<br>where n = 0, 1, or 2 |
-| `py-*`        | `padding-bottom: n * 0.25rem; padding-top: n * 0.25rem;`<br>where n = 0, 1, or 2 |
-| `space-x-{n}` | `margin-left: n * 0.25rem;`<br>where n is 0 to 5                                 |
-| `space-y-{n}` | `margin-top: n * 0.25rem;`<br>where n is 0 to 5                                  |
+| `m-{n}`       | `margin: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                   |
+| `mx-*`        | `margin-left: {n}*0.25rem; margin-right: {n}*0.25rem;`<br>where n = 0, 1, or 2   |
+| `my-*`        | `margin-bottom: {n}*0.25rem; margin-top: {n}*0.25rem;`<br>where n = 0, 1, or 2   |
+| `p-{n}`       | `padding: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                  |
+| `px-*`        | `padding-left: {n}*0.25rem; padding-right: {n}*0.25rem;`<br>where n = 0, 1, or 2 |
+| `py-*`        | `padding-bottom: {n}*0.25rem; padding-top: {n}*0.25rem;`<br>where n = 0, 1, or 2 |
+| `space-x-{n}` | `margin-left: {n}*0.25rem;`<br>where n is 0 to 5                                 |
+| `space-y-{n}` | `margin-top: {n}*0.25rem;`<br>where n is 0 to 5                                  |
 
 ### SVG
 
-| Name Prefix | Description |
-| ----------- | ----------- |
-|             |             |
+| Name Prefix      | Description                                |
+| ---------------- | ------------------------------------------ |
+| `fill-current`   | `fill: currentColor;`                      |
+| `stroke-current` | `stroke: currentColor;`                    |
+| `stroke-{n}`     | `stroke-width: {n};` where n is 0, 1, or 2 |
 
 ### Tables
 
@@ -498,15 +808,65 @@ In the class names below, `corner` can be one of the following:
 
 ### Transforms
 
-| Name Prefix | Description |
-| ----------- | ----------- |
-|             |             |
+In all the classes in this section, `n` can be
+0, 50, 75, 90, 95, 100, 105, 110, 125, or 150.
+
+| Name Prefix           | Description                                                                                              |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| `scale-{n}`           | `--transform-scale-x: {n}/100; --transform-scale-y: {n}/100;`                                            |
+| `scale-x-{n}`         | `--transform-scale-x: {n}/100;`                                                                          |
+| `scale-y-{n}`         | `--transform-scale-y: {n}/100;`                                                                          |
+|                       |                                                                                                          |
+| `rotate-{n}`          | `--transform-rotate: {n}deg;`<br>where n is 0, 45, 90, or 180                                            |
+| `-rotate-{n}`         | `--transform-rotate: -{n}deg;`<br>where n is 45, 90, or 180                                              |
+|                       |                                                                                                          |
+| `translate-x-px`      | `--transform-translate-x: 1px;`                                                                          |
+| `-translate-x-px`     | `--transform-translate-x: -1px;`                                                                         |
+| `translate-x-{n}`     | `--transform-translate-x: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, or 64  |
+| `-translate-x-{n}`    | `--transform-translate-x: -{n}*0.25rem;`<br>where n is 1 to 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, or 64 |
+| `translate-x-full`    | `--transform-translate-x: 100%;`                                                                         |
+| `-translate-x-full`   | `--transform-translate-x: -100%;`                                                                        |
+| `translate-x-1/2`     | `--transform-translate-x: 50%;`                                                                          |
+| `-translate-x-1/2`    | `--transform-translate-x: -50%;`                                                                         |
+|                       |                                                                                                          |
+| `translate-y-{above}` | `--transform-translate-y: ...;`;<br>all the same variations as for `x` above                             |
+|                       |                                                                                                          |
+| `skew-x-{n}`          | `--transform-skew-x: {n}deg;`<br>where n is 0, 3, 6, or 12                                               |
+| `-skew-x-{n}`         | `--transform-skew-x: {n}deg;`<br>where n is 3, 6, or 12                                                  |
+| `skew-y-{n}`          | `--transform-skew-y: ...;`<br>all the same variations as for `x` above                                   |
+|                       |                                                                                                          |
+| `origin-bottom-right` | `transform-origin: bottom right;`                                                                        |
+| `origin-bottom`       | `transform-origin: bottom;`                                                                              |
+| `origin-center`       | `transform-origin: center;`                                                                              |
+| `origin-left`         | `transform-origin: left;`                                                                                |
+| `origin-right`        | `transform-origin: right;`                                                                               |
+| `origin-top-left`     | `transform-origin: top left;`                                                                            |
+| `origin-top-right`    | `transform-origin: top right;`                                                                           |
+| `origin-top`          | `transform-origin: top;`                                                                                 |
 
 ### Transitions and Animation
 
-| Name Prefix | Description |
-| ----------- | ----------- |
-|             |             |
+| Name Prefix            | Description                                                                                                            |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `transition`           | `transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;`            |
+| `transition-all`       | `transition-property: all;`                                                                                            |
+| `transition-colors`    | `transition-property: background-color, border-color, color, fill, stroke;`                                            |
+| `transition-none`      | `transition-property: none;`                                                                                           |
+| `transition-opacity`   | `transition-property: opacity;`                                                                                        |
+| `transition-shadow`    | `transition-property: box-shadow;`                                                                                     |
+| `transition-transform` | `transition-property: transform;`                                                                                      |
+|                        |                                                                                                                        |
+| `duration-{n}`         | `transition-duration: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000                                  |
+|                        |                                                                                                                        |
+| `ease-linear`          | `transition-timing-function: linear;`                                                                                  |
+| `ease-in`              | `transition-timing-function: cubic-bezier(0.4, 0, 1, 1);`                                                              |
+| `ease-out`             | `transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`                                                              |
+| `ease-in-out`          | `transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);`                                                            |
+|                        |                                                                                                                        |
+| `delay-{n}`            | `transition-delay: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000                                     |
+|                        |                                                                                                                        |
+| `animate-none`         | `animation: none;`                                                                                                     |
+| `animate-{effect}`     | `animation: {effect} ...; @keyframes {effect} {...}`<br>where effect is `bounce`, `ping`, `pulse` or, `spin`; see docs |
 
 ### Typography
 
@@ -560,14 +920,7 @@ In the class names below, `corner` can be one of the following:
 | `tracking-wider`          | `letter-spacing: 0.05em;`                                                |
 | `tracking-widest`         | `letter-spacing: 0.1em;`                                                 |
 |                           |                                                                          |
-| `leading-3`               | `line-height: 0.75rem;`                                                  |
-| `leading-4`               | `line-height: 1rem;`                                                     |
-| `leading-5`               | `line-height: 1.25rem;`                                                  |
-| `leading-6`               | `line-height: 1.5rem;`                                                   |
-| `leading-7`               | `line-height: 1.75rem;`                                                  |
-| `leading-8`               | `line-height: 2rem;`                                                     |
-| `leading-9`               | `line-height: 2.25rem;`                                                  |
-| `leading-10`              | `line-height: 2.5rem;`                                                   |
+| `leading-{n}`             | `line-height: {n}*0.25rem;`<br>where n = 3 to 10                         |
 | `leading-none`            | `line-height: 1;`                                                        |
 | `leading-tight`           | `line-height: 1.25rem;`                                                  |
 | `leading-snug`            | `line-height: 1.375rem;`                                                 |
@@ -586,7 +939,7 @@ In the class names below, `corner` can be one of the following:
 | `placeholder-white`       | `color: #fff;`                                                           |
 | `placeholder-{color}-{n}` | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
 |                           |                                                                          |
-| `placeholder-opacity-{n}` | `--placeholder-opacity: n/100;`<br>where n = 0, 25, 50, 75, or 100       |
+| `placeholder-opacity-{n}` | `--placeholder-opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100     |
 |                           |                                                                          |
 | `text-center`             | `text-align: center;`                                                    |
 | `text-justify`            | `text-align: justify;`                                                   |
@@ -599,7 +952,7 @@ In the class names below, `corner` can be one of the following:
 | `text-transparent`        | `color: transparent;`                                                    |
 | `text-white`              | `color: #fff;`                                                           |
 |                           |                                                                          |
-| `text-opacity-{n}`        | `--text-opacity: n/100;`<br>where n is 0, 25, 50, 75, or 100             |
+| `text-opacity-{n}`        | `--text-opacity: {n}/100;`<br>where n is 0, 25, 50, 75, or 100           |
 |                           |                                                                          |
 | `line-through`            | `text-decoration: line-through;`                                         |
 | `no-underline`            | `text-decoration: none;`                                                 |
@@ -635,10 +988,10 @@ In the class names below, `corner` can be one of the following:
 
 ### Z-Index
 
-| Name Prefix | Description                                          |
-| ----------- | ---------------------------------------------------- |
-| `z-{n}`     | `z-index: n;`<br>where n is 0, 10, 20, 30, 40, or 50 |
-| `z-auto`    | `z-index: auto;`                                     |
+| Name Prefix | Description                                            |
+| ----------- | ------------------------------------------------------ |
+| `z-{n}`     | `z-index: {n};`<br>where n is 0, 10, 20, 30, 40, or 50 |
+| `z-auto`    | `z-index: auto;`                                       |
 
 ## Responsive Variants
 
@@ -647,3 +1000,7 @@ to only apply the class when the screen/window width
 matches that breakpoint or larger.
 The breakpoint names are sm, md, lg, and xl.
 For example: `lg:m-16`.
+
+```
+
+```
