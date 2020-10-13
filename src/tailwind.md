@@ -342,6 +342,7 @@ To use this:
 
 1. Enter `npm install -g live-server`.
 1. Enter `live-server public` where `public` contains an `index.html` file.
+1. Browse localhost:8080.
 
 ## VS Code Support
 
@@ -930,7 +931,10 @@ Also see the classes in the
 | `inset-y-0`    | `bottom: 0; top: 0;`                                |
 | `inset-y-auto` | `bottom: auto; top: auto;`                          |
 |                |                                                     |
-| `top-0`        | `top: 0;`                                           |
+| `bottom-{s}`   | `top: {s};` where s is `0` or `auto`                |
+| `left-{s}`     | `left: {s};` where s is `0` or `auto`               |
+| `right-{s}`    | `right: {s};` where s is `0` or `auto`              |
+| `top-{s}`      | `top: {s};` where s is `0` or `auto`                |
 
 ### Sizing
 
@@ -1167,6 +1171,11 @@ In all the classes in this section, `n` can be
 | `break-normal`            | `overflow-wrap: normal; word-break: normal;`                             |
 | `break-words`             | `overflow-wrap: break-word;`                                             |
 | `truncate`                | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`        |
+
+In the class name `text-{color}-{n}`, a number is required at the end.
+For example, `text-red` is not a valid Tailwind CSS class name.:
+
+### Visibility
 
 | Name Prefix | Description            |
 | ----------- | ---------------------- |
