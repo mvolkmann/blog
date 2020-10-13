@@ -386,6 +386,16 @@ equal to or greater than the corresponding `min-width` value.
 The breakpoint values can be overridden by modifying the `tailwind.config.js`
 file as shown in the [Configuration](#configuration) section.
 
+## Responsive Variants
+
+Tailwind class names can be prefixed with a breakpoint name
+to only apply the class when the screen/window width
+matches that breakpoint or larger.
+The breakpoint names are sm, md, lg, and xl.
+j
+For example: `lg:m-4` applies a margin of `1rem`
+only if the screen/window width is greater than or equal to `1024px`.
+
 ## Pseudo-class Variants
 
 Tailwind supports many prefixes that can be added to before class names,
@@ -477,7 +487,7 @@ are only used when an element is hovered over, has focus, or is active.
 
 ## Functions
 
-### `theme` function
+### `theme` Function
 
 The {% aTargetBlank
 "https://tailwindcss.com/docs/functions-and-directives#theme",
@@ -1188,15 +1198,3 @@ For example, `text-red` is not a valid Tailwind CSS class name.:
 | ----------- | ------------------------------------------------------ |
 | `z-{n}`     | `z-index: {n};`<br>where n is 0, 10, 20, 30, 40, or 50 |
 | `z-auto`    | `z-index: auto;`                                       |
-
-## Responsive Variants
-
-Tailwind class names can be prefixes with a breakpoint name
-to only apply the class when the screen/window width
-matches that breakpoint or larger.
-The breakpoint names are sm, md, lg, and xl.
-For example: `lg:m-16`.
-
-```
-
-```
