@@ -121,7 +121,7 @@ The generated CSS file will contain:
   "https://github.com/necolas/normalize.css", "normalize.css" %}
   CSS rules
 - Tailwind {% aTargetBlank "https://tailwindcss.com/docs/preflight",
-  "Preflight" %}) CSS rules
+  "Preflight" %} CSS rules
 - all Tailwind utility class definitions in the categories referenced
   by the `@tailwind` directives in `src/style.css`
 
@@ -379,6 +379,36 @@ equal to or greater than the corresponding `min-width` value.
 
 The breakpoint values can be overridden by modifying the `tailwind.config.js`
 file as shown in the [Configuration](#configuration) section.
+
+## Pseudo-class Variants
+
+Tailwind supports many prefixes that can be added to before class names,
+separated by a colon, that cause the class to only be applied
+when a certain condition holds.
+
+| Variant         | Condition                                                                  |
+| --------------- | -------------------------------------------------------------------------- |
+| `active`        | element is active (ex. `<button>`)                                         |
+| `focus`         | form element (ex. `<input>`) has focus                                     |
+| `hover`         | mouse cursor is over the element                                           |
+| `focus-visible` | element has focus and the user is using a keyboard                         |
+| `focus-within`  | ancestor element has focus                                                 |
+| `group-focus`   | ancestor element has the `group` class and has focus                       |
+| `group-hover`   | hovering over an ancestor element that has the `group` class               |
+| `motion-safe`   | `prefers-reduced-motion` media feature matches `no-preference`             |
+| `motion-reduce` | `prefers-reduced-motion` media feature matches `reduce`                    |
+| `disabled`      | form element is disabled                                                   |
+| `visited`       | link (`<a>`) has been visited                                              |
+| `checked`       | checkbox or radio button is checked                                        |
+| `first-child`   | element is the first child of its parent                                   |
+| `last-child`    | element is the last child of its parent                                    |
+| `odd-child`     | element is an odd-numbered child of its parent (zero-based index is even)  |
+| `even-child`    | element is an event-numbered child of its parent (zero-based index is odd) |
+
+These prefixes can be combined with responsive prefixes.
+For example, `md:hover:border`.
+
+TODO: How can you enable a class when one of these conditions is NOT met?
 
 ## Directives
 
