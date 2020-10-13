@@ -1,10 +1,12 @@
 {
   "cSpell.words": [
     "AAPL",
+    "AMZN",
     "Addy",
     "Bokeh",
     "Bostock",
     "Bostock's",
+    "Brotli",
     "Bulma",
     "Bynens",
     "Caligraphic",
@@ -187,6 +189,7 @@
     "ipady",
     "ipykernel",
     "ipynb",
+    "ipywidgets",
     "isin",
     "isinstance",
     "itemgetter",

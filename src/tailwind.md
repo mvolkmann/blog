@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 ## Overview
 
 {% aTargetBlank "https://tailwindcss.com/", "Tailwind" %}
@@ -29,15 +31,20 @@ such as those that support preprocessors like Sass.
 
 ## Pros
 
-- Tailwind enables styling HTML elements without
+- Less naming required  
+  Tailwind enables styling HTML elements without
   giving them an `id` attribute or CSS `class` name.
   This could already be done with the `style` attribute,
   but using Tailwind CSS classes is much more concise.
-- Placing styles with the elements they affect makes it easier
+
+- Colocates markdown and styling  
+  Placing styles with the elements they affect makes it easier
   to visualize the result while looking at the HTML.
   Using custom CSS classes requires assigning a name and
   looking up the CSS properties, often in another source file
-- Responsive UIs can be created without writing any media queries.
+
+- Responsive UIs are easier.  
+  Tailwind enables creating responsive UIs without writing media queries.
   This is done by prefixing Tailwind class names
   with a breakpoint name followed by a colon.
   For example: `md:flex-col` changes the `flex-direction` to `column`
@@ -45,21 +52,22 @@ such as those that support preprocessors like Sass.
 
 ## Cons
 
-- The HTML becomes more cluttered.
-- Developers that haven't been exposed to Tailwind will have to
-  learn about it in order to contribute to UI development.
-- When Tailwind classes are used in components of frameworks
-  like React, Vue, Svelte, and Angular, parent components
-  cannot override the styling.
+- Clutter  
+  The HTML becomes more cluttered due to many elements having
+  a `class` attribute with a long value.
+
+- Learning curve  
+  CSS has a steep learning curve. Tailwind adds to that.
+  Effective use of Tailwind requires good knowledge of CSS.
+  Developers that are not strong in CSS will struggle with using Tailwind.
+
+- Inability to override
+  When Tailwind classes are used in components of frameworks
+  (ex. React, Vue, Svelte, and Angular),
+  parent components cannot override the styling.
   For this reason it may be advisable to primary use Tailwind
   for element layout and not for properties more likely
   to be overridden such as fonts and colors.
-
-When Tailwind classes are used in component definitions,
-parent components that use those components
-cannot override the styling they specify.
-For this reason, some developers tend to only use Tailwind classes
-for layout, not styling such as fonts and colors.
 
 ## Basic Build Process
 
