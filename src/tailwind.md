@@ -31,41 +31,64 @@ such as those that support preprocessors like Sass.
 
 ## Pros
 
-- Less naming required  
-  Tailwind enables styling HTML elements without
-  giving them an `id` attribute or CSS `class` name.
-  This could already be done with the `style` attribute,
-  but using Tailwind CSS classes is much more concise.
-
-- Colocates markdown and styling  
+- **Colocates markdown and styling**  
   Placing styles with the elements they affect makes it easier
   to visualize the result while looking at the HTML.
-  Using custom CSS classes requires assigning a name and
-  looking up the CSS properties, often in another source file
 
-- Responsive UIs are easier.  
+- **Less naming required**  
+  Tailwind enables styling HTML elements without
+  giving them an `id` attribute or CSS `class` name.
+  Using custom CSS classes requires assigning a name and
+  associating that name with elements using the `class` attribute.
+  Understanding the styling that a CSS class applies requires
+  looking up the CSS class, often in another source file.
+  Another option is to specify CSS properties using the `style` attribute,
+  but using Tailwind CSS classes is more concise.
+
+- **More concise**  
+  Most Tailwind CSS classes define a single CSS property.
+  For example, the CSS property `flex-direction: column;`
+  can be replace by the Tailwind class `flex-col`.
+
+- **Removes need to think about specificity**
+  Specificity is the technique used in CSS to determine which CSS class
+  should be applied to an element when multiple classes can apply.
+  Because Tailwind directly associates CSS classes with HTML elements,
+  those classes are always used, regardless of the specificity of other rules.
+
+- **Easier Responsive UIs**  
   Tailwind enables creating responsive UIs without writing media queries.
   This is done by prefixing Tailwind class names
   with a breakpoint name followed by a colon.
   For example: `md:flex-col` changes the `flex-direction` to `column`
   when the screen width is at or above the medium breakpoint.
 
+- **Configurable**
+  Tailwind is highly configurable.
+  Default values can be overridden in a `tailwind.config.js` file.:
+
+- **Supported by tools**
+  There are good Tailwind-aware extensions for many editors
+  including VS Code, Sublime Text, Vim, and Atom.
+
 ## Cons
 
-- Clutter  
-  The HTML becomes more cluttered due to many elements having
-  a `class` attribute with a long value.
-
-- Learning curve  
+- **Learning curve**  
   CSS has a steep learning curve. Tailwind adds to that.
   Effective use of Tailwind requires good knowledge of CSS.
   Developers that are not strong in CSS will struggle with using Tailwind.
 
-- Inability to override
+- **Clutter**  
+  HTML becomes more cluttered when many elements have
+  a `class` attribute with a long value.
+  This makes it more difficult to understand
+  the nested structure of the elements at a glance.
+
+- **Inability to override**  
   When Tailwind classes are used in components of frameworks
   (ex. React, Vue, Svelte, and Angular),
   parent components cannot override the styling.
-  For this reason it may be advisable to primary use Tailwind
+  For this reason it may be advisable to primarily use Tailwind
   for element layout and not for properties more likely
   to be overridden such as fonts and colors.
 
@@ -170,7 +193,7 @@ with boolean properties that are commented out.
 Uncomment these to get warnings about usage of features
 that will break in future releases.
 
-## Purging Unused CSS
+## Purging Unused CSS Classes
 
 The `purge` configuration property can be modified to purge unused CSS classes.
 If this is not done, the generate CSS file will be massive.
@@ -195,7 +218,7 @@ change the `purge` property in`tailwind.config.js` to the following:
 
 ```json
   purge: {
-    content: ['./public/**/*.html'],
+    content: ['./public/**/*.html', './src/**.*.svelte'],
     enabled: true
   },
 ```
@@ -297,10 +320,11 @@ without repeating them.
 For example:
 TODO: Test this!
 
-````css
+```css
 .my-alert {
   @apply bg-red, rounded, text-white;
 }
+```
 
 ### `@layer`
 
@@ -353,7 +377,7 @@ in a custom CSS rule:
 .warning {
   background-color: theme('colors.yellow.600');
 }
-````
+```
 
 The rule above could also be written using the the `@apply` directive
 as follows:
@@ -526,7 +550,7 @@ In the class names below, `corner` can be one of the following:
 | `divide-none`                | `border-style: none;`                                                           |
 | `divide-solid`               | `border-style: solid;`                                                          |
 
-### Box Alignment
+### <a name="box-alignment">Box Alignment</a>
 
 | Name Prefix             | Description                       |
 | ----------------------- | --------------------------------- |
@@ -656,6 +680,9 @@ For example, `lg:container`.
 | `flex-shrink`       | `flex-shrink: 1;`                   |
 | `flex-shrink-0`     | `flex-shrink: 0;`                   |
 | `order-{n}`         | `order: {n};`<br>where n is 1 to 12 |
+
+Also see the classes in the
+["Box Alignment"](#box-alignment) category.
 
 ### Floats and Clear
 
