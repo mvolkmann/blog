@@ -128,11 +128,11 @@ The generated CSS file will contain:
 Highlights of the Preflight styles include:
 
 - Default margins are removed from headings, paragraphs, and more.
-- Headings are unstyled, so they have the same
+- Headings become unstyled, so they have the same
   font-size and font-weight as normal text.
-- Lists are unstyled, so they have no bullets, numbers, margins, or padding.
-- Images are block-level instead of inline.
-- Borders are solid 1px using the default border color of the current theme.
+- Lists become unstyled, so they have no bullets, numbers, margins, or padding.
+- Images become block-level instead of inline.
+- Borders become solid 1px using the default border color of the current theme.
 - Preflight styles can be overridden by defining CSS classes
   after `@tailwind base;`.
 
@@ -145,8 +145,6 @@ Avoid rebuilds speeds development.
 For details on configuring various build tools to support Tailwind
 {% aTargetBlank "https://tailwindcss.com/docs/installation",
 "Tailwind installation" %}
-
-TODO: How can you use Tailwind in a Svelte app?
 
 ## PostCSS Build Process
 
@@ -225,6 +223,7 @@ To change the responsive breakpoints, modify the values shown below:
 
 ```js
   theme: {
+    ...
     screens: {
       sm: "640px",
       md: "768px",
@@ -237,11 +236,31 @@ To change the fonts used with `sans`, `serif`, and `mono` are specified,
 modify the font name lists in the arrays below::
 
 ```js
+  theme: {
+    ...
     fontFamily: {
       sans: [...],
       serif: [...],
       mono: [...]
     },
+```
+
+To add a custom font size, add it to the object
+that is the value of the `fontSize` property.
+For example:
+
+```js
+  theme: {
+    ...
+    fontSize: {
+      "hero": "6rem"
+    },
+```
+
+With this in place we can cause a header element to use it as follows:
+
+```html
+<h1 class="text-hero">Welcome to My Page</h1>
 ```
 
 The `tailwind.config.js` file defines a `future` property whose value
