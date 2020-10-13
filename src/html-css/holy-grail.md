@@ -14,8 +14,11 @@ The holy grail of web pages is to have:
   regardless of the amount of page content
 - have a left nav and main area that scroll independently
 
-This is implemented at <https://github.com/mvolkmann/holy-grail-html-css>.
-It is hosted on GitHub Pages at
-<https://mvolkmann.github.io/holy-grail-html-css/>.
+This is implemented in {% aTargetBlank
+"https://github.com/mvolkmann/holy-grail-html-css", "GitHub" %}.
+
+It is hosted on {% aTargetBlank
+"https://mvolkmann.github.io/holy-grail-html-css/", "GitHub Pages" %}.
+
 Try making the width narrow or testing it from a phone
 to see the hamburger menu in action.

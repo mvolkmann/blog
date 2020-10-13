@@ -77,6 +77,13 @@ body > main {
   }
 
   nav {
+    & > a {
+      display: block;
+      margin-left: 1rem;
+      margin-top: 1rem;
+      text-decoration: underline;
+    }
+
     & > ul {
       display: block;
 
