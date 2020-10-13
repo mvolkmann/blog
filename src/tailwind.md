@@ -144,7 +144,7 @@ Avoid rebuilds speeds development.
 
 For details on configuring various build tools to support Tailwind
 {% aTargetBlank "https://tailwindcss.com/docs/installation",
-"Tailwind installation" %}
+"Tailwind installation" %}.:
 
 ## PostCSS Build Process
 
@@ -237,8 +237,8 @@ To change the responsive breakpoints, modify the values shown below:
     },
 ```
 
-To change the fonts used with `sans`, `serif`, and `mono` are specified,
-modify the font name lists in the arrays below::
+To change the fonts used when `font-sans`, `font-serif`, and `font-mono`
+are specified, modify the font name lists in the arrays below:
 
 ```js
   theme: {
@@ -392,7 +392,7 @@ Tailwind class names can be prefixed with a breakpoint name
 to only apply the class when the screen/window width
 matches that breakpoint or larger.
 The breakpoint names are sm, md, lg, and xl.
-j
+
 For example: `lg:m-4` applies a margin of `1rem`
 only if the screen/window width is greater than or equal to `1024px`.
 
@@ -1069,7 +1069,7 @@ In all the classes in this section, `n` can be
 | `animate-none`         | `animation: none;`                                                                                                     |
 | `animate-{effect}`     | `animation: {effect} ...; @keyframes {effect} {...}`<br>where effect is `bounce`, `ping`, `pulse` or, `spin`; see docs |
 
-### Typography
+### Typography/Fonts
 
 | Name Prefix               | Description                                                              |
 | ------------------------- | ------------------------------------------------------------------------ |
