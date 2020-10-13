@@ -9,11 +9,11 @@ layout: topic-layout.njk
 {% aTargetBlank "https://tailwindcss.com/", "Tailwind" %}
 is a CSS utility framework.
 It provides a large number of pre-built CSS classes
-that typically set a single CSS property.
+that often only set a single CSS property.
 These can be used as values of the `class` attribute on HTML elements.
 They can also be customized in each application that uses them.
 
-Other CSS frameworks such as Bootstrap, Bulma, Foundation, and Material-UI
+Other CSS frameworks such as Bootstrap, Bulma, Foundation, and Materialize
 define styling for components.
 Tailwind takes a different approach,
 providing lower level styling that can be combined
@@ -22,6 +22,10 @@ in order to create custom looks.
 Tailwind is not a replacement for CSS.
 It is still necessary for developers to be familiar with
 CSS properties and their supported values.
+
+Tailwind is implemented as a PostCSS plugin.
+It can be used in conjunction with other PostCSS plugins
+such as those that support preprocessors like Sass.
 
 ## Pros
 
@@ -82,11 +86,30 @@ The file `src/style.css` should, at a minimum, contain the following:
 The build process will replace these directives with generated CSS.
 The generated CSS file will contain:
 
-- the contents of {% aTargetBlank
+- {% aTargetBlank
   "https://github.com/necolas/normalize.css", "normalize.css" %}
-- Tailwind custom reset styles
+  CSS rules
+- Tailwind {% aTargetBlank "https://tailwindcss.com/docs/preflight",
+  "Preflight" %}) CSS rules
 - all Tailwind utility class definitions in the categories referenced
-  by the `@tailwind` directive in `src/styles.css`
+  by the `@tailwind` directives in `src/style.css`
+
+Highlights of the Preflight styles include:
+
+- Default margins are removed from headings, paragraphs, and more.
+- Headings are unstyled, so they have the same
+  font-size and font-weight as normal text.
+- Lists are unstyled, so they have no bullets, numbers, margins, or padding.
+- Images are block-level instead of inline.
+- Borders are solid 1px using the default border color of the current theme.
+- Preflight styles can be overridden by defining CSS classes
+  after `@tailwind base;`.
+
+It is only necessary to rebuild the Tailwind-generated CSS
+when Tailwind directives have been modified or
+when the build process is configured to purge unused CSS rules
+and the rules being used have changed.
+Avoid rebuilds speeds development.
 
 For details on configuring various build tools to support Tailwind
 {% aTargetBlank "https://tailwindcss.com/docs/installation",
@@ -142,15 +165,24 @@ that will break in future releases.
 ## Purging Unused CSS
 
 The `purge` configuration property can be modified to purge unused CSS classes.
-It should be set to an array of glob patterns
+If this is not done, the generate CSS file will be massive.
+As of 10/13/2020, the size is 2413.4K uncompressed, 1967.4K minified,
+190.2K gzipped, and 46.2K compressed with
+{% aTargetBlank "https://github.com/google/brotli", "Brotli" %}.
+
+The `purge` property should be set to an array of glob patterns
 for file paths that can contain references to CSS classes.
 For example, `purge: ['./public/**/*.html']`.
 Tailwind will automatically check for
 references to Tailwind CSS classes in CSS files.
 
 By default, unused CSS classes are only removed when
-the`NODE_ENV`environment variable is set to`production`.
-To remove them regardless of this setting,
+the `NODE_ENV`environment variable is set to `production`.
+This is desirable.
+Otherwise every time a new Tailwind CSS class is used,
+another Tailwind build is required, which slows development.
+
+To remove unused CSS classes regardless of the value of `NODE_ENV`,
 change the `purge` property in`tailwind.config.js` to the following:
 
 ```json
@@ -165,25 +197,20 @@ change the `purge` property in`tailwind.config.js` to the following:
 To minimize the generated CSS, including removing comments,
 in order to make it smaller:
 
-1. Enter `npm install -D cssnano @fullhuman/postcss-purgecss`
+1. Enter `npm install -D cssnano`
 
 1. Change the content of the `postcss.config.js` file to the following::
 
    ```js
    const cssnano = require('cssnano');
-   const purgecss = require('@fullhuman/postcss-purgecss');:
 
    module.exports = {
      plugins: [
        require('tailwindcss'),
-       require('autoprefixer')
+       require('autoprefixer'),
        cssnano({
          preset: 'default'
-       }),
-       purgecss({
-         content: ['./layouts/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
-         defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
-       });
+       })
      ]
    };
    ```
@@ -192,6 +219,18 @@ It may be desirable to only minimize CSS in production.
 To modify `postcss.config.js` to do this, see the end of {% aTargetBlank
 "https://flaviocopes.com/tailwind-setup/",
 "How to setup Tailwind with PurgeCSS and PostCSS" %}.
+
+## Serving Changes
+
+There are many approaches for serving a site from local files and
+automatically refresh the browser when changes are detected.
+One simple approach is to use {% aTargetBlank
+"https://github.com/tapio/live-server", "live-server" %}.
+
+To use this:
+
+1. Enter `npm install -g live-server`.
+1. Enter `live-server public` where `public` contains an `index.html` file.
 
 ## VS Code Support
 
@@ -208,7 +247,8 @@ hover over its name.
 A small color swatch is displayed in front of each
 Tailwind class name that represents a color.
 
-To enable Emmett completions of Tailwind CSS class names,
+To enable {% aTargetBlank "https://emmet.io/", "Emmett" %}
+completions of Tailwind CSS class names,
 add the following in the VS Code `settings.json` file:
 
 ```json
