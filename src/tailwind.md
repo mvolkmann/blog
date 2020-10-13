@@ -181,15 +181,71 @@ any time a file in the `src` directory changes:
    "watch": "watch 'npm run build:css' ./src"
    ```
 
-## Configuration
+## <a name="configuration">Configuration</a>
 
-To configure aspects of Tailwind,
-generate the file `tailwind.config.js` by entering `npx tailwindcss init`.
-For example, the provided classes can be customized to change
-colors, border sizes, breakpoints, font weights, shadows, and more.
+To see all the Tailwind properties that can be customized,
+create a new configuration file by entering `npx tailwindcss init --full`.
+This creates the file `tailwind.config.js`.
+You may wish to save this file for later reference rather.
+It's best not to edit this version of the file because it will be
+difficult to find properties that have been modified from their default values.
+Consider renaming it to `tailwind.config-full.js`.
 
-This file will define a `future` property whose value is an object
-with boolean properties that are commented out.
+Generate a new `tailwind.config.js` file by entering `npx tailwindcss init`
+and add customizations here.
+This file will be much shorter than the full version,
+making it easier to find your customizations.
+The values used by the provided CSS classes
+can be customized to change many things
+including colors, breakpoints, fonts, and more.
+
+To change the actual colors used when `white` and `black` are specified,
+modify the hex color values shown below::
+
+```js
+  theme: {
+    colors: {
+      black: "#000",
+      white: "#fff",
+```
+
+New, custom color names can be added. For example:
+
+```js
+  theme: {
+    colors: {
+      primary: "cornflowerblue",
+      secondary: "orange",
+```
+
+With these in place, we can use CSS class names like
+`bg-primary` and `text-secondary`.
+
+To change the responsive breakpoints, modify the values shown below:
+
+```js
+  theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px"
+    },
+```
+
+To change the fonts used with `sans`, `serif`, and `mono` are specified,
+modify the font name lists in the arrays below::
+
+```js
+    fontFamily: {
+      sans: [...],
+      serif: [...],
+      mono: [...]
+    },
+```
+
+The `tailwind.config.js` file defines a `future` property whose value
+is an object with boolean properties that are commented out.
 Uncomment these to get warnings about usage of features
 that will break in future releases.
 
@@ -290,18 +346,20 @@ add the following in the VS Code `settings.json` file:
 
 By default Tailwind uses the following responsive breakpoints:
 
-| Name | Width  |
-| ---- | ------ |
-| `sm` | 640px  |
-| `md` | 768px  |
-| `lg` | 1024px |
-| `xl` | 1280px |
+| Name | `min-width` |
+| ---- | ----------- |
+| `sm` | 640px       |
+| `md` | 768px       |
+| `lg` | 1024px      |
+| `xl` | 1280px      |
 
-These can be overridden by modifying the `tailwind.config.js` file.
+Since these specify `min-width` values, a mobile-first approach is used.
+Precede Tailwind CSS class names with a breakpoint name and a colon
+to only apply the CSS class when the screen width is
+equal to or greater than the corresponding `min-width` value.
 
-Precede Tailwind CSS class names with a breakpoint name and colon
-to only apply the CSS class with the screen width matches
-a given breakpoint or is larger.
+The breakpoint values can be overridden by modifying the `tailwind.config.js`
+file as shown in the [Configuration](#configuration) section.
 
 ## Directives
 
