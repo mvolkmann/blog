@@ -1,3 +1,11 @@
+body > footer {
+  & > a {
+    color: white;
+    margin-left: 2rem;
+    text-transform: uppercase;
+  }
+}
+
 body > main {
   display: flex;
   flex-direction: row;
@@ -77,13 +85,6 @@ body > main {
   }
 
   nav {
-    & > a {
-      display: block;
-      margin-left: 1rem;
-      margin-top: 1rem;
-      text-decoration: underline;
-    }
-
     & > ul {
       display: block;
 

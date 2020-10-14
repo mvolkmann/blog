@@ -48,13 +48,13 @@ such as those that support preprocessors like Sass.
 - **More concise**  
   Most Tailwind CSS classes define a single CSS property.
   For example, the CSS property `flex-direction: column;`
-  can be replace by the Tailwind class `flex-col`.
+  can be replaced by the Tailwind class `flex-col`.
 
-- **Removes need to think about specificity**
+- **Removes need to think about specificity**  
   Specificity is the technique used in CSS to determine which CSS class
   should be applied to an element when multiple classes can apply.
   Because Tailwind directly associates CSS classes with HTML elements,
-  those classes are always used, regardless of the specificity of other rules.
+  those classes are always used regardless of the specificity of other rules.
 
 - **Easier Responsive UIs**  
   Tailwind enables creating responsive UIs without writing media queries.
@@ -63,12 +63,12 @@ such as those that support preprocessors like Sass.
   For example: `md:flex-col` changes the `flex-direction` to `column`
   when the screen width is at or above the medium breakpoint.
 
-- **Configurable**
+- **Configurable**  
   Tailwind is highly configurable.
-  Default values can be overridden in a `tailwind.config.js` file.:
+  Default values can be overridden in a `tailwind.config.js` file.
 
-- **Supported by tools**
-  There are good Tailwind-aware extensions for many editors
+- **Supported by tools**  
+  There are good, Tailwind-aware extensions for many editors
   including VS Code, Sublime Text, Vim, and Atom.
 
 ## Cons
@@ -87,7 +87,7 @@ such as those that support preprocessors like Sass.
 - **Inability to override**  
   When Tailwind classes are used in components of frameworks
   (ex. React, Vue, Svelte, and Angular),
-  parent components cannot override the styling.
+  parent components cannot override their styling.
   For this reason it may be advisable to primarily use Tailwind
   for element layout and not for properties more likely
   to be overridden such as fonts and colors.

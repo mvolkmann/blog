@@ -8,7 +8,6 @@ layout: top-layout
 <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button>
 
 <nav>
-  {% aTargetBlank "https://tinyletter.com/mvolkmann", "subscribe" %}
   {{ renderNavList(collections.nav) | safe }}
 </nav>
 
