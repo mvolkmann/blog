@@ -571,6 +571,10 @@ In class names that include `-color`, `color` should be replaced by one of
 `gray`, `red`, `orange`, `yellow`, `green`,
 `teal`, `blue`, `indigo`, `purple`, or `pink`.
 
+In the "CSS Property" column of the tables below,
+lines where the property name start with `--` are
+setting the value of a CSS variables (a.k.a. CSS custom properties).
+
 ### Backgrounds
 
 | Class Name          | CSS Property                                                                             |
