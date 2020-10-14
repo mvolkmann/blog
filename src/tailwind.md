@@ -142,7 +142,7 @@ Highlights of the Preflight styles include:
 It is only necessary to rebuild the Tailwind-generated CSS
 when Tailwind directives have been modified or
 when the build process is configured to purge unused CSS rules
-and the Tailwind CSS classe being used have changed.
+and the Tailwind CSS classes being used have changed.
 Avoiding rebuilds speeds development.
 
 For details on configuring various build tools to support Tailwind, see
