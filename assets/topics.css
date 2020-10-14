@@ -1,3 +1,5 @@
+body > footer > a { color: white; margin-left: 2rem; text-transform: uppercase; }
+
 body > main { display: flex; flex-direction: row; overflow: hidden; padding: 0; }
 
 body > main .hamburger { display: none; }
@@ -25,8 +27,6 @@ body > main > section > iframe { border: none; box-sizing: border-box; height: 1
 body > main li.ordered > a:not(.active) { color: green; }
 
 body > main li.top > a { font-size: 1.2rem; font-weight: bold; }
-
-body > main nav > a { display: block; margin-left: 1rem; margin-top: 1rem; text-decoration: underline; }
 
 body > main nav > ul { display: block; }
 
