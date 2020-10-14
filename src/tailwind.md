@@ -114,7 +114,9 @@ The file `src/style.css` should, at a minimum, contain the following:
 @tailwind utilities;
 ```
 
-The build process will replace these directives with generated CSS.
+To build the required set of Tailwind CSS classes in `public/style.css`,
+enter `npm run build:css`.
+This will replace `@tailwind` directives above with generated CSS.
 The generated CSS file will contain:
 
 - {% aTargetBlank
@@ -129,33 +131,43 @@ Highlights of the Preflight styles include:
 
 - Default margins are removed from headings, paragraphs, and more.
 - Headings become unstyled, so they have the same
-  font-size and font-weight as normal text.
+  `font-size` and `font-weight` as normal text.
 - Lists become unstyled, so they have no bullets, numbers, margins, or padding.
 - Images become block-level instead of inline.
-- Borders become solid 1px using the default border color of the current theme.
+- Borders become `solid 1px` using the
+  default border color of the current theme.
 - Preflight styles can be overridden by defining CSS classes
   after `@tailwind base;`.
 
 It is only necessary to rebuild the Tailwind-generated CSS
 when Tailwind directives have been modified or
 when the build process is configured to purge unused CSS rules
-and the rules being used have changed.
-Avoid rebuilds speeds development.
+and the Tailwind CSS classe being used have changed.
+Avoiding rebuilds speeds development.
 
-For details on configuring various build tools to support Tailwind
+For details on configuring various build tools to support Tailwind, see
 {% aTargetBlank "https://tailwindcss.com/docs/installation",
-"Tailwind installation" %}.:
+"Tailwind installation" %}.
 
 ## PostCSS Build Process
 
-Building with PostCSS is only slightly more complicated.
+An advantage of using PostCSS to build the Tailwind CSS
+used by an application is that other PostCSS plugins can also be used.
 
-1. Enter `npm install -D postcss-cli autoprefixer@9.8.6`
+Building with PostCSS is only slightly more complicated.
+The steps to do this are:
+
+1. Install all the PostCSS plugins to be used. For example:
+
+   ```bash
+   npm install -D postcss-cli autoprefixer@9.8.6
+   ```
 
 1. Create the file `postcss.config.js` containing:
 
    ```js
    module.exports = {
+     // Include a require for each PostCSS plugin to be used here.
      plugins: [require('tailwindcss'), require('autoprefixer')]
    };
    ```
@@ -185,15 +197,13 @@ To see all the Tailwind properties that can be customized,
 create a new configuration file by entering `npx tailwindcss init --full`.
 This creates the file `tailwind.config.js`.
 You may wish to save this file for later reference.
-It's best not to edit this version of the file because it will be
-difficult to find properties that have been modified from their default values.
 Consider renaming it to `tailwind.config-full.js`.
 
 Generate a new `tailwind.config.js` file by entering `npx tailwindcss init`
 and add customizations here.
 This file will be much shorter than the full version,
 making it easier to find your customizations.
-The values used by the provided CSS classes
+Values used by the provided CSS classes
 can be customized to change many styling aspects
 including colors, breakpoints, fonts, and more.
 
@@ -210,7 +220,7 @@ add a `color` property to the `extend` property as follows:
 ```
 
 To define new, custom colors,
-add a `color` property to the `extend` property as follows:
+add `color` properties to the `extend` property as follows:
 
 ```js
   theme: {
@@ -224,7 +234,7 @@ add a `color` property to the `extend` property as follows:
 With these in place, we can use CSS class names like
 `bg-primary` and `text-secondary`.
 
-To change the responsive breakpoints, modify the values shown below:
+To change the responsive breakpoints, modify the values below:
 
 ```js
   theme: {
@@ -256,10 +266,10 @@ For example:
 
 ```js
   theme: {
-    ...
-    fontSize: {
-      "hero": "6rem"
-    },
+    extend: {
+      fontSize: {
+        "hero": "6rem"
+      },
 ```
 
 With this in place we can cause a header element to use it as follows:
@@ -276,25 +286,26 @@ that will break in future releases.
 ## Purging Unused CSS Classes
 
 The `purge` configuration property can be modified to purge unused CSS classes.
-If this is not done, the generate CSS file will be massive.
-As of 10/13/2020, the size is 2413.4K uncompressed, 1967.4K minified,
-190.2K gzipped, and 46.2K compressed with
+If this is not done, the generated CSS file will be massive.
+As of 10/13/2020, the size is 2413K uncompressed, 1967K minified,
+190K gzipped, and 46K compressed with
 {% aTargetBlank "https://github.com/google/brotli", "Brotli" %}.
 
 The `purge` property should be set to an array of glob patterns
 for file paths that can contain references to CSS classes.
-For example, `purge: ['./public/**/*.html']`.
 Tailwind will automatically check for
 references to Tailwind CSS classes in CSS files.
 
 By default, unused CSS classes are only removed when
-the `NODE_ENV`environment variable is set to `production`.
+the `NODE_ENV` environment variable is set to `production`.
 This is desirable.
 Otherwise every time a new Tailwind CSS class is used,
 another Tailwind build is required, which slows development.
 
 To remove unused CSS classes regardless of the value of `NODE_ENV`,
-change the `purge` property in`tailwind.config.js` to the following:
+set the `enabled` property in the `purge` object to `true`.
+
+For example, the `purge` property can be configured as follows::
 
 ```json
   purge: {
@@ -310,7 +321,7 @@ in order to make it smaller:
 
 1. Enter `npm install -D cssnano`
 
-1. Change the content of the `postcss.config.js` file to the following::
+1. Change the content of the `postcss.config.js` file to include :the following:
 
    ```js
    const cssnano = require('cssnano');
@@ -326,32 +337,33 @@ in order to make it smaller:
    };
    ```
 
-It may be desirable to only minimize CSS in production.
+It may be desirable to only minimize CSS in production builds.
 To modify `postcss.config.js` to do this, see the end of {% aTargetBlank
 "https://flaviocopes.com/tailwind-setup/",
 "How to setup Tailwind with PurgeCSS and PostCSS" %}.
 
 ## Serving Changes
 
-There are many approaches for serving a site from local files and
+There are many approaches to serve a site from local files and
 automatically refresh the browser when changes are detected.
 One simple approach is to use {% aTargetBlank
 "https://github.com/tapio/live-server", "live-server" %}.
 
-To use this:
+To use live-server:
 
-1. Enter `npm install -g live-server`.
+1. Enter `npm install -g live-server`
 1. Enter `live-server public` where `public` contains an `index.html` file.
 1. Browse localhost:8080.
 
 ## VS Code Support
 
-The VS Code extension "Tailwind CSS IntelliSense"
+The VS Code extension {% aTargetBlank
+"https://tailwindcss.com/docs/intellisense", "Tailwind CSS IntelliSense" %}
 provides autocomplete, syntax highlighting, and linting.
 
 While entering Tailwind CSS class names,
 a popup displays all matching names and their definitions.
-For example, entering "upp" displays "uppercase text-transform: uppercase".
+For example, entering "upp" displays "uppercase - text-transform: uppercase".
 
 To see the definition of a Tailwind CSS class that has already been entered,
 hover over its name.
@@ -359,7 +371,7 @@ hover over its name.
 A small color swatch is displayed in front of each
 Tailwind class name that represents a color.
 
-To enable {% aTargetBlank "https://emmet.io/", "Emmett" %}
+To enable {% aTargetBlank "https://emmet.io/", "Emmet" %}
 completions of Tailwind CSS class names,
 add the following in the VS Code `settings.json` file:
 
@@ -379,74 +391,78 @@ By default Tailwind uses the following responsive breakpoints:
 | `xl` | 1280px      |
 
 Since these specify `min-width` values, a mobile-first approach is used.
+
 Precede Tailwind CSS class names with a breakpoint name and a colon
-to only apply the CSS class when the screen width is
-equal to or greater than the corresponding `min-width` value.
+to only apply the CSS class when the screen/window width is
+greater than or equal to the corresponding `min-width` value.
+For example: `lg:m-4` applies a margin of `1rem` only if
+the screen/window width is greater than or equal to `1024px`.
 
 The breakpoint values can be overridden by modifying the `tailwind.config.js`
 file as shown in the [Configuration](#configuration) section.
 
-## Responsive Variants
-
-Tailwind class names can be prefixed with a breakpoint name
-to only apply the class when the screen/window width
-matches that breakpoint or larger.
-The breakpoint names are sm, md, lg, and xl.
-
-For example: `lg:m-4` applies a margin of `1rem`
-only if the screen/window width is greater than or equal to `1024px`.
-
 ## Pseudo-class Variants
 
-Tailwind supports many prefixes that can be added to before class names,
+Tailwind supports many prefixes that can be added before class names,
 separated by a colon, that cause the class to only be applied
 when a certain condition holds.
 
 | Variant         | Condition                                                                  |
 | --------------- | -------------------------------------------------------------------------- |
-| `active`        | element is active (ex. `<button>`)                                         |
-| `focus`         | form element (ex. `<input>`) has focus                                     |
-| `hover`         | mouse cursor is over the element                                           |
+| `active`        | element is active (ex. a `<button>` is being pressed)                      |
+| `checked`       | checkbox or radio button is checked                                        |
+| `disabled`      | form element is disabled                                                   |
+| `even-child`    | element is an event-numbered child of its parent (zero-based index is odd) |
+| `first-child`   | element is the first child of its parent                                   |
 | `focus-visible` | element has focus and the user is using a keyboard                         |
 | `focus-within`  | ancestor element has focus                                                 |
+| `focus`         | form element (ex. `<input>`) has focus                                     |
 | `group-focus`   | ancestor element has the `group` class and has focus                       |
 | `group-hover`   | hovering over an ancestor element that has the `group` class               |
-| `motion-safe`   | `prefers-reduced-motion` media feature matches `no-preference`             |
-| `motion-reduce` | `prefers-reduced-motion` media feature matches `reduce`                    |
-| `disabled`      | form element is disabled                                                   |
-| `visited`       | link (`<a>`) has been visited                                              |
-| `checked`       | checkbox or radio button is checked                                        |
-| `first-child`   | element is the first child of its parent                                   |
+| `hover`         | mouse cursor is over the element                                           |
 | `last-child`    | element is the last child of its parent                                    |
+| `motion-reduce` | `prefers-reduced-motion` media feature matches `reduce`                    |
+| `motion-safe`   | `prefers-reduced-motion` media feature matches `no-preference`             |
 | `odd-child`     | element is an odd-numbered child of its parent (zero-based index is even)  |
-| `even-child`    | element is an event-numbered child of its parent (zero-based index is odd) |
+| `visited`       | link (`<a>`) has been visited                                              |
 
 These prefixes can be combined with responsive prefixes.
 For example, `md:hover:border`.
 
 TODO: How can you enable a class when one of these conditions is NOT met?
 
-## Directives
+## Tailwind Directives
 
-Tailwind supports several directives.
+Tailwind supports several directives described below.
 
 ### `@apply`
 
 The {% aTargetBlank
 "https://tailwindcss.com/docs/functions-and-directives#apply",
-"`@apply`" %} directive is used in a CSS rule to
-include properties from any number of Tailwind classes
-in a custom CSS rule.
+"`@apply`" %} directive includes properties from
+any number of Tailwind classes in a custom CSS rule.
 This enables a set of Tailwind classes to be reused on several elements
 without repeating them.
 
-For example:
-TODO: Test this!
+For example, the following can be added to `src/style.css`
+after the `@tailwind` directives:
 
 ```css
-.my-alert {
-  @apply bg-red, rounded, text-white;
+@layer components {
+  .my-alert {
+    @apply bg-red-400 inline-block p-4 rounded-full text-2xl text-white;
+  }
 }
+```
+
+After a Tailwind build, the `my-alert` class can be used
+to apply the styling of all the Tailwind classes
+specified with the `@apply` directive.
+
+For example:
+
+```html
+<div class="my-alert">Alert! Something is wrong.</div>
 ```
 
 ### `@layer`
@@ -455,19 +471,39 @@ The {% aTargetBlank
 "https://tailwindcss.com/docs/functions-and-directives#layer",
 "`@layer`" %} directive is used to add custom CSS rules
 to a specific bucket of Tailwind CSS rules.
-TODO: Why is this useful?
 
 ### `@responsive`
 
 The {% aTargetBlank
 "https://tailwindcss.com/docs/functions-and-directives#responsive",
-"`@responsive`" %} directive is used ...
+"`@responsive`" %} directive generates
+responsive variants of custom CSS classes
+where the same styling is used for every breakpoint.
+To use different styling for some breakpoints,
+define media queries that override these.
 
 ### `@screen`
 
 The {% aTargetBlank
 "https://tailwindcss.com/docs/functions-and-directives#screen",
-"`@screen`" %} directive is used ...
+"`@screen`" %} directive creates a media query that utilizes
+a breakpoint value.
+For example, instead of writing a media query like this:
+
+```css
+@media (min-width: 768px) {
+  /* rules go here */
+}
+```
+
+it can be written as follows to use the `min-width` value
+specified for the `md` breakpoint:
+
+```css
+@screen md {
+  /* rules go here */
+}
+```
 
 ### `@tailwind`
 
@@ -485,7 +521,9 @@ The {% aTargetBlank
 generate variants of your own CSS classes that are responsive or
 are only used when an element is hovered over, has focus, or is active.
 
-## Functions
+## Tailwind Functions
+
+Tailwind currently provides a single function, `theme`.
 
 ### `theme` Function
 
@@ -502,6 +540,10 @@ in a custom CSS rule:
 }
 ```
 
+Note that the string passed to the `theme` function
+is a dot-separated path to a Tailwind configuration value,
+not the name of a Tailwind class.
+
 The rule above could also be written using the the `@apply` directive
 as follows:
 
@@ -512,7 +554,8 @@ as follows:
 ```
 
 The `theme` function is primarily useful when
-a value will be used in a calculation using the CSS `calc` function.
+a value will be used as part of a longer value
+or in a calculation using the CSS `calc` function.
 
 ## Provided CSS Classes
 
@@ -530,7 +573,7 @@ In class names that include `-color`, `color` should be replaced by one of
 
 ### Backgrounds
 
-| Name Prefix         | Description                                                                              |
+| Class Name          | CSS Property                                                                             |
 | ------------------- | ---------------------------------------------------------------------------------------- |
 | `bg-fixed`          | `background-attachment: fixed;`                                                          |
 | `bg-local`          | `background-attachment: local;`                                                          |
@@ -611,14 +654,16 @@ In the class names below, `side` can be one of the following:
 
 In the class names below, `corner` can be one of the following:
 
-| Corner Abbreviation | Corner Name  | CSS Properties Affected |
-| ------------------- | ------------ | ----------------------- |
-| `bl`                | bottom left  | `border-bottom-left`    |
-| `br`                | bottom right | `border-bottom-right`   |
-| `tl`                | top left     | `border-top-left`       |
-| `tr`                | top right    | `border-top-right`      |
+| Corner Abbreviation | Corner Name  | CSS Property Affected |
+| ------------------- | ------------ | --------------------- |
+| `bl`                | bottom left  | `border-bottom-left`  |
+| `br`                | bottom right | `border-bottom-right` |
+| `tl`                | top left     | `border-top-left`     |
+| `tr`                | top right    | `border-top-right`    |
 
-| Name Prefix                  | Description                                                                     |
+&nbsp;
+
+| Class Name                   | CSS Property                                                                    |
 | ---------------------------- | ------------------------------------------------------------------------------- |
 | `rounded-none`               | `border-radius: 0;`                                                             |
 | `rounded-sm`                 | `border-radius: 0.125rem;`                                                      |
@@ -675,7 +720,7 @@ In the class names below, `corner` can be one of the following:
 
 ### <a name="box-alignment">Box Alignment</a>
 
-| Name Prefix             | Description                       |
+| Name Prefix             | CSS Property                      |
 | ----------------------- | --------------------------------- |
 | `content-center`        | `align-content: center;`          |
 | `content-start`         | `align-content: flex-start;`      |
@@ -737,14 +782,14 @@ In the class names below, `corner` can be one of the following:
 
 ### Box Sizing
 
-| Name Prefix   | Description                |
+| Name Prefix   | CSS Property               |
 | ------------- | -------------------------- |
 | `box-border`  | `box-sizing: border-box;`  |
 | `box-content` | `box-sizing: content-box;` |
 
 ### Container
 
-| Name Prefix | Description                                                                      |
+| Name Prefix | Effect                                                                           |
 | ----------- | -------------------------------------------------------------------------------- |
 | `container` | sets max-width to breakpoint size or<br>width to 100% if no breakpoint specified |
 
@@ -752,7 +797,7 @@ For example, `lg:container`.
 
 ### Display
 
-| Name Prefix          | Description                    |
+| Name Prefix          | CSS Property                   |
 | -------------------- | ------------------------------ |
 | `block`              | `display: block;`              |
 | `inline-block`       | `display: inline-block;`       |
@@ -768,7 +813,7 @@ For example, `lg:container`.
 
 ### Effects
 
-| Name Prefix      | Description                                            |
+| Name Prefix      | CSS Property                                           |
 | ---------------- | ------------------------------------------------------ |
 | `opacity-n`      | `opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100 |
 |                  |                                                        |
@@ -785,7 +830,7 @@ For example, `lg:container`.
 
 ### Flexbox
 
-| Name Prefix         | Description                         |
+| Name Prefix         | CSS Property                        |
 | ------------------- | ----------------------------------- |
 | `flex-1`            | `flex: 1 1 0%;`                     |
 | `flex-auto`         | `flex: 1 1 auto;`                   |
@@ -809,7 +854,7 @@ Also see the classes in the
 
 ### Floats and Clear
 
-| Name Prefix   | Description                                             |
+| Name Prefix   | CSS Property                                            |
 | ------------- | ------------------------------------------------------- |
 | `clear-both`  | `clear: both;`                                          |
 | `clear-left`  | `clear: left;`                                          |
@@ -822,7 +867,7 @@ Also see the classes in the
 
 ### Grid
 
-| Name Prefix           | Description                                                                 |
+| Name Prefix           | CSS Property                                                                |
 | --------------------- | --------------------------------------------------------------------------- |
 | `col-auto`            | `grid-column: auto`                                                         |
 | `col-span-{n}`        | `grid-column: span {n} / span {n}`<br>where n is 1 to 11                    |
@@ -840,7 +885,7 @@ Also see the classes in the
 
 ### Interactivity
 
-| Name Prefix           | Description             |
+| Name Prefix           | CSS Property            |
 | --------------------- | ----------------------- |
 | `appearance-none`     | `appearance: none;`     |
 |                       |                         |
@@ -869,7 +914,7 @@ Also see the classes in the
 
 ### Object Fit
 
-| Name Prefix         | Description               |
+| Name Prefix         | CSS Property              |
 | ------------------- | ------------------------- |
 | `object-contain`    | `object-fit: contain;`    |
 | `object-cover`      | `object-fit: cover;`      |
@@ -879,7 +924,7 @@ Also see the classes in the
 
 ### Object Position
 
-| Name Prefix           | Description                      |
+| Name Prefix           | CSS Property                     |
 | --------------------- | -------------------------------- |
 | `object-bottom`       | `object-position: bottom;`       |
 | `object-center`       | `object-position: center;`       |
@@ -893,7 +938,7 @@ Also see the classes in the
 
 ### Overflow
 
-| Name Prefix          | Description            |
+| Name Prefix          | CSS Property           |
 | -------------------- | ---------------------- |
 | `overflow-auto`      | `overflow: auto;`      |
 | `overflow-hidden`    | `overflow: hidden;`    |
@@ -910,7 +955,7 @@ Also see the classes in the
 
 ### Overscroll Behavior
 
-| Name Prefix            | Description                       |
+| Name Prefix            | CSS Property                      |
 | ---------------------- | --------------------------------- |
 | `overscroll-auto`      | `overscroll-behavior: auto;`      |
 | `overscroll-contain`   | `overscroll-behavior: contain;`   |
@@ -924,7 +969,7 @@ Also see the classes in the
 
 ### Position
 
-| Name Prefix    | Description                                         |
+| Name Prefix    | CSS Property                                        |
 | -------------- | --------------------------------------------------- |
 | `absolute`     | `position: absolute;`                               |
 | `fixed`        | `position: fixed;`                                  |
@@ -948,7 +993,7 @@ Also see the classes in the
 
 ### Sizing
 
-| Name Prefix    | Description                                                    |
+| Name Prefix    | CSS Property                                                   |
 | -------------- | -------------------------------------------------------------- |
 | `h-{n}`        | `height: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20 |
 | `w-{n}`        | `width: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20  |
@@ -978,7 +1023,7 @@ Also see the classes in the
 
 ### Spacing
 
-| Name Prefix   | Description                                                                      |
+| Name Prefix   | CSS Property                                                                     |
 | ------------- | -------------------------------------------------------------------------------- |
 | `m-{n}`       | `margin: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                   |
 | `mx-*`        | `margin-left: {n}*0.25rem; margin-right: {n}*0.25rem;`<br>where n = 0, 1, or 2   |
@@ -991,7 +1036,7 @@ Also see the classes in the
 
 ### SVG
 
-| Name Prefix      | Description                                |
+| Name Prefix      | CSS Property                               |
 | ---------------- | ------------------------------------------ |
 | `fill-current`   | `fill: currentColor;`                      |
 | `stroke-current` | `stroke: currentColor;`                    |
@@ -999,7 +1044,7 @@ Also see the classes in the
 
 ### Tables
 
-| Name Prefix       | Description                  |
+| Name Prefix       | CSS Property                 |
 | ----------------- | ---------------------------- |
 | `border-collapse` | `border-collapse: collapse;` |
 | `border-separate` | `border-collapse: separate;` |
@@ -1012,7 +1057,7 @@ Also see the classes in the
 In all the classes in this section, `n` can be
 0, 50, 75, 90, 95, 100, 105, 110, 125, or 150.
 
-| Name Prefix           | Description                                                                                              |
+| Name Prefix           | CSS Property                                                                                             |
 | --------------------- | -------------------------------------------------------------------------------------------------------- |
 | `scale-{n}`           | `--transform-scale-x: {n}/100; --transform-scale-y: {n}/100;`                                            |
 | `scale-x-{n}`         | `--transform-scale-x: {n}/100;`                                                                          |
@@ -1047,7 +1092,7 @@ In all the classes in this section, `n` can be
 
 ### Transitions and Animation
 
-| Name Prefix            | Description                                                                                                            |
+| Name Prefix            | CSS Property                                                                                                           |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `transition`           | `transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;`            |
 | `transition-all`       | `transition-property: all;`                                                                                            |
@@ -1071,7 +1116,7 @@ In all the classes in this section, `n` can be
 
 ### Typography/Fonts
 
-| Name Prefix               | Description                                                              |
+| Name Prefix               | CSS Property                                                             |
 | ------------------------- | ------------------------------------------------------------------------ |
 | `font-sans`               | `font-family: boat load of san serif fonts;`<br>includes Arial           |
 | `font-serif`              | `font-family: boat load of serif fonts;`<br>includes Times New Roman     |
@@ -1187,14 +1232,14 @@ For example, `text-red` is not a valid Tailwind CSS class name.:
 
 ### Visibility
 
-| Name Prefix | Description            |
+| Name Prefix | CSS Property           |
 | ----------- | ---------------------- |
 | `invisible` | `visibility: hidden;`  |
 | `visible`   | `visibility: visible;` |
 
 ### Z-Index
 
-| Name Prefix | Description                                            |
+| Name Prefix | CSS Property                                           |
 | ----------- | ------------------------------------------------------ |
 | `z-{n}`     | `z-index: {n};`<br>where n is 0, 10, 20, 30, 40, or 50 |
 | `z-auto`    | `z-index: auto;`                                       |
