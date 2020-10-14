@@ -789,19 +789,19 @@ In the class names below, `corner` can be one of the following:
 
 ### Container
 
-| Name Prefix | Effect                                                                           |
-| ----------- | -------------------------------------------------------------------------------- |
-| `container` | sets max-width to breakpoint size or<br>width to 100% if no breakpoint specified |
+| Name Prefix | Effect                                                                                 |
+| ----------- | -------------------------------------------------------------------------------------- |
+| `container` | sets `max-width` to breakpoint size or<br>`width` to `100%` if no breakpoint specified |
 
-For example, `lg:container`.
+For example, `lg:container` or `container`.
 
 ### Display
 
 | Name Prefix          | CSS Property                   |
 | -------------------- | ------------------------------ |
 | `block`              | `display: block;`              |
-| `inline-block`       | `display: inline-block;`       |
 | `inline`             | `display: inline;`             |
+| `inline-block`       | `display: inline-block;`       |
 | `flex`               | `display: flex;`               |
 | `inline-flex`        | `display: inline-flex;`        |
 | `table`              | `display: table;`              |
@@ -812,6 +812,10 @@ For example, `lg:container`.
 | `table-header-group` | `display: table-header-group;` |
 
 ### Effects
+
+The `box-shadow` values set by the `shadow` classes
+are somewhat complicated. For details see the {% aTargetBlank
+"https://tailwindcss.com/docs/box-shadow", "Box Shadow" %} docs.
 
 | Name Prefix      | CSS Property                                           |
 | ---------------- | ------------------------------------------------------ |
@@ -850,9 +854,9 @@ For example, `lg:container`.
 | `order-{n}`         | `order: {n};`<br>where n is 1 to 12 |
 
 Also see the classes in the
-["Box Alignment"](#box-alignment) category.
+[Box Alignment](#box-alignment) category.
 
-### Floats and Clear
+### Float and Clear
 
 | Name Prefix   | CSS Property                                            |
 | ------------- | ------------------------------------------------------- |
@@ -867,21 +871,43 @@ Also see the classes in the
 
 ### Grid
 
-| Name Prefix           | CSS Property                                                                |
-| --------------------- | --------------------------------------------------------------------------- |
-| `col-auto`            | `grid-column: auto`                                                         |
-| `col-span-{n}`        | `grid-column: span {n} / span {n}`<br>where n is 1 to 11                    |
-| `gap-{n}`             | `gap: {n}`<br>where n is 0 to 8, 10, 12, 16, or 20                          |
-| `grid-cols-{n}`       | `grid-template-columns: repeat({n}, minmax(0, 1fr));`<br>where n is 1 to 12 |
-| `grid-rows-{n}`       | `grid-template-rows: repeat({n}, minmax(0, 1fr));`<br>where n is 1 to 6     |
-| `grid-rows-none`      | `grid-template-rows: none;`                                                 |
-| `grid-flow-col`       | `grid-auto-flow: column`                                                    |
-| `grid-flow-col-dense` | `grid-auto-flow: column dense`                                              |
-| `grid-flow-row`       | `grid-auto-flow: row`                                                       |
-| `grid-flow-row-dense` | `grid-auto-flow: row dense`                                                 |
-| `row-auto`            | `grid-row: auto`                                                            |
-| `row-span-{n}`        | `grid-row: span {n} / span {n}`<br>where n is 1 to 6                        |
-| `row-start-{n}`       | `grid-row-start: {n}`<br>where n is 1 to 5                                  |
+| Name Prefix           | CSS Property                                                                                 |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| `auto-cols-auto`      | `grid-auto-columns: auto`                                                                    |
+| `auto-cols-fr`        | `grid-auto-columns: minmax(0, 1fr)`                                                          |
+| `auto-cols-max`       | `grid-auto-columns: max-content`                                                             |
+| `auto-cols-min`       | `grid-auto-columns: min-content`                                                             |
+| `auto-rows-auto`      | `grid-auto-rows: auto`                                                                       |
+| `auto-rows-fr`        | `grid-auto-rows: minmax(0, 1fr)`                                                             |
+| `auto-rows-max`       | `grid-auto-rows: max-content`                                                                |
+| `auto-rows-min`       | `grid-auto-rows: min-content`                                                                |
+| `col-auto`            | `grid-column: auto`                                                                          |
+| `col-end-{n}`         | `grid-column-end: {n}`<br>where n is 1 to 13                                                 |
+| `col-end-auto`        | `grid-column-end: auto`                                                                      |
+| `col-span-{n}`        | `grid-column: span {n} / span {n}`<br>where n is 1 to 12                                     |
+| `col-span-full`       | `grid-column: 1 / -1`                                                                        |
+| `col-start-{n}`       | `grid-column-start: {n}`<br>where n is 1 to 13                                               |
+| `col-start-auto`      | `grid-column-start: auto`                                                                    |
+| `gap-{n}`             | `gap: {n}`<br>where n is 0 to 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, or 64                   |
+| `gap-px`              | `gap: 1px`                                                                                   |
+| `gap-x-{n}`           | `column-gap: {n}*0.25rem`<br>where n is 0 to 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, or 64 |
+| `gap-x-px`            | `column-gap: 1px`                                                                            |
+| `gap-y-{n}`           | `row-gap: {n}*0.25rem`<br>where n is 0 to 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, or 64    |
+| `gap-y-px`            | `row-gap: 1px`                                                                               |
+| `grid-cols-{n}`       | `grid-template-columns: repeat({n}, minmax(0, 1fr));`<br>where n is 1 to 12                  |
+| `grid-cols-none`      | `grid-template-columns: none;`                                                               |
+| `grid-flow-col-dense` | `grid-auto-flow: column dense`                                                               |
+| `grid-flow-col`       | `grid-auto-flow: column`                                                                     |
+| `grid-flow-row-dense` | `grid-auto-flow: row dense`                                                                  |
+| `grid-flow-row`       | `grid-auto-flow: row`                                                                        |
+| `grid-rows-{n}`       | `grid-template-rows: repeat({n}, minmax(0, 1fr));`<br>where n is 1 to 6                      |
+| `grid-rows-none`      | `grid-template-rows: none;`                                                                  |
+| `row-auto`            | `grid-row: auto`                                                                             |
+| `row-end-{n}`         | `grid-row-end: {n}`<br>where n is 1 to 7                                                     |
+| `row-end-auto`        | `grid-row-end: auto`                                                                         |
+| `row-span-{n}`        | `grid-row: span {n} / span {n}`<br>where n is 1 to 6                                         |
+| `row-start-{n}`       | `grid-row-start: {n}`<br>where n is 1 to 7                                                   |
+| `row-start-auto`      | `grid-row-start: auto`                                                                       |
 
 ### Interactivity
 
@@ -1023,7 +1049,7 @@ Also see the classes in the
 
 ### Spacing
 
-| Name Prefix   | CSS Property                                                                     |
+| Name Prefix   | CSS Properties                                                                   |
 | ------------- | -------------------------------------------------------------------------------- |
 | `m-{n}`       | `margin: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                   |
 | `mx-*`        | `margin-left: {n}*0.25rem; margin-right: {n}*0.25rem;`<br>where n = 0, 1, or 2   |
@@ -1054,7 +1080,7 @@ Also see the classes in the
 
 ### Transforms
 
-In all the classes in this section, `n` can be
+For all the classes in this section, `n` can be
 0, 50, 75, 90, 95, 100, 105, 110, 125, or 150.
 
 | Name Prefix           | CSS Property                                                                                             |
@@ -1075,7 +1101,7 @@ In all the classes in this section, `n` can be
 | `translate-x-1/2`     | `--transform-translate-x: 50%;`                                                                          |
 | `-translate-x-1/2`    | `--transform-translate-x: -50%;`                                                                         |
 |                       |                                                                                                          |
-| `translate-y-{above}` | `--transform-translate-y: ...;`;<br>all the same variations as for `x` above                             |
+| `translate-y-{above}` | `--transform-translate-y: ...;`<br>all the same variations as for `x` above                              |
 |                       |                                                                                                          |
 | `skew-x-{n}`          | `--transform-skew-x: {n}deg;`<br>where n is 0, 3, 6, or 12                                               |
 | `-skew-x-{n}`         | `--transform-skew-x: {n}deg;`<br>where n is 3, 6, or 12                                                  |
@@ -1092,143 +1118,147 @@ In all the classes in this section, `n` can be
 
 ### Transitions and Animation
 
-| Name Prefix            | CSS Property                                                                                                           |
+The `animation` and `@keyframe` values set by the `animate` classes
+are somewhat complicated. For details see the {% aTargetBlank
+"https://tailwindcss.com/docs/animation", "Animation" %} docs.
+:
+| Name Prefix | CSS Property |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `transition`           | `transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;`            |
-| `transition-all`       | `transition-property: all;`                                                                                            |
-| `transition-colors`    | `transition-property: background-color, border-color, color, fill, stroke;`                                            |
-| `transition-none`      | `transition-property: none;`                                                                                           |
-| `transition-opacity`   | `transition-property: opacity;`                                                                                        |
-| `transition-shadow`    | `transition-property: box-shadow;`                                                                                     |
-| `transition-transform` | `transition-property: transform;`                                                                                      |
-|                        |                                                                                                                        |
-| `duration-{n}`         | `transition-duration: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000                                  |
-|                        |                                                                                                                        |
-| `ease-linear`          | `transition-timing-function: linear;`                                                                                  |
-| `ease-in`              | `transition-timing-function: cubic-bezier(0.4, 0, 1, 1);`                                                              |
-| `ease-out`             | `transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`                                                              |
-| `ease-in-out`          | `transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);`                                                            |
-|                        |                                                                                                                        |
-| `delay-{n}`            | `transition-delay: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000                                     |
-|                        |                                                                                                                        |
-| `animate-none`         | `animation: none;`                                                                                                     |
-| `animate-{effect}`     | `animation: {effect} ...; @keyframes {effect} {...}`<br>where effect is `bounce`, `ping`, `pulse` or, `spin`; see docs |
+| `transition` | `transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;` |
+| `transition-all` | `transition-property: all;` |
+| `transition-colors` | `transition-property: background-color, border-color, color, fill, stroke;` |
+| `transition-none` | `transition-property: none;` |
+| `transition-opacity` | `transition-property: opacity;` |
+| `transition-shadow` | `transition-property: box-shadow;` |
+| `transition-transform` | `transition-property: transform;` |
+| | |
+| `duration-{n}` | `transition-duration: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000 |
+| | |
+| `ease-linear` | `transition-timing-function: linear;` |
+| `ease-in` | `transition-timing-function: cubic-bezier(0.4, 0, 1, 1);` |
+| `ease-out` | `transition-timing-function: cubic-bezier(0, 0, 0.2, 1);` |
+| `ease-in-out` | `transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);` |
+| | |
+| `delay-{n}` | `transition-delay: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000 |
+| | |
+| `animate-none` | `animation: none;` |
+| `animate-{effect}` | `animation: {effect} ...; @keyframes {effect} {...}`<br>where effect is `bounce`, `ping`, `pulse` or, `spin`; see docs |
 
 ### Typography/Fonts
 
-| Name Prefix               | CSS Property                                                             |
-| ------------------------- | ------------------------------------------------------------------------ |
-| `font-sans`               | `font-family: boat load of san serif fonts;`<br>includes Arial           |
-| `font-serif`              | `font-family: boat load of serif fonts;`<br>includes Times New Roman     |
-| `font-mono`               | `font-family: boat load of monospace fonts;`<br>includes Courier New     |
-|                           |                                                                          |
-| `text-xs`                 | `font-size: 0.75rem;`                                                    |
-| `text-sm`                 | `font-size: 0.875rem;`                                                   |
-| `text-base`               | `font-size: 1rem;`<br>Why not named `text-md`?                           |
-| `text-lg`                 | `font-size: 1.125rem;`                                                   |
-| `text-xl`                 | `font-size: 1.25rem;`                                                    |
-| `text-2xl`                | `font-size: 1.5rem;`                                                     |
-| `text-3xl`                | `font-size: 1.875rem;`                                                   |
-| `text-4xl`                | `font-size: 2.25rem;`                                                    |
-| `text-5xl`                | `font-size: 3rem;`                                                       |
-| `text-6xl`                | `font-size: 4rem;`                                                       |
-|                           |                                                                          |
-| `antialiased`             | `font-smoothing` with vendor-specific prefixes and values                |
-| `subpixel-antialiased`    | `font-smoothing: antialiased;` with vendor-specific prefixes and values  |
-|                           |                                                                          |
-| `italic`                  | `font-style: italic;`                                                    |
-| `not-italic`              | `font-style: normal;`<br>weird class name!                               |
-|                           |                                                                          |
-| `font-hairline`           | `font-weight: 100;`                                                      |
-| `font-thin`               | `font-weight: 200;`                                                      |
-| `font-light`              | `font-weight: 300;`                                                      |
-| `font-normal`             | `font-weight: 400;`                                                      |
-| `font-medium`             | `font-weight: 500;`                                                      |
-| `font-semibold`           | `font-weight: 600;`                                                      |
-| `font-bold`               | `font-weight: 700;`                                                      |
-| `font-extrabold`          | `font-weight: 800;`                                                      |
-| `font-black`              | `font-weight: 900;`                                                      |
-|                           |                                                                          |
-| `normal-nums`             | `font-variant-numeric: normal;`                                          |
-| `ordinal`                 | `font-variant-numeric: ordinal;`                                         |
-| `slashed-zero`            | `font-variant-numeric: slashed-zero;`                                    |
-| `lining-nums`             | `font-variant-numeric: lining-nums;`                                     |
-| `oldstyle-nums`           | `font-variant-numeric: oldstyle-nums;`                                   |
-| `proportional-nums`       | `font-variant-numeric: proportional-nums;`                               |
-| `tabular-nums`            | `font-variant-numeric: tabular-nums;`                                    |
-| `diagonal-fractions`      | `font-variant-numeric: diagonal-fractions;`                              |
-| `stacked-fractions`       | `font-variant-numeric: stacked-fractions;`                               |
-|                           |                                                                          |
-| `tracking-tighter`        | `letter-spacing: -0.05em;`                                               |
-| `tracking-tight`          | `letter-spacing: -0.025em;`                                              |
-| `tracking-normal`         | `letter-spacing: 0em;`                                                   |
-| `tracking-wide`           | `letter-spacing: 0.025em;`                                               |
-| `tracking-wider`          | `letter-spacing: 0.05em;`                                                |
-| `tracking-widest`         | `letter-spacing: 0.1em;`                                                 |
-|                           |                                                                          |
-| `leading-{n}`             | `line-height: {n}*0.25rem;`<br>where n = 3 to 10                         |
-| `leading-none`            | `line-height: 1;`                                                        |
-| `leading-tight`           | `line-height: 1.25rem;`                                                  |
-| `leading-snug`            | `line-height: 1.375rem;`                                                 |
-| `leading-normal`          | `line-height: 1.5rem;`                                                   |
-|                           |                                                                          |
-| `list-none`               | `list-style-type: none;`                                                 |
-| `list-disc`               | `list-style-type: disc;`                                                 |
-| `list-decimal`            | `list-style-type: decimal;`                                              |
-|                           |                                                                          |
-| `list-inside`             | `list-style-position: inside;`                                           |
-| `list-outside`            | `list-style-position: outside;`                                          |
-|                           |                                                                          |
-| `placeholder-transparent` | `color: transparent;`                                                    |
-| `placeholder-current`     | `color: currentColor;`                                                   |
-| `placeholder-black`       | `color: #000;`                                                           |
-| `placeholder-white`       | `color: #fff;`                                                           |
-| `placeholder-{color}-{n}` | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
-|                           |                                                                          |
-| `placeholder-opacity-{n}` | `--placeholder-opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100     |
-|                           |                                                                          |
-| `text-center`             | `text-align: center;`                                                    |
-| `text-justify`            | `text-align: justify;`                                                   |
-| `text-left`               | `text-align: left;`                                                      |
-| `text-right`              | `text-align: right;`                                                     |
-|                           |                                                                          |
-| `text-black`              | `color: #000;`                                                           |
-| `text-current`            | `color: currentColor;`                                                   |
-| `text-{color}-{n}`        | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100 |
-| `text-transparent`        | `color: transparent;`                                                    |
-| `text-white`              | `color: #fff;`                                                           |
-|                           |                                                                          |
-| `text-opacity-{n}`        | `--text-opacity: {n}/100;`<br>where n is 0, 25, 50, 75, or 100           |
-|                           |                                                                          |
-| `line-through`            | `text-decoration: line-through;`                                         |
-| `no-underline`            | `text-decoration: none;`                                                 |
-| `underline`               | `text-decoration: underline;`                                            |
-|                           |                                                                          |
-| `capitalize`              | `text-transform: capitalize;`                                            |
-| `lowercase`               | `text-transform: lowercase;`                                             |
-| `normal-case`             | `text-transform: none;`                                                  |
-| `uppercase`               | `text-transform: uppercase;`                                             |
-|                           |                                                                          |
-| `align-baseline`          | `vertical-align: baseline;`                                              |
-| `align-bottom`            | `vertical-align: bottom;`                                                |
-| `align-middle`            | `vertical-align: middle;`                                                |
-| `align-text-bottom`       | `vertical-align: text-bottom;`                                           |
-| `align-text-top`          | `vertical-align: text-top;`                                              |
-| `align-top`               | `vertical-align: top;`                                                   |
-|                           |                                                                          |
-| `whitespace-no-wrap`      | `white-space: nowrap;`                                                   |
-| `whitespace-normal`       | `white-space: normal;`                                                   |
-| `whitespace-pre-line`     | `white-space: pre-line;`                                                 |
-| `whitespace-pre-wrap`     | `white-space: pre-wrap;`                                                 |
-| `whitespace-pre`          | `white-space: pre;`                                                      |
-|                           |                                                                          |
-| `break-all`               | `word-break: break-all;`                                                 |
-| `break-normal`            | `overflow-wrap: normal; word-break: normal;`                             |
-| `break-words`             | `overflow-wrap: break-word;`                                             |
-| `truncate`                | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`        |
-
 In the class name `text-{color}-{n}`, a number is required at the end.
-For example, `text-red` is not a valid Tailwind CSS class name.:
+For example, `text-red` is not a valid Tailwind CSS class name.
+
+| Name Prefix               | CSS Property                                                                |
+| ------------------------- | --------------------------------------------------------------------------- |
+| `font-sans`               | `font-family: boatload of san serif fonts;`<br>includes Arial               |
+| `font-serif`              | `font-family: boatload of serif fonts;`<br>includes Times New Roman         |
+| `font-mono`               | `font-family: boatload of monospace fonts;`<br>includes Courier New         |
+|                           |                                                                             |
+| `text-xs`                 | `font-size: 0.75rem;`                                                       |
+| `text-sm`                 | `font-size: 0.875rem;`                                                      |
+| `text-base`               | `font-size: 1rem;`<br>Why not named `text-md`?                              |
+| `text-lg`                 | `font-size: 1.125rem;`                                                      |
+| `text-xl`                 | `font-size: 1.25rem;`                                                       |
+| `text-2xl`                | `font-size: 1.5rem;`                                                        |
+| `text-3xl`                | `font-size: 1.875rem;`                                                      |
+| `text-4xl`                | `font-size: 2.25rem;`                                                       |
+| `text-5xl`                | `font-size: 3rem;`                                                          |
+| `text-6xl`                | `font-size: 4rem;`                                                          |
+|                           |                                                                             |
+| `antialiased`             | `font-smoothing`<br>with vendor-specific prefixes and values                |
+| `subpixel-antialiased`    | `font-smoothing: antialiased;`<br>with vendor-specific prefixes and values  |
+|                           |                                                                             |
+| `italic`                  | `font-style: italic;`                                                       |
+| `not-italic`              | `font-style: normal;`<br>odd class name!                                    |
+|                           |                                                                             |
+| `font-hairline`           | `font-weight: 100;`                                                         |
+| `font-thin`               | `font-weight: 200;`                                                         |
+| `font-light`              | `font-weight: 300;`                                                         |
+| `font-normal`             | `font-weight: 400;`                                                         |
+| `font-medium`             | `font-weight: 500;`                                                         |
+| `font-semibold`           | `font-weight: 600;`                                                         |
+| `font-bold`               | `font-weight: 700;`                                                         |
+| `font-extrabold`          | `font-weight: 800;`                                                         |
+| `font-black`              | `font-weight: 900;`                                                         |
+|                           |                                                                             |
+| `normal-nums`             | `font-variant-numeric: normal;`                                             |
+| `ordinal`                 | `font-variant-numeric: ordinal;`                                            |
+| `slashed-zero`            | `font-variant-numeric: slashed-zero;`                                       |
+| `lining-nums`             | `font-variant-numeric: lining-nums;`                                        |
+| `oldstyle-nums`           | `font-variant-numeric: oldstyle-nums;`                                      |
+| `proportional-nums`       | `font-variant-numeric: proportional-nums;`                                  |
+| `tabular-nums`            | `font-variant-numeric: tabular-nums;`                                       |
+| `diagonal-fractions`      | `font-variant-numeric: diagonal-fractions;`                                 |
+| `stacked-fractions`       | `font-variant-numeric: stacked-fractions;`                                  |
+|                           |                                                                             |
+| `tracking-tighter`        | `letter-spacing: -0.05em;`                                                  |
+| `tracking-tight`          | `letter-spacing: -0.025em;`                                                 |
+| `tracking-normal`         | `letter-spacing: 0em;`                                                      |
+| `tracking-wide`           | `letter-spacing: 0.025em;`                                                  |
+| `tracking-wider`          | `letter-spacing: 0.05em;`                                                   |
+| `tracking-widest`         | `letter-spacing: 0.1em;`                                                    |
+|                           |                                                                             |
+| `leading-{n}`             | `line-height: {n}*0.25rem;`<br>where n = 3 to 10                            |
+| `leading-none`            | `line-height: 1;`                                                           |
+| `leading-tight`           | `line-height: 1.25rem;`                                                     |
+| `leading-snug`            | `line-height: 1.375rem;`                                                    |
+| `leading-normal`          | `line-height: 1.5rem;`                                                      |
+|                           |                                                                             |
+| `list-none`               | `list-style-type: none;`                                                    |
+| `list-disc`               | `list-style-type: disc;`                                                    |
+| `list-decimal`            | `list-style-type: decimal;`                                                 |
+|                           |                                                                             |
+| `list-inside`             | `list-style-position: inside;`                                              |
+| `list-outside`            | `list-style-position: outside;`                                             |
+|                           |                                                                             |
+| `placeholder-transparent` | `color: transparent;`                                                       |
+| `placeholder-current`     | `color: currentColor;`                                                      |
+| `placeholder-black`       | `color: #000;`                                                              |
+| `placeholder-white`       | `color: #fff;`                                                              |
+| `placeholder-{color}-{n}` | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100    |
+|                           |                                                                             |
+| `placeholder-opacity-{n}` | `--placeholder-opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100        |
+|                           |                                                                             |
+| `text-center`             | `text-align: center;`                                                       |
+| `text-justify`            | `text-align: justify;`                                                      |
+| `text-left`               | `text-align: left;`                                                         |
+| `text-right`              | `text-align: right;`                                                        |
+|                           |                                                                             |
+| `text-black`              | `color: #000;`                                                              |
+| `text-current`            | `color: currentColor;`                                                      |
+| `text-{color}-{n}`        | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100    |
+| `text-transparent`        | `color: transparent;`                                                       |
+| `text-white`              | `color: #fff;`                                                              |
+|                           |                                                                             |
+| `text-opacity-{n}`        | `--text-opacity: {n}/100;`<br>where n is 0, 25, 50, 75, or 100              |
+|                           |                                                                             |
+| `line-through`            | `text-decoration: line-through;`                                            |
+| `no-underline`            | `text-decoration: none;`                                                    |
+| `underline`               | `text-decoration: underline;`                                               |
+|                           |                                                                             |
+| `capitalize`              | `text-transform: capitalize;`                                               |
+| `lowercase`               | `text-transform: lowercase;`                                                |
+| `normal-case`             | `text-transform: none;`                                                     |
+| `uppercase`               | `text-transform: uppercase;`                                                |
+|                           |                                                                             |
+| `align-baseline`          | `vertical-align: baseline;`                                                 |
+| `align-bottom`            | `vertical-align: bottom;`                                                   |
+| `align-middle`            | `vertical-align: middle;`                                                   |
+| `align-text-bottom`       | `vertical-align: text-bottom;`                                              |
+| `align-text-top`          | `vertical-align: text-top;`                                                 |
+| `align-top`               | `vertical-align: top;`                                                      |
+|                           |                                                                             |
+| `whitespace-no-wrap`      | `white-space: nowrap;`                                                      |
+| `whitespace-normal`       | `white-space: normal;`                                                      |
+| `whitespace-pre-line`     | `white-space: pre-line;`                                                    |
+| `whitespace-pre-wrap`     | `white-space: pre-wrap;`                                                    |
+| `whitespace-pre`          | `white-space: pre;`                                                         |
+|                           |                                                                             |
+| `break-all`               | `word-break: break-all;`                                                    |
+| `break-normal`            | `overflow-wrap: normal; word-break: normal;`                                |
+| `break-words`             | `overflow-wrap: break-word;`                                                |
+| `truncate`                | `overflow: hidden;`<br>`text-overflow: ellipsis;`<br>`white-space: nowrap;` |
 
 ### Visibility
 
