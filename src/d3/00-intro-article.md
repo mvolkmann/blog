@@ -7,6 +7,10 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+The Object Computing (OCI) version of this article can be found {% aTargetBlank
+"https://objectcomputing.com/resources/publications/sett/august-2020-mastering-d3-basics",
+"here" %}.
+
 ## Introduction
 
 D3 (<https://d3js.org>) stands for Data-Driven Documents.

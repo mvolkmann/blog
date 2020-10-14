@@ -2,6 +2,7 @@
 eleventyNavigation:
   key: Supporting IE11 in Svelte
   parent: Svelte
+  order: 4
 layout: topic-layout.njk
 ---
 

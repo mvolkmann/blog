@@ -2,6 +2,7 @@
 eleventyNavigation:
   key: Book Errata
 layout: topic-layout.njk
+permalink: 'svelte-and-sapper-in-action/errata/'
 ---
 
 This is an errata for the book

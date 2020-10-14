@@ -2,10 +2,12 @@
 css: '/blog/assets/github-extensions.css'
 eleventyNavigation:
   key: D3 Maps Article
-  order: 1
+  order: 16
   parent: D3
 layout: topic-layout.njk
 ---
+
+This article is unfinished!
 
 ## Introduction
 

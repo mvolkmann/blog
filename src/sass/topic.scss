@@ -4,6 +4,10 @@ body {
 
 img {
   width: 90%;
+
+  &.keep-size {
+    width: auto;
+  }
 }
 
 .MathJax {
