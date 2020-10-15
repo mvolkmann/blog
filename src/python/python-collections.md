@@ -27,6 +27,15 @@ Python provides four collection classes that do not need to be imported to use.
 
 Why do these class names start with a lowercase letter?
 
+For details on the `list` and `tuple` classes,
+see [here](/blog/python/python-compared-to-js/#sequences).
+
+For details on the `set` class,
+see [here](/blog/python/python-compared-to-js/#sets).
+
+For details on the `dict` class,
+see [here](/blog/python/python-compared-to-js/#key-value-collections).
+
 ## Collection Classes in `collections` module
 
 The collections module in the Python standard library

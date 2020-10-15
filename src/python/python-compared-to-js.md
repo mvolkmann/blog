@@ -785,7 +785,7 @@ def print_inheritance(cls, level = 0):
 | trim both ends      | `s.trim()`                                      | `s.strip()`                                                                        |
 | repeat n times      | `s.repeat(n)`                                   | `s * n` or `n * s`                                                                 |
 
-## Sequences
+## <a name="sequences">Sequences</a>
 
 JavaScript stores sequences of values in arrays.
 Python primarily uses the three sequence types list, tuple, and range
@@ -1015,7 +1015,7 @@ multipleOf3 = filter(lambda n: n % 3 == 0, range(10)) # [ 0, 3, 6, 9 ]
 multipleOf3 = [n for n in range(10) if n % 3 == 0] # same using list comprehension
 ```
 
-## Sets
+## <a name="sets">Sets</a>
 
 Sets are unordered collections with no duplicate values.
 
@@ -1045,7 +1045,7 @@ from random import randint
 numbers = {randint(1, 11) for n in range(10)}
 ```
 
-## Key/Value Collections
+## <a name="key-value-collections">Key/Value Collections</a>
 
 JavaScript uses plain objects or instances of the `Map` class
 to store associations between keys and values.
