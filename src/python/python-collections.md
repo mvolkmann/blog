@@ -8,24 +8,16 @@ layout: topic-layout.njk
 
 <!-- markdownlint-disable MD013 -->
 
-Python provides
-four collection classes that do not need to import and
-nine more that can be imported from
-the collections module in the standard library.
-The table below summarizes these:
-
 ## Built-in Collection Classes
 
 Python provides four collection classes that do not need to be imported to use.
 
-| Collection Name | Mutable? | Ordered? | Allows Duplicates? | Can Index | Syntax                  |
-| --------------- | -------- | -------- | ------------------ | --------- | ----------------------- |
-| `list`          | yes      | yes      | yes                | yes       | `[e1, e2, ...]`         |
-| `tuple`         | no       | yes      | yes                | yes       | `(e1, e2, ...)`         |
-| `set`           | yes      | no       | no                 | no        | `{e1, e2, ...}`         |
-| `dict`          | yes      | yes      | yes                | no        | `{k1: v1, k2: v2, ...}` |
-
-Why do these class names start with a lowercase letter?
+| Collection<br>Name | Mutable? | Ordered? | Allows<br>Duplicates? | Can<br>Index? | Syntax                  |
+| ------------------ | -------- | -------- | --------------------- | ------------- | ----------------------- |
+| `list`             | yes      | yes      | yes                   | yes           | `[e1, e2, ...]`         |
+| `tuple`            | no       | yes      | yes                   | yes           | `(e1, e2, ...)`         |
+| `set`              | yes      | no       | no                    | no            | `{e1, e2, ...}`         |
+| `dict`             | yes      | yes      | yes                   | no            | `{k1: v1, k2: v2, ...}` |
 
 For details on the `list` and `tuple` classes,
 see [here](/blog/python/python-compared-to-js/#sequences).
@@ -36,22 +28,22 @@ see [here](/blog/python/python-compared-to-js/#sets).
 For details on the `dict` class,
 see [here](/blog/python/python-compared-to-js/#key-value-collections).
 
-## Collection Classes in `collections` module
+## `collections` Module Classes
 
-The collections module in the Python standard library
-defines nine addition collection classes that most be imported to use.
+The collections module in the Python standard library defines
+nine additional collection classes that must be imported to use.
 
-| Collection Name | Description                                                                           |
-| --------------- | ------------------------------------------------------------------------------------- |
-| `namedtuple`    | function that creates a `tuple` subclass with named fields                            |
-| `deque`         | function that creates a `list`-like container with fast appends and pops on both ends |
-| `Chainmap`      | a `dict`-like view of multiple mappings                                               |
-| `Counter`       | `dict` subclass for counting hashable values                                          |
-| `OrderedDict`   | `dict` subclass that remembers the order in which entries were added                  |
-| `defaultdict`   | `dict` subclass that calls a function to get missing values                           |
-| `UserDict`      | wrapper around `dict` objects for easier subclassing                                  |
-| `UserList`      | wrapper around `list` objects for easier subclassing                                  |
-| `UserString`    | wrapper around `string` objects for easier subclassing                                |
+| Collection Name | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| `namedtuple`    | `tuple` subclass with named fields                            |
+| `deque`         | `list`-like container with fast appends and pops on both ends |
+| `Chainmap`      | `dict`-like view of multiple mappings                         |
+| `Counter`       | `dict` subclass for counting hashable values                  |
+| `OrderedDict`   | `dict` subclass that remembers insertion order                |
+| `defaultdict`   | `dict` subclass that calls a function to get missing values   |
+| `UserDict`      | wrapper around a `dict` object for easier subclassing         |
+| `UserList`      | wrapper around a `list` object for easier subclassing         |
+| `UserString`    | wrapper around a `string` object for easier subclassing       |
 
 ### `namedtuple`
 
@@ -217,10 +209,10 @@ fruits = [
     'apple', 'banana', 'cherry', 'grape', 'orange', 'strawberry',
     'banana', 'apple', 'apple', 'grape', 'banana', 'banana'
 ]
-
 counter = Counter(fruits)
-
 print(counter)
+# Counter({'banana': 4, 'apple': 3, 'grape': 2,
+#          'cherry': 1, 'orange': 1, 'strawberry': 1})
 
 # Get the number of occurrences of banana.
 print(counter['banana']) # 4
@@ -312,7 +304,7 @@ print(dogs)
 A {% aTargetBlank
 "https://docs.python.org/3/library/collections.html#collections.defaultdict",
 "`defaultdict`" %} is a special `dict` that can
-provide a value for missing keys rather than raising a `KeyError`.
+provide a value for missing keys rather than raise a `KeyError`.
 This is useful because it enables writing code
 that doesn't need to check for missing values.
 
@@ -320,9 +312,12 @@ The `defaultdict` function is passed a function that
 must return the default value to use for missing keys.
 This can be a constructor function from a built-in class,
 a custom class, a lambda function, or a normal function.
+Unfortunately the function is not passed the key that is missing,
+so that cannot be used to determine the value to return.
 
 ```python
-# Each of the examples below indicate the value that is used for missing keys
+# Each of the examples below indicate
+# the value that is used for missing keys.
 my_dict = defaultdict(bool) # False
 my_dict = defaultdict(int) # 0
 my_dict = defaultdict(float) # 0.0
@@ -342,7 +337,7 @@ def get_missing():
     print('in get_missing')
     return 'mixed'
 
-dogs = defaultdict(get_missing) # returns custom value for missing keys
+dogs = defaultdict(get_missing) # returns "mixed" for missing keys
 ```
 
 Here is an example of creating and using a `defaultdict`:
@@ -385,7 +380,7 @@ These classes are useful as the base class of custom classes
 that need the functionality of a `dict`, `list`, or `string`.
 In older versions of Python it is not possible to directly
 inherit from `dict`, `list`, and `string`,
-but this is now supported.
+but doing so is now supported.
 However, it can still be easier to inherit from these "User" classes
 instead because the underlying `dict`, `list`, or `string`
 will be available as an attribute.
