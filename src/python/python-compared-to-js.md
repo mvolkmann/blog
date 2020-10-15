@@ -871,7 +871,7 @@ print(len(dog)) # 2
 | includes (boolean)           | `arr.includes(value)`                                                                               | `value in seq`                                                                                                                 |
 | not includes (boolean)       | `!arr.includes(value)`                                                                              | `value not in seq`                                                                                                             |
 | index of                     | `arr.indexOf(value[, fromIndex])`                                                                   | `seq.index(value[, start[, end]])`                                                                                             |
-| last index of                | `arr.lastIndexOf(value[, fromIndex])`                                                               | not builtin; have to reverse list                                                                                              | TODO |
+| last index of                | `arr.lastIndexOf(value[, fromIndex])`                                                               | not built-in; have to reverse list                                                                                             | TODO |
 | count occurrences            | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                                            | `seq.count(value)`                                                                                                             |
 | join                         | `arr.join(delimiter)` returns string                                                                | `delimiter.join(seq)`                                                                                                          |
 | map                          | `const newArr = arr.map(value => newValue);`                                                        | `iterator = map(function, seq)`                                                                                                |
@@ -883,7 +883,7 @@ print(len(dog)) # 2
 | reverse                      | `arr.reverse()`                                                                                     | `list.reverse()` - only for lists                                                                                              |
 | destructure/unpack           | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of array elements             | `v1, v2, v3 = seq`<br># of variables on left must match # of sequence elements<br>which limits usefulness                      |
 
-Python doesn't have a simple, builtin way to find the first item in a list
+Python doesn't have a simple, built-in way to find the first item in a list
 that matches some criteria. This naive approach is probably the most efficient.
 
 ```python
@@ -920,7 +920,7 @@ to convert values to strings. For example:
 
 JavaScript can implement lazy functions using generator functions
 (see the "List Comprehension" section),
-but no builtin generator functions are provided.
+but no built-in generator functions are provided.
 
 ## Sorting
 
@@ -1117,7 +1117,7 @@ my_dict = {name: get_initials(name) for name in names}
 
 ## Regular Expressions
 
-In JavaScript, regular expressions are a builtin type.
+In JavaScript, regular expressions are a built-in type.
 An instance can be created in two ways:
 
 ```js
@@ -1219,9 +1219,9 @@ finally: # optional
 To ignore an exception in Python,
 include a `pass` statement in an `except` block.
 
-There are many builtin Python exception classes.
+There are many built-in Python exception classes.
 The base class of all of them is `Exception`.
-Names of builtin exception classes end in "Error".
+Names of built-in exception classes end in "Error".
 Custom exception classes should do the same.
 
 ## JSON
@@ -1377,7 +1377,7 @@ add(1, 2) # DEBUG:root:add was passed (1, 2) and returned 3
 add(2, 3) # DEBUG:root:add was passed (2, 3) and returned 5
 ```
 
-The builtin Python decorators include:
+The built-in Python decorators include:
 
 - `@classmethod`  
   This transforms a method into a class method

@@ -129,5 +129,5 @@ since the epoch (1970-01-01 00:00:00 UTC).
 
 ## Python Support
 
-Python has builtin support for SQLite.
+Python has built-in support for SQLite.
 For details, see [here](/blog/python/sqlite-in-python/).

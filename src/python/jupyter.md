@@ -407,7 +407,7 @@ plt.show()
 
 {% aTargetBlank "https://vega.github.io/vega/", "Vega" %}
 is a JSON format for describing data visualizations.
-Jupyter has builtin support for rendering Vega files
+Jupyter has built-in support for rendering Vega files
 with a `.vg` or `.vg.json` file extension.
 There are many examples at the Vega website linked above.
 Copy the JSON for one into a `.vg` file

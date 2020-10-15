@@ -53,8 +53,6 @@ defines nine addition collection classes that most be imported to use.
 | `UserList`      | wrapper around `list` objects for easier subclassing                                  |
 | `UserString`    | wrapper around `string` objects for easier subclassing                                |
 
-TODO: Is OrderedDict deprecated since dict now remembers insertion order?
-
 ### `namedtuple`
 
 A {% aTargetBlank
@@ -251,10 +249,143 @@ print(counter.most_common())
 
 ### `OrderedDict`
 
+An {% aTargetBlank
+"https://docs.python.org/3/library/collections.html#collections.OrderedDict",
+"`OrderedDict`" %} is a special `dict` that
+preserves the order in which keys were added.
+Starting in Python 3.5, the `dict` class also does this.
+One reason to continue using `OrderedDict` instead of `dict`
+when order must be preserved is that
+assuming `dict` objects will preserve order will cause
+code to break when run in versions of Python before 3.5.
+
+Here is an example of creating and using an `OrderedDict`:
+
+```python
+from collections import OrderedDict
+
+# Create and populate an OrderedDict.
+dogs = OrderedDict()
+dogs['Maisey'] = 'Treeing Walker Coonhound'
+dogs['Ramsay'] = 'Native American Indian Dog'
+dogs['Oscar'] = 'German Shorthaired Pointer'
+dogs['Comet'] = 'Whippet'
+
+print(dogs)
+# OrderedDict([
+#  ('Maisey', 'Treeing Walker Coonhound'),
+#  ('Ramsay', 'Native American Indian Dog'),
+#  ('Oscar', 'German Shorthaired Pointer'),
+#  ('Comet', 'Whippet')])
+
+# Change the value of a key,
+# noting that its position does not change.
+dogs['Oscar'] = 'GSP'
+
+# Move "Comet" to the beginning.
+dogs.move_to_end('Comet', last=False)
+
+# Move "Ramsay" to the end.
+dogs.move_to_end('Ramsay')
+
+print(dogs)
+# OrderedDict([
+#  ('Comet', 'Whippet'),
+#  ('Maisey', 'Treeing Walker Coonhound'),
+#  ('Oscar', 'GSP'),
+#  ('Ramsay', 'Native American Indian Dog')])
+
+# Remove the first key/value pair.
+dogs.popitem(last=False)
+
+# Remove the last key/value pair.
+dogs.popitem()
+
+print(dogs)
+# OrderedDict([
+#  ('Maisey', 'Treeing Walker Coonhound'),
+#  ('Oscar', 'GSP')])
+```
+
 ### `defaultdict`
 
-### `UserDict`
+A {% aTargetBlank
+"https://docs.python.org/3/library/collections.html#collections.defaultdict",
+"`defaultdict`" %} is a special `dict` that can
+provide a value for missing keys rather than raising a `KeyError`.
+This is useful because it enables writing code
+that doesn't need to check for missing values.
 
-### `UserList`
+The `defaultdict` function is passed a function that
+must return the default value to use for missing keys.
+This can be a constructor function from a built-in class,
+a custom class, a lambda function, or a normal function.
 
-### `UserString`
+```python
+# Each of the examples below indicate the value that is used for missing keys
+my_dict = defaultdict(bool) # False
+my_dict = defaultdict(int) # 0
+my_dict = defaultdict(float) # 0.0
+my_dict = defaultdict(str) # empty string
+my_dict = defaultdict(list) # empty list
+my_dict = defaultdict(tuple) # empty tuple
+my_dict = defaultdict(dict) # empty dict
+my_dict = defaultdict(set) # empty set
+my_dict = defaultdict(MyClass) # an instance of MyClass
+my_dict = defaultdict(lambda: 'missing') # the string "missing"
+my_dict = defaultdict(lambda: 7) # the number 7
+
+# This function is only called once for each missing key.
+# The missing key and the value this returns are
+# added to the defaultdict so it is no longer missing.
+def get_missing():
+    print('in get_missing')
+    return 'mixed'
+
+dogs = defaultdict(get_missing) # returns custom value for missing keys
+```
+
+Here is an example of creating and using a `defaultdict`:
+
+```python
+from collections import defaultdict
+
+names_by_breed = defaultdict(list)
+
+def add_dog(name, breed):
+    # Don't need to check for missing breed key
+    # because an empty list will be supplied.
+    names_by_breed[breed].append(name)
+
+add_dog('Comet', 'Whippet')
+add_dog('Maisey', 'Treeing Walker Coonhound')
+add_dog('Reece', 'Whippet')
+
+print('Whippet names are', names_by_breed['Whippet']) # ['Comet', 'Reece']
+print('Beagle names are', names_by_breed['Beagle']) # []
+
+fruit_counts = defaultdict(int)
+
+def add_fruit(name):
+    # Don't need to check for missing fruit key
+    # because zero will be supplied.
+    fruit_counts[name] += 1
+
+add_fruit('banana')
+add_fruit('apple')
+add_fruit('banana')
+
+print('banana count is', fruit_counts['banana']) # 2
+print('grape count is', fruit_counts['grape']) # 0
+```
+
+### `UserDict`, `UserList`, and `UserString`
+
+These classes are useful as the base class of custom classes
+that need the functionality of a `dict`, `list`, or `string`.
+In older versions of Python it is not possible to directly
+inherit from `dict`, `list`, and `string`,
+but this is now supported.
+However, it can still be easier to inherit from these "User" classes
+instead because the underlying `dict`, `list`, or `string`
+will be available as an attribute.

@@ -264,6 +264,7 @@
     "pandoc",
     "peaceiris",
     "pino",
+    "popitem",
     "popleft",
     "precache",
     "precaching",
