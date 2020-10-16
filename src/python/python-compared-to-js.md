@@ -38,12 +38,12 @@ pros:
 - ability to run in web browsers (clients) and from command-line (servers)
 - great support for asynchronous code
 - performance
-- compact syntax for functional programming (ex. functools vs. `reduce`)
+- compact syntax for functional programming (ex. `reduce` vs. functools)
 - can use TypeScript, a superset of JavaScript, to add type checking
 
 cons:
 
-- still in transition from require to import syntax in Node.js
+- still in transition from `require` to `import` syntax in Node.js
 - type coercions can result in surprising results if not familiar with them
 
 ### Python
@@ -51,49 +51,43 @@ cons:
 pros:
 
 - targeted at scripting and rapid application development
-- quantity and maturity of libraries for machine learning
-- multiple number types
+- quantity and maturity of libraries for data analysis and machine learning
+- multiple number types, not just double-precision float
 - some syntax is easier for beginners
   - no curly braces or semicolons, and fewer parentheses
-  - ex. `and` vs. `&&`.
-  - ex. `print` vs. `console.log`
+  - `and` instead of `&&`, `or` instead of `||`, and `not` instead of `!`
+  - `print` vs. `console.log`
 - can add functions implemented in C/C++ or any language callable from C
 - can use type hints and tools like mypy to add type checking
+- oddly satisfying to type fewer characters
+  (ex. comment with `#` instead of `//`)
 
 cons:
 
-- poor performance -
-  For one example of benchmark results, see {% aTargetBlank
-  "https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html",
-  "The Computer Language Benchmark Game" %}).
-  Python does well with regular expressions.
-- magic methods such as `__init__` use "dunder" names (for double underscore)
-  which is an odd and verbose way to distinguish special values
-  (Other programming languages typically use a single special character prefix.
-  See a list in the "Python magic methods" section.)
-- use of operator overloading (supported by magic methods) can be confusing
-- anonymous functions are limited to a single expression
-- no built-in support for asynchronous code
-  until the asyncio module was added in Python 3.4
-  (some features require Python 3.7+)
-- single-word dictionary keys require quotes unlike JavaScript object keys
-- lambda functions are more verbose than JavaScript arrow functions
-  (lambda vs. ->)
-- even though Python convention is to separate words in multi-word
+- Even though Python convention is to separate words in multi-word
   variable, function, and method names with an underscore,
-  there are many examples where no separate is used
-- the classic ternary operator using a `?` and `:` is not supported;
-  for example:
-
-  ```python
-  name = len(sys.argv) > 1 ? sys.argv[1] : 'World' # not supported
-  name = sys.argv[1] || 'World' # doesn't work
-
-  # The Python version of ternary does work.
-  name = sys.argv[1] if len(sys.argv) > 1 else 'World'
-  ```
-
-- lots of documentation and examples are still for V2 instead of V3
+  there are many examples where no separation is used.
+  This makes it difficult to guess the correct name.
+- poor performance - for example, see {% aTargetBlank
+  "https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html",
+  "The Computer Language Benchmark Game" %})
+- Anonymous functions are limited to a single expression.
+- Lambda functions are more verbose than JavaScript arrow functions
+  (`lambda` vs. `=>`).
+- Single-word dictionary keys require quotes unlike JavaScript object keys.
+- The classic ternary operator using a `?` and `:` is not supported.
+  See the [Conditional logic](#conditional-logic) section for an example.
+- There is no syntax for multi-line comments,
+  so commenting out a block of code is tedious.
+- Magic methods such as `__init__` use "dunder" names (for double underscore)
+  which is an odd and verbose way to distinguish special values.
+  Other programming languages typically use a single special character prefix.
+  See a list in the [Python magic methods](#magic-methods) section.
+- Use of operator overloading (supported by magic methods) can be confusing.
+- These was no built-in support for asynchronous code
+  until the `asyncio` module was added in Python 3.4.
+  Some features require Python 3.7+.
+- Lots of documentation and examples are still for V2 instead of V3.
 
 ## Running scripts
 
@@ -427,7 +421,7 @@ is between 10 and 20 inclusive:
 - in JavaScript, `10 <= n && n <= 20`
 - in Python, `10 <= n <= 20`
 
-## Conditional logic
+## <a name="conditional-logic">Conditional logic</a>
 
 In the JavaScript syntax below, `sOrB` is short for "statement or block".
 It can be a single statement or a set of statements surrounded by curly braces.
@@ -442,6 +436,20 @@ Python blocks must start on a new line and be indented.
 | if/else         | `if (cond) sOrB1 else sOrB2`                        | `if cond: block1 else: block2`                    |
 | if/else if/else | `if (cond1) sOrB1 else if (cond2) sOrB2 else sOrB3` | `if cond: block1 elif cond2: block2 else: block3` |
 | ternary         | `cond ? trueValue : falseValue`                     | `trueValue if cond else falseValue`               |
+
+Here's an example of using a Python ternary statement.
+
+```python
+import sys
+
+name = sys.argv[1] if len(sys.argv) > 1 else 'World'
+
+# This is a nice alternative.
+name = sys.argv[1] or 'World'
+
+# This syntax is NOT supported.
+name = len(sys.argv) > 1 ? sys.argv[1] : 'World'
+```
 
 ## Iteration
 
@@ -2057,7 +2065,7 @@ except Exception as e:
     print(e)
 ```
 
-## Python magic methods
+## <a name="magic-methods">Python magic methods</a>
 
 Python magic methods support many operations on classes and class instances.
 These include operator overloading.
