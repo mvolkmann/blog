@@ -8,7 +8,7 @@ img.keep-size { width: auto; }
 
 .MathJax { font-size: 200%; }
 
-p > code { font-size: 1.2rem; }
+li > code, p > code { font-size: 1.2rem; }
 
 table { border-collapse: collapse; }
 
