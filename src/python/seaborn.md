@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: seaborn
+  key: seaborn library
   order: 7
   parent: Python
 layout: topic-layout.njk

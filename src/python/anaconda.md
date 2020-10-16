@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Anaconda
+  key: Anaconda tools
   order: 2
   parent: Python
 layout: topic-layout.njk

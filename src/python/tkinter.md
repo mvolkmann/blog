@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: tkinter
+  key: tkinter library
   order: 8
   parent: Python
 layout: topic-layout.njk

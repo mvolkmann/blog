@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: VS Code Python Support
+  key: VS Code Python support
   order: 4
   parent: Python
 layout: topic-layout.njk

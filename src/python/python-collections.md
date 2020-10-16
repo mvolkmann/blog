@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Python Collections
+  key: Python collections module
   order: 1.5
   parent: Python
 layout: topic-layout.njk
@@ -30,7 +30,7 @@ see [here](/blog/python/python-compared-to-js/#key-value-collections).
 
 ## `collections` Module Classes
 
-The collections module in the Python standard library defines
+The `collections` module in the Python standard library defines
 nine additional collection classes that must be imported to use.
 
 | Collection Name | Description                                                   |

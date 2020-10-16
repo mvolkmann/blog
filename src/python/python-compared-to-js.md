@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Python Compared to JavaScript
+  key: Python compared to JavaScript
   order: 1
   parent: Python
 layout: topic-layout.njk

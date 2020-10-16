@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Jupyter
+  key: Jupyter tools
   order: 3
   parent: Python
 layout: topic-layout.njk

@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: NumPy
+  key: NumPy library
   order: 5
   parent: Python
 layout: topic-layout.njk

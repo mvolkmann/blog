@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Pandas
+  key: pandas library
   order: 6
   parent: Python
 layout: topic-layout.njk

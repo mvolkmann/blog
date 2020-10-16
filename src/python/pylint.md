@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: pylint
+  key: pylint tool
   order: 10
   parent: Python
 layout: topic-layout.njk
