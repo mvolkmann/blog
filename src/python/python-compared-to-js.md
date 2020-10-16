@@ -876,7 +876,10 @@ To use the Python functions, `import math`.
 | log base 10                    | `Math.log10(x)`               | `math.log10(x)`                              |
 | logarithm to any base          | not built-in; see below       | `math.log(x, y)`                             |
 | maximum                        | `Math.max(n1, n2, ...)`       | `max(n1, n2, ...)`                           |
-| minimum                        | `Math.min(n1, n2, ...)`       | `min(n1, n2, ...)`                           |
+| mean                           | not built-in; see below       | `statistics.mean(seq)`                       |
+| median                         | not built-in; see below       | `statistics.median(seq)`                     |
+| maximum                        | `Math.max(n1, n2, ...)`       | `max(n1, n2, ...)`                           |
+| mode                           | not built-in; see below       | `statistics.mode(seq)`                       |
 | natural log (base e)           | `Math.log(x)`                 | `math.log(x)`                                |
 | not a number                   | `Number.isNaN(x)`             | `math.isnan(x)`                              |
 | not a number constant          | `Number.NaN`                  | `math.nan`                                   |
@@ -900,8 +903,10 @@ JavaScript can use the following functions to compute
 some of the values marked as "not built-in" in the table above:
 
 ```js
-// Compute the logarithm of x using a given base.
-const logBase = (x, base) => Math.log(x) / Math.log(base);
+function combinations(n, k) {
+  // n take k
+  return factorial(n) / (factorial(k) * factorial(n - k));
+}
 
 function factorial(n) {
   if (n < 0) return undefined;
@@ -912,9 +917,34 @@ function factorial(n) {
   return f;
 }
 
-function combinations(n, k) {
-  // n take k
-  return factorial(n) / (factorial(k) * factorial(n - k));
+// Compute the logarithm of x using a given base.
+const logBase = (x, base) => Math.log(x) / Math.log(base);
+
+const mean = nums => sum(nums) / nums.length;
+
+function median(nums) {
+  nums.sort(); // may not want to sort in place
+  const len = nums.length;
+  const index = Math.floor(len / 2);
+  return len % 2 === 1 ? nums[index] : (nums[index - 1] + nums[index]) / 2;
+}
+
+function mode(nums) {
+  let result = undefined;
+  let resultCount = 0;
+  const counts = nums.reduce((acc, n) => {
+    if (acc[n] === undefined) {
+      acc[n] = 1;
+    } else {
+      acc[n]++;
+    }
+    if (acc[n] > resultCount) {
+      result = n;
+      resultCount = acc[n];
+    }
+    return acc;
+  }, {});
+  return result;
 }
 
 function permutations(n, k) {
@@ -924,10 +954,10 @@ function permutations(n, k) {
 
 const product = nums => (nums.length ? nums.reduce((acc, n) => acc * n, 1) : 0);
 
-const sum = nums => (nums.length ? nums.reduce((acc, n) => acc + n) : 0);
-
 // Generate a random integer in the range [a, b].
 const randint = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+
+const sum = nums => (nums.length ? nums.reduce((acc, n) => acc + n) : 0);
 ```
 
 The Python `random` module also provides:
