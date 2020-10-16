@@ -1422,6 +1422,77 @@ with open(file_path, 'r') as reader:
         print(line, end='')
 ```
 
+## Shell commands
+
+JavaScript code running in Node.js can execute shell commands,
+provide input to them, and capture output written to stdout and stderr.
+
+In the example code below we run the `ps` command
+to get the status of all currently running processes and then
+output the process id (pid) and running time of all "node" processes.
+
+```js
+const {exec} = require('child_process');
+
+exec('ps -ef', (error, stdout, stderr) => {
+  if (error || stderr) {
+    console.error(error || stderr);
+    return;
+  }
+
+  lines = stdout.split('\n');
+  for (const line of lines) {
+    tokens = line.trimStart().split(/ +/);
+    if (tokens.length >= 9) {
+      const pid = tokens[1];
+      const time = tokens[6];
+      const command = tokens[7];
+      if (command == 'node') {
+        console.log('process id', pid, 'has run for', time);
+      }
+    }
+  }
+});
+```
+
+Here is a Python version that does the same:
+
+```python
+import os, re, subprocess
+
+# Create a regular expression that matches two or more spaces.
+spaces_re = re.compile(r' {2,}')
+
+# Print the process id and running time of all "node" processes.
+def node_report(lines):
+    for line in lines:
+        # Replaces all occurrences of multiple spaces with one.
+        line = spaces_re.sub(' ', line.lstrip())
+        tokens = line.split(' ')
+        if len(tokens) >= 9:
+            pid = tokens[1]
+            time = tokens[6]
+            command = tokens[7]
+            if command == 'node':
+                print('process id', pid, 'has run for', time)
+
+# Approach #1
+stream = os.popen('ps -ef')
+output = stream.read() # reads all lines into a single string
+node_report(output.split('\n'))
+
+# Approach #2
+stream = os.popen('ps -ef')
+node_report(stream.readlines())
+
+# Approach #3
+process = subprocess.run(['ps', '-ef'], capture_output=True, text=True)
+if process.stderr:
+    print('error:', process.stderr, file=sys.stderr)
+else:
+    node_report(process.stdout.split('\n'))
+```
+
 ## Decorators
 
 Python supports decorators which are annotations placed before
