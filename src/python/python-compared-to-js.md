@@ -847,6 +847,95 @@ def print_inheritance(cls, level = 0):
 | constants                                     | see `Math` and `Number` global objects | see `math` module    |
 | functions                                     | see `Math` and `Number` global objects | see `math` module    |
 
+## Math operations
+
+Lesser used constants and functions are omitted from the table below.
+
+To use the Python functions, `import math`.
+
+| Operation                      | JavaScript                    | Python                                       |
+| ------------------------------ | ----------------------------- | -------------------------------------------- |
+| absolute value                 | `Math.abs(x)`                 | `math.fabs(x)`                               |
+| arc cosine                     | `Math.acos(x)`                | `math.acos(x)`                               |
+| arc sine                       | `Math.asin(x)`                | `math.asin(x)`                               |
+| arc tangent                    | `Math.atan(x)`                | `math.atan(x)`                               |
+| ceiling                        | `Math.ceil(x)`                | `math.ceil(x)`                               |
+| close                          | not built-in                  | `math.isclose(x, y, rel_tol=rt, abs_tol=at)` |
+| combinations of k items from n | not built-in; see below       | `math.comb(n, k)`                            |
+| convert degrees to radians     | `degrees * (Math.PI / 180)`   | `math.degrees(radians)`                      |
+| convert radians to degrees     | `radians * (180 / Math.PI)`   | `math.radians(degrees)`                      |
+| cosine                         | `Math.cos(x)`                 | `math.cos(x)`                                |
+| cube root                      | `Math.cbrt(x)`                | `x ** (1. / 3)`                              |
+| e constant                     | `Math.E`                      | `math.e`                                     |
+| e to power                     | `Math.exp(x)`                 | `math.exp(x)`                                |
+| factorial                      | not built-in; see below       | `math.factorial(n)`                          |
+| floor                          | `Math.floor(x)`               | `math.floor(x)`                              |
+| greatest common denominator    | not built-in                  | `math.gcd(n1, n2, ...)`                      |
+| hypotenuse                     | `Math.hypot(x, y, ...)`       | `math.hypot(x)`                              |
+| least common multiple          | not built-in                  | `math.lcm(n1, n2, ...)`                      |
+| log base 10                    | `Math.log10(x)`               | `math.log10(x)`                              |
+| logarithm to any base          | not built-in; see below       | `math.log(x, y)`                             |
+| maximum                        | `Math.max(n1, n2, ...)`       | `max(n1, n2, ...)`                           |
+| minimum                        | `Math.min(n1, n2, ...)`       | `min(n1, n2, ...)`                           |
+| natural log (base e)           | `Math.log(x)`                 | `math.log(x)`                                |
+| not a number                   | `Number.isNaN(x)`             | `math.isnan(x)`                              |
+| not a number constant          | `Number.NaN`                  | `math.nan`                                   |
+| permutations of k items from n | not built-in; see below       | `math.perm(n, k)`                            |
+| pi constant                    | `Math.PI`                     | `math.pi`                                    |
+| power (x to y)                 | `Math.pow(x, y)`              | `math.pow(x)`                                |
+| product                        | use `Array reduce`; see below | `math.prod(iterable)`                        |
+| random [0, 1)                  | `Math.random()`               | `random.random()`                            |
+| random integer [a, b]          | not built-in; see below       | `random.randint(a, b)`                       |
+| round                          | `Math.round(x)`               | `round(x, decimal_places=0)`                 |
+| sign (-1, 0, or 1)             | `Math.sign(x)`                | `0 if x == 0 else math.copysign(1, x)`       |
+| sine                           | `Math.sin(x)`                 | `math.sin(x)`                                |
+| square root                    | `Math.sqrt(x)`                | `math.sqrt(x)`                               |
+| square root of 1/2             | `Math.SQRT1_2`                | `math.sqrt(0.5)`                             |
+| square root of 2               | `Math.SQRT2`                  | `math.sqrt(2)`                               |
+| sum                            | use `Array reduce`; see below | `math.fsum(iterable)`                        |
+| tangent                        | `Math.tan(x)`                 | `math.tan(x)`                                |
+| truncate                       | `Math.trunc(x)`               | `math.trunc(x)`                              |
+
+JavaScript can use the following functions to compute
+some of the values marked as "not built-in" in the table above:
+
+```js
+// Compute the logarithm of x using a given base.
+const logBase = (x, base) => Math.log(x) / Math.log(base);
+
+function factorial(n) {
+  if (n < 0) return undefined;
+  let f = 1;
+  while (n > 1) {
+    f *= n--;
+  }
+  return f;
+}
+
+function combinations(n, k) {
+  // n take k
+  return factorial(n) / (factorial(k) * factorial(n - k));
+}
+
+function permutations(n, k) {
+  // n take k
+  return factorial(n) / factorial(n - k);
+}
+
+const product = nums => (nums.length ? nums.reduce((acc, n) => acc * n, 1) : 0);
+
+const sum = nums => (nums.length ? nums.reduce((acc, n) => acc + n) : 0);
+
+// Generate a random integer in the range [a, b].
+const randint = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+```
+
+The Python `random` module also provides:
+
+- `random.choice(seq)` returns a random element from a sequence
+- `random.shuffle(seq)` shuffles a sequence in place
+- and more
+
 ## String operations
 
 | Operation           | JavaScript                                      | Python                                                                             |
