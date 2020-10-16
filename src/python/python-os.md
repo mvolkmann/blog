@@ -111,6 +111,34 @@ for dirpath, dirnames, filenames in os.walk(cwd):
         print(dirpath, 'contains', py_files)
 ```
 
+When only files whose names match some pattern will be processed,
+another approach is to use the standard library `glob` module.
+
+The `glob` method returns a list of matching relative file paths.
+The `iglob` method returns an iterator so all the matching
+relative file paths don't need to be stored before iteration begins.
+
+In patterns passed to glob methods:
+
+- `?` matches any single character.
+- `*` matches any run of characters.
+- `**` matches any subdirectory tree, including the current directory.
+
+For example:
+
+```python
+import glob
+
+# Match all Python source files in and below the current directory.
+pattern = '**/*.py'
+
+files = glob.glob(pattern)
+print(files)
+
+for file in glob.iglob(pattern):
+    print(file)
+```
+
 ## Get environment variables
 
 ```python

@@ -208,6 +208,7 @@
     "histplot",
     "hspace",
     "iconbitmap",
+    "iglob",
     "ijavascript",
     "ijsinstall",
     "iloc",
