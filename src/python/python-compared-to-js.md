@@ -1302,6 +1302,27 @@ The base class of all of them is `Exception`.
 Names of built-in exception classes end in "Error".
 Custom exception classes should do the same.
 
+## Exit with status
+
+Both JavaScript programs running in Node.js and Python programs
+can explicitly exit and set a status code.
+
+In Node.js, the `exit` method of the `process` global object is used.
+
+```js
+process.exit(statusCode);
+```
+
+In Python, the `exit` method of the `sys` module is used.
+
+```python
+import sys
+
+sys.exit(status_code)
+```
+
+In both cases if no status code is supplied, it defaults to zero.
+
 ## JSON
 
 In Python, in order to use JSON methods include `import json`.
