@@ -1427,32 +1427,45 @@ with open(file_path, 'r') as reader:
 JavaScript code running in Node.js can execute shell commands,
 provide input to them, and capture output written to stdout and stderr.
 
-In the example code below we run the `ps` command
+In the example code below we execute the `ps` command
 to get the status of all currently running processes and then
 output the process id (pid) and running time of all "node" processes.
 
 ```js
-const {exec} = require('child_process');
+import {exec} from 'child_process';
+import {promisify} from 'util';
+const pexec = promisify(exec);
 
-exec('ps -ef', (error, stdout, stderr) => {
-  if (error || stderr) {
-    console.error(error || stderr);
-    return;
-  }
-
-  lines = stdout.split('\n');
+function node_report(lines) {
   for (const line of lines) {
-    tokens = line.trimStart().split(/ +/);
+    const tokens = line.trimStart().split(/ +/);
     if (tokens.length >= 9) {
-      const pid = tokens[1];
-      const time = tokens[6];
       const command = tokens[7];
       if (command == 'node') {
+        const pid = tokens[1];
+        const time = tokens[6];
         console.log('process id', pid, 'has run for', time);
       }
     }
   }
+}
+
+// Approach #1 - using a callback function
+exec('ps -ef', (error, stdout, stderr) => {
+  if (error || stderr) {
+    console.error(error || stderr);
+  } else {
+    node_report(stdout.split('\n'));
+  }
 });
+
+// Approach #2 - awaiting a Promise
+const {stdout, stderr} = await pexec('ps -ef');
+if (stderr) {
+  console.error(stderr);
+} else {
+  node_report(stdout.split('\n'));
+}
 ```
 
 Here is a Python version that does the same:
@@ -1470,22 +1483,22 @@ def node_report(lines):
         line = spaces_re.sub(' ', line.lstrip())
         tokens = line.split(' ')
         if len(tokens) >= 9:
-            pid = tokens[1]
-            time = tokens[6]
             command = tokens[7]
             if command == 'node':
+                pid = tokens[1]
+                time = tokens[6]
                 print('process id', pid, 'has run for', time)
 
-# Approach #1
+# Approach #1 - reading output into a single string
 stream = os.popen('ps -ef')
 output = stream.read() # reads all lines into a single string
 node_report(output.split('\n'))
 
-# Approach #2
+# Approach #2 - reading output into an array of strings, one per line
 stream = os.popen('ps -ef')
 node_report(stream.readlines())
 
-# Approach #3
+# Approach #3 - using a CompletedProcess instance
 process = subprocess.run(['ps', '-ef'], capture_output=True, text=True)
 if process.stderr:
     print('error:', process.stderr, file=sys.stderr)
