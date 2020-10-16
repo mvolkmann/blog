@@ -118,6 +118,16 @@ To run a Python script:
 
 In both cases, command-line arguments can be passed to the script.
 
+A JavaScript script running in Node.js
+can get them from the array `process.argv`.
+The first element is the path to the `node` executable,
+the second is the path to the script that is running,
+and the remaining elements are the command-line arguments.
+
+A Python script can get them from `sys.argv`.
+The first element is the path to the script that is running,
+and the remaining elements are the command-line arguments.
+
 To make a Python source file directly executable in UNIX systems:
 
 - Add this as the first line: `#!/usr/bin/env python3`
