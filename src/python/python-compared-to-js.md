@@ -29,7 +29,7 @@ Some oddities about Python code formatting include:
 - leaving two blank lines before and after every function and class definition
 - leaving two spaces before every comment that appears on the same line as code
 
-## Pros and Cons
+## Pros and cons
 
 ### JavaScript
 
@@ -70,7 +70,7 @@ cons:
 - magic methods such as `__init__` use "dunder" names (for double underscore)
   which is an odd and verbose way to distinguish special values
   (Other programming languages typically use a single special character prefix.
-  See a list in the "Python Magic Methods" section.)
+  See a list in the "Python magic methods" section.)
 - use of operator overloading (supported by magic methods) can be confusing
 - anonymous functions are limited to a single expression
 - no built-in support for asynchronous code
@@ -95,7 +95,7 @@ cons:
 
 - lots of documentation and examples are still for V2 instead of V3
 
-## Running Scripts
+## Running scripts
 
 JavaScript source files have an extension of `.js`
 or `.mjs` (for ECMAScript modules).
@@ -131,7 +131,7 @@ To automatically restart a script when it or a file it imports is modified:
 1. If running a JavaScript script, enter `nodemon {name}.js`
 1. If running a Python script, enter `nodemon --exec python3 {name}.py`.
 
-## Getting Help
+## Getting help
 
 For Python, see the list of resources at the end.
 You can also enter the `python` command to start the REPL and enter `help`.
@@ -154,7 +154,7 @@ For example, "mdn regexp".
 | single-line | `//`        | `#`    |
 | multi-line  | `/* ... */` | none   |
 
-## Naming Conventions
+## Naming conventions
 
 | Kind                        | JavaScript     | Python          |
 | --------------------------- | -------------- | --------------- |
@@ -171,7 +171,7 @@ they can still be modified.
 And the naming convention for private instance variables
 (start with an underscore), doesn't prevent access from outside the class.
 
-## Builtin Types
+## Builtin types
 
 | Type                 | JavaScript                                           | Python                                                                  |
 | -------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -253,7 +253,7 @@ The community has landed on using the aliases shown in the imports below.
 
 ## Packages
 
-### JavaScript Packages
+### JavaScript packages
 
 JavaScript "packages" are managed using the `npm` tool
 which is install with Node.js is installed.
@@ -262,7 +262,7 @@ and make it easy for other developers to install the same set of packages,
 create a `package.json` file in each project
 by entering `npm init` and answering some questions.
 
-### Python Packages
+### Python packages
 
 Python "packages" are managed using the `pip` tool
 which is installed when Python is installed.
@@ -308,7 +308,7 @@ This differs from Node.js where simply changing to the directory
 of a project causes its dependencies versions to be used
 based on the contents of the `node_modules` subdirectory.
 
-### Package Comparisons
+### Package comparisons
 
 | Operation                                      | JavaScript                                                                         | Python                                                                       |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -324,7 +324,7 @@ based on the contents of the `node_modules` subdirectory.
 | create list of project package versions        | automatically maintained in `package.json`                                         | `pip freeze > requirements.txt`                                              |
 | install project package versions               | `npm install`                                                                      | `pip install -r requirements.txt`                                            |
 
-### Project Python Packages
+### Project Python packages
 
 Project Python packages enable importing modules from subdirectories.
 These are subdirectories whose names are a package name.
@@ -357,7 +357,7 @@ For more information on Python packages, see the
 | print with interpolation               | `` console.log(`Hello ${name}, today is ${dayOfWeek}.`); ``                                 | `print(f'Hello {name}, today is {dayOfWeek}.')`       |
 | print without newline                  | in Node.js<br>`const process = require('process');`<br>`process.stdout.write(v1, v2, ...);` | `print(v1, v2, ..., end='')`                          |
 
-## Variables and Assignment
+## Variables and assignment
 
 JavaScript variables should be declared
 using either the `const` or `let` keyword.
@@ -417,7 +417,7 @@ is between 10 and 20 inclusive:
 - in JavaScript, `10 <= n && n <= 20`
 - in Python, `10 <= n <= 20`
 
-## Conditional Logic
+## Conditional logic
 
 In the JavaScript syntax below, `sOrB` is short for "statement or block".
 It can be a single statement or a set of statements surrounded by curly braces.
@@ -435,7 +435,7 @@ Python blocks must start on a new line and be indented.
 
 ## Iteration
 
-As we will see in the "Key/Value Collections" section later,
+As we will see in the "Key/value collections" section later,
 JavaScript can store key/value pairs in plain objects
 or in instances of the `Map` class.
 Python uses "dictionaries" (or dicts) to store key/value pairs.
@@ -534,7 +534,85 @@ In Python:
 - The `partial` function (shown in the table above)
   can only be used on functions, not methods of a class.
 
-## Asynchronous Functions
+## Execute later or at intervals
+
+In JavaScript, the `setTimeout` function registers a function to be
+called after some number of milliseconds in the future. For example:
+
+```js
+function myFunction(p1, p2) {
+  console.log('myFunction: p1 =', p1, 'p2 =', p2);
+}
+
+// Call function above after one second.
+const id1 = setTimeout(() => myFunction('arg1', 'arg2'), 1000);
+if (tiredOfWaiting) clearTimeout(id1);
+```
+
+In Python the same can be done as follows:
+
+```python
+import threading
+
+def my_function(p1, p2):
+    print('my_function: p1 =', p1, 'p2 =', p2)
+
+# The Timer function takes the number of seconds to wait,
+# the function to call, and a tuple of arguments to be passed.
+t = threading.Timer(1.0, my_function, ('arg1', 'arg2'))
+t.start()
+if tired_of_waiting:
+    t.cancel()
+```
+
+In JavaScript, the `setInterval` function registers a function to be
+called repeatedly every some number of milliseconds. For example:
+
+```js
+// Call the function above once every two seconds.
+const id2 = setInterval(() => myFunction('arg1', 'arg2'), 2000);
+if (tiredOfWaiting) clearInterval(id2);
+
+// Cancel interval after five seconds.
+setTimeout(() => clearInterval(id2), 5000);
+```
+
+In Python there is no simple equivalent.
+But the same can be done if we define and use a class as follows:
+
+```python
+import threading
+import time
+
+class setInterval :
+    def __init__(self, seconds, fn, args):
+        self.seconds = seconds
+        self.fn = fn
+        self.args = args
+        self.event = threading.Event()
+        threading.Thread(target=self.__setInterval).start()
+
+    def __setInterval(self):
+        nextTime = time.time() + self.seconds
+        while not self.event.wait(nextTime - time.time()):
+            nextTime += self.seconds
+            self.fn(*self.args)
+
+    def cancel(self):
+        self.event.set()
+
+def my_function(p1, p2):
+    print('my_function: p1 =', p1, 'p2 =', p2)
+
+interval = setInterval(2, my_function, ('arg1', 'arg2'))
+if tired_of_waiting:
+    interval.cancel()
+
+# Cancel interval after five seconds.
+threading.Timer(5, lambda: interval.cancel()).start()
+```
+
+## Asynchronous functions
 
 In Python 3.4+, asynchronous functions are supported by the `asyncio` library.
 
@@ -729,7 +807,7 @@ def print_inheritance(cls, level = 0):
         print_class_tree(base, level + 1)
 ```
 
-## Boolean Operations
+## Boolean operations
 
 | Operation   | JavaScript | Python      |
 | ----------- | ---------- | ----------- |
@@ -741,7 +819,7 @@ def print_inheritance(cls, level = 0):
 | bitwise not | `~b`       | same        |
 | bitwise xor | `b1 ^ b2`  | same        |
 
-## Numeric Operations
+## Numeric operations
 
 | Operation                                     | JavaScript                             | Python               |
 | --------------------------------------------- | -------------------------------------- | -------------------- |
@@ -759,7 +837,7 @@ def print_inheritance(cls, level = 0):
 | constants                                     | see `Math` and `Number` global objects | see `math` module    |
 | functions                                     | see `Math` and `Number` global objects | see `math` module    |
 
-## String Operations
+## String operations
 
 | Operation           | JavaScript                                      | Python                                                                             |
 | ------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
@@ -919,7 +997,7 @@ to convert values to strings. For example:
 ```
 
 JavaScript can implement lazy functions using generator functions
-(see the "List Comprehension" section),
+(see the "List comprehension" section),
 but no built-in generator functions are provided.
 
 ## Sorting
@@ -961,7 +1039,7 @@ people.sort(key=itemgetter('lastName', 'firstName'))
 print(people)
 ```
 
-## List Comprehensions
+## List comprehensions
 
 Python supports list comprehensions that create a list, but JavaScript does not.
 Here are some examples.
@@ -1031,7 +1109,7 @@ Sets are unordered collections with no duplicate values.
 | iterate over          | `s.forEach(value => { ... });`                   | `for value in set: ...`                 |
 | convert to array/list | `a = s.values();`                                | `l = list(s)`                           |
 
-## Set Comprehensions
+## Set comprehensions
 
 Python supports set comprehensions that create a set, but JavaScript does not.
 Here is an example.
@@ -1045,7 +1123,7 @@ from random import randint
 numbers = {randint(1, 11) for n in range(10)}
 ```
 
-## <a name="key-value-collections">Key/Value Collections</a>
+## <a name="key-value-collections">Key/value collections</a>
 
 JavaScript uses plain objects or instances of the `Map` class
 to store associations between keys and values.
@@ -1115,7 +1193,7 @@ my_dict = {name: get_initials(name) for name in names}
 # {'Mark Volkmann': 'MV', 'Dorian Yeager': 'DY'}
 ```
 
-## Regular Expressions
+## Regular expressions
 
 In JavaScript, regular expressions are a built-in type.
 An instance can be created in two ways:
@@ -1176,7 +1254,7 @@ For more information on regular expression support in Python, see the
 {% aTargetBlank "https://docs.python.org/3/library/re.html",
 "Python Standard Library Documentation" %}.
 
-## Error Handling
+## Error handling
 
 Python refers to errors as exceptions.
 
@@ -1233,7 +1311,7 @@ In Python, in order to use JSON methods include `import json`.
 | create    | `const jsonString = JSON.stringify(expr);` | `jsonString = json.dumps(expr)`  |
 | parse     | `const value = JSON.parse(jsonString);`    | `value = json.loads(jsonString)` |
 
-## Writing and Reading Files
+## Writing and reading Files
 
 Node.js and Python can both read and write files containing text or binary data.
 For details on how this works in Node.js, see the
@@ -1249,7 +1327,7 @@ Another case is when it cannot and therefore
 must be processed using streams, perhaps one line at a time.
 We will see an example using CSV that demonstrates this.
 
-### Writing and Reading Small Files
+### Writing and reading small files
 
 Let's write a JSON file and then read it back in to verify that it worked.
 
@@ -1293,7 +1371,7 @@ with open('x' + file_path, 'r') as reader:
     print(new_dog)
 ```
 
-### Writing and Reading Large Files
+### Writing and reading large files
 
 Let's write a CSV file and then read it back in to verify that it worked.
 Rather than write the entire file at once, we will write one line at a time.
@@ -1407,7 +1485,7 @@ In Node.js, use `if (require.main === module) { ... }`
 
 In Python, use `if __name__ == '__main__': ...`
 
-## HTTP Servers
+## HTTP servers
 
 HTTP servers can be implemented in both Node.js and Python.
 In Node.js, a popular option is to use the
@@ -1438,7 +1516,7 @@ We want the servers to:
   using the data in the request body
 - handle `DELETE /dog/id` requests by deleting the dog with the given id
 
-### JavaScript Express REST Server
+### JavaScript Express REST server
 
 1. Create a directory for the project and cd to it.
 1. Create a `package.json` file for the project by
@@ -1518,7 +1596,7 @@ We want the servers to:
 
 1. Run the server by entering `npm start`.
 
-### Python Flask REST Server
+### Python Flask REST server
 
 Key benefits of
 {% aTargetBlank "https://flask.palletsprojects.com/", "Flask" %} are:
@@ -1601,7 +1679,7 @@ Key benefits of
 
 1. Run the server by entering `./start`.
 
-### Python FastAPI REST Server
+### Python FastAPI REST server
 
 Key benefits of
 {% aTargetBlank "https://fastapi.tiangolo.com/", "FastAPI" %} are:
@@ -1684,7 +1762,7 @@ Key benefits of
    Browse localhost:1919/docs to see API documentation
    and try each API from the browser.
 
-## HTTP Clients
+## HTTP clients
 
 JavaScript applications often use the Fetch API to send HTTP requests.
 This is built into modern web browsers and
@@ -1745,7 +1823,7 @@ except Exception as e:
     print(e)
 ```
 
-## Python Magic Methods
+## Python magic methods
 
 Python magic methods support many operations on classes and class instances.
 These include operator overloading.
@@ -1969,7 +2047,7 @@ the Pyright FAQ says:
 There is no guarantee of continued development on the project.
 If you find it useful, feel free to use it and contribute to the code base."
 
-### Stub Files
+### Stub files
 
 Types can be specified in "stub files" with a `.pyi` extension
 instead of directly in `.py` files.
@@ -2049,7 +2127,7 @@ Found 1 error in 1 file (checked 1 source file)
 Packages that support implementing tests for Python code include
 pytest, codecov, and coverage (Jordan Walker uses these).
 
-## Popular Tools/Libraries/Frameworks
+## Popular tools/libraries/frameworks
 
 | Topic            | JavaScript                          | Python                                        |
 | ---------------- | ----------------------------------- | --------------------------------------------- |
@@ -2074,13 +2152,13 @@ autopep8 and pylint.
 
 ## Resources
 
-### JavaScript Resources
+### JavaScript resources
 
 - {% aTargetBlank "https://nodejs.org/dist/latest-v14.x/docs/api/", "Node API docs" %}
 - {% aTargetBlank "https://npmjs.com/", "npm" %}
 - {% aTargetBlank "https://developer.mozilla.org/en-US/", "Mozilla Developer Network" %}
 
-### Python Resources
+### Python resources
 
 - {% aTargetBlank "https://www.python.org/", "Python home page" %}
 - {% aTargetBlank "https://docs.python.org/3/tutorial/", "Python Tutorial" %}
