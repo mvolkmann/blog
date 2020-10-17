@@ -900,7 +900,7 @@ To use the Python functions, `import math`.
 | log base 10                    | `Math.log10(x)`               | `math.log10(x)`                              |
 | logarithm to any base          | not built-in; see below       | `math.log(x, y)`                             |
 | maximum                        | `Math.max(n1, n2, ...)`       | `max(n1, n2, ...)`                           |
-| mean                           | not built-in; see below       | `statistics.mean(seq)`                       |
+| mean (average)                 | not built-in; see below       | `statistics.mean(seq)`                       |
 | median                         | not built-in; see below       | `statistics.median(seq)`                     |
 | maximum                        | `Math.max(n1, n2, ...)`       | `max(n1, n2, ...)`                           |
 | mode                           | not built-in; see below       | `statistics.mode(seq)`                       |
@@ -2457,7 +2457,7 @@ To lint Python code using
 {% aTargetBlank "https://flake8.pycqa.org/", "flake8" %}:
 
 - `pip install flake8`
-- `flake8 *.py`
+- `flake8`
 
 To configure the rules used by flake8,
 create the project file `.flake8` or a file in a user home directory
