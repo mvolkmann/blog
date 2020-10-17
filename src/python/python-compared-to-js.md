@@ -437,6 +437,17 @@ Python blocks must start on a new line and be indented.
 | if/else if/else | `if (cond1) sOrB1 else if (cond2) sOrB2 else sOrB3` | `if cond: block1 elif cond2: block2 else: block3` |
 | ternary         | `cond ? trueValue : falseValue`                     | `trueValue if cond else falseValue`               |
 
+In JavaScript the following evaluate to `false` in a boolean context:
+`undefined`, `null`, `false`, `0`, `NaN`, and an empty string,
+Unlike in Python, in JavaScript empty collections evaluate to `true`.
+These include arrays, objects, `Map` instances, and `Set` instances.
+
+In Python the following evaluate to `false` in a boolean context:
+`None`, `False`, `0`, `0.0`, `0j` (complex), an empty string,
+or an empty range/list/tuple/set/dict.
+Unlike in JavaScript, in Python the "not a number" value
+`math.nan` evaluates to `true` in a boolean context.
+
 Here's an example of using a Python ternary statement.
 
 ```python
@@ -515,6 +526,11 @@ For guidelines on the content of docstrings, see the
 {% aTargetBlank
   "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
   "PEP-8 documentation strings" %}.
+A good docstring for a function looks like:
+
+```python
+    """Return the average of a sequence of numbers."""
+```
 
 Neither JavaScript nor Python support function overloading
 where the same function name can be defined multiple times
@@ -2381,9 +2397,22 @@ See [Python testing](/blog/python/python-testing/).
 | web server       | Express                             | Flask                                         |
 | web framework    | React, Svelte, Vue                  | Flask                                         |
 | dates and times  | date.fns, Moment.js, Temporal       | datetime (in standard library)                |
+| linting          | ESLint                              | pylint, flake8                                |
 | unit tests       | Jest, Mocha, Chai, @testing-library | unittest (in standard library), nose2, pytest |
 | end-to-end tests | Cypress                             | same                                          |
 | math             | mathjs                              | math (in standard library)                    |
+
+## Linting
+
+To lint Python code using pylint:
+
+- `pip install pylint`
+- `pylint *.py`
+
+To lint Python code using flake8:
+
+- `pip install flake8`
+- `flake8 *.py`
 
 ## VS Code
 

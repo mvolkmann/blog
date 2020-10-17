@@ -107,7 +107,7 @@ for dirpath, dirnames, filenames in os.walk(cwd):
     #print('dirnames =', dirnames)
     #print('filenames =', filenames)
     py_files = list(filter(lambda name: name.endswith('.py'), filenames))
-    if len(py_files):
+    if py_files:
         print(dirpath, 'contains', py_files)
 ```
 
