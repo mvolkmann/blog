@@ -618,18 +618,18 @@ But the same can be done if we define and use a class as follows:
 import threading
 import time
 
-class setInterval :
+class SetInterval:
     def __init__(self, seconds, fn, args):
         self.seconds = seconds
         self.fn = fn
         self.args = args
         self.event = threading.Event()
-        threading.Thread(target=self.__setInterval).start()
+        threading.Thread(target=self.__set_interval).start()
 
-    def __setInterval(self):
-        nextTime = time.time() + self.seconds
-        while not self.event.wait(nextTime - time.time()):
-            nextTime += self.seconds
+    def __set_interval(self):
+        next_time = time.time() + self.seconds
+        while not self.event.wait(next_time - time.time()):
+            next_time += self.seconds
             self.fn(*self.args)
 
     def cancel(self):
@@ -638,7 +638,7 @@ class setInterval :
 def my_function(p1, p2):
     print('my_function: p1 =', p1, 'p2 =', p2)
 
-interval = setInterval(2, my_function, ('arg1', 'arg2'))
+interval = SetInterval(2, my_function, ('arg1', 'arg2'))
 if tired_of_waiting:
     interval.cancel()
 
@@ -2404,15 +2404,70 @@ See [Python testing](/blog/python/python-testing/).
 
 ## Linting
 
-To lint Python code using pylint:
+To lint JavaScript using {% aTargetBlank "https://eslint.org/", "ESLint" %}:
+
+- `npm install eslint eslint-plugin-import`
+- `eslint *.js`
+
+To configure the rules used by ESLint,
+create the file `.eslintrc.json` in project directories
+or in a user home directory.
+
+For example:
+
+```json
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:import/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module"
+  },
+  "plugins": ["import"]
+}
+```
+
+To lint Python code using
+{% aTargetBlank "https://www.pylint.org/", "pylint" %}:
 
 - `pip install pylint`
 - `pylint *.py`
 
-To lint Python code using flake8:
+To configure the rules used by pylint,
+create the project file `.pylintrc` or a file in a user home directory
+(`~/.pylintrc` or `~/.config/pylintrc`).
+To generate a commented version of this file, enter
+`pylint --generate-rcfile > {file-path}`.
+This file can then be modified or just used for reference.
+For example:
+
+```text
+[MESSAGES CONTROL]
+disable=
+    redefined-outer-name,
+    too-few-public-methods
+```
+
+To lint Python code using
+{% aTargetBlank "https://flake8.pycqa.org/", "flake8" %}:
 
 - `pip install flake8`
 - `flake8 *.py`
+
+To configure the rules used by flake8,
+create the project file `.flake8` or a file in a user home directory
+(`~/.flake8` for Windows and `~/.config/flake8` for macOS and Linux).
+For example:
+
+```text
+[flake8]
+ignore = E261, E265, E302, E305, E731
+```
 
 ## VS Code
 
