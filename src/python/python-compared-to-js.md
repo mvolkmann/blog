@@ -2370,8 +2370,7 @@ Found 1 error in 1 file (checked 1 source file)
 
 ## Testing
 
-Packages that support implementing tests for Python code include
-pytest, codecov, and coverage (Jordan Walker uses these).
+See [Python testing](/blog/python/python-testing/).
 
 ## Popular tools/libraries/frameworks
 
