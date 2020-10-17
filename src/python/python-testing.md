@@ -90,15 +90,19 @@ unittest is in the Python standard library, so does not need to be installed.
 
 ### nose2
 
+TODO: Add content
+
 ## Code coverage
+
+TODO: Add content
 
 ### codecov
 
-More detail is coming soon.
+TODO: Add content
 
 ### coverage
 
-More detail is coming soon.
+TODO: Add content
 
 ## End-to-end tests
 
