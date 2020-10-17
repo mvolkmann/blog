@@ -130,12 +130,12 @@ For example:
 import glob
 
 # Match all Python source files in and below the current directory.
-pattern = '**/*.py'
+PATTERN = '**/*.py'
 
-files = glob.glob(pattern)
+files = glob.glob(PATTERN)
 print(files)
 
-for file in glob.iglob(pattern):
+for file in glob.iglob(PATTERN):
     print(file)
 ```
 
@@ -154,10 +154,10 @@ dir_path = os.environ.get('PYTHON_DIR')
 ```python
 # Build a file path using an environment variable.
 dir_path = os.environ.get('PYTHON_DIR')
-file_name = 'test.csv'
+FILE_NAME = 'test.csv'
 # Using os.path.join instead of string concatenation
 # ensures correct handling of path separator characters.
-file_path = os.path.join(dir_path, file_name)
+file_path = os.path.join(dir_path, FILE_NAME)
 
 # Create a CSV file.
 with open(file_path, 'w') as f:
