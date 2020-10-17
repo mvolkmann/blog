@@ -325,6 +325,8 @@
     "relwidth",
     "relx",
     "removedirs",
+    "removeprefix",
+    "removesuffix",
     "repr",
     "rindex",
     "rint",

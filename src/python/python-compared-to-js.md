@@ -993,6 +993,8 @@ The Python `random` module also provides:
 | index of            | `s.indexOf(sub)` returns number                 | `s.index(sub, start?, end?)` returns int                                           |
 | last index of       | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub, start?, end?)` returns int                                          |
 | compare             | `s1.localeCompare(s2)` returns -1, 0, or 1      | `import locale`<br>`locale.strcoll(s1, s2)`<br>returns negative, zero, or positive |
+| remove prefix       | not supported                                   | `s.removeprefix(p)`                                                                |
+| remove suffix       | not supported                                   | `s.removesuffix(p)`                                                                |
 | replace first       | `s.replace(oldSub, newSub)`                     | `s.replace(old, new, 1)`                                                           |
 | replace all         | `s.replaceAll(oldSub, newSub)`                  | `s.replace(old, new)`                                                              |
 | trim start          | `s.trimStart()`                                 | `s.lstrip()`                                                                       |
@@ -1300,6 +1302,8 @@ The keys must be immutable types like strings, numbers, and tuples containing th
 | delete pair             | `del dict[key]`                                                                                        |
 | delete all pairs        | `dict.clear()`                                                                                         |
 | iterate over            | `for item in dict.items(): ...`                                                                        |
+
+Python 3.9 added the `|` and `|=` operators for merging dict objects.
 
 ### Creating a dictionary object
 
