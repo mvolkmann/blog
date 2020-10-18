@@ -175,11 +175,11 @@ they can still be modified.
 And the naming convention for private instance variables
 (start with an underscore), doesn't prevent access from outside the class.
 
-## Builtin types
+## Built-in types
 
 | Type                 | JavaScript                                           | Python                                                                  |
 | -------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------- |
-| boolean              | `true`, `false`                                      | `True`, `False`                                                         |
+| Boolean              | `true`, `false`                                      | `True`, `False`                                                         |
 | number               | default is double precision float, `BigInt`          | `int`, `float`, `complex`                                               |
 | character            | use strings                                          | same                                                                    |
 | string               | `'text'` or `"text"`                                 | same                                                                    |
@@ -196,7 +196,7 @@ And the naming convention for private instance variables
 | no value             | `undefined` or `null`                                | `None`                                                                  |
 
 Everything is an object in Python, even values that are
-primitives in JavaScript like booleans, numbers, and strings.
+primitives in JavaScript like Booleans, numbers, and strings.
 
 Python has "sequences" whereas JavaScript has arrays.
 There are three kinds of sequences: list, tuple, and range.
@@ -208,10 +208,10 @@ JavaScript object keys must be strings.
 Python dict keys can be any immutable type.
 
 In Python, the following values are treated as false when used
-in a boolean context: `False`, `None`, `0`, empty strings, and empty sequences.
+in a Boolean context: `False`, `None`, `0`, empty strings, and empty sequences.
 
 In JavaScript, the following values are treated as false when used
-in a boolean context: `false`, `0`, empty strings, `undefined`, and `null`.
+in a Boolean context: `false`, `0`, empty strings, `undefined`, and `null`.
 
 ## Modules
 
@@ -437,16 +437,16 @@ Python blocks must start on a new line and be indented.
 | if/else if/else | `if (cond1) sOrB1 else if (cond2) sOrB2 else sOrB3` | `if cond: block1 elif cond2: block2 else: block3` |
 | ternary         | `cond ? trueValue : falseValue`                     | `trueValue if cond else falseValue`               |
 
-In JavaScript the following evaluate to `false` in a boolean context:
+In JavaScript the following evaluate to `false` in a Boolean context:
 `undefined`, `null`, `false`, `0`, `NaN`, and an empty string,
 Unlike in Python, in JavaScript empty collections evaluate to `true`.
 These include arrays, objects, `Map` instances, and `Set` instances.
 
-In Python the following evaluate to `false` in a boolean context:
+In Python the following evaluate to `false` in a Boolean context:
 `None`, `False`, `0`, `0.0`, `0j` (complex), an empty string,
 or an empty range/list/tuple/set/dict.
 Unlike in JavaScript, in Python the "not a number" value
-`math.nan` evaluates to `true` in a boolean context.
+`math.nan` evaluates to `true` in a Boolean context.
 
 Here's an example of using a Python ternary statement.
 
@@ -841,6 +841,99 @@ def print_inheritance(cls, level = 0):
         print_class_tree(base, level + 1)
 ```
 
+## Built-in Functions
+
+JavaScript provides a small number (9) of built-in functions.
+Python provides many more (68).
+The table below summarizes these.
+
+Often one of the languages does not have an equivalent function to the other,
+so the closest alternative is shown instead.
+
+Descriptions below that begin with "determines if"
+mean that a Boolean value is returned.
+
+| Description                                                                       | Python                            | JavaScript                      |
+| --------------------------------------------------------------------------------- | --------------------------------- | ------------------------------- |
+| returns absolute value                                                            | `abs(x)`                          | `Math.abs(x)`                   |
+| determines if all elements are `True` in a Boolean context                        | `all(iterable)`                   | `arr.every(predicate)`          |
+| determines if any element is `True` in a Boolean context                          | `any(iterable)`                   | `arr.some(predicate)`           |
+| like `repr`, but escapes non-ASCII characters                                     | `ascii(obj)`                      | not supported                   |
+| converts integer to binary string                                                 | `bin(x)`                          | not supported                   |
+| converts value to Boolean                                                         | `bool(x)`                         | `Boolean(x)`                    |
+| breaks execution and drops into debugger                                          | `breakpoint`                      | `debugger`                      |
+| returns a new array of bytes                                                      | `bytearray(source)`               | ?                               |
+| returns a `bytes` object                                                          | `bytes(source)`                   | ?                               |
+| determines if x is callable (a function)                                          | `callable(x)`                     | `typeof x === 'function'`       |
+| returns string representation of a Unicode code point                             | `chr(code_point)`                 | ?                               |
+| compiles source into a code/AST object<br>which can be passed to `exec` or `eval` | `compile(source, filename, mode)` | not supported                   |
+| creates a complex number from real and imaginary parts                            | `complex(real, imag)`             | not supported                   |
+| deletes an attribute from an object                                               | `delattr(obj, name)`              | `delete obj[name]`              |
+| creates a dictionary                                                              | `dict`                            | `{}` or `new Map()`             |
+| returns a list of defined names in current scope or an object                     | `dir([obj])`                      | `Object.keys(obj)`              |
+| return tuple of quotient and remainder of a divided by b                          | `divmod(a, b)`                    | `Math.floor(a / b)` and `a % b` |
+| return list of tuples each containing and index and value from an iterable        | `enumerate(iterable)`             | `Object.entries(arr)`           |
+| evaluates a single code expression                                                | `eval(code)`                      | `eval(code)`                    |
+| execute an number of lines of code                                                | `exec(code)`                      | `eval(code)`                    |
+| returns iterator over values in iterable where predicate function returns true    | `filter(predicate, iterable)`     | `arr.filter(predicate)`         |
+| returns floating point number created from a number or string                     | `float(x)`                        | ?                               |
+| returns string created by formatting a value using a format string                | `format(value, format)`           | ?                               |
+| returns `frozenset` (immutable set) object created from iterable                  | `frozenset(iterable)`             | `Object.freeze(obj)`            |
+| desc                                                                              | `getattr`                         |
+| desc                                                                              | `globals`                         |
+| desc                                                                              | `hasattr`                         |
+| desc                                                                              | `hash`                            |
+| desc                                                                              | `help`                            |
+| desc                                                                              | `hex`                             |
+| desc                                                                              | `id`                              |
+| desc                                                                              | `input`                           |
+| desc                                                                              | `int`                             |
+| desc                                                                              | `isinstance`                      |
+| desc                                                                              | `issubclass`                      |
+| desc                                                                              | `iter`                            |
+| desc                                                                              | `len`                             |
+| desc                                                                              | `list`                            |
+| desc                                                                              | `locals`                          |
+| desc                                                                              | `map`                             |
+| desc                                                                              | `max`                             |
+| desc                                                                              | `memoryview`                      |
+| desc                                                                              | `min`                             |
+| desc                                                                              | `next`                            |
+| desc                                                                              | `object`                          |
+| desc                                                                              | `oct`                             |
+| desc                                                                              | `open`                            |
+| desc                                                                              | `ord`                             |
+| desc                                                                              | `pow`                             |
+| desc                                                                              | `print`                           |
+| desc                                                                              | `property`                        |
+| desc                                                                              | `range`                           |
+| desc                                                                              | `repr`                            |
+| desc                                                                              | `reversed`                        |
+| desc                                                                              | `round`                           |
+| desc                                                                              | `set`                             |
+| desc                                                                              | `setattr`                         |
+| desc                                                                              | `slice`                           |
+| desc                                                                              | `sorted`                          |
+| desc                                                                              | `staticmethod`                    |
+| desc                                                                              | `str`                             |
+| desc                                                                              | `sum`                             |
+| desc                                                                              | `super`                           |
+| desc                                                                              | `tuple`                           |
+| desc                                                                              | `type`                            |
+| desc                                                                              | `vars`                            |
+| desc                                                                              | `zip`                             |
+| desc                                                                              | `__import__`                      |
+
+| evaluate string as code | | `eval(s)` |
+| determines if x is a finite number | | `isFinite(x)` |
+| determines of x in the "not a number" value | | `isNaN(x)` |
+| converts x to a string and parses to a floating point number | | `parseFloat(x)` |
+| converts x to a string and parses to an integer;<br>can specify radix | | `parseInt(x)` |
+| encodes a URI, replacing certain characters<br>(not /, #, ?, =, and others) | | `encodeURI(s)` |
+| encodes a component of a URI, replacing certain characters | | `encodeURIComponent(s)` |
+| decodes a URL (opposite of `encodeURI`) | | `decodeURI(s)` |
+| decodes a component of a URI (opposite of `encodeURIComponent`) | | `decodeURIComponent(s)` |
+
 ## Boolean operations
 
 | Operation   | JavaScript | Python      |
@@ -1003,9 +1096,9 @@ The Python `random` module also provides:
 | substring           | `s1.substring(start, end?)`                     | `s[start:end]` or `s[start:]` or `s[:end]`                                         |
 | slice               | like `substring`, but supports negative indexes | same as above                                                                      |
 | split               | `s.split(delimiter)` returns array              | `s.split(delimiter)` returns list                                                  |
-| starts with         | `s.startsWith(sub)` returns boolean             | `s.startswith(sub)` returns boolean                                                |
-| ends with           | `s.endsWith(sub)` returns boolean               | `s.endswith(sub)` returns boolean                                                  |
-| contains            | `s.includes(sub)` returns boolean               | `sub in s` returns boolean                                                         |
+| starts with         | `s.startsWith(sub)` returns Boolean             | `s.startswith(sub)` returns Boolean                                                |
+| ends with           | `s.endsWith(sub)` returns Boolean               | `s.endswith(sub)` returns Boolean                                                  |
+| contains            | `s.includes(sub)` returns Boolean               | `sub in s` returns Boolean                                                         |
 | index of            | `s.indexOf(sub)` returns number                 | `s.index(sub, start?, end?)` returns int                                           |
 | last index of       | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub, start?, end?)` returns int                                          |
 | compare             | `s1.localeCompare(s2)` returns -1, 0, or 1      | `import locale`<br>`locale.strcoll(s1, s2)`<br>returns negative, zero, or positive |
@@ -1101,8 +1194,8 @@ print(len(dog)) # 2
 | iterate over                 | `for (const value of arr)` or<br>`arr.forEach((value, index) => { ... });`                          | `for item in seq:` or<br>`for index, item in enumerate(seq):`                                                                  |
 | iterate over in reverse      | iterate over `arr.reverse()`                                                                        | `for item in reversed(seq):`                                                                                                   |
 | iterate over in sorted order | create a sorted copy and iterate over it                                                            | `for item in sorted(seq):`                                                                                                     |
-| includes (boolean)           | `arr.includes(value)`                                                                               | `value in seq`                                                                                                                 |
-| not includes (boolean)       | `!arr.includes(value)`                                                                              | `value not in seq`                                                                                                             |
+| includes (Boolean)           | `arr.includes(value)`                                                                               | `value in seq`                                                                                                                 |
+| not includes (Boolean)       | `!arr.includes(value)`                                                                              | `value not in seq`                                                                                                             |
 | index of                     | `arr.indexOf(value[, fromIndex])`                                                                   | `seq.index(value[, start[, end]])`                                                                                             |
 | last index of                | `arr.lastIndexOf(value[, fromIndex])`                                                               | not built-in; have to reverse list                                                                                             | TODO |
 | count occurrences            | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                                            | `seq.count(value)`                                                                                                             |
@@ -1110,8 +1203,8 @@ print(len(dog)) # 2
 | map                          | `const newArr = arr.map(value => newValue);`                                                        | `iterator = map(function, seq)`                                                                                                |
 | filter                       | `const newArr = arr.filter(predicate);`                                                             | `iterator = filter(predicate, seq)`                                                                                            |
 | reduce                       | `const value = arr.reduce((acc, value) => { ... });`                                                | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                        |
-| some/any (boolean)           | `arr.some(predicate)` - short circuits                                                              | `any(map(predicate, seq))` - no short circuit                                                                                  |
-| every/all (boolean)          | `arr.every(predicate)` - short circuits                                                             | `all(map(predicate, seq))` - no short circuit                                                                                  |
+| some/any (Boolean)           | `arr.some(predicate)` - short circuits                                                              | `any(map(predicate, seq))` - no short circuit                                                                                  |
+| every/all (Boolean)          | `arr.every(predicate)` - short circuits                                                             | `all(map(predicate, seq))` - no short circuit                                                                                  |
 | sort                         | `arr.sort(comparator);`<br>`comparator` is a function that compares two elements                    | `list.sort(key=k, reverse?)`<br>`k` is an attribute name or a function that takes<br>an element and returns a value to sort on |
 | reverse                      | `arr.reverse()`                                                                                     | `list.reverse()` - only for lists                                                                                              |
 | destructure/unpack           | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of array elements             | `v1, v2, v3 = seq`<br># of variables on left must match # of sequence elements<br>which limits usefulness                      |
