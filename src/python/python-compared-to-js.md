@@ -853,86 +853,86 @@ so the closest alternative is shown instead.
 Descriptions below that begin with "determines if"
 mean that a Boolean value is returned.
 
-| Description                                                                       | Python                            | JavaScript                      |
-| --------------------------------------------------------------------------------- | --------------------------------- | ------------------------------- |
-| returns absolute value                                                            | `abs(x)`                          | `Math.abs(x)`                   |
-| determines if all elements are `True` in a Boolean context                        | `all(iterable)`                   | `arr.every(predicate)`          |
-| determines if any element is `True` in a Boolean context                          | `any(iterable)`                   | `arr.some(predicate)`           |
-| like `repr`, but escapes non-ASCII characters                                     | `ascii(obj)`                      | not supported                   |
-| converts integer to binary string                                                 | `bin(x)`                          | not supported                   |
-| converts value to Boolean                                                         | `bool(x)`                         | `Boolean(x)`                    |
-| breaks execution and drops into debugger                                          | `breakpoint`                      | `debugger`                      |
-| returns a new array of bytes                                                      | `bytearray(source)`               | ?                               |
-| returns a `bytes` object                                                          | `bytes(source)`                   | ?                               |
-| determines if x is callable (a function)                                          | `callable(x)`                     | `typeof x === 'function'`       |
-| returns string representation of a Unicode code point                             | `chr(code_point)`                 | ?                               |
-| compiles source into a code/AST object<br>which can be passed to `exec` or `eval` | `compile(source, filename, mode)` | not supported                   |
-| creates a complex number from real and imaginary parts                            | `complex(real, imag)`             | not supported                   |
-| deletes an attribute from an object                                               | `delattr(obj, name)`              | `delete obj[name]`              |
-| creates a dictionary                                                              | `dict`                            | `{}` or `new Map()`             |
-| returns a list of defined names in current scope or an object                     | `dir([obj])`                      | `Object.keys(obj)`              |
-| return tuple of quotient and remainder of a divided by b                          | `divmod(a, b)`                    | `Math.floor(a / b)` and `a % b` |
-| return list of tuples each containing and index and value from an iterable        | `enumerate(iterable)`             | `Object.entries(arr)`           |
-| evaluates a single code expression                                                | `eval(code)`                      | `eval(code)`                    |
-| execute an number of lines of code                                                | `exec(code)`                      | `eval(code)`                    |
-| returns iterator over values in iterable where predicate function returns true    | `filter(predicate, iterable)`     | `arr.filter(predicate)`         |
-| returns floating point number created from a number or string                     | `float(x)`                        | ?                               |
-| returns string created by formatting a value using a format string                | `format(value, format)`           | ?                               |
-| returns `frozenset` (immutable set) object created from iterable                  | `frozenset(iterable)`             | `Object.freeze(obj)`            |
-| desc                                                                              | `getattr`                         |
-| desc                                                                              | `globals`                         |
-| desc                                                                              | `hasattr`                         |
-| desc                                                                              | `hash`                            |
-| desc                                                                              | `help`                            |
-| desc                                                                              | `hex`                             |
-| desc                                                                              | `id`                              |
-| desc                                                                              | `input`                           |
-| desc                                                                              | `int`                             |
-| desc                                                                              | `isinstance`                      |
-| desc                                                                              | `issubclass`                      |
-| desc                                                                              | `iter`                            |
-| desc                                                                              | `len`                             |
-| desc                                                                              | `list`                            |
-| desc                                                                              | `locals`                          |
-| desc                                                                              | `map`                             |
-| desc                                                                              | `max`                             |
-| desc                                                                              | `memoryview`                      |
-| desc                                                                              | `min`                             |
-| desc                                                                              | `next`                            |
-| desc                                                                              | `object`                          |
-| desc                                                                              | `oct`                             |
-| desc                                                                              | `open`                            |
-| desc                                                                              | `ord`                             |
-| desc                                                                              | `pow`                             |
-| desc                                                                              | `print`                           |
-| desc                                                                              | `property`                        |
-| desc                                                                              | `range`                           |
-| desc                                                                              | `repr`                            |
-| desc                                                                              | `reversed`                        |
-| desc                                                                              | `round`                           |
-| desc                                                                              | `set`                             |
-| desc                                                                              | `setattr`                         |
-| desc                                                                              | `slice`                           |
-| desc                                                                              | `sorted`                          |
-| desc                                                                              | `staticmethod`                    |
-| desc                                                                              | `str`                             |
-| desc                                                                              | `sum`                             |
-| desc                                                                              | `super`                           |
-| desc                                                                              | `tuple`                           |
-| desc                                                                              | `type`                            |
-| desc                                                                              | `vars`                            |
-| desc                                                                              | `zip`                             |
-| desc                                                                              | `__import__`                      |
+| Description                                                                        | Python                                | JavaScript                                  |
+| ---------------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------- |
+| returns absolute value                                                             | `abs(x)`                              | `Math.abs(x)`                               |
+| determines if all elements are `True` in a Boolean context                         | `all(iterable)`                       | `arr.every(predicate)`                      |
+| determines if any element is `True` in a Boolean context                           | `any(iterable)`                       | `arr.some(predicate)`                       |
+| like `repr`, but escapes non-ASCII characters                                      | `ascii(obj)`                          | not supported                               |
+| converts integer to binary string                                                  | `bin(x)`                              | not supported                               |
+| converts value to Boolean                                                          | `bool(x)`                             | `Boolean(x)`                                |
+| breaks execution and drops into debugger                                           | `breakpoint`                          | `debugger`                                  |
+| returns a new array of bytes                                                       | `bytearray(source)`                   | ?                                           |
+| returns a `bytes` object                                                           | `bytes(source)`                       | ?                                           |
+| determines if x is callable (a function)                                           | `callable(x)`                         | `typeof x === 'function'`                   |
+| returns string representation of a Unicode code point                              | `chr(code_point)`                     | ?                                           |
+| compiles source into a code/AST object<br>which can be passed to `exec` or `eval`  | `compile(source, filename, mode)`     | not supported                               |
+| creates a complex number from real and imaginary parts                             | `complex(real, imag)`                 | not supported                               |
+| deletes an attribute from an object                                                | `delattr(obj, name)`                  | `delete obj[name]`                          |
+| creates a dictionary                                                               | `dict`                                | `{}` or `new Map()`                         |
+| returns a list of defined names in current scope or an object                      | `dir([obj])`                          | `Object.keys(obj)`                          |
+| return tuple of quotient and remainder of a divided by b                           | `divmod(a, b)`                        | `Math.floor(a / b)` and `a % b`             |
+| return list of tuples each containing and index and value from an iterable         | `enumerate(iterable)`                 | `Object.entries(arr)`                       |
+| evaluates a single code expression                                                 | `eval(code)`                          | `eval(code)`                                |
+| execute an number of lines of code                                                 | `exec(code)`                          | `eval(code)`                                |
+| returns iterator over values in iterable where predicate function returns true     | `filter(predicate, iterable)`         | `arr.filter(predicate)`                     |
+| returns floating point number created from a number or string                      | `float(x)`                            | `parseFloat(x)`                             |
+| returns string created by formatting a value using a format string                 | `format(value, format)`               | ?                                           |
+| returns `frozenset` (immutable set) object created from iterable                   | `frozenset(iterable)`                 | `Object.freeze(obj)`                        |
+| returns attribute value                                                            | `getattr(obj, name [, default])`      | `obj[name] || default`                      |
+| returns dictionary containing current global symbol table                          | `globals`                             | not supported                               |
+| determines if object has a given attribute                                         | `hasattr(obj, name)`                  | `name in obj`                               |
+| returns hash value of object                                                       | `hash(obj)`                           | not supported                               |
+| invoke the built-in Python help system, typically in the REPL                      | `help`                                | not supported                               |
+| converts integer to hex                                                            | `hex`                                 | `n.toString(16)`                            |
+| returns identity of an object                                                      | `id(obj)`                             | not supported                               |
+| read from stdout with optional prompt                                              | `input([prompt])`                     | use Node `readline` module question` method |
+| returns an integer created from a number or string                                 | `int(x)`                              | `parseInt(x[, radix])`                      |
+| determines if an object is an instance of a given class                            | `isinstance(obj, ClassName)`          | `obj instanceof ClassName`                  |
+| determines if a class is a subclass of another                                     | `issubclass(ClassName, SubClassName)` | ?                                           |
+| returns an iterator over the elements of a collection (see 1)                      | `iter(collection)`                    | `arr[Symbol.iterator]()`                    |
+| returns number of items in a collection or characters in a string                  | `len(obj)`                            | `obj.length`                                |
+| constructs a list from an iterable                                                 | `list(iterable)`                      | `Array.from(arrayLike)`                     |
+| returns dictionary containing current local symbol table                           | `locals`                              | not supported                               |
+| returns iterator over values returned by calling function on each iterable element | `map(fn, iterable)`                   | `arr.map(fn)`                               |
+| returns largest value in an iterable or of arguments                               | `max(iterable)` or `max(v1, v2, ...)` | `Math.max(...arr)` or `Math.max(args)`      |
+| desc                                                                               | `memoryview`                          |
+| desc                                                                               | `min`                                 |
+| desc                                                                               | `next`                                |
+| desc                                                                               | `object`                              |
+| desc                                                                               | `oct`                                 |
+| desc                                                                               | `open`                                |
+| desc                                                                               | `ord`                                 |
+| desc                                                                               | `pow`                                 |
+| desc                                                                               | `print`                               |
+| desc                                                                               | `property`                            |
+| desc                                                                               | `range`                               |
+| desc                                                                               | `repr`                                |
+| desc                                                                               | `reversed`                            |
+| desc                                                                               | `round`                               |
+| desc                                                                               | `set`                                 |
+| desc                                                                               | `setattr`                             |
+| desc                                                                               | `slice`                               |
+| desc                                                                               | `sorted`                              |
+| desc                                                                               | `staticmethod`                        |
+| desc                                                                               | `str`                                 |
+| desc                                                                               | `sum`                                 |
+| desc                                                                               | `super`                               |
+| desc                                                                               | `tuple`                               |
+| desc                                                                               | `type`                                |
+| desc                                                                               | `vars`                                |
+| desc                                                                               | `zip`                                 |
+| desc                                                                               | `__import__`                          |
 
-| evaluate string as code | | `eval(s)` |
 | determines if x is a finite number | | `isFinite(x)` |
 | determines of x in the "not a number" value | | `isNaN(x)` |
-| converts x to a string and parses to a floating point number | | `parseFloat(x)` |
-| converts x to a string and parses to an integer;<br>can specify radix | | `parseInt(x)` |
 | encodes a URI, replacing certain characters<br>(not /, #, ?, =, and others) | | `encodeURI(s)` |
 | encodes a component of a URI, replacing certain characters | | `encodeURIComponent(s)` |
 | decodes a URL (opposite of `encodeURI`) | | `decodeURI(s)` |
 | decodes a component of a URI (opposite of `encodeURIComponent`) | | `decodeURIComponent(s)` |
+
+1. To get the next value from na iterator,
+   call the Python `__next__` method or the JavaScript `next` method.
 
 ## Boolean operations
 
