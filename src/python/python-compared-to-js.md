@@ -845,7 +845,7 @@ def print_inheritance(cls, level = 0):
 
 JavaScript provides a small number (9) of built-in functions.
 Python provides many more (68).
-The table below summarizes these.
+The tables below summarizes these.
 
 Often one of the languages does not have an equivalent function to the other,
 so the closest alternative is shown instead.
@@ -853,83 +853,88 @@ so the closest alternative is shown instead.
 Descriptions below that begin with "determines if"
 mean that a Boolean value is returned.
 
-| Description                                                                        | Python                                | JavaScript                                    |
-| ---------------------------------------------------------------------------------- | ------------------------------------- | --------------------------------------------- |
-| returns absolute value                                                             | `abs(x)`                              | `Math.abs(x)`                                 |
-| determines if all elements are `True` in a Boolean context                         | `all(iterable)`                       | `arr.every(predicate)`                        |
-| determines if any element is `True` in a Boolean context                           | `any(iterable)`                       | `arr.some(predicate)`                         |
-| like `repr`, but escapes non-ASCII characters                                      | `ascii(obj)`                          | not supported                                 |
-| converts integer to binary string                                                  | `bin(x)`                              | not supported                                 |
-| converts value to Boolean                                                          | `bool(x)`                             | `Boolean(x)`                                  |
-| breaks execution and drops into debugger                                           | `breakpoint()`                        | `debugger`                                    |
-| returns a new array of bytes                                                       | `bytearray(source)`                   | ?                                             |
-| returns a `bytes` object                                                           | `bytes(source)`                       | ?                                             |
-| determines if x is callable (a function)                                           | `callable(x)`                         | `typeof x === 'function'`                     |
-| returns string representation of a Unicode code point                              | `chr(code_point)`                     | ?                                             |
-| compiles source into a code/AST object<br>which can be passed to `exec` or `eval`  | `compile(source, filename, mode)`     | not supported                                 |
-| creates a complex number from real and imaginary parts                             | `complex(real, imag)`                 | not supported                                 |
-| deletes an attribute from an object                                                | `delattr(obj, name)`                  | `delete obj[name]`                            |
-| creates a dictionary                                                               | `dict([data])`                        | `{}` or `new Map()`                           |
-| returns a list of defined names in current scope or an object                      | `dir([obj])`                          | `Object.keys(obj)`                            |
-| return tuple of quotient and remainder of a divided by b                           | `divmod(a, b)`                        | `Math.floor(a / b)` and `a % b`               |
-| return list of tuples each containing and index and value from an iterable         | `enumerate(iterable)`                 | `Object.entries(arr)`                         |
-| evaluates a single code expression                                                 | `eval(code)`                          | `eval(code)`                                  |
-| execute an number of lines of code                                                 | `exec(code)`                          | `eval(code)`                                  |
-| returns iterator over values in iterable where predicate function returns true     | `filter(predicate, iterable)`         | `arr.filter(predicate)`                       |
-| returns floating point number created from a number or string                      | `float(x)`                            | `parseFloat(x)`                               |
-| returns string created by formatting a value using a format string                 | `format(value, format)`               | ?                                             |
-| returns `frozenset` (immutable set) object created from iterable                   | `frozenset(iterable)`                 | `Object.freeze(obj)`                          |
-| returns attribute value                                                            | `getattr(obj, name [, default])`      | `obj[name] || default`                        |
-| returns dictionary containing current global symbol table                          | `globals()`                           | not supported                                 |
-| determines if object has a given attribute                                         | `hasattr(obj, name)`                  | `name in obj`                                 |
-| returns hash value of object                                                       | `hash(obj)`                           | not supported                                 |
-| invoke the built-in Python help system, typically in the REPL                      | `help([topic])`                       | not supported                                 |
-| converts integer to hex                                                            | `hex(n)`                              | `n.toString(16)`                              |
-| returns identity of an object                                                      | `id(obj)`                             | not supported                                 |
-| read from stdout with optional prompt                                              | `input([prompt])`                     | use Node `readline` module `question` method  |
-| returns an integer created from a number or string                                 | `int(x)`                              | `parseInt(x[, radix])`                        |
-| determines if an object is an instance of a given class                            | `isinstance(obj, ClassName)`          | `obj instanceof ClassName`                    |
-| determines if a class is a subclass of another                                     | `issubclass(ClassName, SubClassName)` | ?                                             |
-| returns an iterator over the elements of a collection (see `next`)                 | `iter(collection)`                    | `arr[Symbol.iterator]()`                      |
-| returns number of items in a collection or characters in a string                  | `len(obj)`                            | `obj.length`                                  |
-| constructs a list from an iterable                                                 | `list(iterable)`                      | `Array.from(arrayLike)`                       |
-| returns dictionary containing current local symbol table                           | `locals():`                           | not supported                                 |
-| returns iterator over values returned by calling function on each iterable element | `map(fn, iterable)`                   | `arr.map(fn)`                                 |
-| returns largest value of arguments or in an iterable                               | `max(v1, v2, ...)` or `max(iterable)` | `Math.max(v1, v2, ...)` or `Math.max(...arr)` |
-| returns a memoryview for an object that support the buffer protocol                | `memoryview(obj)`                     | not supported                                 |
-| returns largest value of arguments or in an iterable                               | `min(v1, v2, ...)` or `min(iterable)` | `Math.min(v1, v2, ...)` or `Math.min(...arr)` |
-| get next item from an iterator                                                     | `next(iterator)`                      | `iterator.next()`                             |
-| create an empty, featureless object; can't add properties; Why useful?             | `object()`                            | `{}` is similar, but CAN add properties       |
-| converts integer to octal                                                          | `oct(n)`                              | `n.toString(8)`                               |
-| opens a file for reading, writing, or appending                                    | `open(file, mode, ...)`               | see the Node fs module                        |
-| returns the Unicode code point for a Unicode character                             | `ord(s)`                              | `s.charCodeAt([index])`                       |
-| return base raised to exp power                                                    | `base ** exp` or `pow(base, exp)`     | `base ** exp` or `Math.pow(base, exp)`        |
-| print space-separated expression values                                            | `print(v1, v2, ...)`                  | `console.log(v1, v2, ...)`                    |
-| desc                                                                               | `property`                            |
-| desc                                                                               | `range`                               |
-| desc                                                                               | `repr`                                |
-| desc                                                                               | `reversed`                            |
-| desc                                                                               | `round`                               |
-| desc                                                                               | `set`                                 |
-| desc                                                                               | `setattr`                             |
-| desc                                                                               | `slice`                               |
-| desc                                                                               | `sorted`                              |
-| desc                                                                               | `staticmethod`                        |
-| desc                                                                               | `str`                                 |
-| desc                                                                               | `sum`                                 |
-| desc                                                                               | `super`                               |
-| desc                                                                               | `tuple`                               |
-| desc                                                                               | `type`                                |
-| desc                                                                               | `vars`                                |
-| desc                                                                               | `zip`                                 |
-| desc                                                                               | `__import__`                          |
+| Python built-in function                         | Description                                                                                            | Closest JavaScript equivalent                                        |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `abs(x)`                                         | returns absolute value                                                                                 | `Math.abs(x)`                                                        |
+| `all(iterable)`                                  | determines if all elements are `True`<br>in a Boolean context                                          | `arr.every(predicate)`                                               |
+| `any(iterable)`                                  | determines if any element is `True`<br>in a Boolean context                                            | `arr.some(predicate)`                                                |
+| `ascii(obj)`                                     | like `repr`, but escapes non-ASCII characters                                                          | not supported                                                        |
+| `bin(x)`                                         | converts integer to binary string                                                                      | not supported                                                        |
+| `bool(x)`                                        | converts value to Boolean                                                                              | `Boolean(x)`                                                         |
+| `breakpoint()`                                   | breaks execution and<br>drops into debugger                                                            | `debugger`                                                           |
+| `bytearray(source)`                              | returns a new array of bytes                                                                           | use `ArrayBuffer` with typed array classes                           |
+| `bytes(source)`                                  | returns a `bytes` object                                                                               | use `ArrayBuffer` with typed array classes                           |
+| `callable(x)`                                    | determines if x is callable (a function)                                                               | `typeof x === 'function'`                                            |
+| `chr(code_point)`                                | returns string representation<br>of a Unicode code point                                               | `String.fromCodePoint(codePoint)`                                    |
+| `compile(source, filename, mode)`                | compiles source into a code/AST object<br>which can be passed to `exec` or `eval`                      | not supported                                                        |
+| `complex(real, imag)`                            | creates a complex number<br>from real and imaginary parts                                              | not supported                                                        |
+| `delattr(obj, name)`                             | deletes an attribute from an object                                                                    | `delete obj[name]`                                                   |
+| `dict([data])`                                   | creates a dictionary                                                                                   | `{}` or `new Map()`                                                  |
+| `dir([obj])`                                     | returns a list of defined names<br>in current scope or an object                                       | `Object.keys(obj)`                                                   |
+| `divmod(a, b)`                                   | return tuple of quotient and remainder<br>of `a` divided by `b`                                        | `Math.floor(a / b)` and `a % b`                                      |
+| `enumerate(iterable)`                            | return list of tuples each containing<br>an index and value from an iterable                           | `Object.entries(arr)`                                                |
+| `eval(code)`                                     | evaluates a single code expression                                                                     | `eval(code)`                                                         |
+| `exec(code)`                                     | execute any number of lines of code                                                                    | `eval(code)`                                                         |
+| `filter(predicate, iterable)`                    | returns iterator over values in iterable<br>where predicate function returns true                      | `arr.filter(predicate)`                                              |
+| `float(x)`                                       | returns floating point number<br>created from a number or string                                       | `parseFloat(x)`                                                      |
+| `format(value, format)`                          | returns string created by formatting a value<br>using a format string                                  | use template literals                                                |
+| `frozenset(iterable)`                            | returns `frozenset` (immutable set) object<br>created from iterable                                    | `Object.freeze(obj)`                                                 |
+| `getattr(obj, name [, default])`                 | returns attribute value                                                                                | `obj[name] || default`                                               |
+| `globals()`                                      | returns dictionary containing the<br>current global symbol table                                       | not supported                                                        |
+| `hasattr(obj, name)`                             | determines if object has a given attribute                                                             | `name in obj`                                                        |
+| `hash(obj)`                                      | returns hash value of object                                                                           | not supported                                                        |
+| `help([topic])`                                  | invoke the built-in Python help system,<br>typically in the REPL                                       | not supported                                                        |
+| `hex(n)`                                         | converts integer to hex                                                                                | `n.toString(16)`                                                     |
+| `id(obj)`                                        | returns identity of an object                                                                          | not supported                                                        |
+| `input([prompt])`                                | read from stdout with optional prompt                                                                  | use the Node `readline` module<br> `question` method                 |
+| `int(x)`                                         | returns an integer created from<br>a number or string                                                  | `parseInt(x[, radix])`                                               |
+| `isinstance(obj, ClassName)`                     | determines if an object is<br>an instance of a given class                                             | `obj instanceof ClassName`                                           |
+| `issubclass(ClassA, ClassB)`                     | determines if `ClassB` is<br>a subclass of `ClassA`                                                    | `ClassB.prototype instanceof ClassA`                                 |
+| `iter(collection)`                               | returns an iterator over the elements<br>of a collection (see `next`)                                  | `arr[Symbol.iterator]()`                                             |
+| `len(obj)`                                       | returns number of items in a collection<br>or characters in a string                                   | `obj.length`                                                         |
+| `list(iterable)`                                 | constructs a list from an iterable                                                                     | `Array.from(arrayLike)`                                              |
+| `locals():`                                      | returns dictionary containing the<br>current local symbol table                                        | not supported                                                        |
+| `map(fn, iterable)`                              | returns iterator over values returned by<br>calling function on each iterable element                  | `arr.map(fn)`                                                        |
+| `max(v1, v2, ...)` or<br>`max(iterable)`         | returns largest value of arguments<br>or in an iterable                                                | `Math.max(v1, v2, ...)` or<br>`Math.max(...arr)`                     |
+| `memoryview(obj)`                                | returns a `memoryview` for an object<br>that support the buffer protocol                               | not supported                                                        |
+| `min(v1, v2, ...)` or<br>`min(iterable)`         | returns largest value of arguments<br>or in an iterable                                                | `Math.min(v1, v2, ...)` or<br>`Math.min(...arr)`                     |
+| `next(iterator)`                                 | get next item from an iterator                                                                         | `iterator.next()`                                                    |
+| `object()`                                       | create an empty, featureless object;<br>can't add properties; Why is this useful?                      | `{}` is similar, but CAN add properties                              |
+| `oct(n)`                                         | converts integer to octal                                                                              | `n.toString(8)`                                                      |
+| `open(file, mode, ...)`                          | opens a file for<br>reading, writing, or appending                                                     | see the Node fs module                                               |
+| `ord(s)`                                         | returns the Unicode code point<br>for a Unicode character                                              | `s.charCodeAt([index])`                                              |
+| `base ** exp` or `pow(base, exp)`                | return base raised to exp power                                                                        | `base ** exp` or `Math.pow(base, exp)`                               |
+| `print(v1, v2, ...)`                             | print space-separated expression values                                                                | `console.log(v1, v2, ...)`                                           |
+| `property(getFn, setFn, delFn, doc)`             | returns a property attribute that encapsulates<br>get, set and delete functions                        | not supported                                                        |
+| `range(stop)` or<br>`range(start, stop[, step])` | returns a `range` object<br>which is an immutable sequence                                             | not supported                                                        |
+| `repr(obj)`                                      | returns a string representation<br>of an object for developers                                         | `obj.toString()`                                                     |
+| `reversed(seq)`                                  | returns an iterator for iterating<br>over a sequence in reverse order                                  | not supported                                                        |
+| `round(n[, digits])`<br>returns `float` or `int` | returns a number rounded to<br>some number of decimal points                                           | `n.toFixed(digits)`<br>returns string                                |
+| `set([iterable])`                                | creates a `set` object                                                                                 | `new Set()`                                                          |
+| `setattr(obj, name, value)`                      | sets an attribute of an object                                                                         | `obj[name] = value`                                                  |
+| `slice(stop)` or<br>`slice(start, stop[, step])` | returns a `slice` object that<br>describes a set of indexes;<br>used to retrieve data at those indexes | not supported                                                        |
+| `sorted(iterable[, key])`                        | returns a sorted version<br>of an iterable as a `list`                                                 | `arr.sort([compareFn])`<br>sorts in place                            |
+| `str(obj)`                                       | returns a human-readable string<br>representation of an object                                         | `obj.toString()`                                                     | : |
+| `sum(iterable)`                                  | returns the sum of<br>numbers in an iterable                                                           | `arr.reduce((acc, n) => acc + n)`                                    |
+| `super()`                                        | returns a proxy object for<br>calling superclass methods                                               | `super` keyword                                                      |
+| `tuple([iterable])`                              | creates a tuple, optionally<br>populated from an iterable                                              | not supported                                                        |
+| `type()` returns class object                    | returns the type of a value                                                                            | `typeof v` returns string<br>`v.constructor` is constructor function |
+| `vars(obj)`                                      | returns a `dict` view of<br>the attributes in an object                                                | not supported                                                        |  |  |
+| `zip(iterables)`                                 | returns an iterator that aggregates<br>elements from multiple iterables                                | not built-in;<br>can use Lodash `zip` function                       |
 
-| determines if x is a finite number | | `isFinite(x)` |
-| determines of x in the "not a number" value | | `isNaN(x)` |
-| encodes a URI, replacing certain characters<br>(not /, #, ?, =, and others) | | `encodeURI(s)` |
-| encodes a component of a URI, replacing certain characters | | `encodeURIComponent(s)` |
-| decodes a URL (opposite of `encodeURI`) | | `decodeURI(s)` |
-| decodes a component of a URI (opposite of `encodeURIComponent`) | | `decodeURIComponent(s)` |
+<br>
+
+| JavaScript built-in function | Description                                                                 | Closest Python equivalent        |
+| ---------------------------- | --------------------------------------------------------------------------- | -------------------------------- |
+| `decodeURI(s)`               | decodes a URL (opposite of `encodeURI`)                                     | `urllib.unquote(s)`              |
+| `decodeURIComponent(s)`      | decodes a component of a URI<br>(opposite of `encodeURIComponent`)          | `urllib.unquote(s)`              |
+| `encodeURI(s)`               | encodes a URI, replacing certain characters<br>(not /, #, ?, =, and others) | `urllib.quote(s, safe='chars1')` |
+| `encodeURIComponent(s)`      | encodes a component of a URI,<br>replacing certain characters               | `urllib.quote(s, safe='chars2')` |
+| `eval(code)`                 | execute any number of lines of code                                         | `exec(code)`                     |
+| `isFinite(x)`                | determines if x is a finite number                                          | `math.isfinite(x)`               |
+| `isNaN(x)`                   | determines of x in the "not a number" value                                 | `math.isnan(x)`                  |
+| `parseFloat(x)`              | returns floating point number<br>created from a number or string            | `float(x)`                       |
+| `parseInt(x[, radix])`       | returns an integer created from<br>a number or string                       | `int(x)`                         |
 
 ## Boolean operations
 
