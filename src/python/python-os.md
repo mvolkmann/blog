@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Python os module
-  order: 1.5
+  order: 1.3
   parent: Python
 layout: topic-layout.njk
 ---
