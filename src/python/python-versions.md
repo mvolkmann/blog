@@ -16,7 +16,7 @@ target="_blank">me</a> know and I will add them.
 
 ## Python 3.0 - December 3, 2008
 
-- Strings use Unicode instead of ASCII.
+- Strings now use Unicode instead of ASCII.
 - The `print` keyword was replaced by the `print` function.
 - The `<>` operator was removed. Use `!=` instead.
 - Some functions and methods now return "views" (like an iterator)
@@ -26,10 +26,10 @@ target="_blank">me</a> know and I will add them.
 - The `__cmp__` method is no longer supported
   and the `cmp` function should not be used.
 - The default encoding for source code is now UTF-8.
-- Non-ASCII letters are allowed in identifiers.
+- Non-ASCII letters are now allowed in identifiers.
 - The `StringIO` module is now in`io.StringIO`.
 - Annotations can be added to function arguments
-  to functions to describe the return value.
+  and to functions to describe their return value.
   The goal is to enable future tooling to use the annotations
   for purposes such as type checking and documentation generation.
 - The `nonlocal` statement was added to allow functions to

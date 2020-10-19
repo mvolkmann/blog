@@ -103,6 +103,8 @@ Python source files have an extension of `.py`.
 Multiple words in file names should be separated by underscores
 rather than hyphens because the file name becomes the module name
 and hyphens are not valid in module names.
+Avoid using file names that match that of an existing module
+because doing so will prevent being able to import the existing module.
 
 To run a Python script:
 
@@ -376,6 +378,8 @@ The pylint Python linting tool treats module-level variables as constants.
 It will output warnings if functions modify their values.
 To avoid this, list all such variables to be modified after
 the `global` keyword inside functions that modify them.
+The related keyword `nonlocal` enables functions to
+access variables in ancestor scopes that are not global.
 
 | Topic                         | JavaScript                                                                     | Python                                                    |
 | ----------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- |
@@ -2564,16 +2568,30 @@ To lint Python code using
 To configure the rules used by pylint,
 create the project file `.pylintrc` or a file in a user home directory
 (`~/.pylintrc` or `~/.config/pylintrc`).
-To generate a commented version of this file, enter
-`pylint --generate-rcfile > {file-path}`.
+To generate a commented version of this file
+in order learn about the format and available options,
+enter `pylint --generate-rcfile > {file-path}`.
 This file can then be modified or just used for reference.
 For example:
 
 ```text
 [MESSAGES CONTROL]
 disable=
+    missing-function-docstring,
     redefined-outer-name,
     too-few-public-methods
+```
+
+In addition, rules can be disable in source files by adding special comments.
+For example:
+
+```python
+# This rule treats all module-level variables as constants.
+# invalid-name: Constant name doesn't conform to UPPER_CASE naming style
+# pylint: disable=C0103
+
+# global-statement: Using the global statement
+# pylint: disable=W0603
 ```
 
 To lint Python code using
