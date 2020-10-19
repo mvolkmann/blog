@@ -1552,7 +1552,16 @@ include a `pass` statement in an `except` block.
 There are many built-in Python exception classes.
 The base class of all of them is `Exception`.
 Names of built-in exception classes end in "Error".
-Custom exception classes should do the same.
+For a list of them, see {% aTargetBlank
+"https://docs.python.org/3/library/exceptions.html", "Built-in Exceptions" %}.
+j
+Names of custom exception classes should also end in "Error".
+Here is an example of defining one:
+
+```python
+class MyCustomError(Exception):
+    pass
+```
 
 ## Exit with status
 

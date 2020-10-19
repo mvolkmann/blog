@@ -47,6 +47,9 @@ def test_average():
     assert average([3]) == 3
 ```
 
+If an `assert` throws, the remainder of the test function is not executed,
+but other test functions are executed.
+
 The condition being asserted can be followed by a string
 that describes why the assertion might fail.
 For example:
@@ -76,6 +79,80 @@ For example:
 pytest.raises(statistics.StatisticsError, average, [])
 ```
 
+#### Running tests
+
+To run tests, enter `pytest`.
+By default this runs all the test files found in
+the current directory and in subdirectories.
+For more brief output, add the `--quiet` (`-q`) option.
+To report skipped tests (described later), add the `-rs` option.
+
+To run specific test files, add their file paths
+as arguments to the `pytest` command.
+
+By default anything written to stdout is "captured".
+To avoid this and make the output is visible,
+add the `--captured=no` or `-s` option.
+
+#### Custom exceptions
+
+Code being tested can define and raise custom errors.
+For example, the following is in `math_util.py`:
+
+```python
+# Define a custom exception type.
+class MathError(Exception):
+    pass
+
+# This is a contrived example because we can just use math.sqrt directly.
+def square_root(x):
+    if x < 0:
+        raise MathError('cannot find square root of a negative number')
+    return math.sqrt(x)
+```
+
+We can write a test that verifies that this error is raised when appropriate.
+For example, the following is in `math_util_test.py`:
+
+```python
+import pytest
+from math_util import MathError, square_root
+
+def test_square_root():
+    assert square_root(4) == 2
+
+    with pytest.raises(MathError) as context:
+       square_root(-4) == 2
+    assert isinstance(context.value, MathError)
+    assert str(context.value) == 'cannot find square root of a negative number'
+```
+
+#### Setup and Teardown
+
+To run setup and teardown code, define the following functions
+that each have no parameters:
+
+- `setup_module` - run once before all the test functions
+- `setup_function` - run once before each test function
+- `teardown_function` - run once after each test function
+- `teardown_module` - run once after all the test functions
+
+#### Parametrized tests
+
+To run a test function repeatedly with
+different sets of inputs and expected results,
+use the `@pytest.mark.parametrize` decorator. For example:
+
+```python
+add_inputs = [
+    (1, 2, 3),
+    (4, 5, 9)
+]
+@pytest.mark.parametrize('n1, n2, expected', add_inputs)
+def test_add(n1, n2, expected):
+    assert add([n1, n2]) == expected
+```
+
 #### Skipping tests
 
 To temporarily skip running a test function,
@@ -92,29 +169,14 @@ add the following near the top of the file:
 pytest.skip('some reason why', allow_module_level=True)
 ```
 
+Another option is to mark test that are expected to fail,
+but should be run anyway, with the `@pytest.mark.xfail` decorator.
+These are counted separately from passing, failing, and skipped tests.
+It's not clear to me why this is a useful alternative to skipping tests.
+
 For additional variations such as conditionally skipping tests,
 see {% aTargetBlank "https://docs.pytest.org/en/latest/skipping.html",
 "Skip and xfail" %}.
-
-#### Running tests
-
-To run tests, enter `pytest`.
-For more brief output, add the `--quiet` (`-q`) option.
-To report skipped tests, add the `-rs` option.
-
-By default anything written to stdout is "captured".
-To avoid this and make the output is visible,
-add the `--captured=no` or `-s` option.
-
-#### Setup and Teardown
-
-To run setup and teardown code, define the following functions
-that each have no parameters:
-
-- `setup_module` - run once before all the test functions
-- `setup_function` - run once before each test function
-- `teardown_function` - run once after each test function
-- `teardown_module` - run once after all the test functions
 
 #### Fixtures
 
@@ -169,13 +231,16 @@ To run tests in watch mode, enter `ptw`.
 Options after `--` are passed on to `pytest`.
 For example, to run tests in quiet mode, enter `ptw -- -q`.
 
-### unittest
+### Alternatives
 
-unittest is in the Python standard library, so does not need to be installed.
+{% aTargetBlank "https://docs.python.org/3/library/unittest.html", "unittest" %}
+is another Python testing framework.
+It is notable in that it is included in the Python standard library,
+so does not need to be installed.
+However, it is more complicated and less popular than pytest.
 
-### nose2
-
-TODO: Add content
+{% aTargetBlank "https://docs.nose2.io/en/latest/", "nose2" %}
+is another Python test framework that is less popular than pytest.
 
 ## Code coverage
 
