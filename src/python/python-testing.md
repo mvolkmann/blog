@@ -145,8 +145,10 @@ def test_average(numbers):
 
 ```
 
-To write a test that asserts what a function will write to stdout or stderr,
-use the provided `capsys` fixture. For example:
+Pytest provides some built-in fixtures.
+The `capsys` fixture enables writing test that
+asserts what a function will write to stdout or stderr,
+For example:
 
 ```python
 def test_greet(capsys):
