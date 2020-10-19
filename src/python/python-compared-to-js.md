@@ -19,7 +19,7 @@ of Python and JavaScript. Lesser used features are omitted.
 | evaluation              | dynamic                                                                                                   | dynamic                                                                                                                                |
 | performance             | fast                                                                                                      | slow unless libraries call C/C++ functions                                                                                             |
 | style guide             | {% aTargetBlank "https://prettier.io/", "Prettier" %}                                                     | {% aTargetBlank "https://www.python.org/dev/peps/pep-0008/", "PEP 8" %}, {% aTargetBlank "https://pypi.org/project/black/", "Black" %} |
-| most common indentation | 2 spaces                                                                                                  | 4 spaces                                                                                                                               |
+| most common indentation | 2 spaces                                                                                                  | 4 spaces (not tabs)                                                                                                                    |
 | type coercion           | implicit                                                                                                  | explicit except between number types                                                                                                   |
 
 Note: PEP stands for Python Enhancement Proposal.
@@ -420,6 +420,25 @@ is between 10 and 20 inclusive:
 
 - in JavaScript, `10 <= n && n <= 20`
 - in Python, `10 <= n <= 20`
+
+## Code blocks
+
+JavaScript code blocks are surrounded by curly brackets (`{ code }`).
+Long statements can be split over multiple lines without
+including any special character at the ends of initial lines.
+
+Python uses leading whitespace (indentation) to determine
+which lines are part of the same block.
+All consecutive lines with the same indentation, ignoring empty lines,
+are considered to be in the same block.
+For the purpose of this determination, tab characters are replaced by spaces
+so that the number of spaces is a multiple of eight.
+This is significant when a mixture of tabs and spaces are used,
+which is not recommended.
+Python style guides recommend using multiples of four spaces for indentation
+and not using tab characters.
+Long statements can be split over multiple lines
+by adding a backslash (`\`) at the end of all but the last line.
 
 ## <a name="conditional-logic">Conditional logic</a>
 
