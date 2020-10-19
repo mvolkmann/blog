@@ -257,15 +257,31 @@ is another Python test framework that is less popular than pytest.
 
 ## Code coverage
 
-TODO: Add content
+{% aTargetBlank "https://coverage.readthedocs.io/en/coverage-5.3/",
+"Coverage.py" %} is a tool for reporting code coverage of Python tests.
 
-### codecov
+To install this tool, enter `pip install coverage`.
 
-TODO: Add content
+To gather coverage information from running pytest tests,
+enter `coverage run -m pytest`.
 
-### coverage
+To display a coverage report, enter `coverage report`.
+The output will be similar to the following:
 
-TODO: Add content
+```text
+Name                  Stmts   Miss  Cover
+-----------------------------------------
+math_util.py             12      3    75%
+math_util_test.py        43      0   100%
+string_util.py            4      0   100%
+string_util_test.py      10      0   100%
+-----------------------------------------
+TOTAL                    69      3    96%
+```
+
+To create an HTML test coverage report, enter `coverage html`.
+This generates files in a directory named `htmlcov`.
+To view the report, open the `index.html` in this directory in any web browser.
 
 ## End-to-end tests
 
