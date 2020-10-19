@@ -387,8 +387,8 @@ access variables in ancestor scopes that are not global.
 | variable declaration          | `let name = value;`                                                            | `name = value`                                            |
 | get type of value in variable | `typeof name` and `name.constructor.name`                                      | `type name`                                               |
 | multiple assignment           | `const [a, b] = [1, 2]`                                                        | `a, b = 1, 2`                                             |
-| destructure of array/list     | `const [v1, v2, ...] = array;`<br># of variables can differ from # of elements | `v1, v2 = seq`<br># of variables must match # of elements |
-| destructure of object         | `const {k1, k2, ...} = object;`                                                | not supported                                             |
+| destructure sequence          | `const [v1, v2, ...] = array;`<br># of variables can differ from # of elements | `v1, v2 = seq`<br># of variables must match # of elements |
+| destructure object            | `const {k1, k2, ...} = object;`                                                | not supported                                             |
 | un-declare variable           | `name = undefined` - just removes value                                        | `del name`                                                |
 | addition                      | `name += expr`                                                                 | same                                                      |
 | subtraction                   | `name -= expr`                                                                 | same                                                      |
@@ -404,6 +404,28 @@ access variables in ancestor scopes that are not global.
 | bitwise xor                   | `name ^= expr`                                                                 | same                                                      |
 | signed bit shift              | `<<=` (left), `>>=` (right)                                                    | same                                                      |
 | unsigned bit shift            | `<<<=` (left), `>>>=` (right)                                                  | not supported                                             |
+
+JavaScript destructuring can capture multiple values in one array variable.
+For example:
+
+```js
+const arr = [1, 2, 3, 4];
+[a, b, ...rest] = arr; // a=1, b=2, rest=[3, 4]
+```
+
+The `rest` variable above is set to an array.
+The "rest operator" `...` must appear before the last variable.
+
+Python refers to this operation as "unpacking" and it's even more capable.
+
+```python
+seq = (1, 2, 3, 4) # could also be a list
+a, b, *rest = seq # a=1, b=2, rest=[3, 4]
+a, *rest, b = seq # a=1, rest=[2, 3], b=4
+a, b, *rest = seq # a=1, b=2, rest=[3, 4]
+```
+
+The `rest` variable above is set to a list.
 
 ## Comparison
 
