@@ -94,6 +94,19 @@ By default anything written to stdout is "captured".
 To avoid this and make the output is visible,
 add the `--captured=no` or `-s` option.
 
+#### Type checking
+
+To make assertions about the types of variables or expressions in tests,
+use the `isinstance` built-in function. For example:
+
+```python
+assert isinstance(happy, bool)
+assert isinstance(name, str)
+assert isinstance(age, int)
+assert isinstance(temperature, float)
+assert isinstance(person, Person) # custom class
+```
+
 #### Custom exceptions
 
 Code being tested can define and raise custom errors.
