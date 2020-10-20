@@ -106,8 +106,8 @@ class Distance:
     def __str__(self):
         return str(self.mag) + ('km' if self.unit == DUnit.KM else ' mile')
 
-k5 = Distance(5, DUnit.KM)
-k10 = Distance(10, DUnit.KM)
+k5 = Distance(5, DUnit.KM) # ~ 3.1 miles
+k10 = Distance(10, DUnit.KM) # ~ 6.2 miles
 m3 = Distance(3, DUnit.MILE)
 m10 = Distance(10, DUnit.MILE)
 
