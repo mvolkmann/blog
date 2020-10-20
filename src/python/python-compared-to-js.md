@@ -1579,7 +1579,7 @@ In Python:
 ```python
 try:
   # code to try executing
-except ExClass1:
+except ExClass1 as e:
   # code to handle a specific exception class
 except (ExClass2, ExClass3):
   # code to handle other exception classes listed in a tuple
@@ -2599,7 +2599,9 @@ For example:
 ```text
 [MESSAGES CONTROL]
 disable=
+    invalid-name,
     missing-function-docstring,
+    missing-module-docstring,
     redefined-outer-name,
     too-few-public-methods
 ```
