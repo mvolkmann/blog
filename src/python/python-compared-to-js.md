@@ -78,7 +78,8 @@ cons:
 - Dictionary references for retrieving and setting values
   are more verbose than JavaScript object references.
   Rather than using dot syntax such as `d.key`,
-  we must use `d['key']` or `d.get('key')`.
+  we must use `d['key']` or `d.get('key')`
+  even if the key is a single word.
 - The classic ternary operator using a `?` and `:` is not supported.
   See the [Conditional logic](#conditional-logic) section for an example.
 - There is no syntax for multi-line comments,

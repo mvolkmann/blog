@@ -22,7 +22,7 @@ from datetime import {function-name}
 
 ## `cache`
 
-This is a decorator that memoized a function,
+This is a decorator that memoizes a function,
 which causes it to cache return values
 so repeated calls with the same arguments return the cached value
 rather that execute the function again.
@@ -158,21 +158,112 @@ a new class method based on an existing class method.
 
 This reduces a sequence of values to a single value.
 The result can be any kind of value including a primitive, object, or sequence.
+For example:
 
 ```python
 from functools import reduce
+import math
 
-# This is a simple example, but the built-in function "sum" can be used instead.
+# This is a simple example, but
+# the built-in function "sum" and the "math.prod" function
+# can be used instead.
 numbers = [1, 7, 13, 21]
-sum = reduce(lambda a, b: a + b, numbers)
-product = reduce(lambda a, b: a * b, numbers)
-print(sum, product) # 42, ?
+my_sum = reduce(lambda a, b: a + b, numbers)
+my_product = reduce(lambda a, b: a * b, numbers)
+print(my_sum, my_product) # 42, 1911
+print(sum(numbers), math.prod(numbers)) # 42, 1911
+
+# This is an example where results are accumuated in a dict.
+items = [
+    {'name': 'apples', 'price': 3.00},
+    {'name': 'bananas', 'price': 2.50},
+    {'name': 'grapes', 'price': 5.99},
+    {'name': 'oranges', 'price': 4.50}
+]
+
+def find_extremes(acc, item):
+    price = item['price']
+    lowest = acc.get('lowest')
+    highest = acc.get('highest')
+    if not lowest or price < lowest['price']:
+        acc['lowest'] = item
+    if not highest or price > highest['price']:
+        acc['highest'] = item
+    return acc
+
+results = reduce(find_extremes, items, {})
+print(results)
+# {
+#     'lowest': {'name': 'bananas', 'price': 2.5},
+#     'highest': {'name': 'grapes', 'price': 5.99}
+# }
 ```
 
 ## `singledispatch`
 
-```python
+This is a decorator that enables implementing multiple version of a function
+that differ based on the type of the first argument.
+For example:
 
+```python
+from functools import singledispatch
+
+class MyClass:
+    def __str__(self):
+        return 'MyClass object'
+
+@singledispatch
+def log_me(arg):
+    print('unsupported type', type(arg))
+
+@log_me.register
+def _(arg: bool):
+    print('boolean', arg)
+
+@log_me.register
+def _(arg: int):
+    print('int', arg)
+
+@log_me.register
+def _(arg: float):
+    print('float', arg)
+
+@log_me.register
+def _(arg: str):
+    print('str', arg)
+
+@log_me.register
+def _(arg: list):
+    print('list', arg)
+
+@log_me.register
+def _(arg: tuple):
+    print('tuple', arg)
+
+@log_me.register
+def _(arg: set):
+    print('set', arg)
+
+@log_me.register
+def _(arg: dict):
+    print('dict', arg)
+
+@log_me.register
+def _(arg: MyClass):
+    print('MyClass', arg)
+
+log_me(True) # boolean True
+log_me(1) # int 1
+log_me(1.2) # float 1.2
+log_me('text') # str text
+log_me([1, 2, 3]) # list [1, 2, 3]
+log_me((1, 2, 3)) # tuple (1, 2, 3)
+log_me({1, 2, 3}) # set {1, 2, 3}
+log_me({'alpha': 1, 'beta': 2}) # dict {'alpha': 1, 'beta': 2}
+obj = MyClass()
+log_me(obj) # MyClass MyClass object
+log_me(None) # unsupported type <class 'NoneType'>
+log_me(range(3)) # unsupported type <class 'range'>
 ```
 
 ## `singledispatchmethod`
