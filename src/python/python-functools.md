@@ -128,20 +128,45 @@ assert m3 != k5
 
 ## `partial`
 
-```python
+This creates a `partial` object that is callable like a function
+and calls a given function with provided initial arguments.
+For example:
 
+```python
+from functools import partial
+
+def relationship(feeling, name1, name2):
+  return f'{name1} {feeling} {name2}.'
+
+print(relationship('loves', 'Joanie', 'Chachi'))
+
+loves = partial(relationship, 'loves')
+print(loves('Joanie', 'Chachi'))
+print(loves('Mark', 'Tami'))
+
+grinch_hates = partial(relationship, 'hates', 'The grinch')
+print(grinch_hates('Christmas'))
+print(grinch_hates('noise'))
 ```
 
 ## `partial_method`
 
-```python
-
-```
+This is similar to `partial`, but it creates
+a new class method based on an existing class method.
 
 ## `reduce`
 
-```python
+This reduces a sequence of values to a single value.
+The result can be any kind of value including a primitive, object, or sequence.
 
+```python
+from functools import reduce
+
+# This is a simple example, but the built-in function "sum" can be used instead.
+numbers = [1, 7, 13, 21]
+sum = reduce(lambda a, b: a + b, numbers)
+product = reduce(lambda a, b: a * b, numbers)
+print(sum, product) # 42, ?
 ```
 
 ## `singledispatch`

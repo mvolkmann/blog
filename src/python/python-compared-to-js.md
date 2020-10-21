@@ -75,6 +75,10 @@ cons:
 - Lambda functions are more verbose than JavaScript arrow functions
   (`lambda` vs. `=>`).
 - Single-word dictionary keys require quotes unlike JavaScript object keys.
+- Dictionary references for retrieving and setting values
+  are more verbose than JavaScript object references.
+  Rather than using dot syntax such as `d.key`,
+  we must use `d['key']` or `d.get('key')`.
 - The classic ternary operator using a `?` and `:` is not supported.
   See the [Conditional logic](#conditional-logic) section for an example.
 - There is no syntax for multi-line comments,
