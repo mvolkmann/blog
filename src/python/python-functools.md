@@ -9,7 +9,7 @@ layout: topic-layout.njk
 <!-- markdownlint-disable MD013 -->
 
 The `functools` module in the Python standard library
-that provides"higher-order" functions
+that provides "higher-order" functions
 which are functions that accept or return other functions.
 The most commonly used of these functions are demonstrated below.
 
@@ -69,63 +69,6 @@ print(add.cache_info())
 # CacheInfo(hits=4, misses=5, maxsize=3, currsize=3)
 ```
 
-## `total_ordering`
-
-This adds comparison methods to a class based on an existing
-`eq` method and at least one of the comparison methods
-`le`, `lt`, `gt`, or `ge`.
-For example:
-
-```python
-from enum import Enum
-from functools import total_ordering
-import math
-
-M_TO_KM = 1.60934
-
-class DUnit(Enum):
-    KM = 1
-    MILE = 2
-
-def km(d):
-    return d.mag if d.unit == DUnit.KM else d.mag * M_TO_KM
-
-@total_ordering
-class Distance:
-    # unit must be a DUnit.
-    def __init__(self, mag, unit):
-        self.mag = mag
-        self.unit = unit
-
-    def __eq__(self, other):
-        return math.isclose(km(self), km(other))
-
-    def __lt__(self, other):
-        return km(self) < km(other)
-
-    def __str__(self):
-        return str(self.mag) + ('km' if self.unit == DUnit.KM else ' mile')
-
-k5 = Distance(5, DUnit.KM) # ~ 3.1 miles
-k10 = Distance(10, DUnit.KM) # ~ 6.2 miles
-m3 = Distance(3, DUnit.MILE)
-m10 = Distance(10, DUnit.MILE)
-
-races = [m10, k5, m3, k10]
-races.sort()
-
-for race in races:
-    print(race)
-
-assert races[0] == m3
-assert races[-1] == m10
-assert m3 < k5
-assert m3 <= k5
-assert k5 > m3
-assert k5 >= m3
-assert m3 != k5
-```
-
 ## `partial`
 
 This creates a `partial` object that is callable like a function
@@ -140,10 +83,12 @@ def relationship(feeling, name1, name2):
 
 print(relationship('loves', 'Joanie', 'Chachi'))
 
+# Provide one initial argument.
 loves = partial(relationship, 'loves')
 print(loves('Joanie', 'Chachi'))
 print(loves('Mark', 'Tami'))
 
+# Provide two initial arguments.
 grinch_hates = partial(relationship, 'hates', 'The grinch')
 print(grinch_hates('Christmas'))
 print(grinch_hates('noise'))
@@ -173,7 +118,7 @@ my_product = reduce(lambda a, b: a * b, numbers)
 print(my_sum, my_product) # 42, 1911
 print(sum(numbers), math.prod(numbers)) # 42, 1911
 
-# This is an example where results are accumuated in a dict.
+# This is an example where results are accumulated in a dict.
 items = [
     {'name': 'apples', 'price': 3.00},
     {'name': 'bananas', 'price': 2.50},
@@ -268,18 +213,62 @@ log_me(range(3)) # unsupported type <class 'range'>
 
 ## `singledispatchmethod`
 
-```python
+This is a decorator that is similar to the `singledispatch` decorator,
+but it enables implementing multiple version of a method in a class.
 
-```
+## `total_ordering`
 
-## `update_wrapper`
-
-```python
-
-```
-
-## `wraps`
+This adds comparison methods to a class based on an existing
+`eq` method and at least one of the comparison methods
+`le`, `lt`, `gt`, or `ge`.
+For example:
 
 ```python
+from enum import Enum
+from functools import total_ordering
+import math
 
+M_TO_KM = 1.60934
+
+class DUnit(Enum):
+    KM = 1
+    MILE = 2
+
+def km(d):
+    return d.mag if d.unit == DUnit.KM else d.mag * M_TO_KM
+
+@total_ordering
+class Distance:
+    # unit must be a DUnit.
+    def __init__(self, mag, unit):
+        self.mag = mag
+        self.unit = unit
+
+    def __eq__(self, other):
+        return math.isclose(km(self), km(other))
+
+    def __lt__(self, other):
+        return km(self) < km(other)
+
+    def __str__(self):
+        return str(self.mag) + ('km' if self.unit == DUnit.KM else ' mile')
+
+k5 = Distance(5, DUnit.KM) # ~ 3.1 miles
+k10 = Distance(10, DUnit.KM) # ~ 6.2 miles
+m3 = Distance(3, DUnit.MILE)
+m10 = Distance(10, DUnit.MILE)
+
+races = [m10, k5, m3, k10]
+races.sort()
+
+for race in races:
+    print(race)
+
+assert races[0] == m3
+assert races[-1] == m10
+assert m3 < k5
+assert m3 <= k5
+assert k5 > m3
+assert k5 >= m3
+assert m3 != k5
 ```
