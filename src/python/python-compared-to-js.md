@@ -35,7 +35,8 @@ Some oddities about Python code formatting include:
 
 pros:
 
-- ability to run in web browsers (clients) and from command-line (servers)
+- ability to run in web browsers (clients)
+  and from command-line (servers) using Node.js
 - great support for asynchronous code
 - performance
 - compact syntax for functional programming (ex. `reduce` vs. functools)
@@ -116,7 +117,7 @@ To run a Python script:
 
 - install the Python interpreter from
   {% aTargetBlank "https://www.python.org/downloads/", "python.org" %}
-- enter `python {name}.py`
+- enter `python3 {name}.py` or `python {name}.py`
 
 In both cases, command-line arguments can be passed to the script.
 
@@ -145,19 +146,19 @@ To automatically restart a script when it or a file it imports is modified:
 
 ## Getting help
 
-For Python, see the list of resources at the end.
+In JavaScript, perform web searches that begin with "MDN"
+(for the Mozilla Developer Network) followed by a JavaScript search term.
+For example, "mdn regexp".
+
+For Python help, see the list of resources at the end.
 You can also enter the `python` command to start the REPL and enter `help`.
 To get help on a particular library, import it and pass the name to help.
 For example:
 
 ```python
-import re
+import re # for regular expressions
 help(re)
 ```
-
-In JavaScript, perform web searches that begin with "MDN"
-(for the Mozilla Developer Network) followed by a JavaScript search term.
-For example, "mdn regexp".
 
 ## Comments
 
@@ -183,43 +184,57 @@ they can still be modified.
 And the naming convention for private instance variables
 (start with an underscore), doesn't prevent access from outside the class.
 
+Many Python libraries, including the standard library,
+deviate from the Python naming conventions.
+In particular, it is common to find multi-word function and method names
+that are all lowercase with no separator between words.
+For example, the `functools` standard library defines the functions
+`partial_method` (follows convention) and `singledispatchmethod` (does not).
+
 ## Built-in types
 
-| Type                 | JavaScript                                           | Python                                                                  |
-| -------------------- | ---------------------------------------------------- | ----------------------------------------------------------------------- |
-| Boolean              | `true`, `false`                                      | `True`, `False`                                                         |
-| number               | default is double precision float, `BigInt`          | `int`, `float`, `complex`                                               |
-| character            | use strings                                          | same                                                                    |
-| string               | `'text'` or `"text"`                                 | same                                                                    |
-| multi-line string    | `` `text` ``                                         | `"""text"""` or `'''text'''`                                            |
-| string interpolation | `` `prefix${expr1}suffix${expr2}` ``                 | `f'prefix{expr1}suffix{expr2}'`                                         |
-| array                | `Array` class, literal syntax `[v1, v2, ...]`        | `array` module                                                          |
-| list                 | use `Array` type                                     | literal syntax `[v1, v2, ...]`<br>mutable and typically homogeneous     |
-| tuple                | no equivalent                                        | literal syntax `(v1, v2, ...)`<br>immutable and typically heterogeneous |
-| range                | no equivalent                                        | `range(start, stop[, step])`                                            |
-| key/value pairs      | Object in the form `{k1: v1, k2: v2, ...}` and `Map` | dictionary (a.k.a. dict) literal syntax<br>`{'k1': v1, 'k2': v2, ...}`  |
-| set                  | `new Set()`                                          | literal syntax `{v1, v2, ...}`<br>or `set(v1, v2, ...)`                 |
-| function             | see "Functions" section below                        | see "Functions" section below                                           |
-| class                | `class Name { ... }`<br>see "Classes" section below  | `class Name:`<br>see "Classes" section below                            |
-| no value             | `undefined` or `null`                                | `None`                                                                  |
+| Type                 | JavaScript                                                              | Python                                                                                     |
+| -------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Boolean              | `true`, `false`                                                         | `True`, `False`                                                                            |
+| number               | default is double precision float, `BigInt`                             | `int`, `float`, `complex`                                                                  |
+| character            | use strings                                                             | same                                                                                       |
+| string               | `'text'` or `"text"`                                                    | same                                                                                       |
+| multi-line string    | `` `text` ``                                                            | `"""text"""` or `'''text'''`                                                               |
+| string interpolation | `` `prefix${expr1}suffix${expr2}` ``                                    | `f'prefix{expr1}suffix{expr2}'`                                                            |
+| array                | `Array` class, literal syntax `[v1, v2, ...]`                           | `array` module in standard library                                                         |
+| list                 | use `Array` class                                                       | `list` class with literal syntax `[v1, v2, ...]`<br>mutable and typically homogeneous      |
+| tuple                | no equivalent                                                           | `tuple` class with literal syntax `(v1, v2, ...)`<br>immutable and typically heterogeneous |
+| range                | no equivalent                                                           | `range` class<br>`range(start, stop[, step])`                                              |
+| key/value pairs      | `Object` class with literal syntax<br>`{k1: v1, k2: v2, ...}` and `Map` | `dict` class with literal syntax<br>`{'k1': v1, 'k2': v2, ...}`                            |
+| set                  | `Set` class;<br>create with `new Set()`                                 | `set` class with literal syntax `{v1, v2, ...}`<br>or `set(v1, v2, ...)`                   |
+| function             | see "Functions" section below                                           | see "Functions" section below                                                              |
+| class                | `class Name { ... }`<br>see "Classes" section below                     | `class Name:`<br>see "Classes" section below                                               |
+| no value             | `undefined` or `null`                                                   | `None`                                                                                     |
 
 Everything is an object in Python, even values that are
 primitives in JavaScript like Booleans, numbers, and strings.
 
 Python has "sequences" whereas JavaScript has arrays.
-There are three kinds of sequences: list, tuple, and range.
+Kinds of sequences include string, list, tuple, range, and buffer.
 A list is a mutable sequence of values that typically have the same type.
 A tuple is an immutable sequence of values that can have varying types.
 A range is an immutable sequence of numbers that is often be used for looping.
 
-JavaScript object keys must be strings.
+JavaScript object keys must be strings, but `Map` keys can be any kind of value.
 Python dict keys can be any immutable type.
 
-In Python, the following values are treated as false when used
-in a Boolean context: `False`, `None`, `0`, empty strings, and empty sequences.
+The values that are treated as false when used in a Boolean context
+are listed below:
 
-In JavaScript, the following values are treated as false when used
-in a Boolean context: `false`, `0`, empty strings, `undefined`, and `null`.
+| Language   | False Values                                                                    |
+| ---------- | ------------------------------------------------------------------------------- |
+| Python     | `False`, `0`, `0.0`, `0j` (complex), empty strings, empty sequences, and `None` |
+| JavaScript | `false`, `0`, `NaN`, empty strings, `undefined`, and `null`                     |
+
+In JavaScript empty collections evaluate to `true`.
+These include arrays, objects, `Map` instances, and `Set` instances.
+
+In Python the "not a number" value `math.nan` evaluates to `true`.
 
 ## Modules
 
@@ -229,7 +244,13 @@ A source file can import other modules and those can import more modules.
 In both JavaScript and Python each module is only imported once.
 If its code is modified, the script must be re-run to interpret the changes.
 
-Python searches for modules in this order
+JavaScript modules that are imported with a relative file path
+are only searched for in that location.
+JavaScript modules that are imported with only a name
+are searched for in the project `node_modules` directory
+and the global `node_modules` directory.
+
+Python searches for modules in the following order:
 
 - built-in modules
 - directory relative to importing file (using dotted module names)
@@ -239,19 +260,21 @@ Python searches for modules in this order
 To see the directories that will be searched,
 `import sys` and execute `print(sys.path)`.
 
-| Topic                    | JavaScript                                                                                              | Python                                                                                               |
-| ------------------------ | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| define                   | content of file                                                                                         | same                                                                                                 |
-| export                   | `export name = value;`                                                                                  | everything is automatically exported;<br>indicate private values by starting name with an underscore |
-| default export           | `export default name = value;`                                                                          | not supported                                                                                        |
-| import default           | `import name from 'path';`                                                                              | not supported                                                                                        |
-| import entire module     | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *`                      |
-| import specific values   | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name1 as other1, name2 as other2`      |
-| import default and named | `import name, {name1, name2} from 'path';`                                                              | not supported                                                                                        |
-| open source catalog      | {% aTargetBlank "https://www.npmjs.com/", "https://www.npmjs.com/" %}                                   | {% aTargetBlank "https://pypi.org/", "https://pypi.org/" %}                                          |
-| tool to install          | `npm` (installed with Node.js)                                                                          | `pip` (installed with Python)                                                                        |
+Several module-related topics are described in the following table:
 
-In Python it is common to assign aliases to commonly used packages.
+| Topic                      | JavaScript                                                                                              | Python                                                                                               |
+| -------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| a module is defined by ... | content of file                                                                                         | same                                                                                                 |
+| export                     | `export name = value;`                                                                                  | everything is automatically exported;<br>indicate private values by starting name with an underscore |
+| default export             | `export default name = value;`                                                                          | not supported                                                                                        |
+| import default             | `import name from 'path';`                                                                              | not supported                                                                                        |
+| import entire module       | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *`                      |
+| import specific values     | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name1 as other1, name2 as other2`      |
+| import default and named   | `import name, {name1, name2} from 'path';`                                                              | not supported                                                                                        |
+| open source catalog        | {% aTargetBlank "https://www.npmjs.com/", "https://www.npmjs.com/" %}                                   | {% aTargetBlank "https://pypi.org/", "https://pypi.org/" %}                                          |
+| tool to install            | `npm` (installed with Node.js)                                                                          | `pip` (installed with Python) or<br>`conda` (installed with Anaconda)                                |
+
+In Python aliases are typically assigned to commonly used packages.
 The community has landed on using the aliases shown in the imports below.
 
 | Package                            | Recommended Import                     |
@@ -262,6 +285,7 @@ The community has landed on using the aliases shown in the imports below.
 | matplotlib                         | `from matplotlib import pyplot as plt` |
 | NumPy                              | `import numpy as np`                   |
 | pandas                             | `import pandas as pd`                  |
+| TensorFlow                         | `import tensorflow as tf`              |
 
 ## Packages
 
@@ -280,7 +304,7 @@ Python "packages" are managed using the `pip` tool
 which is installed when Python is installed.
 The name is an acronym for "Pip Installs Packages".
 It installs packages from the
-{% aTargetBlank "https://pypi.org/", "Python Package Index" %}.
+{% aTargetBlank "https://pypi.org/", "Python Package Index" %} (pypi:).
 To upgrade the version of `pip` being used, enter
 `python -m pip install --upgrade pip`.
 
@@ -306,7 +330,7 @@ In UNIX environments, enter `source env/bin/activate`.
 (When using the Fish shell, add the `.fish` extension.)
 
 Activating a virtual environment changes the environment to use versions of
-tools and libraries found in the `env` directory instead of global ones.
+tools and libraries found in the project `env` directory instead of global ones.
 Note that rather than including a copy of a specific version of
 the Python interpreter, a symbolic link to it is created.
 This also changes the shell prompt to indicate the
@@ -320,7 +344,10 @@ This differs from Node.js where simply changing to the directory
 of a project causes its dependencies versions to be used
 based on the contents of the `node_modules` subdirectory.
 
-### Package comparisons
+For details on using Anaconda to manage virtual environments,
+see [here](/blog/python/anaconda).
+
+### Using packages
 
 | Operation                                      | JavaScript                                                                         | Python                                                                       |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -328,7 +355,7 @@ based on the contents of the `node_modules` subdirectory.
 | install a package globally                     | `npm install -g {pkg-name}`                                                        | with no environment activated,<br>`pip install {pkg-name}`                   |
 | install a package locally                      | `npm install {pkg-name}`                                                           | with an environment activated,<br>`pip install {pkg-name}`                   |
 | install a specific version of a package        | `npm install {pkg-name}@{version}`                                                 | `pip install {pkg-name}=={version}`                                          |
-| update to latest version of a specific package | `npm update {pkg-name}@{version}`                                                  | `pip install --upgrade {pkg-name}`                                           |
+| update to latest version of a specific package | `npm update {pkg-name}`                                                            | `pip install --upgrade {pkg-name}`                                           |
 | see where global packages are installed        | `npm -g root`                                                                      | with no environment activated,<br>`pip list -v`                              |
 | see where local packages are installed         | `npm root`                                                                         | with an environment activated,<br>`pip list -v`                              |
 | location of local packages                     | `{project-dir}/node_modules`                                                       | `{project-dir}/lib/python{version}/site-packages`                            |
@@ -358,16 +385,16 @@ When there are nested packages, imports look like
 
 For more information on Python packages, see the
 {% aTargetBlank "https://docs.python.org/3/tutorial/modules.html#packages",
-"Python Tutorial" %}.
+"Packages" %} in the Python Tutorial.
 
-## Printing
+## Printing/Logging
 
 | Operation                              | JavaScript                                                                                  | Python                                                |
 | -------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| print space-separated values to stdout | `console.log(v1, v2, ...);`                                                                 | `print(v1, v2, ..)`                                   |
-| print space-separated values to stderr | `console.error(v1, v2, ...);`                                                               | `import sys`<br>`print(v1, v2, ..., file=sys.stderr)` |
-| print with interpolation               | `` console.log(`Hello ${name}, today is ${dayOfWeek}.`); ``                                 | `print(f'Hello {name}, today is {dayOfWeek}.')`       |
-| print without newline                  | in Node.js<br>`const process = require('process');`<br>`process.stdout.write(v1, v2, ...);` | `print(v1, v2, ..., end='')`                          |
+| write space-separated values to stdout | `console.log(v1, v2, ...);`                                                                 | `print(v1, v2, ..)`                                   |
+| write space-separated values to stderr | `console.error(v1, v2, ...);`                                                               | `import sys`<br>`print(v1, v2, ..., file=sys.stderr)` |
+| write to stdout with interpolation     | `` console.log(`Hello ${name}, today is ${dayOfWeek}.`); ``                                 | `print(f'Hello {name}, today is {dayOfWeek}.')`       |
+| write to stdout without newline        | in Node.js<br>`const process = require('process');`<br>`process.stdout.write(v1, v2, ...);` | `print(v1, v2, ..., end='')`                          |
 
 ## Variables and assignment
 
@@ -378,7 +405,29 @@ are created when a value is assigned to them.
 
 JavaScript variable assignments can appear inside expressions
 such as an `if` or loop condition, which many developers find confusing.
-This is not allowed in Python.
+This was not allowed in Python until version 3.8
+which adds the "walrus operator" for assigning values to variables
+inside larger expressions. For example:
+
+```python
+from calendar import day_name
+from datetime import date
+
+def get_day():
+    index = date.today().weekday()
+    return day_name[index]
+
+if (day := get_day()) == 'Tuesday':
+    print('Tacos!') # Tacos! if it's a Tuesday
+
+print('day =', day) # Tuesday
+
+# Typically the code is easier to read when
+# the walrus operator is not used.  For example:
+day = get_day()
+if day == 'Tuesday':
+    print('Tacos!') # Tacos! if it's a Tuesday
+```
 
 The pylint Python linting tool treats module-level variables as constants.
 It will output warnings if functions modify their values.
@@ -391,7 +440,7 @@ access variables in ancestor scopes that are not global.
 | ----------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- |
 | constant declaration          | `const NAME = value;`                                                          | `NAME = value`                                            |
 | variable declaration          | `let name = value;`                                                            | `name = value`                                            |
-| get type of value in variable | `typeof name` and `name.constructor.name`                                      | `type name`                                               |
+| get type of value in variable | `typeof v` and `v.constructor.name`                                            | `type v:`                                                 |
 | multiple assignment           | `const [a, b] = [1, 2]`                                                        | `a, b = 1, 2`                                             |
 | destructure sequence          | `const [v1, v2, ...] = array;`<br># of variables can differ from # of elements | `v1, v2 = seq`<br># of variables must match # of elements |
 | destructure object            | `const {k1, k2, ...} = object;`                                                | not supported                                             |
@@ -425,7 +474,7 @@ The "rest operator" `...` must appear before the last variable.
 Python refers to this operation as "unpacking" and it's even more capable.
 
 ```python
-seq = (1, 2, 3, 4) # could also be a list
+seq = (1, 2, 3, 4) # using a tuple, but could also be a list
 a, b, *rest = seq # a=1, b=2, rest=[3, 4]
 a, *rest, b = seq # a=1, rest=[2, 3], b=4
 a, b, *rest = seq # a=1, b=2, rest=[3, 4]
@@ -446,7 +495,7 @@ The `rest` variable above is set to a list.
 | greater than          | `>`                                     | same                    |
 | greater than or equal | `>=`                                    | same                    |
 
-Python comparisons can be chained, but JavaScript comparison cannot.
+Python comparisons can be chained, but JavaScript comparisons cannot.
 For example, to determine whether the value of a variable
 is between 10 and 20 inclusive:
 
@@ -470,7 +519,8 @@ which is not recommended.
 Python style guides recommend using multiples of four spaces for indentation
 and not using tab characters.
 Long statements can be split over multiple lines
-by adding a backslash (`\`) at the end of all but the last line.
+by adding a backslash (`\`) at the end of all but the last line
+when it is not clear that a statement is continuing.
 
 ## <a name="conditional-logic">Conditional logic</a>
 
@@ -487,17 +537,6 @@ Python blocks must start on a new line and be indented.
 | if/else         | `if (cond) sOrB1 else sOrB2`                        | `if cond: block1 else: block2`                    |
 | if/else if/else | `if (cond1) sOrB1 else if (cond2) sOrB2 else sOrB3` | `if cond: block1 elif cond2: block2 else: block3` |
 | ternary         | `cond ? trueValue : falseValue`                     | `trueValue if cond else falseValue`               |
-
-In JavaScript the following evaluate to `false` in a Boolean context:
-`undefined`, `null`, `false`, `0`, `NaN`, and an empty string,
-Unlike in Python, in JavaScript empty collections evaluate to `true`.
-These include arrays, objects, `Map` instances, and `Set` instances.
-
-In Python the following evaluate to `false` in a Boolean context:
-`None`, `False`, `0`, `0.0`, `0j` (complex), an empty string,
-or an empty range/list/tuple/set/dict.
-Unlike in JavaScript, in Python the "not a number" value
-`math.nan` evaluates to `true` in a Boolean context.
 
 Here's an example of using a Python ternary statement.
 
@@ -522,8 +561,8 @@ Python uses "dictionaries" (or dicts) to store key/value pairs.
 
 | Topic                            | JavaScript                                                           | Python                                    |
 | -------------------------------- | -------------------------------------------------------------------- | ----------------------------------------- |
-| classic for loop                 | `for (let value = initial; cond; statements)`                        | `for value in range(start, stop, step?):` |
-| over collection                  | `for (const value of iterable)`                                      | `for value in sequence:`                  |
+| classic for loop                 | `for (let index = start; index < stop; index += step)`               | `for value in range(start, stop, step?):` |
+| over collection                  | `for (const value of iterable)`                                      | `for value in iterable:`                  |
 | over object/dict keys            | `for (const key of Object.keys(obj))`<br>or `for (const key in obj)` | `for key in dict.keys():`                 |
 | over object/dict values          | `for (const value of Object.values(obj))`                            | `for value in dict.values():`             |
 | over object/dict keys and values | `for (const [key, value] of Object.entries(obj))`                    | `for key, value in dict.items():`         |
@@ -573,7 +612,7 @@ It is typically delimited by triple quotes.
 For guidelines on the content of docstrings, see the
 {% aTargetBlank
   "https://docs.python.org/3/tutorial/controlflow.html#documentation-strings",
-  "Python Tutorial" %} and
+  "Documentation Strings" %} in the Python Tutorial and
 {% aTargetBlank
   "https://www.python.org/dev/peps/pep-0008/#documentation-strings",
   "PEP-8 documentation strings" %}.
@@ -583,33 +622,35 @@ A good docstring for a function looks like:
     """Return the average of a sequence of numbers."""
 ```
 
-Neither JavaScript nor Python support function overloading
+JavaScript does not support function overloading
 where the same function name can be defined multiple times
 with different numbers and/or types of arguments.
+Python supports this in a limited sense using the `singledispatch` decorator
+defined in the [`functools`](/blog/python/python-functools) standard library.
 
-| Topic                                                               | JavaScript                                                                           | Python                                                                                                              |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| define named                                                        | `function fnName(params) { ... }`                                                    | `def fnName(params): ...`                                                                                           |
-| define anonymous                                                    | `const fnName = (params) => definition`                                              | `lambda params: expression`                                                                                         |
-| define anonymous w/ single parameter                                | `const fnName = param => {...}`                                                      | same as above                                                                                                       |
-| define anonymous w/ single expression                               | `const fnName = (params) => expr`                                                    | same as above                                                                                                       |
-| specify default parameter values                                    | `function fnName(p1=v1, p2=v2) {...}`                                                | `def fnName(p1=v1, p2=v2): ...`                                                                                     |
-| gather variable number of arguments                                 | `function fnName(p1, p2, ...rest) {...}`<br>`rest` is set to an `Array`              | `def fnName(p1, p2, *rest): ...`<br>`rest` is set to a tuple                                                        |
-| gather arguments as key/value pairs                                 | not supported                                                                        | `def fnName(**args): ...`<br>call with `fnName(p1=v2, p2=v2)`<br>or `fnName(**dict)`                                |
-| use named/keyword arguments                                         | `function fnName({p1, p2}) {...}`<br>pass an object                                  | same as above;<br>any parameter can be specified by name;<br>important feature!<br>call with `fnName(p1=v2, p2=v2)` |
-| return a value                                                      | `return value;`                                                                      | `return value`                                                                                                      |
-| default return value when no `return`                               | `undefined`                                                                          | `None`                                                                                                              |
-| call                                                                | `fnName(args)`                                                                       | same                                                                                                                |
-| get required argument count                                         | `fnName.length`                                                                      | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`                                              |
-| passing fewer arguments than positional parameters                  | remaining are assigned `undefined`                                                   | results in an error                                                                                                 |
-| passing more arguments than positional parameters with no gathering | all arguments are available in `arguments` array-like object                         | results in an error                                                                                                 |
-| get name                                                            | `fnName.name`                                                                        | `fnName.__name__`                                                                                                   |
-| get implementation code                                             | `fnName.toString()`                                                                  | `from inspect import getsource`<br>`getsource(fn)`                                                                  |
-| create partial                                                      | `const newFn = fnName.bind(thisValue, arg1, arg2, ...)`<br>`thisValue` can be `null` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)`                                           |
-| call                                                                | `fnName.call(thisValue, arg1, arg2, ...)`<br>`thisValue` can be `null`               | `class.method(obj, arg1, arg2, ...)`                                                                                |
-| apply                                                               | `fnName.apply(thisValue, argArray)`<br>`thisValue` can be `null`                     | `class.method(obj, *argList)`                                                                                       |
-| spread array to positional arguments                                | `fnName(...arr)`                                                                     | `fnName(*seq)`                                                                                                      |
-| spread object to keyword arguments                                  | not supported                                                                        | `fnName(**dict)`                                                                                                    |
+| Topic                                                                  | JavaScript                                                                           | Python                                                                                                              |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| define named                                                           | `function fnName(params) { ... }`                                                    | `def fnName(params): ...`                                                                                           |
+| define anonymous                                                       | `const fnName = (params) => definition`                                              | `lambda params: expression`                                                                                         |
+| define anonymous w/ single parameter                                   | `const fnName = param => {...}`                                                      | same as above                                                                                                       |
+| define anonymous w/ single expression                                  | `const fnName = (params) => expr`                                                    | same as above                                                                                                       |
+| specify default parameter values                                       | `function fnName(p1=v1, p2=v2) {...}`                                                | `def fnName(p1=v1, p2=v2): ...`                                                                                     |
+| gather variable number of arguments                                    | `function fnName(p1, p2, ...rest) {...}`<br>`rest` is set to an `Array`              | `def fnName(p1, p2, *rest): ...`<br>`rest` is set to a tuple                                                        |
+| gather arguments as key/value pairs                                    | not supported                                                                        | `def fnName(**args): ...`<br>call with `fnName(p1=v2, p2=v2)`<br>or `fnName(**dict)`                                |
+| use named/keyword arguments                                            | `function fnName({p1, p2}) {...}`<br>pass an "options" object                        | same as above;<br>any parameter can be specified by name;<br>important feature!<br>call with `fnName(p1=v2, p2=v2)` |
+| return a value                                                         | `return value;`                                                                      | `return value`                                                                                                      |
+| default return value when no `return`                                  | `undefined`                                                                          | `None`                                                                                                              |
+| call                                                                   | `fnName(args)`                                                                       | same                                                                                                                |
+| get required argument count                                            | `fnName.length`                                                                      | `from inspect import getfullargspec`<br>`len(getfullargspec(fn).args)`                                              |
+| passing fewer arguments than<br>positional parameters                  | remaining are assigned `undefined`                                                   | results in an error                                                                                                 |
+| passing more arguments than<br>positional parameters with no gathering | all arguments are available in `arguments` array-like object                         | results in an error                                                                                                 |
+| get name                                                               | `fnName.name`                                                                        | `fnName.__name__`                                                                                                   |
+| get implementation code                                                | `fnName.toString()`                                                                  | `from inspect import getsource`<br>`getsource(fn)`                                                                  |
+| create partial                                                         | `const newFn = fnName.bind(thisValue, arg1, arg2, ...)`<br>`thisValue` can be `null` | `from functools import partial`<br>`newFn = partial(fn, arg1, arg2, ...)`                                           |
+| call                                                                   | `fnName.call(thisValue, arg1, arg2, ...)`<br>`thisValue` can be `null`               | `ClassName.methodName(obj, arg1, arg2, ...)`                                                                        |
+| apply                                                                  | `fnName.apply(thisValue, argArray)`<br>`thisValue` can be `null`                     | `ClassName.methodName(obj, *argList)`                                                                               |
+| spread array to positional arguments                                   | `fnName(...arr)`                                                                     | `fnName(*seq)`                                                                                                      |
+| spread object to keyword arguments                                     | not supported                                                                        | `fnName(**dict)`                                                                                                    |
 
 In Python:
 
@@ -617,7 +658,8 @@ In Python:
 - Function parameters listed after one that begins with `*`
   must be specified by name.
 - The `partial` function (shown in the table above)
-  can only be used on functions, not methods of a class.
+  can only be used on functions.
+  For methods of a class, use `partial_method`.
 
 ## Execute later or at intervals
 
@@ -780,7 +822,7 @@ run(main())
 
 | Topic                             | JavaScript                                                                | Python                                                                |
 | --------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| define                            | `class Name { ... }`                                                      | `class Name: ...`                                                     |
+| define                            | `class CName { ... }`                                                     | `class CName: ...`                                                    |
 | inheritance                       | `class Sub extends Super { ... }`<br>only single inheritance is supported | `class Sub(Super1, Super2, ...)`<br>multiple inheritance is supported |
 | constructor                       | `constructor(params) { ... }`                                             | `def __init__(self, params):`                                         |
 | instantiate (create instance)     | `const instance = new CName(args);`                                       | `instance = CName(args)`                                              |
@@ -848,14 +890,12 @@ mean = 3
 Here is the same class implemented in Python:
 
 ```python
-from functools import reduce
-
 class Statistics:
     def __init__(self, *numbers):
         self.numbers = list(numbers)
         self.min = min(*self.numbers)
         self.max = max(*self.numbers)
-        self.sum = reduce(lambda acc, n: acc + n, self.numbers, 0)
+        self.sum = sum(numbers)
 
     def add(self, number):
         self.numbers.append(number)
@@ -883,11 +923,22 @@ The output is the same as above.
 
 Note how in Python the first parameter in all instance methods must be `self`.
 
-Here is a function takes a class and prints its inheritance hierarchy:
+Here is a JavaScript function that
+takes a class and prints its inheritance hierarchy:
+
+```js
+function printClassTree(cls, level = 0) {
+  const name = cls.name || 'Object';
+  console.log(' '.repeat(2 * level) + name);
+  if (name !== 'Object') printClassTree(cls.__proto__, level + 1);
+}
+```
+
+Here is a Python function to do the same:
 
 ```python
-def print_inheritance(cls, level = 0):
-    print(' ' * 2 * level, cls.__name__)
+def print_class_tree(cls, level = 0):
+    print(' ' * 2 * level + cls.__name__)
     for base in cls.__bases__:
         print_class_tree(base, level + 1)
 ```
