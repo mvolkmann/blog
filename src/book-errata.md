@@ -186,6 +186,18 @@ Easings ending in Out are applied to the ending of a transition.
 Easings ending in InOut are applied at both ends of a transition."
 (printing 3)
 
+p. 184 Change the last sentence of the paragraph that starts with
+"The function must" to end with "delay, duration, and easing options."
+(printing 3)
+
+p. 185 In Listing 10.10, make the following changes to the "spin" function:
+
+- Change the first line to `const {times = 1} = options;
+- Delete the line `const eased = easing(t);`
+- Change the two occurrences of `eased` in the `return` statement to `t`.
+
+(printing 3)
+
 ### Chapter 12
 
 p. 202 Add the following to the end of the annotation in Listing 12.4
