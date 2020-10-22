@@ -68,18 +68,14 @@ cons:
   variable, function, and method names with an underscore,
   there are many examples where no separation is used.
   This makes it difficult to guess the correct name.
-- poor performance - for example, see {% aTargetBlank
-  "https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html",
-  "The Computer Language Benchmark Game" %})
-- Anonymous functions are limited to a single expression.
-- Lambda functions are more verbose than JavaScript arrow functions
-  (`lambda` vs. `=>`).
-- Single-word dictionary keys require quotes unlike JavaScript object keys.
 - Dictionary references for retrieving and setting values
   are more verbose than JavaScript object references.
   Rather than using dot syntax such as `d.key`,
   we must use `d['key']` or `d.get('key')`
   even if the key is a single word.
+- Anonymous functions are limited to a single expression.
+- Lambda functions are more verbose than JavaScript arrow functions
+  (`lambda` vs. `=>`).
 - The classic ternary operator using a `?` and `:` is not supported.
   See the [Conditional logic](#conditional-logic) section for an example.
 - There is no syntax for multi-line comments,
@@ -92,7 +88,12 @@ cons:
 - These was no built-in support for asynchronous code
   until the `asyncio` module was added in Python 3.4.
   Some features require Python 3.7+.
-- Lots of documentation and examples are still for V2 instead of V3.
+- Python programs have poor performance.
+  For examples, see {% aTargetBlank
+  "https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html",
+  "The Computer Language Benchmark Game" %}).
+- V3 contains breaking changes, so care must be taken when
+  reading documentation and examples to verify version compatibility.
 
 ## Running scripts
 

@@ -8,8 +8,9 @@ layout: topic-layout.njk
 
 <!-- markdownlint-disable MD013 -->
 
-The `functools` module in the Python standard library
-that provides "higher-order" functions
+The {% aTargetBlank "https://docs.python.org/3/library/functools.html",
+"`functools`" %} module in the Python standard library
+provides "higher-order" functions
 which are functions that accept or return other functions.
 The most commonly used of these functions are demonstrated below.
 
