@@ -62,7 +62,7 @@ and their equivalent function from the `operator` module.
 | `obj[k] = v` | `setitem(obj, k, v)` | indexed assignment |
 | `del obj[k]` | `delitem(obj, k)`    | indexed deletion   |
 
-## Creating retrieval functions
+## Retrieval functions
 
 | Operator   | Function                             | Description                                                            |
 | ---------- | ------------------------------------ | ---------------------------------------------------------------------- |
