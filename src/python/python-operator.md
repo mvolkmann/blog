@@ -72,6 +72,48 @@ and their equivalent function from the `operator` module.
 | n/a        | `itemgetter(i1, i2, ...)(obj)`       | returns tuple of values from sequence                                  |
 | n/a        | `methodcaller(name, args)(obj)`      | calls a method with given arguments on an object                       |
 
+For example:
+
+```python
+class Person:
+    def __init__(self, name, hobby, height):
+        self.name = name
+        self.hobby = hobby
+        self.height = height
+
+    def __str__(self):
+        return f'{self.name} likes {self.hobby} and is {self.height}" tall.'
+
+    def grow(self, inches):
+        self.height += inches
+
+people = [
+    Person('Mark', 'running', 74),
+    Person('Tami', 'swimming', 65)
+]
+
+get_hobby = attrgetter('hobby') # works with objects, not dicts
+hobbies = map(get_hobby, people)
+print('hobbies =', list(hobbies)) # ['running', 'swimming']
+
+get_data = attrgetter('hobby', 'height')
+data = map(get_data, people)
+print('data =', list(data)) # [('running', 74), ('swimming', 65)]
+
+colors = ('red', 'orange', 'yellow', 'green', 'blue', 'purple')
+pick_colors = itemgetter(1, 2, 4)
+picked = pick_colors(colors)
+print('picked =', picked) # ('orange', 'yellow', 'blue')
+
+grow2 = methodcaller('grow', 2)
+for person in people:
+    grow2(person) # same as person.grow(2)
+    print(person)
+# Output:
+# Mark likes running and is 76" tall.
+# Tami likes swimming and is 67" tall.
+```
+
 ## Slicing
 
 | Operator            | Function                            | Description      |
