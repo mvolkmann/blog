@@ -20,39 +20,47 @@ THIS IS A WORK IN PROGRESS!
 
 | Operator | Function   |
 | -------- | ---------- |
-| `<`      | `lt(a, b)` |
-| `<=`     | `le(a, b)` |
-| `==`     | `eq(a, b)` |
-| `!=`     | `ne(a, b)` |
-| `>=`     | `ge(a, b)` |
-| `>`      | `gt(a, b)` |
+| `a < b`  | `lt(a, b)` |
+| `a <= b` | `le(a, b)` |
+| `a == b` | `eq(a, b)` |
+| `a != b` | `ne(a, b)` |
+| `a >= b` | `ge(a, b)` |
+| `a > b`  | `gt(a, b)` |
 
 ## Arithmetic
 
-| Operator | Function        |
-| -------- | --------------- |
-| `+`      | `add(a, b)`     |
-| `-`      | `sub(a, b)`     |
-| `*`      | `mul(a, b)`     |
-| `/`      | `truediv(a, b)` |
-| `%`      | `mod(a, b)`     |
-| `**`     | `pow(a, b)`     |
+| Operator | Function         |
+| -------- | ---------------- |
+| `a + b`  | `add(a, b)`      |
+| `a - b`  | `sub(a, b)`      |
+| `a * b`  | `mul(a, b)`      |
+| `a / b`  | `truediv(a, b)`  |
+| `a // b` | `floordiv(a, b)` |
+| `a % b`  | `mod(a, b)`      |
+| `a ** b` | `pow(a, b)`      |
 
 ## Bitwise
 
-| Operator | Function     |
-| -------- | ------------ |
-| `&`      | `and_(a, b)` |
-| `|`      | `or_(a, b)`  |
-| `^`      | `xor(a, b)`  |
-| `~`      | `invert(a)`  |
+| Operator | Function       | Description          |
+| -------- | -------------- | -------------------- |
+| `a & b`  | `and_(a, b)`   | bitwise and          |
+| `a | b`  | `or_(a, b)`    | bitwise or           |
+| `a ^ b`  | `xor(a, b)`    | bitwise exclusive or |
+| `~a`     | `invert(a)`    | bitwise inversion    |
+| `a << b` | `lshift(a, b)` | left shift           |
+| `a >> b` | `rshift(a, b)` | right shift          |
 
 ## Other
 
-| Operator | Function       | Description                                          |
-| -------- | -------------- | ---------------------------------------------------- |
-| `@`      | `matmul(a, b)` | matrix multiplication                                |
-|          | `is_(a, b)`    | determines if a and b are the same object in memory  |
-|          | `is_not(a, b)` | determines if a and b are the same object in memory  |
-| `not`    | `not(v)`       | negates the boolean value of v                       |
-|          | `truth(v)`     | returns the boolean value of v;<br>same as `bool(v)` |
+| Operator                            | Function             | Description                                                                             |
+| ----------------------------------- | -------------------- | --------------------------------------------------------------------------------------- |
+| `a + b`                             | `concat(a, b)`       | concatenation of sequences                                                              |
+| `v in seq`                          | `contains(v, seq)`   | determine if `v` is in `seq`                                                            |
+| `a @ b`                             | `matmul(a, b)`       | matrix multiplication                                                                   |
+| `a is b`                            | `is_(a, b)`          | determines if a and b are the same object in memory;<br>not trailing underscore in name |
+| `a is not b`                        | `is_not(a, b)`       | determines if a and b are not the same object in memory                                 |
+| `not v`                             | `not(v)`             | negates the boolean value of v                                                          |
+| `v` evaluated in<br>Boolean context | `truth(v)`           | returns the boolean value of v;<br>same as `bool(v)`                                    |
+| `obj[k] = v`                        | `setitem(obj, k, v)` | indexed assignment                                                                      |
+| `del obj[k]`                        | `delitem(obj, k)`    | indexed deletion                                                                        |
+| `obj[k]`                            | `getitem(obj, k, v)` | indexed retrieval                                                                       |
