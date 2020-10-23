@@ -121,6 +121,7 @@
     "bytearray",
     "capsys",
     "carshare",
+    "casefold",
     "cat'ing",
     "cbrt",
     "certbot",
