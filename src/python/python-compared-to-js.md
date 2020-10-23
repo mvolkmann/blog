@@ -36,7 +36,7 @@ Some oddities about Python code formatting include:
 pros:
 
 - ability to run in web browsers (clients)
-  and from command-line (servers) using Node.js
+  and from command line (servers) using Node.js
 - great support for asynchronous code
 - performance
 - compact syntax for functional programming (ex. `reduce` vs. functools)
@@ -119,17 +119,17 @@ To run a Python script:
   {% aTargetBlank "https://www.python.org/downloads/", "python.org" %}
 - enter `python3 {name}.py` or `python {name}.py`
 
-In both cases, command-line arguments can be passed to the script.
+In both cases, command line arguments can be passed to the script.
 
 A JavaScript script running in Node.js
 can get them from the array `process.argv`.
 The first element is the path to the `node` executable,
 the second is the path to the script that is running,
-and the remaining elements are the command-line arguments.
+and the remaining elements are the command line arguments.
 
 A Python script can get them from `sys.argv`.
 The first element is the path to the script that is running,
-and the remaining elements are the command-line arguments.
+and the remaining elements are the command line arguments.
 
 To make a Python source file directly executable in UNIX systems:
 
@@ -947,7 +947,7 @@ def print_class_tree(cls, level = 0):
 
 JavaScript provides a small number (9) of built-in functions.
 Python provides many more (68).
-The tables below summarizes these.
+The tables below summarize these.
 
 Often one of the languages does not have an equivalent function to the other,
 so the closest alternative is shown instead.
@@ -1037,6 +1037,11 @@ mean that a Boolean value is returned.
 | `isNaN(x)`                   | determines of x in the "not a number" value                                 | `math.isnan(x)`                  |
 | `parseFloat(x)`              | returns floating point number<br>created from a number or string            | `float(x)`                       |
 | `parseInt(x[, radix])`       | returns an integer created from<br>a number or string                       | `int(x)`                         |
+
+The JavaScript `parseFloat` and `parseInt` functions can process strings
+that contain additional characters after those in the number.
+For example, `parseFloat('3.14pi')` returns the number `3.14`.
+The Python `float` and `int` functions do not support this.
 
 ## Boolean operations
 
@@ -1218,8 +1223,8 @@ The Python `random` module also provides:
 ## <a name="sequences">Sequences</a>
 
 JavaScript stores sequences of values in arrays.
-Python primarily uses the three sequence types list, tuple, and range
-for this purpose.
+Python primarily uses the four sequence types
+`list`, `tuple`, `range`, and `set` for this purpose.
 
 Python lists are mutable and are typically homogeneous
 (elements have the same type).
@@ -1227,6 +1232,8 @@ Python tuples are immutable and are typically heterogeneous
 (elements can have different types).
 Python ranges are immutable sequences of numbers
 and are often used in `for` loops.
+Python sets are mutable sequences that do not allow duplicate values
+and are typically homogeneous.
 
 To create a JavaScript array:
 
@@ -1234,24 +1241,30 @@ To create a JavaScript array:
 const myArray = [element1, element2, ...];
 ```
 
-To create a Python list:
+To create a Python `list`:
 
 ```python
 myList = [element1, element2, ...]
 ```
 
-To create a Python tuple:
+To create a Python `tuple`:
 
 ```python
 # Parentheses around a tuple are optional.
 myTuple = (element1, element2, ...)
 ```
 
-To create a Python range:
+To create a Python `range`:
 
 ```python
 myRange = range(end) # 0 to end-1
 myRange = range(start, end, step?) # start to end-1 where step defaults to 1
+```
+
+To create a Python `set`:
+
+```python
+mySet = {element1, element2, ...}
 ```
 
 All of these types can be nested within each other.
@@ -1275,43 +1288,43 @@ print(dog[1]) # Whippet
 print(len(dog)) # 2
 ```
 
-| Operation                    | JavaScript                                                                                          | Python                                                                                                                         |
-| ---------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| is array/sequence            | `Array.isArray(expr)`                                                                               | `hasattr(type(expr), '\_\_iter\_\_')`<br>`isinstance(expr, list)`<br>`isinstance(expr, tuple)`<br>`isinstance(expr, range)`    |
-| add to end                   | `arr.push(v1, v2, ...);`                                                                            | `seq.append(v)` to add one and<br>`seq.extend(iterable)` to add more than one                                                  |
-| remove from end              | `const value = arr.pop();`                                                                          | `value = seq.pop()`                                                                                                            |
-| add to start                 | `arr.unshift(value);`                                                                               | `seq.insert(0, value)`                                                                                                         |
-| remove from start            | `const value = arr.shift();`                                                                        | `del seq[0]`                                                                                                                   |
-| insert                       | `arr.splice(index, delCount, v1, v2, ...)`                                                          | `seq.insert(index, value)`                                                                                                     |
-| remove item at index         | `arr.splice(index, 1)`                                                                              | `del seq[index]` - only for lists                                                                                              |
-| remove items at index range  | `arr.splice(start, count)`                                                                          | `del seq[start:start+count]` - only for lists                                                                                  |
-| remove value                 | `arr.splice(arr.findIndex(value), 1)`                                                               | `seq.remove(value)` - error if not found                                                                                       |
-| remove all                   | `arr = [];`                                                                                         | `seq.clear()`                                                                                                                  |
-| change                       | `arr.splice(start, delCount, v1, v2, ...);`                                                         | combine `del` and `insert` above                                                                                               |
-| length                       | `arr.length`                                                                                        | `len(seq)`                                                                                                                     |
-| lookup                       | `const value = arr[index];`                                                                         | `value = seq[index]`                                                                                                           |
-| subset                       | `arr.slice(start, end)`<br>can omit end and start and<br>can use negative indexes to count from end | `seq[start:end]`<br>can omit start and/or end and<br>can use negative indexes to count from end                                |
-| concatenate                  | `const newArr = arr1.concat(arr2, arr3, ...);`                                                      | `newSeq = seq1 + seq2 + seq3`                                                                                                  |
-| copy (shallow)               | `[...arr]` or `arr.slice()`                                                                         | `list.copy()` - only for lists                                                                                                 |
-| find                         | `arr.find(predicate);`                                                                              | `next(filter(predicate, seq))` - see note below this table                                                                     |
-| find index                   | `arr.findIndex(predicate);`                                                                         | `index = seq.index(value, start?, end?)` - see note below this table                                                           |
-| iterate over                 | `for (const value of arr)` or<br>`arr.forEach((value, index) => { ... });`                          | `for item in seq:` or<br>`for index, item in enumerate(seq):`                                                                  |
-| iterate over in reverse      | iterate over `arr.reverse()`                                                                        | `for item in reversed(seq):`                                                                                                   |
-| iterate over in sorted order | create a sorted copy and iterate over it                                                            | `for item in sorted(seq):`                                                                                                     |
-| includes (Boolean)           | `arr.includes(value)`                                                                               | `value in seq`                                                                                                                 |
-| not includes (Boolean)       | `!arr.includes(value)`                                                                              | `value not in seq`                                                                                                             |
-| index of                     | `arr.indexOf(value[, fromIndex])`                                                                   | `seq.index(value[, start[, end]])`                                                                                             |
-| last index of                | `arr.lastIndexOf(value[, fromIndex])`                                                               | not built-in; have to reverse list                                                                                             | TODO |
-| count occurrences            | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                                            | `seq.count(value)`                                                                                                             |
-| join                         | `arr.join(delimiter)` returns string                                                                | `delimiter.join(seq)`                                                                                                          |
-| map                          | `const newArr = arr.map(value => newValue);`                                                        | `iterator = map(function, seq)`                                                                                                |
-| filter                       | `const newArr = arr.filter(predicate);`                                                             | `iterator = filter(predicate, seq)`                                                                                            |
-| reduce                       | `const value = arr.reduce((acc, value) => { ... });`                                                | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                        |
-| some/any (Boolean)           | `arr.some(predicate)` - short circuits                                                              | `any(map(predicate, seq))` - no short circuit                                                                                  |
-| every/all (Boolean)          | `arr.every(predicate)` - short circuits                                                             | `all(map(predicate, seq))` - no short circuit                                                                                  |
-| sort                         | `arr.sort(comparator);`<br>`comparator` is a function that compares two elements                    | `list.sort(key=k, reverse?)`<br>`k` is an attribute name or a function that takes<br>an element and returns a value to sort on |
-| reverse                      | `arr.reverse()`                                                                                     | `list.reverse()` - only for lists                                                                                              |
-| destructure/unpack           | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of array elements             | `v1, v2, v3 = seq`<br># of variables on left must match # of sequence elements<br>which limits usefulness                      |
+| Operation                    | JavaScript                                                                                          | Python                                                                                                                                             |
+| ---------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| is array/sequence            | `Array.isArray(expr)`                                                                               | `hasattr(type(expr), '__iter__')`<br>`isinstance(expr, list)`<br>`isinstance(expr, tuple)`<br>`isinstance(expr, range)`<br>`isinstance(expr, set)` |
+| add to end                   | `arr.push(v1, v2, ...);`                                                                            | `seq.append(v)` to add one and<br>`seq.extend(iterable)` to add more than one                                                                      |
+| remove from end              | `const value = arr.pop();`                                                                          | `value = seq.pop()`                                                                                                                                |
+| add to start                 | `arr.unshift(value);`                                                                               | `seq.insert(0, value)`                                                                                                                             |
+| remove from start            | `const value = arr.shift();`                                                                        | `del seq[0]`                                                                                                                                       |
+| insert                       | `arr.splice(index, delCount, v1, v2, ...)`                                                          | `seq.insert(index, value)`                                                                                                                         |
+| remove item at index         | `arr.splice(index, 1)`                                                                              | `del seq[index]` - only for lists                                                                                                                  |
+| remove items at index range  | `arr.splice(start, count)`                                                                          | `del seq[start:start+count]` - only for lists                                                                                                      |
+| remove value                 | `arr.splice(arr.findIndex(value), 1)`                                                               | `seq.remove(value)` - error if not found                                                                                                           |
+| remove all                   | `arr = [];`                                                                                         | `seq.clear()`                                                                                                                                      |
+| change                       | `arr.splice(start, delCount, v1, v2, ...);`                                                         | combine `del` and `insert` above                                                                                                                   |
+| length                       | `arr.length`                                                                                        | `len(seq)`                                                                                                                                         |
+| lookup                       | `const value = arr[index];`                                                                         | `value = seq[index]`                                                                                                                               |
+| subset                       | `arr.slice(start, end)`<br>can omit end and start and<br>can use negative indexes to count from end | `seq[start:end]`<br>can omit start and/or end and<br>can use negative indexes to count from end                                                    |
+| concatenate                  | `const newArr = arr1.concat(arr2, arr3, ...);`                                                      | `newSeq = seq1 + seq2 + seq3`                                                                                                                      |
+| copy (shallow)               | `[...arr]` or `arr.slice()`                                                                         | `list.copy()` - only for lists                                                                                                                     |
+| find                         | `arr.find(predicate);`                                                                              | `next(filter(predicate, seq))` - see note below this table                                                                                         |
+| find index                   | `arr.findIndex(predicate);`                                                                         | `index = seq.index(value, start?, end?)` - see note below this table                                                                               |
+| iterate over                 | `for (const value of arr)` or<br>`arr.forEach((value, index) => { ... });`                          | `for item in seq:` or<br>`for index, item in enumerate(seq):`                                                                                      |
+| iterate over in reverse      | iterate over `arr.reverse()`                                                                        | `for item in reversed(seq):`                                                                                                                       |
+| iterate over in sorted order | create a sorted copy and iterate over it                                                            | `for item in sorted(seq):`                                                                                                                         |
+| includes (Boolean)           | `arr.includes(value)`                                                                               | `value in seq`                                                                                                                                     |
+| not includes (Boolean)       | `!arr.includes(value)`                                                                              | `value not in seq`                                                                                                                                 |
+| index of                     | `arr.indexOf(value[, fromIndex])`                                                                   | `seq.index(value[, start[, end]])`                                                                                                                 |
+| last index of                | `arr.lastIndexOf(value[, fromIndex])`                                                               | not built-in; have to reverse list                                                                                                                 | TODO |
+| count occurrences            | `arr.reduce((acc, v) => v === value ? acc + 1 : acc, 0)`                                            | `seq.count(value)`                                                                                                                                 |
+| join                         | `arr.join(delimiter)` returns string                                                                | `delimiter.join(seq)`                                                                                                                              |
+| map                          | `const newArr = arr.map(value => newValue);`                                                        | `iterator = map(function, seq)`                                                                                                                    |
+| filter                       | `const newArr = arr.filter(predicate);`                                                             | `iterator = filter(predicate, seq)`                                                                                                                |
+| reduce                       | `const value = arr.reduce((acc, value) => { ... });`                                                | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                                            |
+| some/any (Boolean)           | `arr.some(predicate)` - short circuits                                                              | `any(map(predicate, seq))` - no short circuit                                                                                                      |
+| every/all (Boolean)          | `arr.every(predicate)` - short circuits                                                             | `all(map(predicate, seq))` - no short circuit                                                                                                      |
+| sort                         | `arr.sort(comparator);`<br>`comparator` is a function that compares two elements                    | `list.sort(key=k, reverse?)`<br>`k` is an attribute name or a function that takes<br>an element and returns a value to sort on                     |
+| reverse                      | `arr.reverse()`                                                                                     | `list.reverse()` - only for lists                                                                                                                  |
+| destructure/unpack           | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of array elements             | `v1, v2, v3 = seq`<br># of variables on left must match # of sequence elements<br>which limits usefulness                                          |
 
 Python doesn't have a simple, built-in way to find the first item in a list
 that matches some criteria. This naive approach is probably the most efficient.
@@ -1333,7 +1346,7 @@ For example:
 ```python
 numbers = [1, 2, 3]
 
-iter = map(lambda n: n * 2, numbers)
+iter = map(lambda n: n * 2, numbers) # multiplies each by 2
 print(next(iter)) # 2
 print(next(iter)) # 4
 
@@ -1385,9 +1398,12 @@ people = [
   {'firstName': 'Guido', 'lastName': 'van Rossum'}
 ]
 
-# Issue: This sorts lowercase last names like "van Rossum" to the end!
-# TODO: What is the easiest fix for this?
-people.sort(key=itemgetter('lastName', 'firstName'))
+# This sort is case-sensitive.
+#people.sort(key=itemgetter('lastName', 'firstName'))
+# This sort is case-insensitive.
+getter = itemgetter('lastName', 'firstName')
+person_key = lambda p: tuple(map(str.casefold, getter(p)))
+people.sort(key=person_key)
 print(people)
 ```
 
@@ -1399,7 +1415,7 @@ Here are some examples.
 ```python
 squares = [n**2 for n in range(5)] # [0, 1, 4, 9, 16]
 
-multipleOf3 = [n for n in range(10) if n % 3 == 0] # [0, 3, 6, 9]
+multiplesOf3 = [n for n in range(10) if n % 3 == 0] # [0, 3, 6, 9]
 ```
 
 JavaScript generator functions can be used to do the same thing,
@@ -1414,7 +1430,7 @@ function* map(fn, iter) {
   for (const element of iter) yield fn(element);
 }
 
-const squared = map(n => n ** 2, range(5)); // [0, 1, 4, 9, 16 ]
+const squares = map(n => n ** 2, range(5)); // [0, 1, 4, 9, 16 ]
 
 function* filter(predicate, obj) {
   for (const element of obj) {
@@ -1422,7 +1438,7 @@ function* filter(predicate, obj) {
   }
 }
 
-const multipleOf3 = filter(n => n % 3 === 0, range(10)); // [ 0, 3, 6, 9 ]
+const multiplesOf3 = filter(n => n % 3 === 0, range(10)); // [ 0, 3, 6, 9 ]
 ```
 
 Python also supports generator functions and the `yield` keyword.
@@ -1433,16 +1449,14 @@ def map(fn, iter):
     for element in iter:
         yield fn(element)
 
-squared = map(lambda n: n**2, range(5)) # [ 0, 1, 4, 9, 16 ]
-squared = [n**2 for n in range(5)] # same using list comprehension
+squares = map(lambda n: n**2, range(5)) # [ 0, 1, 4, 9, 16 ]
 
 def filter(predicate, seq):
     for element in seq:
         if predicate(element):
             yield element
 
-multipleOf3 = filter(lambda n: n % 3 == 0, range(10)) # [ 0, 3, 6, 9 ]
-multipleOf3 = [n for n in range(10) if n % 3 == 0] # same using list comprehension
+multiplesOf3 = filter(lambda n: n % 3 == 0, range(10)) # [ 0, 3, 6, 9 ]
 ```
 
 ## <a name="sets">Sets</a>
@@ -1562,7 +1576,7 @@ const pc = 'A1B 2C3';
 if (!re.test(pc)) console.log('not a Canadian postal code');
 ```
 
-In Python, import the `re` library to use regular expressions.
+In Python, import the `re` module to use regular expressions.
 Those that will be used multiple times should be compiled.
 Otherwise they can be used inline.
 The following example demonstrate the two ways in which
@@ -1597,7 +1611,7 @@ if (not canadianPostalCode.search(pc)):
 | get all matches          | `str.matchAll(re)` or `re.exec(str)`                                      | `regex.finditer(str)`<br>returns an iterable over match objects        |
 | split string on re       | `str.split(re)`<br>returns an array of strings                            | `regex.split(str)`<br>returns a list of strings                        |
 
-Python match objects have the following methods:
+Python match objects support the following methods:
 
 - `group()` - returns the matching string
 - `start()` - returns the start index of the match (inclusive)
@@ -1612,11 +1626,11 @@ For more information on regular expression support in Python, see the
 
 Python refers to errors as exceptions.
 
-| Operation | JavaScript                                      | Python                         |
-| --------- | ----------------------------------------------- | ------------------------------ |
-| throw     | `throw new Error(message);`                     | `raise ExClass(args)`          |
-| catch     | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ...` |
-| rethrow   | `throw e;`                                      | `raise e`                      |
+| Operation | JavaScript                                      | Python                                                |
+| --------- | ----------------------------------------------- | ----------------------------------------------------- |
+| throw     | `throw new Error(message);`                     | `raise ExClass(args)`                                 |
+| catch     | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ... else: ... finally: ...` |
+| rethrow   | `throw e;`                                      | `raise e`                                             |
 
 In JavaScript:
 
@@ -1656,7 +1670,7 @@ The base class of all of them is `Exception`.
 Names of built-in exception classes end in "Error".
 For a list of them, see {% aTargetBlank
 "https://docs.python.org/3/library/exceptions.html", "Built-in Exceptions" %}.
-j
+
 Names of custom exception classes should also end in "Error".
 Here is an example of defining one:
 
@@ -2280,9 +2294,7 @@ try:
     if res.status_code != 200:
         raise Exception('bad status ' + str(res.status_code))
 
-    obj = res.json()
-    print('is dict?', type(obj) is dict)
-    #image_url = obj.message[0] # TODO: Why doesn't this work?
+    obj = res.json() # a dict
     image_url = obj['message'][0] # get first array element
     print('image url =', image_url)
 except ConnectionError as e:
@@ -2353,7 +2365,7 @@ class MethodMissingDemo:
     def __getattr__(self, method_name):
         prefix = 'add'
         if method_name.startswith(prefix):
-            n1 = int(method_name[len(prefix)])
+            n1 = int(method_name[len(prefix):])
             return lambda n2: n1 + n2
         else:
             class_name = self.__class__.__name__
@@ -2361,7 +2373,7 @@ class MethodMissingDemo:
 
 demo = MethodMissingDemo()
 print(demo.add3(4)) # 7
-print(demo.add4(1)) # 5
+print(demo.add19(1)) # 20
 print(demo.subtract5(7)) # AttributeError: MethodMissingDemo object has no method 'subtract5'
 ```
 
@@ -2388,7 +2400,7 @@ const demo = new Proxy(
 );
 
 console.log(demo.add3(4)); // 7
-console.log(demo.add4(1)); // 5
+console.log(demo.add20(1)); // 20
 console.log(demo.subtract5(7)); // ReferenceError: object has no method subtract5
 ```
 
@@ -2437,9 +2449,9 @@ Other types supported are:
 | `Any`                                               | any value                                                               |
 | any class name                                      | instance of the class or instance of a subclass                         |
 | `Callable[[P1, P2, ...], RT]`                       | function that takes parameters of types P1, P2, ... and returns type RT |
-| `Callable[...], RT]`                                | function that takes any parameters and returns type RT                  |
+| `Callable[..., RT]`                                 | function that takes any parameters and returns type RT                  |
 | `Generator[YieldType, SendType, ReturnType]`        | generator function;<br>`SendType` and `ReturnType` can be `None`        |
-| `NamedType('Name', [('name1', T1), ('name2', T2)])` | named tuple where elements have times T1, T2, ...                       |
+| `NamedType('Name', [('name1', T1), ('name2', T2)])` | named tuple where elements have types T1, T2, ...                       |
 | `Optional[T]`                                       | matches `None` or the type T<br>same as `Union[None, T]`                |
 | `Type[C]`                                           | matches a class object for class C or a subclass                        |
 | `Union[T1, T2, ...]`                                | matches any of the specified types                                      |
@@ -2447,13 +2459,15 @@ Other types supported are:
 All types above whose names begin with a capital letter
 must be imported from the "typing" module.
 For example, `from typing import Any, List`.
+Python 3.9 is supposed to make this unnecessary,
+but perhaps mypy does not yet support the new type syntax.
 
 The `Union` type can be used in collection types
-to allow elements to have one of a set of types.
+to allow elements to have a set of types.
 
 Aliases can be defined for long type descriptions.
 This is useful when the same type description is used in many places.
-For example, `IntToStringMap = Dict[int, str]`.
+For example, `IntToStrMap = Dict[int, str]`.
 
 To add a "type hint" to a variable or function parameter,
 follow its name with a colon, a space, and the type.
@@ -2469,7 +2483,8 @@ def order_ice_cream(flavor: str, scoops: int, add_sprinkles: bool) -> IceCream:
 
 ### mypy
 
-{% aTargetBlank "http://mypy-lang.org/", "mypy" %} is implemented in Python.
+{% aTargetBlank "http://mypy-lang.org/", "mypy" %}
+is a Python type checking tool that is implemented in Python.
 Development began in 2014.
 
 To install mypy, enter `pip install mypy`.
@@ -2486,9 +2501,10 @@ parameters that collect variadic arguments in a tuple or dict.
 ### Pyright
 
 {% aTargetBlank "https://github.com/microsoft/pyright", "Pyright" %}
-is implemented in TypeScript. Development began in 2019.
+is a Python type checking tool that is implemented in TypeScript.
+Development began in 2019.
 It is used by the VS Code extension Pylance
-and can also be run from the command-line.
+and can also be run from the command line.
 
 To install Pyright, install Node.js and enter `npm install -g pyright`.
 
@@ -2524,10 +2540,10 @@ Stub files for popular Python libraries can be downloaded from
 {% aTargetBlank "https://github.com/python/typeshed", "typeshed" %}.
 These are included as a submodule of mypy.
 See the typeshed link for instructions on installing them.
+
 Note that the number of libraries represented here is currently small
 and it does not contain stub files for many popular libraries
 including mathplotlib, numpy, and pandas.
-
 Type stub files for matplotlib, numpy, and pandas can be found at
 {% aTargetBlank "https://pypi.org/project/data-science-types/",
 "data-science-types" %}.
@@ -2598,15 +2614,16 @@ See [Python testing](/blog/python/python-testing/).
 
 | Topic            | JavaScript                          | Python                                        |
 | ---------------- | ----------------------------------- | --------------------------------------------- |
-| command-line     | Node.js `node` command              | `python` command                              |
+| command line     | Node.js `node` command              | `python` command                              |
 | utilities        | Lodash, Ramda                       | pydash                                        |
-| web server       | Express                             | Flask                                         |
+| web server       | Express                             | Flask, FastAPI                                |
 | web framework    | React, Svelte, Vue                  | Flask                                         |
 | dates and times  | date.fns, Moment.js, Temporal       | datetime (in standard library)                |
 | linting          | ESLint                              | pylint, flake8                                |
-| unit tests       | Jest, Mocha, Chai, @testing-library | unittest (in standard library), nose2, pytest |
+| unit tests       | Jest, Mocha, Chai, @testing-library | pytest, unittest (in standard library), nose2 |
 | end-to-end tests | Cypress                             | same                                          |
 | math             | mathjs                              | math (in standard library)                    |
+| popular editors  | VS Code                             | VS Code, PyCharm (JetBrains)                  |
 
 ## Linting
 
