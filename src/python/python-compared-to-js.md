@@ -221,7 +221,7 @@ Everything is an object in Python, even values that are
 primitives in JavaScript like Booleans, numbers, and strings.
 
 Python has "sequences" whereas JavaScript has arrays.
-Kinds of sequences include string, list, tuple, range, and buffer.
+Kinds of sequences include string, list, tuple, range, set, and buffer.
 A list is a mutable sequence of values that typically have the same type.
 A tuple is an immutable sequence of values that can have varying types.
 A range is an immutable sequence of numbers that is often be used for looping.
