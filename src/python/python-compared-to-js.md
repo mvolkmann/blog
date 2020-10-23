@@ -310,7 +310,7 @@ Python "packages" are managed using the `pip` tool
 which is installed when Python is installed.
 The name is an acronym for "Pip Installs Packages".
 It installs packages from the
-{% aTargetBlank "https://pypi.org/", "Python Package Index" %} (pypi:).
+{% aTargetBlank "https://pypi.org/", "Python Package Index" %} (pypi).
 To upgrade the version of `pip` being used, enter
 `python -m pip install --upgrade pip`.
 
@@ -393,7 +393,7 @@ For more information on Python packages, see the
 {% aTargetBlank "https://docs.python.org/3/tutorial/modules.html#packages",
 "Packages" %} in the Python Tutorial.
 
-## Printing/Logging
+## Printing/logging
 
 | Operation                              | JavaScript                                                                                  | Python                                                |
 | -------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
@@ -1330,7 +1330,7 @@ print(len(dog)) # 2
 | every/all (Boolean)          | `arr.every(predicate)` - short circuits                                                             | `all(map(predicate, seq))` - no short circuit                                                                                                      |
 | sort                         | `arr.sort(comparator);`<br>`comparator` is a function that compares two elements                    | `list.sort(key=k, reverse?)`<br>`k` is an attribute name or a function that takes<br>an element and returns a value to sort on                     |
 | reverse                      | `arr.reverse()`                                                                                     | `list.reverse()` - only for lists                                                                                                                  |
-| destructure/unpack           | `const v1, v2, v2 = arr;`<br># of variables on left can differ from # of array elements             | `v1, v2, v3 = seq`<br># of variables on left must match # of sequence elements<br>which limits usefulness                                          |
+| destructure/unpack           | `const [v1, v2, v3] = arr;`<br># of variables on left can differ from # of array elements           | `v1, v2, v3 = seq`<br># of variables on left must match # of sequence elements<br>which limits usefulness                                          |
 
 Python doesn't have a simple, built-in way to find the first item in a list
 that matches some criteria. This naive approach is probably the most efficient.
@@ -1632,11 +1632,11 @@ For more information on regular expression support in Python, see the
 
 Python refers to errors as exceptions.
 
-| Operation | JavaScript                                      | Python                                                |
-| --------- | ----------------------------------------------- | ----------------------------------------------------- |
-| throw     | `throw new Error(message);`                     | `raise ExClass(args)`                                 |
-| catch     | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass: ... else: ... finally: ...` |
-| rethrow   | `throw e;`                                      | `raise e`                                             |
+| Operation | JavaScript                                      | Python                                                     |
+| --------- | ----------------------------------------------- | ---------------------------------------------------------- |
+| throw     | `throw new Error(message);`                     | `raise ExClass(args)`                                      |
+| catch     | `try { ... } catch (e) { ... } finally { ... }` | `try: ... except ExClass as e: ... else: ... finally: ...` |
+| rethrow   | `throw e;`                                      | `raise e`                                                  |
 
 In JavaScript:
 
@@ -2137,9 +2137,7 @@ Key benefits of
    @app.route('/dog', methods=['POST'])
    def create_dog():
        dog = request.get_json() # from body
-       print('dog =', dog)
        id = round(time.time() * 1000)
-       print('id =', id)
        dog['id'] = id
        dogs[id] = dog
        return str(id)
