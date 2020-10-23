@@ -151,8 +151,14 @@ In JavaScript, perform web searches that begin with "MDN"
 For example, "mdn regexp".
 
 For Python help, see the list of resources at the end.
-You can also enter the `python` command to start the REPL and enter `help`.
-To get help on a particular library, import it and pass the name to help.
+You can also enter the `python` command to start the REPL
+and enter `help()` to start the help utility.
+Once inside, enter the name of a module to get help on it.
+To exit the help utility and return to the Python REPL,
+enter `quit` or just `q`.
+
+Alternatively, once a module has been imported, help on it
+can be obtained by passing it to the `help` function.
 For example:
 
 ```python
