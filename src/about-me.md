@@ -4,8 +4,6 @@ title: About Me
 layout: top-layout.njk
 ---
 
-revision = {{ site.github.build_revision }}
-
 ## About Me
 
 <img
