@@ -6,7 +6,7 @@ body > header { display: flex; align-items: center; background-color: var(--acce
 
 body > header > h1 { margin-top: 0; }
 
-body > main { flex-grow: 1; position: relative; width: 100%; }
+body > main { flex-grow: 1; height: 100%; position: relative; width: 100%; }
 
 .bold { font-weight: bold; }
 
