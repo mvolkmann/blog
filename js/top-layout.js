@@ -20,15 +20,11 @@ window.onload = () => {
 
   const nav = document.querySelector('nav');
   if (nav) {
+    // eslint-disable-next-line no-unused-vars
     navLeftWhenClosed = '-' + nav.getBoundingClientRect().width + 'px';
-    nav.style.left = navLeftWhenClosed; // to initially hide it
+    //nav.style.left = navLeftWhenClosed; // to initially hide it
   }
 
   // Make "Topics" be the default page.
   if (location.pathname === '/blog/') location.href += 'topics/';
-
-  const mainLinks = Array.from(document.querySelectorAll('.main-links > a'));
-  for (const a of mainLinks) {
-    if (location.href.startsWith(a.href)) a.classList.add('selected');
-  }
 };
