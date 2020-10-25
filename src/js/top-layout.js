@@ -1,5 +1,3 @@
-/* global navLeftWhenClosed: true */
-
 // Only register the service worker when not on localhost.
 /*
 if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
@@ -22,6 +20,7 @@ window.onload = () => {
 
   const nav = document.querySelector('nav');
   if (nav) {
+    // eslint-disable-next-line no-unused-vars
     navLeftWhenClosed = '-' + nav.getBoundingClientRect().width + 'px';
     //nav.style.left = navLeftWhenClosed; // to initially hide it
   }
