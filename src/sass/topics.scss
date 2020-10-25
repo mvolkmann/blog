@@ -1,36 +1,45 @@
 body > footer {
   & > a {
     color: white;
-    margin-left: 2rem;
     text-transform: uppercase;
   }
 }
 
-body > main {
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  padding: 0;
+body > header {
+  h1 {
+    flex-grow: 1;
+    padding: 0;
+  }
 
   .hamburger {
-    display: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1.7rem;
+    outline: none;
+  }
+}
+
+body > main {
+  li.ordered > a:not(.active) {
+    color: green;
+  }
+
+  li.top > a {
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 
   & > nav {
     background-color: linen;
+    display: inline-block;
     height: 100%;
     overflow: auto;
     padding-right: 1rem;
+    position: absolute;
+    transition-duration: 0.5s;
     width: fit-content;
-
-    h2 {
-      color: gray;
-    }
-
-    & > ul {
-      margin-left: 0;
-      margin-top: 0;
-    }
+    z-index: 1;
 
     a {
       color: var(--accent-color);
@@ -56,35 +65,9 @@ body > main {
     }
 
     li {
-      margin-top: 0.5rem;
+      margin: 1rem 0;
     }
-  }
 
-  & > section {
-    flex-grow: 1;
-    overflow: auto;
-
-    & > iframe {
-      border: none;
-      box-sizing: border-box;
-      height: 100%;
-      padding: 1rem;
-      transition-duration: 500ms; // matches setTimeout in topics.js
-      transition-property: opacity;
-      width: 100%;
-    }
-  }
-
-  li.ordered > a:not(.active) {
-    color: green;
-  }
-
-  li.top > a {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-  nav {
     & > ul {
       display: block;
 
@@ -105,27 +88,21 @@ body > main {
     }
   }
 
-  @media (max-width: 800px) {
-    .hamburger {
-      position: absolute;
-      left: 0;
-      top: 0;
+  & > section {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    left: 0;
+    width: 100%;
 
-      background-color: transparent;
+    & > iframe {
       border: none;
-      color: white;
-      display: inline-block;
-      font-size: 2rem;
-    }
-
-    nav {
-      left: -100%; // so it is initially hidden
-      position: absolute;
-      transition-duration: 0.5s;
-
-      li {
-        margin: 1rem 0;
-      }
+      box-sizing: border-box;
+      height: 100%;
+      padding: 0.5rem;
+      transition-duration: 500ms; // matches setTimeout in topics.js
+      transition-property: opacity;
+      width: 100%;
     }
   }
 }

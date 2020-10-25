@@ -9,16 +9,22 @@ body {
   margin: 0;
 
   & > footer {
+    display: flex;
+    justify-content: space-between;
+
     background-color: var(--accent-color);
     color: white;
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   & > header {
+    display: flex;
+    align-items: center;
+
     background-color: var(--accent-color);
     color: white;
     margin: 0;
-    padding: 1rem;
+    padding: 0.5rem;
     text-align: center;
 
     & > h1 {
@@ -28,8 +34,8 @@ body {
 
   & > main {
     flex-grow: 1;
-    overflow: hidden;
-    padding: 1rem;
+    position: relative;
+    width: 100%;
   }
 }
 
@@ -42,33 +48,19 @@ body {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 1.7rem;
+  margin-bottom: 0;
+}
+
 h2 {
   color: purple;
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin-block-start: 0;
 }
 
 h3 {
   color: var(--accent-color);
-}
-
-.main-links > a {
-  color: transparent;
-  display: inline-block;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0 0.5rem;
-  text-decoration: none;
-  -webkit-text-stroke: yellow 1px;
-
-  &:hover {
-    color: yellow;
-  }
-
-  &.selected {
-    color: lightgreen;
-    -webkit-text-stroke: lightgreen;
-  }
 }
 
 p {

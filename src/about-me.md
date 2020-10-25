@@ -1,14 +1,13 @@
 ---
+eleventyNavigation:
+  key: About Me
 css: '/blog/assets/about-me.css'
-title: About Me
-layout: top-layout.njk
+layout: topic-layout.njk
 ---
-
-## About Me
 
 <img
 alt="head-shot"
-class="head-shot"
+class="head-shot keep-size"
 src="https://avatars0.githubusercontent.com/u/79312?s=460&v=4">
 
 I am a partner at Object Computing, Inc. (OCI) in St. Louis

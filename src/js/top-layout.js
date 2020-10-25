@@ -1,3 +1,5 @@
+/* global navLeftWhenClosed: true */
+
 // Only register the service worker when not on localhost.
 /*
 if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
@@ -21,14 +23,9 @@ window.onload = () => {
   const nav = document.querySelector('nav');
   if (nav) {
     navLeftWhenClosed = '-' + nav.getBoundingClientRect().width + 'px';
-    nav.style.left = navLeftWhenClosed; // to initially hide it
+    //nav.style.left = navLeftWhenClosed; // to initially hide it
   }
 
   // Make "Topics" be the default page.
   if (location.pathname === '/blog/') location.href += 'topics/';
-
-  const mainLinks = Array.from(document.querySelectorAll('.main-links > a'));
-  for (const a of mainLinks) {
-    if (location.href.startsWith(a.href)) a.classList.add('selected');
-  }
 };

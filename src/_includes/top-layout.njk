@@ -32,19 +32,15 @@
   </head>
   <body>
     <header>
+      <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button>
       <h1>Mark Volkmann's Blog</h1>
-      <div class="main-links">
-        <a href="/blog/topics/">Topics</a>
-        <a href="/blog/quotes/">Quotes</a>
-        <a href="/blog/about-me/">About Me</a>
-      </div>
     </header>
     <main>
       {{ content | safe }}
     </main>
     <footer>
-      &copy; R. Mark Volkmann, 2020
       {% aTargetBlank "https://tinyletter.com/mvolkmann", "subscribe" %}
+      <div>&copy; R. Mark Volkmann, 2020</div>
     </footer>
   </body>
 </html>

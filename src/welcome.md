@@ -2,4 +2,5 @@
 layout: topic-layout.njk
 ---
 
-Select a topic in the left nav.
+Select a topic from<br>
+the hamburger menu.

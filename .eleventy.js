@@ -83,9 +83,11 @@ module.exports = eleventyConfig => {
       const {parent} = obj;
       if (parent) {
         parentObj = keyMap[parent];
-        let {children} = parentObj;
-        if (!children) children = parentObj.children = [];
-        children.push(obj);
+        if (parentObj) {
+          let {children} = parentObj;
+          if (!children) children = parentObj.children = [];
+          children.push(obj);
+        }
       } else {
         navMap[obj.key] = obj;
       }

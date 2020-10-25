@@ -11,30 +11,36 @@ function handleLinkClick(link, url) {
     return;
   }
 
-  // We only need to toggle the "expanded" class for non-leaf links.
+  // Only toggle the "expanded" class for non-leaf links.
   // Links for leaf nodes do not have a next sibling.
-  if (link.nextSibling) link.classList.toggle('expanded');
+  if (link.nextSibling) {
+    link.classList.toggle('expanded');
+  } else {
+    // Only change the main content area if a leaf link was clicked.
+    const activeLink = document.querySelector('.active');
 
-  const activeLink = document.querySelector('.active');
+    // If the clicked link is not already the active one ...
+    if (link !== activeLink) {
+      // If there's a previous active link, style it as no longer active.
+      if (activeLink) activeLink.classList.remove('active');
 
-  // If the clicked link is not already the active one ...
-  if (link !== activeLink) {
-    // If there's a previous active link, style it as no longer active.
-    if (activeLink) activeLink.classList.remove('active');
+      // Style the clicked link as active.
+      link.classList.add('active');
 
-    // Style the clicked link as active.
-    link.classList.add('active');
+      const iframe = document.querySelector('iframe');
+      iframe.style.opacity = 0;
+      setTimeout(() => (iframe.src = url), 500); // matches transition-duration in topics.scss
 
-    const iframe = document.querySelector('iframe');
-    iframe.style.opacity = 0;
-    setTimeout(() => (iframe.src = url), 500); // matches transition-duration in topics.scss
+      // Put new page URL in URL hash so it can be bookmarked.
+      const {origin} = location;
+      location.hash = url.startsWith(origin)
+        ? url.substring(origin.length)
+        : url;
+    }
 
-    // Put new page URL in URL hash so it can be bookmarked.
-    const {origin} = location;
-    location.hash = url.startsWith(origin) ? url.substring(origin.length) : url;
+    // Only toggle hamburger menu if a leaf link was clicked.
+    toggleHamburgerMenu();
   }
-
-  toggleHamburgerMenu();
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -45,6 +51,7 @@ function iframeLoaded(iframe) {
 // eslint-disable-next-line no-unused-vars
 function toggleHamburgerMenu() {
   const nav = document.querySelector('nav');
-  const isOpen = nav.style.left === '0px';
+  const {left} = nav.style;
+  const isOpen = !left || left === '0px';
   nav.style.left = isOpen ? navLeftWhenClosed : 0;
 }
