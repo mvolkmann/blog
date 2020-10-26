@@ -15,6 +15,11 @@ body {
     background-color: var(--accent-color);
     color: white;
     padding: 0.5rem;
+
+    & > a {
+      color: white;
+      text-transform: uppercase;
+    }
   }
 
   & > header {
@@ -28,15 +33,113 @@ body {
     text-align: center;
 
     & > h1 {
+      flex-grow: 1;
       margin-top: 0;
+      padding: 0;
+    }
+
+    & > .hamburger {
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 1.7rem;
+      outline: none;
     }
   }
 
   & > main {
     flex-grow: 1;
-    height: 100%;
     position: relative;
     width: 100%;
+
+    display: flex;
+    align-items: stretch;
+
+    li.ordered > a:not(.active) {
+      color: green;
+    }
+
+    li.top > a {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    & > nav {
+      background-color: linen;
+      display: inline-block;
+      height: 100%;
+      overflow: auto;
+      padding-right: 1rem;
+      position: absolute;
+      transition-duration: 0.5s;
+      width: fit-content;
+      z-index: 1;
+
+      a {
+        color: var(--accent-color);
+        cursor: pointer;
+        text-decoration: none;
+
+        &.active {
+          color: purple;
+          font-weight: bold;
+        }
+
+        &.expanded > .triangle {
+          transform: rotate(90deg);
+        }
+
+        .triangle {
+          display: inline-block;
+          margin-left: 0.5rem;
+          transform: rotate(0);
+          transition-duration: 0.5s;
+          transition-property: transform;
+        }
+      }
+
+      li {
+        margin: 1rem 0;
+      }
+
+      & > ul {
+        display: block;
+
+        ul {
+          display: none;
+        }
+      }
+
+      .expanded + ul {
+        display: block;
+      }
+
+      ul {
+        list-style: none;
+        margin-left: 1rem;
+        margin-top: 0.5rem;
+        padding-left: 0;
+      }
+    }
+
+    & > section {
+      flex-grow: 1;
+      display: flex;
+      align-items: stretch;
+      overflow-y: scroll;
+      position: relative;
+      left: 0;
+      width: 100%;
+
+      & > iframe {
+        border: none;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        transition-duration: 500ms; // matches setTimeout in topics.js
+        transition-property: opacity;
+        width: 100%;
+      }
+    }
   }
 }
 
