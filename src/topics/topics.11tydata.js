@@ -17,7 +17,11 @@ function renderNavItem(entry) {
         target="frame"
       >
         ${entry.title}
-        ${entry.children ? '<div class="triangle">&#x25b6;</div>' : ''}
+        ${
+          entry.children
+            ? '<div class="triangle">&#x25b6;\u{25B6}\u{FE0E}</div>'
+            : ''
+        }
       </a>
       ${renderNavList(entry.children)}
     </li>
