@@ -22,7 +22,7 @@ window.onload = () => {
   if (nav) {
     // eslint-disable-next-line no-unused-vars
     navLeftWhenClosed = '-' + nav.getBoundingClientRect().width + 'px';
-    //nav.style.left = navLeftWhenClosed; // to initially hide it
+    nav.style.left = navLeftWhenClosed; // to initially hide it
   }
 
   // Make "Topics" be the default page.
