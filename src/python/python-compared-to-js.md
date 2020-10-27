@@ -1103,7 +1103,7 @@ To use the Python functions, `import math`.
 | factorial                      | not built-in; see below       | `math.factorial(n)`                          |
 | floor                          | `Math.floor(x)`               | `math.floor(x)`                              |
 | greatest common denominator    | not built-in                  | `math.gcd(n1, n2, ...)`                      |
-| hypotenuse                     | `Math.hypot(x, y, ...)`       | `math.hypot(x)`                              |
+| hypotenuse                     | `Math.hypot(x, y, ...)`       | `math.hypot(x, y)`                           |
 | least common multiple          | not built-in                  | `math.lcm(n1, n2, ...)`                      |
 | log base 10                    | `Math.log10(x)`               | `math.log10(x)`                              |
 | logarithm to any base          | not built-in; see below       | `math.log(x, y)`                             |
