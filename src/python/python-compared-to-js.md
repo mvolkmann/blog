@@ -542,6 +542,7 @@ Python blocks must start on a new line and be indented.
 | if              | `if (cond) sOrB`                                    | `if cond: block`                                  |
 | if/else         | `if (cond) sOrB1 else sOrB2`                        | `if cond: block1 else: block2`                    |
 | if/else if/else | `if (cond1) sOrB1 else if (cond2) sOrB2 else sOrB3` | `if cond: block1 elif cond2: block2 else: block3` |
+| switch          | `switch (expr) { case v1: case v2: default }`       | not supported                                     |
 | ternary         | `cond ? trueValue : falseValue`                     | `trueValue if cond else falseValue`               |
 
 Here's an example of using a Python ternary statement.
@@ -1945,14 +1946,14 @@ add(2, 3) # DEBUG:root:add was passed (2, 3) and returned 5
 
 The built-in Python decorators include:
 
-- `@classmethod`  
+- `@classmethod`
   This transforms a method into a class method
   which receives a class object as its first parameter
   and can use it to access class state.
-- `@property`  
+- `@property`
   This defines getter, setter, and deleter methods
   for a class instance property.
-- `@staticmethod`  
+- `@staticmethod`
   This transforms a method into a static method
   which does not receive a class object as its first parameter
   and cannot access class state.
