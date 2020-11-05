@@ -70,6 +70,29 @@ This operations are especially fast
 when run on graphical processing units (GPUs), often
 providing a speed improvement in the neighborhood of 50 times.
 
+PyTorch provides a `DataLoader` class that can load data in the background
+in preparation for use by the training loop.
+Each iteration of the training loop
+evaluates the current model using data from the `DataLoader`.
+Model outputs are compared to target outputs using a loss function.
+The PyTorch "autograd" engine then modifies the model
+in order to produce outputs that are closer to targets.
+
+TorchScript can be used to compile models ahead of time.
+This results in a set of instructions that can be executed
+in environments that do not use Python such as
+C++ applications or mobile devices.
+
+Full training for complex models and large datasets
+typically require access to a CUDA-capable GPU
+in order to complete in a reasonable amount of time
+(hours versus days).
+
+Some cloud platforms provide online access to Jupyter Notebooks
+that have PyTorch preinstalled and can process code using GPUs.
+One example is
+{% aTargetBlank "https://colab.research.google.com", "Colabortory" %}.
+
 ## Conventions
 
 | Variable Name Suffix | Type        |
