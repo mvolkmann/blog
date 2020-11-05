@@ -112,3 +112,5 @@ fig.add_trace(go.Scatter(
     x=df.date, y=df.GOOG, mode='lines+markers', name='Google',
     line=dict(color='firebrick', width=2, dash='dashdot')))
 ```
+
+TODO: Add more detail!
