@@ -99,7 +99,6 @@ and run it, enter the following commands:
 
 - `meteor create {app-name}`
 - `cd {app-name}`
-- `meteor npm install`
 - `meteor`
 
 This is covered in more detail later in the "Todo App" section.

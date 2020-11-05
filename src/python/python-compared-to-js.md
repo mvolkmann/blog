@@ -173,6 +173,9 @@ help(re)
 | single-line | `//`        | `#`    |
 | multi-line  | `/* ... */` | none   |
 
+Workarounds for multiline comments in Python include
+using triple-quoted strings and adding `if False:` before a code block.
+
 ## Naming conventions
 
 | Kind                        | JavaScript     | Python          |
