@@ -133,32 +133,68 @@ Training the model can take many hours.
 Another option it to use a pre-trained model created by someone else.
 {% aTargetBlank "https://pytorch.org/hub/", "PyTorch Hub" %}
 provides some of these.
-Another source is the
-{% aTargetBlank "http://github.com/pytorch/vision", "TorchVision" %} project.
-Three example included in TorchVision are
-{% aTargetBlank "http://mng.bz/lo6z", "AlexNet" %},
-{% aTargetBlank "http://arxiv.org/pdf/1512.03385.pdf", "ResNet" %},
-and {% aTargetBlank "http://arxiv.org/pdf/1512.00567.pdf", "Inception v3" %}.
 
-AlexNet won a 2012 ImageNet Large Scale Visual Recognition Competition (ILSVRC).
-It achieved a top-5 test error rate of 15.4% which means that
-it failed to include the correct label in its top five predictions
-only 15.4% of the time.
-It 2020 top-5 error rates can be 3% or lower.
+Another source is the
+{% aTargetBlank "http://github.com/pytorch/vision", "TorchVision" %} project
+which contains a collection of notable neural network models
+for computer vision.
+
+To see the available models in TorchVision:
+
+```python
+from torchvision import models
+dir(models)
+```
+
+This outputs a list of names.
+Names that start with an uppercase letter represent Python model classes.
+Names that start with a lowercase letter represent Python functions
+that can be called to instantiate a model using one of the model classes.
+For example, model classes include `AlexNet`, `Inception3`, and `ResNet`.
+{% aTargetBlank "http://mng.bz/lo6z", "AlexNet" %},
+{% aTargetBlank "http://arxiv.org/pdf/1512.00567.pdf", "Inception3" %}, and
+{% aTargetBlank "http://arxiv.org/pdf/1512.03385.pdf", "ResNet" %}.
+Functions include `alexnet`, `inception_v3`, and `resnet101`.
+
+The ImageNet Large Scale Visual Recognition Competition (ILSVRC)
+is an annual competition that began in 2010.
+Tasks to be solved vary each year.
+Example tasks include:
+
+- image classification: Identify the categories of objects that are present.
+- object localization: Report the position of an object.
+- object detection: List and label the objects that are present.
+- scene classification: Classify a depicted situation.
+- scene parsing: Segment an image into regions that match object categories.
+
+AlexNet won an ILSVRC award in 2012 with a top-5 test error rate of 15.4%
+which means that it failed to include the correct label
+in its top five predictions only 15.4% of the time.
+In 2020 top-5 error rates can be 3% or lower.
+
+RestNet is a residual network that won an ILSVRC award in 2015.
+It was trained using 1.2 million images in the ImageNet dataset
+to classify images into 1000 categories.
+This means it can only label images using those 1000 categories.
 
 Here is code to perform image recognition using
 a ResNet 101-layer convolutional neural network:
 
 ```python
+from matplotlib import pyplot as plt
 from PIL import Image
 import torch
 from torchvision import models, transforms
 import torch.nn.functional as F
 
 # Create an instance of a neural network.
-# This has been trained to recognize only the 1000 things
-# listed in the file imagenet_classes.txt file
-# that is read in later.
+# The 1000 category names this model supports are listed in
+# the file imagenet_classes.txt file that is read in later.
+# The first time function is called, it downloads the model
+# to the file $TORCH_HOME/checkpoints/resnet101-5d3b4d8f.pth.
+# In macOS, TORCH_HOME defaults to ~/.cache.torch.
+# Download progress will be displayed.
+# For me it took 13 seconds to complete the download.
 resnet = models.resnet101(pretrained=True)
 
 # Put the network into "eval" mode because we want to
@@ -174,7 +210,8 @@ img = Image.open('./' + img_path)
 
 # Prepare the image for input to the network.
 preprocess = transforms.Compose([
-    # Resize the image to reduce the number of pixels to be processed.
+    # Resize the image to reduce the number of pixels to be
+    # processed and match the image sizes used for training.
     transforms.Resize(256),
 
     # Crop the image to a smaller size about its center,
@@ -184,10 +221,9 @@ preprocess = transforms.Compose([
     # Convert the image data to a tensor object.
     transforms.ToTensor(),
 
-    # Normalize the red/green/blue values of the pixels
-    # to have specific mean and standard deviation values
-    # which somewhat improves the recognition.
-    # But why these values?
+    # Normalize the red/green/blue values of the pixels to
+    # have the same mean and standard deviation values
+    # that were used when the model was trained.
    transforms.Normalize(
        mean=[0.485, 0.456, 0.406], # [red, green, blue]
        std=[0.229, 0.224, 0.225] # [red, green, blue]
@@ -196,13 +232,19 @@ preprocess = transforms.Compose([
 img_t = preprocess(img)
 #print(img_t.size()) # torch.Size([3, 224, 224])
 
+# Render the preprocessed image.
+# This will have very odd coloring!
+#tensor_to_pil = transforms.ToPILImage()
+#plt.imshow(tensor_to_pil(img_t))
+#plt.show()
+
 # Create a 1D tensor object from the image
 # with the data starting at index zero.
 # Why isn't zero the default?
 batch_t = torch.unsqueeze(img_t, 0)
 #print(batch_t.size()) # torch.Size([1, 3, 224, 224])
 
-# Run the inference engine to get predicted classes.
+# Perform inference to get predicted classes.
 # "out" is set to a tensor that contains percentage predictions
 # for each of the 1000 possible labels.
 out = resnet(batch_t)
@@ -215,6 +257,7 @@ with open('./dlwpt-code-master/data/p1ch2/imagenet_classes.txt') as f:
 # Find the index with the highest score.
 # _ is set to the highest value, but we don't need that.
 _, index = torch.max(out, 1)
+# index will be a 1D tensor containing one integer.
 # We can also get the tensor value at this index with
 # out.detach().numpy()[0][index])
 
@@ -238,6 +281,14 @@ for i in indices[0][:n]:
     print(f'{label} - {round(pct, 2)}%')
 ```
 
+This code requires the following installs:
+
+```bash
+pip install matplotlib # for rendering images
+pip install pillow # for loading images
+pip install torch torchvision # for neural networks
+```
+
 Here is sample output from the code above:
 
 ```text
@@ -251,8 +302,9 @@ Ibizan hound, Ibizan Podenco - 0.52%
 toy terrier - 0.15%
 ```
 
-The first time this code is run, it downloads the model
-which takes several seconds. Where does it go?
+Note that if an image is fed into the model that
+does not match any of the 1000 training categories,
+matches will still be reported ... possibly with high confidence.
 
 ## Data sources
 
