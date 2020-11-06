@@ -234,9 +234,10 @@ img_t = preprocess(img)
 
 # Render the preprocessed image.
 # This will have very odd coloring!
-#tensor_to_pil = transforms.ToPILImage()
-#plt.imshow(tensor_to_pil(img_t))
+#img_pil = tensor_to_pil(img_t)
+#plt.imshow(img_pil)
 #plt.show()
+#img_pil.save('my-dog-preprocessed.png')
 
 # Create a 1D tensor object from the image
 # with the data starting at index zero.
@@ -301,6 +302,11 @@ basenji - 0.59%
 Ibizan hound, Ibizan Podenco - 0.52%
 toy terrier - 0.15%
 ```
+
+TODO: SHOW THE INPUT AND PREPROCESSED IMAGES!
+
+![input image](/blog/assets/pytorch-input.jpg)
+![preprocessed image](/blog/assets/pytorch-input-preprocessed.png)
 
 Note that if an image is fed into the model that
 does not match any of the 1000 training categories,
