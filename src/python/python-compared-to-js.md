@@ -989,7 +989,7 @@ mean that a Boolean value is returned.
 | `exec(code)`                                     | execute any number of lines of code                                                                    | `eval(code)`                                                         |
 | `filter(predicate, iterable)`                    | returns iterator over values in iterable<br>where predicate function returns true                      | `arr.filter(predicate)`                                              |
 | `float(x)`                                       | returns floating point number<br>created from a number or string                                       | `parseFloat(x)`                                                      |
-| `format(value, format)`                          | returns string created by formatting a value<br>using a format string                                  | use template literals                                                |
+| `format(value, fmt)`                             | returns string created by formatting a value<br>using a format string                                  | use template literals                                                |
 | `frozenset(iterable)`                            | returns `frozenset` (immutable set) object<br>created from iterable                                    | `Object.freeze(obj)`                                                 |
 | `getattr(obj, name [, default])`                 | returns attribute value                                                                                | `obj[name] || default`                                               |
 | `globals()`                                      | returns dictionary containing the<br>current global symbol table                                       | not supported                                                        |
@@ -2737,6 +2737,45 @@ For example:
 [flake8]
 ignore = E261, E265, E302, E305, E731
 ```
+
+## Formatting
+
+To format JavaScript code, use Prettier.
+
+To format Python code, use autopep8 or Black.
+
+To install and run autopep8:
+
+```bash
+pip install autopep8
+autopep8 --in-place *.py
+```
+
+Some of the changes made by autopep8 include:
+
+- enforce having two blank lines before each function definition
+- wrap lines that are longer than 79 characters
+
+The maximum line length can be changed
+by adding the `--max-line-length n` option.
+
+To install and run Black:
+
+```bash
+pip install black
+black *.py
+```
+
+Some of the changes made by black include:
+
+- enforce having two blank lines before each function definition
+- change all string literals to be delimited with
+  double quotes instead of single quotes
+- add a comma after last list items when list does not fit on one line
+- wrap lines that are longer than 88 characters
+
+The maximum line length can be changed
+by adding the `--line-length n` option.
 
 ## VS Code
 
