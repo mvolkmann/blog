@@ -303,10 +303,13 @@ Ibizan hound, Ibizan Podenco - 0.52%
 toy terrier - 0.15%
 ```
 
-TODO: SHOW THE INPUT AND PREPROCESSED IMAGES!
+The input image used is:
 
-![input image](/blog/assets/pytorch-input.jpg)
-![preprocessed image](/blog/assets/pytorch-input-preprocessed.png)
+<img alt="input image" class="keep-size" src="/blog/assets/pytorch-input.jpg">
+
+The image that results from preprocessing is:
+
+<img alt="preprocessed image" class="keep-size" src="/blog/assets/pytorch-input-preprocessed.png">
 
 Note that if an image is fed into the model that
 does not match any of the 1000 training categories,

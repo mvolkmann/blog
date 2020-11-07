@@ -2489,6 +2489,28 @@ For example, if `IceCream` is a class we have defined:
 def order_ice_cream(flavor: str, scoops: int, add_sprinkles: bool) -> IceCream:
 ```
 
+The `typing` module also defines a `cast` function.
+Here's an example of using it.
+
+```python
+from typing import cast, Optional
+
+Action = str  # direction letter
+
+direction_map = {
+    'D': 'down',
+    'L': 'left',
+    'R': 'right',
+    'U': 'up'
+}
+directions = cast(List[Action], direction_map.keys())
+
+last_direction: Optional[Action] = None
+
+def get_possible_actions() -> List[Action]:
+    return list(filter(lambda d: d != last_direction, directions))
+```
+
 ### mypy
 
 {% aTargetBlank "http://mypy-lang.org/", "mypy" %}
