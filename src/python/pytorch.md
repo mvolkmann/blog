@@ -365,7 +365,7 @@ A "discriminator network" evaluates these
 to determine if they appear to be legitimate.
 Personally I don't find this use case to be particularly interesting.
 
-# Scene Classification
+## Scene Classification
 
 The NeuralTalk2 model is a example of a neural network
 that can describe what is sees in a photographed scene.
@@ -384,14 +384,12 @@ Such models are interesting, but they their results
 are not yet consistent enough for real-world usage.
 
 An implementation can be found in the GitHub repository for
-{% aTargetBlank
-"https://github.com/deep-learning-with-pytorch/ImageCaptioning.pytorch",
-"deep-learning-with-pytorch/ImageCaptioning.pytorch" %}
+{% aTargetBlank "https://github.com/deep-learning-with-pytorch/ImageCaptioning.pytorch", "deep-learning-with-pytorch/ImageCaptioning.pytorch" %}
 Note that this requires a GPU.
 
 ## Torch Hub
 
-{% aTargetBlank "https://pytorch.org/hub/", "Torch Hub" is a web site to
+{% aTargetBlank "https://pytorch.org/hub/", "Torch Hub" %} is a web site to
 "discover and publish models to a pre-trained model repository
 designed for research exploration."
 These models can be accessed through a PyTorch interface.
