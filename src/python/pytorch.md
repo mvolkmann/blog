@@ -208,7 +208,14 @@ img = Image.open('./' + img_path)
 # Open the image in the default image app (ex. Preview).
 #img.show()
 
-# Prepare the image for input to the network.
+# Prepare the image for input to the network using the same
+# preprocessing steps that were applied to images during training.
+# One way to discover the preprocessing expected by a given model
+# is to find its documentation at https://pytorch.org/hub.
+# Click the magnifying glass icon in the upper-right
+# to search for a model such as ResNet.
+# For example, documentation on ResNet can be found at
+# https://pytorch.org/hub/pytorch_vision_fcn_resnet101/.
 preprocess = transforms.Compose([
     # Resize the image to reduce the number of pixels to be
     # processed and match the image sizes used for training.
@@ -262,7 +269,7 @@ _, index = torch.max(out, 1)
 # We can also get the tensor value at this index with
 # out.detach().numpy()[0][index])
 
-# Compute the percentage certainty from each tensor value.
+# Compute values that are like percentage certainty from each tensor value.
 percentages = F.softmax(out, dim=1)[0] * 100
 
 # Output the label and percentage associated
@@ -341,3 +348,69 @@ sorted from most to least likely match.
 | `_a`                 | NumPy array |
 | `_g`                 | GPU memory  |
 | `_t`                 | tensor      |
+
+## Generative Adversarial Network (GAN)
+
+From {% aTargetBlank
+"https://machinelearningmastery.com/what-are-generative-adversarial-networks-gans/",
+"Machine Learning Mastery" %}, "Generative modeling is
+an unsupervised learning task in machine learning that involves
+automatically discovering and learning the regularities or patterns
+in input data in such a way that the model can be used to
+generate or output new examples that
+plausibly could have been drawn from the original dataset."
+
+A "generator network" produced to output such as images.
+A "discriminator network" evaluates these
+to determine if they appear to be legitimate.
+Personally I don't find this use case to be particularly interesting.
+
+# Scene Classification
+
+The NeuralTalk2 model is a example of a neural network
+that can describe what is sees in a photographed scene.
+The model has two parts.
+The first part learns to generate a numerical description of a scene.
+The second part takes these numerical descriptions as input
+and generates a sentence that describes the scene.
+Image/caption pairs are used to train this model.
+
+The neural network for the second part is recurrent.
+It generates each of the words that will be present in the final sentence
+using separate passes through its network.
+Each word generated is dependent on the previously generated words.
+
+Such models are interesting, but they their results
+are not yet consistent enough for real-world usage.
+
+An implementation can be found in the GitHub repository for
+{% aTargetBlank
+"https://github.com/deep-learning-with-pytorch/ImageCaptioning.pytorch",
+"deep-learning-with-pytorch/ImageCaptioning.pytorch" %}
+Note that this requires a GPU.
+
+## Torch Hub
+
+{% aTargetBlank "https://pytorch.org/hub/", "Torch Hub" is a web site to
+"discover and publish models to a pre-trained model repository
+designed for research exploration."
+These models can be accessed through a PyTorch interface.
+Each repository must contain a `hubconf.py` file that describes the model.
+
+One way to find these repositories is to search GitHub for repositories
+that contain a `hubconf.py` file.
+
+For example, to obtain the resnet101 model from Torch Hub:
+
+```python
+from torch import hub
+
+model = hub.load('pytorch/vision:master', 'resnet101', pretrained=True)
+```
+
+Add code similar to what was shown earlier
+to use this model for evaluating images.
+
+Before running the code, install a compatible version of torchvision.
+Version 0.8.1 worked for me and can be installed with
+`pip install torchvision==0.8.1`.

@@ -667,9 +667,12 @@ In Python:
 - Function parameters with a default value must follows those without one.
 - Function parameters listed after one that begins with `*`
   must be specified by name.
+- Keyword arguments are often abbreviated as "kwargs" in documentation.
 - The `partial` function (shown in the table above)
   can only be used on functions.
   For methods of a class, use `partial_method`.
+- The default maximum recursion depth is 1000.
+  To change this call `sys.setrecursionlimit(new_limit)`.
 
 ## Execute later or at intervals
 
