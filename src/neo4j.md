@@ -142,7 +142,7 @@ match (person:Person) return person.name
 To delete nodes, enter a Cypher command like the following:
 
 ```text
-match (p:Person) where p.born < 1980 detach delete p
+match (p:Person) where p.born &lt; 1980 detach delete p
 ```
 
 To re-run a previous query, possibly with modifications:
@@ -263,9 +263,7 @@ match (n) return n
 <img alt="Neo4j all nodes" class="keep-size"
   src="/blog/assets/neo4j-all-nodes.png">
 
-Queries can be more specific.
-For example, the following Cypher command
-only renders ...:
+Queries can be more specific. For example:
 
 ```text
 match (p:Person) where p.name starts with 'Amanda' return p
@@ -283,6 +281,9 @@ The resulting displays is as follows:
 
 <img alt="Neo4j Amanda with links" class="keep-size"
   src="/blog/assets/neo4j-amanda-with-links.png">
+
+Queries on labels are more efficient that queries on properties,
+but adding indexes to properties reduces the performance difference.
 
 ## Cleaning up
 
@@ -415,5 +416,10 @@ the `Person` and `Dog` nodes created earlier.
   </body>
 </html>
 ```
+
+This produces a page like the following:
+
+<img alt="neovis page" class="keep-size"
+  src="/blog/assets/neovis-page.png">
 
 Hover over a node or edge to see its properties in a popup.
