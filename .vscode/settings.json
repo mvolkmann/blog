@@ -324,6 +324,7 @@
     "namedtuple",
     "nbconvert",
     "nbytes",
+    "neovis",
     "nlargest",
     "nlink",
     "nonlocal",
