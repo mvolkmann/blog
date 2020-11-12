@@ -127,8 +127,8 @@ To view only the `Person` nodes that are born in 1970 or later,
 enter the following Cypher command:
 
 ```text
-match p=(person:Person)
-where person.born >= 1970
+match (p:Person)
+where p.born >= 1970
 return p;
 ```
 
