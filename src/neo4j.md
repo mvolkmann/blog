@@ -4,8 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-{% aTargetBlank "https://neo4j.com/", "Neo4j" %} is a graph database
-implemented in Java.
+{% aTargetBlank "https://neo4j.com/", "Neo4j" %} is a graph database.
 It was first released in February 2010.
 There are free and commercial versions.
 The free version is limited to run on a single node
@@ -13,18 +12,19 @@ and does not provide hot backups.
 
 Data is stored as collections of "nodes" that are attached by "edges".
 Both nodes and edges can have associated labels and attributes.
-It supports indexing of attributes for faster searches
-and optional schemas.
+Attributes can be indexed to support faster searches.
+Schemas can optionally be defined to specify the attributes
+that an be specified for each node and edge type.
 
-There are drivers that support accessing Neo4j databases
-from many programming languages.
+Neo4j is implemented in Java, but there are drivers that
+support accessing Neo4j databases from many programming languages.
 Officially supported languages include
 C# (.Net), Go, Java, JavaScript, and Python.
 Community supported languages include
 C/C++, Clojure, Erlang, PHP, R, and Ruby.
 
 "Cypher" is the query language used to obtain data from a Neo4j database.
-A good summary of Cypher syntax can be found at { aTargetBlank
+A good summary of Cypher syntax can be found at {% aTargetBlank
 "https://neo4j.com/docs/cypher-refcard/4.1/", "Neo4j Cypher Refcard" %}.
 
 {% aTargetBlank "https://github.com/neo4j-contrib/neovis.js/", "neovis.js" %}
