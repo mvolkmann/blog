@@ -11,11 +11,13 @@ The free version is limited to run on a single node
 and does not provide hot backups.
 
 Data is stored as collections of "nodes" that are attached by "edges".
-Both nodes and edges can have associated labels and attributes.
-Attributes can be indexed to support faster searches.
-Schemas can optionally be defined to specify the attributes
+Both nodes and edges can have associated labels and properties.
+Each node and edge can only have one label which is rendered in diagrams,
+but they can have any number of properties.
+Properties can be indexed to support faster searches,
+but they are not indexed by default.
+Schemas can optionally be defined to specify the properties
 that an be specified for each node and edge type.
-TODO: What is the difference between a label and an attribute?
 
 Neo4j is implemented in Java, but there are drivers that
 support accessing Neo4j databases from many programming languages.
@@ -33,7 +35,8 @@ is a JavaScript library for visualizing the result of Cypher queries
 in a web browser.
 It connects to a running Neo4j database instance
 and renders live data updates.
-TODO: TRY THIS!
+See this {% aTargetBlank
+"https://github.com/neo4j-contrib/neovis.js/issues/141", "issue" %}.
 
 ## Installing
 
@@ -110,14 +113,15 @@ create (Mark:Person {name:'Mark Volkmann', born:1961}),
   (Jeremy:Person {name:'Jeremy Volkmann', born:1987});
 ```
 
-This creates four `Person` nodes that have `name` and `born` attributes.
+This creates four nodes that have the label `Person`
+and the properties `name` and `born`.
 The semicolon at the end is only necessary
 to enter multiple commands in the same cell.
 
 To view these `Person` nodes, enter `match (p:Person) return p`.
 By default the selected view type is "Graph"
 which renders a circle for each `Person` node.
-Hover over a node to see the values for its `id`, `born`, and `name` attributes.
+Hover over a node to see the values for its `id`, `born`, and `name` properties.
 
 To view only the `Person` nodes that are born in 1970 or later,
 enter the following Cypher command:
@@ -128,12 +132,24 @@ where person.born >= 1970
 return p;
 ```
 
-To view only the name attributes of the `Person` nodes,
+To view only the name property of the `Person` nodes,
 enter the following Cypher command:
 
 ```text
 match (person:Person) return person.name
 ```
+
+To delete nodes, enter a Cypher command like the following:
+
+```text
+match (p:Person) where p.born < 1980 detach delete p
+```
+
+To re-run a previous query, possibly with modifications:
+
+- Click the query which copies it to the top cell.
+- Optionally modify it.
+- Execute it.
 
 ## Creating and deleting edges
 
@@ -153,6 +169,10 @@ create (Mark)-[:married {year:1981}]->(Tami),
   (Tami)-[:mother]->(Jeremy);
 ```
 
+The edges created here have the labels "married", "father", and "mother".
+The edge with the "married" label has the property "year".
+The edges with the "father" and "mother" labels do not have any properties.
+
 To view all the instances of a specific node type,
 along with connecting lines for their edges,
 enter a Cypher command like the following:
@@ -171,9 +191,15 @@ To export a diagram as CSV, JSON, PNG, or SVG,
 click the download icon in the upper-right corner of its cell
 and select one of those formats.
 
+<img alt="Neo4j Browser export menu" class="keep-size"
+  src="/blog/assets/neo4j-browser-export-menu.png">
+
 In addition to displaying query results as a "Graph",
 they can also be viewed as a "Table", "Text", or "Code"
 by clicking the corresponding buttons on the left side of the cell.
+
+<img alt="Neo4j Browser views" class="keep-size"
+  src="/blog/assets/neo4j-browser-views.png">
 
 To temporarily hide a node, click its circle and then
 click the icon containing an eye with a minus sign.
@@ -215,6 +241,14 @@ create (Mark)-[:owns {role:'secondary'}]->(Comet),
   (Amanda)-[:owns {role:'primary'}]->(Oscar),
   (Jeremy)-[:owns {role:'primary'}]->(Ramsay);
 ```
+
+To delete edges, enter a Cypher command like the following:
+
+```text
+match (p:Person)-[o:owns]->(d:Dog) delete o
+```
+
+This deletes all the "own" edges between a `Person` and a `Dog`.
 
 ## Querying
 
@@ -268,7 +302,27 @@ match (n) return n
 
 ## Creating and restoring backups
 
-TODO
+TODO: How do you install the `neo4j-admin` command?
+
+To create a backup of a Neo4j database,
+execute a command like the following:
+
+```bash
+neo4j-admin backup --backup-dir={some-directory} --database={db-name}
+```
+
+To restore a Neo4j database from a backup,
+execute a command like the following:
+
+```bash
+neo4j-admin restore --from={some-directory} --database={db-name}
+```
+
+TODO: It is possible that different commands are required when using
+TODO: the community version of Neo4j instead of the enterprise version.
+
+For more detail, see {% aTargetBlank
+"https://neo4j.com/docs/operations-manual/current/backup/", "Backup" %}.
 
 ## Accessing from a web app
 
@@ -286,7 +340,80 @@ Here is an example of a simple web page that renders
 the `Person` and `Dog` nodes created earlier.
 
 ```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>neovis Demo</title>
 
+    <style>
+      #vis {
+        background-color: linen;
+        height: 600px;
+      }
+    </style>
+
+    <script src="neovis.js"></script>
+
+    <script>
+      const cyphers = [
+        'match (p1:Person)-[r:married]->(p2:Person) return p1, r, p2',
+        'match (p1:Person)-[f:father]->(p2:Person) return p1, f, p2',
+        'match (p1:Person)-[m:mother]->(p2:Person) return p1, m, p2',
+        'match (p:Person)-[o:owns]->(d:Dog) return p,o,d'
+      ];
+      const thickness = 'weight';
+      let vis;
+
+      const config = {
+        container_id: 'vis',
+        server_url: 'bolt://localhost:7687',
+        server_user: 'neo4j',
+        server_password: 'neo4j19',
+        labels: {
+          Dog: {
+            caption: 'name',
+            font: {
+              color: 'blue',
+              face: 'fantasy',
+              size: 12
+            },
+            image: './dog-icon.png'
+          },
+          Person: {
+            caption: 'name',
+            font: {
+              color: 'red',
+              face: 'sans-serif',
+              size: 14
+            },
+            image: './person-icon.png'
+          }
+        },
+        relationships: {
+          father: {thickness},
+          married: {thickness},
+          mother: {thickness},
+          owns: {thickness}
+        }
+        //initial_cypher: ''
+      };
+
+      window.onload = () => {
+        vis = new NeoVis.default(config);
+        vis.render();
+        for (const cypher of cyphers) {
+          vis.updateWithCypher(cypher);
+        }
+      };
+    </script>
+  </head>
+
+  <body>
+    <div id="vis"></div>
+  </body>
+</html>
 ```
 
-Hover over a node or edge to see its attributes in a popup.
+Hover over a node or edge to see its properties in a popup.
