@@ -27,6 +27,18 @@ using HTTP requests that contain data in HTML forms.
 HTML forms can contain `input` elements with `type="hidden"`
 to send data that is not rendered.
 
+A great source of PHP documentation is the
+{% aTargetBlank "https://www.php.net/manual/en/", "PHP Manual" %}.
+
+## Pros
+
+- What does Laravel add?
+
+## Cons
+
+- Code only runs on page loads, so many page refreshes are required.
+- No types?
+
 ## Installing
 
 A recommended way to obtain a local HTTP server
@@ -224,6 +236,9 @@ For example:
 $colors = array("red", "green", "blue");
 ```
 
+To access an array element, specify an index in square brackets.
+For example, `$colors[1]` gives `green`.
+
 There are three types of arrays: indexed, associative, and multidimensional.
 
 The `count` function takes an array and returns its length.
@@ -266,6 +281,28 @@ $sum = array_reduce($numbers, function ($carry, $number) {
 });
 ```
 
+## Associative Arrays
+
+Associative arrays hold key/value pairs.
+For example, to create an association between months and their numbers:
+
+```php
+$monthToNumber = array('January'=>1, 'February'=>2, ..., 'December'=>12);
+```
+
+To get the value for a given key, use the syntax `$assocArray[key]`.
+
+To add a key/value pair or modify the value of an existing key,
+use the syntax `$assocArray[key] = value;`.
+
+To iterate over the keys and values in an associative array:
+
+```php
+foreach ($assocArray as $key=>$value) {
+  // Use $key and $value.
+}
+```
+
 ## Classes
 
 A PHP class can define properties and methods.
@@ -298,6 +335,31 @@ Method parameter names must begin with `$` just like variable names.
 Methods refer to the current object using `$this`
 and refer to properties of that object using `->`.
 
+## Magic Methods
+
+See {% aTargetBlank "https://www.php.net/manual/en/language.oop5.magic.php",
+"here" %}.
+
+They include:
+
+- `__construct()`
+- `__destruct()`
+- `__call()`
+- `__callStatic()`
+- `__get()`
+- `__set()`
+- `__isset()`
+- `__unset()`
+- `__sleep()`
+- `__wakeup()`
+- `__serialize()`
+- `__unserialize()`
+- `__toString()`
+- `__invoke()`
+- `__set_state()`
+- `__clone()`
+- `__debugInfo()`
+
 ## Objects
 
 The `new` keyword is used to create an instance of a class.
@@ -327,9 +389,193 @@ PHP supports the same syntax for `if` and `switch` statements as JavaScript.
 
 ## Iteration
 
-PHP supports the same syntax for `for` and `while` loops as JavaScript.
+PHP supports the same syntax for
+`for`, `while`, and `do while` loops as JavaScript.
+
+```php
+for (initializations; condition; updates) {
+  ...
+}
+
+while (condition) { // top tested
+  ...
+}
+
+do {
+
+} while (condition); // bottom tested
+```
+
+The `foreach` loop iterates over the elements of an array.
+For example:
+
+```php
+$colors = array("red", "green", "blue");
+foreach ($colors as $color) {
+  // use $color
+}
+```
+
+To also get the index in each iteration:
+
+```php
+foreach ($colors as $index=>$color) {
+  $number = $index + 1;
+  echo "$number) $color<br>";
+}
+```
+
+If elements will be modified inside the body of `foreach`,
+precede the variable with `&` to get a reference.
+For example:
+
+```php
+foreach ($colors as &$color) {
+  $color = strtoupper($color);
+}
+```
 
 ## Functions
+
+To define a named function:
+
+```php
+function name(parameters) {
+  ...
+}
+```
+
+To define an anonymous function,
+sometimes passed as an argument to another function,
+use the same syntax, but omit the name.
+They can also be assigned to a variable.
+
+Variables defined in a function are local to that function.
+
+Functions can only access variables defined outside them
+if they are listed after the global keyword.
+For example:
+
+```php
+$a = 1;
+$b = 2;
+
+function demo($c) {
+  global $a, $b; // cannot access $w and $x without this
+  $d = 4;
+  echo "a=$a, b=$b, c=$c, d=$d<br>"; // a=1, b=2, c=3, d=4
+}
+
+demo(3);
+```
+
+## Including Other PHP Files
+
+A PHP source file can include others.
+This is typically done at the top of the file.
+For example:
+
+````php
+<?php
+  include 'file-name.php';
+  include 'subdirectory/file-name.php';
+?>
+
+It is an error to define a function or class multiple times.
+If a file being included defines functions or classes,
+include it with `include_once` instead of `include`
+to avoid this error.
+
+For example, here is the file `math.php` that defines math functions:
+
+```php
+<?php
+function sum($n1, $n2) {
+  return $n1 + $n2;
+}
+// Could define more math functions here.
+?>
+````
+
+Note that the above file doesn't indicate what it exports.
+All the functions and classes it defines are automatically exported.
+
+Here is a PHP file that uses this:
+
+```php
+<!DOCTYPE html>
+<html>
+  <body>
+    <?php
+    include 'math.php';
+
+    echo 'sum = ' . sum(2, 3) . '<br>'; // 5
+    ?>
+  </body>
+</html>
+```
+
+## Superglobals
+
+Superglobals are predefined PHP variables.
+PHP currently defines these:
+
+- `$GLOBALS` is an associative array that holds all global variables.
+
+- `$_SERVER` is an associative array that holds server information.  
+  For example:
+
+  - `$_SERVER['REQUEST_METHOD']` holds the method used to
+    access the page such as `GET`, `POST`, or `PUT`.
+  - `$_SERVER['SERVER_ADDR']` holds the server IP address.
+  - `$_SERVER['SERVER_HOST']` holds the server host name.
+
+  For a complete list, see {% aTargetBlank
+  "https://www.php.net/manual/en/reserved.variables.server.php", "here" %}.
+
+- `$_GET` is an associative array that holds URL query parameters
+  that are typically specified in the URL of an HTTP GET request.
+
+- `$_POST` is an associative array that holds form data key/value pairs
+  that are typically passed in the body of an HTTP POST or PUT request.
+
+- `$_FILES` is an associative array that holds file uploads
+  that are typically specified in the body of a multipart POST request.
+
+- `$_COOKIE` is an associative array of HTTP cookies
+  that are stored in the browser and passed to the server in every request.
+
+- `$_SESSION` is an associative array of session variables
+  that are stored on the server only for the duration of the session.
+
+- `$_REQUEST` is an associated array that combines
+  the contents of `$_GET`, `$_POST`, and `$_COOKIE`.
+
+- `$_ENV` is an associative array that holds environment variables
+  that are passed in using the `environment` method.
+  TODO: It's unclear what does this.
+
+To get the value of a query parameter,
+use the syntax `$_GET['name']`.
+
+To get the value of a form parameter,
+use the syntax `$_POST['name']`.
+
+To set a cookie, call `setcookie('name', value)`.
+To set a cookie with a time to live (TTL), add a third argument
+that the number of seconds since the epoch at which it should expire.
+For example, to live for one day, `setcookie('name', value, time() + 86400)`.
+To delete a cookie, set it with a negative expiration value.
+
+Session values are only saved if a session has been started.
+To start a session, add the following on every page that accesses it,
+or in a file that all such pages include:
+
+```php
+<?php session_start(); ?>
+```
+
+To set a session variable, use the syntax `$_SESSION['name'] = value;`
 
 ## Query Parameters
 
@@ -344,6 +590,9 @@ and returns a boolean indicating if it is set.
 To get the value of a query parameter, use `$_GET['digit']`.
 
 ## Calculator Example
+
+This is a ridiculous use of PHP because every button push triggers
+a page refresh. But it does work and it illustrates many PHP concepts.
 
 <img alt="PHP Calculator" class="keep-size" src="/blog/assets/php-calculator.png">
 
