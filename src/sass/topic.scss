@@ -9,6 +9,14 @@ body {
 img {
   width: 90%;
 
+  &.default-size {
+    width: unset;
+  }
+
+  &.half-size {
+    width: 50%;
+  }
+
   &.keep-size {
     width: auto;
   }

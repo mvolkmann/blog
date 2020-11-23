@@ -819,11 +819,9 @@ a page refresh. But it does work and it illustrates many PHP concepts.
 </html>
 ```
 
-## phpMyAdmin
+## MySQL
 
-{% aTargetBlank "https://www.phpmyadmin.net/", "phpMyAdmin" %}
-is a free tool implemented in PHP
-that provides a web UI for managing MySQL databases.
+MySQL is the most commonly used relational database in PHP applications.
 
 To install MySQL on macOS,
 install {% aTargetBlank "https://brew.sh/", "Homebrew" %}
@@ -837,6 +835,7 @@ default-authentication-plugin=mysql_native_password
 ```
 
 To start the MySQL server, enter `mysql.server start`.
+To stop it, enter `mysql.server stop`.
 
 Initially the only user is "root" and it has no password.
 To set a password for the "root" user:
@@ -844,6 +843,12 @@ To set a password for the "root" user:
 - enter `mysql -uroot`
 - enter `alter user 'root'@'localhost' identified by mysql_native_password 'new-password';`
 - enter `exit`
+
+## phpMyAdmin
+
+{% aTargetBlank "https://www.phpmyadmin.net/", "phpMyAdmin" %}
+is a free tool implemented in PHP
+that provides a web UI for managing MySQL databases.
 
 Download phpMyAdmin from
 {% aTargetBlank "https://www.phpmyadmin.net/", "here" %}.
@@ -870,15 +875,61 @@ $cfg['Servers'][$i]['host'] = '127.0.0.1';
 If the Apache server is not running,
 start it by entering `sudo apachectl start`.
 
+If the MySQL server is not running,
+start it by entering `mysql.server start`.
+
 To run phpMyAdmin, browse `localhost/phpMyAdmin`.
 Enter a username and password such as for the "root" user.
+
+<img alt="phpMyAdmin login" style="width: 20%"
+  src="/blog/assets/phpMyAdmin-1-login.png">
+
+After logging in, the settings page is displayed.
+
+<img alt="phpMyAdmin settings" style="width: 70%"
+  src="/blog/assets/phpMyAdmin-2-settings.png">
+
+Click the "Databases" tab to see a list of existing databases
+and create new ones.
+
+<img alt="phpMyAdmin databases" style="width: 50%"
+  src="/blog/assets/phpMyAdmin-3-databases.png">
+
+Click the link for an existing database to see its tables.
+
+<img alt="phpMyAdmin structure" style="width: 70%"
+  src="/blog/assets/phpMyAdmin-4-structure.png">
+
+Click the link for an existing table to see its rows.
+
+<img alt="phpMyAdmin tables" style="width: 70%"
+  src="/blog/assets/phpMyAdmin-5-table-browse.png">
+
+Click the "SQL" tab to enter SQL for any kind of operation
+including creating tables, querying, inserting, updating, and deleting.
+The UI also provides ways of doing all of these things
+without writing SQL.
+
+<img alt="phpMyAdmin SQL" style="width: 70%"
+  src="/blog/assets/phpMyAdmin-6-sql.png">
+
+To create a new table without writing SQL,
+click a database in the left nav,
+enter a table name and number of columns under "Create table",
+and press the "Go" button.
+Enter the column details in the UI below.
+Note that the "A_I" checkboxes are for auto-increment
+which is often used with primary keys.
+
+<img alt="phpMyAdmin columns" style="width: 70%"
+  src="/blog/assets/phpMyAdmin-7-columns.png">
 
 ## Database with CRUD
 
 Here is an example web app that performs
 Create/Retrieve/Update/Delete operations on a database table.
 
-<img alt="PHP dogs app" class="keep-size" src="/blog/assets/php-dogs-app.png">
+<img alt="PHP dogs app" style="width: 30%" src="/blog/assets/php-dogs-app.png">
 
 Let's start with the file `includes/db.php`
 which creates a connection to the database.
