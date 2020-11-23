@@ -6,10 +6,12 @@ layout: topic-layout.njk
 
 <img alt="PHP mascot" class="keep-size" src="/blog/assets/php-mascot.png">
 
-PHP is an interpreted scripting language that is
-typically used to implement web applications.
-It was created by Ramus Lerdorf in 1994.
-PHP version 8 was released in November, 2020.
+PHP is an interpreted scripting language.
+It is typically used to implement web applications,
+but can also be used to implement command line scripts.
+
+PHP was created by Ramus Lerdorf in 1994.
+Version 8 was released in November, 2020.
 A large number of PHP sites continue to use PHP version 5 or older.
 The most popular implementation is the Zend Engine,
 which is the default PHP interpreter in the Apache server.
@@ -39,7 +41,32 @@ A great source of PHP documentation is the
 - Code only runs on page loads, so many page refreshes are required.
 - No types?
 
-## Installing
+## Installing a command-line interpreter
+
+TODO: To install PHP in Windows, ...
+
+macOS comes with PHP preinstalled.
+Do not use Homebrew to install it!
+This failed and made the preinstalled version unusable.
+
+TODO: To install PHP in Linux, ...
+
+## Running a command-line script
+
+To run a PHP script from the command-line,
+enter `php {filename}.php`.
+
+For example, create the file `hello.php` containing the following:
+
+```php
+<?php
+echo "Hello, World!\n";
+?>
+```
+
+To run this, enter `php hello.php`.
+
+## Installing a server
 
 A recommended way to obtain a local HTTP server
 is to use XAMPP. I tried this, but failed to get it to work in macOS.
@@ -50,7 +77,6 @@ See {% aTargetBlank
 "Installing Apache, PHP, and MySQL on macOS Catalina" %}.
 
 1. Start the Apache HTTP server.
-   - `sudo su`
    - `sudo apachectl start`
 1. Browse {% aTargetBlank "http://localhost", "http://localhost" %}
    to verify that it is running.
@@ -148,6 +174,15 @@ PHP statements are separated from each other by semicolons,
 which can also appear as statement terminators
 with the last statement having an optional terminator.
 
+Much of the syntax of PHP matches that of JavaScript.
+
+## Comments
+
+Single-line comments begin with `//` or `#`.
+Multi-line comments are delimited by `/*` and `*/`.
+
+## Variables
+
 PHP variable names must begin with `$`
 and typical follow that with a lowercase letter.
 When the name consists of multiple works, camel-case is preferred.
@@ -155,12 +190,9 @@ Variable names are case-sensitive, but class and function names are not.
 
 Names of constants are typically all uppercase.
 
-Much of the syntax of PHP matches that of JavaScript.
-
-## Comments
-
-Single-line comments begin with `//` or `#`.
-Multi-line comments are delimited by `/*` and `*/`.
+The builtin function `isset` function returns a boolean
+that indicates whether a variable has be set.
+For example, `isset($someName)`.
 
 ## Builtin Data Types
 
@@ -229,6 +261,8 @@ Note that the first occurrence of the delimiter word is in single quotes.
 
 ## Arrays
 
+PHP supports three types of arrays: indexed, associative, and multidimensional.
+
 The `array` function is used to created an array.
 For example:
 
@@ -236,10 +270,9 @@ For example:
 $colors = array("red", "green", "blue");
 ```
 
+This is called an "indexed array".
 To access an array element, specify an index in square brackets.
 For example, `$colors[1]` gives `green`.
-
-There are three types of arrays: indexed, associative, and multidimensional.
 
 The `count` function takes an array and returns its length.
 
@@ -291,6 +324,7 @@ $monthToNumber = array('January'=>1, 'February'=>2, ..., 'December'=>12);
 ```
 
 To get the value for a given key, use the syntax `$assocArray[key]`.
+JavaScript-like syntax of `$assocArray.property` is not supported.
 
 To add a key/value pair or modify the value of an existing key,
 use the syntax `$assocArray[key] = value;`.
@@ -301,6 +335,28 @@ To iterate over the keys and values in an associative array:
 foreach ($assocArray as $key=>$value) {
   // Use $key and $value.
 }
+```
+
+## Multidimensional Arrays
+
+PHP arrays can contain arrays.
+This enables creating multidimensional arrays.
+For example:
+
+```php
+$points = array(
+  array(0, 0),
+  array(1, 5),
+  array(2, 3),
+  array(3, 9)
+);
+```
+
+To access elements in this array:
+
+```php
+$point2 = points[2]; // array(2, 3)
+$value2 = points[2][1]; // 3
 ```
 
 ## Classes
@@ -555,11 +611,11 @@ PHP currently defines these:
   that are passed in using the `environment` method.
   TODO: It's unclear what does this.
 
-To get the value of a query parameter,
-use the syntax `$_GET['name']`.
-
-To get the value of a form parameter,
-use the syntax `$_POST['name']`.
+To get the value of a query parameter, use `$_GET['name']`.
+To get the value of a form parameter, use `$_POST['name']`.
+To get the value of a session variable, use `$_SESSION['name']`.
+To determine if any of these have been set,
+pass the syntax above to the builtin `isset` function.
 
 To set a cookie, call `setcookie('name', value)`.
 To set a cookie with a time to live (TTL), add a third argument
@@ -584,10 +640,10 @@ They are name/value pairs where each pair is separated by a `&` character
 and each name and value are separated by an `=` character.
 For example, `?make=MINI&model=Cooper&year=2015`.
 
-The builtin PHP function `isset` takes the name of a query parameter
-and returns a boolean indicating if it is set.
-
-To get the value of a query parameter, use `$_GET['digit']`.
+To get the value of a query parameter, use `$_GET['someName']`.
+The builtin function `isset` can be used to
+determine if a query parameter is set.
+For example, `isset($_GET['someName'])`.
 
 ## Calculator Example
 
@@ -759,6 +815,259 @@ a page refresh. But it does work and it illustrates many PHP concepts.
       <input type="hidden" name="n2" value="<?= $n2 ?>">
       <input type="hidden" name="lastOperator" value="<?= $lastOperator ?>">
     <form>
+  </body>
+</html>
+```
+
+## phpMyAdmin
+
+{% aTargetBlank "https://www.phpmyadmin.net/", "phpMyAdmin" %}
+is a free tool implemented in PHP
+that provides a web UI for managing MySQL databases.
+
+To install MySQL on macOS,
+install {% aTargetBlank "https://brew.sh/", "Homebrew" %}
+and enter `brew install mysql`.
+
+Edit `/usr/local/etc/my.cnf`
+and add the following at the end:
+
+```text
+default-authentication-plugin=mysql_native_password
+```
+
+To start the MySQL server, enter `mysql.server start`.
+
+Initially the only user is "root" and it has no password.
+To set a password for the "root" user:
+
+- enter `mysql -uroot`
+- enter `alter user 'root'@'localhost' identified by mysql_native_password 'new-password';`
+- enter `exit`
+
+Download phpMyAdmin from
+{% aTargetBlank "https://www.phpmyadmin.net/", "here" %}.
+Unzip the downloaded file and copy the directory created
+to your server documents directory.
+For example, in Apache running in macOS
+this directory defaults to /Library/WebServer/Documents.
+
+Create an empty `tmp` directory in the `phpMyAdmin` directory.
+
+Copy the file `config.sample.inc.php` to `config.inc.php`.
+Edit this file and change the following line:
+
+```php
+$cfg['Servers'][$i]['host'] = 'localhost';
+```
+
+to
+
+```php
+$cfg['Servers'][$i]['host'] = '127.0.0.1';
+```
+
+If the Apache server is not running,
+start it by entering `sudo apachectl start`.
+
+To run phpMyAdmin, browse `localhost/phpMyAdmin`.
+Enter a username and password such as for the "root" user.
+
+## Database with CRUD
+
+Here is an example web app that performs
+Create/Retrieve/Update/Delete operations on a database table.
+
+<img alt="PHP dogs app" class="keep-size" src="/blog/assets/php-dogs-app.png">
+
+Let's start with the file `includes/db.php`
+which creates a connection to the database.
+
+```php
+<?php
+$dbServername = '127.0.0.1'; // 'localhost' doesn't work
+$dbUsername = 'root';
+$dbPassword = 'root';
+$dbName = 'demo';
+$dbConn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+```
+
+Next is the file `includes/dog-crud.php` that
+inserts, updates, and deletes records in the "dogs" database table.
+
+```php
+<?php
+include_once 'db.php';
+
+$fullAction = $_POST['action'];
+$pieces = explode('-', $fullAction);
+$action = $pieces[0];
+$id = $pieces[1];
+
+$name = $_POST['name'];
+$breed = $_POST['breed'];
+
+$sql = '';
+
+switch ($action) {
+  case 'delete':
+    $sql = "delete from dogs where id = $id;";
+    mysqli_query($dbConn, $sql);
+    break;
+  case 'insert':
+    $sql = "insert into dogs (name, breed) values ('$name', '$breed');";
+    mysqli_query($dbConn, $sql);
+    break;
+  case 'edit':
+    // Do nothing.
+    break;
+  case 'update':
+    $sql = "update dogs set name='$name', breed='$breed' where id = $id;";
+    mysqli_query($dbConn, $sql);
+    break;
+  default:
+    $action = "error-${action}";
+}
+
+// If any output is produced before this,
+// such as by echo statements, you'll get
+// "Warning: Cannot modify header information - headers already sent by".
+header("Location: ../dogs.php?action=$action&id=$id");
+```
+
+Finally, the file `dogs.php` generates the HTML for the app.
+
+```php
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PHP Dogs</title>
+    <style>
+      .actions {
+        text-align: center;
+      }
+
+      body {
+        font-family: sans-serif;
+      }
+
+      caption {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .error {
+        color: red;
+        margin-top: 1rem;
+      }
+
+      input {
+        padding: 4px;
+      }
+
+      .row {
+        margin-bottom: 0.5rem;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      table button {
+        background-color: transparent;
+        border: none;
+      }
+
+      td, th {
+        border: 1px solid lightgray;
+        padding: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <?php
+    include_once 'includes/db.php';
+
+    function startsWith($text, $prefix) {
+      $len = strlen($prefix);
+      return substr($text, 0, $len) === $prefix;
+    }
+
+    $action = $_GET['action'];
+    $id = $_GET['id'];
+
+    $btnAction = $action === 'edit' ? "update-$id" : 'insert';
+    $btnText = $action === 'edit' ? 'Update' : 'Add';
+
+
+    $sql = 'select * from dogs order by name;';
+    $results = mysqli_query($dbConn, $sql);
+    //$count = mysqli_num_rows($results);
+
+    $name = '';
+    $breed = '';
+
+    // Fetch each result set row as an associative array.
+    $dogs = [];
+    while ($dog = mysqli_fetch_assoc($results)) {
+      if ($action === 'edit' && $id === $dog['id']) {
+        $name = $dog['name'];
+        $breed = $dog['breed'];
+      }
+      array_push($dogs, $dog);
+    }
+    ?>
+
+    <form method="POST" action="includes/dog-crud.php">
+      <div class="row">
+        <label for="name">Name</label>
+        <input id="name" name="name" value="<?= $name ?>">
+      </div>
+      <div class="row">
+        <label for="breed">Breed</label>
+        <input id="breed" name="breed" value="<?= $breed ?>">
+      </div>
+      <button name="action" value="<?= $btnAction ?>">
+        <?= $btnText ?>
+      </button>
+
+      <table>
+        <caption>Dogs</caption>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Breed</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+            foreach ($dogs as $dog) {
+              $id = $dog['id'];
+              echo '<tr>';
+              echo "<td>{$dog['name']}</td>";
+              echo "<td>{$dog['breed']}</td>";
+              echo '<td class="actions">';
+              //TODO: How can you ask the user to confirm the delete without JS?
+              echo "<button name='action' value='delete-$id'>🗑</button>";
+              echo "<button name='action' value='edit-$id'>✎</button>";
+              echo '</td>';
+              echo '</tr>';
+            }
+          ?>
+        </tbody>
+      </table>
+    </form>
+
+    <?php
+      if (startsWith($action, 'error')) {
+        $pieces = explode('-', $action);
+        echo '<div class="error">';
+        echo "An invalid action \"$pieces[1]\" was submitted.";
+        echo '</div>';
+      }
+    ?>
   </body>
 </html>
 ```
