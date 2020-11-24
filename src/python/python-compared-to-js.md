@@ -2215,8 +2215,8 @@ Key benefits of
        CORSMiddleware,
        allow_origins=['*'],
        allow_credentials=True,
-       allow_methods=["*"],
-       allow_headers=["*"])
+       allow_methods=['*'],
+       allow_headers=['*'])
 
    @app.get('/dog')
    def all_dogs():
