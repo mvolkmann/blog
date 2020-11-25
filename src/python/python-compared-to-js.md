@@ -2324,7 +2324,7 @@ except Exception as e:
 Python magic methods support many operations on classes and class instances.
 These include operator overloading.
 The following table provides a categorized, partial list of
-the magic methods that a Python class can be implement.
+the magic methods that a Python class can implement.
 
 | Method                                | Parameters       | Purpose                                                                        |
 | ------------------------------------- | ---------------- | ------------------------------------------------------------------------------ |

@@ -588,7 +588,7 @@ async function deleteDog(context) {
   const {id} = context.params;
   if (dogs[id]) {
     delete dogs[id];
-    context.response.status = 200;
+    context.response.status = 200; // Why necessary?
   } else {
     context.response.status = 404;
   }
