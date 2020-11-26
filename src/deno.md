@@ -9,6 +9,9 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://deno.land/", "Deno" %} is a
 "secure runtime for JavaScript and TypeScript".
+The name comes from moving the last two letters of "Node" to the front.
+Originally it was pronounced "den O", but was later changed to "D no"
+like the pet dinosaur in the Flintstones cartoon.
 
 Ryan Dahl created both
 {% aTargetBlank "https://nodejs.org/", "Node.js" %} and Deno.
@@ -25,6 +28,16 @@ Both Node.js and Deno are built on the Chrome V8 JavaScript engine
 which is implemented in C++.
 Node.js is primarily implemented in C++.
 Deno was originally implemented in Go and later changed to Rust.
+It is also partially implemented in JavaScript.
+To learn why Deno internals use JavaScript instead of TypeScript,
+see this {% aTargetBlank
+"https://docs.google.com/document/d/1_WvwHl7BXUPmoiSeD8G83JmS8ypsTPqed4Btkqkn_-4/preview",
+"Design Doc" %}.
+
+Event handling in Node.js is provided by the
+{% aTargetBlank "https://libuv.org/", "libuv" %} C++ library.
+In Deno this is provided by the
+{% aTargetBlank "https://tokio.rs/", "Tokio" %} Rust library.
 
 Version 1.0 of Deno was released on May 13, 2020.
 It is open source and uses the MIT license.
@@ -33,7 +46,17 @@ Deno is secure by default.
 The environment, file system, and network
 can only be accessed if explicitly enabled.
 
-To get started and find documentation, see the
+Deno supports WebAssembly (WASM).
+Many programming languages can be compiled to WASM, including
+{% aTargetBlank "https://emscripten.org/", "C" %}, C++, C#,
+Go, Java, Kotlin,
+{% aTargetBlank "https://github.com/iodide-project/pyodide", "Python" %},
+Prolog, Ruby, {% aTargetBlank "https://rustwasm.github.io/", "Rust" %},
+Scheme, Swift, and others.
+The resulting WASM code can then be called from JavaScript or TypeScript code.
+TODO: Try this with Python!
+
+To get started with Deno and find documentation, see the
 {% aTargetBlank "https://deno.land/manual", "Deno Manual" %}.
 
 ## Differences from Node.js
@@ -63,6 +86,8 @@ To install Deno:
 - for Windows, use Chocolately: `choco install deno`
 - for macOS, use Homebrew: `brew install deno`
 - for Linux, use curl: `curl -fsSL https://deno.land/x/install/install.sh | sh`
+
+For more install options, see the main Deno website.
 
 ## Options
 
@@ -108,6 +133,29 @@ Deno supports the following permission options:
   This allows write access to the file system.
   A comma-separated list of directories or files can optionally be specified
   to restrict writes to only those directories and files.
+
+## Command Summary
+
+Deno commands start with `deno` followed by a command name and options.
+Here's a summary of the commands. Details will be provided later.
+
+| Command       | Description                                                                  |
+| ------------- | ---------------------------------------------------------------------------- |
+| `bundle`      | bundles a module and its dependencies into a single file                     |
+| `cache`       | caches dependencies                                                          |
+| `completions` | generates shell completions                                                  |
+| `doc`         | displays documentation for a given module                                    |
+| `eval`        | evaluates a string of JS/TS code                                             |
+| `fmt`         | formats source files                                                         |
+| `help`        | displays help on `deno` commands and environment variables                   |
+| `info`        | displays information about the cache or source files, including dependencies |
+| `install`     | installs a script as an executable                                           |
+| `lint`        | identifies issues in source files                                            |
+| `repl`        | starts a Read Eval Print Loop                                                |
+| `run`         | runs a script from a file or URL                                             |
+| `test`        | runs tests                                                                   |
+| `types`       | displays information about built-in types                                    |
+| `upgrade`     | upgrades `deno`                                                              |
 
 ## Running
 
@@ -326,6 +374,14 @@ for await (const line of readLines(reader)) {
 ```
 
 ## Imports
+
+Deno source files import other files using the `import` statement,
+not the `require` function like in Node.js.
+The file to import can be specified with either a relative file path or a URL.
+TODO: Can it be an absolute file path?
+In both cases a file, not just a directory, must be specified.
+Unlike in Node.js, the filename `index.js` is not treated as
+the default filename and a file extension must be included.
 
 Deno does not use npm to install modules.
 Instead, `import` statements can specify module URLs

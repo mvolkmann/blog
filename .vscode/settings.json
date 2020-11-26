@@ -304,6 +304,7 @@
     "letsencrypt",
     "libexec",
     "libphp",
+    "libuv",
     "linalg",
     "linecap",
     "linecolor",
