@@ -332,6 +332,9 @@ Some noticeable changes dprint makes include:
   (applies to imports, function parameters, function arguments,
   array literals, and object literals)
 
+While dprint is configurable, the `deno fmt` command
+currently ignores dprint configuration files.
+
 To prevent formatting a statement,
 precede it with the comment `// deno-fmt-ignore`.
 To prevent formatting an entire file,
@@ -365,6 +368,39 @@ of the `/** comment */` that precedes it.
 It does not perform any special parsing or formatting of
 {% aTargetBlank "https://jsdoc.app/", "JSDoc" %} comments
 and it does not generate HTML files.
+
+## Debugging
+
+Deno programs can be debugged using the Chrome DevTools Debugger.
+To do this ...
+
+1. Start the script by entering
+   `deno run --inspect-brk --inspect-brk --allow-read --allow-net some_name.ts`
+2. Browse `chrome://inspect`
+3. Click the "inspect" link at the bottom of the Chrome window
+   to open another Chrome window.
+4. Typically the source file of a dependency
+   rather than the main script will be displayed.
+   Click the table for the main script to view its source code.
+   If there is no tab for it, use the file explorer on the left
+   to navigate to it under "file://".
+5. Click line numbers to toggle breakpoints.
+6. Click the buttons in the upper-right to
+   resume execution (play triangle), step over (curved arrow over dot),
+   step in (down arrow), step out (up arrow), step (right arrow),
+   deactivate all breakpoints (slash through breakpoint symbol),
+   and toggle pausing on exceptions (stop sign with equal sign).
+7. Examine local and global variables under the "Scope" section on the right.
+8. Create watches under the "Watch" section on the right.
+9. Examine the call stack under the "Call Stack" section on the right.
+10. To restart execution, click the "reload" link
+    back in the original Chrome window.
+
+<img alt="Chrome debugger" style="width: 90%"
+  src="/blog/assets/deno-chrome-debugger.png" title="Chrome debugger">
+
+VS Code also supports debugging Deno programs.
+TODO: To use it ...
 
 ## Testing
 
