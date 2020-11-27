@@ -5,7 +5,7 @@ layout: topic-layout.njk
 ---
 
 <img alt="Deno logo" style="width: 30%"
-  src="/blog/assets/Deno.svg" title="Deno logo">
+  src="/blog/assets/deno-logo.svg" title="Deno logo">
 
 {% aTargetBlank "https://deno.land/", "Deno" %} is a
 "secure runtime for JavaScript and TypeScript".
@@ -19,6 +19,13 @@ In June 2018, he gave a talk at JSConf EU 2018 titled
 "{% aTargetBlank "https://www.youtube.com/watch?v=M3BM9TB-8yA&vl=en",
 "10 Things I Regret About Node.js" %}.
 A prototype of Deno was presented during this talk.
+
+The Deno core team, in order of commits, consists of
+Ryan Dahl (Google),
+Bartek Iwańczuk
+Bert Belder (StrongLoop),
+Kitson Kelly (Thoughtworks), and
+Luca Casonato.
 
 Deno has builtin support for TypeScript.
 It automatically compiles TypeScript code to JavaScript before running it,
@@ -45,6 +52,10 @@ It is open source and uses the MIT license.
 Deno is secure by default.
 The environment, file system, and network
 can only be accessed if explicitly enabled.
+Compare this to other programming languages/environments
+like Node.js, Python, and Ruby where there are
+no restrictions on what application or library code can do.
+All of those are insecure by default.
 
 Deno supports WebAssembly (WASM).
 Many programming languages can be compiled to WASM, including
@@ -68,18 +79,28 @@ To get started with Deno and find documentation, see the
 1. Deno uses built-in resource fetching
    rather than relying on npm to install packages.
 1. Deno has built-in TypeScript support with caching of compile source files.
-1. Deno has built-in support for web standards
+1. Deno has built-in support for Web APIs
    like the Fetch API and functions from the `window` object.
 1. Deno requires file system and network access to be explicitly enabled.
 1. Deno APIs utilize Promises, ES6, and TypeScript features.
+1. All asynchronous actions in Deno return a Promise rather than use callbacks.
 1. Deno provides a large standard library with no external dependencies.
 1. Deno uses message passing channels to invoke privileged system APIs.
+1. Deno programs stop when an uncaught error is encountered,
+   such as failing to catch a rejected promise.
 
 ## Pros
 
 - Deno supports some modern JavaScript features
   that are not yet implemented in other JavaScript environments.
-  Examples include the optional chaining operator (`?.`) and top-level `await`.
+  Examples include the {% aTargetBlank
+  "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining",
+  "optional chaining operator" %} (`?.`),
+  the {% aTargetBlank
+  "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator",
+  "nullish coalescing operator" %} (`??`),
+  and {% aTargetBlank "https://github.com/tc39/proposal-top-level-await",
+  "top-level `await`" %}.
 
 ## Cons
 
@@ -124,8 +145,12 @@ Deno supports the following permission options:
   A comma-separated list of domains can optionally be specified
   to restrict network access to only those domains.
 - `--allow-plugin`  
-  This allows plugins to be loaded.
-  It is currently an unstable feature.
+  This allows plugins implemented as Rust binaries to be loaded.
+  JavaScript code can then invoke plugin code using OPs.
+  For an example, see {% aTargetBlank
+  "https://denolib.gitbook.io/guide/codebase-basics/example-adding-a-deno-api",
+  "here" %}.
+  Plugins are currently an unstable feature.
 - `--allow-read=<allow-read>`  
   This allows read access to the file system.
   A comma-separated list of directories or files can optionally be specified
@@ -294,9 +319,18 @@ add the following comment before the line:
 
 To format all `.js`, `.json`, and `.ts` files
 in and below the current directory, enter `deno fmt`.
-This uses `dprint` (implemented in Rust) rather than Prettier.
-Two noticeable changes it makes are to adds semicolons where missing
-and change single quotes to double.
+This uses {% aTargetBlank "https://github.com/dprint/dprint", "dprint" %}
+(implemented in Rust) rather than Prettier.
+The primary reason for this choice is that dprint is significantly faster.
+
+Some noticeable changes dprint makes include:
+
+- adds semicolons where missing
+- changes single quotes to double
+- adds trailing commas after last items
+  when they do not all fit on a single line
+  (applies to imports, function parameters, function arguments,
+  array literals, and object literals)
 
 To prevent formatting a statement,
 precede it with the comment `// deno-fmt-ignore`.
@@ -309,10 +343,68 @@ but it seems to not currently be configurable.
 If the formatting performed by `deno fmt` is not to your liking,
 Prettier can be used instead.
 
+## Generating Documentation
+
+The `deno doc` command writes documentation for builtin types
+and local source files to stdout.
+
+For example, to see documentation on the `Deno.read` function,
+enter `deno doc --builtin Deno.read`.
+To see documentation for the local source file `demo.ts`,
+enter `deno doc demo.ts`.
+
+When run on source files, it only generates documentation on things
+that are exported, such as variables, functions, classes, and types.
+It takes a very simple approach.
+For variables, including constants, only their name is output.
+For functions, their signature is output.
+For classes, their constructor signature,
+fields, and method signatures are output.
+Each of these are followed by the text
+of the `/** comment */` that precedes it.
+It does not perform any special parsing or formatting of
+{% aTargetBlank "https://jsdoc.app/", "JSDoc" %} comments
+and it does not generate HTML files.
+
 ## Built-in Functions
 
 For documentation on the built-in functions, see the
 {% aTargetBlank "https://doc.deno.land/builtin/stable", "Runtime API" %}.
+
+These include the following from the Web API:
+
+- variables
+
+  - `console`: an object with the same methods as in browsers
+    including `debug`, `dir`, `error`, `info`, `log`, `table`, and `warn`
+  - `window`
+
+- functions
+
+  - `fetch`
+  - `alert`, `confirm`, and `prompt`
+  - `setTimeout` and `clearTimeout`
+  - `setInterval` and `clearInterval`
+  - `addEventListener`, `removeEventListener`, and `dispatchEvent`
+  - `atob` and `btoa` for converting to and from Base64 encoding
+
+- classes
+  - `Event`
+  - `EventTarget`
+  - `File`
+  - `FormData`
+  - `Headers`
+  - `Request`
+  - `Response`
+  - `URL`
+  - `URLSearchParams`
+  - `WebSocket`
+  - `Window`
+  - `Worker`
+
+To capture performance data for a section of code,
+begin the section with `performance.mark('some-name');`
+and end the section with `performance.measure('some-name');`.
 
 ## Standard Library
 
@@ -682,7 +774,16 @@ const port = 1234;
 const server: Server = serve({port});
 console.log('listening on port', port);
 
-async function getBody(req: ServerRequest): Promise<string> {
+async function getBodyJson(req: ServerRequest): Promise<string> {
+  const text = await getBodyText(req);
+  const contentType = req.headers.get('Content-Type');
+  if (contentType !== 'application/json') {
+    throw new Error(`Content-Type ${contentType} is not valid for JSON`);
+  }
+  return JSON.parse(text);
+}
+
+async function getBodyText(req: ServerRequest): Promise<string> {
   const buf: Uint8Array = await Deno.readAll(req.body);
   return decode(buf);
 }
@@ -712,19 +813,25 @@ function add(req: ServerRequest): number {
   return Number(n1) + Number(n2);
 }
 
+// This just demonstrates getting a JSON body.
+async function echoJson(req: ServerRequest): Promise<string> {
+  const obj = await getBodyJson(req);
+  return JSON.stringify(obj);
+}
+
 function multiply(req: ServerRequest): number {
   const {n1, n2} = getQueryParams(req, 'n1', 'n2');
   return Number(n1) * Number(n2);
 }
 
 async function shout(req: ServerRequest): Promise<string> {
-  const body = await getBody(req);
+  const body = await getBodyText(req);
   return body.toUpperCase();
 }
 
 type Handler = (req: ServerRequest) => void;
 
-const routeHandlers: Record<string, Handler> = {add, multiply, shout};
+const routeHandlers: Record<string, Handler> = {add, echoJson, multiply, shout};
 
 function getFirstPathPart(url: string): string {
   const [path] = url.split('?');
@@ -907,4 +1014,19 @@ dogs = await getAllDogs();
 console.log('after delete, dogs =', Object.values(dogs));
 
 console.log('client.js x: oscar =', await getDogById(oscar.id));
+```
+
+## WebSockets
+
+Deno has built-in support for WebSockets.
+
+Here is some example server code:
+
+```ts
+```
+
+Here is some example client code that communicates with the server:
+
+```html
+
 ```
