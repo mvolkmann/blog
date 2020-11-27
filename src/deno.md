@@ -366,7 +366,61 @@ It does not perform any special parsing or formatting of
 {% aTargetBlank "https://jsdoc.app/", "JSDoc" %} comments
 and it does not generate HTML files.
 
-## Built-in Functions
+## Testing
+
+Deno has built-in support for unit tests, documented
+{% aTargetBlank "https://deno.land/manual/testing", "here" %}.
+
+Here is a simple module defined in `statistics.ts`:
+
+```ts
+export function average(...numbers: number[]): number {
+  const {length} = numbers;
+  if (length === 0) return 0;
+  const sum = numbers.reduce((acc, n) => acc + n);
+  return sum / length;
+}
+```
+
+Here is a file that provides tests for the `average` function.
+
+```ts
+import {assertEquals} from 'https://deno.land/std/testing/asserts.ts';
+import {average} from './statistics.ts';
+
+Deno.test('statistics', () => {
+  assertEquals(average(), 0);
+  assertEquals(average(1), 1);
+  assertEquals(average(1, 2), 1.5);
+  assertEquals(average(1, 2, 3), 2);
+});
+```
+
+To run all the tests in the current directory, enter `deno test`.
+
+The assertion functions provided by the `testing/assert.ts` module include:
+
+- `assert` checks for truthy value
+- `assertEquals` and `assertNotEquals` check for deep equality
+- `assertExists` checks for not `null` or `undefined`
+- `assertMatch` and `assertNotMatch`
+- `assertObjectMatch` checks for object being a subset of another deeply
+- `assertStrictEquals` and `assertNotStrictEquals` checks for same reference
+- `assertArrayIncludes` and `assertStringIncludes`
+- `assertThrows` and `assertThrowsAsync`
+- `fail`
+- `unreachable`
+
+Adding `.only` or `.skip` after `Deno.test` is not supported, but there is
+{% aTargetBlank "https://github.com/denoland/deno/issues/5197", "discussion" %}
+about adding them.
+
+In addition, test code can import and throw `AssertionError`.
+
+The `equal` function checks for deep equality
+and returns a boolean rather than throwing.
+
+## Built-ins
 
 For documentation on the built-in functions, see the
 {% aTargetBlank "https://doc.deno.land/builtin/stable", "Runtime API" %}.
@@ -377,15 +431,25 @@ These include the following from the Web API:
 
   - `console`: an object with the same methods as in browsers
     including `debug`, `dir`, `error`, `info`, `log`, `table`, and `warn`
+
+    `console.table(object)` draws table border lines in the terminal.
+
   - `window`
 
 - functions
 
-  - `fetch`
+  - `fetch` for sending HTTP requests
+
   - `alert`, `confirm`, and `prompt`
+
+    These write to stdout and read from stdin.
+
   - `setTimeout` and `clearTimeout`
+
   - `setInterval` and `clearInterval`
+
   - `addEventListener`, `removeEventListener`, and `dispatchEvent`
+
   - `atob` and `btoa` for converting to and from Base64 encoding
 
 - classes
@@ -411,6 +475,9 @@ and end the section with `performance.measure('some-name');`.
 The Deno {% aTargetBlank "https://deno.land/std", "Standard Library" %}
 is modeled after that of the Go programming language.
 It is maintained by the Deno team.
+These modules are not installed by default and are
+downloaded and cached the first time a script that uses them is run.
+
 These libraries typically contain a `mod.ts` file
 that defines what is exported.
 
@@ -520,14 +587,18 @@ In both cases a file, not just a directory, must be specified.
 Unlike in Node.js, the filename `index.js` is not treated as
 the default filename and a file extension must be included.
 
-Deno does not use npm to install modules.
+Deno does not use `npm` to install modules.
 Instead, `import` statements can specify module URLs
 that reference network resources such as those in GitHub.
 
 Imported files are cached by saving them in the directory
 specified in the `DENO_DIR` environment variable
 rather than in a `node_modules` directory.
-If this environment variable is not set,
+The directory is shared between all Deno projects
+rather and using a separate directory for each project
+as is done in Node.js.
+
+If the `DENO_DIR` environment variable is not set,
 the files are saved in an OS-specific location.
 
 - Windows: `%LOCALAPPDATA%/deno`
