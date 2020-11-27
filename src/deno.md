@@ -315,6 +315,9 @@ It is maintained by the Deno team.
 These libraries typically contain a `mod.ts` file
 that defines what is exported.
 
+TODO: Mention the "View Documentation" links on the pages for
+TODO: standard library source files. For example, http ... server.ts.
+
 For example, the `fs` library provides the following functions:
 
 - `copy` copies a file or directory
@@ -595,21 +598,116 @@ library.
 
 ## Basic HTTP server
 
+Here is a very basic HTTP server that only uses the standard library.
+
 ```js
 import {serve} from 'https://deno.land/std/http/server.ts';
 
-const port = 6543;
+const port = 1234;
 const server = serve({port});
 console.log('listening on port', port);
 
 for await (const req of server) {
-  //console.log('req is', req)
+  console.log('req is', req);
   console.log('got request for', req.method, req.url);
   req.respond({body: 'Hello World\n'});
 }
 ```
 
-## Implementing a REST Server
+Here is a more advanced HTTP server written in TypeScript.
+Typically one would use a framework such as oak or abc for this,
+but it demonstrates what is possible using only the standard library.
+It supports two operations, "add" and "multiply",
+that are invoked with requests like these:
+
+```text
+GET http://localhost:1234/add?n1=2&n2=3 returns 5
+GET http://localhost:1234/multiply?n1=3&n2=4 returns 12
+```
+
+```ts
+import {
+  Response,
+  serve,
+  Server,
+  ServerRequest
+} from 'https://deno.land/std/http/server.ts';
+import {decode} from 'https://deno.land/std/encoding/utf8.ts';
+
+type StringToString = {[key: string]: string};
+
+const port = 1234;
+const server: Server = serve({port});
+console.log('listening on port', port);
+
+// Not used here, but useful for some APIs.
+async function getBody(req: ServerRequest): Promise<string> {
+  const buf: Uint8Array = await Deno.readAll(req.body);
+  return decode(buf);
+}
+
+function getQueryParams(
+  req: ServerRequest,
+  ...names: string[]
+): StringToString {
+  const host = req.headers.get('host');
+  // URL and URLSearchParams are Web APIs.
+  const url = new URL('http://' + host + req.url);
+  const searchParams = new URLSearchParams(url.search);
+
+  const params: StringToString = {};
+  for (const name of names) {
+    const value = searchParams.get(name);
+    if (value === null) {
+      throw new Error('missing query parameter ' + name);
+    }
+    params[name] = value;
+  }
+  return params;
+}
+
+function add(req: ServerRequest): number {
+  const {n1, n2} = getQueryParams(req, 'n1', 'n2');
+  return Number(n1) + Number(n2);
+}
+
+function multiply(req: ServerRequest): number {
+  const {n1, n2} = getQueryParams(req, 'n1', 'n2');
+  return Number(n1) * Number(n2);
+}
+
+type Handler = (req: ServerRequest) => void;
+
+const routeHandlers: Record<string, Handler> = {add, multiply};
+
+function getFirstPathPart(url: string): string {
+  const [path] = url.split('?');
+  return path.split('/')[1];
+}
+
+for await (const req: ServerRequest of server) {
+  console.info(req.method, req.url);
+
+  // This assumes that we can determine the route
+  // based on the first path part and does not
+  // support routes that use path parts as parameters.
+  const route = getFirstPathPart(req.url);
+
+  const handler = routeHandlers[route];
+  if (handler) {
+    try {
+      const body = String(handler(req));
+      req.respond({body});
+    } catch (e) {
+      req.respond({body: e.message, status: 400});
+    }
+  } else {
+    req.respond({body: 'unsupported route ' + route, status: 400});
+  }
+}
+```
+
+## REST Server with oak
 
 There are many HTTP server libraries for Deno.
 Currently the most popular is
@@ -636,11 +734,11 @@ async function createDog(context) {
   context.response.status = 201;
 }
 
-async function deleteAllDogs(context) {
+function deleteAllDogs(context) {
   dogs = {};
 }
 
-async function deleteDog(context) {
+function deleteDog(context) {
   const {id} = context.params;
   if (dogs[id]) {
     delete dogs[id];
@@ -650,11 +748,11 @@ async function deleteDog(context) {
   }
 }
 
-async function getAllDogs(context) {
+function getAllDogs(context) {
   context.response.body = JSON.stringify(dogs);
 }
 
-async function getDog(context) {
+function getDog(context) {
   const {id} = context.params;
   const dog = dogs[id];
   if (dog) {
