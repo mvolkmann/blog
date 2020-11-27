@@ -77,6 +77,10 @@ To get started with Deno and find documentation, see the
 
 ## Pros
 
+- Deno supports some modern JavaScript features
+  that are not yet implemented in other JavaScript environments.
+  Examples include the optional chaining operator (`?.`) and top-level `await`.
+
 ## Cons
 
 ## Installing
@@ -157,6 +161,8 @@ Here's a summary of the commands. Details will be provided later.
 | `types`       | displays information about built-in types                                    |
 | `upgrade`     | upgrades `deno`                                                              |
 
+For an example of using the `install` command, see the "Watching" section.
+
 ## Running
 
 To run a Deno program, enter a command like the following:
@@ -194,7 +200,8 @@ deno run --allow-net --allow-read https://deno.land/std/http/file_server.ts --he
 ## Watching
 
 To run in watch mode so the script is restarted
-when any source file in and below the current directory changes,
+when any source file (`.js`, `.json`, or `.ts`)
+in and below the current directory changes,
 add the currently unstable `--watch` option.
 For example:
 
@@ -374,6 +381,41 @@ const reader = await Deno.open(filename);
 for await (const line of readLines(reader)) {
   console.log(line);
 }
+```
+
+## Third Party Modules
+
+Many third party modules are registered at
+{% aTargetBlank "https://deno.land/x", "deno.land/x" %}.
+The code for this modules is typically in a GitHub repository.
+This site forwards requests to the actual location.
+
+As of 11/26/2020 there are 1315 registered modules.
+
+One example is the `case` module which provides many functions
+that convert multi-word strings where words are separated by spaces
+into another string.
+
+```js
+import * as c from 'https://deno.land/x/case@v2.1.0/mod.ts';
+
+const s = 'one FINE day';
+console.log('camel:', c.camelCase(s)); // oneFineDay
+console.log('constant:', c.constantCase(s)); // ONE_FINE_DAY
+console.log('dot:', c.dotCase(s)); // one.fine.day
+console.log('header:', c.headerCase(s)); // One-Fine-Day
+console.log('lower:', c.lowerCase(s)); // one fine day
+console.log('lowerFirst:', c.lowerFirstCase(s)); // one FINE day
+console.log('normal:', c.normalCase(s)); // one fine day
+console.log('param:', c.paramCase(s)); // one-fine-day
+console.log('pascal:', c.pascalCase(s)); // OneFineDay
+console.log('path:', c.pathCase(s)); // one/fine/day
+console.log('sentence:', c.sentenceCase(s)); // One fine day
+console.log('snake:', c.snakeCase(s)); // one_fine_day
+console.log('swap:', c.swapCase(s)); // ONE fine DAY
+console.log('title:', c.titleCase(s)); // One Fine Day
+console.log('upper:', c.upperCase(s)); // ONE FINE DAY
+console.log('upperFirst:', c.upperFirstCase(s)); // One FINE day
 ```
 
 ## Imports
@@ -640,7 +682,6 @@ const port = 1234;
 const server: Server = serve({port});
 console.log('listening on port', port);
 
-// Not used here, but useful for some APIs.
 async function getBody(req: ServerRequest): Promise<string> {
   const buf: Uint8Array = await Deno.readAll(req.body);
   return decode(buf);
@@ -676,9 +717,14 @@ function multiply(req: ServerRequest): number {
   return Number(n1) * Number(n2);
 }
 
+async function shout(req: ServerRequest): Promise<string> {
+  const body = await getBody(req);
+  return body.toUpperCase();
+}
+
 type Handler = (req: ServerRequest) => void;
 
-const routeHandlers: Record<string, Handler> = {add, multiply};
+const routeHandlers: Record<string, Handler> = {add, multiply, shout};
 
 function getFirstPathPart(url: string): string {
   const [path] = url.split('?');
@@ -696,7 +742,7 @@ for await (const req: ServerRequest of server) {
   const handler = routeHandlers[route];
   if (handler) {
     try {
-      const body = String(handler(req));
+      const body = String(await handler(req));
       req.respond({body});
     } catch (e) {
       req.respond({body: e.message, status: 400});
