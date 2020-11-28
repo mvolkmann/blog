@@ -373,11 +373,13 @@ and it does not generate HTML files.
 
 ## Debugging
 
-Deno programs can be debugged using the Chrome DevTools Debugger
-with the following steps:
+Deno programs can be debugged using the Chrome DevTools Debugger.
+It supports source maps which enables stepping through TypeScript code
+while actually running JavaScript code produced by the compiler.
+The steps to use the debugger are:
 
 1. Start the script by entering
-   `deno run --inspect-brk --inspect-brk --allow-read --allow-net some_name.ts`
+   `deno run -A --inspect-brk some_name.ts`
 2. Browse `chrome://inspect`
 3. Click the "inspect" link at the bottom of the Chrome window
    to open another Chrome window.
@@ -406,7 +408,50 @@ with the following steps:
   title="Chrome debugger window #2">
 
 VS Code also supports debugging Deno programs.
-TODO: To use it ...
+The steps to do this are:
+
+1. Create a `.vscode` directory in the top project directory.
+1. Create the file `.vscode/launch.json` with the following content:
+
+   ```json
+   {
+     "version": "0.2.0",
+     "configurations": [
+       {
+         "name": "Deno",
+         "type": "pwa-node",
+         "request": "launch",
+         "cwd": "${workspaceFolder}",
+         "runtimeExecutable": "deno",
+         "runtimeArgs": ["run", "-A", "--inspect-brk", "${file}"],
+         "attachSimplePort": 9229,
+         "outputCapture": "std"
+       }
+     ]
+   }
+   ```
+
+1. Open the main script file in VS Code.
+1. Select Run ... Start Debugging or press F5.
+1. If prompted to select an environment, select "Deno".
+1. Use the debugger control buttons at the top.
+1. Use the left-nav debugger content including the sections labelled
+   "VARIABLES", "WATCH", "CALL STACK", "LOADED SCRIPTS", and "BREAKPOINTS".
+1. To exit from the debugger, click the red square in the debug controls,
+   select Run ... Stop Debugging, or press shift-F5.
+
+<img alt="VS Code debugger" style="width: 90%"
+  src="/blog/assets/deno-vs-code-debugger.png"
+  title="VS Code debugger">
+
+Currently it reports the following error when importing modules from URLs:
+
+```text
+Could not load source '{file-system-path/some-name.ts}': Unable to retrieve source content.
+```
+
+See this {% aTargetBlank "https://github.com/denoland/vscode_deno/issues/233",
+"issue" %}.
 
 ## Testing
 
@@ -639,6 +684,8 @@ rather than in a `node_modules` directory.
 The directory is shared between all Deno projects
 rather and using a separate directory for each project
 as is done in Node.js.
+This saves disk space and avoids needing to
+reinstall previously used libraries for new projects.
 
 If the `DENO_DIR` environment variable is not set,
 the files are saved in an OS-specific location.
