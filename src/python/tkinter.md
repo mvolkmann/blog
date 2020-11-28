@@ -479,7 +479,7 @@ class EntryPlus(Entry):
         if self.placeholder and not value:
             var.set(self.placeholder)
 
-        # Remove the `placedholder` option before passing options
+        # Remove the `placeholder` option before passing options
         # to the superclass, because it isn't valid for `Entry`.
         del options['placeholder']
         Entry.__init__(self, **options)

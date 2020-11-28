@@ -478,6 +478,7 @@
     "textvariable",
     "timeit",
     "tkinter",
+    "tkmacos",
     "tmdb",
     "topojson",
     "torchvision",

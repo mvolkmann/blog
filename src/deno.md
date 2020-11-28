@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 <img alt="Deno logo" style="width: 30%"
   src="/blog/assets/deno-logo.svg" title="Deno logo">
 
@@ -371,8 +373,8 @@ and it does not generate HTML files.
 
 ## Debugging
 
-Deno programs can be debugged using the Chrome DevTools Debugger.
-To do this ...
+Deno programs can be debugged using the Chrome DevTools Debugger
+with the following steps:
 
 1. Start the script by entering
    `deno run --inspect-brk --inspect-brk --allow-read --allow-net some_name.ts`
@@ -396,8 +398,12 @@ To do this ...
 10. To restart execution, click the "reload" link
     back in the original Chrome window.
 
-<img alt="Chrome debugger" style="width: 90%"
-  src="/blog/assets/deno-chrome-debugger.png" title="Chrome debugger">
+<img alt="Chrome debugger window #1" style="width: 40%"
+  src="/blog/assets/deno-chrome-debugger-1.png"
+  title="Chrome debugger window #1">
+<img alt="Chrome debugger window #2" style="width: 90%"
+  src="/blog/assets/deno-chrome-debugger-2.png"
+  title="Chrome debugger window #2">
 
 VS Code also supports debugging Deno programs.
 TODO: To use it ...

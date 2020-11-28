@@ -92,7 +92,8 @@ See {% aTargetBlank
    - `sudo chmod a+w /Library/WebServer/Documents`
 1. Create the file `/Library/WebServer/Documents/phpinfo.php`
    containing `<?php phpinfo();`
-1. Browse {% aTargetBlank "http://localhost/phpinfo.php", "http://localhost/phpinfo.php" %}.
+1. Browse {% aTargetBlank "http://localhost/phpinfo.php",
+   "http://localhost/phpinfo.php" %}.
 1. Create your first PHP page.
 
    - Create the file `hello.php`
