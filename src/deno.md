@@ -1115,7 +1115,9 @@ which aims to works with many databases.
 It uses deno_mongo under the hood for MongoDB databases,
 but I wasn't able to get it to work.
 See this {% aTargetBlank "https://github.com/eveningkid/denodb/issues/152",
-"issue" %}.
+"issue" %} and this {% aTargetBlank
+"https://github.com/eveningkid/denodb/commit/abed3063dd92436ceb4f124227daee5ee6604b2d#commitcomment-44634400",
+"temporary fix" %}.
 
 Here is an example of using deno_mongo:
 
