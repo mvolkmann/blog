@@ -27,4 +27,10 @@ window.onload = () => {
 
   // Make "Topics" be the default page.
   if (location.pathname === '/blog/') location.href += 'topics/';
+
+  // Open the hamburger menu when on the "Topics" page.
+  if (location.href.endsWith('/topics/')) {
+    const nav = document.querySelector('nav');
+    nav.style.left = 0;
+  }
 };

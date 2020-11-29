@@ -29,7 +29,7 @@ function handleLinkClick(link, url) {
 
       const iframe = document.querySelector('iframe');
       iframe.style.opacity = 0;
-      setTimeout(() => (iframe.src = url), 500); // matches transition-duration in topics.scss
+      setTimeout(() => (iframe.src = url), 300); // matches transition-duration in topics.scss
 
       // Put new page URL in URL hash so it can be bookmarked.
       const {origin} = location;
