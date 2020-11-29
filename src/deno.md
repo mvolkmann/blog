@@ -22,6 +22,9 @@ In June 2018, he gave a talk at JSConf EU 2018 titled
 "10 Things I Regret About Node.js" %}.
 A prototype of Deno was presented during this talk.
 
+Version 1.0 of Deno was released on May 13, 2020.
+It is open source and uses the MIT license.
+
 The Deno core team, in order of commits, consists of
 Ryan Dahl (Google),
 Bartek Iwańczuk
@@ -57,6 +60,11 @@ Deno has builtin support for TypeScript.
 It automatically compiles TypeScript code to JavaScript before running it,
 making it unnecessary to define a build process to do this.
 
+The `deno` command supports many sub-commands for common tasks
+including running programs, starting a REPL, linting code, formatting code,
+displaying code documentation, getting information on dependencies,
+and bundling code.
+
 Both Node.js and Deno are built on the Chrome V8 JavaScript engine
 which is implemented in C++.
 Node.js is primarily implemented in C++.
@@ -71,9 +79,6 @@ Event handling in Node.js is provided by the
 {% aTargetBlank "https://libuv.org/", "libuv" %} C++ library.
 In Deno this is provided by the
 {% aTargetBlank "https://tokio.rs/", "Tokio" %} Rust library.
-
-Version 1.0 of Deno was released on May 13, 2020.
-It is open source and uses the MIT license.
 
 Deno supports WebAssembly (WASM).
 Many programming languages can be compiled to WASM, including
@@ -124,13 +129,15 @@ To get started with Deno and find documentation, see the
 
 ## Installing
 
-To install Deno:
+Deno is installed as a single executable file.
+To install it:
 
 - for Windows, use Chocolately: `choco install deno`
 - for macOS, use Homebrew: `brew install deno`
 - for Linux, use curl: `curl -fsSL https://deno.land/x/install/install.sh | sh`
 
-For more install options, see the main Deno website.
+For more install options, see the
+{% aTargetBlank "https://deno.land/", "main Deno website" %}.
 
 ## Options
 
@@ -581,7 +588,8 @@ and end the section with `performance.measure('some-name');`.
 
 The Deno {% aTargetBlank "https://deno.land/std", "Standard Library" %}
 is modeled after that of the Go programming language.
-It is maintained by the Deno team.
+It is maintained by the Deno team,
+providing more quality assurance than using third-party libraries.
 These modules are not installed by default and are
 downloaded and cached the first time a script that uses them is run.
 
@@ -1051,6 +1059,8 @@ class Dog {
 }
 
 // Delete all rows from the dogs table.
+// The query builder doesn't support deleting all rows from a table
+// because it is a dangerous thing to do in production.
 await db.query('delete from dogs');
 
 // Add new rows to the dogs table.
@@ -1078,6 +1088,18 @@ console.log('comet =', comet);
 await db.disconnect();
 ```
 
+Because this code uses decorators, the following options
+must be present in a `tsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+```
+
 It seems that Cotton does not currently support
 creating or executing for prepared statements?
 See this {% aTargetBlank "https://github.com/rahmanfadhil/cotton/issues/32",
@@ -1085,8 +1107,67 @@ See this {% aTargetBlank "https://github.com/rahmanfadhil/cotton/issues/32",
 
 ## MongoDB
 
-See https://deno.land/x/denodb@v1.0.15 (works with many databases) and
-https://deno.land/x/mongo@v0.20.0.
+One option for working with MongoDB databases in Deno
+is {% aTargetBlank "https://deno.land/x/mongo@v0.20.0", "deno_mongo" %}.
+Another option is
+{% aTargetBlank "https://eveningkid.github.io/denodb-docs/", "denodb" %}
+which aims to works with many databases.
+It uses deno_mongo under the hood for MongoDB databases,
+but I wasn't able to get it to work.
+See this {% aTargetBlank "https://github.com/eveningkid/denodb/issues/152",
+"issue" %}.
+
+Here is an example of using deno_mongo:
+
+```ts
+import {MongoClient} from 'https://deno.land/x/mongo/mod.ts';
+
+const client = new MongoClient();
+await client.connect('mongodb://127.0.0.1:27017');
+
+interface Dog {
+  _id: {$oid: string};
+  name: string;
+  breed: string;
+}
+
+const db = client.database('animals');
+const dogsColl = db.collection<Dog>('dogs');
+
+// Delete all the documents in the dogs collection.
+let count = await dogsColl.deleteMany({_id: {$ne: null}});
+console.log('deleted', count);
+
+// Insert one dog.
+const id = await dogsColl.insertOne({
+  name: 'Snoopy',
+  breed: 'Beagle'
+});
+console.log('inserted id =', id);
+
+// Insert many dogs.
+const initialDogs = [
+  {name: 'Maisey', breed: 'Treeing Walker Coonhound'},
+  {name: 'Ramsay', breed: 'Native American Indian Dog'},
+  {name: 'Oscar', breed: 'German Shorthaired Pointer'},
+  {name: 'Comet', breed: 'Whippet'}
+];
+await dogsColl.insertMany(initialDogs);
+
+// Update one of the dogs.
+const {matchedCount, modifiedCount, upsertedId} = await dogsColl.updateOne(
+  {name: {$eq: 'Oscar'}},
+  {$set: {name: 'Oscar Wilde'}}
+);
+
+// Get all the documents in the dogs collection.
+const dogs = await dogsColl.find({name: {$ne: null}});
+console.log('dogs =', await dogs.toArray());
+
+// Get the number of documents in the dogs collection.
+count = await dogsColl.count();
+console.log('count =', count);
+```
 
 ## Basic HTTP server
 
@@ -1374,17 +1455,126 @@ console.log('after delete, dogs =', Object.values(dogs));
 console.log('client.js x: oscar =', await getDogById(oscar.id));
 ```
 
+Deno server libraries do not yet seem to support
+generating OpenAPI (Swagger) documentation.
+One module that claims to support this is {% aTargetBlank
+"https://deno.land/x/deno_swagger_doc@releasev1.0.0", "deno_swagger_doc" %},
+but I wasn't able to get it to work.
+See this {% aTargetBlank
+"https://github.com/singhcool/deno-swagger-doc/issues/8", "issue" %}.
+
 ## WebSockets
 
 Deno has built-in support for WebSockets.
+To demonstrate this, we'll build a simple app
+where multiple browser clients can connect to a WebSocket server.
+Each client renders an empty `svg` element.
+Clicking on the `svg` adds a circle in that location on every connected client.
+This could be the start of a game.
 
-Here is some example server code:
+<img alt="Deno WebSocket demo" style="width: 30%"
+  src="/blog/assets/deno-websocket-demo.png" title="Deno WebSocket demo">
+
+Here is the server code:
 
 ```ts
+import {serve} from 'https://deno.land/std/http/server.ts';
+import {acceptWebSocket, WebSocket} from 'https://deno.land/std/ws/mod.ts';
+
+const clients: WebSocket[] = [];
+
+async function addClient(sock: WebSocket) {
+  clients.push(sock);
+
+  // For every new event coming from this client ...
+  for await (const event of sock) {
+    // Send the event to all connected clients.
+    clients.forEach(client => client.send(event as string));
+  }
+}
+
+const PORT = '1234';
+// For every client connection request .wss..
+for await (const req of serve(':' + PORT)) {
+  const {conn, r: bufReader, w: bufWriter, headers} = req;
+  try {
+    const sock = await acceptWebSocket({conn, bufReader, bufWriter, headers});
+    addClient(sock);
+  } catch (e) {
+    console.error(`failed to accept WebSocket: ${e}`);
+    await req.respond({status: 400});
+  }
+}
 ```
 
-Here is some example client code that communicates with the server:
+Here is the client code that can be opened in a web browser:
 
 ```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        margin: 0;
+      }
 
+      circle {
+        fill: yellow;
+        stroke: blue;
+        stroke-width: 5px;
+      }
+
+      svg {
+        background-color: linen;
+        height: 400px;
+        width: 600px;
+      }
+    </style>
+    <script>
+      function addCircle(x, y, radius) {
+        const svg = document.querySelector('svg');
+        const circle = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'circle'
+        );
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+        circle.setAttribute('r', radius);
+        svg.appendChild(circle);
+      }
+
+      const ws = new WebSocket('ws://localhost:1234');
+
+      ws.onopen = () => {
+        console.log('opened WebSocket');
+      };
+
+      ws.onmessage = event => {
+        const message = event.data;
+        const [shape, x, y, size] = message.split(' ');
+        if (shape === 'circle') {
+          addCircle(x, y, size);
+        } else {
+          alert('unsupported shape ' + shape);
+        }
+      };
+
+      function handleClick(e) {
+        const RADIUS = 20;
+        const msg = `circle ${event.clientX} ${event.clientY} ${RADIUS}`;
+        ws.send(msg);
+      }
+    </script>
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" onclick="handleClick(event)" />
+  </body>
+</html>
 ```
+
+## Tidbits
+
+To determine if the current file was executed as the main script,
+check the value of the boolean `import.meta.main`.
