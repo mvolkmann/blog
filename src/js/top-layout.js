@@ -1,5 +1,3 @@
-/* global toggleHamburgerMenu: false */
-
 // Only register the service worker when not on localhost.
 /*
 if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
