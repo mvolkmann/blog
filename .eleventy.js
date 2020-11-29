@@ -118,7 +118,7 @@ module.exports = eleventyConfig => {
 
   // This filter is being added in v0.11.0.
   eleventyConfig.addFilter('log', value => {
-    console.log('.eleventy.js log: value =', value);
+    //console.log('.eleventy.js log: value =', value);
     return value;
   });
 
