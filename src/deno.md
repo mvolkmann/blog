@@ -29,6 +29,30 @@ Bert Belder (StrongLoop),
 Kitson Kelly (Thoughtworks), and
 Luca Casonato.
 
+Deno is secure by default.
+The environment, file system, and network
+can only be accessed if explicitly enabled.
+Compare this to other programming languages/environments
+like Node.js, Python, and Java where there are
+no restrictions on what application or library code can do.
+All of those are insecure by default.
+
+I believe the Deno security model is its most significant feature!
+With Deno you never have to worry that some library you are using,
+or a library used by a library,
+might do something bad that you didn't want to allow.
+You can run an app with no permissions and see what errors are generated.
+For example, suppose you see the following error message:
+
+```text
+error: Uncaught PermissionDenied: read access to "pets.db",
+run again with the --allow-read flag
+```
+
+You can then decide whether you app should be reading that file
+before running it again with permission granted.
+The permission flags are covered in more detail later.
+
 Deno has builtin support for TypeScript.
 It automatically compiles TypeScript code to JavaScript before running it,
 making it unnecessary to define a build process to do this.
@@ -50,14 +74,6 @@ In Deno this is provided by the
 
 Version 1.0 of Deno was released on May 13, 2020.
 It is open source and uses the MIT license.
-
-Deno is secure by default.
-The environment, file system, and network
-can only be accessed if explicitly enabled.
-Compare this to other programming languages/environments
-like Node.js, Python, and Ruby where there are
-no restrictions on what application or library code can do.
-All of those are insecure by default.
 
 Deno supports WebAssembly (WASM).
 Many programming languages can be compiled to WASM, including
@@ -889,6 +905,106 @@ const result = await Deno.readTextFile('demo.txt');
 
 See the {% aTargetBlank "https://deno.land/x/yargs@v16.1.1-deno", "Yargs" %}
 library.
+
+## Databases
+
+The most popular Deno library for working with relational databases is
+{% aTargetBlank "https://deno.land/x/cotton", "Cotton" %}.
+It supports MySQL, PostgreSQL, and SQLite.
+
+For more details on SQLite, see [here](/blog/sqlite).
+
+Cotton supports {% aTargetBlank
+"https://deno.land/x/cotton@v0.7.4/docs/guide/query-builder.md",
+"query builder" %} functions that enable
+creating SQL statements with function calls
+as an alternative to manually creating SQL statement strings.
+
+Cotton also supports {% aTargetBlank
+"https://deno.land/x/cotton@v0.7.4/docs/guide/model.md",
+"object-relational mapping" %} that maps a JavaScript class to a database table.
+
+Finally, Cotton supports {% aTargetBlank
+"https://deno.land/x/cotton@v0.7.4/docs/guide/migrations.md",
+"database migrations" %} for making a series of changes to a database schema
+in a repeatable way.
+
+Here's an example using
+{% aTargetBlank "https://www.sqlite.org/index.html", "SQLite" %}.
+
+1. Install SQLite by downloading a version from the
+   {% aTargetBlank "https://www.sqlite.org/download.html", "SQLite Download Page" %}.
+1. Create a pets database by entering `sqlite3 pets.db`
+   This starts an interactive session, indicated by the `sqlite>` prompt.
+1. Create a "dogs" table by entering
+   `create table dogs(id integer primary key autoincrement, name string, breed string);`
+1. Add a row to the "dogs" table by entering
+   `insert into dogs values('Comet', 'Whippet');`
+1. Query the "dogs" table by entering `select \* from dogs;`
+
+Here is a Deno program that interacts with the pets database.
+
+```ts
+import {connect} from 'https://deno.land/x/cotton/mod.ts';
+
+const db = await connect({type: 'sqlite', database: 'pets.db'});
+
+// Delete all rows from the dogs table.
+//await db.table("dogs").delete().execute();
+//await db.table("dogs").delete().where('name', '*').execute();
+await db.query('delete from dogs');
+
+// Add new rows to the dogs table.
+const initialDogs = [
+  {name: 'Maisey', breed: 'Treeing Walker Coonhound'},
+  {name: 'Ramsay', breed: 'Native American Indian Dog'},
+  {name: 'Oscar', breed: 'German Shorthaired Pointer'},
+  {name: 'Comet', breed: 'Whippet'}
+];
+// Note that building a query is separate from executing it.
+const query = db.table('dogs').insert(initialDogs);
+console.log('sql =', query.toSQL()); // to see what it will execute
+await query.execute();
+
+await db
+  .table('dogs')
+  .where('name', 'Oscar')
+  .update({name: 'Oscar Wilde'})
+  .execute();
+
+// Using a SQL string
+let dogs = await db.query('select * from dogs order by name');
+console.log('dogs =', dogs);
+
+// Using query builder
+dogs = await db.table('dogs').order('name').execute();
+console.log('dogs =', dogs);
+
+// Using "where"
+const [comet] = await db.table('dogs').where('name', 'Comet').execute();
+console.log('comet =', comet);
+
+// Using pagination
+dogs = await db.table('dogs').order('name').limit(2).offset(2).execute();
+console.log('2nd page of dogs with 2 per page =', dogs);
+
+await db.disconnect();
+```
+
+An alternative supported by Cotton is to
+define model classes that map to tables,
+create instances of those classes, and
+interact with the database using the model classes and instances.
+Each model class must have a property that is mapped to the primary key of its table
+and that column must use autoincrement.
+TODO: Finish this section!
+
+TODO: Is there any support for prepared statements?
+
+## MongoDB
+
+See https://deno.land/x/denodb@v1.0.15 (works with many databases) and
+https://deno.land/x/mongo@v0.20.0.
 
 ## Basic HTTP server
 
