@@ -181,6 +181,10 @@ Deno supports the following permission options:
   A comma-separated list of directories or files can optionally be specified
   to restrict writes to only those directories and files.
 
+What other programming language / runtime can make
+the security guarantees that Deno makes?
+I don't know of any.
+
 ## Command Summary
 
 Deno commands start with `deno` followed by a command name and options.
@@ -942,7 +946,8 @@ Here's an example using
    `insert into dogs values('Comet', 'Whippet');`
 1. Query the "dogs" table by entering `select \* from dogs;`
 
-Here is a Deno program that interacts with the pets database.
+Here is a Deno program in a file named `cotton_demo.js`
+that interacts with the pets database.
 
 ```ts
 import {connect} from 'https://deno.land/x/cotton/mod.ts';
@@ -991,15 +996,92 @@ console.log('2nd page of dogs with 2 per page =', dogs);
 await db.disconnect();
 ```
 
+To run this, enter the following command which is
+very specific about which files should be readable and writable:
+
+```bash
+drun \
+  --allow-read=pets.db,pets.db-journal \
+  --allow-write=pets.db,pets.db-journal \
+  cotton_demo.js
+```
+
 An alternative supported by Cotton is to
 define model classes that map to tables,
 create instances of those classes, and
 interact with the database using the model classes and instances.
 Each model class must have a property that is mapped to the primary key of its table
 and that column must use autoincrement.
-TODO: Finish this section!
 
-TODO: Is there any support for prepared statements?
+Here is an example that mimics most of the previous example using a model class:
+
+```ts
+import {
+  Column,
+  connect,
+  DataType,
+  Model,
+  Primary
+} from 'https://deno.land/x/cotton/mod.ts';
+
+const db = await connect({type: 'sqlite', database: 'pets.db'});
+const manager = db.getManager();
+
+// If no table name is passed to @Model, it will default to
+// the lowercase version of the class name, "dog" in this case.
+@Model('dogs')
+class Dog {
+  // This class cannot have a constructor because Cotton
+  // requires being able to create instances with new Dog().
+
+  @Primary()
+  id!: number;
+
+  // The docs say "Cotton is smart enough to determine the data type
+  // of that particular column using TypeScript types.
+  // However, you can still customize your column types
+  // by passing the type option."
+  // But omitting this gives the error
+  // "Column '${propertyKey}' must have a type!"
+  @Column({type: DataType.String})
+  name!: string;
+
+  @Column({type: DataType.String})
+  breed!: string;
+}
+
+// Delete all rows from the dogs table.
+await db.query('delete from dogs');
+
+// Add new rows to the dogs table.
+const initialDogs = [
+  {name: 'Maisey', breed: 'Treeing Walker Coonhound'},
+  {name: 'Ramsay', breed: 'Native American Indian Dog'},
+  {name: 'Oscar', breed: 'German Shorthaired Pointer'},
+  {name: 'Comet', breed: 'Whippet'}
+];
+for (const {name, breed} of initialDogs) {
+  const dog = new Dog();
+  dog.name = name;
+  dog.breed = breed;
+  await manager.save(dog);
+}
+
+await manager.query(Dog).where('name', 'Oscar').update({name: 'Oscar Wilde'});
+
+const dogs = await manager.query(Dog).all();
+console.log('dogs =', dogs);
+
+const comet = await manager.query(Dog).where('name', 'Comet').first();
+console.log('comet =', comet);
+
+await db.disconnect();
+```
+
+It seems that Cotton does not currently support
+creating or executing for prepared statements?
+See this {% aTargetBlank "https://github.com/rahmanfadhil/cotton/issues/32",
+"issue" %}.
 
 ## MongoDB
 
