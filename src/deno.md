@@ -676,6 +676,12 @@ When a URL with no version is imported, the newest version is used.
 But after the import is executed, the program will continue to use that version,
 not checking for new versions, unless it is run with the `--reload` flag.
 
+File URLs for libraries maintained in GitHub contain tag names,
+so creating tags that are version numbers is great way
+to make multiple versions compatible with Deno imports.
+To see the URL to use, select a file, select a tag, click the "Raw" button,
+and note the URL in the address bar.
+
 Deno does not use `npm` to install modules.
 Instead, `import` statements can specify module URLs
 that reference network resources such as those in GitHub.
