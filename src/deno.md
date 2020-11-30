@@ -1030,7 +1030,7 @@ To run this, enter the following command which is
 very specific about which files should be readable and writable:
 
 ```bash
-drun \
+deno run \
   --allow-read=pets.db,pets.db-journal \
   --allow-write=pets.db,pets.db-journal \
   cotton_demo.js
