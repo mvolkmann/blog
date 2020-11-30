@@ -261,6 +261,7 @@
     "getsource",
     "getstate",
     "ghcolors",
+    "gitlab",
     "gollum",
     "grapher",
     "graphlib",

@@ -95,13 +95,14 @@ To get started with Deno and find documentation, see the
 
 ## Differences from Node.js
 
-1. Deno uses ES Modules by default.
-   Node.js can use ES Modules, but defaults to CommonJS.
+1. Deno uses ES modules by default.
+   Node.js can use ES modules, but defaults to CommonJS.
 1. Deno uses URLs for loading remote dependencies rather than
    relative paths in the `node_modules` directory.
+   These can come from any URL, not just from npm.
 1. Deno uses built-in resource fetching
    rather than relying on npm to install packages.
-1. Deno has built-in TypeScript support with caching of compile source files.
+1. Deno has built-in TypeScript support with caching of compiled source files.
 1. Deno has built-in support for Web APIs
    like the Fetch API and functions from the `window` object.
 1. Deno requires file system and network access to be explicitly enabled.
@@ -161,9 +162,9 @@ enter `deno --version`.
 The `.js` and `.ts` files in the standard library
 use underscores rather than dashes to separate multiple words in file names.
 
-## Permission Options
+## Permission Flags
 
-Deno supports the following permission options:
+Deno supports the following permission flags:
 
 - `-A` or `--allow-all`  
   This allow all permissions, disabling all security.
@@ -172,10 +173,14 @@ Deno supports the following permission options:
 - `--allow-hrtime`  
   This allows use of high-resolution time measurement
   which can be used in timing attacks and fingerprinting.
+  Without this permission, functions that return times
+  such as `performance.now` return values in milliseconds
+  instead of a more precise value.
 - `--allow-net=<allow-net>`  
   This allows network access.
   A comma-separated list of domains can optionally be specified
   to restrict network access to only those domains.
+  For example, `--allow-net=bitbucket.org,github.com,gitlab.com`.
 - `--allow-plugin`  
   This allows plugins implemented as Rust binaries to be loaded.
   JavaScript code can then invoke plugin code using OPs.
@@ -198,6 +203,40 @@ Deno supports the following permission options:
 What other programming language / runtime can make
 the security guarantees that Deno makes?
 I don't know of any.
+
+A Deno program can check for permission flags and take different actions
+based on whether specific flags and values are present.
+For example:
+
+```js
+const status = await Deno.permissions.query({name: 'write', path: '/tmp'});
+if (status.state === 'granted') {
+  console.log('Permission was granted on the command line.');
+} else {
+  const status = await Deno.permissions.request({name: 'write', path: '/tmp'});
+  if (status.state === 'granted') {
+    console.log('Permission was granted interactively.');
+  } else {
+    console.log('Permission was denied interactively.');
+  }
+}
+```
+
+The permissions API is currently experimental,
+so this must be run with the `--unstable` flag.
+
+If the program is not also run with `--allow-write=/tmp`,
+the user will be prompted with the following and
+the program will wait for the user to press the "g" or "d" key:
+
+```text
+⚠️ Deno requests write access to "/tmp". Grant? [g/d (g = grant, d = deny)]
+```
+
+The `Deno.permissions.revoke` function removes a permission.
+This is useful when actions that require the permission have completed
+and you wish to ensure that those actions cannot be performed again
+for the remainder of the program.
 
 ## Command Summary
 
@@ -222,6 +261,8 @@ Here's a summary of the commands. Details will be provided later.
 | `types`       | displays information about built-in types                                    |
 | `upgrade`     | upgrades `deno`                                                              |
 
+TODO: Add information on some of these commands that you haven't covered yet.
+
 For an example of using the `install` command, see the "Watching" section.
 
 ## REPLs
@@ -239,7 +280,8 @@ which doesn't support code formatting or sharing code.
 
 ## Running
 
-To run a Deno program, enter a command like the following:
+To run a Deno program, enter a command like the following,
+passing it a JavaScript or TypeScript file:
 
 ```bash
 deno run src/main.ts
@@ -554,6 +596,15 @@ In addition, test code can import and throw `AssertionError`.
 The `equal` function checks for deep equality
 and returns a boolean rather than throwing.
 
+## Libraries
+
+Deno library code comes from three categories.
+The "Runtime API" defines built-in things that are available without importing.
+The "Standard Library" defines things that are maintained by the Deno team.
+"Third Party Modules" are maintained by other developers.
+The main Deno website at {% aTargetBlank "https://deno.land/", "deno.land" %}
+has links to documentation for all three categories at the top of the page.
+
 ## Built-ins
 
 For documentation on the built-in functions, see the
@@ -604,11 +655,85 @@ To capture performance data for a section of code,
 begin the section with `performance.mark('some-name');`
 and end the section with `performance.measure('some-name');`.
 
+## Imports
+
+Deno source files import other files as ES modules
+using the `import` statement, not the `require` function like in Node.js.
+The file to import can be specified with
+a relative file path, an absolute file path, or a URL.
+In all cases a file, not just a directory, must be specified.
+Unlike in Node.js, the filename `index.js` is not treated as
+the default filename and a file extension must be included.
+When a `.ts` file is imported, it is automatically compiled to JavaScript.
+
+A version can optionally be specified in `import` URLs. For example:
+
+```js
+import {blue, green, red} from 'https://deno.land/std@0.79.0/fmt/colors.ts';
+```
+
+When a URL with no version is imported, the newest version is used.
+But after the import is executed, the program will continue to use that version,
+not checking for new versions, unless it is run with the `--reload` flag.
+
+Deno does not use `npm` to install modules.
+Instead, `import` statements can specify module URLs
+that reference network resources such as those in GitHub.
+
+Imported files are cached by saving them in the directory
+specified in the `DENO_DIR` environment variable
+rather than in a `node_modules` directory.
+The directory is shared between all Deno projects
+rather and using a separate directory for each project
+as is done in Node.js.
+This saves disk space and avoids needing to
+re-download and re-compile previously used libraries for new projects.
+
+If the `DENO_DIR` environment variable is not set,
+the files are saved in an OS-specific location.
+
+- Windows: `%LOCALAPPDATA%/deno`
+- macOS: `\$HOME/Library/Caches/deno`
+- Linux: `\$XDG_CACHE_HOME/deno` or `\$HOME/.cache/deno`
+
+Downloaded dependencies are placed in the `deps` subdirectory.
+JavaScript files created by compiling TypeScript files
+are placed in the `gen` subdirectory.
+The `gen` directory contains
+a `file` directory for `.js` files
+generated from `.ts` files in the file system and
+a `https` directory for `.js` files
+generated from downloaded `.ts` files.
+
+Dependencies are not cataloged in a `package.json` file,
+which is not used at all.
+The many sub-commands of the `deno` command
+make npm scripts, implemented in a `package.json` file,
+less necessary.
+
+Spreading library URLs throughout the source files of a project
+can be undesirable, especially of some are repeated in multiple files.
+An alternate approach is to create a file like `src/deps.ts` (recommended name)
+containing lines like the following:
+
+```ts
+export {name1, name2, name3} from 'https://domain1/pkg1@v1/filename1.ts';
+export {name4, name5} from 'https://domain2/pkg2@v2/filename2.ts';
+```
+
+Then import from this file with lines like the following:
+
+```ts
+import {name1, name3, name4} from './deps.ts';
+```
+
+TODO: Isn't it odd to then have every source file only import from this one file?
+
 ## Standard Library
 
 The Deno {% aTargetBlank "https://deno.land/std", "Standard Library" %}
 is modeled after that of the Go programming language.
-It is maintained by the Deno team,
+It is maintained and reviewed by the Deno team,
 providing more quality assurance than using third-party libraries.
 These modules are not installed by default and are
 downloaded and cached the first time a script that uses them is run.
@@ -616,8 +741,12 @@ downloaded and cached the first time a script that uses them is run.
 These libraries typically contain a `mod.ts` file
 that defines what is exported.
 
-TODO: Mention the "View Documentation" links on the pages for
-TODO: standard library source files. For example, http ... server.ts.
+To see documentation for a standard library source file,
+browse {% aTargetBlank "https://deno.land/", "deno.land" %},
+click "Standard Library" at the top,
+click the name of the library (such as `fs`),
+click a `.ts` source file (such as `mod.ts`),
+and click "View Documentation".
 
 For example, the `fs` library provides the following functions:
 
@@ -655,12 +784,6 @@ console.log(
   italic(green('two')),
   underline(blue('three'))
 );
-```
-
-A version can optionally be specified in URLs. For example:
-
-```js
-import {blue, green, red} from 'https://deno.land/std@0.79.0/fmt/colors.ts';
 ```
 
 The `io` library provides functions for input/output.
@@ -712,68 +835,7 @@ console.log('upper:', c.upperCase(s)); // ONE FINE DAY
 console.log('upperFirst:', c.upperFirstCase(s)); // One FINE day
 ```
 
-## Imports
-
-Deno source files import other files using the `import` statement,
-not the `require` function like in Node.js.
-The file to import can be specified with either a relative file path or a URL.
-TODO: Can it be an absolute file path?
-In both cases a file, not just a directory, must be specified.
-Unlike in Node.js, the filename `index.js` is not treated as
-the default filename and a file extension must be included.
-
-Deno does not use `npm` to install modules.
-Instead, `import` statements can specify module URLs
-that reference network resources such as those in GitHub.
-
-Imported files are cached by saving them in the directory
-specified in the `DENO_DIR` environment variable
-rather than in a `node_modules` directory.
-The directory is shared between all Deno projects
-rather and using a separate directory for each project
-as is done in Node.js.
-This saves disk space and avoids needing to
-reinstall previously used libraries for new projects.
-
-If the `DENO_DIR` environment variable is not set,
-the files are saved in an OS-specific location.
-
-- Windows: `%LOCALAPPDATA%/deno`
-- macOS: `\$HOME/Library/Caches/deno`
-- Linux: `\$XDG_CACHE_HOME/deno` or `\$HOME/.cache/deno`
-
-Downloaded dependencies are placed in the `deps` subdirectory.
-JavaScript files created by compiling TypeScript files
-are placed in the `gen` subdirectory.
-The `gen` directory contains
-a `file` directory for `.js` files
-generated from `.ts` files in the file system and
-a `https` directory for `.js` files
-generated from downloaded `.ts` files.
-
-Dependencies are not cataloged in a `package.json` file,
-which is not used at all.
-The many sub-commands of the `deno` command
-make npm scripts, implemented in a `package.json` file,
-less necessary.
-
-Spreading library URLs throughout the source files of a project
-can be undesirable, especially of some are repeated in multiple files.
-An alternate approach is to create a file like `src/deps.ts` (recommended name)
-containing lines like the following:
-
-```ts
-export {name1, name2, name3} from 'https://domain1/pkg1@v1/filename1.ts';
-export {name4, name5} from 'https://domain2/pkg2@v2/filename2.ts';
-```
-
-Then import from this file with lines like the following:
-
-```ts
-import {name1, name3, name4} from './deps.ts';
-```
-
-TODO: Isn't it odd to then have every source file only import from this one file?
+## Lock Files
 
 It is useful to record the version of each dependency being used
 so the same versions can be downloaded by multiple developers
@@ -1247,6 +1309,7 @@ async function getBodyJson(req: ServerRequest): Promise<string> {
 }
 
 async function getBodyText(req: ServerRequest): Promise<string> {
+  // Deno makes heavy use of the Uint8Array type.
   const buf: Uint8Array = await Deno.readAll(req.body);
   return decode(buf);
 }
