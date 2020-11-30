@@ -127,6 +127,13 @@ To get started with Deno and find documentation, see the
 
 ## Cons
 
+- The number of libraries that are compatible with Deno
+  is far less that the number of Node.js libraries.
+- Knowledge of existing Node.js libraries often doesn't help
+  when implementing an application in Deno and
+  time must be spent finding and learning how to use an alternate library.
+- Deno is currently slower than Node.js for some tasks.
+
 ## Installing
 
 Deno is installed as a single executable file.
@@ -216,6 +223,19 @@ Here's a summary of the commands. Details will be provided later.
 | `upgrade`     | upgrades `deno`                                                              |
 
 For an example of using the `install` command, see the "Watching" section.
+
+## REPLs
+
+A Read Eval Print Loop (REPL) tool is great for
+learning about the features of a programming language or runtime.
+The command `deno repl` or just `deno` starts a terminal-based REPL.
+
+There are also web-based REPLs.
+One is {% aTargetBlank "https://deno-playground.now.sh/", "Deno Playground" %}.
+This supports code formatting and sharing code with others.
+Another less attractive option is
+{% aTargetBlank "https://deno.town/", "deno.town" %},
+which doesn't support code formatting or sharing code.
 
 ## Running
 
@@ -733,7 +753,9 @@ generated from downloaded `.ts` files.
 
 Dependencies are not cataloged in a `package.json` file,
 which is not used at all.
-TODO: How do you script common actions?
+The many sub-commands of the `deno` command
+make npm scripts, implemented in a `package.json` file,
+less necessary.
 
 Spreading library URLs throughout the source files of a project
 can be undesirable, especially of some are repeated in multiple files.
