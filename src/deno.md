@@ -611,7 +611,8 @@ and returns a boolean rather than throwing.
 ## Bundling
 
 The `deno bundle` command bundles all the dependencies of a program
-into a single file. It takes input and output file paths.
+into a single file.
+It takes a `.js` or `.ts` file as input and produces a `.js` file.
 To bundle the program `demo.js` into `demob.js`,
 enter `deno bundle demo.js demob.js`.
 To run the bundled version, enter `deno run demob.js`.
@@ -1127,6 +1128,32 @@ To write and read text files:
 const text = 'This is a story\nbout a man named Jed';
 await Deno.writeTextFile('demo.txt', text);
 const result = await Deno.readTextFile('demo.txt');
+```
+
+## Environment Variables
+
+The `Deno.env` variable provides methods to
+get, set, and delete environment variables.
+Using these requires the `--allow-env` flag.
+
+| Operation | Function                        |
+| --------- | ------------------------------- |
+| get       | `Deno.env.get("name")`          |
+| set       | `Deno.env.set("name", "value")` |
+| delete    | `Deno.env.delete("name")`       |
+
+The shell in which the Deno program runs is no affected
+by the `set` or `delete` methods.
+
+For example:
+
+```js
+Deno.env.set('COLOR', 'yellow');
+let color = Deno.env.get('COLOR');
+console.log(color); // yellow
+Deno.env.delete('COLOR');
+color = Deno.env.get('COLOR');
+console.log(color); // undefined
 ```
 
 ## Parsing command line arguments
