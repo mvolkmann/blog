@@ -147,7 +147,7 @@ To get started with Deno and find documentation, see the
   time must be spent finding and learning how to use an alternate library.
 - Deno is currently slower than Node.js for some tasks.
 
-## Installing
+## Installing `deno`
 
 Deno is installed as a single executable file.
 To install it:
@@ -610,7 +610,28 @@ and returns a boolean rather than throwing.
 
 ## Bundling
 
-TODO: Cover the `deno bundle` command.
+The `deno bundle` command bundles all the dependencies of a program
+into a single file. It takes input and output file paths.
+To bundle the program `demo.js` into `demob.js`,
+enter `deno bundle demo.js demob.js`.
+To run the bundled version, enter `deno run demob.js`.
+See this {% aTargetBlank "https://github.com/denoland/deno/issues/8211",
+"issue" %}.
+
+## Installing Programs
+
+The `deno install` command creates an executable shell script
+that runs a given Deno program.
+Any required permission options must be included in this command.
+By default the script is placed in `$HOME/.deno/bin`
+and has the same name as the input source file with no file extension.
+To change the name of the executable,
+specify the name with the `--name` or `-n` option.
+To change the location of the executable,
+specify the location with the `--root` option.
+
+The generated script uses the `deno run` command to execute the program
+just as you would when running it yourself.
 
 ## Libraries
 
