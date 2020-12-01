@@ -640,6 +640,7 @@ In order for users to run the app they would need to:
 
 - get the `.js` file created by the `bundle` command
 - get the script created by the `install` command
+- modify the script to refer to the file path of the copied `.js` file
 - install Deno
 - run the script using the same shell
   that was specified in the `install` command
