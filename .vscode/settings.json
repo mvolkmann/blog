@@ -466,6 +466,7 @@
     "stubgen",
     "subclassing",
     "subcommand",
+    "subcommands",
     "submodule",
     "subpixel",
     "subprocesses",

@@ -633,6 +633,20 @@ specify the location with the `--root` option.
 The generated script uses the `deno run` command to execute the program
 just as you would when running it yourself.
 
+## Shell Completions
+
+The `deno completion` command generations shell-specific commands
+to define shell completions for `deno` subcommands and their options.
+The supported shells are zsh, bash, fish, powershell, and elvish.
+For example, to generate completions for the fish shell
+and enable their use enter the following command:
+
+```bash
+deno completions fish > $HOME/.config/fish/completions/deno-completions.fish
+```
+
+TODO: Is this working?
+
 ## Libraries
 
 Deno library code comes from three categories.
@@ -750,7 +764,7 @@ generated from downloaded `.ts` files.
 
 Dependencies are not cataloged in a `package.json` file,
 which is not used at all.
-The many sub-commands of the `deno` command
+The many subcommands of the `deno` command
 make npm scripts, implemented in a `package.json` file,
 less necessary.
 
