@@ -634,6 +634,18 @@ specify the location with the `--root` option.
 The generated script uses the `deno run` command to execute the program
 just as you would when running it yourself.
 
+Bundling and installing a Deno application
+is not a good solution for distributed apps to users.
+In order for users to run the app they would need to:
+
+- get the `.js` file created by the `bundle` command
+- get the script created by the `install` command
+- install Deno
+- run the script using the same shell
+  that was specified in the `install` command
+
+A better solution using `deno compile` is coming soon.
+
 ## Shell Completions
 
 The `deno completion` command generations shell-specific commands
