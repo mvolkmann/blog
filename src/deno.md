@@ -117,8 +117,13 @@ To get started with Deno and find documentation, see the
 
 ## Pros
 
-- Deno supports some modern JavaScript features
-  that are not yet implemented in other JavaScript environments.
+- Deno has unique support for building secure applications
+  that are limited in their ability to read/write files
+  and access network resources.
+- Deno makes using TypeScript easier because it removes the need to
+  install the TypeScript compiler and configure a build process.
+- Deno supports modern JavaScript features that are not yet
+  implemented in other JavaScript environments.
   Examples include the {% aTargetBlank
   "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining",
   "optional chaining operator" %} (`?.`),
@@ -127,11 +132,16 @@ To get started with Deno and find documentation, see the
   "nullish coalescing operator" %} (`??`),
   and {% aTargetBlank "https://github.com/tc39/proposal-top-level-await",
   "top-level `await`" %}.
+- Deno includes many development tools to support common activities such as
+  linting, code formatting, running tests, and bundling code into a single file.
+  This removes the need to select, install, and configure tools for these.
 
 ## Cons
 
 - The number of libraries that are compatible with Deno
   is far less that the number of Node.js libraries.
+  Many Node.js libraries cannot be used directly by Deno
+  because that use APIs that Deno cannot make secure.
 - Knowledge of existing Node.js libraries often doesn't help
   when implementing an application in Deno and
   time must be spent finding and learning how to use an alternate library.
@@ -598,6 +608,10 @@ In addition, test code can import and throw `AssertionError`.
 The `equal` function checks for deep equality
 and returns a boolean rather than throwing.
 
+## Bundling
+
+TODO: Cover the `deno bundle` command.
+
 ## Libraries
 
 Deno library code comes from three categories.
@@ -737,6 +751,94 @@ import {name1, name3, name4} from './deps.ts';
 
 TODO: Isn't it odd to then have every source file only import from this one file?
 
+## Import Maps
+
+Imports maps are currently an experimental feature
+that only work if the `--unstable` flag is included.
+They define a mapping from keywords to URLs
+and allow the keywords to be used in place of URLs in `import` statements.
+The mapping is specified in a JSON file
+which is referenced by the `--importmap` option.
+
+For example, the file `import_map.json` could contain:
+
+```json
+{
+  "imports": {
+    "date-fns": "https://cdn.deno.land/date_fns/versions/v2.15.0/raw/index.js"
+  }
+}
+```
+
+A script in the file `demo.js` can import these as follows:
+
+```js
+// Example function calls take directly from https://date-fns.org/.
+import {format, formatDistance, formatRelative, subDays} from 'date-fns';
+
+console.log(format(new Date(), "'Today is a' iiii"));
+// example output: Today is a Monday
+
+console.log(formatDistance(subDays(new Date(), 3), new Date()));
+// output: 3 days ago
+
+console.log(formatRelative(subDays(new Date(), 3), new Date()));
+// example output: last Friday at 7:26 p.m.
+```
+
+To run this, enter the following:
+
+```bash
+deno run --import-map=import_map.json --unstable demo.js
+```
+
+## Lock Files
+
+It is useful to record the version of each dependency being used
+so the same versions can be downloaded by multiple developers
+and in CI/CD environments.
+A lock file does just this.
+Assuming all dependencies are exported from the file `src/deps.ts`,
+enter the following command to create a lock file named `lock.json`.
+
+```bash
+deno cache --lock=lock.json --lock-write src/deps.ts
+```
+
+Add the lock file to version control.
+
+To install all the dependency versions specified in a lock file,
+enter the following command:
+
+```bash
+deno cache --reload --lock=lock.json src/deps.ts
+```
+
+The cached files continue to be used
+without checking whether dependencies have been updated.
+To update the cached files to their latest versions,
+enter `deno cache --reload`.
+
+To update a single module to a specific version,
+enter a command like the following:
+
+```bash
+deno cache --reload=https://some-domain/some-module@version main.ts
+```
+
+After doing this, the lock file can be updated by
+entering the command for creating it that was described earlier.
+
+To run a Deno program using only cached modules,
+preventing any new downloads, enter a command like the following:
+
+```bash
+deno run --lock=lock.json --cached-only main.ts
+```
+
+This will fail if any source file imports a module with a URL
+that has not previously been cached.
+
 ## Standard Library
 
 The Deno {% aTargetBlank "https://deno.land/std", "Standard Library" %}
@@ -745,6 +847,33 @@ It is maintained and reviewed by the Deno team,
 providing more quality assurance than using third-party libraries.
 These modules are not installed by default and are
 downloaded and cached the first time a script that uses them is run.
+
+Highlights from the Deno standard library
+are described in the following table:
+
+| Module      | Description                                                                        |
+| ----------- | ---------------------------------------------------------------------------------- |
+| archive     | tars and untars files                                                              |
+| bytes       | operates on Uint8Array values                                                      |
+| datetime    | parses date strings, formats `Date` objects, and extracts data from them           |
+| encoding    | deals with many data encodings such as base32, binary, csv, toml, and yaml         |
+| flags       | command line argument parser                                                       |
+| fmt         | formatted output (`sprintf`) including colors and styles                           |
+| fs          | file system manipulation                                                           |
+| hash        | creates hashes (ex. md5) and applies them to data                                  |
+| http        | for implementing HTTP servers                                                      |
+| io          | reading from and writing to streams, including reading by lines                    |
+| log         | logging with debug, info, warning, error, and critical levels                      |
+| mime        | reads and writes multipart form data                                               |
+| node        | compatibility layer for the Node.js standard library (partially implemented)       |
+| path        | manipulates file paths; currently on generates RegExps from glob expressions       |
+| permissions | gets permission flag strings and grants permissions (see `Deno.permissions` first) |
+| signal      | generates and listens for OS signals such as SIGINT (ctrl-c)                       |
+| testing     | assertions for implementing unit tests                                             |
+| textproto   | `TextProtoReader` class for reading from a `BufReader`                             |
+| uuid        | generates and validates unique identifiers                                         |
+| wasi        | implements the WebAssembly System Interface                                        |
+| ws          | for implementing WebSocket servers                                                 |
 
 These libraries typically contain a `mod.ts` file
 that defines what is exported.
@@ -812,10 +941,9 @@ for await (const line of readLines(reader)) {
 
 Many third party modules are registered at
 {% aTargetBlank "https://deno.land/x", "deno.land/x" %}.
-The code for this modules is typically in a GitHub repository.
-This site forwards requests to the actual location.
-
-As of 11/26/2020 there are 1315 registered modules.
+The code for these modules is typically in a GitHub repository.
+This site redirects requests to the actual location.
+As of 11/30/2020 there were 1334 modules here.
 
 One example is the `case` module which provides many functions
 that convert multi-word strings where words are separated by spaces
@@ -843,52 +971,12 @@ console.log('upper:', c.upperCase(s)); // ONE FINE DAY
 console.log('upperFirst:', c.upperFirstCase(s)); // One FINE day
 ```
 
-## Lock Files
-
-It is useful to record the version of each dependency being used
-so the same versions can be downloaded by multiple developers
-and in CI/CD environments.
-A lock file does just this.
-Assuming all dependencies are exported from the file `src/deps.ts`,
-enter the following command to create a lock file named `lock.json`.
-
-```bash
-deno cache --lock=lock.json --lock-write src/deps.ts
-```
-
-Add the lock file to version control.
-
-To install all the dependency versions specified in a lock file,
-enter the following command:
-
-```bash
-deno cache --reload --lock=lock.json src/deps.ts
-```
-
-The cached files continue to be used
-without checking whether dependencies have been updated.
-To update the cached files to their latest versions,
-enter `deno cache --reload`.
-
-To update a single module to a specific version,
-enter a command like the following:
-
-```bash
-deno cache --reload=https://some-domain/some-module@version main.ts
-```
-
-After doing this, the lock file can be updated by
-entering the command for creating it that was described earlier.
-
-To run a Deno program using only cached modules,
-preventing any new downloads, enter a command like the following:
-
-```bash
-deno run --lock=lock.json --cached-only main.ts
-```
-
-This will fail if any source file imports a module with a URL
-that has not previously been cached.
+Another site for third party Deno modules is
+{% aTargetBlank "https://nest.land/", "nest.land" %}.
+This is a free repository of Deno modules that uses
+{% aTargetBlank "https://www.arweave.org/", "Arweave" %}
+to permanently store them using Blockchain.
+As of 11/30/2020 there were 196 registered modules here.
 
 ## deno.land
 
@@ -905,6 +993,7 @@ the `Deno` global variable is made available.
 It has a large number of properties, most of which are functions.
 Examples include:
 
+TODO: Do something with this list!
 args - array of command-line arguments
 Buffer
 chdir
@@ -1007,8 +1096,65 @@ const result = await Deno.readTextFile('demo.txt');
 
 ## Parsing command line arguments
 
-See the {% aTargetBlank "https://deno.land/x/yargs@v16.1.1-deno", "Yargs" %}
-library.
+There are several Deno modules for parsing command line arguments.
+The standard library provides the
+{% aTargetBlank "https://deno.land/std/flags", "flags" %} module.
+Third party options include
+{% aTargetBlank "https://deno.land/x/yargs@v16.1.1-deno", "yargs" %} and
+{% aTargetBlank "https://github.com/c4spar/deno-cliffy", "Cliffy" %}.
+
+The `flags` module provides a `parse` function that gathers
+command line flags into an object and returns it.
+Default values can be specified for each flag.
+Additional values after `--` are gathered into an array stored in the key "\_".
+
+An options method to be called with unsupported flags,
+named `unknown`, can be supplied.
+These flags will still be added to the returned object
+unless this method returns `false`.
+
+Here is an example of using the `flags` module.
+It recognizes the flags "alpha", "beta", and "gamma".
+The value of the "alpha" flag is coerced to a boolean.
+The values of the "beta" and "gamma" flags are treated as strings.
+There is no support for treating flag values as numbers,
+but they can be converted to numbers after being parsed.
+
+```js
+import {parse} from 'https://deno.land/std@0.79.0/flags/mod.ts';
+
+const options = {
+  boolean: ['alpha'],
+  string: ['beta', 'gamma'],
+  default: {
+    alpha: false,
+    beta: 1,
+    gamma: 'Greek'
+  },
+  unknown(flag) {
+    console.error('unsupported flag', flag);
+    return false;
+  }
+};
+const args = parse(Deno.args, options);
+console.table(args);
+```
+
+When this is run with the command
+`deno run flags_demo.js --alpha=foo --beta=19 --delta -- foo bar`
+it outputs the following:
+
+```text
+unsupported flag ---delta
+┌───────┬───────┬───────┬─────────┐
+│ (idx) │   0   │   1   │ Values  │
+├───────┼───────┼───────┼─────────┤
+│   _   │ "foo" │ "bar" │         │
+│ alpha │       │       │  true   │
+│ beta  │       │       │  "19"   │
+│ gamma │       │       │ "Greek" │
+└───────┴───────┴───────┴─────────┘
+```
 
 ## Databases
 
@@ -1282,7 +1428,7 @@ for await (const req of server) {
 ```
 
 Here is a more advanced HTTP server written in TypeScript.
-Typically one would use a framework such as oak or abc for this,
+Typically one would use a framework such as oak (covered below) for this,
 but it demonstrates what is possible using only the standard library.
 It supports two operations, "add" and "multiply",
 that are invoked with requests like these:
@@ -1400,6 +1546,10 @@ There are many HTTP server libraries for Deno.
 Currently the most popular is
 {% aTargetBlank "https://oakserver.github.io/oak/", "oak" %}.
 It is inspired by the Koa package for Node.js.
+
+Other HTTP server libraries to consider include
+{% aTargetBlank "https://github.com/zhmushan/abc", "abc" %} and
+{% aTargetBlank "https://deno.land/x/drash@v1.3.0", "drash" %}.
 
 Here is an example of implementing a REST server in oak
 that supports CRUD operations on dog objects.
