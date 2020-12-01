@@ -1113,7 +1113,7 @@ named `unknown`, can be supplied.
 These flags will still be added to the returned object
 unless this method returns `false`.
 
-Here is an example of using the `flags` module.
+Here is an example of using the `flags` module in the file `flags_demo.js`.
 It recognizes the flags "alpha", "beta", and "gamma".
 The value of the "alpha" flag is coerced to a boolean.
 The values of the "beta" and "gamma" flags are treated as strings.
@@ -1154,6 +1154,69 @@ unsupported flag ---delta
 │ beta  │       │       │  "19"   │
 │ gamma │       │       │ "Greek" │
 └───────┴───────┴───────┴─────────┘
+```
+
+Here is the same example of using the `yargs` module in the file `yargs_demo.ts`.
+It also supports "aliases" which enable shorthand options
+(ex. `--alpha` or `-a`).
+
+```ts
+import yargs from 'https://deno.land/x/yargs/deno.ts';
+import {Arguments} from 'https://deno.land/x/yargs/deno-types.ts';
+
+const args = yargs(Deno.args)
+  .option('alpha', {
+    alias: 'a',
+    default: false,
+    description: 'first greek',
+    type: 'boolean'
+  })
+  .option('beta', {
+    alias: 'b',
+    default: 1,
+    description: 'second greek',
+    type: 'number'
+  })
+  .option('gamma', {
+    alias: 'g',
+    default: 'Greek',
+    description: 'third greek',
+    type: 'string'
+  })
+  .strict().argv; // only allow described options
+console.table(args);
+```
+
+When this is run with the command
+`deno run yargs_demo.ts --alpha=foo --beta=19 --gamma=delta -- foo bar`
+it outputs the following:
+
+```text
+┌───────┬───────┬───────┬────────────┐
+│ (idx) │   0   │   1   │   Values   │
+├───────┼───────┼───────┼────────────┤
+│   _   │ "foo" │ "bar" │            │
+│ alpha │       │       │   false    │
+│   a   │       │       │   false    │
+│ beta  │       │       │     19     │
+│   b   │       │       │     19     │
+│ gamma │       │       │  "delta"   │
+│   g   │       │       │  "delta"   │
+│  $0   │       │       │ "deno run" │
+└───────┴───────┴───────┴────────────┘
+```
+
+The yargs module supports using the `--help` flag
+to output help on the supported flags.
+For example, `deno run yargs_demo.ts --help` outputs the following:
+
+```text
+Options:
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
+  -a, --alpha    first greek                          [boolean] [default: false]
+  -b, --beta     second greek                              [number] [default: 1]
+  -g, --gamma    third greek                         [string] [default: "Greek"]
 ```
 
 ## Databases
