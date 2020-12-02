@@ -120,8 +120,9 @@ To get started with Deno and find documentation, see the
 - Deno has unique support for building secure applications
   that are limited in their ability to read/write files
   and access network resources.
-- Deno makes using TypeScript easier because it removes the need to
-  install the TypeScript compiler and configure a build process.
+- Deno has built-in support for TypeScript which makes using it easier
+  because it removes the need to install the TypeScript compiler
+  and configure a build process.
 - Deno supports modern JavaScript features that are not yet
   implemented in other JavaScript environments.
   Examples include the {% aTargetBlank
@@ -249,6 +250,79 @@ The `Deno.permissions.revoke` function removes a permission.
 This is useful when actions that require the permission have completed
 and you wish to ensure that those actions cannot be performed again
 for the remainder of the program.
+
+## Example Script
+
+Here's an example Deno script to whet your appetite.
+It prompts for a U.S. ZIP code and uses the
+{% aTargetBlank "https://openweathermap.org/api", "OpenWeather API" %}
+to get the city name, current temperature, and current wind speed.
+It was inspired by a
+{% aTargetBlank "https://www.youtube.com/watch?v=3MapKMsioTo", "talk" %}
+given by Luca Casonato at an ING Tech Meetup on November 5, 2020.
+
+```ts
+import {bold, cyan} from 'https://deno.land/std@0.79.0/fmt/colors.ts';
+
+function print(label: string, value: string): void {
+  console.log(bold(cyan(label + ':')), value);
+}
+
+try {
+  // Web browsers implement the "prompt" function
+  // to prompt a user for input using a modal dialog.
+  // Deno implements this to prompt in a terminal.
+  const zipCode = prompt('U.S. ZIP code:');
+  if (!zipCode) {
+    console.error('A ZIP code must be entered.');
+    Deno.exit(1);
+  }
+
+  // Deno supports top level await.
+  const secrets = await Deno.readTextFile('secrets.json');
+  const {API_KEY} = JSON.parse(secrets);
+  const url =
+    'https://api.openweathermap.org/data/2.5/weather' +
+    `?zip=${zipCode}&units=imperial&appid=${API_KEY}`;
+
+  const res = await fetch(url);
+  const json = await res.json();
+  // This API includes JSON error messages in the response body.
+  if (!res.ok) throw new Error(json.message);
+
+  print('\nCity', json.name);
+  print('Temperature', json.main.temp + '°F');
+  print('Wind speed', json.wind.speed + ' mph');
+} catch (e) {
+  // console methods accept a subset of CSS styling.
+  console.error('%c' + e.message, 'color: red');
+}
+```
+
+To check the code for issues, enter `deno lint`.
+
+To format the code, enter `deno fmt`.
+
+Assuming Deno is installed and you have the file
+`secrets.json` that contains your OpenWeather API key,
+the following command runs the script.
+Note the permission flags that are required.
+They only allow reading from a specific file
+and sending network requests to a specific domain.
+
+```bash
+deno run --allow-read=secrets.json --allow-net=api.openweathermap.org weather.ts
+```
+
+Here is a sample session, minus the colors:
+
+```text
+U.S. ZIP code: 12345
+
+City: Schenectady
+Temperature: 40.64°F
+Wind speed: 11.41 mph
+```
 
 ## Command Summary
 
