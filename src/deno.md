@@ -447,33 +447,45 @@ denon run --allow-net my_server.ts
 The "Deno" VS Code extension provides:
 
 - intellisense
+- ES module imports
 - import URL completion
+- import maps
 - diagnostics with quick fixes
 - optional use of `deno fmt` for code formatting
 - TypeScript type definitions
 
-After installing, add the following to the user settings JSON:
+Install and configure this extension.
+
+Most likely you will want this extension to only run on
+`.js` and `.ts` files that contain Deno code.
+Rather than configure this extension with global settings,
+create a `.vscode` directory at the top of each Deno project directory.
+Then create the file `settings.json` inside it with the following content:
 
 ```json
-"deno.enable": true,
-"deno.import_intellisense_origins": {
-  "https://deno.land": true,
-  "https://deno.land/x": true
-},
-"deno.lint": true,
-"deno.unstable": true,
+{
+  "deno.enable": true,
+  "deno.import_intellisense_origins": {
+    "https://deno.land": true,
+    "https://deno.land/x": true
+  },
+  "deno.lint": true,
+  "deno.unstable": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  }
+}
 ```
 
 Enabling `deno.unstable` is required to use `deno lint`.
 
-To use `deno fmt` for formatting TypeScript files,
-regardless of whether they will be run by Deno, add the following:
-
-```json
-"[typescript]": {
-  "editor.defaultFormatter": "denoland.vscode-deno",
-},
-```
+This should use `deno fmt` to format `.js` and `.ts` files in the project,
+but this is not working for me.
+See this {% aTargetBlank
+"https://github.com/denoland/vscode_deno/issues/267", "issue" %}.
 
 ## Linting
 
