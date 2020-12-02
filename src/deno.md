@@ -324,6 +324,18 @@ Temperature: 40.64°F
 Wind speed: 11.41 mph
 ```
 
+Repeatedly typing that long command to run this would be tedious.
+We could write a shell script to run it, but Deno can do that for us.
+Just recall the command, change the "run" subcommand to "install",
+and execute it.
+This writes a shell script to `$HOME/.deno/bin`
+with the same name as your source file.
+It will contain the `deno run` command with all its options.
+To give the script a different name,
+specify the name using the `--name` (or `-n`) flag.
+As long as that "bin" directory is in your `PATH`,
+it can now be executed by just entering the script name.
+
 ## Command Summary
 
 Deno commands start with `deno` followed by a command name and options.
