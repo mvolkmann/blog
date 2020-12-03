@@ -370,6 +370,7 @@ For an example of using the `install` command, see the "Watching" section.
 A Read Eval Print Loop (REPL) tool is great for
 learning about the features of a programming language or runtime.
 The command `deno repl` or just `deno` starts a terminal-based REPL.
+It supports tab completion and syntax highlighting.
 
 There are also web-based REPLs.
 One is {% aTargetBlank "https://deno-playground.now.sh/", "Deno Playground" %}.
@@ -726,10 +727,11 @@ that runs a given Deno program.
 Any required permission options must be included in this command.
 By default the script is placed in `$HOME/.deno/bin`
 and has the same name as the input source file with no file extension.
-To change the name of the executable,
+To change the name of the executable created,
 specify the name with the `--name` or `-n` option.
 To change the location of the executable,
-specify the location with the `--root` option.
+specify it with the `--root` option or
+set the environment variable `DENO_INSTALL_ROOT`.
 
 The generated script uses the `deno run` command to execute the program
 just as you would when running it yourself.
@@ -793,6 +795,9 @@ These include the following from the Web API:
   - `alert`, `confirm`, and `prompt`
 
     These write to stdout and read from stdin.
+    All of them pause execution and wait for the user to reply.
+    `alert` and `prompt` wait for the enter/return key.
+    `confirm` waits for the "y" or "n" key.
 
   - `setTimeout` and `clearTimeout`
 
@@ -1024,6 +1029,8 @@ are described in the following table:
 | wasi        | implements the WebAssembly System Interface                                        |
 | ws          | for implementing WebSocket servers                                                 |
 
+TODO: Is `datetime` being renamed to `date`? See https://github.com/denoland/deno/issues/8594.
+
 These libraries typically contain a `mod.ts` file
 that defines what is exported.
 
@@ -1090,13 +1097,22 @@ for await (const line of readLines(reader)) {
 
 Many third party modules are registered at
 {% aTargetBlank "https://deno.land/x", "deno.land/x" %}.
-The code for these modules is typically in a GitHub repository.
-This site redirects requests to the actual location.
-As of 11/30/2020 there were 1334 modules here.
+The code for these modules originates from a public GitHub repository.
+When a module is added to `deno.land/x`,
+an immutable copy is made in an S3 bucket and it is served from there.
+As of 12/3/2020 there were 1342 modules here.
+
+To add your own modules to `deno.land/x`,
+browse the site and click the "Add a module" button
+under "How do I add a module".
+Apply a git tag to each version.
+These tags are used as version numbers in import URLs.
 
 One example is the `case` module which provides many functions
 that convert multi-word strings where words are separated by spaces
 into another string.
+Follow the instructions to add a
+"Branch or tag creation" webhook to your repository.
 
 ```js
 import * as c from 'https://deno.land/x/case@v2.1.0/mod.ts';
