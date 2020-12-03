@@ -202,6 +202,8 @@ Deno supports the following permission flags:
   For an example, see {% aTargetBlank
   "https://denolib.gitbook.io/guide/codebase-basics/example-adding-a-deno-api",
   "here" %}.
+  Keep in mind that plugins are not limited by
+  the normal Deno security restrictions.
   Plugins are currently an unstable feature.
 - `--allow-read=<allow-read>`  
   This allows read access to the file system.
@@ -358,7 +360,7 @@ Here's a summary of the commands. Details will be provided later.
 | `repl`        | starts a Read Eval Print Loop                                                |
 | `run`         | runs a script from a file or URL                                             |
 | `test`        | runs tests                                                                   |
-| `types`       | displays information about built-in types                                    |
+| `types`       | displays information about built-in types; can use in your code              |
 | `upgrade`     | upgrades `deno`                                                              |
 
 TODO: Add information on some of these commands that you haven't covered yet.
@@ -666,8 +668,11 @@ Here is a simple module defined in `statistics.ts`:
 export function average(...numbers: number[]): number {
   const {length} = numbers;
   if (length === 0) return 0;
-  const sum = numbers.reduce((acc, n) => acc + n);
-  return sum / length;
+  return sum(...numbers) / length;
+}
+
+export function sum(...numbers: number[]): number {
+  return numbers.reduce((acc, n) => acc + n, 0);
 }
 ```
 
@@ -675,13 +680,20 @@ Here is a file that provides tests for the `average` function.
 
 ```ts
 import {assertEquals} from 'https://deno.land/std/testing/asserts.ts';
-import {average} from './statistics.ts';
+import {average, sum} from './statistics.ts';
 
-Deno.test('statistics', () => {
+Deno.test('average', () => {
   assertEquals(average(), 0);
   assertEquals(average(1), 1);
   assertEquals(average(1, 2), 1.5);
   assertEquals(average(1, 2, 3), 2);
+});
+
+Deno.test('sum', () => {
+  assertEquals(sum(), 0);
+  assertEquals(sum(1), 1);
+  assertEquals(sum(1, 2), 3);
+  assertEquals(sum(1, 2, 3), 6);
 });
 ```
 
@@ -708,6 +720,10 @@ In addition, test code can import and throw `AssertionError`.
 
 The `equal` function checks for deep equality
 and returns a boolean rather than throwing.
+
+To run the tests and report test coverage,
+enter `deno test --coverage --unstable`.
+This outputs any uncovered source lines.
 
 ## Bundling
 
