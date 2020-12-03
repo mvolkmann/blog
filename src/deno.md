@@ -94,6 +94,8 @@ TODO: Try this with Python!
 
 To get started with Deno and find documentation, see the
 {% aTargetBlank "https://deno.land/manual", "Deno Manual" %}.
+The {% aTargetBlank "https://discord.gg/deno", "Deno Discord channel" %}
+is another great resource.
 
 ## Differences from Node.js
 
@@ -275,7 +277,7 @@ try {
   const zipCode = prompt('U.S. ZIP code:');
   if (!zipCode) {
     console.error('A ZIP code must be entered.');
-    Deno.exit(1);
+    Deno.exit(1); // exits program with a status code
   }
 
   // Deno supports top level await.
