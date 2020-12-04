@@ -499,6 +499,13 @@ in and below the current directory, enter `deno lint --unstable`.
 
 To see a list of the rules checked by `deno lint`,
 enter `deno lint --rules --unstable`.
+This includes all of the rules in the
+{% aTargetBlank "https://eslint.org/docs/rules/", "eslint:recommended" %} set
+and many of the rules in the {% aTargetBlank
+"https://www.npmjs.com/package/@typescript-eslint/eslint-plugin#supported-rules",
+"plugin:@typescript-eslint/recommended" %} set.
+See this {% aTargetBlank "https://github.com/denoland/deno_lint/issues/556",
+"issue" %}.
 
 To prevent the linter from running on a file,
 add the following comment at the top:
@@ -551,6 +558,16 @@ but it seems to not currently be configurable.
 
 If the formatting performed by `deno fmt` is not to your liking,
 Prettier can be used instead.
+
+## Getting Information
+
+To get the locations of cache directories used by Deno, enter `deno info`.
+This provides the cache directory,
+the subdirectory where remote modules are cached, and
+the subdirectory where the output of the TypeScript compiler is stored.
+
+To install a remote module and see a list of its dependencies,
+enter `deno info {module-url}`.
 
 ## Generating Documentation
 
@@ -736,6 +753,10 @@ To run the bundled version, enter `deno run demob.js`.
 See this {% aTargetBlank "https://github.com/denoland/deno/issues/8211",
 "issue" %}.
 
+Some bundles can be run in web browsers.
+However, this command does not modify the use of top level `await`,
+so code that uses that feature will only run in browsers that support it.
+
 ## Installing Programs
 
 The `deno install` command creates an executable shell script
@@ -876,15 +897,18 @@ and end the section with `performance.measure('some-name');`.
 Here is an example of dispatching and listening for custom events:
 
 ```ts
-const listener = (event: ProgressEvent) => {
+// ProgressEvent extends EventTarget, not Event.
+// But the first parameter of an EventListener is supposed to be an Event.
+// @ts-ignore
+const listener = (event: ProgressEvent): void => {
   // Report on the progress.
   console.log('loaded =', event.loaded);
   if (event.loaded >= event.total) {
-    window.removeEventListener('myCustomEvent', listener);
+    removeEventListener('myCustomEvent', listener);
     clearInterval(intervalId);
   }
 };
-window.addEventListener('myCustomEvent', listener);
+addEventListener('myCustomEvent', listener);
 
 let loaded = 0;
 const intervalId = setInterval(() => {
@@ -895,7 +919,7 @@ const intervalId = setInterval(() => {
     loaded,
     total: 100
   });
-  window.dispatchEvent(event);
+  dispatchEvent(event);
 }, 200);
 ```
 
@@ -1226,6 +1250,40 @@ As of 11/23/2020 it contained 1,302 modules.
 Examples include lodash, date_fns, ramda, xstate, ky (HTTP client), and
 i18next (internationalization framework).
 
+## Using Node Packages
+
+Node packages that only use Node.js APIs that have been polyfilled by Deno
+can be used in Deno programs. For example,
+{% aTargetBlank "https://www.npmjs.com/package/lodash", "lodash" %} can be used.
+To do this:
+
+1. Create a `package.json` file by entering `npm init`.
+2. Install Node package with the `npm install` command
+   to add them in a `node_modules` subdirectory.
+3. Require them with the code like the following.
+
+```js
+import {createRequire} from 'https://deno.land/std@0.79.0/node/module.ts';
+const require = createRequire(import.meta.url);
+const _ = require('lodash');
+
+const scores = [87, 73, 94];
+console.log('first score =', _.first(scores)); // 87
+console.log('last score =', _.last(scores)); // 94
+```
+
+Deno provides polyfills for some Node packages.
+See the list at {% aTargetBlank
+"https://deno.land/std@0.79.0/node", "Supported Builtins" %}.
+Use the `require` function to load these.
+For example, to load the `path` polyfill:
+
+```js
+import {createRequire} from 'https://deno.land/std@0.79.0/node/module.ts';
+const require = createRequire(import.meta.url);
+const path = require('path');
+```
+
 ## Deno Global Variable
 
 When a script is run with `deno run`,
@@ -1296,42 +1354,47 @@ writeSync
 writeTextFile
 writeTextFileSync
 
-build - an object with `arch`, `env`, `os`, `target`, and `vendor` properties
+`build` - an object with `arch`, `env`, `os`, `target`, and `vendor` properties
 
-env - an object with the functions `delete`, `get`, `set`, and `toObject`
+`env` - an object with the functions `delete`, `get`, `set`, and `toObject`
 
-errors - an object whose properties are
-the following error constructor functions:
+`errors` - an object whose properties are
+the following error constructor functions
+which can be used to create errors thrown by your code:
 
-- AddrInUse
-- AddrNotAvailable
-- AlreadyExists
-- BadResource
-- BrokenPipe
-- Busy
-- ConnectionAborted
-- ConnectionRefused
-- ConnectionReset
-- Http
-- Interrupted
-- InvalidData
-- NotConnected
-- NotFound
-- NotSupported
-- PermissionDenied
-- TimedOut
-- UnexpectedEof
-- WriteZero
+- `AddrInUse`
+- `AddrNotAvailable`
+- `AlreadyExists`
+- `BadResource`
+- `BrokenPipe`
+- `Busy`
+- `ConnectionAborted`
+- `ConnectionRefused`
+- `ConnectionReset`
+- `Http`
+- `Interrupted`
+- `InvalidData`
+- `NotConnected`
+- `NotFound`
+- `NotSupported`
+- `PermissionDenied`
+- `TimedOut`
+- `UnexpectedEof`
+- `WriteZero`
 
-version - an object with the properties `deno`, `typescript`, and `v8`
+`version` - an object with the properties `deno`, `typescript`, and `v8`
 whose values are all version numbers
 
 To write and read text files:
 
 ```ts
 const text = 'This is a story\nbout a man named Jed';
-await Deno.writeTextFile('demo.txt', text);
-const result = await Deno.readTextFile('demo.txt');
+try {
+  await Deno.writeTextFile('demo.txt', text);
+  const result = await Deno.readTextFile('demo.txt');
+} catch (e) {
+  // handle errors
+}
 ```
 
 ## Environment Variables
