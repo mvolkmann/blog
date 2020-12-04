@@ -802,9 +802,33 @@ These include the following from the Web API:
 
     `console.table(object)` draws table border lines in the terminal.
 
-  - `window`
+    The other methods can style their output using the following CSS properties:
 
-- functions
+    - `color` with any CSS color value like a name or hex value preceded by `#`
+    - `background-color` with a color value
+    - `font-style` with values like `normal` and `italic`
+    - `font-weight` with values like `normal` and `bold`
+    - `text-decoration-color` with a color value (DOESN'T WORK!)
+    - `text-decoration-line` with values like `none`, `underline`, and `line-through`
+
+    To use CSS properties, pass two or more strings to the method.
+    The first string contains the text to output
+    and `%c` at each location where the styling should change.
+    Supply one CSS string for each occurrence of `%c` in the first string.
+
+    For example:
+
+    ```js
+    console.log(
+      '%cHello, %cWorld!',
+      'color: red; background-color: yellow; font-style: italic',
+      'color: blue; font-weight: bold'
+    );
+    ```
+
+* `window`
+
+* functions
 
   - `fetch` for sending HTTP requests
 
@@ -823,7 +847,7 @@ These include the following from the Web API:
 
   - `atob` and `btoa` for converting to and from Base64 encoding
 
-- classes
+* classes
   - `Event`
   - `EventTarget`
   - `File`
@@ -1013,7 +1037,8 @@ that has not previously been cached.
 
 The Deno {% aTargetBlank "https://deno.land/std", "Standard Library" %}
 is modeled after that of the Go programming language.
-It is maintained and reviewed by the Deno team,
+It is implemented in TypeScript.
+The Deno core team maintains and reviews it,
 providing more quality assurance than using third-party libraries.
 These modules are not installed by default and are
 downloaded and cached the first time a script that uses them is run.
