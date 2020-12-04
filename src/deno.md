@@ -1263,6 +1263,7 @@ To do this:
 3. Require them with the code like the following.
 
 ```js
+// use_node.js
 import {createRequire} from 'https://deno.land/std@0.79.0/node/module.ts';
 const require = createRequire(import.meta.url);
 const _ = require('lodash');
@@ -1272,9 +1273,11 @@ console.log('first score =', _.first(scores)); // 87
 console.log('last score =', _.last(scores)); // 94
 ```
 
+To run this, enter `deno run --allow-env --allow-read --unstable use_node.js`.
+
 Deno provides polyfills for some Node packages.
 See the list at {% aTargetBlank
-"https://deno.land/std@0.79.0/node", "Supported Builtins" %}.
+"https://deno.land/std@0.79.0/node#supported-builtins", "Supported Builtins" %}.
 Use the `require` function to load these.
 For example, to load the `path` polyfill:
 
