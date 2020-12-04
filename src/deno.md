@@ -808,7 +808,7 @@ These include the following from the Web API:
     - `background-color` with a color value
     - `font-style` with values like `normal` and `italic`
     - `font-weight` with values like `normal` and `bold`
-    - `text-decoration-color` with a color value (DOESN'T WORK!)
+    - `text-decoration-color` with a color value (not widely supported by terminals)
     - `text-decoration-line` with values like `none`, `underline`, and `line-through`
 
     To use CSS properties, pass two or more strings to the method.
@@ -826,9 +826,16 @@ These include the following from the Web API:
     );
     ```
 
-* `window`
+  - `window` - global object like in web browsers
 
-* functions
+    The properties of this object include:
+
+    - global variables `console` and `Deno`
+    - global constructor functions for various events
+    - all the global functions listed below
+    - all the global classes listed below
+
+- functions
 
   - `fetch` for sending HTTP requests
 
@@ -847,7 +854,8 @@ These include the following from the Web API:
 
   - `atob` and `btoa` for converting to and from Base64 encoding
 
-* classes
+- classes
+
   - `Event`
   - `EventTarget`
   - `File`
@@ -864,6 +872,32 @@ These include the following from the Web API:
 To capture performance data for a section of code,
 begin the section with `performance.mark('some-name');`
 and end the section with `performance.measure('some-name');`.
+
+Here is an example of dispatching and listening for custom events:
+
+```ts
+const listener = (event: ProgressEvent) => {
+  // Report on the progress.
+  console.log('loaded =', event.loaded);
+  if (event.loaded >= event.total) {
+    window.removeEventListener('myCustomEvent', listener);
+    clearInterval(intervalId);
+  }
+};
+window.addEventListener('myCustomEvent', listener);
+
+let loaded = 0;
+const intervalId = setInterval(() => {
+  // Do some work.
+  loaded += 10; // report that 10% of the work is done
+  const event = new ProgressEvent('myCustomEvent', {
+    lengthComputable: true,
+    loaded,
+    total: 100
+  });
+  window.dispatchEvent(event);
+}, 200);
+```
 
 ## Imports
 
