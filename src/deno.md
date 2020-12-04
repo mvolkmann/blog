@@ -934,6 +934,22 @@ Unlike in Node.js, the filename `index.js` is not treated as
 the default filename and a file extension must be included.
 When a `.ts` file is imported, it is automatically compiled to JavaScript.
 
+Potential issues with importing modules from URLs include the ability to:
+
+- run code without a connection to the internet
+- run code if the owner of a remote module removes or breaks it
+- be confident the code won't do something malicious
+
+Deno addresses all of these concerns.
+The first two are covered by the fact that Deno caches remote modules
+when they are initially downloaded.
+Subsequent runs of your code use cached copies of the remote modules.
+New versions must be explicitly requested with the `--reload` option.
+The last concern is addressed by the Deno security model.
+No code can read/write files, access network resources,
+access environment variables, or run subprocesses
+unless given permission using the `--allow-*` flags.
+
 A version can optionally be specified in `import` URLs. For example:
 
 ```js
