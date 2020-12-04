@@ -788,7 +788,7 @@ A better solution using `deno compile` is coming soon.
 
 ## Shell Completions
 
-The `deno completion` command generations shell-specific commands
+The `deno completions` command generations shell-specific commands
 to define shell completions for `deno` subcommands and their options.
 The supported shells are zsh, bash, fish, powershell, and elvish.
 For example, to generate completions for the fish shell
@@ -1269,7 +1269,7 @@ i18next (internationalization framework).
 ## Using Node Packages
 
 Node packages that only use Node.js APIs that have been polyfilled by Deno
-can be used in Deno programs. For example,
+have a possibility of being usable in Deno programs. For example,
 {% aTargetBlank "https://www.npmjs.com/package/lodash", "lodash" %} can be used.
 To do this:
 
