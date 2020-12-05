@@ -164,7 +164,11 @@ For more install options, see the
 
 ## Options
 
-To get help on `deno` options, enter `deno --help`.
+To get help on `deno` options, enter `deno help`, `deno --help`, or `deno -h`.
+This includes the Deno version, the Deno manual URL, third party module URLs,
+the issue tracker URL, basic command examples, basic options,
+a brief description of each subcommand, and
+a description of environment variables that affect Deno.
 
 To get help on a subcommand such as "run", enter `deno run --help`.
 
@@ -363,7 +367,10 @@ Here's a summary of the commands. Details will be provided later.
 | `types`       | displays information about built-in types; can use in your code              |
 | `upgrade`     | upgrades `deno`                                                              |
 
-TODO: Add information on some of these commands that you haven't covered yet.
+Some commands and flags are considered experimental
+and may change in the future.
+It in order to use those, the `--unstable` flag
+must be included until they become stable.
 
 For an example of using the `install` command, see the "Watching" section.
 
