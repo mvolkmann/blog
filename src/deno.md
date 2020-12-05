@@ -788,17 +788,48 @@ A better solution using `deno compile` is coming soon.
 
 ## Shell Completions
 
-The `deno completions` command generations shell-specific commands
-to define shell completions for `deno` subcommands and their options.
+The `deno completions` command generates shell-specific commands
+that define completions for `deno` subcommands and their options.
 The supported shells are zsh, bash, fish, powershell, and elvish.
-For example, to generate completions for the fish shell
+
+For example, to generate completions for the bash shell
+enter the following command:
+
+```bash
+deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
+```
+
+To cause these completions to be activated in every new bash shell session,
+add the following in `~/.bash_profile`:
+
+```bash
+source /usr/local/etc/bash_completion.d/deno.bash
+```
+
+After starting a new bash shell, type `deno` following by a space
+and press the tab key twice to see all the possible completions.
+They will include flags like `--help` and `--version`.
+They will also include commands like
+`fmt`, `install`, `lint`, `run`, and `test`.
+After completing the command to `deno run` followed by a space,
+press tab twice to see all the possible flags including
+`--allow-net`, `--allow-read`, `--allow-write`,
+`--inspect-brk`, `--unstable`, and `--watch`.
+
+To generate completions for the fish shell
 and enable their use enter the following command:
 
 ```bash
-deno completions fish > $HOME/.config/fish/completions/deno-completions.fish
+deno completions fish > $HOME/.config/fish/completions/deno.fish
 ```
 
-TODO: Is this working?
+No additional steps are needed in order for the
+completions to be activated in every new fish shell session.
+After starting a new fish shell, type `deno` followed by a space
+and press the tab key once to see all the possible completions.
+Use the down and up arrow keys to select a completion and continue typing.
+To see the allowed flags for a command, type one `-` and press tab.
+Once again, use the down and up arrow keys to select one.
 
 ## Libraries
 
