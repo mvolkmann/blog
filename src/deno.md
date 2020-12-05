@@ -2268,6 +2268,24 @@ Here is the client code that can be opened in a web browser:
 </html>
 ```
 
+## WebAssembly (WASM)
+
+WebAssembly is a binary format for a stack-based virtual machine.
+It is a compilation target of many programming languages
+including C, C++, C#, F#, Go, JavaScript, Kotlin, Rust, and Swift.
+(Perhaps Python cannot yet be compiled to WebAssembly.)
+A notable feature is that WebAssembly code
+can be run from all the major web browsers.
+It can also be run from a command line (terminal),
+Node.js, and Deno.
+
+TODO
+To compile Python to WebAssembly ...
+
+To compile Rust to WebAssembly ...
+
+To run WebAssembly code from a Deno program ...
+
 ## Tidbits
 
 To determine if the current file was executed as the main script,
