@@ -751,6 +751,8 @@ and returns a boolean rather than throwing.
 To run the tests and report test coverage,
 enter `deno test --coverage --unstable`.
 This outputs any uncovered source lines.
+It would be nice if this supported an option to
+only output uncovered line numbers instead of the actual code.
 
 ## Bundling
 
@@ -911,6 +913,8 @@ These include the following from the Web API:
   - `setTimeout` and `clearTimeout`
 
   - `setInterval` and `clearInterval`
+
+  - `setImmediate` and `clearImmediate` are being added.
 
   - `addEventListener`, `removeEventListener`, and `dispatchEvent`
 
@@ -2295,7 +2299,7 @@ It does this by utilizing the WebAssembly virtual machine provided by V8.
 TODO
 To compile Python to WebAssembly ...
 
-To compile Rust to WebAssembly ...
+To compile Rust to WebAssembly, see [Rust WebAssembly](/blog/Rust#webassembly).
 
 To run WebAssembly code from a Deno program ...
 
