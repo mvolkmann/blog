@@ -514,6 +514,9 @@ and many of the rules in the {% aTargetBlank
 See this {% aTargetBlank "https://github.com/denoland/deno_lint/issues/556",
 "issue" %}.
 
+The Deno linter is implemented in Rust in order to be
+significantly much faster than ESLint.
+
 To prevent the linter from running on a file,
 add the following comment at the top:
 
@@ -703,7 +706,7 @@ export function sum(...numbers: number[]): number {
 Here is a file that provides tests for the `average` function.
 
 ```ts
-import {assertEquals} from 'https://deno.land/std/testing/asserts.ts';
+import {assertEquals} from 'https://deno.land/std@0.79.0/testing/asserts.ts';
 import {average, sum} from './statistics.ts';
 
 Deno.test('average', () => {
@@ -1236,8 +1239,8 @@ The `io` library provides functions for input/output.
 For example, to read from a file one line at a time:
 
 ```js
-import {readLines} from 'https://deno.land/std/io/mod.ts';
-import * as path from 'https://deno.land/std/path/mod.ts';
+import {readLines} from 'https://deno.land/std@0.79.0/io/mod.ts';
+import * as path from 'https://deno.land/std@0.79.0/path/mod.ts';
 
 const filename = path.join(Deno.cwd(), 'my-file.txt');
 const reader = await Deno.open(filename);
@@ -1547,8 +1550,8 @@ It also supports "aliases" which enable shorthand options
 (ex. `--alpha` or `-a`).
 
 ```ts
-import yargs from 'https://deno.land/x/yargs/deno.ts';
-import {Arguments} from 'https://deno.land/x/yargs/deno-types.ts';
+import yargs from 'https://deno.land/x/yargs@v16.2.0-deno/deno.ts';
+import {Arguments} from 'https://deno.land/x/yargs@v16.2.0-deno/deno-types.ts';
 
 const args = yargs(Deno.args)
   .option('alpha', {
@@ -1645,7 +1648,7 @@ Here is a Deno program in a file named `cotton_demo.js`
 that interacts with the pets database.
 
 ```ts
-import {connect} from 'https://deno.land/x/cotton/mod.ts';
+import {connect} from 'https://deno.land/x/cotton@v0.7.4/mod.ts';
 
 const db = await connect({type: 'sqlite', database: 'pets.db'});
 
@@ -1809,7 +1812,7 @@ See this {% aTargetBlank "https://github.com/eveningkid/denodb/issues/152",
 Here is an example of using deno_mongo:
 
 ```ts
-import {MongoClient} from 'https://deno.land/x/mongo/mod.ts';
+import {MongoClient} from 'https://deno.land/x/mongo@v0.20.0/mod.ts';
 
 const client = new MongoClient();
 await client.connect('mongodb://127.0.0.1:27017');
@@ -1863,7 +1866,7 @@ console.log('count =', count);
 Here is a very basic HTTP server that only uses the standard library.
 
 ```js
-import {serve} from 'https://deno.land/std/http/server.ts';
+import {serve} from 'https://deno.land/std@0.79.0/http/server.ts';
 
 const port = 1234;
 const server = serve({port});
@@ -1894,7 +1897,7 @@ import {
   Server,
   ServerRequest
 } from 'https://deno.land/std/http/server.ts';
-import {decode} from 'https://deno.land/std/encoding/utf8.ts';
+import {decode} from 'https://deno.land/std@.79.0/encoding/utf8.ts';
 
 type StringToString = {[key: string]: string};
 
@@ -2004,8 +2007,8 @@ Here is an example of implementing a REST server in oak
 that supports CRUD operations on dog objects.
 
 ```js
-import {Application, Router} from 'https://deno.land/x/oak/mod.ts';
-import {v4} from 'https://deno.land/std/uuid/mod.ts';
+import {Application, Router} from 'https://deno.land/x/oak@v6.3.2/mod.ts';
+import {v4} from 'https://deno.land/std@0.79.0/uuid/mod.ts';
 
 const PORT = 1234;
 const dogs = {};
@@ -2172,8 +2175,11 @@ This could be the start of a game.
 Here is the server code:
 
 ```ts
-import {serve} from 'https://deno.land/std/http/server.ts';
-import {acceptWebSocket, WebSocket} from 'https://deno.land/std/ws/mod.ts';
+import {serve} from 'https://deno.land/std@0.79.0/http/server.ts';
+import {
+  acceptWebSocket,
+  WebSocket
+} from 'https://deno.land/std@0.79.0/ws/mod.ts';
 
 const clients: WebSocket[] = [];
 
@@ -2279,12 +2285,21 @@ can be run from all the major web browsers.
 It can also be run from a command line (terminal),
 Node.js, and Deno.
 
+WebAssembly code executes much faster than JavaScript code.
+Some benchmarks show it to be an order of magnitude faster.
+Deno can execute WebAssembly code.
+It does this by utilizing the WebAssembly virtual machine provided by V8.
+
 TODO
 To compile Python to WebAssembly ...
 
 To compile Rust to WebAssembly ...
 
 To run WebAssembly code from a Deno program ...
+
+TODO: Create an example that demonstrates the performance difference
+TODO: between JavaScript and WebAssembly. Perhaps compute the total
+TODO: and average sales by category of a large number of transactions.
 
 ## Tidbits
 
