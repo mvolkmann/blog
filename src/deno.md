@@ -2299,9 +2299,8 @@ It does this by utilizing the WebAssembly virtual machine provided by V8.
 TODO
 To compile Python to WebAssembly ...
 
-To compile Rust to WebAssembly, see [Rust WebAssembly](/blog/Rust#webassembly).
-
-To run WebAssembly code from a Deno program ...
+To compile Rust to WebAssembly and use it in a Deno program,
+see [Rust WebAssembly](/blog/Rust#webassembly).
 
 TODO: Create an example that demonstrates the performance difference
 TODO: between JavaScript and WebAssembly. Perhaps compute the total
