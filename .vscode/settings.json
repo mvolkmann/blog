@@ -527,6 +527,7 @@
     "virtualenv",
     "wakeup",
     "wasi",
+    "webassembly",
     "webfontloader",
     "webhook",
     "webp",
