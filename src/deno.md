@@ -1244,6 +1244,8 @@ import * as path from 'https://deno.land/std@0.79.0/path/mod.ts';
 
 const filename = path.join(Deno.cwd(), 'my-file.txt');
 const reader = await Deno.open(filename);
+// The readlines function returns an "async iterable object".
+// The "for await" loop iterates over this.
 for await (const line of readLines(reader)) {
   console.log(line);
 }
