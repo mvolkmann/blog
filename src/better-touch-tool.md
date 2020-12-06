@@ -13,6 +13,13 @@ This post documents customizations I have found useful.
 
 ## Mouse Position
 
+If you use multiple monitors and you switch between apps using cmd-tab,
+this tip is for you.
+When the newly activated app is on a different monitor
+than the previously activated app, the mouse cursor must be
+manually moved between monitors in order to use it in the new app.
+Better Touch Tool can automate this.
+
 The mouse cursor can be moved to the center of the current window,
 even if it is on a different monitor.
 It seems there isn't a way to make this happen whenever any app is activated.
