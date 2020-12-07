@@ -48,6 +48,34 @@ set -x PATH $PATH $HOME/.cargo/bin
 
 Verify installation by entering `rustc --version`.
 
+## Hello World
+
+The following is a Rust Hello World program:
+
+```rust
+fn main() {
+    println!("Hello World!");
+}
+```
+
+## Compiling Code
+
+To compile a `.rs` file, enter `rustc {name}.rs`.
+This creates an executable with the same name and no file extension.
+For example `rustc hello.rs` creates `hello`.
+To run the executable, enter `./` followed by the name.
+For example, `./hello`.
+
+## Formatting Code
+
+The most popular code formatting tool for Rust is
+{% aTargetBlank "", "rustfmt" %}.
+To install this, enter `cargo install rustfmt`.
+TODO: Is this installed by default by rustup?
+
+To run it on all `.rs` files in the current directory,
+enter `rustfmt *.rs`.
+
 ## Built-in Scalar Types
 
 Rust defines four scalar (primitive) types which are
@@ -79,6 +107,7 @@ The default type for literal floats is `f64` regardless of the processor.
 ## Built-in Compound Types
 
 Rust defines two compound (non-primitive) types which are tuple and array.
+These are distinct from the collection types that are described later.
 
 A tuple is a fixed-length list of values that can be of different types.
 The syntax for a tuple type is `(type1, type2, ...)`.
@@ -118,6 +147,11 @@ Strings are collections of characters.
 Vectors are collections of any kind of value.
 Hash maps hold key/value pairs where the keys and values can be any type.
 
+There are two kinds of strings used in Rust programs.
+The Rust language defines the `str` type
+and the standard library defines the `String` type.
+TODO: Explain the differences!
+
 ## Operators
 
 Rust supports common operators including:
@@ -141,37 +175,15 @@ The colon and the type can be omitted if it can be inferred from the value.
 
 ## Iteration
 
+## Functions
+
+## Imports
+
 ## Custom Types
 
 ## Traits
 
-## Hello World
-
-The following is a Rust Hello World program:
-
-```rust
-fn main() {
-    println!("Hello World!");
-}
-````
-
-## Compiling Code
-
-To compile a `.rs` file, enter `rustc {name}.rs`.
-This creates an executable with the same name and no file extension.
-For example `rustc hello.rs` creates `hello`.
-To run the executable, enter `./` followed by the name.
-For example, `./hello`.
-
-## Formatting Code
-
-The most popular code formatting tool for Rust is
-{% aTargetBlank "", "rustfmt" %}.
-To install this, enter `cargo install rustfmt`.
-TODO: Is this installed by default by rustup?
-
-To run it on all `.rs` files in the current directory,
-enter `rustfmt *.rs`.
+## Standard Library
 
 ## <a name="webassembly">WebAssembly</a>
 
@@ -231,7 +243,7 @@ To compile a `.rs` file to WebAssembly:
    wasm-bindgen = "=0.2.61"
    ```
 
-1. Enter `ssvmup build --target deno`  
+1. Enter `ssvmup build --target deno`
    This creates a `pkg` directory containing
    `package.json`, a `.wasm` file, and a `.js` file that
    reads the `.wasm` file and prepares it for use in JavaScript code.
@@ -250,3 +262,4 @@ To compile a `.rs` file to WebAssembly:
    ```js
    console.log(factorial(4n)); // "n" suffix makes it BitInt
    ```
+````
