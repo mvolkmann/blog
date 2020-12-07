@@ -1255,6 +1255,62 @@ for await (const line of readLines(reader)) {
 }
 ```
 
+## Resource Ids
+
+Deno refers to input and output streams as resources
+that have resource ids.
+Resource ids are useful for streaming reads (see `Deno.read`),
+streaming writes (see `Deno.write`),
+seeking to specific resource locations (see `Deno.seek`).
+and flushing pending data operations (see `Deno.fdatasync` and `Deno.fsync`).
+
+Here is an example of using resources.
+
+```js
+import {readLines} from 'https://deno.land/std@0.79.0/io/mod.ts';
+
+const file = await Deno.open('./BeverlyHillbillies.txt');
+console.log('file.rid =', file.rid); // 3
+
+// This returns an object where keys are resource ids (integers as strings)
+// and the values are resource names.
+// Resources include "stdin", "stdout", "stderr", and any opened files.
+const resources = Deno.resources();
+console.table(resources);
+
+// Determine which resources are associated with a terminal.
+for (const rid of Object.keys(resources)) {
+  console.log(`Is resource id ${rid} a TTY?`, Deno.isatty(Number(rid)));
+  // stdin, stdout, and stderr are ttys.
+  // Files are not.
+}
+
+const READ_LINE_BY_LINE = true;
+if (READ_LINE_BY_LINE) {
+  for await (const line of readLines(file)) {
+    console.log('line =', line);
+  }
+} else {
+  // Read the entire file at once.
+  // buffer is a Uint8Array.
+  const buffer = await Deno.readAll(file);
+  const text = new TextDecoder().decode(buffer);
+  console.log('text =', text);
+}
+
+// One way to close a file is to refer to it by its resource id.
+// This also removes the file from the list of resources.
+//Deno.close(file.rid);
+
+// Here is another way which just calls Deno.close(file.rid).
+file.close();
+```
+
+While you could read from stdio using its resource id,
+it is easier to use the `prompt` function.
+While you could write to stdout and stderr using their resource ids,
+it is easier to use `console.log` and `console.error`.
+
 ## Third Party Modules
 
 Many third party modules are registered at

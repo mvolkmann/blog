@@ -18,7 +18,7 @@ Features of Rust include:
 
 - fast
 - memory-efficient
-- rich type system
+- rich, static type system with type inference
 - ownership model to guarantee memory-safety and thread-safety
 
 ## Installing
@@ -48,6 +48,103 @@ set -x PATH $PATH $HOME/.cargo/bin
 
 Verify installation by entering `rustc --version`.
 
+## Built-in Scalar Types
+
+Rust defines four scalar (primitive) types which are
+boolean, character, integer, and floating-point.
+
+The boolean type name is `bool`.
+Its only values are `true` and `false`.
+
+The character type name is `char`.
+Its values are Unicode values of up to four bytes.
+TODO: Does every character use all four bytes?
+
+The signed integer type names are `i{n}` where `{n}`
+is the number of bits which can be 8, 16, 32, 64, 128 or `size`
+which corresponds to either 32 or 64 depending on the processor architecture.
+The default type for literal integers is `i32` regardless of the processor.
+
+Literal integer values can use the underscore character to separate
+thousands, millions, and so on. For example,
+the population of the U.S. in 2020 was approximately 330_676_544.
+Hex values begin with `0x`, octal values begin with `0o`,
+and binary values begin with `0b`.
+
+The unsigned integer types are the same, but start with `u` instead of `i`.
+
+Floating-point type names are `f{n}` where `{n}` is 32 or 64.
+The default type for literal floats is `f64` regardless of the processor.
+
+## Built-in Compound Types
+
+Rust defines two compound (non-primitive) types which are tuple and array.
+
+A tuple is a fixed-length list of values that can be of different types.
+The syntax for a tuple type is `(type1, type2, ...)`.
+The syntax for a tuple value is `(value1, value2, ...)`.
+Individual values can be accessed by index or destructuring.
+
+For example:
+
+```rust
+TODO: ADD THIS
+```
+
+An array is a fixed-length list of values that have the same type.
+The syntax for an array type is `[type, length]`.
+The syntax for an array value is `[value1, value2, ...]`.
+For example:
+
+````rust
+let rgb = ["red", "green", "blue"];
+// A Rust string is a "compound collection", covered later.
+let sevens = [7, 5]; // same as [7, 7, 7, 7, 7]
+```
+
+Elements of an array can be accessed using
+square brackets and zero-based indexes.
+For example, `rgb[1]` is "green".
+
+A vector is a variable-length list of values.
+TODO: Do they all have the same type?
+
+## Collections
+
+Rust defines three kinds of collections that hold a variable number of values.
+These include strings, vectors, and hash maps.
+
+Strings are collections of characters.
+Vectors are collections of any kind of value.
+Hash maps hold key/value pairs where the keys and values can be any type.
+
+## Operators
+
+Rust supports common operators including:
+
+- arithmetic: `+`, `-`, `\*`, `/`, `%` (mod)
+
+## Variables
+
+Variables are immutable by default.
+For variables that hold non-primitive values,
+even their fields cannot be mutated.
+
+The `mut` keyword marks a variable as mutable.
+
+A variable declaration has the syntax `let name: type = value;`
+where the value is optional.
+However, a value must be assigned before the variable is referenced.
+The colon and the type can be omitted if it can be inferred from the value.
+
+## Conditional Logic
+
+## Iteration
+
+## Custom Types
+
+## Traits
+
 ## Hello World
 
 The following is a Rust Hello World program:
@@ -56,7 +153,7 @@ The following is a Rust Hello World program:
 fn main() {
     println!("Hello World!");
 }
-```
+````
 
 ## Compiling Code
 
@@ -151,5 +248,5 @@ To compile a `.rs` file to WebAssembly:
 1. Call the imported functions.
 
    ```js
-   console.log(factorial(4n));
+   console.log(factorial(4n)); // "n" suffix makes it BitInt
    ```
