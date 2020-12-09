@@ -353,6 +353,7 @@ Here's a summary of the commands. Details will be provided later.
 | ------------- | ---------------------------------------------------------------------------- |
 | `bundle`      | bundles a module and its dependencies into a single file                     |
 | `cache`       | caches dependencies                                                          |
+| `compile`     | creates a standalone executable                                              |
 | `completions` | generates shell completions                                                  |
 | `doc`         | displays documentation for a given module                                    |
 | `eval`        | evaluates a string of JS/TS code                                             |

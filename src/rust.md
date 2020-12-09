@@ -21,6 +21,49 @@ Features of Rust include:
 - rich, static type system with type inference
 - ownership model to guarantee memory-safety and thread-safety
 
+## Why use Rust
+
+Performance:
+The best way to get software performance is to
+use a "systems" language like C, C++, or Rust.
+These languages are fast because they do not provide automatic
+garbage collection that is slow and can run at any time.
+They also allow control over whether data is on the stack or on the heap.
+
+Safety:
+Software written in systems languages typically must
+take great care to avoid memory and threading issues.
+Memory issues include accessing memory after it has been freed,
+resulting in unpredictable behavior.
+Threading issues include race conditions where the order in which
+code runs is unpredictable, resulting in unpredictable results.
+Rust addresses both of these issues resulting in
+code that is less likely to contain bugs.
+
+Immutable by default:
+A large source of errors in any software involves incorrect assumptions
+about where data is modified.
+Making variables be immutable by default and
+requiring explicit indication of functions that are
+allowed to modify data significantly reduces these errors.
+
+Control over size of numbers:
+One way to achieve performance in computationally intensive tasks
+is to store collections of numbers in contiguous memory for fast access
+and control the number of bytes used by each number.
+
+Ownership model: Manual garbage collection is error prone.
+Rust uses an "ownership model" where code is explicit about
+the single scope that owns each piece of data.
+When that scope ends, the data can be safely freed
+because no other scope can possibly be using the data.
+
+Systems languages tend to be more complex that non-systems languages,
+requiring more time to learn and more time to write software in them.
+Rust is no exception.
+But developers choose to use it in spite of this
+in order to gain the benefits described above.
+
 ## Installing
 
 Rust is installed using the {% aTargetBlank "", "rustup" %} tool.
@@ -48,9 +91,26 @@ set -x PATH $PATH $HOME/.cargo/bin
 
 Verify installation by entering `rustc --version`.
 
-## Hello World
+## Online REPL
 
-The following is a Rust Hello World program:
+To try Rust code online, browse the
+{% aTargetBlank "https://play.rust-lang.org/", "Rust Playground" %}.
+
+## Compiling and Running
+
+Rust source files have a `.rs` file extension.
+
+To compile a Rust source file,
+creating an executable with the same name and no file extension,
+and run it:
+
+- open a terminal (or Windows Command Prompt),
+- cd to the directory containing a `.rs` file that defines a `main` function
+- enter `rustc name.rs`
+- in macOS or Linux, enter `./name`
+- in Windows, enter `name`
+
+For example, the following is a Rust Hello World program:
 
 ```rust
 fn main() {
@@ -58,13 +118,162 @@ fn main() {
 }
 ```
 
-## Compiling Code
+## VS Code
 
-To compile a `.rs` file, enter `rustc {name}.rs`.
-This creates an executable with the same name and no file extension.
-For example `rustc hello.rs` creates `hello`.
-To run the executable, enter `./` followed by the name.
-For example, `./hello`.
+Install the Rust extension which adds:
+
+- syntax highlighting
+- code completion
+- code formatting
+- type documentation on hover
+- code snippets
+- rename refactoring
+- linting with error indicators with ability to apply suggestions
+- build tasks
+
+TODO: This extension seems to do nothing!
+
+## Terminology
+
+`cargo`: a command-line utility
+crate: a binary (executable) or a library
+module: a set of related values such as constants and functions
+package: a set of related crates described by a `Cargo.toml` file
+TOML: a configuration file format; stands for Tom's Obvious, Minimal Language
+
+## TOML Syntax
+
+{% aTargetBlank "https://github.com/toml-lang/toml", "TOML" %}
+is a configuration file format that maps to a hash table.
+
+Each key/value pair is described by a line with the syntax `key = value`.
+Keys are not surrounded by any delimiters.
+Supported value data types include
+string, integer, float, boolean, datetime,
+array (ordered list of values),
+and table (collection of key/value pairs).
+String values are surrounded by double quotes.
+Datetime values have the format `yyyy-mm-ddThh:mm:ss`.
+The time portion can be omitted and it can be followed by a time zone
+(`Z` for UTC or `+hh:mm` for an offset).
+Array elements are surrounded by square brackets and separated by commas.
+
+Comments begin with `#` character and extend to the end of the line.
+
+Sections and sub-sections are indicated by lines
+containing a name enclosed in square brackets.
+Think of these like keys whose values are objects.
+
+## Cargo
+
+The `cargo` command is a CLI tool that is installed with Rust.
+While using it is not required, it is highly recommended.
+For help, enter `cargo --help` or just `cargo`.
+
+The following table describes the `cargo` subcommands:
+
+| Subcommand    | Description                                           |
+| ------------- | ----------------------------------------------------- |
+| `new`         | creates a Rust project in a new subdirectory          |
+| `init`        | creates a Rust project in the current directory       |
+| `test` or `t` | runs the tests in the current project                 |
+| `bench`       | runs the benchmarks for the current project           |
+| `run` or `r`  | runs the current project                              |
+| `check`       | checks the current project for errors                 |
+| `build`       | builds the current project in the `target` directory  |
+| `clean`       | deletes the `target` directory                        |
+| `update`      | updates dependencies in `Cargo.lock`                  |
+| `publish`     | publishes the package to the registry                 |
+| `install`     | installs an executable in `~/.cargo/bin` by default   |
+| `uninstall`   | removes the executable from `~/.cargo/bin` by default |
+| `doc`         | generates documentation for the current project       |
+| `search`      | searches the registry for crates                      |
+
+## Comments
+
+Rust supports many comment syntaxes.
+"Doc comments" are included in generated HTML documentation
+that is generated by entering `cargo doc`.
+TODO: How do you generate it?
+
+| Syntax      | Usage                                       |
+| ----------- | ------------------------------------------- |
+| `//`        | extends to end of current line              |
+| `/* ... */` | can span multiple lines                     |
+| `///`       | doc comment preceding the item it describes |
+| `//!`       | doc comment inside the item it describes    |
+
+Code inside doc comments that is surrounded by "fences"
+is run by the `rustdoc --test` command.
+For example:
+
+1. Create a project by entering `cargo new doc_test`.
+
+1. Add the file `src/math.rs` containing the following:
+
+   ````rust
+   /// ```
+   /// assert_eq!(math::average(vec![1.0, 2.0, 3.0, 4.0]), 2.5);
+   /// ```
+   pub fn average(numbers: Vec<f64>) -> f64 {
+       let sum: f64 = numbers.iter().sum();
+       return sum / numbers.len() as f64;
+   }
+   ````
+
+1. Compile this to a library by entering
+   `rustc --crate-type lib src/math.rs`
+   This is needed because doc tests are only run on library crates.
+
+1. Run the doc tests by entering
+   `rustdoc -L . --test src/math.rs`
+
+1. To call the `average` function from another source file,
+   modify `src/main.js` to match the following:
+
+   ```rust
+   mod math;
+
+   fn main() {
+       let scores = vec![1.0, 2.0, 3.0, 4.0];
+       let avg = math::average(scores);
+       println!("average = {}", avg);
+   }
+   ```
+
+1. To run this, enter `cargo run`
+
+TODO: Are all names that end with `!` macros?
+
+## Formatted Print
+
+The `std::fmt` namespace defines macros that format text.
+
+| Macro Name  | Description                           |
+| ----------- | ------------------------------------- |
+| `format!`   | writes to a `String`                  |
+| `print!`    | writes to stdout                      |
+| `println!`  | same as `print!`, but adds a newline  |
+| `eprint!`   | writes to stderr                      |
+| `eprintln!` | same as `eprint!`, but adds a newline |
+
+All of these macros take a formatting string
+followed by zero or more expressions whose values
+are substituted into the formatting string
+where occurrences of `{}` appear.
+For example:
+
+```rust
+println!("{} is {}.", "Rust", "interesting"); // Rust is interesting.
+```
+
+The curly brackets can contain indexes which allow
+the expression values to be inserted in a different order
+and be inserted more than once. For example:
+
+```rust
+println!("{1} {0} {2} {1}", "red", "green", "blue"); // green red blue green
+```
 
 ## Formatting Code
 
@@ -85,6 +294,7 @@ The boolean type name is `bool`.
 Its only values are `true` and `false`.
 
 The character type name is `char`.
+Literal values are surrounded by single quotes.
 Its values are Unicode values of up to four bytes.
 TODO: Does every character use all four bytes?
 
@@ -144,7 +354,10 @@ Rust defines three kinds of collections that hold a variable number of values.
 These include strings, vectors, and hash maps.
 
 Strings are collections of characters.
+Literal values are surrounded by double quotes.
+
 Vectors are collections of any kind of value.
+
 Hash maps hold key/value pairs where the keys and values can be any type.
 
 There are two kinds of strings used in Rust programs.
@@ -176,6 +389,28 @@ The colon and the type can be omitted if it can be inferred from the value.
 ## Iteration
 
 ## Functions
+
+## Modules
+
+Modules define collections of values like constants and functions.
+A module can be defined in three ways.
+
+1. Inside a source file that uses it with the `mod` keyword.
+1. In a file whose name is the module name.
+1. In multiple files within a directory whose name is the module name.
+
+By default, all members of a module are private.
+To make a member accessible outside the module,
+add the `pub` keyword at the beginning of its definition.
+
+TODO: Show examples of each of these approaches.
+
+To use a module that is defined in another file or directory,
+use the `mod` keyword to gain access
+and the `use` keyword to specify the values in it that will be used.
+TODO: Why are both keywords needed?
+
+Modules can be nested to further segregate the defined names.
 
 ## Imports
 
