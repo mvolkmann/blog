@@ -2257,7 +2257,7 @@ async function addClient(sock: WebSocket) {
 }
 
 const PORT = '1234';
-// For every client connection request .wss..
+// For every client connection request ...
 for await (const req of serve(':' + PORT)) {
   const {conn, r: bufReader, w: bufWriter, headers} = req;
   try {

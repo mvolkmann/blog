@@ -24,35 +24,42 @@ Features of Rust include:
 ## Why use Rust
 
 Performance:
+
 The best way to get software performance is to
 use a "systems" language like C, C++, or Rust.
 These languages are fast because they do not provide automatic
-garbage collection that is slow and can run at any time.
-They also allow control over whether data is on the stack or on the heap.
+garbage collection that is slow and can run at unpredictable time.
+Systems languages also allow control over
+whether data is on the stack or on the heap.
 
 Safety:
+
 Software written in systems languages typically must
 take great care to avoid memory and threading issues.
 Memory issues include accessing memory after it has been freed,
 resulting in unpredictable behavior.
 Threading issues include race conditions where the order in which
 code runs is unpredictable, resulting in unpredictable results.
-Rust addresses both of these issues resulting in
-code that is less likely to contain bugs.
+Rust addresses both of these issues,
+resulting in code that is less likely to contain bugs.
 
 Immutable by default:
-A large source of errors in any software involves incorrect assumptions
-about where data is modified.
-Making variables be immutable by default and
+
+A large source of errors in any software involves
+incorrect assumptions about where data is modified.
+Making variables immutable by default and
 requiring explicit indication of functions that are
 allowed to modify data significantly reduces these errors.
 
-Control over size of numbers:
+Control over number sizes:
+
 One way to achieve performance in computationally intensive tasks
 is to store collections of numbers in contiguous memory for fast access
 and control the number of bytes used by each number.
 
-Ownership model: Manual garbage collection is error prone.
+Ownership model:
+
+Manual garbage collection is error prone.
 Rust uses an "ownership model" where code is explicit about
 the single scope that owns each piece of data.
 When that scope ends, the data can be safely freed
@@ -61,7 +68,7 @@ because no other scope can possibly be using the data.
 Systems languages tend to be more complex that non-systems languages,
 requiring more time to learn and more time to write software in them.
 Rust is no exception.
-But developers choose to use it in spite of this
+But some developers choose to them in spite of this
 in order to gain the benefits described above.
 
 ## Installing
