@@ -27,8 +27,9 @@ Performance:
 
 The best way to get software performance is to
 use a "systems" language like C, C++, or Rust.
-These languages are fast because they do not provide automatic
-garbage collection that is slow and can run at unpredictable time.
+One reason these languages are fast is because
+they do not provide automatic garbage collection
+that is slow and can run at unpredictable times.
 Systems languages also allow control over
 whether data is on the stack or on the heap.
 
@@ -98,10 +99,98 @@ set -x PATH $PATH $HOME/.cargo/bin
 
 Verify installation by entering `rustc --version`.
 
-## Online REPL
+## Online Playground
 
 To try Rust code online, browse the
 {% aTargetBlank "https://play.rust-lang.org/", "Rust Playground" %}.
+This includes access to the top 100 most downloaded crates from
+{% aTargetBlank "https://crates.io/", "crates.io" %}
+and crates from the
+{% aTargetBlank "https://rust-lang-nursery.github.io/rust-cookbook/",
+"Rust Cookbook" %}.
+
+<img alt="Rust Playground" style="width: 100%"
+  src="/blog/assets/rust-playground.png" title="Rust Playground">
+
+Press the ellipsis after the "RUN" button
+to open a popup with the following options:
+
+- "Run" to build and run the code (`cargo run`)
+- "Build" to only build the code (`cargo build`)
+- "Test" to build the code and run the tests (`cargo test`)  
+  Tests must be preceded by `#[test]` and no `main` function can be present.
+- "ASM" to build the code and show the generated assembly code
+- "LLVM IR" to build the code and show the generated
+  LLVM intermediate representation (IR)
+- "MIR" to build the code and show the generated
+  mid-level intermediate representation (MIR)
+- "WASM" to build a WebAssembly module for use in web browsers
+
+The "RUN" button will change to the last selected option
+so it can be re-executed by pressing the button.
+
+Press the "DEBUG" button to open a popup for choosing between
+"Debug" and "Release" built modes.
+
+Press the "NIGHTLY" button to open a popup for choosing a Rust version
+which can be "Stable channel" (default), "Beta channel", or "Nightly channel".
+The button text changes to indicate the selected version.
+
+Press the ellipsis after the version button to open a popup
+with the following options:
+
+- "Edition" sets the Rust edition to 2018 (default) or 2015
+- "Backtrace" to disable (default) or enable
+  display of backtraces when a panic occurs  
+  Enabling this slows performance a bit.
+
+Press the "SHARE" button to open a panel on the right side
+containing the following links:
+
+- "Permalink to the playground" changes the URL to one which will
+  recall the current code set to run with the current version of Rust.
+- "Direct link to the gist" navigates to the URL of the GitHub Gist
+  where the code is stored. The code cannot be executed from here.
+- "Embed code in link" changes the URL to one which includes
+  a base 64 encoded copy of the code as a query parameter.
+  This is only appropriate for small code samples due to URL length limits.
+- "Open a new thread in the Rust user forum" does what the link
+  implies, making it easy to ask questions about a code sample.
+- "Open an issue on the Rust GitHub repository"
+  makes it easy to report a bug in Rust.
+
+Press the "TOOLS" button to open a popup with the following options:
+
+- "Rustfmt" formats the code using the `rustfmt` tool.
+- "Clippy" runs the Clippy linter on the code.
+- "Miri" runs the program using the
+  {% aTargetBlank "https://github.com/rust-lang/miri", "Miri interpreter" %}
+  which is an experimental interpreter for Rust's
+  mid-level intermediate representation (MIR).
+  which detects some bugs not detected by press the "RUN" button?
+- "Expand macros" displays the code in the right panel with
+  all the macro calls expanded in order to see what they actually do.
+
+Press the "CONFIG" button to open a popup with the following options:
+
+- "Style" to switch between "SIMPLE" (no line numbers)
+  and "ADVANCED" (line numbers).
+- "Keybinding" to choose between keybindings supported by the
+  {% aTargetBlank "https://github.com/ajaxorg/ace", "Ace" %} (Cloud9) editor.
+  These include ace, emacs, sublime, vim, and vscode.
+- "Theme" to choose from 30+ themes including
+  cobalt, github, solarized light, solarized dark.
+- "Pair Characters" to ???
+- "Orientation" to arrange panes horizontally, vertically,
+  or automatically choose based on window size.
+- and advanced options to control generated assembly code
+
+There doesn't seem to be a way to select a font for the code.
+
+Configuration options are saved in browser Local Storage
+so they can be applied to future sessions.
+The most recently entered code is also saved in Local Storage,
+but previously entered code is not.
 
 ## Compiling and Running
 
@@ -142,7 +231,7 @@ TODO: This extension seems to do nothing!
 
 ## Terminology
 
-`cargo`: a command-line utility
+`cargo`: a command-line utility described later
 crate: a binary (executable) or a library
 module: a set of related values such as constants and functions
 package: a set of related crates described by a `Cargo.toml` file
@@ -179,22 +268,50 @@ For help, enter `cargo --help` or just `cargo`.
 
 The following table describes the `cargo` subcommands:
 
-| Subcommand    | Description                                           |
-| ------------- | ----------------------------------------------------- |
-| `new`         | creates a Rust project in a new subdirectory          |
-| `init`        | creates a Rust project in the current directory       |
-| `test` or `t` | runs the tests in the current project                 |
-| `bench`       | runs the benchmarks for the current project           |
-| `run` or `r`  | runs the current project                              |
-| `check`       | checks the current project for errors                 |
-| `build`       | builds the current project in the `target` directory  |
-| `clean`       | deletes the `target` directory                        |
-| `update`      | updates dependencies in `Cargo.lock`                  |
-| `publish`     | publishes the package to the registry                 |
-| `install`     | installs an executable in `~/.cargo/bin` by default   |
-| `uninstall`   | removes the executable from `~/.cargo/bin` by default |
-| `doc`         | generates documentation for the current project       |
-| `search`      | searches the registry for crates                      |
+| Subcommand    | Description                                                                |
+| ------------- | -------------------------------------------------------------------------- |
+| `bench`       | runs benchmarks for the current project                                    |
+| `build`       | builds current project in the `target` directory                           |
+| `check`       | verifies current project builds without errors,<br>without generating code |
+| `clean`       | deletes `target` directory                                                 |
+| `clippy`      | checks current project for errors using the Clippy linter                  |
+| `doc`         | generates documentation for the current project                            |
+| `init`        | creates a Rust project in the current directory                            |
+| `install`     | installs an executable in `~/.cargo/bin` by default                        |
+| `new`         | creates a Rust project in a new subdirectory                               |
+| `publish`     | publishes package to the registry                                          |
+| `run` or `r`  | runs current project                                                       |
+| `search`      | searches registry for crates                                               |
+| `test` or `t` | runs tests in the current project                                          |
+| `uninstall`   | removes executable from `~/.cargo/bin` by default                          |
+| `update`      | updates dependencies in `Cargo.lock`                                       |
+
+## Naming Conventions
+
+In general, names of "types" use PascalCase
+and names of "value" use snake_case.
+
+| Item            | Naming Convention                  |
+| --------------- | ---------------------------------- |
+| constants       | SCREAMING_SNAKE_CASE               |
+| constructors    | snake_case                         |
+| crates          | snake_case or kebab-case           |
+| enums           | PascalCase                         |
+| enums values    | PascalCase                         |
+| features        | no convention                      |
+| enums           | PascalCase                         |
+| file names      | snake_case or kebab-case           |
+| functions       | snake_case                         |
+| lifetimes       | 'lowercase                         |
+| macros          | snake_case!                        |
+| methods         | snake_case                         |
+| modules         | snake_case                         |
+| statics         | SCREAMING_SNAKE_CASE               |
+| structs         | PascalCase                         |
+| traits          | PascalCase                         |
+| type parameters | PascalCase, but usually one letter |
+| types           | PascalCase                         |
+| variables       | snake_case                         |
 
 ## Comments
 
@@ -224,7 +341,7 @@ For example:
    /// ```
    pub fn average(numbers: Vec<f64>) -> f64 {
        let sum: f64 = numbers.iter().sum();
-       return sum / numbers.len() as f64;
+       sum / numbers.len() as f64 // return value
    }
    ````
 
@@ -291,6 +408,40 @@ TODO: Is this installed by default by rustup?
 
 To run it on all `.rs` files in the current directory,
 enter `rustfmt *.rs`.
+
+## Variables
+
+Variables are immutable by default.
+For variables that hold non-primitive values,
+even their fields cannot be mutated.
+
+The `mut` keyword marks a variable as mutable.
+
+A variable declaration has the syntax `let name: type = value;`
+where the value is optional.
+However, a value must be assigned before the variable is referenced.
+The colon and the type can be omitted if it can be inferred from the value.
+
+There are four ways to declare a "variable".
+
+| Syntax                          | Meaning                                                                                               |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `let name: type = value`        | immutable variable that must be assigned a value<br>before it is used and is thereafter immutable     |
+| `let mut name: type = value`    | mutable variable that must be assigned a value<br>before it is used, but can be modified              |
+| `const name = value`            | constant that must be assigned a value when it is declared                                            |
+| `static name: type = value`     | immutable variable that lives for the duration of the program; typically `const` is preferred         |
+| `static mut name: type = value` | mutable variable that lives for the duration of the program;<br>can only mutate in `unsafe` functions |
+
+TODO: Are statics a way to share data across functions,
+TODO: even those defined in separate files, without passing it?
+
+## Rules of Ownership
+
+Memory management in Rust is handle by following these rules:
+
+1. Each value is referred to by a variable that is its owner.
+1. Each value has one owner at a time.
+1. When the owner goes out of the scope, the value is dropped.
 
 ## Built-in Scalar Types
 
@@ -378,24 +529,125 @@ Rust supports common operators including:
 
 - arithmetic: `+`, `-`, `\*`, `/`, `%` (mod)
 
-## Variables
-
-Variables are immutable by default.
-For variables that hold non-primitive values,
-even their fields cannot be mutated.
-
-The `mut` keyword marks a variable as mutable.
-
-A variable declaration has the syntax `let name: type = value;`
-where the value is optional.
-However, a value must be assigned before the variable is referenced.
-The colon and the type can be omitted if it can be inferred from the value.
-
 ## Conditional Logic
 
 ## Iteration
 
 ## Functions
+
+Functions are defined using the `fn` keyword,
+followed by a name, parameter list, return type, and body.
+For example:
+
+```rust
+fn average(numbers: &Vec<f64>) -> f64 {
+  numbers.iter().sum() / numbers.len() as f64
+}
+
+fn main() {
+  let numbers: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
+  println!("average = {}", average(&numbers));
+}
+```
+
+A `return` statement returns the value of an expression.
+If the last statement is not terminated by a semicolon, its value is returned.
+This means that `return my_result;` is equivalent to `my_result`.
+
+Functions are accessible by default within the same source file,
+but they are private by default when defined in a different source file.
+For functions that should be visible outside the source file that defines them,
+add the `pub` keyword before the `fn` keyword.
+
+## Structs
+
+A struct defines a type that is a set of related fields and methods,
+similar to a class in other languages.
+The `struct` keyword only defines fields.
+The `impl` keyword adds methods to a struct.
+Struct names are used to create instances.
+For example:
+
+```rust
+fn main() {
+  struct Point2D {
+    x: f64,
+    y: f64,
+  }
+
+  impl Point2D {
+    fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
+      let dx = self.x - other.x;
+      let dy = self.y - other.y;
+      (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+    }
+  }
+
+  let p1 = Point2D { x: 3.0, y: 4.0 };
+  let p2 = Point2D { x: 6.0, y: 8.0 };
+  let d = p1.distance_to(&p2);
+  println!("distance is {}", d);
+}
+```
+
+Structs and their fields are accessible by default within the same source file,
+but they are private by default when defined in a different source file.
+For structs that should be visible outside the source file that defines them,
+add the `pub` keyword to both the `struct` and the fields to be exposed.
+
+Structs cannot inherit from (extend) other structs,
+but they can nest other structs (composition).
+
+## Traits
+
+A trait describes an interface that structs can implement.
+Traits can be generic, including type parameters.
+Trait functions can provide default implementations
+that are used by implementing types that do not override them.
+
+For example:
+
+```rust
+fn main() {
+  struct Point2D {
+    x: f64,
+    y: f64,
+  }
+
+  trait Distance<T> {
+      fn distance_to(self: &Self, other: &Self) -> T;
+  }
+
+  impl Distance<f64> for Point2D {
+      fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
+          let dx = self.x - other.x;
+          let dy = self.y - other.y;
+          (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+      }
+  }
+
+  let p1 = Point2D { x: 3.0, y: 4.0 };
+  let p2 = Point2D { x: 6.0, y: 8.0 };
+  let d = p1.distance_to(&p2);
+  println!("distance is {}", d);
+}
+```
+
+Traits can specify other traits that must also be implemented
+by any structs that implement them.  For example:
+
+```rust
+pub trait HockeyPlayer: Athlete + Person {
+  // Describe functions unique to hockey players here.
+}
+```
+
+Now any `struct` that implements `HockeyPlayer`
+must also implement `Athlete` and `Person`.
+
+## Custom Types
+
+TODO: Is this different from a struct?
 
 ## Modules
 
@@ -420,10 +672,6 @@ TODO: Why are both keywords needed?
 Modules can be nested to further segregate the defined names.
 
 ## Imports
-
-## Custom Types
-
-## Traits
 
 ## Standard Library
 
