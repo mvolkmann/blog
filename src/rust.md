@@ -174,15 +174,16 @@ Press the "TOOLS" button to open a popup with the following options:
 Press the "CONFIG" button to open a popup with the following options:
 
 - "Style" to switch between "SIMPLE" (no line numbers)
-  and "ADVANCED" (line numbers).
+  and "ADVANCED" (line numbers)
 - "Keybinding" to choose between keybindings supported by the
-  {% aTargetBlank "https://github.com/ajaxorg/ace", "Ace" %} (Cloud9) editor.
+  {% aTargetBlank "https://github.com/ajaxorg/ace", "Ace" %} (Cloud9) editor  
   These include ace, emacs, sublime, vim, and vscode.
 - "Theme" to choose from 30+ themes including
-  cobalt, github, solarized light, solarized dark.
-- "Pair Characters" to ???
+  cobalt, github, solarized light, solarized dark
+- "Pair Characters" to automatically insert
+  closing `)`, `}`, and `]` character after `(`, `{`, and `[` characters
 - "Orientation" to arrange panes horizontally, vertically,
-  or automatically choose based on window size.
+  or automatically choose based on window size
 - and advanced options to control generated assembly code
 
 There doesn't seem to be a way to select a font for the code.
