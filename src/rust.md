@@ -429,9 +429,12 @@ There are four ways to declare a "variable".
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `let name: type = value`        | immutable variable that must be assigned a value<br>before it is used and is thereafter immutable     |
 | `let mut name: type = value`    | mutable variable that must be assigned a value<br>before it is used, but can be modified              |
-| `const name = value`            | constant that must be assigned a value when it is declared                                            |
+| `const name: type = value`      | constant that must be assigned a value when it is declared                                            |
 | `static name: type = value`     | immutable variable that lives for the duration of the program; typically `const` is preferred         |
 | `static mut name: type = value` | mutable variable that lives for the duration of the program;<br>can only mutate in `unsafe` functions |
+
+Note that `const` declarations must be explicitly typed.
+They do not infer a type based on the assigned value.
 
 TODO: Are statics a way to share data across functions,
 TODO: even those defined in separate files, without passing it?
