@@ -447,7 +447,7 @@ Memory management in Rust is handle by following these rules:
 ## Built-in Scalar Types
 
 Rust defines four scalar (primitive) types which are
-boolean, character, integer, and floating-point.
+boolean, character, integer, and floating point.
 
 The boolean type name is `bool`.
 Its only values are `true` and `false`.
@@ -470,8 +470,10 @@ and binary values begin with `0b`.
 
 The unsigned integer types are the same, but start with `u` instead of `i`.
 
-Floating-point type names are `f{n}` where `{n}` is 32 or 64.
+Floating point type names are `f{n}` where `{n}` is 32 or 64.
 The default type for literal floats is `f64` regardless of the processor.
+Literal floating point values must include a decimal point
+to avoid being treated as integer values.
 
 ## Built-in Compound Types
 
@@ -573,7 +575,7 @@ For example:
 fn main() {
   struct Point2D {
     x: f64,
-    y: f64,
+    y: f64, // comma after last field is optional
   }
 
   impl Point2D {
@@ -591,10 +593,65 @@ fn main() {
 }
 ```
 
+To allow structs to be printed for debugging purposes,
+add the following above their definition:
+`#[derive(Debug)]`.
+Then print using the `:?` (single line) or `:#f` (multi-line) format specifier.
+For example:
+
+```rust
+println!("p1 = {:?}", p1);
+println!("p2 = {:#?}", p1);
+```
+
+This outputs the following:
+
+```text
+p1 = Point2D { x: 3.0, y: 4.0 }
+p2 = Point2D {
+    x: 3.0,
+    y: 4.0,
+}
+```
+
+
+A `struct` can be empty, containing no fields.
+This is useful for implementing groups of functionality
+that do not require fields.
+
 Structs and their fields are accessible by default within the same source file,
 but they are private by default when defined in a different source file.
 For structs that should be visible outside the source file that defines them,
 add the `pub` keyword to both the `struct` and the fields to be exposed.
+
+A `struct` can include the fields of another `struct` of the same type
+using the `..` syntax.
+This can only appear at the end of the list of values.
+It only supplies values that were not specified.
+For example:
+
+```rust
+struct Point3D {
+  x: f64,
+  y: f64,
+  z: f64
+}
+let p3 = Point2D { x: 1, y: 2, z: 3 };
+let p4 = Point3D { z: 4, ..p3 }; // uses p3.x and p3.y, but not p3.z
+```
+
+A "tuple struct" gives a name to a tuple.
+For example:
+
+```rust
+#[derive(Debug)]
+struct RGB(u8, u8, u8);
+
+const CORNFLOWER_BLUE: RGB = RGB(100, 149, 237);
+const REBECCA_PURPLE: RGB = RGB(0x66, 0x33, 0x99);
+println!("{:?}", CORNFLOWER_BLUE); // RGB(100, 149, 237)
+println!("{:?}", REBECCA_PURPLE); // RGB(102, 51, 153)
+```
 
 Structs cannot inherit from (extend) other structs,
 but they can nest other structs (composition).
