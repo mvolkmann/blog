@@ -668,6 +668,71 @@ fn main() {
 }
 ```
 
+## Dereference
+
+The dereference operator is used to get the value of a reference.
+It isn't needed very often.
+This is because unlike in most programming languages
+that support references (or pointers),
+Rust does not require different syntax for accessing fields and methods
+based on whether an instance or a reference is used.
+For example:
+
+```rust
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+impl Point2D {
+    fn is_origin(&self) -> bool {
+        self.x == 0.0 &&self.y == 0.0
+    }
+}
+
+fn main() {
+    let p = Point2D { x: 1.0, y: 2.0 };
+    let p_ref = &p;
+    println!("{}", p.x); // 1
+    println!("{}", p_ref.x); // 1
+    println!("{}", p.is_origin()); // false
+    println!("{}", p_ref.is_origin()); // false
+}
+```
+
+Here is an example where dereference is needed:
+
+```rust
+// Implementing the PartialEq and PartialOrd traits
+// enables comparing instances.
+#[derive(Debug, PartialEq, PartialOrd)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+const ORIGIN: Point2D = Point2D { x: 0.0, y: 0.0 };
+
+fn is_origin(pt: &Point2D) -> bool {
+    // We could just check whether x and y are zero,
+    // but then we wouldn't need to dereference pt.
+    //pt.x == 0.0 && pt.y == 0.0
+
+    // We can't compare a Point2D reference to a Point2D,
+    // but we can dereference pt to get the Point2D instance
+    // it references and then compare that to ORIGIN.
+    *pt == ORIGIN
+}
+
+fn main() {
+    let p = Point2D { x: 1.0, y: 2.0 };
+    let q = Point2D { x: 0.0, y: 0.0 };
+    println!("p equal q? {}", p == q); // false
+    println!("p is origin? {:?}", is_origin(&p)); // false
+    println!("q is origin? {:?}", is_origin(&q)); // true
+}
+```
+
 ## Lifetimes
 
 Lifetimes ensure that memory does not get freed
