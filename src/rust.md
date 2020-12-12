@@ -608,6 +608,125 @@ Rust supports common operators including:
 
 ## Conditional Logic
 
+`if` expressions are the most common way to implement conditional logic.
+The condition is not surrounded by parentheses.
+where blocks require surrounding curly brackets.
+For example:
+
+```rust
+if temperature > 90 {
+  println!("hot");
+} else if temperature < 40 {
+  println!("cold");
+} else {
+  println!("tolerable");
+}
+```
+
+The expression can be assigned to a variable.
+Newlines are not required, so this can be written on a single line.
+For example:
+
+```rust
+let color = if temperature > 90 { "red" } else { "blue" };
+```
+
+A variation on `if` is an `if let` which
+uses pattern matching to extract a value.
+
+Another option is a `match` expression.
+This is often used in conjunction the `Option` type
+which is an enum with two possible values,
+`Some(value)` and `None`.
+`Option` can be used as the return type of a function that can fail.
+When it succeeds, a value is returned using `Some(value)`.
+When it fails, `None` is returned.
+For example:
+
+```rust
+fn divide(numerator: f64, denominator: f64) -> Option<f64> {
+  if denominator == 0. {
+    None // means there is no result, but doesn't explain why
+  } else {
+    Some(numerator / denominator)
+  }
+}
+
+fn main() {
+  let n = 5.;
+  let d = 2.;
+  match divide(n, d) {
+    None => println!("divide by zero"),
+    Some(result) => println!("{:.2}", result),
+  }
+}
+```
+
+The `Result` type is similar to `Option`,
+but supports expressing why a function failed.
+For example:
+
+```rust
+#[derive(Debug)]
+pub enum MathError {
+  DivisionByZero
+}
+
+// Commented lines show an alternative why to describe the error.
+//const DIV_BY_ZERO: &str = "divide by zero";
+
+fn divide(numerator: f64, denominator: f64) -> Result<f64, MathError> {
+//fn divide(numerator: f64, denominator: f64) -> Result<f64, &'static str> {
+  if denominator == 0. {
+    Err(MathError::DivisionByZero)
+    //Err(DIV_BY_ZERO)
+  } else {
+    Ok(numerator / denominator)
+  }
+}
+
+fn main() {
+  let n = 5.;
+  let d = 0.;
+  match divide(n, d) {
+    Err(e) => println!("{:?}", e),
+    //Err(msg) => println!("{}", msg),
+    Ok(result) => println!("{:.2}", result),
+  }
+}
+```
+
+Rust does not support the ternary operator (`? :`)
+found in many other programming languages.
+Since `if` forms an expression that has a value,
+the following can be written to simulate a ternary:
+
+```rust
+const color = if temperature > 90 { "red" } else { "blue" };
+```
+
+It is possible to write a macro to mimic this,
+but it doesn't reduce the expression much.
+For example:
+
+```rust
+macro_rules! tern {
+    ($cond:expr => $true_expr:expr, $false_expr:expr) => {
+        if $cond {
+            $true_expr
+        } else {
+            $false_expr
+        }
+    };
+}
+
+fn main() {
+    let temperature = 80;
+    let color = tern!(temperature > 90 => "red", "blue");
+    println!("{}", color); // blue
+}
+```
+
 ## Iteration
 
 ## Functions
