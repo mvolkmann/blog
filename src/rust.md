@@ -223,9 +223,10 @@ Install the Rust extension which adds:
 - code completion
 - code formatting
 - type documentation on hover
+- linting with error indicators with ability to apply suggestions
 - code snippets
 - rename refactoring
-- linting with error indicators with ability to apply suggestions
+- debugging
 - build tasks
 
 TODO: This extension seems to do nothing!
@@ -499,7 +500,7 @@ The syntax for an array type is `[type, length]`.
 The syntax for an array value is `[value1, value2, ...]`.
 For example:
 
-````rust
+```rust
 let rgb = ["red", "green", "blue"];
 // A Rust string is a "compound collection", covered later.
 let sevens = [7, 5]; // same as [7, 7, 7, 7, 7]
@@ -517,17 +518,87 @@ TODO: Do they all have the same type?
 Rust defines three kinds of collections that hold a variable number of values.
 These include strings, vectors, and hash maps.
 
-Strings are collections of characters.
+Strings are collections of UTF-8 encoded characters.
 Literal values are surrounded by double quotes.
 
 Vectors are collections of any kind of value.
 
 Hash maps hold key/value pairs where the keys and values can be any type.
 
-There are two kinds of strings used in Rust programs.
-The Rust language defines the `str` type
+## Strings
+
+Strings are more difficult to work with in Rust than in other languages.
+Rust trades simplicity here for better
+performance, concurrency, memory management.
+
+There are two kinds of strings in Rust.
+The language defines the "string slice" type `str`
 and the standard library defines the `String` type.
-TODO: Explain the differences!
+A `str` value has a fixed length (with some exceptions)
+and can be stored on the stack or in the heap.
+A `String` value has a variable length and is stored in the heap.
+
+Literal strings (zero or more characters) are surrounded by double quotes
+and have the type `&str`.
+Literal characters (just one) are surrounded by single quotes
+and have the type `char`.
+
+In the table below, assume
+the variable `c` holds a `char` value,
+the variables `s` and `t` hold `&str` values, and
+the variables `u`, `v`, and `w` hold `String` values.
+Everywhere `c` is used, a literal character can be used in its place.
+Everywhere `s` and `t` are used, a literal string can be used in its place.
+
+| Operation                                         | Syntax                           |
+| ------------------------------------------------- | -------------------------------- |
+| create `&str`                                     | `"text in double quotes"`        |
+| create `String` #1                                | `String::from(s)`                |
+| create `String` #2                                | `s.to_string()`                  |
+| create empty `String`                             | `String::new()`                  |
+| create `String` from multiple `&str` #1           | `let u = [s, t].concat();`       |
+| create `String` from multiple `&str` #2           | `let u = format!("{}{}", s, t);` |
+| create `String` from `String` and `&str` (1)      | `let u = v + s;`                 |
+| create `String` from multiple `String` values (2) | `let u = v + &w;`                |
+| convert `&str` to `String`                        | `s.to_string()`                  |
+| convert `String` to `&str` without copying        | `let s = &t;`                    |
+| concatenate to `&str`                             | cannot be done                   |
+| concatenate to `&str` to `String`                 | `u += s;`                        |
+| concatenate to `String` to `String`               | `u += v;`                        |
+| concatenate to `char` to `String` (3)             | `u.push(c);`                     |
+| concatenate to `&str` to `String` (3)             | `u.push_str(s);`                 |
+| get substring of `&str`                           | `s[start..end]` (4)              |
+| get substring of `String`                         | same as for `&str`               |
+| get substring from index to end                   | `s[start..]`                     |
+| get substring from beginning to index             | `s[..end]`                       |
+| get substring where end is inclusive              | `u[start.. =end]`                |
+| get `char` at index from `&str`                   | `s.chars().nth(index)` (5)       |
+| get `char` at index from `String`                 | `&u.chars().nth(index)`          |
+
+1. The `String` `u` here must be first.
+1. All `String` values on the right of `=` after the first
+   must be preceded by `&` which converts it to a `&str`.
+1. The `String` `u` must be mutable.
+1. `start` is inclusive and `end` is exclusive.
+1. The `chars` method can be used to iterate over the characters in a string.
+   The `nth` method returns a `Option` object because
+   the string may be shorter than the index.
+   To get the `char` from it, use one of the approaches below.
+
+```rust
+let char5 = &myString.chars().nth(5);
+
+// Approach #1
+if let Some(c) = char5 {
+  println!("5th char is {}", c);
+}
+
+// Approach #2
+match char5 {
+  Some(c) => println!("5th char is {}", c);
+  None => {} // ignores when string is shorter
+}
+```
 
 ## Operators
 
@@ -543,22 +614,31 @@ Rust supports common operators including:
 
 Functions are defined using the `fn` keyword,
 followed by a name, parameter list, return type, and body.
+Functions that do not return anything omit the return type rather than
+specify a type like `void` as is done in some other languages.
+
+A `return` statement returns the value of an expression.
+If the last statement is not terminated by a semicolon, its value is returned.
+This means that `return my_result;` is equivalent to `my_result`.
+
 For example:
 
 ```rust
 fn average(numbers: &Vec<f64>) -> f64 {
-  numbers.iter().sum() / numbers.len() as f64
+  let sum: f64 = numbers.iter().sum();
+  sum / numbers.len() as f64 // return value
+}
+
+fn greet(name: &str) {
+  println!("Hello, {}!", name);
 }
 
 fn main() {
   let numbers: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
   println!("average = {}", average(&numbers));
+  greet("World");
 }
 ```
-
-A `return` statement returns the value of an expression.
-If the last statement is not terminated by a semicolon, its value is returned.
-This means that `return my_result;` is equivalent to `my_result`.
 
 Functions are accessible by default within the same source file,
 but they are private by default when defined in a different source file.
@@ -616,7 +696,6 @@ p2 = Point2D {
     y: 4.0,
 }
 ```
-
 
 A `struct` can be empty, containing no fields.
 This is useful for implementing groups of functionality
@@ -695,7 +774,7 @@ fn main() {
 ```
 
 Traits can specify other traits that must also be implemented
-by any structs that implement them.  For example:
+by any structs that implement them. For example:
 
 ```rust
 pub trait HockeyPlayer: Athlete + Person {
@@ -813,4 +892,7 @@ To compile a `.rs` file to WebAssembly:
    ```js
    console.log(factorial(4n)); // "n" suffix makes it BitInt
    ```
-````
+
+```
+
+```
