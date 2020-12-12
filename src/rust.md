@@ -631,19 +631,15 @@ For example:
 let color = if temperature > 90 { "red" } else { "blue" };
 ```
 
-A variation on `if` is an `if let` which
-uses pattern matching to extract a value.
-TODO: Show an example of this!
+Other ways to implement conditional logic
+include `if let` and `match` expressions
+which use pattern matching to extract a value.
+These are often used in conjunction with `Option` and `Result` enum types
+which can be the result type of functions that can fail.
 
-Another option is a `match` expression.
-This is often used in conjunction the `Option` type
-which is an enum with two possible values,
-`Some(value)` and `None`.
-`Option` can be used as the return type of a function that can fail.
-It is similar to the `Maybe` monad in Haskell.
-When it succeeds, a value is returned using `Some(value)`.
-When it fails, `None` is returned.
-For example:
+Here is an example of using the `Option` type
+whose possible values are `Some(value)` and `None`.
+This is similar to the `Maybe` monad in Haskell.
 
 ```rust
 fn divide(numerator: f64, denominator: f64) -> Option<f64> {
@@ -657,17 +653,25 @@ fn divide(numerator: f64, denominator: f64) -> Option<f64> {
 fn main() {
   let n = 5.;
   let d = 2.;
+
   match divide(n, d) {
     None => println!("divide by zero"),
     Some(result) => println!("{:.2}", result),
   }
+
+  if let Some(result) = divide(n, d) {
+    println!("result is {}", result);
+  } else {
+    println!("fail")
+  }
 }
 ```
 
-The `Result` type is similar to `Option`,
-but supports expressing why a function failed.
-It is similar to the `Either` monad in Haskell.
-For example:
+Here is an example of using the `Result` type
+whose possible values are `Ok(value)` and `Err(why)`.
+It differs from the `Option` type in that
+it can express why a function failed.
+This is similar to the `Either` monad in Haskell.
 
 ```rust
 #[derive(Debug)]
@@ -675,7 +679,8 @@ pub enum MathError {
   DivisionByZero
 }
 
-// Commented lines show an alternative why to describe the error.
+// Commented lines show an alternative way
+// to describe the error using a string.
 //const DIV_BY_ZERO: &str = "divide by zero";
 
 fn divide(numerator: f64, denominator: f64) -> Result<f64, MathError> {
@@ -691,10 +696,17 @@ fn divide(numerator: f64, denominator: f64) -> Result<f64, MathError> {
 fn main() {
   let n = 5.;
   let d = 0.;
+
   match divide(n, d) {
     Err(e) => println!("{:?}", e),
     //Err(msg) => println!("{}", msg),
-    Ok(result) => println!("{:.2}", result),
+    Ok(result) => println!("result is {:.2}", result),
+  }
+
+  if let Ok(result) = divide(n, d) {
+    println!("result is {}", result);
+  } else {
+    println!("fail")
   }
 }
 ```
