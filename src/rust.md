@@ -668,6 +668,38 @@ fn main() {
 }
 ```
 
+Early we said that memory allocated in a scope is freed when that scope exits.
+However, there is an exception to this
+when ownership is transferred outside the block.
+For example:
+
+```rust
+fn main() {
+    let a;
+
+    {
+        // Allocate inside block.
+        let b = String::from("test");
+
+        // Move ownership to a which lives outside this block.
+        a = b;
+
+        // If the previous line is changed to
+        // a = &b;
+        // we get the error "`b` does not live long enough"
+        // because a will no longer get ownership
+        // and b will be freed at the end of the block.
+
+        // Memory for b is not freed when this block exits
+        // because b no longer owns it.
+    }
+
+    // We can use the value here because
+    // the lifetime of a has not ended yet.
+    println!("{}", a);
+}
+```
+
 ## Dereference
 
 The dereference operator is used to get the value of a reference.
