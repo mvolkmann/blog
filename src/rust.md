@@ -448,6 +448,69 @@ Memory management in Rust is handle by following these rules:
 1. Each value has one owner at a time.
 1. When the owner goes out of the scope, the value is dropped.
 
+## Lifetimes
+
+Lifetimes ensure that memory does not get freed
+before a reference to it can use it.
+This is only a concern in functions that
+take two or more references and return one of them.
+
+All reference parameters and reference return types have a lifetime,
+but the Rust compiler automatically determines them in most cases.
+When it cannot, you must explicitly specify them.
+This is typically only needed when
+reference parameters can be returned.
+Usually the same lifetime is used on
+all of them AND on the return reference type.
+
+Lifetimes are specified appear before type names
+are are composed of a single quote followed by a name
+which is typically a single letter such as "a".
+They only serve to indicate which items in a function signature
+have the same lifetime, not an actual duration.
+
+The following code illustrates potential errors
+that lifetime checking prevents.
+
+```rust
+fn a(s1: &String) -> &String {
+  let s2 = String::from("second");
+  return b(s1, &s2);
+}
+
+// This function signature results in
+// "explicit lifetime required" errors for s1 and s2.
+// and a "missing lifetime specifier" error on the return type.
+// This is because when more than one reference is passed to a function
+// AND one of them can be returned, Rust requires lifetime specifiers.
+//fn b(s1: &String, s2: &String) -> &String {
+
+// This function signature includes lifetime specifiers.
+// Now we get an error on the call to function b above
+// because it might return the value of the local variable s2
+// which is freed when function a exits.
+// "s2" would not be available in the caller ("main" in this case).
+fn b<'a>(s1: &'a String, s2: &'a String) -> &'a String {
+  if s1 > s2 {
+    s1
+  } else {
+    s2
+  }
+}
+
+fn main() {
+  let s1 = String::from("first");
+  println!("greatest is {}", a(&s1));
+}
+```
+
+To use more than one lifetime specifier in a function signature,
+list them after the function name inside angle brackets separated by commas.
+For example, `fn my_function<'a, 'b>(...)`.
+
+To specify that lifetime `b` is at least as long as lifetime `a`,
+use `fn my_function<'a, 'b: 'a>(...)`.
+
 ## Built-in Scalar Types
 
 Rust defines four scalar (primitive) types which are
@@ -598,6 +661,22 @@ match char5 {
   Some(c) => println!("5th char is {}", c);
   None => {} // ignores when string is shorter
 }
+```
+
+In many programming languages strings are immutable.
+To make a change you create a new string
+and assign it back to the same variable.
+In Rust the `&mut str` type can be used for this.
+If it is desirable to modify a string in place,
+perhaps for performance reasons, the `mut String` type can be used instead.
+For example:
+
+```rust
+let mut s1 = "first";
+s1 = "second";
+
+let mut s2 = String::from("first");
+s2.replace_range(.., "second");
 ```
 
 ## Operators
