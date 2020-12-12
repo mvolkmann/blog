@@ -215,6 +215,9 @@ fn main() {
 }
 ```
 
+See the "Cargo" section for an alternative way
+to compile and run a Rust program.
+
 ## VS Code
 
 Install the Rust extension which adds:
@@ -314,6 +317,15 @@ and names of "value" use snake_case.
 | type parameters | PascalCase, but usually one letter |
 | types           | PascalCase                         |
 | variables       | snake_case                         |
+
+## Syntax Details
+
+The dot (`.`) character is used to
+access struct fields and call instance methods.
+
+The double colon (`::`) is used as
+a namespace separator (borrowed from C++)
+and to call static methods.
 
 ## Comments
 
@@ -440,13 +452,129 @@ They do not infer a type based on the assigned value.
 TODO: Are statics a way to share data across functions,
 TODO: even those defined in separate files, without passing it?
 
-## Rules of Ownership
+## Ownership Model
 
-Memory management in Rust is handle by following these rules:
+The Rust ownership model provides the following benefits:
+
+- runtime speed achieved by eliminating the need for a garbage collector (GC)
+- more predictable performance since there are no GC pauses
+- safer memory access since there is no possibility of
+  null pointer accesses or dangling pointer accesses
+  (accessing memory that has already been freed)
+- safer parallel and concurrent processing
+  since there is no possibility of data races
+  causing unpredictable interactions between threads
+
+Memory management is handled by following these rules:
 
 1. Each value is referred to by a variable that is its owner.
-1. Each value has one owner at a time.
+1. Each value has one owner at a time, the owner can change over its lifetime.
 1. When the owner goes out of the scope, the value is dropped.
+
+Variable values are stored either in the stack or the heap.
+Accessing stack data is faster, but data on the heap can grow and shrink
+and it can live beyond the scope that created it.
+
+Variable values whose sizes are known at compile time are stored on the stack.
+This includes booleans (`bool` type), single characters (`char` type), numbers,
+tuples, and arrays.
+Variable values of all other types are stored in the heap.
+This includes:
+
+- strings (`&str` and `String`)
+- structs, even those that only contain
+  fields with types that have a known size
+- collections from the `std::collections` namespace
+  which defines sequences (`Vec`, `VecDeque`, and `LinkedList`),
+  sets (`HashSet` and `BTreeSet`), and maps (`HashMap` and `BTreeMap`).
+
+A value of these types can be stored on the heap by using the `Box` type.
+For example:
+
+```rust
+let heap_int: Box<i32> = Box::new(19);
+```
+
+Note: Sometimes Rust stores `&str` values on the stack
+but you cannot control that, so it's best to think of them
+as always being on the heap.
+
+All code blocks are delimited by a pair of curly brackets
+and create a new scope.
+Each new scope can add data to the stack
+that is freed when that scope exits.
+Many keywords have an associated block, including
+`fn`, `if`, `loop`, `for`, and `while`.
+
+Here are some examples that demonstrate ownership
+inside a single function:
+
+```rust
+fn main() {
+  let a = 1;
+  // Because a is a scalar type (fixed size),
+  // this makes a copy of a and assigns that to b
+  // rather than moving ownership from a to b.
+  // Both a and b can then be used.
+  let b = a;
+  println!("b = {}", b); // 1
+  println!("a = {}", a); // 1
+
+  let c = String::from("test");
+  // Because c is on the heap and does not implement the Copy trait,
+  // this moves ownership from c to d.
+  // c can no longer be used.
+  let d = c;
+  println!("d = {}", d); // test
+  //println!("c = {}", c); // error "value borrowed here after move"
+
+  // The Copy trait requires also implementing the Clone trait.
+  // We can also implement these traits manually, but that is more work.
+  #[derive(Clone, Copy, Debug)]
+  struct Point2D {
+      x: f64,
+      y: f64
+  }
+  let e = Point2D { x: 1.0, y: 2.0 };
+  // If the struct implements the Copy trait, as we have done above,
+  // a copy is made.  Otherwise this moves ownership from e to f.
+  let f = e;
+  println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
+  // This fails if ownership has been moved from e to f.
+  println!("e = {:?}", e); // error "value borrowed here after move"
+}
+```
+
+We can explicitly make a clone of any value
+whose type implements the `Clone` trait
+by calling the `clone` method on it.
+For example, `let f = e.clone();`
+
+Ownership of a value can also be "borrowed".
+For example:
+
+```rust
+  let e = Point2D { x: 1.0, y: 2.0 };
+  let f = &e;
+  println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
+  println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
+```
+
+When a value is mutable and ownership is borrowed,
+Rust will flag an error if the value is mutated
+after ownership is borrowed and before the last use of the borrow.
+For example:
+
+```rust
+  let mut e = Point2D { x: 1.0, y: 2.0 };
+  let f = &e;
+  println!("f = {:?}", f); // works
+  // If f is used after this, the next line triggers the error
+  // "cannot assign to `e.x` because it is borrowed".
+  e.x += 3.0;
+  println!("e = {:?}", e); // Point2D { x: 4.0, y: 2.0 }
+  println!("f = {:?}", f); // triggers error on mutation above
+```
 
 ## Lifetimes
 
@@ -576,20 +704,21 @@ For example, `rgb[1]` is "green".
 A vector is a variable-length list of values.
 TODO: Do they all have the same type?
 
+## Operators
+
+Rust supports common operators including:
+
+- arithmetic: `+`, `-`, `\*`, `/`, `%` (mod)
+
 ## Collections
 
-Rust defines three kinds of collections that hold a variable number of values.
-These include strings, vectors, and hash maps.
-
-Strings are collections of UTF-8 encoded characters.
-Literal values are surrounded by double quotes.
-
-Vectors are collections of any kind of value.
-
-Hash maps hold key/value pairs where the keys and values can be any type.
+Rust defines many kinds of collections that hold a variable number of values.
+These include strings and collections in the `std::collections` namespace.
 
 ## Strings
 
+Strings are collections of UTF-8 encoded characters.
+Literal values are surrounded by double quotes.
 Strings are more difficult to work with in Rust than in other languages.
 Rust trades simplicity here for better
 performance, concurrency, memory management.
@@ -679,11 +808,40 @@ let mut s2 = String::from("first");
 s2.replace_range(.., "second");
 ```
 
-## Operators
+## `std::collections`
 
-Rust supports common operators including:
+The `std::collections` namespace defines the following sequence types:
 
-- arithmetic: `+`, `-`, `\*`, `/`, `%` (mod)
+- `Vec`: a resizable, ordered array of any kind of value
+  where items can be efficiently added at the end
+- `VecDeque`: like a `Vec`, but items
+  can also be efficiently added at the beginning
+- `LinkedList`: like a `Vec`, but it they
+  can be efficiently split and appended
+
+The `std::collections` namespace defines the following map types:
+
+- `HashMap`: a collection of key/value pairs with efficient value lookup by key
+  where keys and values can be any kind of value
+- `BTreeMap`: like a `HashMap`, but sorted by key enabling efficient retrieval
+  of values corresponding to the smallest key, largest key,
+  closest key that is smaller or larger than some key value,
+  or range of keys
+
+The `std::collections` namespace defines the following set types:
+
+- `HashSet`: a collection of values with efficient determination
+  of whether a given value is a member
+- `BTreeSet`: similar to storing only the keys in a `HashMap`
+
+- `BinaryHeap`: implements a priority queue where
+  only the highest priority item is accessible
+
+### Vectors
+
+| Operation    | Syntax       |
+| ------------ | ------------ |
+| create empty | `Vec::new()` |
 
 ## Conditional Logic
 
@@ -908,6 +1066,18 @@ p2 = Point2D {
     x: 3.0,
     y: 4.0,
 }
+```
+
+Structs are not cloneable, copyable, or printable by default.
+Being copyable allows instances to be
+passed by value (copy) instead of by reference.
+These features add compile time,
+so Rust requires implementing them on a case-by-case basis.
+The easiest way to implement these features
+is the proceed a struct definition with the following:
+
+```rust
+#[derive(Clone, Copy, Debug)]
 ```
 
 A `struct` can be empty, containing no fields.
