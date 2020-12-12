@@ -633,12 +633,14 @@ let color = if temperature > 90 { "red" } else { "blue" };
 
 A variation on `if` is an `if let` which
 uses pattern matching to extract a value.
+TODO: Show an example of this!
 
 Another option is a `match` expression.
 This is often used in conjunction the `Option` type
 which is an enum with two possible values,
 `Some(value)` and `None`.
 `Option` can be used as the return type of a function that can fail.
+It is similar to the `Maybe` monad in Haskell.
 When it succeeds, a value is returned using `Some(value)`.
 When it fails, `None` is returned.
 For example:
@@ -664,6 +666,7 @@ fn main() {
 
 The `Result` type is similar to `Option`,
 but supports expressing why a function failed.
+It is similar to the `Either` monad in Haskell.
 For example:
 
 ```rust
