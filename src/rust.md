@@ -69,8 +69,12 @@ because no other scope can possibly be using the data.
 Systems languages tend to be more complex that non-systems languages,
 requiring more time to learn and more time to write software in them.
 Rust is no exception.
-But some developers choose to them in spite of this
+But some developers choose to use Rust in spite of this
 in order to gain the benefits described above.
+On the positive side, the Rust compiler catches many errors
+that would only be discovered at runtime with other systems languages.
+The Rust compiler also provides very detailed error messages
+that include suggestions on how to correct the errors.
 
 ## Installing
 
@@ -291,6 +295,16 @@ The following table describes the `cargo` subcommands:
 | `uninstall`   | removes executable from `~/.cargo/bin` by default                          |
 | `update`      | updates dependencies in `Cargo.lock`                                       |
 
+## Formatting Code
+
+The most popular code formatting tool for Rust is
+{% aTargetBlank "", "rustfmt" %}.
+To install this, enter `cargo install rustfmt`.
+TODO: Is this installed by default by rustup?
+
+To run it on all `.rs` files in the current directory,
+enter `rustfmt *.rs`.
+
 ## Naming Conventions
 
 In general, names of "types" use PascalCase
@@ -412,16 +426,6 @@ and be inserted more than once. For example:
 ```rust
 println!("{1} {0} {2} {1}", "red", "green", "blue"); // green red blue green
 ```
-
-## Formatting Code
-
-The most popular code formatting tool for Rust is
-{% aTargetBlank "", "rustfmt" %}.
-To install this, enter `cargo install rustfmt`.
-TODO: Is this installed by default by rustup?
-
-To run it on all `.rs` files in the current directory,
-enter `rustfmt *.rs`.
 
 ## Variables
 
@@ -545,11 +549,6 @@ fn main() {
 }
 ```
 
-We can explicitly make a clone of any value
-whose type implements the `Clone` trait
-by calling the `clone` method on it.
-For example, `let f = e.clone();`
-
 Ownership of a value can also be "borrowed".
 For example:
 
@@ -563,17 +562,110 @@ For example:
 When a value is mutable and ownership is borrowed,
 Rust will flag an error if the value is mutated
 after ownership is borrowed and before the last use of the borrow.
+This is because references expect the data they reference
+to remain the same.
 For example:
 
 ```rust
   let mut e = Point2D { x: 1.0, y: 2.0 };
-  let f = &e;
+  let f = &e; // f borrows a reference rather than taking ownership
   println!("f = {:?}", f); // works
   // If f is used after this, the next line triggers the error
   // "cannot assign to `e.x` because it is borrowed".
   e.x += 3.0;
   println!("e = {:?}", e); // Point2D { x: 4.0, y: 2.0 }
   println!("f = {:?}", f); // triggers error on mutation above
+```
+
+An alternative is to clone data instead of borrowing a reference,
+but doing this is often unnecessarily inefficient.
+To clone a value whose type implements the `Clone` trait,
+call the `clone` method on it.
+For example, `let f = e.clone();`
+
+When stack variables are passed to functions,
+the functions are given copies.
+This is true even if the parameters are declared to be mutable.
+For example:
+
+```rust
+fn my_function(x: i32) {
+    println!("{}", x); // 1
+}
+
+fn main() {
+    let x = 1;
+    my_function(x);
+    println!("{}", x); // 1
+}
+```
+
+When heap variables (not references) are passed to functions,
+copies are not made and ownership is transferred.
+When the function exits, the data is freed.
+The calling function can no longer use the variable that was passed in.
+For example:
+
+```rust
+// Note that it is preferable to use &str instead of String here
+// unless we need a mutable String as demonstrated below.
+// However, we want to demonstrate using an argument value
+// that is definitely in the heap.
+fn my_function(s: String) {
+    println!("{}", s); // "test"
+}
+
+fn main() {
+    let s = String::from("test");
+    my_function(s); // error "borrow of moved value: `s`"
+    println!("{}", s); // triggers error above
+}
+```
+
+When references to stack or heap variables are passed to functions,
+ownership is borrowed by the function and
+is returned to the calling function when the function completes.
+For example:
+
+```rust
+// We could pass the i32 argument by reference,
+// but there is no benefit in doing that.
+fn my_function(i: i32, s: &String) {
+    println!("{}", i); // 1
+    println!("{}", s); // "test"
+}
+
+fn main() {
+    let i = 1;
+    let s = String::from("test");
+    my_function(i, &s);
+    println!("{}", i); // 1
+    println!("{}", s); // "test"
+}
+```
+
+To allow a function to modify data passed to it by reference,
+pass and receive mutable references.
+For example:
+
+```rust
+fn my_function(i: &mut i32, s: &mut String) {
+    println!("{}", i); // 1
+    *i += 1;
+    println!("{}", s); // "test"
+    s.push_str(" more");
+}
+
+fn main() {
+    let mut i = 1; // on stack
+    let mut s = String::from("test"); // on heap
+    // Even though i and s are mutable, the arguments to
+    // my_function below do not need to be marked as mutable
+    // unless that function requires them to be mutable.
+    my_function(&mut i, &mut s);
+    println!("{}", i); // 2
+    println!("{}", s); // "test more"
+}
 ```
 
 ## Lifetimes
@@ -724,10 +816,11 @@ Rust trades simplicity here for better
 performance, concurrency, memory management.
 
 There are two kinds of strings in Rust.
-The language defines the "string slice" type `str`
+The language defines the "string slice" type `&str`
 and the standard library defines the `String` type.
-A `str` value has a fixed length (with some exceptions)
-and can be stored on the stack or in the heap.
+A `&str` value has a fixed length and its data
+can be stored on the stack or in the heap.
+Variables of this type hold a reference to the data wherever it lives.
 A `String` value has a variable length and is stored in the heap.
 
 Literal strings (zero or more characters) are surrounded by double quotes
@@ -806,6 +899,22 @@ s1 = "second";
 
 let mut s2 = String::from("first");
 s2.replace_range(.., "second");
+```
+
+When a `String` reference is passed to a function that expects a `&str`
+it is automatically coerced to that type.
+For example:
+
+```rust
+fn my_function(s: &str) {
+    println!("{}", s); // "test"
+}
+
+fn main() {
+    let s = String::from("test");
+    my_function(&s);
+    println!("{}", s); // "test"
+}
 ```
 
 ## `std::collections`
