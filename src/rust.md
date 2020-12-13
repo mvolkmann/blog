@@ -437,6 +437,7 @@ The following table summarizes commonly used attributes.
 | -------------------------------- | ------------------------------------------------------ |
 | `allow(warning1, warning2, ...)` | suppress specified warnings (ex. `dead_code` )         |
 | `derive(trait1, trait2, ...)`    | automatically implement a list of traits on a `struct` |
+| `doc`                            | provides an alternate way to include doc comments      |
 | `should_panic`                   | indicates that a test is expected to panic             |
 | `test`                           | annotates a function as a test                         |
 
@@ -1322,7 +1323,33 @@ fn main() {
 }
 ```
 
-## Iteration
+## Iteration (Looping)
+
+Rust supports the following looping expressions:
+
+| Name        | Description                                                               |
+| ----------- | ------------------------------------------------------------------------- |
+| `loop`      | infinite loop that can be exited with a `break`                           |
+| `while`     | top-tested loop that repeats as long as an expression evaluates to `true` |
+| `while let` | like `while`, but repeats as long as a pattern match succeeds             |
+| `for`       | for looping over an iterator                                              |
+
+Here are examples of each of these kinds of loops:
+
+```rust
+use std::io::stdin;
+
+fn main() {
+    let mut answer = String::new();
+    loop {
+        stdin().read_line(&mut answer);
+        if answer == "quit" {
+            break;
+        }
+        println!("You said {}.", answer);
+    }
+}
+```
 
 ## Functions
 
@@ -1372,6 +1399,27 @@ fn main() {
     };
     inner();
     println!("{}", a);
+}
+```
+
+Rust does not support writing functions that
+accept a variable number of arguments (variadic).
+They can instead be passed in an array.
+For example:
+
+```rust
+// This takes an array of strings and returns one of them.
+// Lifetimes must be specified, but why?
+fn longest<'a>(strings: &'a [&str]) -> &'a str {
+    strings
+        .iter()
+        .fold("", |acc, s| if s.len() > acc.len() { s } else { acc })
+}
+
+fn main() {
+    let fruits = ["apple", "banana", "cherry", "date"];
+    let result = longest(&fruits);
+    println!("longest is {}", result);
 }
 ```
 
