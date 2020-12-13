@@ -345,6 +345,7 @@ and names of "value" use snake_case.
 
 ## Syntax Highlights
 
+- The preferred indentation is four spaces.
 - Statements must terminated by a semicolon.
 - Strings are delimited by double quotes.
 - Single characters are delimited by single quotes.
@@ -637,37 +638,37 @@ inside a single function:
 
 ```rust
 fn main() {
-  let a = 1;
-  // Because a is a scalar type (fixed size),
-  // this makes a copy of a and assigns that to b
-  // rather than moving ownership from a to b.
-  // Both a and b can then be used.
-  let b = a;
-  println!("b = {}", b); // 1
-  println!("a = {}", a); // 1
+    let a = 1;
+    // Because a is a scalar type (fixed size),
+    // this makes a copy of a and assigns that to b
+    // rather than moving ownership from a to b.
+    // Both a and b can then be used.
+    let b = a;
+    println!("b = {}", b); // 1
+    println!("a = {}", a); // 1
 
-  let c = String::from("test");
-  // Because c is on the heap and does not implement the Copy trait,
-  // this moves ownership from c to d.
-  // c can no longer be used.
-  let d = c;
-  println!("d = {}", d); // test
-  //println!("c = {}", c); // error "value borrowed here after move"
+    let c = String::from("test");
+    // Because c is on the heap and does not implement the Copy trait,
+    // this moves ownership from c to d.
+    // c can no longer be used.
+    let d = c;
+    println!("d = {}", d); // test
+    //println!("c = {}", c); // error "value borrowed here after move"
 
-  // The Copy trait requires also implementing the Clone trait.
-  // We can also implement these traits manually, but that is more work.
-  #[derive(Clone, Copy, Debug)]
-  struct Point2D {
-      x: f64,
-      y: f64
-  }
-  let e = Point2D { x: 1.0, y: 2.0 };
-  // If the struct implements the Copy trait, as we have done above,
-  // a copy is made.  Otherwise this moves ownership from e to f.
-  let f = e;
-  println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
-  // This fails if ownership has been moved from e to f.
-  println!("e = {:?}", e); // error "value borrowed here after move"
+    // The Copy trait requires also implementing the Clone trait.
+    // We can also implement these traits manually, but that is more work.
+    #[derive(Clone, Copy, Debug)]
+    struct Point2D {
+        x: f64,
+        y: f64
+    }
+    let e = Point2D { x: 1.0, y: 2.0 };
+    // If the struct implements the Copy trait, as we have done above,
+    // a copy is made.  Otherwise this moves ownership from e to f.
+    let f = e;
+    println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
+    // This fails if ownership has been moved from e to f.
+    println!("e = {:?}", e); // error "value borrowed here after move"
 }
 ```
 
@@ -675,10 +676,10 @@ Ownership of a value can also be "borrowed".
 For example:
 
 ```rust
-  let e = Point2D { x: 1.0, y: 2.0 };
-  let f = &e;
-  println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
-  println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
+let e = Point2D { x: 1.0, y: 2.0 };
+let f = &e;
+println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
+println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
 ```
 
 When a value is mutable and ownership is borrowed,
@@ -689,14 +690,14 @@ to remain the same.
 For example:
 
 ```rust
-  let mut e = Point2D { x: 1.0, y: 2.0 };
-  let f = &e; // f borrows a reference rather than taking ownership
-  println!("f = {:?}", f); // works
-  // If f is used after this, the next line triggers the error
-  // "cannot assign to `e.x` because it is borrowed".
-  e.x += 3.0;
-  println!("e = {:?}", e); // Point2D { x: 4.0, y: 2.0 }
-  println!("f = {:?}", f); // triggers error on mutation above
+let mut e = Point2D { x: 1.0, y: 2.0 };
+let f = &e; // f borrows a reference rather than taking ownership
+println!("f = {:?}", f); // works
+// If f is used after this, the next line triggers the error
+// "cannot assign to `e.x` because it is borrowed".
+e.x += 3.0;
+println!("e = {:?}", e); // Point2D { x: 4.0, y: 2.0 }
+println!("f = {:?}", f); // triggers error on mutation above
 ```
 
 An alternative is to clone data instead of borrowing a reference,
@@ -927,8 +928,8 @@ that lifetime checking prevents.
 
 ```rust
 fn a(s1: &String) -> &String {
-  let s2 = String::from("second");
-  return b(s1, &s2);
+    let s2 = String::from("second");
+    return b(s1, &s2);
 }
 
 // This function signature results in
@@ -944,16 +945,16 @@ fn a(s1: &String) -> &String {
 // which is freed when function a exits.
 // "s2" would not be available in the caller ("main" in this case).
 fn b<'a>(s1: &'a String, s2: &'a String) -> &'a String {
-  if s1 > s2 {
-    s1
-  } else {
-    s2
-  }
+    if s1 > s2 {
+        s1
+    } else {
+        s2
+    }
 }
 
 fn main() {
-  let s1 = String::from("first");
-  println!("greatest is {}", a(&s1));
+    let s1 = String::from("first");
+    println!("greatest is {}", a(&s1));
 }
 ```
 
@@ -1108,13 +1109,13 @@ let char5 = &myString.chars().nth(5);
 
 // Approach #1
 if let Some(c) = char5 {
-  println!("5th char is {}", c);
+    println!("5th char is {}", c);
 }
 
 // Approach #2
 match char5 {
-  Some(c) => println!("5th char is {}", c);
-  None => {} // ignores when string is shorter
+    Some(c) => println!("5th char is {}", c);
+    None => {} // ignores when string is shorter
 }
 ```
 
@@ -1194,11 +1195,11 @@ For example:
 
 ```rust
 if temperature > 90 {
-  println!("hot");
+    println!("hot");
 } else if temperature < 40 {
-  println!("cold");
+    println!("cold");
 } else {
-  println!("tolerable");
+    println!("tolerable");
 }
 ```
 
@@ -1222,27 +1223,27 @@ This is similar to the `Maybe` monad in Haskell.
 
 ```rust
 fn divide(numerator: f64, denominator: f64) -> Option<f64> {
-  if denominator == 0. {
-    None // means there is no result, but doesn't explain why
-  } else {
-    Some(numerator / denominator)
-  }
+    if denominator == 0. {
+        None // means there is no result, but doesn't explain why
+    } else {
+        Some(numerator / denominator)
+    }
 }
 
 fn main() {
-  let n = 5.;
-  let d = 2.;
+    let n = 5.;
+    let d = 2.;
 
-  match divide(n, d) {
-    None => println!("divide by zero"),
-    Some(result) => println!("{:.2}", result),
-  }
+    match divide(n, d) {
+        None => println!("divide by zero"),
+        Some(result) => println!("{:.2}", result),
+    }
 
-  if let Some(result) = divide(n, d) {
-    println!("result is {}", result);
-  } else {
-    println!("fail")
-  }
+    if let Some(result) = divide(n, d) {
+        println!("result is {}", result);
+    } else {
+        println!("fail")
+    }
 }
 ```
 
@@ -1255,7 +1256,7 @@ This is similar to the `Either` monad in Haskell.
 ```rust
 #[derive(Debug)]
 pub enum MathError {
-  DivisionByZero
+    DivisionByZero
 }
 
 // Commented lines show an alternative way
@@ -1264,29 +1265,29 @@ pub enum MathError {
 
 fn divide(numerator: f64, denominator: f64) -> Result<f64, MathError> {
 //fn divide(numerator: f64, denominator: f64) -> Result<f64, &'static str> {
-  if denominator == 0. {
-    Err(MathError::DivisionByZero)
-    //Err(DIV_BY_ZERO)
-  } else {
-    Ok(numerator / denominator)
-  }
+    if denominator == 0. {
+        Err(MathError::DivisionByZero)
+        //Err(DIV_BY_ZERO)
+    } else {
+        Ok(numerator / denominator)
+    }
 }
 
 fn main() {
-  let n = 5.;
-  let d = 0.;
+    let n = 5.;
+    let d = 0.;
 
-  match divide(n, d) {
-    Err(e) => println!("{:?}", e),
-    //Err(msg) => println!("{}", msg),
-    Ok(result) => println!("result is {:.2}", result),
-  }
+    match divide(n, d) {
+        Err(e) => println!("{:?}", e),
+        //Err(msg) => println!("{}", msg),
+        Ok(result) => println!("result is {:.2}", result),
+    }
 
-  if let Ok(result) = divide(n, d) {
-    println!("result is {}", result);
-  } else {
-    println!("fail")
-  }
+    if let Ok(result) = divide(n, d) {
+        println!("result is {}", result);
+    } else {
+        println!("fail")
+    }
 }
 ```
 
@@ -1338,18 +1339,18 @@ For example:
 
 ```rust
 fn average(numbers: &Vec<f64>) -> f64 {
-  let sum: f64 = numbers.iter().sum();
-  sum / numbers.len() as f64 // return value
+    let sum: f64 = numbers.iter().sum();
+    sum / numbers.len() as f64 // return value
 }
 
 fn greet(name: &str) {
-  println!("Hello, {}!", name);
+    println!("Hello, {}!", name);
 }
 
 fn main() {
-  let numbers: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
-  println!("average = {}", average(&numbers));
-  greet("World");
+    let numbers: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
+    println!("average = {}", average(&numbers));
+    greet("World");
 }
 ```
 
@@ -1385,23 +1386,23 @@ For example:
 
 ```rust
 fn main() {
-  struct Point2D {
-    x: f64,
-    y: f64, // comma after last field is optional
-  }
-
-  impl Point2D {
-    fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
-      let dx = self.x - other.x;
-      let dy = self.y - other.y;
-      (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+    struct Point2D {
+        x: f64,
+        y: f64, // comma after last field is optional
     }
-  }
 
-  let p1 = Point2D { x: 3.0, y: 4.0 };
-  let p2 = Point2D { x: 6.0, y: 8.0 };
-  let d = p1.distance_to(&p2);
-  println!("distance is {}", d);
+    impl Point2D {
+        fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
+            let dx = self.x - other.x;
+            let dy = self.y - other.y;
+            (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+        }
+    }
+
+    let p1 = Point2D { x: 3.0, y: 4.0 };
+    let p2 = Point2D { x: 6.0, y: 8.0 };
+    let d = p1.distance_to(&p2);
+    println!("distance is {}", d);
 }
 ```
 
@@ -1455,9 +1456,9 @@ For example:
 
 ```rust
 struct Point3D {
-  x: f64,
-  y: f64,
-  z: f64
+    x: f64,
+    y: f64,
+    z: f64
 }
 let p3 = Point2D { x: 1, y: 2, z: 3 };
 let p4 = Point3D { z: 4, ..p3 }; // uses p3.x and p3.y, but not p3.z
@@ -1490,27 +1491,27 @@ For example:
 
 ```rust
 fn main() {
-  struct Point2D {
-    x: f64,
-    y: f64,
-  }
+    struct Point2D {
+        x: f64,
+        y: f64,
+    }
 
-  trait Distance<T> {
-      fn distance_to(self: &Self, other: &Self) -> T;
-  }
+    trait Distance<T> {
+        fn distance_to(self: &Self, other: &Self) -> T;
+    }
 
-  impl Distance<f64> for Point2D {
-      fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
-          let dx = self.x - other.x;
-          let dy = self.y - other.y;
-          (dx.powf(2.0) + dy.powf(2.0)).sqrt()
-      }
-  }
+    impl Distance<f64> for Point2D {
+        fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
+            let dx = self.x - other.x;
+            let dy = self.y - other.y;
+            (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+        }
+    }
 
-  let p1 = Point2D { x: 3.0, y: 4.0 };
-  let p2 = Point2D { x: 6.0, y: 8.0 };
-  let d = p1.distance_to(&p2);
-  println!("distance is {}", d);
+    let p1 = Point2D { x: 3.0, y: 4.0 };
+    let p2 = Point2D { x: 6.0, y: 8.0 };
+    let d = p1.distance_to(&p2);
+    println!("distance is {}", d);
 }
 ```
 
@@ -1519,7 +1520,7 @@ by any structs that implement them. For example:
 
 ```rust
 pub trait HockeyPlayer: Athlete + Person {
-  // Describe functions unique to hockey players here.
+    // Describe functions unique to hockey players here.
 }
 ```
 
@@ -1531,9 +1532,27 @@ that can be derived (automatically implemented).
 Additional built-in traits that must be manually implemented
 are described in the following table.
 
-| Trait Name | Description |
-| ---------- | ----------- |
-| `Display`  |             |
+| Trait Name     | Description                                                                                         |
+| -------------- | --------------------------------------------------------------------------------------------------- |
+| `AsRef`        |                                                                                                     |
+| `Borrow`       |                                                                                                     |
+| `Display`      | adds a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |
+| `Deref`        |                                                                                                     |
+| `DerefMut`     |                                                                                                     |
+| `Drop`         |                                                                                                     |
+| `From`         |                                                                                                     |
+| `FromStr`      |                                                                                                     |
+| `Into`         |                                                                                                     |
+| `Iterator`     |                                                                                                     |
+| `IntoIterator` |                                                                                                     |
+| `Read`         |                                                                                                     |
+| `Send`         |                                                                                                     |
+| `Sized`        |                                                                                                     |
+| `Sync`         |                                                                                                     |
+| `ToString`     | adds a `to_string` method                                                                           |
+| `Write`        |                                                                                                     |
+
+TODO: Finish adding descriptions in this table.
 
 ## Custom Types
 
@@ -1642,7 +1661,3 @@ To compile a `.rs` file to WebAssembly:
    ```js
    console.log(factorial(4n)); // "n" suffix makes it BitInt
    ```
-
-```
-
-```
