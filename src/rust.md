@@ -1576,6 +1576,10 @@ fn main() {
 }
 ```
 
+TODO: Try to write a generic version of the average function
+TODO: that works on any numeric type. But see
+TODO: https://users.rust-lang.org/t/passing-generic-vector-of-numbers/52486/7.
+
 Functions are accessible by default within the same source file,
 but they are private by default when defined in a different source file.
 For functions that should be visible outside the source file that defines them,
