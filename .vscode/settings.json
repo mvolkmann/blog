@@ -178,6 +178,7 @@
     "cond",
     "conda",
     "condarc",
+    "consts",
     "contextvar",
     "convolutional",
     "copysign",

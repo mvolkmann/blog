@@ -246,7 +246,7 @@ module: a set of related values such as constants and functions
 package: a set of related crates described by a `Cargo.toml` file
 TOML: a configuration file format; stands for Tom's Obvious, Minimal Language
 
-## TOML Syntax
+## TOML
 
 {% aTargetBlank "https://github.com/toml-lang/toml", "TOML" %}
 is a configuration file format that maps to a hash table.
@@ -419,13 +419,64 @@ For example:
 println!("{} is {}.", "Rust", "interesting"); // Rust is interesting.
 ```
 
-The curly brackets can contain indexes which allow
-the expression values to be inserted in a different order
-and be inserted more than once. For example:
+To print a representation of a value for debugging purposes on a single line,
+use `{:?}`. To print each field of a struct on separate lines, use `{:#?}`.
+Custom structs must implement the `Debug` trait in order to use these.
+This is done by adding the line `#[derive(Debug)]` before their definitions.
+
+The following table summarizes the supported format strings
+that can appear inside the curly brackets.
+
+| Format String | Description                                                           |
+| ------------- | --------------------------------------------------------------------- |
+| `{:?}`        | debugging output on single line                                       |
+| `{:#?}`       | debugging output on multiple lines                                    |
+| `{n}`         | prints the argument at index n (zero-based)                           |
+| `{name}`      | prints the value with a given name                                    |
+| `{:.n}`       | prints a number with `n` decimal places                               |
+| `{:.*}`       | prints a number with number of decimal places specified in value list |
+| `{:#X}`       | prints number as uppercase hexadecimal                                |
+| `{:#x}`       | prints number as lowercase hexadecimal                                |
+| `{:<n}`       | print left justified in a width of n                                  |
+| `{:>n}`       | print right justified in a width of n                                 |
+| `{:^n}`       | print centered in a width of n                                        |
+
+Here are some examples:
 
 ```rust
+#[derive(Debug)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
+let p = Point2D { x: 1.0, y: 2.0 };
+println!("{:?}", p); // Point2D { x: 1.0, y: 2.0 }
+println!("{:#?}", p);
+// Point2D {
+//     x: 1.0,
+//     y: 2.0,
+// }
+
 println!("{1} {0} {2} {1}", "red", "green", "blue"); // green red blue green
+
+println!(
+    "{red} {green} {blue}",
+    blue="00F", green="0F0", red="F00"); // F00 0F0 00F
+
+let pi = std::f64::consts::PI;
+println!("{:.4}", pi); // 3.1416
+println!("{:.*}", 4, pi); // 3.1416
+
+println!("{:#X}", 15); // 0xF
+println!("{:#x}", 15); // 0xf
+
+println!("A{:<5}Z", 123); // A123  Z
+println!("A{:>5}Z", 123); // A  123Z
+println!("A{:^5}Z", 123); // A 123 Z
 ```
+
+For more options, see
+{% aTargetBlank "https://doc.rust-lang.org/std/fmt/", "std::fmt" %}.
 
 ## Variables
 
@@ -696,6 +747,20 @@ fn main() {
 
     // We can use the value here because
     // the lifetime of a has not ended yet.
+    println!("{}", a);
+}
+```
+
+Here is a similar example using a closure:
+
+```rust
+fn main() {
+    let mut a = String::new();
+    let mut inner = | | {
+        let b = String::from("test");
+        a = b;
+    };
+    inner();
     println!("{}", a);
 }
 ```
@@ -1222,6 +1287,22 @@ but they are private by default when defined in a different source file.
 For functions that should be visible outside the source file that defines them,
 add the `pub` keyword before the `fn` keyword.
 
+Named functions in Rust are not closures.
+They do not capture variables from their surrounding environment.
+However, anonymous functions assigned to variables are closures.
+For example:
+
+```rust
+fn main() {
+    let mut a = "";
+    let mut inner = | | {
+        a = "test"; // a is visible since we are in a closure
+    };
+    inner();
+    println!("{}", a);
+}
+```
+
 ## Structs
 
 A struct defines a type that is a set of related fields and methods,
@@ -1256,7 +1337,7 @@ fn main() {
 To allow structs to be printed for debugging purposes,
 add the following above their definition:
 `#[derive(Debug)]`.
-Then print using the `:?` (single line) or `:#f` (multi-line) format specifier.
+Then print using the `:?` (single line) or `:#?` (multi-line) format specifier.
 For example:
 
 ```rust
