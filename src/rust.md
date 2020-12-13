@@ -343,6 +343,8 @@ and names of "value" use snake_case.
 | types           | PascalCase                         |
 | variables       | snake_case                         |
 
+The compiler outputs warnings when these naming conventions are not followed.
+
 ## Syntax Highlights
 
 - The preferred indentation is four spaces.
@@ -433,13 +435,13 @@ or inside the declaration with the syntax `#![attr]`.
 
 The following table summarizes commonly used attributes.
 
-| Attribute                        | Description                                            |
-| -------------------------------- | ------------------------------------------------------ |
-| `allow(warning1, warning2, ...)` | suppress specified warnings (ex. `dead_code` )         |
-| `derive(trait1, trait2, ...)`    | automatically implement a list of traits on a `struct` |
-| `doc`                            | provides an alternate way to include doc comments      |
-| `should_panic`                   | indicates that a test is expected to panic             |
-| `test`                           | annotates a function as a test                         |
+| Attribute                        | Description                                                  |
+| -------------------------------- | ------------------------------------------------------------ |
+| `allow(warning1, warning2, ...)` | suppress specified warnings (ex. `dead_code` )               |
+| `derive(trait1, trait2, ...)`    | automatically implement a list of traits on a `struct`       |
+| `doc`                            | provides an alternate way to specify and format doc comments |
+| `should_panic`                   | indicates that a test is expected to panic                   |
+| `test`                           | annotates a function as a test                               |
 
 For more, see the list at {% aTargetBlank
 "https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index",
@@ -1323,6 +1325,72 @@ fn main() {
 }
 ```
 
+## <a name="standard-io">Standard IO</a>
+
+The `std::io` namespace supports many input/output operations.
+The members `stdin` and `stdout` are functions that return objects
+with methods for operating on the actual `stdio` and `stdout` streams.
+
+The `stdin` methods like `read_line` and
+`stdout` methods like `write` and `flush` return a `Result` enum value.
+The `unwrap` methods can be called on this.
+If the enum value is `Ok`, this returns the value it contains.
+If the enum value is `Err`, this panics.
+The `expect` method is similar, but allows specifying an error message.
+
+```rust
+// The Write trait is required in order to use the flush method.
+use std::io::{stdin, stdout, Write};
+
+fn main() {
+  let mut buffer = String::new();
+
+  loop {
+    print!("Command: ");
+    stdout().flush().unwrap();
+    stdin().read_line(&mut buffer).unwrap();
+    buffer.pop(); // removes newline from end of buffer
+
+    if buffer == "quit" {
+      break;
+    }
+
+    println!("You entered {}.", buffer);
+
+    buffer.clear(); // prepares to reuse buffer
+  }
+}
+```
+
+Here is a modified version of the code above that uses the `text_io` crate:
+To use this, add the following to the dependency
+`text_io = "0.1.8"` in Cargo.toml.
+It also adds a `print_flush` function to simplify
+writing to `stdout` without including a newline.
+
+```rust
+use std::io::{self, Write};
+
+use text_io::read;
+
+fn print_flush(text: &str) {
+  let mut stdout = io::stdout();
+  stdout.write(text.as_bytes()).unwrap();
+  stdout.flush().unwrap();
+}
+
+fn main() {
+  loop {
+    print_flush("Command: ");
+    let command: String = read!("{}\n"); // reads until newline and omits it
+    if command == "quit" {
+      break;
+    }
+    println!("You entered {}.", command);
+  }
+}
+```
+
 ## Iteration (Looping)
 
 Rust supports the following looping expressions:
@@ -1334,21 +1402,119 @@ Rust supports the following looping expressions:
 | `while let` | like `while`, but repeats as long as a pattern match succeeds             |
 | `for`       | for looping over an iterator                                              |
 
-Here are examples of each of these kinds of loops:
+For an example using `loop`, see the [Standard IO](#standard-io) section.
+
+TODO: Do something with the following example code.
+
+Here's an example of using a `while` loop:
 
 ```rust
-use std::io::stdin;
+let numbers = [1, 7, 5, 2, 9, 6];
+let mut i = 0;
+while numbers[i] % 2 == 1 {
+    println!("{} is odd", numbers[i]);
+    i += 1;
+}
+```
+
+A `while let` loop is useful when iterating over
+repeated calls to a function that might fail.
+The example below uses the `futures` crate which requires
+adding the dependency `futures = "0.3.8"` to `Cargo.toml`.
+For example:
+
+```rust
+use futures::executor::block_on;
+use rand::Rng;
+
+// Pretend this function makes a REST call that could possibly fail.
+async fn get_data() -> Result<i8, &'static str> {
+  let mut rng = rand::thread_rng();
+  let n = rng.gen_range(1, 11); // number from 1 to 10
+  println!("get_data: n = {}", n);
+  if n <= 7 { Ok(n) } else { Err("failed") }
+}
 
 fn main() {
-    let mut answer = String::new();
-    loop {
-        stdin().read_line(&mut answer);
-        if answer == "quit" {
-            break;
-        }
-        println!("You said {}.", answer);
+    // Here is an approach for processing the result of a single call.
+    let result = block_on(get_data());
+    match result {
+        Ok(n) => println!("in single call, n = {}", n),
+        Err(msg) => println!("get_data error: {}", msg)
+    }
+
+    // Here is an approach for processing calls in a loop
+    // that continues until an Err is returned.
+    while let Ok(n) = block_on(get_data()) {
+        println!("in while let, n = {}", n);
     }
 }
+```
+
+A `for` loop is used to iterate over any kind of iterator.
+For example:
+
+```rust
+fn main() {
+    // We can use range notation to iterate over a range of numbers
+    // where the first number inclusive and the last is exclusive.
+    for n in 1..4 { // 1, 2, and 3
+        println!("loop 1: n = {}", n);
+    }
+    // Adding = before the second number makes the range inclusive.
+    for n in 1..=4 { // 1, 2, 3, and 4
+        println!("loop 2: n = {}", n);
+    }
+
+    // Iterating over the items in a tuple is not supported,
+    // but we can iterate over the items in an array.
+    let num_arr = [1, 7, 5, 2, 9, 6];
+    for n in num_arr.iter() {
+        println!("loop 3: n = {:?}", n);
+    }
+
+    // The iter_mut method allows items to be mutated during iteration.
+    let mut mut_num_arr = [1, 7, 5, 2, 9, 6];
+    // Double all the numbers during iteration.
+    for n in mut_num_arr.iter_mut() {
+        *n *= 2;
+    }
+    for n in mut_num_arr.iter() {
+        println!("loop 4: {:?}", n);
+    }
+
+    // Another approach is to create a new array of modified values
+    // using the array map method that is considered experimental
+    // and only available in nightly builds as of 12/13/20.
+    //let new_numbers = numbers.map(|n| n * 2);
+
+    // We can call the map method on an iterator
+    // to create a new iterator over doubled numbers.
+    let new_iter = mut_num_arr.iter().map(|n| n * 2);
+    for n in new_iter {
+        println!("loop 5: {:?}", n);
+    }
+
+    // We can iterate over the items in a vector.
+    let num_vec = vec![1, 7, 5, 2, 9, 6];
+    for n in num_vec.iter() {
+        println!("loop 3: n = {:?}", n);
+    }
+}
+```
+
+TODO: Where should this go?
+
+```rust
+fn longest<'a>(strings: &'a [&str]) -> &'a str {
+    strings
+        .iter()
+        .fold("", |acc, s| if s.len() > acc.len() { s } else { acc })
+}
+
+let fruits = ["apple", "banana", "cherry", "date"];
+let result = longest(&fruits);
+println!("longest is {}", result);
 ```
 
 ## Functions
@@ -1709,3 +1875,7 @@ To compile a `.rs` file to WebAssembly:
    ```js
    console.log(factorial(4n)); // "n" suffix makes it BitInt
    ```
+
+```
+
+```
