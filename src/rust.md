@@ -1055,7 +1055,37 @@ Rust supports common operators including:
 Rust defines many kinds of collections that hold a variable number of values.
 These include strings and collections in the `std::collections` namespace.
 
-## Strings
+The `std::collections` namespace defines the following sequence types:
+
+- `Vec`: a resizable, ordered array of any kind of value
+  where items can be efficiently added at the end
+- `VecDeque`: like a `Vec`, but items
+  can also be efficiently added at the beginning
+- `LinkedList`: like a `Vec`, but it they
+  can be efficiently split and appended
+
+The `std::collections` namespace defines the following map types:
+
+- `HashMap`: a collection of key/value pairs with efficient value lookup by key
+  where keys and values can be any kind of value
+- `BTreeMap`: like a `HashMap`, but sorted by key enabling efficient retrieval
+  of values corresponding to the smallest key, largest key,
+  closest key that is smaller or larger than some key value,
+  or range of keys
+
+The `std::collections` namespace defines the following set types:
+
+- `HashSet`: a collection of values with efficient determination
+  of whether a given value is a member
+- `BTreeSet`: similar to storing only the keys in a `HashMap`
+
+The `std::collections` namespace defines one more collection type
+that doesn't fall into the previous categories:
+
+- `BinaryHeap`: implements a priority queue where
+  only the highest priority item is accessible
+
+### Strings
 
 Strings are collections of UTF-8 encoded characters.
 Literal values are surrounded by double quotes.
@@ -1165,40 +1195,21 @@ fn main() {
 }
 ```
 
-## `std::collections`
-
-The `std::collections` namespace defines the following sequence types:
-
-- `Vec`: a resizable, ordered array of any kind of value
-  where items can be efficiently added at the end
-- `VecDeque`: like a `Vec`, but items
-  can also be efficiently added at the beginning
-- `LinkedList`: like a `Vec`, but it they
-  can be efficiently split and appended
-
-The `std::collections` namespace defines the following map types:
-
-- `HashMap`: a collection of key/value pairs with efficient value lookup by key
-  where keys and values can be any kind of value
-- `BTreeMap`: like a `HashMap`, but sorted by key enabling efficient retrieval
-  of values corresponding to the smallest key, largest key,
-  closest key that is smaller or larger than some key value,
-  or range of keys
-
-The `std::collections` namespace defines the following set types:
-
-- `HashSet`: a collection of values with efficient determination
-  of whether a given value is a member
-- `BTreeSet`: similar to storing only the keys in a `HashMap`
-
-- `BinaryHeap`: implements a priority queue where
-  only the highest priority item is accessible
-
 ### Vectors
 
 | Operation    | Syntax       |
 | ------------ | ------------ |
 | create empty | `Vec::new()` |
+
+TODO: Finish this.
+
+### Sets
+
+TODO: Finish this.
+
+### Maps
+
+TODO: Finish this.
 
 ## Conditional Logic
 
