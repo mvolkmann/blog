@@ -23,7 +23,7 @@ Features of Rust include:
 
 ## Why use Rust
 
-Performance:
+**Performance:**
 
 The best way to get software performance is to
 use a "systems" language like C, C++, or Rust.
@@ -33,7 +33,7 @@ that is slow and can run at unpredictable times.
 Systems languages also allow control over
 whether data is on the stack or on the heap.
 
-Safety:
+**Safety:**
 
 Software written in systems languages typically must
 take great care to avoid memory and threading issues.
@@ -44,7 +44,7 @@ code runs is unpredictable, resulting in unpredictable results.
 Rust addresses both of these issues,
 resulting in code that is less likely to contain bugs.
 
-Immutable by default:
+**Immutable by default:**
 
 A large source of errors in any software involves
 incorrect assumptions about where data is modified.
@@ -52,13 +52,13 @@ Making variables immutable by default and
 requiring explicit indication of functions that are
 allowed to modify data significantly reduces these errors.
 
-Control over number sizes:
+**Control over number sizes:**
 
 One way to achieve performance in computationally intensive tasks
 is to store collections of numbers in contiguous memory for fast access
 and control the number of bytes used by each number.
 
-Ownership model:
+**Ownership model:**
 
 Manual garbage collection is error prone.
 Rust uses an "ownership model" where code is explicit about
@@ -115,6 +115,9 @@ and crates from the
 
 <img alt="Rust Playground" style="width: 100%"
   src="/blog/assets/rust-playground.png" title="Rust Playground">
+
+All of the code must be entered in a single editor pane,
+simulating all of it being in a single file.
 
 Press the ellipsis after the "RUN" button
 to open a popup with the following options:
@@ -295,6 +298,14 @@ The following table describes the `cargo` subcommands:
 | `uninstall`   | removes executable from `~/.cargo/bin` by default                          |
 | `update`      | updates dependencies in `Cargo.lock`                                       |
 
+To watch project files for changes and
+automatically run a `cargo` command when they do,
+enter `cargo install cargo-watch` one time
+and then enter `cargo watch -x subcommand`.
+The `-x` flag can be omitted in which case
+the subcommand defaults to `check`, not `run`.
+Typically you will want the subcommand to be `run`.
+
 ## Formatting Code
 
 The most popular code formatting tool for Rust is
@@ -332,14 +343,28 @@ and names of "value" use snake_case.
 | types           | PascalCase                         |
 | variables       | snake_case                         |
 
-## Syntax Details
+## Syntax Highlights
 
-The dot (`.`) character is used to
-access struct fields and call instance methods.
-
-The double colon (`::`) is used as
-a namespace separator (borrowed from C++)
-and to call static methods.
+- Statements must terminated by a semicolon.
+- Strings are delimited by double quotes.
+- Single characters are delimited by single quotes.
+- Items are made public using the `pub` keyword.
+- The dot (`.`) character is used to
+  access struct fields and call instance methods.
+- The double colon (`::`) is used as
+  a namespace separator (borrowed from C++)
+  and to call static methods.
+- Conditions for conditional logic and iteration are not
+  surrounded by any delimiter such as parentheses.
+- Statements associated with conditional logic and iteration
+  must be in blocks surrounded by curly brackets.
+- Named functions are declared with the `fn` keyword.
+- Function return types follow the parameter list and `->`.
+- Functions that return nothing omit the `->` and return type.
+- Most statements are also expressions and evaluate to a value,
+  including `if` and `match` statements.
+- If the last expression in a function does not end with a semicolon,
+  it's value is returned.
 
 ## Comments
 
@@ -397,6 +422,51 @@ For example:
 
 TODO: Are all names that end with `!` macros?
 
+## <a name="attributes">Attributes</a>
+
+Rust attributes are like "decorators" in other programming languages.
+They annotate an item in order to change its behavior.
+An attribute can be specified
+immediately before the declaration of an item with the syntax `#[attr]`
+or inside the declaration with the syntax `#![attr]`.
+
+The following table summarizes commonly used attributes.
+
+| Attribute                        | Description                                            |
+| -------------------------------- | ------------------------------------------------------ |
+| `allow(warning1, warning2, ...)` | suppress specified warnings (ex. `dead_code` )         |
+| `derive(trait1, trait2, ...)`    | automatically implement a list of traits on a `struct` |
+| `should_panic`                   | indicates that a test is expected to panic             |
+| `test`                           | annotates a function as a test                         |
+
+For more, see the list at {% aTargetBlank
+"https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index",
+"Attributes" %}.
+
+For the `derive` attribute, traits that can be automatically implemented
+are described in the following table:
+
+| Trait Name   | Description                                                                               |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| `Clone`      | adds ability to explicitly copy an object using the `clone` method                        |
+| `Copy`       | adds ability to implicitly copy an object in assignment or pass by value                  |
+| `Debug`      | adds ability to output a value for debugging using `{:?}` and `{:#?}` in a format string  |
+| `Default`    | adds a `default` static method for getting an empty or default instance of a type         |
+| `Eq`         | adds ability to compare instances using `==` and `!=`                                     |
+| `Hash`       | adds a `hash` method for computing the hash value of an instance (1)                      |
+| `Ord`        | adds ability to compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators    |
+| `PartialEq`  | like `Eq`, but for types where some instances are not equal to themselves (2)             |
+| `PartialOrd` | like `Ord`, but for types where some instances cannot be logically compared to others (3) |
+
+1. The `hash` method is used by the `HashMap` and `HashSet` collections.
+1. This means values are not necessarily reflexive.
+   For example, the number value `NaN` is not equal to itself.
+1. For example, the number value `NaN` is not
+   less than, equal to, or greater than zero.
+
+For more detail, see {% aTargetBlank
+"https://doc.rust-lang.org/rust-by-example/trait/derive.html", "Derive" %}.
+
 ## Formatted Print
 
 The `std::fmt` namespace defines macros that format text.
@@ -449,6 +519,7 @@ struct Point2D {
     x: f64,
     y: f64
 }
+
 let p = Point2D { x: 1.0, y: 2.0 };
 println!("{:?}", p); // Point2D { x: 1.0, y: 2.0 }
 println!("{:#?}", p);
@@ -481,7 +552,7 @@ For more options, see
 ## Variables
 
 Variables are immutable by default.
-For variables that hold non-primitive values,
+For variables that hold non-primitive values such as structs and arrays,
 even their fields cannot be mutated.
 
 The `mut` keyword marks a variable as mutable.
@@ -1454,6 +1525,15 @@ pub trait HockeyPlayer: Athlete + Person {
 
 Now any `struct` that implements `HockeyPlayer`
 must also implement `Athlete` and `Person`.
+
+The [Attributes](#attributes) section describes the built-in traits
+that can be derived (automatically implemented).
+Additional built-in traits that must be manually implemented
+are described in the following table.
+
+| Trait Name | Description |
+| ---------- | ----------- |
+| `Display`  |             |
 
 ## Custom Types
 
