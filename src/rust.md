@@ -239,7 +239,18 @@ Install the Rust extension which adds:
 - debugging
 - build tasks
 
-TODO: This extension seems to do nothing!
+Add the following in `settings.json`:
+
+```json
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
+```
+
+Note that this extension only works if
+the opened folder contains a `Cargo.toml` file.
 
 ## Terminology
 
