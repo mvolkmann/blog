@@ -1514,7 +1514,12 @@ fn main() {
 }
 ```
 
-TODO: Where should this go?
+Let's look at one more iteration example that requires specifying lifetimes.
+The function `longest` is passed a reference to an array of strings.
+There are three lifetimes to consider,
+that of the array, that of the elements inside it, and that of the return value.
+Rust wants to know that they all match and requires us to specify that
+with lifetime annotations (`'a` below).
 
 ```rust
 fn longest<'a>(strings: &'a [&str]) -> &'a str {
