@@ -1231,7 +1231,7 @@ println!("contains orange? = {:?}", colors.contains("orange")); // false
 colors.remove("green");
 println!("after removing green, colors = {:?}", colors);
 
-for color in colors {
+for color in &colors {
     println!("{}", color);
 }
 ```
@@ -1261,7 +1261,7 @@ dogs.insert(Dog::new("Oscar", "German Shorthaired Pointer"));
 dogs.insert(Dog::new("Comet", "Whippet"));
 println!("dogs = {:#?}", dogs);
 
-for dog in dogs.iter() {
+for dog in &dogs {
     println!("{:?}", dog);
 }
 
@@ -1283,28 +1283,28 @@ Here is an example of creating and using a `HashMap`
 with `String` keys and `i32` values:
 
 ```rust
-use std::collections::HashMap;
+// Key and value types are inferred from what is inserted.
+let mut days_in_month = HashMap::new();
+days_in_month.insert("January", 31);
+days_in_month.insert("February", 28);
+days_in_month.insert("March", 31);
+days_in_month.insert("April", 30);
 
-fn main() {
-    // Key and value types are inferred from what is inserted.
-    let mut days_in_month = HashMap::new();
-    days_in_month.insert("January", 31);
-    days_in_month.insert("February", 28);
-    days_in_month.insert("March", 31);
-    days_in_month.insert("April", 30);
+println!("daysInMonth = {:#?}", days_in_month);
+println!("entries = {:?}", days_in_month.len()); // 4
+println!("days in March = {:?}", days_in_month.get("March").unwrap());
+days_in_month.remove("February");
+println!("entries = {:?}", days_in_month.len()); // 3
+println!("days in February = {:?}", days_in_month.get("February"));
 
-    println!("daysInMonth = {:#?}", days_in_month);
-    println!("entries = {:?}", days_in_month.len()); // 4
-    println!("days in March = {:?}", days_in_month.get("March").unwrap());
-    days_in_month.remove("February");
-    println!("entries = {:?}", days_in_month.len()); // 3
-    println!("days in February = {:?}", days_in_month.get("February"));
+let month = "April";
+match days_in_month.get(month) {
+    Some(days) => println!("There are {} days in {}.", days, month),
+    None => println!("No data found for {}.", month)
+}
 
-    let month = "April";
-    match days_in_month.get(month) {
-        Some(days) => println!("There are {} days in {}.", days, month),
-        None => println!("No data found for {}.", month)
-    }
+for (month, days) in &days_in_month {
+    println!("There are {} days in {}.", days, month);
 }
 ```
 
@@ -1349,6 +1349,10 @@ let name = "Oscar";
 match dogs.get(name) {
     Some(dog) => println!("found {:#?}.", dog),
     None => println!("No dog named {} found.", name)
+}
+
+for (name, dog) in &dogs {
+    println!("{} is a {}.", name, dog.breed);
 }
 ```
 
