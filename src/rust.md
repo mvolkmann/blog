@@ -20,6 +20,21 @@ Features of Rust include:
 - memory-efficient
 - rich, static type system with type inference
 - ownership model to guarantee memory-safety and thread-safety
+- targets LLVM, so runs on a wide variety of platforms that targets
+- can call and be called by C
+
+Rust was created at Mozilla by Graydon Hoare,
+with contributions from Dave Herman, Brendan Eich, and others.
+It was formally announced in 2010.
+Rust has been implemented in itself since 2011.
+Version 1.0 was released in May 2015.
+A new point release is made every six weeks.
+
+From {% aTargetBlank "https://doc.rust-lang.org/edition-guide/editions/",
+"rust-lang.org" %},
+"Every two or three years, we'll be producing a new edition of Rust.
+Each edition brings together the features that have landed into
+a clear package, with fully updated documentation and tooling."
 
 ## Why use Rust
 
@@ -1458,6 +1473,63 @@ fn main() {
     } else {
         println!("fail")
     }
+}
+```
+
+`match` expressions can be used to match on any kind of value.
+For example:
+
+```rust
+let month = "February";
+let holiday = match month {
+    "January" => "New Year's Day",
+    "February" => "Valentine's Day",
+    "July" => "Independence Day",
+    "October" => "Halloween",
+    "November" => "Thanksgiving",
+    "December" => "Christmas",
+    _ => "unknown" // underscore matches an other value
+};
+println!("The holiday in {} is {}.", month, holiday);
+```
+
+The part of each match on the left side of `=>` is called a "match arm".
+It can list multiple values separated by `|` characters.
+It can also specify a numeric range.
+
+The part on the right side of `=>` can be an expression or a block.
+
+For example:
+
+```rust
+fn get_points(rank: &str) -> i8 {
+    match rank {
+        "Jack" | "Queen" | "King" => 10,
+        "Ace" => 1,
+        _ => match rank.parse::<i8>() {
+              Ok(points) => points,
+              Err(_) => 0
+        }
+    }
+}
+
+fn main() {
+    let cards = ["7", "Jack", "Ace", "5", "bad"];
+    for rank in &cards {
+        println!("Points for {} is {}.", rank, get_points(rank));
+    }
+
+    let age = 15;
+    let category = match age {
+        // The ranges cannot overlap and
+        // must use "..=" rather than "..".
+        0..=2 => "toddler",
+        3..=12 => "child",
+        13..=19 => "teen",
+        20..=59 => "adult",
+        _ => "senior"
+    };
+    println!("{} is a {}.", age, category);
 }
 ```
 
