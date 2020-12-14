@@ -379,6 +379,8 @@ The compiler outputs warnings when these naming conventions are not followed.
   including `if` and `match` statements.
 - If the last expression in a function does not end with a semicolon,
   it's value is returned.
+- There is no null type or value.
+  Instead the wrapper enum types `Option` and `Result` are used.
 
 ## Comments
 
@@ -1075,9 +1077,9 @@ The `std::collections` namespace defines the following map types:
 
 The `std::collections` namespace defines the following set types:
 
-- `HashSet`: a collection of values with efficient determination
-  of whether a given value is a member
-- `BTreeSet`: similar to storing only the keys in a `HashMap`
+- `HashSet`: a collection of unique values with
+  efficient determination of whether a given value is a member
+- `BTreeSet`: similar to storing only the keys in a `BTreeMap`
 
 The `std::collections` namespace defines one more collection type
 that doesn't fall into the previous categories:
@@ -1205,11 +1207,150 @@ TODO: Finish this.
 
 ### Sets
 
-TODO: Finish this.
+To use the `HashSet` type by ony its name:
+
+```rust
+use std::collections::HashSet;
+```
+
+Here is an example of creating and using a `HashSet`
+containing `String` elements:
+
+```rust
+// Element type is inferred from what is inserted.
+let mut colors = HashSet::new();
+colors.insert("red");
+colors.insert("green");
+colors.insert("blue");
+
+println!("colors = {:?}", colors);
+println!("color count = {:?}", colors.len()); // 3
+println!("contains green? = {:?}", colors.contains("green")); // true
+println!("contains orange? = {:?}", colors.contains("orange")); // false
+
+colors.remove("green");
+println!("after removing green, colors = {:?}", colors);
+
+for color in colors {
+    println!("{}", color);
+}
+```
+
+Here is an example of creating and using a `HashSet`
+containing `struct` elements:
+
+```rust
+#[derive(Debug, Eq, Hash, PartialEq)]
+struct Dog {
+    name: String,
+    breed: String
+}
+impl Dog {
+    fn new(name: &str, breed: &str) -> Self {
+        Dog {
+            name: name.to_string(),
+            breed: breed.to_string()
+        }
+    }
+}
+
+let mut dogs = HashSet::new();
+dogs.insert(Dog::new("Maisey", "Treeing Walker Coonhound"));
+dogs.insert(Dog::new("Ramsay", "Native American Indian Dog"));
+dogs.insert(Dog::new("Oscar", "German Shorthaired Pointer"));
+dogs.insert(Dog::new("Comet", "Whippet"));
+println!("dogs = {:#?}", dogs);
+
+for dog in dogs.iter() {
+    println!("{:?}", dog);
+}
+
+let comet = Dog::new("Comet", "Whippet");
+let spot = Dog::new("Spot", "Beagle");
+println!("contains Comet? = {:?}", dogs.contains(&comet)); // true
+println!("contains Spot? = {:?}", dogs.contains(&spot)); // false
+```
 
 ### Maps
 
-TODO: Finish this.
+To use the `HashMap` type by ony its name:
+
+```rust
+use std::collections::HashMap;
+```
+
+Here is an example of creating and using a `HashMap`
+with `String` keys and `i32` values:
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    // Key and value types are inferred from what is inserted.
+    let mut days_in_month = HashMap::new();
+    days_in_month.insert("January", 31);
+    days_in_month.insert("February", 28);
+    days_in_month.insert("March", 31);
+    days_in_month.insert("April", 30);
+
+    println!("daysInMonth = {:#?}", days_in_month);
+    println!("entries = {:?}", days_in_month.len()); // 4
+    println!("days in March = {:?}", days_in_month.get("March").unwrap());
+    days_in_month.remove("February");
+    println!("entries = {:?}", days_in_month.len()); // 3
+    println!("days in February = {:?}", days_in_month.get("February"));
+
+    let month = "April";
+    match days_in_month.get(month) {
+        Some(days) => println!("There are {} days in {}.", days, month),
+        None => println!("No data found for {}.", month)
+    }
+}
+```
+
+Here is an example of creating and using a `HashMap`
+with `String` keys and `struct` values:
+
+```rust
+#[derive(Debug, Eq, Hash, PartialEq)]
+struct Dog {
+    name: String,
+    breed: String
+}
+impl Dog {
+    fn new(name: &str, breed: &str) -> Self {
+        Dog {
+            name: name.to_string(),
+            breed: breed.to_string()
+        }
+    }
+}
+
+// Key and value types are inferred from what is inserted.
+let mut dogs = HashMap::new();
+
+// This function must be a closure so it can access dogs.
+let mut add_dog = |name: &str, breed: &str| {
+    dogs.insert(name.to_string(), Dog::new(name, breed));
+};
+
+add_dog("Maisey", "Treeing Walker Coonhound");
+add_dog("Ramsay", "Native American Indian Dog");
+add_dog("Oscar", "German Shorthaired Pointer");
+add_dog("Comet", "Whippet");
+
+println!("dogs = {:#?}", dogs);
+println!("entries = {:?}", dogs.len()); // 4
+println!("Comet = {:#?}", dogs.get("Comet").unwrap());
+dogs.remove("Comet");
+println!("entries = {:?}", dogs.len()); // 3
+
+let name = "Oscar";
+match dogs.get(name) {
+    Some(dog) => println!("found {:#?}.", dog),
+    None => println!("No dog named {} found.", name)
+}
+```
 
 ## Conditional Logic
 
