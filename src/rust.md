@@ -26,7 +26,7 @@ Features of Rust include:
 Rust was created at Mozilla by Graydon Hoare,
 with contributions from Dave Herman, Brendan Eich, and others.
 It was formally announced in 2010.
-Rust has been implemented in itself since 2011.
+Rust has been self-hosted (implemented in itself) since 2011.
 Version 1.0 was released in May 2015.
 A new point release is made every six weeks.
 
@@ -1063,12 +1063,6 @@ For example, `rgb[1]` is "green".
 A vector is a variable-length list of values.
 TODO: Do they all have the same type?
 
-## Operators
-
-Rust supports common operators including:
-
-- arithmetic: `+`, `-`, `\*`, `/`, `%` (mod)
-
 ## Collections
 
 Rust defines many kinds of collections that hold a variable number of values.
@@ -1841,6 +1835,48 @@ fn main() {
 }
 ```
 
+## Operators
+
+Rust supports most of the common operators found in other programming languages.
+
+The `std::ops` namespace defines overloadable operators.
+For example, we can define what it means
+to add and subtract to `Point2D` objects by
+implementing the `Add` and `Sub` traits defined in `std::ops`.
+
+The operators that can be implemented for custom types include:
+
+- arithmetic: `+`, `+=`, `-`, `-=`, `_`, `_=`, `/`, `/=`
+- bit shift: `<<`, `<<=`, `>>`, and `>>=`
+- bitwise: `&`, `&=`, `|`, `|=`, `^`, and `^=`
+- deref: `\*` for getting and setting a value
+- functions: `()` call operator in three forms
+- index: `[]` operator to get and set an element
+- logical: `!` not, but `&&` and `||` cannot be defined
+- mod: `%` and `%=`
+- negate: `-` (unary)
+- range: `..` and `..=`
+
+## Ranges
+
+The `std::ops` namespace defines the range types
+
+| Range Type         | Meaning                          |
+| ------------------ | -------------------------------- |
+| `Range`            | start inclusive to end exclusive |
+| `RangeFrom`        | start inclusive and above        |
+| `RangeFull`        | zero and above                   |
+| `RangeInclusive`   | start inclusive to end inclusive |
+| `RangeTo`          | zero to end exclusive            |
+| `RangeToInclusive` | start inclusive to end inclusive |
+
+These are distinct types and there is not a
+provided range type that encompasses all of them.
+
+Objects of these types are regular values that
+can be assigned to variables, be members of structs,
+be passed to functions, and be returned from functions.
+
 ## Structs
 
 A struct defines a type that is a set of related fields and methods,
@@ -2140,6 +2176,11 @@ fn main() {
 This approach works well for small modules.
 For large modules it is sometimes desirable to
 split their definition across multiple source files.
+Each `.rs` defines a module and
+placing them in directories creates sub-modules.
+A `.rs` file can use the `mod` and `use` statements
+to gain access to the functionality in multiple other modules
+and re-export the functionality as its own.
 
 The old way of doing this was to
 create a directory with the name of the module,
@@ -2191,6 +2232,8 @@ using all the features of the `points` module.
 
 ```rust
 mod points;
+// Note how a single "use" statement can simplify
+// access to multiple values from a module.
 use points::{distance, Point2D};
 
 fn main() {
