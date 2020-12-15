@@ -94,6 +94,8 @@ that include suggestions on how to correct the errors.
 ## Installing
 
 Rust is installed using the {% aTargetBlank "", "rustup" %} tool.
+This enables having multiple versions of Rust installed
+and switching between them.
 
 To install rustup in macOS, install {% aTargetBlank "", "homebrew" %}
 and then enter `brew install rustup`.
@@ -1844,7 +1846,7 @@ fn main() {
 A struct defines a type that is a set of related fields and methods,
 similar to a class in other languages.
 The `struct` keyword only defines fields.
-The `impl` keyword adds methods to a struct.
+The `impl` keyword adds instance and static methods to a struct.
 Struct names are used to create instances.
 For example:
 
@@ -1856,17 +1858,25 @@ fn main() {
     }
 
     impl Point2D {
-        fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
-            let dx = self.x - other.x;
-            let dy = self.y - other.y;
+        // Instance method
+        fn distance_to(self: &Self, other: &Self) -> f64 {
+            Self::distance_between(self, other)
+        }
+
+        // Static method
+        fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
+            let dx = pt1.x - pt2.x;
+            let dy = pt1.y - pt2.y;
             (dx.powf(2.0) + dy.powf(2.0)).sqrt()
         }
     }
 
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
-    let d = p1.distance_to(&p2);
-    println!("distance is {}", d);
+    let d1 = p1.distance_to(&p2);
+    println!("d1 = {}", d1);
+    let d2 = Point2D::distance_between(&p1, &p2);
+    println!("d2 = {}", d2);
 }
 ```
 
@@ -2018,33 +2028,188 @@ are described in the following table.
 
 TODO: Finish adding descriptions in this table.
 
-## Custom Types
+## Futures
 
-TODO: Is this different from a struct?
+TODO: Add this section.
 
 ## Modules
 
-Modules define collections of values like constants and functions.
-A module can be defined in three ways.
+A module defines a collection of values like constants, functions, and structs.
 
-1. Inside a source file that uses it with the `mod` keyword.
-1. In a file whose name is the module name.
-1. In multiple files within a directory whose name is the module name.
+A module can be defined in many places:
+
+1. inside a source file that uses it
+1. in a file whose name is the module name
+1. in multiple files within a directory whose name is the module name
+1. in the Rust standard library
+1. in a dependency declared in the `Cargo.toml` file
 
 By default, all members of a module are private.
 To make a member accessible outside the module,
 add the `pub` keyword at the beginning of its definition.
 
-TODO: Show examples of each of these approaches.
+When a module is defined inside a source file,
+it is typically only used by code in that file.
+This is useful for teaching Rust concepts,
+but is not often used in practice.
+For example:
 
-To use a module that is defined in another file or directory,
-use the `mod` keyword to gain access
-and the `use` keyword to specify the values in it that will be used.
-TODO: Why are both keywords needed?
+```rust
+mod points {
+    pub struct Point2D {
+        pub x: f64,
+        pub y: f64, // comma after last field is optional
+    }
+
+    impl Point2D {
+        // Instance method
+        pub fn distance_to(self: &Self, other: &Self) -> f64 {
+            Self::distance_between(self, other)
+        }
+
+        // Static method
+        pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
+            let dx = pt1.x - pt2.x;
+            let dy = pt1.y - pt2.y;
+            (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+        }
+    }
+}
+
+fn main() {
+    use points::Point2D;
+    let p1 = Point2D { x: 3.0, y: 4.0 };
+    let p2 = Point2D { x: 6.0, y: 8.0 };
+    let d1 = p1.distance_to(&p2);
+    println!("d1 = {}", d1);
+    let d2 = Point2D::distance_between(&p1, &p2);
+    println!("d2 = {}", d2);
+}
+```
+
+Moving the module definition into a separate file
+de-clutters the source file that uses it
+and enables using the module in many source files.
+
+Here is the same code, split into two files.
+First up is the file `src/points.rs`:
+
+```rust
+pub struct Point2D {
+    pub x: f64,
+    pub y: f64, // comma after last field is optional
+}
+
+impl Point2D {
+    // Instance method
+    pub fn distance_to(self: &Self, other: &Self) -> f64 {
+        Self::distance_between(self, other)
+    }
+
+    // Static method
+    pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
+        let dx = pt1.x - pt2.x;
+        let dy = pt1.y - pt2.y;
+        (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+    }
+}
+```
+
+In addition to its use in defining a module inside a source file,
+the `mod` keyword is used to gain access to modules defined outside.
+The `use` statement binds a full path to a new name for easier access.
+For example, `use A::B::C` enables using `C` with just that name
+instead of its fully qualified name.
+
+The file `src/main.rs` below uses the `points` module defined above.
+
+```rust
+mod points;
+use points::Point2D;
+
+fn main() {
+    let p1 = Point2D { x: 3.0, y: 4.0 };
+    let p2 = Point2D { x: 6.0, y: 8.0 };
+    let d1 = p1.distance_to(&p2);
+    println!("d1 = {}", d1);
+    let d2 = Point2D::distance_between(&p1, &p2);
+    println!("d2 = {}", d2);
+}
+```
+
+This approach works well for small modules.
+For large modules it is sometimes desirable to
+split their definition across multiple source files.
+
+The old way of doing this was to
+create a directory with the name of the module,
+place the files that define the module functionality inside it,
+and create the file `mod.rs` inside the directory
+that imports all functionality to be exposed from those files
+and re-exports it.
+
+The new way is similar, but
+a `.rs` file with the name of the module is created instead of `mod.rs`
+and this is placed in the same directory as the module directory.
+
+Here is the previous code using this approach.
+We'll add a function to the module that is
+defined in a different source file than
+the one that defines the `Point2D` struct.
+
+The file `src/points/types.rs` can be
+identical to the file `src/points.rs` above.
+It defines the `Point2D` struct fields and methods.
+
+The file `src/points/functions.rs` defines the function `distance`
+which returns the distance between two `Point2D` objects.
+Note that this is a plain function, not an instance or static method.
+
+```rust
+// The super keyword enables finding a module
+// (types in this case) in the same directory.
+use super::types::Point2D;
+
+pub fn distance(pt1: &Point2D, pt2: &Point2D) -> f64 {
+    let dx = pt1.x - pt2.x;
+    let dy = pt1.y - pt2.y;
+    (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+}
+```
+
+The file `src/points.rs` ties it all together.
+
+```rust
+mod functions;
+mod types;
+pub use functions::*;
+pub use types::*;
+```
+
+The file `src/main.rs` below demonstrates
+using all the features of the `points` module.
+
+```rust
+mod points;
+use points::{distance, Point2D};
+
+fn main() {
+    let p1 = Point2D { x: 3.0, y: 4.0 };
+    let p2 = Point2D { x: 6.0, y: 8.0 };
+    let d1 = p1.distance_to(&p2);
+    println!("d1 = {}", d1);
+    let d2 = Point2D::distance_between(&p1, &p2);
+    println!("d2 = {}", d2);
+    let d3 = distance(&p1, &p2);
+    println!("d3 = {}", d3);
+}
+```
 
 Modules can be nested to further segregate the defined names.
 
-## Imports
+## Crates
+
+A crate is a collection of modules.
 
 ## Standard Library
 
