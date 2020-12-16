@@ -725,9 +725,13 @@ println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
 println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
 ```
 
+Borrowing does not transfer ownership,
+so a borrow variable can go out of scope without
+freeing the memory associated with the original variable.
+
 When a value is mutable and ownership is borrowed,
-Rust will flag an error if the value is mutated
-after ownership is borrowed and before the last use of the borrow.
+the compiler will flag an error if the value is mutated
+after the borrow is created and before its last use.
 This is because references expect the data they reference
 to remain the same.
 For example:
