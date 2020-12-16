@@ -39,8 +39,11 @@ Each edition brings together the features that have landed into
 a clear package, with fully updated documentation and tooling."
 
 Rust developers are referred to as "Rustaceans"
-which was derived from the word "crustaceans"
-and the Rust mascot is Ferris the crab.
+which was derived from the word "crustaceans".
+Rust mascot is Ferris the crab, a crustacean.
+The name is fitting because ferrous metals are subject to rust.
+Images of Ferris can be found at {% aTargetBlank
+"https://rustacean.net/", "rustacean.net" %}.
 
 ## Why use Rust
 
@@ -1006,7 +1009,10 @@ use `fn my_function<'a, 'b: 'a>(...)`.
 
 ## Error Handling
 
-Functions that can fail typically return the enum type `Option` or `Result`.
+Rust does not support throwing and catching exceptions
+like many other programming languages.
+Instead, functions that can fail typically
+return the enum type `Option` or `Result`.
 
 The `Option` enum has two values,
 `Some` which wraps a value and `None` which doesn't.
@@ -1031,7 +1037,6 @@ There are many ways to handle values from these enum types.
    #[derive(Debug)]
    pub enum MathError {
        DivisionByZero // used by divide2:w
-
    }
 
    fn divide1(numerator: f64, denominator: f64) -> Option<f64> {
@@ -1122,11 +1127,11 @@ There are many ways to handle values from these enum types.
 
 5. Use the `?` operator.  
    If the value is a `Some` or `Ok` then it is unwrapped and returned.
-   If the value is a `None` or `Err` then returns the error to the caller.
-   The function in which this operator is used
-   must declare the proper return type and return a value of that type.
-   This allows the caller to handle errors,
-   like re-throwing an exception in other programming languages.
+   If the value is a `None` or `Err` then it is returned to the caller.
+   The function in which this operator is used must
+   declare the proper return type and return a value of that type.
+   This allows the caller to handle errors, similar to
+   re-throwing an exception in other programming languages.
 
    ```rust
    let result = divide1(n, d)?;
@@ -1134,6 +1139,19 @@ There are many ways to handle values from these enum types.
 
    let result = divide2(n, d)?;
    println!("result is {}", result);
+   ```
+
+   The `?` operator is shorthand for the `try!` macro.
+
+   Uses of `?` can be chained in the same statement.
+   For example, suppose the function `alpha` returns a `Result`
+   whose wrapped value is an object with a method `beta`
+   that returns a `Result` whose wrapped value is
+   an object with a method `gamma` that returns a `Result`.
+   We can get the value of this call sequences with the following:
+
+   ```rust
+   let value = alpha()?beta()?gamma()?;
    ```
 
 ## Built-in Scalar Types
