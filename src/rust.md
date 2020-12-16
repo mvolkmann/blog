@@ -998,6 +998,138 @@ For example, `fn my_function<'a, 'b>(...)`.
 To specify that lifetime `b` is at least as long as lifetime `a`,
 use `fn my_function<'a, 'b: 'a>(...)`.
 
+## Error Handling
+
+Functions that can fail typically return the enum type `Option` or `Result`.
+
+The `Option` enum has two values,
+`Some` which wraps a value and `None` which doesn't.
+For example, a function that takes a vector and
+returns the first element that matches some criteria
+could return `Some` wrapping the element, or `None` if no match is found.
+This is similar to the `Maybe` monad in Haskell.
+
+The `Result` enum also has two values,
+`Ok` which wraps a value and `Err` which wraps an error description.
+For example, a function that reads all the text in a file
+could return `Ok` wrapping the text, or
+`Err` wrapping a description of why reading the file failed.
+This is similar to the `Either` monad in Haskell.
+
+There are many ways to handle values from these enum types.
+
+1. Use a `match` statement.
+   For example:
+
+   ```rust
+   #[derive(Debug)]
+   pub enum MathError {
+       DivisionByZero // used by divide2:w
+
+   }
+
+   fn divide1(numerator: f64, denominator: f64) -> Option<f64> {
+       if denominator == 0. {
+           None // means there is no result, but doesn't explain why
+       } else {
+           Some(numerator / denominator)
+       }
+   }
+
+   // Commented lines below show an alternative way
+   // to describe the error using a string.
+   //const DIV_BY_ZERO: &str = "divide by zero";
+   fn divide2(numerator: f64, denominator: f64) -> Result<f64, MathError> {
+   //fn divide(numerator: f64, denominator: f64) -> Result<f64, &'static str> {
+       if denominator == 0. {
+           Err(MathError::DivisionByZero)
+           //Err(DIV_BY_ZERO)
+       } else {
+           Ok(numerator / denominator)
+       }
+   }
+
+   fn main() {
+       let n = 5.;
+       let d = 2.;
+
+       match divide1(n, d) { // returns an Option enum
+           None => println!("divide by zero"),
+           Some(result) => println!("{:.2}", result),
+       }
+
+       match divide2(n, d) { // returns a Result enum
+           Err(e) => println!("{:?}", e),
+           //Err(msg) => println!("{}", msg),
+           Ok(result) => println!("result is {:.2}", result),
+       }
+
+   }
+   ```
+
+2. Use `if let` statement.  
+   We can replace the `match` statements
+   in the previous example with the following:
+
+   ```rust
+   if let Some(result) = divide1(n, d) {
+       println!("result is {}", result);
+   } else {
+       println!("fail")
+   }
+
+   if let Ok(result) = divide2(n, d) {
+       println!("result is {}", result);
+   } else {
+       println!("fail")
+   }
+   ```
+
+3. Use the `unwrap` method.  
+   This extracts the value from an `Option` or `Result` enum.
+   If the value is a `Some` or `Ok` then it succeeds.
+   If the value is a `None` or `Err` then it panics, exiting the program.
+   When it is an `Err` the message it wraps will be output.
+   We can replace the `match` and `if let` statements above
+   with the following:
+
+   ```rust
+   let result = divide1(n, d).unwrap();
+   println!("result is {}", result);
+
+   let result = divide2(n, d).unwrap();
+   println!("result is {}", result);
+   ```
+
+4. Use the `expect` method.  
+   This is nearly the same as the `unwrap` method.
+   The only difference is that we can supply a custom error message.
+   We can replace the lines above with the following:
+
+   ```rust
+   let result = divide1(n, d).expect("division failed");
+   println!("result is {}", result);
+
+   let result = divide2(n, d).expect("division failed");
+   println!("result is {}", result);
+   ```
+
+5. Use the `?` operator.  
+   If the value is a `Some` or `Ok` then it is unwrapped and returned.
+   If the value is a `None` or `Err` then returns the error to the caller.
+   The function in which this operator is used
+   must declare the proper return type and return a value of that type.
+   This allows the caller to handle errors,
+   like re-throwing an exception in other programming languages.
+
+   ```rust
+   let result = divide1(n, d)?;
+   println!("result is {}", result);
+
+   let result = divide2(n, d)?;
+   println!("result is {}", result);
+   ```
+
 ## Built-in Scalar Types
 
 Rust defines four scalar (primitive) types which are
@@ -1395,82 +1527,7 @@ let color = if temperature > 90 { "red" } else { "blue" };
 Other ways to implement conditional logic
 include `if let` and `match` expressions
 which use pattern matching to extract a value.
-These are often used in conjunction with `Option` and `Result` enum types
-which can be the result type of functions that can fail.
-
-Here is an example of using the `Option` type
-whose possible values are `Some(value)` and `None`.
-This is similar to the `Maybe` monad in Haskell.
-
-```rust
-fn divide(numerator: f64, denominator: f64) -> Option<f64> {
-    if denominator == 0. {
-        None // means there is no result, but doesn't explain why
-    } else {
-        Some(numerator / denominator)
-    }
-}
-
-fn main() {
-    let n = 5.;
-    let d = 2.;
-
-    match divide(n, d) {
-        None => println!("divide by zero"),
-        Some(result) => println!("{:.2}", result),
-    }
-
-    if let Some(result) = divide(n, d) {
-        println!("result is {}", result);
-    } else {
-        println!("fail")
-    }
-}
-```
-
-Here is an example of using the `Result` type
-whose possible values are `Ok(value)` and `Err(why)`.
-It differs from the `Option` type in that
-it can express why a function failed.
-This is similar to the `Either` monad in Haskell.
-
-```rust
-#[derive(Debug)]
-pub enum MathError {
-    DivisionByZero
-}
-
-// Commented lines show an alternative way
-// to describe the error using a string.
-//const DIV_BY_ZERO: &str = "divide by zero";
-
-fn divide(numerator: f64, denominator: f64) -> Result<f64, MathError> {
-//fn divide(numerator: f64, denominator: f64) -> Result<f64, &'static str> {
-    if denominator == 0. {
-        Err(MathError::DivisionByZero)
-        //Err(DIV_BY_ZERO)
-    } else {
-        Ok(numerator / denominator)
-    }
-}
-
-fn main() {
-    let n = 5.;
-    let d = 0.;
-
-    match divide(n, d) {
-        Err(e) => println!("{:?}", e),
-        //Err(msg) => println!("{}", msg),
-        Ok(result) => println!("result is {:.2}", result),
-    }
-
-    if let Ok(result) = divide(n, d) {
-        println!("result is {}", result);
-    } else {
-        println!("fail")
-    }
-}
-```
+These were shown in the early "Error Handling" section.
 
 `match` expressions can be used to match on any kind of value.
 For example:
@@ -1567,32 +1624,29 @@ The members `stdin` and `stdout` are functions that return objects
 with methods for operating on the actual `stdio` and `stdout` streams.
 
 The `stdin` methods like `read_line` and
-`stdout` methods like `write` and `flush` return a `Result` enum value.
-The `unwrap` methods can be called on this.
-If the enum value is `Ok`, this returns the value it contains.
-If the enum value is `Err`, this panics.
-The `expect` method is similar, but allows specifying an error message.
+`stdout` methods like `write` and `flush`
+return a `Result` enum value.
 
 ```rust
 // The Write trait is required in order to use the flush method.
 use std::io::{stdin, stdout, Write};
 
 fn main() {
-  let mut buffer = String::new();
+    let mut buffer = String::new();
 
-  loop {
-    print!("Command: ");
-    stdout().flush().unwrap();
-    stdin().read_line(&mut buffer).unwrap();
-    buffer.pop(); // removes newline from end of buffer
+    loop {
+        print!("Command: ");
+        stdout().flush().unwrap();
+        stdin().read_line(&mut buffer).unwrap();
+        buffer.pop(); // removes newline from end of buffer
 
-    if buffer == "quit" {
-      break;
-    }
+        if buffer == "quit" {
+            break;
+     }
 
-    println!("You entered {}.", buffer);
+      println!("You entered {}.", buffer);
 
-    buffer.clear(); // prepares to reuse buffer
+      buffer.clear(); // prepares to reuse buffer
   }
 }
 ```
@@ -1877,6 +1931,37 @@ Objects of these types are regular values that
 can be assigned to variables, be members of structs,
 be passed to functions, and be returned from functions.
 
+For example:
+
+```rust
+use std::ops::{Range, RangeInclusive};
+
+fn print_range(r: &Range<i32>) {
+    println!("range = {:?}", r);
+}
+
+fn print_range_inclusive(r: &RangeInclusive<i32>) {
+    println!("range = {:?}", r);
+}
+
+fn main() {
+    let a = 3;
+    let b = 7;
+
+    let r1 = a..b;
+    print_range(&r1); // range = 3..7
+    // The Range contains method requires a ref to a number.  Odd!
+    println!("{}", r1.contains(&5)); // true
+    println!("{}", r1.contains(&7)); // false
+
+    let r2 = a..=b;
+    print_range_inclusive(&r2); // range = 3..=7
+    for n in r2 {
+        println!("n = {}", n);
+    }
+}
+```
+
 ## Structs
 
 A struct defines a type that is a set of related fields and methods,
@@ -2153,6 +2238,10 @@ impl Point2D {
 
 In addition to its use in defining a module inside a source file,
 the `mod` keyword is used to gain access to modules defined outside.
+The statement `mod name;` is equivalent to `mod name { include!("main.rs"); }`
+where `main.rs` is the file that contains the module definition
+(determined by the compiler).
+
 The `use` statement binds a full path to a new name for easier access.
 For example, `use A::B::C` enables using `C` with just that name
 instead of its fully qualified name.
