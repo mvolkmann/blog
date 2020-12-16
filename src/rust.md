@@ -6,8 +6,10 @@ layout: topic-layout.njk
 
 <!-- markdownlint-disable MD013 -->
 
-<img alt="Deno logo" style="width: 20%"
+<img alt="Rust logo" style="width: 20%"
   src="/blog/assets/rust-logo.png" title="Rust logo">
+<img alt="Rust mascot" style="width: 30%"
+  src="/blog/assets/rustacean-ferris-crab.png" title="Rust mascot, Ferris the crab">
 
 ## Overview
 
@@ -35,6 +37,10 @@ From {% aTargetBlank "https://doc.rust-lang.org/edition-guide/editions/",
 "Every two or three years, we'll be producing a new edition of Rust.
 Each edition brings together the features that have landed into
 a clear package, with fully updated documentation and tooling."
+
+Rust developers are referred to as "Rustaceans"
+which was derived from the word "crustaceans"
+and the Rust mascot is Ferris the crab.
 
 ## Why use Rust
 

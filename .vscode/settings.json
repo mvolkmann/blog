@@ -449,6 +449,7 @@
     "rshift",
     "rstrip",
     "rugplot",
+    "rustacean",
     "rustc",
     "rustdoc",
     "rustfmt",
