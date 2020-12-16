@@ -2173,10 +2173,6 @@ are described in the following table.
 
 TODO: Finish adding descriptions in this table.
 
-## Futures
-
-TODO: Add this section.
-
 ## Modules
 
 A module defines a collection of values like constants, functions, and structs.
@@ -2367,6 +2363,14 @@ Modules can be nested to further segregate the defined names.
 
 A crate is a collection of modules.
 
+## Futures
+
+TODO: Add this section.
+
+## Threads
+
+TODO: Add this section.
+
 ## Standard Library
 
 ## <a name="webassembly">WebAssembly</a>
@@ -2446,7 +2450,3 @@ To compile a `.rs` file to WebAssembly:
    ```js
    console.log(factorial(4n)); // "n" suffix makes it BitInt
    ```
-
-```
-
-```
