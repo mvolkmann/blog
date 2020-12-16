@@ -714,12 +714,13 @@ fn main() {
 }
 ```
 
-Ownership of a value can also be "borrowed".
+Ownership of a value can also be "borrowed" by any number of variables
+by getting a reference to a value.
 For example:
 
 ```rust
 let e = Point2D { x: 1.0, y: 2.0 };
-let f = &e;
+let f = &e; // an immutable borrow
 println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
 println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
 ```
@@ -742,13 +743,31 @@ println!("e = {:?}", e); // Point2D { x: 4.0, y: 2.0 }
 println!("f = {:?}", f); // triggers error on mutation above
 ```
 
-An alternative is to clone data instead of borrowing a reference,
+Typically a borrow only needs to read a value.
+But when a value is mutable, we can create one mutable borrow
+as long as there are no immutable borrows.
+This allows changing the value through the borrow variable.
+The original variable cannot be accessed again
+until after the last access of the borrow variable.
+For example:
+
+```rust
+let mut v1 = 10; // mutable variable
+let v2 = &mut v1; // mutable borrow
+*v2 = 11;
+
+// The following statements cannot be reversed.
+println!("v2 = {}", v2);
+println!("v1 = {}", v1);
+```
+
+An alternative to borrowing is to clone data,
 but doing this is often unnecessarily inefficient.
 To clone a value whose type implements the `Clone` trait,
 call the `clone` method on it.
-For example, `let f = e.clone();`
+For example, `let copy = v.clone();`
 
-When stack variables are passed to functions,
+When variables whose values are on the stack are passed to functions,
 the functions are given copies.
 This is true even if the parameters are declared to be mutable.
 For example:
@@ -765,8 +784,8 @@ fn main() {
 }
 ```
 
-When heap variables (not references) are passed to functions,
-copies are not made and ownership is transferred.
+When variables (not references) whose values are on the heap
+are passed to functions, copies are not made and ownership is transferred.
 When the function exits, the data is freed.
 The calling function can no longer use the variable that was passed in.
 For example:
@@ -787,7 +806,7 @@ fn main() {
 }
 ```
 
-When references to stack or heap variables are passed to functions,
+When references to variables on the stack or heap are passed to functions,
 ownership is borrowed by the function and
 is returned to the calling function when the function completes.
 For example:
