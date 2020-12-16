@@ -486,27 +486,8 @@ For more, see the list at {% aTargetBlank
 "https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index",
 "Attributes" %}.
 
-For the `derive` attribute, traits that can be automatically implemented
-are described in the following table:
-
-| Trait Name   | Description                                                                               |
-| ------------ | ----------------------------------------------------------------------------------------- |
-| `Clone`      | adds ability to explicitly copy an object using the `clone` method                        |
-| `Copy`       | adds ability to implicitly copy an object in assignment or pass by value                  |
-| `Debug`      | adds ability to output a value for debugging using `{:?}` and `{:#?}` in a format string  |
-| `Default`    | adds a `default` static method for getting an empty or default instance of a type         |
-| `Eq`         | adds ability to compare instances using `==` and `!=`                                     |
-| `Hash`       | adds a `hash` method for computing the hash value of an instance (1)                      |
-| `Ord`        | adds ability to compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators    |
-| `PartialEq`  | like `Eq`, but for types where some instances are not equal to themselves (2)             |
-| `PartialOrd` | like `Ord`, but for types where some instances cannot be logically compared to others (3) |
-
-1. The `hash` method is used by the `HashMap` and `HashSet` collections.
-1. This means values are not necessarily reflexive.
-   For example, the number value `NaN` is not equal to itself.
-1. For example, the number value `NaN` is not
-   less than, equal to, or greater than zero.
-
+The table of provided traits in the "Traits" section
+indicates those can be automatically implemented.
 For more detail, see {% aTargetBlank
 "https://doc.rust-lang.org/rust-by-example/trait/derive.html", "Derive" %}.
 
@@ -1997,7 +1978,8 @@ fn main() {
 
     let r1 = a..b;
     print_range(&r1); // range = 3..7
-    // The Range contains method requires a ref to a number.  Odd!
+    // The Range contains method requires a ref to a number,
+    // so even literal values must be passed by reference.
     println!("{}", r1.contains(&5)); // true
     println!("{}", r1.contains(&7)); // false
 
@@ -2173,32 +2155,69 @@ The [Attributes](#attributes) section describes the built-in traits
 that can be derived (automatically implemented).
 Additional built-in traits that must be manually implemented
 are described in the following table.
+"Marker traits" are used to indicate a
+property of a type without defining any methods and are
+indicated in the table below with "marker" in the Methods column.
 
-| Trait Name     | Description                                                                                         |
-| -------------- | --------------------------------------------------------------------------------------------------- |
-| `AsRef`        |                                                                                                     |
-| `Borrow`       |                                                                                                     |
-| `Display`      | adds a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |
-| `Deref`        |                                                                                                     |
-| `DerefMut`     |                                                                                                     |
-| `Drop`         |                                                                                                     |
-| `From`         |                                                                                                     |
-| `FromStr`      |                                                                                                     |
-| `Into`         |                                                                                                     |
-| `Iterator`     |                                                                                                     |
-| `IntoIterator` |                                                                                                     |
-| `Read`         |                                                                                                     |
-| `Send`         |                                                                                                     |
-| `Sized`        |                                                                                                     |
-| `Sync`         |                                                                                                     |
-| `ToString`     | adds a `to_string` method                                                                           |
-| `Write`        |                                                                                                     |
+| Trait Name     | Description                                                                                         | Methods |
+| -------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| `AsRef`        |                                                                                                     |         |
+| `Borrow`       |                                                                                                     |         |
+| `Clone`\*      | adds ability to explicitly copy an object using the `clone` method                                  |         |
+| `Copy`\*       | adds ability to implicitly copy an object in assignment or pass by value                            | marker  |
+| `Debug`\*      | adds ability to output a value for debugging using `{:?}` and `{:#?}` in a format string            |         |
+| `Default`\*    | adds a `default` static method for getting an empty or default instance of a type                   |         |
+| `Deref`        |                                                                                                     |         |
+| `DerefMut`     |                                                                                                     |         |
+| `Display`      | adds a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |         |
+| `Drop`         |                                                                                                     |         |
+| `Eq`\*         | adds ability to compare instances using `==` and `!=`                                               |         |
+| `Extend`       |                                                                                                     |         |
+| `Fn`           |                                                                                                     |         |
+| `FnMut`        |                                                                                                     |         |
+| `FnOnce`       |                                                                                                     |         |
+| `From`         |                                                                                                     |         |
+| `FromStr`      |                                                                                                     |         |
+| `Hash`\*       | adds a `hash` method for computing the hash value of an instance (1)                                |         |
+| `Into`         |                                                                                                     |         |
+| `IntoIterator` |                                                                                                     |         |
+| `Iterator`     |                                                                                                     |         |
+| `Ord`\*        | adds ability to compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators              |         |
+| `PartialEq`\*  | like `Eq`, but for types where some instances are not equal to themselves (2)                       |         |
+| `PartialOrd`\* | like `Ord`, but for types where some instances cannot be logically compared to others (3)           |         |
+| `Read`         |                                                                                                     |         |
+| `Send`         |                                                                                                     | marker  |
+| `Sized`        |                                                                                                     | marker  |
+| `Sync`         |                                                                                                     | marker  |
+| `ToString`     | adds a `to_string` method                                                                           |         |
+| `Unpin`        |                                                                                                     | marker  |
+| `Write`        |                                                                                                     |         |
+
+TODO: Finish adding descriptions and methods in the table above.
+
+1. Traits with "\*" after their name can be automatically implemented
+   using the `derive` attribute.
+1. The `hash` method is used by the `HashMap` and `HashSet` collections.
+1. This means values are not necessarily reflexive.
+   For example, the number value `NaN` is not equal to itself.
+1. For example, the number value `NaN` is not
+   less than, equal to, or greater than zero.
 
 TODO: Finish adding descriptions in this table.
 
 ## Modules
 
 A module defines a collection of values like constants, functions, and structs.
+
+To gain access to the values in a module that is
+not defined in the same source file, use the `mod` statement.
+Values in the `std::prelude` module are automatically made available.
+A list of these values can be found {% aTargetBlank
+"https://doc.rust-lang.org/std/prelude/", "here" %}
+and include `Box`, `Option`, `Result`, `String`, and `Vec`.
+Other libraries can also define a `prelude` module,
+but the values it defines are not automatically imported.
+TODO: Do they just provide an easier way to gain access to selected submodule values?
 
 A module can be defined in many places:
 
