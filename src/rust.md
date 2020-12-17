@@ -129,6 +129,42 @@ set -x PATH $PATH $HOME/.cargo/bin
 
 Verify installation by entering `rustc --version`.
 
+## Learning Resources
+
+- {% aTargetBlank "https://www.rust-lang.org/", "Rust website" %}
+
+- {% aTargetBlank "https://doc.rust-lang.org/book/", "The Rust Programming Language" %} book
+
+  - free, open source book
+  - from No Starch Press
+  - can purchase a print copy
+
+- {% aTargetBlank "https://rust-lang-nursery.github.io/rust-cookbook/", "Rust Cookbook" %}
+
+  - "collection of simple examples that demonstrate
+    good practices to accomplish common programming tasks"
+
+- {% aTargetBlank "https://doc.rust-lang.org/stable/rust-by-example/", "Rust by Example" %}
+
+  - free, online set of examples in many categories
+
+- {% aTargetBlank "https://github.com/rust-lang/rustlings", "Rustlings" %}
+
+  - "contains small exercises to get you used to reading and writing Rust code"
+
+- {% aTargetBlank "https://exercism.io/tracks/rust", "exercism Rust track" %}
+
+  - "Code practice and mentorship for everyone"
+  - "exercises across 52 languages"
+
+- {% aTargetBlank "https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/", "Programming Rust" %} book
+
+  - from O'Reilly
+
+- {% aTargetBlank "https://www.manning.com/livevideo/rust-in-motion?a_aid=cnichols&a_bid=6a993c2e", "Rust in Motion" %} video course
+
+  - from Manning
+
 ## Online Playground
 
 To try Rust code online, browse the

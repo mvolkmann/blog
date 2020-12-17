@@ -232,6 +232,7 @@
     "endswith",
     "eprint",
     "eprintln",
+    "exercism",
     "extendleft",
     "f'Hello",
     "f'computing",
