@@ -131,6 +131,20 @@ Verify installation by entering `rustc --version`.
 
 ## Learning Resources
 
+- `rustup doc` command
+
+  - displays local documentation installed along with Rust
+    in default web browser
+  - can read even when offline
+  - includes
+    - "The Rust Programming Language" book
+    - "Rust by Example" book
+    - API documentation
+    - "The Rust Reference" book which is more detailed
+      than "The Rust Programming Language" book
+    - "The Cargo Book" book
+    - and much more
+
 - {% aTargetBlank "https://www.rust-lang.org/", "Rust website" %}
 
 - {% aTargetBlank "https://doc.rust-lang.org/book/", "The Rust Programming Language" %} book
@@ -138,6 +152,8 @@ Verify installation by entering `rustc --version`.
   - free, open source book
   - from No Starch Press
   - can purchase a print copy
+
+- {% aTargetBlank "https://doc.rust-lang.org/stable/reference/", "The Rust Reference" %}
 
 - {% aTargetBlank "https://rust-lang-nursery.github.io/rust-cookbook/", "Rust Cookbook" %}
 
