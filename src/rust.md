@@ -2255,14 +2255,17 @@ impl First for bool {} // using default method implementation
 impl Second for bool {} // using default method implementation
 
 fn main() {
-    //true.some_method(); // error; multiple applicable items in scope
-    One::some_method(&true); // works
-    Two::some_method(&true); // works
-
     //println!("{}", bool::SOME_CONST); // error; multiple `VALUE` found
     //println!("{}", First::SOME_CONST); // error; type annotations needed
     println!("{}", <bool as One>::SOME_CONST); // works
     println!("{}", <bool as Two>::SOME_CONST); // works
+
+    //true.some_method(); // error; multiple applicable items in scope
+    // Using a "fully-qualified function call addresses this.
+    // Normal function calls are really syntactic sugar for this form.
+    // The compiler converts them to this form.
+    One::some_method(&true); // works
+    Two::some_method(&true); // works
 }
 ```
 
