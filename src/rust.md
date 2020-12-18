@@ -300,6 +300,9 @@ fn main() {
 }
 ```
 
+Calls to names that end in `!` are actually
+calls to a macro rather than a function.
+
 See the "Cargo" section for an alternative way
 to compile and run a Rust program.
 
@@ -332,11 +335,20 @@ the opened folder contains a `Cargo.toml` file.
 
 ## Terminology
 
-`cargo`: a command-line utility described later
-crate: a binary (executable) or a library
-module: a set of related values such as constants and functions
-package: a set of related crates described by a `Cargo.toml` file
-TOML: a configuration file format; stands for Tom's Obvious, Minimal Language
+- `cargo`
+  - command-line utility described later
+- crate
+  - tree of modules
+  - either a binary (bin) or a library (lib)
+- module
+  - set of related values such as constants and functions
+- package
+  - `cargo` feature for building, testing, and sharing crates
+  - set of related crates described by a `Cargo.toml` file;
+  - contains any number of binaries and 0 or 1 library
+- TOML
+  - configuration file format
+  - stands for Tom's Obvious, Minimal Language
 
 ## TOML
 
@@ -381,11 +393,19 @@ The following table describes the `cargo` subcommands:
 | `install`     | installs an executable in `~/.cargo/bin` by default                        |
 | `new`         | creates a Rust project in a new subdirectory                               |
 | `publish`     | publishes package to the registry                                          |
-| `run` or `r`  | runs current project                                                       |
+| `run` or `r`  | builds and runs current project                                            |
 | `search`      | searches registry for crates                                               |
 | `test` or `t` | runs tests in the current project                                          |
 | `uninstall`   | removes executable from `~/.cargo/bin` by default                          |
 | `update`      | updates dependencies in `Cargo.lock`                                       |
+
+The `cargo run` command creates a new directory containing Rust project
+that is initialized as a new Git repository.
+It contains a `Cargo.toml` configuration file
+that specifies the project name, version, authors,
+the Rust edition to use, and a list of project dependencies.
+It also contains a `src` directory with a
+`main.rs` file that is a simple hello world program.
 
 To watch project files for changes and
 automatically run a `cargo` command when they do,
@@ -394,6 +414,11 @@ and then enter `cargo watch -x subcommand`.
 The `-x` flag can be omitted in which case
 the subcommand defaults to `check`, not `run`.
 Typically you will want the subcommand to be `run`.
+
+The `cargo build` command creates an executable in the `target/debug` directory.
+To create an optimized, production build, enter `cargo build --release`
+which creates an executable in the `target/release` directory.
+Benchmarking should be done on optimized builds.
 
 ## Formatting Code
 
@@ -513,8 +538,6 @@ For example:
    ```
 
 1. To run this, enter `cargo run`
-
-TODO: Are all names that end with `!` macros?
 
 ## <a name="attributes">Attributes</a>
 
@@ -2158,8 +2181,13 @@ but they can nest other structs (composition).
 
 ## Traits
 
-A trait describes an interface that structs can implement.
+A trait describes an interface that any type can implement.
+Often they are implemented for struts, but
+they can also be implemented for other types like tuples
+and even for primitive types like `bool`.
+
 Traits can be generic, including type parameters.
+
 Trait functions can provide default implementations
 that are used by implementing types that do not override them.
 
@@ -2202,6 +2230,41 @@ pub trait HockeyPlayer: Athlete + Person {
 
 Now any `struct` that implements `HockeyPlayer`
 must also implement `Athlete` and `Person`.
+
+It is possible for a type to implement multiple traits
+that describe the same constants and methods.
+Calling them requires do so in a form that makes it clear which is desired.
+For example:
+
+```rust
+trait First {
+    const SOME_CONST: i32 = 1;
+    fn some_method(&self) {
+        println!("in foo for trait First")
+    }
+}
+
+trait Second {
+    const SOME_CONST: i32 = 2;
+    fn some_method(&self) {
+        println!("in some_method for trait Second")
+    }
+}
+
+impl First for bool {} // using default method implementation
+impl Second for bool {} // using default method implementation
+
+fn main() {
+    //true.some_method(); // error; multiple applicable items in scope
+    One::some_method(&true); // works
+    Two::some_method(&true); // works
+
+    //println!("{}", bool::SOME_CONST); // error; multiple `VALUE` found
+    //println!("{}", First::SOME_CONST); // error; type annotations needed
+    println!("{}", <bool as One>::SOME_CONST); // works
+    println!("{}", <bool as Two>::SOME_CONST); // works
+}
+```
 
 The [Attributes](#attributes) section describes the built-in traits
 that can be derived (automatically implemented).
