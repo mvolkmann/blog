@@ -185,8 +185,8 @@ Verify installation by entering `rustc --version`.
 
 To try Rust code online, browse the
 {% aTargetBlank "https://play.rust-lang.org/", "Rust Playground" %}.
-This includes access to the top 100 most downloaded crates from
-{% aTargetBlank "https://crates.io/", "crates.io" %}
+This includes access to the top 100 most downloaded crates (libraries)
+from {% aTargetBlank "https://crates.io/", "crates.io" %}
 and crates from the
 {% aTargetBlank "https://rust-lang-nursery.github.io/rust-cookbook/",
 "Rust Cookbook" %}.
@@ -671,8 +671,31 @@ There are four ways to declare a "variable".
 | `static name: type = value`     | immutable variable that lives for the duration of the program; typically `const` is preferred         |
 | `static mut name: type = value` | mutable variable that lives for the duration of the program;<br>can only mutate in `unsafe` functions |
 
-Note that `const` declarations must be explicitly typed.
+Note that `const` and `static` declarations must be explicitly typed.
 They do not infer a type based on the assigned value.
+One rationale for this is that
+because their scope can extend to the entire crate,
+it is better to be explicit about the desired type.
+
+Differences between constants and immutable statics include:
+
+- The value of a `const` variable is copied everywhere it is used
+  rather than sharing the memory.
+  For values that do not use more bytes than a reference,
+  this difference doesn't matter.
+- `const` variables must be initialized when they are declared,
+  but `static` variables can wait to do this until their first access
+  using `std::lazy::Lazy` which is useful for expensive initializations.
+  An example is compiling a regular expression.
+- `pub static` variables can be accessed from C code,
+  but `const` variables cannot.
+- For types that do not implement the `Copy` trait,
+  `const` values can be assigned to variables
+  but `static` values cannot because doing so would require copying.
+  Note that all the scalar types like `bool`, `char`, `i32`, and `f64`
+  implement the `Copy` trait.
+- Generic functions can declare `const` variables with a generic type
+  (often named `T`), but cannot do so with `static` variables.
 
 TODO: Are statics a way to share data across functions,
 TODO: even those defined in separate files, without passing it?
