@@ -1049,6 +1049,11 @@ This is because unlike in most programming languages
 that support references (or pointers),
 Rust does not require different syntax for accessing fields and methods
 based on whether an instance or a reference is used.
+It supplies "automatic referencing and dereferencing"
+in field access and method calls.
+In the case of method calls, it automatically adds `&`, `&mut`, or `*`
+based on the method declaration of the `self` type.
+
 For example:
 
 ```rust
@@ -1067,9 +1072,9 @@ fn main() {
     let p = Point2D { x: 1.0, y: 2.0 };
     let p_ref = &p;
     println!("{}", p.x); // 1
-    println!("{}", p_ref.x); // 1
+    println!("{}", p_ref.x); // 1; same syntax with reference
     println!("{}", p.is_origin()); // false
-    println!("{}", p_ref.is_origin()); // false
+    println!("{}", p_ref.is_origin()); // false; same syntax with reference
 }
 ```
 
