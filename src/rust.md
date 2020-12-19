@@ -1356,6 +1356,7 @@ A tuple is a fixed-length list of values that can be of different types.
 The syntax for a tuple type is `(type1, type2, ...)`.
 The syntax for a tuple value is `(value1, value2, ...)`.
 Individual values can be accessed by index or destructuring.
+It is not possible to iterate over the elements of a tuple.
 
 For example:
 
@@ -1378,8 +1379,12 @@ Elements of an array can be accessed using
 square brackets and zero-based indexes.
 For example, `rgb[1]` is "green".
 
-A vector is a variable-length list of values.
-TODO: Do they all have the same type?
+A `Vec` (vector) is a variable-length list of values that have the same type.
+
+In many cases to operate on an array or `Vec`
+you will want to obtain an `Iterator` and operate on that.
+For example, that is where you will find
+the methods `map`, `filter`, and `fold`.
 
 ## Collections
 
@@ -1473,9 +1478,9 @@ Here are operations on the `str` type:
 | `s.split_whitespace()`               | split on any amounts of whitespace                     |
 | `s.strip_prefix(z)` returns `Option` | remove prefix                                          |
 | `s.strip_suffix(z)` returns `Option` | remove suffix                                          |
-| `s.to_uppercase()`                   | get uppercase `String`                                 |
 | `s.to_string()`                      | convert `&str` to `String`                             |
 | `s.to_lowercase()`                   | get lowercase `String`                                 |
+| `s.to_uppercase()`                   | get uppercase `String`                                 |
 | `s.trim()`                           | get slice with leading and trailing whitespace removed |
 | `s.trim_end()`                       | get slice with trailing whitespace removed             |
 | `s.trim_start()`                     | get slice with leading whitespace removed              |
@@ -1489,6 +1494,11 @@ Here are operations on the `str` type:
 1. The `::<T>` syntax is called "turbofish".
 1. Call the `collect` method on this iterator to get a `Vec<&str>`.
 
+Many `String` methods operate on byte indexes.
+This works for strings that only contain ASCII characters,
+but is dangerous for things that contain multi-byte Unicode characters.
+Methods on the `str` type are better for working with Unicode characters.
+
 Here are operations on the `String` type:
 
 | Operation                                | Syntax                           |
@@ -1500,16 +1510,18 @@ Here are operations on the `String` type:
 | create from multiple `&str` #2           | `let u = format!("{}{}", s, t);` |
 | create from `String` and `&str` (1)      | `let u = v + s;`                 |
 | create from multiple `String` values (2) | `let u = v + &w;`                |
-| convert `&str` without copying           | `let s = &t;`                    |
-| concatenate `String`                     | `u += v;`                        |
-| concatenate `&str`                       | `u += s;`                        |
-| concatenate `char` (3)                   | `u.push(c);`                     |
-| concatenate `&str` (3)                   | `u.push_str(s);`                 |
+| get `&str` without copying               | `let s = &t;`                    |
+| append character                         | `u.push(c)`                      |
+| append `&str`                            | `u += s;`                        |
+| append `String`                          | `u += v;`                        |
+| append `&str`                            | `u.push_str(s)`                  |
 | get substring                            | same as for `&str`               |
 | get substring from index to end          | `s[start..]`                     |
 | get substring from beginning to index    | `s[..end]`                       |
 | get substring where end is inclusive     | `u[start.. =end]`                |
 | get `char` at index                      | `&u.chars().nth(index)`          |
+| get length                               | `u.len()`                        |
+| remove and return last character         | `u.pop()`                        |
 
 1. The `String` `u` here must be first.
 1. All `String` values on the right of `=` after the first
