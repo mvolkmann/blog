@@ -890,7 +890,7 @@ fn main() {
 When variables (not references) whose values are on the heap
 are passed to functions, copies are not made and ownership is transferred.
 When the function exits, the data is freed.
-The calling function can no longer use the variable that was passed in.
+The calling function can then no longer use variables that were passed in.
 For example:
 
 ```rust
@@ -909,9 +909,28 @@ fn main() {
 }
 ```
 
+We can fix this by changing the function to return the reference.
+For example:
+
+```rust
+fn my_function(s: String) -> String {
+    println!("{}", s); // "test"
+    s
+}
+
+fn main() {
+    let s = String::from("test");
+    let s2 = my_function(s);
+    println!("{}", s2); // "test"
+}
+```
+
 When references to variables on the stack or heap are passed to functions,
-ownership is borrowed by the function and
-is returned to the calling function when the function completes.
+ownership is borrowed by the function.
+If the function exits by returning the reference,
+ownership is returned to the calling function.
+Otherwise the data is freed and the calling function
+can then no longer use the variable that was passed in.
 For example:
 
 ```rust
