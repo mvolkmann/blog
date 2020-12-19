@@ -100,6 +100,26 @@ that would only be discovered at runtime with other systems languages.
 The Rust compiler also provides very detailed error messages
 that include suggestions on how to correct the errors.
 
+## Why use another programming language
+
+**Performance:**
+
+If programming languages that provided automatic memory management
+(such as JavaScript/TypeScript, Python, and Go)
+are fast enough for the target application,
+Rust will be overkill.
+
+**Learning Curve:**
+
+The learning curve for Rust is quite high.
+It may be too much effort to bring an entire team
+up to speed on using it.
+
+**Processor target:**
+
+If the target platform uses a processor type that is not a target of LLVM,
+Rust cannot currently produce code that will run on it.
+
 ## Installing
 
 Rust is installed using the {% aTargetBlank "", "rustup" %} tool.
