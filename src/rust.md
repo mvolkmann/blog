@@ -2393,10 +2393,11 @@ fn main() {
 }
 ```
 
-Struct fields with a string value should almost always use
-the type `String` instead of `&str` or `&String`.
+In general it's best for struct fields to not have reference types.
 This makes the lifetime of the field value match that of the struct
 which simplifies its usage by removing the need to specify lifetime annotations.
+For example, struct fields with a string value should almost always
+use the type `String` instead of `&str` or `&String`.
 
 To allow structs to be printed for debugging purposes,
 add the following above their definition:
