@@ -1414,7 +1414,8 @@ that doesn't fall into the previous categories:
 
 ### Strings
 
-Strings are collections of UTF-8 encoded characters.
+Strings are collections of UTF-8 encoded characters
+stored as a `Vec` of `u8` byte values.
 Literal values are surrounded by double quotes.
 Strings are more difficult to work with in Rust than in other languages.
 Rust trades simplicity here for better
@@ -1433,60 +1434,121 @@ and have the type `&str`.
 Literal characters (just one) are surrounded by single quotes
 and have the type `char`.
 
-In the table below, assume
-the variable `c` holds a `char` value,
-the variables `s` and `t` hold `&str` values, and
-the variables `u`, `v`, and `w` hold `String` values.
+In the tables below, assume the following variable types:
+
+- `c` holds a `char` value
+- `r` holds a `std::ops::Range`
+- `s` and `t` hold `&str` values
+- `u`, `v`, and `w` hold `String` values
+- `z` holds a char or `&str`
+
 Everywhere `c` is used, a literal character can be used in its place.
 Everywhere `s` and `t` are used, a literal string can be used in its place.
 
-| Operation                                         | Syntax                           |
-| ------------------------------------------------- | -------------------------------- |
-| create `&str`                                     | `"text in double quotes"`        |
-| create `String` #1                                | `String::from(s)`                |
-| create `String` #2                                | `s.to_string()`                  |
-| create empty `String`                             | `String::new()`                  |
-| create `String` from multiple `&str` #1           | `let u = [s, t].concat();`       |
-| create `String` from multiple `&str` #2           | `let u = format!("{}{}", s, t);` |
-| create `String` from `String` and `&str` (1)      | `let u = v + s;`                 |
-| create `String` from multiple `String` values (2) | `let u = v + &w;`                |
-| convert `&str` to `String`                        | `s.to_string()`                  |
-| convert `String` to `&str` without copying        | `let s = &t;`                    |
-| concatenate to `&str`                             | cannot be done                   |
-| concatenate to `&str` to `String`                 | `u += s;`                        |
-| concatenate to `String` to `String`               | `u += v;`                        |
-| concatenate to `char` to `String` (3)             | `u.push(c);`                     |
-| concatenate to `&str` to `String` (3)             | `u.push_str(s);`                 |
-| get substring of `&str`                           | `s[start..end]` (4)              |
-| get substring of `String`                         | same as for `&str`               |
-| get substring from index to end                   | `s[start..]`                     |
-| get substring from beginning to index             | `s[..end]`                       |
-| get substring where end is inclusive              | `u[start.. =end]`                |
-| get `char` at index from `&str`                   | `s.chars().nth(index)` (5)       |
-| get `char` at index from `String`                 | `&u.chars().nth(index)`          |
+Here are operations on the `str` type:
 
-1. The `String` `u` here must be first.
-1. All `String` values on the right of `=` after the first
-   must be preceded by `&` which converts it to a `&str`.
-1. The `String` `u` must be mutable.
+| Operation                                              | Syntax                               |
+| ------------------------------------------------------ | ------------------------------------ |
+| create                                                 | `"text in double quotes"`            |
+| concatenate to `&str`                                  | cannot be done                       |
+| get substring                                          | `s[start..end]` (1)                  |
+| get iterator over Unicode characters                   | `s.chars()`                          |
+| get `char` at index                                    | `s.chars().nth(index)` (2)           |
+| determine if contains                                  | `s.contains(z)`                      |
+| determine if ends with                                 | `s.ends_with(z)`                     |
+| determine if starts with                               | `s.starts_with(z)`                   |
+| get substring                                          | `s.get(r)` (3)                       |
+| get length                                             | `s.len()`                            |
+| get iterator over lines                                | `s.lines()`                          |
+| parse into another type such as specific number type   | `let v = s.parse::<T>()` (4)         |
+| create `String` that repeat n times                    | `s.repeat(n)`                        |
+| replace all occurrences of z1 with z2                  | `s.replace(z1, z2)`                  |
+| replace first n occurrences of z1 with z2              | `s.replacen(z1, z2, n)`              |
+| split on a character                                   | `s.split(c)` returns an iterator (5) |
+| split at index                                         | `s.split_at(n)` returns tuple        |
+| split on any amounts of whitespace                     | `s.split_whitespace()`               |
+| remove prefix                                          | `s.strip_prefix(z)` returns `Option` |
+| remove suffix                                          | `s.strip_suffix(z)` returns `Option` |
+| get uppercase `String`                                 | `s.to_uppercase()`                   |
+| convert `&str` to `String`                             | `s.to_string()`                      |
+| get lowercase `String`                                 | `s.to_lowercase()`                   |
+| get slice with leading and trailing whitespace removed | `s.trim()`                           |
+| get slice with trailing whitespace removed             | `s.trim_end()`                       |
+| get slice with leading whitespace removed              | `s.trim_start()`                     |
+
 1. `start` is inclusive and `end` is exclusive.
 1. The `chars` method can be used to iterate over the characters in a string.
    The `nth` method returns a `Option` object because
    the string may be shorter than the index.
    To get the `char` from it, use one of the approaches below.
+1. This returns an `Option` object rather than panic on bad indexes.
+1. The `::<T>` syntax is called "turbofish".
+1. Call the `collect` method on this iterator to get a `Vec<&str>`.
+
+Here are operations on the `String` type:
+
+| Operation                                | Syntax                           |
+| ---------------------------------------- | -------------------------------- |
+| create empty                             | `String::new()`                  |
+| create from `&str` #1                    | `String::from(s)`                |
+| create from `&str` #2                    | `s.to_string()`                  |
+| create from multiple `&str` #1           | `let u = [s, t].concat();`       |
+| create from multiple `&str` #2           | `let u = format!("{}{}", s, t);` |
+| create from `String` and `&str` (1)      | `let u = v + s;`                 |
+| create from multiple `String` values (2) | `let u = v + &w;`                |
+| convert `&str` without copying           | `let s = &t;`                    |
+| concatenate `String`                     | `u += v;`                        |
+| concatenate `&str`                       | `u += s;`                        |
+| concatenate `char` (3)                   | `u.push(c);`                     |
+| concatenate `&str` (3)                   | `u.push_str(s);`                 |
+| get substring                            | same as for `&str`               |
+| get substring from index to end          | `s[start..]`                     |
+| get substring from beginning to index    | `s[..end]`                       |
+| get substring where end is inclusive     | `u[start.. =end]`                |
+| get `char` at index                      | `&u.chars().nth(index)`          |
+
+1. The `String` `u` here must be first.
+1. All `String` values on the right of `=` after the first
+   must be preceded by `&` which converts it to a `&str`.
+1. The `String` `u` must be mutable.
 
 ```rust
-let char5 = &myString.chars().nth(5);
+let my_string = "Santa 🎅 🎄";
+let letter = &my_string.chars().nth(6);
 
 // Approach #1
-if let Some(c) = char5 {
-    println!("5th char is {}", c);
+if let Some(c) = letter {
+    println!("letter is {}", c);
 }
 
 // Approach #2
-match char5 {
-    Some(c) => println!("5th char is {}", c);
+match letter {
+    Some(c) => println!("letter is {}", c),
     None => {} // ignores when string is shorter
+}
+```
+
+Here's a function that returns the first word in a string
+that might contain non-ASCII Unicode characters:
+
+```rust
+fn first_word(s: &str) -> &str {
+    for (i, letter) in s.chars().enumerate() {
+        if letter == ' ' {
+            return &s[..i];
+        }
+    }
+    s
+}
+
+fn main() {
+    let s = String::from("foo bar baz");
+    let word = first_word(&s);
+    println!("{}", word); // foo
+
+    let s = String::from("onelongword");
+    let word = first_word(&s);
+    println!("{}", word); // onelongword
 }
 ```
 
@@ -1680,6 +1742,33 @@ for (name, dog) in &dogs {
     println!("{} is a {}.", name, dog.breed);
 }
 ```
+
+## Slices
+
+A slice is a reference to a contiguous subset of a collection.
+This is what a `&str` value represents.
+For example:
+
+```rust
+let s = String::from("abcdefgh");
+// Note the & which says we are getting a
+// "reference" to a portion of the string.
+let sub = &s[3..6];
+println!("{}", sub); // "def"
+```
+
+Many kinds of collections, including Array and Vector,
+support obtaining slices of their elements.
+
+The following table shows all the syntax variations of ranges:
+
+| Syntax  | Meaning  |
+| ------- | -------- |
+| `s..e`  | s to e-1 |
+| `s..=e` | s to e   |
+| `s..`   | s to end |
+| `..e`   | 0 to e-1 |
+| `..=e`  | 0 to e   |
 
 ## Conditional Logic
 
@@ -1995,6 +2084,44 @@ let result = longest(&fruits);
 println!("longest is {}", result);
 ```
 
+## Iterators
+
+Many Rust methods return a `std::iter::Iterator` that
+can be used to iterate over the elements of a collection.
+This type supports methods in the following non-exhaustive list:
+
+| Method           | Description                                                         |
+| ---------------- | ------------------------------------------------------------------- |
+| `all(predFn)`    | returns `bool` indicating if `predFn` returns true for all elements |
+| `any(predFn)`    | returns `bool` indicating if `predFn` returns true for any elements |
+| `chain(iter2)`   | returns `Iterator` that iterates over combined elements             |
+| `collect()`      | returns a `std::vec::Vec` containing all the elements               |
+| `count()`        | returns number of elements in `Iterator`, consuming it              |
+| `enumerate()`    | returns `Iterator` over tuples of indexes and elements              |
+| `filter(predFn)` | returns `Iterator` over elements for which `predFn` returns true    |
+| `fold()`         | TODO: like `reduce` in JavaScript                                   |
+| `last()`         | returns last element in `Iterator`, consuming it                    |
+| `map()`          |                                                                     |
+| `max()`          |                                                                     |
+| `max_by()`       |                                                                     |
+| `max_by_key()`   |                                                                     |
+| `min()`          |                                                                     |
+| `min_by()`       |                                                                     |
+| `min_by_key()`   |                                                                     |
+| `nth()`          |                                                                     |
+| `partition()`    |                                                                     |
+| `position()`     | like `Array` `find` in JavaScript                                   |
+| `product()`      |                                                                     |
+| `rev()`          |                                                                     |
+| `skip()`         |                                                                     |
+| `skip_while()`   |                                                                     |
+| `sum()`          |                                                                     |
+| `take()`         |                                                                     |
+| `take_while()`   |                                                                     |
+| `zip()`          |                                                                     |
+
+TODO: Finish describing the methods above.
+
 ## Functions
 
 Functions are defined using the `fn` keyword,
@@ -2162,7 +2289,7 @@ fn main() {
     }
 
     impl Point2D {
-        // Instance method
+        // Instance method (use of self is similar to Python)
         fn distance_to(self: &Self, other: &Self) -> f64 {
             Self::distance_between(self, other)
         }
