@@ -1456,34 +1456,34 @@ Everywhere `s` and `t` are used, a literal string can be used in its place.
 
 Here are operations on the `str` type:
 
-| Syntax                               | Operation                                              |
-| ------------------------------------ | ------------------------------------------------------ |
-| `"text in double quotes"`            | create                                                 |
-| cannot be done                       | concatenate to `&str`                                  |
-| `s[start..end]` (1)                  | get substring                                          |
-| `s.chars()`                          | get iterator over Unicode characters                   |
-| `s.chars().nth(index)` (2)           | get `char` at index                                    |
-| `s.contains(z)`                      | determine if contains                                  |
-| `s.ends_with(z)`                     | determine if ends with                                 |
-| `s.starts_with(z)`                   | determine if starts with                               |
-| `s.get(r)` (3)                       | get substring                                          |
-| `s.len()`                            | get length                                             |
-| `s.lines()`                          | get iterator over lines                                |
-| `let v = s.parse::<T>()` (4)         | parse into another type such as specific number type   |
-| `s.repeat(n)`                        | create `String` that repeat n times                    |
-| `s.replace(z1, z2)`                  | replace all occurrences of z1 with z2                  |
-| `s.replacen(z1, z2, n)`              | replace first n occurrences of z1 with z2              |
-| `s.split(c)` returns an iterator (5) | split on a character                                   |
-| `s.split_at(n)` returns tuple        | split at index                                         |
-| `s.split_whitespace()`               | split on any amounts of whitespace                     |
-| `s.strip_prefix(z)` returns `Option` | remove prefix                                          |
-| `s.strip_suffix(z)` returns `Option` | remove suffix                                          |
-| `s.to_string()`                      | convert `&str` to `String`                             |
-| `s.to_lowercase()`                   | get lowercase `String`                                 |
-| `s.to_uppercase()`                   | get uppercase `String`                                 |
-| `s.trim()`                           | get slice with leading and trailing whitespace removed |
-| `s.trim_end()`                       | get slice with trailing whitespace removed             |
-| `s.trim_start()`                     | get slice with leading whitespace removed              |
+| Syntax                                                 | Operation                            |
+| ------------------------------------------------------ | ------------------------------------ |
+| create                                                 | `"text in double quotes"`            |
+| concatenate to `&str`                                  | cannot be done                       |
+| get substring                                          | `s[start..end]` (1)                  |
+| get iterator over Unicode characters                   | `s.chars()`                          |
+| get `char` at index                                    | `s.chars().nth(index)` (2)           |
+| determine if contains                                  | `s.contains(z)`                      |
+| determine if ends with                                 | `s.ends_with(z)`                     |
+| determine if starts with                               | `s.starts_with(z)`                   |
+| get substring                                          | `s.get(r)` (3)                       |
+| get length                                             | `s.len()`                            |
+| get iterator over lines                                | `s.lines()`                          |
+| parse into another type such as specific number type   | `let v = s.parse::<T>()` (4)         |
+| create `String` that repeat n times                    | `s.repeat(n)`                        |
+| replace all occurrences of z1 with z2                  | `s.replace(z1, z2)`                  |
+| replace first n occurrences of z1 with z2              | `s.replacen(z1, z2, n)`              |
+| split on a character                                   | `s.split(c)` returns an iterator (5) |
+| split at index                                         | `s.split_at(n)` returns tuple        |
+| split on any amounts of whitespace                     | `s.split_whitespace()`               |
+| remove prefix                                          | `s.strip_prefix(z)` returns `Option` |
+| remove suffix                                          | `s.strip_suffix(z)` returns `Option` |
+| convert `&str` to `String`                             | `s.to_string()`                      |
+| get lowercase `String`                                 | `s.to_lowercase()`                   |
+| get uppercase `String`                                 | `s.to_uppercase()`                   |
+| get slice with leading and trailing whitespace removed | `s.trim()`                           |
+| get slice with trailing whitespace removed             | `s.trim_end()`                       |
+| get slice with leading whitespace removed              | `s.trim_start()`                     |
 
 1. `start` is inclusive and `end` is exclusive.
 1. The `chars` method can be used to iterate over the characters in a string.
@@ -1499,7 +1499,9 @@ This works for strings that only contain ASCII characters,
 but is dangerous for things that contain multi-byte Unicode characters.
 Methods on the `str` type are better for working with Unicode characters.
 
-Here are operations on the `String` type:
+Here are operations on the `String` type.
+Note that methods that modify the value
+require the `String` to be mutable (`mut`).
 
 | Operation                                | Syntax                           |
 | ---------------------------------------- | -------------------------------- |
@@ -1526,7 +1528,6 @@ Here are operations on the `String` type:
 1. The `String` `u` here must be first.
 1. All `String` values on the right of `=` after the first
    must be preceded by `&` which converts it to a `&str`.
-1. The `String` `u` must be mutable.
 
 ```rust
 let my_string = "Santa 🎅 🎄";
