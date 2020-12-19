@@ -114,6 +114,10 @@ Rust will be overkill.
 The learning curve for Rust is quite high.
 It may be too much effort to bring an entire team
 up to speed on using it.
+For example, developers must constantly decide whether
+values or references should be passed to functions.
+The reason is that by default all values are passed by value,
+but nearly always it is best to pass non-primitive values by reference.
 
 **Processor target:**
 
@@ -1447,34 +1451,34 @@ Everywhere `s` and `t` are used, a literal string can be used in its place.
 
 Here are operations on the `str` type:
 
-| Operation                                              | Syntax                               |
-| ------------------------------------------------------ | ------------------------------------ |
-| create                                                 | `"text in double quotes"`            |
-| concatenate to `&str`                                  | cannot be done                       |
-| get substring                                          | `s[start..end]` (1)                  |
-| get iterator over Unicode characters                   | `s.chars()`                          |
-| get `char` at index                                    | `s.chars().nth(index)` (2)           |
-| determine if contains                                  | `s.contains(z)`                      |
-| determine if ends with                                 | `s.ends_with(z)`                     |
-| determine if starts with                               | `s.starts_with(z)`                   |
-| get substring                                          | `s.get(r)` (3)                       |
-| get length                                             | `s.len()`                            |
-| get iterator over lines                                | `s.lines()`                          |
-| parse into another type such as specific number type   | `let v = s.parse::<T>()` (4)         |
-| create `String` that repeat n times                    | `s.repeat(n)`                        |
-| replace all occurrences of z1 with z2                  | `s.replace(z1, z2)`                  |
-| replace first n occurrences of z1 with z2              | `s.replacen(z1, z2, n)`              |
-| split on a character                                   | `s.split(c)` returns an iterator (5) |
-| split at index                                         | `s.split_at(n)` returns tuple        |
-| split on any amounts of whitespace                     | `s.split_whitespace()`               |
-| remove prefix                                          | `s.strip_prefix(z)` returns `Option` |
-| remove suffix                                          | `s.strip_suffix(z)` returns `Option` |
-| get uppercase `String`                                 | `s.to_uppercase()`                   |
-| convert `&str` to `String`                             | `s.to_string()`                      |
-| get lowercase `String`                                 | `s.to_lowercase()`                   |
-| get slice with leading and trailing whitespace removed | `s.trim()`                           |
-| get slice with trailing whitespace removed             | `s.trim_end()`                       |
-| get slice with leading whitespace removed              | `s.trim_start()`                     |
+| Syntax                               | Operation                                              |
+| ------------------------------------ | ------------------------------------------------------ |
+| `"text in double quotes"`            | create                                                 |
+| cannot be done                       | concatenate to `&str`                                  |
+| `s[start..end]` (1)                  | get substring                                          |
+| `s.chars()`                          | get iterator over Unicode characters                   |
+| `s.chars().nth(index)` (2)           | get `char` at index                                    |
+| `s.contains(z)`                      | determine if contains                                  |
+| `s.ends_with(z)`                     | determine if ends with                                 |
+| `s.starts_with(z)`                   | determine if starts with                               |
+| `s.get(r)` (3)                       | get substring                                          |
+| `s.len()`                            | get length                                             |
+| `s.lines()`                          | get iterator over lines                                |
+| `let v = s.parse::<T>()` (4)         | parse into another type such as specific number type   |
+| `s.repeat(n)`                        | create `String` that repeat n times                    |
+| `s.replace(z1, z2)`                  | replace all occurrences of z1 with z2                  |
+| `s.replacen(z1, z2, n)`              | replace first n occurrences of z1 with z2              |
+| `s.split(c)` returns an iterator (5) | split on a character                                   |
+| `s.split_at(n)` returns tuple        | split at index                                         |
+| `s.split_whitespace()`               | split on any amounts of whitespace                     |
+| `s.strip_prefix(z)` returns `Option` | remove prefix                                          |
+| `s.strip_suffix(z)` returns `Option` | remove suffix                                          |
+| `s.to_uppercase()`                   | get uppercase `String`                                 |
+| `s.to_string()`                      | convert `&str` to `String`                             |
+| `s.to_lowercase()`                   | get lowercase `String`                                 |
+| `s.trim()`                           | get slice with leading and trailing whitespace removed |
+| `s.trim_end()`                       | get slice with trailing whitespace removed             |
+| `s.trim_start()`                     | get slice with leading whitespace removed              |
 
 1. `start` is inclusive and `end` is exclusive.
 1. The `chars` method can be used to iterate over the characters in a string.
@@ -2121,6 +2125,30 @@ This type supports methods in the following non-exhaustive list:
 | `zip()`          |                                                                     |
 
 TODO: Finish describing the methods above.
+
+Here is an example of using the `filter` method.
+
+```rust
+// This is a predicate function that is by the filter method.
+// It must take a reference to a item in an Iterator.
+// In this case the item type is &str,
+// so the parameter must have the type &&str.
+fn is_short(s: &&str) -> bool {
+    s.len() <= 5
+}
+
+fn main() {
+    let months = "January|February|March|April|May|June|July|August";
+
+    // This passes a closure to the filter method.
+    let short_names: Vec<&str> = months.split('|').filter(|m| m.len() <= 5).collect();
+    println!("shorts = {:?}", short_names);
+
+    // This passes a function to the filter method.
+    let short_names: Vec<&str> = months.split('|').filter(is_short).collect();
+    println!("shorts = {:?}", short_names);
+}
+```
 
 ## Functions
 
