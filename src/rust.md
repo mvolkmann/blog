@@ -1433,15 +1433,20 @@ performance, concurrency, memory management.
 There are two kinds of strings in Rust.
 The language defines the "string slice" type `&str`
 and the standard library defines the `String` type.
-A `&str` value has a fixed length and its data
-can be stored on the stack or in the heap.
-Variables of this type hold a reference to the data wherever it lives.
+A `&str` value has a fixed length.
+The compiler decides whether its data should be
+stored on the stack or in the heap.
+You just get a reference to it.
 A `String` value has a variable length and is stored in the heap.
 
-Literal strings (zero or more characters) are surrounded by double quotes
-and have the type `&str`.
 Literal characters (just one) are surrounded by single quotes
 and have the type `char`.
+Literal strings (zero or more characters) are surrounded by double quotes
+and have the type `&str`.
+
+Typically variables for strings that
+do not require mutation should have the type `&str`
+and those that do should have the type `&mut String`.
 
 In the tables below, assume the following variable types:
 
@@ -2234,6 +2239,11 @@ fn main() {
 }
 ```
 
+Function parameters that are strings that are not mutated by the function
+should almost always have the type `&str`.
+This allows many string representations to be passed in including
+literal strings, `&str` values, and `&String` values.
+
 TODO: Try to write a generic version of the average function
 TODO: that works on any numeric type. But see
 TODO: https://users.rust-lang.org/t/passing-generic-vector-of-numbers/52486/7.
@@ -2476,10 +2486,47 @@ but they can nest other structs (composition).
 ## Type Aliases
 
 Aliases for types can be defined using the `type` keyword.
-For example:
+These can be used anywhere a type can be specified.
+For example, we can define an alias for a function signature:
 
 ```rust
-type ArrNumbers3 = [i32; 3];
+#[derive(Debug)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+// This is a type alias for a function signature.
+type PointFn = fn (pt: &Point2D, input: f64) -> Point2D;
+
+fn rotate(pt: &Point2D, angle: f64) -> Point2D {
+    let cos = angle.cos();
+    let sin = angle.sin();
+    let x = pt.x * cos - pt.y * sin;
+    let y = pt.x * sin + pt.y * cos;
+    Point2D { x, y }
+}
+
+fn translate_x(pt: &Point2D, dx: f64) -> Point2D {
+    Point2D { x: pt.x + dx, ..*pt }
+}
+
+fn translate_y(pt: &Point2D, dy: f64) -> Point2D {
+    Point2D { y: pt.x + dy, ..*pt }
+}
+
+// The type of the second parameter is the type alias defined above.
+fn operate(pt: &Point2D, function: PointFn, input: f64) -> Point2D {
+    function(pt, input)
+}
+
+fn main() {
+    let p = Point2D {x: 3.0, y: 4.0};
+    println!("{:?}", operate(&p, translate_x, 4.0));
+    println!("{:?}", operate(&p, translate_y, 2.0));
+    let pi = std::f64::consts::PI;
+    println!("{:?}", operate(&p, rotate, pi / 2.0));
+}
 ```
 
 ## Traits
