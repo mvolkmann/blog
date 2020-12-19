@@ -974,6 +974,23 @@ fn main() {
 }
 ```
 
+A function can create a value on the heap and return it.
+This transfers ownership to the caller rather than freeing the data.
+For example:
+
+```rust
+fn my_function() -> String {
+    let s = String::from("test");
+    println!("{}", s); // "test"
+    s // returns to caller, transferring ownership
+}
+
+fn main() {
+    let s = my_function();
+    println!("{}", s); // "test"
+}
+```
+
 Early we said that memory allocated in a scope is freed when that scope exits.
 However, there is an exception to this
 when ownership is transferred outside the block.
