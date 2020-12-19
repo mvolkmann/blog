@@ -2094,37 +2094,47 @@ Many Rust methods return a `std::iter::Iterator` that
 can be used to iterate over the elements of a collection.
 This type supports methods in the following non-exhaustive list:
 
-| Method           | Description                                                         |
-| ---------------- | ------------------------------------------------------------------- |
-| `all(predFn)`    | returns `bool` indicating if `predFn` returns true for all elements |
-| `any(predFn)`    | returns `bool` indicating if `predFn` returns true for any elements |
-| `chain(iter2)`   | returns `Iterator` that iterates over combined elements             |
-| `collect()`      | returns a `std::vec::Vec` containing all the elements               |
-| `count()`        | returns number of elements in `Iterator`, consuming it              |
-| `enumerate()`    | returns `Iterator` over tuples of indexes and elements              |
-| `filter(predFn)` | returns `Iterator` over elements for which `predFn` returns true    |
-| `fold()`         | TODO: like `reduce` in JavaScript                                   |
-| `last()`         | returns last element in `Iterator`, consuming it                    |
-| `map()`          |                                                                     |
-| `max()`          |                                                                     |
-| `max_by()`       |                                                                     |
-| `max_by_key()`   |                                                                     |
-| `min()`          |                                                                     |
-| `min_by()`       |                                                                     |
-| `min_by_key()`   |                                                                     |
-| `nth()`          |                                                                     |
-| `partition()`    |                                                                     |
-| `position()`     | like `Array` `find` in JavaScript                                   |
-| `product()`      |                                                                     |
-| `rev()`          |                                                                     |
-| `skip()`         |                                                                     |
-| `skip_while()`   |                                                                     |
-| `sum()`          |                                                                     |
-| `take()`         |                                                                     |
-| `take_while()`   |                                                                     |
-| `zip()`          |                                                                     |
+| Method               | Description                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------- |
+| `all(predFn)`        | returns `bool` indicating if `predFn` returns true for all elements                               |
+| `any(predFn)`        | returns `bool` indicating if `predFn` returns true for any elements                               |
+| `chain(iter2)`       | returns `Iterator` that iterates over combined elements                                           |
+| `collect()`          | returns a `std::vec::Vec` containing all the elements                                             |
+| `count()`            | returns number of elements in `Iterator`, consuming it                                            |
+| `enumerate()`        | returns `Iterator` over tuples of indexes and elements                                            |
+| `filter(predFn)`     | returns `Iterator` over elements for which `predFn` returns true                                  |
+| `fold(fn)`           | returns result of combining elements into a single value                                          |
+| `last()`             | returns last element in `Iterator`, consuming it                                                  |
+| `map(fn)`            | returns `Iterator` over results of calling a function on each element                             |
+| `max()`              | returns `Option` that wraps the largest element                                                   |
+| `max_by(fn)`         | returns `Option` that wraps the largest result based on passing pairs of elements to a function   |
+| `max_by_key(fn)`     | returns `Option` that wraps the largest result of passing each element to a function              |
+| `min()`              | returns `Option` that wraps the smallest element                                                  |
+| `min_by(fn)`         | returns `Option` that wraps the smallest result based on passing pairs of elements to a function  |
+| `min_by_key(fn)`     | returns `Option` that wraps the smallest result of passing each element to a function             |
+| `nth(n)`             | returns the nth element                                                                           |
+| `partition(predFn)`  | returns two collections containing elements for which a function returns true or false            |
+| `position(predFn)`   | returns the first element for which a function returns true                                       |
+| `product()`          | returns the product of number values                                                              |
+| `rev()`              | returns an iterate that iterates in the reverse order                                             |
+| `skip(n)`            | returns an `Iterator` that begins after n elements                                                |
+| `skip_while(predFn)` | returns an `Iterator` that begins at the first element for which a function returns false         |
+| `sum()`              | returns the sum of number values                                                                  |
+| `take(n)`            | returns an `Iterator` that stops after the first n elements                                       |
+| `take_while(predFn)` | returns an `Iterator` that stops at the last element for which a function returns true            |
+| `zip()`              | returns an `Iterator` over `Option` objects that wrap corresponding elements from two `Iterators` |
 
-TODO: Finish describing the methods above.
+Here is an example of using the `fold` method:
+
+```rust
+let a1 = [1, 2, 3];
+let sum = a1.iter().fold(0, |acc, n| acc + n);
+println!("{}", sum);
+
+// For this use of fold we can use the sum method instead.
+let sum = a1.iter().sum::<i32>();
+println!("{}", sum);
+```
 
 Here is an example of using the `filter` method.
 
@@ -2148,6 +2158,37 @@ fn main() {
     let short_names: Vec<&str> = months.split('|').filter(is_short).collect();
     println!("shorts = {:?}", short_names);
 }
+```
+
+Here is an example of using the `map` method:
+
+```rust
+let a1 = [1, 2, 3];
+let iter = a1.iter().map(|n| n * 2); // doubles each number
+for n in iter {
+    println!("{}", n);
+}
+
+// We cannot create an array from an iterator,
+// but we can create a Vector.
+let v1 = vec![1, 2, 3];
+let iter = v1.iter().map(|n| n * 2);
+let v2: Vec<i32> = iter.collect();
+println!("{:?}", v2);
+```
+
+Here is an example of using the `zip` method:
+
+```rust
+let a1 = [1, 2, 3];
+let a2 = [4, 5, 6];
+
+let mut iter = a1.iter().zip(a2.iter());
+
+assert_eq!(iter.next(), Some((&1, &4)));
+assert_eq!(iter.next(), Some((&2, &5)));
+assert_eq!(iter.next(), Some((&3, &6)));
+assert_eq!(iter.next(), None);
 ```
 
 ## Functions
@@ -2412,6 +2453,15 @@ println!("{:?}", REBECCA_PURPLE); // RGB(102, 51, 153)
 
 Structs cannot inherit from (extend) other structs,
 but they can nest other structs (composition).
+
+## Type Aliases
+
+Aliases for types can be defined using the `type` keyword.
+For example:
+
+```rust
+type ArrNumbers3 = [i32; 3];
+```
 
 ## Traits
 
