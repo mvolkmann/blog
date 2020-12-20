@@ -423,7 +423,7 @@ The following table describes the `cargo` subcommands:
 | `uninstall`   | removes executable from `~/.cargo/bin` by default                          |
 | `update`      | updates dependencies in `Cargo.lock`                                       |
 
-The `cargo run` command creates a new directory containing Rust project
+The `cargo new` command creates a new directory containing Rust project
 that is initialized as a new Git repository.
 It contains a `Cargo.toml` configuration file
 that specifies the project name, version, authors,
@@ -438,6 +438,10 @@ and then enter `cargo watch -x subcommand`.
 The `-x` flag can be omitted in which case
 the subcommand defaults to `check`, not `run`.
 Typically you will want the subcommand to be `run`.
+
+The `cargo run` command builds and runs the project.
+To pass command-line arguments to the program, specify them after `--`.
+For example, `cargo run -- arg1 arg2 ...`
 
 The `cargo build` command creates an executable in the `target/debug` directory.
 To create an optimized, production build, enter `cargo build --release`
@@ -1449,7 +1453,48 @@ and have the type `char`.
 Literal strings (zero or more characters) are surrounded by double quotes
 and have the type `&str`.
 
-Typically variables for strings that
+Here is a summary of the types that can be used to represent strings:
+
+TODO: FINISH THIS! See Rust Playground.
+
+| Type          | Description                                              |
+| ------------- | -------------------------------------------------------- |
+| `str`         | cannot use this type                                     |
+| `&str`        | reference to an immutable string slice                   |
+| `&mut str`    | cannot use this type                                     |
+| `String`      | immutable if declared with `let`; mutable with `let mut` |
+| `&String`     | reference to an immutable string                         |
+| `&mut String` | reference to a mutable string                            |
+
+Here are examples of declaring, creating, and passing various kinds of strings:
+
+```rust
+fn demo(s1: &str, s2: String, s3: &String, s4: &mut String) {
+  println!("s1 = {}", s1); // one
+  println!("s2 = {}", s2); // two
+  println!("s3 = {}", s3); // three
+  println!("s4 = {}", s4); // four alpha
+  //s3.push_str(" beta"); // error: cannot borrow `*s3` as mutable
+  s4.push_str(" beta"); // only s4 can be mutated
+}
+
+fn main() {
+    let s1: &str = "one";
+    let s2: String = String::from("two");
+    let s3: String = String::from("three");
+    let mut s4: String = String::from("four");
+    s4.push_str(" alpha");
+
+    demo(s1, s2, &s3, &mut s4);
+
+    println!("main: s1 = {}", s1); // one
+    //println!("main: s2 = {}", s2); // error: borrow of moved value
+    println!("main: s3 = {}", s3); // three
+    println!("main: s4 = {}", s4); // four alpha beta
+}
+```
+
+Typically variables and parameters for strings that
 do not require mutation should have the type `&str`
 and those that do should have the type `&mut String`.
 
@@ -1660,6 +1705,8 @@ struct Dog {
     breed: String
 }
 impl Dog {
+    // This is a constructor function where the name "new"
+    // is used by convention, but is not required.
     fn new(name: &str, breed: &str) -> Self {
         Dog {
             name: name.to_string(),
@@ -1698,7 +1745,7 @@ with `String` keys and `i32` values:
 
 ```rust
 // Key and value types are inferred from what is inserted.
-let mut days_in_month = HashMap::new();
+let mut days_in_month = HashMap<String, i32>::new();
 days_in_month.insert("January", 31);
 days_in_month.insert("February", 28);
 days_in_month.insert("March", 31);
