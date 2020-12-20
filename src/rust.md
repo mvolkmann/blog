@@ -1269,11 +1269,22 @@ There are many ways to handle values from these enum types.
    }
    ```
 
-3. Use the `unwrap` method.  
-   This extracts the value from an `Option` or `Result` enum.
-   If the value is a `Some` or `Ok` then it succeeds.
-   If the value is a `None` or `Err` then it panics, exiting the program.
-   When it is an `Err` the message it wraps will be output.
+3. Use the `unwrap`, `unwrap_or`, `unwrap_or_default`,
+   or `unwrap_or_else` method.  
+   These extract the value from an `Option` or `Result` enum.
+
+   If the value is a `Some` or `Ok`, they succeed.
+
+   If the value is a `None` or `Err`:
+
+   - `unwrap` panics, exiting the program
+   - `unwrap_or` uses a specified default value
+   - `unwrap_or_default` uses the default value for the type
+   - `unwrap_or_else` uses a closure to compute the value to use
+
+   If the value is `Err` and the `unwrap` method is used,
+   the message it wraps will be output.
+
    We can replace the `match` and `if let` statements above
    with the following:
 
@@ -1281,7 +1292,8 @@ There are many ways to handle values from these enum types.
    let result = divide1(n, d).unwrap();
    println!("result is {}", result);
 
-   let result = divide2(n, d).unwrap();
+   // When d is zero this uses infinity for the value.
+   let result = divide2(n, d).unwrap_or(std::f64::INFINITY);
    println!("result is {}", result);
    ```
 
@@ -2837,6 +2849,17 @@ TODO: Finish adding descriptions and methods in the table above.
    less than, equal to, or greater than zero.
 
 TODO: Finish adding descriptions in this table.
+
+## Macros
+
+Macros are like functions that:
+
+- name names that end in `!`
+- generate code at compile-time
+- can take a variable number of arguments
+
+To define a macro ...
+TODO: Finish this
 
 ## Modules
 
