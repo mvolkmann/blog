@@ -1457,14 +1457,17 @@ and have the type `&str`.
 
 Here is a summary of the types that can be used to represent strings:
 
-| Type          | Description                                              |
-| ------------- | -------------------------------------------------------- |
-| `str`         | cannot use this type                                     |
-| `&str`        | reference to an immutable string slice                   |
-| `&mut str`    | cannot use this type                                     |
-| `String`      | immutable if declared with `let`; mutable with `let mut` |
-| `&String`     | reference to an immutable string                         |
-| `&mut String` | reference to a mutable string                            |
+| Type          | Description                                                             |
+| ------------- | ----------------------------------------------------------------------- |
+| `str`         | only used directly in rare circumstances                                |
+| `&str`        | reference to an immutable string slice; commonly used                   |
+| `&mut str`    | only used in rare circumstances; some `str` methods use it              |
+| `String`      | immutable if declared with `let`; mutable with `let mut`; commonly used |
+| `&String`     | reference to an immutable string; typically use `&str` instead          |
+| `&mut String` | reference to a mutable string; commonly used                            |
+
+So the string types most frequently used are
+`&str`, `String`, and `&mut String`.
 
 Here are examples of declaring, creating, and passing various kinds of strings:
 
