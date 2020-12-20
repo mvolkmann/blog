@@ -1666,6 +1666,9 @@ TODO: Finish this.
 
 ### Sets
 
+Sets of string values typically use the type `String`
+so the elements are owned by the set and therefore have the same lifetime.
+
 To use the `HashSet` type by ony its name:
 
 ```rust
@@ -1734,6 +1737,9 @@ println!("contains Spot? = {:?}", dogs.contains(&spot)); // false
 
 ### Maps
 
+Maps that use strings for keys and/or values typically use the type `String`
+so they are owned by the map and therefore have the same lifetime.
+
 To use the `HashMap` type by ony its name:
 
 ```rust
@@ -1745,7 +1751,7 @@ with `String` keys and `i32` values:
 
 ```rust
 // Key and value types are inferred from what is inserted.
-let mut days_in_month = HashMap<String, i32>::new();
+let mut days_in_month = HashMap::new();
 days_in_month.insert("January", 31);
 days_in_month.insert("February", 28);
 days_in_month.insert("March", 31);
@@ -2534,6 +2540,84 @@ println!("{:?}", REBECCA_PURPLE); // RGB(102, 51, 153)
 
 Structs cannot inherit from (extend) other structs,
 but they can nest other structs (composition).
+
+The `impl` keyword can be used multiple times on the same struct.
+Typically it's best to define all the methods of a struct in one place.
+The following example shows using `impl` in three places
+to define methods on the same struct.
+
+`geometry.rs`
+
+```rust
+#[derive(Debug)]
+pub struct Point2D {
+    pub x: f64,
+    pub y: f64,
+}
+
+impl Point2D {
+    pub fn distance_from_origin(&self) -> f64 {
+        self.x.powf(2.0) + self.y.powf(2.0)
+    }
+}
+```
+
+`more.rs`
+
+```rust
+use super::geometry::Point2D;
+
+impl Point2D {
+    pub fn translate_x(&mut self, dx: f64) {
+        self.x += dx;
+    }
+}
+
+pub fn scoot(p: &mut Point2D) {
+    p.translate_x(1.0);
+}
+```
+
+`main.rs`
+
+```rust
+mod geometry;
+use geometry::Point2D;
+
+mod more;
+
+fn demo(p: &mut Point2D) {
+    impl Point2D {
+        fn translate_y(&mut self, dy: f64) {
+            self.y += dy;
+        }
+    }
+
+    p.translate_y(1.0);
+}
+
+fn main() {
+    let mut p = Point2D { x: 1.0, y: 2.0 };
+    println!("distance = {}", p.distance_from_origin());
+
+    // The translate_x method is defined in geometry.rs.
+    p.translate_x(2.0);
+
+    // The scoot function is defined in more.rs.
+    // Just because p is mutable doesn't mean
+    // that all references to it are mutable.
+    // The scoot function requires a mutable reference
+    // and we must specify that when passing a reference.
+    more::scoot(&mut p);
+
+    demo(&mut p);
+
+    // The translate_y method is defined in the demo function above.
+    p.translate_y(2.0);
+
+    println!("{:?}", p); // Point2D { x: 4.0, y: 5.0 }
+}
+```
 
 ## Type Aliases
 
