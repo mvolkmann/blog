@@ -107,7 +107,9 @@ that include suggestions on how to correct the errors.
 If programming languages that provided automatic memory management
 (such as JavaScript/TypeScript, Python, and Go)
 are fast enough for the target application,
-Rust will be overkill.
+and garbage collection pauses are not an issue,
+the effort required to use Rust is hard to justify.
+For many developers, this is the case for everything they write.
 
 **Learning Curve:**
 
@@ -1455,8 +1457,6 @@ and have the type `&str`.
 
 Here is a summary of the types that can be used to represent strings:
 
-TODO: FINISH THIS! See Rust Playground.
-
 | Type          | Description                                              |
 | ------------- | -------------------------------------------------------- |
 | `str`         | cannot use this type                                     |
@@ -1752,17 +1752,17 @@ with `String` keys and `i32` values:
 ```rust
 use std::collections::HashMap;
 
-fn get_shortest(months: &HashMap<String, i8>) -> Option<&String> {
-    let mut shortest: i8 = 32;
-    let mut name = None;
+fn get_shortest(months: &HashMap<String, i8>) -> Option<&str> {
+    let mut shortest: i8 = std::i8::MAX;
+    let mut name: Option<&str> = None;
 
     // The months HashMap owns its keys and values.
     // The iter method iterates over shared references to elements.
     // The into_iter methods iterates over owned elements
-    for (key, val) in months.into_iter() {
-        if *val < shortest {
+    for (key, &val) in months.into_iter() {
+        if val < shortest {
             name = Some(key);
-            shortest = *val;
+            shortest = val;
         }
     }
     name
