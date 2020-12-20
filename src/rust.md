@@ -1740,7 +1740,7 @@ println!("contains Spot? = {:?}", dogs.contains(&spot)); // false
 Maps that use strings for keys and/or values typically use the type `String`
 so they are owned by the map and therefore have the same lifetime.
 
-To use the `HashMap` type by ony its name:
+To use the `HashMap` type by only its name:
 
 ```rust
 use std::collections::HashMap;
@@ -1750,28 +1750,54 @@ Here is an example of creating and using a `HashMap`
 with `String` keys and `i32` values:
 
 ```rust
-// Key and value types are inferred from what is inserted.
-let mut days_in_month = HashMap::new();
-days_in_month.insert("January", 31);
-days_in_month.insert("February", 28);
-days_in_month.insert("March", 31);
-days_in_month.insert("April", 30);
+use std::collections::HashMap;
 
-println!("daysInMonth = {:#?}", days_in_month);
-println!("entries = {:?}", days_in_month.len()); // 4
-println!("days in March = {:?}", days_in_month.get("March").unwrap());
-days_in_month.remove("February");
-println!("entries = {:?}", days_in_month.len()); // 3
-println!("days in February = {:?}", days_in_month.get("February"));
+fn get_shortest(months: &HashMap<String, i8>) -> Option<&String> {
+    let mut shortest: i8 = 32;
+    let mut name = None;
 
-let month = "April";
-match days_in_month.get(month) {
-    Some(days) => println!("There are {} days in {}.", days, month),
-    None => println!("No data found for {}.", month)
+    // The months HashMap owns its keys and values.
+    // The iter method iterates over shared references to elements.
+    // The into_iter methods iterates over owned elements
+    for (key, val) in months.into_iter() {
+        if *val < shortest {
+            name = Some(key);
+            shortest = *val;
+        }
+    }
+    name
 }
 
-for (month, days) in &days_in_month {
-    println!("There are {} days in {}.", days, month);
+fn main() {
+    let mut days_in_month: HashMap<String, i8> = HashMap::new();
+    days_in_month.insert("January".to_string(), 31);
+    days_in_month.insert("February".to_string(), 28);
+    days_in_month.insert("March".to_string(), 31);
+    days_in_month.insert("April".to_string(), 30);
+
+    println!("daysInMonth = {:#?}", &days_in_month);
+
+    for (month, days) in &days_in_month {
+        println!("There are {} days in {}.", days, month);
+    }
+
+    println!("entries = {:?}", days_in_month.len()); // 4
+
+    println!("days in March = {:?}", days_in_month.get("March").unwrap());
+
+    if let Some(shortest) = get_shortest(&days_in_month) {
+        println!("shortest = {}", shortest); // February
+    }
+
+    days_in_month.remove("February");
+    println!("entries = {:?}", days_in_month.len()); // 3
+    println!("days in February = {:?}", days_in_month.get("February"));
+
+    let month = "April";
+    match days_in_month.get(month) {
+        Some(days) => println!("There are {} days in {}.", days, month),
+        None => println!("No data found for {}.", month)
+    }
 }
 ```
 
