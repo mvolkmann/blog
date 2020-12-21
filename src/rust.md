@@ -1486,9 +1486,11 @@ So the string types most frequently used are
 `&str`, `String`, and `&mut String`.
 
 To get a `&str` from a `String` in the variable `s`,
-use `s.as_str()` or `&s[..]` (taking a full slice).
+use `s.as_str()` or `&s`.
 To get a `String` from a `&str` in the variable `s`,
 use `s.to_string()` or `String::from(s)`.
+To create a `String` from multiple values of types that implement the `Display` trait,
+use `format!(fmt_string, v1, v2, ...)`.
 
 Here are examples of declaring, creating, and passing various kinds of strings:
 
