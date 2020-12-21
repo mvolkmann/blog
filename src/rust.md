@@ -1370,6 +1370,10 @@ The default type for literal floats is `f64` regardless of the processor.
 Literal floating point values must include a decimal point
 to avoid being treated as integer values.
 
+The "unit type" is represents not having a value.
+It is like an enum with a single variant which is written as `()`.
+TODO: When is this used?
+
 ## Built-in Compound Types
 
 Rust defines two compound (non-primitive) types which are tuple and array.
@@ -1480,6 +1484,11 @@ Here is a summary of the types that can be used to represent strings:
 
 So the string types most frequently used are
 `&str`, `String`, and `&mut String`.
+
+To get a `&str` from a `String` in the variable `s`,
+use `s.as_str()` or `&s[..]` (taking a full slice).
+To get a `String` from a `&str` in the variable `s`,
+use `s.to_string()` or `String::from(s)`.
 
 Here are examples of declaring, creating, and passing various kinds of strings:
 
@@ -1767,13 +1776,15 @@ with `String` keys and `i32` values:
 ```rust
 use std::collections::HashMap;
 
-fn get_shortest(months: &HashMap<String, i8>) -> Option<&str> {
+fn get_shortest_v1(months: &HashMap<String, i8>) -> Option<&str> {
     let mut shortest: i8 = std::i8::MAX;
     let mut name: Option<&str> = None;
 
     // The months HashMap owns its keys and values.
-    // The iter method iterates over shared references to elements.
-    // The into_iter methods iterates over owned elements
+    // The iter method iterates over shared references to elements,
+    // so we don't use that here.
+    // Instead we use the into_iter method
+    // which iterates over owned elements.
     for (key, &val) in months.into_iter() {
         if val < shortest {
             name = Some(key);
@@ -1781,6 +1792,23 @@ fn get_shortest(months: &HashMap<String, i8>) -> Option<&str> {
         }
     }
     name
+}
+
+fn get_shortest_v1(months: &HashMap<String, i8>) -> Option<&str> {
+      // The HashMap iter method returns
+      // an iterator over (key, value) tuples.
+      month_map.iter()
+        // The Iter min_by_key method is passed a closure and returns
+        // an Option that wraps the smallest value returned by the closure.
+        // The closure is passed each tuple, one at a time,
+        // and returns the value to be compared.
+        // In this case it is the second element in the tuple (at index 1).
+        .min_by_key(|p| p.1)
+        // The Option map is called on an Option of one type
+        // and returns an Option of another.
+        // In this case it is called on an Option wrapping a (key, value) tuple
+        // and returns an Option wrapping just the key (at index 0).
+        .map(|p| p.0.as_str())
 }
 
 fn main() {
@@ -1800,7 +1828,8 @@ fn main() {
 
     println!("days in March = {:?}", days_in_month.get("March").unwrap());
 
-    if let Some(shortest) = get_shortest(&days_in_month) {
+    // get_shortest_v1 and get_shortest_v2 return the same value.
+    if let Some(shortest) = get_shortest_v2(&days_in_month) {
         println!("shortest = {}", shortest); // February
     }
 
