@@ -727,6 +727,15 @@ Differences between constants and immutable statics include:
 - Generic functions can declare `const` variables with a generic type
   (often named `T`), but cannot do so with `static` variables.
 
+To print the type of a variable for debugging purposes,
+define the following function and pass a reference to it:
+
+```rust
+fn print_type<T>(_: &T) {
+    println!("{}", std::any::type_name::<T>())
+}
+```
+
 TODO: Are statics a way to share data across functions,
 TODO: even those defined in separate files, without passing it?
 
@@ -1489,6 +1498,8 @@ To get a `&str` from a `String` in the variable `s`,
 use `s.as_str()` or `&s`.
 To get a `String` from a `&str` in the variable `s`,
 use `s.to_string()` or `String::from(s)`.
+`String` values are automatically converted to the `&str` type
+when passed as an argument to a function that accepts a `&str`.
 To create a `String` from multiple values of types that implement the `Display` trait,
 use `format!(fmt_string, v1, v2, ...)`.
 
@@ -2994,6 +3005,23 @@ where `main.rs` is the file that contains the module definition
 The `use` statement binds a full path to a new name for easier access.
 For example, `use A::B::C` enables using `C` with just that name
 instead of its fully qualified name.
+This is also referred to as bringing `C` into scope.
+
+When bringing functions into scope it is idiomatic to just
+specify the path to their parent module in a `use` statement
+and use that to refer to the function (`ParentModule::fnName`).
+This makes it apparent when looking a calls to the functions
+that they are not defined locally.
+
+When bringing other items like structs and enums into scope
+it is idiomatic to specify their full paths in a `use` statement
+and then refer to them using only their name.
+However, this approach doesn't work if multiple items are needed
+from different modules and they have the same name.
+In that case either bring their parent modules into scope
+and use those to disambiguate references
+or use the `as` keyword in the `use` statement to assign aliases to the names.
+For example, `use math::dimension3::Point as Point3D`.
 
 The file `src/main.rs` below uses the `points` module defined above.
 
