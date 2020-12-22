@@ -1943,7 +1943,10 @@ for await (const req of server) {
 ```
 
 Here is a more advanced HTTP server written in TypeScript.
-Typically one would use a framework such as oak (covered below) for this,
+Typically one would use a framework such as
+{% aTargetBlank "https://oakserver.github.io/oak/", "oak" %} (covered below) or
+{% aTargetBlank "https://github.com/asos-craigmorten/opine", "opine" %}
+(port of Express) for this,
 but it demonstrates what is possible using only the standard library.
 It supports two operations, "add" and "multiply",
 that are invoked with requests like these:

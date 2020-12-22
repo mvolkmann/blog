@@ -190,6 +190,9 @@ Verify installation by entering `rustc --version`.
 
   - free, online set of examples in many categories
 
+- {% aTargetBlank "https://doc.rust-lang.org/std/index.html", "Rust Standard Library" %}
+  API documentation
+
 - {% aTargetBlank "https://github.com/rust-lang/rustlings", "Rustlings" %}
 
   - "contains small exercises to get you used to reading and writing Rust code"
@@ -1321,7 +1324,10 @@ There are many ways to handle values from these enum types.
 
 5. Use the `?` operator.  
    If the value is a `Some` or `Ok` then it is unwrapped and returned.
-   If the value is a `None` or `Err` then it is returned to the caller.
+   If the value is a `None` or `Err` then it is passed through the
+   `from` function (defined in the standard library `From` trait)
+   in order to convert it to the return type of the function,
+   and that is returned to the caller.
    The function in which this operator is used must
    declare the proper return type and return a value of that type.
    This allows the caller to handle errors, similar to
@@ -2902,6 +2908,56 @@ Macros are like functions that:
 
 To define a macro ...
 TODO: Finish this
+
+## File IO
+
+The `std::fs` and `std::io` modules enable reading and writing from files.
+For example:
+
+```rust
+use std::fs;
+use std::io;
+// The following is required to gain access to the
+// lines and write methods.
+use std::io::prelude::*;
+
+fn write_file(path: &str) -> io::Result<()> {
+    // To write entire file from one string ...
+    //let mut f = fs::File::create(path)?;
+    //f.write_all(b"Hello\nWorld\n")
+
+    // To write one line at a time ...
+    let f = fs::File::create(path)?;
+    let mut writer = io::BufWriter::new(f);
+    // The write method takes a byte slice
+    // and returns the number of bytes written.
+    // This shows two ways to create a byte slice from a string.
+    writer.write(b"Hello\n")?;
+    writer.write("World\n".as_bytes())?;
+    Ok(())
+}
+
+fn read_file(path: &str) -> io::Result<()> {
+    // To read entire file into a string ...
+    //let content = fs::read_to_string(path)?;
+    //println!("content = {}", content);
+
+    // To read one line at a time ...
+    let f = fs::File::open(path)?;
+    let reader = io::BufReader::new(f);
+    for line in reader.lines() {
+        println!("line = {}", line?);
+    }
+
+    Ok(())
+}
+
+fn main() -> io::Result<()> {
+    let path = "demo.txt";
+    write_file(path)?;
+    read_file(path)
+}
+```
 
 ## Modules
 
