@@ -3020,6 +3020,21 @@ fn main() {
 }
 ```
 
+Another option is allow multiple types to be passed into the macro.
+To this, change the first line inside the macro to the following:
+
+```rust
+    ($($t: ty), *) => {
+        $(
+```
+
+Add the line `)*` after the end of the `impl` block.
+Call the new version of the macro as follows:
+
+```rust
+implement_days! { i8, i16, i32, i64, i128 }
+```
+
 ## File IO
 
 The `std::fs` and `std::io` modules enable reading and writing from files.
