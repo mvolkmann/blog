@@ -759,7 +759,11 @@ Memory management is handled by following these rules:
 
 1. Each value is referred to by a variable that is its owner.
 1. Each value has one owner at a time, the owner can change over its lifetime.
-1. When the owner goes out of the scope, the value is dropped.
+1. When the owner goes out of the scope, the value is dropped (freed).
+
+While it is not typically called directly,
+`std::mem::drop` is a function that can be called to
+explicitly free the memory owned by a variable.
 
 Variable values are stored either in the stack or the heap.
 Accessing stack data is faster, but data on the heap can grow and shrink
@@ -846,7 +850,7 @@ println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
 println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
 ```
 
-Borrowing does not transfer ownership,
+Borrowing does not transfer (also referred to as "move") ownership,
 so a borrow variable can go out of scope without
 freeing the memory associated with the original variable.
 
@@ -1192,6 +1196,31 @@ For example, `fn my_function<'a, 'b>(...)`.
 To specify that lifetime `b` is at least as long as lifetime `a`,
 use `fn my_function<'a, 'b: 'a>(...)`.
 
+## Enums
+
+Enums specify a list of allowed values referred to as "variants".
+For example:
+
+```rust
+#[allow(dead_code)] // suppress warning about not using all the variants
+#[derive(Debug)]
+enum PrimaryColor { Red, Green, Blue }
+
+fn process_color(color: PrimaryColor) {
+    println!("color = {:?}", color);
+}
+
+fn main() {
+    let color: PrimaryColor = PrimaryColor::Green;
+    process_color(color);
+}
+```
+
+The "Error Handling" section describes the `Option` and `Result` enums
+that are provided by the standard library.
+These contain variants that hold data,
+which is something that enums in most other programming languages cannot do.
+
 ## Error Handling
 
 Rust does not support throwing and catching exceptions
@@ -1387,7 +1416,38 @@ to avoid being treated as integer values.
 
 The "unit type" is represents not having a value.
 It is like an enum with a single variant which is written as `()`.
-TODO: When is this used?
+This is sometimes used to take no action
+in a particular arm of a `match` expression.
+
+Rust allows adding methods to any type, even built-in types.
+For example:
+
+```rust
+trait Days<T> {
+    fn days_from_now(self) -> String;
+}
+
+impl Days<i32> for i32 {
+    fn days_from_now(self: i32) -> String {
+        let s = match self {
+            -1 => "yesterday",
+            0 => "today",
+            1 => "tomorrow",
+            _ => if self > 0 { "future" } else { "past" }
+        };
+        s.to_string()
+    }
+}
+
+fn main() {
+    let days: i32 = -1;
+    println!("{}", days.days_from_now()); // yesterday
+    println!("{}", 0.days_from_now()); // today
+    println!("{}", 1.days_from_now()); // tomorrow
+    println!("{}", 2.days_from_now()); // future
+    println!("{}", (-2).days_from_now()); // past
+}
+```
 
 ## Built-in Compound Types
 
@@ -1475,7 +1535,8 @@ performance, concurrency, memory management.
 There are two kinds of strings in Rust.
 The language defines the "string slice" type `&str`
 and the standard library defines the `String` type.
-A `&str` value has a fixed length.
+A `&str` value is a reference (or pointer) to a view into
+the characters of an owned `String` that has a fixed length.
 The compiler decides whether its data should be
 stored on the stack or in the heap.
 You just get a reference to it.
@@ -1503,7 +1564,9 @@ So the string types most frequently used are
 To get a `&str` from a `String` in the variable `s`,
 use `s.as_str()` or `&s`.
 To get a `String` from a `&str` in the variable `s`,
-use `s.to_string()` or `String::from(s)`.
+use `s.to_string()`, `String::from(s)`, or `s.to_owned()`.
+Note that `to_string` calls `String::from` which calls `to_owned`.
+These calls are inlined so they all have the same performance.
 `String` values are automatically converted to the `&str` type
 when passed as an argument to a function that accepts a `&str`.
 To create a `String` from multiple values of types that implement the `Display` trait,
@@ -2257,6 +2320,8 @@ println!("longest is {}", result);
 
 Many Rust methods return a `std::iter::Iterator` that
 can be used to iterate over the elements of a collection.
+Iterators are lazy, meaning that they
+do not pre-compute the values they will return.
 This type supports methods in the following non-exhaustive list:
 
 | Method               | Description                                                                                       |
@@ -2362,6 +2427,9 @@ Functions are defined using the `fn` keyword,
 followed by a name, parameter list, return type, and body.
 Functions that do not return anything omit the return type rather than
 specify a type like `void` as is done in some other languages.
+Functions that might fail should return a `Result` enum
+to allow callers to handle errors.
+See the "Error Handling" section for details.
 
 A `return` statement returns the value of an expression.
 If the last statement is not terminated by a semicolon, its value is returned.
@@ -2537,7 +2605,7 @@ fn main() {
         fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
             let dx = pt1.x - pt2.x;
             let dy = pt1.y - pt2.y;
-            (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+            (dx.powi(2) + dy.powi(2)).sqrt()
         }
     }
 
@@ -2646,7 +2714,7 @@ pub struct Point2D {
 
 impl Point2D {
     pub fn distance_from_origin(&self) -> f64 {
-        self.x.powf(2.0) + self.y.powf(2.0)
+        self.x.powi(2) + self.y.powi(2)
     }
 }
 ```
@@ -2783,7 +2851,7 @@ fn main() {
         fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
             let dx = self.x - other.x;
             let dy = self.y - other.y;
-            (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+            (dx.powi(2) + dy.powi(2)).sqrt()
         }
     }
 
@@ -2909,6 +2977,49 @@ Macros are like functions that:
 To define a macro ...
 TODO: Finish this
 
+Here is an example of a macro that implements the trait `Days`
+for a given integer type such as `i8`:
+
+```rust
+trait Days {
+    fn days_from_now(self) -> String;
+}
+
+macro_rules! implement_days {
+    ($t: ty) => {
+        impl Days for $t {
+            fn days_from_now(self) -> String {
+                let s = match self {
+                    -1 => "yesterday",
+                    0 => "today",
+                    1 => "tomorrow",
+                    _ => {
+                        if self > 0 {
+                            "future"
+                        } else {
+                            "past"
+                        }
+                    }
+                };
+                s.to_string()
+            }
+        }
+    };
+}
+
+implement_days! {i8}
+implement_days! {i16}
+implement_days! {i32}
+
+fn main() {
+    let d8: i8 = 1;
+    let d16: i16 = -1;
+    println!("{}", d8.days_from_now()); // tomorrow
+    println!("{}", d16.days_from_now()); // yesterday
+    println!("{}", 0.days_from_now()); // today
+}
+```
+
 ## File IO
 
 The `std::fs` and `std::io` modules enable reading and writing from files.
@@ -2959,6 +3070,9 @@ fn main() -> io::Result<()> {
 }
 ```
 
+To read and write JSON files, consider using
+{% aTargetBlank "https://github.com/serde-rs/json", "Serde JSON" %}.
+
 ## Modules
 
 A module defines a collection of values like constants, functions, and structs.
@@ -3008,7 +3122,7 @@ mod points {
         pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
             let dx = pt1.x - pt2.x;
             let dy = pt1.y - pt2.y;
-            (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+            (dx.powi(2) + dy.powi(2)).sqrt()
         }
     }
 }
@@ -3047,7 +3161,7 @@ impl Point2D {
     pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
         let dx = pt1.x - pt2.x;
         let dy = pt1.y - pt2.y;
-        (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+        (dx.powi(2) + dy.powi(2)).sqrt()
     }
 }
 ```
@@ -3136,7 +3250,7 @@ use super::types::Point2D;
 pub fn distance(pt1: &Point2D, pt2: &Point2D) -> f64 {
     let dx = pt1.x - pt2.x;
     let dy = pt1.y - pt2.y;
-    (dx.powf(2.0) + dy.powf(2.0)).sqrt()
+    (dx.powi(2) + dy.powi(2)).sqrt()
 }
 ```
 
