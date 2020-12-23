@@ -297,6 +297,10 @@ p. 296 Delete the annotation that says
 "Using preventDefault prevents a form submission."
 because setting the button types to "button" removes the need for this.
 
+p. 300 In section 17.5 under "Add the following import:",
+change the code to `const {json} = require('body-parser');`
+(printing 3)
+
 p. 301 In step 7, change `routes/checklist.svelte`
 to `components/Category.svelte`.
 
