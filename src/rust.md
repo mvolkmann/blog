@@ -23,7 +23,7 @@ Features of Rust include:
 - rich, static type system with type inference
 - ownership model to guarantee memory-safety and thread-safety
 - targets LLVM, so runs on a wide variety of platforms that targets
-- can call and be called by C
+- can call and be called by C/C++
 
 Rust was created at Mozilla by Graydon Hoare,
 with contributions from Dave Herman, Brendan Eich, and others.
@@ -375,6 +375,9 @@ the opened folder contains a `Cargo.toml` file.
   - `cargo` feature for building, testing, and sharing crates
   - set of related crates described by a `Cargo.toml` file;
   - contains any number of binaries and 0 or 1 library
+- panic
+  - represents an unrecoverable error that causes a program to terminate
+    and print a stack trace and error message
 - TOML
   - configuration file format
   - stands for Tom's Obvious, Minimal Language
@@ -764,6 +767,9 @@ Memory management is handled by following these rules:
 While it is not typically called directly,
 `std::mem::drop` is a function that can be called to
 explicitly free the memory owned by a variable.
+
+The `Drop` trait can be implemented for any type
+to specify code to execute when data of a specific type is dropped.
 
 Variable values are stored either in the stack or the heap.
 Accessing stack data is faster, but data on the heap can grow and shrink
@@ -1479,9 +1485,13 @@ The default type for literal floats is `f64` regardless of the processor.
 Literal floating point values must include a decimal point
 to avoid being treated as integer values.
 
-The "unit type" is represents not having a value.
+The "unit type" is represents not having a value,
+like `void` in other languages.
 It is like an enum with a single variant which is written as `()`.
-This is sometimes used to take no action
+It is the return value of functions that do not return a value.
+It is also what the `Result` enum `Ok` variant
+wraps when there is nothing to return.
+It can also be used to take no action
 in a particular arm of a `match` expression.
 
 Rust allows adding methods to any type, even built-in types.
@@ -1739,6 +1749,7 @@ Here are operations on the `str` type:
 | replace all occurrences of z1 with z2                  | `s.replace(z1, z2)`                  |
 | replace first n occurrences of z1 with z2              | `s.replacen(z1, z2, n)`              |
 | split on a character                                   | `s.split(c)` returns an iterator (5) |
+| split on a character n times (last contains rest)      | `s.splitn(n, c)` returns an iterator |
 | split at index                                         | `s.split_at(n)` returns tuple        |
 | split on any amounts of whitespace                     | `s.split_whitespace()`               |
 | remove prefix                                          | `s.strip_prefix(z)` returns `Option` |
@@ -2525,6 +2536,48 @@ assert_eq!(iter.next(), Some((&3, &6)));
 assert_eq!(iter.next(), None);
 ```
 
+## Regular Expressions
+
+Regular expressions for string pattern matching are not directly supported.
+Instead an external crate such as
+{% aTargetBlank "https://crates.io/crates/regex", "regex" %} must be used.
+For example:
+
+```rust
+use regex::Regex;
+
+fn main() {
+    // Determine if a string matches a regular expression.
+    // Match 'h' or 's' followed by 1 to 3 digits.
+    let re = Regex::new(r"[hs]\d{1,3}").unwrap();
+    let s = "The host is h19 and the switch is s257.";
+    if re.is_match(s) {
+        println!("matched");
+    } else {
+        println!("mismatch");
+    }
+
+    // Get text matching capture groups.
+    //let re = Regex::new(r"([hs]\d{1,3})").unwrap();
+    for cap in re.captures_iter(s) {
+        let text = &cap[0];
+        println!("{:?}", text); // h19 and s257
+    }
+
+    // Split a string on a regular expression
+    // and collect the pieces into a vector.
+    let pieces: Vec<&str> = re.split(s).into_iter().collect();
+    println!("pieces = {:?}", pieces);
+
+    // Split a string on a regular expression
+    // and iterate over the pieces.
+    let piece_iter = re.split(s).into_iter();
+    for piece in piece_iter {
+        println!("piece = {}", piece);
+    }
+}
+```
+
 ## Functions
 
 Functions are defined using the `fn` keyword,
@@ -2938,7 +2991,13 @@ Traits can be generic, including type parameters.
 Trait functions can provide default implementations
 that are used by implementing types that do not override them.
 
-For example:
+Many functions provided by the standard library are implementations of traits.
+When looking at documentation for a type consider that
+some methods may only be described in the documentation
+for traits that are implemented for the type.
+
+Here is an example of a custom trait named `Distance`
+that is implemented for the custom type `Point2D`:
 
 ```rust
 fn main() {
@@ -3192,6 +3251,13 @@ fn main() -> io::Result<()> {
 
 To read and write JSON files, consider using
 {% aTargetBlank "https://github.com/serde-rs/json", "Serde JSON" %}.
+This requires adding the following dependencies in `cargo.toml`:
+
+```toml
+serde = { version = "1.0.118", features = ["derive"] }
+serde_json = "1.0.60"
+```
+
 For example:
 
 ```rust
@@ -3439,11 +3505,13 @@ The most popular source of open source crates is
 {% aTargetBlank "https://crates.io/", "crates.io" %}.
 Commonly used crates found here include:
 
+- {% aTargetBlank "https://crates.io/crates/actix-web", "actix-web" %} - web framework
 - {% aTargetBlank "https://crates.io/crates/chrono", "chrono" %} - date and time library
 - {% aTargetBlank "https://crates.io/crates/clap", "clap" %} - command-line argument parser
 - {% aTargetBlank "https://crates.io/crates/log", "log" %} - logging API
 - {% aTargetBlank "https://crates.io/crates/rand", "rand" %} - random number generation
 - {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %} - HTTP client
+- {% aTargetBlank "https://crates.io/crates/rocket", "rocket" %} - web framework
 - {% aTargetBlank "https://crates.io/crates/serde", "serde" %} - data structure serialization, including JSON
 
 ## Futures
@@ -3455,6 +3523,12 @@ TODO: Add this section.
 TODO: Add this section.
 
 ## Standard Library
+
+The {% aTargetBlank "https://doc.rust-lang.org/std/index.html",
+"Rust Standard Library" %} is relatively small.
+Often commonly needed functionality is instead found
+in the collection of crates at
+{% aTargetBlank "https://crates.io/", "crates.io" %}.
 
 ## <a name="webassembly">WebAssembly</a>
 
