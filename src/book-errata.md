@@ -298,7 +298,9 @@ p. 296 Delete the annotation that says
 because setting the button types to "button" removes the need for this.
 
 p. 300 In section 17.5 under "Add the following import:",
-change the code to `const {json} = require('body-parser');`
+  one reader reported that they needed to chnage the import of `body-parser`
+to `const {json} = require('body-parser');`
+But the `import` works for me.
 (printing 3)
 
 p. 301 In step 7, change `routes/checklist.svelte`
