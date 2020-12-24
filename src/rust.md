@@ -3550,7 +3550,10 @@ To demonstrate, let's create a library for operating on 2D points.
 1. Modify `geometry2d/src/lib.rs` to contain the following:
 
    ```rust
-   pub mod geometry2d;
+   mod geometry2d;
+
+   // Expose the Point2D struct as a root item.
+   pub use crate::geometry2d::Point2D;
 
    #[cfg(test)]
    mod tests {
@@ -3589,7 +3592,7 @@ To demonstrate, let's create a library for operating on 2D points.
 
    ```rust
    extern crate geometry2d;
-   use geometry2d::geometry2d::Point2D;
+   use geometry2d::Point2D;
 
    fn main() {
        let origin = Point2D { x: 0.0, y: 0.0 };
