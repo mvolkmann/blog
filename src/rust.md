@@ -1514,6 +1514,45 @@ fn main() {
 }
 ```
 
+Here is another way to implement this that works on values
+of any type that implements the traits `Eq`, `Ord`, and `From<i8>`
+which all the number types do:
+
+```rust
+use std::cmp::{ Eq, Ord };
+
+trait Days {
+    fn days_from_now(self) -> &'static str;
+}
+
+impl<T: Eq + Ord + From<i8>> Days for T {
+    fn days_from_now(self) -> &'static str {
+        if self == Self::from(0) {
+            "today"
+        } else if self == Self::from(-1) {
+            "yesterday"
+        } else if self == Self::from(1) {
+            "tomorrow"
+        } else if self < Self::from(0) {
+            "future"
+        } else {
+            "past"
+        }
+    }
+}
+
+fn main() {
+    let days: i32 = -1;
+    println!("{}", days.days_from_now()); // yesterday
+    println!("{}", 0.days_from_now()); // today
+    println!("{}", 1.days_from_now()); // tomorrow
+    println!("{}", 2.days_from_now()); // future
+    println!("{}", (-2).days_from_now()); // past
+}
+```
+
+The "Macros" section shows one more approach.
+
 ## Built-in Compound Types
 
 Rust defines two compound (non-primitive) types which are tuple and array.
@@ -3042,8 +3081,9 @@ Macros are like functions that:
 To define a macro ...
 TODO: Finish this
 
-Here is an example of a macro that implements the trait `Days`
-for a given integer type such as `i8`:
+Back in the "Built-in Scalar Types" we included
+examples of adding methods to built-in types.
+This can also be accomplished with macros as shown here:
 
 ```rust
 trait Days {
