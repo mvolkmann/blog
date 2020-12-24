@@ -332,8 +332,9 @@ fn main() {
 Calls to names that end in `!` are actually
 calls to a macro rather than a function.
 
-See the "Cargo" section for an alternative way
-to compile and run a Rust program.
+Typically the `rustc` command is not used directly.
+Instead the `cargo` command, described in the "Cargo" section,
+is used to run `rustc` and the resulting executable.
 
 ## VS Code
 
@@ -3258,6 +3259,14 @@ serde = { version = "1.0.118", features = ["derive"] }
 serde_json = "1.0.60"
 ```
 
+The "features" option above is required to use
+features in a library that are "feature-gated".
+In the case of the `serde` library,
+we need things provided by the "derive" feature.
+Some libraries use this approach to
+optimize compile times and the generated binary size
+when optional parts of the library are not needed.
+
 For example:
 
 ```rust
@@ -3608,6 +3617,24 @@ To demonstrate, let's create a library for operating on 2D points.
    ```
 
 1. Run the app by entering `cargo run`
+
+## Cross-compiling
+
+Rust can build executables for platforms other than the host platform.
+For example, follow these steps to build a Windows executable
+when not running on a Windows machine:
+
+1. One time, install mingw-w64.
+   In macOS this can be done by installing Homebrew
+   and entering `brew install mingw-w64`
+1. One time, enter `rustup target add x86_64-pc-windows-gnu`
+1. One time, enter `rustup toolchain install stable-x86_64-pc-windows-gnu`
+1. `cd` to the application root directory.
+1. Enter `cargo build --target x86_64-pc-windows-gnu --release`
+
+This creates the executable file in the
+`target/x86_64-pc-windows-gnu/release` directory
+with the same name as the project and a `.exe` file extension.
 
 ## Futures
 
