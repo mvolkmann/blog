@@ -3192,6 +3192,31 @@ fn main() -> io::Result<()> {
 
 To read and write JSON files, consider using
 {% aTargetBlank "https://github.com/serde-rs/json", "Serde JSON" %}.
+For example:
+
+```rust
+use serde::{Deserialize, Serialize};
+use serde_json;
+
+#[derive(Deserialize, Serialize, Debug)]
+struct Dog {
+    name: String,
+    breed: String,
+}
+
+fn main() {
+    let mut dogs = Vec::new();
+    dogs.push(Dog {
+        name: "Comet".to_string(),
+        breed: "Whippet".to_string(),
+    });
+
+    let json = serde_json::to_string(&dogs).unwrap();
+    println!("json = {}", json);
+    let dogs: Vec<Dog> = serde_json::from_str(&json).unwrap();
+    println!("dogs = {:#?}", dogs);
+}
+```
 
 ## Modules
 
@@ -3409,6 +3434,17 @@ Modules can be nested to further segregate the defined names.
 ## Crates
 
 A crate is a collection of modules.
+
+The most popular source of open source crates is
+{% aTargetBlank "https://crates.io/", "crates.io" %}.
+Commonly used crates found here include:
+
+- {% aTargetBlank "https://crates.io/crates/chrono", "chrono" %} - date and time library
+- {% aTargetBlank "https://crates.io/crates/clap", "clap" %} - command-line argument parser
+- {% aTargetBlank "https://crates.io/crates/log", "log" %} - logging API
+- {% aTargetBlank "https://crates.io/crates/rand", "rand" %} - random number generation
+- {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %} - HTTP client
+- {% aTargetBlank "https://crates.io/crates/serde", "serde" %} - data structure serialization, including JSON
 
 ## Futures
 
