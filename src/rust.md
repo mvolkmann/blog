@@ -800,6 +800,22 @@ that is freed when that scope exits.
 Many keywords have an associated block, including
 `fn`, `if`, `loop`, `for`, and `while`.
 
+The following table summarizes the options for
+passing an argument to a function.
+
+| Goal               | Syntax      |
+| ------------------ | ----------- |
+| transfer ownership | `name`      |
+| borrow immutably   | `&name`     |
+| borrow mutably     | `&mut name` |
+
+The following table summarizes the options for
+returning a value from a function.
+
+| Goal             | Syntax |
+| ---------------- | ------ |
+| return ownership |        |
+
 Here are some examples that demonstrate ownership
 inside a single function:
 
@@ -1060,6 +1076,55 @@ fn main() {
     };
     inner();
     println!("{}", a);
+}
+```
+
+Here is an example that concisely summarizes ownership options
+when passing a value to a function:
+
+```rust
+#[derive(Debug)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+fn take(pt: Point2D) {
+    println!("in take pt = {:?}", pt);
+}
+
+fn take_and_return(pt: Point2D) -> Point2D {
+    println!("in take_and_return pt = {:?}", pt);
+    pt // returns ownership to caller
+}
+
+fn borrow_immutably(pt: &Point2D) {
+    //pt.x = 3.0; // can't mutate
+    println!("in borrow_immutably pt = {:?}", pt);
+}
+
+fn borrow_mutably(pt: &mut Point2D) {
+    pt.x = 3.0; // can mutate
+    println!("in borrow_mutably pt = {:?}", pt);
+}
+
+fn main() {
+    let pt = Point2D { x: 1.0, y: 2.0 };
+    take(pt);
+    // Can't use pt after ownership was transferred.
+    //println!("after take, pt = {:?}", pt);
+
+    let mut pt = Point2D { x: 1.0, y: 2.0 };
+    pt = take_and_return(pt);
+    println!("after take_and_return, pt = {:?}", pt);
+
+    let pt = Point2D { x: 1.0, y: 2.0 };
+    borrow_immutably(&pt);
+    println!("after borrow_immutably, pt = {:?}", pt);
+
+    let mut pt = Point2D { x: 1.0, y: 2.0 };
+    borrow_mutably(&mut pt);
+    println!("after borrow_mutably, pt = {:?}", pt);
 }
 ```
 
