@@ -3516,15 +3516,16 @@ Commonly used crates found here include:
 
 ## Creating and Using a Library
 
-TODO: Add this section.
+To create a library project, enter `cargo new {name} --lib`
 
-To create a new library, enter `cargo new {name} --lib`.
 To demonstrate, let's create a library for operating on 2D points.
 
 1. Create the library directory structure by entering
-   `cargo new geometry2d --lib`.
+   `cargo new geometry2d --lib`
 
-1. Create `geometry2d/src/geometry2d.rs` containing the following:
+1. Enter `cd geometry2d`
+
+1. Create `src/geometry2d.rs` containing the following:
 
    ```rust
    pub struct Point2D {
@@ -3547,7 +3548,7 @@ To demonstrate, let's create a library for operating on 2D points.
    }
    ```
 
-1. Modify `geometry2d/src/lib.rs` to contain the following:
+1. Modify `src/lib.rs` to contain the following:
 
    ```rust
    mod geometry2d;
@@ -3575,20 +3576,24 @@ To demonstrate, let's create a library for operating on 2D points.
    }
    ```
 
-1. Run the tests by entering `cargo test`.
+1. Run the tests by entering `cargo test`
 
-1. Build the library by entering `cargo build`.
+1. Build the library by entering `cargo build`
+
+1. Go back up a directory by entering `cd ..`
 
 1. Create the directory structure for an application that will use the library
-   by entering `cargo new geometry2d-app`.
+   by entering `cargo new geometry2d-app`
 
-1. Modify `geometry2d-app/Cargo.toml` to contain the following dependency:
+1. Enter `cd geometry2d-app`
+
+1. Modify `Cargo.toml` to contain the following dependency:
 
    ```toml
    geometry2d = { path = "../geometry2d" }
    ```
 
-1. Modify `geometry2d-app/src/main.rs` to contain the following:
+1. Modify `src/main.rs` to contain the following:
 
    ```rust
    extern crate geometry2d;
@@ -3601,6 +3606,8 @@ To demonstrate, let's create a library for operating on 2D points.
        println!("{}", origin.distance_to(&pt)); // 5
    }
    ```
+
+1. Run the app by entering `cargo run`
 
 ## Futures
 
