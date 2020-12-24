@@ -407,6 +407,7 @@
     "popitem",
     "popleft",
     "powf",
+    "powi",
     "ppid",
     "precache",
     "precaching",

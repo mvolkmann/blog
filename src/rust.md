@@ -3514,6 +3514,91 @@ Commonly used crates found here include:
 - {% aTargetBlank "https://crates.io/crates/rocket", "rocket" %} - web framework
 - {% aTargetBlank "https://crates.io/crates/serde", "serde" %} - data structure serialization, including JSON
 
+## Creating and Using a Library
+
+TODO: Add this section.
+
+To create a new library, enter `cargo new {name} --lib`.
+To demonstrate, let's create a library for operating on 2D points.
+
+1. Create the library directory structure by entering
+   `cargo new geometry2d --lib`.
+
+1. Create `geometry2d/src/geometry2d.rs` containing the following:
+
+   ```rust
+   pub struct Point2D {
+       pub x: f64,
+       pub y: f64,
+   }
+
+   impl Point2D {
+       // Instance method (use of self is similar to Python)
+       pub fn distance_to(self: &Self, other: &Self) -> f64 {
+           Self::distance_between(self, other)
+       }
+
+       // Static method
+       pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
+           let dx = pt1.x - pt2.x;
+           let dy = pt1.y - pt2.y;
+           (dx.powi(2) + dy.powi(2)).sqrt()
+       }
+   }
+   ```
+
+1. Modify `geometry2d/src/lib.rs` to contain the following:
+
+   ```rust
+   pub mod geometry2d;
+
+   #[cfg(test)]
+   mod tests {
+       use crate::geometry2d::Point2D;
+
+       #[test]
+       fn distance_between() {
+           let origin = Point2D { x: 0.0, y: 0.0 };
+           let pt = Point2D { x: 3.0, y: 4.0 };
+           assert_eq!(Point2D::distance_between(&origin, &pt), 5.0);
+       }
+
+       #[test]
+       fn distance_to() {
+           let origin = Point2D { x: 0.0, y: 0.0 };
+           let pt = Point2D { x: 3.0, y: 4.0 };
+           assert_eq!(origin.distance_to(&pt), 5.0);
+       }
+   }
+   ```
+
+1. Run the tests by entering `cargo test`.
+
+1. Build the library by entering `cargo build`.
+
+1. Create the directory structure for an application that will use the library
+   by entering `cargo new geometry2d-app`.
+
+1. Modify `geometry2d-app/Cargo.toml` to contain the following dependency:
+
+   ```toml
+   geometry2d = { path = "../geometry2d" }
+   ```
+
+1. Modify `geometry2d-app/src/main.rs` to contain the following:
+
+   ```rust
+   extern crate geometry2d;
+   use geometry2d::geometry2d::Point2D;
+
+   fn main() {
+       let origin = Point2D { x: 0.0, y: 0.0 };
+       let pt = Point2D { x: 3.0, y: 4.0 };
+       println!("{}", Point2D::distance_between(&origin, &pt)); // 5
+       println!("{}", origin.distance_to(&pt)); // 5
+   }
+   ```
+
 ## Futures
 
 TODO: Add this section.
