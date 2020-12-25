@@ -449,6 +449,12 @@ the subcommand defaults to `check`, not `run`.
 Typically you will want the subcommand to be `run`.
 
 The `cargo run` command builds and runs the project.
+It also downloads dependencies listed in the `Cargo.toml` file,
+and their dependencies recursively.
+This can be slow, so the speed of this command varies greatly
+depending on whether any new dependencies have been added
+since the last time it was run.
+
 To pass command-line arguments to the program, specify them after `--`.
 For example, `cargo run -- arg1 arg2 ...`
 
@@ -3651,6 +3657,59 @@ The {% aTargetBlank "https://doc.rust-lang.org/std/index.html",
 Often commonly needed functionality is instead found
 in the collection of crates at
 {% aTargetBlank "https://crates.io/", "crates.io" %}.
+
+## Sending HTTP Requests
+
+The {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %}
+crate is a popular option for sending HTTP requests.
+Here is an example of using it along with
+{% aTargetBlank "https://crates.io/crates/tokio", "tokio" %}
+for asynchronous calls and
+{% aTargetBlank "https://crates.io/crates/serde", "serde" %}
+for data structure deserialization.
+
+```rust
+extern crate reqwest;
+extern crate tokio;
+
+use serde::{Deserialize, Serialize};
+use serde_json;
+
+#[derive(Deserialize, Serialize, Debug)]
+#[serde(rename_all = "camelCase")]
+struct Todo {
+    user_id: i32,
+    id: i32,
+    title: String,
+    completed: bool,
+}
+
+// std::error::Error is a trait, not a type.
+// Adding the `dyn` keyword before it means the error can be
+// described by any type of value that implements that trait.
+// The error value must have known size at compile time.
+// Since any value of a type that implements the trait can be used,
+// that size is not known.
+// But the compiler does know the size of a `Box`
+// which is what it is used to wrap the error value.
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    //let url = "https://jsonplaceholder.typicode.com/todos/3";
+    let url = "https://jsonplaceholder.typicode.com/todos";
+
+    let res = reqwest::get(url).await?;
+    let json = res.text().await.unwrap();
+    println!("json = {}", json);
+
+    //let todo: Todo = serde_json::from_str(&json).unwrap();
+    let todos: Vec<Todo> = serde_json::from_str(&json).unwrap();
+
+    //println!("todo = {:?}", todo);
+    println!("todos = {:#?}", todos);
+
+    Ok(())
+}
+```
 
 ## <a name="webassembly">WebAssembly</a>
 
