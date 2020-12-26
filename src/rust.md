@@ -221,6 +221,13 @@ Verify installation by entering `rustc --version`.
 
   - from Manning
 
+- {% aTargetBlank
+  "https://www.youtube.com/watch?v=Az3jBd4xdF4&list=PLLqEtX6ql2EyPAZ1M2_C0GgVd4A-_L4_5",
+  "Doug Milford Rust Tutorial series" %} YouTube videos
+
+- {% aTargetBlank "https://www.youtube.com/watch?v=WnWGO-tLtLA&t=2s",
+  "Ryan Levick Introduction to Rust" %} YouTube videos
+
 ## Online Playground
 
 To try Rust code online, browse the
@@ -3364,28 +3371,142 @@ can be used to simplify parsing of the options and provide help.
 
 The `clap` crate supports many features including:
 
-- positional options
-- named options with short (ex. `-q`) and long (ex. `--quiet`) forms
-- options with values (ex. `--color yellow`) referred to as "option arguments"
-- options with default values
-- non-string option values (ex. `bool`, `i32`, or `f64`)
-- custom value validation
 - generated help viewed with `--help` (not with `-h`)
 - getting the version with `--version` or `-V` (not with `-v`)
-  specified with the `version` method or from the `Cargo.toml` file
-- defining when an option is allowed or required
-- specifying options with YAML
+  specified in the code or obtained from the `Cargo.toml` file
+- positional arguments
+- optional named arguments with no value, also known as "flags" (ex. `--quiet`)
+- named arguments with values, also known as "options" (ex. `--color yellow`)
+- arguments with default values
+- defining when an argument is allowed or required
+  (see the `Arg` methods `required_if`, `required_ifs`,
+  `required_unless`, `required_unless_all`, and `required_unless_one`)
+- specifying options with YAML (but a benefit of specifying them
+  in code is that an IDE can detect and report errors)
 - colored error messages
+- non-string option values (ex. `bool`, `i32`, or `f64`)
+- custom value validation
 - and more
 
-Each option must have a name that uses to retrieve its value.
-This typically matches its long name, but is required
-because positional options do not have a long or short name.
+Named arguments can have short (ex. `-q`) and long (ex. `--quiet`) forms.
+Flags can be combined, so `-a -b -c` is the same as `-abc`.
 
-For example:
+Each argument must have a name that uses to retrieve its value.
+This typically matches its long name, but is required
+because positional options are not required to have a long or short name.
+
+For example, consider an app that accepts:
+
+- a positional argument with a type of `u8` that specifies a size
+- an optional flag that causes output to be minimized
+- a required option that supplies a color name
+
+To get help on the app, enter `cargo run -- --help` or
+build the app with `cargo build` and
+enter `./target/debug/clap-demo --help`.
+
+To run the app, enter `cargo run -- 19 --color yellow -q` or
+build the app with `cargo build` and
+enter `./target/debug/clap-demo -- 19 --color yellow -q`.
 
 ```rust
+// The following attribute enables using macros defined in the clap crate.
+#[macro_use]
+extern crate clap;
 
+use clap::Arg;
+// Use the following line instead if the alternate approach below is selected.
+//use clap::{App, Arg};
+
+// This is a custom validator function that
+// is passed to the `validator` method below.
+fn validate_color(color: String) -> Result<(), String> {
+    if color == "white" {
+        Err("white is not a valid choice".to_string())
+    } else {
+        Ok(())
+    }
+}
+
+fn main() {
+    // Alternate approach, not getting values from Cargo.toml file:
+    // let matches = App::new("clap-demo) // next line preferred
+    // let matches = App::new(crate_name!()) // gets from Cargo.toml
+    //     .about("This demonstrates the use of clap.") // next line preferred
+    //     .about(crate_description!()) // gets from Cargo.toml
+    //     .author("R. Mark Volkmann") // next line preferred
+    //     .author(crate_authors!()) // gets from Cargo.toml
+    //     .version("1.0") // next line preferred
+    //     .version(crate_version!()) // gets from Cargo.toml
+
+    // Preferred approach, getting all possible values from Cargo.toml file:
+    // The `app_from_crate!` macro combines
+    // the use of all the macros used above.
+    let matches = app_from_crate!()
+        .before_help("Welcome to my demo!") // optional; rarely used
+        .after_help("Have fun!") // optional; rarely used
+
+        // Good usage strings are generated automatically,
+        // but they can be overridden as follows.
+        //.usage("overridden usage text")
+
+        // This is a named argument that doesn't have a value (a "flag")
+        // and is either present or not.
+        .arg(
+            Arg::with_name("quiet")
+                .long("quiet")
+                .short("q")
+                .help("minimizes output"),
+        )
+
+        // This is a named argument that has a value (an "option").
+        // The name can be separated from the value with a space or `=`.
+        // For example, `--color yellow` or `--color=yellow`.
+        .arg(
+            Arg::with_name("color")
+                .long("color")
+                .short("c")
+                .takes_value(true) // makes this an "option"
+                .default_value("black")
+                .value_name("COLOR")
+                .help("your favorite color")
+                .validator(validate_color),
+        )
+
+        // This argument is positional (an "arg").
+        // Positional arguments can come before or after named arguments.
+        // Their order is the order in which they are defined
+        // unless the `index` method is called.
+        // This specifies the position and is only used on positional arguments.
+        // When this is done, `takes_value` defaults to `true`.
+        .arg(
+            Arg::with_name("size")
+                .takes_value(true)
+                .help("how big?")
+                .required(true),
+        )
+
+        .get_matches(); // parses the command-line arguments
+
+    // The `value_of` method returns an `Option` enum, with
+    // `Some` wrapping the value or `None` when not present.
+    // We can safely call unwrap instead of unwrap_or
+    // (which supplies a value to use in case of parsing error)
+    // for required options.
+    // In this case, `color` is not required and has a default value.
+    let color = matches.value_of("color").unwrap();
+
+    // Values are always strings, but clap provides
+    // a macro to convert them to other types.
+    let size = value_t_or_exit!(matches, "size", u8);
+
+    // The `is_present` method checks whether a flag is present.
+    if matches.is_present("quiet") {
+        println!("{} {}", size, color);
+    } else {
+        println!("You ordered size {} in {}.", size, color);
+    }
+}
 ```
 
 ## Modules
