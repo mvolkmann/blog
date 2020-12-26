@@ -100,6 +100,17 @@ that would only be discovered at runtime with other systems languages.
 The Rust compiler also provides very detailed error messages
 that include suggestions on how to correct the errors.
 
+**WebAssembly:**
+
+WebAssembly (abbreviated WASM) is an instruction format for a virtual machine
+that is supported by the web browsers Chrome, Edge, Firefox, and Safari.
+Code from many programming languages can be compiled to WASM
+which can then be executed in a web browser.
+In order to run WASM code in a web browser,
+the runtime of the source language must be included.
+Rust is a great choice for targeting WASM because it has a very small runtime
+compared to other options like Python, so it downloads faster.
+
 ## Why use another programming language
 
 **Performance:**
@@ -921,9 +932,12 @@ println!("v1 = {}", v1);
 
 An alternative to borrowing is to clone data,
 but doing this is often unnecessarily inefficient.
-To clone a value whose type implements the `Clone` trait,
-call the `clone` method on it.
-For example, `let copy = v.clone();`
+To clone a value, call its `clone` method
+which is available for all types that implement the `Clone` trait.
+A large number of built-in types implement this including
+`String`, arrays, tuples, `Vec`, `HashMap`, and `HashSet`.
+To enable cloning a struct, implement the `Clone` trait by adding
+the `#[derive(Clone)]` attribute before it.
 
 When variables whose values are on the stack are passed to functions,
 the functions are given copies.
@@ -1576,6 +1590,7 @@ Rust defines two compound (non-primitive) types which are tuple and array.
 These are distinct from the collection types that are described later.
 
 A tuple is a fixed-length list of values that can be of different types.
+The maximum length is 12.
 The syntax for a tuple type is `(type1, type2, ...)`.
 The syntax for a tuple value is `(value1, value2, ...)`.
 Individual values can be accessed by index or destructuring.
@@ -1662,6 +1677,10 @@ The compiler decides whether its data should be
 stored on the stack or in the heap.
 You just get a reference to it.
 A `String` value has a variable length and is stored in the heap.
+
+The most common reason for a variable to use the `String` type
+instead of the `&str` type is so it can "own" it.
+Values of type `&str` cannot be owned by a variable.
 
 Literal characters (just one) are surrounded by single quotes
 and have the type `char`.
@@ -2618,10 +2637,35 @@ fn main() {
 }
 ```
 
+When a value of a type that implements the `Copy` trait
+is passed to a function, rather than passing a reference,
+a copy is created and ownership of the original value is not transferred.
+All primitive types such as `bool`, `char`, `i32`, and `f64`
+implement `Copy`.
+However, structs and collection types like
+tuple, array, `Vec`, `HashMap`, and `HashMap` do not.
+You can choose to implement the `Copy` trait for custom structs
+if all their fields also implement it.
+
+Function parameters of non-Copy types typically use reference types.
+This is because usually the function wants to borrow their values
+rather than take ownership.
+If the caller uses a variable to pass a non-Copy value,
+and the function takes ownership, the caller loses ownership and
+can no longer use the variable unless the function returns it.
+
+Function return values typically have non-reference types.
+This is because usually the function creates the value
+and wants to transfer ownership to the caller.
+If a function creates a value and returns a reference to it,
+the code will not compile because the value goes out of scope and is dropped.
+
 Function parameters that are strings that are not mutated by the function
 should almost always have the type `&str`.
 This allows many string representations to be passed in including
 literal strings, `&str` values, and `&String` values.
+Functions that create and return strings have the return type `String`
+so ownership can be transferred to the caller.
 
 TODO: Try to write a generic version of the average function
 TODO: that works on any numeric type. But see
@@ -3297,6 +3341,29 @@ fn main() {
     let dogs: Vec<Dog> = serde_json::from_str(&json).unwrap();
     println!("dogs = {:#?}", dogs);
 }
+```
+
+## Command-line Arguments
+
+To pass command-line arguments to the program, specify them after `--`.
+For example, `cargo run -- arg1 arg2 ...`
+The arguments are available in `std::env::args`.
+The following can be used to get the command-line arguments in a vector
+where the first item is the path the executable
+and the remaining items are the actual arguments.
+
+```rust
+let args: Vec<String> = std::env::args().collect();
+```
+
+Command-line arguments can represent options
+that affect what an application does.
+A crate like {% aTargetBlank "https://crates.io/crates/clap", "clap" %}
+can be used to simplify parsing of the options and provide help.
+For example:
+
+```rust
+
 ```
 
 ## Modules
