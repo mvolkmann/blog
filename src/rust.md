@@ -2637,8 +2637,9 @@ fn main() {
 }
 ```
 
-When a value of a type that implements the `Copy` trait
-is passed to a function, rather than passing a reference,
+The documentation for the `Copy` trait says that values of types
+that implement it "can be duplicated by simply copying bits".
+When such a value is passed to a function, rather than passing a reference,
 a copy is created and ownership of the original value is not transferred.
 All primitive types such as `bool`, `char`, `i32`, and `f64`
 implement `Copy`.
@@ -3360,6 +3361,27 @@ Command-line arguments can represent options
 that affect what an application does.
 A crate like {% aTargetBlank "https://crates.io/crates/clap", "clap" %}
 can be used to simplify parsing of the options and provide help.
+
+The `clap` crate supports many features including:
+
+- positional options
+- named options with short (ex. `-q`) and long (ex. `--quiet`) forms
+- options with values (ex. `--color yellow`) referred to as "option arguments"
+- options with default values
+- non-string option values (ex. `bool`, `i32`, or `f64`)
+- custom value validation
+- generated help viewed with `--help` (not with `-h`)
+- getting the version with `--version` or `-V` (not with `-v`)
+  specified with the `version` method or from the `Cargo.toml` file
+- defining when an option is allowed or required
+- specifying options with YAML
+- colored error messages
+- and more
+
+Each option must have a name that uses to retrieve its value.
+This typically matches its long name, but is required
+because positional options do not have a long or short name.
+
 For example:
 
 ```rust
