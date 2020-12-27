@@ -607,25 +607,35 @@ They annotate an item in order to change its behavior.
 An attribute can be specified
 immediately before the declaration of an item with the syntax `#[attr]`
 or inside the declaration with the syntax `#![attr]`.
+When used at the top level, `#![attr]` specifies a crate-wide attribute.
 
-The following table summarizes commonly used attributes.
+The following table summarizes commonly used built-in attributes.
 
 | Attribute                        | Description                                                  |
 | -------------------------------- | ------------------------------------------------------------ |
-| `allow(warning1, warning2, ...)` | suppress specified warnings (ex. `dead_code` )               |
+| `allow(warning1, warning2, ...)` | suppress specified linting rule warnings                     |
 | `derive(trait1, trait2, ...)`    | automatically implement a list of traits on a `struct`       |
 | `doc`                            | provides an alternate way to specify and format doc comments |
 | `should_panic`                   | indicates that a test is expected to panic                   |
 | `test`                           | annotates a function as a test                               |
 
-For more, see the list at {% aTargetBlank
+For a list of linting rules that produce warnings, see {% aTargetBlank
+"https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html",
+"Warn-by-default lints" %}.
+Examples include `dead_code`, `unreachable_code`, `unused_assignment`,
+`unused_imports`, and `unused_variables`.
+These warnings can be disabled using the `allow` attributes.
+
+For more built-in attributes, see the list at {% aTargetBlank
 "https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index",
 "Attributes" %}.
 
-The table of provided traits in the "Traits" section
-indicates those can be automatically implemented.
+The table of provided traits in the "Traits" section indicates
+those can be automatically implemented using the `derive` attribute.
 For more detail, see {% aTargetBlank
 "https://doc.rust-lang.org/rust-by-example/trait/derive.html", "Derive" %}.
+
+TODO: How can you implement custom attributes?
 
 ## Formatted Print
 
@@ -1239,6 +1249,7 @@ before a reference to it can use it.
 This is only a concern in functions that
 take two or more references and return one of them.
 
+Lifetime annotations only apply to references.
 All reference parameters and reference return types have a lifetime,
 but the Rust compiler automatically determines them in most cases.
 When it cannot, you must explicitly specify them.
@@ -1247,7 +1258,7 @@ reference parameters can be returned.
 Usually the same lifetime is used on
 all of them AND on the return reference type.
 
-Lifetimes are specified appear before type names
+Lifetime annotations appear before type names
 are are composed of a single quote followed by a name
 which is typically a single letter such as "a".
 They only serve to indicate which items in a function signature
@@ -1287,6 +1298,10 @@ fn main() {
     println!("greatest is {}", a(&s1));
 }
 ```
+
+The name `static` is a reserved lifetime name.
+It is the lifetime of `const` and `static` values
+which live for the duration of the program.
 
 To use more than one lifetime specifier in a function signature,
 list them after the function name inside angle brackets separated by commas.
@@ -3858,7 +3873,38 @@ TODO: Add this section.
 
 ## Threads
 
+Rust has built-in support for threads.
+{% aTargetBlank "https://crates.io/crates/tokio", "tokio" %} is a popular crate
+that makes implementing asynchronous code even easier.
+
+Here is a very basic example of using `tokio`.
+It assumes the following dependency line
+has been added in the `Cargo.toml` file.
+
+```toml
+tokio = { version = "1.0.1", features = ["full"] }
+```
+
+```rust
+use std::time::Duration;
+use tokio::time::{sleep, Sleep};
+
+fn sleep_ms(ms: u64) -> Sleep {
+    sleep(Duration::from_millis(ms))
+}
+
+#[tokio::main]
+async fn main() {
+    println!("Hello");
+    //sleep(Duration::from_millis(1000)).await;
+    sleep_ms(1000).await;
+    println!("World");
+}
+```
+
 TODO: Add this section.
+TODO: Add an example that uses multiple threads.
+TODO: Add an example that uses channels to communicate between threads.
 
 ## Standard Library
 
