@@ -1621,7 +1621,9 @@ It is not possible to iterate over the elements of a tuple.
 For example:
 
 ```rust
-TODO: ADD THIS
+let t = (1, 2, 3, 4);
+let (v1, v2, ..) = t; // .. means to ignore the remaining values
+println!("{} {}", v1, v2); // 1 2
 ```
 
 An array is a fixed-length list of values that have the same type.
@@ -1630,9 +1632,14 @@ The syntax for an array value is `[value1, value2, ...]`.
 For example:
 
 ```rust
+let a = [1, 2, 3, 4];
+let [v1, v2, ..] = a; // .. means to ignore the remaining values
+println!("{} {}", v1, v2); // 1 2
+
 let rgb = ["red", "green", "blue"];
 // A Rust string is a "compound collection", covered later.
-let sevens = [7, 5]; // same as [7, 7, 7, 7, 7]
+
+let sevens = [7; 5]; // same as [7, 7, 7, 7, 7]
 ```
 
 Elements of an array can be accessed using
@@ -3867,6 +3874,90 @@ This creates the executable file in the
 `target/x86_64-pc-windows-gnu/release` directory
 with the same name as the project and a `.exe` file extension.
 
+## Smart Pointers
+
+Smart pointers are an alternative to references.
+Each is implemented by a struct that holds metadata
+and has methods that implement its features.
+Many are defined in the standard library
+and developers can implement new ones.
+
+| Name         | Description                                                                                          |
+| ------------ | ---------------------------------------------------------------------------------------------------- |
+| `String`     | owns `str` data, holds `capacity` and `length` metadata, and provides methods to operate on the data |
+| `Vec<T>`     | similar to `String`, but the data elements can be any specified type                                 |
+| `Box<T>`     | a pointer stored on the stack to data on the heap                                                    |
+| `Rc<T>`      | stands for "reference counting"; enables multiple owners                                             |
+| `Cell<T>`    | enables having multiple mutable references to a value within a single thread (1)                     |
+| `RefCell<T>` | similar to `Cell`, but holds references to values instead of values                                  |
+| `Ref<T>`     | used with a `RefCell` to enforce immutable borrowing rules at runtime                                |
+| `RefMut<T>`  | used with a `RefCell` to enforce mutable borrowing rules at runtime                                  |
+
+1. This supports "interior mutability" which is described below.
+
+Smart pointers must implement the `std::ops::Deref` and `Drop` traits.
+The `Deref` trait requires a single method, `deref`,
+that is used by the dereference operator `*`.
+The `Drop` trait requires a single method, `drop`,
+that is called automatically when an object
+from an implementing struct goes out of scope.
+It can define what should happen in addition to freeing memory,
+including freeing resources like file handles and network connections.
+
+Rust provides "deref coercion" which automatically converts a reference
+to any value that implements the `Deref` trait to
+a reference to the value returned by the `deref` method.
+This enables passing references or smart pointers
+to functions that take a reference.
+No additional uses of the `&` or `*` operators are required.
+This is why references to `String` values
+can be passed to functions that take a `&str`.
+
+It is possible to drop (free) a value that implements the `Drop` trait
+before it goes out of scope.
+This is done by passing the value to the prelude function `std::mem::drop`
+rather than calling the `drop` method.
+
+A `Box` smart pointer lives on the stack
+and holds a pointer to data on the heap.
+It is useful in three scenarios:
+
+1. A value that implements a given trait should be owned,
+   but the value can be any type that implements the trait
+   (ex. `Box<dyn Error>`).
+1. Ownership of a large value should be transferred without copying the data.
+1. The size of some data cannot be known at compile time,
+   but it must be used in a context that requires a fixed size
+   (ex. a recursive type such as linked-list or tree)
+
+An `Rc` smart pointer holds a reference count that starts at one,
+is incremented each time it is cloned (by calling `Rc::clone(&my_rc)`),
+and is decremented when the original or a clone goes out of scope.
+The value they refer to is not dropped until the reference count goes to zero.
+This smart pointer is useful when it is not possible to know at compile-time
+which scope that uses the data will be the last to do so.
+
+"Interior mutability" is the ability to modify data inside an immutable object.
+Normally Rust does not allow this, but the `RefCell` smart pointer enables it.
+Often `RefCell` is used in combination with `Rc`.
+
+The `Rc` smart pointer can hold both
+strong (owning) and weak (not owning) references.
+Instances are dropped when the number of strong references goes to zero,
+but not when the number of weak references goes to zero.
+This distinction is useful in situations like representing a tree
+where parent nodes have strong references to children,
+but children have a weak reference to their parent.
+The result is that dropping a parent also drops its children
+(unless there are other strong references to them),
+but dropping a child does not drop its parent.
+
+Smart pointers are needed to implement data structures such as
+linked lists, trees, and graphs.
+The standard library provides `std::collections::LinkedList`,
+but it does not provide structs that implement trees and graphs.
+TODO: Try implementing a graph with Node and Edge structs.
+
 ## Futures
 
 TODO: Add this section.
@@ -3877,6 +3968,19 @@ Rust has built-in support for threads.
 {% aTargetBlank "https://crates.io/crates/tokio", "tokio" %} is a popular crate
 that makes implementing asynchronous code even easier.
 
+Features supported by Tokio include:
+
+- TCP
+- UDP
+- Unix sockets
+- timers
+- spawning threads
+- communication between threads using channels
+- streams
+- sync utilities
+- scheduling
+- and more
+
 Here is a very basic example of using `tokio`.
 It assumes the following dependency line
 has been added in the `Cargo.toml` file.
@@ -3884,6 +3988,10 @@ has been added in the `Cargo.toml` file.
 ```toml
 tokio = { version = "1.0.1", features = ["full"] }
 ```
+
+Tokio supports a large number of features.
+The resulting binary size for a program can be reduced
+by including only the features being used instead of "full".
 
 ```rust
 use std::time::Duration;
