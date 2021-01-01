@@ -267,6 +267,46 @@ Resources are learning Rust include:
   - "Code practice and mentorship for everyone"
   - "exercises across 52 languages"
 
+## Terminology
+
+- <a href="#cargo">Cargo</a>
+  - a command-line utility for building and running Rust programs
+- <a href="#crates">crate</a>
+  - a tree of modules
+  - two types, binary (bin) or library (lib)
+- <a href="#enums">enum</a>
+  - a named type whose values come from a list of named variants
+  - in Rust, these variants can have associated data
+  - a key feature of Rust error handling
+- generic
+  - a parameterized type that enables storing and using multiple types of data
+- lifetime
+  - time period during which a variable can be access,
+    starting when it is created and ending when it is freed (a.k.a dropped)
+  - often associated with the scope of a particular code block
+- <a href="#macros">macro</a>
+  - a function-like construct whose name ends in `!`
+    and generates code at compile-time
+- <a href="modules">module</a>
+  - set of related values such as constants and functions
+- package
+  - `cargo` feature for building, testing, and sharing crates
+  - set of related crates described by a `Cargo.toml` file;
+  - contains any number of binaries and 0 or 1 library
+- panic
+  - represents an unrecoverable error that causes a program to terminate,
+    print a stack trace, and print an error message
+- <a href="#structs">struct</a>
+  - a named collection of fields similar to a class in other languages
+  - can have associated functions and methods
+- <a href="#traits">trait</a>
+  - a named collection of constants, function signatures,
+    and optional default implementations
+  - similar to interfaces in other languages
+- <a href="#toml">TOML</a>
+  - a configuration file format used by Cargo
+  - stands for Tom's Obvious, Minimal Language
+
 ## Online Playground
 
 To try Rust code online, browse the
@@ -373,12 +413,12 @@ but previously entered code is not.
 
 Rust source files have a `.rs` file extension.
 
-To compile a Rust source file,
+To compile a Rust source file that defines a `main` function,
 creating an executable with the same name and no file extension,
 and run it:
 
 - open a terminal (or Windows Command Prompt),
-- cd to the directory containing a `.rs` file that defines a `main` function
+- cd to the directory containing the `.rs` file
 - enter `rustc name.rs`
 - in macOS or Linux, enter `./name`
 - in Windows, enter `name`
@@ -391,16 +431,18 @@ fn main() {
 }
 ```
 
-Calls to names that end in `!` are actually
-calls to a macro rather than a function.
+Note that calls to names that end in `!` (like `println!`)
+are calls to a <a href="#macros">macro</a> rather than a function.
 
 Typically the `rustc` command is not used directly.
-Instead the `cargo` command, described in the "Cargo" section,
+Instead the `cargo` command,
+described in the <a href="#cargo">Cargo</a> section,
 is used to run `rustc` and the resulting executable.
 
 ## VS Code
 
-Install the Rust extension which adds:
+If using VS Code to edit Rust code,
+install the Rust extension which adds:
 
 - syntax highlighting
 - code completion
@@ -424,31 +466,14 @@ Add the following in `settings.json`:
 
 Note that this extension only works if
 the opened folder contains a `Cargo.toml` file.
+See the <a href="#cargo">Cargo</a> section
+for details on creating this.
 
-## Terminology
-
-- `cargo`
-  - command-line utility described later
-- crate
-  - tree of modules
-  - either a binary (bin) or a library (lib)
-- module
-  - set of related values such as constants and functions
-- package
-  - `cargo` feature for building, testing, and sharing crates
-  - set of related crates described by a `Cargo.toml` file;
-  - contains any number of binaries and 0 or 1 library
-- panic
-  - represents an unrecoverable error that causes a program to terminate
-    and print a stack trace and error message
-- TOML
-  - configuration file format
-  - stands for Tom's Obvious, Minimal Language
-
-## TOML
+## <a name="toml">TOML</a>
 
 {% aTargetBlank "https://github.com/toml-lang/toml", "TOML" %}
 is a configuration file format that maps to a hash table.
+The Rust Cargo tool uses this for its `cargo.toml` configuration file.
 
 Each key/value pair is described by a line with the syntax `key = value`.
 Keys are not surrounded by any delimiters.
@@ -458,57 +483,53 @@ array (ordered list of values),
 and table (collection of key/value pairs).
 String values are surrounded by double quotes.
 Datetime values have the format `yyyy-mm-ddThh:mm:ss`.
-The time portion can be omitted and it can be followed by a time zone
+The time portion can be omitted or be followed by a time zone
 (`Z` for UTC or `+hh:mm` for an offset).
 Array elements are surrounded by square brackets and separated by commas.
 
-Comments begin with `#` character and extend to the end of the line.
+Comments begin with the `#` character and extend to the end of the line.
 
 Sections and sub-sections are indicated by lines
 containing a name enclosed in square brackets.
 Think of these like keys whose values are objects.
 
-## Cargo
+## <a name="cargo">Cargo</a>
 
 The `cargo` command is a CLI tool that is installed with Rust.
 While using it is not required, it is highly recommended.
+
 For help, enter `cargo --help` or just `cargo`.
 
 The following table describes the `cargo` subcommands:
 
-| Subcommand    | Description                                                                |
-| ------------- | -------------------------------------------------------------------------- |
-| `bench`       | runs benchmarks for the current project                                    |
-| `build`       | builds current project in the `target` directory                           |
-| `check`       | verifies current project builds without errors,<br>without generating code |
-| `clean`       | deletes `target` directory                                                 |
-| `clippy`      | checks current project for errors using the Clippy linter                  |
-| `doc`         | generates documentation for the current project                            |
-| `init`        | creates a Rust project in the current directory                            |
-| `install`     | installs an executable in `~/.cargo/bin` by default                        |
-| `new`         | creates a Rust project in a new subdirectory                               |
-| `publish`     | publishes package to the registry                                          |
-| `run` or `r`  | builds and runs current project                                            |
-| `search`      | searches registry for crates                                               |
-| `test` or `t` | runs tests in the current project                                          |
-| `uninstall`   | removes executable from `~/.cargo/bin` by default                          |
-| `update`      | updates dependencies in `Cargo.lock`                                       |
+| Subcommand    | Description                                                                             |
+| ------------- | --------------------------------------------------------------------------------------- |
+| `bench`       | runs benchmarks for the current project                                                 |
+| `build`       | builds current project in the `target` directory                                        |
+| `check`       | verifies current project builds without errors,<br>without generating code              |
+| `clean`       | deletes `target` directory                                                              |
+| `clippy`      | checks current project for errors using the Clippy linter                               |
+| `doc`         | generates documentation for the current project                                         |
+| `init`        | creates a Rust project in the current directory                                         |
+| `install`     | installs an executable, by default in `~/.cargo/bin`                                    |
+| `new`         | creates a Rust project in a new subdirectory                                            |
+| `publish`     | publishes the crate to the {% aTargetBlank "https://crates.io", "crates.io" %} registry |
+| `run` or `r`  | builds and runs current project                                                         |
+| `search`      | searches the {% aTargetBlank "https://crates.io", "crates.io" %} registry for crates    |
+| `test` or `t` | runs tests in the current project                                                       |
+| `uninstall`   | removes the executable, by default from `~/.cargo/bin`                                  |
+| `update`      | updates dependencies in the `Cargo.lock` file                                           |
 
-The `cargo new` command creates a new directory containing Rust project
+The `cargo new` command creates a new directory containing a Rust project
 that is initialized as a new Git repository.
 It contains a `Cargo.toml` configuration file
 that specifies the project name, version, authors,
 the Rust edition to use, and a list of project dependencies.
-It also contains a `src` directory with a
-`main.rs` file that is a simple hello world program.
-
-To watch project files for changes and
-automatically run a `cargo` command when they do,
-enter `cargo install cargo-watch` one time
-and then enter `cargo watch -x subcommand`.
-The `-x` flag can be omitted in which case
-the subcommand defaults to `check`, not `run`.
-Typically you will want the subcommand to be `run`.
+The created directory also contains a `src` directory containing a single file.
+When the `--lib` switch is not included, the file is
+`main.rs` file which is a simple hello world program.
+When the `--lib` switch is included, the file is
+`lib.rs` file that contains a simple unit test.
 
 The `cargo run` command builds and runs the project.
 It also downloads dependencies listed in the `Cargo.toml` file,
@@ -520,47 +541,51 @@ since the last time it was run.
 To pass command-line arguments to the program, specify them after `--`.
 For example, `cargo run -- arg1 arg2 ...`
 
+To watch project files for changes and
+automatically run a `cargo` command when they do,
+enter `cargo install cargo-watch` one time
+and then enter <code>cargo watch -x <i>subcommand</i></code>.
+If the `-x` option is omitted, the subcommand defaults to `check`, not `run`.
+Typically you will want the subcommand to be `run`.
+
 The `cargo build` command creates an executable in the `target/debug` directory.
 To create an optimized, production build, enter `cargo build --release`
 which creates an executable in the `target/release` directory.
-Benchmarking should be done on optimized builds.
 
 ## Formatting Code
 
 The most popular code formatting tool for Rust is
 {% aTargetBlank "", "rustfmt" %}.
-To install this, enter `cargo install rustfmt`.
-TODO: Is this installed by default by rustup?
+The `rustup` tool installs this by default.
 
 To run it on all `.rs` files in the current directory,
-enter `rustfmt *.rs`.
+enter `cargo fmt` or `rustfmt *.rs`.
 
 ## Naming Conventions
 
-In general, names of "types" use PascalCase
-and names of "value" use snake_case.
+In general, names of types use PascalCase
+and names of values use snake_case.
 
-| Item            | Naming Convention                  |
-| --------------- | ---------------------------------- |
-| constants       | SCREAMING_SNAKE_CASE               |
-| constructors    | snake_case                         |
-| crates          | snake_case or kebab-case           |
-| enums           | PascalCase                         |
-| enums values    | PascalCase                         |
-| features        | no convention                      |
-| enums           | PascalCase                         |
-| file names      | snake_case or kebab-case           |
-| functions       | snake_case                         |
-| lifetimes       | 'lowercase                         |
-| macros          | snake_case!                        |
-| methods         | snake_case                         |
-| modules         | snake_case                         |
-| statics         | SCREAMING_SNAKE_CASE               |
-| structs         | PascalCase                         |
-| traits          | PascalCase                         |
-| type parameters | PascalCase, but usually one letter |
-| types           | PascalCase                         |
-| variables       | snake_case                         |
+| Item                       | Naming Convention                  |
+| -------------------------- | ---------------------------------- |
+| constants                  | SCREAMING_SNAKE_CASE               |
+| constructor functions      | snake_case                         |
+| crates                     | snake_case or kebab-case           |
+| crate features             | no convention                      |
+| enums                      | PascalCase                         |
+| enums variants             | PascalCase                         |
+| file names                 | snake_case or kebab-case           |
+| functions                  | snake_case                         |
+| lifetimes                  | 'lowercase                         |
+| macros                     | snake_case!                        |
+| methods                    | snake_case                         |
+| modules                    | snake_case                         |
+| statics                    | SCREAMING_SNAKE_CASE               |
+| structs                    | PascalCase                         |
+| traits                     | PascalCase                         |
+| type parameters (generics) | PascalCase, but usually one letter |
+| type aliases               | PascalCase                         |
+| variables                  | snake_case                         |
 
 The compiler outputs warnings when these naming conventions are not followed.
 
@@ -570,32 +595,30 @@ The compiler outputs warnings when these naming conventions are not followed.
 - Statements must terminated by a semicolon.
 - Strings are delimited by double quotes.
 - Single characters are delimited by single quotes.
-- Items are made public using the `pub` keyword.
+- Items (like functions and struct members) are
+  made public using the `pub` keyword.
 - The dot (`.`) character is used to
   access struct fields and call instance methods.
 - The double colon (`::`) is used as
   a namespace separator (borrowed from C++)
   and to call static methods.
-- Conditions for conditional logic and iteration are not
-  surrounded by any delimiter such as parentheses.
+- Conditions for conditional logic and iteration
+  are not surrounded by any delimiter (no parentheses).
 - Statements associated with conditional logic and iteration
   must be in blocks surrounded by curly brackets.
 - Named functions are declared with the `fn` keyword.
 - Function return types follow the parameter list and `->`.
-- Functions that return nothing omit the `->` and return type.
+- Functions that return nothing omit `->` and return type.
 - Most statements are also expressions and evaluate to a value,
   including `if` and `match` statements.
 - If the last expression in a function does not end with a semicolon,
-  it's value is returned.
+  its value is returned.
 - There is no null type or value.
-  Instead the wrapper enum types `Option` and `Result` are used.
+  Instead the `Option` enum `None` variant used.
 
 ## Comments
 
-Rust supports many comment syntaxes.
-"Doc comments" are included in generated HTML documentation
-that is generated by entering `cargo doc`.
-TODO: How do you generate it?
+Rust supports regular comments and "doc comments".
 
 | Syntax      | Usage                                       |
 | ----------- | ------------------------------------------- |
@@ -604,53 +627,65 @@ TODO: How do you generate it?
 | `///`       | doc comment preceding the item it describes |
 | `//!`       | doc comment inside the item it describes    |
 
-Code inside doc comments that is surrounded by "fences"
-is run by the `rustdoc --test` command.
+"Doc comments" are included in HTML documentation
+that is generated by entering `cargo doc`.
+This creates the directory `target/doc/{crate-name}`
+and writes HTML for the documentation there.
+To generate the documentation and open it in the default browser,
+enter `cargo doc --open`.
+Optionally add the `--no-deps` flag to
+avoid building documentation for crate dependencies.
+
+Doc comments optionally include sections with titles that begin with `#`.
+Common sections include:
+
+- `# Examples`
+
+  This section provides code examples in Markdown fences.
+  It is especially useful to demonstrate calls to functions and methods.
+  For library crates (not for binary crates) this code is run along with
+  other test code by the `cargo test` and `rustdoc --test` commands.
+
+- `# Errors`
+
+  This section describes any errors that can be returned by the code
+  in a `Result` enum.
+
+- `# Panics`
+
+  This section describes scenarios that can cause the code to panic.
+
+- `# Safety`
+
+  For functions marked as `unsafe`, this section explains why.
+  It also describes what callers must do to use it safely.
+
 For example:
 
-1. Create a project by entering `cargo new doc_test`.
+1. Create a project by entering `cargo new math --lib`.
 
-1. Add the file `src/math.rs` containing the following:
+1. Edit the file `src/lib.rs` and replace its content the following:
 
    ````rust
+   /// # Examples
+   ///
    /// ```
-   /// assert_eq!(math::average(vec![1.0, 2.0, 3.0, 4.0]), 2.5);
+   /// let numbers = vec![1.0, 2.0, 3.0, 4.0];
+   /// assert_eq!(doc_test2::average(&numbers), 2.5);
    /// ```
-   pub fn average(numbers: Vec<f64>) -> f64 {
+   pub fn average(numbers: &Vec<f64>) -> f64 {
        let sum: f64 = numbers.iter().sum();
        sum / numbers.len() as f64 // return value
    }
    ````
-
-1. Compile this to a library by entering
-   `rustc --crate-type lib src/math.rs`
-   This is needed because doc tests are only run on library crates.
-
-1. Run the doc tests by entering
-   `rustdoc -L . --test src/math.rs`
-
-1. To call the `average` function from another source file,
-   modify `src/main.js` to match the following:
-
-   ```rust
-   mod math;
-
-   fn main() {
-       let scores = vec![1.0, 2.0, 3.0, 4.0];
-       let avg = math::average(scores);
-       println!("average = {}", avg);
-   }
-   ```
-
-1. To run this, enter `cargo run`
 
 ## <a name="attributes">Attributes</a>
 
 Rust attributes are like "decorators" in other programming languages.
 They annotate an item in order to change its behavior.
 An attribute can be specified
-immediately before the declaration of an item with the syntax `#[attr]`
-or inside the declaration with the syntax `#![attr]`.
+immediately before an item with the syntax `#[attr]`
+or inside the item with the syntax `#![attr]`.
 When used at the top level, `#![attr]` specifies a crate-wide attribute.
 
 The following table summarizes commonly used built-in attributes.
@@ -1354,7 +1389,7 @@ For example, `fn my_function<'a, 'b>(...)`.
 To specify that lifetime `b` is at least as long as lifetime `a`,
 use `fn my_function<'a, 'b: 'a>(...)`.
 
-## Enums
+## <a name="enums">Enums</a>
 
 Enums specify a list of allowed values referred to as "variants".
 For example:
@@ -1692,7 +1727,7 @@ fn main() {
 }
 ```
 
-The "Macros" section shows one more approach.
+The <a href="#macros">Macros</a> section shows one more approach.
 
 ## Built-in Compound Types
 
@@ -1776,7 +1811,7 @@ that doesn't fall into the previous categories:
 - `BinaryHeap`: implements a priority queue where
   only the highest priority item is accessible
 
-### Strings
+### <a name="strings">Strings</a>
 
 Strings are collections of UTF-8 encoded characters
 stored as a `Vec` of `u8` byte values.
@@ -2905,7 +2940,7 @@ fn main() {
 }
 ```
 
-## Structs
+## <a name="structs">Structs</a>
 
 A struct defines a type that is a set of related fields and methods,
 similar to a class in other languages.
@@ -3165,7 +3200,7 @@ fn main() {
 }
 ```
 
-## Traits
+## <a name="traits">Traits</a>
 
 A trait describes an interface that any type can implement.
 Often they are implemented for struts, but
@@ -3315,7 +3350,7 @@ TODO: Finish adding descriptions and methods in the table above.
 
 TODO: Finish adding descriptions in this table.
 
-## Macros
+## <a name="macros">Macros</a>
 
 Macros are like functions that:
 
@@ -3636,7 +3671,7 @@ fn main() {
 }
 ```
 
-## Modules
+## <a name="modules">Modules</a>
 
 A module defines a collection of values like constants, functions, and structs.
 
@@ -3849,9 +3884,12 @@ fn main() {
 
 Modules can be nested to further segregate the defined names.
 
-## Crates
+## <a name="crates">Crates</a>
 
-A crate is a collection of modules.
+A crate is a tree of modules.
+There are two kinds of traits.
+Binary (bin) crates produce an executable.
+Library (lib) crates provide code used by other crates.
 
 The most popular source of open source crates is
 {% aTargetBlank "https://crates.io/", "crates.io" %}.
@@ -3860,11 +3898,17 @@ Commonly used crates found here include:
 - {% aTargetBlank "https://crates.io/crates/actix-web", "actix-web" %} - web framework
 - {% aTargetBlank "https://crates.io/crates/chrono", "chrono" %} - date and time library
 - {% aTargetBlank "https://crates.io/crates/clap", "clap" %} - command-line argument parser
+- {% aTargetBlank "https://crates.io/crates/futures", "log" %} -
+  "An implementation of futures and streams featuring
+  zero allocations, composability, and iterator-like interfaces.
+- {% aTargetBlank "https://crates.io/crates/hyper", "log" %} - HTTP client library
 - {% aTargetBlank "https://crates.io/crates/log", "log" %} - logging API
+- {% aTargetBlank "https://crates.io/crates/num-traits", "log" %} - generic mathematics
 - {% aTargetBlank "https://crates.io/crates/rand", "rand" %} - random number generation
 - {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %} - HTTP client
 - {% aTargetBlank "https://crates.io/crates/rocket", "rocket" %} - web framework
 - {% aTargetBlank "https://crates.io/crates/serde", "serde" %} - data structure serialization, including JSON
+- {% aTargetBlank "https://crates.io/crates/tokio", "tokio" %} - "An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications."
 
 ## Creating and Using a Library
 
@@ -3913,6 +3957,7 @@ To demonstrate, let's create a library for operating on 2D points.
        use crate::geometry2d::Point2D;
 
        #[test]
+       // To skip a test, add: #[ignore]
        fn distance_between() {
            let origin = Point2D { x: 0.0, y: 0.0 };
            let pt = Point2D { x: 3.0, y: 4.0 };
