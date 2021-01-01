@@ -13,17 +13,29 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://www.rust-lang.org/", "Rust" %} is a
-programming language for building reliable and efficient software.
+{% aTargetBlank "https://www.rust-lang.org/", "Rust" %}
+is a programming language
+"empowering everyone to build reliable and efficient software."
 
 Features of Rust include:
 
-- fast
-- memory-efficient
+- performance on par with C/C++
+- memory-efficiency
 - rich, static type system with type inference
 - ownership model to guarantee memory-safety and thread-safety
-- targets LLVM, so runs on a wide variety of platforms that targets
-- can call and be called by C/C++
+- targets {% aTargetBlank "https://llvm.org", "LLVM" %}  
+  Rust programs Runs on a wide variety of platforms targeted by LLVM.
+- ability to call and be called by C/C++ (but calling C is easier)
+- functional  
+  Functions can be stored in variables,
+  passed to functions, and returned from functions.
+- somewhat object-oriented  
+  Structs can have fields and methods (like classes).
+  these can be private or public (encapsulation).
+  Structs can implement traits (like interfaces).
+  Traits can be used as types (achieves polymorphism).
+  Structs can have fields whose types are other structs (composition),
+  but they cannot inherit from other structs.
 
 Rust was created at Mozilla by Graydon Hoare,
 with contributions from Dave Herman, Brendan Eich, and others.
@@ -53,24 +65,27 @@ The best way to get software performance is to
 use a "systems" language like C, C++, or Rust.
 One reason these languages are fast is because
 they do not provide automatic garbage collection
-that is slow and can run at unpredictable times.
-Systems languages also allow control over
-whether data is on the stack or on the heap.
+which is slow and can run at unpredictable times.
+Systems languages also allow control over whether
+data is on the stack (faster) or on the heap (slower).
 
 **Safety:**
 
 Software written in systems languages typically must
 take great care to avoid memory and threading issues.
-Memory issues include accessing memory after it has been freed,
-resulting in unpredictable behavior.
+Memory issues include
+dangling pointers (accessing memory after it has been freed),
+memory leaks (failing to free memory that is no longer needed),
+and double frees (freeing memory more than once).
+These result in unpredictable behavior.
 Threading issues include race conditions where the order in which
-code runs is unpredictable, resulting in unpredictable results.
+code runs is unpredictable, resulting in somewhat random results.
 Rust addresses both of these issues,
 resulting in code that is less likely to contain bugs.
 
 **Immutable by default:**
 
-A large source of errors in any software involves
+A large source of software errors involves
 incorrect assumptions about where data is modified.
 Making variables immutable by default and
 requiring explicit indication of functions that are
@@ -81,35 +96,43 @@ allowed to modify data significantly reduces these errors.
 One way to achieve performance in computationally intensive tasks
 is to store collections of numbers in contiguous memory for fast access
 and control the number of bytes used by each number.
+Rust supports a wide variety of number types for
+integer and floating point values of specific sizes.
 
 **Ownership model:**
 
-Manual garbage collection is error prone.
-Rust uses an "ownership model" where code is explicit about
-the single scope that owns each piece of data.
-When that scope ends, the data can be safely freed
+Manual garbage collection, where developers are responsibly for
+allocating and freeing memory, is error prone.
+Rust uses an ownership model where code is explicit about
+the single scope that currently owns each piece of data.
+unless ownership is transferred to another scope,
+when that scope ends the data can be safely freed
 because no other scope can possibly be using the data.
+
+**WebAssembly:**
+
+WebAssembly (abbreviated WASM) is an instruction format
+for a virtual machine that is supported by modern web browsers
+(currently Chrome, Edge, Firefox, and Safari).
+This is typically much faster than equivalent code written in JavaScript.
+Code from many programming languages can be compiled to WASM.
+Currently full support is only available for C, C++, and Rust.
+Experimental support is available for C#, Go, Java, Kotlin, Python,
+Swift, TypeScript, and a few other less commonly used languages.
+In order to run WASM code in a web browser,
+the runtime of the source language must be included.
+Rust is a great choice for targeting WASM because it has a very small runtime
+compared to options like Python, so it downloads faster.
 
 Systems languages tend to be more complex that non-systems languages,
 requiring more time to learn and more time to write software in them.
 Rust is no exception.
-But some developers choose to use Rust in spite of this
+But many developers choose to use Rust in spite of this
 in order to gain the benefits described above.
 On the positive side, the Rust compiler catches many errors
 that would only be discovered at runtime with other systems languages.
 The Rust compiler also provides very detailed error messages
 that include suggestions on how to correct the errors.
-
-**WebAssembly:**
-
-WebAssembly (abbreviated WASM) is an instruction format for a virtual machine
-that is supported by the web browsers Chrome, Edge, Firefox, and Safari.
-Code from many programming languages can be compiled to WASM
-which can then be executed in a web browser.
-In order to run WASM code in a web browser,
-the runtime of the source language must be included.
-Rust is a great choice for targeting WASM because it has a very small runtime
-compared to other options like Python, so it downloads faster.
 
 ## Why use another programming language
 
@@ -125,12 +148,13 @@ For many developers, this is the case for everything they write.
 **Learning Curve:**
 
 The learning curve for Rust is quite high.
-It may be too much effort to bring an entire team
-up to speed on using it.
-For example, developers must constantly decide whether
+It may be too much effort to bring an entire team up to speed on using it.
+Just learning how to use strings in Rust is a challenge.
+Developers must constantly decide whether
 values or references should be passed to functions.
-The reason is that by default all values are passed by value,
-but nearly always it is best to pass non-primitive values by reference.
+They must think about whether values have sizes that are known at compile-time.
+And generics are used heavily (for example, in error handling),
+and often generic types are nested.
 
 **Processor target:**
 
@@ -156,6 +180,10 @@ To install rustup in Windows,
 use {% aTargetBlank "https://chocolatey.org/", "Chocolately" %}
 or {% aTargetBlank "https://scoop.sh/", "Scoop" %}.
 
+For more details, see {% aTargetBlank
+"https://forge.rust-lang.org/infra/other-installation-methods.html",
+"Other Rust Installation Methods" %}.
+
 After installing rustup, enter `rustup-init`.
 This configures the use of Rust in the bash and zsh shells.
 When using the fish shell, add the following in `.config/fish/config.fish`:
@@ -166,17 +194,21 @@ set -x PATH $PATH $HOME/.cargo/bin
 
 Verify installation by entering `rustc --version`.
 
+Once installed, to update the version of Rust enter `rustup update`.
+
 ## Learning Resources
+
+Resources are learning Rust include:
 
 - `rustup doc` command
 
   - displays local documentation installed along with Rust
-    in default web browser
+    in the default web browser
   - can read even when offline
   - includes
+    - API documentation
     - "The Rust Programming Language" book
     - "Rust by Example" book
-    - API documentation
     - "The Rust Reference" book which is more detailed
       than "The Rust Programming Language" book
     - "The Cargo Book" book
@@ -187,10 +219,11 @@ Verify installation by entering `rustc --version`.
 - {% aTargetBlank "https://doc.rust-lang.org/book/", "The Rust Programming Language" %} book
 
   - free, open source book
-  - from No Starch Press
-  - can purchase a print copy
+  - can purchase a print copy from No Starch Press
 
 - {% aTargetBlank "https://doc.rust-lang.org/stable/reference/", "The Rust Reference" %}
+
+  - "the primary reference for the Rust programming language"
 
 - {% aTargetBlank "https://rust-lang-nursery.github.io/rust-cookbook/", "Rust Cookbook" %}
 
@@ -208,11 +241,6 @@ Verify installation by entering `rustc --version`.
 
   - "contains small exercises to get you used to reading and writing Rust code"
 
-- {% aTargetBlank "https://exercism.io/tracks/rust", "exercism Rust track" %}
-
-  - "Code practice and mentorship for everyone"
-  - "exercises across 52 languages"
-
 - {% aTargetBlank "https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/", "Programming Rust" %} book
 
   - from O'Reilly
@@ -226,7 +254,18 @@ Verify installation by entering `rustc --version`.
   "Doug Milford Rust Tutorial series" %} YouTube videos
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=WnWGO-tLtLA&t=2s",
+  "Jon Gjengset Crust of Rust" %} YouTube videos
+
+- {% aTargetBlank "https://www.youtube.com/watch?v=WnWGO-tLtLA&t=2s",
   "Ryan Levick Introduction to Rust" %} YouTube videos
+
+- {% aTargetBlank "https://github.com/rust-lang/rustlings", "rustlings" %}
+  "small exercises to get you used to reading and writing Rust code"
+
+- {% aTargetBlank "https://exercism.io/tracks/rust", "exercism Rust track" %}
+
+  - "Code practice and mentorship for everyone"
+  - "exercises across 52 languages"
 
 ## Online Playground
 
@@ -262,9 +301,9 @@ The "RUN" button will change to the last selected option
 so it can be re-executed by pressing the button.
 
 Press the "DEBUG" button to open a popup for choosing between
-"Debug" and "Release" built modes.
+"Debug" and "Release" build modes.
 
-Press the "NIGHTLY" button to open a popup for choosing a Rust version
+Press the "STABLE" button to open a popup for choosing a Rust version
 which can be "Stable channel" (default), "Beta channel", or "Nightly channel".
 The button text changes to indicate the selected version.
 
@@ -280,14 +319,16 @@ Press the "SHARE" button to open a panel on the right side
 containing the following links:
 
 - "Permalink to the playground" changes the URL to one which will
-  recall the current code set to run with the current version of Rust.
-- "Direct link to the gist" navigates to the URL of the GitHub Gist
-  where the code is stored. The code cannot be executed from here.
+  recall the current code, set to run with the current version of Rust.
+- "Direct link to the gist" navigates to the
+  URL of the GitHub Gist where the code is stored.
+  The code can be viewed, but not executed from here.
 - "Embed code in link" changes the URL to one which includes
   a base 64 encoded copy of the code as a query parameter.
   This is only appropriate for small code samples due to URL length limits.
 - "Open a new thread in the Rust user forum" does what the link
   implies, making it easy to ask questions about a code sample.
+  Use this frequently while learning!
 - "Open an issue on the Rust GitHub repository"
   makes it easy to report a bug in Rust.
 
@@ -299,9 +340,12 @@ Press the "TOOLS" button to open a popup with the following options:
   {% aTargetBlank "https://github.com/rust-lang/miri", "Miri interpreter" %}
   which is an experimental interpreter for Rust's
   mid-level intermediate representation (MIR).
-  which detects some bugs not detected by press the "RUN" button?
+  It can detect some bugs not detected by pressing the "RUN" button.
 - "Expand macros" displays the code in the right panel with
   all the macro calls expanded in order to see what they actually do.
+  For example, try this with a `main` function that
+  just calls the `println!` macro to print "Hello".
+  You would never want to write this code yourself.
 
 Press the "CONFIG" button to open a popup with the following options:
 
@@ -313,7 +357,7 @@ Press the "CONFIG" button to open a popup with the following options:
 - "Theme" to choose from 30+ themes including
   cobalt, github, solarized light, solarized dark
 - "Pair Characters" to automatically insert
-  closing `)`, `}`, and `]` character after `(`, `{`, and `[` characters
+  closing `)`, `}`, and `]` characters after `(`, `{`, and `[` characters
 - "Orientation" to arrange panes horizontally, vertically,
   or automatically choose based on window size
 - and advanced options to control generated assembly code
@@ -1334,6 +1378,31 @@ The "Error Handling" section describes the `Option` and `Result` enums
 that are provided by the standard library.
 These contain variants that hold data,
 which is something that enums in most other programming languages cannot do.
+The `Option<T>` enum defines the variants `Some(T)` and `None`.
+The `Result<T, E>` enum defines the variants `Ok(T)` and `Err<E>`.
+
+Enum variants can hold many kinds of values.
+For example:
+
+```rust
+use std::fmt::Debug;
+
+#[derive(Debug)]
+enum Demo {
+    Empty,
+    Single(String),
+    TupleLike(String, i32, bool),
+    StructLike{x: f64, y: f64}
+}
+
+fn main() {
+    let d1 = Demo::Empty;
+    let d2 = Demo::Single(String::from("Hello"));
+    let d3 = Demo::TupleLike(String::from("red"), 19, true);
+    let d4 = Demo::StructLike{x: 1.2, y: 3.4};
+    println!("{:?}, {:?}, {:?}, {:?}", d1, d2, d3, d4);
+}
+```
 
 ## Error Handling
 
@@ -1495,6 +1564,25 @@ There are many ways to handle values from these enum types.
 
    ```rust
    let value = alpha()?beta()?gamma()?;
+   ```
+
+   In functions that call multiple other functions
+   that return `Result` instances with different types of errors
+   and wish to return them to callers,
+   consider adding `?` after those calls and
+   making the return type `Result<SomeOkType, Box<dyn error::Error>>`.
+   For example, from the Rustlings exercise `errorsn.rs`:
+
+   ```rust
+   fn read_and_validate(
+       b: &mut dyn io::BufRead,
+   ) -> Result<PositiveNonzeroInteger, Box<dyn error::Error>> {
+       let mut line = String::new();
+       b.read_line(&mut line)?;
+       let num: i64 = line.trim().parse()?;
+       let answer = PositiveNonzeroInteger::new(num)?;
+       Ok(answer)
+   }
    ```
 
 ## Built-in Scalar Types
@@ -3014,6 +3102,23 @@ fn main() {
 }
 ```
 
+Structs can use generic types.
+For example:
+
+```rust
+struct Wrapper<T> {
+    value: T,
+}
+
+impl<T> Wrapper<T> {
+    pub fn new(value: T) -> Self {
+        Wrapper { value }
+    }
+}
+```
+
+TODO: Make the example above more compelling.
+
 ## Type Aliases
 
 Aliases for types can be defined using the `type` keyword.
@@ -3888,6 +3993,7 @@ and developers can implement new ones.
 | `Vec<T>`     | similar to `String`, but the data elements can be any specified type                                 |
 | `Box<T>`     | a pointer stored on the stack to data on the heap                                                    |
 | `Rc<T>`      | stands for "reference counting"; enables multiple owners                                             |
+| `Arc<T>`     | stands for "atomically reference counting"; enables multiple owners across multiple threads          |
 | `Cell<T>`    | enables having multiple mutable references to a value within a single thread (1)                     |
 | `RefCell<T>` | similar to `Cell`, but holds references to values instead of values                                  |
 | `Ref<T>`     | used with a `RefCell` to enforce immutable borrowing rules at runtime                                |
