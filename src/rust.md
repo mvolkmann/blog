@@ -697,26 +697,28 @@ The following table summarizes commonly used built-in attributes.
 | `allow(warning1, warning2, ...)` | suppress specified linting rule warnings                     |
 | `derive(trait1, trait2, ...)`    | automatically implement a list of traits on a `struct`       |
 | `doc`                            | provides an alternate way to specify and format doc comments |
-| `should_panic`                   | indicates that a test is expected to panic                   |
-| `test`                           | annotates a function as a test                               |
+| `should_panic`                   | indicates that a test function is expected to panic          |
+| `test`                           | indicates that a function is a test                          |
 
 For a list of linting rules that produce warnings, see {% aTargetBlank
 "https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html",
 "Warn-by-default lints" %}.
 Examples include `dead_code`, `unreachable_code`, `unused_assignment`,
 `unused_imports`, and `unused_variables`.
-These warnings can be disabled using the `allow` attributes.
+These warnings can be disabled using `allow` attributes.
+
+The <a href="#trait-table">table of provided traits</a> in the "Traits" section
+indicates those can be automatically implemented using the `derive` attribute.
+For more detail, see {% aTargetBlank
+"https://doc.rust-lang.org/rust-by-example/trait/derive.html", "Derive" %}.
 
 For more built-in attributes, see the list at {% aTargetBlank
 "https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index",
 "Attributes" %}.
 
-The table of provided traits in the "Traits" section indicates
-those can be automatically implemented using the `derive` attribute.
-For more detail, see {% aTargetBlank
-"https://doc.rust-lang.org/rust-by-example/trait/derive.html", "Derive" %}.
-
-TODO: How can you implement custom attributes?
+Custom attributes are implemented by defining {% aTargetBlank
+"https://doc.rust-lang.org/book/ch19-06-macros.html#attribute-like-macros",
+"attribute-like macros" %}.
 
 ## Formatted Print
 
@@ -3298,47 +3300,48 @@ fn main() {
 }
 ```
 
-The [Attributes](#attributes) section describes the built-in traits
-that can be derived (automatically implemented).
-Additional built-in traits that must be manually implemented
-are described in the following table.
-"Marker traits" are used to indicate a
-property of a type without defining any methods and are
-indicated in the table below with "marker" in the Methods column.
+<a name="trait-table"></a>
+The following table summarizes the built-in traits.
+Those that can be derived (automatically implemented) using the
+`#[derive(trait1, trait2, ...)]` syntax are indicted in the "Notes" column.
+"Marker traits" are used to indicate a property of a type
+without defining any methods and are also indicated in the "Notes" column.
+Other traits must be manually implemented.
+TODO: Finish adding trait descriptions in this table!
 
-| Trait Name     | Description                                                                                         | Methods |
-| -------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| `AsRef`        |                                                                                                     |         |
-| `Borrow`       |                                                                                                     |         |
-| `Clone`\*      | adds ability to explicitly copy an object using the `clone` method                                  |         |
-| `Copy`\*       | adds ability to implicitly copy an object in assignment or pass by value                            | marker  |
-| `Debug`\*      | adds ability to output a value for debugging using `{:?}` and `{:#?}` in a format string            |         |
-| `Default`\*    | adds a `default` static method for getting an empty or default instance of a type                   |         |
-| `Deref`        |                                                                                                     |         |
-| `DerefMut`     |                                                                                                     |         |
-| `Display`      | adds a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |         |
-| `Drop`         |                                                                                                     |         |
-| `Eq`\*         | adds ability to compare instances using `==` and `!=`                                               |         |
-| `Extend`       |                                                                                                     |         |
-| `Fn`           |                                                                                                     |         |
-| `FnMut`        |                                                                                                     |         |
-| `FnOnce`       |                                                                                                     |         |
-| `From`         |                                                                                                     |         |
-| `FromStr`      |                                                                                                     |         |
-| `Hash`\*       | adds a `hash` method for computing the hash value of an instance (1)                                |         |
-| `Into`         |                                                                                                     |         |
-| `IntoIterator` |                                                                                                     |         |
-| `Iterator`     |                                                                                                     |         |
-| `Ord`\*        | adds ability to compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators              |         |
-| `PartialEq`\*  | like `Eq`, but for types where some instances are not equal to themselves (2)                       |         |
-| `PartialOrd`\* | like `Ord`, but for types where some instances cannot be logically compared to others (3)           |         |
-| `Read`         |                                                                                                     |         |
-| `Send`         |                                                                                                     | marker  |
-| `Sized`        |                                                                                                     | marker  |
-| `Sync`         |                                                                                                     | marker  |
-| `ToString`     | adds a `to_string` method                                                                           |         |
-| `Unpin`        |                                                                                                     | marker  |
-| `Write`        |                                                                                                     |         |
+| Trait Name     | Description                                                                                         | Notes             |
+| -------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
+| `AsRef`        |                                                                                                     |                   |
+| `Borrow`       |                                                                                                     |                   |
+| `Clone`        | adds ability to explicitly copy an object using the `clone` method                                  | derivable         |
+| `Copy`         | adds ability to implicitly copy an object in assignment or pass by value                            | derivable, marker |
+| `Debug`        | adds ability to output a value for debugging using `{:?}` and `{:#?}` in a format string            | derivable         |
+| `Default`      | adds a `default` static method for getting an empty or default instance of a type                   | derivable         |
+| `Deref`        |                                                                                                     |                   |
+| `DerefMut`     |                                                                                                     |                   |
+| `Display`      | adds a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |                   |
+| `Drop`         |                                                                                                     |                   |
+| `Eq`           | adds ability to compare instances using `==` and `!=`                                               | derivable         |
+| `Extend`       |                                                                                                     |                   |
+| `Fn`           |                                                                                                     |                   |
+| `FnMut`        |                                                                                                     |                   |
+| `FnOnce`       |                                                                                                     |                   |
+| `From`         |                                                                                                     |                   |
+| `FromStr`      |                                                                                                     |                   |
+| `Hash`         | adds a `hash` method for computing the hash value of an instance (1)                                | derivable         |
+| `Into`         |                                                                                                     |                   |
+| `IntoIterator` |                                                                                                     |                   |
+| `Iterator`     |                                                                                                     |                   |
+| `Ord`          | adds ability to compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators              | derivabl          |
+| `PartialEq`    | like `Eq`, but for types where some instances are not equal to themselves (2)                       | derivable         |
+| `PartialOrd`   | like `Ord`, but for types where some instances cannot be logically compared to others (3)           | derivable         |
+| `Read`         |                                                                                                     |                   |
+| `Send`         |                                                                                                     | marker            |
+| `Sized`        |                                                                                                     | marker            |
+| `Sync`         |                                                                                                     | marker            |
+| `ToString`     | adds a `to_string` method                                                                           |                   |
+| `Unpin`        |                                                                                                     | marker            |
+| `Write`        |                                                                                                     |                   |
 
 TODO: Finish adding descriptions and methods in the table above.
 
