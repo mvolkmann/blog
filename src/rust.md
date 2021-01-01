@@ -679,6 +679,8 @@ For example:
    }
    ````
 
+1. Run the doc comment examples as tests by entering `cargo test`.
+
 ## <a name="attributes">Attributes</a>
 
 Rust attributes are like "decorators" in other programming languages.
