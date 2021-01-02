@@ -3036,32 +3036,52 @@ fn main() {
 
 A struct defines a type that is a set of related fields and methods,
 similar to a class in other languages.
-The `struct` keyword only defines fields.
-The `impl` keyword adds instance and static methods to a struct.
-Struct names are used to create instances.
+
+The `struct` keyword only defines a set of fields.
+When there a no fields, it is referred to as a "unit struct".
+These are used to implement groups of related functionality
+that have no state.
+
+The `impl` keyword adds
+associated functions (like class or static methods in other languages)
+and methods (like instance methods in other languages) to a struct.
+
+Instances of a struct can be created using its name.
+It is also common to define an associated function named "new"
+(by convention) that creates an instance that is initialized in a specific way
+(like a constructor in other languages).
+
 For example:
 
 ```rust
+#[derive(Debug)]
+struct Point2D {
+    x: f64,
+    y: f64, // comma after last field is optional
+}
+
+impl Point2D {
+    // The new function can have parameters.
+    fn new() -> Self {
+      Point2D { x: 0.0, y: 0.0 }
+    }
+
+    // Instance method (use of self is similar to Python)
+    fn distance_to(self: &Self, other: &Self) -> f64 {
+        Self::distance_between(self, other)
+    }
+
+    // Static method
+    fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
+        let dx = pt1.x - pt2.x;
+        let dy = pt1.y - pt2.y;
+        (dx.powi(2) + dy.powi(2)).sqrt()
+    }
+}
+
 fn main() {
-    struct Point2D {
-        x: f64,
-        y: f64, // comma after last field is optional
-    }
-
-    impl Point2D {
-        // Instance method (use of self is similar to Python)
-        fn distance_to(self: &Self, other: &Self) -> f64 {
-            Self::distance_between(self, other)
-        }
-
-        // Static method
-        fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
-            let dx = pt1.x - pt2.x;
-            let dy = pt1.y - pt2.y;
-            (dx.powi(2) + dy.powi(2)).sqrt()
-        }
-    }
-
+    let origin = Point2D::new();
+    println!("origin = {:?}", origin);
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
     let d1 = p1.distance_to(&p2);
@@ -3109,10 +3129,6 @@ is the proceed a struct definition with the following:
 ```rust
 #[derive(Clone, Copy, Debug)]
 ```
-
-A `struct` can be empty, containing no fields.
-This is useful for implementing groups of functionality
-that do not require fields.
 
 Structs and their fields are accessible by default within the same source file,
 but they are private by default when defined in a different source file.
