@@ -1732,43 +1732,47 @@ There are many ways to handle values from these enum types.
 
 ## Built-in Scalar Types
 
-Rust defines four scalar (primitive) types which are
-boolean, character, integer, and floating point.
+Rust defines many scalar (primitive) types which can be categories as
+boolean, character, integer (6 kinds), or floating point (2 kinds).
 
 The boolean type name is `bool`.
 Its only values are `true` and `false`.
 
 The character type name is `char`.
 Literal values are surrounded by single quotes.
-Its values are Unicode values of up to four bytes.
-TODO: Does every character use all four bytes?
+Its values are Unicode values that each occupy four bytes
+regardless of whether four bytes are actually needed to represent them.
+This gives the values a known size at compile time.
 
 The signed integer type names are `i{n}` where `{n}`
-is the number of bits which can be 8, 16, 32, 64, 128 or `size`
-which corresponds to either 32 or 64 depending on the processor architecture.
+is the number of bits which can be 8, 16, 32, 64, 128, or `size`.
+The `isize` type matches either `i32` or `i64`
+depending on the processor architecture.
 The default type for literal integers is `i32` regardless of the processor.
+
+The unsigned integer types are the same, but start with `u` instead of `i`.
 
 Literal integer values can use the underscore character to separate
 thousands, millions, and so on. For example,
 the population of the U.S. in 2020 was approximately 330_676_544.
+
 Hex values begin with `0x`, octal values begin with `0o`,
 and binary values begin with `0b`.
 
-The unsigned integer types are the same, but start with `u` instead of `i`.
-
-Floating point type names are `f{n}` where `{n}` is 32 or 64.
+The floating point type names are `f{n}` where `{n}` is 32 or 64.
 The default type for literal floats is `f64` regardless of the processor.
 Literal floating point values must include a decimal point
-to avoid being treated as integer values.
+to avoid being treated as integer values,
+but it is acceptable to have no digits after the decimal point.
+This means that `123.` is treated the same as `123.0`.
 
-The "unit type" is represents not having a value,
+The "unit type" represents not having a value,
 like `void` in other languages.
-It is like an enum with a single variant which is written as `()`.
+It can be thought of as an enum with a single variant which is written as `()`.
 It is the return value of functions that do not return a value.
-It is also what the `Result` enum `Ok` variant
+It is what the `Result` enum `Ok` variant
 wraps when there is nothing to return.
-It can also be used to take no action
-in a particular arm of a `match` expression.
+It can follow the `=>` in a `match` arm to take no action.
 
 Rust allows adding methods to any type, even built-in types.
 For example:
@@ -1819,7 +1823,7 @@ impl<T: Eq + Ord + From<i8>> Days for T {
             "yesterday"
         } else if self == Self::from(1) {
             "tomorrow"
-        } else if self < Self::from(0) {
+        } else if self > Self::from(0) {
             "future"
         } else {
             "past"

@@ -324,6 +324,7 @@
     "isfinite",
     "isin",
     "isinstance",
+    "isize",
     "islice",
     "islink",
     "isnan",
