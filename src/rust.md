@@ -1385,46 +1385,39 @@ fn main() {
 
 Lifetimes ensure that memory does not get freed
 before a reference to it can use it.
-This is only a concern in functions that
-take two or more references and return one of them.
 
 Lifetime annotations only apply to references.
 All reference parameters and reference return types have a lifetime,
 but the Rust compiler automatically determines them in most cases.
 When it cannot, you must explicitly specify them.
 This is typically only needed when
-reference parameters can be returned.
+there are multiple reference parameters
+and more than one of them can be returned.
 Usually the same lifetime is used on
-all of them AND on the return reference type.
+all of the reference parameters AND on the return reference type.
 
-Lifetime annotations appear before type names
-are are composed of a single quote followed by a name
-which is typically a single letter such as "a".
-They only serve to indicate which items in a function signature
-have the same lifetime, not an actual duration.
+Lifetime annotations used in function signatures are
+declared by listing them in angle brackets just like generic types.
+They are distinguish from generic types by beginning with a single quote.
+Uses of lifetime annotations appear in reference types
+after the `&` and before type names.
+Their names are typically a single letter such as "a".
+Lifetime annotations only serve to indicate which items in a function signature
+have the same lifetime (or at least as long as another), not an actual duration.
 
-The following code illustrates potential errors
-that lifetime checking prevents.
+The following example illustrates a case
+where lifetime annotations are required:
 
 ```rust
-fn a(s1: &String) -> &String {
-    let s2 = String::from("second");
-    return b(s1, &s2);
-}
+// The function signature below results in a "missing lifetime specifier" error
+// The compiler says "explicit lifetime required"
+// for s1, s2, and the return type.
+// When more than one reference is passed to a function AND
+// one of them can be returned, Rust requires lifetime specifiers.
+//fn get_greater(s1: &str, s2: &str) -> &str {
 
-// This function signature results in
-// "explicit lifetime required" errors for s1 and s2.
-// and a "missing lifetime specifier" error on the return type.
-// This is because when more than one reference is passed to a function
-// AND one of them can be returned, Rust requires lifetime specifiers.
-//fn b(s1: &String, s2: &String) -> &String {
-
-// This function signature includes lifetime specifiers.
-// Now we get an error on the call to function b above
-// because it might return the value of the local variable s2
-// which is freed when function a exits.
-// "s2" would not be available in the caller ("main" in this case).
-fn b<'a>(s1: &'a String, s2: &'a String) -> &'a String {
+// The next function signature includes lifetime specifiers.
+fn get_greater<'a>(s1: &'a str, s2: &'a str) -> &'a str {
     if s1 > s2 {
         s1
     } else {
@@ -1432,9 +1425,13 @@ fn b<'a>(s1: &'a String, s2: &'a String) -> &'a String {
     }
 }
 
+fn get_surprise(s: &str) -> &str {
+    return get_greater(s, "no soup for you");
+}
+
 fn main() {
-    let s1 = String::from("first");
-    println!("greatest is {}", a(&s1));
+    println!("{}", get_surprise("soup")); // soup
+    println!("{}", get_surprise("bread")); // no soup for you
 }
 ```
 
