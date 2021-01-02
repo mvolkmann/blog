@@ -1319,9 +1319,8 @@ fn main() {
     // Since it is then modified in the closure, it must be mutable.
     let mut a = String::new();
 
-    // TODO: Why does inner need to be mut in this example?
-    // I never modify the inner variable which is assigned a closure.
-    // Is it because any closure that modifies a variable in its environment must be mut?
+    // This variable must be `mut` because it captures and mutates
+    // the mutable variable "a" in its environment.
     let mut inner = | | {
         let b = String::from("test");
         a = b; // Moves ownership from b to a.
@@ -1452,12 +1451,12 @@ Enums specify a list of allowed values referred to as "variants".
 For example:
 
 ```rust
-#[allow(dead_code)] // suppress warning about not using all the variants
+#[allow(dead_code)] // suppresses warning about not using all the variants
 #[derive(Debug)]
 enum PrimaryColor { Red, Green, Blue }
 
 fn process_color(color: PrimaryColor) {
-    println!("color = {:?}", color);
+    println!("color = {:?}", color); // Green
 }
 
 fn main() {
@@ -1466,7 +1465,37 @@ fn main() {
 }
 ```
 
-The "Error Handling" section describes the `Option` and `Result` enums
+Match expressions ensure that all possibilities are checked (exhaustive).
+For example:
+
+```rust
+#[allow(dead_code)]
+#[derive(Debug)]
+enum PrimaryColor { Red, Green, Blue }
+
+fn main() {
+    use PrimaryColor::*;
+    let color = Red;
+
+    // If a match arm for any PrimaryColor variant was missing
+    // we would get a "non-exhaustive patterns" error.
+    let item = match color {
+        Red => "stop sign",
+        Green => "grass",
+        Blue => "sky",
+    };
+    println!("item = {}", item); // stop sign
+
+    let item = match color {
+        Blue => "sky",
+        _ => "unknown" // wildcard handling all other values
+    };
+    println!("item = {}", item); // unknown
+}
+```
+
+The <a href="#error-handling">Error Handling</a> section
+describes the `Option` and `Result` enums
 that are provided by the standard library.
 These contain variants that hold data,
 which is something that enums in most other programming languages cannot do.
@@ -1488,15 +1517,16 @@ enum Demo {
 }
 
 fn main() {
-    let d1 = Demo::Empty;
-    let d2 = Demo::Single(String::from("Hello"));
-    let d3 = Demo::TupleLike(String::from("red"), 19, true);
-    let d4 = Demo::StructLike{x: 1.2, y: 3.4};
+    use Demo::*;
+    let d1 = Empty;
+    let d2 = Single(String::from("Hello"));
+    let d3 = TupleLike(String::from("red"), 19, true);
+    let d4 = StructLike{x: 1.2, y: 3.4};
     println!("{:?}, {:?}, {:?}, {:?}", d1, d2, d3, d4);
 }
 ```
 
-## Error Handling
+## <a name="error-handling">Error Handling</a>
 
 Rust does not support throwing and catching exceptions
 like many other programming languages.
@@ -1525,7 +1555,7 @@ There are many ways to handle values from these enum types.
    ```rust
    #[derive(Debug)]
    pub enum MathError {
-       DivisionByZero // used by divide2:w
+       DivisionByZero // used by divide2
    }
 
    fn divide1(numerator: f64, denominator: f64) -> Option<f64> {
