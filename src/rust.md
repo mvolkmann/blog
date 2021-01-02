@@ -185,7 +185,10 @@ For more details, see {% aTargetBlank
 "Other Rust Installation Methods" %}.
 
 After installing rustup, enter `rustup-init`.
-This configures the use of Rust in the bash and zsh shells.
+This installs many toolchain items including `cargo` (build/run tool),
+`clippy` (linter), `rust-docs` (documentation), `rust-std` (standard library),
+`rustc` (compiler), and `rustfmt` (code formatter).
+It also configures the use of Rust in the bash and zsh shells.
 When using the fish shell, add the following in `.config/fish/config.fish`:
 
 ```bash
