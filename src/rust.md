@@ -1238,45 +1238,58 @@ fn main() {
     let mut i = 1; // on stack
     let mut s = String::from("test"); // on heap
     // Even though i and s are mutable, the arguments to
-    // my_function below do not need to be marked as mutable
-    // unless that function requires them to be mutable.
+    // my_function below only need to be marked as mutable
+    // if that function requires them to be mutable.
     my_function(&mut i, &mut s);
     println!("{}", i); // 2
     println!("{}", s); // "test more"
 }
 ```
 
-A function can create a value on the heap and return it.
-This transfers ownership to the caller rather than freeing the data.
+A function can create a value and return it.
+This transfers ownership to the caller
+rather than freeing the data when the function exits.
 For example:
 
 ```rust
-fn my_function() -> String {
-    let s = String::from("test");
-    println!("{}", s); // "test"
-    s // returns to caller, transferring ownership
+#[derive(Debug)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+fn get_origin() -> Point2D {
+    Point2D { x: 0.0, y: 0.0 }
+}
+
+fn get_string() -> String {
+    String::from("test")
 }
 
 fn main() {
-    let s = my_function();
-    println!("{}", s); // "test"
+    let p = get_origin();
+    println!("{:?}", p); // Point2D { x: 0.0, y: 0.0 }
+
+    let s = get_string();
+    println!("{}", s); // test
 }
 ```
 
-Early we said that memory allocated in a scope is freed when that scope exits.
+Early we said that memory for values allocated in a scope
+is freed when the scope exits.
 However, there is an exception to this
 when ownership is transferred outside the block.
 For example:
 
 ```rust
 fn main() {
-    let a;
+    let a; // set once inside the block that follows
 
     {
         // Allocate inside block.
         let b = String::from("test");
 
-        // Move ownership to a which lives outside this block.
+        // Move ownership to "a" which lives outside this block.
         a = b;
 
         // If the previous line is changed to
@@ -1289,27 +1302,37 @@ fn main() {
         // because b no longer owns it.
     }
 
-    // We can use the value here because
-    // the lifetime of a has not ended yet.
+    // "a" can be used here because its lifetime has yet not ended.
     println!("{}", a);
 }
 ```
 
-Here is a similar example using a closure:
+Closures are anonymous functions that capture values in their environment.
+Their parameter list is written between vertical bars
+which must be present even if there are no parameters.
+Closures are described in more detail later.
+Here is a similar ownership example using a closure:
 
 ```rust
 fn main() {
+    // This variable must be initialized in order to access it in the closure.
+    // Since it is then modified in the closure, it must be mutable.
     let mut a = String::new();
+
+    // TODO: Why does inner need to be mut in this example?
+    // I never modify the inner variable which is assigned a closure.
+    // Is it because any closure that modifies a variable in its environment must be mut?
     let mut inner = | | {
         let b = String::from("test");
-        a = b;
+        a = b; // Moves ownership from b to a.
     };
+
     inner();
     println!("{}", a);
 }
 ```
 
-Here is an example that concisely summarizes ownership options
+Here is an example that concisely summarizes the ownership options
 when passing a value to a function:
 
 ```rust
@@ -1355,76 +1378,6 @@ fn main() {
     let mut pt = Point2D { x: 1.0, y: 2.0 };
     borrow_mutably(&mut pt);
     println!("after borrow_mutably, pt = {:?}", pt);
-}
-```
-
-## Dereference
-
-The dereference operator is used to get the value of a reference.
-It isn't needed very often.
-This is because unlike in most programming languages
-that support references (or pointers),
-Rust does not require different syntax for accessing fields and methods
-based on whether an instance or a reference is used.
-It supplies "automatic referencing and dereferencing"
-in field access and method calls.
-In the case of method calls, it automatically adds `&`, `&mut`, or `*`
-based on the method declaration of the `self` type.
-
-For example:
-
-```rust
-struct Point2D {
-    x: f64,
-    y: f64
-}
-
-impl Point2D {
-    fn is_origin(&self) -> bool {
-        self.x == 0.0 &&self.y == 0.0
-    }
-}
-
-fn main() {
-    let p = Point2D { x: 1.0, y: 2.0 };
-    let p_ref = &p;
-    println!("{}", p.x); // 1
-    println!("{}", p_ref.x); // 1; same syntax with reference
-    println!("{}", p.is_origin()); // false
-    println!("{}", p_ref.is_origin()); // false; same syntax with reference
-}
-```
-
-Here is an example where dereference is needed:
-
-```rust
-// Implementing the PartialEq and PartialOrd traits
-// enables comparing instances.
-#[derive(Debug, PartialEq, PartialOrd)]
-struct Point2D {
-    x: f64,
-    y: f64
-}
-
-const ORIGIN: Point2D = Point2D { x: 0.0, y: 0.0 };
-
-fn is_origin(pt: &Point2D) -> bool {
-    // We could just check whether x and y are zero,
-    // but then we wouldn't need to dereference pt.
-    //pt.x == 0.0 && pt.y == 0.0
-
-    // We can't compare a Point2D reference to a Point2D,
-    // but we can dereference pt to get the Point2D instance
-    // it references and then compare that to ORIGIN.
-    *pt == ORIGIN
-}
-
-fn main() {
-    let p = Point2D { x: 1.0, y: 2.0 };
-    let q = Point2D { x: 0.0, y: 0.0 };
-    println!("p equal q? {}", p == q); // false
-    println!("p is origin? {:?}", is_origin(&p)); // false
-    println!("q is origin? {:?}", is_origin(&q)); // true
 }
 ```
 
@@ -3259,6 +3212,76 @@ impl<T> Wrapper<T> {
 ```
 
 TODO: Make the example above more compelling.
+
+## Dereference
+
+The dereference operator is used to get the value of a reference.
+It isn't needed very often.
+This is because unlike in most programming languages
+that support references (or pointers),
+Rust does not require different syntax for accessing fields and methods
+based on whether an instance or a reference is used.
+It supplies "automatic referencing and dereferencing"
+in field access and method calls.
+In the case of method calls, it automatically adds `&`, `&mut`, or `*`
+based on the method declaration of the `self` type.
+
+For example:
+
+```rust
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+impl Point2D {
+    fn is_origin(&self) -> bool {
+        self.x == 0.0 &&self.y == 0.0
+    }
+}
+
+fn main() {
+    let p = Point2D { x: 1.0, y: 2.0 };
+    let p_ref = &p;
+    println!("{}", p.x); // 1
+    println!("{}", p_ref.x); // 1; same syntax with reference
+    println!("{}", p.is_origin()); // false
+    println!("{}", p_ref.is_origin()); // false; same syntax with reference
+}
+```
+
+Here is an example where dereference is needed:
+
+```rust
+// Implementing the PartialEq and PartialOrd traits
+// enables comparing instances.
+#[derive(Debug, PartialEq, PartialOrd)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+const ORIGIN: Point2D = Point2D { x: 0.0, y: 0.0 };
+
+fn is_origin(pt: &Point2D) -> bool {
+    // We could just check whether x and y are zero,
+    // but then we wouldn't need to dereference pt.
+    //pt.x == 0.0 && pt.y == 0.0
+
+    // We can't compare a Point2D reference to a Point2D,
+    // but we can dereference pt to get the Point2D instance
+    // it references and then compare that to ORIGIN.
+    *pt == ORIGIN
+}
+
+fn main() {
+    let p = Point2D { x: 1.0, y: 2.0 };
+    let q = Point2D { x: 0.0, y: 0.0 };
+    println!("p equal q? {}", p == q); // false
+    println!("p is origin? {:?}", is_origin(&p)); // false
+    println!("q is origin? {:?}", is_origin(&q)); // true
+}
+```
 
 ## Type Aliases
 
