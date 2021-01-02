@@ -946,30 +946,25 @@ fn print_type<T>(_: &T) {
 
 ## Ownership Model
 
-The Rust ownership model provides the following benefits:
-
-- runtime speed achieved by eliminating the need for a garbage collector (GC)
-- more predictable performance since there are no GC pauses
-- safer memory access since there is no possibility of
-  null pointer accesses or dangling pointer accesses
-  (accessing memory that has already been freed)
-- safer parallel and concurrent processing
-  since there is no possibility of data races
-  causing unpredictable interactions between threads
-
-Memory management is handled by following these rules:
+Memory management in Rust is handled by following these rules,
+referred to as the ownership model:
 
 1. Each value is referred to by a variable that is its owner.
 1. Each value has one owner at a time,
    but the owner can change over its lifetime.
-1. When the owner goes out of the scope, the value is dropped (freed).
+1. When the owner variable goes out of the scope, the value is dropped (freed).
 
-While it is not typically called directly,
-`std::mem::drop` is a function that can be called to
-explicitly free the memory owned by a variable.
+The ownership model provides the following benefits:
 
-The `Drop` trait can be implemented for any type
-to specify code to execute when data of a specific type is dropped.
+- Runtime speed is achieved by
+  eliminating the need for a garbage collector (GC).
+- Performance is more predictable because there are no GC pauses.
+- Memory access is safer since there is no possibility of
+  null pointer accesses or dangling pointer accesses
+  (accessing memory that has already been freed).
+- Parallel and concurrent processing is safer
+  because there is no possibility of data races
+  causing unpredictable interactions between threads.
 
 Variable values are stored either in the stack or the heap.
 Accessing stack data is faster, but data on the heap can grow and shrink
@@ -988,14 +983,14 @@ This includes:
   which defines sequences (`Vec`, `VecDeque`, and `LinkedList`),
   sets (`HashSet` and `BTreeSet`), and maps (`HashMap` and `BTreeMap`).
 
-A value of these types can be stored on the heap by using the `Box` type.
-For example:
+Values of these types can be stored on the heap by using the `Box` type.
+This is typically done in order to have a fixed size way
+to refer to a value that does not have a fixed size.
+An example is returning an error struct whose specific type
+is selected at run time based on the kind of error that occurs.
+Another example is a recursive type such as linked list.
 
-```rust
-let heap_int: Box<i32> = Box::new(19);
-```
-
-Note: Sometimes Rust stores `&str` values on the stack
+Note that sometimes Rust stores `&str` values on the stack
 but you cannot control that, so it's best to think of them
 as always being on the heap.
 
@@ -1006,6 +1001,14 @@ that is freed when that scope exits.
 Many keywords have an associated block, including
 `fn`, `if`, `loop`, `for`, and `while`.
 
+The `Drop` trait can be implemented for any type
+to specify code to execute (in the `drop` method)
+when data of a specific type is dropped.
+
+While it is not typically called directly,
+`std::mem::drop` is a function that can be called to explicitly
+free the memory owned by a variable before it goes out of scope.
+
 The following table summarizes the options for
 passing an argument to a function.
 
@@ -1015,69 +1018,76 @@ passing an argument to a function.
 | borrow immutably   | `&name`     |
 | borrow mutably     | `&mut name` |
 
-The following table summarizes the options for
-returning a value from a function.
-
-| Goal             | Syntax |
-| ---------------- | ------ |
-| return ownership |        |
-
 Here are some examples that demonstrate ownership
 inside a single function:
 
 ```rust
 fn main() {
     let a = 1;
-    // Because a is a scalar type (fixed size),
+
+    // Because a is a scalar type (fixed size) that implements the Copy trait,
     // this makes a copy of a and assigns that to b
     // rather than moving ownership from a to b.
     // Both a and b can then be used.
     let b = a;
-    println!("b = {}", b); // 1
+
     println!("a = {}", a); // 1
+    println!("b = {}", b); // 1
 
     let c = String::from("test");
-    // Because c is on the heap and does not implement the Copy trait,
-    // this moves ownership from c to d.
-    // c can no longer be used.
+
+    // Because c is on the heap and String does not implement
+    // the Copy trait, this moves ownership from c to d
+    // and c can no longer be used.
     let d = c;
-    println!("d = {}", d); // test
+
     //println!("c = {}", c); // error "value borrowed here after move"
+    println!("d = {}", d); // test
 
     // The Copy trait requires also implementing the Clone trait.
-    // We can also implement these traits manually, but that is more work.
+    // We could implement these traits manually, but that is more work.
     #[derive(Clone, Copy, Debug)]
     struct Point2D {
         x: f64,
         y: f64
     }
     let e = Point2D { x: 1.0, y: 2.0 };
-    // If the struct implements the Copy trait, as we have done above,
-    // a copy is made.  Otherwise this moves ownership from e to f.
+
+    // Since we implemented the Copy trait on the Point2D type,
+    // this makes a copy of e and assigns it to f.
+    // If we hadn't implemented the Copy trait,
+    // this would move ownership from e to f.
     let f = e;
     println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
-    // This fails if ownership has been moved from e to f.
-    println!("e = {:?}", e); // error "value borrowed here after move"
+
+    // This works because we implemented the Copy trait.
+    // If we hadn't, we would get the error "value borrowed here after move".
+    println!("e = {:?}", e);
 }
 ```
 
-Ownership of a value can also be "borrowed" by any number of variables
+Ownership of a value can be "borrowed" by any number of variables
 by getting a reference to a value.
 For example:
 
 ```rust
 let e = Point2D { x: 1.0, y: 2.0 };
+println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
+
 let f = &e; // an immutable borrow
 println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
-println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
 ```
 
+References are automatically dereferenced when used.
+This is why we were able to print `f` without specifying `*f`,
+but that also works.
+
 Borrowing does not transfer (also referred to as "move") ownership,
-so a borrow variable can go out of scope without
+so a borrowed variable can go out of scope without
 freeing the memory associated with the original variable.
 
 When a value is mutable and ownership is borrowed,
-the compiler will flag an error if the value is mutated
+the compiler will report an error if the value is mutated
 after the borrow is created and before its last use.
 This is because references expect the data they reference
 to remain the same.
@@ -1087,11 +1097,12 @@ For example:
 let mut e = Point2D { x: 1.0, y: 2.0 };
 let f = &e; // f borrows a reference rather than taking ownership
 println!("f = {:?}", f); // works
-// If f is used after this, the next line triggers the error
-// "cannot assign to `e.x` because it is borrowed".
+
+// f is used after the next line which mutates e, so we get
+// the error "cannot assign to `e.x` because it is borrowed".
 e.x += 3.0;
-println!("e = {:?}", e); // Point2D { x: 4.0, y: 2.0 }
-println!("f = {:?}", f); // triggers error on mutation above
+
+println!("f = {:?}", f);
 ```
 
 Typically a borrow only needs to read a value.
