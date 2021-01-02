@@ -833,21 +833,53 @@ such as arrays, tuples, and structs,
 even their elements/fields cannot be mutated.
 
 The `mut` keyword marks a variable as mutable.
+For variables that hold non-primitive values
+such as arrays, tuples, and structs,
+the variable can be changed to point to a different value
+and their elements/fields can be mutated.
 
-A variable declaration has the syntax `let name: type = value;`
-where the value is optional.
-However, a value must be assigned before the variable is referenced.
-The colon and the type can be omitted if it can be inferred from the value.
+A variable declaration has the syntax `let[ mut] name[: type][ = value];`
+where optional parts are surrounded by square brackets.
+The colon and type can be omitted if
+the desired type can be inferred from the value.
+A value must be assigned before the variable is referenced.
+For example:
 
-There are four ways to declare a variable.
+```rust
+#[derive(Debug)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
 
-| Syntax                           | Meaning                                                                                               |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `let name: type = value;`        | immutable variable that must be assigned a value<br>before it is used and is thereafter immutable     |
-| `let mut name: type = value;`    | mutable variable that must be assigned a value<br>before it is used and can be modified               |
-| `const name: type = value;`      | constant that must be assigned a value when it is declared                                            |
-| `static name: type = value;`     | immutable variable that lives for the duration of the program                                         |
-| `static mut name: type = value;` | mutable variable that lives for the duration of the program;<br>can only mutate in `unsafe` functions |
+fn main() {
+    let p: Point2D = Point2D { x: 1.0, y: 2.0 }; // can assign in declaration
+    println!("p = {:?}", p); // Point2D { x: 1.0, y: 2.0 }
+
+    let p: Point2D;
+    p = Point2D { x: 1.0, y: 2.0 }; // can assign after declaration
+    println!("p = {:?}", p); // Point2D { x: 1.0, y: 2.0 }
+    //p = Point2D { x: 1.2, y: 3.4 }; // cannot change value
+    //p.x = 5.6; // cannot change a field in current value
+
+    let mut p = Point2D { x: 1.0, y: 2.0 };
+    println!("p = {:?}", p); // Point2D { x: 1.0, y: 2.0 }
+    p = Point2D { x: 1.2, y: 3.4 }; // can change value
+    println!("p = {:?}", p); // Point2D { x: 1.2, y: 3.4 }
+    p.x = 5.6; // can change a field in current value
+    println!("p = {:?}", p); // Point2D { x: 5.6, y: 3.4 }
+}
+```
+
+There are five ways to declare a variable.
+
+| Syntax                           | Meaning                                                                                                          |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `let name: type = value;`        | immutable variable that must be assigned a value<br>before it is used and is thereafter immutable                |
+| `let mut name: type = value;`    | mutable variable that must be assigned a value<br>before it is used and can be modified                          |
+| `const name: type = value;`      | constant that must be assigned a value when it is declared                                                       |
+| `static name: type = value;`     | immutable variable that lives for the duration of the program                                                    |
+| `static mut name: type = value;` | mutable variable that lives for the duration of the program;<br>can only access in `unsafe` blocks and functions |
 
 The lifetime of all `const` and `static` variables is `'static`
 which is the duration of the program.
@@ -856,25 +888,52 @@ Rather than inferring a type based on the assigned value,
 One rationale is that because their scope can extend to the entire crate,
 it is better to be explicit about the desired type.
 
-Differences between constants and immutable statics include:
+Constants can be defined using either `const` or `static`.
+Using `static` is preferred for values that are larger than a pointer.
+This is because the value of a `const` variable is copied everywhere it is used,
+unlike the value of a `static` variable that is shared.
+A consequence of this is that static values cannot be assigned to variables
+unless their type implements the `Copy` trait
+because doing so requires copying.
+Note that all the scalar types like `bool`, `char`, `i32`, and `f64`
+implement the `Copy` trait.
 
-- The value of a `const` variable is copied everywhere it is used,
-  unlike the value of a `static` variable that is shared.
-  For values that do not use more bytes than a reference,
-  this difference doesn't matter.
-- `const` variables must be initialized when they are declared,
-  but `static` variables can wait to do this until their first access
-  using `std::lazy::Lazy` which is useful for expensive initializations.
-  An example is compiling a regular expression.
-- `pub static` variables can be accessed from C code,
-  but `const` variables cannot.
-- For types that do not implement the `Copy` trait,
-  `const` values can be assigned to variables
-  but `static` values cannot because doing so would require copying.
-  Note that all the scalar types like `bool`, `char`, `i32`, and `f64`
-  implement the `Copy` trait.
-- Generic functions can declare `const` variables with a generic type
-  (often named `T`), but cannot do so with `static` variables.
+Here are examples of using these:
+
+```rust
+#[derive(Debug)]
+struct Color {
+    r: u8,
+    g: u8,
+    b: u8,
+}
+const PURPLE_C: Color = Color { r: 255, g: 0, b: 255 };
+static PURPLE_S: Color = Color { r: 255, g: 0, b: 255 };
+
+static mut SIZE: u8 = 1;
+
+fn main() {
+    println!("PURPLE_C = {:?}", PURPLE_C);
+    println!("PURPLE_S = {:?}", PURPLE_S);
+    let v = PURPLE_C;
+    //let v = PURPLE_S; // cannot move out of static item
+    println!("v = {:?}", v);
+
+    unsafe {
+        println!("{}", SIZE); // 1
+        change_it();
+        use_it();
+    }
+}
+
+unsafe fn change_it() {
+    SIZE = 2;
+}
+
+unsafe fn use_it() {
+    println!("{}", SIZE); // 2
+}
+```
 
 To print the type of a variable for debugging purposes,
 define the following function and pass a reference to it:
