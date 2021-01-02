@@ -747,22 +747,23 @@ use `{:?}`. To print each field of a struct on separate lines, use `{:#?}`.
 Custom structs must implement the `Debug` trait in order to use these.
 This is done by adding the line `#[derive(Debug)]` before their definitions.
 
-The following table summarizes the supported format strings
+The following table summarizes the supported format arguments
 that can appear inside the curly brackets.
 
-| Format String | Description                                                           |
-| ------------- | --------------------------------------------------------------------- |
-| `{:?}`        | debugging output on single line                                       |
-| `{:#?}`       | debugging output on multiple lines                                    |
-| `{n}`         | prints the argument at index n (zero-based)                           |
-| `{name}`      | prints the value with a given name                                    |
-| `{:.n}`       | prints a number with `n` decimal places                               |
-| `{:.*}`       | prints a number with number of decimal places specified in value list |
-| `{:#X}`       | prints number as uppercase hexadecimal                                |
-| `{:#x}`       | prints number as lowercase hexadecimal                                |
-| `{:<n}`       | print left justified in a width of n                                  |
-| `{:>n}`       | print right justified in a width of n                                 |
-| `{:^n}`       | print centered in a width of n                                        |
+| Format Argument | Description                                                           |
+| --------------- | --------------------------------------------------------------------- |
+| `{}`            | prints display value of next argument                                 |
+| `{:?}`          | debugging output on single line                                       |
+| `{:#?}`         | debugging output on multiple lines                                    |
+| `{n}`           | prints the argument at index n (zero-based)                           |
+| `{name}`        | prints the value with a given name                                    |
+| `{:.n}`         | prints a number with `n` decimal places                               |
+| `{:.*}`         | prints a number with number of decimal places specified in value list |
+| `{:#X}`         | prints number as uppercase hexadecimal                                |
+| `{:#x}`         | prints number as lowercase hexadecimal                                |
+| `{:<n}`         | print left justified in a width of n                                  |
+| `{:>n}`         | print right justified in a width of n                                 |
+| `{:^n}`         | print centered in a width of n                                        |
 
 Here are some examples:
 
@@ -799,7 +800,29 @@ println!("A{:>5}Z", 123); // A  123Z
 println!("A{:^5}Z", 123); // A 123 Z
 ```
 
-For more options, see
+Here is an example of customizing the way a struct is formatted as a string:
+
+```rust
+use std::fmt;
+
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+impl fmt::Display for Point2D {
+    fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        write!(formatter, "(x:{}, y:{})", self.x, self.y)
+    }
+}
+
+fn main() {
+    let pt = Point2D { x: 1.2, y: 3.4 };
+    println!("{}", pt); // (x:1.2, y:3.4)
+}
+```
+
+For more formatting options, see
 {% aTargetBlank "https://doc.rust-lang.org/std/fmt/", "std::fmt" %}.
 
 ## Variables
@@ -1777,8 +1800,7 @@ A `Vec` (vector) is a variable-length list of values that have the same type.
 
 In many cases to operate on an array or `Vec`
 you will want to obtain an `Iterator` and operate on that.
-For example, that is where you will find
-the methods `map`, `filter`, and `fold`.
+For example, that is where the methods `map`, `filter`, and `fold` are found.
 
 ## Collections
 
@@ -2153,18 +2175,12 @@ Here is an example of creating and using a `HashMap`
 with `String` keys and `i32` values:
 
 ```rust
-use std::collections::HashMap;
+se std::collections::HashMap;
 
 fn get_shortest_v1(months: &HashMap<String, i8>) -> Option<&str> {
     let mut shortest: i8 = std::i8::MAX;
     let mut name: Option<&str> = None;
-
-    // The months HashMap owns its keys and values.
-    // The iter method iterates over shared references to elements,
-    // so we don't use that here.
-    // Instead we use the into_iter method
-    // which iterates over owned elements.
-    for (key, &val) in months.into_iter() {
+    for (key, &val) in months {
         if val < shortest {
             name = Some(key);
             shortest = val;
@@ -2173,10 +2189,10 @@ fn get_shortest_v1(months: &HashMap<String, i8>) -> Option<&str> {
     name
 }
 
-fn get_shortest_v1(months: &HashMap<String, i8>) -> Option<&str> {
+fn get_shortest_v2(months: &HashMap<String, i8>) -> Option<&str> {
       // The HashMap iter method returns
       // an iterator over (key, value) tuples.
-      month_map.iter()
+      months.iter()
         // The Iter min_by_key method is passed a closure and returns
         // an Option that wraps the smallest value returned by the closure.
         // The closure is passed each tuple, one at a time,
@@ -2208,7 +2224,7 @@ fn main() {
     println!("days in March = {:?}", days_in_month.get("March").unwrap());
 
     // get_shortest_v1 and get_shortest_v2 return the same value.
-    if let Some(shortest) = get_shortest_v2(&days_in_month) {
+    if let Some(shortest) = get_shortest_v1(&days_in_month) {
         println!("shortest = {}", shortest); // February
     }
 
@@ -2541,6 +2557,12 @@ fn main() {
 ```
 
 A `for` loop is used to iterate over any kind of iterator.
+It can operate on an explicitly obtained iterator or
+it can obtain an iterator from any type that
+implements the `IntoIterator` trait.
+Collection types typically implement this.
+Examples include `Range`, `HashMap`, `HashSet`, and `Vec`,
+but not arrays or tuples.
 For example:
 
 ```rust
@@ -2586,7 +2608,7 @@ fn main() {
 
     // We can iterate over the items in a vector.
     let num_vec = vec![1, 7, 5, 2, 9, 6];
-    for n in num_vec.iter() {
+    for n in num_vec {
         println!("loop 3: n = {:?}", n);
     }
 }
@@ -3207,7 +3229,7 @@ fn main() {
 ## <a name="traits">Traits</a>
 
 A trait describes an interface that any type can implement.
-Often they are implemented for struts, but
+Often they are implemented for structs, but
 they can also be implemented for other types like tuples
 and even for primitive types like `bool`.
 
@@ -3222,7 +3244,13 @@ some methods may only be described in the documentation
 for traits that are implemented for the type.
 
 Here is an example of a custom trait named `Distance`
-that is implemented for the custom type `Point2D`:
+that is implemented for the custom type `Point2D`.
+We saw in the "Struct" section above that
+we can add methods to a struct without defining a trait.
+Doing so is useful when it is desireable to
+implement the same set of methods on many types
+and be able to use the trait as a parameter or return type
+so any type that implements the trait can be used.
 
 ```rust
 fn main() {
@@ -3232,6 +3260,8 @@ fn main() {
     }
 
     trait Distance<T> {
+        // The type Self here refers to the implementing type.
+        // In the example below, that is the Point2D struct.
         fn distance_to(self: &Self, other: &Self) -> T;
     }
 
@@ -3307,53 +3337,46 @@ Those that can be derived (automatically implemented) using the
 "Marker traits" are used to indicate a property of a type
 without defining any methods and are also indicated in the "Notes" column.
 Other traits must be manually implemented.
-TODO: Finish adding trait descriptions in this table!
 
-| Trait Name     | Description                                                                                         | Notes             |
-| -------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
-| `AsRef`        |                                                                                                     |                   |
-| `Borrow`       |                                                                                                     |                   |
-| `Clone`        | adds ability to explicitly copy an object using the `clone` method                                  | derivable         |
-| `Copy`         | adds ability to implicitly copy an object in assignment or pass by value                            | derivable, marker |
-| `Debug`        | adds ability to output a value for debugging using `{:?}` and `{:#?}` in a format string            | derivable         |
-| `Default`      | adds a `default` static method for getting an empty or default instance of a type                   | derivable         |
-| `Deref`        |                                                                                                     |                   |
-| `DerefMut`     |                                                                                                     |                   |
-| `Display`      | adds a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |                   |
-| `Drop`         |                                                                                                     |                   |
-| `Eq`           | adds ability to compare instances using `==` and `!=`                                               | derivable         |
-| `Extend`       |                                                                                                     |                   |
-| `Fn`           |                                                                                                     |                   |
-| `FnMut`        |                                                                                                     |                   |
-| `FnOnce`       |                                                                                                     |                   |
-| `From`         |                                                                                                     |                   |
-| `FromStr`      |                                                                                                     |                   |
-| `Hash`         | adds a `hash` method for computing the hash value of an instance (1)                                | derivable         |
-| `Into`         |                                                                                                     |                   |
-| `IntoIterator` |                                                                                                     |                   |
-| `Iterator`     |                                                                                                     |                   |
-| `Ord`          | adds ability to compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators              | derivabl          |
-| `PartialEq`    | like `Eq`, but for types where some instances are not equal to themselves (2)                       | derivable         |
-| `PartialOrd`   | like `Ord`, but for types where some instances cannot be logically compared to others (3)           | derivable         |
-| `Read`         |                                                                                                     |                   |
-| `Send`         |                                                                                                     | marker            |
-| `Sized`        |                                                                                                     | marker            |
-| `Sync`         |                                                                                                     | marker            |
-| `ToString`     | adds a `to_string` method                                                                           |                   |
-| `Unpin`        |                                                                                                     | marker            |
-| `Write`        |                                                                                                     |                   |
+| Trait Name     | Description                                                                                            | Notes             |
+| -------------- | ------------------------------------------------------------------------------------------------------ | ----------------- |
+| `AsRef`        | defines an `as_ref` method that converts one reference type to another                                 |                   |
+| `Borrow`       | allows a type to be borrowed as a different type (ex. `String` borrowed as `str`)                      |                   |
+| `Clone`        | defines a `clone` method that explicitly copies an object                                              | derivable         |
+| `Copy`         | marks a type whose instances can be implicitly copied by assignment or passing by value                | derivable, marker |
+| `Debug`        | outputs a value for debugging using `{:?}` and `{:#?}` in a format string                              | derivable         |
+| `Default`      | defines a `default` static method for getting an empty or default instance of a type                   | derivable         |
+| `Deref`        | allows smart pointers to be used like immutable references to the data to which they point             |                   |
+| `DerefMut`     | allows smart pointers to be used like mutable references to the data to which they point               |                   |
+| `Display`      | defines a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |                   |
+| `Drop`         | defines a `drop` method that is called when a value is dropped, typically to free resources            |                   |
+| `Eq`           | compares instances using `==` and `!=`                                                                 | derivable         |
+| `Extend`       | defines an `extend` method that adds items to a collection                                             |                   |
+| `Fn`           | type of a closure that borrows values from its environment immutably                                   |                   |
+| `FnMut`        | type of a closure that borrows values from its environment mutably                                     |                   |
+| `FnOnce`       | type of a closure that takes ownership of values from its environment; can only be called once         |                   |
+| `From`         | defines a `from` static method that converts one value type to another; ex. `String::from`             |
+| `FromStr`      | defines a `from_str` static method that converts a `&str` value to the implementing type               |                   |
+| `Hash`         | adds a `hash` method for computing the hash value of an instance (1)                                   | derivable         |
+| `Into`         | opposite of `From` and automatically implement when that is implemented                                |                   |
+| `IntoIterator` | automatically converts a value to an iterator over the data in the value                               |                   |
+| `Iterator`     | defines the `next` method for iterating over the data in a value                                       |                   |
+| `Ord`          | compares instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators                                | derivable         |
+| `PartialEq`    | like `Eq`, but for types where some instances are not equal to themselves (2)                          | derivable         |
+| `PartialOrd`   | like `Ord`, but for types where some instances cannot be logically compared to others (3)              | derivable         |
+| `Read`         | defines the `read` method which reads the receiver value into an array of bytes                        |                   |
+| `Send`         | marks a type whose instance ownership can be transferred from one thread to another                    | marker            |
+| `Sized`        | marks a type whose instance sizes are known a compile time                                             | marker            |
+| `Sync`         | marks a type whose instance references can be shared between threads                                   | marker            |
+| `ToString`     | adds a `to_string` method                                                                              |                   |
+| `Unpin`        | marks a type whose instances can be moved after being pinned to a memory location                      | marker            |
+| `Write`        | defines the `write` method which writes data from an array of bytes into the receiver                  |                   |
 
-TODO: Finish adding descriptions and methods in the table above.
-
-1. Traits with "\*" after their name can be automatically implemented
-   using the `derive` attribute.
 1. The `hash` method is used by the `HashMap` and `HashSet` collections.
 1. This means values are not necessarily reflexive.
    For example, the number value `NaN` is not equal to itself.
 1. For example, the number value `NaN` is not
    less than, equal to, or greater than zero.
-
-TODO: Finish adding descriptions in this table.
 
 ## <a name="macros">Macros</a>
 
