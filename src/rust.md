@@ -3045,6 +3045,10 @@ that have no state.
 The `impl` keyword adds
 associated functions (like class or static methods in other languages)
 and methods (like instance methods in other languages) to a struct.
+These are distinguished by the name of the first parameter
+which is `self` for methods and anything else for associated functions.
+Associated functions are called with `StructName::function_name(arguments)`.
+Methods are called with `instance_variable.method_name(arguments)`.
 
 Instances of a struct can be created using its name.
 It is also common to define an associated function named "new"
