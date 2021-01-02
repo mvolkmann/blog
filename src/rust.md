@@ -827,9 +827,10 @@ For more formatting options, see
 
 ## Variables
 
-Variables are immutable by default.
-For variables that hold non-primitive values such as structs and arrays,
-even their fields cannot be mutated.
+Rust variables are immutable by default.
+For variables that hold non-primitive values
+such as arrays, tuples, and structs,
+even their elements/fields cannot be mutated.
 
 The `mut` keyword marks a variable as mutable.
 
@@ -838,26 +839,27 @@ where the value is optional.
 However, a value must be assigned before the variable is referenced.
 The colon and the type can be omitted if it can be inferred from the value.
 
-There are four ways to declare a "variable".
+There are four ways to declare a variable.
 
-| Syntax                          | Meaning                                                                                               |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `let name: type = value`        | immutable variable that must be assigned a value<br>before it is used and is thereafter immutable     |
-| `let mut name: type = value`    | mutable variable that must be assigned a value<br>before it is used, but can be modified              |
-| `const name: type = value`      | constant that must be assigned a value when it is declared                                            |
-| `static name: type = value`     | immutable variable that lives for the duration of the program; typically `const` is preferred         |
-| `static mut name: type = value` | mutable variable that lives for the duration of the program;<br>can only mutate in `unsafe` functions |
+| Syntax                           | Meaning                                                                                               |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `let name: type = value;`        | immutable variable that must be assigned a value<br>before it is used and is thereafter immutable     |
+| `let mut name: type = value;`    | mutable variable that must be assigned a value<br>before it is used and can be modified               |
+| `const name: type = value;`      | constant that must be assigned a value when it is declared                                            |
+| `static name: type = value;`     | immutable variable that lives for the duration of the program                                         |
+| `static mut name: type = value;` | mutable variable that lives for the duration of the program;<br>can only mutate in `unsafe` functions |
 
-Note that `const` and `static` declarations must be explicitly typed.
-They do not infer a type based on the assigned value.
-One rationale for this is that
-because their scope can extend to the entire crate,
+The lifetime of all `const` and `static` variables is `'static`
+which is the duration of the program.
+Rather than inferring a type based on the assigned value,
+`const` and `static` declarations must be explicitly typed.
+One rationale is that because their scope can extend to the entire crate,
 it is better to be explicit about the desired type.
 
 Differences between constants and immutable statics include:
 
-- The value of a `const` variable is copied everywhere it is used
-  rather than sharing the memory.
+- The value of a `const` variable is copied everywhere it is used,
+  unlike the value of a `static` variable that is shared.
   For values that do not use more bytes than a reference,
   this difference doesn't matter.
 - `const` variables must be initialized when they are declared,
@@ -883,9 +885,6 @@ fn print_type<T>(_: &T) {
 }
 ```
 
-TODO: Are statics a way to share data across functions,
-TODO: even those defined in separate files, without passing it?
-
 ## Ownership Model
 
 The Rust ownership model provides the following benefits:
@@ -902,7 +901,8 @@ The Rust ownership model provides the following benefits:
 Memory management is handled by following these rules:
 
 1. Each value is referred to by a variable that is its owner.
-1. Each value has one owner at a time, the owner can change over its lifetime.
+1. Each value has one owner at a time,
+   but the owner can change over its lifetime.
 1. When the owner goes out of the scope, the value is dropped (freed).
 
 While it is not typically called directly,
