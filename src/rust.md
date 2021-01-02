@@ -169,6 +169,9 @@ and switching between them.
 
 To install rustup in macOS, install {% aTargetBlank "", "homebrew" %}
 and then enter `brew install rustup`.
+"Command Line Tools for Xcode" must also be installed from {% aTargetBlank
+"https://developer.apple.com/downloads/more", "developer.apple.com" %}
+which requires a free Apple ID.
 
 To install rustup in Linux (or macOS), enter the following command:
 
