@@ -1471,7 +1471,11 @@ fn main() {
 }
 ```
 
-Match expressions ensure that all possibilities are checked (exhaustive).
+Match expressions are similar to `switch` statements in other languages,
+but they evaluate to a value.
+Instead of `case` statements inside a `switch` they have "match arms".
+There must be a match arm for every possible value
+of the expression being matched (exhaustive).
 For example:
 
 ```rust
@@ -1556,6 +1560,7 @@ This is similar to the `Either` monad in Haskell.
 There are many ways to handle values from these enum types.
 
 1. Use a `match` statement.
+
    For example:
 
    ```rust
@@ -1564,20 +1569,22 @@ There are many ways to handle values from these enum types.
        DivisionByZero // used by divide2
    }
 
+   // Demonstrates returning a Option enum.
    fn divide1(numerator: f64, denominator: f64) -> Option<f64> {
-       if denominator == 0. {
+       if denominator == 0.0 {
            None // means there is no result, but doesn't explain why
        } else {
            Some(numerator / denominator)
        }
    }
 
+   // Demonstrates returning a Result enum.
    // Commented lines below show an alternative way
    // to describe the error using a string.
    //const DIV_BY_ZERO: &str = "divide by zero";
    fn divide2(numerator: f64, denominator: f64) -> Result<f64, MathError> {
-   //fn divide(numerator: f64, denominator: f64) -> Result<f64, &'static str> {
-       if denominator == 0. {
+   //fn divide2(numerator: f64, denominator: f64) -> Result<f64, &'static str> {
+       if denominator == 0.0 {
            Err(MathError::DivisionByZero)
            //Err(DIV_BY_ZERO)
        } else {
@@ -1586,8 +1593,8 @@ There are many ways to handle values from these enum types.
    }
 
    fn main() {
-       let n = 5.;
-       let d = 2.;
+       let n = 5.0;
+       let d = 2.0;
 
        match divide1(n, d) { // returns an Option enum
            None => println!("divide by zero"),
@@ -1599,11 +1606,11 @@ There are many ways to handle values from these enum types.
            //Err(msg) => println!("{}", msg),
            Ok(result) => println!("result is {:.2}", result),
        }
-
    }
    ```
 
-2. Use `if let` statement.  
+2. Use `if let` statement.
+
    We can replace the `match` statements
    in the previous example with the following:
 
@@ -1616,23 +1623,25 @@ There are many ways to handle values from these enum types.
 
    if let Ok(result) = divide2(n, d) {
        println!("result is {}", result);
-   } else {
+   } else { // With this approach we lose the detail in the Err variant.
        println!("fail")
    }
    ```
 
 3. Use the `unwrap`, `unwrap_or`, `unwrap_or_default`,
-   or `unwrap_or_else` method.  
+   or `unwrap_or_else` method.
+
    These extract the value from an `Option` or `Result` enum.
 
-   If the value is a `Some` or `Ok`, they succeed.
+   If the value is a `Some` or `Ok`, these succeed.
 
    If the value is a `None` or `Err`:
 
    - `unwrap` panics, exiting the program
-   - `unwrap_or` uses a specified default value
+   - `unwrap_or` uses a specified value
    - `unwrap_or_default` uses the default value for the type
-   - `unwrap_or_else` uses a closure to compute the value to use
+   - `unwrap_or_else` executes a closure passed to it
+     to compute the value to use
 
    If the value is `Err` and the `unwrap` method is used,
    the message it wraps will be output.
@@ -1649,9 +1658,10 @@ There are many ways to handle values from these enum types.
    println!("result is {}", result);
    ```
 
-4. Use the `expect` method.  
+4. Use the `expect` method.
+
    This is nearly the same as the `unwrap` method.
-   The only difference is that we can supply a custom error message.
+   The only difference is that a custom error message can be supplied.
    We can replace the lines above with the following:
 
    ```rust
@@ -1662,7 +1672,8 @@ There are many ways to handle values from these enum types.
    println!("result is {}", result);
    ```
 
-5. Use the `?` operator.  
+5. Use the `?` operator which is shorthand for the `try!` macro.
+
    If the value is a `Some` or `Ok` then it is unwrapped and returned.
    If the value is a `None` or `Err` then it is passed through the
    `from` function (defined in the standard library `From` trait)
@@ -1681,8 +1692,6 @@ There are many ways to handle values from these enum types.
    println!("result is {}", result);
    ```
 
-   The `?` operator is shorthand for the `try!` macro.
-
    Uses of `?` can be chained in the same statement.
    For example, suppose the function `alpha` returns a `Result`
    whose wrapped value is an object with a method `beta`
@@ -1699,15 +1708,23 @@ There are many ways to handle values from these enum types.
    and wish to return them to callers,
    consider adding `?` after those calls and
    making the return type `Result<SomeOkType, Box<dyn error::Error>>`.
+   The `dyn` keyword performs dynamic dispatch to allow
+   a value of any type that implements a given trait.
+   In this case the errors that can be returned
+   (`std::io::Error` and `std::num::ParseIntError`)
+   all implement the `std::error::Error` trait.
+   Because they don't all have the same size,
+   they must wrapped in a `Box` which does have a fixed size.
    For example, from the Rustlings exercise `errorsn.rs`:
 
    ```rust
    fn read_and_validate(
        b: &mut dyn io::BufRead,
-   ) -> Result<PositiveNonzeroInteger, Box<dyn error::Error>> {
+   ) -> Result<PositiveNonzeroInteger, Box<dyn std::error::Error>> {
        let mut line = String::new();
-       b.read_line(&mut line)?;
-       let num: i64 = line.trim().parse()?;
+       b.read_line(&mut line)?; // can return Err(std::io::Error)
+       let num: i64 = line.trim().parse()?; // can return Err(std::num::ParseIntError)
+       // If
        let answer = PositiveNonzeroInteger::new(num)?;
        Ok(answer)
    }
