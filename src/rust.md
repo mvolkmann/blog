@@ -1864,29 +1864,32 @@ println!("{} {}", v1, v2); // 1 2
 ```
 
 An array is a fixed-length list of values that have the same type.
-The syntax for an array type is `[type, length]`.
+The syntax for an array type is `[type; length]`.
 The syntax for an array value is `[value1, value2, ...]`.
 For example:
 
 ```rust
-let a = [1, 2, 3, 4];
+let a = [1, 2, 3, 4]; // inferred type is [i32; 4]
 let [v1, v2, ..] = a; // .. means to ignore the remaining values
 println!("{} {}", v1, v2); // 1 2
 
 let rgb = ["red", "green", "blue"];
 // A Rust string is a "compound collection", covered later.
+println!("rgb = {:?}", rgb); // ["red", "green", "blue"]
 
 let sevens = [7; 5]; // same as [7, 7, 7, 7, 7]
+println!("sevens = {:?}", sevens); // [7, 7, 7, 7, 7]
 ```
 
 Elements of an array can be accessed using
 square brackets and zero-based indexes.
 For example, `rgb[1]` is "green".
 
-A `Vec` (vector) is a variable-length list of values that have the same type.
-
-In many cases to operate on an array or `Vec`
-you will want to obtain an `Iterator` and operate on that.
+Rust provides the `Vec` (vector) type for creating
+variable-length lists of values that have the same type.
+These can be used in place of arrays when the number of values varies.
+Operating on an array or `Vec` often requires
+obtaining an <a href="#iterators">`Iterator`</a>.
 For example, that is where the methods `map`, `filter`, and `fold` are found.
 
 ## Collections
@@ -2722,7 +2725,7 @@ let result = longest(&fruits);
 println!("longest is {}", result);
 ```
 
-## Iterators
+## <a name="iterators">Iterators</a>
 
 Many Rust methods return a `std::iter::Iterator` that
 can be used to iterate over the elements of a collection.
