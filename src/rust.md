@@ -1075,7 +1075,8 @@ let e = Point2D { x: 1.0, y: 2.0 };
 println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
 
 let f = &e; // an immutable borrow
-println!("f = {:?}", f); // Point2D { x: 1.0, y: 2.0 }
+let g = &e; // another immutable borrow
+println!("f={:?}, g={:?}", f, g);
 ```
 
 References are automatically dereferenced when used.
@@ -1108,9 +1109,9 @@ println!("f = {:?}", f);
 Typically a borrow only needs to read a value.
 But when a value is mutable, we can create one mutable borrow
 as long as there are no immutable borrows.
-This allows changing the value through the borrow variable.
+This allows changing the value through the borrowed variable.
 The original variable cannot be accessed again
-until after the last access of the borrow variable.
+until after the last access of the borrowed variable.
 For example:
 
 ```rust
@@ -1119,7 +1120,7 @@ let v2 = &mut v1; // mutable borrow
 *v2 = 11;
 
 // The following statements cannot be reversed.
-println!("v2 = {}", v2);
+println!("v2 = {}", v2); // last access of borrowed variable
 println!("v1 = {}", v1);
 ```
 
@@ -1134,7 +1135,6 @@ the `#[derive(Clone)]` attribute before it.
 
 When variables whose values are on the stack are passed to functions,
 the functions are given copies.
-This is true even if the parameters are declared to be mutable.
 For example:
 
 ```rust
@@ -1149,25 +1149,21 @@ fn main() {
 }
 ```
 
-When variables (not references) whose values are on the heap
-are passed to functions, copies are not made and ownership is transferred.
+When variables (not references) whose values are on the heap are
+passed to functions, copies are not made and ownership is transferred.
 When the function exits, the data is freed.
 The calling function can then no longer use variables that were passed in.
 For example:
 
 ```rust
-// Note that it is preferable to use &str instead of String here
-// unless we need a mutable String as demonstrated below.
-// However, we want to demonstrate using an argument value
-// that is definitely in the heap.
-fn my_function(s: String) {
-    println!("{}", s); // "test"
+fn my_function(v: Vec<u8>) {
+    println!("v = {:?}", v);
 }
 
 fn main() {
-    let s = String::from("test");
-    my_function(s); // error "borrow of moved value: `s`"
-    println!("{}", s); // triggers error above
+    let numbers = vec![1, 2, 3];
+    my_function(numbers); // error "borrow of moved value: `numbers`"
+    println!("numbers = {:?}", numbers); // value borrowed here after move
 }
 ```
 
@@ -1175,15 +1171,15 @@ We can fix this by changing the function to return the reference.
 For example:
 
 ```rust
-fn my_function(s: String) -> String {
-    println!("{}", s); // "test"
-    s
+fn my_function(v: Vec<u8>) -> Vec<u8> {
+    println!("v = {:?}", v);
+    v
 }
 
 fn main() {
-    let s = String::from("test");
-    let s2 = my_function(s);
-    println!("{}", s2); // "test"
+    let numbers = vec![1, 2, 3];
+    let new_numbers = my_function(numbers);
+    println!("new_numbers = {:?}", new_numbers);
 }
 ```
 
