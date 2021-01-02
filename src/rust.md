@@ -1199,12 +1199,10 @@ fn main() {
 }
 ```
 
-When references to variables on the stack or heap are passed to functions,
-ownership is borrowed by the function.
-If the function exits by returning the reference,
-ownership is returned to the calling function.
-Otherwise the data is freed and the calling function
-can then no longer use the variable that was passed in.
+When references to variables are passed to functions,
+ownership is borrowed rather than being transferred.
+When the function exits, the value is not freed
+and the calling function can continue using it.
 For example:
 
 ```rust
