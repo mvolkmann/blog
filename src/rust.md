@@ -972,13 +972,11 @@ and it can live beyond the scope that created it.
 
 Variable values whose sizes are known at compile time are stored on the stack.
 This includes booleans (`bool` type), single characters (`char` type), numbers,
-tuples, and arrays.
+tuples, arrays, and structs.
 Variable values of all other types are stored in the heap.
 This includes:
 
 - strings (`&str` and `String`)
-- structs, even those that only contain
-  fields with types that have a known size
 - collections from the `std::collections` namespace
   which defines sequences (`Vec`, `VecDeque`, and `LinkedList`),
   sets (`HashSet` and `BTreeSet`), and maps (`HashMap` and `BTreeMap`).
@@ -1149,36 +1147,54 @@ fn main() {
 }
 ```
 
-When variables (not references) whose values are on the heap are
-passed to functions, copies are not made and ownership is transferred.
+When variables (not references) of types that
+do not implement the `Copy` trait are passed to functions,
+copies are not made and ownership is transferred.
 When the function exits, the data is freed.
 The calling function can then no longer use variables that were passed in.
 For example:
 
 ```rust
-fn my_function(v: Vec<u8>) {
+#[derive(Clone, Copy, Debug)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+fn take_point(p: Point2D) {
+    println!("p = {:?}", p);
+}
+
+fn take_vector(v: Vec<u8>) {
     println!("v = {:?}", v);
 }
 
 fn main() {
+    let pt = Point2D { x: 1.0, y: 2.0 };
+    take_point(pt);
+    // We can still use pt because ownership was not transferred.
+    println!("pt = {:?}", pt);
+
     let numbers = vec![1, 2, 3];
-    my_function(numbers); // error "borrow of moved value: `numbers`"
+    take_vector(numbers); // error "borrow of moved value: `numbers`"
+    // We cannot still use numbers because ownership was transferred.
     println!("numbers = {:?}", numbers); // value borrowed here after move
 }
 ```
 
-We can fix this by changing the function to return the reference.
+We can fix the error above by changing the function to
+return the parameter which returns ownership.
 For example:
 
 ```rust
-fn my_function(v: Vec<u8>) -> Vec<u8> {
+fn take_vector(v: Vec<u8>) -> Vec<u8> {
     println!("v = {:?}", v);
     v
 }
 
 fn main() {
     let numbers = vec![1, 2, 3];
-    let new_numbers = my_function(numbers);
+    let new_numbers = take_vector(numbers);
     println!("new_numbers = {:?}", new_numbers);
 }
 ```
