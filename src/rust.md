@@ -1871,6 +1871,18 @@ fn main() {
 
 The <a href="#macros">Macros</a> section shows one more approach.
 
+## Generics
+
+Rust makes heavy use of generic types.
+They enable implementing functions, structs, and traits that
+operate on various types of data instead of only specific types.
+
+Generic types are declared inside angle brackets.
+They can specify one or more traits that must be implemented by
+concrete types in order to use them in place of the type parameters.
+The sections on functions, structs, and traits
+contain many examples of using generic types.
+
 ## Built-in Compound Types
 
 Rust defines two compound (non-primitive) types which are tuple and array.
@@ -2319,6 +2331,8 @@ fn main() {
 Writing functions that operate on any numeric type is tricky,
 but it can be done. This involves using the {% aTargetBlank
 "https://crates.io/crates/num", "num" %} crate.
+Add this as a dependency in `Cargo.toml` with a line like `num = "0.3.1"`.
+
 For example:
 
 ```rust
@@ -2326,18 +2340,21 @@ extern crate num;
 use core::ops::AddAssign;
 use num::{Num, ToPrimitive};
 
-// T can be any numeric type such as i32, u8, or f32.
+// T can be any type that implements the traits
+// AddAssign, Copy, Num, and ToPrimitive.
+// The built-in primitive number types like i32, u8, and f32
+// all implement the AddAssign and Copy traits.
+// The num crate adds implementations of
+// Num and ToPrimitive to those same types.
+// So T can be any built-in numeric type.
 fn average<T: AddAssign + Copy + Num + ToPrimitive>(numbers: &[T]) -> f32 {
-    // The Num trait includes the Zero trait
-    // which defines the zero function
-    // which returns the zero value for the wrapped primitive type.
+    // The Num trait requires also implementing the Zero trait
+    // which defines the zero function.
+    // That returns the zero value for the wrapped primitive type.
     let mut sum = T::zero();
 
     for n in numbers {
-        // The Num trait includes the NumOps trait which includes Add trait
-        // which enables using the + operator to add values.
-        //sum = sum + *n;
-        sum += *n; // requires AddAssign which the Num trait does not include
+        sum += *n; // requires implementing the AddAssign trait
     }
     let numerator = sum.to_f32().unwrap();
     numerator / numbers.len() as f32
@@ -2358,6 +2375,22 @@ fn main() {
 ### Sets
 
 A set is a collection of unique values.
+
+The `std::collections` namespace defines the `HashSet` generic type.
+
+Here is a summary of commonly used `HashSet` methods:
+
+| Operation                                     | Syntax                   |
+| --------------------------------------------- | ------------------------ |
+| create empty                                  | `let h = HashSet::new()` |
+| insert an item                                | `h.insert(item)` (1)     |
+| remove all items                              | `h.clear()`              |
+| determine if an item is contained             | `h.contains(item)`       |
+| get a reference to an item with a given value | `h.get(value)`           |
+
+TODO: FINISH THIS!
+
+1. returns a `bool` indicating if the item was added; `false` if already present
 
 Here is an example of creating and using a `HashSet`
 containing `String` elements.
@@ -2435,6 +2468,15 @@ fn main() {
 Maps are collections of key/value pairs.
 Keys can be any type, but they must all be the same type.
 The same is true for values.
+
+The `std::collections` namespace defines the `HashMap` generic type.
+
+Here is a summary of commonly used `HashMap` methods:
+
+| Operation | Syntax |
+| --------- | ------ |
+
+TODO: Finish this
 
 Here is an example of creating and using a `HashMap`
 containing `String` keys and `i32` values.
@@ -3122,10 +3164,6 @@ literal strings, `&str` values, and `&String` values.
 Functions that create and return strings have the return type `String`
 so ownership can be transferred to the caller.
 
-TODO: Try to write a generic version of the average function
-TODO: that works on any numeric type. But see
-TODO: https://users.rust-lang.org/t/passing-generic-vector-of-numbers/52486/7.
-
 Functions are accessible by default within the same source file,
 but they are private by default when defined in a different source file.
 For functions that should be visible outside the source file that defines them,
@@ -3744,6 +3782,96 @@ Other traits must be manually implemented.
    For example, the number value `NaN` is not equal to itself.
 1. For example, the number value `NaN` is not
    less than, equal to, or greater than zero.
+
+Here is an example of implementing some of the built-in traits
+for a custom struct:
+
+```rust
+use std::cmp;
+use std::default::Default;
+use std::ops::{Add, AddAssign, Sub};
+
+// Deriving the Default trait adds a default function
+// that returns an instance of the struct where all the fields
+// are set to their default value, 0 in this case.
+#[derive(Clone, Copy, Debug, Default)]
+struct Color {
+    r: u8,
+    g: u8,
+    b: u8
+}
+
+/*
+// We could manually implement the Default trait as follows
+// which is useful for fields to have non-default values.
+impl Default for Color {
+    fn default() -> Self {
+        Self {
+            r: 0,
+            g: 0,
+            b: 0
+        }
+    }
+}
+*/
+
+// Implementing the Add trait enables using
+// the + operator to add Color instances.
+impl Add for Color {
+    type Output = Self;
+
+    fn add(self, other: Self) -> Self {
+        Self {
+            r: cmp::min(255, self.r + other.r),
+            g: cmp::min(255, self.g + other.g),
+            b: cmp::min(255, self.b + other.b)
+        }
+    }
+}
+
+// Implementing the AddAssign trait enables using
+// the += operator to add a Color instance to a receiver Color.
+impl AddAssign for Color {
+    fn add_assign(&mut self, other: Self) {
+        self.r = cmp::min(255, self.r + other.r);
+        self.g = cmp::min(255, self.g + other.g);
+        self.b = cmp::min(255, self.b + other.b);
+    }
+}
+
+// Implementing the Sub trait enables using
+// the - operator to subtract Color instances.
+impl Sub for Color {
+    type Output = Self;
+
+    fn sub(self, other: Self) -> Self {
+        Self {
+            r: cmp::max(0, self.r - other.r),
+            g: cmp::max(0, self.g - other.g),
+            b: cmp::max(0, self.b - other.b)
+        }
+    }
+}
+
+// Implementing SubAssign to enable using the -= operator
+// would be similar to implementing the AddAssign trait.
+
+fn main() {
+    let red = Color { r: 255, g: 0, b: 0 };
+    let blue = Color { r: 0, g: 0, b: 255 };
+
+    let purple = red + blue; // can add colors
+    println!("purple = {:?}", purple); // Color { r: 255, g: 0, b: 255 }
+
+    let blue = purple - red; // can subtract colors
+    println!("blue = {:?}", blue); // Color { r: 0, g: 0, b: 255 }
+
+    let mut color = Color::default();
+    color += red; // can add a Color to the one on the left side
+    color += blue;
+    println!("color = {:?}", color); // Color { r: 255, g: 0, b: 255 }
+}
+```
 
 ## <a name="macros">Macros</a>
 
