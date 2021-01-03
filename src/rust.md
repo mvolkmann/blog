@@ -958,6 +958,26 @@ fn print_type<T>(_: &T) {
 }
 ```
 
+Rust allows variables to be re-declared with a different type in the same block.
+This is referred to as "shadowing".
+Sometimes this is preferred over coming up with
+multiple names for the same concept.
+For example:
+
+```rust
+let command = "order 3 tacos"; // &str
+// The str split_whitespace method returns an Iterator.
+// The Iterator nth method returns an Option.
+let quantity = command.split_whitespace().nth(1).unwrap_or(""); // &str
+// The str parse method returns an Option.
+let quantity = quantity.parse().unwrap_or(0); // i32
+if quantity > 2 {
+    println!("You must be very hungry!")
+} else {
+    println!("Perhaps you don't really like tacos.")
+}
+```
+
 ## Ownership Model
 
 Memory management in Rust is handled by following these rules,
@@ -2473,6 +2493,8 @@ which use pattern matching to extract a value.
 These were shown in the early "Error Handling" section.
 
 `match` expressions can be used to match on any kind of value.
+They must be exhaustive, meaning that they
+account for every possible value of the expression being matched.
 For example:
 
 ```rust
