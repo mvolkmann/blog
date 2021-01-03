@@ -2318,35 +2318,35 @@ fn main() {
 
 ### Sets
 
-Sets of string values typically use the type `String`
-so the elements are owned by the set and therefore have the same lifetime.
+A set is a collection of unique values.
 
-To use the `HashSet` type by ony its name:
+Here is an example of creating and using a `HashSet`
+containing `String` elements.
+Using the `String` type rather than `&str` allows the `HashSet`
+to own the values so they have the same lifetime as the `HashSet`
+which is generally desirable.
 
 ```rust
 use std::collections::HashSet;
-```
 
-Here is an example of creating and using a `HashSet`
-containing `String` elements:
+fn main() {
+    // Element type is inferred from what is inserted.
+    let mut colors = HashSet::new();
+    colors.insert("red");
+    colors.insert("green");
+    colors.insert("blue");
 
-```rust
-// Element type is inferred from what is inserted.
-let mut colors = HashSet::new();
-colors.insert("red");
-colors.insert("green");
-colors.insert("blue");
+    println!("{:?}", colors); // {"red", "green", "blue"}
+    println!("{}", colors.len()); // 3
+    println!("{}", colors.contains("green")); // true
+    println!("{}", colors.contains("orange")); // false
 
-println!("colors = {:?}", colors);
-println!("color count = {:?}", colors.len()); // 3
-println!("contains green? = {:?}", colors.contains("green")); // true
-println!("contains orange? = {:?}", colors.contains("orange")); // false
+    colors.remove("green");
+    println!("{:?}", colors); // {"blue", "red"}
 
-colors.remove("green");
-println!("after removing green, colors = {:?}", colors);
-
-for color in &colors {
-    println!("{}", color);
+    for color in &colors {
+        println!("{}", color); // blue then red
+    }
 }
 ```
 
@@ -2354,55 +2354,57 @@ Here is an example of creating and using a `HashSet`
 containing `struct` elements:
 
 ```rust
+use std::collections::HashSet;
+
 #[derive(Debug, Eq, Hash, PartialEq)]
 struct Dog {
     name: String,
     breed: String
 }
 impl Dog {
-    // This is a constructor function where the name "new"
-    // is used by convention, but is not required.
+    // This is a constructor function where
+    // the name "new" is used by convention.
     fn new(name: &str, breed: &str) -> Self {
-        Dog {
+        Self {
             name: name.to_string(),
             breed: breed.to_string()
         }
     }
 }
 
-let mut dogs = HashSet::new();
-dogs.insert(Dog::new("Maisey", "Treeing Walker Coonhound"));
-dogs.insert(Dog::new("Ramsay", "Native American Indian Dog"));
-dogs.insert(Dog::new("Oscar", "German Shorthaired Pointer"));
-dogs.insert(Dog::new("Comet", "Whippet"));
-println!("dogs = {:#?}", dogs);
+fn main() {
+    let mut dogs = HashSet::new();
+    dogs.insert(Dog::new("Maisey", "Treeing Walker Coonhound"));
+    dogs.insert(Dog::new("Ramsay", "Native American Indian Dog"));
+    dogs.insert(Dog::new("Oscar", "German Shorthaired Pointer"));
+    dogs.insert(Dog::new("Comet", "Whippet"));
+    println!("dogs = {:#?}", dogs);
 
-for dog in &dogs {
-    println!("{:?}", dog);
+    for dog in &dogs {
+        println!("{:?}", dog);
+    }
+
+    let comet = Dog::new("Comet", "Whippet");
+    let spot = Dog::new("Spot", "Beagle");
+    println!("{:?}", dogs.contains(&comet)); // true
+    println!("{:?}", dogs.contains(&spot)); // false
 }
-
-let comet = Dog::new("Comet", "Whippet");
-let spot = Dog::new("Spot", "Beagle");
-println!("contains Comet? = {:?}", dogs.contains(&comet)); // true
-println!("contains Spot? = {:?}", dogs.contains(&spot)); // false
 ```
 
 ### Maps
 
-Maps that use strings for keys and/or values typically use the type `String`
-so they are owned by the map and therefore have the same lifetime.
+Maps are collections of key/value pairs.
+Keys can be any type, but they must all be the same type.
+The same is true for values.
 
-To use the `HashMap` type by only its name:
+Here is an example of creating and using a `HashMap`
+containing `String` keys and `i32` values.
+Using the `String` type for keys rather than `&str` allows the `HashMap`
+to own the values so they have the same lifetime as the `HashMap`
+which is generally desirable.
 
 ```rust
 use std::collections::HashMap;
-```
-
-Here is an example of creating and using a `HashMap`
-with `String` keys and `i32` values:
-
-```rust
-se std::collections::HashMap;
 
 fn get_shortest_v1(months: &HashMap<String, i8>) -> Option<&str> {
     let mut shortest: i8 = std::i8::MAX;
@@ -2471,6 +2473,8 @@ Here is an example of creating and using a `HashMap`
 with `String` keys and `struct` values:
 
 ```rust
+use std::collections::HashMap;
+
 #[derive(Debug, Eq, Hash, PartialEq)]
 struct Dog {
     name: String,
@@ -2485,33 +2489,35 @@ impl Dog {
     }
 }
 
-// Key and value types are inferred from what is inserted.
-let mut dogs = HashMap::new();
+fn main() {
+    // Key and value types are inferred from what is inserted.
+    let mut dogs = HashMap::new();
 
-// This function must be a closure so it can access dogs.
-let mut add_dog = |name: &str, breed: &str| {
-    dogs.insert(name.to_string(), Dog::new(name, breed));
-};
+    // This function must be a closure so it can access dogs.
+    let mut add_dog = |name: &str, breed: &str| {
+        dogs.insert(name.to_string(), Dog::new(name, breed));
+    };
 
-add_dog("Maisey", "Treeing Walker Coonhound");
-add_dog("Ramsay", "Native American Indian Dog");
-add_dog("Oscar", "German Shorthaired Pointer");
-add_dog("Comet", "Whippet");
+    add_dog("Maisey", "Treeing Walker Coonhound");
+    add_dog("Ramsay", "Native American Indian Dog");
+    add_dog("Oscar", "German Shorthaired Pointer");
+    add_dog("Comet", "Whippet");
 
-println!("dogs = {:#?}", dogs);
-println!("entries = {:?}", dogs.len()); // 4
-println!("Comet = {:#?}", dogs.get("Comet").unwrap());
-dogs.remove("Comet");
-println!("entries = {:?}", dogs.len()); // 3
+    println!("dogs = {:#?}", dogs);
+    println!("entries = {:?}", dogs.len()); // 4
+    println!("Comet = {:#?}", dogs.get("Comet").unwrap());
+    dogs.remove("Comet");
+    println!("entries = {:?}", dogs.len()); // 3
 
-let name = "Oscar";
-match dogs.get(name) {
-    Some(dog) => println!("found {:#?}.", dog),
-    None => println!("No dog named {} found.", name)
-}
+    let name = "Oscar";
+    match dogs.get(name) {
+        Some(dog) => println!("found {:#?}.", dog),
+        None => println!("No dog named {} found.", name)
+    }
 
-for (name, dog) in &dogs {
-    println!("{} is a {}.", name, dog.breed);
+    for (name, dog) in &dogs {
+        println!("{} is a {}.", name, dog.breed);
+    }
 }
 ```
 
