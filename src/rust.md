@@ -2316,6 +2316,45 @@ fn main() {
 }
 ```
 
+Writing functions that operate on any numeric type is tricky,
+but it can be done. This involves using the {% aTargetBlank
+"https://crates.io/crates/num", "num" %} crate.
+For example:
+
+```rust
+extern crate num;
+use core::ops::AddAssign;
+use num::{Num, ToPrimitive};
+
+// T can be any numeric type such as i32, u8, or f32.
+fn average<T: AddAssign + Copy + Num + ToPrimitive>(numbers: &[T]) -> f32 {
+    // The Num trait includes the Zero trait
+    // which defines the zero function
+    // which returns the zero value for the wrapped primitive type.
+    let mut sum = T::zero();
+
+    for n in numbers {
+        // The Num trait includes the NumOps trait which includes Add trait
+        // which enables using the + operator to add values.
+        //sum = sum + *n;
+        sum += *n; // requires AddAssign which the Num trait does not include
+    }
+    let numerator = sum.to_f32().unwrap();
+    numerator / numbers.len() as f32
+}
+
+fn main() {
+    //let scores = vec![70, 90, 85, 100];
+    let scores = vec![70.1, 90.2, 85.3, 99.4];
+
+    // Print average of all scores.
+    println!("average = {:.1}", average(&scores)); // 86.2
+
+    // Print average of all scores except the first.
+    println!("average = {:.1}", average(&scores[1..])); // 91.7
+}
+```
+
 ### Sets
 
 A set is a collection of unique values.
@@ -2535,18 +2574,20 @@ let sub = &s[3..6];
 println!("{}", sub); // "def"
 ```
 
-Many kinds of collections, including Array and Vector,
-support obtaining slices of their elements.
+Many kinds of collections, including arrays and vectors,
+support obtaining slices of their items.
 
-The following table shows all the syntax variations of ranges:
+For example:
 
-| Syntax  | Meaning  |
-| ------- | -------- |
-| `s..e`  | s to e-1 |
-| `s..=e` | s to e   |
-| `s..`   | s to end |
-| `..e`   | 0 to e-1 |
-| `..=e`  | 0 to e   |
+```rust
+let colors = vec!["red", "orange", "yellow", "green", "blue", "purple"];
+for color in &colors[2..=4] {
+  println!("{}", color); // yellow then green then blue
+}
+```
+
+For details on the syntax for specifying ranges,
+see <a href="#ranges">Ranges</a>.
 
 ## Conditional Logic
 
@@ -3149,18 +3190,18 @@ The operators that can be implemented for custom types include:
 - negate: `-` (unary)
 - range: `..` and `..=`
 
-## Ranges
+## <a name="ranges">Ranges</a>
 
 The `std::ops` namespace defines the range types
 
-| Range Type         | Meaning                          |
-| ------------------ | -------------------------------- |
-| `Range`            | start inclusive to end exclusive |
-| `RangeFrom`        | start inclusive and above        |
-| `RangeFull`        | zero and above                   |
-| `RangeInclusive`   | start inclusive to end inclusive |
-| `RangeTo`          | zero to end exclusive            |
-| `RangeToInclusive` | start inclusive to end inclusive |
+| Range Type         | Meaning                          | Syntax  |
+| ------------------ | -------------------------------- | ------- |
+| `RangeFull`        | all items                        | `..`    |
+| `Range`            | start inclusive to end exclusive | `s..e`  |
+| `RangeInclusive`   | start inclusive to end inclusive | `s..=e` |
+| `RangeFrom`        | start inclusive and above        | `s..`   |
+| `RangeTo`          | zero to end exclusive            | `..e`   |
+| `RangeToInclusive` | zero to end inclusive            | `..=e`  |
 
 These are distinct types and there is not a
 provided range type that encompasses all of them.
