@@ -2009,8 +2009,23 @@ use `s.to_string()`, `String::from(s)`, or `s.to_owned()` which are equivalent.
 Actually, `to_string` calls `String::from` which calls `to_owned`.
 These calls are inlined so they all have the same performance.
 
-`String` values are automatically converted to the `&str` type
-when passed as an argument to a function that accepts a `&str`.
+When a `String` reference is passed to a function that expects a `&str`
+it is automatically coerced to that type.
+This is because `String` implements the `Deref` trait with a `Target` of `str`.
+For more on this, see the <a href="#smart-pointers">Smart Pointers</a> section.
+For example:
+
+```rust
+fn my_function(s: &str) {
+    println!("{}", s); // "test"
+}
+
+fn main() {
+    let s = String::from("test");
+    my_function(&s); // ownership is not transferred
+    println!("{}", s); // "test"
+}
+```
 
 To create a `String` from multiple values of types that
 implement the `Display` trait, use `format!(fmt_string, v1, v2, ...)`.
@@ -2204,24 +2219,6 @@ let mut s2 = String::from("first");
 s2.replace_range(.., "second"); // range .. is the entire string
 ```
 
-When a `String` reference is passed to a function that expects a `&str`
-it is automatically coerced to that type.
-This is because `String` implements the `Deref` trait with a `Target` of `str`.
-For more on this, see the <a href="#smart-pointers">Smart Pointers</a> section.
-For example:
-
-```rust
-fn my_function(s: &str) {
-    println!("{}", s); // "test"
-}
-
-fn main() {
-    let s = String::from("test");
-    my_function(&s); // ownership is not transferred
-    println!("{}", s); // "test"
-}
-```
-
 ### Vectors
 
 A vector is represented by the `Vec` generic type.
@@ -2230,11 +2227,94 @@ a length, and a capacity.
 The capacity is the length to which the data can grow
 before additional space must be allocated (handled automatically).
 
-| Operation    | Syntax       |
-| ------------ | ------------ |
-| create empty | `Vec::new()` |
+Here is a summary of commonly used `Vec` methods:
 
-TODO: Finish this.
+| Operation                             | Syntax                         |
+| ------------------------------------- | ------------------------------ |
+| create empty                          | `Vec::new()`                   |
+| create empty with capacity            | `Vec::with_capacity(capacity)` |
+| create with items                     | `vec![item1, item2, ...]` (1)  |
+| append other                          | `v.append(&other_vector)`      |
+| search for index of value when sorted | `v.binary_search(value)`       |
+| remove all items                      | `v.clear()`                    |
+| determine if contains value           | `v.contains(value)`            |
+| remove consecutive repeated items     | `v.dedup()`                    |
+| remove consecutive repeated items     | `v.dedup_by(fn)` (2)           |
+| remove consecutive repeated items     | `v.dedup_by_key(fn)` (3)       |
+| get first value                       | `v.first()`                    |
+| insert at index                       | `v.insert(index, value)`       |
+| determine if empty                    | `v.is_empty()`                 |
+| get iterator                          | `v.iter()`                     |
+| get iterator that allows mutating     | `v.iter_mut()`                 |
+| get last value                        | `v.last()`                     |
+| get length                            | `v.len()`                      |
+| remove and return last item           | `v.pop()`                      |
+| add to end                            | `v.push(value)`                |
+| remove and return item at index       | `v.remove(index)`              |
+| remove item with value                | `v.remove_item(index)`         |
+| reverse in place                      | `v.reverse()`                  |
+| sort in place                         | `v.sort()`                     |
+| sort in place                         | `v.sort_by(fn)` (2)            |
+| sort in place                         | `v.sort_by_key(fn)` (3)        |
+| replace items                         | `v.splice(range, iter)` (4)    |
+| swap items at indexes                 | `v.swap(index1, index2)`       |
+
+1. `vec!` is a macro, not a method.
+1. `fn` is passed two values and returns
+   a `bool` indicating if the first should be removed.
+1. `fn` is passed a value and returns
+   a computed value to be used for comparison.
+1. `range` specifies indexes to remove and
+   `iter` specifies items to insert in their place.
+
+Also see the <a href="#iterators">Iterator</a> methods
+that include `filter`, `map`, `fold` (like `reduce` in JavaScript),
+`min`, `max`, `sum`, `product`, and more.
+
+Here is an example of creating and operating on a vector:
+
+```rust
+fn main() {
+    let scores = vec![70, 90, 85, 100];
+
+    for score in &scores {
+        let grade = match score {
+            90..=100 => 'A',
+            80..=89 => 'B',
+            70..=79 => 'C',
+            60..=69 => 'D',
+            _ => 'F',
+        };
+        println!("{}", grade);
+    }
+
+    let total: u32 = scores.iter().sum();
+    let average = total as f32 / total as f32;
+    println!("average = {:.1}", average);
+}
+```
+
+When a `Vec` reference is passed to a function that expects a slice reference
+it is automatically coerced to that type.
+This is because `Vec<T>` implements the `Deref` trait with a `Target` of `[T]`.
+For more on this, see the <a href="#smart-pointers">Smart Pointers</a> section.
+For example:
+
+```rust
+fn average_i32(numbers: &[i32]) -> f32 {
+    numbers.iter().sum::<i32>() as f32 / numbers.len() as f32
+}
+
+fn main() {
+    let scores = vec![70, 90, 85, 100];
+
+    // Print average of all scores.
+    println!("average = {:.1}", average_i32(&scores)); // 86.2
+
+    // Print average of all scores except the first.
+    println!("average = {:.1}", average_i32(&scores[1..])); // 91.7
+}
+```
 
 ### Sets
 
@@ -2792,35 +2872,35 @@ Iterators are lazy, meaning that they
 do not pre-compute the values they will return.
 This type supports methods in the following non-exhaustive list:
 
-| Method               | Description                                                                                       |
-| -------------------- | ------------------------------------------------------------------------------------------------- |
-| `all(predFn)`        | returns `bool` indicating if `predFn` returns true for all elements                               |
-| `any(predFn)`        | returns `bool` indicating if `predFn` returns true for any elements                               |
-| `chain(iter2)`       | returns `Iterator` that iterates over combined elements                                           |
-| `collect()`          | returns a `std::vec::Vec` containing all the elements                                             |
-| `count()`            | returns number of elements in `Iterator`, consuming it                                            |
-| `enumerate()`        | returns `Iterator` over tuples of indexes and elements                                            |
-| `filter(predFn)`     | returns `Iterator` over elements for which `predFn` returns true                                  |
-| `fold(fn)`           | returns result of combining elements into a single value                                          |
-| `last()`             | returns last element in `Iterator`, consuming it                                                  |
-| `map(fn)`            | returns `Iterator` over results of calling a function on each element                             |
-| `max()`              | returns `Option` that wraps the largest element                                                   |
-| `max_by(fn)`         | returns `Option` that wraps the largest result based on passing pairs of elements to a function   |
-| `max_by_key(fn)`     | returns `Option` that wraps the largest result of passing each element to a function              |
-| `min()`              | returns `Option` that wraps the smallest element                                                  |
-| `min_by(fn)`         | returns `Option` that wraps the smallest result based on passing pairs of elements to a function  |
-| `min_by_key(fn)`     | returns `Option` that wraps the smallest result of passing each element to a function             |
-| `nth(n)`             | returns the nth element                                                                           |
-| `partition(predFn)`  | returns two collections containing elements for which a function returns true or false            |
-| `position(predFn)`   | returns the first element for which a function returns true                                       |
-| `product()`          | returns the product of number values                                                              |
-| `rev()`              | returns an iterate that iterates in the reverse order                                             |
-| `skip(n)`            | returns an `Iterator` that begins after n elements                                                |
-| `skip_while(predFn)` | returns an `Iterator` that begins at the first element for which a function returns false         |
-| `sum()`              | returns the sum of number values                                                                  |
-| `take(n)`            | returns an `Iterator` that stops after the first n elements                                       |
-| `take_while(predFn)` | returns an `Iterator` that stops at the last element for which a function returns true            |
-| `zip()`              | returns an `Iterator` over `Option` objects that wrap corresponding elements from two `Iterators` |
+| Method                | Description                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------- |
+| `all(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for all elements                              |
+| `any(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for any elements                              |
+| `chain(iter2)`        | returns `Iterator` that iterates over combined elements                                           |
+| `collect()`           | returns a `std::vec::Vec` containing all the elements                                             |
+| `count()`             | returns number of elements in `Iterator`, consuming it                                            |
+| `enumerate()`         | returns `Iterator` over tuples of indexes and elements                                            |
+| `filter(pred_fn)`     | returns `Iterator` over elements for which `pred_fn` returns true                                 |
+| `fold(fn)`            | returns result of combining elements into a single value                                          |
+| `last()`              | returns last element in `Iterator`, consuming it                                                  |
+| `map(fn)`             | returns `Iterator` over results of calling a function on each element                             |
+| `max()`               | returns `Option` that wraps the largest element                                                   |
+| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of elements to a function   |
+| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each element to a function              |
+| `min()`               | returns `Option` that wraps the smallest element                                                  |
+| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of elements to a function  |
+| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each element to a function             |
+| `nth(n)`              | returns the nth element                                                                           |
+| `partition(pred_fn)`  | returns two collections containing elements for which a function returns true or false            |
+| `position(pred_fn)`   | returns the first element for which a function returns true                                       |
+| `product()`           | returns the product of number values                                                              |
+| `rev()`               | returns an iterate that iterates in the reverse order                                             |
+| `skip(n)`             | returns an `Iterator` that begins after n elements                                                |
+| `skip_while(pred_fn)` | returns an `Iterator` that begins at the first element for which a function returns false         |
+| `sum()`               | returns the sum of number values                                                                  |
+| `take(n)`             | returns an `Iterator` that stops after the first n elements                                       |
+| `take_while(pred_fn)` | returns an `Iterator` that stops at the last element for which a function returns true            |
+| `zip()`               | returns an `Iterator` over `Option` objects that wrap corresponding elements from two `Iterators` |
 
 Here is an example of using the `fold` method:
 
@@ -3358,7 +3438,8 @@ that support references (or pointers),
 Rust does not require different syntax for accessing fields and methods
 based on whether an instance or a reference is used.
 It supplies "automatic referencing and dereferencing"
-in field access and method calls.
+in field access and method calls for types that implement the `Deref` trait.
+This includes the `String` and `Vec` types.
 In the case of method calls, it automatically adds `&`, `&mut`, or `*`
 based on the method declaration of the `self` type.
 
