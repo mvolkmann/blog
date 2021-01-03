@@ -243,10 +243,6 @@ Resources are learning Rust include:
 - {% aTargetBlank "https://doc.rust-lang.org/std/index.html", "Rust Standard Library" %}
   API documentation
 
-- {% aTargetBlank "https://github.com/rust-lang/rustlings", "Rustlings" %}
-
-  - "contains small exercises to get you used to reading and writing Rust code"
-
 - {% aTargetBlank "https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/", "Programming Rust" %} book
 
   - from O'Reilly
@@ -265,13 +261,18 @@ Resources are learning Rust include:
 - {% aTargetBlank "https://www.youtube.com/watch?v=WnWGO-tLtLA&t=2s",
   "Ryan Levick Introduction to Rust" %} YouTube videos
 
-- {% aTargetBlank "https://github.com/rust-lang/rustlings", "rustlings" %}
-  "small exercises to get you used to reading and writing Rust code"
+- {% aTargetBlank "https://github.com/rust-lang/rustlings", "Rustlings" %}
+
+  - "contains small exercises to get you used to reading and writing Rust code"
 
 - {% aTargetBlank "https://exercism.io/tracks/rust", "exercism Rust track" %}
 
   - "Code practice and mentorship for everyone"
   - "exercises across 52 languages"
+
+- {% aTargetBlank "https://github.com/ctjhoa/rust-learning", "rust-learning" %}
+
+  - "A bunch of links to blog posts, articles, videos, etc for learning Rust."
 
 ## Terminology
 
@@ -887,8 +888,15 @@ There are five ways to declare a variable.
 | `static name: type = value;`     | immutable variable that lives for the duration of the program                                                    |
 | `static mut name: type = value;` | mutable variable that lives for the duration of the program;<br>can only access in `unsafe` blocks and functions |
 
-The lifetime of all `const` and `static` variables is `'static`
-which is the duration of the program.
+Variables defined with `static` are given a fixed location in memory
+and all references refer to the value at that location.
+Their lifetime is `'static` which is the duration of the program.
+
+Variables defined with `const` do not have a location in memory.
+The compiler substitutes their value where all references appear,
+so the variable doesn't exist at runtime.
+In that sense they do not have a lifetime.
+
 Rather than inferring a type based on the assigned value,
 `const` and `static` declarations must be explicitly typed.
 One rationale is that because their scope can extend to the entire crate,
@@ -1899,19 +1907,19 @@ These include strings and collections in the `std::collections` namespace.
 
 The `std::collections` namespace defines the following sequence types:
 
-- `Vec`: a resizable, ordered array of any kind of value
-  where items can be efficiently added at the end
+- `Vec`: a resizable, ordered array of values of the same type
+  where items can be efficiently adding and removing items at the end
 - `VecDeque`: like a `Vec`, but items
-  can also be efficiently added at the beginning
-- `LinkedList`: like a `Vec`, but it they
-  can be efficiently split and appended
+  can also be efficiently adding and removing items at the beginning
+- `LinkedList`: like a `VecDeque`, but can be efficiently split
+  which enables efficiently adding and removing items in the middle
 
 The `std::collections` namespace defines the following map types:
 
 - `HashMap`: a collection of key/value pairs with efficient value lookup by key
-  where keys and values can be any kind of value
-- `BTreeMap`: like a `HashMap`, but sorted by key enabling efficient retrieval
-  of values corresponding to the smallest key, largest key,
+  where keys and values can be any type
+- `BTreeMap`: like a `HashMap`, but sorted by key enabling efficient
+  retrieval of values corresponding to the smallest key, largest key,
   closest key that is smaller or larger than some key value,
   or range of keys
 
@@ -1934,20 +1942,24 @@ stored as a `Vec` of `u8` byte values.
 Literal values are surrounded by double quotes.
 Strings are more difficult to work with in Rust than in other languages.
 Rust trades simplicity here for better
-performance, concurrency, memory management.
+performance, memory management, and concurrency.
 
 There are two kinds of strings in Rust.
 The language defines the "string slice" type `&str`
 and the standard library defines the `String` type.
-A `&str` value is a reference (or pointer) to a view into
-the characters of an owned `String` that has a fixed length.
-The compiler decides whether its data should be
-stored on the stack or in the heap.
-You just get a reference to it.
-A `String` value has a variable length and is stored in the heap.
+A `&str` value is a reference (or pointer) to data that includes
+the length of the string and a pointer to where the character data is stored,
+which can be on the stack or the heap.
+A `String` value is a <% aTargetBlank "#smart-pointers", "smart pointer" %>
+that holds a pointer to the character data on the heap,
+a length, and a capacity.
+The capacity is the length to which the character data can grow
+before additional space must be allocated (handled automatically).
+A `&str` value can be a view into the characters of `String`,
+sharing its character data.
 
-The most common reason for a variable to use the `String` type
-instead of the `&str` type is so it can "own" it.
+While one reason to choose the `String` type over the `&str` type is so
+the length can change, the most common reason is so a variable can "own" it.
 Values of type `&str` cannot be owned by a variable.
 
 Literal characters (just one) are surrounded by single quotes
@@ -1959,26 +1971,29 @@ Here is a summary of the types that can be used to represent strings:
 
 | Type          | Description                                                             |
 | ------------- | ----------------------------------------------------------------------- |
-| `str`         | only used directly in rare circumstances                                |
+| `str`         | rarely used directly                                                    |
 | `&str`        | reference to an immutable string slice; commonly used                   |
-| `&mut str`    | only used in rare circumstances; some `str` methods use it              |
+| `&mut str`    | rarely user; some `str` methods use it                                  |
 | `String`      | immutable if declared with `let`; mutable with `let mut`; commonly used |
-| `&String`     | reference to an immutable string; typically use `&str` instead          |
+| `&String`     | reference to an immutable string; typically `&str` is used instead      |
 | `&mut String` | reference to a mutable string; commonly used                            |
 
 So the string types most frequently used are
 `&str`, `String`, and `&mut String`.
 
 To get a `&str` from a `String` in the variable `s`,
-use `s.as_str()` or `&s`.
+use `&s` or `s.as_str()` which are equivalent.
+
 To get a `String` from a `&str` in the variable `s`,
-use `s.to_string()`, `String::from(s)`, or `s.to_owned()`.
-Note that `to_string` calls `String::from` which calls `to_owned`.
+use `s.to_string()`, `String::from(s)`, or `s.to_owned()` which are equivalent.
+Actually, `to_string` calls `String::from` which calls `to_owned`.
 These calls are inlined so they all have the same performance.
+
 `String` values are automatically converted to the `&str` type
 when passed as an argument to a function that accepts a `&str`.
-To create a `String` from multiple values of types that implement the `Display` trait,
-use `format!(fmt_string, v1, v2, ...)`.
+
+To create a `String` from multiple values of types that
+implement the `Display` trait, use `format!(fmt_string, v1, v2, ...)`.
 
 Here are examples of declaring, creating, and passing various kinds of strings:
 
@@ -1993,10 +2008,10 @@ fn demo(s1: &str, s2: String, s3: &String, s4: &mut String) {
 }
 
 fn main() {
-    let s1: &str = "one";
-    let s2: String = String::from("two");
+    let s1 = "one"; // type is inferred as &str
+    let s2: String = "two".to_string();
     let s3: String = String::from("three");
-    let mut s4: String = String::from("four");
+    let mut s4: String = "four".to_owned();
     s4.push_str(" alpha");
 
     demo(s1, s2, &s3, &mut s4);
@@ -2009,64 +2024,66 @@ fn main() {
 ```
 
 Typically variables and parameters for strings that
-do not require mutation should have the type `&str`
-and those that do should have the type `&mut String`.
+do not require mutation should use the type `&str`
+and those that do should use the type `&mut String`.
 
 In the tables below, assume the following variable types:
 
 - `c` holds a `char` value
-- `r` holds a `std::ops::Range`
+- `r` holds a `std::ops::Range` value
 - `s` and `t` hold `&str` values
 - `u`, `v`, and `w` hold `String` values
-- `z` holds a char or `&str`
+- `z` holds a `char` or `&str` value
 
 Everywhere `c` is used, a literal character can be used in its place.
-Everywhere `s` and `t` are used, a literal string can be used in its place.
+Everywhere `s` and `t` are used, a literal string can be used in their place.
 
 Here are operations on the `str` type:
 
-| Syntax                                                 | Operation                            |
-| ------------------------------------------------------ | ------------------------------------ |
-| create                                                 | `"text in double quotes"`            |
-| concatenate to `&str`                                  | cannot be done                       |
-| get substring                                          | `s[start..end]` (1)                  |
-| get iterator over Unicode characters                   | `s.chars()`                          |
-| get `char` at index                                    | `s.chars().nth(index)` (2)           |
-| determine if contains                                  | `s.contains(z)`                      |
-| determine if ends with                                 | `s.ends_with(z)`                     |
-| determine if starts with                               | `s.starts_with(z)`                   |
-| get substring                                          | `s.get(r)` (3)                       |
-| get length                                             | `s.len()`                            |
-| get iterator over lines                                | `s.lines()`                          |
-| parse into another type such as specific number type   | `let v = s.parse::<T>()` (4)         |
-| create `String` that repeat n times                    | `s.repeat(n)`                        |
-| replace all occurrences of z1 with z2                  | `s.replace(z1, z2)`                  |
-| replace first n occurrences of z1 with z2              | `s.replacen(z1, z2, n)`              |
-| split on a character                                   | `s.split(c)` returns an iterator (5) |
-| split on a character n times (last contains rest)      | `s.splitn(n, c)` returns an iterator |
-| split at index                                         | `s.split_at(n)` returns tuple        |
-| split on any amounts of whitespace                     | `s.split_whitespace()`               |
-| remove prefix                                          | `s.strip_prefix(z)` returns `Option` |
-| remove suffix                                          | `s.strip_suffix(z)` returns `Option` |
-| convert `&str` to `String`                             | `s.to_string()`                      |
-| get lowercase `String`                                 | `s.to_lowercase()`                   |
-| get uppercase `String`                                 | `s.to_uppercase()`                   |
-| get slice with leading and trailing whitespace removed | `s.trim()`                           |
-| get slice with trailing whitespace removed             | `s.trim_end()`                       |
-| get slice with leading whitespace removed              | `s.trim_start()`                     |
+| Syntax                                                  | Operation                            |
+| ------------------------------------------------------- | ------------------------------------ |
+| create                                                  | `"text in double quotes"`            |
+| get substring                                           | `s[start..end]` (1)                  |
+| get iterator over Unicode characters                    | `s.chars()`                          |
+| get `char` at index                                     | `s.chars().nth(index)` (2)           |
+| determine if contains                                   | `s.contains(z)`                      |
+| determine if ends with                                  | `s.ends_with(z)`                     |
+| determine if starts with                                | `s.starts_with(z)`                   |
+| get substring                                           | `s.get(r)` (3)                       |
+| get length                                              | `s.len()`                            |
+| get iterator over lines                                 | `s.lines()`                          |
+| parse into another type such as specific number type    | `let v = s.parse::<T>()` (4)         |
+| create `String` that repeat n times                     | `s.repeat(n)`                        |
+| replace all occurrences of z1 with z2                   | `s.replace(z1, z2)`                  |
+| replace first n occurrences of z1 with z2               | `s.replacen(z1, z2, n)`              |
+| split on a character                                    | `s.split(c)` returns an iterator (5) |
+| split on a character n times (last contains rest)       | `s.splitn(n, c)` returns an iterator |
+| split at index                                          | `s.split_at(n)` returns tuple        |
+| split on any amounts of whitespace                      | `s.split_whitespace()`               |
+| remove prefix                                           | `s.strip_prefix(z)` returns `Option` |
+| remove suffix                                           | `s.strip_suffix(z)` returns `Option` |
+| convert `&str` to `String`                              | `s.to_string()`                      |
+| convert `&str` to `String`                              | `String::from(s)`                    |
+| convert `&str` to `String`                              | `s.to_owned()`                       |
+| get lowercase `String`                                  | `s.to_lowercase()`                   |
+| get uppercase `String`                                  | `s.to_uppercase()`                   |
+| get `&str` with leading and trailing whitespace removed | `s.trim()`                           |
+| get `&str` with trailing whitespace removed             | `s.trim_end()`                       |
+| get `&str` with leading whitespace removed              | `s.trim_start()`                     |
 
 1. `start` is inclusive and `end` is exclusive.
 1. The `chars` method can be used to iterate over the characters in a string.
    The `nth` method returns a `Option` object because
    the string may be shorter than the index.
-   To get the `char` from it, use one of the approaches below.
+   See the <a href="#error-handling">Error Handling</a> section
+   for ways to get the `char` from it.
 1. This returns an `Option` object rather than panic on bad indexes.
 1. The `::<T>` syntax is called "turbofish".
-1. Call the `collect` method on this iterator to get a `Vec<&str>`.
+1. The `collect` method can be called on this iterator to get a `Vec<&str>`.
 
 Many `String` methods operate on byte indexes.
 This works for strings that only contain ASCII characters,
-but is dangerous for things that contain multi-byte Unicode characters.
+but is error-prone for strings that contain multi-byte Unicode characters.
 Methods on the `str` type are better for working with Unicode characters.
 
 Here are operations on the `String` type.
@@ -2083,35 +2100,40 @@ require the `String` to be mutable (`mut`).
 | create from `String` and `&str` (1)      | `let u = v + s;`                 |
 | create from multiple `String` values (2) | `let u = v + &w;`                |
 | get `&str` without copying               | `let s = &t;`                    |
+| get `&str` without copying               | `let s = t.as_str();`            |
 | append character                         | `u.push(c)`                      |
 | append `&str`                            | `u += s;`                        |
-| append `String`                          | `u += v;`                        |
 | append `&str`                            | `u.push_str(s)`                  |
-| get substring                            | same as for `&str`               |
+| append `String`                          | `u += v;`                        |
+| get substring                            | `s.get(r)` same as for `&str`    |
 | get substring from index to end          | `s[start..]`                     |
 | get substring from beginning to index    | `s[..end]`                       |
-| get substring where end is inclusive     | `u[start.. =end]`                |
+| get substring where end is exclusive     | `u[start..end]`                  |
+| get substring where end is inclusive     | `u[start..=end]`                 |
 | get `char` at index                      | `&u.chars().nth(index)`          |
 | get length                               | `u.len()`                        |
 | remove and return last character         | `u.pop()`                        |
 
-1. The `String` `u` here must be first.
+1. The `String` `v` here must precede the `&str` s.
 1. All `String` values on the right of `=` after the first
-   must be preceded by `&` which converts it to a `&str`.
+   must be preceded by `&` which converts them to `&str`.
+
+Here's an example of working with Unicode characters:
 
 ```rust
 let my_string = "Santa 🎅 🎄";
+// Get the Santa emoji character.
 let letter = &my_string.chars().nth(6);
 
 // Approach #1
 if let Some(c) = letter {
-    println!("letter is {}", c);
+    println!("letter is {}", c); // 🎅
 }
 
 // Approach #2
 match letter {
-    Some(c) => println!("letter is {}", c),
-    None => {} // ignores when string is shorter
+    Some(c) => println!("letter is {}", c), // 🎅
+    None => () // ignores when string is shorter
 }
 ```
 
@@ -2120,8 +2142,13 @@ that might contain non-ASCII Unicode characters:
 
 ```rust
 fn first_word(s: &str) -> &str {
+    // The chars method returns an iterator.
+    // The enumerate method on the iterator returns a new iterator
+    // over tuples of indexes and values in the receiver iterator.
     for (i, letter) in s.chars().enumerate() {
         if letter == ' ' {
+            // Return all the characters up to,
+            // but not including the space.
             return &s[..i];
         }
     }
@@ -2136,6 +2163,8 @@ fn main() {
     let s = String::from("onelongword");
     let word = first_word(&s);
     println!("{}", word); // onelongword
+
+    println!("{}", first_word("")); // empty string
 }
 ```
 
@@ -2143,8 +2172,8 @@ In many programming languages strings are immutable.
 To make a change you create a new string
 and assign it back to the same variable.
 In Rust the `&mut str` type can be used for this.
-If it is desirable to modify a string in place,
-perhaps for performance reasons, the `mut String` type can be used instead.
+If it is desirable to modify a string in place, perhaps for
+performance reasons, the `mut String` type can be used instead.
 For example:
 
 ```rust
@@ -2152,11 +2181,13 @@ let mut s1 = "first";
 s1 = "second";
 
 let mut s2 = String::from("first");
-s2.replace_range(.., "second");
+s2.replace_range(.., "second"); // range .. is the entire string
 ```
 
 When a `String` reference is passed to a function that expects a `&str`
 it is automatically coerced to that type.
+This is because `String` implements the `Deref` trait with a `Target` of `str`.
+For more on this, see the <a href="#smart-pointers">Smart Pointers</a> section.
 For example:
 
 ```rust
@@ -2166,12 +2197,18 @@ fn my_function(s: &str) {
 
 fn main() {
     let s = String::from("test");
-    my_function(&s);
+    my_function(&s); // ownership is not transferred
     println!("{}", s); // "test"
 }
 ```
 
 ### Vectors
+
+A vector is represented by the `Vec` generic type.
+It is a smart pointer that holds a pointer to the data on the heap,
+a length, and a capacity.
+The capacity is the length to which the data can grow
+before additional space must be allocated (handled automatically).
 
 | Operation    | Syntax       |
 | ------------ | ------------ |
@@ -4232,7 +4269,7 @@ This creates the executable file in the
 `target/x86_64-pc-windows-gnu/release` directory
 with the same name as the project and a `.exe` file extension.
 
-## Smart Pointers
+## <a name="smart-pointers">Smart Pointers</a>
 
 Smart pointers are an alternative to references.
 Each is implemented by a struct that holds metadata
