@@ -2380,17 +2380,26 @@ The `std::collections` namespace defines the `HashSet` generic type.
 
 Here is a summary of commonly used `HashSet` methods:
 
-| Operation                                     | Syntax                   |
-| --------------------------------------------- | ------------------------ |
-| create empty                                  | `let h = HashSet::new()` |
-| insert an item                                | `h.insert(item)` (1)     |
-| remove all items                              | `h.clear()`              |
-| determine if an item is contained             | `h.contains(item)`       |
-| get a reference to an item with a given value | `h.get(value)`           |
-
-TODO: FINISH THIS!
+| Operation                                     | Syntax                     |
+| --------------------------------------------- | -------------------------- |
+| create empty                                  | `let set = HashSet::new()` |
+| remove all items                              | `set.clear()`              |
+| determine if an item is present               | `set.contains(item)`       |
+| get iterator over items not in another set    | `set1.difference(set2)`    |
+| get a reference to an item with a given value | `set.get(value)`           |
+| insert an item                                | `set.insert(item)` (1)     |
+| get iterator over common items in two sets    | `set1.intersection(set2)`  |
+| determine if empty                            | `set.is_empty()`           |
+| determine if a subset of another set          | `set1.is_subset(set2)`     |
+| determine if a superset of another set        | `set1.is_superset(set2)`   |
+| get iterator over all items                   | `set.iter()`               |
+| get number of items (length)                  | `set.len()`                |
+| remove a value                                | `set.remove(value)`        |
+| remove elements that do not match a predicate | `set.retain(pred_fn)` (2)  |
+| get iterator over unique items in two sets    | `set1.union(set2)`         |
 
 1. returns a `bool` indicating if the item was added; `false` if already present
+1. modifies in place
 
 Here is an example of creating and using a `HashSet`
 containing `String` elements.
@@ -2473,10 +2482,27 @@ The `std::collections` namespace defines the `HashMap` generic type.
 
 Here is a summary of commonly used `HashMap` methods:
 
-| Operation | Syntax |
-| --------- | ------ |
+| Operation                                            | Syntax                       |
+| ---------------------------------------------------- | ---------------------------- |
+| create empty                                         | `let map = HashMap::new()`   |
+| remove all items                                     | `map.clear()`                |
+| determine if a key is present                        | `set.contains_key(key)`      |
+| get value associated with a key                      | `map.get(key)` (1)           |
+| get mutable value associated with a key              | `map.get_mut(key)` (1)       |
+| insert key/value pair                                | `map.insert(key, value)` (2) |
+| determine if empty                                   | `map.is_empty()`             |
+| get iterator over key/value pairs as tuples          | `map.iter()`                 |
+| get mutable iterator over key/value pairs as tuples  | `map.iter_mut()`             |
+| get iterator over keys                               | `map.keys()`                 |
+| get number of key/value pairs (length)               | `map.len()`                  |
+| remove a key/value pair                              | `map.remove(key)` (2)        |
+| remove key/value pairs that do not match a predicate | `map.retain(pred_fn)` (3)    |
+| get iterator over values                             | `map.values()`               |
+| get iterator over mutable values                     | `map.values_mut()`           |
 
-TODO: Finish this
+1. returns an `Option`
+1. returns `Some(old_value)` if key was already present and `None` otherwise
+1. modifies in place
 
 Here is an example of creating and using a `HashMap`
 containing `String` keys and `i32` values.
@@ -3646,7 +3672,15 @@ fn main() {
 A trait describes an interface that any type can implement.
 This can include any number of functions and methods.
 The first parameter of methods must be named "self".
-Any `fn` definition that does not is an "associated function" rather than a method.
+Any `fn` definition that does not is an
+"associated function" rather than a method.
+
+The first parameter of a method can be written as `self: &Self`,
+but is typically written using the shorthand `&self`
+which has the same meaning.
+If the first parameter is not a reference,
+the function takes ownership of the receiver object,
+which is almost never desirable.
 
 Often traits are implemented for structs, but they can also
 be implemented for tuples and primitive types like `bool`.
