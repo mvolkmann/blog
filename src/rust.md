@@ -3293,10 +3293,16 @@ that have no state.
 The `impl` keyword adds
 associated functions (like class or static methods in other languages)
 and methods (like instance methods in other languages) to a struct.
-These are distinguished by the name of the first parameter
-which is `self` for methods and anything else for associated functions.
+The first parameter of methods must be named "self".
+Any `fn` definition with no parameters or
+a first parameter with a name other than "self"
+is an "associated function" rather than a method.
 Associated functions are called with `StructName::function_name(arguments)`.
 Methods are called with `instance_variable.method_name(arguments)`.
+
+In an `impl` block the type `Self` refers to the associated struct type.
+Using `Self` in place of the struct name enables renaming the struct
+without needing to change uses of the name inside the `impl` block.
 
 Instances of a struct can be created using its name.
 It is also common to define an associated function named "new"
@@ -3638,14 +3644,19 @@ fn main() {
 ## <a name="traits">Traits</a>
 
 A trait describes an interface that any type can implement.
-Often they are implemented for structs, but
-they can also be implemented for other types like tuples
-and even for primitive types like `bool`.
+This can include any number of functions and methods.
+The first parameter of methods must be named "self".
+Any `fn` definition that does not is an "associated function" rather than a method.
+
+Often traits are implemented for structs, but they can also
+be implemented for tuples and primitive types like `bool`.
+
+A trait function can be described by providing only its signature,
+requiring implementing structs to define the body.
+It can also provide a default implementation that is
+used by implementing types that do not override it.
 
 Traits can be generic, including type parameters.
-
-Trait functions can provide default implementations
-that are used by implementing types that do not override them.
 
 Many functions provided by the standard library are implementations of traits.
 When looking at documentation for a type consider that
@@ -3654,34 +3665,35 @@ for traits that are implemented for the type.
 
 Here is an example of a custom trait named `Distance`
 that is implemented for the custom type `Point2D`.
-We saw in the "Struct" section above that
+We saw in the <a href="#structs">Structs</a> section that
 we can add methods to a struct without defining a trait.
-Doing so is useful when it is desireable to
-implement the same set of methods on many types
-and be able to use the trait as a parameter or return type
-so any type that implements the trait can be used.
+Using a trait useful when it is desireable to
+implement the same set of functions and methods on many types.
+The trait can then be used as a parameter or return type,
+enabling any type that implements the trait can be used.
+This is how Rust achieves polymorphism.
 
 ```rust
+struct Point2D {
+    x: f64,
+    y: f64,
+}
+
+trait Distance<T> {
+    // The type Self here refers to the implementing type.
+    // In the example below, that is the Point2D struct.
+    fn distance_to(self: &Self, other: &Self) -> T;
+}
+
+impl Distance<f64> for Point2D {
+    fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
+        let dx = self.x - other.x;
+        let dy = self.y - other.y;
+        (dx.powi(2) + dy.powi(2)).sqrt()
+    }
+}
+
 fn main() {
-    struct Point2D {
-        x: f64,
-        y: f64,
-    }
-
-    trait Distance<T> {
-        // The type Self here refers to the implementing type.
-        // In the example below, that is the Point2D struct.
-        fn distance_to(self: &Self, other: &Self) -> T;
-    }
-
-    impl Distance<f64> for Point2D {
-        fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
-            let dx = self.x - other.x;
-            let dy = self.y - other.y;
-            (dx.powi(2) + dy.powi(2)).sqrt()
-        }
-    }
-
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
     let d = p1.distance_to(&p2);
@@ -3754,7 +3766,7 @@ Other traits must be manually implemented.
 | `Clone`        | defines a `clone` method that explicitly copies an object                                              | derivable         |
 | `Copy`         | marks a type whose instances can be implicitly copied by assignment or passing by value                | derivable, marker |
 | `Debug`        | outputs a value for debugging using `{:?}` and `{:#?}` in a format string                              | derivable         |
-| `Default`      | defines a `default` static method for getting an empty or default instance of a type                   | derivable         |
+| `Default`      | defines a `default` static method for getting a default instance of a type                             | derivable         |
 | `Deref`        | allows smart pointers to be used like immutable references to the data to which they point             |                   |
 | `DerefMut`     | allows smart pointers to be used like mutable references to the data to which they point               |                   |
 | `Display`      | defines a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |                   |
@@ -3795,7 +3807,7 @@ use std::cmp;
 use std::default::Default;
 use std::ops::{Add, AddAssign, Sub};
 
-// Deriving the Default trait adds a default function
+// Deriving the "Default" trait adds a "default" function
 // that returns an instance of the struct where all the fields
 // are set to their default value, 0 in this case.
 #[derive(Clone, Copy, Debug, Default)]
@@ -3806,7 +3818,7 @@ struct Color {
 }
 
 /*
-// We could manually implement the Default trait as follows
+// We could manually implement the "Default" trait as follows
 // which is useful for fields to have non-default values.
 impl Default for Color {
     fn default() -> Self {
@@ -3819,9 +3831,10 @@ impl Default for Color {
 }
 */
 
-// Implementing the Add trait enables using
-// the + operator to add Color instances.
+// Implementing the "Add" trait enables using
+// the "+" operator to add "Color" instances.
 impl Add for Color {
+    TODO: Describe the use of "type" inside an "impl" block!
     type Output = Self;
 
     fn add(self, other: Self) -> Self {
@@ -3833,8 +3846,8 @@ impl Add for Color {
     }
 }
 
-// Implementing the AddAssign trait enables using
-// the += operator to add a Color instance to a receiver Color.
+// Implementing the "AddAssign" trait enables using
+// the "+=" operator to add a "Color" instance to a receiver "Color".
 impl AddAssign for Color {
     fn add_assign(&mut self, other: Self) {
         self.r = cmp::min(255, self.r + other.r);
@@ -3843,8 +3856,8 @@ impl AddAssign for Color {
     }
 }
 
-// Implementing the Sub trait enables using
-// the - operator to subtract Color instances.
+// Implementing the "Sub" trait enables using
+// the "-" operator to subtract "Color" instances.
 impl Sub for Color {
     type Output = Self;
 
@@ -3857,8 +3870,8 @@ impl Sub for Color {
     }
 }
 
-// Implementing SubAssign to enable using the -= operator
-// would be similar to implementing the AddAssign trait.
+// Implementing the "SubAssign" trait to enable using the "-=" operator
+// would be similar to implementing the "AddAssign" trait.
 
 fn main() {
     let red = Color { r: 255, g: 0, b: 0 };
