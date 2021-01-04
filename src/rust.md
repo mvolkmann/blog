@@ -3403,6 +3403,10 @@ let p3 = Point2D { x: 1, y: 2, z: 3 };
 let p4 = Point3D { z: 4, ..p3 }; // uses p3.x and p3.y, but not p3.z
 ```
 
+Note that it wouldn't make sense to allow including the fields
+of multiple structs because struct fields are never optional.
+Each struct being included would contain all the fields.
+
 A "tuple struct" gives a name to a tuple.
 For example:
 
