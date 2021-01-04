@@ -818,6 +818,7 @@ struct Point2D {
 }
 
 impl fmt::Display for Point2D {
+    // Using "self" as the name of the first parameter makes this a method.
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         write!(formatter, "(x:{}, y:{})", self.x, self.y)
     }
@@ -2190,8 +2191,8 @@ that might contain non-ASCII Unicode characters:
 ```rust
 fn first_word(s: &str) -> &str {
     // The chars method returns an iterator.
-    // The enumerate method on the iterator returns a new iterator
-    // over tuples of indexes and values in the receiver iterator.
+    // The enumerate method on the iterator returns a new iterator over
+    // tuples of indexes and values in the iterator on which it is called.
     for (i, letter) in s.chars().enumerate() {
         if letter == ' ' {
             // Return all the characters up to,
@@ -2629,6 +2630,8 @@ fn main() {
 ```
 
 ## Slices
+
+TODO: Continue reviewing here.
 
 A slice is a reference to a contiguous subset of a collection.
 This is what a `&str` value represents.
@@ -3675,12 +3678,13 @@ The first parameter of methods must be named "self".
 Any `fn` definition that does not is an
 "associated function" rather than a method.
 
-The first parameter of a method can be written as `self: &Self`,
-but is typically written using the shorthand `&self`
-which has the same meaning.
-If the first parameter is not a reference,
-the function takes ownership of the receiver object,
-which is almost never desirable.
+The first parameter of a method can be written as
+`self` (takes ownership or copies),
+`&self` (borrows immutably; most common), or
+`&mut self` (borrows mutably).
+These are shorthand for `self: Self`, `self: &Self`, `self: &mut Self`.
+In first case, if the type implements the `Copy` trait then the value is copied.
+Otherwise ownership is transferred to the method.
 
 Often traits are implemented for structs, but they can also
 be implemented for tuples and primitive types like `bool`.
@@ -3819,7 +3823,7 @@ Other traits must be manually implemented.
 | `Ord`          | compares instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators                                | derivable         |
 | `PartialEq`    | like `Eq`, but for types where some instances are not equal to themselves (2)                          | derivable         |
 | `PartialOrd`   | like `Ord`, but for types where some instances cannot be logically compared to others (3)              | derivable         |
-| `Read`         | defines the `read` method which reads the receiver value into an array of bytes                        |                   |
+| `Read`         | defines the `read` method which reads the receiver value into an array of bytes (4)                    |                   |
 | `Send`         | marks a type whose instance ownership can be transferred from one thread to another                    | marker            |
 | `Sized`        | marks a type whose instance sizes are known a compile time                                             | marker            |
 | `Sync`         | marks a type whose instance references can be shared between threads                                   | marker            |
@@ -3832,6 +3836,7 @@ Other traits must be manually implemented.
    For example, the number value `NaN` is not equal to itself.
 1. For example, the number value `NaN` is not
    less than, equal to, or greater than zero.
+1. The term "receiver" refers to the value to the left of the dot.
 
 Here is an example of implementing some of the built-in traits
 for a custom struct:
