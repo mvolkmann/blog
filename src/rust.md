@@ -2683,8 +2683,6 @@ see <a href="#ranges">Ranges</a>.
 
 ## Conditional Logic
 
-TODO: Continue reviewing here.
-
 The most common way to implement conditional logic is with an `if` expressions.
 The condition is not surrounded by parentheses and
 code to be executed must be surrounded curly brackets,
@@ -2790,22 +2788,6 @@ struct Point2D {
 }
 
 fn main() {
-    let pt = Point2D { x: 3, y: -5 };
-
-    // Can't use floating point values in match patterns.
-    let describe = match pt {
-        Point2D { x: 0, y: 0 } => "origin",
-        Point2D { x: _, y: 0 } => "x-axis",
-        Point2D { x: 0, y: _ } => "y-axis",
-        Point2D { x, y } if x > 0 && y > 0 => "1st quadrant",
-        Point2D { x, y } if x < 0 && y > 0 => "2nd quadrant",
-        Point2D { x, y } if x < 0 && y < 0 => "3rd quadrant",
-        Point2D { x, y } if x > 0 && y < 0 => "4th quadrant",
-        _ => "impossible" // doesn't know about conditions are exhaustive
-    };
-
-    println!("{}", describe); // 4th quadrant
-
     let numbers = vec![3, 8, -1, 12];
 
     // Suppose the numbers are supposed to be between 1 and 10 inclusive
@@ -2820,12 +2802,30 @@ fn main() {
         };
         println!("n is {}", describe); // odd, even, negative, too high
     };
+
+    let pt = Point2D { x: 3, y: -5 };
+
+    // Structs can be matched, but
+    // floating point values cannot be used in match patterns.
+    // This is why the Point2D struct here uses integer values.
+    let describe = match pt {
+        Point2D { x: 0, y: 0 } => "origin",
+        Point2D { x: _, y: 0 } => "x-axis",
+        Point2D { x: 0, y: _ } => "y-axis",
+        Point2D { x, y } if x > 0 && y > 0 => "1st quadrant",
+        Point2D { x, y } if x < 0 && y > 0 => "2nd quadrant",
+        Point2D { x, y } if x < 0 && y < 0 => "3rd quadrant",
+        Point2D { x, y } if x > 0 && y < 0 => "4th quadrant",
+        _ => "impossible" // doesn't know about conditions are exhaustive
+    };
+
+    println!("{}", describe); // 4th quadrant
 }
 ```
 
 Rust does not support the ternary operator (`? :`)
 found in many other programming languages.
-Since `if` forms an expression that has a value,
+Since `if` expressions have a value,
 the following can be written to simulate a ternary:
 
 ```rust
@@ -2856,6 +2856,7 @@ fn main() {
 
 ## <a name="standard-io">Standard IO</a>
 
+TODO: Resume review here.
 The `std::io` namespace supports many input/output operations.
 The members `stdin` and `stdout` are functions that return objects
 with methods for operating on the actual `stdio` and `stdout` streams.
