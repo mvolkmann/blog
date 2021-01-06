@@ -2805,6 +2805,21 @@ fn main() {
     };
 
     println!("{}", describe); // 4th quadrant
+
+    let numbers = vec![3, 8, -1, 12];
+
+    // Suppose the numbers are supposed to be between 1 and 10 inclusive
+    // and we want to know whether each is even, odd,
+    // or invalid because it is outside that range.
+    for n in numbers {
+        let describe = match n {
+            1..=10 if n % 2 == 0 => "even",
+            1..=10 if n % 2 == 1 => "odd",
+            _ if n > 0 => "too high",
+            _ => "negative" // only other possibility
+        };
+        println!("n is {}", describe); // odd, even, negative, too high
+    };
 }
 ```
 
