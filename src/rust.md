@@ -1781,6 +1781,10 @@ The default type for literal integers is `i32` regardless of the processor.
 
 The unsigned integer types are the same, but start with `u` instead of `i`.
 
+Literal number values can end with these type names to make their type explicit.
+For example, the value 19 can be specified to be
+an unsigned, 8-bit integer by writing `19u8`.
+
 Literal integer values can use the underscore character to separate
 thousands, millions, and so on. For example,
 the population of the U.S. in 2020 was approximately 330_676_544.
@@ -2631,9 +2635,9 @@ fn main() {
 
 ## Slices
 
-TODO: Continue reviewing here.
-
-A slice is a reference to a contiguous subset of a collection.
+A slice is a reference to a contiguous subset of a collection
+that is represented by pointer and a length.
+They are often created using a range.
 This is what a `&str` value represents.
 For example:
 
@@ -2651,9 +2655,26 @@ support obtaining slices of their items.
 For example:
 
 ```rust
-let colors = vec!["red", "orange", "yellow", "green", "blue", "purple"];
-for color in &colors[2..=4] {
-  println!("{}", color); // yellow then green then blue
+
+```
+
+Mutable slices allow their items to be mutated.
+For example:
+
+```rust
+fn main() {
+    // Create a vector of &str values.
+    let original = vec!["red", "orange", "yellow", "green", "blue", "purple"];
+
+    // Create a vector of String values from original.
+    let mut colors = original.iter().map(|c| c.to_string()).collect::<Vec<String>>();
+
+    // Change a subset of the colors to uppercase.
+    let subset = &mut colors[1..=3];
+    for color in subset {
+        color.make_ascii_uppercase();
+    }
+    println!("{:?}", colors); // ["red", "ORANGE", "YELLOW", "GREEN", "blue", "purple"]
 }
 ```
 
@@ -2662,9 +2683,12 @@ see <a href="#ranges">Ranges</a>.
 
 ## Conditional Logic
 
-`if` expressions are the most common way to implement conditional logic.
-The condition is not surrounded by parentheses.
-where blocks require surrounding curly brackets.
+TODO: Continue reviewing here.
+
+The most common way to implement conditional logic is with an `if` expressions.
+The condition is not surrounded by parentheses and
+code to be executed must be surrounded curly brackets,
+even if there is only one statement or expression.
 For example:
 
 ```rust
@@ -2677,8 +2701,7 @@ if temperature > 90 {
 }
 ```
 
-The expression can be assigned to a variable.
-Newlines are not required, so this can be written on a single line.
+An `if` expression can be assigned to a variable and newlines are not required.
 For example:
 
 ```rust
@@ -2688,11 +2711,12 @@ let color = if temperature > 90 { "red" } else { "blue" };
 Other ways to implement conditional logic
 include `if let` and `match` expressions
 which use pattern matching to extract a value.
-These were shown in the early "Error Handling" section.
+These were shown in the <a href="#error-handling">Error Handling</a> section.
 
-`match` expressions can be used to match on any kind of value.
-They must be exhaustive, meaning that they
-account for every possible value of the expression being matched.
+A `match` expression can match the following kinds of values:
+boolean, integer, &str, String, and enum.
+These must be exhaustive, meaning that they account for
+every possible value of the expression being matched.
 For example:
 
 ```rust
@@ -2704,14 +2728,21 @@ let holiday = match month {
     "October" => "Halloween",
     "November" => "Thanksgiving",
     "December" => "Christmas",
-    _ => "unknown" // underscore matches an other value
+    _ => "unknown" // underscore matches any other value
 };
 println!("The holiday in {} is {}.", month, holiday);
 ```
 
-The part of each match on the left side of `=>` is called a "match arm".
-It can list multiple values separated by `|` characters.
-It can also specify a numeric range.
+The lines containing `=>` are referred to as "match arms".
+They can match a single pattern or
+multiple patterns separated by `|` characters.
+Patterns can be literal values of the types
+`bool`, `char`, `&str`, non-negative integer, wildcard (`_`),
+tuple of these types, array of these types,
+inclusive range (`m..=n`, not `m..n`), enum variant, or struct.
+There are a few more less commonly used patterns that are supported.
+For details, see {% aTargetBlank
+"https://doc.rust-lang.org/reference/patterns.html", "Patterns" %}.
 
 The part on the right side of `=>` can be an expression or a block.
 
@@ -2748,6 +2779,9 @@ fn main() {
     println!("{} is a {}.", age, category);
 }
 ```
+
+TODO: Add example of a match guard.
+TODO: For example, `Some(x) if x < 10 => process_digit(x),`
 
 Rust does not support the ternary operator (`? :`)
 found in many other programming languages.
@@ -2990,35 +3024,77 @@ Iterators are lazy, meaning that they
 do not pre-compute the values they will return.
 This type supports methods in the following non-exhaustive list:
 
-| Method                | Description                                                                                       |
-| --------------------- | ------------------------------------------------------------------------------------------------- |
-| `all(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for all elements                              |
-| `any(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for any elements                              |
-| `chain(iter2)`        | returns `Iterator` that iterates over combined elements                                           |
-| `collect()`           | returns a `std::vec::Vec` containing all the elements                                             |
-| `count()`             | returns number of elements in `Iterator`, consuming it                                            |
-| `enumerate()`         | returns `Iterator` over tuples of indexes and elements                                            |
-| `filter(pred_fn)`     | returns `Iterator` over elements for which `pred_fn` returns true                                 |
-| `fold(fn)`            | returns result of combining elements into a single value                                          |
-| `last()`              | returns last element in `Iterator`, consuming it                                                  |
-| `map(fn)`             | returns `Iterator` over results of calling a function on each element                             |
-| `max()`               | returns `Option` that wraps the largest element                                                   |
-| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of elements to a function   |
-| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each element to a function              |
-| `min()`               | returns `Option` that wraps the smallest element                                                  |
-| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of elements to a function  |
-| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each element to a function             |
-| `nth(n)`              | returns the nth element                                                                           |
-| `partition(pred_fn)`  | returns two collections containing elements for which a function returns true or false            |
-| `position(pred_fn)`   | returns the first element for which a function returns true                                       |
-| `product()`           | returns the product of number values                                                              |
-| `rev()`               | returns an iterate that iterates in the reverse order                                             |
-| `skip(n)`             | returns an `Iterator` that begins after n elements                                                |
-| `skip_while(pred_fn)` | returns an `Iterator` that begins at the first element for which a function returns false         |
-| `sum()`               | returns the sum of number values                                                                  |
-| `take(n)`             | returns an `Iterator` that stops after the first n elements                                       |
-| `take_while(pred_fn)` | returns an `Iterator` that stops at the last element for which a function returns true            |
-| `zip()`               | returns an `Iterator` over `Option` objects that wrap corresponding elements from two `Iterators` |
+| Method                | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `all(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for all items                              |
+| `any(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for any items                              |
+| `chain(iter2)`        | returns `Iterator` that iterates over combined items                                           |
+| `collect()`           | returns a `std::vec::Vec` containing all the items                                             |
+| `count()`             | returns number of items in `Iterator`, consuming it                                            |
+| `enumerate()`         | returns `Iterator` over tuples of indexes and items                                            |
+| `filter(pred_fn)`     | returns `Iterator` over items for which `pred_fn` returns true                                 |
+| `fold(fn)`            | returns result of combining items into a single value                                          |
+| `last()`              | returns last item in `Iterator`, consuming it                                                  |
+| `map(fn)`             | returns `Iterator` over results of calling a function on each item                             |
+| `max()`               | returns `Option` that wraps the largest item                                                   |
+| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of items to a function   |
+| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each item to a function              |
+| `min()`               | returns `Option` that wraps the smallest item                                                  |
+| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of items to a function  |
+| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each item to a function             |
+| `next()`              | returns `Option` that wraps the next item                                                      |
+| `nth(n)`              | returns the nth item                                                                           |
+| `partition(pred_fn)`  | returns two collections containing items for which a function returns true or false            |
+| `position(pred_fn)`   | returns the first item for which a function returns true                                       |
+| `product()`           | returns the product of number values                                                           |
+| `rev()`               | returns an iterate that iterates in the reverse order                                          |
+| `skip(n)`             | returns an `Iterator` that begins after n items                                                |
+| `skip_while(pred_fn)` | returns an `Iterator` that begins at the first item for which a function returns false         |
+| `sum()`               | returns the sum of number values                                                               |
+| `take(n)`             | returns an `Iterator` that stops after the first n items                                       |
+| `take_while(pred_fn)` | returns an `Iterator` that stops at the last item for which a function returns true            |
+| `zip()`               | returns an `Iterator` over `Option` objects that wrap corresponding items from two `Iterators` |
+
+Here is an example of using the `next` method:
+
+```rust
+fn main() {
+    let colors = ["red", "yellow", "blue"];
+    let mut iter = colors.iter();
+
+    match iter.next() {
+        Some(color) => println!("{}", color), // red
+        None => println!("no more colors")
+    }
+
+    if let Some(color) = iter.next() {
+        println!("{}", color); // yellow
+        if let Some(color) = iter.next() {
+            println!("{}", color); // blue
+        }
+    }
+}
+```
+
+We can also obtain a mutable iterator so the underlying collection
+can be modify while iterating over it.
+For example:
+
+```rust
+fn main() {
+    let mut colors = ["red".to_string(), "yellow".to_string(), "blue".to_string()];
+
+    for color in colors.iter_mut() {
+        color.make_ascii_uppercase();
+    }
+
+    println!("{:?}", colors); // ["RED", "YELLOW", "BLUE"]
+
+    // If we wanted to create a new vector rather than modify one in place ...
+    //let new_colors: Vec<String> =
+    //    colors.iter().map(|s| s.to_uppercase()).collect();
+}
+```
 
 Here is an example of using the `fold` method:
 
@@ -3739,8 +3815,10 @@ fn main() {
 }
 ```
 
-Traits can specify other traits that must also be implemented
-by any structs that implement them. For example:
+Traits can specify other traits that must also be
+implemented by any types that implement them.
+These are referred to as "supertraits".
+For example:
 
 ```rust
 pub trait HockeyPlayer: Athlete + Person {
