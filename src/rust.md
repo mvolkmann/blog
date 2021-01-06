@@ -2780,8 +2780,33 @@ fn main() {
 }
 ```
 
-TODO: Add example of a match guard.
-TODO: For example, `Some(x) if x < 10 => process_digit(x),`
+A "match guard" adds an `if` expression to a match pattern.
+For example:
+
+```rust
+struct Point2D {
+    x: i32,
+    y: i32
+}
+
+fn main() {
+    let pt = Point2D { x: 3, y: -5 };
+
+    // Can't use floating point values in match patterns.
+    let describe = match pt {
+        Point2D { x: 0, y: 0 } => "origin",
+        Point2D { x: _, y: 0 } => "x-axis",
+        Point2D { x: 0, y: _ } => "y-axis",
+        Point2D { x, y } if x > 0 && y > 0 => "1st quadrant",
+        Point2D { x, y } if x < 0 && y > 0 => "2nd quadrant",
+        Point2D { x, y } if x < 0 && y < 0 => "3rd quadrant",
+        Point2D { x, y } if x > 0 && y < 0 => "4th quadrant",
+        _ => "impossible" // doesn't know about conditions are exhaustive
+    };
+
+    println!("{}", describe); // 4th quadrant
+}
+```
 
 Rust does not support the ternary operator (`? :`)
 found in many other programming languages.
