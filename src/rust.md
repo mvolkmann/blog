@@ -1140,6 +1140,7 @@ Finally, automatic dereferencing occurs when
 a reference type is passed to a function or macro.
 This is why we were able to print `f` above
 without specifying `*f`, but that also works.
+Automatic dereferencing makes code less "noisy" than it would otherwise be.
 
 Borrowing does not transfer (also referred to as "move") ownership.
 A borrowed variable can go out of scope without
