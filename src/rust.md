@@ -775,6 +775,11 @@ that can appear inside the curly brackets.
 Here are some examples:
 
 ```rust
+let n = 3;
+println!("{} {}", n * 2, n * 3); // 6, 9
+println!("{2} {1}", n * 3, n * 2); // 6, 9
+println!("{double} {triple}", double = n * 2, triple = n * 3); // 6 9
+
 #[derive(Debug)]
 struct Point2D {
     x: f64,
@@ -885,7 +890,7 @@ There are five ways to declare a variable.
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `let name: type = value;`        | immutable variable that must be assigned a value<br>before it is used and is thereafter immutable                |
 | `let mut name: type = value;`    | mutable variable that must be assigned a value<br>before it is used and can be modified                          |
-| `const name: type = value;`      | constant that must be assigned a value when it is declared                                                       |
+| `const name: type = value;`      | constant that must be assigned a compile-time expression when it is declared, not the result of a function call  |
 | `static name: type = value;`     | immutable variable that lives for the duration of the program                                                    |
 | `static mut name: type = value;` | mutable variable that lives for the duration of the program;<br>can only access in `unsafe` blocks and functions |
 
@@ -2153,10 +2158,12 @@ require the `String` to be mutable (`mut`).
 | create from multiple `String` values (2) | `let u = v + &w;`                |
 | get `&str` without copying               | `let s = &t;`                    |
 | get `&str` without copying               | `let s = t.as_str();`            |
-| append character                         | `u.push(c)`                      |
+| append `char`                            | `u.push(c)`                      |
 | append `&str`                            | `u += s;`                        |
 | append `&str`                            | `u.push_str(s)`                  |
 | append `String`                          | `u += v;`                        |
+| insert `char`                            | `u.insert(index, c)`             |
+| insert `&str`                            | `u.insert_str(v, s)`             |
 | get substring                            | `s.get(r)` same as for `&str`    |
 | get substring from index to end          | `s[start..]`                     |
 | get substring from beginning to index    | `s[..end]`                       |
