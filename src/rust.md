@@ -91,14 +91,6 @@ Making variables immutable by default and
 requiring explicit indication of functions that are
 allowed to modify data significantly reduces these errors.
 
-**Control over number sizes:**
-
-One way to achieve performance in computationally intensive tasks
-is to store collections of numbers in contiguous memory for fast access
-and control the number of bytes used by each number.
-Rust supports a wide variety of number types for
-integer and floating point values of specific sizes.
-
 **Ownership model:**
 
 Manual garbage collection, where developers are responsibly for
@@ -108,6 +100,27 @@ the single scope that currently owns each piece of data.
 unless ownership is transferred to another scope,
 when that scope ends the data can be safely freed
 because no other scope can possibly be using the data.
+
+**Zero-Cost Abstractions:**
+
+Rust strives for zero-cost abstractions characterized by
+this quote from Bjarne Stroustrup, the creator of C++:
+"What you don't use, you don't pay for.
+And further: What you do use, you couldn't hand code any better."
+Rust supports many abstractions that make code more clear,
+but are optimized by the compiler so there is little to no impact
+on performance or the amount of machine code that is generated.
+One example is the use of generic functions that are compiled
+to separate versions for each concrete type used with them
+which eliminates the need for runtime dynamic dispatch.
+
+**Control over number sizes:**
+
+One way to achieve performance in computationally intensive tasks
+is to store collections of numbers in contiguous memory for fast access
+and control the number of bytes used by each number.
+Rust supports a wide variety of number types for
+integer and floating point values of specific sizes.
 
 **WebAssembly:**
 
@@ -1117,12 +1130,19 @@ let g = &e; // another immutable borrow
 println!("f={:?}, g={:?}", f, g);
 ```
 
-References are automatically dereferenced when used.
-This is why we were able to print `f` without specifying `*f`,
-but that also works.
+Any type that acts like a pointer to another type
+(ex. `&variable` and smart pointers like `Box`, `Rc`, and `Arc`)
+can be dereferenced to get the value to which it points.
+This can be done with the `*` operator.
+Automatic dereferencing is performed by the dot operator
+which is used to access a field or method of a type.
+Finally, automatic dereferencing occurs when
+a reference type is passed to a function or macro.
+This is why we were able to print `f` above
+without specifying `*f`, but that also works.
 
-Borrowing does not transfer (also referred to as "move") ownership,
-so a borrowed variable can go out of scope without
+Borrowing does not transfer (also referred to as "move") ownership.
+A borrowed variable can go out of scope without
 freeing the memory associated with the original variable.
 
 When a value is mutable and ownership is borrowed,
@@ -1144,22 +1164,50 @@ e.x += 3.0;
 println!("f = {:?}", f);
 ```
 
-Typically a borrow only needs to read a value.
-But when a value is mutable, we can create one mutable borrow
-as long as there are no immutable borrows.
-This allows changing the value through the borrowed variable.
+Often a borrow only needs to read a value (referred to as
+an "immutable borrow") and any number of these can be created.
+A mutable borrow allows changing a mutable value through the borrowed variable.
+But a mutable borrow can only be created when
+there will be no uses of already created immutable borrows
+until after the last use of the mutable one.
+Also, only one mutable borrow of a given variable can be active at a time.
 The original variable cannot be accessed again
 until after the last access of the borrowed variable.
 For example:
 
 ```rust
-let mut v1 = 10; // mutable variable
-let v2 = &mut v1; // mutable borrow
-*v2 = 11;
+#[derive(Debug)]
+struct Point2D {
+    x: f64,
+    y: f64
+}
 
-// The following statements cannot be reversed.
-println!("v2 = {}", v2); // last access of borrowed variable
-println!("v1 = {}", v1);
+fn main() {
+    let mut pt = Point2D { x: 1.0, y: 2.0 };
+    let ref1 = &pt; // immutable reference
+    println!("{:?}", ref1); // Point2D { x: 1.0, y: 2.0 }
+
+    // Can create and use any number of additional immutable references.
+    let ref2 = &pt;
+    println!("{:?}", ref2); // Point2D { x: 1.0, y: 2.0 }
+
+    // Can use earlier immutable references again.
+    println!("{:?}", ref1); // Point2D { x: 1.0, y: 2.0 }
+
+    // Can create and use a mutable reference.
+    let ref3 = &mut pt;
+    ref3.x = 3.0;
+    println!("{:?}", ref3); // Point2D { x: 3.0, y: 2.0 }
+
+    // Can't use immutable references created before a mutable reference,
+    // even if the mutable reference isn't used to mutate the value.
+    //println!("{:?}", ref1);
+
+    // Can create and use new immutable references because
+    // we are finished with the mutable reference at this point.
+    let ref4 = &pt;
+    println!("{:?}", ref4); // Point2D { x: 3.0, y: 2.0 }
+}
 ```
 
 An alternative to borrowing is to clone data,
