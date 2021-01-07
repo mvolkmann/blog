@@ -289,12 +289,12 @@ Resources are learning Rust include:
 
 ## Terminology
 
-- <a href="#cargo">Cargo</a>
+- [Cargo](#cargo)
   - a command-line utility for building and running Rust programs
-- <a href="#crates">crate</a>
+- [crate](#crates)
   - a tree of modules
   - two types, binary (bin) or library (lib)
-- <a href="#enums">enum</a>
+- [enum](#enums)
   - a named type whose values come from a list of named variants
   - in Rust, these variants can have associated data
   - a key feature of Rust error handling
@@ -304,10 +304,10 @@ Resources are learning Rust include:
   - time period during which a variable can be access,
     starting when it is created and ending when it is freed (a.k.a dropped)
   - often associated with the scope of a particular code block
-- <a href="#macros">macro</a>
+- [macro](#macros)
   - a function-like construct whose name ends in `!`
     and generates code at compile-time
-- <a href="modules">module</a>
+- [module](#modules)
   - set of related values such as constants and functions
 - package
   - `cargo` feature for building, testing, and sharing crates
@@ -316,14 +316,14 @@ Resources are learning Rust include:
 - panic
   - represents an unrecoverable error that causes a program to terminate,
     print a stack trace, and print an error message
-- <a href="#structs">struct</a>
+- [struct](#structs)
   - a named collection of fields similar to a class in other languages
   - can have associated functions and methods
-- <a href="#traits">trait</a>
+- [trait](#traits)
   - a named collection of constants, function signatures,
     and optional default implementations
   - similar to interfaces in other languages
-- <a href="#toml">TOML</a>
+- [TOML](#toml)
   - a configuration file format used by Cargo
   - stands for Tom's Obvious, Minimal Language
 
@@ -452,11 +452,11 @@ fn main() {
 ```
 
 Note that calls to names that end in `!` (like `println!`)
-are calls to a <a href="#macros">macro</a> rather than a function.
+are calls to a [macro](#macros) rather than a function.
 
 Typically the `rustc` command is not used directly.
 Instead the `cargo` command,
-described in the <a href="#cargo">Cargo</a> section,
+described in the [Cargo](#cargo) section,
 is used to run `rustc` and the resulting executable.
 
 ## VS Code
@@ -486,8 +486,7 @@ Add the following in `settings.json`:
 
 Note that this extension only works if
 the opened folder contains a `Cargo.toml` file.
-See the <a href="#cargo">Cargo</a> section
-for details on creating this.
+See the [Cargo](#cargo) section for details on creating this.
 
 ## <a name="toml">TOML</a>
 
@@ -727,7 +726,7 @@ Examples include `dead_code`, `unreachable_code`, `unused_assignment`,
 `unused_imports`, and `unused_variables`.
 These warnings can be disabled using `allow` attributes.
 
-The <a href="#trait-table">table of provided traits</a> in the "Traits" section
+The [table of provided traits](#trait-table) in the "Traits" section
 indicates those can be automatically implemented using the `derive` attribute.
 For more detail, see {% aTargetBlank
 "https://doc.rust-lang.org/rust-by-example/trait/derive.html", "Derive" %}.
@@ -1587,7 +1586,7 @@ fn main() {
 }
 ```
 
-The <a href="#error-handling">Error Handling</a> section
+The [Error Handling](#error-handling) section
 describes the `Option` and `Result` enums
 that are provided by the standard library.
 These contain variants that hold data,
@@ -1928,7 +1927,7 @@ fn main() {
 }
 ```
 
-The <a href="#macros">Macros</a> section shows one more approach.
+The [Macros](#macros) section shows one more approach.
 
 ## Generics
 
@@ -1988,7 +1987,7 @@ Rust provides the `Vec` (vector) type for creating
 variable-length lists of values that have the same type.
 These can be used in place of arrays when the number of values varies.
 Operating on an array or `Vec` often requires
-obtaining an <a href="#iterators">`Iterator`</a>.
+obtaining an [`Iterator`](#iterators).
 For example, that is where the methods `map`, `filter`, and `fold` are found.
 
 ## Collections
@@ -2083,7 +2082,7 @@ These calls are inlined so they all have the same performance.
 When a `String` reference is passed to a function that expects a `&str`
 it is automatically coerced to that type.
 This is because `String` implements the `Deref` trait with a `Target` of `str`.
-For more on this, see the <a href="#smart-pointers">Smart Pointers</a> section.
+For more on this, see the [Smart Pointers](#smart-pointers) section.
 For example:
 
 ```rust
@@ -2181,7 +2180,7 @@ Here are operations on the `str` type:
 1. The `chars` method can be used to iterate over the characters in a string.
    The `nth` method returns a `Option` object because
    the string may be shorter than the index.
-   See the <a href="#error-handling">Error Handling</a> section
+   See the [Error Handling](#error-handling) section
    for ways to get the `char` from it.
 1. This returns an `Option` object rather than panic on bad indexes.
 1. The `::<T>` syntax is called "turbofish".
@@ -2340,7 +2339,7 @@ Here is a summary of commonly used `Vec` methods:
 1. `range` specifies indexes to remove and
    `iter` specifies items to insert in their place.
 
-Also see the <a href="#iterators">Iterator</a> methods
+Also see the [Iterator](#iterators) methods
 that include `filter`, `map`, `fold` (like `reduce` in JavaScript),
 `min`, `max`, `sum`, `product`, and more.
 
@@ -2370,7 +2369,7 @@ fn main() {
 When a `Vec` reference is passed to a function that expects a slice reference
 it is automatically coerced to that type.
 This is because `Vec<T>` implements the `Deref` trait with a `Target` of `[T]`.
-For more on this, see the <a href="#smart-pointers">Smart Pointers</a> section.
+For more on this, see the [Smart Pointers](#smart-pointers) section.
 For example:
 
 ```rust
@@ -2734,8 +2733,7 @@ fn main() {
 }
 ```
 
-For details on the syntax for specifying ranges,
-see <a href="#ranges">Ranges</a>.
+For details on the syntax for specifying ranges, see [Ranges](#ranges).
 
 ## Conditional Logic
 
@@ -2765,7 +2763,7 @@ let color = if temperature > 90 { "red" } else { "blue" };
 Other ways to implement conditional logic
 include `if let` and `match` expressions
 which use pattern matching to extract a value.
-These were shown in the <a href="#error-handling">Error Handling</a> section.
+These were shown in the [Error Handling](#error-handling) section.
 
 A `match` expression can match the following kinds of values:
 boolean, integer, &str, String, and enum.
@@ -2910,70 +2908,6 @@ fn main() {
 }
 ```
 
-## <a name="standard-io">Standard IO</a>
-
-TODO: Resume review here.
-The `std::io` namespace supports many input/output operations.
-The members `stdin` and `stdout` are functions that return objects
-with methods for operating on the actual `stdio` and `stdout` streams.
-
-The `stdin` methods like `read_line` and
-`stdout` methods like `write` and `flush`
-return a `Result` enum value.
-
-```rust
-// The Write trait is required in order to use the flush method.
-use std::io::{stdin, stdout, Write};
-
-fn main() {
-    let mut buffer = String::new();
-
-    loop {
-        print!("Command: ");
-        stdout().flush().unwrap();
-        stdin().read_line(&mut buffer).unwrap();
-        buffer.pop(); // removes newline from end of buffer
-
-        if buffer == "quit" {
-            break;
-     }
-
-      println!("You entered {}.", buffer);
-
-      buffer.clear(); // prepares to reuse buffer
-  }
-}
-```
-
-Here is a modified version of the code above that uses the `text_io` crate:
-To use this, add the following to the dependency
-`text_io = "0.1.8"` in Cargo.toml.
-It also adds a `print_flush` function to simplify
-writing to `stdout` without including a newline.
-
-```rust
-use std::io::{self, Write};
-
-use text_io::read;
-
-fn print_flush(text: &str) {
-  let mut stdout = io::stdout();
-  stdout.write(text.as_bytes()).unwrap();
-  stdout.flush().unwrap();
-}
-
-fn main() {
-  loop {
-    print_flush("Command: ");
-    let command: String = read!("{}\n"); // reads until newline and omits it
-    if command == "quit" {
-      break;
-    }
-    println!("You entered {}.", command);
-  }
-}
-```
-
 ## Iteration (Looping)
 
 Rust supports the following looping expressions:
@@ -2985,8 +2919,11 @@ Rust supports the following looping expressions:
 | `while let` | like `while`, but repeats as long as a pattern match succeeds             |
 | `for`       | for looping over an iterator                                              |
 
-For an example using `loop`, see the [Standard IO](#standard-io) section.
+See the [Standard IO](#standard-io) section for an example using `loop`.
+While not commonly used, the `break` keyword can be followed by
+an expression whose value becomes the value of the `loop` expression.
 
+TODO: Resume review here.
 TODO: Do something with the following example code.
 
 Here's an example of using a `while` loop:
@@ -3876,7 +3813,7 @@ for traits that are implemented for the type.
 
 Here is an example of a custom trait named `Distance`
 that is implemented for the custom type `Point2D`.
-We saw in the <a href="#structs">Structs</a> section that
+We saw in the [Structs](#structs) section that
 we can add methods to a struct without defining a trait.
 Using a trait useful when it is desireable to
 implement the same set of functions and methods on many types.
@@ -4172,6 +4109,72 @@ Call the new version of the macro as follows:
 
 ```rust
 implement_days! { i8, i16, i32, i64, i128 }
+```
+
+## <a name="standard-io">Standard IO</a>
+
+The `std::io` namespace supports many input/output operations.
+The members `stdin` and `stdout` are functions that return objects
+with methods for operating on the `stdio` and `stdout` streams.
+
+The `stdin` methods like `read_line` and
+`stdout` methods like `write` and `flush`
+return a `Result` enum value.
+For example:
+
+```rust
+// The Write trait must be in scope in order to use the flush method.
+use std::io::{stdin, stdout, Write};
+
+fn main() {
+    let mut buffer = String::new();
+
+    loop {
+        // Output a prompt.
+        print!("Command: ");
+        // Flush stdio without writing a newline character.
+        stdout().flush().unwrap();
+
+        stdin().read_line(&mut buffer).unwrap();
+        buffer.pop(); // removes newline from end of buffer
+
+        if buffer == "quit" {
+            break;
+        }
+
+        println!("You entered {}.", buffer);
+
+        buffer.clear(); // prepares to reuse buffer
+    }
+}
+```
+
+Here is a modified version of the code above that uses the `text_io` crate:
+To use this, add the dependency `text_io = "0.1.8"` in the `Cargo.toml` file.
+This also adds a `print` function to simplify
+writing to `stdout` without including a newline.
+
+```rust
+use std::io::{self, Write};
+
+use text_io::read;
+
+fn print(text: &str) {
+  let mut stdout = io::stdout();
+  stdout.write(text.as_bytes()).unwrap();
+  stdout.flush().unwrap();
+}
+
+fn main() {
+  loop {
+    print("Command: ");
+    let command: String = read!("{}\n"); // reads until newline and omits it
+    if command == "quit" {
+      break;
+    }
+    println!("You entered {}.", command);
+  }
+}
 ```
 
 ## File IO
@@ -4659,6 +4662,7 @@ Commonly used crates found here include:
 - {% aTargetBlank "https://crates.io/crates/log", "log" %} - logging API
 - {% aTargetBlank "https://crates.io/crates/num-traits", "log" %} - generic mathematics
 - {% aTargetBlank "https://crates.io/crates/rand", "rand" %} - random number generation
+- {% aTargetBlank "https://crates.io/crates/rayon", "rayon" %} - "data-parallelism library"
 - {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %} - HTTP client
 - {% aTargetBlank "https://crates.io/crates/rocket", "rocket" %} - web framework
 - {% aTargetBlank "https://crates.io/crates/serde", "serde" %} - data structure serialization, including JSON
