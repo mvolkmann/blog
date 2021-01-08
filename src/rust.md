@@ -2505,6 +2505,7 @@ struct Dog {
 impl Dog {
     // This is a constructor function where
     // the name "new" is used by convention.
+    // The type "Self" here refers to "Dog".
     fn new(name: &str, breed: &str) -> Self {
         Self {
             name: name.to_string(),
@@ -2649,7 +2650,7 @@ struct Dog {
 }
 impl Dog {
     fn new(name: &str, breed: &str) -> Self {
-        Dog {
+        Self {
             name: name.to_string(),
             breed: breed.to_string()
         }
@@ -2924,7 +2925,7 @@ While not commonly used, the `break` keyword can be followed by
 an expression whose value becomes the value of the `loop` expression.
 
 TODO: Resume review here.
-TODO: Do something with the following example code.
+TODO: Do something more with the following example code.
 
 Here's an example of using a `while` loop:
 
@@ -3130,7 +3131,8 @@ fn main() {
 }
 ```
 
-Here is an example of using the `fold` method:
+Here is an example of using the `fold` method
+which is like `reduce` in some other programming languages:
 
 ```rust
 let a1 = [1, 2, 3];
@@ -3195,6 +3197,53 @@ assert_eq!(iter.next(), Some((&1, &4)));
 assert_eq!(iter.next(), Some((&2, &5)));
 assert_eq!(iter.next(), Some((&3, &6)));
 assert_eq!(iter.next(), None);
+```
+
+Here is an example of using the `take` method
+to get a certain number of initial values from an iterator:
+
+```rust
+#[derive(Debug)]
+struct Student {
+    name: String,
+    scores: Vec<f32>,
+}
+
+impl Student {
+    fn new(name: &str, scores: &[f32]) -> Self {
+        Self {
+            name: name.to_string(),
+            scores: scores.to_vec(),
+        }
+    }
+}
+
+fn average(numbers: &[f32]) -> f32 {
+    numbers.iter().sum::<f32>() / numbers.len() as f32
+}
+
+fn main() {
+    // This is mutable because the sort_by method sorts it in place.
+    let mut students: Vec<Student> = vec![
+        Student::new("Alice", &[90.0, 75.0, 80.0]),
+        Student::new("Betty", &[85.0, 95.0, 80.0]),
+        Student::new("Claire", &[70.0, 80.0, 75.0]),
+        Student::new("Dina", &[95.0, 100.0, 90.0]),
+        Student::new("Elaine", &[75.0, 90.0, 100.0]),
+    ];
+
+    // Sort the students in descending order by their average scores.
+    students.sort_by(|a, b| {
+        let a_avg = average(&a.scores);
+        let b_avg = average(&b.scores);
+        b_avg.partial_cmp(&a_avg).unwrap()
+    });
+
+    // Print the names of the top 3 students.
+    for student in students.iter().take(3) {
+      println!("{}", student.name);
+    }
+}
 ```
 
 ## Regular Expressions
