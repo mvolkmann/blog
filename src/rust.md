@@ -976,6 +976,8 @@ define the following function and pass a reference to it:
 
 ```rust
 fn print_type<T>(_: &T) {
+    // The syntax ::<T> is referred to as the "turbofish operator"
+    // and is described later.
     println!("{}", std::any::type_name::<T>())
 }
 ```
@@ -2187,7 +2189,7 @@ Here are operations on the `str` type:
    See the [Error Handling](#error-handling) section
    for ways to get the `char` from it.
 1. This returns an `Option` object rather than panic on bad indexes.
-1. The `::<T>` syntax is called "turbofish".
+1. The `::<T>` syntax is called "turbofish" and is described later.
 1. The `collect` method can be called on this iterator to get a `Vec<&str>`.
 
 Many `String` methods operate on byte indexes.
@@ -2393,7 +2395,41 @@ fn main() {
 ```
 
 Writing functions that operate on any numeric type is tricky,
-but it can be done. This involves using the {% aTargetBlank
+but it can be done. For example:
+
+```rust
+// The trait bound "impl Copy + Into<f32>" means that this
+// takes a slice of any type that can be copied
+// and can be converted to the f32 type.
+// This is the case for all the primitive numbers types except f64.
+// This approach is more flexible than declaring the parameter
+// to be "&[i32]" which only accepts a slice of i32 values.
+fn sum(numbers: &[impl Copy+Into<f32>]) -> f32 {
+    // The map part below can also be written as ".map(|x| x.into())".
+    numbers.iter().copied().map(Into::into).sum::<f32>()
+}
+
+fn average(numbers: &[impl Copy+Into<f32>]) -> f32 {
+    sum(numbers) / numbers.len() as f32
+}
+
+
+fn main() {
+    let numbers = [200u8, 255u8, 3u8];
+    let total = sum(&numbers);
+    println!("total = {}", total); // 458 which would overflow u8
+
+    let scores: Vec<u8> = vec![70, 90, 85, 100];
+
+    // Print average of all scores.
+    println!("average = {:.1}", average(&scores)); // 86.2
+
+    // Print average of all scores except the first.
+    println!("average = {:.1}", average(&scores[1..])); // 91.7
+}
+```
+
+Another approach is to use the {% aTargetBlank
 "https://crates.io/crates/num", "num" %} crate.
 Add this as a dependency in `Cargo.toml` with a line like `num = "0.3.1"`.
 
@@ -2422,17 +2458,6 @@ fn average<T: AddAssign + Copy + Num + ToPrimitive>(numbers: &[T]) -> f32 {
     }
     let numerator = sum.to_f32().unwrap();
     numerator / numbers.len() as f32
-}
-
-fn main() {
-    //let scores = vec![70, 90, 85, 100];
-    let scores = vec![70.1, 90.2, 85.3, 99.4];
-
-    // Print average of all scores.
-    println!("average = {:.1}", average(&scores)); // 86.2
-
-    // Print average of all scores except the first.
-    println!("average = {:.1}", average(&scores[1..])); // 91.7
 }
 ```
 
