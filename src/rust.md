@@ -2385,8 +2385,8 @@ fn average_i32(numbers: &[i32]) -> f32 {
     // For example:
     // let numerator: i32 = numbers.iter().sum();
     // numerator as f32 / numbers.len() as f32
-    // Another approach is to use the turbofish qualifier
-    // which is ideal to specify the type in the middle of a longer expression.
+    // Another approach is to use the turbofish qualifier which is
+    // ideal for specifying the type in the middle of a longer expression.
     // For example:
     numbers.iter().sum::<i32>() as f32 / numbers.len() as f32
 }
@@ -3118,44 +3118,44 @@ fn main() {
 
 ## <a name="iterators">Iterators</a>
 
-TODO: Continue review from here.
-
 Many Rust methods return a `std::iter::Iterator` that
 can be used to iterate over the elements of a collection.
 Iterators are lazy, meaning that they
 do not pre-compute the values they will return.
-This type supports methods in the following non-exhaustive list:
+The `Iterator` type supports methods in the following non-exhaustive list:
 
-| Method                | Description                                                                                    |
-| --------------------- | ---------------------------------------------------------------------------------------------- |
-| `all(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for all items                              |
-| `any(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for any items                              |
-| `chain(iter2)`        | returns `Iterator` that iterates over combined items                                           |
-| `collect()`           | returns a `std::vec::Vec` containing all the items                                             |
-| `count()`             | returns number of items in `Iterator`, consuming it                                            |
-| `enumerate()`         | returns `Iterator` over tuples of indexes and items                                            |
-| `filter(pred_fn)`     | returns `Iterator` over items for which `pred_fn` returns true                                 |
-| `fold(fn)`            | returns result of combining items into a single value                                          |
-| `last()`              | returns last item in `Iterator`, consuming it                                                  |
-| `map(fn)`             | returns `Iterator` over results of calling a function on each item                             |
-| `max()`               | returns `Option` that wraps the largest item                                                   |
-| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of items to a function   |
-| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each item to a function              |
-| `min()`               | returns `Option` that wraps the smallest item                                                  |
-| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of items to a function  |
-| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each item to a function             |
-| `next()`              | returns `Option` that wraps the next item                                                      |
-| `nth(n)`              | returns the nth item                                                                           |
-| `partition(pred_fn)`  | returns two collections containing items for which a function returns true or false            |
-| `position(pred_fn)`   | returns the first item for which a function returns true                                       |
-| `product()`           | returns the product of number values                                                           |
-| `rev()`               | returns an iterate that iterates in the reverse order                                          |
-| `skip(n)`             | returns an `Iterator` that begins after n items                                                |
-| `skip_while(pred_fn)` | returns an `Iterator` that begins at the first item for which a function returns false         |
-| `sum()`               | returns the sum of number values                                                               |
-| `take(n)`             | returns an `Iterator` that stops after the first n items                                       |
-| `take_while(pred_fn)` | returns an `Iterator` that stops at the last item for which a function returns true            |
-| `zip()`               | returns an `Iterator` over `Option` objects that wrap corresponding items from two `Iterators` |
+| Method                | Description                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------------------- |
+| `all(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for all items                             |
+| `any(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for any items                             |
+| `chain(iter2)`        | returns `Iterator` that iterates over combined items                                          |
+| `collect()`           | returns a `std::vec::Vec` containing all the items                                            |
+| `count()`             | returns number of items in `Iterator`, consuming it                                           |
+| `enumerate()`         | returns `Iterator` over tuples of indexes and items                                           |
+| `filter(pred_fn)`     | returns `Iterator` over items for which `pred_fn` returns true                                |
+| `fold(fn)`            | returns result of combining items into a single value; like `reduce` in other languages       |
+| `last()`              | returns last item in `Iterator`, consuming it                                                 |
+| `map(fn)`             | returns `Iterator` over results of calling a function on each item                            |
+| `max()`               | returns `Option` that wraps the largest item                                                  |
+| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of items to a function  |
+| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each item to a function             |
+| `min()`               | returns `Option` that wraps the smallest item                                                 |
+| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of items to a function |
+| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each item to a function            |
+| `next()`              | returns `Option` that wraps the next item                                                     |
+| `nth(n)`              | returns `Option` that wraps the nth item                                                      |
+| `partition(pred_fn)`  | returns two collections containing items for which a function returns true or false           |
+| `position(pred_fn)`   | returns `Option` that wraps the index of first item for which `pred_fn` returns true          |
+| `product()`           | returns product of items; panics on overflow                                                  |
+| `rev()`               | returns `Iterator` that iterates in reverse order                                             |
+| `skip(n)`             | returns `Iterator` that begins after n items                                                  |
+| `skip_while(pred_fn)` | returns `Iterator` that begins at first item for which `pred_fn` returns false                |
+| `sum()`               | returns sum of items; panics on overflow                                                      |
+| `take(n)`             | returns `Iterator` that stops after the first n items                                         |
+| `take_while(pred_fn)` | returns `Iterator` that stops at last item for which `pred_fn` returns true                   |
+| `zip(iter2)`          | returns `Iterator` over `Option` objects that wrap corresponding items from two `Iterators`   |
+
+TODO: Continue review from here.
 
 Here is an example of using the `next` method:
 
