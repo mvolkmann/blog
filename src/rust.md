@@ -976,7 +976,7 @@ define the following function and pass a reference to it:
 
 ```rust
 fn print_type<T>(_: &T) {
-    // The syntax ::<T> is referred to as the "turbofish operator"
+    // The syntax ::<T> is referred to as the "turbofish" qualifier
     // and is described later.
     println!("{}", std::any::type_name::<T>())
 }
@@ -2380,6 +2380,14 @@ For example:
 
 ```rust
 fn average_i32(numbers: &[i32]) -> f32 {
+    // The "sum" generic function doesn't know what its output type should be,
+    // so that must be specified.  One approach to specify it as the type of a variable that will hold return value.
+    // For example:
+    // let numerator: i32 = numbers.iter().sum();
+    // numerator as f32 / numbers.len() as f32
+    // Another approach is to use the turbofish qualifier
+    // which is ideal to specify the type in the middle of a longer expression.
+    // For example:
     numbers.iter().sum::<i32>() as f32 / numbers.len() as f32
 }
 
