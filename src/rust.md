@@ -4161,8 +4161,9 @@ Traits can be used as parameter and return types to
 specify that any type which implements it can be substituted.
 Specifying traits as a qualifier on a generic type
 is referred to a "trait bound".
-In this example the "print_string" function takes a "&str" and
-any type that implements both the "Debug" and "ToString" traits.
+In this example the first parameter of the "print_string" function
+is a "&str" and the second is any type that
+implements both the "Debug" and "ToString" traits.
 The compiler will generate separate versions of the function
 for each concrete type passed as the second argument.
 
@@ -4199,7 +4200,22 @@ fn main() {
 }
 ```
 
-TODO: Should you also show an example using the `dyn` keyword?
+Another approach is to use the `dyn` keyword.
+This causes the compiler to generate a single version of the function
+that uses runtime dynamic dispatch.
+Here is a new version of the `print_string` function that does this:
+
+```rust
+// We need to define a new trait that combines the desired traits
+// because only one trait name can follow the `dyn` keyword.
+trait Printable: Debug + ToString {}
+impl<T: Debug + ToString> Printable for T {}
+
+fn print_string(label: &str, value: &dyn Printable) {
+  println!("{}: {}", label, value.to_string());
+  println!("debug: {:?}", value);
+}
+```
 
 ## <a name="macros">Macros</a>
 
