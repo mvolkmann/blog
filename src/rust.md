@@ -25,7 +25,10 @@ Features of Rust include:
 - ownership model to guarantee memory-safety and thread-safety
 - targets {% aTargetBlank "https://llvm.org", "LLVM" %}  
   Rust programs Runs on a wide variety of platforms targeted by LLVM.
-- ability to call and be called by C/C++ (but calling C is easier)
+- ability to call and be called by languages that support
+  the C Application Binary Interface (ABI)
+  (includes C, C++, Go, Java, Python, and Ruby)
+  with no overhead
 - functional  
   Functions can be stored in variables,
   passed to functions, and returned from functions.
