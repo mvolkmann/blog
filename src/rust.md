@@ -3355,7 +3355,6 @@ let v2: Vec<i32> = v1.iter().map(|n| n * 2).collect();
 println!("{:?}", v2); // [2, 4, 6]
 ```
 
-TODO: Continue review from here.
 Here is an example of using the `zip` method:
 
 ```rust
@@ -3372,6 +3371,7 @@ assert_eq!(iter.next(), Some((&3, &6)));
 assert_eq!(iter.next(), None); // extra item in a2 ignored
 ```
 
+TODO: Continue review from here.
 Here is an example of using the `take` method
 to get a certain number of initial values from an iterator:
 
@@ -4201,7 +4201,7 @@ fn main() {
 ```
 
 Another approach is to use the `dyn` keyword.
-This causes the compiler to generate a single version of the function
+This causes the compiler to generate a single version of a function
 that uses runtime dynamic dispatch.
 Here is a new version of the `print_string` function that does this:
 
