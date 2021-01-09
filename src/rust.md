@@ -112,7 +112,8 @@ but are optimized by the compiler so there is little to no impact
 on performance or the amount of machine code that is generated.
 One example is the use of generic functions that are compiled
 to separate versions for each concrete type used with them
-which eliminates the need for runtime dynamic dispatch.
+which eliminates the need for runtime dynamic dispatch
+(referred to as "monomorphism").
 
 **Control over number sizes:**
 
@@ -2924,17 +2925,42 @@ See the [Standard IO](#standard-io) section for an example using `loop`.
 While not commonly used, the `break` keyword can be followed by
 an expression whose value becomes the value of the `loop` expression.
 
-TODO: Resume review here.
-TODO: Do something more with the following example code.
-
 Here's an example of using a `while` loop:
 
 ```rust
-let numbers = [1, 7, 5, 2, 9, 6];
-let mut i = 0;
-while numbers[i] % 2 == 1 {
-    println!("{} is odd", numbers[i]);
-    i += 1;
+struct Item {
+    name: String,
+    price: u32 // in cents
+}
+
+fn main() {
+    let items: Vec<Item> = vec![
+        Item { name: "milk".to_string(), price: 289 },
+        Item { name: "bread".to_string(), price: 349 },
+        Item { name: "orange juice".to_string(), price: 479 },
+        Item { name: "cheese".to_string(), price: 399 },
+        Item { name: "cereal".to_string(), price: 379 },
+    ];
+    let len = items.len();
+
+    let mut wallet = 1200; // $12
+
+    // Buy items until there isn't enough left in the wallet.
+    let mut index = 0;
+    while index < len && wallet >= items[index].price {
+      wallet -= items[index].price;
+      println!("bought {}", items[index].name); // milk, bread, and orange juice
+      index += 1;
+    }
+
+    // Here is a somewhat nicer approach using a for loop:
+    /*
+    for item in items {
+        if wallet < item.price { break; }
+        wallet -= item.price;
+        println!("bought {}", item.name); // milk, bread, and orange juice
+    }
+    */
 }
 ```
 
@@ -2950,9 +2976,10 @@ use rand::Rng;
 
 // Pretend this function makes a REST call that could possibly fail.
 async fn get_data() -> Result<i8, &'static str> {
+  // rng stands for "random number generator".
   let mut rng = rand::thread_rng();
   let n = rng.gen_range(1, 11); // number from 1 to 10
-  println!("get_data: n = {}", n);
+  // Fail if n is greater than 7.
   if n <= 7 { Ok(n) } else { Err("failed") }
 }
 
@@ -2961,7 +2988,7 @@ fn main() {
     let result = block_on(get_data());
     match result {
         Ok(n) => println!("in single call, n = {}", n),
-        Err(msg) => println!("get_data error: {}", msg)
+        Err(msg) => println!("error: {}", msg)
     }
 
     // Here is an approach for processing calls in a loop
@@ -2976,9 +3003,8 @@ A `for` loop is used to iterate over any kind of iterator.
 It can operate on an explicitly obtained iterator or
 it can obtain an iterator from any type that
 implements the `IntoIterator` trait.
-Collection types typically implement this.
-Examples include `Range`, `HashMap`, `HashSet`, and `Vec`,
-but not arrays or tuples.
+Collection types such as `Range`, `HashMap`, `HashSet`, and `Vec`
+implement this, but arrays and tuples do not.
 For example:
 
 ```rust
@@ -2993,21 +3019,21 @@ fn main() {
         println!("loop 2: n = {}", n);
     }
 
-    // Iterating over the items in a tuple is not supported,
-    // but we can iterate over the items in an array.
+    // Iterating over the items in a tuple is not supported, but we
+    // can iterate over the items in an array using the "iter" method.
     let num_arr = [1, 7, 5, 2, 9, 6];
     for n in num_arr.iter() {
         println!("loop 3: n = {:?}", n);
     }
 
     // The iter_mut method allows items to be mutated during iteration.
-    let mut mut_num_arr = [1, 7, 5, 2, 9, 6];
+    let mut num_arr = [1, 7, 5, 2, 9, 6];
     // Double all the numbers during iteration.
-    for n in mut_num_arr.iter_mut() {
+    for n in num_arr.iter_mut() {
         *n *= 2;
     }
-    for n in mut_num_arr.iter() {
-        println!("loop 4: {:?}", n);
+    for n in num_arr.iter() {
+        println!("loop 4: {:?}", n); // values are doubled
     }
 
     // Another approach is to create a new array of modified values
@@ -3017,15 +3043,16 @@ fn main() {
 
     // We can call the map method on an iterator
     // to create a new iterator over doubled numbers.
-    let new_iter = mut_num_arr.iter().map(|n| n * 2);
+    let new_iter = num_arr.iter().map(|n| n * 2);
     for n in new_iter {
-        println!("loop 5: {:?}", n);
+        println!("loop 5: {:?}", n); // values are doubled
     }
 
-    // We can iterate over the items in a vector.
+    // We can iterate over the items in a vector
+    // without calling the "iter" method.
     let num_vec = vec![1, 7, 5, 2, 9, 6];
     for n in num_vec {
-        println!("loop 3: n = {:?}", n);
+        println!("loop 6: n = {:?}", n);
     }
 }
 ```
@@ -3033,8 +3060,8 @@ fn main() {
 Let's look at one more iteration example that requires specifying lifetimes.
 The function `longest` is passed a reference to an array of strings.
 There are three lifetimes to consider, that of the array,
-that of the elements inside it, and that of the return value.
-Rust wants to know that the array elements
+that of the items inside it, and that of the return value.
+Rust wants to know that the array items
 will live as long as the return value
 since one of them will be returned.
 We must specify that with lifetime annotations (`'a` below).
@@ -3046,12 +3073,16 @@ fn longest<'a>(strings: &[&'a str]) -> &'a str {
         .fold("", |acc, s| if s.len() > acc.len() { s } else { acc })
 }
 
-let fruits = ["apple", "banana", "cherry", "date"];
-let result = longest(&fruits);
-println!("longest is {}", result);
+fn main() {
+    let fruits = ["apple", "banana", "cherry", "date"];
+    let result = longest(&fruits);
+    println!("longest is {}", result); // banana
+}
 ```
 
 ## <a name="iterators">Iterators</a>
+
+TODO: Continue review from here.
 
 Many Rust methods return a `std::iter::Iterator` that
 can be used to iterate over the elements of a collection.
