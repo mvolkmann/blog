@@ -1002,7 +1002,7 @@ if quantity > 2 {
 }
 ```
 
-## Ownership Model
+## <a name="ownership-model">Ownership Model</a>
 
 Memory management in Rust is handled by following these rules,
 referred to as the ownership model:
@@ -1401,10 +1401,12 @@ fn main() {
 }
 ```
 
-Closures are anonymous functions that capture values in their environment.
-Their parameter list is written between vertical bars
+Closures are functions that capture values in their environment
+so they can be access later when the function is executed.
+Functions defined with the `fn` keyword are not closures.
+Closures are defined as anonymous functions
+with a parameter list written between vertical bars
 which must be present even if there are no parameters.
-Closures are described in more detail later.
 Here is a similar ownership example using a closure:
 
 ```rust
@@ -2403,7 +2405,9 @@ fn main() {
 ```
 
 Writing functions that operate on any numeric type is tricky,
-but it can be done. For example:
+but it can be done using trait bounds
+which are described in the [Traits](#traits) section.
+For example:
 
 ```rust
 // The trait bound "impl Copy + Into<f32>" means that this
@@ -2412,7 +2416,7 @@ but it can be done. For example:
 // This is the case for all the primitive numbers types except f64.
 // This approach is more flexible than declaring the parameter
 // to be "&[i32]" which only accepts a slice of i32 values.
-fn sum(numbers: &[impl Copy+Into<f32>]) -> f32 {
+fn sum(numbers: &[impl Copy + Into<f32>]) -> f32 {
     // The map part below can also be written as ".map(|x| x.into())".
     numbers.iter().copied().map(Into::into).sum::<f32>()
 }
@@ -3116,6 +3120,105 @@ fn main() {
 }
 ```
 
+## Functions
+
+Functions are defined using the `fn` keyword,
+followed by a name, parameter list, return type, and body.
+Functions that do not return anything omit the return type rather than
+specify a type like `void` as is done in some other languages.
+Functions that might fail should return a `Result` enum
+to allow callers to handle errors.
+See the "Error Handling" section for details.
+
+A `return` statement returns the value of an expression.
+If the last statement is not terminated by a semicolon, its value is returned.
+This means that `return my_result;` is equivalent to `my_result`.
+
+For example:
+
+```rust
+fn average(numbers: &Vec<f64>) -> f64 {
+    let sum: f64 = numbers.iter().sum();
+    sum / numbers.len() as f64 // return value
+}
+
+fn greet(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    let numbers: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
+    println!("average = {}", average(&numbers));
+    greet("World");
+}
+```
+
+The documentation for the `Copy` trait says that values of types
+that implement it "can be duplicated by simply copying bits".
+When such a value is passed to a function, rather than passing a reference,
+a copy is created and ownership of the original value is not transferred.
+All primitive types such as `bool`, `char`, `i32`, and `f64`
+implement `Copy`.
+However, structs and collection types like
+tuple, array, `Vec`, `HashMap`, and `HashMap` do not.
+You can choose to implement the `Copy` trait for custom structs
+if all their fields also implement it.
+
+Function parameters of non-Copy types typically use reference types.
+This is because usually the function wants to borrow their values
+rather than take ownership.
+If the caller uses a variable to pass a non-Copy value,
+and the function takes ownership, the caller loses ownership and
+can no longer use the variable unless the function returns it.
+
+Function return values typically have non-reference types.
+This is because usually the function creates the value
+and wants to transfer ownership to the caller.
+If a function creates a value and returns a reference to it,
+the code will not compile because the value goes out of scope and is dropped.
+
+Function parameters that are strings that are not mutated by the function
+should almost always have the type `&str`.
+This allows many string representations to be passed in including
+literal strings, `&str` values, and `&String` values.
+Functions that create and return strings have the return type `String`
+so ownership can be transferred to the caller.
+
+Functions are accessible by default within the same source file,
+but they are private by default when defined in a different source file.
+For functions that should be visible outside the source file that defines them,
+add the `pub` keyword before the `fn` keyword.
+
+In the [Ownership Model](#ownership-model) section we learned that
+closures are functions that capture values in their environment
+so they can be access later when the function is executed.
+Functions defined with the `fn` keyword are not closures.
+Closures are defined as anonymous functions
+with a parameter list written between vertical bars
+which must be present even if there are no parameters.
+
+Rust does not support writing functions that
+accept a variable number of arguments (variadic),
+but macros can do this.
+Functions can instead be passed in an array.
+For example:
+
+```rust
+// This takes an array of strings and returns one of them.
+// Lifetimes must be specified, but why?
+fn longest<'a>(strings: &'a [&str]) -> &'a str {
+    strings
+        .iter()
+        .fold("", |acc, s| if s.len() > acc.len() { s } else { acc })
+}
+
+fn main() {
+    let fruits = ["apple", "banana", "cherry", "date"];
+    let result = longest(&fruits);
+    println!("longest is {}", result);
+}
+```
+
 ## <a name="iterators">Iterators</a>
 
 Many Rust methods return a `std::iter::Iterator` that
@@ -3124,44 +3227,44 @@ Iterators are lazy, meaning that they
 do not pre-compute the values they will return.
 The `Iterator` type supports methods in the following non-exhaustive list:
 
-| Method                | Description                                                                                   |
-| --------------------- | --------------------------------------------------------------------------------------------- |
-| `all(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for all items                             |
-| `any(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for any items                             |
-| `chain(iter2)`        | returns `Iterator` that iterates over combined items                                          |
-| `collect()`           | returns a `std::vec::Vec` containing all the items                                            |
-| `count()`             | returns number of items in `Iterator`, consuming it                                           |
-| `enumerate()`         | returns `Iterator` over tuples of indexes and items                                           |
-| `filter(pred_fn)`     | returns `Iterator` over items for which `pred_fn` returns true                                |
-| `fold(fn)`            | returns result of combining items into a single value; like `reduce` in other languages       |
-| `last()`              | returns last item in `Iterator`, consuming it                                                 |
-| `map(fn)`             | returns `Iterator` over results of calling a function on each item                            |
-| `max()`               | returns `Option` that wraps the largest item                                                  |
-| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of items to a function  |
-| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each item to a function             |
-| `min()`               | returns `Option` that wraps the smallest item                                                 |
-| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of items to a function |
-| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each item to a function            |
-| `next()`              | returns `Option` that wraps the next item                                                     |
-| `nth(n)`              | returns `Option` that wraps the nth item                                                      |
-| `partition(pred_fn)`  | returns two collections containing items for which a function returns true or false           |
-| `position(pred_fn)`   | returns `Option` that wraps the index of first item for which `pred_fn` returns true          |
-| `product()`           | returns product of items; panics on overflow                                                  |
-| `rev()`               | returns `Iterator` that iterates in reverse order                                             |
-| `skip(n)`             | returns `Iterator` that begins after n items                                                  |
-| `skip_while(pred_fn)` | returns `Iterator` that begins at first item for which `pred_fn` returns false                |
-| `sum()`               | returns sum of items; panics on overflow                                                      |
-| `take(n)`             | returns `Iterator` that stops after the first n items                                         |
-| `take_while(pred_fn)` | returns `Iterator` that stops at last item for which `pred_fn` returns true                   |
-| `zip(iter2)`          | returns `Iterator` over `Option` objects that wrap corresponding items from two `Iterators`   |
-
-TODO: Continue review from here.
+| Method                | Description                                                                                                  |
+| --------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `all(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for all items                                            |
+| `any(pred_fn)`        | returns `bool` indicating if `pred_fn` returns true for any items                                            |
+| `chain(iter2)`        | returns `Iterator` that iterates over combined items                                                         |
+| `collect()`           | returns a `std::vec::Vec` containing all the items                                                           |
+| `count()`             | returns number of items in `Iterator`, consuming it                                                          |
+| `enumerate()`         | returns `Iterator` over tuples of indexes and items                                                          |
+| `filter(pred_fn)`     | returns `Iterator` over items for which `pred_fn` returns true                                               |
+| `fold(fn)`            | returns result of combining items into a single value; like `reduce` in other languages                      |
+| `last()`              | returns last item in `Iterator`, consuming it                                                                |
+| `map(fn)`             | returns `Iterator` over results of calling a function on each item                                           |
+| `max()`               | returns `Option` that wraps the largest item                                                                 |
+| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of items to a function                 |
+| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each item to a function                            |
+| `min()`               | returns `Option` that wraps the smallest item                                                                |
+| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of items to a function                |
+| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each item to a function                           |
+| `next()`              | returns `Option` that wraps the next item                                                                    |
+| `nth(n)`              | returns `Option` that wraps the nth item                                                                     |
+| `partition(pred_fn)`  | returns two collections containing items for which a function returns true or false                          |
+| `position(pred_fn)`   | returns `Option` that wraps the index of first item for which `pred_fn` returns true                         |
+| `product()`           | returns product of items; panics on overflow                                                                 |
+| `rev()`               | returns `Iterator` that iterates in reverse order                                                            |
+| `skip(n)`             | returns `Iterator` that begins after n items                                                                 |
+| `skip_while(pred_fn)` | returns `Iterator` that begins at first item for which `pred_fn` returns false                               |
+| `sum()`               | returns sum of items; panics on overflow                                                                     |
+| `take(n)`             | returns `Iterator` that stops after the first n items                                                        |
+| `take_while(pred_fn)` | returns `Iterator` that stops at last item for which `pred_fn` returns true                                  |
+| `zip(iter2)`          | returns `Iterator` over `Option` objects that wrap<br>references to corresponding items from two `Iterators` |
 
 Here is an example of using the `next` method:
 
 ```rust
 fn main() {
     let colors = ["red", "yellow", "blue"];
+    // Must be mutable because calling methods
+    // like "next" on it modifies its state.
     let mut iter = colors.iter();
 
     match iter.next() {
@@ -3178,9 +3281,8 @@ fn main() {
 }
 ```
 
-We can also obtain a mutable iterator so the underlying collection
-can be modify while iterating over it.
-For example:
+We can also obtain an iterator that allows the underlying collection
+to be modify while iterating over it. For example:
 
 ```rust
 fn main() {
@@ -3192,7 +3294,7 @@ fn main() {
 
     println!("{:?}", colors); // ["RED", "YELLOW", "BLUE"]
 
-    // If we wanted to create a new vector rather than modify one in place ...
+    // To create a new vector rather than modify one in place ...
     //let new_colors: Vec<String> =
     //    colors.iter().map(|s| s.to_uppercase()).collect();
 }
@@ -3204,34 +3306,36 @@ which is like `reduce` in some other programming languages:
 ```rust
 let a1 = [1, 2, 3];
 let sum = a1.iter().fold(0, |acc, n| acc + n);
-println!("{}", sum);
+println!("{}", sum); // 6
 
-// For this use of fold we can use the sum method instead.
-let sum = a1.iter().sum::<i32>();
-println!("{}", sum);
+// For this use of "fold" we can use the "sum" method instead.
+let sum: i32 = a1.iter().sum();
+println!("{}", sum); // 6
 ```
 
 Here is an example of using the `filter` method.
 
 ```rust
-// This is a predicate function that is by the filter method.
-// It must take a reference to a item in an Iterator.
-// In this case the item type is &str,
-// so the parameter must have the type &&str.
+// This is a predicate function used by the "filter" method.
+// It must take a reference to a item in an "Iterator".
+// In this case the item type is "&str",
+// so the parameter type must be "&&str".
 fn is_short(s: &&str) -> bool {
-    s.len() <= 5
+    s.len() <= 4
 }
 
 fn main() {
     let months = "January|February|March|April|May|June|July|August";
 
     // This passes a closure to the filter method.
-    let short_names: Vec<&str> = months.split('|').filter(|m| m.len() <= 5).collect();
-    println!("shorts = {:?}", short_names);
+    let short_names: Vec<&str> =
+        months.split('|').filter(|m| m.len() <= 4).collect();
+    println!("{:?}", short_names); // ["May", "June", "July"]
 
     // This passes a function to the filter method.
-    let short_names: Vec<&str> = months.split('|').filter(is_short).collect();
-    println!("shorts = {:?}", short_names);
+    let short_names: Vec<&str> =
+        months.split('|').filter(is_short).collect();
+    println!("{:?}", short_names); // ["May", "June", "July"]
 }
 ```
 
@@ -3241,29 +3345,31 @@ Here is an example of using the `map` method:
 let a1 = [1, 2, 3];
 let iter = a1.iter().map(|n| n * 2); // doubles each number
 for n in iter {
-    println!("{}", n);
+    println!("{}", n); // 2 then 4 then 6
 }
 
 // We cannot create an array from an iterator,
 // but we can create a Vector.
 let v1 = vec![1, 2, 3];
-let iter = v1.iter().map(|n| n * 2);
-let v2: Vec<i32> = iter.collect();
-println!("{:?}", v2);
+let v2: Vec<i32> = v1.iter().map(|n| n * 2).collect();
+println!("{:?}", v2); // [2, 4, 6]
 ```
 
+TODO: Continue review from here.
 Here is an example of using the `zip` method:
 
 ```rust
 let a1 = [1, 2, 3];
-let a2 = [4, 5, 6];
+let a2 = [4, 5, 6, 7];
 
+// This creates an "Iterator" over "Option" enums.
+// The "Some" variant will contain tuples of references.
 let mut iter = a1.iter().zip(a2.iter());
 
 assert_eq!(iter.next(), Some((&1, &4)));
 assert_eq!(iter.next(), Some((&2, &5)));
 assert_eq!(iter.next(), Some((&3, &6)));
-assert_eq!(iter.next(), None);
+assert_eq!(iter.next(), None); // extra item in a2 ignored
 ```
 
 Here is an example of using the `take` method
@@ -3352,112 +3458,6 @@ fn main() {
     for piece in piece_iter {
         println!("piece = {}", piece);
     }
-}
-```
-
-## Functions
-
-Functions are defined using the `fn` keyword,
-followed by a name, parameter list, return type, and body.
-Functions that do not return anything omit the return type rather than
-specify a type like `void` as is done in some other languages.
-Functions that might fail should return a `Result` enum
-to allow callers to handle errors.
-See the "Error Handling" section for details.
-
-A `return` statement returns the value of an expression.
-If the last statement is not terminated by a semicolon, its value is returned.
-This means that `return my_result;` is equivalent to `my_result`.
-
-For example:
-
-```rust
-fn average(numbers: &Vec<f64>) -> f64 {
-    let sum: f64 = numbers.iter().sum();
-    sum / numbers.len() as f64 // return value
-}
-
-fn greet(name: &str) {
-    println!("Hello, {}!", name);
-}
-
-fn main() {
-    let numbers: Vec<f64> = vec![1.0, 2.0, 3.0, 4.0];
-    println!("average = {}", average(&numbers));
-    greet("World");
-}
-```
-
-The documentation for the `Copy` trait says that values of types
-that implement it "can be duplicated by simply copying bits".
-When such a value is passed to a function, rather than passing a reference,
-a copy is created and ownership of the original value is not transferred.
-All primitive types such as `bool`, `char`, `i32`, and `f64`
-implement `Copy`.
-However, structs and collection types like
-tuple, array, `Vec`, `HashMap`, and `HashMap` do not.
-You can choose to implement the `Copy` trait for custom structs
-if all their fields also implement it.
-
-Function parameters of non-Copy types typically use reference types.
-This is because usually the function wants to borrow their values
-rather than take ownership.
-If the caller uses a variable to pass a non-Copy value,
-and the function takes ownership, the caller loses ownership and
-can no longer use the variable unless the function returns it.
-
-Function return values typically have non-reference types.
-This is because usually the function creates the value
-and wants to transfer ownership to the caller.
-If a function creates a value and returns a reference to it,
-the code will not compile because the value goes out of scope and is dropped.
-
-Function parameters that are strings that are not mutated by the function
-should almost always have the type `&str`.
-This allows many string representations to be passed in including
-literal strings, `&str` values, and `&String` values.
-Functions that create and return strings have the return type `String`
-so ownership can be transferred to the caller.
-
-Functions are accessible by default within the same source file,
-but they are private by default when defined in a different source file.
-For functions that should be visible outside the source file that defines them,
-add the `pub` keyword before the `fn` keyword.
-
-Named functions in Rust are not closures.
-They do not capture variables from their surrounding environment.
-However, anonymous functions assigned to variables are closures.
-For example:
-
-```rust
-fn main() {
-    let mut a = "";
-    let mut inner = | | {
-        a = "test"; // a is visible since we are in a closure
-    };
-    inner();
-    println!("{}", a);
-}
-```
-
-Rust does not support writing functions that
-accept a variable number of arguments (variadic).
-They can instead be passed in an array.
-For example:
-
-```rust
-// This takes an array of strings and returns one of them.
-// Lifetimes must be specified, but why?
-fn longest<'a>(strings: &'a [&str]) -> &'a str {
-    strings
-        .iter()
-        .fold("", |acc, s| if s.len() > acc.len() { s } else { acc })
-}
-
-fn main() {
-    let fruits = ["apple", "banana", "cherry", "date"];
-    let result = longest(&fruits);
-    println!("longest is {}", result);
 }
 ```
 
@@ -3901,8 +3901,8 @@ fn main() {
 A trait describes an interface that any type can implement.
 This can include any number of functions and methods.
 The first parameter of methods must be named "self".
-Any `fn` definition that does not is an
-"associated function" rather than a method.
+Any `fn` definition whose first parameter name is not "self"
+is an "associated function" rather than a method.
 
 The first parameter of a method can be written as
 `self` (takes ownership or copies),
@@ -4156,6 +4156,50 @@ fn main() {
     println!("color = {:?}", color); // Color { r: 255, g: 0, b: 255 }
 }
 ```
+
+Traits can be used as parameter and return types to
+specify that any type which implements it can be substituted.
+Specifying traits as a qualifier on a generic type
+is referred to a "trait bound".
+In this example the "print_string" function takes a "&str" and
+any type that implements both the "Debug" and "ToString" traits.
+The compiler will generate separate versions of the function
+for each concrete type passed as the second argument.
+
+```rust
+struct Point2D {
+    x: f64,
+    y: f64
+}
+
+impl ToString for Point2D {
+    fn to_string(&self) -> String {
+        format!("({}, {})", self.x, self.y)
+    }
+}
+
+fn print_string<T: Debug + ToString>(label: &str, value: &T) {
+  println!("{}: {}", label, value.to_string());
+  println!("debug: {:?}", value);
+}
+
+fn main() {
+  print_string("Name", &"Mark");
+  // Name: Mark
+  // debug: "Mark"
+
+  print_string("Score", &19); // Score: 19
+  // Score: 19
+  // debug: 19
+
+  let pt = Point2D { x: 1.2, y: 3.4 };
+  print_string("Point", &pt);
+  // Point: (1.2, 3.4)
+  // debug: Point2D { x: 1.2, y: 3.4 }
+}
+```
+
+TODO: Should you also show an example using the `dyn` keyword?
 
 ## <a name="macros">Macros</a>
 
