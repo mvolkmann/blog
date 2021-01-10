@@ -3505,7 +3505,7 @@ The operators that can be implemented for custom types include:
 
 ## <a name="ranges">Ranges</a>
 
-The `std::ops` namespace defines the range types
+The `std::ops` namespace defines the following range types:
 
 | Range Type         | Meaning                          | Syntax  |
 | ------------------ | -------------------------------- | ------- |
@@ -3519,7 +3519,7 @@ The `std::ops` namespace defines the range types
 These are distinct types and there is not a
 provided range type that encompasses all of them.
 
-Objects of these types are regular values that
+Instances these types are values that
 can be assigned to variables, be members of structs,
 be passed to functions, and be returned from functions.
 
