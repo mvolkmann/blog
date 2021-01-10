@@ -1068,11 +1068,16 @@ free the memory owned by a variable before it goes out of scope.
 The following table summarizes the options for
 passing an argument to a function.
 
-| Goal               | Syntax      |
-| ------------------ | ----------- |
-| transfer ownership | `name`      |
-| borrow immutably   | `&name`     |
-| borrow mutably     | `&mut name` |
+| Goal                           | Syntax      |
+| ------------------------------ | ----------- |
+| transfer ownership or copy (1) | `name`      |
+| borrow immutably               | `&name`     |
+| borrow mutably                 | `&mut name` |
+
+1. When a non-primitive value, not a reference to one,
+   is assigned to a variable or passed to a function,
+   ownership is transferred UNLESS the type implements the `Copy` trait.
+   In that case a copy is created and ownership is not transferred.
 
 Here are some examples that demonstrate ownership
 inside a single function:
@@ -3240,11 +3245,7 @@ The `Iterator` type supports methods in the following non-exhaustive list:
 | `last()`              | returns last item in `Iterator`, consuming it                                                                |
 | `map(fn)`             | returns `Iterator` over results of calling a function on each item                                           |
 | `max()`               | returns `Option` that wraps the largest item                                                                 |
-| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of items to a function                 |
-| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each item to a function                            |
 | `min()`               | returns `Option` that wraps the smallest item                                                                |
-| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of items to a function                |
-| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each item to a function                           |
 | `next()`              | returns `Option` that wraps the next item                                                                    |
 | `nth(n)`              | returns `Option` that wraps the nth item                                                                     |
 | `partition(pred_fn)`  | returns two collections containing items for which a function returns true or false                          |
@@ -3724,7 +3725,7 @@ pub struct Point2D {
 
 impl Point2D {
     pub fn distance_from_origin(&self) -> f64 {
-        self.x.powi(2) + self.y.powi(2)
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
     }
 }
 ```
@@ -3786,36 +3787,57 @@ fn main() {
 }
 ```
 
-TODO: Do more in this example!
-
 Structs can use generic types.
 For example:
 
 ```rust
-struct Wrapper<T> {
-    value: T,
+use num::ToPrimitive;
+
+// T can be any type that implements the "ToPrimitive" trait.
+// This is required because the "distance_to_origin" method
+// calls the "to_f64" method defined by that trait.
+#[derive(Debug)]
+struct Point2D<T: ToPrimitive> {
+    x: T,
+    y: T
 }
 
-impl<T> Wrapper<T> {
-    pub fn new(value: T) -> Self {
-        Wrapper { value }
+impl<T: ToPrimitive> Point2D<T> {
+    pub fn distance_from_origin(&self) -> f64 {
+        let x = self.x.to_f64().unwrap();
+        let y = self.y.to_f64().unwrap();
+        (x.powi(2) + y.powi(2)).sqrt()
     }
+}
+
+fn main() {
+    let pt1 = Point2D::<f32> { x: 3.0, y: 4.0 };
+    let pt2 = Point2D::<i8> { x: 3, y: 4 };
+    println!("pt1 = {:?}", pt1);
+    println!("pt1 distance = {:?}", pt1.distance_from_origin());
+    println!("pt2 = {:?}", pt2);
+    println!("pt2 distance = {:?}", pt2.distance_from_origin());
+
+    /* Can't do this because &str does not implement the ToPrimitive trait.
+    let pt3 = Point2D::<&str> { x: "foo", y: "bar" };
+    println!("pt3 = {:?}", pt3);
+    println!("pt3 distance = {:?}", pt3.distance_from_origin());
+    */
 }
 ```
 
 ## Dereference
 
 The dereference operator is used to get the value of a reference.
-It isn't needed very often.
-This is because unlike in most programming languages
-that support references (or pointers),
-Rust does not require different syntax for accessing fields and methods
+This isn't needed very often because unlike in most programming languages
+that support references (or pointers), Rust does not
+require different syntax for accessing fields and methods
 based on whether an instance or a reference is used.
 It supplies "automatic referencing and dereferencing"
 in field access and method calls for types that implement the `Deref` trait.
-This includes the `String` and `Vec` types.
+This includes immutable and mutable references to all types.
 In the case of method calls, it automatically adds `&`, `&mut`, or `*`
-based on the method declaration of the `self` type.
+based on the method declaration of the `self` parameter.
 
 For example:
 
@@ -3827,7 +3849,7 @@ struct Point2D {
 
 impl Point2D {
     fn is_origin(&self) -> bool {
-        self.x == 0.0 &&self.y == 0.0
+        self.x == 0.0 && self.y == 0.0
     }
 }
 
@@ -3878,7 +3900,40 @@ fn main() {
 
 Aliases for types can be defined using the `type` keyword.
 These can be used anywhere a type can be specified.
-For example, we can define an alias for a function signature:
+
+Here is an example of a type alias for a
+`HashMap` with specific key and value types:
+
+TODO: Finish this example.
+
+```rust
+use std::collections::HashMap;
+
+type StringToIntMap = HashMap<String, i32>;
+
+fn main() {
+    let mut score_map: StringToIntMap = StringToIntMap::new();
+    score_map.insert("Mark".to_string(), 19);
+    score_map.insert("Tami".to_string(), 42);
+    score_map.insert("Amanda".to_string(), 37);
+    score_map.insert("Jeremy".to_string(), 35);
+
+    // Why do I get the error "borrow of moved value" without "&"?
+    for entry in &score_map {
+        println!("{:?}", entry);
+    }
+
+    // Is this the best way to find the winner?
+    // The use of "nobody" seems to complicated.
+    let nobody = (&"".to_string(), &0i32);
+    let winner = score_map.iter().fold(nobody, |acc, entry| {
+       if entry.1 > &acc.1 { entry } else { acc }
+    });
+    println!("winner is {}", winner.0);
+}
+```
+
+Here is an example of using a type alias for a function signature:
 
 ```rust
 #[derive(Debug)]
@@ -3899,10 +3954,14 @@ fn rotate(pt: &Point2D, angle: f64) -> Point2D {
 }
 
 fn translate_x(pt: &Point2D, dx: f64) -> Point2D {
+    // "..*pt" gets the rest of the fields in the "pt" object
+    // which in this case is just the "y" field.
     Point2D { x: pt.x + dx, ..*pt }
 }
 
 fn translate_y(pt: &Point2D, dy: f64) -> Point2D {
+    // "..*pt" gets the rest of the fields in the "pt" object
+    // which in this case is just the "x" field.
     Point2D { y: pt.x + dy, ..*pt }
 }
 
@@ -3913,12 +3972,20 @@ fn operate(pt: &Point2D, function: PointFn, input: f64) -> Point2D {
 
 fn main() {
     let p = Point2D {x: 3.0, y: 4.0};
+
     println!("{:?}", operate(&p, translate_x, 4.0));
+    // Point2D { x: 7.0, y: 4.0 }
+
     println!("{:?}", operate(&p, translate_y, 2.0));
+    // Point2D { x: 3.0, y: 5.0 }
+
     let pi = std::f64::consts::PI;
     println!("{:?}", operate(&p, rotate, pi / 2.0));
+    // Point2D { x: -4.0, y: 3.0000000000000004 }
 }
 ```
+
+TODO: Resume review from here.
 
 ## <a name="traits">Traits</a>
 
@@ -4737,16 +4804,16 @@ mod points {
     }
 
     impl Point2D {
-        // Instance method
-        pub fn distance_to(self: &Self, other: &Self) -> f64 {
-            Self::distance_between(self, other)
-        }
-
         // Static method
         pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
             let dx = pt1.x - pt2.x;
             let dy = pt1.y - pt2.y;
             (dx.powi(2) + dy.powi(2)).sqrt()
+        }
+
+        // Instance method
+        pub fn distance_to(self: &Self, other: &Self) -> f64 {
+            Self::distance_between(self, other)
         }
     }
 }
@@ -4776,16 +4843,16 @@ pub struct Point2D {
 }
 
 impl Point2D {
-    // Instance method
-    pub fn distance_to(self: &Self, other: &Self) -> f64 {
-        Self::distance_between(self, other)
-    }
-
     // Static method
     pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
         let dx = pt1.x - pt2.x;
         let dy = pt1.y - pt2.y;
         (dx.powi(2) + dy.powi(2)).sqrt()
+    }
+
+    // Instance method
+    pub fn distance_to(self: &Self, other: &Self) -> f64 {
+        Self::distance_between(self, other)
     }
 }
 ```
