@@ -3245,7 +3245,11 @@ The `Iterator` type supports methods in the following non-exhaustive list:
 | `last()`              | returns last item in `Iterator`, consuming it                                                                |
 | `map(fn)`             | returns `Iterator` over results of calling a function on each item                                           |
 | `max()`               | returns `Option` that wraps the largest item                                                                 |
+| `max_by(fn)`          | returns `Option` that wraps the largest result based on passing pairs of items to a function                 |
+| `max_by_key(fn)`      | returns `Option` that wraps the largest result of passing each item to a function                            |
 | `min()`               | returns `Option` that wraps the smallest item                                                                |
+| `min_by(fn)`          | returns `Option` that wraps the smallest result based on passing pairs of items to a function                |
+| `min_by_key(fn)`      | returns `Option` that wraps the smallest result of passing each item to a function                           |
 | `next()`              | returns `Option` that wraps the next item                                                                    |
 | `nth(n)`              | returns `Option` that wraps the nth item                                                                     |
 | `partition(pred_fn)`  | returns two collections containing items for which a function returns true or false                          |
@@ -3904,8 +3908,6 @@ These can be used anywhere a type can be specified.
 Here is an example of a type alias for a
 `HashMap` with specific key and value types:
 
-TODO: Finish this example.
-
 ```rust
 use std::collections::HashMap;
 
@@ -3918,18 +3920,16 @@ fn main() {
     score_map.insert("Amanda".to_string(), 37);
     score_map.insert("Jeremy".to_string(), 35);
 
-    // Why do I get the error "borrow of moved value" without "&"?
+    // Iterating takes ownership of score_map unless a reference is used.
     for entry in &score_map {
         println!("{:?}", entry);
     }
 
-    // Is this the best way to find the winner?
-    // The use of "nobody" seems to complicated.
-    let nobody = (&"".to_string(), &0i32);
-    let winner = score_map.iter().fold(nobody, |acc, entry| {
-       if entry.1 > &acc.1 { entry } else { acc }
-    });
-    println!("winner is {}", winner.0);
+    if let Some(winner) = score_map.iter().max_by_key(|entry| entry.1) {
+        println!("winner is {}", winner.0);
+    } else {
+        println!("no players found");
+    }
 }
 ```
 
@@ -4804,14 +4804,14 @@ mod points {
     }
 
     impl Point2D {
-        // Static method
+        // Associated function
         pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
             let dx = pt1.x - pt2.x;
             let dy = pt1.y - pt2.y;
             (dx.powi(2) + dy.powi(2)).sqrt()
         }
 
-        // Instance method
+        // Method
         pub fn distance_to(self: &Self, other: &Self) -> f64 {
             Self::distance_between(self, other)
         }
@@ -4843,14 +4843,13 @@ pub struct Point2D {
 }
 
 impl Point2D {
-    // Static method
+    // Associated function
     pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
         let dx = pt1.x - pt2.x;
         let dy = pt1.y - pt2.y;
         (dx.powi(2) + dy.powi(2)).sqrt()
     }
-
-    // Instance method
+    // Method
     pub fn distance_to(self: &Self, other: &Self) -> f64 {
         Self::distance_between(self, other)
     }
