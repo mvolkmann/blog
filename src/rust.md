@@ -3482,7 +3482,6 @@ fn main() {
 
 ## Operators
 
-TODO: Resume review here
 Rust supports most of the common operators found in other programming languages.
 
 The `std::ops` namespace defines overloadable operators.
@@ -3550,7 +3549,7 @@ fn main() {
     let r2 = a..=b;
     print_range_inclusive(&r2); // range = 3..=7
     for n in r2 {
-        println!("n = {}", n);
+        println!("{}", n); // 3, 4, 5, 6, 7
     }
 }
 ```
@@ -3572,17 +3571,21 @@ The first parameter of methods must be named "self".
 Any `fn` definition with no parameters or
 a first parameter with a name other than "self"
 is an "associated function" rather than a method.
-Associated functions are called with `StructName::function_name(arguments)`.
-Methods are called with `instance_variable.method_name(arguments)`.
+Associated functions are called with the syntax
+`StructName::function_name(arguments)`.
+Methods are called with the syntax
+`instance_variable.method_name(arguments)`.
 
 In an `impl` block the type `Self` refers to the associated struct type.
-Using `Self` in place of the struct name enables renaming the struct
-without needing to change uses of the name inside the `impl` block.
+Using `Self` in place of the struct name enables renaming structs
+without needing to change uses of their names inside `impl` blocks.
 
-Instances of a struct can be created using its name.
+An instance of a struct can be created using its name.
 It is also common to define an associated function named "new"
-(by convention) that creates an instance that is initialized in a specific way
-(like a constructor in other languages).
+(by convention) that creates an instance that is initialized in a specific way,
+similar to a constructor in other languages.
+
+TODO: Continue review here.
 
 For example:
 
