@@ -3371,7 +3371,6 @@ assert_eq!(iter.next(), Some((&3, &6)));
 assert_eq!(iter.next(), None); // extra item in a2 ignored
 ```
 
-TODO: Continue review from here.
 Here is an example of using the `take` method
 to get a certain number of initial values from an iterator:
 
@@ -3419,8 +3418,27 @@ fn main() {
 }
 ```
 
+Here is an example of using the `some` and `all` methods:
+
+```rust
+let numbers = vec![8, 13, 5, 21, 15, 3, 6, 24];
+
+// Is any number less than 3?
+println!("any < 3? {}", numbers.iter().any(|&n| n < 3));
+
+// Is any number greater or equal to 20?
+println!("any >= 20? {}", numbers.iter().any(|&n| n >= 20));
+
+// Are all the numbers even?
+println!("all even? {}", numbers.iter().all(|&n| n & 2 == 0));
+
+// Are all the numbers less than 30?
+println!("all < 30? {}", numbers.iter().all(|&n| n < 30));
+```
+
 ## Regular Expressions
 
+TODO: Resume review here
 Regular expressions for string pattern matching are not directly supported.
 Instead an external crate such as
 {% aTargetBlank "https://crates.io/crates/regex", "regex" %} must be used.
@@ -3898,9 +3916,12 @@ fn main() {
 
 ## <a name="traits">Traits</a>
 
-A trait describes an interface that types can implement.
-However, the trait, the type, or both must be defined in the current crate.
-A Rust program cannot implement an externally defined trait on an externally defined type.
+A trait describes an interface that any number of types can implement.
+Any trait can be implemented on a type defined in the current crate.
+A trait defined in the current crate can be implemented on any type,
+even those in the standard library.
+But a trait defined outside the current crate
+cannot be implemented on a type defined outside the current crate.
 For example, the `std::vec::Vec` type does not implement the
 `std::fmt::Display` trait and this implementation cannot be added.
 
@@ -3993,32 +4014,33 @@ For example:
 trait First {
     const SOME_CONST: i32 = 1;
     fn some_method(&self) {
-        println!("in foo for trait First")
+        println!("First some_method {}", Self::SOME_CONST);
     }
 }
 
 trait Second {
     const SOME_CONST: i32 = 2;
     fn some_method(&self) {
-        println!("in some_method for trait Second")
+        println!("Second some_method {}", Self::SOME_CONST);
     }
 }
 
-impl First for bool {} // using default method implementation
-impl Second for bool {} // using default method implementation
+// Implement both traits on the built-in bool type.
+impl First for bool {} // using default some_method implementation
+impl Second for bool {} // using default some_method implementation
 
 fn main() {
     //println!("{}", bool::SOME_CONST); // error; multiple `VALUE` found
     //println!("{}", First::SOME_CONST); // error; type annotations needed
-    println!("{}", <bool as One>::SOME_CONST); // works
-    println!("{}", <bool as Two>::SOME_CONST); // works
+    println!("{}", <bool as First>::SOME_CONST); // 1
+    println!("{}", <bool as Second>::SOME_CONST); // 2
 
     //true.some_method(); // error; multiple applicable items in scope
     // Using a "fully-qualified function call addresses this.
     // Normal function calls are really syntactic sugar for this form.
     // The compiler converts them to this form.
-    One::some_method(&true); // works
-    Two::some_method(&true); // works
+    First::some_method(&true); // First some_method 1
+    Second::some_method(&false); // Second some_method 2
 }
 ```
 
@@ -4164,6 +4186,61 @@ fn main() {
     color += red; // can add a Color to the one on the left side
     color += blue;
     println!("color = {:?}", color); // Color { r: 255, g: 0, b: 255 }
+}
+```
+
+Here is an example of implementing a custom trait
+on built-in types, in this case `str` and `String`:
+
+```rust
+use itertools::join;
+
+trait Case {
+    fn to_camel(&self) -> String;
+    fn to_snake(&self) -> String;
+}
+
+impl Case for str {
+    fn to_camel(&self) -> String {
+        let word_tuples = self.split_whitespace().enumerate();
+        let word_iter = word_tuples.map(|(index, s)| {
+          let word = s.to_lowercase();
+          if index == 0 {
+              return word;
+          }
+          // Change first letter to uppercase.
+          let mut chars = word.chars(); // iterator over characters
+          let first = chars.next().unwrap().to_uppercase();
+          let rest = chars.as_str();
+          format!("{}{}", first, rest)
+        });
+        join(word_iter, "")
+    }
+
+    fn to_snake(&self) -> String {
+        join(self.split_whitespace().map(|s| s.to_lowercase()), "_")
+    }
+}
+
+impl Case for String {
+    fn to_camel(&self) -> String {
+        self.as_str().to_camel() // uses str implementation
+    }
+
+    fn to_snake(&self) -> String {
+        self.as_str().to_snake() // uses str implementation
+    }
+}
+
+fn main() {
+    let s1 = "Foo BAR bAZ";
+    let s2= String::from(s1);
+
+    println!("{}", s1.to_camel()); // fooBarBaz
+    println!("{}", s2.to_camel()); // fooBarBaz
+
+    println!("{}", s1.to_snake()); // foo_bar_baz
+    println!("{}", s2.to_snake()); // foo_bar_baz
 }
 ```
 
