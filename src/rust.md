@@ -3898,8 +3898,13 @@ fn main() {
 
 ## <a name="traits">Traits</a>
 
-A trait describes an interface that any type can implement.
-This can include any number of functions and methods.
+A trait describes an interface that types can implement.
+However, the trait, the type, or both must be defined in the current crate.
+A Rust program cannot implement an externally defined trait on an externally defined type.
+For example, the `std::vec::Vec` type does not implement the
+`std::fmt::Display` trait and this implementation cannot be added.
+
+A trait defines any number of functions and methods.
 The first parameter of methods must be named "self".
 Any `fn` definition whose first parameter name is not "self"
 is an "associated function" rather than a method.
@@ -4025,39 +4030,44 @@ Those that can be derived (automatically implemented) using the
 without defining any methods and are also indicated in the "Notes" column.
 Other traits must be manually implemented.
 
-| Trait Name     | Description                                                                                            | Notes             |
-| -------------- | ------------------------------------------------------------------------------------------------------ | ----------------- |
-| `AsRef`        | defines an `as_ref` method that converts one reference type to another                                 |                   |
-| `Borrow`       | allows a type to be borrowed as a different type (ex. `String` borrowed as `str`)                      |                   |
-| `Clone`        | defines a `clone` method that explicitly copies an object                                              | derivable         |
-| `Copy`         | marks a type whose instances can be implicitly copied by assignment or passing by value                | derivable, marker |
-| `Debug`        | outputs a value for debugging using `{:?}` and `{:#?}` in a format string                              | derivable         |
-| `Default`      | defines a `default` static method for getting a default instance of a type                             | derivable         |
-| `Deref`        | allows smart pointers to be used like immutable references to the data to which they point             |                   |
-| `DerefMut`     | allows smart pointers to be used like mutable references to the data to which they point               |                   |
-| `Display`      | defines a `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |                   |
-| `Drop`         | defines a `drop` method that is called when a value is dropped, typically to free resources            |                   |
-| `Eq`           | compares instances using `==` and `!=`                                                                 | derivable         |
-| `Extend`       | defines an `extend` method that adds items to a collection                                             |                   |
-| `Fn`           | type of a closure that borrows values from its environment immutably                                   |                   |
-| `FnMut`        | type of a closure that borrows values from its environment mutably                                     |                   |
-| `FnOnce`       | type of a closure that takes ownership of values from its environment; can only be called once         |                   |
-| `From`         | defines a `from` static method that converts one value type to another; ex. `String::from`             |
-| `FromStr`      | defines a `from_str` static method that converts a `&str` value to the implementing type               |                   |
-| `Hash`         | adds a `hash` method for computing the hash value of an instance (1)                                   | derivable         |
-| `Into`         | opposite of `From` and automatically implement when that is implemented                                |                   |
-| `IntoIterator` | automatically converts a value to an iterator over the data in the value                               |                   |
-| `Iterator`     | defines the `next` method for iterating over the data in a value                                       |                   |
-| `Ord`          | compares instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators                                | derivable         |
-| `PartialEq`    | like `Eq`, but for types where some instances are not equal to themselves (2)                          | derivable         |
-| `PartialOrd`   | like `Ord`, but for types where some instances cannot be logically compared to others (3)              | derivable         |
-| `Read`         | defines the `read` method which reads the receiver value into an array of bytes (4)                    |                   |
-| `Send`         | marks a type whose instance ownership can be transferred from one thread to another                    | marker            |
-| `Sized`        | marks a type whose instance sizes are known a compile time                                             | marker            |
-| `Sync`         | marks a type whose instance references can be shared between threads                                   | marker            |
-| `ToString`     | adds a `to_string` method                                                                              |                   |
-| `Unpin`        | marks a type whose instances can be moved after being pinned to a memory location                      | marker            |
-| `Write`        | defines the `write` method which writes data from an array of bytes into the receiver                  |                   |
+| Trait Name     | Description                                                                                          | Notes             |
+| -------------- | ---------------------------------------------------------------------------------------------------- | ----------------- |
+| `AsMut`        | defines `as_mut` method that converts one mutable reference type to another                          |                   |
+| `AsRef`        | defines `as_ref` method that converts one reference type to another                                  |                   |
+| `Borrow`       | allows an immutable type to be borrowed as a different type (ex. `String` borrowed as `str`)         |                   |
+| `BorrowMut`    | allows a mutable type to be borrowed as a different type                                             |                   |
+| `Clone`        | defines `clone` method that explicitly copies an object                                              | derivable         |
+| `Copy`         | marks a type whose instances can be implicitly copied by assignment or passing by value              | derivable, marker |
+| `Debug`        | outputs a value for debugging using `{:?}` and `{:#?}` in a format string                            | derivable         |
+| `Default`      | defines `default` static method for getting a default instance of a type                             | derivable         |
+| `Deref`        | allows smart pointers to be used like immutable references to the data to which they point           |                   |
+| `DerefMut`     | allows smart pointers to be used like mutable references to the data to which they point             |                   |
+| `Display`      | defines `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |                   |
+| `Drop`         | defines `drop` method that is called when a value is dropped, typically to free resources            |                   |
+| `Eq`           | compares instances using `==` and `!=`                                                               | derivable         |
+| `Extend`       | defines `extend` method that adds items to a collection                                              |                   |
+| `Fn`           | type of a closure that borrows values from its environment immutably                                 |                   |
+| `FnMut`        | type of a closure that borrows values from its environment mutably                                   |                   |
+| `FnOnce`       | type of a closure that takes ownership of values from its environment; can only be called once       |                   |
+| `From`         | defines `from` static method that converts one value type to another; ex. `String::from`             |
+| `FromStr`      | defines `from_str` static method that converts a `&str` value to the implementing type               |                   |
+| `Hash`         | defines `hash` method for computing the hash value of an instance (1)                                | derivable         |
+| `Index`        | defines `index` method for getting data from a value by index; supports `[index]` syntax             |                   |
+| `Into`         | opposite of `From` and automatically implement when that is implemented                              |                   |
+| `IntoIterator` | automatically converts a value to an iterator over the data in the value                             |                   |
+| `Iterator`     | defines `next` method for iterating over the data in a value                                         |                   |
+| `Ord`          | compares instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators                              | derivable         |
+| `PartialEq`    | like `Eq`, but for types where some instances are not equal to themselves (2)                        | derivable         |
+| `PartialOrd`   | like `Ord`, but for types where some instances cannot be logically compared to others (3)            | derivable         |
+| `Read`         | defines the `read` method which reads the receiver value into an array of bytes (4)                  |                   |
+| `Send`         | marks a type whose instance ownership can be transferred from one thread to another                  | marker            |
+| `Sized`        | marks a type whose instance sizes are known a compile time                                           | marker            |
+| `Sync`         | marks a type whose instance references can be shared between threads                                 | marker            |
+| `ToString`     | defines `to_string` method                                                                           |                   |
+| `TryFrom`      | defines `try_from` method for type conversions; opposite of `TryInto`                                |                   |
+| `TryInto`      | defines `try_into` method for type conversions; opposite of `TryFrom`                                |                   |
+| `Unpin`        | marks a type whose instances can be moved after being pinned to a memory location                    | marker            |
+| `Write`        | defines `write` method which writes data from an array of bytes into the receiver                    |                   |
 
 1. The `hash` method is used by the `HashMap` and `HashSet` collections.
 1. This means values are not necessarily reflexive.
