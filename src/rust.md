@@ -3438,7 +3438,6 @@ println!("all < 30? {}", numbers.iter().all(|&n| n < 30));
 
 ## Regular Expressions
 
-TODO: Resume review here
 Regular expressions for string pattern matching are not directly supported.
 Instead an external crate such as
 {% aTargetBlank "https://crates.io/crates/regex", "regex" %} must be used.
@@ -3459,7 +3458,6 @@ fn main() {
     }
 
     // Get text matching capture groups.
-    //let re = Regex::new(r"([hs]\d{1,3})").unwrap();
     for cap in re.captures_iter(s) {
         let text = &cap[0];
         println!("{:?}", text); // h19 and s257
@@ -3468,19 +3466,23 @@ fn main() {
     // Split a string on a regular expression
     // and collect the pieces into a vector.
     let pieces: Vec<&str> = re.split(s).into_iter().collect();
-    println!("pieces = {:?}", pieces);
+    println!("{:?}", pieces); // ["The host is ", " and the switch is ", "."]
 
     // Split a string on a regular expression
     // and iterate over the pieces.
     let piece_iter = re.split(s).into_iter();
     for piece in piece_iter {
-        println!("piece = {}", piece);
+        println!("{}", piece);
+        // The host is
+        //  and the switch is
+        // .
     }
 }
 ```
 
 ## Operators
 
+TODO: Resume review here
 Rust supports most of the common operators found in other programming languages.
 
 The `std::ops` namespace defines overloadable operators.
