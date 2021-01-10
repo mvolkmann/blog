@@ -3567,7 +3567,8 @@ that have no state.
 The `impl` keyword adds
 associated functions (like class or static methods in other languages)
 and methods (like instance methods in other languages) to a struct.
-The first parameter of methods must be named "self".
+The first parameter of methods must be named "self",
+like the convention in Python.
 Any `fn` definition with no parameters or
 a first parameter with a name other than "self"
 is an "associated function" rather than a method.
@@ -3585,8 +3586,6 @@ It is also common to define an associated function named "new"
 (by convention) that creates an instance that is initialized in a specific way,
 similar to a constructor in other languages.
 
-TODO: Continue review here.
-
 For example:
 
 ```rust
@@ -3598,45 +3597,45 @@ struct Point2D {
 
 impl Point2D {
     // The new function can have parameters.
+    // When there are no parameters, consider implementing
+    // the "Default" trait (described later) instead.
     fn new() -> Self {
       Point2D { x: 0.0, y: 0.0 }
     }
 
-    // Instance method (use of self is similar to Python)
-    fn distance_to(self: &Self, other: &Self) -> f64 {
-        Self::distance_between(self, other)
-    }
-
-    // Static method
+    // Associated function
     fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
         let dx = pt1.x - pt2.x;
         let dy = pt1.y - pt2.y;
         (dx.powi(2) + dy.powi(2)).sqrt()
     }
+
+    // Method
+    fn distance_to(self: &Self, other: &Self) -> f64 {
+        Self::distance_between(self, other)
+    }
 }
 
 fn main() {
     let origin = Point2D::new();
-    println!("origin = {:?}", origin);
+    println!("{:?}", origin); // Point2D { x: 0.0, y: 0.0 }
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
-    let d1 = p1.distance_to(&p2);
-    println!("d1 = {}", d1);
-    let d2 = Point2D::distance_between(&p1, &p2);
-    println!("d2 = {}", d2);
+    println!("{}", Point2D::distance_between(&p1, &p2)); // 5
+    println!("{}", p1.distance_to(&p2)); // 5
 }
 ```
 
 In general it's best for struct fields to not have reference types.
-This makes the lifetime of the field value match that of the struct
-which simplifies its usage by removing the need to specify lifetime annotations.
+This makes the lifetime of field values match that of the struct.
+This simplifies its usage by removing the need to specify lifetime annotations.
 For example, struct fields with a string value should almost always
 use the type `String` instead of `&str` or `&String`.
 
 To allow structs to be printed for debugging purposes,
-add the following above their definition:
-`#[derive(Debug)]`.
-Then print using the `:?` (single line) or `:#?` (multi-line) format specifier.
+add the following above their definition: `#[derive(Debug)]`.
+Then print instances using the `:?` (single line)
+or `:#?` (multi-line) format specifier.
 For example:
 
 ```rust
@@ -3660,7 +3659,7 @@ passed by value (copy) instead of by reference.
 These features add compile time,
 so Rust requires implementing them on a case-by-case basis.
 The easiest way to implement these features
-is the proceed a struct definition with the following:
+is the precede a struct definition with the following:
 
 ```rust
 #[derive(Clone, Copy, Debug)]
@@ -3671,8 +3670,11 @@ but they are private by default when defined in a different source file.
 For structs that should be visible outside the source file that defines them,
 add the `pub` keyword to both the `struct` and the fields to be exposed.
 
-A `struct` can include the fields of another `struct` of the same type
-using the `..` syntax.
+Structs cannot inherit from (extend) other structs,
+but they can nest other structs (composition).
+
+A `struct` can include the fields of another `struct`
+of the same type using the `..` syntax.
 This can only appear at the end of the list of values.
 It only supplies values that were not specified.
 For example:
@@ -3691,7 +3693,8 @@ Note that it wouldn't make sense to allow including the fields
 of multiple structs because struct fields are never optional.
 Each struct being included would contain all the fields.
 
-A "tuple struct" gives a name to a tuple.
+A "tuple struct" gives a name to a tuple,
+allowing it to be used as a type.
 For example:
 
 ```rust
@@ -3704,15 +3707,13 @@ println!("{:?}", CORNFLOWER_BLUE); // RGB(100, 149, 237)
 println!("{:?}", REBECCA_PURPLE); // RGB(102, 51, 153)
 ```
 
-Structs cannot inherit from (extend) other structs,
-but they can nest other structs (composition).
-
 The `impl` keyword can be used multiple times on the same struct.
-Typically it's best to define all the methods of a struct in one place.
-The following example shows using `impl` in three places
+However, usually all the non-trait methods of a struct
+are defined in one `impl` block.
+The following example shows using three `impl` blocks
 to define methods on the same struct.
 
-`geometry.rs`
+File `geometry.rs`
 
 ```rust
 #[derive(Debug)]
@@ -3728,7 +3729,7 @@ impl Point2D {
 }
 ```
 
-`more.rs`
+File `more_geometry.rs`
 
 ```rust
 use super::geometry::Point2D;
@@ -3744,13 +3745,13 @@ pub fn scoot(p: &mut Point2D) {
 }
 ```
 
-`main.rs`
+File `main.rs`
 
 ```rust
 mod geometry;
 use geometry::Point2D;
 
-mod more;
+mod more_geometry;
 
 fn demo(p: &mut Point2D) {
     impl Point2D {
@@ -3769,21 +3770,23 @@ fn main() {
     // The translate_x method is defined in geometry.rs.
     p.translate_x(2.0);
 
-    // The scoot function is defined in more.rs.
-    // Just because p is mutable doesn't mean
+    // The "scoot" function is defined in more.rs.
+    // Just because "p" is mutable doesn't mean
     // that all references to it are mutable.
-    // The scoot function requires a mutable reference
+    // The "scoot" function requires a mutable reference
     // and we must specify that when passing a reference.
     more::scoot(&mut p);
 
     demo(&mut p);
 
-    // The translate_y method is defined in the demo function above.
+    // The "translate_y" method is defined in the "demo" function above.
     p.translate_y(2.0);
 
     println!("{:?}", p); // Point2D { x: 4.0, y: 5.0 }
 }
 ```
+
+TODO: Do more in this example!
 
 Structs can use generic types.
 For example:
@@ -3799,8 +3802,6 @@ impl<T> Wrapper<T> {
     }
 }
 ```
-
-TODO: Make the example above more compelling.
 
 ## Dereference
 
