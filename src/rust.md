@@ -1825,7 +1825,7 @@ There are many ways to handle values from these enum types.
    }
    ```
 
-## Built-in Scalar Types
+## <a name="scalar-types">Built-in Scalar Types</a>
 
 Rust defines many scalar (primitive) types which can be categories as
 boolean, character, integer (6 kinds), or floating point (2 kinds).
@@ -4269,7 +4269,6 @@ fn main() {
 }
 ```
 
-TODO: Resume here
 Here is an example of implementing a custom trait
 on built-in types, in this case `str` and `String`:
 
@@ -4326,12 +4325,13 @@ fn main() {
 ```
 
 Traits can be used as parameter and return types to
-specify that any type which implements it can be substituted.
+specify that any type which implements them can be substituted.
 Specifying traits as a qualifier on a generic type
 is referred to a "trait bound".
-In this example the first parameter of the "print_string" function
-is a "&str" and the second is any type that
-implements both the "Debug" and "ToString" traits.
+In the `print_string` function below,
+the type of the first parameter is `&str`
+and the type of the second is a reference to any type that
+implements both the `Debug` and `ToString` traits.
 The compiler will generate separate versions of the function
 for each concrete type passed as the second argument.
 
@@ -4389,16 +4389,16 @@ fn print_string(label: &str, value: &dyn Printable) {
 
 Macros are like functions that:
 
-- name names that end in `!`
+- have names that end in `!`
 - generate code at compile-time
 - can take a variable number of arguments
 
-To define a macro ...
-TODO: Finish this
+Implementing macros is an advanced topic.
+We will just show one example here.
 
-Back in the "Built-in Scalar Types" we included
-examples of adding methods to built-in types.
-This can also be accomplished with macros as shown here:
+In the [Built-in Scalar Types](#scalar-types) section
+we included examples of adding methods to built-in types.
+This can also be accomplished with macros as shown below:
 
 ```rust
 trait Days {
@@ -4440,16 +4440,18 @@ fn main() {
 }
 ```
 
-Another option is allow multiple types to be passed into the macro.
-To this, change the first line inside the macro to the following:
+In the example above, each call to the `implement_days!` macro
+adds the `days_from_now` method to a single type.
+To allow adding the the method to multiple types in one call,
+change the first line inside the macro to the following:
 
 ```rust
-    ($($t: ty), *) => {
-        $(
+    ($($t: ty), *) => { $(
 ```
 
-Add the line `)*` after the end of the `impl` block.
-Call the new version of the macro as follows:
+Then add the line `)*` after the end of the `impl` block.
+Now the macro can be called as follows
+to add the `days_from_now` method to several types:
 
 ```rust
 implement_days! { i8, i16, i32, i64, i128 }
@@ -4457,6 +4459,7 @@ implement_days! { i8, i16, i32, i64, i128 }
 
 ## <a name="standard-io">Standard IO</a>
 
+TODO: Resume review here
 The `std::io` namespace supports many input/output operations.
 The members `stdin` and `stdout` are functions that return objects
 with methods for operating on the `stdio` and `stdout` streams.
