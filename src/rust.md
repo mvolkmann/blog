@@ -622,9 +622,9 @@ The compiler outputs warnings when these naming conventions are not followed.
   made public using the `pub` keyword.
 - The dot (`.`) character is used to
   access struct fields and call instance methods.
-- The double colon (`::`) is used as
-  a namespace separator (borrowed from C++)
-  and to call static methods.
+- The double colon (`::`) is used as a namespace separator (borrowed from C++)
+  and to call associated functions
+  (like class or static methods in other languages).
 - Conditions for conditional logic and iteration
   are not surrounded by any delimiter (no parentheses).
 - Statements associated with conditional logic and iteration
@@ -3985,20 +3985,19 @@ fn main() {
 }
 ```
 
-TODO: Resume review from here.
-
 ## <a name="traits">Traits</a>
 
 A trait describes an interface that any number of types can implement.
 Any trait can be implemented on a type defined in the current crate.
 A trait defined in the current crate can be implemented on any type,
 even those in the standard library.
-But a trait defined outside the current crate
-cannot be implemented on a type defined outside the current crate.
+But a trait defined outside the current crate cannot be
+implemented on a type that is also defined outside the current crate.
 For example, the `std::vec::Vec` type does not implement the
 `std::fmt::Display` trait and this implementation cannot be added.
 
-A trait defines any number of functions and methods.
+A trait defines any number of associated constants (not commonly used),
+associated functions, and methods.
 The first parameter of methods must be named "self".
 Any `fn` definition whose first parameter name is not "self"
 is an "associated function" rather than a method.
@@ -4007,34 +4006,36 @@ The first parameter of a method can be written as
 `self` (takes ownership or copies),
 `&self` (borrows immutably; most common), or
 `&mut self` (borrows mutably).
-These are shorthand for `self: Self`, `self: &Self`, `self: &mut Self`.
-In first case, if the type implements the `Copy` trait then the value is copied.
+These are shorthand for `self: Self`, `self: &Self`,
+and `self: &mut Self` respectively.
+In the first case, if the type implements
+the `Copy` trait then the value is copied.
 Otherwise ownership is transferred to the method.
 
 Often traits are implemented for structs, but they can also
 be implemented for tuples and primitive types like `bool`.
 
-A trait function can be described by providing only its signature,
-requiring implementing structs to define the body.
+A trait function or method can be described by providing only its signature.
+This requires implementing types to define the body.
 It can also provide a default implementation that is
 used by implementing types that do not override it.
 
-Traits can be generic, including type parameters.
+We saw in the [Structs](#structs) section that
+we can add methods to a struct without defining a trait.
+Using a trait is useful when it is desireable to
+implement the same set of functions and methods on many types.
+The trait can then be used as a parameter or return type,
+enabling any type that implements the trait to be used.
+This is how Rust achieves polymorphism.
 
 Many functions provided by the standard library are implementations of traits.
 When looking at documentation for a type consider that
 some methods may only be described in the documentation
 for traits that are implemented for the type.
 
-Here is an example of a custom trait named `Distance`
+Traits can be made generic by including type parameters.
+Here is an example of a custom generic trait named `Distance`
 that is implemented for the custom type `Point2D`.
-We saw in the [Structs](#structs) section that
-we can add methods to a struct without defining a trait.
-Using a trait useful when it is desireable to
-implement the same set of functions and methods on many types.
-The trait can then be used as a parameter or return type,
-enabling any type that implements the trait can be used.
-This is how Rust achieves polymorphism.
 
 ```rust
 struct Point2D {
@@ -4044,10 +4045,12 @@ struct Point2D {
 
 trait Distance<T> {
     // The type Self here refers to the implementing type.
-    // In the example below, that is the Point2D struct.
+    // In the "impl" below, that is the Point2D struct.
     fn distance_to(self: &Self, other: &Self) -> T;
 }
 
+// Implementations of the "Distance" trait on other types
+// could choose a different return type such as "f32".
 impl Distance<f64> for Point2D {
     fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
         let dx = self.x - other.x;
@@ -4060,7 +4063,7 @@ fn main() {
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
     let d = p1.distance_to(&p2);
-    println!("distance is {}", d);
+    println!("{}", d); // 5
 }
 ```
 
@@ -4076,23 +4079,24 @@ pub trait HockeyPlayer: Athlete + Person {
 ```
 
 Now any `struct` that implements `HockeyPlayer`
-must also implement `Athlete` and `Person`.
+must also implement the `Athlete` and `Person` traits.
+Also see the `Printable` example later in this section.
 
 It is possible for a type to implement multiple traits
 that describe the same constants and methods.
-Calling them requires do so in a form that makes it clear which is desired.
+Calling them requires doing so in a form that makes it clear which is desired.
 For example:
 
 ```rust
 trait First {
-    const SOME_CONST: i32 = 1;
+    const SOME_CONST: i32 = 1; // associated constant
     fn some_method(&self) {
         println!("First some_method {}", Self::SOME_CONST);
     }
 }
 
 trait Second {
-    const SOME_CONST: i32 = 2;
+    const SOME_CONST: i32 = 2; // associated constant
     fn some_method(&self) {
         println!("Second some_method {}", Self::SOME_CONST);
     }
@@ -4120,49 +4124,50 @@ fn main() {
 <a name="trait-table"></a>
 The following table summarizes the built-in traits.
 Those that can be derived (automatically implemented) using the
-`#[derive(trait1, trait2, ...)]` syntax are indicted in the "Notes" column.
+`#[derive(trait1, trait2, ...)]` attribute are indicted in the "Notes" column.
 "Marker traits" are used to indicate a property of a type
 without defining any methods and are also indicated in the "Notes" column.
 Other traits must be manually implemented.
 
-| Trait Name     | Description                                                                                          | Notes             |
-| -------------- | ---------------------------------------------------------------------------------------------------- | ----------------- |
-| `AsMut`        | defines `as_mut` method that converts one mutable reference type to another                          |                   |
-| `AsRef`        | defines `as_ref` method that converts one reference type to another                                  |                   |
-| `Borrow`       | allows an immutable type to be borrowed as a different type (ex. `String` borrowed as `str`)         |                   |
-| `BorrowMut`    | allows a mutable type to be borrowed as a different type                                             |                   |
-| `Clone`        | defines `clone` method that explicitly copies an object                                              | derivable         |
-| `Copy`         | marks a type whose instances can be implicitly copied by assignment or passing by value              | derivable, marker |
-| `Debug`        | outputs a value for debugging using `{:?}` and `{:#?}` in a format string                            | derivable         |
-| `Default`      | defines `default` static method for getting a default instance of a type                             | derivable         |
-| `Deref`        | allows smart pointers to be used like immutable references to the data to which they point           |                   |
-| `DerefMut`     | allows smart pointers to be used like mutable references to the data to which they point             |                   |
-| `Display`      | defines `fmt` method that formats a value for output<br>to be seen by a user rather than a developer |                   |
-| `Drop`         | defines `drop` method that is called when a value is dropped, typically to free resources            |                   |
-| `Eq`           | compares instances using `==` and `!=`                                                               | derivable         |
-| `Extend`       | defines `extend` method that adds items to a collection                                              |                   |
-| `Fn`           | type of a closure that borrows values from its environment immutably                                 |                   |
-| `FnMut`        | type of a closure that borrows values from its environment mutably                                   |                   |
-| `FnOnce`       | type of a closure that takes ownership of values from its environment; can only be called once       |                   |
-| `From`         | defines `from` static method that converts one value type to another; ex. `String::from`             |
-| `FromStr`      | defines `from_str` static method that converts a `&str` value to the implementing type               |                   |
-| `Hash`         | defines `hash` method for computing the hash value of an instance (1)                                | derivable         |
-| `Index`        | defines `index` method for getting data from a value by index; supports `[index]` syntax             |                   |
-| `Into`         | opposite of `From` and automatically implement when that is implemented                              |                   |
-| `IntoIterator` | automatically converts a value to an iterator over the data in the value                             |                   |
-| `Iterator`     | defines `next` method for iterating over the data in a value                                         |                   |
-| `Ord`          | compares instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators                              | derivable         |
-| `PartialEq`    | like `Eq`, but for types where some instances are not equal to themselves (2)                        | derivable         |
-| `PartialOrd`   | like `Ord`, but for types where some instances cannot be logically compared to others (3)            | derivable         |
-| `Read`         | defines the `read` method which reads the receiver value into an array of bytes (4)                  |                   |
-| `Send`         | marks a type whose instance ownership can be transferred from one thread to another                  | marker            |
-| `Sized`        | marks a type whose instance sizes are known a compile time                                           | marker            |
-| `Sync`         | marks a type whose instance references can be shared between threads                                 | marker            |
-| `ToString`     | defines `to_string` method                                                                           |                   |
-| `TryFrom`      | defines `try_from` method for type conversions; opposite of `TryInto`                                |                   |
-| `TryInto`      | defines `try_into` method for type conversions; opposite of `TryFrom`                                |                   |
-| `Unpin`        | marks a type whose instances can be moved after being pinned to a memory location                    | marker            |
-| `Write`        | defines `write` method which writes data from an array of bytes into the receiver                    |                   |
+| Trait Name     | Description                                                                                                                                 | Notes             |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `AsMut`        | defines `as_mut` method that converts one mutable reference type to another                                                                 |                   |
+| `AsRef`        | defines `as_ref` method that converts one reference type to another                                                                         |                   |
+| `Borrow`       | defines `borrow` method that allows an immutable type to be borrowed as a different type<br>(ex. `String` borrowed as `str`)                |                   |
+| `BorrowMut`    | defines `borrow_mut` method that allows a mutable type to be borrowed as a different type                                                   |                   |
+| `Clone`        | defines `clone` method that explicitly copies an object                                                                                     | derivable         |
+| `Copy`         | marks a type whose instances can be implicitly copied by assignment or passing by value                                                     | derivable, marker |
+| `Debug`        | defines `fmt` method that outputs a value for debugging using `{:?}` and `{:#?}` in a format string                                         | derivable         |
+| `Default`      | defines `default` associated function for getting a default instance of a type                                                              | derivable         |
+| `Deref`        | defines `deref` method that allows smart pointers to be<br>used as immutable references to the data to which they point                     |                   |
+| `DerefMut`     | defines `deref_mut` method that allows smart pointers to be<br>used as mutable references to the data to which they point                   |                   |
+| `Display`      | defines `fmt` method that formats a value for output<br>to be seen by a user rather than a developer                                        |                   |
+| `Drop`         | defines `drop` method that is called when a value is dropped, typically to free resources                                                   |                   |
+| `Eq`           | defines `eq` method that is used by the `==` and `!=` operators to compare instances                                                        | derivable         |
+| `Extend`       | defines `extend` method that adds items to a collection                                                                                     |                   |
+| `Fn`           | defines `call` method for closures that borrow values from their environment immutably                                                      |                   |
+| `FnMut`        | defines `call_mut` method for closures that borrow values from their environment mutably                                                    |                   |
+| `FnOnce`       | defines `call_once` method for closures that takes ownership of values from their environment;<br>can only be called once                   |                   |
+| `From`         | defines `from` associated function that converts one value type to another; ex. `String::from`                                              |
+| `FromStr`      | defines `from_str` associated function that converts a `&str` value to the implementing type                                                |                   |
+| `Hash`         | defines `hash` method for computing the hash value of an instance (1)                                                                       | derivable         |
+| `Index`        | defines `index` method for getting data from a value by index; supports `[index]` syntax                                                    |                   |
+| `Into`         | defines `into` method that is the opposite of `From`<br>and is automatically implemented when that is implemented                           |                   |
+| `IntoIterator` | defines `into_iter` method that is used to automatically<br>convert a value to an iterator over the data in the value                       |                   |
+| `Iterator`     | defines `next` method for iterating over the data in a value                                                                                |                   |
+| `Ord`          | defines `cmp`, `max`, `min`, and `clamp` methods that are used to<br>compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators | derivable         |
+| `PartialEq`    | defines `eq` and `ne` methods for comparing types where some instances are not equal to themselves (2)                                      | derivable         |
+| `PartialOrd`   | defines `partial_cmp` method for comparing types where some instances cannot be logically compared to others (3)                            | derivable         |
+| `Read`         | defines `read` method that reads the receiver value into an array of bytes (4)                                                              |                   |
+| `Send`         | marks a type whose instance ownership can be transferred from one thread to another                                                         | marker            |
+| `Sized`        | marks a type whose instance sizes are known a compile time                                                                                  | marker            |
+| `Sync`         | marks a type whose instance references can be shared between threads                                                                        | marker            |
+| `ToOwned`      | defines `to_owned` and `clone_into` methods to construct owned data from a borrow                                                           |                   |
+| `ToString`     | defines `to_string` method that is automatically implemented by implementing the `Display` trait                                            |                   |
+| `TryFrom`      | defines `try_from` method for type conversions; opposite of `TryInto`                                                                       |                   |
+| `TryInto`      | defines `try_into` method for type conversions; opposite of `TryFrom`                                                                       |                   |
+| `Unpin`        | marks a type whose instances can be moved after being pinned to a memory location                                                           | marker            |
+| `Write`        | defines `write` method that writes data from an array of bytes into the receiver                                                            |                   |
 
 1. The `hash` method is used by the `HashMap` and `HashSet` collections.
 1. This means values are not necessarily reflexive.
@@ -4206,7 +4211,9 @@ impl Default for Color {
 // Implementing the "Add" trait enables using
 // the "+" operator to add "Color" instances.
 impl Add for Color {
-    TODO: Describe the use of "type" inside an "impl" block!
+    // The "Add" trait requires specifying an "associated type"
+    // named "Output" that specifies the return type of the "add" method.
+    // It could be a type other than "Add", but that's what we want here.
     type Output = Self;
 
     fn add(self, other: Self) -> Self {
@@ -4218,8 +4225,8 @@ impl Add for Color {
     }
 }
 
-// Implementing the "AddAssign" trait enables using
-// the "+=" operator to add a "Color" instance to a receiver "Color".
+// Implementing the "AddAssign" trait enables using the
+// "+=" operator to add a "Color" instance to a receiver "Color".
 impl AddAssign for Color {
     fn add_assign(&mut self, other: Self) {
         self.r = cmp::min(255, self.r + other.r);
@@ -4228,8 +4235,8 @@ impl AddAssign for Color {
     }
 }
 
-// Implementing the "Sub" trait enables using
-// the "-" operator to subtract "Color" instances.
+// Implementing the "Sub" trait enables using the
+// "-" operator to subtract "Color" instances.
 impl Sub for Color {
     type Output = Self;
 
@@ -4250,18 +4257,19 @@ fn main() {
     let blue = Color { r: 0, g: 0, b: 255 };
 
     let purple = red + blue; // can add colors
-    println!("purple = {:?}", purple); // Color { r: 255, g: 0, b: 255 }
+    println!("{:?}", purple); // Color { r: 255, g: 0, b: 255 }
 
     let blue = purple - red; // can subtract colors
-    println!("blue = {:?}", blue); // Color { r: 0, g: 0, b: 255 }
+    println!("{:?}", blue); // Color { r: 0, g: 0, b: 255 }
 
     let mut color = Color::default();
     color += red; // can add a Color to the one on the left side
     color += blue;
-    println!("color = {:?}", color); // Color { r: 255, g: 0, b: 255 }
+    println!("{:?}", color); // Color { r: 255, g: 0, b: 255 }
 }
 ```
 
+TODO: Resume here
 Here is an example of implementing a custom trait
 on built-in types, in this case `str` and `String`:
 
@@ -4930,7 +4938,7 @@ It defines the `Point2D` struct fields and methods.
 
 The file `src/points/functions.rs` defines the function `distance`
 which returns the distance between two `Point2D` objects.
-Note that this is a plain function, not an instance or static method.
+Note that this is a plain function, not a method or associated function.
 
 ```rust
 // The super keyword enables finding a module
