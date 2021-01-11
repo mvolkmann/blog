@@ -715,13 +715,13 @@ When used at the top level, `#![attr]` specifies a crate-wide attribute.
 
 The following table summarizes commonly used built-in attributes.
 
-| Attribute                        | Description                                                  |
-| -------------------------------- | ------------------------------------------------------------ |
-| `allow(warning1, warning2, ...)` | suppress specified linting rule warnings                     |
-| `derive(trait1, trait2, ...)`    | automatically implement a list of traits on a `struct`       |
-| `doc`                            | provides an alternate way to specify and format doc comments |
-| `should_panic`                   | indicates that a test function is expected to panic          |
-| `test`                           | indicates that a function is a test                          |
+| Attribute                        | Description                                                                  |
+| -------------------------------- | ---------------------------------------------------------------------------- |
+| `allow(warning1, warning2, ...)` | suppress specified linting rule warnings                                     |
+| `derive(name1, name2, ...)`      | automatically implement traits or apply "derive macros", often on a `struct` |
+| `doc`                            | provides an alternate way to specify and format doc comments                 |
+| `should_panic`                   | indicates that a test function is expected to panic                          |
+| `test`                           | indicates that a function is a test                                          |
 
 For a list of linting rules that produce warnings, see {% aTargetBlank
 "https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html",
@@ -1412,6 +1412,9 @@ Functions defined with the `fn` keyword are not closures.
 Closures are defined as anonymous functions
 with a parameter list written between vertical bars
 which must be present even if there are no parameters.
+While function parameter and return types must be specified,
+these can be inferred for closures.
+
 Here is a similar ownership example using a closure:
 
 ```rust
@@ -2957,7 +2960,7 @@ fn main() {
 
 ## Iteration (Looping)
 
-Rust supports the following looping expressions:
+Rust supports the following loop expressions:
 
 | Name        | Description                                                               |
 | ----------- | ------------------------------------------------------------------------- |
@@ -2966,9 +2969,13 @@ Rust supports the following looping expressions:
 | `while let` | like `while`, but repeats as long as a pattern match succeeds             |
 | `for`       | for looping over an iterator                                              |
 
+All these support using the a `break` statement to break out of the loop
+and the `continue` statement to advance to the next iteration.
+While not commonly used, `break` can be followed by an expression
+whose value becomes the value of a `loop` expression.
+This is not permitted inside `while`, `while let`, or `for` loops.
+
 See the [Standard IO](#standard-io) section for an example using `loop`.
-While not commonly used, the `break` keyword can be followed by
-an expression whose value becomes the value of the `loop` expression.
 
 Here's an example of using a `while` loop:
 
@@ -4576,6 +4583,7 @@ fn main() -> io::Result<()> {
 
 To read and write JSON files, consider using
 {% aTargetBlank "https://github.com/serde-rs/json", "Serde JSON" %}.
+The name is short for "<b>ser</b>ializing and <b>de</b>serializing".
 This requires adding the following dependencies in `cargo.toml`:
 
 ```toml
