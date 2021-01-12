@@ -1853,6 +1853,12 @@ The unsigned integer types are the same, but start with `u` instead of `i`.
 Literal number values can end with these type names to make their type explicit.
 For example, the value 19 can be specified to be
 an unsigned, 8-bit integer by writing `19u8`.
+The following variable declarations are equivalent:
+
+```rust
+let number: i8 = 19;
+let number = 19i8;
+```
 
 Literal integer values can use the underscore character to separate
 thousands, millions, and so on. For example,
@@ -4466,14 +4472,14 @@ implement_days! { i8, i16, i32, i64, i128 }
 
 ## <a name="standard-io">Standard IO</a>
 
-TODO: Resume review here
 The `std::io` namespace supports many input/output operations.
 The members `stdin` and `stdout` are functions that return objects
-with methods for operating on the `stdio` and `stdout` streams.
+with methods for operating on the `stdin` and `stdout` streams.
 
 The `stdin` methods like `read_line` and
 `stdout` methods like `write` and `flush`
-return a `Result` enum value.
+return a `Result` enum value to enable representing
+successful operations and errors.
 For example:
 
 ```rust
@@ -4489,24 +4495,30 @@ fn main() {
         // Flush stdio without writing a newline character.
         stdout().flush().unwrap();
 
+        // Read a line of input from the user.
         stdin().read_line(&mut buffer).unwrap();
-        buffer.pop(); // removes newline from end of buffer
+        // Remove the newline character from the end of the buffer.
+        buffer.pop();
 
+        // Break out of the loop if the user entered "quit".
         if buffer == "quit" {
             break;
         }
 
         println!("You entered {}.", buffer);
 
-        buffer.clear(); // prepares to reuse buffer
+        // Prepare to reuse the buffer.
+        buffer.clear();
     }
 }
 ```
 
-Here is a modified version of the code above that uses the `text_io` crate:
+Here is a modified version of the code above
+that uses the `text_io` crate which simplify it.
 To use this, add the dependency `text_io = "0.1.8"` in the `Cargo.toml` file.
-This also adds a `print` function to simplify
+This version also adds a `print` function to simplify
 writing to `stdout` without including a newline.
+The `main` function in this version is much simpler!
 
 ```rust
 use std::io::{self, Write};
@@ -4537,20 +4549,20 @@ The `std::fs` and `std::io` modules enable reading and writing from files.
 For example:
 
 ```rust
-use std::fs;
-use std::io;
+use std::fs::File;
+use std::io::{BufReader, BufWriter, Result};
 // The following is required to gain access to the
-// lines and write methods.
+// "lines" and "write" methods.
 use std::io::prelude::*;
 
-fn write_file(path: &str) -> io::Result<()> {
+fn write_file(path: &str) -> Result<()> {
     // To write entire file from one string ...
-    //let mut f = fs::File::create(path)?;
+    //let mut f = File::create(path)?;
     //f.write_all(b"Hello\nWorld\n")
 
     // To write one line at a time ...
-    let f = fs::File::create(path)?;
-    let mut writer = io::BufWriter::new(f);
+    let f = File::create(path)?;
+    let mut writer = BufWriter::new(f);
     // The write method takes a byte slice
     // and returns the number of bytes written.
     // This shows two ways to create a byte slice from a string.
@@ -4559,22 +4571,22 @@ fn write_file(path: &str) -> io::Result<()> {
     Ok(())
 }
 
-fn read_file(path: &str) -> io::Result<()> {
+fn read_file(path: &str) -> Result<()> {
     // To read entire file into a string ...
-    //let content = fs::read_to_string(path)?;
+    //let content = read_to_string(path)?;
     //println!("content = {}", content);
 
     // To read one line at a time ...
-    let f = fs::File::open(path)?;
-    let reader = io::BufReader::new(f);
+    let f = File::open(path)?;
+    let reader = BufReader::new(f);
     for line in reader.lines() {
         println!("line = {}", line?);
     }
 
-    Ok(())
+    Ok(()) // returning unit value
 }
 
-fn main() -> io::Result<()> {
+fn main() -> Result<()> {
     let path = "demo.txt";
     write_file(path)?;
     read_file(path)
@@ -4591,15 +4603,14 @@ serde = { version = "1.0.118", features = ["derive"] }
 serde_json = "1.0.60"
 ```
 
-The "features" option above is required to use
-features in a library that are "feature-gated".
-In the case of the `serde` library,
-we need things provided by the "derive" feature.
-Some libraries use this approach to
-optimize compile times and the generated binary size
-when optional parts of the library are not needed.
+Rust allows libraries to "feature-gate" some their features.
+This enables reduced compile times and generated binary sizes
+for applications that do not use all the features of a library.
+The "features" option above specifies that we wish to use
+parts of the "derive" feature of the "serde" library,
+which is a gated feature.
 
-For example:
+Here is an example of writing and reading a JSON file:
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -4617,22 +4628,45 @@ fn main() {
         name: "Comet".to_string(),
         breed: "Whippet".to_string(),
     });
+    dogs.push(Dog {
+        name: "Oscar".to_string(),
+        breed: "German Shorthaired Pointer".to_string(),
+    });
 
+    // Produce JSON from the dogs vector.
     let json = serde_json::to_string(&dogs).unwrap();
+    // To produced pretty-printed JSON, use the following instead:
+    // let json = serde_json::to_string_pretty(&dogs).unwrap();
     println!("json = {}", json);
+
+    // Parse the JSON to obtain a vector of Dog instances.
     let dogs: Vec<Dog> = serde_json::from_str(&json).unwrap();
     println!("dogs = {:#?}", dogs);
 }
 ```
 
+The JSON produced by the code above is the following, all on a single line:
+
+```json
+[
+  {"name": "Comet", "breed": "Whippet"},
+  {"name": "Oscar", "breed": "German Shorthaired Pointer"}
+]
+```
+
 ## Command-line Arguments
 
-To pass command-line arguments to the program, specify them after `--`.
-For example, `cargo run -- arg1 arg2 ...`
-The arguments are available in `std::env::args`.
-The following can be used to get the command-line arguments in a vector
-where the first item is the path the executable
-and the remaining items are the actual arguments.
+Command-line arguments can be passed to a Rust program
+by listing them after the executable path.
+To execute a Rust program using `cargo run` and
+pass it command-line arguments, specify them after `--`
+as follows: `cargo run -- arg1 arg2 ...`
+
+In either case, the arguments are available in the iterator `std::env::args`.
+The `collect` method can be used to create a vector of the arguments.
+The first item is the path the executable and
+the remaining items are the actual arguments.
+For example:
 
 ```rust
 let args: Vec<String> = std::env::args().collect();
@@ -4640,40 +4674,44 @@ let args: Vec<String> = std::env::args().collect();
 
 Command-line arguments can represent options
 that affect what an application does.
-A crate like {% aTargetBlank "https://crates.io/crates/clap", "clap" %}
+A library crate like {% aTargetBlank "https://crates.io/crates/clap", "clap" %}
 can be used to simplify parsing of the options and provide help.
 
-The `clap` crate supports many features including:
+The `clap` crate supports many features including the ability to:
 
-- generated help viewed with `--help` (not with `-h`)
-- getting the version with `--version` or `-V` (not with `-v`)
+- generate help viewed with `--help` (not with `-h`)
+- get the program version with `--version` or `-V` (not with `-v`)
   specified in the code or obtained from the `Cargo.toml` file
-- positional arguments
-- optional named arguments with no value, also known as "flags" (ex. `--quiet`)
-- named arguments with values, also known as "options" (ex. `--color yellow`)
-- arguments with default values
-- defining when an argument is allowed or required
+- parse positional arguments (known as "args")
+- parse optional named arguments with no value,
+  also known as "flags" (ex. `--quiet`)
+- parse named arguments with values,
+  also known as "options" (ex. `--color yellow`)
+- parse arguments with default values
+- define when an argument is allowed or required
   (see the `Arg` methods `required_if`, `required_ifs`,
   `required_unless`, `required_unless_all`, and `required_unless_one`)
-- specifying options with YAML (but a benefit of specifying them
-  in code is that an IDE can detect and report errors)
-- colored error messages
-- non-string option values (ex. `bool`, `i32`, or `f64`)
-- custom value validation
+- specify options with YAML (However, a benefit of specifying them
+  in code is that an IDE can detect and report errors.)
+- produce colored error messages
+- parse non-string option values (ex. `bool`, `i32`, or `f64`)
+- implement custom value validation
 - and more
 
 Named arguments can have short (ex. `-q`) and long (ex. `--quiet`) forms.
-Flags can be combined, so `-a -b -c` is the same as `-abc`.
 
-Each argument must have a name that uses to retrieve its value.
-This typically matches its long name, but is required
+Flags can be combined.
+This means that `-abc` is treated the same as `-a -b -c`.
+
+Each argument must have a name that is used to retrieve its value.
+While it typically matches its long name, specifying this name is required
 because positional options are not required to have a long or short name.
 
-For example, consider an app that accepts:
+To demonstrate using `clap` we will create a program that accepts:
 
 - a positional argument with a type of `u8` that specifies a size
-- an optional flag that causes output to be minimized
-- a required option that supplies a color name
+- an optional flag that causes output to be minimized (`--quiet`)
+- a required option that supplies a color name (`--color`)
 
 To get help on the app, enter `cargo run -- --help` or
 build the app with `cargo build` and
@@ -4689,7 +4727,8 @@ enter `./target/debug/clap-demo -- 19 --color yellow -q`.
 extern crate clap;
 
 use clap::Arg;
-// Use the following line instead if the alternate approach below is selected.
+// Use the following line instead if the
+// alternate approach described below is selected.
 //use clap::{App, Arg};
 
 // This is a custom validator function that
@@ -4703,7 +4742,8 @@ fn validate_color(color: String) -> Result<(), String> {
 }
 
 fn main() {
-    // Alternate approach, not getting values from Cargo.toml file:
+    // The code below gets some values from the Cargo.toml file.
+    // To supply those values in the code here, use the following:
     // let matches = App::new("clap-demo) // next line preferred
     // let matches = App::new(crate_name!()) // gets from Cargo.toml
     //     .about("This demonstrates the use of clap.") // next line preferred
@@ -4713,15 +4753,18 @@ fn main() {
     //     .version("1.0") // next line preferred
     //     .version(crate_version!()) // gets from Cargo.toml
 
-    // Preferred approach, getting all possible values from Cargo.toml file:
-    // The `app_from_crate!` macro combines
+    // The preferred approach is to get
+    // all possible values from Cargo.toml file.
+    // The `app_from_crate!` macro does this by combining
     // the use of all the macros used above.
     let matches = app_from_crate!()
+        // This adds text before the generated help text.
         .before_help("Welcome to my demo!") // optional; rarely used
+        // This adds text after the generated help text.
         .after_help("Have fun!") // optional; rarely used
 
-        // Good usage strings are generated automatically,
-        // but they can be overridden as follows.
+        // Good usage text is generated automatically,
+        // but it can be overridden as follows:
         //.usage("overridden usage text")
 
         // This is a named argument that doesn't have a value (a "flag")
@@ -4734,8 +4777,8 @@ fn main() {
         )
 
         // This is a named argument that has a value (an "option").
-        // The name can be separated from the value with a space or `=`.
-        // For example, `--color yellow` or `--color=yellow`.
+        // The name can be separated from the value with a space or "=".
+        // For example, "--color yellow" or "--color=yellow".
         .arg(
             Arg::with_name("color")
                 .long("color")
@@ -4749,10 +4792,10 @@ fn main() {
 
         // This argument is positional (an "arg").
         // Positional arguments can come before or after named arguments.
-        // Their order is the order in which they are defined
-        // unless the `index` method is called.
-        // This specifies the position and is only used on positional arguments.
-        // When this is done, `takes_value` defaults to `true`.
+        // Their order is the order in which they are defined here
+        // unless the "index" method is called.
+        // It specifies the position and is only used on positional arguments.
+        // When the "index" method is used, "takes_value" defaults to "true".
         .arg(
             Arg::with_name("size")
                 .takes_value(true)
@@ -4760,14 +4803,14 @@ fn main() {
                 .required(true),
         )
 
-        .get_matches(); // parses the command-line arguments
+        .get_matches(); // parses command-line arguments
 
-    // The `value_of` method returns an `Option` enum, with
-    // `Some` wrapping the value or `None` when not present.
-    // We can safely call unwrap instead of unwrap_or
-    // (which supplies a value to use in case of parsing error)
-    // for required options.
-    // In this case, `color` is not required and has a default value.
+    // The "value_of" method returns an "Option" enum, with
+    // "Some" wrapping the value or "None" when the option is not present.
+    // We can safely call "unwrap" for required options or
+    // options with a default value, instead of calling "unwrap_or"
+    // which supplies a value to use when a parsing error occurs.
+    // In this case, "color" is not required and has a default value.
     let color = matches.value_of("color").unwrap();
 
     // Values are always strings, but clap provides
@@ -4785,6 +4828,7 @@ fn main() {
 
 ## <a name="modules">Modules</a>
 
+TODO: Resume review here.
 A module defines a collection of values like constants, functions, and structs.
 
 To gain access to the values in a module that is
