@@ -4828,26 +4828,14 @@ fn main() {
 
 ## <a name="modules">Modules</a>
 
-TODO: Resume review here.
 A module defines a collection of values like constants, functions, and structs.
-
-To gain access to the values in a module that is
-not defined in the same source file, use the `mod` statement.
-Values in the `std::prelude` module are automatically made available.
-A list of these values can be found {% aTargetBlank
-"https://doc.rust-lang.org/std/prelude/", "here" %}
-and include `Box`, `Option`, `Result`, `String`, and `Vec`.
-Other libraries can also define a `prelude` module,
-but the values it defines are not automatically imported.
-TODO: Do they just provide an easier way to gain access to selected submodule values?
-
 A module can be defined in many places:
 
-1. inside a source file that uses it
-1. in a file whose name is the module name
-1. in multiple files within a directory whose name is the module name
 1. in the Rust standard library
 1. in a dependency declared in the `Cargo.toml` file
+1. in a file whose name is the module name
+1. in multiple files within a directory whose name is the module name
+1. inside a source file that uses it (with `mod { ... }`)
 
 By default, all members of a module are private.
 To make a member accessible outside the module,
@@ -4886,9 +4874,9 @@ fn main() {
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
     let d1 = p1.distance_to(&p2);
-    println!("d1 = {}", d1);
+    println!("{}", d1); // 5
     let d2 = Point2D::distance_between(&p1, &p2);
-    println!("d2 = {}", d2);
+    println!("{}", d2); // 5
 }
 ```
 
@@ -4925,15 +4913,28 @@ The statement `mod name;` is equivalent to `mod name { include!("main.rs"); }`
 where `main.rs` is the file that contains the module definition
 (determined by the compiler).
 
-The `use` statement binds a full path to a new name for easier access.
+Values in the `std::prelude` module are automatically made available.
+A list of these values can be found {% aTargetBlank
+"https://doc.rust-lang.org/std/prelude/", "here" %}
+and include `Box`, `Option`, `Result`, `String`, and `Vec`.
+Other libraries can also define a `prelude` module,
+but the values it defines are not automatically imported.
+Users of the library can include all the items defined in the `prelude` module
+using `use library_name::prelude::\*;
+TODO: Does a prelude module just provide an easier way
+TODO: to gain access to selected submodule values?
+
+The `use` statement binds a module path to a new name for easier access.
 For example, `use A::B::C` enables using `C` with just that name
 instead of its fully qualified name.
 This is also referred to as bringing `C` into scope.
+In this example, `C` can be any kind of item
+including a module, enum, struct, or function.
 
-When bringing functions into scope it is idiomatic to just
+When bringing functions into scope, it is idiomatic to just
 specify the path to their parent module in a `use` statement
 and use that to refer to the function (`ParentModule::fnName`).
-This makes it apparent when looking a calls to the functions
+This makes it apparent when looking a calls to these functions
 that they are not defined locally.
 
 When bringing other items like structs and enums into scope
@@ -4942,8 +4943,8 @@ and then refer to them using only their name.
 However, this approach doesn't work if multiple items are needed
 from different modules and they have the same name.
 In that case either bring their parent modules into scope
-and use those to disambiguate references
-or use the `as` keyword in the `use` statement to assign aliases to the names.
+and use those to disambiguate references or
+use the `as` keyword in the `use` statement to assign aliases to the names.
 For example, `use math::dimension3::Point as Point3D`.
 
 The file `src/main.rs` below uses the `points` module defined above.
@@ -4956,27 +4957,26 @@ fn main() {
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
     let d1 = p1.distance_to(&p2);
-    println!("d1 = {}", d1);
+    println!("{}", d1); // 5
     let d2 = Point2D::distance_between(&p1, &p2);
-    println!("d2 = {}", d2);
+    println!("{}", d2); // 5
 }
 ```
 
 This approach works well for small modules.
 For large modules it is sometimes desirable to
 split their definition across multiple source files.
-Each `.rs` defines a module and
-placing them in directories creates sub-modules.
+Each `.rs` file defines a module and
+placing them in subdirectories creates sub-modules.
 A `.rs` file can use the `mod` and `use` statements
-to gain access to the functionality in multiple other modules
-and re-export the functionality as its own.
+to gain access to items in multiple other modules
+and re-export those items as their own.
 
 The old way of doing this was to
 create a directory with the name of the module,
 place the files that define the module functionality inside it,
 and create the file `mod.rs` inside the directory
-that imports all functionality to be exposed from those files
-and re-exports it.
+that imports items to be exposed from those files and re-exports them.
 
 The new way is similar, but
 a `.rs` file with the name of the module is created instead of `mod.rs`
@@ -4985,14 +4985,15 @@ and this is placed in the same directory as the module directory.
 Here is the previous code using this approach.
 We'll add a function to the module that is
 defined in a different source file than
-the one that defines the `Point2D` struct.
+the one that defines the `Point2D` struct
+just to demonstrate using multiple files.
 
 The file `src/points/types.rs` can be
-identical to the file `src/points.rs` above.
-It defines the `Point2D` struct fields and methods.
+identical to the file `src/points.rs` above,
+defining the `Point2D` struct and it's associated function and method.
 
-The file `src/points/functions.rs` defines the function `distance`
-which returns the distance between two `Point2D` objects.
+The file `src/points/functions.rs` defines the function `distance_from_origin`
+which returns the distance from a `Point2D` object to the origin.
 Note that this is a plain function, not a method or associated function.
 
 ```rust
@@ -5000,10 +5001,8 @@ Note that this is a plain function, not a method or associated function.
 // (types in this case) in the same directory.
 use super::types::Point2D;
 
-pub fn distance(pt1: &Point2D, pt2: &Point2D) -> f64 {
-    let dx = pt1.x - pt2.x;
-    let dy = pt1.y - pt2.y;
-    (dx.powi(2) + dy.powi(2)).sqrt()
+pub fn distance_from_origin(pt: &Point2D) -> f64 {
+    (pt.x.powi(2) + pt.y.powi(2)).sqrt()
 }
 ```
 
@@ -5021,26 +5020,27 @@ using all the features of the `points` module.
 
 ```rust
 mod points;
-// Note how a single "use" statement can simplify
-// access to multiple values from a module.
-use points::{distance, Point2D};
+// Note how a "use" statement can access multiple values
+// from a module using curly brackets.
+use points::{distance_to_origin, Point2D};
 
 fn main() {
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
     let d1 = p1.distance_to(&p2);
-    println!("d1 = {}", d1);
+    println!("{}", d1); // 5
     let d2 = Point2D::distance_between(&p1, &p2);
-    println!("d2 = {}", d2);
-    let d3 = distance(&p1, &p2);
-    println!("d3 = {}", d3);
+    println!("{}", d2); // 5
+    let d3 = distance_to_origin(&p1);
+    println!("{}", d3); // 5
 }
 ```
 
-Modules can be nested to further segregate the defined names.
+Modules can be nested to further segregate the defined items.
 
 ## <a name="crates">Crates</a>
 
+TODO: Resume review here.
 A crate is a tree of modules.
 There are two kinds of traits.
 Binary (bin) crates produce an executable.
