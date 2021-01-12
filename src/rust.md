@@ -5015,12 +5015,15 @@ Values in the `std::prelude` module are automatically made available.
 A list of these values can be found {% aTargetBlank
 "https://doc.rust-lang.org/std/prelude/", "here" %}
 and include `Box`, `Option`, `Result`, `String`, and `Vec`.
+
 Other libraries can also define a `prelude` module,
 but the values it defines are not automatically imported.
-Users of the library can include all the items defined in the `prelude` module
-using `use library_name::prelude::\*;
-TODO: Does a prelude module just provide an easier way
-TODO: to gain access to selected submodule values?
+Users of the library can include all the items defined in a `prelude` module
+using `use library_name::prelude::\*;`.
+This is most useful for bringing traits into scope.
+(See this comment in the <% aTargetBlank
+"https://users.rust-lang.org/t/defining-a-prelude-module-for-a-library-crate/54018/2",
+"Rust Forum" %}>).
 
 The `use` statement binds a module path to a new name for easier access.
 For example, `use A::B::C` enables using `C` with just that name
