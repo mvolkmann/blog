@@ -564,6 +564,7 @@
     "urllib",
     "uroot",
     "usecols",
+    "usize",
     "uuidv",
     "uvicorn",
     "venv",

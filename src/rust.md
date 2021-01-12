@@ -2487,6 +2487,102 @@ fn average<T: AddAssign + Copy + Num + ToPrimitive>(numbers: &[T]) -> f32 {
 }
 ```
 
+The following table maps built-in traits
+to the commonly used built-in types that implement them.
+Knowing this is useful for determining the trait bounds that can be used
+to write functions that support arguments of multiple types.
+
+Recall that Rust supports the following built-in scalar (single value) types:
+
+- `bool`
+- `char`
+- number: float and integer
+- float: `f32` and `f64`
+- integer: signed and unsigned
+- signed integer: `i8`, `i16`, `i32`, `i64`, `i128`, and `isize`
+- unsigned integer: `u8`, `u16`, `u32`, `u64`, `u128`, and `usize`
+
+The compound types (multiple values) with fixed sizes include arrays and tuples.
+When these are listed as a implementing type below,
+this is only the case if their items implement the trait.
+
+TODO: Finish this table
+
+| Trait                      | Implementing Types                                           |
+| -------------------------- | ------------------------------------------------------------ |
+| `std::borrow::Borrow`      | scalar, compound, array, `Arc`, `Box`, `Rc`, `String`, `Vec` |
+| `std::borrow::BorrowMut`   | array                                                        |
+| `std::borrow::ToOwned`     | scalar, compound,                                            |
+| `std::clone::Clone`        | array, tuple                                                 |
+| `std::compare::Eq`         |                                                              |
+| `std::compare::Ord`        | array, tuple                                                 |
+| `std::compare::PartialEq`  | array, tuple                                                 |
+| `std::compare::PartialOrd` | array, tuple                                                 |
+| `std::convert::AsMut`      | array, `Box`, `String`, `Vec`                                |
+| `std::convert::AsRef`      | array, `Arc`, `Box`, `Rc`, `str`, `String`                   |
+| `std::convert::From`       | scalar, compound,                                            |
+| `std::convert::Into`       | scalar, compound,                                            |
+| `std::convert::TryFrom`    | scalar, compound,                                            |
+| `std::convert::TryInto`    | scalar, compound,                                            |
+| `std::default::Default`    | array, tuple                                                 |
+| `std::fmt::Debug`          | array, tuple                                                 |
+| `std::fmt::Display`        |                                                              |
+| `std::fmt::Write`          |                                                              |
+| `std::hash::Hash`          | array, tuple                                                 |
+| `std::io::Read`            |                                                              |
+| `std::io::Write`           |                                                              |
+| `std::iter::Extend`        |                                                              |
+| `std::iter::FromIterator`  |                                                              |
+| `std::iter::IntoIterator`  | array                                                        |
+| `std::iter::Iterator`      |                                                              |
+| `std::iter::Product`       |                                                              |
+| `std::iter::Sum`           |                                                              |
+| `std::marker::Copy`        | array, tuple                                                 |
+| `std::marker::Send`        | scalar, compound,                                            |
+| `std::marker::Sized`       | type parameters                                              |
+| `std::marker::Sync`        | scalar, compound,                                            |
+| `std::marker::Unpin`       | scalar, compound,                                            |
+| `std::ops::Add`            |                                                              |
+| `std::ops::AddAssign`      |                                                              |
+| `std::ops::BitAndAdd`      |                                                              |
+| `std::ops::BitAndAssign`   |                                                              |
+| `std::ops::BitOr`          |                                                              |
+| `std::ops::BitOrAssign`    |                                                              |
+| `std::ops::BitXor`         |                                                              |
+| `std::ops::BitXorAssign`   |                                                              |
+| `std::ops::Deref`          |                                                              |
+| `std::ops::Deref`          |                                                              |
+| `std::ops::DerefMut`       |                                                              |
+| `std::ops::DerefMut`       |                                                              |
+| `std::ops::Div`            |                                                              |
+| `std::ops::DivAssign`      |                                                              |
+| `std::ops::Drop`           |                                                              |
+| `std::ops::Drop`           |                                                              |
+| `std::ops::Fn`             |                                                              |
+| `std::ops::Fn`             |                                                              |
+| `std::ops::FnMut`          |                                                              |
+| `std::ops::FnMut`          |                                                              |
+| `std::ops::FnOnce`         |                                                              |
+| `std::ops::FnOnce`         |                                                              |
+| `std::ops::Index`          |                                                              |
+| `std::ops::Index`          |                                                              |
+| `std::ops::IndexMut`       |                                                              |
+| `std::ops::Mul`            |                                                              |
+| `std::ops::MulAssign`      |                                                              |
+| `std::ops::Neg`            |                                                              |
+| `std::ops::Not`            | `bool`                                                       |
+| `std::ops::RangeBound`     |                                                              |
+| `std::ops::Rem`            |                                                              |
+| `std::ops::RemAssign`      |                                                              |
+| `std::ops::Shl`            |                                                              |
+| `std::ops::ShlAssign`      |                                                              |
+| `std::ops::Shr`            |                                                              |
+| `std::ops::ShrAssign`      |                                                              |
+| `std::ops::Sub`            |                                                              |
+| `std::ops::SubAssign`      |                                                              |
+| `std::str::FromStr`        |                                                              |
+| `std::string::ToString`    | scalar, compound,                                            |
+
 ### Sets
 
 A set is a collection of unique values.
@@ -4142,6 +4238,8 @@ Those that can be derived (automatically implemented) using the
 without defining any methods and are also indicated in the "Notes" column.
 Other traits must be manually implemented.
 
+TODO: Add namespace in front of all these trait names.
+
 | Trait Name     | Description                                                                                                                                 | Notes             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `AsMut`        | defines `as_mut` method that converts one mutable reference type to another                                                                 |                   |
@@ -5040,7 +5138,6 @@ Modules can be nested to further segregate the defined items.
 
 ## <a name="crates">Crates</a>
 
-TODO: Resume review here.
 A crate is a tree of modules.
 There are two kinds of crates.
 Binary (bin) crates produce an executable.
@@ -5064,7 +5161,7 @@ Commonly used crates found here include:
 - {% aTargetBlank "https://crates.io/crates/rayon", "rayon" %} - "data-parallelism library"
 - {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %} - HTTP client
 - {% aTargetBlank "https://crates.io/crates/rocket", "rocket" %} - web framework
-- {% aTargetBlank "https://crates.io/crates/serde", "serde" %} - data structure serialization, including JSON
+- {% aTargetBlank "https://crates.io/crates/serde", "serde" %} - data structure serialization and deserialization, including JSON
 - {% aTargetBlank "https://crates.io/crates/tokio", "tokio" %} - "An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications."
 
 ## Creating and Using a Library
@@ -5087,16 +5184,16 @@ To demonstrate, let's create a library for operating on 2D points.
    }
 
    impl Point2D {
-       // Instance method (use of self is similar to Python)
-       pub fn distance_to(self: &Self, other: &Self) -> f64 {
-           Self::distance_between(self, other)
-       }
-
-       // Static method
+       // Associated function
        pub fn distance_between(pt1: &Self, pt2: &Self) -> f64 {
            let dx = pt1.x - pt2.x;
            let dy = pt1.y - pt2.y;
            (dx.powi(2) + dy.powi(2)).sqrt()
+       }
+
+       // Method
+       pub fn distance_to(self: &Self, other: &Self) -> f64 {
+           Self::distance_between(self, other)
        }
    }
    ```
@@ -5114,18 +5211,18 @@ To demonstrate, let's create a library for operating on 2D points.
        use crate::geometry2d::Point2D;
 
        #[test]
-       // To skip a test, add: #[ignore]
+       // To temporarily skip a test, add: #[ignore]
        fn distance_between() {
-           let origin = Point2D { x: 0.0, y: 0.0 };
-           let pt = Point2D { x: 3.0, y: 4.0 };
-           assert_eq!(Point2D::distance_between(&origin, &pt), 5.0);
+           let pt1 = Point2D { x: 3.0, y: 4.0 };
+           let pt2 = Point2D { x: 6.0, y: 8.0 };
+           assert_eq!(Point2D::distance_between(&pt1, &pt2), 5.0);
        }
 
        #[test]
        fn distance_to() {
-           let origin = Point2D { x: 0.0, y: 0.0 };
-           let pt = Point2D { x: 3.0, y: 4.0 };
-           assert_eq!(origin.distance_to(&pt), 5.0);
+           let pt1 = Point2D { x: 3.0, y: 4.0 };
+           let pt2 = Point2D { x: 6.0, y: 8.0 };
+           assert_eq!(pt1.distance_to(&pt2), 5.0);
        }
    }
    ```
@@ -5154,10 +5251,10 @@ To demonstrate, let's create a library for operating on 2D points.
    use geometry2d::Point2D;
 
    fn main() {
-       let origin = Point2D { x: 0.0, y: 0.0 };
-       let pt = Point2D { x: 3.0, y: 4.0 };
-       println!("{}", Point2D::distance_between(&origin, &pt)); // 5
-       println!("{}", origin.distance_to(&pt)); // 5
+       let pt1 = Point2D { x: 3.0, y: 4.0 };
+       let pt2 = Point2D { x: 6.0, y: 8.0 };
+       println!("{}", Point2D::distance_between(&pt1, &pt2)); // 5
+       println!("{}", pt1.distance_to(&pt2)); // 5
    }
    ```
 
@@ -5177,29 +5274,31 @@ when not running on a Windows machine:
 1. `cd` to the application root directory.
 1. Enter `cargo build --target x86_64-pc-windows-gnu --release`
 
-This creates the executable file in the
+This creates an executable file in the
 `target/x86_64-pc-windows-gnu/release` directory
 with the same name as the project and a `.exe` file extension.
 
 ## <a name="smart-pointers">Smart Pointers</a>
 
+TODO: Resume review here.
 Smart pointers are an alternative to references.
 Each is implemented by a struct that holds metadata
 and has methods that implement its features.
 Many are defined in the standard library
 and developers can implement new ones.
 
-| Name         | Description                                                                                          |
-| ------------ | ---------------------------------------------------------------------------------------------------- |
-| `String`     | owns `str` data, holds `capacity` and `length` metadata, and provides methods to operate on the data |
-| `Vec<T>`     | similar to `String`, but the data elements can be any specified type                                 |
-| `Box<T>`     | a pointer stored on the stack to data on the heap                                                    |
-| `Rc<T>`      | stands for "reference counting"; enables multiple owners                                             |
-| `Arc<T>`     | stands for "atomically reference counting"; enables multiple owners across multiple threads          |
-| `Cell<T>`    | enables having multiple mutable references to a value within a single thread (1)                     |
-| `RefCell<T>` | similar to `Cell`, but holds references to values instead of values                                  |
-| `Ref<T>`     | used with a `RefCell` to enforce immutable borrowing rules at runtime                                |
-| `RefMut<T>`  | used with a `RefCell` to enforce mutable borrowing rules at runtime                                  |
+| Name         | Description                                                                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Arc<T>`     | stands for "atomically reference counting"; enables multiple owners across multiple threads                                                      |
+| `Box<T>`     | a pointer stored on the stack to data on the heap                                                                                                |
+| `Cell<T>`    | enables having multiple mutable references to a value within a single thread (1)                                                                 |
+| `Cow<T>`     | stands for "Clone On Write"; wraps an immutable borrow and<br>provides the `to_mut` method for lazy cloning when mutation or ownership is needed |
+| `Rc<T>`      | stands for "reference counting"; enables multiple owners                                                                                         |
+| `Ref<T>`     | used with a `RefCell` to enforce immutable borrowing rules at runtime                                                                            |
+| `RefCell<T>` | similar to `Cell`, but holds references to values instead of values                                                                              |
+| `RefMut<T>`  | used with a `RefCell` to enforce mutable borrowing rules at runtime                                                                              |
+| `String`     | owns `str` data, holds `capacity` and `length` metadata, and provides methods to operate on the data                                             |
+| `Vec<T>`     | similar to `String`, but the data elements can be any specified type                                                                             |
 
 1. This supports "interior mutability" which is described below.
 
