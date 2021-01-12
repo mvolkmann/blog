@@ -5042,9 +5042,10 @@ Modules can be nested to further segregate the defined items.
 
 TODO: Resume review here.
 A crate is a tree of modules.
-There are two kinds of traits.
+There are two kinds of crates.
 Binary (bin) crates produce an executable.
 Library (lib) crates provide code used by other crates.
+TODO: Can a crate be both types?
 
 The most popular source of open source crates is
 {% aTargetBlank "https://crates.io/", "crates.io" %}.
@@ -5053,12 +5054,12 @@ Commonly used crates found here include:
 - {% aTargetBlank "https://crates.io/crates/actix-web", "actix-web" %} - web framework
 - {% aTargetBlank "https://crates.io/crates/chrono", "chrono" %} - date and time library
 - {% aTargetBlank "https://crates.io/crates/clap", "clap" %} - command-line argument parser
-- {% aTargetBlank "https://crates.io/crates/futures", "log" %} -
+- {% aTargetBlank "https://crates.io/crates/futures", "futures" %} -
   "An implementation of futures and streams featuring
   zero allocations, composability, and iterator-like interfaces.
-- {% aTargetBlank "https://crates.io/crates/hyper", "log" %} - HTTP client library
+- {% aTargetBlank "https://crates.io/crates/hyper", "hyper" %} - HTTP client library
 - {% aTargetBlank "https://crates.io/crates/log", "log" %} - logging API
-- {% aTargetBlank "https://crates.io/crates/num-traits", "log" %} - generic mathematics
+- {% aTargetBlank "https://crates.io/crates/num-traits", "num-traits" %} - generic mathematics
 - {% aTargetBlank "https://crates.io/crates/rand", "rand" %} - random number generation
 - {% aTargetBlank "https://crates.io/crates/rayon", "rayon" %} - "data-parallelism library"
 - {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %} - HTTP client
