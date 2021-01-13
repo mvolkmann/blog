@@ -2506,82 +2506,88 @@ The compound types (multiple values) with fixed sizes include arrays and tuples.
 When these are listed as a implementing type below,
 this is only the case if their items implement the trait.
 
+In the lists of implementing types:
+
+- B means all the built-in scalar and compound types.
+- C means any type that implements the `Clone` trait or slices of such types.
+- S means any type with size known at compile type or slices of such types.
+
 TODO: Finish this table
 
-| Trait                      | Implementing Types                                           |
-| -------------------------- | ------------------------------------------------------------ |
-| `std::borrow::Borrow`      | scalar, compound, array, `Arc`, `Box`, `Rc`, `String`, `Vec` |
-| `std::borrow::BorrowMut`   | array                                                        |
-| `std::borrow::ToOwned`     | scalar, compound,                                            |
-| `std::clone::Clone`        | array, tuple                                                 |
-| `std::compare::Eq`         |                                                              |
-| `std::compare::Ord`        | array, tuple                                                 |
-| `std::compare::PartialEq`  | array, tuple                                                 |
-| `std::compare::PartialOrd` | array, tuple                                                 |
-| `std::convert::AsMut`      | array, `Box`, `String`, `Vec`                                |
-| `std::convert::AsRef`      | array, `Arc`, `Box`, `Rc`, `str`, `String`                   |
-| `std::convert::From`       | scalar, compound,                                            |
-| `std::convert::Into`       | scalar, compound,                                            |
-| `std::convert::TryFrom`    | scalar, compound,                                            |
-| `std::convert::TryInto`    | scalar, compound,                                            |
-| `std::default::Default`    | array, tuple                                                 |
-| `std::fmt::Debug`          | array, tuple                                                 |
-| `std::fmt::Display`        |                                                              |
-| `std::fmt::Write`          |                                                              |
-| `std::hash::Hash`          | array, tuple                                                 |
-| `std::io::Read`            |                                                              |
-| `std::io::Write`           |                                                              |
-| `std::iter::Extend`        |                                                              |
-| `std::iter::FromIterator`  |                                                              |
-| `std::iter::IntoIterator`  | array                                                        |
-| `std::iter::Iterator`      |                                                              |
-| `std::iter::Product`       |                                                              |
-| `std::iter::Sum`           |                                                              |
-| `std::marker::Copy`        | array, tuple                                                 |
-| `std::marker::Send`        | scalar, compound,                                            |
-| `std::marker::Sized`       | type parameters                                              |
-| `std::marker::Sync`        | scalar, compound,                                            |
-| `std::marker::Unpin`       | scalar, compound,                                            |
-| `std::ops::Add`            |                                                              |
-| `std::ops::AddAssign`      |                                                              |
-| `std::ops::BitAndAdd`      |                                                              |
-| `std::ops::BitAndAssign`   |                                                              |
-| `std::ops::BitOr`          |                                                              |
-| `std::ops::BitOrAssign`    |                                                              |
-| `std::ops::BitXor`         |                                                              |
-| `std::ops::BitXorAssign`   |                                                              |
-| `std::ops::Deref`          |                                                              |
-| `std::ops::Deref`          |                                                              |
-| `std::ops::DerefMut`       |                                                              |
-| `std::ops::DerefMut`       |                                                              |
-| `std::ops::Div`            |                                                              |
-| `std::ops::DivAssign`      |                                                              |
-| `std::ops::Drop`           |                                                              |
-| `std::ops::Drop`           |                                                              |
-| `std::ops::Fn`             |                                                              |
-| `std::ops::Fn`             |                                                              |
-| `std::ops::FnMut`          |                                                              |
-| `std::ops::FnMut`          |                                                              |
-| `std::ops::FnOnce`         |                                                              |
-| `std::ops::FnOnce`         |                                                              |
-| `std::ops::Index`          |                                                              |
-| `std::ops::Index`          |                                                              |
-| `std::ops::IndexMut`       |                                                              |
-| `std::ops::Mul`            |                                                              |
-| `std::ops::MulAssign`      |                                                              |
-| `std::ops::Neg`            |                                                              |
-| `std::ops::Not`            | `bool`                                                       |
-| `std::ops::RangeBound`     |                                                              |
-| `std::ops::Rem`            |                                                              |
-| `std::ops::RemAssign`      |                                                              |
-| `std::ops::Shl`            |                                                              |
-| `std::ops::ShlAssign`      |                                                              |
-| `std::ops::Shr`            |                                                              |
-| `std::ops::ShrAssign`      |                                                              |
-| `std::ops::Sub`            |                                                              |
-| `std::ops::SubAssign`      |                                                              |
-| `std::str::FromStr`        |                                                              |
-| `std::string::ToString`    | scalar, compound,                                            |
+| Trait                     | Implementing Types                                                                                                                                       |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `std::borrow::Borrow`     | S, scalar, compound, `Arc`, `Box`, `Rc`, `String`, `Vec`                                                                                                 |
+| `std::borrow::BorrowMut`  | S, array, `Box`, `String`, `Vec`                                                                                                                         |
+| `std::borrow::ToOwned`    | C, `str`                                                                                                                                                 |
+| `std::clone::Clone`       | B, S, `Arc`, `Box`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more                                          |
+| `std::cmp::Eq`            | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more |
+| `std::cmp::Ord`           | B, S, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                 |
+| `std::cmp::PartialEq`     | B, S, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `str`, `String`, `Vec`                               |
+| `std::cmp::PartialOrd`    | array, tuple TODO: Finish from here                                                                                                                      |
+| `std::convert::AsMut`     | array, `Box`, `String`, `Vec`                                                                                                                            |
+| `std::convert::AsRef`     | array, `Arc`, `Box`, `Rc`, `str`, `String`                                                                                                               |
+| `std::convert::From`      | scalar, compound,                                                                                                                                        |
+| `std::convert::Into`      | scalar, compound,                                                                                                                                        |
+| `std::convert::TryFrom`   | scalar, compound,                                                                                                                                        |
+| `std::convert::TryInto`   | scalar, compound,                                                                                                                                        |
+| `std::default::Default`   | array, tuple                                                                                                                                             |
+| `std::fmt::Debug`         | array, tuple                                                                                                                                             |
+| `std::fmt::Display`       |                                                                                                                                                          |
+| `std::fmt::Write`         |                                                                                                                                                          |
+| `std::hash::Hash`         | array, tuple                                                                                                                                             |
+| `std::io::Read`           |                                                                                                                                                          |
+| `std::io::Write`          |                                                                                                                                                          |
+| `std::iter::Extend`       |                                                                                                                                                          |
+| `std::iter::FromIterator` |                                                                                                                                                          |
+| `std::iter::IntoIterator` | array                                                                                                                                                    |
+| `std::iter::Iterator`     |                                                                                                                                                          |
+| `std::iter::Product`      |                                                                                                                                                          |
+| `std::iter::Sum`          |                                                                                                                                                          |
+| `std::marker::Copy`       | array, tuple                                                                                                                                             |
+| `std::marker::Send`       | scalar, compound,                                                                                                                                        |
+| `std::marker::Sized`      | type parameters                                                                                                                                          |
+| `std::marker::Sync`       | scalar, compound,                                                                                                                                        |
+| `std::marker::Unpin`      | scalar, compound,                                                                                                                                        |
+| `std::ops::Add`           |                                                                                                                                                          |
+| `std::ops::AddAssign`     |                                                                                                                                                          |
+| `std::ops::BitAndAdd`     |                                                                                                                                                          |
+| `std::ops::BitAndAssign`  |                                                                                                                                                          |
+| `std::ops::BitOr`         |                                                                                                                                                          |
+| `std::ops::BitOrAssign`   |                                                                                                                                                          |
+| `std::ops::BitXor`        |                                                                                                                                                          |
+| `std::ops::BitXorAssign`  |                                                                                                                                                          |
+| `std::ops::Deref`         |                                                                                                                                                          |
+| `std::ops::Deref`         |                                                                                                                                                          |
+| `std::ops::DerefMut`      |                                                                                                                                                          |
+| `std::ops::DerefMut`      |                                                                                                                                                          |
+| `std::ops::Div`           |                                                                                                                                                          |
+| `std::ops::DivAssign`     |                                                                                                                                                          |
+| `std::ops::Drop`          |                                                                                                                                                          |
+| `std::ops::Drop`          |                                                                                                                                                          |
+| `std::ops::Fn`            |                                                                                                                                                          |
+| `std::ops::Fn`            |                                                                                                                                                          |
+| `std::ops::FnMut`         |                                                                                                                                                          |
+| `std::ops::FnMut`         |                                                                                                                                                          |
+| `std::ops::FnOnce`        |                                                                                                                                                          |
+| `std::ops::FnOnce`        |                                                                                                                                                          |
+| `std::ops::Index`         |                                                                                                                                                          |
+| `std::ops::Index`         |                                                                                                                                                          |
+| `std::ops::IndexMut`      |                                                                                                                                                          |
+| `std::ops::Mul`           |                                                                                                                                                          |
+| `std::ops::MulAssign`     |                                                                                                                                                          |
+| `std::ops::Neg`           |                                                                                                                                                          |
+| `std::ops::Not`           | `bool`                                                                                                                                                   |
+| `std::ops::RangeBound`    |                                                                                                                                                          |
+| `std::ops::Rem`           |                                                                                                                                                          |
+| `std::ops::RemAssign`     |                                                                                                                                                          |
+| `std::ops::Shl`           |                                                                                                                                                          |
+| `std::ops::ShlAssign`     |                                                                                                                                                          |
+| `std::ops::Shr`           |                                                                                                                                                          |
+| `std::ops::ShrAssign`     |                                                                                                                                                          |
+| `std::ops::Sub`           |                                                                                                                                                          |
+| `std::ops::SubAssign`     |                                                                                                                                                          |
+| `std::str::FromStr`       |                                                                                                                                                          |
+| `std::string::ToString`   | scalar, compound,                                                                                                                                        |
 
 ### Sets
 
