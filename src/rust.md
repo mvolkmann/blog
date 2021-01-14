@@ -1830,11 +1830,16 @@ There are many ways to handle values from these enum types.
    }
    ```
 
-## <a name="scalar-types">Built-in Scalar Types</a>
+## <a name="scalar-types">Built-in Types</a>
+
+Rust provides many built-types.
+The following diagram summarizes them.
 
 <img alt="Rust Built-in Data Types" style="width: 70%"
   src="/blog/assets/rust-types.png?v={{pkg.version}}"
   title="Rust Built-in Data Types">
+
+## <a name="scalar-types">Built-in Scalar Types</a>
 
 Rust defines many scalar (primitive) types which can be categories as
 boolean, character, integer (6 kinds), or floating point (2 kinds).
