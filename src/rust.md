@@ -1830,6 +1830,9 @@ There are many ways to handle values from these enum types.
 
 ## <a name="scalar-types">Built-in Scalar Types</a>
 
+<img alt="Rust Built-in Data Types" style="width: 70%"
+  src="/blog/assets/rust-types.png" title="Rust Built-in Data Types">
+
 Rust defines many scalar (primitive) types which can be categories as
 boolean, character, integer (6 kinds), or floating point (2 kinds).
 
@@ -2523,27 +2526,27 @@ TODO: Finish this table
 | `std::cmp::Eq`            | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more |
 | `std::cmp::Ord`           | B, S, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                 |
 | `std::cmp::PartialEq`     | B, S, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `str`, `String`, `Vec`                               |
-| `std::cmp::PartialOrd`    | array, tuple TODO: Finish from here                                                                                                                      |
-| `std::convert::AsMut`     | array, `Box`, `String`, `Vec`                                                                                                                            |
-| `std::convert::AsRef`     | array, `Arc`, `Box`, `Rc`, `str`, `String`                                                                                                               |
-| `std::convert::From`      | scalar, compound,                                                                                                                                        |
+| `std::cmp::PartialOrd`    | B, arrays, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `str`, `String`, `Vec`                                     |
+| `std::convert::AsMut`     | arrays, slices, `Box`, `String`, `Vec`                                                                                                                   |
+| `std::convert::AsRef`     | arrays, slices, `Arc`, `Box`, `Rc`, `str`, `String`, `Vec`                                                                                               |
+| `std::convert::From`      | B (not `bool`), `Arc`, `Box`, `Error`, `String`, `Vec`                                                                                                   |
 | `std::convert::Into`      | scalar, compound,                                                                                                                                        |
 | `std::convert::TryFrom`   | scalar, compound,                                                                                                                                        |
 | `std::convert::TryInto`   | scalar, compound,                                                                                                                                        |
-| `std::default::Default`   | array, tuple                                                                                                                                             |
-| `std::fmt::Debug`         | array, tuple                                                                                                                                             |
+| `std::default::Default`   | arrays, tuples                                                                                                                                           |
+| `std::fmt::Debug`         | arrays, tuples                                                                                                                                           |
 | `std::fmt::Display`       |                                                                                                                                                          |
 | `std::fmt::Write`         |                                                                                                                                                          |
-| `std::hash::Hash`         | array, tuple                                                                                                                                             |
+| `std::hash::Hash`         | arrays, tuples                                                                                                                                           |
 | `std::io::Read`           |                                                                                                                                                          |
 | `std::io::Write`          |                                                                                                                                                          |
 | `std::iter::Extend`       |                                                                                                                                                          |
 | `std::iter::FromIterator` |                                                                                                                                                          |
-| `std::iter::IntoIterator` | array                                                                                                                                                    |
+| `std::iter::IntoIterator` | arrays                                                                                                                                                   |
 | `std::iter::Iterator`     |                                                                                                                                                          |
 | `std::iter::Product`      |                                                                                                                                                          |
 | `std::iter::Sum`          |                                                                                                                                                          |
-| `std::marker::Copy`       | array, tuple                                                                                                                                             |
+| `std::marker::Copy`       | arrays, tuples                                                                                                                                           |
 | `std::marker::Send`       | scalar, compound,                                                                                                                                        |
 | `std::marker::Sized`      | type parameters                                                                                                                                          |
 | `std::marker::Sync`       | scalar, compound,                                                                                                                                        |
