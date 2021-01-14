@@ -4,7 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<img alt="PHP mascot" class="keep-size" src="/blog/assets/php-mascot.png">
+<img alt="PHP mascot" class="keep-size"
+  src="/blog/assets/php-mascot.png?v={{pkg.version}}">
 
 PHP is an interpreted scripting language.
 It is typically used to implement web applications,
@@ -651,7 +652,8 @@ For example, `isset($_GET['someName'])`.
 This is a ridiculous use of PHP because every button push triggers
 a page refresh. But it does work and it illustrates many PHP concepts.
 
-<img alt="PHP Calculator" class="keep-size" src="/blog/assets/php-calculator.png">
+<img alt="PHP Calculator" class="keep-size"
+  src="/blog/assets/php-calculator.png?v={{pkg.version}}">
 
 ```php
 <!DOCTYPE html>
@@ -883,28 +885,28 @@ To run phpMyAdmin, browse `localhost/phpMyAdmin`.
 Enter a username and password such as for the "root" user.
 
 <img alt="phpMyAdmin login" style="width: 20%"
-  src="/blog/assets/phpMyAdmin-1-login.png">
+  src="/blog/assets/phpMyAdmin-1-login.png?v={{pkg.version}}">
 
 After logging in, the settings page is displayed.
 
 <img alt="phpMyAdmin settings" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-2-settings.png">
+  src="/blog/assets/phpMyAdmin-2-settings.png?v={{pkg.version}}">
 
 Click the "Databases" tab to see a list of existing databases
 and create new ones.
 
 <img alt="phpMyAdmin databases" style="width: 50%"
-  src="/blog/assets/phpMyAdmin-3-databases.png">
+  src="/blog/assets/phpMyAdmin-3-databases.png?v={{pkg.version}}">
 
 Click the link for an existing database to see its tables.
 
 <img alt="phpMyAdmin structure" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-4-structure.png">
+  src="/blog/assets/phpMyAdmin-4-structure.png?v={{pkg.version}}">
 
 Click the link for an existing table to see its rows.
 
 <img alt="phpMyAdmin tables" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-5-table-browse.png">
+  src="/blog/assets/phpMyAdmin-5-table-browse.png?v={{pkg.version}}">
 
 Click the "SQL" tab to enter SQL for any kind of operation
 including creating tables, querying, inserting, updating, and deleting.
@@ -912,7 +914,7 @@ The UI also provides ways of doing all of these things
 without writing SQL.
 
 <img alt="phpMyAdmin SQL" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-6-sql.png">
+  src="/blog/assets/phpMyAdmin-6-sql.png?v={{pkg.version}}">
 
 To create a new table without writing SQL,
 click a database in the left nav,
@@ -923,14 +925,15 @@ Note that the "A_I" checkboxes are for auto-increment
 which is often used with primary keys.
 
 <img alt="phpMyAdmin columns" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-7-columns.png">
+  src="/blog/assets/phpMyAdmin-7-columns.png?v={{pkg.version}}">
 
 ## Database with CRUD
 
 Here is an example web app that performs
 Create/Retrieve/Update/Delete operations on a database table.
 
-<img alt="PHP dogs app" style="width: 30%" src="/blog/assets/php-dogs-app.png">
+<img alt="PHP dogs app" style="width: 30%"
+  src="/blog/assets/php-dogs-app.png?v={{pkg.version}}">
 
 Let's start with the file `includes/db.php`
 which creates a connection to the database.

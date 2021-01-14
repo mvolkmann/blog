@@ -95,7 +95,7 @@ can be clicked to initiate the following actions:
 - close (X)
 
 <img alt="Neo4j Browser icons" class="keep-size"
-  src="/blog/assets/neo4j-browser-icons.png">
+  src="/blog/assets/neo4j-browser-icons.png?v={{pkg.version}}">
 
 To execute the code in a cell,
 click the blue play icon (triangle) on the right side of the cell
@@ -182,7 +182,7 @@ match (p:Person) return p
 ```
 
 <img alt="Neo4j Person relationships" class="keep-size"
-  src="/blog/assets/neo4j-person-relationships.png">
+  src="/blog/assets/neo4j-person-relationships.png?v={{pkg.version}}">
 
 The nodes in the diagram can be dragged to new positions
 in order to manually change their layout.
@@ -192,20 +192,20 @@ click the download icon in the upper-right corner of its cell
 and select one of those formats.
 
 <img alt="Neo4j Browser export menu" class="keep-size"
-  src="/blog/assets/neo4j-browser-export-menu.png">
+  src="/blog/assets/neo4j-browser-export-menu.png?v={{pkg.version}}">
 
 In addition to displaying query results as a "Graph",
 they can also be viewed as a "Table", "Text", or "Code"
 by clicking the corresponding buttons on the left side of the cell.
 
 <img alt="Neo4j Browser views" class="keep-size"
-  src="/blog/assets/neo4j-browser-views.png">
+  src="/blog/assets/neo4j-browser-views.png?v={{pkg.version}}">
 
 To temporarily hide a node, click its circle and then
 click the icon containing an eye with a minus sign.
 
 <img alt="Neo4j node selected" class="keep-size"
-  src="/blog/assets/neo4j-node-selected.png">
+  src="/blog/assets/neo4j-node-selected.png?v={{pkg.version}}">
 
 To get only the nodes that have a specific relationship,
 enter a Cypher query like the following:
@@ -215,7 +215,7 @@ match (p1:Person)-[m:father]->(p2:Person) return p1, m, p2
 ```
 
 <img alt="Neo4j father edges" class="keep-size"
-  src="/blog/assets/neo4j-father-edges.png">
+  src="/blog/assets/neo4j-father-edges.png?v={{pkg.version}}">
 
 Let's make this more interesting by adding `Dog` nodes
 and relationships between them and their `Person` owners.
@@ -261,7 +261,7 @@ match (n) return n
 ```
 
 <img alt="Neo4j all nodes" class="keep-size"
-  src="/blog/assets/neo4j-all-nodes.png">
+  src="/blog/assets/neo4j-all-nodes.png?v={{pkg.version}}">
 
 Queries can be more specific. For example:
 
@@ -275,12 +275,12 @@ click the node to display a ring around it
 and then click the graph icon in the ring.
 
 <img alt="Neo4j Amanda with ring" class="keep-size"
-  src="/blog/assets/neo4j-amanda-ring.png">
+  src="/blog/assets/neo4j-amanda-ring.png?v={{pkg.version}}">
 
 The resulting displays is as follows:
 
 <img alt="Neo4j Amanda with links" class="keep-size"
-  src="/blog/assets/neo4j-amanda-with-links.png">
+  src="/blog/assets/neo4j-amanda-with-links.png?v={{pkg.version}}">
 
 Queries on labels are more efficient that queries on properties,
 but adding indexes to properties reduces the performance difference.
@@ -420,6 +420,6 @@ the `Person` and `Dog` nodes created earlier.
 This produces a page like the following:
 
 <img alt="neovis page" class="keep-size"
-  src="/blog/assets/neovis-page.png">
+  src="/blog/assets/neovis-page.png?v={{pkg.version}}">
 
 Hover over a node or edge to see its properties in a popup.

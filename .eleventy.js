@@ -73,7 +73,7 @@ module.exports = eleventyConfig => {
       const {key, title} = nav;
 
       if (!title) nav.title = key;
-      if (url) nav.url = '/blog' + url;
+      if (url) nav.url = '/blog' + url + '?v={{pkg.version}}';
 
       keyMap[key] = nav;
     }
@@ -149,7 +149,8 @@ module.exports = eleventyConfig => {
 
   eleventyConfig.addShortcode(
     'aTargetBlank',
-    (url, text) => `<a href="${url}" rel="noopener" target="_blank">${text}</a>`
+    (url, text) =>
+      `<a href="${url}?v={{pkg.version}}" rel="noopener" target="_blank">${text}</a>`
   );
 
   // Minify generated HTML.

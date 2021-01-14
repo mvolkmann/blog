@@ -7,9 +7,10 @@ layout: topic-layout.njk
 <!-- markdownlint-disable MD013 -->
 
 <img alt="Rust logo" style="width: 20%"
-  src="/blog/assets/rust-logo.png" title="Rust logo">
+  src="/blog/assets/rust-logo.png?v={{pkg.version}}" title="Rust logo">
 <img alt="Rust mascot" style="width: 30%"
-  src="/blog/assets/rustacean-ferris-crab.png" title="Rust mascot, Ferris the crab">
+  src="/blog/assets/rustacean-ferris-crab.png?v={{pkg.version}}"
+  title="Rust mascot, Ferris the crab">
 
 ## Overview
 
@@ -342,7 +343,8 @@ and crates from the
 "Rust Cookbook" %}.
 
 <img alt="Rust Playground" style="width: 100%"
-  src="/blog/assets/rust-playground.png" title="Rust Playground">
+  src="/blog/assets/rust-playground.png?v={{pkg.version}}"
+  title="Rust Playground">
 
 All of the code must be entered in a single editor pane,
 simulating all of it being in a single file.

@@ -16,4 +16,5 @@ This article served as the starting point for my book {% aTargetBlank
 
 The errata for my book is [here](/blog/svelte-and-sapper-in-action/errata/).
 
-<img alt="book cover" class="keep-size" src="/blog/assets/book-cover.png">
+<img alt="book cover" class="keep-size"
+  src="/blog/assets/book-cover.png?v={{pkg.version}}">

@@ -312,11 +312,13 @@ toy terrier - 0.15%
 
 The input image used is:
 
-<img alt="input image" class="keep-size" src="/blog/assets/pytorch-input.jpg">
+<img alt="input image" class="keep-size"
+  src="/blog/assets/pytorch-input.jpg?v={{pkg.version}}">
 
 The image that results from preprocessing is:
 
-<img alt="preprocessed image" class="keep-size" src="/blog/assets/pytorch-input-preprocessed.png">
+<img alt="preprocessed image" class="keep-size"
+  src="/blog/assets/pytorch-input-preprocessed.png?v={{pkg.version}}">
 
 Note that if an image is fed into the model that
 does not match any of the 1000 training categories,

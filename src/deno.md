@@ -7,7 +7,8 @@ layout: topic-layout.njk
 <!-- markdownlint-disable MD013 -->
 
 <img alt="Deno logo" style="width: 30%"
-  src="/blog/assets/deno-logo.svg" title="Deno logo">
+  src="/blog/assets/deno-logo.svg?v={{pkg.version}}"
+  title="Deno logo">
 
 ## Overview
 
@@ -633,10 +634,10 @@ The steps to use the debugger are:
     back in the original Chrome window.
 
 <img alt="Chrome debugger window #1" style="width: 40%"
-  src="/blog/assets/deno-chrome-debugger-1.png"
+  src="/blog/assets/deno-chrome-debugger-1.png?v={{pkg.version}}"
   title="Chrome debugger window #1">
 <img alt="Chrome debugger window #2" style="width: 90%"
-  src="/blog/assets/deno-chrome-debugger-2.png"
+  src="/blog/assets/deno-chrome-debugger-2.png?v={{pkg.version}}"
   title="Chrome debugger window #2">
 
 VS Code also supports debugging Deno programs.
@@ -673,7 +674,7 @@ The steps to do this are:
    select Run ... Stop Debugging, or press shift-F5.
 
 <img alt="VS Code debugger" style="width: 90%"
-  src="/blog/assets/deno-vs-code-debugger.png"
+  src="/blog/assets/deno-vs-code-debugger.png?v={{pkg.version}}"
   title="VS Code debugger">
 
 Currently it reports the following error when importing modules from URLs:
@@ -2236,7 +2237,8 @@ Clicking on the `svg` adds a circle in that location on every connected client.
 This could be the start of a game.
 
 <img alt="Deno WebSocket demo" style="width: 30%"
-  src="/blog/assets/deno-websocket-demo.png" title="Deno WebSocket demo">
+  src="/blog/assets/deno-websocket-demo.png?v={{pkg.version}}"
+  title="Deno WebSocket demo">
 
 Here is the server code:
 
