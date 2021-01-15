@@ -1070,18 +1070,18 @@ While it is not typically called directly,
 free the memory owned by a variable before it goes out of scope.
 
 The following table summarizes the options for
+assigning a variable to another or
 passing an argument to a function.
 
-| Goal                           | Syntax      |
-| ------------------------------ | ----------- |
-| transfer ownership or copy (1) | `name`      |
-| borrow immutably               | `&name`     |
-| borrow mutably                 | `&mut name` |
+| Goal               | Syntax      |
+| ------------------ | ----------- |
+| transfer ownership | `name`      |
+| copy               | `name`      |
+| borrow immutably   | `&name`     |
+| borrow mutably     | `&mut name` |
 
-1. When a non-primitive value, not a reference to one,
-   is assigned to a variable or passed to a function,
-   ownership is transferred UNLESS the type implements the `Copy` trait.
-   In that case a copy is created and ownership is not transferred.
+The difference between the first and second cases is entirely
+based on whether the type of the data implements the `Copy` trait.
 
 Here are some examples that demonstrate ownership
 inside a single function:
@@ -2542,17 +2542,17 @@ TODO: Finish this table
 | `std::convert::AsMut`     | arrays, slices, `Box`, `String`, `Vec`                                                                                                                   |
 | `std::convert::AsRef`     | arrays, slices, `Arc`, `Box`, `Rc`, `str`, `String`, `Vec`                                                                                               |
 | `std::convert::From`      | B (not `bool`), `Arc`, `Box`, `Error`, `String`, `Vec`                                                                                                   |
-| `std::convert::Into`      | scalar, compound,                                                                                                                                        |
-| `std::convert::TryFrom`   | scalar, compound,                                                                                                                                        |
-| `std::convert::TryInto`   | scalar, compound,                                                                                                                                        |
-| `std::default::Default`   | arrays, tuples                                                                                                                                           |
-| `std::fmt::Debug`         | arrays, tuples                                                                                                                                           |
-| `std::fmt::Display`       |                                                                                                                                                          |
-| `std::fmt::Write`         |                                                                                                                                                          |
-| `std::hash::Hash`         | arrays, tuples                                                                                                                                           |
-| `std::io::Read`           |                                                                                                                                                          |
-| `std::io::Write`          |                                                                                                                                                          |
-| `std::iter::Extend`       |                                                                                                                                                          |
+| `std::convert::Into`      | any type that implements the `From` trait                                                                                                                |
+| `std::convert::TryFrom`   | B (not `bool`), arrays (and arrays wrapped by `Arc`, `Box`, or `Rc`), `Vec`                                                                              |
+| `std::convert::TryInto`   | any type that implements the `TryFrom` trait                                                                                                             |
+| `std::default::Default`   | B, arrays, slices, tuples, `Arc`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Range`, `Rc`, `String`, `Vec`                                |
+| `std::fmt::Debug`         | B, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `Range`, `Rc`, `str`, `String`                                       |
+| `std::fmt::Display`       | B, `Arc`, `Box`, `Error`, `Rc`, `str` `String`                                                                                                           |
+| `std::fmt::Write`         | `String`                                                                                                                                                 |
+| `std::hash::Hash`         | B, arrays, slices, tuples, `Arc`, `Box`, `LinkedList`, `Range`, `Rc`, `Result`, `Vec`                                                                    |
+| `std::io::Read`           | `BufReader`, `File`, `Stdin`, `TcpStream`, `UnixStream`                                                                                                  |
+| `std::io::Write`          | `BufWriter`, `File` `LineWriter`, `Stderr`, `Stdout`, `TcpStream`, `UnixStream`                                                                          |
+| `std::iter::Extend`       | `HashMap`, `HashSet`, `LinkedList`, `String`, `Vec`                                                                                                      |
 | `std::iter::FromIterator` |                                                                                                                                                          |
 | `std::iter::IntoIterator` | arrays                                                                                                                                                   |
 | `std::iter::Iterator`     |                                                                                                                                                          |
