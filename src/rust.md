@@ -2429,27 +2429,29 @@ fn main() {
 }
 ```
 
-Writing functions that operate on any numeric type is tricky,
-but it can be done using trait bounds
-which are described in the [Traits](#traits) section.
-For example:
+Writing functions that operate on any numeric type
+can be done using trait bounds.
+There are three ways to specify them,
+all described in the [Traits](#traits) section.
+One way is shown in this example.
 
 ```rust
-// The trait bound "impl Copy + Into<f32>" means that this
+// The trait bound "Copy + Into<f32>" means that this
 // takes a slice of any type that can be copied
 // and can be converted to the f32 type.
-// This is the case for all the primitive numbers types except f64.
+// This is true of all the primitive numbers types except f64.
 // This approach is more flexible than declaring the parameter
 // to be "&[i32]" which only accepts a slice of i32 values.
-fn sum(numbers: &[impl Copy + Into<f32>]) -> f32 {
+fn sum<T>(numbers: &[T]) -> f32
+where T: Copy + Into<f32> {
     // The map part below can also be written as ".map(|x| x.into())".
     numbers.iter().copied().map(Into::into).sum::<f32>()
 }
 
-fn average(numbers: &[impl Copy+Into<f32>]) -> f32 {
+fn average<T>(numbers: &[T]) -> f32
+where T: Copy + Into<f32> {
     sum(numbers) / numbers.len() as f32
 }
-
 
 fn main() {
     let numbers = [200u8, 255u8, 3u8];
@@ -4464,6 +4466,9 @@ The compiler will generate separate versions of the function
 for each concrete type passed as the second argument.
 
 ```rust
+use std::fmt::Debug;
+
+#[derive(Debug)]
 struct Point2D {
     x: f64,
     y: f64
@@ -4475,7 +4480,17 @@ impl ToString for Point2D {
     }
 }
 
-fn print_string<T: Debug + ToString>(label: &str, value: &T) {
+// There are three ways to write the function signature
+// that all specify that the "value" parameter
+// must implement both the "Debug" and "ToString" traits:
+// 1) fn print_string(label: &str, value: &(impl Debug + ToString)) {
+// 2) fn print_string<T: Debug + ToString>(label: &str, value: &T) {
+// 3) fn print_string<T>(label: &str, value: &T)
+//    where T: Debug + ToString {
+// Option 3 is often used when there are multiple generic parameters
+// or they have more than one trait bound.
+fn print_string<T>(label: &str, value: &T)
+where T: Debug + ToString {
   println!("{}: {}", label, value.to_string());
   println!("debug: {:?}", value);
 }
