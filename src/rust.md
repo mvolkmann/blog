@@ -3718,22 +3718,37 @@ An instance of a struct can be created using its name.
 It is also common to define an associated function named "new"
 (by convention) that creates an instance that is initialized in a specific way,
 similar to a constructor in other languages.
+In addition, we can implement the `Default` trait for a struct
+to provide a way to create a "default" instance.
 
 For example:
 
 ```rust
-#[derive(Debug)]
+use std::default::Default;
+
+#[derive(Debug, Default)]
 struct Point2D {
     x: f64,
     y: f64, // comma after last field is optional
 }
 
+// We only need to manually implement the "Default" trait
+// when one or more fields should be assigned non-default values,
+// such as a number other than zero for numeric fields.
+// In this case the default fields values work fine,
+// so we don't need to write the commented out code below.
+// The derive attribute above generates this code for us.
+/*
+impl Default for Point2D {
+    fn default() -> Self {
+        Self { x: 0.0, y: 0.0 } // origin
+    }
+}
+*/
+
 impl Point2D {
-    // The new function can have parameters.
-    // When there are no parameters, consider implementing
-    // the "Default" trait (described later) instead.
-    fn new() -> Self {
-      Point2D { x: 0.0, y: 0.0 }
+    fn new(x: f64, y: f64) -> Self {
+      Self { x, y }
     }
 
     // Associated function
@@ -3750,10 +3765,16 @@ impl Point2D {
 }
 
 fn main() {
-    let origin = Point2D::new();
-    println!("{:?}", origin); // Point2D { x: 0.0, y: 0.0 }
+    // Create an instance using the "default" function.
+    let origin = Point2D::default();
+
+    // Create an instance using the struct name.
     let p1 = Point2D { x: 3.0, y: 4.0 };
-    let p2 = Point2D { x: 6.0, y: 8.0 };
+
+    // Create an instance using the "constructor" function.
+    let p2 = Point2D::new(6.0, 8.0);
+
+    println!("{:?}", origin); // Point2D { x: 0.0, y: 0.0 }
     println!("{}", Point2D::distance_between(&p1, &p2)); // 5
     println!("{}", p1.distance_to(&p2)); // 5
 }
@@ -4314,29 +4335,12 @@ use std::cmp;
 use std::default::Default;
 use std::ops::{Add, AddAssign, Sub};
 
-// Deriving the "Default" trait adds a "default" function
-// that returns an instance of the struct where all the fields
-// are set to their default value, 0 in this case.
 #[derive(Clone, Copy, Debug, Default)]
 struct Color {
     r: u8,
     g: u8,
     b: u8
 }
-
-/*
-// We could manually implement the "Default" trait as follows
-// which is useful for fields to have non-default values.
-impl Default for Color {
-    fn default() -> Self {
-        Self {
-            r: 0,
-            g: 0,
-            b: 0
-        }
-    }
-}
-*/
 
 // Implementing the "Add" trait enables using
 // the "+" operator to add "Color" instances.
