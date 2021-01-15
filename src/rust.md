@@ -3748,7 +3748,7 @@ impl Default for Point2D {
 
 impl Point2D {
     fn new(x: f64, y: f64) -> Self {
-      Self { x, y }
+        Self { x, y }
     }
 
     // Associated function
