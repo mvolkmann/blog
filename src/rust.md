@@ -1026,20 +1026,22 @@ The ownership model provides the following benefits:
   because there is no possibility of data races
   causing unpredictable interactions between threads.
 
-Variable values are stored either in the stack or the heap.
+Values are stored either in the stack or the heap.
 Accessing stack data is faster, but data on the heap can grow and shrink
 and it can live beyond the scope that created it.
 
-Variable values whose sizes are known at compile time are stored on the stack.
-This includes booleans (`bool` type), single characters (`char` type), numbers,
-tuples, arrays, and structs.
-Variable values of all other types are stored in the heap.
+Values whose sizes are known at compile time,
+which includes most types, are stored on the stack.
+Values of all other types are stored in the heap.
+The documentation for types whose size is not known at compile time
+indicates this with `?Sized`.
 This includes:
 
-- strings (`&str` and `String`)
-- collections from the `std::collections` namespace
-  which defines sequences (`Vec`, `VecDeque`, and `LinkedList`),
-  sets (`HashSet` and `BTreeSet`), and maps (`HashMap` and `BTreeMap`).
+- slices, not references to them
+- string slice types `str` and `OsStr`
+- `std::path::Path` for representing and operating on file system paths
+- trait objects (`dyn TraitName`)
+- structs and tuples for which the last field/item has one of these types
 
 Values of these types can be stored on the heap by using the `Box` type.
 This is typically done in order to have a fixed size way
