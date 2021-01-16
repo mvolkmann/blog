@@ -2470,6 +2470,23 @@ fn main() {
 }
 ```
 
+Alternatively we can define a new trait that
+combines several others and then use it as a trait bound.
+With the following in place, we can use the trait `Number`
+in the code above in place of `Copy + Into<f32>`.
+We can also use it in functions that need the capabilities
+of the additional traits from the `std::ops` namespace.
+
+```rust
+use std::ops::*;
+trait Number:
+    Add + AddAssign + Copy + Div + DivAssign +
+    Into<f64> + Mul + MulAssign + Sub + SubAssign {}
+impl<T> Number for T where
+    T: Add + AddAssign + Copy + Div + DivAssign +
+       Into<f64> + Mul + MulAssign + Sub + SubAssign {}
+```
+
 Another approach is to use the {% aTargetBlank
 "https://crates.io/crates/num", "num" %} crate.
 Add this as a dependency in `Cargo.toml` with a line like `num = "0.3.1"`.
