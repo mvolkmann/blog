@@ -2487,6 +2487,9 @@ impl<T> Number for T where
        Into<f64> + Mul + MulAssign + Sub + SubAssign {}
 ```
 
+A similar approach is used by {% aTargetBlank
+"https://docs.rs/num-traits/", "num_traits" %} library crate.
+
 Another approach is to use the {% aTargetBlank
 "https://crates.io/crates/num", "num" %} crate.
 Add this as a dependency in `Cargo.toml` with a line like `num = "0.3.1"`.
