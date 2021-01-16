@@ -2506,6 +2506,8 @@ The following table maps built-in traits
 to the commonly used built-in types that implement them.
 Knowing this is useful for determining the trait bounds that can be used
 to write functions that support arguments of multiple types.
+The goal is provide a sense for the use of each trait.
+See the official documentation for details.
 
 Recall that Rust supports the following built-in scalar (single value) types:
 
@@ -2526,83 +2528,86 @@ In the lists of implementing types:
 - B means all the built-in scalar and compound types.
 - C means any type that implements the `Clone` trait or slices of such types.
 - S means any type with size known at compile type or slices of such types.
+- Often there are restrictions on an implementing type.
+  For example, when `HashMap` is listed, there may be restrictions on
+  the types of keys and values that can be used.
 
 TODO: Finish this table
 
-| Trait                     | Implementing Types                                                                                                                                       |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `std::borrow::Borrow`     | S, scalar, compound, `Arc`, `Box`, `Rc`, `String`, `Vec`                                                                                                 |
-| `std::borrow::BorrowMut`  | S, array, `Box`, `String`, `Vec`                                                                                                                         |
-| `std::borrow::ToOwned`    | C, `str`                                                                                                                                                 |
-| `std::clone::Clone`       | B, S, `Arc`, `Box`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more                                          |
-| `std::cmp::Eq`            | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more |
-| `std::cmp::Ord`           | B, S, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                 |
-| `std::cmp::PartialEq`     | B, S, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `str`, `String`, `Vec`                               |
-| `std::cmp::PartialOrd`    | B, arrays, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `str`, `String`, `Vec`                                     |
-| `std::convert::AsMut`     | arrays, slices, `Box`, `String`, `Vec`                                                                                                                   |
-| `std::convert::AsRef`     | arrays, slices, `Arc`, `Box`, `Rc`, `str`, `String`, `Vec`                                                                                               |
-| `std::convert::From`      | B (not `bool`), `Arc`, `Box`, `Error`, `String`, `Vec`                                                                                                   |
-| `std::convert::Into`      | any type that implements the `From` trait                                                                                                                |
-| `std::convert::TryFrom`   | B (not `bool`), arrays (and arrays wrapped by `Arc`, `Box`, or `Rc`), `Vec`                                                                              |
-| `std::convert::TryInto`   | any type that implements the `TryFrom` trait                                                                                                             |
-| `std::default::Default`   | B, arrays, slices, tuples, `Arc`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Range`, `Rc`, `String`, `Vec`                                |
-| `std::fmt::Debug`         | B, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `Range`, `Rc`, `str`, `String`                                       |
-| `std::fmt::Display`       | B, `Arc`, `Box`, `Error`, `Rc`, `str` `String`                                                                                                           |
-| `std::fmt::Write`         | `String`                                                                                                                                                 |
-| `std::hash::Hash`         | B, arrays, slices, tuples, `Arc`, `Box`, `LinkedList`, `Range`, `Rc`, `Result`, `Vec`                                                                    |
-| `std::io::Read`           | `BufReader`, `File`, `Stdin`, `TcpStream`, `UnixStream`                                                                                                  |
-| `std::io::Write`          | `BufWriter`, `File` `LineWriter`, `Stderr`, `Stdout`, `TcpStream`, `UnixStream`                                                                          |
-| `std::iter::Extend`       | `HashMap`, `HashSet`, `LinkedList`, `String`, `Vec`                                                                                                      |
-| `std::iter::FromIterator` |                                                                                                                                                          |
-| `std::iter::IntoIterator` | arrays                                                                                                                                                   |
-| `std::iter::Iterator`     |                                                                                                                                                          |
-| `std::iter::Product`      |                                                                                                                                                          |
-| `std::iter::Sum`          |                                                                                                                                                          |
-| `std::marker::Copy`       | arrays, tuples                                                                                                                                           |
-| `std::marker::Send`       | scalar, compound,                                                                                                                                        |
-| `std::marker::Sized`      | type parameters                                                                                                                                          |
-| `std::marker::Sync`       | scalar, compound,                                                                                                                                        |
-| `std::marker::Unpin`      | scalar, compound,                                                                                                                                        |
-| `std::ops::Add`           |                                                                                                                                                          |
-| `std::ops::AddAssign`     |                                                                                                                                                          |
-| `std::ops::BitAndAdd`     |                                                                                                                                                          |
-| `std::ops::BitAndAssign`  |                                                                                                                                                          |
-| `std::ops::BitOr`         |                                                                                                                                                          |
-| `std::ops::BitOrAssign`   |                                                                                                                                                          |
-| `std::ops::BitXor`        |                                                                                                                                                          |
-| `std::ops::BitXorAssign`  |                                                                                                                                                          |
-| `std::ops::Deref`         |                                                                                                                                                          |
-| `std::ops::Deref`         |                                                                                                                                                          |
-| `std::ops::DerefMut`      |                                                                                                                                                          |
-| `std::ops::DerefMut`      |                                                                                                                                                          |
-| `std::ops::Div`           |                                                                                                                                                          |
-| `std::ops::DivAssign`     |                                                                                                                                                          |
-| `std::ops::Drop`          |                                                                                                                                                          |
-| `std::ops::Drop`          |                                                                                                                                                          |
-| `std::ops::Fn`            |                                                                                                                                                          |
-| `std::ops::Fn`            |                                                                                                                                                          |
-| `std::ops::FnMut`         |                                                                                                                                                          |
-| `std::ops::FnMut`         |                                                                                                                                                          |
-| `std::ops::FnOnce`        |                                                                                                                                                          |
-| `std::ops::FnOnce`        |                                                                                                                                                          |
-| `std::ops::Index`         |                                                                                                                                                          |
-| `std::ops::Index`         |                                                                                                                                                          |
-| `std::ops::IndexMut`      |                                                                                                                                                          |
-| `std::ops::Mul`           |                                                                                                                                                          |
-| `std::ops::MulAssign`     |                                                                                                                                                          |
-| `std::ops::Neg`           |                                                                                                                                                          |
-| `std::ops::Not`           | `bool`                                                                                                                                                   |
-| `std::ops::RangeBound`    |                                                                                                                                                          |
-| `std::ops::Rem`           |                                                                                                                                                          |
-| `std::ops::RemAssign`     |                                                                                                                                                          |
-| `std::ops::Shl`           |                                                                                                                                                          |
-| `std::ops::ShlAssign`     |                                                                                                                                                          |
-| `std::ops::Shr`           |                                                                                                                                                          |
-| `std::ops::ShrAssign`     |                                                                                                                                                          |
-| `std::ops::Sub`           |                                                                                                                                                          |
-| `std::ops::SubAssign`     |                                                                                                                                                          |
-| `std::str::FromStr`       |                                                                                                                                                          |
-| `std::string::ToString`   | scalar, compound,                                                                                                                                        |
+| Trait                     | Implementing Types                                                                                                                                               |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `std::borrow::Borrow`     | S, scalar, compound, `Arc`, `Box`, `Rc`, `String`, `Vec`                                                                                                         |
+| `std::borrow::BorrowMut`  | S, array, `Box`, `String`, `Vec`                                                                                                                                 |
+| `std::borrow::ToOwned`    | C, `str`                                                                                                                                                         |
+| `std::clone::Clone`       | B, S, `Arc`, `Box`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more                                                  |
+| `std::cmp::Eq`            | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more         |
+| `std::cmp::Ord`           | B, S, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                         |
+| `std::cmp::PartialEq`     | B, S, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `str`, `String`, `Vec`                                       |
+| `std::cmp::PartialOrd`    | B, arrays, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `str`, `String`, `Vec`                                             |
+| `std::convert::AsMut`     | arrays, slices, `Box`, `String`, `Vec`                                                                                                                           |
+| `std::convert::AsRef`     | arrays, slices, `Arc`, `Box`, `Rc`, `str`, `String`, `Vec`                                                                                                       |
+| `std::convert::From`      | B (not `bool`), `Arc`, `Box`, `Error`, `String`, `Vec`                                                                                                           |
+| `std::convert::Into`      | any type that implements the `From` trait                                                                                                                        |
+| `std::convert::TryFrom`   | B (not `bool`), arrays (and arrays wrapped by `Arc`, `Box`, or `Rc`), `Vec`                                                                                      |
+| `std::convert::TryInto`   | any type that implements the `TryFrom` trait                                                                                                                     |
+| `std::default::Default`   | B, arrays, slices, tuples, `Arc`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Range`, `Rc`, `String`, `Vec`                                        |
+| `std::fmt::Debug`         | B, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `Range`, `Rc`, `str`, `String`                                               |
+| `std::fmt::Display`       | B, `Arc`, `Box`, `Error`, `Rc`, `str` `String`                                                                                                                   |
+| `std::fmt::Write`         | `String`                                                                                                                                                         |
+| `std::hash::Hash`         | B, arrays, slices, tuples, `Arc`, `Box`, `LinkedList`, `Range`, `Rc`, `Result`, `Vec`                                                                            |
+| `std::io::Read`           | `BufReader`, `File`, `Stdin`, `TcpStream`, `UnixStream`                                                                                                          |
+| `std::io::Write`          | `BufWriter`, `File` `LineWriter`, `Stderr`, `Stdout`, `TcpStream`, `UnixStream`                                                                                  |
+| `std::iter::Extend`       | `HashMap`, `HashSet`, `LinkedList`, `String`, `Vec`                                                                                                              |
+| `std::iter::FromIterator` | `Arc`, `Box`, `HashMap`, `HashSet`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                                                      |
+| `std::iter::IntoIterator` | arrays, slices, `HashMap`, `LinkedList`, `Option`, `Result`, `Vec`                                                                                               |
+| `std::iter::Iterator`     | `Range` and many more                                                                                                                                            |
+| `std::iter::Product`      | numbers, `Option`, `Result`                                                                                                                                      |
+| `std::iter::Sum`          | numbers, `Option`, `Result`                                                                                                                                      |
+| `std::marker::Copy`       | B, arrays, tuples, `Error`, `Result`                                                                                                                             |
+| `std::marker::Send`       | B, arrays, slices, `Arc`, `Box`, `Cell`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Range`, `RefCell`, `Vec`                                                  |
+| `std::marker::Sized`      | From the docs, "All type parameters have an implicit bound of `Sized`.<br>The special syntax `?Sized` can be used to remove this bound if it's not appropriate." |
+| `std::marker::Sync`       | B, arrays, slices, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Range`, `Result`, `String`, `Vec`                                     |
+| `std::marker::Unpin`      | B, arrays, slices, `Arc`, `Box`, `Cell`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `Range`, `Ref`, `RefCell`, `Result`, `String`, `Vec`                    |
+| `std::ops::Add`           |                                                                                                                                                                  |
+| `std::ops::AddAssign`     |                                                                                                                                                                  |
+| `std::ops::BitAndAdd`     |                                                                                                                                                                  |
+| `std::ops::BitAndAssign`  |                                                                                                                                                                  |
+| `std::ops::BitOr`         |                                                                                                                                                                  |
+| `std::ops::BitOrAssign`   |                                                                                                                                                                  |
+| `std::ops::BitXor`        |                                                                                                                                                                  |
+| `std::ops::BitXorAssign`  |                                                                                                                                                                  |
+| `std::ops::Deref`         |                                                                                                                                                                  |
+| `std::ops::Deref`         |                                                                                                                                                                  |
+| `std::ops::DerefMut`      |                                                                                                                                                                  |
+| `std::ops::DerefMut`      |                                                                                                                                                                  |
+| `std::ops::Div`           |                                                                                                                                                                  |
+| `std::ops::DivAssign`     |                                                                                                                                                                  |
+| `std::ops::Drop`          |                                                                                                                                                                  |
+| `std::ops::Drop`          |                                                                                                                                                                  |
+| `std::ops::Fn`            |                                                                                                                                                                  |
+| `std::ops::Fn`            |                                                                                                                                                                  |
+| `std::ops::FnMut`         |                                                                                                                                                                  |
+| `std::ops::FnMut`         |                                                                                                                                                                  |
+| `std::ops::FnOnce`        |                                                                                                                                                                  |
+| `std::ops::FnOnce`        |                                                                                                                                                                  |
+| `std::ops::Index`         |                                                                                                                                                                  |
+| `std::ops::Index`         |                                                                                                                                                                  |
+| `std::ops::IndexMut`      |                                                                                                                                                                  |
+| `std::ops::Mul`           |                                                                                                                                                                  |
+| `std::ops::MulAssign`     |                                                                                                                                                                  |
+| `std::ops::Neg`           |                                                                                                                                                                  |
+| `std::ops::Not`           | `bool`                                                                                                                                                           |
+| `std::ops::RangeBound`    |                                                                                                                                                                  |
+| `std::ops::Rem`           |                                                                                                                                                                  |
+| `std::ops::RemAssign`     |                                                                                                                                                                  |
+| `std::ops::Shl`           |                                                                                                                                                                  |
+| `std::ops::ShlAssign`     |                                                                                                                                                                  |
+| `std::ops::Shr`           |                                                                                                                                                                  |
+| `std::ops::ShrAssign`     |                                                                                                                                                                  |
+| `std::ops::Sub`           |                                                                                                                                                                  |
+| `std::ops::SubAssign`     |                                                                                                                                                                  |
+| `std::str::FromStr`       |                                                                                                                                                                  |
+| `std::string::ToString`   | scalar, compound,                                                                                                                                                |
 
 ### Sets
 
