@@ -4299,7 +4299,6 @@ Other traits must be manually implemented.
 | `std::io::Write`          | defines `write` method that writes data from an array of bytes into the receiver                                                            |                       |
 | `std::iter::Extend`       | defines `extend` method that adds items to a collection                                                                                     |                       |
 | `std::iter::FromIterator` | defines `from_iter` method that is used to automatically<br>convert an iterator to a collection                                             |                       |
-|                           |
 | `std::iter::IntoIterator` | defines `into_iter` method that is used to automatically<br>convert a collection to an iterator over it                                     |                       |
 | `std::iter::Iterator`     | defines `next` method for iterating over the data in a value                                                                                |                       |
 | `std::iter::Product`      | defines `product` method on an iterator to compute the product of its items                                                                 |                       |
@@ -5549,9 +5548,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 Tools for compiling Rust code to WebAssembly include
 {% aTargetBlank "https://rustwasm.github.io/wasm-pack/", "wasm-pack" %} and
 {% aTargetBlank "https://www.secondstate.io/articles/ssvmup/", "ssvmup" %}
-The last update to wasm-pack was on February 7, 2020,
-so this project may be abandoned.
 The ssvmup tool was inspired by wasm-pack and has explicit support for Deno.
+
+### wasm-pack
+
+To install wasm-pack in Linux or macOS, enter the following:
+
+```bash
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+```
+
+### ssvmupk
 
 To compile a `.rs` file to WebAssembly:
 

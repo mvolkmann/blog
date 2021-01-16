@@ -1927,10 +1927,12 @@ console.log('count =', count);
 
 ## Basic HTTP server
 
-Here is a very basic HTTP server that only uses the standard library.
+Here is a very basic HTTP server that serves files
+and only uses the standard library.
 
 ```js
-import {serve} from 'https://deno.land/std@0.79.0/http/server.ts';
+import {serve} from 'https://deno.land/std@0.83.0/http/server.ts';
+import {serveFile} from 'https://deno.land/std@0.83.0/http/file_server.ts';
 
 const port = 1234;
 const server = serve({port});
@@ -1939,7 +1941,14 @@ console.log('listening on port', port);
 for await (const req of server) {
   console.log('req is', req);
   console.log('got request for', req.method, req.url);
-  req.respond({body: 'Hello World\n'});
+  const path = `${Deno.cwd()}/${req.url}`;
+  try {
+    const content = await serveFile(req, path);
+    req.respond(content);
+  } catch (e) {
+    const status = e && e instanceof Deno.errors.NotFound ? 404 : 500;
+    req.respond({body: e.message, status});
+  }
 }
 ```
 
