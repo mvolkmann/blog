@@ -129,10 +129,11 @@ integer and floating point values of specific sizes.
 
 **WebAssembly:**
 
-WebAssembly (abbreviated WASM) is an instruction format
-for a virtual machine that is supported by modern web browsers
+WebAssembly (abbreviated WASM) is a binary instruction format
+for a stack-based virtual machine that is supported by modern web browsers
 (currently Chrome, Edge, Firefox, and Safari).
-This is typically much faster than equivalent code written in JavaScript.
+WASM code typically executes much faster than
+equivalent code written in JavaScript.
 Code from many programming languages can be compiled to WASM.
 Currently full support is only available for C, C++, and Rust.
 Experimental support is available for C#, Go, Java, Kotlin, Python,
@@ -2722,8 +2723,7 @@ A slice is a borrowed reference to a contiguous subset of a collection
 that is represented by pointer and a length.
 For example, a slice of a `String` has the type `&str`
 which holds a pointer and a length.
-Slices are often created using a range.
-TODO: Is this the only way?
+A slice is created using a range.
 For example:
 
 ```rust
@@ -3612,6 +3612,10 @@ that have no state.
 The `impl` keyword adds
 associated functions (like class or static methods in other languages)
 and methods (like instance methods in other languages) to a struct.
+Associated functions are typically used to construct instances or a struct.
+By convention, many structs have an associated function
+named `new` for just this purpose.
+
 The first parameter of methods must be named "self",
 like the convention in Python.
 Any `fn` definition with no parameters or
@@ -3771,6 +3775,37 @@ const CORNFLOWER_BLUE: RGB = RGB(100, 149, 237);
 const REBECCA_PURPLE: RGB = RGB(0x66, 0x33, 0x99);
 println!("{:?}", CORNFLOWER_BLUE); // RGB(100, 149, 237)
 println!("{:?}", REBECCA_PURPLE); // RGB(102, 51, 153)
+```
+
+Tuples whose values have the same types as those in a tuple struct
+are not compatible with that type. For example:
+
+```rust
+let mut color: RGB = RGB(100, 149, 237);
+color = RGB(200, 49, 137); // can change to value of type RGB
+color = (100, 149, 237); // error: expected struct `RGB, found tuple
+```
+
+One use of a tuple struct is referred to as the "new type" pattern.
+It assigns a name to a specific use of an existing type.
+For example:
+
+```rust
+#[derive(Debug)]
+struct Temperature(i16);
+
+fn is_cold(t: &Temperature) -> bool {
+    t.0 <= 32 // Fahrenheit
+}
+
+fn main() {
+    let mut temperature: Temperature = Temperature(20);
+    println!("{}", is_cold(&temperature)); // true
+    temperature = Temperature(90);
+    println!("{}", is_cold(&temperature)); // false
+    println!("{}", is_cold(&Temperature(50))); // false
+    println!("{}", is_cold(&(50))); // error: expected struct `Temperature`, found integer
+}
 ```
 
 The `impl` keyword can be used multiple times on the same struct.
@@ -5647,6 +5682,22 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## <a name="webassembly">WebAssembly</a>
 
+WebAssembly (abbreviated WASM) is a binary instruction format
+for a stack-based virtual machine that is supported by modern web browsers
+(currently Chrome, Edge, Firefox, and Safari).
+WASM code typically executes much faster than
+equivalent code written in JavaScript.
+
+Code from many programming languages can be compiled to WASM.
+Currently full support is only available for C, C++, and Rust.
+Experimental support is available for C#, Go, Java, Kotlin, Python,
+Swift, TypeScript, and a few other less commonly used languages.
+
+In order to run WASM code in a web browser,
+the runtime of the source language must be included.
+Rust is a great choice for targeting WASM because it has a very small runtime
+compared to options like Python, so it downloads faster.
+
 Tools for compiling Rust code to WebAssembly include
 {% aTargetBlank "https://rustwasm.github.io/wasm-pack/", "wasm-pack" %} and
 {% aTargetBlank "https://www.secondstate.io/articles/ssvmup/", "ssvmup" %}
@@ -5671,7 +5722,7 @@ the JavaScript garbage-collected heap and the WebAssembly linear memory."
 To install wasm-pack in Linux or macOS, enter the following:
 
 ```bash
-curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+cargo install wasm-pack
 ```
 
 1. `wasm-pack new my-wasm`
