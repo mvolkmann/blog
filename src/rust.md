@@ -104,6 +104,7 @@ the single scope that currently owns each piece of data.
 unless ownership is transferred to another scope,
 when that scope ends the data can be safely freed
 because no other scope can possibly be using the data.
+The "borrow checker" in the Rust compiler enforces this.
 
 **Zero-Cost Abstractions:**
 
@@ -1625,8 +1626,8 @@ use std::fmt::Debug;
 enum Demo {
     Empty,
     Single(String),
-    TupleLike(String, i32, bool),
-    StructLike{x: f64, y: f64}
+    TupleLike(String, i32, bool), // holds positional items
+    StructLike{x: f64, y: f64}, // holds named items
 }
 
 fn main() {
@@ -3674,9 +3675,15 @@ impl Point2D {
         (dx.powi(2) + dy.powi(2)).sqrt()
     }
 
-    // Method
+    // Method that does not mutate
     fn distance_to(self: &Self, other: &Self) -> f64 {
         Self::distance_between(self, other)
+    }
+
+    // Method that mutates
+    fn translate(self: &mut Self, dx: f64, dy: f64) {
+        self.x += dx;
+        self.y += dy;
     }
 }
 
@@ -3693,6 +3700,9 @@ fn main() {
     println!("{:?}", origin); // Point2D { x: 0.0, y: 0.0 }
     println!("{}", Point2D::distance_between(&p1, &p2)); // 5
     println!("{}", p1.distance_to(&p2)); // 5
+
+    p2.translate(-2.0, 1.0);
+    println!("{:?}", p2); // Point2D { x: 4.0, y: 9.0 }
 }
 ```
 
@@ -5354,6 +5364,7 @@ Commonly used crates found here include:
   zero allocations, composability, and iterator-like interfaces.
 - {% aTargetBlank "https://crates.io/crates/hyper", "hyper" %} - HTTP client library
 - {% aTargetBlank "https://crates.io/crates/log", "log" %} - logging API
+- {% aTargetBlank "https://crates.io/crates/nom", "log" %} - parser combinators library
 - {% aTargetBlank "https://crates.io/crates/num-traits", "num-traits" %} - generic mathematics
 - {% aTargetBlank "https://crates.io/crates/rand", "rand" %} - random number generation
 - {% aTargetBlank "https://crates.io/crates/rayon", "rayon" %} - "data-parallelism library"
