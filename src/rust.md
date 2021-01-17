@@ -2431,193 +2431,33 @@ fn main() {
 }
 ```
 
-Writing functions that operate on any numeric type
-can be done using trait bounds.
-There are three ways to specify them,
-all described in the [Traits](#traits) section.
-One way is shown in this example.
+The size of items in a vector must all be the same
+and must be known at compile time.
+One way to hold items with varying sizes to
+place each item in a `Box` and place these in the vector.
+For example, this approach can be used to can create
+a vector of items that all implement a given trait.
 
 ```rust
-// The trait bound "Copy + Into<f32>" means that this
-// takes a slice of any type that can be copied
-// and can be converted to the f32 type.
-// This is true of all the primitive numbers types except f64.
-// This approach is more flexible than declaring the parameter
-// to be "&[i32]" which only accepts a slice of i32 values.
-fn sum<T>(numbers: &[T]) -> f32
-where T: Copy + Into<f32> {
-    // The map part below can also be written as ".map(|x| x.into())".
-    numbers.iter().copied().map(Into::into).sum::<f32>()
-}
-
-fn average<T>(numbers: &[T]) -> f32
-where T: Copy + Into<f32> {
-    sum(numbers) / numbers.len() as f32
-}
+use std::fmt::Debug;
 
 fn main() {
-    let numbers = [200u8, 255u8, 3u8];
-    let total = sum(&numbers);
-    println!("total = {}", total); // 458 which would overflow u8
+    let mut items: Vec<Box<dyn Debug>> = Vec::new();
 
-    let scores: Vec<u8> = vec![70, 90, 85, 100];
+    items.push(Box::new(true)); // bool
+    items.push(Box::new('X')); // char
+    items.push(Box::new(19)); // i32
+    items.push(Box::new(1.23)); // f64
+    items.push(Box::new("hello")); // &str
+    items.push(Box::new(String::from("world"))); // String
+    items.push(Box::new([1, 2, 3])); // array
+    items.push(Box::new((1, 2, 3))); // tuple
 
-    // Print average of all scores.
-    println!("average = {:.1}", average(&scores)); // 86.2
-
-    // Print average of all scores except the first.
-    println!("average = {:.1}", average(&scores[1..])); // 91.7
-}
-```
-
-Alternatively we can define a new trait that
-combines several others and then use it as a trait bound.
-With the following in place, we can use the trait `Number`
-in the code above in place of `Copy + Into<f32>`.
-We can also use it in functions that need the capabilities
-of the additional traits from the `std::ops` namespace.
-
-```rust
-use std::ops::*;
-trait Number:
-    Add + AddAssign + Copy + Div + DivAssign +
-    Into<f64> + Mul + MulAssign + Sub + SubAssign {}
-impl<T> Number for T where
-    T: Add + AddAssign + Copy + Div + DivAssign +
-       Into<f64> + Mul + MulAssign + Sub + SubAssign {}
-```
-
-A similar approach is used by {% aTargetBlank
-"https://docs.rs/num-traits/", "num_traits" %} library crate.
-
-Another approach is to use the {% aTargetBlank
-"https://crates.io/crates/num", "num" %} crate.
-Add this as a dependency in `Cargo.toml` with a line like `num = "0.3.1"`.
-
-For example:
-
-```rust
-extern crate num;
-use core::ops::AddAssign;
-use num::{Num, ToPrimitive};
-
-// T can be any type that implements the traits
-// AddAssign, Copy, Num, and ToPrimitive.
-// The built-in primitive number types like i32, u8, and f32
-// all implement the AddAssign and Copy traits.
-// The num crate adds implementations of
-// Num and ToPrimitive to those same types.
-// So T can be any built-in numeric type.
-fn average<T: AddAssign + Copy + Num + ToPrimitive>(numbers: &[T]) -> f32 {
-    // The Num trait requires also implementing the Zero trait
-    // which defines the zero function.
-    // That returns the zero value for the wrapped primitive type.
-    let mut sum = T::zero();
-
-    for n in numbers {
-        sum += *n; // requires implementing the AddAssign trait
+    for item in items {
+        println!("{:?}", item);
     }
-    let numerator = sum.to_f32().unwrap();
-    numerator / numbers.len() as f32
 }
 ```
-
-The following table maps built-in traits
-to the commonly used built-in types that implement them.
-Knowing this is useful for determining the trait bounds that can be used
-to write functions that support arguments of multiple types.
-The goal is provide a sense for the use of each trait.
-See the official documentation for details.
-
-Recall that Rust supports the following built-in scalar (single value) types:
-
-- `bool`
-- `char`
-- number: float and integer
-- float: `f32` and `f64`
-- integer: signed and unsigned
-- signed integer: `i8`, `i16`, `i32`, `i64`, `i128`, and `isize`
-- unsigned integer: `u8`, `u16`, `u32`, `u64`, `u128`, and `usize`
-
-The compound types (multiple values) with fixed sizes include arrays and tuples.
-When these are listed as a implementing type below,
-this is only the case if their items implement the trait.
-
-In the lists of implementing types:
-
-- B means all the built-in scalar and compound types.
-- C means any type that implements the `Clone` trait or slices of such types.
-- S means any type with size known at compile type or slices of such types.
-- Often there are restrictions on an implementing type.
-  For example, when `HashMap` is listed, there may be restrictions on
-  the types of keys and values that can be used.
-
-| Trait                     | Implementing Types                                                                                                                                               |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `std::borrow::Borrow`     | S, scalar, compound, `Arc`, `Box`, `Rc`, `String`, `Vec`                                                                                                         |
-| `std::borrow::BorrowMut`  | S, array, `Box`, `String`, `Vec`                                                                                                                                 |
-| `std::borrow::ToOwned`    | C, `str`                                                                                                                                                         |
-| `std::clone::Clone`       | B, S, `Arc`, `Box`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more                                                  |
-| `std::cmp::Eq`            | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more         |
-| `std::cmp::Ord`           | B, S, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                         |
-| `std::cmp::PartialEq`     | B, S, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `str`, `String`, `Vec`                                       |
-| `std::cmp::PartialOrd`    | B, arrays, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `str`, `String`, `Vec`                                             |
-| `std::convert::AsMut`     | arrays, slices, `Box`, `String`, `Vec`                                                                                                                           |
-| `std::convert::AsRef`     | arrays, slices, `Arc`, `Box`, `Rc`, `str`, `String`, `Vec`                                                                                                       |
-| `std::convert::From`      | B (not `bool`), `Arc`, `Box`, `Error`, `String`, `Vec`                                                                                                           |
-| `std::convert::Into`      | any type that implements the `From` trait                                                                                                                        |
-| `std::convert::TryFrom`   | B (not `bool`), arrays (and arrays wrapped by `Arc`, `Box`, or `Rc`), `Vec`                                                                                      |
-| `std::convert::TryInto`   | any type that implements the `TryFrom` trait                                                                                                                     |
-| `std::default::Default`   | B, arrays, ranges, slices, tuples, `Arc`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `String`, `Vec`                                         |
-| `std::fmt::Debug`         | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `Rc`, `str`, `String`                                                |
-| `std::fmt::Display`       | B, `Arc`, `Box`, `Error`, `Rc`, `str` `String`                                                                                                                   |
-| `std::hash::Hash`         | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `LinkedList`, `Rc`, `Result`, `Vec`                                                                             |
-| `std::io::Read`           | `BufReader`, `File`, `Stdin`, `TcpStream`, `UnixStream`                                                                                                          |
-| `std::io::Write`          | `BufWriter`, `File` `LineWriter`, `Stderr`, `Stdout`, `TcpStream`, `UnixStream`                                                                                  |
-| `std::iter::Extend`       | `HashMap`, `HashSet`, `LinkedList`, `String`, `Vec`                                                                                                              |
-| `std::iter::FromIterator` | `Arc`, `Box`, `HashMap`, `HashSet`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                                                      |
-| `std::iter::IntoIterator` | arrays, slices, `HashMap`, `LinkedList`, `Option`, `Result`, `Vec`                                                                                               |
-| `std::iter::Iterator`     | ranges and many more                                                                                                                                             |
-| `std::iter::Product`      | numbers, `Option`, `Result`                                                                                                                                      |
-| `std::iter::Sum`          | numbers, `Option`, `Result`                                                                                                                                      |
-| `std::marker::Copy`       | B, arrays, tuples, `Error`, `Result`                                                                                                                             |
-| `std::marker::Send`       | B, arrays, ranges, slices, `Arc`, `Box`, `Cell`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `RefCell`, `Vec`                                                   |
-| `std::marker::Sized`      | From the docs, "All type parameters have an implicit bound of `Sized`.<br>The special syntax `?Sized` can be used to remove this bound if it's not appropriate." |
-| `std::marker::Sync`       | B, arrays, ranges, slices, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Result`, `String`, `Vec`                                      |
-| `std::marker::Unpin`      | B, arrays, ranges, slices, `Arc`, `Box`, `Cell`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `Ref`, `RefCell`, `Result`, `String`, `Vec`                     |
-| `std::ops::Add`           | numbers, `Duration`, `String`                                                                                                                                    |
-| `std::ops::AddAssign`     | numbers                                                                                                                                                          |
-| `std::ops::BitAnd`        | `bool`, numbers                                                                                                                                                  |
-| `std::ops::BitAndAssign`  | `bool`, numbers                                                                                                                                                  |
-| `std::ops::BitOr`         | `bool`, numbers                                                                                                                                                  |
-| `std::ops::BitOrAssign`   | `bool`, numbers                                                                                                                                                  |
-| `std::ops::BitXor`        | `bool`, numbers                                                                                                                                                  |
-| `std::ops::BitXorAssign`  | `bool`, numbers:                                                                                                                                                 |
-| `std::ops::Deref`         | `Arc`, `Box`, `Rc`, `Ref`, `RefMut`, `String`, `Vec`                                                                                                             |
-| `std::ops::DerefMut`      | `Box`, `String`, `Vec`                                                                                                                                           |
-| `std::ops::Div`           | numbers                                                                                                                                                          |
-| `std::ops::DivAssign`     | numbers                                                                                                                                                          |
-| `std::ops::Drop`          | `Arc`, `Box`, `LinkedList`, `Rc`                                                                                                                                 |
-| `std::ops::Fn`            |                                                                                                                                                                  |
-| `std::ops::FnMut`         |                                                                                                                                                                  |
-| `std::ops::FnOnce`        |                                                                                                                                                                  |
-| `std::ops::Index`         | slices, `HashMap`, `str`, `String`, `Vec`                                                                                                                        |
-| `std::ops::IndexMut`      | slices, `str`, `String`, `Vec`                                                                                                                                   |
-| `std::ops::Mul`           | numbers                                                                                                                                                          |
-| `std::ops::MulAssign`     | numbers                                                                                                                                                          |
-| `std::ops::Neg`           | numbers                                                                                                                                                          |
-| `std::ops::Not`           | `bool`, numbers                                                                                                                                                  |
-| `std::ops::RangeBound`    | ranges                                                                                                                                                           |
-| `std::ops::Rem`           | numbers                                                                                                                                                          |
-| `std::ops::RemAssign`     | ranges                                                                                                                                                           |
-| `std::ops::Shl`           | numbers                                                                                                                                                          |
-| `std::ops::ShlAssign`     | numbers                                                                                                                                                          |
-| `std::ops::Shr`           | numbers                                                                                                                                                          |
-| `std::ops::ShrAssign`     | numbers                                                                                                                                                          |
-| `std::ops::Sub`           | numbers                                                                                                                                                          |
-| `std::ops::SubAssign`     | numbers                                                                                                                                                          |
-| `std::str::FromStr`       | B, `String`                                                                                                                                                      |
-| `std::string::ToString`   | `char`, `str`, `String`                                                                                                                                          |
 
 ### Sets
 
@@ -2878,22 +2718,33 @@ fn main() {
 
 ## Slices
 
-A slice is a reference to a contiguous subset of a collection
+A slice is a borrowed reference to a contiguous subset of a collection
 that is represented by pointer and a length.
-They are often created using a range.
-This is what a `&str` value represents.
+For example, a slice of a `String` has the type `&str`
+which holds a pointer and a length.
+Slices are often created using a range.
+TODO: Is this the only way?
 For example:
 
 ```rust
 let s = String::from("abcdefgh");
-// Note the & which says we are getting a
-// "reference" to a portion of the string.
+// The & here says we are getting a "reference" to a portion of the string.
 let sub = &s[3..6];
 println!("{}", sub); // "def"
+
+let colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+
+let slice1 = &colors[1..5];
+println!("{:?}", slice1); // ["orange", "yellow", "green", "blue"]
+
+// We can get a slice of a slice.
+let slice2 = &slice1[1..3];
+println!("{:?}", slice2); // ["yellow", "green"]
 ```
 
 Many kinds of collections, including arrays and vectors,
 support obtaining slices of their items.
+TODO: Add a list of the types that support obtaining slices.
 
 For example:
 
@@ -2957,6 +2808,7 @@ A `match` expression can match the following kinds of values:
 boolean, integer, &str, String, and enum.
 These must be exhaustive, meaning that they account for
 every possible value of the expression being matched.
+An underscore can be used as a wildcard match.
 For example:
 
 ```rust
@@ -2968,14 +2820,14 @@ let holiday = match month {
     "October" => "Halloween",
     "November" => "Thanksgiving",
     "December" => "Christmas",
-    _ => "unknown" // underscore matches any other value
+    _ => "unknown" // matches any other value
 };
 println!("The holiday in {} is {}.", month, holiday);
 ```
 
 The lines containing `=>` are referred to as "match arms".
 They can match a single pattern or
-multiple patterns separated by `|` characters.
+one of a set of patterns separated by `|` characters.
 Patterns can be literal values of the types
 `bool`, `char`, `&str`, non-negative integer, wildcard (`_`),
 tuple of these types, array of these types,
@@ -3018,6 +2870,21 @@ fn main() {
     };
     println!("{} is a {}.", age, category);
 }
+```
+
+The expression being evaluated can be a complex type such as a tuple.
+For example:
+
+```rust
+let suit = "diamond";
+let rank = "queen";
+let card = match (suit, rank) {
+    ("spade", _) => "a spade",
+    (_, "king") => "a king",
+    ("diamond", "queen") => "queen of diamonds",
+    _ => "something else"
+};
+println!("Your card is {}.", card);
 ```
 
 A "match guard" adds an `if` expression to a match pattern.
@@ -3375,7 +3242,35 @@ Many Rust methods return a `std::iter::Iterator` that
 can be used to iterate over the elements of a collection.
 Iterators are lazy, meaning that they
 do not pre-compute the values they will return.
-The `Iterator` type supports methods in the following non-exhaustive list:
+
+The commonly used methods for creating an iterator over a collection include:
+
+- `iter` for iterating over immutable references to items
+- `iter_mut` for iterating over mutable references to items
+- `into_iter` for iterating over items
+
+Here is an example of modifying the items in a collection while iterating over it.
+
+```rust
+let mut colors = ["red".to_string(), "orange".to_string(), "yellow".to_string()];
+for color in colors.iter_mut() {
+    *color = color.to_uppercase();
+}
+```
+
+The `into_iter` method is described by the `IntoIterator` trait.
+Collections that implement this can be iterated over using a `for` loop
+without needing to call one of the methods listed above.
+For example:
+
+```rust
+let colors = ["red", "orange", "yellow"];
+for color in &colors {
+    println!("{}", color); // red then orange then yellow
+}
+```
+
+The `Iterator` trait supports methods in the following non-exhaustive list:
 
 | Method                | Description                                                                                                  |
 | --------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -4574,6 +4469,193 @@ fn print_string(label: &str, value: &dyn Printable) {
 }
 ```
 
+Writing functions that operate on any numeric type
+can be done using trait bounds.
+There are three ways to specify them.
+One way is shown in this example.
+
+```rust
+// The trait bound "Copy + Into<f32>" means that this
+// takes a slice of any type that can be copied
+// and can be converted to the f32 type.
+// This is true of all the primitive numbers types except f64.
+// This approach is more flexible than declaring the parameter
+// to be "&[i32]" which only accepts a slice of i32 values.
+fn sum<T>(numbers: &[T]) -> f32
+where T: Copy + Into<f32> {
+    // The map part below can also be written as ".map(|x| x.into())".
+    numbers.iter().copied().map(Into::into).sum::<f32>()
+}
+
+fn average<T>(numbers: &[T]) -> f32
+where T: Copy + Into<f32> {
+    sum(numbers) / numbers.len() as f32
+}
+
+fn main() {
+    let numbers = [200u8, 255u8, 3u8];
+    let total = sum(&numbers);
+    println!("total = {}", total); // 458 which would overflow u8
+
+    let scores: Vec<u8> = vec![70, 90, 85, 100];
+
+    // Print average of all scores.
+    println!("average = {:.1}", average(&scores)); // 86.2
+
+    // Print average of all scores except the first.
+    println!("average = {:.1}", average(&scores[1..])); // 91.7
+}
+```
+
+Alternatively we can define a new trait that
+combines several others and then use it as a trait bound.
+With the following in place, we can use the trait `Number`
+in the code above in place of `Copy + Into<f32>`.
+We can also use it in functions that need the capabilities
+of the additional traits from the `std::ops` namespace.
+
+```rust
+use std::ops::*;
+trait Number:
+    Add + AddAssign + Copy + Div + DivAssign +
+    Into<f64> + Mul + MulAssign + Sub + SubAssign {}
+impl<T> Number for T where
+    T: Add + AddAssign + Copy + Div + DivAssign +
+       Into<f64> + Mul + MulAssign + Sub + SubAssign {}
+```
+
+A similar approach is used by {% aTargetBlank
+"https://docs.rs/num-traits/", "num_traits" %} library crate.
+
+Another approach is to use the {% aTargetBlank
+"https://crates.io/crates/num", "num" %} crate.
+Add this as a dependency in `Cargo.toml` with a line like `num = "0.3.1"`.
+
+For example:
+
+```rust
+extern crate num;
+use core::ops::AddAssign;
+use num::{Num, ToPrimitive};
+
+// T can be any type that implements the traits
+// AddAssign, Copy, Num, and ToPrimitive.
+// The built-in primitive number types like i32, u8, and f32
+// all implement the AddAssign and Copy traits.
+// The num crate adds implementations of
+// Num and ToPrimitive to those same types.
+// So T can be any built-in numeric type.
+fn average<T: AddAssign + Copy + Num + ToPrimitive>(numbers: &[T]) -> f32 {
+    // The Num trait requires also implementing the Zero trait
+    // which defines the zero function.
+    // That returns the zero value for the wrapped primitive type.
+    let mut sum = T::zero();
+
+    for n in numbers {
+        sum += *n; // requires implementing the AddAssign trait
+    }
+    let numerator = sum.to_f32().unwrap();
+    numerator / numbers.len() as f32
+}
+```
+
+The following table maps built-in traits
+to the commonly used built-in types that implement them.
+Knowing this is useful for determining the trait bounds that can be used
+to write functions that support arguments of multiple types.
+The goal is provide a sense for the use of each trait.
+See the official documentation for details.
+
+Recall that Rust supports the following built-in scalar (single value) types:
+
+- `bool`
+- `char`
+- number: float and integer
+- float: `f32` and `f64`
+- integer: signed and unsigned
+- signed integer: `i8`, `i16`, `i32`, `i64`, `i128`, and `isize`
+- unsigned integer: `u8`, `u16`, `u32`, `u64`, `u128`, and `usize`
+
+The compound types (multiple values) with fixed sizes include arrays and tuples.
+When these are listed as a implementing type below,
+this is only the case if their items implement the trait.
+
+In the lists of implementing types:
+
+- B means all the built-in scalar and compound types.
+- C means any type that implements the `Clone` trait or slices of such types.
+- S means any type with size known at compile type or slices of such types.
+- Often there are restrictions on an implementing type.
+  For example, when `HashMap` is listed, there may be restrictions on
+  the types of keys and values that can be used.
+
+| Trait                     | Implementing Types                                                                                                                                               |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `std::borrow::Borrow`     | S, scalar, compound, `Arc`, `Box`, `Rc`, `String`, `Vec`                                                                                                         |
+| `std::borrow::BorrowMut`  | S, array, `Box`, `String`, `Vec`                                                                                                                                 |
+| `std::borrow::ToOwned`    | C, `str`                                                                                                                                                         |
+| `std::clone::Clone`       | B, S, `Arc`, `Box`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more                                                  |
+| `std::cmp::Eq`            | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `Result`, `String`, `Vec`, and many more         |
+| `std::cmp::Ord`           | B, S, arrays, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                         |
+| `std::cmp::PartialEq`     | B, S, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `str`, `String`, `Vec`                                       |
+| `std::cmp::PartialOrd`    | B, arrays, tuples, `Arc`, `Box`, `Duration`, `Error`, `LinkedList`, `Option`, `Rc`, `Result`, `str`, `String`, `Vec`                                             |
+| `std::convert::AsMut`     | arrays, slices, `Box`, `String`, `Vec`                                                                                                                           |
+| `std::convert::AsRef`     | arrays, slices, `Arc`, `Box`, `Rc`, `str`, `String`, `Vec`                                                                                                       |
+| `std::convert::From`      | B (not `bool`), `Arc`, `Box`, `Error`, `String`, `Vec`                                                                                                           |
+| `std::convert::Into`      | any type that implements the `From` trait                                                                                                                        |
+| `std::convert::TryFrom`   | B (not `bool`), arrays (and arrays wrapped by `Arc`, `Box`, or `Rc`), `Vec`                                                                                      |
+| `std::convert::TryInto`   | any type that implements the `TryFrom` trait                                                                                                                     |
+| `std::default::Default`   | B, arrays, ranges, slices, tuples, `Arc`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Rc`, `String`, `Vec`                                         |
+| `std::fmt::Debug`         | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `Rc`, `str`, `String`                                                |
+| `std::fmt::Display`       | B, `Arc`, `Box`, `Error`, `Rc`, `str` `String`                                                                                                                   |
+| `std::hash::Hash`         | B, arrays, ranges, slices, tuples, `Arc`, `Box`, `LinkedList`, `Rc`, `Result`, `Vec`                                                                             |
+| `std::io::Read`           | `BufReader`, `File`, `Stdin`, `TcpStream`, `UnixStream`                                                                                                          |
+| `std::io::Write`          | `BufWriter`, `File` `LineWriter`, `Stderr`, `Stdout`, `TcpStream`, `UnixStream`                                                                                  |
+| `std::iter::Extend`       | `HashMap`, `HashSet`, `LinkedList`, `String`, `Vec`                                                                                                              |
+| `std::iter::FromIterator` | `Arc`, `Box`, `HashMap`, `HashSet`, `LinkedList`, `Option`, `Rc`, `Result`, `String`, `Vec`                                                                      |
+| `std::iter::IntoIterator` | arrays, slices, `HashMap`, `LinkedList`, `Option`, `Result`, `Vec`                                                                                               |
+| `std::iter::Iterator`     | ranges and many more                                                                                                                                             |
+| `std::iter::Product`      | numbers, `Option`, `Result`                                                                                                                                      |
+| `std::iter::Sum`          | numbers, `Option`, `Result`                                                                                                                                      |
+| `std::marker::Copy`       | B, arrays, tuples, `Error`, `Result`                                                                                                                             |
+| `std::marker::Send`       | B, arrays, ranges, slices, `Arc`, `Box`, `Cell`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `RefCell`, `Vec`                                                   |
+| `std::marker::Sized`      | From the docs, "All type parameters have an implicit bound of `Sized`.<br>The special syntax `?Sized` can be used to remove this bound if it's not appropriate." |
+| `std::marker::Sync`       | B, arrays, ranges, slices, `Arc`, `Box`, `Duration`, `Error`, `HashMap`, `HashSet`, `LinkedList`, `Result`, `String`, `Vec`                                      |
+| `std::marker::Unpin`      | B, arrays, ranges, slices, `Arc`, `Box`, `Cell`, `Duration`, `HashMap`, `HashSet`, `LinkedList`, `Ref`, `RefCell`, `Result`, `String`, `Vec`                     |
+| `std::ops::Add`           | numbers, `Duration`, `String`                                                                                                                                    |
+| `std::ops::AddAssign`     | numbers                                                                                                                                                          |
+| `std::ops::BitAnd`        | `bool`, numbers                                                                                                                                                  |
+| `std::ops::BitAndAssign`  | `bool`, numbers                                                                                                                                                  |
+| `std::ops::BitOr`         | `bool`, numbers                                                                                                                                                  |
+| `std::ops::BitOrAssign`   | `bool`, numbers                                                                                                                                                  |
+| `std::ops::BitXor`        | `bool`, numbers                                                                                                                                                  |
+| `std::ops::BitXorAssign`  | `bool`, numbers:                                                                                                                                                 |
+| `std::ops::Deref`         | `Arc`, `Box`, `Rc`, `Ref`, `RefMut`, `String`, `Vec`                                                                                                             |
+| `std::ops::DerefMut`      | `Box`, `String`, `Vec`                                                                                                                                           |
+| `std::ops::Div`           | numbers                                                                                                                                                          |
+| `std::ops::DivAssign`     | numbers                                                                                                                                                          |
+| `std::ops::Drop`          | `Arc`, `Box`, `LinkedList`, `Rc`                                                                                                                                 |
+| `std::ops::Fn`            |                                                                                                                                                                  |
+| `std::ops::FnMut`         |                                                                                                                                                                  |
+| `std::ops::FnOnce`        |                                                                                                                                                                  |
+| `std::ops::Index`         | slices, `HashMap`, `str`, `String`, `Vec`                                                                                                                        |
+| `std::ops::IndexMut`      | slices, `str`, `String`, `Vec`                                                                                                                                   |
+| `std::ops::Mul`           | numbers                                                                                                                                                          |
+| `std::ops::MulAssign`     | numbers                                                                                                                                                          |
+| `std::ops::Neg`           | numbers                                                                                                                                                          |
+| `std::ops::Not`           | `bool`, numbers                                                                                                                                                  |
+| `std::ops::RangeBound`    | ranges                                                                                                                                                           |
+| `std::ops::Rem`           | numbers                                                                                                                                                          |
+| `std::ops::RemAssign`     | ranges                                                                                                                                                           |
+| `std::ops::Shl`           | numbers                                                                                                                                                          |
+| `std::ops::ShlAssign`     | numbers                                                                                                                                                          |
+| `std::ops::Shr`           | numbers                                                                                                                                                          |
+| `std::ops::ShrAssign`     | numbers                                                                                                                                                          |
+| `std::ops::Sub`           | numbers                                                                                                                                                          |
+| `std::ops::SubAssign`     | numbers                                                                                                                                                          |
+| `std::str::FromStr`       | B, `String`                                                                                                                                                      |
+| `std::string::ToString`   | `char`, `str`, `String`                                                                                                                                          |
+
 ## <a name="macros">Macros</a>
 
 Macros are like functions that:
@@ -5570,6 +5652,20 @@ Tools for compiling Rust code to WebAssembly include
 {% aTargetBlank "https://www.secondstate.io/articles/ssvmup/", "ssvmup" %}
 The ssvmup tool was inspired by wasm-pack and has explicit support for Deno.
 
+From {% aTargetBlank
+"https://rustwasm.github.io/book/game-of-life/implementing.html",
+"Implementing Conway's Game of Life" %},
+"As a general rule of thumb, a good JavaScript/WebAssembly interface design
+is often one where large, long-lived data structures are implemented as
+Rust types that live in the WebAssembly linear memory,
+and are exposed to JavaScript as opaque handles.
+JavaScript calls exported WebAssembly functions that take these opaque handles,
+transform their data, perform heavy computations, query the data,
+and ultimately return a small, copy-able result.
+By only returning the small result of the computation,
+we avoid copying and/or serializing everything back and forth between
+the JavaScript garbage-collected heap and the WebAssembly linear memory."
+
 ### wasm-pack
 
 To install wasm-pack in Linux or macOS, enter the following:
@@ -5578,7 +5674,38 @@ To install wasm-pack in Linux or macOS, enter the following:
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 ```
 
-### ssvmupk
+1. `wasm-pack new my-wasm`
+1. `cd my-wasm`
+1. `wasm-pack build --target web`
+1. Create the following `index.html` file:
+
+   ```html
+   <html>
+     <head>
+       <meta charset="utf-8" />
+       <title>WASM Demo</title>
+     </head>
+     <body>
+       <script type="module">
+         import {default as wasm, greet} from './pkg/my_wasm.js';
+         wasm().then(module => {
+           greet();
+         });
+       </script>
+     </body>
+   </html>
+   ```
+
+1. Start a local HTTP file server.
+   There are many ways to do this, including using Deno.
+   To run a simple Deno HTTP file server:
+
+   1. Install {% aTargetBlank "https://deno.land/#installation", "Deno" %}.
+   1. Enter `deno install --allow-net --allow-read https://deno.land/std@0.83.0/http/file_server.ts`
+   1. Enter `file_server .`
+   1. Browse `localhost:4507`
+
+### ssvmup
 
 To compile a `.rs` file to WebAssembly:
 

@@ -1939,9 +1939,6 @@ const server = serve({port});
 console.log('listening on port', port);
 
 for await (const req of server) {
-  console.log('req is', req);
-  console.log('got request for', req.method, req.url);
-  const path = `${Deno.cwd()}/${req.url}`;
   try {
     const content = await serveFile(req, path);
     req.respond(content);
