@@ -1883,6 +1883,8 @@ depending on the processor architecture.
 The default type for literal integers is `i32` regardless of the processor.
 
 The unsigned integer types are the same, but start with `u` instead of `i`.
+The `usize` type is typically used to index into
+collections such as arrays and vectors.
 
 Literal number values can end with these type names to make their type explicit.
 For example, the value 19 can be specified to be
@@ -1997,9 +1999,9 @@ concrete types in order to use them in place of the type parameters.
 The sections on functions, structs, and traits
 contain many examples of using generic types.
 
-## Built-in Compound Types
+## Primitive Compound Types
 
-Rust defines two compound (non-primitive) types which are tuple and array.
+Rust defines three primitive compound types which are tuple, array, and slice.
 These are distinct from the collection types that are described later.
 
 A tuple is a fixed-length list of values that can be of different types.
@@ -2018,6 +2020,7 @@ println!("{} {}", v1, v2); // 1 2
 ```
 
 An array is a fixed-length list of values that have the same type.
+Once created, it cannot grow or shrink.
 The syntax for an array type is `[type; length]`.
 The syntax for an array value is `[value1, value2, ...]`.
 For example:
@@ -2038,6 +2041,10 @@ println!("sevens = {:?}", sevens); // [7, 7, 7, 7, 7]
 Elements of an array can be accessed using
 square brackets and zero-based indexes.
 For example, `rgb[1]` is "green".
+
+A slice is a borrowed reference to a contiguous subset of a collection
+that is represented by pointer and a length.
+These are described in more detail in the [Slices](#slices) section.
 
 Rust provides the `Vec` (vector) type for creating
 variable-length lists of values that have the same type.
@@ -2798,7 +2805,8 @@ For details on the syntax for specifying ranges, see [Ranges](#ranges).
 ## Conditional Logic
 
 The most common way to implement conditional logic is with an `if` expressions.
-The condition is not surrounded by parentheses and
+The expression after the `if` keyword must evaluate to a `bool` value.
+It is not surrounded by parentheses and
 code to be executed must be surrounded curly brackets,
 even if there is only one statement or expression.
 For example:
@@ -4177,14 +4185,20 @@ struct Point2D {
 
 trait Distance<T> {
     // The type Self here refers to the implementing type.
-    // In the "impl" below, that is the Point2D struct.
+    // In the "impl" below, that is the Point2D type.
     fn distance_to(self: &Self, other: &Self) -> T;
 }
 
-// Implementations of the "Distance" trait on other types
-// could choose a different return type such as "f32".
+impl Distance<f32> for Point2D {
+    fn distance_to(&self, other: &Point2D) -> f32 {
+        let dx = self.x - other.x;
+        let dy = self.y - other.y;
+        (dx.powi(2) + dy.powi(2)).sqrt() as f32
+    }
+}
+
 impl Distance<f64> for Point2D {
-    fn distance_to(self: &Point2D, other: &Point2D) -> f64 {
+    fn distance_to(&self, other: &Point2D) -> f64 {
         let dx = self.x - other.x;
         let dy = self.y - other.y;
         (dx.powi(2) + dy.powi(2)).sqrt()
@@ -4194,8 +4208,38 @@ impl Distance<f64> for Point2D {
 fn main() {
     let p1 = Point2D { x: 3.0, y: 4.0 };
     let p2 = Point2D { x: 6.0, y: 8.0 };
-    let d = p1.distance_to(&p2);
+
+    // The type of d must be specified because there is more than one
+    // implementation of the Distance Trait on the Point2D type.
+    let d: f32 = p1.distance_to(&p2);
     println!("{}", d); // 5
+    let d: f64 = p1.distance_to(&p2);
+    println!("{}", d); // 5
+}
+```
+
+An alternative to making a trait generic is to use "associated types".
+A key distinction is the number of implementations that can be defined
+on a given type, many (with generics) or only one (with associated types).
+For example, for the `Point2D` type above
+if we only need one implementation of the `distance_to` method,
+we can use an associated type as follows:
+
+```rust
+trait Distance {
+    type Output;
+
+    fn distance_to(&self, other: &Self) -> Self::Output;
+}
+
+impl Distance for Point2D {
+    type Output = f64;
+
+    fn distance_to(&self, other: &Point2D) -> Self::Output {
+        let dx = self.x - other.x;
+        let dy = self.y - other.y;
+        (dx.powi(2) + dy.powi(2)).sqrt()
+    }
 }
 ```
 
@@ -4355,7 +4399,9 @@ struct Color {
 impl Add for Color {
     // The "Add" trait requires specifying an "associated type"
     // named "Output" that specifies the return type of the "add" method.
-    // It could be a type other than "Add", but that's what we want here.
+    // It could be a type other than "Self" which represents
+    // the type on which it is being implemented (Color in this case),
+    // but that's what we want here.
     type Output = Self;
 
     fn add(self, other: Self) -> Self {
