@@ -4137,7 +4137,7 @@ is an "associated function" rather than a method.
 The first parameter of a method can be written as
 `self` (takes ownership or copies),
 `&self` (borrows immutably; most common), or
-`&mut self` (borrows mutably).
+`&mut self` (borrows mutably; needed to modify struct fields).
 These are shorthand for `self: Self`, `self: &Self`,
 and `self: &mut Self` respectively.
 In the first case, if the type implements
