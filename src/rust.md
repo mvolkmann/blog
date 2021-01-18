@@ -1490,6 +1490,25 @@ fn main() {
 }
 ```
 
+Here are some _guidelines_ related to ownership of heap data.
+While there are situations in which these do not apply,
+often to improve performance,
+following these will typically reduce ownership issues in your code.
+
+1. Compound types should own their heap data rather than
+   hold references to heap data owned elsewhere.
+   For example, struct fields that are strings
+   should use `String` instead of `&str`.
+1. Pass references to heap data to functions
+   rather than transferring ownership.
+   For example, a parameter that accepts string data
+   should have the type `&str` instead of `String`.
+   An exception is when the function wants to take ownership
+   in order to add an item to a compound type that it owns.
+1. In functions that create and return heap data,
+   transfer ownership to the caller.
+   For example, return `String` rather than `&str`.
+
 ## Lifetimes
 
 Lifetimes ensure that memory does not get freed
@@ -2724,7 +2743,8 @@ A slice is a borrowed reference to a contiguous subset of a collection
 that is represented by pointer and a length.
 For example, a slice of a `String` has the type `&str`
 which holds a pointer and a length.
-A slice is created using a range.
+Slice are created on a reference (`&`) using a range (`[start..end]`).
+Indexes that are out of bounds are caught at runtime, not compile-time.
 For example:
 
 ```rust
@@ -2745,7 +2765,7 @@ println!("{:?}", slice2); // ["yellow", "green"]
 
 Many kinds of collections, including arrays and vectors,
 support obtaining slices of their items.
-TODO: Add a list of the types that support obtaining slices.
+This includes strings, arrays, and vectors.
 
 For example:
 
@@ -3198,9 +3218,15 @@ the code will not compile because the value goes out of scope and is dropped.
 Function parameters that are strings that are not mutated by the function
 should almost always have the type `&str`.
 This allows many string representations to be passed in including
-literal strings, `&str` values, and `&String` values.
+literal strings, `&str` values, and
+references to `String` values (not `String` values).
 Functions that create and return strings have the return type `String`
 so ownership can be transferred to the caller.
+
+Functions that take data from arrays or vectors
+typically should have slice parameters.
+This makes them more flexible than taking a reference to an array or vector
+because callers can pass an array, vector, or slice of them.
 
 Functions are accessible by default within the same source file,
 but they are private by default when defined in a different source file.
@@ -5694,10 +5720,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## <a name="webassembly">WebAssembly</a>
 
 WebAssembly (abbreviated WASM) is a binary instruction format
-for a stack-based virtual machine that is supported by modern web browsers
-(currently Chrome, Edge, Firefox, and Safari).
+for a stack-based virtual machine.
+
+WASM is supported by modern web browsers including
+Chrome, Edge, Firefox, and Safari (not Internet Explorer).
 WASM code typically executes much faster than
 equivalent code written in JavaScript.
+
+WASM can also be compiled to native executables
+that run on x86 and ARM processors.
 
 Code from many programming languages can be compiled to WASM.
 Currently full support is only available for C, C++, and Rust.
@@ -5737,8 +5768,15 @@ cargo install wasm-pack
 ```
 
 1. `wasm-pack new my-wasm`
+
+   TODO: Describe what this puts in Cargo.toml.
+
 1. `cd my-wasm`
+
 1. `wasm-pack build --target web`
+
+   TODO: Describe the files this produces.
+
 1. Create the following `index.html` file:
 
    ```html
@@ -5760,6 +5798,8 @@ cargo install wasm-pack
 
 1. Start a local HTTP file server.
    There are many ways to do this, including using Deno.
+   TODO: Is there any reason to use wasm-server instead because it supports the WASM MIME type?
+   TODO: Maybe this is no longer an issue.
    To run a simple Deno HTTP file server:
 
    1. Install {% aTargetBlank "https://deno.land/#installation", "Deno" %}.
