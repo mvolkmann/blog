@@ -4226,13 +4226,18 @@ if we only need one implementation of the `distance_to` method,
 we can use an associated type as follows:
 
 ```rust
+// We can implement this trait for any number of types like Point2D,
+// but each can only specify one output type for its distance_to method.
 trait Distance {
+    // We can define any number of named associated types here,
+    // but only one is needed in this example.
     type Output;
 
     fn distance_to(&self, other: &Self) -> Self::Output;
 }
 
 impl Distance for Point2D {
+    // Specify the concrete type of each associated type here.
     type Output = f64;
 
     fn distance_to(&self, other: &Point2D) -> Self::Output {
