@@ -2598,23 +2598,24 @@ The `std::collections` namespace defines the `HashMap` generic type.
 
 Here is a summary of commonly used `HashMap` methods:
 
-| Operation                                            | Syntax                       |
-| ---------------------------------------------------- | ---------------------------- |
-| create empty                                         | `let map = HashMap::new()`   |
-| remove all items                                     | `map.clear()`                |
-| determine if a key is present                        | `set.contains_key(key)`      |
-| get value associated with a key                      | `map.get(key)` (1)           |
-| get mutable value associated with a key              | `map.get_mut(key)` (1)       |
-| insert key/value pair                                | `map.insert(key, value)` (2) |
-| determine if empty                                   | `map.is_empty()`             |
-| get iterator over key/value pairs as tuples          | `map.iter()`                 |
-| get mutable iterator over key/value pairs as tuples  | `map.iter_mut()`             |
-| get iterator over keys                               | `map.keys()`                 |
-| get number of key/value pairs (length)               | `map.len()`                  |
-| remove a key/value pair                              | `map.remove(key)` (2)        |
-| remove key/value pairs that do not match a predicate | `map.retain(pred_fn)` (3)    |
-| get iterator over values                             | `map.values()`               |
-| get iterator over mutable values                     | `map.values_mut()`           |
+| Operation                                                 | Syntax                                    |
+| --------------------------------------------------------- | ----------------------------------------- |
+| create empty                                              | `let map = HashMap::new()`                |
+| remove all items                                          | `map.clear()`                             |
+| determine if a key is present                             | `set.contains_key(key)`                   |
+| get value associated with a key                           | `map.get(key)` (1)                        |
+| get mutable value associated with a key                   | `map.get_mut(key)` (1)                    |
+| insert key/value pair                                     | `map.insert(key, value)` (2)              |
+| determine if empty                                        | `map.is_empty()`                          |
+| get iterator over key/value pairs as tuples               | `map.iter()`                              |
+| get mutable iterator over key/value pairs as tuples       | `map.iter_mut()`                          |
+| get iterator over keys                                    | `map.keys()`                              |
+| get number of key/value pairs (length)                    | `map.len()`                               |
+| get value for key, inserting default value if not present | `map.entry(key).or_insert(initial-value)` |
+| remove a key/value pair                                   | `map.remove(key)` (2)                     |
+| remove key/value pairs that do not match a predicate      | `map.retain(pred_fn)` (3)                 |
+| get iterator over values                                  | `map.values()`                            |
+| get iterator over mutable values                          | `map.values_mut()`                        |
 
 1. returns an `Option`
 1. returns `Some(old_value)` if key was already present and `None` otherwise
@@ -2743,6 +2744,14 @@ fn main() {
     }
 }
 ```
+
+For a longer example of using a `HashMap` and the `entry` method,
+see {% aTargetBlank "https://github.com/mvolkmann/rust-poker", "rust-poker" %}.
+The file `src/lib.rs` defines the `evaluate` method of the `Hand` struct.
+This uses the `entry` method to determine the number of cards in the hand
+from each suit and rank.
+This repository also serves as a good example of implementing
+doc tests, unit tests, and integration tests.
 
 ## Slices
 
@@ -3052,8 +3061,9 @@ fn main() {
 
 A `while let` loop is useful when iterating over
 repeated calls to a function that might fail.
-The example below uses the `futures` crate which requires
-adding the dependency `futures = "0.3.8"` to `Cargo.toml`.
+The example below uses the `futures` and `rand` crates
+which requires adding the dependencies `futures = "0.3.8"` and `rand = "0.8.2"`
+to `Cargo.toml`.
 For example:
 
 ```rust
