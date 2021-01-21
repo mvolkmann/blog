@@ -41,6 +41,11 @@ table {
   border-collapse: collapse;
 }
 
+// Matches the element whose id matches the URL hash.
+:target {
+  color: purple;
+}
+
 td,
 th {
   border: solid lightgray 1px;

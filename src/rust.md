@@ -4790,14 +4790,96 @@ In the lists of implementing types:
 
 ## <a name="macros">Macros</a>
 
-Macros are like functions that:
+Macros generate code at compile-time.
+There are two categories of macros, "declarative" and "procedural".
+There are three kinds of procedural macros: attribute, derive, and function.
 
-- have names that end in `!`
-- generate code at compile-time
-- can take a variable number of arguments
+TODO: Finish this section.
+
+Declarative macros specify a patterns (similar to a `match` expression) to match
+and code to replace what is matched.
+Examples include ?.
+
+Attribute macros annotate on code that follows.
+Examples include:
+
+- `allow` disables certain warnings (ex. `unused` variables and functions)
+- `cfg` conditionally includes an item based on a predicate (ex. configuration value or target OS)
+- `deprecated` marks an item as deprecated so usages of it will trigger a warning message
+- `derive` derives the implementation of specified traits on a type such as a struct
+- `feature` enables unstable or experimental compiler features
+- `macro_use` to expand the scope of a macro definition or import macros from another crate
+- `should_panic` indicates that a test function is expected to panic
+- `test` identifies a test function
+
+Derive macros specify code to be added to implement traits
+when the `derive` attribute is applied to a type such as a struct.
+For example, `#[derive(Clone, Copy, Debug)]`.
+
+Function macros are invoked like Rust functions,
+but with `!` at the end of their name.
+Unlike functions, they can take a variable number of arguments.
+Examples include all the macros in the table below.
+
+| Name              | Description                                                                                                       |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `assert`          | takes a boolean expression and panics if it is false                                                              |
+| `assert_eq`       | takes two arguments and panics if they are not equal                                                              |
+| `assert_ne`       | takes two arguments and panics if they are equal                                                                  |
+| `dbg`             | takes expressions separated by commas and<br>prints each followed by `=` and its value on separate lines          |
+| `debug_assert`    | same as `assert`, but not enabled in release builds                                                               |
+| `debug_assert_eq` | same as `assert_eq`, but not enabled in release builds                                                            |
+| `debug_assert_ne` | same as `assert_ne`, but not enabled in release builds                                                            |
+| `env`             | takes an environment variable name and is replaced by its value                                                   |
+| `eprint`          | same as `print`, but prints to stderr instead of stdout                                                           |
+| `eprintln`        | same as `println`, but prints to stderr instead of stdout                                                         |
+| `file`            | expands to the relative path to the current source file                                                           |
+| `format`          | takes a format string and expressions and returns a `String`                                                      |
+| `include_bytes`   | takes a relative file path and returns the contents as a byte array                                               |
+| `include_str`     | takes a relative file path and returns the contents as a Unicode string                                           |
+| `line`            | expands to the line number of the current source line                                                             |
+| `matches`         | takes an expression and a pattern and returns a boolean indicating whether it matches the pattern                 |
+| `option_env`      | takes an environment variable name and expands to an `Option` enum;<br>`Some(value)` if defined, `None` otherwise |
+| `panic`           | exits program and outputs a stack trace and error message                                                         |
+| `print`           | takes a format string and expressions and prints them                                                             |
+| `println`         | same as `print`, but adds a newline at the end                                                                    |
+| `todo`            | panics with the message "not yet implemented"                                                                     |
+| `unimplemented`   | panics with the message "not implemented"                                                                         |
+| `unreachable`     | panics with the message "entered unreachable code"                                                                |
+| `vec`             | creates a `Vec` containing specified items listed in square brackets                                              |
+| `write`           | like `print`, but writes to a byte buffer                                                                         |
+| `writeln`         | like `write`, but adds a newline at the end                                                                       |
+
+The assert macros are used in tests and to check
+pre-conditions that must hold at the beginning of functions.
+
+The `dbg` macro is incredibly useful for debugging!
+For example, rather than writing `println!("score = {}", score);`
+write `$dbg(score)`.
+
+The following macros all take a format string
+and expressions to insert into the format string:
+`eprint`, `eprintln`, `format`, `panic`, `println`, `write`, and `writeln`.
+
+The `todo` and `unimplemented` macro is called from functions that have
+not yet been implemented so that calls to them will be flagged.
+From the official documentation, "The difference ... is that
+while todo! conveys an intent of implementing the functionality later ...,
+unimplemented! makes no such claims."
+
+The `unreachable` macro is called in code paths that should never be reached.
+An example is in the last arm of a `match` expression
+that uses a wildcard (`_`) on the left side
+where all the expected conditions are described in the preceding match arms.
+
+Another source of macros is the external crate
+`log` which provides macros for logging.
+It defines the macros `debug`, `error`, `info`, `log`, `trace`, and `warn`.
 
 Implementing macros is an advanced topic.
 We will just show one example here.
+Declarative macros are defined with `macro_rules!`.
+They specify code patterns to match and code to replace the match.
 
 In the [Built-in Scalar Types](#scalar-types) section
 we included examples of adding methods to built-in types.
@@ -4809,7 +4891,7 @@ trait Days {
 }
 
 macro_rules! implement_days {
-    ($t: ty) => {
+    ($t: ty) => { // "ty" matches a Rust type
         impl Days for $t {
             fn days_from_now(self) -> String {
                 let s = match self {
@@ -5777,6 +5859,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
+## Databases
+
+TODO: Show how Rust can access PostgreSQL and MongoDB databases.
 
 ## <a name="webassembly">WebAssembly</a>
 
