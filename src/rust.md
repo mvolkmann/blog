@@ -4791,16 +4791,18 @@ In the lists of implementing types:
 ## <a name="macros">Macros</a>
 
 Macros generate code at compile-time.
-There are two categories of macros, "declarative" and "procedural".
-There are three kinds of procedural macros: attribute, derive, and function.
+There are two ways to define a macro: "declarative" and "procedural".
+There are three ways to use macros: attribute-like, derive, and function-like.
+Macros defined with the procedural syntax can be used in any of these ways.
+But macros defined with the declarative syntax
+can only create function-like macros.
 
-TODO: Finish this section.
-
-Declarative macros specify a patterns (similar to a `match` expression) to match
+Declarative macros are defined with `macro_rules!`.
+They specify patterns to match, similar to a `match` expression,
 and code to replace what is matched.
-Examples include ?.
+One example is the `vec` macro that is used create instances of the `Vec` type.
 
-Attribute macros annotate on code that follows.
+Attribute-like macros annotate the code that follows.
 Examples include:
 
 - `allow` disables certain warnings (ex. `unused` variables and functions)
@@ -4816,7 +4818,7 @@ Derive macros specify code to be added to implement traits
 when the `derive` attribute is applied to a type such as a struct.
 For example, `#[derive(Clone, Copy, Debug)]`.
 
-Function macros are invoked like Rust functions,
+Function-like macros are invoked like Rust functions,
 but with `!` at the end of their name.
 Unlike functions, they can take a variable number of arguments.
 Examples include all the macros in the table below.
@@ -4940,6 +4942,22 @@ to add the `days_from_now` method to several types:
 
 ```rust
 implement_days! { i8, i16, i32, i64, i128 }
+```
+
+The built-in `vec` macro is defined as follows:
+
+```rust
+macro_rules! vec {
+    () => (
+        $crate::vec::Vec::new()
+    );
+    ($elem:expr; $n:expr) => (
+        $crate::vec::from_elem($elem, $n)
+    );
+    ($($x:expr),+ $(,)?) => (
+        <[_]>::into_vec(box [$($x),+])
+    );
+}
 ```
 
 ## <a name="standard-io">Standard IO</a>
