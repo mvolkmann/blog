@@ -4320,72 +4320,72 @@ Those that can be derived (automatically implemented) using the
 without defining any methods and are also indicated in the "Notes" column.
 Other traits must be manually implemented.
 
-| Trait Name                | Description                                                                                                                                 | Notes                 |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --- |
-| `std::borrow::Borrow`     | defines `borrow` method that allows an immutable type to be borrowed as a different type<br>(ex. `String` borrowed as `str`)                |                       |
-| `std::borrow::BorrowMut`  | defines `borrow_mut` method that allows a mutable type to be borrowed as a different type                                                   |                       |
-| `std::borrow::ToOwned`    | defines `to_owned` and `clone_into` methods to construct owned data from a borrow                                                           |                       |
-| `std::clone::Clone`       | defines `clone` method that explicitly copies an object                                                                                     | derivable             |
-| `std::cmp::Eq`            | defines `eq` method that is used by the `==` and `!=` operators to compare instances                                                        | derivable             |
-| `std::cmp::Ord`           | defines `cmp`, `max`, `min`, and `clamp` methods that are used to<br>compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators | derivable             |
-| `std::cmp::PartialEq`     | defines `eq` and `ne` methods for comparing types where some instances are not equal to themselves (2)                                      | derivable             |
-| `std::cmp::PartialOrd`    | defines `partial_cmp` method for comparing types where some instances cannot be logically compared to others (3)                            | derivable             |
-| `std::convert::AsMut`     | defines `as_mut` method that converts one mutable reference type to another                                                                 |                       |
-| `std::convert::AsRef`     | defines `as_ref` method that converts one reference type to another                                                                         |                       |
+| Trait Name                | Description                                                                                                                                 | Notes             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `std::borrow::Borrow`     | defines `borrow` method that allows an immutable type to be borrowed as a different type<br>(ex. `String` borrowed as `str`)                |                   |
+| `std::borrow::BorrowMut`  | defines `borrow_mut` method that allows a mutable type to be borrowed as a different type                                                   |                   |
+| `std::borrow::ToOwned`    | defines `to_owned` and `clone_into` methods to construct owned data from a borrow                                                           |                   |
+| `std::clone::Clone`       | defines `clone` method that explicitly copies an object                                                                                     | derivable         |
+| `std::cmp::Eq`            | defines `eq` method that is used by the `==` and `!=` operators to compare instances                                                        | derivable         |
+| `std::cmp::Ord`           | defines `cmp`, `max`, `min`, and `clamp` methods that are used to<br>compare instances using `<`, `<=`, `==`, `!=`, `>=`, and `>` operators | derivable         |
+| `std::cmp::PartialEq`     | defines `eq` and `ne` methods for comparing types where some instances are not equal to themselves (2)                                      | derivable         |
+| `std::cmp::PartialOrd`    | defines `partial_cmp` method for comparing types where some instances cannot be logically compared to others (3)                            | derivable         |
+| `std::convert::AsMut`     | defines `as_mut` method that converts one mutable reference type to another                                                                 |                   |
+| `std::convert::AsRef`     | defines `as_ref` method that converts one reference type to another                                                                         |                   |
 | `std::convert::From`      | defines `from` associated function that converts one value type to another; ex. `String::from`                                              |
-| `std::convert::Into`      | defines `into` method that is the opposite of `From`<br>and is automatically implemented when that is implemented                           |                       |
-| `std::convert::TryFrom`   | defines `try_from` method for type conversions; opposite of `TryInto`                                                                       |                       |
-| `std::convert::TryInto`   | defines `try_into` method for type conversions; opposite of `TryFrom`                                                                       |                       |
-| `std::default::Default`   | defines `default` associated function for getting a default instance of a type                                                              | derivable             |
-| `std::fmt::Debug`         | defines `fmt` method that outputs a value for debugging using `{:?}` and `{:#?}` in a format string                                         | derivable             |
-| `std::fmt::Display`       | defines `fmt` method that formats a value for output<br>to be seen by a user rather than a developer                                        |                       |
-| `std::hash::Hash`         | defines `hash` method for computing the hash value of an instance (1)                                                                       | derivable             |
-| `std::io::Read`           | defines `read` method that reads the receiver value into an array of bytes (4)                                                              |                       |
-| `std::io::Write`          | defines `write` method that writes data from an array of bytes into the receiver                                                            |                       |
-| `std::iter::Extend`       | defines `extend` method that adds items to a collection                                                                                     |                       |
-| `std::iter::FromIterator` | defines `from_iter` method that is used to automatically<br>convert an iterator to a collection                                             |                       |
-| `std::iter::IntoIterator` | defines `into_iter` method that is used to automatically<br>convert a collection to an iterator over it                                     |                       |
-| `std::iter::Iterator`     | defines `next` method for iterating over the data in a value                                                                                |                       |
-| `std::iter::Product`      | defines `product` method on an iterator to compute the product of its items                                                                 |                       |
-| `std::iter::Sum`          | defines `sum` method for on an iterator to compute the sum of its items                                                                     |                       |
-| `std::marker::Copy`       | marks a type whose instances can be implicitly copied by assignment or passing by value                                                     | derivable, marker     |
-| `std::marker::Send`       | marks a type whose instance ownership can be transferred from one thread to another                                                         | marker                |
-| `std::marker::Sized`      | marks a type whose instance sizes are known a compile time                                                                                  | marker                |
-| `std::marker::Sync`       | marks a type whose instance references can be shared between threads                                                                        | marker                |
-| `std::marker::Unpin`      | marks a type whose instances can be moved after being pinned to a memory location                                                           | marker                |
-| `std::ops::Add`           | defines the `+` operator on a type                                                                                                          |                       |
-| `std::ops::AddAssign`     | defines the `+=` operator on a type                                                                                                         |                       |
-| `std::ops::BitAnd`        | defines the `&` operator on a type                                                                                                          |                       |
-| `std::ops::BitAndAssign`  | defines the `&=` operator on a type                                                                                                         |                       |
-| `std::ops::BitOr`         | defines the `                                                                                                                               | ` operator on a type  |     |
-| `std::ops::BitOrAssign`   | defines the `                                                                                                                               | =` operator on a type |     |
-| `std::ops::BitXor`        | defines the `^` operator on a type                                                                                                          |                       |
-| `std::ops::BitXorAssign`  | defines the `^=` operator on a type                                                                                                         |                       |
-| `std::ops::Deref`         | defines `deref` method that allows smart pointers to be<br>used as immutable references to the data to which they point                     |                       |
-| `std::ops::DerefMut`      | defines `deref_mut` method that allows smart pointers to be<br>used as mutable references to the data to which they point                   |                       |
-| `std::ops::Div`           | defines the `/` operator on a type                                                                                                          |                       |
-| `std::ops::DivAssign`     | defines the `/=` operator on a type                                                                                                         |                       |
-| `std::ops::Drop`          | defines `drop` method that is called when a value is dropped, typically to free resources                                                   |                       |
-| `std::ops::Fn`            | defines `call` method for closures that borrow values from their environment immutably                                                      |                       |
-| `std::ops::FnMut`         | defines `call_mut` method for closures that borrow values from their environment mutably                                                    |                       |
-| `std::ops::FnOnce`        | defines `call_once` method for closures that takes ownership of values from their environment;<br>can only be called once                   |                       |
-| `std::ops::Index`         | defines `index` method for getting data from a value by index; supports `[index]` syntax                                                    |                       |
-| `std::ops::IndexMut`      | defines `index` method                                                                                                                      |                       |
-| `std::ops::Mul`           | defines the `*` operator on a type                                                                                                          |                       |
-| `std::ops::MulAssign`     | defines the `*=` operator on a type                                                                                                         |                       |
-| `std::ops::Neg`           | defines the unary `-` operator on a type                                                                                                    |                       |
-| `std::ops::Not`           | defines the unary `!` operator on a type                                                                                                    |                       |
-| `std::ops::RangeBound`    | defines the `..` and `..=` operator on a type                                                                                               |                       |
-| `std::ops::Rem`           | defines the `%` mod operator on a type                                                                                                      |                       |
-| `std::ops::RemAssign`     | defines the `%=` mod operator on a type                                                                                                     |                       |
-| `std::ops::Shl`           | defines the `<<` operator on a type                                                                                                         |                       |
-| `std::ops::ShlAssign`     | defines the `<<=` operator on a type                                                                                                        |                       |
-| `std::ops::Shr`           | defines the `>>` operator on a type                                                                                                         |                       |
-| `std::ops::ShrAssign`     | defines the `>>=` operator on a type                                                                                                        |                       |
-| `std::ops::Sub`           | defines the `-` operator on a type                                                                                                          |                       |
-| `std::ops::SubAssign`     | defines the `-=` operator on a type                                                                                                         |                       |
-| `std::str::FromStr`       | defines `from_str` associated function that converts a `&str` value to the implementing type                                                |                       |
-| `std::string::ToString`   | defines `to_string` method that is automatically implemented by implementing the `Display` trait                                            |                       |
+| `std::convert::Into`      | defines `into` method that is the opposite of `From`<br>and is automatically implemented when that is implemented                           |                   |
+| `std::convert::TryFrom`   | defines `try_from` method for type conversions; opposite of `TryInto`                                                                       |                   |
+| `std::convert::TryInto`   | defines `try_into` method for type conversions; opposite of `TryFrom`                                                                       |                   |
+| `std::default::Default`   | defines `default` associated function for getting a default instance of a type                                                              | derivable         |
+| `std::fmt::Debug`         | defines `fmt` method that outputs a value for debugging using `{:?}` and `{:#?}` in a format string                                         | derivable         |
+| `std::fmt::Display`       | defines `fmt` method that formats a value for output<br>to be seen by a user rather than a developer                                        |                   |
+| `std::hash::Hash`         | defines `hash` method for computing the hash value of an instance (1)                                                                       | derivable         |
+| `std::io::Read`           | defines `read` method that reads the receiver value into an array of bytes (4)                                                              |                   |
+| `std::io::Write`          | defines `write` method that writes data from an array of bytes into the receiver                                                            |                   |
+| `std::iter::Extend`       | defines `extend` method that adds items to a collection                                                                                     |                   |
+| `std::iter::FromIterator` | defines `from_iter` method that is used to automatically<br>convert an iterator to a collection                                             |                   |
+| `std::iter::IntoIterator` | defines `into_iter` method that is used to automatically<br>convert a collection to an iterator over it                                     |                   |
+| `std::iter::Iterator`     | defines `next` method for iterating over the data in a value                                                                                |                   |
+| `std::iter::Product`      | defines `product` method on an iterator to compute the product of its items                                                                 |                   |
+| `std::iter::Sum`          | defines `sum` method for on an iterator to compute the sum of its items                                                                     |                   |
+| `std::marker::Copy`       | marks a type whose instances can be implicitly copied by assignment or passing by value                                                     | derivable, marker |
+| `std::marker::Send`       | marks a type whose instance ownership can be transferred from one thread to another                                                         | marker            |
+| `std::marker::Sized`      | marks a type whose instance sizes are known a compile time                                                                                  | marker            |
+| `std::marker::Sync`       | marks a type whose instance references can be shared between threads                                                                        | marker            |
+| `std::marker::Unpin`      | marks a type whose instances can be moved after being pinned to a memory location                                                           | marker            |
+| `std::ops::Add`           | defines the `+` operator on a type                                                                                                          |                   |
+| `std::ops::AddAssign`     | defines the `+=` operator on a type                                                                                                         |                   |
+| `std::ops::BitAnd`        | defines the `&` operator on a type                                                                                                          |                   |
+| `std::ops::BitAndAssign`  | defines the `&=` operator on a type                                                                                                         |                   |
+| `std::ops::BitOr`         | defines the `\|` operator on a type                                                                                                         |                   |
+| `std::ops::BitOrAssign`   | defines the `\| =` operator on a type                                                                                                       |                   |
+| `std::ops::BitXor`        | defines the `^` operator on a type                                                                                                          |                   |
+| `std::ops::BitXorAssign`  | defines the `^=` operator on a type                                                                                                         |                   |
+| `std::ops::Deref`         | defines `deref` method that allows smart pointers to be<br>used as immutable references to the data to which they point                     |                   |
+| `std::ops::DerefMut`      | defines `deref_mut` method that allows smart pointers to be<br>used as mutable references to the data to which they point                   |                   |
+| `std::ops::Div`           | defines the `/` operator on a type                                                                                                          |                   |
+| `std::ops::DivAssign`     | defines the `/=` operator on a type                                                                                                         |                   |
+| `std::ops::Drop`          | defines `drop` method that is called when a value is dropped, typically to free resources                                                   |                   |
+| `std::ops::Fn`            | defines `call` method for closures that borrow values from their environment immutably                                                      |                   |
+| `std::ops::FnMut`         | defines `call_mut` method for closures that borrow values from their environment mutably                                                    |                   |
+| `std::ops::FnOnce`        | defines `call_once` method for closures that takes ownership of values from their environment;<br>can only be called once                   |                   |
+| `std::ops::Index`         | defines `index` method for getting data from a value by index; supports `[index]` syntax                                                    |                   |
+| `std::ops::IndexMut`      | defines `index` method                                                                                                                      |                   |
+| `std::ops::Mul`           | defines the `*` operator on a type                                                                                                          |                   |
+| `std::ops::MulAssign`     | defines the `*=` operator on a type                                                                                                         |                   |
+| `std::ops::Neg`           | defines the unary `-` operator on a type                                                                                                    |                   |
+| `std::ops::Not`           | defines the unary `!` operator on a type                                                                                                    |                   |
+| `std::ops::RangeBound`    | defines the `..` and `..=` operator on a type                                                                                               |                   |
+| `std::ops::Rem`           | defines the `%` mod operator on a type                                                                                                      |                   |
+| `std::ops::RemAssign`     | defines the `%=` mod operator on a type                                                                                                     |                   |
+| `std::ops::Shl`           | defines the `<<` operator on a type                                                                                                         |                   |
+| `std::ops::ShlAssign`     | defines the `<<=` operator on a type                                                                                                        |                   |
+| `std::ops::Shr`           | defines the `>>` operator on a type                                                                                                         |                   |
+| `std::ops::ShrAssign`     | defines the `>>=` operator on a type                                                                                                        |                   |
+| `std::ops::Sub`           | defines the `-` operator on a type                                                                                                          |                   |
+| `std::ops::SubAssign`     | defines the `-=` operator on a type                                                                                                         |                   |
+| `std::str::FromStr`       | defines `from_str` associated function that converts a `&str` value to the implementing type                                                |                   |
+| `std::string::ToString`   | defines `to_string` method that is automatically implemented by implementing the `Display` trait                                            |                   |
 
 1. The `hash` method is used by the `HashMap` and `HashSet` collections.
 1. This means values are not necessarily reflexive.
