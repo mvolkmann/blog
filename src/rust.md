@@ -5886,81 +5886,228 @@ Rust can access many kinds of databases including
 PostgreSQL, MySQL, SQLite, and MongoDB.
 This is supported by several crates including:
 
-- {%a aTargetBlank "", "" %}
-- {%a aTargetBlank "", "" %}
-- {%a aTargetBlank "", "" %}
+- {%a aTargetBlank "https://crates.io/crates/diesel", "diesel" %}
+- {%a aTargetBlank "https://crates.io/crates/postgres", "postgres" %}
+- {%a aTargetBlank "https://crates.io/crates/mongodb", "mongodb" %}
+- {%a aTargetBlank "https://crates.io/crates/mysql", "mysql" %}
+- {%a aTargetBlank "https://crates.io/crates/rusqlite", "rusqlite" %}
 
 Here is an example of using the `postgres` crate:
 
-TODO: Finish this.
+1. Start the PostgreSQL server by entering
+   `pg_ctl -D /usr/local/pgsql/data -l logfile start`
+1. Create the "animals" database by entering `createdb animals`.
+1. Create the file `db.ddl` containing the following:
 
-```rust
-use postgres::{Client, Error, NoTls, Row};
+   ```sql
+   create table dogs (
+     id serial primary key,
+     breed text,
+     name text
+   )
+   ```
 
-fn insert_dog(client: &mut Client, name: &str, breed: &str) -> Result<Vec<Row>, Error> {
-    client.query(
-        "insert into dogs (name, breed) VALUES ($1, $2) returning id",
-        &[&name, &breed],
-    )
-}
+1. Create the "dogs" table by entering `psql -d animals -f db.ddl`
 
-fn insert_dogs(client: &mut Client) -> Result<u64, Error> {
-    let dogs = [
-        ("Maisey", "Treeing Walker Coonhound"),
-        ("Ramsay", "Native American Indian Dog"),
-        ("Comet", "Whippet"),
-    ];
-    for dog in &dogs {
-        insert_dog(client, dog.0, dog.1)?;
-    }
-    Ok(dogs.len() as u64) // # of inserted rows
-}
+1. Create a new Rust project by entering `cargo new postgres-demo`
 
-fn delete_dogs(client: &mut Client) -> Result<u64, Error> {
-    client.execute("delete from dogs", &[])
-}
+1. Enter `cd postgres-demo`
 
-fn update_dog(client: &mut Client, id: i32, name: &str) -> Result<u64, Error> {
-    client.execute("update dogs set name = $2 where id = $1", &[&id, &name])
-}
+1. Edit `src/main.rs` to contain the following:
 
-fn report_dogs(client: &mut Client) {
-    if let Ok(rows) = client.query("select id, name, breed from dogs", &[]) {
-        for row in rows {
-            let id: i32 = row.get(0);
-            let name: &str = row.get(1);
-            let breed: &str = row.get(2);
-            println!("id={} name={} breed={}", id, name, breed);
-        }
-    }
-}
+   ```rust
+   use postgres::{Client, Error, NoTls, Row};
 
-fn main() {
-    let username = "mark";
-    let password = "";
-    let database = "animals";
-    let conn_str = format!(
-        "postgresql://{}:{}@localhost/{}",
-        username, password, database
-    );
-    let mut client = Client::connect(&conn_str, NoTls).unwrap();
+   fn insert_dog(client: &mut Client, name: &str, breed: &str) -> Result<Vec<Row>, Error> {
+       client.query(
+           "insert into dogs (name, breed) VALUES ($1, $2) returning id",
+           &[&name, &breed],
+       )
+   }
 
-    delete_dogs(&mut client).unwrap();
-    insert_dogs(&mut client).unwrap();
+   fn insert_dogs(client: &mut Client) -> Result<u64, Error> {
+       let dogs = [
+           ("Maisey", "Treeing Walker Coonhound"),
+           ("Ramsay", "Native American Indian Dog"),
+           ("Comet", "Whippet"),
+       ];
+       for dog in &dogs {
+           insert_dog(client, dog.0, dog.1)?;
+       }
+       Ok(dogs.len() as u64) // # of inserted rows
+   }
 
-    let rows = insert_dog(&mut client, "Oscar", "German Shorthaired Pointer").unwrap();
-    let row = rows.first().unwrap();
-    if let Some::<i32>(id) = row.get(0) {
-        update_dog(&mut client, id, "Oscar Wilde").unwrap();
-    }
+   fn delete_dogs(client: &mut Client) -> Result<u64, Error> {
+       client.execute("delete from dogs", &[])
+   }
 
-    report_dogs(&mut client)
-}
-```
+   fn update_dog(client: &mut Client, id: i32, name: &str) -> Result<u64, Error> {
+       client.execute("update dogs set name = $2 where id = $1", &[&id, &name])
+   }
+
+   fn report_dogs(client: &mut Client) {
+       if let Ok(rows) = client.query("select id, name, breed from dogs", &[]) {
+           for row in rows {
+               let id: i32 = row.get(0);
+               let name: &str = row.get(1);
+               let breed: &str = row.get(2);
+               println!("id={} name={} breed={}", id, name, breed);
+           }
+       }
+   }
+
+   fn main() {
+       let username = "mark";
+       let password = "";
+       let database = "animals";
+       let conn_str = format!(
+           "postgresql://{}:{}@localhost/{}",
+           username, password, database
+       );
+       let mut client = Client::connect(&conn_str, NoTls).unwrap();
+
+       delete_dogs(&mut client).unwrap();
+       insert_dogs(&mut client).unwrap();
+
+       let rows = insert_dog(&mut client, "Oscar", "German Shorthaired Pointer").unwrap();
+       let row = rows.first().unwrap();
+       if let Some::<i32>(id) = row.get(0) {
+           update_dog(&mut client, id, "Oscar Wilde").unwrap();
+       }
+
+       report_dogs(&mut client)
+   }
+   ```
+
+1. Enter `cargo run`
 
 Here is an example of using the `diesel` crate
 to access the same PostgreSQL database:
-TODO: Finish this.
+TODO: Finish and test this.
+
+1. Enter `cargo new diesel_demo`
+
+1. Enter `cd diesel_demo`
+
+1. Add these dependencies in `Cargo.toml`:
+
+   ```toml
+   diesel = { version = "1.4.5", features = ["postgres"] }
+   dotenv = "0.15.0"
+   ```
+
+1. Enter `cargo install diesel_cli`
+
+1. Create the file `.env` that sets the environment variable `DATABASE_URL`
+   to the proper connection string with the syntax
+   `postgresql://{username}:{password}@localhost/{database}`.
+   For example:
+
+   ```bash
+   DATABASE_URL=postgresql://mark:@localhost/animals
+   ```
+
+1. Enter `diesel setup`
+
+1. Enter `diesel migration generate dogs`
+
+1. Edit `migrations/dogs/up.sql` to contain:
+
+   ```sql
+   create table dogs (
+     id serial,
+     breed text,
+     name text
+   )
+   ```
+
+1. Edit `migrations/dogs/down.sql` to contain the following:
+
+   ```sql
+   drop table dogs
+   ```
+
+1. Enter `diesel migration run`.
+   Later, to remove the dogs table and recreate it
+   enter `diesel migration redo`.
+
+1. Edit `src/models.rs` to contain the following:
+
+   ```rust
+   #[derive(Queryable)]
+   pub struct Dog {
+       pub id: i32,
+       pub name: String,
+       pub breed: String,
+   }
+   ```
+
+1. Edit `src/lib.rs` to contain the following:
+
+   ```rust
+   extern crate diesel;
+   extern crate dotenv;
+
+   use diesel::pg::PgConnection;
+   use diesel::prelude::\*;
+   use dotenv::dotenv;
+   use std::env;
+
+   pub mod models;
+   pub mod schema;
+
+   pub fn establish_connection() -> PgConnection {
+   dotenv().ok();
+
+       let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+       PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
+
+   }
+
+   fn main() {
+   use schema::dogs::dsl::\*;
+
+       let connection = establish_connection();
+       let results = dogs
+           //.filter(published.eq(true))
+           //.limit(5)
+           .load::<Dog>(&connection)
+           .expect("error loading dogs");
+
+       println!("Displaying {} dogs", results.len());
+       for dog in results {
+           println!("{} is a {}.", dog.name, dog.breed);
+       }
+
+   }
+   ```
+
+1. Edit `src/main.rs` to contain the following:
+
+   ```rust
+   extern crate diesel;
+   extern crate diesel_demo;
+
+   use self::diesel_demo::prelude::*;
+   use self::diesel_demo::*;
+   use self::models::*;
+
+   fn main() {
+       use diesel_demo::schema::dogs::dsl::*;
+
+       let connection = establish_connection();
+       let results = dogs
+           //.filter(published.eq(true))
+           //.limit(5)
+           .load::<Dog>(&connection)
+           .expect("error loading dogs");
+
+       println!("Displaying {} dogs", results.len());
+       for dog in results {
+           println!("{} is a {}.", dog.name, dog.breed);
+       }
+   }
+   ```
 
 Here is an example of using the `mongodb` crate:
 TODO: Finish this.
