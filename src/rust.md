@@ -4885,7 +4885,7 @@ They specify code patterns to match and code to replace the match.
 
 In the [Built-in Scalar Types](#scalar-types) section
 we included examples of adding methods to built-in types.
-This can also be accomplished with macros as shown below:
+This can also be accomplished with declarative macros as shown below:
 
 ```rust
 trait Days {
@@ -4944,7 +4944,7 @@ to add the `days_from_now` method to several types:
 implement_days! { i8, i16, i32, i64, i128 }
 ```
 
-The built-in `vec` macro is defined as follows:
+The built-in, declarative macro `vec` is defined as follows:
 
 ```rust
 macro_rules! vec {
@@ -4959,6 +4959,8 @@ macro_rules! vec {
     );
 }
 ```
+
+TODO: What is the syntax for defining a procedural macro?
 
 ## <a name="standard-io">Standard IO</a>
 
@@ -5880,7 +5882,88 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## Databases
 
-TODO: Show how Rust can access PostgreSQL and MongoDB databases.
+Rust can access many kinds of databases including
+PostgreSQL, MySQL, SQLite, and MongoDB.
+This is supported by several crates including:
+
+- {%a aTargetBlank "", "" %}
+- {%a aTargetBlank "", "" %}
+- {%a aTargetBlank "", "" %}
+
+Here is an example of using the `postgres` crate:
+
+TODO: Finish this.
+
+```rust
+use postgres::{Client, Error, NoTls, Row};
+
+fn insert_dog(client: &mut Client, name: &str, breed: &str) -> Result<Vec<Row>, Error> {
+    client.query(
+        "insert into dogs (name, breed) VALUES ($1, $2) returning id",
+        &[&name, &breed],
+    )
+}
+
+fn insert_dogs(client: &mut Client) -> Result<u64, Error> {
+    let dogs = [
+        ("Maisey", "Treeing Walker Coonhound"),
+        ("Ramsay", "Native American Indian Dog"),
+        ("Comet", "Whippet"),
+    ];
+    for dog in &dogs {
+        insert_dog(client, dog.0, dog.1)?;
+    }
+    Ok(dogs.len() as u64) // # of inserted rows
+}
+
+fn delete_dogs(client: &mut Client) -> Result<u64, Error> {
+    client.execute("delete from dogs", &[])
+}
+
+fn update_dog(client: &mut Client, id: i32, name: &str) -> Result<u64, Error> {
+    client.execute("update dogs set name = $2 where id = $1", &[&id, &name])
+}
+
+fn report_dogs(client: &mut Client) {
+    if let Ok(rows) = client.query("select id, name, breed from dogs", &[]) {
+        for row in rows {
+            let id: i32 = row.get(0);
+            let name: &str = row.get(1);
+            let breed: &str = row.get(2);
+            println!("id={} name={} breed={}", id, name, breed);
+        }
+    }
+}
+
+fn main() {
+    let username = "mark";
+    let password = "";
+    let database = "animals";
+    let conn_str = format!(
+        "postgresql://{}:{}@localhost/{}",
+        username, password, database
+    );
+    let mut client = Client::connect(&conn_str, NoTls).unwrap();
+
+    delete_dogs(&mut client).unwrap();
+    insert_dogs(&mut client).unwrap();
+
+    let rows = insert_dog(&mut client, "Oscar", "German Shorthaired Pointer").unwrap();
+    let row = rows.first().unwrap();
+    if let Some::<i32>(id) = row.get(0) {
+        update_dog(&mut client, id, "Oscar Wilde").unwrap();
+    }
+
+    report_dogs(&mut client)
+}
+```
+
+Here is an example of using the `diesel` crate
+to access the same PostgreSQL database:
+TODO: Finish this.
+
+Here is an example of using the `mongodb` crate:
+TODO: Finish this.
 
 ## <a name="webassembly">WebAssembly</a>
 
