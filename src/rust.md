@@ -5886,11 +5886,11 @@ Rust can access many kinds of databases including
 PostgreSQL, MySQL, SQLite, and MongoDB.
 This is supported by several crates including:
 
-- {%a aTargetBlank "https://crates.io/crates/diesel", "diesel" %}
-- {%a aTargetBlank "https://crates.io/crates/postgres", "postgres" %}
-- {%a aTargetBlank "https://crates.io/crates/mongodb", "mongodb" %}
-- {%a aTargetBlank "https://crates.io/crates/mysql", "mysql" %}
-- {%a aTargetBlank "https://crates.io/crates/rusqlite", "rusqlite" %}
+- {% aTargetBlank "https://crates.io/crates/diesel", "diesel" %}
+- {% aTargetBlank "https://crates.io/crates/postgres", "postgres" %}
+- {% aTargetBlank "https://crates.io/crates/mongodb", "mongodb" %}
+- {% aTargetBlank "https://crates.io/crates/mysql", "mysql" %}
+- {% aTargetBlank "https://crates.io/crates/rusqlite", "rusqlite" %}
 
 Here is an example of using the `postgres` crate:
 
@@ -5983,7 +5983,7 @@ Here is an example of using the `postgres` crate:
 
 Here is an example of using the `diesel` crate
 to access the same PostgreSQL database:
-TODO: Finish and test this.
+TODO: Redo all these steps and test.
 
 1. Enter `cargo new diesel_demo`
 
