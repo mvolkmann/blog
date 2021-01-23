@@ -5939,7 +5939,8 @@ Here is an example of using the `postgres` crate:
 
 Here is an example of using the `diesel` crate
 to access the same PostgreSQL database:
-TODO: Redo all these steps and test.
+This code can also be found at {% aTargetBlank
+"https://github.com/mvolkmann/rust-diesel-demo", "rust-diesel-demo" %}.
 
 1. Enter `cargo new diesel_demo`
 
@@ -5990,62 +5991,119 @@ TODO: Redo all these steps and test.
 1. Edit `src/models.rs` to contain the following:
 
    ```rust
-   use diesel::prelude::Queryable;
+   use crate::schema::dogs;
 
-   // The order of the fields here must match
-   // the column order in the corresponding table.
-   #[derive(Queryable)]
+   // The order of the fields in these structs must match
+   // the order of the columns in the corresponding table.
+   //
+   // Implementing the "Identifiable" trait means the struct
+   // represents a single row in a database table and, by default,
+   // has an "id" field that is its primary key.
+   //
+   // The associated table name defaults to the lowercase version
+   // of the struct name with an "s" on the end.
+   // If this is not the table name, specify the "table_name" attribute
+   // as shown above the "NewDog" struct that follows.
+   #[derive(AsChangeset, Identifiable, Queryable)]
    pub struct Dog {
        pub id: i32,
-       pub name: String,
        pub breed: String,
+       pub name: String,
    }
-   ```
 
-1. Edit `src/lib.rs` to contain the following:
-
-   ```rust
-   #[macro_use]
-   extern crate diesel;
-   extern crate dotenv;
-
-   pub mod models;
-   pub mod schema;
-
-   use diesel::prelude::*;
-   use dotenv::dotenv;
-   use std::env;
-
-   pub fn establish_connection() -> PgConnection {
-       dotenv().ok();
-
-       let database_url =
-           env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-       PgConnection::establish(&database_url)
-           .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
+   #[table_name = "dogs"]
+   #[derive(Insertable)]
+   pub struct NewDog {
+       pub breed: String,
+       pub name: String,
    }
    ```
 
 1. Edit `src/main.rs` to contain the following:
 
    ```rust
+   #[macro_use]
    extern crate diesel;
-   extern crate diesel_demo;
 
-   use self::models::*;
+   mod models;
+   mod schema;
+
    use diesel::prelude::*;
-   use diesel_demo::*;
+   use diesel::result::Error;
+   use models::*;
 
-   fn main() {
-       use self::schema::dogs::dsl::*;
+   // Deletes all rows from the dogs table.
+   fn delete_dogs(conn: &PgConnection) -> Result<usize, Error> {
+       diesel::delete(schema::dogs::table).execute(conn)
+   }
 
-       let connection = establish_connection();
-       let results = dogs.load::<Dog>(&connection).expect("error loading dogs");
+   // Gets a connection to the "animals" database that contains a "dogs" table.
+   fn get_connection() -> ConnectionResult<PgConnection> {
+       use dotenv::dotenv;
+       use std::env;
+       dotenv().ok();
+       let url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+       PgConnection::establish(&url)
+   }
 
-       println!("Displaying {} dogs", results.len());
+   // Inserts a row in the "dogs" table and returns its id.
+   fn insert_dog(conn: &PgConnection, name: &str, breed: &str) -> Result<i32, Error> {
+       let dog = NewDog {
+           name: name.to_string(),
+           breed: breed.to_string(),
+       };
+       let id: i32 = diesel::insert_into(schema::dogs::table)
+           .values(&dog)
+           .returning(schema::dogs::id)
+           .get_result(conn)?;
+       Ok(id)
+   }
+
+   // Outputs information about each row in the "dogs" table.
+   fn report_dogs(conn: &PgConnection) {
+       let results = schema::dogs::dsl::dogs
+           .load::<Dog>(conn)
+           .expect("error loading dogs");
+
        for dog in results {
-           println!("{} is a {}.", dog.name, dog.breed);
+           println!("{} is a {} (id {}).", dog.name, dog.breed, dog.id);
        }
+   }
+
+   // Updates the "dogs" table row with a given id.
+   //TODO: How can you update just one column?
+   fn update_dog(conn: &PgConnection, id: i32, name: &str, breed: &str) -> Result<usize, Error> {
+       let dog = Dog {
+           id,
+           name: name.to_string(),
+           breed: breed.to_string(),
+       };
+       diesel::update(&dog).set(&dog).execute(conn)
+   }
+
+   // The return type specified here allows using "?" for error handling
+   // regardless of the specific kinds of errors that occur.
+   fn main() -> Result<(), Box<dyn std::error::Error>> {
+       let conn = get_connection()?;
+
+       delete_dogs(&conn)?;
+
+       let dogs = [
+           ("Maisey", "Treeing Walker Coonhound"),
+           ("Ramsay", "Native American Indian Dog"),
+           ("Comet", "Whippet"),
+       ];
+       for dog in &dogs {
+           insert_dog(&conn, dog.0, dog.1)?;
+       }
+
+       let id = insert_dog(&conn, "Oscar", "German Shorthaired Pointer")?;
+
+       update_dog(&conn, id, "Oscar Wilde", "German Shorthaired Pointer")?;
+
+       report_dogs(&conn);
+
+       Ok(())
    }
    ```
 
@@ -6143,6 +6201,8 @@ async fn main() {
         .expect("failed to start rocket");
 }
 ```
+
+TODO: Implement REST services that use the postgres crate to support CRUD operations on the dogs table.
 
 ## <a name="webassembly">WebAssembly</a>
 
