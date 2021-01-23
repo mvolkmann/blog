@@ -6028,12 +6028,16 @@ TODO: Redo all these steps and test.
    ```
 
 1. Enter `diesel migration run`.
-   Later, to remove the dogs table and recreate it
+   Later, to drop the `dogs` table and recreate it
    enter `diesel migration redo`.
 
 1. Edit `src/models.rs` to contain the following:
 
    ```rust
+   use diesel::prelude::Queryable;
+
+   // The order of the fields here must match
+   // the column order in the corresponding table.
    #[derive(Queryable)]
    pub struct Dog {
        pub id: i32,
@@ -6045,40 +6049,24 @@ TODO: Redo all these steps and test.
 1. Edit `src/lib.rs` to contain the following:
 
    ```rust
+   #[macro_use]
    extern crate diesel;
    extern crate dotenv;
-
-   use diesel::pg::PgConnection;
-   use diesel::prelude::\*;
-   use dotenv::dotenv;
-   use std::env;
 
    pub mod models;
    pub mod schema;
 
+   use diesel::prelude::*;
+   use dotenv::dotenv;
+   use std::env;
+
    pub fn establish_connection() -> PgConnection {
-   dotenv().ok();
+       dotenv().ok();
 
-       let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-       PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
-
-   }
-
-   fn main() {
-   use schema::dogs::dsl::\*;
-
-       let connection = establish_connection();
-       let results = dogs
-           //.filter(published.eq(true))
-           //.limit(5)
-           .load::<Dog>(&connection)
-           .expect("error loading dogs");
-
-       println!("Displaying {} dogs", results.len());
-       for dog in results {
-           println!("{} is a {}.", dog.name, dog.breed);
-       }
-
+       let database_url =
+           env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+       PgConnection::establish(&database_url)
+           .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
    }
    ```
 
@@ -6088,19 +6076,15 @@ TODO: Redo all these steps and test.
    extern crate diesel;
    extern crate diesel_demo;
 
-   use self::diesel_demo::prelude::*;
-   use self::diesel_demo::*;
    use self::models::*;
+   use diesel::prelude::*;
+   use diesel_demo::*;
 
    fn main() {
-       use diesel_demo::schema::dogs::dsl::*;
+       use self::schema::dogs::dsl::*;
 
        let connection = establish_connection();
-       let results = dogs
-           //.filter(published.eq(true))
-           //.limit(5)
-           .load::<Dog>(&connection)
-           .expect("error loading dogs");
+       let results = dogs.load::<Dog>(&connection).expect("error loading dogs");
 
        println!("Displaying {} dogs", results.len());
        for dog in results {
