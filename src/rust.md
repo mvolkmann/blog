@@ -1085,6 +1085,15 @@ passing an argument to a function.
 The difference between the first and second cases is entirely
 based on whether the type of the data implements the `Copy` trait.
 
+Having all of these options requires considering the following questions
+for every variable being passed to a function or assigned to another variable:
+
+1. Do I want to transfer ownership?
+1. Does the receiver need to modify the value?
+1. Do I want to avoid making a copy for efficiency?
+1. If I want to pass a copy, will one be made automatically
+   or do I need to explicitly clone it?
+
 Here are some examples that demonstrate ownership
 inside a single function:
 
@@ -5827,59 +5836,6 @@ Often commonly needed functionality is instead found
 in the collection of crates at
 {% aTargetBlank "https://crates.io/", "crates.io" %}.
 
-## Sending HTTP Requests
-
-The {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %}
-crate is a popular option for sending HTTP requests.
-Here is an example of using it along with
-{% aTargetBlank "https://crates.io/crates/tokio", "tokio" %}
-for asynchronous calls and
-{% aTargetBlank "https://crates.io/crates/serde", "serde" %}
-for data structure deserialization.
-
-```rust
-extern crate reqwest;
-extern crate tokio;
-
-use serde::{Deserialize, Serialize};
-use serde_json;
-
-#[derive(Deserialize, Serialize, Debug)]
-#[serde(rename_all = "camelCase")]
-struct Todo {
-    user_id: i32,
-    id: i32,
-    title: String,
-    completed: bool,
-}
-
-// std::error::Error is a trait, not a type.
-// Adding the `dyn` keyword before it means the error can be
-// described by any type of value that implements that trait.
-// The error value must have known size at compile time.
-// Since any value of a type that implements the trait can be used,
-// that size is not known.
-// But the compiler does know the size of a `Box`
-// which is what it is used to wrap the error value.
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    //let url = "https://jsonplaceholder.typicode.com/todos/3";
-    let url = "https://jsonplaceholder.typicode.com/todos";
-
-    let res = reqwest::get(url).await?;
-    let json = res.text().await.unwrap();
-    println!("json = {}", json);
-
-    //let todo: Todo = serde_json::from_str(&json).unwrap();
-    let todos: Vec<Todo> = serde_json::from_str(&json).unwrap();
-
-    //println!("todo = {:?}", todo);
-    println!("todos = {:#?}", todos);
-
-    Ok(())
-}
-```
-
 ## Databases
 
 Rust can access many kinds of databases including
@@ -5902,8 +5858,8 @@ Here is an example of using the `postgres` crate:
    ```sql
    create table dogs (
      id serial primary key,
-     breed text,
-     name text
+     breed text not null,
+     name text not null
    )
    ```
 
@@ -6015,9 +5971,9 @@ TODO: Redo all these steps and test.
 
    ```sql
    create table dogs (
-     id serial,
-     breed text,
-     name text
+     id serial primary key,
+     breed text not null,
+     name text not null
    )
    ```
 
@@ -6096,6 +6052,98 @@ TODO: Redo all these steps and test.
 Here is an example of using the `mongodb` crate:
 TODO: Finish this.
 
+## Sending HTTP Requests
+
+The {% aTargetBlank "https://crates.io/crates/reqwest", "reqwest" %}
+crate is a popular option for sending HTTP requests.
+Here is an example of using it along with
+{% aTargetBlank "https://crates.io/crates/tokio", "tokio" %}
+for asynchronous calls and
+{% aTargetBlank "https://crates.io/crates/serde", "serde" %}
+for data structure deserialization.
+
+```rust
+extern crate reqwest;
+extern crate tokio;
+
+use serde::{Deserialize, Serialize};
+use serde_json;
+
+#[derive(Deserialize, Serialize, Debug)]
+#[serde(rename_all = "camelCase")]
+struct Todo {
+    user_id: i32,
+    id: i32,
+    title: String,
+    completed: bool,
+}
+
+// std::error::Error is a trait, not a type.
+// Adding the `dyn` keyword before it means the error can be
+// described by any type of value that implements that trait.
+// The error value must have known size at compile time.
+// Since any value of a type that implements the trait can be used,
+// that size is not known.
+// But the compiler does know the size of a `Box`
+// which is what it is used to wrap the error value.
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    //let url = "https://jsonplaceholder.typicode.com/todos/3";
+    let url = "https://jsonplaceholder.typicode.com/todos";
+
+    let res = reqwest::get(url).await?;
+    let json = res.text().await.unwrap();
+    println!("json = {}", json);
+
+    //let todo: Todo = serde_json::from_str(&json).unwrap();
+    let todos: Vec<Todo> = serde_json::from_str(&json).unwrap();
+
+    //println!("todo = {:?}", todo);
+    println!("todos = {:#?}", todos);
+
+    Ok(())
+}
+```
+
+## Receiving HTTP Requests
+
+There are many ways to listen for and process HTTP requests.
+A popular option is to use use the `rocket` crate.
+
+An issue with using Rocket is that it currently
+requires using a nightly version of Rust.
+For details, see {% aTargetBlank
+"https://github.com/SergioBenitez/Rocket/issues/19#issuecomment-736637259",
+"this issue" %}.
+The stable version of Rust can be used with the master branch of Rocket.
+To use the master branch, add this dependency:
+
+```toml
+rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master" }
+```
+
+Here is an example of CRUD REST services using Rocket:
+
+````rust
+#[macro_use]
+extern crate rocket;
+
+// Browse localhost:8000/hello/Mark/59
+#[get("/<name>/<age>")]
+fn hello(name: String, age: u8) -> String {
+    format!("Hello, {} year old named {}!", age, name)
+}
+
+#[rocket::main]
+async fn main() {
+    rocket::ignite()
+        .mount("/hello", routes![hello])
+        .launch()
+        .await
+        .expect("failed to start rocket");
+}
+```
+
 ## <a name="webassembly">WebAssembly</a>
 
 WebAssembly (abbreviated WASM) is a binary instruction format
@@ -6144,7 +6192,7 @@ To install wasm-pack in Linux or macOS, enter the following:
 
 ```bash
 cargo install wasm-pack
-```
+````
 
 1. `wasm-pack new my-wasm`
 
