@@ -6198,7 +6198,6 @@ This code can also be found at {% aTargetBlank
    ```
 
 Here is an example of using the `mongodb` crate:
-TODO: Finish this.
 
 1. Edit `Cargo.toml` to include these dependencies:
 
@@ -6212,7 +6211,7 @@ TODO: Finish this.
 
    ```rust
    use futures::stream::StreamExt; // needed to call "next" method on cursor
-   use mongodb::bson::{doc, Document};
+   use mongodb::bson::{doc};
    use mongodb::error::Result;
    use mongodb::Client;
 
