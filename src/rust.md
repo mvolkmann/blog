@@ -5155,7 +5155,6 @@ fn it_evaluates_hand() {
     let hand = Hand::from_str("Q♥ 7♥ 3♥ A♥ 9♥").unwrap();
     assert_eq!(hand.evaluate(), "flush");
 
-    // ♣ ♦ ♥ ♠
     let hand = Hand::from_str("Q♥ 9♣ J♦ 8♠ 10♥").unwrap();
     assert_eq!(hand.evaluate(), "straight");
 
