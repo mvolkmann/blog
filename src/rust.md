@@ -1839,10 +1839,12 @@ There are many ways to handle values from these enum types.
    that return `Result` instances with different types of errors
    and wish to return them to callers,
    consider adding `?` after those calls and
-   making the return type `Result<SomeOkType, Box<dyn error::Error>>`.
+   making the return type `Result<SomeOkType, Box<dyn std::error::Error>>`.
    The `dyn` keyword performs dynamic dispatch to allow
    a value of any type that implements a given trait.
-   In this case the errors that can be returned
+   Note that this can be done in the `main` function.
+
+   In the case below the errors that can be returned
    (`std::io::Error` and `std::num::ParseIntError`)
    all implement the `std::error::Error` trait.
    Because they don't all have the same size,
@@ -5869,6 +5871,8 @@ Here is an example of using the `postgres` crate:
 
 1. Enter `cd postgres-demo`
 
+1. Edit `Cargo.toml` and add the dependency `postgres = "0.19.0"`.
+
 1. Edit `src/main.rs` to contain the following:
 
    ```rust
@@ -6124,6 +6128,14 @@ This code can also be found at {% aTargetBlank
 
 Here is an example of using the `mongodb` crate:
 TODO: Finish this.
+
+1. Edit `Cargo.toml` to include these dependencies:
+
+   ```toml
+   futures = "0.3.12"
+   mongodb = { version = "1.1.1", default-features = false, features = ["tokio-runtime"] }
+   tokio = { version = "0.2", features = ["full"] }
+   ```
 
 ## Sending HTTP Requests
 
