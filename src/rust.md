@@ -4295,6 +4295,8 @@ Here is `src/person.rs` which defines the `Person` type:
 ```rust
 // super traverses up a level to the parent of this module
 // which is the same parent as the "printable" module.
+// It is only aware of the "printable" module
+// because src/main.rs contains "mod printable;".
 use super::printable::Printable;
 
 pub struct Person {
