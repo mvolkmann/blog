@@ -6240,6 +6240,20 @@ Here is an example of using the `mongodb` crate:
        ];
        coll.insert_many(documents, None).await?;
 
+       // An array can be used instead as follows.
+       // But the "insert_many" method wants owned documents
+       // and this array only contains references to them.
+       // One way to get an array of owned documents from an
+       // array of references is to call ".iter().cloned()" on it as shown here.
+       /*
+       let documents: [Document; 3] = [
+           doc! {"name": "Maisey", "breed": "Treeing Walker Coonhound"},
+           doc! {"name": "Ramsay", "breed": "Native American Indian Dog"},
+           doc! {"name": "Comet", "breed": "Whippet"},
+       ];
+       coll.insert_many(documents.iter().cloned(), None).await?;
+       */
+
        let document = doc! { "name": "Oscar", "breed": "German Shorthaired Pointer" };
        let result = coll.insert_one(document, None).await?;
 
