@@ -318,7 +318,7 @@ Resources are learning Rust include:
   - set of related values such as constants and functions
 - package
   - `cargo` feature for building, testing, and sharing crates
-  - set of related crates described by a `Cargo.toml` file;
+  - set of crates described by a `Cargo.toml` file;
   - contains any number of binaries and 0 or 1 library
 - panic
   - represents an unrecoverable error that causes a program to terminate,
@@ -557,6 +557,14 @@ When the `--lib` switch is not included, the file is
 `main.rs` file which is a simple hello world program.
 When the `--lib` switch is included, the file is
 `lib.rs` file that contains a simple unit test.
+
+In Node.js applications can use dependencies listed in their
+`package.json` file AND also their dependencies recursively.
+However, in Rust applications can only use
+dependencies listed in their `Cargo.toml` file.
+This has the benefit a dependency can drop one of its dependencies
+without breaking apps that use it because
+an application or library must explicitly list all of their dependencies.
 
 The `cargo run` command builds and runs the project.
 It also downloads dependencies listed in the `Cargo.toml` file,
@@ -4269,6 +4277,69 @@ impl Distance for Point2D {
 }
 ```
 
+A trait must be in scope in order to use its constants and methods.
+This avoids ambiguities in cases where a type implements multiple traits
+that happen to define constants and/or methods with the same names.
+Consider this example, defined by three source files:
+
+Here is `src/printable.rs` which defines the `Printable` trait:
+
+```rust
+pub trait Printable {
+    fn print(&self);
+}
+```
+
+Here is `src/person.rs` which defines the `Person` type:
+
+```rust
+// super traverses up a level to the parent of this module
+// which is the same parent as the "printable" module.
+use super::printable::Printable;
+
+pub struct Person {
+    pub first_name: String,
+    pub last_name: String,
+}
+
+impl Printable for Person {
+    fn print(&self) {
+        println!("{} {}", self.first_name, self.last_name);
+    }
+}
+```
+
+Here is `src/main.rs` which uses the `Person` type:
+
+```rust
+// These mod statements tell the compiler to read the corresponding ".rs" files
+// and add entries in the module tree which will become
+// crate (src/main.rs)
+// - crate::person (src/person.rs)
+// - crate::printable (src/printable.rs)
+// Note that `person` and `printable` are siblings,
+// but `main is not their sibling!
+// There can be only one "mod" statement per module in the project.
+// Each "mod" statement is placed in the highest module
+// that encompasses all usages of the module.j
+// Often, but not always, this is the top source file (main.rs or lib.rs).
+mod person;
+mod printable;
+
+use person::Person;
+
+// In order to use methods defined by a trait, the trait must be in scope.
+use printable::Printable;
+
+fn main() {
+    let p = Person {
+        first_name: "Mark".to_string(),
+        last_name: "Volkmann".to_string(),
+    };
+    p.print();
+}
+```
+
 Traits can specify other traits that must also be
 implemented by any types that implement them.
 These are referred to as "supertraits".
@@ -4285,7 +4356,7 @@ must also implement the `Athlete` and `Person` traits.
 Also see the `Printable` example later in this section.
 
 It is possible for a type to implement multiple traits
-that describe the same constants and methods.
+that describe constants and/or methods with the same names.
 Calling them requires doing so in a form that makes it clear which is desired.
 For example:
 
@@ -6135,6 +6206,59 @@ TODO: Finish this.
    futures = "0.3.12"
    mongodb = { version = "1.1.1", default-features = false, features = ["tokio-runtime"] }
    tokio = { version = "0.2", features = ["full"] }
+   ```
+
+1. Add the following in `src/main.rs`:
+
+   ```rust
+   use futures::stream::StreamExt; // needed to call "next" method on cursor
+   use mongodb::bson::{doc, Document};
+   use mongodb::error::Result;
+   use mongodb::Client;
+
+   #[tokio::main]
+   async fn main() -> Result<()> {
+       let uri = "mongodb://127.0.0.1:27017";
+       let client = Client::with_uri_str(uri).await?;
+
+       println!("Databases:");
+       for name in client.list_database_names(None, None).await? {
+           println!("- {}", name);
+       }
+
+       let db = client.database("animals");
+       let coll = db.collection("dogs");
+
+       //coll.delete_many(None, None).await?; // does not work
+       coll.drop(None).await?;
+
+       let documents = vec![
+           doc! {"name": "Maisey", "breed": "Treeing Walker Coonhound"},
+           doc! {"name": "Ramsay", "breed": "Native American Indian Dog"},
+           doc! {"name": "Comet", "breed": "Whippet"},
+       ];
+       coll.insert_many(documents, None).await?;
+
+       let document = doc! { "name": "Oscar", "breed": "German Shorthaired Pointer" };
+       let result = coll.insert_one(document, None).await?;
+
+       coll.update_one(
+           doc! {"_id": &result.inserted_id},
+           doc! { "$set": { "name": "Oscar Wilde" }},
+           None,
+       )
+       .await?;
+
+       println!("\nDogs:");
+       let mut cursor = coll.find(None, None).await?;
+       while let Some(result) = cursor.next().await {
+           if let Ok(doc) = result {
+               dbg!(doc);
+           }
+       }
+
+       Ok(())
+   }
    ```
 
 ## Sending HTTP Requests
