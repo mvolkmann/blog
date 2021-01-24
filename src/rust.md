@@ -4281,6 +4281,7 @@ A trait must be in scope in order to use its constants and methods.
 This avoids ambiguities in cases where a type implements multiple traits
 that happen to define constants and/or methods with the same names.
 Consider this example, defined by three source files:
+TODO: Maybe this example belongs in the "Modules" section instead.
 
 Here is `src/printable.rs` which defines the `Printable` trait:
 
@@ -5045,6 +5046,132 @@ macro_rules! vec {
 ```
 
 TODO: What is the syntax for defining a procedural macro?
+
+## <a name="tests">Tests</a>
+
+Rust supports three kinds of tests:
+doc tests, unit tests, and integration tests.
+Examples of each kind of test can be found in the Rust application at
+{% aTargetBlank "https://github.com/mvolkmann/rust-poker", "rust-poker" %}.
+All of these tests are executed by entering `cargo test`.
+
+Doc tests are placed in special comments above the library functions they test.
+A nice feature of these tests is that they provide examples of using
+the function they test along with other comments about the function.
+A downside is that because they appear in a comment,
+editors like VS Code do not inspect the code for syntax and usage errors.
+Note that placing doc tests above non library functions has no effect.
+
+Here is an example from the `src/lib.js` file in the rust-poker app.
+This function takes a `Hand` struct that has
+a `cards` field with the type `Vec<Card>`.
+It also takes a `rank` that is a `char` representing
+a card rank such as `K` for king.
+The function returns the suit (a Unicode character)
+of the first card found with a matching rank.
+
+````rust
+/// ```
+/// use std::str::FromStr; // needs to be in scope
+/// let hand = poker::Hand::from_str("Q♥ 9♣ J♦ 8♠ 10♥").unwrap();
+/// assert_eq!(poker::get_suit(&hand, 'J'), '♦');
+/// ```
+pub fn get_suit(hand: &Hand, rank: char) -> char {
+    if let Some(card) = hand.cards.iter().find(|&c| c.rank == rank) {
+        card.suit
+    } else {
+        '?'
+    }
+}
+````
+
+The file `src/lib.rs` has doc tests above each of the functions it defines.
+Examine this file for additional doc test examples.
+
+Unit tests are placed in the source files of the functions they test.
+Each unit test is meant to test a single function in isolation from the others,
+although nothing enforces this.
+Unlike doc tests, these are not placed in comments.
+This enables editors like VS Code inspect the code for syntax and usage errors.
+
+Here is an example from the `src/lib.js` file in the rust-poker app.
+It tests the `suit_name` function that takes a suit Unicode character
+and returns the name of the suit.
+It also tests the `Hand::deal` function that deals a set of random cards.
+
+```rust
+#[cfg(test)]
+mod tests {
+    // This makes all the functions in the containing module available.
+    use super::*;
+
+    #[test]
+    fn it_gets_suit_name() {
+        assert_eq!(suit_name('♣'), "clubs");
+        assert_eq!(suit_name('♦'), "diamonds");
+        assert_eq!(suit_name('♥'), "hearts");
+        assert_eq!(suit_name('♠'), "spades");
+    }
+
+    #[test]
+    fn it_deals() {
+        let size = 5;
+        let hand = Hand::deal(size);
+        assert_eq!(hand.cards.len(), size);
+        // We could make more assertions here, but
+        // other tests cover the creation of individual cards.
+    }
+}
+```
+
+Integration tests are placed in separate source files
+under the `test` directory.
+Unlike unit tests, these are meant to test
+multiple functions in conjunction with each other.
+
+Here is an example from the `tests/tests.rs` file in the rust-poker app.
+It tests the `evaluate` method of the `Hand` struct which
+determines the type of hand such as "full house", "flush", or "straight".
+
+```rust
+use poker;
+use poker::Hand;
+use std::str::FromStr;
+
+#[test]
+fn it_evaluates_hand() {
+    let hand = Hand::from_str("A♥ K♥ Q♥ J♥ 10♥").unwrap();
+    assert_eq!(hand.evaluate(), "royal flush");
+
+    let hand = Hand::from_str("Q♥ J♥ 10♥ 9♥ 8♥").unwrap();
+    assert_eq!(hand.evaluate(), "straight flush");
+
+    let hand = Hand::from_str("Q♥ 7♥ Q♣ Q♦ Q♠").unwrap();
+    assert_eq!(hand.evaluate(), "4 of a kind of queens");
+
+    let hand = Hand::from_str("Q♥ 7♥ Q♣ Q♦ 7♠").unwrap();
+    assert_eq!(hand.evaluate(), "full house");
+
+    let hand = Hand::from_str("Q♥ 7♥ 3♥ A♥ 9♥").unwrap();
+    assert_eq!(hand.evaluate(), "flush");
+
+    // ♣ ♦ ♥ ♠
+    let hand = Hand::from_str("Q♥ 9♣ J♦ 8♠ 10♥").unwrap();
+    assert_eq!(hand.evaluate(), "straight");
+
+    let hand = Hand::from_str("Q♥ 7♥ Q♣ Q♦ J♠").unwrap();
+    assert_eq!(hand.evaluate(), "3 of a kind of queens");
+
+    let hand = Hand::from_str("Q♥ 7♥ Q♣ 5♦ 7♠").unwrap();
+    assert_eq!(hand.evaluate(), "two pairs");
+
+    let hand = Hand::from_str("Q♥ 7♥ Q♣ 5♦ J♠").unwrap();
+    assert_eq!(hand.evaluate(), "pair of queens");
+
+    let hand = Hand::from_str("Q♥ 7♥ J♣ 5♦ A♠").unwrap();
+    assert_eq!(hand.evaluate(), "high card ace of ♠");
+}
+```
 
 ## <a name="standard-io">Standard IO</a>
 
