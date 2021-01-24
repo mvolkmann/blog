@@ -6071,7 +6071,6 @@ This code can also be found at {% aTargetBlank
    }
 
    // Updates the "dogs" table row with a given id.
-   //TODO: How can you update just one column?
    fn update_dog(conn: &PgConnection, id: i32, name: &str, breed: &str) -> Result<usize, Error> {
        let dog = Dog {
            id,
@@ -6079,6 +6078,21 @@ This code can also be found at {% aTargetBlank
            breed: breed.to_string(),
        };
        diesel::update(&dog).set(&dog).execute(conn)
+   }
+
+   // Updates the name of a dog with a given id in the "dogs" table.
+   fn update_name(conn: &PgConnection, id: i32, name: &str) -> Result<usize, Error> {
+       let dog = schema::dogs::dsl::dogs.filter(schema::dogs::id.eq(id));
+       let result = diesel::update(dog)
+           // can also pass a tuple of column changes
+           .set(schema::dogs::name.eq(name))
+           .execute(conn);
+       if let Ok(count) = result {
+           if count == 0 {
+               return Err(Error::NotFound);
+           }
+       }
+       result
    }
 
    // The return type specified here allows using "?" for error handling
@@ -6099,7 +6113,8 @@ This code can also be found at {% aTargetBlank
 
        let id = insert_dog(&conn, "Oscar", "German Shorthaired Pointer")?;
 
-       update_dog(&conn, id, "Oscar Wilde", "German Shorthaired Pointer")?;
+       //update_dog(&conn, id, "Oscar Wilde", "German Shorthaired Pointer")?;
+       update_name(&conn, id, "Oscar Wilde")?;
 
        report_dogs(&conn);
 
