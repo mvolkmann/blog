@@ -4948,6 +4948,13 @@ The following macros all take a format string
 and expressions to insert into the format string:
 `eprint`, `eprintln`, `format`, `panic`, `println`, `write`, and `writeln`.
 
+The `file` and `line` macros are useful for debugging output.
+For example:
+
+```rust
+println!("in {} on line {} x = {}", file!(), line!(), x);
+```
+
 The `todo` and `unimplemented` macro is called from functions that have
 not yet been implemented so that calls to them will be flagged.
 From the official documentation, "The difference ... is that
@@ -5903,7 +5910,7 @@ and developers can implement new ones.
 | `Cow<T>`     | stands for "Clone On Write"; wraps an immutable borrow and<br>provides the `to_mut` method for lazy cloning when mutation or ownership is needed |
 | `Rc<T>`      | stands for "reference counting"; enables multiple owners                                                                                         |
 | `Ref<T>`     | used with a `RefCell` to enforce immutable borrowing rules at runtime                                                                            |
-| `RefCell<T>` | similar to `Cell`, but holds references to values instead of values                                                                              |
+| `RefCell<T>` | similar to `Cell`, but holds references to values instead of values and supports mutable borrows                                                 |
 | `RefMut<T>`  | used with a `RefCell` to enforce mutable borrowing rules at runtime                                                                              |
 | `String`     | owns `str` data, holds `capacity` and `length` metadata, and provides methods to operate on the data                                             |
 | `Vec<T>`     | similar to `String`, but the data elements can be any specified type                                                                             |
@@ -5971,7 +5978,65 @@ Smart pointers are needed to implement data structures such as
 linked lists, trees, and graphs.
 The standard library provides `std::collections::LinkedList`,
 but it does not provide structs that implement trees and graphs.
-TODO: Try implementing a graph with Node and Edge structs.
+For example:
+
+```rust
+use std::cell::RefCell;
+use std::fmt::Display;
+use std::rc::Rc;
+use std::vec::Vec;
+
+// This is a common combination of types
+// for holding a reference to a value that can be mutated.
+// Rc cannot mutate what it holds, but
+// RefCell provides "interior mutability" which
+// allows a mutable borrow while immutable borrows exist.
+// Normally this is not allowed by the compiler, but using
+// RefCell moves the checking of correct usage to runtime.
+type Wrapper<T> = Rc<RefCell<Node<T>>>;
+
+#[derive(Debug)]
+struct Node<T> {
+    data: T,
+    children: Vec<Wrapper<T>>
+}
+
+impl<T: Display> Node<T> {
+    fn add_child(&mut self, child: Wrapper<T>) {
+        self.children.push(child);
+    }
+
+    fn new(data: T) -> Node<T> {
+        Node { data, children: vec![] }
+    }
+
+    fn depth_first(&self) {
+        println!("{}", self.data);
+        for child in &self.children {
+            // These two lines can be replaced by the one that follows.
+            //let child_node = child.borrow();
+            //child_node.depth_first();
+            child.borrow().depth_first();
+        }
+    }
+
+    fn wrap(data: T) -> Wrapper<T> {
+        Rc::new(RefCell::new(Node::new(data)))
+    }
+}
+
+fn main() {
+    let a = Node::wrap('A');
+    let b = Node::wrap('B');
+    let c = Node::wrap('C');
+    let d = Node::wrap('D');
+
+    a.borrow_mut().add_child(Rc::clone(&b));
+    a.borrow_mut().add_child(Rc::clone(&c));
+    b.borrow_mut().add_child(Rc::clone(&d));
+    a.borrow().depth_first();
+}
+```
 
 ## Futures
 
@@ -6458,35 +6523,142 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## Receiving HTTP Requests
 
 There are many ways to listen for and process HTTP requests.
-A popular option is to use use the `rocket` crate.
+Popular options include using the
+{% aTargetBlank "https://crates.io/crates/warp", "warp" %},
+{% aTargetBlank "https://crates.io/crates/rocket", "rocket" %}, and
+{% aTargetBlank "https://crates.io/crates/actix-web", "actix-web" %} crates.
+
+### Actix-web
+
+This crate has a bad reputation for using unsafe code. See {% aTargetBlank
+"https://deavid.wordpress.com/2020/01/18/actix-web-is-dead-about-unsafe-rust/",
+"Actix-web is dead" %}.
+As of January 2020, this crate has new maintainers.
+Perhaps the issues raised will be addressed.
+
+### Warp
+
+TODO: Implement your Rocket example below using warp.
+
+### Rocket
 
 An issue with using Rocket is that it currently
 requires using a nightly version of Rust.
 For details, see {% aTargetBlank
 "https://github.com/SergioBenitez/Rocket/issues/19#issuecomment-736637259",
 "this issue" %}.
-The stable version of Rust can be used with the master branch of Rocket.
+However, the stable version of Rust can be used with the master branch of Rocket.
 To use the master branch, add this dependency:
 
 ```toml
 rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master" }
 ```
 
-Here is an example of CRUD REST services using Rocket:
+Rocket includes builtin support for accessing the following databases:
+Memcache, MongoDB, MySQL, Neo4J, PostgreSQL, Redis, and SQLite.
+
+The {% aTargetBlank "https://rocket.rs/v0.4/guide/configuration/",
+"Rocket configuration guide" %} says
+"Warning: Rocket's built-in TLS is not considered ready for
+production use. It is intended for development use only."
+Presumably production uses of Rocket place the Rocket server
+behind another server such as nginx to get HTTPS support.
+
+Here is an example of implementing CRUD REST services using Rocket:
 
 ````rust
 #[macro_use]
 extern crate rocket;
 
-// Browse localhost:8000/hello/Mark/59
-#[get("/<name>/<age>")]
-fn hello(name: String, age: u8) -> String {
-    format!("Hello, {} year old named {}!", age, name)
+use rocket::State;
+use rocket_contrib::json::Json;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::sync::Mutex;
+use uuid::Uuid;
+
+// We need to implement the "Clone" trait in order to
+// call the "cloned" method in the "get_dogs" function.
+#[derive(Clone, Deserialize, Serialize, Debug)]
+struct Dog {
+    id: String,
+    breed: String,
+    name: String,
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+struct NewDog {
+    breed: String,
+    name: String,
+}
+
+struct MyState {
+    dog_map: Mutex<HashMap<String, Dog>>,
 }
 
 #[rocket::main]
 async fn main() {
+    // Browse localhost:8000/hello/April/21
+    #[get("/<name>/<age>")]
+    fn hello(name: String, age: u8) -> String {
+        format!("Hello, {} year old named {}!", age, name)
+    }
+
+    #[post("/", format = "json", data = "<json>")]
+    fn create_dog(json: Json<NewDog>, state: State<MyState>) -> Json<Dog> {
+        let new_dog = json.into_inner();
+        let id = Uuid::new_v4().to_string();
+        let dog = Dog {
+            id: id.clone(),
+            name: new_dog.name,
+            breed: new_dog.breed,
+        };
+        let mut lock = state.dog_map.lock().unwrap();
+        let copy = dog.clone();
+        lock.insert(id, dog);
+        Json(copy)
+    }
+
+    #[delete("/<id>")]
+    fn delete_dog(id: String, state: State<MyState>) {
+        let mut lock = state.dog_map.lock().unwrap();
+        lock.remove(&id);
+    }
+
+    #[get("/<id>", format = "json")]
+    fn get_dog(id: String, state: State<MyState>) -> Option<Json<Dog>> {
+        let lock = state.dog_map.lock().unwrap();
+        if let Some(dog) = lock.get(&id) {
+            Some(Json(dog.clone()))
+        } else {
+            None
+        }
+    }
+
+    #[get("/")]
+    fn get_dogs(state: State<MyState>) -> Json<Vec<Dog>> {
+        let lock = state.dog_map.lock().unwrap();
+        let dogs = lock.values().cloned().collect();
+        Json(dogs)
+    }
+
+    #[put("/<id>", format = "json", data = "<json>")]
+    fn update_dog(id: String, json: Json<Dog>, state: State<MyState>) -> Json<Dog> {
+        let dog: Dog = json.into_inner();
+        let mut lock = state.dog_map.lock().unwrap();
+        let copy = dog.clone();
+        lock.insert(id, dog);
+        Json(copy)
+    }
+
     rocket::ignite()
+        .manage(MyState {
+            dog_map: Mutex::new(HashMap::new()),
+        })
+        .mount(
+            "/dog",
+            routes![create_dog, delete_dog, get_dog, get_dogs, update_dog],
+        )
         .mount("/hello", routes![hello])
         .launch()
         .await
