@@ -4971,9 +4971,24 @@ Another source of macros is the external crate
 It defines the macros `debug`, `error`, `info`, `log`, `trace`, and `warn`.
 
 Implementing macros is an advanced topic.
-We will just show one example here.
+We will just show some basic examples here.
 Declarative macros are defined with `macro_rules!`.
 They specify code patterns to match and code to replace the match.
+
+Here is a macro that expands on the provided `dbg` macro
+by outputting the relative file path and line number of the call.
+
+```rust
+macro_rules! debug {
+    ($ex:expr) => {
+        println!("{}@{}: {} = {}", file!(), line!(), stringify!($ex), $ex);
+    };
+}
+
+fn main() {
+    debug!(2 + 3); // outputs src/main.rs@8: 2 + 3 = 5
+}
+```
 
 In the [Built-in Scalar Types](#scalar-types) section
 we included examples of adding methods to built-in types.
