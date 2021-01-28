@@ -6563,10 +6563,15 @@ For details, see {% aTargetBlank
 "https://github.com/SergioBenitez/Rocket/issues/19#issuecomment-736637259",
 "this issue" %}.
 However, the stable version of Rust can be used with the master branch of Rocket.
-To use the master branch, add this dependency:
+To use the master branch of Rocket along with a few other crates,
+add the following lines in `Cargo.toml`:
 
 ```toml
 rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master" }
+rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket", branch = "master", features = ["json"] }
+serde = { version = "1.0.118", features = ["derive", "rc"] }
+serde_json = "1.0.60"
+uuid = { version = "0.8.2", features = ["serde", "v4"] }
 ```
 
 Rocket includes builtin support for accessing the following databases:
@@ -6579,7 +6584,29 @@ production use. It is intended for development use only."
 Presumably production uses of Rocket place the Rocket server
 behind another server such as nginx to get HTTPS support.
 
-Here is an example of implementing CRUD REST services using Rocket:
+Some aspects of Rocket are configured by created a `Rocket.toml` file.
+If this file does not exist, default values are used.
+Here is example content for this file:
+
+```toml
+[debug]
+address = "127.0.0.1"
+port = 1234
+log = "normal"
+
+[staging]
+address = "0.0.0.0"
+port = 80
+log = "normal"
+
+[release]
+address = "0.0.0.0"
+port = 80
+log = "critical"
+```
+
+Here is an example of implementing CRUD REST services
+for a collection of dogs using Rocket:
 
 ````rust
 #[macro_use]
@@ -6589,7 +6616,7 @@ use rocket::State;
 use rocket_contrib::json::Json;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use uuid::Uuid;
 
 // We need to implement the "Clone" trait in order to
@@ -6608,30 +6635,23 @@ struct NewDog {
 }
 
 struct MyState {
-    dog_map: Mutex<HashMap<String, Dog>>,
+    dog_map: Mutex<HashMap<String, Arc<Dog>>>,
 }
 
 #[rocket::main]
 async fn main() {
-    // Browse localhost:8000/hello/April/21
-    #[get("/<name>/<age>")]
-    fn hello(name: String, age: u8) -> String {
-        format!("Hello, {} year old named {}!", age, name)
-    }
-
     #[post("/", format = "json", data = "<json>")]
-    fn create_dog(json: Json<NewDog>, state: State<MyState>) -> Json<Dog> {
+    fn create_dog(json: Json<NewDog>, state: State<MyState>) -> Json<Arc<Dog>> {
         let new_dog = json.into_inner();
         let id = Uuid::new_v4().to_string();
-        let dog = Dog {
+        let dog = Arc::new(Dog {
             id: id.clone(),
             name: new_dog.name,
             breed: new_dog.breed,
-        };
+        });
         let mut lock = state.dog_map.lock().unwrap();
-        let copy = dog.clone();
-        lock.insert(id, dog);
-        Json(copy)
+        lock.insert(id, dog.clone());
+        Json(dog)
     }
 
     #[delete("/<id>")]
@@ -6641,31 +6661,34 @@ async fn main() {
     }
 
     #[get("/<id>", format = "json")]
-    fn get_dog(id: String, state: State<MyState>) -> Option<Json<Dog>> {
+    fn get_dog(id: String, state: State<MyState>) -> Option<Json<Arc<Dog>>> {
         let lock = state.dog_map.lock().unwrap();
         if let Some(dog) = lock.get(&id) {
-            Some(Json(dog.clone()))
+            Some(Json(Arc::clone(dog)))
         } else {
             None
         }
     }
 
     #[get("/")]
-    fn get_dogs(state: State<MyState>) -> Json<Vec<Dog>> {
+    fn get_dogs(state: State<MyState>) -> Json<Vec<Arc<Dog>>> {
         let lock = state.dog_map.lock().unwrap();
         let dogs = lock.values().cloned().collect();
         Json(dogs)
     }
 
     #[put("/<id>", format = "json", data = "<json>")]
-    fn update_dog(id: String, json: Json<Dog>, state: State<MyState>) -> Json<Dog> {
-        let dog: Dog = json.into_inner();
+    fn update_dog(id: String, json: Json<Dog>, state: State<MyState>) -> Json<Arc<Dog>> {
+        let dog: Arc<Dog> = Arc::new(json.into_inner());
         let mut lock = state.dog_map.lock().unwrap();
-        let copy = dog.clone();
-        lock.insert(id, dog);
-        Json(copy)
+        lock.insert(id, dog.clone());
+        Json(dog)
     }
 
+    //TODO: Learn how to get this to use TLS/HTTPS.
+    // Note that https://rocket.rs/v0.4/guide/configuration/ says
+    // "Warning: Rocket's built-in TLS is not considered ready for
+    // production use. It is intended for development use only."
     rocket::ignite()
         .manage(MyState {
             dog_map: Mutex::new(HashMap::new()),
@@ -6674,7 +6697,6 @@ async fn main() {
             "/dog",
             routes![create_dog, delete_dog, get_dog, get_dogs, update_dog],
         )
-        .mount("/hello", routes![hello])
         .launch()
         .await
         .expect("failed to start rocket");
