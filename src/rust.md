@@ -6538,10 +6538,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## Receiving HTTP Requests
 
 There are many ways to listen for and process HTTP requests.
-Popular options include using the
-{% aTargetBlank "https://crates.io/crates/warp", "warp" %},
-{% aTargetBlank "https://crates.io/crates/rocket", "rocket" %}, and
-{% aTargetBlank "https://crates.io/crates/actix-web", "actix-web" %} crates.
+Popular creates for implementing HTTP servers include:
+
+- {% aTargetBlank "https://crates.io/crates/actix-web", "actix-web" %}
+- {% aTargetBlank "https://crates.io/crates/rocket", "rocket" %}
+- {% aTargetBlank "https://crates.io/crates/warp", "warp" %}
+- {% aTargetBlank "https://crates.io/crates/tide", "tide" %}
 
 ### Actix-web
 
@@ -6676,10 +6678,6 @@ async fn main() -> std::io::Result<()> {
     .await
 }
 ```
-
-### Warp
-
-TODO: Implement the dog REST services using warp.
 
 ### Rocket
 
@@ -6830,6 +6828,14 @@ async fn main() {
         .expect("failed to start rocket");
 }
 ```
+
+### Tide
+
+TODO: Implement the dog REST services using tide.
+
+### Warp
+
+TODO: Implement the dog REST services using warp.
 
 TODO: Implement REST services that use the postgres crate to support CRUD operations on the dogs table.
 
