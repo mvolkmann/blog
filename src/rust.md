@@ -6545,26 +6545,17 @@ Popular options include using the
 
 ### Actix-web
 
-This crate has a bad reputation for using unsafe code. See {% aTargetBlank
+This crate had a bad reputation for using unsafe code. See {% aTargetBlank
 "https://deavid.wordpress.com/2020/01/18/actix-web-is-dead-about-unsafe-rust/",
 "Actix-web is dead" %}.
-As of January 2020, this crate has new maintainers.
-Perhaps the issues raised will be addressed.
+However, as of January 2020, this crate has new maintainers
+and perhaps the issues raised will be addressed.
+They claim that all of the unsafe code has been carefully analyzed
+and should be safe in practice.
 
-### Warp
+Let's create CRUD REST services that operate on a collection of dog descriptions.
 
-TODO: Implement your Rocket example below using warp.
-
-### Rocket
-
-An issue with using Rocket is that it currently
-requires using a nightly version of Rust.
-For details, see {% aTargetBlank
-"https://github.com/SergioBenitez/Rocket/issues/19#issuecomment-736637259",
-"this issue" %}.
-However, the stable version of Rust can be used with the master branch of Rocket.
-To use the master branch of Rocket along with a few other crates,
-add the following lines in `Cargo.toml`:
+Add the following dependencies in `Cargo.toml`:
 
 ```toml
 rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master" }
@@ -6573,6 +6564,132 @@ serde = { version = "1.0.118", features = ["derive", "rc"] }
 serde_json = "1.0.60"
 uuid = { version = "0.8.2", features = ["serde", "v4"] }
 ```
+
+Add the following code in `src/main.rs`:
+
+```rust
+use actix_web::{App, delete, get, HttpRequest, HttpResponse, HttpServer, Result, web};
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::sync::Mutex;
+use uuid::Uuid;
+
+// We need to implement the "Clone" trait in order to
+// call the "cloned" method in the "get_dogs" route.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+struct Dog {
+    id: String,
+    breed: String,
+    name: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+struct NewDog {
+    breed: String,
+    name: String,
+}
+
+type DogMap = HashMap<String, Dog>;
+
+struct AppState {
+    dog_map: DogMap
+}
+
+#[get("/dog")]
+async fn get_dogs(state: web::Data<Mutex<AppState>>) -> Result<HttpResponse> {
+    let lock = state.lock().unwrap();
+    let dogs: Vec<Dog> = lock.dog_map.values().cloned().collect();
+    Ok(HttpResponse::Ok().json(dogs))
+}
+
+#[get("/dog/{id}")]
+async fn get_dog(req: HttpRequest, state: web::Data<Mutex<AppState>>) -> Result<HttpResponse> {
+    let id = req.match_info().get("id").unwrap();
+    let lock = state.lock().unwrap();
+    if let Some(dog) = lock.dog_map.get(id) {
+        Ok(HttpResponse::Ok().json(dog))
+    } else {
+        Ok(HttpResponse::NotFound().finish())
+    }
+}
+
+//#[post("/dog")]
+async fn create_dog(json: web::Json<NewDog>, state: web::Data<Mutex<AppState>>) -> Result<HttpResponse> {
+    let id = Uuid::new_v4().to_string();
+    let new_dog = json.into_inner();
+    let dog = Dog {id: id.clone(), name: new_dog.name, breed: new_dog.breed};
+
+    let mut lock = state.lock().unwrap();
+    lock.dog_map.insert(id, dog.clone());
+    Ok(HttpResponse::Ok().json(dog))
+}
+
+//#[put("/dog")]
+async fn update_dog(json: web::Json<Dog>, state: web::Data<Mutex<AppState>>) -> Result<HttpResponse> {
+    let dog = json.into_inner();
+    let id = dog.id.clone();
+    println!("updating dog with id {}", id);
+    let mut lock = state.lock().unwrap();
+    lock.dog_map.insert(id, dog.clone());
+    Ok(HttpResponse::Ok().json(dog))
+}
+
+#[delete("/dog/{id}")]
+async fn delete_dog(req: HttpRequest, state: web::Data<Mutex<AppState>>) -> Result<HttpResponse> {
+    let id = req.match_info().get("id").unwrap();
+    println!("deleting dog with id {}", id);
+    let mut lock = state.lock().unwrap();
+    if let Some(_dog) = lock.dog_map.remove(id) {
+        Ok(HttpResponse::Ok().finish())
+    } else {
+        Ok(HttpResponse::NotFound().finish())
+    }
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    let mut dog_map: HashMap<String, Dog> = HashMap::new();
+
+    // Start with one dog already created.
+    let id = Uuid::new_v4().to_string();
+    let dog = Dog {
+        id: id.clone(),
+        name: "Comet".to_string(),
+        breed: "Whippet".to_string(),
+    };
+    dog_map.insert(id, dog);
+
+
+    let data = web::Data::new(Mutex::new(AppState { dog_map}));
+
+    HttpServer::new(move || {
+        App::new()
+            .app_data(data.clone())
+            .service(get_dog)
+            .service(get_dogs)
+            .service(delete_dog)
+            .route("/dog", web::post().to(create_dog))
+            .route("/dog/{id}", web::put().to(update_dog))
+    })
+    .bind(("127.0.0.1", 1234))?
+    .run()
+    .await
+}
+```
+
+### Warp
+
+TODO: Implement the dog REST services using warp.
+
+### Rocket
+
+An issue with using Rocket is that it currently
+requires using a nightly version of Rust.
+For details, see {% aTargetBlank
+"https://github.com/SergioBenitez/Rocket/issues/19#issuecomment-736637259",
+"this issue" %}.
+However, the stable version of Rust can be used with the master branch of Rocket
+if that is specified in the `rocket` dependency.
 
 Rocket includes builtin support for accessing the following databases:
 Memcache, MongoDB, MySQL, Neo4J, PostgreSQL, Redis, and SQLite.
@@ -6605,8 +6722,19 @@ port = 80
 log = "critical"
 ```
 
-Here is an example of implementing CRUD REST services
-for a collection of dogs using Rocket:
+Let's create CRUD REST services that operate on a collection of dog descriptions.
+
+Add the following dependencies in `Cargo.toml`:
+
+```toml
+rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master" }
+rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket", branch = "master", features = ["json"] }
+serde = { version = "1.0.118", features = ["derive", "rc"] }
+serde_json = "1.0.60"
+uuid = { version = "0.8.2", features = ["serde", "v4"] }
+```
+
+Add the following code in `src/main.rs`:
 
 ````rust
 #[macro_use]
