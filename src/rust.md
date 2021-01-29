@@ -6613,7 +6613,7 @@ async fn get_dog(req: HttpRequest, state: web::Data<Mutex<AppState>>) -> Result<
     }
 }
 
-//#[post("/dog")]
+#[post("/dog")]
 async fn create_dog(json: web::Json<NewDog>, state: web::Data<Mutex<AppState>>) -> Result<HttpResponse> {
     let id = Uuid::new_v4().to_string();
     let new_dog = json.into_inner();
@@ -6624,7 +6624,7 @@ async fn create_dog(json: web::Json<NewDog>, state: web::Data<Mutex<AppState>>) 
     Ok(HttpResponse::Ok().json(dog))
 }
 
-//#[put("/dog")]
+#[put("/dog/{id}")]
 async fn update_dog(json: web::Json<Dog>, state: web::Data<Mutex<AppState>>) -> Result<HttpResponse> {
     let dog = json.into_inner();
     let id = dog.id.clone();
@@ -6668,8 +6668,8 @@ async fn main() -> std::io::Result<()> {
             .service(get_dog)
             .service(get_dogs)
             .service(delete_dog)
-            .route("/dog", web::post().to(create_dog))
-            .route("/dog/{id}", web::put().to(update_dog))
+            .service(create_dog)
+            .service(update_dog)
     })
     .bind(("127.0.0.1", 1234))?
     .run()
