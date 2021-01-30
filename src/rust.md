@@ -6053,6 +6053,10 @@ fn main() {
 }
 ```
 
+TODO: Also look at use async_std::sync::{Arc, RwLock};
+TODO: How does async_std::sync::RwLock differ from std::sync::RwLock?
+TODO: Is it better to put RwLock outside Arc instead of Arc outside RwLock?
+
 ## Futures
 
 TODO: Add this section.
@@ -6535,7 +6539,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-## Receiving HTTP Requests
+## <a name="http-servers">Receiving HTTP Requests</a>
 
 There are many ways to listen for and process HTTP requests.
 Popular creates for implementing HTTP servers include:
@@ -6734,7 +6738,7 @@ uuid = { version = "0.8.2", features = ["serde", "v4"] }
 
 Add the following code in `src/main.rs`:
 
-````rust
+```rust
 #[macro_use]
 extern crate rocket;
 
@@ -6761,53 +6765,65 @@ struct NewDog {
 }
 
 struct MyState {
-    dog_map: Mutex<HashMap<String, Arc<Dog>>>,
+    dog_map: Arc<Mutex<HashMap<String, Dog>>>,
 }
 
 #[rocket::main]
 async fn main() {
+    let mut dog_map: HashMap<String, Dog> = HashMap::new();
+
+    let id = Uuid::new_v4().to_string();
+    let dog = Dog {
+        id: id.clone(),
+        name: "Comet".to_string(),
+        breed: "Whippet".to_string(),
+    };
+    dog_map.insert(id, dog);
+
+    let state = MyState { dog_map: Arc::new(Mutex::new(dog_map)) };
+
     #[post("/", format = "json", data = "<json>")]
-    fn create_dog(json: Json<NewDog>, state: State<MyState>) -> Json<Arc<Dog>> {
+    fn create_dog(json: Json<NewDog>, state: State<MyState>) -> Json<Dog> {
         let new_dog = json.into_inner();
         let id = Uuid::new_v4().to_string();
-        let dog = Arc::new(Dog {
+        let dog = Dog {
             id: id.clone(),
             name: new_dog.name,
             breed: new_dog.breed,
-        });
-        let mut lock = state.dog_map.lock().unwrap();
-        lock.insert(id, dog.clone());
+        };
+        let mut dog_map = state.dog_map.lock().unwrap();
+        dog_map.insert(id, dog.clone());
         Json(dog)
     }
 
     #[delete("/<id>")]
     fn delete_dog(id: String, state: State<MyState>) {
-        let mut lock = state.dog_map.lock().unwrap();
-        lock.remove(&id);
+        let mut dog_map = state.dog_map.lock().unwrap();
+        dog_map.remove(&id);
     }
 
     #[get("/<id>", format = "json")]
-    fn get_dog(id: String, state: State<MyState>) -> Option<Json<Arc<Dog>>> {
-        let lock = state.dog_map.lock().unwrap();
-        if let Some(dog) = lock.get(&id) {
-            Some(Json(Arc::clone(dog)))
+    fn get_dog(id: String, state: State<MyState>) -> Option<Json<Dog>> {
+        let dog_map = state.dog_map.lock().unwrap();
+        if let Some(dog) = dog_map.get(&id) {
+            Some(Json(dog.clone()))
         } else {
             None
         }
     }
 
     #[get("/")]
-    fn get_dogs(state: State<MyState>) -> Json<Vec<Arc<Dog>>> {
-        let lock = state.dog_map.lock().unwrap();
-        let dogs = lock.values().cloned().collect();
+    fn get_dogs(state: State<MyState>) -> Json<Vec<Dog>> {
+        let dog_map = state.dog_map.lock().unwrap();
+        let dogs = dog_map.values().cloned().collect();
         Json(dogs)
     }
 
     #[put("/<id>", format = "json", data = "<json>")]
-    fn update_dog(id: String, json: Json<Dog>, state: State<MyState>) -> Json<Arc<Dog>> {
-        let dog: Arc<Dog> = Arc::new(json.into_inner());
-        let mut lock = state.dog_map.lock().unwrap();
-        lock.insert(id, dog.clone());
+    fn update_dog(id: String, json: Json<Dog>, state: State<MyState>) -> Json<Dog> {
+        let dog: Dog = json.into_inner();
+        let mut dog_map = state.dog_map.lock().unwrap();
+        dog_map.insert(id, dog.clone());
         Json(dog)
     }
 
@@ -6816,12 +6832,11 @@ async fn main() {
     // "Warning: Rocket's built-in TLS is not considered ready for
     // production use. It is intended for development use only."
     rocket::ignite()
-        .manage(MyState {
-            dog_map: Mutex::new(HashMap::new()),
-        })
+        .manage(state)
         .mount(
             "/dog",
-            routes![create_dog, delete_dog, get_dog, get_dogs, update_dog],
+            //routes![create_dog, delete_dog, get_dog, get_dogs, update_dog],
+            routes![create_dog, delete_dog, get_dogs, update_dog],
         )
         .launch()
         .await
@@ -6831,9 +6846,125 @@ async fn main() {
 
 ### Tide
 
-TODO: Implement the dog REST services using tide.
+Let's create CRUD REST services that operate on a collection of dog descriptions.
+
+Add the following dependencies in `Cargo.toml`:
+
+```toml
+async-std = { version = "1.9.0", features = ["attributes"] }
+serde = "1.0.123"
+tide = "0.15.0"
+uuid = { version = "0.8.2", features = ["serde", "v4"] }
+```
+
+Add the following code in `src/main.rs`:
+
+```rust
+use std::collections::HashMap;
+use async_std::sync::{Arc, RwLock};
+use tide::{Body, Request, Response};
+use tide::prelude::*;
+use uuid::Uuid;
+
+// We need to implement the "Clone" trait in order to
+// call the "cloned" method in the "get_dogs" route.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+struct Dog {
+    #[serde(default)]
+    id: Option<String>,
+    breed: String,
+    name: String,
+}
+
+type DogMap = HashMap<String, Dog>;
+
+#[derive(Clone)]
+struct State {
+    dog_map: Arc<RwLock<DogMap>>
+}
+
+#[async_std::main]
+async fn main() -> tide::Result<()> {
+    let mut dog_map: HashMap<String, Dog> = HashMap::new();
+
+    let id = Uuid::new_v4().to_string();
+    let dog = Dog {
+        id: Some(id.clone()),
+        name: "Comet".to_string(),
+        breed: "Whippet".to_string(),
+    };
+    dog_map.insert(id, dog);
+
+    let state = State { dog_map: Arc::new(RwLock::new(dog_map)) };
+    let mut app = tide::with_state(state);
+
+    app.at("/dog")
+        // Get all dogs.
+        .get(|req: Request<State>| async move {
+            let dog_map = req.state().dog_map.read().await;
+            let dogs: Vec<Dog> = dog_map.values().cloned().collect();
+            let mut res = Response::new(200);
+            res.set_body(Body::from_json(&dogs)?);
+            Ok(res)
+        })
+        // Create a dog.
+        .post(|mut req: Request<State>| async move {
+            let mut dog: Dog = req.body_json().await?;
+            let id = Uuid::new_v4().to_string();
+            dog.id = Some(id.clone());
+            let mut dog_map = req.state().dog_map.write().await;
+            dog_map.insert( id, dog.clone());
+            let mut res = tide::Response::new(200);
+            res.set_body(Body::from_json(&dog)?);
+            Ok(res)
+        });
+
+    app.at("/dog/:id")
+        // Get a specific dog.
+        .get(|req: Request<State>| async move {
+            let id = req.param("id")?;
+            let dog_map = req.state().dog_map.read().await;
+            if let Some(dog) = dog_map.get(id.clone()) {
+                let mut res = Response::new(200);
+                res.set_body(Body::from_json(&dog)?);
+                Ok(res)
+            } else {
+                Ok(Response::new(404))
+            }
+        })
+        // Update a dog.
+        .put(|mut req: Request<State>| async move {
+            let dog: Dog = req.body_json().await?;
+            let id = req.param("id")?;
+            let mut dog_map = req.state().dog_map.write().await;
+            dog_map.insert( id.to_string(), dog.clone());
+            let mut res = tide::Response::new(200);
+            res.set_body(Body::from_json(&dog)?);
+            Ok(res)
+        })
+        // Delete a dog.
+        .delete(|req: Request<State>| async move {
+            let id = req.param("id")?;
+            let mut dog_map = req.state().dog_map.write().await;
+            if let Some(_dog) = dog_map.remove(id) {
+                Ok(Response::new(200))
+            } else {
+                Ok(Response::new(404))
+            }
+        });
+
+    app.listen("127.0.0.1:1234").await?;
+    Ok(())
+}
+
+```
 
 ### Warp
+
+The Warp framework was created by Sean McArthur (@seanmonster)
+who has created many popular Rust crates including
+hyper, reqwest, and pretty-env-logger.
+It defines HTTP routes using "filters".
 
 TODO: Implement the dog REST services using warp.
 
@@ -6887,7 +7018,7 @@ To install wasm-pack in Linux or macOS, enter the following:
 
 ```bash
 cargo install wasm-pack
-````
+```
 
 1. `wasm-pack new my-wasm`
 
