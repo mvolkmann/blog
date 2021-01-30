@@ -6982,6 +6982,9 @@ tide = "0.16.0"
 uuid = { version = "0.8.2", features = ["serde", "v4"] }
 ```
 
+TODO: It is unclear whether tokio can be used with Tide instead of async_std.
+TODO: See https://github.com/http-rs/tide/issues/791.
+
 Add the following code in `src/main.rs`:
 
 ```rust
