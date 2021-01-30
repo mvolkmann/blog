@@ -6539,6 +6539,91 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
+Here is an example that uses reqwest to benchmark REST service implementations.
+This code can be found at {% aTargetBlank
+"https://github.com/mvolkmann/rust-rest-benchmark", "rust-rest-benchmark" %}.
+
+```rust
+use serde::{Deserialize, Serialize};
+use std::time::Instant;
+use uuid::Uuid;
+
+const BASE_URL: &str = "http://localhost:1234/dog";
+#[derive(Clone, Debug, Deserialize, Serialize)]
+struct Dog {
+    id: String,
+    breed: String,
+    name: String,
+}
+
+async fn delete_all_dogs(client: &Client, dogs: &Vec<Dog>) -> Result<(), Box<dyn std::error::Error>> {
+    for dog in dogs {
+        let url = format!("{}/{}", BASE_URL, dog.id);
+        client.delete(&url).send().await?.text().await?;
+    }
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let count: usize = 10000;
+    let client = reqwest::Client::new();
+
+    let start = Instant::now();
+
+    // Get all the current dogs.
+    let dogs = reqwest::get(BASE_URL).await?.json::<Vec<Dog>>().await?;
+
+    // Delete all the current dogs.
+    delete_all_dogs(&client, &dogs).await?;
+
+    // Create new dogs.
+    for i in 0..count {
+        let id = Uuid::new_v4().to_string();
+        let dog = Dog {
+            id,
+            name: format!("name-{}", i),
+            breed: format!("breed-{}", i)
+        };
+        let res = client.post(BASE_URL).json(&dog).send().await?;
+        if !res.status().is_success() {
+            eprintln!("error creating dog, status = {}", res.status());
+        //} else {
+        //    let new_dog: Dog = res.json().await?;
+        //    println!("created dog {:?}", new_dog);
+        }
+    }
+    let dogs = reqwest::get(BASE_URL).await?.json::<Vec<Dog>>().await?;
+    //println!("after creates, dogs = {:#?}", dogs);
+    assert_eq!(dogs.len(), count);
+
+    // Update all the dogs.
+    for dog in dogs {
+        let id = dog.id.clone();
+        let new_dog = Dog {
+            id: id.clone(),
+            name: format!("new-{}", dog.name),
+            breed: format!("new-{}", dog.breed)
+        };
+        let url = format!("{}/{}", BASE_URL, id);
+        let res = client.put(&url).json(&new_dog).send().await?;
+        if !res.status().is_success() {
+            eprintln!("error updating dog, status = {}", res.status());
+        }
+    }
+
+    // Retrieve all the dogs.
+    let dogs = reqwest::get(BASE_URL).await?.json::<Vec<Dog>>().await?;
+    //println!("after updates, dogs = {:#?}", dogs);
+
+    delete_all_dogs(&client, &dogs).await?;
+
+    println!("elapsed time: {:?}", start.elapsed());
+
+    Ok(())
+}
+```
+
 ## <a name="http-servers">Receiving HTTP Requests</a>
 
 There are many ways to listen for and process HTTP requests.
