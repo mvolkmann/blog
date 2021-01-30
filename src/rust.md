@@ -6671,6 +6671,21 @@ Popular creates for implementing HTTP servers include:
 - {% aTargetBlank "https://crates.io/crates/warp", "warp" %}
 - {% aTargetBlank "https://crates.io/crates/tide", "tide" %}
 
+In order to demonstrate using each of these frameworks,
+we will implement the same set of CRUD REST services
+that operate on a collection of dog descriptions.
+Typically the data would be persisted to a database, but
+to keep the focus on the frameworks it will just be held in memory.
+This requires learning how each framework manages application state.
+
+The endpoints exposes will be:
+
+- GET /dog - to retrieve all the dogs
+- GET /dog/{id} - to retrieve a specific dog
+- POST /dog - to create a dog
+- PUT /dog/{id} - to update a dog
+- DELETE /dog/{id} - to delete a dog
+
 ### Actix-web
 
 This crate had a bad reputation for using unsafe code. See {% aTargetBlank
@@ -6681,15 +6696,12 @@ and perhaps the issues raised will be addressed.
 They claim that all of the unsafe code has been carefully analyzed
 and should be safe in practice.
 
-Let's create CRUD REST services that operate on a collection of dog descriptions.
-
 Add the following dependencies in `Cargo.toml`:
 
 ```toml
-rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master" }
-rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket", branch = "master", features = ["json"] }
-serde = { version = "1.0.118", features = ["derive", "rc"] }
-serde_json = "1.0.60"
+actix-web = "3.3.2"
+parking_lot = "0.11.1"
+serde = "1.0.123"
 uuid = { version = "0.8.2", features = ["serde", "v4"] }
 ```
 
@@ -6846,8 +6858,6 @@ port = 80
 log_level = "critical"
 ```
 
-Let's create CRUD REST services that operate on a collection of dog descriptions.
-
 Add the following dependencies in `Cargo.toml`:
 
 ```toml
@@ -6970,8 +6980,6 @@ async fn main() {
 
 ### Tide
 
-Let's create CRUD REST services that operate on a collection of dog descriptions.
-
 Add the following dependencies in `Cargo.toml`:
 
 ```toml
@@ -6982,8 +6990,10 @@ tide = "0.16.0"
 uuid = { version = "0.8.2", features = ["serde", "v4"] }
 ```
 
-TODO: It is unclear whether tokio can be used with Tide instead of async_std.
-TODO: See https://github.com/http-rs/tide/issues/791.
+While it may be possible to get Tide to work with tokio instead of async_std,
+the author has not provided an easy way to do this
+and no examples of doing it were found. See
+{% aTargetBlank "https://github.com/http-rs/tide/issues/791", "this issue" %}.
 
 Add the following code in `src/main.rs`:
 
@@ -7093,8 +7103,6 @@ The Warp framework was created by Sean McArthur (@seanmonster)
 who has created many popular Rust crates including
 hyper, reqwest, and pretty-env-logger.
 It defines HTTP routes using "filters".
-
-Let's create CRUD REST services that operate on a collection of dog descriptions.
 
 Add the following dependencies in `Cargo.toml`:
 
