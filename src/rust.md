@@ -6113,6 +6113,43 @@ TODO: Add this section.
 TODO: Add an example that uses multiple threads.
 TODO: Add an example that uses channels to communicate between threads.
 
+It is often necessary to coordinate access to
+data that is shared between threads.
+Common ways to do this include using a `Mutex` or `RwLock`.
+There are multiple implementations available for each of these.
+Consider using those in `std::sync` and the `parking_lot` crate.
+
+The `parking_lot` versions of `Mutex` and `RwLock`
+are generally preferred over the `std::sync` versions for reasons described at
+{% aTargetBlank "https://docs.rs/parking_lot/0.11.1/parking_lot/type.Mutex.html", "parking_lot::Mutex" %}
+and
+{% aTargetBlank "https://docs.rs/parking_lot/0.11.1/parking_lot/type.RwLock.html", "parking_lot::RwLock" %}.:w
+The reasons include better poison handling, less memory usage,
+better fairness of lock sharing, and better performance.
+
+To gain exclusive access to a value wrapped in a `Mutex`,
+call its `lock` method. The lock is automatically released
+when the value returned by this method goes out of scope.
+
+To gain non-exclusive read access to a value wrapped in a `RwLock`,
+call its `read` method. There can be any number of concurrent readers.
+To gain exclusive write access to a value wrapped in a `RwLock`,
+call its `write` method.
+This will block until there are no other readers or writers.
+Like with a `Mutex`, the lock is automatically released
+when the value returned by the `read` or `write` method goes out of scope.
+
+A mutex is "poisoned" when a thread that holds the lock panics.
+This causes attempts to acquire the lock in other threads to fail,
+The `lock` method returns a `LockResult`
+which enables callers to detect this situation.
+
+A `RwLock` is poisoned when a thread that
+holds a write lock (not a read lock) panics.
+This causes attempts to acquire the lock in other threads to fail,
+The `read` and `write` methods returns a `LockResult`
+which enables callers to detect this situation.
+
 ## Standard Library
 
 The {% aTargetBlank "https://doc.rust-lang.org/std/index.html",
