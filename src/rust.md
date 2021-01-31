@@ -6664,7 +6664,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-## <a name="http-servers">Receiving HTTP Requests</a>
+## <a name="http-servers">HTTP Servers</a>
 
 There are many ways to listen for and process HTTP requests.
 Popular creates for implementing HTTP servers include:

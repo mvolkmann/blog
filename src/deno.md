@@ -2080,60 +2080,68 @@ Here is an example of implementing a REST server in oak
 that supports CRUD operations on dog objects.
 
 ```js
-import {Application, Router} from 'https://deno.land/x/oak@v6.3.2/mod.ts';
-import {v4} from 'https://deno.land/std@0.79.0/uuid/mod.ts';
+import {
+  Application,
+  Context,
+  Router
+} from 'https://deno.land/x/oak@v6.5.0/mod.ts';
+import {v4} from 'https://deno.land/std@0.85.0/uuid/mod.ts';
 
 const PORT = 1234;
 const dogs = {};
+const id = v4.generate();
+dogs[id] = {id, name: 'Comet', breed: 'Whippet'};
 
-async function createDog(context) {
-  const body = await context.request.body();
-  const {breed, name} = await body.value;
-  const id = v4.generate();
-  dogs[id] = {id, breed, name};
-
-  context.response.body = id;
-  context.response.status = 201;
+function sendJson(context, value) {
+  context.response.headers.set('Content-Type', 'application/json');
+  context.response.body = JSON.stringify(value);
 }
 
 function deleteAllDogs(context) {
   dogs = {};
 }
 
-function deleteDog(context) {
-  const {id} = context.params;
-  if (dogs[id]) {
-    delete dogs[id];
-    context.response.status = 200; // Why necessary?
-  } else {
-    context.response.status = 404;
-  }
-}
-
 function getAllDogs(context) {
-  context.response.body = JSON.stringify(dogs);
+  sendJson(context, Object.values(dogs));
 }
 
 function getDog(context) {
   const {id} = context.params;
   const dog = dogs[id];
   if (dog) {
-    context.response.body = JSON.stringify(dog);
+    sendJson(dog);
   } else {
     context.response.status = 404;
   }
 }
 
+async function createDog(context) {
+  const body = await context.request.body();
+  const {breed, name} = await body.value;
+  const id = v4.generate();
+  const dog = {id, breed, name};
+  dogs[id] = dog;
+  context.response.status = 201;
+  sendJson(context, dog);
+}
+
 async function updateDog(context) {
   const {id} = context.params;
-  const dog = dogs[id];
-  if (dog) {
+  if (dogs[id]) {
     const body = await context.request.body();
-    dogs[id] = await body.value;
+    const dog = await body.value;
+    dogs[id] = dog;
+    sendJson(context, dog);
   } else {
-    console.log('server.js updateDog: not found');
     context.response.status = 404;
   }
+}
+
+function deleteDog(context) {
+  const {id} = context.params;
+  const exists = Boolean(dogs[id]);
+  if (exists) delete dogs[id];
+  context.response.status = exists ? 200 : 404;
 }
 
 const router = new Router();
