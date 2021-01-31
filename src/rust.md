@@ -5077,6 +5077,9 @@ Examples of each kind of test can be found in the Rust application at
 {% aTargetBlank "https://github.com/mvolkmann/rust-poker", "rust-poker" %}.
 All of these tests are executed by entering `cargo test`.
 
+By default output to stdout is captured and not displayed.
+To run the tests and see this output, enter `cargo test -- --nocapture`.
+
 Doc tests are placed in special comments above the library functions they test.
 A nice feature of these tests is that they provide examples of using
 the function they test along with other comments about the function.
@@ -6708,7 +6711,7 @@ uuid = { version = "0.8.2", features = ["serde", "v4"] }
 Add the following code in `src/main.rs`:
 
 ```rust
-use actix_web::{App, delete, get, HttpRequest, HttpResponse, HttpServer, post, put, Result, web};
+use actix_web::{delete, get, post, put, web, App, HttpRequest, HttpResponse, HttpServer, Result};
 use parking_lot::RwLock;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -6732,7 +6735,7 @@ struct NewDog {
 type DogMap = HashMap<String, Dog>;
 
 struct AppState {
-    dog_map: DogMap
+    dog_map: DogMap,
 }
 
 #[get("/dog")]
@@ -6754,18 +6757,28 @@ async fn get_dog(req: HttpRequest, state: web::Data<RwLock<AppState>>) -> Result
 }
 
 #[post("/dog")]
-async fn create_dog(json: web::Json<NewDog>, state: web::Data<RwLock<AppState>>) -> Result<HttpResponse> {
+async fn create_dog(
+    json: web::Json<NewDog>,
+    state: web::Data<RwLock<AppState>>,
+) -> Result<HttpResponse> {
     let id = Uuid::new_v4().to_string();
     let new_dog = json.into_inner();
-    let dog = Dog {id: id.clone(), name: new_dog.name, breed: new_dog.breed};
+    let dog = Dog {
+        id: id.clone(),
+        name: new_dog.name,
+        breed: new_dog.breed,
+    };
 
     let mut state = state.write();
     state.dog_map.insert(id, dog.clone());
-    Ok(HttpResponse::Ok().json(dog))
+    Ok(HttpResponse::Created().json(dog))
 }
 
 #[put("/dog/{id}")]
-async fn update_dog(json: web::Json<Dog>, state: web::Data<RwLock<AppState>>) -> Result<HttpResponse> {
+async fn update_dog(
+    json: web::Json<Dog>,
+    state: web::Data<RwLock<AppState>>,
+) -> Result<HttpResponse> {
     let dog = json.into_inner();
     let id = dog.id.clone();
     //println!("updating dog with id {}", id);
@@ -6799,8 +6812,7 @@ async fn main() -> std::io::Result<()> {
     };
     dog_map.insert(id, dog);
 
-
-    let data = web::Data::new(RwLock::new(AppState { dog_map}));
+    let data = web::Data::new(RwLock::new(AppState { dog_map }));
 
     HttpServer::new(move || {
         App::new()
@@ -6861,6 +6873,7 @@ log_level = "critical"
 Add the following dependencies in `Cargo.toml`:
 
 ```toml
+parking_lot = "0.11.1"
 rocket = { git = "https://github.com/SergioBenitez/Rocket", branch = "master" }
 rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket", branch = "master", features = ["json"] }
 serde = { version = "1.0.118", features = ["derive", "rc"] }
@@ -6897,7 +6910,6 @@ struct NewDog {
     name: String,
 }
 
-//TODO: Wrap the Arc and RwLock around the state, not the HashMap!
 struct MyState {
     dog_map: Arc<RwLock<HashMap<String, Dog>>>,
 }
@@ -6914,7 +6926,9 @@ async fn main() {
     };
     dog_map.insert(id, dog);
 
-    let state = MyState { dog_map: Arc::new(RwLock::new(dog_map)) };
+    let state = MyState {
+        dog_map: Arc::new(RwLock::new(dog_map)),
+    };
 
     #[post("/", format = "json", data = "<json>")]
     fn create_dog(json: Json<NewDog>, state: State<MyState>) -> Json<Dog> {
@@ -6927,7 +6941,7 @@ async fn main() {
         };
         let mut dog_map = state.dog_map.write();
         dog_map.insert(id, dog.clone());
-        Json(dog)
+        Json(dog) //TODO: Set status to 201 CREATED.:
     }
 
     #[delete("/<id>")]
@@ -6969,8 +6983,7 @@ async fn main() {
         .manage(state)
         .mount(
             "/dog",
-            //routes![create_dog, delete_dog, get_dog, get_dogs, update_dog],
-            routes![create_dog, delete_dog, get_dogs, update_dog],
+            routes![create_dog, delete_dog, get_dog, get_dogs, update_dog],
         )
         .launch()
         .await
@@ -7001,8 +7014,8 @@ Add the following code in `src/main.rs`:
 use async_std::sync::Arc;
 use parking_lot::RwLock;
 use std::collections::HashMap;
-use tide::{Body, Request, Response};
 use tide::prelude::*;
+use tide::{Body, Request, Response, StatusCode};
 use uuid::Uuid;
 
 // We need to implement the "Clone" trait in order to
@@ -7019,7 +7032,7 @@ type DogMap = HashMap<String, Dog>;
 
 #[derive(Clone)]
 struct State {
-    dog_map: Arc<RwLock<DogMap>>
+    dog_map: Arc<RwLock<DogMap>>,
 }
 
 #[async_std::main]
@@ -7034,7 +7047,9 @@ async fn main() -> tide::Result<()> {
     };
     dog_map.insert(id, dog);
 
-    let state = State { dog_map: Arc::new(RwLock::new(dog_map)) };
+    let state = State {
+        dog_map: Arc::new(RwLock::new(dog_map)),
+    };
     let mut app = tide::with_state(state);
 
     app.at("/dog")
@@ -7042,7 +7057,7 @@ async fn main() -> tide::Result<()> {
         .get(|req: Request<State>| async move {
             let dog_map = req.state().dog_map.read();
             let dogs: Vec<Dog> = dog_map.values().cloned().collect();
-            let mut res = Response::new(200);
+            let mut res = Response::new(StatusCode::Ok);
             res.set_body(Body::from_json(&dogs)?);
             Ok(res)
         })
@@ -7052,8 +7067,8 @@ async fn main() -> tide::Result<()> {
             let id = Uuid::new_v4().to_string();
             dog.id = Some(id.clone());
             let mut dog_map = req.state().dog_map.write();
-            dog_map.insert( id, dog.clone());
-            let mut res = tide::Response::new(200);
+            dog_map.insert(id, dog.clone());
+            let mut res = tide::Response::new(StatusCode::Created);
             res.set_body(Body::from_json(&dog)?);
             Ok(res)
         });
@@ -7064,11 +7079,11 @@ async fn main() -> tide::Result<()> {
             let id = req.param("id")?;
             let dog_map = req.state().dog_map.read();
             if let Some(dog) = dog_map.get(id.clone()) {
-                let mut res = Response::new(200);
+                let mut res = Response::new(StatusCode::Ok);
                 res.set_body(Body::from_json(&dog)?);
                 Ok(res)
             } else {
-                Ok(Response::new(404))
+                Ok(Response::new(StatusCode::NotFound))
             }
         })
         // Update a dog.
@@ -7076,19 +7091,23 @@ async fn main() -> tide::Result<()> {
             let dog: Dog = req.body_json().await?;
             let id = req.param("id")?;
             let mut dog_map = req.state().dog_map.write();
-            dog_map.insert( id.to_string(), dog.clone());
-            let mut res = tide::Response::new(200);
-            res.set_body(Body::from_json(&dog)?);
-            Ok(res)
+            if let Some(_dog) = dog_map.get(id) {
+                dog_map.insert(id.to_string(), dog.clone());
+                let mut res = tide::Response::new(StatusCode::Ok);
+                res.set_body(Body::from_json(&dog)?);
+                Ok(res)
+            } else {
+                Ok(Response::new(StatusCode::NotFound))
+            }
         })
         // Delete a dog.
         .delete(|req: Request<State>| async move {
             let id = req.param("id")?;
             let mut dog_map = req.state().dog_map.write();
             if let Some(_dog) = dog_map.remove(id) {
-                Ok(Response::new(200))
+                Ok(Response::new(StatusCode::Ok))
             } else {
-                Ok(Response::new(404))
+                Ok(Response::new(StatusCode::NotFound))
             }
         });
 

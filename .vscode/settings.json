@@ -401,6 +401,7 @@
     "neovis",
     "nlargest",
     "nlink",
+    "nocapture",
     "nonlocal",
     "noopener",
     "nowdoc",
