@@ -7107,6 +7107,7 @@ It defines HTTP routes using "filters".
 Add the following dependencies in `Cargo.toml`:
 
 ```toml
+parking_lot = "0.11.1"
 serde = { version = "1.0.123", features = ["derive"] }
 serde_json = "1.0.61"
 tokio = { version = "1.1.0", features = ["full"] }
@@ -7117,12 +7118,11 @@ warp = "0.3.0"
 Add the following code in `src/main.rs`:
 
 ```rust
+use parking_lot::RwLock;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::convert::Infallible;
 use std::sync::Arc;
-//TODO: Switch to using parking_lot::RwLock.
-use tokio::sync::Mutex;
 use uuid::Uuid;
 use warp::{Filter, Rejection};
 use warp::http::StatusCode;
@@ -7145,7 +7145,7 @@ struct NewDog {
 
 type DogMap = HashMap<String, Dog>;
 
-type State = Arc<Mutex<DogMap>>;
+type State = Arc<RwLock<DogMap>>;
 
 #[tokio::main]
 async fn main() {
@@ -7159,7 +7159,7 @@ async fn main() {
     let mut dog_map = HashMap::new();
     dog_map.insert(id, dog);
 
-    let state: State = Arc::new(Mutex::new(dog_map));
+    let state: State = Arc::new(RwLock::new(dog_map));
 
     fn with_state(state: State) -> impl Filter<Extract = (State,), Error = Infallible> + Clone {
         warp::any().map(move || state.clone())
@@ -7175,7 +7175,7 @@ async fn main() {
     // This must be an async fn instead of a closure passed to and_then
     // until proper support for async closures is added to Rust.
     async fn handle_get_dogs(state: State) -> Result<Json, Rejection> {
-        let dog_map = state.lock().await;
+        let dog_map = state.read();
         let dogs: Vec<Dog> = dog_map.values().cloned().collect();
         Ok(warp::reply::json(&dogs))
     }
@@ -7184,7 +7184,7 @@ async fn main() {
         .and(warp::get())
         .and(with_state(state.clone()))
         .and_then(|id, state: State| async move {
-            let dog_map = state.lock().await;
+            let dog_map = state.read();
             if let Some(dog) = dog_map.get(&id) {
                 Ok(warp::reply::json(&dog))
             } else {
@@ -7202,7 +7202,7 @@ async fn main() {
     async fn handle_create_dog(new_dog: NewDog, state: State) -> Result<Json, Rejection> {
         let id = Uuid::new_v4().to_string();
         let dog = Dog { id: id.clone(), name: new_dog.name, breed: new_dog.breed};
-        let mut dog_map = state.lock().await;
+        let mut dog_map = state.write();
         dog_map.insert(id, dog.clone());
         //Ok(warp::reply::with_status("success", StatusCode::CREATED))
         //TODO: How can you set the status to 201 CREATED?
@@ -7214,7 +7214,7 @@ async fn main() {
         .and(warp::body::json())
         .and(with_state(state.clone()))
         .and_then(|id: String, dog: Dog, state: State| async move {
-            let mut dog_map = state.lock().await;
+            let mut dog_map = state.write();
             if let Some(_dog) = &dog_map.get(&id) {
                 dog_map.insert(id, dog.clone());
                 Ok(warp::reply::json(&dog))
@@ -7227,7 +7227,7 @@ async fn main() {
         .and(warp::delete())
         .and(with_state(state.clone()))
         .and_then(|id: String, state: State| async move {
-            let mut dog_map = state.lock().await;
+            let mut dog_map = state.write();
             if let Some(_dog) = dog_map.remove(&id) {
                 Ok(warp::reply::with_status("success", StatusCode::OK))
             } else {
