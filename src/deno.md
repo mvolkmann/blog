@@ -2109,7 +2109,7 @@ function getDog(context) {
   const {id} = context.params;
   const dog = dogs[id];
   if (dog) {
-    sendJson(dog);
+    sendJson(context, dog);
   } else {
     context.response.status = 404;
   }
