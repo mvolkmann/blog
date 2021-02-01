@@ -6681,7 +6681,10 @@ Typically the data would be persisted to a database, but
 to keep the focus on the frameworks it will just be held in memory.
 This requires learning how each framework manages application state.
 
-The endpoints exposes will be:
+All of this code can be found in GitHub at
+{% aTargetBlank "https://github.com/mvolkmann/rust-rest", "rust-rest" %}.
+
+The endpoints exposed will be:
 
 - GET /dog - to retrieve all the dogs
 - GET /dog/{id} - to retrieve a specific dog
