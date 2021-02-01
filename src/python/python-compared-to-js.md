@@ -446,7 +446,7 @@ The related keyword `nonlocal` enables functions to
 access variables in ancestor scopes that are not global.
 
 | Topic                         | JavaScript                                                                     | Python                                                    |
-| ----------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| ----------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- | ------- | ------------- |
 | constant declaration          | `const NAME = value;`                                                          | `NAME = value`                                            |
 | variable declaration          | `let name = value;`                                                            | `name = value`                                            |
 | get type of value in variable | `typeof v` and `v.constructor.name`                                            | `type v:`                                                 |
@@ -461,10 +461,10 @@ access variables in ancestor scopes that are not global.
 | exponentiation                | `name **= expr`                                                                | same                                                      |
 | mod (remainder)               | `name %= expr`                                                                 | same                                                      |
 | logical and                   | `name &&= expr`                                                                | not supported                                             |
-| logical or                    | `name ||= expr`                                                                | not supported                                             |
+| logical or                    | `name                                                                          |                                                           | = expr` | not supported |
 | logical xor                   | `name ^= expr`                                                                 | not supported                                             |
 | bitwise and                   | `name &= expr`                                                                 | same                                                      |
-| bitwise or                    | `name |= expr`                                                                 | same                                                      |
+| bitwise or                    | `name                                                                          | = expr`                                                   | same    |
 | bitwise xor                   | `name ^= expr`                                                                 | same                                                      |
 | signed bit shift              | `<<=` (left), `>>=` (right)                                                    | same                                                      |
 | unsigned bit shift            | `<<<=` (left), `>>>=` (right)                                                  | not supported                                             |
@@ -969,7 +969,7 @@ Descriptions below that begin with "determines if"
 mean that a Boolean value is returned.
 
 | Python built-in function                         | Description                                                                                            | Closest JavaScript equivalent                                        |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- | --- | -------- |
 | `abs(x)`                                         | returns absolute value                                                                                 | `Math.abs(x)`                                                        |
 | `all(iterable)`                                  | determines if all elements are `True`<br>in a Boolean context                                          | `arr.every(predicate)`                                               |
 | `any(iterable)`                                  | determines if any element is `True`<br>in a Boolean context                                            | `arr.some(predicate)`                                                |
@@ -994,7 +994,7 @@ mean that a Boolean value is returned.
 | `float(x)`                                       | returns floating point number<br>created from a number or string                                       | `parseFloat(x)`                                                      |
 | `format(value, fmt)`                             | returns string created by formatting a value<br>using a format string                                  | use template literals                                                |
 | `frozenset(iterable)`                            | returns `frozenset` (immutable set) object<br>created from iterable                                    | `Object.freeze(obj)`                                                 |
-| `getattr(obj, name [, default])`                 | returns attribute value                                                                                | `obj[name] || default`                                               |
+| `getattr(obj, name [, default])`                 | returns attribute value                                                                                | `obj[name]                                                           |     | default` |
 | `globals()`                                      | returns dictionary containing the<br>current global symbol table                                       | not supported                                                        |
 | `hasattr(obj, name)`                             | determines if object has a given attribute                                                             | `name in obj`                                                        |
 | `hash(obj)`                                      | returns hash value of object                                                                           | not supported                                                        |
@@ -1029,12 +1029,12 @@ mean that a Boolean value is returned.
 | `setattr(obj, name, value)`                      | sets an attribute of an object                                                                         | `obj[name] = value`                                                  |
 | `slice(stop)` or<br>`slice(start, stop[, step])` | returns a `slice` object that<br>describes a set of indexes;<br>used to retrieve data at those indexes | not supported                                                        |
 | `sorted(iterable[, key])`                        | returns a sorted version<br>of an iterable as a `list`                                                 | `arr.sort([compareFn])`<br>sorts in place                            |
-| `str(obj)`                                       | returns a human-readable string<br>representation of an object                                         | `obj.toString()`                                                     | : |
+| `str(obj)`                                       | returns a human-readable string<br>representation of an object                                         | `obj.toString()`                                                     | :   |
 | `sum(iterable)`                                  | returns the sum of<br>numbers in an iterable                                                           | `arr.reduce((acc, n) => acc + n)`                                    |
 | `super()`                                        | returns a proxy object for<br>calling superclass methods                                               | `super` keyword                                                      |
 | `tuple([iterable])`                              | creates a tuple, optionally<br>populated from an iterable                                              | not supported                                                        |
 | `type()` returns class object                    | returns the type of a value                                                                            | `typeof v` returns string<br>`v.constructor` is constructor function |
-| `vars(obj)`                                      | returns a `dict` view of<br>the attributes in an object                                                | not supported                                                        |  |  |
+| `vars(obj)`                                      | returns a `dict` view of<br>the attributes in an object                                                | not supported                                                        |     |          |
 | `zip(iterables)`                                 | returns an iterator that aggregates<br>elements from multiple iterables                                | not built-in;<br>can use Lodash `zip` function                       |
 
 <br>
@@ -1059,12 +1059,12 @@ The Python `float` and `int` functions do not support this.
 ## Boolean operations
 
 | Operation   | JavaScript | Python      |
-| ----------- | ---------- | ----------- |
+| ----------- | ---------- | ----------- | ---- | ---------- |
 | and         | `b1 && b2` | `b1 and b2` |
-| or          | `b1 || b2` | `b1 or b2`  |
+| or          | `b1        |             | b2`  | `b1 or b2` |
 | not         | `!b`       | `not b`     |
 | bitwise and | `b1 & b2`  | same        |
-| bitwise or  | `b1 | b2`  | same        |
+| bitwise or  | `b1        | b2`         | same |
 | bitwise not | `~b`       | same        |
 | bitwise xor | `b1 ^ b2`  | same        |
 
@@ -2122,47 +2122,56 @@ Key benefits of
 1. Create the file `server.py` containing the following:
 
    ```py
-   from flask import Flask, abort, request
+   from flask import Flask, abort, jsonify, make_response, request
    from flask_cors import CORS
 
    import time
+   import uuid
+
+   # Disable request logging.
+   import logging
+   log = logging.getLogger('werkzeug')
+   log.setLevel(logging.ERROR)
 
    # Serve static files found in the public directory.
    app = Flask(__name__, static_folder='public', static_url_path='')
-   CORS(app) # for cross-origin resource sharing
+   CORS(app)  # for cross-origin resource sharing
 
-   dogs = {
-       1: {
-           'id': 1, 'breed': 'Whippet', 'name': 'Comet'
-       }
-   }
+   id = str(uuid.uuid4())
+   dogs = {}
+   dogs[id] = {'id': id, 'breed': 'Whippet', 'name': 'Comet'}
 
    @app.route('/dog')
-   def all_dogs():
-       return dogs
+   def get_dogs():
+       return jsonify(list(dogs.values()))
+
+   @app.route('/dog/<id>')
+   def get_dog(id):
+       if id in dogs:
+           return jsonify(dogs[id])
+       else:
+           abort(404)
 
    @app.route('/dog', methods=['POST'])
    def create_dog():
-       dog = request.get_json() # from body
-       id = round(time.time() * 1000)
+       dog = request.get_json()  # from body
+       id = str(uuid.uuid4())
        dog['id'] = id
        dogs[id] = dog
-       return str(id)
+       return make_response(jsonify(dog), 201)
 
    @app.route('/dog/<id>', methods=['PUT'])
    def update_dog(id):
-       id = int(id)
        if id in dogs:
-           dog = request.get_json() # from body
+           dog = request.get_json()  # from body
            dog['id'] = id
            dogs[id] = dog
-           return ''
+           return jsonify(dog)
        else:
            abort(404)
 
    @app.route('/dog/<id>', methods=['DELETE'])
    def delete_dog(id):
-       id = int(id)
        if id in dogs:
            del dogs[id]
            return ''
@@ -2189,26 +2198,25 @@ Key benefits of
 1. Create the file `server.py` containing the following:
 
    ```py
-   from fastapi import FastAPI
+   from fastapi import FastAPI, Response, status
    from fastapi.middleware.cors import CORSMiddleware
    from pydantic import BaseModel
    from typing import Optional
    import time
+   import uuid
 
    # JSON in request bodies of POST and PUT requests
    # is validated against this type definition.
    # When validation fails, the response status
    # is set to 422 Unprocessable Entity.
    class Dog(BaseModel):
-       id: Optional[int] = None
+       id: Optional[str] = None
        breed: str
        name: str
 
-   dogs = {
-       1: {
-           'id': 1, 'breed': 'Whippet', 'name': 'Comet'
-       }
-   }
+   id = str(uuid.uuid4())
+   dogs = {}
+   dogs[id] = {'id': id, 'breed': 'Whippet', 'name': 'Comet'}
 
    app = FastAPI()
    app.add_middleware(
@@ -2219,41 +2227,47 @@ Key benefits of
        allow_headers=['*'])
 
    @app.get('/dog')
-   def all_dogs():
-       return dogs
+   def get_dogs():
+       return list(dogs.values())
 
-   @app.post('/dog', response_model=str)
+   @app.get('/dog/{id}')
+   def get_dog(id: str):
+       if id in dogs:
+           return dogs[id]
+       else:
+           return Response(status_code=status.HTTP_404_NOT_FOUND)
+
+   @app.post('/dog', status_code=201)
    def create_dog(dog: Dog):
-       id = round(time.time() * 1000)
-       #dog['id'] = id # Why can't the dog object be modified?
+       id = str(uuid.uuid4())
+       # dog['id'] = id # Why can't the dog object be modified?
        dict = dog.dict()
        dict['id'] = id
        dogs[id] = dict
-       return str(id)
+       return dict
 
-   @app.put('/dog/{id}', response_model=str)
-   def update_dog(dog: Dog, id: int):
+   @app.put('/dog/{id}')
+   def update_dog(dog: Dog, id: str):
        if id in dogs:
-           #dog['id'] = id # Why can't the dog object be modified?
+           # dog['id'] = id # Why can't the dog object be modified?
            dict = dog.dict()
            dict['id'] = id
            dogs[id] = dict
-           return ''
+           return dict
        else:
-           abort(404)
+           return Response(status_code=status.HTTP_404_NOT_FOUND)
 
    @app.delete('/dog/{id}')
-   def delete_dog(id: int):
-       id = int(id)
+   def delete_dog(id: str):
        if id in dogs:
            del dogs[id]
-           return ''
+           return Response(status_code=status.HTTP_204_NO_CONTENT)
        else:
-           abort(404)
+           return Response(status_code=status.HTTP_404_NOT_FOUND)
    ```
 
-1. Run the server by entering `uvicorn server:app --port 1919 --reload`.
-   Including the `--reload` option provides
+1. Run the server by entering `uvicorn server:app --log-level error --port 1919`.
+   Include the `--reload` option to provide
    automatic file watch and server restart.
 
 1. Check out the Open API docs that are provided for free!

@@ -341,6 +341,7 @@
     "iterrows",
     "itertools",
     "jointplot",
+    "jsonify",
     "jstl",
     "jupyterlab",
     "kanban",
