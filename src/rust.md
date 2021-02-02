@@ -6713,6 +6713,8 @@ uuid = { version = "0.8.2", features = ["serde", "v4"] }
 
 Add the following code in `src/main.rs`:
 
+TODO: Update all Rust server example code to match what is in rust-rest repo.
+
 ```rust
 use actix_web::{delete, get, post, put, web, App, HttpRequest, HttpResponse, HttpServer, Result};
 use parking_lot::RwLock;
@@ -7212,7 +7214,12 @@ async fn main() {
             } else {
                 Err(warp::reject::not_found())
             }
-        });
+        })
+        .recover(not_found); // will get 405 Method Not Allowed without this
+
+    async fn not_found(_err: Rejection) -> Result<impl warp::Reply, Rejection> {
+        Ok(StatusCode::NOT_FOUND)
+    }
 
     let create_dog = warp::path!("dog")
         .and(warp::post())
