@@ -7148,9 +7148,9 @@ use std::collections::HashMap;
 use std::convert::Infallible;
 use std::sync::Arc;
 use uuid::Uuid;
-use warp::{Filter, Rejection};
 use warp::http::StatusCode;
-use warp::reply::Json;
+use warp::reply::{json, with_status, Json, Reply};
+use warp::{Filter, Rejection};
 
 // We need to implement the "Clone" trait in order to
 // call the "cloned" method in the "get_dogs" route.
@@ -7207,18 +7207,15 @@ async fn main() {
     let get_dog = warp::path!("dog" / String)
         .and(warp::get())
         .and(with_state(state.clone()))
-        .and_then(|id, state: State| async move {
-            let dog_map = state.read();
-            if let Some(dog) = dog_map.get(&id) {
-                Ok(warp::reply::json(&dog))
-            } else {
-                Err(warp::reject::not_found())
-            }
-        })
-        .recover(not_found); // will get 405 Method Not Allowed without this
+        .and_then(handle_get_dog);
 
-    async fn not_found(_err: Rejection) -> Result<impl warp::Reply, Rejection> {
-        Ok(StatusCode::NOT_FOUND)
+    async fn handle_get_dog(id: String, state: State) -> Result<impl Reply, Infallible> {
+        let dog_map = state.read();
+        if let Some(dog) = dog_map.get(&id) {
+            Ok(with_status(json(&dog), StatusCode::OK))
+        } else {
+            Ok(with_status(json(&""), StatusCode::NOT_FOUND))
+        }
     }
 
     let create_dog = warp::path!("dog")
@@ -7228,14 +7225,16 @@ async fn main() {
         .and_then(handle_create_dog);
 
     // See the comment above the handle_get_dogs function.
-    async fn handle_create_dog(new_dog: NewDog, state: State) -> Result<Json, Rejection> {
+    async fn handle_create_dog(new_dog: NewDog, state: State) -> Result<impl Reply, Rejection> {
         let id = Uuid::new_v4().to_string();
-        let dog = Dog { id: id.clone(), name: new_dog.name, breed: new_dog.breed};
+        let dog = Dog {
+            id: id.clone(),
+            name: new_dog.name,
+            breed: new_dog.breed,
+        };
         let mut dog_map = state.write();
         dog_map.insert(id, dog.clone());
-        //Ok(warp::reply::with_status("success", StatusCode::CREATED))
-        //TODO: How can you set the status to 201 CREATED?
-        Ok(warp::reply::json(&dog))
+        Ok(with_status(json(&dog), StatusCode::CREATED))
     }
 
     let update_dog = warp::path!("dog" / String)
@@ -7258,14 +7257,18 @@ async fn main() {
         .and_then(|id: String, state: State| async move {
             let mut dog_map = state.write();
             if let Some(_dog) = dog_map.remove(&id) {
-                Ok(warp::reply::with_status("success", StatusCode::OK))
+                Ok(with_status("", StatusCode::NO_CONTENT))
             } else {
                 Err(warp::reject::not_found())
             }
         });
 
     //TODO: Learn how to get this to use TLS/HTTPS.
-    let routes = get_dogs.or(get_dog).or(create_dog).or(update_dog).or(delete_dog);
+    let routes = get_dogs
+        .or(create_dog)
+        .or(update_dog)
+        .or(delete_dog)
+        .or(get_dog);
     warp::serve(routes).run(([127, 0, 0, 1], 1234)).await;
 }
 ```
