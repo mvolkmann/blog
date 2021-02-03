@@ -6713,8 +6713,6 @@ uuid = { version = "0.8.2", features = ["serde", "v4"] }
 
 Add the following code in `src/main.rs`:
 
-TODO: Update all Rust server example code to match what is in rust-rest repo.
-
 ```rust
 use actix_web::{delete, get, post, put, web, App, HttpRequest, HttpResponse, HttpServer, Result};
 use parking_lot::RwLock;
@@ -6795,7 +6793,6 @@ async fn update_dog(
 #[delete("/dog/{id}")]
 async fn delete_dog(req: HttpRequest, state: web::Data<RwLock<AppState>>) -> Result<HttpResponse> {
     let id = req.match_info().get("id").unwrap();
-    //println!("deleting dog with id {}", id);
     let mut state = state.write();
     if let Some(_dog) = state.dog_map.remove(id) {
         Ok(HttpResponse::Ok().finish())
@@ -6944,15 +6941,19 @@ async fn main() {
             name: new_dog.name,
             breed: new_dog.breed,
         };
+        //TODO: Find better way to get host and port.
+        let url = format!("http://localhost:1234/dog/{}", &id);
         let mut dog_map = state.dog_map.write();
         dog_map.insert(id, dog.clone());
-        Json(dog) //TODO: Set status to 201 CREATED.:
+
+        Created::new(url).body(Json(dog))
     }
 
     #[delete("/<id>")]
-    fn delete_dog(id: String, state: State<MyState>) {
+    fn delete_dog(id: String, state: State<MyState>) -> NoContent {
         let mut dog_map = state.dog_map.write();
         dog_map.remove(&id);
+        NoContent
     }
 
     #[get("/<id>", format = "json")]
