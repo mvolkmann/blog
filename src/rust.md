@@ -1845,19 +1845,19 @@ There are many ways to handle values from these enum types.
 
    In functions that call multiple other functions
    that return `Result` instances with different types of errors
-   and wish to return them to callers,
-   consider adding `?` after those calls and
-   making the return type `Result<SomeOkType, Box<dyn std::error::Error>>`.
-   The `dyn` keyword performs dynamic dispatch to allow
-   a value of any type that implements a given trait.
-   Note that this can be done in the `main` function.
+   and wish to return them to callers, consider making the return type
+   `Result<SomeOkType, Box<dyn std::error::Error>>`.
+   `Box` is needed to accommodate error values of different sizes
+   because the size of the error value must be known at compile time.
+   A `Box` is a smart pointer with a fixed size that points to another value.
+   The `dyn` keyword performs dynamic dispatch to allow a value
+   of any type that implements a given trait, `Error` in this case.
+   Even the `main` function can be given this return type.
 
    In the case below the errors that can be returned
    (`std::io::Error` and `std::num::ParseIntError`)
    all implement the `std::error::Error` trait.
-   Because they don't all have the same size,
-   they must wrapped in a `Box` which does have a fixed size.
-   For example, from the Rustlings exercise `errorsn.rs`:
+   This example comes from the Rustlings exercise `errorsn.rs`.
 
    ```rust
    fn read_and_validate(
@@ -1866,11 +1866,17 @@ There are many ways to handle values from these enum types.
        let mut line = String::new();
        b.read_line(&mut line)?; // can return Err(std::io::Error)
        let num: i64 = line.trim().parse()?; // can return Err(std::num::ParseIntError)
-       // If
        let answer = PositiveNonzeroInteger::new(num)?;
        Ok(answer)
    }
    ```
+
+   This example demonstrates several approaches to error handling
+   for functions that can return multiple error types.
+   See {% aTargetBlank "https://github.com/mvolkmann/rust-error-handling",
+   "rust-error-handling" %}.
+
+TODO: Add your rust-error-handling example here.
 
 ## <a name="scalar-types">Built-in Types</a>
 
@@ -2817,6 +2823,7 @@ fn main() {
     let original = vec!["red", "orange", "yellow", "green", "blue", "purple"];
 
     // Create a vector of String values from original.
+    // map is lazy and collect forces its evaluation.
     let mut colors = original.iter().map(|c| c.to_string()).collect::<Vec<String>>();
 
     // Change a subset of the colors to uppercase.
@@ -3093,7 +3100,7 @@ use rand::Rng;
 async fn get_data() -> Result<i8, &'static str> {
   // rng stands for "random number generator".
   let mut rng = rand::thread_rng();
-  let n = rng.gen_range(1, 11); // number from 1 to 10
+  let n = rng.gen_range(1..11); // number from 1 to 10
   // Fail if n is greater than 7.
   if n <= 7 { Ok(n) } else { Err("failed") }
 }
@@ -3459,6 +3466,7 @@ for n in iter {
 
 // We cannot create an array from an iterator,
 // but we can create a Vector.
+// map is lazy and collect forces its evaluation.
 let v1 = vec![1, 2, 3];
 let v2: Vec<i32> = v1.iter().map(|n| n * 2).collect();
 println!("{:?}", v2); // [2, 4, 6]
@@ -5276,7 +5284,7 @@ The `std::fs` and `std::io` modules enable reading and writing from files.
 For example:
 
 ```rust
-use std::fs::File;
+use std::fs::{File, read_to_string};
 use std::io::{BufReader, BufWriter, Result};
 // The following is required to gain access to the
 // "lines" and "write" methods.
@@ -5922,11 +5930,11 @@ and developers can implement new ones.
 
 | Name         | Description                                                                                                                                      |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Arc<T>`     | stands for "atomically reference counting"; enables multiple owners across multiple threads                                                      |
+| `Arc<T>`     | stands for "atomically reference counted"; enables multiple owners across multiple threads                                                       |
 | `Box<T>`     | a pointer stored on the stack to data on the heap                                                                                                |
 | `Cell<T>`    | enables having multiple mutable references to a value within a single thread (1)                                                                 |
 | `Cow<T>`     | stands for "Clone On Write"; wraps an immutable borrow and<br>provides the `to_mut` method for lazy cloning when mutation or ownership is needed |
-| `Rc<T>`      | stands for "reference counting"; enables multiple owners                                                                                         |
+| `Rc<T>`      | stands for "reference counted"; enables multiple owners                                                                                          |
 | `Ref<T>`     | used with a `RefCell` to enforce immutable borrowing rules at runtime                                                                            |
 | `RefCell<T>` | similar to `Cell`, but holds references to values instead of values and supports mutable borrows                                                 |
 | `RefMut<T>`  | used with a `RefCell` to enforce mutable borrowing rules at runtime                                                                              |
@@ -6056,9 +6064,42 @@ fn main() {
 }
 ```
 
+The `Arc` smart pointer is similar to the `Rc` smart pointer,
+but can be used by multiple threads to safely share data between them.
+Often this is used in conjunction with
+`std::sync::Mutex` or `std::sync::RwLock`.
+
+"Mutex" is short for "mutual exclusion".
+Instances guarantee that only one thread at a time
+will have access to the data it holds.
+A thread gains access by calling the `lock` method.
+This blocks until the lock can be acquired.
+The lock is automatically released when
+the variable that holds it goes out of scope.
+
+`RwLock` instances a similar, but distinguish between uses that
+need the ability to modify the data and those that merely read the data.
+Only one thread at a time can acquire a write lock,
+but any number of threads can acquire a read lock
+as long as no thread has a write lock.
+The `read` and `write` methods are called to acquire a lock.
+These block until it can be acquired.
+Like with a `Mutex`, the lock is automatically released when
+the variable that holds it goes out of scope.
+
 TODO: Also look at use async_std::sync::{Arc, RwLock};
 TODO: How does async_std::sync::RwLock differ from std::sync::RwLock?
 TODO: Is it better to put RwLock outside Arc instead of Arc outside RwLock?
+TODO: Also discuss the versions of these in the parking_lot crate.:
+
+I said:
+It would be great if there was a resource that provided guidance for choosing between the std::sync , async_std::sync , tokio::sync , and parking_lot versions of all of these locking mechanisms.
+
+Alice replied:
+Use the guide on Tokio's docs to choose between blocking or async lock, then use either Tokio or async-std's lock if you need an async lock, choosing the same as the one you use as runtime, or std/parking_lot if you need a blocking lock.
+
+The shared state chapter in Tokio's tutorial has more details.
+See https://tokio.rs/tokio/tutorial/shared-state.
 
 ## Futures
 
@@ -6088,7 +6129,7 @@ It assumes the following dependency line
 has been added in the `Cargo.toml` file.
 
 ```toml
-tokio = { version = "1.0.1", features = ["full"] }
+tokio = { version = "1.1.1", features = ["full"] }
 ```
 
 Tokio supports a large number of features.
@@ -6456,7 +6497,7 @@ Here is an example of using the `mongodb` crate:
    ```toml
    futures = "0.3.12"
    mongodb = { version = "1.1.1", default-features = false, features = ["tokio-runtime"] }
-   tokio = { version = "0.2", features = ["full"] }
+   tokio = { version = "1.1.1", features = ["full"] }
    ```
 
 1. Add the following in `src/main.rs`:
@@ -7135,7 +7176,7 @@ Add the following dependencies in `Cargo.toml`:
 parking_lot = "0.11.1"
 serde = { version = "1.0.123", features = ["derive"] }
 serde_json = "1.0.61"
-tokio = { version = "1.1.0", features = ["full"] }
+tokio = { version = "1.1.1", features = ["full"] }
 uuid = { version = "0.8.2", features = ["serde", "v4"] }
 warp = "0.3.0"
 ```
