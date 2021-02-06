@@ -1814,6 +1814,7 @@ There are many ways to handle values from these enum types.
 
 5. Use the `?` operator which is shorthand for the `try!` macro.
 
+   This can be applied to functions that return a `Result` or `Option` enum.
    If the value is a `Some` or `Ok` then it is unwrapped and returned.
    If the value is a `None` or `Err` then it is passed through the
    `from` function (defined in the standard library `From` trait)
@@ -6108,6 +6109,146 @@ TODO: Add this section.
 ## Threads
 
 Rust has built-in support for threads.
+
+Here is an example that scrapes web sites listed in the file `web-sites.txt`.
+It reports the number of `img` tags found at each site.
+First it does this with a single thread and
+then with a separate thread for each site.
+The elapsed time for each approach is output
+to show the speed benefit of using multiple threads.
+
+Here are the dependencies added in `Cargo.toml`:
+
+```toml
+futures = "0.3.12"
+reqwest = "0.11.0"
+tokio = { version = "1.2.0", features = ["full", "rt"] }
+```
+
+Here is the `src/main.js` file:
+
+```rust
+extern crate reqwest;
+extern crate tokio;
+
+//use futures::prelude::*;
+use reqwest::header::USER_AGENT;
+use std::boxed::Box;
+use std::fs::File;
+use std::io::{BufRead, BufReader, Lines};
+//use std::thread;
+use std::time::Instant;
+
+// We need to set the user agent because some sites return 403 Forbidden
+// for requests that do not seem to be coming from a web browser.
+//const UA: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36";
+const UA: &str = "Mozilla/5.0"; // This is enough.
+
+type FileLines = Lines<BufReader<File>>;
+
+type GenericError = Box<dyn std::error::Error + Send + Sync>;
+type Result<T> = std::result::Result<T, GenericError>;
+
+async fn get_sites() -> Result<FileLines> {
+    let path = "./web-sites.txt";
+    let f = File::open(path)?;
+    let reader = BufReader::new(f);
+    Ok(reader.lines())
+}
+
+async fn process_site(url: &str) -> Result<()> {
+    // If commented ...
+    if url.starts_with("#") {
+        return Ok(());
+    }
+
+    let client = reqwest::Client::new();
+    let res = client.get(url).header(USER_AGENT, UA).send().await?;
+    let html = res.text().await?;
+    //dbg!(&html);
+    let images: Vec<&str> = html.matches("<img ").collect();
+    println!("{} has {} img tags", url, images.len());
+    Ok(())
+}
+
+#[tokio::main] // starts the Tokio runtime
+async fn main() -> Result<()> {
+    // Single threaded ...
+    let sites = get_sites().await?;
+    let start = Instant::now();
+    for site in sites {
+        if let Ok(url) = site {
+            process_site(&url).await?;
+        }
+    }
+    println!("single-threaded time: {:?}\n", start.elapsed());
+
+    // Multi-threaded ...
+    let sites = get_sites().await?;
+    let start = Instant::now();
+    let mut handles = Vec::new();
+    for site in sites {
+        //handles.push(thread::spawn(|| async move {
+        handles.push(tokio::task::spawn(async {
+            if let Ok(url) = site {
+                process_site(&url).await?;
+            }
+            // The ? operator used above propagates the error
+            // and can convert it to a different type.
+            // The error type isn't specified, so we do that the next line.
+            Ok::<_, GenericError>(())
+        }));
+    }
+    for handle in handles {
+        if let Err(e) = handle.await? {
+            eprintln!("error: {}", e);
+        }
+    }
+    println!("multi-threaded time: {:?}", start.elapsed());
+
+    Ok(())
+}
+```
+
+TODO: When using threads do you always need to add
+TODO: use of a runtime such as async_std or tokio?
+
+{% aTargetBlank "https://github.com/rayon-rs/rayon", "rayon" %}
+is a Rust "data parallelism library".
+It supports the parallel iterator methods `par_iter` and `par_iter_mut`.
+It also supports parallel sorting of slices and vectors.j
+The following example shows how rayon can be used to
+process of all the items in a vector using multiple threads.
+It uses the `rand` crate to generate random numbers.
+
+```rust
+use rand::Rng;
+use rayon::prelude::*;
+use std::time::Instant;
+
+fn main() {
+    // Generate a vector of random numbers.
+    const N: i32 = 1_000_000_000;
+    let mut numbers = Vec::new();
+    // rng stands for "random number generator".
+    let mut rng = rand::thread_rng();
+    for _i in 0..N {
+        let n = rng.gen(); // number from 0 inclusive to 1 exclusive
+        numbers.push(n);
+    }
+
+    // Multiplying all the numbers by two took 2.617 seconds using one thread.
+    let start = Instant::now();
+    numbers.iter_mut().for_each(|p: &mut f64| *p *= 2.0);
+    println!("elapsed time: {:?}", start.elapsed());
+
+    // Using multiple threads on an 8-core machine took only 554ms.
+    let start = Instant::now();
+    numbers.par_iter_mut().for_each(|p: &mut f64| *p *= 2.0);
+    println!("elapsed time: {:?}", start.elapsed());
+}
+```
+
 {% aTargetBlank "https://crates.io/crates/tokio", "tokio" %} is a popular crate
 that makes implementing asynchronous code even easier.
 
