@@ -395,6 +395,7 @@
     "mouseout",
     "mplcursors",
     "mpldatacursor",
+    "mpsc",
     "myapp",
     "mypy",
     "mysqli",
