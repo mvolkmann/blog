@@ -4166,6 +4166,7 @@ fn main() {
 ## <a name="traits">Traits</a>
 
 A trait describes an interface that any number of types can implement.
+
 Any trait can be implemented on a type defined in the current crate.
 A trait defined in the current crate can be implemented on any type,
 even those in the standard library.
@@ -4173,6 +4174,7 @@ But a trait defined outside the current crate cannot be
 implemented on a type that is also defined outside the current crate.
 For example, the `std::vec::Vec` type does not implement the
 `std::fmt::Display` trait and this implementation cannot be added.
+This is referred to as the "orphan rule".
 
 A trait defines any number of associated constants (not commonly used),
 associated functions, and methods.
@@ -4276,9 +4278,8 @@ impl Cart {
 
 impl fmt::Display for Cart {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        //for boxed_item in self.items {
         for item in &self.items {
-            //let item = *boxed_item;
+            // We don't need to manually extract items from their Box.
             writeln!(f, "{} ${}", item.get_description(), item.get_price())?;
         }
         Ok(())
@@ -6253,19 +6254,19 @@ Here is the `src/main.js` file:
 
 ```rust
 extern crate reqwest;
+// We cannot use async-std in place of tokio because reqwest depends on tokio.
 extern crate tokio;
 
-//use futures::prelude::*;
 use reqwest::header::USER_AGENT;
 use std::boxed::Box;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Lines};
-//use std::thread;
 use std::time::Instant;
+use tokio::task;
+use tokio::task::JoinHandle;
 
 // We need to set the user agent because some sites return 403 Forbidden
 // for requests that do not seem to be coming from a web browser.
-//const UA: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36";
 const UA: &str = "Mozilla/5.0"; // This is enough.
 
 type FileLines = Lines<BufReader<File>>;
@@ -6310,17 +6311,14 @@ async fn main() -> Result<()> {
     // Multi-threaded ...
     let sites = get_sites().await?;
     let start = Instant::now();
-    let mut handles = Vec::new();
+    let mut handles: Vec<JoinHandle<MyResult<()>>> = Vec::new();
     for site in sites {
         //handles.push(thread::spawn(|| async move {
-        handles.push(tokio::task::spawn(async {
+        handles.push(task::spawn(async {
             if let Ok(url) = site {
                 process_site(&url).await?;
             }
-            // The ? operator used above propagates the error
-            // and can convert it to a different type.
-            // The error type isn't specified, so we do that the next line.
-            Ok::<_, GenericError>(())
+            Ok(())
         }));
     }
     for handle in handles {
