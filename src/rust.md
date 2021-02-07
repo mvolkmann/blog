@@ -4211,6 +4211,102 @@ When looking at documentation for a type consider that
 some methods may only be described in the documentation
 for traits that are implemented for the type.
 
+In this example we define the trait `Item` which is implemented
+by specific kinds of items such as `Book` and `Food`.
+A `Cart` holds items that implement the `Item` trait.
+
+```rust
+use std::fmt;
+
+type Price = u64;
+
+trait Item {
+    fn get_description(&self) -> &str;
+    fn get_price(&self) -> Price;
+}
+
+struct Book {
+    price: Price,
+    title: String,
+}
+
+impl Item for Book {
+    fn get_description(&self) -> &str {
+        &self.title
+    }
+    fn get_price(&self) -> Price {
+        self.price
+    }
+}
+
+struct Food {
+    calories_per_serving: u32,
+    description: String,
+    price: Price,
+}
+
+impl Item for Food {
+    fn get_description(&self) -> &str {
+        &self.description
+    }
+    fn get_price(&self) -> Price {
+        self.price
+    }
+}
+
+#[derive(Default)]
+struct Cart {
+    // A Cart holds any kind of items that implement the Item trait.
+    items: Vec<Box<dyn Item>>,
+}
+
+impl Cart {
+    // Each Item added to a Cart is guaranteed
+    // to live for the duration of the program.
+    fn add(&mut self, item: impl Item + 'static) {
+        self.items.push(Box::new(item));
+    }
+
+    fn get_subtotal(&self) -> Price {
+        self.items
+            .iter()
+            .fold(0, |acc, item| acc + item.get_price())
+    }
+}
+
+impl fmt::Display for Cart {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        //for boxed_item in self.items {
+        for item in &self.items {
+            //let item = *boxed_item;
+            writeln!(f, "{} ${}", item.get_description(), item.get_price())?;
+        }
+        Ok(())
+    }
+}
+
+fn main() {
+    let mut cart = Cart::default();
+
+    let item = Book {
+        title: "Svelte and Sapper in Action".to_string(),
+        price: 2000,
+    };
+    cart.add(item);
+    cart.add(Food {
+        description: "Snickers bar".to_string(),
+        calories_per_serving: 229,
+        price: 75,
+    });
+    cart.add(Food {
+        description: "Coke can".to_string(),
+        calories_per_serving: 140,
+        price: 100,
+    });
+    println!("subtotal = {}", cart.get_subtotal() as f64 / 100.0);
+}
+```
+
 Traits can be made generic by including type parameters.
 Here is an example of a custom generic trait named `Distance`
 that is implemented for the custom type `Point2D`.
@@ -6102,6 +6198,26 @@ Use the guide on Tokio's docs to choose between blocking or async lock, then use
 The shared state chapter in Tokio's tutorial has more details.
 See https://tokio.rs/tokio/tutorial/shared-state.
 
+## async-std
+
+The `async-std` crate is an alternative runtime that provides
+asynchronous alternatives to some functionality in the `std` crate.
+It utilizes the `async` and `await` keywords.
+Form the official documentation, "blocking functions have been replaced with
+async functions and threads have been replaced with lightweight tasks."
+
+To use this runtime, add `async-std` as a dependency in `Cargo.toml`
+
+```toml
+async-std = { version = "1.9.0", features = ["attributes"] }
+```
+
+Then add the following attribute before the `main` function:
+
+```rust
+#[async_std::main]
+```
+
 ## Futures
 
 TODO: Add this section.
@@ -6110,12 +6226,20 @@ TODO: Add this section.
 
 Rust has built-in support for threads.
 
-Here is an example that scrapes web sites listed in the file `web-sites.txt`.
+Here is an example that scrapes web sites listed in a file.
 It reports the number of `img` tags found at each site.
 First it does this with a single thread and
-then with a separate thread for each site.
+then spawning a separate tasks for each site
+to enable using multiple threads.
 The elapsed time for each approach is output
 to show the speed benefit of using multiple threads.
+
+The code can be found at {% aTargetBlank
+"https://github.com/mvolkmann/rust-web-scrape", "rust-web-scrape" %}.
+With 19 web sites listed in `web-sites.txt` and
+running on a 2019 MacBook Pro laptop with 32GB of memory,
+the single-threaded approach took 16.18 seconds
+and the multi-threaded approach took 707 milliseconds.
 
 Here are the dependencies added in `Cargo.toml`:
 
@@ -6237,12 +6361,14 @@ fn main() {
         numbers.push(n);
     }
 
+    // The times given here are from a 2019 MacBook Pro laptop
+    // with 32GB of memory and 8 cores.
     // Multiplying all the numbers by two took 2.617 seconds using one thread.
     let start = Instant::now();
     numbers.iter_mut().for_each(|p: &mut f64| *p *= 2.0);
     println!("elapsed time: {:?}", start.elapsed());
 
-    // Using multiple threads on an 8-core machine took only 554ms.
+    // Using multiple threads took only 554ms.
     let start = Instant::now();
     numbers.par_iter_mut().for_each(|p: &mut f64| *p *= 2.0);
     println!("elapsed time: {:?}", start.elapsed());
