@@ -5365,6 +5365,8 @@ doc tests, unit tests, and integration tests.
 Examples of each kind of test can be found in the Rust application at
 {% aTargetBlank "https://github.com/mvolkmann/rust-poker", "rust-poker" %}.
 All of these tests are executed by entering `cargo test`.
+To run only test files whose names match a pattern,
+enter `cargo test {pattern}`.
 
 By default output to stdout is captured and not displayed.
 To run the tests and see this output, enter `cargo test -- --nocapture`.
@@ -5428,6 +5430,7 @@ mod tests {
     }
 
     #[test]
+    //#[ignore] to temporarily ignore a test
     fn it_deals() {
         let size = 5;
         let hand = Hand::deal(size);

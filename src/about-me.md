@@ -26,7 +26,7 @@ I have presented at many conferences including
 Nordic.js, Jfokus, NDC Oslo, Strange Loop, MidwestJS,
 No Fluff Just Stuff, and XML DevCon.
 
-I frequently writes articles on various software development topics.
+I frequently write articles on various software development topics.
 These can be found at
 <https://objectcomputing.com/resources/publications/mark-volkmann>.
 
