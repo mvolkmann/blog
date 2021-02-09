@@ -6385,6 +6385,75 @@ Use the guide on Tokio's docs to choose between blocking or async lock, then use
 The shared state chapter in Tokio's tutorial has more details.
 See https://tokio.rs/tokio/tutorial/shared-state.
 
+## Futures
+
+`Future` is a trait that enables defining code to be executed in the future.
+While it can be used directly, typically the keywords `async` and `await`
+are used to provide syntactic sugar that simplifies the code.
+
+The keyword `async` is added to the beginning of function definitions.
+It changes the function to be non-blocking and
+return an instance that implements the `Future` trait.
+
+All `async` functions return a `Future` even though
+they do not explicitly specify that in their return type.
+For example, add the following dependencies in `Cargo.toml`:
+
+```toml
+async-std = {version = "1.9.0", features = ["attributes"]}
+futures = "0.3.12"
+```
+
+Add the following in `src/main.rs`:
+
+```rust
+use async_std::fs::{File};
+use async_std::io::{BufReader, Result};
+use async_std::prelude::*;
+
+// The return type, in this case a Result, is wrapped in a Future.
+async fn sum_file(file_path: &str) -> Result<f64> {
+    let f = File::open(file_path).await?;
+    let reader = BufReader::new(f);
+    let mut sum = 0.0;
+    //for line in reader.lines() { // can use this with std::io::BufReader
+    let mut stream = reader.lines();
+    while let Some(Ok(line)) = stream.next().await {
+        if let Ok(n) = line.parse::<f64>() {
+            println!("n = {}", n);
+            sum += n;
+        }
+    }
+    Ok(sum)
+}
+
+#[async_std::main]
+async fn main() {
+    match sum_file("./numbers.txt").await {
+        Ok(sum) => println!("sum = {}", sum),
+        Err(e) => eprintln!("error = {}", e)
+    }
+}
+```
+
+`Future`s are lazy meaning they are not executed
+until the `await` keyword is applied to them.
+The `await` keyword triggers execution of the future
+and waits for it to complete.
+It is often placed at the end of a function call with a dot (period) before it.
+This makes it appear that `await` is a property, but it is actually a keyword.
+For example: `some_future.await;`.
+
+The `await` keyword can only be used in `async` functions or `async` blocks.
+An async block has the syntax `async { ... }`.
+The `move` keyword can be added to move ownership of variables
+defined outside the block that are used in the block into it.
+For example, `async move { ... }`.
+
+An "executor" is required in order to evaluate `Future`s.
+The most common way to add an executor is to include the attribute
+`#[async_std::main]` or `#[tokio::main]` before `async fn main`.
+
 ## async-std
 
 The `async-std` crate is a port of the `std` crate that provides provides
@@ -6410,10 +6479,6 @@ Then add the following attribute before the `main` function:
 ```rust
 #[async_std::main]
 ```
-
-## Futures
-
-TODO: Add this section.
 
 ## Threads
 
