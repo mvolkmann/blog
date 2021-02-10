@@ -7311,7 +7311,7 @@ Typically the data would be persisted to a database, but
 to keep the focus on the frameworks it will just be held in memory.
 This requires learning how each framework manages application state.
 
-All of this code can be found in GitHub at
+All of this code, along with benchmark results, can be found in GitHub at
 {% aTargetBlank "https://github.com/mvolkmann/rust-rest", "rust-rest" %}.
 
 The endpoints exposed will be:
@@ -7321,6 +7321,44 @@ The endpoints exposed will be:
 - POST /dog - to create a dog
 - PUT /dog/{id} - to update a dog
 - DELETE /dog/{id} - to delete a dog
+
+{% aTargetBlank
+"https://www.techempower.com/benchmarks/#section=intro&hw=ph&test=fortune",
+"TechEmpower" %} is a company that has been performing benchmarks of
+web application frameworks since 2013.
+They catalog community-provided code and results for a large number
+of frameworks performing the same set of tasks that include
+"JSON serialization, database access, and server-side template composition."
+The tests are run "on cloud instances and on physical hardware."
+They are rerun with the latest versions of each framework every few months.
+As of February 2021, five of the top 10 frameworks were implemented in Rust.
+Of these the most popular in terms of usage is actix.
+The Rust frameworks listed above had the following percentage
+performance scores compared to 100% for the fastest framework.
+For reference, a few non-Rust frameworks are included.
+
+| Framework      | Language   | Score      |
+| -------------- | ---------- | ---------- |
+| drogon         | C++        | 100%       |
+| actix          | Rust       | 98.0%      |
+| vertx          | Java       | 51.0%      |
+| greenlightning | Java       | 49.0%      |
+| warp           | Rust       | 22.4%      |
+| php            | PHP        | 14.1%      |
+| nodejs         | JavaScript | 13.7%      |
+| micronaut      | Java       | 13.5%      |
+| fastify        | JavaScript | 10.9%      |
+| express        | JavaScript | 8.9%       |
+| rocket         | Rust       | 5.0%       |
+| fastapi        | Python     | 7.8%       |
+| flask          | Python     | 3.5%       |
+| spring         | Java       | 3.5%       |
+| grails         | Java       | 1.7%       |
+| laravel        | PHP        | 0.7%       |
+| tide           | Rust       | not listed |
+
+Interestingly most of the frameworks evaluated
+are ones you have probably never heard of.
 
 ### Actix-web
 
@@ -7903,8 +7941,6 @@ async fn main() {
     warp::serve(routes).run(([127, 0, 0, 1], 1234)).await;
 }
 ```
-
-TODO: Implement REST services that use the postgres crate to support CRUD operations on the dogs table.
 
 ## <a name="webassembly">WebAssembly</a>
 
