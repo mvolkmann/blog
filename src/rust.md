@@ -7360,6 +7360,10 @@ For reference, a few non-Rust frameworks are included.
 Interestingly most of the frameworks evaluated
 are ones you have probably never heard of.
 
+One might conclude from this that actix is the only
+Rust framework that should be considered.
+Why start with one that is significantly slower?
+
 ### Actix-web
 
 This crate had a bad reputation for using unsafe code. See {% aTargetBlank
