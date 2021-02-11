@@ -470,7 +470,7 @@ is used to run `rustc` and the resulting executable.
 ## VS Code
 
 If using VS Code to edit Rust code there are two main extensions to consider,
-"Rust" and "rust analyzer". Both over similar features which include:
+"Rust" and "Rust-analyzer". Both over similar features which include:
 
 - syntax highlighting
 - code completion
@@ -495,6 +495,12 @@ Add the following in `settings.json`:
 Note that this extension only works if
 the opened folder contains a `Cargo.toml` file.
 See the [Cargo](#cargo) section for details on creating this.
+
+By default Rust-analyzer displays inferred types inline in code.
+This can be beneficial, but also verbose and distracting.
+It can be disabled in Settings by searching for "rust analyzer"
+and unchecking "Rust-analyzer > Inlay Hints: Type Hints".
+The inferred types can still be displayed by hovering over a variable.
 
 ## <a name="toml">TOML</a>
 
@@ -6483,6 +6489,31 @@ Then add the following attribute before the `main` function:
 ## Threads
 
 Rust has built-in support for threads.
+It uses native threads, not "green threads".
+But support for green threads (or "tasks") is available
+in popular crates including async-std and tokio.
+
+When writing to code to execute multiple blocks of code or functions
+there are four options to consider.
+
+1. Execute serially, in the order which it is called.
+1. Execute concurrently, taking turns using a single thread
+1. Execute in parallel using operating system threads
+1. Execute in parallel using tasks
+
+Let's see how these options are supported using
+what is built into Rust (`std`), and using popular crates.
+
+| Option                   | `std`                         | async-std | tokio |
+| ------------------------ | ----------------------------- | --------- | ----- |
+| serially                 |                               |           |       |
+| concurrent single thread | `thread::spawn(sync-closure)` |           |       |
+| parallel OS threads      |                               |           |       |
+| parallel tasks           | not supported                 |           |       |
+
+In addition, "channels" can be used to enable
+threads to communicate during their execution
+rather than waiting to get a result when they complete.
 
 Here is a simple example that spawns a number of threads
 that each sleep for a random duration,
@@ -7331,6 +7362,7 @@ of frameworks performing the same set of tasks that include
 "JSON serialization, database access, and server-side template composition."
 The tests are run "on cloud instances and on physical hardware."
 They are rerun with the latest versions of each framework every few months.
+
 As of February 2021, five of the top 10 frameworks were implemented in Rust.
 Of these the most popular in terms of usage is actix.
 The Rust frameworks listed above had the following percentage
@@ -7359,6 +7391,8 @@ For reference, a few non-Rust frameworks are included.
 
 Interestingly most of the frameworks evaluated
 are ones you have probably never heard of.
+
+One reason to care about performance is cloud costs.
 
 One might conclude from this that actix is the only
 Rust framework that should be considered.
