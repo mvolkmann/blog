@@ -47,7 +47,7 @@ containing the following:
   "arrowParens": "avoid",
   "bracketSpacing": false,
   "singleQuote": true,
-  "svelteSortOrder": "scripts-markup-styles",
+  "svelteSortOrder": "options-scripts-markup-styles",
   "trailingComma": "none"
 }
 ```

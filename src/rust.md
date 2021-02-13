@@ -6391,101 +6391,6 @@ Use the guide on Tokio's docs to choose between blocking or async lock, then use
 The shared state chapter in Tokio's tutorial has more details.
 See https://tokio.rs/tokio/tutorial/shared-state.
 
-## Futures
-
-`Future` is a trait that enables defining code to be executed in the future.
-While it can be used directly, typically the keywords `async` and `await`
-are used to provide syntactic sugar that simplifies the code.
-
-The keyword `async` is added to the beginning of function definitions.
-It changes the function to be non-blocking and
-return an instance that implements the `Future` trait.
-
-All `async` functions return a `Future` even though
-they do not explicitly specify that in their return type.
-For example, add the following dependencies in `Cargo.toml`:
-
-```toml
-async-std = {version = "1.9.0", features = ["attributes"]}
-futures = "0.3.12"
-```
-
-Add the following in `src/main.rs`:
-
-```rust
-use async_std::fs::{File};
-use async_std::io::{BufReader, Result};
-use async_std::prelude::*;
-
-// The return type, in this case a Result, is wrapped in a Future.
-async fn sum_file(file_path: &str) -> Result<f64> {
-    let f = File::open(file_path).await?;
-    let reader = BufReader::new(f);
-    let mut sum = 0.0;
-    //for line in reader.lines() { // can use this with std::io::BufReader
-    let mut stream = reader.lines();
-    while let Some(Ok(line)) = stream.next().await {
-        if let Ok(n) = line.parse::<f64>() {
-            println!("n = {}", n);
-            sum += n;
-        }
-    }
-    Ok(sum)
-}
-
-#[async_std::main]
-async fn main() {
-    match sum_file("./numbers.txt").await {
-        Ok(sum) => println!("sum = {}", sum),
-        Err(e) => eprintln!("error = {}", e)
-    }
-}
-```
-
-`Future`s are lazy meaning they are not executed
-until the `await` keyword is applied to them.
-The `await` keyword triggers execution of the future
-and waits for it to complete.
-It is often placed at the end of a function call with a dot (period) before it.
-This makes it appear that `await` is a property, but it is actually a keyword.
-For example: `some_future.await;`.
-
-The `await` keyword can only be used in `async` functions or `async` blocks.
-An async block has the syntax `async { ... }`.
-The `move` keyword can be added to move ownership of variables
-defined outside the block that are used in the block into it.
-For example, `async move { ... }`.
-
-An "executor" is required in order to evaluate `Future`s.
-The most common way to add an executor is to include the attribute
-`#[async_std::main]` or `#[tokio::main]` before `async fn main`.
-
-## async-std
-
-The `async-std` crate is a port of the `std` crate that provides provides
-asynchronous alternatives to some its functionality .
-Programs that wish to use it can replace references
-to the `std` namespace with `async_std`.
-It utilizes the `async` and `await` keywords.
-Form the official documentation, "blocking functions have been replaced with
-async functions and threads have been replaced with lightweight tasks."
-
-Prefer using the tokio runtime instead of async-std
-because it is very mature and supports more features.
-These cannot be mixed, so you must choose one.
-
-To use this runtime, add `async-std` as a dependency in `Cargo.toml`
-
-```toml
-async-std = { version = "1.9.0", features = ["attributes"] }
-```
-
-Then add the following attribute before the `main` function:
-
-```rust
-#[async_std::main]
-```
-
 ## Threads
 
 Rust has built-in support for threads.
@@ -6503,6 +6408,8 @@ there are four options to consider.
 
 Let's see how these options are supported using
 what is built into Rust (`std`), and using popular crates.
+
+TODO: FINISH THIS TABLE!
 
 | Option                   | `std`                         | async-std | tokio |
 | ------------------------ | ----------------------------- | --------- | ----- |
@@ -6691,9 +6598,6 @@ async fn main() -> Result<()> {
 }
 ```
 
-TODO: When using threads do you always need to add
-TODO: use of a runtime such as async_std or tokio?
-
 {% aTargetBlank "https://github.com/rayon-rs/rayon", "rayon" %}
 is a Rust "data parallelism library".
 It supports the parallel iterator methods `par_iter` and `par_iter_mut`.
@@ -6731,6 +6635,146 @@ fn main() {
     println!("elapsed time: {:?}", start.elapsed());
 }
 ```
+
+It is often necessary to coordinate access to
+data that is shared between threads.
+Common ways to do this include using a `Mutex` or `RwLock`.
+There are multiple implementations available for each of these.
+Consider using those in `std::sync` and the `parking_lot` crate.
+
+The `parking_lot` versions of `Mutex` and `RwLock`
+are generally preferred over the `std::sync` versions for reasons described at
+{% aTargetBlank "https://docs.rs/parking_lot/0.11.1/parking_lot/type.Mutex.html", "parking_lot::Mutex" %}
+and
+{% aTargetBlank "https://docs.rs/parking_lot/0.11.1/parking_lot/type.RwLock.html", "parking_lot::RwLock" %}.:w
+The reasons include better poison handling, less memory usage,
+better fairness of lock sharing, and better performance.
+
+To gain exclusive access to a value wrapped in a `Mutex`,
+call its `lock` method. The lock is automatically released
+when the value returned by this method goes out of scope.
+
+To gain non-exclusive read access to a value wrapped in a `RwLock`,
+call its `read` method. There can be any number of concurrent readers.
+To gain exclusive write access to a value wrapped in a `RwLock`,
+call its `write` method.
+This will block until there are no other readers or writers.
+Like with a `Mutex`, the lock is automatically released
+when the value returned by the `read` or `write` method goes out of scope.
+
+A mutex is "poisoned" when a thread that holds the lock panics.
+This causes attempts to acquire the lock in other threads to fail,
+The `lock` method returns a `LockResult`
+which enables callers to detect this situation.
+
+A `RwLock` is poisoned when a thread that
+holds a write lock (not a read lock) panics.
+This causes attempts to acquire the lock in other threads to fail,
+The `read` and `write` methods returns a `LockResult`
+which enables callers to detect this situation.
+
+## Futures and async/await
+
+`Future` is a trait that enables defining code to be executed in the future.
+While it can be used directly, typically the keywords `async` and `await`
+are used to provide syntactic sugar that simplifies the code.
+
+The keyword `async` is added to the beginning of function definitions or blocks.
+It changes the function to be non-blocking and
+return an instance that implements the `Future` trait.
+
+All `async` functions return a `Future` even though
+they do not explicitly specify that in their return type.
+For example, add the following dependencies in `Cargo.toml`:
+
+```toml
+async-std = {version = "1.9.0", features = ["attributes"]}
+futures = "0.3.12"
+```
+
+Using `async` requires a futures executor like those
+provided by the external crates async-std and tokio.
+While you could write your own executor or write low-level routines
+that return futures and wake them after some hardware event,
+in practice typically async-std or tokio is used.
+
+Add the following in `src/main.rs`:
+
+```rust
+use async_std::fs::{File};
+use async_std::io::{BufReader, Result};
+use async_std::prelude::*;
+
+// The return type, in this case a Result, is wrapped in a Future.
+async fn sum_file(file_path: &str) -> Result<f64> {
+    let f = File::open(file_path).await?;
+    let reader = BufReader::new(f);
+    let mut sum = 0.0;
+    //for line in reader.lines() { // can use this with std::io::BufReader
+    let mut stream = reader.lines();
+    while let Some(Ok(line)) = stream.next().await {
+        if let Ok(n) = line.parse::<f64>() {
+            println!("n = {}", n);
+            sum += n;
+        }
+    }
+    Ok(sum)
+}
+
+#[async_std::main]
+async fn main() {
+    match sum_file("./numbers.txt").await {
+        Ok(sum) => println!("sum = {}", sum),
+        Err(e) => eprintln!("error = {}", e)
+    }
+}
+```
+
+`Future`s are lazy meaning they are not executed
+until the `await` keyword is applied to them.
+The `await` keyword triggers execution of the future
+and waits for it to complete.
+It is often placed at the end of a function call with a dot (period) before it.
+This makes it appear that `await` is a property, but it is actually a keyword.
+For example: `some_future.await;`.
+
+The `await` keyword can only be used in `async` functions or `async` blocks.
+An async block has the syntax `async { ... }`.
+The `move` keyword can be added to move ownership of variables
+defined outside the block that are used in the block into it.
+For example, `async move { ... }`.
+
+An "executor" is required in order to evaluate `Future`s.
+The most common way to add an executor is to include the attribute
+`#[async_std::main]` or `#[tokio::main]` before `async fn main`.
+
+## async-std
+
+The `async-std` crate is a port of the `std` crate that provides provides
+asynchronous alternatives to some its functionality .
+Programs that wish to use it can replace references
+to the `std` namespace with `async_std`.
+It utilizes the `async` and `await` keywords.
+Form the official documentation, "blocking functions have been replaced with
+async functions and threads have been replaced with lightweight tasks."
+
+Prefer using the tokio runtime instead of async-std
+because it is very mature and supports more features.
+These cannot be mixed, so you must choose one.
+
+To use this runtime, add `async-std` as a dependency in `Cargo.toml`
+
+```toml
+async-std = { version = "1.9.0", features = ["attributes"] }
+```
+
+Then add the following attribute before the `main` function:
+
+```rust
+#[async_std::main]
+```
+
+## Tokio
 
 {% aTargetBlank "https://crates.io/crates/tokio", "tokio" %} is a popular crate
 that makes implementing asynchronous code even easier.
@@ -6777,42 +6821,7 @@ async fn main() {
 }
 ```
 
-It is often necessary to coordinate access to
-data that is shared between threads.
-Common ways to do this include using a `Mutex` or `RwLock`.
-There are multiple implementations available for each of these.
-Consider using those in `std::sync` and the `parking_lot` crate.
-
-The `parking_lot` versions of `Mutex` and `RwLock`
-are generally preferred over the `std::sync` versions for reasons described at
-{% aTargetBlank "https://docs.rs/parking_lot/0.11.1/parking_lot/type.Mutex.html", "parking_lot::Mutex" %}
-and
-{% aTargetBlank "https://docs.rs/parking_lot/0.11.1/parking_lot/type.RwLock.html", "parking_lot::RwLock" %}.:w
-The reasons include better poison handling, less memory usage,
-better fairness of lock sharing, and better performance.
-
-To gain exclusive access to a value wrapped in a `Mutex`,
-call its `lock` method. The lock is automatically released
-when the value returned by this method goes out of scope.
-
-To gain non-exclusive read access to a value wrapped in a `RwLock`,
-call its `read` method. There can be any number of concurrent readers.
-To gain exclusive write access to a value wrapped in a `RwLock`,
-call its `write` method.
-This will block until there are no other readers or writers.
-Like with a `Mutex`, the lock is automatically released
-when the value returned by the `read` or `write` method goes out of scope.
-
-A mutex is "poisoned" when a thread that holds the lock panics.
-This causes attempts to acquire the lock in other threads to fail,
-The `lock` method returns a `LockResult`
-which enables callers to detect this situation.
-
-A `RwLock` is poisoned when a thread that
-holds a write lock (not a read lock) panics.
-This causes attempts to acquire the lock in other threads to fail,
-The `read` and `write` methods returns a `LockResult`
-which enables callers to detect this situation.
+TODO: Add information from <https://github.com/mvolkmann/rust-parallel-options>.
 
 ## Standard Library
 
