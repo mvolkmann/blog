@@ -6389,7 +6389,7 @@ Alice replied:
 Use the guide on Tokio's docs to choose between blocking or async lock, then use either Tokio or async-std's lock if you need an async lock, choosing the same as the one you use as runtime, or std/parking_lot if you need a blocking lock.
 
 The shared state chapter in Tokio's tutorial has more details.
-See https://tokio.rs/tokio/tutorial/shared-state.
+See <https://tokio.rs/tokio/tutorial/shared-state>.
 
 ## Threads
 
