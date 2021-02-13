@@ -394,6 +394,7 @@ so it can be re-executed by simply pressing the button.
 
 Press the "DEBUG" button to open a popup for choosing between
 "Debug" and "Release" build modes.
+A debug build is faster because it performs less optimization.
 
 Press the "STABLE" button to open a popup for choosing a Rust version
 which can be "Stable channel" (default), "Beta channel", or "Nightly channel".
@@ -403,15 +404,14 @@ Press the ellipsis after the version button to open a popup
 with the following options:
 
 - "Edition" sets the Rust edition to 2018 (default) or 2015
-- "Backtrace" to disable (default) or enable
-  display of backtraces when a panic occurs  
-  Enabling this slows performance a bit.
+- "Backtrace" to disable (default) or enable display of backtraces
+  when a panic occurs which slows performance a bit.
 
 Press the "SHARE" button to open a panel on the right side
 containing the following links:
 
-- "Permalink to the playground" changes the URL to one which will
-  recall the current code, set to run with the current version of Rust.
+- "Permalink to the playground" changes the URL to one which will recall
+  the current code, set to run with the currently selected version of Rust.
 - "Direct link to the gist" navigates to the
   URL of the GitHub Gist where the code is stored.
   The code can be viewed, but not executed from here.
@@ -427,7 +427,8 @@ containing the following links:
 Press the "TOOLS" button to open a popup with the following options:
 
 - "Rustfmt" formats the code using the `rustfmt` tool.
-- "Clippy" runs the Clippy linter on the code.
+- "Clippy" runs the Clippy linter on the code which can
+  provide better error messages and suggestions than the compiler.
 - "Miri" runs the program using the
   {% aTargetBlank "https://github.com/rust-lang/miri", "Miri interpreter" %}
   which is an experimental interpreter for Rust's
@@ -437,29 +438,31 @@ Press the "TOOLS" button to open a popup with the following options:
   all the macro calls expanded in order to see what they actually do.
   For example, try this with a `main` function that
   just calls the `println!` macro to print "Hello".
-  You would never want to write this code yourself.
+  You would not want to write this code yourself.
 
 Press the "CONFIG" button to open a popup with the following options:
 
-- "Style" to switch between "SIMPLE" (no line numbers)
-  and "ADVANCED" (line numbers)
-- "Keybinding" to choose between keybindings supported by the
-  {% aTargetBlank "https://github.com/ajaxorg/ace", "Ace" %} (Cloud9) editor  
-  These include ace, emacs, sublime, vim, and vscode.
-- "Theme" to choose from 30+ themes including
-  cobalt, github, solarized light, solarized dark
-- "Pair Characters" to automatically insert
-  closing `)`, `}`, and `]` characters after `(`, `{`, and `[` characters
-- "Orientation" to arrange panes horizontally, vertically,
-  or automatically choose based on window size
-- and advanced options to control generated assembly code
+- "Style" enables switching between "SIMPLE" (no line numbers)
+  and "ADVANCED" (line numbers).
+- "Keybinding" enables choosing between keybindings supported by the
+  {% aTargetBlank "https://github.com/ajaxorg/ace", "Ace" %} (Cloud9) editor
+  which is used by this tool.
+  Options include ace, emacs, sublime, vim, and vscode.
+- "Theme" enables choosing between 30+ themes including
+  cobalt, github, solarized light, solarized dark.
+- "Pair Characters" automatically inserts
+  closing `)`, `}`, and `]` characters after `(`, `{`, and `[` characters.
+- "Orientation" enables choosing how panes are arranged.
+  Options include Horizontal, Vertical,
+  and Automatic which chooses based on window size.
+- Advanced options control generated assembly code.
 
 There doesn't seem to be a way to select a font for the code.
 
 Configuration options are saved in browser Local Storage
 so they can be applied to future sessions.
 The most recently entered code is also saved in Local Storage,
-but previously entered code is not.
+but previously entered code is not retained.
 
 ## Compiling and Running
 
@@ -467,7 +470,7 @@ Rust source files have a `.rs` file extension.
 
 To compile a Rust source file that defines a `main` function,
 creating an executable with the same name and no file extension,
-and run it:
+and run the executable:
 
 - open a terminal (or Windows Command Prompt),
 - cd to the directory containing the `.rs` file
@@ -483,7 +486,7 @@ fn main() {
 }
 ```
 
-Note that calls to names that end in `!` (like `println!`)
+Note that calls to names that end in `!`, like `println!`,
 are calls to a [macro](#macros) rather than a function.
 
 Typically the `rustc` command is not used directly.
@@ -494,43 +497,45 @@ is used to run `rustc` and the resulting executable.
 ## VS Code
 
 If using VS Code to edit Rust code there are two main extensions to consider,
-"Rust" and "Rust-analyzer". Both over similar features which include:
+"Rust" and "Rust-analyzer". Both offer similar features which include:
 
 - syntax highlighting
 - code completion
 - code formatting
 - type documentation on hover
-- linting with error indicators with ability to apply suggestions
+- linting with error indicators and the ability to apply suggestions
 - code snippets
 - rename refactoring
 - debugging
 - build tasks
 
-Add the following in `settings.json`:
+To enable Rust code formatting, add the following in `settings.json`
+where FORMATTER is "rust-lang.rust" for the Rust extension
+and "matklad.rust-analyzer" for the "Rust-analyzer" extension.
 
 ```json
   "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust",
+    "editor.defaultFormatter": FORMATTER,
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
 ```
 
-Note that this extension only works if
-the opened folder contains a `Cargo.toml` file.
-See the [Cargo](#cargo) section for details on creating this.
-
-By default Rust-analyzer displays inferred types inline in code.
-This can be beneficial, but also verbose and distracting.
-It can be disabled in Settings by searching for "rust analyzer"
+By default Rust-analyzer displays inferred types inline in code,
+which can be beneficial but it is also verbose and distracting.
+This can be disabled in Settings by searching for "rust analyzer"
 and unchecking "Rust-analyzer > Inlay Hints: Type Hints".
-The inferred types can still be displayed by hovering over a variable.
+Inferred types can still be displayed by hovering over a variable.
+
+Note that these extensions only work properly if the root folder
+of a Rust project is opened and it contains a `Cargo.toml` file.
+See the [Cargo](#cargo) section for details on creating this.
 
 ## <a name="toml">TOML</a>
 
 {% aTargetBlank "https://github.com/toml-lang/toml", "TOML" %}
 is a configuration file format that maps to a hash table.
-The Rust Cargo tool uses this for its `cargo.toml` configuration file.
+The Rust Cargo tool uses this format for `Cargo.toml` configuration files.
 
 Each key/value pair is described by a line with the syntax `key = value`.
 Keys are not surrounded by any delimiters.
@@ -540,8 +545,8 @@ array (ordered list of values),
 and table (collection of key/value pairs).
 String values are surrounded by double quotes.
 Datetime values have the format `yyyy-mm-ddThh:mm:ss`.
-The time portion can be omitted or be followed by a time zone
-(`Z` for UTC or `+hh:mm` for an offset).
+The time portion can be omitted or be followed by a time zone,
+`Z` for UTC or `+hh:mm` for an offset.
 Array elements are surrounded by square brackets and separated by commas.
 
 Comments begin with the `#` character and extend to the end of the line.
