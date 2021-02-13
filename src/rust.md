@@ -15,36 +15,33 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://www.rust-lang.org/", "Rust" %}
-is a programming language
+is a programming language with the goal of
 "empowering everyone to build reliable and efficient software."
 
 Features of Rust include:
 
 - performance on par with C/C++
 - memory-efficiency
+- ownership model which guarantees memory-safety and thread-safety
 - rich, static type system with type inference
-- ownership model to guarantee memory-safety and thread-safety
-- targets {% aTargetBlank "https://llvm.org", "LLVM" %}  
-  Rust programs Runs on a wide variety of platforms targeted by LLVM.
+- targets {% aTargetBlank "https://llvm.org", "LLVM" %} to
+  enable Rust programs to run on a wide variety of platforms
 - ability to call and be called by languages that support
-  the C Application Binary Interface (ABI)
+  the C Application Binary Interface (ABI) with no overhead
   (includes C, C++, Go, Java, Python, and Ruby)
-  with no overhead
-- functional  
-  Functions can be stored in variables,
+- functional - Functions can be stored in variables,
   passed to functions, and returned from functions.
-- somewhat object-oriented  
-  Structs can have fields and methods (like classes).
-  these can be private or public (encapsulation).
+- somewhat object-oriented - Structs can have fields and methods (like classes).
+  These can be private or public (encapsulation).
   Structs can implement traits (like interfaces).
   Traits can be used as types (achieves polymorphism).
-  Structs can have fields whose types are other structs (composition),
-  but they cannot inherit from other structs.
+  Structs can have fields whose types are other struct types
+  (achieves composition), but they cannot inherit from other structs.
+- self-hosted (implemented in itself) since 2011
 
 Rust was created at Mozilla by Graydon Hoare,
 with contributions from Dave Herman, Brendan Eich, and others.
 It was formally announced in 2010.
-Rust has been self-hosted (implemented in itself) since 2011.
 Version 1.0 was released in May 2015.
 A new point release is made every six weeks.
 
@@ -54,8 +51,15 @@ From {% aTargetBlank "https://doc.rust-lang.org/edition-guide/editions/",
 Each edition brings together the features that have landed into
 a clear package, with fully updated documentation and tooling."
 
+The {% aTargetBlank "https://foundation.rust-lang.org", "Rust Foundation" %}
+was announced in February 2021.
+It is "an independent non-profit organization to
+steward the Rust programming language and ecosystem."
+The initial member companies include
+AWS, Huawei, Google, Microsoft, and Mozilla.
+
 Rust developers are referred to as "Rustaceans"
-which was derived from the word "crustaceans".
+which is derived from the word "crustaceans".
 Rust mascot is Ferris the crab, a crustacean.
 The name is fitting because ferrous metals are subject to rust.
 Images of Ferris can be found at {% aTargetBlank
@@ -68,10 +72,11 @@ Images of Ferris can be found at {% aTargetBlank
 The best way to get software performance is to
 use a "systems" language like C, C++, or Rust.
 One reason these languages are fast is because
-they do not provide automatic garbage collection
+they do not provide automatic garbage collection,
 which is slow and can run at unpredictable times.
 Systems languages also allow control over whether
-data is on the stack (faster) or on the heap (slower).
+data is on the stack (faster, but data must have fixed size)
+or on the heap (slower, but data can vary in size).
 
 **Safety:**
 
@@ -83,7 +88,7 @@ memory leaks (failing to free memory that is no longer needed),
 and double frees (freeing memory more than once).
 These result in unpredictable behavior.
 Threading issues include race conditions where the order in which
-code runs is unpredictable, resulting in somewhat random results.
+code runs is unpredictable, leading to somewhat random results.
 Rust addresses both of these issues,
 resulting in code that is less likely to contain bugs.
 
@@ -99,12 +104,15 @@ allowed to modify data significantly reduces these errors.
 
 Manual garbage collection, where developers are responsibly for
 allocating and freeing memory, is error prone.
-Rust uses an ownership model where code is explicit about
-the single scope that currently owns each piece of data.
-unless ownership is transferred to another scope,
-when that scope ends the data can be safely freed
+Automatic garbage collection is relatively slow and
+requires runtime support which consumes memory.
+Rust does not use either form of garbage collection.
+It instead enforces an ownership model where code is explicit
+about the single scope that currently owns each piece of data.
+Unless ownership is transferred to another scope,
+when that scope ends the data is safely freed
 because no other scope can possibly be using the data.
-The "borrow checker" in the Rust compiler enforces this.
+The "borrow checker" in the Rust compiler enforces this at compile time.
 
 **Zero-Cost Abstractions:**
 
@@ -116,22 +124,22 @@ Rust supports many abstractions that make code more clear,
 but are optimized by the compiler so there is little to no impact
 on performance or the amount of machine code that is generated.
 One example is the use of generic functions that are compiled
-to separate versions for each concrete type used with them
-which eliminates the need for runtime dynamic dispatch
-(referred to as "monomorphism").
+to separate versions for each concrete type with which they are used.
+This eliminates the need for runtime dynamic dispatch
+and is referred to as "monomorphism".
 
 **Control over number sizes:**
 
 One way to achieve performance in computationally intensive tasks
 is to store collections of numbers in contiguous memory for fast access
-and control the number of bytes used by each number.
+and specify the number of bytes used by each number.
 Rust supports a wide variety of number types for
 integer and floating point values of specific sizes.
 
 **WebAssembly:**
 
-WebAssembly (abbreviated WASM) is a binary instruction format
-for a stack-based virtual machine that is supported by modern web browsers
+WebAssembly (abbreviated WASM) is a binary instruction format for
+a stack-based virtual machine that is supported by modern web browsers
 (currently Chrome, Edge, Firefox, and Safari).
 WASM code typically executes much faster than
 equivalent code written in JavaScript.
@@ -144,6 +152,7 @@ the runtime of the source language must be included.
 Rust is a great choice for targeting WASM because it has a very small runtime
 compared to options like Python, so it downloads faster.
 
+**Complexity Tradeoff**
 Systems languages tend to be more complex that non-systems languages,
 requiring more time to learn and more time to write software in them.
 Rust is no exception.
@@ -152,17 +161,17 @@ in order to gain the benefits described above.
 On the positive side, the Rust compiler catches many errors
 that would only be discovered at runtime with other systems languages.
 The Rust compiler also provides very detailed error messages
-that include suggestions on how to correct the errors.
+that often include suggestions on how to correct the errors.
 
 ## Why use another programming language
 
-**Performance:**
+**Not Performance Critical:**
 
 If programming languages that provided automatic memory management
 (such as JavaScript/TypeScript, Python, and Go)
 are fast enough for the target application,
 and garbage collection pauses are not an issue,
-the effort required to use Rust is hard to justify.
+the effort required to learn and use Rust may be hard to justify.
 For many developers, this is the case for everything they write.
 
 **Learning Curve:**
@@ -173,25 +182,34 @@ Just learning how to use strings in Rust is a challenge.
 Developers must constantly decide whether
 values or references should be passed to functions.
 They must think about whether values have sizes that are known at compile-time.
-And generics are used heavily (for example, in error handling),
+And generic types are used heavily (for example, in error handling),
 and often generic types are nested.
 
-**Processor target:**
+**Incompatible Libraries:**
+
+If an application needs to use non-Rust libraries that are difficult to use
+from Rust, it may be better to use a more compatible programming language.
+
+**Processor Target:**
 
 If the target platform uses a processor type that is not a target of LLVM,
 Rust cannot currently produce code that will run on it.
 
 ## Installing
 
-Rust is installed using the {% aTargetBlank "", "rustup" %} tool.
+Rust is installed using the
+{% aTargetBlank "https://github.com/rust-lang/rustup/blob/master/README.md",
+"rustup" %} tool.
 This enables having multiple versions of Rust installed
 and switching between them.
 
-To install rustup in macOS, install {% aTargetBlank "", "homebrew" %}
-and then enter `brew install rustup`.
-"Command Line Tools for Xcode" must also be installed from {% aTargetBlank
-"https://developer.apple.com/downloads/more", "developer.apple.com" %}
-which requires a free Apple ID.
+To install rustup in macOS
+
+1. install {% aTargetBlank "", "homebrew" %}
+1. enter `brew install rustup`
+1. install "Command Line Tools for Xcode" from {% aTargetBlank
+   "https://developer.apple.com/downloads/more", "developer.apple.com" %}
+   (requires a free Apple ID)
 
 To install rustup in Linux (or macOS), enter the following command:
 
@@ -218,27 +236,28 @@ When using the fish shell, add the following in `.config/fish/config.fish`:
 set -x PATH $PATH $HOME/.cargo/bin
 ```
 
-Verify installation by entering `rustc --version`.
+Verify installation by entering `rustc --version`
+which should output the version of the `rustc` command that is installed.
 
-Once installed, to update the version of Rust enter `rustup update`.
+Once installed, to update the version of all the Rust tools
+enter `rustup update`.
 
 ## Learning Resources
 
-Resources are learning Rust include:
+Resources for learning Rust include:
 
 - `rustup doc` command
 
-  - displays local documentation installed along with Rust
-    in the default web browser
-  - can read even when offline
-  - includes
-    - API documentation
-    - "The Rust Programming Language" book
-    - "Rust by Example" book
-    - "The Rust Reference" book which is more detailed
-      than "The Rust Programming Language" book
-    - "The Cargo Book" book
-    - and much more
+  This displays local documentation that is installed along with Rust
+  in the default web browser. It can be read even when offline and includes:
+
+  - API documentation
+  - "The Rust Programming Language" book
+  - "Rust by Example" book
+  - "The Rust Reference" book which is more detailed
+    than "The Rust Programming Language" book
+  - "The Cargo Book" book
+  - and much more
 
 - {% aTargetBlank "https://www.rust-lang.org/", "Rust website" %}
 
@@ -263,13 +282,9 @@ Resources are learning Rust include:
 - {% aTargetBlank "https://doc.rust-lang.org/std/index.html", "Rust Standard Library" %}
   API documentation
 
-- {% aTargetBlank "https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/", "Programming Rust" %} book
+- {% aTargetBlank "https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/", "Programming Rust" %} book (O'Reilly)
 
-  - from O'Reilly
-
-- {% aTargetBlank "https://www.manning.com/livevideo/rust-in-motion?a_aid=cnichols&a_bid=6a993c2e", "Rust in Motion" %} video course
-
-  - from Manning
+- {% aTargetBlank "https://www.manning.com/livevideo/rust-in-motion?a_aid=cnichols&a_bid=6a993c2e", "Rust in Motion" %} video course (Manning)
 
 - {% aTargetBlank
   "https://www.youtube.com/watch?v=Az3jBd4xdF4&list=PLLqEtX6ql2EyPAZ1M2_C0GgVd4A-_L4_5",
@@ -288,7 +303,7 @@ Resources are learning Rust include:
 - {% aTargetBlank "https://exercism.io/tracks/rust", "exercism Rust track" %}
 
   - "Code practice and mentorship for everyone"
-  - "exercises across 52 languages"
+  - exercism includes "exercises across 52 languages"
 
 - {% aTargetBlank "https://github.com/ctjhoa/rust-learning", "rust-learning" %}
 
@@ -299,12 +314,17 @@ Resources are learning Rust include:
 - [Cargo](#cargo)
   - a command-line utility for building and running Rust programs
 - [crate](#crates)
-  - a tree of modules
-  - two types, binary (bin) or library (lib)
+  - a Rust program (binary) or library
+  - contains a tree of modules
+- {% aTargetBlank "https://crates.io/", "crates.io" %}
+  - repository of Rust crates, similar to npm for JavaScript
 - [enum](#enums)
   - a named type whose values come from a list of named variants
   - in Rust, these variants can have associated data
   - a key feature of Rust error handling
+- future
+  - represents the result of an operation that will complete in the future,
+    similar to a JavaScript `Promise`
 - generic
   - a parameterized type that enables storing and using multiple types of data
 - lifetime
@@ -318,7 +338,7 @@ Resources are learning Rust include:
   - set of related values such as constants and functions
 - package
   - `cargo` feature for building, testing, and sharing crates
-  - set of crates described by a `Cargo.toml` file;
+  - set of crates described by a `Cargo.toml` file
   - contains any number of binaries and 0 or 1 library
 - panic
   - represents an unrecoverable error that causes a program to terminate,
@@ -343,6 +363,9 @@ from {% aTargetBlank "https://crates.io/", "crates.io" %}
 and crates from the
 {% aTargetBlank "https://rust-lang-nursery.github.io/rust-cookbook/",
 "Rust Cookbook" %}.
+
+The example code shown in the screenshot below
+will be more clear after structs and traits are explained.
 
 <img alt="Rust Playground" style="width: 100%"
   src="/blog/assets/rust-playground.png?v={{pkg.version}}"
