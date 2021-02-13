@@ -372,7 +372,7 @@ will be more clear after structs and traits are explained.
   title="Rust Playground">
 
 All of the code must be entered in a single editor pane,
-simulating all of it being in a single file.
+simulating being in the single source file `main.rs`.
 
 Press the ellipsis after the "RUN" button
 to open a popup with the following options:
@@ -380,7 +380,8 @@ to open a popup with the following options:
 - "Run" to build and run the code (`cargo run`)
 - "Build" to only build the code (`cargo build`)
 - "Test" to build the code and run the tests (`cargo test`)  
-  Tests must be preceded by `#[test]` and no `main` function can be present.
+  Test functions must be preceded by `#[test]`
+  and no `main` function can be present.
 - "ASM" to build the code and show the generated assembly code
 - "LLVM IR" to build the code and show the generated
   LLVM intermediate representation (IR)
@@ -389,7 +390,7 @@ to open a popup with the following options:
 - "WASM" to build a WebAssembly module for use in web browsers
 
 The "RUN" button will change to the last selected option
-so it can be re-executed by pressing the button.
+so it can be re-executed by simply pressing the button.
 
 Press the "DEBUG" button to open a popup for choosing between
 "Debug" and "Release" build modes.
