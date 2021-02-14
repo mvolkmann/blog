@@ -566,7 +566,7 @@ The following table describes the `cargo` subcommands:
 
 | Subcommand    | Description                                                                             |
 | ------------- | --------------------------------------------------------------------------------------- |
-| `bench`       | runs benchmarks for the current project                                                 |
+| `bench`       | runs benchmarks for the current project which are special kinds of tests                |
 | `build`       | builds current project in the `target` directory                                        |
 | `check`       | verifies current project builds without errors,<br>without generating code              |
 | `clean`       | deletes `target` directory                                                              |
@@ -797,6 +797,7 @@ Custom attributes are implemented by defining {% aTargetBlank
 
 ## Formatted Print
 
+The `std` namespace, pronounced "stood", defines many commonly used values.
 The `std::fmt` namespace defines macros that format text.
 
 | Macro Name  | Description                           |
@@ -1573,13 +1574,32 @@ before a reference to it can use it.
 
 Lifetime annotations only apply to references.
 All reference parameters and reference return types have a lifetime,
-but the Rust compiler automatically determines them in most cases.
-When it cannot, you must explicitly specify them.
-This is typically only needed when
-there are multiple reference parameters
-and more than one of them can be returned.
-Usually the same lifetime is used on
-all of the reference parameters AND on the return reference type.
+but in most cases the Rust compiler automatically determines them.
+It does so using these three simple "lifetime elision" rules:
+
+1. Each parameter with a reference type and no specified lifetime parameter
+   is assigned a unique lifetime parameter.
+1. If all the reference parameters now have the same lifetime
+   and the return type is a reference,
+   it is assigned the same lifetime as the reference parameters.
+1. If the function is a method
+   (indicated by the first parameter having the name `self`),
+   the `self` parameter is a reference (`&self` or `&mut self`),
+   and the return type is a reference,
+   the `self` reference and the return type reference
+   are given the same lifetime parameter.
+   The reason for this is that it is common for such a method
+   to return a reference to part of `self`.
+
+If after applying these rules to a function whose return type is a reference
+the lifetime of the return type is still unknown,
+the compiler outputs a "missing lifetime specifier".
+This means that lifetimes must be explicitly specified.
+Typically explicit lifetime parameters are only needed when
+there are multiple reference parameters and the return type is a reference.
+When this is the case,
+often the same explicit lifetime parameter is added to
+all of the reference parameters AND the return reference type.
 
 Lifetime annotations used in function signatures are
 declared by listing them in angle brackets just like generic types.
