@@ -251,7 +251,9 @@ Resources for learning Rust include:
   This displays local documentation that is installed along with Rust
   in the default web browser. It can be read even when offline and includes:
 
-  - API documentation
+  - API documentation  
+    When reading API documentation, if a "Go to latest version" link
+    appears in the page header, indicating you are not looking at the latest version of the documentation, click it to see the latest.
   - "The Rust Programming Language" book
   - "Rust by Example" book
   - "The Rust Reference" book which is more detailed
@@ -762,37 +764,38 @@ a doc comment with an "Examples" section.
 Rust attributes are like "decorators" in other programming languages.
 They annotate an item in order to change its behavior.
 An attribute can be specified
-immediately before an item with the syntax `#[attr]`
-or inside the item with the syntax `#![attr]`.
+immediately before an item with the syntax `#[attr]`,
+inside the block of an item with the syntax `#![attr]`, or at the top level.
 When used at the top level, `#![attr]` specifies a crate-wide attribute.
 
 The following table summarizes commonly used built-in attributes.
 
-| Attribute                        | Description                                                                  |
-| -------------------------------- | ---------------------------------------------------------------------------- |
-| `allow(warning1, warning2, ...)` | suppress specified linting rule warnings                                     |
-| `derive(name1, name2, ...)`      | automatically implement traits or apply "derive macros", often on a `struct` |
-| `doc`                            | provides an alternate way to specify and format doc comments                 |
-| `should_panic`                   | indicates that a test function is expected to panic                          |
-| `test`                           | indicates that a function is a test                                          |
+| Attribute                        | Description                                                                     |
+| -------------------------------- | ------------------------------------------------------------------------------- |
+| `allow(warning1, warning2, ...)` | suppresses the specified linting rule warnings                                  |
+| `derive(name1, name2, ...)`      | automatically implements traits or applies "derive macros", often on a `struct` |
+| `doc`                            | provides an alternate way to specify and format doc comments                    |
+| `should_panic`                   | indicates that a test function is expected to panic                             |
+| `test`                           | indicates that a function is a test                                             |
 
 For a list of linting rules that produce warnings, see {% aTargetBlank
 "https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html",
 "Warn-by-default lints" %}.
 Examples include `dead_code`, `unreachable_code`, `unused_assignment`,
 `unused_imports`, and `unused_variables`.
-These warnings can be disabled using `allow` attributes.
+These warnings can be disabled using the `allow` attribute.
 
 The [table of provided traits](#trait-table) in the "Traits" section
 indicates those can be automatically implemented using the `derive` attribute.
 For more detail, see {% aTargetBlank
 "https://doc.rust-lang.org/rust-by-example/trait/derive.html", "Derive" %}.
 
-For more built-in attributes, see the list at {% aTargetBlank
+For more built-in attributes,
+see the list in "The Rust Reference" at {% aTargetBlank
 "https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index",
 "Attributes" %}.
 
-Custom attributes are implemented by defining {% aTargetBlank
+Custom attributes can be implemented by defining {% aTargetBlank
 "https://doc.rust-lang.org/book/ch19-06-macros.html#attribute-like-macros",
 "attribute-like macros" %}.
 
@@ -822,32 +825,33 @@ println!("{} is {}.", "Rust", "interesting"); // Rust is interesting.
 To print a representation of a value for debugging purposes on a single line,
 use `{:?}`. To print each field of a struct on separate lines, use `{:#?}`.
 Custom structs must implement the `Debug` trait in order to use these.
-This is done by adding the line `#[derive(Debug)]` before their definitions.
+The easiest way to do this is to add the line `#[derive(Debug)]`
+before struct definitions.
 
-The following table summarizes the supported format arguments
-that can appear inside the curly brackets.
+The following table summarizes what
+each of the supported format arguments produce.
 
-| Format Argument | Description                                                           |
-| --------------- | --------------------------------------------------------------------- |
-| `{}`            | prints display value of next argument                                 |
-| `{:?}`          | debugging output on single line                                       |
-| `{:#?}`         | debugging output on multiple lines                                    |
-| `{n}`           | prints the argument at index n (zero-based)                           |
-| `{name}`        | prints the value with a given name                                    |
-| `{:.n}`         | prints a number with `n` decimal places                               |
-| `{:.*}`         | prints a number with number of decimal places specified in value list |
-| `{:#X}`         | prints number as uppercase hexadecimal                                |
-| `{:#x}`         | prints number as lowercase hexadecimal                                |
-| `{:<n}`         | print left justified in a width of n                                  |
-| `{:>n}`         | print right justified in a width of n                                 |
-| `{:^n}`         | print centered in a width of n                                        |
+| Format Argument | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| `{}`            | display value of next argument                               |
+| `{:?}`          | debugging value on single line                               |
+| `{:#?}`         | debugging value on multiple lines                            |
+| `{n}`           | argument at zero-based index n                               |
+| `{name}`        | value with a given name                                      |
+| `{:.n}`         | number with `n` decimal places                               |
+| `{:.*}`         | number with number of decimal places specified in value list |
+| `{:#X}`         | number as uppercase hexadecimal                              |
+| `{:#x}`         | number as lowercase hexadecimal                              |
+| `{:<n}`         | left justified in a width of n                               |
+| `{:>n}`         | right justified in a width of n                              |
+| `{:^n}`         | centered in a width of n                                     |
 
 Here are some examples:
 
 ```rust
 let n = 3;
 println!("{} {}", n * 2, n * 3); // 6, 9
-println!("{2} {1}", n * 3, n * 2); // 6, 9
+println!("{2} {1}", n * 2, n * 3); // 9, 6
 println!("{double} {triple}", double = n * 2, triple = n * 3); // 6 9
 
 #[derive(Debug)]
@@ -6480,6 +6484,8 @@ send a value to the main thread using a channel,
 and return a value.
 The main thread receives and prints the messages sent over the channel.
 It also waits for all the threads to finish by calling their `join` method.
+
+TODO: See other mpsc implementations in futures::sync::mpsc and tokio::sync::mpsc, but not in async-std!
 
 ```rust
 use rand::Rng; // stands for "random number generator".
