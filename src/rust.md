@@ -6879,6 +6879,37 @@ async fn main() {
 }
 ```
 
+The following example spawns 10 tasks that each sleep for a random amount of time and then return some data. The results are processed in the order in which the tasks complete.
+
+```rust
+// The StreamExt and Rng traits must be in scope.
+use futures::stream::{FuturesUnordered, StreamExt};
+use rand::Rng;
+use tokio::{
+    task,
+    time::{sleep, Duration},
+};
+
+#[tokio::main]
+async fn main() {
+    let mut futures = FuturesUnordered::new();
+    for i in 0..10 {
+        futures.push(task::spawn(async move {
+            let ms = rand::thread_rng().gen_range(1000..3000);
+            sleep(Duration::from_millis(ms)).await;
+            (i, ms)
+        }));
+    }
+
+    while let Some(result) = futures.next().await {
+        let (task_number, sleep_ms) = result.unwrap();
+        println!("task {} slept for {}ms", task_number, sleep_ms);
+    }
+
+    println!("done");
+}
+```
+
 TODO: Add information from <https://github.com/mvolkmann/rust-parallel-options>.
 
 ## Standard Library
