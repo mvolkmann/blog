@@ -195,6 +195,15 @@ from Rust, it may be better to use a more compatible programming language.
 If the target platform uses a processor type that is not a target of LLVM,
 Rust cannot currently produce code that will run on it.
 
+**Compiler Speed:**
+
+The Rust compiler is notoriously slow, but it has been getting faster.
+Slow compile times can negatively affect developer flow because
+they make it difficult to quickly try alternate coding approaches.
+The introduction of multiple companies participating in the
+newly formed "Rust Foundation" will likely lead to
+improvements in this area.
+
 ## Installing
 
 Rust is installed using the
@@ -925,7 +934,8 @@ such as arrays, tuples, and structs,
 the variable can be changed to point to a different value
 and their elements/fields can be mutated.
 
-A variable declaration has the syntax `let[ mut] name[: type][ = value];`
+A variable declaration has the syntax
+<code>let[ mut] name[: <i>type</i>][ = <i>value</i>];</code>
 where optional parts are surrounded by square brackets.
 The colon and type can be omitted if
 the desired type can be inferred from the value.
@@ -6806,6 +6816,11 @@ An "executor" is required in order to evaluate `Future`s.
 The most common way to add an executor is to include the attribute
 `#[async_std::main]` or `#[tokio::main]` before `async fn main`.
 
+Crates like async-std and tokio support "tasks"
+which are like lightweight threads that are scheduled
+to run in read threads.
+A task can be thought of as a collection of futures.
+
 ## async-std
 
 The `async-std` crate is a port of the `std` crate that provides provides
@@ -6836,18 +6851,22 @@ Then add the following attribute before the `main` function:
 
 {% aTargetBlank "https://crates.io/crates/tokio", "tokio" %} is a popular crate
 that makes implementing asynchronous code even easier.
+It was initially created by Carl Lerche and is supported by
+many contributors including Alex Crichton, Ivan Petkov, Alice Rhyl,
+Taiki Endo, Eliza Weisman, Lucio Franco, Sean McArthur, and more.
 
 Features supported by Tokio include:
 
-- TCP
-- UDP
-- Unix sockets
+- TCP, UDP, Unix sockets, and pipes
 - timers
 - spawning threads
 - communication between threads using channels
+- mutex and semaphore
+- subprocesses
+- signal handlers
 - streams
 - sync utilities
-- scheduling
+- work-stealing task scheduling
 - and more
 
 Here is a very basic example of using `tokio`.
@@ -6881,34 +6900,7 @@ async fn main() {
 
 The following example spawns 10 tasks that each sleep for a random amount of time and then return some data. The results are processed in the order in which the tasks complete.
 
-```rust
-// The StreamExt and Rng traits must be in scope.
-use futures::stream::{FuturesUnordered, StreamExt};
-use rand::Rng;
-use tokio::{
-    task,
-    time::{sleep, Duration},
-};
-
-#[tokio::main]
-async fn main() {
-    let mut futures = FuturesUnordered::new();
-    for i in 0..10 {
-        futures.push(task::spawn(async move {
-            let ms = rand::thread_rng().gen_range(1000..3000);
-            sleep(Duration::from_millis(ms)).await;
-            (i, ms)
-        }));
-    }
-
-    while let Some(result) = futures.next().await {
-        let (task_number, sleep_ms) = result.unwrap();
-        println!("task {} slept for {}ms", task_number, sleep_ms);
-    }
-
-    println!("done");
-}
-```
+TODO: Add code from https://github.com/mvolkmann/rust-tokio.
 
 TODO: Add information from <https://github.com/mvolkmann/rust-parallel-options>.
 
