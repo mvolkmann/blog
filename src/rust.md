@@ -4778,8 +4778,8 @@ Other traits must be manually implemented.
 | `std::convert::AsRef`     | defines `as_ref` method that converts one reference type to another                                                                         |                   |
 | `std::convert::From`      | defines `from` associated function that converts one value type to another; ex. `String::from`                                              |
 | `std::convert::Into`      | defines `into` method that is the opposite of `From`<br>and is automatically implemented when that is implemented                           |                   |
-| `std::convert::TryFrom`   | defines `try_from` method for type conversions; opposite of `TryInto`                                                                       |                   |
-| `std::convert::TryInto`   | defines `try_into` method for type conversions; opposite of `TryFrom`                                                                       |                   |
+| `std::convert::TryFrom`   | defines `try_from` method for type conversions that can fail; opposite of `TryInto`                                                         |                   |
+| `std::convert::TryInto`   | defines `try_into` method for type conversions that can fail; opposite of `TryFrom`                                                         |                   |
 | `std::default::Default`   | defines `default` associated function for getting a default instance of a type                                                              | derivable         |
 | `std::fmt::Debug`         | defines `fmt` method that outputs a value for debugging using `{:?}` and `{:#?}` in a format string                                         | derivable         |
 | `std::fmt::Display`       | defines `fmt` method that formats a value for output<br>to be seen by a user rather than a developer                                        |                   |
@@ -4913,6 +4913,106 @@ fn main() {
     color += red; // can add a Color to the one on the left side
     color += blue;
     println!("{:?}", color); // Color { r: 255, g: 0, b: 255 }
+}
+```
+
+Here is an example of implementing the `From` and `Into` traits
+on custom structs `Point2D` (a point with x and y coordinates)
+and `Point3D` (a point with x, y, and z coordinates).
+It implements the following type conversions:
+
+- `Point2D` -> `Point3D` sets `z` to zero.
+- `Point2D` -> `f64` calculates the distance from the origin.
+- `Point3D` -> `Point2D` discards the `z` coordinate.
+- `Point3D` -> `f64` calculates the distance from the origin.
+
+This code can also be found in the GitHub repo {% aTargetBlank
+"https://github.com/mvolkmann/rust-from-into", "rust-from-into" %}.
+
+```rust
+use std::convert::{From, Into};
+
+#[derive(Debug, Default)]
+struct Point2D {
+    x: f64,
+    y: f64,
+}
+
+impl Point2D {
+    fn new(x: f64, y: f64) -> Point2D {
+        Self { x, y }
+    }
+}
+
+impl Into<f64> for Point2D {
+    fn into(self) -> f64 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+}
+
+impl From<&Point3D> for Point2D {
+    fn from(p3: &Point3D) -> Self {
+        Self { x: p3.x, y: p3.y }
+    }
+}
+
+#[derive(Debug, Default)]
+struct Point3D {
+    x: f64,
+    y: f64,
+    z: f64,
+}
+
+impl Point3D {
+    fn new(x: f64, y: f64, z: f64) -> Point3D {
+        Self { x, y, z }
+    }
+}
+
+impl Into<f64> for Point3D {
+    fn into(self) -> f64 {
+        (self.x.powi(2) + self.y.powi(2) + self.z.powi(2)).sqrt()
+    }
+}
+
+impl From<&Point2D> for Point3D {
+    fn from(p2: &Point2D) -> Self {
+        Self {
+            x: p2.x,
+            y: p2.y,
+            z: 0.0,
+        }
+    }
+}
+
+fn main() {
+    let p2 = Point2D::new(3.0, 4.0);
+
+    // One way to convert a Point2D to a Point3D.
+    let p3 = Point3D::from(&p2);
+    println!("p2 to 3D = {:?}", p3);
+
+    // Another way to convert a Point2D to a Point3D.
+    // Parens are required around the reference because the
+    // dot operator for the call to "into" has higher precedence.
+    let p3: Point3D = (&p2).into();
+    println!("p2 to 3D = {:?}", p3);
+
+    let distance: f64 = p2.into();
+    println!("p2 distance from origin = {}", distance);
+
+    let p3 = Point3D::new(3.0, 4.0, 5.0);
+
+    // One way to convert a Point3D to a Point2D.
+    let p2 = Point2D::from(&p3);
+    println!("p3 to 2D = {:?}", p2);
+
+    // Another way to convert a Point3D to a Point2D.
+    let p2: Point2D = (&p3).into();
+    println!("p3 to 2D = {:?}", p2);
+
+    let distance: f64 = p3.into();
+    println!("p3 distance from origin = {}", distance);
 }
 ```
 
@@ -6753,6 +6853,23 @@ return an instance that implements the `Future` trait.
 
 All `async` functions return a `Future` even though
 they do not explicitly specify that in their return type.
+
+It is not possible to manually write normal Rust code
+that is the equivalent of the code
+produced by the `async` and `await` keywords.
+The Rust compiler performs some magic to support these.
+
+From user "kornel" in the Rust Forum February 3, 2020,
+
+> `async` can create `Future` objects that are self-referential structs,
+> and this is the only place in safe Rust where this is allowed.
+> It ends up being a state machine that uses unsafe pointers.
+> It's not a straightforward translation,
+> and there's no equivalent high-level syntax.
+> That unique complexity is the reason why
+> `.await` is a built-in syntax.
+> Otherwise it would be a crate with a proc_macro.
+
 For example, add the following dependencies in `Cargo.toml`:
 
 ```toml
@@ -6800,9 +6917,11 @@ async fn main() {
 
 `Future`s are lazy meaning they are not executed
 until the `await` keyword is applied to them.
-The `await` keyword triggers execution of the future
-and waits for it to complete.
-It is often placed at the end of a function call with a dot (period) before it.
+The `await` keyword triggers execution of the future,
+waits for it to complete, and yields control back to the thread
+so it has the opportunity to do other work while waiting.
+The `.await` syntax is often placed at the end of a function call
+with a dot (period) before it.
 This makes it appear that `await` is a property, but it is actually a keyword.
 For example: `some_future.await;`.
 
@@ -6815,6 +6934,29 @@ For example, `async move { ... }`.
 An "executor" is required in order to evaluate `Future`s.
 The most common way to add an executor is to include the attribute
 `#[async_std::main]` or `#[tokio::main]` before `async fn main`.
+These are macros that transform the `async fn main()`
+into a synchronous `fn main()` that initializes a runtime instance
+and executes the code in the function.
+
+From the tokio tutorial, the following:
+
+```rust
+#[tokio::main]
+async fn main() {
+    println!("hello");
+}
+```
+
+is transformed into:
+
+```rust
+fn main() {
+    let mut rt = tokio::runtime::Runtime::new().unwrap();
+    rt.block_on(async {
+        println!("hello");
+    })
+}
+```
 
 Crates like async-std and tokio support "tasks"
 which are like lightweight threads that are scheduled
@@ -6868,6 +7010,13 @@ Features supported by Tokio include:
 - sync utilities
 - work-stealing task scheduling
 - and more
+
+From the Tokio tutorial:
+
+> Many of Tokio's types are named the same as their
+> synchronous equivalent in the Rust standard library.
+> When it makes sense, Tokio exposes the same APIs
+> as `std` but using `async fn`.
 
 Here is a very basic example of using `tokio`.
 It assumes the following dependency line
