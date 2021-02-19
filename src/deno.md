@@ -1927,6 +1927,16 @@ console.log('count =', count);
 
 ## Basic HTTP server
 
+The standard library contains `file_server.ts`
+which implements a basic HTTP file server.
+To install this and server files in the current directory:
+
+```bash
+deno install --allow-net --allow-read https://deno.land/std@0.87.0/http/file_server.ts
+file_server .
+```
+
+There are many options for implementing a custom HTTP server.
 Here is a very basic HTTP server that serves files
 and only uses the standard library.
 
