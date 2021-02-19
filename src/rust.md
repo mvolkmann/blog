@@ -8246,6 +8246,8 @@ Tools for compiling Rust code to WebAssembly include
 {% aTargetBlank "https://rustwasm.github.io/wasm-pack/", "wasm-pack" %} and
 {% aTargetBlank "https://www.secondstate.io/articles/ssvmup/", "ssvmup" %}
 The ssvmup tool was inspired by wasm-pack and has explicit support for Deno.
+Also see the support for Rust in the
+{% aTargetBlank "https://parceljs.org/rust.html", "Parcel bundler" %}!
 
 From {% aTargetBlank
 "https://rustwasm.github.io/book/game-of-life/implementing.html",
@@ -8268,6 +8270,8 @@ To install wasm-pack in Linux or macOS, enter the following:
 ```bash
 cargo install wasm-pack
 ```
+
+To create a project that uses wasm-pack::
 
 1. `wasm-pack new my-wasm`
 
