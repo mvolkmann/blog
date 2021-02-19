@@ -169,64 +169,69 @@ To call this code from JavaScript running in a web browser ...
 
 ## WASM Instructions
 
-The table below summarizes the supported WASM instructions.
-It uses the following abbreviations for substitutions in instruction names:
+The tables below summarizes the supported WASM instructions.
+For more detail, see the {% aTargetBlank
+"https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md",
+"WASM Reference Manual" %>.
+
+The tables use the following abbreviations
+for substitutions in instruction names:
 
 - `mm` and `nn` can be `32` or `64`
 - `sx` can be `u` or `s`
 
 ### Numeric Instructions
 
-| Name       | Description           |
-| ---------- | --------------------- |
-| `abs`      | absolute value        |
-| `add`      | add                   |
-| `and`      | and                   |
-| `ceil`     | ceiling               |
-| `clz`      | ?                     |
-| `copysign` | copy sign             |
-| `ctz`      | ?                     |
-| `div_{sx}` | divide                |
-| `div`      | divide                |
-| `eq`       | equal                 |
-| `eqz`      | ?                     |
-| `floor`    | floor                 |
-| `ge_{sx}`  | greater than or equal |
-| `ge`       | greater than or equal |
-| `gt_{sx}`  | greater than          |
-| `le_{sx}`  | less than or equal    |
-| `le`       | less than or equal    |
-| `lt_{sx}`  | less than             |
-| `max`      | maximum               |
-| `min`      | minimum               |
-| `mul`      | multiply              |
-| `ne`       | not equal             |
-| `nearest`  | round?                |
-| `neg`      | negate                |
-| `or`       | or                    |
-| `popcnt`   | ?                     |
-| `rem_{sx}` | remainder             |
-| `rotl`     | rotate left           |
-| `rotr`     | rotate right          |
-| `shl`      | shift left            |
-| `shr_{xx}` | shift right           |
-| `sqrt`     | square root           |
-| `sub`      | subtract              |
-| `trunc`    | truncate              |
-| `xor`      | exclusive or          |
+| Name       | Description                    |
+| ---------- | ------------------------------ |
+| `abs`      | absolute value                 |
+| `add`      | add                            |
+| `and`      | and                            |
+| `ceil`     | ceiling                        |
+| `clz`      | count leading zeros            |
+| `copysign` | copy sign                      |
+| `ctz`      | count training zeros           |
+| `div_{sx}` | divide                         |
+| `div`      | divide                         |
+| `eq`       | equal                          |
+| `eqz`      | equal to zero                  |
+| `floor`    | floor                          |
+| `ge_{sx}`  | greater than or equal          |
+| `ge`       | greater than or equal          |
+| `gt_{sx}`  | greater than                   |
+| `le_{sx}`  | less than or equal             |
+| `le`       | less than or equal             |
+| `lt_{sx}`  | less than                      |
+| `max`      | maximum                        |
+| `min`      | minimum                        |
+| `mul`      | multiply                       |
+| `ne`       | not equal                      |
+| `nearest`  | round?                         |
+| `neg`      | negate                         |
+| `or`       | or                             |
+| `popcnt`   | population count (# of 1 bits) |
+| `rem_{sx}` | remainder                      |
+| `rotl`     | rotate left                    |
+| `rotr`     | rotate right                   |
+| `shl`      | shift left                     |
+| `shr_{xx}` | shift right                    |
+| `sqrt`     | square root                    |
+| `sub`      | subtract                       |
+| `trunc`    | truncate                       |
+| `xor`      | exclusive or                   |
 
 ### ? Instructions
 
-| Name          | Description |
-| ------------- | ----------- |
-| `convert`     | ?           |
-| `demote`      | ?           |
-| `extend`      | ?           |
-| `promote`     | ?           |
-| `reinterpret` | ?           |
-| `trunc_sat`   | ?           |
-| `trunc`       | truncate    |
-| `wrap`        | ?           |
+| Name          | Description                       |
+| ------------- | --------------------------------- |
+| `convert`     | convert integer to floating point |
+| `demote`      | demote f64 to f32                 |
+| `extend`      | ?                                 |
+| `promote`     | ?                                 |
+| `reinterpret` | ?                                 |
+| `trunc_sat`   | ?                                 |
+| `trunc`       | truncate                          |
+| `wrap`        | ?                                 |
 
 ### Parametric Instructions
 
