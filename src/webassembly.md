@@ -180,7 +180,7 @@ To call this code from JavaScript running in a web browser ...
 The tables below summarizes the supported WASM instructions.
 For more detail, see the {% aTargetBlank
 "https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md",
-"WASM Reference Manual" %>.
+"WASM Reference Manual" %}.
 
 The tables use the following abbreviations
 for substitutions in instruction names:
