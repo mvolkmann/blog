@@ -76,22 +76,22 @@ The most popular is "WebAssembly" with the description
 ## Text Format
 
 WASM has a binary format and a text (intermediate form) format.
+Files in the binary format have the extension `.wasm`.
+Files in the text format have the extension `.wat`.
 The text format has two styles, linear and S-expressions.
-WASM in binary format is generated in `.wasm` files.
-WASM in text format is written in `.wat` files
-as opposed to writing in the another language such as Rust
-and compiling to WASM.
+The linear format places instructions on separate lines.
+The S-expression format uses parentheses, similar to LISP,
+representing a tree of nodes.
+The first value in each expression indicates the node type.
+The remaining values are attributes or child nodes.
 
 A `.wat` file can be compile to a `.wasm` file using the `wat2wasm` tool.
 A `.wasm` file can be de-compiled to a `.wat` file using the `wasm2wat` tool.
 Note that this outputs the linear style.
 Also see `.wast` files that are for writing tests.
 
-S-expressions in `.wat` files are similar to LISP
-and represent code as a tree of nodes.
-Each expression is enclosed in parentheses.
-The first value in each expression indicates the node type.
-The remaining values are attributes or child nodes.
+It is also possible write code in another language such as Rust
+and compile it to WASM.
 
 Every `.wat` file contains a single, top-level S-expression
 that defines a module.
@@ -292,6 +292,12 @@ for substitutions in instruction names:
 | `call_indirect {type-id}`                    |                                                                                |
 | `end`                                        | ends a function body, global initialization, element segment, or data segement |
 
+## Demos
+
+- <https://github.com/mvolkmann/wasm-bind-demo>
+- <https://github.com/mvolkmann/wasm-demo>
+- <https://github.com/mvolkmann/wasm-rust-linear-memory>
+
 ## wasm-pack
 
 To install wasm-pack in Linux or macOS, enter the following:
@@ -387,6 +393,7 @@ To compile a `.rs` file to WebAssembly:
    #repository = "https://github.com/mvolkmann/my-crate"
 
    [lib]
+   # cdylib exports a C-style interface for a Rust dynamic library.
    crate-type = ["cdylib"]
 
    [dependencies]
