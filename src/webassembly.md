@@ -76,7 +76,7 @@ The most popular is "WebAssembly" with the description
 ## Text Format
 
 WASM has a binary format and a text (intermediate form) format.
-The text format has two styles, WAT (linear) and WAST (S-expression).
+The text format has two styles, linear and S-expressions.
 WASM in binary format is generated in `.wasm` files.
 WASM in text format is written in `.wat` files
 as opposed to writing in the another language such as Rust
@@ -85,10 +85,10 @@ and compiling to WASM.
 A `.wat` file can be compile to a `.wasm` file using the `wat2wasm` tool.
 A `.wasm` file can be de-compiled to a `.wat` file using the `wasm2wat` tool.
 Note that this outputs the linear style.
+Also see `.wast` files that are for writing tests.
 
-The WAST style uses S-expressions similar to LISP
-that represents code as a tree of nodes.
-See https://webassembly.js.org/docs/contrib-wat-vs-wast.html.
+S-expressions in `.wat` files are similar to LISP
+and represent code as a tree of nodes.
 Each expression is enclosed in parentheses.
 The first value in each expression indicates the node type.
 The remaining values are attributes or child nodes.
