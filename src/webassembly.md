@@ -452,7 +452,7 @@ Where are the steps assuming Rust has already been installed.
 
 1. Edit `src/lib.rs` and change the contents to the following:
 
-   ```rs
+   ```rust
    #[no_mangle]
    pub fn sum(n1: f64, n2: f64) -> f64 {
        n1 + n2
@@ -470,9 +470,11 @@ Where are the steps assuming Rust has already been installed.
 1. To install the `wasm-nm` tool for
    listing the symbols exported by a `.wasm` file,
    enter `cargo install wasm-nm`
+   The symbols `sum` and `distance` will be output with an "e"
+   in front of them for "export".
 
 1. To see the exported symbols,
-   enter `wasm-nm target/wasm32-unknown-unknown/rust_math.wasm`
+   enter `wasm-nm target/wasm32-unknown-unknown/debug/rust_math.wasm`
 
 1. Modify the `index.js` file created earlier to pass
    the file path of this `.wasm` file to the fetch function which is
@@ -488,20 +490,218 @@ Where are the steps assuming Rust has already been installed.
    which is expected because the Rust code
    only defines the `sum` and `distance` functions.
 
-## Rust With More Types
-
-The wasm-bindgen crate makes it possible to compile Rust functions
-that use non-numeric types to WASM.
-
-TODO: STOPPED HERE
-
-TODO: Demonstrate passing a custom Rust struct and a Rust Vector.
-
 ## Calling JavaScript functions from Rust
 
-call JS from Rust (builtins like alert and console.log and also custom functions)
+WASM code written in a language other than JavaScript can call custom JavaScript functions.
+Let's look at an example.
+
+1. Add the following at the beginning of `index.js`:
+
+   ```js
+   function cube(n) {
+     return n ** 3;
+   }
+
+   function square(n) {
+     return n \* n;
+   }
+
+   const importObject = {env: {cube, square}};
+   ```
+
+1. Pass `importObject` as the second argument to
+   `WebAssembly.instantiateStreaming` as follows:
+
+   ```js
+   WebAssembly.instantiateStreaming(fetch(wasmPath), importObject).then(m => {
+   ```
+
+1. Define the function signatures in `rust_math/src/lib.rs` as follows:
+
+   ```rust
+   extern "C" {
+     fn cube(n: f64) -> f64;
+     fn square(n: f64) -> f64;
+   }
+   ```
+
+1. Call these functions like normal Rust functions,
+   but call them inside an `unsafe` block since
+   the Rust compiler cannot guarantee that they are safe.
+   For example:
+
+   ```rust
+   #[no_mangle]
+   pub fn sum_of_square_and_cube(n: f64) -> f64 {
+       let result;
+       unsafe {
+           result = square(n) + cube(n);
+       }
+       result
+   }
+   ```
+
+1. Rebuild the `.wasm` file by entering
+   `cargo build --target wasm32-unknown-unknown`
+
+1. Verify the symbols that are imported by entering
+   `wasm-nm target/wasm32-unknown-unknown/debug/rust_math.wasm`
+   The symbols `cube` and `square` will be output with an "i"
+   in front of them for "import".
+
+1. Start a local HTTP file server like before.
+
+1. Browse localhost:{port} where port is
+   the port on which the local server is listening.
+
+1. Open the DevTools console to see the `console.log` output.
+
+## Rust With More Types
+
+The wasm-bindgen tool makes it possible to compile Rust functions
+that use non-numeric types to WASM.
+It also enables calling built-in JavaScript functions
+such as `alert` and `console.log`.
+wasm-bindgen provides a Rust library and a CLI tool.
+The Rust library provides macros that generate the Rust code
+required to serialize and deserialize Rust data types.
+The CLI tool generates JavaScript code that wraps the WASM code as an ES module
+which makes it easier to consume in a web app.
+
+Let's implement an example where non-numeric types are
+passed from JavaScript to Rust functions and non-numeric types are returned.
+
+The wasm-pack CLI tool makes using wasm-bindgen easier,
+so we will also use that. This tool:
+
+- It executes a Cargo command to compile Rust code to WASM.
+- It calls wasm-bindgen to generate an ES module
+  that wraps usage of the WASM code.
+- It can invoke the wasm-opt tool to optimize the WASM code.
+- It can generate a `package.json` file needed to
+  deploy the ES module and WASM code as an npm package.
+- It generates TypeScript type definitions
+  for the exported functions and types in a `.d.ts` file
+  that can be used by calling TypeScript code to provide type checking.
+
+1. Install wasm-pack by entering the following command:
+
+   ```bash
+   curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+   ```
+
+1. Enter `cargo new --lib wasm-bindgen-demo`
+
+1. Enter `cd wasm-bindgen-demo`.
+
+1. Edit `Cargo.toml` and add the following dependency.
+
+   ```toml
+   [lib]
+   crate-type = ['cdylib']
+
+   [dependencies]
+   wasm-bindgen = "0.2.70"
+   ```
+
+1. Edit `src/lib.rs` and change the contents to the following:
+
+   ```rust
+   use wasm_bindgen::prelude::*;
+
+   #[wasm_bindgen]
+   extern "C" {
+       fn alert(s: &str);
+
+       #[wasm_bindgen(js_namespace = console)]
+       pub fn log(s: &str);
+   }
+
+   #[wasm_bindgen]
+   pub fn greet(name: &str) {
+       log(&format!("Hello, {}!", name));
+   }
+
+   #[wasm_bindgen]
+   #[derive(Debug)]
+   pub struct Color {
+       pub red: u8,
+       pub green: u8,
+       pub blue: u8,
+   }
+
+   #[wasm_bindgen(js_name = getColor)]
+   pub fn get_color() -> Color {
+       let color = Color {
+           red: 1,
+           green: 2,
+           blue: 3,
+       };
+       log(&format!("color = {:?}", color));
+       color
+   }
+
+   #[wasm_bindgen(js_name = getPowers)]
+   pub fn get_powers(n: u32) -> Vec<u32> {
+       alert(&format!("Getting powers of {} ...", n));
+       vec![n, n.pow(2), n.pow(3)]
+   }
+   ```
+
+1. Enter `wasm-pack build --dev --target web`
+
+1. Create `index.js` with the following content:
+
+   ```js
+   import init, {
+     Color,
+     getColor,
+     getPowers,
+     greet
+   } from './pkg/wasm_bindgen_demo.js';
+
+   async function run() {
+     await init();
+     greet('World');
+
+     const color = getColor();
+     console.log('color =', color);
+     console.log('color instanceof Color?', color instanceof Color); // true
+     console.log('color.red =', color.red); // 1
+     console.log('color.green =', color.green); // 2
+     console.log('color.blue =', color.blue); // 3
+
+     const powers = getPowers(3); // a UIntArray
+     console.log('powers =', powers); // [3, 9, 27]
+   }
+
+   run();
+   ```
+
+1. Create `index.html` with the following content:
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+     <head>
+       <script type="module" src="index.js"></script>
+     </head>
+     <body>
+       <div>See the console.</div>
+     </body>
+   </html>
+   ```
+
+1. Start a local HTTP file server like before.
+
+1. Browse localhost:{port} where port is
+   the port on which the local server is listening.
+
+1. Open the DevTools console to see the `console.log` output.
 
 ## Linear Memory
+
+TODO: Resume here
 
 "Linear memory" can be used to share data across programming languages
 without the overhead of copying values.
