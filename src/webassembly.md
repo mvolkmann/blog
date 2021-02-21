@@ -109,7 +109,7 @@ This code is available in the GitHub repo
 
 1. Create the file `math.wat` containing the following:
 
-```wat
+```wasm
 (module
   (func $sum (param $lhs i32) (param $rhs i32) (result i32)
     local.get $lhs
