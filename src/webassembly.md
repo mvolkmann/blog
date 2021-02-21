@@ -11,8 +11,11 @@ for a stack-based virtual machine.
 
 WASM code can be run in modern web browsers including
 Chrome, Edge, Firefox, and Safari (not Internet Explorer).
-It can also be run outside of web browsers using
-WASM3, Wasmtime, or WAMR.
+It can also be run outside of web browsers using tools such as
+{% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %},
+{% aTargetBlank "https://wasmtime.dev", "Wasmtime" %},
+{% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime",
+"WebAssembly Micro Runtime (WAMR)" %}.
 
 There are two primary reasons to run WASM code from a web browser.
 The first is that it typically executes much faster than
@@ -28,6 +31,377 @@ whose virtual machine is supported by many platforms.
 WASM can also be compiled to native executables
 that run on x86 and ARM processors.
 
+## VS Code
+
+VS Code has several extensions for working with WASM code.
+The most popular is "WebAssembly" with the description
+"WebAssembly Toolkit for VSCode".
+
+## Only Numbers
+
+Currently WASM only supports the number types `i32`, `i64`, `f32`, and `f64`.
+But the {% aTargetBlank "https://github.com/WebAssembly/interface-types",
+"Interface Types proposal" %} seeks to change this.
+This can be accomplished by enabling supported programming languages
+to serialize non-numeric values to linear memory as an array of i32 values.
+Other supported languages can then deserialize values from the array.
+This enables each language to use its own representation of the data types.
+
+## Implementing Directly
+
+While code from many programming languages can be compiled to WASM,
+it is also possible to directly implement the code.
+
+WASM has a binary format and a text (intermediate form) format.
+Files in the binary format have the extension `.wasm`.
+Files in the text format have the extension `.wat`.
+
+The text format has two styles, linear and S-expressions.
+The linear format places instructions on separate lines.
+The S-expression format uses parentheses, similar to LISP,
+representing a tree of nodes.
+The first value in each expression indicates the node type.
+The remaining values are attributes or child nodes.
+
+A `.wat` file can be compile to a `.wasm` file using the `wat2wasm` tool.
+A `.wasm` file can be de-compiled to a `.wat` file using the `wasm2wat` tool.
+Note that this outputs the linear style.
+Also see `.wast` files that are for writing tests.
+
+Every `.wat` file contains a single, top-level S-expression
+that defines a module.
+Modules can define functions that are callable from JavaScript.
+These definitions have the syntax `(func {signature} {locals} {body})`.
+The signature defines the function name,
+its parameter types, and its return type.
+In functions that do not return a value, the return type is omitted.
+Locals defines local variable names and their types.
+The body is a list of instructions that implement the function.
+
+Currently only four types are supported, `i32`, `i64`, `f32`, and `f64`.
+These match number types from Rust.
+Other types such as strings and structs currently must be
+serialized into these number types and deserialized from them.
+Tools such as wasm_bindgen for Rust generate code that does this for you.
+
+Parameters and local variables are accessed by their
+position in the signature using zero-based indexes.
+The text format also allows functions, parameters, and local variables
+to have names that start with `$`.
+These can be referenced by name,
+but the names are compiled away in favor of indexes.
+
+Operations get their arguments from the top values on the stack.
+The `local.get {index | name}` instruction
+gets the value of a parameter of local variable and places it on the stack.
+The `local.set {index | name} {value}` instruction
+sets value of a local variable.
+The `{type}.const {value}` instruction pushes a constant value on the stack.
+When a function exists, its return value is the top value on the stack.
+
+Here are examples of functions.
+The first takes two numbers and returns their sum.
+The rest compute the distance between two points
+using the formula `sqrt(dx**2 + dy**2)`.
+Three versions are presented to show different approaches.
+This code is available in the GitHub repo
+{% aTargetBlank "https://github.com/mvolkmann/wasm-demo/", "wasm-demo" %}.
+
+1. Create the file `math.wat` containing the following:
+
+```wat
+(module
+  (func $sum (param $lhs i32) (param $rhs i32) (result i32)
+    local.get $lhs
+    local.get $rhs
+    i32.add
+  )
+  (export "sum" (func $sum))
+
+  ;; This uses the "linear" format.
+  (func $distance1
+    (param $x1 f64)
+    (param $y1 f64)
+    (param $x2 f64)
+    (param $y2 f64)
+    (result f64)
+
+    get_local $x1
+    get_local $x2
+    f64.sub
+    tee_local $x1 ;; reusing $x1 to hold temporary dx value
+    get_local $x1
+    f64.mul
+
+    get_local $y1
+    get_local $y2
+    f64.sub
+    tee_local $y1 ;; reusing $y1 to hold temporary dy value
+    get_local $y1
+    f64.mul
+
+    f64.add
+    f64.sqrt
+  )
+  (export "distance1" (func $distance2))
+
+  ;; This uses S-expressions.
+  (func $distance2
+    (param $x1 f64)
+    (param $y1 f64)
+    (param $x2 f64)
+    (param $y2 f64)
+    (result f64)
+
+    (local $dx f64)
+    (local $dy f64)
+
+    (set_local $dx
+      (f64.sub
+        (local.get $x1)
+        (local.get $x2)
+      )
+    )
+    (set_local $dy
+      (f64.sub
+        (local.get $y1)
+        (local.get $y2)
+      )
+    )
+
+    (f64.sqrt
+      (f64.add
+        (f64.mul
+          ;; There is no instruction to duplicate the value at
+          ;; the top of the stack, so we have to do this twice.
+          ;; See https://github.com/WebAssembly/design/issues/1365.
+          (get_local $dx)
+          (get_local $dx)
+        )
+        (f64.mul
+          (get_local $dy)
+          (get_local $dy)
+        )
+      )
+    )
+  )
+  (export "distance2" (func $distance2))
+
+  ;; This uses even more S-expressions.
+  (func $distance3
+    (param $x1 f64)
+    (param $y1 f64)
+    (param $x2 f64)
+    (param $y2 f64)
+    (result f64)
+
+    (f64.sqrt
+      (f64.add
+        (f64.mul
+          (tee_local $x1 ;; reusing $x1 to hold temporary dx value
+            (f64.sub
+              (get_local $x1)
+              (get_local $x2)
+            )
+          )
+          (get_local $x1)
+        )
+        (f64.mul
+          (tee_local $y1 ;; reusing $y1 to hold temporary dy value
+            (f64.sub
+              (get_local $y1)
+              (get_local $y2)
+            )
+          )
+          (get_local $y1)
+        )
+      )
+    )
+  )
+  (export "distance3" (func $distance3))
+)
+```
+
+1. Install the {% aTargetBlank "https://github.com/WebAssembly/wabt",
+   "WebAssembly Binary Toolkit (WABT)" %}.
+   This includes a set of command line tools including
+   wat2wasm, wasm2wat, wasm-validate, and wasm-interp.
+   In macOS this can be installed using Homebrew
+   by entering `brew install wabt`.
+
+1. Enter `wat2wasm math.mat` to create the binary file `math.wasm`.
+
+1. Create the JavaScript file `index.js` that loads the `add.wasm`
+   and calls the function it defines:
+
+   ```js
+   WebAssembly.instantiateStreaming(fetch('math.wasm')).then(m => {
+     const {distance1, distance2, distance3, sum} = m.instance.exports;
+     document.getElementById('sum').textContent = sum(19, 3);
+     document.getElementById('distance').textContent = distance1(2, 3, 5, 7);
+     console.log('distance1 =', distance1(2, 3, 5, 7));
+     console.log('distance2 =', distance2(2, 3, 5, 7));
+     console.log('distance3 =', distance3(2, 3, 5, 7));
+   });
+   ```
+
+1. Create the HTML file `index.html` that includes `index.js`:
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+     <head>
+       <script src="index.js"></script>
+     </head>
+     <body>
+       <div>sum = <span id="sum"></span></div>
+       <div>distance = <span id="distance"></span></div>
+     </body>
+   </html>
+   ```
+
+1. Start a local HTTP file server.
+   One approach is to install [Deno](https://deno.land/)
+   and then enter these commands:
+
+   ```bash
+   deno install --allow-net --allow-read https://deno.land/std@0.87.0/http/file_server.ts
+   file_server .
+   ```
+
+1. Browse localhost:{port} where port is
+   the port on which the local server is listening.
+
+1. Open the DevTools console to see the `console.log` output.
+
+## WASM Instructions
+
+The tables below summarize the currently supported WASM instructions.
+For more detail, see the {% aTargetBlank
+"https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md",
+"WASM Reference Manual" %}.
+
+The tables use the following abbreviations
+for substitutions in instruction names:
+
+- `mm` and `nn` can be `32` bits or `64` bits
+- `sx` can be `u` (unsigned) or `s` (signed)
+
+### Numeric Instructions
+
+These instructions are prefixed by one of the four supported number types.
+For example, the instruction to add two `f32` values is `f32.add`.
+
+| Name       | Description                          |
+| ---------- | ------------------------------------ |
+| `abs`      | absolute value                       |
+| `add`      | add                                  |
+| `and`      | and                                  |
+| `ceil`     | ceiling                              |
+| `clz`      | count leading zeros                  |
+| `copysign` | copy sign                            |
+| `ctz`      | count training zeros                 |
+| `div_{sx}` | integer divide                       |
+| `div`      | floating point divide                |
+| `eq`       | equal                                |
+| `eqz`      | equal to zero                        |
+| `floor`    | floor                                |
+| `ge_{sx}`  | integer greater than or equal        |
+| `ge`       | floating point greater than or equal |
+| `gt_{sx}`  | integer greater than                 |
+| `gt`       | floating point greater than          |
+| `le_{sx}`  | integer less than or equal           |
+| `le`       | floating point less than or equal    |
+| `lt_{sx}`  | integer less than                    |
+| `lt`       | floating point less than             |
+| `max`      | maximum                              |
+| `min`      | minimum                              |
+| `mul`      | multiply                             |
+| `ne`       | not equal                            |
+| `nearest`  | round floating point to integer      |
+| `neg`      | negate                               |
+| `or`       | or                                   |
+| `popcnt`   | population count (# of 1 bits)       |
+| `rem_{sx}` | remainder                            |
+| `rotl`     | rotate left                          |
+| `rotr`     | rotate right                         |
+| `shl`      | shift left                           |
+| `shr_{xx}` | shift right                          |
+| `sqrt`     | square root                          |
+| `sub`      | subtract                             |
+| `trunc`    | truncate                             |
+| `xor`      | exclusive or                         |
+
+### Conversion Instructions
+
+| Name          | Description                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| `convert`     | convert integer to floating point                                   |
+| `demote`      | convert f64 to f32                                                  |
+| `extend`      | convert i32 to i64                                                  |
+| `promote`     | convert f32 to f64                                                  |
+| `reinterpret` | convert from integer to floating point or floating point to integer |
+| `trunc`       | truncate, discarding the least significant bits                     |
+| `wrap`        | converts i32 to i64, discarding the most significant bits           |
+
+### Basic Instructions
+
+| Name            | Description                                                            |
+| --------------- | ---------------------------------------------------------------------- |
+| `call`          | calls a function                                                       |
+| `call_indirect` | calls a function at an index in the default table                      |
+| `const`         | pushes a constant value onto the stack                                 |
+| `drop`          | pops top value from stack and does nothing with it                     |
+| `nop`           | no operation                                                           |
+| `select`        | takes two values and a condition; returns 1st if true and 2nd if false |
+
+## Variable Instructions
+
+| Name                    | Description                                      |
+| ----------------------- | ------------------------------------------------ |
+| `local.get {local-id}`  | push local variable onto stack                   |
+| `local.set {local-id}`  | set local variable from stack and pop            |
+| `local.tee {local-id}`  | set local variable from stack and leave on stack |
+| `global.get {local-id}` | push global variable onto stack                  |
+| `global.set {local-id}` | set global variable from stack and pop           |
+
+## Memory Instructions
+
+The `load` instructions load data from the default linear memory.
+The `store` instructions store data into the default linear memory.
+These instructions are prefixed by the number type to be loaded or stored.
+In the table below, `mem` is a memory offset.
+
+| Name                      | Description                                    |
+| ------------------------- | ---------------------------------------------- |
+| `i{nn}.load {mem}`        | reads integer value into matching size         |
+| `i{nn}.load8_{sx} {mem}`  | reads integer value into 8 bits                |
+| `i{nn}.load16_{sx} {mem}` | reads integer value into 16 bits               |
+| `i64.load32_{sx} {mem}`   | reads i64 value into 32 bits                   |
+| `f{nn}.load {mem}`        | reads floating point value                     |
+| `i{nn}.store {mem}`       | writes integer value into matching size        |
+| `i{nn}.store8 {mem}`      | writes integer value into 8 bits               |
+| `i{nn}.store16 {mem}`     | writes integer value into 16 bits              |
+| `i64.store32 {mem}`       | writes i64 value into 32 bits                  |
+| `f{nn}.store {mem}`       | writes floating point value into matching size |
+| `memory.grow`             | increases size of default linear memory        |
+| `memory.size`             | returns the size of default linear memory      |
+
+## Control Instructions
+
+| Name                                         | Description                                                         |
+| -------------------------------------------- | ------------------------------------------------------------------- |
+| `block {block-type} {instr}*`                | push code block onto control-flow stack                             |
+| `loop {block-type} {instr}* end`             | pushes loop body onto control-flow stack                            |
+| `if {block-type} {instr}* else {instr}* end` | conditional                                                         |
+| `br {depth}`                                 | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop |
+| `br_if {depth} {condition}`                  | conditional branch                                                  |
+| `br_table {table} {default-depth}`           | branch based on table entry at depth                                |
+| `return`                                     | return from function                                                |
+| `call {function-id}`                         | call function                                                       |
+| `call_indirect {type-id}`                    | call function at index in table                                     |
+| `unreachable`                                | signals an error (trap) if reached                                  |
+
 ## Choice of Programming Language
 
 Code from many programming languages can be compiled to WASM.
@@ -35,12 +409,12 @@ Currently full support is only available for C, C++, and Rust.
 Experimental support is available for C#, Go, Java, Kotlin, Python,
 Swift, TypeScript, and a few other less commonly used languages.
 
-In order to run WASM code in a web browser,
-the runtime of the source language must be included.
+In order to run WASM code that was compiled from another language,
+the runtime of the language must be included.
 Rust is a great choice for targeting WASM because it has a very small runtime
-compared to options like Python, so it downloads faster.
+compared to options like Python, so it loads faster.
 One reason Rust is able to ship a small runtime is that
-it does not need to include garbage collection code.
+it does not need to include code to perform garbage collection.
 
 A reason to prefer Rust over languages like C and C++
 is that the Rust compiler makes certain kinds of error impossible,
@@ -52,6 +426,31 @@ Tools for compiling Rust code to WebAssembly include
 The ssvmup tool was inspired by wasm-pack and has explicit support for Deno.
 Also see the support for Rust in the
 {% aTargetBlank "https://parceljs.org/rust.html", "Parcel bundler" %}!
+
+## Rust With Numbers
+
+Rust functions that only use numbers
+can be compiled to WASM and called from JavaScript
+without using tools like wasm-pack or wasm-bindgen.
+
+## Rust With More Types
+
+The wasm-bindgen crate makes it possible to compile Rust functions
+that use non-numeric types to WASM.
+
+TODO: Demonstrate passing a custom Rust struct and a Rust Vector.
+
+## Calling JavaScript functions from Rust
+
+call JS from Rust (builtins like alert and console.log and also custom functions)
+
+## Linear Memory
+
+"Linear memory" can be used to share data across programming languages
+without the overhead of copying values.
+Linear memory is also used by libraries such as wasm-bindgen
+to enable passing non-numeric values to functions
+and returning non-numeric values from them.
 
 From {% aTargetBlank
 "https://rustwasm.github.io/book/game-of-life/implementing.html",
@@ -67,230 +466,36 @@ By only returning the small result of the computation,
 we avoid copying and/or serializing everything back and forth between
 the JavaScript garbage-collected heap and the WebAssembly linear memory."
 
-## VS Code
+To use this approach, WASM code allocates space and provides functions that
+return a pointer to the space and the size of the space.
+Languages that wish to use the space call these functions
+and map their own data to it.
+For example, JavaScript code can create a typed array such as `Float64Array`
+that uses the same space.
+It can then set and get elements in the array to write and read
+the linear memory that is available in the WASM code.
+Note that it is not possible to allocate space outside the WASM code
+and get WASM code to share it.
 
-VS Code has several extensions for working with WASM code.
-The most popular is "WebAssembly" with the description
-"WebAssembly Toolkit for VSCode".
+Let's walk through an example that demonstrates this.
+The code is available in the GitHub repo {% aTargetBlank
+"https://github.com/mvolkmann/wasm-rust-linear-memory",
+"wasm-rust-linear-memory" %}.
+TODO: Why did you need to use wasm-bindgen in this example
+TODO: since it only uses numbers?
 
-## Text Format
+## Updating DOM from Rust
 
-WASM has a binary format and a text (intermediate form) format.
-Files in the binary format have the extension `.wasm`.
-Files in the text format have the extension `.wat`.
-The text format has two styles, linear and S-expressions.
-The linear format places instructions on separate lines.
-The S-expression format uses parentheses, similar to LISP,
-representing a tree of nodes.
-The first value in each expression indicates the node type.
-The remaining values are attributes or child nodes.
+See https://github.com/mvolkmann/wasm-bind-demo/blob/main/src/lib.rs
+which uses the web-sys crate.
 
-A `.wat` file can be compile to a `.wasm` file using the `wat2wasm` tool.
-A `.wasm` file can be de-compiled to a `.wat` file using the `wasm2wat` tool.
-Note that this outputs the linear style.
-Also see `.wast` files that are for writing tests.
+## Running Outside Browsers
 
-It is also possible write code in another language such as Rust
-and compile it to WASM.
-
-Every `.wat` file contains a single, top-level S-expression
-that defines a module.
-Modules define sets of functions.
-Function definitions have the syntax
-`(func {signature} {locals} {body})`.
-The signature defines the function name,
-its parameter types, and its return type.
-Locals defines local variable names and types.
-Body is a list of instructions that implement the function.
-
-Currently only for types are supported.
-These match number types from Rust, including `i32`, `i64`, `f32`, and `f64`.
-Other types such as strings and structs currently must be
-serialized into these number types and deserialized from them.
-Tools such as wasm_bindgen for Rust can do this for you.
-
-Parameters and local variables are access by their position in the signature
-(zero-based index), not by name.
-The `local.get {index}` instruction gets a value and places it on the stack.
-To change the value of a local variable, use the instruction
-`(local.set {index} {value})`.
-Function calls get their arguments from the stack.
-When a function exists, its return value is the top value on the stack.
-
-In functions that do not return a value, the return type is omitted.
-
-Here is an example that defines a function that
-takes two numbers and returns their sum.
-
-1. Create the file `add.wat` containing the following:
-
-```text
-(module
-  (func $add (param $lhs i32) (param $rhs i32) (result i32)
-    local.get $lhs
-    local.get $rhs
-    i32.add)
-  (export "add" (func $add))
-)
-```
-
-To compile this code ...
-
-1. Install WebAssembly Binary Toolkit (WABT).
-   This includes a set of command line tools including
-   wat2wasm, wasm2wat, wasm-validate, and wasm-interp.
-   In macOS this can be installed using Homebrew
-   by entering `brew install wabt`.
-
-1. Enter `wat2wasm` to create the binary file `add.wasm`.
-
-1. Create the JavaScript file `index.js` that loads the `add.wasm`
-   and calls the function it defines:
-
-```js
-WebAssembly.instantiateStreaming(fetch('add.wasm')).then(m => {
-  const sum = m.instance.exports.add(1, 2);
-  console.log('sum =', sum);
-  document.getElementById('result').textContent = sum;
-});
-```
-
-1. Create the HTML file `index.html` that includes `index.js`:
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <script src="index.js"></script>
-  </head>
-  <body>
-    <div>sum = <span id="result"></span></div>
-  </body>
-</html>
-```
-
-1. Start a local HTTP file server.
-
-1. Browse localhost:????.
-
-To call this code from JavaScript running in a web browser ...
-
-## WASM Instructions
-
-The tables below summarizes the supported WASM instructions.
-For more detail, see the {% aTargetBlank
-"https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md",
-"WASM Reference Manual" %}.
-
-The tables use the following abbreviations
-for substitutions in instruction names:
-
-- `mm` and `nn` can be `32` or `64`
-- `sx` can be `u` or `s`
-
-### Numeric Instructions
-
-| Name       | Description                    |
-| ---------- | ------------------------------ |
-| `abs`      | absolute value                 |
-| `add`      | add                            |
-| `and`      | and                            |
-| `ceil`     | ceiling                        |
-| `clz`      | count leading zeros            |
-| `copysign` | copy sign                      |
-| `ctz`      | count training zeros           |
-| `div_{sx}` | divide                         |
-| `div`      | divide                         |
-| `eq`       | equal                          |
-| `eqz`      | equal to zero                  |
-| `floor`    | floor                          |
-| `ge_{sx}`  | greater than or equal          |
-| `ge`       | greater than or equal          |
-| `gt_{sx}`  | greater than                   |
-| `le_{sx}`  | less than or equal             |
-| `le`       | less than or equal             |
-| `lt_{sx}`  | less than                      |
-| `max`      | maximum                        |
-| `min`      | minimum                        |
-| `mul`      | multiply                       |
-| `ne`       | not equal                      |
-| `nearest`  | round?                         |
-| `neg`      | negate                         |
-| `or`       | or                             |
-| `popcnt`   | population count (# of 1 bits) |
-| `rem_{sx}` | remainder                      |
-| `rotl`     | rotate left                    |
-| `rotr`     | rotate right                   |
-| `shl`      | shift left                     |
-| `shr_{xx}` | shift right                    |
-| `sqrt`     | square root                    |
-| `sub`      | subtract                       |
-| `trunc`    | truncate                       |
-| `xor`      | exclusive or                   |
-
-### ? Instructions
-
-| Name          | Description                       |
-| ------------- | --------------------------------- |
-| `convert`     | convert integer to floating point |
-| `demote`      | demote f64 to f32                 |
-| `extend`      | ?                                 |
-| `promote`     | ?                                 |
-| `reinterpret` | ?                                 |
-| `trunc_sat`   | ?                                 |
-| `trunc`       | truncate                          |
-| `wrap`        | ?                                 |
-
-### Parametric Instructions
-
-| Name     | Description |
-| -------- | ----------- |
-| `drop`   | ?           |
-| `select` | ?           |
-
-## Variable Instructions
-
-| Name                    | Description                    |
-| ----------------------- | ------------------------------ |
-| `local.get {local-id}`  | get local variable onto stack  |
-| `local.set {local-id}`  | set local variable from stack  |
-| `local.tee {local-id}`  | ?                              |
-| `global.get {local-id}` | get global variable onto stack |
-| `global.set {local-id}` | set global variable from stack |
-
-## Memory Instructions
-
-| Name                      | Description |
-| ------------------------- | ----------- |
-| `i{nn}.load {mem}`        |             |
-| `i{nn}.load8_{sx} {mem}`  |             |
-| `i{nn}.load16_{sx} {mem}` |             |
-| `i64.load32_{sx} {mem}`   |             |
-| `i{nn}.store {mem}`       |             |
-| `i{nn}.store8 {mem}`      |             |
-| `i{nn}.store16 {mem}`     |             |
-| `i64.store32 {mem}`       |             |
-| `f{nn}.load {mem}`        |             |
-| `f{nn}.store {mem}`       |             |
-| `memory.grow`             |             |
-| `memory.size`             |             |
-
-## Control Instructions
-
-| Name                                         | Description                                                                    |
-| -------------------------------------------- | ------------------------------------------------------------------------------ |
-| `nop`                                        | no operation                                                                   |
-| `unreachable`                                |                                                                                |
-| `block {block-type} {instr}* end`            | code block                                                                     |
-| `loop {block-type} {instr}* end`             | loop                                                                           |
-| `if {block-type} {instr}* else {instr}* end` | conditional                                                                    |
-| `br {label-id}`                              |                                                                                |
-| `br_if {label-id}`                           |                                                                                |
-| `br_table vec({label-id}) {label-id}`        |                                                                                |
-| `return`                                     | return from function                                                           |
-| `call {function-id}`                         | call function                                                                  |
-| `call_indirect {type-id}`                    |                                                                                |
-| `end`                                        | ends a function body, global initialization, element segment, or data segement |
+Describe using
+{% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %},
+{% aTargetBlank "https://wasmtime.dev", "Wasmtime" %}, and
+{% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime",
+"WebAssembly Micro Runtime (WAMR)" %}.
 
 ## Demos
 
