@@ -119,7 +119,7 @@ This code is available in the GitHub repo
   (export "sum" (func $sum))
 
   ;; This uses the "linear" format.
-  (func $distance1
+  (func $distance
     (param $x1 f64)
     (param $y1 f64)
     (param $x2 f64)
@@ -143,7 +143,7 @@ This code is available in the GitHub repo
     f64.add
     f64.sqrt
   )
-  (export "distance1" (func $distance2))
+  (export "distance" (func $distance))
 
   ;; This uses S-expressions.
   (func $distance2
@@ -236,10 +236,10 @@ This code is available in the GitHub repo
 
    ```js
    WebAssembly.instantiateStreaming(fetch('math.wasm')).then(m => {
-     const {distance1, distance2, distance3, sum} = m.instance.exports;
+     const {distance, distance2, distance3, sum} = m.instance.exports;
      document.getElementById('sum').textContent = sum(19, 3);
-     document.getElementById('distance').textContent = distance1(2, 3, 5, 7);
-     console.log('distance1 =', distance1(2, 3, 5, 7));
+     document.getElementById('distance').textContent = distance(2, 3, 5, 7);
+     console.log('distance1 =', distance(2, 3, 5, 7));
      console.log('distance2 =', distance2(2, 3, 5, 7));
      console.log('distance3 =', distance3(2, 3, 5, 7));
    });
@@ -277,6 +277,10 @@ This code is available in the GitHub repo
 ## WASM Instructions
 
 The tables below summarize the currently supported WASM instructions.
+Understanding these is only necessary when
+directly writing WASM code in text format or
+to understand what compilers for higher level languages like Rust generate.
+
 For more detail, see the {% aTargetBlank
 "https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md",
 "WASM Reference Manual" %}.
@@ -344,6 +348,31 @@ For example, the instruction to add two `f32` values is `f32.add`.
 | `trunc`       | truncate, discarding the least significant bits                     |
 | `wrap`        | converts i32 to i64, discarding the most significant bits           |
 
+## Variable Instructions
+
+| Name                    | Description                                      |
+| ----------------------- | ------------------------------------------------ |
+| `local.get {local-id}`  | push local variable onto stack                   |
+| `local.set {local-id}`  | set local variable from stack and pop            |
+| `local.tee {local-id}`  | set local variable from stack and leave on stack |
+| `global.get {local-id}` | push global variable onto stack                  |
+| `global.set {local-id}` | set global variable from stack and pop           |
+
+## Control Instructions
+
+| Name                                         | Description                                                         |
+| -------------------------------------------- | ------------------------------------------------------------------- |
+| `block {block-type} {instr}*`                | push code block onto control-flow stack                             |
+| `loop {block-type} {instr}* end`             | pushes loop body onto control-flow stack                            |
+| `if {block-type} {instr}* else {instr}* end` | conditional                                                         |
+| `br {depth}`                                 | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop |
+| `br_if {depth} {condition}`                  | conditional branch                                                  |
+| `br_table {table} {default-depth}`           | branch based on table entry at depth                                |
+| `return`                                     | return from function                                                |
+| `call {function-id}`                         | call function                                                       |
+| `call_indirect {type-id}`                    | call function at index in table                                     |
+| `unreachable`                                | signals an error (trap) if reached                                  |
+
 ### Basic Instructions
 
 | Name            | Description                                                            |
@@ -354,16 +383,6 @@ For example, the instruction to add two `f32` values is `f32.add`.
 | `drop`          | pops top value from stack and does nothing with it                     |
 | `nop`           | no operation                                                           |
 | `select`        | takes two values and a condition; returns 1st if true and 2nd if false |
-
-## Variable Instructions
-
-| Name                    | Description                                      |
-| ----------------------- | ------------------------------------------------ |
-| `local.get {local-id}`  | push local variable onto stack                   |
-| `local.set {local-id}`  | set local variable from stack and pop            |
-| `local.tee {local-id}`  | set local variable from stack and leave on stack |
-| `global.get {local-id}` | push global variable onto stack                  |
-| `global.set {local-id}` | set global variable from stack and pop           |
 
 ## Memory Instructions
 
@@ -387,22 +406,7 @@ In the table below, `mem` is a memory offset.
 | `memory.grow`             | increases size of default linear memory        |
 | `memory.size`             | returns the size of default linear memory      |
 
-## Control Instructions
-
-| Name                                         | Description                                                         |
-| -------------------------------------------- | ------------------------------------------------------------------- |
-| `block {block-type} {instr}*`                | push code block onto control-flow stack                             |
-| `loop {block-type} {instr}* end`             | pushes loop body onto control-flow stack                            |
-| `if {block-type} {instr}* else {instr}* end` | conditional                                                         |
-| `br {depth}`                                 | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop |
-| `br_if {depth} {condition}`                  | conditional branch                                                  |
-| `br_table {table} {default-depth}`           | branch based on table entry at depth                                |
-| `return`                                     | return from function                                                |
-| `call {function-id}`                         | call function                                                       |
-| `call_indirect {type-id}`                    | call function at index in table                                     |
-| `unreachable`                                | signals an error (trap) if reached                                  |
-
-## Choice of Programming Language
+## Higher Level Languages
 
 Code from many programming languages can be compiled to WASM.
 Currently full support is only available for C, C++, and Rust.
@@ -433,10 +437,63 @@ Rust functions that only use numbers
 can be compiled to WASM and called from JavaScript
 without using tools like wasm-pack or wasm-bindgen.
 
+Let's implement the same `sum` and `distance` functions
+we saw earlier, but do so using Rust instead of WAT.
+Where are the steps assuming Rust has already been installed.
+
+1. `cargo new --lib rust-math`
+
+1. Edit `Cargo.toml` and add the following:
+
+   ```toml
+   [lib]
+   crate-type = ['cdylib']
+   ```
+
+1. Edit `src/lib.rs` and change the contents to the following:
+
+   ```rs
+   #[no_mangle]
+   pub fn sum(n1: f64, n2: f64) -> f64 {
+       n1 + n2
+   }
+
+   #[no_mangle]
+   pub fn distance(x1: f64, y1: f64, x2: f64, y2: f64) -> f64 {
+       ((x1 - x2).powi(2) + (y1 - y2).powi(2)).sqrt()
+   }
+   ```
+
+1. To generate a `.wasm` file from the Rust code,
+   enter `cargo build --target wasm32-unknown-unknown`
+
+1. To install the `wasm-nm` tool for
+   listing the symbols exported by a `.wasm` file,
+   enter `cargo install wasm-nm`
+
+1. To see the exported symbols,
+   enter `wasm-nm target/wasm32-unknown-unknown/rust_math.wasm`
+
+1. Modify the `index.js` file created earlier to pass
+   the file path of this `.wasm` file to the fetch function which is
+   `rust-math/target/wasm32-unknown-unknown/debug/rust_math.wasm`.
+
+1. Start a local HTTP file server like before.
+
+1. Browse localhost:{port} where port is
+   the port on which the local server is listening.
+
+1. Open the DevTools console to see the `console.log` output.
+   There be an error message saying that `distance2` is not a function
+   which is expected because the Rust code
+   only defines the `sum` and `distance` functions.
+
 ## Rust With More Types
 
 The wasm-bindgen crate makes it possible to compile Rust functions
 that use non-numeric types to WASM.
+
+TODO: STOPPED HERE
 
 TODO: Demonstrate passing a custom Rust struct and a Rust Vector.
 
