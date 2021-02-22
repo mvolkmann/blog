@@ -8,6 +8,8 @@ layout: topic-layout.njk
 
 WebAssembly (abbreviated WASM) is a binary instruction format
 for a stack-based virtual machine.
+Other popular stack-based virtual machines include
+the Java Virtual Machine (JVM) and the .NET Common Language Runtime (CLR).
 
 WASM code can be run in modern web browsers including
 Chrome, Edge, Firefox, and Safari (not Internet Explorer).
@@ -46,6 +48,11 @@ This can be accomplished by enabling supported programming languages
 to serialize non-numeric values to linear memory as an array of i32 values.
 Other supported languages can then deserialize values from the array.
 This enables each language to use its own representation of the data types.
+
+WASM doesn't assume number values are signed.
+However, specific operations performed on them do.
+For example, the operation to add two i64 signed values is `i64.add`
+and the for unsigned values is `i64.add_u`.
 
 ## Implementing Directly
 
@@ -291,6 +298,31 @@ for substitutions in instruction names:
 - `mm` and `nn` can be `32` bits or `64` bits
 - `sx` can be `u` (unsigned) or `s` (signed)
 
+As mentioned earlier, there is no instruction for
+duplicating the top value on the stack.
+Adding this has been proposed.
+Thomas Lively provided rationale on why this has not been done.
+
+"It takes a surprising amount of work and time to spec new instructions and
+get them implemented in every tool and engine out there.
+So generally only changes with significant benefits
+get all the way through the process.
+Unfortunately that means that there are a lot of "nice to have" proposals,
+even tiny ones like adding a single dup instruction, that don't make the cut.
+I'm not saying we'll never add dup, but if we do it will because it solves
+an important problem so lots of folks agree it's important to add
+and will be motivated to implement and maintain it throughout the ecosystem.
+
+This is one of the costs of standards-based work.
+If WASM were controlled by a single party,
+it would be easy to add a single instruction like dup.
+Since it's not, you first have to get a lot of different people with
+different priorities and opinions to agree that adding dup
+is both a good idea and worth their time and effort.
+Because of this extra consensus-building work,
+the community can have more confidence in the robustness and benefits
+of the proposals that do make it through the process."
+
 ### Numeric Instructions
 
 These instructions are prefixed by one of the four supported number types.
@@ -360,18 +392,37 @@ For example, the instruction to add two `f32` values is `f32.add`.
 
 ## Control Instructions
 
-| Name                                         | Description                                                         |
-| -------------------------------------------- | ------------------------------------------------------------------- |
-| `block {block-type} {instr}*`                | push code block onto control-flow stack                             |
-| `loop {block-type} {instr}* end`             | pushes loop body onto control-flow stack                            |
-| `if {block-type} {instr}* else {instr}* end` | conditional                                                         |
-| `br {depth}`                                 | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop |
-| `br_if {depth} {condition}`                  | conditional branch                                                  |
-| `br_table {table} {default-depth}`           | branch based on table entry at depth                                |
-| `return`                                     | return from function                                                |
-| `call {function-id}`                         | call function                                                       |
-| `call_indirect {type-id}`                    | call function at index in table                                     |
-| `unreachable`                                | signals an error (trap) if reached                                  |
+| Name                               | Description                                                                  |
+| ---------------------------------- | ---------------------------------------------------------------------------- |
+| `block {block-type} {instr}*`      | creates a block of instructions, typically in another operation such as `if` |
+| `loop {block-type} {instr}* end`   | creates a labeled block for implementing a loop                              |
+| `if`                               | denotes the true block of a conditional                                      |
+| `else`                             | denotes the false block of a conditional                                     |
+| `end`                              | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`    |
+| `br {depth}`                       | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop          |
+| `br_if {depth} {condition}`        | conditional branch                                                           |
+| `br_table {table} {default-depth}` | branch based on table entry at depth                                         |
+| `return`                           | return from function                                                         |
+| `call {function-id}`               | call function                                                                |
+| `call_indirect {type-id}`          | call function at index in table                                              |
+| `unreachable`                      | signals an error (trap) if reached                                           |
+
+Even control flow operates on the stack.
+For example, the `if` operation executes its branch
+if the value at the top of the stack evaluates to true.
+
+Here is an example of an `if` operation uses the S-expression syntax:
+
+```wasm
+(if (f32.gt (call $getTemperature) (f32.const 100.0))
+  (then (call $turnOnAc))
+  (else (call $runAgain))
+)
+```
+
+TODO: Demonstrate all the control instructions in a `.wat` file!
+TODO: See https://medium.com/leaningtech/solving-the-structured-control-flow-problem-once-and-for-all-5123117b1ee2.
+TODO: Maybe implement the Fibonacci function in multiple ways.
 
 ### Basic Instructions
 
@@ -699,6 +750,10 @@ so we will also use that. This tool:
 
 1. Open the DevTools console to see the `console.log` output.
 
+TODO: How can Rust call custom JavaScript functions when using wasm-bindgen
+TODO: instead of `WebAssembly.instantiateStreaming`?
+TODO: See https://rustwasm.github.io/docs/wasm-bindgen/examples/import-js.html!
+
 ## Linear Memory
 
 TODO: Resume here
@@ -749,10 +804,56 @@ which uses the web-sys crate.
 ## Running Outside Browsers
 
 Describe using
-{% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %},
-{% aTargetBlank "https://wasmtime.dev", "Wasmtime" %}, and
-{% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime",
 "WebAssembly Micro Runtime (WAMR)" %}.
+
+There are currently three tools for running WASM code outside a web browser.
+
+- {% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %}
+
+  To install this in macOS, install Homebrew and enter `brew install wasm3`.
+  Installing for other platforms is more complicated.
+  For details, visit the WASM3 site linked above.
+
+  To call functions defined in a `.wasm` file from a REPL,
+  enter `wasm3 --repl {path-to-wasm-file}`.
+  Then enter function names followed by arguments.
+
+  To call functions directly, not using a REPL,
+  enter `wasm3 --func {function-name} {path-to-wasm-file} {arguments}`.
+
+  TODO: I can't get either of these approaches to work on a `.wasm` file
+  TODO: I created from a Rust programing using
+  TODO: `rustc {path-to-rust-file} --target wasm32-wasi`!
+
+- {% aTargetBlank "https://wasmtime.dev", "Wasmtime" %}, and
+
+  To install this in Linux or macOS, enter the following command
+  and open a new terminal:
+
+  ```bash
+  curl https://wasmtime.dev/install.sh -sSf | bash
+  ```
+
+  Visit the Wasmtime site linked above for instructions on installing in Windows.
+
+  To compile Rust code to
+  {% aTargetBlank "https://wasi.dev", "WebAssembly System Interface (WASI)" %},
+  enter `rustc {path-to-rust-file} --target wasm32-wasi`.
+  The Rust code can use features such as the `println!` macro to produce output.
+  This produces a `.wasm` file.
+
+  To execute a `.wasm` file, enter `wasmtime {path-to-wasm-file}`.
+
+  To execute a `.wast` test file, enter `wasmtime wast {path-to-wast-file}`.
+
+  Unlike wasm3, wasmtime does not provide a REPL or
+  support running a specific function from the command-line.
+
+- {% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime",
+
+  To install this, VERY COMPLICATED!
+  It's not clear if this is meant to be used as a command-line tool.
+  See https://github.com/bytecodealliance/wasm-micro-runtime/issues/538.
 
 ## Demos
 
@@ -881,3 +982,6 @@ To compile a `.rs` file to WebAssembly:
    ```js
    console.log(factorial(4n)); // "n" suffix makes it BitInt
    ```
+
+TODO: Invent a programming language that translated to WAT
+TODO: more directly than a language like Rust.
