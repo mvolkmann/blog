@@ -850,8 +850,9 @@ There are currently three tools for running WASM code outside a web browser.
   support running a specific function from the command-line.
 
 - {% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime",
+  "WebAssembly Micro Runtime (WAMR)" %}.
 
-  To install this, VERY COMPLICATED!
+  To install this, ... VERY COMPLICATED!
   It's not clear if this is meant to be used as a command-line tool.
   See https://github.com/bytecodealliance/wasm-micro-runtime/issues/538.
 
