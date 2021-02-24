@@ -901,10 +901,8 @@ that computes the distance between two points and call it from JavaScript:
 
 ## Running Outside Browsers
 
-Describe using
-"WebAssembly Micro Runtime (WAMR)" %}.
-
 There are currently three tools for running WASM code outside a web browser.
+Each is described below.
 
 ### {% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %}
 
@@ -937,6 +935,13 @@ One way to demonstrate running this is to compile Rust code to
 To do so, enter `rustc {path-to-rust-file} --target wasm32-wasi`.
 This produces a `.wasm` file.
 The Rust code can use features such as the `println!` macro to produce output.
+For example:
+
+```rust
+fn main() {
+    println!("Hello, World!");
+}
+```
 
 To execute a `.wasm` file, enter `wasmtime {path-to-wasm-file}`.
 
