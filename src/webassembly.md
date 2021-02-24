@@ -668,6 +668,14 @@ so we will also use that. This tool:
        pub fn log(s: &str);
    }
 
+   // This makes functions define in JavaScript available in Rust.
+   #[wasm_bindgen(raw_module = "/index.js")]
+   extern "C" {
+       fn cube(n: f64) -> f64;
+       fn square(n: f64) -> f64;
+   }
+
+
    #[wasm_bindgen]
    pub fn greet(name: &str) {
        log(&format!("Hello, {}!", name));
@@ -697,6 +705,13 @@ so we will also use that. This tool:
        alert(&format!("Getting powers of {} ...", n));
        vec![n, n.pow(2), n.pow(3)]
    }
+
+
+   // This Rust function calls custom JavaScript functions.
+   #[wasm_bindgen(js_name = sumOfSquareAndCube)]
+   pub fn sum_of_square_and_cube(n: f64) -> f64 {
+       square(n) * cube(n)
+   }
    ```
 
 1. Enter `wasm-pack build --dev --target web`
@@ -711,6 +726,14 @@ so we will also use that. This tool:
      greet
    } from './pkg/wasm_bindgen_demo.js';
 
+   export function square(n) {
+     return n * n;
+   }
+
+   export function cube(n) {
+     return n ** 3;
+   }
+
    async function run() {
      await init();
      greet('World');
@@ -724,6 +747,8 @@ so we will also use that. This tool:
 
      const powers = getPowers(3); // a UIntArray
      console.log('powers =', powers); // [3, 9, 27]
+
+     console.log('square + cube =', sumOfSquareAndCube(2)); // 12
    }
 
    run();
