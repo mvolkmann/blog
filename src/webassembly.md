@@ -801,6 +801,104 @@ TODO: since it only uses numbers?
 See https://github.com/mvolkmann/wasm-bind-demo/blob/main/src/lib.rs
 which uses the web-sys crate.
 
+## AssemblyScript
+
+{% aTargetBlank "https://www.assemblyscript.org", "AssemblyScript" %}
+is a programming language designed to compile to WASM.
+
+AssemblyScript is a variant of TypeScript.
+Its source files use the `.ts` file extension.
+Semicolons at the ends of statements are optional.
+
+AssemblyScript includes
+"a relatively small memory management and garbage collection runtime."
+
+The only supported types are:
+
+- boolean `bool`
+- signed integer types `i8`, `i16`, `i32` and `i64`
+- unsigned integer types `u8`, `u16`, `u32` and `u64`
+- floating point types `f32` and `f64`.
+- platform-specific integers `isize` and `usize`
+- 128-bit vector `v128`
+- opaque host reference `anyref`
+- `void` for functions with no return value (cannot omit return type)
+- `Array`
+- `ArrayBuffer`
+- `DataView`
+- `Map`
+- `Math`
+- `Set`
+- `string`?
+- `String`
+- typed arrays `Int{size}Array`, `UInt{size}Array`, and `Float{size}Array`
+
+Macro types
+
+- `indexof<T>`
+- `native<T>`
+- `returnof<T>`
+- `valueof<T>`
+
+Supported math operations are described {% aTargetBlank
+"https://www.assemblyscript.org/stdlib/math.html", "here" %}.
+
+To install the AssemblyScript compiler, install Node.js
+and enter `npm install -g assemblyscript`.
+
+To compile an AssemblyScript source file to a `.wat` file:
+
+```bash
+asc {file-path}.ts -t {file-path}.wat
+```
+
+To compile an AssemblyScript source file to a `.wasm` file:
+
+```bash
+asc {file-path}.ts -b {file-path}.wasm -O3
+```
+
+Here are the steps to implement a `distance` function in AssemblyScript
+that computes the distance between two points and call it from JavaScript:
+
+1. Create the file `math.ts` containing the following:
+
+   ```ts
+   export function distance(x1: f64, y1: f64, x2: f64, y2: f64): f64 {
+     return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+   }
+   ```
+
+1. Compile this to WASM by entering `asc math.ts -b math.wasm -O3`
+
+1. Create the file `index.js` containing the following:
+
+   ```js
+   WebAssembly.instantiateStreaming(fetch('math.wasm')).then(m => {
+     const {distance} = m.instance.exports;
+     document.getElementById('result').textContent = distance(2, 3, 5, 7);
+   });
+   ```
+
+1. Create the file `index.html` containing the following:
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+     <head>
+       <script src="index.js"></script>
+     </head>
+     <body>
+       <div>result = <span id="result"></span></div>
+     </body>
+   </html>
+   ```
+
+1. Start a local HTTP file server like before.
+
+1. Browse localhost:{port} where port is
+   the port on which the local server is listening.
+
 ## Running Outside Browsers
 
 Describe using
@@ -808,53 +906,68 @@ Describe using
 
 There are currently three tools for running WASM code outside a web browser.
 
-- {% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %}
+### {% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %}
 
-  To install this in macOS, install Homebrew and enter `brew install wasm3`.
-  Installing for other platforms is more complicated.
-  For details, visit the WASM3 site linked above.
+To install this in macOS, install Homebrew and enter `brew install wasm3`.
+Installing for other platforms is more complicated.
+For details, visit the WASM3 site linked above.
 
-  To call functions defined in a `.wasm` file from a REPL,
-  enter `wasm3 --repl {path-to-wasm-file}`.
-  Then enter function names followed by arguments.
+To call functions defined in a `.wasm` file from a REPL,
+enter `wasm3 --repl {path-to-wasm-file}`.
+Then enter function names followed by arguments.
 
-  To call functions directly, not using a REPL,
-  enter `wasm3 --func {function-name} {path-to-wasm-file} {arguments}`.
+To call functions directly, not using a REPL,
+enter `wasm3 --func {function-name} {path-to-wasm-file} {arguments}`.
 
-  TODO: I can't get either of these approaches to work on a `.wasm` file
-  TODO: I created from a Rust programing using
-  TODO: `rustc {path-to-rust-file} --target wasm32-wasi`!
+TODO: I can't get either of these approaches to work on a `.wasm` file
+TODO: I created from a Rust programing using
+TODO: `rustc {path-to-rust-file} --target wasm32-wasi`!
 
-- {% aTargetBlank "https://wasmtime.dev", "Wasmtime" %}, and
+### {% aTargetBlank "https://wasmtime.dev", "Wasmtime" %}
 
-  To install this in Linux or macOS, enter the following command
-  and open a new terminal:
+To install this in Linux or macOS:
 
-  ```bash
-  curl https://wasmtime.dev/install.sh -sSf | bash
-  ```
+1. Enter `curl https://wasmtime.dev/install.sh -sSf | bash`
+1. Open a new terminal that will have `wasmtime` in `PATH`.
 
-  Visit the Wasmtime site linked above for instructions on installing in Windows.
+Visit the Wasmtime site linked above for instructions to install in Windows.
 
-  To compile Rust code to
-  {% aTargetBlank "https://wasi.dev", "WebAssembly System Interface (WASI)" %},
-  enter `rustc {path-to-rust-file} --target wasm32-wasi`.
-  The Rust code can use features such as the `println!` macro to produce output.
-  This produces a `.wasm` file.
+One way to demonstrate running this is to compile Rust code to
+{% aTargetBlank "https://wasi.dev", "WebAssembly System Interface (WASI)" %}.
+To do so, enter `rustc {path-to-rust-file} --target wasm32-wasi`.
+This produces a `.wasm` file.
+The Rust code can use features such as the `println!` macro to produce output.
 
-  To execute a `.wasm` file, enter `wasmtime {path-to-wasm-file}`.
+To execute a `.wasm` file, enter `wasmtime {path-to-wasm-file}`.
 
-  To execute a `.wast` test file, enter `wasmtime wast {path-to-wast-file}`.
+To execute a `.wast` test file, enter `wasmtime wast {path-to-wast-file}`.
 
-  Unlike wasm3, wasmtime does not provide a REPL or
-  support running a specific function from the command-line.
+Unlike wasm3, wasmtime does not provide a REPL or
+support running a specific function from the command-line.
 
-- {% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime",
-  "WebAssembly Micro Runtime (WAMR)" %}.
+### {% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime", "WebAssembly Micro Runtime (WAMR)" %}
 
-  To install this, ... VERY COMPLICATED!
-  It's not clear if this is meant to be used as a command-line tool.
-  See https://github.com/bytecodealliance/wasm-micro-runtime/issues/538.
+Instructions for installing this tool on various platforms can be found at
+{% aTargetBlank
+  "https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wamr.md",
+  "build_wamr.md" %}.
+
+To install this in macOS:
+
+- Browse {% aTargetBlank
+  "https://github.com/bytecodealliance/wasm-micro-runtime",
+  "wasm-micro-runtime" %}.
+- Click the "Code" button and "Download ZIP".
+- Unzip the downloaded file.
+- cd into its directory and into `product-mini/platforms/darwin`.
+- Install the `cmake` command with `brew install cmake`.
+- Enter `mkdir build`
+- Enter `cd build`
+- Enter `cmake ..`
+- Enter `make` to create the executable `iwasm` in the current directory.
+- Copy `iwasm` to a directory listed in the `PATH` environment variable.
+
+To run a `.wasm` file, enter `.iwasm {path-to-wasm-file}`
 
 ## Demos
 
