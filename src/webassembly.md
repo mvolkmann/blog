@@ -108,9 +108,9 @@ These can be referenced by name,
 but the names are compiled away in favor of indexes.
 
 Operations get their arguments from the top values on the stack.
-The `local.get {index | name}` instruction
+The `local.get {index | name}` instruction (old name was `get_local`)
 gets the value of a parameter of local variable and places it on the stack.
-The `local.set {index | name} {value}` instruction
+The `local.set {index | name} {value}` instruction (old name was `set_local`)
 sets value of a local variable.
 The `{type}.const {value}` instruction pushes a constant value on the stack.
 When a function exists, its return value is the top value on the stack.
@@ -149,18 +149,18 @@ This code is available in the GitHub repo
     (param $y2 f64)
     (result f64)
 
-    get_local $x1
-    get_local $x2
+    local.get $x1
+    local.get $x2
     f64.sub
-    tee_local $x1 ;; reusing $x1 to hold temporary dx value
-    get_local $x1
+    local.tee $x1 ;; reusing $x1 to hold temporary dx value
+    local.get $x1
     f64.mul
 
-    get_local $y1
-    get_local $y2
+    local.get $y1
+    local.get $y2
     f64.sub
-    tee_local $y1 ;; reusing $y1 to hold temporary dy value
-    get_local $y1
+    local.tee $y1 ;; reusing $y1 to hold temporary dy value
+    local.get $y1
     f64.mul
 
     f64.add
@@ -179,13 +179,13 @@ This code is available in the GitHub repo
     (local $dx f64)
     (local $dy f64)
 
-    (set_local $dx
+    (local.set $dx
       (f64.sub
         (local.get $x1)
         (local.get $x2)
       )
     )
-    (set_local $dy
+    (local.set $dy
       (f64.sub
         (local.get $y1)
         (local.get $y2)
@@ -198,12 +198,12 @@ This code is available in the GitHub repo
           ;; There is no instruction to duplicate the value at
           ;; the top of the stack, so we have to do this twice.
           ;; See https://github.com/WebAssembly/design/issues/1365.
-          (get_local $dx)
-          (get_local $dx)
+          (local.get $dx)
+          (local.get $dx)
         )
         (f64.mul
-          (get_local $dy)
-          (get_local $dy)
+          (local.get $dy)
+          (local.get $dy)
         )
       )
     )
@@ -221,22 +221,22 @@ This code is available in the GitHub repo
     (f64.sqrt
       (f64.add
         (f64.mul
-          (tee_local $x1 ;; reusing $x1 to hold temporary dx value
+          (local.tee $x1 ;; reusing $x1 to hold temporary dx value
             (f64.sub
-              (get_local $x1)
-              (get_local $x2)
+              (local.get $x1)
+              (local.get $x2)
             )
           )
-          (get_local $x1)
+          (local.get $x1)
         )
         (f64.mul
-          (tee_local $y1 ;; reusing $y1 to hold temporary dy value
+          (local.tee $y1 ;; reusing $y1 to hold temporary dy value
             (f64.sub
-              (get_local $y1)
-              (get_local $y2)
+              (local.get $y1)
+              (local.get $y2)
             )
           )
-          (get_local $y1)
+          (local.get $y1)
         )
       )
     )
