@@ -1028,6 +1028,9 @@ To compile a Rust project to WASM with WASI support,
 enter `cargo build --target wasm32-unknown-wasi`.
 TODO: What are the options for the three parts of the target string?
 
+TODO: Try reading and writing files using Wasmtime.
+TODO: Try sending an HTTP GET request using Wasmtime.
+
 C/C++ code compiled to WASM can use WASI features because it will use
 wasi-sysroot which is a wasi-core implementation of the libc library.
 
@@ -1106,7 +1109,7 @@ To execute a `.wasm` file, enter `wasmtime {path-to-wasm-file}`.
 
 To execute a `.wast` test file, enter `wasmtime wast {path-to-wast-file}`.
 
-Unlike wasm3, wasmtime does not provide a REPL or
+Unlike wasm3, Wasmtime does not provide a REPL or
 support running a specific function from the command-line.
 
 ### {% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime", "WebAssembly Micro Runtime (WAMR)" %}
