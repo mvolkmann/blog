@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 ## Overview
 
 WebAssembly (abbreviated WASM) is a binary instruction format
@@ -976,7 +978,7 @@ ability to combine code compiled from many higher-level programming languages.
 WASM code using WASI is portable across operating systems.
 
 Implementations of WASI include
-{% aTargetBlank "https://wasmtime.dev", "Wasmtime" %} (developed at Mozila) and
+{% aTargetBlank "https://wasmtime.dev", "Wasmtime" %} (developed at Mozilla) and
 {% aTargetBlank "https://bytecodealliance.github.io/lucet/", "Lucet" %}
 (developed at Fastly).
 There is a {% aTargetBlank
