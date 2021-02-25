@@ -56,7 +56,7 @@ However, specific instructions performed on them do.
 For example, the instruction to add two i64 signed values is `i64.add`
 and the for unsigned values is `i64.add_u`.
 
-## Implementing Directly
+## WASM Text Format
 
 While code from many programming languages can be compiled to WASM,
 it is also possible to directly implement the code.
@@ -107,7 +107,43 @@ to have names that start with `$`.
 These can be referenced by name,
 but the names are compiled away in favor of indexes.
 
-Operations get their arguments from the top values on the stack.
+### Common Instructions
+
+| Operation                                  | Instruction Syntax                                            |
+| ------------------------------------------ | ------------------------------------------------------------- |
+| define function                            | `func {name} {parameters} {return-type} {body}`               |
+| define a function parameter                | `param {name} {type}`                                         |
+| define a function return type              | `result {type}`                                               |
+| export function to make it available in JS | `export {js-name} (func {name})`                              |
+| call function                              | `call {fn-name}`                                              |
+| declare local variable                     | `local {name} {type}` (cannot initialize)                     |
+| set local variable                         | `local.set {name} {value}`                                    |
+| get local variable                         | `local.get {name}`                                            |
+| declare global variable                    | `global {name} {type} [{value}]` (can initialize)             |
+| set global variable                        | `global.set {name} {value}` (must be mutable)                 |
+| get global variable                        | `global.get {name}`                                           |
+| conditional logic                          | `if (result {type}) {condition} (then {body}) (else {body}))` |
+| select value based on condition            | `select {non-zero-value} {zero-value} {condition}`            |
+| define a block                             | `block {body}`                                                |
+| loop                                       | `loop {body}` (defines a block)                               |
+| break out of block                         | `br {depth}`                                                  |
+| compare values                             | see "Comparison Instructions" below                           |
+| set data in linear memory                  | `{type}.store{bits} {value}` (ex. `i32.store8`)               |
+| get data from linear memory                | `{type}.load{bits}` (ex. `i32.load8_u`)                       |
+| grow linear memory                         | `memory.grow {pages}`                                         |
+| shrink linear memory?                      | not currently supported, but being discussed (1)              |
+
+(1) {% aTargetBlank "https://github.com/WebAssembly/design/issues/1397", "memory management issue" %}
+
+TODO: See your wasm-linear-memory example which uses
+TODO: AssemblyScript to store to and load from linear memory.
+
+Local variables are mutable, but global variables are immutable by default.
+Since local variables cannot be initialized when they are declared,
+there is no point in making them immutable.
+To declare a global variable to be mutable, specify its type as `(mut {type})`.
+
+Instructions get their arguments from the top values on the stack.
 The `local.get {index | name}` instruction (old name was `get_local`)
 gets the value of a parameter of local variable and places it on the stack.
 The `local.set {index | name} {value}` instruction (old name was `set_local`)
