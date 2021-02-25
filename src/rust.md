@@ -6567,26 +6567,20 @@ in popular crates including async-std and tokio.
 When writing to code to execute multiple blocks of code or functions
 there are four options to consider.
 
-1. Execute serially, in the order which it is called.
-1. Execute concurrently, taking turns using a single thread
-1. Execute in parallel using operating system threads
-1. Execute in parallel using tasks
+1. serially: one at a time
+1. concurrently: taking turns using a single thread
+1. parallel using operating system threads
+1. parallel using tasks (a.k.a. green threads)
 
-Let's see how these options are supported using
-what is built into Rust (`std`), and using popular crates.
+These options are demonstrated using the `std`, `async_std`, and `tokio` crates.
+Note that options 2 and 4 are not possible using only the `std` crate.
 
-TODO: FINISH THIS TABLE!
-
-| Option                   | `std`                         | async-std | tokio |
-| ------------------------ | ----------------------------- | --------- | ----- |
-| serially                 |                               |           |       |
-| concurrent single thread | `thread::spawn(sync-closure)` |           |       |
-| parallel OS threads      |                               |           |       |
-| parallel tasks           | not supported                 |           |       |
-
-In addition, "channels" can be used to enable
-threads to communicate during their execution
-rather than waiting to get a result when they complete.
+| Option           | `std` | `async_std` | `tokio` |
+| ---------------- | ----- | ----------- | ------- |
+| serial           | ✓     | ✓           | ✓       |
+| concurrent       | x     | ✓           | ✓       |
+| parallel threads | ✓     | ✓           | ✓       |
+| parallel tasks   | x     | ✓           | ✓       |
 
 Here is a simple example that spawns a number of threads
 that each sleep for a random duration,
@@ -6595,7 +6589,82 @@ and return a value.
 The main thread receives and prints the messages sent over the channel.
 It also waits for all the threads to finish by calling their `join` method.
 
-TODO: See other mpsc implementations in futures::sync::mpsc and tokio::sync::mpsc, but not in async-std!
+The file `src/main.rs` exercises all four options using a single crate.
+To use a different crate, uncomment the related code in this file
+and comment the previously uncommented part.
+This code can be found in the GitHub repo at
+{% aTargetBlank "https://github.com/mvolkmann/rust-parallel-options",
+"rust-parallel-options" %}.
+
+```rust
+use std::error::Error;
+
+mod std_demo;
+use std_demo::{concurrent, parallel_tasks, parallel_threads, serial};
+fn main() -> Result<(), Box<dyn Error>> {
+    let (sum1, sum2) = serial()?;
+    println!("serial: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    let (sum1, sum2) = concurrent()?;
+    println!("concurrent: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    let (sum1, sum2) = parallel_threads()?;
+    println!("threads: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    let (sum1, sum2) = parallel_tasks()?;
+    println!("tasks: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    Ok(())
+}
+
+mod async_std_demo;
+use async_std_demo::{concurrent, parallel_threads, parallel_tasks, serial};
+#[async_std::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+    let (sum1, sum2) = serial()?;
+    println!("serial: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    //let (sum1, sum2) = concurrent()?;
+    let (sum1, sum2) = concurrent().await?;
+    println!("concurrent: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    //let (sum1, sum2) = parallel_threads()?;
+    let (sum1, sum2) = parallel_threads().await?;
+    println!("threads: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    //let (sum1, sum2) = parallel_tasks()?;
+    let (sum1, sum2) = parallel_tasks().await?;
+    println!("tasks: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    Ok(())
+}
+
+mod tokio_demo;
+use tokio_demo::{concurrent, parallel_tasks, parallel_threads, serial};
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+    let (sum1, sum2) = serial()?;
+    println!("serial: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    let (sum1, sum2) = concurrent().await?;
+    println!("concurrent: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    let (sum1, sum2) = parallel_threads().await?;
+    println!("threads: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    let (sum1, sum2) = parallel_tasks().await?;
+    println!("tasks: sum1 = {:?}, sum2 = {:?}", sum1, sum2);
+
+    Ok(())
+}
+```
+
+TODO: See other mpsc implementations that are in futures::sync::mpsc
+TODO: :and tokio::sync::mpsc, but not in async-std!
+
+In addition, "channels" can be used to enable
+threads to communicate during their execution
+rather than waiting to get a result when they complete.
 
 ```rust
 use rand::Rng; // stands for "random number generator".

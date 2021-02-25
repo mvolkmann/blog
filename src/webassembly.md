@@ -50,8 +50,8 @@ Other supported languages can then deserialize values from the array.
 This enables each language to use its own representation of the data types.
 
 WASM doesn't assume number values are signed.
-However, specific operations performed on them do.
-For example, the operation to add two i64 signed values is `i64.add`
+However, specific instructions performed on them do.
+For example, the instruction to add two i64 signed values is `i64.add`
 and the for unsigned values is `i64.add_u`.
 
 ## Implementing Directly
@@ -74,6 +74,13 @@ A `.wat` file can be compile to a `.wasm` file using the `wat2wasm` tool.
 A `.wasm` file can be de-compiled to a `.wat` file using the `wasm2wat` tool.
 Note that this outputs the linear style.
 Also see `.wast` files that are for writing tests.
+
+The `wasm-nm` tool outputs the symbols that are
+export from and imported into a `.wasm` file.
+To install this tool, enter `cargo install wasm-nm`.
+To run it, enter `wasm-nm {file-path}.wasm`.
+The names of exported symbols are preceded by "e " and
+the names of imported symbols are preceded by "i ".
 
 Every `.wat` file contains a single, top-level S-expression
 that defines a module.
@@ -105,6 +112,13 @@ The `local.set {index | name} {value}` instruction
 sets value of a local variable.
 The `{type}.const {value}` instruction pushes a constant value on the stack.
 When a function exists, its return value is the top value on the stack.
+
+Single line comments begin with `;;` and extend to the end of the line.
+Multi-line comments begin with `(;` and end with `;)`.
+This makes it easy to comment out an S-expression
+because `;` characters just need to be added
+inside the opening and closing parentheses.
+It also means that a winking smiley face is the closing delimiter!
 
 Here are examples of functions.
 The first takes two numbers and returns their sum.
@@ -328,45 +342,60 @@ of the proposals that do make it through the process."
 These instructions are prefixed by one of the four supported number types.
 For example, the instruction to add two `f32` values is `f32.add`.
 
-| Name       | Description                          |
-| ---------- | ------------------------------------ |
-| `abs`      | absolute value                       |
-| `add`      | add                                  |
-| `and`      | and                                  |
-| `ceil`     | ceiling                              |
-| `clz`      | count leading zeros                  |
-| `copysign` | copy sign                            |
-| `ctz`      | count training zeros                 |
-| `div_{sx}` | integer divide                       |
-| `div`      | floating point divide                |
-| `eq`       | equal                                |
-| `eqz`      | equal to zero                        |
-| `floor`    | floor                                |
-| `ge_{sx}`  | integer greater than or equal        |
-| `ge`       | floating point greater than or equal |
-| `gt_{sx}`  | integer greater than                 |
-| `gt`       | floating point greater than          |
-| `le_{sx}`  | integer less than or equal           |
-| `le`       | floating point less than or equal    |
-| `lt_{sx}`  | integer less than                    |
-| `lt`       | floating point less than             |
-| `max`      | maximum                              |
-| `min`      | minimum                              |
-| `mul`      | multiply                             |
-| `ne`       | not equal                            |
-| `nearest`  | round floating point to integer      |
-| `neg`      | negate                               |
-| `or`       | or                                   |
-| `popcnt`   | population count (# of 1 bits)       |
-| `rem_{sx}` | remainder                            |
-| `rotl`     | rotate left                          |
-| `rotr`     | rotate right                         |
-| `shl`      | shift left                           |
-| `shr_{xx}` | shift right                          |
-| `sqrt`     | square root                          |
-| `sub`      | subtract                             |
-| `trunc`    | truncate                             |
-| `xor`      | exclusive or                         |
+| Name       | Description                     |
+| ---------- | ------------------------------- |
+| `abs`      | absolute value                  |
+| `add`      | add                             |
+| `ceil`     | ceiling                         |
+| `copysign` | copy sign                       |
+| `div_{sx}` | integer divide                  |
+| `div`      | floating point divide           |
+| `floor`    | floor                           |
+| `max`      | maximum                         |
+| `min`      | minimum                         |
+| `mul`      | multiply                        |
+| `ne`       | not equal                       |
+| `nearest`  | round floating point to integer |
+| `neg`      | negate                          |
+| `rem_{sx}` | remainder                       |
+| `sqrt`     | square root                     |
+| `sub`      | subtract                        |
+| `trunc`    | truncate                        |
+
+### Bitwise Instructions
+
+| Name       | Description                    |
+| ---------- | ------------------------------ |
+| `clz`      | count leading zeros            |
+| `ctz`      | count training zeros           |
+| `popcnt`   | population count (# of 1 bits) |
+| `rotl`     | rotate left                    |
+| `rotr`     | rotate right                   |
+| `shl`      | shift left                     |
+| `shr_{xx}` | shift right                    |
+
+### Logical Instructions
+
+| Name  | Description  |
+| ----- | ------------ |
+| `and` | and          |
+| `or`  | or           |
+| `xor` | exclusive or |
+
+### Comparison Instructions
+
+| Name      | Description                          |
+| --------- | ------------------------------------ |
+| `eq`      | equal                                |
+| `eqz`     | equal to zero                        |
+| `ge_{sx}` | integer greater than or equal        |
+| `ge`      | floating point greater than or equal |
+| `gt_{sx}` | integer greater than                 |
+| `gt`      | floating point greater than          |
+| `le_{sx}` | integer less than or equal           |
+| `le`      | floating point less than or equal    |
+| `lt_{sx}` | integer less than                    |
+| `lt`      | floating point less than             |
 
 ### Conversion Instructions
 
@@ -392,32 +421,41 @@ For example, the instruction to add two `f32` values is `f32.add`.
 
 ## Control Instructions
 
-| Name                               | Description                                                                  |
-| ---------------------------------- | ---------------------------------------------------------------------------- |
-| `block {block-type} {instr}*`      | creates a block of instructions, typically in another operation such as `if` |
-| `loop {block-type} {instr}* end`   | creates a labeled block for implementing a loop                              |
-| `if`                               | denotes the true block of a conditional                                      |
-| `else`                             | denotes the false block of a conditional                                     |
-| `end`                              | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`    |
-| `br {depth}`                       | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop          |
-| `br_if {depth} {condition}`        | conditional branch                                                           |
-| `br_table {table} {default-depth}` | branch based on table entry at depth                                         |
-| `return`                           | return from function                                                         |
-| `call {function-id}`               | call function                                                                |
-| `call_indirect {type-id}`          | call function at index in table                                              |
-| `unreachable`                      | signals an error (trap) if reached                                           |
+These instructions are expressions, not statements.
+They result in placing a value on the stack.
+
+| Name                               | Description                                                                    |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
+| `block {block-type} {instr}*`      | creates a block of instructions, typically in another instruction such as `if` |
+| `loop {block-type} {instr}* end`   | creates a labeled block for implementing a loop                                |
+| `if`                               | denotes the true block of a conditional                                        |
+| `else`                             | denotes the false block of a conditional                                       |
+| `end`                              | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`      |
+| `br {depth}`                       | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop            |
+| `br_if {depth} {condition}`        | conditional branch                                                             |
+| `br_table {table} {default-depth}` | branch based on table entry at depth                                           |
+| `return`                           | return from function                                                           |
+| `call {function-id}`               | call function                                                                  |
+| `call_indirect {type-id}`          | call function at index in table                                                |
+| `unreachable`                      | signals an error (trap) if reached                                             |
 
 Even control flow operates on the stack.
-For example, the `if` operation executes its branch
+For example, the `if` instruction executes its branch
 if the value at the top of the stack evaluates to true.
 
-Here is an example of an `if` operation uses the S-expression syntax:
+Here is an example of using an `if` instruction
+in a function that returns the largest of two values:
 
 ```wasm
-(if (f32.gt (call $getTemperature) (f32.const 100.0))
-  (then (call $turnOnAc))
-  (else (call $runAgain))
-)
+  (func $max (param $lhs i32) (param $rhs i32) (result i32)
+    ;; The first argument specifies the type if expression result.
+    '' The second argument is the result of the condition to be tested.
+    (if (result i32) (i32.gt_s (local.get $lhs) (local.get $rhs))
+      (then (local.get $lhs))
+      (else (local.get $rhs))
+    )
+  )
+  (export "max" (func $max))
 ```
 
 TODO: Demonstrate all the control instructions in a `.wat` file!
@@ -865,7 +903,7 @@ Macro types
 - `returnof<T>`
 - `valueof<T>`
 
-Supported math operations are described {% aTargetBlank
+Supported math instructions are described {% aTargetBlank
 "https://www.assemblyscript.org/stdlib/math.html", "here" %}.
 
 To install the AssemblyScript compiler, install Node.js
@@ -924,7 +962,65 @@ that computes the distance between two points and call it from JavaScript:
 1. Browse localhost:{port} where port is
    the port on which the local server is listening.
 
-## Running Outside Browsers
+## WebAssembly System Interface (WASI)
+
+The {% aTargetBlank "https://wasi.dev", "WebAssembly System Interface (WASI)" %}
+defines a way to communicate with the system
+that focuses on portability and security.
+This includes things like stdout/stdin, the file system, and network resources.
+
+Adding these features makes WASM useful outside of web browsers.
+Motivations for using WASM in this way include performance, safety, and the
+ability to combine code compiled from many higher-level programming languages.
+
+WASM code using WASI is portable across operating systems.
+
+Implementations of WASI include
+{% aTargetBlank "https://wasmtime.dev", "Wasmtime" %} (developed at Mozila) and
+{% aTargetBlank "https://bytecodealliance.github.io/lucet/", "Lucet" %}
+(developed at Fastly).
+There is a {% aTargetBlank
+"https://github.com/bytecodealliance/lucet/issues/607", "plan" %}
+to merge Lucet with Wasmtime.
+
+Rust code compiled to WASM can use WASI features
+because WASI capabilities are included in Rust standard libraries.
+For example, the `println!` macro can be used.
+To compile a Rust project to WASM with WASI support,
+enter `cargo build --target wasm32-unknown-wasi`.
+TODO: What are the options for the three parts of the target string?
+
+C/C++ code compiled to WASM can use WASI features because it will use
+wasi-sysroot which is a wasi-core implementation of the libc library.
+
+WASM code using WASI can also be run in web browsers using polyfills.
+For example, such a polyfill would turn the WASI version of a Rust `println!`
+into a call to `console.log`.
+
+Security in WASI is implemented with sandboxing, similar to Deno.
+Perhaps Deno modeled their security after WASI.
+When running WASM code that uses WASI features,
+file system and network resources to be accessed must be specified.
+Access to unspecified resources are not permitted.
+This is referred to as "Capability Space Security".
+
+Platform-specific versions of tools like Wasmtime
+can execute platform-independent WASM code that uses WASI features.
+They handle translation into platform-specific calls.
+
+WASI functions are made available to WASM binaries
+through imports that are passed in.
+This allows passing in platform-specific versions of these functions.
+It also supports limiting what the WASM code can do
+by not passing in every function.
+
+Security is also controlled at the module level
+by passing allowed functions and file descriptors between them.
+
+Remaining work on WASI includes defining support for
+asynchronous I/O, file watching, and file locking.
+
+## Running WASM Outside Browsers
 
 There are currently three tools for running WASM code outside a web browser.
 Each is described below.
