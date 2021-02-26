@@ -111,7 +111,7 @@ but the names are compiled away in favor of indexes.
 
 | Operation                                  | Instruction Syntax                                            |
 | ------------------------------------------ | ------------------------------------------------------------- |
-| define function                            | `func {name} {parameters} {return-type} {body}`               |
+| define function                            | `func [{name}] {parameters} {return-type} {body}`             |
 | define a function parameter                | `param {name} {type}`                                         |
 | define a function return type              | `result {type}`                                               |
 | export function to make it available in JS | `export {js-name} (func {name})`                              |
@@ -142,6 +142,28 @@ Local variables are mutable, but global variables are immutable by default.
 Since local variables cannot be initialized when they are declared,
 there is no point in making them immutable.
 To declare a global variable to be mutable, specify its type as `(mut {type})`.
+
+Functions can be named or unnamed.
+Unnamed functions are referred to by their
+position (zero-based index) within the module.
+TODO: Can named functions also be called by their position? Probably.
+
+Exporting a function makes it available outside its module,
+such as in JavaScript.
+Here are two ways to export a function:
+
+```wasm
+  ;; This function can be called by name in this WASM module.
+  (func $add (param i32 i32) (result i32)
+    (i32.add (local.get 0) (local.get 1))
+  )
+  (export "add" (func $add))
+
+  ;; This function cannot be called by name in this WASM module.
+  (func (export "subtract") (param i32 i32) (result i32)
+    (i32.sub (local.get 0) (local.get 1))
+  )
+```
 
 Instructions get their arguments from the top values on the stack.
 The `local.get {index | name}` instruction (old name was `get_local`)
