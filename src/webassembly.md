@@ -148,6 +148,15 @@ Unnamed functions are referred to by their
 position (zero-based index) within the module.
 TODO: Can named functions also be called by their position? Probably.
 
+Function parameters can also be named or unnamed.
+Unnamed functions are referred to by their
+position (zero-based index) within the parameter list.
+
+Functions that return a value must specify its type with `(return {type})`.
+This is omitted for functions that do not return a value.
+
+TODO: Do local variables have to be declared at the beginning of function bodies?
+
 Exporting a function makes it available outside its module,
 such as in JavaScript.
 Here are two ways to export a function:
