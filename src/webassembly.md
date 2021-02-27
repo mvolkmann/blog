@@ -14,25 +14,30 @@ Other popular stack-based virtual machines include
 the Java Virtual Machine (JVM) and the .NET Common Language Runtime (CLR).
 
 WASM code can be run in modern web browsers including
-Chrome, Edge, Firefox, and Safari (not Internet Explorer).
+Chrome (including Android), Edge, Firefox (including Android),
+Safari (including iOS), Opera, and Android Browser, but not Internet Explorer.
 It can also be run outside of web browsers using tools such as
-{% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %},
 {% aTargetBlank "https://wasmtime.dev", "Wasmtime" %},
+{% aTargetBlank "https://github.com/wasm3/wasm3", "WASM3" %},
 {% aTargetBlank "https://github.com/bytecodealliance/wasm-micro-runtime",
 "WebAssembly Micro Runtime (WAMR)" %}.
 
-There are two primary reasons to run WASM code from a web browser.
+There are two primary reasons to run WASM code in a web browser.
 The first is that it typically executes much faster than
 equivalent code written in JavaScript.
-The second is that it enables writing code in any language
+The second is that it enables writing some of the code in any language
 that can be compiled to WASM as an alternative to JavaScript.
 
-The primary reason to run WASM code outside a web browser
-is that it enables targeting any platform that supports WASM.
+There are also two primary reasons to run WASM code outside a web browser.
+The first is that it enables targeting any platform that supports WASM.
 This is similar to the rationale for using Java,
 whose virtual machine is supported by many platforms.
+The second is that it provides "capability-based security" where
+access to resources such as the file system and network are restricted.
+Actually, WASM itself has no access to these and only gains it through the
+{% aTargetBlank "https://wasi.dev", "WebAssembly System Interface (WASI)" %}.
 
-WASM can also be compiled to native executables
+WASM code can also be compiled to native executables
 that run on x86 and ARM processors.
 
 ## VS Code
@@ -43,18 +48,29 @@ The most popular is "WebAssembly" with the description
 
 ## Only Numbers
 
-Currently WASM only supports the number types `i32`, `i64`, `f32`, and `f64`.
-But the {% aTargetBlank "https://github.com/WebAssembly/interface-types",
-"Interface Types proposal" %} seeks to change this.
-This can be accomplished by enabling supported programming languages
-to serialize non-numeric values to linear memory as an array of i32 values.
-Other supported languages can then deserialize values from the array.
-This enables each language to use its own representation of the data types.
+Currently WASM only supports the four data types `i32`, `i64`, `f32`, and `f64`.
+These match number types from Rust.
+Other types such as strings and structs must be
+serialized into these number types and deserialized from them
+using linear memory.
+Tools such as wasm_bindgen for Rust generate code that does this.
 
-WASM doesn't assume number values are signed.
+The {% aTargetBlank "https://github.com/WebAssembly/interface-types",
+"Interface Types proposal" %} seeks to change this. It "adds a new set
+of interface types to WebAssembly that describe high-level values".
+These can be implemented using linear memory
+and the standard WASM numeric types.
+Added types include additional integer types, characters, lists,
+records (structs), and variants (enumerated types).
+Strings are represented as lists of characters.
+Supported programming languages will be able to
+serialize and deserialize these additional data types.
+Each language will be able to use its own representation of the data types.
+
+WASM doesn't assume that number values are signed.
 However, specific instructions performed on them do.
 For example, the instruction to add two i64 signed values is `i64.add`
-and the for unsigned values is `i64.add_u`.
+and for unsigned values is `i64.add_u`.
 
 ## WASM Text Format
 
@@ -63,18 +79,42 @@ it is also possible to directly implement the code.
 
 WASM has a binary format and a text (intermediate form) format.
 Files in the binary format have the extension `.wasm`.
+Details about this format are provided later.
 Files in the text format have the extension `.wat`.
 
-The text format has two styles, linear and S-expressions.
+The text format has two styles, linear (or plain) and S-expressions (or folded).
 The linear format places instructions on separate lines.
 The S-expression format uses parentheses, similar to LISP,
 representing a tree of nodes.
 The first value in each expression indicates the node type.
 The remaining values are attributes or child nodes.
 
-A `.wat` file can be compile to a `.wasm` file using the `wat2wasm` tool.
-A `.wasm` file can be de-compiled to a `.wat` file using the `wasm2wat` tool.
-Note that this outputs the linear style.
+Every `.wat` file contains a single, top-level S-expression
+that defines a module.
+Modules can define many kinds of things including
+
+- imports from other modules
+- exports other modules can import
+- function type definitions
+- function definitions,
+- tables to implement function pointers
+- linear memory for storing arbitrary data
+- data to be placed in linear memory
+- global variables available throughout the module
+
+## Tools
+
+The {% aTargetBlank "https://github.com/WebAssembly/wabt",
+"WebAssembly Binary Toolkit (WABT)" %}
+includes a set of command line tools including
+`wat2wasm`, `wasm2wat`, `wasm-validate`, and `wasm-interp`.
+In macOS these can be installed by installing
+{% aTargetBlank "https://brew.sh", "Homebrew" %}
+and entering `brew install wabt`.
+
+The `wat2wasm` tool compiles a `.wat` file to a `.wasm` file.
+The `wasm2wat` tool de-compiles a `.wasm` file to a `.wat` file
+that uses the linear style.
 Also see `.wast` files that are for writing tests.
 
 The `wasm-nm` tool outputs the symbols that are
@@ -83,29 +123,6 @@ To install this tool, enter `cargo install wasm-nm`.
 To run it, enter `wasm-nm {file-path}.wasm`.
 The names of exported symbols are preceded by "e " and
 the names of imported symbols are preceded by "i ".
-
-Every `.wat` file contains a single, top-level S-expression
-that defines a module.
-Modules can define functions that are callable from JavaScript.
-These definitions have the syntax `(func {signature} {locals} {body})`.
-The signature defines the function name,
-its parameter types, and its return type.
-In functions that do not return a value, the return type is omitted.
-Locals defines local variable names and their types.
-The body is a list of instructions that implement the function.
-
-Currently only four types are supported, `i32`, `i64`, `f32`, and `f64`.
-These match number types from Rust.
-Other types such as strings and structs currently must be
-serialized into these number types and deserialized from them.
-Tools such as wasm_bindgen for Rust generate code that does this for you.
-
-Parameters and local variables are accessed by their
-position in the signature using zero-based indexes.
-The text format also allows functions, parameters, and local variables
-to have names that start with `$`.
-These can be referenced by name,
-but the names are compiled away in favor of indexes.
 
 ### Common Instructions
 
@@ -138,19 +155,108 @@ but the names are compiled away in favor of indexes.
 TODO: See your wasm-linear-memory example which uses
 TODO: AssemblyScript to store to and load from linear memory.
 
+Each WASM module can have only one array of linear memory.
+But JavaScript can instantiate more than one WASM module
+in order to access multiple instances of linear memory.
+
 Local variables are mutable, but global variables are immutable by default.
 Since local variables cannot be initialized when they are declared,
 there is no point in making them immutable.
 To declare a global variable to be mutable, specify its type as `(mut {type})`.
 
-Functions can be named or unnamed.
-Unnamed functions are referred to by their
-position (zero-based index) within the module.
-TODO: Can named functions also be called by their position? Probably.
+### WASM Functions
+
+Modules can define functions.
+Functions that are exported can be called from JavaScript.
+These definitions have the syntax `(func {signature} {locals} {body})`.
+The signature defines the function name,
+its parameter types, and its return type.
+In functions that do not return a value, the return type is omitted.
+Locals defines local variable names and their types.
+The body is a list of instructions that implement the function.
+
+Parameters and local variables are accessed by their
+position in the signature using zero-based indexes.
+The text format also allows functions, parameters, and local variables
+to have names that start with `$`.
+These can be referenced by name,
+but the names are compiled away in favor of indexes.
+
+WASM functions can be named or unnamed.
+Any function can be called by its position (zero-based index) within the module.
+Named functions call also be called using their name.
+
+The following code is in the file `demo.wat`.
+
+```wasm
+(module
+  ;; anonymous function at index 0 that just returns 19
+  (func (result i32)
+    i32.const 19
+  )
+
+  ;; named function at index 1 that just returns 21
+  (func $second (result i32)
+    i32.const 21
+  )
+
+  (func (export "callFirst") (result i32)
+    call 0
+  )
+
+  (func (export "callSecond") (result i32)
+    call $second
+    ;; same as call 1
+  )
+)
+```
+
+Compile this code to a `.wasm` file by entering `wat2wasm demo.wat`.
+
+The following JavaScript code is in the file `demo.js`.
+It instantiates the WASM code above and calls its exported functions:
+
+```js
+async function run() {
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'));
+  const {callFirst, callSecond} = m.instance.exports;
+  console.log('first =', callFirst()); // 19
+  console.log('second =', callSecond()); // 21
+}
+
+run();
+```
 
 Function parameters can also be named or unnamed.
 Unnamed functions are referred to by their
 position (zero-based index) within the parameter list.
+Parameters are declared using the `param` instruction.
+Typically each parameter is described separately so each can be given a name and type.
+Alternatively all of their types can be described with a single `param` instruction,
+but in that case they cannot be given names.
+Functions have a fixed number of parameters
+and cannot accept a variable number of them.
+For example:
+
+```wasm
+  ;; Declaring each parameter separately
+  (func (export "percent") (param $amount f32) (param $total f32) (result f32)
+    local.get $amount
+    local.get $total
+    f32.div
+    f32.const 100.0
+    f32.mul
+  )
+
+  ;; Using on param instruction
+  (func (export "percent2") (param f32 f32) (result f32)
+    local.get 0
+    local.get 1
+    f32.div
+    f32.const 100.0
+    f32.mul
+  )
+```
 
 Functions that return a value must specify its type with `(return {type})`.
 This is omitted for functions that do not return a value.
@@ -159,16 +265,23 @@ TODO: Do local variables have to be declared at the beginning of function bodies
 
 Exporting a function makes it available outside its module,
 such as in JavaScript.
-Here are two ways to export a function:
+There are two ways to export a function.
+It can be given both a WASM name and an exported name.
+This allows it to be called from both WASM code and outside code.
+For example:
 
 ```wasm
-  ;; This function can be called by name in this WASM module.
-  (func $add (param i32 i32) (result i32)
-    (i32.add (local.get 0) (local.get 1))
-  )
-  (export "add" (func $add))
-
   ;; This function cannot be called by name in this WASM module.
+  (func (export "subtract") (param i32 i32) (result i32)
+    (i32.sub (local.get 0) (local.get 1))
+  )
+```
+
+It call also be given only an exported name.
+In this case it can still be called from WASM code,
+but only by its position within the module.
+
+```wasm
   (func (export "subtract") (param i32 i32) (result i32)
     (i32.sub (local.get 0) (local.get 1))
   )
@@ -932,6 +1045,32 @@ TODO: since it only uses numbers?
 
 See https://github.com/mvolkmann/wasm-bind-demo/blob/main/src/lib.rs
 which uses the web-sys crate.
+
+## WASM Binary Format
+
+WASM binary files have the extension `.wasm`.
+They begin with four bytes that identify the file as WASM.
+The hex values are `0061736d` which is zero
+followed by the ASCII characters "asm".
+This is followed by a four byte integer in little endian format
+that specifies the WASM version which is currently `01000000` for version 1.
+
+The remainder of the file is divided into 12 sections.
+
+| Section Name | Description                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------------ |
+| type         | describes function signatures (parameter and return types)                                                   |
+| import       | describes imports from other modules including functions, tables, memory, and global variables               |
+| func         | stores a list of indexes into the type section for each function defined in this module                      |
+| table        | used by the `call_indirect` instruction for function pointers                                                |
+| mem          | holds the lower and upper limits on the number of 64KB pages of linear memory that will be used              |
+| global       | holds the type, mutability, and initial value of all global variables                                        |
+| export       | describes all the functions, tables, memory, and global variables that are exported for other modules to use |
+| start        | holds the index of the main/starting function if there is one (for running outside web browsers)             |
+| elem         | holds data used to select a function from a table by the `call_indirect` instruction                         |
+| code         | holds the local variables and code for each function defined in the module                                   |
+| data         | holds data used to initialize the linear memory used by the module                                           |
+| custom       | can store arbitrary data such a debugging information and data used by third party extensions                |
 
 ## AssemblyScript
 
