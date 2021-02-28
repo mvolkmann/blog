@@ -674,10 +674,48 @@ For example, the instruction to add two `f32` values is `f32.add`.
 | `sub`      |  0  |  2  |  1  | subtract                        |
 | `trunc`    |  0  |  1  |  1  | truncate                        |
 
-Note that many math functions,
-such as `sin`, `cos`, `tan`, and `log` are missing in WASM.
-One way to get these is to import them from JavaScript
-as shown below.
+All of these instructions require a type prefix.
+For example, the `f64.max` instruction is used below.
+
+The file `demo.wat` below demonstrates using some of these instructions.
+TODO: Show examples of more of these instructions?
+
+```wasm
+(module
+  (func (export "max") (param f64 f64) (result f64)
+    (f64.max (local.get 0) (local.get 1))
+  )
+
+  (func (export "min") (param f64 f64) (result f64)
+    (f64.min (local.get 0) (local.get 1))
+  )
+)
+```
+
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
+The file `demo.js` below uses `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {};
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {max, min} = m.instance.exports;
+
+  const pi = Math.PI; // 3.14159
+  const e = Math.E; // 2.71828
+
+  console.log(max(pi, e)); // pi
+  console.log(max(e, pi)); // pi
+  console.log(min(pi, e)); // e
+  console.log(min(e, pi)); // e
+}
+
+run();
+```
+
+Many math functions, such as `sin`, `cos`, `tan`, and `log` are missing in WASM.
+One way to get these is to import them from JavaScript as shown below.
 
 The file `demo.js` below provides math functions to `demo.wasm`.
 
@@ -877,7 +915,10 @@ run();
 | `lt_{sx}` |  0  |  2  |  0  | integer less than                    |
 | `lt`      |  0  |  2  |  0  | floating point less than             |
 
-The file `demo.wat` below demonstrates using some of these instructions.
+All of these instructions require a type prefix.
+For example, `f64.ge` is used in the file `demo.wat` below
+which demonstrates using some of these instructions.
+We saw an easier way to implement this in the "Numeric Instructions" section.
 
 ```wasm
 (module
@@ -940,7 +981,7 @@ They result in placing a value on the stack.
 | `if`                               |  0  |  0  |  0  | denotes the true block of a conditional                                        |
 | `else`                             |  0  |  0  |  0  | denotes the false block of a conditional                                       |
 | `end`                              |  0  |  0  |  0  | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`      |
-| `br {depth}`                       |  0  |  0  |  0  | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop            |
+| `br {depth}`                       |  0  |  0  |  0  | unconditional branch |
 | `br_if {depth} {condition}`        |  0  |  0  |  0  | conditional branch                                                             |
 | `br_table {table} {default-depth}` |  0  |  0  |  0  | branch based on table entry at depth                                           |
 | `return`                           |  0  |  0  |  0  | return from function                                                           |
@@ -951,6 +992,18 @@ They result in placing a value on the stack.
 Even control flow operates on the stack.
 For example, the `if` instruction executes its branch
 if the value at the top of the stack evaluates to true.
+
+The `block` instruction creates the equivalent of
+an immediately invoked inline function.
+It has a result type and a set of instructions.
+When in a `block`, branching to depth `0` exits the `block`.
+
+The `loop` instruction creates a different kind of `block`
+where branching to depth `0` goes to the beginning of the loop
+for another iteration rather than branching out of the block.
+
+The `block` and `loop` instructions can specify a block name
+that branch instructions can refer to instead of specifying a depth.
 
 The file `demo.wat` below demonstrates using some of these instructions.
 
@@ -983,12 +1036,57 @@ The file `demo.wat` below demonstrates using some of these instructions.
       ;; Add 1 to $n.
       (local.set $n (i32.add (local.get $n) (i32.const 1)))
 
-      ;; Go to top of the loop if $end not reached.
+      ;; Go to top of the loop if $end not reached
+      ;; by branching to block level zero.
       ;; Otherwise drop out of loop.
       (br_if 0 (i32.le_s (local.get $n) (local.get $end)))
     )
 
     (local.get $sum)
+  )
+
+  (func (export "blockWithoutResult") (param $n i32) (result i32)
+    (local $result i32)
+
+    (block ;; This block has no result.
+      (local.set $result (i32.const 1))
+      ;; Inside a block, branching to depth zero exits the block.
+      (br_if 0 (i32.lt_s (local.get $n) (i32.const 100)))
+      (local.set $result (i32.const 2))
+      (br_if 0 (i32.lt_s (local.get $n) (i32.const 200)))
+      (local.set $result (i32.const 3))
+    )
+
+    (local.get $result)
+  )
+
+  (func (export "blockWithResult") (param $n i32) (result i32)
+    (block (result i32) ;; This block has a result.
+      i32.const 1
+      ;; Inside a block, branching to depth zero exits the block.
+      (br_if 0 (i32.lt_s (local.get $n) (i32.const 100)))
+
+      ;; This is needed so there will only be one value
+      ;; on the stack at the end of this function.
+      drop
+      i32.const 2
+      (br_if 0 (i32.lt_s (local.get $n) (i32.const 200)))
+
+      ;; This is needed so there will only be one value
+      ;; on the stack at the end of this function.
+      drop
+      i32.const 3
+    )
+  )
+
+  (func (export "usingReturn") (param $n i32) (result i32)
+    (if (i32.lt_s (local.get $n) (i32.const 100))
+      (then (return (i32.const 1)))
+    )
+    (if (i32.lt_s (local.get $n) (i32.const 200))
+      (then (return (i32.const 2)))
+    )
+    (i32.const 3)
   )
 )
 ```
@@ -1001,17 +1099,35 @@ The file `demo.js` below uses `demo.wasm`.
 async function run() {
   const imports = {};
   const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
-  const {factorial, sumRange} = m.instance.exports;
+  const {
+    blockWithoutResult,
+    blockWithResult,
+    factorial,
+    returnDemo,
+    sumRange,
+    usingReturn
+  } = m.instance.exports;
 
   console.log(factorial(3)); // 1 * 2 * 3 = 6
   console.log(factorial(5)); // 1 * 2 * 3 * 4 * 5 = 120
+
   console.log(sumRange(3, 6)); // 3 + 4 + 5 + 6 = 18
+
+  console.log(blockWithoutResult(19)); // 1
+  console.log(blockWithoutResult(142)); // 2
+  console.log(blockWithoutResult(728)); // 3
+
+  console.log(blockWithResult(19)); // 1
+  console.log(blockWithResult(142)); // 2
+  console.log(blockWithResult(728)); // 3
+
+  console.log(usingReturn(19)); // 1
+  console.log(usingReturn(142)); // 2
+  console.log(usingReturn(728)); // 3
 }
 
 run();
 ```
-
-TODO: Maybe implement the Fibonacci function in multiple ways.
 
 ### Basic Instructions
 
@@ -1026,6 +1142,23 @@ TODO: Maybe implement the Fibonacci function in multiple ways.
 
 The number of stack values used by `call` and `call_indirect`
 matches the number of parameters in the function signature.
+
+We saw an example of using the `call` instruction in the `factorial` function
+defined in the "Control Instructions" section.
+
+We have seen many examples of using the `const` instruction.
+
+We saw an example of using the `drop` instruction
+in the `blockWithResult` function
+defined in the "Control Instructions" section.
+
+We saw an example of using the `select` instruction
+in the `max` and `min` functions
+defined in the "Comparison Instructions" section.
+
+Here is an example of using the `call_indirect` instruction.
+It works in conjunction with the `table` instruction.
+TODO: Add this!
 
 ### Memory Instructions
 
