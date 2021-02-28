@@ -297,6 +297,7 @@
     "fsum",
     "fullchain",
     "fullhuman",
+    "funcref",
     "functools",
     "gapminder",
     "genfromtxt",

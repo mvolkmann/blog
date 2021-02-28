@@ -550,15 +550,15 @@ To declare a global variable to be mutable, specify its type as `(mut {type})`.
 
 These instructions get and set local and global variables.
 
-| Name         |  I  | Si  | So  | Description                                      |
-| ------------ | :-: | :-: | :-: | ------------------------------------------------ |
-| `local`      |  2  |  0  |  0  | declares a local variable                        |
-| `local.get`  |  1  |  0  |  0  | push local variable onto stack                   |
-| `local.set`  |  1  |  1  |  0  | set local variable from stack and pop            |
-| `local.tee`  |  1  |  0  |  0  | set local variable from stack and leave on stack |
-| `global`     |  1  |  0  |  0  | declares and initializes a global variable       |
-| `global.get` |  1  |  0  |  0  | push global variable onto stack                  |
-| `global.set` |  1  |  1  |  0  | set global variable from stack and pop           |
+| Name         |  I  | Si  | So  | Description                                              |
+| ------------ | :-: | :-: | :-: | -------------------------------------------------------- |
+| `local`      |  2  |  0  |  0  | declares a local variable name and type                  |
+| `local.get`  |  1  |  0  |  0  | push local variable onto stack                           |
+| `local.set`  |  1  |  1  |  0  | set local variable from stack and pop                    |
+| `local.tee`  |  1  |  0  |  0  | set local variable from stack and leave on stack         |
+| `global`     |  1  |  0  |  0  | declares a global variable name, type, and initial value |
+| `global.get` |  1  |  0  |  0  | push global variable onto stack                          |
+| `global.set` |  1  |  1  |  0  | set global variable from stack and pop                   |
 
 The two immediate arguments of the `local` instruction are its name and type.
 Local variables default to zero and cannot be initialized to a different value.
@@ -674,11 +674,12 @@ For example, the instruction to add two `f32` values is `f32.add`.
 | `sub`      |  0  |  2  |  1  | subtract                        |
 | `trunc`    |  0  |  1  |  1  | truncate                        |
 
-All of these instructions require a type prefix.
-For example, the `f64.max` instruction is used below.
+We saw examples of using the `add` and `mul` instructions
+in the "Variable Instructions" section.
 
-The file `demo.wat` below demonstrates using some of these instructions.
-TODO: Show examples of more of these instructions?
+All of these instructions require a type prefix.
+For example, `f64.max` is used in the file `demo.wat` below
+which demonstrates using some of these instructions.
 
 ```wasm
 (module
@@ -777,7 +778,9 @@ Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
 | `shl`      |  0  |  2  |  0  | shift left                     |
 | `shr_{sx}` |  0  |  2  |  0  | shift right                    |
 
-The file `demo.wat` below demonstrates using each of these instructions.
+All of these instructions require a type prefix.
+For example, `i32.clz` is used in the file `demo.wat` below
+which demonstrates using some of these instructions.
 
 ```wasm
 (module
@@ -858,6 +861,10 @@ run();
 | `or`  |  0  |  2  |  0  | or           |
 | `xor` |  0  |  2  |  0  | exclusive or |
 
+All of these instructions require a type prefix.
+For example, `i32.and` is used in the file `demo.wat` below
+which demonstrates using some of these instructions.
+
 The file `demo.wat` below demonstrates using each of these instructions.
 
 ```wasm
@@ -918,7 +925,8 @@ run();
 All of these instructions require a type prefix.
 For example, `f64.ge` is used in the file `demo.wat` below
 which demonstrates using some of these instructions.
-We saw an easier way to implement this in the "Numeric Instructions" section.
+We saw an easier way to implement these functions
+in the "Numeric Instructions" section.
 
 ```wasm
 (module
@@ -966,8 +974,11 @@ run();
 | `trunc`       |  0  |  1  |  0  | truncate, discarding the least significant bits                     |
 | `wrap`        |  0  |  1  |  0  | converts i32 to i64, discarding the most significant bits           |
 
-We saw examples of using the `convert` instruction
+All of these instructions require a type prefix.
+We saw examples of using the `f64.convert_i32s` instruction
 in the "Variable Instructions" section above.
+The type prefix specifies the output type and the
+instruction suffix (`_32s` in this case) specifies the input type.
 
 ### Control Instructions
 
@@ -989,7 +1000,7 @@ They result in placing a value on the stack.
 | `call_indirect {type-id}`          |  0  |  0  |  0  | call function at index in table                                                |
 | `unreachable`                      |  0  |  0  |  0  | signals an error (trap) if reached                                             |
 
-Even control flow operates on the stack.
+Even control flow instructions operate on the stack.
 For example, the `if` instruction executes its branch
 if the value at the top of the stack evaluates to true.
 
@@ -1140,13 +1151,14 @@ run();
 | `nop`           |  0  |  0  |  0  | no operation                                                           |
 | `select`        |  0  |  3  |  0  | takes two values and a condition; returns 1st if true and 2nd if false |
 
-The number of stack values used by `call` and `call_indirect`
-matches the number of parameters in the function signature.
+The number of stack values used by `call` and `call_indirect` matches
+the number of parameters in the signature of the function being called.
 
-We saw an example of using the `call` instruction in the `factorial` function
-defined in the "Control Instructions" section.
+We saw an example of using the `call` instruction in the
+`factorial` function defined in the "Control Instructions" section.
 
-We have seen many examples of using the `const` instruction.
+We have seen many examples of using the `const` instruction
+to push a constant value onto the stack.
 
 We saw an example of using the `drop` instruction
 in the `blockWithResult` function
@@ -1156,9 +1168,58 @@ We saw an example of using the `select` instruction
 in the `max` and `min` functions
 defined in the "Comparison Instructions" section.
 
-Here is an example of using the `call_indirect` instruction.
-It works in conjunction with the `table` instruction.
-TODO: Add this!
+The `call_indirect` instruction is used in the file `demo.wat` below.
+It works in conjunction with the `table` and `elem` instructions.
+
+```wasm
+(module
+  (type $transform (func (param f64) (result f64)))
+
+  (func $double (type $transform)
+    (f64.mul (local.get 0) (f64.const 2))
+  )
+
+  (func $half (type $transform)
+    (f64.div (local.get 0) (f64.const 2))
+  )
+
+  (func $triple (type $transform)
+    (f64.mul (local.get 0) (f64.const 3))
+  )
+
+  ;; Create a table of function references named $transforms
+  ;; that holds at most three elements.
+  ;; Note that this is at the module level, not inside a function.
+  (table $transforms 3 funcref)
+
+  ;; Set elements in the table starting at offset zero.
+  ;; Note that this is at the module level, not inside a function.
+  (elem (i32.const 0) func $half $double $triple)
+
+  (func (export "transform") (param $value f64) (param $fnIndex i32) (result f64)
+    (call_indirect (type $transform) (local.get $value) (local.get $fnIndex))
+  )
+)
+```
+
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
+The file `demo.js` below uses `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {};
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {transform} = m.instance.exports;
+
+  const n = 3.14;
+  console.log('half =', transform(n, 0)); // using $half function; 1.57
+  console.log('double =', transform(n, 1)); // using $double function; 6.28
+  console.log('triple =', transform(n, 2)); // using $triple function; 9.42
+}
+
+run();
+```
 
 ### Memory Instructions
 
