@@ -124,47 +124,7 @@ To run it, enter `wasm-nm {file-path}.wasm`.
 The names of exported symbols are preceded by "e " and
 the names of imported symbols are preceded by "i ".
 
-### Common Instructions
-
-| Operation                                  | Instruction Syntax                                            |
-| ------------------------------------------ | ------------------------------------------------------------- |
-| define function                            | `func [{name}] {parameters} {return-type} {body}`             |
-| define a function parameter                | `param {name} {type}`                                         |
-| define a function return type              | `result {type}`                                               |
-| export function to make it available in JS | `export {js-name} (func {name})`                              |
-| call function                              | `call {fn-name}`                                              |
-| declare local variable                     | `local {name} {type}` (cannot initialize)                     |
-| set local variable                         | `local.set {name} {value}`                                    |
-| get local variable                         | `local.get {name}`                                            |
-| declare global variable                    | `global {name} {type} [{value}]` (can initialize)             |
-| set global variable                        | `global.set {name} {value}` (must be mutable)                 |
-| get global variable                        | `global.get {name}`                                           |
-| conditional logic                          | `if (result {type}) {condition} (then {body}) (else {body}))` |
-| select value based on condition            | `select {non-zero-value} {zero-value} {condition}`            |
-| define a block                             | `block {body}`                                                |
-| loop                                       | `loop {body}` (defines a block)                               |
-| break out of block                         | `br {depth}`                                                  |
-| compare values                             | see "Comparison Instructions" below                           |
-| set data in linear memory                  | `{type}.store{bits} {value}` (ex. `i32.store8`)               |
-| get data from linear memory                | `{type}.load{bits}` (ex. `i32.load8_u`)                       |
-| grow linear memory                         | `memory.grow {pages}`                                         |
-| shrink linear memory?                      | not currently supported, but being discussed (1)              |
-
-(1) {% aTargetBlank "https://github.com/WebAssembly/design/issues/1397", "memory management issue" %}
-
-TODO: See your wasm-linear-memory example which uses
-TODO: AssemblyScript to store to and load from linear memory.
-
-Each WASM module can have only one array of linear memory.
-But JavaScript can instantiate more than one WASM module
-in order to access multiple instances of linear memory.
-
-Local variables are mutable, but global variables are immutable by default.
-Since local variables cannot be initialized when they are declared,
-there is no point in making them immutable.
-To declare a global variable to be mutable, specify its type as `(mut {type})`.
-
-### WASM Functions
+## WASM Functions
 
 Modules can define functions.
 Functions that are exported can be called from JavaScript.
@@ -479,6 +439,35 @@ This code is available in the GitHub repo
 
 ## WASM Instructions
 
+| Operation                                  | Instruction Syntax                                            |
+| ------------------------------------------ | ------------------------------------------------------------- |
+| define function                            | `func [{name}] {parameters} {return-type} {body}`             |
+| define a function parameter                | `param {name} {type}`                                         |
+| define a function return type              | `result {type}`                                               |
+| export function to make it available in JS | `export {js-name} (func {name})`                              |
+| call function                              | `call {fn-name}`                                              |
+| declare local variable                     | `local {name} {type}` (cannot initialize)                     |
+| set local variable                         | `local.set {name} {value}`                                    |
+| get local variable                         | `local.get {name}`                                            |
+| declare global variable                    | `global {name} {type} [{value}]` (can initialize)             |
+| set global variable                        | `global.set {name} {value}` (must be mutable)                 |
+| get global variable                        | `global.get {name}`                                           |
+| conditional logic                          | `if (result {type}) {condition} (then {body}) (else {body}))` |
+| select value based on condition            | `select {non-zero-value} {zero-value} {condition}`            |
+| define a block                             | `block {body}`                                                |
+| loop                                       | `loop {body}` (defines a block)                               |
+| break out of block                         | `br {depth}`                                                  |
+| compare values                             | see "Comparison Instructions" below                           |
+| set data in linear memory                  | `{type}.store{bits} {value}` (ex. `i32.store8`)               |
+| get data from linear memory                | `{type}.load{bits}` (ex. `i32.load8_u`)                       |
+| grow linear memory                         | `memory.grow {pages}`                                         |
+| shrink linear memory?                      | not currently supported, but being discussed (1)              |
+
+(1) {% aTargetBlank "https://github.com/WebAssembly/design/issues/1397", "memory management issue" %}
+
+TODO: See your wasm-linear-memory example which uses
+TODO: AssemblyScript to store to and load from linear memory.
+
 The tables below summarize the currently supported WASM instructions.
 Understanding these is only necessary when
 directly writing WASM code in text format or
@@ -488,7 +477,7 @@ For more detail, see the {% aTargetBlank
 "https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md",
 "WASM Reference Manual" %}.
 
-The tables use the following abbreviations
+The tables below use the following abbreviations
 for substitutions in instruction names:
 
 - `mm` and `nn` can be `32` bits or `64` bits
@@ -499,127 +488,309 @@ duplicating the top value on the stack.
 Adding this has been proposed.
 Thomas Lively provided rationale on why this has not been done.
 
-"It takes a surprising amount of work and time to spec new instructions and
-get them implemented in every tool and engine out there.
-So generally only changes with significant benefits
-get all the way through the process.
-Unfortunately that means that there are a lot of "nice to have" proposals,
-even tiny ones like adding a single dup instruction, that don't make the cut.
-I'm not saying we'll never add dup, but if we do it will because it solves
-an important problem so lots of folks agree it's important to add
-and will be motivated to implement and maintain it throughout the ecosystem.
+> > > "It takes a surprising amount of work and time to spec new instructions and
+> > > get them implemented in every tool and engine out there.
+> > > So generally only changes with significant benefits
+> > > get all the way through the process.
+> > > Unfortunately that means that there are a lot of "nice to have" proposals,
+> > > even tiny ones like adding a single dup instruction, that don't make the cut.
+> > > I'm not saying we'll never add dup, but if we do it will because it solves
+> > > an important problem so lots of folks agree it's important to add
+> > > and will be motivated to implement and maintain it throughout the ecosystem.
+> > >
+> > > This is one of the costs of standards-based work.
+> > > If WASM were controlled by a single party,
+> > > it would be easy to add a single instruction like dup.
+> > > Since it's not, you first have to get a lot of different people with
+> > > different priorities and opinions to agree that adding dup
+> > > is both a good idea and worth their time and effort.
+> > > Because of this extra consensus-building work,
+> > > the community can have more confidence in the robustness and benefits
+> > > of the proposals that do make it through the process."
 
-This is one of the costs of standards-based work.
-If WASM were controlled by a single party,
-it would be easy to add a single instruction like dup.
-Since it's not, you first have to get a lot of different people with
-different priorities and opinions to agree that adding dup
-is both a good idea and worth their time and effort.
-Because of this extra consensus-building work,
-the community can have more confidence in the robustness and benefits
-of the proposals that do make it through the process."
+Most WASM instruction names follow the format `{kind-of-thing}.{operation}`.
+Kinds of things include:
+
+- variables: `local` and `global`
+- integers: `i32` and `i64`
+- floating point numbers: `f32` and `f64`
+- memory: `mem`
+- `import` and `export`
+- `func` to define a function
+- `type` to define a function signature
+- `call` to call a function
+- `global` to declare and initialize a global variable
+- `module` to define a module
+- `data` to initialize memory
+- `param` to define a function parameter
+- `result` to define a function return type
+
+Kind-specific operations include:
+
+- `get` and `set` to get and set the value of a variable
+- `const` to place the value of a constant on the stack
+- `store` and `load` to set and retrieve data in memory
+
+WASM instructions get their arguments from
+the stack (referred to as "dynamic operands") and/or from
+literal values specified after the instruction
+(referred to as "static immediate arguments").
+The columns in the tables of instructions below include:
+
+- I: number of immediate arguments
+- Si: number of arguments popped from the stack (input)
+- So: number of values pushed onto the stack (output)
+
+### Variable Instructions
+
+Local variables are mutable, but global variables are immutable by default.
+Since local variables cannot be initialized when they are declared,
+there is no point in making them immutable.
+To declare a global variable to be mutable, specify its type as `(mut {type})`.
+
+These instructions get and set local and global variables.
+
+| Name         |  I  | Si  | So  | Description                                      |
+| ------------ | :-: | :-: | :-: | ------------------------------------------------ |
+| `local`      |  2  |  0  |  0  | declares a local variable (cannot initialize)    |
+| `local.get`  |  1  |  0  |  0  | push local variable onto stack                   |
+| `local.set`  |  1  |  1  |  0  | set local variable from stack and pop            |
+| `local.tee`  |  1  |  0  |  0  | set local variable from stack and leave on stack |
+| `global`     |  1  |  0  |  0  | declares and initializes a global variable       |
+| `global.get` |  1  |  0  |  0  | push global variable onto stack                  |
+| `global.set` |  1  |  1  |  0  | set global variable from stack and pop           |
+
+The two immediate arguments of the `local` instruction are its name and type.
+See the `$l1` example below.
+
+Older code examples use the deprecated names
+`get_local`, `set_local`, `tee_local`, `get_global`, and `set_global`.
+
+All of these instructions take an immediate argument
+that identifies the variable on which to operate by index or name.
+The `set` instructions get the new value from the stack.
+
+The file `demo.wat` below demonstrates of using these instructions.
+
+````wasm
+(module
+  ;; Import a global variable named gFromJS from JavaScript,
+  ;; give it the WASM name $g_from_js,
+  ;; and declare it to hold an immutable i32 value.
+  (global $g_from_js (import "js" "gFromJS") i32)
+
+  ;; Define a global variable named $g_here that
+  ;; holds a mutable i32 value and is initialized to 19.
+  (global $g_here (mut i32) (i32.const 19))
+
+  ;; Define a function that has no parameters and returns a f64 value and
+  ;; export it with the name "demo" so it can be called from JavaScript.
+  (func (export "demo") (result f64)
+    ;; Define a local variable named $l1 that holds a f64 value.
+    ;; The value cannot be initialized in this instruction.
+    (local $l1 f64)
+
+    ;; Set the local variable to 3.14.
+    (local.set $l1 (f64.const 3.14))
+
+    ;; Get the value of $l1, placing it on the stack.
+    local.get $l1
+
+    ;; Do it again so two copies are on the stack.
+    local.get $l1
+
+    ;; Multiply $l1 by itself and place the f64 result on the stack.
+    f64.mul
+
+    ;; Add 1 to $g_here so the value becomes 20.
+    (global.set $g_here (i32.add (global.get $g_here) (i32.const 1)))
+
+    ;; Get the value of $g_here, placing it on the stack.
+    global.get $g_here
+
+    ;; Convert the i32 value to f64.
+    f64.convert_i32_s
+
+    ;; Add $g_here to the previous result from f64.mul.
+    f64.add
+
+    ;; Get the value of $g_from_js.
+    global.get $g_from_js
+
+    ;; Convert the i32 value to f64.
+    f64.convert_i32_s
+
+    ;; Add $g_from_js to the previous result and
+    ;; use this as the return value of the function.
+    ;; The result is 3.14 * 3.14 + (19 + 1) + 20 = 49.8596.
+    f64.add
+  )
+)
+```
+
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+The file `demo.js` below uses `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {
+    js: {
+      gFromJS: new WebAssembly.Global({value: 'i32'}, 20),
+    }
+  };
+
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {demo} = m.instance.exports;
+  console.log('result =', demo());
+}
+
+run();
+```
 
 ### Numeric Instructions
 
 These instructions are prefixed by one of the four supported number types.
 For example, the instruction to add two `f32` values is `f32.add`.
 
-| Name       | Description                     |
-| ---------- | ------------------------------- |
-| `abs`      | absolute value                  |
-| `add`      | add                             |
-| `ceil`     | ceiling                         |
-| `copysign` | copy sign                       |
-| `div_{sx}` | integer divide                  |
-| `div`      | floating point divide           |
-| `floor`    | floor                           |
-| `max`      | maximum                         |
-| `min`      | minimum                         |
-| `mul`      | multiply                        |
-| `ne`       | not equal                       |
-| `nearest`  | round floating point to integer |
-| `neg`      | negate                          |
-| `rem_{sx}` | remainder                       |
-| `sqrt`     | square root                     |
-| `sub`      | subtract                        |
-| `trunc`    | truncate                        |
+| Name       |  I  | Si  | So  | Description                     |
+| ---------- | :-: | :-: | :-: | ------------------------------- |
+| `abs`      |  0  |  1  |  1  | absolute value                  |
+| `add`      |  0  |  2  |  1  | add                             |
+| `ceil`     |  0  |  1  |  1  | ceiling                         |
+| `copysign` |  0  |  1  |  1  | copy sign                       |
+| `div_{sx}` |  0  |  2  |  1  | integer divide                  |
+| `div`      |  0  |  2  |  1  | floating point divide           |
+| `floor`    |  0  |  1  |  1  | floor                           |
+| `max`      |  0  |  2  |  1  | maximum                         |
+| `min`      |  0  |  2  |  1  | minimum                         |
+| `mul`      |  0  |  2  |  1  | multiply                        |
+| `ne`       |  0  |  1  |  1  | not equal                       |
+| `nearest`  |  0  |  1  |  1  | round floating point to integer |
+| `neg`      |  0  |  1  |  1  | negate                          |
+| `rem_{sx}` |  0  |  2  |  1  | remainder                       |
+| `sqrt`     |  0  |  1  |  1  | square root                     |
+| `sub`      |  0  |  2  |  1  | subtract                        |
+| `trunc`    |  0  |  1  |  1  | truncate                        |
+
+Note that many math functions,
+such as `sin`, `cos`, `tan`, and `log` are missing in WASM.
+One way to get these is to import them from JavaScript
+as shown below.
+
+The file `demo.js` below provides math functions to `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {
+    js: {
+      sin: Math.sin,
+      cos: Math.cos,
+      tan: Math.tan,
+      log: Math.log
+    }
+  };
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {demo} = m.instance.exports;
+  console.log('result =', demo(0.7)); // 0.811529
+}
+
+run();
+```
+
+The file `demo.wat` below demonstrates using functions imported from JavaScript.
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
+```wasm
+(module
+  ;; This shows describing a function signature inline.
+  ;;(import "js" "sin" (func $sin (param f64) (result f64)))
+
+  ;; This shows assigning a name to a function signature
+  ;; and reusing it.
+  (type $math_fn (func (param f64) (result f64) ))
+  (import "js" "sin" (func $sin (type $math_fn)))
+  (import "js" "cos" (func $cos (type $math_fn)))
+  (import "js" "tan" (func $tan (type $math_fn)))
+  (import "js" "log" (func $log (type $math_fn)))
+
+  ;; This returns log(sin($radians) + cos($radians) + tan($radians)).
+  (func (export "demo") (param $radians f64) (result f64)
+    (call $sin (local.get $radians))
+    (call $cos (local.get $radians))
+    f64.add
+    (call $tan (local.get $radians))
+    f64.add
+    call $log
+  )
+)
+```
 
 ### Bitwise Instructions
 
-| Name       | Description                    |
-| ---------- | ------------------------------ |
-| `clz`      | count leading zeros            |
-| `ctz`      | count training zeros           |
-| `popcnt`   | population count (# of 1 bits) |
-| `rotl`     | rotate left                    |
-| `rotr`     | rotate right                   |
-| `shl`      | shift left                     |
-| `shr_{xx}` | shift right                    |
+| Name       |  I  | Si  | So  | Description                    |
+| ---------- | :-: | :-: | :-: | ------------------------------ |
+| `clz`      |  0  |  1  |  0  | count leading zeros            |
+| `ctz`      |  0  |  1  |  0  | count training zeros           |
+| `popcnt`   |  0  |  1  |  0  | population count (# of 1 bits) |
+| `rotl`     |  0  |  1  |  0  | rotate left                    |
+| `rotr`     |  0  |  1  |  0  | rotate right                   |
+| `shl`      |  0  |  1  |  0  | shift left                     |
+| `shr_{xx}` |  0  |  1  |  0  | shift right                    |
 
 ### Logical Instructions
 
-| Name  | Description  |
-| ----- | ------------ |
-| `and` | and          |
-| `or`  | or           |
-| `xor` | exclusive or |
+| Name  |  I  | Si  | So  | Description  |
+| ----- | :-: | :-: | :-: | ------------ |
+| `and` |  0  |  2  |  0  | and          |
+| `or`  |  0  |  2  |  0  | or           |
+| `xor` |  0  |  2  |  0  | exclusive or |
 
 ### Comparison Instructions
 
-| Name      | Description                          |
-| --------- | ------------------------------------ |
-| `eq`      | equal                                |
-| `eqz`     | equal to zero                        |
-| `ge_{sx}` | integer greater than or equal        |
-| `ge`      | floating point greater than or equal |
-| `gt_{sx}` | integer greater than                 |
-| `gt`      | floating point greater than          |
-| `le_{sx}` | integer less than or equal           |
-| `le`      | floating point less than or equal    |
-| `lt_{sx}` | integer less than                    |
-| `lt`      | floating point less than             |
+| Name      |  I  | Si  | So  | Description                          |
+| --------- | :-: | :-: | :-: | ------------------------------------ |
+| `eq`      |  0  |  2  |  0  | equal                                |
+| `eqz`     |  0  |  1  |  0  | equal to zero                        |
+| `ge_{sx}` |  0  |  2  |  0  | integer greater than or equal        |
+| `ge`      |  0  |  2  |  0  | floating point greater than or equal |
+| `gt_{sx}` |  0  |  2  |  0  | integer greater than                 |
+| `gt`      |  0  |  2  |  0  | floating point greater than          |
+| `le_{sx}` |  0  |  2  |  0  | integer less than or equal           |
+| `le`      |  0  |  2  |  0  | floating point less than or equal    |
+| `lt_{sx}` |  0  |  2  |  0  | integer less than                    |
+| `lt`      |  0  |  2  |  0  | floating point less than             |
 
 ### Conversion Instructions
 
-| Name          | Description                                                         |
-| ------------- | ------------------------------------------------------------------- |
-| `convert`     | convert integer to floating point                                   |
-| `demote`      | convert f64 to f32                                                  |
-| `extend`      | convert i32 to i64                                                  |
-| `promote`     | convert f32 to f64                                                  |
-| `reinterpret` | convert from integer to floating point or floating point to integer |
-| `trunc`       | truncate, discarding the least significant bits                     |
-| `wrap`        | converts i32 to i64, discarding the most significant bits           |
-
-### Variable Instructions
-
-| Name                    | Description                                      |
-| ----------------------- | ------------------------------------------------ |
-| `local.get {local-id}`  | push local variable onto stack                   |
-| `local.set {local-id}`  | set local variable from stack and pop            |
-| `local.tee {local-id}`  | set local variable from stack and leave on stack |
-| `global.get {local-id}` | push global variable onto stack                  |
-| `global.set {local-id}` | set global variable from stack and pop           |
+| Name          |  I  | Si  | So  | Description                                                         |
+| ------------- | :-: | :-: | :-: | ------------------------------------------------------------------- |
+| `convert`     |  0  |  1  |  0  | convert integer to floating point                                   |
+| `demote`      |  0  |  1  |  0  | convert f64 to f32                                                  |
+| `extend`      |  0  |  1  |  0  | convert i32 to i64                                                  |
+| `promote`     |  0  |  1  |  0  | convert f32 to f64                                                  |
+| `reinterpret` |  0  |  1  |  0  | convert from integer to floating point or floating point to integer |
+| `trunc`       |  0  |  1  |  0  | truncate, discarding the least significant bits                     |
+| `wrap`        |  0  |  1  |  0  | converts i32 to i64, discarding the most significant bits           |
 
 ### Control Instructions
 
 These instructions are expressions, not statements.
 They result in placing a value on the stack.
 
-| Name                               | Description                                                                    |
-| ---------------------------------- | ------------------------------------------------------------------------------ |
-| `block {block-type} {instr}*`      | creates a block of instructions, typically in another instruction such as `if` |
-| `loop {block-type} {instr}* end`   | creates a labeled block for implementing a loop                                |
-| `if`                               | denotes the true block of a conditional                                        |
-| `else`                             | denotes the false block of a conditional                                       |
-| `end`                              | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`      |
-| `br {depth}`                       | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop            |
-| `br_if {depth} {condition}`        | conditional branch                                                             |
-| `br_table {table} {default-depth}` | branch based on table entry at depth                                           |
-| `return`                           | return from function                                                           |
-| `call {function-id}`               | call function                                                                  |
-| `call_indirect {type-id}`          | call function at index in table                                                |
-| `unreachable`                      | signals an error (trap) if reached                                             |
+| Name                               |  I  | Si  | So  | Description                                                                    |
+| ---------------------------------- | :-: | :-: | :-: | ------------------------------------------------------------------------------ |
+| `block {block-type} {instr}*`      |  0  |  0  |  0  | creates a block of instructions, typically in another instruction such as `if` |
+| `loop {block-type} {instr}* end`   |  0  |  0  |  0  | creates a labeled block for implementing a loop                                |
+| `if`                               |  0  |  0  |  0  | denotes the true block of a conditional                                        |
+| `else`                             |  0  |  0  |  0  | denotes the false block of a conditional                                       |
+| `end`                              |  0  |  0  |  0  | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`      |
+| `br {depth}`                       |  0  |  0  |  0  | unconditional branch; `br 0` goes to top of loop; `br 1` exits loop            |
+| `br_if {depth} {condition}`        |  0  |  0  |  0  | conditional branch                                                             |
+| `br_table {table} {default-depth}` |  0  |  0  |  0  | branch based on table entry at depth                                           |
+| `return`                           |  0  |  0  |  0  | return from function                                                           |
+| `call {function-id}`               |  0  |  0  |  0  | call function                                                                  |
+| `call_indirect {type-id}`          |  0  |  0  |  0  | call function at index in table                                                |
+| `unreachable`                      |  0  |  0  |  0  | signals an error (trap) if reached                                             |
 
 Even control flow operates on the stack.
 For example, the `if` instruction executes its branch
@@ -638,7 +809,7 @@ in a function that returns the largest of two values:
     )
   )
   (export "max" (func $max))
-```
+````
 
 TODO: Demonstrate all the control instructions in a `.wat` file!
 TODO: See https://medium.com/leaningtech/solving-the-structured-control-flow-problem-once-and-for-all-5123117b1ee2.
@@ -646,36 +817,43 @@ TODO: Maybe implement the Fibonacci function in multiple ways.
 
 ### Basic Instructions
 
-| Name            | Description                                                            |
-| --------------- | ---------------------------------------------------------------------- |
-| `call`          | calls a function                                                       |
-| `call_indirect` | calls a function at an index in the default table                      |
-| `const`         | pushes a constant value onto the stack                                 |
-| `drop`          | pops top value from stack and does nothing with it                     |
-| `nop`           | no operation                                                           |
-| `select`        | takes two values and a condition; returns 1st if true and 2nd if false |
+| Name            |  I  | Si  | So  | Description                                                            |
+| --------------- | :-: | :-: | :-: | ---------------------------------------------------------------------- |
+| `call`          |  0  |  0  |  0  | calls a function                                                       |
+| `call_indirect` |  0  |  0  |  0  | calls a function at an index in the default table                      |
+| `const`         |  1  |  0  |  0  | pushes a constant value onto the stack                                 |
+| `drop`          |  0  |  0  |  0  | pops top value from stack and does nothing with it                     |
+| `nop`           |  0  |  0  |  0  | no operation                                                           |
+| `select`        |  0  |  3  |  0  | takes two values and a condition; returns 1st if true and 2nd if false |
+
+The number of stack values used by `call` and `call_indirect`
+matches the number of parameters in the function signature.
 
 ### Memory Instructions
+
+Each WASM module can have only one array of linear memory.
+But JavaScript can instantiate more than one WASM module
+in order to access multiple instances of linear memory.
 
 The `load` instructions load data from the default linear memory.
 The `store` instructions store data into the default linear memory.
 These instructions are prefixed by the number type to be loaded or stored.
 In the table below, `mem` is a memory offset.
 
-| Name                      | Description                                    |
-| ------------------------- | ---------------------------------------------- |
-| `i{nn}.load {mem}`        | reads integer value into matching size         |
-| `i{nn}.load8_{sx} {mem}`  | reads integer value into 8 bits                |
-| `i{nn}.load16_{sx} {mem}` | reads integer value into 16 bits               |
-| `i64.load32_{sx} {mem}`   | reads i64 value into 32 bits                   |
-| `f{nn}.load {mem}`        | reads floating point value                     |
-| `i{nn}.store {mem}`       | writes integer value into matching size        |
-| `i{nn}.store8 {mem}`      | writes integer value into 8 bits               |
-| `i{nn}.store16 {mem}`     | writes integer value into 16 bits              |
-| `i64.store32 {mem}`       | writes i64 value into 32 bits                  |
-| `f{nn}.store {mem}`       | writes floating point value into matching size |
-| `memory.grow`             | increases size of default linear memory        |
-| `memory.size`             | returns the size of default linear memory      |
+| Name                      |  I  | Si  | So  | Description                                    |
+| ------------------------- | :-: | :-: | :-: | ---------------------------------------------- |
+| `i{nn}.load {mem}`        |  0  |  0  |  0  | reads integer value into matching size         |
+| `i{nn}.load8_{sx} {mem}`  |  0  |  0  |  0  | reads integer value into 8 bits                |
+| `i{nn}.load16_{sx} {mem}` |  0  |  0  |  0  | reads integer value into 16 bits               |
+| `i64.load32_{sx} {mem}`   |  0  |  0  |  0  | reads i64 value into 32 bits                   |
+| `f{nn}.load {mem}`        |  0  |  0  |  0  | reads floating point value                     |
+| `i{nn}.store {mem}`       |  0  |  0  |  0  | writes integer value into matching size        |
+| `i{nn}.store8 {mem}`      |  0  |  0  |  0  | writes integer value into 8 bits               |
+| `i{nn}.store16 {mem}`     |  0  |  0  |  0  | writes integer value into 16 bits              |
+| `i64.store32 {mem}`       |  0  |  0  |  0  | writes i64 value into 32 bits                  |
+| `f{nn}.store {mem}`       |  0  |  0  |  0  | writes floating point value into matching size |
+| `memory.grow`             |  0  |  0  |  0  | increases size of default linear memory        |
+| `memory.size`             |  0  |  0  |  0  | returns the size of default linear memory      |
 
 ## Higher Level Languages
 
