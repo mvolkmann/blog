@@ -980,6 +980,7 @@ instruction suffix (`_32s` in this case) specifies the input type.
 
 These instructions are expressions, not statements.
 They result in placing a value on the stack.
+TODO: Fill in this table!
 
 | Name                               |  I  | Si  | So  | Description                                                                    |
 | ---------------------------------- | :-: | :-: | :-: | ------------------------------------------------------------------------------ |
@@ -1144,6 +1145,7 @@ The `load` instructions load data from the default linear memory.
 The `store` instructions store data into the default linear memory.
 These instructions are prefixed by the number type to be loaded or stored.
 In the table below, `mem` is a memory offset.
+TODO: Fill in this table!
 
 | Name                      |  I  | Si  | So  | Description                                    |
 | ------------------------- | :-: | :-: | :-: | ---------------------------------------------- |
@@ -1247,6 +1249,8 @@ run();
 ```
 
 ### Other Instructions
+
+TODO: Fill in this table!
 
 | Name            |  I  | Si  | So  | Description                                                            |
 | --------------- | :-: | :-: | :-: | ---------------------------------------------------------------------- |
