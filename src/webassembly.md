@@ -795,17 +795,17 @@ async function run() {
   const value = 52;
 
   // In four bytes there are 3*8 + 2 leading zeros.
-  console.log('leading zeros =', leadingZeros(52)); // 26
-  console.log('trailing zeros =', trailingZeros(52)); // 2
-  console.log('population =', population(52)); // 3 1-bits
-  console.log('shiftRight =', shiftRight(52, 1)); // 26
-  console.log('shiftLeft =', shiftLeft(52, 1)); // 104
+  console.log('leading zeros =', leadingZeros(value)); // 26
+  console.log('trailing zeros =', trailingZeros(value)); // 2
+  console.log('population =', population(value)); // 3 1-bits
+  console.log('shiftRight =', shiftRight(value, 1)); // 26
+  console.log('shiftLeft =', shiftLeft(value, 1)); // 104
 
   // Could use shiftRight here instead since no bits are wrapping around.
-  console.log('rotateRight =', rotateRight(52, 2)); // 13
+  console.log('rotateRight =', rotateRight(value, 2)); // 13
 
   // Could use shiftLeft here instead since no bits are wrapping around.
-  console.log('rotateLeft =', rotateLeft(52, 2)); // 208
+  console.log('rotateLeft =', rotateLeft(value, 2)); // 208
 }
 
 run();
@@ -818,6 +818,48 @@ run();
 | `and` |  0  |  2  |  0  | and          |
 | `or`  |  0  |  2  |  0  | or           |
 | `xor` |  0  |  2  |  0  | exclusive or |
+
+The file `demo.wat` below demonstrates using each of these instructions.
+
+```wasm
+(module
+  (func (export "and") (param i32 i32) (result i32)
+    (i32.and (local.get 0) (local.get 1))
+  )
+
+  (func (export "or") (param i32 i32) (result i32)
+    (i32.or (local.get 0) (local.get 1))
+  )
+
+  (func (export "xor") (param i32 i32) (result i32)
+    (i32.xor (local.get 0) (local.get 1))
+  )
+)
+```
+
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
+The file `demo.js` below uses `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {};
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {and, or, xor} = m.instance.exports;
+
+  // 52 in one byte of binary is 00110100.
+  const v1 = 52;
+
+  // 21 in one byte of binary is 00010101.
+  const v2 = 21;
+
+  console.log('and =', and(v1, v2)); // 00010100 = 20
+  console.log('or =', or(v1, v2)); // 00110101 = 53
+  console.log('xor =', xor(v1, v2)); // 00100001 = 33
+}
+
+run();
+```
 
 ### Comparison Instructions
 
