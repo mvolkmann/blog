@@ -629,6 +629,7 @@ The file `demo.wat` below demonstrates of using these instructions.
 ```
 
 Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
 The file `demo.js` below uses `demo.wasm`.
 
 ```js
@@ -730,12 +731,85 @@ Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
 | Name       |  I  | Si  | So  | Description                    |
 | ---------- | :-: | :-: | :-: | ------------------------------ |
 | `clz`      |  0  |  1  |  0  | count leading zeros            |
-| `ctz`      |  0  |  1  |  0  | count training zeros           |
+| `ctz`      |  0  |  1  |  0  | count trailing zeros           |
 | `popcnt`   |  0  |  1  |  0  | population count (# of 1 bits) |
-| `rotl`     |  0  |  1  |  0  | rotate left                    |
-| `rotr`     |  0  |  1  |  0  | rotate right                   |
-| `shl`      |  0  |  1  |  0  | shift left                     |
-| `shr_{xx}` |  0  |  1  |  0  | shift right                    |
+| `rotl`     |  0  |  2  |  0  | rotate left                    |
+| `rotr`     |  0  |  2  |  0  | rotate right                   |
+| `shl`      |  0  |  2  |  0  | shift left                     |
+| `shr_{sx}` |  0  |  2  |  0  | shift right                    |
+
+The file `demo.wat` below demonstrates using each of these instructions.
+
+```wasm
+(module
+  (func (export "leadingZeros") (param $value i32) (result i32)
+    (i32.clz (local.get $value))
+  )
+
+  (func (export "trailingZeros") (param $value i32) (result i32)
+    (i32.ctz (local.get $value))
+  )
+
+  (func (export "population") (param $value i32) (result i32)
+    (i32.popcnt (local.get $value))
+  )
+
+  (func (export "rotateLeft") (param $value i32) (param $bits i32) (result i32)
+    (i32.rotl (local.get $value) (local.get $bits))
+  )
+
+  (func (export "rotateRight") (param $value i32) (param $bits i32) (result i32)
+    (i32.rotr (local.get $value) (local.get $bits))
+  )
+
+  (func (export "shiftLeft") (param $value i32) (param $bits i32) (result i32)
+    (i32.shl (local.get $value) (local.get $bits))
+  )
+
+  (func (export "shiftRight") (param $value i32) (param $bits i32) (result i32)
+    ;; shr_u is for unsigned.
+    (i32.shr_u (local.get $value) (local.get $bits))
+  )
+)
+```
+
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
+The file `demo.js` below uses `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {};
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {
+    leadingZeros,
+    population,
+    rotateLeft,
+    rotateRight,
+    shiftLeft,
+    shiftRight,
+    trailingZeros
+  } = m.instance.exports;
+
+  // 52 in one byte of binary is 00110100.
+  const value = 52;
+
+  // In four bytes there are 3*8 + 2 leading zeros.
+  console.log('leading zeros =', leadingZeros(52)); // 26
+  console.log('trailing zeros =', trailingZeros(52)); // 2
+  console.log('population =', population(52)); // 3 1-bits
+  console.log('shiftRight =', shiftRight(52, 1)); // 26
+  console.log('shiftLeft =', shiftLeft(52, 1)); // 104
+
+  // Could use shiftRight here instead since no bits are wrapping around.
+  console.log('rotateRight =', rotateRight(52, 2)); // 13
+
+  // Could use shiftLeft here instead since no bits are wrapping around.
+  console.log('rotateLeft =', rotateLeft(52, 2)); // 208
+}
+
+run();
+```
 
 ### Logical Instructions
 
