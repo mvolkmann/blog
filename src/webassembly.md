@@ -591,7 +591,7 @@ For example, the instruction to add two `f32` values is `f32.add`.
 | `trunc`       | truncate, discarding the least significant bits                     |
 | `wrap`        | converts i32 to i64, discarding the most significant bits           |
 
-## Variable Instructions
+### Variable Instructions
 
 | Name                    | Description                                      |
 | ----------------------- | ------------------------------------------------ |
@@ -601,7 +601,7 @@ For example, the instruction to add two `f32` values is `f32.add`.
 | `global.get {local-id}` | push global variable onto stack                  |
 | `global.set {local-id}` | set global variable from stack and pop           |
 
-## Control Instructions
+### Control Instructions
 
 These instructions are expressions, not statements.
 They result in placing a value on the stack.
@@ -655,7 +655,7 @@ TODO: Maybe implement the Fibonacci function in multiple ways.
 | `nop`           | no operation                                                           |
 | `select`        | takes two values and a condition; returns 1st if true and 2nd if false |
 
-## Memory Instructions
+### Memory Instructions
 
 The `load` instructions load data from the default linear memory.
 The `store` instructions store data into the default linear memory.

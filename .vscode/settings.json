@@ -402,6 +402,7 @@
     "markersize",
     "mathjax",
     "mathplotlib",
+    "matklad",
     "matmul",
     "matplotlab",
     "matplotlib",
