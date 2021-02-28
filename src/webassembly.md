@@ -221,8 +221,6 @@ For example:
 Functions that return a value must specify its type with `(return {type})`.
 This is omitted for functions that do not return a value.
 
-TODO: Do local variables have to be declared at the beginning of function bodies?
-
 Exporting a function makes it available outside its module,
 such as in JavaScript.
 There are two ways to export a function.
@@ -467,9 +465,6 @@ TODO: Consider deleting this table if it just duplicates what is explained later
 
 (1) {% aTargetBlank "https://github.com/WebAssembly/design/issues/1397", "memory management issue" %}
 
-TODO: See your wasm-linear-memory example which uses
-TODO: AssemblyScript to store to and load from linear memory.
-
 The tables below summarize the currently supported WASM instructions.
 Understanding these is only necessary when
 directly writing WASM code in text format or
@@ -538,12 +533,15 @@ to provide this information for each instruction:
 
 ### Variable Instructions
 
-Local variables are always mutable.
-They cannot be initialized when they are declared,
-so there is no point in making them immutable.
-
-Global variables are immutable by default.
+Global variables are declared at the module level, not inside functions.
+They are immutable by default.
 To declare a global variable to be mutable, specify its type as `(mut {type})`.
+
+Local variables are declared inside functions
+and the declarations must appear at the beginning of the function
+before any other instructions.
+Local variables cannot be initialized when they are declared,
+so they are always mutable.
 
 The instructions in the table below declare, get, and set
 local and global variables.
@@ -1136,7 +1134,119 @@ async function run() {
 run();
 ```
 
-### Basic Instructions
+### Memory Instructions
+
+Each WASM module can have only one array of linear memory.
+But JavaScript can instantiate more than one WASM module
+in order to access multiple instances of linear memory.
+
+The `load` instructions load data from the default linear memory.
+The `store` instructions store data into the default linear memory.
+These instructions are prefixed by the number type to be loaded or stored.
+In the table below, `mem` is a memory offset.
+
+| Name                      |  I  | Si  | So  | Description                                    |
+| ------------------------- | :-: | :-: | :-: | ---------------------------------------------- |
+| `i{nn}.load {mem}`        |  0  |  0  |  0  | reads integer value into matching size         |
+| `i{nn}.load8_{sx} {mem}`  |  0  |  0  |  0  | reads integer value into 8 bits                |
+| `i{nn}.load16_{sx} {mem}` |  0  |  0  |  0  | reads integer value into 16 bits               |
+| `i64.load32_{sx} {mem}`   |  0  |  0  |  0  | reads i64 value into 32 bits                   |
+| `f{nn}.load {mem}`        |  0  |  0  |  0  | reads floating point value                     |
+| `i{nn}.store {mem}`       |  0  |  0  |  0  | writes integer value into matching size        |
+| `i{nn}.store8 {mem}`      |  0  |  0  |  0  | writes integer value into 8 bits               |
+| `i{nn}.store16 {mem}`     |  0  |  0  |  0  | writes integer value into 16 bits              |
+| `i64.store32 {mem}`       |  0  |  0  |  0  | writes i64 value into 32 bits                  |
+| `f{nn}.store {mem}`       |  0  |  0  |  0  | writes floating point value into matching size |
+| `memory`                  |  0  |  0  |  0  | create linear memory        |
+| `memory.grow`             |  0  |  0  |  0  | increases size of default linear memory        |
+| `memory.size`             |  0  |  0  |  0  | returns the size of default linear memory      |
+
+The file `demo.wat` below demonstrates using some of these instructions.
+
+```wasm
+(module
+  (memory (export "myMemory") 1)
+
+  (func $translate (param $offset i32) (param $delta f64)
+    (f64.store
+      (local.get $offset)
+      (f64.add
+        (f64.load (local.get $offset))
+        (local.get $delta)
+      )
+    )
+  )
+
+  (func (export "translatePoints") (param $length i32) (param $dx f64) (param $dy f64)
+    (local $offset i32) ;; starts at zero
+
+    (local $lastOffset i32)
+    (local.set $lastOffset
+      (i32.mul
+        (local.get $length) ;; number of points
+        (i32.const 16) ;; 8 bytes for x + 8 bytes for y
+      )
+    )
+
+    (loop
+      (call $translate (local.get $offset) (local.get $dx))
+
+      ;; Advance $offset to get next y value.
+      (local.set $offset (i32.add (local.get $offset) (i32.const 8)))
+
+      ;; Translate y value by $dy.
+      (f64.store
+        (local.get $offset)
+        (f64.add
+          (f64.load (local.get $offset))
+          (local.get $dy)
+        )
+      )
+
+      ;; Advance $offset to get next x value.
+      (local.set $offset (i32.add (local.get $offset) (i32.const 8)))
+
+      (br_if 0 (i32.lt_s (local.get $offset) (local.get $lastOffset)))
+    )
+  )
+)
+```
+
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
+The file `demo.js` below uses `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {};
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {myMemory, translatePoints} = m.instance.exports;
+
+  const points = [
+    {x: 1.2, y: 2.3},
+    {x: 3.4, y: 4.5},
+    {x: 5.6, y: 6.7}
+  ];
+
+  // Copy the point data into linear memory shared with WASM code.
+  const offset = 0;
+  const length = points.length * 2;
+  const array = new Float64Array(myMemory.buffer, offset, length);
+  let index = 0;
+  for (const point of points) {
+    array[index++] = point.x;
+    array[index++] = point.y;
+  }
+
+  console.log('untranslated points =', array);
+  translatePoints(points.length, 2, 3);
+  console.log('translated points =', array);
+}
+
+run();
+```
+
+### Other Instructions
 
 | Name            |  I  | Si  | So  | Description                                                            |
 | --------------- | :-: | :-: | :-: | ---------------------------------------------------------------------- |
@@ -1216,32 +1326,6 @@ async function run() {
 
 run();
 ```
-
-### Memory Instructions
-
-Each WASM module can have only one array of linear memory.
-But JavaScript can instantiate more than one WASM module
-in order to access multiple instances of linear memory.
-
-The `load` instructions load data from the default linear memory.
-The `store` instructions store data into the default linear memory.
-These instructions are prefixed by the number type to be loaded or stored.
-In the table below, `mem` is a memory offset.
-
-| Name                      |  I  | Si  | So  | Description                                    |
-| ------------------------- | :-: | :-: | :-: | ---------------------------------------------- |
-| `i{nn}.load {mem}`        |  0  |  0  |  0  | reads integer value into matching size         |
-| `i{nn}.load8_{sx} {mem}`  |  0  |  0  |  0  | reads integer value into 8 bits                |
-| `i{nn}.load16_{sx} {mem}` |  0  |  0  |  0  | reads integer value into 16 bits               |
-| `i64.load32_{sx} {mem}`   |  0  |  0  |  0  | reads i64 value into 32 bits                   |
-| `f{nn}.load {mem}`        |  0  |  0  |  0  | reads floating point value                     |
-| `i{nn}.store {mem}`       |  0  |  0  |  0  | writes integer value into matching size        |
-| `i{nn}.store8 {mem}`      |  0  |  0  |  0  | writes integer value into 8 bits               |
-| `i{nn}.store16 {mem}`     |  0  |  0  |  0  | writes integer value into 16 bits              |
-| `i64.store32 {mem}`       |  0  |  0  |  0  | writes i64 value into 32 bits                  |
-| `f{nn}.store {mem}`       |  0  |  0  |  0  | writes floating point value into matching size |
-| `memory.grow`             |  0  |  0  |  0  | increases size of default linear memory        |
-| `memory.size`             |  0  |  0  |  0  | returns the size of default linear memory      |
 
 ## Higher Level Languages
 
