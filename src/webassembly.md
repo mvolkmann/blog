@@ -552,7 +552,7 @@ These instructions get and set local and global variables.
 
 | Name         |  I  | Si  | So  | Description                                      |
 | ------------ | :-: | :-: | :-: | ------------------------------------------------ |
-| `local`      |  2  |  0  |  0  | declares a local variable (cannot initialize)    |
+| `local`      |  2  |  0  |  0  | declares a local variable                        |
 | `local.get`  |  1  |  0  |  0  | push local variable onto stack                   |
 | `local.set`  |  1  |  1  |  0  | set local variable from stack and pop            |
 | `local.tee`  |  1  |  0  |  0  | set local variable from stack and leave on stack |
@@ -561,6 +561,7 @@ These instructions get and set local and global variables.
 | `global.set` |  1  |  1  |  0  | set global variable from stack and pop           |
 
 The two immediate arguments of the `local` instruction are its name and type.
+Local variables default to zero and cannot be initialized to a different value.
 See the `$l1` example below.
 
 Older code examples use the deprecated names
@@ -876,6 +877,42 @@ run();
 | `lt_{sx}` |  0  |  2  |  0  | integer less than                    |
 | `lt`      |  0  |  2  |  0  | floating point less than             |
 
+The file `demo.wat` below demonstrates using some of these instructions.
+
+```wasm
+(module
+  (func (export "max") (param f64 f64) (result f64)
+    (select (local.get 0) (local.get 1) (f64.ge (local.get 0) (local.get 1)))
+  )
+
+  (func (export "min") (param f64 f64) (result f64)
+    (select (local.get 0) (local.get 1) (f64.le (local.get 0) (local.get 1)))
+  )
+)
+```
+
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
+The file `demo.js` below uses `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {};
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {max, min} = m.instance.exports;
+
+  const pi = Math.PI; // 3.14159
+  const e = Math.E; // 2.71828
+
+  console.log(max(pi, e)); // pi
+  console.log(max(e, pi)); // pi
+  console.log(min(pi, e)); // e
+  console.log(min(e, pi)); // e
+}
+
+run();
+```
+
 ### Conversion Instructions
 
 | Name          |  I  | Si  | So  | Description                                                         |
@@ -887,6 +924,9 @@ run();
 | `reinterpret` |  0  |  1  |  0  | convert from integer to floating point or floating point to integer |
 | `trunc`       |  0  |  1  |  0  | truncate, discarding the least significant bits                     |
 | `wrap`        |  0  |  1  |  0  | converts i32 to i64, discarding the most significant bits           |
+
+We saw examples of using the `convert` instruction
+in the "Variable Instructions" section above.
 
 ### Control Instructions
 
@@ -912,23 +952,65 @@ Even control flow operates on the stack.
 For example, the `if` instruction executes its branch
 if the value at the top of the stack evaluates to true.
 
-Here is an example of using an `if` instruction
-in a function that returns the largest of two values:
+The file `demo.wat` below demonstrates using some of these instructions.
 
 ```wasm
-  (func $max (param $lhs i32) (param $rhs i32) (result i32)
-    ;; The first argument specifies the type if expression result.
-    '' The second argument is the result of the condition to be tested.
-    (if (result i32) (i32.gt_s (local.get $lhs) (local.get $rhs))
-      (then (local.get $lhs))
-      (else (local.get $rhs))
+(module
+  (func $factorial (param $n i32) (result i32)
+    (if
+      (result i32)
+      (i32.le_s (local.get $n) (i32.const 2))
+      (then (local.get $n))
+      (else
+        (i32.mul
+          (local.get $n)
+          (call $factorial (i32.sub (local.get $n) (i32.const 1))) ;; recursive
+        )
+      )
     )
   )
-  (export "max" (func $max))
-````
+  (export "factorial" (func $factorial))
 
-TODO: Demonstrate all the control instructions in a `.wat` file!
-TODO: See https://medium.com/leaningtech/solving-the-structured-control-flow-problem-once-and-for-all-5123117b1ee2.
+  (func (export "sumRange") (param $start i32) (param $end i32) (result i32)
+    (local $sum i32)
+    (local $n i32)
+    (local.set $n (local.get $start))
+
+    (loop
+      ;; Add $n to $sum.
+      (local.set $sum (i32.add (local.get $sum) (local.get $n)))
+
+      ;; Add 1 to $n.
+      (local.set $n (i32.add (local.get $n) (i32.const 1)))
+
+      ;; Go to top of the loop if $end not reached.
+      ;; Otherwise drop out of loop.
+      (br_if 0 (i32.le_s (local.get $n) (local.get $end)))
+    )
+
+    (local.get $sum)
+  )
+)
+```
+
+Compile this file to `demo.wasm` by entering `wat2wasm demo.wat`.
+
+The file `demo.js` below uses `demo.wasm`.
+
+```js
+async function run() {
+  const imports = {};
+  const m = await WebAssembly.instantiateStreaming(fetch('demo.wasm'), imports);
+  const {factorial, sumRange} = m.instance.exports;
+
+  console.log(factorial(3)); // 1 * 2 * 3 = 6
+  console.log(factorial(5)); // 1 * 2 * 3 * 4 * 5 = 120
+  console.log(sumRange(3, 6)); // 3 + 4 + 5 + 6 = 18
+}
+
+run();
+```
+
 TODO: Maybe implement the Fibonacci function in multiple ways.
 
 ### Basic Instructions
@@ -1730,3 +1812,4 @@ To compile a `.rs` file to WebAssembly:
 
 TODO: Invent a programming language that translated to WAT
 TODO: more directly than a language like Rust.
+````
