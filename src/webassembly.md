@@ -439,6 +439,8 @@ This code is available in the GitHub repo
 
 ## WASM Instructions
 
+TODO: Consider deleting this table if it just duplicates what is explained later.
+
 | Operation                                  | Instruction Syntax                                            |
 | ------------------------------------------ | ------------------------------------------------------------- |
 | define function                            | `func [{name}] {parameters} {return-type} {body}`             |
@@ -508,34 +510,27 @@ Thomas Lively provided rationale on why this has not been done.
 > > > the community can have more confidence in the robustness and benefits
 > > > of the proposals that do make it through the process."
 
-Most WASM instruction names follow the format `{kind-of-thing}.{operation}`.
-Kinds of things include:
+Many WASM instruction names follow the format `{kind-of-thing}.{operation}`
+where kinds of things include:
 
 - variables: `local` and `global`
 - integers: `i32` and `i64`
 - floating point numbers: `f32` and `f64`
-- memory: `mem`
-- `import` and `export`
-- `func` to define a function
-- `type` to define a function signature
-- `call` to call a function
-- `global` to declare and initialize a global variable
-- `module` to define a module
-- `data` to initialize memory
-- `param` to define a function parameter
-- `result` to define a function return type
 
-Kind-specific operations include:
+Some kind-specific operations include:
 
 - `get` and `set` to get and set the value of a variable
 - `const` to place the value of a constant on the stack
-- `store` and `load` to set and retrieve data in memory
+- `store` and `load` to copy data into memory and retrieve it
 
 WASM instructions get their arguments from
-the stack (referred to as "dynamic operands") and/or from
 literal values specified after the instruction
-(referred to as "static immediate arguments").
-The columns in the tables of instructions below include:
+(referred to as "static immediate arguments") and/or
+from the stack (referred to as "dynamic operands").
+Some instructions use only one of these sources,
+while others use both.
+The columns in the tables below include the following columns
+to provide this information for each instruction:
 
 - I: number of immediate arguments
 - Si: number of arguments popped from the stack (input)
@@ -543,12 +538,15 @@ The columns in the tables of instructions below include:
 
 ### Variable Instructions
 
-Local variables are mutable, but global variables are immutable by default.
-Since local variables cannot be initialized when they are declared,
-there is no point in making them immutable.
+Local variables are always mutable.
+They cannot be initialized when they are declared,
+so there is no point in making them immutable.
+
+Global variables are immutable by default.
 To declare a global variable to be mutable, specify its type as `(mut {type})`.
 
-These instructions get and set local and global variables.
+The instructions in the table below declare, get, and set
+local and global variables.
 
 | Name         |  I  | Si  | So  | Description                                              |
 | ------------ | :-: | :-: | :-: | -------------------------------------------------------- |
@@ -996,8 +994,6 @@ They result in placing a value on the stack.
 | `br_if {depth} {condition}`        |  0  |  0  |  0  | conditional branch                                                             |
 | `br_table {table} {default-depth}` |  0  |  0  |  0  | branch based on table entry at depth                                           |
 | `return`                           |  0  |  0  |  0  | return from function                                                           |
-| `call {function-id}`               |  0  |  0  |  0  | call function                                                                  |
-| `call_indirect {type-id}`          |  0  |  0  |  0  | call function at index in table                                                |
 | `unreachable`                      |  0  |  0  |  0  | signals an error (trap) if reached                                             |
 
 Even control flow instructions operate on the stack.
