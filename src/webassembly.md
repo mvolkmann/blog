@@ -980,19 +980,19 @@ instruction suffix (`_32s` in this case) specifies the input type.
 
 These instructions are expressions, not statements.
 They result in placing a value on the stack.
-TODO: Fill in this table!
 
 | Name                               |  I  | Si  | So  | Description                                                                    |
 | ---------------------------------- | :-: | :-: | :-: | ------------------------------------------------------------------------------ |
-| `block {block-type} {instr}*`      |  0  |  0  |  0  | creates a block of instructions, typically in another instruction such as `if` |
-| `loop {block-type} {instr}* end`   |  0  |  0  |  0  | creates a labeled block for implementing a loop                                |
-| `if`                               |  0  |  0  |  0  | denotes the true block of a conditional                                        |
+| `block [{name}]`                   |  0  |  1  |  0  | creates a group of instructions                                                |
+| `loop [{name}]`                    |  0  |  1  |  0  | creates a special block for implementing a loop                                |
+| `if {condition}`                   |  0  |  1  |  0  | creates a conditional with at `then` part and an optional `else` part          |
+| `then`                             |  0  |  0  |  0  | denotes the false block of a conditional                                       |
 | `else`                             |  0  |  0  |  0  | denotes the false block of a conditional                                       |
 | `end`                              |  0  |  0  |  0  | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`      |
-| `br {depth}`                       |  0  |  0  |  0  | unconditional branch |
-| `br_if {depth} {condition}`        |  0  |  0  |  0  | conditional branch                                                             |
-| `br_table {table} {default-depth}` |  0  |  0  |  0  | branch based on table entry at depth                                           |
-| `return`                           |  0  |  0  |  0  | return from function                                                           |
+| `br {depth}`                       |  1  |  0  |  0  | unconditional branch                                                           |
+| `br_if {depth} {condition}`        |  1  |  1  |  0  | conditional branch                                                             |
+| `br_table {list-of-depths}`        |  2+ |  1  |  0  | branch to a depth from a list of them based on the index at the top of the stack |
+| `return`                           |  0  |  1  |  0  | return from function, optionally specifying a return value                     |
 | `unreachable`                      |  0  |  0  |  0  | signals an error (trap) if reached                                             |
 
 Even control flow instructions operate on the stack.
@@ -1137,6 +1137,12 @@ run();
 
 ### Memory Instructions
 
+WASM memory is a contiguous array of bytes.
+When it is allocated, it is given an initial size in pages (64 KB each)
+and optionally a maximum size which cannot exceed 4 GB.
+The allocated size can be increased later using the `memory.grow` instruction
+up to the maximum size.
+
 Each WASM module can have only one array of linear memory.
 But JavaScript can instantiate more than one WASM module
 in order to access multiple instances of linear memory.
@@ -1145,29 +1151,28 @@ The `load` instructions load data from the default linear memory.
 The `store` instructions store data into the default linear memory.
 These instructions are prefixed by the number type to be loaded or stored.
 In the table below, `mem` is a memory offset.
-TODO: Fill in this table!
 
 | Name                      |  I  | Si  | So  | Description                                    |
 | ------------------------- | :-: | :-: | :-: | ---------------------------------------------- |
-| `i{nn}.load {mem}`        |  0  |  0  |  0  | reads integer value into matching size         |
-| `i{nn}.load8_{sx} {mem}`  |  0  |  0  |  0  | reads integer value into 8 bits                |
-| `i{nn}.load16_{sx} {mem}` |  0  |  0  |  0  | reads integer value into 16 bits               |
-| `i64.load32_{sx} {mem}`   |  0  |  0  |  0  | reads i64 value into 32 bits                   |
-| `f{nn}.load {mem}`        |  0  |  0  |  0  | reads floating point value                     |
-| `i{nn}.store {mem}`       |  0  |  0  |  0  | writes integer value into matching size        |
-| `i{nn}.store8 {mem}`      |  0  |  0  |  0  | writes integer value into 8 bits               |
-| `i{nn}.store16 {mem}`     |  0  |  0  |  0  | writes integer value into 16 bits              |
-| `i64.store32 {mem}`       |  0  |  0  |  0  | writes i64 value into 32 bits                  |
-| `f{nn}.store {mem}`       |  0  |  0  |  0  | writes floating point value into matching size |
-| `memory`                  |  0  |  0  |  0  | create linear memory        |
-| `memory.grow`             |  0  |  0  |  0  | increases size of default linear memory        |
-| `memory.size`             |  0  |  0  |  0  | returns the size of default linear memory      |
+| `i{nn}.load {mem}`        |  0  |  1  |  1  | reads integer value into matching size         |
+| `i{nn}.load8_{sx} {mem}`  |  0  |  1  |  1  | reads integer value into 8 bits                |
+| `i{nn}.load16_{sx} {mem}` |  0  |  1  |  1  | reads integer value into 16 bits               |
+| `i64.load32_{sx} {mem}`   |  0  |  1  |  1  | reads i64 value into 32 bits                   |
+| `f{nn}.load {mem}`        |  0  |  1  |  1  | reads floating point value                     |
+| `i{nn}.store {mem}`       |  0  |  2  |  0  | writes integer value into matching size        |
+| `i{nn}.store8 {mem}`      |  0  |  2  |  0  | writes integer value into 8 bits               |
+| `i{nn}.store16 {mem}`     |  0  |  2  |  0  | writes integer value into 16 bits              |
+| `i64.store32 {mem}`       |  0  |  2  |  0  | writes i64 value into 32 bits                  |
+| `f{nn}.store {mem}`       |  0  |  2  |  0  | writes floating point value into matching size |
+| `memory {initial-pages} [{max-pages}]` | 1|2 |  0  |  0  | allocates linear memory                           |
+| `memory.grow`             |  1  |  0  |  1  | increases size of linear memory in pages and returns previous size |
+| `memory.size`             |  0  |  0  |  1  | returns the size of default linear memory      |
 
 The file `demo.wat` below demonstrates using some of these instructions.
 
 ```wasm
 (module
-  (memory (export "myMemory") 1)
+  (memory (export "myMemory") 1) ;; initial size 1 page; maximum not specified
 
   (func $translate (param $offset i32) (param $delta f64)
     (f64.store
@@ -1250,16 +1255,14 @@ run();
 
 ### Other Instructions
 
-TODO: Fill in this table!
-
 | Name            |  I  | Si  | So  | Description                                                            |
 | --------------- | :-: | :-: | :-: | ---------------------------------------------------------------------- |
-| `call`          |  0  |  0  |  0  | calls a function                                                       |
-| `call_indirect` |  0  |  0  |  0  | calls a function at an index in the default table                      |
-| `const`         |  1  |  0  |  0  | pushes a constant value onto the stack                                 |
+| `call`          |  1  |  *  |  1  | calls a function                                                       |
+| `call_indirect` |  0  |  *  |  1  | calls a function at an index in the default table                      |
+| `const`         |  1  |  0  |  1  | pushes a constant value onto the stack                                 |
 | `drop`          |  0  |  0  |  0  | pops top value from stack and does nothing with it                     |
 | `nop`           |  0  |  0  |  0  | no operation                                                           |
-| `select`        |  0  |  3  |  0  | takes two values and a condition; returns 1st if true and 2nd if false |
+| `select`        |  0  |  3  |  1  | takes two values and a condition; returns 1st if true and 2nd if false |
 
 The number of stack values used by `call` and `call_indirect` matches
 the number of parameters in the signature of the function being called.
