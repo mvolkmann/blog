@@ -166,7 +166,7 @@ a function to be tested and its tests.
 
 The output is:
 
-```test
+```text
 demo.wast:12: mismatch in result 0 of assert_return: expected i32:6, got i32:7
 3/4 tests passed.
 ```
