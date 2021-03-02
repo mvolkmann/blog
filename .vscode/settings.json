@@ -539,6 +539,7 @@
     "singledispatchmethod",
     "skyblue",
     "softmax",
+    "spectest",
     "splitext",
     "splitn",
     "sprintf",

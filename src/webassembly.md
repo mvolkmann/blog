@@ -32,7 +32,14 @@ There are also two primary reasons to run WASM code outside a web browser.
 The first is that it enables targeting any platform that supports WASM.
 This is similar to the rationale for using Java,
 whose virtual machine is supported by many platforms.
-The second is that it provides "capability-based security" where
+The second is that it is secure by default.
+WASM code does not have access to the environment,
+the file system, or network resources.
+The only way it can access those things is if the code
+that invokes it passes in functions that have those capabilities.
+This is referred to as capability-based security".
+
+where
 access to resources such as the file system and network are restricted.
 Actually, WASM itself has no access to these and only gains it through the
 {% aTargetBlank "https://wasi.dev", "WebAssembly System Interface (WASI)" %}.
@@ -91,7 +98,14 @@ The remaining values are attributes or child nodes.
 
 Every `.wat` file contains a single, top-level S-expression
 that defines a module.
-Modules can define many kinds of things including
+It is not possible to define more than one module in a source file.
+The module instruction does not support assigning a name.
+
+Non-WASM runtimes such as web browsers, Rust, Node.js, Deno, and Python
+can import multiple WASM modules,
+but a WASM module cannot import another WASM module.
+
+Modules can define many kinds of things including:
 
 - imports from other modules
 - exports other modules can import
@@ -123,6 +137,39 @@ To install this tool, enter `cargo install wasm-nm`.
 To run it, enter `wasm-nm {file-path}.wasm`.
 The names of exported symbols are preceded by "e " and
 the names of imported symbols are preceded by "i ".
+
+## Tests
+
+One way to write unit tests for WASM functions
+is to use the WABT tools `wast2json` and `spectest-interp`.
+For example, the following code defines an `add` function
+and unit tests for it.
+To run this, enter `wast2json demo.wat && spectest-interp demo.json`.
+
+Here is the contents of `demo.wat` which defines
+a function to be tested and its tests.
+
+```wasm
+(module $main
+  (func (export "add") (param i32 i32) (result i32)
+    (i32.add (local.get 0) (local.get 1))
+  )
+)
+
+(assert_return (invoke $main "add" (i32.const 0) (i32.const 0)) (i32.const 0))
+(assert_return (invoke $main "add" (i32.const 0) (i32.const 1)) (i32.const 1))
+(assert_return (invoke $main "add" (i32.const 1) (i32.const 0)) (i32.const 1))
+;; This test is expected to fail.
+;; It's purpose to show how failures are reported.
+(assert_return (invoke $main "add" (i32.const 3) (i32.const 4)) (i32.const 6))
+```
+
+The output is:
+
+```test
+demo.wast:12: mismatch in result 0 of assert_return: expected i32:6, got i32:7
+3/4 tests passed.
+```
 
 ## WASM Functions
 
@@ -1702,6 +1749,14 @@ TODO: since it only uses numbers?
 
 See https://github.com/mvolkmann/wasm-bind-demo/blob/main/src/lib.rs
 which uses the web-sys crate.
+
+## Parallel WASM
+
+TODO: Show how to run multiple WASM functions in parallel in a web browser
+TODO: using WebWorkers.
+
+TODO: Can they update the same linear memory in order to divide a large task
+TODO: like rotating points?
 
 ## WASM Binary Format
 
