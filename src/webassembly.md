@@ -61,7 +61,7 @@ Other types such as strings and structs must be
 serialized into these number types and deserialized from them
 using linear memory.
 Tools such as
-{% aTargetBlank "https://github.com/rustwasm/wasm-bindgen", "wasm_bindgen"}
+{% aTargetBlank "https://github.com/rustwasm/wasm-bindgen", "wasm_bindgen" %}
 for Rust and
 {% aTargetBlank "https://emscripten.org", "Emscripten" %} for C/C++
 generate code that does this.
