@@ -60,7 +60,11 @@ These match number types from Rust.
 Other types such as strings and structs must be
 serialized into these number types and deserialized from them
 using linear memory.
-Tools such as wasm_bindgen for Rust generate code that does this.
+Tools such as
+{% aTargetBlank "https://github.com/rustwasm/wasm-bindgen", "wasm_bindgen"}
+for Rust and
+{% aTargetBlank "https://emscripten.org", "Emscripten" %} for C/C++
+generate code that does this.
 
 The {% aTargetBlank "https://github.com/WebAssembly/interface-types",
 "Interface Types proposal" %} seeks to change this. It "adds a new set
@@ -150,18 +154,18 @@ Here is the contents of `demo.wat` which defines
 a function to be tested and its tests.
 
 ```wasm
-(module $main
+(module
   (func (export "add") (param i32 i32) (result i32)
     (i32.add (local.get 0) (local.get 1))
   )
 )
 
-(assert_return (invoke $main "add" (i32.const 0) (i32.const 0)) (i32.const 0))
-(assert_return (invoke $main "add" (i32.const 0) (i32.const 1)) (i32.const 1))
-(assert_return (invoke $main "add" (i32.const 1) (i32.const 0)) (i32.const 1))
+(assert_return (invoke "add" (i32.const 0) (i32.const 0)) (i32.const 0))
+(assert_return (invoke "add" (i32.const 0) (i32.const 1)) (i32.const 1))
+(assert_return (invoke "add" (i32.const 1) (i32.const 0)) (i32.const 1))
 ;; This test is expected to fail.
 ;; It's purpose to show how failures are reported.
-(assert_return (invoke $main "add" (i32.const 3) (i32.const 4)) (i32.const 6))
+(assert_return (invoke "add" (i32.const 3) (i32.const 4)) (i32.const 6))
 ```
 
 The output is:
@@ -616,7 +620,7 @@ The `set` instructions get the new value from the stack.
 
 The file `demo.wat` below demonstrates of using these instructions.
 
-````wasm
+```wasm
 (module
   ;; Import a global variable named gFromJS from JavaScript,
   ;; give it the WASM name $g_from_js,
@@ -680,7 +684,7 @@ The file `demo.js` below uses `demo.wasm`.
 async function run() {
   const imports = {
     js: {
-      gFromJS: new WebAssembly.Global({value: 'i32'}, 20),
+      gFromJS: new WebAssembly.Global({value: 'i32'}, 20)
     }
   };
 
@@ -1028,19 +1032,19 @@ instruction suffix (`_32s` in this case) specifies the input type.
 These instructions are expressions, not statements.
 They result in placing a value on the stack.
 
-| Name                               |  I  | Si  | So  | Description                                                                    |
-| ---------------------------------- | :-: | :-: | :-: | ------------------------------------------------------------------------------ |
-| `block [{name}]`                   |  0  |  1  |  0  | creates a group of instructions                                                |
-| `loop [{name}]`                    |  0  |  1  |  0  | creates a special block for implementing a loop                                |
-| `if {condition}`                   |  0  |  1  |  0  | creates a conditional with at `then` part and an optional `else` part          |
-| `then`                             |  0  |  0  |  0  | denotes the false block of a conditional                                       |
-| `else`                             |  0  |  0  |  0  | denotes the false block of a conditional                                       |
-| `end`                              |  0  |  0  |  0  | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`      |
-| `br {depth}`                       |  1  |  0  |  0  | unconditional branch                                                           |
-| `br_if {depth} {condition}`        |  1  |  1  |  0  | conditional branch                                                             |
-| `br_table {list-of-depths}`        |  2+ |  1  |  0  | branch to a depth from a list of them based on the index at the top of the stack |
-| `return`                           |  0  |  1  |  0  | return from function, optionally specifying a return value                     |
-| `unreachable`                      |  0  |  0  |  0  | signals an error (trap) if reached                                             |
+| Name                        |  I  | Si  | So  | Description                                                                      |
+| --------------------------- | :-: | :-: | :-: | -------------------------------------------------------------------------------- |
+| `block [{name}]`            |  0  |  1  |  0  | creates a group of instructions                                                  |
+| `loop [{name}]`             |  0  |  1  |  0  | creates a special block for implementing a loop                                  |
+| `if {condition}`            |  0  |  1  |  0  | creates a conditional with at `then` part and an optional `else` part            |
+| `then`                      |  0  |  0  |  0  | denotes the false block of a conditional                                         |
+| `else`                      |  0  |  0  |  0  | denotes the false block of a conditional                                         |
+| `end`                       |  0  |  0  |  0  | marks the end of a block for `block`, `if`, `else`, `loop`, or `function`        |
+| `br {depth}`                |  1  |  0  |  0  | unconditional branch                                                             |
+| `br_if {depth} {condition}` |  1  |  1  |  0  | conditional branch                                                               |
+| `br_table {list-of-depths}` | 2+  |  1  |  0  | branch to a depth from a list of them based on the index at the top of the stack |
+| `return`                    |  0  |  1  |  0  | return from function, optionally specifying a return value                       |
+| `unreachable`               |  0  |  0  |  0  | signals an error (trap) if reached                                               |
 
 Even control flow instructions operate on the stack.
 For example, the `if` instruction executes its branch
@@ -1199,21 +1203,21 @@ The `store` instructions store data into the default linear memory.
 These instructions are prefixed by the number type to be loaded or stored.
 In the table below, `mem` is a memory offset.
 
-| Name                      |  I  | Si  | So  | Description                                    |
-| ------------------------- | :-: | :-: | :-: | ---------------------------------------------- |
-| `i{nn}.load {mem}`        |  0  |  1  |  1  | reads integer value into matching size         |
-| `i{nn}.load8_{sx} {mem}`  |  0  |  1  |  1  | reads integer value into 8 bits                |
-| `i{nn}.load16_{sx} {mem}` |  0  |  1  |  1  | reads integer value into 16 bits               |
-| `i64.load32_{sx} {mem}`   |  0  |  1  |  1  | reads i64 value into 32 bits                   |
-| `f{nn}.load {mem}`        |  0  |  1  |  1  | reads floating point value                     |
-| `i{nn}.store {mem}`       |  0  |  2  |  0  | writes integer value into matching size        |
-| `i{nn}.store8 {mem}`      |  0  |  2  |  0  | writes integer value into 8 bits               |
-| `i{nn}.store16 {mem}`     |  0  |  2  |  0  | writes integer value into 16 bits              |
-| `i64.store32 {mem}`       |  0  |  2  |  0  | writes i64 value into 32 bits                  |
-| `f{nn}.store {mem}`       |  0  |  2  |  0  | writes floating point value into matching size |
-| `memory {initial-pages} [{max-pages}]` | 1|2 |  0  |  0  | allocates linear memory                           |
-| `memory.grow`             |  1  |  0  |  1  | increases size of linear memory in pages and returns previous size |
-| `memory.size`             |  0  |  0  |  1  | returns the size of default linear memory      |
+| Name                                   |  I  | Si  | So  | Description                                                        |
+| -------------------------------------- | :-: | :-: | :-: | ------------------------------------------------------------------ | ----------------------- |
+| `i{nn}.load {mem}`                     |  0  |  1  |  1  | reads integer value into matching size                             |
+| `i{nn}.load8_{sx} {mem}`               |  0  |  1  |  1  | reads integer value into 8 bits                                    |
+| `i{nn}.load16_{sx} {mem}`              |  0  |  1  |  1  | reads integer value into 16 bits                                   |
+| `i64.load32_{sx} {mem}`                |  0  |  1  |  1  | reads i64 value into 32 bits                                       |
+| `f{nn}.load {mem}`                     |  0  |  1  |  1  | reads floating point value                                         |
+| `i{nn}.store {mem}`                    |  0  |  2  |  0  | writes integer value into matching size                            |
+| `i{nn}.store8 {mem}`                   |  0  |  2  |  0  | writes integer value into 8 bits                                   |
+| `i{nn}.store16 {mem}`                  |  0  |  2  |  0  | writes integer value into 16 bits                                  |
+| `i64.store32 {mem}`                    |  0  |  2  |  0  | writes i64 value into 32 bits                                      |
+| `f{nn}.store {mem}`                    |  0  |  2  |  0  | writes floating point value into matching size                     |
+| `memory {initial-pages} [{max-pages}]` |  1  |  2  |  0  | 0                                                                  | allocates linear memory |
+| `memory.grow`                          |  1  |  0  |  1  | increases size of linear memory in pages and returns previous size |
+| `memory.size`                          |  0  |  0  |  1  | returns the size of default linear memory                          |
 
 The file `demo.wat` below demonstrates using some of these instructions.
 
@@ -1304,12 +1308,14 @@ run();
 
 | Name            |  I  | Si  | So  | Description                                                            |
 | --------------- | :-: | :-: | :-: | ---------------------------------------------------------------------- |
-| `call`          |  1  |  *  |  1  | calls a function                                                       |
-| `call_indirect` |  0  |  *  |  1  | calls a function at an index in the default table                      |
+| `call`          |  1  | \*  |  1  | calls a function                                                       |
+| `call_indirect` |  0  | \*  |  1  | calls a function at an index in the default table                      |
 | `const`         |  1  |  0  |  1  | pushes a constant value onto the stack                                 |
 | `drop`          |  0  |  0  |  0  | pops top value from stack and does nothing with it                     |
 | `nop`           |  0  |  0  |  0  | no operation                                                           |
 | `select`        |  0  |  3  |  1  | takes two values and a condition; returns 1st if true and 2nd if false |
+
+TODO: Are `module` and `type` considered to be instructions?
 
 The number of stack values used by `call` and `call_indirect` matches
 the number of parameters in the signature of the function being called.
@@ -1405,6 +1411,8 @@ Tools for compiling Rust code to WebAssembly include
 The ssvmup tool was inspired by wasm-pack and has explicit support for Deno.
 Also see the support for Rust in the
 {% aTargetBlank "https://parceljs.org/rust.html", "Parcel bundler" %}!
+
+TODO: Demonstrate using emscripten to compile C code to WASM.
 
 ## Rust With Numbers
 
@@ -1989,6 +1997,7 @@ fn main() {
 
 To execute a `.wasm` file, enter `wasmtime {path-to-wasm-file}`.
 
+TODO: Is this correct!
 To execute a `.wast` test file, enter `wasmtime wast {path-to-wast-file}`.
 
 Unlike wasm3, Wasmtime does not provide a REPL or
@@ -2148,4 +2157,7 @@ To compile a `.rs` file to WebAssembly:
 
 TODO: Invent a programming language that translated to WAT
 TODO: more directly than a language like Rust.
-````
+
+```
+
+```
