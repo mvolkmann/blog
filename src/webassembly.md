@@ -2157,7 +2157,3 @@ To compile a `.rs` file to WebAssembly:
 
 TODO: Invent a programming language that translated to WAT
 TODO: more directly than a language like Rust.
-
-```
-
-```
