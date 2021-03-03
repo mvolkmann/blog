@@ -175,6 +175,10 @@ demo.wast:12: mismatch in result 0 of assert_return: expected i32:6, got i32:7
 3/4 tests passed.
 ```
 
+TODO: Describe the other supported asserts including
+TODO: assert_trap, assert_exhaustion, assert_malformed,
+TODO: assert_invalid, assert_unlinkable, and assert_trap.
+
 ## WASM Functions
 
 Modules can define functions.
