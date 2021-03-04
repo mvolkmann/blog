@@ -257,6 +257,8 @@
     "dunder",
     "edgecolor",
     "elif",
+    "emcc",
+    "emsdk",
     "enddraw",
     "endfilter",
     "endmacro",

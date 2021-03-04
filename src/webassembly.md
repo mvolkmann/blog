@@ -1715,6 +1715,18 @@ TODO: How can Rust call custom JavaScript functions when using wasm-bindgen
 TODO: instead of `WebAssembly.instantiateStreaming`?
 TODO: See https://rustwasm.github.io/docs/wasm-bindgen/examples/import-js.html!
 
+## C With Emscripten
+
+To install Emscripten, browse {% aTargetBlank
+"https://emscripten.org/docs/getting_started/downloads.html",
+"Download and install" %}
+and follow the instructions for installing using emsdk.
+This will result in the `emcc` executable being in your `PATH`.
+
+To compile a C source to WASM and generate JavaScript that invokes it,
+enter `emcc {name}.c -o {name}.js`.
+To run this, install Node.js and enter `node {name}.js`.
+
 ## Linear Memory
 
 TODO: Resume here
