@@ -38,14 +38,20 @@ the file system, or network resources.
 The only way it can access those things is if the code
 that invokes it passes in functions that have those capabilities.
 This is referred to as capability-based security".
-
-where
-access to resources such as the file system and network are restricted.
 Actually, WASM itself has no access to these and only gains it through the
 {% aTargetBlank "https://wasi.dev", "WebAssembly System Interface (WASI)" %}.
 
 WASM code can also be compiled to native executables
 that run on x86 and ARM processors.
+
+## Resources
+
+- {% aTargetRef "https://bytecodealliance.org", "Bytecode Alliance" %}
+
+  This is "an open source community dedicated to creating secure new
+  software foundations, building on standards such as
+  WebAssembly and WebAssembly System Interface (WASI)."
+  The founding members are Mozilla, Fastly, Intel, and Red Hat.
 
 ## VS Code
 
@@ -149,9 +155,17 @@ is to use the WABT tools `wast2json` and `spectest-interp`.
 For example, the following code defines an `add` function
 and unit tests for it.
 To run this, enter `wast2json demo.wat && spectest-interp demo.json`.
+This makes additional assert instructions available
+for implementing tests including:
 
-Here is the contents of `demo.wat` which defines
-a function to be tested and its tests.
+- `assert_exhaustion`: system resources were exhausted
+- `assert_invalid`: module is invalid
+- `assert_malformed`: module cannot be decoded
+- `assert_return`: function returns a specific result (most common)
+- `assert_trap`: error trap is triggered
+- `assert_unlinkable`: module fails to link
+
+Here is the contents of `demo.wat` which defines a function and its tests.
 
 ```wasm
 (module
@@ -174,10 +188,6 @@ The output is:
 demo.wast:12: mismatch in result 0 of assert_return: expected i32:6, got i32:7
 3/4 tests passed.
 ```
-
-TODO: Describe the other supported asserts including
-TODO: assert_trap, assert_exhaustion, assert_malformed,
-TODO: assert_invalid, assert_unlinkable, and assert_trap.
 
 ## WASM Functions
 
