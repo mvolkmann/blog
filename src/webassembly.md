@@ -46,7 +46,7 @@ that run on x86 and ARM processors.
 
 ## Resources
 
-- {% aTargetRef "https://bytecodealliance.org", "Bytecode Alliance" %}
+- {% aTargetBlank "https://bytecodealliance.org", "Bytecode Alliance" %}
 
   This is "an open source community dedicated to creating secure new
   software foundations, building on standards such as
