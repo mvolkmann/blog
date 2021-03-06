@@ -24,13 +24,14 @@ It can also be run outside of web browsers using tools such as
 
 There are two primary reasons to run WASM code in a web browser.
 The first is that it typically executes much faster than
-equivalent code written in JavaScript.
+equivalent code written in JavaScript,
+bringing near native performance to the web.
 The second is that it enables writing some of the code in any language
 that can be compiled to WASM as an alternative to JavaScript.
 
 There are also two primary reasons to run WASM code outside a web browser.
 The first is that it enables targeting any platform that supports WASM.
-This is similar to the rationale for using Java,
+This is similar to the rationale for using Jav,
 whose virtual machine is supported by many platforms.
 The second is that it is secure by default.
 WASM code does not have access to the environment,
@@ -1860,8 +1861,54 @@ Macro types
 Supported math instructions are described {% aTargetBlank
 "https://www.assemblyscript.org/stdlib/math.html", "here" %}.
 
-To install the AssemblyScript compiler, install Node.js
-and enter `npm install -g assemblyscript`.
+The easiest way to create an AssemblyScript project is to:
+
+- Enter `npx asinit {project-name}`
+- Enter `cd {project-name}`
+- Enter `npm install`
+- Edit the implementation in `assembly/index.ts`
+- Edit the tests in `tests/index.ts`
+- Enter `npm run asbuild` to build the project.
+- Enter `npm test` to run the tests.
+
+To use the functions exported in `assembly/index.ts` in a web app:
+
+1. Create `index.html` containing the following:
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+     <head>
+       <meta charset="utf-8" />
+       <script src="main.js"></script>
+     </head>
+     <body>
+       <div>See output in the DevTools console.</div>
+     </body>
+   </html>
+   ```
+
+1. Create `main.js` containing the following:
+
+   ```js
+   async function run() {
+     const imports = {};
+     const m = await WebAssembly.instantiateStreaming(
+       fetch('build/optimized.wasm'),
+       imports
+     );
+     const {add} = m.instance.exports;
+     console.log('result =', add(1, 2));
+   }
+
+   run();
+   ```
+
+1. Start a local HTTP file server.
+1. Browse localhost:{port}.
+
+Alternatively, install the AssemblyScript compiler
+by entering `npm install -g assemblyscript`.
 
 To compile an AssemblyScript source file to a `.wat` file:
 
@@ -1869,7 +1916,8 @@ To compile an AssemblyScript source file to a `.wat` file:
 asc {file-path}.ts -t {file-path}.wat
 ```
 
-To compile an AssemblyScript source file to a `.wasm` file:
+To compile an AssemblyScript source file to a `.wasm` file,
+specifying a level of optimization:
 
 ```bash
 asc {file-path}.ts -b {file-path}.wasm -O3
