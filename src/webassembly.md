@@ -1976,7 +1976,7 @@ that computes the distance between two points and call it from JavaScript:
    the port on which the local server is listening.
 
 Another approach for implementing tests of AssemblyScript functions is to use
-{% aTargetBlank "https://github.com/jtenner/as-pect", "as-pect"} tool.
+{% aTargetBlank "https://github.com/jtenner/as-pect", "as-pect" %} tool.
 
 AssemblyScript can call WASI functions using the
 {% aTargetBlank "https://github.com/jedisct1/as-wasi", "as-wasi" %} library.
