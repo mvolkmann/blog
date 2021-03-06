@@ -455,6 +455,7 @@
     "pathlib",
     "pathsep",
     "peaceiris",
+    "pect",
     "pexec",
     "pino",
     "popcnt",

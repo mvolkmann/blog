@@ -26,6 +26,8 @@ There are two primary reasons to run WASM code in a web browser.
 The first is that it typically executes much faster than
 equivalent code written in JavaScript,
 bringing near native performance to the web.
+The performance is also more predictable because WASM code
+does not introduce garbage collection pauses.
 The second is that it enables writing some of the code in any language
 that can be compiled to WASM as an alternative to JavaScript.
 
@@ -495,6 +497,8 @@ This code is available in the GitHub repo
    deno install --allow-net --allow-read https://deno.land/std@0.87.0/http/file_server.ts
    file_server .
    ```
+
+   Another approach is to enter `npx live-server`.
 
 1. Browse localhost:{port} where port is
    the port on which the local server is listening.
@@ -1405,7 +1409,7 @@ run();
 ## Higher Level Languages
 
 Code from many programming languages can be compiled to WASM.
-Currently full support is only available for C, C++, and Rust.
+Currently full support is only available for C, C++, Rust, and AssemblyScript.
 Experimental support is available for C#, Go, Java, Kotlin, Python,
 Swift, TypeScript, and a few other less commonly used languages.
 
@@ -1790,6 +1794,13 @@ which uses the web-sys crate.
 TODO: Show how to run multiple WASM functions in parallel in a web browser
 TODO: using WebWorkers.
 
+A `SharedArrayBuffer` can be mapped to WASM linear memory
+and used to share data between the main thread and the web workers.
+This is much more efficient that message passing.
+See the code in wasm/wasm-web-workers.
+However, I was not able to get this to work in current browsers,
+without setting feature flags.
+
 TODO: Can they update the same linear memory in order to divide a large task
 TODO: like rotating points?
 
@@ -1963,6 +1974,15 @@ that computes the distance between two points and call it from JavaScript:
 
 1. Browse localhost:{port} where port is
    the port on which the local server is listening.
+
+Another approach for implementing tests of AssemblyScript functions is to use
+{% aTargetBlank "https://github.com/jtenner/as-pect", "as-pect"} tool.
+
+AssemblyScript can call WASI functions using the
+{% aTargetBlank "https://github.com/jedisct1/as-wasi", "as-wasi" %} library.
+
+The memory management code added to `.wasm` files generated from AssemblyScript
+adds about 2K bytes. This can be removed if not needed.
 
 ## WebAssembly System Interface (WASI)
 
