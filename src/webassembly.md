@@ -1972,7 +1972,7 @@ that computes the distance between two points and call it from JavaScript:
 
 1. Start a local HTTP file server like before.
 
-1. Browse localhost:{port} where port is
+1. Browse `localhost:{port}` where port is
    the port on which the local server is listening.
 
 Another approach for implementing tests of AssemblyScript functions is to use
