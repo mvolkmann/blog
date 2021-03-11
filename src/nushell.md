@@ -84,8 +84,8 @@ For example:
 
 ```toml
 startup = [
-  "alias cdjs = cd $nu.env.JS_DIR",
-  "alias cdrust = cd $nu.env.RUST_DIR",
+  "def cdjs [] { cd $nu.env.JS_DIR }",
+  "def cdrust [] { cd $nu.env.RUST_DIR }",
   "alias cls = clear"
 ]
 ```
@@ -153,6 +153,8 @@ sys | get temp
 ```
 
 To define a function, enter `def {name} [params] { commands }`.
+Square brackets are used to surround the parameters because
+they are treated as a list and that is the syntax for lists.
 
 For example, this command has no parameters.
 
@@ -182,11 +184,12 @@ To iterate over a range of integers, use
 
 ## Aliases
 
-To create an alias for a command, enter `alias {name} = {value}`
+To create an alias for a command, enter `alias {name} = {value}`.
+For example, `alias cls = clear`.
 
-To make aliases be available in each new Nushell session,
+To make aliases available in each new Nushell session,
 add them to the `startup` list in the config file
-as show in the "Configuration" section.
+as shown in the "Configuration" section.
 
 ## VS Code
 
