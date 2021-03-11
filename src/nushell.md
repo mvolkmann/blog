@@ -7,8 +7,13 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://www.nushell.sh", "Nushell" %} is "a new type of shell".
-It was created by Jonathan Turner, Yehuda Katz, and Andres Robalino.
+"The goal of this project is to take the Unix philosophy of shells,
+where pipes connect simple commands together,
+and bring it to the modern style of development."
+Nushell was created by Jonathan Turner, Yehuda Katz, and Andres Robalino.
 It is implemented in Rust.
+
+Nushell runs in Linux, macOS, and Windows.
 
 Unlike most shells where only strings are used for command input and output,
 Nushell supports many primitive and structured data types.
@@ -17,6 +22,9 @@ string, date, file size, and path.
 Structured data types include list, table (object), binary data, and block.
 Details about these data types can be found at {% aTargetBlank
 "https://www.nushell.sh/book/types_of_data.html", "Types of data" %}.
+
+Color coding of commands is applied while they are typed.
+When the command is invalid, all the text is red.
 
 ## Installing
 
@@ -50,6 +58,9 @@ The configuration for Nushell is stored in a TOML file
 whose path can be obtained by entering `config path`.
 To edit this file with Vim, enter `vim $(config path)`.
 
+For details on configuration options, see {% aTargetBlank
+"https://www.nushell.sh/book/configuration.html", "Configuration" %}.
+
 The color used to output data of each type can be customized
 by adding a `[color_config]` section to the config file.
 For example:
@@ -74,9 +85,14 @@ For example:
 ```toml
 startup = [
   "alias cdjs = cd $nu.env.JS_DIR",
-  "alias cdrust = cd $nu.env.RUST_DIR"
+  "alias cdrust = cd $nu.env.RUST_DIR",
+  "alias cls = clear"
 ]
 ```
+
+TODO: Using the "cd" aliases above currently causes Nushell to crash.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3138",
+"this issue" %}.
 
 To output the value of each key in the config file,
 enter `config`.
@@ -115,9 +131,9 @@ can be used to modify the output.
 For example:
 
 ```bash
-# List files and directories in the current directory
+# List files in the current directory with a size of 2kb or more,
 # sorted on size from largest to smallest.
-ls | sort-by size | reverse
+ls | where type == File && size >= 2kb | sort-by size | reverse
 
 # List directories in the current directory,
 # sorted on size from largest to smallest,
@@ -150,18 +166,8 @@ Here is a version that has a CPU percentage parameter:
 def topn [pct:int] { ps | where cpu > $pct | sort-by cpu | reverse }
 ```
 
-To create an alias for a command, enter `alias {name} [{params}] { {command} }`.
-TODO: How do aliases differ from functions?
-
 To drop n columns from the end of a table, add `| drop n`.
 Omitting the number drops one column.
-
-TODO: Is it possible to change the nu shell prompt?
-
-There is a VS Code extension for Nushell that provides syntax highlighting.
-See {% aTargetBlank
-"https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang",
-"vscode-nushell-lang" %}.
 
 To set a variable, enter `let name = value`.
 
@@ -173,3 +179,22 @@ enter `let v3 = echo [$v1 $v2] | str collect`.
 
 To iterate over a range of integers, use
 `seq start end | each { ... }`.
+
+## Aliases
+
+To create an alias for a command, enter `alias {name} = {value}`
+
+To make aliases be available in each new Nushell session,
+add them to the `startup` list in the config file
+as show in the "Configuration" section.
+
+## VS Code
+
+There is a VS Code extension for Nushell that provides syntax highlighting.
+See {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang",
+"vscode-nushell-lang" %}.
+
+## Questions
+
+TODO: Is it possible to change the nu shell prompt?
