@@ -131,6 +131,9 @@ can be used to modify the output.
 For example:
 
 ```bash
+# List files in a tree layout
+ls | tree
+
 # List files in the current directory with a size of 2kb or more,
 # sorted on size from largest to smallest.
 ls | where type == File && size >= 2kb | sort-by size | reverse
