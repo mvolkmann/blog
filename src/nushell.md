@@ -285,7 +285,7 @@ ls | where type == Dir && size > 1024 | sort-by size | reverse | to html | save 
 ls | where type == Dir && size > 1024 | sort-by size | reverse | save big-zips.csv
 ```
 
-### Functions
+## Functions
 
 To define a function, enter `def {name} [params] { commands }`.
 Square brackets are used to surround the parameters because
