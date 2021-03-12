@@ -386,46 +386,47 @@ fetch https://jsonplaceholder.typicode.com/todos | where userId == 2 && complete
 
 Many Nushell commands operate on tables.
 
-| Command         | Description                                                      |
-| --------------- | ---------------------------------------------------------------- |
-| `append`        | appends a row                                                    |
-| `autoview`      | renders data as a table or list                                  |
-| `compact`       | removes empty rows                                               |
-| `count`         | counts rows or list items                                        |
-| `drop n`        | removes the last n rows (n defaults to 1)                        |
-| `drop column n` | removes the last n columns (n defaults to 1)                     |
-| `each`          | runs a block of code on each row                                 |
-| `every n`       | show or skip every nth row                                       |
-| `first n`       | show only the first n rows (n defaults to 1)                     |
-| `flatten`       | flattens a table                                                 |
-| `format`        | formats columns into a string                                    |
-| `from {format}` | parses a given file format into a table                          |
-| `get {column}`  | gets the content of a given column as a table                    |
-| `group-by`      | STUDY THIS                                                       |
-| `headers`       | uses the first row as column names                               |
-| `histogram`     | STUDY THIS                                                       |
-| `insert`        | inserts a column                                                 |
-| `keep n`        | keeps the first n rows (n defaults to 1); same as `first`?       |
-| `last n`        | show only the last n rows (n defaults to 1)                      |
-| `lines`         | splits a string of lines into rows                               |
-| `match`         | filter rows using a regular expression                           |
-| `merge`         | merges tables; STUDY THIS                                        |
-| `move`          | moves columns; STUDY THIS                                        |
-| `nth`           | keep or skip specified rows                                      |
-| `pivot`         | swaps the rows and columns                                       |
-| `sort-by`       | sorts the rows on a given column                                 |
-| `reject`        | removes given columns                                            |
-| `rename`        | renames columns                                                  |
-| `reverse`       | reverses the order of the rows                                   |
-| `roll n`        | rolls the bottom n rows to the top (n defaults to 1)             |
-| `rotate`        | rotates the table 90 degrees clockwise; can apply multiple times |
-| `select`        | specifies columns to be retained and their order                 |
-| `shuffle`       | shuffles the rows randomly                                       |
-| `skip n`        | skips the first n rows (n defaults to 1)                         |
-| `split-by`      | ?                                                                |
-| `update`        | updates data in a given column                                   |
-| `where`         | specifies a condition rows must meet to render                   |
-| `wrap`          | wraps data in a table                                            |
+| Command                    | Description                                                      |
+| -------------------------- | ---------------------------------------------------------------- |
+| `append`                   | appends a row                                                    |
+| `autoview`                 | renders data as a table or list                                  |
+| `compact`                  | removes empty rows                                               |
+| `count`                    | counts rows or list items                                        |
+| `drop n`                   | removes the last n rows (n defaults to 1)                        |
+| `drop column n`            | removes the last n columns (n defaults to 1)                     |
+| `each`                     | runs a block of code on each row                                 |
+| `every n`                  | show or skip every nth row                                       |
+| `first n`                  | show only the first n rows (n defaults to 1)                     |
+| `flatten`                  | flattens a table                                                 |
+| `format`                   | formats columns into a string                                    |
+| `from {format}`            | parses a given file format into a table                          |
+| `get {column}`             | gets the content of a given column as a table                    |
+| `group-by`                 | STUDY THIS                                                       |
+| `headers`                  | uses the first row as column names                               |
+| `histogram`                | STUDY THIS                                                       |
+| `insert`                   | inserts a column                                                 |
+| `keep n`                   | keeps the first n rows (n defaults to 1); same as `first`?       |
+| `last n`                   | show only the last n rows (n defaults to 1)                      |
+| `lines`                    | splits a string of lines into rows                               |
+| `match`                    | filter rows using a regular expression                           |
+| `merge`                    | merges tables; STUDY THIS                                        |
+| `move`                     | moves columns; STUDY THIS                                        |
+| `nth`                      | keep or skip specified rows                                      |
+| `pivot`                    | swaps the rows and columns                                       |
+| `sort-by`                  | sorts the rows on a given column                                 |
+| `reject`                   | removes given columns                                            |
+| `rename`                   | renames columns                                                  |
+| `reverse`                  | reverses the order of the rows                                   |
+| `roll n`                   | rolls the bottom n rows to the top (n defaults to 1)             |
+| `rotate`                   | rotates the table 90 degrees clockwise; can apply multiple times |
+| `rotate counter-clockwise` | rotates the table 90 degrees counter-clockwise                   |
+| `select`                   | specifies columns to be retained and their order                 |
+| `shuffle`                  | shuffles the rows randomly                                       |
+| `skip n`                   | skips the first n rows (n defaults to 1)                         |
+| `split-by`                 | ?                                                                |
+| `update`                   | updates data in a given column                                   |
+| `where`                    | specifies a condition rows must meet to render                   |
+| `wrap`                     | wraps data in a table                                            |
 
 ## Questions
 
