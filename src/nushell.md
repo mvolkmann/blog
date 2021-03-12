@@ -36,7 +36,8 @@ To start the shell, enter `nu`.
 For help, enter `help`.
 For a list of supported commands, enter `help commands`.
 In version 0.28.0 there are 105 commands.
-For help on a specific command, enter `help {command-name}`.
+For help on a specific command,
+enter `help {command-name}` or {command-name} -h`.
 
 For detailed documentation, see the
 {% aTargetBlank "https://www.nushell.sh/book/", "Book" %}
@@ -183,7 +184,8 @@ outputs the following table:
 ## Common Commands
 
 Many common UNIX commands are supported by Nushell.
-These include:
+These are implemented in Rust and are very fast.
+They include:
 
 - `cal` displays a calendar
 - `cd` changes the current working directory
@@ -205,7 +207,15 @@ These include:
 - `rm` removes (deletes) a file or directory
 - `source` runs a script file in the current context
 - `which` outputs the path of an executable, alias, or custom command
-  TODO: ADD MORE from `help commands`
+
+To invoke a command in the parent shell instead of the Nushell version,
+precede the command name with `^`. For example, `^ls *.html`.
+
+Note that the `cp`, `mv`, and `rm` commands do not
+currently support the `-i` flag to prompt for confirmation.
+However, aliases for these can be defined to
+use the corresponding commands from the parent shell.
+For example, `alias rm = ^rm -i`.
 
 To clear the screen, enter `clear`.
 
@@ -256,6 +266,27 @@ sys | get temp
 date now | date to-table
 ```
 
+To convert a table to a specific text format, use the `to` command.
+Supported formats include csv (comma-separated), html, json,
+md (Markdown), toml, tsv (tab-separated), url (url-encoded text), xml, and yaml.
+
+To write the text output of a command to a file, use the `save` command.
+This is alternative to the `>` redirect operator using in bash.
+
+For example:
+
+```bash
+# Create an HTML file describing the largest directories
+# in the current directory that are more than 1 KB.
+ls | where type == Dir && size > 1024 | sort-by size | reverse | to html | save big-zips.html
+
+# The text format defaults to CSV if the file extension is .csv.
+# It does not do this for other file extensions.
+ls | where type == Dir && size > 1024 | sort-by size | reverse | save big-zips.csv
+```
+
+### Functions
+
 To define a function, enter `def {name} [params] { commands }`.
 Square brackets are used to surround the parameters because
 they are treated as a list and that is the syntax for lists.
@@ -272,19 +303,17 @@ Here is a version that has a CPU percentage parameter:
 def topn [pct:int] { ps | where cpu > $pct | sort-by cpu | reverse }
 ```
 
-To drop n columns from the end of a table, add `| drop n`.
-Omitting the number drops one column.
+## Variables
 
 To set a variable, enter `let name = value`.
+Note that these are distinct from environment variables.
+Their scope is the context or block in which they are defined.
 
 To set a variable to the result of a command,
 enter `let name = $(command)`.
 
-To concatenate two string variables,
+To set a variable to the result of concatenating two string variables,
 enter `let v3 = echo [$v1 $v2] | str collect`.
-
-To iterate over a range of integers, use
-`seq start end | each { ... }`.
 
 ## Aliases
 
@@ -304,8 +333,8 @@ See {% aTargetBlank
 
 ## More Commands
 
-The `open` command render certain file types as tables.
-Supported file types include csv, ini, json, toml, xml, and yaml.
+The `open` command renders certain file types as tables.
+These file types include csv, ini, json, toml, xml, and yaml.
 
 For example, the following outputs a table of scripts in a `package.json` file.
 
@@ -332,6 +361,9 @@ enter `open $(config path) | get startup`.
 
 Other types of files are treated as a list of lines and
 rendered in a table where the first column contains line numbers.
+For known programming language file extensions, syntax highlighting is provided.
+Compare this to using the `cat` command where this does not happen.
+
 To render delimited data as a table we can use the `lines` and `split` commands.
 For example, consider the following file content:
 
@@ -424,16 +456,32 @@ Many Nushell commands operate on tables.
 | `shuffle`                  | shuffles the rows randomly                                       |
 | `skip n`                   | skips the first n rows (n defaults to 1)                         |
 | `split-by`                 | ?                                                                |
+| `to {format}`              | converts a table to a given format such as json                  |
 | `update`                   | updates data in a given column                                   |
 | `where`                    | specifies a condition rows must meet to render                   |
 | `wrap`                     | wraps data in a table                                            |
 
-## Questions
+## Scripts
 
-TODO: Is it possible to change the nu shell prompt?
+Nushell scripts are written in files with a `.nu` extension.
+
+To execute a Nushell script, ...
+
+Commands commonly used in Nushell scripts include `if`, `each`, ...
+
+To iterate over a range of integers, use
+`seq start end | each { ... }`.
 
 ## Plugins
 
 Nushell supports adding functionality through plugins.
 These can be installed using the Rust `cargo` utility.
 For example, `cargo install nu_plugin_chart`.
+
+## Questions
+
+TODO: Is it possible to change the nu shell prompt?
+
+The `$it` variable holds the output of the previous command
+so it can be used in a block.
+TODO: Show examples of using this.
