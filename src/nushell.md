@@ -275,7 +275,8 @@ They include:
 - `pwd` prints the current working directory
 - `rm` removes (deletes) a file or directory
 - `source` runs a script file in the current context
-- `which` outputs the path of an executable, alias, or custom command
+- `which` outputs the path of an executable AND
+  information about aliases and custom functions
 
 Commands not defined in Nushell are processed
 using the parent shell implementation.
