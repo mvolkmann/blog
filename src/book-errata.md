@@ -221,6 +221,25 @@ p. 223 Add a new first step in the list after the sentence that starts with
 p. 226 At the end of the bullet "It adds the following npm scripts",
 add "in package.json" with "package.json" in code font.
 
+p. 226 The command for adding Storybook to a Svelte app has changed.
+The new command is just `npx sb init`.
+
+p. 226 The first npm script added by the command above is now
+`"storybook": "start-storybook -p 6006",`
+
+p. 226 Change `addons.js` to `main.js`.
+
+p. 226 Change "It creates the stories directory" to
+"It creates the src/stories directory".
+
+p. 226 Change `index.stories.js` to `Button.stories.js`.
+
+p. 227 Change `index.stories.js` to `Button.stories.js` in two places.
+
+p. 227 In the sentence that begins with "The two states",
+change "two" to "four" and change '"Text" and "Emoji"'
+to '"Primary", "Secondary", "Large", and "Small"'.
+
 ### Chapter 13
 
 p. 240 In the second sentence, change "Create-React-App" to "Create React App"
