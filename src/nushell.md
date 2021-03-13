@@ -69,6 +69,19 @@ The configuration for Nushell is stored in a TOML file
 whose path can be obtained by entering `config path`.
 To edit this file with Vim, enter `vim $(config path)`.
 
+Settings can also be changed with the command `config set {key} {value}`.
+For example, to change the prompt enter
+`config set prompt "echo $(ansi yellow) '🦀nu> '"`.
+This adds the line `prompt = "echo $(ansi yellow) '🦀nu> '"`
+to the configuration file.
+If the "prompt" key is already defined, the existing definition is deleted.
+The change affects future shell sessions, not the current one.
+TODO: You asked in the Nushell discussion page if there is a way to affect the current session.
+
+Another option for customizing the prompt is to enable the use of
+{% aTargetBlank "https://starship.rs", "starship" %}
+with `config set use_starship $true`.
+
 For details on configuration options, see {% aTargetBlank
 "https://www.nushell.sh/book/configuration.html", "Configuration" %}.
 
