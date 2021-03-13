@@ -85,8 +85,9 @@ For example, `yb`.
 The only exception is blue which uses the letter "u"
 because "b" is used for black.
 
-The header elements that can be configured include header_align, header_bold,
-header_color, index_color, leading_trailing_space_bg, and separator_color.
+The header elements that can be configured include
+header_align, header_bold, header_color, index_color,
+leading_trailing_space_bg, and separator_color (used for table lines).
 The types that can be configured include
 primitive_binary, primitive_boolean, primitive_columnpath, primitive_date,
 primitive_decimal, primitive_duration, primitive_filesize, primitive_int,
@@ -100,6 +101,17 @@ For example:
 primitive_filesize = "ub" # blue bold
 primitive_path = "yb" # yellow bold
 
+```
+
+Nushell line editing is provided by
+{% aTargetBlank "https://crates.io/crates/rustyline", "rustyline" %}.
+It can be configured with the "[line_editor]" section.
+For example:
+
+```toml
+[line_editor]
+edit_mode = "vi" # or "emacs"; omit for default keystrokes
+history_ignore_space = true # omits whitespace around commands saved in history?
 ```
 
 Table borders can be customized with the `table_mode` setting.
