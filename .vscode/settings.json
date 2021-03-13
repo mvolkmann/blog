@@ -533,6 +533,7 @@
     "rustdoc",
     "rustfmt",
     "rustup",
+    "rustyline",
     "s",
     "savefig",
     "scatterplot",

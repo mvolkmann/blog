@@ -72,6 +72,12 @@ To edit this file with Vim, enter `vim $(config path)`.
 For details on configuration options, see {% aTargetBlank
 "https://www.nushell.sh/book/configuration.html", "Configuration" %}.
 
+To output the value of each key in the config file, enter `config`.
+To output the value of a specific key in the config file,
+enter `config | get {key}`.
+
+### color_config Section
+
 The colors used to output data of each
 table element and data type can be customized
 by adding a `[color_config]` section in the config file.
@@ -98,10 +104,23 @@ For example:
 
 ```toml
 [color_config]
-primitive_filesize = "ub" # blue bold
-primitive_path = "yb" # yellow bold
+header_align = "l" # left|l, right|r, center|c
+header_bold = true
+header_color = "r"
+index_color = "wd"
+separator_color = "wd" # for table lines
 
+primitive_binary = "c"
+primitive_boolean = "p"
+primitive_date = "u"
+primitive_decimal = "g"
+primitive_filesize = "g"
+primitive_int = "g"
+primitive_path = "y"
+primitive_string = "w"
 ```
+
+### line_editor Section
 
 Nushell line editing is provided by
 {% aTargetBlank "https://crates.io/crates/rustyline", "rustyline" %}.
@@ -110,9 +129,11 @@ For example:
 
 ```toml
 [line_editor]
-edit_mode = "vi" # or "emacs"; omit for default keystrokes
+edit_mode = "vi" # or "emacs"; omit for default keystrokes (see rustyline docs)
 history_ignore_space = true # omits whitespace around commands saved in history?
 ```
+
+### table_mode
 
 Table borders can be customized with the `table_mode` setting.
 Supported values include:
@@ -128,16 +149,31 @@ Supported values include:
 - thin: border on every cell
 - with_love: heart characters for borders
 
+### path Section
+
+The list of directories in the path of the external shell
+are automatically used by the nu shell.
+
+To see a nicely formatted list of directories in your path,
+enter `echo $nu.path` or `config | get path`.
+
 The command `config set path $nu.path` writes the value of `$nu.path`,
 which is the value of the `PATH` environment variable in the parent shell,
-into the `config.toml` file as the `path` variable. TODO: Why is that useful?
-Similarly, the command `config set env $nu.env`
-writes all the current environment variables into the `config.toml` file.
-These are useful for two reasons.
-First, they enable setting the path and environment variables
+into the `config.toml` file as the `path` variable.
+This is useful because it enables setting a path that is specific to Nushell.
+Also, if Nushell is your login shell then there is
+no parent shell from which to inherit a path.
+
+## env Section
+
+The command `config set env $nu.env` writes
+all the current environment variables into the `config.toml` file.
+This is useful because it enables setting environment variables
 that are specific to Nushell.
-Second, if Nushell is your login shell then
-there is no parent shell from which to inherit the values.
+Also, if Nushell is your login shell then there is
+no parent shell from which to inherit environment variables.
+
+### startup
 
 To specify commands to run each time a new Nushell session is started,
 add a `startup` list in the config file where the commands are
@@ -155,25 +191,9 @@ startup = [
 Functions defined in this way appear in the output of `help --commands`,
 but aliases do not.
 
-TODO: Using the "cd" aliases above currently causes Nushell to crash.
+Aliases that use the "cd" command above currently causes Nushell to crash.
 See {% aTargetBlank "https://github.com/nushell/nushell/issues/3138",
 "this issue" %}.
-
-To output the value of each key in the config file,
-enter `config`.
-To output the value of a specific key in the config file,
-enter `config | get {key}`.
-This is especially useful when the type of the field is "table".
-The key can be arbitrarily deep with sub-keys separated by periods.
-For example, `sys | get host.sessions | where name == 'root' | get groups`.
-
-## PATH
-
-The list of directories in the path of the external shell
-are automatically used by the nu shell.
-
-To see a nicely formatted list of directories in your path,
-enter `echo $nu.path` or `config | get path`.
 
 ## Environment Variables
 
@@ -571,6 +591,10 @@ names of the three largest TypeScript files:
 ```bash
 ls *.ts | sort-by size | reverse | first 3 | get name
 ```
+
+The `get` command is especially useful when the type of a field is "table".
+The key can be arbitrarily deep with sub-keys separated by periods.
+For example, `sys | get host.sessions | where name == 'root' | get groups`.
 
 ## Scripts
 
