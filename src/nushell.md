@@ -18,6 +18,24 @@ Nushell runs in Linux, macOS, and Windows.
 Color coding of commands is applied while they are typed.
 When the command is invalid, all the text is red.
 
+## Terminology
+
+Nushell commands are often chained together using the pipe (|) character.
+The output of the command on the left of a pipe
+is used as the input of the command on the right.
+Nushell refers to these sequences of commands as "pipelines".
+
+Commands that take no input and produce output
+are referred to as "inputs" or "sources".
+An example is the `open` command.
+
+Commands that take input and transform it are referred to as "filters".
+Examples include the `where` and `sort-by` commands.
+
+Commands that take input and display it or write it somewhere such as file
+are referred to as "outputs" or "sinks".
+Examples include `autoview` and `save`.
+
 ## Installing
 
 There are many options for installing the Nushell.
@@ -54,21 +72,60 @@ To edit this file with Vim, enter `vim $(config path)`.
 For details on configuration options, see {% aTargetBlank
 "https://www.nushell.sh/book/configuration.html", "Configuration" %}.
 
-The color used to output data of each type can be customized
-by adding a `[color_config]` section to the config file.
+The colors used to output data of each
+table element and data type can be customized
+by adding a `[color_config]` section in the config file.
+Supported colors include
+red, yellow, green, cyan, blue, purple, white, and black.
+Supported modifiers include bold, underline, italic, dimmed, and reverse.
+Colors and modifiers can be specified with their full names,
+separated by an underscore. For example, `yellow_bold`.
+They can also be abbreviated using only their first letters.
+For example, `yb`.
+The only exception is blue which uses the letter "u"
+because "b" is used for black.
+
+The header elements that can be configured include header_align, header_bold,
+header_color, index_color, leading_trailing_space_bg, and separator_color.
+The types that can be configured include
+primitive_binary, primitive_boolean, primitive_columnpath, primitive_date,
+primitive_decimal, primitive_duration, primitive_filesize, primitive_int,
+primitive_line, primitive_path, primitive_pattern, primitive_range, and
+primitive_string
+
 For example:
 
 ```toml
 [color_config]
-primitive_filesize = "ub"
-primitive_path = "yb"
+primitive_filesize = "ub" # blue bold
+primitive_path = "yb" # yellow bold
+
 ```
 
-The command `config set path $nu.path` writes the value of `$nu.path`
-into the `config.toml` file. TODO: Why is that useful?
+Table borders can be customized with the `table_mode` setting.
+Supported values include:
+
+- basic: uses +, -, and | characters for borders
+- compact: omits outer left and right borders
+- compact_double: like compact, but uses double lines for borders
+- heavy: thicker border on every cell
+- light: horizontal line below header and no other borders
+- none: no borders
+- reinforced: border on every cell with thick table corners
+- rounded: border on every cell and rounded table corners (my favorite)
+- thin: border on every cell
+- with_love: heart characters for borders
+
+The command `config set path $nu.path` writes the value of `$nu.path`,
+which is the value of the `PATH` environment variable in the parent shell,
+into the `config.toml` file as the `path` variable. TODO: Why is that useful?
 Similarly, the command `config set env $nu.env`
 writes all the current environment variables into the `config.toml` file.
-TODO: Why is that useful?
+These are useful for two reasons.
+First, they enable setting the path and environment variables
+that are specific to Nushell.
+Second, if Nushell is your login shell then
+there is no parent shell from which to inherit the values.
 
 To specify commands to run each time a new Nushell session is started,
 add a `startup` list in the config file where the commands are
@@ -168,7 +225,7 @@ Tables have a literal syntax that allows them to be created manually.
 all the data is surrounded in square brackets.
 The values in each row are also surrounded by square brackets.
 The row of column headings comes first and is followed by a semicolon.
-The remaining rows are separated by commas.
+The remaining rows are separated by a space.
 For example, `echo [[Name, Score]; [Mark, 19] [Tami, 21]]`
 outputs the following table:
 
@@ -208,8 +265,11 @@ They include:
 - `source` runs a script file in the current context
 - `which` outputs the path of an executable, alias, or custom command
 
-To invoke a command in the parent shell instead of the Nushell version,
-precede the command name with `^`. For example, `^ls *.html`.
+Commands not defined in Nushell are processed
+using the parent shell implementation.
+For commands defined in Nushell, the parent shell implementation
+can be invoked by prefixing the command name with `^`.
+For example, `^ls *.html`.
 
 Note that the `cp`, `mv`, and `rm` commands do not
 currently support the `-i` flag to prompt for confirmation.
@@ -460,6 +520,44 @@ Many Nushell commands operate on tables.
 | `update`                   | updates data in a given column                                   |
 | `where`                    | specifies a condition rows must meet to render                   |
 | `wrap`                     | wraps data in a table                                            |
+
+Let's look at some examples using the `ls` command.
+This produces a table with the columns "name", "type", "size", and "modified".
+Here is a command that lists the files with a `.ts` file extension,
+only includes the "name" and "size" columns,
+sorts the files from largest to smallest,
+and only outputs the three largest files:
+
+```bash
+ls *.ts | select name size | sort-by size | reverse | first 3
+```
+
+This produces output similar to the following:
+
+```text
+───┬────────────────────────┬──────────
+ # │          name          │   size
+───┼────────────────────────┼──────────
+ 0 │ lib.deno.unstable.d.ts │ 194.4 KB
+ 1 │ lib.deno.d.ts          │ 145.8 KB
+ 2 │ my_server.ts           │   2.7 KB
+───┴────────────────────────┴──────────
+```
+
+The row indexes in the first column can be used to
+retrieve only a specific row using the `nth` function.
+For example, we can add `| nth 1` to the end of the command
+to only output the row for the file `lib.deno.d.ts`.
+
+The `get` command can be used to output
+only the values in a single column.
+It returns a list rather than a table.
+For example, the following outputs the
+names of the three largest TypeScript files:
+
+```bash
+ls *.ts | sort-by size | reverse | first 3 | get name
+```
 
 ## Scripts
 
