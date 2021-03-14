@@ -67,27 +67,89 @@ Nushell has great command recall and completion like the Fish and zsh shells.
 
 The configuration for Nushell is stored in a TOML file
 whose path can be obtained by entering `config path`.
-To edit this file with Vim, enter `vim $(config path)`.
+Configuration settings can be changed by editing this file
+or using the `config` subcommands described below.
+To edit the config file with Vim, enter `vim $(config path)`.
 
-Settings can also be changed with the command `config set {key} {value}`.
-For example, to change the prompt enter
-`config set prompt "echo $(ansi yellow) '🦀nu> '"`.
-This adds the line `prompt = "echo $(ansi yellow) '🦀nu> '"`
-to the configuration file.
-If the "prompt" key is already defined, the existing definition is deleted.
-The change affects future shell sessions, not the current one.
-TODO: You asked in the Nushell discussion page if there is a way to affect the current session.
+Some Nushell configuration settings are top-level
+and appear in a specific TOML section.
+Notable top-level options include:
 
-Another option for customizing the prompt is to enable the use of
-{% aTargetBlank "https://starship.rs", "starship" %}
-with `config set use_starship $true`.
+| Setting                 | Description                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------- |
+| `disable_table_indexes` | when `true`, omits index column from table output                                                 |
+| `prompt`                | command whose output is used for the prompt                                                       |
+| `skip_welcome_message`  | when `true`, starting a shell doesn't output<br>welcome message including Nushell version         |
+| `startup`               | list of commands to execute when a shell starts;<br>typically defines aliases and custom commands |
+| `table_mode`            | controls the border lines drawn when tables are rendered<br>(more detail below)                   |
 
 For details on configuration options, see {% aTargetBlank
 "https://www.nushell.sh/book/configuration.html", "Configuration" %}.
 
-To output the value of each key in the config file, enter `config`.
-To output the value of a specific key in the config file,
-enter `config | get {key}`.
+The `config` command supports many subcommands that operate on the config file.
+These are summarized in the table below.
+
+| Command                                | Description                                     |
+| -------------------------------------- | ----------------------------------------------- |
+| `config`                               | outputs all the settings                        |
+| `config path`                          | outputs the file path of the configuration file |
+| `config set {name} {value}`            | sets or updates a specific setting              |
+| `{pipeline} \| config set_into {name}` | sets a specific setting to a piped-in value     |
+| `config get {name}`                    | gets a specific setting                         |
+| `config remove {name}`                 | removes a specific setting                      |
+| `config load {file-path}`              | loads settings from a file                      |
+
+Configuration changes affect future shell sessions, not the current one.
+
+For example, to change the prompt enter
+`config set prompt "echo $(ansi yellow) '🦀ν> '"`.
+This adds the line `prompt = "echo $(ansi yellow) '🦀ν> '"`
+to the configuration file.
+🦀 is for the Rust mascot Ferris and ν is the Greek letter nu.
+To output the value of each setting in the config file, enter `config`.
+
+Another option for customizing the prompt is to enable the use of
+{% aTargetBlank "https://starship.rs", "starship" %}
+which is enabled by setting the `use_starship` setting to `true`.
+
+TODO: Why doesn't `config load $(config path)` work?
+TODO: You asked in the Nushell discussion page.
+
+### startup
+
+The `startup` setting specifies a list of commands
+to run each time a new Nushell session is started.
+Typically the commands define aliases and custom commands.
+For example:
+
+```toml
+startup = [
+  "alias cls = clear",
+  "def cdjs [] { cd $nu.env.JS_DIR }",
+  "def cdrust [] { cd $nu.env.RUST_DIR }"
+]
+```
+
+Aliases that use the "cd" command above currently causes Nushell to crash.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3138",
+"this issue" %}.
+
+### table_mode
+
+Table borders can be customized with the `table_mode` setting.
+Supported values include:
+
+- basic: uses +, -, and | characters for borders
+- compact: omits outer left and right borders
+- compact_double: like compact, but uses double lines for borders
+- heavy: thicker border on every cell
+- light: horizontal line below header and no other borders
+- none: no borders
+- other: TODO: What does this do?
+- reinforced: border on every cell with thick table corners
+- rounded: border on every cell and rounded table corners (my favorite)
+- thin: border on every cell
+- with_love: heart characters for borders
 
 ### color_config Section
 
@@ -138,6 +200,14 @@ primitive_string = "w"
 Nushell line editing is provided by
 {% aTargetBlank "https://crates.io/crates/rustyline", "rustyline" %}.
 It can be configured with the "[line_editor]" section.
+Notable settings include:
+
+| Setting                | Description                                                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `edit_mode`            | `"emacs"` or `"vi"`<br>default is to use {% aTargetBlank "https://github.com/kkawakam/rustyline#actions", "rustyline key bindings" %} |
+| `history_duplicates`   | `"alwaysadd"` or `"ignoreconsecutive"` (default)                                                                                      |
+| `history_ignore_space` | `true` (default) or `false`; doesn't add commands with leading whitespace to history                                                  |
+
 For example:
 
 ```toml
@@ -145,22 +215,6 @@ For example:
 edit_mode = "vi" # or "emacs"; omit for default keystrokes (see rustyline docs)
 history_ignore_space = true # omits whitespace around commands saved in history?
 ```
-
-### table_mode
-
-Table borders can be customized with the `table_mode` setting.
-Supported values include:
-
-- basic: uses +, -, and | characters for borders
-- compact: omits outer left and right borders
-- compact_double: like compact, but uses double lines for borders
-- heavy: thicker border on every cell
-- light: horizontal line below header and no other borders
-- none: no borders
-- reinforced: border on every cell with thick table corners
-- rounded: border on every cell and rounded table corners (my favorite)
-- thin: border on every cell
-- with_love: heart characters for borders
 
 ### path Section
 
@@ -177,6 +231,16 @@ This is useful because it enables setting a path that is specific to Nushell.
 Also, if Nushell is your login shell then there is
 no parent shell from which to inherit a path.
 
+## text_view Section
+
+None of the settings in this section seem to work.
+For example, setting `tab_width = 4` seems to have no effect.
+When not set or set to zero to should
+pass tab characters through without converting them to spaces.
+Using `\t` in strings does not seem to produce a tab character.
+See {% aTargetBlank
+"https://github.com/nushell/nushell/issues/3171", "this issue" %}.
+
 ## env Section
 
 The command `config set env $nu.env` writes
@@ -185,28 +249,6 @@ This is useful because it enables setting environment variables
 that are specific to Nushell.
 Also, if Nushell is your login shell then there is
 no parent shell from which to inherit environment variables.
-
-### startup
-
-To specify commands to run each time a new Nushell session is started,
-add a `startup` list in the config file where the commands are
-inside square brackets, delimited by quotes, and separated by commas.
-For example:
-
-```toml
-startup = [
-  "def cdjs [] { cd $nu.env.JS_DIR }",
-  "def cdrust [] { cd $nu.env.RUST_DIR }",
-  "alias cls = clear"
-]
-```
-
-Functions defined in this way appear in the output of `help --commands`,
-but aliases do not.
-
-Aliases that use the "cd" command above currently causes Nushell to crash.
-See {% aTargetBlank "https://github.com/nushell/nushell/issues/3138",
-"this issue" %}.
 
 ## Environment Variables
 
@@ -309,7 +351,7 @@ They include:
 - `rm` removes (deletes) a file or directory
 - `source` runs a script file in the current context
 - `which` outputs the path of an executable AND
-  information about aliases and custom functions
+  information about aliases and custom commands
 
 Commands not defined in Nushell are processed
 using the parent shell implementation.
@@ -391,9 +433,9 @@ ls | where type == Dir && size > 1024 | sort-by size | reverse | to html | save 
 ls | where type == Dir && size > 1024 | sort-by size | reverse | save big-zips.csv
 ```
 
-## Functions
+## Custom Commands
 
-To define a function, enter `def {name} [params] { commands }`.
+To define a custom command, enter `def {name} [params] { commands }`.
 Square brackets are used to surround the parameters because
 they are treated as a list and that is the syntax for lists.
 
@@ -591,7 +633,7 @@ This produces output similar to the following:
 ```
 
 The row indexes in the first column can be used to
-retrieve only a specific row using the `nth` function.
+retrieve only a specific row using the `nth` command.
 For example, we can add `| nth 1` to the end of the command
 to only output the row for the file `lib.deno.d.ts`.
 
