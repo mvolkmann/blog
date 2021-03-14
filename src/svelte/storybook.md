@@ -170,7 +170,7 @@ This starts the Storybook server and
 opens the Storybook app in your default web browser.
 Click the `Pie` component in the left nav to render the following:
 
-<img alt="Pie story" class="keep-size"
+<img alt="Pie story"
   src="/blog/assets/svelte-storybook-1.png?v={{pkg.version}}">
 
 If desired, the example components can be deleted
@@ -183,21 +183,25 @@ value rendered by the `Pie` component to any value from zero to 100.
 The `bgColor`, `fgColor`, and `size` props can also be modified.
 Very nice!
 
-<img alt="Pie story controls" class="keep-size"
+<img alt="Pie story controls"
   src="/blog/assets/svelte-storybook-2.png?v={{pkg.version}}">
 
 ## Static Deploy
 
 Sometimes it is desirable to generate and deploy a static version
 of Storybook, including all the registered components.
-This allow others to view the components,
-interact with them, and provide feedback.
-To do this, enter `npm run build-storybook`
-which creates the `storybook-static` directory
+This allow others to browse the deployed Storybook site
+without having to install any software.
+They can then view the components, interact with them, and provide feedback.
+
+To generate a static Storybook site, enter `npm run build-storybook`.
+This creates the `storybook-static` directory
 containing all the required HTML and JavaScript files.
 All required CSS is compiled into the JavaScript files.
-This directory can be copied to any web server.
-To view it locally, simply open the `index.html` file in a web browser.
+To view the site locally before deploying it,
+open the `index.html` file in a web browser.
+To deploy the site, copy the contents of the 'storybook-static' directory
+to any web server.
 
 ## Conclusion
 

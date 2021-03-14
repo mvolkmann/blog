@@ -70,6 +70,7 @@ whose path can be obtained by entering `config path`.
 Configuration settings can be changed by editing this file
 or using the `config` subcommands described below.
 To edit the config file with Vim, enter `vim $(config path)`.
+To edit the config file with VS Code, enter `code $(config path)`.
 
 Some Nushell configuration settings are top-level
 and appear in a specific TOML section.
@@ -78,6 +79,7 @@ Notable top-level options include:
 | Setting                 | Description                                                                                       |
 | ----------------------- | ------------------------------------------------------------------------------------------------- |
 | `disable_table_indexes` | when `true`, omits index column from table output                                                 |
+| `path`                  | quoted list of directories                                                                        |
 | `prompt`                | command whose output is used for the prompt                                                       |
 | `skip_welcome_message`  | when `true`, starting a shell doesn't output<br>welcome message including Nushell version         |
 | `startup`               | list of commands to execute when a shell starts;<br>typically defines aliases and custom commands |
@@ -110,7 +112,7 @@ To output the value of each setting in the config file, enter `config`.
 
 Another option for customizing the prompt is to enable the use of
 {% aTargetBlank "https://starship.rs", "starship" %}
-which is enabled by setting the `use_starship` setting to `true`.
+by setting the `use_starship` setting to `true`.
 
 TODO: Why doesn't `config load $(config path)` work?
 TODO: You asked in the Nushell discussion page.
@@ -216,39 +218,46 @@ edit_mode = "vi" # or "emacs"; omit for default keystrokes (see rustyline docs)
 history_ignore_space = true # omits whitespace around commands saved in history?
 ```
 
-### path Section
+### path setting
 
-The list of directories in the path of the external shell
-are automatically used by the nu shell.
+The `path` setting lists directories to be searched for executables.
 
 To see a nicely formatted list of directories in your path,
 enter `echo $nu.path` or `config | get path`.
 
-The command `config set path $nu.path` writes the value of `$nu.path`,
-which is the value of the `PATH` environment variable in the parent shell,
-into the `config.toml` file as the `path` variable.
-This is useful because it enables setting a path that is specific to Nushell.
-Also, if Nushell is your login shell then there is
-no parent shell from which to inherit a path.
-
-## text_view Section
-
-None of the settings in this section seem to work.
-For example, setting `tab_width = 4` seems to have no effect.
-When not set or set to zero to should
-pass tab characters through without converting them to spaces.
-Using `\t` in strings does not seem to produce a tab character.
-See {% aTargetBlank
-"https://github.com/nushell/nushell/issues/3171", "this issue" %}.
+The command `config set path $nu.path`
+sets the `path` setting to the value of `$nu.path`,
+which is the value of the `PATH` environment variable in the parent shell.
+This is useful because it also enables
+setting a path that is specific to Nushell.
+Note that if Nushell is your login shell then
+there is no parent shell from which to inherit a path.
 
 ## env Section
 
-The command `config set env $nu.env` writes
-all the current environment variables into the `config.toml` file.
-This is useful because it enables setting environment variables
+The command `config set env $nu.env` adds all the current
+environment variables in the `env` section of the config file.
+This section can also define environment variables
 that are specific to Nushell.
-Also, if Nushell is your login shell then there is
-no parent shell from which to inherit environment variables.
+Note that if Nushell is your login shell then
+there is no parent shell from which to inherit environment variables.
+
+## textview Section
+
+These settings affect use of the `bat` crate for viewing text files
+using the `open` command.
+
+| Setting                  | Description                                 |
+| ------------------------ | ------------------------------------------- |
+| grid                     | `true` (default) or `false`                 |
+| header                   | `true` (default) or `false`                 |
+| line_numbers             | `true` (default) or `false`                 |
+| theme                    | ex. "Coldark-Dark"                          |
+| true_color               | `true` or `false`                           |
+| vcs_modification_markers | `true` or `false` (seems to have no effect) |
+
+To see the supported themes, install `bat` by entering `cargo install bat`
+and enter `bat --list-themes`. There are over 20.
 
 ## Environment Variables
 
@@ -438,6 +447,7 @@ ls | where type == Dir && size > 1024 | sort-by size | reverse | save big-zips.c
 To define a custom command, enter `def {name} [params] { commands }`.
 Square brackets are used to surround the parameters because
 they are treated as a list and that is the syntax for lists.
+If no parameters are required, `[]` must still be included.
 
 For example, this command has no parameters.
 
@@ -445,10 +455,70 @@ For example, this command has no parameters.
 def top [] { ps | where cpu > 5 | sort-by cpu | reverse }
 ```
 
-Here is a version that has a CPU percentage parameter:
+To run this, enter `top`.
+
+Here is a version that has a CPU percentage parameter.
+Parameter values are accessed by adding `$` before their names.
 
 ```bash
-def topn [pct:int] { ps | where cpu > $pct | sort-by cpu | reverse }
+def topn [pct] { ps | where cpu > $pct | sort-by cpu | reverse }
+```
+
+To run this, enter `top` followed by a number like `top 5`.
+
+The type of each parameter can optionally be specified after a colon to
+provide better documentation and better error messages when used incorrectly.
+Supported types include `int`, `number` (for float), `path` (for file paths),
+`pattern` (for regular expressions), `range`, and `string`.
+For example:
+
+```bash
+def topn [pct: number] { ps | where cpu > $pct | sort-by cpu | reverse }
+```
+
+Multiple arguments are separated by spaces. For example:
+
+```bash
+def sum [n1: number, n2: number] { = $n1 + $n2 }
+```
+
+To run this, enter a command like `sum 1 2` which outputs `3`.
+
+The parameters in the examples above are positional.
+Named parameters (a.k.a. flags) can also be specified
+by adding `--` before their names.
+These are long-form names.
+To also specify short-form names, follow the long name with `(-short-name)`.
+For example:
+
+{% raw %}
+
+```bash
+def color-echo [
+  text: string,
+  --color (-c): string
+] {
+  #TODO: What is the best way to test whether a flag is present?
+  #if $color { echo 'present' } { echo 'missing' }
+  let len = $(echo `{{$color}}` | str length)
+  if $len == 0 { echo $text} { echo [$(ansi $color), $text, $(ansi reset), $(char newline)] | str collect }
+}
+```
+
+{% endraw %}
+
+To add documentation to custom commands,
+add a comment before the definition and after each parameter.
+For example:
+
+```bash
+# Computes the sum of two numbers.
+def sum [
+  n1: number, # first number
+  n2: number # second number
+] {
+  = $n1 + $n2
+}
 ```
 
 ## Variables
@@ -668,6 +738,15 @@ Nushell supports adding functionality through plugins.
 These can be installed using the Rust `cargo` utility.
 For example, `cargo install nu_plugin_chart`.
 
+## Default Shell
+
+To make Nushell your default shell in Linux or macOS, first
+add a line containing the file path to the `nu` executable in `/etc/shells`.
+For example, for me using macOS I entered `su vim /etc/shells`
+and added the line `/Users/mark/.cargo/bin/nu`.
+Then enter `chsh -s nu`.
+If using tmux, also change the value of `default-shell` in `~/.tmux.conf`.
+
 ## Questions
 
 TODO: Is it possible to change the nu shell prompt?
@@ -675,3 +754,5 @@ TODO: Is it possible to change the nu shell prompt?
 The `$it` variable holds the output of the previous command
 so it can be used in a block.
 TODO: Show examples of using this.
+
+See the `str` subcommands.
