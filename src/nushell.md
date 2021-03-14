@@ -147,7 +147,6 @@ Supported values include:
 - heavy: thicker border on every cell
 - light: horizontal line below header and no other borders
 - none: no borders
-- other: TODO: What does this do?
 - reinforced: border on every cell with thick table corners
 - rounded: border on every cell and rounded table corners (my favorite)
 - thin: border on every cell
@@ -468,8 +467,9 @@ To run this, enter `top` followed by a number like `top 5`.
 
 The type of each parameter can optionally be specified after a colon to
 provide better documentation and better error messages when used incorrectly.
-Supported types include `int`, `number` (for float), `path` (for file paths),
-`pattern` (for regular expressions), `range`, and `string`.
+Supported types include `any`, `int`, `number` (for float), `path` (for file paths),
+`pattern` (for glob patterns), `range`, `string`, `table`, `block`,
+and `unit` (like void?).
 For example:
 
 ```bash
@@ -721,17 +721,6 @@ The `get` command is especially useful when the type of a field is "table".
 The key can be arbitrarily deep with sub-keys separated by periods.
 For example, `sys | get host.sessions | where name == 'root' | get groups`.
 
-## Scripts
-
-Nushell scripts are written in files with a `.nu` extension.
-
-To execute a Nushell script, ...
-
-Commands commonly used in Nushell scripts include `if`, `each`, ...
-
-To iterate over a range of integers, use
-`seq start end | each { ... }`.
-
 ## Plugins
 
 Nushell supports adding functionality through plugins.
@@ -746,6 +735,19 @@ For example, for me using macOS I entered `su vim /etc/shells`
 and added the line `/Users/mark/.cargo/bin/nu`.
 Then enter `chsh -s nu`.
 If using tmux, also change the value of `default-shell` in `~/.tmux.conf`.
+
+## Scripts
+
+Nushell scripts are written in files with a `.nu` extension.
+To execute a script, enter `nu {name}.nu`.
+
+For examples of Nushell scripts, see {% aTargetBlank
+"https://github.com/nushell/nu_scripts/tree/main/nu_101", "Nu_101 Scripts" %}.
+
+Commands commonly used in Nushell scripts include `if`, `each`, ...
+
+To iterate over a range of integers, use
+`seq start end | each { ... }`.
 
 ## Questions
 
