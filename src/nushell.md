@@ -568,7 +568,11 @@ def sum [
 ```
 
 Subcommands provide a way of grouping commands under a common "namespace".
-Examples of such built-in namespaces include `from`, `to`, `math` and `str`.
+Examples of such built-in namespaces include
+`date`, `from`, `to`, `math`, `str`, `url`.
+
+The `date` subcommands are
+`format`, `list-timezone`, `now`, `to-table`, and `to-timezone`.
 
 The `from` subcommands convert data from a given format to a table.
 They are
@@ -584,6 +588,7 @@ The `math` subcommands perform math calculations.
 They are
 `abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
 `product`, `round`, `stddev`, `sum`, and `variance`.
+Also see the commands `count`, `inc`, `into-int`, `random`, `seq`, ....
 
 The `str` subcommands perform string operations.
 They are
@@ -592,9 +597,10 @@ They are
 `pascal-case`, `reverse`, `rpad`, `rtrim`, `screaming-snake-case`,
 `snake-case`, `starts-with`, `substring`, `to-datetime`, `to-decimal`,
 `to-int`, `trim`, and `upcase`.
+Also see the commands `build-string`, `char`, `flatten`, `format`, `size`, ...
 
-TODO: Are there others?
-TODO: Describe these subcomands.
+The `url` subcommands get information from a URL.
+They are `host`, `path`, `query`, and `scheme` (ex. http).
 
 Defining a custom subcommand is similar to defining a custom command,
 but the name is specified as the parent command and subcommand name
@@ -771,8 +777,12 @@ Many Nushell commands operate on tables.
 | `merge`                    | merges tables; STUDY THIS                                        |
 | `move`                     | moves columns; STUDY THIS                                        |
 | `nth`                      | keep or skip specified rows                                      |
+| `parse`                    | parses columns from a string using a pattern                     |
 | `pivot`                    | swaps the rows and columns                                       |
+| `prepend`                  | prepends a row                                                   |
 | `sort-by`                  | sorts the rows on a given column                                 |
+| `range`                    | gets a subset of rows                                            |
+| `reduce`                   | computes a single value from a list table                        |
 | `reject`                   | removes given columns                                            |
 | `rename`                   | renames columns                                                  |
 | `reverse`                  | reverses the order of the rows                                   |
@@ -782,8 +792,11 @@ Many Nushell commands operate on tables.
 | `select`                   | specifies columns to be retained and their order                 |
 | `shuffle`                  | shuffles the rows randomly                                       |
 | `skip n`                   | skips the first n rows (n defaults to 1)                         |
+| `sort-by`                  | sorts by given columns                                           |
 | `split-by`                 | ?                                                                |
+| `table`                    | views pipeline output as a table                                 |
 | `to {format}`              | converts a table to a given format such as json                  |
+| `uniq`                     | gets unique rows                                                 |
 | `update`                   | updates data in a given column                                   |
 | `where`                    | specifies a condition rows must meet to render                   |
 | `wrap`                     | wraps data in a table                                            |
@@ -864,6 +877,11 @@ enter `ls $(build-string $(which nu | get path) '*') | get size | math sum`.
 ## Charts
 
 TODO: Learn about rendering bar and line charts with the `chart` command.
+TODO: Also see the `histogram` command.
+
+## Working with URLs
+
+TODO: Describe the `fetch` and `post` commands.
 
 ## Questions
 
