@@ -124,9 +124,13 @@ Here is a fancier prompt setting that includes
 the current working directory in yellow,
 and a right-pointing triangle at the end:
 
+{% raw %}
+
 ```bash
 prompt = "echo `🦀{{$(ansi yellow)}}ν {{$(pwd)}}{{$(char prompt)}} `"
 ```
+
+{% endraw %}
 
 To output the value of each setting in the config file, enter `config`.
 
