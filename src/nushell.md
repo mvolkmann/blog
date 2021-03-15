@@ -488,28 +488,52 @@ def sum [n1: number, n2: number] { = $n1 + $n2 }
 
 To run this, enter a command like `sum 1 2` which outputs `3`.
 
+Input from other commands can be piped into a custom command
+and accessed with the `$it` variable.
+Output from custom commands can be piped into other commands.
+
 The parameters in the examples above are positional.
 Named parameters (a.k.a. flags) can also be specified
 by adding `--` before their names.
 These are long-form names.
 To also specify short-form names, follow the long name with `(-short-name)`.
+Like positional parameters, types can be specified for flags.
 For example:
 
 {% raw %}
 
-```bash
-def color-echo [
-  text: string,
-  --color (-c): string
-] {
-  #TODO: What is the best way to test whether a flag is present?
-  #if $color { echo 'present' } { echo 'missing' }
-  let len = $(echo `{{$color}}` | str length)
-  if $len == 0 { echo $text} { echo [$(ansi $color), $text, $(ansi reset), $(char newline)] | str collect }
+```nu
+# Prints a value followed by a newline.
+def logv [value: any] {
+  echo [`{{$value}}` $(char newline)] | str collect
 }
+
+# Prints "name = value" followed by a newline.
+def lognv [name: string, value: any] {
+  logv $(echo [$name " = " `{{$value}}`] | str collect)
+}
+
+def logv-color [
+  text: string,
+  --color (-c): string # a flag
+] {
+  # This code does not work yet.
+  # It gives a coercion error that supposed is fixed in the next version of nu.
+  # See https://github.com/nushell/nushell/discussions/3178.
+  if $color == $nothing {
+    logv $text
+  } {
+    logv $(echo [$(ansi $color) $text $(ansi reset)] | str collect)
+  }
+}
+
+logv-color "Giraffes are cool!" "yellow"
 ```
 
 {% endraw %}
+
+Help for custom commands is obtained in the same way it is for built-in commands,
+using `help {command-name}` or `{command-name} -h`.
 
 To add documentation to custom commands,
 add a comment before the definition and after each parameter.
@@ -531,16 +555,6 @@ separated by a space and inside quotes.
 In the following custom commands, the parent command `rmv` is my initials:
 
 ```nu
-# Prints a value followed by a newline.
-def logv [value: any] {
-  echo [`{{$value}}` $(char newline)] | str collect
-}
-
-# Prints "name = value" followed by a newline.
-def lognv [name: string, value: any] {
-  logv $(echo [$name " = " `{{$value}}`] | str collect)
-}
-
 # Parent command.
 def rmv [] {}
 
