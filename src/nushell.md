@@ -57,11 +57,15 @@ In version 0.28.0 there are 105 commands.
 For help on a specific command,
 enter `help {command-name}` or {command-name} -h`.
 
+Like all shells, enter commands and press enter to execute them.
+Multi-line commands can be entered by pressing enter
+before a block, delimited by square brackets or curly braces, is complete.
+Nushell has great command recall and completion like the Fish and zsh shells.
+Command recall even supports multi-line command editing.
+
 For detailed documentation, see the
 {% aTargetBlank "https://www.nushell.sh/book/", "Book" %}
 link in the top nav of the website.
-
-Nushell has great command recall and completion like the Fish and zsh shells.
 
 ## Configuration
 
@@ -521,6 +525,35 @@ def sum [
 }
 ```
 
+Defining a custom subcommand is similar to defining a custom command,
+but the name is specified as the parent command and subcommand name
+separated by a space and inside quotes.
+In the following custom commands, the parent command `rmv` is my initials:
+
+```nu
+# Prints a value followed by a newline.
+def logv [value: any] {
+  echo [`{{$value}}` $(char newline)] | str collect
+}
+
+# Prints "name = value" followed by a newline.
+def lognv [name: string, value: any] {
+  logv $(echo [$name " = " `{{$value}}`] | str collect)
+}
+
+# Parent command.
+def rmv [] {}
+
+# Increments a number by 1.
+def "rmv increment" [n: number] { = $n + 1 }
+
+# Doubles a number.
+def "rmv double" [n: number] { = $n * 2 }
+
+let score = 3
+lognv 'score' $(rmv double $(rmv increment $score)) # 8
+```
+
 ## Variables
 
 To set a variable, enter `let name = value`.
@@ -531,7 +564,7 @@ To set a variable to the result of a command,
 enter `let name = $(command)`.
 
 To set a variable to the result of concatenating two string variables,
-enter `let v3 = echo [$v1 $v2] | str collect`.
+enter `let v3 = $(echo [$v1 $v2] | str collect)`.
 
 ## Aliases
 

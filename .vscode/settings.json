@@ -411,6 +411,7 @@
     "listdir",
     "lmplot",
     "logfile",
+    "lognv",
     "lshift",
     "lstrip",
     "luwenjiechn",
