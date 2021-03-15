@@ -120,6 +120,14 @@ For example, to change the prompt enter
 This adds the line `prompt = "echo $(ansi yellow) '🦀ν> '"`
 to the configuration file.
 🦀 is for the Rust mascot Ferris and ν is the Greek letter nu.
+Here is a fancier prompt setting that includes
+the current working directory in yellow,
+and a right-pointing triangle at the end:
+
+```bash
+prompt = "echo `🦀{{$(ansi yellow)}}ν {{$(pwd)}}{{$(char prompt)}} `"
+```
+
 To output the value of each setting in the config file, enter `config`.
 
 Another option for customizing the prompt is to enable the use of
@@ -513,12 +521,14 @@ For example:
 ```bash
 # Prints a value followed by a newline.
 def logv [value: any] {
-  echo [`{{$value}}` $(char newline)] | str collect
+  echo $(build-string $value $(char newline))
+  # Another way to write the line above is:
+  #echo [`{{$value}}` $(char newline)] | str collect
 }
 
 # Prints "name = value" followed by a newline.
 def lognv [name: string, value: any] {
-  logv $(echo [$name " = " `{{$value}}`] | str collect)
+  logv $(build-string $name " = " $value)
 }
 
 def logv-color [
@@ -531,7 +541,7 @@ def logv-color [
   if $color == $nothing {
     logv $text
   } {
-    logv $(echo [$(ansi $color) $text $(ansi reset)] | str collect)
+    logv $(build-string $(ansi $color) $text $(ansi reset))
   }
 }
 
@@ -556,6 +566,35 @@ def sum [
   = $n1 + $n2
 }
 ```
+
+Subcommands provide a way of grouping commands under a common "namespace".
+Examples of such built-in namespaces include `from`, `to`, `math` and `str`.
+
+The `from` subcommands convert data from a given format to a table.
+They are
+`csv`, `eml`, `ics`, `ini`, `json`, `ods`, `ssv`, `toml`, `tsv`,
+`url`, `vcf`, `xlsx`, `xml`, `yaml`, and `yml`.
+
+The `to` subcommands convert a table into a given output format and
+are commonly piped to the `save` command to write the result to a file.
+They are
+`csv`, `html`, `json`, `md`, `toml`, `tsv`, `url`, `xml`, and `yaml`.
+
+The `math` subcommands perform math calculations.
+They are
+`abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
+`product`, `round`, `stddev`, `sum`, and `variance`.
+
+The `str` subcommands perform string operations.
+They are
+`camel-case`, `capitalize`, `collect`, `contains`, `downcase`, `ends-with`,
+`find-replace`, `from`, `index-of`, `kebab-case`, `length`, `lpad`, `ltrim`,
+`pascal-case`, `reverse`, `rpad`, `rtrim`, `screaming-snake-case`,
+`snake-case`, `starts-with`, `substring`, `to-datetime`, `to-decimal`,
+`to-int`, `trim`, and `upcase`.
+
+TODO: Are there others?
+TODO: Describe these subcomands.
 
 Defining a custom subcommand is similar to defining a custom command,
 but the name is specified as the parent command and subcommand name
@@ -585,13 +624,22 @@ Their scope is the context or block in which they are defined.
 To set a variable to the result of a command,
 enter `let name = $(command)`.
 
-To set a variable to the result of concatenating two string variables,
-enter `let v3 = $(echo [$v1 $v2] | str collect)`.
+To set a variable to the result of concatenating two variable values as strings,
+use `let v3 = $(build-str $v1 $v2)`.
+
+To get the type of a primitive value, pipe it into the `describe` command.
+For example, `echo 19 | describe` outputs "integer"
+and `echo 3.14 | describe` outputs "decimal".
 
 ## Aliases
 
-To create an alias for a command, enter `alias {name} = {value}`.
+To create an alias for a command, enter `alias {name} = {command}`.
 For example, `alias cls = clear`.
+
+The command can be built-in or custom
+and literal arguments can be specified.
+When the aliases is used, additional arguments can be specified.
+For example, alias
 
 To make aliases available in each new Nushell session,
 add them to the `startup` list in the config file
@@ -811,8 +859,11 @@ To iterate over a range of integers, use
 `seq start end | each { ... }`.
 
 To calculate the combined size of the `nu` executable and installed plugins,
-enter
-`ls $(echo [$(ls $(which nu | get path) | get name) '*'] | str collect) | get size | math sum`.
+enter `ls $(build-string $(which nu | get path) '*') | get size | math sum`.
+
+## Charts
+
+TODO: Learn about rendering bar and line charts with the `chart` command.
 
 ## Questions
 
@@ -821,5 +872,3 @@ TODO: Is it possible to change the nu shell prompt?
 The `$it` variable holds the output of the previous command
 so it can be used in a block.
 TODO: Show examples of using this.
-
-See the `str` subcommands.
