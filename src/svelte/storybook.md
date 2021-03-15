@@ -171,20 +171,17 @@ opens the Storybook app in your default web browser.
 Click the `Pie` component in the left nav to render the following:
 
 <img alt="Pie story"
-  src="/blog/assets/svelte-storybook-1.png?v={{pkg.version}}">
+  src="/blog/assets/svelte-storybook.png?v={{pkg.version}}">
 
 If desired, the example components can be deleted
 from the `src/stories` directory so they no longer render.
 
 To change any of the props passed to the `Pie` component,
-click the "Docs" tab and enter new values using the UI shown below.
+enter new values in the "Controls" section at the bottom.
 For example, drag the value slider for the `value` prop to change the
 value rendered by the `Pie` component to any value from zero to 100.
 The `bgColor`, `fgColor`, and `size` props can also be modified.
 Very nice!
-
-<img alt="Pie story controls"
-  src="/blog/assets/svelte-storybook-2.png?v={{pkg.version}}">
 
 ## Static Deploy
 
