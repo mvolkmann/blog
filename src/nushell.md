@@ -15,6 +15,11 @@ It is implemented in Rust.
 
 Nushell runs in Linux, macOS, and Windows.
 
+It costs nothing but some disk space to try it (about 50 MB).
+You don't have to commit to making it your default shell.
+Just pop in periodically to try it and exit to return to your current shell.
+Over time you may decide you like it enough to make it your default shell.
+
 Color coding of commands is applied while they are typed.
 When the command is invalid, all the text is red.
 
@@ -66,6 +71,9 @@ Command recall even supports multi-line command editing.
 For detailed documentation, see the
 {% aTargetBlank "https://www.nushell.sh/book/", "Book" %}
 link in the top nav of the website.
+
+For more help, join the {% aTargetBlank
+"https://discord.gg/NtAbbGn", "nushell Discord channel" %}.
 
 ## Configuration
 
@@ -502,7 +510,7 @@ For example:
 
 {% raw %}
 
-```nu
+```bash
 # Prints a value followed by a newline.
 def logv [value: any] {
   echo [`{{$value}}` $(char newline)] | str collect
@@ -554,7 +562,7 @@ but the name is specified as the parent command and subcommand name
 separated by a space and inside quotes.
 In the following custom commands, the parent command `rmv` is my initials:
 
-```nu
+```bash
 # Parent command.
 def rmv [] {}
 
@@ -588,6 +596,12 @@ For example, `alias cls = clear`.
 To make aliases available in each new Nushell session,
 add them to the `startup` list in the config file
 as shown in the "Configuration" section.
+
+TODO: This alias should work, but does not. Why?
+
+```bash
+alias top = ps | sort-by cpu | reverse | first 10
+```
 
 ## VS Code
 
@@ -795,6 +809,10 @@ Commands commonly used in Nushell scripts include `if`, `each`, ...
 
 To iterate over a range of integers, use
 `seq start end | each { ... }`.
+
+To calculate the combined size of the `nu` executable and installed plugins,
+enter
+`ls $(echo [$(ls $(which nu | get path) | get name) '*'] | str collect) | get size | math sum`.
 
 ## Questions
 
