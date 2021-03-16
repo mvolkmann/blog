@@ -11,17 +11,51 @@ layout: topic-layout.njk
 where pipes connect simple commands together,
 and bring it to the modern style of development."
 Nushell was created by Jonathan Turner, Yehuda Katz, and Andres Robalino.
-It is implemented in Rust.
+It runs in Linux, macOS, and Windows.
 
-Nushell runs in Linux, macOS, and Windows.
+Nushell is implemented in Rust.
+And like Rust, Nushell produces helpful, nicely formatted error messages.
+
+Nushell includes the Nu language which excels at
+"processing streams of structured data".
+This provides features that are somewhat like SQL for databases.
+It also has similarities to the Python-based Pandas data analysis library.
+These are features not typically seen in shell environments.
+It is far from a toy project and uses recursive descent parser
+that is driven by its many supported data types.
+
+Nushell continues the UNIX tradition of
+commands whose input can be piped in from a previous command
+and whose output can be piped to a subsequent command.
+This is done in a streaming fashion so that a command
+does not have to run to completion before the next command
+in the pipeline can begin receiving that output as its input.
+
+Some commands, such as `echo` and `ls`, are lazy.
+This means they do not produce output unless
+something is requesting data from their output stream.
+One way to do this it to pipe their output to the `autoview` command
+which determines how to render the data based on its type.
+Piping to `autoview` occurs implicitly in the shell
+after the last command in a pipeline.
+So `ls` is processed as if `ls | autoview` was entered.
+When semicolons are used to separate multiple commands on the same line,
+`autoview` is only applied to the last pipeline.
+For example, `let a = 2; let b = 3; = $a + $b` outputs `5`.
+
+The Nu language can be used outside Nushell, such as in Jupyter Notebooks.
+Because Rust is a great source for compiling to WebAssembly, it was
+possible to implement a web-based environment for experimenting with Nushell.
+This can be found at
+{% aTargetBlank "https://www.nushell.sh/demo/", "Nushell demo" %}.
 
 It costs nothing but some disk space to try it (about 50 MB).
 You don't have to commit to making it your default shell.
 Just pop in periodically to try it and exit to return to your current shell.
 Over time you may decide you like it enough to make it your default shell.
 
-Color coding of commands is applied while they are typed.
-When the command is invalid, all the text is red.
+Color coding is applied to commands as they are typed.
+If a command becomes invalid, all the text changes to red.
 
 ## Terminology
 
@@ -282,19 +316,6 @@ using the `open` command.
 To see the supported themes, install `bat` by entering `cargo install bat`
 and enter `bat --list-themes`. There are over 20.
 
-## Environment Variables
-
-To set the value of an environment variable,
-enter `let-env NAME = value`.
-To get the value of an environment variable, use `$nu.env.NAME`
-which can be passed to the `echo` command to print the value.
-
-To see a nicely formatted list of environment variables,
-enter `echo $nu.env | pivot` or `config | get env | pivot`.
-
-To get the value of a single environment variable,
-enter `config | get env.{name}`.
-
 ## Data Types
 
 Unlike most shells where only strings are used for command input and output,
@@ -303,18 +324,19 @@ Nushell supports many primitive and structured data types.
 | Type         | Description                                                                                    |
 | ------------ | ---------------------------------------------------------------------------------------------- |
 | `boolean`    | literal values are `$true` and `$false`                                                        |
-| `integer`    | whole numbers                                                                                  |
-| `decimal`    | numbers with a fractional part                                                                 |
+| `integer`    | whole numbers with infinite precision                                                          |
+| `decimal`    | numbers with a fractional part and infinite precision                                          |
+| `number`     | floating point numbers with infinite precision                                                 |
 | `range`      | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive)                           |
 | `string`     | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
 | `line`       | a string with an OS-dependent line ending                                                      |
 | glob pattern | can include `*` wildcard and `**` for traversing directories                                   |
 | `date`       | timezone-aware; defaults to UTC                                                                |
-| `duration`   | number followed by a unit which can be `sec`, `min`, `hr`, `day`, `wk`, `mon`, or `yr`         |
+| `duration`   | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, `wk`, `mon`, or `yr`   |
 | `file size`  |                                                                                                |
 | column path  | dot-separated list of nested column names                                                      |
 | file path    | platform-independent path to a file or directory                                               |
-| file size    | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                    |
+| `filesize`   | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                    |
 | `binary`     | sequence of raw bytes                                                                          |
 | `list`       | sequence of values of any type                                                                 |
 | `row`        | list where each value represents a column with an associated name                              |
@@ -324,6 +346,8 @@ Nushell supports many primitive and structured data types.
 
 Details about these data types can be found at {% aTargetBlank
 "https://www.nushell.sh/book/types_of_data.html", "Types of data" %}.
+
+### Strings
 
 Strings delimited by backticks support templating
 with expressions in pairs of double curly brackets.
@@ -337,15 +361,47 @@ let x = 19; echo `x is {{$x}}`
 
 {% endraw %}
 
+The operators `=~` and `!~` test whether
+one string contains or does not contain another.
+
+### Ranges
+
+Values of the `range` type can use default values for their start or end.
 If the start value of a range is omitted, it defaults to zero.
 If the end value of a range is omitted, the range has no upper bound.
 
-Tables have a literal syntax that allows them to be created manually.
-all the data is surrounded in square brackets.
-The values in each row are also surrounded by square brackets.
-The row of column headings comes first and is followed by a semicolon.
-The remaining rows are separated by a space.
-For example, `echo [[Name, Score]; [Mark, 19] [Tami, 21]]`
+### Types With Units
+
+Duration values with different units can be added.
+For example, `2hr + 57min + 11sec` (my best marathon time).
+
+Values of the `filesize` type with different units can be added.
+For example, `2mb + 57kb + 11b`.
+
+Combining values of different types results in a coercion error.
+For example, `3hr + 2mb` gives this kind of error and clearly identifies
+that the first value is a `duration` and the 2nd is a `filesize`.
+
+### Lists
+
+The literal syntax for creating a `list` is to include expressions
+in square brackets only separated by spaces or commas (for readability).
+For example, `["foo" "bar" "baz"]` or `["foo", "bar", "baz"]`.
+
+The `in` and `not in` operators are used to test whether a value is in a list.
+
+The `empty?` function is used to test whether a string, list, or table is empty.
+For example:
+
+```bash
+TODO: Add examples here.  You asked on Discord on 3/16/2021.
+```
+
+### Tables
+
+The literal syntax for creating a table describe each row with a list
+and separate the header row from the data rows with a semicolon.
+For example, `echo [[Name Score]; [Mark 19] [Tami 21]]`
 outputs the following table:
 
 ```text
@@ -356,6 +412,57 @@ outputs the following table:
  1 │ Tami │    21
 ───┴──────┴───────
 ```
+
+Single-row tables can be used like objects in other languages.
+For example:
+
+```bash
+let data = [[color flavor]; [yellow vanilla]]
+echo $data.flavor # outputs vanilla
+
+# The newlines in the table definition below break it!
+# See https://github.com/nushell/nushell/issues/3186.
+let sports = [
+  [name players];
+  [baseball 9]
+  [basketball 5]
+  [football 11]
+  [hockey 6]
+]
+let sport = basketball
+let players = $(echo $sports | where name == $sport | get players)
+echo `The number of active players in {{$sport}} is {{$players}}.`
+```
+
+## Operators
+
+Nushell supports the following operators:
+
+| Operator | Description                     |
+| -------- | ------------------------------- |
+| `+`      | add                             |
+| `-`      | subtract                        |
+| `*`      | multiply                        |
+| `/`      | divide                          |
+| `==`     | equal                           |
+| `!=`     | not equal                       |
+| `<`      | less than                       |
+| `<=`     | less than or equal              |
+| `>`      | greater than                    |
+| `>=`     | greater than or equal           |
+| `=~`     | string contains another         |
+| `!~`     | string does not contain another |
+| `in`     | value in list                   |
+| `not in` | value not in list               |
+| `&&`     | and two Boolean values          |
+| `\|\|`   | or two Boolean values           |
+
+Parentheses can be used for grouping in order to specify evaluation order.
+Operators can only be used in "math mode".
+An expression is in math mode if it begins with `=`.
+Some commands, such as `where` are automatically evaluated in math mode.
+
+For example, `let a = 2; let b = 3; = $a * $b` outputs `6`.
 
 ## Common Commands
 
@@ -468,6 +575,8 @@ ls | where type == Dir && size > 1024 | sort-by size | reverse | save big-zips.c
 ## Custom Commands
 
 To define a custom command, enter `def {name} [params] { commands }`.
+Names can be in kebab-case, including hyphens for readability.
+They can end with `?` to indicate that they return a Boolean value.
 Square brackets are used to surround the parameters because
 they are treated as a list and that is the syntax for lists.
 If no parameters are required, `[]` must still be included.
@@ -601,7 +710,7 @@ They are
 `pascal-case`, `reverse`, `rpad`, `rtrim`, `screaming-snake-case`,
 `snake-case`, `starts-with`, `substring`, `to-datetime`, `to-decimal`,
 `to-int`, `trim`, and `upcase`.
-Also see the commands `build-string`, `char`, `flatten`, `format`, `size`, ...
+Also see the commands `build-string`, `char`, `flatten`, `format`, and `size`.
 
 The `url` subcommands get information from a URL.
 They are `host`, `path`, `query`, and `scheme` (ex. http).
@@ -631,8 +740,21 @@ To set a variable, enter `let name = value`.
 Note that these are distinct from environment variables.
 Their scope is the context or block in which they are defined.
 
-To set a variable to the result of a command,
-enter `let name = $(command)`.
+To set a variable to the result of a command pipeline,
+which may contain only a single command,
+enter `let name = $(pipeline)`.
+
+To use a variable in an expression, precede its name with `$`.
+For example, `$total`.
+When a variable holds a structured value such as a table,
+dot syntax can be used to access nested values.
+For example:
+
+```bash
+# A single row type can be used like objects in other languages.
+let data = [[color flavor]; [yellow vanilla]]
+echo $data.flavor # outputs vanilla
+```
 
 To set a variable to the result of concatenating two variable values as strings,
 use `let v3 = $(build-str $v1 $v2)`.
@@ -640,6 +762,23 @@ use `let v3 = $(build-str $v1 $v2)`.
 To get the type of a primitive value, pipe it into the `describe` command.
 For example, `echo 19 | describe` outputs "integer"
 and `echo 3.14 | describe` outputs "decimal".
+
+## Environment Variables
+
+Environment variables are distinct from regular variables.
+Unlike regular variables, environment variables can be
+used in executables that are run from Nushell.
+
+To set the value of an environment variable,
+enter `let-env NAME = value`.
+To get the value of an environment variable, use `$nu.env.NAME`
+which can be passed to the `echo` command to print the value.
+
+To see a nicely formatted list of environment variables,
+enter `echo $nu.env | pivot` or `config | get env | pivot`.
+
+To get the value of a single environment variable,
+enter `config | get env.{name}`.
 
 ## Aliases
 
@@ -655,11 +794,20 @@ To make aliases available in each new Nushell session,
 add them to the `startup` list in the config file
 as shown in the "Configuration" section.
 
-TODO: This alias should work, but does not. Why?
+Aliases cannot use pipelines. Custom commands must be used instead.
+For example, this does not work:
 
 ```bash
 alias top = ps | sort-by cpu | reverse | first 10
 ```
+
+But this does work:
+
+```bash
+def top [] { ps | sort-by cpu | reverse | first 10 }
+```
+
+TODO: Why is everything after the first pipe ignored?
 
 ## VS Code
 
@@ -787,7 +935,7 @@ Many Nushell commands operate on tables.
 | `sort-by`                  | sorts the rows on a given column                                 |
 | `range`                    | gets a subset of rows                                            |
 | `reduce`                   | computes a single value from a list table                        |
-| `reject`                   | removes given columns                                            |
+| `reject`                   | removes columns by name                                          |
 | `rename`                   | renames columns                                                  |
 | `reverse`                  | reverses the order of the rows                                   |
 | `roll n`                   | rolls the bottom n rows to the top (n defaults to 1)             |
@@ -866,6 +1014,8 @@ If using tmux, also change the value of `default-shell` in `~/.tmux.conf`.
 
 Nushell scripts are written in files with a `.nu` extension.
 To execute a script, enter `nu {name}.nu`.
+To "source" a script so its definitions become available in the current shell,
+enter `source {name}.nu`.
 
 For examples of Nushell scripts, see {% aTargetBlank
 "https://github.com/nushell/nu_scripts/tree/main/nu_101", "Nu_101 Scripts" %}.

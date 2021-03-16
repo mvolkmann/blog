@@ -6,6 +6,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+by R. Mark Volkmann, partner and Distinguished Software Engineer at
+{% aTargetBlank "https://objectcomputing.com", "Object Computing, Inc." %}.
+
 ## Overview
 
 When developing web applications it is useful to be able to
@@ -200,6 +203,10 @@ open the `index.html` file in a web browser.
 To deploy the site, copy the contents of the 'storybook-static' directory
 to any web server.
 
+For more detail on deploying Storybook, see {% aTargetBlank
+"https://storybook.js.org/docs/react/workflows/publish-storybook",
+"Publish Storybook" %}.
+
 ## Conclusion
 
 Storybook provides a great way to
@@ -210,3 +217,7 @@ When a bug is discovered in a component,
 it can be debugged in the context of Storybook.
 This is typically faster than debugging in an app that uses the component
 because there is no need to navigate to where the component is used.
+
+More more on Svelte, check out
+{% aTargetBlank "https://www.manning.com/books/svelte-and-sapper-in-action",
+"Svelte and Sapper in Action" %}.
