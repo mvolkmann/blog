@@ -218,6 +218,10 @@ format = "[$all_status$ahead_behind]($style) "
 style = "bold red"
 ```
 
+The prompt can contain icons.
+To see available icons, browse {% aTargetBlank
+"https://www.nerdfonts.com/cheat-sheet", "Nerd Fonts Cheatsheet" %}.
+
 TODO: Why doesn't `config load $(config path)` work?
 TODO: You asked in the Nushell discussion page.
 
