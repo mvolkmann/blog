@@ -1141,7 +1141,7 @@ TODO: Show examples of using this.
 
 ## Issues
 
-- Defining and using an alias named "pull" crashes the shell.
+- Defining and using aliases named "pull" and "push" crashes the shell.
 - Fuzzy completion is not yet supported.
   For example, entering `cd foo` and pressing the tab key
   doesn’t auto complete to a directory that contains `foo`.
