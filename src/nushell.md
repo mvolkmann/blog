@@ -214,7 +214,7 @@ style = "italic green"
 symbol = ""
 
 [git_status]
-format = "[$all_status]($style) "
+format = "[$all_status$ahead_behind]($style) "
 style = "bold red"
 ```
 
@@ -1145,5 +1145,3 @@ TODO: Show examples of using this.
 - Fuzzy completion is not yet supported.
   For example, entering `cd foo` and pressing the tab key
   doesn’t auto complete to a directory that contains `foo`.
-
-test starship
