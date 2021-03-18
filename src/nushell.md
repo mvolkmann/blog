@@ -1145,3 +1145,5 @@ TODO: Show examples of using this.
 - Fuzzy completion is not yet supported.
   For example, entering `cd foo` and pressing the tab key
   doesn’t auto complete to a directory that contains `foo`.
+
+test starship
