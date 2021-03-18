@@ -92,9 +92,16 @@ To start the shell, enter `nu`.
 
 For help, enter `help`.
 For a list of supported commands, enter `help commands`.
-In version 0.28.0 there are 105 commands.
+In version 0.28.0 there are 105 Nushell commands.
 For help on a specific command,
 enter `help {command-name}` or {command-name} -h`.
+
+When a command not defined by Nushell is encountered,
+the directories listed in the `path` configuration setting
+are searched to find a matching executable.
+To run a command in the `path` that happens to have the same name
+as a Nushell command, prefix the command name with `^`.
+For example, `^ls *.html`.
 
 Like all shells, enter commands and press enter to execute them.
 Multi-line commands can be entered by pressing enter
@@ -179,7 +186,7 @@ TODO: You asked in the Nushell discussion page.
 
 The `startup` setting specifies a list of commands
 to run each time a new Nushell session is started.
-Typically the commands define aliases and custom commands.
+Typically the commands define aliases and custom commands (using `def`).
 For example:
 
 ```toml
@@ -389,12 +396,38 @@ in square brackets only separated by spaces or commas (for readability).
 For example, `["foo" "bar" "baz"]` or `["foo", "bar", "baz"]`.
 
 The `in` and `not in` operators are used to test whether a value is in a list.
+For example:
+
+```bash
+let colors = [red green blue]
+# As discussed in the "Operators" section below, "=" enables math mode
+# which is required to use the "in" and "not-in" operators.
+= blue in $colors # true
+= yellow in $colors # false
+```
 
 The `empty?` function is used to test whether a string, list, or table is empty.
 For example:
 
+TODO: Add examples of testing strings and tables.
+
 ```bash
-TODO: Add examples here.  You asked on Discord on 3/16/2021.
+# Strings
+let name = "Mark"
+= $name | empty? # false
+let name = ""
+= $name | empty? # true
+
+# Lists
+= $colors | empty? # false
+let colors = []
+= $colors | empty? # true
+
+# Tables
+let scores = [[Name Score]; [Mark 19] [Tami 21]]
+= $scores | empty? # false
+let scores = []
+= $scores | empty? # true; not empty header row is present
 ```
 
 ### Tables
@@ -411,6 +444,25 @@ outputs the following table:
  0 │ Mark │    19
  1 │ Tami │    21
 ───┴──────┴───────
+```
+
+SQL-like syntax can be used to retrieve data from a table.
+For example:
+
+```bash
+let scores = [[Name Score]; [Mark 19] [Tami 21]]
+echo $scores | where Name == 'Tami' | get Score # 21
+```
+
+The use of the `where` command above is shorthand for
+the expanded syntax using the special variable `$it` which holds
+the result of the previous command or the current iteration value.
+The previous pipeline can be written as follows using this syntax.
+The curly braces after the `where` command define a block on which it operates.
+The `=` enters "math mode".
+
+```bash
+echo $scores | where { = $it.Name == 'Tami'} | get Score # 21
 ```
 
 Single-row tables can be used like objects in other languages.
@@ -491,12 +543,6 @@ They include:
 - `source` runs a script file in the current context
 - `which` outputs the path of an executable AND
   information about aliases and custom commands
-
-Commands not defined in Nushell are processed
-using the parent shell implementation.
-For commands defined in Nushell, the parent shell implementation
-can be invoked by prefixing the command name with `^`.
-For example, `^ls *.html`.
 
 Note that the `cp`, `mv`, and `rm` commands do not
 currently support the `-i` flag to prompt for confirmation.
@@ -743,6 +789,9 @@ Their scope is the context or block in which they are defined.
 To set a variable to the result of a command pipeline,
 which may contain only a single command,
 enter `let name = $(pipeline)`.
+The syntax `$(...)` is referred to as an "invocation".
+It can also be used to pass the result of a command pipeline
+as a argument to a command.
 
 To use a variable in an expression, precede its name with `$`.
 For example, `$total`.
@@ -769,16 +818,19 @@ Environment variables are distinct from regular variables.
 Unlike regular variables, environment variables can be
 used in executables that are run from Nushell.
 
-To set the value of an environment variable,
-enter `let-env NAME = value`.
-To get the value of an environment variable, use `$nu.env.NAME`
-which can be passed to the `echo` command to print the value.
+To set the value of an environment variable only in the current scope,
+not permanently, enter `let-env NAME = value`.
+This adds `NAME` to `$nu.env` which is a like a map of environment variables.
+
+To set the value of an environment variable
+so it is available in subsequent Nushell sessions,
+add it to the `env` section of the Nushell configuration file.
+
+To get the value of an environment variable, use `$nu.env.NAME`.
+To print the value, enter `echo $nu.env.NAME` or `config | get env.{name}`.
 
 To see a nicely formatted list of environment variables,
 enter `echo $nu.env | pivot` or `config | get env | pivot`.
-
-To get the value of a single environment variable,
-enter `config | get env.{name}`.
 
 ## Aliases
 
@@ -866,6 +918,7 @@ To render a table where each row describes a programming language,
 the columns have proper names, and
 the rows are sorted on ascending year of creation,
 enter `open languages.txt | lines | split column '|' Language Year Creator | sort-by Year`.
+The `lines` command converts input text into a list of separate lines of text.
 The following table is produced:
 
 ```text
@@ -893,13 +946,15 @@ To process data from a URL instead of a local file, use the `fetch` command.
 For example, the
 {% aTargetBlank "https://jsonplaceholder.typicode.com", "{JSON} Placeholder" %}
 site provides free data for testing and prototyping.
-Todo data from this site can be rendered as a table with the following:
+Todo data from this site can be rendered as a table with the following commands:
 
 ```bash
+fetch https://jsonplaceholder.typicode.com/todos | first 10
+
 fetch https://jsonplaceholder.typicode.com/todos | where userId == 2 && completed == $true | sort-by title
 ```
 
-## Tables
+## Table Commands
 
 Many Nushell commands operate on tables.
 
@@ -917,7 +972,7 @@ Many Nushell commands operate on tables.
 | `flatten`                  | flattens a table                                                 |
 | `format`                   | formats columns into a string                                    |
 | `from {format}`            | parses a given file format into a table                          |
-| `get {column}`             | gets the content of a given column as a table                    |
+| `get {column}`             | gets the content of a given column name as a table               |
 | `group-by`                 | STUDY THIS                                                       |
 | `headers`                  | uses the first row as column names                               |
 | `histogram`                | STUDY THIS                                                       |
@@ -941,7 +996,7 @@ Many Nushell commands operate on tables.
 | `roll n`                   | rolls the bottom n rows to the top (n defaults to 1)             |
 | `rotate`                   | rotates the table 90 degrees clockwise; can apply multiple times |
 | `rotate counter-clockwise` | rotates the table 90 degrees counter-clockwise                   |
-| `select`                   | specifies columns to be retained and their order                 |
+| `select`                   | specifies columns to be retained by name and their order         |
 | `shuffle`                  | shuffles the rows randomly                                       |
 | `skip n`                   | skips the first n rows (n defaults to 1)                         |
 | `sort-by`                  | sorts by given columns                                           |
@@ -1044,3 +1099,7 @@ TODO: Is it possible to change the nu shell prompt?
 The `$it` variable holds the output of the previous command
 so it can be used in a block.
 TODO: Show examples of using this.
+
+```
+
+```
