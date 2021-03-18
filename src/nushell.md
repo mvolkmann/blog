@@ -176,8 +176,10 @@ prompt = "echo `🦀{{$(ansi yellow)}}ν {{$(pwd)}}{{$(char prompt)}} `"
 To output the value of each setting in the config file, enter `config`.
 
 Another option for customizing the prompt is to enable the use of
-{% aTargetBlank "https://starship.rs", "starship" %}
+{% aTargetBlank "https://starship.rs", "Starship" %}
 by setting the `use_starship` setting to `true`.
+One way to install Starship is to enter `cargo install starship`.
+To configure Starship, create the file `~/.config/starship.toml`.
 
 TODO: Why doesn't `config load $(config path)` work?
 TODO: You asked in the Nushell discussion page.
@@ -1100,6 +1102,9 @@ The `$it` variable holds the output of the previous command
 so it can be used in a block.
 TODO: Show examples of using this.
 
-```
+## Issues
 
-```
+- Defining and using an alias named "pull" crashes the shell.
+- Fuzzy completion is not yet supported.
+  For example, entering `cd foo` and pressing the tab key
+  doesn’t auto complete to a directory that contains `foo`.
