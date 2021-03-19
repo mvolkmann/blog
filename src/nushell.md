@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 ## Overview
 
 {% aTargetBlank "https://www.nushell.sh", "Nushell" %} is "a new type of shell".
