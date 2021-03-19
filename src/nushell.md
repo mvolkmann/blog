@@ -175,52 +175,8 @@ prompt = "echo `🦀{{$(ansi yellow)}}ν {{$(pwd)}}{{$(char prompt)}} `"
 
 To output the value of each setting in the config file, enter `config`.
 
-## Starship
-
-Another option for customizing the prompt is to enable the use of
-{% aTargetBlank "https://starship.rs", "Starship" %}.
-Edit the configuration file and add `prompt = "starship prompt"`.
-One way to install Starship is to enter `cargo install starship`.
-Download "FiraCode Nerd Font" from {% aTargetBlank
-"https://www.nerdfonts.com/font-downloads", "nerdfonts.com" %}.
-In macOS, double-click the file `Fira Code Regular Nerd Font Complete.ttf`
-and press the "Install Font" button.
-In iTerm2, select Preferences...Profiles...Text and
-select "FiraCode Nerd Font" from the Font drop-down.
-Open a new terminal window for the changes to take effect.
-To configure Starship, create the file `~/.config/starship.toml`.
-Changes to this file take effect immediately.
-
-For example:
-
-```toml
-format = "🦀$git_branch$git_status$directory$character"
-# Nushell controls the color of commands typed after the prompt.
-
-[character]
-success_symbol = "[▶](bold green)"
-error_symbol = "[✗](bold red)"
-
-[directory]
-format = "[$path]($style)"
-style = "yellow"
-truncate_to_repo = false
-truncation_length = 3 # parent directories to show; default is 3
-truncation_symbol = "…/"
-
-[git_branch]
-format = "[$symbol](green)[$branch]($style)"
-style = "italic green"
-symbol = ""
-
-[git_status]
-format = "[$all_status$ahead_behind]($style) "
-style = "bold red"
-```
-
-The prompt can contain icons.
-To see available icons, browse {% aTargetBlank
-"https://www.nerdfonts.com/cheat-sheet", "Nerd Fonts Cheatsheet" %}.
+Another option for customizing the prompt is
+to enable the use of [Starship](/blog/starship).
 
 TODO: Why doesn't `config load $(config path)` work?
 TODO: You asked in the Nushell discussion page.
