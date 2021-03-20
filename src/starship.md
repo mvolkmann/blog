@@ -32,10 +32,19 @@ To install the font in macOS, double-click the file
 and press the "Install Font" button.
 
 Terminal apps must then be configured to use the font.
-For example, in the macOS app iTerm2
-select Preferences...Profiles...Text and
-select "FiraCode Nerd Font" from the Font drop-down.
-A new terminal window must be opened for the changes to take effect.
+
+- <b>macOS Terminal app</b>  
+  Select Preferences...Profiles...Text,
+  press the "Change..." button in the "Font" section to open
+  the "Fonts" dialog, and select "FiraCode Nerd Font".
+- <b>macOS iTerm2 app</b>  
+  Select Preferences...Profiles...Text and
+  select "FiraCode Nerd Font" from the Font drop-down.
+  Also consider checking the "Use ligatures" checkbox.
+  A new terminal window must be opened for the changes to take effect.
+- <b>VS Code</b>  
+  Select Preferences...Settings, enter "Editor: Font Family",
+  and enter "FiraCode Nerd Font".
 
 ## Enabling
 
