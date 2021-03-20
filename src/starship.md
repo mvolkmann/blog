@@ -67,6 +67,21 @@ To enable the use of Starship in each shell:
 To configure Starship, create the file `~/.config/starship.toml`.
 Changes to this file take effect immediately.
 
+The example configuration below results in the following prompts
+which begin by indicating the current shell: bash, fish, or Nushell.
+
+<img alt="Starship bash prompt" style="width: 40%"
+  src="/blog/assets/starship-bash-prompt.png?v={{pkg.version}}"
+  title="Starship bash prompt">
+
+<img alt="Starship fish prompt" style="width: 40%"
+  src="/blog/assets/starship-fish-prompt.png?v={{pkg.version}}"
+  title="Starship fish prompt">
+
+<img alt="Starship Nushell prompt" style="width: 40%"
+  src="/blog/assets/starship-nu-prompt.png?v={{pkg.version}}"
+  title="Starship Nushell prompt">
+
 Many string values in the configuration file can contain the syntax
 `[value](style)` where `value` is literal text and variable values to display,
 and `style` specifies a color and style.
