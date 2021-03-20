@@ -34,17 +34,11 @@ and press the "Install Font" button.
 Terminal apps must then be configured to use the font.
 
 - <b>macOS Terminal app</b>  
-  Select Preferences...Profiles...Text,
-  press the "Change..." button in the "Font" section to open
-  the "Fonts" dialog, and select "FiraCode Nerd Font".
+  SelectPreferences...Profiles...Text,pressthe"Change..."buttoninthe"Font"sectiontoopenthe"Fonts"dialog,andselect"FiraCodeNerdFont".
 - <b>macOS iTerm2 app</b>  
-  Select Preferences...Profiles...Text and
-  select "FiraCode Nerd Font" from the Font drop-down.
-  Also consider checking the "Use ligatures" checkbox.
-  A new terminal window must be opened for the changes to take effect.
+  SelectPreferences...Profiles...Textandselect"FiraCodeNerdFont"fromtheFontdrop-down.Alsoconsidercheckingthe"Useligatures"checkbox.Anewterminalwindowmustbeopenedforthechangestotakeeffect.
 - <b>VS Code</b>  
-  Select Preferences...Settings, enter "Editor: Font Family",
-  and enter "FiraCode Nerd Font".
+  SelectPreferences...Settings,enter"Editor:FontFamily",andenter"FiraCodeNerdFont".
 
 ## Enabling
 
@@ -102,12 +96,33 @@ truncation_symbol = "…/"
 [git_branch]
 format = "[$symbol](green)[$branch]($style)"
 style = "italic green"
-symbol = ""
+symbol = ""
 
 # Displays status of Git repository when in a directory of a Git repository.
 [git_status]
-format = "[$all_status$ahead_behind]($style) "
+format = "[$all_status$ahead_behind]($style)"
+ahead = "⇡ $count "
+behind = "⇣ $count "
+deleted = "🗑 $count "
+diverged = " $count "
+stashed = "📦 $count "
+modified = "פֿ $count "
+staged = '[ $count ](green)'
+renamed = " $count "
+untracked = "🤷 ‍$count "
 style = "bold red"
+```
+
+The top `format` setting that defines the prompt
+can contain newline characters for a multi-line prompt.
+Alternatively it can be delimited by triple quotes (single or double)
+to actually specify a multi-line prompt with multiple lines.
+For example:
+
+```toml
+format = '''
+$directory $git_branch$git_status
+$custom$character'''
 ```
 
 The prompt can contain icons.
