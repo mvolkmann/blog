@@ -203,8 +203,8 @@ when = 'test "$STARSHIP_SHELL" = "fish"'
 # Indicates when in Nushell.
 [custom.nu]
 command = "echo 🦀"
-shell = '/usr/local/bin/bash'
-when = 'test "$STARSHIP_SHELL" = ""' # not set in Nushell
+shell = 'bash'
+when = '[ "$STARSHIP_SHELL" == "" ]' # not set in Nushell
 ```
 
 The `command` specified for each of these is only executed
