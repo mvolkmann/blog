@@ -71,6 +71,23 @@ Many string values in the configuration file can contain the syntax
 `[value](style)` where `value` is literal text and variable values to display,
 and `style` specifies a color and style.
 
+A color specifier can be one of the following:
+
+- red, green, blue, yellow, purple, cyan, black, or white
+- `#` followed by a six-digit hexadecimal number
+  (ex. cornflower blue is #6495ed)
+- number between 0-255 to specify an 8-bit {% aTargetBlank
+  "https://i.stack.imgur.com/KTSQa.png", "ANSI color code" %}
+  (ex. orange is 208)
+
+Style prefixes include:
+
+- `fg:` (default) or `bg:` with no space after the colon
+  to distinguish between foreground and background styles
+  (ex. `fg:#6495ed bg:yellow`)
+- `bold`, `italic`, or `underline`
+- `bright` or `dimmed`
+
 For example:
 
 ```toml
