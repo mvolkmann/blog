@@ -65,19 +65,23 @@ To configure Starship, create the file `~/.config/starship.toml`.
 Changes to this file take effect immediately.
 
 Many string values in the configuration file can contain the syntax
-`[value](style)` where `value` is literal text and variable values to display
+`[value](style)` where `value` is literal text and variable values to display,
 and `style` specifies a color and style.
 
 For example:
 
 ```toml
-format = "$env_var$git_branch$git_status$directory$character"
+format = "$git_branch$git_status$directory$character"
 # Nushell controls the color of commands typed after the prompt.
 
+# Displays text, typically a single character,
+# based on the status of the previous command.
 [character]
-success_symbol = "[▶](bold green)"
-error_symbol = "[✗](bold red)"
+success_symbol = "[▶](bold green)" # normal prompt
+error_symbol = "[✗](bold red)" # used if previous command failed
+# error_symbol does not work in Nushell
 
+# Displays current directory.
 [directory]
 format = "[$path]($style)"
 style = "yellow"
@@ -85,16 +89,13 @@ truncate_to_repo = false
 truncation_length = 3 # parent directories to show; default is 3
 truncation_symbol = "…/"
 
-[env_var]
-format = "$env_value"
-variable = "SHELL_ICON"
-default = "?"
-
+# Displays current Git branch when in a directory of a Git repository.
 [git_branch]
 format = "[$symbol](green)[$branch]($style)"
 style = "italic green"
 symbol = ""
 
+# Displays status of Git repository when in a directory of a Git repository.
 [git_status]
 format = "[$all_status$ahead_behind]($style) "
 style = "bold red"
@@ -114,6 +115,39 @@ For example:
 - For Fish, edit `~/.config/fish/config.fish` and add `set -x SHELL_ICON 🐠`.
 - For Nushell, edit `$(config path)` and add `SHELL_ICON = "🦀"`
   in the `[env]` section.
+
+## Custom Commands
+
+Custom commands display the output of a given shell command.
+To define a custom command, add a `[command.{name}]` section in `starship.toml`.
+For example:
+
+```toml
+# Indicates when in bash shell.
+[custom.bash]
+command = "echo 🚀"
+when = '[ "$STARSHIP_SHELL" == "bash" ]'
+
+# Indicates when in fish shell.
+[custom.fish]
+command = "echo 🐠"
+when = 'test "$STARSHIP_SHELL" = "fish"'
+
+# Indicates when in Nushell.
+[custom.nu]
+command = "echo 🦀"
+shell = '/usr/local/bin/bash'
+when = 'test "$STARSHIP_SHELL" = ""' # not set in Nushell
+```
+
+The `command` specified for each of these is only executed
+if the `when` command returns `0` indicating success.
+The `shell` option specifies the shell to use when executing the `when` command
+and defaults to the current shell.
+To run all the custom commands in the order they are defined,
+add `$command` to the prompt string.
+To run a specific custom command, add `${custom.name}` to the prompt string
+where `name` is the name of a custom command.
 
 For more details on configuration, see {% aTargetBlank
 "https://starship.rs/config/#prompt", "Configuration" %}.
