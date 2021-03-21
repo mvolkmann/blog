@@ -178,12 +178,18 @@ prompt = "echo `🦀{{$(ansi yellow)}}ν {{$(pwd)}}{{$(char prompt)}} `"
 To output the value of each setting in the config file, enter `config`.
 
 Another option for customizing the prompt is
-to enable the use of [Starship](/blog/starship).
+to enable the use of [Starship](/blog/starship),
+which has many more options.
+It also has the advantage that it can be used with nearly any shell,
+which is great for users that sometimes switch between shells.
 
 TODO: Why doesn't `config load $(config path)` work?
 TODO: You asked in the Nushell discussion page.
 
-### startup
+TODO: Why does Eleventy place all these subsections after the
+TODO: Overview section instead of after the Configuration section?
+
+### startup Setting
 
 The `startup` setting specifies a list of commands
 to run each time a new Nushell session is started.
@@ -202,7 +208,7 @@ Aliases that use the "cd" command above currently causes Nushell to crash.
 See {% aTargetBlank "https://github.com/nushell/nushell/issues/3138",
 "this issue" %}.
 
-### table_mode
+### table_mode Setting
 
 Table borders can be customized with the `table_mode` setting.
 Supported values include:
@@ -298,7 +304,7 @@ setting a path that is specific to Nushell.
 Note that if Nushell is your login shell then
 there is no parent shell from which to inherit a path.
 
-## env Section
+### env Section
 
 The command `config set env $nu.env` adds all the current
 environment variables in the `env` section of the config file.
@@ -307,7 +313,7 @@ that are specific to Nushell.
 Note that if Nushell is your login shell then
 there is no parent shell from which to inherit environment variables.
 
-## textview Section
+### textview Section
 
 These settings affect use of the `bat` crate for viewing text files
 using the `open` command.
@@ -354,6 +360,22 @@ Nushell supports many primitive and structured data types.
 
 Details about these data types can be found at {% aTargetBlank
 "https://www.nushell.sh/book/types_of_data.html", "Types of data" %}.
+
+### Type Conversions
+
+The following type conversions are supported:
+
+| From   | To          | Command                   |
+| ------ | ----------- | ------------------------- |
+| any    | type string | pipe to `describe`        |
+| string | date        | pipe to `str to-datetime` |
+| string | decimal     | pipe to `str to-decimal`  |
+| string | integer     | pipe to `str to-int`      |
+| list   | string      | pipe to `str collect`     |
+
+For example,
+
+`echo "2021-3-21 14:30" | str to-datetime`
 
 ### Strings
 
@@ -473,6 +495,10 @@ For example:
 let data = [[color flavor]; [yellow vanilla]]
 echo $data.flavor # outputs vanilla
 
+However, it is currently very picky about
+splitting table data over multiple lines.
+TODO: See your json.nu example.
+
 # The newlines in the table definition below break it!
 # See https://github.com/nushell/nushell/issues/3186.
 let sports = [
@@ -485,6 +511,52 @@ let sports = [
 let sport = basketball
 let players = $(echo $sports | where name == $sport | get players)
 echo `The number of active players in {{$sport}} is {{$players}}.`
+```
+
+The following example demonstrates using nested tables.
+
+```bash
+let person = [
+  [name address]; [
+    "Mark Volkmann", [
+      [street city state zip]; [
+        "123 Some Street" "Somewhere" "MO" 12345
+      ]
+    ]
+  ]
+]
+
+echo $person
+echo $person | get address
+echo $person | to json --pretty 2
+```
+
+Running the code above produces the following result:
+
+```text
+╭───┬───────────────┬────────────────╮
+│ # │ name          │ address        │
+├───┼───────────────┼────────────────┤
+│ 0 │ Mark Volkmann │ [table 1 rows] │
+╰───┴───────────────┴────────────────╯
+
+╭───┬─────────────────┬───────────┬───────┬───────╮
+│ # │ street          │ city      │ state │ zip   │
+├───┼─────────────────┼───────────┼───────┼───────┤
+│ 0 │ 123 Some Street │ Somewhere │ MO    │ 12345 │
+╰───┴─────────────────┴───────────┴───────┴───────╯
+
+{
+  "address": [
+    {
+      "city": "Somewhere",
+      "state": "MO",
+      "street": "123 Some Street",
+      "zip": 12345
+    }
+  ],
+  "name": "Mark Volkmann"
+}
 ```
 
 ## Operators
@@ -619,6 +691,36 @@ ls | where type == Dir && size > 1024 | sort-by size | reverse | to html | save 
 ls | where type == Dir && size > 1024 | sort-by size | reverse | save big-zips.csv
 ```
 
+## Aliases
+
+To create an alias for a command, enter `alias {name} = {command}`.
+For example, `alias cls = clear`.
+
+The command can be built-in or custom
+and literal arguments can be specified.
+When the aliases is used, additional arguments can be specified.
+For example, alias
+
+To make aliases available in each new Nushell session,
+add them to the `startup` list in the config file
+as shown in the "Configuration" section.
+
+Aliases cannot use pipelines. Custom commands must be used instead.
+For example, this does not work:
+
+```bash
+alias top = ps | sort-by cpu | reverse | first 10
+```
+
+But this does work:
+
+```bash
+def top [] { ps | sort-by cpu | reverse | first 10 }
+```
+
+For more detail on supported commands, see the {% aTargetBlank
+"https://www.nushell.sh/book/command_reference.html", "Command Reference" %}.
+
 ## Custom Commands
 
 To define a custom command, enter `def {name} [params] { commands }`.
@@ -748,7 +850,7 @@ The `math` subcommands perform math calculations.
 They are
 `abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
 `product`, `round`, `stddev`, `sum`, and `variance`.
-Also see the commands `count`, `inc`, `into-int`, `random`, `seq`, ....
+Also see the commands `count`, `inc`, `into-int`, `random`, and `seq`.
 
 The `str` subcommands perform string operations.
 They are
@@ -783,8 +885,11 @@ lognv 'score' $(rmv double $(rmv increment $score)) # 8
 
 ## Variables
 
+Variables in Nushell are distinct from environment variables.
+They are immutable, but they can be shadowed
+to have different values in different scopes.
+
 To set a variable, enter `let name = value`.
-Note that these are distinct from environment variables.
 Their scope is the context or block in which they are defined.
 
 To set a variable to the result of a command pipeline,
@@ -833,43 +938,7 @@ To print the value, enter `echo $nu.env.NAME` or `config | get env.{name}`.
 To see a nicely formatted list of environment variables,
 enter `echo $nu.env | pivot` or `config | get env | pivot`.
 
-## Aliases
-
-To create an alias for a command, enter `alias {name} = {command}`.
-For example, `alias cls = clear`.
-
-The command can be built-in or custom
-and literal arguments can be specified.
-When the aliases is used, additional arguments can be specified.
-For example, alias
-
-To make aliases available in each new Nushell session,
-add them to the `startup` list in the config file
-as shown in the "Configuration" section.
-
-Aliases cannot use pipelines. Custom commands must be used instead.
-For example, this does not work:
-
-```bash
-alias top = ps | sort-by cpu | reverse | first 10
-```
-
-But this does work:
-
-```bash
-def top [] { ps | sort-by cpu | reverse | first 10 }
-```
-
-TODO: Why is everything after the first pipe ignored?
-
-## VS Code
-
-There is a VS Code extension for Nushell that provides syntax highlighting.
-See {% aTargetBlank
-"https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang",
-"vscode-nushell-lang" %}.
-
-## More Commands
+## open Command
 
 The `open` command renders certain file types as tables.
 These file types include csv, ini, json, toml, xml, and yaml.
@@ -1051,6 +1120,10 @@ The `get` command is especially useful when the type of a field is "table".
 The key can be arbitrarily deep with sub-keys separated by periods.
 For example, `sys | get host.sessions | where name == 'root' | get groups`.
 
+## Working with URLs
+
+TODO: Describe the `fetch` and `post` commands.
+
 ## Plugins
 
 Nushell supports adding functionality through plugins.
@@ -1076,22 +1149,115 @@ enter `source {name}.nu`.
 For examples of Nushell scripts, see {% aTargetBlank
 "https://github.com/nushell/nu_scripts/tree/main/nu_101", "Nu_101 Scripts" %}.
 
-Commands commonly used in Nushell scripts include `if`, `each`, ...
+To add comments or "comment-out" a line of code,
+preceded the comment with a `#` character.
 
-To iterate over a range of integers, use
-`seq start end | each { ... }`.
+Commands commonly used in Nushell scripts include
+`def`, `if`, `each`, and `seq`.
+
+The `def` command defines a custom command
+which can be used like a function in many programming languages.
+
+Conditional processing is implemented with the `if` command.
+Its syntax is `if condition { then-block } { else-block }`.
+Note that the condition is not surrounded by parentheses and
+curly braces are required around the then and else blocks.
+There are no `then` or `else` keywords.
+Nested ifs must be placed inside a then or else block.
+An `if` command can be split over multiple lines.
+For example:
+
+```bash
+let temperature = 80
+if $temperature <= 32 {
+  echo cold
+} {
+  if $temperature >= 80 {
+    echo hot
+  } {
+    echo warm
+  }
+}
+```
+
+To iterate over a range of integers, use the `seq` command
+and pipe the result to the `each` command.
+The special variable `$it` holds each iteration value.
+For example:
+
+```bash
+seq 1 4 | each { build-string $it $(char newline) } | str collect
+```
+
+Let's break this down.
+
+- `seq 1 4` returns the list `[1 2 3 4]`.
+- `each { build-string $it $(char newline) }` returns the list
+  `["1\n" "2\n" "3\n" "4\n"]`
+- `str collect` returns a string created by concatenating the list values.
+- The output is:
+
+  ```text
+  1
+  2
+  3
+  4
+  ```
+
+The `seq` command creates a list of strings, not integers.
+An alternative is to use the `echo` command with a range
+specified with `start..end` which creates a list of integers.
+The previous example can be written as follows:
+
+```bash
+echo 1..4 | each { build-string $it $(char newline) } | str collect
+```
+
+Iteration over the elements of a list is implemented with the `each` command.
+Its syntax is `echo some-list | each { block }`.
+The block can use the special variable `$it`
+to access the current element in the iteration.
+For example:
+
+```bash
+def log-value [label, value] {
+  echo $(build-string $label " = " $value $(char newline))
+}
+
+def report [list] {
+  # Without the --numbered option, $it is set to each list value.
+  # With it, $it is an object with the properties index and item.
+  echo $list | each --numbered {
+    build-string $(= $it.index + 1) ") " $it.item $(char newline)
+  } | str collect # with this the result is a table instead of a string
+}
+
+let names = [Mark Tami Amanda Jeremy]
+
+log-value "name at index 2" $(echo $names | nth 2) # Amanda
+
+report $names
+# 1) Mark
+# 2) Tami
+# 3) Amanda
+# 4) Jeremy
+```
 
 To calculate the combined size of the `nu` executable and installed plugins,
 enter `ls $(build-string $(which nu | get path) '*') | get size | math sum`.
+
+## VS Code
+
+There is a VS Code extension for Nushell that
+provides syntax highlighting for Nushell scripts.
+See {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang",
+"vscode-nushell-lang" %}.
 
 ## Charts
 
 TODO: Learn about rendering bar and line charts with the `chart` command.
 TODO: Also see the `histogram` command.
-
-## Working with URLs
-
-TODO: Describe the `fetch` and `post` commands.
 
 ## Questions
 
