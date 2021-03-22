@@ -893,12 +893,15 @@ which takes a list and a block.
 ```bash
 # You asked about this in Discord.
 def map [values, code: block] { # What type can be specified for values?
-  echo $values | do $code # THIS DOES NOT WORK!  Cannot access $it.
+  echo $values | each $code
 }
 
 let names = [Mark Tami Amanda Jeremy]
 
-map $names { echo $(build-string "Hello, " $it) }
+map $names { echo $(build-string "Hello, " $it $(char newline)) } | str collect
+
+# Same result just using each.
+echo $names | each { echo $(build-string "Hello, " $it ($(char newline)) } | str collect
 ```
 
 Custom commands can take a variable number of arguments
