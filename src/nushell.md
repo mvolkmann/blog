@@ -40,7 +40,7 @@ One way to do this it to pipe their output to the `autoview` command
 which determines how to render the data based on its type.
 Piping to `autoview` occurs implicitly in the shell
 after the last command in a pipeline.
-So `ls` is processed as if `ls | autoview` was entered.
+So the command `ls` is processed as if `ls | autoview` was entered.
 When semicolons are used to separate multiple commands on the same line,
 `autoview` is only applied to the last pipeline.
 For example, `let a = 2; let b = 3; = $a + $b` outputs `5`.
@@ -335,28 +335,29 @@ and enter `bat --list-themes`. There are over 20.
 Unlike most shells where only strings are used for command input and output,
 Nushell supports many primitive and structured data types.
 
-| Type         | Description                                                                                    |
-| ------------ | ---------------------------------------------------------------------------------------------- |
-| `boolean`    | literal values are `$true` and `$false`                                                        |
-| `integer`    | whole numbers with infinite precision                                                          |
-| `decimal`    | numbers with a fractional part and infinite precision                                          |
-| `number`     | floating point numbers with infinite precision                                                 |
-| `range`      | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive)                           |
-| `string`     | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
-| `line`       | a string with an OS-dependent line ending                                                      |
-| glob pattern | can include `*` wildcard and `**` for traversing directories                                   |
-| `date`       | timezone-aware; defaults to UTC                                                                |
-| `duration`   | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, `wk`, `mon`, or `yr`   |
-| `file size`  |                                                                                                |
-| column path  | dot-separated list of nested column names                                                      |
-| file path    | platform-independent path to a file or directory                                               |
-| `filesize`   | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                    |
-| `binary`     | sequence of raw bytes                                                                          |
-| `list`       | sequence of values of any type                                                                 |
-| `row`        | list where each value represents a column with an associated name                              |
-| `table`      | list of rows; returned by many Nushell commands                                                |
-| `block`      | block of nu script code that can be executed on each row of a table                            |
-| `group`      | semicolon-separated list of pipelines that can be run in parallel?                             |
+| Type        | Description                                                                                    |
+| ----------- | ---------------------------------------------------------------------------------------------- |
+| `any`       | any type below (default)                                                                       |
+| `binary`    | sequence of raw bytes                                                                          |
+| `block`     | block of nu script code that can be executed on each row of a table                            |
+| `boolean`   | literal values are `$true` and `$false`                                                        |
+| column path | dot-separated list of nested column names                                                      |
+| `date`      | timezone-aware; defaults to UTC                                                                |
+| `decimal`   | numbers with a fractional part and infinite precision                                          |
+| `duration`  | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, `wk`, `mon`, or `yr`   |
+| `filesize`  | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                    |
+| `group`     | semicolon-separated list of pipelines that can be run in parallel?                             |
+| `int`       | whole numbers with infinite precision                                                          |
+| `line`      | a string with an OS-dependent line ending                                                      |
+| list        | sequence of values of any type                                                                 |
+| `number`    | `int` or `decimal`; floating point numbers with infinite precision                             |
+| `path`      | platform-independent path to a file or directory                                               |
+| `pattern`   | glob pattern that can include `*` wildcard and `**` for traversing directories                 |
+| `range`     | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive); use 2 dots, not 3        |
+| row         | list where each value represents a column with an associated name                              |
+| `string`    | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
+| `table`     | list of rows; returned by many Nushell commands                                                |
+| `unit`      | number with a unit (ex. 3mb)                                                                   |
 
 Details about these data types can be found at {% aTargetBlank
 "https://www.nushell.sh/book/types_of_data.html", "Types of data" %}.
@@ -373,13 +374,19 @@ The following type conversions are supported:
 | string | integer     | pipe to `str to-int`      |
 | list   | string      | pipe to `str collect`     |
 
+TODO: Add more rows in the table above!
+
+The `echo` command is often used to
+feed the initial value into a command pipeline.
+This can be a literal value or an expression such as a variable reference.
+
 For example,
 
 `echo "2021-3-21 14:30" | str to-datetime`
 
 ### Strings
 
-Strings delimited by backticks support templating
+Strings delimited by backticks support templating (a.k.a interpolation)
 with expressions in pairs of double curly brackets.
 For example:
 
@@ -387,6 +394,11 @@ For example:
 
 ```bash
 let x = 19; echo `x is {{$x}}`
+
+#TODO: Why doesn't this work?
+let x = 3
+let y = 5
+echo `product of {{$x}} and {{$y}} is {{= $x * $y}}`
 ```
 
 {% endraw %}
@@ -417,6 +429,20 @@ that the first value is a `duration` and the 2nd is a `filesize`.
 The literal syntax for creating a `list` is to include expressions
 in square brackets only separated by spaces or commas (for readability).
 For example, `["foo" "bar" "baz"]` or `["foo", "bar", "baz"]`.
+
+To iterate over the elements in a list, use the `each` command.
+For example:
+
+```bash
+let names = [Mark Tami Amanda Jeremy]
+echo $names | each {
+  echo $(build-string $it $(char newline))
+} | str collect # converts table to a single string
+```
+
+To access a list element at a given index, use `$name.index`.
+For example, the second element in the list above
+which is "Tami" can be accessed with `$names.1`.
 
 The `in` and `not in` operators are used to test whether a value is in a list.
 For example:
@@ -451,6 +477,20 @@ let scores = [[Name Score]; [Mark 19] [Tami 21]]
 = $scores | empty? # false
 let scores = []
 = $scores | empty? # true; not empty header row is present
+```
+
+The `reduce` command computes a single value from a list.
+It takes a block which can use the special variables `$acc` and `$it`.
+To specify an initial value for `$acc`, use the `--fold` flag.
+To change `$it` to have `$it.index` and `$it.item` values,
+add the `--numbered` flag.
+For example:
+
+```bash
+let scores = [3 8 4]
+echo "total =" $(echo $scores | reduce { = $acc + $it }) # 15
+echo "total =" $(echo $scores | math sum) # easier approach, same result
+echo "product =" $(echo $scores | reduce --fold 1 { = $acc * $it }) # 96
 ```
 
 ### Tables
@@ -514,6 +554,7 @@ echo `The number of active players in {{$sport}} is {{$players}}.`
 ```
 
 The following example demonstrates using nested tables.
+Note the use of `to json` to generate JSON from a table.
 
 ```bash
 let person = [
@@ -569,6 +610,8 @@ Nushell supports the following operators:
 | `-`      | subtract                        |
 | `*`      | multiply                        |
 | `/`      | divide                          |
+| `**`     | exponentiation (power)          |
+| `mod`    | modulo                          |
 | `==`     | equal                           |
 | `!=`     | not equal                       |
 | `<`      | less than                       |
@@ -651,15 +694,16 @@ ls | tree
 # List files in the current directory with a size of 2kb or more,
 # sorted on size from largest to smallest.
 ls | where type == File && size >= 2kb | sort-by size | reverse
+ls | where type == File && size >= 2kb | sort-by -r size # same
 
 # List directories in the current directory,
 # sorted on size from largest to smallest,
 # excluding the type column since all will be "Dir".
-ls | where type == Dir | sort-by size | reverse | reject type
+ls | where type == Dir | sort-by -r size | reject type
 
 # Output processes using more than 5% of a CPU
 # sorted on the usage in reverse order.
-ps | where cpu > 5 | sort-by cpu | reverse
+ps | where cpu > 5 | sort-by -r cpu
 
 # Output information about the current machine
 # including OS version, host name, and uptime.
@@ -684,11 +728,11 @@ For example:
 ```bash
 # Create an HTML file describing the largest directories
 # in the current directory that are more than 1 KB.
-ls | where type == Dir && size > 1024 | sort-by size | reverse | to html | save big-zips.html
+ls | where type == Dir && size > 1024 | sort-by -r size | to html | save big-zips.html
 
 # The text format defaults to CSV if the file extension is .csv.
 # It does not do this for other file extensions.
-ls | where type == Dir && size > 1024 | sort-by size | reverse | save big-zips.csv
+ls | where type == Dir && size > 1024 | sort-by -r size | save big-zips.csv
 ```
 
 ## Aliases
@@ -709,13 +753,13 @@ Aliases cannot use pipelines. Custom commands must be used instead.
 For example, this does not work:
 
 ```bash
-alias top = ps | sort-by cpu | reverse | first 10
+alias top = ps | sort-by -r cpu | first 10
 ```
 
 But this does work:
 
 ```bash
-def top [] { ps | sort-by cpu | reverse | first 10 }
+def top [] { ps | sort-by cpu -r | first 10 }
 ```
 
 For more detail on supported commands, see the {% aTargetBlank
@@ -730,10 +774,16 @@ Square brackets are used to surround the parameters because
 they are treated as a list and that is the syntax for lists.
 If no parameters are required, `[]` must still be included.
 
-For example, this command has no parameters.
+The result of a custom command is
+the result of the last command pipeline
+or a string formed by the accumulation of everything it echoes.
+
+The following custom command has no parameters and outputs a table
+showing the processes that are using more 5% or more of CPU usage
+sorted from highest to lowest.
 
 ```bash
-def top [] { ps | where cpu > 5 | sort-by cpu | reverse }
+def top [] { ps | where cpu >= 5 | sort-by -r cpu }
 ```
 
 To run this, enter `top`.
@@ -742,7 +792,7 @@ Here is a version that has a CPU percentage parameter.
 Parameter values are accessed by adding `$` before their names.
 
 ```bash
-def topn [pct] { ps | where cpu > $pct | sort-by cpu | reverse }
+def topn [pct] { ps | where cpu >= $pct | sort-by -r cpu }
 ```
 
 To run this, enter `top` followed by a number like `top 5`.
@@ -755,16 +805,39 @@ and `unit` (like void?).
 For example:
 
 ```bash
-def topn [pct: number] { ps | where cpu > $pct | sort-by cpu | reverse }
+def topn [pct: number] { ps | where cpu >= $pct | sort-by -r cpu }
 ```
 
-Multiple arguments are separated by spaces. For example:
+When invoking a command, multiple arguments are separated by spaces.
+For example:
 
 ```bash
 def sum [n1: number, n2: number] { = $n1 + $n2 }
 ```
 
 To run this, enter a command like `sum 1 2` which outputs `3`.
+
+Here are examples of custom commands whose result is defined by what they echo.
+
+```bash
+def evaluate [n: int] {
+  echo $(build-string "The number " $n " is ")
+  if $n > 5 { echo big } { echo small }
+  echo "."
+  echo $(char newline)
+}
+
+echo $(evaluate 1) # The number 1 is small.
+echo $(evaluate 9) # The number 9 is big.
+
+def evaluate2 [n: int] {
+  let word = $(if $n > 5 { echo big } { echo small })
+  echo $(build-string "The number " $n " is " $word "." $(char newline))
+}
+
+echo $(evaluate2 1) # The number 1 is small.
+echo $(evaluate2 9) # The number 9 is big.
+```
 
 Input from other commands can be piped into a custom command
 and accessed with the `$it` variable.
@@ -811,6 +884,36 @@ logv-color "Giraffes are cool!" "yellow"
 ```
 
 {% endraw %}
+
+Custom commands can take arguments with a type of `block`.
+The `do` command can be used to execute the block.
+For example, this can be used to implement `map`
+which takes a list and a block.
+
+```bash
+# You asked about this in Discord.
+def map [values, code: block] { # What type can be specified for values?
+  echo $values | do $code # THIS DOES NOT WORK!  Cannot access $it.
+}
+
+let names = [Mark Tami Amanda Jeremy]
+
+map $names { echo $(build-string "Hello, " $it) }
+```
+
+Custom commands can take a variable number of arguments
+using the parameter syntax `...rest`.
+The parameter name must be "rest" and it must be the last parameter.
+Its value is a list.
+For example:
+
+```bash
+def labelled-sum [label: string, ...rest: int] {
+  echo $(build-string $label " = " $(echo $rest | math sum) $(char newline))
+}
+
+labelled-sum "sum of scores" 3 7 19 # sum of scores = 29
+```
 
 Help for custom commands is obtained in the same way it is for built-in commands,
 using `help {command-name}` or `{command-name} -h`.
@@ -886,8 +989,8 @@ lognv 'score' $(rmv double $(rmv increment $score)) # 8
 ## Variables
 
 Variables in Nushell are distinct from environment variables.
-They are immutable, but they can be shadowed
-to have different values in different scopes.
+They are immutable, so they must be set when they are declared.
+However, they can be shadowed to have different values in different scopes.
 
 To set a variable, enter `let name = value`.
 Their scope is the context or block in which they are defined.
@@ -986,8 +1089,8 @@ TypeScript|2012|Anders Hejlsberg
 
 To render a table where each row describes a programming language,
 the columns have proper names, and
-the rows are sorted on ascending year of creation,
-enter `open languages.txt | lines | split column '|' Language Year Creator | sort-by Year`.
+the rows are sorted on ascending year of creation, enter
+`open languages.txt | lines | split column '|' Language Year Creator | sort-by Year`.
 The `lines` command converts input text into a list of separate lines of text.
 The following table is produced:
 
@@ -1009,7 +1112,7 @@ If the file extension on a file does not match its content type,
 use the `from` command to specify the actual content type.
 For example, `open really-json.txt | from json`.
 
-To prevent the `open` command from processing a file, add the `--raw` option.
+To prevent the `open` command from processing a file, add the `--raw` flag.
 For example, `open scores.csv --raw`.
 
 To process data from a URL instead of a local file, use the `fetch` command.
@@ -1057,7 +1160,6 @@ Many Nushell commands operate on tables.
 | `parse`                    | parses columns from a string using a pattern                     |
 | `pivot`                    | swaps the rows and columns                                       |
 | `prepend`                  | prepends a row                                                   |
-| `sort-by`                  | sorts the rows on a given column                                 |
 | `range`                    | gets a subset of rows                                            |
 | `reduce`                   | computes a single value from a list table                        |
 | `reject`                   | removes columns by name                                          |
@@ -1069,7 +1171,7 @@ Many Nushell commands operate on tables.
 | `select`                   | specifies columns to be retained by name and their order         |
 | `shuffle`                  | shuffles the rows randomly                                       |
 | `skip n`                   | skips the first n rows (n defaults to 1)                         |
-| `sort-by`                  | sorts by given columns                                           |
+| `sort-by`                  | sorts rows on given columns                                      |
 | `split-by`                 | ?                                                                |
 | `table`                    | views pipeline output as a table                                 |
 | `to {format}`              | converts a table to a given format such as json                  |
@@ -1077,6 +1179,10 @@ Many Nushell commands operate on tables.
 | `update`                   | updates data in a given column                                   |
 | `where`                    | specifies a condition rows must meet to render                   |
 | `wrap`                     | wraps data in a table                                            |
+
+The `sort-by` command accepts
+the `--insensitive` flag to make the sort case-insensitive and
+the `--reverse` flag to reverse the sort order.
 
 Let's look at some examples using the `ls` command.
 This produces a table with the columns "name", "type", "size", and "modified".
@@ -1126,9 +1232,16 @@ TODO: Describe the `fetch` and `post` commands.
 
 ## Plugins
 
-Nushell supports adding functionality through plugins.
-These can be installed using the Rust `cargo` utility.
-For example, `cargo install nu_plugin_chart`.
+Nushell plugins add new commands.
+They can be installed using the Rust `cargo` utility.
+After installing, open a new shell to gain access to commands that they add.
+
+### nu_plugin_start
+
+This plugin adds the `start` command that opens a given file
+using its default application.
+To install this, enter `cargo install nu_plugin_start`.
+Then open a new shell and enter `start file-path`.
 
 ## Default Shell
 
@@ -1225,7 +1338,7 @@ def log-value [label, value] {
 }
 
 def report [list] {
-  # Without the --numbered option, $it is set to each list value.
+  # Without the --numbered flag, $it is set to each list value.
   # With it, $it is an object with the properties index and item.
   echo $list | each --numbered {
     build-string $(= $it.index + 1) ") " $it.item $(char newline)
@@ -1267,10 +1380,29 @@ The `$it` variable holds the output of the previous command
 so it can be used in a block.
 TODO: Show examples of using this.
 
+## Additional Shells
+
+New shells can be created from the current shell.
+This enables retaining the working directory of the current shell and
+switching back to it using the `n` (for next) and `p` (for previous) commands.
+
+| Command           | Description                                                                       |
+| ----------------- | --------------------------------------------------------------------------------- |
+| `enter dir-path`  | similar to `cd`, but creates a new shell starting in the given directory          |
+| `enter file-path` | creates a new shell whose context is the content of the given file; odd           |
+| `shells`          | lists the existing shells and indicates which one is active                       |
+| `n`               | makes the next shell in the list active;<br>wrapping to first if on last          |
+| `p`               | makes the previous shell in the list active;<br>wrapping to last if on first      |
+| `exit`            | exits the current shell, removing it from the list                                |
+| `exit --now`      | exits all the shells;<br>depending on configuration the terminal window may close |
+
 ## Issues
 
-- Defining and using aliases named "pull" and "push" crashes the shell.
-  See https://github.com/nushell/nushell/issues/3194.
 - Fuzzy completion is not yet supported.
   For example, entering `cd foo` and pressing the tab key
   doesn’t auto complete to a directory that contains `foo`.
+- The literal syntax for tables is very picky
+  about the location of newline characters.
+- There is no built-in `grep` command.
+  TODO: How can another grep command (like `ripgrep`)
+  TODO: be used with the output of `ls **/*.file-type`?
