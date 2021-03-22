@@ -65,6 +65,8 @@ Nushell commands are often chained together using the pipe (|) character.
 The output of the command on the left of a pipe
 is used as the input of the command on the right.
 Nushell refers to these sequences of commands as "pipelines".
+Command pipelines entered in the shell must be on a single line,
+but inside scripts lines that end with `|` continue on the next line.
 
 Commands that take no input and produce output
 are referred to as "inputs" or "sources".
@@ -799,9 +801,9 @@ To run this, enter `top` followed by a number like `top 5`.
 
 The type of each parameter can optionally be specified after a colon to
 provide better documentation and better error messages when used incorrectly.
-Supported types include `any`, `int`, `number` (for float), `path` (for file paths),
-`pattern` (for glob patterns), `range`, `string`, `table`, `block`,
-and `unit` (like void?).
+Supported types include `any`, `int`, `number` (for float),
+`path` (for file paths), `pattern` (for glob patterns), `range`,
+`string`, `table`, `block`, and `unit` (like void?).
 For example:
 
 ```bash
@@ -898,10 +900,14 @@ def map [values, code: block] { # What type can be specified for values?
 
 let names = [Mark Tami Amanda Jeremy]
 
-map $names { echo $(build-string "Hello, " $it $(char newline)) } | str collect
+map $names {
+  echo $(build-string "Hello, " $it $(char newline))
+} | str collect
 
 # Same result just using each.
-echo $names | each { echo $(build-string "Hello, " $it ($(char newline)) } | str collect
+echo $names | each {
+  echo $(build-string "Hello, " $it ($(char newline))
+} | str collect
 ```
 
 Custom commands can take a variable number of arguments
@@ -918,8 +924,8 @@ def labelled-sum [label: string, ...rest: int] {
 labelled-sum "sum of scores" 3 7 19 # sum of scores = 29
 ```
 
-Help for custom commands is obtained in the same way it is for built-in commands,
-using `help {command-name}` or `{command-name} -h`.
+Help for custom commands is obtained in the same way it is for
+built-in commands, using `help {command-name}` or `{command-name} -h`.
 
 To add documentation to custom commands,
 add a comment before the definition and after each parameter.
@@ -1404,8 +1410,10 @@ switching back to it using the `n` (for next) and `p` (for previous) commands.
 - Fuzzy completion is not yet supported.
   For example, entering `cd foo` and pressing the tab key
   doesn’t auto complete to a directory that contains `foo`.
-- The literal syntax for tables is very picky
-  about the location of newline characters.
+- The literal syntax for tables is currently very picky
+  about the location of newline characters due to a parser bug.
+  See {% aTargetBlank "https://github.com/nushell/nushell/issues/3204",
+  "issue 3204" %}
 - There is no built-in `grep` command.
   TODO: How can another grep command (like `ripgrep`)
   TODO: be used with the output of `ls **/*.file-type`?
