@@ -375,6 +375,8 @@ The following type conversions are supported:
 | string | decimal     | pipe to `str to-decimal`  |
 | string | integer     | pipe to `str to-int`      |
 | list   | string      | pipe to `str collect`     |
+| date   | string      | pipe to `str from`        |
+| number | string      | pipe to `str from`        |
 
 TODO: Add more rows in the table above!
 
@@ -442,6 +444,9 @@ echo $names | each {
 } | str collect # converts table to a single string
 ```
 
+The `$it` special variable holds the output of the previous command
+so it can be used in a block.
+
 To access a list element at a given index, use `$name.index`.
 For example, the second element in the list above
 which is "Tami" can be accessed with `$names.1`.
@@ -457,7 +462,7 @@ let colors = [red green blue]
 = yellow in $colors # false
 ```
 
-The `empty?` function is used to test whether a string, list, or table is empty.
+The `empty?` command is used to test whether a string, list, or table is empty.
 For example:
 
 TODO: Add examples of testing strings and tables.
@@ -647,7 +652,7 @@ They include:
 - `date` gets the current date
 - `du` gets information about disk usage
 - `echo` outputs the values of expressions
-- `exit` exits the current shell
+- `exit` exits the current shell; can specify status code
 - `help` displays help information
 - `history` displays command history
 - `kill` kills a process
@@ -875,7 +880,10 @@ def logv-color [
   # This code does not work yet.
   # It gives a coercion error that supposed is fixed in the next version of nu.
   # See https://github.com/nushell/nushell/discussions/3178.
-  if $color == $nothing {
+  #if $color == $nothing {
+
+  #if $(echo $color | empty?) { # same as next line
+  if $(= $color | empty?) {
     logv $text
   } {
     logv $(build-string $(ansi $color) $text $(ansi reset))
@@ -1376,18 +1384,86 @@ See {% aTargetBlank
 "https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang",
 "vscode-nushell-lang" %}.
 
+## Comparison to Bash
+
+The following table shows the Nushell equivalent of some common Bash commands.
+
+| Bash                   | Nushell                           | Description                                                                  |
+| ---------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
+| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`               | creates directory structure, including any missing directories               |
+| `command > file-path`  | `command \| save --raw file-path` | saves command output to a file<br>without converting based on file extension |
+| ``                     | ``                                |                                                                              |
+| ``                     | ``                                |                                                                              |
+| ``                     | ``                                |                                                                              |
+| ``                     | ``                                |                                                                              |
+
+The command whose output is piped in the `save` command must produce a string.
+For example, `date now | save --raw timestamp.txt` does not work,
+but `date now | str from | save --raw timestamp.txt` does.
+
 ## Charts
 
 TODO: Learn about rendering bar and line charts with the `chart` command.
 TODO: Also see the `histogram` command.
 
-## Questions
+## Per Directory Environment Variables
 
-TODO: Is it possible to change the nu shell prompt?
+Nushell supports defining things to happen when changing to given directories.
+To enable this feature, edit the configuration file and
+add a `[nu_env_dirs]` section that lists the participating directories.
+The create a `.nu-env` file in each directory.
+These are TOML files with the following sections:
 
-The `$it` variable holds the output of the previous command
-so it can be used in a block.
-TODO: Show examples of using this.
+| TOML Section   | Description                                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `[env]`        | sets environment variables to literal values; lines have syntax<br>`name = "value"`                                 |
+| `[scriptvars]` | sets environment variables to command output; lines have syntax<br>`name = "command-pipeline"`                      |
+| `[scripts]`    | specifies commands to run when entering and exiting the directory<br>with `entryscripts` and `exitscripts` commands |
+
+After creating the `.nu-env` file in each directory,
+enter `autoenv trust` to give Nushell permission to read the file.
+
+For example, suppose we want to set the environment variable `NODE_ENV`
+to `development` or `production` based on the current directory.
+Add the following setting in the Nushell configuration file:
+
+```toml
+nu_env_dirs = [
+  "~/projects/airline-reservations",
+  "~/projects/bank-accounts"
+]
+```
+
+In the `~/projects/airline-reservations` directory, create the file `.nu-env`
+containing the following and then enter `autoenv trust`:
+
+```toml
+[env]
+NODE_ENV = "development"
+
+[scripts]
+entryscripts = ["echo 'Welcome to airline-reservations!'"]
+exitscripts = ["echo 'Goodbye from airline-reservations!'"]
+```
+
+In the `~/projects/bank-accounts` directory, create the file `.nu-env`
+containing the following and then enter `autoenv trust`:
+
+```toml
+[env]
+NODE_ENV = "production"
+
+[scripts]
+entryscripts = ["echo 'Welcome to bank-accounts!'"]
+exitscripts = ["echo 'Goodbye from bank-accounts!'"]
+```
+
+Now `cd` to each of these directories and verify the expected output
+and that the `NODE_ENV` environment variable is set to the expected value.
+
+TODO: THIS IS NOT WORKING!
+
+For more details on this feature, enter `help autoenv`.
 
 ## Additional Shells
 
