@@ -361,6 +361,14 @@ Nushell supports many primitive and structured data types.
 | `table`     | list of rows; returned by many Nushell commands                                                |
 | `unit`      | number with a unit (ex. 3mb)                                                                   |
 
+To see the type of an expression, pipe it to the `describe` command.
+For example, `date now | describe` outputs `date`.
+TODO: Ask about the rest of this paragraph.
+Values of type of `int` are reported as `integer`.
+The following types are never output by the `describe` command:
+`number`, list, `pattern`, `range`, `table`, and `unit`.
+Values of type `unit` are reported as either `duration` or `filesize`.
+
 Details about these data types can be found at {% aTargetBlank
 "https://www.nushell.sh/book/types_of_data.html", "Types of data" %}.
 
@@ -368,17 +376,45 @@ Details about these data types can be found at {% aTargetBlank
 
 The following type conversions are supported:
 
-| From   | To          | Command                   |
-| ------ | ----------- | ------------------------- |
-| any    | type string | pipe to `describe`        |
-| string | date        | pipe to `str to-datetime` |
-| string | decimal     | pipe to `str to-decimal`  |
-| string | integer     | pipe to `str to-int`      |
-| list   | string      | pipe to `str collect`     |
-| date   | string      | pipe to `str from`        |
-| number | string      | pipe to `str from`        |
+| From       | To         | Command                   |
+| ---------- | ---------- | ------------------------- |
+| `any`      | `string`   | pipe to `describe`        |
+| `binary`   | `string`   | pipe to `???`             |
+| `boolean`  | `string`   | pipe to `str from`        |
+| `date`     | `string`   | pipe to `str from`        |
+| `decimal`  | `string`   | pipe to `str from`        |
+| `duration` | `string`   | pipe to `str from` \*     |
+| `filesize` | `string`   | pipe to `str from`        |
+| `int`      | `string`   | pipe to `str from`        |
+| `line`     | `string`   | pipe to `???`             |
+| `list`     | `string`   | pipe to `str collect`     |
+| `path`     | `string`   | pipe to `???`             |
+| `pattern`  | `string`   | pipe to `???`             |
+| `range`    | `string`   | pipe to `???`             |
+| `row`      | `string`   | pipe to `???`             |
+| `string`   | `binary`   | pipe to `???`             |
+| `string`   | `boolean`  | pipe to `???`             |
+| `string`   | `date`     | pipe to `str to-datetime` |
+| `string`   | `decimal`  | pipe to `str to-decimal`  |
+| `string`   | `duration` | pipe to `???`             |
+| `string`   | `filesize` | pipe to `???`             |
+| `string`   | `int`      | pipe to `str to-int`      |
+| `string`   | `list`     | pipe to `???`             |
+| `string`   | `path`     | pipe to `???`             |
+| `string`   | `range`    | pipe to `???`             |
+| `string`   | `row`      | pipe to `???`             |
+| `string`   | `table`    | pipe to `???`             |
+| `table`    | `string`   | pipe to ``                |
 
-TODO: Add more rows in the table above!
+\* THIS GIVES AN ERROR!
+
+TODO: How can you get the start and end of a `range`?
+
+TODO: Is there no such thing as a value of type `number`?
+TODO: Maybe it is always either `int` or `decimal`.
+
+TODO: Is there no such thing as a value of type `unit`?
+TODO: Maybe it is always either `duration` or `filesize`.
 
 The `echo` command is often used to
 feed the initial value into a command pipeline.
@@ -1409,9 +1445,7 @@ TODO: Also see the `histogram` command.
 ## Per Directory Environment Variables
 
 Nushell supports defining things to happen when changing to given directories.
-To enable this feature, edit the configuration file and
-add a `[nu_env_dirs]` section that lists the participating directories.
-The create a `.nu-env` file in each directory.
+To configure this, create a `.nu-env` file in each directory.
 These are TOML files with the following sections:
 
 | TOML Section   | Description                                                                                                         |
