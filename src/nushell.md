@@ -188,9 +188,6 @@ which is great for users that sometimes switch between shells.
 TODO: Why doesn't `config load $(config path)` work?
 TODO: You asked in the Nushell discussion page.
 
-TODO: Why does Eleventy place all these subsections after the
-TODO: Overview section instead of after the Configuration section?
-
 ### startup Setting
 
 The `startup` setting specifies a list of commands
@@ -376,35 +373,35 @@ Details about these data types can be found at {% aTargetBlank
 
 The following type conversions are supported:
 
-| From       | To         | Command                   |
-| ---------- | ---------- | ------------------------- |
-| `any`      | `string`   | pipe to `describe`        |
-| `binary`   | `string`   | pipe to `???`             |
-| `boolean`  | `string`   | pipe to `str from`        |
-| `date`     | `string`   | pipe to `str from`        |
-| `decimal`  | `string`   | pipe to `str from`        |
-| `duration` | `string`   | pipe to `str from` \*     |
-| `filesize` | `string`   | pipe to `str from`        |
-| `int`      | `string`   | pipe to `str from`        |
-| `line`     | `string`   | pipe to `???`             |
-| `list`     | `string`   | pipe to `str collect`     |
-| `path`     | `string`   | pipe to `???`             |
-| `pattern`  | `string`   | pipe to `???`             |
-| `range`    | `string`   | pipe to `???`             |
-| `row`      | `string`   | pipe to `???`             |
-| `string`   | `binary`   | pipe to `???`             |
-| `string`   | `boolean`  | pipe to `???`             |
-| `string`   | `date`     | pipe to `str to-datetime` |
-| `string`   | `decimal`  | pipe to `str to-decimal`  |
-| `string`   | `duration` | pipe to `???`             |
-| `string`   | `filesize` | pipe to `???`             |
-| `string`   | `int`      | pipe to `str to-int`      |
-| `string`   | `list`     | pipe to `???`             |
-| `string`   | `path`     | pipe to `???`             |
-| `string`   | `range`    | pipe to `???`             |
-| `string`   | `row`      | pipe to `???`             |
-| `string`   | `table`    | pipe to `???`             |
-| `table`    | `string`   | pipe to ``                |
+| From       | To         | Command                                            |
+| ---------- | ---------- | -------------------------------------------------- |
+| `any`      | `string`   | pipe to `describe`                                 |
+| `binary`   | `string`   | pipe to `???`                                      |
+| `boolean`  | `string`   | pipe to `str from`                                 |
+| `date`     | `string`   | pipe to `str from`                                 |
+| `decimal`  | `string`   | pipe to `str from`                                 |
+| `duration` | `string`   | pipe to `str from` \*                              |
+| `filesize` | `string`   | pipe to `str from`                                 |
+| `int`      | `string`   | pipe to `str from`                                 |
+| `line`     | `string`   | pipe to `???`                                      |
+| `list`     | `string`   | pipe to `str collect` if the list contains strings |
+| `path`     | `string`   | pipe to `???`                                      |
+| `pattern`  | `string`   | pipe to `???`                                      |
+| `range`    | `string`   | pipe to `???`                                      |
+| `row`      | `string`   | pipe to `???`                                      |
+| `string`   | `binary`   | pipe to `???`                                      |
+| `string`   | `boolean`  | pipe to `???`                                      |
+| `string`   | `date`     | pipe to `str to-datetime`                          |
+| `string`   | `decimal`  | pipe to `str to-decimal`                           |
+| `string`   | `duration` | pipe to `???`                                      |
+| `string`   | `filesize` | pipe to `???`                                      |
+| `string`   | `int`      | pipe to `str to-int`                               |
+| `string`   | `list`     | pipe to `???`                                      |
+| `string`   | `path`     | pipe to `???`                                      |
+| `string`   | `range`    | pipe to `???`                                      |
+| `string`   | `row`      | pipe to `???`                                      |
+| `string`   | `table`    | pipe to `???`                                      |
+| `table`    | `string`   | pipe to ``                                         |
 
 \* THIS GIVES AN ERROR!
 
@@ -1424,14 +1421,14 @@ See {% aTargetBlank
 
 The following table shows the Nushell equivalent of some common Bash commands.
 
-| Bash                   | Nushell                           | Description                                                                  |
-| ---------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
-| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`               | creates directory structure, including any missing directories               |
-| `command > file-path`  | `command \| save --raw file-path` | saves command output to a file<br>without converting based on file extension |
-| ``                     | ``                                |                                                                              |
-| ``                     | ``                                |                                                                              |
-| ``                     | ``                                |                                                                              |
-| ``                     | ``                                |                                                                              |
+| Bash                   | Nushell                                  | Description                                                                  |
+| ---------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
+| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`                      | creates directory structure, including any missing directories               |
+| `command > file-path`  | `command \| save --raw file-path`        | saves command output to a file<br>without converting based on file extension |
+| `man command`          | `help command` only for Nushell commands |                                                                              |
+| ``                     | ``                                       |                                                                              |
+| ``                     | ``                                       |                                                                              |
+| ``                     | ``                                       |                                                                              |
 
 The command whose output is piped in the `save` command must produce a string.
 For example, `date now | save --raw timestamp.txt` does not work,
@@ -1474,11 +1471,10 @@ containing the following and then enter `autoenv trust`:
 ```toml
 [env]
 NODE_ENV = "development"
-
-[scripts]
-entryscripts = ["echo 'Welcome to airline-reservations!'"]
-exitscripts = ["echo 'Goodbye from airline-reservations!'"]
 ```
+
+Currently the `echo` command does not write to stdout when run from
+`entryscripts` or `exitscripts`.
 
 In the `~/projects/bank-accounts` directory, create the file `.nu-env`
 containing the following and then enter `autoenv trust`:
@@ -1486,16 +1482,10 @@ containing the following and then enter `autoenv trust`:
 ```toml
 [env]
 NODE_ENV = "production"
-
-[scripts]
-entryscripts = ["echo 'Welcome to bank-accounts!'"]
-exitscripts = ["echo 'Goodbye from bank-accounts!'"]
 ```
 
-Now `cd` to each of these directories and verify the expected output
-and that the `NODE_ENV` environment variable is set to the expected value.
-
-TODO: THIS IS NOT WORKING!
+Now `cd` to each of these directories and verify that
+the `NODE_ENV` environment variable is set to the expected value.
 
 For more details on this feature, enter `help autoenv`.
 

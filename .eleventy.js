@@ -4,7 +4,7 @@ const navigationPlugin = require('@11ty/eleventy-navigation');
 const syntaxHighlightPlugin = require('@11ty/eleventy-plugin-syntaxhighlight');
 const fs = require('fs');
 const markdownItAnchor = require('markdown-it-anchor');
-const tocPlugin = require('eleventy-plugin-toc');
+const tocPlugin = require('eleventy-plugin-nesting-toc');
 const pkg = require('./package.json');
 
 /*
