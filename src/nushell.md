@@ -65,8 +65,11 @@ Nushell commands are often chained together using the pipe (|) character.
 The output of the command on the left of a pipe
 is used as the input of the command on the right.
 Nushell refers to these sequences of commands as "pipelines".
+
 Command pipelines entered in the shell must be on a single line,
 but inside scripts lines that end with `|` continue on the next line.
+Nushell does not support using `\` as a line continuation character
+like in other shells such as Bash.
 
 Commands that take no input and produce output
 are referred to as "inputs" or "sources".
@@ -350,22 +353,24 @@ Nushell supports many primitive and structured data types.
 | `int`       | whole numbers with infinite precision                                                          |
 | `line`      | a string with an OS-dependent line ending                                                      |
 | list        | sequence of values of any type                                                                 |
-| `number`    | `int` or `decimal`; floating point numbers with infinite precision                             |
+| `number`    | `int` or `decimal`, both with infinite precision                                               |
 | `path`      | platform-independent path to a file or directory                                               |
 | `pattern`   | glob pattern that can include `*` wildcard and `**` for traversing directories                 |
 | `range`     | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive); use 2 dots, not 3        |
 | row         | list where each value represents a column with an associated name                              |
 | `string`    | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
 | `table`     | list of rows; returned by many Nushell commands                                                |
-| `unit`      | number with a unit (ex. 3mb)                                                                   |
 
 To see the type of an expression, pipe it to the `describe` command.
 For example, `date now | describe` outputs `date`.
-TODO: Ask about the rest of this paragraph.
+
 Values of type of `int` are reported as `integer`.
+This is likely a bug. See {% aTargetBlank
+"https://github.com/nushell/nushell/issues/3206", "issue 3206" %}.
+
 The following types are never output by the `describe` command:
-`number`, list, `pattern`, `range`, `table`, and `unit`.
-Values of type `unit` are reported as either `duration` or `filesize`.
+`number`, list, `pattern`, `range`, and `table`.
+TODO: Perhaps the `describe` command should be modified to report these types.
 
 Details about these data types can be found at {% aTargetBlank
 "https://www.nushell.sh/book/types_of_data.html", "Types of data" %}.
@@ -373,6 +378,8 @@ Details about these data types can be found at {% aTargetBlank
 ### Type Conversions
 
 The following type conversions are supported:
+
+TODO: Fill in the ??? in this table.
 
 | From       | To         | Command                                            |
 | ---------- | ---------- | -------------------------------------------------- |
@@ -406,13 +413,8 @@ The following type conversions are supported:
 
 \* THIS GIVES AN ERROR!
 
-TODO: How can you get the start and end of a `range`?
-
-TODO: Is there no such thing as a value of type `number`?
-TODO: Maybe it is always either `int` or `decimal`.
-
-TODO: Is there no such thing as a value of type `unit`?
-TODO: Maybe it is always either `duration` or `filesize`.
+The get the starting and ending values of a `range`,
+pipe it to the `first` and `last` commands.
 
 The `echo` command is often used to
 feed the initial value into a command pipeline.
@@ -433,10 +435,9 @@ For example:
 ```bash
 let x = 19; echo `x is {{$x}}`
 
-#TODO: Why doesn't this work?
 let x = 3
 let y = 5
-echo `product of {{$x}} and {{$y}} is {{= $x * $y}}`
+echo `product of {{$x}} and {{$y}} is {{$(= $x * $y)}}`
 ```
 
 {% endraw %}
@@ -1456,12 +1457,12 @@ The following table shows the Nushell equivalent of some common Bash commands.
 
 | Bash                   | Nushell                                  | Description                                                                  |
 | ---------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
-| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`                      | creates directory structure, including any missing directories               |
-| `command > file-path`  | `command \| save --raw file-path`        | saves command output to a file<br>without converting based on file extension |
 | `man command`          | `help command` only for Nushell commands |                                                                              |
-| ``                     | ``                                       |                                                                              |
-| ``                     | ``                                       |                                                                              |
-| ``                     | ``                                       |                                                                              |
+| `$PATH`                | `$nu.path`                               | list of directories search for executables                                   |
+| `cat file-path`        | `open --raw file-path`                   | print the contents of a file; omit `--raw` to output structured data         |
+| `command > file-path`  | `command \| save --raw file-path`        | saves command output to a file<br>without converting based on file extension |
+| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`                      | creates directory structure, including any missing directories               |
+| cmd1 && cmd2           | cmd1; cmd2                               | run cmd1 and then only run cmd2 if cmd1 was successful                       |
 
 The command whose output is piped in the `save` command must produce a string.
 For example, `date now | save --raw timestamp.txt` does not work,
