@@ -128,6 +128,7 @@ Configuration settings can be changed by editing this file
 or using the `config` subcommands described below.
 To edit the config file with Vim, enter `vim $(config path)`.
 To edit the config file with VS Code, enter `code $(config path)`.
+Changes to the config file take effect immediately in the current shell session.
 
 Some Nushell configuration settings are top-level
 and appear in a specific TOML section.
@@ -158,6 +159,9 @@ These are summarized in the table below.
 | `config remove {name}`                 | removes a specific setting                      |
 | `config load {file-path}`              | loads settings from a file                      |
 
+Note that changes to the config file at `$(config path)`
+take effect immediately. Using `config load` is not required.
+
 Configuration changes affect future shell sessions, not the current one.
 
 For example, to change the prompt enter
@@ -184,9 +188,6 @@ to enable the use of [Starship](/blog/starship),
 which has many more options.
 It also has the advantage that it can be used with nearly any shell,
 which is great for users that sometimes switch between shells.
-
-TODO: Why doesn't `config load $(config path)` work?
-TODO: You asked in the Nushell discussion page.
 
 ### startup Setting
 
@@ -671,6 +672,40 @@ An expression is in math mode if it begins with `=`.
 Some commands, such as `where` are automatically evaluated in math mode.
 
 For example, `let a = 2; let b = 3; = $a * $b` outputs `6`.
+
+## Working with numbers
+
+Many of the operators listed in the previous section operate on numbers.
+
+The `inc` command has three uses.
+
+The first use of the `inc` command is to
+return a value that is one higher that the piped in value.
+For example, `echo 2 | inc` gives `3`.
+Since variables are immutable,
+this cannot be used to increment the value in a variable.
+
+The second use of the `inc` command is to increment all the `int` values
+in a given table column if all the values in the column are of type `int`.
+For example, `echo [[Name Size]; [Mark 33] [Tami 28]] | inc Size`
+results in a table where the values in the "Size" column are 34 and 29.
+
+The third use of the `inc` command is to increment
+a specify part of a semantic version number
+that includes major, minor, and patch parts.
+For example:
+
+```bash
+echo 1.2.3 | inc -M # increments major resulting in 2.0.0
+echo 1.2.3 | inc -m # increments minor resulting in 1.3.0
+echo 1.2.3 | inc -p # increments patch resulting in 1.2.4
+```
+
+There is no `dec` command for decrementing values.
+
+## Working with URLs
+
+TODO: Describe the `fetch` and `post` commands.
 
 ## Common Commands
 
@@ -1221,6 +1256,8 @@ Many Nushell commands operate on tables.
 | `select`                   | specifies columns to be retained by name and their order         |
 | `shuffle`                  | shuffles the rows randomly                                       |
 | `skip n`                   | skips the first n rows (n defaults to 1)                         |
+| `skip until condition`     | skips runs until the condition is met (alternative to `where`)   |
+| `skip while condition`     | skips runs while the condition is met (alternative to `where`)   |
 | `sort-by`                  | sorts rows on given columns                                      |
 | `split-by`                 | ?                                                                |
 | `table`                    | views pipeline output as a table                                 |
@@ -1242,7 +1279,7 @@ sorts the files from largest to smallest,
 and only outputs the three largest files:
 
 ```bash
-ls *.ts | select name size | sort-by size | reverse | first 3
+ls *.ts | select name size | sort-by -r size | first 3
 ```
 
 This produces output similar to the following:
@@ -1275,10 +1312,6 @@ ls *.ts | sort-by size | reverse | first 3 | get name
 The `get` command is especially useful when the type of a field is "table".
 The key can be arbitrarily deep with sub-keys separated by periods.
 For example, `sys | get host.sessions | where name == 'root' | get groups`.
-
-## Working with URLs
-
-TODO: Describe the `fetch` and `post` commands.
 
 ## Plugins
 
