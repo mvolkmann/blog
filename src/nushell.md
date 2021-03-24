@@ -209,7 +209,7 @@ startup = [
 
 Aliases that use the "cd" command above currently causes Nushell to crash.
 See {% aTargetBlank "https://github.com/nushell/nushell/issues/3138",
-"this issue" %}.
+"issue 3138" %}.
 
 ### table_mode Setting
 
@@ -500,8 +500,6 @@ let colors = [red green blue]
 The `empty?` command is used to test whether a string, list, or table is empty.
 For example:
 
-TODO: Add examples of testing strings and tables.
-
 ```bash
 # Strings
 let name = "Mark"
@@ -573,16 +571,17 @@ echo $scores | where { = $it.Name == 'Tami'} | get Score # 21
 Single-row tables can be used like objects in other languages.
 For example:
 
-```bash
+````bash
 let data = [[color flavor]; [yellow vanilla]]
 echo $data.flavor # outputs vanilla
 
-However, it is currently very picky about
+Nushell is currently very picky about
 splitting table data over multiple lines.
-TODO: See your json.nu example.
+The newlines in the table definition below break it!
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3186",
+"issue 3186" %}.
 
-# The newlines in the table definition below break it!
-# See https://github.com/nushell/nushell/issues/3186.
+```bash
 let sports = [
   [name players];
   [baseball 9]
@@ -593,9 +592,11 @@ let sports = [
 let sport = basketball
 let players = $(echo $sports | where name == $sport | get players)
 echo `The number of active players in {{$sport}} is {{$players}}.`
-```
+````
 
-The following example demonstrates using nested tables.
+Tables can contain nested tables.
+Note the placement of newlines in the example below
+which avoids the issue described above.
 Note the use of `to json` to generate JSON from a table.
 
 ```bash
@@ -706,7 +707,31 @@ There is no `dec` command for decrementing values.
 
 ## Working with URLs
 
-TODO: Describe the `fetch` and `post` commands.
+The `fetch` command can be used to get data from a URL.
+The website {% aTargetBlank
+"https://jsonplaceholder.typicode.com", "JSONPlaceholder" %}
+provides access to free sample JSON data.
+The following example gets data about TODOs from this site.
+
+```bash
+fetch https://jsonplaceholder.typicode.com/todos |
+  where userId == 5 && completed == $false |
+  sort-by title
+```
+
+The `post` command sends an HTTP POST requests to a server
+and returns the response as a table.
+The following example simulates creating a TODO resource
+using the JSONPlaceholder site.
+This particular service just simulates creating a resource.
+
+```bash
+let json = '{"title": "get milk", "userId": 5}"'
+post https://jsonplaceholder.typicode.com/todos $json
+```
+
+Nushell does not currently provide commands
+to send PUT, PATCH, or DELETE requests.
 
 ## Common Commands
 
@@ -1231,17 +1256,17 @@ Many Nushell commands operate on tables.
 | `flatten`                  | flattens a table                                                 |
 | `format`                   | formats columns into a string                                    |
 | `from {format}`            | parses a given file format into a table                          |
-| `get {column}`             | gets the content of a given column name as a table               |
-| `group-by`                 | STUDY THIS                                                       |
+| `get {column-name}`        | gets the content of a given column name as a table               |
+| `group-by`                 | TODO: STUDY THIS                                                 |
 | `headers`                  | uses the first row as column names                               |
-| `histogram`                | STUDY THIS                                                       |
+| `histogram`                | TODO: STUDY THIS                                                 |
 | `insert`                   | inserts a column                                                 |
 | `keep n`                   | keeps the first n rows (n defaults to 1); same as `first`?       |
 | `last n`                   | show only the last n rows (n defaults to 1)                      |
 | `lines`                    | splits a string of lines into rows                               |
 | `match`                    | filter rows using a regular expression                           |
-| `merge`                    | merges tables; STUDY THIS                                        |
-| `move`                     | moves columns; STUDY THIS                                        |
+| `merge`                    | merges tables; TODO: STUDY THIS                                  |
+| `move`                     | moves columns; TODO: STUDY THIS                                  |
 | `nth`                      | keep or skip specified rows                                      |
 | `parse`                    | parses columns from a string using a pattern                     |
 | `pivot`                    | swaps the rows and columns                                       |
@@ -1254,7 +1279,7 @@ Many Nushell commands operate on tables.
 | `roll n`                   | rolls the bottom n rows to the top (n defaults to 1)             |
 | `rotate`                   | rotates the table 90 degrees clockwise; can apply multiple times |
 | `rotate counter-clockwise` | rotates the table 90 degrees counter-clockwise                   |
-| `select`                   | specifies columns to be retained by name and their order         |
+| `select {column-names}`    | specifies columns to be retained by name and their order         |
 | `shuffle`                  | shuffles the rows randomly                                       |
 | `skip n`                   | skips the first n rows (n defaults to 1)                         |
 | `skip until condition`     | skips runs until the condition is met (alternative to `where`)   |
@@ -1313,6 +1338,15 @@ ls *.ts | sort-by size | reverse | first 3 | get name
 The `get` command is especially useful when the type of a field is "table".
 The key can be arbitrarily deep with sub-keys separated by periods.
 For example, `sys | get host.sessions | where name == 'root' | get groups`.
+
+The following example demonstrates getting the headings from a table.
+TODO: Is this the best way?
+
+```bash
+echo $my-table | first | pivot | select Column0
+```
+
+TODO: Is there a command get a column by its index rather than its name?
 
 ## Plugins
 
