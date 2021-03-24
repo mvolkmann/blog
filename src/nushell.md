@@ -1291,7 +1291,7 @@ Many Nushell commands operate on tables.
 | `uniq`                     | gets unique rows                                                 |
 | `update`                   | updates data in a given column                                   |
 | `where`                    | specifies a condition rows must meet to render                   |
-| `wrap`                     | wraps data in a table                                            |
+| `wrap`                     | creates a table column from its data and a name                  |
 
 The `sort-by` command accepts
 the `--insensitive` flag to make the sort case-insensitive and
