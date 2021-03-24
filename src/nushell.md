@@ -1389,6 +1389,8 @@ The output produced by this example is:
 ╰───┴──────┴───────┴────────┴───────────╯
 ```
 
+TODO: Is there a way to add rows to a table?
+
 ## Plugins
 
 Nushell plugins add new commands.

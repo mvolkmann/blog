@@ -13,6 +13,10 @@ This removes the need to customize the prompt in shell-specific ways.
 It can be configured in one place for all shells,
 which is great for users that utilize multiple shells.
 
+Starship was inspired by {% aTargetBlank
+"https://github.com/denysdovhan/spaceship-prompt", "spaceship-prompt" %}
+which has similar functionality, but only for Zsh.
+
 Starship is implemented in Rust, so it is very fast.
 
 ## Installing
