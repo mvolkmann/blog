@@ -1265,7 +1265,7 @@ Many Nushell commands operate on tables.
 | `last n`                   | show only the last n rows (n defaults to 1)                      |
 | `lines`                    | splits a string of lines into rows                               |
 | `match`                    | filter rows using a regular expression                           |
-| `merge`                    | merges tables; TODO: STUDY THIS                                  |
+| `merge`                    | merges tables by adding columns                                  |
 | `move`                     | moves columns; TODO: STUDY THIS                                  |
 | `nth`                      | keep or skip specified rows                                      |
 | `parse`                    | parses columns from a string using a pattern                     |
@@ -1347,6 +1347,47 @@ echo $my-table | first | pivot | select Column0
 ```
 
 TODO: Is there a command get a column by its index rather than its name?
+
+The columns of one table can be added to another to produce a new table
+using the `merge` command. For example:
+
+```bash
+let t1 = [[name score]; [Mark 19] [Tami 21]]
+echo $t1
+
+# Add a single column.
+let column = $(echo [yellow blue] | wrap color)
+echo $t1 | merge { echo $column }
+
+# Add all the columns from another table.
+let t2 = [[color flavor]; [yellow vanilla] [blue chocolate]]
+echo $t1 | merge { echo $t2 }
+```
+
+The output produced by this example is:
+
+```text
+╭───┬──────┬───────╮
+│ # │ name │ score │
+├───┼──────┼───────┤
+│ 0 │ Mark │    19 │
+│ 1 │ Tami │    21 │
+╰───┴──────┴───────╯
+
+╭───┬──────┬───────┬────────╮
+│ # │ name │ score │ color  │
+├───┼──────┼───────┼────────┤
+│ 0 │ Mark │    19 │ yellow │
+│ 1 │ Tami │    21 │ blue   │
+╰───┴──────┴───────┴────────╯
+
+╭───┬──────┬───────┬────────┬───────────╮
+│ # │ name │ score │ color  │ flavor    │
+├───┼──────┼───────┼────────┼───────────┤
+│ 0 │ Mark │    19 │ yellow │ vanilla   │
+│ 1 │ Tami │    21 │ blue   │ chocolate │
+╰───┴──────┴───────┴────────┴───────────╯
+```
 
 ## Plugins
 
