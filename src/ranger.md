@@ -8,8 +8,8 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://ranger.github.io", "Range" %}
 is a Vim-inspired, terminal-based file manager.
-But don't despair if you aren't a fan of Vim.
-Use of Vim keybindings is not required.
+But use of the Vim keybindings is not required, so it is
+useful even if you haven't internalized those keybindings.
 
 See the {% aTargetBlank
 "https://github.com/ranger/ranger/wiki/Official-user-guide",
