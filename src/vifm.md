@@ -139,6 +139,8 @@ Finally, restart `vifm` for the change to take effect.
 To display icons before files of specific types
 add lines like the following in the `vifmrc` configuration file
 and restart `vifm`.
+Note that file types are surrounded by single colons
+and file patterns are surrounded by double colons.
 
 ```text
 set classify='  :dir:'
