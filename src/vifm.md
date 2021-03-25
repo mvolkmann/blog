@@ -46,6 +46,7 @@ If they are not specified, it starts with
 both panes showing the current directory.
 However, Vifm remembers the last directory visited in each pane
 and restores these in subsequent sessions.
+To force starting in the current directory, start with `vifm .`.
 
 To exit Vifm, enter `:q` just like quitting Vim.
 
@@ -57,6 +58,11 @@ To exit Vifm, enter `:q` just like quitting Vim.
 | previous item in current directory | `k` or up arrow             |
 | into child directory               | `l` or right arrow or enter |
 | into parent directory              | `h` or left arrow           |
+
+The status bar at the bottom of the window
+shows information about the file or directory under the cursor.
+This includes the read/write/execute permissions, owner:group,
+size, and last modified date and time.
 
 To open the item the cursor,
 press `l`, the right arrow, or return.
@@ -87,7 +93,7 @@ The term "item" refers to a file or directory, often the one under the cursor.
 
 | Task                                 | Key Binding            | Notes                                    |
 | ------------------------------------ | ---------------------- | ---------------------------------------- |
-| directory - change                   | `:cd path`             |                                          |
+| directory - change                   | `:cd path`             | can use environment variables in path    |
 | directory - create                   | `:mkdir name`          |                                          |
 | file - create                        | `:touch name`          |                                          |
 | file - edit                          | enter                  | `:q` to quit editing                     |
@@ -124,6 +130,28 @@ into the `~/.config/vifm/colors` directory.
 Then edit `~/.config/vifm/vifmrc` and change the `colorscheme` setting.
 For example, `colorscheme desert`.
 Finally, restart `vifm` for the change to take effect.
+
+## Icons
+
+To display icons before files of specific types
+add lines like the following in the `vifmrc` configuration file
+and restart `vifm`.
+
+```text
+set classify='  :dir:'
+set classify+='🏃 :exe:'
+set classify+=' :link:' " link
+set classify+=' ::*.css::' " CSS
+set classify+=' ::*.go::' " Go
+set classify+=' ::*.html::' " HTML
+set classify+=' ::*.java::' " Java
+set classify+=' ::*.js::' " JavaScript
+set classify+=' ::*.md::' " Markdown
+set classify+=' ::*.py::' " Python
+set classify+=' ::*.rb::' " Ruby
+set classify+=' ::*.rs::' " Rust
+set classify+=' ::*.sass::' " Sass
+```
 
 ## Questions
 
