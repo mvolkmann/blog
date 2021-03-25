@@ -18,21 +18,15 @@ For key bindings see the
 {% aTargetBlank "https://vifm.info/cheatsheets.shtml", "Cheatsheet" %}.
 
 For color schemes see the
-{% aTargetBlank "https://vifm.info/colorschemes.shtml", "Cheatsheet" %}.
+{% aTargetBlank "https://vifm.info/colorschemes.shtml", "Color Schemes" %}.
 
 ## Installing
 
+See the "Download link" at the bottom of the
+{% aTargetBlank "https://vifm.info", "home page" %}
+for downloading the source or Windows executables.
+
 To install Vifm in macOS, install Homebrew and enter `brew install vifm`.
-To run it, enter `vifm`.
-
-## Help
-
-For help, enter `:help` or just `:h`.
-To exit help, enter `:q`.
-
-## Configuring
-
-By default `vifm` is configured in the file `~/.vifn/vifmrc`.
 
 ## Launching
 
@@ -49,6 +43,11 @@ and restores these in subsequent sessions.
 To force starting in the current directory, start with `vifm .`.
 
 To exit Vifm, enter `:q` just like quitting Vim.
+
+## Help
+
+For help, enter `:help` or just `:h`.
+To exit help, enter `:q`.
 
 ## Navigating
 
@@ -120,6 +119,10 @@ The term "item" refers to a file or directory, often the one under the cursor.
 | pane - split vertical                | `vs` or `ctrl-w v`     | also switches from 1 to 2 panes          |
 | preview mode - toggle                | `w`                    | changes 2nd pane to show preview of item |
 | preview pane - toggle focus          | shift-tab              | can navigate up and down in preview pane |
+
+## Configuring
+
+By default `vifm` is configured in the file `~/.vifm/vifmrc`.
 
 ## Color Schemes
 
