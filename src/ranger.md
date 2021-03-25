@@ -85,38 +85,27 @@ opens a line at the bottom for typing a command just like in Vim.
 
 Commonly used commands are described in the table below.
 
-| Command                      | Description                                                                    |
-| ---------------------------- | ------------------------------------------------------------------------------ |
-| `cd dir-path`                | changes current directory being displayed;<br>cannot use environment variables |
-| `copy`                       | copies item cursor or those selected                                           |
-| `cut`                        | cuts item cursor or those selected                                             |
-| `delete`                     | deletes item cursor or those selected                                          |
-| `edit`                       | edits file under cursor using Vim                                              |
-| `exit`                       | exits ranger                                                                   |
-| `grep text`                  | searches for text in selected files and directories                            |
-| `help`                       | displays ranger help                                                           |
-| `linemode mode`              | TODO: What are the supported modes?                                            |
-| `mkdir dir-name`             | creates a directory                                                            |
-| `paste_ext`                  | like `paste`, but adds a unique suffix to name if it already exists            |
-| `paste`                      | pastes files or directories that were copied or cut                            |
-| `rename new-name`            | renames item cursor                                                            |
-| `touch file-name`            | creates a file                                                                 |
-| `trash`                      | moves item cursor to system trash                                              |
-| `yank [name \| dir \| path]` | copies name, directory, or path of item cursor to clipboard                    |
+| Command                   | Key Binding | Description                                                                                                 |
+| ------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
+| `cd dir-path`             |             | changes current directory being displayed;<br>cannot use environment variables                              |
+| `copy [set\|add\|remove]` | `yy`        | copies cursor item or selected items;<br>argument defaults to `set`                                         |
+| `cut [set\|add\|remove]`  | `dd`        | cuts cursor item or selected items;<br>argument defaults to `set`                                           |
+| `delete`                  | `dD`        | deletes cursor item or selected items;<br>requests confirmation for non-empty directories or multiple files |
+| `edit`                    | enter       | edits file under cursor using Vim                                                                           |
+| `exit`                    |             | exits ranger                                                                                                |
+| `grep text`               |             | searches for text in selected files and directories                                                         |
+| `help`                    |             | displays ranger help                                                                                        |
+| `linemode mode`           |             | TODO: What are the supported modes?                                                                         |
+|                           | space       | toggles mark of cursor item                                                                                 |
+| `mkdir dir-name`          |             | creates a directory                                                                                         |
+| `paste_ext`               |             | like `paste`, but adds a unique suffix to name if it already exists                                         |
+| `paste`                   | `pp`        | pastes files or directories that were copied or cut                                                         |
+| `rename new-name`         | `cw`        | renames cursor item                                                                                         |
+| `touch file-name`         |             | creates a file                                                                                              |
+| `trash`                   |             | moves cursor item to system trash                                                                           |
+| `yank [name\|dir\|path]`  |             | copies name, directory, or path of cursor item to clipboard                                                 |
 
-## File Operations
-
-| Operation             | Keystrokes                                                                              |
-| --------------------- | --------------------------------------------------------------------------------------- |
-| copy file             | `yy` (like yanking a line in Vim) or<br>`:copy` (default argument is `add`)             |
-| cut file              | `dd` (like deleting a line in Vim) or<br>`:cut` (default argument is `add`)             |
-| delete file           | `dD` or `:delete`;<br>requests confirmation for non-empty directories or multiple files |
-| edit file             | enter or `:edit`                                                                        |
-| paste file            | `pp` (like pasting a line in Vim) or `:paste`                                           |
-| rename file           | `cw` (like change word in Vim),<br>`A` (append at end), or `I` (insert at start)        |
-| toggle file selection | space (can select multiple files)                                                       |
-| create directory      | `:mkdir name`                                                                           |
-| delete directory      | `:delete`                                                                               |
+TODO: Which commands operate on marked files?
 
 By default the copy, cut, and rename commands
 act on the file under the cursor.
@@ -128,3 +117,7 @@ navigate to it and press `pp`.
 
 After copying or cutting a file, its name is dimmed.
 To undo this, enter `:copy remove` or `:cut remove`.
+
+To bookmark a directory, navigate to it and
+press `m` followed by the letter to assign.
+To navigate to a bookmark, press backtick and the letter.
