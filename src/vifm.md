@@ -32,6 +32,12 @@ To install Vifm in macOS, install Homebrew and enter `brew install vifm`.
 
 To start Vifm, enter `vifm`.
 
+The current directory is identified in the top line.
+A status bar at the bottom displays information
+about the file or directory under the cursor.
+This includes the read/write/execute permissions, owner:group,
+size, and last modified date and time.
+
 Vifm displays two panes by default that are views of two directories.
 This makes it easy to copy and move files between directories.
 These directories can be specified as
@@ -47,6 +53,9 @@ To exit Vifm, enter `:q` just like quitting Vim.
 ## Help
 
 For help, enter `:help` or just `:h`.
+
+To open help and scroll to a specific command, enter `:help command`.
+
 To exit help, enter `:q`.
 
 ## Navigating
@@ -58,24 +67,13 @@ To exit help, enter `:q`.
 | into child directory               | `l` or right arrow or enter |
 | into parent directory              | `h` or left arrow           |
 
-The status bar at the bottom of the window
-shows information about the file or directory under the cursor.
-This includes the read/write/execute permissions, owner:group,
-size, and last modified date and time.
-
 To open the item the cursor,
 press `l`, the right arrow, or return.
 Text files are displayed in the right column.
 Non-text files are opened by their default application.
 For example, in macOS image files are opened in the Preview app.
-TODO: Verify this.
 
-To create a bookmark for the current directory,
-enter `:bmark` followed by a letter or press ???.
-To navigate to a bookmark, press ???.
-To list the current bookmarks, enter `:bmarks`.
-To delete a bookmark, enter ???.
-It seems like "marks" and "bookmarks" may be separate concepts.
+TODO: Configure Nushell to use Preview app for images.
 
 ## Functionality
 
@@ -92,6 +90,9 @@ The term "item" refers to a file or directory, often the one under the cursor.
 
 | Task                                 | Key Binding            | Notes                                    |
 | ------------------------------------ | ---------------------- | ---------------------------------------- |
+| bookmark - create                    | `:bmark name`          | creates bookmark for current directory   |
+| bookmark - list                      | `:bmarks`              | bookmark for current directory           |
+| bookmark - go                        | `:bmgo name`           |                                          |
 | directory - change                   | `:cd path`             | can use environment variables in path    |
 | directory - create                   | `:mkdir name`          |                                          |
 | file - create                        | `:touch name`          |                                          |
@@ -105,6 +106,7 @@ The term "item" refers to a file or directory, often the one under the cursor.
 | item - paste                         | `p`                    | after a delete or copy                   |
 | item - rename name and/or extension  | `cw`                   |                                          |
 | item - rename only name              | `cW`                   |                                          |
+| item - toggle selection              | `t`                    | TODO: How can you operate on selections? |
 | item - undo delete                   | `u`                    |                                          |
 | mark - create                        | `m` followed by letter | remembers selected item in directory     |
 | mark - delete under cursor in list   | `dd`                   |                                          |
@@ -161,5 +163,6 @@ set classify+=' ::*.sass::' " Sass
 ## Questions
 
 How do you copy or delete multiple items as a group?
+See "item - toggle selection".
 
 How do you search/grep inside vifm?
