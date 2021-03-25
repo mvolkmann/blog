@@ -7,7 +7,8 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://ranger.github.io", "Range" %}
-is a Vim-inspired, terminal-based file manager.
+is a Vim-inspired, terminal-based file manager
+that is implemented in Python.
 But use of the Vim keybindings is not required, so it is
 useful even if you haven't internalized those keybindings.
 
@@ -62,21 +63,17 @@ or a description of it.
 
 Navigation always occurs in the middle column.
 
-To move the cursor to the next file or directory in the middle column,
-press `j` or the down arrow.
+| Direction                          | Keys               |
+| ---------------------------------- | ------------------ |
+| next item in current directory     | `j` or down arrow  |
+| previous item in current directory | `k` or up arrow    |
+| into child directory               | `l` or right arrow |
+| edit file under cursor             | `l` or right arrow |
+| into parent directory              | `h` or left arrow  |
 
-To move the cursor to the previous file or directory in the middle column,
-press `k` or the up arrow.
-
-To open the item the cursor,
-press `l`, the right arrow, or return.
 Text files are displayed in the right column.
 Non-text files are opened by their default application.
 For example, in macOS image files are opened in the Preview app.
-
-To navigate to the parent directory, press `h` or the left arrow.
-
-To exit Ranger, press `q`, enter `:q`, or enter `:exit`.
 
 ## Commands
 
@@ -85,25 +82,26 @@ opens a line at the bottom for typing a command just like in Vim.
 
 Commonly used commands are described in the table below.
 
-| Command                   | Key Binding | Description                                                                                                 |
-| ------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------- |
-| `cd dir-path`             |             | changes current directory being displayed;<br>cannot use environment variables                              |
-| `copy [set\|add\|remove]` | `yy`        | copies cursor item or selected items;<br>argument defaults to `set`                                         |
-| `cut [set\|add\|remove]`  | `dd`        | cuts cursor item or selected items;<br>argument defaults to `set`                                           |
-| `delete`                  | `dD`        | deletes cursor item or selected items;<br>requests confirmation for non-empty directories or multiple files |
-| `edit`                    | enter       | edits file under cursor using Vim                                                                           |
-| `exit`                    |             | exits ranger                                                                                                |
-| `grep text`               |             | searches for text in selected files and directories                                                         |
-| `help`                    |             | displays ranger help                                                                                        |
-| `linemode mode`           |             | TODO: What are the supported modes?                                                                         |
-|                           | space       | toggles mark of cursor item                                                                                 |
-| `mkdir dir-name`          |             | creates a directory                                                                                         |
-| `paste_ext`               |             | like `paste`, but adds a unique suffix to name if it already exists                                         |
-| `paste`                   | `pp`        | pastes files or directories that were copied or cut                                                         |
-| `rename new-name`         | `cw`        | renames cursor item                                                                                         |
-| `touch file-name`         |             | creates a file                                                                                              |
-| `trash`                   |             | moves cursor item to system trash                                                                           |
-| `yank [name\|dir\|path]`  |             | copies name, directory, or path of cursor item to clipboard                                                 |
+| Command                   | Key Binding    | Description                                                                                                 |
+| ------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------- |
+| `cd dir-path`             |                | changes current directory being displayed;<br>cannot use environment variables                              |
+| `copy [set\|add\|remove]` | `yy`           | copies cursor item or selected items;<br>argument defaults to `set`                                         |
+| `cut [set\|add\|remove]`  | `dd`           | cuts cursor item or selected items;<br>argument defaults to `set`                                           |
+| `delete`                  | `dD`           | deletes cursor item or selected items;<br>requests confirmation for non-empty directories or multiple files |
+| `edit`                    | enter          | edits file under cursor using Vim                                                                           |
+| `exit`                    | `q` or `:q`    | exits ranger                                                                                                |
+| `grep text`               |                | searches for text in selected files and directories                                                         |
+| `help`                    |                | displays ranger help                                                                                        |
+| `linemode mode`           |                | TODO: What are the supported modes?                                                                         |
+| `mkdir dir-name`          |                | creates a directory                                                                                         |
+| `paste_ext`               |                | like `paste`, but adds a unique suffix to name if it already exists                                         |
+| `paste`                   | `pp`           | pastes files or directories that were copied or cut                                                         |
+| `rename new-name`         | `cw`           | renames cursor item                                                                                         |
+| `touch file-name`         |                | creates a file                                                                                              |
+| `trash`                   |                | moves cursor item to system trash                                                                           |
+| `yank [name\|dir\|path]`  |                | copies name, directory, or path of cursor item to clipboard                                                 |
+|                           | space          | toggles mark of cursor item                                                                                 |
+|                           | `zh` or delete | toggles display of hidden files                                                                             |
 
 TODO: Which commands operate on marked files?
 
