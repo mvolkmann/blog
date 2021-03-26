@@ -73,7 +73,9 @@ Text files are displayed in the right column.
 Non-text files are opened by their default application.
 For example, in macOS image files are opened in the Preview app.
 
-TODO: Configure Nushell to use Preview app for images.
+TODO: I tried to configure Nushell to use Preview app for images.
+TODO: I also tried to configure vifm to use imgcat.
+TODO: This works iTerm2, but not in tmux. There is issues file for this.
 
 ## Functionality
 

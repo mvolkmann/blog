@@ -103,6 +103,19 @@ In version 0.28.0 there are 105 Nushell commands.
 For help on a specific command,
 enter `help {command-name}` or {command-name} -h`.
 
+To search for commands whose name or help text contains given text,
+define the following custom command and pass the text to it.
+
+```bash
+def help-text [s: string] {
+  help commands |
+    select name description |
+    append $(help commands | get subcommands ) |
+    flatten |
+    where description =~ $s || name =~ $s
+}
+```
+
 When a command not defined by Nushell is encountered,
 the directories listed in the `path` configuration setting
 are searched to find a matching executable.
@@ -370,7 +383,9 @@ This is likely a bug. See {% aTargetBlank
 
 The following types are never output by the `describe` command:
 `number`, list, `pattern`, `range`, and `table`.
-TODO: Perhaps the `describe` command should be modified to report these types.
+Perhaps the `describe` command should be modified to report these types.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3206",
+"issue 3206" %}.
 
 Details about these data types can be found at {% aTargetBlank
 "https://www.nushell.sh/book/types_of_data.html", "Types of data" %}.
@@ -1242,56 +1257,56 @@ fetch https://jsonplaceholder.typicode.com/todos | where userId == 2 && complete
 
 Many Nushell commands operate on tables.
 
-| Command                    | Description                                                      |
-| -------------------------- | ---------------------------------------------------------------- |
-| `append`                   | appends a row                                                    |
-| `autoview`                 | renders data as a table or list                                  |
-| `compact`                  | removes empty rows                                               |
-| `count`                    | counts rows or list items                                        |
-| `drop n`                   | removes the last n rows (n defaults to 1)                        |
-| `drop column n`            | removes the last n columns (n defaults to 1)                     |
-| `each`                     | runs a block of code on each row                                 |
-| `every n`                  | show or skip every nth row                                       |
-| `first n`                  | show only the first n rows (n defaults to 1)                     |
-| `flatten`                  | flattens a table                                                 |
-| `format`                   | formats columns into a string                                    |
-| `from {format}`            | parses a given file format into a table                          |
-| `get {column-name}`        | gets the content of a given column name as a table               |
-| `group-by`                 | TODO: STUDY THIS                                                 |
-| `headers`                  | uses the first row as column names                               |
-| `histogram`                | TODO: STUDY THIS                                                 |
-| `insert`                   | inserts a column                                                 |
-| `keep n`                   | keeps the first n rows (n defaults to 1); same as `first`?       |
-| `last n`                   | show only the last n rows (n defaults to 1)                      |
-| `lines`                    | splits a string of lines into rows                               |
-| `match`                    | filter rows using a regular expression                           |
-| `merge`                    | merges tables by adding columns                                  |
-| `move`                     | moves columns; TODO: STUDY THIS                                  |
-| `nth`                      | keep or skip specified rows                                      |
-| `parse`                    | parses columns from a string using a pattern                     |
-| `pivot`                    | swaps the rows and columns                                       |
-| `prepend`                  | prepends a row                                                   |
-| `range`                    | gets a subset of rows                                            |
-| `reduce`                   | computes a single value from a list table                        |
-| `reject`                   | removes columns by name                                          |
-| `rename`                   | renames columns                                                  |
-| `reverse`                  | reverses the order of the rows                                   |
-| `roll n`                   | rolls the bottom n rows to the top (n defaults to 1)             |
-| `rotate`                   | rotates the table 90 degrees clockwise; can apply multiple times |
-| `rotate counter-clockwise` | rotates the table 90 degrees counter-clockwise                   |
-| `select {column-names}`    | specifies columns to be retained by name and their order         |
-| `shuffle`                  | shuffles the rows randomly                                       |
-| `skip n`                   | skips the first n rows (n defaults to 1)                         |
-| `skip until condition`     | skips runs until the condition is met (alternative to `where`)   |
-| `skip while condition`     | skips runs while the condition is met (alternative to `where`)   |
-| `sort-by`                  | sorts rows on given columns                                      |
-| `split-by`                 | ?                                                                |
-| `table`                    | views pipeline output as a table                                 |
-| `to {format}`              | converts a table to a given format such as json                  |
-| `uniq`                     | gets unique rows                                                 |
-| `update`                   | updates data in a given column                                   |
-| `where`                    | specifies a condition rows must meet to render                   |
-| `wrap`                     | creates a table column from its data and a name                  |
+| Command                    | Description                                                                                                               |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `append`                   | appends a row                                                                                                             |
+| `autoview`                 | renders data as a table or list                                                                                           |
+| `compact`                  | removes empty rows                                                                                                        |
+| `count`                    | counts rows or list items                                                                                                 |
+| `drop n`                   | removes the last n rows (n defaults to 1)                                                                                 |
+| `drop column n`            | removes the last n columns (n defaults to 1)                                                                              |
+| `each`                     | runs a block of code on each row                                                                                          |
+| `every n`                  | show or skip every nth row                                                                                                |
+| `first n`                  | show only the first n rows (n defaults to 1)                                                                              |
+| `flatten`                  | flattens a table                                                                                                          |
+| `format`                   | formats columns into a string                                                                                             |
+| `from {format}`            | parses a given file format into a table                                                                                   |
+| `get {column-name}`        | gets the content of a given column name as a table                                                                        |
+| `group-by`                 | creates multiple tables from one based on some grouping                                                                   |
+| `headers`                  | uses the first row as column names                                                                                        |
+| `histogram`                | creates a table with "value", "count", "percentage", and "frequency"<br>columns based on a given column in an input table |
+| `insert`                   | inserts a column                                                                                                          |
+| `keep n`                   | keeps the first n rows (n defaults to 1); same as `first`?                                                                |
+| `last n`                   | show only the last n rows (n defaults to 1)                                                                               |
+| `lines`                    | splits a string of lines into rows                                                                                        |
+| `match`                    | filter rows using a regular expression                                                                                    |
+| `merge`                    | merges tables by adding columns                                                                                           |
+| `move`                     | moves columns                                                                                                             |
+| `nth`                      | keep or skip specified rows                                                                                               |
+| `parse`                    | parses columns from a string using a pattern                                                                              |
+| `pivot`                    | swaps the rows and columns                                                                                                |
+| `prepend`                  | prepends a row                                                                                                            |
+| `range`                    | gets a subset of rows                                                                                                     |
+| `reduce`                   | computes a single value from a list table                                                                                 |
+| `reject`                   | removes columns by name                                                                                                   |
+| `rename`                   | renames columns                                                                                                           |
+| `reverse`                  | reverses the order of the rows                                                                                            |
+| `roll n`                   | rolls the bottom n rows to the top (n defaults to 1)                                                                      |
+| `rotate`                   | rotates the table 90 degrees clockwise; can apply multiple times                                                          |
+| `rotate counter-clockwise` | rotates the table 90 degrees counter-clockwise                                                                            |
+| `select {column-names}`    | specifies columns to be retained by name and their order                                                                  |
+| `shuffle`                  | shuffles the rows randomly                                                                                                |
+| `skip n`                   | skips the first n rows (n defaults to 1)                                                                                  |
+| `skip until condition`     | skips runs until the condition is met (alternative to `where`)                                                            |
+| `skip while condition`     | skips runs while the condition is met (alternative to `where`)                                                            |
+| `sort-by`                  | sorts rows on given columns                                                                                               |
+| `split-by`                 | TODO: Study                                                                                                               |
+| `table`                    | views pipeline output as a table                                                                                          |
+| `to {format}`              | converts a table to a given format such as json                                                                           |
+| `uniq`                     | gets unique rows                                                                                                          |
+| `update`                   | updates data in a given column                                                                                            |
+| `where`                    | specifies a condition rows must meet to render                                                                            |
+| `wrap`                     | creates a table column from its data and a name                                                                           |
 
 The `sort-by` command accepts
 the `--insensitive` flag to make the sort case-insensitive and
@@ -1348,6 +1363,48 @@ echo $my-table | first | pivot | select Column0
 
 TODO: Is there a command get a column by its index rather than its name?
 
+The rows of a table can be segregated into multiple tables
+using the `group-by` command.
+For example, the output of `ls` can be split into two tables
+where one contains rows with a type of "File"
+and the other contains rows with a type of "Dir".
+The following command produces a table with the columns "File" and "Dir"
+that contains a single row whose cells are themselves tables.
+
+```bash
+ls | group-by type
+```
+
+The following code outputs the nested tables:
+
+```bash
+let temp = $(ls | group-by type)
+echo $temp | get File
+echo $temp | get Dir
+```
+
+The `group-by` command can be passed a block
+that computes the value used to group the rows.
+The following example groups files based on their file extension:
+TODO: Why doesn't this work? You asked on Discord.
+TODO: It seems like group-by would need two arguments,
+TODO: the column name and the "grouper" block.
+
+```bash
+ls | group-by { = $it.name | cut -d'.' -f2 }
+```
+
+Table columns can be moved after or before another column.
+For example, by default the `ls` command outputs a type
+with the columns "name", "type", "size", and "modified".
+The following command moves the "type" and "size" columns
+to be after the "modified" column.
+It also reorders the "size" and "type" columns to the specified order.
+
+```bash
+ls | move size type --after modified
+```
+
 The columns of one table can be added to another to produce a new table
 using the `merge` command. For example:
 
@@ -1388,6 +1445,40 @@ The output produced by this example is:
 │ 1 │ Tami │    21 │ blue   │ chocolate │
 ╰───┴──────┴───────┴────────┴───────────╯
 ```
+
+The `histogram` command generates a histogram
+from the data in a given table row.
+For example:
+
+```bash
+# The newlines need to be placed like this
+# due to a parser bug.
+let data = [
+  [name color]; [
+  Mark yellow] [
+  Tami blue] [
+  Amanda green] [
+  Jeremy yellow] [
+  Sally blue] [
+  Sam yellow]
+]
+echo $data | get color | histogram
+```
+
+This produces the following table:
+
+```text
+╭───┬────────┬───────┬────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ # │ value  │ count │ percentage │ frequency                                                                                           │
+├───┼────────┼───────┼────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ 0 │ blue   │     2 │ 66.67%     │ ******************************************************************                                  │
+│ 1 │ green  │     1 │ 33.33%     │ *********************************                                                                   │
+│ 2 │ yellow │     3 │ 100.00%    │ *************************************************************************************************** │
+╰───┴────────┴───────┴────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
+The percentage values are double what they should be.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3215", "issue 3215" %}.
 
 TODO: Is there a way to add rows to a table?
 
