@@ -421,7 +421,7 @@ TODO: binary, line, path, pattern, row
 | `string`   | `duration` | pipe to `???`                                      |
 | `string`   | `filesize` | pipe to `???`                                      |
 | `string`   | `int`      | pipe to `str to-int`                               |
-| `string`   | `list`     | pipe to `???`                                      |
+| `string`   | `list`     | pipe to `split row`                                |
 | `string`   | `path`     | pipe to `???`                                      |
 | `string`   | `range`    | pipe to `???`                                      |
 | `string`   | `row`      | pipe to `???`                                      |
@@ -1261,7 +1261,7 @@ Many Nushell commands operate on tables.
 
 | Command                    | Description                                                                                                               |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `append`                   | appends a row                                                                                                             |
+| `append`                   | creates a new table by appending a single row to an existing table                                                        |
 | `autoview`                 | renders data as a table or list                                                                                           |
 | `compact`                  | removes empty rows                                                                                                        |
 | `count`                    | counts rows or list items                                                                                                 |
@@ -1275,7 +1275,7 @@ Many Nushell commands operate on tables.
 | `from {format}`            | parses a given file format into a table                                                                                   |
 | `get {column-name}`        | gets the content of a given column name as a table                                                                        |
 | `group-by`                 | creates multiple tables from one based on some grouping                                                                   |
-| `headers`                  | uses the first row as column names                                                                                        |
+| `headers`                  | creates a table from an existing one where the first row replaces the current column headers                              |
 | `histogram`                | creates a table with "value", "count", "percentage", and "frequency"<br>columns based on a given column in an input table |
 | `insert`                   | inserts a column                                                                                                          |
 | `keep n`                   | keeps the first n rows (n defaults to 1); same as `first`?                                                                |
@@ -1302,6 +1302,8 @@ Many Nushell commands operate on tables.
 | `skip until condition`     | skips runs until the condition is met (alternative to `where`)                                                            |
 | `skip while condition`     | skips runs while the condition is met (alternative to `where`)                                                            |
 | `sort-by`                  | sorts rows on given columns                                                                                               |
+| `split row`                | converts a string into a list of strings                                                                                  |
+| `split column`             | converts a list of strings into a table with generic "Column{n}" headers                                                  |
 | `split-by`                 | TODO: Study; I don't understand this one.                                                                                 |
 | `table`                    | views pipeline output as a table                                                                                          |
 | `to {format}`              | converts a table to a given format such as json                                                                           |
@@ -1394,6 +1396,15 @@ This produces the following output:
 TODO: How could you iterate over the rows of a table
 TODO: and add each one to another table? Use reduce and append?
 TODO: See `append-demo.nu`.
+
+The table in the previous example can be created from a string
+using the `split` and `headers` commands.
+
+```bash
+let data = "name red green blue|red 255 0 0|green 0 255 0|blue 0 0 255|purple 255 0 255"
+let colors = $(echo $data | split row "|" | split column " " | headers)
+echo $colors
+```
 
 The rows of a table can be segregated into multiple tables
 using the `group-by` command.
@@ -1532,7 +1543,7 @@ This plugin adds the `chart` command with the subcommands `bar` and `line`.
 To install this, enter `cargo install nu_plugin_chart`.
 
 Here is an example of creating both kinds of charts.
-TODO: Why doesn't this produce any output?
+TODO: Why doesn't this produce any output? See chart-demo.nu.
 
 ```bash
 let data = [[name score] [
