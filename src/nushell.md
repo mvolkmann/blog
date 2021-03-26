@@ -395,6 +395,8 @@ Details about these data types can be found at {% aTargetBlank
 The following type conversions are supported:
 
 TODO: Fill in the ??? in this table.
+TODO: How can you create values with these types?
+TODO: binary, line, path, pattern, row
 
 | From       | To         | Command                                            |
 | ---------- | ---------- | -------------------------------------------------- |
@@ -1300,7 +1302,7 @@ Many Nushell commands operate on tables.
 | `skip until condition`     | skips runs until the condition is met (alternative to `where`)                                                            |
 | `skip while condition`     | skips runs while the condition is met (alternative to `where`)                                                            |
 | `sort-by`                  | sorts rows on given columns                                                                                               |
-| `split-by`                 | TODO: Study                                                                                                               |
+| `split-by`                 | TODO: Study; I don't understand this one.                                                                                 |
 | `table`                    | views pipeline output as a table                                                                                          |
 | `to {format}`              | converts a table to a given format such as json                                                                           |
 | `uniq`                     | gets unique rows                                                                                                          |
@@ -1355,13 +1357,43 @@ The key can be arbitrarily deep with sub-keys separated by periods.
 For example, `sys | get host.sessions | where name == 'root' | get groups`.
 
 The following example demonstrates getting the headings from a table.
-TODO: Is this the best way?
 
 ```bash
 echo $my-table | first | pivot | select Column0
 ```
 
 TODO: Is there a command get a column by its index rather than its name?
+TODO: You asked on Discord on 3/26/21.
+
+A new table can be created by appending a new row. For example:
+
+```bash
+let primaryColors = [[name red green blue]; [
+  red 255 0 0] [
+  green 0 255 0] [
+  blue 0 0 255]
+]
+let purple = [[name red green blue]; [purple 255 0 255]]
+let colors = $(echo $primaryColors | append $purple)
+echo $colors
+```
+
+This produces the following output:
+
+```text
+╭───┬────────┬─────┬───────┬──────╮
+│ # │ name   │ red │ green │ blue │
+├───┼────────┼─────┼───────┼──────┤
+│ 0 │ red    │ 255 │     0 │    0 │
+│ 1 │ green  │   0 │   255 │    0 │
+│ 2 │ blue   │   0 │     0 │  255 │
+│ 3 │ purple │ 255 │     0 │  255 │
+╰───┴────────┴─────┴───────┴──────╯
+```
+
+TODO: How could you iterate over the rows of a table
+TODO: and add each one to another table? Use reduce and append?
+TODO: See `append-demo.nu`.
 
 The rows of a table can be segregated into multiple tables
 using the `group-by` command.
@@ -1389,6 +1421,7 @@ The following example groups files based on their file extension:
 TODO: Why doesn't this work? You asked on Discord.
 TODO: It seems like group-by would need two arguments,
 TODO: the column name and the "grouper" block.
+TODO: You asked on Discord on 3/25/21. JT thinks @andras_io would know.
 
 ```bash
 ls | group-by { = $it.name | cut -d'.' -f2 }
@@ -1480,8 +1513,6 @@ This produces the following table:
 The percentage values are double what they should be.
 See {% aTargetBlank "https://github.com/nushell/nushell/issues/3215", "issue 3215" %}.
 
-TODO: Is there a way to add rows to a table?
-
 ## Plugins
 
 Nushell plugins add new commands.
@@ -1494,6 +1525,26 @@ This plugin adds the `start` command that opens a given file
 using its default application.
 To install this, enter `cargo install nu_plugin_start`.
 Then open a new shell and enter `start file-path`.
+
+### nu_plugin_chart
+
+This plugin adds the `chart` command with the subcommands `bar` and `line`.
+To install this, enter `cargo install nu_plugin_chart`.
+
+Here is an example of creating both kinds of charts.
+TODO: Why doesn't this produce any output?
+
+```bash
+let data = [[name score] [
+  Mark 19] [
+  Tami 21] [
+  Amanda 17] [
+  Jeremy 15]
+]
+
+echo $data | chart bar [name score]
+echo $data | chart line [name score]
+```
 
 ## Default Shell
 
@@ -1635,11 +1686,6 @@ The following table shows the Nushell equivalent of some common Bash commands.
 The command whose output is piped in the `save` command must produce a string.
 For example, `date now | save --raw timestamp.txt` does not work,
 but `date now | str from | save --raw timestamp.txt` does.
-
-## Charts
-
-TODO: Learn about rendering bar and line charts with the `chart` command.
-TODO: Also see the `histogram` command.
 
 ## Per Directory Environment Variables
 
