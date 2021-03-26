@@ -123,6 +123,7 @@ The term "item" refers to a file or directory, often the one under the cursor.
 | pane - split vertical                | `vs` or `ctrl-w v`     | also switches from 1 to 2 panes          |
 | preview mode - toggle                | `w`                    | changes 2nd pane to show preview of item |
 | preview pane - toggle focus          | shift-tab              | can navigate up and down in preview pane |
+| shell - open in current directory    | `:shell`               | exit to return to `vifm`                 |
 
 ## Configuring
 
@@ -168,3 +169,6 @@ How do you copy or delete multiple items as a group?
 See "item - toggle selection".
 
 How do you search/grep inside vifm?
+
+How can you use `fileviewer` to configure
+image files to open in the Mac Preview app?
