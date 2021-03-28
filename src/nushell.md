@@ -1304,7 +1304,7 @@ Many Nushell commands operate on tables.
 | `sort-by`                  | sorts rows on given columns                                                                                               |
 | `split row`                | converts a string into a list of strings                                                                                  |
 | `split column`             | converts a list of strings into a table with generic "Column{n}" headers                                                  |
-| `split-by`                 | TODO: Study; I don't understand this one.                                                                                 |
+| `split-by`                 | creates a new table from one with nested tables where column headings are values of a given nested table heading          |
 | `table`                    | views pipeline output as a table                                                                                          |
 | `to {format}`              | converts a table to a given format such as json                                                                           |
 | `uniq`                     | gets unique rows                                                                                                          |
@@ -1358,14 +1358,20 @@ The `get` command is especially useful when the type of a field is "table".
 The key can be arbitrarily deep with sub-keys separated by periods.
 For example, `sys | get host.sessions | where name == 'root' | get groups`.
 
-The following example demonstrates getting the headings from a table.
+The following example demonstrates getting all the headings from a table.
 
 ```bash
-echo $my-table | first | pivot | select Column0
+echo $myTable | get
 ```
 
-TODO: Is there a command get a column by its index rather than its name?
-TODO: You asked on Discord on 3/26/21.
+Table columns can be accessed by their header name
+using the `get` and `select` commands,
+but there is no command to get a table column by its index.
+However, this can be done with the following pipeline:
+
+```bash
+echo $myTable | select $(echo $myTable | get | nth $columnIndex)
+```
 
 A new table can be created by appending a new row. For example:
 
@@ -1406,6 +1412,9 @@ let colors = $(echo $data | split row "|" | split column " " | headers)
 echo $colors
 ```
 
+The `split-by` command doesn't seem very useful.
+TODO: See `split-by-demo.nu`.
+
 The rows of a table can be segregated into multiple tables
 using the `group-by` command.
 For example, the output of `ls` can be split into two tables
@@ -1429,13 +1438,18 @@ echo $temp | get Dir
 The `group-by` command can be passed a block
 that computes the value used to group the rows.
 The following example groups files based on their file extension:
-TODO: Why doesn't this work? You asked on Discord.
-TODO: It seems like group-by would need two arguments,
-TODO: the column name and the "grouper" block.
-TODO: You asked on Discord on 3/25/21. JT thinks @andras_io would know.
 
 ```bash
-ls | group-by { = $it.name | cut -d'.' -f2 }
+ls | group-by { get name | path extension }
+```
+
+To see the contents of one of the nested tables, pipe this to `get ext-name`.
+
+Another way to see only the files whose name ends with certain characters is:
+TODO: Why doesn't this work? You asked on Discord on 3/27/21.
+
+```bash
+ls | where { echo $it.name | str ends-with "some-suffix" }
 ```
 
 Table columns can be moved after or before another column.
@@ -1543,10 +1557,9 @@ This plugin adds the `chart` command with the subcommands `bar` and `line`.
 To install this, enter `cargo install nu_plugin_chart`.
 
 Here is an example of creating both kinds of charts.
-TODO: Why doesn't this produce any output? See chart-demo.nu.
 
 ```bash
-let data = [[name score] [
+let data = [[name score]; [
   Mark 19] [
   Tami 21] [
   Amanda 17] [
@@ -1556,6 +1569,16 @@ let data = [[name score] [
 echo $data | chart bar [name score]
 echo $data | chart line [name score]
 ```
+
+After each chart is rendered, press enter to go to the next chart
+or exit if the last chart has been rendered.
+
+Unfortunately these plot the frequencies of the values
+and not values themselves.
+So the bar chart shows four bars at 100% because
+the values 19, 21, 17, and 15 each occur once.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3096",
+"issue 3096" %}.
 
 ## Default Shell
 
