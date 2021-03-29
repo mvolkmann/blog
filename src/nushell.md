@@ -588,9 +588,10 @@ echo $scores | where { = $it.Name == 'Tami'} | get Score # 21
 Single-row tables can be used like objects in other languages.
 For example:
 
-````bash
+```bash
 let data = [[color flavor]; [yellow vanilla]]
 echo $data.flavor # outputs vanilla
+```
 
 Nushell is currently very picky about
 splitting table data over multiple lines.
@@ -609,7 +610,7 @@ let sports = [
 let sport = basketball
 let players = $(echo $sports | where name == $sport | get players)
 echo `The number of active players in {{$sport}} is {{$players}}.`
-````
+```
 
 Tables can contain nested tables.
 Note the placement of newlines in the example below
