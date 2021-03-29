@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://ranger.github.io", "Range" %}
+{% aTargetBlank "https://ranger.github.io", "Ranger" %}
 is a Vim-inspired, terminal-based file manager
 that is implemented in Python.
 But use of the Vim keybindings is not required, so it is
