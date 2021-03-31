@@ -1082,7 +1082,7 @@ The `math` subcommands perform math calculations.
 They are
 `abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
 `product`, `round`, `stddev`, `sum`, and `variance`.
-Also see the commands `count`, `inc`, `into-int`, `random`, and `seq`.
+Also see the commands `inc`, `into-int`, `random`, and `seq`.
 
 The `str` subcommands perform string operations.
 They are
@@ -1265,7 +1265,6 @@ Many Nushell commands operate on tables.
 | `append`                   | creates a new table by appending a single row to an existing table                                                        |
 | `autoview`                 | renders data as a table or list                                                                                           |
 | `compact`                  | removes empty rows                                                                                                        |
-| `count`                    | counts rows or list items                                                                                                 |
 | `drop n`                   | removes the last n rows (n defaults to 1)                                                                                 |
 | `drop column n`            | removes the last n columns (n defaults to 1)                                                                              |
 | `each`                     | runs a block of code on each row                                                                                          |
@@ -1281,6 +1280,7 @@ Many Nushell commands operate on tables.
 | `insert`                   | inserts a column                                                                                                          |
 | `keep n`                   | keeps the first n rows (n defaults to 1); same as `first`?                                                                |
 | `last n`                   | show only the last n rows (n defaults to 1)                                                                               |
+| `length`                   | counts rows or list items                                                                                                 |
 | `lines`                    | splits a string of lines into rows                                                                                        |
 | `match`                    | filter rows using a regular expression                                                                                    |
 | `merge`                    | merges tables by adding columns                                                                                           |
