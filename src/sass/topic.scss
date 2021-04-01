@@ -2,6 +2,12 @@ a > code {
   font-size: 1.4rem;
 }
 
+article aside {
+  border: 1px solid gray;
+  margin-left: 2rem;
+  padding: 1rem;
+}
+
 body {
   --accent-color: #3265dc;
 

@@ -21,7 +21,8 @@ And like Rust, Nushell produces helpful, nicely formatted error messages.
 Nushell includes the Nu language which excels at
 "processing streams of structured data".
 This provides features that are somewhat like SQL for databases.
-It also has similarities to the Python-based Pandas data analysis library.
+It also has similarities to the Python-based
+{% aTargetBlank "https://pandas.pydata.org", "Pandas" %} data analysis library.
 These are features not typically seen in shell environments.
 It is far from a toy project and uses recursive descent parser
 that is driven by its many supported data types.
@@ -29,11 +30,13 @@ that is driven by its many supported data types.
 Nushell continues the UNIX tradition of
 commands whose input can be piped in from a previous command
 and whose output can be piped to a subsequent command.
-This is done in a streaming fashion so that a command
-does not have to run to completion before the next command
+A series of commands separated by the pipe character `|`
+is referred to as a "pipeline".
+Commands stream their output to the next command in the pipeline.
+A command does not have to run to completion before the next command
 in the pipeline can begin receiving that output as its input.
 
-Some commands, such as `echo` and `ls`, are lazy.
+Some commands such as `echo` and `ls` are lazy.
 This means they do not produce output unless
 something is requesting data from their output stream.
 One way to do this it to pipe their output to the `autoview` command
@@ -41,31 +44,28 @@ which determines how to render the data based on its type.
 Piping to `autoview` occurs implicitly in the shell
 after the last command in a pipeline.
 So the command `ls` is processed as if `ls | autoview` was entered.
-When semicolons are used to separate multiple commands on the same line,
+When semicolons are used to separate multiple pipelines on the same line,
 `autoview` is only applied to the last pipeline.
 For example, `let a = 2; let b = 3; = $a + $b` outputs `5`.
 
-The Nu language can be used outside Nushell, such as in Jupyter Notebooks.
+Color coding is applied to commands as they are typed.
+If a command becomes invalid, all the text changes to red.
+
 Because Rust is a great source for compiling to WebAssembly, it was
 possible to implement a web-based environment for experimenting with Nushell.
 This can be found at
 {% aTargetBlank "https://www.nushell.sh/demo/", "Nushell demo" %}.
 
-It costs nothing but some disk space to try it (about 50 MB).
+The Nu language can be used outside Nushell, such as in Jupyter Notebooks.
+
+It costs nothing but some disk space to try Nushell (about 50 MB).
 You don't have to commit to making it your default shell.
 Just pop in periodically to try it and exit to return to your current shell.
 Over time you may decide you like it enough to make it your default shell.
 
-Color coding is applied to commands as they are typed.
-If a command becomes invalid, all the text changes to red.
-
 ## Terminology
 
-Nushell commands are often chained together using the pipe (|) character.
-The output of the command on the left of a pipe
-is used as the input of the command on the right.
-Nushell refers to these sequences of commands as "pipelines".
-
+The term "pipeline" was described earlier.
 Command pipelines entered in the shell must be on a single line,
 but inside scripts lines that end with `|` continue on the next line.
 Nushell does not support using `\` as a line continuation character
@@ -73,29 +73,33 @@ like in other shells such as Bash.
 
 Commands that take no input and produce output
 are referred to as "inputs" or "sources".
-An example is the `open` command.
+An example is the `open` command which loads a file.
 
 Commands that take input and transform it are referred to as "filters".
 Examples include the `where` and `sort-by` commands.
 
 Commands that take input and display it or write it somewhere such as file
 are referred to as "outputs" or "sinks".
-Examples include `autoview` and `save`.
+Examples include the `autoview` and `save` commands.
 
 ## Installing
 
 There are many options for installing the Nushell.
+
 If you have Rust installed, enter `cargo install nu`.
-This takes a long time to complete.
+This takes several minutes to complete.
+
 If you are on macOS and have Homebrew installed, enter `brew install nushell`.
 Note that Homebrew may install a version
 that is several versions behind the latest.
+
 Prebuilt binaries for Linux, macOS, and Windows can also be downloaded.
+
 For more information on installation options, click the Nushell link above.
 
 ## Getting Started
 
-To start the shell, enter `nu`.
+After installing Nushell, enter `nu` in a terminal to start a shell.
 
 For help, enter `help`.
 For a list of supported commands, enter `help commands`.
@@ -103,8 +107,11 @@ In version 0.28.0 there are 105 Nushell commands.
 For help on a specific command,
 enter `help {command-name}` or {command-name} -h`.
 
+<aside>
 To search for commands whose name or help text contains given text,
 define the following custom command and pass the text to it.
+Later we will see how to define custom commands
+so they are automatically available in new Nushell sessions.
 
 ```bash
 def help-text [s: string] {
@@ -116,46 +123,55 @@ def help-text [s: string] {
 }
 ```
 
+</aside>
+
+Like in all shells, commands are executed by typing them
+and pressing the enter key.
+Multi-line commands can be entered by pressing enter
+before a block, delimited by square brackets or curly braces, is complete.
+
+Nushell has great command recall and completion like the Fish and Zsh shells.
+Command recall even supports multi-line command editing.
+
 When a command not defined by Nushell is encountered,
 the directories listed in the `path` configuration setting
 are searched to find a matching executable.
 To run a command in the `path` that happens to have the same name
 as a Nushell command, prefix the command name with `^`.
-For example, `^ls *.html`.
+For example, `^ls *.html` uses the `ls` command defined in root shell
+rather than the version defined by Nushell.
 
-Like all shells, enter commands and press enter to execute them.
-Multi-line commands can be entered by pressing enter
-before a block, delimited by square brackets or curly braces, is complete.
-Nushell has great command recall and completion like the Fish and zsh shells.
-Command recall even supports multi-line command editing.
-
-For detailed documentation, see the
+For detailed documentation on Nushell commands, see the
 {% aTargetBlank "https://www.nushell.sh/book/", "Book" %}
-link in the top nav of the website.
+link in the top nav of the Nushell website.
 
 For more help, join the {% aTargetBlank
 "https://discord.gg/NtAbbGn", "nushell Discord channel" %}.
 
 ## Configuration
 
-The configuration for Nushell is stored in a TOML file
+The configuration for Nushell is stored in a
+{% aTargetBlank "https://github.com/toml-lang/toml", "TOML" %}
+(Tom's Obvious, Minimal Language) file
 whose path can be obtained by entering `config path`.
 Configuration settings can be changed by editing this file
 or using the `config` subcommands described below.
+Changes to the config file take effect immediately in the current shell session.
+TODO: The previous sentence doesn't seem to be true!
+
 To edit the config file with Vim, enter `vim $(config path)`.
 To edit the config file with VS Code, enter `code $(config path)`.
-Changes to the config file take effect immediately in the current shell session.
 
 Some Nushell configuration settings are top-level
-and appear in a specific TOML section.
+and do not appear in a specific TOML section.
 Notable top-level options include:
 
 | Setting                 | Description                                                                                       |
 | ----------------------- | ------------------------------------------------------------------------------------------------- |
 | `disable_table_indexes` | when `true`, omits index column from table output                                                 |
-| `path`                  | quoted list of directories                                                                        |
+| `path`                  | list of directories in quotes to search for executables                                           |
 | `prompt`                | command whose output is used for the prompt                                                       |
-| `skip_welcome_message`  | when `true`, starting a shell doesn't output<br>welcome message including Nushell version         |
+| `skip_welcome_message`  | when `true`, starting a shell doesn't output a<br>welcome message including the Nushell version   |
 | `startup`               | list of commands to execute when a shell starts;<br>typically defines aliases and custom commands |
 | `table_mode`            | controls the border lines drawn when tables are rendered<br>(more detail below)                   |
 
@@ -168,15 +184,15 @@ These are summarized in the table below.
 | Command                                | Description                                     |
 | -------------------------------------- | ----------------------------------------------- |
 | `config`                               | outputs all the settings                        |
-| `config path`                          | outputs the file path of the configuration file |
+| `config path`                          | outputs the file path to the configuration file |
 | `config set {name} {value}`            | sets or updates a specific setting              |
 | `{pipeline} \| config set_into {name}` | sets a specific setting to a piped-in value     |
 | `config get {name}`                    | gets a specific setting                         |
 | `config remove {name}`                 | removes a specific setting                      |
 | `config load {file-path}`              | loads settings from a file                      |
 
-Note that changes to the config file at `$(config path)`
-take effect immediately. Using `config load` is not required.
+Since changes to the config file take effect immediately,
+using `config load` on the default config file is not required.
 
 Configuration changes affect future shell sessions, not the current one.
 
@@ -1447,7 +1463,7 @@ ls | group-by { get name | path extension }
 To see the contents of one of the nested tables, pipe this to `get ext-name`.
 
 Another way to see only the files whose name ends with certain characters is:
-TODO: Why doesn't this work? You asked on Discord on 3/27/21.
+TODO: Why doesn't this work? You asked on Discord on 4/1/21.
 
 ```bash
 ls | where { echo $it.name | str ends-with "some-suffix" }
@@ -1798,5 +1814,5 @@ switching back to it using the `n` (for next) and `p` (for previous) commands.
   See {% aTargetBlank "https://github.com/nushell/nushell/issues/3204",
   "issue 3204" %}
 - There is no built-in `grep` command.
-  TODO: How can another grep command (like `ripgrep`)
-  TODO: be used with the output of `ls **/*.file-type`?
+  Consider using {% aTargetBlank "https://github.com/BurntSushi/ripgrep",
+  "ripgrep" %}.
