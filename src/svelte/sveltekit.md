@@ -29,6 +29,48 @@ The main features of SvelteKit are:
   - setup of Prettier
 - adapters for specific deployment targets
 
+## File-based Page Routing
+
+TODO: Finish this
+
+## File-based Endpoints (REST services)
+
+TODO: Finish this
+
+## Layouts
+
+TODO: Finish this
+
+## Error Page
+
+TODO: Finish this
+
+## Code Splitting
+
+TODO: Finish this
+
+## Hot Module Reloading
+
+TODO: Finish this
+
+## Static Pages and Sites
+
+TODO: Finish this
+
+## Tool Setup
+
+Creation of a new SvelteKit project prompts for desired features.
+It asks the following questions:
+
+"Use TypeScript in components?" This defaults to no.
+
+"What do you want to use for writing Styles in Svelte components?"
+The options are CSS (default), Less, and SCSS.
+
+"Add ESLint for code listing?" This defaults to no.
+
+"Add Prettier for code formatting?" This defaults to no.
+
 ## Path Aliases
 
 SvelteKit provides directory aliases.
@@ -136,5 +178,3 @@ The provided adapter targets currently include
 Node.js, static, Begin, Netlify, and Vercel.
 New SvelteKit projects default to using the Node adapter.
 To change the adapter, modify the `svelte.config.cjs` file.
-
-TODO: Finish this
