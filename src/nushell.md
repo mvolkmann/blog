@@ -189,11 +189,8 @@ These are summarized in the table below.
 | `{pipeline} \| config set_into {name}` | sets a specific setting to a piped-in value     |
 | `config get {name}`                    | gets a specific setting                         |
 | `config remove {name}`                 | removes a specific setting                      |
-| `config load {file-path}`              | loads settings from a file                      |
 
-Since changes to the config file take effect immediately,
-using `config load` on the default config file is not required.
-
+TODO: Verify the following.
 Configuration changes affect future shell sessions, not the current one.
 
 For example, to change the prompt enter
@@ -528,6 +525,15 @@ let colors = [red green blue]
 # which is required to use the "in" and "not-in" operators.
 = blue in $colors # true
 = yellow in $colors # false
+```
+
+The `where` command can be used to create a subset of a list.
+The following example gets all the colors whose names end in "e".
+
+```bash
+let colors = [red orange yellow green blue purple]
+echo $colors | where $(each { echo $it | str ends-with 'e' })
+# outputs the list [orange blue purple]
 ```
 
 The `empty?` command is used to test whether a string, list, or table is empty.
@@ -1463,11 +1469,12 @@ ls | group-by { get name | path extension }
 To see the contents of one of the nested tables, pipe this to `get ext-name`.
 
 Another way to see only the files whose name ends with certain characters is:
-TODO: Why doesn't this work? You asked on Discord on 4/1/21.
 
 ```bash
-ls | where { echo $it.name | str ends-with "some-suffix" }
+ls | where $(each { echo $it.name | str ends-with '.rs' }) == $true | get name
 ```
+
+TODO: What is `each` doing in the line above if `where` already iterates over the rows?
 
 Table columns can be moved after or before another column.
 For example, by default the `ls` command outputs a type
