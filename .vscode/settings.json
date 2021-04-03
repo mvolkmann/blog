@@ -321,6 +321,7 @@
     "fontname",
     "fontsize",
     "fontweight",
+    "foobarbaz",
     "forceescape",
     "freenom",
     "fromtimestamp",

@@ -45,9 +45,10 @@ To create a new SvelteKit project:
    - Add ESLint for code listing? defaults to no
    - Add Prettier for code formatting? defaults to no
 
-1. Enter `cd project-name`
+1. Following instructions for next steps that are output.
 
-1. Enter `npm install`
+   - Enter `cd project-name`
+   - Enter `npm install`
 
 To run a SvelteKit project:
 
@@ -213,3 +214,40 @@ The provided adapter targets currently include
 Node.js, static, Begin, Netlify, and Vercel.
 New SvelteKit projects default to using the Node adapter.
 To change the adapter, modify the `svelte.config.cjs` file.
+
+### Netlify Example
+
+- Install the Netlify CLI with `npm install -g netlify-cli`
+
+- Install the Netlify SvelteKit adapter with
+  `npm install -D @sveltejs/adapter-netlify@next`
+
+- Edit `svelte.config.cjs`
+
+  - Change the first line to the following:
+
+  ```js
+  const adapter = require('@sveltejs/adapter-netlify');
+  ```
+
+  - Change the "adapter" line to the following:
+
+    ```js
+    adapter: adapter(),
+    ```
+
+- Create the file `netlify.toml` in the project root directory
+  containing the following:
+
+  ```toml
+  [build]
+  command = "npm run build"
+  functions="functions/"
+  publish="build/"
+  ```
+
+- Enter `npm run build` (necessary? maybe netlify deploy does this)
+
+- Enter `netlify deploy`
+
+TODO: Why do I get a 500 error when running the deployed app?

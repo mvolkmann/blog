@@ -372,25 +372,23 @@ and enter `bat --list-themes`. There are over 20.
 
 ## Data Types
 
-TODO: Continue reviewing from here.
-
 Unlike most shells where only strings are used for command input and output,
 Nushell supports many primitive and structured data types.
 
 | Type        | Description                                                                                    |
 | ----------- | ---------------------------------------------------------------------------------------------- |
-| `any`       | any type below (default)                                                                       |
+| `any`       | any type below (default for variables and custom command parameters)                           |
 | `binary`    | sequence of raw bytes                                                                          |
-| `block`     | block of nu script code that can be executed on each row of a table                            |
+| `block`     | block of nu script code (can be executed on each row of a table)                               |
 | `boolean`   | literal values are `$true` and `$false`                                                        |
 | column path | dot-separated list of nested column names                                                      |
 | `date`      | timezone-aware; defaults to UTC                                                                |
-| `decimal`   | numbers with a fractional part and infinite precision                                          |
+| `decimal`   | number with a fractional part and infinite precision                                           |
 | `duration`  | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, `wk`, `mon`, or `yr`   |
 | `filesize`  | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                    |
-| `group`     | semicolon-separated list of pipelines that can be run in parallel?                             |
-| `int`       | whole numbers with infinite precision                                                          |
-| `line`      | a string with an OS-dependent line ending                                                      |
+| `group`     | semicolon-separated list of pipelines where only output from the last is output                |
+| `int`       | whole number with infinite precision                                                           |
+| `line`      | string with an OS-dependent line ending                                                        |
 | list        | sequence of values of any type                                                                 |
 | `number`    | `int` or `decimal`, both with infinite precision                                               |
 | `path`      | platform-independent path to a file or directory                                               |
@@ -452,20 +450,28 @@ TODO: binary, line, path, pattern, row
 | `string`   | `range`    | pipe to `???`                                      |
 | `string`   | `row`      | pipe to `???`                                      |
 | `string`   | `table`    | pipe to `???`                                      |
-| `table`    | `string`   | pipe to ``                                         |
+| `table`    | `string`   | pipe to `???`                                      |
 
-\* THIS GIVES AN ERROR!
-
-The get the starting and ending values of a `range`,
-pipe it to the `first` and `last` commands.
+\* TODO: This gives an error.
 
 The `echo` command is often used to
 feed the initial value into a command pipeline.
 This can be a literal value or an expression such as a variable reference.
+For example:
 
-For example,
+```bash
+echo "2021-3-21 14:30" | str to-datetime | date format -t '%B %d, %Y' | get formatted
+# This outputs the string "March 21, 2021".
+```
 
-`echo "2021-3-21 14:30" | str to-datetime`
+This handy custom command produces a string from the items in a list
+where the value of each item is followed by a newline character.
+It is used in several examples that follow.
+Consider adding this to the startup array in your Nushell config file.
+
+```bash
+def as-lines [] { each { echo $(build-string $it $(char newline)) } | str collect }
+```
 
 ### Strings
 
@@ -481,6 +487,9 @@ let x = 19; echo `x is {{$x}}`
 let x = 3
 let y = 5
 echo `product of {{$x}} and {{$y}} is {{$(= $x * $y)}}`
+# As discussed in the "Operators" section later,
+# operators can only be used in "math mode".
+# An expression is in math mode if it begins with `=`.
 ```
 
 {% endraw %}
@@ -488,13 +497,34 @@ echo `product of {{$x}} and {{$y}} is {{$(= $x * $y)}}`
 The operators `=~` and `!~` test whether
 one string contains or does not contain another.
 
+For example:
+
+```bash
+= "foobarbaz" =~ "bar" # true
+= "foobarbaz" !~ "bar" # false
+```
+
 ### Ranges
 
 Values of the `range` type can use default values for their start or end.
 If the start value of a range is omitted, it defaults to zero.
+For example, `..10` is the same as `0..10`.
 If the end value of a range is omitted, the range has no upper bound.
 
+The get the starting and ending values of a `range`,
+pipe it to the `first` and `last` commands.
+
+For example:
+
+````bash
+echo 3..7 | first # 3
+echo 3..<7 | last # 6
+echo 1..3 | as-lines # outputs 1, 2, and 3 on separate lines
+```
+
 ### Types With Units
+
+TODO: Continue reviewing from here.
 
 Duration values with different units can be added.
 For example, `2hr + 57min + 11sec` (my best marathon time).
@@ -517,9 +547,7 @@ For example:
 
 ```bash
 let names = [Mark Tami Amanda Jeremy]
-echo $names | each {
-  echo $(build-string $it $(char newline))
-} | str collect # converts table to a single string
+echo $names | as-lines # outputs each name on a separate line
 ```
 
 The `$it` special variable holds the output of the previous command
@@ -1834,3 +1862,4 @@ switching back to it using the `n` (for next) and `p` (for previous) commands.
 - There is no built-in `grep` command.
   Consider using {% aTargetBlank "https://github.com/BurntSushi/ripgrep",
   "ripgrep" %}.
+````
