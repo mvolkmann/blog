@@ -29,6 +29,41 @@ The main features of SvelteKit are:
   - setup of Prettier
 - adapters for specific deployment targets
 
+## Getting Started
+
+To create a new SvelteKit project:
+
+1. Install Node.js
+
+1. Enter `npm init svelte@next [project-name]`  
+   Omit the project name to create a SvelteKit project in the current directory.
+
+1. Answer the following question:
+
+   - Use TypeScript in components? defaults to no
+   - What do you want to use for writing Styles in Svelte components? CSS (default), Less, or SCSS
+   - Add ESLint for code listing? defaults to no
+   - Add Prettier for code formatting? defaults to no
+
+1. Enter `cd project-name`
+
+1. Enter `npm install`
+
+To run a SvelteKit project:
+
+1. `cd` to the project root directory.
+
+1. To run in development mode, enter `npm run dev`  
+   This provides watch and live reload.
+   Optionally add options after `--`.
+   The `--open` or `-o` option opens the app in the default web browser.  
+   The `--port` or `-p` option specifies a port listen on
+   which defaults to 3000.
+
+1. To run the ESlint linter, enter `npm run lint`
+
+1. To run the Prettier code formatter, enter `npm run format`
+
 ## File-based Page Routing
 
 TODO: Finish this
