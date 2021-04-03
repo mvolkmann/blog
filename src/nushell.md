@@ -363,8 +363,9 @@ which is used by the `open` command to view text files.
 | true_color               | `true` or `false`                           |
 | vcs_modification_markers | `true` or `false` (seems to have no effect) |
 
-TODO: Setting vcs_modification_markers to true seems to have no effect.
-TODO: You asked about this in Discord on 4/2/2021.
+TODO: Setting vcs_modification_markers to true has no effect.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3254",
+"issue 3254" %}.
 
 To see the supported themes, install `bat` by entering `cargo install bat`
 and enter `bat --list-themes`. There are over 20.
