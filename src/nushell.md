@@ -470,6 +470,8 @@ It is used in several examples that follow.
 Consider adding this to the startup array in your Nushell config file.
 
 ```bash
+# The `each` command iterates over list items that are piped to this command.
+# During the iteration, the special variable $it is set to the current item.
 def as-lines [] { each { echo $(build-string $it $(char newline)) } | str collect }
 ```
 
@@ -516,7 +518,7 @@ pipe it to the `first` and `last` commands.
 
 For example:
 
-````bash
+```bash
 echo 3..7 | first # 3
 echo 3..<7 | last # 6
 echo 1..3 | as-lines # outputs 1, 2, and 3 on separate lines
@@ -524,22 +526,20 @@ echo 1..3 | as-lines # outputs 1, 2, and 3 on separate lines
 
 ### Types With Units
 
-TODO: Continue reviewing from here.
-
 Duration values with different units can be added.
 For example, `2hr + 57min + 11sec` (my best marathon time).
 
 Values of the `filesize` type with different units can be added.
 For example, `2mb + 57kb + 11b`.
 
-Combining values of different types results in a coercion error.
-For example, `3hr + 2mb` gives this kind of error and clearly identifies
+When values of different types are combined in a coercion error occurs.
+For example, `3hr + 2mb` gives this error and clearly identifies
 that the first value is a `duration` and the 2nd is a `filesize`.
 
 ### Lists
 
 The literal syntax for creating a `list` is to include expressions
-in square brackets only separated by spaces or commas (for readability).
+in square brackets separated by spaces or commas (for readability).
 For example, `["foo" "bar" "baz"]` or `["foo", "bar", "baz"]`.
 
 To iterate over the elements in a list, use the `each` command.
@@ -550,10 +550,12 @@ let names = [Mark Tami Amanda Jeremy]
 echo $names | as-lines # outputs each name on a separate line
 ```
 
-The `$it` special variable holds the output of the previous command
-so it can be used in a block.
+The `$it` special variable holds the output of the previous command.
+When used in a block passed to the `each` command,
+it holds the current iteration value.
 
-To access a list element at a given index, use `$name.index`.
+To access a list element at a given index, use `$name.index`
+where `$name` is a variable that holds a list.
 For example, the second element in the list above
 which is "Tami" can be accessed with `$names.1`.
 
@@ -562,11 +564,14 @@ For example:
 
 ```bash
 let colors = [red green blue]
-# As discussed in the "Operators" section below, "=" enables math mode
-# which is required to use the "in" and "not-in" operators.
+# As discussed in the "Operators" section later,
+# operators can only be used in "math mode".
+# An expression is in math mode if it begins with `=`.
 = blue in $colors # true
 = yellow in $colors # false
 ```
+
+TODO: Continue reviewing from here.
 
 The `where` command can be used to create a subset of a list.
 The following example gets all the colors whose names end in "e".
@@ -1862,4 +1867,3 @@ switching back to it using the `n` (for next) and `p` (for previous) commands.
 - There is no built-in `grep` command.
   Consider using {% aTargetBlank "https://github.com/BurntSushi/ripgrep",
   "ripgrep" %}.
-````
