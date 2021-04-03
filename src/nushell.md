@@ -776,24 +776,22 @@ For example, `let a = 2; let b = 3; = $a * $b` outputs `6`.
 
 ## Working with numbers
 
-TODO: Continue reviewing from here.
-
 Many of the operators listed in the previous section operate on numbers.
 
 The `inc` command has three uses.
 
-The first use of the `inc` command is to
+The first use of `inc` is to
 return a value that is one higher that the piped in value.
 For example, `echo 2 | inc` gives `3`.
 Since variables are immutable,
 this cannot be used to increment the value in a variable.
 
-The second use of the `inc` command is to increment all the `int` values
-in a given table column if all the values in the column are of type `int`.
+The second use of `inc` is to increment all the `int` values
+in a given table column if all the values are of type `int`.
 For example, `echo [[Name Size]; [Mark 33] [Tami 28]] | inc Size`
 results in a table where the values in the "Size" column are 34 and 29.
 
-The third use of the `inc` command is to increment
+The third use of `inc` is to increment
 a specify part of a semantic version number
 that includes major, minor, and patch parts.
 For example:
@@ -807,6 +805,8 @@ echo 1.2.3 | inc -p # increments patch resulting in 1.2.4
 There is no `dec` command for decrementing values.
 
 ## Working with URLs
+
+TODO: Continue reviewing from here.
 
 The `fetch` command can be used to get data from a URL.
 The website {% aTargetBlank
