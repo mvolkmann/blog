@@ -769,8 +769,9 @@ Nushell supports the following operators:
 Parentheses can be used for grouping to specify evaluation order.
 Operators can only be used in "math mode".
 An expression is in math mode if it begins with `=`.
-Some commands, such as `where` are automatically evaluated in math mode.
-TODO: You asked on Discord on 4/3/21 what other commands do this.
+Commands that take a boolean expression, such as
+`where`, `keep while`, `keep until`, `skip while`, and `skip util`,
+are automatically evaluated in math mode.
 
 For example, `let a = 2; let b = 3; = $a * $b` outputs `6`.
 
@@ -1362,6 +1363,8 @@ Many Nushell commands operate on tables.
 | `histogram`                | creates a table with "value", "count", "percentage", and "frequency"<br>columns based on a given column in an input table |
 | `insert`                   | inserts a column                                                                                                          |
 | `keep n`                   | keeps the first n rows (n defaults to 1); same as `first`?                                                                |
+| `keep until {condition}`   | keeps rows until the condition is met                                                                                     |
+| `keep while {condition}`   | keeps rows while the condition is met                                                                                     |
 | `last n`                   | show only the last n rows (n defaults to 1)                                                                               |
 | `length`                   | counts rows or list items                                                                                                 |
 | `lines`                    | splits a string of lines into rows                                                                                        |
@@ -1383,8 +1386,8 @@ Many Nushell commands operate on tables.
 | `select {column-names}`    | specifies columns to be retained by name and their order                                                                  |
 | `shuffle`                  | shuffles the rows randomly                                                                                                |
 | `skip n`                   | skips the first n rows (n defaults to 1)                                                                                  |
-| `skip until condition`     | skips runs until the condition is met (alternative to `where`)                                                            |
-| `skip while condition`     | skips runs while the condition is met (alternative to `where`)                                                            |
+| `skip until {condition}`   | skips rows until the condition is met                                                                                     |
+| `skip while {condition}`   | skips rows while the condition is met                                                                                     |
 | `sort-by`                  | sorts rows on given columns                                                                                               |
 | `split row`                | converts a string into a list of strings                                                                                  |
 | `split column`             | converts a list of strings into a table with generic "Column{n}" headers                                                  |
