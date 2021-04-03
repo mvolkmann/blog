@@ -156,11 +156,14 @@ The configuration for Nushell is stored in a
 whose path can be obtained by entering `config path`.
 Configuration settings can be changed by editing this file
 or using the `config` subcommands described below.
-Changes to the config file take effect immediately in the current shell session.
-TODO: The previous sentence doesn't seem to be true!
+Changes to the config file only affect new shell sessions,
+not the current one.
 
 To edit the config file with Vim, enter `vim $(config path)`.
 To edit the config file with VS Code, enter `code $(config path)`.
+When editing the config file using VS Code,
+consider installing the "TOML Language Support" extension
+which profiles syntax highlighting and formatting.
 
 Some Nushell configuration settings are top-level
 and do not appear in a specific TOML section.
@@ -190,27 +193,28 @@ These are summarized in the table below.
 | `config get {name}`                    | gets a specific setting                         |
 | `config remove {name}`                 | removes a specific setting                      |
 
-TODO: Verify the following.
-Configuration changes affect future shell sessions, not the current one.
+For example, to change the prompt enter the following:
 
-For example, to change the prompt enter
-`config set prompt "echo $(ansi yellow) '🦀ν> '"`.
+```bash
+config set prompt "echo $(ansi yellow) '🦀ν> '"
+```
+
 This adds the line `prompt = "echo $(ansi yellow) '🦀ν> '"`
 to the configuration file.
 🦀 is for the Rust mascot Ferris and ν is the Greek letter nu.
-Here is a fancier prompt setting that includes
+
+For a fancier prompt setting that includes
 the current working directory in yellow,
-and a right-pointing triangle at the end:
+and a green, right-pointing triangle at the end,
+add the following line in the config file:
 
 {% raw %}
 
 ```bash
-prompt = "echo `🦀{{$(ansi yellow)}}ν {{$(pwd)}}{{$(char prompt)}} `"
+prompt = "echo `🦀ν {{$(ansi yellow)}}{{$(pwd)}}{{$(ansi green)}}{{$(char prompt)}} `"
 ```
 
 {% endraw %}
-
-To output the value of each setting in the config file, enter `config`.
 
 Another option for customizing the prompt is
 to enable the use of [Starship](/blog/starship),
@@ -218,7 +222,7 @@ which has many more options.
 It also has the advantage that it can be used with nearly any shell,
 which is great for users that sometimes switch between shells.
 
-### startup Setting
+### `startup` Setting
 
 The `startup` setting specifies a list of commands
 to run each time a new Nushell session is started.
@@ -233,11 +237,15 @@ startup = [
 ]
 ```
 
-Aliases that use the "cd" command above currently causes Nushell to crash.
+Some code formatters reformat TOML arrays to be on a single line
+which makes reading these definitions difficult.
+VS Code and the "TOML Language Support" extension does not do this.
+
+Aliases that use the "cd" command currently causes Nushell to crash.
 See {% aTargetBlank "https://github.com/nushell/nushell/issues/3138",
 "issue 3138" %}.
 
-### table_mode Setting
+### `table_mode` Setting
 
 Table borders can be customized with the `table_mode` setting.
 Supported values include:
@@ -253,7 +261,7 @@ Supported values include:
 - thin: border on every cell
 - with_love: heart characters for borders
 
-### color_config Section
+### `color_config` Section
 
 The colors used to output data of each
 table element and data type can be customized
@@ -268,24 +276,24 @@ For example, `yb`.
 The only exception is blue which uses the letter "u"
 because "b" is used for black.
 
-The header elements that can be configured include
-header_align, header_bold, header_color, index_color,
-leading_trailing_space_bg, and separator_color (used for table lines).
-The types that can be configured include
-primitive_binary, primitive_boolean, primitive_columnpath, primitive_date,
-primitive_decimal, primitive_duration, primitive_filesize, primitive_int,
-primitive_line, primitive_path, primitive_pattern, primitive_range, and
-primitive_string
+The header elements and styles that can be configured include
+`header_align`, `header_bold`, `header_color`, `index_color`,
+`leading_trailing_space_bg`, and `separator_color` (used for table lines).
+The data types that can be configured include
+`primitive_binary`, `primitive_boolean`, `primitive_columnpath`,
+`primitive_date`, `primitive_decimal`, `primitive_duration`,
+`primitive_filesize`, `primitive_int`, `primitive_line`, `primitive_path`,
+`primitive_pattern`, `primitive_range`, and `primitive_string`.
 
 For example:
 
 ```toml
 [color_config]
-header_align = "l" # left|l, right|r, center|c
+header_align = "l" # use left or l, right or r, and center or c
 header_bold = true
 header_color = "r"
-index_color = "wd"
-separator_color = "wd" # for table lines
+index_color = "wd" # white dimmed
+separator_color = "wd" # white dimmed; for table lines
 
 primitive_binary = "c"
 primitive_boolean = "p"
@@ -297,7 +305,7 @@ primitive_path = "y"
 primitive_string = "w"
 ```
 
-### line_editor Section
+### `line_editor` Section
 
 Nushell line editing is provided by
 {% aTargetBlank "https://crates.io/crates/rustyline", "rustyline" %}.
@@ -308,17 +316,17 @@ Notable settings include:
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `edit_mode`            | `"emacs"` or `"vi"`<br>default is to use {% aTargetBlank "https://github.com/kkawakam/rustyline#actions", "rustyline key bindings" %} |
 | `history_duplicates`   | `"alwaysadd"` or `"ignoreconsecutive"` (default)                                                                                      |
-| `history_ignore_space` | `true` (default) or `false`; doesn't add commands with leading whitespace to history                                                  |
+| `history_ignore_space` | `true` (default) or `false`;<br>when true, commands with leading whitespace are not added to history                                  |
 
 For example:
 
 ```toml
 [line_editor]
-edit_mode = "vi" # or "emacs"; omit for default keystrokes (see rustyline docs)
-history_ignore_space = true # omits whitespace around commands saved in history?
+edit_mode = "vi" # omit for default keystrokes (see rustyline link above)
+history_ignore_space = true
 ```
 
-### path setting
+### `path` setting
 
 The `path` setting lists directories to be searched for executables.
 
@@ -328,12 +336,11 @@ enter `echo $nu.path` or `config | get path`.
 The command `config set path $nu.path`
 sets the `path` setting to the value of `$nu.path`,
 which is the value of the `PATH` environment variable in the parent shell.
-This is useful because it also enables
-setting a path that is specific to Nushell.
+Once set, this can be customized to be specific to Nushell.
 Note that if Nushell is your login shell then
 there is no parent shell from which to inherit a path.
 
-### env Section
+### `env` Section
 
 The command `config set env $nu.env` adds all the current
 environment variables in the `env` section of the config file.
@@ -342,10 +349,10 @@ that are specific to Nushell.
 Note that if Nushell is your login shell then
 there is no parent shell from which to inherit environment variables.
 
-### textview Section
+### `textview` Section
 
-These settings affect use of the `bat` crate for viewing text files
-using the `open` command.
+These settings affect operation of the `bat` crate
+which is used by the `open` command to view text files.
 
 | Setting                  | Description                                 |
 | ------------------------ | ------------------------------------------- |
@@ -356,10 +363,15 @@ using the `open` command.
 | true_color               | `true` or `false`                           |
 | vcs_modification_markers | `true` or `false` (seems to have no effect) |
 
+TODO: Setting vcs_modification_markers to true seems to have no effect.
+TODO: You asked about this in Discord on 4/2/2021.
+
 To see the supported themes, install `bat` by entering `cargo install bat`
 and enter `bat --list-themes`. There are over 20.
 
 ## Data Types
+
+TODO: Continue reviewing from here.
 
 Unlike most shells where only strings are used for command input and output,
 Nushell supports many primitive and structured data types.
@@ -1103,7 +1115,7 @@ They are
 The `math` subcommands perform math calculations.
 They are
 `abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
-`product`, `round`, `stddev`, `sum`, and `variance`.
+`product`, `round`, `sqrt`, `stddev`, `sum`, and `variance`.
 Also see the commands `inc`, `into-int`, `random`, and `seq`.
 
 The `str` subcommands perform string operations.
@@ -1471,10 +1483,8 @@ To see the contents of one of the nested tables, pipe this to `get ext-name`.
 Another way to see only the files whose name ends with certain characters is:
 
 ```bash
-ls | where $(each { echo $it.name | str ends-with '.rs' }) == $true | get name
+ls | where {= $(echo $it.name | str ends-with ".rs") } | get name
 ```
-
-TODO: What is `each` doing in the line above if `where` already iterates over the rows?
 
 Table columns can be moved after or before another column.
 For example, by default the `ls` command outputs a type
