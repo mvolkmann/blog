@@ -452,7 +452,7 @@ TODO: binary, line, path, pattern, row
 | `string`   | `table`    | pipe to `???`                                      |
 | `table`    | `string`   | pipe to `???`                                      |
 
-\* TODO: This gives an error.
+\* TODO: This gives an error. Why?
 
 The `echo` command is often used to
 feed the initial value into a command pipeline.
@@ -571,16 +571,17 @@ let colors = [red green blue]
 = yellow in $colors # false
 ```
 
-TODO: Continue reviewing from here.
-
 The `where` command can be used to create a subset of a list.
 The following example gets all the colors whose names end in "e".
 
 ```bash
 let colors = [red orange yellow green blue purple]
-echo $colors | where $(each { echo $it | str ends-with 'e' })
-# outputs the list [orange blue purple]
+echo $colors | where {= $(echo $it | str ends-with 'e')}
+# The block passed to where must evaluate to a boolean.
+# This outputs the list [orange blue purple].
 ```
+
+TODO: Continue reviewing from here.
 
 The `empty?` command is used to test whether a string, list, or table is empty.
 For example:
