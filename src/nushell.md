@@ -471,7 +471,8 @@ Consider adding this to the startup array in your Nushell config file.
 
 ```bash
 # The `each` command iterates over list items that are piped to this command.
-# During the iteration, the special variable $it is set to the current item.
+# During the iteration, the special variable $it (for item)
+# is set to the current item.
 def as-lines [] { each { echo $(build-string $it $(char newline)) } | str collect }
 ```
 
@@ -581,8 +582,6 @@ echo $colors | where {= $(echo $it | str ends-with 'e')}
 # This outputs the list [orange blue purple].
 ```
 
-TODO: Continue reviewing from here.
-
 The `empty?` command is used to test whether a string, list, or table is empty.
 For example:
 
@@ -602,11 +601,12 @@ let colors = []
 let scores = [[Name Score]; [Mark 19] [Tami 21]]
 = $scores | empty? # false
 let scores = []
-= $scores | empty? # true; not empty header row is present
+= $scores | empty? # true; not empty if only header row is present
 ```
 
 The `reduce` command computes a single value from a list.
-It takes a block which can use the special variables `$acc` and `$it`.
+It takes a block which can use the special variables
+`$acc` (for accumulator) and `$it` (for item).
 To specify an initial value for `$acc`, use the `--fold` flag.
 To change `$it` to have `$it.index` and `$it.item` values,
 add the `--numbered` flag.
@@ -621,18 +621,18 @@ echo "product =" $(echo $scores | reduce --fold 1 { = $acc * $it }) # 96
 
 ### Tables
 
-The literal syntax for creating a table describe each row with a list
-and separate the header row from the data rows with a semicolon.
+The literal syntax for creating a table defines each row with a list,
+starting with the header row which is followed by a semicolon.
 For example, `echo [[Name Score]; [Mark 19] [Tami 21]]`
 outputs the following table:
 
 ```text
-───┬──────┬───────
- # │ Name │ Score
-───┼──────┼───────
- 0 │ Mark │    19
- 1 │ Tami │    21
-───┴──────┴───────
+╭───┬──────┬───────╮
+│ # │ Name │ Score │
+├───┼──────┼───────┤
+│ 0 │ Mark │    19 │
+│ 1 │ Tami │    21 │
+╰───┴──────┴───────╯
 ```
 
 SQL-like syntax can be used to retrieve data from a table.
@@ -643,12 +643,13 @@ let scores = [[Name Score]; [Mark 19] [Tami 21]]
 echo $scores | where Name == 'Tami' | get Score # 21
 ```
 
-The use of the `where` command above is shorthand for
-the expanded syntax using the special variable `$it` which holds
+The use of the `where` command above is shorthand for the expanded syntax.
+This uses the special variable `$it` which holds
 the result of the previous command or the current iteration value.
-The previous pipeline can be written as follows using this syntax.
+The previous pipeline can be written as shown below using this syntax.
 The curly braces after the `where` command define a block on which it operates.
-The `=` enters "math mode".
+As we have seen, the leading `=` enters "math mode"
+which enables use of operators.
 
 ```bash
 echo $scores | where { = $it.Name == 'Tami'} | get Score # 21
@@ -659,22 +660,32 @@ For example:
 
 ```bash
 let data = [[color flavor]; [yellow vanilla]]
+echo $data.color # outputs yellow
 echo $data.flavor # outputs vanilla
 ```
 
 Nushell is currently very picky about
 splitting table data over multiple lines.
 The newlines in the table definition below break it!
-See {% aTargetBlank "https://github.com/nushell/nushell/issues/3186",
-"issue 3186" %}.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3204",
+"issue 3204" %}.
 
 ```bash
+# This way of adding newlines in a table definition is not parsed correctly.
 let sports = [
   [name players];
   [baseball 9]
   [basketball 5]
   [football 11]
   [hockey 6]
+]
+# This way is parsed correctly.
+let sports = [
+  [name players
+  ]; [baseball 9
+  ] [basketball 5
+  ] [football 11
+  ] [hockey 6]
 ]
 let sport = basketball
 let players = $(echo $sports | where name == $sport | get players)
@@ -683,8 +694,8 @@ echo `The number of active players in {{$sport}} is {{$players}}.`
 
 Tables can contain nested tables.
 Note the placement of newlines in the example below
-which avoids the issue described above.
-Note the use of `to json` to generate JSON from a table.
+which avoids the parsing issue described above.
+The `to json` command is used to generate JSON from a table.
 
 ```bash
 let person = [
@@ -755,14 +766,17 @@ Nushell supports the following operators:
 | `&&`     | and two Boolean values          |
 | `\|\|`   | or two Boolean values           |
 
-Parentheses can be used for grouping in order to specify evaluation order.
+Parentheses can be used for grouping to specify evaluation order.
 Operators can only be used in "math mode".
 An expression is in math mode if it begins with `=`.
 Some commands, such as `where` are automatically evaluated in math mode.
+TODO: You asked on Discord on 4/3/21 what other commands do this.
 
 For example, `let a = 2; let b = 3; = $a * $b` outputs `6`.
 
 ## Working with numbers
+
+TODO: Continue reviewing from here.
 
 Many of the operators listed in the previous section operate on numbers.
 
