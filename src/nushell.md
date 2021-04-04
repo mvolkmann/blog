@@ -102,10 +102,12 @@ For more information on installation options, click the Nushell link above.
 After installing Nushell, enter `nu` in a terminal to start a shell.
 
 For help, enter `help`.
-For a list of supported commands, enter `help commands`.
+For a list of Nushell commands and custom commands, enter `help commands`.
 In version 0.28.0 there are 105 Nushell commands.
 For help on a specific command,
 enter `help {command-name}` or {command-name} -h`.
+For more detail on supported commands, see the {% aTargetBlank
+"https://www.nushell.sh/book/command_reference.html", "Command Reference" %}.
 
 <aside>
 To search for commands whose name or help text contains given text,
@@ -397,6 +399,10 @@ Nushell supports many primitive and structured data types.
 | row         | list where each value represents a column with an associated name                              |
 | `string`    | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
 | `table`     | list of rows; returned by many Nushell commands                                                |
+| `unit`      | any value with a unit; includes `duration` and `filesize` types                                |
+
+TODO: It seems that `decimal`, `duration`, and `filesize` are not real types.
+TODO: You asked about this in Discord on 4/3/2021.
 
 To see the type of an expression, pipe it to the `describe` command.
 For example, `date now | describe` outputs `date`.
@@ -460,8 +466,10 @@ This can be a literal value or an expression such as a variable reference.
 For example:
 
 ```bash
-echo "2021-3-21 14:30" | str to-datetime | date format -t '%B %d, %Y' | get formatted
+echo "2021-3-21 14:30" | str to-datetime | date format -t '%B %-d, %Y' | get formatted
 # This outputs the string "March 21, 2021".
+# Supported control characters are described {% aTargetBlank
+"https://man7.org/linux/man-pages/man1/date.1.html", "here" %}.
 ```
 
 This handy custom command produces a string from the items in a list
@@ -807,9 +815,8 @@ There is no `dec` command for decrementing values.
 
 ## Working with URLs
 
-TODO: Continue reviewing from here.
-
 The `fetch` command can be used to get data from a URL.
+
 The website {% aTargetBlank
 "https://jsonplaceholder.typicode.com", "JSONPlaceholder" %}
 provides access to free sample JSON data.
@@ -818,14 +825,25 @@ The following example gets data about TODOs from this site.
 ```bash
 fetch https://jsonplaceholder.typicode.com/todos |
   where userId == 5 && completed == $false |
-  sort-by title
+  sort-by title | keep 3
+```
+
+This produces output like the following:
+
+```text
+╭───┬────────┬─────┬─────────────────────────────────────────────────┬───────────╮
+│ # │ userId │ id  │ title                                           │ completed │
+├───┼────────┼─────┼─────────────────────────────────────────────────┼───────────┤
+│ 0 │      5 │  97 │ dolorum laboriosam eos qui iure aliquam         │ false     │
+│ 1 │      5 │ 100 │ excepturi a et neque qui expedita vel voluptate │ false     │
+│ 2 │      5 │  94 │ facilis modi saepe mollitia                     │ false     │
+╰───┴────────┴─────┴─────────────────────────────────────────────────┴───────────╯
 ```
 
 The `post` command sends an HTTP POST requests to a server
 and returns the response as a table.
-The following example simulates creating a TODO resource
-using the JSONPlaceholder site.
-This particular service just simulates creating a resource.
+The following example simulates creating a TODO using the
+JSONPlaceholder site and returns the id of the newly created TODO.
 
 ```bash
 let json = '{"title": "get milk", "userId": 5}"'
@@ -833,65 +851,65 @@ post https://jsonplaceholder.typicode.com/todos $json
 ```
 
 Nushell does not currently provide commands
-to send PUT, PATCH, or DELETE requests.
+to send `PUT`, `PATCH`, or `DELETE` requests.
 
-## Common Commands
+## Common UNIX Commands
 
 Many common UNIX commands are supported by Nushell.
 These are implemented in Rust and are very fast.
 They include:
 
-- `cal` displays a calendar
-- `cd` changes the current working directory
-- `clear` clears the terminal
-- `cp` copies a file or directory
-- `date` gets the current date
-- `du` gets information about disk usage
-- `echo` outputs the values of expressions
-- `exit` exits the current shell; can specify status code
-- `help` displays help information
-- `history` displays command history
-- `kill` kills a process
-- `ls` lists the contents of the current directory or path
-- `mkdir` makes (creates) a directory
-- `mv` moves a file or directory
-- `open` opens a file
-- `ps` prints process information
-- `pwd` prints the current working directory
-- `rm` removes (deletes) a file or directory
-- `source` runs a script file in the current context
-- `which` outputs the path of an executable AND
-  information about aliases and custom commands
+| Command    | Description                                                                           |
+| ---------- | ------------------------------------------------------------------------------------- |
+| `cal`      | displays a calendar for the current month or an entire specified year                 |
+| `cd`       | changes the current working directory                                                 |
+| `clear`    | clears the terminal                                                                   |
+| `cp`       | copies a file or directory                                                            |
+| `date now` | gets the current date (see the other `date` subcommands)                              |
+| `du`       | gets information about disk usage                                                     |
+| `echo`     | outputs the values of expressions                                                     |
+| `exit`     | exits the current shell; can specify a status code                                    |
+| `help`     | outputs help information                                                              |
+| `history`  | outputs command history (last 100 commands)                                           |
+| `kill`     | kills a process                                                                       |
+| `ls`       | lists the contents of the current directory or specified path                         |
+| `mkdir`    | makes (creates) a directory                                                           |
+| `mv`       | moves a file or directory                                                             |
+| `open`     | opens a file                                                                          |
+| `ps`       | outputs process information                                                           |
+| `pwd`      | outputs the present (current) working directory                                       |
+| `rm`       | removes (deletes) a file or directory                                                 |
+| `source`   | executes a script file in the current context                                         |
+| `which`    | outputs the path of an executable OR<br>information about aliases and custom commands |
 
-Note that the `cp`, `mv`, and `rm` commands do not
-currently support the `-i` flag to prompt for confirmation.
+The change to a subdirectory named "sub", enter `cd sub` or just `sub`.
+
+The `cp`, `mv`, and `rm` commands do not currently
+support the `-i` flag to prompt for confirmation.
 However, aliases for these can be defined to
 use the corresponding commands from the parent shell.
 For example, `alias rm = ^rm -i`.
 
-To clear the screen, enter `clear`.
+Commands such as `ls`, `ps`, and `sys` output data as a table.
+When a cell displays `[table n rows]`,
+that indicates that it contains a nested table.
+Use the `get` filter to display them (see examples below).
 
-The nu shell displays most data in tables.
-Commands that produce tables include `ls`, `ps`, and `sys`.
-When a column displays `[table n rows]`,
-use the `get` filter to display those rows (examples below).
-SQL-like filters like `where`, `sort-by`, and `reverse`
+SQL-like filters such as `where`, `sort-by`, and `reverse`
 can be used to modify the output.
-For example:
+
+Let's walk through some examples.
 
 ```bash
-# Change directory to a subdirectory named "src".
-src # no need to type the "cd" command
-
 # List all the package.json files in and below the current directory
 # using a glob pattern.
 ls **/package.json
 
-# List TypeScript files in and below the current directory
+# List Rust files in and below the current directory
 # using a glob pattern.
-ls **/*.ts
+ls **/*.rs
 
-# List files in a tree layout
+# List files in a tree layout.
 ls | tree
 
 # List files in the current directory with a size of 2kb or more,
@@ -905,7 +923,7 @@ ls | where type == File && size >= 2kb | sort-by -r size # same
 ls | where type == Dir | sort-by -r size | reject type
 
 # Output processes using more than 5% of a CPU
-# sorted on the usage in reverse order.
+# sorted on CPU usage in reverse order.
 ps | where cpu > 5 | sort-by -r cpu
 
 # Output information about the current machine
@@ -922,20 +940,23 @@ date now | date to-table
 To convert a table to a specific text format, use the `to` command.
 Supported formats include csv (comma-separated), html, json,
 md (Markdown), toml, tsv (tab-separated), url (url-encoded text), xml, and yaml.
+For example, to generate JSON from the `ls` command output,
+enter `ls | to json`.
 
-To write the text output of a command to a file, use the `save` command.
-This is alternative to the `>` redirect operator using in bash.
+The `save` command writes the string output of a command to a file.
+This is alternative to the `>` redirect operator used in the Bash shell.
+The `to` command can be used to convert non-string data to a string.
 
 For example:
 
 ```bash
-# Create an HTML file describing the largest directories
-# in the current directory that are more than 1 KB.
-ls | where type == Dir && size > 1024 | sort-by -r size | to html | save big-zips.html
+# Create an HTML file describing the directories
+# in the current directory that are larger than 1 KB.
+ls | where type == Dir && size > 1024 | sort-by -r size | to html | save big-dirs.html
 
 # The text format defaults to CSV if the file extension is .csv.
-# It does not do this for other file extensions.
-ls | where type == Dir && size > 1024 | sort-by -r size | save big-zips.csv
+# It does not do this for any other file extensions.
+ls | where type == Dir && size > 1024 | sort-by -r size | save big-dirs.csv
 ```
 
 ## Aliases
@@ -943,30 +964,32 @@ ls | where type == Dir && size > 1024 | sort-by -r size | save big-zips.csv
 To create an alias for a command, enter `alias {name} = {command}`.
 For example, `alias cls = clear`.
 
-The command can be built-in or custom
+The command can be a built-in command or a custom command,
 and literal arguments can be specified.
-When the aliases is used, additional arguments can be specified.
-For example, alias
+When aliases are used, additional arguments can be specified.
+For example:
+
+```bash
+alias df = date format
+date now | df "%B %-d, %Y" # April 3, 2021
+```
 
 To make aliases available in each new Nushell session,
 add them to the `startup` list in the config file
 as shown in the "Configuration" section.
 
 Aliases cannot use pipelines. Custom commands must be used instead.
-For example, this does not work:
+For example, the following does not work:
 
 ```bash
 alias top = ps | sort-by -r cpu | first 10
 ```
 
-But this does work:
+But defining it as as custom command as follows does work:
 
 ```bash
 def top [] { ps | sort-by cpu -r | first 10 }
 ```
-
-For more detail on supported commands, see the {% aTargetBlank
-"https://www.nushell.sh/book/command_reference.html", "Command Reference" %}.
 
 ## Custom Commands
 
@@ -974,7 +997,7 @@ To define a custom command, enter `def {name} [params] { commands }`.
 Names can be in kebab-case, including hyphens for readability.
 They can end with `?` to indicate that they return a Boolean value.
 Square brackets are used to surround the parameters because
-they are treated as a list and that is the syntax for lists.
+they are treated as a list and that syntax is used for lists.
 If no parameters are required, `[]` must still be included.
 
 The result of a custom command is
@@ -982,7 +1005,7 @@ the result of the last command pipeline
 or a string formed by the accumulation of everything it echoes.
 
 The following custom command has no parameters and outputs a table
-showing the processes that are using more 5% or more of CPU usage
+showing the processes that have CPU usage of 5% or more
 sorted from highest to lowest.
 
 ```bash
@@ -998,13 +1021,20 @@ Parameter values are accessed by adding `$` before their names.
 def topn [pct] { ps | where cpu >= $pct | sort-by -r cpu }
 ```
 
-To run this, enter `top` followed by a number like `top 5`.
+To run this enter `top` followed by a number.
+For example, `top 5`.
+
+To make custom commands available in each new Nushell session,
+add them to the `startup` list in the config file
+as shown in the "Configuration" section.
+
+TODO: Continue reviewing from here.
 
 The type of each parameter can optionally be specified after a colon to
 provide better documentation and better error messages when used incorrectly.
-Supported types include `any`, `int`, `number` (for float),
+Supported types include `any`, `int`, `number` (for integer or decimal),
 `path` (for file paths), `pattern` (for glob patterns), `range`,
-`string`, `table`, `block`, and `unit` (like void?).
+`string`, `table`, `block`, and `unit` (value with unit like `3mb`).
 For example:
 
 ```bash
@@ -1794,14 +1824,14 @@ See {% aTargetBlank
 
 The following table shows the Nushell equivalent of some common Bash commands.
 
-| Bash                   | Nushell                                  | Description                                                                  |
-| ---------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
-| `man command`          | `help command` only for Nushell commands |                                                                              |
-| `$PATH`                | `$nu.path`                               | list of directories search for executables                                   |
-| `cat file-path`        | `open --raw file-path`                   | print the contents of a file; omit `--raw` to output structured data         |
-| `command > file-path`  | `command \| save --raw file-path`        | saves command output to a file<br>without converting based on file extension |
-| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`                      | creates directory structure, including any missing directories               |
-| cmd1 && cmd2           | cmd1; cmd2                               | run cmd1 and then only run cmd2 if cmd1 was successful                       |
+| Bash                   | Nushell                           | Description                                                                  |
+| ---------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
+| `man command`          | `help command`                    | `help commands` lists Nushell commands and custom commands                   |
+| `$PATH`                | `$nu.path`                        | list of directories search for executables                                   |
+| `cat file-path`        | `open --raw file-path`            | print the contents of a file; omit `--raw` to output structured data         |
+| `command > file-path`  | `command \| save --raw file-path` | saves command output to a file<br>without converting based on file extension |
+| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`               | creates directory structure, including any missing directories               |
+| cmd1 && cmd2           | cmd1; cmd2                        | run cmd1 and then only run cmd2 if cmd1 was successful                       |
 
 The command whose output is piped in the `save` command must produce a string.
 For example, `date now | save --raw timestamp.txt` does not work,
