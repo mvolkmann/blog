@@ -1285,7 +1285,7 @@ These file types include csv, ini, json, toml, xml, and yaml.
 
 Consider the file `scores.csv` containing the follow:
 
-```csv
+```text
 Name,Score
 Mark,19
 Tami,21
@@ -1417,7 +1417,7 @@ fetch https://jsonplaceholder.typicode.com/todos | where userId == 2 && complete
 
 ## Table Commands
 
-TODO: Continue reviewing from here.
+TODO: Continue reviewing from flatten command.
 
 Many Nushell commands operate on tables.
 
@@ -1426,12 +1426,12 @@ Many Nushell commands operate on tables.
 | `append`                   | creates a new table by appending a single row to an existing table                                                        |
 | `autoview`                 | renders data as a table or list                                                                                           |
 | `compact`                  | removes empty rows                                                                                                        |
-| `drop n`                   | removes the last n rows (n defaults to 1)                                                                                 |
-| `drop column n`            | removes the last n columns (n defaults to 1)                                                                              |
+| `drop n`                   | removes the last `n` rows (`n` defaults to 1)                                                                             |
+| `drop column n`            | removes the last `n` columns (`n` defaults to 1)                                                                          |
 | `each`                     | runs a block of code on each row                                                                                          |
-| `every n`                  | show or skip every nth row                                                                                                |
-| `first n`                  | show only the first n rows (n defaults to 1)                                                                              |
-| `flatten`                  | flattens a table                                                                                                          |
+| `every n`                  | show (default) or skip (with `-s` option) every `n`th row                                                                 |
+| `first n`                  | show only the first `n` rows (`n` defaults to 1)                                                                          |
+| `flatten`                  | flattens a table or list, turning nested values into top-level values                                                     |
 | `format`                   | formats columns into a string                                                                                             |
 | `from {format}`            | parses a given file format into a table                                                                                   |
 | `get {column-name}`        | gets the content of a given column name as a table                                                                        |
@@ -1439,10 +1439,10 @@ Many Nushell commands operate on tables.
 | `headers`                  | creates a table from an existing one where the first row replaces the current column headers                              |
 | `histogram`                | creates a table with "value", "count", "percentage", and "frequency"<br>columns based on a given column in an input table |
 | `insert`                   | inserts a column                                                                                                          |
-| `keep n`                   | keeps the first n rows (n defaults to 1); same as `first`?                                                                |
+| `keep n`                   | keeps the first `n` rows (`n` defaults to 1); same as `first`?                                                            |
 | `keep until {condition}`   | keeps rows until the condition is met                                                                                     |
 | `keep while {condition}`   | keeps rows while the condition is met                                                                                     |
-| `last n`                   | show only the last n rows (n defaults to 1)                                                                               |
+| `last n`                   | show only the last `n` rows (`n` defaults to 1)                                                                           |
 | `length`                   | counts rows or list items                                                                                                 |
 | `lines`                    | splits a string of lines into rows                                                                                        |
 | `match`                    | filter rows using a regular expression                                                                                    |
@@ -1457,12 +1457,12 @@ Many Nushell commands operate on tables.
 | `reject`                   | removes columns by name                                                                                                   |
 | `rename`                   | renames columns                                                                                                           |
 | `reverse`                  | reverses the order of the rows                                                                                            |
-| `roll n`                   | rolls the bottom n rows to the top (n defaults to 1)                                                                      |
+| `roll n`                   | rolls the bottom `n` rows to the top (`n` defaults to 1)                                                                  |
 | `rotate`                   | rotates the table 90 degrees clockwise; can apply multiple times                                                          |
 | `rotate counter-clockwise` | rotates the table 90 degrees counter-clockwise                                                                            |
 | `select {column-names}`    | specifies columns to be retained by name and their order                                                                  |
 | `shuffle`                  | shuffles the rows randomly                                                                                                |
-| `skip n`                   | skips the first n rows (n defaults to 1)                                                                                  |
+| `skip n`                   | skips the first `n` rows (`n` defaults to 1)                                                                              |
 | `skip until {condition}`   | skips rows until the condition is met                                                                                     |
 | `skip while {condition}`   | skips rows while the condition is met                                                                                     |
 | `sort-by`                  | sorts rows on given columns                                                                                               |
