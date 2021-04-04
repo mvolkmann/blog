@@ -150,6 +150,43 @@ link in the top nav of the Nushell website.
 For more help, join the {% aTargetBlank
 "https://discord.gg/NtAbbGn", "nushell Discord channel" %}.
 
+## Subcommands
+
+Subcommands provide a way of grouping commands under a common "namespace".
+Examples of such built-in namespaces include
+`date`, `from`, `to`, `math`, `str`, `url`.
+
+The `date` subcommands are
+`format`, `list-timezone`, `now`, `to-table`, and `to-timezone`.
+
+The `from` subcommands convert data from a given format to a table.
+They are
+`csv`, `eml`, `ics`, `ini`, `json`, `ods`, `ssv`, `toml`, `tsv`,
+`url`, `vcf`, `xlsx`, `xml`, `yaml`, and `yml`.
+
+The `to` subcommands convert a table into a given output format and
+are commonly piped to the `save` command to write the result to a file.
+They are
+`csv`, `html`, `json`, `md`, `toml`, `tsv`, `url`, `xml`, and `yaml`.
+
+The `math` subcommands perform math calculations.
+They are
+`abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
+`product`, `round`, `sqrt`, `stddev`, `sum`, and `variance`.
+Also see the commands `inc`, `into-int`, `random`, and `seq`.
+
+The `str` subcommands perform string operations.
+They are
+`camel-case`, `capitalize`, `collect`, `contains`, `downcase`, `ends-with`,
+`find-replace`, `from`, `index-of`, `kebab-case`, `length`, `lpad`, `ltrim`,
+`pascal-case`, `reverse`, `rpad`, `rtrim`, `screaming-snake-case`,
+`snake-case`, `starts-with`, `substring`, `to-datetime`, `to-decimal`,
+`to-int`, `trim`, and `upcase`.
+Also see the commands `build-string`, `char`, `flatten`, `format`, and `size`.
+
+The `url` subcommands get information from a URL.
+They are `host`, `path`, `query`, and `scheme` (ex. http).
+
 ## Configuration
 
 The configuration for Nushell is stored in a
@@ -166,6 +203,12 @@ To edit the config file with VS Code, enter `code $(config path)`.
 When editing the config file using VS Code,
 consider installing the "TOML Language Support" extension
 which profiles syntax highlighting and formatting.
+
+<aside>
+The syntax `$(pipeline)` is referred to as an "invocation".
+This can be used to pass the result of a command pipeline
+as a argument to a command.
+</aside>
 
 Some Nushell configuration settings are top-level
 and do not appear in a specific TOML section.
@@ -351,6 +394,13 @@ that are specific to Nushell.
 Note that if Nushell is your login shell then
 there is no parent shell from which to inherit environment variables.
 
+For example:
+
+```toml
+[env]
+GITHUB_USER = "mvolkmann"
+```
+
 ### `textview` Section
 
 These settings affect operation of the `bat` crate
@@ -376,44 +426,51 @@ and enter `bat --list-themes`. There are over 20.
 
 Unlike most shells where only strings are used for command input and output,
 Nushell supports many primitive and structured data types.
+Some types described in the Nushell documentation are purely conceptual,
+meaning that they cannot be used as the type of a custom command parameter.
+The following tables list all the real types and conceptual types.
 
-| Type        | Description                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------------------- |
-| `any`       | any type below (default for variables and custom command parameters)                           |
-| `binary`    | sequence of raw bytes                                                                          |
-| `block`     | block of nu script code (can be executed on each row of a table)                               |
-| `boolean`   | literal values are `$true` and `$false`                                                        |
-| column path | dot-separated list of nested column names                                                      |
-| `date`      | timezone-aware; defaults to UTC                                                                |
-| `decimal`   | number with a fractional part and infinite precision                                           |
-| `duration`  | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, `wk`, `mon`, or `yr`   |
-| `filesize`  | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                    |
-| `group`     | semicolon-separated list of pipelines where only output from the last is output                |
-| `int`       | whole number with infinite precision                                                           |
-| `line`      | string with an OS-dependent line ending                                                        |
-| list        | sequence of values of any type                                                                 |
-| `number`    | `int` or `decimal`, both with infinite precision                                               |
-| `path`      | platform-independent path to a file or directory                                               |
-| `pattern`   | glob pattern that can include `*` wildcard and `**` for traversing directories                 |
-| `range`     | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive); use 2 dots, not 3        |
-| row         | list where each value represents a column with an associated name                              |
-| `string`    | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
-| `table`     | list of rows; returned by many Nushell commands                                                |
-| `unit`      | any value with a unit; includes `duration` and `filesize` types                                |
+Real Types:
 
-TODO: It seems that `decimal`, `duration`, and `filesize` are not real types.
-TODO: You asked about this in Discord on 4/3/2021.
+| Type      | Description                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------- |
+| `any`     | any type below (default for variables and custom command parameters)                           |
+| `block`   | block of nu script code (can be executed on each row of a table)                               |
+| `int`     | whole number with infinite precision                                                           |
+| `number`  | `int` or `decimal`, both with infinite precision                                               |
+| `path`    | platform-independent path to a file or directory                                               |
+| `pattern` | glob pattern that can include `*` wildcard and `**` for traversing directories                 |
+| `range`   | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive); use 2 dots, not 3        |
+| `string`  | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
+| `table`   | list of rows; returned by many Nushell commands                                                |
+| `unit`    | any value with a unit; includes `duration` and `filesize` types                                |
 
-To see the type of an expression, pipe it to the `describe` command.
-For example, `date now | describe` outputs `date`.
+Conceptual Types:
 
+| Type        | Description                                                                                  |
+| ----------- | -------------------------------------------------------------------------------------------- |
+| binary      | sequence of raw bytes                                                                        |
+| boolean     | literal values are `$true` and `$false`                                                      |
+| column path | dot-separated list of nested column names                                                    |
+| date        | timezone-aware; defaults to UTC                                                              |
+| decimal     | number with a fractional part and infinite precision                                         |
+| duration    | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, `wk`, `mon`, or `yr` |
+| filesize    | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                  |
+| group       | semicolon-separated list of pipelines where only output from the last is output              |
+| line        | string with an OS-dependent line ending                                                      |
+| list        | sequence of values of any type                                                               |
+| row         | list where each value represents a column with an associated name                            |
+
+To see a description of the value of an expression,
+pipe it to the `describe` command.
+This is not its real type.
 Values of type of `int` are reported as `integer`.
 This is likely a bug. See {% aTargetBlank
 "https://github.com/nushell/nushell/issues/3206", "issue 3206" %}.
+For example, `date now | describe` outputs `date`.
 
-The following types are never output by the `describe` command:
-`number`, list, `pattern`, `range`, and `table`.
-Perhaps the `describe` command should be modified to report these types.
+Perhaps the `describe` command should be modified to report real types
+or a new command should be added to do this.
 See {% aTargetBlank "https://github.com/nushell/nushell/issues/3206",
 "issue 3206" %}.
 
@@ -428,35 +485,28 @@ TODO: Fill in the ??? in this table.
 TODO: How can you create values with these types?
 TODO: binary, line, path, pattern, row
 
-| From       | To         | Command                                            |
-| ---------- | ---------- | -------------------------------------------------- |
-| `any`      | `string`   | pipe to `describe`                                 |
-| `binary`   | `string`   | pipe to `???`                                      |
-| `boolean`  | `string`   | pipe to `str from`                                 |
-| `date`     | `string`   | pipe to `str from`                                 |
-| `decimal`  | `string`   | pipe to `str from`                                 |
-| `duration` | `string`   | pipe to `str from` \*                              |
-| `filesize` | `string`   | pipe to `str from`                                 |
-| `int`      | `string`   | pipe to `str from`                                 |
-| `line`     | `string`   | pipe to `???`                                      |
-| `list`     | `string`   | pipe to `str collect` if the list contains strings |
-| `path`     | `string`   | pipe to `???`                                      |
-| `pattern`  | `string`   | pipe to `???`                                      |
-| `range`    | `string`   | pipe to `???`                                      |
-| `row`      | `string`   | pipe to `???`                                      |
-| `string`   | `binary`   | pipe to `???`                                      |
-| `string`   | `boolean`  | pipe to `???`                                      |
-| `string`   | `date`     | pipe to `str to-datetime`                          |
-| `string`   | `decimal`  | pipe to `str to-decimal`                           |
-| `string`   | `duration` | pipe to `???`                                      |
-| `string`   | `filesize` | pipe to `???`                                      |
-| `string`   | `int`      | pipe to `str to-int`                               |
-| `string`   | `list`     | pipe to `split row`                                |
-| `string`   | `path`     | pipe to `???`                                      |
-| `string`   | `range`    | pipe to `???`                                      |
-| `string`   | `row`      | pipe to `???`                                      |
-| `string`   | `table`    | pipe to `???`                                      |
-| `table`    | `string`   | pipe to `???`                                      |
+| From      | To       | Command                                            |
+| --------- | -------- | -------------------------------------------------- |
+| `any`     | `string` | pipe to `describe`                                 |
+| boolean   | `string` | pipe to `str from`                                 |
+| date      | `string` | pipe to `str from`                                 |
+| `int`     | `string` | pipe to `str from`                                 |
+| list      | `string` | pipe to `str collect` if the list contains strings |
+| `number`  | `string` | pipe to `str from`                                 |
+| `path`    | `string` | pipe to `???`                                      |
+| `pattern` | `string` | pipe to `???`                                      |
+| `range`   | `string` | pipe to `???`                                      |
+| `table`   | `string` | pipe to `???`                                      |
+| `unit`    | `string` | pipe to `str from` \*                              |
+| `string`  | boolean  | pipe to `???`                                      |
+| `string`  | date     | pipe to `str to-datetime`                          |
+| `string`  | `int`    | pipe to `str to-int`                               |
+| `string`  | list     | pipe to `split row`                                |
+| `string`  | `number` | pipe to `str to-decimal`                           |
+| `string`  | `path`   | pipe to `???`                                      |
+| `string`  | `range`  | pipe to `???`                                      |
+| `string`  | `table`  | pipe to `???`                                      |
+| `string`  | `unit`   | pipe to `???`                                      |
 
 \* TODO: This gives an error. Why?
 
@@ -1028,29 +1078,22 @@ To make custom commands available in each new Nushell session,
 add them to the `startup` list in the config file
 as shown in the "Configuration" section.
 
-TODO: Continue reviewing from here.
-
 The type of each parameter can optionally be specified after a colon to
 provide better documentation and better error messages when used incorrectly.
-Supported types include `any`, `int`, `number` (for integer or decimal),
-`path` (for file paths), `pattern` (for glob patterns), `range`,
-`string`, `table`, `block`, and `unit` (value with unit like `3mb`).
-For example:
-
-```bash
-def topn [pct: number] { ps | where cpu >= $pct | sort-by -r cpu }
-```
-
-When invoking a command, multiple arguments are separated by spaces.
+See the list of "real types" described in the "Data Types" section.
 For example:
 
 ```bash
 def sum [n1: number, n2: number] { = $n1 + $n2 }
+
+def topn [pct: number] { ps | where cpu >= $pct | sort-by -r cpu }
 ```
 
-To run this, enter a command like `sum 1 2` which outputs `3`.
+When invoking a command, multiple arguments are separated by spaces.
+For example, entering `sum 1 2` which outputs `3`.
 
-Here are examples of custom commands whose result is defined by what they echo.
+Here are examples of custom commands whose result is defined by what they echo
+rather than the result of a command pipeline.
 
 ```bash
 def evaluate [n: int] {
@@ -1073,7 +1116,7 @@ echo $(evaluate2 9) # The number 9 is big.
 ```
 
 Input from other commands can be piped into a custom command
-and accessed with the `$it` variable.
+and accessed with the `$it` special variable.
 Output from custom commands can be piped into other commands.
 
 The parameters in the examples above are positional.
@@ -1091,7 +1134,7 @@ For example:
 def logv [value: any] {
   echo $(build-string $value $(char newline))
   # Another way to write the line above is:
-  #echo [`{{$value}}` $(char newline)] | str collect
+  # echo [`{{$value}}` $(char newline)] | str collect
 }
 
 # Prints "name = value" followed by a newline.
@@ -1103,11 +1146,6 @@ def logv-color [
   text: string,
   --color (-c): string # a flag
 ] {
-  # This code does not work yet.
-  # It gives a coercion error that supposed is fixed in the next version of nu.
-  # See https://github.com/nushell/nushell/discussions/3178.
-  #if $color == $nothing {
-
   #if $(echo $color | empty?) { # same as next line
   if $(= $color | empty?) {
     logv $text
@@ -1116,19 +1154,18 @@ def logv-color [
   }
 }
 
-logv-color "Giraffes are cool!" "yellow"
+logv-color "Giraffes are cool!" -c "yellow"
 ```
 
 {% endraw %}
 
 Custom commands can take arguments with a type of `block`.
 The `do` command can be used to execute the block.
-For example, this can be used to implement `map`
+For example, this can be used to implement a `map` command
 which takes a list and a block.
 
 ```bash
-# You asked about this in Discord.
-def map [values, code: block] { # What type can be specified for values?
+def map [values: any, code: block] {
   echo $values | each $code
 }
 
@@ -1138,7 +1175,7 @@ map $names {
   echo $(build-string "Hello, " $it $(char newline))
 } | str collect
 
-# Same result just using each.
+# Same result using built-in "each" command instead of custom "map" command.
 echo $names | each {
   echo $(build-string "Hello, " $it ($(char newline))
 } | str collect
@@ -1175,43 +1212,8 @@ def sum [
 }
 ```
 
-Subcommands provide a way of grouping commands under a common "namespace".
-Examples of such built-in namespaces include
-`date`, `from`, `to`, `math`, `str`, `url`.
-
-The `date` subcommands are
-`format`, `list-timezone`, `now`, `to-table`, and `to-timezone`.
-
-The `from` subcommands convert data from a given format to a table.
-They are
-`csv`, `eml`, `ics`, `ini`, `json`, `ods`, `ssv`, `toml`, `tsv`,
-`url`, `vcf`, `xlsx`, `xml`, `yaml`, and `yml`.
-
-The `to` subcommands convert a table into a given output format and
-are commonly piped to the `save` command to write the result to a file.
-They are
-`csv`, `html`, `json`, `md`, `toml`, `tsv`, `url`, `xml`, and `yaml`.
-
-The `math` subcommands perform math calculations.
-They are
-`abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
-`product`, `round`, `sqrt`, `stddev`, `sum`, and `variance`.
-Also see the commands `inc`, `into-int`, `random`, and `seq`.
-
-The `str` subcommands perform string operations.
-They are
-`camel-case`, `capitalize`, `collect`, `contains`, `downcase`, `ends-with`,
-`find-replace`, `from`, `index-of`, `kebab-case`, `length`, `lpad`, `ltrim`,
-`pascal-case`, `reverse`, `rpad`, `rtrim`, `screaming-snake-case`,
-`snake-case`, `starts-with`, `substring`, `to-datetime`, `to-decimal`,
-`to-int`, `trim`, and `upcase`.
-Also see the commands `build-string`, `char`, `flatten`, `format`, and `size`.
-
-The `url` subcommands get information from a URL.
-They are `host`, `path`, `query`, and `scheme` (ex. http).
-
 Defining a custom subcommand is similar to defining a custom command,
-but the name is specified as the parent command and subcommand name
+but the name is specified as the parent command name and the subcommand name
 separated by a space and inside quotes.
 In the following custom commands, the parent command `rmv` is my initials:
 
@@ -1226,6 +1228,7 @@ def "rmv increment" [n: number] { = $n + 1 }
 def "rmv double" [n: number] { = $n * 2 }
 
 let score = 3
+# The "lognv" command is defined above.
 lognv 'score' $(rmv double $(rmv increment $score)) # 8
 ```
 
@@ -1236,47 +1239,38 @@ They are immutable, so they must be set when they are declared.
 However, they can be shadowed to have different values in different scopes.
 
 To set a variable, enter `let name = value`.
-Their scope is the context or block in which they are defined.
+The scope of a variable is the context or block in which it is defined.
 
 To set a variable to the result of a command pipeline,
-which may contain only a single command,
+which can be comprised of one or more commands,
 enter `let name = $(pipeline)`.
-The syntax `$(...)` is referred to as an "invocation".
-It can also be used to pass the result of a command pipeline
-as a argument to a command.
 
 To use a variable in an expression, precede its name with `$`.
 For example, `$total`.
-When a variable holds a structured value such as a table,
-dot syntax can be used to access nested values.
-For example:
+
+The `build-str` command concatenates the values of multiple expressions
+into a single string.
+For example, the following sets a variable to the result of
+concatenating two variable values as strings:
 
 ```bash
-# A single row type can be used like objects in other languages.
-let data = [[color flavor]; [yellow vanilla]]
-echo $data.flavor # outputs vanilla
+let v3 = $(build-str $v1 $v2)
 ```
-
-To set a variable to the result of concatenating two variable values as strings,
-use `let v3 = $(build-str $v1 $v2)`.
-
-To get the type of a primitive value, pipe it into the `describe` command.
-For example, `echo 19 | describe` outputs "integer"
-and `echo 3.14 | describe` outputs "decimal".
 
 ## Environment Variables
 
 Environment variables are distinct from regular variables.
 Unlike regular variables, environment variables can be
-used in executables that are run from Nushell.
+accessed by executables that are run from Nushell.
 
 To set the value of an environment variable only in the current scope,
 not permanently, enter `let-env NAME = value`.
-This adds `NAME` to `$nu.env` which is a like a map of environment variables.
+This adds `NAME` to `$nu.env` which holds a map of environment variables.
 
 To set the value of an environment variable
 so it is available in subsequent Nushell sessions,
-add it to the `env` section of the Nushell configuration file.
+add it to the `env` section of the Nushell configuration file
+as shown in the "Configuration" section.
 
 To get the value of an environment variable, use `$nu.env.NAME`.
 To print the value, enter `echo $nu.env.NAME` or `config | get env.{name}`.
@@ -1285,6 +1279,8 @@ To see a nicely formatted list of environment variables,
 enter `echo $nu.env | pivot` or `config | get env | pivot`.
 
 ## open Command
+
+TODO: Continue reviewing from here.
 
 The `open` command renders certain file types as tables.
 These file types include csv, ini, json, toml, xml, and yaml.
@@ -1308,6 +1304,9 @@ The output will be similar to the following:
  4 │ start   │ sirv public
 ───┴─────────┴─────────────────────────────────────────────────────────
 ```
+
+TODO: Is there are way to suppress the header row and the # column
+TODO: from a specific command output.
 
 To see the commands in the Nushell configuration file `startup` section,
 enter `open $(config path) | get startup`.
