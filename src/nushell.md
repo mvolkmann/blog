@@ -182,7 +182,7 @@ They are
 `pascal-case`, `reverse`, `rpad`, `rtrim`, `screaming-snake-case`,
 `snake-case`, `starts-with`, `substring`, `to-datetime`, `to-decimal`,
 `to-int`, `trim`, and `upcase`.
-Also see the commands `build-string`, `char`, `flatten`, `format`, and `size`.
+Also see the commands `build-string`, `char`, `format`, and `size`.
 
 The `url` subcommands get information from a URL.
 They are `host`, `path`, `query`, and `scheme` (ex. http).
@@ -660,6 +660,17 @@ let scores = [[Name Score]; [Mark 19] [Tami 21]]
 = $scores | empty? # false
 let scores = []
 = $scores | empty? # true; not empty if only header row is present
+```
+
+The `flatten` command creates a new list from an existing list
+by adding items in nested lists to the top-level list.
+This can be called multiple times to flatten lists nested at any depth.
+For example:
+
+```bash
+echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
+
+echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
 The `reduce` command computes a single value from a list.
@@ -1417,7 +1428,7 @@ fetch https://jsonplaceholder.typicode.com/todos | where userId == 2 && complete
 
 ## Table Commands
 
-TODO: Continue reviewing from flatten command.
+TODO: Continue reviewing from the `from` command.
 
 Many Nushell commands operate on tables.
 
@@ -1432,7 +1443,7 @@ Many Nushell commands operate on tables.
 | `every n`                  | show (default) or skip (with `-s` option) every `n`th row                                                                 |
 | `first n`                  | show only the first `n` rows (`n` defaults to 1)                                                                          |
 | `flatten`                  | flattens a table or list, turning nested values into top-level values                                                     |
-| `format`                   | formats columns into a string                                                                                             |
+| `format`                   | formats specified columns into a single string using a pattern                                                            |
 | `from {format}`            | parses a given file format into a table                                                                                   |
 | `get {column-name}`        | gets the content of a given column name as a table                                                                        |
 | `group-by`                 | creates multiple tables from one based on some grouping                                                                   |
@@ -1563,10 +1574,6 @@ This produces the following output:
 ╰───┴────────┴─────┴───────┴──────╯
 ```
 
-TODO: How could you iterate over the rows of a table
-TODO: and add each one to another table? Use reduce and append?
-TODO: See `append-demo.nu`.
-
 The table in the previous example can be created from a string
 using the `split` and `headers` commands.
 
@@ -1578,6 +1585,43 @@ echo $colors
 
 The `split-by` command doesn't seem very useful.
 TODO: See `split-by-demo.nu`.
+
+The `flatten` can create a new table from an existing table,
+replacing columns that whose values are nested tables
+with the columns in those tables.
+For example, the `sys` command creates a table with the columns
+"host", "cpu", "disks", "mem" (for memory),
+"temp" (for temperature), and "net" (for network activity).
+Piping this output to the `flatten` command
+replaces the "host" and "mem" columns with the columns in their nested tables.
+
+The `format` command formats specified columns
+into a single string using a pattern.
+For example:
+
+```bash
+ls | format '{name} is a {size} {type} and was modified {modified}.' | str downcase
+```
+
+This outputs lines like the following:
+
+```text
+histogram.nu is a 233 b file and was modified 1 week ago.
+```
+
+The `from` command parses a given file format into a table.
+For example:
+
+```bash
+let data = $(open --raw scores.csv)
+let table = echo $data | from csv
+```
+
+This can be done in a single line with `let table = $(open scores.csv)`.
+
+TODO: How could you iterate over the rows of a table
+TODO: and add each one to another table? Use reduce and append?
+TODO: See `append-demo.nu`.
 
 The rows of a table can be segregated into multiple tables
 using the `group-by` command.
