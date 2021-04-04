@@ -205,7 +205,7 @@ consider installing the "TOML Language Support" extension
 which profiles syntax highlighting and formatting.
 
 <aside>
-The syntax `$(pipeline)` is referred to as an "invocation".
+The syntax <code>$(pipeline)</code> is referred to as an "invocation".
 This can be used to pass the result of a command pipeline
 as a argument to a command.
 </aside>
@@ -1280,11 +1280,34 @@ enter `echo $nu.env | pivot` or `config | get env | pivot`.
 
 ## open Command
 
-TODO: Continue reviewing from here.
-
 The `open` command renders certain file types as tables.
 These file types include csv, ini, json, toml, xml, and yaml.
 
+Consider the file `scores.csv` containing the follow:
+
+```csv
+Name,Score
+Mark,19
+Tami,21
+Amanda,17
+Jeremy,15
+```
+
+The command `open scores.csv` renders this as follows:
+
+```text
+╭───┬────────┬───────╮
+│ # │ Name   │ Score │
+├───┼────────┼───────┤
+│ 0 │ Mark   │    19 │
+│ 1 │ Tami   │    21 │
+│ 2 │ Amanda │    17 │
+│ 3 │ Jeremy │    15 │
+╰───┴────────┴───────╯
+```
+
+When run on a JSON file, the `open` command produces a table
+from which specific data can be extracted.
 For example, the following outputs a table of scripts in a `package.json` file.
 
 ```bash
@@ -1294,29 +1317,28 @@ open package.json | get scripts | pivot
 The output will be similar to the following:
 
 ```text
-───┬─────────┬─────────────────────────────────────────────────────────
- # │ Column0 │                         Column1
-───┼─────────┼─────────────────────────────────────────────────────────
- 0 │ build   │ rollup -c
- 1 │ dev     │ rollup -c -w
- 2 │ format  │ prettier --write '{public,src}/**/*.{css,html,js,svelte}'
- 3 │ lint    │ eslint --fix --quiet src --ext .js,.svelte
- 4 │ start   │ sirv public
-───┴─────────┴─────────────────────────────────────────────────────────
+╭───┬─────────┬────────────────────────────────╮
+│ # │ Column0 │ Column1                        │
+├───┼─────────┼────────────────────────────────┤
+│ 0 │ dev     │ svelte-kit dev                 │
+│ 1 │ build   │ svelte-kit build               │
+│ 2 │ start   │ svelte-kit start               │
+│ 3 │ lint    │ prettier --check . && eslint . │
+│ 4 │ format  │ prettier --write .             │
+│ 5 │ open    │ svelte-kit dev --open          │
+╰───┴─────────┴────────────────────────────────╯
 ```
 
-TODO: Is there are way to suppress the header row and the # column
-TODO: from a specific command output.
+There is no way to output a table without the heading row.
+The "#" column can be suppressed from all table output by setting
+the `disable_table_indexes` configuration option to `true`,
+but there is no way to do this for the output of a specific command.
 
 To see the commands in the Nushell configuration file `startup` section,
 enter `open $(config path) | get startup`.
 
-Other types of files are treated as a list of lines and
-rendered in a table where the first column contains line numbers.
-For known programming language file extensions, syntax highlighting is provided.
-Compare this to using the `cat` command where this does not happen.
-
-To render delimited data as a table we can use the `lines` and `split` commands.
+The `lines` and `split` commands can be used
+to render delimited data as a table.
 For example, consider the following file content:
 
 ```text
@@ -1329,33 +1351,57 @@ Rust|2010|Graydon Hoare
 TypeScript|2012|Anders Hejlsberg
 ```
 
-To render a table where each row describes a programming language,
+The following command renders a table where
+each row describes a programming language,
 the columns have proper names, and
-the rows are sorted on ascending year of creation, enter
-`open languages.txt | lines | split column '|' Language Year Creator | sort-by Year`.
-The `lines` command converts input text into a list of separate lines of text.
-The following table is produced:
+the rows are sorted on ascending year of creation:
+
+```bash
+open languages.txt | lines | split column '|' Language Year Creator | sort-by Year
+```
+
+The `lines` command converts input text
+into a list of separate lines from the text.
+The command above produces the following output.
 
 ```text
-───┬────────────┬──────┬────────────────────
- # │  Language  │ Year │      Creator
-───┼────────────┼──────┼────────────────────
- 0 │ Python     │ 1991 │ Guido van Rossum
- 1 │ Java       │ 1995 │ James Gosling
- 2 │ JavaScript │ 1995 │ Brendan Eich
- 3 │ Ruby       │ 1995 │ Yukihiro Matsumoto
- 4 │ Rust       │ 2010 │ Graydon Hoare
- 5 │ Go         │ 2012 │ Rob Pike
- 6 │ TypeScript │ 2012 │ Anders Hejlsberg
-───┴────────────┴──────┴────────────────────
+╭───┬────────────┬──────┬────────────────────╮
+│ # │ Language   │ Year │ Creator            │
+├───┼────────────┼──────┼────────────────────┤
+│ 0 │ Python     │ 1991 │ Guido van Rossum   │
+│ 1 │ Java       │ 1995 │ James Gosling      │
+│ 2 │ JavaScript │ 1995 │ Brendan Eich       │
+│ 3 │ Ruby       │ 1995 │ Yukihiro Matsumoto │
+│ 4 │ Rust       │ 2010 │ Graydon Hoare      │
+│ 5 │ Go         │ 2012 │ Rob Pike           │
+│ 6 │ TypeScript │ 2012 │ Anders Hejlsberg   │
+╰───┴────────────┴──────┴────────────────────╯
 ```
+
+The `open` command treats other types of files as a list of lines and
+produces a table where the first column contains line numbers.
+For known programming language file extensions,
+the `open` command uses the `bat` crate which provides syntax highlighting.
+Compare this to using the `cat` command where this does not happen.
 
 If the file extension on a file does not match its content type,
 use the `from` command to specify the actual content type.
 For example, `open really-json.txt | from json`.
 
 To prevent the `open` command from processing a file, add the `--raw` flag.
-For example, `open scores.csv --raw`.
+For example, `open scores.csv --raw` outputs the following:
+
+```text
+───────┬────────────
+       │ scores.csv
+───────┼────────────
+   1   │ Name,Score
+   2   │ Mark,19
+   3   │ Tami,21
+   4   │ Amanda,17
+   5   │ Jeremy,15
+───────┴───────────
+```
 
 To process data from a URL instead of a local file, use the `fetch` command.
 For example, the
@@ -1370,6 +1416,8 @@ fetch https://jsonplaceholder.typicode.com/todos | where userId == 2 && complete
 ```
 
 ## Table Commands
+
+TODO: Continue reviewing from here.
 
 Many Nushell commands operate on tables.
 
