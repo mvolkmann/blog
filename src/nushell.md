@@ -596,10 +596,14 @@ Nushell doesn't currently support escape characters like `\n`,
 so the `char` command must be used to insert newlines into a literal string.
 For example:
 
+{% raw %}
+
 ```bash
 let s = `This string{{$(char newline)}}consists of{{$(char newline)}}three lines.`
 let l = echo $s | lines # ["This string", "consists of", "three lines."]
 ```
+
+{% endraw %}
 
 ### Ranges
 
