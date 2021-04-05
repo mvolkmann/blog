@@ -590,6 +590,17 @@ For example:
 = "foobarbaz" !~ "bar" # false
 ```
 
+The `lines` command creates a list of strings
+from a string that contains newline characters.
+Nushell doesn't currently support escape characters like `\n`,
+so the `char` command must be used to insert newlines into a literal string.
+For example:
+
+```bash
+let s = `This string{{$(char newline)}}consists of{{$(char newline)}}three lines.`
+let l = echo $s | lines # ["This string", "consists of", "three lines."]
+```
+
 ### Ranges
 
 Values of the `range` type can use default values for their start or end.
@@ -1456,7 +1467,7 @@ fetch https://jsonplaceholder.typicode.com/todos |
 
 ## Table Commands
 
-TODO: Continue reviewing from the `lines` command.
+TODO: Continue reviewing from the `pivot` command.
 
 Many Nushell commands operate on tables.
 
@@ -1483,11 +1494,10 @@ Many Nushell commands operate on tables.
 | `keep while {condition}`   | keeps rows while the condition is met                                                                                     |
 | `last n`                   | shows only the last `n` rows (`n` defaults to 1)                                                                          |
 | `length`                   | counts rows or list items                                                                                                 |
-| `lines`                    | splits a string of lines into rows                                                                                        |
 | `match`                    | filters rows by matching the values in given column against a regular expression                                          |
 | `merge`                    | merges tables by adding columns                                                                                           |
 | `move`                     | moves columns to another position                                                                                         |
-| `nth`                      | keep or skip specified rows                                                                                               |
+| `nth`                      | keeps or skips specified rows                                                                                             |
 | `parse`                    | parses columns from a string using a pattern                                                                              |
 | `pivot`                    | swaps the rows and columns                                                                                                |
 | `prepend`                  | prepends a row                                                                                                            |
@@ -1650,12 +1660,6 @@ let table = echo $data | from csv
 
 This can be done in a single line with `let table = $(open scores.csv)`.
 
-The `match` command filters rows by matching the
-values in given column against a regular expression.
-For example, `ls | where type == File | match name "^c.*\.nu$"`
-lists files in the current directory whose name
-begin with "c" and have a file extension of ".nu".
-
 TODO: How could you iterate over the rows of a table
 TODO: and add each one to another table? Use reduce and append?
 TODO: See `append-demo.nu`.
@@ -1695,6 +1699,12 @@ Another way to see only the files whose name ends with certain characters is:
 ```bash
 ls | where {= $(echo $it.name | str ends-with ".rs") } | get name
 ```
+
+The `match` command filters rows by matching the
+values in given column against a regular expression.
+For example, `ls | where type == File | match name "^c.*\.nu$"`
+lists files in the current directory whose name
+begin with "c" and have a file extension of ".nu".
 
 Table columns can be moved after or before another column.
 For example, by default the `ls` command outputs a type
