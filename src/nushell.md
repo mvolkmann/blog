@@ -480,12 +480,23 @@ This is likely a bug. See {% aTargetBlank
 "https://github.com/nushell/nushell/issues/3206", "issue 3206" %}.
 For example, `date now | describe` outputs `date`.
 
-Perhaps the `describe` command should be modified to report real types
-or a new command should be added to do this.
+<aside>
+It seems like many of the conceptual types should become real types long-term.
+I would think at least these could become real types:
+boolean, date, decimal (remove number?), duration, filesize, and list.
+
+Related to this is the fact that the `describe` command
+doesn't strictly return real type names.
+One of the oddities is that if you pipe an `int` value to `describe`,
+it outputs "integer".
 See {% aTargetBlank "https://github.com/nushell/nushell/issues/3206",
 "issue 3206" %}.
+Maybe it would be good to add a `type` command
+that returns the real type of a value.
 
-Details about these data types can be found at {% aTargetBlank
+</aside>
+
+Details about Nushell data types can be found at {% aTargetBlank
 "https://www.nushell.sh/book/types_of_data.html", "Types of data" %}.
 
 ### Type Conversions
