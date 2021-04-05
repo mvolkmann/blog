@@ -445,6 +445,16 @@ Real Types:
 | `table`   | list of rows; returned by many Nushell commands                                                |
 | `unit`    | any value with a unit; includes `duration` and `filesize` types                                |
 
+The ability to specify single-word literal strings with no delimiters
+is one of my favorite features in Nushell!
+It makes defining lists and tables that contain single-word strings
+much more compact.
+For example, the following line creates a list of color names.
+
+```bash
+let colors = [red orange yellow green blue purple]
+```
+
 Conceptual Types:
 
 | Type        | Description                                                                                  |
@@ -1428,7 +1438,7 @@ fetch https://jsonplaceholder.typicode.com/todos | where userId == 2 && complete
 
 ## Table Commands
 
-TODO: Continue reviewing from the `from` command.
+TODO: Continue reviewing from the `lines` command.
 
 Many Nushell commands operate on tables.
 
@@ -1440,25 +1450,25 @@ Many Nushell commands operate on tables.
 | `drop n`                   | removes the last `n` rows (`n` defaults to 1)                                                                             |
 | `drop column n`            | removes the last `n` columns (`n` defaults to 1)                                                                          |
 | `each`                     | runs a block of code on each row                                                                                          |
-| `every n`                  | show (default) or skip (with `-s` option) every `n`th row                                                                 |
-| `first n`                  | show only the first `n` rows (`n` defaults to 1)                                                                          |
+| `every n`                  | shows (default) or skips (with `-s` option) every `n`th row                                                               |
+| `first n`                  | shows only the first `n` rows (`n` defaults to 1); alternative to `keep`                                                  |
 | `flatten`                  | flattens a table or list, turning nested values into top-level values                                                     |
 | `format`                   | formats specified columns into a single string using a pattern                                                            |
 | `from {format}`            | parses a given file format into a table                                                                                   |
-| `get {column-name}`        | gets the content of a given column name as a table                                                                        |
+| `get {column-name}`        | gets the content of a given column                                                                                        |
 | `group-by`                 | creates multiple tables from one based on some grouping                                                                   |
 | `headers`                  | creates a table from an existing one where the first row replaces the current column headers                              |
 | `histogram`                | creates a table with "value", "count", "percentage", and "frequency"<br>columns based on a given column in an input table |
 | `insert`                   | inserts a column                                                                                                          |
-| `keep n`                   | keeps the first `n` rows (`n` defaults to 1); same as `first`?                                                            |
+| `keep n`                   | keeps the first `n` rows (`n` defaults to 1); alternative to `first`                                                      |
 | `keep until {condition}`   | keeps rows until the condition is met                                                                                     |
 | `keep while {condition}`   | keeps rows while the condition is met                                                                                     |
-| `last n`                   | show only the last `n` rows (`n` defaults to 1)                                                                           |
+| `last n`                   | shows only the last `n` rows (`n` defaults to 1)                                                                          |
 | `length`                   | counts rows or list items                                                                                                 |
 | `lines`                    | splits a string of lines into rows                                                                                        |
-| `match`                    | filter rows using a regular expression                                                                                    |
+| `match`                    | filters rows by matching the values in given column against a regular expression                                          |
 | `merge`                    | merges tables by adding columns                                                                                           |
-| `move`                     | moves columns                                                                                                             |
+| `move`                     | moves columns to another position                                                                                         |
 | `nth`                      | keep or skip specified rows                                                                                               |
 | `parse`                    | parses columns from a string using a pattern                                                                              |
 | `pivot`                    | swaps the rows and columns                                                                                                |
@@ -1601,6 +1611,7 @@ For example:
 
 ```bash
 ls | format '{name} is a {size} {type} and was modified {modified}.' | str downcase
+# downcase is used to change the type to lowercase.
 ```
 
 This outputs lines like the following:
@@ -1618,6 +1629,12 @@ let table = echo $data | from csv
 ```
 
 This can be done in a single line with `let table = $(open scores.csv)`.
+
+The `match` command filters rows by matching the
+values in given column against a regular expression.
+For example, `ls | where type == File | match name "^c.*\.nu$"`
+lists files in the current directory whose name
+begin with "c" and have a file extension of ".nu".
 
 TODO: How could you iterate over the rows of a table
 TODO: and add each one to another table? Use reduce and append?
