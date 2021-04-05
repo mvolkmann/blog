@@ -256,7 +256,8 @@ add the following line in the config file:
 {% raw %}
 
 ```bash
-prompt = "echo `🦀ν {{$(ansi yellow)}}{{$(pwd)}}{{$(ansi green)}}{{$(char prompt)}} `"
+prompt =
+  "echo `🦀ν {{$(ansi yellow)}}{{$(pwd)}}{{$(ansi green)}}{{$(char prompt)}} `"
 ```
 
 {% endraw %}
@@ -526,7 +527,8 @@ This can be a literal value or an expression such as a variable reference.
 For example:
 
 ```bash
-echo "2021-3-21 14:30" | str to-datetime | date format -t '%B %-d, %Y' | get formatted
+echo "2021-3-21 14:30" | str to-datetime | date format -t '%B %-d, %Y' |
+  get formatted
 # This outputs the string "March 21, 2021".
 # Supported control characters are described {% aTargetBlank
 "https://man7.org/linux/man-pages/man1/date.1.html", "here" %}.
@@ -541,7 +543,9 @@ Consider adding this to the startup array in your Nushell config file.
 # The `each` command iterates over list items that are piped to this command.
 # During the iteration, the special variable $it (for item)
 # is set to the current item.
-def as-lines [] { each { echo $(build-string $it $(char newline)) } | str collect }
+def as-lines [] {
+  each { echo $(build-string $it $(char newline)) } | str collect
+}
 ```
 
 ### Strings
@@ -1023,7 +1027,8 @@ For example:
 ```bash
 # Create an HTML file describing the directories
 # in the current directory that are larger than 1 KB.
-ls | where type == Dir && size > 1024 | sort-by -r size | to html | save big-dirs.html
+ls | where type == Dir && size > 1024 | sort-by -r size | to html |
+  save big-dirs.html
 
 # The text format defaults to CSV if the file extension is .csv.
 # It does not do this for any other file extensions.
@@ -1378,7 +1383,8 @@ the columns have proper names, and
 the rows are sorted on ascending year of creation:
 
 ```bash
-open languages.txt | lines | split column '|' Language Year Creator | sort-by Year
+open languages.txt | lines | split column '|' Language Year Creator |
+  sort-by Year
 ```
 
 The `lines` command converts input text
@@ -1433,7 +1439,8 @@ Todo data from this site can be rendered as a table with the following commands:
 ```bash
 fetch https://jsonplaceholder.typicode.com/todos | first 10
 
-fetch https://jsonplaceholder.typicode.com/todos | where userId == 2 && completed == $true | sort-by title
+fetch https://jsonplaceholder.typicode.com/todos |
+  where userId == 2 && completed == $true | sort-by title
 ```
 
 ## Table Commands
@@ -1588,7 +1595,8 @@ The table in the previous example can be created from a string
 using the `split` and `headers` commands.
 
 ```bash
-let data = "name red green blue|red 255 0 0|green 0 255 0|blue 0 0 255|purple 255 0 255"
+let data =
+  "name red green blue|red 255 0 0|green 0 255 0|blue 0 0 255|purple 255 0 255"
 let colors = $(echo $data | split row "|" | split column " " | headers)
 echo $colors
 ```
@@ -1610,7 +1618,8 @@ into a single string using a pattern.
 For example:
 
 ```bash
-ls | format '{name} is a {size} {type} and was modified {modified}.' | str downcase
+ls | format '{name} is a {size} {type} and was modified {modified}.' |
+  str downcase
 # downcase is used to change the type to lowercase.
 ```
 
@@ -1750,17 +1759,18 @@ echo $data | get color | histogram
 This produces the following table:
 
 ```text
-╭───┬────────┬───────┬────────────┬─────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ # │ value  │ count │ percentage │ frequency                                                                                           │
-├───┼────────┼───────┼────────────┼─────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ 0 │ blue   │     2 │ 66.67%     │ ******************************************************************                                  │
-│ 1 │ green  │     1 │ 33.33%     │ *********************************                                                                   │
-│ 2 │ yellow │     3 │ 100.00%    │ *************************************************************************************************** │
-╰───┴────────┴───────┴────────────┴─────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭───┬────────┬───────┬────────────┬──────────────────────────────────────────────╮
+│ # │ value  │ count │ percentage │ frequency                                    │
+├───┼────────┼───────┼────────────┼──────────────────────────────────────────────┤
+│ 0 │ blue   │     2 │ 66.67%     │ *****************************                │
+│ 1 │ green  │     1 │ 33.33%     │ ***************                              │
+│ 2 │ yellow │     3 │ 100.00%    │ ******************************************** │
+╰───┴────────┴───────┴────────────┴──────────────────────────────────────────────╯
 ```
 
 The percentage values are double what they should be.
-See {% aTargetBlank "https://github.com/nushell/nushell/issues/3215", "issue 3215" %}.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3215",
+"issue 3215" %}.
 
 ## Plugins
 

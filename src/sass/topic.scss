@@ -4,7 +4,6 @@ a > code {
 
 article aside {
   border: 1px solid gray;
-  margin-left: 2rem;
   padding: 1rem;
 }
 
@@ -12,6 +11,8 @@ body {
   --accent-color: #3265dc;
 
   font-family: sans-serif;
+  margin: 0 auto;
+  max-width: 50rem;
 }
 
 h2 {
