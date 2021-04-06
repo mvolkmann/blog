@@ -702,6 +702,28 @@ let scores = []
 = $scores | empty? # true; not empty if only header row is present
 ```
 
+The `append` command appends a value to the end of a list.
+The `prepend` command prepends a value to the beginning of a list.
+For example:
+
+```bash
+let colors = [yellow green]
+let colors = $(echo $colors | prepend red)
+let colors = $(echo $colors | append purple)
+echo $colors
+```
+
+This outputs the following:
+
+```text
+╭───┬────────╮
+│ 0 │ red    │
+│ 1 │ yellow │
+│ 2 │ green  │
+│ 3 │ purple │
+╰───┴────────╯
+```
+
 The `flatten` command creates a new list from an existing list
 by adding items in nested lists to the top-level list.
 This can be called multiple times to flatten lists nested at any depth.
@@ -998,6 +1020,9 @@ Use the `get` filter to display them (see examples below).
 
 SQL-like filters such as `where`, `sort-by`, and `reverse`
 can be used to modify the output.
+The `sort-by` command accepts
+the `--insensitive` (`-i`) flag to make the sort case-insensitive and
+the `--reverse` (`-r`) flag to reverse the sort order.
 
 Let's walk through some examples.
 
@@ -1473,7 +1498,9 @@ fetch https://jsonplaceholder.typicode.com/todos |
 
 TODO: Continue reviewing from the `pivot` command.
 
-Many Nushell commands operate on tables.
+The many Nushell commands that operate on tables
+are summarized in the table below.
+Examples of using many of them appear in the sub-sections that follow.
 
 | Command                    | Description                                                                                                               |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -1499,12 +1526,12 @@ Many Nushell commands operate on tables.
 | `last n`                   | shows only the last `n` rows (`n` defaults to 1)                                                                          |
 | `length`                   | counts rows or list items                                                                                                 |
 | `match`                    | filters rows by matching the values in given column against a regular expression                                          |
-| `merge`                    | merges tables by adding columns                                                                                           |
+| `merge`                    | creates a new table by merging the columns of existing tables                                                             |
 | `move`                     | moves columns to another position                                                                                         |
 | `nth`                      | keeps or skips specified rows                                                                                             |
-| `parse`                    | parses columns from a string using a pattern                                                                              |
-| `pivot`                    | swaps the rows and columns                                                                                                |
-| `prepend`                  | prepends a row                                                                                                            |
+| `parse`                    | creates a single-row table by parsing columns from a string according to a pattern                                        |
+| `pivot`                    | swaps the rows and columns of a table                                                                                     |
+| `prepend`                  | prepends a row to a table                                                                                                 |
 | `range`                    | gets a subset of rows                                                                                                     |
 | `reduce`                   | computes a single value from a list table                                                                                 |
 | `reject`                   | removes columns by name                                                                                                   |
@@ -1529,13 +1556,10 @@ Many Nushell commands operate on tables.
 | `where`                    | specifies a condition rows must meet to render                                                                            |
 | `wrap`                     | creates a table column from its data and a name                                                                           |
 
-The `sort-by` command accepts
-the `--insensitive` flag to make the sort case-insensitive and
-the `--reverse` flag to reverse the sort order.
-
 Let's look at some examples using the `ls` command.
 This produces a table with the columns "name", "type", "size", and "modified".
-Here is a command that lists the files with a `.ts` file extension,
+Here is a command that lists the files
+in the current directory with a `.ts` file extension,
 only includes the "name" and "size" columns,
 sorts the files from largest to smallest,
 and only outputs the three largest files:
@@ -1547,50 +1571,25 @@ ls *.ts | select name size | sort-by -r size | first 3
 This produces output similar to the following:
 
 ```text
-───┬────────────────────────┬──────────
- # │          name          │   size
-───┼────────────────────────┼──────────
- 0 │ lib.deno.unstable.d.ts │ 194.4 KB
- 1 │ lib.deno.d.ts          │ 145.8 KB
- 2 │ my_server.ts           │   2.7 KB
-───┴────────────────────────┴──────────
+╭───┬────────────────────────┬──────────╮
+│ # │ name                   │ size     │
+├───┼────────────────────────┼──────────┤
+│ 0 │ lib.deno.unstable.d.ts │ 194.4 KB │
+│ 1 │ lib.deno.d.ts          │ 145.8 KB │
+│ 2 │ my_server.ts           │   2.7 KB │
+╰───┴────────────────────────┴──────────╯
 ```
 
 The row indexes in the first column can be used to
 retrieve only a specific row using the `nth` command.
-For example, we can add `| nth 1` to the end of the command
-to only output the row for the file `lib.deno.d.ts`.
+For example, adding `| nth 1` to the end of the command
+causes it to only output the row for the file `lib.deno.d.ts`.
 
-The `get` command can be used to output
-only the values in a single column.
-It returns a list rather than a table.
-For example, the following outputs the
-names of the three largest TypeScript files:
+### `append` Command
 
-```bash
-ls *.ts | sort-by size | reverse | first 3 | get name
-```
-
-The `get` command is especially useful when the type of a field is "table".
-The key can be arbitrarily deep with sub-keys separated by periods.
-For example, `sys | get host.sessions | where name == 'root' | get groups`.
-
-The following example demonstrates getting all the headings from a table.
-
-```bash
-echo $myTable | get
-```
-
-Table columns can be accessed by their header name
-using the `get` and `select` commands,
-but there is no command to get a table column by its index.
-However, this can be done with the following pipeline:
-
-```bash
-echo $myTable | select $(echo $myTable | get | nth $columnIndex)
-```
-
-A new table can be created by appending a new row. For example:
+The `append` command creates a new table by
+appending a single row to an existing table.
+For example:
 
 ```bash
 let primaryColors = [[name red green blue]; [
@@ -1616,20 +1615,31 @@ This produces the following output:
 ╰───┴────────┴─────┴───────┴──────╯
 ```
 
-The table in the previous example can be created from a string
-using the `split` and `headers` commands.
+### `each` Command
+
+The `each` command runs a block of code on each row of a table.
+For example:
 
 ```bash
-let data =
-  "name red green blue|red 255 0 0|green 0 255 0|blue 0 0 255|purple 255 0 255"
-let colors = $(echo $data | split row "|" | split column " " | headers)
-echo $colors
+ls *.nu | each {
+  let name = $(echo $it | get name)
+  let size = $(echo $it | get size)
+  echo $(build-string $name ' is ' $size '.')
+} | as-lines
 ```
 
-The `split-by` command doesn't seem very useful.
-TODO: See `split-by-demo.nu`.
+This produces output like the following:
 
-The `flatten` can create a new table from an existing table,
+```text
+append-demo.nu is 670 B.
+block-param.nu is 305 B.
+chart-demo.nu is 189 B.
+```
+
+### `flatten` Command
+
+The `flatten` command operates on both lists and tables.
+It can create a new table from an existing table,
 replacing columns that whose values are nested tables
 with the columns in those tables.
 For example, the `sys` command creates a table with the columns
@@ -1637,6 +1647,8 @@ For example, the `sys` command creates a table with the columns
 "temp" (for temperature), and "net" (for network activity).
 Piping this output to the `flatten` command
 replaces the "host" and "mem" columns with the columns in their nested tables.
+
+### `format` Command
 
 The `format` command formats specified columns
 into a single string using a pattern.
@@ -1654,6 +1666,8 @@ This outputs lines like the following:
 histogram.nu is a 233 b file and was modified 1 week ago.
 ```
 
+### `from` Command
+
 The `from` command parses a given file format into a table.
 For example:
 
@@ -1667,6 +1681,38 @@ This can be done in a single line with `let table = $(open scores.csv)`.
 TODO: How could you iterate over the rows of a table
 TODO: and add each one to another table? Use reduce and append?
 TODO: See `append-demo.nu`.
+
+### `get` Command
+
+The `get` command can be used to output only the values in a single column.
+It returns a list rather than a table.
+For example, the following outputs the
+names of the three largest TypeScript files in the current directory:
+
+```bash
+ls *.ts | sort-by size | reverse | first 3 | get name
+```
+
+The `get` command is especially useful when the type of a field is "table".
+The key can be arbitrarily deep with sub-keys separated by periods.
+For example, `sys | get host.sessions | where name == 'root' | get groups`.
+
+The following example demonstrates getting all the headings from a table.
+
+```bash
+echo $myTable | get
+```
+
+Table columns can be accessed by their header name
+using the `get` and `select` commands,
+but there is no command to get a table column by its index.
+However, this can be done with the following pipeline:
+
+```bash
+echo $myTable | select $(echo $myTable | get | nth $columnIndex)
+```
+
+### `group-by` Command
 
 The rows of a table can be segregated into multiple tables
 using the `group-by` command.
@@ -1698,11 +1744,68 @@ ls | group-by { get name | path extension }
 
 To see the contents of one of the nested tables, pipe this to `get ext-name`.
 
-Another way to see only the files whose name ends with certain characters is:
+Another way to see only the files whose name ends with certain characters
+is the use the `where` command with a block as follows:
 
 ```bash
 ls | where {= $(echo $it.name | str ends-with ".rs") } | get name
 ```
+
+### `histogram` Command
+
+The `histogram` command generates a histogram
+from the data in a given table row.
+For example:
+
+```bash
+# The newlines need to be placed like this
+# due to a parser bug.
+let data = [
+  [name color]; [
+  Mark yellow] [
+  Tami blue] [
+  Amanda green] [
+  Jeremy yellow] [
+  Sally blue] [
+  Sam yellow]
+]
+echo $data | get color | histogram
+```
+
+This produces the following table:
+
+```text
+╭───┬────────┬───────┬────────────┬──────────────────────────────────────────────╮
+│ # │ value  │ count │ percentage │ frequency                                    │
+├───┼────────┼───────┼────────────┼──────────────────────────────────────────────┤
+│ 0 │ blue   │     2 │ 66.67%     │ *****************************                │
+│ 1 │ green  │     1 │ 33.33%     │ ***************                              │
+│ 2 │ yellow │     3 │ 100.00%    │ ******************************************** │
+╰───┴────────┴───────┴────────────┴──────────────────────────────────────────────╯
+```
+
+The percentage values are double what you might expect.
+This is because the value when the largest count is assigned a percentage of 100
+and all the other percentages are calculated relative to that count.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3215",
+"issue 3215" %}.
+
+### `split` and `headers` Commands
+
+The table in the previous example can be created from a string
+using the `split` and `headers` commands.
+
+```bash
+let data =
+  "name red green blue|red 255 0 0|green 0 255 0|blue 0 0 255|purple 255 0 255"
+let colors = $(echo $data | split row "|" | split column " " | headers)
+echo $colors
+```
+
+The `split-by` command doesn't seem very useful.
+TODO: See `split-by-demo.nu`.
+
+### `match` Command
 
 The `match` command filters rows by matching the
 values in given column against a regular expression.
@@ -1710,19 +1813,11 @@ For example, `ls | where type == File | match name "^c.*\.nu$"`
 lists files in the current directory whose name
 begin with "c" and have a file extension of ".nu".
 
-Table columns can be moved after or before another column.
-For example, by default the `ls` command outputs a type
-with the columns "name", "type", "size", and "modified".
-The following command moves the "type" and "size" columns
-to be after the "modified" column.
-It also reorders the "size" and "type" columns to the specified order.
+### `merge` Command
 
-```bash
-ls | move size type --after modified
-```
-
-The columns of one table can be added to another to produce a new table
-using the `merge` command. For example:
+The `merge` command creates a new table
+by merging the columns of existing tables.
+For example:
 
 ```bash
 let t1 = [[name score]; [Mark 19] [Tami 21]]
@@ -1762,40 +1857,56 @@ The output produced by this example is:
 ╰───┴──────┴───────┴────────┴───────────╯
 ```
 
-The `histogram` command generates a histogram
-from the data in a given table row.
+### `move` Command
+
+The `move` command moves specified columns to after or before another column.
+For example, by default the `ls` command outputs a type
+with the columns "name", "type", "size", and "modified".
+The following command moves the "type" and "size" columns
+to be after the "modified" column.
+It also reorders the "size" and "type" columns to the specified order.
+
+```bash
+ls | move size type --after modified
+```
+
+### `parse` Command
+
+The `parse` command creates a single-row table
+by parsing columns from a string using a pattern.
 For example:
 
 ```bash
-# The newlines need to be placed like this
-# due to a parser bug.
-let data = [
-  [name color]; [
-  Mark yellow] [
-  Tami blue] [
-  Amanda green] [
-  Jeremy yellow] [
-  Sally blue] [
-  Sam yellow]
-]
-echo $data | get color | histogram
+echo "123 Some St., St. Charles, MO 63304" |
+  parse "{street}, {city}, {state} {zip}"
 ```
 
-This produces the following table:
+This outputs the following table:
 
 ```text
-╭───┬────────┬───────┬────────────┬──────────────────────────────────────────────╮
-│ # │ value  │ count │ percentage │ frequency                                    │
-├───┼────────┼───────┼────────────┼──────────────────────────────────────────────┤
-│ 0 │ blue   │     2 │ 66.67%     │ *****************************                │
-│ 1 │ green  │     1 │ 33.33%     │ ***************                              │
-│ 2 │ yellow │     3 │ 100.00%    │ ******************************************** │
-╰───┴────────┴───────┴────────────┴──────────────────────────────────────────────╯
+╭───┬──────────────┬─────────────┬───────┬───────╮
+│ # │ street       │ city        │ state │ zip   │
+├───┼──────────────┼─────────────┼───────┼───────┤
+│ 0 │ 123 Some St. │ St. Charles │ MO    │ 63304 │
+╰───┴──────────────┴─────────────┴───────┴───────╯
 ```
 
-The percentage values are double what they should be.
-See {% aTargetBlank "https://github.com/nushell/nushell/issues/3215",
-"issue 3215" %}.
+### `pivot` Command
+
+The `pivot` command swaps the rows and columns of a table.
+For example, `ls *.nu | sort-by -r size | first 3 | pivot`
+produces output like the following:
+
+```text
+╭───┬──────────┬────────────┬──────────────────┬────────────────╮
+│ # │ Column0  │ Column1    │ Column2          │ Column3        │
+├───┼──────────┼────────────┼──────────────────┼────────────────┤
+│ 0 │ name     │ rmv.nu     │ split-by-demo.nu │ append-demo.nu │
+│ 1 │ type     │ File       │ File             │ File           │
+│ 2 │ size     │     1.3 KB │            927 B │          670 B │
+│ 3 │ modified │ 1 week ago │ 1 week ago       │ 4 days ago     │
+╰───┴──────────┴────────────┴──────────────────┴────────────────╯
+```
 
 ## Plugins
 
