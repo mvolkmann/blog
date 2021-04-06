@@ -649,6 +649,10 @@ let names = [Mark Tami Amanda Jeremy]
 echo $names | as-lines # outputs each name on a separate line
 ```
 
+The `split row` command creates a list from a string based on a delimiter.
+For example, `let colors = $(echo "red,green,blue" | split row ",")`
+creates the list `[red green blue]`.
+
 The `$it` special variable holds the output of the previous command.
 When used in a block passed to the `each` command,
 it holds the current iteration value.
@@ -734,6 +738,9 @@ echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 
 echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
+
+The `length` command returns the number of items in a list.
+For example, `echo [red green blue] | length` outputs `3`.
 
 The `reduce` command computes a single value from a list.
 It takes a block which can use the special variables
@@ -1496,7 +1503,7 @@ fetch https://jsonplaceholder.typicode.com/todos |
 
 ## Table Commands
 
-TODO: Continue reviewing from the `pivot` command.
+TODO: Continue reviewing from the `to` command.
 
 The many Nushell commands that operate on tables
 are summarized in the table below.
@@ -1533,7 +1540,6 @@ Examples of using many of them appear in the sub-sections that follow.
 | `pivot`                    | swaps the rows and columns of a table                                                                                     |
 | `prepend`                  | prepends a row to a table                                                                                                 |
 | `range`                    | gets a subset of rows                                                                                                     |
-| `reduce`                   | computes a single value from a list table                                                                                 |
 | `reject`                   | removes columns by name                                                                                                   |
 | `rename`                   | renames columns                                                                                                           |
 | `reverse`                  | reverses the order of the rows                                                                                            |
@@ -1546,9 +1552,8 @@ Examples of using many of them appear in the sub-sections that follow.
 | `skip until {condition}`   | skips rows until the condition is met                                                                                     |
 | `skip while {condition}`   | skips rows while the condition is met                                                                                     |
 | `sort-by`                  | sorts rows on given columns                                                                                               |
-| `split row`                | converts a string into a list of strings                                                                                  |
-| `split column`             | converts a list of strings into a table with generic "Column{n}" headers                                                  |
-| `split-by`                 | creates a new table from one with nested tables where column headings are values of a given nested table heading          |
+| `split column`             | creates a table from a string based on a delimiter                                                                        |
+| `split-by`                 | creates a new table from one with nested tables<br>where column headings are values of a given nested table heading       |
 | `table`                    | views pipeline output as a table                                                                                          |
 | `to {format}`              | converts a table to a given format such as json                                                                           |
 | `uniq`                     | gets unique rows                                                                                                          |
@@ -1906,6 +1911,41 @@ produces output like the following:
 │ 2 │ size     │     1.3 KB │            927 B │          670 B │
 │ 3 │ modified │ 1 week ago │ 1 week ago       │ 4 days ago     │
 ╰───┴──────────┴────────────┴──────────────────┴────────────────╯
+```
+
+### `prepend` Command
+
+The `prepend` command creates a new table by
+prepending a single row to an existing table.
+For example:
+
+```bash
+let primaryColors = [[name red green blue]; [
+  red 255 0 0] [
+  green 0 255 0] [
+  blue 0 0 255]
+]
+let white = [[name red green blue]; [white 255 255 255]]
+let colors = $(echo $primaryColors | prepend $white)
+echo $colors
+```
+
+This does not currently produce the expected output.
+See {% aTargetBlank "https://github.com/nushell/nushell/issues/3269",
+"issue 3269" %}.
+
+### `split column` Command
+
+The `split column` command creates a table from a string based on a delimiter.
+For example, `echo "red,green,blue" | split column ","`
+produces the following output:
+
+```text
+╭───┬─────────┬─────────┬─────────╮
+│ # │ Column1 │ Column2 │ Column3 │
+├───┼─────────┼─────────┼─────────┤
+│ 0 │ red     │ green   │ blue    │
+╰───┴─────────┴─────────┴─────────╯
 ```
 
 ## Plugins
