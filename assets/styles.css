@@ -36,9 +36,11 @@ body > main > nav .expanded + ul { display: block; }
 
 body > main > nav ul { list-style: none; margin-left: 1rem; margin-top: 0.5rem; padding-left: 0; }
 
-body > main > section { flex-grow: 1; display: flex; align-items: stretch; overflow-y: scroll; position: relative; left: 0; width: 100%; }
+body > main > .topic-background { display: flex; justify-content: center; background-color: lightblue; width: 100%; }
 
-body > main > section > iframe { border: none; box-sizing: border-box; padding: 0.5rem; transition-duration: 500ms; transition-property: opacity; width: 100%; }
+body > main > .topic-background > .topic-content { display: flex; flex-grow: 1; align-items: stretch; position: relative; left: 0; background-color: white; overflow-y: scroll; max-width: 50rem; width: 100%; }
+
+body > main > .topic-background > .topic-content > iframe { border: none; box-sizing: border-box; padding: 0.5rem; transition-duration: 500ms; transition-property: opacity; width: 100%; }
 
 .bold { font-weight: bold; }
 

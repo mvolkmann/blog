@@ -2,7 +2,7 @@ a > code { font-size: 1.4rem; }
 
 article aside { border: 1px solid gray; padding: 1rem; }
 
-body { --accent-color: #3265dc; font-family: sans-serif; margin: 0 auto; max-width: 50rem; }
+body { --accent-color: #3265dc; font-family: sans-serif; margin: 0 auto; padding: 1rem; }
 
 h2 { color: purple; font-size: 1.4rem; }
 
