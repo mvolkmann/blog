@@ -1930,7 +1930,8 @@ let colors = $(echo $primaryColors | prepend $white)
 echo $colors
 ```
 
-This does not currently produce the expected output.
+This does not currently produce the expected output,
+but piping the output to the `flatten` command fixes it.
 See {% aTargetBlank "https://github.com/nushell/nushell/issues/3269",
 "issue 3269" %}.
 
