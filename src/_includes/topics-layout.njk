@@ -8,10 +8,12 @@ layout: top-layout
   {{ renderNavList(collections.nav) | safe }}
 </nav>
 
-<section class="topic-content">
-  <iframe
-    name="frame"
-    onLoad="iframeLoaded(this)"
-    src="../welcome/"
-    title="topic content"></iframe>
+<section class="topic-background">
+  <section class="topic-content">
+    <iframe
+      name="frame"
+      onLoad="iframeLoaded(this)"
+      src="../welcome/"
+      title="topic content"></iframe>
+  </section>
 </section>

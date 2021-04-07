@@ -122,22 +122,34 @@ body {
       }
     }
 
-    & > section {
-      flex-grow: 1;
+    & > .topic-background {
       display: flex;
-      align-items: stretch;
-      overflow-y: scroll;
-      position: relative;
-      left: 0;
+      justify-content: center;
+
+      background-color: lightblue;
       width: 100%;
 
-      & > iframe {
-        border: none;
-        box-sizing: border-box;
-        padding: 0.5rem;
-        transition-duration: 500ms; // matches setTimeout in topics.js
-        transition-property: opacity;
+      & > .topic-content {
+        display: flex;
+        flex-grow: 1;
+        align-items: stretch;
+
+        position: relative;
+        left: 0;
+
+        background-color: white;
+        overflow-y: scroll;
+        max-width: 50rem;
         width: 100%;
+
+        & > iframe {
+          border: none;
+          box-sizing: border-box;
+          padding: 0.5rem;
+          transition-duration: 500ms; // matches setTimeout in topics.js
+          transition-property: opacity;
+          width: 100%;
+        }
       }
     }
   }
