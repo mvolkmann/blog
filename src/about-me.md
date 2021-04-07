@@ -10,7 +10,8 @@ alt="head-shot"
 class="head-shot keep-size"
 src="https://avatars0.githubusercontent.com/u/79312?s=460&v=4">
 
-I am a partner at Object Computing, Inc. (OCI) in St. Louis
+I am a Partner and Distinguished Software Engineer
+at Object Computing, Inc. (OCI) in St. Louis
 where I have provided software consulting and training since 1996.
 As a consultant, I have assisted many companies with
 JavaScript, Node.js, Svelte, React, Vue, Angular, and more.
