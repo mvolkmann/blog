@@ -1503,8 +1503,6 @@ fetch https://jsonplaceholder.typicode.com/todos |
 
 ## Table Commands
 
-TODO: Continue reviewing from the `to` command.
-
 The many Nushell commands that operate on tables
 are summarized in the table below.
 Examples of using many of them appear in the sub-sections that follow.
@@ -1555,7 +1553,7 @@ Examples of using many of them appear in the sub-sections that follow.
 | `split column`             | creates a table from a string based on a delimiter                                                                        |
 | `split-by`                 | creates a new table from one with nested tables<br>where column headings are values of a given nested table heading       |
 | `table`                    | views pipeline output as a table                                                                                          |
-| `to {format}`              | converts a table to a given format such as json                                                                           |
+| `to {format}`              | converts a table to a given format such as JSON                                                                           |
 | `uniq`                     | gets unique rows                                                                                                          |
 | `update`                   | updates data in a given column                                                                                            |
 | `where`                    | specifies a condition rows must meet to render                                                                            |
@@ -1589,6 +1587,9 @@ The row indexes in the first column can be used to
 retrieve only a specific row using the `nth` command.
 For example, adding `| nth 1` to the end of the command
 causes it to only output the row for the file `lib.deno.d.ts`.
+
+The following sub-sections provide more detail
+on some of the table commands described above.
 
 ### `append` Command
 
@@ -1949,7 +1950,47 @@ produces the following output:
 ╰───┴─────────┴─────────┴─────────╯
 ```
 
+### `to` Command
+
+The `to` command converts a table to a given format such as JSON.
+It is followed by a format name which can be one of the following:
+`csv`, `html`, `json`, `md`, `toml`, `tsv`, `url`, `xml`, and `yaml`.
+The `toml`, `url`, and `xml` formats are only applicable on tables
+that meet specific requirements.
+For example:
+
+```bash
+let scores = [[Name Score]; [Mark 19] [Tami 21]]
+echo $scores | to csv
+echo $scores | to json
+echo $scores | to md
+echo $scores | to yaml
+```
+
+This produces the following output:
+
+```text
+Name,Score
+Mark,19
+Tami,21
+
+[{"Name":"Mark","Score":19},{"Name":"Tami","Score":21}]
+
+|Name|Score|
+|-|-|
+|Mark|19|
+|Tami|21|
+
+---
+- Name: Mark
+  Score: 19
+- Name: Tami
+  Score: 21
+```
+
 ## Plugins
+
+TODO: Continue reviewing from here.
 
 Nushell plugins add new commands.
 They can be installed using the Rust `cargo` utility.
