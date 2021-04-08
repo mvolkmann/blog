@@ -1093,6 +1093,14 @@ ls | where type == Dir && size > 1024 | sort-by -r size | to html |
 ls | where type == Dir && size > 1024 | sort-by -r size | save big-dirs.csv
 ```
 
+We can compute the combined size of all the executables
+installed using the Rust `cargo` command in the default location.
+This includes the `nu` executable and plugins.
+
+```bash
+ls $(build-string $(which nu | get path) '*') | get size | math sum
+```
+
 ## Aliases
 
 To create an alias for a command, enter `alias {name} = {command}`.
@@ -1990,23 +1998,33 @@ Tami,21
 
 ## Plugins
 
-TODO: Continue reviewing from here.
-
 Nushell plugins add new commands.
-They can be installed using the Rust `cargo` utility.
-After installing, open a new shell to gain access to commands that they add.
+Supported plugins can be found in the {% aTargetBlank
+"https://github.com/nushell/nushell/tree/main/crates", "crates" %}
+directory of the Nushell GitHub repository.
+Look for subdirectories whose names being with "nu_plugin\_".
+All of these are installed by default if Nushell is installed
+using the command `cargo install nu --features=extra`.
+
+Additional plugins can be installed using the Rust `cargo` utility.
+Specify the directories where these plugins are installed
+in the configuration setting `plugin_dirs` which is a
+list of directories where Nushell should search for plugins.
+After installing plugins and changing this setting,
+open a new shell to gain access to the commands that they add.
+
+The following sub-sections describe some commonly used plugins.
 
 ### nu_plugin_start
 
 This plugin adds the `start` command that opens a given file
 using its default application.
-To install this, enter `cargo install nu_plugin_start`.
-Then open a new shell and enter `start file-path`.
+For example, `start demo.html` will
+open the HTML file in the default web browser.
 
 ### nu_plugin_chart
 
 This plugin adds the `chart` command with the subcommands `bar` and `line`.
-To install this, enter `cargo install nu_plugin_chart`.
 
 Here is an example of creating both kinds of charts.
 
@@ -2036,9 +2054,9 @@ See {% aTargetBlank "https://github.com/nushell/nushell/issues/3096",
 
 To make Nushell your default shell in Linux or macOS, first
 add a line containing the file path to the `nu` executable in `/etc/shells`.
-For example, for me using macOS I entered `su vim /etc/shells`
+For example, using macOS I entered `su vim /etc/shells`
 and added the line `/Users/mark/.cargo/bin/nu`.
-Then enter `chsh -s nu`.
+Then change the default shell by entering `chsh -s nu`.
 If using tmux, also change the value of `default-shell` in `~/.tmux.conf`.
 
 ## Scripts
@@ -2051,14 +2069,15 @@ enter `source {name}.nu`.
 For examples of Nushell scripts, see {% aTargetBlank
 "https://github.com/nushell/nu_scripts/tree/main/nu_101", "Nu_101 Scripts" %}.
 
-To add comments or "comment-out" a line of code,
-preceded the comment with a `#` character.
+To add comments or comment-out a line of code,
+begin the comment with a `#` character.
 
 Commands commonly used in Nushell scripts include
 `def`, `if`, `each`, and `seq`.
 
-The `def` command defines a custom command
-which can be used like a function in many programming languages.
+As we saw in the "Custom Commands" section,
+the `def` command defines a custom command
+that can be used like a function in many programming languages.
 
 Conditional processing is implemented with the `if` command.
 Its syntax is `if condition { then-block } { else-block }`.
@@ -2109,7 +2128,7 @@ Let's break this down.
 The `seq` command creates a list of strings, not integers.
 An alternative is to use the `echo` command with a range
 specified with `start..end` which creates a list of integers.
-The previous example can be written as follows:
+The previous example can also be written as follows:
 
 ```bash
 echo 1..4 | each { build-string $it $(char newline) } | str collect
@@ -2118,7 +2137,7 @@ echo 1..4 | each { build-string $it $(char newline) } | str collect
 Iteration over the elements of a list is implemented with the `each` command.
 Its syntax is `echo some-list | each { block }`.
 The block can use the special variable `$it`
-to access the current element in the iteration.
+to access the current item in the iteration.
 For example:
 
 ```bash
@@ -2128,7 +2147,7 @@ def log-value [label, value] {
 
 def report [list] {
   # Without the --numbered flag, $it is set to each list value.
-  # With it, $it is an object with the properties index and item.
+  # With it, $it is set to an object with the properties index and item.
   echo $list | each --numbered {
     build-string $(= $it.index + 1) ") " $it.item $(char newline)
   } | str collect # with this the result is a table instead of a string
@@ -2145,10 +2164,9 @@ report $names
 # 4) Jeremy
 ```
 
-To calculate the combined size of the `nu` executable and installed plugins,
-enter `ls $(build-string $(which nu | get path) '*') | get size | math sum`.
-
 ## VS Code
+
+TODO: Continue reviewing from here.
 
 There is a VS Code extension for Nushell that
 provides syntax highlighting for Nushell scripts.
@@ -2160,29 +2178,30 @@ See {% aTargetBlank
 
 The following table shows the Nushell equivalent of some common Bash commands.
 
-| Bash                   | Nushell                           | Description                                                                  |
-| ---------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
-| `man command`          | `help command`                    | `help commands` lists Nushell commands and custom commands                   |
-| `$PATH`                | `$nu.path`                        | list of directories search for executables                                   |
-| `cat file-path`        | `open --raw file-path`            | print the contents of a file; omit `--raw` to output structured data         |
-| `command > file-path`  | `command \| save --raw file-path` | saves command output to a file<br>without converting based on file extension |
-| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`               | creates directory structure, including any missing directories               |
-| cmd1 && cmd2           | cmd1; cmd2                        | run cmd1 and then only run cmd2 if cmd1 was successful                       |
+| Bash                    | Nushell                             | Description                                                                                  |
+| ----------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------- |
+| `man command`           | `help {command}`                    | outputs help for a command;<br>`help commands` lists Nushell<br>commands and custom commands |
+| `$PATH`                 | `$nu.path`                          | holds the list of directories<br>searched for executables                                    |
+| `cat {file-path}`       | `open --raw {file-path}`            | prints the contents of a file;<br>omit `--raw` to output structured data                     |
+| `command > {file-path}` | `command \| save --raw {file-path}` | saves command output to a file<br>without converting based on file extension                 |
+| `mkdir -p foo/bar/baz`  | `mkdir foo/bar/baz`                 | creates directory structure,<br>including any missing directories                            |
+| cmd1 && cmd2            | cmd1; cmd2                          | runs cmd1 and then only runs<br>cmd2 if cmd1 was successful                                  |
 
 The command whose output is piped in the `save` command must produce a string.
-For example, `date now | save --raw timestamp.txt` does not work,
-but `date now | str from | save --raw timestamp.txt` does.
+For example,  
+`date now | save --raw timestamp.txt` does not work, but  
+`date now | str from | save --raw timestamp.txt` does.
 
 ## Per Directory Environment Variables
 
-Nushell supports defining things to happen when changing to given directories.
+Nushell supports defining actions to happen when changing to given directories.
 To configure this, create a `.nu-env` file in each directory.
 These are TOML files with the following sections:
 
 | TOML Section   | Description                                                                                                         |
 | -------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `[env]`        | sets environment variables to literal values; lines have syntax<br>`name = "value"`                                 |
-| `[scriptvars]` | sets environment variables to command output; lines have syntax<br>`name = "command-pipeline"`                      |
+| `[env]`        | sets environment variables to literal values;<br>lines have the syntax `name = "value"`                             |
+| `[scriptvars]` | sets environment variables to command output;<br>lines have the syntax `name = "command-pipeline"`                  |
 | `[scripts]`    | specifies commands to run when entering and exiting the directory<br>with `entryscripts` and `exitscripts` commands |
 
 After creating the `.nu-env` file in each directory,
@@ -2207,9 +2226,6 @@ containing the following and then enter `autoenv trust`:
 NODE_ENV = "development"
 ```
 
-Currently the `echo` command does not write to stdout when run from
-`entryscripts` or `exitscripts`.
-
 In the `~/projects/bank-accounts` directory, create the file `.nu-env`
 containing the following and then enter `autoenv trust`:
 
@@ -2221,6 +2237,9 @@ NODE_ENV = "production"
 Now `cd` to each of these directories and verify that
 the `NODE_ENV` environment variable is set to the expected value.
 
+Currently the `echo` command does not write to stdout when run from
+`entryscripts` or `exitscripts`.
+
 For more details on this feature, enter `help autoenv`.
 
 ## Additional Shells
@@ -2229,15 +2248,17 @@ New shells can be created from the current shell.
 This enables retaining the working directory of the current shell and
 switching back to it using the `n` (for next) and `p` (for previous) commands.
 
-| Command           | Description                                                                       |
-| ----------------- | --------------------------------------------------------------------------------- |
-| `enter dir-path`  | similar to `cd`, but creates a new shell starting in the given directory          |
-| `enter file-path` | creates a new shell whose context is the content of the given file; odd           |
-| `shells`          | lists the existing shells and indicates which one is active                       |
-| `n`               | makes the next shell in the list active;<br>wrapping to first if on last          |
-| `p`               | makes the previous shell in the list active;<br>wrapping to last if on first      |
-| `exit`            | exits the current shell, removing it from the list                                |
-| `exit --now`      | exits all the shells;<br>depending on configuration the terminal window may close |
+Here is a summary of the commands related to working with multiple shells.
+
+| Command           | Description                                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------ |
+| `enter dir-path`  | similar to `cd`, but creates a new shell starting in the given directory                         |
+| `enter file-path` | creates a new shell whose context is the content of the given file;<br>seems like an odd feature |
+| `shells`          | lists the existing shells and indicates which one is active                                      |
+| `n`               | makes the next shell in the list active;<br>wrapping to the first if in the last                 |
+| `p`               | makes the previous shell in the list active;<br>wrapping to the last if in the first             |
+| `exit`            | exits the current shell, removing it from the list                                               |
+| `exit --now`      | exits all the shells;<br>depending on configuration the terminal window may close                |
 
 ## Issues
 
