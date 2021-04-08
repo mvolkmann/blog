@@ -504,8 +504,8 @@ Details about Nushell data types can be found at {% aTargetBlank
 The following type conversions are supported:
 
 TODO: Fill in the ??? in this table.
-TODO: How can you create values with these types?
-TODO: binary, line, path, pattern, row
+
+TODO: How can you create values with types binary, line, path, pattern, and row?
 
 | From      | To       | Command                                            |
 | --------- | -------- | -------------------------------------------------- |
@@ -538,12 +538,15 @@ This can be a literal value or an expression such as a variable reference.
 For example:
 
 ```bash
-echo "2021-3-21 14:30" | str to-datetime | date format -t '%B %-d, %Y' |
+echo "2021-3-21 14:30" |
+  str to-datetime |
+  date format -t '%B %-d, %Y' |
   get formatted
 # This outputs the string "March 21, 2021".
-# Supported control characters are described {% aTargetBlank
-"https://man7.org/linux/man-pages/man1/date.1.html", "here" %}.
 ```
+
+Formatting characters supported by `date format` are described
+{% aTargetBlank "https://man7.org/linux/man-pages/man1/date.1.html", "here" %}.
 
 This handy custom command produces a string from the items in a list
 where the value of each item is followed by a newline character.
@@ -599,8 +602,8 @@ For example:
 {% raw %}
 
 ```bash
-let s = `This string{{$(char newline)}}consists of{{$(char newline)}}three lines.`
-let l = echo $s | lines # ["This string", "consists of", "three lines."]
+let s = `This{{$(char newline)}}has{{$(char newline)}}three lines.`
+let l = $(echo $s | lines) # ["This", "has", "three lines."]
 ```
 
 {% endraw %}
@@ -736,7 +739,8 @@ For example:
 ```bash
 echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
 
-echo [[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
+echo [[1 2] [3 [4 5 [6 7 8]]]] |
+  flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
 The `length` command returns the number of items in a list.
@@ -913,7 +917,7 @@ are automatically evaluated in math mode.
 
 For example, `let a = 2; let b = 3; = $a * $b` outputs `6`.
 
-## Working with numbers
+## Working with Numbers
 
 Many of the operators listed in the previous section operate on numbers.
 
@@ -961,13 +965,13 @@ fetch https://jsonplaceholder.typicode.com/todos |
 This produces output like the following:
 
 ```text
-╭───┬────────┬─────┬─────────────────────────────────────────────────┬───────────╮
-│ # │ userId │ id  │ title                                           │ completed │
-├───┼────────┼─────┼─────────────────────────────────────────────────┼───────────┤
-│ 0 │      5 │  97 │ dolorum laboriosam eos qui iure aliquam         │ false     │
-│ 1 │      5 │ 100 │ excepturi a et neque qui expedita vel voluptate │ false     │
-│ 2 │      5 │  94 │ facilis modi saepe mollitia                     │ false     │
-╰───┴────────┴─────┴─────────────────────────────────────────────────┴───────────╯
+╭───┬────────┬─────┬─────────────────────────────────────────┬───────────╮
+│ # │ userId │ id  │ title                                   │ completed │
+├───┼────────┼─────┼─────────────────────────────────────────┼───────────┤
+│ 0 │      5 │  97 │ dolorum laboriosam eos qui iure aliquam │ false     │
+│ 1 │      5 │ 100 │ excepturi a et neque qui expedita vel   │ false     │
+│ 2 │      5 │  94 │ facilis modi saepe mollitia             │ false     │
+╰───┴────────┴─────┴─────────────────────────────────────────┴───────────╯
 ```
 
 The `post` command sends an HTTP POST requests to a server
@@ -1365,10 +1369,11 @@ add it to the `env` section of the Nushell configuration file
 as shown in the "Configuration" section.
 
 To get the value of an environment variable, use `$nu.env.NAME`.
-To print the value, enter `echo $nu.env.NAME` or `config | get env.{name}`.
+To print the value, enter  
+`echo $nu.env.NAME` or `config | get env.{name}`.
 
-To see a nicely formatted list of environment variables,
-enter `echo $nu.env | pivot` or `config | get env | pivot`.
+To see a nicely formatted list of environment variables, enter  
+`echo $nu.env | pivot` or `config | get env | pivot`.
 
 ## open Command
 
@@ -1426,8 +1431,8 @@ The "#" column can be suppressed from all table output by setting
 the `disable_table_indexes` configuration option to `true`,
 but there is no way to do this for the output of a specific command.
 
-To see the commands in the Nushell configuration file `startup` section,
-enter `open $(config path) | get startup`.
+To see the commands in the Nushell configuration file `startup` section, enter  
+`open $(config path) | get startup`.
 
 The `lines` and `split` commands can be used
 to render delimited data as a table.
@@ -1693,8 +1698,8 @@ let table = echo $data | from csv
 This can be done in a single line with `let table = $(open scores.csv)`.
 
 TODO: How could you iterate over the rows of a table
-TODO: and add each one to another table? Use reduce and append?
-TODO: See `append-demo.nu`.
+and add each one to another table? Use reduce and append?
+See `append-demo.nu`.
 
 ### `get` Command
 
@@ -1789,13 +1794,13 @@ echo $data | get color | histogram
 This produces the following table:
 
 ```text
-╭───┬────────┬───────┬────────────┬──────────────────────────────────────────────╮
-│ # │ value  │ count │ percentage │ frequency                                    │
-├───┼────────┼───────┼────────────┼──────────────────────────────────────────────┤
-│ 0 │ blue   │     2 │ 66.67%     │ *****************************                │
-│ 1 │ green  │     1 │ 33.33%     │ ***************                              │
-│ 2 │ yellow │     3 │ 100.00%    │ ******************************************** │
-╰───┴────────┴───────┴────────────┴──────────────────────────────────────────────╯
+╭───┬────────┬───────┬────────────┬──────────────────────────────────────────╮
+│ # │ value  │ count │ percentage │ frequency                                │
+├───┼────────┼───────┼────────────┼──────────────────────────────────────────┤
+│ 0 │ blue   │     2 │ 66.67%     │ **************************               │
+│ 1 │ green  │     1 │ 33.33%     │ *************                            │
+│ 2 │ yellow │     3 │ 100.00%    │ **************************************** │
+╰───┴────────┴───────┴────────────┴──────────────────────────────────────────╯
 ```
 
 The percentage values are double what you might expect.
@@ -1817,6 +1822,7 @@ echo $colors
 ```
 
 The `split-by` command doesn't seem very useful.
+
 TODO: See `split-by-demo.nu`.
 
 ### `match` Command
@@ -1908,7 +1914,8 @@ This outputs the following table:
 ### `pivot` Command
 
 The `pivot` command swaps the rows and columns of a table.
-For example, `ls *.nu | sort-by -r size | first 3 | pivot`
+For example,  
+`ls *.nu | sort-by -r size | first 3 | pivot`  
 produces output like the following:
 
 ```text
@@ -2165,8 +2172,6 @@ report $names
 ```
 
 ## VS Code
-
-TODO: Continue reviewing from here.
 
 There is a VS Code extension for Nushell that
 provides syntax highlighting for Nushell scripts.
