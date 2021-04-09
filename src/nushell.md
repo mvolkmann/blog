@@ -2269,11 +2269,16 @@ Here is a summary of the commands related to working with multiple shells.
 
 - Fuzzy completion is not yet supported.
   For example, entering `cd foo` and pressing the tab key
-  doesn’t auto complete to a directory that contains `foo`.
+  completes to names that begin with `foo`,
+  but not names that merely contain `foo`.
 - The literal syntax for tables is currently very picky
   about the location of newline characters due to a parser bug.
   See {% aTargetBlank "https://github.com/nushell/nushell/issues/3204",
   "issue 3204" %}
+- Several data types discussed in the official documentation
+  cannot be used as parameter types of custom commands.
+  These include boolean, date, decimal, duration, filesize, and list.
+  Perhaps these will become real types in the future.
 - There is no built-in `grep` command.
   Consider using {% aTargetBlank "https://github.com/BurntSushi/ripgrep",
   "ripgrep" %}.
