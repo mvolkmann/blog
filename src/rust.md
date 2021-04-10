@@ -77,7 +77,7 @@ One reason these languages are fast is because
 they do not provide automatic garbage collection,
 which is slow and can run at unpredictable times.
 Systems languages also allow control over whether
-data is on the stack (faster, but data must have fixed size)
+data is on the stack (faster, but data must have a fixed size)
 or on the heap (slower, but data can vary in size).
 
 **Safety:**

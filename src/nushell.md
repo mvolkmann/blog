@@ -97,6 +97,12 @@ Prebuilt binaries for Linux, macOS, and Windows can also be downloaded.
 
 For more information on installation options, click the Nushell link above.
 
+If you are interested in peeking at the source code, clone the GitHub repo.
+To build it locally enter `cargo build --release --features=extra`.
+To see the extra features this includes, search for "extra" at
+{% aTargetBlank "https://github.com/nushell/nushell/blob/main/Cargo.toml",
+"Cargo.toml" %}.
+
 ## Getting Started
 
 After installing Nushell, enter `nu` in a terminal to start a shell.
@@ -651,6 +657,7 @@ that the first value is a `duration` and the 2nd is a `filesize`.
 
 ### Lists
 
+A list is an ordered collection of values.
 The literal syntax for creating a `list` is to include expressions
 in square brackets separated by spaces or commas (for readability).
 For example, `[foo bar baz]` or `[foo, bar, baz]`.
@@ -792,9 +799,9 @@ echo "total =" $(echo $scores | math sum) # easier approach, same result
 
 echo "product =" $(echo $scores | reduce --fold 1 { = $acc * $it }) # 96
 
-TODO: Why doesn't this work?
 echo $scores | reduce -n { = $acc.item + $it.index * $it.item }
-# 0*3 + 1*8 + 2*4 = 16
+# This should produce 0*3 + 1*8 + 2*4 = 16.
+# But see https://github.com/nushell/nushell/issues/3298.
 ```
 
 ### Tables
