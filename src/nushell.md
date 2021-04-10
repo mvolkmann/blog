@@ -1558,6 +1558,8 @@ Examples of using many of them appear in the sub-sections that follow.
 
 | Command                    | Description                                                                                                               |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `all?`                     | determines if any row in a table matches a given condition                                                                |
+| `any?`                     | determines if all rows in a table match a given condition                                                                 |
 | `append`                   | creates a new table by appending a single row to an existing table                                                        |
 | `autoview`                 | renders data as a table or list                                                                                           |
 | `compact`                  | removes empty rows                                                                                                        |
@@ -1641,6 +1643,34 @@ causes it to only output the row for the file `lib.deno.d.ts`.
 The following sub-sections provide more detail
 on some of the table commands described above.
 
+### `all?` command
+
+The `all?` command determines if every row in a table
+matches a given condition.
+For example:
+
+```bash
+# Are all files in the current directory larger than 1 megabyte.
+ls | all? size > 1mb # true or false
+```
+
+### `any?` command
+
+The `any?` command determines if any row in a table
+matches a given condition.
+For example:
+
+```bash
+# Are any files in the current directory larger than 1 megabyte.
+ls | any? size > 1mb # true or false
+```
+
+# Are all scores even?
+
+echo $scores | all $it mod 2 == 0 # false
+
+````
+
 ### `append` Command
 
 The `append` command creates a new table by
@@ -1656,7 +1686,7 @@ let primaryColors = [[name red green blue]; [
 let purple = [[name red green blue]; [purple 255 0 255]]
 let colors = $(echo $primaryColors | append $purple)
 echo $colors
-```
+````
 
 This produces the following output:
 
