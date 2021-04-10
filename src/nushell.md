@@ -458,19 +458,19 @@ let colors = [red orange yellow green blue purple]
 
 Conceptual Types:
 
-| Type        | Description                                                                                  |
-| ----------- | -------------------------------------------------------------------------------------------- |
-| binary      | sequence of raw bytes                                                                        |
-| boolean     | literal values are `$true` and `$false`                                                      |
-| column path | dot-separated list of nested column names                                                    |
-| date        | timezone-aware; defaults to UTC                                                              |
-| decimal     | number with a fractional part and infinite precision                                         |
-| duration    | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, `wk`, `mon`, or `yr` |
-| filesize    | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                  |
-| group       | semicolon-separated list of pipelines where only output from the last is output              |
-| line        | string with an OS-dependent line ending                                                      |
-| list        | sequence of values of any type                                                               |
-| row         | list where each value represents a column with an associated name                            |
+| Type        | Description                                                                     |
+| ----------- | ------------------------------------------------------------------------------- |
+| binary      | sequence of raw bytes                                                           |
+| boolean     | literal values are `$true` and `$false`                                         |
+| column path | dot-separated list of nested column names                                       |
+| date        | timezone-aware; defaults to UTC                                                 |
+| decimal     | number with a fractional part and infinite precision                            |
+| duration    | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, or `wk` |
+| filesize    | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`     |
+| group       | semicolon-separated list of pipelines where only output from the last is output |
+| line        | string with an OS-dependent line ending                                         |
+| list        | sequence of values of any type                                                  |
+| row         | list where each value represents a column with an associated name               |
 
 To see a description of the value of an expression,
 pipe it to the `describe` command.
@@ -685,6 +685,45 @@ let colors = [red orange yellow green blue purple]
 echo $colors | where {= $(echo $it | str ends-with 'e')}
 # The block passed to where must evaluate to a boolean.
 # This outputs the list [orange blue purple].
+
+let scores = [7 10 8 6 7]
+echo $scores | where $it > 7 # [10 8]
+```
+
+The `any?` command determines if any item in a list
+matches a given condition.
+For example:
+
+```bash
+# Do any of the color names end with "e"?
+echo $colors | any? $(echo $it | str ends-with "e") # true
+
+# Is the length of any color name less than 3?
+echo $colors | any? $(echo $it | str length) < 3 # false
+
+# Are any of the scores greater than 7?
+echo $scores | any? $it > 7 # true
+
+# Are any of the scores odd?
+echo $scores | any? $it mod 2 == 1 # true
+```
+
+The `all?` command determines if every item in a list
+matches a given condition.
+For example:
+
+```bash
+# Do all of the color names end with "e"?
+echo $colors | all? $(echo $it | str ends-with "e") # false
+
+# Is the length of all color names greater than or equal to 3?
+echo $colors | all? $(echo $it | str length) >= 3 # true
+
+# Are all of the scores greater than 7?
+echo $scores | all? $it > 7 # false
+
+# Are all of the scores even?
+echo $scores | all $it mod 2 == 0 # false
 ```
 
 The `empty?` command is used to test whether a string, list, or table is empty.

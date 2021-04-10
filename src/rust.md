@@ -22,7 +22,7 @@ Features of Rust include:
 
 - performance on par with C/C++
 - memory-efficiency
-- ownership model which guarantees memory-safety and thread-safety
+- ownership model that guarantees memory-safety and thread-safety
 - rich, static type system with type inference
 - targets {% aTargetBlank "https://llvm.org", "LLVM" %} to
   enable Rust programs to run on a wide variety of platforms
@@ -32,11 +32,11 @@ Features of Rust include:
 - functional - Functions can be stored in variables,
   passed to functions, and returned from functions.
 - somewhat object-oriented - Structs can have fields and methods (like classes).
-  These can be private or public (encapsulation).
-  Structs can implement traits (like interfaces).
-  Traits can be used as types (achieves polymorphism).
+  These can be public or private, providing encapsulation.
+  Structs can implement traits which are like interfaces.
+  Traits can be used as types which achieves polymorphism.
   Structs can have fields whose types are other struct types
-  (achieves composition), but they cannot inherit from other structs.
+  which achieves composition, but they cannot inherit from other structs.
 - self-hosted (implemented in itself) since 2011
 
 Rust was created at Mozilla by Graydon Hoare,
@@ -56,7 +56,7 @@ was announced in February 2021.
 It is "an independent non-profit organization to
 steward the Rust programming language and ecosystem."
 The initial member companies include
-AWS, Huawei, Google, Microsoft, and Mozilla.
+AWS, Google, Huawei, Microsoft, and Mozilla.
 
 Rust developers are referred to as "Rustaceans"
 which is derived from the word "crustaceans".
@@ -66,6 +66,8 @@ Images of Ferris can be found at {% aTargetBlank
 "https://rustacean.net/", "rustacean.net" %}.
 
 ## Why use Rust
+
+TODO: Continue review here
 
 **Performance:**
 
