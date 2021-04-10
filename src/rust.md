@@ -67,8 +67,6 @@ Images of Ferris can be found at {% aTargetBlank
 
 ## Why use Rust
 
-TODO: Continue review here
-
 **Performance:**
 
 The best way to get software performance is to
@@ -143,12 +141,12 @@ integer and floating point values of specific sizes.
 WebAssembly (abbreviated WASM) is a binary instruction format for
 a stack-based virtual machine that is supported by modern web browsers
 (currently Chrome, Edge, Firefox, and Safari).
-WASM code typically executes much faster than
-equivalent code written in JavaScript.
+WASM code typically executes faster than equivalent code written in JavaScript.
 Code from many programming languages can be compiled to WASM.
-Currently full support is only available for C, C++, and Rust.
+In 2021 full support is only available for C, C++, and Rust.
 Experimental support is available for C#, Go, Java, Kotlin, Python,
 Swift, TypeScript, and a few other less commonly used languages.
+
 In order to run WASM code in a web browser,
 the runtime of the source language must be included.
 Rust is a great choice for targeting WASM because it has a very small runtime
@@ -181,10 +179,10 @@ For many developers, this is the case for everything they write.
 The learning curve for Rust is quite high.
 It may be too much effort to bring an entire team up to speed on using it.
 Just learning how to use strings in Rust is a challenge.
-Developers must constantly decide whether
-values or references should be passed to functions.
+Developers must constantly think about which scope "owns" each piece of data
+and decide whether values or references should be passed to functions.
 They must think about whether values have sizes that are known at compile-time.
-And generic types are used heavily (for example, in error handling),
+Generic types are used heavily (for example, in error handling),
 and often generic types are nested.
 
 **Incompatible Libraries:**
@@ -205,24 +203,26 @@ they make it difficult to quickly try alternate coding approaches.
 The introduction of multiple companies participating in the
 newly formed "Rust Foundation" will likely lead to
 improvements in this area.
+Testing new and modified functions with unit tests rather than in the context
+of an application that uses them can reduce the time to test changes.
 
 ## Installing
 
-Rust is installed using the
+It is recommended to install Rust using the
 {% aTargetBlank "https://github.com/rust-lang/rustup/blob/master/README.md",
 "rustup" %} tool.
 This enables having multiple versions of Rust installed
 and switching between them.
 
-To install rustup in macOS
+To install rustup in macOS:
 
-1. install {% aTargetBlank "", "homebrew" %}
-1. enter `brew install rustup`
-1. install "Command Line Tools for Xcode" from {% aTargetBlank
+1. Install "Command Line Tools for Xcode" from {% aTargetBlank
    "https://developer.apple.com/downloads/more", "developer.apple.com" %}
    (requires a free Apple ID)
+1. Install {% aTargetBlank "", "homebrew" %}.
+1. Enter `brew install rustup`
 
-To install rustup in Linux (or macOS), enter the following command:
+Enter the following command to install rustup in Linux (or macOS):
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -247,10 +247,10 @@ When using the fish shell, add the following in `.config/fish/config.fish`:
 set -x PATH $PATH $HOME/.cargo/bin
 ```
 
-Verify installation by entering `rustc --version`
+Verify the installation by entering `rustc --version`
 which should output the version of the `rustc` command that is installed.
 
-Once installed, to update the version of all the Rust tools
+Once installed, to update the versions of all the Rust tools
 enter `rustup update`.
 
 ## Learning Resources
@@ -260,10 +260,11 @@ Resources for learning Rust include:
 - `rustup doc` command
 
   This displays local documentation that is installed along with Rust
-  in the default web browser. It can be read even when offline and includes:
+  in the default web browser. It can be read even when offline.
+  This includes links to the following:
 
   - API documentation  
-    When reading API documentation, if a "Go to latest version" link
+    Tip: When reading API documentation, if a "Go to latest version" link
     appears in the page header, indicating you are not looking at the latest version of the documentation, click it to see the latest.
   - "The Rust Programming Language" book
   - "Rust by Example" book
@@ -276,21 +277,22 @@ Resources for learning Rust include:
 
 - {% aTargetBlank "https://doc.rust-lang.org/book/", "The Rust Programming Language" %} book
 
-  - free, open source book
-  - can purchase a print copy from No Starch Press
+  This is a free, open source book.
+  A print copy can be purchased from {% aTargetBlank
+  "https://nostarch.com/Rust2018", "No Starch Press" %}.
 
 - {% aTargetBlank "https://doc.rust-lang.org/stable/reference/", "The Rust Reference" %}
 
-  - "the primary reference for the Rust programming language"
+  This is "the primary reference for the Rust programming language".
 
 - {% aTargetBlank "https://rust-lang-nursery.github.io/rust-cookbook/", "Rust Cookbook" %}
 
-  - "collection of simple examples that demonstrate
-    good practices to accomplish common programming tasks"
+  This is a "collection of simple examples that demonstrate
+  good practices to accomplish common programming tasks".
 
 - {% aTargetBlank "https://doc.rust-lang.org/stable/rust-by-example/", "Rust by Example" %}
 
-  - free, online set of examples in many categories
+  This is a free, online set of examples in many categories.
 
 - {% aTargetBlank "https://doc.rust-lang.org/std/index.html", "Rust Standard Library" %}
   API documentation
@@ -311,22 +313,24 @@ Resources for learning Rust include:
 
 - {% aTargetBlank "https://github.com/rust-lang/rustlings", "Rustlings" %}
 
-  - "contains small exercises to get you used to reading and writing Rust code"
+  This "contains small exercises to get you used to
+  reading and writing Rust code".
 
 - {% aTargetBlank "https://exercism.io/tracks/rust", "exercism Rust track" %}
 
-  - "Code practice and mentorship for everyone"
-  - exercism includes "exercises across 52 languages"
+  This provides "code practice and mentorship for everyone".
+  The exercism site includes exercises across 52 languages.
 
 - {% aTargetBlank "https://github.com/ctjhoa/rust-learning", "rust-learning" %}
 
-  - "A bunch of links to blog posts, articles, videos, etc for learning Rust."
+  This includes "a bunch of links to blog posts, articles, videos, etc
+  for learning Rust."
 
 ## Terminology
 
 - [Cargo](#cargo)
   - a command-line utility for building and running Rust programs
-- Clippy
+- {% aTargetBlank "https://github.com/rust-lang/rust-clippy", "Clippy" %}
   - a code linter with over 400 checks for
     correctness, style, complexity, an performance
 - [crate](#crates)
@@ -344,17 +348,17 @@ Resources for learning Rust include:
 - generic
   - a parameterized type that enables storing and using multiple types of data
 - lifetime
-  - time period during which a variable can be access,
+  - the time period during which a variable can be accesses,
     starting when it is created and ending when it is freed (a.k.a dropped)
   - often associated with the scope of a particular code block
 - [macro](#macros)
   - a function-like construct whose name ends in `!`
     and generates code at compile-time
 - [module](#modules)
-  - set of related values such as constants and functions
+  - a set of related values such as constants and functions
 - package
   - `cargo` feature for building, testing, and sharing crates
-  - set of crates described by a `Cargo.toml` file
+  - a set of crates described by a `Cargo.toml` file
   - contains any number of binaries and 0 or 1 library
 - panic
   - represents an unrecoverable error that causes a program to terminate,
@@ -410,7 +414,7 @@ so it can be re-executed by simply pressing the button.
 
 Press the "DEBUG" button to open a popup for choosing between
 "Debug" and "Release" build modes.
-A debug build is faster because it performs less optimization.
+A debug build completes in less time because it performs less optimization.
 
 Press the "STABLE" button to open a popup for choosing a Rust version
 which can be "Stable channel" (default), "Beta channel", or "Nightly channel".
@@ -443,8 +447,8 @@ containing the following links:
 Press the "TOOLS" button to open a popup with the following options:
 
 - "Rustfmt" formats the code using the `rustfmt` tool.
-- "Clippy" runs the Clippy code with over 400 checks for
-  correctness, style, complexity, an performance.:
+- "Clippy" runs the Clippy code linter with over 400 checks for
+  correctness, style, complexity, an performance.
 - "Miri" runs the program using the
   {% aTargetBlank "https://github.com/rust-lang/miri", "Miri interpreter" %}
   which is an experimental interpreter for Rust's
@@ -454,7 +458,6 @@ Press the "TOOLS" button to open a popup with the following options:
   all the macro calls expanded in order to see what they actually do.
   For example, try this with a `main` function that
   just calls the `println!` macro to print "Hello".
-  You would not want to write this code yourself.
 
 Press the "CONFIG" button to open a popup with the following options:
 
@@ -466,8 +469,8 @@ Press the "CONFIG" button to open a popup with the following options:
   Options include ace, emacs, sublime, vim, and vscode.
 - "Theme" enables choosing between 30+ themes including
   cobalt, github, solarized light, solarized dark.
-- "Pair Characters" automatically inserts
-  closing `)`, `}`, and `]` characters after `(`, `{`, and `[` characters.
+- "Pair Characters" automatically inserts closing `)`, `}`, and `]` characters
+  after the `(`, `{`, and `[` characters are typed.
 - "Orientation" enables choosing how panes are arranged.
   Options include Horizontal, Vertical,
   and Automatic which chooses based on window size.
@@ -484,8 +487,8 @@ but previously entered code is not retained.
 
 Rust source files have a `.rs` file extension.
 
-To compile a Rust source file that defines a `main` function,
-creating an executable with the same name and no file extension,
+Here are the steps to compile a Rust source file that defines a `main` function,
+create an executable with the same name and no file extension,
 and run the executable:
 
 - open a terminal (or Windows Command Prompt),
@@ -502,7 +505,7 @@ fn main() {
 }
 ```
 
-Note that calls to names that end in `!`, like `println!`,
+Calls to names that end in `!`, like `println!`,
 are calls to a [macro](#macros) rather than a function.
 
 Typically the `rustc` command is not used directly.
@@ -512,8 +515,9 @@ is used to run `rustc` and the resulting executable.
 
 ## VS Code
 
-If using VS Code to edit Rust code there are two main extensions to consider,
-"Rust" and "Rust-analyzer". Both offer similar features which include:
+If VS Code is being used to edit Rust code,
+there are two main extensions to consider: "Rust" and "Rust-analyzer".
+Both offer similar features which include:
 
 - syntax highlighting
 - code completion
@@ -523,7 +527,7 @@ If using VS Code to edit Rust code there are two main extensions to consider,
 - code snippets
 - rename refactoring
 - debugging
-- build tasks
+- running build tasks
 
 To enable Rust code formatting, add the following in `settings.json`
 where FORMATTER is "rust-lang.rust" for the Rust extension
@@ -536,6 +540,8 @@ and "matklad.rust-analyzer" for the "Rust-analyzer" extension.
     "editor.tabSize": 4
   },
 ```
+
+TODO: Continue review here
 
 By default Rust-analyzer displays inferred types inline in code,
 which can be beneficial but it is also verbose and distracting.
