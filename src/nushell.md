@@ -583,6 +583,17 @@ echo `product of {{$x}} and {{$y}} is {{$(= $x * $y)}}`
 
 {% endraw %}
 
+The `empty?` command determines whether a string, list, or table is empty.
+It can be used with strings as follows:
+
+```bash
+let name = "Mark"
+= $name | empty? # false
+
+let name = ""
+= $name | empty? # true
+```
+
 The operators `=~` and `!~` test whether
 one string contains or does not contain another.
 
@@ -642,37 +653,52 @@ that the first value is a `duration` and the 2nd is a `filesize`.
 
 The literal syntax for creating a `list` is to include expressions
 in square brackets separated by spaces or commas (for readability).
-For example, `["foo" "bar" "baz"]` or `["foo", "bar", "baz"]`.
+For example, `[foo bar baz]` or `[foo, bar, baz]`.
 
 To iterate over the elements in a list, use the `each` command.
+The `$it` special variable holds the output of the previous command.
+When used in a block passed to the `each` command, it holds the current item.
+To change `$it` to have `$it.index` and `$it.item` values,
+add the `--numbered` (`-n`) flag.
 For example:
 
 ```bash
 let names = [Mark Tami Amanda Jeremy]
-echo $names | as-lines # outputs each name on a separate line
+echo $names | each { build-string "Hello, " $it "!" }
+# Outputs "Hello, Mark!" and three more similar lines.
+
+echo $names | each -n { build-string $($it.index | inc) ")" $it.item }
 ```
 
 The `split row` command creates a list from a string based on a delimiter.
 For example, `let colors = $(echo "red,green,blue" | split row ",")`
 creates the list `[red green blue]`.
 
-The `$it` special variable holds the output of the previous command.
-When used in a block passed to the `each` command,
-it holds the current iteration value.
-
-To access a list element at a given index, use `$name.index`
+To access a list item at a given index, use `$name.index`
 where `$name` is a variable that holds a list.
 For example, the second element in the list above
 which is "Tami" can be accessed with `$names.1`.
 
+The `length` command returns the number of items in a list.
+For example, `echo [red green blue] | length` outputs `3`.
+
+The `empty?` command determines whether a string, list, or table is empty.
+It can be used with lists as follows:
+
+```bash
+= $colors | empty? # false
+
+let colors = []
+= $colors | empty? # true
+```
+
 The `in` and `not in` operators are used to test whether a value is in a list.
+Operators can only be used in "math mode".
+One way to enter math mode is to begin an expression with `=`.
 For example:
 
 ```bash
 let colors = [red green blue]
-# As discussed in the "Operators" section later,
-# operators can only be used in "math mode".
-# An expression is in math mode if it begins with `=`.
 = blue in $colors # true
 = yellow in $colors # false
 ```
@@ -695,16 +721,16 @@ matches a given condition.
 For example:
 
 ```bash
-# Do any of the color names end with "e"?
+# Do any color names end with "e"?
 echo $colors | any? $(echo $it | str ends-with "e") # true
 
 # Is the length of any color name less than 3?
 echo $colors | any? $(echo $it | str length) < 3 # false
 
-# Are any of the scores greater than 7?
+# Are any scores greater than 7?
 echo $scores | any? $it > 7 # true
 
-# Are any of the scores odd?
+# Are any scores odd?
 echo $scores | any? $it mod 2 == 1 # true
 ```
 
@@ -713,61 +739,28 @@ matches a given condition.
 For example:
 
 ```bash
-# Do all of the color names end with "e"?
+# Do all color names end with "e"?
 echo $colors | all? $(echo $it | str ends-with "e") # false
 
 # Is the length of all color names greater than or equal to 3?
 echo $colors | all? $(echo $it | str length) >= 3 # true
 
-# Are all of the scores greater than 7?
+# Are all scores greater than 7?
 echo $scores | all? $it > 7 # false
 
-# Are all of the scores even?
+# Are all scores even?
 echo $scores | all $it mod 2 == 0 # false
 ```
 
-The `empty?` command is used to test whether a string, list, or table is empty.
-For example:
-
-```bash
-# Strings
-let name = "Mark"
-= $name | empty? # false
-let name = ""
-= $name | empty? # true
-
-# Lists
-= $colors | empty? # false
-let colors = []
-= $colors | empty? # true
-
-# Tables
-let scores = [[Name Score]; [Mark 19] [Tami 21]]
-= $scores | empty? # false
-let scores = []
-= $scores | empty? # true; not empty if only header row is present
-```
-
-The `append` command appends a value to the end of a list.
-The `prepend` command prepends a value to the beginning of a list.
+The `append` command appends a single value to the end of a list.
+The `prepend` command prepends a single value to the beginning of a list.
 For example:
 
 ```bash
 let colors = [yellow green]
 let colors = $(echo $colors | prepend red)
 let colors = $(echo $colors | append purple)
-echo $colors
-```
-
-This outputs the following:
-
-```text
-╭───┬────────╮
-│ 0 │ red    │
-│ 1 │ yellow │
-│ 2 │ green  │
-│ 3 │ purple │
-╰───┴────────╯
+echo $colors # [red yellow green purple]
 ```
 
 The `flatten` command creates a new list from an existing list
@@ -782,22 +775,26 @@ echo [[1 2] [3 [4 5 [6 7 8]]]] |
   flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
 ```
 
-The `length` command returns the number of items in a list.
-For example, `echo [red green blue] | length` outputs `3`.
-
 The `reduce` command computes a single value from a list.
 It takes a block which can use the special variables
 `$acc` (for accumulator) and `$it` (for item).
-To specify an initial value for `$acc`, use the `--fold` flag.
+To specify an initial value for `$acc`, use the `--fold` (`-f`) flag.
 To change `$it` to have `$it.index` and `$it.item` values,
-add the `--numbered` flag.
+add the `--numbered` (`-n`) flag.
+This also changes `$acc` to have a `$acc.item` value.
 For example:
 
 ```bash
 let scores = [3 8 4]
 echo "total =" $(echo $scores | reduce { = $acc + $it }) # 15
+
 echo "total =" $(echo $scores | math sum) # easier approach, same result
+
 echo "product =" $(echo $scores | reduce --fold 1 { = $acc * $it }) # 96
+
+TODO: Why doesn't this work?
+echo $scores | reduce -n { = $acc.item + $it.index * $it.item }
+# 0*3 + 1*8 + 2*4 = 16
 ```
 
 ### Tables
@@ -1567,6 +1564,7 @@ Examples of using many of them appear in the sub-sections that follow.
 | `drop n`                   | removes the last `n` rows (`n` defaults to 1)                                                                             |
 | `drop column n`            | removes the last `n` columns (`n` defaults to 1)                                                                          |
 | `each`                     | runs a block of code on each row                                                                                          |
+| `empty?`                   | determines if a table contains no rows                                                                                    |
 | `every n`                  | shows (default) or skips (with `-s` option) every `n`th row                                                               |
 | `first n`                  | shows only the first `n` rows (`n` defaults to 1); alternative to `keep`                                                  |
 | `flatten`                  | flattens a table or list, turning nested values into top-level values                                                     |
@@ -1692,6 +1690,19 @@ This produces output like the following:
 append-demo.nu is 670 B.
 block-param.nu is 305 B.
 chart-demo.nu is 189 B.
+```
+
+## `empty?` command
+
+The `empty?` command determines whether a string, list, or table is empty.
+It can be used with tables as follows:
+
+```bash
+let scores = [[Name Score]; [Mark 19] [Tami 21]]
+= $scores | empty? # false
+
+let scores = []
+= $scores | empty? # true; not empty if only header row is present
 ```
 
 ### `flatten` Command
