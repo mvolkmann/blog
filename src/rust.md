@@ -328,6 +328,8 @@ Resources for learning Rust include:
 
 ## Terminology
 
+TODO: Add more terminology in this section? ownership, borrow checker, ...
+
 - [Cargo](#cargo)
   - a command-line utility for building and running Rust programs
 - {% aTargetBlank "https://github.com/rust-lang/rust-clippy", "Clippy" %}
@@ -541,15 +543,13 @@ and "matklad.rust-analyzer" for the "Rust-analyzer" extension.
   },
 ```
 
-TODO: Continue review here
-
 By default Rust-analyzer displays inferred types inline in code,
-which can be beneficial but it is also verbose and distracting.
+which can be beneficial but is also verbose and distracting.
 This can be disabled in Settings by searching for "rust analyzer"
 and unchecking "Rust-analyzer > Inlay Hints: Type Hints".
 Inferred types can still be displayed by hovering over a variable.
 
-Note that these extensions only work properly if the root folder
+These extensions only work properly if the root folder
 of a Rust project is opened and it contains a `Cargo.toml` file.
 See the [Cargo](#cargo) section for details on creating this.
 
@@ -561,14 +561,15 @@ The Rust Cargo tool uses this format for `Cargo.toml` configuration files.
 
 Each key/value pair is described by a line with the syntax `key = value`.
 Keys are not surrounded by any delimiters.
+
 Supported value data types include
 string, integer, float, boolean, datetime,
-array (ordered list of values),
-and table (collection of key/value pairs).
+array (an ordered list of values),
+and table (a collection of key/value pairs).
 String values are surrounded by double quotes.
 Datetime values have the format `yyyy-mm-ddThh:mm:ss`.
-The time portion can be omitted or be followed by a time zone,
-`Z` for UTC or `+hh:mm` for an offset.
+The time portion can be omitted or be followed by a time zone
+which is `Z` for UTC or `+hh:mm` for a specific offset.
 Array elements are surrounded by square brackets and separated by commas.
 
 Comments begin with the `#` character and extend to the end of the line.
@@ -576,6 +577,23 @@ Comments begin with the `#` character and extend to the end of the line.
 Sections and sub-sections are indicated by lines
 containing a name enclosed in square brackets.
 Think of these like keys whose values are objects.
+
+Here is the default `Cargo.toml` file that is created by
+the command `cargo new project-name`
+which we will learn about in the next section:
+
+```toml
+[package]
+name = "delete-me"
+version = "0.1.0"
+authors = ["R. Mark Volkmann <r.mark.volkmann@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+```
 
 ## <a name="cargo">Cargo</a>
 
@@ -586,24 +604,24 @@ For help, enter `cargo --help` or just `cargo`.
 
 The following table describes the `cargo` subcommands:
 
-| Subcommand    | Description                                                                                   |
-| ------------- | --------------------------------------------------------------------------------------------- |
-| `bench`       | runs benchmarks for the project which are special kinds of tests                              |
-| `build`       | builds the project in the `target` directory                                                  |
-| `check`       | verifies the project builds successfully,<br>without generating code                          |
-| `clean`       | deletes `target` directory                                                                    |
-| `clippy`      | runs all project source files through the Clippy linter                                       |
-| `doc`         | generates documentation for the current project                                               |
-| `fmt`         | formats all project source files using `rustfmt`                                              |
-| `init`        | creates a new Rust project in the current directory                                           |
-| `install`     | installs the project executable, by default in `~/.cargo/bin`                                 |
-| `new`         | creates a new Rust project in a new subdirectory                                              |
-| `publish`     | publishes project crate in the {% aTargetBlank "https://crates.io", "crates.io" %} registry   |
-| `run` or `r`  | builds and runs the project                                                                   |
-| `search`      | searches the {% aTargetBlank "https://crates.io", "crates.io" %} registry for matching crates |
-| `test` or `t` | runs tests in the project                                                                     |
-| `uninstall`   | removes the project executable, by default from `~/.cargo/bin`                                |
-| `update`      | updates dependencies in the `Cargo.lock` file                                                 |
+| Subcommand                      | Description                                                                                     |
+| ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `bench`                         | runs benchmarks for the project which are special kinds of tests                                |
+| `build`                         | builds the project in the `target` directory                                                    |
+| `check`                         | verifies that the project builds successfully,<br>without generating code                       |
+| `clean`                         | deletes the `target` directory                                                                  |
+| `clippy`                        | runs all project source files through the Clippy linter                                         |
+| `doc`                           | generates documentation for the current project                                                 |
+| `fmt`                           | formats all project source files using `rustfmt`                                                |
+| `init`                          | creates a new Rust project in the current directory                                             |
+| `install`                       | installs the project executable, by default in `~/.cargo/bin`                                   |
+| `new`                           | creates a new Rust project in a new subdirectory                                                |
+| `publish`                       | publishes the project crate in the {% aTargetBlank "https://crates.io", "crates.io" %} registry |
+| `run` or `r`                    | builds and runs the project                                                                     |
+| <code>search <i>name</i></code> | searches the {% aTargetBlank "https://crates.io", "crates.io" %} registry for matching crates   |
+| `test` or `t`                   | runs the project tests                                                                          |
+| `uninstall`                     | removes the project executable, by default from `~/.cargo/bin`                                  |
+| `update`                        | updates dependencies in the `Cargo.lock` file                                                   |
 
 The most commonly used `cargo` subcommands are described in more detail below.
 
@@ -614,26 +632,25 @@ that specifies the project name, version, authors,
 the Rust edition to use, and a list of dependencies.
 The created directory also contains a `src` directory containing a single file.
 When the `--lib` switch is not included, the file is
-`main.rs`, which is a simple hello world program.
+`main.rs` which is a simple hello world program.
 When the `--lib` switch is included, the file is
-`lib.rs`, which contains a simple unit test.
+`lib.rs` which contains a simple unit test.
 
-In Node.js, applications can use dependencies listed in their
+In Node.js, project source files can use dependencies listed in their
 `package.json` file AND also their dependencies recursively.
-But in Rust, projects can only use
+But Rust project source files can only use
 dependencies listed in their `Cargo.toml` file.
-This has the benefit a dependency can drop one of its dependencies
+This has the benefit that a dependency can drop one of its dependencies
 without breaking apps that use it because a Rust application or library
 must explicitly list all of its dependencies.
 
 The `cargo run` command builds and runs the project.
 It also downloads dependencies listed in the `Cargo.toml` file,
 and their dependencies recursively, that have not yet been downloaded.
-This can be slow, so the speed of this command varies greatly
-depending on whether any new dependencies have been added
-since the last time it was run.
+This command can be slow when run for the first time in a new project
+or if new dependencies have been added since the last time it was run.
 
-To pass command-line arguments to a program, specify them after `--`.
+To pass command-line arguments to a program, specify them after `--`.  
 For example, `cargo run -- arg1 arg2`
 
 To watch project files for changes and
@@ -641,9 +658,10 @@ automatically run a `cargo` command when they do,
 enter `cargo install cargo-watch` one time
 and then enter <code>cargo watch -x <i>subcommand</i></code>.
 If the `-x` option is omitted, the subcommand defaults to `check`, not `run`.
-Typically you will want the subcommand to be `run`.
+Typically the desired subcommand is `run`.
 
-The `cargo build` command creates an executable in the `target/debug` directory.
+The `cargo build` command creates a non-optimized executable
+in the `target/debug` directory.
 To create an optimized, production build, enter `cargo build --release`
 which creates an executable in the `target/release` directory.
 
@@ -651,29 +669,29 @@ which creates an executable in the `target/release` directory.
 
 In general, names of types use `PascalCase`
 and names of values use `snake_case`.
+The compiler outputs warnings when the naming conventions
+described in the table below are not followed.
 
-| Item                                                                                           | Naming Convention                  |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------- |
-| constants                                                                                      | SCREAMING_SNAKE_CASE               |
-| constructor functions                                                                          | snake_case                         |
-| crates                                                                                         | snake_case or kebab-case           |
-| {% aTargetBlank "https://doc.rust-lang.org/cargo/reference/features.html", "crate features" %} | no convention                      |
-| enums                                                                                          | PascalCase                         |
-| enum variants                                                                                  | PascalCase                         |
-| file names                                                                                     | snake_case or kebab-case           |
-| functions                                                                                      | snake_case                         |
-| lifetimes                                                                                      | 'lowercase                         |
-| macros                                                                                         | snake_case!                        |
-| methods                                                                                        | snake_case                         |
-| modules                                                                                        | snake_case                         |
-| statics                                                                                        | SCREAMING_SNAKE_CASE               |
-| structs                                                                                        | PascalCase                         |
-| traits                                                                                         | PascalCase                         |
-| type parameters (generics)                                                                     | PascalCase, but usually one letter |
-| type aliases                                                                                   | PascalCase                         |
-| variables                                                                                      | snake_case                         |
-
-The compiler outputs warnings when these naming conventions are not followed.
+| Item                                                                                           | Naming Convention                    |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------ |
+| constants                                                                                      | `SCREAMING_SNAKE_CASE`               |
+| constructor functions                                                                          | `snake_case`                         |
+| crates                                                                                         | `snake_case` or `kebab-case`         |
+| {% aTargetBlank "https://doc.rust-lang.org/cargo/reference/features.html", "crate features" %} | no convention                        |
+| enums                                                                                          | `PascalCase`                         |
+| enum variants                                                                                  | `PascalCase`                         |
+| file names                                                                                     | `snake_case` or `kebab-case`         |
+| functions                                                                                      | `snake_case`                         |
+| lifetimes                                                                                      | `'lowercase`                         |
+| macros                                                                                         | `snake_case!`                        |
+| methods                                                                                        | `snake_case`                         |
+| modules                                                                                        | `snake_case`                         |
+| statics                                                                                        | `SCREAMING_SNAKE_CASE`               |
+| structs                                                                                        | `PascalCase`                         |
+| traits                                                                                         | `PascalCase`                         |
+| type parameters (generics)                                                                     | `PascalCase,` but usually one letter |
+| type aliases                                                                                   | `PascalCase`                         |
+| variables                                                                                      | `snake_case`                         |
 
 ## Syntax Highlights
 
@@ -691,18 +709,18 @@ The compiler outputs warnings when these naming conventions are not followed.
 - A dot (`.`) character is used to
   access struct fields and call instance methods.
 - A double colon (`::`) is used as a namespace separator (borrowed from C++)
-  and to call associated functions
+  and to call "associated functions"
   (like class or static methods in other languages).
 - Conditions for conditional logic and iteration
   are not surrounded by any delimiter (no parentheses).
 - Statements associated with conditional logic and iteration
-  must be in blocks surrounded by curly brackets.
+  must be in blocks surrounded by curly braces.
 - The preferred indentation is four spaces.
 - Named functions are declared with the `fn` keyword.
-- Function return types follow the parameter list and `->`.
-- Functions that return nothing omit `->` and return type.
+- Function return types follow the parameter list and the characters `->`.
+- Functions that return nothing omit `->` and the return type.
 - Statements must terminated by a semicolon.
-- If the last expression in a function does not end with a semicolon,
+- If the last evaluated expression in a function does not end with a semicolon,
   its value is returned.
 - Most statements are also expressions and evaluate to a value,
   including the `if` and `match` statements.
@@ -722,7 +740,7 @@ Rust supports regular comments and "doc comments".
 
 "Doc comments" are included in HTML documentation
 that is generated by entering `cargo doc`.
-This creates the directory `target/doc/{crate-name}`
+This creates the directory <code>target/doc/<i>crate-name</i></code>
 and writes HTML for the documentation there.
 
 To generate the documentation and open it in the default browser,
@@ -737,7 +755,7 @@ Common sections include:
 
   This section provides code examples in Markdown fences.
   It is especially useful to demonstrate calls to functions and methods.
-  For library crates (not for binary crates) this code is run along with
+  For library crates (not for binary crates) this code is executed along with
   other test code by the `cargo test` and `rustdoc --test` commands.
 
 - `# Errors`
@@ -756,6 +774,13 @@ Common sections include:
 
 Let's walk through a simple example of code that includes
 a doc comment with an "Examples" section.
+The `vec!` macro, `iter` method, and `sum` method
+are described in more detail later.
+For now all you need to know is that the `vec!` macro creates a list of values,
+the `iter` method returns an iterator over the values,
+and the `sum` method adds all the values provided by the iterator.
+In this case all the values have the type `f64`
+which is an 8-byte floating point value.
 
 1. Create a library project by entering `cargo new math --lib`.
 
@@ -782,18 +807,19 @@ Rust attributes are like "decorators" in other programming languages.
 They annotate an item in order to change its behavior.
 An attribute can be specified
 immediately before an item with the syntax `#[attr]`,
-inside the block of an item with the syntax `#![attr]`, or at the top level.
+inside the block of an item with the syntax `#![attr]`,
+or at the top level of a source file.
 When used at the top level, `#![attr]` specifies a crate-wide attribute.
 
 The following table summarizes commonly used built-in attributes.
 
-| Attribute                        | Description                                                                     |
-| -------------------------------- | ------------------------------------------------------------------------------- |
-| `allow(warning1, warning2, ...)` | suppresses the specified linting rule warnings                                  |
-| `derive(name1, name2, ...)`      | automatically implements traits or applies "derive macros", often on a `struct` |
-| `doc`                            | provides an alternate way to specify and format doc comments                    |
-| `should_panic`                   | indicates that a test function is expected to panic                             |
-| `test`                           | indicates that a function is a test                                             |
+| Attribute                        | Description                                                                        |
+| -------------------------------- | ---------------------------------------------------------------------------------- |
+| `allow(warning1, warning2, ...)` | suppresses the specified linting rule warnings                                     |
+| `derive(name1, name2, ...)`      | automatically implements traits or<br>applies "derive macros", often on a `struct` |
+| `doc`                            | provides an alternate way to specify and format doc comments                       |
+| `should_panic`                   | indicates that a test function is expected to panic                                |
+| `test`                           | indicates that a function is a test                                                |
 
 For a list of linting rules that produce warnings, see {% aTargetBlank
 "https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html",
@@ -817,6 +843,8 @@ Custom attributes can be implemented by defining {% aTargetBlank
 "attribute-like macros" %}.
 
 ## Formatted Print
+
+TODO: Continue review here
 
 The `std` namespace, pronounced "stood", defines many commonly used values.
 The `std::fmt` namespace defines macros that format text.
