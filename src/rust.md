@@ -2222,6 +2222,18 @@ quick_error! {
 }
 ```
 
+## Generics
+
+Rust makes heavy use of generic types.
+They enable implementing functions, structs, and traits that
+operate on various types of data instead of only specific types.
+
+Generic types are declared inside angle brackets.
+They can specify one or more traits that must be implemented by
+concrete types in order to use them in place of the type parameters.
+The sections on functions, structs, and traits
+contain many examples of using generic types.
+
 ## <a name="scalar-types">Built-in Types</a>
 
 Rust provides many built-types.
@@ -2231,11 +2243,9 @@ The following diagram summarizes them.
   src="/blog/assets/rust-types.png?v={{pkg.version}}"
   title="Rust Built-in Data Types">
 
-TODO: Continue review here
+### <a name="scalar-types">Built-in Scalar Types</a>
 
-## <a name="scalar-types">Built-in Scalar Types</a>
-
-Rust defines many scalar (primitive) types which can be categories as
+Rust defines many scalar (primitive) types which can be categorized as
 boolean, character, integer (6 kinds), or floating point (2 kinds).
 
 The boolean type name is `bool`.
@@ -2243,14 +2253,14 @@ Its only values are `true` and `false`.
 
 The character type name is `char`.
 Literal values are surrounded by single quotes.
-Its values are Unicode values that each occupy four bytes
+Its values are Unicode values that each occupy four bytes,
 regardless of whether four bytes are actually needed to represent them.
 This gives the values a known size at compile time.
 
 The signed integer type names are `i{n}` where `{n}`
 is the number of bits which can be 8, 16, 32, 64, 128, or `size`.
 The `isize` type matches either `i32` or `i64`
-depending on the processor architecture.
+depending on the current processor architecture.
 The default type for literal integers is `i32` regardless of the processor.
 
 The unsigned integer types are the same, but start with `u` instead of `i`.
@@ -2258,9 +2268,7 @@ The `usize` type is typically used to index into
 collections such as arrays and vectors.
 
 Literal number values can end with these type names to make their type explicit.
-For example, the value 19 can be specified to be
-an unsigned, 8-bit integer by writing `19u8`.
-The following variable declarations are equivalent:
+For example, the following variable declarations are equivalent:
 
 ```rust
 let number: i8 = 19;
@@ -2271,11 +2279,13 @@ Literal integer values can use the underscore character to separate
 thousands, millions, and so on. For example,
 the population of the U.S. in 2020 was approximately 330_676_544.
 
-Hex values begin with `0x`, octal values begin with `0o`,
-and binary values begin with `0b`.
+Hex literal values begin with `0x`,
+octal literal values begin with `0o`, and
+binary literal values begin with `0b`.
 
 The floating point type names are `f{n}` where `{n}` is 32 or 64.
-The default type for literal floats is `f64` regardless of the processor.
+The default type for literal floats is `f64`
+regardless of the current processor.
 Literal floating point values must include a decimal point
 to avoid being treated as integer values,
 but it is acceptable to have no digits after the decimal point.
@@ -2285,12 +2295,14 @@ The "unit type" represents not having a value,
 like `void` in other languages.
 It can be thought of as an enum with a single variant which is written as `()`.
 It is the return value of functions that do not return a value.
-It is what the `Result` enum `Ok` variant
+It is also what the `Result` enum `Ok` variant
 wraps when there is nothing to return.
-It can follow the `=>` in a `match` arm to take no action.
+The unit type value can follow the `=>` in a `match` arm to take no action.
 
-Rust allows adding methods to any type, even built-in types.
-For example:
+TODO: Continue review here
+
+Rust allows adding methods to any type, even built-in, scalar types.
+The following example shows added a method to the `i32` type:
 
 ```rust
 trait Days<T> {
@@ -2358,19 +2370,7 @@ fn main() {
 
 The [Macros](#macros) section shows one more approach.
 
-## Generics
-
-Rust makes heavy use of generic types.
-They enable implementing functions, structs, and traits that
-operate on various types of data instead of only specific types.
-
-Generic types are declared inside angle brackets.
-They can specify one or more traits that must be implemented by
-concrete types in order to use them in place of the type parameters.
-The sections on functions, structs, and traits
-contain many examples of using generic types.
-
-## Primitive Compound Types
+### Primitive Compound Types
 
 Rust defines three primitive compound types which are tuple, array, and slice.
 These are distinct from the collection types that are described later.
@@ -2424,7 +2424,7 @@ Operating on an array or `Vec` often requires
 obtaining an [`Iterator`](#iterators).
 For example, that is where the methods `map`, `filter`, and `fold` are found.
 
-## Collections
+### Collections
 
 Rust defines many kinds of collections that hold a variable number of values.
 These include strings and collections in the `std::collections` namespace.
@@ -2459,7 +2459,7 @@ that doesn't fall into the previous categories:
 - `BinaryHeap`: implements a priority queue where
   only the highest priority item is accessible
 
-### <a name="strings">Strings</a>
+#### <a name="strings">Strings</a>
 
 Strings are collections of UTF-8 encoded characters
 stored as a `Vec` of `u8` byte values.
@@ -2725,7 +2725,7 @@ let mut s2 = String::from("first");
 s2.replace_range(.., "second"); // range .. is the entire string
 ```
 
-### Vectors
+#### Vectors
 
 A vector is represented by the `Vec` generic type.
 It is a smart pointer that holds a pointer to the data on the heap,
@@ -2858,7 +2858,7 @@ fn main() {
 }
 ```
 
-### Sets
+#### Sets
 
 A set is a collection of unique values.
 
@@ -2959,7 +2959,7 @@ fn main() {
 }
 ```
 
-### Maps
+#### Maps
 
 Maps are collections of key/value pairs.
 Keys can be any type, but they must all be the same type.

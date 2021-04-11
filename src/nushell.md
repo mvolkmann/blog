@@ -478,6 +478,10 @@ Conceptual Types:
 | list        | sequence of values of any type                                                  |
 | row         | list where each value represents a column with an associated name               |
 
+Duration units for month and year are not supported
+because those durations vary based on the month (28 to 31)
+or year (normal or leap year).
+
 To see a description of the value of an expression,
 pipe it to the `describe` command.
 This is not its real type.
