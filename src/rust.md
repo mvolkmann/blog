@@ -1651,14 +1651,16 @@ following these will typically reduce ownership issues in your code.
 
 ## <a name="lifetimes">Lifetimes</a>
 
+Lifetimes ensure that memory does not get freed
+before a reference to it can use it.
+
 <aside>
 This is an advanced topic.
 Be prepared to revisit this later and
 read it multiple times before it sinks in.
+Fortunately for most function definitions
+there is no need to explicitly specify lifetimes.
 </aside>
-
-Lifetimes ensure that memory does not get freed
-before a reference to it can use it.
 
 Lifetime annotations only apply to references.
 All reference parameters and reference return types have a lifetime,
