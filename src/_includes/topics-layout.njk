@@ -10,7 +10,9 @@ layout: top-layout
 
 <section class="topic-background">
   <section class="topic-content">
+    <button id="print-btn" onclick="print()">Print</button>
     <iframe
+      id="topic-content"
       name="frame"
       onLoad="iframeLoaded(this)"
       src="../welcome/"

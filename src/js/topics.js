@@ -48,6 +48,11 @@ function iframeLoaded(iframe) {
   iframe.style.opacity = 1;
 }
 
+// This is called from topics-layout.njk.
+function print() {
+  document.getElementById('topic-content').contentWindow.print();
+}
+
 // eslint-disable-next-line no-unused-vars
 function toggleHamburgerMenu() {
   const nav = document.querySelector('nav');
