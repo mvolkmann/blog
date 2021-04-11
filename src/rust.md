@@ -1856,8 +1856,6 @@ This is similar to the `Either` monad in Haskell.
 
 There are many ways to handle variants from these enum types.
 
-TODO: Continue review here
-
 1. Use a `match` statement.
 
    For example:
@@ -1865,7 +1863,7 @@ TODO: Continue review here
    ```rust
    #[derive(Debug)]
    pub enum MathError {
-       DivisionByZero // used by divide2
+       DivisionByZero // used by divide2 function below
    }
 
    // Demonstrates returning a Option enum.
@@ -1881,8 +1879,10 @@ TODO: Continue review here
    // Commented lines below show an alternative way
    // to describe the error using a string.
    //const DIV_BY_ZERO: &str = "divide by zero";
-   fn divide2(numerator: f64, denominator: f64) -> Result<f64, MathError> {
-   //fn divide2(numerator: f64, denominator: f64) -> Result<f64, &'static str> {
+   fn divide2(numerator: f64, denominator: f64)
+   -> Result<f64, MathError> {
+   //fn divide2(numerator: f64, denominator: f64)
+   //-> Result<f64, &'static str> {
        if denominator == 0.0 {
            Err(MathError::DivisionByZero)
            //Err(DIV_BY_ZERO)
@@ -1896,14 +1896,14 @@ TODO: Continue review here
        let d = 2.0;
 
        match divide1(n, d) { // returns an Option enum
+           Some(result) => println!("{:.2}", result), // 2.50
            None => println!("divide by zero"),
-           Some(result) => println!("{:.2}", result),
        }
 
        match divide2(n, d) { // returns a Result enum
+           Ok(result) => println!("{:.2}", result), // 2.50
            Err(e) => println!("{:?}", e),
            //Err(msg) => println!("{}", msg),
-           Ok(result) => println!("result is {:.2}", result),
        }
    }
    ```
@@ -1915,13 +1915,13 @@ TODO: Continue review here
 
    ```rust
    if let Some(result) = divide1(n, d) {
-       println!("result is {}", result);
+       println!("{:.2}", result);
    } else {
        println!("fail")
    }
 
    if let Ok(result) = divide2(n, d) {
-       println!("result is {}", result);
+       println!("{:.2}", result);
    } else { // With this approach we lose the detail in the Err variant.
        println!("fail")
    }
@@ -1936,26 +1936,24 @@ TODO: Continue review here
 
    If the value is a `None` or `Err`:
 
-   - `unwrap` panics, exiting the program
-   - `unwrap_or` uses a specified value
-   - `unwrap_or_default` uses the default value for the type;
-     for custom types, this is specified by implementing the `Default` trait
+   - `unwrap` panics, exiting the program.  
+      If the value is `Err`, the message it wraps will be output.
+   - `unwrap_or` uses a specified value.
+   - `unwrap_or_default` uses the default value for the type.  
+     For custom types, this is specified by implementing the `Default` trait.
    - `unwrap_or_else` executes a closure passed to it
-     to compute the value to use
+     to compute the value to use.
 
-   If the value is `Err` and the `unwrap` method is used,
-   the message it wraps will be output.
-
-   We can replace the `match` and `if let` statements above
+   For example, we can replace the `match` and `if let` statements above
    with the following:
 
    ```rust
    let result = divide1(n, d).unwrap();
-   println!("result is {}", result);
+   println!("{:.2}", result);
 
    // When d is zero this uses infinity for the value.
    let result = divide2(n, d).unwrap_or(std::f64::INFINITY);
-   println!("result is {}", result);
+   println!("{:.2}", result);
    ```
 
 4. Use the `expect` method.
@@ -1966,31 +1964,33 @@ TODO: Continue review here
 
    ```rust
    let result = divide1(n, d).expect("division failed");
-   println!("result is {}", result);
+   println!("{:.2}", result);
 
    let result = divide2(n, d).expect("division failed");
-   println!("result is {}", result);
+   println!("{:.2}", result);
    ```
 
 5. Use the `?` operator which is shorthand for the `try!` macro.
 
-   This can be applied to functions that return a `Result` or `Option` enum.
-   If the value is a `Some` or `Ok` then it is unwrapped and returned.
-   If the value is a `None` or `Err` then it is passed through the
+   This allows the caller to handle errors, similar to
+   re-throwing an exception in other programming languages.
+   It can be applied to functions that return a `Result` or `Option` enum.
+
+   If the value is a `Some` or `Ok` variant then it is unwrapped and returned.
+   If the value is a `None` or `Err` variant then it is passed through the
    `from` function (defined in the standard library `From` trait)
    in order to convert it to the return type of the function,
    and that is returned to the caller.
+
    The function in which this operator is used must
    declare the proper return type and return a value of that type.
-   This allows the caller to handle errors, similar to
-   re-throwing an exception in other programming languages.
 
    ```rust
    let result = divide1(n, d)?;
-   println!("result is {}", result);
+   println!("{:.2}", result);
 
    let result = divide2(n, d)?;
-   println!("result is {}", result);
+   println!("{:.2}", result);
    ```
 
    Uses of `?` can be chained in the same statement.
@@ -2025,17 +2025,20 @@ TODO: Continue review here
        b: &mut dyn io::BufRead,
    ) -> Result<PositiveNonzeroInteger, Box<dyn std::error::Error>> {
        let mut line = String::new();
-       b.read_line(&mut line)?; // can return Err(std::io::Error)
-       let num: i64 = line.trim().parse()?; // can return Err(std::num::ParseIntError)
+       // The read_line method can return Err(std::io::Error).
+       b.read_line(&mut line)?;
+       // The parse method can return Err(std::num::ParseIntError).
+       let num: i64 = line.trim().parse()?;
        let answer = PositiveNonzeroInteger::new(num)?;
        Ok(answer)
    }
    ```
 
-   This example demonstrates several approaches to error handling
-   for functions that can return multiple error types.
-   See {% aTargetBlank "https://github.com/mvolkmann/rust-error-handling",
-   "rust-error-handling" %}.
+The following example demonstrates several approaches to error handling
+for functions that can return multiple error types.
+To experiment with this code, download it from the GitHub repo named
+{% aTargetBlank "https://github.com/mvolkmann/rust-error-handling",
+"rust-error-handling" %}.
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -2046,8 +2049,8 @@ use std::fs::read_to_string;
 // This is a custom error type.
 // It enables callers that receive this kind of error
 // to handle different error causes differently.
-// These must implement the Error trait (below) which requires
-// implementing the Debug (derived) and Display (below) traits.
+// These must implement the Error trait (done below) which requires
+// implementing the Debug (done here) and Display (done below) traits.
 #[derive(Debug)]
 pub enum GetDogsError {
     BadFile(std::io::Error),
@@ -2151,7 +2154,8 @@ fn main() {
     let file_path = "./dogs.json";
 
     /*
-    // With the first approach we can easily detect that an error has occurred.
+    // With the first approach we can easily detect
+    // that an error has occurred.
     if let Ok(dogs) = get_dogs1(file_path) {
         dbg!(dogs);
     } else {
@@ -2166,7 +2170,8 @@ fn main() {
         Err(e) => {
             if let Some(e) = e.downcast_ref::<std::io::Error>() {
                 eprintln!("bad file: {:?}", e);
-            } else if let Some(e) = e.downcast_ref::<serde_json::error::Error>() {
+            } else if let Some(e) =
+                e.downcast_ref::<serde_json::error::Error>() {
                 eprintln!("bad json {:?}", e);
             } else {
                 eprintln!("some other kind of error");
@@ -2191,6 +2196,9 @@ Here are the changes required to use this approach which also requires
 adding `quick-error` as a dependency in `Cargo.toml`.
 Note that we no longer need to manually implement the
 `Error`, `Display`, and `From` traits for our custom error enum.
+To experiment with this code, see the `quick_error` branch of the
+{% aTargetBlank "https://github.com/mvolkmann/rust-error-handling",
+"rust-error-handling" %} GitHub repo.
 
 ```rust
 #[macro_use]
@@ -2222,6 +2230,8 @@ The following diagram summarizes them.
 <img alt="Rust Built-in Data Types" style="width: 70%"
   src="/blog/assets/rust-types.png?v={{pkg.version}}"
   title="Rust Built-in Data Types">
+
+TODO: Continue review here
 
 ## <a name="scalar-types">Built-in Scalar Types</a>
 
