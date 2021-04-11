@@ -376,7 +376,7 @@ TODO: Add more terminology in this section? ownership, borrow checker, ...
   - a configuration file format used by Cargo
   - stands for Tom's Obvious, Minimal Language
 
-## Online Playground
+## Rust Playground
 
 To try Rust code online, browse the
 {% aTargetBlank "https://play.rust-lang.org/", "Rust Playground" %}.
@@ -385,6 +385,10 @@ from {% aTargetBlank "https://crates.io/", "crates.io" %}
 and crates from the
 {% aTargetBlank "https://rust-lang-nursery.github.io/rust-cookbook/",
 "Rust Cookbook" %}.
+
+A good use for the Rust Playground is to copy code examples
+from this blog post into it and run them.
+Then make changes to the code to try variations and expand your knowledge.
 
 The example code shown in the screenshot below
 will be more clear after structs and traits are explained.
@@ -1741,8 +1745,6 @@ use `fn my_function<'a, 'b: 'a>(...)`.
 
 ## <a name="enums">Enums</a>
 
-TODO: Continue review here
-
 Enums specify a list of allowed values referred to as "variants".
 For example:
 
@@ -1752,7 +1754,7 @@ For example:
 enum PrimaryColor { Red, Green, Blue }
 
 fn process_color(color: PrimaryColor) {
-    println!("color = {:?}", color); // Green
+    println!("{:?}", color); // Green
 }
 
 fn main() {
@@ -1765,7 +1767,7 @@ Match expressions are similar to `switch` statements in other languages,
 but they evaluate to a value.
 Instead of `case` statements inside a `switch` they have "match arms".
 There must be a match arm for every possible value
-of the expression being matched (exhaustive).
+of the expression being matched, i.e. they must be exhaustive.
 For example:
 
 ```rust
@@ -1774,7 +1776,7 @@ For example:
 enum PrimaryColor { Red, Green, Blue }
 
 fn main() {
-    use PrimaryColor::*;
+    use PrimaryColor::*; // brings all values into current scope
     let color = Red;
 
     // If a match arm for any PrimaryColor variant was missing
@@ -1784,18 +1786,18 @@ fn main() {
         Green => "grass",
         Blue => "sky",
     };
-    println!("item = {}", item); // stop sign
+    println!("{}", item); // stop sign
 
     let item = match color {
         Blue => "sky",
         _ => "unknown" // wildcard handling all other values
     };
-    println!("item = {}", item); // unknown
+    println!("{}", item); // unknown
 }
 ```
 
 The [Error Handling](#error-handling) section
-describes the `Option` and `Result` enums
+describes the `Option` and `Result` generic enums
 that are provided by the standard library.
 These contain variants that hold data,
 which is something that enums in most other programming languages cannot do.
@@ -1823,31 +1825,36 @@ fn main() {
     let d3 = TupleLike(String::from("red"), 19, true);
     let d4 = StructLike{x: 1.2, y: 3.4};
     println!("{:?}, {:?}, {:?}, {:?}", d1, d2, d3, d4);
+    // prints Empty, Single("Hello"),
+    // TupleLike("red", 19, true),
+    // StructLike { x: 1.2, y: 3.4 }
 }
 ```
 
 ## <a name="error-handling">Error Handling</a>
 
-Rust does not support throwing and catching exceptions
-like many other programming languages.
+Unlike many other programming languages,
+Rust does not support throwing and catching exceptions.
 Instead, functions that can fail typically
 return the enum type `Option` or `Result`.
 
-The `Option` enum has two values,
+The `Option` enum has two variants,
 `Some` which wraps a value and `None` which doesn't.
 For example, a function that takes a vector and
 returns the first element that matches some criteria
 could return `Some` wrapping the element, or `None` if no match is found.
 This is similar to the `Maybe` monad in Haskell.
 
-The `Result` enum also has two values,
+The `Result` enum also has two variants,
 `Ok` which wraps a value and `Err` which wraps an error description.
 For example, a function that reads all the text in a file
 could return `Ok` wrapping the text, or
 `Err` wrapping a description of why reading the file failed.
 This is similar to the `Either` monad in Haskell.
 
-There are many ways to handle values from these enum types.
+There are many ways to handle variants from these enum types.
+
+TODO: Continue review here
 
 1. Use a `match` statement.
 
