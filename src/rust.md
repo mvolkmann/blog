@@ -844,18 +844,16 @@ Custom attributes can be implemented by defining {% aTargetBlank
 
 ## Formatted Print
 
-TODO: Continue review here
-
 The `std` namespace, pronounced "stood", defines many commonly used values.
 The `std::fmt` namespace defines macros that format text.
 
 | Macro Name  | Description                           |
 | ----------- | ------------------------------------- |
-| `format!`   | writes to a `String`                  |
 | `print!`    | writes to stdout                      |
 | `println!`  | same as `print!`, but adds a newline  |
 | `eprint!`   | writes to stderr                      |
 | `eprintln!` | same as `eprint!`, but adds a newline |
+| `format!`   | writes to a `String`                  |
 
 All of these macros take a formatting string
 followed by zero or more expressions whose values
@@ -870,26 +868,26 @@ println!("{} is {}.", "Rust", "interesting"); // Rust is interesting.
 To print a representation of a value for debugging purposes on a single line,
 use `{:?}`. To print each field of a struct on separate lines, use `{:#?}`.
 Custom structs must implement the `Debug` trait in order to use these.
-The easiest way to do this is to add the line `#[derive(Debug)]`
+The easiest way to do this is to add the attribute `#[derive(Debug)]`
 before struct definitions.
 
 The following table summarizes what
 each of the supported format arguments produce.
 
-| Format Argument | Description                                                  |
-| --------------- | ------------------------------------------------------------ |
-| `{}`            | display value of next argument                               |
-| `{:?}`          | debugging value on single line                               |
-| `{:#?}`         | debugging value on multiple lines                            |
-| `{n}`           | argument at zero-based index n                               |
-| `{name}`        | value with a given name                                      |
-| `{:.n}`         | number with `n` decimal places                               |
-| `{:.*}`         | number with number of decimal places specified in value list |
-| `{:#X}`         | number as uppercase hexadecimal                              |
-| `{:#x}`         | number as lowercase hexadecimal                              |
-| `{:<n}`         | left justified in a width of n                               |
-| `{:>n}`         | right justified in a width of n                              |
-| `{:^n}`         | centered in a width of n                                     |
+| Format Argument | Description                                    |
+| --------------- | ---------------------------------------------- |
+| `{}`            | value of next argument                         |
+| `{:?}`          | debugging value on single line                 |
+| `{:#?}`         | debugging value on multiple lines              |
+| `{n}`           | value of argument at zero-based index n        |
+| `{name}`        | value with a given name                        |
+| `{:.n}`         | number with `n` decimal places                 |
+| `{:.*}`         | number with specified number of decimal places |
+| `{:#X}`         | number as uppercase hexadecimal                |
+| `{:#x}`         | number as lowercase hexadecimal                |
+| `{:<n}`         | value left justified in a width of n           |
+| `{:>n}`         | value right justified in a width of n          |
+| `{:^n}`         | value centered in a width of n                 |
 
 Here are some examples:
 
@@ -905,7 +903,7 @@ struct Point2D {
     y: f64
 }
 
-let p = Point2D { x: 1.0, y: 2.0 };
+let p = Point2D { x: 1.0, y: 2.0 }; // constructs a struct instance
 println!("{:?}", p); // Point2D { x: 1.0, y: 2.0 }
 println!("{:#?}", p);
 // Point2D {
@@ -943,6 +941,8 @@ struct Point2D {
 
 impl fmt::Display for Point2D {
     // Using "self" as the name of the first parameter makes this a method.
+    // The second parameter "fmt" must be a mutable reference.
+    // This method renders a value with the type "fmt::Result".
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         write!(formatter, "(x:{}, y:{})", self.x, self.y)
     }
@@ -957,18 +957,18 @@ fn main() {
 For more formatting options, see
 {% aTargetBlank "https://doc.rust-lang.org/std/fmt/", "std::fmt" %}.
 
-## Variables
+## <a name="variables">Variables</a>
 
 Rust variables are immutable by default.
 For variables that hold non-primitive values
 such as arrays, tuples, and structs,
 even their elements/fields cannot be mutated.
 
-The `mut` keyword marks a variable as mutable.
+The `mut` keyword marks a variable or parameter as mutable.
 For variables that hold non-primitive values
 such as arrays, tuples, and structs,
 the variable can be changed to point to a different value
-and their elements/fields can be mutated.
+AND their elements/fields can be mutated.
 
 A variable declaration has the syntax
 <code>let[ mut] name[: <i>type</i>][ = <i>value</i>];</code>
@@ -989,7 +989,7 @@ fn main() {
     let p: Point2D = Point2D { x: 1.0, y: 2.0 }; // can assign in declaration
     println!("p = {:?}", p); // Point2D { x: 1.0, y: 2.0 }
 
-    let p: Point2D;
+    let p: Point2D; // shadows previous declaration (described later)
     p = Point2D { x: 1.0, y: 2.0 }; // can assign after declaration
     println!("p = {:?}", p); // Point2D { x: 1.0, y: 2.0 }
     //p = Point2D { x: 1.2, y: 3.4 }; // cannot change value
@@ -1006,25 +1006,25 @@ fn main() {
 
 There are five ways to declare a variable.
 
-| Syntax                           | Meaning                                                                                                          |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `let name: type = value;`        | immutable variable that must be assigned a value<br>before it is used and is thereafter immutable                |
-| `let mut name: type = value;`    | mutable variable that must be assigned a value<br>before it is used and can be modified                          |
-| `const name: type = value;`      | constant that must be assigned a compile-time expression when it is declared, not the result of a function call  |
-| `static name: type = value;`     | immutable variable that lives for the duration of the program                                                    |
-| `static mut name: type = value;` | mutable variable that lives for the duration of the program;<br>can only access in `unsafe` blocks and functions |
+| Syntax                           | Meaning                                                                                                            |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `let name: type = value;`        | immutable variable that must be assigned a value<br>before it is used                                              |
+| `let mut name: type = value;`    | mutable variable that must be assigned a value<br>before it is used and can be modified                            |
+| `const name: type = value;`      | constant that must be assigned a compile-time expression<br>when it is declared, not the result of a function call |
+| `static name: type = value;`     | immutable variable that lives for the duration of the program                                                      |
+| `static mut name: type = value;` | mutable variable that lives for the duration of the program;<br>can only access in `unsafe` blocks and functions   |
 
 Variables defined with `static` are given a fixed location in memory
 and all references refer to the value at that location.
-Their lifetime is `'static` which is the duration of the program.
+Their [lifetime](#lifetimes) is `'static` which is the duration of the program.
 
 Variables defined with `const` do not have a location in memory.
 The compiler substitutes their value where all references appear,
 so the variable doesn't exist at runtime.
 In that sense they do not have a lifetime.
 
-Rather than inferring a type based on the assigned value,
-`const` and `static` declarations must be explicitly typed.
+Declarations of `const` and `static` variables must be explicitly typed,
+rather than inferring a type based on the assigned value.
 One rationale is that because their scope can extend to the entire crate,
 it is better to be explicit about the desired type.
 
@@ -1032,13 +1032,13 @@ Constants can be defined using either `const` or `static`.
 Using `static` is preferred for values that are larger than a pointer.
 This is because the value of a `const` variable is copied everywhere it is used,
 unlike the value of a `static` variable that is shared.
-A consequence of this is that static values cannot be assigned to variables
-unless their type implements the `Copy` trait
-because doing so requires copying.
-Note that all the scalar types like `bool`, `char`, `i32`, and `f64`
+In order to assign `static` variables to other variables,
+their type must implements the `Copy` trait
+because the assignment requires copying.
+All of the scalar types like `bool`, `char`, `i32`, and `f64`
 implement the `Copy` trait.
 
-Here are examples of using these:
+Here are examples of using `const` and `static` variables:
 
 ```rust
 #[derive(Debug)]
@@ -1053,21 +1053,21 @@ static PURPLE_S: Color = Color { r: 255, g: 0, b: 255 };
 static mut SIZE: u8 = 1;
 
 fn main() {
-    println!("PURPLE_C = {:?}", PURPLE_C);
-    println!("PURPLE_S = {:?}", PURPLE_S);
-    let v = PURPLE_C;
-    //let v = PURPLE_S; // cannot move out of static item
-    println!("v = {:?}", v);
+    println!("{:?}", PURPLE_C); // Color { r: 255, g: 0, b: 255 }
+    println!("{:?}", PURPLE_S); // Color { r: 255, g: 0, b: 255 }
+    let v = PURPLE_C; // allowed
+    //let v = PURPLE_S; // error: cannot move out of static item
+    println!("{:?}", v); // Color { r: 255, g: 0, b: 255 }b
 
     unsafe {
         println!("{}", SIZE); // 1
         change_it();
-        use_it();
+        use_it(); // 2
     }
 }
 
 unsafe fn change_it() {
-    SIZE = 2;
+    SIZE = 2; // mutates "static mut" variable
 }
 
 unsafe fn use_it() {
@@ -1080,9 +1080,15 @@ define the following function and pass a reference to it:
 
 ```rust
 fn print_type<T>(_: &T) {
-    // The syntax ::<T> is referred to as the "turbofish" qualifier
-    // and is described later.
+    // The syntax ::<T> is referred to as the "turbofish" qualifier.
+    // It specifies a type in the middle of an expression.
+    // In this case it is a generic type.:
     println!("{}", std::any::type_name::<T>())
+}
+
+fn main() {
+    let v = 19;
+    print_type(&v); // i32
 }
 ```
 
@@ -1094,11 +1100,17 @@ For example:
 
 ```rust
 let command = "order 3 tacos"; // &str
+
 // The str split_whitespace method returns an Iterator.
-// The Iterator nth method returns an Option.
+// The Iterator nth method returns an Option
+// whose value can be obtained in many ways.
+// One way is to call unwrap_or, passing it
+// a value to return if no value is found.
 let quantity = command.split_whitespace().nth(1).unwrap_or(""); // &str
-// The str parse method returns an Option.
-let quantity = quantity.parse().unwrap_or(0); // i32
+
+// Parse the string value to create an i32 value.
+let quantity = quantity.parse().unwrap_or(0);
+
 if quantity > 2 {
     println!("You must be very hungry!")
 } else {
@@ -1107,6 +1119,8 @@ if quantity > 2 {
 ```
 
 ## <a name="ownership-model">Ownership Model</a>
+
+TODO: Continue review here
 
 Memory management in Rust is handled by following these rules,
 referred to as the ownership model:
@@ -1618,7 +1632,7 @@ following these will typically reduce ownership issues in your code.
    transfer ownership to the caller.
    For example, return `String` rather than `&str`.
 
-## Lifetimes
+## <a name="lifetimes">Lifetimes</a>
 
 Lifetimes ensure that memory does not get freed
 before a reference to it can use it.
