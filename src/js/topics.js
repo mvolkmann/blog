@@ -49,6 +49,7 @@ function iframeLoaded(iframe) {
 }
 
 // This is called from topics-layout.njk.
+// eslint-disable-next-line no-unused-vars
 function print() {
   document.getElementById('topic-content').contentWindow.print();
 }
