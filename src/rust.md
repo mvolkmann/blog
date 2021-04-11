@@ -1120,8 +1120,6 @@ if quantity > 2 {
 
 ## <a name="ownership-model">Ownership Model</a>
 
-TODO: Continue review here
-
 Memory management in Rust is handled by following these rules,
 referred to as the ownership model:
 
@@ -1143,43 +1141,45 @@ The ownership model provides the following benefits:
   causing unpredictable interactions between threads.
 
 Values are stored either in the stack or the heap.
-Accessing stack data is faster, but data on the heap can grow and shrink
+Accessing stack data is faster, but data on the heap can grow and shrink,
 and it can live beyond the scope that created it.
 
-Values whose sizes are known at compile time,
-which includes most types, are stored on the stack.
+Values whose sizes are known at compile time are stored on the stack.
 Values of all other types are stored in the heap.
 The documentation for types whose size is not known at compile time
 indicates this with `?Sized`.
-This includes:
+These include:
 
 - slices, not references to them
 - string slice types `str` and `OsStr`
 - `std::path::Path` for representing and operating on file system paths
-- trait objects (`dyn TraitName`)
+- trait objects (<code>dyn <i>TraitName</i></code>)
 - structs and tuples for which the last field/item has one of these types
 
-Values of these types can be stored on the heap by using the `Box` type.
-This is typically done in order to have a fixed size way
-to refer to a value that does not have a fixed size.
+Values of types whose sizes are not known at compile time
+can be stored on the heap by using the `Box` type.
+This provides a fixed size way to refer to a value
+that does not have a fixed size.
 An example is returning an error struct whose specific type
 is selected at run time based on the kind of error that occurs.
 Another example is a recursive type such as linked list.
 
-Note that sometimes Rust stores `&str` values on the stack
+<aside>
+Sometimes Rust chooses to stores `&str` values on the stack
 but you cannot control that, so it's best to think of them
 as always being on the heap.
+</aside>
 
-All code blocks are delimited by a pair of curly brackets
+All code blocks are delimited by a pair of curly braces
 and create a new scope.
-Each new scope can add data to the stack
+Variables declared in each new scope add data to the stack
 that is freed when that scope exits.
 Many keywords have an associated block, including
 `fn`, `if`, `loop`, `for`, and `while`.
 
 The `Drop` trait can be implemented for any type
 to specify code to execute (in the `drop` method)
-when data of a specific type is dropped.
+when data of that type is dropped.
 
 While it is not typically called directly,
 `std::mem::drop` is a function that can be called to explicitly
@@ -1187,7 +1187,7 @@ free the memory owned by a variable before it goes out of scope.
 
 The following table summarizes the options for
 assigning a variable to another or
-passing an argument to a function.
+passing a variable an argument to a function.
 
 | Goal               | Syntax      |
 | ------------------ | ----------- |
@@ -1202,28 +1202,30 @@ based on whether the type of the data implements the `Copy` trait.
 Having all of these options requires considering the following questions
 for every variable being passed to a function or assigned to another variable:
 
-1. Do I want to transfer ownership?
-1. Does the receiver need to modify the value?
-1. Do I want to avoid making a copy for efficiency?
+1. Do I want to transfer ownership? Often the answer is "no".
+1. Does the receiver need to modify the value? Often the answer is "no".
+1. Do I want to avoid making a copy for efficiency? Often the answer is "yes".
 1. If I want to pass a copy, will one be made automatically
    or do I need to explicitly clone it?
 
-Here are some examples that demonstrate ownership
-inside a single function:
+Here are some examples that demonstrate ownership inside a single function.
+See the [Strings](#strings) section for more detail
+on the differences between the `String` and `&str` types.
 
 ```rust
 fn main() {
     let a = 1;
 
-    // Because a is a scalar type (fixed size) that implements the Copy trait,
+    // Because a has a scalar type (fixed size) that implements the Copy trait,
     // this makes a copy of a and assigns that to b
     // rather than moving ownership from a to b.
     // Both a and b can then be used.
     let b = a;
 
-    println!("a = {}", a); // 1
-    println!("b = {}", b); // 1
+    println!("{}", a); // 1
+    println!("{}", b); // 1
 
+    // This creates a String instance from a &str value.
     let c = String::from("test");
 
     // Because c is on the heap and String does not implement
@@ -1231,11 +1233,12 @@ fn main() {
     // and c can no longer be used.
     let d = c;
 
-    //println!("c = {}", c); // error "value borrowed here after move"
+    //println!("c = {}", c); // error: value borrowed here after move
     println!("d = {}", d); // test
 
     // The Copy trait requires also implementing the Clone trait.
-    // We could implement these traits manually, but that is more work.
+    // We can implement these traits manually, but that is more work.
+    // The easiest way to implement them is with the derive attribute.
     #[derive(Clone, Copy, Debug)]
     struct Point2D {
         x: f64,
@@ -1266,19 +1269,20 @@ println!("e = {:?}", e); // Point2D { x: 1.0, y: 2.0 }
 
 let f = &e; // an immutable borrow
 let g = &e; // another immutable borrow
-println!("f={:?}, g={:?}", f, g);
+println!("f={:?}, g={:?}", f, g); // no errors here
 ```
 
-Any type that acts like a pointer to another type
-(ex. `&variable` and smart pointers like `Box`, `Rc`, and `Arc`)
+Any variable whose type acts like a pointer to another type
+(for example, `&variable` and smart pointers like
+`Box`, `Rc`, and `Arc` that are described later)
 can be dereferenced to get the value to which it points.
 This can be done with the `*` operator.
 Automatic dereferencing is performed by the dot operator
 which is used to access a field or method of a type.
-Finally, automatic dereferencing occurs when
+Automatic dereferencing also occurs when
 a reference type is passed to a function or macro.
 This is why we were able to print `f` above
-without specifying `*f`, but that also works.
+without specifying `*f` which also works.
 Automatic dereferencing makes code less "noisy" than it would otherwise be.
 
 Borrowing does not transfer (also referred to as "move") ownership.
@@ -1287,9 +1291,9 @@ freeing the memory associated with the original variable.
 
 When a value is mutable and ownership is borrowed,
 the compiler will report an error if the value is mutated
-after the borrow is created and before its last use.
+after the borrow is created and before the last use of the borrow.
 This is because references expect the data they reference
-to remain the same.
+to remain the same for the duration of the borrow.
 For example:
 
 ```rust
@@ -1297,15 +1301,17 @@ let mut e = Point2D { x: 1.0, y: 2.0 };
 let f = &e; // f borrows a reference rather than taking ownership
 println!("f = {:?}", f); // works
 
-// f is used after the next line which mutates e, so we get
-// the error "cannot assign to `e.x` because it is borrowed".
+// The next line mutates e.
+// But f which is a mutable borrow is used after this line.
+// So we get the error "cannot assign to `e.x` because it is borrowed".
 e.x += 3.0;
 
 println!("f = {:?}", f);
 ```
 
 Often a borrow only needs to read a value (referred to as
-an "immutable borrow") and any number of these can be created.
+an "immutable borrow").
+Any number of immutable borrows can be created.
 A mutable borrow allows changing a mutable value through the borrowed variable.
 But a mutable borrow can only be created when
 there will be no uses of already created immutable borrows
@@ -1324,27 +1330,29 @@ struct Point2D {
 
 fn main() {
     let mut pt = Point2D { x: 1.0, y: 2.0 };
-    let ref1 = &pt; // immutable reference
+    let ref1 = &pt; // immutable borrow
     println!("{:?}", ref1); // Point2D { x: 1.0, y: 2.0 }
 
-    // Can create and use any number of additional immutable references.
+    // Can create and use any number of additional immutable borrows.
     let ref2 = &pt;
     println!("{:?}", ref2); // Point2D { x: 1.0, y: 2.0 }
 
-    // Can use earlier immutable references again.
+    // Can use earlier immutable borrows again.
     println!("{:?}", ref1); // Point2D { x: 1.0, y: 2.0 }
 
-    // Can create and use a mutable reference.
+    // Can create and use a mutable borrow.
     let ref3 = &mut pt;
     ref3.x = 3.0;
     println!("{:?}", ref3); // Point2D { x: 3.0, y: 2.0 }
 
-    // Can't use immutable references created before a mutable reference,
-    // even if the mutable reference isn't used to mutate the value.
+    // Can't use immutable borrows created before a mutable borrow,
+    // even if the mutable borrow isn't used to mutate the value.
     //println!("{:?}", ref1);
+    // error: cannot borrow `pt` as mutable
+    // because it is also borrowed as immutable
 
-    // Can create and use new immutable references because
-    // we are finished with the mutable reference at this point.
+    // Can create and use new immutable borrows because
+    // we are finished with the mutable borrow at this point.
     let ref4 = &pt;
     println!("{:?}", ref4); // Point2D { x: 3.0, y: 2.0 }
 }
@@ -1370,7 +1378,7 @@ fn my_function(x: i32) {
 
 fn main() {
     let x = 1;
-    my_function(x);
+    my_function(x); // a copy of x is passed
     println!("{}", x); // 1
 }
 ```
@@ -1379,7 +1387,7 @@ When variables (not references) of types that
 do not implement the `Copy` trait are passed to functions,
 copies are not made and ownership is transferred.
 When the function exits, the data is freed.
-The calling function can then no longer use variables that were passed in.
+The calling function can then no longer use variables that were passed.
 For example:
 
 ```rust
@@ -1399,13 +1407,16 @@ fn take_vector(v: Vec<u8>) {
 
 fn main() {
     let pt = Point2D { x: 1.0, y: 2.0 };
+    // A copy is passed because the Point2D type implements the copy trait.
     take_point(pt);
     // We can still use pt because ownership was not transferred.
     println!("pt = {:?}", pt);
 
     let numbers = vec![1, 2, 3];
-    take_vector(numbers); // error "borrow of moved value: `numbers`"
-    // We cannot still use numbers because ownership was transferred.
+    // Ownership is transferred because
+    // the Vec type does not implement the Copy trait.
+    take_vector(numbers); // error: borrow of moved value: `numbers`
+    // We cannot use numbers here because ownership was transferred.
     println!("numbers = {:?}", numbers); // value borrowed here after move
 }
 ```
@@ -1457,7 +1468,7 @@ For example:
 ```rust
 fn my_function(i: &mut i32, s: &mut String) {
     println!("{}", i); // 1
-    *i += 1;
+    *i += 1; // dereferences and increments
     println!("{}", s); // "test"
     s.push_str(" more");
 }
@@ -1506,7 +1517,7 @@ fn main() {
 Early we said that memory for values allocated in a scope
 is freed when the scope exits.
 However, there is an exception to this
-when ownership is transferred outside the block.
+when ownership is transferred outside a block.
 For example:
 
 ```rust
@@ -1536,7 +1547,7 @@ fn main() {
 ```
 
 Closures are functions that capture values in their environment
-so they can be access later when the function is executed.
+so they can be accessed later when the function is executed.
 Functions defined with the `fn` keyword are not closures.
 Closures are defined as anonymous functions
 with a parameter list written between vertical bars
@@ -1544,23 +1555,24 @@ which must be present even if there are no parameters.
 While function parameter and return types must be specified,
 these can be inferred for closures.
 
-Here is a similar ownership example using a closure:
+Here is an ownership example that is similar to the previous example,
+but uses a closure:
 
 ```rust
 fn main() {
     // This variable must be initialized in order to access it in the closure.
-    // Since it is then modified in the closure, it must be mutable.
-    let mut a = String::new();
+    // Because it is then modified in the closure, it must be mutable.
+    let mut a = String::new(); // an empty string
 
     // This variable must be `mut` because it captures and mutates
     // the mutable variable "a" in its environment.
-    let mut inner = | | {
+    let mut inner = | | { // no parameters
         let b = String::from("test");
         a = b; // Moves ownership from b to a.
     };
 
     inner();
-    println!("{}", a);
+    println!("{}", a); // test
 }
 ```
 
@@ -1575,41 +1587,42 @@ struct Point2D {
 }
 
 fn take(pt: Point2D) {
-    println!("in take pt = {:?}", pt);
+    println!("in take, {:?}", pt);
 }
 
 fn take_and_return(pt: Point2D) -> Point2D {
-    println!("in take_and_return pt = {:?}", pt);
+    println!("in take_and_return, {:?}", pt);
     pt // returns ownership to caller
 }
 
 fn borrow_immutably(pt: &Point2D) {
     //pt.x = 3.0; // can't mutate
-    println!("in borrow_immutably pt = {:?}", pt);
+    println!("in borrow_immutably, {:?}", pt);
 }
 
 fn borrow_mutably(pt: &mut Point2D) {
     pt.x = 3.0; // can mutate
-    println!("in borrow_mutably pt = {:?}", pt);
+    println!("in borrow_mutably, {:?}", pt);
 }
 
 fn main() {
     let pt = Point2D { x: 1.0, y: 2.0 };
-    take(pt);
-    // Can't use pt after ownership was transferred.
+    take(pt); // in take, Point2D { x: 1.0, y: 2.0 }
+    // Can't use pt after ownership was transferred and not returned.
     //println!("after take, pt = {:?}", pt);
 
     let mut pt = Point2D { x: 1.0, y: 2.0 };
-    pt = take_and_return(pt);
-    println!("after take_and_return, pt = {:?}", pt);
+    pt = take_and_return(pt); // in take_and_return, Point2D { x: 1.0, y: 2.0 }
+    // Can use after this because ownership is returned.
+    println!("{:?}", pt); // Point2D { x: 1.0, y: 2.0 }
 
     let pt = Point2D { x: 1.0, y: 2.0 };
-    borrow_immutably(&pt);
-    println!("after borrow_immutably, pt = {:?}", pt);
+    borrow_immutably(&pt); // in borrow_immutably, Point2D { x: 1.0, y: 2.0 }
+    println!("{:?}", pt); // Point2D { x: 1.0, y: 2.0 }
 
     let mut pt = Point2D { x: 1.0, y: 2.0 };
-    borrow_mutably(&mut pt);
-    println!("after borrow_mutably, pt = {:?}", pt);
+    borrow_mutably(&mut pt); // in borrow_mutably, Point2D { x: 3.0, y: 2.0 }
+    println!("{:?}", pt); // Point2D { x: 3.0, y: 2.0 }
 }
 ```
 
@@ -1621,18 +1634,24 @@ following these will typically reduce ownership issues in your code.
 1. Compound types should own their heap data rather than
    hold references to heap data owned elsewhere.
    For example, struct fields that are strings
-   should use `String` instead of `&str`.
+   should use the `String` type instead of `&str`.
 1. Pass references to heap data to functions
    rather than transferring ownership.
    For example, a parameter that accepts string data
    should have the type `&str` instead of `String`.
    An exception is when the function wants to take ownership
-   in order to add an item to a compound type that it owns.
+   in order to add items to a compound type that it owns.
 1. In functions that create and return heap data,
    transfer ownership to the caller.
    For example, return `String` rather than `&str`.
 
 ## <a name="lifetimes">Lifetimes</a>
+
+<aside>
+This is an advanced topic.
+Be prepared to revisit this later and
+read it multiple times before it sinks in.
+</aside>
 
 Lifetimes ensure that memory does not get freed
 before a reference to it can use it.
@@ -1647,6 +1666,9 @@ It does so using these three simple "lifetime elision" rules:
 1. If all the reference parameters now have the same lifetime
    and the return type is a reference,
    it is assigned the same lifetime as the reference parameters.
+   This occurs when there is only one parameter with a reference type
+   or when there is more that one,
+   but they all have the same specified lifetime annotation.
 1. If the function is a method
    (indicated by the first parameter having the name `self`),
    the `self` parameter is a reference (`&self` or `&mut self`),
@@ -1669,7 +1691,7 @@ all of the reference parameters AND the return reference type.
 Lifetime annotations used in function signatures are
 declared by listing them in angle brackets just like generic types.
 They are distinguish from generic types by beginning with a single quote.
-Uses of lifetime annotations appear in reference types
+Lifetime annotations appear in reference types
 after the `&` and before type names.
 Their names are typically a single letter such as "a".
 Lifetime annotations only serve to indicate which items in a function signature
@@ -1679,8 +1701,9 @@ The following example illustrates a case
 where lifetime annotations are required:
 
 ```rust
-// The function signature below results in a "missing lifetime specifier" error
-// The compiler says "explicit lifetime required"
+// The function signature below results in a
+// "missing lifetime specifier" error.
+// Additionally, the compiler says "explicit lifetime required"
 // for s1, s2, and the return type.
 // When more than one reference is passed to a function AND
 // one of them can be returned, Rust requires lifetime specifiers.
@@ -1717,6 +1740,8 @@ To specify that lifetime `b` is at least as long as lifetime `a`,
 use `fn my_function<'a, 'b: 'a>(...)`.
 
 ## <a name="enums">Enums</a>
+
+TODO: Continue review here
 
 Enums specify a list of allowed values referred to as "variants".
 For example:
@@ -3144,7 +3169,7 @@ For details on the syntax for specifying ranges, see [Ranges](#ranges).
 The most common way to implement conditional logic is with an `if` expressions.
 The expression after the `if` keyword must evaluate to a `bool` value.
 It is not surrounded by parentheses and
-code to be executed must be surrounded curly brackets,
+code to be executed must be surrounded curly braces,
 even if there is only one statement or expression.
 For example:
 
@@ -6265,7 +6290,7 @@ using all the features of the `points` module.
 ```rust
 mod points;
 // Note how a "use" statement can access multiple values
-// from a module using curly brackets.
+// from a module using curly braces.
 use points::{distance_to_origin, Point2D};
 
 fn main() {
