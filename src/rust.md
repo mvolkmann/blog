@@ -2299,8 +2299,6 @@ It is also what the `Result` enum `Ok` variant
 wraps when there is nothing to return.
 The unit type value can follow the `=>` in a `match` arm to take no action.
 
-TODO: Continue review here
-
 Rust allows adding methods to any type, even built-in, scalar types.
 The following example shows added a method to the `i32` type:
 
@@ -2344,6 +2342,7 @@ trait Days {
 
 impl<T: Eq + Ord + From<i8>> Days for T {
     fn days_from_now(self) -> &'static str {
+        // Can't use match with Self::from(n) values.
         if self == Self::from(0) {
             "today"
         } else if self == Self::from(-1) {
@@ -2373,7 +2372,8 @@ The [Macros](#macros) section shows one more approach.
 ### Primitive Compound Types
 
 Rust defines three primitive compound types which are tuple, array, and slice.
-These are distinct from the collection types that are described later.
+These are distinct from the collection types
+that are described in the next section.
 
 A tuple is a fixed-length list of values that can be of different types.
 The maximum length is 12.
@@ -2386,7 +2386,7 @@ For example:
 
 ```rust
 let t = (1, 2, 3, 4);
-let (v1, v2, ..) = t; // .. means to ignore the remaining values
+let (v1, v2, ..) = t; // destructuring; .. means ignore remaining values
 println!("{} {}", v1, v2); // 1 2
 ```
 
@@ -2398,24 +2398,21 @@ For example:
 
 ```rust
 let a = [1, 2, 3, 4]; // inferred type is [i32; 4]
-let [v1, v2, ..] = a; // .. means to ignore the remaining values
+let [v1, v2, ..] = a; // destructuring; .. means ignore remaining values
 println!("{} {}", v1, v2); // 1 2
 
 let rgb = ["red", "green", "blue"];
 // A Rust string is a "compound collection", covered later.
-println!("rgb = {:?}", rgb); // ["red", "green", "blue"]
+println!("{:?}", rgb); // ["red", "green", "blue"]
 
+// A literal value (7 here) can be used as a type.
 let sevens = [7; 5]; // same as [7, 7, 7, 7, 7]
-println!("sevens = {:?}", sevens); // [7, 7, 7, 7, 7]
+println!("{:?}", sevens); // [7, 7, 7, 7, 7]
 ```
 
 Elements of an array can be accessed using
 square brackets and zero-based indexes.
 For example, `rgb[1]` is "green".
-
-A slice is a borrowed reference to a contiguous subset of a collection
-that is represented by pointer and a length.
-These are described in more detail in the [Slices](#slices) section.
 
 Rust provides the `Vec` (vector) type for creating
 variable-length lists of values that have the same type.
@@ -2424,7 +2421,13 @@ Operating on an array or `Vec` often requires
 obtaining an [`Iterator`](#iterators).
 For example, that is where the methods `map`, `filter`, and `fold` are found.
 
+A slice is a borrowed reference to a contiguous subset of a collection
+that is represented by pointer and a length.
+These are described in more detail in the [Slices](#slices) section.
+
 ### Collections
+
+TODO: Continue review here.
 
 Rust defines many kinds of collections that hold a variable number of values.
 These include strings and collections in the `std::collections` namespace.
