@@ -217,10 +217,13 @@ To change the adapter, modify the `svelte.config.cjs` file.
 
 ### Netlify Example
 
-- Install the Netlify CLI with `npm install -g netlify-cli`
+- cd to the root directory of a SvelteKit project.
 
 - Install the Netlify SvelteKit adapter with
   `npm install -D @sveltejs/adapter-netlify@next`
+
+  This deploys SvelteKit endpoints as serverless functions in AWS
+  without requiring an AWS account.
 
 - Edit `svelte.config.cjs`
 
@@ -246,8 +249,32 @@ To change the adapter, modify the `svelte.config.cjs` file.
   publish="build/"
   ```
 
-- Enter `npm run build` (necessary? maybe netlify deploy does this)
+- Create a GitHub repository to hold the project files,
+  add all the files, and push.
 
-- Enter `netlify deploy`
+- Create a Netlify account if you don't already have one.
 
-TODO: Why do I get a 500 error when running the deployed app?
+  Browse <https://www.netlify.com> and click "Sign up".
+
+- Login to your Netlify account.
+
+- Press the "New site from Git" button.
+
+- Press the "GitHub" button.
+
+- Select the repository created above.
+
+  If you configured your account to only
+  provide access to selected repositories,
+  click the "Configure the Netlify app on GitHub" link,
+  click "Configure", scroll down to "Repository access",
+  click the "Select repositories" drop down,
+  search for the repository, select it, and press the "Save" button.
+
+- Verify the settings displayed (defaults should be fine)
+  and press the "Deploy site" button.
+
+- Wait for deployment to complete
+  and note its URL.
+
+- Browse the URL to run the app.
