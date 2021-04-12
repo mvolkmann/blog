@@ -278,3 +278,14 @@ To change the adapter, modify the `svelte.config.cjs` file.
   and note its URL.
 
 - Browse the URL to run the app.
+
+Note: I was expecting each SvelteKit endpoint to
+show up as a separate Netlify function.
+But instead I see just one Netlify function named "render".
+I know it's working because if I add a `console.log`
+in the code of each of my endpoints, push the changes,
+wait for it to be redeployed to Netlify,
+run the new version of app to trigger calls to the endpoints,
+and then click that "render" function in Netlify,
+I do see the expected output from the `console.log` calls.
+It seems odd that all the endpoints are bundled into one Netlify function.
