@@ -20,6 +20,13 @@ To install Fastify in a project, enter `npm install fastify`.
 
 To enable serving static files, enter `npm install fastify-static`.
 
+To enable accessing environment-specific environment files,
+enter `npm install dotenv`.
+Then create a `.env` file that defines environment variables
+with lines like `MONGO_URL=some-url`.
+A different version of this file can be created for each environment,
+such as dev, test, stage, and production.
+
 To run the server in watch mode,
 install `nodemon` by entering `npm install -g nodemon`.
 Then run the app using the `nodemon` command instead of `node`.
@@ -36,6 +43,7 @@ import './some-name.js'; // file extension is required
 Here is code for an example server.
 
 ```js
+import dotenv from 'dotenv';
 import {fastify} from 'fastify';
 import fastifyStatic from 'fastify-static';
 import path from 'path';
@@ -48,6 +56,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = 1919;
+
+// Load environment variables from the .env file into process.env.
+// For example, process.env.MONGO_URL.
+dotenv.config();
 
 const app = fastify();
 
