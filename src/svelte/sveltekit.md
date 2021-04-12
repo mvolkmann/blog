@@ -208,7 +208,7 @@ These files can be cached by calling `cache.addAll(build)`.
 It can be used generate a unique cache name which enables
 invalidating the caches of subsequent deploys.
 
-## Adapters
+## <a name="adapter">Adapters</a>
 
 The provided adapter targets currently include
 Node.js, static, Begin, Netlify, and Vercel.
