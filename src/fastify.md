@@ -40,6 +40,9 @@ import a JavaScript file from another one:
 import './some-name.js'; // file extension is required
 ```
 
+Set MONGO_URL to
+mongodb+srv://{username}:{password}@cluster0.3efbd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
 Here is code for an example server.
 
 ```js
