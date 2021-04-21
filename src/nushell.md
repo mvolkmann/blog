@@ -181,6 +181,25 @@ They are
 `product`, `round`, `sqrt`, `stddev`, `sum`, and `variance`.
 Also see the commands `inc`, `into-int`, `random`, and `seq`.
 
+The `path` subcommands operate on file paths.
+The table below describes these and shows the result of entering
+`echo ~/Documents/demo.txt | path {subcommand}`.
+
+| Subcommand  | Description                                                                                                                     |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `basename`  | returns the filename portion (`demo.txt`)                                                                                       |
+| `dirname`   | returns the directory path (`~/Documents`)                                                                                      |
+| `exists`    | returns a boolean indicating if the file exists;<br>can only return `true` for expanded paths                                   |
+| `expand`    | returns the expanded path (`/Users/mark/Documents/demo.txt`)                                                                    |
+| `extension` | returns the file extension (`txt`)                                                                                              |
+| `filestem`  | returns the filename with the the extension (`demo`)                                                                            |
+| `join`      | returns the result of joining two partial paths<br>`echo '~/Documents' \| path join demo.txt`<br>returns `~/Documents/demo.txt` |
+| `type`      | returns `Dir` or `File`                                                                                                         |
+
+TODO: Document `into int` command.
+
+TODO: Document `query json` command.
+
 The `str` subcommands perform string operations.
 They are
 `camel-case`, `capitalize`, `collect`, `contains`, `downcase`, `ends-with`,
@@ -1733,7 +1752,7 @@ block-param.nu is 305 B.
 chart-demo.nu is 189 B.
 ```
 
-## `empty?` command
+### `empty?` command
 
 The `empty?` command determines whether a string, list, or table is empty.
 It can be used with tables as follows:

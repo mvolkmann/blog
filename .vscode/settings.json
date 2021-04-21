@@ -312,6 +312,7 @@
     "fetchone",
     "figsize",
     "filesize",
+    "filestem",
     "fileviewer",
     "fillna",
     "filterfalse",
