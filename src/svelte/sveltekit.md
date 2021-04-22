@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: SvelteKit
   parent: Svelte
-  order: 7
+  order: 8
 layout: topic-layout.njk
 ---
 
