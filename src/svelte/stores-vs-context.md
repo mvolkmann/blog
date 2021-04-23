@@ -27,10 +27,14 @@ I frequently use this approach.
 
 ### dynamic + local case
 
-If the store should only be available to
-descendant components of a given ancestor component,
-define it in the ancestor component, place it in context,
+If descendant components need to use a different store
+based on the ancestor that rendered them,
+define the store in ancestor components, place it in context,
 and retrieve the store from context in the descendant components.
+This approach can also be used to limit the scope
+in which a given store is accessible,
+unlike the "dynamic + global" approach
+which makes stores available to any component.
 In my experience, this option is rarely needed.
 
 ## Static data
