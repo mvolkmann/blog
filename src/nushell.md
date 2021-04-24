@@ -170,6 +170,15 @@ They are
 `csv`, `eml`, `ics`, `ini`, `json`, `ods`, `ssv`, `toml`, `tsv`,
 `url`, `vcf`, `xlsx`, `xml`, `yaml`, and `yml`.
 
+The `into` command converts values to another type.
+Currently the only supported subcommand is `int`.
+For example, `echo '19' | into int` gives the integer 19.
+
+The `query` command queries various data formats.
+Currently the only supported subcommand is `json`.
+For example, `echo '{"foo": 1, "bar": 2}' | query json bar`
+gives the integer 2.
+
 The `to` subcommands convert a table into a given output format and
 are commonly piped to the `save` command to write the result to a file.
 They are
@@ -195,10 +204,6 @@ The table below describes these and shows the result of entering
 | `filestem`  | returns the filename with the the extension (`demo`)                                                                            |
 | `join`      | returns the result of joining two partial paths<br>`echo '~/Documents' \| path join demo.txt`<br>returns `~/Documents/demo.txt` |
 | `type`      | returns `Dir` or `File`                                                                                                         |
-
-TODO: Document `into int` command.
-
-TODO: Document `query json` command.
 
 The `str` subcommands perform string operations.
 They are
