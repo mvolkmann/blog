@@ -257,6 +257,12 @@ enter `rustup update`.
 
 Resources for learning Rust include:
 
+- {% aTargetBlank "https://cheats.rs", "Rust Language Cheat Sheet" %}
+
+- {% aTargetBlank
+  "https://docs.microsoft.com/en-us/learn/paths/rust-first-steps/",
+  "Take your first steps with Rust" %} from Microsoft
+
 - `rustup doc` command
 
   This displays local documentation that is installed along with Rust
