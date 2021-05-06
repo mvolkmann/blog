@@ -9,17 +9,19 @@ web-based authentication from scratch, not using libraries.
 This is useful for understanding all the underlying steps
 or implementing a custom authentication approach.
 
-Encryption typically encodes data using a key and an algorithm.
+## Terminology
+
+_Encryption_ typically encodes data using a key and an algorithm.
 The data can be decoded if the key and algorithm are known.
 
-Hashing is a one-way encoding of data.
+_Hashing_ is a one-way encoding of data.
 While it is possibly given sufficient computing power
 to recover the original data, doing so is very difficult.
 This is often used to store passwords in a database.
 Commonly used hashing algorithms include MD4, MD5,
 and SHA (Security Hashing Algorithm).
 
-Salting makes data more secure by adding "salt"
+_Salting_ makes data more secure by adding "salt"
 to the data to be encrypted or hashed.
 Often a fixed string is added to the
 beginning, end, or both ends of the data.
@@ -67,6 +69,68 @@ a web application can use a refresh token
 to request a new access token.
 This only works if the session is still valid.
 Site administrators can revoke sessions to prevent this.
+
+## Strategies
+
+This section describes a number of strategies to securely store user passwords
+in order from least to most secure.
+
+1. Store in plain text in an "inaccessible" location.
+
+This approach is strongly discouraged because hackers often find a way
+to access data stores that were thought to be inaccessible.
+
+1. Store encrypted versions of passwords.
+
+If a hacker gains access to the data store AND
+determines the encryption algorithm that was used,
+they can decrypt any of the passwords.
+
+1. Store hashed versions of passwords.
+
+Encryption and hashing algorithms always
+produce the same output for a given input.
+But encryption is two-way and hashing is one-way.
+Encrypted values can be decrypted.
+Hashed values cannot be used to recovered the original value.
+This is analogous to the distinction between
+loss-less and lossy image compression.
+
+A hacker can use a rainbow table to discover commonly used passwords.
+From {% aTargetBlank "https://en.wikipedia.org/wiki/Rainbow_table",
+"Wikipedia" %}, "A rainbow table is a precomputed table for caching the
+output of cryptographic hash functions, usually for cracking password hashes."
+
+1. Store passwords that add a common salted and are hashed.
+
+Salting adds a fixed number of bytes to the passwords before they are hashed.
+This prevents rainbow tables from being used to discover the use of common passwords.
+However, if a hacker learned the salt value that was added to all of the passwords,
+they could generate a new rainbow table that is useful.
+
+1. Store passwords that add a different salt to each password before hashing.
+
+With this approach the salt used for each user will also need to be stored.
+A common approach is to add it to the beginning of hashed password.
+The steps to hash the password for a single user would be:
+
+- Generate a new salt for the user.
+- Hash the password using the new salt and the plain text password.
+- Concatenate the new salt and the hashed value.
+- Store this value.
+
+If a hacker gains accessed to these hashed values
+and they know the length of the salt values and
+where there are added to the hashed value (ex. beginning or end),
+they can generate a rainbow table in order to determine if
+the password is one from a list of commonly used passwords.
+However, a new rainbow table would be needed for each user
+since each user uses a different salt value.
+
+The bcrypt hashing algorithm is purposely slower than other hashing algorithms
+in order to make creation of rainbow tables time consuming,
+while still being fast enough for single hashing operations
+required for uses like authentication.
 
 ## Local SSL Setup
 
