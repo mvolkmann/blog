@@ -4,14 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-This page describes an approach for implementing
-web-based authentication from scratch, not using libraries.
-This is useful for understanding all the underlying steps
-or implementing a custom authentication approach.
-
-The solution described here is implemented in the
-{% aTargetBlank "https://github.com/mvolkmann/authentication-fastify",
-"authentication-fastify" %} GitHub repo.
+This page describes terminology and strategies
+related to implementing authentication in web applications.
 
 ## Terminology
 
@@ -116,21 +110,22 @@ in order from least to most secure.
    This is analogous to the distinction between
    loss-less and lossy image compression.
 
-   A hacker can use a rainbow table to discover commonly used passwords.
-   From {% aTargetBlank "https://en.wikipedia.org/wiki/Rainbow_table",
-   "Wikipedia" %}, "A rainbow table is a precomputed table for caching the
-   output of cryptographic hash functions, usually for cracking password hashes."
+   While hashed values cannot be un-hashed to obtain their original value,
+   a hacker can use a "rainbow table" to discover commonly used passwords.
 
 1. Store passwords that add a common salted and are hashed.
 
-   Salting adds a fixed number of bytes to the passwords before they are hashed.
-   This prevents rainbow tables from being used to discover the use of common passwords.
-   However, if a hacker learned the salt value that was added to all of the passwords,
-   they could generate a new rainbow table that is useful.
+   Salting adds a fixed number of bytes to the passwords
+   before they are hashed.
+   This prevents rainbow tables from being used
+   to discover the use of common passwords.
+   However, if a hacker learned the salt value
+   that was added to all of the passwords,
+   they could generate a new rainbow table can be used.
 
 1. Store passwords that add a different salt to each password before hashing.
 
-   With this approach the salt used for each user will also need to be stored.
+   With this approach the salt used for each user must also be stored.
    A common approach is to add it to the beginning of hashed password.
    The steps to hash the password for a single user would be:
 
@@ -147,7 +142,14 @@ in order from least to most secure.
    However, a new rainbow table would be needed for each user
    since each user uses a different salt value.
 
-   The bcrypt hashing algorithm is purposely slower than other hashing algorithms
+   The bcrypt hashing algorithm is purposely
+   slower than other hashing algorithms
    in order to make creation of rainbow tables time consuming,
    while still being fast enough for single hashing operations
    required for uses like authentication.
+   So generating a new rainbow table for each user
+   is highly impractical.
+
+   This strategy is used in the demonstration app found in the
+   {% aTargetBlank "https://github.com/mvolkmann/authentication-fastify",
+   "authentication-fastify" %} GitHub repo.
