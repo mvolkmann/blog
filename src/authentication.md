@@ -15,36 +15,47 @@ _Encryption_ typically encodes data using a key and an algorithm.
 The data can be decoded if the key and algorithm are known.
 
 _Hashing_ is a one-way encoding of data.
-While it is possibly given sufficient computing power
-to recover the original data, doing so is very difficult.
-This is often used to store passwords in a database.
-Commonly used hashing algorithms include MD4, MD5,
-and SHA (Security Hashing Algorithm).
+When applied to passwords the result is referred to as a "password digest".
+These values are often stored in a database and used for authentication.
+The password entered by the user is hashed using the same approach
+and that is compared to the hashed value in the database.
+Commonly used hashing algorithms include
+{% aTargetBlank "https://github.com/kelektiv/node.bcrypt.js", "bcrypt" %},
+MD4, MD5, and SHA (Security Hashing Algorithm).
+"Bcrypt is an adaptive hash function based on the
+Blowfish symmetric block cipher cryptographic algorithm."
+
+{% aTargetBlank "https://en.wikipedia.org/wiki/Rainbow_table",
+"Rainbow tables" %} can be used to determine if a hashed password
+corresponds to a commonly used password.
+Rainbow tables for specific hashing algorithms can be found on the internet.
+They map the hashes of commonly used passwords to their plain text equivalents.
+
+The bcrypt hashing algorithm is purposely slower than other hashing algorithms
+in order to make generating rainbow tables very time consuming,
+while still being fast enough for single hashing operations
+required for uses like authentication.
 
 _Salting_ makes data more secure by adding "salt"
 to the data to be encrypted or hashed.
-Often a fixed string is added to the
-beginning, end, or both ends of the data.
+This is typically a fixed-length string that is added to
+the beginning, end, or both ends of the data.
+This makes existing rainbow tables useless to hackers
+because the hashes they include are not based on salted passwords.
 
-Passing user names, passwords, and email addresses
-from browsers to servers in plain text
-can be made safe by using HTTPS.
+_Hypertext Transfer Protocol Secure (HTTPS)_
+uses Transport Layer Security (TLS) encryption
+to send data between browsers and servers.
+Using this makes it safe to pass user names, passwords, and email addresses.
 
-`npm install bcryptjs`
-`npm install fastify`
-`npm install fastify-cookie`
-`npm install fastify-cors`
-`npm install jsonwebtoken`
-`npm install nodemailer`
-
-HTTP-only cookies can only be created by a server
+_HTTP-only cookies_ can only be created by a server
 and can only be retrieved by the server that created them.
-They can be made secure and can expire after a given amount of time.
-Like other cookies, DevTools can see that they exists,
-but their values are not available.
+
+_Secure cookies_ can only be sent over HTTPS.
+Like all cookies, they can expire after a given amount of time.
 In addition, browser extensions cannot access them.
 
-A JSON Web Token (JWT) encapsulates encoded information in a token
+_JSON Web Tokens (JWTs)_ encapsulate encoded information in a token
 that can be passed to and from servers.
 The data is not encrypted, so it should not contain sensitive data.
 It is comprised of three parts, a header, payload, and a signature.
@@ -131,6 +142,17 @@ The bcrypt hashing algorithm is purposely slower than other hashing algorithms
 in order to make creation of rainbow tables time consuming,
 while still being fast enough for single hashing operations
 required for uses like authentication.
+
+## Libraries
+
+The npm packages used in the demonstration app include:
+
+- `bcryptjs`
+- `fastify`
+- `fastify-cookie`
+- `fastify-cors`
+- `jsonwebtoken`
+- `nodemailer`
 
 ## Local SSL Setup
 
