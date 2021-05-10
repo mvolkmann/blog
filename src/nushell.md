@@ -194,16 +194,16 @@ The `path` subcommands operate on file paths.
 The table below describes these and shows the result of entering
 `echo ~/Documents/demo.txt | path {subcommand}`.
 
-| Subcommand  | Description                                                                                                                     |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `basename`  | returns the filename portion (`demo.txt`)                                                                                       |
-| `dirname`   | returns the directory path (`~/Documents`)                                                                                      |
-| `exists`    | returns a boolean indicating if the file exists;<br>can only return `true` for expanded paths                                   |
-| `expand`    | returns the expanded path (`/Users/mark/Documents/demo.txt`)                                                                    |
-| `extension` | returns the file extension (`txt`)                                                                                              |
-| `filestem`  | returns the filename with the the extension (`demo`)                                                                            |
-| `join`      | returns the result of joining two partial paths<br>`echo '~/Documents' \| path join demo.txt`<br>returns `~/Documents/demo.txt` |
-| `type`      | returns `Dir` or `File`                                                                                                         |
+| Subcommand  | Description                                                                                                                        |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `basename`  | returns the filename portion (`demo.txt`)                                                                                          |
+| `dirname`   | returns the directory path (`~/Documents`)                                                                                         |
+| `exists`    | returns a boolean indicating if the file exists;<br>can only return `true` for expanded paths                                      |
+| `expand`    | returns the expanded path (`/Users/mark/Documents/demo.txt`)                                                                       |
+| `extension` | returns the file extension (`txt`)                                                                                                 |
+| `filestem`  | returns the filename with the the extension (`demo`)                                                                               |
+| `join`      | returns the result of joining two partial paths<br>`echo '~/Documents' \| path join -a demo.txt`<br>returns `~/Documents/demo.txt` |
+| `type`      | returns `Dir` or `File`                                                                                                            |
 
 The `str` subcommands perform string operations.
 They are
