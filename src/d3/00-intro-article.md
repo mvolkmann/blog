@@ -441,7 +441,7 @@ These methods take a function that is invoked
 once for each encapsulated DOM element.
 The function is passed the value of the `__data__` property value
 and the index of the DOM element within the selection.
-Inside these function, the current element
+Inside these functions, the current element
 can be accessed using the `this` keyword.
 In order to use `this`, the function must not be an arrow function.
 
