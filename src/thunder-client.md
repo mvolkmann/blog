@@ -105,6 +105,10 @@ in the first user object is `json.0.lastName`.
 A "Set Env Var" test specifies that the response value at a Json Query path
 matches the value of a specified environment variable.
 
+Postman also supports associating tests with requests,
+but they must be written in JavaScript.
+Thunder Client tests are more limited, but are much easier to specify.
+
 ## Environments
 
 The Env tab is used to create collections of key/value pairs
