@@ -12,6 +12,10 @@ It is similar to {% aTargetBlank "", "Postman" %},
 but has the advantage of being able to test APIs
 in the same tool where code is being written.
 
+<img alt="Thunder Client" style="width: 90%"
+  src="/blog/assets/vs-code-thunder-client.png?v={{pkg.version}}"
+  title="Thunder Client">
+
 ## Installing
 
 To install Thunder Client in VS Code,
@@ -27,7 +31,7 @@ To start Thunder Client, click the sidebar icon
 that is a circle containing a lightning bolt.
 
 <img alt="Thunder Client icon" style="width: 10%"
-  src="/blog/assets/thunder-client-icon.png?v={{pkg.version}}"
+  src="/blog/assets/vs-code-thunder-client-icon.png?v={{pkg.version}}"
   title="Thunder Client icon">
 
 To create a new collection of requests,
@@ -114,12 +118,14 @@ select "New Environment", and enter a name.
 To add variables to the environment, click the environment name,
 enter name/value pairs, and click the Save button.
 
+{% raw %}
 To refer to a variable value in a request,
 enclose the name in double curly braces.
-For example, {{ `{{my-name}}` }}.
+For example, <code>{{my-name}}</code>.
 This syntax can appear in request URLs and in Auth values.
 It likely can also appear in request headers and bodies,
 but I have not test that.
+{% endraw %}
 
 ## Data
 
