@@ -12,7 +12,12 @@ It is similar to {% aTargetBlank "", "Postman" %}.
 
 ## Installing
 
-To install Thunder Client in VS Code, ...
+To install Thunder Client in VS Code,
+click the side bar extensions icon,
+search for "Thunder Client",
+and click the Install button.
+
+Good documentation for this extension is provided inside VS Code.
 
 ## Using
 
@@ -28,8 +33,15 @@ click the "Collections" tab, click the ellipsis after the collection name,
 click "New Request", and enter a name for the request.
 Then select the method from a drop-down (defaults to GET)
 and enter the URL for the request.
+The method can be GET, POST, PUT, DELETE, PATCH, HEAD, or OPTIONS.
 The following optional features can also be specified:
 query parameters, authentication, request headers, body, and tests.
+Authentication can use Basic Auth, Bearer Token, or OAuth 2.0.
+The body can contain text, JSON, XML, form data, files,
+form-url-encoded key/value pairs, or a GraphQL query.
+
+To create a one-time request that is not associated with a collection,
+click the "New Request" button above the Activity, Collections, and Env tabs.
 
 Any number of tests can be added to a request.
 Result data that can be tested includes ResponseCode, ResponseType,
@@ -47,6 +59,12 @@ This opens the request in an editor tab.
 Optionally modify the request details and then click the "SEND" button.
 The results include the status, size, time,
 response body, response headers, cookies, and test results.
+
+To execute all the requests in a collection,
+click the ellipsis after the collection name and select "Run All".
+This is particularly useful when the requests have associated tests.
+It provides a quick way to verify that all the APIs
+exercised by the collection are still returning the expected responses.
 
 To rename a request, click the ellipsis after it, select "Rename",
 and enter a new name.
@@ -66,8 +84,23 @@ To delete a collection of requests, ...
 
 The Env tab is for entering repetitive or sensitive data
 that is used in requests.
-But it doesn't seem to be a collection of key/value pairs,
-so it's not clear how the values can be referenced by requests.
+To create a new environment, click the Env tab,
+click the hamburger menu on the right,
+select "New Environment", and enter a name.
+To add variables to the environment, click the environment name,
+enter name/value pairs, and click the Save button.
+To refer to a variable value in a request,
+enclose the name in double curly braces.
+For example, `{{my-name}}`.
+
+## Data
+
+The data associated with collections of requests (Collections tab)
+and environments (Env tab) are shared by all VS Code windows.
+However, newly added data is not
+automatically available in other VS Code windows.
+To update the data in the current VS Code window,
+open the context menu and select "Developer: Reload Window".
 
 ## Questions
 
