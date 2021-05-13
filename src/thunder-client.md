@@ -87,18 +87,25 @@ click the ellipsis after it and select "Delete".
 To delete a collection of requests,
 click the ellipsis after it and select "Delete".
 
-## Env tab
+## Environments
 
-The Env tab is for entering repetitive or sensitive data
-that is used in requests.
+The Env tab is used to create collections of key/value pairs
+referred to as an "environment"
+that represent repetitive or sensitive data used in requests.
+
 To create a new environment, click the Env tab,
 click the hamburger menu on the right,
 select "New Environment", and enter a name.
+
 To add variables to the environment, click the environment name,
 enter name/value pairs, and click the Save button.
+
 To refer to a variable value in a request,
 enclose the name in double curly braces.
 For example, `{{my-name}}`.
+This syntax can appear in request URLs.
+It likely can also appear in request headers and bodies,
+but I have not test that.
 
 ## Data
 
