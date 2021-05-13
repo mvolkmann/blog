@@ -170,8 +170,8 @@ They are
 `csv`, `eml`, `ics`, `ini`, `json`, `ods`, `ssv`, `toml`, `tsv`,
 `url`, `vcf`, `xlsx`, `xml`, `yaml`, and `yml`.
 
-The `into` command converts values to another type.
-Currently the only supported subcommand is `int`.
+The `into` subcommands convert values to another type.
+They are `binary`, `int`, and `string`.
 For example, `echo '19' | into int` gives the integer 19.
 
 The `query` command queries various data formats.
@@ -1641,7 +1641,7 @@ Examples of using many of them appear in the sub-sections that follow.
 | `split-by`                 | creates a new table from one with nested tables<br>where column headings are values of a given nested table heading       |
 | `table`                    | views pipeline output as a table                                                                                          |
 | `to {format}`              | converts a table to a given format such as JSON                                                                           |
-| `uniq`                     | gets unique rows                                                                                                          |
+| `uniq`                     | gets unique rows; has `duplicated` and `ignore-case` options                                                              |
 | `update`                   | updates data in a given column                                                                                            |
 | `where`                    | specifies a condition rows must meet to render                                                                            |
 | `wrap`                     | creates a table column from its data and a name                                                                           |
