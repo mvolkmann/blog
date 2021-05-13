@@ -6,8 +6,6 @@ layout: topic-layout.njk
 
 ## Overview
 
-test
-
 {% aTargetBlank "https://www.thunderclient.io", "Thunder Client" %}
 is a VS Code extension for testing APIs.
 It is similar to {% aTargetBlank "", "Postman" %},
