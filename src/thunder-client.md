@@ -24,6 +24,10 @@ Good documentation for this extension is provided inside VS Code.
 To start Thunder Client, click the sidebar icon
 that is a circle containing a lightning bolt.
 
+<img alt="Thunder Client icon" style="width: 10%"
+  src="/blog/assets/thunder-client-icon.png?v={{pkg.version}}"
+  title="Thunder Client icon">
+
 To create a new collection of requests,
 click the "Collections" tab, click the hamburger menu on the right,
 click "New Collection", and enter a name.
@@ -103,7 +107,7 @@ enter name/value pairs, and click the Save button.
 To refer to a variable value in a request,
 enclose the name in double curly braces.
 For example, `{{my-name}}`.
-This syntax can appear in request URLs.
+This syntax can appear in request URLs and in Auth values.
 It likely can also appear in request headers and bodies,
 but I have not test that.
 
@@ -119,4 +123,5 @@ open the context menu and select "Developer: Reload Window".
 ## Questions
 
 What is the purpose of the "Activity" tab?
-Nothing new ever seems to appear there.
+It should at least provide a list of recently executed requests,
+but nothing new ever seems to appear here.
