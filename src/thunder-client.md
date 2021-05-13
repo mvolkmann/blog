@@ -50,6 +50,11 @@ Header, and "Json Query".
 Each test has an action and a value.
 Actions include equal, notEqual, contains, count,
 isType, isJson, setTo, <, <=, >, and >=.
+A "Json Query" specifies the path to a particular piece of data
+starting with `json.`.
+For example, if the API returns a JSON array of user objects
+that have a lastName property, the path to this property
+in the first user object is `json.0.lastName`.
 
 To view the requests in a given collection,
 click the "Collections" tab and click the collection name.
@@ -76,9 +81,11 @@ The name of the new request will match the original
 with " Copy" added to the end.
 Then edit the new request.
 
-To delete a request, click the ellipsis after it and select "Delete".
+To delete a request,
+click the ellipsis after it and select "Delete".
 
-To delete a collection of requests, ...
+To delete a collection of requests,
+click the ellipsis after it and select "Delete".
 
 ## Env tab
 
