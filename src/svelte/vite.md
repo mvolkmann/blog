@@ -21,7 +21,15 @@ and is pronounced "vēt".
 Another build to tool that is similar to Vite is
 {% aTargetBlank "https://www.snowpack.dev", "Snowpack" %}.
 
-To create a Svelte project that uses Vite,
+{% aTargetBlank "https://kit.svelte.dev", "SvelteKit" %}
+adds many features on top of Svelte including
+the use of Vite, file-based page routing, code splitting,
+hot module reloading, and server-side rendering.
+If you if you create a SvelteKit project,
+by entering `npm init svelte@next {project-name}`,
+it will already be configured to use to Vite.
+But if you want to create a plain Svelte project that uses Vite,
+follow these steps:
 
 - Enter `npm init @vitejs/app`
 - Enter a project name which will be the name of the created directory.
