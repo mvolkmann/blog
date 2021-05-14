@@ -24,7 +24,8 @@ To create a Svelte project that uses Vite,
 
 - Enter `npm init @vitejs/app`
 - Enter a project name which will be the name of the created directory.
-- Select a framework such as "svelte".
+- Select "svelte" for the framework.
+  Other options include "lit-element", "preact", "react", "vanilla", and "vue".
 - Select a variant: JavaScript or TypeScript
 - `cd` to the project directory.
 - Enter `npm install` to install all of the dependencies.
