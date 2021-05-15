@@ -24,7 +24,11 @@ To run the server:
 - Enter `npm install`
 - Enter `npm run start`
 
-### Server `package.json`
+This uses {% aTargetBlank "https://nodemon.io", "nodemon" %}
+to automatically restart the server when its code is modified,
+which is useful during iterative development and debugging.
+
+### Server package.json
 
 ```json
 {
@@ -46,14 +50,17 @@ To run the server:
 }
 ```
 
-### `server.js
+### server.js
 
 ```js
 import WebSocket from 'ws';
 
+// Create a WebSocket server.
 const wss = new WebSocket.Server({port: 1919});
 
+// When a client connects ...
 wss.on('connection', ws => {
+  // Listen for messages from the client.
   ws.on('message', message => {
     // Broadcast the message to all the clients.
     // wss.clients is not an Array, so you cannot use a for-of loop.
@@ -71,6 +78,7 @@ wss.on('connection', ws => {
     });
   });
 
+  // Send an initial message to the newly connected client.
   ws.send('connected to WebSocket server');
 });
 ```
@@ -81,13 +89,13 @@ To run the client:
 
 - Enter `npm install`
 - Enter `npm run start`
-- Browse `localhost:8080` in multiple browser windows.
+- Browse `localhost:1920` in multiple browser windows.
 - Enter a message in the "Send" input and
   press the Enter key or click the "Send" button to send it.
 - The message will appear in all connected browser windows.
 - Try sending multiple messages from each connected browser window.
 
-### Client `package.json`
+### Client package.json
 
 ```json
 {
@@ -97,7 +105,7 @@ To run the client:
   "author": "R. Mark Volkmann",
   "license": "MIT",
   "scripts": {
-    "start": "http-server"
+    "start": "http-server --port 1920"
   },
   "devDependencies": {
     "http-server": "^0.12.3"
@@ -105,7 +113,7 @@ To run the client:
 }
 ```
 
-### `index.html`
+### index.html
 
 ```html
 <!DOCTYPE html>
@@ -116,48 +124,57 @@ To run the client:
 
     <script>
       window.onload = () => {
+        // Find various DOM elements.
         const errorMessage = document.getElementById('error-message');
         const form = document.getElementById('form');
         const receivedArea = document.getElementById('received-area');
         const sendInput = document.getElementById('send-input');
         const status = document.getElementById('status');
 
+        // Open a connection to the WebSocket server.
         let wsOpen = false;
-
-        form.addEventListener('submit', event => {
-          event.preventDefault();
-          if (wsOpen) {
-            ws.send(sendInput.value);
-            sendInput.value = '';
-          } else {
-            errorMessage.textContent =
-              'Cannot send because WebSocket is closed.';
-          }
-        });
-
         const WS_URL = 'ws://localhost:1919';
         const ws = new WebSocket(WS_URL);
 
+        // When the WebSocket connection is opened ...
         ws.addEventListener('open', event => {
           wsOpen = true;
           status.textContent = 'The WebSocket is open.';
         });
 
+        // When the WebSocket connection is closed ...
         ws.addEventListener('close', event => {
           wsOpen = false;
           status.textContent =
             'The WebSocket is closed. ' + 'Refresh when the server is ready.';
         });
 
+        // When a WebSocket message is received ...
         ws.addEventListener('message', event => {
+          // Display the message in the received area of the UI.
           const div = document.createElement('div');
           div.textContent = event.data;
           receivedArea.append(div);
         });
 
+        // When a WebSocket error occurs ...
         ws.addEventListener('error', event => {
-          // By design, there is no useful information in this event object.
+          // For security reasons, there is no
+          // useful information in this event object.
           errorMessage.textContent = `Failed to connect to ${WS_URL}.`;
+        });
+
+        // When the form containing a message to send is submitted ...
+        form.addEventListener('submit', event => {
+          event.preventDefault();
+          if (wsOpen) {
+            // Send the message to the WebSocket server.
+            ws.send(sendInput.value);
+            sendInput.value = '';
+          } else {
+            errorMessage.textContent =
+              'Cannot send because the WebSocket is closed.';
+          }
         });
       };
     </script>
