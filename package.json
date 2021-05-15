@@ -27,7 +27,7 @@
     "lint": "eslint --fix --quiet src --ext .js",
     "push": "git push origin master",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
-    "sass": "sass --style=compressed src/sass _site/assets",
+    "sass": "sass --style=compressed src/sass:_site/assets",
     "serve": "npm-run-all sass --parallel watch:*",
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "npm run sass -- --watch"
