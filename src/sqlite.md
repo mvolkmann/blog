@@ -6,7 +6,8 @@ layout: topic-layout.njk
 
 ## Overview
 
-SQLite claims to be "the most used database engine in the world".
+{% aTargetBlank "https://www.sqlite.org/", "SQLite" %}
+claims to be "the most used database engine in the world".
 It runs on all common operating systems and mobile devices.
 
 Features of SQLite include:
@@ -23,6 +24,14 @@ Features of SQLite include:
 - wide operating system support
 - public domain source code
 - includes a command-line interface (CLI)
+
+## Installing
+
+SQLite can be downloaded from
+{% aTargetBlank "https://www.sqlite.org/download.html", "here" %}.
+In macOS it can be installed using Homebrew by entering `brew install sqlite`.
+
+For help, enter `sqlite3 --help`.
 
 ## CLI Tool
 
@@ -48,6 +57,15 @@ $ ls *.db
 
 The file `pets.db` exist now as long as at least one table was defined.
 
+## File Input
+
+SQL commands can be read from a file.
+For example, if the file `schema.txt` commands SQL commands
+then the command `sqlite3 demo.db < schema.txt`
+will execute the commands using the database `demo.db`.
+
+## Dot Commands
+
 The most commonly used dot commands are described in the following table:
 
 | Action                                            | Command                                                                                                      |
@@ -59,7 +77,7 @@ The most commonly used dot commands are described in the following table:
 | list tables in current database                   | `.tables`                                                                                                    |
 | show database schema                              | `.schema`                                                                                                    |
 | show table schema                                 | `.schema {table-name}`                                                                                       |
-| configure showing/hiding # of rows changed by SQL | `.changes {on|off}`                                                                                          |
+| configure showing/hiding # of rows changed by SQL | `.changes {on \| off}`                                                                                       |
 | export table to CSV file                          | `.headers on`<br>`.mode csv`<br>`.once {file-path}`<br>`select * from {table-name}`<br>`.system {file-path}` |
 | import CSV file into a table                      | `.import {file-path} {table-name}`                                                                           |
 | execute shell command                             | `.shell {command}`                                                                                           |
