@@ -84,7 +84,7 @@ Examples include the `autoview` and `save` commands.
 
 ## Installing
 
-There are many options for installing the Nushell.
+There are many options for installing or upgrading Nushell.
 
 If you have Rust installed, enter `cargo install nu`.
 This takes several minutes to complete.
@@ -463,18 +463,19 @@ The following tables list all the real types and conceptual types.
 
 Real Types:
 
-| Type      | Description                                                                                    |
-| --------- | ---------------------------------------------------------------------------------------------- |
-| `any`     | any type below (default for variables and custom command parameters)                           |
-| `block`   | block of nu script code (can be executed on each row of a table)                               |
-| `int`     | whole number with infinite precision                                                           |
-| `number`  | `int` or `decimal`, both with infinite precision                                               |
-| `path`    | platform-independent path to a file or directory                                               |
-| `pattern` | glob pattern that can include `*` wildcard and `**` for traversing directories                 |
-| `range`   | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive); use 2 dots, not 3        |
-| `string`  | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
-| `table`   | list of rows; returned by many Nushell commands                                                |
-| `unit`    | any value with a unit; includes `duration` and `filesize` types                                |
+| Type       | Description                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| `any`      | any type below (default for variables and custom command parameters)                           |
+| `block`    | block of nu script code (can be executed on each row of a table)                               |
+| `duration` | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, or `wk`                |
+| `filesize` | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                    |
+| `int`      | whole number with infinite precision                                                           |
+| `number`   | `int` or `decimal`, both with infinite precision                                               |
+| `path`     | platform-independent path to a file or directory                                               |
+| `pattern`  | glob pattern that can include `*` wildcard and `**` for traversing directories                 |
+| `range`    | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive); use 2 dots, not 3        |
+| `string`   | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
+| `table`    | list of rows; returned by many Nushell commands                                                |
 
 The ability to specify single-word literal strings with no delimiters
 is one of my favorite features in Nushell!
@@ -495,8 +496,6 @@ Conceptual Types:
 | column path | dot-separated list of nested column names                                       |
 | date        | timezone-aware; defaults to UTC                                                 |
 | decimal     | number with a fractional part and infinite precision                            |
-| duration    | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, or `wk` |
-| filesize    | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`     |
 | group       | semicolon-separated list of pipelines where only output from the last is output |
 | line        | string with an OS-dependent line ending                                         |
 | list        | sequence of values of any type                                                  |
@@ -517,7 +516,7 @@ For example, `date now | describe` outputs `date`.
 <aside>
 It seems like many of the conceptual types should become real types long-term.
 I would think at least these could become real types:
-boolean, date, decimal (remove number?), duration, filesize, and list.
+boolean, date, decimal (remove number?), and list.
 
 Related to this is the fact that the `describe` command
 doesn't strictly return real type names.
@@ -654,6 +653,19 @@ let l = $(echo $s | lines) # ["This", "has", "three lines."]
 {% endraw %}
 
 ### Ranges
+
+A range represents a sequence of numbers in increments of one.
+For example, `2..4` represents the numbers 2, 3, and 4.
+Floating point numbers are supported.
+For example, `1.2..4.0` represents the numbers 1.2, 2.2, and 3.2.
+The start value can be greater than the end value
+to represent a decrementing sequence.
+For example, `4..2` represents the numbers 4, 3, and 2.
+
+Either bound can be negative, but parentheses are required
+when the start value is negative.
+For example, `(-2)..2` represents the numbers -2, -1, 0, 1, and 2.
+and `2..-2 represents the numbers 2, 1, 0, -1, and -2.
 
 Values of the `range` type can use default values for their start or end.
 If the start value of a range is omitted, it defaults to zero.
