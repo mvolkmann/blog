@@ -75,6 +75,7 @@ The most commonly used dot commands are described in the following table:
 | attach an additional database                     | `attach database "{file-path}" as {name};`                                                                   |
 | list names and paths of attached databases        | `.databases`                                                                                                 |
 | list tables in current database                   | `.tables`                                                                                                    |
+| drop a table                                      | `drop table if exists {table-name}`                                                                          |
 | show database schema                              | `.schema`                                                                                                    |
 | show table schema                                 | `.schema {table-name}`                                                                                       |
 | configure showing/hiding # of rows changed by SQL | `.changes {on \| off}`                                                                                       |
