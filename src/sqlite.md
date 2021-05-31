@@ -76,6 +76,7 @@ The most commonly used dot commands are described in the following table:
 | list names and paths of attached databases        | `.databases`                                                                                                 |
 | list tables in current database                   | `.tables`                                                                                                    |
 | drop a table                                      | `drop table if exists {table-name}`                                                                          |
+| upsert                                            | `insert into table-name (col1, col2) values (val1, val2) on conflict(name) do update set col2 = val2;`       |
 | show database schema                              | `.schema`                                                                                                    |
 | show table schema                                 | `.schema {table-name}`                                                                                       |
 | configure showing/hiding # of rows changed by SQL | `.changes {on \| off}`                                                                                       |
