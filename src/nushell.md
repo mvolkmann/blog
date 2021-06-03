@@ -46,7 +46,7 @@ after the last command in a pipeline.
 So the command `ls` is processed as if `ls | autoview` was entered.
 When semicolons are used to separate multiple pipelines on the same line,
 `autoview` is only applied to the last pipeline.
-For example, `let a = 2; let b = 3; = $a + $b` outputs `5`.
+For example, `let a = 2; let b = 3; $a + $b` outputs `5`.
 
 Color coding is applied to commands as they are typed.
 If a command becomes invalid, all the text changes to red.
@@ -87,7 +87,7 @@ Examples include the `autoview` and `save` commands.
 There are many options for installing or upgrading Nushell.
 
 If you have Rust installed, enter `cargo install nu`.
-This takes several minutes to complete.
+This takes around seven minutes to complete.
 
 If you are on macOS and have Homebrew installed, enter `brew install nushell`.
 Note that Homebrew may install a version
@@ -130,6 +130,8 @@ def help-text [s: string] {
     where description =~ $s || name =~ $s
 }
 ```
+
+TODO: Does this work in v0.32.0?
 
 </aside>
 
