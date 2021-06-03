@@ -6,6 +6,7 @@ layout: topic-layout.njk
 
 This is a collection of tips related to web development
 divided into categories.
+It is very much a work in progress!
 
 ## HTML
 
