@@ -125,7 +125,7 @@ so they are automatically available in new Nushell sessions.
 def help-text [s: string] {
   help commands |
     select name description |
-    append $(help commands | get subcommands ) |
+    append (help commands | get subcommands ) |
     flatten |
     where description =~ $s || name =~ $s
 }
@@ -230,14 +230,14 @@ or using the `config` subcommands described below.
 Changes to the config file only affect new shell sessions,
 not the current one.
 
-To edit the config file with Vim, enter `vim $(config path)`.
-To edit the config file with VS Code, enter `code $(config path)`.
+To edit the config file with Vim, enter `vim (config path)`.
+To edit the config file with VS Code, enter `code (config path)`.
 When editing the config file using VS Code,
 consider installing the "TOML Language Support" extension
 which profiles syntax highlighting and formatting.
 
 <aside>
-The syntax <code>$(pipeline)</code> is referred to as an "invocation".
+The syntax <code>(pipeline)</code> is referred to as an "invocation".
 This can be used to pass the result of a command pipeline
 as a argument to a command.
 </aside>
@@ -273,10 +273,10 @@ These are summarized in the table below.
 For example, to change the prompt enter the following:
 
 ```bash
-config set prompt "echo $(ansi yellow) '🦀ν> '"
+config set prompt "echo (ansi yellow) '🦀ν> '"
 ```
 
-This adds the line `prompt = "echo $(ansi yellow) '🦀ν> '"`
+This adds the line `prompt = "echo (ansi yellow) '🦀ν> '"`
 to the configuration file.
 🦀 is for the Rust mascot Ferris and ν is the Greek letter nu.
 
@@ -289,7 +289,7 @@ add the following line in the config file:
 
 ```bash
 prompt =
-  "echo `🦀ν {{$(ansi yellow)}}{{$(pwd)}}{{$(ansi green)}}{{$(char prompt)}} `"
+  "echo `🦀ν {{(ansi yellow)}}{{(pwd)}}{{(ansi green)}}{{(char prompt)}} `"
 ```
 
 {% endraw %}
@@ -593,7 +593,7 @@ Consider adding this to the startup array in your Nushell config file.
 # During the iteration, the special variable $it (for item)
 # is set to the current item.
 def as-lines [] {
-  each { echo $(build-string $it $(char newline)) } | str collect
+  each { echo (build-string $it (char newline)) } | str collect
 }
 ```
 
@@ -610,7 +610,7 @@ let x = 19; echo `x is {{$x}}`
 
 let x = 3
 let y = 5
-echo `product of {{$x}} and {{$y}} is {{$(= $x * $y)}}`
+echo `product of {{$x}} and {{$y}} is {{($x * $y)}}`
 # As discussed in the "Operators" section later,
 # operators can only be used in "math mode".
 # An expression is in math mode if it begins with `=`.
@@ -648,8 +648,8 @@ For example:
 {% raw %}
 
 ```bash
-let s = `This{{$(char newline)}}has{{$(char newline)}}three lines.`
-let l = $(echo $s | lines) # ["This", "has", "three lines."]
+let s = $"This(char newline)has(char newline)three lines."
+let l = (echo $s | lines) # ["This", "has", "three lines."]
 ```
 
 {% endraw %}
@@ -716,11 +716,11 @@ let names = [Mark Tami Amanda Jeremy]
 echo $names | each { build-string "Hello, " $it "!" }
 # Outputs "Hello, Mark!" and three more similar lines.
 
-echo $names | each -n { build-string $($it.index | inc) ")" $it.item }
+echo $names | each -n { build-string ($it.index | inc) ")" $it.item }
 ```
 
 The `split row` command creates a list from a string based on a delimiter.
-For example, `let colors = $(echo "red,green,blue" | split row ",")`
+For example, `let colors = (echo "red,green,blue" | split row ",")`
 creates the list `[red green blue]`.
 
 To access a list item at a given index, use `$name.index`
@@ -757,7 +757,7 @@ The following example gets all the colors whose names end in "e".
 
 ```bash
 let colors = [red orange yellow green blue purple]
-echo $colors | where {= $(echo $it | str ends-with 'e')}
+echo $colors | where (echo $it | str ends-with 'e')
 # The block passed to where must evaluate to a boolean.
 # This outputs the list [orange blue purple].
 
@@ -771,10 +771,10 @@ For example:
 
 ```bash
 # Do any color names end with "e"?
-echo $colors | any? $(echo $it | str ends-with "e") # true
+echo $colors | any? (echo $it | str ends-with "e") # true
 
 # Is the length of any color name less than 3?
-echo $colors | any? $(echo $it | str length) < 3 # false
+echo $colors | any? (echo $it | str length) < 3 # false
 
 # Are any scores greater than 7?
 echo $scores | any? $it > 7 # true
@@ -789,10 +789,10 @@ For example:
 
 ```bash
 # Do all color names end with "e"?
-echo $colors | all? $(echo $it | str ends-with "e") # false
+echo $colors | all? (echo $it | str ends-with "e") # false
 
 # Is the length of all color names greater than or equal to 3?
-echo $colors | all? $(echo $it | str length) >= 3 # true
+echo $colors | all? (echo $it | str length) >= 3 # true
 
 # Are all scores greater than 7?
 echo $scores | all? $it > 7 # false
@@ -807,8 +807,8 @@ For example:
 
 ```bash
 let colors = [yellow green]
-let colors = $(echo $colors | prepend red)
-let colors = $(echo $colors | append purple)
+let colors = (echo $colors | prepend red)
+let colors = (echo $colors | append purple)
 echo $colors # [red yellow green purple]
 ```
 
@@ -835,11 +835,11 @@ For example:
 
 ```bash
 let scores = [3 8 4]
-echo "total =" $(echo $scores | reduce { = $acc + $it }) # 15
+echo "total =" (echo $scores | reduce { = $acc + $it }) # 15
 
-echo "total =" $(echo $scores | math sum) # easier approach, same result
+echo "total =" (echo $scores | math sum) # easier approach, same result
 
-echo "product =" $(echo $scores | reduce --fold 1 { = $acc * $it }) # 96
+echo "product =" (echo $scores | reduce --fold 1 { = $acc * $it }) # 96
 
 echo $scores | reduce -n { = $acc.item + $it.index * $it.item }
 # This should produce 0*3 + 1*8 + 2*4 = 16.
@@ -915,7 +915,7 @@ let sports = [
   ] [hockey 6]
 ]
 let sport = basketball
-let players = $(echo $sports | where name == $sport | get players)
+let players = (echo $sports | where name == $sport | get players)
 echo `The number of active players in {{$sport}} is {{$players}}.`
 ```
 
@@ -1187,7 +1187,7 @@ installed using the Rust `cargo` command in the default location.
 This includes the `nu` executable and plugins.
 
 ```bash
-ls $(build-string $(which nu | get path) '*') | get size | math sum
+ls (build-string (which nu | get path) '*') | get size | math sum
 ```
 
 ## Aliases
@@ -1278,22 +1278,22 @@ rather than the result of a command pipeline.
 
 ```bash
 def evaluate [n: int] {
-  echo $(build-string "The number " $n " is ")
+  echo (build-string "The number " $n " is ")
   if $n > 5 { echo big } { echo small }
   echo "."
-  echo $(char newline)
+  echo (char newline)
 }
 
-echo $(evaluate 1) # The number 1 is small.
-echo $(evaluate 9) # The number 9 is big.
+echo (evaluate 1) # The number 1 is small.
+echo (evaluate 9) # The number 9 is big.
 
 def evaluate2 [n: int] {
-  let word = $(if $n > 5 { echo big } { echo small })
-  echo $(build-string "The number " $n " is " $word "." $(char newline))
+  let word = (if $n > 5 { echo big } { echo small })
+  echo (build-string "The number " $n " is " $word "." (char newline))
 }
 
-echo $(evaluate2 1) # The number 1 is small.
-echo $(evaluate2 9) # The number 9 is big.
+echo (evaluate2 1) # The number 1 is small.
+echo (evaluate2 9) # The number 9 is big.
 ```
 
 Input from other commands can be piped into a custom command
@@ -1313,25 +1313,25 @@ For example:
 ```bash
 # Prints a value followed by a newline.
 def logv [value: any] {
-  echo $(build-string $value $(char newline))
+  echo (build-string $value (char newline))
   # Another way to write the line above is:
-  # echo [`{{$value}}` $(char newline)] | str collect
+  # echo [`{{$value}}` (char newline)] | str collect
 }
 
 # Prints "name = value" followed by a newline.
 def lognv [name: string, value: any] {
-  logv $(build-string $name " = " $value)
+  logv (build-string $name " = " $value)
 }
 
 def logv-color [
   text: string,
   --color (-c): string # a flag
 ] {
-  #if $(echo $color | empty?) { # same as next line
-  if $(= $color | empty?) {
+  #if (echo $color | empty?) { # same as next line
+  if ($color | empty?) {
     logv $text
   } {
-    logv $(build-string $(ansi $color) $text $(ansi reset))
+    logv (build-string (ansi $color) $text (ansi reset))
   }
 }
 
@@ -1353,12 +1353,12 @@ def map [values: any, code: block] {
 let names = [Mark Tami Amanda Jeremy]
 
 map $names {
-  echo $(build-string "Hello, " $it $(char newline))
+  echo (build-string "Hello, " $it (char newline))
 } | str collect
 
 # Same result using built-in "each" command instead of custom "map" command.
 echo $names | each {
-  echo $(build-string "Hello, " $it ($(char newline))
+  echo (build-string "Hello, " $it ((char newline))
 } | str collect
 ```
 
@@ -1370,7 +1370,7 @@ For example:
 
 ```bash
 def labelled-sum [label: string, ...rest: int] {
-  echo $(build-string $label " = " $(echo $rest | math sum) $(char newline))
+  echo (build-string $label " = " (echo $rest | math sum) (char newline))
 }
 
 labelled-sum "sum of scores" 3 7 19 # sum of scores = 29
@@ -1410,7 +1410,7 @@ def "rmv double" [n: number] { = $n * 2 }
 
 let score = 3
 # The "lognv" command is defined above.
-lognv 'score' $(rmv double $(rmv increment $score)) # 8
+lognv 'score' (rmv double (rmv increment $score)) # 8
 ```
 
 ## Variables
@@ -1424,7 +1424,7 @@ The scope of a variable is the context or block in which it is defined.
 
 To set a variable to the result of a command pipeline,
 which can be comprised of one or more commands,
-enter `let name = $(pipeline)`.
+enter `let name = (pipeline)`.
 
 To use a variable in an expression, precede its name with `$`.
 For example, `$total`.
@@ -1435,7 +1435,7 @@ For example, the following sets a variable to the result of
 concatenating two variable values as strings:
 
 ```bash
-let v3 = $(build-str $v1 $v2)
+let v3 = (build-str $v1 $v2)
 ```
 
 ## Environment Variables
@@ -1517,7 +1517,7 @@ the `disable_table_indexes` configuration option to `true`,
 but there is no way to do this for the output of a specific command.
 
 To see the commands in the Nushell configuration file `startup` section, enter  
-`open $(config path) | get startup`.
+`open (config path) | get startup`.
 
 The `lines` and `split` commands can be used
 to render delimited data as a table.
@@ -1733,7 +1733,7 @@ let primaryColors = [[name red green blue]; [
   blue 0 0 255]
 ]
 let purple = [[name red green blue]; [purple 255 0 255]]
-let colors = $(echo $primaryColors | append $purple)
+let colors = (echo $primaryColors | append $purple)
 echo $colors
 ````
 
@@ -1757,9 +1757,9 @@ For example:
 
 ```bash
 ls *.nu | each {
-  let name = $(echo $it | get name)
-  let size = $(echo $it | get size)
-  echo $(build-string $name ' is ' $size '.')
+  let name = (echo $it | get name)
+  let size = (echo $it | get size)
+  echo (build-string $name ' is ' $size '.')
 } | as-lines
 ```
 
@@ -1820,11 +1820,11 @@ The `from` command parses a given file format into a table.
 For example:
 
 ```bash
-let data = $(open --raw scores.csv)
+let data = (open --raw scores.csv)
 let table = echo $data | from csv
 ```
 
-This can be done in a single line with `let table = $(open scores.csv)`.
+This can be done in a single line with `let table = (open scores.csv)`.
 
 TODO: How could you iterate over the rows of a table
 and add each one to another table? Use reduce and append?
@@ -1857,7 +1857,7 @@ but there is no command to get a table column by its index.
 However, this can be done with the following pipeline:
 
 ```bash
-echo $myTable | select $(echo $myTable | get | nth $columnIndex)
+echo $myTable | select (echo $myTable | get | nth $columnIndex)
 ```
 
 ### `group-by` Command
@@ -1877,7 +1877,7 @@ ls | group-by type
 The following code outputs the nested tables:
 
 ```bash
-let temp = $(ls | group-by type)
+let temp = (ls | group-by type)
 echo $temp | get File
 echo $temp | get Dir
 ```
@@ -1896,7 +1896,7 @@ Another way to see only the files whose name ends with certain characters
 is the use the `where` command with a block as follows:
 
 ```bash
-ls | where {= $(echo $it.name | str ends-with ".rs") } | get name
+ls | where {= (echo $it.name | str ends-with ".rs") } | get name
 ```
 
 ### `histogram` Command
@@ -1946,7 +1946,7 @@ using the `split` and `headers` commands.
 ```bash
 let data =
   "name red green blue|red 255 0 0|green 0 255 0|blue 0 0 255|purple 255 0 255"
-let colors = $(echo $data | split row "|" | split column " " | headers)
+let colors = (echo $data | split row "|" | split column " " | headers)
 echo $colors
 ```
 
@@ -1973,7 +1973,7 @@ let t1 = [[name score]; [Mark 19] [Tami 21]]
 echo $t1
 
 # Add a single column.
-let column = $(echo [yellow blue] | wrap color)
+let column = (echo [yellow blue] | wrap color)
 echo $t1 | merge { echo $column }
 
 # Add all the columns from another table.
@@ -2071,7 +2071,7 @@ let primaryColors = [[name red green blue]; [
   blue 0 0 255]
 ]
 let white = [[name red green blue]; [white 255 255 255]]
-let colors = $(echo $primaryColors | prepend $white)
+let colors = (echo $primaryColors | prepend $white)
 echo $colors
 ```
 
@@ -2243,13 +2243,13 @@ The special variable `$it` holds each iteration value.
 For example:
 
 ```bash
-seq 1 4 | each { build-string $it $(char newline) } | str collect
+seq 1 4 | each { build-string $it (char newline) } | str collect
 ```
 
 Let's break this down.
 
 - `seq 1 4` returns the list `[1 2 3 4]`.
-- `each { build-string $it $(char newline) }` returns the list
+- `each { build-string $it (char newline) }` returns the list
   `["1\n" "2\n" "3\n" "4\n"]`
 - `str collect` returns a string created by concatenating the list values.
 - The output is:
@@ -2267,7 +2267,7 @@ specified with `start..end` which creates a list of integers.
 The previous example can also be written as follows:
 
 ```bash
-echo 1..4 | each { build-string $it $(char newline) } | str collect
+echo 1..4 | each { build-string $it (char newline) } | str collect
 ```
 
 Iteration over the elements of a list is implemented with the `each` command.
@@ -2278,20 +2278,20 @@ For example:
 
 ```bash
 def log-value [label, value] {
-  echo $(build-string $label " = " $value $(char newline))
+  echo (build-string $label " = " $value (char newline))
 }
 
 def report [list] {
   # Without the --numbered flag, $it is set to each list value.
   # With it, $it is set to an object with the properties index and item.
   echo $list | each --numbered {
-    build-string $(= $it.index + 1) ") " $it.item $(char newline)
+    build-string ($it.index + 1) ") " $it.item (char newline)
   } | str collect # with this the result is a table instead of a string
 }
 
 let names = [Mark Tami Amanda Jeremy]
 
-log-value "name at index 2" $(echo $names | nth 2) # Amanda
+log-value "name at index 2" (echo $names | nth 2) # Amanda
 
 report $names
 # 1) Mark
