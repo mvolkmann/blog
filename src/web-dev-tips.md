@@ -6,14 +6,13 @@ layout: topic-layout.njk
 
 This is a collection of tips related to web development
 divided into categories.
-It assumes that you already know HTML, CSS, and JavaScript
-to some extent, but perhaps have not encountered
-all the tips shared here.
+It assumes that you already know HTML, CSS, and JavaScript to some extent,
+but perhaps have not encountered all the tips shared here.
 This is very much a work in progress!
 
 ## HTML
 
-### <input> type attribute
+### Semantic elements
 
 HTML5 introduced many "semantic" elements.
 These better describe the intent of certain kinds of markup
@@ -30,6 +29,8 @@ when the content is only text to be rendered.
 In most cases `click` events should only be associated
 with `<button>` elements, not with generic elements like `<div>`.
 
+### Values of the type attribute on input elements
+
 HTML5 added by values for the `input` element `type` attribute.
 These can change the way the element is rendered
 and provide additional input validation.
@@ -37,6 +38,8 @@ The values include `checkbox`, `color`, `date`, `datetime-local`,
 `email`, `file`, `image`, `month`, `number`, `password`, `radio`,
 `range`, `search`, `tel`, `text`, `time`, `url`, `week`,
 and a few more less commonly used values.
+
+### Form validation
 
 HTML provides good form validation with nice error messages.
 Consider using this before reaching for a form library
@@ -62,6 +65,8 @@ Use CSS pseudo-classes to style form elements based on their validity.
 These include `:required`, `:optional`, `:valid`, `:invalid`, `:user-invalid`,
 `:blank`, `:placeholder-shown`, `:in-range`, `:out-of-range`,
 
+### Events fired by input elements
+
 The `input` element fires many events, two of which are `change` and `input`.
 A `change` event is fired when a user changes the value
 AND focus leaves the element.
@@ -70,6 +75,8 @@ For example, if a user types "abc" into an `input`,
 an `input` event will be fired after each character
 whereas a `change` event will only be fired once
 after focus leaves the `input`.
+
+### Value of input elements
 
 The value displayed in an `input` element is specified by an attribute
 that is determined by the value of its `type` attribute.
@@ -116,21 +123,74 @@ using the CSS `stroke` and `fill` properties.
 
 ## CSS
 
-selectors
-pseudo classes
-pseudo selectors
-carbonators
-variables
+### Size Units
+
+CSS supports many units for expressing sizes.
+Absolute units include:
+
+- `cm` for centimeters
+- `in` for inches
+- `mm` for millimeters
+- `Q` for quarter millimeters
+- `pc` for picas
+- `pt` for points
+- `px` for pixels
+
+Of these only `px` is commonly used.
+
+Relative units include:
+
+- `ch` for width of "0" in current font
+- `em` for parent font size
+- `ex` for height of "x" in current font
+- `lh` for line height of current element
+- `rem` for root element font size
+- `vh` for 1% of viewport height
+- `vmin` for 1% of smallest viewport dimension
+- `vmax` for 1% of largest viewport dimension
+- `vw` for 1% of viewport width
+
+Of these the mostly commonly used are `rem`, `vh`, and `vw`.
+
+An important benefit of using `rem` as the unit for nearly all sizes
+is that it enables scaling everything in the web site
+by simply changing the font size of the `html` element.
+A web app can allow each user to modify this size,
+perhaps saving their preference in `localStorage`.
+
+### Flex layout
+
+Flex layout is a powerful way to control
+the layout of HTML elements in one dimension.
+There are many CSS properties that affect this.
+The most commonly used properties are described here.
 
 flex box commonly used properties
 
+### Grid layout
+
+Grid layout is a powerful way to control
+the layout of HTML elements in two dimensions.
+There are many CSS properties that affect this.
+The most commonly used properties are described here.
+
 grid layout basics
 
-using rems to enable scaling fonts across site
+### Selectors
 
-CSS position with relative an absolute return
+### Pseudo classes
 
-window.matchMedia can be used to support light and dark modes.
+### pseudo selectors
+
+### Combinators
+
+### Variables
+
+### CSS position with relative an absolute return
+
+### window.matchMedia
+
+The `window.matchMedia` function can be used to support light and dark modes.
 
 box-sizing: border-box
 
