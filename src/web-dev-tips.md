@@ -402,6 +402,22 @@ domElement.style.setProperty('--size', '5rem');
 
 ## Node
 
+### npm scripts
+
+"npm scripts" are custom command strings
+that are defined in `package.json` files.
+Nearly all JavaScript-based web development projects use these.
+To add one, editing a `package.json` file,
+find or add a section that begins with `"scripts": {`,
+and add a line with the syntax `"some-name": "some-command-string"`.
+For example, the following npm scripts run the Prettier and ESLint tools
+on all the applicable files in a Svelte project.
+
+```json
+    "format": "prettier --write '{public,src}/**/*.{css,html,js,svelte,ts}'",
+    "lint": "eslint --fix --quiet src --ext .js,.svelte,.ts",
+```
+
 Web development tooling is often executed using npm scripts
 that are defined in a `package.json` file using the `npm run` command.
 This is such a frequent activity that it is
@@ -413,23 +429,123 @@ The details differ based on the shell being used.
 - fish: `abbr --add nr npm run`
 - nushell: `alias nr = npm run`
 
-npm scripts
-
 ## Browsers
 
 Create bookmarks in the bookmark bar to `http://localhost:{port-number}`
 for ports that are commonly used by web frameworks.
 Common ports include 3000, 5000, and 8080.
 These make it easy to test web apps that being developed and run locally.
+I learned this from Bill Odom.
 
 ## Editors
 
-Emmett basics
+### Emmet
+
+Emmet is an editor plugin for quickly entering HTML, XML, and CSS.
+It also supports many "actions" that operate on HTML and XML elements.
+The most commonly used action is to expand an abbreviation or snippet.
+Emmet is built into the VS Code editor and
+can be installed in most other editors and IDEs.
+
+For example, to create a `div` element with CSS class of `pizza`,
+enter `.pizza` and press the tab key.
+This expands to `<div class="pizza"></div>` with the cursor
+before the end tag ready for you to enter content.
+
+Here are examples of generating HTML:
+
+| Syntax                             | Expands to                           |
+| ---------------------------------- | ------------------------------------ |
+| `.foo`                             | `<div class="foo"></div>`            |
+| `.foo.bar`                         | `<div class="foo bar"></div>`        |
+| `#foo`                             | `<div id="foo"></div>`               |
+| `p.foo`                            | `<p class="foo"></p>`                |
+| `p.foo.bar`                        | `<p class="foo bar"></p>`            |
+| `p#foo`                            | `<p id="foo"></p>`                   |
+| `ul>li`                            | `<ul><li></li></ul>`                 |
+| `p{Hello, World!}`                 | `<p>Hello, World!</p>`               |
+| `a:link`                           | `<a href="http://"></a>`             |
+| `c`                                | `<!-- -->`                           |
+| `img`                              | `<img src="" alt="">`                |
+| `img[alt="dog" src="whippet.png"]` | `<img src="whippet.png" alt="dog">`  |
+| `input:email`                      | `<input type="email" name="" id="">` |
+| `link`                             | `<link rel="stylesheet" href="">`    |
+
+Here are examples of generating CSS.
+While it seems like there is a lot to memorize,
+if you guess an abbreviation you will usually be correct.
+
+| Syntax | Expands to                        |
+| ------ | --------------------------------- |
+| `aic`  | `align-items: center;`            |
+| `aie`  | `align-items: end;`               |
+| `asc`  | `align-self: center;`             |
+| `ase`  | `align-self: end;`                |
+| `b`    | `bottom: ;`                       |
+| `bd`   | `border: ;`                       |
+| `bgc`  | `background-color: #fff;`         |
+| `c`    | `color: #000;`                    |
+| `curp` | `cursor: pointer;`                |
+| `df`   | `display: flex;`                  |
+| `dg`   | `display: grid;`                  |
+| `dib`  | `display: inline-block;`          |
+| `dn`   | `display: none;`                  |
+| `fsi`  | `font-style: italic;`             |
+| `fwb`  | `font-weight: bold;`              |
+| `fxdc` | `flex-direction: column;`         |
+| `fz`   | `font-size ;`                     |
+| `h`    | `height: ;`                       |
+| `jcc`  | `justify-content: center;`        |
+| `jcsp` | `justify-content: space-between;` |
+| `l`    | `left: ;`                         |
+| `m`    | `margin: ;`                       |
+| `o`    | `outline: ;`                      |
+| `p`    | `padding: ;`                      |
+| `r`    | `right: ;`                        |
+| `t`    | `top: ;`                          |
+| `tac`  | `text-align: center;`             |
+| `tar`  | `text-align: right;`              |
+| `ttc`  | `text-transform: capitalize;`     |
+| `ttu`  | `text-transform: uppercase;`      |
+| `w`    | `width: ;`                        |
+| `z`    | `z-index: ;`                      |
+
+For more detail, see my {% aTargetBlank
+"https://objectcomputing.com/resources/publications/sett/march-2018-emmet-editor-plugin?v=1.0.15",
+"Emmet article" %}.
 
 ## Miscellaneous
 
-configuring ESLint
+Frequently when starting a server locally to test a web app
+an error message is output stating that
+the port the server tried to use is being used by another process.
+One option is to start the server so it listens on a different port.
+Another option is to kill the process currently listening on the port.
+But how do you find and kill that process?
 
-configuring Prettier
+Here is a bash script that does this.
+You can create an alias named "klp" to this script.
+Then you can enter "klp 5000" to
+kill the process currently listening on port 5000.
 
-kill listening process script
+```bash
+#!/usr/bin/env bash
+# Kills the process listening on a given port.
+
+if [[ $# -ne 1 ]]; then
+  echo usage: kill-listening-process {port}
+  exit 1
+fi
+
+port=$1
+pid=$(lsof -n -iTCP:$port -sTCP:LISTEN -t)
+
+if [[ $pid ]]; then
+  kill $pid
+  echo killed process $pid
+else
+  echo no process is listening on port $port
+fi
+```
+
+TODO: Add Windows version from Adam Mitz.
