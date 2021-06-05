@@ -31,7 +31,7 @@ with `<button>` elements, not with generic elements like `<div>`.
 
 ### Values of the type attribute on input elements
 
-HTML5 added by values for the `input` element `type` attribute.
+HTML5 added many values for the `input` element `type` attribute.
 These can change the way the element is rendered
 and provide additional input validation.
 The values include `checkbox`, `color`, `date`, `datetime-local`,
@@ -84,10 +84,60 @@ For most `input` types the `value` attribute is used for this purpose.
 But when the `type` is `"checkbox"` or `"radio"`,
 the value is specified using the `checked` attribute.
 
+### input and datalist
+
 An `input` element can have an associated `datalist`.
-This cause the `input` to act like an "auto-complete".
-TODO: Provide an example.
-TODO: Can the datalist be dynamic?
+This causes the `input` to act like an "auto-complete".
+New values can be added to the `datalist`
+and existing values can be deleted.
+This will change the options displayed in the `input`.
+
+Here is a simple example where the user can select a color.
+Initially the only values in the `datalist` are blue, green, and red.
+But the user can add more colors.
+This example uses Svelte, but the concepts
+should easily translate to other web frameworks
+and you shouldn't need to know about Svelte to understand this.
+
+{% raw %}
+
+```js
+<script>
+  let color = '';
+  let colors = ['blue', 'green', 'red']; // sorted
+  let newColor = '';
+
+  function addColor(event) {
+    colors.push(newColor);
+    colors.sort();
+    // The next line causes the options
+    // in the datalist below to be updated.
+    colors = colors; // triggers reactivity
+
+    newColor = ''; // clears the new color input
+  }
+</script>
+
+<main>
+  <form on:submit|preventDefault={addColor}>
+    <label for="new-color">New Color:</label>
+    <input id="new-color" bind:value={newColor} />
+    <button>Add Color</button>
+  </form>
+
+  <label for="color">Color:</label>
+  <input id="color" list="colors" bind:value={color} />
+  <datalist id="colors">
+    {#each colors as color}
+      <option value={color} />
+    {/each}
+  </datalist>
+
+  <p>You selected {color}.</p>
+</main>
+```
+
+{% endraw %}
 
 ## SVG
 
@@ -157,6 +207,34 @@ is that it enables scaling everything in the web site
 by simply changing the font size of the `html` element.
 A web app can allow each user to modify this size,
 perhaps saving their preference in `localStorage`.
+
+### Variables
+
+CSS variables (a.k.a custom properties) are useful for
+storing and referring to values that are used in multiple places.
+Changing the value of a variable updates all the places where it is used.
+Common uses include storing the values of colors and sizes.
+
+Here are examples of the syntax for defining and referring to a CSS variable:
+
+```css
+:root {
+  /* This matches the root element "html". */
+  /* All elements in the document can use variables defined here. */
+  --primary-color: cornflowerblue;
+}
+
+p {
+  color: var(--primary-color);
+}
+
+.circle {
+  --size: 4rem;
+  border: 1px solid calc(var(--size) / 2);
+  height: var(--size);
+  width: var(--size);
+}
+```
 
 ### Flex layout
 
@@ -267,7 +345,7 @@ are described here.
   ```css
   grid-template-areas:
     'header header'
-    'left-nav main'
+    'nav main'
     'footer footer';
   ```
 
@@ -296,6 +374,69 @@ the `justify-content` and `align-items` properties on the container.
 Child elements can override this by setting their
 `justify-self` and `align-self` properties.
 
+In the example below grid layout is used to layout
+a header, footer, left nav and main area of a page.
+
+<img alt="grid layout" style="width: 100%"
+  src="/blog/assets/grid-layout.png?v={{pkg.version}}"
+  title="grid layout">
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+
+    <style>
+      body {
+        --footer-height: 3rem;
+        --header-height: 5rem;
+        --nav-width: 10rem;
+
+        display: grid;
+        grid-template-columns: var(--nav-width) 1fr;
+        grid-template-rows: var(--header-height) 1fr var(--footer-height);
+        grid-template-areas:
+          'header header'
+          'nav main'
+          'footer footer';
+
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+      }
+
+      footer {
+        grid-area: footer;
+        background-color: lightgreen;
+      }
+
+      header {
+        grid-area: header;
+        background-color: orange;
+      }
+
+      nav {
+        grid-area: nav;
+        background-color: lightcoral;
+      }
+
+      section {
+        grid-area: main;
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <header>This is the header.</header>
+    <nav>This is the nav.</nav>
+    <section>This is the main area.</section>
+    <footer>This is the footer.</footer>
+  </body>
+</html>
+```
+
 ### Selectors
 
 ### Pseudo classes
@@ -303,33 +444,6 @@ Child elements can override this by setting their
 ### pseudo selectors
 
 ### Combinators
-
-### Variables
-
-CSS variables (a.k.a custom properties) are useful for
-storing and referring to values that are used in multiple places.
-Changing the value of a variable updates all the places where it is used.
-Common uses include storing the values of colors and sizes.
-
-Here are examples of the syntax for defining and referring to a CSS variable:
-
-````css
-:root { /* This matches the root element "html". */
-  /* All elements in the document can use variables defined here. */
-  --primary-color: cornflowerblue;
-}
-
-p {
-  color: var(--primary-color);
-}
-
-.circle {
-  --size: 4rem;
-  border: 1px solid calc(var(--size) / 2);
-  height: var(--size);
-  width: var(--size);
-}
-```
 
 ### CSS position
 
@@ -339,6 +453,12 @@ that has its CSS `position` property set to `relative`.
 If none is found then it is relative to the browser window.
 Positioning is specified using the CSS properties
 `top`, `bottom`, `left` and `right`.
+
+### CSS transition
+
+### CSS transform
+
+Include card flip example.
 
 ### window.matchMedia
 
@@ -350,7 +470,7 @@ to prefer dark mode:
 
 ```js
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-````
+```
 
 This can then be used to add a CSS class name such as "dark-mode"
 to the body element.
@@ -364,40 +484,371 @@ values of those CSS variables with the values to be used in dark mode.
 
 box-sizing: border-box
 
+### Viewport units
+
 100% versus 100 VH or 100 VW
 
+### Fixed vs sticky position
+
 position fixed and position sticky
+Show example of a table where thead is sticky.
+
+### CSS resets
 
 using normalize reset
 
-CSS box model basics
+### CSS box model
 
-CSS specificity
+### CSS specificity
+
+### Centering
 
 ways to center things including using absolute positioning and translate -50%
 
 ## JavaScript
 
-Review of array methods including reduce
+### Embrace booleans
+
+```js
+// Bad
+if (total >= 100) {
+  return true;
+} else {
+  return false;
+}
+
+// Better
+return total >= 100 ? true : false;
+
+// Best
+return total >= 100;
+```
+
+### Nested ternaries
+
+A common opinion is that nested ternaries are hard to read.
+But are they? Consider this example.
+
+{% raw %}
+
+```text
+let assessment;
+if (temperature &lt;= 32) {
+  assessment = 'cold';
+} else if (temperature &lt;= 80) {
+  assessment = 'mild';
+} else {
+  assessment = 'hot';
+}
+
+// This uses nested ternaries to achieve the same result.
+// It's not confusing when formatted nicely.
+let assessment =
+  temperature &lt;= 32 ? 'cold' :
+  temperature &lt;= 80 ? 'mild' :
+  'hot';
+```
+
+{% endraw %}
+
+### Array methods
+
+The JavaScript `Array` class supports many methods for operating on elements.
+Some of the most useful methods are described below.
+The examples use an array of objects that describe dogs.
+
+```js
+const comet = {name: 'Comet', breed: 'Whippet', weight: 31};
+const snoopy = {name: 'Snoopy', breed: 'Beagle', weight: 40};
+const dogs = [
+  {name: 'Maisey', breed: 'Treeing Walker Coonhound', weight: 55},
+  {name: 'Ramsay', breed: 'Native American Indian Dog', weight: 85},
+  {name: 'Oscar', breed: 'German Shorthaired Pointer', weight: 70},
+  comet
+];
+```
+
+- `forEach` iterates of the elements.
+  It is useful in cases where it is desirable to
+  call a named function on each element.
+  In other cases it can be more clear to use a `for of` loop.
+
+  ```js
+  function report(dog) {
+    console.log(`${dog.name} is a ${dog.breed}.`);
+  }
+
+  dogs.forEach(dog => report(dog));
+  dogs.forEach(report); // same as previous line
+
+  for (const dog of dogs) {
+    report(dog);
+  }
+  ```
+
+- `filter` creates a new array containing a subset of the elements.
+
+  ```js
+  const bigDogs = dogs.filter(dog => dog.weight &gt;= 70);
+  // [object for Ramsay, object for Oscar]
+  ```
+
+- `map` creates a new array with the same length.
+
+  ```js
+  const dogNames = dogs.map(dog => dog.name);
+  // ['Maisey', 'Ramsay', 'Oscar', 'Comet']
+  ```
+
+- `reduce` creates a single value from the elements and an initial value.
+
+  ```js
+  // Here the initial value is zero.
+  const totalWeight = dogs.reduce((acc, dog) => acc + dog.weight, 0);
+
+  // Create an object where the keys are dog names
+  // and the values are the dog objects.
+  // This doesn't gracefully handle having multiple dogs with the same name.
+  // Here the initial value is an empty object.
+  const nameToDogMap = dogs.reduce((acc, dog) => {
+    acc[dog.name] = dog;
+    return acc;
+  }, {});
+  ```
+
+- `some` determines if some element meets specified criteria.
+
+  ```js
+  const haveWhippet = dogs.some(dog => dog.breed === 'Whippet'); // true
+  ```
+
+- `every` determines if every element meets specified criteria.
+
+  ```js
+  const allWhippets = dogs.every(dog => dog.breed === 'Whippet'); // false
+  ```
+
+- `find` finds the first element that meets specified criteria.
+
+  ```js
+  const firstBigDog = dogs.find(dog => dog.weight &gt;= 70);
+  // object for Ramsay
+  ```
+
+- `findIndex` finds the index of the first element
+  that meets specified criteria.
+
+  ```js
+  const firstBigDogIndex = dogs.findIndex(dog => dog.weight &gt;= 70);
+  // 1 which is the index for Ramsay
+  ```
+
+- `includes` determines if at least one of the elements
+  matches a given value.
+
+  ```js
+  const haveComet = dogs.includes(comet); // true
+  const haveSnoopy = dogs.includes(snoopy); // false
+  ```
+
+- `join` creates a string by joining the string representation
+  of the elements with a given separator string.
+
+  ```js
+  const combined = dogNames.join(', ');
+  // 'Maisey, Ramsay, Oscar, Comet'
+  ```
+
+- `sort` sorts the elements in place rather than creating a new array.
+  If no comparator function is passed, the elements are compared as strings.
+  A comparator function that takes a pair of elements can be passed.
+  It must return a negative number if they are in the correct order,
+  a positive number if they are not,
+  and zero if they are the same or the order doesn't matter.
+
+  ```js
+  // Sort dogs by weight in ascending order.
+  dogs.sort((d1, d2) => d1.weight - d2.weight);
+
+  // Sort dogs by weight in descending order.
+  dogs.sort((d1, d2) => d2.weight - d1.weight);
+
+  // Sort dogs by name.
+  dogs.sort((d1, d2) => d1.name.localeCompare(d2.name));
+  ```
+
+- `push` adds any number of values to the end.
+
+  ```js
+  dogs.push(snoopy); // Adds Snoopy at the end.
+  ```
+
+- `pop` removes the last element.
+
+  ```js
+  dogs.pop(snoopy); // Removes Snoopy from the end.
+  ```
+
+- `unshift` adds any number of values to the beginning.
+
+  ```js
+  dogs.unshift(snoopy); // Adds Snoopy at the beginning.
+  ```
+
+- `shift` removes the first element.
+
+  ```js
+  dogs.shift(snoopy); // Removes Snoopy from the beginning.
+  ```
+
+### Modifying CSS properties from JavaScript
+
+HTML elements are represented by Document Object Model (DOM) objects in memory.
+DOM objects have a style property whose value is an object.
+The keys of this object are camelCased CSS property names
+and the values the values of those CSS properties.
+New properties can be added to the style objects
+and existing ones can be modified or deleted.
+
+In the example below the CSS variable `--color` is initially set to "red"
+and used to set the CSS `color` property of `p` elements.
+When the "Toggle Color" button is pressed a function is called that
+gets the current value of the CSS variable
+and modifies it based on its current value.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+  </head>
+  <body>
+    <p id="greeting">Hello, World!</p>
+    <button id="toggle-btn">Toggle Color</button>
+
+    <!--
+    Placing the script tag here causes it to
+    run after the HTML above is rendered.
+    Another option is to move the script tag to the head section and
+    wrap the code in a function that is assigned to window.onload.
+    -->
+    <script>
+      const greeting = document.getElementById('greeting');
+      const toggleBtn = document.getElementById('toggle-btn');
+      toggleBtn.onclick = () => {
+        // This is initially unset, not populated from the style tag.
+        const {color} = greeting.style;
+        greeting.style.color = color === 'blue' ? 'red' : 'blue';
+      };
+    </script>
+  </body>
+</html>
+```
 
 ### CSS variables from JavaScript
 
-JavaScript code can access the values of CSS variables.
-For example, suppose we have found a DOM element
-whose CSS defines the variable `--size`.
-We can get the value with the following:
+JavaScript code can access the values of CSS variables using a
+combination of the `getComputedStyle` and `getPropertyValue` methods.
+JavaScript code can also modify the values of CSS variables
+using the `setProperty` method.
+This updates the use of all CSS properties that reference them.
 
-```js
-const size = getComputedStyle(domElement).getPropertyValue('--size');
+In the example below the CSS variable `--color` is initially set to "red"
+and used to set the CSS `color` property of `p` elements.
+When the "Toggle Color" button is pressed a function is called that
+gets the current value of the CSS variable
+and modifies it based on its current value.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      p {
+        --color: red;
+        color: var(--color);
+      }
+    </style>
+  </head>
+  <body>
+    <p id="greeting">Hello, World!</p>
+    <button id="toggle-btn">Toggle Color</button>
+
+    <script>
+      const greeting = document.getElementById('greeting');
+      const toggleBtn = document.getElementById('toggle-btn');
+      toggleBtn.onclick = () => {
+        const color = getComputedStyle(greeting)
+          .getPropertyValue('--color')
+          .trim();
+        greeting.style.setProperty(
+          '--color',
+          color === 'blue' ? 'red' : 'blue'
+        );
+      };
+    </script>
+  </body>
+</html>
 ```
 
-JavaScript code can modify the values of CSS variables.
-This updates the use of all CSS properties that reference them.
-For example, we can change the value of the `--size` variable
-with the following:
+### Getting element size
 
-```js
-domElement.style.setProperty('--size', '5rem');
+DOM elements support the method `getBoundingClientRect`
+that returns a `DOMRect` object.
+This object contains the properties `width` and `height`
+which provide the size of the element.
+It also contains the following properties that describe its position:
+`x`, `y`, `left`, `top`, `right`, `bottom`.
+
+In the example below a div with many CSS properties is rendered.
+When the "Query" button is pressed a function is called that
+gets the bounding rectangle of the div and outputs its properties.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+
+    <style>
+      #box {
+        position: absolute;
+        left: 100px;
+        top: 100px;
+        height: 200px;
+        width: 300px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">I'm a box.</div>
+    <button id="query-btn">Query</button>
+
+    <script>
+      const box = document.getElementById('box');
+      const queryBtn = document.getElementById('query-btn');
+      queryBtn.onclick = () => {
+        const rect = box.getBoundingClientRect();
+        console.log('get-rect.html: rect =', rect);
+        /*
+        bottom: 302 - includes border
+        height: 202 - includes border
+        left: 100
+        right: 402 - includes border
+        top: 100
+        width: 302 - includes border
+        x: 100
+        y: 100
+        */
+      };
+    </script>
+  </body>
+</html>
 ```
 
 ## Node
@@ -454,22 +905,23 @@ before the end tag ready for you to enter content.
 
 Here are examples of generating HTML:
 
-| Syntax                             | Expands to                           |
-| ---------------------------------- | ------------------------------------ |
-| `.foo`                             | `<div class="foo"></div>`            |
-| `.foo.bar`                         | `<div class="foo bar"></div>`        |
-| `#foo`                             | `<div id="foo"></div>`               |
-| `p.foo`                            | `<p class="foo"></p>`                |
-| `p.foo.bar`                        | `<p class="foo bar"></p>`            |
-| `p#foo`                            | `<p id="foo"></p>`                   |
-| `ul>li`                            | `<ul><li></li></ul>`                 |
-| `p{Hello, World!}`                 | `<p>Hello, World!</p>`               |
-| `a:link`                           | `<a href="http://"></a>`             |
-| `c`                                | `<!-- -->`                           |
-| `img`                              | `<img src="" alt="">`                |
-| `img[alt="dog" src="whippet.png"]` | `<img src="whippet.png" alt="dog">`  |
-| `input:email`                      | `<input type="email" name="" id="">` |
-| `link`                             | `<link rel="stylesheet" href="">`    |
+| Syntax                             | Expands to                                |
+| ---------------------------------- | ----------------------------------------- |
+| `!`                                | HTML template including `head` and `body` |
+| `.foo`                             | `<div class="foo"></div>`                 |
+| `.foo.bar`                         | `<div class="foo bar"></div>`             |
+| `#foo`                             | `<div id="foo"></div>`                    |
+| `p.foo`                            | `<p class="foo"></p>`                     |
+| `p.foo.bar`                        | `<p class="foo bar"></p>`                 |
+| `p#foo`                            | `<p id="foo"></p>`                        |
+| `ul>li`                            | `<ul><li></li></ul>`                      |
+| `p{Hello, World!}`                 | `<p>Hello, World!</p>`                    |
+| `a:link`                           | `<a href="http://"></a>`                  |
+| `c`                                | `<!-- -->`                                |
+| `img`                              | `<img src="" alt="">`                     |
+| `img[alt="dog" src="whippet.png"]` | `<img src="whippet.png" alt="dog">`       |
+| `input:email`                      | `<input type="email" name="" id="">`      |
+| `link`                             | `<link rel="stylesheet" href="">`         |
 
 Here are examples of generating CSS.
 While it seems like there is a lot to memorize,
@@ -548,4 +1000,17 @@ else
 fi
 ```
 
-TODO: Add Windows version from Adam Mitz.
+Here is a version of this script for Windows.
+It lacks error handling.
+TODO: Add the missing error handling to match the bash script.
+
+{% raw %}
+
+```bash
+@echo off
+for /f "tokens=5" %%p in ('netstat -anop tcp ^| findstr /r :%1.*LISTENING') do (
+  taskkill /f /pid %%p
+)
+```
+
+{% endraw %}
