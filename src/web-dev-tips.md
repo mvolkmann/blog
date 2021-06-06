@@ -92,12 +92,20 @@ New values can be added to the `datalist`
 and existing values can be deleted.
 This will change the options displayed in the `input`.
 
-Here is a simple example where the user can select a color.
+Here is an example where the user can select a color.
 Initially the only values in the `datalist` are blue, green, and red.
 But the user can add more colors.
-This example uses Svelte, but the concepts
-should easily translate to other web frameworks
-and you shouldn't need to know about Svelte to understand this.
+This uses Svelte, but the concepts
+should easily translate to other web frameworks and
+you shouldn't need to know much about Svelte to understand this.
+
+In this screenshot the user has already added the color "orange"
+and has enter "n" into the "Color" input
+which causes the matching values "green" and "orange" to be suggested.
+
+<img alt="datalist" style="width: 30%"
+  src="/blog/assets/datalist-example.png?v={{pkg.version}}"
+  title="datalist">
 
 {% raw %}
 
@@ -455,9 +463,12 @@ and the `align-items` values appear in the row headings.
 
 ## inline-block
 
-Setting the `width` of an element with `display: block` has no effect.
-Change it to `display: inline-block`.
-What about height?
+The default value of the CSS `display` property for many HTML elements,
+including `div`, is "block".
+This prevents them from appearing on the same "row" as other elements,
+unless flex or grid layout is specified for the parent element.
+Another way to allow multiple block elements to appear on the same row
+is to set the CSS `display` property to "inline-block".
 
 ### pointer-events
 
