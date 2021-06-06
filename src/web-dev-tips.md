@@ -417,21 +417,21 @@ a header, footer, left nav and main area of a page.
         background-color: orange;
       }
 
+      main {
+        grid-area: main;
+        background-color: lightblue;
+      }
+
       nav {
         grid-area: nav;
         background-color: lightcoral;
-      }
-
-      section {
-        grid-area: main;
-        background-color: lightblue;
       }
     </style>
   </head>
   <body>
     <header>This is the header.</header>
     <nav>This is the nav.</nav>
-    <section>This is the main area.</section>
+    <main>This is the main area.</main>
     <footer>This is the footer.</footer>
   </body>
 </html>
