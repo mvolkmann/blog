@@ -260,17 +260,24 @@ The most commonly used properties are described here.
 - `justify-content`
 
   This controls layout on the major axis.
-  The most commonly used values are
-  `flex-start` (default, pushing children toward start),
-  `flex-end (pushing children toward end)`, `center`,
-  and `space-between` (spreading children).
+  The values are:
+
+  - `flex-start` (default) pushes children toward the start
+  - `flex-end` pushes children toward the end
+  - `center` centers children
+  - `space-between` spreads children with
+    no space before the first or after the last
+  - `space-evenly` spreads children with
+    equal space before the first and after the last
+  - `space-around` spreads children with
+    half space before the first and after the last
 
 - `align-items`
 
   This controls layout on the minor axis.
   The most commonly used values are `stretch` (default),
-  `start` (pushing children toward start),
-  `end` (pushing children toward end), and `center`.
+  `flex-start` (pushes children toward start),
+  `flex-end` (pushes children toward end), and `center`.
 
 - `flex-grow`
 
@@ -287,6 +294,10 @@ The most commonly used properties are described here.
 
   This controls the space between elements when
   `justify-content` is not one of the values that begins with `space-`.
+
+<img alt="flex layout" style="width: 100%"
+  src="/blog/assets/css-flex-layout.png?v={{pkg.version}}"
+  title="flex layout">
 
 Child elements can override their minor axis alignment
 described by the `align-items` property on the container
@@ -377,8 +388,13 @@ Child elements can override this by setting their
 In the example below grid layout is used to layout
 a header, footer, left nav and main area of a page.
 
+The table below demonstrates combinations of
+`justify-content` and `align-items` values.
+The `justify-content` values appear in the column headings
+and the `align-items` values appear in the row headings.
+
 <img alt="grid layout" style="width: 100%"
-  src="/blog/assets/grid-layout.png?v={{pkg.version}}"
+  src="/blog/assets/css-grid-layout.png?v={{pkg.version}}"
   title="grid layout">
 
 ```html
@@ -437,6 +453,22 @@ a header, footer, left nav and main area of a page.
 </html>
 ```
 
+## inline-block
+
+Setting the `width` of an element with `display: block` has no effect.
+Change it to `display: inline-block`.
+What about height?
+
+### pointer-events
+
+To enable clicking an element that is behind another in `z-index`,
+set the `pointer-events` CSS property of the top element to `none`.
+
+### appearance
+
+To take control of how a form control is rendered
+set the `appearance` CSS property to `none`.
+
 ### Selectors
 
 ### Pseudo classes
@@ -459,6 +491,11 @@ Positioning is specified using the CSS properties
 ### CSS transform
 
 Include card flip example.
+
+### Media queries
+
+CSS media queries have many uses, but the most common is to
+apply different CSS properties based on the window width.
 
 ### window.matchMedia
 
@@ -584,6 +621,25 @@ const dogs = [
   for (const dog of dogs) {
     report(dog);
   }
+  ```
+
+  However, `forEach` has the advantage that
+  it makes the current index available.
+  For example:
+
+  ```js
+  dogs.forEach((dog, index) => {
+    console.log(`${index + 1}) ${dog.name}`);
+  });
+  ```
+
+  This outputs:
+
+  ```text
+  1) Maisey
+  2) Ramsay
+  3) Oscar
+  4) Comet
   ```
 
 - `filter` creates a new array containing a subset of the elements.
