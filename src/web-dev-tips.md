@@ -216,6 +216,18 @@ by simply changing the font size of the `html` element.
 A web app can allow each user to modify this size,
 perhaps saving their preference in `localStorage`.
 
+### CSS resets
+
+using normalize reset
+
+### CSS box model
+
+### CSS specificity
+
+### Centering
+
+TODO: Describe ways to center things including using absolute positioning and translate -50%.
+
 ### Variables
 
 CSS variables (a.k.a custom properties) are useful for
@@ -461,7 +473,7 @@ and the `align-items` values appear in the row headings.
 </html>
 ```
 
-## inline-block
+### inline-block
 
 The default value of the CSS `display` property for many HTML elements,
 including `div`, is "block".
@@ -474,11 +486,13 @@ is to set the CSS `display` property to "inline-block".
 
 To enable clicking an element that is behind another in `z-index`,
 set the `pointer-events` CSS property of the top element to `none`.
+TODO: Need an example of when this is useful.
 
 ### appearance
 
 To take control of how a form control is rendered
 set the `appearance` CSS property to `none`.
+TODO: Add example of a custom checkbox?
 
 ### Selectors
 
@@ -497,9 +511,83 @@ If none is found then it is relative to the browser window.
 Positioning is specified using the CSS properties
 `top`, `bottom`, `left` and `right`.
 
-### CSS transition
+### CSS transitions
 
-### CSS transform
+A CSS transition causes a change to specific CSS properties
+to be applied over a given time duration.
+To demonstrate this we will implement a toggle component
+that is an oval containing a circle that represents a "thumb".
+Clicking anywhere in the oval causes the thumb to move left or right
+indicating some application-specific option being disable or enabled.
+The CSS property `left` has a transition duration of 0.3 seconds
+so any change to that property takes place gradually over that duration.
+
+<img alt="CSS transition toggle" style="width: 10%"
+  src="/blog/assets/css-transition-toggle.png?v={{pkg.version}}"
+  title="CSS transition toggle">
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+
+    <style>
+      .toggle {
+        --height: 2rem;
+
+        display: inline-block;
+        background-color: cornflowerblue;
+        border-radius: calc(var(--height) / 2);
+        height: var(--height);
+        position: relative;
+        width: calc(var(--height) * 2);
+      }
+
+      .thumb {
+        --inset: 3px;
+        --size: calc(var(--height) - 2 * var(--inset));
+
+        position: absolute;
+        left: var(--inset);
+        top: var(--inset);
+
+        background-color: orange;
+        border-radius: calc(var(--size) / 2);
+        height: var(--size);
+        transition: left 0.3s;
+        width: var(--size);
+      }
+    </style>
+    <script>
+      let selected = false;
+
+      window.onload = () => {
+        const toggle = document.querySelector('.toggle');
+        const thumb = document.querySelector('.toggle > .thumb');
+
+        const toggleWidth = toggle.getBoundingClientRect().width;
+        const thumbWidth = thumb.getBoundingClientRect().width;
+        const inset = getComputedStyle(thumb).getPropertyValue('--inset');
+        const selectedLeft = toggleWidth - thumbWidth - parseInt(inset) + 'px';
+
+        toggle.addEventListener('click', () => {
+          selected = !selected;
+          thumb.style.left = selected ? selectedLeft : inset;
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div class="toggle">
+      <div class="thumb" />
+    </div>
+  </body>
+</html>
+```
+
+### CSS transformations
 
 Include card flip example.
 
@@ -540,18 +628,6 @@ box-sizing: border-box
 
 position fixed and position sticky
 Show example of a table where thead is sticky.
-
-### CSS resets
-
-using normalize reset
-
-### CSS box model
-
-### CSS specificity
-
-### Centering
-
-ways to center things including using absolute positioning and translate -50%
 
 ## JavaScript
 
