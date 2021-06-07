@@ -423,7 +423,6 @@ and the `align-items` values appear in the row headings.
   <head>
     <meta charset="UTF-8" />
     <title>Demo</title>
-
     <style>
       body {
         --footer-height: 3rem;
@@ -532,7 +531,6 @@ so any change to that property takes place gradually over that duration.
   <head>
     <meta charset="UTF-8" />
     <title>Demo</title>
-
     <style>
       .toggle {
         --height: 2rem;
@@ -587,9 +585,132 @@ so any change to that property takes place gradually over that duration.
 </html>
 ```
 
-### CSS transformations
+### CSS transforms
 
-Include card flip example.
+CSS transforms translate, rotate, scale, and skew DOM elements.
+
+The example below renders a button containing a finger pointing emoji.
+When the button is pressed, a `rotate` `transform` is applied
+to rotate the emoji 180 degrees.
+When pressed again, the original rotation of zero degrees is restored.
+
+```html
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      button {
+        --size: 3rem;
+
+        display: inline-block;
+        background-color: cornflowerblue;
+        border: none;
+        border-radius: calc(var(--size) / 2);
+        font-size: 2rem;
+        height: var(--size);
+        transition: transform 0.7s;
+        width: var(--size);
+      }
+
+      button.rotate {
+        transform: rotate(180deg);
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        const button = document.querySelector('button');
+        button.addEventListener('click', () => {
+          button.classList.toggle('rotate');
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <p>Click the button to rotate it.</p>
+    <button>☝</button>
+  </body>
+</html>
+```
+
+The next example renders a Pokemon card which is initially face-down.
+Clicking the card flips it over.
+It uses a CSS transform to provide a nice 3D effect.
+
+This works in Chrome, Firefox, and Safari,
+but flashes a bit in Safari making the effect feel less polished.
+
+```html
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+
+    <style>
+      .card {
+        height: 403px;
+        width: 291px;
+
+        /* This determines the distance between the z=0 plane and the user
+           in order to give a 3D-positioned element some perspective. */
+        perspective: 40rem;
+      }
+
+      .card-container {
+        /* Absolute positioning of the img children are relative to this. */
+        position: relative;
+
+        /* This allows elements to have a sense of front and back faces. */
+        transform-style: preserve-3d;
+
+        /* If the transform property is modified,
+           transition the change over this time duration. */
+        transition: transform 0.7s;
+      }
+
+      .card-container > img {
+        /* Stack the images on top of each other. */
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        /* Hide the image when it is flipped. */
+        backface-visibility: hidden;
+      }
+
+      /* The card front is always flipped 180 degrees from the card back. */
+      .card-front {
+        transform: rotateY(180deg);
+      }
+
+      .flipped {
+        /* Making this negative flips right to left,
+           whereas positive would flip left to right. */
+        transform: rotateY(-180deg);
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        const cards = document.querySelectorAll('.card');
+        for (const card of Array.from(cards)) {
+          card.addEventListener('click', () => {
+            card.firstElementChild.classList.toggle('flipped');
+          });
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <p>Click card to flip it over.</p>
+    <div class="card">
+      <div class="card-container">
+        <img alt="card back" src="pokemon-back.png" />
+        <img alt="card front" src="pokemon-front.png" class="card-front" />
+      </div>
+    </div>
+  </body>
+</html>
+```
 
 ### Media queries
 
