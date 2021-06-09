@@ -1,0 +1,57 @@
+<style>
+  #centering-demo .box {
+    color: white;
+    height: var(--box-size);
+    line-height: var(--box-size); /* causes vertical centering of text */
+    text-align: center; /* centers text horizontally */
+    width: var(--box-size);
+  }
+
+  #centering-demo .box1 {
+    background-color: red;
+    display: block;
+    margin: 0 auto; /* centers box horizontally when display is block */
+  }
+
+  #centering-demo .box2 {
+    background-color: blue;
+    display: inline-block;
+  }
+
+  #centering-demo .box3 {
+    background-color: green;
+    opacity: 0.5;
+    position: absolute;
+    left: 50%; /* of width of position relative ancestor */
+    top: 50%; /* of height of position relative ancestor */
+    transform: translate(-50%, -50%); /* of box size */
+  }
+
+  #centering-demo {
+    --box-size: 100px;
+    --size: 550px;
+    height: var(--size);
+    outline: 1px dashed gray;
+    position: relative; /* absolute positioning of .box3 is relative to this */
+    width: var(--size);
+  }
+
+  #centering-demo .container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  #centering-demo p {
+    text-align: center;
+  }
+</style>
+<section id="centering-demo">
+  <p>This is a paragraph.</p>
+  <div class="box box1">Box #1</div>
+  <div class="container">
+    <div class="box box2">Box #2</div>
+  </div>
+  <div class="box box3">Box #3</div>
+</section>

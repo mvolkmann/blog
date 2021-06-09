@@ -463,7 +463,86 @@ For more details on CSS specificity, see
 
 ### Centering
 
-TODO: Describe ways to center things including using absolute positioning and translate -50%.
+There are many ways to center content using CSS.
+Four common ways are:
+
+- `text-align` property
+- `margin` property set to `auto` when `display` is `block`
+- using flex layout
+- absolute positioning using translate
+
+Each of these approaches are demonstrated in the code below.
+
+{% include "_centering.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      .box {
+        color: white;
+        height: var(--box-size);
+        line-height: var(--box-size); /* causes vertical centering of text */
+        text-align: center; /* centers text horizontally */
+        width: var(--box-size);
+      }
+
+      .box1 {
+        background-color: red;
+        display: block;
+        margin: 0 auto; /* centers box horizontally when display is block */
+      }
+
+      .box2 {
+        background-color: blue;
+        display: inline-block;
+      }
+
+      .box3 {
+        background-color: green;
+        opacity: 0.5;
+        position: absolute;
+        left: 50%; /* of width of position relative ancestor */
+        top: 50%; /* of height of position relative ancestor */
+        transform: translate(-50%, -50%); /* of box size */
+      }
+
+      #centering-demo {
+        --box-size: 100px;
+        --size: 550px;
+        height: var(--size);
+        outline: 1px dashed gray;
+        position: relative; /* absolute positioning of .box3 is relative to this */
+        width: var(--size);
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      p {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="centering-demo">
+      <p>This is a paragraph.</p>
+      <div class="box box1">Box #1</div>
+      <div class="container">
+        <div class="box box2">Box #2</div>
+      </div>
+      <div class="box box3">Box #3</div>
+    </section>
+  </body>
+</html>
+```
 
 ### Variables
 
