@@ -1,0 +1,67 @@
+<style>
+  .card {
+    height: 403px;
+    width: 291px;
+
+    /* This determines the distance between the z=0 plane and the user
+           in order to give a 3D-positioned element some perspective. */
+    perspective: 40rem;
+  }
+
+  .card-container {
+    /* Absolute positioning of the img children are relative to this. */
+    position: relative;
+
+    /* This allows elements to have a sense of front and back faces. */
+    transform-style: preserve-3d;
+
+    /* If the transform property is modified,
+           transition the change over this time duration. */
+    transition: transform 0.7s;
+  }
+
+  .card-container > img {
+    /* Stack the images on top of each other. */
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* Hide the image when it is flipped. */
+    backface-visibility: hidden;
+  }
+
+  /* The card front is always flipped 180 degrees from the card back. */
+  .card-front {
+    transform: rotateY(180deg);
+  }
+
+  .flipped {
+    /* Making this negative flips right to left,
+           whereas positive would flip left to right. */
+    transform: rotateY(-180deg);
+  }
+</style>
+<script>
+  window.onload = () => {
+    const cards = document.querySelectorAll('.card');
+    for (const card of Array.from(cards)) {
+      card.addEventListener('click', () => {
+        card.firstElementChild.classList.toggle('flipped');
+      });
+    }
+  };
+</script>
+
+<section class="card-flip">
+  <p>Click card to flip it over.</p>
+  <div class="card">
+    <div class="card-container">
+      <img alt="card back" src="/blog/assets/pokemon-back.png" />
+      <img
+        alt="card front"
+        src="/blog/assets/pokemon-front.png"
+        class="card-front"
+      />
+    </div>
+  </div>
+</section>

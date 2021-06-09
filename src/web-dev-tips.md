@@ -952,6 +952,8 @@ It uses a CSS transform to provide a nice 3D effect.
 This works in Chrome, Firefox, and Safari,
 but flashes a bit in Safari making the effect feel less polished.
 
+{% include "_css-card-flip.html" %}
+
 ```html
 <html lang="en">
   <head>
