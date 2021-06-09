@@ -4,13 +4,16 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<!--code>
+  const element = document.createElement('div');
+  element.textContent = 'Hello, World!';
+  return element;
+</code-->
+
 This is a collection of tips related to web development
 divided into categories.
 It assumes that you already know HTML, CSS, and JavaScript to some extent,
 but perhaps have not encountered all the tips shared here.
-All of the examples use vanilla JavaScript
-to avoid appealing only to users of specific web frameworks.
-
 This is very much a work in progress!
 
 ## HTML
@@ -106,103 +109,57 @@ In this screenshot the user has already added the color "orange"
 and has enter "n" into the "Color" input
 which causes the matching values "green" and "orange" to be suggested.
 
-{% include "_datalist.html" %}
+<img alt="datalist" style="width: 30%"
+  src="/blog/assets/datalist-example.png?v={{pkg.version}}"
+  title="datalist">
 
 {% raw %}
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Demo</title>
-    <style>
-      #datalist-demo form {
-        margin-bottom: 1rem;
-      }
-    </style>
-    <script>
-      const INITIAL_COLORS = ['blue', 'green', 'red'];
+```js
+<script>
+  let color = '';
+  let colors = ['blue', 'green', 'red']; // sorted
+  let newColor = '';
 
-      window.onload = () => {
-        const form = document.querySelector('#datalist-demo form');
-        const addBtn = form.querySelector('button');
-        const newColorInput = form.querySelector('input');
-        const colorInput = document.getElementById('color');
-        const colorsDataList = document.getElementById('colors');
-        const report = document.getElementById('report');
+  function addColor(event) {
+    colors.push(newColor);
+    colors.sort();
+    // The next line causes the options
+    // in the datalist below to be updated.
+    colors = colors; // triggers reactivity
 
-        function addColor(color) {
-          // Create a new option element to add to the datalist.
-          const option = document.createElement('option');
-          option.setAttribute('value', color);
+    newColor = ''; // clears the new color input
+  }
+</script>
 
-          // Insert the new option in the datalist
-          // so they remain in alphabetical order.
-          for (const child of colorsDataList.children) {
-            const thisColor = child.getAttribute('value');
-            if (color < thisColor) {
-              colorsDataList.insertBefore(option, child);
-              return;
-            }
-            if (color === thisColor) return; // avoids duplicates
-          }
-          colorsDataList.appendChild(option);
-        }
+<main>
+  <form on:submit|preventDefault={addColor}>
+    <label for="new-color">New Color:</label>
+    <input id="new-color" bind:value={newColor} />
+    <button>Add Color</button>
+  </form>
 
-        INITIAL_COLORS.forEach(addColor);
+  <label for="color">Color:</label>
+  <input id="color" list="colors" bind:value={color} />
+  <datalist id="colors">
+    {#each colors as color}
+      <option value={color} />
+    {/each}
+  </datalist>
 
-        // When the form is submitted, add a color to the datalist.
-        form.addEventListener('submit', event => {
-          event.preventDefault();
-          addColor(newColorInput.value);
-          newColorInput.value = '';
-        });
-
-        // Enable the "Add Color" button only if a new color has been entered.
-        newColorInput.addEventListener('input', event => {
-          if (event.target.value) {
-            addBtn.removeAttribute('disabled');
-          } else {
-            addBtn.setAttribute('disabled', 'disabled');
-          }
-        });
-
-        // Report color selections.
-        colorInput.addEventListener('change', event => {
-          report.textContent = 'You selected ' + event.target.value + '.';
-        });
-      };
-    </script>
-  </head>
-  <body>
-    <section id="datalist-demo">
-      <form>
-        <label for="new-color">New Color:</label>
-        <input id="new-color" />
-        <button disabled>Add Color</button>
-      </form>
-
-      <label for="color">Color:</label>
-      <input id="color" list="colors" bind:value="{color}" />
-      <datalist id="colors"></datalist>
-
-      <p id="report">No color has been selected.</p>
-    </section>
-  </body>
-</html>
+  <p>You selected {color}.</p>
+</main>
 ```
 
 {% endraw %}
 
 ## SVG
 
-SVG is a markup language for drawing and rendering text and images.
+SVG is a great markup language for drawing and rendering text and images.
 The basics steps to use SVG are:
 
-- Start with `<svg viewBox="0 0 maxX maxY" xmlns="http://www.w3.org/2000/svg">`.
-  The `viewBox` defines the coordinate system.
-  Replace `maxX` and `maxY` with the maximum values in those dimensions.
+- Start with `<svg viewBox="0 0 maxX maxY" xmlns="http://www.w3.org/2000/svg">`
+  where `maxX` and `maxY` are the maximum values in those dimensions.
   The minimum values do not have to be zero, but those are common values.
 - Include child elements for rendering specific kinds of things.
   Commonly used elements include:
@@ -220,82 +177,13 @@ The basics steps to use SVG are:
 - Wrap a `g` element around groups of children
   that need to be positioned or manipulated as a group.
 - End with `</svg>`.
-- Add a CSS rule for the `svg` element
-  that defines its actual `width` and `height`.
+  basics
+
+The size of an SVG element can be specified
+using the CSS `width` and `height` properties.
 
 The color of lines, paths, and shapes can be specified
-using the CSS `stroke`, `stroke-width`, and `fill` properties.
-
-The following example demonstrates all the commonly used SVG elements.
-
-{% include "_svg.html" %}
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Demo</title>
-    <style>
-      svg {
-        height: 230px;
-        width: 180px;
-      }
-      svg > * {
-        stroke-width: 8px;
-      }
-      circle {
-        fill: pink;
-        stroke: red;
-      }
-      ellipse {
-        fill: lightgreen;
-        stroke: green;
-      }
-      line {
-        stroke: blue;
-        stroke-linecap: round;
-      }
-      path {
-        fill: none;
-        stroke: orange;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      polygon {
-        fill: lightblue;
-        stroke: purple;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      rect {
-        fill: lightblue;
-        stroke: blue;
-      }
-      text {
-        fill: blue;
-      }
-    </style>
-  </head>
-  <body>
-    <section id="svg-demo">
-      <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="30" cy="30" r="25" />
-        <ellipse cx="120" cy="30" rx="50" ry="25" />
-        <image x="0" y="60" width="50" height="50" href="./duck.png" />
-        <line x1="60" y1="60" x2="170" y2="100" />
-        <path d="M 10,120 L 70,160 L 70,120" />
-        <polygon points="90,120 160,160 160,120" />
-        <rect x="5" y="170" width="80" height="50" rx="10" />
-        <text x="95" y="180">
-          <tspan>Hello</tspan>
-          <tspan x="95" dy="15">World!</tspan>
-        </text>
-      </svg>
-    </section>
-  </body>
-</html>
-```
+using the CSS `stroke` and `fill` properties.
 
 ## CSS
 
@@ -433,7 +321,9 @@ The most commonly used properties are described here.
   This controls the space between elements when
   `justify-content` is not one of the values that begins with `space-`.
 
-{% include "_flex-layout.html" %}
+<img alt="flex layout" style="width: 100%"
+  src="/blog/assets/css-flex-layout.png?v={{pkg.version}}"
+  title="flex layout">
 
 Child elements can override their minor axis alignment
 described by the `align-items` property on the container
@@ -637,7 +527,11 @@ indicating some application-specific option being disable or enabled.
 The CSS property `left` has a transition duration of 0.3 seconds
 so any change to that property takes place gradually over that duration.
 
-{% include "_css-transition.html" %}
+<!-- {% include css-transition.html %} -->
+
+<img alt="CSS transition toggle" style="width: 10%"
+  src="/blog/assets/css-transition-toggle.png?v={{pkg.version}}"
+  title="CSS transition toggle">
 
 ```html
 <!DOCTYPE html>
@@ -702,6 +596,8 @@ so any change to that property takes place gradually over that duration.
 ### CSS transforms
 
 CSS transforms translate, rotate, scale, and skew DOM elements.
+CSS transitions can also be applied so these changes
+occur gradually over a specified time duration.
 
 The example below renders a button containing a finger pointing emoji.
 When the button is pressed, a `rotate` `transform` is applied
@@ -1326,7 +1222,7 @@ if you guess an abbreviation you will usually be correct.
 | `fz`   | `font-size ;`                     |
 | `h`    | `height: ;`                       |
 | `jcc`  | `justify-content: center;`        |
-| `jcsb` | `justify-content: space-between;` |
+| `jcsp` | `justify-content: space-between;` |
 | `l`    | `left: ;`                         |
 | `m`    | `margin: ;`                       |
 | `o`    | `outline: ;`                      |
@@ -1392,3 +1288,11 @@ for /f "tokens=5" %%p in ('netstat -anop tcp ^| findstr /r :%1.*LISTENING') do (
 ```
 
 {% endraw %}
+
+<!--script>
+  const codes = document.querySelectorAll('code');
+  for (const code of Array.from(codes)) {
+    const result = Function(code.textContent)();
+    code.insertAdjacentElement('beforebegin', result);
+  }
+</script-->

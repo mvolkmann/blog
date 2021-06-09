@@ -1,0 +1,113 @@
+<style>
+  .child1 {
+    background-color: red;
+    display: inline-block;
+    min-height: 15px;
+    min-width: 15px;
+  }
+
+  .child2 {
+    background-color: green;
+    display: inline-block;
+    min-height: 25px;
+    min-width: 25px;
+  }
+
+  .child3 {
+    background-color: blue;
+    display: inline-block;
+    min-height: 20px;
+    min-width: 20px;
+  }
+
+  .container {
+    outline: 1px solid gray;
+    height: 30px;
+    width: 90px;
+  }
+
+  .heading {
+    text-align: center;
+  }
+
+  table {
+    border-collapse: collapse;
+    font-family: monospace;
+  }
+
+  td,
+  th {
+    border: 1px solid gray;
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  .align-items {
+    background-color: lightpink;
+  }
+
+  .justify-content {
+    background-color: lightyellow;
+  }
+</style>
+
+<table class="flex-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th class="heading justify-content" colspan="6">justify-content</th>
+    </tr>
+    <tr>
+      <th class="align-items">align-items</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  const jcValues = [
+    'flex-start',
+    'center',
+    'flex-end',
+    'space-between',
+    'space-around',
+    'space-evenly'
+  ];
+  const aiValues = ['flex-start', 'center', 'flex-end', 'stretch'];
+
+  const headRow = document.querySelector('.flex-table thead > tr:last-of-type');
+  for (const jcValue of jcValues) {
+    const th = document.createElement('th');
+    th.className = 'justify-content';
+    th.textContent = jcValue;
+    headRow.appendChild(th);
+  }
+
+  const tbody = document.querySelector('.flex-table tbody');
+  for (const aiValue of aiValues) {
+    const tr = document.createElement('tr');
+
+    const th = document.createElement('th');
+    th.className = 'align-items';
+    th.textContent = aiValue;
+    tr.appendChild(th);
+
+    for (const jcValue of jcValues) {
+      const td = document.createElement('td');
+      const container = document.createElement('div');
+      container.className = 'container';
+      container.style.display = 'flex';
+      container.style.justifyContent = jcValue;
+      container.style.alignItems = aiValue;
+      for (let i = 1; i <= 3; i++) {
+        const child = document.createElement('div');
+        child.className = 'child' + i;
+        container.appendChild(child);
+      }
+      td.appendChild(container);
+      tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+  }
+</script>

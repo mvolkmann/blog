@@ -1,0 +1,71 @@
+<style>
+  #datalist-demo form {
+    margin-bottom: 1rem;
+  }
+</style>
+
+<section id="datalist-demo">
+  <form>
+    <label for="new-color">New Color:</label>
+    <input id="new-color" />
+    <button disabled>Add Color</button>
+  </form>
+
+  <label for="color">Color:</label>
+  <input id="color" list="colors" bind:value="{color}" />
+  <datalist id="colors"></datalist>
+
+  <p id="report">No color has been selected.</p>
+</section>
+
+<script>
+  const INITIAL_COLORS = ['blue', 'green', 'red'];
+
+  const form = document.querySelector('#datalist-demo form');
+  const addBtn = form.querySelector('button');
+  const newColorInput = form.querySelector('input');
+  const colorInput = document.getElementById('color');
+  const colorsDataList = document.getElementById('colors');
+  const report = document.getElementById('report');
+
+  function addColor(color) {
+    // Create a new option element to add to the datalist.
+    const option = document.createElement('option');
+    option.setAttribute('value', color);
+
+    // Insert the new option in the datalist
+    // so they remain in alphabetical order.
+    for (const child of colorsDataList.children) {
+      const thisColor = child.getAttribute('value');
+      if (color < thisColor) {
+        colorsDataList.insertBefore(option, child);
+        return;
+      }
+      if (color === thisColor) return; // avoids duplicates
+    }
+    colorsDataList.appendChild(option);
+  }
+
+  INITIAL_COLORS.forEach(addColor);
+
+  // When the form is submitted, add a color to the datalist.
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    addColor(newColorInput.value);
+    newColorInput.value = '';
+  });
+
+  // Enable the "Add Color" button only if a new color has been entered.
+  newColorInput.addEventListener('input', event => {
+    if (event.target.value) {
+      addBtn.removeAttribute('disabled');
+    } else {
+      addBtn.setAttribute('disabled', 'disabled');
+    }
+  });
+
+  // Report color selections.
+  colorInput.addEventListener('change', event => {
+    report.textContent = 'You selected ' + event.target.value + '.';
+  });
+</script>

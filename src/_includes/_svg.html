@@ -1,0 +1,55 @@
+<style>
+  svg {
+    height: 230px;
+    width: 180px;
+  }
+  svg > * {
+    stroke-width: 8px;
+  }
+  circle {
+    fill: pink;
+    stroke: red;
+  }
+  ellipse {
+    fill: lightgreen;
+    stroke: green;
+  }
+  line {
+    stroke: blue;
+    stroke-linecap: round;
+  }
+  path {
+    fill: none;
+    stroke: orange;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  polygon {
+    fill: lightblue;
+    stroke: purple;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  rect {
+    fill: lightblue;
+    stroke: blue;
+  }
+  text {
+    fill: blue;
+  }
+</style>
+<section id="svg-demo">
+  <svg viewBox="0 0 180 230" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="30" cy="30" r="25" />
+    <ellipse cx="120" cy="30" rx="50" ry="25" />
+    <image x="0" y="60" width="50" height="50" href="/blog/assets/duck.png" />
+    <line x1="60" y1="60" x2="170" y2="100" />
+    <path d="M 10,120 L 70,160 L 70,120" />
+    <polygon points="90,120 160,160 160,120" />
+    <rect x="5" y="170" width="80" height="50" rx="10" />
+    <text x="95" y="180">
+      <tspan>Hello</tspan>
+      <tspan x="95" dy="15">World!</tspan>
+    </text>
+  </svg>
+</section>

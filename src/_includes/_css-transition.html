@@ -1,0 +1,50 @@
+<style>
+  .toggle {
+    --height: 2rem;
+
+    display: inline-block;
+    background-color: cornflowerblue;
+    border-radius: calc(var(--height) / 2);
+    height: var(--height);
+    position: relative;
+    width: calc(var(--height) * 2);
+  }
+
+  .thumb {
+    --inset: 3px;
+    --size: calc(var(--height) - 2 * var(--inset));
+
+    position: absolute;
+    left: var(--inset);
+    top: var(--inset);
+
+    background-color: orange;
+    border-radius: calc(var(--size) / 2);
+    height: var(--size);
+    transition: left 0.3s;
+    width: var(--size);
+  }
+</style>
+
+<script>
+  let selected = false;
+
+  window.onload = () => {
+    const toggle = document.querySelector('.toggle');
+    const thumb = document.querySelector('.toggle > .thumb');
+
+    const toggleWidth = toggle.getBoundingClientRect().width;
+    const thumbWidth = thumb.getBoundingClientRect().width;
+    const inset = getComputedStyle(thumb).getPropertyValue('--inset');
+    const selectedLeft = toggleWidth - thumbWidth - parseInt(inset) + 'px';
+
+    toggle.addEventListener('click', () => {
+      selected = !selected;
+      thumb.style.left = selected ? selectedLeft : inset;
+    });
+  };
+</script>
+
+<div class="toggle">
+  <div class="thumb"></div>
+</div>
