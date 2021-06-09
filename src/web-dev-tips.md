@@ -515,7 +515,8 @@ Each of these approaches are demonstrated in the code below.
         --size: 550px;
         height: var(--size);
         outline: 1px dashed gray;
-        position: relative; /* absolute positioning of .box3 is relative to this */
+        /* Absolute positioning of .box3 is relative to this. */
+        position: relative;
         width: var(--size);
       }
 
