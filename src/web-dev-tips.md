@@ -336,11 +336,130 @@ perhaps saving their preference in `localStorage`.
 
 ### CSS resets
 
-using normalize reset
+A CSS reset is a set of CSS rules that attempt to
+set the CSS properties of standard HTML elements
+so they render the same across all the popular web browsers.
+There are many such resets available.
+The most popular is {% aTargetBlank
+"https://necolas.github.io/normalize.css/", "normalize.css" %}.
+
+To use normalize.css:
+
+1. Download it from the URL above.
+2. Add the following in the `head` element of HTML files:
+
+```html
+<link rel="stylesheet" href="normalize.css" />
+```
 
 ### CSS box model
 
+The CSS box model defines how padding, border, and margin are added to elements.
+Padding is outside the content and inside the border.
+The border is optional.
+Margin is outside the border.
+
+<img alt="CSS box model" style="width: 50%"
+  src="/blog/assets/css-box-model.png?v={{pkg.version}}"
+  title="CSS box model">
+
+Padding, border, and margin can be specified to be the same on all four sides
+or be different on each side.
+
+When an element has a specified `width` and `height`,
+by default those apply to the content and
+do not include the `padding`, `border`, and `margin`.
+This is because the CSS `box-sizing` property defaults to `content-box`.
+If `box-sizing` is set to `border-box` then the `width` and `height`
+include the content, `padding`, and `border`, but not the `margin`.
+There are no other supported values for the `box-sizing` property.
+
 ### CSS specificity
+
+CSS specificity determines the precedence of conflicting CSS rules.
+For example, consider the following HTML:
+
+```html
+<div class="parent">
+  I am the parent.
+  <div id="me" class="child" style="color: red">I am the child.</div>
+</div>
+```
+
+The following CSS rules set the color of
+the text “I am the child.” to different values.
+The color used depends on the specificity of the selectors.
+Scores represented by a list of four numbers
+are explained after this example.
+
+```css
+/* score is 0,1,0,0 */
+#me {
+  color: orange;
+}
+
+/* score is 0,0,2,0 */
+.parent > .child {
+  color: yellow;
+}
+
+/* This has the same specificity as the rule before: 0,0,2,0.
+   The last one wins. */
+.parent .child {
+  color: green;
+}
+
+/* score is 0,0,1,0 */
+.child {
+  color: blue;
+}
+
+/* This has the same specificity as the rule before: 0,0,1,0.
+   It applies the color purple to the
+   element with the class “parent”,
+   but the previous rule applies the color blue
+   to the element with the class “child”. */
+.parent {
+  color: purple;
+}
+```
+
+The precedence order of these rules happens to be
+the order in which they are listed here.
+Using a `style` attribute on the inner `div` has the highest specificity.
+
+There is a formula for computing the specificity score
+of any CSS rule that results in a list of four numbers.
+Considering the four numbers from left to right,
+
+- The first is 1 for inline styles and 0 otherwise.
+- The second is the number of `id` values in the selector.
+- The third is the number of class names in the selector.
+- The fourth is the number of element name references in the selector.
+
+The selector with the highest combined number,
+obtained by removing the commas and treating it as a single 4-digit number,
+wins. For example, treat a score of 1,2,3,4 as 1234.
+
+This means that inline styling specified with a
+`style` attribute on an HTML element always wins.
+After this, `id` attributes are more important than class names,
+which are more important than element names.
+
+It also means that the order in which `id` values,
+class names, and element names appear in a selector
+does not affect its specificity calculation.
+
+Here are some examples of applying this scoring:
+
+- The CSS selector `.parent > #me` has a score of 0,1,1,0.
+- The CSS selector `.parent #me` has the same score.
+- The CSS selector `.parent .child` has a score of 0,0,2,0
+  and so has a lower score than selectors that use an `id`.
+
+For more details on CSS specificity, see
+{% aTargetBlank "https://css-tricks.com/specifics-on-css-specificity/",
+"Specifics on CSS Specificity" %} on the CSS-Tricks site.
 
 ### Centering
 
@@ -850,10 +969,6 @@ CSS for the `body` element can define CSS variables
 that specify colors to be used in light mode.
 A separate rule with the selector `body.dark-mode` can override the
 values of those CSS variables with the values to be used in dark mode.
-
-### box-sizing
-
-box-sizing: border-box
 
 ### Viewport units
 
