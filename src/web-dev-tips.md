@@ -538,6 +538,7 @@ Each of these approaches are demonstrated in the code below.
       <div class="container">
         <div class="box box2">Box #2</div>
       </div>
+      <!-- This box is centered in the section. -->
       <div class="box box3">Box #3</div>
     </section>
   </body>
@@ -727,9 +728,7 @@ The table below demonstrates combinations of
 The `justify-content` values appear in the column headings
 and the `align-items` values appear in the row headings.
 
-<img alt="grid layout" style="width: 100%"
-  src="/blog/assets/css-grid-layout.png?v={{pkg.version}}"
-  title="grid layout">
+{% include "_grid-layout.html" %}
 
 ```html
 <!DOCTYPE html>
@@ -789,23 +788,109 @@ and the `align-items` values appear in the row headings.
 ### inline-block
 
 The default value of the CSS `display` property for many HTML elements,
-including `div`, is "block".
+including `div`, is `block`.
 This prevents them from appearing on the same "row" as other elements,
 unless flex or grid layout is specified for the parent element.
 Another way to allow multiple block elements to appear on the same row
-is to set the CSS `display` property to "inline-block".
+is to set the CSS `display` property to `inline-block`.
 
-### pointer-events
+### pointer-events and appearance
 
-To enable clicking an element that is behind another in `z-index`,
-set the `pointer-events` CSS property of the top element to `none`.
-TODO: Need an example of when this is useful.
+The CSS property `pointer-events` can be set to `none`
+so that click events pass through an element to
+elements that are behind it in stacking order or `z-index`.
 
-### appearance
+The CSS property `appearance`, along with vendor prefix variants,
+can be set to `none` to disable the default rendering for form controls
+such as `button`, `input`, `textarea`, and `select`.
+Other CSS properties can then be used to provide custom rendering
+while retaining the functionality of the underlying form control.
 
-To take control of how a form control is rendered
-set the `appearance` CSS property to `none`.
-TODO: Add example of a custom checkbox?
+The following example uses both of these on a `select` element.
+The goal is to control the size and color of the
+downward pointing triangle on the right side of the `select`.
+
+{% include "_pointer-events.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      .select-wrapper {
+        --color: blue;
+        display: inline-block;
+        position: relative;
+      }
+
+      /* The ::after pseudo selector doesn't work on select elements,
+         but it does work on div elements. */
+      .select-wrapper::after {
+        content: '▼';
+        color: var(--color);
+        font-size: 1.2rem;
+
+        /* Position this over the small triangle
+           provided by the select element.
+           If appearance is set to none on the select,
+           no small triangle will be rendered. */
+        position: absolute;
+        right: 2px;
+        top: 6px;
+
+        /* When this is clicked, allow the click to be processed
+           by the select element, not this triangle. */
+        pointer-events: none;
+      }
+
+      select {
+        margin-left: 0.5rem;
+        width: 5rem;
+
+        /* This works in Chrome and Firefox, but Safari ignores it. */
+        padding: 0.5rem;
+
+        /* To get this to look nice in all the browsers, including Safari,
+           we can just draw it ourselves. */
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        border: 1px solid var(--color);
+        border-radius: 0; /* Safari has a non-zero default border radius. */
+      }
+    </style>
+    <script>
+      const prompt = 'Select a color.';
+      window.onload = () => {
+        const report = document.getElementById('report');
+        report.textContent = prompt;
+
+        const select = document.getElementById('color-select');
+        select.addEventListener('change', event => {
+          const {value} = event.target;
+          report.textContent = value ? `You selected ${value}.` : prompt;
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <section>
+      <label for="color-select">Color</label>
+      <div class="select-wrapper">
+        <select id="color-select">
+          <option></option>
+          <option>Red</option>
+          <option>Green</option>
+          <option>Blue</option>
+        </select>
+      </div>
+      <p id="report"></p>
+    </section>
+  </body>
+</html>
+```
 
 ### Selectors
 
@@ -1072,7 +1157,7 @@ if (total >= 100) {
   return false;
 }
 
-// Better
+// Only slightly better.
 return total >= 100 ? true : false;
 
 // Best
@@ -1098,7 +1183,7 @@ if (temperature &lt;= 32) {
 
 // This uses nested ternaries to achieve the same result.
 // It's not confusing when formatted nicely.
-let assessment =
+const assessment =
   temperature &lt;= 32 ? 'cold' :
   temperature &lt;= 80 ? 'mild' :
   'hot';

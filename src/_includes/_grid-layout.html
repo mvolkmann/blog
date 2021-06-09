@@ -1,0 +1,45 @@
+<style>
+  #grid-layout-demo {
+    --footer-height: 3rem;
+    --header-height: 5rem;
+    --nav-width: 10rem;
+
+    display: grid;
+    grid-template-columns: var(--nav-width) 1fr;
+    grid-template-rows: var(--header-height) 1fr var(--footer-height);
+    grid-template-areas:
+      'header header'
+      'nav main'
+      'footer footer';
+
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+  }
+
+  #grid-layout-demo footer {
+    grid-area: footer;
+    background-color: lightgreen;
+  }
+
+  #grid-layout-demo header {
+    grid-area: header;
+    background-color: orange;
+  }
+
+  #grid-layout-demo main {
+    grid-area: main;
+    background-color: lightblue;
+  }
+
+  #grid-layout-demo nav {
+    grid-area: nav;
+    background-color: lightcoral;
+  }
+</style>
+<section id="grid-layout-demo">
+  <header>This is the header.</header>
+  <nav>This is the nav.</nav>
+  <main>This is the main area.</main>
+  <footer>This is the footer.</footer>
+</section>
