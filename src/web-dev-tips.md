@@ -1146,6 +1146,21 @@ values of those CSS variables with the values to be used in dark mode.
 position fixed and position sticky
 Show example of a table where thead is sticky.
 
+### Vendor prefixes
+
+Some CSS properties require "vendor prefixes" that indicate they are
+vendor-specific extensions or are considered experimental.
+Vendor prefixes include `-moz-` for Firefox,
+`-ms-` for Internet Explorer and Edge, and
+`-webkit-` for Chrome and Safari.
+
+Overtime the need for these prefixes has diminished,
+but many CSS properties still require them.
+For a list of CSS properties that still require vendor prefixes in 2021,
+see the section "Prefixing in 2021 in this {% aTargetBlank
+"https://css-tricks.com/is-vendor-prefixing-dead/#prefixing-in-2021",
+"CSS Tricks article" %}.
+
 ### CSS linting
 
 The {% aTargetBlank "https://stylelint.io", "stylelint" %} linter
