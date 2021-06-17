@@ -1146,6 +1146,37 @@ values of those CSS variables with the values to be used in dark mode.
 position fixed and position sticky
 Show example of a table where thead is sticky.
 
+### CSS linting
+
+The {% aTargetBlank "https://stylelint.io", "stylelint" %} linter
+is a great option for detecting errors and formatting issues
+in CSS and Sass syntax.
+It can validate CSS rules found in many file types including
+CSS, HTML, JavaScript, Markdown, PostCSS, Sass, Svelte, TypeScript, and Vue.
+
+To add this to a project:
+
+1. cd to the root directory of the project.
+1. Enter `npm install -D stylelint stylelint-config-standard`.
+1. Create the file `.stylelintrc.json` containing the following:
+
+   ```json
+   {
+     "extends": "stylelint-config-standard"
+   }
+   ```
+
+To run stylelint, enter `npx stylelint **/*.css` in the root project directory.
+Alternatively, add a script like the following in the `package.json` file
+and run it by entering `npm run stylelint`:
+
+```json
+"stylelint": "stylelint **/*.{css,svelte}"
+```
+
+There is a VS Code extension for stylelint (stylelint.vscode-stylelint)
+that automatically validates CSS and identifies issues.
+
 ## JavaScript
 
 ### Embrace booleans
