@@ -1167,7 +1167,8 @@ To add this to a project:
    ```
 
 To run stylelint, enter `npx stylelint **/*.css` in the root project directory.
-Alternatively, add a script like the following in the `package.json` file
+Any number of glob patterns can be specified to process multiple file types.
+Alternatively, add an npm script like the following in the `package.json` file
 and run it by entering `npm run stylelint`:
 
 ```json
