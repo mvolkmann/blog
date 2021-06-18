@@ -1059,6 +1059,28 @@ see the section "Prefixing in 2021 in this {% aTargetBlank
 "https://css-tricks.com/is-vendor-prefixing-dead/#prefixing-in-2021",
 "CSS Tricks article" %}.
 
+It is not necessary to manually write CSS properties with vendor prefixes.
+Tools such as {% aTargetBlank "https://postcss.org", "PostCSS" %} and
+{% aTargetBlank "https://sass-lang.com", "Sass" %} can generate these for you.
+Here are the steps to setup and use PostCSS to do this:
+
+1. For projects that do not have a `package.json` file,
+   create one by entering `npm init` and answering the questions it asks.
+1. Enter `npm install -D postcss postcss-cli autoprefixer`
+1. Add the following npm script in `package.json`:
+
+   ```json
+   "postcss": "postcss --use autoprefixer --dir build src/**/*.css"
+   ```
+
+1. Enter `npm run postcss` to generate new CSS files in the `build` directory.
+1. Use the CSS files in the `build` directory
+   instead of those in the `src` directory.
+
+The `autoprefixer` npm package is one of many plugins available for PostCSS.
+Others include `postcss-preset-env`, `postcss-sorting`, `stylelint`,
+and many more.
+
 ### CSS linting
 
 The {% aTargetBlank "https://stylelint.io", "stylelint" %} linter
