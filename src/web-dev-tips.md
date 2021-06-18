@@ -1696,6 +1696,223 @@ It produces similar output to the SVG example above.
 </html>
 ```
 
+## Intl
+
+The ECMAScript Internationalization API defines the `Intl` namespace
+which defines constructor functions and associated methods for
+"language sensitive string comparison,
+number formatting, and date and time formatting."
+A locale can optionally be passed to the constructor functions.
+If no locale is specified, the browser default locale is used.
+
+This section provides examples of the most commonly used features.
+
+### Intl.Collator
+
+This constructor function returns an object with a `compare` function that
+is suitable for use as a comparator function for the `Array` `sort` method.
+
+```js
+const names = ['Mark', 'Tami', 'Amanda', 'Jeremy', 'mark'];
+const options = {caseFirst: 'upper'};
+const collator = new Intl.Collator([], options);
+names.sort(collator.compare);
+console.log('names =', names);
+// ["Amanda", "Jeremy", "Mark", "mark", "Tami"]
+```
+
+### Intl.DateTimeFormat
+
+This constructor function returns an object with a `format` method
+that can be passed a date object or a number of milliseconds since the epoch.
+The constructor takes an options object which supports many options.
+The most commonly used options are:
+
+- `dateStyle`: values are `full`, `long`, `medium`, and `short` (default)
+- `timeStyle`: values are `full`, `long`, `medium`, and `short` (no default value)
+- `hour12`: values are `true` (default) and `false`
+
+To output only the date, do not specify a value for the `timeStyle` option.
+To output only the time, do not specify `dateStyle` and do specify `timeStyle`.
+To output both, specify both `dateStyle` and `timeStyle`.
+
+```js
+let formatter = new Intl.DateTimeFormat();
+const date = new Date(1961, 3, 16, 14, 19, 37);
+console.log(formatter.format(date)); // 4/16/1961
+
+formatter = new Intl.DateTimeFormat(locales, {
+  dateStyle: 'short',
+  timeStyle: 'short'
+});
+console.log(formatter.format(date)); // 4/16/61 2:19 PM
+
+const dateStyles = ['full', 'long', 'medium', 'short'];
+for (const dateStyle of dateStyles) {
+  formatter = new Intl.DateTimeFormat(locales, {dateStyle});
+  console.log(formatter.format(date));
+}
+// full -> Sunday, April 16, 1961
+// long -> April 16, 1961
+// medium -> Apr 16, 1961
+// short (default) -> 4/16/61
+
+const timeStyles = ['full', 'long', 'medium', 'short'];
+for (const timeStyle of timeStyles) {
+  formatter = new Intl.DateTimeFormat(locales, {timeStyle});
+  console.log(formatter.format(date));
+}
+// full -> 2:19:37 PM GMT-06:00
+// long -> 2:19:37 PM GMT-6
+// medium -> 2:19:37 PM
+// short -> 2:19 PM
+```
+
+Custom formats can specify the parts that are present
+and their formatting, but not their order or punctuation.
+Implementations are only required to
+support specific subsets of the following options.
+
+- `weekday`: values are `long` (Thursday; default), `short` (Thu), and `narrow` (T)
+- `year`: values are `numeric` (1961) and `2-digit` (61)
+- `month`: values are `numeric` (2), `2-digit` (02), `long` (March),
+  `short` (Mar), and `narrow` (M)
+- `day`, `hour`, `minute`, and `second`: values are `numeric` (7) and `2-digit` (07)
+
+```js
+formatter = new Intl.DateTimeFormat(locales, {
+  weekday: 'short',
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+});
+console.log('custom =', formatter.format(date)); // Sun, Apr 16, 1961
+```
+
+### Intl.DisplayNames
+
+This constructor function returns an object with an `of` method.
+One use is to pass a region identifier and obtain the region name.
+
+```js
+const displayNames = new Intl.DisplayNames('en', {type: 'region'});
+const regions = ['AU', 'CA', 'FR', 'GB', 'US'];
+for (const region of regions) {
+  console.log(region, '=', displayNames.of(region));
+}
+// AU = Australia
+// CA = Canada
+// FR = France
+// GB = United Kingdom
+// US = United States
+```
+
+### Intl.ListFormat
+
+This constructor function returns an object with a `format` method
+that takes an array of strings and returns a string
+that is a specific concatenation of the values.
+
+```js
+const colors = ['red', 'green', 'blue'];
+let formatter = new Intl.ListFormat('en', {
+  style: 'long',
+  type: 'conjunction'
+});
+console.log(formatter.format(colors)); // red, green, and blue
+formatter = new Intl.ListFormat('en', {
+  style: 'long',
+  type: 'disjunction'
+});
+console.log(formatter.format(colors)); // red, green, or blue
+```
+
+### Intl.NumberFormat
+
+This constructor function returns an object with a `format` method
+that takes a number and returns a formatted string.
+It supports many options. The most commonly used options are:
+
+- `currency`: currency identifier such as `USD` or `EUR`
+- `currencyDisplay`: `symbol`, `narrowSymbol`, `code`, or `name`
+- `notation`: `standard`, `scientific`, `engineering`, or `compact`
+- `signDisplay`: `auto`, `never`, `always`, or `exceptZero`
+- `style`: `decimal`, `currency`, `percent`, or `unit`
+- `unit`: many options including `day`, `degree`, `gigabyte`, `hour`, and `meter`
+- `unitDisplay`: `long`, `short`, or `narrow`
+
+```js
+formatter = new Intl.NumberFormat();
+console.log(formatter.format(1234567)); // 1,234,567
+
+formatter = new Intl.NumberFormat('en', {style: 'percent'});
+console.log(formatter.format(0.19)); // 19%
+
+const currencyDisplays = ['symbol', 'narrowSymbol', 'code', 'name'];
+for (const currencyDisplay of currencyDisplays) {
+  formatter = new Intl.NumberFormat('en', {
+    style: 'currency',
+    currency: 'USD',
+    currencyDisplay
+  });
+  console.log(currencyDisplay, '=', formatter.format(1234.56));
+}
+// symbol = $1,234.56
+// narrowSymbol = $1,234.56
+// code = USD 1,234.56
+// name = 1,234.56 US dollars
+
+const units = ['day', 'degree', 'gigabyte', 'hour', 'meter'];
+const unitDisplays = ['long', 'short', 'narrow'];
+for (const unit of units) {
+  for (const unitDisplay of unitDisplays) {
+    formatter = new Intl.NumberFormat('en', {
+      style: 'unit',
+      unit,
+      unitDisplay
+    });
+    console.log(unit, unitDisplay, '=', formatter.format(1234));
+  }
+}
+// day long = 1,234 days
+// day short = 1,234 days
+// day narrow = 1,234d
+// degree long = 1,234 degrees
+// degree short = 1,234 deg
+// degree narrow = 1,234°
+// gigabyte long = 1,234 gigabytes
+// gigabyte short = 1,234 GB
+// gigabyte narrow = 1,234GB
+// hour long = 1,234 hours
+// hour short = 1,234 hr
+// hour narrow = 1,234h
+// meter long = 1,234 meters
+// meter short = 1,234 m
+// meter narrow = 1,234m
+```
+
+### Intl.RelativeTimeFormat
+
+This constructor function returns an object with a `format` method
+that takes a numeric value and a unit name.
+The most commonly used options are:
+
+- `numeric`: `always` (default) or `auto` (seems best)
+- `style`: `long` (default), `short`, or `narrow`
+
+```js
+const formatter = new Intl.RelativeTimeFormat('en', {numeric: 'auto'});
+const values = [-2, -1, 0, 1, 2];
+for (const value of values) {
+  console.log(value, '=', formatter.format(value, 'month'));
+}
+// -2 = 2 months ago
+// -1 = last month
+// 0 = this month
+// 1 = next month
+// 2 = in 2 months
+```
+
 ## Node
 
 ### npm scripts
