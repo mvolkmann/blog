@@ -1894,7 +1894,7 @@ for (const unit of units) {
 ### Intl.RelativeTimeFormat
 
 This constructor function returns an object with a `format` method
-that takes a numeric value and a unit name.
+that takes a numeric value and a unit name such as `day` or `month`.
 The most commonly used options are:
 
 - `numeric`: `always` (default) or `auto` (seems best)
@@ -1903,6 +1903,16 @@ The most commonly used options are:
 ```js
 const formatter = new Intl.RelativeTimeFormat('en', {numeric: 'auto'});
 const values = [-2, -1, 0, 1, 2];
+
+for (const value of values) {
+  console.log(value, '=', formatter.format(value, 'day'));
+}
+// -2 = 2 days ago
+// -1 = yesterday
+// 0 = today
+// 1 = tomorrow
+// 2 = in 2 days
+
 for (const value of values) {
   console.log(value, '=', formatter.format(value, 'month'));
 }
