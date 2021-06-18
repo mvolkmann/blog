@@ -195,108 +195,6 @@ which causes the matching values "green" and "orange" to be suggested.
 
 {% endraw %}
 
-## SVG
-
-SVG is a markup language for drawing and rendering text and images.
-The basics steps to use SVG are:
-
-- Start with `<svg viewBox="0 0 maxX maxY" xmlns="http://www.w3.org/2000/svg">`.
-  The `viewBox` defines the coordinate system.
-  Replace `maxX` and `maxY` with the maximum values in those dimensions.
-  The minimum values do not have to be zero, but those are common values.
-- Include child elements for rendering specific kinds of things.
-  Commonly used elements include:
-
-  - `circle`
-  - `ellipse`
-  - `image`
-  - `line`
-  - `path`
-  - `polygon`
-  - `polyline`
-  - `rect`
-  - `text` and `tspan`
-
-- Wrap a `g` element around groups of children
-  that need to be positioned or manipulated as a group.
-- End with `</svg>`.
-- Add a CSS rule for the `svg` element
-  that defines its actual `width` and `height`.
-
-The color of lines, paths, and shapes can be specified
-using the CSS `stroke`, `stroke-width`, and `fill` properties.
-
-The following example demonstrates all the commonly used SVG elements.
-
-{% include "_svg.html" %}
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Demo</title>
-    <style>
-      svg {
-        height: 230px;
-        width: 180px;
-      }
-      svg > * {
-        stroke-width: 8px;
-      }
-      circle {
-        fill: pink;
-        stroke: red;
-      }
-      ellipse {
-        fill: lightgreen;
-        stroke: green;
-      }
-      line {
-        stroke: blue;
-        stroke-linecap: round;
-      }
-      path {
-        fill: none;
-        stroke: orange;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      polygon {
-        fill: lightblue;
-        stroke: purple;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-      }
-      rect {
-        fill: lightblue;
-        stroke: blue;
-      }
-      text {
-        fill: blue;
-      }
-    </style>
-  </head>
-  <body>
-    <section id="svg-demo">
-      <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="30" cy="30" r="25" />
-        <ellipse cx="120" cy="30" rx="50" ry="25" />
-        <image x="0" y="60" width="50" height="50" href="./duck.png" />
-        <line x1="60" y1="60" x2="170" y2="100" />
-        <path d="M 10,120 L 70,160 L 70,120" />
-        <polygon points="90,120 160,160 160,120" />
-        <rect x="5" y="170" width="80" height="50" rx="10" />
-        <text x="95" y="180">
-          <tspan>Hello</tspan>
-          <tspan x="95" dy="15">World!</tspan>
-        </text>
-      </svg>
-    </section>
-  </body>
-</html>
-```
-
 ## CSS
 
 ### Size Units
@@ -1554,6 +1452,246 @@ gets the bounding rectangle of the div and outputs its properties.
         */
       };
     </script>
+  </body>
+</html>
+```
+
+## Drawing
+
+Both SVG and the Canvas API can be used to draw things on a web page.
+
+SVG stands for "Scalable Vector Graphics".
+It is a markup language similar to HTML which makes it declarative.
+You tell it what to draw, not how to draw it.
+SVG elements appear in the DOM.
+It draws using vectors which allows it to draw sharp images at nearly any size.
+SVG is a great choice for rendering icons.
+
+The Canvas API draws on a `canvas` element using a JavaScript API
+which makes it imperative. You tell it how to draw.
+The Canvas API is a great choice for implementing games.
+
+For everything in between rendering icons and implementing games,
+the choice is less clear.
+For many developers SVG is the default choice until
+they need to do something that performs poorly when using SVG.
+
+### SVG
+
+The basics steps to use SVG are:
+
+1. Start with `<svg viewBox="0 0 maxX maxY" xmlns="http://www.w3.org/2000/svg">`.
+   The `viewBox` defines the coordinate system.
+   Replace `maxX` and `maxY` with the maximum values in those dimensions.
+   The minimum values do not have to be zero, but those are common values.
+1. Include child elements for rendering specific kinds of things.
+   Commonly used elements include:
+
+   - `circle`
+   - `ellipse`
+   - `image`
+   - `line`
+   - `path`
+   - `polygon`
+   - `polyline`
+   - `rect`
+   - `text` and `tspan`
+
+1. Wrap a `g` element around groups of children
+   that need to be positioned or manipulated as a group.
+1. End with `</svg>`.
+1. Add a CSS rule for the `svg` element
+   that defines its actual `width` and `height`.
+
+The color of lines, paths, and shapes can be specified
+using the CSS `stroke`, `stroke-width`, and `fill` properties.
+
+The following example demonstrates all the commonly used SVG elements.
+
+{% include "_svg.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      svg {
+        height: 230px;
+        width: 180px;
+      }
+      svg > * {
+        stroke-width: 8px;
+      }
+      circle {
+        fill: pink;
+        stroke: red;
+      }
+      ellipse {
+        fill: lightgreen;
+        stroke: green;
+      }
+      line {
+        stroke: blue;
+        stroke-linecap: round;
+      }
+      path {
+        fill: none;
+        stroke: orange;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      polygon {
+        fill: lightblue;
+        stroke: purple;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      rect {
+        fill: lightblue;
+        stroke: blue;
+      }
+      text {
+        fill: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="svg-demo">
+      <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="30" r="25" />
+        <ellipse cx="120" cy="30" rx="50" ry="25" />
+        <image x="0" y="60" width="50" height="50" href="./duck.png" />
+        <line x1="60" y1="60" x2="170" y2="100" />
+        <path d="M 10,120 L 70,160 L 70,120" />
+        <polygon points="90,120 160,160 160,120" />
+        <rect x="5" y="170" width="80" height="50" rx="10" />
+        <text x="95" y="180">
+          <tspan>Hello</tspan>
+          <tspan x="95" dy="15">World!</tspan>
+        </text>
+      </svg>
+    </section>
+  </body>
+</html>
+```
+
+### Canvas
+
+The basics steps to use the Canvas API are:
+
+1. Create a `canvas` element.
+1. Get a reference to the `canvas` DOM element.
+1. Get a context object from the `canvas` DOM element.
+1. Call methods on the context object to specify styling,
+   draw paths, and fill paths.
+1. Call the context `beginPath` method to start a new path.
+   This avoids drawing a line from the end of the previous path.
+
+The following example demonstrates all the commonly used
+`CanvasRenderingContext2D` methods.
+It produces similar output to the SVG example above.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <script>
+      const TWO_PI = 2 * Math.PI;
+
+      window.onload = () => {
+        const canvas = document.getElementById('my-canvas');
+        const ctx = canvas.getContext('2d');
+
+        ctx.lineWidth = 8;
+
+        // Circle
+        // ctx.arc arguments are centerX, centerY, radius,
+        // startAngle, endAngle, and counterClockwise (defaults to false).
+        ctx.arc(30, 30, 25, 0, 2 * TWO_PI);
+        ctx.fillStyle = 'pink';
+        ctx.fill();
+        ctx.strokeStyle = 'red';
+        ctx.stroke();
+
+        // Ellipse
+        ctx.beginPath();
+        // ctx.ellipse arguments are centerX, centerY, radiusX, radiusY,
+        // rotation, startAngle, endAngle, and
+        // counterClockwise (defaults to false).
+        ctx.ellipse(120, 30, 50, 25, 0, 0, TWO_PI);
+        ctx.fillStyle = 'lightgreen';
+        ctx.fill();
+        ctx.strokeStyle = 'green';
+        ctx.stroke();
+
+        // Image
+        // ctx.drawImage arguments are image, x, y, width, and height.
+        const image = document.getElementById('duck');
+        ctx.drawImage(image, 0, 60, 50, 50);
+
+        // Line
+        ctx.beginPath();
+        ctx.moveTo(60, 60);
+        ctx.lineTo(170, 100);
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'blue';
+        ctx.stroke();
+
+        // Path
+        ctx.beginPath();
+        ctx.moveTo(10, 120);
+        ctx.lineTo(70, 160);
+        ctx.lineTo(70, 120);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = 'orange';
+        ctx.stroke();
+
+        // Polygon
+        ctx.beginPath();
+        ctx.moveTo(90, 120);
+        ctx.lineTo(160, 160);
+        ctx.lineTo(160, 120);
+        ctx.closePath();
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = 16; // Why must this be doubled?
+        ctx.strokeStyle = 'purple';
+        ctx.stroke();
+        ctx.fillStyle = 'lightblue';
+        ctx.fill();
+
+        // Rectangle
+        ctx.beginPath();
+        ctx.fillStyle = 'lightblue';
+        // ctx.fillRect arguments are image, x, y, width, and height.
+        const args = [5, 170, 80, 50];
+        ctx.fillRect(...args);
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 8;
+        ctx.strokeRect(...args);
+        // To get rounded corners, use the polygon approach above.
+
+        // Text
+        ctx.font = '18px sans-serif';
+        ctx.lineWidth = 1;
+        ctx.fillStyle = 'blue';
+        const x = 95;
+        const y = 180;
+        ctx.fillText('Hello', x, y);
+        ctx.fillText('World!', x, y + 15);
+      };
+    </script>
+  </head>
+  <body>
+    <section id="svg-demo">
+      <canvas id="my-canvas" width="180" height="230" />
+      <img id="duck" src="./duck.png" width="50" height="50" />
+    </section>
   </body>
 </html>
 ```
