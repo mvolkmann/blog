@@ -1,0 +1,45 @@
+<style>
+  body {
+    --bg-color: white;
+    --fg-color: purple;
+  }
+
+  body.dark-mode {
+    --bg-color: purple;
+    --fg-color: white;
+  }
+
+  #prefers-color-scheme-demo {
+    background-color: var(--bg-color);
+    border: 1px solid gray;
+    color: var(--fg-color);
+    padding: 0 1rem 1rem 1rem;
+  }
+</style>
+
+<section id="prefers-color-scheme-demo">
+  <p>Try changing the light/dark preference in your operating system.</p>
+  <p>
+    In macOS, open System Preferences and select "General". After "Appearance",
+    select "Light" or "Dark".
+  </p>
+  <p>
+    In Windows, select Start...Settings...Personalization...Colors. Under
+    "Choose your color", select "Light" or "Dark".
+  </p>
+  <button>Toggle Light/Dark Mode</button>
+</section>
+
+<script>
+  // Get the light/dark preference from operating system (OS)
+  // and use it for the initial setting.
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) document.body.classList.add('dark-mode');
+
+  // Allow the user switch modes without modifying the OS setting.
+  const toggleBtn = document.querySelector('#prefers-color-scheme-demo button');
+  console.log('_prefers-color-scheme.html x: toggleBtn =', toggleBtn);
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+  });
+</script>

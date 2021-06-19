@@ -1,0 +1,33 @@
+<style>
+  #media-queries-demo .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #media-queries-demo .container > div {
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  @media (max-width: 700px) {
+    #media-queries-demo .container {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    #media-queries-demo .container > div {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+<div id="media-queries-demo">
+  <div class="container">
+    <div id="first">First</div>
+    <div id="second">Second</div>
+    <div id="third">Third</div>
+    <div id="fourth">Fourth</div>
+  </div>
+</div>

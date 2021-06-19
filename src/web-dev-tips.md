@@ -1318,7 +1318,53 @@ but flashes a bit in Safari making the effect feel less polished.
 CSS media queries have many uses, but the most common is to
 apply different CSS properties based on the window width.
 
-TODO: Add an example the demonstrates a responsive app.
+The following example lays out elements
+horizontally when the browser window is wider than 700 pixels
+and vertically otherwise.
+
+{% include "_media-queries.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .container > div {
+        border: 1px solid gray;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        padding: 1rem;
+      }
+
+      @media (max-width: 700px) {
+        .container {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .container > div {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="first">First</div>
+      <div id="second">Second</div>
+      <div id="third">Third</div>
+      <div id="fourth">Fourth</div>
+    </div>
+  </body>
+</html>
+```
 
 ### window.matchMedia
 
@@ -1333,12 +1379,68 @@ const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 ```
 
 This can then be used to add a CSS class name such as "dark-mode"
-to the body element.
+to the `body` element.
 
 CSS for the `body` element can define CSS variables
 that specify colors to be used in light mode.
 A separate rule with the selector `body.dark-mode` can override the
 values of those CSS variables with the values to be used in dark mode.
+The following example demonstrates this.
+
+{% include "_prefers-color-scheme.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      body {
+        --bg-color: white;
+        --fg-color: purple;
+
+        background-color: var(--bg-color);
+        color: var(--fg-color);
+        padding: 0 1rem 1rem 1rem;
+      }
+
+      body.dark-mode {
+        --bg-color: purple;
+        --fg-color: white;
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        // Get the light/dark preference from operating system (OS)
+        // and use it for the initial setting.
+        const prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        ).matches;
+        if (prefersDark) document.body.classList.add('dark-mode');
+
+        // Allow the user switch modes without modifying the OS setting.
+        const toggleBtn = document.getElementById('toggle-btn');
+        toggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('dark-mode');
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <p>Try changing the light/dark preference in your operating system.</p>
+    <p>
+      In macOS, open System Preferences and select "General". After
+      "Appearance", select "Light" or "Dark".
+    </p>
+    <p>
+      In Windows, select Start...Settings...Personalization...Colors. Under
+      "Choose your color", select "Light" or "Dark".
+    </p>
+    <button id="toggle-btn">Toggle Light/Dark Mode</button>
+  </body>
+</html>
+```
 
 ### Viewport units
 
