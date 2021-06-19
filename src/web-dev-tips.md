@@ -1056,6 +1056,59 @@ If none is found then it is relative to the browser window.
 Positioning is specified using the CSS properties
 `top`, `bottom`, `left` and `right`.
 
+{% include "_position.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      #position-demo {
+        display: inline-block;
+        border: 1px solid black;
+        height: 5rem;
+        width: 8rem;
+        position: relative;
+      }
+
+      #position-demo > div {
+        position: absolute;
+      }
+
+      #first {
+        top: 0;
+        left: 0;
+      }
+
+      #second {
+        top: 0;
+        right: 0;
+      }
+
+      #third {
+        bottom: 0;
+        left: 0;
+      }
+
+      #fourth {
+        bottom: 0;
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="position-demo">
+      <div id="first">First</div>
+      <div id="second">Second</div>
+      <div id="third">Third</div>
+      <div id="fourth">Fourth</div>
+    </div>
+  </body>
+</html>
+```
+
 ### CSS transitions
 
 A CSS transition causes a change to specific CSS properties

@@ -1,0 +1,40 @@
+<style>
+  #position-demo {
+    display: inline-block;
+    border: 1px solid black;
+    height: 5rem;
+    width: 8rem;
+    position: relative;
+  }
+
+  #position-demo > div {
+    position: absolute;
+  }
+
+  #first {
+    top: 0;
+    left: 0;
+  }
+
+  #second {
+    top: 0;
+    right: 0;
+  }
+
+  #third {
+    bottom: 0;
+    left: 0;
+  }
+
+  #fourth {
+    bottom: 0;
+    right: 0;
+  }
+</style>
+
+<div id="position-demo">
+  <div id="first">First</div>
+  <div id="second">Second</div>
+  <div id="third">Third</div>
+  <div id="fourth">Fourth</div>
+</div>
