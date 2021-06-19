@@ -1,90 +1,90 @@
 <section id="canvas-demo">
   <canvas id="my-canvas" width="180" height="230" />
   <img id="duck" src="/blog/assets/duck.png" width="50" height="50" />
-
-  <script>
-    const TWO_PI = 2 * Math.PI;
-
-    const canvas = document.getElementById('my-canvas');
-    const ctx = canvas.getContext('2d');
-
-    ctx.lineWidth = 8;
-
-    // Circle
-    // ctx.arc arguments are centerX, centerY, radius,
-    // startAngle, endAngle, and counterClockwise (defaults to false).
-    ctx.arc(30, 30, 25, 0, 2 * TWO_PI);
-    ctx.fillStyle = 'pink';
-    ctx.fill();
-    ctx.strokeStyle = 'red';
-    ctx.stroke();
-
-    // Ellipse
-    ctx.beginPath();
-    // ctx.ellipse arguments are centerX, centerY, radiusX, radiusY,
-    // rotation, startAngle, endAngle, and
-    // counterClockwise (defaults to false).
-    ctx.ellipse(120, 30, 50, 25, 0, 0, TWO_PI);
-    ctx.fillStyle = 'lightgreen';
-    ctx.fill();
-    ctx.strokeStyle = 'green';
-    ctx.stroke();
-
-    // Image
-    // ctx.drawImage arguments are image, x, y, width, and height.
-    const image = document.getElementById('duck');
-    ctx.drawImage(image, 0, 60, 50, 50);
-
-    // Line
-    ctx.beginPath();
-    ctx.moveTo(60, 60);
-    ctx.lineTo(170, 100);
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = 'blue';
-    ctx.stroke();
-
-    // Path
-    ctx.beginPath();
-    ctx.moveTo(10, 120);
-    ctx.lineTo(70, 160);
-    ctx.lineTo(70, 120);
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.strokeStyle = 'orange';
-    ctx.stroke();
-
-    // Polygon
-    ctx.beginPath();
-    ctx.moveTo(90, 120);
-    ctx.lineTo(160, 160);
-    ctx.lineTo(160, 120);
-    ctx.closePath();
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.lineWidth = 16; // Why must this be doubled?
-    ctx.strokeStyle = 'purple';
-    ctx.stroke();
-    ctx.fillStyle = 'lightblue';
-    ctx.fill();
-
-    // Rectangle
-    ctx.beginPath();
-    ctx.fillStyle = 'lightblue';
-    // ctx.fillRect arguments are image, x, y, width, and height.
-    const args = [5, 170, 80, 50];
-    ctx.fillRect(...args);
-    ctx.strokeStyle = 'blue';
-    ctx.lineWidth = 8;
-    ctx.strokeRect(...args);
-    // To get rounded corners, use the polygon approach above.
-
-    // Text
-    ctx.font = '18px sans-serif';
-    ctx.lineWidth = 1;
-    ctx.fillStyle = 'blue';
-    const x = 95;
-    const y = 180;
-    ctx.fillText('Hello', x, y);
-    ctx.fillText('World!', x, y + 15);
-  </script>
 </section>
+
+<script>
+  const TWO_PI = 2 * Math.PI;
+
+  const canvas = document.getElementById('my-canvas');
+  const ctx = canvas.getContext('2d');
+
+  ctx.lineWidth = 8;
+
+  // Circle
+  // ctx.arc arguments are centerX, centerY, radius,
+  // startAngle, endAngle, and counterClockwise (defaults to false).
+  ctx.arc(30, 30, 25, 0, 2 * TWO_PI);
+  ctx.fillStyle = 'pink';
+  ctx.fill();
+  ctx.strokeStyle = 'red';
+  ctx.stroke();
+
+  // Ellipse
+  ctx.beginPath();
+  // ctx.ellipse arguments are centerX, centerY, radiusX, radiusY,
+  // rotation, startAngle, endAngle, and
+  // counterClockwise (defaults to false).
+  ctx.ellipse(120, 30, 50, 25, 0, 0, TWO_PI);
+  ctx.fillStyle = 'lightgreen';
+  ctx.fill();
+  ctx.strokeStyle = 'green';
+  ctx.stroke();
+
+  // Image
+  // ctx.drawImage arguments are image, x, y, width, and height.
+  const image = document.getElementById('duck');
+  ctx.drawImage(image, 0, 60, 50, 50);
+
+  // Line
+  ctx.beginPath();
+  ctx.moveTo(60, 60);
+  ctx.lineTo(170, 100);
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = 'blue';
+  ctx.stroke();
+
+  // Path
+  ctx.beginPath();
+  ctx.moveTo(10, 120);
+  ctx.lineTo(70, 160);
+  ctx.lineTo(70, 120);
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.strokeStyle = 'orange';
+  ctx.stroke();
+
+  // Polygon
+  ctx.beginPath();
+  ctx.moveTo(90, 120);
+  ctx.lineTo(160, 160);
+  ctx.lineTo(160, 120);
+  ctx.closePath();
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = 16; // Why must this be doubled?
+  ctx.strokeStyle = 'purple';
+  ctx.stroke();
+  ctx.fillStyle = 'lightblue';
+  ctx.fill();
+
+  // Rectangle
+  ctx.beginPath();
+  ctx.fillStyle = 'lightblue';
+  // ctx.fillRect arguments are image, x, y, width, and height.
+  const args = [5, 170, 80, 50];
+  ctx.fillRect(...args);
+  ctx.strokeStyle = 'blue';
+  ctx.lineWidth = 8;
+  ctx.strokeRect(...args);
+  // To get rounded corners, use the polygon approach above.
+
+  // Text
+  ctx.font = '18px sans-serif';
+  ctx.lineWidth = 1;
+  ctx.fillStyle = 'blue';
+  const x = 95;
+  const y = 180;
+  ctx.fillText('Hello', x, y);
+  ctx.fillText('World!', x, y + 15);
+</script>
