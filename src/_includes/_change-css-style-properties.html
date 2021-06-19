@@ -1,0 +1,21 @@
+<style>
+  #change-css-style-properties-demo .greeting {
+    color: red;
+  }
+</style>
+
+<section id="change-css-style-properties-demo">
+  <p class="greeting">Hello, World!</p>
+  <button class="toggle-btn">Toggle Color</button>
+</section>
+
+<script>
+  const root = document.getElementById('change-css-style-properties-demo');
+  const greeting = root.querySelector('.greeting');
+  const toggleBtn3 = root.querySelector('.toggle-btn');
+  toggleBtn3.onclick = () => {
+    // This is initially unset, not populated from the style tag.
+    const {color} = greeting.style;
+    greeting.style.color = color === 'blue' ? 'red' : 'blue';
+  };
+</script>

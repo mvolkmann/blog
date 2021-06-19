@@ -1,0 +1,23 @@
+<style>
+  #change-css-variable-demo p {
+    --color: red;
+    color: var(--color);
+  }
+</style>
+
+<section id="change-css-variable-demo">
+  <p class="greeting">Hello, World!</p>
+  <button class="toggle-btn">Toggle Color</button>
+</section>
+
+<script>
+  const root2 = document.getElementById('change-css-variable-demo');
+  const greeting2 = root2.querySelector('.greeting');
+  const toggleBtn2 = root2.querySelector('.toggle-btn');
+  toggleBtn2.onclick = () => {
+    const color = getComputedStyle(greeting2)
+      .getPropertyValue('--color')
+      .trim();
+    greeting2.style.setProperty('--color', color === 'blue' ? 'red' : 'blue');
+  };
+</script>

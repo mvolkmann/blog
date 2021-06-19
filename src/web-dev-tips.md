@@ -1446,10 +1446,14 @@ The following example demonstrates this.
 
 100% versus 100 VH or 100 VW
 
+TODO: Finish this section.
+
 ### Fixed vs sticky position
 
 position fixed and position sticky
 Show example of a table where thead is sticky.
+
+TODO: Finish this section.
 
 ### Vendor prefixes
 
@@ -1560,6 +1564,10 @@ that automatically validates CSS and identifies issues.
 
 ### Embrace booleans
 
+Boolean is a fundamental data type.
+Many JavaScript expressions evaluate to a boolean value
+and can be used in a direct way as shown in the example below.
+
 ```js
 // Bad
 if (total >= 100) {
@@ -1578,7 +1586,8 @@ return total >= 100;
 ### Nested ternaries
 
 A common opinion is that nested ternaries are hard to read.
-But are they? Consider this example.
+But this is only true if they are formatted poorly.
+Consider this example.
 
 {% raw %}
 
@@ -1593,7 +1602,6 @@ if (temperature &lt;= 32) {
 }
 
 // This uses nested ternaries to achieve the same result.
-// It's not confusing when formatted nicely.
 const assessment =
   temperature &lt;= 32 ? 'cold' :
   temperature &lt;= 80 ? 'mild' :
@@ -1678,7 +1686,8 @@ const dogs = [
 
   // Create an object where the keys are dog names
   // and the values are the dog objects.
-  // This doesn't gracefully handle having multiple dogs with the same name.
+  // This doesn't gracefully handle having
+  // multiple dogs with the same name.
   // Here the initial value is an empty object.
   const nameToDogMap = dogs.reduce((acc, dog) => {
     acc[dog.name] = dog;
@@ -1771,7 +1780,7 @@ const dogs = [
   dogs.shift(snoopy); // Removes Snoopy from the beginning.
   ```
 
-### Modifying CSS properties from JavaScript
+### CSS properties from JavaScript
 
 HTML elements are represented by Document Object Model (DOM) objects in memory.
 DOM objects have a style property whose value is an object.
@@ -1786,32 +1795,34 @@ When the "Toggle Color" button is pressed a function is called that
 gets the current value of the CSS variable
 and modifies it based on its current value.
 
+{% include "_change-css-style-properties.html" %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Demo</title>
+    <style>
+      #greeting {
+        color: red;
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        const greeting = document.getElementById('greeting');
+        const toggleBtn = document.getElementById('toggle-btn');
+        toggleBtn.onclick = () => {
+          // This is initially unset, not populated from the style tag.
+          const {color} = greeting.style;
+          greeting.style.color = color === 'blue' ? 'red' : 'blue';
+        };
+      };
+    </script>
   </head>
   <body>
     <p id="greeting">Hello, World!</p>
     <button id="toggle-btn">Toggle Color</button>
-
-    <!--
-    Placing the script tag here causes it to
-    run after the HTML above is rendered.
-    Another option is to move the script tag to the head section and
-    wrap the code in a function that is assigned to window.onload.
-    -->
-    <script>
-      const greeting = document.getElementById('greeting');
-      const toggleBtn = document.getElementById('toggle-btn');
-      toggleBtn.onclick = () => {
-        // This is initially unset, not populated from the style tag.
-        const {color} = greeting.style;
-        greeting.style.color = color === 'blue' ? 'red' : 'blue';
-      };
-    </script>
   </body>
 </html>
 ```
@@ -1830,6 +1841,8 @@ When the "Toggle Color" button is pressed a function is called that
 gets the current value of the CSS variable
 and modifies it based on its current value.
 
+{% include "_change-css-variable.html" %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1842,24 +1855,25 @@ and modifies it based on its current value.
         color: var(--color);
       }
     </style>
+    <script>
+      window.onload = () => {
+        const greeting = document.getElementById('greeting');
+        const toggleBtn = document.getElementById('toggle-btn');
+        toggleBtn.onclick = () => {
+          const color = getComputedStyle(greeting)
+            .getPropertyValue('--color')
+            .trim();
+          greeting.style.setProperty(
+            '--color',
+            color === 'blue' ? 'red' : 'blue'
+          );
+        };
+      };
+    </script>
   </head>
   <body>
     <p id="greeting">Hello, World!</p>
     <button id="toggle-btn">Toggle Color</button>
-
-    <script>
-      const greeting = document.getElementById('greeting');
-      const toggleBtn = document.getElementById('toggle-btn');
-      toggleBtn.onclick = () => {
-        const color = getComputedStyle(greeting)
-          .getPropertyValue('--color')
-          .trim();
-        greeting.style.setProperty(
-          '--color',
-          color === 'blue' ? 'red' : 'blue'
-        );
-      };
-    </script>
   </body>
 </html>
 ```
