@@ -1077,9 +1077,27 @@ Here are the steps to setup and use PostCSS to do this:
 1. Use the CSS files in the `build` directory
    instead of those in the `src` directory.
 
+This changes CSS like the following:
+
+```css
+select {
+  appearance: none;
+}
+```
+
+to this:
+
+```css
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+```
+
 The `autoprefixer` npm package is one of many plugins available for PostCSS.
-Others include `postcss-preset-env`, `postcss-sorting`, `stylelint`,
-and many more.
+Others include `postcss-cssnext`, `postcss-preset-env`, `postcss-sorting`,
+`stylelint`, and many more.
 
 ### CSS linting
 
@@ -1614,6 +1632,9 @@ The basics steps to use the Canvas API are:
 The following example demonstrates all the commonly used
 `CanvasRenderingContext2D` methods.
 It produces similar output to the SVG example above.
+Note that the duck image is quite pixelated compared to the SVG version.
+
+{% include "_canvas.html" %}
 
 ```html
 <!DOCTYPE html>
