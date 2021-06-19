@@ -809,6 +809,10 @@ The basic selectors are:
   - must be present ending with a given value: ex. `[href$=".com"]`
   - and other less commonly used options
 
+A rule can begin with a comma-separated list of selectors to match any of them.
+
+### Combinators
+
 Selectors can be combined to specify relationships between elements.
 
 - descendant: `a b` applies to `b` elements that have an `a` ancestor.
@@ -824,8 +828,6 @@ that is anywhere inside a `table` element.
 They could appear inside the `thead` or `tbody` elements
 that are children of the `table` element.
 
-A rule can begin with a comma-separated list of selectors to match any of them.
-
 ### Pseudo classes
 
 CSS pseudo classes are added to selectors to indicate
@@ -833,13 +835,13 @@ that matching elements must be in a specific state.
 They begin with a single colon.
 Categorized lists of commonly used pseudo classes are described below.
 
-Location
+**Location**
 
 - `:link` matches links that have not yet been visited.
 
 - `:visited` matches links that have been visited.
 
-User action
+**User action**
 
 - `:focus` matches the element that has focus.
 
@@ -848,7 +850,7 @@ User action
 
 - `:hover` matches elements being hovered over.
 
-Input
+**Input**
 
 - `:blank` matches form elements that are empty.
 
@@ -873,7 +875,7 @@ Input
 
 - `:read-write` matches elements that can be modified by the user.
 
-Tree-structural
+**Tree-structural**
 
 - `:first-child` matches the first sibling.
 
@@ -1044,8 +1046,6 @@ after the label of required form elements.
   </body>
 </html>
 ```
-
-### Combinators
 
 ### CSS position
 
