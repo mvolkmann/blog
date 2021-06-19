@@ -1,0 +1,30 @@
+<style>
+  button {
+    --size: 3rem;
+
+    display: inline-block;
+    background-color: cornflowerblue;
+    border: none;
+    border-radius: calc(var(--size) / 2);
+    font-size: 2rem;
+    height: var(--size);
+    transition: transform 0.7s;
+    width: var(--size);
+  }
+
+  button.rotate {
+    transform: rotate(180deg);
+  }
+</style>
+
+<div id="transform-demo">
+  <p>Click the button to rotate it.</p>
+  <button>☝</button>
+</div>
+
+<script>
+  const button = document.querySelector('#transform-demo button');
+  button.addEventListener('click', () => {
+    button.classList.toggle('rotate');
+  });
+</script>

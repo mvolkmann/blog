@@ -1056,7 +1056,7 @@ If none is found then it is relative to the browser window.
 Positioning is specified using the CSS properties
 `top`, `bottom`, `left` and `right`.
 
-{% include "_position.html" %}
+{% include "_css-position.html" %}
 
 ```html
 <!DOCTYPE html>
@@ -1191,6 +1191,8 @@ When the button is pressed, a `rotate` `transform` is applied
 to rotate the emoji 180 degrees.
 When pressed again, the original rotation of zero degrees is restored.
 
+{% include "_css-transform.html" %}
+
 ```html
 <html lang="en">
   <head>
@@ -1315,6 +1317,8 @@ but flashes a bit in Safari making the effect feel less polished.
 
 CSS media queries have many uses, but the most common is to
 apply different CSS properties based on the window width.
+
+TODO: Add an example the demonstrates a responsive app.
 
 ### window.matchMedia
 
