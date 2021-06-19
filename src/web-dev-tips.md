@@ -1052,7 +1052,7 @@ Vendor prefixes include `-moz-` for Firefox,
 `-ms-` for Internet Explorer and Edge, and
 `-webkit-` for Chrome and Safari.
 
-Overtime the need for these prefixes has diminished,
+Over time the need for these prefixes has diminished,
 but many CSS properties still require them.
 For a list of CSS properties that still require vendor prefixes in 2021,
 see the section "Prefixing in 2021 in this {% aTargetBlank
@@ -1062,7 +1062,9 @@ see the section "Prefixing in 2021 in this {% aTargetBlank
 It is not necessary to manually write CSS properties with vendor prefixes.
 Tools such as {% aTargetBlank "https://postcss.org", "PostCSS" %} and
 {% aTargetBlank "https://sass-lang.com", "Sass" %} can generate these for you.
-Here are the steps to setup and use PostCSS to do this:
+Here are the steps to setup and use PostCSS and the
+{% aTargetBlank "https://github.com/postcss/autoprefixer", "autoprefixer" %}
+plugin to do this:
 
 1. For projects that do not have a `package.json` file,
    create one by entering `npm init` and answering the questions it asks.
@@ -1096,8 +1098,24 @@ select {
 ```
 
 The `autoprefixer` npm package is one of many plugins available for PostCSS.
-Others include `postcss-cssnext`, `postcss-preset-env`, `postcss-sorting`,
-`stylelint`, and many more.
+Other popular plugins include:
+
+- {% aTargetBlank "https://github.com/csstools/postcss-preset-env",
+  "postcss-preset-env" %}
+
+  This "lets you convert modern CSS into something most browsers can understand,
+  determining the polyfills you need based on
+  your targeted browsers or runtime environments."
+
+- {% aTargetBlank "https://github.com/hudochenkov/postcss-sorting",
+  "postcss-sorting" %}
+
+  This sorts properties within rules, not rules based on selectors.
+
+- {% aTargetBlank "https://stylelint.io/user-guide/usage/postcss-plugin",
+  "stylelint" %}
+
+  This is a "linter that helps you avoid errors and enforce conventions."
 
 ### CSS linting
 
