@@ -793,9 +793,120 @@ downward pointing triangle on the right side of the `select`.
 
 ### Selectors
 
+CSS selectors appear at the beginning of CSS rules.
+They specify the elements to which a rule applies.
+The basic selectors are:
+
+- type: specifies an element name; ex. `table`
+- id: specifies the value of an `id` attribute; ex. `#my-id`
+- class: specifies a CSS class name; ex. `.my-class`
+- attribute: specifies an attribute that:
+
+  - must be present: ex. `[href]`
+  - must be present with a given value: ex. `[href="https://foo.com"]`
+  - must be present containing a given value: ex. `[href*="foo"]`
+  - must be present beginning with a given value: ex. `[href^="https"]`
+  - must be present ending with a given value: ex. `[href$=".com"]`
+  - and other less commonly used options
+
+Selectors can be combined to specify relationships between elements.
+
+- descendant: `a b` applies to `b` elements that have an `a` ancestor.
+- child: `a > b` applies to `b` elements that have an `a` parent.
+- sibling: `a + b` applies to `b` elements that have
+  an immediately preceding `a` sibling.
+- sibling: `a ~ b` applies to `b` elements that have
+  a preceding `a` sibling.
+
+These can be combined to any depth. For example,
+`table tr > img` matches all `img` elements whose parent is a `tr` element
+that is anywhere inside a `table` element.
+They could appear inside the `thead` or `tbody` elements
+that are children of the `table` element.
+
+A rule can begin with a comma-separated list of selectors to match any of them.
+
 ### Pseudo classes
 
-### pseudo selectors
+CSS pseudo classes are added to selectors to indicate
+that matching elements must be in a specific state.
+They begin with a single colon.
+Categorized lists of commonly used pseudo classes are described below.
+
+Location
+
+- `:link` matches links that have not yet been visited.
+
+- `:visited` matches links that have been visited.
+
+User action
+
+- `:focus` matches the element that has focus.
+
+- `:focus-within` matches the element that has focus
+  or elements that contain an element that has focus.
+
+- `:hover` matches elements being hovered over.
+
+Input
+
+- `:blank` matches form elements that are empty.
+
+- `:placeholder-shown` matches form elements elements that
+  are currently displaying their placeholder text.
+
+- `:checked` matches checkboxes and radio buttons that are toggled on.
+
+- `:enabled` matches elements that are not disabled.
+
+- `:disabled` matches elements that are disabled.
+
+- `:required` matches form elements that are required to have a value.
+
+- `:optional` matches form elements that are not required to have a value.
+
+- `:valid` matches form elements that contain a valid value.
+
+- `:invalid` matches form elements that contain an invalid value.
+
+- `:user-invalid` matches form elements that the user has interacted with
+  and have an invalid value.
+
+- `:read-only` matches elements that cannot be modified by the user.
+
+- `:read-write` matches elements that can be modified by the user.
+
+Tree-structural
+
+- `:first-child` matches the first sibling.
+
+- `:first-of-type` matches the first sibling with the same element name.
+
+- `:last-child` matches the last sibling.
+
+- `:last-of-type` matches the last sibling with the same element name.
+
+- `:nth-child` matches sibling elements whose 1-based index matches `an+b`.
+  For example, `:nth-child(3)` matches the third sibling,
+  `:nth-child(even)` matches even siblings,
+  `:nth-child(odd)` matches odd siblings,
+  and `:nth-child(2n+3)` matches siblings 3, 5, 7, and so on.
+
+- `:nth-of-type` is like `:nth-child`, but only
+  considers siblings with the same element name.
+
+- `:nth-last-child` matches sibling elements in a similar way to `:nth-child`,
+  but counting from the end of the list of siblings.
+
+- `:nth-last-of-type` is like `:nth-last-child`, but only
+  considers siblings with the same element name.
+
+- `:only-child` matches the element only if it has no siblings.
+
+- `:only-of-type` matches the element only if
+  it has no siblings with the same element name.
+
+### Pseudo selectors
 
 ### Combinators
 
