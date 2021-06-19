@@ -1,0 +1,45 @@
+<style>
+  form > div {
+    margin-bottom: 0.5rem;
+  }
+
+  label {
+    display: inline-block;
+    margin-right: 0.5rem;
+    text-align: right;
+    width: 5rem;
+  }
+
+  .required label::after {
+    color: red;
+    content: '*';
+  }
+</style>
+
+<form id="pseudo-selectors-demo">
+  <div class="required">
+    <label for="name">Name</label>
+    <input id="name" />
+  </div>
+  <div class="required">
+    <label for="email">Email</label>
+    <input id="email" type="email" />
+  </div>
+  <div>
+    <label for="phone">Telephone</label>
+    <input id="phone" type="tel" />
+  </div>
+  <button>Submit</button>
+</form>
+
+<script>
+  // Add the "required" attribute to all inputs inside
+  // container elements with the "required" CSS class.
+  const requiredDivs = document.querySelectorAll(
+    '#pseudo-selectors-demo > .required'
+  );
+  for (const div of requiredDivs) {
+    const input = div.querySelector('input');
+    input.setAttribute('required', 'required');
+  }
+</script>

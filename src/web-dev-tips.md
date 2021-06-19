@@ -869,9 +869,6 @@ Input
 
 - `:invalid` matches form elements that contain an invalid value.
 
-- `:user-invalid` matches form elements that the user has interacted with
-  and have an invalid value.
-
 - `:read-only` matches elements that cannot be modified by the user.
 
 - `:read-write` matches elements that can be modified by the user.
@@ -906,7 +903,147 @@ Tree-structural
 - `:only-of-type` matches the element only if
   it has no siblings with the same element name.
 
+The following example demonstrates a few of the pseudo-classes.
+If an invalid email address is entered in the input, the border turns red.
+The "Baseball" button is red because it is disabled.
+The other buttons change from blue to green when hovering over them.
+
+{% include "_pseudo-classes.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      button {
+        background-color: lightblue;
+        border: 3px solid blue;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+
+      button:hover {
+        background-color: lightgreen;
+        border-color: green;
+      }
+
+      /* Placing this after the :hover rule makes it take precedence. */
+      button:disabled {
+        background-color: pink;
+        border-color: red;
+      }
+
+      form > div {
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        border: 1px solid gray;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+      }
+
+      input:invalid {
+        border-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="pseudo-classes-demo">
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" />
+      </div>
+      <div>
+        <button disabled>Baseball</button>
+        <button>Basketball</button>
+        <button>Football</button>
+        <button>Hockey</button>
+      </div>
+    </form>
+  </body>
+</html>
+```
+
 ### Pseudo selectors
+
+CSS pseudo elements are added to selectors to style a part of an element
+or add content.
+They begin with a double colon.
+Commonly used pseudo selectors are described below.
+Most supported pseudo selectors are rarely used.
+
+- `::after` is used in conjunction with the `content` property
+  to add content after the matching element.
+- `::before` is used in conjunction with the `content` property
+  to add content before the matching element.
+
+Content can only be added to elements that have content
+such as `label` and `p` elements.
+Content cannot be added to empty elements like `input`.
+
+The following example adds an asterisk
+after the label of required form elements.
+
+{% include "_pseudo-selectors.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      form > div {
+        margin-bottom: 0.5rem;
+      }
+
+      label {
+        display: inline-block;
+        margin-right: 0.5rem;
+        text-align: right;
+        width: 5rem;
+      }
+
+      .required label::after {
+        color: red;
+        content: '*';
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        // Add the "required" attribute to all inputs inside
+        // container elements with the "required" CSS class.
+        const requiredDivs = document.querySelectorAll('form > .required');
+        for (const div of requiredDivs) {
+          const input = div.querySelector('input');
+          input.setAttribute('required', 'required');
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <form id="pseudo-selectors-demo">
+      <div class="required">
+        <label for="name">Name</label>
+        <input id="name" />
+      </div>
+      <div class="required">
+        <label for="email">Email</label>
+        <input id="email" type="email" />
+      </div>
+      <div>
+        <label for="phone">Telephone</label>
+        <input id="phone" type="tel" />
+      </div>
+      <button>Submit</button>
+    </form>
+  </body>
+</html>
+```
 
 ### Combinators
 

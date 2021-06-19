@@ -1,0 +1,47 @@
+<style>
+  button {
+    background-color: lightblue;
+    border: 3px solid blue;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  button:hover {
+    background-color: lightgreen;
+    border-color: green;
+  }
+
+  /* Placing this after the :hover rule makes it take precedence. */
+  button:disabled {
+    background-color: pink;
+    border-color: red;
+  }
+
+  form > div {
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  input:invalid {
+    border-color: red;
+  }
+</style>
+
+<form id="pseudo-classes-demo">
+  <div>
+    <label for="email">Email</label>
+    <input id="email" type="email" />
+  </div>
+  <div>
+    <button disabled>Baseball</button>
+    <button>Basketball</button>
+    <button>Football</button>
+    <button>Hockey</button>
+  </div>
+</form>
