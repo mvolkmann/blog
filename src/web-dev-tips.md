@@ -228,7 +228,8 @@ Of these the mostly commonly used are `rem`, `vh`, and `vw`.
 
 An important benefit of using `rem` as the unit for nearly all sizes
 is that it enables scaling everything in the web site
-by simply changing the font size of the `html` element.
+by simply changing the font size of the `html` element
+which defaults to `16px`.
 A web app can allow each user to modify this size,
 perhaps saving their preference in `localStorage`.
 
@@ -1444,9 +1445,78 @@ The following example demonstrates this.
 
 ### Viewport units
 
-100% versus 100 VH or 100 VW
+There are four CSS viewport units.
 
-TODO: Finish this section.
+| Unit   | Description               |
+| ------ | ------------------------- |
+| `vh`   | 1% of the viewport height |
+| `vw`   | 1% of the viewport width  |
+| `vmax` | larger of `vh` and `vw`   |
+| `vmin` | smaller of `vh` and `vw`  |
+
+The size `100vw` is the full viewport width including the `body` margin.
+The size `100%` is the full width of the parent element.
+For children of the `body` element, this does not include the `margin`.
+If the `body` `margin` is zero then `100vw` and `100%` are equivalent.
+If the `body` `margin` is not zero then
+setting the width of a top-level element to `100vw`
+will cause it to overlap the right edge of the viewport,
+but setting the width to `100%` will not.
+For this reason often `100%` is preferred over `100vw`.
+
+The example below demonstrates the difference between `100vw` and `100%`.
+Notice the right borders and the use of `box-sizing: border-box;`.
+
+{% include "_viewport-vs-percent.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      body {
+        margin: 1rem;
+      }
+
+      div {
+        box-sizing: border-box;
+        display: flex;
+        font-size: 1rem;
+        outline: 1px solid black;
+        padding: 1rem;
+      }
+
+      div > div {
+        flex-grow: 1;
+      }
+
+      .percent100 {
+        width: 100%;
+      }
+
+      .vw100 {
+        width: 100vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vw100">100vw</div>
+
+    <div class="percent100">100%</div>
+
+    <div class="percent100">
+      <div>
+        <div class="percent100">left</div>
+      </div>
+      <div>
+        <div class="percent100">right</div>
+      </div>
+    </div>
+  </body>
+</html>
+```
 
 ### Fixed vs sticky position
 

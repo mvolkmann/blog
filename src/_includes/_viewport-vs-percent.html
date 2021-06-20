@@ -1,0 +1,39 @@
+<style>
+  #viewport-vs-percent-demo {
+    margin: 1rem;
+  }
+
+  #viewport-vs-percent-demo div {
+    box-sizing: border-box;
+    display: flex;
+    font-size: 1rem;
+    outline: 1px solid black;
+    padding: 1rem;
+  }
+
+  #viewport-vs-percent-demo div > div {
+    flex-grow: 1;
+  }
+
+  #viewport-vs-percent-demo .percent100 {
+    width: 100%;
+  }
+
+  #viewport-vs-percent-demo .vw100 {
+    width: 100vw;
+  }
+</style>
+<div id="viewport-vs-percent-demo>
+  <div class="vw100">100vw</div>
+
+  <div class="percent100">100%</div>
+
+  <div class="percent100">
+    <div>
+      <div class="percent100">left</div>
+    </div>
+    <div>
+      <div class="percent100">right</div>
+    </div>
+  </div>
+</body>
