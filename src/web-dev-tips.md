@@ -1053,24 +1053,25 @@ after the label of required form elements.
 The CSS `position` property supports many values.
 In this section we want to distinguish between three of them.
 
-| position value | Description                       |
-| -------------- | --------------------------------- |
-| `absolute`     | relative to the document          |
-| `fixed`        | relative to the viewport          |
-| `sticky`       | relative to the document, but ... |
+| position value | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| `absolute`     | relative to the document; removes from document flow                |
+| `fixed`        | relative to the viewport; removes from document flow                |
+| `sticky`       | relative to the document; stays in document flow, but can be offset |
 
-<br>but offset if scrolling parent scrolls out of view
+All of these use the `top`, `right`, `bottom`, and `left` properties
+to specify the actual position of the element.
 
-Show example of a table where thead is sticky.
+The `absolute` value causes elements to be positioned relative to the nearest
+ancestor element that has its CSS `position` property set to `relative`.
+If none is found then they are positioned relative to the browser window.
 
-TODO: Finish this section.
+The `sticky` value is often used to keep `table` headings in view
+when a table is scrolled vertically.
 
-Elements whose CSS `position` property set to `absolute`
-are positioned relative to the nearest ancestor element
-that has its CSS `position` property set to `relative`.
-If none is found then it is relative to the browser window.
-Positioning is specified using the CSS properties
-`top`, `bottom`, `left` and `right`.
+The following example demonstrates using `absolute` to
+position elements at the four corners of an ancestor element
+that uses a `position` value of `relative`.
 
 {% include "_css-position.html" %}
 
@@ -1120,6 +1121,97 @@ Positioning is specified using the CSS properties
       <div id="second">Second</div>
       <div id="third">Third</div>
       <div id="fourth">Fourth</div>
+    </div>
+  </body>
+</html>
+```
+
+<a name="css-position-fixed-sticky"></a>
+The next example shows the differences between the CSS `position` property
+values of `absolute`, `fixed`, and `sticky`.
+
+To run the demo, click the "Show Demo" button.
+After viewing it, click the "Back" button to return to this location.
+The demo will scroll this page to the top and display three boxes.
+The first box uses a `position` value of `absolute`,
+the second uses `fixed`, and the third uses `sticky`.
+Scroll vertically to see that the `fixed` box remains in place
+while the `absolute` and `sticky` boxes scroll with the page.
+Scroll vertically inside the list of fruits to see how
+using `position` `sticky` causes the "Fruit" line to remain in view.
+
+{% include "_css-position-fixed-sticky.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      #absolute {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      #container {
+        background-color: linen;
+        height: 500px; /* so contents can scroll vertically */
+        width: 100%;
+      }
+
+      .demo {
+        background-color: white;
+        border: 1px solid black;
+        display: inline-block;
+        height: 150px;
+        width: 100px;
+      }
+
+      #fixed {
+        position: fixed;
+        top: 1rem;
+        left: 8rem;
+      }
+
+      #scrolling {
+        overflow: scroll;
+        position: absolute;
+        top: 1rem;
+        left: 15rem;
+      }
+
+      #sticky {
+        position: sticky;
+        top: 0;
+        left: 0;
+        background-color: cornflowerblue;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="absolute" class="demo">absolute</div>
+      <div id="fixed" class="demo">fixed</div>
+      <div id="scrolling" i class="demo">
+        <div id="sticky">Fruit</div>
+        <div>apple</div>
+        <div>banana</div>
+        <div>blueberry</div>
+        <div>cherry</div>
+        <div>grape</div>
+        <div>kiwi</div>
+        <div>peach</div>
+        <div>raspberry</div>
+        <div>strawberry</div>
+        <div>watermelon</div>
+      </div>
     </div>
   </body>
 </html>

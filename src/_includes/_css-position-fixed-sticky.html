@@ -1,0 +1,87 @@
+<style>
+  #position-demo2 .absolute {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  #position-demo2 .back-btn {
+    position: absolute;
+    top: 1rem;
+    left: 22rem;
+  }
+
+  #position-demo2 .demo {
+    background-color: white;
+    border: 1px solid black;
+    display: inline-block;
+    height: 150px;
+    width: 100px;
+  }
+
+  #position-demo2 .fixed {
+    position: fixed;
+    top: 1rem;
+    left: 8rem;
+  }
+
+  #position-demo2 {
+    background-color: linen;
+    display: none;
+    height: 500px; /* so contents can scroll vertically */
+    width: 100%;
+  }
+
+  #position-demo2 .scrolling {
+    overflow: scroll;
+    position: absolute;
+    top: 1rem;
+    left: 15rem;
+  }
+
+  #position-demo2 .sticky {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: cornflowerblue;
+    color: white;
+  }
+</style>
+
+<button id="position-demo2-show-btn">Show Demo</button>
+
+<div id="position-demo2">
+  <div class="demo absolute">absolute</div>
+  <div class="demo fixed">fixed</div>
+  <div class="demo scrolling">
+    <div class="sticky">Fruit</div>
+    <div>apple</div>
+    <div>banana</div>
+    <div>blueberry</div>
+    <div>cherry</div>
+    <div>grape</div>
+    <div>kiwi</div>
+    <div>peach</div>
+    <div>raspberry</div>
+    <div>strawberry</div>
+    <div>watermelon</div>
+  </div>
+  <button class="back-btn">Back</button>
+</div>
+
+<script>
+  const backBtn = document.querySelector('#position-demo2 .back-btn');
+  const showBtn = document.getElementById('position-demo2-show-btn');
+  const demo = document.getElementById('position-demo2');
+
+  backBtn.addEventListener('click', () => {
+    demo.style.display = 'none';
+    location.href = '#css-position-fixed-sticky';
+  });
+
+  showBtn.addEventListener('click', () => {
+    const visible = demo.style.display === 'block';
+    demo.style.display = visible ? 'none' : 'block';
+    if (!visible) window.scrollTo(0, 0);
+  });
+</script>
