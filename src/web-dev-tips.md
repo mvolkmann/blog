@@ -1050,6 +1050,21 @@ after the label of required form elements.
 
 ### CSS position
 
+The CSS `position` property supports many values.
+In this section we want to distinguish between three of them.
+
+| position value | Description                       |
+| -------------- | --------------------------------- |
+| `absolute`     | relative to the document          |
+| `fixed`        | relative to the viewport          |
+| `sticky`       | relative to the document, but ... |
+
+<br>but offset if scrolling parent scrolls out of view
+
+Show example of a table where thead is sticky.
+
+TODO: Finish this section.
+
 Elements whose CSS `position` property set to `absolute`
 are positioned relative to the nearest ancestor element
 that has its CSS `position` property set to `relative`.
@@ -1517,13 +1532,6 @@ Notice the right borders and the use of `box-sizing: border-box;`.
   </body>
 </html>
 ```
-
-### Fixed vs sticky position
-
-position fixed and position sticky
-Show example of a table where thead is sticky.
-
-TODO: Finish this section.
 
 ### Vendor prefixes
 
