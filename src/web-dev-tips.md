@@ -2725,16 +2725,35 @@ fi
 ```
 
 Here is a version of this script for Windows.
-It lacks error handling.
-TODO: Add the missing error handling to match the bash script.
+Place this in a file named `klp.bat` that is in
+a directory listed in your `PATH` environment variable.
 
 {% raw %}
 
 ```bash
 @echo off
-for /f "tokens=5" %%p in ('netstat -anop tcp ^| findstr /r :%1.*LISTENING') do (
+
+rem %1 is the first command line argument including quotes.
+rem %~1 is the same without the quotes.
+set port=%~1
+if "%port%" == "" goto noport
+
+rem The /f flag is for reading a file a line at a time.
+rem In this case the output of the netstat command is treated as a file.
+rem The fifth token in the netstat output is the process id.
+rem This is placed in the variable %%p whose name must be a single letter.
+for /f "tokens=5" %%p in ('netstat -anop tcp ^| findstr /r :%port%.*LISTENING') do (
   taskkill /f /pid %%p
+  goto end rem Exit if a match is found.
 )
+
+echo no process is listening on port {port}
+goto end
+
+:noport
+  echo usage: kill-listening-process {port}
+
+:end
 ```
 
 {% endraw %}

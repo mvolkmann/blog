@@ -493,6 +493,7 @@
 	"nodeauth",
 	"nonlocal",
 	"noopener",
+	"noport",
 	"nowdoc",
 	"npmhub",
 	"numpy",
