@@ -2747,7 +2747,7 @@ for /f "tokens=5" %%p in ('netstat -anop tcp ^| findstr /r :%port%.*LISTENING') 
   goto end rem Exit if a match is found.
 )
 
-echo no process is listening on port {port}
+echo no process is listening on port %port%
 goto end
 
 :noport
