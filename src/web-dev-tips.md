@@ -8,10 +8,11 @@ This is a collection of tips related to web development
 divided into categories.
 It assumes that you already know HTML, CSS, and JavaScript to some extent,
 but perhaps have not encountered all the tips shared here.
+
 All of the examples use vanilla JavaScript
 to avoid appealing only to users of specific web frameworks.
-
-This is very much a work in progress!
+Most of the examples run live in this web page.
+You can also copy the code into a `.html` file and open it in a web browser.
 
 ## HTML
 
@@ -25,6 +26,9 @@ such as screen readers.
 Some of the most commonly used semantic elements are
 `article`, `aside`, `details`, `figcaption`, `figure`, `footer`, `header`,
 `main`, `mark`, `nav`, `section`, `summary`, and `time`.
+For descriptions of each of these elements, see the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/HTML/Element",
+"MDN HTML elements reference" %}.
 
 In most cases the paragraph element `<p>` should be used instead of `<div>`
 when the content is only text to be rendered.
@@ -32,7 +36,7 @@ when the content is only text to be rendered.
 In most cases `click` events should only be associated
 with `<button>` elements, not with generic elements like `<div>`.
 
-### Values of the type attribute on input elements
+### input element type attribute
 
 HTML5 added many values for the `input` element `type` attribute.
 These can change the way the element is rendered
@@ -41,6 +45,9 @@ The values include `checkbox`, `color`, `date`, `datetime-local`,
 `email`, `file`, `image`, `month`, `number`, `password`, `radio`,
 `range`, `search`, `tel`, `text`, `time`, `url`, `week`,
 and a few more less commonly used values.
+For details on these, see the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input",
+"MDN input element" %} page.
 
 ### Form validation
 
@@ -50,13 +57,13 @@ that is specific to a given web framework.
 Often what works well is to:
 
 - Enclose all the form elements such as
-  `button`, `input`, `textarea`, and `select` in a `form` element.
+  `button`, `input`, `select`, and `textarea` in a `form` element.
 - Include only one "submit" button.
   This is the default type of a `button` element.
   To include `button` elements to do not submit the form,
   set their `type` attribute to `"button"`.
 - Mark required form elements with the `require` attribute.
-- Use the appropriate `input` `type` attribute values
+- Use appropriate `input` `type` attribute values
   such as `"email"` and `"tel"`.
 - Use other `input` attributes such as:
 
@@ -66,7 +73,7 @@ Often what works well is to:
 
 Use CSS pseudo-classes to style form elements based on their validity.
 These include `:required`, `:optional`, `:valid`, `:invalid`, `:user-invalid`,
-`:blank`, `:placeholder-shown`, `:in-range`, `:out-of-range`,
+`:blank`, `:placeholder-shown`, `:in-range`, and `:out-of-range`.
 
 ### Events fired by input elements
 
