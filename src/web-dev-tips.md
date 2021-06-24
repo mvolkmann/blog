@@ -2179,6 +2179,10 @@ This `Promise` eventually resolves and never rejects.
 </html>
 ```
 
+All functions that are marked as `async` return a `Promise` object,
+even if they do not explicitly return anything.
+In that case they return a `Promise` that resolves to the value `undefined`.
+
 The following example demonstrates creating a `Promise`
 that can resolve or reject.
 
