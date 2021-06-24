@@ -2248,6 +2248,7 @@ that uses the `then` and `catch` methods.
 ```js
 // This prints "yes" three times.
 callLater(() => printTimes('yes', 3), 2000)
+  // Note that this callback function returns a promise.
   .then(() => callLater(() => printTimes('no', -2), 1000))
   .then(() => {
     console.log('finished'); // not reached
