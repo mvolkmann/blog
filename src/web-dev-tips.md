@@ -1643,7 +1643,7 @@ Vendor prefixes include `-moz-` for Firefox,
 Over time the need for these prefixes has diminished,
 but many CSS properties still require them.
 For a list of CSS properties that still require vendor prefixes in 2021,
-see the section "Prefixing in 2021 in this {% aTargetBlank
+see the section "Prefixing in 2021" in this {% aTargetBlank
 "https://css-tricks.com/is-vendor-prefixing-dead/#prefixing-in-2021",
 "CSS Tricks article" %}.
 
@@ -2111,6 +2111,192 @@ gets the bounding rectangle of the div and outputs its properties.
   </body>
 </html>
 ```
+
+### Promises
+
+The JavaScript `Promise` class provides an alternative to callback functions
+for dealing with asynchronous operations.
+Many JavaScript functions return `Promise` objects.
+One example is the `fetch` function defined by the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API", "Fetch API" %}
+covered in the next section.
+
+A promise can be in one of three states:
+
+- pending
+- fulfilled (a.k.a. resolved) with a value
+- rejected with a reason or error
+
+There are two syntaxes for waiting for a promise to be fulfilled or rejected.
+
+One syntax is to use chains of calls to the
+`then`, `catch`, and `finally` methods.
+Callback functions are passed to each of these methods.
+The `then` method can be passed one or two callback functions.
+The first is called with the resolved value if the promise resolves and
+the optional second callback is called with the error if the promise rejects.
+The `catch` method is passed one callback function
+that is called with the error only if the promise rejects.
+The `finally` method is passed one callback function
+that is called with no arguments
+regardless of whether the promise resolves or rejects.
+
+The other syntax is to use the `await` keyword, often with `try`/`catch` blocks.
+Many developers find this syntax easier to read.
+When the `await` keyword is used inside a function,
+the function definition must begin with the `async` keyword.
+
+The following example demonstrates using a `Promise`
+to implement a `sleep` function.
+This `Promise` eventually resolves and never rejects.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <script>
+      function sleep(ms) {
+        // This promise always resolves.
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      async function greetLater(name, ms) {
+        await sleep(ms);
+        alert('Hello, ' + name);
+      }
+
+      window.onload = () => {
+        const button = document.getElementById('greet-btn');
+        button.addEventListener('click', greetLater('Mark', 3000));
+      };
+    </script>
+  </head>
+  <body>
+    <button id="greet-btn">Greet Later</button>
+  </body>
+</html>
+```
+
+The following example demonstrates creating a `Promise`
+that can resolve or reject.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+
+    <!-- Specifying type="module" enables top-level await. -->
+    <script type="module">
+      // This takes a function and a number of milliseconds.
+      // It returns a promise that waits for the
+      // number of milliseconds and then calls the function.
+      // If the function doesn't throw,
+      // the promise resolves to the return value.
+      // If the function throws, the promise rejects with the error.
+      function callLater(fn, ms) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            try {
+              resolve(fn());
+            } catch (e) {
+              reject(e);
+            }
+          }, ms);
+        });
+      }
+
+      // This prints given text a specified number of times.
+      // If times is zero or negative, it throws.
+      function printTimes(text, times) {
+        if (times <= 0) throw new Error('printTimes requires times > 0');
+        for (let i = 0; i < times; i++) {
+          console.log(text);
+        }
+      }
+
+      try {
+        // This prints "yes" three times.
+        await callLater(() => printTimes('yes', 3), 2000);
+
+        // This prints an error message because times is not greater than zero.
+        await callLater(() => printTimes('no', -2), 1000);
+
+        // This line is not reached because the previous line throws.
+        console.log('finished');
+      } catch (e) {
+        console.error(e);
+      }
+    </script>
+  </head>
+  <body>
+    <p>See output in the DevTools console.</p>
+  </body>
+</html>
+```
+
+The `try`/`catch` above can be replaced with the following code
+that uses the `then` and `catch` methods.
+TODO: TEST THIS!
+
+```js
+// This prints "yes" three times.
+callLater(() => printTimes('yes', 3), 2000)
+  .then(() => {
+    callLater(() => printTimes('no', -2), 1000);
+  })
+  .then(() => {
+    console.log('finished'); // TODO: Why does this print?
+  })
+  .catch(e => {
+    console.error(e);
+  });
+```
+
+The `Promise` class defines four static methods
+that take an `Iterable` of `Promise` objects, typically an array,
+and return a new promise.
+These are summarized in the table below.
+
+| Static Method        | Resolves When                      | Rejects When            |
+| -------------------- | ---------------------------------- | ----------------------- |
+| `Promise.all`        | all the promises resolve           | any promise rejects     |
+| `Promise.allSettled` | all the promises resolve or reject | never                   |
+| `Promise.any`        | any promise resolves               | all the promises reject |
+| `Promise.race`       | any promise resolves               | any promise rejects     |
+
+If the promise returned by `Promise.all` resolves,
+the value is an array of the resolved values
+in the same order as the promises passed in.
+
+If the promise returned by `Promise.allSettled` resolves,
+the value is an array of the resolved and rejected values
+in the same order as the promises passed in.
+
+If the promise returned by `Promise.any` resolves,
+the value is that of the first promise that resolved.
+If it rejects, the value is an `AggregateError` object
+that holds a collection of the errors.
+
+If the promise returned by `Promise.race` resolves,
+the value s that of the first promise that resolves.
+If it rejects, the value is that of the first promise that rejects.
+
+Sometimes it is convenient to create a `Promise` that immediately
+resolves or rejects. This is done with the static methods
+`Promise.reject(reason)` and `Promise.resolve(value)`.
+
+### Fetch API
+
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API", "Fetch API" %}
+defines ...
+
+TODO: Discuss the browser limit on the number of concurrent HTTP requests.
+TODO: Is the limit 5 in all modern browsers?
 
 ## Drawing
 
