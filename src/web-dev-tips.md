@@ -2244,16 +2244,13 @@ that can resolve or reject.
 
 The `try`/`catch` above can be replaced with the following code
 that uses the `then` and `catch` methods.
-TODO: TEST THIS!
 
 ```js
 // This prints "yes" three times.
 callLater(() => printTimes('yes', 3), 2000)
+  .then(() => callLater(() => printTimes('no', -2), 1000))
   .then(() => {
-    callLater(() => printTimes('no', -2), 1000);
-  })
-  .then(() => {
-    console.log('finished'); // TODO: Why does this print?
+    console.log('finished'); // not reached
   })
   .catch(e => {
     console.error(e);
