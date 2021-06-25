@@ -2114,12 +2114,12 @@ gets the bounding rectangle of the div and outputs its properties.
 
 ### Promises
 
-The JavaScript `Promise` class provides an alternative to callback functions
+The JavaScript {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+"Promise" %} class provides an alternative to callback functions
 for dealing with asynchronous operations.
 Many JavaScript functions return `Promise` objects.
-One example is the `fetch` function defined by the {% aTargetBlank
-"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API", "Fetch API" %}
-covered in the next section.
+One example is the `fetch` function described in the next section.
 
 A promise can be in one of three states:
 
@@ -2133,12 +2133,13 @@ One syntax is to use chains of calls to the
 `then`, `catch`, and `finally` methods.
 Callback functions are passed to each of these methods.
 The `then` method can be passed one or two callback functions.
-The first is called with the resolved value if the promise resolves and
-the optional second callback is called with the error if the promise rejects.
+If the promise resolves, the first callback
+is called with the resolved value.
+If the promise rejects, the second callback is called with the error.
 The `catch` method is passed one callback function
 that is called with the error only if the promise rejects.
 The `finally` method is passed one callback function
-that is called with no arguments
+that is called at the end with no arguments
 regardless of whether the promise resolves or rejects.
 
 The other syntax is to use the `await` keyword, often with `try`/`catch` blocks.
@@ -2148,7 +2149,7 @@ the function definition must begin with the `async` keyword.
 
 The following example demonstrates using a `Promise`
 to implement a `sleep` function.
-This `Promise` eventually resolves and never rejects.
+This promise eventually resolves and never rejects.
 
 ```html
 <!DOCTYPE html>
@@ -2158,7 +2159,6 @@ This `Promise` eventually resolves and never rejects.
     <title>Demo</title>
     <script>
       function sleep(ms) {
-        // This promise always resolves.
         return new Promise(resolve => setTimeout(resolve, ms));
       }
 
@@ -2169,7 +2169,7 @@ This `Promise` eventually resolves and never rejects.
 
       window.onload = () => {
         const button = document.getElementById('greet-btn');
-        button.addEventListener('click', greetLater('Mark', 3000));
+        button.addEventListener('click', () => greetLater('Mark', 3000));
       };
     </script>
   </head>
@@ -2193,7 +2193,7 @@ that can resolve or reject.
     <meta charset="UTF-8" />
     <title>Demo</title>
 
-    <!-- Specifying type="module" enables top-level await. -->
+    <!-- Specifying type="module" enables use of top-level await. -->
     <script type="module">
       // This takes a function and a number of milliseconds.
       // It returns a promise that waits for the
@@ -2223,10 +2223,11 @@ that can resolve or reject.
       }
 
       try {
-        // This prints "yes" three times.
+        // This waits 2 seconds and then prints "yes" three times.
         await callLater(() => printTimes('yes', 3), 2000);
 
-        // This prints an error message because times is not greater than zero.
+        // This waits 1 second and then prints an error message
+        // because times (-2) is not greater than zero.
         await callLater(() => printTimes('no', -2), 1000);
 
         // This line is not reached because the previous line throws.
@@ -2244,13 +2245,17 @@ that can resolve or reject.
 
 The `try`/`catch` above can be replaced with the following code
 that uses the `then` and `catch` methods.
+This code is somewhat less readable.
 
 ```js
 // This prints "yes" three times.
 callLater(() => printTimes('yes', 3), 2000)
-  // Note that this callback function returns a promise.
+  // Note that this callback function returns a promise
+  // which is required to chain another "then" call.
   .then(() => callLater(() => printTimes('no', -2), 1000))
   .then(() => {
+    // This line is not reached because the promise
+    // returned by the callback of the previous "then" rejects.
     console.log('finished'); // not reached
   })
   .catch(e => {
@@ -2272,19 +2277,20 @@ These are summarized in the table below.
 
 If the promise returned by `Promise.all` resolves,
 the value is an array of the resolved values
-in the same order as the promises passed in.
+in the same order as the promises that were passed in.
 
 If the promise returned by `Promise.allSettled` resolves,
 the value is an array of the resolved and rejected values
-in the same order as the promises passed in.
+in the same order as the promises that were passed in.
 
 If the promise returned by `Promise.any` resolves,
 the value is that of the first promise that resolved.
-If it rejects, the value is an `AggregateError` object
-that holds a collection of the errors.
+If it rejects, the value is an {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError",
+"AggregateError" %} object that holds a collection of the errors.
 
 If the promise returned by `Promise.race` resolves,
-the value s that of the first promise that resolves.
+the value is that of the first promise that resolves.
 If it rejects, the value is that of the first promise that rejects.
 
 Sometimes it is convenient to create a `Promise` that immediately
@@ -2300,13 +2306,15 @@ defined by the {% aTargetBlank "https://fetch.spec.whatwg.org",
 provides a JavaScript API for fetching resources, typically using HTTP.
 It defines a single function, {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch",
-"fetch" %} that takes
-a URL that identifies a resource (or a `Request` object)
-and an optional options object.
+"fetch" %} that takes a URL that
+identifies a resource (or a {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Request",
+"Request" %} object) and an optional options object.
 The options object can include the following properties:
 
-- `method`: The value is a string value like `GET`, `POST`, `PUT`, or `DELETE`.
-- `headers`: The value is an object whose
+- `method`: This is an HTTP method such as
+  `GET`, `POST`, `PUT`, or `DELETE`.
+- `headers`: This is an object whose
   keys are request header names and whose values are their values.
 - `body`: This specifies content to be passed in the request body.
   Methods such as `POST` and `PUT` use this.
@@ -2315,8 +2323,8 @@ The options object can include the following properties:
 - and several more less commonly used properties
 
 The `fetch` function returns a `Promise` object.
-This promise resolves to a response object that contains
-many properties including:
+This promise resolves to a response object that
+can contains many properties including:
 
 - `status`: This is an HTTP status code such as 200 (OK),
   201 (Created), 400 (Bad Request), 401 (Unauthorized),
@@ -2326,13 +2334,13 @@ many properties including:
   corresponding to the status code.
 - `ok`: This is a boolean that indicates
   whether the request was successfully processed,
-  indicated by `status` being in the range 200 to 299.
+  indicated by the `status` being in the range 200 to 299.
   Note that other status values do not cause
   the returned promise to reject.
-- `headers`: The value is an object whose
+- `headers`: This is an object whose
   keys are response header names and whose values are their values.
 - `body`: This is the response data
-  which can be text, including JSON, or binary data.
+  which can be text (including JSON) or binary data.
   The `Content-Type` response header indicates the format of this data.
 
 Here are examples of using the `fetch` function to
@@ -2349,7 +2357,7 @@ async function createDog(breed, name) {
   const body = JSON.stringify(dog);
   const headers = {
     'Content-Length': body.length,
-    'Content-Type': 'application.json'
+    'Content-Type': 'application/json'
   };
   const res = await fetch(
     DOG_SERVICE_URL,
@@ -2369,7 +2377,7 @@ async function updateDog(dog) {
   const body = JSON.stringify(dog);
   const headers = {
     'Content-Length': body.length,
-    'Content-Type': 'application.json'
+    'Content-Type': 'application/json'
   };
   const res = await fetch(
     DOG_SERVICE_URL + '/' + dog.id,
@@ -2409,12 +2417,15 @@ async function demo() {
     console.error(e);
   }
 }
+
+demo();
 ```
 
 Browsers limit the total number of open connections to other hosts
-and the number per host. As of 2021, the limits are those shown below.
+and the number per host.
+As of 2021, the limits for popular browsers are those shown below.
 When the number of concurrent requests exceeds these limits,
-requests wait to be processed which can make their time to complete
+requests wait to be processed, which can make their time to complete
 much longer than the actual processing time.
 
 | Browser | Total Connections | Connections per Host |
