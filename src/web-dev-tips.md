@@ -2953,7 +2953,8 @@ The details differ based on the shell being used.
 Create bookmarks in the bookmark bar to `http://localhost:{port-number}`
 for ports that are commonly used by web frameworks.
 Common ports include 3000, 5000, and 8080.
-These make it easy to test web apps that being developed and run locally.
+These make it easy to test web apps that are
+being developed and run locally.
 I learned this from Bill Odom.
 
 ## Editors
