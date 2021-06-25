@@ -2127,6 +2127,19 @@ A promise can be in one of three states:
 - fulfilled (a.k.a. resolved) with a value
 - rejected with a reason or error
 
+To create a `Promise` object, call the `Promise` constructor
+passing it a function that has one or two parameters.
+The first is a function to call to put the promise in a resolved state.
+The second, optional parameter is a function to call
+to put the promise into a rejected state.
+For example:
+
+```js
+const myPromise = new Promise((resolve, reject) => {
+  // Do some work and eventually call either resolve or reject.
+});
+```
+
 There are two syntaxes for waiting for a promise to be fulfilled or rejected.
 
 One syntax is to use chains of calls to the
