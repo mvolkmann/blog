@@ -105,13 +105,8 @@ This will change the options displayed in the `input`.
 Here is an example where the user can select a color.
 Initially the only values in the `datalist` are blue, green, and red.
 But the user can add more colors.
-This uses Svelte, but the concepts
-should easily translate to other web frameworks and
-you shouldn't need to know much about Svelte to understand this.
-
-In this screenshot the user has already added the color "orange"
-and has enter "n" into the "Color" input
-which causes the matching values "green" and "orange" to be suggested.
+Try adding more colors and then type into the input
+to see the list be filtered to only colors that match.
 
 {% include "_datalist.html" %}
 
@@ -166,7 +161,8 @@ which causes the matching values "green" and "orange" to be suggested.
           newColorInput.value = '';
         });
 
-        // Enable the "Add Color" button only if a new color has been entered.
+        // Enable the "Add Color" button only
+        // if a new color has been entered.
         newColorInput.addEventListener('input', event => {
           if (event.target.value) {
             addBtn.removeAttribute('disabled');
