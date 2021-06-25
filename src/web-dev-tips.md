@@ -217,15 +217,15 @@ Of these only `px` is commonly used.
 
 Relative units include:
 
-- `ch` for width of "0" in current font
-- `em` for parent font size
-- `ex` for height of "x" in current font
-- `lh` for line height of current element
-- `rem` for root element font size
-- `vh` for 1% of viewport height
-- `vmin` for 1% of smallest viewport dimension
-- `vmax` for 1% of largest viewport dimension
-- `vw` for 1% of viewport width
+- `ch` for the width of "0" in current font
+- `em` for the parent font size
+- `ex` for the height of "x" in current font
+- `lh` for the line height of current element
+- `rem` for the root element (`html`) font size
+- `vh` for 1% of the viewport height
+- `vmin` for 1% of the smallest viewport dimension
+- `vmax` for 1% of the largest viewport dimension
+- `vw` for 1% of the viewport width
 
 Of these the mostly commonly used are `rem`, `vh`, and `vw`.
 
@@ -247,7 +247,7 @@ The most popular is {% aTargetBlank
 
 To use normalize.css:
 
-1. Download it from the URL above.
+1. Download it from the link above.
 2. Add the following in the `head` element of HTML files:
 
 ```html
@@ -256,10 +256,11 @@ To use normalize.css:
 
 ### CSS box model
 
-The CSS box model defines how padding, border, and margin are added to elements.
-Padding is outside the content and inside the border.
+The CSS box model defines how padding, border, and margin
+are added to elements.
+Padding is outside the content and inside the border can be set to `0`.
 The border is optional.
-Margin is outside the border.
+Margin is outside the border and can also be set to `0`.
 
 <img alt="CSS box model" style="width: 50%"
   src="/blog/assets/css-box-model.png?v={{pkg.version}}"
@@ -291,10 +292,20 @@ For example, consider the following HTML:
 The following CSS rules set the color of
 the text “I am the child.” to different values.
 The color used depends on the specificity of the selectors.
-Scores represented by a list of four numbers
-are explained after this example.
+The scores are represented by lists of four numbers
+and are explained after this example.
 
 ```css
+/* score is 0,1,1,0 */
+.parent > #me {
+  color: pink;
+}
+
+/* same score as the previous selector */
+.parent #me {
+  color: red;
+}
+
 /* score is 0,1,0,0 */
 #me {
   color: orange;
@@ -305,8 +316,7 @@ are explained after this example.
   color: yellow;
 }
 
-/* This has the same specificity as the rule before: 0,0,2,0.
-   The last one wins. */
+/* same score as the previous selector */
 .parent .child {
   color: green;
 }
@@ -316,7 +326,7 @@ are explained after this example.
   color: blue;
 }
 
-/* This has the same specificity as the rule before: 0,0,1,0.
+/* same score as the previous selector;
    It applies the color purple to the
    element with the class “parent”,
    but the previous rule applies the color blue
@@ -326,8 +336,9 @@ are explained after this example.
 }
 ```
 
-The precedence order of these rules happens to be
-the order in which they are listed here.
+The precedence order of these rules happens to be the order
+in which they are listed here with the exception that
+when there are ties, the last one wins.
 Using a `style` attribute on the inner `div` has the highest specificity.
 
 There is a formula for computing the specificity score
@@ -351,13 +362,6 @@ which are more important than element names.
 It also means that the order in which `id` values,
 class names, and element names appear in a selector
 does not affect its specificity calculation.
-
-Here are some examples of applying this scoring:
-
-- The CSS selector `.parent > #me` has a score of 0,1,1,0.
-- The CSS selector `.parent #me` has the same score.
-- The CSS selector `.parent .child` has a score of 0,0,2,0
-  and so has a lower score than selectors that use an `id`.
 
 For more details on CSS specificity, see
 {% aTargetBlank "https://css-tricks.com/specifics-on-css-specificity/",
