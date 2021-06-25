@@ -12,6 +12,12 @@
     width: var(--size);
   }
 
+  /* Without this the button content briefly changes
+     to white when it is clicked only in Safari. */
+  #transform-demo button:active {
+    color: black;
+  }
+
   #transform-demo button.rotate {
     transform: rotate(180deg);
   }

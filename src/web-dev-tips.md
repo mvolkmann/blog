@@ -717,107 +717,9 @@ a header, footer, left nav and main area of a page.
 The default value of the CSS `display` property for many HTML elements,
 including `div`, is `block`.
 This prevents them from appearing on the same "row" as other elements,
-unless flex or grid layout is specified for the parent element.
+unless flex or grid layout is specified for their parent element.
 Another way to allow multiple block elements to appear on the same row
 is to set the CSS `display` property to `inline-block`.
-
-### pointer-events and appearance
-
-The CSS property `pointer-events` can be set to `none`
-so that click events pass through an element to
-elements that are behind it in stacking order or `z-index`.
-
-The CSS property `appearance`, along with vendor prefix variants,
-can be set to `none` to disable the default rendering for form controls
-such as `button`, `input`, `textarea`, and `select`.
-Other CSS properties can then be used to provide custom rendering
-while retaining the functionality of the underlying form control.
-
-The following example uses both of these on a `select` element.
-The goal is to control the size and color of the
-downward pointing triangle on the right side of the `select`.
-
-{% include "_pointer-events.html" %}
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Demo</title>
-    <style>
-      .select-wrapper {
-        --color: blue;
-        display: inline-block;
-        position: relative;
-      }
-
-      /* The ::after pseudo selector doesn't work on select elements,
-         but it does work on div elements. */
-      .select-wrapper::after {
-        content: '▼';
-        color: var(--color);
-        font-size: 1.2rem;
-
-        /* Position this over the small triangle
-           provided by the select element.
-           If appearance is set to none on the select,
-           no small triangle will be rendered. */
-        position: absolute;
-        right: 2px;
-        top: 6px;
-
-        /* When this is clicked, allow the click to be processed
-           by the select element, not this triangle. */
-        pointer-events: none;
-      }
-
-      select {
-        margin-left: 0.5rem;
-        width: 5rem;
-
-        /* This works in Chrome and Firefox, but Safari ignores it. */
-        padding: 0.5rem;
-
-        /* To get this to look nice in all the browsers, including Safari,
-           we can just draw it ourselves. */
-        appearance: none;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        border: 1px solid var(--color);
-        border-radius: 0; /* Safari has a non-zero default border radius. */
-      }
-    </style>
-    <script>
-      const prompt = 'Select a color.';
-      window.onload = () => {
-        const report = document.getElementById('report');
-        report.textContent = prompt;
-
-        const select = document.getElementById('color-select');
-        select.addEventListener('change', event => {
-          const {value} = event.target;
-          report.textContent = value ? `You selected ${value}.` : prompt;
-        });
-      };
-    </script>
-  </head>
-  <body>
-    <section>
-      <label for="color-select">Color</label>
-      <div class="select-wrapper">
-        <select id="color-select">
-          <option></option>
-          <option>Red</option>
-          <option>Green</option>
-          <option>Blue</option>
-        </select>
-      </div>
-      <p id="report"></p>
-    </section>
-  </body>
-</html>
-```
 
 ### Selectors
 
@@ -841,14 +743,15 @@ A rule can begin with a comma-separated list of selectors to match any of them.
 
 ### Combinators
 
-Selectors can be combined to specify relationships between elements.
+Selectors can be combined to specify the following
+relationships between elements:
 
 - descendant: `a b` applies to `b` elements that have an `a` ancestor.
 - child: `a > b` applies to `b` elements that have an `a` parent.
-- sibling: `a + b` applies to `b` elements that have
-  an immediately preceding `a` sibling.
 - sibling: `a ~ b` applies to `b` elements that have
   a preceding `a` sibling.
+- sibling: `a + b` applies to `b` elements that have
+  an immediately preceding `a` sibling.
 
 These can be combined to any depth. For example,
 `table tr > img` matches all `img` elements whose parent is a `tr` element
@@ -865,16 +768,16 @@ Categorized lists of commonly used pseudo classes are described below.
 
 **Location**
 
-- `:link` matches links that have not yet been visited.
+- `:link` matches links (`a` elements) that have not yet been visited.
 
 - `:visited` matches links that have been visited.
 
 **User action**
 
-- `:focus` matches the element that has focus.
+- `:focus` matches the element that currently has focus.
 
-- `:focus-within` matches the element that has focus
-  or elements that contain an element that has focus.
+- `:focus-within` matches the element that currently has focus
+  and elements that contain an element that currently has focus.
 
 - `:hover` matches elements being hovered over.
 
@@ -971,7 +874,7 @@ The other buttons change from blue to green when hovering over them.
       }
 
       input {
-        border: 1px solid gray;
+        border: 2px solid gray;
         border-radius: 0.5rem;
         padding: 0.5rem;
       }
@@ -1078,13 +981,13 @@ after the label of required form elements.
 ### CSS position
 
 The CSS `position` property supports many values.
-In this section we want to distinguish between three of them.
+This tip distinguishes between three of them.
 
-| position value | Description                                                         |
-| -------------- | ------------------------------------------------------------------- |
-| `absolute`     | relative to the document; removes from document flow                |
-| `fixed`        | relative to the viewport; removes from document flow                |
-| `sticky`       | relative to the document; stays in document flow, but can be offset |
+| position value | Description                                                                   |
+| -------------- | ----------------------------------------------------------------------------- |
+| `absolute`     | relative to the document; removes element from document flow                  |
+| `fixed`        | relative to the viewport; removes element from document flow                  |
+| `sticky`       | relative to the document; element remains in document flow, but can be offset |
 
 All of these use the `top`, `right`, `bottom`, and `left` properties
 to specify the actual position of the element.
@@ -1143,6 +1046,7 @@ that uses a `position` value of `relative`.
     </style>
   </head>
   <body>
+    <h4>CSS position absolute demo</h4>
     <div id="position-demo">
       <div id="first">First</div>
       <div id="second">Second</div>
@@ -1155,7 +1059,7 @@ that uses a `position` value of `relative`.
 
 <a name="css-position-fixed-sticky"></a>
 The next example shows the differences between the CSS `position` property
-values of `absolute`, `fixed`, and `sticky`.
+values `absolute`, `fixed`, and `sticky`.
 
 To run the demo, click the "Show Demo" button.
 After viewing it, click the "Back" button to return to this location.
@@ -1244,14 +1148,115 @@ using `position` `sticky` causes the "Fruit" line to remain in view.
 </html>
 ```
 
+### pointer-events and appearance
+
+The CSS property `pointer-events` can be set to `none`
+so that click events pass through an element to
+elements that are behind it in stacking order or `z-index`.
+
+The CSS property `appearance`, along with vendor prefix variants,
+can be set to `none` to disable the default rendering for form controls
+such as `button`, `input`, `textarea`, and `select`.
+Other CSS properties can then be used to provide custom rendering
+while retaining the functionality of the underlying form control.
+
+The following example uses both of these on a `select` element.
+The goal is to control the size and color of the
+downward pointing triangle on the right side of the `select`.
+
+{% include "_pointer-events.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      .select-wrapper {
+        --color: blue;
+        display: inline-block;
+        position: relative;
+      }
+
+      /* The ::after pseudo selector doesn't work on select elements,
+         but it does work on div elements.
+         This is why the select is wrapped in a div below. */
+      .select-wrapper::after {
+        content: '▼';
+        color: var(--color);
+        font-size: 1.2rem;
+
+        /* Position this over the small triangle
+           provided by the select element.
+           If appearance is set to none on the select,
+           no small triangle will be rendered. */
+        position: absolute;
+        right: 2px;
+        top: 6px;
+
+        /* When this is clicked, allow the click to be processed
+           by the select element, not this triangle. */
+        pointer-events: none;
+      }
+
+      select {
+        margin-left: 0.5rem;
+        width: 5rem;
+
+        /* This works in Chrome and Firefox, but Safari ignores it. */
+        padding: 0.5rem;
+
+        /* To get this to look nice in all the browsers, including Safari,
+           we can just draw it ourselves. */
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        border: 1px solid var(--color);
+        border-radius: 0; /* Safari has a non-zero default border radius. */
+      }
+    </style>
+    <script>
+      const prompt = 'Select a color.';
+      window.onload = () => {
+        const report = document.getElementById('report');
+        report.textContent = prompt;
+
+        const select = document.getElementById('color-select');
+        select.addEventListener('change', event => {
+          const {value} = event.target;
+          report.textContent = value ? `You selected ${value}.` : prompt;
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <section>
+      <label for="color-select">Color</label>
+      <div class="select-wrapper">
+        <select id="color-select">
+          <option></option>
+          <option>Red</option>
+          <option>Green</option>
+          <option>Blue</option>
+        </select>
+      </div>
+      <p id="report"></p>
+    </section>
+  </body>
+</html>
+```
+
 ### CSS transitions
 
-A CSS transition causes a change to specific CSS properties
+The CSS {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/transition",
+"transition property" %} causes changes to specific CSS properties
 to be applied over a given time duration.
 To demonstrate this we will implement a toggle component
 that is an oval containing a circle that represents a "thumb".
 Clicking anywhere in the oval causes the thumb to move left or right
-indicating some application-specific option being disable or enabled.
+indicating some application-specific option being disabled or enabled.
 The CSS property `left` has a transition duration of 0.3 seconds
 so any change to that property takes place gradually over that duration.
 
@@ -1319,7 +1324,9 @@ so any change to that property takes place gradually over that duration.
 
 ### CSS transforms
 
-CSS transforms translate, rotate, scale, and skew DOM elements.
+The CSS {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/transform",
+"transform property" %} translates, rotates, scales, and skews DOM elements.
 
 The example below renders a button containing a finger pointing emoji.
 When the button is pressed, a `rotate` `transform` is applied
@@ -1437,7 +1444,6 @@ but flashes a bit in Safari making the effect feel less polished.
     </script>
   </head>
   <body>
-    <p>Click card to flip it over.</p>
     <div class="card">
       <div class="card-container">
         <img alt="card back" src="pokemon-back.png" />
@@ -1450,7 +1456,9 @@ but flashes a bit in Safari making the effect feel less polished.
 
 ### Media queries
 
-CSS media queries have many uses, but the most common is to
+CSS {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries",
+"media queries" %} have many uses, but the most common is to
 apply different CSS properties based on the window width.
 
 The following example lays out elements
@@ -1503,8 +1511,9 @@ and vertically otherwise.
 
 ### window.matchMedia
 
-The CSS Object Model (CSSOM) `window.matchMedia` function
-can be used to support light and dark modes.
+The CSS Object Model (CSSOM) {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia",
+"window.matchMedia" %} function can be used to support light and dark modes.
 For example, the following line of JavaScript code
 determines if the user has configured their operating system
 to prefer dark mode:
