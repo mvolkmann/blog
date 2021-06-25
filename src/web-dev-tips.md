@@ -1605,7 +1605,7 @@ If the `body` `margin` is not zero then
 setting the width of a top-level element to `100vw`
 will cause it to overlap the right edge of the viewport,
 but setting the width to `100%` will not.
-For this reason often `100%` is preferred over `100vw`.
+For this reason `100%` is often preferred over `100vw`.
 
 The example below demonstrates the difference between `100vw` and `100%`.
 Notice the right borders and the use of `box-sizing: border-box;`.
