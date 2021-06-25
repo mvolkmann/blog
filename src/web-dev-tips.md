@@ -2294,11 +2294,136 @@ resolves or rejects. This is done with the static methods
 ### Fetch API
 
 The {% aTargetBlank
-"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API", "Fetch API" %}
-defines ...
+"https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API", "Fetch API" %},
+defined by the {% aTargetBlank "https://fetch.spec.whatwg.org",
+"Web Hypertext Application Working Group (WHATWG)" %}
+provides a JavaScript API for fetching resources, typically using HTTP.
+It defines a single function, {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch",
+"fetch" %} that takes
+a URL that identifies a resource (or a `Request` object)
+and an optional options object.
+The options object can include the following properties:
 
-TODO: Discuss the browser limit on the number of concurrent HTTP requests.
-TODO: Is the limit 5 in all modern browsers?
+- `method`: The value is a string value like `GET`, `POST`, `PUT`, or `DELETE`.
+- `headers`: The value is an object whose
+  keys are request header names and whose values are their values.
+- `body`: This specifies content to be passed in the request body.
+  Methods such as `POST` and `PUT` use this.
+  The value can be a string, a `FormData` object, a `Blob` object,
+  or one of several other less commonly used types.
+- and several more less commonly used properties
+
+The `fetch` function returns a `Promise` object.
+This promise resolves to a response object that contains
+many properties including:
+
+- `status`: This is an HTTP status code such as 200 (OK),
+  201 (Created), 400 (Bad Request), 401 (Unauthorized),
+  403 (Forbidden), 404 (Not Found), 500 (Internal Server Error),
+  and many more less commonly used values.
+- `statusText`: This is the status message
+  corresponding to the status code.
+- `ok`: This is a boolean that indicates
+  whether the request was successfully processed,
+  indicated by `status` being in the range 200 to 299.
+  Note that other status values do not cause
+  the returned promise to reject.
+- `headers`: The value is an object whose
+  keys are response header names and whose values are their values.
+- `body`: This is the response data
+  which can be text, including JSON, or binary data.
+  The `Content-Type` response header indicates the format of this data.
+
+Here are examples of using the `fetch` function to
+create (POST), retrieve (GET), update (PUT), and delete (DELETE)
+resources using a fictional set of {% aTargetBlank
+"https://en.wikipedia.org/wiki/Representational_state_transfer",
+"REST" %} services.
+
+```js
+const DOG_SERVICE_URL = 'https://dogs.com/manage';
+
+async function createDog(breed, name) {
+  const dog = {breed, name};
+  const body = JSON.stringify(dog);
+  const headers = {
+    'Content-Length': body.length,
+    'Content-Type': 'application.json'
+  };
+  const res = await fetch(
+    DOG_SERVICE_URL,
+    {method: 'POST', headers, body }
+  );
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function retrieveDog(id) {
+  const res = await fetch(DOG_SERVICE_URL + '/' + id);
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function updateDog(dog) {
+  const body = JSON.stringify(dog);
+  const headers = {
+    'Content-Length': body.length,
+    'Content-Type': 'application.json'
+  };
+  const res = await fetch(
+    DOG_SERVICE_URL + '/' + dog.id,
+    {method: 'PUT', headers, body }
+  );
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function deleteDog(id) {
+  const res = await fetch(
+    DOG_SERVICE_URL + '/' + id
+    {method: 'DELETE'}
+  );
+  if (!res.ok) throw new Error(await res.text());
+}
+```
+
+Here is example code that uses these functions:
+
+```js
+async function demo() {
+  try {
+    const dog1 = await createDog('Whippet', 'Comet');
+    console.log('created dog is', dog1);
+
+    const dog2 = await getDog(dog1.id);
+    console.log('retrieved dog is', dog2);
+
+    dog2.name = 'Fireball';
+    const dog3 = await updateDog(dog2);
+    console.log('updated dog is', dog3);
+
+    await deleteDog(dog3.id);
+    console.log('The dog is gone.');
+  } catch (e) {
+    console.error(e);
+  }
+}
+```
+
+Browsers limit the total number of open connections to other hosts
+and the number per host. As of 2021, the limits are those shown below.
+When the number of concurrent requests exceeds these limits,
+requests wait to be processed which can make their time to complete
+much longer than the actual processing time.
+
+| Browser | Total Connections | Connections per Host |
+| ------- | ----------------- | -------------------- |
+| Chrome  | 10                | 6                    |
+| Edge    | same as IE11      | same as IE11         |
+| Firefox | 17                | 6                    |
+| IE11    | 17                | 11                   |
+| Safari  | 17                | 6                    |
 
 ## Drawing
 
