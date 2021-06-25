@@ -492,13 +492,16 @@ the values of CSS variables in JavaScript code.
 
 ### Flex layout
 
-Flex layout is a powerful way to control
+{% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox",
+"Flex layout" %} is a powerful way to control
 the layout of HTML elements in one dimension.
 {% aTargetBlank "https://flexboxfroggy.com", "Flexbox Froggy" %}
 provides a great way to learn about this.
 
 There are many CSS properties that affect flex layout.
-The most commonly used properties are described here.
+The most commonly used properties applied to container elements
+are described here.
 
 - `display`
 
@@ -516,22 +519,25 @@ The most commonly used properties are described here.
   This controls layout on the major axis.
   The values are:
 
-  - `flex-start` (default) pushes children toward the start
-  - `flex-end` pushes children toward the end
-  - `center` centers children
+  - `flex-start` (default) pushes children toward the start.
+  - `flex-end` pushes children toward the end.
+  - `center` centers children.
   - `space-between` spreads children with
-    no space before the first or after the last
+    no space before the first or after the last.
   - `space-evenly` spreads children with
-    equal space before the first and after the last
+    equal space before the first and after the last.
   - `space-around` spreads children with
-    half space before the first and after the last
+    half space before the first and after the last.
 
 - `align-items`
 
   This controls layout on the minor axis.
-  The most commonly used values are `stretch` (default),
-  `flex-start` (pushes children toward start),
-  `flex-end` (pushes children toward end), and `center`.
+  The most commonly used values are:
+
+  - `stretch` (default)
+  - `flex-start` pushes children toward start
+  - `flex-end` pushes children toward end
+  - `center`
 
 - `flex-grow`
 
@@ -541,13 +547,17 @@ The most commonly used properties are described here.
   The `flex-grow` values of all the children are added to obtain a total.
   Then the `flex-grow` value of each child is
   divided by the total to get a percentage.
-  That percentage of the unused space in the parent container
+  That percentage of the **unused space** in the parent container
   is added to the size of the child element.
 
 - `gap`
 
   This controls the space between elements when
   `justify-content` is not one of the values that begins with `space-`.
+
+The table below demonstrates combinations of values
+for the `justify-content` and `align-items` properties.
+This is not an image. It is generated in your web browser.
 
 {% include "_flex-layout.html" %}
 
@@ -557,13 +567,15 @@ by setting their `align-self` property.
 
 ### Grid layout
 
-Grid layout is a powerful way to control
+{% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids",
+"Grid layout" %} is a powerful way to control
 the layout of HTML elements in two dimensions.
 {% aTargetBlank "https://cssgridgarden.com", "Grid Garden" %}
 provides a great way to learn about this.
 
 There are many CSS properties that affect grid layout.
-The most commonly used properties applied to a container element
+The most commonly used properties applied to container elements
 are described here.
 
 - `display`
@@ -619,10 +631,10 @@ are described here.
 The most commonly used properties applied to child elements
 are described here.
 
-- `grid-column-start`: This specifies the column number in which the child begins.
-- `grid-column-end`: This specifies the column number in which the child ends.
-- `grid-row-start`: This specifies the row number in which the child begins.
-- `grid-row-end`: This specifies the row number in which the child ends.
+- `grid-column-start` specifies the column number in which the child begins.
+- `grid-column-end` specifies the column number in which the child ends.
+- `grid-row-start` specifies the row number in which the child begins.
+- `grid-row-end` specifies the row number in which the child ends.
 - `grid-column: {start} / {end}` specifies the start and end columns.
 - `grid-column: {start} / span {columns}` specifies the start and # of columns.
 - `grid-row: {start} / {end}` specifies the start and end rows.
@@ -632,6 +644,9 @@ are described here.
 
 Negative values for `end` count from the last column or row.
 
+Since a grid area already knows the columns and rows that it occupies,
+specifying the `grid-area` property makes the other properties unnecessary.
+
 The default alignment of elements within their grids is specified setting
 the `justify-content` and `align-items` properties on the container.
 Child elements can override this by setting their
@@ -639,11 +654,6 @@ Child elements can override this by setting their
 
 In the example below grid layout is used to layout
 a header, footer, left nav and main area of a page.
-
-The table below demonstrates combinations of
-`justify-content` and `align-items` values.
-The `justify-content` values appear in the column headings
-and the `align-items` values appear in the row headings.
 
 {% include "_grid-layout.html" %}
 
