@@ -372,10 +372,12 @@ For more details on CSS specificity, see
 There are many ways to center content using CSS.
 Four common ways are:
 
-- `text-align` property
+- `text-align` property set to `center`
 - `margin` property set to `auto` when `display` is `block`
-- using flex layout
-- absolute positioning using translate
+- `display` property set to `flex` and setting the
+  `justify-content` and/or `align-items` properties to `center`
+- `position` property set to `absolute` or `fixed`
+  and setting the `transform` property
 
 Each of these approaches are demonstrated in the code below.
 
@@ -456,15 +458,17 @@ Each of these approaches are demonstrated in the code below.
 
 CSS variables (a.k.a custom properties) are useful for
 storing and referring to values that are used in multiple places.
-Changing the value of a variable updates all the places where it is used.
+Changing the value of a variable updates
+all the property values where it is used.
 Common uses include storing the values of colors and sizes.
 
-Here are examples of the syntax for defining and referring to a CSS variable:
+The following examples show the syntax
+for defining and referring to a CSS variable:
 
 ```css
 :root {
   /* This matches the root element "html". */
-  /* All elements in the document can use variables defined here. */
+  /* All other CSS rules can use variables defined here. */
   --primary-color: cornflowerblue;
 }
 
@@ -473,12 +477,18 @@ p {
 }
 
 .circle {
+  /* This variable can only be used in this rule
+     and in rules that match descendant elements */
   --size: 4rem;
+
   border: 1px solid calc(var(--size) / 2);
   height: var(--size);
   width: var(--size);
 }
 ```
+
+Later we will see how to get and set
+the values of CSS variables in JavaScript code.
 
 ### Flex layout
 
