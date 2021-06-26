@@ -14,6 +14,18 @@ to avoid appealing only to users of specific web frameworks.
 Most of the examples run live in this web page.
 You can also copy the code into a `.html` file and open it in a web browser.
 
+For information about any fundamental web topics like
+HTML, CSS, and JavaScript that are not covered here,
+or to get more detail on topics that are covered here,
+your first stop should be the {% aTargetBlank
+"https://developer.mozilla.org/en-US/",
+"Mozilla Developer Network (MDN) Web Docs" %}.
+Start a web search with "MDN"; for example, "MDN CSS transform".
+
+Another great resource is {% aTargetBlank "https://caniuse.com", "Can I use" %}
+which provides details on browser support for
+all fundamental web development features.
+
 ## HTML
 
 ### Semantic elements
