@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 This is a collection of tips related to web development
 divided into categories.
 It assumes that you already know HTML, CSS, and JavaScript to some extent,
