@@ -1838,7 +1838,7 @@ const dogs = [
 ];
 ```
 
-- `forEach` iterates over the elements.
+- `forEach` takes a function and iterates over the elements.
   It is useful in cases where it is desirable to
   call a named function on each element.
   In other cases it can be more clear to use a `for of` loop.
@@ -1849,7 +1849,7 @@ const dogs = [
   }
 
   dogs.forEach(dog => report(dog));
-  dogs.forEach(report); // same as previous line
+  dogs.forEach(report); // same as the previous line
 
   for (const dog of dogs) {
     report(dog);
@@ -1875,58 +1875,65 @@ const dogs = [
   4) Comet
   ```
 
-- `filter` creates a new array containing a subset of the elements.
+- `filter` takes a function and
+  creates a new array containing a subset of the elements.
 
   ```js
-  const bigDogs = dogs.filter(dog => dog.weight &gt;= 70);
+  const bigDogs = dogs.filter(dog => dog.weight >= 70);
   // [object for Ramsay, object for Oscar]
   ```
 
-- `map` creates a new array with the same length.
+- `map` takes a function and creates a new array with the same length.
 
   ```js
   const dogNames = dogs.map(dog => dog.name);
   // ['Maisey', 'Ramsay', 'Oscar', 'Comet']
   ```
 
-- `reduce` creates a single value from the elements and an initial value.
+- `reduce` takes a function and an initial value,
+  and creates a single value from the elements.
+  The parameter name `acc` is short for "accumulator" and is a
+  common name for the first parameter of the function passed to `map`.
 
   ```js
-  // Here the initial value is zero.
+  // The initial value is zero.
   const totalWeight = dogs.reduce((acc, dog) => acc + dog.weight, 0);
 
   // Create an object where the keys are dog names
   // and the values are the dog objects.
   // This doesn't gracefully handle having
   // multiple dogs with the same name.
-  // Here the initial value is an empty object.
+  // The initial value is an empty object.
   const nameToDogMap = dogs.reduce((acc, dog) => {
     acc[dog.name] = dog;
     return acc;
   }, {});
   ```
 
-- `some` determines if some element meets specified criteria.
+- `some` takes a function and
+  determines if some element meets the criteria specified by the function.
 
   ```js
   const haveWhippet = dogs.some(dog => dog.breed === 'Whippet'); // true
   ```
 
-- `every` determines if every element meets specified criteria.
+- `every` takes a function and
+  determines if every element meets the criteria specified by the function.
 
   ```js
   const allWhippets = dogs.every(dog => dog.breed === 'Whippet'); // false
   ```
 
-- `find` finds the first element that meets specified criteria.
+- `find` takes a function and
+  finds the first element that meets the criteria specified by the function.
 
   ```js
-  const firstBigDog = dogs.find(dog => dog.weight &gt;= 70);
+  const firstBigDog = dogs.find(dog => dog.weight >= 70);
   // object for Ramsay
   ```
 
-- `findIndex` finds the index of the first element
-  that meets specified criteria.
+- `findIndex` takes a function and finds the index of the first element
+  that meets the criteria specified by the function.
 
   ```js
   const firstBigDogIndex = dogs.findIndex(dog => dog.weight &gt;= 70);
@@ -1955,6 +1962,7 @@ const dogs = [
   It must return a negative number if they are in the correct order,
   a positive number if they are not,
   and zero if they are the same or the order doesn't matter.
+  Also see `Intl.Collator` described later.
 
   ```js
   // Sort dogs by weight in ascending order.
@@ -1964,10 +1972,12 @@ const dogs = [
   dogs.sort((d1, d2) => d2.weight - d1.weight);
 
   // Sort dogs by name.
+  // Using "localeCompare" sorts in a language-specific way.
   dogs.sort((d1, d2) => d1.name.localeCompare(d2.name));
   ```
 
-- `push` adds any number of values to the end.
+- `push` adds any number of values to the end
+  by passing any number of arguments.
 
   ```js
   dogs.push(snoopy); // Adds Snoopy at the end.
@@ -1979,7 +1989,8 @@ const dogs = [
   dogs.pop(snoopy); // Removes Snoopy from the end.
   ```
 
-- `unshift` adds any number of values to the beginning.
+- `unshift` adds any number of values to the beginning
+  by passing any number of arguments.
 
   ```js
   dogs.unshift(snoopy); // Adds Snoopy at the beginning.
@@ -1992,6 +2003,8 @@ const dogs = [
   ```
 
 ### CSS properties from JavaScript
+
+TODO: Continue review from here.
 
 HTML elements are represented by Document Object Model (DOM) objects in memory.
 DOM objects have a style property whose value is an object.
