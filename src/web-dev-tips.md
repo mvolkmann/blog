@@ -543,7 +543,7 @@ Each of these approaches are demonstrated in the code below.
 </html>
 ```
 
-### Variables
+### CSS variables
 
 CSS variables (a.k.a custom properties) are useful for
 storing and referring to values that are used in multiple places.
@@ -1624,8 +1624,11 @@ CSS {% aTargetBlank
 apply different CSS properties based on the window width.
 
 The following example lays out elements
-horizontally when the browser window is wider than 700 pixels
-and vertically otherwise.
+horizontally when the browser window is wider than 768 pixels (desktop)
+and vertically otherwise (mobile).
+This treats the default styling as being for desktop
+and the media query styling as being for mobile devices.
+The opposite can be done with a media query that specifies `min-width`.
 
 {% include "_media-queries.html" %}
 
@@ -1648,7 +1651,7 @@ and vertically otherwise.
         padding: 1rem;
       }
 
-      @media (max-width: 700px) {
+      @media (max-width: 768px) {
         .container {
           align-items: flex-start;
           flex-direction: column;
@@ -1805,6 +1808,105 @@ return total >= 100 ? true : false;
 // Best
 return total >= 100;
 ```
+
+### Variables
+
+JavaScript supports three keywords for declaring variables,
+`var`, `const`, and `let`.
+
+| Keyword | Modifiable | Scope                        | Hoisted |
+| ------- | ---------- | ---------------------------- | ------- |
+| `var`   | yes        | enclosing function or global | yes     |
+| `const` | no         | enclosing block or module    | no      |
+| `let`   | yes        | enclosing block or module    | no      |
+
+Hoisted variables can be used in the scope of the variable before
+their declaration, which is odd from a code readability standpoint.
+
+Use of `var` is generally discouraged.
+
+Using `const` provides useful documentation to readers of the code
+that a variable will not be modified.
+Keep in mind that when a `const` variable holds an object or array,
+its contents can be modified, but the variable cannot be modified
+to refer to a different object or array.
+
+Most JavaScript developers reach for `const` first and
+only use the `let` keyword for variables whose values need to be modified.
+
+### Function declarations
+
+JavaScript supports two syntaxes for declaring functions,
+function expressions (older style) and arrow functions (newer style).
+There are important differences between these
+and there are good reasons to use both.
+
+| Can Use Keyword  | Function Expression | Arrow Function |
+| ---------------- | ------------------- | -------------- |
+| can use `this`?  | yes                 | no             |
+| can use `super`? | yes                 | no             |
+| can use `yield`? | yes                 | no             |
+
+The `this` and `super` keywords are used in functions
+that are methods of some object, so arrow functions
+cannot be used to define methods that use these keywords.
+
+The `yield` keyword is used in {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*",
+"generator functions" %}, so arrow functions cannot be used to define them.
+
+There are a few other differences that rarely come up in practice.
+
+Arrow functions are ideal for defining functions
+that only need to be passed to another function,
+such as the `Array` methods described later.
+They are also ideal for functions that only
+need to return the value of a single expression
+because those can omit the curly braces around the function body
+and the `return` keyword.
+
+The following example uses such an arrow function to sort an array of numbers.
+
+```js
+const numbers = [7, 1, 8, 4, 3];
+
+// Sorting using a function expression ... verbose.
+numbers.sort(function (n1, n2) {
+  return n1 - n2;
+});
+
+// Sorting using an arrow function ... compact.
+numbers.sort((n1, n2) => n1 - n2);
+```
+
+There are two ways to define a named function,
+as shown in the examples below.
+
+```js
+// Function expression
+function average(numbers) {
+  const sum = numbers.reduce((acc, n) => acc + n, 0);
+  return sum / numbers.length;
+}
+
+// Arrow function
+const average = numbers => {
+  const sum = numbers.reduce((acc, n) => acc + n, 0);
+  return sum / numbers.length;
+};
+```
+
+Using an arrow function does not save typing because
+the `function` keyword is shorter than the combination of
+the `const` keyword, the `=` operator, the `=>` arrow,
+and the spaces around them.
+
+Some developers prefer using function expressions to define named functions
+because the first line of code immediately makes it clear
+that a function is being defined.
+When an arrow function is used, readers of the code don't know
+that a function is being defined until they
+scan enough of the first line to find the `=>` arrow.
 
 ### Nested ternaries
 
