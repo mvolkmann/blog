@@ -36,7 +36,7 @@ when the content is only text to be rendered.
 In most cases `click` events should only be associated
 with `<button>` elements, not with generic elements like `<div>`.
 
-### input element type attribute
+### `input` element `type` attribute
 
 HTML5 added many values for the `input` element `type` attribute.
 These can change the way the element is rendered
@@ -86,7 +86,7 @@ an `input` event will be fired after each character
 whereas a `change` event will only be fired once
 after focus leaves the `input`.
 
-### Value of input elements
+### Value of `input` elements
 
 The value displayed in an `input` element is specified by an attribute
 that is determined by the value of its `type` attribute.
@@ -94,7 +94,7 @@ For most `input` types the `value` attribute is used for this purpose.
 But when the `type` is `"checkbox"` or `"radio"`,
 the value is specified using the `checked` attribute.
 
-### input and datalist
+### `input` and `datalist`
 
 An `input` element can have an associated `datalist`.
 This causes the `input` to act like an "auto-complete".
@@ -236,7 +236,82 @@ which defaults to `16px`.
 A web app can allow each user to modify this size,
 perhaps saving their preference in `localStorage`.
 
-### CSS resets
+### Viewport units
+
+There are four CSS viewport units.
+
+| Unit   | Description               |
+| ------ | ------------------------- |
+| `vh`   | 1% of the viewport height |
+| `vw`   | 1% of the viewport width  |
+| `vmax` | larger of `vh` and `vw`   |
+| `vmin` | smaller of `vh` and `vw`  |
+
+The size `100vw` is the full viewport width including the `body` margin.
+The size `100%` is the full width of the parent element.
+For children of the `body` element, this does not include the `margin`.
+If the `body` `margin` is zero then `100vw` and `100%` are equivalent.
+If the `body` `margin` is not zero then
+setting the width of a top-level element to `100vw`
+will cause it to overlap the right edge of the viewport,
+but setting the width to `100%` will not.
+For this reason `100%` is often preferred over `100vw`.
+
+The example below demonstrates the difference between `100vw` and `100%`.
+Notice the right borders and the use of `box-sizing: border-box;`.
+
+{% include "_viewport-vs-percent.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      body {
+        margin: 1rem;
+      }
+
+      div {
+        box-sizing: border-box;
+        display: flex;
+        font-size: 1rem;
+        outline: 1px solid black;
+        padding: 1rem;
+      }
+
+      div > div {
+        flex-grow: 1;
+      }
+
+      .percent100 {
+        width: 100%;
+      }
+
+      .vw100 {
+        width: 100vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vw100">100vw</div>
+
+    <div class="percent100">100%</div>
+
+    <div class="percent100">
+      <div>
+        <div class="percent100">left</div>
+      </div>
+      <div>
+        <div class="percent100">right</div>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
+### Resets
 
 A CSS reset is a set of CSS rules that attempt to
 set the CSS properties of standard HTML elements
@@ -254,7 +329,7 @@ To use normalize.css:
 <link rel="stylesheet" href="normalize.css" />
 ```
 
-### CSS box model
+### Box model
 
 The CSS box model defines how padding, border, and margin
 are added to elements.
@@ -269,6 +344,8 @@ Margin is outside the border and can also be set to `0`.
 Padding, border, and margin can be specified to be the same on all four sides
 or be different on each side.
 
+### `box-sizing` property
+
 When an element has a specified `width` and `height`,
 by default those apply to the content and
 do not include the `padding`, `border`, and `margin`.
@@ -277,7 +354,7 @@ If `box-sizing` is set to `border-box` then the `width` and `height`
 include the content, `padding`, and `border`, but not the `margin`.
 There are no other supported values for the `box-sizing` property.
 
-### CSS specificity
+### Specificity
 
 CSS specificity determines the precedence of conflicting CSS rules.
 For example, consider the following HTML:
@@ -712,7 +789,7 @@ a header, footer, left nav and main area of a page.
 </html>
 ```
 
-### inline-block
+### `display` `inline-block` property
 
 The default value of the CSS `display` property for many HTML elements,
 including `div`, is `block`.
@@ -978,7 +1055,7 @@ after the label of required form elements.
 </html>
 ```
 
-### CSS position
+### `position` property
 
 The CSS `position` property supports many values.
 This tip distinguishes between three of them.
@@ -1148,7 +1225,80 @@ using `position` `sticky` causes the "Fruit" line to remain in view.
 </html>
 ```
 
-### pointer-events and appearance
+### Vendor prefixes
+
+Some CSS properties require "vendor prefixes" that indicate they are
+vendor-specific extensions or are considered experimental.
+Vendor prefixes include `-moz-` for Firefox,
+`-ms-` for Internet Explorer and Edge, and
+`-webkit-` for Chrome and Safari.
+
+Over time the need for these prefixes has diminished,
+but many CSS properties still require them.
+For a list of CSS properties that still require vendor prefixes in 2021,
+see the section "Prefixing in 2021" in this {% aTargetBlank
+"https://css-tricks.com/is-vendor-prefixing-dead/#prefixing-in-2021",
+"CSS Tricks article" %}.
+
+It is not necessary to manually write CSS properties with vendor prefixes.
+Tools such as {% aTargetBlank "https://postcss.org", "PostCSS" %} and
+{% aTargetBlank "https://sass-lang.com", "Sass" %} can generate these for you.
+Here are the steps to setup and use PostCSS and the
+{% aTargetBlank "https://github.com/postcss/autoprefixer", "autoprefixer" %}
+plugin to do this:
+
+1. For projects that do not have a `package.json` file,
+   create one by entering `npm init` and answering the questions it asks.
+1. Enter `npm install -D postcss postcss-cli autoprefixer`
+1. Add the following npm script in `package.json`:
+
+   ```json
+   "postcss": "postcss --use autoprefixer --dir build src/**/*.css"
+   ```
+
+1. Enter `npm run postcss` to generate new CSS files in the `build` directory.
+1. Use the CSS files in the `build` directory
+   instead of those in the `src` directory.
+
+This changes CSS like the following:
+
+```css
+select {
+  appearance: none;
+}
+```
+
+to this:
+
+```css
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+```
+
+The `autoprefixer` npm package is one of many plugins available for PostCSS.
+Other popular plugins include:
+
+- {% aTargetBlank "https://github.com/csstools/postcss-preset-env",
+  "postcss-preset-env" %}
+
+  This "lets you convert modern CSS into something most browsers can understand,
+  determining the polyfills you need based on
+  your targeted browsers or runtime environments."
+
+- {% aTargetBlank "https://github.com/hudochenkov/postcss-sorting",
+  "postcss-sorting" %}
+
+  This sorts properties within rules, not rules based on selectors.
+
+- {% aTargetBlank "https://stylelint.io/user-guide/usage/postcss-plugin",
+  "stylelint" %}
+
+  This is a "linter that helps you avoid errors and enforce conventions."
+
+### `pointer-events` and `appearance`
 
 The CSS property `pointer-events` can be set to `none`
 so that click events pass through an element to
@@ -1247,7 +1397,7 @@ downward pointing triangle on the right side of the `select`.
 </html>
 ```
 
-### CSS transitions
+### Transitions
 
 The CSS {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/CSS/transition",
@@ -1322,7 +1472,7 @@ so any change to that property takes place gradually over that duration.
 </html>
 ```
 
-### CSS transforms
+### Transforms
 
 The CSS {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/CSS/transform",
@@ -1509,11 +1659,11 @@ and vertically otherwise.
 </html>
 ```
 
-### window.matchMedia
+### `window.matchMedia` method
 
 The CSS Object Model (CSSOM) {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia",
-"window.matchMedia" %} function can be used to support light and dark modes.
+"window.matchMedia" %} method can be used to support light and dark modes.
 For example, the following line of JavaScript code
 determines if the user has configured their operating system
 to prefer dark mode:
@@ -1586,166 +1736,19 @@ The following example demonstrates this.
 </html>
 ```
 
-### Viewport units
-
-There are four CSS viewport units.
-
-| Unit   | Description               |
-| ------ | ------------------------- |
-| `vh`   | 1% of the viewport height |
-| `vw`   | 1% of the viewport width  |
-| `vmax` | larger of `vh` and `vw`   |
-| `vmin` | smaller of `vh` and `vw`  |
-
-The size `100vw` is the full viewport width including the `body` margin.
-The size `100%` is the full width of the parent element.
-For children of the `body` element, this does not include the `margin`.
-If the `body` `margin` is zero then `100vw` and `100%` are equivalent.
-If the `body` `margin` is not zero then
-setting the width of a top-level element to `100vw`
-will cause it to overlap the right edge of the viewport,
-but setting the width to `100%` will not.
-For this reason `100%` is often preferred over `100vw`.
-
-The example below demonstrates the difference between `100vw` and `100%`.
-Notice the right borders and the use of `box-sizing: border-box;`.
-
-{% include "_viewport-vs-percent.html" %}
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Demo</title>
-    <style>
-      body {
-        margin: 1rem;
-      }
-
-      div {
-        box-sizing: border-box;
-        display: flex;
-        font-size: 1rem;
-        outline: 1px solid black;
-        padding: 1rem;
-      }
-
-      div > div {
-        flex-grow: 1;
-      }
-
-      .percent100 {
-        width: 100%;
-      }
-
-      .vw100 {
-        width: 100vw;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="vw100">100vw</div>
-
-    <div class="percent100">100%</div>
-
-    <div class="percent100">
-      <div>
-        <div class="percent100">left</div>
-      </div>
-      <div>
-        <div class="percent100">right</div>
-      </div>
-    </div>
-  </body>
-</html>
-```
-
-### Vendor prefixes
-
-Some CSS properties require "vendor prefixes" that indicate they are
-vendor-specific extensions or are considered experimental.
-Vendor prefixes include `-moz-` for Firefox,
-`-ms-` for Internet Explorer and Edge, and
-`-webkit-` for Chrome and Safari.
-
-Over time the need for these prefixes has diminished,
-but many CSS properties still require them.
-For a list of CSS properties that still require vendor prefixes in 2021,
-see the section "Prefixing in 2021" in this {% aTargetBlank
-"https://css-tricks.com/is-vendor-prefixing-dead/#prefixing-in-2021",
-"CSS Tricks article" %}.
-
-It is not necessary to manually write CSS properties with vendor prefixes.
-Tools such as {% aTargetBlank "https://postcss.org", "PostCSS" %} and
-{% aTargetBlank "https://sass-lang.com", "Sass" %} can generate these for you.
-Here are the steps to setup and use PostCSS and the
-{% aTargetBlank "https://github.com/postcss/autoprefixer", "autoprefixer" %}
-plugin to do this:
-
-1. For projects that do not have a `package.json` file,
-   create one by entering `npm init` and answering the questions it asks.
-1. Enter `npm install -D postcss postcss-cli autoprefixer`
-1. Add the following npm script in `package.json`:
-
-   ```json
-   "postcss": "postcss --use autoprefixer --dir build src/**/*.css"
-   ```
-
-1. Enter `npm run postcss` to generate new CSS files in the `build` directory.
-1. Use the CSS files in the `build` directory
-   instead of those in the `src` directory.
-
-This changes CSS like the following:
-
-```css
-select {
-  appearance: none;
-}
-```
-
-to this:
-
-```css
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-```
-
-The `autoprefixer` npm package is one of many plugins available for PostCSS.
-Other popular plugins include:
-
-- {% aTargetBlank "https://github.com/csstools/postcss-preset-env",
-  "postcss-preset-env" %}
-
-  This "lets you convert modern CSS into something most browsers can understand,
-  determining the polyfills you need based on
-  your targeted browsers or runtime environments."
-
-- {% aTargetBlank "https://github.com/hudochenkov/postcss-sorting",
-  "postcss-sorting" %}
-
-  This sorts properties within rules, not rules based on selectors.
-
-- {% aTargetBlank "https://stylelint.io/user-guide/usage/postcss-plugin",
-  "stylelint" %}
-
-  This is a "linter that helps you avoid errors and enforce conventions."
-
-### CSS linting
+### Linting
 
 The {% aTargetBlank "https://stylelint.io", "stylelint" %} linter
-is a great option for detecting errors and formatting issues
-in CSS and Sass syntax.
+is a great option for detecting errors and formatting issues in CSS.
 It can validate CSS rules found in many file types including
-CSS, HTML, JavaScript, Markdown, PostCSS, Sass, Svelte, TypeScript, and Vue.
+CSS, HTML, JavaScript, Markdown, PostCSS,
+{% aTargetBlank "https://sass-lang.com", "Sass" %},
+Svelte, TypeScript, and Vue.
 
 To add this to a project:
 
 1. cd to the root directory of the project.
-1. Enter `npm install -D stylelint stylelint-config-standard`.
+1. Enter `npm install -D stylelint stylelint-config-standard`
 1. Create the file `.stylelintrc.json` containing the following:
 
    ```json
@@ -1763,7 +1766,9 @@ and run it by entering `npm run stylelint`:
 "stylelint": "stylelint **/*.{css,svelte}"
 ```
 
-There is a VS Code extension for stylelint (stylelint.vscode-stylelint)
+There is a VS Code extension for stylelint ({% aTargetBlank
+"https://github.com/stylelint/vscode-stylelint#readme",
+"stylelint.vscode-stylelint" %})
 that automatically validates CSS and identifies issues.
 
 ## JavaScript
@@ -1772,7 +1777,7 @@ that automatically validates CSS and identifies issues.
 
 Boolean is a fundamental data type.
 Many JavaScript expressions evaluate to a boolean value
-and can be used in a direct way as shown in the example below.
+and can be used in a direct way as shown below.
 
 ```js
 // Bad
@@ -1833,7 +1838,7 @@ const dogs = [
 ];
 ```
 
-- `forEach` iterates of the elements.
+- `forEach` iterates over the elements.
   It is useful in cases where it is desirable to
   call a named function on each element.
   In other cases it can be more clear to use a `for of` loop.
@@ -2721,7 +2726,7 @@ Note that the duck image is quite pixelated compared to the SVG version.
 </html>
 ```
 
-## Intl
+## `Intl`
 
 The ECMAScript Internationalization API defines the `Intl` namespace
 which defines constructor functions and associated methods for
@@ -2732,7 +2737,7 @@ If no locale is specified, the browser default locale is used.
 
 This section provides examples of the most commonly used features.
 
-### Intl.Collator
+### `Intl.Collator`
 
 This constructor function returns an object with a `compare` function that
 is suitable for use as a comparator function for the `Array` `sort` method.
@@ -2746,7 +2751,7 @@ console.log('names =', names);
 // ["Amanda", "Jeremy", "Mark", "mark", "Tami"]
 ```
 
-### Intl.DateTimeFormat
+### `Intl.DateTimeFormat`
 
 This constructor function returns an object with a `format` method
 that can be passed a date object or a number of milliseconds since the epoch.
@@ -2814,7 +2819,7 @@ formatter = new Intl.DateTimeFormat(locales, {
 console.log('custom =', formatter.format(date)); // Sun, Apr 16, 1961
 ```
 
-### Intl.DisplayNames
+### `Intl.DisplayNames`
 
 This constructor function returns an object with an `of` method.
 One use is to pass a region identifier and obtain the region name.
@@ -2832,7 +2837,7 @@ for (const region of regions) {
 // US = United States
 ```
 
-### Intl.ListFormat
+### `Intl.ListFormat`
 
 This constructor function returns an object with a `format` method
 that takes an array of strings and returns a string
@@ -2852,7 +2857,7 @@ formatter = new Intl.ListFormat('en', {
 console.log(formatter.format(colors)); // red, green, or blue
 ```
 
-### Intl.NumberFormat
+### `Intl.NumberFormat`
 
 This constructor function returns an object with a `format` method
 that takes a number and returns a formatted string.
@@ -2916,7 +2921,7 @@ for (const unit of units) {
 // meter narrow = 1,234m
 ```
 
-### Intl.RelativeTimeFormat
+### `Intl.RelativeTimeFormat`
 
 This constructor function returns an object with a `format` method
 that takes a numeric value and a unit name such as `day` or `month`.
