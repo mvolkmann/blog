@@ -368,95 +368,182 @@ If `box-sizing` is set to `border-box` then the `width` and `height`
 include the content, `padding`, and `border`, but not the `margin`.
 There are no other supported values for the `box-sizing` property.
 
-### Specificity
+### `box-shadow` property
 
-CSS specificity determines the precedence of conflicting CSS rules.
-For example, consider the following HTML:
+The `box-shadow` property adds shadows to
+one or more sides of an element.
+It does not add to the size of the element,
+so it does not affect element layout.
 
-```html
-<div class="parent">
-  I am the parent.
-  <div id="me" class="child" style="color: red">I am the child.</div>
-</div>
-```
+The most common examples of using shadows are to:
 
-The following CSS rules set the color of
-the text “I am the child.” to different values.
-The color used depends on the specificity of the selectors.
-The scores are represented by lists of four numbers
-and are explained after this example.
+- Make the element appear raised above the page
+  by adding outset shadows on the right and bottom sides.
+- Make the element appear sunken into the page
+  by adding inset shadows on the top and left sides.
+- Frame the element by adding outset shadows on all four sides.
+
+The `box-shadow` property takes 3 to 5 values.
+
+| # of Values | Meaning                                           |
+| ----------- | ------------------------------------------------- |
+| 3           | offset-x offset-y color                           |
+| 4           | offset-x offset-y blur-radius color               |
+| 5           | offset-x offset-y blur-radius spread-radius color |
+
+Additionally, the `inset` keyword can precede the color
+to cause the shadow to be drawn on
+the inside of the element rather than the outside
+(referred to here as "outset"),
+and on the opposite side of the element.
+
+Setting offset-x to a non-zero value
+adds shadow on the left or right side
+depending on whether the `inset` keyword is present.
+Likewise, setting offset-y to a non-zero value
+adds shadow on the top or bottom side
+depending on whether the `inset` keyword is present.
+
+The blur-radius value specifies the width over which
+the shadow changes from 100% opacity to zero opacity.
+The default value is `0` which results in a solid colored shadow.
+
+Setting a positive spread-radius value
+increases the shadow width on all four sides.
+This is typically only used when offset-x and offset-y are both zero
+in order to add a shadow on all four sides of an element.
+The default value is `0`.
+
+Here are the value patterns to add a shadow
+on a single side of an element.
+
+| Side          | offset-x offset y inset? |
+| ------------- | ------------------------ |
+| top outset    | 0 negative               |
+| top inset     | 0 positive inset         |
+| bottom outset | 0 positive               |
+| bottom inset  | 0 negative inset         |
+| right outset  | positive 0               |
+| right inset   | negative 0 inset         |
+| left outset   | negative 0               |
+| left inset    | positive 0 inset         |
+
+Multiple shadows can be added to an element
+by specifying comma-separated lists of values.
+For example, the following adds shadows of different colors
+to the right and bottom sides of an element:
 
 ```css
-/* score is 0,1,1,0 */
-.parent > #me {
-  color: pink;
-}
-
-/* same score as the previous selector */
-.parent #me {
-  color: red;
-}
-
-/* score is 0,1,0,0 */
-#me {
-  color: orange;
-}
-
-/* score is 0,0,2,0 */
-.parent > .child {
-  color: yellow;
-}
-
-/* same score as the previous selector */
-.parent .child {
-  color: green;
-}
-
-/* score is 0,0,1,0 */
-.child {
-  color: blue;
-}
-
-/* same score as the previous selector;
-   It applies the color purple to the
-   element with the class “parent”,
-   but the previous rule applies the color blue
-   to the element with the class “child”. */
-.parent {
-  color: purple;
-}
+box-shadow: 10px 0 10px red, 0 10px 10px blue;
 ```
 
-The precedence order of these rules happens to be the order
-in which they are listed here with the exception that
-when there are ties, the last one wins.
-Using a `style` attribute on the inner `div` has the highest specificity.
+The following example demonstrates many uses of shadows.
 
-There is a formula for computing the specificity score
-of any CSS rule that results in a list of four numbers.
-Considering the four numbers from left to right,
+{% include "_css-box-shadow.html" %}
 
-- The first is 1 for inline styles and 0 otherwise.
-- The second is the number of `id` values in the selector.
-- The third is the number of class names in the selector.
-- The fourth is the number of element name references in the selector.
+```html
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo</title>
+    <style>
+      .all-inset {
+        box-shadow: 0 0 10px 10px inset var(--color);
+      }
 
-The selector with the highest combined number,
-obtained by removing the commas and treating it as a single 4-digit number,
-wins. For example, treat a score of 1,2,3,4 as 1234.
+      .all-outset {
+        box-shadow: 0 0 10px 10px var(--color);
+      }
 
-This means that inline styling specified with a
-`style` attribute on an HTML element always wins.
-After this, `id` attributes are more important than class names,
-which are more important than element names.
+      .bottom-inset {
+        box-shadow: 0 -10px 10px inset var(--color);
+      }
 
-It also means that the order in which `id` values,
-class names, and element names appear in a selector
-does not affect its specificity calculation.
+      .bottom-outset {
+        box-shadow: 0 10px 10px var(--color);
+      }
 
-For more details on CSS specificity, see
-{% aTargetBlank "https://css-tricks.com/specifics-on-css-specificity/",
-"Specifics on CSS Specificity" %} on the CSS-Tricks site.
+      .box {
+        --color: blue;
+        --size: 4rem;
+        height: var(--size);
+        width: var(--size);
+
+        border: 1px solid var(--color);
+        font-family: sans-serif;
+        padding: 1rem;
+        margin: 1.5rem;
+      }
+
+      .left-inset {
+        box-shadow: 10px 0 10px inset var(--color);
+      }
+
+      .left-outset {
+        box-shadow: -10px 0 10px var(--color);
+      }
+
+      .right-bottom-outset {
+        box-shadow: 10px 10px 10px var(--color);
+      }
+
+      .right-inset {
+        box-shadow: -10px 0 10px inset var(--color);
+      }
+
+      .right-outset {
+        box-shadow: 10px 0 10px var(--color);
+      }
+
+      .row {
+        display: flex;
+      }
+
+      .top-inset {
+        box-shadow: 0 10px 10px inset var(--color);
+      }
+
+      .top-left-inset {
+        box-shadow: 10px 10px 10px inset var(--color);
+      }
+
+      .top-outset {
+        box-shadow: 0 -10px 10px var(--color);
+      }
+
+      .two-shadows {
+        box-shadow: 10px 0 10px red, 0 10px 10px blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="box top-outset">top outset</div>
+      <div class="box top-inset">top inset</div>
+      <div class="box bottom-outset">bottom outset</div>
+      <div class="box bottom-inset">bottom inset</div>
+    </div>
+    <div class="row">
+      <div class="box left-outset">left outset</div>
+      <div class="box left-inset">left inset</div>
+      <div class="box right-outset">right outset</div>
+      <div class="box right-inset">right inset</div>
+    </div>
+
+    <div class="row">
+      <div class="box right-bottom-outset">right and bottom outset</div>
+      <div class="box top-left-inset">top and left inset</div>
+    </div>
+
+    <div class="row">
+      <div class="box all-outset">outset all sides</div>
+      <div class="box all-inset">inset all sides</div>
+    </div>
+
+    <div class="box two-shadows">two shadows</div>
+  </body>
+</html>
+```
 
 ### Centering
 
@@ -818,6 +905,7 @@ CSS selectors appear at the beginning of CSS rules.
 They specify the elements to which a rule applies.
 The basic selectors are:
 
+- universal: selects every element; ex. `*`
 - type: specifies an element name; ex. `table`
 - id: specifies the value of an `id` attribute; ex. `#my-id`
 - class: specifies a CSS class name; ex. `.my-class`
@@ -1068,6 +1156,96 @@ after the label of required form elements.
   </body>
 </html>
 ```
+
+### Specificity
+
+CSS specificity determines the precedence of conflicting CSS rules.
+For example, consider the following HTML:
+
+```html
+<div class="parent">
+  I am the parent.
+  <div id="me" class="child" style="color: red">I am the child.</div>
+</div>
+```
+
+The following CSS rules set the color of
+the text “I am the child.” to different values.
+The color used depends on the specificity of the selectors.
+The scores are represented by lists of four numbers
+and are explained after this example.
+
+```css
+/* score is 0,1,1,0 */
+.parent > #me {
+  color: pink;
+}
+
+/* same score as the previous selector */
+.parent #me {
+  color: red;
+}
+
+/* score is 0,1,0,0 */
+#me {
+  color: orange;
+}
+
+/* score is 0,0,2,0 */
+.parent > .child {
+  color: yellow;
+}
+
+/* same score as the previous selector */
+.parent .child {
+  color: green;
+}
+
+/* score is 0,0,1,0 */
+.child {
+  color: blue;
+}
+
+/* same score as the previous selector;
+   It applies the color purple to the
+   element with the class “parent”,
+   but the previous rule applies the color blue
+   to the element with the class “child”. */
+.parent {
+  color: purple;
+}
+```
+
+The precedence order of these rules happens to be the order
+in which they are listed here with the exception that
+when there are ties, the last one wins.
+Using a `style` attribute on the inner `div` has the highest specificity.
+
+There is a formula for computing the specificity score
+of any CSS rule that results in a list of four numbers.
+Considering the four numbers from left to right,
+
+- The first is 1 for inline styles and 0 otherwise.
+- The second is the number of `id` values in the selector.
+- The third is the number of class names in the selector.
+- The fourth is the number of element name references in the selector.
+
+The selector with the highest combined number,
+obtained by removing the commas and treating it as a single 4-digit number,
+wins. For example, treat a score of 1,2,3,4 as 1234.
+
+This means that inline styling specified with a
+`style` attribute on an HTML element always wins.
+After this, `id` attributes are more important than class names,
+which are more important than element names.
+
+It also means that the order in which `id` values,
+class names, and element names appear in a selector
+does not affect its specificity calculation.
+
+For more details on CSS specificity, see
+{% aTargetBlank "https://css-tricks.com/specifics-on-css-specificity/",
+"Specifics on CSS Specificity" %} on the CSS-Tricks site.
 
 ### `position` property
 

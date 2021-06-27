@@ -1,0 +1,95 @@
+<style>
+  #css-box-shadow-demo .all-inset {
+    box-shadow: 0 0 10px 10px inset var(--color);
+  }
+
+  #css-box-shadow-demo .all-outset {
+    box-shadow: 0 0 10px 10px var(--color);
+  }
+
+  #css-box-shadow-demo .bottom-inset {
+    box-shadow: 0 -10px 10px inset var(--color);
+  }
+
+  #css-box-shadow-demo .bottom-outset {
+    box-shadow: 0 10px 10px var(--color);
+  }
+
+  #css-box-shadow-demo .box {
+    --color: blue;
+    --size: 4rem;
+    height: var(--size);
+    width: var(--size);
+
+    border: 1px solid var(--color);
+    font-family: sans-serif;
+    padding: 1rem;
+    margin: 1.5rem;
+  }
+
+  #css-box-shadow-demo .left-inset {
+    box-shadow: 10px 0 10px inset var(--color);
+  }
+
+  #css-box-shadow-demo .left-outset {
+    box-shadow: -10px 0 10px var(--color);
+  }
+
+  #css-box-shadow-demo .right-bottom-outset {
+    box-shadow: 10px 10px 10px var(--color);
+  }
+
+  #css-box-shadow-demo .right-inset {
+    box-shadow: -10px 0 10px inset var(--color);
+  }
+
+  #css-box-shadow-demo .right-outset {
+    box-shadow: 10px 0 10px var(--color);
+  }
+
+  #css-box-shadow-demo .row {
+    display: flex;
+  }
+
+  #css-box-shadow-demo .top-inset {
+    box-shadow: 0 10px 10px inset var(--color);
+  }
+
+  #css-box-shadow-demo .top-left-inset {
+    box-shadow: 10px 10px 10px inset var(--color);
+  }
+
+  #css-box-shadow-demo .top-outset {
+    box-shadow: 0 -10px 10px var(--color);
+  }
+
+  #css-box-shadow-demo .two-shadows {
+    box-shadow: 10px 0 10px red, 0 10px 10px blue;
+  }
+</style>
+<div id="css-box-shadow-demo">
+  <div class="row">
+    <div class="box top-outset">top outset</div>
+    <div class="box top-inset">top inset</div>
+    <div class="box bottom-outset">bottom outset</div>
+    <div class="box bottom-inset">bottom inset</div>
+  </div>
+  <div class="row">
+    <div class="box left-outset">left outset</div>
+    <div class="box left-inset">left inset</div>
+    <div class="box right-outset">right outset</div>
+    <div class="box right-inset">right inset</div>
+  </div>
+
+  <div class="row">
+    <div class="box right-bottom-outset">right and bottom outset</div>
+    <div class="box top-left-inset">top and left inset</div>
+  </div>
+
+  <div class="row">
+    <div class="box all-outset">outset all sides</div>
+    <div class="box all-inset">inset all sides</div>
+  </div>
+
+  <div class="box two-shadows">two shadows</div>
+</div>
