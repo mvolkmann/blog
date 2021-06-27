@@ -1,6 +1,5 @@
 <section id="canvas-demo">
   <canvas id="my-canvas" width="180" height="230" />
-  <img id="duck" src="/blog/assets/duck.png" width="50" height="50" />
 </section>
 
 <script>
@@ -33,8 +32,13 @@
 
   // Image
   // ctx.drawImage arguments are image, x, y, width, and height.
-  const image = document.getElementById('duck');
-  ctx.drawImage(image, 0, 60, 50, 50);
+  const image = new Image();
+  // Wait for the image to load before
+  // asking the canvas context to draw it.
+  image.onload = () => {
+    ctx.drawImage(image, 0, 60, 50, 50);
+  };
+  image.src = '/blog/assets/duck.png';
 
   // Line
   ctx.beginPath();

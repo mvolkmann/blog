@@ -28,6 +28,9 @@ Another great resource is {% aTargetBlank "https://caniuse.com", "Can I use" %}
 which provides details on browser support for
 all fundamental web development features.
 
+Many of the tip descriptions contains links to MDN pages and
+other resources to make it easy to access more detailed information.
+
 ## HTML
 
 ### Semantic elements
@@ -2483,13 +2486,14 @@ One example is the `fetch` function described in the next section.
 A promise can be in one of three states:
 
 - pending
-- fulfilled (a.k.a. resolved) with a value
+- fulfilled with a value (a.k.a. resolved)
 - rejected with a reason or error
 
 To create a `Promise` object, call the `Promise` constructor
 passing it a function that has one or two parameters.
-The first is a function to call to put the promise in a resolved state.
-The second, optional parameter is a function to call
+The first parameter is a function to call
+to put the promise in a resolved state.
+The second parameter (optional) is a function to call
 to put the promise into a rejected state.
 For example:
 
@@ -2511,12 +2515,13 @@ If the promise rejects, the second callback is called with the error.
 The `catch` method is passed one callback function
 that is called with the error only if the promise rejects.
 The `finally` method is passed one callback function
-that is called at the end with no arguments
-regardless of whether the promise resolves or rejects.
+that is called last with no arguments
+after the promise either resolves or rejects.
 
-The other syntax is to use the `await` keyword, often with `try`/`catch` blocks.
+The other syntax is to use the `await` keyword,
+often inside a `try` block that has a corresponding `catch` blocks.
 Many developers find this syntax easier to read.
-When the `await` keyword is used inside a function,
+Note that when the `await` keyword is used inside a function,
 the function definition must begin with the `async` keyword.
 
 The following example demonstrates using a `Promise`
@@ -2541,6 +2546,8 @@ This promise eventually resolves and never rejects.
 
       window.onload = () => {
         const button = document.getElementById('greet-btn');
+        // When the button is clicked, it waits 3 seconds and
+        // then displays a greeting in an alert dialog.
         button.addEventListener('click', () => greetLater('Mark', 3000));
       };
     </script>
@@ -2565,13 +2572,14 @@ that can resolve or reject.
     <meta charset="UTF-8" />
     <title>Demo</title>
 
-    <!-- Specifying type="module" enables use of top-level await. -->
+    <!-- Specifying type="module" enables use of top-level await,
+         which is using the await keyword outside of any function. -->
     <script type="module">
       // This takes a function and a number of milliseconds.
       // It returns a promise that waits for the
       // number of milliseconds and then calls the function.
       // If the function doesn't throw,
-      // the promise resolves to the return value.
+      // the promise resolves to the return value of the function.
       // If the function throws, the promise rejects with the error.
       function callLater(fn, ms) {
         return new Promise((resolve, reject) => {
@@ -2588,7 +2596,10 @@ that can resolve or reject.
       // This prints given text a specified number of times.
       // If times is zero or negative, it throws.
       function printTimes(text, times) {
-        if (times <= 0) throw new Error('printTimes requires times > 0');
+        if (times <= 0) {
+          throw new Error('printTimes requires times > 0');
+        }
+
         for (let i = 0; i < times; i++) {
           console.log(text);
         }
@@ -2617,7 +2628,7 @@ that can resolve or reject.
 
 The `try`/`catch` above can be replaced with the following code
 that uses the `then` and `catch` methods.
-This code is somewhat less readable.
+However, this code is somewhat less readable.
 
 ```js
 // This prints "yes" three times.
@@ -2650,6 +2661,7 @@ These are summarized in the table below.
 If the promise returned by `Promise.all` resolves,
 the value is an array of the resolved values
 in the same order as the promises that were passed in.
+If it rejects, the value is that of the first promise that rejects.
 
 If the promise returned by `Promise.allSettled` resolves,
 the value is an array of the resolved and rejected values
@@ -2666,7 +2678,8 @@ the value is that of the first promise that resolves.
 If it rejects, the value is that of the first promise that rejects.
 
 Sometimes it is convenient to create a `Promise` that immediately
-resolves or rejects. This is done with the static methods
+resolves or rejects and return it from a function.
+To create such a promise, call the static methods
 `Promise.reject(reason)` and `Promise.resolve(value)`.
 
 ### Fetch API
@@ -2684,7 +2697,7 @@ identifies a resource (or a {% aTargetBlank
 "Request" %} object) and an optional options object.
 The options object can include the following properties:
 
-- `method`: This is an HTTP method such as
+- `method`: This is an HTTP method name such as
   `GET`, `POST`, `PUT`, or `DELETE`.
 - `headers`: This is an object whose
   keys are request header names and whose values are their values.
@@ -2708,7 +2721,9 @@ can contains many properties including:
   whether the request was successfully processed,
   indicated by the `status` being in the range 200 to 299.
   Note that other status values do not cause
-  the returned promise to reject.
+  the returned promise to reject,
+  so it is important to check this boolean value
+  along with the status code and handle unsuccessful responses.
 - `headers`: This is an object whose
   keys are response header names and whose values are their values.
 - `body`: This is the response data
@@ -2776,6 +2791,8 @@ async function demo() {
     const dog1 = await createDog('Whippet', 'Comet');
     console.log('created dog is', dog1);
 
+    // This assumes that the JSON object returned by
+    // the createDog function includes an id property.
     const dog2 = await getDog(dog1.id);
     console.log('retrieved dog is', dog2);
 
@@ -2794,29 +2811,34 @@ demo();
 ```
 
 Browsers limit the total number of open connections to other hosts
-and the number per host.
+and the number of open connections per host.
 As of 2021, the limits for popular browsers are those shown below.
 When the number of concurrent requests exceeds these limits,
 requests wait to be processed, which can make their time to complete
 much longer than the actual processing time.
 
-| Browser | Total Connections | Connections per Host |
-| ------- | ----------------- | -------------------- |
-| Chrome  | 10                | 6                    |
-| Edge    | same as IE11      | same as IE11         |
-| Firefox | 17                | 6                    |
-| IE11    | 17                | 11                   |
-| Safari  | 17                | 6                    |
+| Browser | Total Open Connections | Open Connections per Host |
+| ------- | ---------------------- | ------------------------- |
+| Chrome  | 10                     | 6                         |
+| Edge    | same as IE11           | same as IE11              |
+| Firefox | 17                     | 6                         |
+| IE11    | 17                     | 11                        |
+| Safari  | 17                     | 6                         |
 
 ## Drawing
 
-Both SVG and the Canvas API can be used to draw things on a web page.
+Both {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/SVG", "SVG" %}
+and the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API",
+"Canvas API" %} can be used to draw things on a web page.
 
 SVG stands for "Scalable Vector Graphics".
 It is a markup language similar to HTML which makes it declarative.
 You tell it what to draw, not how to draw it.
-SVG elements appear in the DOM.
-It draws using vectors which allows it to draw sharp images at nearly any size.
+SVG elements appear in the DOM and can be styled with CSS.
+It draws using vectors which allows it
+to render sharp images at nearly any size.
 SVG is a great choice for rendering icons.
 
 The Canvas API draws on a `canvas` element using a JavaScript API
@@ -2832,10 +2854,20 @@ they need to do something that performs poorly when using SVG.
 
 The basics steps to use SVG are:
 
-1. Start with `<svg viewBox="0 0 maxX maxY" xmlns="http://www.w3.org/2000/svg">`.
+1. Start with the following element.
+
+   ```html
+   <svg viewBox="0 0 maxX maxY" xmlns="http://www.w3.org/2000/svg">
+     <!-- Add other elements here. -->
+   </svg>
+   ```
+
    The `viewBox` defines the coordinate system.
-   Replace `maxX` and `maxY` with the maximum values in those dimensions.
-   The minimum values do not have to be zero, but those are common values.
+   Replace `maxX` and `maxY` with
+   the maximum values in those dimensions.
+   The minimum values do not have to be zero,
+   but those are common values.
+
 1. Include child elements for rendering specific kinds of things.
    Commonly used elements include:
 
@@ -2851,14 +2883,14 @@ The basics steps to use SVG are:
 
 1. Wrap a `g` element around groups of children
    that need to be positioned or manipulated as a group.
-1. End with `</svg>`.
 1. Add a CSS rule for the `svg` element
    that defines its actual `width` and `height`.
 
 The color of lines, paths, and shapes can be specified
 using the CSS `stroke`, `stroke-width`, and `fill` properties.
 
-The following example demonstrates all the commonly used SVG elements.
+The following example demonstrates all of
+the commonly used SVG elements.
 
 {% include "_svg.html" %}
 
@@ -2935,7 +2967,10 @@ The basics steps to use the Canvas API are:
 
 1. Create a `canvas` element.
 1. Get a reference to the `canvas` DOM element.
-1. Get a context object from the `canvas` DOM element.
+1. Get a context object from the `canvas` DOM element
+   by calling the {% aTargetBlank
+   "https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext",
+   "getContext" %} method.
 1. Call methods on the context object to specify styling,
    draw paths, and fill paths.
 1. Call the context `beginPath` method to start a new path.
@@ -2985,8 +3020,13 @@ Note that the duck image is quite pixelated compared to the SVG version.
 
         // Image
         // ctx.drawImage arguments are image, x, y, width, and height.
-        const image = document.getElementById('duck');
-        ctx.drawImage(image, 0, 60, 50, 50);
+        const image = new Image();
+        // Wait for the image to load before
+        // asking the canvas context to draw it.
+        image.onload = () => {
+          ctx.drawImage(image, 0, 60, 50, 50);
+        };
+        image.src = './duck.png';
 
         // Line
         ctx.beginPath();
@@ -3045,7 +3085,6 @@ Note that the duck image is quite pixelated compared to the SVG version.
   <body>
     <section id="svg-demo">
       <canvas id="my-canvas" width="180" height="230" />
-      <img id="duck" src="./duck.png" width="50" height="50" />
     </section>
   </body>
 </html>
