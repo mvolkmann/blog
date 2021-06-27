@@ -416,6 +416,8 @@ The default value is `0`.
 
 Here are the value patterns to add a shadow
 on a single side of an element.
+Note that a small amount of shadow is also added to the adjacent sides
+in order to achieve a 3D effect and this cannot be prevented.
 
 | Side          | offset-x offset y inset? |
 | ------------- | ------------------------ |
@@ -430,12 +432,7 @@ on a single side of an element.
 
 Multiple shadows can be added to an element
 by specifying comma-separated lists of values.
-For example, the following adds shadows of different colors
-to the right and bottom sides of an element:
-
-```css
-box-shadow: 10px 0 10px red, 0 10px 10px blue;
-```
+See the `.two-shadows` selector below for an example.
 
 The following example demonstrates many uses of shadows.
 
@@ -464,7 +461,7 @@ The following example demonstrates many uses of shadows.
       }
 
       .box {
-        --color: blue;
+        --color: gray;
         --size: 4rem;
         height: var(--size);
         width: var(--size);
@@ -2298,19 +2295,18 @@ const dogs = [
 
 ### CSS properties from JavaScript
 
-TODO: Continue review from here.
-
-HTML elements are represented by Document Object Model (DOM) objects in memory.
-DOM objects have a style property whose value is an object.
+HTML elements are represented by
+Document Object Model (DOM) objects in memory.
+DOM objects have a `style` property whose value is an object.
 The keys of this object are camelCased CSS property names
-and the values the values of those CSS properties.
-New properties can be added to the style objects
+and the values are the values of those CSS properties.
+Using JavaScript, new properties can be added to the `style` objects
 and existing ones can be modified or deleted.
 
-In the example below the CSS variable `--color` is initially set to "red"
-and used to set the CSS `color` property of `p` elements.
+In the example below the CSS `color` property of the
+element with an id of "greeting" is set to "red" in a CSS rule.
 When the "Toggle Color" button is pressed a function is called that
-gets the current value of the CSS variable
+gets the current value of that style property
 and modifies it based on its current value.
 
 {% include "_change-css-style-properties.html" %}
@@ -2352,6 +2348,9 @@ combination of the `getComputedStyle` and `getPropertyValue` methods.
 JavaScript code can also modify the values of CSS variables
 using the `setProperty` method.
 This updates the use of all CSS properties that reference them.
+
+TODO: What is the difference between getProperty and getPropertyValue?
+TODO: Why does setProperty exist, but not setPropertyValue?
 
 In the example below the CSS variable `--color` is initially set to "red"
 and used to set the CSS `color` property of `p` elements.
