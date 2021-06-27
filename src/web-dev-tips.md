@@ -3092,23 +3092,29 @@ Note that the duck image is quite pixelated compared to the SVG version.
 
 ## `Intl`
 
-The ECMAScript Internationalization API defines the `Intl` namespace
-which defines constructor functions and associated methods for
-"language sensitive string comparison,
+The ECMAScript Internationalization API defines the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl",
+"Intl" %} namespace which defines constructor functions and associated methods
+for "language sensitive string comparison,
 number formatting, and date and time formatting."
 A locale can optionally be passed to the constructor functions.
 If no locale is specified, the browser default locale is used.
 
-This section provides examples of the most commonly used features.
+This section provides examples of the most commonly used features in this API.
 
 ### `Intl.Collator`
 
-This constructor function returns an object with a `compare` function that
+This {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator",
+"constructor function" %} returns an object with a `compare` function that
 is suitable for use as a comparator function for the `Array` `sort` method.
+It performs language-sensitive string comparison.
+
+Here is an example of using this constructor function:
 
 ```js
 const names = ['Mark', 'Tami', 'Amanda', 'Jeremy', 'mark'];
-const options = {caseFirst: 'upper'};
+const options = {caseFirst: 'upper'}; // sorts uppercase before lower
 const collator = new Intl.Collator([], options);
 names.sort(collator.compare);
 console.log('names =', names);
@@ -3117,8 +3123,10 @@ console.log('names =', names);
 
 ### `Intl.DateTimeFormat`
 
-This constructor function returns an object with a `format` method
-that can be passed a date object or a number of milliseconds since the epoch.
+This {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat",
+"constructor function" %} returns an object with a `format` method
+that can be passed a `Date` object or a number of milliseconds since the epoch.
 The constructor takes an options object which supports many options.
 The most commonly used options are:
 
@@ -3129,6 +3137,8 @@ The most commonly used options are:
 To output only the date, do not specify a value for the `timeStyle` option.
 To output only the time, do not specify `dateStyle` and do specify `timeStyle`.
 To output both, specify both `dateStyle` and `timeStyle`.
+
+Here are some examples of using this constructor function.
 
 ```js
 let formatter = new Intl.DateTimeFormat();
@@ -3162,16 +3172,19 @@ for (const timeStyle of timeStyles) {
 // short -> 2:19 PM
 ```
 
-Custom formats can specify the parts that are present
-and their formatting, but not their order or punctuation.
+Custom formats can specify the parts that should be present and
+their formatting, but not their order or the punctuation between them.
 Implementations are only required to
 support specific subsets of the following options.
+Example values are provided for each.
 
 - `weekday`: values are `long` (Thursday; default), `short` (Thu), and `narrow` (T)
 - `year`: values are `numeric` (1961) and `2-digit` (61)
 - `month`: values are `numeric` (2), `2-digit` (02), `long` (March),
   `short` (Mar), and `narrow` (M)
 - `day`, `hour`, `minute`, and `second`: values are `numeric` (7) and `2-digit` (07)
+
+Here is an example of defining and using a custom format.
 
 ```js
 formatter = new Intl.DateTimeFormat(locales, {
@@ -3185,8 +3198,11 @@ console.log('custom =', formatter.format(date)); // Sun, Apr 16, 1961
 
 ### `Intl.DisplayNames`
 
-This constructor function returns an object with an `of` method.
+This {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames",
+"constructor function" %} returns an object with an `of` method.
 One use is to pass a region identifier and obtain the region name.
+For example:
 
 ```js
 const displayNames = new Intl.DisplayNames('en', {type: 'region'});
@@ -3203,37 +3219,45 @@ for (const region of regions) {
 
 ### `Intl.ListFormat`
 
-This constructor function returns an object with a `format` method
+This {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/ListFormat/ListFormat",
+"constructor function" %} returns an object with a `format` method
 that takes an array of strings and returns a string
 that is a specific concatenation of the values.
+
+Here are some examples of using this constructor function.
 
 ```js
 const colors = ['red', 'green', 'blue'];
 let formatter = new Intl.ListFormat('en', {
   style: 'long',
-  type: 'conjunction'
+  type: 'conjunction' // "and" in English
 });
 console.log(formatter.format(colors)); // red, green, and blue
 formatter = new Intl.ListFormat('en', {
   style: 'long',
-  type: 'disjunction'
+  type: 'disjunction' // "or" in English
 });
 console.log(formatter.format(colors)); // red, green, or blue
 ```
 
 ### `Intl.NumberFormat`
 
-This constructor function returns an object with a `format` method
+This {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat",
+"constructor function" %} returns an object with a `format` method
 that takes a number and returns a formatted string.
 It supports many options. The most commonly used options are:
 
-- `currency`: currency identifier such as `USD` or `EUR`
+- `currency`: a currency identifier such as `USD` or `EUR`
 - `currencyDisplay`: `symbol`, `narrowSymbol`, `code`, or `name`
 - `notation`: `standard`, `scientific`, `engineering`, or `compact`
 - `signDisplay`: `auto`, `never`, `always`, or `exceptZero`
 - `style`: `decimal`, `currency`, `percent`, or `unit`
-- `unit`: many options including `day`, `degree`, `gigabyte`, `hour`, and `meter`
+- `unit`: options include `day`, `degree`, `gigabyte`, `hour`, and `meter`
 - `unitDisplay`: `long`, `short`, or `narrow`
+
+Here are some examples of using this constructor function.
 
 ```js
 formatter = new Intl.NumberFormat();
@@ -3287,12 +3311,16 @@ for (const unit of units) {
 
 ### `Intl.RelativeTimeFormat`
 
-This constructor function returns an object with a `format` method
+This {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat/RelativeTimeFormat",
+"constructor function" %} returns an object with a `format` method
 that takes a numeric value and a unit name such as `day` or `month`.
 The most commonly used options are:
 
 - `numeric`: `always` (default) or `auto` (seems best)
 - `style`: `long` (default), `short`, or `narrow`
+
+Here are some examples of using this constructor function.
 
 ```js
 const formatter = new Intl.RelativeTimeFormat('en', {numeric: 'auto'});
