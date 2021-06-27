@@ -3352,9 +3352,10 @@ for (const value of values) {
 "npm scripts" are custom command strings
 that are defined in `package.json` files.
 Nearly all JavaScript-based web development projects use these.
-To add one, editing a `package.json` file,
-find or add a section that begins with `"scripts": {`,
-and add a line with the syntax `"some-name": "some-command-string"`.
+To add one, edit a `package.json` file,
+find or add a top-level `scripts` property whose value is a JSON object.
+The keys of this object are script names
+and the values are the corresponding command strings.
 For example, the following npm scripts run the Prettier and ESLint tools
 on all the applicable files in a Svelte project.
 
@@ -3363,11 +3364,11 @@ on all the applicable files in a Svelte project.
     "lint": "eslint --fix --quiet src --ext .js,.svelte,.ts",
 ```
 
-Web development tooling is often executed using npm scripts
-that are defined in a `package.json` file using the `npm run` command.
+To execute these scripts use the `npm run` command followed by a script name.
 This is such a frequent activity that it is
 useful to define the alias `nr` to do this.
-The details differ based on the shell being used.
+The details on creating this alias differ based on the shell being used.
+Some examples include:
 
 - bash: `alias nr="npm run"
 - zsh: same as bash
@@ -3376,12 +3377,14 @@ The details differ based on the shell being used.
 
 ## Browsers
 
-Create bookmarks in the bookmark bar to `http://localhost:{port-number}`
+It is useful to create bookmarks in the bookmark bar
+of the web browsers you use to `http://localhost:{port-number}`
 for ports that are commonly used by web frameworks.
 Common ports include 3000, 5000, and 8080.
-These make it easy to test web apps that are
+These make it easy to test web applications that are
 being developed and run locally.
-I learned this from Bill Odom.
+I learned this from
+{% aTargetBlank "http://www.billodom.com", "Bill Odom" %}.
 
 ## Editors
 
@@ -3394,11 +3397,11 @@ Emmet is built into the VS Code editor and
 can be installed in most other editors and IDEs.
 
 For example, to create a `div` element with CSS class of `pizza`,
-enter `.pizza` and press the tab key.
+enter `.pizza` and press the tab or return key.
 This expands to `<div class="pizza"></div>` with the cursor
 before the end tag ready for you to enter content.
 
-Here are examples of generating HTML:
+Here are examples of snippets for generating HTML:
 
 | Syntax                             | Expands to                                |
 | ---------------------------------- | ----------------------------------------- |
@@ -3480,7 +3483,7 @@ kill the process currently listening on port 5000.
 # Kills the process listening on a given port.
 
 if [[ $# -ne 1 ]]; then
-  echo usage: kill-listening-process {port}
+  echo usage: klp {port}
   exit 1
 fi
 
@@ -3522,9 +3525,20 @@ echo no process is listening on port %port%
 goto end
 
 :noport
-  echo usage: kill-listening-process {port}
+  echo usage: klp {port}
 
 :end
 ```
 
 {% endraw %}
+
+## Wrap up
+
+That's it for now!
+I will be continually refining and adding web development tips here,
+so check back occasionally for new content.
+
+If you have ideas for additional tips that should be included
+or corrections to what is already here, please
+<a href="mailto:r.mark.volkmann@gmail.com?subject=Web Dev Tips suggestion">
+email</a> them to me.
