@@ -134,7 +134,7 @@ to see the list be filtered to only colors that match.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>input/datalist Demo</title>
     <style>
       #datalist-demo form {
         margin-bottom: 1rem;
@@ -284,7 +284,7 @@ Notice the right borders and the use of `box-sizing: border-box;`.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>Viewport Units Demo</title>
     <style>
       body {
         margin: 1rem;
@@ -445,7 +445,7 @@ The following example demonstrates many uses of shadows.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS box-shadow Demo</title>
     <style>
       .all-inset {
         box-shadow: 0 0 10px 10px inset var(--color);
@@ -566,7 +566,7 @@ Each of these approaches are demonstrated in the code below.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS Centering Demo</title>
     <style>
       .box {
         color: white;
@@ -840,7 +840,7 @@ a header, footer, left nav and main area of a page.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS Grid Layout Demo</title>
     <style>
       body {
         --footer-height: 3rem;
@@ -1027,7 +1027,7 @@ The other buttons change from blue to green when hovering over them.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS Pseudo Classes Demo</title>
     <style>
       button {
         background-color: lightblue;
@@ -1107,7 +1107,7 @@ after the label of required form elements.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS Pseudo Selectors Demo</title>
     <style>
       form > div {
         margin-bottom: 0.5rem;
@@ -1279,7 +1279,7 @@ that uses a `position` value of `relative`.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS position absolute Demo</title>
     <style>
       #position-demo {
         display: inline-block;
@@ -1347,7 +1347,7 @@ using `position` `sticky` causes the "Fruit" line to remain in view.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS position Demo</title>
     <style>
       #absolute {
         position: absolute;
@@ -1513,7 +1513,7 @@ downward pointing triangle on the right side of the `select`.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS pointer-events and appearance Demo</title>
     <style>
       .select-wrapper {
         --color: blue;
@@ -1609,7 +1609,7 @@ so any change to that property takes place gradually over that duration.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS transition Demo</title>
     <style>
       .toggle {
         --height: 2rem;
@@ -1683,7 +1683,7 @@ When pressed again, the original rotation of zero degrees is restored.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS transform Demo</title>
     <style>
       button {
         --size: 3rem;
@@ -1731,7 +1731,7 @@ but flashes a bit in Safari making the effect feel less polished.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS Card Flip Demo</title>
 
     <style>
       .card {
@@ -1819,7 +1819,7 @@ The opposite can be done with a media query that specifies `min-width`.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS Media Queries Demo</title>
     <style>
       .container {
         display: flex;
@@ -1885,7 +1885,7 @@ The following example demonstrates this.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>window.matchMedia Demo</title>
     <style>
       body {
         --bg-color: white;
@@ -2321,7 +2321,7 @@ and modifies it based on its current value.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS Properties Demo</title>
     <style>
       #greeting {
         color: red;
@@ -2377,7 +2377,7 @@ and modifies it based on its current value.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>CSS Variables Demo</title>
     <style>
       p {
         --color: red;
@@ -2438,7 +2438,7 @@ in a read-only `textarea`.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>getBoundingClientRect Demo</title>
 
     <style>
       #box {
@@ -2533,7 +2533,7 @@ This promise eventually resolves and never rejects.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>Promises Demo #1</title>
     <script>
       function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -2570,7 +2570,7 @@ that can resolve or reject.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>Promises Demo #2</title>
 
     <!-- Specifying type="module" enables use of top-level await,
          which is using the await keyword outside of any function. -->
@@ -2899,7 +2899,7 @@ the commonly used SVG elements.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>SVG Demo</title>
     <style>
       svg {
         height: 230px;
@@ -2988,7 +2988,7 @@ Note that the duck image is quite pixelated compared to the SVG version.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Demo</title>
+    <title>Canvas API Demo</title>
     <script>
       const TWO_PI = 2 * Math.PI;
 
