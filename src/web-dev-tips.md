@@ -1641,6 +1641,8 @@ so any change to that property takes place gradually over that duration.
         const toggle = document.querySelector('.toggle');
         const thumb = document.querySelector('.toggle > .thumb');
 
+        // See the "Get element size" top in the "JavaScript" section
+        // for details on the getBoundingClientRect method.
         const toggleWidth = toggle.getBoundingClientRect().width;
         const thumbWidth = thumb.getBoundingClientRect().width;
         const inset = getComputedStyle(thumb).getPropertyValue('--inset');
@@ -2305,8 +2307,8 @@ and existing ones can be modified or deleted.
 
 In the example below the CSS `color` property of the
 element with an id of "greeting" is set to "red" in a CSS rule.
-When the "Toggle Color" button is pressed a function is called that
-gets the current value of that style property
+When the "Toggle Color" button is pressed,
+a function is called that gets the current value of that style property
 and modifies it based on its current value.
 
 {% include "_change-css-style-properties.html" %}
@@ -2344,18 +2346,25 @@ and modifies it based on its current value.
 ### CSS variables from JavaScript
 
 JavaScript code can access the values of CSS variables using a
-combination of the `getComputedStyle` and `getPropertyValue` methods.
+combination of the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle",
+"getComputedStyle" %} and {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue",
+"getPropertyValue" %} methods.
 JavaScript code can also modify the values of CSS variables
-using the `setProperty` method.
+using the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty",
+"setProperty" %} method.
 This updates the use of all CSS properties that reference them.
 
-TODO: What is the difference between getProperty and getPropertyValue?
-TODO: Why does setProperty exist, but not setPropertyValue?
+These method names are a bit inconsistent as there is
+no method named `getProperty` or `setPropertyValue`.
 
-In the example below the CSS variable `--color` is initially set to "red"
-and used to set the CSS `color` property of `p` elements.
-When the "Toggle Color" button is pressed a function is called that
-gets the current value of the CSS variable
+In the example below the CSS variable `--color`
+is initially set to "red" and used to
+set the CSS `color` property of `p` elements.
+When the "Toggle Color" button is pressed,
+a function is called that gets the current value of the CSS variable
 and modifies it based on its current value.
 
 {% include "_change-css-variable.html" %}
@@ -2397,16 +2406,29 @@ and modifies it based on its current value.
 
 ### Getting element size
 
-DOM elements support the method `getBoundingClientRect`
-that returns a `DOMRect` object.
+DOM elements support the method {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect",
+"getBoundingClientRect" %} that returns a `DOMRect` object.
 This object contains the properties `width` and `height`
-which provide the size of the element.
+which provide the size of the element including the border.
 It also contains the following properties that describe its position:
-`x`, `y`, `left`, `top`, `right`, `bottom`.
 
-In the example below a div with many CSS properties is rendered.
-When the "Query" button is pressed a function is called that
-gets the bounding rectangle of the div and outputs its properties.
+| Property | Description                         |
+| -------- | ----------------------------------- |
+| `left`   | distance from left side of viewport |
+| `top`    | distance from top side of viewport  |
+| `right`  | `left` + `width`                    |
+| `bottom` | `top` + `height`                    |
+| `x`      | synonym for `left`                  |
+| `y`      | synonym for `top`                   |
+
+In the example below a `div` element is rendered with CSS properties
+that give it absolute positioning with a fixed width and height.
+The `getBoundingClientRect` method is called on this element
+and the properties of the object returned are output as a JSON string
+in a read-only `textarea`.
+
+{% include "_getBoundingClientRect.html" %}
 
 ```html
 <!DOCTYPE html>
@@ -2418,35 +2440,32 @@ gets the bounding rectangle of the div and outputs its properties.
     <style>
       #box {
         position: absolute;
-        left: 100px;
-        top: 100px;
+        left: 160px;
+        top: 50px;
+
+        background-color: orange;
+        box-sizing: border-box;
         height: 200px;
+        padding: 1rem;
         width: 300px;
-        border: 1px solid red;
+      }
+
+      textarea {
+        display: block;
+        margin-top: 1rem;
+        width: 130px;
       }
     </style>
   </head>
   <body>
     <div id="box">I'm a box.</div>
-    <button id="query-btn">Query</button>
+    <textarea id="report" readonly rows="10"></textarea>
 
     <script>
       const box = document.getElementById('box');
-      const queryBtn = document.getElementById('query-btn');
-      queryBtn.onclick = () => {
-        const rect = box.getBoundingClientRect();
-        console.log('get-rect.html: rect =', rect);
-        /*
-        bottom: 302 - includes border
-        height: 202 - includes border
-        left: 100
-        right: 402 - includes border
-        top: 100
-        width: 302 - includes border
-        x: 100
-        y: 100
-        */
-      };
+      const report = document.getElementById('report');
+      const rect = box.getBoundingClientRect();
+      report.value = JSON.stringify(rect, null, 2);
     </script>
   </body>
 </html>
