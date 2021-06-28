@@ -346,6 +346,66 @@ To use normalize.css:
 <link rel="stylesheet" href="normalize.css" />
 ```
 
+### CSS variables
+
+CSS variables (a.k.a custom properties) are useful for
+storing and referring to values that are used in multiple places.
+Changing the value of a variable updates
+all the property values where it is used.
+Common uses include storing the values of colors and sizes.
+
+To define a CSS variable, add a line in any CSS rule
+with the syntax:
+
+```css
+--some-var-name: some-value;
+```
+
+The variable is available for use in the rule where it is define
+and in any rules that apply to descendant elements
+of elements matched by this rule.
+
+To refer to a CSS variable in the value of a CSS property,
+use the following syntax:
+
+```css
+var(--some-var-name)
+```
+
+To add a default value to be used if the variable is not defined,
+use the following syntax:
+
+```css
+var(--some-var-name, default-value)
+```
+
+The following example defines and uses a couple of CSS variables.
+
+```css
+:root {
+  /* This matches the root element "html". */
+  /* All other CSS rules can use variables defined here. */
+  --primary-color: cornflowerblue;
+}
+
+p {
+  color: var(--primary-color);
+}
+
+.circle {
+  /* This variable can only be used in this rule
+     and in rules that match descendant elements */
+  --size: 4rem;
+
+  border: 1px solid calc(var(--size) / 2);
+  height: var(--size);
+  width: var(--size);
+}
+```
+
+Later we will see how to get and set
+the values of CSS variables in JavaScript code.
+
 ### Box model
 
 The CSS box model defines how padding, border, and margin
@@ -631,42 +691,6 @@ Each of these approaches are demonstrated in the code below.
   </body>
 </html>
 ```
-
-### CSS variables
-
-CSS variables (a.k.a custom properties) are useful for
-storing and referring to values that are used in multiple places.
-Changing the value of a variable updates
-all the property values where it is used.
-Common uses include storing the values of colors and sizes.
-
-The following examples show the syntax
-for defining and referring to a CSS variable:
-
-```css
-:root {
-  /* This matches the root element "html". */
-  /* All other CSS rules can use variables defined here. */
-  --primary-color: cornflowerblue;
-}
-
-p {
-  color: var(--primary-color);
-}
-
-.circle {
-  /* This variable can only be used in this rule
-     and in rules that match descendant elements */
-  --size: 4rem;
-
-  border: 1px solid calc(var(--size) / 2);
-  height: var(--size);
-  width: var(--size);
-}
-```
-
-Later we will see how to get and set
-the values of CSS variables in JavaScript code.
 
 ### Flex layout
 
