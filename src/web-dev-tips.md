@@ -1822,6 +1822,125 @@ but flashes a bit in Safari making the effect feel less polished.
 </html>
 ```
 
+### Keyframes
+
+We have seen how animations can be implemented
+using the CSS `transition` and `transform` properties.
+Another approach is to use the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations",
+"animation properties" %} along with `@keyframes`.
+Keyframes specify changes to CSS properties
+that should be animated over some time duration
+using an easing function to control the rate of change.
+
+The starting values of the properties to be animated
+default to their current value.
+However, alternate starting values can be specified with `from` or `0%`.
+The ending values of these properties also default to their current value.
+However, alternate ending values can be specified with `to` or `100%`.
+Additional property values can be specified for
+other percentages of time through the animation.
+
+The following example moves a square
+around the window when a button is pressed.
+The background color of the square changes from
+red to yellow, to green, to blue, and back to red.
+
+{% include "_css-keyframes.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>keyframes Demo</title>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      #box {
+        --size: 4rem;
+        height: var(--size);
+        width: var(--size);
+
+        --start-distance: 2rem;
+        --end-distance: 20rem;
+        position: absolute;
+        top: var(--start-distance);
+        left: var(--start-distance);
+
+        background-color: red;
+        border: 3px solid black;
+        color: white;
+        padding: 1rem;
+      }
+
+      .jump {
+        animation-duration: 3s;
+        animation-name: jump-around;
+        animation-timing-function: linear;
+        /* Other animation properties include
+           animation-delay, animation-direction, animation-fill-mode,
+           animation-iteration-count, and animation-play-state. */
+      }
+
+      @keyframes jump-around {
+        /* We can specify "from" or "0%" (same thing) properties here.
+          They default to the starting property values
+          which is what we want in this case. */
+        25% {
+          background-color: yellow;
+          /* Move box to upper right. */
+          top: var(--start-distance);
+          left: var(--end-distance);
+        }
+        50% {
+          background-color: green;
+          /* Move box to lower right. */
+          top: var(--end-distance);
+          left: var(--end-distance);
+        }
+        75% {
+          background-color: blue;
+          /* Move box to lower left. */
+          top: var(--end-distance);
+          left: var(--start-distance);
+        }
+        /* We can specify "to" or "100%" (same thing) properties here.
+          They default to the starting property values
+          which is what we want in this case.
+          The box will move from the lower left to the upper left
+          and the color will change from blue to red. */
+      }
+    </style>
+
+    <script>
+      window.onload = () => {
+        const btn = document.getElementById('jump-btn');
+        const box = document.getElementById('box');
+
+        // When the button is clicked, add the "jump" class to the box.
+        btn.addEventListener('click', () => {
+          box.classList.add('jump');
+        });
+
+        // When the animation ends, remove the "jump" class from the box.
+        // This allows the animation to be repeated
+        // when the "jump" class is added again.
+        box.addEventListener('animationend', () => {
+          box.classList.remove('jump');
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <button id="jump-btn">Jump Around</button>
+    <div id="box">I'm a box.</div>
+  </body>
+</html>
+```
+
 ### Media queries
 
 CSS {% aTargetBlank
