@@ -1878,10 +1878,20 @@ The `animation-play-state` property can be set to
 "paused" to pause a running animation or
 "running" to resume a paused animation from where it stopped.
 
+The `animation-timing-function` property specifies an easing function.
+Built-in ones include `ease` (default), `ease-in`, `ease-out`, `ease-in-out`,
+`linear`, `step-start`, `step-end`, and `steps(n, jump-term)`.
+It is also possible to define custom easing functions using
+`cubic-bezier(values)`. For help on arriving at the values,
+see {% aTargetBlank "https://cubic-bezier.com/", "cubic-bezier.com" %}.
+For example, the following values cause the animation to
+bounce backward in the middle: `0, 2.06, 1, -1.22`.
+
 The `animation` property is a shorthand property whose value is
 a comma-separated list of values for the other animation properties.
 If it contains two time values, the first must be for
 `animation-duration` and the second must be for `animation-delay`.
+TODO: Show an example of this later!
 
 The following example moves a square
 around the window when a button is pressed.
