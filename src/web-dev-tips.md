@@ -611,6 +611,8 @@ There are many ways to center content using CSS.
 Four common ways are:
 
 - `text-align` property set to `center`
+  and `line-height` property set to element height,
+  possibly also setting `box-sizing` to `border-box`
 - `margin` property set to `auto` when `display` is `block`
 - `display` property set to `flex` and setting the
   `justify-content` and/or `align-items` properties to `center`
