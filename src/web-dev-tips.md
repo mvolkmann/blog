@@ -1833,6 +1833,15 @@ Keyframes specify changes to CSS properties
 that should be animated over some time duration
 using an easing function to control the rate of change.
 
+Animations created this way can do several things
+that transitions and transforms cannot including:
+
+1. repeating indefinitely
+1. executing several sets of property changes
+   in parallel, sequentially, or overlapped in any way
+1. running animations in reverse
+1. returning CSS properties to their original values at the end
+
 The starting values of the properties to be animated
 default to their current value.
 However, alternate starting values can be specified with `from` or `0%`.
@@ -1840,6 +1849,39 @@ The ending values of these properties also default to their current value.
 However, alternate ending values can be specified with `to` or `100%`.
 Additional property values can be specified for
 other percentages of time through the animation.
+
+| CSS Property                | Description                                                           |
+| --------------------------- | --------------------------------------------------------------------- |
+| `animation-delay`           | time to wait before beginning animation                               |
+| `animation-direction`       | `normal` (default), `reverse`, `alternate`, or `alternate-reverse`    |
+| `animation-duration`        | time over which to spread the animation                               |
+| `animation-fill-mode`       | determines the styles that are applied before and after the animation |
+| `animation-iteration-count` | number of times to execute; defaults to 1; can specify `infinite`     |
+| `animation-name`            | name of an `@keyframe`                                                |
+| `animation-play-state`      | pauses a running animation or resumes a paused animation              |
+| `animation-timing-function` | name of an easing function                                            |
+| `animation`                 | shorthand property that can specify multiple animations               |
+
+The `animation-direction` values that begin with "alternate" are
+useful when `animation-iteration-count` is greater than 1.
+They cause the animation to alternate between
+going forward (`normal`) and backward (`reverse`).
+
+The `animation-fill-mode` property determines the styles
+that are applied before the animation begins and after it completes.
+By default the current styles remain applied at the beginning
+and are reapplied at the end.
+Other than accepting this default, the most common value is "forwards"
+which retains the property values set in the last keyframe.
+
+The `animation-play-state` property can be set to
+"paused" to pause a running animation or
+"running" to resume a paused animation from where it stopped.
+
+The `animation` property is a shorthand property whose value is
+a comma-separated list of values for the other animation properties.
+If it contains two time values, the first must be for
+`animation-duration` and the second must be for `animation-delay`.
 
 The following example moves a square
 around the window when a button is pressed.
