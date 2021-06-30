@@ -1822,7 +1822,7 @@ but flashes a bit in Safari making the effect feel less polished.
 </html>
 ```
 
-### Keyframes
+### Animation with keyframes
 
 We have seen how animations can be implemented
 using the CSS `transition` and `transform` properties.
