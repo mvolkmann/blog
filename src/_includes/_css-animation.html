@@ -1,0 +1,106 @@
+<style>
+  #css-animation-demo {
+    --size: 27rem;
+    height: var(--size);
+    width: var(--size);
+    position: relative;
+  }
+
+  #animation-box {
+    --size: 4rem;
+    height: var(--size);
+    width: var(--size);
+
+    --start-distance: 2rem;
+    --end-distance: 20rem;
+    position: absolute;
+    top: var(--start-distance);
+    left: var(--start-distance);
+
+    background-color: red;
+    border: 3px solid black;
+    color: white;
+    padding: 1rem;
+  }
+
+  .jump {
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: jump-around;
+    animation-timing-function: linear;
+  }
+
+  @keyframes jump-around {
+    /* We can specify "from" or "0%" (same thing) properties here.
+          They default to the starting property values
+          which is what we want in this case. */
+    25% {
+      background-color: yellow;
+      top: var(--start-distance);
+      left: var(--end-distance);
+    }
+    50% {
+      background-color: green;
+      top: var(--end-distance);
+      left: var(--end-distance);
+    }
+    75% {
+      background-color: blue;
+      top: var(--end-distance);
+      left: var(--start-distance);
+    }
+    /* We can specify "to" or "1000%" (same thing) properties here.
+       They default to the starting property values
+       which is what we want in this case.
+       The box will move from the lower left to the upper left
+       and the color will change from blue to red. */
+  }
+
+  #animation-stop-btn {
+    display: none;
+  }
+</style>
+
+<section id="css-animation-demo">
+  <button id="animation-start-btn">Start</button>
+  <button id="animation-stop-btn">Stop</button>
+  <div id="animation-box">I'm a box.</div>
+</section>
+
+<script>
+  const startBtn = document.getElementById('animation-start-btn');
+  const stopBtn = document.getElementById('animation-stop-btn');
+  const keyFrameBox = document.getElementById('animation-box');
+
+  startBtn.addEventListener('click', () => {
+    if (startBtn.textContent === 'Start') {
+      keyFrameBox.classList.add('jump');
+      keyFrameBox.style.animationPlayState = 'running';
+      startBtn.textContent = 'Pause';
+      stopBtn.style.display = 'inline-block';
+    } else {
+      const {style} = box;
+      const running = keyFrameBox.style.animationPlayState === 'running';
+      keyFrameBox.style.animationPlayState = running ? 'paused' : 'running';
+      startBtn.textContent = running ? 'Resume' : 'Pause';
+    }
+  });
+
+  stopBtn.addEventListener('click', () => {
+    keyFrameBox.classList.remove('jump');
+    startBtn.textContent = 'Start';
+    stopBtn.style.display = 'none';
+  });
+
+  // This is useful when animation-iteration-count
+  // is not set to infinite.
+  // When the animation ends, it removes the "jump" class.
+  // This allows the animation to be repeated
+  // when the "jump" class is added again.
+  /*
+  box.addEventListener('animationend', () => {
+    box.classList.remove('jump');
+  });
+  */
+</script>

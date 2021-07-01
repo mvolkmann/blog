@@ -1896,19 +1896,26 @@ If a list contains two time values, the first must be for
 `animation-duration` and the second must be for `animation-delay`.
 TODO: Show an example of this later!
 
-The following example moves a square
-around the window when a button is pressed.
+The following example demonstrates many of the animation properties.
+It moves a square around the window when the "Start" button is pressed.
 The background color of the square changes from
 red to yellow, to green, to blue, and back to red.
+The "Start" button changes to "Pause" and a "Stop" button appears.
+Pressing the "Pause" button pauses the animation
+and changes the button to "Resume".
+Pressing the "Resume" button resumes the animation.
+Pressing the "Stop" button stops the animation,
+which returns the square to its starting position,
+and changes the first button back to "Start".
 
-{% include "_css-keyframes.html" %}
+{% include "_css-animation.html" %}
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>keyframes Demo</title>
+    <title>CSS Animation Demo</title>
     <style>
       body {
         margin: 0;
@@ -1933,11 +1940,11 @@ red to yellow, to green, to blue, and back to red.
 
       .jump {
         animation-duration: 3s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
         animation-name: jump-around;
         animation-timing-function: linear;
-        /* Other animation properties include
-           animation-delay, animation-direction, animation-fill-mode,
-           animation-iteration-count, and animation-play-state. */
+        /* animation-timing-function: cubic-bezier(0, 2.06, 1, -1.22); */
       }
 
       @keyframes jump-around {
@@ -1946,51 +1953,72 @@ red to yellow, to green, to blue, and back to red.
           which is what we want in this case. */
         25% {
           background-color: yellow;
-          /* Move box to upper right. */
           top: var(--start-distance);
           left: var(--end-distance);
         }
         50% {
           background-color: green;
-          /* Move box to lower right. */
           top: var(--end-distance);
           left: var(--end-distance);
         }
         75% {
           background-color: blue;
-          /* Move box to lower left. */
           top: var(--end-distance);
           left: var(--start-distance);
         }
-        /* We can specify "to" or "100%" (same thing) properties here.
+        /* We can specify "to" or "1000%" (same thing) properties here.
           They default to the starting property values
           which is what we want in this case.
           The box will move from the lower left to the upper left
           and the color will change from blue to red. */
       }
-    </style>
 
+      #stop-btn {
+        display: none;
+      }
+    </style>
     <script>
       window.onload = () => {
-        const btn = document.getElementById('jump-btn');
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
         const box = document.getElementById('box');
 
-        // When the button is clicked, add the "jump" class to the box.
-        btn.addEventListener('click', () => {
-          box.classList.add('jump');
+        startBtn.addEventListener('click', () => {
+          if (startBtn.textContent === 'Start') {
+            box.classList.add('jump');
+            box.style.animationPlayState = 'running';
+            startBtn.textContent = 'Pause';
+            stopBtn.style.display = 'inline-block';
+          } else {
+            const {style} = box;
+            const running = box.style.animationPlayState === 'running';
+            box.style.animationPlayState = running ? 'paused' : 'running';
+            startBtn.textContent = running ? 'Resume' : 'Pause';
+          }
         });
 
-        // When the animation ends, remove the "jump" class from the box.
+        stopBtn.addEventListener('click', () => {
+          box.classList.remove('jump');
+          startBtn.textContent = 'Start';
+          stopBtn.style.display = 'none';
+        });
+
+        // This is useful when animation-iteration-count
+        // is not set to infinite.
+        // When the animation ends, it removes the "jump" class.
         // This allows the animation to be repeated
         // when the "jump" class is added again.
+        /*
         box.addEventListener('animationend', () => {
           box.classList.remove('jump');
         });
+        */
       };
     </script>
   </head>
   <body>
-    <button id="jump-btn">Jump Around</button>
+    <button id="start-btn">Start</button>
+    <button id="stop-btn">Stop</button>
     <div id="box">I'm a box.</div>
   </body>
 </html>
