@@ -1637,9 +1637,16 @@ For a list of those that can, see {% aTargetBlank
 The `transition-timing-function` property specifies an easing function.
 Built-in ones include `ease` (default), `ease-in`, `ease-out`, `ease-in-out`,
 `linear`, `step-start`, `step-end`, and `steps(n, jump-term)`.
+
 It is also possible to define custom easing functions using
-`cubic-bezier(values)`. For help on arriving at the values,
-see {% aTargetBlank "https://cubic-bezier.com/", "cubic-bezier.com" %}.
+`cubic-bezier(4-values)`. To determine the four values,
+inspect an element that specifies a timing function
+in the DevTools of Chrome, Firefox, or Safari.
+Click the icon representing a cubic bezier curve and
+drag the two handles that are displayed to obtain the desired curve.
+This updates the timing function property to match
+and takes effect immediately so the effect can be viewed.
+Copy this property value and paste into the source file where it is specified.
 For example, the following values cause the animation to
 bounce backward in the middle: `0, 2.06, 1, -1.22`.
 
@@ -1910,11 +1917,9 @@ The `animation-play-state` property can be set to
 The `animation-timing-function` property specifies an easing function.
 Built-in ones include `ease` (default), `ease-in`, `ease-out`, `ease-in-out`,
 `linear`, `step-start`, `step-end`, and `steps(n, jump-term)`.
-It is also possible to define custom easing functions using
-`cubic-bezier(values)`. For help on arriving at the values,
-see {% aTargetBlank "https://cubic-bezier.com/", "cubic-bezier.com" %}.
-For example, the following values cause the animation to
-bounce backward in the middle: `0, 2.06, 1, -1.22`.
+It is also possible to define custom easing functions
+using `cubic-bezier(values)`.
+For details, see the "Transitions" section above.
 
 The `animation` property is a shorthand property whose value is
 comma-separated lists of values for the other animation properties
