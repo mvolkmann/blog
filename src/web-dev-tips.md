@@ -1619,8 +1619,35 @@ downward pointing triangle on the right side of the `select`.
 
 The CSS {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/CSS/transition",
-"transition property" %} causes changes to specific CSS properties
-to be applied over a given time duration.
+"transition properties" %} cause changes to specific CSS properties
+to be applied over a given time duration, resulting in animation.
+Note that not all CSS properties can be animated.
+For a list of those that can, see {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties",
+"Animatable CSS properties" %}.
+
+| CSS Property                 | Description                                                        |
+| ---------------------------- | ------------------------------------------------------------------ |
+| `transition-delay`           | time to wait before beginning transition                           |
+| `transition-duration`        | time over which to spread the transition                           |
+| `transition-property`        | property to transition or "all" (default)                          |
+| `transition-timing-function` | name of an easing function                                         |
+| `transition`                 | shorthand property that can specify multiple transition properties |
+
+The `transition-timing-function` property specifies an easing function.
+Built-in ones include `ease` (default), `ease-in`, `ease-out`, `ease-in-out`,
+`linear`, `step-start`, `step-end`, and `steps(n, jump-term)`.
+It is also possible to define custom easing functions using
+`cubic-bezier(values)`. For help on arriving at the values,
+see {% aTargetBlank "https://cubic-bezier.com/", "cubic-bezier.com" %}.
+For example, the following values cause the animation to
+bounce backward in the middle: `0, 2.06, 1, -1.22`.
+
+The `transition` property is a shorthand property whose value is
+a list of values for the other transition properties.
+If a list contains two time values, the first must be for
+`transition-duration` and the second must be for `transition-delay`.
+
 To demonstrate this we will implement a toggle component
 that is an oval containing a circle that represents a "thumb".
 Clicking anywhere in the oval causes the thumb to move left or right
