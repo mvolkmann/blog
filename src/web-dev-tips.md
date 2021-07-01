@@ -1869,8 +1869,17 @@ Keyframes specify changes to CSS properties
 that should be animated over some time duration
 using an easing function to control the rate of change.
 
+Each keyframe specifies the properties to be applied
+at a given percentage through the duration.
+It is not necessary to specify a value for every property being animated
+for every percentage that is specified.
+For example, we could animate `color` changing from
+`red` to `yellow` to `blue` and back to `red` at `0%`, `33%`, `67%`, and `100%`
+while animating `font-size` changing from
+`1rem` to `3rem` and back to `1rem` at `0%`, `50%`, and `100%`.
+
 Animations created this way can do several things
-that transitions and transforms cannot including:
+that transitions cannot including:
 
 1. repeating indefinitely
 1. executing several sets of property changes
