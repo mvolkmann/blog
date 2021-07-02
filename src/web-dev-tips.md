@@ -1935,6 +1935,8 @@ comma-separated lists of values for the other animation properties
 that supports "chained" animations.
 If a list contains two time values, the first must be for
 `animation-duration` and the second must be for `animation-delay`.
+Note that the `animation-iteration-count` value can be a number
+which is distinguishable from a time value.
 
 The following example demonstrates many of the animation properties.
 It moves a square around the window when the "Start" button is pressed.
@@ -2066,8 +2068,6 @@ and changes the first button back to "Start".
 
 The following example demonstrates using the `animation` shorthand property
 and chaining animations.
-TODO: When there are 3 numbers in the shorthand property, how does
-TODO: it know which is the duration and which is the iteration count?
 
 {% include "_css-animation-chain.html" %}
 
