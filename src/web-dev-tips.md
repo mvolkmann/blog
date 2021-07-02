@@ -1935,7 +1935,6 @@ comma-separated lists of values for the other animation properties
 that supports "chained" animations.
 If a list contains two time values, the first must be for
 `animation-duration` and the second must be for `animation-delay`.
-TODO: Show an example of this later!
 
 The following example demonstrates many of the animation properties.
 It moves a square around the window when the "Start" button is pressed.
@@ -2061,6 +2060,92 @@ and changes the first button back to "Start".
     <button id="start-btn">Start</button>
     <button id="stop-btn">Stop</button>
     <div id="box">I'm a box.</div>
+  </body>
+</html>
+```
+
+The following example demonstrates using the `animation` shorthand property
+and chaining animations.
+TODO: When there are 3 numbers in the shorthand property, how does
+TODO: it know which is the duration and which is the iteration count?
+
+{% include "_css-animation-chain.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>keyframes Demo</title>
+    <style>
+      div {
+        --common-options: 500ms alternate 2;
+        font-size: 1rem;
+        position: absolute;
+        left: 0.5rem;
+      }
+
+      #text1 {
+        top: 2.5rem;
+      }
+
+      #text2 {
+        top: 3.5rem;
+      }
+
+      .zoom-down {
+        /* This chains two animations. */
+        animation: font-zoom var(--common-options), translate-down var(--common-options);
+      }
+
+      .zoom-right {
+        /* This chains two animations. */
+        animation: font-zoom var(--common-options), translate-right var(--common-options);
+      }
+
+      @keyframes font-zoom {
+        to {
+          font-size: 4rem;
+        }
+      }
+
+      @keyframes translate-right {
+        to {
+          transform: translateX(400px);
+        }
+      }
+
+      @keyframes translate-down {
+        to {
+          transform: translateY(200px);
+        }
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        const startBtn = document.getElementById('start-btn');
+        const text1 = document.getElementById('text1');
+        const text2 = document.getElementById('text2');
+
+        startBtn.addEventListener('click', () => {
+          text1.classList.add('zoom-right');
+          text2.classList.add('zoom-down');
+        });
+
+        text1.addEventListener('animationend', () => {
+          text1.classList.remove('zoom-right');
+        });
+
+        text2.addEventListener('animationend', () => {
+          text2.classList.remove('zoom-down');
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <button id="start-btn">Start</button>
+    <div id="text1">Hello</div>
+    <div id="text2">Animation!</div>
   </body>
 </html>
 ```

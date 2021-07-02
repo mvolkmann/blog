@@ -1,0 +1,74 @@
+<style>
+  #css-animation-chain {
+    height: 5rem;
+    position: relative;
+  }
+
+  #css-animation-chain div {
+    --common-options: 500ms alternate 2;
+    font-size: 1rem;
+    position: absolute;
+    left: 0.5rem;
+  }
+
+  .text1 {
+    top: 2.5rem;
+  }
+
+  .text2 {
+    top: 3.5rem;
+  }
+
+  .zoom-down {
+    animation: font-zoom var(--common-options),
+      translate-down var(--common-options);
+  }
+
+  .zoom-right {
+    animation: font-zoom var(--common-options),
+      translate-right var(--common-options);
+  }
+
+  @keyframes font-zoom {
+    to {
+      font-size: 4rem;
+    }
+  }
+
+  @keyframes translate-right {
+    to {
+      transform: translateX(400px);
+    }
+  }
+
+  @keyframes translate-down {
+    to {
+      transform: translateY(200px);
+    }
+  }
+</style>
+
+<div id="css-animation-chain">
+  <button class="start-btn">Start</button>
+  <div class="text1">Hello</div>
+  <div class="text2">Animation!</div>
+</div>
+
+<script>
+  const chainBtn = document.querySelector('#css-animation-chain .start-btn');
+  const text1 = document.querySelector('#css-animation-chain .text1');
+  const text2 = document.querySelector('#css-animation-chain .text2');
+
+  chainBtn.addEventListener('click', () => {
+    text1.classList.add('zoom-right');
+    text2.classList.add('zoom-down');
+  });
+
+  text1.addEventListener('animationend', () => {
+    text1.classList.remove('zoom-right');
+  });
+
+  text2.addEventListener('animationend', () => {
+    text2.classList.remove('zoom-down');
+  });
+</script>
