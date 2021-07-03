@@ -944,6 +944,11 @@ The basic selectors are:
   - must be present ending with a given value: ex. `[href$=".com"]`
   - and other less commonly used options
 
+Selectors can be combined to be more specific.
+For example,
+`button.primary` selects `button` elements that have a class of `primary` and
+`.dog.active` selects elements with both the `dog` and `active` classes.
+
 A rule can begin with a comma-separated list of selectors to match any of them.
 
 ### Combinators
@@ -1256,9 +1261,16 @@ Considering the four numbers from left to right,
 - The third is the number of class names in the selector.
 - The fourth is the number of element name references in the selector.
 
-The selector with the highest combined number,
-obtained by removing the commas and treating it as a single 4-digit number,
-wins. For example, treat a score of 1,2,3,4 as 1234.
+Since each matching rule can specific a different set of CSS properties,
+properties from multiple rules can be applied to an element.
+
+The score of a selector is determined by removing the commas
+and treating it as a single 4-digit number.
+For example, treat 1,2,3,4 as 1234.
+
+For each property in a matching rule, the one specified in the
+rule with the highest scoring selector wins.
+In the case of a tie, one in the last tieing rule wins.
 
 This means that inline styling specified with a
 `style` attribute on an HTML element always wins.
