@@ -6,17 +6,24 @@ layout: topic-layout.njk
 
 <!-- markdownlint-disable MD013 -->
 
-This is a collection of tips related to web development
-divided into categories.
-It assumes that you already know HTML, CSS, and JavaScript to some extent,
-but perhaps have not encountered all the tips shared here.
+Whether you are fairly new to web development or
+you've been practicing for a while,
+it's always exciting to come across a shortcut or a tip
+for simplifying your code that you hadn't been aware of before.
+In this article, you'll find a variety of suggestions that will
+help you improve your craft and your productivity.
 
-All of the examples use vanilla JavaScript
+This collection of web development tips assumes that you
+already know HTML, CSS, and JavaScript to some extent,
+but perhaps have forgot or never seen some of the tips shared here.
+
+All of the examples here use vanilla JavaScript
 to avoid appealing only to users of specific web frameworks.
-Most of the examples run live in this web page.
+To make the experience more interactive, most of the examples
+run live in this web page.
 You can also copy the code into a `.html` file and open it in a web browser.
 
-For information about any fundamental web topics like
+For information about fundamental web topics like
 HTML, CSS, and JavaScript that are not covered here,
 or to get more detail on topics that are covered here,
 your first stop should be the {% aTargetBlank
@@ -24,11 +31,12 @@ your first stop should be the {% aTargetBlank
 "Mozilla Developer Network (MDN) Web Docs" %}.
 Start a web search with "MDN"; for example, "MDN CSS transform".
 
-Another great resource is {% aTargetBlank "https://caniuse.com", "Can I use" %}
+Another great resource is
+"{% aTargetBlank "https://caniuse.com", "Can I use" %}"
 which provides details on browser support for
 all fundamental web development features.
 
-Many of the tip descriptions contains links to MDN pages and
+Many of the tip descriptions contain links to MDN pages and
 other resources to make it easy to access more detailed information.
 
 ## HTML
@@ -36,33 +44,66 @@ other resources to make it easy to access more detailed information.
 ### Semantic elements
 
 HTML5 introduced many "semantic" elements.
-These better describe the intent of certain kinds of markup
-than using a more generic element such as `div`.
-They also provide more context to assistive technologies
+These more specifically describe the intent of certain kinds of markup
+than a more generic element, such as `div`.
+They also provide more context to assistive technologies,
 such as screen readers.
-Some of the most commonly used semantic elements are
-`article`, `aside`, `details`, `figcaption`, `figure`, `footer`, `header`,
-`main`, `mark`, `nav`, `section`, `summary`, and `time`.
+
+Some of the most commonly used semantic elements include:
+
+- `article`
+- `aside`
+- `details`
+- `figcaption`
+- `figure`
+- `footer`
+- `header`
+- `main`
+- `mark`
+- `nav`
+- `section`
+- `summary`
+- `time`
+
 For descriptions of each of these elements, see the {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/HTML/Element",
 "MDN HTML elements reference" %}.
 
-In most cases the paragraph element `<p>` should be used instead of `<div>`
-when the content is only text to be rendered.
+Two key tips to keep in mind:
 
-In most cases `click` events should only be associated
-with `<button>` elements, not with generic elements like `<div>`.
+- In most cases, the paragraph element `<p>` should be used
+  instead of `<div>` when the content is only text to be rendered.
+- In most cases, `click` events should be associated only with
+  `<button>` elements, not with generic elements like `<div>`.
 
 ### `input` element `type` attribute
 
 HTML5 added many values for the `input` element `type` attribute.
 These can change the way the element is rendered
 and provide additional input validation.
-The values include `checkbox`, `color`, `date`, `datetime-local`,
-`email`, `file`, `image`, `month`, `number`, `password`, `radio`,
-`range`, `search`, `tel`, `text`, `time`, `url`, `week`,
-and a few more less commonly used values.
-For details on these, see the {% aTargetBlank
+The values include:
+
+- `checkbox`
+- `color`
+- `date`
+- `datetime-local`
+- `email`
+- `file`
+- `image`
+- `month`
+- `number`
+- `password`
+- `radio`
+- `range`
+- `search`
+- `tel`
+- `text`
+- `time`
+- `url`
+- `week`
+- ... and a few more less commonly used values
+
+For details on these attribute values, see the {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input",
 "MDN input element" %} page.
 
@@ -73,15 +114,15 @@ Consider using this before reaching for a form library
 that is specific to a given web framework.
 Often what works well is to:
 
-- Enclose all the form elements such as
-  `button`, `input`, `select`, and `textarea` in a `form` element.
+- Enclose all form elements, such as
+  `button`, `input`, `select`, and `textarea`, in a `form` element.
 - Include only one "submit" button.
-  This is the default type of a `button` element.
-  To include `button` elements to do not submit the form,
-  set their `type` attribute to `"button"`.
+  This is the default `type` of a `button` element.
+  To include `button` elements that do not submit the form,
+  set the `type` attribute to `button`.
 - Mark required form elements with the `require` attribute.
-- Use appropriate `input` `type` attribute values
-  such as `"email"` and `"tel"`.
+- Use appropriate `input` `type` attribute values,
+  such as `email` and `tel`.
 - Use other `input` attributes such as:
 
   - `min` and `max` for allowed numeric ranges
@@ -89,17 +130,28 @@ Often what works well is to:
   - `pattern` for regular expressions to be matched
 
 Use CSS pseudo-classes to style form elements based on their validity.
-These include `:required`, `:optional`, `:valid`, `:invalid`, `:user-invalid`,
-`:blank`, `:placeholder-shown`, `:in-range`, and `:out-of-range`.
+These include:
+
+- `:required`
+- `:optional`
+- `:valid`
+- `:invalid`
+- `:user-invalid`
+- `:blank`
+- `:placeholder-shown`
+- `:in-range`
+- `:out-of-range`
 
 ### Events fired by input elements
 
 The `input` element fires many events, two of which are `change` and `input`.
-A `change` event is fired when a user changes the value
-AND focus leaves the element.
-An `input` event is fired after every change to the value.
+
+- A `change` event is fired when a user changes the value
+  AND focus leaves the element.
+- An `input` event is fired after every change to the value.
+
 For example, if a user types "abc" into an `input`,
-an `input` event will be fired after each character
+an `input` event will be fired after each character,
 whereas a `change` event will only be fired once
 after focus leaves the `input`.
 
@@ -107,15 +159,15 @@ after focus leaves the `input`.
 
 The value displayed in an `input` element is specified by an attribute
 that is determined by the value of its `type` attribute.
-For most `input` types the `value` attribute is used for this purpose.
-But when the `type` is `"checkbox"` or `"radio"`,
+For most `input` types, the `value` attribute is used for this purpose.
+But when the `type` is `checkbox` or `radio`,
 the value is specified using the `checked` attribute.
 
 ### `input` and `datalist`
 
 An `input` element can have an associated `datalist`.
 This causes the `input` to act like an "auto-complete".
-New values can be added to the `datalist`
+New values can be added to the `datalist`,
 and existing values can be deleted.
 This will change the options displayed in the `input`.
 
@@ -123,7 +175,7 @@ Here is an example where the user can select a color.
 Initially the only values in the `datalist` are blue, green, and red.
 But the user can add more colors.
 Try adding more colors and then type into the input
-to see the list be filtered to only colors that match.
+to see the list filtered to only colors that match.
 
 {% include "_datalist.html" %}
 
@@ -230,7 +282,7 @@ Absolute units include:
 - `pt` for points
 - `px` for pixels
 
-Of these only `px` is commonly used.
+Of these, only `px` is commonly used.
 
 Relative units include:
 
@@ -244,11 +296,11 @@ Relative units include:
 - `vmax` for 1% of the largest viewport dimension
 - `vw` for 1% of the viewport width
 
-Of these the mostly commonly used are `rem`, `vh`, and `vw`.
+Of these, the mostly commonly used are `rem`, `vh`, and `vw`.
 
 An important benefit of using `rem` as the unit for nearly all sizes
 is that it enables scaling everything in the web site
-by simply changing the font size of the `html` element
+by simply changing the font size of the `html` element,
 which defaults to `16px`.
 A web app can allow each user to modify this size,
 perhaps saving their preference in `localStorage`.
@@ -264,11 +316,12 @@ There are four CSS viewport units.
 | `vmax` | larger of `vh` and `vw`   |
 | `vmin` | smaller of `vh` and `vw`  |
 
-The size `100vw` is the full viewport width including the `body` margin.
+The size `100vw` is the full viewport width, including the `body` margin.
+
 The size `100%` is the full width of the parent element.
 For children of the `body` element, this does not include the `margin`.
-If the `body` `margin` is zero then `100vw` and `100%` are equivalent.
-If the `body` `margin` is not zero then
+If the `body` `margin` is zero, `100vw` and `100%` are equivalent.
+If the `body` `margin` is not zero,
 setting the width of a top-level element to `100vw`
 will cause it to overlap the right edge of the viewport,
 but setting the width to `100%` will not.
@@ -332,7 +385,7 @@ Notice the right borders and the use of `box-sizing: border-box;`.
 
 A CSS reset is a set of CSS rules that attempt to
 set the CSS properties of standard HTML elements
-so they render the same across all the popular web browsers.
+so they render the same across all popular web browsers.
 There are many such resets available.
 The most popular is {% aTargetBlank
 "https://necolas.github.io/normalize.css/", "normalize.css" %}.
@@ -348,7 +401,7 @@ To use normalize.css:
 
 ### CSS variables
 
-CSS variables (a.k.a custom properties) are useful for
+CSS variables (a.k.a. custom properties) are useful for
 storing and referring to values that are used in multiple places.
 Changing the value of a variable updates
 all the property values where it is used.
@@ -410,16 +463,17 @@ the values of CSS variables in JavaScript code.
 
 The CSS box model defines how padding, border, and margin
 are added to elements.
-Padding is outside the content and inside the border can be set to `0`.
-The border is optional.
-Margin is outside the border and can also be set to `0`.
+
+- Padding is outside the content and inside the border can be set to `0`.
+- The border is optional.
+- Margin is outside the border and can also be set to `0`.
 
 <img alt="CSS box model" style="width: 50%"
   src="/blog/assets/css-box-model.png?v={{pkg.version}}"
   title="CSS box model">
 
 Padding, border, and margin can be specified to be the same on all four sides
-or be different on each side.
+or to be different on each side.
 
 ### `box-sizing` property
 
@@ -427,7 +481,8 @@ When an element has a specified `width` and `height`,
 by default those apply to the content and
 do not include the `padding`, `border`, and `margin`.
 This is because the CSS `box-sizing` property defaults to `content-box`.
-If `box-sizing` is set to `border-box` then the `width` and `height`
+
+If `box-sizing` is set to `border-box`, the `width` and `height`
 include the content, `padding`, and `border`, but not the `margin`.
 There are no other supported values for the `box-sizing` property.
 
@@ -455,32 +510,31 @@ The `box-shadow` property takes 3 to 5 values.
 | 5           | offset-x offset-y blur-radius spread-radius color |
 
 Additionally, the `inset` keyword can precede the color
-to cause the shadow to be drawn on
-the inside of the element rather than the outside
-(referred to here as "outset"),
+to cause the shadow to be drawn on the inside of the element
+rather than on the outside (referred to here as "outset")
 and on the opposite side of the element.
 
 Setting offset-x to a non-zero value
-adds shadow on the left or right side
+adds shadow on the left or right side,
 depending on whether the `inset` keyword is present.
 Likewise, setting offset-y to a non-zero value
-adds shadow on the top or bottom side
+adds shadow on the top or bottom side,
 depending on whether the `inset` keyword is present.
 
 The blur-radius value specifies the width over which
 the shadow changes from 100% opacity to zero opacity.
-The default value is `0` which results in a solid colored shadow.
+The default value is `0`, which results in a solid colored shadow.
 
 Setting a positive spread-radius value
 increases the shadow width on all four sides.
-This is typically only used when offset-x and offset-y are both zero
+This is typically used only when offset-x and offset-y are both zero
 in order to add a shadow on all four sides of an element.
 The default value is `0`.
 
 Here are the value patterns to add a shadow
 on a single side of an element.
 Note that a small amount of shadow is also added to the adjacent sides
-in order to achieve a 3D effect and this cannot be prevented.
+in order to achieve a 3D effect, and this cannot be prevented.
 
 | Side          | offset-x offset y inset? |
 | ------------- | ------------------------ |
@@ -619,7 +673,7 @@ Four common ways are:
 - `position` property set to `absolute` or `fixed`
   and setting the `transform` property
 
-Each of these approaches are demonstrated in the code below.
+Each of these approaches is demonstrated in the code below.
 
 {% include "_centering.html" %}
 
@@ -703,7 +757,7 @@ the layout of HTML elements in one dimension.
 {% aTargetBlank "https://flexboxfroggy.com", "Flexbox Froggy" %}
 provides a great way to learn about this.
 
-There are many CSS properties that affect flex layout.
+Many CSS properties affect flex layout.
 The most commonly used properties applied to container elements
 are described here.
 
@@ -745,7 +799,7 @@ are described here.
 
 - `flex-grow`
 
-  This is applied to children, not the container.
+  This is applied to children, not to the container.
   It affects the amount of space allocated to the element.
   The default value is zero.
   The `flex-grow` values of all the children are added to obtain a total.
@@ -778,7 +832,7 @@ the layout of HTML elements in two dimensions.
 {% aTargetBlank "https://cssgridgarden.com", "Grid Garden" %}
 provides a great way to learn about this.
 
-There are many CSS properties that affect grid layout.
+Many CSS properties affect grid layout.
 The most commonly used properties applied to container elements
 are described here.
 
@@ -790,8 +844,9 @@ are described here.
 
   This specifies the number of columns and their widths.
   Widths can be specified using any CSS unit.
-  They can also use `fr` fractional units which work similarly
+  They can also use `fr` fractional units, which work similarly
   to the `flex-grow` CSS property described earlier.
+
   If consecutive columns have the same width,
   they can be described with the `repeat` function.
   For example, `grid-template-columns: 3rem repeat(3, 1fr) 4rem;`
@@ -812,7 +867,7 @@ are described here.
 
 - `grid-template-areas`
 
-  This gives names to collections of grid cells
+  This gives names to collections of grid cells,
   allowing them to span multiple columns and rows.
   Child elements then assign themselves to the grid names
   using the `grid-area` CSS property.
@@ -851,12 +906,12 @@ Negative values for `end` count from the last column or row.
 Since a grid area already knows the columns and rows that it occupies,
 specifying the `grid-area` property makes the other properties unnecessary.
 
-The default alignment of elements within their grids is specified setting
+The default alignment of elements within their grids is specified by setting
 the `justify-content` and `align-items` properties on the container.
 Child elements can override this by setting their
 `justify-self` and `align-self` properties.
 
-In the example below grid layout is used to layout
+In the example below, grid layout is used to layout
 a header, footer, left nav and main area of a page.
 
 {% include "_grid-layout.html" %}
@@ -922,6 +977,7 @@ The default value of the CSS `display` property for many HTML elements,
 including `div`, is `block`.
 This prevents them from appearing on the same "row" as other elements,
 unless flex or grid layout is specified for their parent element.
+
 Another way to allow multiple block elements to appear on the same row
 is to set the CSS `display` property to `inline-block`.
 
@@ -942,7 +998,7 @@ The basic selectors are:
   - must be present containing a given value: ex. `[href*="foo"]`
   - must be present beginning with a given value: ex. `[href^="https"]`
   - must be present ending with a given value: ex. `[href$=".com"]`
-  - and other less commonly used options
+  - ... and other less commonly used options
 
 Selectors can be combined to be more specific.
 For example,
@@ -995,7 +1051,7 @@ Categorized lists of commonly used pseudo classes are described below.
 
 - `:blank` matches form elements that are empty.
 
-- `:placeholder-shown` matches form elements elements that
+- `:placeholder-shown` matches form elements that
   are currently displaying their placeholder text.
 
 - `:checked` matches checkboxes and radio buttons that are toggled on.
@@ -1124,7 +1180,7 @@ Most supported pseudo selectors are rarely used.
 - `::before` is used in conjunction with the `content` property
   to add content before the matching element.
 
-Content can only be added to elements that have content
+Content can be added only to elements that allow content,
 such as `label` and `p` elements.
 Content cannot be added to empty elements like `input`.
 
@@ -1248,7 +1304,7 @@ and are explained after this example.
 ```
 
 The precedence order of these rules happens to be the order
-in which they are listed here with the exception that
+in which they are listed here, with the exception that
 when there are ties, the last one wins.
 Using a `style` attribute on the inner `div` has the highest specificity.
 
@@ -1301,7 +1357,7 @@ to specify the actual position of the element.
 
 The `absolute` value causes elements to be positioned relative to the nearest
 ancestor element that has its CSS `position` property set to `relative`.
-If none is found then they are positioned relative to the browser window.
+If none is found, they are positioned relative to the browser window.
 
 The `sticky` value is often used to keep `table` headings in view
 when a table is scrolled vertically.
@@ -1647,8 +1703,16 @@ For a list of those that can, see {% aTargetBlank
 | `transition`                 | shorthand property that can specify multiple transition properties |
 
 The `transition-timing-function` property specifies an easing function.
-Built-in ones include `ease` (default), `ease-in`, `ease-out`, `ease-in-out`,
-`linear`, `step-start`, `step-end`, and `steps(n, jump-term)`.
+Built-in ones include:
+
+- `ease` (default)
+- `ease-in`
+- `ease-out`
+- `ease-in-out`
+- `linear`
+- `step-start`
+- `step-end`
+- `steps(n, jump-term)`
 
 It is also possible to define custom easing functions using
 `cubic-bezier(4-values)`. To determine the four values,
@@ -1667,11 +1731,11 @@ a list of values for the other transition properties.
 If a list contains two time values, the first must be for
 `transition-duration` and the second must be for `transition-delay`.
 
-To demonstrate this we will implement a toggle component
+To demonstrate this, we will implement a toggle component
 that is an oval containing a circle that represents a "thumb".
-Clicking anywhere in the oval causes the thumb to move left or right
+Clicking anywhere in the oval causes the thumb to move left or right,
 indicating some application-specific option being disabled or enabled.
-The CSS property `left` has a transition duration of 0.3 seconds
+The CSS property `left` has a transition duration of 0.3 seconds,
 so any change to that property takes place gradually over that duration.
 
 {% include "_css-transition.html" %}
@@ -1790,12 +1854,12 @@ When pressed again, the original rotation of zero degrees is restored.
 </html>
 ```
 
-The next example renders a Pokemon card which is initially face-down.
+The next example renders a Pokemon card that starts face-down.
 Clicking the card flips it over.
 It uses a CSS transform to provide a nice 3D effect.
 
-This works in Chrome, Firefox, and Safari,
-but flashes a bit in Safari making the effect feel less polished.
+This works in Chrome, Firefox, and Safari
+but flashes a bit in Safari, making the effect feel less polished.
 
 {% include "_css-card-flip.html" %}
 
@@ -1877,6 +1941,7 @@ using the CSS `transition` and `transform` properties.
 Another approach is to use the {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations",
 "animation properties" %} along with `@keyframes`.
+
 Keyframes specify changes to CSS properties
 that should be animated over some time duration
 using an easing function to control the rate of change.
@@ -1900,9 +1965,9 @@ that transitions cannot including:
 1. returning CSS properties to their original values at the end
 
 The starting values of the properties to be animated
-default to their current value.
+default to their current values.
 However, alternate starting values can be specified with `from` or `0%`.
-The ending values of these properties also default to their current value.
+The ending values of these properties also default to their current values.
 However, alternate ending values can be specified with `to` or `100%`.
 Additional property values can be specified for
 other percentages of time through the animation.
@@ -1936,8 +2001,17 @@ The `animation-play-state` property can be set to
 "running" to resume a paused animation from where it stopped.
 
 The `animation-timing-function` property specifies an easing function.
-Built-in ones include `ease` (default), `ease-in`, `ease-out`, `ease-in-out`,
-`linear`, `step-start`, `step-end`, and `steps(n, jump-term)`.
+Built-in ones include:
+
+- `ease` (default)
+- `ease-in`
+- `ease-out`
+- `ease-in-out`
+- `linear`
+- `step-start`
+- `step-end`
+- `steps(n, jump-term)`
+
 It is also possible to define custom easing functions
 using `cubic-bezier(values)`.
 For details, see the "Transitions" section above.
@@ -1948,18 +2022,18 @@ that supports "chained" animations.
 If a list contains two time values, the first must be for
 `animation-duration` and the second must be for `animation-delay`.
 Note that the `animation-iteration-count` value can be a number
-which is distinguishable from a time value.
+that is distinguishable from a time value.
 
 The following example demonstrates many of the animation properties.
 It moves a square around the window when the "Start" button is pressed.
 The background color of the square changes from
-red to yellow, to green, to blue, and back to red.
+red to yellow to green to blue and back to red.
 The "Start" button changes to "Pause" and a "Stop" button appears.
 Pressing the "Pause" button pauses the animation
 and changes the button to "Resume".
 Pressing the "Resume" button resumes the animation.
 Pressing the "Stop" button stops the animation,
-which returns the square to its starting position,
+which returns the square to its starting position
 and changes the first button back to "Start".
 
 {% include "_css-animation.html" %}
@@ -2384,7 +2458,7 @@ only use the `let` keyword for variables whose values need to be modified.
 
 JavaScript supports two syntaxes for declaring functions,
 function expressions (older style) and arrow functions (newer style).
-There are important differences between these
+There are important differences between these,
 and there are good reasons to use both.
 
 | Can Use Keyword  | Function Expression | Arrow Function |
@@ -2501,7 +2575,7 @@ const dogs = [
 - `forEach` takes a function and iterates over the elements.
   It is useful in cases where it is desirable to
   call a named function on each element.
-  In other cases it can be more clear to use a `for of` loop.
+  In other cases, it can be more clear to use a `for of` loop.
 
   ```js
   function report(dog) {
@@ -2550,7 +2624,7 @@ const dogs = [
   // ['Maisey', 'Ramsay', 'Oscar', 'Comet']
   ```
 
-- `reduce` takes a function and an initial value,
+- `reduce` takes a function and an initial value
   and creates a single value from the elements.
   The parameter name `acc` is short for "accumulator" and is a
   common name for the first parameter of the function passed to `map`.
@@ -2667,8 +2741,9 @@ const dogs = [
 HTML elements are represented by
 Document Object Model (DOM) objects in memory.
 DOM objects have a `style` property whose value is an object.
-The keys of this object are camelCased CSS property names
+The keys of this object are camelCased CSS property names,
 and the values are the values of those CSS properties.
+
 Using JavaScript, new properties can be added to the `style` objects
 and existing ones can be modified or deleted.
 
@@ -2776,7 +2851,7 @@ and modifies it based on its current value.
 DOM elements support the method {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect",
 "getBoundingClientRect" %} that returns a `DOMRect` object.
-This object contains the properties `width` and `height`
+This object contains the properties `width` and `height`,
 which provide the size of the element including the border.
 It also contains the following properties that describe its position:
 
@@ -2853,7 +2928,7 @@ A promise can be in one of three states:
 - fulfilled with a value (a.k.a. resolved)
 - rejected with a reason or error
 
-To create a `Promise` object, call the `Promise` constructor
+To create a `Promise` object, call the `Promise` constructor,
 passing it a function that has one or two parameters.
 The first parameter is a function to call
 to put the promise in a resolved state.
@@ -2872,18 +2947,19 @@ There are two syntaxes for waiting for a promise to be fulfilled or rejected.
 One syntax is to use chains of calls to the
 `then`, `catch`, and `finally` methods.
 Callback functions are passed to each of these methods.
-The `then` method can be passed one or two callback functions.
-If the promise resolves, the first callback
-is called with the resolved value.
-If the promise rejects, the second callback is called with the error.
-The `catch` method is passed one callback function
-that is called with the error only if the promise rejects.
-The `finally` method is passed one callback function
-that is called last with no arguments
-after the promise either resolves or rejects.
+
+- The `then` method can be passed one or two callback functions.
+  If the promise resolves, the first callback
+  is called with the resolved value.
+  If the promise rejects, the second callback is called with the error.
+- The `catch` method is passed one callback function
+  that is called with the error only if the promise rejects.
+- The `finally` method is passed one callback function
+  that is called last with no arguments
+  after the promise either resolves or rejects.
 
 The other syntax is to use the `await` keyword,
-often inside a `try` block that has a corresponding `catch` blocks.
+often inside a `try` block that has a corresponding `catch` block.
 Many developers find this syntax easier to read.
 Note that when the `await` keyword is used inside a function,
 the function definition must begin with the `async` keyword.
@@ -3055,13 +3131,13 @@ defined by the {% aTargetBlank "https://fetch.spec.whatwg.org",
 provides a JavaScript API for fetching resources, typically using HTTP.
 It defines a single function, {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch",
-"fetch" %} that takes a URL that
+"fetch" %}, that takes a URL that
 identifies a resource (or a {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/Request",
 "Request" %} object) and an optional options object.
 The options object can include the following properties:
 
-- `method`: This is an HTTP method name such as
+- `method`: This is an HTTP method name, such as
   `GET`, `POST`, `PUT`, or `DELETE`.
 - `headers`: This is an object whose
   keys are request header names and whose values are their values.
@@ -3069,7 +3145,7 @@ The options object can include the following properties:
   Methods such as `POST` and `PUT` use this.
   The value can be a string, a `FormData` object, a `Blob` object,
   or one of several other less commonly used types.
-- and several more less commonly used properties
+- ... and several more less commonly used properties
 
 The `fetch` function returns a `Promise` object.
 This promise resolves to a response object that
@@ -3090,7 +3166,7 @@ can contains many properties including:
   along with the status code and handle unsuccessful responses.
 - `headers`: This is an object whose
   keys are response header names and whose values are their values.
-- `body`: This is the response data
+- `body`: This is the response data,
   which can be text (including JSON) or binary data.
   The `Content-Type` response header indicates the format of this data.
 
@@ -3198,14 +3274,14 @@ and the {% aTargetBlank
 "Canvas API" %} can be used to draw things on a web page.
 
 SVG stands for "Scalable Vector Graphics".
-It is a markup language similar to HTML which makes it declarative.
+It is a markup language similar to HTML, which makes it declarative.
 You tell it what to draw, not how to draw it.
 SVG elements appear in the DOM and can be styled with CSS.
-It draws using vectors which allows it
+SVG draws using vectors, which allows it
 to render sharp images at nearly any size.
 SVG is a great choice for rendering icons.
 
-The Canvas API draws on a `canvas` element using a JavaScript API
+The Canvas API draws on a `canvas` element using a JavaScript API,
 which makes it imperative. You tell it how to draw.
 The Canvas API is a great choice for implementing games.
 
@@ -3458,8 +3534,8 @@ Note that the duck image is quite pixelated compared to the SVG version.
 
 The ECMAScript Internationalization API defines the {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl",
-"Intl" %} namespace which defines constructor functions and associated methods
-for "language sensitive string comparison,
+"Intl" %} namespace, which defines constructor functions and
+associated methods for "language sensitive string comparison,
 number formatting, and date and time formatting."
 A locale can optionally be passed to the constructor functions.
 If no locale is specified, the browser default locale is used.
@@ -3716,9 +3792,9 @@ for (const value of values) {
 "npm scripts" are custom command strings
 that are defined in `package.json` files.
 Nearly all JavaScript-based web development projects use these.
-To add one, edit a `package.json` file,
-find or add a top-level `scripts` property whose value is a JSON object.
-The keys of this object are script names
+To add one, edit a `package.json` file and find or add a
+top-level `scripts` property whose value is a JSON object.
+The keys of this object are script names,
 and the values are the corresponding command strings.
 For example, the following npm scripts run the Prettier and ESLint tools
 on all the applicable files in a Svelte project.
@@ -3830,7 +3906,7 @@ For more detail, see my {% aTargetBlank
 
 ## Miscellaneous
 
-Frequently when starting a server locally to test a web app
+Frequently, when starting a server locally to test a web app,
 an error message is output stating that
 the port the server tried to use is being used by another process.
 One option is to start the server so it listens on a different port.
