@@ -27,7 +27,6 @@
     const observer = new IntersectionObserver(callback, {threshold: 1});
 
     const headings = document.querySelectorAll('h2,h3');
-    console.log('_intersection-observer-headings.html x: headings =', headings);
     for (const heading of headings) {
       observer.observe(heading);
     }

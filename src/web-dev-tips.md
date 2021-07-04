@@ -3281,6 +3281,8 @@ bringing certain elements into view. Examples include:
 The last use case is implemented on the page you are reading.
 Notice how the color of section headings
 temporarily changes when they come into view.
+TODO: Why this only apply to the first header in Safari?
+TODO: It works fine in Chrome and Firefox.
 
 {% include "_intersection-observer.html" %}
 
