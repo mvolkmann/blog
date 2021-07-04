@@ -1,0 +1,56 @@
+<style>
+  .intersection-container {
+    height: 30rem;
+    overflow-y: scroll;
+    border: 1px solid black;
+  }
+
+  .intersection-container .target {
+    --size: 10rem;
+    height: var(--size);
+    width: var(--size);
+
+    animation-delay: 100ms;
+    animation-direction: alternate;
+    animation-duration: 500ms;
+    animation-iteration-count: 2;
+    background-color: cornflowerblue;
+    color: white;
+    font-family: sans-serif;
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  @keyframes pulse {
+    100% {
+      color: red;
+      font-size: 3rem;
+    }
+  }
+</style>
+
+<section class="intersection-container">
+  <div class="target">First</div>
+  <div class="target">Second</div>
+  <div class="target">Third</div>
+  <div class="target">Fourth</div>
+  <div class="target">Fifth</div>
+</section>
+
+<script>
+  function callback(entries) {
+    for (const entry of entries) {
+      entry.target.style.animationName = entry.isIntersecting
+        ? 'pulse'
+        : 'none';
+    }
+  }
+  const options = {threshold: 1}; // fully visible
+  const observer = new IntersectionObserver(callback, options);
+
+  const targets = document.querySelectorAll('.intersection-container .target');
+  for (const target of targets) {
+    observer.observe(target);
+  }
+</script>

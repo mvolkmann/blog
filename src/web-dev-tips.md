@@ -3265,6 +3265,86 @@ much longer than the actual processing time.
 | IE11    | 17                     | 11                        |
 | Safari  | 17                     | 6                         |
 
+### Intersection Observer API
+
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API",
+"Intersection Observer API" %} enables executing JavaScript code
+when an element intersections an ancestor element or the browser viewport.
+Often the goal is to perform some processing when the user scrolls the page,
+bringing certain elements into view. Examples include:
+
+- loading images on when they come in to view
+- fetching data only when it needs to be displayed
+- adding animation to certain elements when they scroll into view
+
+The last use case is implemented on the page you are reading.
+Notice how the color of section headings
+temporarily changes when they come into view.
+
+{% include "_intersection-observer.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Intersection Observer Demo</title>
+    <style>
+      .target {
+        --size: 10rem;
+        height: var(--size);
+        width: var(--size);
+
+        animation-delay: 100ms;
+        animation-direction: alternate;
+        animation-duration: 500ms;
+        animation-iteration-count: 2;
+        background-color: cornflowerblue;
+        color: white;
+        font-family: sans-serif;
+        font-size: 2rem;
+        margin: 1rem;
+        padding: 1rem;
+      }
+
+      @keyframes pulse {
+        100% {
+          color: red;
+          font-size: 3rem;
+        }
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        function callback(entries) {
+          for (const entry of entries) {
+            entry.target.style.animationName = entry.isIntersecting
+              ? 'pulse'
+              : 'none';
+          }
+        }
+        //const options = {threshold: 0.5}; // half visible
+        const options = {threshold: 1}; // fully visible
+        const observer = new IntersectionObserver(callback, options);
+
+        const targets = document.querySelectorAll('.target');
+        for (const target of targets) {
+          observer.observe(target);
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="target">First</div>
+    <div class="target">Second</div>
+    <div class="target">Third</div>
+    <div class="target">Fourth</div>
+    <div class="target">Fifth</div>
+  </body>
+</html>
+```
+
 ## Drawing
 
 Both {% aTargetBlank
@@ -3982,3 +4062,5 @@ If you have ideas for additional tips that should be included
 or corrections to what is already here, please
 <a href="mailto:r.mark.volkmann@gmail.com?subject=Web Dev Tips suggestion">
 email</a> them to me.
+
+{% include "_intersection-observer-headings.html" %}
