@@ -3,20 +3,20 @@
   h3 {
     animation-direction: alternate;
     animation-duration: 500ms;
+    animation-fill-mode: forwards;
     animation-iteration-count: 2;
   }
 
   @keyframes pulse {
-    100% {
+    to {
       color: red;
     }
   }
 </style>
 
 <script>
+  // The brackets here add a local scope.
   {
-    // adding a local scope
-
     function callback(entries) {
       for (const entry of entries) {
         entry.target.style.animationName = entry.isIntersecting
@@ -27,6 +27,10 @@
     const observer = new IntersectionObserver(callback, {threshold: 1});
 
     const headings = document.querySelectorAll('h2,h3');
+    console.log(
+      '_intersection-observer-headings.html x: headings.length =',
+      headings.length
+    );
     for (const heading of headings) {
       observer.observe(heading);
     }

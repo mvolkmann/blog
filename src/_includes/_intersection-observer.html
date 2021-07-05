@@ -10,7 +10,6 @@
     height: var(--size);
     width: var(--size);
 
-    animation-delay: 100ms;
     animation-direction: alternate;
     animation-duration: 500ms;
     animation-iteration-count: 2;
@@ -25,6 +24,7 @@
   @keyframes pulse {
     100% {
       color: red;
+      /* TODO: Why does this work on a separate web page, but not in the blog page? */
       font-size: 3rem;
     }
   }

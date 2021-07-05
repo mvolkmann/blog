@@ -267,6 +267,22 @@ to see the list filtered to only colors that match.
 
 {% endraw %}
 
+### Lazy Loading
+
+To avoid loading `img` and `iframe` elements that are not scrolled into view,
+add the `loading="lazy"` attribute.
+As of July 2021 this is not yet supported in Safari
+and Firefox does not support this on `iframe` elements.
+
+Browsers can implement this to begin loading
+just before the associated elements come in to view.
+They can even take network speed into consideration in order to
+load the elements even sooner when a slow connection is detected.
+
+It is recommended to only add this attribute to `img` and `iframe` elements
+that do not require scrolling after the initial page load
+in order to view them.
+
 ## CSS
 
 ### Size Units
@@ -1991,10 +2007,13 @@ going forward (`normal`) and backward (`reverse`).
 
 The `animation-fill-mode` property determines the styles
 that are applied before the animation begins and after it completes.
-By default the current styles remain applied at the beginning
-and are reapplied at the end.
-Other than accepting this default, the most common value is "forwards"
-which retains the property values set in the last keyframe.
+
+- To retain the current properties at the beginning and end of the animation,
+  set this to `none` which is the default value.
+- To apply different styles at `0%` (or `from`), set this to `backwards`.
+- To return the properties set after `100%` (or `to`),
+  set this to `forwards`.
+- To do both, set this to `both`.
 
 The `animation-play-state` property can be set to
 "paused" to pause a running animation or
@@ -3270,19 +3289,88 @@ much longer than the actual processing time.
 The {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API",
 "Intersection Observer API" %} enables executing JavaScript code
-when an element intersections an ancestor element or the browser viewport.
+when an element intersect (or stops intersecting)
+an ancestor element (or the browser viewport).
 Often the goal is to perform some processing when the user scrolls the page,
-bringing certain elements into view. Examples include:
+bringing certain elements into view.
+Use cases include:
 
-- loading images on when they come in to view
-- fetching data only when it needs to be displayed
 - adding animation to certain elements when they scroll into view
+- fetching data only when it needs to be displayed
+- loading images on when they come in to view
 
-The last use case is implemented on the page you are reading.
+The first use case, adding animation,
+is implemented on the page you are reading.
 Notice how the color of section headings
 temporarily changes when they come into view.
-TODO: Why this only apply to the first header in Safari?
+TODO: Why does this only apply to the first header in Safari?
 TODO: It works fine in Chrome and Firefox.
+
+The last use case, lazy loading images, is better achieved in modern browsers
+by adding `loading="lazy"` to all `img` elements.
+See the "Lazy Loading" section above.
+
+To use the Intersection Observer API:
+
+1. Create an `IntersectionObserver` object by invoking the constructor function
+   and passing it a callback function and an options object.
+2. Call the `observe` method on the `IntersectionObserver` object,
+   passing it a DOM element to observe.
+
+The options object passed to the `IntersectionObserver` constructor function
+can contain the following properties:
+
+| Option Property | Description                                                                      |
+| --------------- | -------------------------------------------------------------------------------- |
+| `root`          | DOM element to use as the viewport                                               |
+| `rootMargin`    | distance by which to grow or shrink the viewport used to determine intersections |
+| `threshold`     | percentage of an element that must be visible to trigger a change                |
+
+The `root` property defaults to the browser viewport.
+Typically this is the desired viewport.
+
+The `rootMargin` property takes the same length values as the `margin` property.
+It defaults to `0` on all four sides, but can be specified as:
+
+- a single length to specify the same margin on all four sides
+- two lengths to specify equal top and bottom margins
+  followed by equal left and right margins
+- four lengths to specify different margins on all four sides
+
+The `threshold` property defaults to `0`, which means a change is triggered
+when a single pixel becomes visible or all pixels become invisible.
+A value of `1` means the entire element must be visible
+and a value of `0.5` means half of the element must be visible.
+This can also be set to an array of numbers to trigger the callback function
+at various percentages of visibility.
+
+The callback function will called whenever the intersection status
+of a DOM element being observed changes.
+It is passed an array of entry objects and the observer object.
+
+Each entry object in the array contain the following properties:
+
+| Entry Object Property | Description                                                                |
+| --------------------- | -------------------------------------------------------------------------- |
+| `target`              | DOM element being observed                                                 |
+| `isIntersecting`      | boolean indicating whether there is any intersection                       |
+| `time`                | `DOMHightResTimeStamp` value indicating when the intersection was detected |
+| `boundingClientRect`  | `DOMRect` object describing the `target`                                   |
+| `rootBounds`          | `DOMRect` object describing the `root`                                     |
+| `intersectionRect`    | `DOMRect` object describing the visible area of the `target`               |
+| `intersectionRatio`   | ratio of `intersectionRect` area to `rootBounds` area                      |
+
+Getting the observer object enables a callback
+that is used for more than one `IntersectionObserver`
+to determine which observer detected a change.
+It can also be used to stop observing changes to a given element
+by calling `observer.unobserve(domElement)`.
+
+In the following example, scrolling vertically
+causes the light blue boxes to come into view and leave view.
+When a box comes completely into view,
+the text size temporarily increases
+and the text color temporarily changes to red.
 
 {% include "_intersection-observer.html" %}
 
@@ -3298,7 +3386,6 @@ TODO: It works fine in Chrome and Firefox.
         height: var(--size);
         width: var(--size);
 
-        animation-delay: 100ms;
         animation-direction: alternate;
         animation-duration: 500ms;
         animation-iteration-count: 2;
@@ -3313,6 +3400,7 @@ TODO: It works fine in Chrome and Firefox.
       @keyframes pulse {
         100% {
           color: red;
+          /* TODO: Why doesn't the font-size change? */
           font-size: 3rem;
         }
       }
@@ -3326,7 +3414,6 @@ TODO: It works fine in Chrome and Firefox.
               : 'none';
           }
         }
-        //const options = {threshold: 0.5}; // half visible
         const options = {threshold: 1}; // fully visible
         const observer = new IntersectionObserver(callback, options);
 
