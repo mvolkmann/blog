@@ -3303,8 +3303,6 @@ The first use case, adding animation,
 is implemented on the page you are reading.
 Notice how the color of section headings
 temporarily changes when they come into view.
-TODO: Why does this only apply to the first header in Safari?
-TODO: It works fine in Chrome and Firefox.
 
 The last use case, lazy loading images, is better achieved in modern browsers
 by adding `loading="lazy"` to all `img` elements.
@@ -3400,7 +3398,6 @@ and the text color temporarily changes to red.
       @keyframes pulse {
         100% {
           color: red;
-          /* TODO: Why doesn't the font-size change? */
           font-size: 3rem;
         }
       }

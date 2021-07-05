@@ -24,7 +24,6 @@
   @keyframes pulse {
     100% {
       color: red;
-      /* TODO: Why does this work on a separate web page, but not in the blog page? */
       font-size: 3rem;
     }
   }
@@ -46,7 +45,7 @@
         : 'none';
     }
   }
-  const options = {threshold: 1}; // fully visible
+  const options = {root: document.body, threshold: 1}; // fully visible
   const observer = new IntersectionObserver(callback, options);
 
   const targets = document.querySelectorAll('.intersection-container .target');

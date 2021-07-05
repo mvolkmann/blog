@@ -3,13 +3,14 @@
   h3 {
     animation-direction: alternate;
     animation-duration: 500ms;
-    animation-fill-mode: forwards;
     animation-iteration-count: 2;
+    /* color: purple; */
   }
 
   @keyframes pulse {
     to {
       color: red;
+      font-size: 2rem;
     }
   }
 </style>
@@ -18,19 +19,18 @@
   // The brackets here add a local scope.
   {
     function callback(entries) {
+      const intersecting = entries.filter(e => e.isIntersecting);
       for (const entry of entries) {
         entry.target.style.animationName = entry.isIntersecting
           ? 'pulse'
           : 'none';
       }
     }
-    const observer = new IntersectionObserver(callback, {threshold: 1});
+    // This doesn't work in Safari if threshold is set to 1,
+    // but it does work with 0.99.
+    const observer = new IntersectionObserver(callback, {threshold: 0.99});
 
     const headings = document.querySelectorAll('h2,h3');
-    console.log(
-      '_intersection-observer-headings.html x: headings.length =',
-      headings.length
-    );
     for (const heading of headings) {
       observer.observe(heading);
     }
