@@ -267,6 +267,42 @@ to see the list filtered to only colors that match.
 
 {% endraw %}
 
+### figure element
+
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure",
+"figure element" %} associates a caption with any content.
+Typically the content is a single `img` element,
+but it can be any content such as a `code` or `picture` element.
+The caption is specified with a `figcaption` element.
+Typically there is only one and it appears
+either before or after all the content.
+
+The following example adds a caption to an image:
+
+{% include "_figure.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Figure Demo</title>
+    <style>
+      img {
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <figure>
+      <img src="./comet.jpg" alt="Comet" />
+      <figcaption>Comet, the Whippet</figcaption>
+    </figure>
+  </body>
+</html>
+```
+
 ### Lazy Loading
 
 To avoid loading `img` and `iframe` elements that are not scrolled into view,
