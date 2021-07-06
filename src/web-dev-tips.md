@@ -1997,6 +1997,9 @@ Another approach is to use the {% aTargetBlank
 Keyframes specify changes to CSS properties
 that should be animated over some time duration
 using an easing function to control the rate of change.
+When each keyframe is executed,
+a transition is performed for each CSS properties that is specified,
+going from the previous value to a new value.
 
 Each keyframe specifies the properties to be applied
 at a given percentage through the duration.
