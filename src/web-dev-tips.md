@@ -2464,6 +2464,52 @@ There is a VS Code extension for stylelint ({% aTargetBlank
 "stylelint.vscode-stylelint" %})
 that automatically validates CSS and identifies issues.
 
+## Images
+
+### Image Formats
+
+The table below summarizes the most common image formats used on the web
+and the features they support.
+
+| Format                                  | Transparency | Animation | Maximum Colors     | Primary Usage                |
+| --------------------------------------- | ------------ | --------- | ------------------ | ---------------------------- |
+| Graphics Interchange Format (GIF)       | ✓            | ✓         | 8-bit, 256         | animation                    |
+| Joint Photographic Experts Group (JPEG) | ✖            | ✖         | 24-bit, 16 million | photos                       |
+| Portable Network Graphics (PNG)         | ✓            | ✖         | 24-bit, 16 million | icons and text               |
+| Animated PNG (APNG)                     | ✓            | ✓         | 24-bit, 16 million | animation                    |
+| WebP                                    | ✓            | ✓         | 24-bit, 16 million | replacement for JPEG and PNG |
+| High Efficiency Image File (HEIF)       | ✓            | ✓         | 16-bit, 65,536     | Apple apps, not browsers     |
+
+GIF, JPEG, PNG, and APNG are widely supported by web browsers.
+WebP is supported by Chrome, Edge, and Firefox,
+but not Safari (except in macOS 11 Big Sur and later).
+HEIF is not supported by any web browsers.
+
+TODO: Discuss image compression and options to optimize each format.
+
+### image element
+
+The `img` element supports using the `srcset` attribute
+to specify a list of image files can be used.
+An image can be selected based on its width in pixels,
+device pixel density, and support for specific image formats such as WebP.
+
+```html
+<img alt="..." src="..." srcset="..." />
+```
+
+### picture element
+
+The `picture` element must be used in order to render WEBP images.
+
+```html
+<picture>
+  <source srcset="..." media="(min-width: 768px)" />
+  ...
+  <img alt="..." src="..." />
+</picture>
+```
+
 ## JavaScript
 
 ### Embrace booleans

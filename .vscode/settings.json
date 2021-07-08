@@ -2,6 +2,7 @@
   "cSpell.words": [
     "AAPL",
     "AMZN",
+    "APNG",
     "Addy",
     "Anders",
     "Arweave",
@@ -46,6 +47,7 @@
     "Gjengset",
     "Graydon",
     "Gruber",
+    "HEIF",
     "HOWTOs",
     "Haml",
     "Hejlsberg",
@@ -616,6 +618,7 @@
     "splitext",
     "splitn",
     "sprintf",
+    "srcset",
     "ssh'ing",
     "ssvmup",
     "starmap",
