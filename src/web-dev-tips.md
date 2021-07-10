@@ -2481,11 +2481,23 @@ and the features they support.
 | High Efficiency Image File (HEIF)       | ✓            | ✓         | 16-bit, 65,536     | Apple apps, not browsers     |
 
 GIF, JPEG, PNG, and APNG are widely supported by web browsers.
-WebP is supported by Chrome, Edge, and Firefox,
-but not Safari (except in macOS 11 Big Sur and later).
+WebP is supported by Chrome, Edge, Firefox, and Safari.
+However, Safari 14 does not support animated WebP images.
+Safari 15 does, but only runs in macOS 11 (Big Sur) and later.
 HEIF is not supported by any web browsers.
 
 TODO: Discuss image compression and options to optimize each format.
+
+To generate a variety of images sizes in macOS,
+open an image file in the Preview app.
+By default this can be done by double-clicking an image file in the Finder.
+For each image size to be created:
+
+1. Select File...Duplicate.
+1. Change the file name in the upper-left corner.
+1. Select Tools...Adjust Size...
+1. Enter the desired width in pixels.
+1. Press the "OK" button.
 
 ### image element
 
@@ -2495,12 +2507,31 @@ An image can be selected based on its width in pixels,
 device pixel density, and support for specific image formats such as WebP.
 
 ```html
-<img alt="..." src="..." srcset="..." />
+<img
+  alt="Grand Prismatic Spring"
+  src="grand-prismatic-spring-1200.jpg"
+  srcset="
+    grand-prismatic-spring-400.jpg   400w,
+    grand-prismatic-spring-800.jpg   800w,
+    grand-prismatic-spring-1200.jpg 1200w,
+    grand-prismatic-spring-4032.jpg 4032w
+  "
+/>
 ```
+
+To verify the image that is downloaded for various browser widths,
+open the browser DevTools, click the "Network" tab,
+disable caching, size the browser window, and refresh the page.
+The image that was downloaded will appear in the Network tab.
+Note that the Firefox DevTools Network tab does not show
+local files (with a `file:` protocol).
 
 ### picture element
 
-The `picture` element must be used in order to render WEBP images.
+The `picture` element must be used in order to render WebP images.
+
+There are web sites that convert JPEG images to the WebP format for free.
+One is {% aTargetBlank "Convertio", "https://convertio.co/jpg-webp/" %}.
 
 ```html
 <picture>
