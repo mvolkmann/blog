@@ -2581,9 +2581,11 @@ and the features they support.
 | High Efficiency Image File (HEIF)       | ✓            | ✓         | 16-bit, 65,536     | Apple apps, not browsers     |
 
 GIF, JPEG, PNG, and APNG are widely supported by web browsers.
+WebP images are typically preferred over JPEG and PNG images
+because they are much smaller that equivalent images in those formats.
 WebP is supported by Chrome, Edge, Firefox, and Safari.
 However, Safari 14 does not support animated WebP images.
-Safari 15 does, but only runs in macOS 11 (Big Sur) and later.
+Safari 15 does, but it only runs in macOS 11 (Big Sur) and later.
 HEIF is not supported by any web browsers.
 
 TODO: Discuss image compression and options to optimize each format.
