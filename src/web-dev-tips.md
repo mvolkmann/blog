@@ -2717,7 +2717,11 @@ For each image size to be created:
 1. Press the "OK" button.
 
 There are web sites that convert JPEG images to the WebP format for free.
-One is {% aTargetBlank "https://convertio.co/jpg-webp/", "Convertio" %}.
+One is {% aTargetBlank "https://squoosh.app/", "Squoosh" %}
+which is an experimental project from Google Chrome Labs.
+It "make images smaller using best-in-class codecs, right in the browser."
+Another option is {% aTargetBlank "https://convertio.co/jpg-webp/", "Convertio" %}
+from {% aTargetBlank "https://softo.co", "softo" %}.
 
 These images can also be created with different aspect ratios
 and have different parts of the image cropped out.
