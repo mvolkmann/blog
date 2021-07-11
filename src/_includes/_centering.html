@@ -1,21 +1,31 @@
 <style>
+  #centering-demo {
+    --box-size: 100px;
+    --size: 550px;
+    height: var(--size);
+    outline: 1px dashed gray;
+    position: relative; /* absolute positioning of .box3 is relative to this */
+    width: var(--size);
+  }
+
   #centering-demo .box {
+    display: inline-block;
     color: white;
     height: var(--box-size);
-    line-height: var(--box-size); /* causes vertical centering of text */
+    line-height: var(--box-size); /* centers 1 line of text vertically */
     text-align: center; /* centers text horizontally */
     width: var(--box-size);
   }
 
   #centering-demo .box1 {
-    background-color: red;
     display: block;
+    background-color: red;
+    line-height: calc(var(--box-size) / 3);
     margin: 0 auto; /* centers box horizontally when display is block */
   }
 
   #centering-demo .box2 {
     background-color: blue;
-    display: inline-block;
   }
 
   #centering-demo .box3 {
@@ -27,13 +37,22 @@
     transform: translate(-50%, -50%); /* of box size */
   }
 
-  #centering-demo {
-    --box-size: 100px;
-    --size: 550px;
-    height: var(--size);
-    outline: 1px dashed gray;
-    position: relative; /* absolute positioning of .box3 is relative to this */
-    width: var(--size);
+  #centering-demo .box4 {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    background-color: purple;
+    line-height: unset; /* override from .box */
+
+    /* This centers in browser window. */
+    position: fixed;
+
+    /* This centers in its parent, overlapping .box3 */
+    /* position: absolute; centers in parent */
+
+    inset: 0; /* doesn't center without this */
+    margin: auto; /* doesn't center without this */
   }
 
   #centering-demo .container {
@@ -47,12 +66,30 @@
     text-align: center;
   }
 </style>
+
+<button id="centering-show-btn">Show Box #4</button>
 <section id="centering-demo">
   <p>This is a paragraph.</p>
-  <div class="box box1">Box #1</div>
+
+  <div class="box box1">Box #1<br />line 2<br />line 3</div>
+
   <div class="container">
     <div class="box box2">Box #2</div>
   </div>
+
   <!-- This box is centered in the section. -->
   <div class="box box3">Box #3</div>
+
+  <!-- This box is centered in the browser window. -->
+  <div class="box box4">Box #4<br />Click to hide.</div>
 </section>
+
+<script>
+  const box4 = document.querySelector('#centering-demo .box4');
+  const centeringShowBtn = document.getElementById('centering-show-btn');
+  box4.addEventListener('click', () => (box4.style.display = 'none'));
+  centeringShowBtn.addEventListener(
+    'click',
+    () => (box4.style.display = 'inline-flex')
+  );
+</script>

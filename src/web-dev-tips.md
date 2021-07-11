@@ -754,16 +754,39 @@ The following example demonstrates many uses of shadows.
 ### Centering
 
 There are many ways to center content using CSS.
-Four common ways are:
+Common ways include:
 
-- `text-align` property set to `center`
-  and `line-height` property set to element height,
-  possibly also setting `box-sizing` to `border-box`
-- `margin` property set to `auto` when `display` is `block`
-- `display` property set to `flex` and setting the
-  `justify-content` and/or `align-items` properties to `center`
-- `position` property set to `absolute` or `fixed`
-  and setting the `transform` property
+1. To center lines of text in an element,
+   set `text-align` to `center` to center horizontally, and
+   set `line-height` to the element height
+   divided by the number of lines to center vertically
+   (see `.box` below).
+
+1. To center an element with `display` set to `block`
+   horizontally in its parent,
+   set `margin-left` and `margin-right` to `auto`
+   (see `.box1` below).
+
+1. To center text or child elements within their parent,
+   on the parent element set `display` to `flex`,
+   set `justify-content` to `center` (to center along major axis),
+   and set `align-items` to `center` (to center along minor axis)
+   (see `.container` and `.box2` below).
+
+1. To center an element in its parent element,
+   on the parent element set `position` to `relative` and
+   on the child element set `position` to `absolute`,
+   `inset` to `0`, and `margin` to `auto`.
+   Alternatively, set `left` and `top` to `50%`, and
+   `transform` to `translate(-50%, -50%)`
+   (see `.box3` below).
+
+1. To center an element in the browser window,
+   set `position` to `fixed`,
+   set `inset` to `0`, and set `margin` to `auto`
+   Alternatively, set `left` and `top` to `50%`, and
+   `transform` to `translate(-50%, -50%)`
+   (see `.box4` below).
 
 Each of these approaches is demonstrated in the code below.
 
@@ -777,22 +800,23 @@ Each of these approaches is demonstrated in the code below.
     <title>CSS Centering Demo</title>
     <style>
       .box {
+        display: inline-block;
         color: white;
         height: var(--box-size);
-        line-height: var(--box-size); /* causes vertical centering of text */
+        line-height: var(--box-size); /* centers 1 line of text vertically */
         text-align: center; /* centers text horizontally */
         width: var(--box-size);
       }
 
       .box1 {
-        background-color: red;
         display: block;
+        background-color: red;
+        line-height: calc(var(--box-size) / 3);
         margin: 0 auto; /* centers box horizontally when display is block */
       }
 
       .box2 {
         background-color: blue;
-        display: inline-block;
       }
 
       .box3 {
@@ -804,13 +828,30 @@ Each of these approaches is demonstrated in the code below.
         transform: translate(-50%, -50%); /* of box size */
       }
 
+      .box4 {
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        background-color: purple;
+        line-height: unset; /* override from .box */
+
+        /* This centers in browser window. */
+        position: fixed;
+
+        /* This centers in its parent, overlapping .box3 */
+        /* position: absolute; centers in parent */
+
+        inset: 0; /* doesn't center without this */
+        margin: auto; /* doesn't center without this */
+      }
+
       #centering-demo {
         --box-size: 100px;
         --size: 550px;
         height: var(--size);
         outline: 1px dashed gray;
-        /* Absolute positioning of .box3 is relative to this. */
-        position: relative;
+        position: relative; /* absolute positioning of .box3 is relative to this */
         width: var(--size);
       }
 
@@ -825,16 +866,35 @@ Each of these approaches is demonstrated in the code below.
         text-align: center;
       }
     </style>
+
+    <script>
+      window.onload = () => {
+        const box4 = document.querySelector('.box4');
+        const showBtn = document.getElementById('show-btn');
+        box4.addEventListener('click', () => (box4.style.display = 'none'));
+        showBtn.addEventListener(
+          'click',
+          () => (box4.style.display = 'inline-flex')
+        );
+      };
+    </script>
   </head>
   <body>
+    <button id="show-btn">Show Box #4</button>
     <section id="centering-demo">
       <p>This is a paragraph.</p>
-      <div class="box box1">Box #1</div>
+
+      <div class="box box1">Box #1<br />line 2<br />line 3</div>
+
       <div class="container">
         <div class="box box2">Box #2</div>
       </div>
+
       <!-- This box is centered in the section. -->
       <div class="box box3">Box #3</div>
+
+      <!-- This box is centered in the browser window. -->
+      <div class="box box4">Box #4<br />Click to hide.</div>
     </section>
   </body>
 </html>
