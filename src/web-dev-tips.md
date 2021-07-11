@@ -544,8 +544,10 @@ There are no other supported values for the `box-sizing` property.
 
 The `box-shadow` property adds shadows to
 one or more sides of an element.
-It does not add to the size of the element,
+Like the `outline` property,
+it does not add to the size of the element,
 so it does not affect element layout.
+Unlike the `outline` property, its width can be specified.
 
 The most common examples of using shadows are to:
 
