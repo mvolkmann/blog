@@ -605,11 +605,14 @@ in order to achieve a 3D effect, and this cannot be prevented.
 
 Multiple shadows can be added to an element
 by specifying comma-separated lists of values.
-See the `.two-shadows` selector below for an example.
+See the `.multiple-borders` and `.two-shadows` selectors
+below for examples.
 
 The following example demonstrates many uses of shadows.
 
 {% include "_css-box-shadow.html" %}
+
+{# pragma warning disable format #}
 
 ```html
 <html lang="en">
@@ -659,6 +662,11 @@ The following example demonstrates many uses of shadows.
 
       .left-outset {
         box-shadow: -10px 0 10px var(--color);
+      }
+
+      .multiple-borders {
+        box-shadow: 0 -10px 0 red, 10px 0 0 green, 0 10px 0 blue, -10px 0 0
+            purple;
       }
 
       .right-border {
@@ -733,10 +741,13 @@ The following example demonstrates many uses of shadows.
       <div class="box right-border">right border</div>
       <div class="box bottom-border">bottom border</div>
       <div class="box left-border">left border</div>
+      <div class="box multiple-borders">multiple borders</div>
     </div>
   </body>
 </html>
 ```
+
+{# pragma warning enable format #}
 
 ### Centering
 

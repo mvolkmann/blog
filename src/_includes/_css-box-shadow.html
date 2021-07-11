@@ -43,6 +43,11 @@
     box-shadow: -10px 0 10px var(--color);
   }
 
+  #css-box-shadow-demo .multiple-borders {
+    box-shadow: 0 -10px 0 red, /* top */ 10px 0 0 green,
+      /* right */ 0 10px 0 blue, /* bottom */ -10px 0 0 purple; /* left */
+  }
+
   #css-box-shadow-demo .right-border {
     box-shadow: 10px 0 0 red;
   }
@@ -114,5 +119,6 @@
     <div class="box right-border">right border</div>
     <div class="box bottom-border">bottom border</div>
     <div class="box left-border">left border</div>
+    <div class="box multiple-borders">multiple borders</div>
   </div>
 </div>
