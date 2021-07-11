@@ -473,14 +473,14 @@ of elements matched by this rule.
 To refer to a CSS variable in the value of a CSS property,
 use the following syntax:
 
-```css
+```text
 var(--some-var-name)
 ```
 
 To add a default value to be used if the variable is not defined,
 use the following syntax:
 
-```css
+```text
 var(--some-var-name, default-value)
 ```
 
@@ -2488,6 +2488,8 @@ HEIF is not supported by any web browsers.
 
 TODO: Discuss image compression and options to optimize each format.
 
+### Generating Images
+
 To generate a variety of images sizes in macOS,
 open an image file in the Preview app.
 By default this can be done by double-clicking an image file in the Finder.
@@ -2499,25 +2501,118 @@ For each image size to be created:
 1. Enter the desired width in pixels.
 1. Press the "OK" button.
 
-### image element
+There are web sites that convert JPEG images to the WebP format for free.
+One is {% aTargetBlank "Convertio", "https://convertio.co/jpg-webp/" %}.
 
-The `img` element supports using the `srcset` attribute
+These images can also be created with different aspect ratios
+and have different parts of the image cropped out.
+
+In the examples below we started with a full-size JPEG image
+with a resolution of 4032x3024 and created other images from it.
+These include JPEG images with widths of 1200, 800, and 400 pixels.
+We also created a WebP image from the full-size JPEG image.
+
+### img element
+
+The `img` element supports using the `srcset` and `sizes` attributes
 to specify a list of image files can be used.
-An image can be selected based on its width in pixels,
-device pixel density, and support for specific image formats such as WebP.
+The `srcset` value is a comma-separated list of image file paths followed by their pixel width (with a `w` after the number).
+along with the pixel width of each.
+The `sizes` value is a comma-separated list of media queries
+that specify when to use the corresponding image file.
+When the `sizes` attribute is omitted, an image is selected based on the width of the area in which it will be rendered.
+When the `sizes` attribute is specified, an image is selected based on the first media query that is satisfied.
+TODO: Can this also specify pixel density values like 1x, 2x, and 3x?
+
+When `srcset` is specified, the `src` attribute should
+also be included to provide a default image to render
+in browsers that do not yet support the `srcset` attribute.
+
+In the example below, the browser will select the smallest image
+that is at least as wide as the area in which it will be rendered.
+If the largest available image size is needed,
+and the browser supports the WebP format,
+that will be preferred over the JPEG format
+due to the order in which the options are listed.
+
+Resizing the browser window to a smaller width
+will not necessarily cause it to switch to a smaller image.
+Since an image that is wider than necessary has already been loaded,
+the browser can simply scale that image
+rather than download a new, smaller image.
+
+Resizing the browser window to a larger width
+will cause it to switch to a larger image
+if that is called for my the `srcset` and `size` attribute values.
+
+{# pragma warning disable format #}
 
 ```html
-<img
-  alt="Grand Prismatic Spring"
-  src="grand-prismatic-spring-1200.jpg"
-  srcset="
-    grand-prismatic-spring-400.jpg   400w,
-    grand-prismatic-spring-800.jpg   800w,
-    grand-prismatic-spring-1200.jpg 1200w,
-    grand-prismatic-spring-4032.jpg 4032w
-  "
-/>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>img Element Demo</title>
+    <style>
+      body {
+        padding: 1rem;
+      }
+
+      .container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        box-sizing: border-box;
+        width: 100%;
+      }
+
+      img {
+        box-shadow: 0.5rem 0.5rem 0.5rem gray;
+        box-sizing: border-box;
+        flex-grow: 1;
+        min-width: 0; /* needed to allow image to shrink */
+      }
+
+      p {
+        text-align: center;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>This is the Grand Prismatic Spring in Yellowstone National Park.</p>
+      <img
+        alt="Grand Prismatic Spring"
+        src="./grand-prismatic-spring-1200.jpg"
+        srcset="
+          ./grand-prismatic-spring-400.jpg    400w,
+          ./grand-prismatic-spring-800.jpg    800w,
+          ./grand-prismatic-spring-1200.jpg  1200w,
+          ./grand-prismatic-spring-4032.webp 4032w,
+          ./grand-prismatic-spring-4032.jpg  4032w
+        "
+      />
+    </div>
+  </body>
+</html>
 ```
+
+Note that the `400w` image above is never used, even when
+the browser window is resized to its smallest width
+and the page is refreshed.
+This is because Chrome, Firefox, Safari,
+and possibly Edge (I haven't tested this.)
+do not allow a browser window to be resized
+to a width that is less than 400 pixels.
+Also, when the DevTools are set to simulate a specific mobile device
+that has a screen width that is less than 400 pixels,
+it typically has a pixel density (DPI) that is 2x or 3x,
+so the width is treated as double or triple
+which is also not less than 400 pixels.
+
+{# pragma warning enable format #}
 
 To verify the image that is downloaded for various browser widths,
 open the browser DevTools, click the "Network" tab,
@@ -2528,18 +2623,88 @@ local files (with a `file:` protocol).
 
 ### picture element
 
-The `picture` element must be used in order to render WebP images.
+The `picture` element can also be used to specify
+a set of images to be considered.
+TODO: What features does the picture element support that the img element doesn't?
 
-There are web sites that convert JPEG images to the WebP format for free.
-One is {% aTargetBlank "Convertio", "https://convertio.co/jpg-webp/" %}.
+The example below is similar to the example above,
+but uses the `picture` element instead of the `img` element.
+
+{# pragma warning disable format #}
 
 ```html
-<picture>
-  <source srcset="..." media="(min-width: 768px)" />
-  ...
-  <img alt="..." src="..." />
-</picture>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>picture Element Demo</title>
+    <style>
+      body {
+        padding: 1rem;
+      }
+
+      .container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        box-sizing: border-box;
+        width: 100%;
+      }
+
+      img {
+        box-shadow: 0.5rem 0.5rem 0.5rem gray;
+        width: 100%;
+      }
+
+      p {
+        text-align: center;
+        /*TODO: Ask Eldon why these cannot be replaced with just width: 225px; */
+        max-width: 225px;
+        min-width: 225px;
+      }
+
+      .right {
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>This is the Grand Prismatic Spring in Yellowstone National Park.</p>
+      <!--TODO: Why couldn't I get flexbox to size the image
+           unless I wrapped the picture element in a div. -->
+      <div class="right">
+        <!--TODO: Why does every simulated small phone
+               download the 1200w image? -->
+        <picture>
+          <source
+            media="(max-width: 400px)"
+            srcset="grand-prismatic-spring-400.jpg 400w"
+          />
+          <source
+            media="(max-width: 800px)"
+            srcset="grand-prismatic-spring-800.jpg 800w"
+          />
+          <source
+            media="(max-width: 1200px)"
+            srcset="grand-prismatic-spring-1200.jpg 1200w"
+          />
+          <source srcset="grand-prismatic-spring-4032.webp" type="image/webp" />
+          <source srcset="grand-prismatic-spring-4032.jpg" />
+
+          <img
+            alt="Grand Prismatic Spring"
+            src="./grand-prismatic-spring-1200.jpg"
+          />
+        </picture>
+      </div>
+    </div>
+  </body>
+</html>
 ```
+
+{# pragma warning enable format #}
 
 ## JavaScript
 
