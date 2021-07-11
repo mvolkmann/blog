@@ -578,6 +578,8 @@ depending on whether the `inset` keyword is present.
 The blur-radius value specifies the width over which
 the shadow changes from 100% opacity to zero opacity.
 The default value is `0`, which results in a solid colored shadow.
+This is useful to render a "border" that does not
+affect the size of the element as a real border does.
 
 Setting a positive spread-radius value
 increases the shadow width on all four sides.
@@ -623,6 +625,10 @@ The following example demonstrates many uses of shadows.
         box-shadow: 0 0 10px 10px var(--color);
       }
 
+      .bottom-border {
+        box-shadow: 0 10px 0 red;
+      }
+
       .bottom-inset {
         box-shadow: 0 -10px 10px inset var(--color);
       }
@@ -643,12 +649,20 @@ The following example demonstrates many uses of shadows.
         margin: 1.5rem;
       }
 
+      .left-border {
+        box-shadow: -10px 0 0 red;
+      }
+
       .left-inset {
         box-shadow: 10px 0 10px inset var(--color);
       }
 
       .left-outset {
         box-shadow: -10px 0 10px var(--color);
+      }
+
+      .right-border {
+        box-shadow: 10px 0 0 red;
       }
 
       .right-bottom-outset {
@@ -665,6 +679,10 @@ The following example demonstrates many uses of shadows.
 
       .row {
         display: flex;
+      }
+
+      .top-border {
+        box-shadow: 0 -10px 0 red;
       }
 
       .top-inset {
@@ -709,6 +727,13 @@ The following example demonstrates many uses of shadows.
     </div>
 
     <div class="box two-shadows">two shadows</div>
+
+    <div class="row">
+      <div class="box top-border">top border</div>
+      <div class="box right-border">right border</div>
+      <div class="box bottom-border">bottom border</div>
+      <div class="box left-border">left border</div>
+    </div>
   </body>
 </html>
 ```

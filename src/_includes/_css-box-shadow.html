@@ -7,6 +7,10 @@
     box-shadow: 0 0 10px 10px var(--color);
   }
 
+  #css-box-shadow-demo .bottom-border {
+    box-shadow: 0 10px 0 red;
+  }
+
   #css-box-shadow-demo .bottom-inset {
     box-shadow: 0 -10px 10px inset var(--color);
   }
@@ -27,12 +31,20 @@
     margin: 1.5rem;
   }
 
+  #css-box-shadow-demo .left-border {
+    box-shadow: -10px 0 0 red;
+  }
+
   #css-box-shadow-demo .left-inset {
     box-shadow: 10px 0 10px inset var(--color);
   }
 
   #css-box-shadow-demo .left-outset {
     box-shadow: -10px 0 10px var(--color);
+  }
+
+  #css-box-shadow-demo .right-border {
+    box-shadow: 10px 0 0 red;
   }
 
   #css-box-shadow-demo .right-bottom-outset {
@@ -49,6 +61,10 @@
 
   #css-box-shadow-demo .row {
     display: flex;
+  }
+
+  #css-box-shadow-demo .top-border {
+    box-shadow: 0 -10px 0 red;
   }
 
   #css-box-shadow-demo .top-inset {
@@ -92,4 +108,11 @@
   </div>
 
   <div class="box two-shadows">two shadows</div>
+
+  <div class="row">
+    <div class="box top-border">top border</div>
+    <div class="box right-border">right border</div>
+    <div class="box bottom-border">bottom border</div>
+    <div class="box left-border">left border</div>
+  </div>
 </div>
