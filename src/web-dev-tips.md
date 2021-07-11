@@ -380,7 +380,8 @@ but setting the width to `100%` will not.
 For this reason `100%` is often preferred over `100vw`.
 
 The example below demonstrates the difference between `100vw` and `100%`.
-Notice the right borders and the use of `box-sizing: border-box;`.
+Notice the right borders and the use of `box-sizing: border-box;`
+which is explained later.
 
 {% include "_viewport-vs-percent.html" %}
 
@@ -536,6 +537,7 @@ This is because the CSS `box-sizing` property defaults to `content-box`.
 
 If `box-sizing` is set to `border-box`, the `width` and `height`
 include the content, `padding`, and `border`, but not the `margin`.
+Frequently this is the desired value.
 There are no other supported values for the `box-sizing` property.
 
 ### `box-shadow` property
