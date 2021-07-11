@@ -1,0 +1,82 @@
+<style>
+  #object-fit-demo .bg-contain {
+    background-image: url('/blog/assets/comet.jpg');
+    background-position: center; /* defaults to 0% 0% */
+    background-repeat: no-repeat; /* defaults to repeat */
+    background-size: contain; /* defaults to auto auto */
+  }
+
+  #object-fit-demo .bg-cover {
+    background-image: url('/blog/assets/comet.jpg');
+    background-position: center; /* defaults to 0% 0% */
+    background-size: cover; /* defaults to auto auto */
+  }
+
+  #object-fit-demo .contain {
+    object-fit: contain; /* defaults to fill */
+  }
+
+  #object-fit-demo .cover {
+    object-fit: cover; /* defaults to fill */
+  }
+
+  #object-fit-demo div,
+  #object-fit-demo img {
+    --size: 140px;
+    height: var(--size);
+    width: var(--size);
+
+    margin: 0;
+    outline: 1px solid red;
+  }
+
+  #object-fit-demo div {
+    color: #0c0;
+    font-family: monospace;
+    font-size: 1.2rem;
+  }
+
+  #object-fit-demo div,
+  #object-fit-demo figure {
+    display: inline-block;
+    margin: 1rem;
+  }
+
+  #object-fit-demo figcaption {
+    font-family: monospace;
+    font-size: 1rem;
+  }
+
+  #object-fit-demo .fill {
+    object-fit: fill;
+  }
+
+  #object-fit-demo .scale-down {
+    object-fit: scale-down;
+  }
+</style>
+
+<div id="object-fit-demo">
+  <section>
+    <figure>
+      <img class="contain" alt="Comet" src="/blog/assets/comet.jpg" />
+      <figcaption>object-fit: contain;</figcaption>
+    </figure>
+    <figure>
+      <img class="cover" alt="Comet" src="/blog/assets/comet.jpg" />
+      <figcaption>object-fit: cover;</figcaption>
+    </figure>
+    <figure>
+      <img class="fill" alt="Comet" src="/blog/assets/comet.jpg" />
+      <figcaption>object-fit: fill;</figcaption>
+    </figure>
+    <figure>
+      <img class="scale-down" alt="Comet" src="/blog/assets/comet.jpg" />
+      <figcaption>object-fit: scale-down;</figcaption>
+    </figure>
+  </section>
+  <section>
+    <div class="bg-contain">background-size: contain</div>
+    <div class="bg-cover">background-size: cover</div>
+  </section>
+</div>

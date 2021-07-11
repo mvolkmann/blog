@@ -2490,6 +2490,121 @@ HEIF is not supported by any web browsers.
 
 TODO: Discuss image compression and options to optimize each format.
 
+### object-fit and background-size CSS properties
+
+When the size of an image doesn't match
+the size of the area where it will be rendered,
+the `object-fit` CSS property can be used
+to specify how the image should be resized.
+
+| `object-fit` value | Effect                                                         |
+| ------------------ | -------------------------------------------------------------- |
+| `contain`          | scaled to fit inside, so may not completely cover              |
+| `scale-down`       | same as `contain`, but only if it would make the image smaller |
+| `cover`            | scaled to cover container, so can be cropped                   |
+| `fill`             | resized to cover container by stretching, losing aspect ratio  |
+| `none`             | not scaled or resized                                          |
+
+When an image is used as a background
+by specifying the `background-image` CSS property,
+use `background-size` instead of `object-fit`
+to specify how it should be resized.
+The value can be `contain`, `cover`, a width, or a width and height.
+Other values that can be used with `object-fit` are not supported.
+
+{% include "_object-fit.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>object-fit and background-size Demo</title>
+    <style>
+      .bg-contain {
+        background-image: url('comet.jpg');
+        background-position: center; /* defaults to 0% 0% */
+        background-repeat: no-repeat; /* defaults to repeat */
+        background-size: contain; /* defaults to auto auto */
+      }
+
+      .bg-cover {
+        background-image: url('comet.jpg');
+        background-position: center; /* defaults to 0% 0% */
+        background-size: cover; /* defaults to auto auto */
+      }
+
+      .contain {
+        object-fit: contain; /* defaults to fill */
+      }
+
+      .cover {
+        object-fit: cover; /* defaults to fill */
+      }
+
+      div,
+      img {
+        --size: 200px;
+        height: var(--size);
+        width: var(--size);
+
+        margin: 0;
+        outline: 1px solid red;
+      }
+
+      div {
+        color: #0c0;
+        font-family: monospace;
+        font-size: 1.2rem;
+      }
+
+      div,
+      figure {
+        display: inline-block;
+        margin: 1rem;
+      }
+
+      figcaption {
+        font-family: monospace;
+        font-size: 1rem;
+      }
+
+      .fill {
+        object-fit: fill;
+      }
+
+      .scale-down {
+        object-fit: scale-down;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <figure>
+        <img class="contain" alt="Comet" src="comet.jpg" />
+        <figcaption>object-fit: contain;</figcaption>
+      </figure>
+      <figure>
+        <img class="cover" alt="Comet" src="comet.jpg" />
+        <figcaption>object-fit: cover;</figcaption>
+      </figure>
+      <figure>
+        <img class="fill" alt="Comet" src="comet.jpg" />
+        <figcaption>object-fit: fill;</figcaption>
+      </figure>
+      <figure>
+        <img class="scale-down" alt="Comet" src="comet.jpg" />
+        <figcaption>object-fit: scale-down;</figcaption>
+      </figure>
+    </section>
+    <section>
+      <div class="bg-contain">background-size: contain</div>
+      <div class="bg-cover">background-size: cover</div>
+    </section>
+  </body>
+</html>
+```
+
 ### Generating Images
 
 To generate a variety of images sizes in macOS,
