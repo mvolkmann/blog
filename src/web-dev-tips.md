@@ -2502,7 +2502,7 @@ For each image size to be created:
 1. Press the "OK" button.
 
 There are web sites that convert JPEG images to the WebP format for free.
-One is {% aTargetBlank "Convertio", "https://convertio.co/jpg-webp/" %}.
+One is {% aTargetBlank "https://convertio.co/jpg-webp/", "Convertio" %}.
 
 These images can also be created with different aspect ratios
 and have different parts of the image cropped out.
@@ -2552,6 +2552,7 @@ if that is called for my the `srcset` and `size` attribute values.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>img Element Demo</title>
     <style>
       body {
@@ -2593,11 +2594,19 @@ if that is called for my the `srcset` and `size` attribute values.
           ./grand-prismatic-spring-4032.webp 4032w,
           ./grand-prismatic-spring-4032.jpg  4032w
         "
+        sizes="
+          (max-width: 800px) 400px,
+          (max-width: 1200px) 800px,
+          (max-width: 1600px) 1200px,
+          4032px
+        "
       />
     </div>
   </body>
 </html>
 ```
+
+{# pragma warning enable format #}
 
 Note that the `400w` image above is never used, even when
 the browser window is resized to its smallest width
@@ -2612,7 +2621,34 @@ it typically has a pixel density (DPI) that is 2x or 3x,
 so the width is treated as double or triple
 which is also not less than 400 pixels.
 
-{# pragma warning enable format #}
+An alternative to specifying image widths after
+the image file paths in the `srcset` attribute value
+is to specify pixel densities such as `2x` and `3x`.
+Chrome DevTools refers to this value as the Device Pixel Ratio (DPR).
+
+For reference, the table below provides the pixel densities
+of some common mobile devices.
+
+| Mobile Device      | Pixel Density or DPR |
+| ------------------ | -------------------- |
+| iPhone 2-3         | 1x                   |
+| iPhone 4-9         | 2x                   |
+| iPhone 10+         | 3x                   |
+| iPad 1-2           | 1x                   |
+| iPad 3-7           | 2x                   |
+| iPad Air 1-3       | 2x                   |
+| iPad Pro 2015-2020 | 2x                   |
+| Galaxy S5          | 3x                   |
+| Nexus 5X           | 2.6x                 |
+| Pixel 2            | 2.6x                 |
+| Pixel 2 XL         | 3.5x                 |
+
+The following mobile devices have a pixel density of `2x`:
+iPhone 4 through 9, iPad
+The following mobile devices have a pixel density of `2x`:
+iPhone 4 through 9, iPad
+The following mobile devices have a pixel density of `3x`:
+iPhone 10 and above,
 
 To verify the image that is downloaded for various browser widths,
 open the browser DevTools, click the "Network" tab,
@@ -2623,12 +2659,18 @@ local files (with a `file:` protocol).
 
 ### picture element
 
-The `picture` element can also be used to specify
-a set of images to be considered.
-TODO: What features does the picture element support that the img element doesn't?
+Like the `img` element, the `picture` element
+can be used to specify a set of images to be considered.
+But it can also specify multiple sets of images
+consider based on additional media queries.
 
-The example below is similar to the example above,
+The next example similar to the one above,
 but uses the `picture` element instead of the `img` element.
+It also specifies different sets of images to use
+based on device orientation.
+This is a uncommon need.
+In most cases the `img` element can be used
+instead of the `picture` element, and is somewhat simpler.
 
 {# pragma warning disable format #}
 
@@ -2637,6 +2679,7 @@ but uses the `picture` element instead of the `img` element.
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>picture Element Demo</title>
     <style>
       body {
@@ -2659,7 +2702,7 @@ but uses the `picture` element instead of the `img` element.
 
       p {
         text-align: center;
-        /*TODO: Ask Eldon why these cannot be replaced with just width: 225px; */
+        /*TODO: Why can't these be replaced with just width: 225px;? */
         max-width: 225px;
         min-width: 225px;
       }
@@ -2675,24 +2718,39 @@ but uses the `picture` element instead of the `img` element.
       <!--TODO: Why couldn't I get flexbox to size the image
            unless I wrapped the picture element in a div. -->
       <div class="right">
-        <!--TODO: Why does every simulated small phone
-               download the 1200w image? -->
         <picture>
           <source
-            media="(max-width: 400px)"
-            srcset="grand-prismatic-spring-400.jpg 400w"
+            media="(orientation: landscape)"
+            srcset="
+              ./grand-prismatic-spring-400.jpg    400w,
+              ./grand-prismatic-spring-800.jpg    800w,
+              ./grand-prismatic-spring-1200.jpg  1200w,
+              ./grand-prismatic-spring-4032.webp 4032w,
+              ./grand-prismatic-spring-4032.jpg  4032w
+            "
+            sizes="
+              (max-width: 800px) 400px,
+              (max-width: 1200px) 800px,
+              (max-width: 1600px) 1200px,
+              4032px
+            "
           />
           <source
-            media="(max-width: 800px)"
-            srcset="grand-prismatic-spring-800.jpg 800w"
+            media="(orientation: portrait)"
+            srcset="
+              ./grand-prismatic-spring-400-portrait.jpg    400w,
+              ./grand-prismatic-spring-800-portrait.jpg    800w,
+              ./grand-prismatic-spring-1200-portrait.jpg  1200w,
+              ./grand-prismatic-spring-4032-portrait.webp 4032w,
+              ./grand-prismatic-spring-4032-portrait.jpg  4032w
+            "
+            sizes="
+              (max-width: 800px) 400px,
+              (max-width: 1200px) 800px,
+              (max-width: 1600px) 1200px,
+              4032px
+            "
           />
-          <source
-            media="(max-width: 1200px)"
-            srcset="grand-prismatic-spring-1200.jpg 1200w"
-          />
-          <source srcset="grand-prismatic-spring-4032.webp" type="image/webp" />
-          <source srcset="grand-prismatic-spring-4032.jpg" />
-
           <img
             alt="Grand Prismatic Spring"
             src="./grand-prismatic-spring-1200.jpg"
