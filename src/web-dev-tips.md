@@ -321,7 +321,7 @@ in order to view them.
 
 ## CSS
 
-### Size Units
+### Size units
 
 CSS supports many units for expressing sizes.
 Absolute units include:
@@ -338,15 +338,15 @@ Of these, only `px` is commonly used.
 
 Relative units include:
 
-- `ch` for the width of "0" in current font
-- `em` for the parent font size
-- `ex` for the height of "x" in current font
-- `lh` for the line height of current element
-- `rem` for the root element (`html`) font size
-- `vh` for 1% of the viewport height
-- `vmin` for 1% of the smallest viewport dimension
-- `vmax` for 1% of the largest viewport dimension
-- `vw` for 1% of the viewport width
+- `ch` - width of "0" in current font
+- `em` - parent font size in `font-size` property; current font size in other properties
+- `ex` - height of "x" in current font
+- `lh` - line height of current element
+- `rem` - root element (`html`) font size; stands for "root em"
+- `vh` - 1% of viewport height
+- `vmin` - 1% of smallest viewport dimension
+- `vmax` - 1% of largest viewport dimension
+- `vw` - 1% of viewport width
 
 Of these, the mostly commonly used are `rem`, `vh`, and `vw`.
 
