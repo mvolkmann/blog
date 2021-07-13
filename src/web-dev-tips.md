@@ -503,7 +503,8 @@ p {
      and in rules that match descendant elements */
   --size: 4rem;
 
-  border: 1px solid calc(var(--size) / 2);
+  border: 1px solid var(--primary-color);
+  border-radius: calc(var(--size) / 2); /* 50% is preferred */
   height: var(--size);
   width: var(--size);
 }
@@ -1899,17 +1900,6 @@ so any change to that property takes place gradually over that duration.
     <meta charset="UTF-8" />
     <title>CSS transition Demo</title>
     <style>
-      .toggle {
-        --height: 2rem;
-
-        display: inline-block;
-        background-color: cornflowerblue;
-        border-radius: calc(var(--height) / 2);
-        height: var(--height);
-        position: relative;
-        width: calc(var(--height) * 2);
-      }
-
       .thumb {
         --inset: 3px;
         --size: calc(var(--height) - 2 * var(--inset));
@@ -1919,10 +1909,21 @@ so any change to that property takes place gradually over that duration.
         top: var(--inset);
 
         background-color: orange;
-        border-radius: calc(var(--size) / 2);
+        border-radius: 50%;
         height: var(--size);
         transition: left 0.3s;
         width: var(--size);
+      }
+
+      .toggle {
+        --height: 2rem;
+
+        display: inline-block;
+        background-color: cornflowerblue;
+        border-radius: calc(var(--height) / 2);
+        height: var(--height);
+        position: relative;
+        width: calc(var(--height) * 2);
       }
     </style>
     <script>
@@ -1979,7 +1980,7 @@ When pressed again, the original rotation of zero degrees is restored.
         display: inline-block;
         background-color: cornflowerblue;
         border: none;
-        border-radius: calc(var(--size) / 2);
+        border-radius: 50%;
         font-size: 2rem;
         height: var(--size);
         transition: transform 0.7s;
