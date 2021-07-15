@@ -2094,6 +2094,12 @@ This is made possible by the fact that borders meet on diagonal lines,
 even when some of the borders are transparent.
 The code below demonstrates this.
 
+Some alternatives to consider include
+describing triangles with SVG,
+drawing triangles with Canvas, and
+using the many triangle Unicode characters.
+such as <code>&amp;#9650;</code> (&#9650;).
+
 {% include "_css-triangles.html" %}
 
 ```html
