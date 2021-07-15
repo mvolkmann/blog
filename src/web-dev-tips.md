@@ -2547,6 +2547,7 @@ The opposite can be done with a media query that specifies `min-width`.
         padding: 1rem;
       }
 
+      /* mobile view */
       @media (max-width: 768px) {
         .container {
           align-items: flex-start;
@@ -2568,6 +2569,28 @@ The opposite can be done with a media query that specifies `min-width`.
     </div>
   </body>
 </html>
+```
+
+If separate media queries are defined for mobile and non-mobile widths,
+be careful that both are not applied at the breakpoint.
+In the following example, if the screen width is exactly `800px`,
+both of these media queries will be applied
+and `h1` elements will be both bold and red.
+
+```css
+/* Mobile - width <= 800px */
+@media (max-width: 800px) {
+  h1 {
+    font-weight: bold;
+  }
+}
+
+/* Desktop - width >= 800px */
+@media (min-width: 800px) {
+  h1 {
+    color: red;
+  }
+}
 ```
 
 ### `window.matchMedia` method
