@@ -1,0 +1,93 @@
+<style>
+  /* This rule must precede the rules for
+       .bottom, .left, .right, and .top. */
+  #css-triangles .frame {
+    height: 4rem;
+    width: 4rem;
+    border: 2rem solid;
+    border-color: red green blue purple;
+  }
+
+  #css-triangles .bottom {
+    border-color: transparent;
+    border-bottom-color: blue;
+    outline: 1px dashed gray;
+  }
+
+  #css-triangles .isosceles {
+    border-width: 2rem 4rem;
+  }
+
+  #css-triangles .left {
+    border-color: transparent;
+    border-left-color: purple;
+    outline: 1px dashed gray;
+  }
+
+  #css-triangles .no-content {
+    height: 0;
+    width: 0;
+  }
+
+  #css-triangles .right {
+    border-color: transparent;
+    border-right-color: green;
+    outline: 1px dashed gray;
+  }
+
+  #css-triangles .rotate {
+    transform: rotate(45deg);
+    outline: 1px dashed gray;
+  }
+
+  #css-triangles .row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  #css-triangles .row > .frame {
+    margin-left: 1rem;
+  }
+
+  #css-triangles .top {
+    border-color: transparent;
+    border-top-color: red;
+    outline: 1px dashed gray;
+  }
+</style>
+
+<section id="css-triangles">
+  <p>Borders meet on diagonal lines.</p>
+  <div class="frame"></div>
+
+  <p>When the content size is zero, the borders become triangles.</p>
+  <div class="frame no-content"></div>
+
+  <p>Making all but one border transparent results in a single triangle.</p>
+  <div class="row">
+    top
+    <div class="frame no-content top"></div>
+  </div>
+  <div class="row">
+    right
+    <div class="frame no-content right"></div>
+  </div>
+  <div class="row">
+    bottom
+    <div class="frame no-content bottom"></div>
+  </div>
+  <div class="row">
+    left
+    <div class="frame no-content left"></div>
+  </div>
+
+  <p>A triangle can be rotated by any amount.</p>
+  <div class="row">
+    45 degrees
+    <div class="frame no-content left rotate"></div>
+  </div>
+
+  <p>To create non-right, isosceles triangles, use differing border widths.</p>
+  <div class="frame no-content isosceles"></div>
+</section>

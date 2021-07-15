@@ -2087,6 +2087,117 @@ but flashes a bit in Safari, making the effect feel less polished.
 </html>
 ```
 
+### Triangles
+
+CSS borders can be used to render triangles.
+This is made possible by the fact that borders meet on diagonal lines,
+even when some of the borders are transparent.
+The code below demonstrates this.
+
+{% include "_css-triangles.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS Triangles Demo</title>
+    <style>
+      .bottom {
+        border-color: transparent;
+        border-bottom-color: blue;
+        outline: 1px dashed gray;
+      }
+
+      .frame {
+        height: 4rem;
+        width: 4rem;
+        border: 2rem solid;
+        border-color: red green blue purple;
+      }
+
+      .isosceles {
+        border-width: 2rem 4rem;
+      }
+
+      .left {
+        border-color: transparent;
+        border-left-color: purple;
+        outline: 1px dashed gray;
+      }
+
+      .no-content {
+        height: 0;
+        width: 0;
+      }
+
+      .right {
+        border-color: transparent;
+        border-right-color: green;
+        outline: 1px dashed gray;
+      }
+
+      .rotate {
+        transform: rotate(45deg);
+        outline: 1px dashed gray;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .row > .frame {
+        margin-left: 1rem;
+      }
+
+      .top {
+        border-color: transparent;
+        border-top-color: red;
+        outline: 1px dashed gray;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Borders meet on diagonal lines.</p>
+    <div class="frame"></div>
+
+    <p>When the content size is zero, the borders become triangles.</p>
+    <div class="frame no-content"></div>
+
+    <p>Making all but one border transparent results in a single triangle.</p>
+    <div class="row">
+      top
+      <div class="frame no-content top"></div>
+    </div>
+    <div class="row">
+      right
+      <div class="frame no-content right"></div>
+    </div>
+    <div class="row">
+      bottom
+      <div class="frame no-content bottom"></div>
+    </div>
+    <div class="row">
+      left
+      <div class="frame no-content left"></div>
+    </div>
+
+    <p>A triangle can be rotated by any amount.</p>
+    <div class="row">
+      45 degrees
+      <div class="frame no-content left rotate"></div>
+    </div>
+
+    <p>
+      To create non-right, isosceles triangles, use differing border widths.
+    </p>
+    <div class="frame no-content isosceles"></div>
+  </body>
+</html>
+```
+
 ### Animation with keyframes
 
 We have seen how animations can be implemented
