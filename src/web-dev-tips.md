@@ -1508,6 +1508,14 @@ This tip distinguishes between three of them.
 All of these use the `top`, `right`, `bottom`, and `left` properties
 to specify the actual position of the element.
 
+The `inset` property provides a shorter alternative to specifying these.
+
+| `inset` usage    | Equivalent to                          |
+| ---------------- | -------------------------------------- |
+| `inset: a`       | `top: a; right: a; bottom: a; left: a` |
+| `inset: a b`     | `top: a; right: b; bottom: a; left: b` |
+| `inset: a b c d` | `top: a; right: b; bottom: c; left: d` |
+
 The `absolute` value causes elements to be positioned relative to the nearest
 ancestor element that has its CSS `position` property set to `relative`.
 If none is found, they are positioned relative to the browser window.
@@ -3080,8 +3088,8 @@ instead of the `picture` element, and is somewhat simpler.
   <body>
     <div class="container">
       <p>This is the Grand Prismatic Spring in Yellowstone National Park.</p>
-      <!--TODO: Why couldn't I get flexbox to size the image
-           unless I wrapped the picture element in a div. -->
+      <!--TODO: Why can't flexbox size the image unless
+          the picture element is wrapped in a div? -->
       <div class="right">
         <picture>
           <source
