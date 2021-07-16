@@ -2092,12 +2092,15 @@ but flashes a bit in Safari, making the effect feel less polished.
 CSS borders can be used to render triangles.
 This is made possible by the fact that borders meet on diagonal lines,
 even when some of the borders are transparent.
-The code below demonstrates this.
+Once the desired triangle is created, it can be
+translated, scaled, and rotated using the CSS `transform` property.
+
+The code below demonstrates creating triangles in this way.
 
 Some alternatives to consider include
 describing triangles with SVG,
 drawing triangles with Canvas, and
-using the many triangle Unicode characters.
+using the many triangle Unicode characters
 such as <code>&amp;#9650;</code> (&#9650;).
 
 {% include "_css-triangles.html" %}
