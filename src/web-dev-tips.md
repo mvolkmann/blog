@@ -321,6 +321,142 @@ in order to view them.
 
 ## CSS
 
+### CSS property sources
+
+CSS property values come from the following four sources:
+
+1. CSS specification defaults
+1. Browser (user agent) defaults
+1. User stylesheets (not widely supported)
+1. Author stylesheets (site-specific)
+
+User stylesheets allow users to apply custom styling to any site they browse.
+They are supported in Safari and IE, but not in Chrome or Edge.
+In Firefox they are not supported by default, but support can be enabled
+by setting `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`.
+To enable user stylesheets in Safari, select Preferences ... Advanced,
+click the drop-down labelled "Style sheet", and select a CSS file.
+
+For example, to hide the Twitter left and right sidebars in Safari,
+create a `.css` file containing the following
+and make it the user stylesheet.
+
+```css
+#react-root {
+  header[role='banner'] {
+    display: none;
+  }
+}
+
+[data-testid='sidebarColumn'] {
+  display: none;
+}
+```
+
+TODO: Why doesn't this actually work?
+TODO: Refreshing the page and even restarting Safari doesn't help.
+
+The precedence order from lowest to highest
+of CSS rules found in the sources above is:
+
+1. CSS specification
+1. Browser (user agent)
+1. User
+1. Author
+1. animations (using `@keyframes`)
+1. Author with `!important`
+1. User with `!important`
+1. Browser (user agent) `!important`
+1. transitions
+
+Note how the order of sources with `!important` is
+opposite from the order of sources without it.
+
+### Inheritable CSS properties
+
+The value of some CSS properties for an element
+is inherited from its parent element by default.
+It would be undesirable this to be the case for all properties.
+For example, if `border` was inherited by default,
+adding a border to an element would add
+the same border to all of its descendant elements.
+
+The following CSS properties are inheritable by default:
+
+- `border-collapse`
+- `border-spacing`
+- `caption-side`
+- `color`
+- `cursor`
+- `direction`
+- `empty-cells`
+- `font-family`
+- `font-size`
+- `font-style`
+- `font-variant`
+- `font-weight`
+- `font-size-adjust`
+- `font-stretch`
+- `font`
+- `letter-spacing`
+- `line-height`
+- `list-style-image`
+- `list-style-position`
+- `list-style-type`
+- `list-style`
+- `orphans`
+- `quotes`
+- `tab-size`
+- `text-align`
+- `text-align-last`
+- `text-decoration-color`
+- `text-indent`
+- `text-justify`
+- `text-shadow`
+- `text-transform`
+- `visibility`
+- `white-space`
+- `widows`
+- `word-break`
+- `word-spacing`
+- `word-wrap`
+
+### CSS global values
+
+In the CSS specification, all CSS properties support the global values
+`inherit`, `initial`, `unset`, and `revert`.
+All modern browsers support these, but IE only supports `inherit`.
+
+| CSS Global Value | Description                                                                             |
+| ---------------- | --------------------------------------------------------------------------------------- |
+| `inherit`        | inherits the computed value from the parent element                                     |
+| `initial`        | uses the CSS specification default value                                                |
+| `unset`          | same as `inherit` for inheritable properties and `initial` for others                   |
+| `revert`         | same as `inherit` for inheritable properties and browser (user agent) values for others |
+
+Specifying a value of `inherit` on a non-inheritable property
+causes it to inherit from its parent element,
+overriding the fact that it is not inheritable by default.
+
+The CSS specification does not define a default value for all properties.
+When `initial` is used as the value of a property
+for which the CSS specification does not specify a default,
+the browser default is used instead.
+
+The following CSS rule resets all properties on all elements
+to the CSS specification defaults:
+
+```css
+* {
+  all: initial;
+}
+```
+
+Specifying a value of `revert` causes a property to use the value
+it would have if it wasn't set by an author stylesheet.
+This means the value could come from the CSS specification,
+a browser stylesheet, or a user stylesheet.
+
 ### Size units
 
 CSS supports many units for expressing sizes.
@@ -1499,11 +1635,11 @@ For more details on CSS specificity, see
 The CSS `position` property supports many values.
 This tip distinguishes between three of them.
 
-| position value | Description                                                                   |
-| -------------- | ----------------------------------------------------------------------------- |
-| `absolute`     | relative to the document; removes element from document flow                  |
-| `fixed`        | relative to the viewport; removes element from document flow                  |
-| `sticky`       | relative to the document; element remains in document flow, but can be offset |
+| `position` value | Description                                                                   |
+| ---------------- | ----------------------------------------------------------------------------- |
+| `absolute`       | relative to the document; removes element from document flow                  |
+| `fixed`          | relative to the viewport; removes element from document flow                  |
+| `sticky`         | relative to the document; element remains in document flow, but can be offset |
 
 All of these use the `top`, `right`, `bottom`, and `left` properties
 to specify the actual position of the element.
@@ -2984,11 +3120,13 @@ if that is called for my the `srcset` and `size` attribute values.
 Note that the `400w` image above is never used, even when
 the browser window is resized to its smallest width
 and the page is refreshed.
-This is because Chrome, Firefox, Safari,
-and possibly Edge (I haven't tested this.)
+This is because Chrome, Firefox, and Safari
 do not allow a browser window to be resized
 to a width that is less than 400 pixels.
-Also, when the DevTools are set to simulate a specific mobile device
+Edge allows a minimum width of 149px when the DevTools are open
+and 500px when they are not.
+
+When the DevTools are set to simulate a specific mobile device
 that has a screen width that is less than 400 pixels,
 it typically has a pixel density (DPI) that is 2x or 3x,
 so the width is treated as double or triple
