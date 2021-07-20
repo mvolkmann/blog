@@ -4554,8 +4554,10 @@ The ECMAScript Internationalization API defines the {% aTargetBlank
 "Intl" %} namespace, which defines constructor functions and
 associated methods for "language sensitive string comparison,
 number formatting, and date and time formatting."
-A locale can optionally be passed to the constructor functions.
-If no locale is specified, the browser default locale is used.
+A locale and an options object can optionally
+be passed to the constructor functions.
+If neither is passed, the browser default locale is used.
+If options are required then a locale must be specified.
 
 This section provides examples of the most commonly used features in this API.
 
@@ -4602,7 +4604,8 @@ let formatter = new Intl.DateTimeFormat();
 const date = new Date(1961, 3, 16, 14, 19, 37);
 console.log(formatter.format(date)); // 4/16/1961
 
-formatter = new Intl.DateTimeFormat(locales, {
+const locale = 'en-US';
+formatter = new Intl.DateTimeFormat(locale, {
   dateStyle: 'short',
   timeStyle: 'short'
 });
@@ -4610,7 +4613,7 @@ console.log(formatter.format(date)); // 4/16/61 2:19 PM
 
 const dateStyles = ['full', 'long', 'medium', 'short'];
 for (const dateStyle of dateStyles) {
-  formatter = new Intl.DateTimeFormat(locales, {dateStyle});
+  formatter = new Intl.DateTimeFormat(locale, {dateStyle});
   console.log(formatter.format(date));
 }
 // full -> Sunday, April 16, 1961
@@ -4620,7 +4623,7 @@ for (const dateStyle of dateStyles) {
 
 const timeStyles = ['full', 'long', 'medium', 'short'];
 for (const timeStyle of timeStyles) {
-  formatter = new Intl.DateTimeFormat(locales, {timeStyle});
+  formatter = new Intl.DateTimeFormat(locale, {timeStyle});
   console.log(formatter.format(date));
 }
 // full -> 2:19:37 PM GMT-06:00
@@ -4644,7 +4647,7 @@ Example values are provided for each.
 Here is an example of defining and using a custom format.
 
 ```js
-formatter = new Intl.DateTimeFormat(locales, {
+formatter = new Intl.DateTimeFormat(locale, {
   weekday: 'short',
   year: 'numeric',
   month: 'short',
