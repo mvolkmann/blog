@@ -338,23 +338,24 @@ To enable user stylesheets in Safari, select Preferences ... Advanced,
 click the drop-down labelled "Style sheet", and select a CSS file.
 
 For example, to hide the Twitter left and right sidebars in Safari,
-create a `.css` file containing the following
-and make it the user stylesheet.
+create a `.css` file containing the following,
+make it the user stylesheet, and restart Safari.
 
 ```css
-#react-root {
-  header[role='banner'] {
-    display: none;
-  }
+/* Twitter left sidebar */
+#react-root header[role='banner'] {
+  /* !important is needed here because
+     the author stylesheet sets display to flex. */
+  display: none !important;
 }
 
+/* Twitter right sidebar */
 [data-testid='sidebarColumn'] {
-  display: none;
+  /* !important is needed here because
+     the author stylesheet sets display to flex. */
+  display: none !important;
 }
 ```
-
-TODO: Why doesn't this actually work?
-TODO: Refreshing the page and even restarting Safari doesn't help.
 
 The precedence order from lowest to highest
 of CSS rules found in the sources above is:
