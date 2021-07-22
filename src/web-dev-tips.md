@@ -357,6 +357,10 @@ make it the user stylesheet, and restart Safari.
 }
 ```
 
+An issue with user stylesheets is that they do not target specific web sites.
+They affect any visited site containing elements
+that are targeted by the CSS rule selectors.
+
 The precedence order from lowest to highest
 of CSS rules found in the sources above is:
 
@@ -493,6 +497,10 @@ by simply changing the font size of the `html` element,
 which defaults to `16px`.
 A web app can allow each user to modify this size,
 perhaps saving their preference in `localStorage`.
+
+When the value is zero, a unit is not required.
+CSS linters encourage not supplying a value in that case.
+For example, `0` is preferred over `0px`.
 
 ### Viewport units
 
@@ -665,6 +673,16 @@ are added to elements.
 
 Padding, border, and margin can be specified to be the same on all four sides
 or to be different on each side.
+
+Many CSS properties that can effect the four sizes of the box differently
+have a shorthand version that supports
+specifying a different value for each side.
+The values are listed in clockwise order starting with the top.
+Also, the mnemonic "TRouBLe" serves as a reminder
+that the order is top, right, bottom, and left.
+When only two values are specified,
+the first affects the top and bottom (vertical)
+and the second affects the left and right (horizontal).
 
 ### `box-sizing` property
 
@@ -1807,6 +1825,27 @@ using `position` `sticky` causes the "Fruit" line to remain in view.
     </div>
   </body>
 </html>
+```
+
+### `calc` function
+
+CSS property values can use the `calc` function to compute a value.
+It takes an expression that can include arithmetic expressions
+involving values with different units.
+It can also use variables.
+
+The unary minus operator cannot be applied to a variable
+to produce a negative value, but a variable can be
+multiplied by a negative number to achieve the same effect.
+
+For example:
+
+```css
+.some-class {
+  height: calc(3rem + 5px);
+  width: calc(var(--some-size) * 2);
+  margin: calc(var(--some-size) * -1);
+}
 ```
 
 ### Vendor prefixes
