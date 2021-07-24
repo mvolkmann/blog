@@ -2147,6 +2147,12 @@ and press tab to move focus to the "Login" `button`.
 The focused form control will be indicated by a green outline
 that starts with an offset that transitions to zero.
 
+In Safari and Firefox on macOS,
+the tab key only moves focus between input fields.
+This can be changed in System Preferences by selecting
+Keyboard ... Shortcuts and checking the checkbox for
+"Use keyboard navigation to move focus between controls".
+
 {% include "_css-transition-outline.html" %}
 
 ```html
@@ -2179,10 +2185,8 @@ that starts with an offset that transitions to zero.
       form button,
       form input {
         border: 1px solid gray;
-        /*TODO: Why is the outline color blue in Firefox and Safari, */
-        /*TODO: but it is green in Chrome? */
+        outline: 0 solid green;
         outline-color: green;
-        outline-offset: 0.5rem;
         padding: 0.5rem;
         transition: outline-offset 1s;
       }
