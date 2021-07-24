@@ -369,6 +369,7 @@
     "gollum",
     "grapher",
     "graphlib",
+    "grayscale",
     "greenlightning",
     "groupby",
     "hasattr",
@@ -558,6 +559,7 @@
     "readline",
     "readlines",
     "readouterr",
+    "rebeccapurple",
     "reconfig",
     "rects",
     "rejectattr",
@@ -731,6 +733,6 @@
     "yticks",
     "zeromq",
     "zoneinfo"
-],
+  ],
   "python.pythonPath": "/Users/mark/opt/anaconda3/envs/blog-env/bin/python"
 }

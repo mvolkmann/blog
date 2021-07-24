@@ -1,0 +1,65 @@
+<style>
+  #clip-paths {
+    background-color: rebeccapurple;
+  }
+
+  #clip-paths .circle {
+    /* radius "at" x-center y-center */
+    clip-path: circle(35% at 55% 50%);
+  }
+
+  #clip-paths .diamond {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+
+  #clip-paths .ellipse {
+    /* x-radius y-radius "at" x-center y-center */
+    clip-path: ellipse(50px 75px at 60% 50%);
+  }
+
+  #clip-paths .heart {
+    clip-path: path(
+      'M15,45 A30,30,0,0,1,75,45 A30,30,0,0,1,135,45 Q135,90,75,130 Q15,90,15,45 Z'
+    );
+  }
+
+  #clip-paths img {
+    display: inline-block;
+    height: 200px;
+    width: unset;
+  }
+
+  #clip-paths .inset {
+    /* top right bottom left "round" border-radius */
+    clip-path: inset(30px 20px 40px 50px round 10px);
+  }
+
+  #clip-paths .star {
+    clip-path: polygon(
+      50% 0%,
+      61% 35%,
+      98% 35%,
+      68% 57%,
+      79% 91%,
+      50% 70%,
+      21% 91%,
+      32% 57%,
+      2% 35%,
+      39% 35%
+    );
+    /* This works best on square elements.
+       The following properties cause on the top, square
+       portion of the image to be rendered. */
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+</style>
+
+<div id="clip-paths">
+  <img class="inset" src="/blog/assets/comet.jpg" alt="Comet" />
+  <img class="circle" src="/blog/assets/comet.jpg" alt="Comet" />
+  <img class="ellipse" src="/blog/assets/comet.jpg" alt="Comet" />
+  <img class="heart" src="/blog/assets/comet.jpg" alt="Comet" />
+  <img class="diamond" src="/blog/assets/comet.jpg" alt="Comet" />
+  <img class="star" src="/blog/assets/comet.jpg" alt="Comet" />
+</div>

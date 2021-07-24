@@ -2971,22 +2971,110 @@ The following example demonstrates this.
 </html>
 ```
 
-### Filters
+### clip-path property
 
-The {%aTargetBlank "https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
-"CSS `filter` function" %} applies special effects to elements.
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path",
+"CSS clip-path property" %} defines a clipping region
+that determines the parts of an element that should be visible.
+It is often used with images, but is not limited to those.
+
+The clip path is defined by one of the following functions,
+`inset`, `circle`, `ellipse`, `polygon`, or `path`.
+Each of these is demonstrated below.
+
+{% include "_css-clip-paths.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS clip-path Demo</title>
+    <style>
+      body {
+        background-color: rebeccapurple;
+      }
+
+      .circle {
+        /* radius "at" x-center y-center */
+        clip-path: circle(35% at 55% 50%);
+      }
+
+      .diamond {
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      }
+
+      .ellipse {
+        /* x-radius y-radius "at" x-center y-center */
+        clip-path: ellipse(50px 75px at 60% 50%);
+      }
+
+      .heart {
+        clip-path: path(
+          'M15,45 A30,30,0,0,1,75,45 A30,30,0,0,1,135,45 Q135,90,75,130 Q15,90,15,45 Z'
+        );
+      }
+
+      img {
+        display: inline-block;
+        height: 200px;
+        width: unset;
+      }
+
+      .inset {
+        /* top right bottom left "round" border-radius */
+        clip-path: inset(30px 20px 40px 50px round 10px);
+      }
+
+      .star {
+        clip-path: polygon(
+          50% 0%,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+        );
+        /* This works best on square elements.
+           The following properties cause on the top, square
+           portion of the image to be rendered. */
+        aspect-ratio: 1; /* not supported by IE or Safari */
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="inset" src="./comet.jpg" alt="Comet" />
+    <img class="circle" src="./comet.jpg" alt="Comet" />
+    <img class="ellipse" src="./comet.jpg" alt="Comet" />
+    <img class="heart" src="./comet.jpg" alt="Comet" />
+    <img class="diamond" src="./comet.jpg" alt="Comet" />
+    <img class="star" src="./comet.jpg" alt="Comet" />
+  </body>
+</html>
+```
+
+### filter property
+
+The {% aTargetBlank "https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
+"CSS filter function" %} applies special effects to elements.
 Each effect is described by a function call
 that is the value of the `filter` property.
 For example, `filter: sepia(100%);`
 
 The supported effects are demonstrated below.
 Try changing the input values to vary the effects.
-In Safari, changes to the drop-shadow values do not take effect until
-the window width is made smaller or the window height is changed.
+In Safari, changes to the drop-shadow values do not take effect
+until the window width is made smaller or the window height is changed.
 This seems to be a bug in Safari.
 
-One effect not covered here is `url(some-url)`
-where the `some-url` refers to a file that defines an SVG filter.
+One effect not covered here is `url(some-url)` where
+the `some-url` refers to a file that defines an SVG filter.
 
 {% include "_css-filters.html" %}
 
