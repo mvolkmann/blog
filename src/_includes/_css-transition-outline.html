@@ -52,7 +52,7 @@
 </form>
 
 <script>
-  const form = document.getElementById('login-form');
+  const loginForm = document.getElementById('login-form');
   const usernameInput = document.getElementById('username');
   const passwordInput = document.getElementById('password');
   const submitBtn = document.querySelector('form button[type="submit"]');
@@ -71,7 +71,7 @@
     updateSubmitBtn();
   });
 
-  form.addEventListener('submit', event => {
+  loginForm.addEventListener('submit', event => {
     event.preventDefault();
     alert('Logging in with ' + username + ' and ' + password);
   });

@@ -21,9 +21,9 @@
 <script>
   const INITIAL_COLORS = ['blue', 'green', 'red'];
 
-  const form = document.querySelector('#datalist-demo form');
-  const addBtn = form.querySelector('button');
-  const newColorInput = form.querySelector('input');
+  const dataListForm = document.querySelector('#datalist-demo form');
+  const addBtn = dataListForm.querySelector('button');
+  const newColorInput = dataListForm.querySelector('input');
   const colorInput = document.getElementById('color');
   const colorsDataList = document.getElementById('colors');
   const report = document.getElementById('report');
@@ -49,7 +49,7 @@
   INITIAL_COLORS.forEach(addColor);
 
   // When the form is submitted, add a color to the datalist.
-  form.addEventListener('submit', event => {
+  dataListForm.addEventListener('submit', event => {
     event.preventDefault();
     addColor(newColorInput.value);
     newColorInput.value = '';

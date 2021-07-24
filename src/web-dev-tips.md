@@ -2971,6 +2971,299 @@ The following example demonstrates this.
 </html>
 ```
 
+### Filters
+
+{% include "_css-filters.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Figure Demo</title>
+    <style>
+      .blur {
+        filter: blur(var(--blur-size));
+      }
+
+      body {
+        font-family: sans-serif;
+      }
+
+      .brightness {
+        filter: brightness(var(--brightness-percent));
+      }
+
+      .contrast {
+        filter: contrast(var(--contrast-percent));
+      }
+
+      .drop-shadow {
+        filter: drop-shadow(
+          var(--drop-shadow-offset-x) var(--drop-shadow-offset-y) var(
+              --drop-shadow-blur-radius
+            ) var(--drop-shadow-color)
+        );
+      }
+
+      .filter {
+        font-family: monospace;
+      }
+
+      table input {
+        border: 1px solid gray;
+        padding: 0.5rem;
+      }
+
+      .grayscale {
+        filter: grayscale(var(--grayscale-percent));
+      }
+
+      .hue-rotate {
+        filter: hue-rotate(var(--hue-rotate-angle));
+      }
+
+      img {
+        display: inline-block;
+        height: 200px;
+      }
+
+      .invert {
+        filter: invert(var(--invert-percent));
+      }
+
+      .opacity {
+        filter: opacity(var(--opacity-percent));
+      }
+
+      .saturate {
+        filter: saturate(var(--saturate-percent));
+      }
+
+      .sepia {
+        filter: sepia(var(--sepia-percent));
+      }
+
+      table {
+        --blur-size: 1px;
+        --brightness-percent: 50%;
+        --contrast-percent: 50%;
+        --drop-shadow-blur-radius: 5px;
+        --drop-shadow-color: #0000ff; /* This color format is required. */
+        --drop-shadow-offset-x: 5px;
+        --drop-shadow-offset-y: 5px;
+        --grayscale-percent: 100%;
+        --hue-rotate-angle: 180deg;
+        --invert-percent: 100%;
+        --opacity-percent: 50%;
+        --saturate-percent: 50%;
+        --sepia-percent: 100%;
+
+        border-collapse: collapse;
+      }
+
+      td,
+      th {
+        border: 1px solid gray;
+        padding: 0.5rem;
+      }
+
+      td > div:not(:first-of-type) {
+        margin-top: 0.5rem;
+      }
+    </style>
+
+    <script>
+      window.onload = () => {
+        const table = document.getElementById('filter-table');
+
+        function setupInput(id, suffix) {
+          const input = document.getElementById(id);
+          const value = getComputedStyle(table)
+            .getPropertyValue('--' + id)
+            .trim();
+          input.value = suffix ? parseInt(value) : value;
+
+          input.addEventListener('input', e => {
+            let {value} = e.target;
+            table.style.setProperty(
+              '--' + id,
+              suffix ? parseInt(value) + suffix : value
+            );
+          });
+        }
+
+        setupInput('blur-size', 'px');
+        setupInput('brightness-percent', '%');
+        setupInput('contrast-percent', '%');
+        setupInput('drop-shadow-blur-radius', 'px');
+        setupInput('drop-shadow-color');
+        setupInput('drop-shadow-offset-x', 'px');
+        setupInput('drop-shadow-offset-y', 'px');
+        setupInput('grayscale-percent', '%');
+        setupInput('hue-rotate-angle', 'deg');
+        setupInput('invert-percent', '%');
+        setupInput('opacity-percent', '%');
+        setupInput('saturate-percent', '%');
+        setupInput('sepia-percent', '%');
+      };
+    </script>
+  </head>
+  <body>
+    <table id="filter-table">
+      <thead>
+        <tr>
+          <th>Filter</th>
+          <th>Demo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="filter">blur(size)</div>
+            <div>
+              <label for="blur-size">blur size in px</label>
+              <input id="blur-size" min="0" max="20" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="blur" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">brightness(percent)</div>
+            <div>
+              <label for="brightness-percent">percent</label>
+              <input id="brightness-percent" min="0" max="200" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="brightness" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">contrast(percent)</div>
+            <div>
+              <label for="contrast-percent">percent</label>
+              <input id="contrast-percent" min="0" max="200" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="contrast" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">
+              drop-shadow(<br />
+              offset-x offset-y blur-radius color<br />)
+            </div>
+            <div>
+              <label for="drop-shadow-offset-x">offset-x in px</label>
+              <input id="drop-shadow-offset-x" min="0" max="20" type="number" />
+            </div>
+            <div>
+              <label for="drop-shadow-offset-y">offset-y in px</label>
+              <input id="drop-shadow-offset-y" min="0" max="20" type="number" />
+            </div>
+            <div>
+              <label for="drop-shadow-blur-radius">blur radius in px</label>
+              <input
+                id="drop-shadow-blur-radius"
+                min="0"
+                max="20"
+                type="number"
+              />
+            </div>
+            <div>
+              <label for="drop-shadow-color">color</label>
+              <input id="drop-shadow-color" type="color" />
+            </div>
+          </td>
+          <td>
+            <img class="drop-shadow" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">grayscale(percent)</div>
+            <div>
+              <label for="grayscale-percent">percent</label>
+              <input id="grayscale-percent" min="0" max="200" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="grayscale" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">hue-rotate(angle)</div>
+            <div>
+              <label for="hue-rotate-angle">angle in degrees</label>
+              <input id="hue-rotate-angle" min="0" max="360" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="hue-rotate" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">invert(percent)</div>
+            <div>
+              <label for="invert-percent">percent</label>
+              <input id="invert-percent" min="0" max="200" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="invert" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">opacity(percent)</div>
+            <div>
+              <label for="opacity-percent">percent</label>
+              <input id="opacity-percent" min="0" max="200" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="opacity" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">saturate(percent)</div>
+            <div>
+              <label for="saturate-percent">percent</label>
+              <input id="saturate-percent" min="0" max="200" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="saturate" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="filter">sepia(percent)</div>
+            <div>
+              <label for="sepia-percent">percent</label>
+              <input id="sepia-percent" min="0" max="200" type="number" />
+            </div>
+          </td>
+          <td>
+            <img class="sepia" src="./comet.jpg" alt="Comet" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
+```
+
 ### Linting
 
 The {% aTargetBlank "https://stylelint.io", "stylelint" %} linter
