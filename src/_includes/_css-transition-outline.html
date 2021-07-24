@@ -1,0 +1,82 @@
+<style>
+  #login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: sans-serif;
+  }
+
+  #login-form button:disabled {
+    background-color: gray;
+    color: white;
+  }
+
+  #login-form > div {
+    margin-bottom: 0.5rem;
+  }
+
+  #login-form button,
+  #login-form input {
+    border: 1px solid gray;
+    outline-color: green;
+    outline-offset: 0.5rem;
+    padding: 0.5rem;
+    transition: outline-offset 1s;
+  }
+
+  #login-form button:focus,
+  #login-form input:focus {
+    outline-offset: 0;
+    outline-width: 3px;
+  }
+
+  #login-form label {
+    display: inline-block;
+    margin-right: 0.5rem;
+    text-align: right;
+    width: 4.5rem;
+  }
+</style>
+
+<form id="login-form">
+  <div>
+    <label for="username">Username</label>
+    <input id="username" />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input id="password" type="password" />
+  </div>
+  <button type="submit">Login</button>
+</form>
+
+<script>
+  const form = document.getElementById('login-form');
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const submitBtn = document.querySelector('form button[type="submit"]');
+  submitBtn.disabled = true;
+
+  let username = '';
+  let password = '';
+
+  usernameInput.addEventListener('input', e => {
+    username = e.target.value;
+    updateSubmitBtn();
+  });
+
+  passwordInput.addEventListener('input', e => {
+    password = e.target.value;
+    updateSubmitBtn();
+  });
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    alert('Logging in with ' + username + ' and ' + password);
+  });
+
+  function updateSubmitBtn() {
+    submitBtn.disabled = !username || !password;
+  }
+</script>

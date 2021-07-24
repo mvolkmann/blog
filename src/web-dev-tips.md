@@ -2139,6 +2139,116 @@ so any change to that property takes place gradually over that duration.
 </html>
 ```
 
+Here is another example that transitions the CSS `outline-offset` property
+to focus the attention of the user when focus moves to a new form control.
+Click in the the username `input`, enter a value,
+press tab to move focus to the password `input`, enter a value,
+and press tab to move focus to the "Login" `button`.
+The focused form control will be indicated by a green outline
+that starts with an offset that transitions to zero.
+
+{% include "_css-transition-outline.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS transition outline-offset Demo</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      form button:disabled {
+        background-color: gray;
+        color: white;
+      }
+
+      form > div {
+        margin-bottom: 0.5rem;
+      }
+
+      form button,
+      form input {
+        border: 1px solid gray;
+        /*TODO: Why is the outline color blue in Firefox and Safari, */
+        /*TODO: but it is green in Chrome? */
+        outline-color: green;
+        outline-offset: 0.5rem;
+        padding: 0.5rem;
+        transition: outline-offset 1s;
+      }
+
+      form button:focus,
+      form input:focus {
+        outline-offset: 0;
+        outline-width: 3px;
+      }
+
+      form label {
+        display: inline-block;
+        margin-right: 0.5rem;
+        text-align: right;
+        width: 4.5rem;
+      }
+    </style>
+
+    <script>
+      window.onload = () => {
+        const form = document.getElementById('login-form');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const submitBtn = document.querySelector('form button[type="submit"]');
+        submitBtn.disabled = true;
+
+        let username = '';
+        let password = '';
+
+        usernameInput.addEventListener('input', e => {
+          username = e.target.value;
+          updateSubmitBtn();
+        });
+
+        passwordInput.addEventListener('input', e => {
+          password = e.target.value;
+          updateSubmitBtn();
+        });
+
+        form.addEventListener('submit', event => {
+          event.preventDefault();
+          alert('Logging in with ' + username + ' and ' + password);
+        });
+
+        function updateSubmitBtn() {
+          submitBtn.disabled = !username || !password;
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <form id="login-form">
+      <div>
+        <label for="username">Username</label>
+        <input id="username" />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input id="password" type="password" />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </body>
+</html>
+```
+
 ### Transforms
 
 The CSS {% aTargetBlank
