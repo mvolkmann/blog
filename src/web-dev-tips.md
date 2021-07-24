@@ -2983,6 +2983,10 @@ The clip path is defined by one of the following functions,
 `inset`, `circle`, `ellipse`, `polygon`, or `path`.
 Each of these is demonstrated below.
 
+The `clip-path` property can be used with the `transition` property
+so changes are animated.
+For example, the `clip-path` can become larger or smaller on hover.
+
 {% include "_css-clip-paths.html" %}
 
 ```html
