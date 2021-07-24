@@ -2973,15 +2973,20 @@ The following example demonstrates this.
 
 ### Filters
 
-The CSS `filter` function applies ten kinds special effects to elements.
-Each effect is described by a function call that is the value of the `filter` property.
+The {%aTargetBlank "https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
+"CSS `filter` function" %} applies special effects to elements.
+Each effect is described by a function call
+that is the value of the `filter` property.
 For example, `filter: sepia(100%);`
 
-Each supported effect is demonstrated below.
+The supported effects are demonstrated below.
 Try changing the input values to vary the effects.
 In Safari, changes to the drop-shadow values do not take effect until
 the window width is made smaller or the window height is changed.
 This seems to be a bug in Safari.
+
+One effect not covered here is `url(some-url)`
+where the `some-url` refers to a file that defines an SVG filter.
 
 {% include "_css-filters.html" %}
 
