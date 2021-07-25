@@ -763,10 +763,14 @@ in order to achieve a 3D effect, and this cannot be prevented.
 
 Multiple shadows can be added to an element
 by specifying comma-separated lists of values.
-See the `.multiple-borders` and `.two-shadows` selectors
+See the `.two-shadows`, `.target`, and .multiple-borders` selectors
 below for examples.
+An alternative to defining multiple, nested borders
+is to use nested divs that each have a single border,
+but that requires more HTML elements and
+more CSS properties to center each of the divs.
 
-The following example demonstrates many uses of shadows.
+The following examples demonstrate many uses of shadows.
 
 {% include "_css-box-shadow.html" %}
 
@@ -827,6 +831,13 @@ The following example demonstrates many uses of shadows.
             purple;
       }
 
+      .nested {
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 0 0 20px red, 0 0 0 40px green, 0 0 0 60px blue;
+        margin: 4rem;
+      }
+
       .right-border {
         box-shadow: 10px 0 0 red;
       }
@@ -845,6 +856,20 @@ The following example demonstrates many uses of shadows.
 
       .row {
         display: flex;
+      }
+
+      .target {
+        --red: #cb0000;
+        --size: 2rem;
+
+        height: var(--size);
+        width: var(--size);
+
+        background-color: var(--red);
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 0 0 20px white, 0 0 0 40px var(--red);
+        margin: 3rem;
       }
 
       .top-border {
@@ -892,7 +917,11 @@ The following example demonstrates many uses of shadows.
       <div class="box all-inset">inset all sides</div>
     </div>
 
-    <div class="box two-shadows">two shadows</div>
+    <div class="row">
+      <div class="box two-shadows">two shadows</div>
+      <div class="box nested">nested shadows</div>
+      <div class="target"></div>
+    </div>
 
     <div class="row">
       <div class="box top-border">top border</div>
@@ -1649,6 +1678,29 @@ For more details on CSS specificity, see
 {% aTargetBlank "https://css-tricks.com/specifics-on-css-specificity/",
 "Specifics on CSS Specificity" %} on the CSS-Tricks site.
 
+### `scroll-behavior` property
+
+The CSS {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior",
+"scroll-behavior property" %} causes the page to
+smoothly scroll rather than jump to a new page location
+when the user clicks a link that
+navigates to a different part of the same page.
+To enable this behavior, add the following CSS rule:
+
+```css
+html {
+  scroll-behavior: smooth;
+}
+```
+
+It is not possible to control the speed at which the page scrolls.
+
+Smooth scrolling is implemented in the page you are viewing.
+Click a link in the table of contents at the top to see this in action.
+Click the browser back button to scroll back to the table of contents.
+Safari does not yet implement this property and simply ignores it.
+
 ### `position` property
 
 The CSS `position` property supports many values.
@@ -1736,7 +1788,6 @@ that uses a `position` value of `relative`.
 </html>
 ```
 
-<a name="css-position-fixed-sticky"></a>
 The next example shows the differences between the CSS `position` property
 values `absolute`, `fixed`, and `sticky`.
 
@@ -2973,9 +3024,9 @@ The following example demonstrates this.
 
 ### clip-path property
 
-The {% aTargetBlank
+The CSS {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path",
-"CSS clip-path property" %} defines a clipping region
+"clip-path property" %} defines a clipping region
 that determines the parts of an element that should be visible.
 It is often used with images, but is not limited to those.
 
@@ -3065,8 +3116,8 @@ For example, the `clip-path` can become larger or smaller on hover.
 
 ### filter property
 
-The {% aTargetBlank "https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
-"CSS filter function" %} applies special effects to elements.
+The CSS {% aTargetBlank "https://developer.mozilla.org/en-US/docs/Web/CSS/filter",
+"filter property" %} applies special effects to elements.
 Each effect is described by a function call
 that is the value of the `filter` property.
 For example, `filter: sepia(100%);`
@@ -3076,6 +3127,10 @@ Try changing the input values to vary the effects.
 In Safari, changes to the drop-shadow values do not take effect
 until the window width is made smaller or the window height is changed.
 This seems to be a bug in Safari.
+
+The only advantage of using the `filter` property
+with the `drop-shadow` function over using the `box-shadow` property
+is that some browsers utilized hardware acceleration for it.
 
 One effect not covered here is `url(some-url)` where
 the `some-url` refers to a file that defines an SVG filter.

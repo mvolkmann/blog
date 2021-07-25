@@ -2240,7 +2240,7 @@ concrete types in order to use them in place of the type parameters.
 The sections on functions, structs, and traits
 contain many examples of using generic types.
 
-## <a name="scalar-types">Built-in Types</a>
+## Built-in Types
 
 Rust provides many built-types.
 The following diagram summarizes them.

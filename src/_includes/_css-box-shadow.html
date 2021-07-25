@@ -48,6 +48,13 @@
       /* right */ 0 10px 0 blue, /* bottom */ -10px 0 0 purple; /* left */
   }
 
+  #css-box-shadow-demo .nested {
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0 20px red, 0 0 0 40px green, 0 0 0 60px blue;
+    margin: 4rem;
+  }
+
   #css-box-shadow-demo .right-border {
     box-shadow: 10px 0 0 red;
   }
@@ -66,6 +73,20 @@
 
   #css-box-shadow-demo .row {
     display: flex;
+  }
+
+  #css-box-shadow-demo .target {
+    --red: #cb0000;
+    --size: 2rem;
+
+    height: var(--size);
+    width: var(--size);
+
+    background-color: var(--red);
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0 20px white, 0 0 0 40px var(--red);
+    margin: 3rem;
   }
 
   #css-box-shadow-demo .top-border {
@@ -112,7 +133,11 @@
     <div class="box all-inset">inset all sides</div>
   </div>
 
-  <div class="box two-shadows">two shadows</div>
+  <div class="row">
+    <div class="box two-shadows">two shadows</div>
+    <div class="box nested">nested shadows</div>
+    <div class="target"></div>
+  </div>
 
   <div class="row">
     <div class="box top-border">top border</div>
