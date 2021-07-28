@@ -37,6 +37,11 @@ h3 {
 html {
   scroll-behavior: smooth; /* not supported in Safari */
 }
+@media (prefers-reduced-motion) {
+  html {
+    scroll-behavior: auto;
+  }
+}
 
 img {
   width: 95%;

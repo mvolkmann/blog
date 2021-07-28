@@ -1701,6 +1701,21 @@ Click a link in the table of contents at the top to see this in action.
 Click the browser back button to scroll back to the table of contents.
 Safari does not yet implement this property and simply ignores it.
 
+Some users prefer reduced motion.
+This is indicated through an OS setting.
+To set this in macOS, open System Preferences, select Accessibility,
+select Display, and check the checkbox for "Reduce Motion".
+
+To disable smooth scrolling for these uses, add the following CSS:
+
+```css
+@media (prefers-reduced-motion) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+```
+
 ### `position` property
 
 The CSS `position` property supports many values.
