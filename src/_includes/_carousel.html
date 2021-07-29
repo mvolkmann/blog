@@ -1,0 +1,173 @@
+<style>
+  .carousel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .carousel button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 3rem;
+  }
+
+  .carousel .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .carousel .container {
+    --height: 400px;
+    background-color: lightgray;
+    height: var(--height);
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .carousel .dot {
+    --size: 1.5rem;
+
+    background-color: lightgray;
+    border: none;
+    border-radius: 50%;
+    height: var(--size);
+    width: var(--size);
+  }
+
+  .carousel .dot.selected {
+    background-color: gray;
+  }
+
+  .carousel img {
+    max-height: var(--height);
+    position: absolute;
+    transition: left 0.5s;
+    transform: translate(-50%, 0);
+    visibility: hidden; /* initially */
+    width: unset;
+  }
+
+  .carousel .left-btn {
+    visibility: hidden; /* initially */
+  }
+
+  .carousel nav {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+</style>
+
+<div class="carousel">
+  <button class="left-btn">&lt;</button>
+  <div class="center">
+    <div class="container"></div>
+    <nav></nav>
+  </div>
+  <button class="right-btn">&gt;</button>
+</div>
+
+<script>
+  const images = [
+    'german-shorthaired-pointer.jpg',
+    'native-american-indian-dog.jpg',
+    'treeing-walker-coonhound.jpg',
+    'whippet.jpg'
+  ];
+
+  let containerWidth = 0;
+  let itemWidth = 0;
+  let currentDot;
+  let lastIndex = images.length - 1;
+  let leftBtn;
+  let nav;
+  let rightBtn;
+  let showIndex = 0;
+  let imgElements = [];
+
+  function showNext() {
+    if (showIndex === lastIndex) return;
+    showIndex++;
+    update();
+  }
+
+  function showPrevious() {
+    if (showIndex === 0) return;
+    showIndex--;
+    update();
+  }
+
+  function update() {
+    const maxWidth = Math.max(containerWidth, itemWidth);
+
+    // Slide the images to their new position.
+    imgElements.forEach((img, index) => {
+      const offset = index - showIndex + 0.5;
+      // For the image being shown, we want to center it in the container.
+      // For the other images, we need to ensure they are out of view.
+      const width = index === showIndex ? containerWidth : maxWidth;
+      img.style.left = offset * width + 'px';
+    });
+
+    // Update the visibility of the left and right buttons.
+    leftBtn.style.visibility = showIndex === 0 ? 'hidden' : 'visible';
+    rightBtn.style.visibility = showIndex === lastIndex ? 'hidden' : 'visible';
+
+    // Select the correct dot.
+    currentDot.classList.remove('selected');
+    currentDot = nav.querySelector(`button:nth-of-type(${showIndex + 1})`);
+    currentDot.classList.add('selected');
+  }
+
+  const carousel = document.querySelector('.carousel');
+
+  leftBtn = carousel.querySelector('.left-btn');
+  leftBtn.addEventListener('click', showPrevious);
+
+  rightBtn = carousel.querySelector('.right-btn');
+  rightBtn.addEventListener('click', showNext);
+
+  nav = carousel.querySelector('nav');
+
+  const container = carousel.querySelector('.container');
+  containerWidth = container.getBoundingClientRect().width;
+
+  let loadCount = 0;
+
+  images.forEach((image, index) => {
+    // Create and add a dot for each image.
+    const dot = document.createElement('button');
+    dot.classList.add('dot');
+    nav.appendChild(dot);
+    if (index === 0) currentDot = dot;
+    dot.addEventListener('click', () => {
+      showIndex = index;
+      update();
+    });
+
+    // Create and add an img element for each image.
+    const img = document.createElement('img');
+    img.setAttribute('src', '/blog/assets/' + image);
+    container.appendChild(img);
+    imgElements.push(img);
+
+    // Wait for the image to load so we can get its width.
+    img.onload = () => {
+      const {width} = img.getBoundingClientRect();
+      if (width > itemWidth) itemWidth = width;
+
+      // After the last image has loaded,
+      // slide them into position and make them visible.
+      loadCount++;
+      if (loadCount === images.length) {
+        update();
+        imgElements.forEach(img => (img.style.visibility = 'visible'));
+      }
+    };
+  });
+</script>
