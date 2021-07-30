@@ -5667,6 +5667,12 @@ I learned this from
 
 ## Editors
 
+### VS Code
+
+{% aTargetBlank "https://code.visualstudio.com", "VS Code" %}
+is a very popular, free code editor from Microsoft.
+It has many built-in features and more can be added through extensions.
+
 ### Emmet
 
 Emmet is an editor plugin for quickly entering HTML, XML, and CSS.
@@ -5742,6 +5748,55 @@ if you guess an abbreviation you will usually be correct.
 For more detail, see my {% aTargetBlank
 "https://objectcomputing.com/resources/publications/sett/march-2018-emmet-editor-plugin?v=1.0.15",
 "Emmet article" %}.
+
+### Live Server VS Code extension
+
+{% aTargetBlank "https://ritwickdey.github.io/vscode-live-server/",
+"Live Server" %} is a VS Code extension that
+starts a local file server and watches files for changes,
+reloading a browser page when detected.
+This is great for experimenting with HTML, CSS, and JavaScript
+changes to a site that does not require a build step.
+
+To install it, click the extensions icon in the left nav,
+enter "live server" in the search input, and
+click the install button in the entry for "Live Server" by Ritwick Dey.
+
+To use it, open a folder/directory in VS Code
+that includes an HTML file and open an HTML file.
+Then use one of these approaches to start the server:
+
+1. Right-click the pane displaying the HTML and select "Open with Live Server".
+1. Open the command palette and select "Live Server: Open with Live Server".
+
+Each of these will launch a local file server,
+open the file in your default web browser, and
+add "⍉ Port: 5500" to the status bar
+at the bottom of the VS Code window.
+
+To stop the server, use one of these approaches:
+
+1. Click the area added to the status bar described above.
+1. Right-click the pane displaying the HTML and select "Stop Live Server".
+1. Open the command palette and select "Live Server: Stop Live Server".
+
+The status bar area will change to "Go Live"
+which can then be clicked to restart the server.
+
+To change the default port that is used (5500)
+specify the port in the `liveServer.settings.port` setting.
+
+To use a web browser other than your default,
+specify it in the `liveserver.settings.CustomBrowser` setting.
+Options include `chrome`, `chrome:PrivateMode`,
+`firefox`, `firefox:PrivateMode`, `microsoft-edge`, and `blisk`.
+
+{% aTargetBlank "https://blisk.io", "Blisk" %}
+is a Chromium-based, developer-oriented web browser
+for testing various device types including desktop, tablet, and mobile.
+
+Live Server supports many more {% aTargetBlank
+"https://github.com/ritwickdey/vscode-live-server/blob/master/docs/settings.md", "settings" %}.
 
 ## Miscellaneous
 
