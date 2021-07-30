@@ -1,0 +1,32 @@
+<style>
+  #truncate-text-demo > .demo-text {
+    outline: 1px dashed red;
+    width: 100px;
+  }
+
+  #truncate-text-demo label {
+      width: unset;
+  }
+
+  #truncate-text-demo .truncate-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+
+<div id="truncate-text-demo">
+  <div>
+    <input id="truncate-text-cb" type="checkbox" />
+    <label for="truncate-text-cb">Truncate Text</label>
+  </div>
+  <div class="demo-text">This is a large amount of text.</div>
+</body>
+
+<script>
+  text = document.querySelector('#truncate-text-demo .demo-text');
+  checkbox = document.getElementById('truncate-text-cb');
+  checkbox.addEventListener('change', () => {
+    text.classList.toggle('truncate-text');
+  });
+</script>

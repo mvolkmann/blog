@@ -1678,6 +1678,57 @@ For more details on CSS specificity, see
 {% aTargetBlank "https://css-tricks.com/specifics-on-css-specificity/",
 "Specifics on CSS Specificity" %} on the CSS-Tricks site.
 
+### Truncating text
+
+The CSS property `text-overflow` can be used to truncate long text.
+However, it doesn't work on its own.
+The `overflow` and `whitespace` properties must also be specified.
+See the CSS rule for `.truncate-text` below.
+
+Toggle the checkbox in the example below to switch between
+non-truncated and truncated text.
+
+{% include "_truncate-text.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Text Ellipsis Demo</title>
+    <style>
+      #demo-text {
+        outline: 1px dashed red;
+        width: 100px;
+      }
+
+      .truncate-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    </style>
+
+    <script>
+      window.onload = () => {
+        text = document.getElementById('demo-text');
+        checkbox = document.getElementById('truncate-cb');
+        checkbox.addEventListener('change', () => {
+          text.classList.toggle('truncate-text');
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div>
+      <input id="truncate-cb" type="checkbox" />
+      <label for="truncate-cb">Truncate Text</label>
+    </div>
+    <div id="demo-text">This is a large amount of text.</div>
+  </body>
+</html>
+```
+
 ### `scroll-behavior` property
 
 The CSS {% aTargetBlank
