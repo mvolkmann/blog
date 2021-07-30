@@ -2634,7 +2634,7 @@ Keyframes specify changes to CSS properties
 that should be animated over some time duration
 using an easing function to control the rate of change.
 When each keyframe is executed,
-a transition is performed for each CSS properties that is specified,
+a transition is performed for each CSS property that is specified,
 going from the previous value to a new value.
 
 Each keyframe specifies the properties to be applied
@@ -2647,7 +2647,7 @@ while animating `font-size` changing from
 `1rem` to `3rem` and back to `1rem` at `0%`, `50%`, and `100%`.
 
 Animations created this way can do several things
-that transitions cannot including:
+that transitions cannot, including:
 
 1. repeating indefinitely
 1. executing several sets of property changes
@@ -2658,8 +2658,10 @@ that transitions cannot including:
 The starting values of the properties to be animated
 default to their current values.
 However, alternate starting values can be specified with `from` or `0%`.
+
 The ending values of these properties also default to their current values.
 However, alternate ending values can be specified with `to` or `100%`.
+
 Additional property values can be specified for
 other percentages of time through the animation.
 
@@ -2684,7 +2686,7 @@ The `animation-fill-mode` property determines the styles
 that are applied before the animation begins and after it completes.
 
 - To retain the current properties at the beginning and end of the animation,
-  set this to `none` which is the default value.
+  set this to `none`, which is the default value.
 - To apply different styles at `0%` (or `from`), set this to `backwards`.
 - To return the properties set after `100%` (or `to`),
   set this to `forwards`.
@@ -2722,7 +2724,7 @@ The following example demonstrates many of the animation properties.
 It moves a square around the window when the "Start" button is pressed.
 The background color of the square changes from
 red to yellow to green to blue and back to red.
-The "Start" button changes to "Pause" and a "Stop" button appears.
+The "Start" button changes to "Pause", and a "Stop" button appears.
 Pressing the "Pause" button pauses the animation
 and changes the button to "Resume".
 Pressing the "Resume" button resumes the animation.
@@ -3196,7 +3198,7 @@ This seems to be a bug in Safari.
 
 The only advantage of using the `filter` property
 with the `drop-shadow` function over using the `box-shadow` property
-is that some browsers utilized hardware acceleration for it.
+is that some browsers utilize hardware acceleration for it.
 
 One effect not covered here is `url(some-url)` where
 the `some-url` refers to a file that defines an SVG filter.
