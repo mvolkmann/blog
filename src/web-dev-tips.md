@@ -5726,6 +5726,81 @@ I learned this from
 is a very popular, free code editor from Microsoft.
 It has many built-in features and more can be added through extensions.
 
+Recommended VS Code extensions include:
+
+- {% aTargetBlank "https://github.com/CoenraadS/Bracket-Pair-Colorizer-2", "Bracket Pair Colorizer 2" %}
+
+  This colorizes matching parentheses, square brackets, and curly braces
+  to make it easier to find matching pairs.
+
+- {% aTargetBlank "https://github.com/streetsidesoftware/vscode-spell-checker", "Code Spell Checker" %}
+
+  This performs spell checking in source code considering the parts of camelCase names separately.
+  It enables adding words to the user dictionary and workspace dictionaries.
+  Spell checking can be disabled and enabled within a file
+  and a list of words to ignore can be specified with special comments.
+
+- {% aTargetBlank "https://github.com/kamikillerto/vscode-colorize", "colorize" %}
+
+  This adds color swatches before all CSS colors to visualize them.
+
+- {% aTargetBlank "https://github.com/Microsoft/vscode-eslint", "ESLint" %}
+
+  This integrates the
+  {% aTargetBlank "https://eslint.org", "ESLint" %} tool
+  for reporting problems in JavaScript and TypeScript files.
+
+- {% aTargetBlank "https://github.com/eamodio/vscode-gitlens", "GitLens" %}
+
+  This adds Git capabilities including:
+
+  - revision navigation,
+  - current line blame in faint text at the end of the current line
+    (Hover over this text for more detail.)
+  - new views in the "SOURCE CONTROL" sidebar including
+    COMMITS, REPOSITORIES, FILE HISTORY, BRANCHES, REMOTES, STASHES, and TAGS.
+  - git command palette
+  - interactive rebase editor
+  - and much more
+
+- {% aTargetBlank "https://github.com/ritwickdey/vscode-live-server", "Live Server" %}
+
+  This launches a local development server with live reload.
+  It is described in more detail below.
+
+- {% aTargetBlank "https://github.com/prettier/prettier-vscode", "Prettier" %}
+
+  This integrates the
+  {% aTargetBlank "https://prettier.io", "Prettier" %} code formatter
+  and is typically configured to run when file changes are saved.
+
+- {% aTargetBlank "https://github.com/stylelint/vscode-stylelint", "stylelint" %}
+
+  This integrates the
+  {% aTargetBlank "https://stylelint.io", "stylelint" %} tool
+  for reporting problems in CSS and Sass files.
+
+- {% aTargetBlank "https://github.com/rangav/thunder-client-support", "Thunder Client" %}
+
+  This is a lightweight Rest API client, similar to
+  {% aTargetBlank "https://www.postman.com", "Postman" %}.
+  For more detail, see this [blog page](/blog/thunder-client/).
+
+- {% aTargetBlank "https://github.com/Gruntfuggly/todo-tree", "Todo Tree" %}
+
+  This searches your workspace for comment tags like "TODO" and "FIXME".
+  It then displays them in a tree view in the EXPLORER pane.
+  To navigate to the source file and line of a TODO, click a line in the tree.
+
+- {% aTargetBlank "https://gitlab.com/versionlens/vscode-versionlens", "Version Lens" %}
+
+  When viewing dependencies in a `package.json` file, this shows the latest version of each and enables updating to that version.
+
+- {% aTargetBlank "https://github.com/VSCodeVim/Vim", "Vim" %}
+
+  This provides {% aTargetBlank "https://www.vim.org", "Vim" %} emulation, including support for Vim macros.
+  Use this if you value efficient text editing!
+
 ### Emmet
 
 Emmet is an editor plugin for quickly entering HTML, XML, and CSS.
