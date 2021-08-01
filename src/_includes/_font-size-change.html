@@ -1,0 +1,61 @@
+<style>
+  /* We are using ems instead of rems for the h1 and p sizes
+     because we don't want to change the font size
+     of the entire page for this demo. */
+
+  #font-size-change button:disabled {
+    background-color: pink;
+  }
+
+  #font-size-change h1 {
+    font-size: 2em;
+    margin-top: 0;
+  }
+
+  #font-size-change header {
+    display: flex;
+    align-items: center;
+    /* The sizes in this element do not use rems
+           because we don't want zooming to change them. */
+    font-size: 16px;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  #font-size-change p {
+    font-size: 1em;
+  }
+</style>
+
+<div id="font-size-change">
+  <header>
+    <button id="zoom-in-btn">➕</button>
+    <button id="zoom-out-btn">➖</button>
+    <div id="zoom-factor">1</div>
+  </header>
+  <h1>Font Size Demo</h1>
+  <p>
+    Click the plus and minus buttons above to change the font size used in the
+    entire page for elements whose size is specified using
+    <code>rem</code> units.
+  </p>
+</div>
+
+<script>
+  const container = document.getElementById('font-size-change');
+  const zoomFactorDiv = document.getElementById('zoom-factor');
+  const zoomInBtn = document.getElementById('zoom-in-btn');
+  const zoomOutBtn = document.getElementById('zoom-out-btn');
+  let zoomFactor = 1;
+
+  zoomInBtn.addEventListener('click', () => changeFontSize(0.2));
+  zoomOutBtn.addEventListener('click', () => changeFontSize(-0.2));
+
+  function changeFontSize(delta) {
+    zoomFactor += delta;
+    zoomFactorDiv.textContent = zoomFactor.toFixed(1);
+    zoomInBtn.disabled = zoomFactor >= 4;
+    zoomOutBtn.disabled = zoomFactor <= 0.4;
+    container.style.fontSize = zoomFactor.toFixed(1) + 'rem';
+  }
+</script>

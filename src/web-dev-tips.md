@@ -3161,6 +3161,92 @@ The following example demonstrates this.
 </html>
 ```
 
+### Font size preference
+
+Using the CSS size unit `rem` for most sizes
+has the advantage that it is easy to allow users to
+adjust the size of those properties across the entire page.
+
+The example below shows this in action.
+Clicking the "+" button increases the font size of the `h1` and `p` elements.
+Clicking the "-" button decreases those font sizes.
+
+An enhancement idea is to save the users preferred font size
+in `localStorage` and restore it each time they revisit the site.
+
+{% include "_font-size-change.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Font Size Change Demo</title>
+    <style>
+      button:disabled {
+        background-color: pink;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-top: 0;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        /* The sizes in this element do not use rems
+           because we don't want zooming to change them. */
+        font-size: 16px;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    </style>
+    <script>
+      let zoomFactor = 1;
+      let zoomFactorDiv;
+      let zoomInBtn;
+      let zoomOutBtn;
+
+      function changeFontSize(delta) {
+        zoomFactor += delta;
+        zoomFactorDiv.textContent = zoomFactor.toFixed(1);
+        zoomInBtn.disabled = zoomFactor >= 4;
+        zoomOutBtn.disabled = zoomFactor <= 0.4;
+        /* document.documentElement is the html element. */
+        document.documentElement.style.fontSize = zoomFactor + 'rem';
+      }
+
+      window.onload = () => {
+        zoomFactorDiv = document.getElementById('zoom-factor');
+        zoomInBtn = document.getElementById('zoom-in-btn');
+        zoomOutBtn = document.getElementById('zoom-out-btn');
+
+        zoomInBtn.addEventListener('click', () => changeFontSize(0.2));
+        zoomOutBtn.addEventListener('click', () => changeFontSize(-0.2));
+      };
+    </script>
+  </head>
+  <body>
+    <header>
+      <button id="zoom-in-btn">➕</button>
+      <button id="zoom-out-btn">➖</button>
+      <div id="zoom-factor">1</div>
+    </header>
+    <h1>Font Size Demo</h1>
+    <p>
+      Click the plus and minus buttons above to change the font size used in the
+      entire page for elements whose size is specified using
+      <code>rem</code> units.
+    </p>
+  </body>
+</html>
+```
+
 ### clip-path property
 
 The CSS {% aTargetBlank
