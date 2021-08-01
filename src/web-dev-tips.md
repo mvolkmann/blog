@@ -76,6 +76,77 @@ Two key tips to keep in mind:
 - In most cases, `click` events should be associated only with
   `<button>` elements, not with generic elements like `<div>`.
 
+### Accessible Rich Internet Applications (ARIA)
+
+{% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA", "ARIA" %}
+defines a set of HTML attributes that make certain HTML elements
+more accessible to people with disabilities.
+This is a large topic and only the surface is scratched here.
+
+Sometimes `button` elements do not contain text that makes their purpose clear.
+They may only include an emoji, `img` or `svg` element.
+In this case the `aria-label` attribute should be added
+so devices such as screen readers can describe the purpose of the button.
+For example:
+
+```html
+<button aria-label="Fire the missiles">🚀</button>
+```
+
+The table below summarizes the ARIA attributes.
+For more detail, see the {% aTargetBlank
+"https://www.w3.org/TR/wai-aria-1.0/states_and_properties", "W3C documentation" %}.
+
+TODO: Are these only needed when using HTML elements in a non-standard way?
+For example, is `role="button"` only needed on non-button elements (like a `div`)?
+It seems like we should just always using the `button` element for buttons.
+Is `aria-valuemax` only recommended when creating a custom "range widget"
+rather than using something like `<input type="range" max="50" />`.
+
+| ARIA Attribute          | Description                                                                                                                                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `aria-activedescendant` | identifies the currently active descendant of a composite widget                                                                                                                               |
+| `aria-atomic`           | indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by `aria-relevant`                                   |
+| `aria-autocomplete`     | indicates whether input completion suggestions are provided                                                                                                                                    |
+| `aria-busy`             | indicates whether an element, and its subtree, are currently being updated                                                                                                                     |
+| `aria-checked`          | indicates the current "checked" state of checkboxes, radio buttons, and other widgets                                                                                                          |
+| `aria-controls`         | identifies the elements whose contents or presence are controlled by the current element                                                                                                       |
+| `aria-describedby`      | identifies the elements that describe the object                                                                                                                                               |
+| `aria-disabled`         | indicates that the element is perceivable but disabled, so it is not editable or otherwise operable                                                                                            |
+| `aria-dropeffect`       | indicates what functions can be performed when the dragged object is released on the drop target                                                                                               |
+| `aria-expanded`         | indicates whether the element, or another grouping element it controls, is currently expanded or collapsed                                                                                     |
+| `aria-flowto`           | identifies the next elements in an alternate reading order which allows assistive technology to override the default reading order                                                             |
+| `aria-grabbed`          | indicates an element's "grabbed" state in a drag-and-drop operation                                                                                                                            |
+| `aria-haspopup`         | indicates that the element has a popup context menu or sub-level menu                                                                                                                          |
+| `aria-hidden`           | indicates that the element and all of its descendants are not visible or perceivable to any user as implemented by the author                                                                  |
+| `aria-invalid`          | indicates the entered value does not conform to the format expected by the application                                                                                                         |
+| `aria-label`            | defines a string value that labels the current element                                                                                                                                         |
+| `aria-labelledby`       | identifies the elements that label the current element                                                                                                                                         |
+| `aria-level`            | defines the hierarchical level of an element within a structure                                                                                                                                |
+| `aria-live`             | indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect                                                     |
+| `aria-multiline`        | indicates whether a text box accepts multiple lines of input or only a single line                                                                                                             |
+| `aria-multiselectable`  | indicates that the user may select more than one item from the current selectable descendants                                                                                                  |
+| `aria-orientation`      | indicates whether the element orientation is horizontal or vertical                                                                                                                            |
+| `aria-owns`             | identifies elements in order to define a visual, functional, or contextual parent/child relationship between DOM elements where the DOM hierarchy cannot be used to represent the relationship |
+| `aria-posinset`         | defines an element's position in the current set of listitems or treeitems (not required if all elements in the set are present in the DOM)                                                    |
+| `aria-pressed`          | indicates the current "pressed" state of toggle buttons                                                                                                                                        |
+| `aria-readonly`         | indicates that the element is not editable, but is otherwise operable                                                                                                                          |
+| `aria-relevant`         | indicates what user agent change notifications (additions, removals, etc.) assistive technologies will receive within a live region                                                            |
+| `aria-required`         | indicates that user input is required on the element before a form may be submitted                                                                                                            |
+| `aria-selected`         | indicates the current "selected" state of various widgets                                                                                                                                      |
+| `aria-setsize`          | defines the number of items in the current set of listitems or treeitems (not required if all elements in the set are present in the DOM)                                                      |
+| `aria-sort`             | indicates if items in a table or grid are sorted in ascending or descending order                                                                                                              |
+| `aria-valuemax`         | defines the maximum allowed value for a range widget                                                                                                                                           |
+| `aria-valuemin`         | defines the minimum allowed value for a range widget                                                                                                                                           |
+| `aria-valuenow`         | defines the current value for a range widget                                                                                                                                                   |
+| `aria-valuetext`        | defines the human readable text alternative of aria-valuenow for a range widget                                                                                                                |
+
+In addition to these, a `role` attribute can be added to an HTML element
+with one of the values described at {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques",
+"Using ARIA: Roles, states, and properties" %}.
+
 ### `input` element `type` attribute
 
 HTML5 added many values for the `input` element `type` attribute.
