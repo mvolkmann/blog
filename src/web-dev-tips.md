@@ -3084,7 +3084,7 @@ and `h1` elements will be both bold and red.
 }
 ```
 
-### `window.matchMedia` method
+### Light and dark modes
 
 The CSS Object Model (CSSOM) {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia",
@@ -4110,6 +4110,70 @@ instead of the `picture` element, and is somewhat simpler.
 {# pragma warning enable format #}
 
 ## JavaScript
+
+### console methods
+
+The global `console` object supports many methods for writing to
+the browser DevTools console or `stdout` in Node.js.
+
+There are four levels output messages.
+From lowest to highest severity they are
+`verbose`, `info`, `warning`, and `error`.
+Browser DevTools allow selecting the levels of messages to be output.
+By default, all are enabled.
+
+TODO: This table is a work in progress!
+
+| Method                              | Level   | Description                                                                                                                                |
+| ----------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `console.assert(condition, values)` | error   | if `condition` is false, this is similar to `console.error`<br>but includes a stack trace;<br>if `condition` is true, this outputs nothing |
+| `console.clear()`                   | N/A     | clears all previous console output                                                                                                         |
+| `console.count(label)`              | info    | outputs the number of times it has been called with a given label                                                                          |
+| `console.countReset(label)`         | N/A     | resets the count for a given label to zero                                                                                                 |
+| `console.debug(values)`             | verbose | similar to `console.log` but at debug level                                                                                                |
+| `console.dir(values)`               |         |                                                                                                                                            |
+| `console.dirxml(values)`            |         |                                                                                                                                            |
+| `console.error(values)`             | error   | similar to `console.log` but outputs an icon, red text, pink background, and stack trace                                                   |
+| `console.group(values)`             |         |                                                                                                                                            |
+| `console.groupCollapsed(values)`    |         |                                                                                                                                            |
+| `console.groupEnd(values)`          |         |                                                                                                                                            |
+| `console.info(values)`              | info    | similar to `console.log`, but begins with an "i" icon in Firefox                                                                           |
+| `console.log(values)`               | info    | outputs string representation of each value separated by single spaces                                                                     |
+| `console.profile(values)`           |         |                                                                                                                                            |
+| `console.profileEnd(values)`        |         |                                                                                                                                            |
+| `console.table(values)`             |         |                                                                                                                                            |
+| `console.time(values)`              |         |                                                                                                                                            |
+| `console.timeEnd(values)`           |         |                                                                                                                                            |
+| `console.timeLog(values)`           |         |                                                                                                                                            |
+| `console.timeStamp(values)`         |         |                                                                                                                                            |
+| `console.trace(values)`             |         |                                                                                                                                            |
+| `console.warn(values)`              | warning | similar to `console.log` but outputs an icon, brown text, yellow background, and stack trace                                               |
+
+The `log`, `info`, `debug`, `warn`, and `error` methods
+are similar in that they can be passed:
+
+1. any number of values to be output with a single space between each
+2. a template string containing type-specific placeholders
+   followed by values to be substituted into the placeholders
+
+The supported placeholders are:
+
+- `%d` or `%i` for an integer
+- `%f` for a floating point value
+- `%s` for a string
+- `%o` or `%O` for an object
+
+In browser DevTools the object placeholder is replaced by
+a disclosure triangle (▶) which can be clicked to expand the output
+so each property in the object is displayed on a separate line.
+Clicking it again contracts the display to a single line.
+
+When outputting descriptive text followed by an object,
+it is best to separate them with a comma
+instead of concatenating them with the `+` operator.
+Like when using the object placeholder,
+it will output a disclosure triangle for expanding and contracting
+the object properties rather than outputting
 
 ### Embrace booleans
 

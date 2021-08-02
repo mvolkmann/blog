@@ -134,8 +134,8 @@
 
   nav = carousel.querySelector('nav');
 
-  const container = carousel.querySelector('.container');
-  containerWidth = container.getBoundingClientRect().width;
+  const carouselContainer = carousel.querySelector('.container');
+  containerWidth = carouselContainer.getBoundingClientRect().width;
 
   let loadCount = 0;
 
@@ -153,7 +153,7 @@
     // Create and add an img element for each image.
     const img = document.createElement('img');
     img.setAttribute('src', '/blog/assets/' + image);
-    container.appendChild(img);
+    carouselContainer.appendChild(img);
     imgElements.push(img);
 
     // Wait for the image to load so we can get its width.
