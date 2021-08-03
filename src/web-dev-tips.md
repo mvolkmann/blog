@@ -4131,17 +4131,17 @@ TODO: This table is a work in progress!
 | `console.count(label)`              | info    | outputs the number of times it has been called with a given label                                                                          |
 | `console.countReset(label)`         | N/A     | resets the count for a given label to zero                                                                                                 |
 | `console.debug(values)`             | verbose | similar to `console.log` but at debug level                                                                                                |
-| `console.dir(values)`               |         |                                                                                                                                            |
-| `console.dirxml(values)`            |         |                                                                                                                                            |
+| `console.dir(object)`               | info    | outputs a single object with disclosure triangles like `console.log` (no reason to prefer over that)                                       |
+| `console.dirxml(element)`           | info    | outputs a DOM element with disclosure triangles for viewing descendant elements                                                            |
 | `console.error(values)`             | error   | similar to `console.log` but outputs an icon, red text, pink background, and stack trace                                                   |
-| `console.group(values)`             |         |                                                                                                                                            |
-| `console.groupCollapsed(values)`    |         |                                                                                                                                            |
-| `console.groupEnd(values)`          |         |                                                                                                                                            |
+| `console.group(label)`              | N/A     | starts a collapsable group of output that is initially expanded; can create nested groups groups                                           |
+| `console.groupCollapsed(label)`     | N/A     | same as `console.group`, but initially collapsed                                                                                           |
+| `console.groupEnd()`                | N/A     | ends the most recent collapsable group of output                                                                                           |
 | `console.info(values)`              | info    | similar to `console.log`, but begins with an "i" icon in Firefox                                                                           |
 | `console.log(values)`               | info    | outputs string representation of each value separated by single spaces                                                                     |
-| `console.profile(values)`           |         |                                                                                                                                            |
-| `console.profileEnd(values)`        |         |                                                                                                                                            |
-| `console.table(values)`             |         |                                                                                                                                            |
+| `console.profile(name)`             | N/A     | non-standard; starts a section of code to be profiled; can define nested sections                                                          |
+| `console.profileEnd(name)`          | N/A     | non-standard; ends a section of code to be profiled and outputs results                                                                    |
+| `console.table(obj-or-arr)`         | info    | outputs properties of an object or array in a table                                                                                        |
 | `console.time(values)`              |         |                                                                                                                                            |
 | `console.timeEnd(values)`           |         |                                                                                                                                            |
 | `console.timeLog(values)`           |         |                                                                                                                                            |
