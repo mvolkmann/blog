@@ -4116,38 +4116,45 @@ instead of the `picture` element, and is somewhat simpler.
 The global `console` object supports many methods for writing to
 the browser DevTools console or `stdout` in Node.js.
 
-There are four levels output messages.
+There are four levels of output.
 From lowest to highest severity they are
 `verbose`, `info`, `warning`, and `error`.
 Browser DevTools allow selecting the levels of messages to be output.
 By default, all are enabled.
 
-TODO: This table is a work in progress!
+In Chrome, the levels to output are specified in a drop-down
+that initially has the value "All Levels ▼".
+In Firefox, there are toggle buttons for
+"Errors", "Warnings", "Logs", "Info", and "Debug"
+where any number of them can be selected.
+In Safari, there are toggle buttons for
+"All", "Evaluations", "Errors", "Warnings", and "Logs"
+where only one of them can be selected.
 
-| Method                              | Level   | Description                                                                                                                                |
-| ----------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `console.assert(condition, values)` | error   | if `condition` is false, this is similar to `console.error`<br>but includes a stack trace;<br>if `condition` is true, this outputs nothing |
-| `console.clear()`                   | N/A     | clears all previous console output                                                                                                         |
-| `console.count(label)`              | info    | outputs the number of times it has been called with a given label                                                                          |
-| `console.countReset(label)`         | N/A     | resets the count for a given label to zero                                                                                                 |
-| `console.debug(values)`             | verbose | similar to `console.log` but at debug level                                                                                                |
-| `console.dir(object)`               | info    | outputs a single object with disclosure triangles like `console.log` (no reason to prefer over that)                                       |
-| `console.dirxml(element)`           | info    | outputs a DOM element with disclosure triangles for viewing descendant elements                                                            |
-| `console.error(values)`             | error   | similar to `console.log` but outputs an icon, red text, pink background, and stack trace                                                   |
-| `console.group(label)`              | N/A     | starts a collapsable group of output that is initially expanded; can create nested groups groups                                           |
-| `console.groupCollapsed(label)`     | N/A     | same as `console.group`, but initially collapsed                                                                                           |
-| `console.groupEnd()`                | N/A     | ends the most recent collapsable group of output                                                                                           |
-| `console.info(values)`              | info    | similar to `console.log`, but begins with an "i" icon in Firefox                                                                           |
-| `console.log(values)`               | info    | outputs string representation of each value separated by single spaces                                                                     |
-| `console.profile(name)`             | N/A     | non-standard                                                                                                                               |
-| `console.profileEnd(name)`          | N/A     | non-standard                                                                                                                               |
-| `console.table(obj-or-arr)`         | info    | outputs properties of objects or arrays in a table; often passed an array of objects                                                       |
-| `console.time(name)`                | N/A     | starts timer with a given name                                                                                                             |
-| `console.timeEnd(name)`             | info    | ends timer with a given name and outputs the name and number of milliseconds that elapsed                                                  |
-| `console.timeLog(name)`             | info    | outputs the name and number of milliseconds that elapsed for a given timer without ending it                                               |
-| `console.timeStamp(values)`         | N/A     | non-standard                                                                                                                               |
-| `console.trace(values)`             | info    | outputs a stack trace and the supplied values, if any, with an expanded disclosure triangle                                                |
-| `console.warn(values)`              | warning | similar to `console.log` but outputs an icon, brown text, yellow background, and stack trace                                               |
+| Method                              | Level   | Description                                                                                                                             |
+| ----------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `console.assert(condition, values)` | error   | if `condition` is false, this is similar to `console.error`<br>but includes a stack trace;<br>if `condition` is true, nothing is output |
+| `console.clear()`                   | N/A     | clears all previous console output                                                                                                      |
+| `console.count(label)`              | info    | outputs the number of times it has been called with a given label                                                                       |
+| `console.countReset(label)`         | N/A     | resets the count for a given label to zero                                                                                              |
+| `console.debug(values)`             | verbose | similar to `console.log` but at debug level                                                                                             |
+| `console.dir(object)`               | info    | outputs a single object with disclosure triangles like `console.log` (no reason to prefer over that)                                    |
+| `console.dirxml(element)`           | info    | outputs a DOM element with disclosure triangles for viewing descendant elements                                                         |
+| `console.error(values)`             | error   | similar to `console.log` but outputs an icon, red text, pink background, and a stack trace                                              |
+| `console.group(label)`              | N/A     | starts a collapsable group of output that is initially expanded; can create nested groups                                               |
+| `console.groupCollapsed(label)`     | N/A     | same as `console.group`, but initially collapsed                                                                                        |
+| `console.groupEnd()`                | N/A     | ends the most recent group                                                                                                              |
+| `console.info(values)`              | info    | similar to `console.log`                                                                                                                |
+| `console.log(values)`               | info    | outputs string representation of each value separated by single spaces                                                                  |
+| `console.profile(name)`             | N/A     | non-standard                                                                                                                            |
+| `console.profileEnd(name)`          | N/A     | non-standard                                                                                                                            |
+| `console.table(obj-or-arr)`         | info    | outputs properties of objects or arrays in a table; often passed an array of objects                                                    |
+| `console.time(name)`                | N/A     | starts timer with a given name                                                                                                          |
+| `console.timeEnd(name)`             | info    | ends timer with a given name and outputs the name and number of milliseconds that elapsed                                               |
+| `console.timeLog(name)`             | info    | outputs the name and number of milliseconds that elapsed for a given timer without ending it                                            |
+| `console.timeStamp(values)`         | N/A     | non-standard                                                                                                                            |
+| `console.trace(values)`             | info    | outputs the supplied values, if any, and a disclosure triangle expanded to show a stack trace                                           |
+| `console.warn(values)`              | warning | similar to `console.log` but outputs brown text, yellow background, and stack trace                                                     |
 
 The `log`, `info`, `debug`, `warn`, and `error` methods
 are similar in that they can be passed:
@@ -4164,23 +4171,194 @@ The supported placeholders are:
 - `%o` or `%O` for an object
 
 In browser DevTools the object placeholder is replaced by
-a disclosure triangle (▶) which can be clicked to expand the output
+a disclosure triangle (▶) which can be clicked to expand
 so each property in the object is displayed on a separate line.
 Clicking it again contracts the display to a single line.
 
 When outputting descriptive text followed by an object,
 it is best to separate them with a comma
 instead of concatenating them with the `+` operator.
-Like when using the object placeholder,
-it will output a disclosure triangle for expanding and contracting
-the object properties rather than outputting
+This will cause it to output a disclosure triangle for
+expanding and contracting the object properties.
+When the `+` operator is used, the string representations are concatenated
+and then the result is output.
+The string representation of an object typically looks like
+`[object Object]`, which is unhelpful.
+
+One way to output multiple variables with their names and values
+is to pass an object literal containing them to a `console` method.
+For example:
+
+```js
+const name = 'Mark';
+const address = {street: '123 Some Street', city: 'Somewhere', state: 'MO'};
+console.log({name, address});
+```
+
+This outputs `▶ {name: "Mark", address: {…}}`.
+
+When the disclosure triangle is clicked it displays:
+
+```text
+▼ {name: "Mark", address: {…}}
+  ▶ address: {street: "123 Some Street", city: "Somewhere", state: "MO"}
+    name: "Mark"
+```
+
+Clicking the disclosure triangle before "address" displays:
+
+```text
+▼ {name: "Mark", address: {…}}
+  ▼ address:
+      city: "Somewhere"
+      state: "MO"
+      street: "123 Some Street"
+    name: "Mark"
+```
 
 The `console.table` method can be passed an array of objects.
 In this case the column headings are property names
-and each object is output in a different row.
-An optional second argument is an array of property names
-that lists the properties to output and their order.
-Clicking a column heading sorts the rows on the corresponding property value.
+and each object is output on its own row.
+An optional second argument is an array of the property names
+to output in the order in which the columns should appear.
+Clicking a column heading sorts the rows on the corresponding property value
+(except in Firefox).
+
+The following code example demonstrates many of the `console` methods
+described in the table above.
+
+```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      function doWork() {
+        let sum = 0;
+        for (let n = 1; n < 100000; n++) {
+          sum += n;
+        }
+        console.log('doWork: sum =', sum);
+      }
+
+      window.onload = () => {
+        const b = true;
+        const n = 19;
+        const p = Math.PI;
+        const t = 'some text';
+        const o = {b, n, p, t};
+
+        console.assert(n > 20, 'n is too low');
+        // outputs "Assertion failed: n is too low"
+
+        console.count('demo'); // outputs "demo: 1"
+
+        console.debug('debug', b, n, p, t);
+        // outputs "debug true 19 3.141592653589793 some text"
+
+        console.dir(o);
+        // outputs "▶ Object" which can be expanded
+
+        console.dirxml(document.body);
+        // outputs "▶<body>...</body>" which can be expanded
+
+        console.error('error', b, n, p, t);
+        // outputs "error true 19 3.141592653589793 some text"
+        // in pink and red
+
+        console.group('animals');
+        console.groupCollapsed('domestic');
+        console.log('dog');
+        console.log('cat');
+        console.groupEnd();
+        console.group('wild');
+        console.log('lion');
+        console.log('tiger');
+        console.log('bear');
+        console.groupEnd();
+        console.groupEnd();
+        // outputs the following:
+        // ▼ animals (already expanded)
+        //   ▶ domestic (can be expanded)
+        //   ▼ wild (already expanded)
+        //       lion
+        //       tiger
+        //       bear
+
+        console.info('info', b, n, p, t);
+        // outputs "info true 19 3.141592653589793 some text"
+
+        console.log('o = ' + o); // o = [object Object]; not useful
+
+        console.log('o =', o);
+        // outputs the following:
+        // o = ▶{b: true, n: 19, p: 3.141592653589793, t: "some text"}
+
+        console.log('log', b, n, p, t);
+        // outputs "log true 19 3.141592653589793 some text"
+
+        console.log('b=%s, n=%d, pi=%f, t=%s, o=%o', b, n, p, t, o);
+        // outputs the following:
+        // b=true, n=19, pi=3.141592653589793, t=some text, o=
+        // ▶{b: true, n: 19, p: 3.141592653589793, t: "some text"}
+
+        console.table(o);
+        // outputs the following table:
+        // | (index) | Value      |
+        // |---------|------------|
+        // |b        |true        |
+        // |n        |19          |
+        // |p        |3.14159...  |
+        // |t        |"some text" |
+        // ▶Object (can expand)
+
+        console.count('demo'); // outputs "demo: 2"
+
+        const fruits = [
+          {name: 'apple', color: 'red', price: 50},
+          {name: 'banana', color: 'yellow', price: 25}
+        ];
+        // When passed an array of objects,
+        // the column headings are property names and
+        // each object is output in a different row.
+        // The optional second argument limits the
+        // properties to output and their order.
+        // Click a column heading to sort the rows on that column.
+        console.table(fruits, ['price', 'name']);
+        // outputs the following table:
+        // | (index) | price | name   |
+        // |---------|-------|--------|
+        // |0        |50     |"apple" |
+        // |1        |25     |"banana"|
+
+        console.time('groups');
+        doWork();
+        // outputs "doWork: sum = 4999950000"
+        console.timeLog('groups');
+        // outputs "groups: 8.5400390625 ms"
+        doWork();
+        // outputs "doWork: sum = 4999950000"
+        console.timeEnd('groups');
+        // outputs "groups: 12.336181640625 ms"
+
+        console.trace('foo', 1, true);
+        // outputs "▼foo 1 true" followed by a stack trace
+
+        console.warn('warn', b, n, p, t, o);
+        // outputs "warn true 19 3.141592653589793 some text"
+        // in yellow and brown
+
+        console.countReset('demo'); // no output
+
+        console.count('demo'); // outputs "demo: 1"
+      };
+    </script>
+  </head>
+  <body>
+    <p>See output in the DevTools console.</p>
+  </body>
+</html>
+```
 
 ### Embrace booleans
 
