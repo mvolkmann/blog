@@ -51,7 +51,7 @@ Let's review the most commonly used parts of Markdown syntax.
 
 - **tables**
 
-  ```md
+  ```text
   | Heading 1 | Heading 2 | Heading 3 | Heading 4 |
   | --------- | :-------- | --------: | :-------: |
   | data 1-1  | data 1-2  |  data 1-3 | data 1-4  |
