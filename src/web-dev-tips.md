@@ -1179,10 +1179,8 @@ See the comments in the code for details.
 
       /* To change the center position of a radial gradient,
          specify the shape (circle or ellipse) followed by the keyword "at",
-         and the center location using the same values supported by the
-         {% aTargetBlank
-         "https://developer.mozilla.org/en-US/docs/Web/CSS/background-position",
-         "background-position" %} property.  */
+         and the center location using the same values
+         supported by the CSS background-position property. */
       .rg4 {
         background-image: radial-gradient(
           circle at left top,
