@@ -1007,6 +1007,333 @@ The following examples demonstrate many uses of shadows.
 
 {# pragma warning enable format #}
 
+### Gradients
+
+CSS supports three kinds of gradients: linear, radial, and conic.
+Each of these can occur one time over an area or repeat multiple times.
+These are supported by the CSS functions
+`linear-gradient`, `repeating-linear-gradient`,
+`radial-gradient`, `repeating-radial-gradient`,
+`conic-gradient`, and `repeating-conic-gradient`.
+Each of these functions produce an image which is appropriate for
+the value of the `background-image` property.
+They cannot be used as the value of the `background-color` property.
+
+The color keyword "transparent" can be used in gradients to allow
+the `background-color` of an area to show through a portion of the gradient.
+
+The code below demonstrates using each of these gradient functions.
+See the comments in the code for details.
+
+{% include "_gradients.html" %}
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gradients Demo</title>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .container > div {
+        --size: 5rem;
+
+        display: inline-block;
+        font-size: 2rem;
+        height: var(--size);
+        line-height: var(--size);
+        margin-right: 0.5rem;
+        text-align: center;
+        width: var(--size);
+      }
+
+      p {
+        font-weight: bold;
+      }
+
+      /* By default linear gradients go from top to bottom.
+         Any number of colors through which to transition can be specified. */
+      .lg1 {
+        background-image: linear-gradient(red, yellow, blue);
+      }
+
+      /* The area filled with the gradient is not required to be rectangular.
+         Here it is a circle. */
+      .lg2 {
+        background-image: linear-gradient(red, yellow, blue);
+        border-radius: 50%;
+      }
+
+      /* Each color can optionally be followed by the percentage
+         across the area at which the full color is reached.
+         This is referred to as a "color stop".
+         In the previous example, yellow is reached at 50%
+         because it is the middle color.
+         Here yellow is reached at 20%. */
+      .lg3 {
+        background-image: linear-gradient(red, yellow 20%, blue);
+      }
+
+      /* If a color is followed by two percentages, they indicate
+         a range over which a solid color is displayed.
+         These are also referred to as color stops.
+         Here the first 20% is solid red, the last 20% is solid yellow,
+         and the middle 60% transitions from red to yellow. */
+      .lg4 {
+        background-image: linear-gradient(red 0% 20%, yellow 80% 100%);
+      }
+
+      /* An optional first argument specifies the angle of the gradient
+         which defaults to zero.
+         It can be specified in degrees, radians, or turns.
+         For example, 45deg, 0.785rad, and 0.125turn are equivalent */
+      .lg5 {
+        background-image: linear-gradient(45deg, red, yellow, blue);
+      }
+
+      /* The transition angle can also be specified with
+         the "to" keyword followed by
+         "left" or "right" and/or "top" or "bottom" in any order.
+         Using "to right top" is the same as 45deg. */
+      .lg6 {
+        background-image: linear-gradient(to right top, red, yellow, blue);
+      }
+
+      /* Multiple, comma-separated gradients can be specified,
+         but only the first will be visible unless
+         the colors have less than full opacity.
+         Here we have red with 80% opacity starting in the left bottom
+         and moving toward the right top that changes to zero opacity
+         70% across the area.
+         We also have blue with 80% opacity starting in the right bottom
+         and moving toward the left top that changes to zero opacity
+         70% across the area.
+         The colors combine in the middle to create shades of purple. */
+      .lg7 {
+        background-image: linear-gradient(
+            to right top,
+            rgba(255, 0, 0, 0.8),
+            rgba(255, 0, 0, 0) 70%
+          ), linear-gradient(to left top, rgba(0, 0, 255, 0.8), rgba(
+                0,
+                0,
+                255,
+                0
+              ) 70%);
+      }
+
+      /* To repeat a linear gradient multiple times across an area,
+         use the repeating-linear-gradient function.
+         Each color can be followed by the length
+         or percentage across the area at which it ends.
+         The length or percentage of the entire gradient is specified
+         by the length after the last color.
+         Adding lengths after the other colors is optional
+         and just specifies where they reach the full color.
+         To repeat the gradient three times,
+         add 33.33% after the last color.
+         The angle of the gradient can be specified with the same
+         optional first argument as in the linear-gradient function. */
+      .lg8 {
+        background-image: repeating-linear-gradient(red, yellow, blue 33.33%);
+      }
+
+      /* Stripes can be created by specifying two color stops for each color. */
+      .lg9 {
+        background-image: repeating-linear-gradient(
+          0.25turn,
+          red 0 10px,
+          yellow 10px 20px,
+          blue 20px 30px
+        );
+      }
+
+      /* Radial gradients start in the center of an area by default
+         and change color as they work outward. */
+      .rg1 {
+        background-image: radial-gradient(red, yellow, blue);
+      }
+
+      /* The area filled with the gradient is not required to be rectangular.
+         Here it is a circle.
+         A percentage less that 100% is specified after the last color
+         because otherwise that color would only appear in the corners
+         which are clipped by the border-radius. */
+      .rg2 {
+        background-image: radial-gradient(red, yellow, blue 75%);
+        border-radius: 50%;
+      }
+
+      /* The gradient shape can be a circle (default) or ellipse.
+         Note that an ellipse will be a circle if
+         the height and width of the area are equal. */
+      .rg3 {
+        background-image: radial-gradient(ellipse, red, yellow, blue);
+        width: 8rem;
+      }
+
+      /* To change the center position of a radial gradient,
+         specify the shape (circle or ellipse) followed by the keyword "at",
+         and the center location using the same values supported by the
+         {% aTargetBlank
+         "https://developer.mozilla.org/en-US/docs/Web/CSS/background-position",
+         "background-position" %} property.  */
+      .rg4 {
+        background-image: radial-gradient(
+          circle at left top,
+          red,
+          yellow,
+          blue
+        );
+      }
+
+      /* The distance from the center where the full ending color is reached
+         can be specified with the keywords "closest-side", "closest-corner",
+         "farthest-side" and "farthest-corner".
+         The "closest" and "farthest" only differ when
+         the center is not in the center of the area. */
+      .rg5 {
+        background-image: radial-gradient(
+          circle closest-side at 25% 50%,
+          red,
+          yellow,
+          blue
+        );
+      }
+      .rg6 {
+        background-image: radial-gradient(
+          circle closest-corner at 25% 50%,
+          red,
+          yellow,
+          blue
+        );
+      }
+      .rg7 {
+        background-image: radial-gradient(
+          circle farthest-side at 25% 50%,
+          red,
+          yellow,
+          blue
+        );
+      }
+      .rg8 {
+        background-image: radial-gradient(
+          circle farthest-corner at 25% 50%,
+          red,
+          yellow,
+          blue
+        );
+      }
+
+      /* Color stops can be applied to radial-gradient colors
+         in the same way as in linear-gradient colors. */
+
+      /* To repeat a radial gradient multiple times across an area,
+         use the repeating-radial-gradient function
+         which is similar to repeating-linear-gradient. */
+      .rg9 {
+        background-image: repeating-radial-gradient(red, yellow, blue 33.33%);
+      }
+
+      /* Conic gradients transition colors through
+         angles of rotation around a center point. */
+      .cg1 {
+        background-image: conic-gradient(red, yellow, blue);
+      }
+
+      /* The area filled with the gradient is not required to be rectangular.
+         Here it is a circle. */
+      .cg2 {
+        background-image: conic-gradient(red, yellow, blue);
+        border-radius: 50%;
+      }
+
+      /* The starting angle defaults to zero degrees which,
+         unlike what you learned in Geometry class,
+         is at the top of the circle.
+         To change this, use the "from" keyword. */
+      .cg3 {
+        background-image: conic-gradient(from 0.25turn, red, yellow, blue);
+      }
+
+      /* The center of the gradient can be moved from the center of the area. */
+      .cg4 {
+        background-image: conic-gradient(at 35% 50%, red, yellow, blue);
+      }
+
+      /* Color stops are specified as angles or percentages, not distances.
+         Here the first 90 degrees (or 0.25turn) transitions from red to yellow
+         and the final 270 degrees (or 0.75turn) transitions from yellow to blue. */
+      .cg5 {
+        background-image: conic-gradient(red, yellow 90deg, blue);
+      }
+
+      /* Pairs of color stops produce solid colors. */
+      .cg6 {
+        background-image: conic-gradient(
+          red 0 120deg,
+          yellow 120deg 240deg,
+          blue 240deg 360deg
+        );
+        border-radius: 50%;
+      }
+
+      /* To repeat a conic gradient multiple times around an area,
+         use the repeating-conic-gradient function
+         which is similar to repeating-linear-gradient.
+         Here the gradient is repeated three times,
+         each occupying 1/3 (33.33%) of a circle. */
+      .cg7 {
+        background-image: repeating-conic-gradient(red, yellow, blue 33.33%);
+      }
+    </style>
+  </head>
+  <body>
+    <p>Linear Gradients</p>
+    <div class="container">
+      <div class="lg1">1</div>
+      <div class="lg2">2</div>
+      <div class="lg3">3</div>
+      <div class="lg4">4</div>
+      <div class="lg5">5</div>
+      <div class="lg6">6</div>
+      <div class="lg7">7</div>
+      <div class="lg8">8</div>
+      <div class="lg9">9</div>
+    </div>
+
+    <p>Radial Gradients</p>
+    <div class="container">
+      <div class="rg1">1</div>
+      <div class="rg2">2</div>
+      <div class="rg3">3</div>
+      <div class="rg4">4</div>
+      <div class="rg5">5</div>
+      <div class="rg6">6</div>
+      <div class="rg7">7</div>
+      <div class="rg8">8</div>
+      <div class="rg9">9</div>
+    </div>
+
+    <p>Conic Gradients</p>
+    <div class="container">
+      <div class="cg1">1</div>
+      <div class="cg2">2</div>
+      <div class="cg3">3</div>
+      <div class="cg4">4</div>
+      <div class="cg5">5</div>
+      <div class="cg6">6</div>
+      <div class="cg7">7</div>
+    </div>
+  </body>
+</html>
+```
+
 ### Centering
 
 There are many ways to center content using CSS.
