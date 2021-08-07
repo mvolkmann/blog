@@ -701,17 +701,31 @@ use the following syntax:
 var(--some-var-name, default-value)
 ```
 
-The following example defines and uses a couple of CSS variables.
+The default value can be specified with another `var`.
+For example, `var(--border-color, var(--accent-color, black))`.
+
+The following example defines and uses several CSS variables.
 
 ```css
+/* This matches the root element "html". */
+/* All other CSS rules can use variables defined here. */
 :root {
-  /* This matches the root element "html". */
-  /* All other CSS rules can use variables defined here. */
+  --accent-color: blue;
+  --border-color: red;
   --primary-color: cornflowerblue;
 }
 
 p {
   color: var(--primary-color);
+}
+
+.demo {
+  display: inline-block;
+  /* The border color will --border-color if it is defined.
+     Otherwise it will be --accent-color if it is defined
+     or black if neither are defined. */
+  border: 5px solid var(--border-color, var(--accent-color, black));
+  padding: 1rem;
 }
 
 .circle {
@@ -728,6 +742,17 @@ p {
 
 Later we will see how to get and set
 the values of CSS variables in JavaScript code.
+
+I have still have some questions.
+
+Why can't we reference CSS variables with just their name
+instead of using the `var` function?
+I understand that has the advantage of being able to specify a value to use
+if the variable is not defined, but often we know it will be defined.
+
+Why did they choose to start variable names with `--` instead of `$`
+like Sass variables? That is one character shorter
+and was already a familiar convention.
 
 ### Box model
 
