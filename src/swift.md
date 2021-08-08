@@ -58,19 +58,49 @@ The most commonly used commands are described in the table below.
 
 ## Built-in Primitive Types
 
-| Type        | Description                                                  |
-| ----------- | ------------------------------------------------------------ |
-| `Bool`      | boolean; literal values are `true` and `false`               |
-| `Character` | single character                                             |
-| `Double`    | 64-bit floating point number                                 |
-| `Float`     | 32-bit floating point number                                 |
-| `Int`       | signed integer; same number of bits as platform (32 or 64)   |
-| `String`    | text                                                         |
-| `UInt`      | unsigned integer; same number of bits as platform (32 or 64) |
+| Type          | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| `Bool`        | boolean; literal values are `true` and `false`               |
+| `UInt`        | unsigned integer; same number of bits as platform (32 or 64) |
+| `Int`         | signed integer; same number of bits as platform (32 or 64)   |
+| `Float`       | 32-bit floating point number                                 |
+| `Double`      | 64-bit floating point number                                 |
+| `Character`   | single character                                             |
+| `String`      | text                                                         |
+| `Range`       | interval from lower bound to upper bound (exclusive)         |
+| `ClosedRange` | interval from lower bound to upper bound (inclusive)         |
+
+### Characters and Strings
 
 Literal `Character` and single-line `String` values
 are both delimited by double-quotes.
 Multi-line `String` values are delimited by triple double-quotes.
+
+### Ranges
+
+A literal `Range` including the numbers 2, 3, and 4
+can be defined with `2..<5` or `2...4`.
+This can be assigned to a variable. For example:
+
+```swift
+let r = 2...4
+```
+
+To determine if a number is in a range, pass it to the `contains` method.
+For example:
+
+```swift
+print(r.contains(3)) // true
+print(r.contains(5)) // false
+```
+
+To iterate over the values in a range, use a `for-in` loop. For example:
+
+```swift
+for n in r {
+  print(n)
+}
+```
 
 ## Built-in Collection Types
 
@@ -81,8 +111,18 @@ Multi-line `String` values are delimited by triple double-quotes.
 | `Set`        | unordered collection of values with the same type and no duplicates       |
 | tuple        | fixed-length, ordered collection of values that have type that can differ |
 
+### Arrays
+
+### Dictionaries
+
+### Sets
+
+### Tuples
+
 To define a tuple type, provide a list of elements types in parentheses.
 For example, `(Bool, Int, String)`.
+
+## Control Structures
 
 ## Protocols
 
@@ -94,6 +134,12 @@ TODO: Can it also describe constants and fields?
 - `CustomDebugStringConvertible`
 - `CustomReflectable`
 - `Equatable`
+
+## Tools
+
+Is there an equivalent of ESLint for Swift?
+
+Is there an equivalent of Prettier for Swift?
 
 ## Resources
 

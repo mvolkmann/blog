@@ -702,7 +702,13 @@ var(--some-var-name, default-value)
 ```
 
 The default value can be specified with another `var`.
-For example, `var(--border-color, var(--accent-color, black))`.
+For example, the following uses `--border-color` if it is defined.
+Otherwise it will be `--accent-color` if it is defined
+or `black` if neither are defined.
+
+```text
+var(--border-color, var(--accent-color, black));
+```
 
 The following example defines and uses several CSS variables.
 
@@ -721,9 +727,6 @@ p {
 
 .demo {
   display: inline-block;
-  /* The border color will --border-color if it is defined.
-     Otherwise it will be --accent-color if it is defined
-     or black if neither are defined. */
   border: 5px solid var(--border-color, var(--accent-color, black));
   padding: 1rem;
 }
