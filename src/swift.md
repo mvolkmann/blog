@@ -4,9 +4,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-This is a work in progress!
-
 ## Overview
+
+THIS IS A WORK IN PROGRESS!
 
 {% aTargetBlank "https://swift.org", "Swift" %}
 is an open source programming language created by Apple.
@@ -35,7 +35,7 @@ Key facts about Swift include the following:
 
 - main site - {% aTargetBlank "https://swift.org", "https://swift.org" %}
 - {% aTargetBlank "https://cs193p.sites.stanford.edu",
-  "Stanford CS193p - "Developing Apps for iOS"" %} course by Paul Hegarty - free
+  "Stanford CS193p - Developing Apps for iOS" %} course by Paul Hegarty - free
 - {% aTargetBlank "https://www.hackingwithswift.com/100", "100 Days of Swift" %}
   by Paul Hudson - free
 - {% aTargetBlank "https://www.udemy.com/course/ios-13-app-development-bootcamp/",
@@ -342,6 +342,8 @@ Each argument is specified by the argument label, a colon, and a value.
 These must appear in the same orders as the corresponding parameters.
 The rationale for this is that it can make some calls more expressive,
 almost like sentences.
+It is useful to think of the argument labels
+as being part of the function name.
 
 When an argument label of `_` is specified,
 the function must be called with only a value for that parameter.
