@@ -65,6 +65,17 @@ To run a SvelteKit project:
 
 1. To run the Prettier code formatter, enter `npm run format`
 
+## TypeScript
+
+The TypeScript types used by SvelteKit can be found in the files
+in the `node_modules/@sveltejs/kit/types` directory.
+For example, the `page.d.ts` file defines the types
+`LoadInput` and `LoadOutput`.
+Routes that need to load data before they are rendered
+do so by defining a `load` function in their module context.
+The `load` function has a single parameter whose type is `LoadInput`
+and it returns a `Promise<LoadOutput>`.
+
 ## File-based Page Routing
 
 TODO: Finish this
@@ -72,6 +83,14 @@ TODO: Finish this
 ## File-based Endpoints (REST services)
 
 TODO: Finish this
+
+Endpoints are defined by creating `.js` or `.ts` files
+under the `src/routes` directory.
+There are two common conventions for these.
+One is to create an `api` directory in `src/routes`
+and create files in that directory and below.
+Another is to create files with a `.json.js` or `.json.ts` extension.
+TODO: Try the second option to verify.
 
 ## Layouts
 
