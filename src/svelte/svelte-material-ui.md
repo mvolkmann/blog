@@ -30,15 +30,26 @@ To install it in a Svelte project:
 
 Here's an example of using the `Button` component in a Svelte component.
 
+<img alt="app screenshot" class="keep-size"
+  src="/blog/assets/svelte-material-ui.png?v={{pkg.version}}">
+
 ```html
 <script>
   import Button from '@smui/button';
+  import Switch from '@smui/switch';
+
+  export let name;
 
   let clicked = 0;
+  let likeIceCream = false;
 </script>
 
 <main>
   <Button on:click={() => clicked++}>Click Me</Button>
   <p>clicked = {clicked}</p>
+
+  <Switch bind:checked={likeIceCream} />
+  <span>Do you like ice cream?</span>
+  <p>likeIceCream = {likeIceCream}</p>
 </main>
 ```
