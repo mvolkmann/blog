@@ -28,7 +28,8 @@ To install it in a Svelte project:
    <link rel="stylesheet" href="/svelte-material-ui.css" />
    ```
 
-Here's an example of using the `Button` component in a Svelte component.
+Here's an example of using the `Button` and `Switch` components
+in a Svelte component.
 
 <img alt="app screenshot" class="keep-size"
   src="/blog/assets/svelte-material-ui.png?v={{pkg.version}}">
