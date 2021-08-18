@@ -8,8 +8,9 @@ layout: topic-layout.njk
 
 ## Overview
 
-SvelteKit is a framework that leverages Svelte
-an is a replacement for previous framework Sapper.
+{% aTargetBlank "https://kit.svelte.dev", "SvelteKit" %}
+is a framework that leverages Svelte
+and is a replacement for previous framework Sapper.
 It is similar to Next for React and Nuxt for Vue.
 
 The main features of SvelteKit are:
@@ -19,9 +20,12 @@ The main features of SvelteKit are:
 - layouts (ex. common page header, footer, and nav)
 - error page
 - code splitting for JS and CSS
+- first page visit is server-rendered for performance
+  and remaining pages are rendered in the browser
 - page visits only load the JS and CSS they need
 - hot reloading (provided by Vite; very fast!)
-- static sites and individual static pages
+- can build static sites and individual static pages
+- offline support with ServiceWorkers
 - CLI tool that provides:
   - setup of TypeScript
   - setup of Sass or Less CSS preprocessors
@@ -69,8 +73,6 @@ To run a SvelteKit project:
 
 The TypeScript types used by SvelteKit can be found in the files
 in the `node_modules/@sveltejs/kit/types` directory.
-For example, the `page.d.ts` file defines the types
-`LoadInput` and `LoadOutput`.
 Routes that need to load data before they are rendered
 do so by defining a `load` function in their module context.
 The `load` function has a single parameter whose type is `LoadInput`
@@ -78,19 +80,106 @@ and it returns a `Promise<LoadOutput>`.
 
 ## File-based Page Routing
 
-TODO: Finish this
+SvelteKit supports two kinds of routes, pages and endpoints.
+This section describes page routes.
+Endpoint routes are described in the next section.
+
+The page routes of a SvelteKit app are defined by
+files and directories inside the `src/routes` directory.
+These can be rendered on the server or in the browser,
+depending on configuration.
+
+There are two ways to define a new page route.
+Suppose the desired route name is "some-route".
+The first approach is to add the file `src/routes/some-route.svelte`
+that describes a Svelte component to render.
+
+The second approach is to add the directory `src/routes/some-route`
+with the file `index.svelte` inside it
+that describes a Svelte component to render.
+This approach is often used when there are other route-specific
+source files so they can be grouped in the same directory.
+
+In both cases the route is rendered by adding `/some-route`
+to the end of the base URL for the app.
+
+Routes that require loading data before they are rendered
+can do so by defining a `load` function in their module context.
+For example:
+
+```ts
+<script context="module" lang="ts">
+  import type {LoadInput, LoadOutput} from '@sveltejs/kit/types';
+
+  export async function load({context, fetch, page, session}: LoadInput): Promise<LoadOutput> {
+    const dogId = Number(page.params.someId);
+
+    let res = await fetch(`/api/dog/${dogId}`);
+    const dog = await res.json();
+
+    return {props: {dog}};
+  }
+</script>
+
+<script lang="ts">
+  import type {Dog} from '$lib/types';
+
+  export let dog: Dog;
+</script>
+
+<h2>Dog</h2>
+
+<p>{dog.name} is a {dog.breed}.</p>
+```
+
+The `LoadInput` object passed to the `load` function
+contains four properties.
+
+The `context` property is a `Context` object.
+
+The `fetch` property is a function used to send an HTTP request.
+`fetch: (info: RequestInfo, init?: RequestInit) => Promise<Response>`
+This can be called to send an HTTP request to any server,
+including the one provided by SvelteKit
+where endpoints (described next) are hosted.
+
+The `page` property is a `Page<PageParams>` object.
+
+The `session` property is a `Session` object.
+
+The file `src/routes/index.svelte` defines
+the page to render at the `/` route.
+To render this page when running the app locally
+on the default port, browse `localhost:3000`.
+
+Nested subdirectories under `src/routes` define routes
+at URL paths with multiple path parts.
+Directories with names that begin with `[` and end with `]`
+represent path parameters (a.k.a dynamic parameters).
+For example, suppose a page is defined in the file
+`src/routes/person/[personId]/dog/[dogId]/index.svelte`.
+To render the page for the person with id 19 and the dog with id 2,
+browse `localhost:3000/person/19/dog/2`.
 
 ## File-based Endpoints (REST services)
 
-TODO: Finish this
-
 Endpoints are defined by creating `.js` or `.ts` files
 under the `src/routes` directory.
-There are two common conventions for these.
+This code is executed by a provided Node.js server,
+or a build time for pre-rendered pages.
+It is never executed in a browser.
+
+Endpoints can access data from sources like databases.
+They return data as JSON by default,
+but other data formats can also be returned.
+
+There are two common conventions for defining endpoints.
 One is to create an `api` directory in `src/routes`
 and create files in that directory and below.
 Another is to create files with a `.json.js` or `.json.ts` extension.
 TODO: Try the second option to verify.
+
+TODO: Finish this
 
 ## Layouts
 

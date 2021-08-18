@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: Svelte Resources
   parent: Svelte
-  order: 10
+  order: 11
   title: Resources
 layout: topic-layout.njk
 ---
