@@ -14,17 +14,18 @@ Its creator, D. Richard Hipp, pronounces it "es queue el ite".
 
 Features of SQLite include:
 
-- atomic transactions
+- open source and free
+- no external dependencies
+- small code footprint
 - zero configuration required
 - full SQL support
 - databases stored in a single, binary file which makes them easy to back up
-- small code footprint
+- only supports a single writer (locks entire database during writes)
+- supports multiple, concurrent readers
 - simple API
+- atomic transactions
 - fast performance
-- implemented in C
-- no external dependencies
 - wide operating system support
-- public domain source code
 - includes a command-line interface (CLI)
 
 ## Installing
