@@ -12,7 +12,7 @@ It is a relational database implemented in C.
 It runs on all common operating systems and mobile devices.
 Its creator, D. Richard Hipp, pronounces it "es queue el ite".
 
-Features of SQLite include:
+Pros of SQLite include:
 
 - open source and free
 - no external dependencies
@@ -20,13 +20,21 @@ Features of SQLite include:
 - zero configuration required
 - full SQL support
 - databases stored in a single, binary file which makes them easy to back up
-- only supports a single writer (locks entire database during writes)
-- supports multiple, concurrent readers
+- includes a command-line interface (CLI)
 - simple API
 - atomic transactions
 - fast performance
 - wide operating system support
-- includes a command-line interface (CLI)
+- wide programming language support
+- targeted at small databases (great for mobile applications)
+- supports multiple, concurrent readers
+
+Cons of SQLite include:
+
+- only supports a single writer (locks entire database during writes)
+  so not good for multi-user applications
+- no support for stored procedures
+- no built-in data encryption
 
 ## Installing
 
