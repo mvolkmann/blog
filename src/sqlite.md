@@ -31,6 +31,10 @@ Pros of SQLite include:
 
 Cons of SQLite include:
 
+- doesn't support databases larger than 281 terabytes
+  (There are other limits on things like string length,
+  number of columns in a table, and number of tables,
+  but these are all quite high.)
 - only supports a single writer (locks entire database during writes)
   so not good for multi-user applications
 - no support for stored procedures
