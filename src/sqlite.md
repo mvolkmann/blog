@@ -8,7 +8,9 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://www.sqlite.org/", "SQLite" %}
 claims to be "the most used database engine in the world".
+It is a relational database implemented in C.
 It runs on all common operating systems and mobile devices.
+Its creator, D. Richard Hipp, pronounces it "es queue el ite".
 
 Features of SQLite include:
 
@@ -126,8 +128,10 @@ breed = Native American Indian Dog
 Here is an example of `column` mode output:
 
 ```text
-Maisey      Treeing Walker Coonhound  11
-Ramsay      Native American Indian D  8
+id name   breed                    age
+-- ------ ------------------------ ---
+1  Maisey Treeing Walker Coonhound 11
+2  Ramsay Native American Indian D 8
 ```
 
 ## Column Types
@@ -146,6 +150,135 @@ Use the text type for ISO date strings.
 
 Use the integer type for storing seconds or milliseconds
 since the epoch (1970-01-01 00:00:00 UTC).
+
+## JavaScript Support
+
+There are many client libraries in npm for working with SQLite databases.
+A recommended library is {% aTargetBlank
+"https://github.com/JoshuaWise/better-sqlite3", "better-sqlite3" %}.
+To install this, enter `npm install better-sqlite3`.
+To use TypeScript types, enter `npm install @types/better-sqlite3`.
+
+The example code below demonstrates using this with TypeScript.
+
+```js
+import sqlite from 'better-sqlite3';
+import type {RunResult, Statement} from 'better-sqlite3';
+
+// Open existing database file or creating if missing.
+const db = sqlite('gift-track.db');
+
+// This pragma must be enabled in order to
+// check foreign key constraints and perform cascading deletes.
+db.pragma('foreign_key = true');
+
+// Delete the tables if they already exist.
+db.exec('drop table if exists gifts');
+db.exec('drop table if exists people');
+db.exec('drop table if exists occasions');
+
+// Create tables.
+
+db.exec(
+  'create table people (' +
+    'id integer primary key autoincrement, ' +
+    'name string, ' +
+    'month integer, ' +
+    'day integer, ' +
+    'year integer, ' +
+    'unique (name collate nocase))' // case insensitive
+);
+
+db.exec(
+  'create table occasions (' +
+    'id integer primary key autoincrement, ' +
+    'name string, ' +
+    'month integer, ' +
+    'day integer, ' +
+    'year integer, ' +
+    'unique (name collate nocase))' // case insensitive
+);
+
+db.exec(
+  'create table gifts (' +
+    'id integer primary key autoincrement, ' +
+    'description string, ' +
+    'location string, ' +
+    'name string, ' +
+    'occasionId integer, ' +
+    'personId integer, ' +
+    'price numeric, ' +
+    'url string, ' +
+    'unique (name collate nocase), ' + // case insensitive
+    // If an occasion is deleted, also delete gifts associated with it.
+    'constraint fk_occasion foreign key ' +
+    '  (occasionId) references occasions(id) on delete cascade ' +
+    // If a person is deleted, also delete gifts their gifts.
+    'constraint fk_person foreign key ' +
+    '  (personId) references people(id) on delete cascade ' +
+    ')'
+);
+
+// Create prepared statements.
+
+insertPersonPS = db.prepare(
+  'insert into people (name, month, day, year) values (?, ?, ?, ?)'
+);
+getAllPeoplePS = db.prepare('select * from people');
+getPersonPS = db.prepare('select * from people where id = ?');
+updatePersonPS = db.prepare(
+  'update people set name=?, month=?, day=?, year=? where id = ?'
+);
+deletePersonPS = db.prepare('delete from people where id = ?');
+
+// Execute prepared statements.
+
+type Person = {
+  id?: number;
+  name: string;
+  month?: number;
+  day?: number;
+  year?: number;
+};
+
+// Insert a person.
+const person: Person = {
+  name: 'Mark',
+  month: 4,
+  day: 16,
+  year: 1961
+};
+
+try {
+  const result: RunResult = insertPersonPS.run( // synchronous
+    person.name,
+    person.month,
+    person.day,
+    person.year
+  );
+  person.id = result.lastInsertRowid as number;
+} catch (e) {
+  const isDuplicate = e.toString().includes('UNIQUE constraint failed');
+  throw isDuplicate
+    ? new Error('duplicate person name ' + person.name)
+    : e;
+}
+
+// Get all the people.
+const people = (getAllPeoplePS.all() as unknown) as Person[];
+
+// Update a person.
+updatePersonPS.run(
+  person.name,
+  person.month,
+  person.day,
+  person.year,
+  person.id
+);
+
+// Delete a person.
+deletePersonPS.run(person.id);
+```
 
 ## Python Support
 
