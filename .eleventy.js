@@ -149,11 +149,15 @@ module.exports = eleventyConfig => {
     (url, text) => `<a href="${url}" target="frame">${text}</a>`
   );
 
-  //TODO: pkg is not defined!
   eleventyConfig.addShortcode(
     'aTargetBlank',
     (url, text) =>
       `<a href="${url}?v=${pkg.version}" rel="noopener" target="_blank">${text}</a>`
+  );
+
+  eleventyConfig.addShortcode(
+    'aTargetBlankNoVersion',
+    (url, text) => `<a href="${url}" rel="noopener" target="_blank">${text}</a>`
   );
 
   // Minify generated HTML.
