@@ -181,6 +181,36 @@ TODO: Try the second option to verify.
 
 TODO: Finish this
 
+## Recommended Directory Structure
+
+This is my opinion on what makes a good directory structure
+for a SvelteKit project.
+
+- `.env` defines environment variables with names starting with VITE\_
+- `src`
+  - `app.html` is the topmost HTML file (import third-party CSS files here)
+  - `global.css` defines CSS rules that can affect all components
+  - `lib`
+    - `env.ts` imports environment variables from `.env` file
+      and exports them so Svelte components can use them
+    - shared JS functions
+    - components used by multiple pages
+    - `stores.ts` defines stores used by multiple page
+  - `routes`
+    - `index.svelte` defines the home page (import `global.css` here?)
+    - `api`
+      - directories and files for file-based API routes
+    - `page-name-1`
+      - `stores.ts` defines stores used only by this page
+      - `types.ts` defines types used only by this page
+      - `index.svelte` defines the top level of the page
+      - components used only by this page
+    - `page-name-2`
+      - `stores.ts` defines stores used only by this page
+      - `types.ts` defines types used only by this page
+      - `index.svelte` defines the top level of the page
+      - components used only by this page
+
 ## Layouts
 
 TODO: Finish this
