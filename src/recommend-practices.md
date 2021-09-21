@@ -28,10 +28,10 @@ perhaps aided by your comments, request reviewers.
 ## Sprints
 
 Add a story in each sprint to review and fix issues found by testers.
-Testers can be enter these as GitHub issues the repository.
+Testers should enter these as GitHub issues in the repository.
 An estimate of 1.5 days is typically sufficient.
 Focusing on new issues as they are reported can be a distraction.
-Don't focus on the issues until other stories in the sprint have been completed.
+Don't fix the issues until other stories in the sprint have been completed.
 
 ## Fixing Issues
 
@@ -39,7 +39,7 @@ When addressing a GitHub issue, if it cannot be fixed yet
 because there are questions that must be answered,
 add the questions in issue comments.
 Also edit the the issue title to begin with "Q: ".
-This enables seeing at a glance all the issues
+This enables the team to see at a glance all the issues
 that are blocked due to questions.
 
 When an issue is fixed, add an issue comment that says the issue is fixed
