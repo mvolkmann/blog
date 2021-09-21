@@ -32,3 +32,19 @@ Testers can be enter these as GitHub issues the repository.
 An estimate of 1.5 days is typically sufficient.
 Focusing on new issues as they are reported can be a distraction.
 Don't focus on the issues until other stories in the sprint have been completed.
+
+## Fixing Issues
+
+When addressing a GitHub issue, if it cannot be fixed yet
+because there are questions that must be answered,
+add the questions in issue comments.
+Also edit the the issue title to begin with "Q: ".
+This enables seeing at a glance all the issues
+that are blocked due to questions.
+
+When an issue is fixed, add an issue comment that says the issue is fixed
+and include the branch name that contains the fix.
+Also edit the issue title to begin with "Fixed: ".
+This enables testers to see at a glance which issues have fixes to be tested.
+However, they shouldn't test the fix until the branch containing it
+is merged to the "develop" branch.
