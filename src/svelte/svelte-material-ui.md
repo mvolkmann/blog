@@ -22,10 +22,20 @@ To install it in a Svelte project:
 1. Copy `node_modules/svelte-material-ui/bare.css`
    to `public/svelte-material-ui.css`.
 
-1. Add the following line in `public/index.html` after the last `<link>` tag:
+1. Add the following in `public/index.html` after the last `<link>` tag:
 
    ```html
    <link rel="stylesheet" href="/svelte-material-ui.css" />
+   ```
+
+1. To use Material Icons,
+   add the following in `public/index.html` after the last `<link>` tag:
+
+   ```html
+   <link
+     rel="stylesheet"
+     href="https://fonts.googleapis.com/icon?family=Material+Icons"
+   />
    ```
 
 Here's an example of using the `Button` and `Switch` components
@@ -38,8 +48,6 @@ in a Svelte component.
 <script>
   import Button from '@smui/button';
   import Switch from '@smui/switch';
-
-  export let name;
 
   let clicked = 0;
   let likeIceCream = false;

@@ -13,6 +13,10 @@ Verify that the code quality is something you can be proud to show others.
 
 ## Pull Requests
 
+Before creating a pull request, verify that linting, code formatting,
+unit tests, and end-to-end tests all run cleanly.
+Consider creating an npm script that runs all of these.
+
 After creating a pull request and before requesting reviewers,
 examine all the code changes.
 In GitHub, click the "Files changed" tab and scroll through all the changes.
