@@ -197,7 +197,7 @@ The return type can be omitted when it can be inferred.
 
 The following code defines and calls several anonymous functions.
 
-````swift
+```swift
 // This function has no parameters.
 let printTime = {
     let date = Date() // now
@@ -214,6 +214,7 @@ print(product(2, 3))
 // This function omits the return type because it can be inferred.
 let product2 = {(a: Double, b: Double) in a * b}
 print(product2(2, 3))
+```
 
 If the parameter types of an anonymous function can be inferred from usage,
 the parameter list can be omitted and the parameter values can be
@@ -685,6 +686,7 @@ for color in fruitColors.values { // can add .sorted()
 | Method                                             | Description                                                      |
 | -------------------------------------------------- | ---------------------------------------------------------------- |
 | `filter((Element) -> Bool) -> Bool) -> Dictionary` | returns new `Dictionary` containing pairs that satisfy predicate |
+| `removeAll()`                                      | removes all pairs                                                |
 | `removeValue(forKey: key) -> prevValue`            | removes pair with given key and returns previous value or `nil`  |
 | `updateValue(newValue, forKey: key) -> prevValue`  | sets value of given key and returns previous value or `nil`      |
 
@@ -772,4 +774,7 @@ enter `swiftformat *.swift`.
 
 Xcode 13 adds support for Vim key bindings.
 To enable this, select Editor ... Vim Mode.
-````
+
+```
+
+```
