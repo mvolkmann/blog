@@ -255,8 +255,29 @@ To return multiple values, return a tuple
 by returning a list of values inside parentheses.
 
 ```swift
-TODO: Write a function that takes a color and returns a tuple
-TODO: containing the amounts of red, green, and blue in the color.
+func getAvgSum(_ numbers: [Float]) -> (Float, Float) {
+    let sum = numbers.reduce(0, {$0 + $1})
+    let avg = sum / Float(numbers.count)
+    return (avg, sum)
+}
+
+print(getAvgSum([1, 3, 8])) // (4.0, 12.0)
+
+typealias RGB = (red: Int, green: Int, blue: Int)
+
+let rgbDict: [String : RGB] = [
+    "red": (red: 255, green: 0, blue: 0),
+    "green": (red: 0, green: 255, blue: 0),
+    "blue": (red: 0, green: 0, blue: 255)
+]
+
+func getRgb(_ color: String) -> RGB? {
+    return rgbDict[color]
+}
+
+print(getRgb("red")) // (red: 255, green: 0, blue: 0)
+print(getRgb("green")) // (red: 0, green: 255, blue: 0)
+print(getRgb("pink")) // nill
 ```
 
 By default, parameters cannot be modified in function bodies.
@@ -279,11 +300,6 @@ to scope their usage.
 Otherwise they are global and can be called from anywhere.
 Nested functions can be returned by their enclosing function
 to allow them to be called from outside.
-
-### Trailing Closures
-
-TODO: Add this section.
-TODO: See https://docs.swift.org/swift-book/LanguageGuide/Closures.html
 
 ## Built-in Primitive Types
 
@@ -818,3 +834,20 @@ To enable this, select Editor ... Vim Mode.
 ```
 
 ```
+
+## Annoyances
+
+I will add to this list as I learn more.
+
+The things that annoy me most about Swift are:
+
+- String interpolation syntax
+
+  They should have copied the `${expression}` syntax already in use by other
+  languages instead of using the `\(expression)` syntax that is unique to Swift.
+
+- Defaulting to named parameters
+
+  Most function/method parameters are not named.
+  But we have to indicate that for each parameter
+  by preceding its name with "\_ ".
