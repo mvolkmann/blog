@@ -293,10 +293,71 @@ let taxRate = 0.8
 print("item \(item) costs \(price * (1 + taxRate))")
 ```
 
+A new string can be created by concatenating existing strings
+using the `+` operator.
+
+A string can be appended to an existing variable string
+using the `+=` operator.
+
+`String` properties include the following:
+
+| Property  | Description                                     |
+| --------- | ----------------------------------------------- |
+| `count`   | number of current characters                    |
+| `first`   | first character                                 |
+| `isEmpty` | `Bool` value indicating whether `count` is zero |
+| `last`    | last character                                  |
+
 `String` methods include, but are not limited to the following:
 
-| Method | Description |
-| ------ | ----------- |
+| Method                                       | Description                                                   |
+| -------------------------------------------- | ------------------------------------------------------------- |
+| `append(Character)`                          | appends a given `Character` to the receiver                   |
+| `append(String)`                             | appends a given `String` to the receiver                      |
+| `contains(Character) -> Bool`                | determines if receiver contains a given character             |
+| `dropFirst(Int) -> Substring`                | returns substring not including first n characters            |
+| `dropLast(Int) -> Substring`                 | returns substring not including last n characters             |
+| `firstIndex(of: Character or String) -> Int` | returns index of first occurrence of a character or substring |
+| `insert(Character, at: index)`               | inserts a given `Character` in the receiver                   |
+| `lowercased() -> String`                     | returns lowercase version                                     |
+| `popLast() -> Character?`                    | removes and returns last character                            |
+| `prefix(Int) -> Substring`                   | returns first n characters                                    |
+| `remove(at: index)`                          | removes and returns the character at a given index            |
+| `removeAll()`                                | removes all characters                                        |
+| `removeFirst([n])`                           | removes first n characters, defaulting to 1                   |
+| `removeLast([n])`                            | removes last n characters, defaulting to 1                    |
+| `removeSubrange(Range)`                      | removes characters in `Range`                                 |
+| `replaceSubrange(Range, with: String)`       | replaces characters in a given range                          |
+| `starts(with: String) -> Bool`               | determines if receiver begins with a substring                |
+| `split(separator: Character) -> [Substring]` | returns `Array` of substrings delimited by a given character  |
+| `suffix(Int) -> Substring`                   | returns last n characters                                     |
+| `uppercased() -> String`                     | returns uppercase version                                     |
+
+| `index(of: String) -> Int` | returns index of first occurrence of a substring |
+
+There is no `ends` method corresponding the to `starts` method.
+
+It is amazing difficult to get the character at a given index.
+
+```swift
+let name = "Mark"
+print(name[name.index(name.startIndex, offsetBy: 2)]) // "r"
+```
+
+This is insane! Fortunately there is a better way
+by overriding the subscript operator as follows:
+
+```swift
+extension String : BidirectionalCollection {
+    subscript(i: Index) -> Character { return characters[i] }
+}
+```
+
+With this in place, the following works:
+
+```swift
+print(name[2]) // "r"
+```
 
 ### Ranges
 
