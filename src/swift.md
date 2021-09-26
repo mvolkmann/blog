@@ -197,7 +197,7 @@ The return type can be omitted when it can be inferred.
 
 The following code defines and calls several anonymous functions.
 
-```swift
+````swift
 // This function has no parameters.
 let printTime = {
     let date = Date() // now
@@ -215,13 +215,13 @@ print(product(2, 3))
 let product2 = {(a: Double, b: Double) in a * b}
 print(product2(2, 3))
 
-// This function has parameters with unspecified types.
-// It does not compile because the * operator cannot be applied to all types.
-//let product3 = {a, b in a * b}
-//print(product3(2, 3))
-// This is a very contrived example since
-// "print(2 * 3)" would do the same thing.
-print({$0 * $1}(2, 3))
+If the parameter types of an anonymous function can be inferred from usage,
+the parameter list can be omitted and the parameter values can be
+referred to by index using the names `$0`, `$1`, and so on.
+
+```swift
+let numbers = [1, 3, 7]
+let doubled = numbers.map({$0 * 2}) // [2, 6, 14]
 ```
 
 A "variadic" parameter accepts multiple values of the same type.
@@ -677,13 +677,23 @@ for color in fruitColors.values { // can add .sorted()
 | `capacity` | number of pairs that can be held without allocating more space |
 | `count`    | number of current elements                                     |
 | `isEmpty`  | `Bool` value indicating whether `count` is zero                |
+| `keys`     | `Keys` `Collection` of keys                                    |
+| `values`   | `Values` `MutableCollection` of values                         |
 
 `Dictionary` methods include, but are not limited to the following:
 
-| Method                                            | Description                                                     |
-| ------------------------------------------------- | --------------------------------------------------------------- |
-| `removeValue(forKey: key) -> prevValue`           | removes pair with given key and returns previous value or `nil` |
-| `updateValue(newValue, forKey: key) -> prevValue` | sets value of given key and returns previous value or `nil`     |
+| Method                                             | Description                                                      |
+| -------------------------------------------------- | ---------------------------------------------------------------- |
+| `filter((Element) -> Bool) -> Bool) -> Dictionary` | returns new `Dictionary` containing pairs that satisfy predicate |
+| `removeValue(forKey: key) -> prevValue`            | removes pair with given key and returns previous value or `nil`  |
+| `updateValue(newValue, forKey: key) -> prevValue`  | sets value of given key and returns previous value or `nil`      |
+
+Here are examples of using some of these methods.
+
+```swift
+// Get fruit elements where the color is short.
+let shortColors = fruitColors.filter({$1.count <= 3})
+```
 
 ### Tuples
 
@@ -762,3 +772,4 @@ enter `swiftformat *.swift`.
 
 Xcode 13 adds support for Vim key bindings.
 To enable this, select Editor ... Vim Mode.
+````
