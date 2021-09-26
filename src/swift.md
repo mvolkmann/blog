@@ -189,7 +189,8 @@ func greet() {
 greet() // outputs Hello, World!
 ```
 
-Anonymous functions can be used at the values of variables and arguments.
+Anonymous functions (a.k.a closures) can be used as
+the values of variables and arguments.
 They are written with the following syntax:
 `{ (parameter-list) -> return-type in statements }`.
 The return type can be omitted when it can be inferred.
@@ -264,6 +265,11 @@ Otherwise they are global and can be called from anywhere.
 Nested functions can be returned by their enclosing function
 to allow them to be called from outside.
 
+### Trailing Closures
+
+TODO: Add this section.
+TODO: See https://docs.swift.org/swift-book/LanguageGuide/Closures.html
+
 ## Built-in Primitive Types
 
 | Type          | Description                                                  |
@@ -299,6 +305,20 @@ using the `+` operator.
 A string can be appended to an existing variable string
 using the `+=` operator.
 
+To iterate over the characters in a `String`,
+use a `for-in` loop or the `forEach` method.
+
+```swift
+let name = "Mark"
+
+for c in name {
+  print(c)
+}
+
+name.forEach({(c: Character) -> Void in print(c)})
+name.forEach({(c) in print(c)})
+```
+
 `String` properties include the following:
 
 | Property  | Description                                     |
@@ -318,6 +338,8 @@ using the `+=` operator.
 | `dropFirst(Int) -> Substring`                | returns substring not including first n characters            |
 | `dropLast(Int) -> Substring`                 | returns substring not including last n characters             |
 | `firstIndex(of: Character or String) -> Int` | returns index of first occurrence of a character or substring |
+| `hasPrefix(String) -> Bool`                  | determines if receiver begins with a substring                |
+| `hasSuffix(String) -> Bool`                  | determines if receiver ends with a substring                  |
 | `insert(Character, at: index)`               | inserts a given `Character` in the receiver                   |
 | `lowercased() -> String`                     | returns lowercase version                                     |
 | `popLast() -> Character?`                    | removes and returns last character                            |
@@ -328,34 +350,26 @@ using the `+=` operator.
 | `removeLast([n])`                            | removes last n characters, defaulting to 1                    |
 | `removeSubrange(Range)`                      | removes characters in `Range`                                 |
 | `replaceSubrange(Range, with: String)`       | replaces characters in a given range                          |
-| `starts(with: String) -> Bool`               | determines if receiver begins with a substring                |
 | `split(separator: Character) -> [Substring]` | returns `Array` of substrings delimited by a given character  |
+| `sorted() -> [Character]`                    | returns `Array` of characters in sorted order                 |
 | `suffix(Int) -> Substring`                   | returns last n characters                                     |
 | `uppercased() -> String`                     | returns uppercase version                                     |
 
-| `index(of: String) -> Int` | returns index of first occurrence of a substring |
-
-There is no `ends` method corresponding the to `starts` method.
-
-It is amazing difficult to get the character at a given index.
+Getting the character at a given index requires using the `index` method
+which makes if quite verbose.
 
 ```swift
 let name = "Mark"
 print(name[name.index(name.startIndex, offsetBy: 2)]) // "r"
 ```
 
-This is insane! Fortunately there is a better way
-by overriding the subscript operator as follows:
+Fortunately we can override the subscript operator to make this easier.
 
 ```swift
 extension String : BidirectionalCollection {
     subscript(i: Index) -> Character { return characters[i] }
 }
-```
 
-With this in place, the following works:
-
-```swift
 print(name[2]) // "r"
 ```
 
