@@ -317,6 +317,78 @@ to allow them to be called from outside.
 
 TODO: List some properties and methods of number types.
 
+The `Int`, `Float`, and `Double` types have many common properties and methods.
+But some properties are methods are not shared by all of these types.
+
+Number properties include the following:
+
+| Property                  | Description                               |
+| ------------------------- | ----------------------------------------- |
+| `greatestFiniteMagnitude` | maximum value of `Float` or `Double` type |
+| `leastNonzeroMagnitude`   | minimum value of `Float` or `Double` type |
+| `max`                     | maximum value of `Int` type               |
+| `min`                     | minimum value of `Int` type               |
+| `pi`                      | value of `Float` or `Double` Pi           |
+
+Static number methods include, but are not limited to the following:
+
+| Method                              | Description                                       |
+| ----------------------------------- | ------------------------------------------------- |
+| `random(in: Range) -> number`       | returns a random number in the given range        |
+| `maximum(number, number) -> Double` | returns the larger of two floating point numbers  |
+| `minimum(number, number) -> Double` | returns the smaller of two floating point numbers |
+
+```swift
+// Generate a random integer from 0 to 9.
+// This can also be used on the Float and Double types.
+let r = Int.random(in: 0...10)
+```
+
+Number methods include, but are not limited to the following:
+
+| Method                          | Description                                                 |
+| ------------------------------- | ----------------------------------------------------------- |
+| `abs(number) -> number          | returns absolute value                                      |
+| `isMultiple(of: Int) -> Bool    | determines if the Int receiver is a multiple of another Int |
+| `remainder(dividingBy: Double)` | returns remainder                                           |
+| `round()`                       | mutates value to rounded value                              |
+| `rounded() -> Double`           | returns rounded value                                       |
+| `signum() -> Int`               | returns -1, 0, or 1                                         |
+| `squareRoot()`                  | returns square root                                         |
+
+Many more math functions are defined in the "Foundation" framework.
+This "provides a base layer of functionality for apps and frameworks,
+including data storage and persistence, text processing,
+date and time calculations, sorting and filtering, and networking.
+Many math functions can only be used if the Foundation framework is imported.
+
+```swift
+import Foundation
+print(sin(45.0)) // 0.8509...
+```
+
+Numeric foundation functions include:
+
+| Function              | Description                               |
+| --------------------- | ----------------------------------------- |
+| `abs(number)`         | returns absolute value                    |
+| `ceil(number)`        | returns ceiling value                     |
+| `floor(number)`       | returns floor value                       |
+| `round(number)`       | returns rounded value                     |
+| `sign(number)`        | returns -1, 0, or 1                       |
+| `trunc(number)`       | returns truncated value                   |
+| `pow(base, exponent)` | returns a number raised to a power        |
+| `sqrt(number)`        | returns the square root of a number       |
+| `exp(exponent)`       | returns e raised to a power               |
+| `log(number)`         | returns the natural log of a number       |
+| `log10(number)`       | returns the log base 10 value of a number |
+| `sin(number)`         | returns sine of angle in radians          |
+| `cos(number)`         | returns cosine of angle in radians        |
+| `tan(number)`         | returns tangent of angle in radians       |
+| `asin(number)`        | returns arc sine in radians               |
+| `acos(number)`        | returns arc cosine in radians             |
+| `atan(number)`        | returns arc tangent in radians            |
+
 ### Characters and Strings
 
 Literal `Character` and single-line `String` values
@@ -851,3 +923,8 @@ The things that annoy me most about Swift are:
   Most function/method parameters are not named.
   But we have to indicate that for each parameter
   by preceding its name with "\_ ".
+
+- Trailing closures
+
+  The syntax for trailing closures is surprising and unique to Swift.
+  It is even more surprising if there is more than one.
