@@ -54,7 +54,8 @@ For other operating systems, download it from
 
 ## Using Xcode
 
-Xcode is an IDE from Apple for creating apps for
+{% aTargetBlank "https://developer.apple.com/xcode/", "Xcode" %}
+is an IDE from Apple for creating apps for
 iPhone, iPad, Mac, Apple Watch, and Apple TV.
 
 To experiment with Swift:
@@ -90,10 +91,17 @@ and enter `swift < greet.swift` to run it.
 Interpreter commands begin with a colon.
 The most commonly used commands are described in the table below.
 
-| Command | Description           |
-| ------- | --------------------- |
-| `:exit` | exits the interpreter |
-| `:help` | prints                |
+| Command | Description                      |
+| ------- | -------------------------------- |
+| `:exit` | exits the interpreter            |
+| `:help` | prints help on all REPL commands |
+
+## Comments
+
+Single-line comments begin with `//`.
+Multi-line comments are delimited by `/*` and `*/`.
+Multi-line comments can be nested which makes it easy to
+comment out blocks of code that contain multi-line comments.
 
 ## Built-in Primitive Types
 
@@ -106,8 +114,8 @@ The most commonly used commands are described in the table below.
 | `Double`      | 64-bit floating point number                                 |
 | `Character`   | single character                                             |
 | `String`      | text                                                         |
-| `Range`       | interval from lower bound to upper bound (exclusive)         |
-| `ClosedRange` | interval from lower bound to upper bound (inclusive)         |
+| `Range`       | interval from inclusive lower bound to exclusive upper bound |
+| `ClosedRange` | interval from inclusive lower bound to inclusive upper bound |
 
 ### Characters and Strings
 
@@ -115,25 +123,33 @@ Literal `Character` and single-line `String` values
 are both delimited by double-quotes.
 Multi-line `String` values are delimited by triple double-quotes.
 
+To insert expressions in string values use the string interpolation syntax.
+
+```swift
+let item = "milk"
+let price = 2.59
+let taxRate = 0.8
+print("item \(item) costs \(price * (1 + taxRate))")
+```
+
 ### Ranges
 
 A literal `Range` including the numbers 2, 3, and 4
 can be defined with `2..<5` or `2...4`.
-This can be assigned to a variable. For example:
+This can be assigned to a variable.
 
 ```swift
 let r = 2...4
 ```
 
 To determine if a number is in a range, pass it to the `contains` method.
-For example:
 
 ```swift
 print(r.contains(3)) // true
 print(r.contains(5)) // false
 ```
 
-To iterate over the values in a range, use a `for-in` loop. For example:
+To iterate over the values in a range, use a `for-in` loop.
 
 ```swift
 for n in r {
@@ -143,90 +159,220 @@ for n in r {
 
 ## Built-in Collection Types
 
-| Type         | Description                                                               |
-| ------------ | ------------------------------------------------------------------------- |
-| `Array`      | indexed collection of values with the same type                           |
-| `Dictionary` | collection of key/value pairs                                             |
-| `Set`        | unordered collection of values with the same type and no duplicates       |
-| tuple        | fixed-length, ordered collection of values that have type that can differ |
+| Type         | Description                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------------- |
+| `Array`      | indexed collection of values with the same type                                                   |
+| `Dictionary` | collection of key/value pairs where all keys have the same type and all values have the same type |
+| `Set`        | unordered collection of values with the same type and no duplicates                               |
+| tuple        | fixed-length, ordered collection of values that have type that can differ                         |
+
+When a variable is initialized to a collection,
+the elements in the collection can be modified.
+However, when a constant is initialized to a collection,
+the elements in the collection cannot be modified.
 
 ### Arrays
 
-Array properties include the following:
+Arrays can be created by listing elements in square brackets,
+separated by commas.
+
+```swift
+var scores = [2, 5] // type is inferred to be [Int]
+
+var numbers: [Int] = [] // can't infer type, so must specify
+
+var numbers: Array<Int> = [] // same as previous line
+
+var zeros = Array(repeating: 0, count: 5) // array containing 5 zeros
+```
+
+To append new elements to an array:
+
+```swift
+scores += [10, 3] // now [2, 5, 10, 3]
+scores.append(9) // can only pass one value; now [2, 5, 10, 3, 9]
+```
+
+To change values at specific indexes:
+
+```swift
+scores[0] = 4 // now [4, 5, 10, 3, 9]
+scores[2...3] = [1, 2] // inclusive range; now [4 5, 1, 2, 9]
+```
+
+To iterate over the elements in an `Array`, use a `for`/`in` loop.
+
+```swift
+for score in scores {
+    print(score)
+}
+```
+
+To also access the index of each value, use the `enumerated` method.
+
+```swift
+for (index, score) in scores.enumerated() {
+    print("score \(index + 1): \(score)")
+}
+```
+
+`Array` properties include the following:
 
 | Property   | Description                                                       |
 | ---------- | ----------------------------------------------------------------- |
 | `capacity` | number of elements that can be held without allocating more space |
-| `count`    | number of elements                                                |
+| `count`    | number of current elements                                        |
 | `first`    | first element                                                     |
 | `isEmpty`  | `Bool` value indicating whether `count` is zero                   |
 | `last`     | last element                                                      |
 
-Array methods include, but are not limited to the following:
+`Array` methods include, but are not limited to the following:
 
-| Method                                                    | Description                                                                                  |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `allSatisfy((Element) -> Bool) -> Bool`                   | determines if all elements match a predicate                                                 |
-| `append(Element)`                                         | adds a new element at the end                                                                |
-| `append(contentsOf: S)`                                   | adds the elements in `S` at the end                                                          |
-| `compactMap<T>((Element) -> T) -> [T]`                    | returns an array of the non-nil values returned by the function                              |
-| `contains(Element) -> Bool`                               | determines if an element is a member                                                         |
-| `contains(where: (Element) -> Bool) -> Bool`              | determines if any element matches a predicate                                                |
-| `drop(while: (Element) -> Bool) -> ArraySlice<Element>`   | returns a subsequence of the elements after those at the beginning that match a predicate    |
-| `dropFirst(Int) -> ArraySlice<Element>`                   | returns a subsequence of the elements after the first n                                      |
-| `dropLast(Int) -> ArraySlice<Element>`                    | returns a subsequence of the elements before the last n                                      |
-| `enumerated(t) -> EnumeratedSequence`                     | returns a subsequence of (n, x) pairs where n is an index and x is the element at that index |
-| `first(where: (Element) -> Bool) -> Element?`             | returns the first element that matches a predicate                                           |
-| `firstIndex(of: Element) -> Int?`                         | returns the index of the first element matching element                                      |
-| `firstIndex(where: (Element) -> Bool) -> Int?`            | returns the index of the first element that matches a predicate                              |
-| `flatMap<T>((Element) -> T) -> [T]`                       | like `map`, but concatenates the results                                                     |
-| `forEach((Element) -> Void)`                              | passes each element to a given function                                                      |
-| `last(where: (Element) -> Bool) -> Element?`              | returns the last element that matches a predicate                                            |
-| `lastIndex(of: Element) -> Int?`                          | returns the index of the last element matching element                                       |
-| `lastIndex(where: (Element) -> Bool) -> Int?`             | returns the index of the last element that matches a predicate                               |
-| `insert(Element, at: Int)`                                | inserts a new element at the given index                                                     |
-| `joined(String) -> String`                                | returns the contenation of the elements with a separator between each                        |
-| `lazy`                                                    | returns a sequence that can be used lazily by another function                               |
-| `map<T>((Element) -> T) -> [T]`                           | returns an Array of the results of calling a function on each element                        |
-| `max() -> Element?`                                       | returns the maximum element                                                                  |
-| `max((Element, Element) -> Bool) -> Element?`             | returns the maximum element as determined by a comparator                                    |
-| `min() -> Element?`                                       | returns the minimum element                                                                  |
-| `min((Element, Element) -> Bool) -> Element?`             | returns the minimum element as determined by a comparator                                    |
-| `partition(by: (Element) -> Bool) -> Int`                 | reorders the elements using a predicate so all false are before all true                     |
-| `popLast() -> Element?`                                   | removes the last element and returns it                                                      |
-| `prefix(Int) -> ArraySlice<Element>`                      | returns a subsequence of the first n elements                                                |
-| `prefix(while: (Element) -> Bool) -> ArraySlice<Element>` | returns a subsequence of the first elements that match a predicate                           |
-| `randomElement()`                                         | a random element                                                                             |
-| `reduce(Result, (Result, Element) -> Result) -> Result`   | takes an initial value and a function; returns result of combining elements                  |
-| `remove(at: Int) -> Element`                              | removes the element at a given index and returns it                                          |
-| `removeFirst() -> Element`                                | removes the first element and returns it                                                     |
-| `removeFirst(Int)`                                        | removes a given number of elements from the beginning                                        |
-| `removeLast() -> Element`                                 | removes the last element and returns it                                                      |
-| `removeLast(Int)`                                         | removes a given number of elements from the end                                              |
-| `removeSubrange(Range<Int>)`                              | removes the elements in the range                                                            |
-| `removeAll(keepingCapacity: Bool)`                        | removes all elements, optionally keeping the capacity                                        |
-| `removeAll(where: (Element) -> Bool)`                     | removes all elements that match a predicate                                                  |
-| `replaceSubrange(Range<Int>, with: C)`                    | replaces elements in the range with elements in `C`                                          |
-| `reserveCapacity(Int)`                                    | reserves enough space for at least the given number of elements                              |
-| `reverse()`                                               | reverses the elements in place                                                               |
-| `reversed() -> ReversedCollection`                        | returns a view of the elements in reverse order                                              |
-| `shuffle()`                                               | shuffles the elements in place                                                               |
-| `shuffled()`                                              | returns a new array of the elements in shuffled order                                        |
-| `sort()`                                                  | sorts the elements in place                                                                  |
-| `sort(by: (Element, Element) -> Bool)`                    | sorts the elements in place using a given comparator                                         |
-| `sorted() -> [Element]`                                   | returns a new array of the elements in sorted order                                          |
-| `sorted(by: (Element, Element) -> Bool) -> [Element]`     | returns a new array of the elements in sorted using a given comparator                       |
-| `subscript(Int)`                                          | element at a given index                                                                     |
-| `subscript(Range<Int>)`                                   | `ArraySlice` of the elements in the given range                                              |
-| `suffix(Int) -> ArraySlice<Element>`                      | returns a subsequence of the last n elements                                                 |
-| `suffix(while: (Element) -> Bool) -> ArraySlice<Element>` | returns a subsequence of the last elements that match a predicate                            |
-| `swapAt(Int, Int)`                                        | swaps the elements at the given indexes                                                      |
+| Method                                                    | Description                                                                                |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `allSatisfy((Element) -> Bool) -> Bool`                   | determines if all elements match predicate                                                 |
+| `append(Element)`                                         | adds new element at end                                                                    |
+| `append(contentsOf: S)`                                   | adds elements in `S` at end                                                                |
+| `compactMap<T>((Element) -> T) -> [T]`                    | returns Array of non-nil values returned by function                                       |
+| `contains(Element) -> Bool`                               | determines if an element is a member                                                       |
+| `contains(where: (Element) -> Bool) -> Bool`              | determines if any element matches a predicate                                              |
+| `drop(while: (Element) -> Bool) -> ArraySlice<Element>`   | returns subsequence of elements after those at beginning that match predicate              |
+| `dropFirst(Int) -> ArraySlice<Element>`                   | returns subsequence of elements after first n                                              |
+| `dropLast(Int) -> ArraySlice<Element>`                    | returns subsequence of elements before last n                                              |
+| `enumerated(t) -> EnumeratedSequence`                     | returns subsequence of (n, x) pairs where n is an index and x is the element at that index |
+| `first(where: (Element) -> Bool) -> Element?`             | returns first element that matches predicate                                               |
+| `firstIndex(of: Element) -> Int?`                         | returns index of first element matching given element                                      |
+| `firstIndex(where: (Element) -> Bool) -> Int?`            | returns index of first element that matches predicate                                      |
+| `flatMap<T>((Element) -> T) -> [T]`                       | like `map`, but concatenates results                                                       |
+| `forEach((Element) -> Void)`                              | passes each element to given function                                                      |
+| `last(where: (Element) -> Bool) -> Element?`              | returns last element that matches a predicate                                              |
+| `lastIndex(of: Element) -> Int?`                          | returns index of last element matching element                                             |
+| `lastIndex(where: (Element) -> Bool) -> Int?`             | returns index of last element that matches a predicate                                     |
+| `insert(Element, at: Int)`                                | inserts new element at given index                                                         |
+| `joined(String) -> String`                                | returns concatenation of elements with separator between each                              |
+| `lazy`                                                    | returns sequence that can be used lazily by another function                               |
+| `map<T>((Element) -> T) -> [T]`                           | returns Array of results of calling a function on each element                             |
+| `max() -> Element?`                                       | returns maximum element                                                                    |
+| `max((Element, Element) -> Bool) -> Element?`             | returns maximum element as determined by a comparator                                      |
+| `min() -> Element?`                                       | returns minimum element                                                                    |
+| `min((Element, Element) -> Bool) -> Element?`             | returns minimum element as determined by a comparator                                      |
+| `partition(by: (Element) -> Bool) -> Int`                 | reorders elements using a predicate so all false are before all true                       |
+| `popLast() -> Element?`                                   | removes last element and returns it; returns nil if empty                                  |
+| `prefix(Int) -> ArraySlice<Element>`                      | returns subsequence of first n elements                                                    |
+| `prefix(while: (Element) -> Bool) -> ArraySlice<Element>` | returns subsequence of first elements that match a predicate                               |
+| `randomElement()`                                         | a random element                                                                           |
+| `reduce(Result, (Result, Element) -> Result) -> Result`   | takes an initial value and a function; returns result of combining elements                |
+| `remove(at: Int) -> Element`                              | removes element at given index and returns it                                              |
+| `removeFirst() -> Element`                                | removes first element and returns it                                                       |
+| `removeFirst(Int)`                                        | removes given number of elements from beginning                                            |
+| `removeLast() -> Element`                                 | removes last element and returns it; crashes if empty                                      |
+| `removeLast(Int)`                                         | removes given number of elements from end                                                  |
+| `removeSubrange(Range<Int>)`                              | removes elements in range                                                                  |
+| `removeAll(keepingCapacity: Bool)`                        | removes all elements, optionally keeping the capacity                                      |
+| `removeAll(where: (Element) -> Bool)`                     | removes all elements that match a predicate                                                |
+| `replaceSubrange(Range<Int>, with: C)`                    | replaces elements in the range with elements in `C`                                        |
+| `reserveCapacity(Int)`                                    | reserves enough space for at least the given number of elements                            |
+| `reverse()`                                               | reverses the elements in place                                                             |
+| `reversed() -> ReversedCollection`                        | returns view of elements in reverse order                                                  |
+| `shuffle()`                                               | shuffles elements in place                                                                 |
+| `shuffled()`                                              | returns new array of elements in shuffled order                                            |
+| `sort()`                                                  | sorts elements in place                                                                    |
+| `sort(by: (Element, Element) -> Bool)`                    | sorts elements in place using a given comparator                                           |
+| `sorted() -> [Element]`                                   | returns new array of elements in sorted order                                              |
+| `sorted(by: (Element, Element) -> Bool) -> [Element]`     | returns new array of elements in sorted using a given comparator                           |
+| `subscript(Int)`                                          | element at given index                                                                     |
+| `subscript(Range<Int>)`                                   | `ArraySlice` of elements in given range                                                    |
+| `suffix(Int) -> ArraySlice<Element>`                      | returns subsequence of last n elements                                                     |
+| `suffix(while: (Element) -> Bool) -> ArraySlice<Element>` | returns subsequence of last elements that match a predicate                                |
+| `swapAt(Int, Int)`                                        | swaps elements at the given indexes                                                        |
 
-Do `popLast` and `removeLast` have the same functionality?
+### Sets
+
+Sets can be created by passing elements to the `Set` function.
+
+```swift
+// The type of the following is inferred to be Set<String>.
+var cards: Set = ["5C", "KH"] // 5 of clubs and King of hearts
+
+var cards = Set<String>() // starts empty; can't infer type so must specify
+```
+
+To add an element, use the `insert` method:
+
+```swift
+cards.insert("AD") // Ace of diamonds
+```
+
+To iterate over the elements in a `Set`, use a `for`/`in` loop.
+
+```swift
+for card in cards { // elements are unordered
+    print(card)
+}
+```
+
+To iterate over the elements in a `Set` in sorted order,
+add use of the `sorted` method.
+
+```swift
+for card in cards.sorted() {
+    print(card)
+}
+```
+
+The `==` operator can be used to determine if two sets contain the same elements.
+
+`Set` properties include the following:
+
+| Property   | Description                                                       |
+| ---------- | ----------------------------------------------------------------- |
+| `capacity` | number of elements that can be held without allocating more space |
+| `count`    | number of current elements                                        |
+| `isEmpty`  | `Bool` value indicating whether `count` is zero                   |
+
+TODO: Are Arrays, Sets, and tuples all kinds of "sequences"?
+
+`Set` methods include, but are not limited to the following:
+
+| Method                                 | Description                                                            |
+| -------------------------------------- | ---------------------------------------------------------------------- |
+| `contains(Element) -> Bool`            | determines if an element is a member                                   |
+| `insert(element)`                      | adds an element                                                        |
+| `intersection(otherSet) -> Set`        | returns new `Set` that is intersection of receiver with another        |
+| `isDisjoint(with: otherSet) -> Bool`   | true if receiver has no elements in common with `otherSet`             |
+| `isStrictSuperset(of: seq) -> Bool`    | like `isSuperset`, but `false` when equal                              |
+| `isSubset(of: seq) -> Bool`            | determines if receiver is a subset of a sequence                       |
+| `isSuperset(of: seq) -> Bool`          | determines if receiver is a superset of a sequence                     |
+| `remove(element)`                      | deletes an element                                                     |
+| `subtracting(otherSet) -> Set`         | returns new `Set` containing elements in receiver not also in another  |
+| `symmetricDifference(otherSet) -> Set` | returns new `Set` containing elements in either `Set`, but not in both |
+| `union(otherSet) -> Set`               | returns new `Set` that is union of receiver with another               |
 
 ### Dictionaries
 
-### Sets
+Dictionaries can be created by listing key/value pairs in square brackets,
+separated by commas. Keys and values are separated by colons.
+
+```swift
+// The type of fruitColors is inferred to be [String : String].
+var fruitColors = ["apple": "red", "banana": "yellow", "orange": "orange"];
+
+// When the type can't be inferred, it must be specified.
+// The syntax for an empty Dictionary includes a colon.
+var pairs: [Int : String] = [:]
+var pairs: Dictionary<Int, String> = [:] //TODO: Correct?
+```
+
+To access the value of a given key, use the following syntax:
+
+```swift
+let color = fruitColors["banana"]; // "yellow"
+```
+
+Dictionary methods include, but are not limited to the following:
+
+| Method | Description |
+| ------ | ----------- |
 
 ### Tuples
 
@@ -241,8 +387,6 @@ Variable names can be followed by a colon and a type.
 They can also be followed by `=` and an initial value.
 The type can be omitted if the desired type
 can be inferred from the initial value.
-
-For example:
 
 ```swift
 let name1: String = "Mark" // type and initial value
@@ -264,7 +408,6 @@ in a block surrounded by curly braces.
 ### Conditional Logic
 
 Conditional logic is implemented with the `if` statement.
-For example:
 
 ```swift
 if score1 == 21, score2 <= 19 { // same as score1 == 21 && score2 <= 19
@@ -275,7 +418,6 @@ if score1 == 21, score2 <= 19 { // same as score1 == 21 && score2 <= 19
 ### Iteration
 
 To iterate over all the elements of an array, use a for-in loop.
-For example:
 
 ```swift
 let names = ["Maisey", "Ramsay", "Oscar", "Comet"]
@@ -290,7 +432,6 @@ Functions are defined using the `func` keyword,
 followed by the function name, the parameter list in parentheses,
 and an optional return type preceded by `->`.
 The parentheses are required even for functions that have no parameters.
-For example:
 
 ```swift
 func add(n1: Int, n2: Int) -> Int {
@@ -355,8 +496,6 @@ To call a function, specify the function name
 followed by arguments in parentheses.
 The parentheses are required even when not passing any arguments.
 
-For example:
-
 ```swift
 func greet() {
     print('Hello, World!')
@@ -400,7 +539,6 @@ print({$0 * $1}(2, 3))
 
 A "variadic" parameter accepts multiple values of the same type.
 The parameter value will be a constant array of values.
-For example:
 
 ```swift
 func displaySum(label: String, numbers: Int...) {
@@ -413,7 +551,6 @@ Function names can be overloaded based on their parameter types.
 
 To return multiple values, return a tuple
 by returning a list of values inside parentheses.
-For example:
 
 ```swift
 TODO: Write a function that takes a color and returns a tuple
