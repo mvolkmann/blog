@@ -225,6 +225,20 @@ let numbers = [1, 3, 7]
 let doubled = numbers.map({$0 * 2}) // [2, 6, 14]
 ```
 
+If the last parameters to a function or method are functions,
+calls can be written using "trailing closures".
+Typically this is only done for the last argument.
+For example, these are equivalent:
+
+```swift
+let prices = [1.23, 2.34, 3.45]
+let total = prices.reduce(0, {(result, price) in result + price})
+let total = prices.reduce(0) {
+    (result, price) in result + price
+}
+let total = prices.reduce(0, {$0 + $1})
+```
+
 A "variadic" parameter accepts multiple values of the same type.
 The parameter value will be a constant array of values.
 
@@ -483,6 +497,8 @@ for (index, score) in scores.enumerated() {
     print("score \(index + 1): \(score)")
 }
 ```
+
+TODO: Does Swift support any form of destructuring? Probably not.
 
 `Array` properties include the following:
 
