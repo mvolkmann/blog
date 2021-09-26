@@ -315,12 +315,20 @@ to allow them to be called from outside.
 | `Range`       | interval from inclusive lower bound to exclusive upper bound |
 | `ClosedRange` | interval from inclusive lower bound to inclusive upper bound |
 
-TODO: List some properties and methods of number types.
+## Numbers
 
-The `Int`, `Float`, and `Double` types have many common properties and methods.
-But some properties are methods are not shared by all of these types.
+The `Int`, `Float`, and `Double` types have some common properties and methods.
+But some are not shared by all of these types.
 
-Number properties include the following:
+Global numeric constants include:
+
+| Name     | Description             |
+| -------- | ----------------------- |
+| `M_E`    | Double value of e       |
+| `M_PI`   | Double value of pi      |
+| `M_PI_2` | Double value of half pi |
+
+Static number properties include the following:
 
 | Property                  | Description                               |
 | ------------------------- | ----------------------------------------- |
