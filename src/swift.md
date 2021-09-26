@@ -730,7 +730,17 @@ let sorted = scoreDict.sorted(by: {$0.value > $1.value}); // descending
 ### Tuples
 
 To define a tuple type, provide a list of elements types in parentheses.
-For example, `(Bool, Int, String)`.
+These can be named or unnamed.
+
+```swift
+typealias MyUnnamedTuple = (Bool, Int, String)
+let t1: MyUnnamedTuple = (true, 19, "Mark")
+print(t1.1) // 19
+
+typealias MyNamedTuple = (happy: Bool, score: Int, name: String)
+let t2: MyNamedTuple = (happy: true, score: 19, name: "Mark")
+print(t2.score) // 19
+```
 
 ## Variables
 
