@@ -498,19 +498,19 @@ for (index, score) in scores.enumerated() {
 
 | Method                                                    | Description                                                                                |
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `allSatisfy((Element) -> Bool) -> Bool`                   | determines if all elements match predicate                                                 |
+| `allSatisfy((Element) -> Bool) -> Bool`                   | determines if every element satisfies predicate; like JS `every`                           |
 | `append(Element)`                                         | adds new element at end                                                                    |
 | `append(contentsOf: S)`                                   | adds elements in `S` at end                                                                |
 | `compactMap<T>((Element) -> T) -> [T]`                    | returns Array of non-nil values returned by function                                       |
 | `contains(Element) -> Bool`                               | determines if an element is a member                                                       |
-| `contains(where: (Element) -> Bool) -> Bool`              | determines if any element matches a predicate                                              |
+| `contains(where: (Element) -> Bool) -> Bool`              | determines if some element satisfies predicate; like JS `some`                             |
 | `drop(while: (Element) -> Bool) -> ArraySlice<Element>`   | returns subsequence of elements after those at beginning that match predicate              |
 | `dropFirst(Int) -> ArraySlice<Element>`                   | returns subsequence of elements after first n                                              |
 | `dropLast(Int) -> ArraySlice<Element>`                    | returns subsequence of elements before last n                                              |
 | `enumerated(t) -> EnumeratedSequence`                     | returns subsequence of (n, x) pairs where n is an index and x is the element at that index |
-| `first(where: (Element) -> Bool) -> Element?`             | returns first element that matches predicate                                               |
+| `first(where: (Element) -> Bool) -> Element?`             | returns first element that satisfies predicate                                             |
 | `firstIndex(of: Element) -> Int?`                         | returns index of first element matching given element                                      |
-| `firstIndex(where: (Element) -> Bool) -> Int?`            | returns index of first element that matches predicate                                      |
+| `firstIndex(where: (Element) -> Bool) -> Int?`            | returns index of first element that satisfies predicate                                    |
 | `flatMap<T>((Element) -> T) -> [T]`                       | like `map`, but concatenates results                                                       |
 | `forEach((Element) -> Void)`                              | passes each element to given function                                                      |
 | `last(where: (Element) -> Bool) -> Element?`              | returns last element that matches a predicate                                              |
@@ -600,19 +600,21 @@ The `==` operator can be used to determine if two sets contain the same elements
 
 `Set` methods include, but are not limited to the following:
 
-| Method                                 | Description                                                            |
-| -------------------------------------- | ---------------------------------------------------------------------- |
-| `contains(Element) -> Bool`            | determines if an element is a member                                   |
-| `insert(element)`                      | adds an element                                                        |
-| `intersection(otherSet) -> Set`        | returns new `Set` that is intersection of receiver with another        |
-| `isDisjoint(with: otherSet) -> Bool`   | true if receiver has no elements in common with `otherSet`             |
-| `isStrictSuperset(of: seq) -> Bool`    | like `isSuperset`, but `false` when equal                              |
-| `isSubset(of: seq) -> Bool`            | determines if receiver is a subset of a sequence                       |
-| `isSuperset(of: seq) -> Bool`          | determines if receiver is a superset of a sequence                     |
-| `remove(element)`                      | deletes an element                                                     |
-| `subtracting(otherSet) -> Set`         | returns new `Set` containing elements in receiver not also in another  |
-| `symmetricDifference(otherSet) -> Set` | returns new `Set` containing elements in either `Set`, but not in both |
-| `union(otherSet) -> Set`               | returns new `Set` that is union of receiver with another               |
+| Method                                       | Description                                                            |
+| -------------------------------------------- | ---------------------------------------------------------------------- |
+| `allSatisfy((Element) -> Bool) -> Bool`      | determines if every element satisfies predicate; like JS `every`       |
+| `contains(Element) -> Bool`                  | determines if an element is a member                                   |
+| `contains(where: (Element) -> Bool) -> Bool` | determines if some element satisfies predicate; like JS `some`         |
+| `insert(element)`                            | adds an element                                                        |
+| `intersection(otherSet) -> Set`              | returns new `Set` that is intersection of receiver with another        |
+| `isDisjoint(with: otherSet) -> Bool`         | true if receiver has no elements in common with `otherSet`             |
+| `isStrictSuperset(of: seq) -> Bool`          | like `isSuperset`, but `false` when equal                              |
+| `isSubset(of: seq) -> Bool`                  | determines if receiver is a subset of a sequence                       |
+| `isSuperset(of: seq) -> Bool`                | determines if receiver is a superset of a sequence                     |
+| `remove(element)`                            | deletes an element                                                     |
+| `subtracting(otherSet) -> Set`               | returns new `Set` containing elements in receiver not also in another  |
+| `symmetricDifference(otherSet) -> Set`       | returns new `Set` containing elements in either `Set`, but not in both |
+| `union(otherSet) -> Set`                     | returns new `Set` that is union of receiver with another               |
 
 ### Dictionaries
 
@@ -683,18 +685,30 @@ for color in fruitColors.values { // can add .sorted()
 
 `Dictionary` methods include, but are not limited to the following:
 
-| Method                                             | Description                                                      |
-| -------------------------------------------------- | ---------------------------------------------------------------- |
-| `filter((Element) -> Bool) -> Bool) -> Dictionary` | returns new `Dictionary` containing pairs that satisfy predicate |
-| `removeAll()`                                      | removes all pairs                                                |
-| `removeValue(forKey: key) -> prevValue`            | removes pair with given key and returns previous value or `nil`  |
-| `updateValue(newValue, forKey: key) -> prevValue`  | sets value of given key and returns previous value or `nil`      |
+| Method                                                | Description                                                                     |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `allSatisfy((Element) -> Bool) -> Bool`               | determines if every element satisfies a predicate; like JS `every`              |
+| `contains(where: (Element) -> Bool) -> Bool`          | determines if some element satisfies a predicate; like JS `some`                |
+| `filter((Element) -> Bool) -> Bool) -> Dictionary`    | returns new `Dictionary` containing pairs that satisfy predicate                |
+| `forEach((Element)) -> Void)`                         | alternate way to iterate over pairs; elements have `key` and `value` properties |
+| `map<T>((Element) -> T) -> [T]`                       | returns `Array` of values computed from elements                                |
+| `mapValues((Value) -> newValue) -> Dictionary`        | returns new `Dictionary` with same keys but transformed values                  |
+| `removeAll()`                                         | removes all pairs                                                               |
+| `removeValue(forKey: key) -> prevValue`               | removes pair with given key and returns previous value or `nil`                 |
+| `sorted(by: (Element, Element) -> Bool) => [Element]` | returns `Array` of elements sorted using a comparator function                  |
+| `updateValue(newValue, forKey: key) -> prevValue`     | sets value of given key and returns previous value or `nil`                     |
 
 Here are examples of using some of these methods.
 
 ```swift
-// Get fruit elements where the color is short.
-let shortColors = fruitColors.filter({$1.count <= 3})
+let scoreDict = ["Mark": 19, "Tami": 20, "Amanda": 18, "Jeremy": 17]
+let allOdd = scoreDict.allSatisfy({$0.value % 2 == 1}) // false
+let someOdd = scoreDict.contains(where: {$0.value % 2 == 1}) // true
+let odds = scoreDict.filter({$0.value % 2 == 1}) // includes Mark & Jeremy elements
+let upperNames = scoreDict.map({$0.key.uppercased()}) // array of uppercase names
+let doubledScoresDict = scoreDict.mapValues({$0 * 2}) // scoreDict w/ doubled scores
+//scoreDict.removeValue(forKey: "Mark")
+let sorted = scoreDict.sorted(by: {$0.value > $1.value}); // descending
 ```
 
 ### Tuples
