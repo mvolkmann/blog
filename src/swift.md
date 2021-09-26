@@ -103,6 +103,167 @@ Multi-line comments are delimited by `/*` and `*/`.
 Multi-line comments can be nested which makes it easy to
 comment out blocks of code that contain multi-line comments.
 
+## Protocols
+
+A protocol is like an interface in other programming languages.
+It describes a set of method signatures and properties.
+Properties can be constant (`let`) or variable (`var`).
+
+Examples of built-in protocols include `Collection`, `Comparable`,
+`Equatable`, `Hashable`, `Identifiable`, `Numeric`, and `Sequence`.
+
+## Functions
+
+Functions are defined using the `func` keyword,
+followed by the function name, the parameter list in parentheses,
+and an optional return type preceded by `->`.
+The parentheses are required even for functions that have no parameters.
+
+```swift
+func add(n1: Int, n2: Int) -> Int {
+    return n1 * n2
+}
+print(add(2, 3)) // 5
+```
+
+If the body of the function is a single expression,
+the `return` keyword` is not required to return its value.
+The previous function can rewritten as follows:
+
+```swift
+func add(n1: Int, n2: Int) -> Int {
+    n1 * n2
+}
+print(add(2, 3)) // 5
+```
+
+If the return type can be inferred, the return type can be omitted.
+The previous function can rewritten as follows:
+
+```swift
+func add(n1: Int, n2: Int) {
+    n1 * n2
+}
+print(add(2, 3)) // 5
+```
+
+When the return type of a function cannot be inferred
+and no return type is specified, it defaults to `Void`
+which is an empty tuple (`()`).
+
+Parameters must have a name and type.
+They can also have an "argument label"
+that is the name callers must use when providing a value.
+The argument label defaults to the parameter name.
+Typically argument labels are omitted
+and callers use the parameter names.
+
+A parameter can specify a default value by including an equal sign (`=`)
+followed by a value after the type.
+Doing so makes the corresponding argument optional.
+All parameters with default values must
+follow those that do not have a default value.
+
+Calls to a function must provided all the required arguments.
+Each argument is specified by the argument label, a colon, and a value.
+These must appear in the same orders as the corresponding parameters.
+The rationale for this is that it can make some calls more expressive,
+almost like sentences.
+It is useful to think of the argument labels
+as being part of the function name.
+
+When an argument label of `_` is specified,
+the function must be called with only a value for that parameter.
+Otherwise calls must include the argument label.
+A function can have a mixture of parameters with argument labels
+and parameters with none (indicated by `_`).
+
+To call a function, specify the function name
+followed by arguments in parentheses.
+The parentheses are required even when not passing any arguments.
+
+```swift
+func greet() {
+    print('Hello, World!')
+}
+greet() // outputs Hello, World!
+```
+
+Anonymous functions can be used at the values of variables and arguments.
+They are written with the following syntax:
+`{ (parameter-list) -> return-type in statements }`.
+The return type can be omitted when it can be inferred.
+
+The following code defines and calls several anonymous functions.
+
+```swift
+// This function has no parameters.
+let printTime = {
+    let date = Date() // now
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "M/d/yyyy"
+    print(dateFormatter.string(from: date))
+}
+printTime()
+
+// This function specifies all the types.
+let product = {(a: Double, b: Double) -> Double in a * b}
+print(product(2, 3))
+
+// This function omits the return type because it can be inferred.
+let product2 = {(a: Double, b: Double) in a * b}
+print(product2(2, 3))
+
+// This function has parameters with unspecified types.
+// It does not compile because the * operator cannot be applied to all types.
+//let product3 = {a, b in a * b}
+//print(product3(2, 3))
+// This is a very contrived example since
+// "print(2 * 3)" would do the same thing.
+print({$0 * $1}(2, 3))
+```
+
+A "variadic" parameter accepts multiple values of the same type.
+The parameter value will be a constant array of values.
+
+```swift
+func displaySum(label: String, numbers: Int...) {
+    let sum = numbers.sum();
+    print("\(label) = \(sum)")
+}
+```
+
+Function names can be overloaded based on their parameter types.
+
+To return multiple values, return a tuple
+by returning a list of values inside parentheses.
+
+```swift
+TODO: Write a function that takes a color and returns a tuple
+TODO: containing the amounts of red, green, and blue in the color.
+```
+
+By default, parameters cannot be modified in function bodies.
+Adding the keyword `inout` before their type changes this.
+Modifying the values of these parameters changes
+the value of the corresponding argument in the caller.
+This only works if the value passed in is a variable (`var`)
+rather than a constant (`let`).
+This seems like a feature to avoid!
+
+The type of a function is describe by its parameter types and return type.
+For example, the type of the `displaySum` function above is
+`(String, Int) -> Void`.
+Function types can be used for variable, parameter, and return types.
+This means that compatible functions can be assigned variables,
+passed to functions, and returned from functions.
+
+Functions can defined in the bodies of other functions
+to scope their usage.
+Otherwise they are global and can be called from anywhere.
+Nested functions can be returned by their enclosing function
+to allow them to be called from outside.
+
 ## Built-in Primitive Types
 
 | Type          | Description                                                  |
@@ -131,6 +292,11 @@ let price = 2.59
 let taxRate = 0.8
 print("item \(item) costs \(price * (1 + taxRate))")
 ```
+
+`String` methods include, but are not limited to the following:
+
+| Method | Description |
+| ------ | ----------- |
 
 ### Ranges
 
@@ -166,10 +332,34 @@ for n in r {
 | `Set`        | unordered collection of values with the same type and no duplicates                               |
 | tuple        | fixed-length, ordered collection of values that have type that can differ                         |
 
-When a variable is initialized to a collection,
+When a variable is set to a collection,
 the elements in the collection can be modified.
 However, when a constant is initialized to a collection,
 the elements in the collection cannot be modified.
+
+The class hierarchy of the built-in collections,
+including the protocols they implement, is:
+
+- `Sequence` protocol
+  - `Collection` protocol
+    - `Dictionary` struct
+    - `Range` struct
+    - `Set` struct
+    - `Slice` struct
+    - `MutableCollection` protocol
+      - `Array` struct
+
+The `Sequence` protocol defines operations for collections that
+"provide sequential, iterated access to their elements".
+Iterating can be destructive to the elements.
+
+The `Collection` protocol defines operations for collections that
+"can be traversed multiple times, nondestructively,
+and accessed by an indexed subscript".
+
+The `MutableCollection` protocol defines operations that
+change the values of elements.
+Methods include `reverse`, `shuffle`, and `sort`.
 
 ### Arrays
 
@@ -330,8 +520,6 @@ The `==` operator can be used to determine if two sets contain the same elements
 | `count`    | number of current elements                                        |
 | `isEmpty`  | `Bool` value indicating whether `count` is zero                   |
 
-TODO: Are Arrays, Sets, and tuples all kinds of "sequences"?
-
 `Set` methods include, but are not limited to the following:
 
 | Method                                 | Description                                                            |
@@ -426,168 +614,13 @@ for name in names {
 }
 ```
 
-## Functions
+## Structs
 
-Functions are defined using the `func` keyword,
-followed by the function name, the parameter list in parentheses,
-and an optional return type preceded by `->`.
-The parentheses are required even for functions that have no parameters.
+TODO: Add this section.
 
-```swift
-func add(n1: Int, n2: Int) -> Int {
-    return n1 * n2
-}
-print(add(2, 3)) // 5
-```
+## Classes
 
-If the body of the function is a single expression,
-the `return` keyword` is not required to return its value.
-The previous function can rewritten as follows:
-
-```swift
-func add(n1: Int, n2: Int) -> Int {
-    n1 * n2
-}
-print(add(2, 3)) // 5
-```
-
-If the return type can be inferred, the return type can be omitted.
-The previous function can rewritten as follows:
-
-```swift
-func add(n1: Int, n2: Int) {
-    n1 * n2
-}
-print(add(2, 3)) // 5
-```
-
-When the return type of a function cannot be inferred
-and no return type is specified, it defaults to `Void`
-which is an empty tuple (`()`).
-
-Parameters must have a name and type.
-They can also have an "argument label"
-that is the name callers must use when providing a value.
-The argument label defaults to the parameter name.
-Typically argument labels are omitted
-and callers use the parameter names.
-
-A parameter can specify a default value by including an equal sign (`=`)
-followed by a value after the type.
-Doing so makes the corresponding argument optional.
-All parameters with default values must
-follow those that do not have a default value.
-
-Calls to a function must provided all the required arguments.
-Each argument is specified by the argument label, a colon, and a value.
-These must appear in the same orders as the corresponding parameters.
-The rationale for this is that it can make some calls more expressive,
-almost like sentences.
-It is useful to think of the argument labels
-as being part of the function name.
-
-When an argument label of `_` is specified,
-the function must be called with only a value for that parameter.
-Otherwise calls must include the argument label.
-A function can have a mixture of parameters with argument labels
-and parameters with none (indicated by `_`).
-
-To call a function, specify the function name
-followed by arguments in parentheses.
-The parentheses are required even when not passing any arguments.
-
-```swift
-func greet() {
-    print('Hello, World!')
-}
-greet() // outputs Hello, World!
-```
-
-Anonymous functions can be used at the values of variables and arguments.
-They are written with the following syntax:
-`{ (parameter-list) -> return-type in statements }`.
-The return type can be omitted when it can be inferred.
-
-The following code defines and calls several anonymous functions.
-
-```swift
-// This function has no parameters.
-let printTime = {
-    let date = Date() // now
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "M/d/yyyy"
-    print(dateFormatter.string(from: date))
-}
-printTime()
-
-// This function specifies all the types.
-let product = {(a: Double, b: Double) -> Double in a * b}
-print(product(2, 3))
-
-// This function omits the return type because it can be inferred.
-let product2 = {(a: Double, b: Double) in a * b}
-print(product2(2, 3))
-
-// This function has parameters with unspecified types.
-// It does not compile because the * operator cannot be applied to all types.
-//let product3 = {a, b in a * b}
-//print(product3(2, 3))
-// This is a very contrived example since
-// "print(2 * 3)" would do the same thing.
-print({$0 * $1}(2, 3))
-```
-
-A "variadic" parameter accepts multiple values of the same type.
-The parameter value will be a constant array of values.
-
-```swift
-func displaySum(label: String, numbers: Int...) {
-    let sum = numbers.sum();
-    print("\(label) = \(sum)")
-}
-```
-
-Function names can be overloaded based on their parameter types.
-
-To return multiple values, return a tuple
-by returning a list of values inside parentheses.
-
-```swift
-TODO: Write a function that takes a color and returns a tuple
-TODO: containing the amounts of red, green, and blue in the color.
-```
-
-By default, parameters cannot be modified in function bodies.
-Adding the keyword `inout` before their type changes this.
-Modifying the values of these parameters changes
-the value of the corresponding argument in the caller.
-This only works if the value passed in is a variable (`var`)
-rather than a constant (`let`).
-This seems like a feature to avoid!
-
-The type of a function is describe by its parameter types and return type.
-For example, the type of the `displaySum` function above is
-`(String, Int) -> Void`.
-Function types can be used for variable, parameter, and return types.
-This means that compatible functions can be assigned variables,
-passed to functions, and returned from functions.
-
-Functions can defined in the bodies of other functions
-to scope their usage.
-Otherwise they are global and can be called from anywhere.
-Nested functions can be returned by their enclosing function
-to allow them to be called from outside.
-
-## Protocols
-
-A protocol is like an interface in other programming languages.
-It describes a set of method signatures.
-TODO: Can it also describe constants and fields?
-
-- `Collection`
-- `CustomDebugStringConvertible`
-- `CustomReflectable`
-- `Equatable`
+TODO: Add this section.
 
 ## Tools
 
@@ -604,6 +637,5 @@ enter `swiftformat *.swift`.
 
 ### Xcode
 
-Xcode 13 (still in beta as of 8/8/21) adds support for Vim key bindings.
-To enable Vim key bindings, select
-Preferences ... Text Editing ... Editing ... Enable Vim key bindings.
+Xcode 13 adds support for Vim key bindings.
+To enable this, select Editor ... Vim Mode.
