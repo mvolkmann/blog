@@ -284,6 +284,8 @@ TODO: See https://docs.swift.org/swift-book/LanguageGuide/Closures.html
 | `Range`       | interval from inclusive lower bound to exclusive upper bound |
 | `ClosedRange` | interval from inclusive lower bound to inclusive upper bound |
 
+TODO: List some properties and methods of number types.
+
 ### Characters and Strings
 
 Literal `Character` and single-line `String` values
@@ -613,29 +615,75 @@ The `==` operator can be used to determine if two sets contain the same elements
 
 ### Dictionaries
 
-Dictionaries can be created by listing key/value pairs in square brackets,
-separated by commas. Keys and values are separated by colons.
+Dictionaries are hash tables that hold key/value pairs.
+They can be created by listing key/value pairs in square brackets,
+separated by commas.
+Keys and values are separated by colons.
+While typically the keys are strings,
+they can be any type that implements the `Hashable` protocol.
 
 ```swift
-// The type of fruitColors is inferred to be [String : String].
-var fruitColors = ["apple": "red", "banana": "yellow", "orange": "orange"];
-
 // When the type can't be inferred, it must be specified.
 // The syntax for an empty Dictionary includes a colon.
-var pairs: [Int : String] = [:]
-var pairs: Dictionary<Int, String> = [:] //TODO: Correct?
+var pairs: [Int : String] = [:] // uses short form of the type
+
+var pairs: Dictionary<Int, String> = [:] // uses long form of the type
+
+// The type of fruitColors is inferred to be [String : String].
+var fruitColors = ["apple": "red", "banana": "yellow", "orange": "orange"];
 ```
 
-To access the value of a given key, use the following syntax:
+To get the value of a given key:
 
 ```swift
 let color = fruitColors["banana"]; // "yellow"
 ```
 
-Dictionary methods include, but are not limited to the following:
+To delete a key pair:
 
-| Method | Description |
-| ------ | ----------- |
+```swift
+fruitColors["banana"] = nil
+fruitColors.removeValue(forKey: "banana")
+```
+
+To iterate over the keys and values in a `Dictionary`, use a `for`/`in` loop.
+
+```swift
+for (name, color) in fruitColors {
+    print("\(name) is \(color)")
+}
+```
+
+To iterate over the keys in a `Dictionary`, use a `for`/`in` loop.
+
+```swift
+for name in fruitColors.keys { // can add .sorted()
+    print("name is \(name)")
+}
+```
+
+To iterate over the values in a `Dictionary`, use a `for`/`in` loop.
+
+```swift
+for color in fruitColors.values { // can add .sorted()
+    print("color is \(color)")
+}
+```
+
+`Dictionary` properties include the following:
+
+| Property   | Description                                                    |
+| ---------- | -------------------------------------------------------------- |
+| `capacity` | number of pairs that can be held without allocating more space |
+| `count`    | number of current elements                                     |
+| `isEmpty`  | `Bool` value indicating whether `count` is zero                |
+
+`Dictionary` methods include, but are not limited to the following:
+
+| Method                                            | Description                                                     |
+| ------------------------------------------------- | --------------------------------------------------------------- |
+| `removeValue(forKey: key) -> prevValue`           | removes pair with given key and returns previous value or `nil` |
+| `updateValue(newValue, forKey: key) -> prevValue` | sets value of given key and returns previous value or `nil`     |
 
 ### Tuples
 
