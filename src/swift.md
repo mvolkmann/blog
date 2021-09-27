@@ -60,7 +60,7 @@ iPhone, iPad, Mac, Apple Watch, and Apple TV.
 
 To experiment with Swift:
 
-- select File ... New Playground...
+- select File ... New ... Playground...
 - select a template such as "Blank" and press "Next"
 - enter a name for the playground
 - select the directory where it will be saved
@@ -102,6 +102,29 @@ Single-line comments begin with `//`.
 Multi-line comments are delimited by `/*` and `*/`.
 Multi-line comments can be nested which makes it easy to
 comment out blocks of code that contain multi-line comments.
+
+## Operators
+
+| Category       | Operators                                            |
+| -------------- | ---------------------------------------------------- |
+| equal          | `==` (equal), `!=` (not equal)                       |
+| identical      | `===` (identical), `!==` (not identical)             |
+| relational     | `<`, `<=`, `>=`, `>`                                 |
+| pattern match  | `~=`                                                 |
+| logical        | `&&` (and), `\|\|`, (or), `!` (not)                  |
+| ternary        | condition `?` true-value `:` false-value             |
+| mathematical   | `+`, `-`, `*`, `/`, `%` (mod)                        |
+| assignment     | `=`, `+=`, `-=`, `*=`, `/=`                          |
+| concatenation  | `+`                                                  |
+| unary sign     | `+` (positive), `-` (negative)                       |
+| closed range   | `a...b` (inclusive upper), `a..<b` (exclusive upper) |
+| open range     | `a...`, `...b`, `..<b`                               |
+| nil-coalescing | a `??` b (value is a if not nil and b otherwise)     |
+| bit shift      | `<<`, `>>`, `&<<`, `&>>`                             |
+| bitwise        | `&` (and), `\|` (or), `^` (xor)                      |
+| types          | `is` (type check), `as`, `as?`, `as!` (type cast)    |
+
+The nil coalescing operator in `a ?? b` is shorthand for `a != nil ? a! : b`.
 
 ## Protocols
 
