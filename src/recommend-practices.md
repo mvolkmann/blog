@@ -43,6 +43,7 @@ When addressing a GitHub issue, if it cannot be fixed yet
 because there are questions that must be answered,
 add the questions in issue comments.
 Also edit the the issue title to begin with "Q: ".
+If you know who needs to answer the question, begin with "Q for {name}: ".
 This enables the team to see at a glance all the issues
 that are blocked due to questions.
 

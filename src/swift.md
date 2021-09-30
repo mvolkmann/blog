@@ -34,6 +34,8 @@ Key facts about Swift include the following:
 ## Resources
 
 - main site - {% aTargetBlank "https://swift.org", "https://swift.org" %}
+- {% aTargetBlank "https://docs.swift.org/swift-book/",
+  "The Swift Programming Language Book" %}
 - {% aTargetBlank "https://cs193p.sites.stanford.edu",
   "Stanford CS193p - Developing Apps for iOS" %} course by Paul Hegarty - free
 - {% aTargetBlank "https://www.hackingwithswift.com/100", "100 Days of Swift" %}
@@ -889,23 +891,68 @@ in a block surrounded by curly braces.
 
 ### Conditional Logic
 
-Conditional logic is implemented with the `if` statement.
+Conditional logic is implemented with the `if` statement
+that can optionally include `else if` and `else` parts.
+Curly braces are required around all code blocks,
+even if they only contain a single statement.
 
 ```swift
 if score1 == 21, score2 <= 19 { // same as score1 == 21 && score2 <= 19
   print('Player 1 has won by at least 2.`)
+} else if score1 > score2 {
+  print('Player 1 is leading.`)
+} else {
+  print('Player 1 is not leading.`)
 }
 ```
 
+To compare an expression against multiple values, use a `switch` statement.
+The expression can have any kind of value including collections such as tuples.
+Unlike in many other languages, after executing the statements in the
+first matching `case` execution does not fall through to the next `case`.
+No `break` statement is needed to prevent this.
+
+```swift
+switch computeScore(player1) {
+    case 21:
+        print('Winner!');
+    case 18...20:
+        print('Very good hand.')
+    default:
+        print('Will likely lose.')
+}
+```
+
+If the `default` case is omitted, there must be a `case`
+that matches every possible value of the expression
+(i.e. it must be exhaustive).
+
 ### Iteration
 
-To iterate over all the elements of an array, use a for-in loop.
+To iterate over all the elements of a sequence (such as an array),
+use a for-in loop.
 
 ```swift
 let names = ["Maisey", "Ramsay", "Oscar", "Comet"]
-for name in names {
+for name in names { // variable name does not need to be declared
     print(name)
 }
+```
+
+To iterate while a condition is true, use a `while` loop which is top-tested.
+
+```swift
+while condition {
+    statements
+}
+```
+
+For a bottom-tested loop that always runs at least once, use a `repeat` loop.
+
+```swift
+repeat {
+    statements
+} while condition
 ```
 
 ## Structs
@@ -914,7 +961,36 @@ TODO: Add this section.
 
 ## Classes
 
-TODO: Add this section.
+To define a class, use the `class` keyword.
+A class can have:
+
+- any number of initializers (named `init`)
+- class-level properties declared with `static`
+- class-level methods declared with `static`
+- instance-level properties
+- instance-level methods
+- a superclass
+
+TODO: Can properties be private or protected?
+
+```swift
+class Person {
+    static var count = 0
+
+    var name: String
+    var age: Int
+
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+        count++
+    }
+
+    func describe() {
+        return "\(name) is \(age) years old."
+    }
+}
+TODO: Add more to this section.
 
 ## Tools
 
@@ -959,3 +1035,4 @@ The things that annoy me most about Swift are:
 
   The syntax for trailing closures is surprising and unique to Swift.
   It is even more surprising if there is more than one.
+```

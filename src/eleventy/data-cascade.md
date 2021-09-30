@@ -14,11 +14,11 @@ The places where variables can be defined,
 from highest to lowest precedence, include:
 
 - `{template-name}.{markup-extension}` in front matter
-- front matter in layouts used by the template
 - `{template-name}.11tydata.js` file in same directory
 - `{template-name}.11tydata.json` file in same directory
 - `{dir-name}.11tydata.js` file in same directory
 - `{dir-name}.11tydata.json` file in same directory
+- front matter in layouts used by the template
 - `{dir-name}.11tydata.js` files in ancestor directories
 - `{dir-name}.11tydata.json` files in ancestor directories
 - `{data-name}.js` file in the `_data` directory
