@@ -574,6 +574,18 @@ The `MutableCollection` protocol defines operations that
 change the values of elements.
 Methods include `reverse`, `shuffle`, and `sort`.
 
+From "The Swift Programming Language":
+
+> Collections defined by the standard library
+> like arrays, dictionaries, and strings
+> use an optimization to reduce the performance cost of copying.
+> Instead of making a copy immediately, these collections share the memory
+> where the elements are stored between the original instance and any copies.
+> If one of the copies of the collection is modified,
+> the elements are copied just before the modification.
+> The behavior you see in your code is always
+> as if a copy took place immediately.
+
 ### Arrays
 
 Arrays can be created by listing elements in square brackets,
@@ -957,9 +969,172 @@ repeat {
 
 ## Structs
 
-TODO: Add this section.
+Structs defined named groups of properties and methods.
+They can conform to protocols which are
+similar to interfaces in other languages.
+
+Here is an example of a struct definition.
+
+```swift
+struct Dog {
+    var breed: String
+    var name: String
+    var age: Int
+}
+
+// Create an instance using the provided memberwise initializer.
+var dog = Dog(breed: "Whippet", name: "Comet", age: 1)
+print("\(dog.name) is a \(dog.breed)") // Comet is a Whippet
+```
+
+Structs are value types. This means that assigning one to a variable
+creates a copy rather than assigning a reference to the same instance.
+
+````swift
+var dog2 = dog // dog2 is a copy of dog.
+dog.age = 2 // This change doesn't affect dog2.
+print(dog.age, dog2.age) // 2 1
+```
+
+Properties defined with the `var` keyword can have their value changed
+only if the instance is assigned to a `var`.
+If the instance is assigned to a `let` then its properties cannot be changed.
+
+Properties defined with the `let` keyword must be given a value
+when an instance is initialized and cannot be changed after that.
+
+A computed property is defined with a `get` function
+that computes the value each time it is referenced.
+It can optionally define a `set` function
+whose purpose is the change the values of properties used to
+compute the value so the result will be a given value.
+Typically it doesn't make sense to define
+the `set` function for a computed property.
+
+```swift
+import UIKit
+
+struct Dog {
+    var breed: String
+    var name: String
+    var age: Int
+}
+
+var dog = Dog(breed: "Whippet", name: "Comet", age: 1)
+print("\(dog.name) is a \(dog.breed)")
+
+var dog2 = dog
+dog.age = 2
+print(dog.age, dog2.age) // 2 1
+
+struct Point {
+    // This is a "type property".
+    // Other languages refer to this as a "class property".
+    // This is used to keep track of the largest y value
+    // ever assigned to any instances of a Point struct.
+    static var maxY = -Double.greatestFiniteMagnitude
+
+    // This is a basic property.
+    var x: Double
+
+    // This property has a property observer.
+    var y: Double {
+        willSet {
+            print("y is about to change to \(newValue)")
+        }
+        didSet {
+            Point.maxY = Double.maximum(Point.maxY, y)
+            print("y changed from \(oldValue) to \(y)")
+        }
+    }
+
+    // A "memberwise initializer" is automatically supplied.
+    // Writing this yourself enables doing more
+    // than just assigning property values.
+    init(x: Double, y: Double) {
+        self.x = x
+        self.y = y
+        Point.maxY = Double.maximum(Point.maxY, y)
+    }
+
+    // This is a computed property.
+    var distanceFromOrigin: Double {
+        get {
+            //return (x*x + y*y).squareRoot()
+            // If the body is a single expression, return can be omitted.
+            (x*x + y*y).squareRoot()
+        }
+        // This moves the point along its current angle from the origin
+        // to the new distance.
+        /*
+        set(distance) {
+            let angle = atan(y / x)
+            x = distance * cos(angle)
+            y = distance * sin(angle)
+        }
+        */
+        // If no name is specified for the new value, it defaults to newValue.
+        set {
+            let angle = atan(y / x)
+            x = newValue * cos(angle)
+            y = newValue * sin(angle)
+        }
+    }
+
+    // This is another computed property that has no set function.
+    // In this case the definition can be shortened.
+    var distanceFromOrigin2: Double {
+        (x*x + y*y).squareRoot()
+    }
+
+    // This is an instance method.
+    func log() {
+        print("(\(x), \(y))")
+    }
+
+    // This is a mutating instance method.
+    // In a class, var properties can be modified in instance methods.
+    // In a struct they cannot unless the method is declared to be "mutating".
+    // The underscores mean that this method can be called
+    // with raw values, not including argument labels.
+    mutating func translate(_ dx: Double, _ dy: Double) {
+        x += dx
+        y += dy
+        //translationCount++ // Why doesn't this work?
+    }
+}
+
+var pt = Point(x: 3, y: 4) // creates an instance
+print(pt.distanceFromOrigin) // invokes computed property get function; 5
+pt.distanceFromOrigin = 10 // invokes computed property set function
+pt.log() // invokes instance method; (6, 8)
+print(pt.distanceFromOrigin2) // invokes computed property; 10
+
+pt.y = 2 // invokes a property observer
+
+pt.log() // (6, 2)
+pt.translate(-4, 3)
+pt.log() // (2.0, 5.0)
+pt.translate(1, 2)
+print(Point.maxY) // 8
+let pt2 = Point(x: 0, y: 9) // creates a second instance
+print(Point.maxY) // 9
+```
+
+TODO: Add more here?
 
 ## Classes
+
+Classes are similar to structs in many ways,
+but can do things that structs cannot.
+
+- refer to instances by reference rather than making a copy
+- inherit properties and methods from another
+- use type casting to determine if an object is an instance at runtime
+- define a "deinitializer" to perform cleanup when an instance is destroyed
+
+Classes are reference types. This means that assigning one to a variable
+assigns a reference to the same instance rather than making a copy.
 
 To define a class, use the `class` keyword.
 A class can have:
@@ -1010,7 +1185,7 @@ enter `swiftformat *.swift`.
 Xcode 13 adds support for Vim key bindings.
 To enable this, select Editor ... Vim Mode.
 
-```
+````
 
 ```
 
