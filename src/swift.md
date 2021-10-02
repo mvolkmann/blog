@@ -1017,11 +1017,12 @@ import Foundation // needed to use functions like sin, cos, and atan
 struct Dog {
     var breed: String
     var name: String
-    var age: Int
+    var age = 0 // has a default value; type is inferred to be Int
 }
 
+//var dog = Dog(breed: "Whippet", name: "Comet") // uses default value for age
 var dog = Dog(breed: "Whippet", name: "Comet", age: 1)
-print("\(dog.name) is a \(dog.breed)")
+print("\(dog.name) is a \(dog.age) year old \(dog.breed)")
 
 var dog2 = dog
 dog.age = 2
@@ -1052,6 +1053,8 @@ struct Point {
     // Writing this yourself enables doing more
     // than just assigning property values.
     init(x: Double, y: Double) {
+        // self. is only needed here because there is a
+        // parameter name with the same name as the property being set.
         self.x = x
         self.y = y
         Point.maxY = Double.maximum(Point.maxY, y)
@@ -1196,8 +1199,8 @@ class Point2 {
 
 ## Initializers
 
-Structs and classes can define `init` methods
-that initialize ALL of their properties.
+Structs and classes can define `init` methods that initialize
+ALL of their properties that do not have default values.
 There can be more than one `init` method as long as each
 takes a different set of arguments and initializes all of the properties.
 
@@ -1206,6 +1209,9 @@ These must be labeled with the `convenience` keyword.
 It's not clear why Swift doesn't allow any `init` method to do this.
 Congratulations Swift for having what may be
 the longest keyword in any programming language!
+
+Deinitializers are methods named `deinit`
+that can perform cleanup when an instance is destroyed.
 
 ## Access Specifiers
 
