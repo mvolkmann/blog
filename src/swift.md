@@ -1057,8 +1057,15 @@ struct Point {
         Point.maxY = Double.maximum(Point.maxY, y)
     }
 
-    // This is a computed property.
+    // This is a basic computed property.
+    // Its value is computed by a function every time it is referenced.
     var distanceFromOrigin: Double {
+        (x*x + y*y).squareRoot()
+    }
+
+    // This is a computed property that uses the full syntax
+    // that supports defining "get" and "set" functions.
+    var distanceFromOrigin2: Double {
         get {
             //return (x*x + y*y).squareRoot()
             // If the body is a single expression, return can be omitted.
@@ -1081,12 +1088,6 @@ struct Point {
         }
     }
 
-    // This is another computed property that has no set function.
-    // In this case the definition can be shortened.
-    var distanceFromOrigin2: Double {
-        (x*x + y*y).squareRoot()
-    }
-
     // This is an instance method.
     func log() {
         print("(\(x), \(y))")
@@ -1100,7 +1101,6 @@ struct Point {
     mutating func translate(_ dx: Double, _ dy: Double) {
         x += dx
         y += dy
-        //translationCount++ // Why doesn't this work?
     }
 }
 
@@ -1146,25 +1146,56 @@ A class can have:
 - instance-level methods
 - a superclass
 
-TODO: Can properties be private or protected?
+Let's re-implement the "Point" struct as a class named "Point2".
 
 ```swift
-class Person {
-    static var count = 0
-
-    var name: String
-    var age: Int
-
-    init(name: String, age: Int) {
-        self.name = name
-        self.age = age
-        count++
+class Point2 {
+    static var maxY = -Double.greatestFiniteMagnitude
+    var x: Double
+    var y: Double {
+        willSet {
+            print("y is about to change to \(newValue)")
+        }
+        didSet {
+            Point2.maxY = Double.maximum(Point2.maxY, y)
+            print("y changed from \(oldValue) to \(y)")
+        }
     }
 
-    func describe() {
-        return "\(name) is \(age) years old."
+    init(x: Double, y: Double) {
+        self.x = x
+        self.y = y
+        Point2.maxY = Double.maximum(Point2.maxY, y)
+    }
+
+    var distanceFromOrigin: Double {
+        (x*x + y*y).squareRoot()
+    }
+
+    var distanceFromOrigin2: Double {
+        get {
+            (x*x + y*y).squareRoot()
+        }
+        set {
+            let angle = atan(y / x)
+            x = newValue * cos(angle)
+            y = newValue * sin(angle)
+        }
+    }
+
+    func log() {
+        print("(\(x), \(y))")
+    }
+
+    // Note that the "mutating" keyword was removed
+    // because that is only used on struct methods.
+    func translate(_ dx: Double, _ dy: Double) {
+        x += dx
+        y += dy
     }
 }
+```
+
 TODO: Add more to this section.
 
 ## Tools
