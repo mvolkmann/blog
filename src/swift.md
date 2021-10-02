@@ -1012,7 +1012,7 @@ Typically it doesn't make sense to define
 the `set` function for a computed property.
 
 ```swift
-import UIKit
+import Foundation // needed to use functions like sin, cos, and atan
 
 struct Dog {
     var breed: String
@@ -1121,8 +1121,6 @@ let pt2 = Point(x: 0, y: 9) // creates a second instance
 print(Point.maxY) // 9
 ```
 
-TODO: Add more here?
-
 ## Classes
 
 Classes are similar to structs in many ways,
@@ -1196,7 +1194,22 @@ class Point2 {
 }
 ```
 
-TODO: Add more to this section.
+## Initializers
+
+Structs and classes can define `init` methods
+that initialize ALL of their properties.
+There can be more than one `init` method as long as each
+takes a different set of arguments and initializes all of the properties.
+
+"Convenience initializers" are `init` methods that invoke another `init` method.
+These must be labeled with the `convenience` keyword.
+It's not clear why Swift doesn't allow any `init` method to do this.
+Congratulations Swift for having what may be
+the longest keyword in any programming language!
+
+## Access Specifiers
+
+Swift has too many of these!
 
 ## Tools
 
@@ -1215,10 +1228,6 @@ enter `swiftformat *.swift`.
 
 Xcode 13 adds support for Vim key bindings.
 To enable this, select Editor ... Vim Mode.
-
-````
-
-```
 
 ## Annoyances
 
@@ -1242,3 +1251,4 @@ The things that annoy me most about Swift are:
   The syntax for trailing closures is surprising and unique to Swift.
   It is even more surprising if there is more than one.
 ```
+````
