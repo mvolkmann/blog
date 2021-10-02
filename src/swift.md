@@ -536,6 +536,23 @@ for n in r {
 }
 ```
 
+## Enums
+
+An `enum` has a name and a list of possible values
+specified by `case` statements.
+
+```swift
+enum Color {
+    case red
+    case green
+    case blue
+}
+
+var c = Color.red
+```
+
+TODO: Add more detail on enums.
+
 ## Built-in Collection Types
 
 | Type         | Description                                                                                       |
@@ -895,6 +912,40 @@ score1 = 19 // initializes
 var score2 = 19 // only value; Int type is inferred
 ```
 
+## Optionals
+
+Variables must be assigned a value before they are accessed
+unless they have an optional type indicated by a `?` after the type name.
+This allows the value to be `nil`.
+
+```swift
+var message: String? // optional type
+
+// Tests for a value AND unwraps into another variable if not nil.
+if let msg = message {
+    print(msg) // doesn't print
+} else {
+    print("no message") // does print
+}
+
+// Print the message if it is set, otherwise do nothing.
+func printMessage(_ message: String?) {
+    guard let msg = message else { return }
+    print(msg)
+}
+
+message = "Hello, World!"
+// The ! operator does a "force unwrap" of an optional.
+// If the value is nil, the program crashes.
+// But here we test for nil before using the force unwrap.
+print(message == nil ? "no message" : message!) // "Hello, World!"
+printMessage(message) // "Hello, World!"
+
+message = nil
+print(message == nil ? "no message" : message!) // "no message"
+printMessage(message) // no output
+```
+
 ## Control Structures
 
 Swift does not require parentheses around conditions in control structures.
@@ -919,10 +970,13 @@ if score1 == 21, score2 <= 19 { // same as score1 == 21 && score2 <= 19
 ```
 
 To compare an expression against multiple values, use a `switch` statement.
-The expression can have any kind of value including collections such as tuples.
+The expression can have any kind of value
+including enums and collections such as tuples.
 Unlike in many other languages, after executing the statements in the
 first matching `case` execution does not fall through to the next `case`.
 No `break` statement is needed to prevent this.
+If falling through is desired, add a `fallthrough` statement
+at the end of a `case` block.
 
 ```swift
 switch computeScore(player1) {
@@ -938,6 +992,8 @@ switch computeScore(player1) {
 If the `default` case is omitted, there must be a `case`
 that matches every possible value of the expression
 (i.e. it must be exhaustive).
+If the value of the `switch` expression is an `enum`,
+there must be a `case` that matches each value of the `enum`.
 
 ### Iteration
 
@@ -981,11 +1037,20 @@ struct Dog {
     var name: String
     var age: Int
 }
+```
 
+A default memberwise initializer is provided for a structs and classes.
+This has arguments labels that match the property names
+and are in the order in which the properties are defined.
+
+```swift
 // Create an instance using the provided memberwise initializer.
 var dog = Dog(breed: "Whippet", name: "Comet", age: 1)
 print("\(dog.name) is a \(dog.breed)") // Comet is a Whippet
 ```
+
+If all of the properties are optional or have a default value,
+a default initializer that takes no arguments is provided.
 
 Structs are value types. This means that assigning one to a variable
 creates a copy rather than assigning a reference to the same instance.
@@ -1201,8 +1266,11 @@ class Point2 {
 
 Structs and classes can define `init` methods that initialize
 ALL of their properties that do not have default values.
-There can be more than one `init` method as long as each
-takes a different set of arguments and initializes all of the properties.
+There can be more than one `init` method as long as each has a
+different set of argument labels and initializes all of the properties.
+
+Just like with functions and other kinds of methods,
+using `_` for an argument label allows its value to be passed without a label.
 
 "Convenience initializers" are `init` methods that invoke another `init` method.
 These must be labeled with the `convenience` keyword.
@@ -1212,6 +1280,12 @@ the longest keyword in any programming language!
 
 Deinitializers are methods named `deinit`
 that can perform cleanup when an instance is destroyed.
+
+## Optional Properties
+
+Properties of structs and classes whose values are allowed to be `nil`
+should have a `?` at end of their type.
+Just like with optional variables, they must be unwrapped to access their value.
 
 ## Access Specifiers
 
