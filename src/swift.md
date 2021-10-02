@@ -922,6 +922,7 @@ This allows the value to be `nil`.
 var message: String? // optional type
 
 // Tests for a value AND unwraps into another variable if not nil.
+// It then executes a block of code depending on whether the value was nil.
 if let msg = message {
     print(msg) // doesn't print
 } else {
@@ -1039,9 +1040,17 @@ struct Dog {
 }
 ```
 
-A default memberwise initializer is provided for a structs and classes.
-This has arguments labels that match the property names
+In structs that do not define an initializer (`init` method),
+a default memberwise initializer is provided.
+This has argument labels that match the property names
 and are in the order in which the properties are defined.
+No default memberwise initializer is provided for classes.
+
+An instance of a struct or class is created by
+calling the struct name as a function,
+passing arguments required by an initializer.
+Note that unlike in many other languages,
+use a `new` keyword is not required.
 
 ```swift
 // Create an instance using the provided memberwise initializer.
@@ -1266,20 +1275,44 @@ class Point2 {
 
 Structs and classes can define `init` methods that initialize
 ALL of their properties that do not have default values.
+These are referred to as "designated initializers".
+Designated initializers for classes
+must also initialize all inherited properties.
+
+As seen earlier, structs provided a default initializer.
+Structs are not required to explicitly defining more.
+Classes do not provide a default initializer
+and at least one must be explicitly defined.
+
 There can be more than one `init` method as long as each has a
 different set of argument labels and initializes all of the properties.
+Classes typically only define one designated initializer.
+
+If a class inherits from another,
+its designated initializers must call one in its immediate superclass.
 
 Just like with functions and other kinds of methods,
 using `_` for an argument label allows its value to be passed without a label.
 
-"Convenience initializers" are `init` methods that invoke another `init` method.
+"Convenience initializers" are `init` methods that invoke another
+designated or convenience initializer in the same struct or class.
 These must be labeled with the `convenience` keyword.
-It's not clear why Swift doesn't allow any `init` method to do this.
+Why doesn't Swift allow any `init` method to do this?
 Congratulations Swift for having what may be
 the longest keyword in any programming language!
 
-Deinitializers are methods named `deinit`
-that can perform cleanup when an instance is destroyed.
+"Failable initializers" are `init?` methods that can return `nil`
+to prevent an instance from being created
+if the supplied arguments are deemed invalid.
+An optional value is returned when an instance is created
+using a failable initializer.
+As with any optional value, callers must
+test and unwrap the value in order to use it.
+
+Deinitializers are methods named `deinit`.
+If a struct or class defines this method,
+it will be called when any instance is destroyed.
+It is used to perform cleanup.
 
 ## Optional Properties
 
@@ -1287,9 +1320,20 @@ Properties of structs and classes whose values are allowed to be `nil`
 should have a `?` at end of their type.
 Just like with optional variables, they must be unwrapped to access their value.
 
-## Access Specifiers
+## Access Control
 
-Swift has too many of these!
+Swift supports many keywords for controlling access
+to values like functions, structs, classes, and
+and the properties and methods of structs and classes.
+These keywords appear at the beginning of declarations for these kinds of values.
+
+The access control keywords include:
+
+- `open`: access from anywhere; only for classes and class members
+- `public`: same as `open` except cannot be subclasses or overridden
+- `internal`: access from any source in in the same module (default level)
+- `fileprivate`: access from code in the same source file
+- `private`: access within enclosing declaration (such as a struct or class)
 
 ## Tools
 
