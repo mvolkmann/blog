@@ -1273,6 +1273,10 @@ class Point2 {
         }
     }
 
+    lazy var initialDistance: Double = {
+        (x*x + y*y).squareRoot()
+    }() // note that the function is being called
+
     func log() {
         print("(\(x), \(y))")
     }
