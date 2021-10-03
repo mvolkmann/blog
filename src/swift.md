@@ -1085,6 +1085,11 @@ compute the value so the result will be a given value.
 Typically it doesn't make sense to define
 the `set` function for a computed property.
 
+A lazy property is similar to a computed property,
+but its value is only computed the first time it is accessed.
+If must be declared with `var` and
+can be mutated after its initial value is computed.
+
 ```swift
 import Foundation // needed to use functions like sin, cos, and atan
 
@@ -1165,6 +1170,13 @@ struct Point {
         }
     }
 
+    // This is a lazy property.
+    // Its value is computed by a function only the first time it is referenced.
+    lazy var initialDistance: Double = {
+        print("computing lazy property")
+        return (x*x + y*y).squareRoot()
+    }() // note that the function is being called
+
     // This is an instance method.
     func log() {
         print("(\(x), \(y))")
@@ -1183,9 +1195,11 @@ struct Point {
 
 var pt = Point(x: 3, y: 4) // creates an instance
 print(pt.distanceFromOrigin) // invokes computed property get function; 5
+print("initial distance =", pt.initialDistance) // 5
 pt.distanceFromOrigin = 10 // invokes computed property set function
 pt.log() // invokes instance method; (6, 8)
 print(pt.distanceFromOrigin2) // invokes computed property; 10
+print("initial distance =", pt.initialDistance) // 5
 
 pt.y = 2 // invokes a property observer
 
@@ -1193,6 +1207,7 @@ pt.log() // (6, 2)
 pt.translate(-4, 3)
 pt.log() // (2.0, 5.0)
 pt.translate(1, 2)
+print("initial distance =", pt.initialDistance) // still 5
 print(Point.maxY) // 8
 let pt2 = Point(x: 0, y: 9) // creates a second instance
 print(Point.maxY) // 9
