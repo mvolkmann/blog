@@ -223,6 +223,7 @@ the values of variables and arguments.
 They are written with the following syntax:
 `{ (parameter-list) -> return-type in statements }`.
 The return type can be omitted when it can be inferred.
+Note the use of the `in` keyword to mark the beginning of the statements.
 
 The following code defines and calls several anonymous functions.
 
@@ -387,6 +388,8 @@ do {
     print("fail")
 }
 ```
+
+TODO: Add a section on error handling.
 
 Why is the `try` keyword necessary?
 Can a `do` block contain more than one use of the `try` keyword?
@@ -777,9 +780,9 @@ separated by commas.
 ```swift
 var scores = [2, 5] // type is inferred to be [Int]
 
-var numbers: [Int] = [] // can't infer type, so must specify
-
-var numbers: Array<Int> = [] // same as previous line
+var numbers: [Int] = [] // can't infer type, so must specify; uses short form
+var numbers: Array<Int> = [] // same as previous line; uses long form
+var numbers = [Int]() // same as previous lines
 
 var zeros = Array(repeating: 0, count: 5) // array containing 5 zeros
 ```
@@ -961,17 +964,25 @@ they can be any type that implements the `Hashable` protocol.
 // When the type can't be inferred, it must be specified.
 // The syntax for an empty Dictionary includes a colon.
 var pairs: [Int : String] = [:] // uses short form of the type
-
-var pairs: Dictionary<Int, String> = [:] // uses long form of the type
+var pairs: Dictionary<Int, String> = [:] // same as previous line; uses long form
+var pairs = [Int : String]() // same as previous lines
 
 // The type of fruitColors is inferred to be [String : String].
 var fruitColors = ["apple": "red", "banana": "yellow", "orange": "orange"];
 ```
 
-To get the value of a given key:
+To set the value of a given key, use the subscript operator `[]`
+and an assignment.
 
 ```swift
-let color = fruitColors["banana"]; // "yellow"
+fruitColors["strawberry"] = "red"
+```
+
+To get the value of a given key, use the subscript operator `[]`
+which returns an `Optional`:
+
+```swift
+let color = fruitColors["banana"]; // Optional("yellow")
 ```
 
 To delete a key pair:
@@ -1659,6 +1670,10 @@ The things that annoy me most about Swift are:
   But that is only allowed for argument labels
   that are specified to be an underscore.
   The common case should be the default.
+
+- `in` keyword
+
+  The need for the `in` keyword in closures seems odd.
 
 - Trailing closures
 
