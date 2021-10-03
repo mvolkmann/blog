@@ -428,6 +428,10 @@ Literal `Character` and single-line `String` values
 are both delimited by double-quotes.
 Multi-line `String` values are delimited by triple double-quotes.
 
+Strings are value types.
+This means that assigning a `String` variable to another
+makes a copy rather than assigning a reference to the same memory.
+
 To insert expressions in string values use the string interpolation syntax.
 
 ```swift
@@ -456,6 +460,10 @@ for c in name {
 name.forEach({(c: Character) -> Void in print(c)})
 name.forEach({(c) in print(c)})
 ```
+
+Indexes into strings have the type `String.Index` rather than `Int`.
+This makes many string operations more verbose that in other languages
+because obtaining a `String.Index` value requires a method call.
 
 `String` properties include the following:
 
@@ -545,6 +553,7 @@ that can be a string, character, or number.
 
 When values are provided, their type must be specified after the `enum` name.
 These values are accessed with the `rawValue` property.
+Why doesn't an enum name evaluated to its value like in other languages?
 
 If a type is provided after the `enum` name,
 any cases without specified values are given default values.
@@ -608,6 +617,26 @@ print(Color.allCases.count) // 3
 for color in Color.allCases {
     print(color) // red, green, and blue
 }
+```
+
+Here is an example of adding a method to an `enum`.
+
+```swift
+enum Color: String, CaseIterable {
+    case red = "ff0000"
+    case green = "00ff00"
+    case blue = "0000ff"
+
+    func getGreenHex() -> Substring {
+        let hex = self.rawValue
+        let start = hex.index(hex.startIndex, offsetBy: 2)
+        let end = hex.index(start, offsetBy: 1)
+        return hex[start...end]
+    }
+}
+
+print(Color.red.getGreenHex()) // 00
+print(Color.green.getGreenHex()) // ff
 ```
 
 ## Built-in Collection Types
