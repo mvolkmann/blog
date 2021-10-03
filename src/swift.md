@@ -355,6 +355,38 @@ let product: doublePairToDouble = {$0 * $1}
 print(product(2, 3))
 ```
 
+A `typealias` can be used to give a name to a combination of protocols.
+For example, the following type alias is defined by Swift.
+
+```swift
+typealias Codable = Decodble & Encodable
+```
+
+Instances of types that implement this protocol
+can be serialized and deserialized to and from formats like JSON.
+
+```swift
+struct Sport : Codable {
+    let name: String
+    let playerCount: Int
+}
+
+let hockey = Sport(name: "Hockey", playerCount: 6)
+
+let encoder = JSONEncoder()
+let decoder = JSONDecoder()
+do {
+    let data = try encoder.encode(hockey)
+    let json = String(data: data, encoding: .utf8)!
+    print("json =", json)
+
+    let newSport = try decoder.decode(Sport.self, from: data)
+    print("newSport =", newSport)
+} catch {
+    print("fail")
+}
+```
+
 ## Built-in Primitive Types
 
 | Type          | Description                                                  |
