@@ -146,6 +146,7 @@
     "dedup",
     "defaultdict",
     "deinit",
+    "deinitialize",
     "deinitializer",
     "Deinitializers",
     "delattr",

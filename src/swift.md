@@ -1360,10 +1360,17 @@ using a failable initializer.
 As with any optional value, callers must
 test and unwrap the value in order to use it.
 
-Deinitializers are methods named `deinit`.
+Deinitializers are methods named `deinit`,
 If a struct or class defines this method,
 it will be called when any instance is destroyed.
 It is used to perform cleanup.
+
+I have two issues with the method name `deinit`.
+First, "deinitialize" is not a word.
+Second, the method doesn't necessarily only
+clean up after actions taken in an initializer.
+It can perform cleanup of actions taken by any method.
+A better name would have been "cleanup" or "onDestroy".
 
 ## Optional Properties
 
