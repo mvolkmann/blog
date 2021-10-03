@@ -1089,6 +1089,7 @@ A lazy property is similar to a computed property,
 but its value is only computed the first time it is accessed.
 If must be declared with `var` and
 can be mutated after its initial value is computed.
+Lazy properties are not thread safe and will be computed again in each thread.
 
 ```swift
 import Foundation // needed to use functions like sin, cos, and atan
