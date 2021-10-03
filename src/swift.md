@@ -209,7 +209,7 @@ The parentheses are required even when not passing any arguments.
 
 ```swift
 func greet() {
-    print('Hello, World!')
+    print("Hello, World!")
 }
 greet() // outputs Hello, World!
 ```
@@ -536,10 +536,17 @@ for n in r {
 }
 ```
 
-## Enums
+## Enumerations
 
-An `enum` has a name and a list of possible values
-specified by `case` statements.
+Enumerations are declared with the `enum` keyword.
+They have a name and a list of possible cases specified by `case` statements.
+Each `case` has a name and an optional value
+that can be a string, character, or number.
+When values are not specified, the cases are not given
+default `Int` values like in many other languages.
+
+Like structs and classes, enumerations define initializers and methods.
+This seems like a misuse of enumerations.
 
 ```swift
 enum Color {
@@ -548,10 +555,33 @@ enum Color {
     case blue
 }
 
-var c = Color.red
+enum Color2 {
+    // Multiple cases can be specified on the same line.
+    case red, green, blue
+}
 ```
 
-TODO: Add more detail on enums.
+When the type of a value can be inferred to be a specific `enum` type,
+a value can be specified with only a period followed by a `case` name
+as a shorthand.
+
+```swift
+var c1 = Color.red
+print(c1) // red
+var c2: Color = .red // using shorthand
+print(c2) // red
+
+switch c1 {
+    case .red:
+        print("hot") // this prints
+    case .green:
+        print("warm")
+    case .blue:
+        print("color")
+}
+```
+
+TODO: Add more detail on enums?
 
 ## Built-in Collection Types
 
@@ -962,11 +992,11 @@ even if they only contain a single statement.
 
 ```swift
 if score1 == 21, score2 <= 19 { // same as score1 == 21 && score2 <= 19
-  print('Player 1 has won by at least 2.`)
+  print("Player 1 has won by at least 2.")
 } else if score1 > score2 {
-  print('Player 1 is leading.`)
+  print("Player 1 is leading.")
 } else {
-  print('Player 1 is not leading.`)
+  print("Player 1 is not leading.")
 }
 ```
 
@@ -982,11 +1012,11 @@ at the end of a `case` block.
 ```swift
 switch computeScore(player1) {
     case 21:
-        print('Winner!');
+        print("Winner!");
     case 18...20:
-        print('Very good hand.')
+        print("Very good hand.")
     default:
-        print('Will likely lose.')
+        print("Will likely lose.")
 }
 ```
 
@@ -1087,7 +1117,8 @@ the `set` function for a computed property.
 
 A lazy property is similar to a computed property,
 but its value is only computed the first time it is accessed.
-If must be declared with `var` and
+This is ideal for expensive computations that may not be accessed.
+It must be declared with `var` and
 can be mutated after its initial value is computed.
 Lazy properties are not thread safe and will be computed again in each thread.
 
@@ -1370,7 +1401,9 @@ enter `swiftformat *.swift`.
 
 ### Xcode
 
-Xcode 13 adds support for Vim key bindings.
+Xcode 13 adds support for Vim key bindings, but it is very basic.
+It does not support repeating commands with the period key,
+defining macros, and other more advanced Vim features.
 To enable this, select Editor ... Vim Mode.
 
 ## Annoyances
