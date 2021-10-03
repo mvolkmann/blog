@@ -218,6 +218,23 @@ almost like sentences.
 It is useful to think of the argument labels
 as being part of the function name.
 
+Here is an example of a function where it is useful
+for argument labels to differ from parameters names.
+It uses the types `Ingredient` and `Food` that are not defined here.
+
+```swift
+func getDailyPercentage(of ingredient: Ingredient, in food: Food) -> Float {
+    // Perhaps look up the value in a Dictionary and return it.
+}
+
+let sugar = Ingredient(name: "sugar")
+let frostedFlakes = Food(name: "Frosted Flakes")
+let dailySugarPct = getDailyPercentage(of: sugar, in: frostedFlakes)
+```
+
+Code hints provided by Xcode help developers know
+the argument labels and types that must be provided.
+
 Anonymous functions (a.k.a closures) can be used as
 the values of variables and arguments.
 They are written with the following syntax:
@@ -412,6 +429,10 @@ where each matches a different kind of error.
 | `String`      | text                                                         |
 | `Range`       | interval from inclusive lower bound to exclusive upper bound |
 | `ClosedRange` | interval from inclusive lower bound to inclusive upper bound |
+
+Variables of these types cannot be set to `nil`
+unless a `?` follows the type to indicated that it is optional.
+See the "Optionals" section later.
 
 ## Numbers
 
@@ -1461,6 +1482,9 @@ A class can have:
 
 Why don't classes get a default memberwise initializer like structs?
 
+Typically structs are used instead of classes
+the need for inheritance is not anticipated.
+
 Let's re-implement the "Point" struct as a class named "Point2".
 
 ```swift
@@ -1560,8 +1584,9 @@ mark.log() // Mark is a programmer that knows JavaScript & Swift.
 
 ## Initializers
 
-Structs and classes can define `init` methods that initialize
-ALL of their properties that do not have default values.
+Structs and classes can define `init` methods.
+These must initialize ALL of non-optional properties
+that do not have a specified default value.
 These are referred to as "designated initializers".
 Designated initializers for classes
 must also initialize all inherited properties.
