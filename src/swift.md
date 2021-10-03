@@ -465,6 +465,15 @@ Indexes into strings have the type `String.Index` rather than `Int`.
 This makes many string operations more verbose that in other languages
 because obtaining a `String.Index` value requires a method call.
 
+For example, the following gets the 2nd and 3rd characters of a string.
+
+```swift
+let name = "Mark"
+let start = name.index(name.startIndex, offsetBy: 1)
+let end = name.index(start, offsetBy: 1)
+print(name[start...end]) // "ar"
+```
+
 `String` properties include the following:
 
 | Property  | Description                                     |
@@ -1494,5 +1503,8 @@ The things that annoy me most about Swift are:
 - Going too far
 
   Swift has many good features that it stretches too far.
-  One example is enumerations which also support "recursive enumerations".
+  There are too many examples to list them all, but here are some:
+
+  - enumerations can have initializers and methods
+  - enumerations support "recursive enumerations"
 ````
