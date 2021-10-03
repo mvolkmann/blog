@@ -148,9 +148,37 @@ followed by the function name, the parameter list in parentheses,
 and an optional return type preceded by `->`.
 The parentheses are required even for functions that have no parameters.
 
+When the return type of a function cannot be inferred
+and no return type is specified, it defaults to `Void`
+which is an empty tuple (`()`).
+
+To call a function, specify the function name
+followed by arguments in parentheses.
+The parentheses are required even when not passing any arguments.
+
 ```swift
-func add(n1: Int, n2: Int) -> Int {
-    return n1 * n2
+func greet() {
+    print("Hello, World!")
+}
+greet() // outputs Hello, World!
+```
+
+Parameters must have a name and type.
+They can also have an "argument label"
+that is the name callers must use when providing a value.
+The argument label defaults to the parameter name.
+Typically argument labels are omitted
+and callers use the parameter names.
+
+When an argument label of `_` is specified,
+the function must be called with only a value for that parameter.
+Otherwise calls must include the argument label.
+A function can have a mixture of parameters with argument labels
+and parameters with none (indicated by `_`).
+
+```swift
+func add(_ n1: Int, _ n2: Int) -> Int {
+    return n1 + n2
 }
 print(add(2, 3)) // 5
 ```
@@ -160,8 +188,8 @@ the `return` keyword` is not required to return its value.
 The previous function can rewritten as follows:
 
 ```swift
-func add(n1: Int, n2: Int) -> Int {
-    n1 * n2
+func add(_ n1: Int, _ n2: Int) -> Int {
+    n1 + n2
 }
 print(add(2, 3)) // 5
 ```
@@ -170,22 +198,11 @@ If the return type can be inferred, the return type can be omitted.
 The previous function can rewritten as follows:
 
 ```swift
-func add(n1: Int, n2: Int) {
-    n1 * n2
+func add(_ n1: Int, _ n2: Int) {
+    n1 + n2
 }
 print(add(2, 3)) // 5
 ```
-
-When the return type of a function cannot be inferred
-and no return type is specified, it defaults to `Void`
-which is an empty tuple (`()`).
-
-Parameters must have a name and type.
-They can also have an "argument label"
-that is the name callers must use when providing a value.
-The argument label defaults to the parameter name.
-Typically argument labels are omitted
-and callers use the parameter names.
 
 A parameter can specify a default value by including an equal sign (`=`)
 followed by a value after the type.
@@ -200,23 +217,6 @@ The rationale for this is that it can make some calls more expressive,
 almost like sentences.
 It is useful to think of the argument labels
 as being part of the function name.
-
-When an argument label of `_` is specified,
-the function must be called with only a value for that parameter.
-Otherwise calls must include the argument label.
-A function can have a mixture of parameters with argument labels
-and parameters with none (indicated by `_`).
-
-To call a function, specify the function name
-followed by arguments in parentheses.
-The parentheses are required even when not passing any arguments.
-
-```swift
-func greet() {
-    print("Hello, World!")
-}
-greet() // outputs Hello, World!
-```
 
 Anonymous functions (a.k.a closures) can be used as
 the values of variables and arguments.
