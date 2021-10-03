@@ -170,7 +170,7 @@ The argument label defaults to the parameter name.
 Typically argument labels are omitted
 and callers use the parameter names.
 
-When an argument label of `_` is specified,
+When an argument label is underscore,
 the function must be called with only a value for that parameter.
 Otherwise calls must include the argument label.
 A function can have a mixture of parameters with argument labels
@@ -560,6 +560,7 @@ for n in r {
 ## Enumerations
 
 Enumerations are declared with the `enum` keyword.
+By convention their names begin with an uppercase letter.
 They have a name and a list of possible cases.
 Each `case` has a name and an optional value
 that can be a string, character, or number.
@@ -1126,8 +1127,17 @@ repeat {
 ## Structs
 
 Structs define named groups of properties and methods.
-They can conform to protocols which are
+By convention their names begin with an uppercase letter.
+They can optionally conform to protocols which are
 similar to interfaces in other languages.
+
+Properties are declared with the `let` (immutable) and
+`var` (mutable) keywords, just like variables.
+Mutable properties can only be modified if the instance is also mutable
+(assigned to a `var`).
+
+Immutable properties must be given a value when an instance is initialized
+and cannot be changed after that.
 
 Here is an example of a simple struct definition.
 
@@ -1168,13 +1178,6 @@ var dog2 = dog // dog2 is a copy of dog.
 dog.age = 2 // This change doesn't affect dog2.
 print(dog.age, dog2.age) // 2 1
 ```
-
-Properties defined with the `var` keyword can have their value changed
-only if the instance is assigned to a `var`.
-If the instance is assigned to a `let` then its properties cannot be changed.
-
-Properties defined with the `let` keyword must be given a value
-when an instance is initialized and cannot be changed after that.
 
 A computed property is defined with a `get` function
 that computes the value each time it is referenced.
@@ -1355,8 +1358,10 @@ print(p?.address?.zip ?? "no zip") // alternate way to handle optional; "no zip"
 
 ## Classes
 
-Classes are similar to structs in many ways,
-but can do things that structs cannot.
+Classes are similar to structs in many ways.
+By convention their names begin with an uppercase letter.
+
+Classes can do the following things that structs cannot.
 
 - refer to instances by reference rather than making a copy
 - inherit properties and methods from another
@@ -1537,9 +1542,11 @@ The things that annoy me most about Swift are:
 
 - Defaulting to named parameters
 
-  Most function/method parameters are not named.
-  But we have to indicate that for each parameter
-  by preceding its name with "\_ ".
+  Arguments to most functions and methods are specified with
+  just a value (positionally) rather than using argument labels.
+  But that is only allowed for argument labels
+  that are specified to be an underscore.
+  The common case should be the default.
 
 - Trailing closures
 
