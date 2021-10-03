@@ -378,14 +378,23 @@ let decoder = JSONDecoder()
 do {
     let data = try encoder.encode(hockey)
     let json = String(data: data, encoding: .utf8)!
-    print("json =", json)
+    print(json) // {"name":"Hockey","playerCount":6}
 
+    // The first argument to decode specifies the type to be created.
     let newSport = try decoder.decode(Sport.self, from: data)
-    print("newSport =", newSport)
+    print(newSport) // Sport(name: "Hockey", playerCount: 6)
 } catch {
     print("fail")
 }
 ```
+
+Why is the `try` keyword necessary?
+Can a `do` block contain more than one use of the `try` keyword?
+Why are `catch` blocks not supplied with
+an error object that describes the error?
+
+There can be more than one `catch` block
+where each matches a different kind of error.
 
 ## Built-in Primitive Types
 
