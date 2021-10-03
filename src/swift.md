@@ -128,6 +128,10 @@ comment out blocks of code that contain multi-line comments.
 
 The nil coalescing operator in `a ?? b` is shorthand for `a != nil ? a! : b`.
 
+Swift supports optional chaining so chains of references to optional values
+do not have to check for nil values.
+See the example in the Structs section.
+
 ## Protocols
 
 A protocol is like an interface in other programming languages.
@@ -1121,11 +1125,11 @@ repeat {
 
 ## Structs
 
-Structs defined named groups of properties and methods.
+Structs define named groups of properties and methods.
 They can conform to protocols which are
 similar to interfaces in other languages.
 
-Here is an example of a struct definition.
+Here is an example of a simple struct definition.
 
 ```swift
 struct Dog {
@@ -1186,6 +1190,9 @@ This is ideal for expensive computations that may not be accessed.
 It must be declared with `var` and
 can be mutated after its initial value is computed.
 Lazy properties are not thread safe and will be computed again in each thread.
+
+Methods are defined with the `func` keyword.
+They can use the `self` keyword to refer the instance on which they are invoked.
 
 ```swift
 import Foundation // needed to use functions like sin, cos, and atan
@@ -1308,6 +1315,42 @@ print("initial distance =", pt.initialDistance) // still 5
 print(Point.maxY) // 8
 let pt2 = Point(x: 0, y: 9) // creates a second instance
 print(Point.maxY) // 9
+```
+
+Swift supports optional chaining so chains of references to optional values
+do not have to check for nil values.
+The result is either an `Optional` value or `nil`.
+
+```swift
+struct Address {
+    var street: String
+    var city: String
+    var state: String
+    var zip: String
+}
+
+struct Person {
+    var name: String
+    var address: Address?
+}
+
+var a = Address(street: "123 Some Lane", city: "Somewhere", state: "MO", zip: "12345")
+var p: Person? = Person(name: "Mark", address: a)
+
+print(p?.address?.zip as Any) // Optional(12345)
+
+if let zip = p?.address?.zip {
+    print(zip) // 12345
+} else {
+    print("no zip")
+}
+
+p!.address = nil
+print(p?.address?.zip as Any) // nil
+
+p = nil
+print(p?.address?.zip as Any) // nil
+print(p?.address?.zip ?? "no zip") // alternate way to handle optional; "no zip"
 ```
 
 ## Classes
@@ -1460,7 +1503,10 @@ The access control keywords include:
 
 ## Tools
 
-Is there an equivalent of ESLint for Swift?
+TODO: Is there an equivalent of ESLint for Swift?
+
+To format Swift code in Xcode, select the lines to be formatted (cmd-a for all)
+and press ctrl-i.
 
 Some options for Swift code formatting are
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
