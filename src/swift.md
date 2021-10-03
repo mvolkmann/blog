@@ -292,6 +292,7 @@ func getAvgSum(_ numbers: [Float]) -> (Float, Float) {
 
 print(getAvgSum([1, 3, 8])) // (4.0, 12.0)
 
+// This defines a "tuple" type and assigns a name to it.
 typealias RGB = (red: Int, green: Int, blue: Int)
 
 let rgbDict: [String : RGB] = [
@@ -329,6 +330,30 @@ to scope their usage.
 Otherwise they are global and can be called from anywhere.
 Nested functions can be returned by their enclosing function
 to allow them to be called from outside.
+
+## Type Aliases
+
+A type alias assigns an alternate name to another type.
+
+One uses is to provide additional documentation for primitive types.
+For example, the following documents the expected format of a `String`.
+
+```swift
+typealias MMDDYYYY = String
+var date: MMDDYYYY = "04161961"
+```
+
+The type of an anonymous function can be assigned to a `typealias`
+to avoid repeating it and the possibility for typos.
+This is also useful for declaring the types of functions
+that are passed as arguments to other functions.
+For example, the product function above can be written as follows:
+
+```swift
+typealias doublePairToDouble = (Double, Double) -> Double
+let product: doublePairToDouble = {$0 * $1}
+print(product(2, 3))
+```
 
 ## Built-in Primitive Types
 
@@ -1199,6 +1224,7 @@ They can use the `self` keyword to refer the instance on which they are invoked.
 
 ```swift
 import Foundation // needed to use functions like sin, cos, and atan
+// Importing UIKit imports Foundation for you.
 
 struct Dog {
     var breed: String
@@ -1374,12 +1400,14 @@ assigns a reference to the same instance rather than making a copy.
 To define a class, use the `class` keyword.
 A class can have:
 
-- any number of initializers (named `init`)
+- one or more initializers (named `init`)
 - class-level properties declared with `static`
 - class-level methods declared with `static`
 - instance-level properties
 - instance-level methods
 - a superclass
+
+Why don't classes get a default memberwise initializer like structs?
 
 Let's re-implement the "Point" struct as a class named "Point2".
 
@@ -1433,6 +1461,49 @@ class Point2 {
         y += dy
     }
 }
+```
+
+To implement a class (subclass) that inherits
+the properties and methods of another class (superclass),
+add a colon after the subclass name followed by the superclass name.
+
+```swift
+class Person {
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+
+    func log() {
+        print("\(name) is a person.")
+    }
+}
+
+class Programmer : Person {
+    var languages: [String]
+
+    init(name: String, languages: [String]) {
+        // Must initialize all properties of this class
+        // before calling super.init.
+        self.languages = languages
+
+        // The "super" keyword is used to call methods in the superclass.
+        // Subclasses must have an "init" method that
+        // calls an "init" method of the superclass.
+        super.init(name: name)
+    }
+
+    // The "override" keyword is required to
+    // override methods in the superclass.
+    override func log() {
+        let langs = languages.joined(separator: " & ")
+        print("\(name) is a programmer that knows \(langs).")
+    }
+}
+
+var mark = Programmer(name: "Mark", languages: ["JavaScript", "Swift"])
+mark.log() // Mark is a programmer that knows JavaScript & Swift.
 ```
 
 ## Initializers
