@@ -539,25 +539,36 @@ for n in r {
 ## Enumerations
 
 Enumerations are declared with the `enum` keyword.
-They have a name and a list of possible cases specified by `case` statements.
+They have a name and a list of possible cases.
 Each `case` has a name and an optional value
 that can be a string, character, or number.
-When values are not specified, the cases are not given
-default `Int` values like in many other languages.
 
-Like structs and classes, enumerations define initializers and methods.
+When values are provided, their type must be specified after the `enum` name.
+These values are accessed with the `rawValue` property.
+
+If a type is provided after the `enum` name,
+any cases without specified values are given default values.
+For example, if the type is `Int`,
+incrementing values starting with zero are assigned.
+And when the type is `String`,
+values matching the case name are assigned.
+
+If no type is provided, the cases are not assigned default values.
+This differs from many other programming languages.
+
+Like structs and classes, enumerations can define initializers and methods.
 This seems like a misuse of enumerations.
 
 ```swift
 enum Color {
-    case red
-    case green
-    case blue
-}
-
-enum Color2 {
     // Multiple cases can be specified on the same line.
     case red, green, blue
+}
+
+enum ColorHex: String {
+    case red = "ff0000"
+    case green = "00ff00"
+    case blue = "0000ff"
 }
 ```
 
@@ -567,9 +578,9 @@ as a shorthand.
 
 ```swift
 var c1 = Color.red
-print(c1) // red
+print(c1.rawValue) // ff0000
 var c2: Color = .red // using shorthand
-print(c2) // red
+print(c2.rawValue) // ff0000
 
 switch c1 {
     case .red:
@@ -581,7 +592,23 @@ switch c1 {
 }
 ```
 
-TODO: Add more detail on enums?
+If an `enum` has the type `CaseIterable` then
+its cases will be held in the `allCases` property.
+This can be used to iterate over the cases.
+If a value type is also specified, it must appear before `CaseIterable`.
+
+```swift
+enum Color: String, CaseIterable {
+    case red = "ff0000"
+    case green = "00ff00"
+    case blue = "0000ff"
+}
+
+print(Color.allCases.count) // 3
+for color in Color.allCases {
+    print(color) // red, green, and blue
+}
+```
 
 ## Built-in Collection Types
 
@@ -1434,5 +1461,9 @@ The things that annoy me most about Swift are:
 
   The syntax for trailing closures is surprising and unique to Swift.
   It is even more surprising if there is more than one.
-```
+
+- Going too far
+
+  Swift has many good features that it stretches too far.
+  One example is enumerations which also support "recursive enumerations".
 ````
