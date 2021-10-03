@@ -235,57 +235,6 @@ let dailySugarPct = getDailyPercentage(of: sugar, in: frostedFlakes)
 Code hints provided by Xcode help developers know
 the argument labels and types that must be provided.
 
-Anonymous functions (a.k.a closures) can be used as
-the values of variables and arguments.
-They are written with the following syntax:
-`{ (parameter-list) -> return-type in statements }`.
-The return type can be omitted when it can be inferred.
-Note the use of the `in` keyword to mark the beginning of the statements.
-
-The following code defines and calls several anonymous functions.
-
-```swift
-// This function has no parameters.
-let printTime = {
-    let date = Date() // now
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "M/d/yyyy"
-    print(dateFormatter.string(from: date))
-}
-printTime()
-
-// This function specifies all the types.
-let product = {(a: Double, b: Double) -> Double in a * b}
-print(product(2, 3))
-
-// This function omits the return type because it can be inferred.
-let product2 = {(a: Double, b: Double) in a * b}
-print(product2(2, 3))
-```
-
-If the parameter types of an anonymous function can be inferred from usage,
-the parameter list can be omitted and the parameter values can be
-referred to by index using the names `$0`, `$1`, and so on.
-
-```swift
-let numbers = [1, 3, 7]
-let doubled = numbers.map({$0 * 2}) // [2, 6, 14]
-```
-
-If the last parameters to a function or method are functions,
-calls can be written using "trailing closures".
-Typically this is only done for the last argument.
-For example, these are equivalent:
-
-```swift
-let prices = [1.23, 2.34, 3.45]
-let total = prices.reduce(0, {(result, price) in result + price})
-let total = prices.reduce(0) {
-    (result, price) in result + price
-}
-let total = prices.reduce(0, {$0 + $1})
-```
-
 A "variadic" parameter accepts multiple values of the same type.
 The parameter value will be a constant array of values.
 
@@ -348,6 +297,67 @@ to scope their usage.
 Otherwise they are global and can be called from anywhere.
 Nested functions can be returned by their enclosing function
 to allow them to be called from outside.
+
+## Closures
+
+Anonymous functions (a.k.a closures) can be used as
+the values of variables and arguments.
+They are written with the following syntax:
+`{ (parameter-list) -> return-type in statements }`.
+The return type can be omitted when it can be inferred.
+Note the use of the `in` keyword to mark the beginning of the statements.
+
+The following code defines and calls several anonymous functions.
+
+```swift
+// This function has no parameters.
+let printTime = {
+    let date = Date() // now
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "M/d/yyyy"
+    print(dateFormatter.string(from: date))
+}
+printTime()
+
+// This function specifies all the types.
+let product = {(a: Double, b: Double) -> Double in a * b}
+print(product(2, 3))
+
+// This function omits the return type because it can be inferred.
+let product2 = {(a: Double, b: Double) in a * b}
+print(product2(2, 3))
+```
+
+If the parameter types of an anonymous function can be inferred from usage,
+the parameter list can be omitted and the parameter values can be
+referred to by index using the names `$0`, `$1`, and so on.
+
+```swift
+let numbers = [1, 3, 7]
+let doubled = numbers.map({$0 * 2}) // [2, 6, 14]
+```
+
+If the last parameters to a function or method are functions,
+calls can be written using "trailing closures".
+Typically this is only done for the last argument.
+For example, these are equivalent:
+
+```swift
+let prices = [1.23, 2.34, 3.45]
+let total = prices.reduce(0, {(result, price) in result + price})
+let total = prices.reduce(0) {
+    (result, price) in result + price
+}
+let total = prices.reduce(0, {$0 + $1})
+```
+
+Closure can be passed as arguments to other functions.
+If the receiving function has asynchronous behavior
+that invokes the closure after the function returns,
+the closure parameter must be declared to be `@escaping`.
+Why is this required?
+Are non-escaping closures handled in an optimized way
+that discards their context after the function returns?
 
 ## Type Aliases
 
