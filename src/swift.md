@@ -141,6 +141,54 @@ Properties can be constant (`let`) or variable (`var`).
 Examples of built-in protocols include `Collection`, `Comparable`,
 `Equatable`, `Hashable`, `Identifiable`, `Numeric`, and `Sequence`.
 
+```swift
+protocol Shape {
+    func getArea() -> Double
+}
+
+// Structs can implement protocols,
+// but cannot inherit from other structs or classes.
+struct Triangle : Shape {
+    var base: Double
+    var height: Double
+
+    init(base: Double, height: Double) {
+        self.base = base
+        self.height = height
+    }
+
+    func getArea() -> Double {
+        base * height * 0.5
+    }
+}
+
+// Classes can implement protocols
+// and they can inherit from other classes.
+class Rectangle : Shape {
+    var height: Double
+    var width: Double
+
+    init(width: Double, height: Double) {
+        self.width = width
+        self.height = height
+    }
+
+    func getArea() -> Double {
+        width * height
+    }
+}
+
+// Any object that implements the Shape protocol can be passed.
+// Calling getArea on a shape demonstrates polymorphism because
+// what the call does is determined by the receiver type.
+func logShape(_ shape: Shape) {
+    print("area = \(shape.getArea())")
+}
+
+logShape(Triangle(base: 3, height: 4)) // area = 6
+logShape(Rectangle(width: 4, height: 5)) // area = 20
+```
+
 ## Functions
 
 Functions are defined using the `func` keyword,
@@ -351,7 +399,7 @@ let total = prices.reduce(0) {
 let total = prices.reduce(0, {$0 + $1})
 ```
 
-Closure can be passed as arguments to other functions.
+Closures can be passed as arguments to other functions.
 If the receiving function has asynchronous behavior
 that invokes the closure after the function returns,
 the closure parameter must be declared to be `@escaping`.
@@ -443,6 +491,13 @@ where each matches a different kind of error.
 Variables of these types cannot be set to `nil`
 unless a `?` follows the type to indicated that it is optional.
 See the "Optionals" section later.
+
+The `try` function returns the type of its argument as a `String`.
+
+```swift
+var c: Character = "x"
+print(type(of: c)) // Character
+```
 
 ## Numbers
 
@@ -660,14 +715,18 @@ for n in r {
 ## Enumerations
 
 Enumerations are declared with the `enum` keyword.
-By convention their names begin with an uppercase letter.
 They have a name and a list of possible cases.
-Each `case` has a name and an optional value
-that can be a string, character, or number.
+Each `case` has a name and an optional value that can be
+any type, though `Int`, and `String` are common types.
+By convention both `enum` names and `case` names use camel-case,
+but `enum` names begin uppercase and `case` names begin lowercase.
 
-When values are provided, their type must be specified after the `enum` name.
+When `case` values are provided,
+their type must be specified after the `enum` name.
 These values are accessed with the `rawValue` property.
-Why doesn't an enum name evaluated to its value like in other languages?
+Why doesn't an enum name evaluate to its value like in other languages
+so `rawValue` would not be needed?
+Why isn't this property just named `value`?
 
 If a type is provided after the `enum` name,
 any cases without specified values are given default values.
@@ -679,8 +738,10 @@ values matching the case name are assigned.
 If no type is provided, the cases are not assigned default values.
 This differs from many other programming languages.
 
+An enumeration `case` value can be a collection type such as a tuple or object.
 Like structs and classes, enumerations can define initializers and methods.
-This seems like a misuse of enumerations.
+All of this seems like a misuse of enumerations.
+It seems better to use a struct or class for these cases.
 
 ```swift
 enum Color {
@@ -1120,11 +1181,60 @@ score1 = 19 // initializes
 var score2 = 19 // only value; Int type is inferred
 ```
 
+Multiple variables can be declared on the same line.
+
+```swift
+let a = 1, b = 2.3, c = true, d = "test"
+
+var e: Int?, f: Double?, g: Bool?, h: String?
+e = 1
+f = 2.3
+g = true
+h = "test"
+```
+
 ## Optionals
 
 Variables must be assigned a value before they are accessed
 unless they have an optional type indicated by a `?` after the type name.
 This allows the value to be `nil`.
+
+There are several ways to extract the value from
+a variable or property with an optional type.
+
+- `if let value = myOptional { ... }`
+
+  If the value is `nil` the block is not executed.
+  If the value is not `nil`, it is assigned to the variable `value`
+  and the block is executed.
+
+- `let value = myOptionalObject?.someProperty;`
+
+  This uses the optional chaining operator `?.`.
+  If `myOptionalObject` is `nil` the `value` will be set to `nil`.
+  Otherwise it will be set to the value of `someProperty` in the object.
+  This operator can also precede method calls
+  to avoid calling them if the receiver is `nil`.
+
+- `let value = myDictionary[someKey] ?? defaultValue`
+
+  This uses the nil-coalescing operator `??`
+  to handle cases where a key is not found in a dictionary.
+
+- `guard let value = myOptional else { ... }
+
+  This uses a "guard" to
+  assign the value of the optional to a variable if it is not `nil`
+  or run the code in the `else` block if it is `nil`.
+
+- `if myOptional != nil { let value = myOptional!; ... }`
+
+  This uses the `!` to "force unwrap" the optional.
+  If the `!` operator is applied to an optional set to `nil`
+  the program will crash with a fatal error.
+  It is recommended to never use this operator.
+
+Here are more examples of working with optionals.
 
 ```swift
 var message: String? // optional type
@@ -1144,9 +1254,7 @@ func printMessage(_ message: String?) {
 }
 
 message = "Hello, World!"
-// The ! operator does a "force unwrap" of an optional.
-// If the value is nil, the program crashes.
-// But here we test for nil before using the force unwrap.
+// This uses the "force unwrap" operator.
 print(message == nil ? "no message" : message!) // "Hello, World!"
 printMessage(message) // "Hello, World!"
 
@@ -1304,6 +1412,8 @@ Lazy properties are not thread safe and will be computed again in each thread.
 
 Methods are defined with the `func` keyword.
 They can use the `self` keyword to refer the instance on which they are invoked.
+Definitions of `struct` methods that modify properties of the receiver must
+begin with the `mutating` keyword to explicitly indicate that they do this.
 
 ```swift
 import Foundation // needed to use functions like sin, cos, and atan
@@ -1492,6 +1602,10 @@ A class can have:
 
 Why don't classes get a default memberwise initializer like structs?
 
+Definitions of `class` methods that modify properties of the receiver
+cannot begin with `mutating` keyword.
+That is only applied to `struct` and `extension` methods.
+
 Typically structs are used instead of classes
 the need for inheritance is not anticipated.
 
@@ -1553,6 +1667,9 @@ To implement a class (subclass) that inherits
 the properties and methods of another class (superclass),
 add a colon after the subclass name followed by the superclass name.
 
+Methods in a subclass that override methods in the superclass
+must begin with the `override` keyword.
+
 ```swift
 class Person {
     var name: String
@@ -1612,6 +1729,9 @@ Classes typically only define one designated initializer.
 
 If a class inherits from another,
 its designated initializers must call one in its immediate superclass.
+If an initializer has the same signature as one in the superclass,
+it must indicate that it is overriding the one in the superclass
+by adding the `override` keyword before `init`.
 
 Just like with functions and other kinds of methods,
 using `_` for an argument label allows its value to be passed without a label.
@@ -1664,12 +1784,212 @@ The access control keywords include:
 - `fileprivate`: access from code in the same source file
 - `private`: access within enclosing declaration (such as a struct or class)
 
+## Ranges
+
+Swift supports four kinds of ranges.
+
+- `Range`: `start..<end`
+
+   This is half-open, meaning that the end index is not included.
+   `CountableRange` is a typealias of this type.
+
+- `ClosedRange`: `start...end`
+   This is a closed, meaning that the end index is included.
+   `CountableClosedRange` is a typealias of this type.
+
+- `PartialRangeFrom`: `start...`
+
+  This is one-sided,
+  meaning that the end index is not specified.
+
+- `PartialRangeUpTo`: `..<end`
+  This is one-sided at the end,
+  meaning that the start index is not specified.
+
+There are many uses of ranges, including:
+
+- iterating over a range of values
+- checking whether a value is in a range
+- extracting a subset of data from a collection
+- modifying a subset of a collection
+
+## Extensions
+
+Extensions add functionality to structs, classes, enums, and protocols.
+The functionality that can be added includes:
+
+- computed type and instance properties
+- initializers
+- type and instance methods
+- conformance to a protocol
+
+Extensions cannot add regular properties (a.k.a stored properties).
+
+Definitions of `extension` methods that modify properties of the receiver must
+begin with the `mutating` keyword to explicitly indicate that they do this.
+
+Strings in Swift are notoriously difficult to work with
+because indexes to characters within them must be specified
+using the type `String.Index` instead of `Int`.
+It is common to use an extension to the `String` class
+to add support for `Int` indexes to the subscript operator.
+Here is an implementation of this idea.
+
+When overriding the subscript operator,
+five argument types should be supported.
+
+- single index: `start`
+- `Range`: `start..<end`
+- `ClosedRange`: `start...end`
+- `PartialRangeFrom`: `start...`
+- `PartialRangeUpTo`: `..<end`
+
+```swift
+public extension String {
+    // Handles negative indexes by counting from end of string.
+    func getOffset(_ i: Int) -> Int {
+        let count = self.count
+        var offset = i >= 0 ? i : i + count
+        offset = offset < 0 ? 0 : offset > count ? count : offset
+        return offset
+    }
+
+    // single index
+    subscript (_ i: Int) -> String {
+        get {
+            let offset = getOffset(i)
+            if offset >= self.count { return "" }
+            let idx = index(self.startIndex, offsetBy: offset)
+            return String(self[idx])
+        }
+        set {
+            let offset = getOffset(i)
+            let idx = index(self.startIndex, offsetBy: offset)
+            replaceSubrange(idx...idx, with: newValue)
+        }
+    }
+
+    // start..<end
+    subscript (_ r: Range<Int>) -> String {
+        get {
+            let startOffset = getOffset(r.lowerBound)
+            let endOffset = getOffset(r.upperBound)
+            let si = index(self.startIndex, offsetBy: startOffset)
+            let ei = index(si, offsetBy: endOffset - startOffset)
+            return String(self[si..<ei])
+        }
+        set {
+            let startOffset = getOffset(r.lowerBound)
+            let endOffset = getOffset(r.upperBound)
+            let si = index(self.startIndex, offsetBy: startOffset)
+            let ei = index(si, offsetBy: endOffset - startOffset)
+            replaceSubrange(si..<ei, with: newValue)
+        }
+    }
+
+    // start...end
+    subscript (_ r: ClosedRange<Int>) -> String {
+        get {
+            let startOffset = getOffset(r.lowerBound)
+            var endOffset = getOffset(r.upperBound)
+            if endOffset >= self.count { endOffset -= 1 }
+            let si = index(self.startIndex, offsetBy: startOffset)
+            let ei = index(si, offsetBy: endOffset - startOffset)
+            return String(self[si...ei])
+        }
+        set {
+            let startOffset = getOffset(r.lowerBound)
+            var endOffset = getOffset(r.upperBound)
+            if endOffset >= self.count { endOffset -= 1 }
+            let si = index(self.startIndex, offsetBy: startOffset)
+            let ei = index(si, offsetBy: endOffset - startOffset)
+            replaceSubrange(si...ei, with: newValue)
+        }
+    }
+
+    // start...
+    subscript (_ r: PartialRangeFrom<Int>) -> String {
+        get {
+            let startOffset = getOffset(r.lowerBound)
+            let idx = index(self.startIndex, offsetBy: startOffset)
+            return String(self[idx...])
+        }
+        set {
+            let startOffset = getOffset(r.lowerBound)
+            let idx = index(self.startIndex, offsetBy: startOffset)
+            replaceSubrange(idx..., with: newValue)
+        }
+    }
+
+    // ..<end
+    subscript (_ r: PartialRangeUpTo<Int>) -> String {
+        get {
+            var endOffset = getOffset(r.upperBound)
+            if endOffset >= self.count { endOffset -= 1 }
+            let idx = index(self.startIndex, offsetBy: endOffset)
+            return String(self[...idx])
+        }
+        set {
+            var endOffset = getOffset(r.upperBound)
+            if endOffset >= self.count { endOffset -= 1 }
+            let idx = index(self.startIndex, offsetBy: endOffset)
+            replaceSubrange(...idx, with: newValue)
+        }
+    }
+
+    // using two Int arguments instead of a range
+    func substring(_ start: Int, _ end: Int) -> String {
+        return self[start...end]
+    }
+}
+
+var text = "Mark"
+
+// Positive indexes
+assert(text.substring(1, 2) == "ar")
+assert(text[1] == "a")
+assert(text[1...2] == "ar")
+assert(text[1..<3] == "ar")
+assert(text[1...] == "ark")
+assert(text[..<2] == "Mar")
+
+// Negative indexes
+// These must be wrapped in parentheses or
+// separated from the range operator by a space.
+assert(text[-2] == "r")
+assert(text[-3 ... -2] == "ar")
+assert(text[-3 ..< -1] == "ar")
+assert(text[(-3)...] == "ark") // parens work, but a space doesn't
+assert(text[..<(-2)] == "Mar") // parens work, but a space doesn't
+
+// Handling indexes that are out of range
+assert(text.substring(1, 7) == "ark")
+assert(text[7] == "")
+assert(text[1...7] == "ark")
+assert(text[1..<7] == "ark")
+assert(text[7...] == "")
+assert(text[..<7] == "Mark")
+
+// Setting substrings
+text[1] = "o"
+assert(text == "Mork")
+text[1..<3] = "as"
+assert(text == "Mask")
+text[1...2] = "il"
+assert(text == "Milk")
+text[1...] = "eet"
+assert(text == "Meet")
+text[..<2] = "Goa"
+assert(text == "Goat")
+```
+
 ## Tools
 
 TODO: Is there an equivalent of ESLint for Swift?
 
 To format Swift code in Xcode, select the lines to be formatted (cmd-a for all)
-and press ctrl-i.
+and press ctrl-i which is the keyboard shortcut
+for Editor ... Structure ... Re-Indent.
 
 Some options for Swift code formatting are
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
@@ -1686,6 +2006,22 @@ Xcode 13 adds support for Vim key bindings, but it is very basic.
 It does not support repeating commands with the period key,
 defining macros, and other more advanced Vim features.
 To enable this, select Editor ... Vim Mode.
+
+### VS Code
+
+For tips on writing Swift code in VS Code, see
+{% aTargetBlank "https://nshipster.com/vscode/",
+"Swift Development with Visual Studio Code" %}.
+
+The setup steps are:
+
+- install Xcode
+- install VS Code
+- `git clone https://github.com/apple/sourcekit-lsp.git`
+- `cd sourcekit-lsp/Editors/vscode/`
+- `npm install`
+- `npm run dev-package`
+- `code --install-extension out/sourcekit-lsp-vscode-dev.vsix`
 
 ## Annoyances
 
