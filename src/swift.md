@@ -151,8 +151,14 @@ See the example in the Structs section.
 ## Protocols
 
 A protocol is like an interface in other programming languages.
-It describes a set of method signatures and properties.
+It can describe type properties, instance properties,
+type method signatures, and instance method signatures.
 Properties can be constant (`let`) or variable (`var`).
+
+Unlike in method implementations, default parameter values cannot be specified.
+
+Default method implementations cannot be define in a `protocol`,
+but they can be defined in an `extension` of the `protocol`.
 
 Examples of built-in protocols include `Collection`, `Comparable`,
 `Equatable`, `Hashable`, `Identifiable`, `Numeric`, and `Sequence`.
@@ -164,7 +170,7 @@ protocol Shape {
 
 // Structs can implement protocols,
 // but cannot inherit from other structs or classes.
-struct Triangle : Shape {
+struct Triangle: Shape {
     var base: Double
     var height: Double
 
@@ -180,7 +186,7 @@ struct Triangle : Shape {
 
 // Classes can implement protocols
 // and they can inherit from other classes.
-class Rectangle : Shape {
+class Rectangle: Shape {
     var height: Double
     var width: Double
 
@@ -458,7 +464,7 @@ Instances of types that implement this protocol
 can be serialized and deserialized to and from formats like JSON.
 
 ```swift
-struct Sport : Codable {
+struct Sport: Codable {
     let name: String
     let playerCount: Int
 }
@@ -696,7 +702,7 @@ print(name[name.index(name.startIndex, offsetBy: 2)]) // "r"
 Fortunately we can override the subscript operator to make this easier.
 
 ```swift
-extension String : BidirectionalCollection {
+extension String: BidirectionalCollection {
     subscript(i: Index) -> Character { return characters[i] }
 }
 
@@ -1245,6 +1251,72 @@ This allows it to be allocated on the stack rather than the heap.
 Data on the stack can be accessed more efficiently.
 Its value can also be inlined in the generated code.
 
+## Type Checking and Casting
+
+The `is` operator is used to check the type of an expression.
+
+```swift
+class Animal: CustomStringConvertible {
+    var name: String
+
+    init(name: String) {
+        self.name = name
+    }
+
+    // This is a computed property that is defined
+    // in the CustomStringConvertible protocol.
+    // It is used when a variable of this type
+    // is printed or converted to a string.
+    public var description: String { return name }
+}
+
+class Cat: Animal {
+    var declawed: Bool
+
+    init(name: String, declawed: Bool) {
+        self.declawed = declawed
+        super.init(name: name)
+    }
+}
+
+class Dog: Animal {
+    var hasTail: Bool
+
+    init(name: String, hasTail: Bool) {
+        self.hasTail = hasTail
+        super.init(name: name)
+    }
+}
+
+let a = Animal(name: "Mystery")
+let c = Cat(name: "Whiskers", declawed: true)
+let d = Dog(name: "Comet", hasTail: true)
+
+func evaluate(_ animal: Animal) {
+    if animal is Cat {
+        print("\(animal) is a cat. ")
+    } else if animal is Dog {
+        print("\(animal) is a dog.")
+    } else {
+        print("\(animal) is an unknown kind of animal.")
+    }
+
+    // The as? operator attempts to perform downcasting to a subclass type.
+    // This is necessary to access properties
+    // or call methods defined in a subclass.
+    if let cat = animal as? Cat {
+        print("has claws? \(!cat.declawed)")
+    }
+    if let dog = animal as? Dog {
+        print("has tail? \(dog.hasTail)")
+    }
+}
+
+evaluate(a) // Mystery is an unknown kind of animal.
+evaluate(c) // Whiskers is a cat.\nhas claws? false
+evaluate(d) // Comet is a dog.\nhas tail? true
+```
+
 ## Optionals
 
 Variables must be assigned a value before they are accessed
@@ -1752,7 +1824,7 @@ class Person {
     }
 }
 
-class Programmer : Person {
+class Programmer: Person {
     var languages: [String]
 
     init(name: String, languages: [String]) {
@@ -1837,6 +1909,34 @@ A better name would have been "cleanup" or "onDestroy".
 Properties of structs and classes whose values are allowed to be `nil`
 should have a `?` at end of their type.
 Just like with optional variables, they must be unwrapped to access their value.
+
+## Implementing Operators
+
+Built-in operators can be implemented for custom types.
+For example, the following code defines a way to add two colors.
+
+```swift
+struct Color {
+    var red = 0
+    var green = 0
+    var blue = 0
+
+    static func +(c1: Color, c2: Color) -> Color {
+        let r = (c1.red + c2.red) % 256
+        let g = (c1.green + c2.green) % 256
+        let b = (c1.blue + c2.blue) % 256
+        return Color(red: r, green: g, blue: b)
+    }
+}
+
+let c1 = Color(red: 255, green: 0, blue: 0)
+let c2 = Color(red: 0, green: 0, blue: 255)
+let c3 = c1 + c2
+print(c3)
+```
+
+A similar approach can be used to implement an operator
+in an existing type using an `extension`.
 
 ## Access Control
 
