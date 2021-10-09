@@ -1255,6 +1255,12 @@ Its value can also be inlined in the generated code.
 
 The `is` operator is used to check the type of an expression.
 
+The `as?` operator is used to downcast a
+value of a superclass type to a value of a subclass type.
+Since this can fail, it is typically used in an `if let` statement.
+The code example below uses the `is` and `as?` operators
+in the `evaluate` function.
+
 ```swift
 class Animal: CustomStringConvertible {
     var name: String
