@@ -886,6 +886,7 @@ including the protocols they implement, is:
     - `Slice` struct
     - `MutableCollection` protocol
       - `Array` struct
+      - `Dictionary.Values` struct
 
 The `Sequence` protocol defines operations for collections that
 "provide sequential, iterated access to their elements".
