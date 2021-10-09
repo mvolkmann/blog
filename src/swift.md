@@ -126,10 +126,26 @@ comment out blocks of code that contain multi-line comments.
 | bitwise        | `&` (and), `\|` (or), `^` (xor)                      |
 | types          | `is` (type check), `as`, `as?`, `as!` (type cast)    |
 
+The binary mathematical operators require
+the variables on each side to have the same type.
+For example, a `Float` cannot be divided by an `Int`.
+When the types differ, one side must be cast to the type of the other side.
+
+```swift
+let a = 8.0
+let b = 3
+print(8.0 / 3) // both sides are literals so allowed; 2.666...
+print(a / 3) // one side is literal so allowed; same result
+print(a / Double(b)) // variables on both sides so cast required; same result
+```
+
+When an `Int` is divided by an `Int` using the `/` operator,
+the result is truncated to an `Int`, not rounded.
+
 The nil coalescing operator in `a ?? b` is shorthand for `a != nil ? a! : b`.
 
 Swift supports optional chaining so chains of references to optional values
-do not have to check for nil values.
+(see the "Optionals" section later) do not have to check for nil values.
 See the example in the Structs section.
 
 ## Protocols
@@ -687,6 +703,31 @@ extension String : BidirectionalCollection {
 print(name[2]) // "r"
 ```
 
+Strings that contain numbers can be converted to numbers using casting
+which returns an optional.
+The following code demonstrates three approaches.
+
+```swift
+let i = "3"
+let f = "3.14"
+let d = "3.14159"
+
+if let number = Int(i) {
+    print(number * 2) // 6
+}
+
+print((Float(f) ?? 0) + 2) // 5.14
+
+let number = Double(d)
+if number != nil {
+    print(number! + 2) // 5.14159
+}
+```
+
+## Characters
+
+TODO: Finish this section.
+
 ### Ranges
 
 A literal `Range` including the numbers 2, 3, and 4
@@ -909,7 +950,7 @@ for (index, score) in scores.enumerated() {
 }
 ```
 
-TODO: Does Swift support any form of destructuring? Probably not.
+TODO: Does Swift support destructuring? Works with tuples.
 
 `Array` properties include the following:
 
@@ -1051,6 +1092,9 @@ separated by commas.
 Keys and values are separated by colons.
 While typically the keys are strings,
 they can be any type that implements the `Hashable` protocol.
+For details on the `Hashable` protocol, see the
+{% aTargetBlank "https://developer.apple.com/documentation/swift/hashable",
+"Apple Developer Documentation" %}.
 
 ```swift
 // When the type can't be inferred, it must be specified.
@@ -1178,7 +1222,9 @@ let name2 = "Mark" // only value; String type is inferred
 var score1: Int // only type; can't use until initialized
 score1 = 19 // initializes
 
-var score2 = 19 // only value; Int type is inferred
+var score2 = 19 // only value; inferred type is Int
+
+var score3 = 1.23 // inferred type is Double, not Float
 ```
 
 Multiple variables can be declared on the same line.
@@ -1192,6 +1238,12 @@ f = 2.3
 g = true
 h = "test"
 ```
+
+Swift is able to optimized storage of `let` variables more than `var` variables.
+Because the value of a `let` variable never changes, its size is known.
+This allows it to be allocated on the stack rather than the heap.
+Data on the stack can be accessed more efficiently.
+Its value can also be inlined in the generated code.
 
 ## Optionals
 
@@ -1313,6 +1365,23 @@ If the value of the `switch` expression is an `enum`,
 there must be a `case` that matches each value of the `enum`.
 
 ### Iteration
+
+To iterate over a range of integers, use a for-in loop with a range operator.
+See the "Ranges" section for more detail on these.
+
+If the current iteration value is not needed,
+use an underscore for the variable name.
+
+```swift
+for frame in 1...10 {
+    print(frame) // prints integers from 1 to 10 inclusive
+}
+
+let times = 3
+for _ in 0..<times {
+    print("Hello") // prints for 0, 1, and 2 (3 times)
+}
+```
 
 To iterate over all the elements of a sequence (such as an array),
 use a for-in loop.
