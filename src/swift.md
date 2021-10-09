@@ -1253,6 +1253,45 @@ Its value can also be inlined in the generated code.
 
 ## Type Checking and Casting
 
+Primitive type names can be used as functions
+to cast another primitive type to a given type.
+The `Bool` and `Characters` types can be cast to and from a `String`,
+but no other types.
+
+The following code demonstrates the supported primitive type casts.
+
+```swift
+let b = true
+let i = 3
+let f = 3.14
+let d = 3.14159
+let c: Character = "4"
+var s = "7"
+
+print(String(b)) // "true"
+
+print(Float(i)) // 3.0
+print(Double(i)) // 3.0
+print(String(i)) // "3"
+
+print(Int(f)) // 3
+print(Double(f)) // 3.14
+print(String(f)) // "3.14"
+
+print(Int(d)) // 3
+print(Float(d)) // 3.14159
+print(String(d)) // "3.14159"
+
+print(String(c)) // "4"
+
+let bStr = "true"
+print(Bool(bStr) ?? false) // true
+print(Int(s) ?? 0) // 7
+print(Float(s) ?? 0) // 7.0
+print(Double(s) ?? 0) // 7.0
+print(Character(s)) // "7"; Fatal Error if Strig contains more than one character
+```
+
 The `is` operator is used to check the type of an expression.
 
 The `as?` operator is used to downcast a
