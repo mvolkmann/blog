@@ -2519,7 +2519,7 @@ the features of Swift that are annoying, at least in my opinion.
 
 - String interpolation syntax
 
-  They should have copied the `${expression}` syntax already in use by other
+  Swift should have copied the `${expression}` syntax already in use by other
   languages instead of using the `\(expression)` syntax that is unique to Swift.
 
 - Defaulting to named parameters
@@ -2532,7 +2532,8 @@ the features of Swift that are annoying, at least in my opinion.
 
 - `in` keyword
 
-  The need for the `in` keyword in closures seems odd.
+  The need for the `in` keyword in closures to
+  separate the parameter list from the statements seems odd.
 
 - Trailing closures
 
@@ -2540,7 +2541,7 @@ the features of Swift that are annoying, at least in my opinion.
   It's nice when used with methods like `Array` `map`.
   However, the syntax looks strange when more than one
   is used in the same function/method call.
-  I'd prefer if that wasn't supported.
+  Using more that one shouldn't be supported.
 
 - Going too far
 
@@ -2548,7 +2549,7 @@ the features of Swift that are annoying, at least in my opinion.
   Some might say programming language features that have
   significant overlap with other features should not be supported.
 
-  Here are some examples of features that perhaps should not be supported.
+  Examples include:
 
   - enumerations should not support initializers, properties, and methods
   - enumerations should not support "recursive enumerations"
