@@ -614,8 +614,9 @@ Numeric foundation functions include:
 | `acos(number)`        | returns arc cosine in radians             |
 | `atan(number)`        | returns arc tangent in radians            |
 
-### Characters and Strings
+### Strings
 
+The `String` type is a `struct` that represents a sequence of Unicode characters.
 Literal `Character` and single-line `String` values
 are both delimited by double-quotes.
 Multi-line `String` values are delimited by triple double-quotes.
@@ -743,8 +744,41 @@ if number != nil {
 
 ## Characters
 
-The `Character` type represents a single Unicode character.
-TODO: Finish this section.
+The `Character` type is a `struct` that represents a single Unicode character.
+Literal `Character` values are delimited by double-quotes.
+
+`Character` properties include the following:
+
+| Property           | Description                                                 |
+| ------------------ | ----------------------------------------------------------- |
+| `asciiValue`       | the `UInt8` ASCII value, if it is an ASCII character        |
+| `description`      | textual representation                                      |
+| `hashValue`        | the `Int` hash value                                        |
+| `hexDigitValue`    | the `Int` hex value                                         |
+| `isASCII`          | `Bool` value                                                |
+| `isCased`          | `Bool` value indicating if it is changed by case conversion |
+| `isCurrencySymbol` | `Bool` value                                                |
+| `isHexDigit`       | `Bool` value                                                |
+| `isLetter`         | `Bool` value                                                |
+| `isLowercase`      | `Bool` value                                                |
+| `isMathSymbol`     | `Bool` value                                                |
+| `isNewline`        | `Bool` value                                                |
+| `isNumber`         | `Bool` value                                                |
+| `isPunctuation`    | `Bool` value                                                |
+| `isSymbol`         | `Bool` value                                                |
+| `isUppercase`      | `Bool` value                                                |
+| `isWhitespace`     | `Bool` value                                                |
+| `isWholeNumber`    | `Bool` value; What single-digit numbers are not whole?      |
+| `utf16`            | the UTF-16 encoding value                                   |
+| `utf8`             | the UTF-8 encoding value                                    |
+| `wholeNumberValue` | the `Int` value                                             |
+
+`Character` methods include, but are not limited to the following:
+
+| Method         | Description                                   |
+| -------------- | --------------------------------------------- |
+| `lowercased()` | returns `Character` that is lowercase version |
+| `uppercased()` | returns `Character` that is uppercase version |
 
 ### Ranges
 
