@@ -2455,7 +2455,60 @@ assert(text == "Goat")
 
 ## JSON
 
-TODO: Describe how to create and parse JSON.
+Serializing Swift types to JSON and deserializing JSON back to Swift types
+is supported by the `JSONEncoder` and `JSONDecoder` classes.
+These tasks are a bit more difficult in Swift than in JavaScript.
+
+Swift types must implement the `Encodable` and `Decodable` protocols
+in order be converted to and from JSON.
+`Codable` is a typealias to `Decodable & Encodable`,
+so custom types typically just state that they implement that.
+
+```swift
+import Foundation
+
+let encoder = JSONEncoder()
+encoder.outputFormatting = .prettyPrinted // optional setting
+let decoder = JSONDecoder()
+
+let arr = [1, 3, 7]
+// Encode the array as JSON.
+var encoded = try encoder.encode(arr)
+// This String initializer returns an optional.
+if let json = String(data: encoded, encoding: .utf8) {
+    print("array JSON =", json)
+} else {
+    print("failed to encode JSON")
+}
+
+struct Demo: Codable {
+    var b: Bool
+    var i: Int
+    var f: Float
+    var d: Double
+    var s: String
+    // The Character type does not conform to Encodable or Decodable
+    // so it cannot easily be converted to and from JSON.
+}
+
+let demo = Demo(b: true, i: 3, f: 3.14, d: 3.14159, s: "test")
+// Encode the object as JSON.
+encoded = try encoder.encode(demo)
+if let json = String(data: encoded, encoding: .utf8) {
+    print("object JSON =", json)
+
+    // Prepare to decode the JSON.
+    // The data method returns an optional.
+    if let data = json.data(using: .utf8) {
+        // Decode the JSON into a Demo objet.
+        // Is Demo.self a constructor?
+        let demo2: Demo? = try? decoder.decode(Demo.self, from: data)
+        if (demo2 != nil) { print("Demo object =", demo2!) }
+    }
+} else {
+    print("failed to encode JSON")
+}
+```
 
 ## File I/O
 
@@ -2591,3 +2644,10 @@ the features of Swift that are annoying, at least in my opinion.
 - Why doesn't Swift assume that any statement in a `do` block can throw?
   It seems tedious to require the `try` keyword
   in front of every expression that can throw.
+
+- Why doesn't the `Character` type conform to the
+  `Decodable` and `Encodable` protocols like the other primitive types?
+
+- Why is the `try` keyword allowed outside a `do` block
+  and what happens if the expression following it throws?
+  Does it just propagate the error up the call stack?
