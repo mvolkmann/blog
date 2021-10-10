@@ -2513,10 +2513,12 @@ if let json = String(data: encoded, encoding: .utf8) {
 ## File I/O
 
 TODO: Describe how to read and write files.
+See the `FileManager` class.
 
 ## HTTP Requests
 
 TODO: Describe how to send HTTP requests and process HTTP responses.
+See the `URLRequest` struct.
 
 ## Shell Commands
 
