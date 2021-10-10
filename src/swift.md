@@ -15,6 +15,8 @@ Key facts about Swift include the following:
 - goals are to be safe, fast, and expressive
 - strongly typed with type inference
 - supports both object-oriented and functional programming
+- a big language with a large number of features
+  and a corresponding learning curve
 - built on {% aTargetBlank "https://llvm.org", "LLVM" %}
   (Low Level Virtual Machine)
 - interoperates with {% aTargetBlank
@@ -590,6 +592,10 @@ typealias doublePairToDouble = (Double, Double) -> Double
 let product: doublePairToDouble = {$0 * $1}
 print(product(2, 3))
 ```
+
+Swift does not support type unions like in TypeScript.
+For example, it is not possible to define a type that can be
+an `Int` or a `Double` using `typealias Number = Int | Double`.
 
 A `typealias` can be used to give a name to a combination of protocols.
 For example, the following type alias is defined by Swift.
@@ -1785,7 +1791,7 @@ a default initializer that takes no arguments is provided.
 Structs are value types. This means that assigning one to a variable
 creates a copy rather than assigning a reference to the same instance.
 
-````swift
+```swift
 var dog2 = dog // dog2 is a copy of dog.
 dog.age = 2 // This change doesn't affect dog2.
 print(dog.age, dog2.age) // 2 1
@@ -2214,12 +2220,12 @@ Swift supports four kinds of ranges.
 
 - `Range`: `start..<end`
 
-   This is half-open, meaning that the end index is not included.
-   `CountableRange` is a typealias of this type.
+  This is half-open, meaning that the end index is not included.
+  `CountableRange` is a typealias of this type.
 
 - `ClosedRange`: `start...end`
-   This is a closed, meaning that the end index is included.
-   `CountableClosedRange` is a typealias of this type.
+  This is a closed, meaning that the end index is included.
+  `CountableClosedRange` is a typealias of this type.
 
 - `PartialRangeFrom`: `start...`
 
@@ -2494,8 +2500,16 @@ the features of Swift that are annoying, at least in my opinion.
 - Going too far
 
   Swift has many good features that it stretches too far.
-  There are too many examples to list them all, but here are some:
+  Some might say programming language features that have
+  significant overlap with other features should not be supported.
+
+  Here are some examples of features that perhaps should not be supported.
 
   - enumerations can have initializers and methods
   - enumerations support "recursive enumerations"
-````
+  - structs and classes have too much overlap in functionality
+
+## Questions
+
+- Why is a default memberwise initializer is provided for structs,
+  but not for classes?
