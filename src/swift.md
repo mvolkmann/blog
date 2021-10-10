@@ -67,10 +67,17 @@ To experiment with Swift:
 - enter a name for the playground
 - select the directory where it will be saved
 - enter code in the provided text editor
-- to run all of the code, click the square at the top of the console area
+- to run all of the code,
+  click the blue triangle in the gutter after the last line,
+  press cmd-shift-return, or select Editor ... Run Playground
 - to run only the code up to and including a specific line,
   hover over the line and click the play button that appears
 - `print` output appears in the console area at the bottom
+
+Xcode is slow at evaluating a playground.
+It can take several seconds after saving a change
+for it to identify syntax errors.
+It can also take several seconds to run the code.
 
 To developing an app:
 
