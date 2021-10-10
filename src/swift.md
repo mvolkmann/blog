@@ -983,6 +983,7 @@ TODO: Does Swift support destructuring? Works with tuples.
 | `dropFirst(Int) -> ArraySlice<Element>`                   | returns subsequence of elements after first n                                              |
 | `dropLast(Int) -> ArraySlice<Element>`                    | returns subsequence of elements before last n                                              |
 | `enumerated(t) -> EnumeratedSequence`                     | returns subsequence of (n, x) pairs where n is an index and x is the element at that index |
+| `filter((Element) -> Bool) -> [Element]                   | returns a new array containing a subset of the elements                                    |
 | `first(where: (Element) -> Bool) -> Element?`             | returns first element that satisfies predicate                                             |
 | `firstIndex(of: Element) -> Int?`                         | returns index of first element matching given element                                      |
 | `firstIndex(where: (Element) -> Bool) -> Int?`            | returns index of first element that satisfies predicate                                    |
