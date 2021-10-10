@@ -6,8 +6,6 @@ layout: topic-layout.njk
 
 ## Overview
 
-THIS IS A WORK IN PROGRESS!
-
 {% aTargetBlank "https://swift.org", "Swift" %}
 is an open source programming language created by Apple.
 Key facts about Swift include the following:
@@ -30,6 +28,7 @@ Key facts about Swift include the following:
 - includes a {% aTargetBlank
   "https://developer.apple.com/documentation/swift/swift_standard_library",
   "Standard Library" %}
+- compiler is slow, not swift
 
 ## Resources
 
@@ -480,11 +479,12 @@ To handle errors, use one of the following approaches:
 
   Each `case` can be followed by a pattern, or list of patterns,
   that identify the kinds of errors it handles.
+  To access data associated with errors caught by these cases,
+  use the `let` syntax shown in the example code below.
+
   A `case` with no pattern can appear at the end
   and is used to handle all remaining kinds of errors.
-  Inside each `case` block the local constant `error`
-  is set to the error object that describes the error.
-  TODO: Does this only happen in the `case` with no pattern?
+  Inside this block the variable `error` is set to the value that was thrown.
 
   If none of the cases handle the error type that has occurred,
   the error is propagated to the caller.
@@ -519,10 +519,53 @@ such as closing files or database connections.
 Here is an example of using the do/catch syntax.
 
 ```swift
+enum IntError: Error {
+    case negative(_ n: Int)
+    case other
+    case zero
+    case tooHigh(_ n: Int, max: Int)
+}
 
+struct PositiveInteger {
+    var n: Int
+
+    init(_ n: Int, max: Int) throws {
+        if (n < 0) { throw IntError.negative(n) }
+        if (n == 0) { throw IntError.zero }
+        if (n > max) { throw IntError.tooHigh(n, max: max) }
+        if (n == 7) { throw IntError.other } // for testing catch with no pattern
+        self.n = n
+    }
+}
+
+do {
+    // Try each of the variations below by uncommented it
+    // and commenting all the others.
+
+    let pi = try PositiveInteger(3, max: 10) // doesn't throw
+    print("pi =", pi)
+
+    //let pi = try PositiveInteger(0, max: 10) // throws zero
+    //print("pi =", pi)
+
+    //let pi = try PositiveInteger(-2, max: 10) // throws negative
+    //print("pi =", pi)
+
+    //let pi = try PositiveInteger(11, max: 10) // throws tooHigh
+    //print("pi =", pi)
+
+    //let pi = try PositiveInteger(7, max: 10) // throws other
+    //print("pi =", pi)
+} catch IntError.negative(let n) {
+    print("negative numbers like \(n) are not allowed")
+} catch IntError.zero {
+    print("zero is not allowed")
+} catch IntError.tooHigh(let n, let max) {
+    print("value \(n) exceeds the maximum of \(max)")
+} catch {
+    print("error value is", error)
+}
 ```
-
-TODO: Finish this section
 
 ## Type Aliases
 
@@ -1077,8 +1120,6 @@ for (index, score) in scores.enumerated() {
 }
 ```
 
-TODO: Does Swift support destructuring? Works with tuples.
-
 `Array` properties include the following:
 
 | Property   | Description                                                       |
@@ -1369,6 +1410,16 @@ typealias MyNamedTuple = (happy: Bool, score: Int, name: String)
 let t2: MyNamedTuple = (happy: true, score: 19, name: "Mark")
 print(t2.score) // 19
 ```
+
+The elements of a tuple can be assigned to variables using destructuring,
+All of the elements must be assigned, not just a subset.
+
+```swift
+let myTuple = (true, "test", 1, 2.3)
+let (b, s, i, d) = myTuple
+```
+
+Swift only supports destructuring of tuples, not arrays or objects.
 
 ## Variables
 
@@ -2371,7 +2422,7 @@ To format Swift code in Xcode, select the lines to be formatted (cmd-a for all)
 and press ctrl-i which is the keyboard shortcut
 for Editor ... Structure ... Re-Indent.
 
-Some options for Swift code formatting are
+Some options for Swift code formatting outside Xcode include
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
 and {% aTargetBlank "https://github.com/apple/swift-format", "swift-format" %}.
 
