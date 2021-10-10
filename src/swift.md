@@ -97,8 +97,7 @@ To start the interpreter as a REPL (Read Eval Print Loop), enter `swift`.
 Then enter Swift statements to be evaluated.
 For example, enter `print(1 + 2)`.
 
-To run the interpreter on lines of code in a file,
-enter `swift < file-path`.
+To run the interpreter on code in a file, enter `swift < file-path`.
 For example, create the file `greet.swift` containing `print("Hello, World!")`
 and enter `swift < greet.swift` to run it.
 
@@ -2512,8 +2511,45 @@ if let json = String(data: encoded, encoding: .utf8) {
 
 ## File I/O
 
-TODO: Describe how to read and write files.
-See the `FileManager` class.
+To write and read files, use the `FileManager` class.
+
+```swift
+import Foundation
+
+let dirUrl = FileManager.default.homeDirectoryForCurrentUser
+// file:///Users/mark/
+
+// For iOS, use this instead:
+// let dirUrl = FileManager.default.urls(
+//     for: .documentDirectory, in: .userDomainMask)[0]
+
+var filePath = dirUrl.appendingPathComponent("demo.txt")
+// file:///Users/mark/demo.txt
+
+// Write to the file.
+let text = "Hello, World!"
+do {
+    // Setting atomically to true means that it will write to an auxillary file
+    // first and then rename that file to the target file to guarantee that
+    // the file won't be partially written if the app crashes while writing.
+    try text.write(to: filePath, atomically: true, encoding: .utf8)
+    print("wrote file")
+} catch {
+    print(error.localizedDescription)
+}
+
+// Read from the file.
+do {
+    let data = try Data(contentsOf: filePath)
+    if let text = String(data: data, encoding: .utf8) {
+        print(text) // Hello, World!
+    } else {
+        print("failed to read from file");
+    }
+} catch {
+    print(error.localizedDescription)
+}
+```
 
 ## HTTP Requests
 
@@ -2523,6 +2559,7 @@ See the `URLRequest` struct.
 ## Shell Commands
 
 TODO: Is it possible to execute shell commands from Swift?
+See the `Process` class.
 
 ## Tools
 
@@ -2657,3 +2694,6 @@ the features of Swift that are annoying, at least in my opinion.
 - Why is the `try` keyword allowed outside a `do` block
   and what happens if the expression following it throws?
   Does it just propagate the error up the call stack?
+
+- How is a new module defined and
+  can it be implemented by multiple source files?
