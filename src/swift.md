@@ -743,6 +743,7 @@ if number != nil {
 
 ## Characters
 
+The `Character` type represents a single Unicode character.
 TODO: Finish this section.
 
 ### Ranges
@@ -1044,7 +1045,7 @@ TODO: Does Swift support destructuring? Works with tuples.
 ```swift
 let data = [1, 4, 7, 10, 16]
 
-let doubled = data.map { $0 * 2 }
+let doubled = data.map { $0 * 2 } // uses a trailing closure
 print(doubled) // [2, 8, 14, 20, 32]
 
 let allData = [1, nil, 7, nil, nil, 10]
@@ -1063,6 +1064,8 @@ print(evens) // [4, 10, 16]
 //let sum = data.reduce(0) {(acc: Int, n: Int) in acc + n} // 38
 
 // Passing a binary operator.
+// This works because binary operators are
+// implemented as functions that take two arguments
 let sum = data.reduce(0, +) // 38
 print(sum)
 
@@ -2093,9 +2096,16 @@ begin with the `mutating` keyword to explicitly indicate that they do this.
 Strings in Swift are notoriously difficult to work with
 because indexes to characters within them must be specified
 using the type `String.Index` instead of `Int`.
+String operations that require finding a character at a given index
+are O(n) due to the fact that Unicode characters can vary in length.
+These operations require traversing all the characters from the beginning,
+and is the reason Swift doesn't support them out of the box.
+However, these operations are commonly needed and
+I think these operations should be supported despite being O(n).
+
 It is common to use an extension to the `String` class
 to add support for `Int` indexes to the subscript operator.
-Here is an implementation of this idea.
+The following is an implementation of this idea.
 
 When overriding the subscript operator,
 five argument types should be supported.
@@ -2287,9 +2297,17 @@ The setup steps are:
 
 ## Annoyances
 
-I will add to this list as I learn more.
+In a sense if you want to do web development,
+your opinions about JavaScript don't matter.
+Web development is primary done with JavaScript (or TypeScript)
+and you have to accept that.
 
-The things that annoy me most about Swift are:
+In a similar way, kf you want to do iOS or Mac development,
+your opinions about Swift don't matter.
+Most developers prefer it over Objective-C and there are no other choices.
+
+However, it's still interesting to discuss
+the features of Swift that are annoying, at least in my opinion.
 
 - String interpolation syntax
 
@@ -2310,8 +2328,11 @@ The things that annoy me most about Swift are:
 
 - Trailing closures
 
-  The syntax for trailing closures is surprising and unique to Swift.
-  It is even more surprising if there is more than one.
+  The syntax for trailing closures is unique to Swift.
+  It's nice when used with methods like `Array` `map`.
+  However, the syntax looks strange when more than one
+  is used in the same function/method call.
+  I'd prefer if that wasn't supported.
 
 - Going too far
 
