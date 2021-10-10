@@ -500,7 +500,9 @@ To handle errors, use one of the following approaches:
   that each handle different kinds of errors.
 
   Each statement in the `do` block that can throw an error
-  should be preceded by the `try` keyword.
+  must be preceded by the `try` keyword.
+  This is different from most programming languages where
+  it is assumed that any statement in a `try` block can thrown.
 
   Each `case` can be followed by a pattern, or list of patterns,
   that identify the kinds of errors it handles.
@@ -2273,7 +2275,10 @@ There are many uses of ranges, including:
 
 ## Extensions
 
-Extensions add functionality to structs, classes, enums, and protocols.
+Extensions add functionality to existing types,
+including structs, classes, enums, and protocols.
+This can even be done to types defined by the standard library.
+
 The functionality that can be added includes:
 
 - computed type and instance properties
@@ -2448,6 +2453,18 @@ text[..<2] = "Goa"
 assert(text == "Goat")
 ```
 
+## JSON
+
+TODO: Describe how to create and parse JSON.
+
+## File I/O
+
+TODO: Describe how to read and write files.
+
+## HTTP Requests
+
+TODO: Describe how to send HTTP requests and process HTTP responses.
+
 ## Tools
 
 To format Swift code in Xcode, select the lines to be formatted (cmd-a for all)
@@ -2533,8 +2550,9 @@ the features of Swift that are annoying, at least in my opinion.
 
   Here are some examples of features that perhaps should not be supported.
 
-  - enumerations can have initializers and methods
-  - enumerations support "recursive enumerations"
+  - enumerations should not support initializers, properties, and methods
+  - enumerations should not support "recursive enumerations"
+  - associated types of enumerations should be limited to primitive types
   - structs and classes have too much overlap in functionality
 
 - Too many optional unwrapping options
@@ -2547,3 +2565,28 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Why is a default memberwise initializer is provided for structs,
   but not for classes?
+
+- Why do `struct` methods that modify properties
+  have to be marked with the `mutating` keyword,
+  but `class` methods that modify properties
+  are not required to do do this and in fact cannot do it?
+
+- The compiler knows whether a struct method modifies properties.
+  It reports an error if a non-modifying method is marked as `mutating`.
+  It also reports an error if a modifying method is not marked as `mutating`.
+  So why are developers required to apply the `mutating` keyword?
+
+- Why do closure parameters that outlive a function call
+  need to be annotated with `@escaping`?
+  Can't the compiler determine how to manage them?
+
+- Since all initializers are required to initialize all properties,
+  either directly or through a call to `super.init`,
+  why is the `convenience` keyword needed?
+
+- Why are subclass initializers required to initialize their own properties
+  before calling `super.init`?
+
+- Why doesn't Swift assume that any statement in a `do` block can throw?
+  It seems tedious to require the `try` keyword
+  in front of every expression that can throw.
