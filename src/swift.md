@@ -2416,8 +2416,6 @@ assert(text == "Goat")
 
 ## Tools
 
-TODO: Is there an equivalent of ESLint for Swift?
-
 To format Swift code in Xcode, select the lines to be formatted (cmd-a for all)
 and press ctrl-i which is the keyboard shortcut
 for Editor ... Structure ... Re-Indent.
