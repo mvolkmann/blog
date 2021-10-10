@@ -1041,6 +1041,41 @@ TODO: Does Swift support destructuring? Works with tuples.
 | `suffix(while: (Element) -> Bool) -> ArraySlice<Element>` | returns subsequence of last elements that match a predicate                                |
 | `swapAt(Int, Int)`                                        | swaps elements at the given indexes                                                        |
 
+```swift
+let data = [1, 4, 7, 10, 16]
+
+let doubled = data.map { $0 * 2 }
+print(doubled) // [2, 8, 14, 20, 32]
+
+let allData = [1, nil, 7, nil, nil, 10]
+let goodData = allData.compactMap { $0 }
+print(goodData) // [1, 7, 10]
+
+let evens = data.filter { $0 % 2 == 0}
+print(evens) // [4, 10, 16]
+
+// This shows three ways to use the Array reduce method to sum numbers.
+
+// Passing a closure as the last argument.
+//let sum = data.reduce(0, {(acc: Int, n: Int) in acc + n}) // 38
+
+// Using a trailing closure.
+//let sum = data.reduce(0) {(acc: Int, n: Int) in acc + n} // 38
+
+// Passing a binary operator.
+let sum = data.reduce(0, +) // 38
+print(sum)
+
+let prices = [1.23, 5.79, 3.48]
+let quantities = [5, 2, 4, 7, 1] // 7 and 1 are ignored
+// The zip function only takes two sequences
+// and only uses elements up to the shortest count.
+// It returns a Sequence, not an Array.
+let zipped = Array(zip(prices, quantities))
+print(zipped) // [(1.23, 5), (5.79, 2), (3.48, 4)]
+print(zipped[2].0) // 3.48
+```
+
 ### Sets
 
 Sets can be created by passing elements to the `Set` function.
