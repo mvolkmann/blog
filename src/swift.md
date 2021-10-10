@@ -252,6 +252,24 @@ The argument label defaults to the parameter name.
 Typically argument labels are omitted
 and callers use the parameter names.
 
+```swift
+func order(item: Item, quantity: Int) -> Int {
+    // Place order and get order number.
+    return orderNumber
+}
+let orderNumber = order(item: Item("chicken fried rice"), quantity: 2)
+```
+
+Swift does not support a shorthand syntax for calling functions
+when in-scope variables have the same names are argument labels.
+
+```swift
+let item = Item("chicken fried rice")
+let quantity = 2
+//let orderNumber = order(item, quantity) // doesn't work
+let orderNumber = order(item: item, quantity: quantity)
+```
+
 When an argument label is underscore,
 the function must be called with only a value for that parameter.
 Otherwise calls must include the argument label.
@@ -379,6 +397,11 @@ to scope their usage.
 Otherwise they are global and can be called from anywhere.
 Nested functions can be returned by their enclosing function
 to allow them to be called from outside.
+
+Function currying creates a new version of an existing function that
+takes one fewer arguments and uses a fixed value for the omitted argument.
+JavaScript functions support this using the `bind` method.
+Swift does not support this.
 
 ## Closures
 
@@ -1429,8 +1452,11 @@ Swift only supports destructuring of tuples, not arrays or objects.
 
 ## Variables
 
-Variables are declared with the
-`let` (immutable) and `var` (mutable) keywords.
+Mutable variables are declared with the `var` keyword.
+Immutable variables are declared with the `let` keyword.
+This is an unfortunate choice for JavaScript developers where
+`let` is for mutable variables and `const` is for immutable variables.
+
 Variable names can be followed by a colon and a type.
 They can also be followed by `=` and an initial value.
 The type can be omitted if the desired type
@@ -1611,6 +1637,8 @@ a variable or property with an optional type.
   This uses a "guard" to
   assign the value of the optional to a variable if it is not `nil`
   or run the code in the `else` block if it is `nil`.
+  In a sense this it the opposite of the `if let` syntax
+  and is perhaps an option that isn't needed.
 
 - `if myOptional != nil { let value = myOptional!; ... }`
 
@@ -2508,6 +2536,12 @@ the features of Swift that are annoying, at least in my opinion.
   - enumerations can have initializers and methods
   - enumerations support "recursive enumerations"
   - structs and classes have too much overlap in functionality
+
+- Too many optional unwrapping options
+
+  The `if let` syntax reads well.
+  It seems that in most cases this is
+  a better option than the `guard if` syntax.
 
 ## Questions
 
