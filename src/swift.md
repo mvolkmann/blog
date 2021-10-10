@@ -440,6 +440,90 @@ Why is this required?
 Are non-escaping closures handled in an optimized way
 that discards their context after the function returns?
 
+## Error Handling
+
+Errors in that occur in Swift code are described by
+objects that implement the `Error` protocol.
+This is merely a marker protocol,
+not requiring any properties or methods.
+Often errors are described by an `enum` that implements the `Error` protocol.
+Each `enum` `case` represents a variation of the error
+and specific cases are thrown.
+
+To throw an error, use the `throw` keyword followed by an
+instance of any type that implements the `Error` protocol.
+
+To handle errors, use one of the following approaches:
+
+- allow errors to propagate to the caller
+
+  This is done by adding the `throws` keyword
+  after the parameter list and before the return type.
+  For example:
+
+  ```swift
+  func divide(numerator: Double, denominator: Double) throws -> Double {
+      ...
+  }
+  ```
+
+  Note that it is not required, or even possible,
+  to indicate the kinds of errors that can be thrown.
+
+- use a do/catch statement
+
+  The `do` statement supports having any number of associated `catch` blocks
+  that each handle different kinds of errors.
+
+  Each statement in the `do` block that can throw an error
+  should be preceded by the `try` keyword.
+
+  Each `case` can be followed by a pattern, or list of patterns,
+  that identify the kinds of errors it handles.
+  A `case` with no pattern can appear at the end
+  and is used to handle all remaining kinds of errors.
+  Inside each `case` block the local constant `error`
+  is set to the error object that describes the error.
+  TODO: Does this only happen in the `case` with no pattern?
+
+  If none of the cases handle the error type that has occurred,
+  the error is propagated to the caller.
+
+  If an error propagates to the top of the call chain and is not handled,
+  the program will terminate with a fatal error.
+
+- treat the error as an optional value
+
+  When setting a variable to the result of an expression that can throw,
+  one option is to precede the expression with `try?`.
+  If the expression throws, the variable is set to `nil`
+  and error is considered handled.
+  Such code does not need to be in a `do` block.
+
+- assert that the error should never occur
+
+  If an expression or statement technically can throw,
+  but should never throw given the way it is being used,
+  one option is to precede it with `try!`.
+  This frees the code from needing the handle errors.
+  If the code actually does throw,
+  the program will terminate with a fatal error.
+
+A `defer` block contains code the execute
+before its containing block or function exits,
+regardless of whether an error was thrown.
+This is similar to "finally" blocks in other languages.
+The code in a `defer` block typically performs cleanup activities
+such as closing files or database connections.
+
+Here is an example of using the do/catch syntax.
+
+```swift
+
+```
+
+TODO: Finish this section
+
 ## Type Aliases
 
 A type alias assigns an alternate name to another type.
@@ -496,16 +580,6 @@ do {
     print("fail")
 }
 ```
-
-TODO: Add a section on error handling.
-
-Why is the `try` keyword necessary?
-Can a `do` block contain more than one use of the `try` keyword?
-Why are `catch` blocks not supplied with
-an error object that describes the error?
-
-There can be more than one `catch` block
-where each matches a different kind of error.
 
 ## Built-in Primitive Types
 
