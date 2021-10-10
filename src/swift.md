@@ -2518,6 +2518,10 @@ TODO: Describe how to read and write files.
 
 TODO: Describe how to send HTTP requests and process HTTP responses.
 
+## Shell Commands
+
+TODO: Is it possible to execute shell commands from Swift?
+
 ## Tools
 
 To format Swift code in Xcode, select the lines to be formatted (cmd-a for all)
