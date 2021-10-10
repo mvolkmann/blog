@@ -79,6 +79,10 @@ It can take several seconds after saving a change
 for it to identify syntax errors.
 It can also take several seconds to run the code.
 
+Playgrounds treat files under “Sources” as a separate, unnamed module.
+To expose things defined in those files to the main playground code,
+declare them as `public`. They do not need to be "imported".
+
 To developing an app:
 
 - select one of the following:
