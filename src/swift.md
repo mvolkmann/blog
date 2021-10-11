@@ -407,9 +407,10 @@ Swift does not support this.
 Anonymous functions (a.k.a closures) can be used as
 the values of variables and arguments.
 They are written with the following syntax:
-`{ (parameter-list) -> return-type in statements }`.
+`{ parameter-list -> return-type in statements }`.
 The return type can be omitted when it can be inferred.
-Note the use of the `in` keyword to mark the beginning of the statements.
+Note the use of the `in` keyword to mark
+the end of the parameter list and the beginning of the statements.
 
 The following code defines and calls several anonymous functions.
 
@@ -428,7 +429,7 @@ let product = {(a: Double, b: Double) -> Double in a * b}
 print(product(2, 3))
 
 // This function omits the return type because it can be inferred.
-let product2 = {(a: Double, b: Double) in a * b}
+let product2 = {a: Double, b: Double in a * b}
 print(product2(2, 3))
 ```
 
@@ -448,10 +449,8 @@ For example, these are equivalent:
 
 ```swift
 let prices = [1.23, 2.34, 3.45]
-let total = prices.reduce(0, {(result, price) in result + price})
-let total = prices.reduce(0) {
-    (result, price) in result + price
-}
+let total = prices.reduce(0, { result, price in result + price })
+let total = prices.reduce(0) { result, price in result + price }
 let total = prices.reduce(0, {$0 + $1})
 ```
 
@@ -798,7 +797,7 @@ for c in name {
 }
 
 name.forEach({(c: Character) -> Void in print(c)})
-name.forEach({(c) in print(c)})
+name.forEach({c in print(c)})
 ```
 
 Indexes into strings have the type `String.Index` rather than `Int`.
@@ -1237,10 +1236,10 @@ print(evens) // [4, 10, 16]
 // This shows three ways to use the Array reduce method to sum numbers.
 
 // Passing a closure as the last argument.
-//let sum = data.reduce(0, {(acc: Int, n: Int) in acc + n}) // 38
+//let sum = data.reduce(0, {acc: Int, n: Int in acc + n}) // 38
 
 // Using a trailing closure.
-//let sum = data.reduce(0) {(acc: Int, n: Int) in acc + n} // 38
+//let sum = data.reduce(0) {acc: Int, n: Int in acc + n} // 38
 
 // Passing a binary operator.
 // This works because binary operators are
@@ -2657,6 +2656,13 @@ the features of Swift that are annoying, at least in my opinion.
   The `if let` syntax reads well.
   It seems that in most cases this is
   a better option than the `guard if` syntax.
+
+- Some names are way too long
+
+  I'm trying to imagine a meeting between the Swift designers where
+  someone proposed that the name of the error property
+  that holds the message should be `localizedDescription`
+  and everyone in the room agreed.
 
 ## Questions
 
