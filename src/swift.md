@@ -97,9 +97,9 @@ To start the interpreter as a REPL (Read Eval Print Loop), enter `swift`.
 Then enter Swift statements to be evaluated.
 For example, enter `print(1 + 2)`.
 
-To run the interpreter on code in a file, enter `swift < file-path`.
+To run the interpreter on code in a file, enter `swift file-path`.
 For example, create the file `greet.swift` containing `print("Hello, World!")`
-and enter `swift < greet.swift` to run it.
+and enter `swift greet.swift` to run it.
 
 Interpreter commands begin with a colon.
 The most commonly used commands are described in the table below.
@@ -2552,8 +2552,59 @@ do {
 
 ## HTTP Requests
 
-TODO: Describe how to send HTTP requests and process HTTP responses.
-See the `URLRequest` struct.
+Sending HTTP requests and processing HTTP responses is fairly tedious.
+Perhaps using the new `async` and `await` keywords will make this easier,
+but those require macOS 12 or higher or an unknown iOS version.
+
+```swift
+import Foundation
+
+struct Employee: Codable {
+    let employee_age: Int
+    let employee_name: String
+    let employee_salary: Int
+    let id: Int
+    let profile_image: String
+}
+
+struct EmployeesResponse: Codable {
+    let status: String;
+    let data: [Employee]
+}
+
+let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")!
+
+let group = DispatchGroup()
+group.enter()
+
+let task = URLSession.shared.dataTask(with: url) { data, response, error in
+    guard let data = data, error == nil else {
+        print("URLSession error:", error!.localizedDescription)
+        return
+    }
+
+    do {
+        let decoded: EmployeesResponse? =
+            try JSONDecoder().decode(EmployeesResponse.self, from: data)
+        guard let res = decoded else { return }
+        if (res.status == "success") {
+            //print("res =", res)
+            for employee in res.data {
+                print("\(employee.employee_name); age: \(employee.employee_age)")
+            }
+        } else {
+            print("service failed to return data")
+        }
+    } catch {
+        print("error parsing JSON:", error.localizedDescription)
+    }
+
+    group.leave()
+}
+
+task.resume()
+group.wait()
+```
 
 ## Shell Commands
 
@@ -2703,3 +2754,5 @@ the features of Swift that are annoying, at least in my opinion.
 
 - How is a new module defined and
   can it be implemented by multiple source files?
+
+- Does Swift having anything like promises in JavaScript?
