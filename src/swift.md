@@ -2652,6 +2652,22 @@ enter `swiftformat *.swift`.
 
 ### Xcode
 
+The primary IDE for creating macOS, iOS, and watchOS applications is Xcode.
+It is a passable IDE with many issues.
+
+It is slow.
+
+It cannot format code on save.
+You must select a section of code or the entire file and press ctrl-i.
+
+When developing iOS apps it is useful to launch the app in the Simulator
+directly from Xcode. The Simulator can simulate many different devices.
+But Xcode will not automatically refresh the app in the Simulator
+when code changes are saved.
+The Preview panel is updated, but it is more limited in functionality
+than the Simulator.
+TODO: List the differences between the Simulator app and the Preview pane.
+
 Xcode 13 adds support for Vim key bindings, but it is very basic.
 It does not support repeating commands with the period key,
 defining macros, and other more advanced Vim features.
