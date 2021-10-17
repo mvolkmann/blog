@@ -132,3 +132,38 @@ Component views include:
 - EquatableView
 - AnyView
 - TupleView
+
+## Core Data
+
+Core Data is an object/graph persistence framework.
+It supports many features including
+data validation, undo/redo, and lazy loading.
+
+The easiest way to setup use of Core Data is to
+check the "Use Core Data" checkbox on the options panel
+when creating a new project.
+
+To define the entities that will be persisted,
+click the project-name.xcdatamodeld file in the Navigator pane.
+This will display an entity editor.
+
+To add entities, click the "Add Entity" button at the bottom.
+This will create an empty entity named "Entity".
+Double-click the name to change it.
+These become class names, so begin with an uppercase letter.
+
+To add attributes to an entity,
+click the "+" at the bottom of the attribute list.
+For each attribute, enter a name and select a type.
+
+To create an initial set of objects,
+edit the `preview` property defined in `Persistence.swift`.
+For example:
+
+```swift
+
+``
+
+If you see errors that say "cannot find type 'SomeEntityName' in scope",
+restart Xcode.
+```
