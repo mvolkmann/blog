@@ -31,6 +31,8 @@ Key facts about Swift include the following:
   "https://developer.apple.com/documentation/swift/swift_standard_library",
   "Standard Library" %}
 - compiler is slow, not swift
+- language makes almost no effort to be concise
+  and uses many long keywords and method names
 
 ## Resources
 
@@ -2563,12 +2565,16 @@ but those require macOS 12 or higher or an unknown iOS version.
 ```swift
 import Foundation
 
-struct Employee: Codable {
+// Codable combines Encodable and Decodable.
+// The Encodable part is not used in this example.
+struct Employee: Codable, CustomStringConvertible {
     let employee_age: Int
     let employee_name: String
     let employee_salary: Int
     let id: Int
     let profile_image: String
+
+    var description: String { "\(employee_name); age: \(employee_age)" }
 }
 
 struct EmployeesResponse: Codable {
@@ -2582,19 +2588,35 @@ let group = DispatchGroup()
 group.enter()
 
 let task = URLSession.shared.dataTask(with: url) { data, response, error in
+    defer { group.leave() }
+
     guard let data = data, error == nil else {
         print("URLSession error:", error!.localizedDescription)
         return
     }
 
+    if let res = response as? HTTPURLResponse {
+        let contentType = res.value(forHTTPHeaderField: "Content-Type") ?? ""
+        if contentType.hasPrefix("text/html") {
+            let status = res.value(forHTTPHeaderField: "response") ?? "200"
+            if (status == "429") {
+                print("too many requests")
+            } else {
+              print("res =", res)
+              print("status =", status)
+            }
+            return
+        }
+    }
+
+    // Print the data which is in a byte array.
+    //print(String(data: data, encoding: .utf8) ?? "Bad Data")
+
     do {
-        let decoded: EmployeesResponse? =
-            try JSONDecoder().decode(EmployeesResponse.self, from: data)
-        guard let res = decoded else { return }
-        if (res.status == "success") {
-            //print("res =", res)
-            for employee in res.data {
-                print("\(employee.employee_name); age: \(employee.employee_age)")
+        let json = try JSONDecoder().decode(EmployeesResponse.self, from: data)
+        if (json.status == "success") {
+            for employee in json.data {
+                print(employee)
             }
         } else {
             print("service failed to return data")
@@ -2602,8 +2624,6 @@ let task = URLSession.shared.dataTask(with: url) { data, response, error in
     } catch {
         print("error parsing JSON:", error.localizedDescription)
     }
-
-    group.leave()
 }
 
 task.resume()
