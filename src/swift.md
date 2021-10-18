@@ -2668,6 +2668,10 @@ The Preview panel is updated, but it is more limited in functionality
 than the Simulator.
 TODO: List the differences between the Simulator app and the Preview pane.
 
+The default device type used by the Simulator can be changed
+by selecting Product ... Destination ... Choose Destination...
+and selecting a device type.
+
 Xcode 13 adds support for Vim key bindings, but it is very basic.
 It does not support repeating commands with the period key,
 defining macros, and other more advanced Vim features.

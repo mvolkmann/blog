@@ -103,6 +103,31 @@ To see the extra features this includes, search for "extra" at
 {% aTargetBlank "https://github.com/nushell/nushell/blob/main/Cargo.toml",
 "Cargo.toml" %}.
 
+## Upgrading
+
+My `PATH` environment variable contains `/usr/local/bin`.
+I created a symbolic link in that directory
+to where the Rust `cargo` command installs executables.
+The one-time setup commands to do this are:
+
+- `cd /usr/local/bin`
+- `ln -s $HOME/.cargo/bin/nu nu`
+
+When a new version of Nushell comes out, here are the steps to upgrade.
+These have been tested in macOS, but not in other platforms.
+
+- enter `nu` to see the current version
+
+- optionally update the Rust toolchain if tools may be out of date
+  by entering `rustup update`
+
+- enter `cargo install nu` to install the new version of Nushell
+
+  This takes a very long time, perhaps 10 minutes.
+  It installs the `nu` executable in `$HOME/.cargo/bin`.
+
+- enter `nu` to verify that a new version was installed
+
 ## Getting Started
 
 After installing Nushell, enter `nu` in a terminal to start a shell.
