@@ -133,7 +133,28 @@ Component views include:
 - AnyView
 - TupleView
 
+## Environments
+
+TODO: https://www.youtube.com/watch?v=SUiITSkAqAo&t=548s
+
+## Key Paths
+
+A key path refers to a property in a struct or class rather than
+the value of a property in a particular instance.
+
+TODO: https://www.youtube.com/watch?v=YY7SlOklZzk
+
+## Network Requests
+
+TODO: https://www.youtube.com/watch?v=2NowSN4qJUY&t=729s
+
+## Combine
+
+TODO: https://www.youtube.com/watch?v=bRpFHqv0tRQ&t=701s
+
 ## Core Data
+
+TODO: https://www.youtube.com/watch?v=091Mdv_Rjb4
 
 Core Data is an object/graph persistence framework.
 It supports many features including
