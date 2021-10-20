@@ -144,7 +144,7 @@ Optional arguments that follow the value include
 
 ## Key Paths
 
-A {% aTargetPath "https://www.youtube.com/watch?v=YY7SlOklZzk",
+A {% aTargetBlank "https://www.youtube.com/watch?v=YY7SlOklZzk",
 "key path" %} refers to a property in a struct or class rather than
 the value of a property in a particular instance.
 
