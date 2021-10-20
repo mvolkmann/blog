@@ -133,16 +133,63 @@ Component views include:
 - AnyView
 - TupleView
 
-## Environments
+## Utility Functions
 
-TODO: https://www.youtube.com/watch?v=SUiITSkAqAo&t=548s
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swift/1539127-dump", "dump" %}
+function takes a value and prints it for debugging purposes.
+The value can be non-primitive such as an object or array.
+Optional arguments that follow the value include
+`name`, `indent`, `maxDepth`, and `maxItems`.
 
 ## Key Paths
 
-A key path refers to a property in a struct or class rather than
+A {% aTargetPath "https://www.youtube.com/watch?v=YY7SlOklZzk",
+"key path" %} refers to a property in a struct or class rather than
 the value of a property in a particular instance.
 
-TODO: https://www.youtube.com/watch?v=YY7SlOklZzk
+A key path can be created with a backslash followed by
+a type name, a period, and a property name.
+For example:
+
+```swift
+struct Person {
+  var name: String
+}
+
+let namePath = \Person.name
+```
+
+A key path can be used to get the value of a property
+from an instance of a struct or class. For example:
+
+```swift
+let person = Person(name: "Mark")
+let name = person[keyPath: namePath] // "Mark"
+```
+
+TODO: What kind of key path does `\self` create?
+
+## Contexts
+
+A SwiftUI context is ...
+Most apps only use a single context.
+
+## Environments
+
+A SwiftUI environment specifies key/value pairs that affect
+all sub-views of the view on which they are specified.
+For example, if a font is specified on a `VStack` then it
+becomes the default found for all views nested inside it at any depth.
+
+To dump the contents on the current environment of a view,
+chain the following onto the view:
+
+```swift
+.transformEnvironment(\.self) { dump($0) }
+```
+
+TODO: https://www.youtube.com/watch?v=SUiITSkAqAo&t=548s
 
 ## Network Requests
 
