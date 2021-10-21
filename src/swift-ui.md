@@ -21,6 +21,8 @@ is a Swift library for building macOS, iOS, and Apple Watch apps.
 - enter an Organization Identifier such as your email address
 - select the Interface such as "SwiftUI"
 - select the Language such as "Swift"
+- check "Use Core Data" to persist data in a local database
+- check "Include Tests" to enable writing unit tests
 - click "Next"
 - select the directory where the project will be stored and click "Create"
 - press the black, right-pointing triangle near the top
@@ -35,7 +37,16 @@ The left side is the Navigator.
 The right side is the Inspector.
 The center is the main editing area containing two panes.
 The left pane is the code editor and the right pane is the Preview.
+
 The Preview shows the UI outside of a simulator.
+If it isn't running, press "Resume" to start it.
+It automatically updates when code changes are saved.
+
+To run the app in the Simulator, click the black triangle at the top.
+That builds the app, launches the Simulator (if not already running),
+loads the app in the Simulator, and starts it.
+The app is not automatically updates when code changes are saved.
+The triangle must be clicked again to repeat the whole build/load/start process.
 
 Q: How can you get the simulator to automatically update
 when code changes are saved?
@@ -43,14 +54,15 @@ when code changes are saved?
 ## Icons
 
 {% aTargetBlank "https://developer.apple.com/sf-symbols/", "SF Symbols" %}
-is a library of icons provided by Apple.
+is a library of over 3000 icons provided by Apple.
 To use it, browse the website linked above and click the "Download" link.
-This downloads a .dmg file.
-Double-click this and double-click the .pkg file icon to install
-the library and the "SF Symbols" app that is used to browse the icons.
+This downloads a `.dmg` file.
+Double-click this and double-click the `.pkg` file icon to install
+the library and the "SF Symbols" app.
+To discover icon names, launch the "SF Symbols" app,
+browse the collection of icons, and click them.
 
-To use an icon in a SwiftUI app,
-add an `Image` view. For example:
+To use an icon in a SwiftUI app, add an `Image` view. For example:
 
 ```swift
 Image(systemName: "cloud.snow")
@@ -61,7 +73,7 @@ Image(systemName: "cloud.snow")
 
 SwiftUI Views are used for layout and components.
 
-Layout views include:
+Layout/container views include:
 
 - HStack
 - VStack
@@ -84,7 +96,7 @@ Layout views include:
 
 - List
 - Section
-- Foreach
+- ForEach
 - DynamicViewContent
 - Table
 
@@ -132,6 +144,17 @@ Component views include:
 - EquatableView
 - AnyView
 - TupleView
+
+TODO: Are `Color` and `LinearGradient` views?
+
+View modifiers are methods that can be called on a view to create
+a new view that is like the receiver, but modified in a specific way.
+For example, the `foregroundColor` method is a view modifier
+that can be used as follows.
+
+```swift
+Text("Hello, World!").foregroundColor(.red)
+```
 
 ## Utility Functions
 
