@@ -41,6 +41,8 @@ Key facts about Swift include the following:
   "The Swift Programming Language Book" %}
 - {% aTargetBlank "https://cs193p.sites.stanford.edu",
   "Stanford CS193p - Developing Apps for iOS" %} course by Paul Hegarty - free
+- {% aTargetBlank "https://www.youtube.com/c/PaulHudson", "Hacking with Swift" %}
+  video series on Swift and SwiftUI by Paul Hudson - free
 - {% aTargetBlank "https://www.hackingwithswift.com/100", "100 Days of Swift" %}
   by Paul Hudson - free
 - {% aTargetBlank "https://www.udemy.com/course/ios-13-app-development-bootcamp/",
