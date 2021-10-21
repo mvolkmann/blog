@@ -44,11 +44,27 @@ The Preview area shows the UI running outside of a simulator.
 If it isn't running, press the "Resume" button at the top to start it.
 The Preview automatically updates when code changes are saved.
 
+To zoom in and out on the Preview area,
+click the magnifier glass icons in the lower right (minus and plus)
+or select a zoom level from the percent dropdown.
+
 After saving code changes, if an error is detected the Preview will pause.
 To restart it, click the "Resume" button at the top or press cmd-option-p.
 
 By default the Preview is not in "Live Preview" mode.
-Clicking elements in the UI selects them rather than triggering tap events.
+Key things to know about not being in this mode include:
+
+- Clicking a View in the Preview selects it rather than triggering tap events.
+  The corresponding code is highlighted and
+  the Navigator changes to show the properties of the selected View.
+- Double-clicking a View in the Preview is similar,
+  but moves focus to the code so it can be edited.
+- Clicking a View in the code selects the corresponding View in the Preview
+  and also populates the Navigator.
+- Changes made in the Navigator update the Preview and the code,
+  but they do not take effect until
+  focus is moved out of the modified Navigator field.
+
 To switch to "Live Preview" mode so tap events are honored,
 click the button with a triangle inside a circle.
 
@@ -253,6 +269,10 @@ struct CircleButton: View {
         Button(action: action, label: {
             ZStack {
                 Circle().fill(color)
+                // Conditional logic can be implemented with an "if" statement,
+                // but iteration cannot be implemented with a "for-in" loop.
+                // A "ForEach" View must be used instead.
+                //TODO: Why the difference?
                 if selected {
                     Circle().strokeBorder(Color.black, lineWidth: 5)
                 }
@@ -290,6 +310,10 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            // When iterating over elements that do not conform to
+            // the `Identifiable` protocol, add the "id:" argument
+            // whose value is a key path that specifies
+            // how to find something unique in the element.
             ForEach(lights) { light in
                 CircleButton(
                     color: light.color,
