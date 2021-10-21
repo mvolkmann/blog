@@ -2237,6 +2237,21 @@ Properties of structs and classes whose values are allowed to be `nil`
 should have a `?` at end of their type.
 Just like with optional variables, they must be unwrapped to access their value.
 
+## `some` Keyword
+
+The `some` keyword proceeds the name of a protocol to specify that a type
+(called an "opaque type") will be some type that implements the protocol.
+In a way this is the opposite of using a generic type.
+Generic types allow calling code to specify the type that
+will be used by a function, struct, class, or enum.
+Opaque types allow a function, struct, class, or enum
+to select the type to be used.
+
+A common place whether the `some` keyword is used is in SwiftUI views.
+Their `body` property has the type `some View`.
+The value of this property is a function that returns
+any kind of object that implements the View protocol.
+
 ## Implementing Operators
 
 Built-in operators can be implemented for custom types.
@@ -2666,6 +2681,35 @@ group.wait()
 
 TODO: Is it possible to execute shell commands from Swift?
 See the `Process` class.
+
+## Compiler Directives
+
+The `#if` compiler directive conditionally includes a block of code.
+A common use is to include code that is specific to
+iOS, macOS, tvOS, or watchOS.
+
+```swift
+#if os(macOS)
+  // macOS code
+#elseif os(iOS)
+  // iOS code
+#else
+  // Other code
+#endif
+```
+
+To include code only when the app is compiled in debug mode,
+surround it with `#if DEBUG ... #endif`.
+
+To include code only when the app is not compiled in debug mode,
+surround it with `#if RELEASE ... #endif`.
+
+To include code only when the app is compiled with a specific version of Swift,
+surround it with `#if swift(<version) ... #endif`
+where `version` is replaced by a number like 5.
+
+To include code only when the app is running in the Simulator,
+surround it with `#if targetEnvironment(simulator) ... #endif`.
 
 ## Tools
 

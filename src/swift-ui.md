@@ -44,6 +44,9 @@ The Preview area shows the UI running outside of a simulator.
 If it isn't running, press the "Resume" button at the top to start it.
 The Preview automatically updates when code changes are saved.
 
+After saving code changes, if an error is detected the Preview will pause.
+To restart it, click the "Resume" button at the top or press cmd-option-p.
+
 By default the Preview is not in "Live Preview" mode.
 Clicking elements in the UI selects them rather than triggering tap events.
 To switch to "Live Preview" mode so tap events are honored,
@@ -165,6 +168,24 @@ and layout those views in a specific way.
 - AsyncImage
 
 - Button
+
+  Here are two ways to create a `Button`.
+
+  ```swift
+  // Button containing text and action specified with a trailing closure.
+  Button("My Label") {
+      // code to run when button is pressed
+  }
+
+  // Button with an action argument that is a function and
+  // contents that can be any View specified with a trailing closure.
+  Button(action: {
+      // code to run when button is pressed
+  }) {
+      Text("My Label")
+  }
+  ```
+
 - EditButton
 - PasteButton
 
@@ -362,15 +383,43 @@ data validation, undo/redo, and lazy loading.
 The easiest way to setup use of Core Data is to
 check the "Use Core Data" checkbox on the options panel
 when creating a new project.
+While it is possible to add the use of Core Data to an existing app,
+the setup steps are quite involved.
 
-To define the entities that will be persisted,
-click the project-name.xcdatamodeld file in the Navigator pane.
+The generated files setup use of Core Data.
+The file `{app-name}App.swift` registers an "environment"
+with the main `ContentView` that uses
+a `PersistenceController` instance defined in `Persistence.swift`
+and made available through a static `shared` property.
+The main view defined in `ContentView.swift` has access to this
+and uses the `@FetchRequest` property wrapper
+to get `Item` objects from the persistent store.
+The `Item` type is defined in `{app-name}.xcdatamodeld`
+and has a single attribute `timestamp`.
+
+The generated app is fully functional.
+It displays a list of items that each have a timestamp.
+Tap an item to get to a page that displays detail about just that item.
+To delete an item, swipe it left and click the "Delete" button that appears.
+To add an item with the current timestamp, click the "+" button at the top.
+To delete items without swiping them, click the "Edit" button at the top.
+This displays a red circle containing a minus sign to left of each item.
+Click those to delete items.
+When finished, click the "Done" button at the top
+that replaced the "Edit" button.
+From here you can edit the code to provide your own CRUD functionality.
+
+To define additional entity types that can be persisted,
+and possibly delete the provided `Item` type,
+click the `{app-name}.xcdatamodeld` file in the Navigator pane.
 This will display an entity editor.
 
 To add entities, click the "Add Entity" button at the bottom.
 This will create an empty entity named "Entity".
 Double-click the name to change it.
-These become class names, so begin with an uppercase letter.
+These become the names of generated class definitions,
+so they should begin with an uppercase letter.
+The generated classes inherit from `NSManagedObject`.
 
 To add attributes to an entity,
 click the "+" at the bottom of the attribute list.
