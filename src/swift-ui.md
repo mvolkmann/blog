@@ -38,9 +38,38 @@ The right side is the Inspector.
 The center is the main editing area containing two panes.
 The left pane is the code editor and the right pane is the Preview.
 
-The Preview shows the UI outside of a simulator.
-If it isn't running, press "Resume" to start it.
-It automatically updates when code changes are saved.
+### Preview
+
+The Preview area shows the UI running outside of a simulator.
+If it isn't running, press the "Resume" button at the top to start it.
+The Preview automatically updates when code changes are saved.
+
+By default the Preview is not in "Live Preview" mode.
+Clicking elements in the UI selects them rather than triggering tap events.
+To switch to "Live Preview" mode so tap events are honored,
+click the button with a triangle inside a circle.
+
+It is possible for the Preview area to show more than one preview.
+This is controlled by the `ContentView_Previews` struct
+defined in `ContentView.swift`.
+For example, the following renders the app in light mode, the app in dark mode,
+and a single component to test in isolation from the rest of the app.
+
+```swift
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView().preferredColorScheme(.light)
+        ContentView().preferredColorScheme(.dark)
+        CircleButton(color: .blue) { }
+    }
+}
+```
+
+Note that if any of the previews are in "Live Preview" mode,
+only that preview will be displayed.
+Exit out of that mode to get the other previews to display again.
+
+### Simulator
 
 To run the app in the Simulator, click the black triangle at the top.
 That builds the app, launches the Simulator (if not already running),
@@ -48,8 +77,19 @@ loads the app in the Simulator, and starts it.
 The app is not automatically updates when code changes are saved.
 The triangle must be clicked again to repeat the whole build/load/start process.
 
-Q: How can you get the simulator to automatically update
-when code changes are saved?
+## MVVM
+
+SwiftUI uses the Model-View-ViewModel paradigm.
+The Model holds data and application logic.
+The View decides what to render.
+The View gets data from the ViewModel.
+The ViewModel binds views to a model.
+It gets data from the Model and
+optionally transforms it before sending it to the View.
+For example, it could get the result of a SQL query from the Model
+and turn it into an array of objects that it passes to the View.
+
+TODO: Does the view send events to the ViewModel which sends them to the Model?
 
 ## Icons
 
@@ -71,9 +111,14 @@ Image(systemName: "cloud.snow")
 
 ## Views
 
-SwiftUI Views are used for layout and components.
+SwiftUI View subclasses are used for components and layout.
+Each of these are defined as a struct.
 
-Layout/container views include:
+### Combiner Views
+
+Combiner views combine other views.
+They act as a container of other views
+and layout those views in a specific way.
 
 - HStack
 - VStack
@@ -109,10 +154,7 @@ Layout/container views include:
 - VSplitView
 - TimelineView
 
-- Spacer
-- Divider
-
-Component views include:
+### Component Views
 
 - Text
 - TextField
@@ -145,7 +187,14 @@ Component views include:
 - AnyView
 - TupleView
 
+### Other Views
+
+- Spacer
+- Divider
+
 TODO: Are `Color` and `LinearGradient` views?
+
+### View Modifiers
 
 View modifiers are methods that can be called on a view to create
 a new view that is like the receiver, but modified in a specific way.
@@ -154,6 +203,86 @@ that can be used as follows.
 
 ```swift
 Text("Hello, World!").foregroundColor(.red)
+```
+
+### View State
+
+All views are immutable structs.
+Typically they get mutable data from a model.
+They can also have associated mutable data
+by applying the `@State` property wrapper to a property.
+
+Properties with `@State` are typically only used for
+temporary data related to styling details.
+Such data is held outside of the struct and the struct holds a pointer to it.
+
+The following example holds the status of a stoplight
+in the "status" state property.
+Note the use of `$` before the name to get a two-way binding with a `TextField`.
+
+```swift
+import SwiftUI
+
+struct CircleButton: View {
+    var color: Color
+    var selected: Bool = false
+    var action: () -> Void // a function
+
+    var body: some View {
+        Button(action: action, label: {
+            ZStack {
+                Circle().fill(color)
+                if selected {
+                    Circle().strokeBorder(Color.black, lineWidth: 5)
+                }
+            }
+        })
+    }
+}
+
+struct Light: Identifiable {
+    let id: String
+    let color: Color
+}
+
+struct MyTextField: View {
+    var label: String
+    var text: Binding<String>
+
+    var body: some View {
+        TextField(label, text: text)
+            .autocapitalization(.none)
+            .padding()
+            .textFieldStyle(.roundedBorder)
+    }
+}
+
+// This file must define a struct named "ContentView".
+struct ContentView: View {
+    @State var status = "stop"
+
+    let lights: [Light] = [
+        Light(id: "stop", color: .red),
+        Light(id: "yield", color: .yellow),
+        Light(id: "go", color: .green)
+    ]
+
+    var body: some View {
+        VStack {
+            ForEach(lights) { light in
+                CircleButton(
+                    color: light.color,
+                    selected: status == light.id
+                ) {
+                    status = light.id
+                }
+            }
+            // $ in front of status is needed for a two-way binding.
+            // $ in front of status is needed for a two-way binding.
+            MyTextField(label: "status", text: $status)
+        }
+    }
+}
 ```
 
 ## Utility Functions

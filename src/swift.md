@@ -234,7 +234,7 @@ and an optional return type preceded by `->`.
 The parentheses are required even for functions that have no parameters.
 
 When the return type of a function cannot be inferred
-and no return type is specified, it defaults to `Void`
+and no return type is specified, it defaults to the `Void` type
 which is an empty tuple (`()`).
 
 To call a function, specify the function name
@@ -671,6 +671,8 @@ do {
 | `Range`       | interval from inclusive lower bound to exclusive upper bound |
 | `ClosedRange` | interval from inclusive lower bound to inclusive upper bound |
 
+All of these types are defined as structs and are therefore immutable.
+
 Variables of these types cannot be set to `nil`
 unless a `?` follows the type to indicated that it is optional.
 See the "Optionals" section later.
@@ -682,9 +684,27 @@ var c: Character = "x"
 print(type(of: c)) // Character
 ```
 
-### `Boolean` Type
+### `Bool` Type
 
-TODO: Finish this section.
+The `Bool` type has two possible values, `true` and `false`.
+
+`Bool` instance properties include the following:
+
+| Property      | Description            |
+| ------------- | ---------------------- |
+| `description` | text "true" or "false" |
+
+`Bool` static methods include, but are not limited to the following:
+
+| Method     | Description                        |
+| ---------- | ---------------------------------- |
+| `random()` | randomly returns `true` or `false` |
+
+`Bool` instance methods include, but are not limited to the following:
+
+| Method     | Description                                  |
+| ---------- | -------------------------------------------- |
+| `toggle()` | toggles the value between `true` and `false` |
 
 ### Number Types
 
@@ -699,7 +719,7 @@ Global numeric constants include:
 | `M_PI`   | Double value of pi      |
 | `M_PI_2` | Double value of half pi |
 
-Static number properties include the following:
+Number static properties include the following:
 
 | Property                  | Description                               |
 | ------------------------- | ----------------------------------------- |
@@ -709,7 +729,7 @@ Static number properties include the following:
 | `min`                     | minimum value of `Int` type               |
 | `pi`                      | value of `Float` or `Double` Pi           |
 
-Static number methods include, but are not limited to the following:
+Number static methods include, but are not limited to the following:
 
 | Method                              | Description                                       |
 | ----------------------------------- | ------------------------------------------------- |
@@ -723,11 +743,10 @@ Static number methods include, but are not limited to the following:
 let r = Int.random(in: 0...10)
 ```
 
-Number methods include, but are not limited to the following:
+Number instance methods include, but are not limited to the following:
 
 | Method                          | Description                                                 |
 | ------------------------------- | ----------------------------------------------------------- |
-| `abs(number) -> number          | returns absolute value                                      |
 | `isMultiple(of: Int) -> Bool    | determines if the Int receiver is a multiple of another Int |
 | `remainder(dividingBy: Double)` | returns remainder                                           |
 | `round()`                       | mutates value to rounded value                              |
@@ -743,6 +762,7 @@ Many math functions can only be used if the Foundation framework is imported.
 
 ```swift
 import Foundation
+print(abs(3.7)) // gives absolute value which is 3.
 print(sin(45.0)) // 0.8509...
 ```
 
@@ -821,7 +841,7 @@ let end = name.index(start, offsetBy: 1)
 print(name[start...end]) // "ar"
 ```
 
-`String` properties include the following:
+`String` instance properties include the following:
 
 | Property  | Description                                     |
 | --------- | ----------------------------------------------- |
@@ -830,7 +850,7 @@ print(name[start...end]) // "ar"
 | `isEmpty` | `Bool` value indicating whether `count` is zero |
 | `last`    | last character                                  |
 
-`String` methods include, but are not limited to the following:
+`String` instance methods include, but are not limited to the following:
 
 | Method                                       | Description                                                   |
 | -------------------------------------------- | ------------------------------------------------------------- |
@@ -901,7 +921,7 @@ if number != nil {
 The `Character` type is a `struct` that represents a single Unicode character.
 Literal `Character` values are delimited by double-quotes.
 
-`Character` properties include the following:
+`Character` instance properties include the following:
 
 | Property           | Description                                                 |
 | ------------------ | ----------------------------------------------------------- |
@@ -927,7 +947,7 @@ Literal `Character` values are delimited by double-quotes.
 | `utf8`             | the UTF-8 encoding value                                    |
 | `wholeNumberValue` | the `Int` value                                             |
 
-`Character` methods include, but are not limited to the following:
+`Character` instance methods include, but are not limited to the following:
 
 | Method         | Description                                   |
 | -------------- | --------------------------------------------- |
@@ -1070,9 +1090,11 @@ print(Color.green.getGreenHex()) // ff
 | `Set`        | unordered collection of values with the same type and no duplicates                               |
 | tuple        | fixed-length, ordered collection of values that have type that can differ                         |
 
-When a variable is set to a collection,
+All of these types are defined as structs.
+
+When a variable is set to a collection instance,
 the elements in the collection can be modified.
-However, when a constant is initialized to a collection,
+However, when a constant is initialized to a collection instance,
 the elements in the collection cannot be modified.
 
 The class hierarchy of the built-in collections,
@@ -1099,6 +1121,14 @@ and accessed by an indexed subscript".
 The `MutableCollection` protocol defines operations that
 change the values of elements.
 Methods include `reverse`, `shuffle`, and `sort`.
+
+The `Void` type has a single value which is an empty tuple.
+
+When an instance is assigned to another variable or passed to a function,
+a copy-on-write version is created that shares the data with the original.
+Operations that attempt to modify an instance have two possible behaviors.
+If there is only one reference to the object, it is modified in place.
+Otherwise the data is copied before being modified.
 
 From "The Swift Programming Language":
 
@@ -1157,7 +1187,7 @@ for (index, score) in scores.enumerated() {
 }
 ```
 
-`Array` properties include the following:
+`Array` instance properties include the following:
 
 | Property   | Description                                                       |
 | ---------- | ----------------------------------------------------------------- |
@@ -1167,7 +1197,7 @@ for (index, score) in scores.enumerated() {
 | `isEmpty`  | `Bool` value indicating whether `count` is zero                   |
 | `last`     | last element                                                      |
 
-`Array` methods include, but are not limited to the following:
+`Array` instance methods include, but are not limited to the following:
 
 | Method                                                    | Description                                                                                |
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -1301,7 +1331,7 @@ for card in cards.sorted() {
 
 The `==` operator can be used to determine if two sets contain the same elements.
 
-`Set` properties include the following:
+`Set` instance properties include the following:
 
 | Property   | Description                                                       |
 | ---------- | ----------------------------------------------------------------- |
@@ -1309,7 +1339,7 @@ The `==` operator can be used to determine if two sets contain the same elements
 | `count`    | number of current elements                                        |
 | `isEmpty`  | `Bool` value indicating whether `count` is zero                   |
 
-`Set` methods include, but are not limited to the following:
+`Set` instance methods include, but are not limited to the following:
 
 | Method                                       | Description                                                            |
 | -------------------------------------------- | ---------------------------------------------------------------------- |
@@ -1395,7 +1425,7 @@ for color in fruitColors.values { // can add .sorted()
 }
 ```
 
-`Dictionary` properties include the following:
+`Dictionary` instance properties include the following:
 
 | Property   | Description                                                    |
 | ---------- | -------------------------------------------------------------- |
@@ -1405,7 +1435,7 @@ for color in fruitColors.values { // can add .sorted()
 | `keys`     | `Keys` `Collection` of keys                                    |
 | `values`   | `Values` `MutableCollection` of values                         |
 
-`Dictionary` methods include, but are not limited to the following:
+`Dictionary` instance methods include, but are not limited to the following:
 
 | Method                                                | Description                                                                     |
 | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
