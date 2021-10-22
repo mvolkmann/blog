@@ -32,24 +32,61 @@ is a Swift library for building macOS, iOS, and Apple Watch apps.
   click the device drop-down after the app name near the top
   and select the device type (such as "iPhone 12 mini")
 
-The main Xcode window is divided into three main areas.
-The left side is the Navigator.
-The right side is the Inspector.
-The center is the main editing area containing two panes.
-The left pane is the code editor and the right pane is the Preview.
+A new "App" project begins with the following files.
 
-### Preview
+- `{app-name}.swift`
 
-The Preview area shows the UI running outside of a simulator.
-If it isn't running, press the "Resume" button at the top to start it.
-The Preview automatically updates when code changes are saved.
+  This defines the main struct which implements the `App` protocol.
+  It has computed property named `body`
+  whose value implements the `Scene` protocol.
+  The actual value is an instance of `WindowGroup`.
+  This renders an instance of `ContentView` which is defined in the next file.
+
+- `ContentView.swift`
+
+  This defines the `ContentView` struct which implements the `View` protocol
+  and is the top of the user interface.
+  It also defines the `ContentView_Previews` struct
+  which describes what the Preview area should display.
+  This can be one or more views that are each displayed in a separate Preview.
+
+- `Assets.xcassets`
+
+  This associates names with assets such as images, audio files, and video files.
+
+- `{app-name}.xcodeproj`
+
+  This file is not visible in the Navigator,
+  but can be viewed and edited by clicking the top entry in the navigator.
+  The editor for this data has the following tabs:
+  General, Signing & Capabilities, Resource Tags, Info,
+  Build Settings, Build Phases, and Build Rules.
+  The General tab configures the app display name, version of iOS,
+  targets (iPhone, iPad, or Mac), status bar style, and more.
+
+To add a particular kind of provided UI View in a `.swift` file,
+manually enter code or click where it should go in the code
+and click the "+" in the upper-right.
+Clicking the "+" displays a dialog with a list provided View types.
+Selecting one displays related documentation and code examples.
+Double-click a View type to insert code for it.
+
+### Canvas / Preview
+
+The Canvas area displays Previews of the UI running outside of a simulator.
+To hide/show the Canvas area, select Editor ... Canvas.
+If Preview isn't running inside the Canvas area,
+press the "Resume" button at the top to start it.
+
+When code changes are saved and there are no errors,
+the Preview is automatically updated.
+When there are errors, the Preview pauses and must be manually restarted
+by click the "Resume" button or pressing cmd-option-p.
+TODO: Are there other things that cause the Preview to pause?
 
 To zoom in and out on the Preview area,
 click the magnifier glass icons in the lower right (minus and plus)
 or select a zoom level from the percent dropdown.
-
-After saving code changes, if an error is detected the Preview will pause.
-To restart it, click the "Resume" button at the top or press cmd-option-p.
 
 By default the Preview is not in "Live Preview" mode.
 Key things to know about not being in this mode include:
@@ -79,7 +116,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().preferredColorScheme(.light)
         ContentView().preferredColorScheme(.dark)
-        CircleButton(color: .blue) { }
+        CircleButton(color: .blue) { } // action that does nothing
     }
 }
 ```
@@ -130,14 +167,35 @@ Image(systemName: "cloud.snow")
 
 ## Views
 
-SwiftUI View subclasses are used for components and layout.
-Each of these are defined as a struct.
+Every visible part of an app created with SwiftUI is a view.
+Views can render other views.
+
+Each view is a struct that implement the `View` protocol.
+This requires having a computed property named `body` with the type `Some View`.
+
+Views are used for components and layout.
+Views that layout other views are often referred to as "combiner views".
+
+Functions that create views often take another function as their last argument.
+Calls to these frequently uses trailing closures.
 
 ### Combiner Views
 
 Combiner views combine other views.
 They act as a container of other views
 and layout those views in a specific way.
+
+Combiner views can be passed a special kind of closure
+as their last argument that is called a `ViewBuilder`.
+These accept one to ten other Views.
+A `ViewBuilder` is a kind of result builder.
+For more information on these, see the {% aTargetBlank
+"https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
+"Result builders proposal" %}.
+
+Combiner views also support conditional logic with `if` and `switch` statements.
+However, no other Swift syntax is allowed in them.
+For iteration in a `ViewBuilder`, use a `ForEach` `View`.
 
 - HStack
 - VStack
@@ -193,8 +251,11 @@ and layout those views in a specific way.
       // code to run when button is pressed
   }
 
-  // Button with an action argument that is a function and
-  // contents that can be any View specified with a trailing closure.
+  // Button with an "action" argument whose value
+  // can be a closure or a function reference
+  // and a "contents" argument whose value is a ViewBuilder
+  // that can be written as a trailing closure.
+
   Button(action: {
       // code to run when button is pressed
   }) {
@@ -223,6 +284,76 @@ and layout those views in a specific way.
 - EquatableView
 - AnyView
 - TupleView
+
+Here is an example of using combiner and component views.
+Note how these can be assigned to a variable
+that is later referenced to render them.
+They can also be placed in a new struct
+from which instances are created to render them.
+
+```swift
+// Defining a custom View that is used below
+struct MyRow: View {
+    var body: some View {
+        HStack {
+            Text("Six")
+            Text("Seven")
+        }
+    }
+}
+
+struct ContentView: View {
+    // Assigning a View to a variable
+    var row = HStack {
+        Text("Four")
+        Text("Five")
+    }
+
+    var body: some View {
+        VStack {
+            Text("One")
+            HStack {
+                Text("Two")
+                Text("Three")
+            }
+            // Referring to a variable to get a View
+            // and chaining View modifiers
+            row.padding().border(.red)
+            MyRow() // Creating a custom View instance
+        }
+    }
+}
+```
+
+### Drawing Views
+
+- Capsule
+- Circle
+- Circle
+- Ellipse
+- Path
+- Rectangle
+- RoundedRectangle
+
+- ContainerRelativeShape
+- OffsetShape
+- RotatedShape
+- ScaledShape
+- TransformedShape
+
+- AnyShapeShape
+
+- AnimatablePair
+- Animation
+- AnyTransition
+- EmptyAnimatableData
+
+- Anchor
+- Angle
+- GeometryProxy
+- GeometryReader
+- ProjectionTransform
+- UnitPoint
 
 ### Other Views
 

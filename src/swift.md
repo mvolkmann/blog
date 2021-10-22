@@ -2062,13 +2062,15 @@ To define a class, use the `class` keyword.
 A class can have:
 
 - one or more initializers (named `init`)
-- class-level properties declared with `static`
-- class-level methods declared with `static`
+  that play the role of constructors in other languages
+- class-level (or "type") properties declared with `static`
+- class-level (or "type") methods declared with `static`
 - instance-level properties
 - instance-level methods
 - a superclass
 
-Why don't classes get a default memberwise initializer like structs?
+Classes, unlike structs, are not provided with a default memberwise initializer.
+It's not clear why this difference exists.
 
 Definitions of `class` methods that modify properties of the receiver
 cannot begin with `mutating` keyword.
@@ -2130,6 +2132,12 @@ class Point2 {
     }
 }
 ```
+
+Instance properties and instance methods that
+refer to static properties and methods must prefix them
+with the class name followed by a period.
+However, initializers and static methods do not require prefixing
+to refer to static properties and methods.
 
 To implement a class (subclass) that inherits
 the properties and methods of another class (superclass),
@@ -2729,12 +2737,37 @@ enter `swiftformat *.swift`.
 ### Xcode
 
 The primary IDE for creating macOS, iOS, and watchOS applications is Xcode.
-It is a passable IDE with many issues.
+The main Xcode window is divided into three main areas.
+The left side is the Navigator.
+The right side is the Inspector.
+The center area is divided into three sections.
+The left section is for editing code.
+The right section is the Canvas which is used to test
+Previews of an app outside of the Simulator or a real device.
+The bottom section has two subsections.
+The left side of the bottom section is for the debugging.
+The right side of the bottom section is for output
+such as that from `print` function calls.
+Note that `print` output only appears when running in the Simulator,
+not when running in Preview.
+TODO: Is this because print output only appears when running a debug build
+TODO: and Preview doesn't use a debug build?
 
-It is slow.
+To open additional code panes, click the button the upper-right
+that is a rectangle containing a vertical line and a "+".
+The dropdown menu to the left of this button enables
+toggling the display of the Canvas area and much more.
 
-It cannot format code on save.
+Xcode is a passable IDE with many issues.
+
+Xcode is slow. After saving code changes it can
+take a few seconds for it to identify syntax errors.
+
+Xcode cannot format code on save.
 You must select a section of code or the entire file and press ctrl-i.
+
+To set Xcode to check spelling while typing, select
+Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
 
 When developing iOS apps it is useful to launch the app in the Simulator
 directly from Xcode. The Simulator can simulate many different devices.
