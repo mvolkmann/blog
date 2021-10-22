@@ -93,12 +93,12 @@ Key things to know about not being in this mode include:
 
 - Clicking a View in the Preview selects it rather than triggering tap events.
   The corresponding code is highlighted and
-  the Navigator changes to show the properties of the selected View.
+  the Inspector changes to show the properties of the selected View.
 - Double-clicking a View in the Preview is similar,
   but moves focus to the code so it can be edited.
 - Clicking a View in the code selects the corresponding View in the Preview
-  and also populates the Navigator.
-- Changes made in the Navigator update the Preview and the code,
+  and also populates the Inspector.
+- Changes made in the Inspector update the Preview and the code,
   but they do not take effect until
   focus is moved out of the modified Navigator field.
 
@@ -124,6 +124,16 @@ struct ContentView_Previews: PreviewProvider {
 Note that if any of the previews are in "Live Preview" mode,
 only that preview will be displayed.
 Exit out of that mode to get the other previews to display again.
+
+### Inspector
+
+The Inspector shows commonly used modifiers of the selected view.
+To see additional modifiers,
+click "Add Modifier" at the button of the Inspector.
+Optionally type part of a modifier name to filter the list.
+Click a modifier to add it to the Inspector.
+To stop displaying a modifier in the Inspector,
+hover over it and click the "Delete" button that appears.
 
 ### Simulator
 
@@ -197,51 +207,51 @@ Combiner views also support conditional logic with `if` and `switch` statements.
 However, no other Swift syntax is allowed in them.
 For iteration in a `ViewBuilder`, use a `ForEach` `View`.
 
-- HStack
-- VStack
-- ZStack
-- LazyHStack
-- LazyVStack
+- `HStack`
+- `VStack`
+- `ZStack`: stacks views from bottom to top
+- `LazyHStack`
+- `LazyVStack`
 
-- LazyHGrid
-- LazyVGrid
-- GridItem
+- `LazyHGrid`
+- `LazyVGrid`
+- `GridItem`
 
-- Form
-- Group
-- GroupBox
-- ControlGroup
+- `Form`
+- `Group`
+- `GroupBox`
+- `ControlGroup`
 
-- ScrollView
-- ScrollViewReader
-- ScrollViewProxy
+- `ScrollView`
+- `ScrollViewReader`
+- `ScrollViewProxy`
 
-- List
-- Section
-- ForEach
-- DynamicViewContent
-- Table
+- `List`
+- `Section`
+- `ForEach`
+- `DynamicViewContent`
+- `Table`
 
-- NavigationView
-- NavigationLink
-- OutlineGroup
-- DisclosureGroup
-- TabView
-- HSplitView
-- VSplitView
-- TimelineView
+- `NavigationView`
+- `NavigationLink`
+- `OutlineGroup`
+- `DisclosureGroup`
+- `TabView`
+- `HSplitView`
+- `VSplitView`
+- `TimelineView`
 
 ### Component Views
 
-- Text
-- TextField
-- SecureField
-- TextEditor
+- `Text`
+- `TextField`
+- `SecureField`
+- `TextEditor`
 
-- Image
-- AsyncImage
+- `Image`
+- `AsyncImage`
 
-- Button
+- `Button`
 
   Here are two ways to create a `Button`.
 
@@ -263,27 +273,27 @@ For iteration in a `ViewBuilder`, use a `ForEach` `View`.
   }
   ```
 
-- EditButton
-- PasteButton
+- `EditButton`
+- `PasteButton`
 
-- Link
-- Menu
+- `Link`
+- `Menu`
 
-- Toggle
-- Slider
-- Stepper
-- Picker
-- DatePicker
-- ColorPicker
+- `Toggle`
+- `Slider`
+- `Stepper`
+- `Picker`
+- `DatePicker`
+- `ColorPicker`
 
-- Label
-- ProgressView
-- Gauge
+- `Label`
+- `ProgressView`
+- `Gauge`
 
-- EmptyView
-- EquatableView
-- AnyView
-- TupleView
+- `EmptyView`
+- `EquatableView`
+- `AnyView`
+- `TupleView`
 
 Here is an example of using combiner and component views.
 Note how these can be assigned to a variable
@@ -327,38 +337,38 @@ struct ContentView: View {
 
 ### Drawing Views
 
-- Capsule
-- Circle
-- Circle
-- Ellipse
-- Path
-- Rectangle
-- RoundedRectangle
+- `Capsule`
+- `Circle`
+- `Circle`
+- `Ellipse`
+- `Path`
+- `Rectangle`
+- `RoundedRectangle`
 
-- ContainerRelativeShape
-- OffsetShape
-- RotatedShape
-- ScaledShape
-- TransformedShape
+- `ContainerRelativeShape`
+- `OffsetShape`
+- `RotatedShape`
+- `ScaledShape`
+- `TransformedShape`
 
-- AnyShapeShape
+- `AnyShapeShape`
 
-- AnimatablePair
-- Animation
-- AnyTransition
-- EmptyAnimatableData
+- `AnimatablePair`
+- `Animation`
+- `AnyTransition`
+- `EmptyAnimatableData`
 
-- Anchor
-- Angle
-- GeometryProxy
-- GeometryReader
-- ProjectionTransform
-- UnitPoint
+- `Anchor`
+- `Angle`
+- `GeometryProxy`
+- `GeometryReader`
+- `ProjectionTransform`
+- `UnitPoint`
 
 ### Other Views
 
-- Spacer
-- Divider
+- `Spacer`
+- `Divider`
 
 TODO: Are `Color` and `LinearGradient` views?
 
@@ -366,12 +376,22 @@ TODO: Are `Color` and `LinearGradient` views?
 
 View modifiers are methods that can be called on a view to create
 a new view that is like the receiver, but modified in a specific way.
-For example, the `foregroundColor` method is a view modifier
-that can be used as follows.
+For example:
 
 ```swift
+// foregroundColor is a view modifier.
 Text("Hello, World!").foregroundColor(.red)
+
+// stroke is a view modifier.
+RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).padding(.all)
 ```
+
+Calls to view modifiers can be chained since each returns a new view.
+
+View modifiers can be specific to certain types of views.
+For a list of them, see {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
+"View Modifiers" %}.
 
 ### View State
 

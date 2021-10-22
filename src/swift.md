@@ -120,6 +120,9 @@ Multi-line comments are delimited by `/*` and `*/`.
 Multi-line comments can be nested which makes it easy to
 comment out blocks of code that contain multi-line comments.
 
+Xcode can toggle whether lines are commented.
+To comment/uncomment the current line or selected lines, press cmd-/.
+
 ## Operators
 
 | Category       | Operators                                            |
