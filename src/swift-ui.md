@@ -374,6 +374,18 @@ rather than creating views whose code is long and deeply nested.
 ### Other Views
 
 - `Spacer`
+
+  Each of these take an equal amount of the unused space
+  inside the parent combiner view.
+  This can be compared to web applications that use
+  the CSS properties `display: flex;` and `justify-content`.
+
+  | CSS justify-content value | Spacer placement              |
+  | ------------------------- | ----------------------------- |
+  | flex-start                | at end of list of views       |
+  | flex-end                  | at beginning of list of views |
+  | space-between             | one between each child view   |
+
 - `Divider`
 
 TODO: Are `Color` and `LinearGradient` views?
