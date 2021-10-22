@@ -450,7 +450,7 @@ let doubled = numbers.map({$0 * 2}) // [2, 6, 14]
 ```
 
 If the last parameters to a function or method are functions,
-calls can be written using "trailing closures".
+they can be passed using using "trailing closures".
 Typically this is only done for the last argument.
 For example, these are equivalent:
 
@@ -460,6 +460,9 @@ let total = prices.reduce(0, { result, price in result + price })
 let total = prices.reduce(0) { result, price in result + price }
 let total = prices.reduce(0, {$0 + $1})
 ```
+
+If no other arguments are being passed to the function,
+the parentheses for its argument list can be omitted.
 
 Closures can be passed as arguments to other functions.
 If the receiving function has asynchronous behavior

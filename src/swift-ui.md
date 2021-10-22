@@ -265,11 +265,13 @@ For iteration in a `ViewBuilder`, use a `ForEach` `View`.
   // can be a closure or a function reference
   // and a "contents" argument whose value is a ViewBuilder
   // that can be written as a trailing closure.
-
   Button(action: {
       // code to run when button is pressed
   }) {
-      Text("My Label")
+      HStack {
+          Text("Heart")
+          Image(systemName: "heart")
+      }
   }
   ```
 
@@ -302,7 +304,7 @@ They can also be placed in a new struct
 from which instances are created to render them.
 
 ```swift
-// Defining a custom View that is used below
+// This defines a custom View that is used below.
 struct MyRow: View {
     var body: some View {
         HStack {
@@ -334,6 +336,10 @@ struct ContentView: View {
     }
 }
 ```
+
+Note how `ContentView` uses the view `MyRow`.
+It is preferred to create small views like this and compose them
+rather than creating views whose code is long and deeply nested.
 
 ### Drawing Views
 
@@ -392,6 +398,22 @@ View modifiers can be specific to certain types of views.
 For a list of them, see {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
 "View Modifiers" %}.
+
+When view modifiers are added to combiner views,
+they are passed down to all descendant views.
+In the following example, all the `Text` views are red
+because the `VStack` that contains them has
+a view modifier that sets the foreground color.
+
+```swift
+VStack {
+    Text("Alpha")
+    HStack {
+        Text("Beta")
+        Text("Gamma")
+    }
+}.foregroundColor(.red)
+```
 
 ### View State
 
@@ -516,7 +538,9 @@ let person = Person(name: "Mark")
 let name = person[keyPath: namePath] // "Mark"
 ```
 
-TODO: What kind of key path does `\self` create?
+All objects have the property `self` that refers to the whole object.
+To write a key path that refers to the whole object
+rather than a specific property inside it, use `\.self`.
 
 ## Contexts
 
