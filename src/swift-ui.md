@@ -8,6 +8,13 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://developer.apple.com/xcode/swiftui/", "SwiftUI" %}
 is a Swift library for building macOS, iOS, and Apple Watch apps.
+It is an alternative to its predecessor UIKit.
+
+By comparison SwiftUI ...
+
+- is currently less capable than UIKit.
+- is declarative in nature than imperative.
+- requires far less code to do the same things
 
 ## Resources
 
@@ -145,15 +152,31 @@ The triangle must be clicked again to repeat the whole build/load/start process.
 
 ## MVVM
 
-SwiftUI uses the Model-View-ViewModel paradigm.
+SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm
+which separates application code into three groups.
+This differs from UIKit which encourages use of Model-View-Controller (MVC).
+
 The Model holds data and application logic.
-The View decides what to render.
-The View gets data from the ViewModel.
+It is independent from the view code and has no knowledge of it.
+
+The View decides what to render and should be mostly stateless.
+Any state held in the view using the `@State` property modifier
+should be primarily related to styling and not application data.
+
+Views reacts to changes published by the ViewModel.
+Their `body` vars return new views
+any time the ViewModel data they use changes.
+Views are declarative rather than imperative
+because they describe what to render based on the current data,
+not when to render it.
+
 The ViewModel binds views to a model.
-It gets data from the Model and
+It reacts to changes in the Model and
 optionally transforms it before sending it to the View.
 For example, it could get the result of a SQL query from the Model
 and turn it into an array of objects that it passes to the View.
+
+Read-only data flows from the Model, through the ViewModel, and into the View.
 
 TODO: Does the view send events to the ViewModel which sends them to the Model?
 
@@ -171,8 +194,8 @@ browse the collection of icons, and click them.
 To use an icon in a SwiftUI app, add an `Image` view. For example:
 
 ```swift
-Image(systemName: "cloud.snow")
-    .font(.system(size: 64))
+Image(systemName: "heart").font(.largeTitle)) // one way to set font size
+Image(systemName: "cloud.snow").font(.system(size: 64)) // another way
 ```
 
 ## Views
@@ -206,16 +229,41 @@ For more information on these, see the {% aTargetBlank
 Combiner views also support conditional logic with `if` and `switch` statements.
 However, no other Swift syntax is allowed in them.
 For iteration in a `ViewBuilder`, use a `ForEach` `View`.
+There is no corresponding view for conditional logic,
+so `if` and `switch` statements are used instead.
 
-- `HStack`
-- `VStack`
+- `HStack`: lays out child views horizontally
+
+- `VStack`: lays out child views vertically
+
 - `ZStack`: stacks views from bottom to top
+
 - `LazyHStack`
+
+  This is similar to `HStack`, but only renders items when they are visible.
+  It is commonly used inside a `ScrollView`.
+
 - `LazyVStack`
 
+  This is similar to `VStack`, but only renders items when they are visible.
+  It is commonly used inside a `ScrollView`.
+
 - `LazyHGrid`
+
+  This specifies a number of rows and adds columns as necessary.
+  The rows are described by an array of {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/griditem", "GridItem" %}
+  objects that each specify their size, spacing, and alignment.
+  For example, a `GridItem` can adapt to the width of its content,
+  but also have a minimum size of 25 by specifying
+  `GridItem(.adaptive(minimum: 25))`.
+
 - `LazyVGrid`
-- `GridItem`
+
+  This specifies a number of columns and adds rows as necessary.
+  The columns are described by an array of {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/griditem", "GridItem" %}
+  objects that each specify their size, spacing, and alignment.
 
 - `Form`
 - `Group`
@@ -223,6 +271,22 @@ For iteration in a `ViewBuilder`, use a `ForEach` `View`.
 - `ControlGroup`
 
 - `ScrollView`
+
+  This creates a scrollable view that is vertical by default,
+  but can be changed to horizontal.
+  The following example creates a horizontally scrollable view
+  containing 20 numbered `Text` views.
+
+  ```swift
+  ScrollView(.horizontal) {
+      HStack(spacing: 10) {
+          ForEach(1..<21) { // 1...20 isn't allowed here
+              Text("Number \($0)").padding(5).border(.red, width: 2)
+          }
+      }
+  }
+  ```
+
 - `ScrollViewReader`
 - `ScrollViewProxy`
 
@@ -249,6 +313,19 @@ For iteration in a `ViewBuilder`, use a `ForEach` `View`.
 - `TextEditor`
 
 - `Image`
+
+  This renders an image.
+  Many image formats are supported including PNG, JPEG, and HEIC.
+  Click `Assets.xcassets` in the Navigator to
+  associate a name with each image to be used.
+  Click the "+" in the lower-left to add an entry.
+  Give the entry a name and drag images into the 1x, 2x, and 3x boxes.
+  Pass the name to the `Image` view as an unlabelled argument.
+  For example, `Image("Comet")`.
+
+  Icons from SF Symbols can be used by specifying
+  their name as the `systemName` argument.
+
 - `AsyncImage`
 
 - `Button`
@@ -343,6 +420,13 @@ rather than creating views whose code is long and deeply nested.
 
 ### Drawing Views
 
+Many of these views support both the `border` and `strokeBorder` view modifiers.
+The difference between these becomes apparent
+when the border width is greater than one.
+`border` is drawn so it is centered on the edge of the shape
+with have inside and half outside.
+`strokeBorder` is drawn so none of the border is outside of the shape.
+
 - `Capsule`
 - `Circle`
 - `Circle`
@@ -400,7 +484,7 @@ For example:
 // foregroundColor is a view modifier.
 Text("Hello, World!").foregroundColor(.red)
 
-// stroke is a view modifier.
+// stroke and padding are view modifiers.
 RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).padding(.all)
 ```
 
