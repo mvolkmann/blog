@@ -690,7 +690,7 @@ var c: Character = "x"
 print(type(of: c)) // Character
 ```
 
-### `Bool` Type
+### Bool Type
 
 The `Bool` type has two possible values, `true` and `false`.
 
@@ -794,7 +794,7 @@ Numeric foundation functions include:
 | `acos(number)`        | returns arc cosine in radians             |
 | `atan(number)`        | returns arc tangent in radians            |
 
-### `String` Type
+### String Type
 
 The `String` type is a `struct` that represents a sequence of Unicode characters.
 Literal `Character` and single-line `String` values
@@ -925,7 +925,7 @@ if number != nil {
 }
 ```
 
-### `Character` Type
+### Character Type
 
 The `Character` type is a `struct` that represents a single Unicode character.
 Literal `Character` values are delimited by double-quotes.
