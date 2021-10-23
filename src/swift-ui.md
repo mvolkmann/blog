@@ -32,12 +32,19 @@ By comparison SwiftUI ...
 - check "Include Tests" to enable writing unit tests
 - click "Next"
 - select the directory where the project will be stored and click "Create"
-- press the black, right-pointing triangle near the top
-  to build and run the starting version of the app
-  in the simulator
-- to change the device being simulated,
-  click the device drop-down after the app name near the top
-  and select the device type (such as "iPhone 12 mini")
+
+Press the black, right-pointing triangle near the top
+to build and run the starting version of the app
+in the simulator.
+
+To change the device being simulated,
+click the device drop-down after the app name near the top
+and select the device type (such as "iPhone 12 mini").
+
+To change the target version of iOS,
+click the app name at the top of the Navigator
+click the "General" tab, and
+select an iOS version from the dropdown in the "Deployment info" section.
 
 A new "App" project begins with the following files.
 
@@ -670,6 +677,9 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
+
+If the view inside a `NavigationLink` doesn't have a `navigationTitle`,
+the link to get back to it will just display "Back".
 
 ## Utility Functions
 
