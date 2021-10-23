@@ -910,6 +910,9 @@ let i = "3"
 let f = "3.14"
 let d = "3.14159"
 
+// "Int" returns an "optional".
+// "if let" unwraps it if the conversion is successful.
+// See the "Optionals" section for details.
 if let number = Int(i) {
     print(number * 2) // 6
 }
@@ -1663,6 +1666,11 @@ a variable or property with an optional type.
   If the value is not `nil`, it is assigned to the variable `value`
   and the block is executed.
 
+  It is common to unwrap an optional held in a variable
+  into a variable with the same name.
+  The one on the left shadows the one on the right inside the block.
+  For example, `if let result = result { ... }`
+
 - `let value = myOptionalObject?.someProperty;`
 
   This uses the optional chaining operator `?.`.
@@ -2190,6 +2198,9 @@ class Programmer: Person {
 var mark = Programmer(name: "Mark", languages: ["JavaScript", "Swift"])
 mark.log() // Mark is a programmer that knows JavaScript & Swift.
 ```
+
+Definitions of both classes and structs can be nested inside each other
+to limit their visibility and/or scope their names.
 
 ## Initializers
 

@@ -111,6 +111,8 @@ Key things to know about not being in this mode include:
 
 To switch to "Live Preview" mode so tap events are honored,
 click the button with a triangle inside a circle.
+This also enables scrolling by dragging
+which is not possible in the default mode.
 
 It is possible for the Preview area to show more than one preview.
 This is controlled by the `ContentView_Previews` struct
