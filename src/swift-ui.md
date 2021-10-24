@@ -104,6 +104,9 @@ When there are errors, the Preview pauses and must be manually restarted
 by click the "Resume" button or pressing cmd-option-p.
 TODO: Are there other things that cause the Preview to pause?
 
+If the Canvas area displays the message "Failed to build" in the upper-left,
+click the "Diagnostics" button in the upper-right to see error messages.
+
 To zoom in and out on the Preview area,
 click the magnifier glass icons in the lower right (minus and plus)
 or select a zoom level from the percent dropdown.
@@ -244,6 +247,7 @@ and layout those views in a specific way.
 Combiner views can be passed a special kind of closure
 as their last argument that is called a `ViewBuilder`.
 These accept one to ten other Views.
+Note that a `ForEach` view counts as a single view.
 A `ViewBuilder` is a kind of result builder.
 For more information on these, see the {% aTargetBlank
 "https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
