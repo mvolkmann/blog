@@ -61,7 +61,7 @@ A new "App" project begins with the following files.
   This defines the `ContentView` struct which implements the `View` protocol
   and is the top of the user interface.
   It also defines the `ContentView_Previews` struct
-  which describes what the Preview area should display.
+  which describes the Previews that should display in the Canvas area.
   This can be one or more views that are each displayed in a separate Preview.
 
 - `Assets.xcassets`
@@ -92,6 +92,12 @@ To hide/show the Canvas area, select Editor ... Canvas.
 If Preview isn't running inside the Canvas area,
 press the "Resume" button at the top to start it.
 
+By default the Canvas area is only displayed
+when the file `ContentView.swift` is selected.
+To keep it displayed even when a different file is selected,
+select `ContentView.swift` and
+click the pin icon in the lower-left of the Canvas.
+
 When code changes are saved and there are no errors,
 the Preview is automatically updated.
 When there are errors, the Preview pauses and must be manually restarted
@@ -120,6 +126,9 @@ To switch to "Live Preview" mode so tap events are honored,
 click the button with a triangle inside a circle.
 This also enables scrolling by dragging
 which is not possible in the default mode.
+And one more thing clicking this does is to
+trigger the Preview to resume if it is paused
+and rebuild the code.
 
 It is possible for the Preview area to show more than one preview.
 This is controlled by the `ContentView_Previews` struct
@@ -218,8 +227,13 @@ This requires having a computed property named `body` with the type `Some View`.
 Views are used for components and layout.
 Views that layout other views are often referred to as "combiner views".
 
-Functions that create views often take another function as their last argument.
-Calls to these frequently uses trailing closures.
+Functions that create views often take a `ViewBuilder` their last argument.
+These are typically written as trailing closures.
+
+Views can be given an explicit identifier with the `.id` method
+that is passed an identifier.
+This is useful in methods that take a view identifier
+like the `ScrollViewReader` method `scrollTo`.
 
 ### Combiner Views
 
@@ -235,7 +249,8 @@ For more information on these, see the {% aTargetBlank
 "https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
 "Result builders proposal" %}.
 
-Combiner views also support conditional logic with `if` and `switch` statements.
+`ViewBuilder` blocks also support variable declarations and
+conditional logic with `if` and `switch` statements.
 However, no other Swift syntax is allowed in them.
 For iteration in a `ViewBuilder`, use a `ForEach` `View`.
 There is no corresponding view for conditional logic,
@@ -302,6 +317,14 @@ so `if` and `switch` statements are used instead.
 - `List`
 - `Section`
 - `ForEach`
+
+  This view iterates of the elements of an array
+  and renders the view specified in its `ViewBuilder`.
+  The elements in the array must either conform to the `Identifiable` protocol
+  OR `id:` argument must be specified.
+  The value of `id:` is a key path that specifies
+  how to find a unique value in the element.
+
 - `DynamicViewContent`
 - `Table`
 
