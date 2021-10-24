@@ -1660,11 +1660,13 @@ This allows the value to be `nil`.
 There are several ways to extract the value from
 a variable or property with an optional type.
 
-- `if let value = myOptional { ... }`
+- `if let unwrapped = someOptional { ... }`
 
-  If the value is `nil` the block is not executed.
   If the value is not `nil`, it is assigned to the variable `value`
   and the block is executed.
+  If the value is `nil` the block is not executed.
+  Often the same name is used for `unwrapped` and `someOptional`
+  to shadow the name in the scope of the block.
 
   It is common to unwrap an optional held in a variable
   into a variable with the same name.
@@ -1689,8 +1691,10 @@ a variable or property with an optional type.
   This uses a "guard" to
   assign the value of the optional to a variable if it is not `nil`
   or run the code in the `else` block if it is `nil`.
-  In a sense this it the opposite of the `if let` syntax
-  and is perhaps an option that isn't needed.
+  In a sense this it the opposite of the `if let` syntax.
+  It is typically used near the beginning of function bodies
+  to check the value of an argument an exit if it is unacceptable.
+  For this reason, the `else` block usually contains a `return` statement.
 
 - `if myOptional != nil { let value = myOptional!; ... }`
 
