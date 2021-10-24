@@ -2083,6 +2083,8 @@ A class can have:
 - instance-level methods
 - a superclass
 
+The default value of a property cannot depend on the value of another property.
+
 Classes, unlike structs, are not provided with a default memberwise initializer.
 It's not clear why this difference exists.
 

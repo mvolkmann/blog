@@ -608,6 +608,71 @@ struct ContentView: View {
 }
 ```
 
+## Modals
+
+Modal dialogs are implemented by displaying a "sheet".
+The sheet slides in from the bottom by default.
+
+The following example defines the custom view `MyModal`
+which is displayed in the sheet.
+The `ContentView` struct declares the boolean property `showModal`
+and passes it to the `MyModal` struct as a binding.
+This allows the action of the "Close" button in `MyModal`
+to set it to false which hides the sheet.
+
+```swift
+import SwiftUI
+
+struct MyModal: View {
+    @Binding var show: Bool
+    var message: String
+
+    var body: some View {
+        VStack {
+            Text("My Modal").font(.title)
+            Spacer()
+            Text(message).padding(20)
+            Spacer()
+            Button("Close") { show = false }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.black.opacity(0.2))
+    }
+}
+
+struct ContentView: View {
+    @State private var count = 0
+    @State private var message = "Opened once"
+    @State private var showModal = false
+
+    var body: some View {
+        VStack {
+            Text("Main View")
+            Button(action: {
+                count += 1
+                message = "Opened \(count) times"
+                showModal = true
+            }) {
+                Text("Show Modal")
+                .padding()
+                .background(.yellow)
+                .cornerRadius(10)
+            }
+            .sheet(isPresented: $showModal) {
+                // By default the sheet slides in from the bottom.
+                MyModal(show: $showModal, message: message)
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
 ## Navigation
 
 The `NavigationView` view marks the spot where
