@@ -2767,14 +2767,24 @@ The center area is divided into three sections.
 The left section is for editing code.
 The right section is the Canvas which is used to test
 Previews of an app outside of the Simulator or a real device.
+
+The bottom section is not visible by default.
+Drag the status row at the bottom up to expose it.
 The bottom section has two subsections.
 The left side of the bottom section is for the debugging.
-The right side of the bottom section is for output
+The right side of the bottom section is for the console output
 such as that from `print` function calls.
-Note that `print` output only appears when running in the Simulator,
-not when running in Preview.
-TODO: Is this because print output only appears when running a debug build
-TODO: and Preview doesn't use a debug build?
+Click the trashcan icon in the lower-right to clear the output.
+The output from `print` calls only appears when running in the debug mode.
+Xcode used to support debug mode in Previews,
+but now it is only supported in the Simulator.
+This is why `print` output never appears when running in Preview.
+This is really bad because the Simulator
+takes much longer to start than Preview!
+
+To make the console area appear automatically when new text is written to it,
+select Xcode ... Preferences... ... Behaviors ... Generates output,
+click the "Show" checkbox, and select "Variables & Console View".
 
 To open additional code panes, click the button the upper-right
 that is a rectangle containing a vertical line and a "+".
@@ -2803,6 +2813,7 @@ TODO: List the differences between the Simulator app and the Preview pane.
 The default device type used by the Simulator can be changed
 by selecting Product ... Destination ... Choose Destination...
 and selecting a device type.
+This must be done in each Xcode project.
 
 Xcode 13 adds support for Vim key bindings, but it is very basic.
 It does not support repeating commands with the period key,
