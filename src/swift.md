@@ -95,6 +95,12 @@ To developing an app:
   - "Clone an existing project"
   - "Open a project or file"
 
+The "Source Control" menu supports many Git commands including
+Commit, Push, Pull, Fetch Changes, Stash Changes, and Discard All Changes.
+When commiting changes a window opens where
+side-by-side file diffs are displayed.
+Modified files are indicated the Navigator by added an "M" after their names.
+
 ## Using the Interpreter
 
 To start the interpreter as a REPL (Read Eval Print Loop), enter `swift`.
@@ -265,6 +271,10 @@ func order(item: Item, quantity: Int) -> Int {
 }
 let orderNumber = order(item: Item("chicken fried rice"), quantity: 2)
 ```
+
+All function parameters are treated as `let` constants.
+This prevents function code from assigning new values to them.
+This also applies to the properties of objects passed to functions.
 
 Swift does not support a shorthand syntax for calling functions
 when in-scope variables have the same names are argument labels.
@@ -712,6 +722,8 @@ The `Bool` type has two possible values, `true` and `false`.
 | ---------- | -------------------------------------------- |
 | `toggle()` | toggles the value between `true` and `false` |
 
+Note that `myBool.toggle()` is equivalent to `myBool = !myBool`.
+
 ### Number Types
 
 The `Int`, `Float`, and `Double` types have some common properties and methods.
@@ -997,6 +1009,10 @@ any type, though `Int`, and `String` are common types.
 By convention both `enum` names and `case` names use camel-case,
 but `enum` names begin uppercase and `case` names begin lowercase.
 
+Enums are value types like structs.
+When an enum value is assigned to a variable or passed to a function,
+it is copied rather than using a reference.
+
 When `case` values are provided,
 their type must be specified after the `enum` name.
 These values are accessed with the `rawValue` property.
@@ -1008,16 +1024,10 @@ If a type is provided after the `enum` name,
 any cases without specified values are given default values.
 For example, if the type is `Int`,
 incrementing values starting with zero are assigned.
-And when the type is `String`,
-values matching the case name are assigned.
+When the type is `String`, values matching the case name are assigned.
 
 If no type is provided, the cases are not assigned default values.
 This differs from many other programming languages.
-
-An enumeration `case` value can be a collection type such as a tuple or object.
-Like structs and classes, enumerations can define initializers and methods.
-All of this seems like a misuse of enumerations.
-It seems better to use a struct or class for these cases.
 
 ```swift
 enum Color {
@@ -1025,6 +1035,7 @@ enum Color {
     case red, green, blue
 }
 
+// The cases here have specified values.
 enum ColorHex: String {
     case red = "ff0000"
     case green = "00ff00"
@@ -1052,7 +1063,68 @@ switch c1 {
 }
 ```
 
-If an `enum` has the type `CaseIterable` then
+An enumeration `case` value can have associated data specified as a list.
+Each piece of associated data:
+
+- must specify their type
+- can have a name for documentation, but are identified by position when used
+- can have a default value which makes it optional to
+  specifying a value when creating an instance
+
+Typically a `switch` statement is used to evaluate `enum` instances
+and take different actions based on the `case`.
+These must be exhaustive, meaning that either there is a `case`
+for every possible value or the `default` case must be specified.
+
+For example:
+
+```swift
+enum Activity {
+    case swim(googles: Bool, inPool: Bool = true)
+    case bike(Bike) // this associated data item has no name
+    case run(shoes: Shoe)
+    case sleep // no associated data
+}
+
+struct Bike: CustomStringConvertible {
+    var brand: String
+    var model: String
+    var description: String { "\(brand) \(model)" }
+}
+
+struct Shoe: CustomStringConvertible {
+    var brand: String
+    var model: String
+    var description: String { "\(brand) \(model)" }
+}
+
+func printActivity(_ activity: Activity) {
+    switch activity {
+    // Variable names are not required to match associated data names.
+    // These become local variables that are scoped to the case.
+    // _ can be used for a name if it isn't used.
+    case .swim(let g, let inP):
+        print("swimming \(inP ? "in" : "out of") a pool \(g ? "with" : "without") goggles")
+    case .bike(let bike):
+        print("riding a \(bike)")
+    case .run(let shoes):
+        print("running in \(shoes) shoes")
+    case .sleep:
+        print("sleeping")
+    }
+}
+
+var activity: Activity = .swim(googles: true)
+printActivity(activity) // swimming in a pool with googles
+activity = .bike(Bike(brand: "Cannondale", model: "Topstone"))
+printActivity(activity) // riding a Cannondale Topstone
+activity = .run(shoes: Shoe(brand: "Hoka", model: "Clifton"))
+printActivity(activity) // running in Hoka Clifton shoes
+activity = .sleep
+printActivity(activity) // sleeping
+```
+
+If an `enum` conforms to the `CaseIterable` protocol then
 its cases will be held in the `allCases` property.
 This can be used to iterate over the cases.
 If a value type is also specified, it must appear before `CaseIterable`.
@@ -1070,7 +1142,9 @@ for color in Color.allCases {
 }
 ```
 
-Here is an example of adding a method to an `enum`.
+Like structs and classes, enumerations can define
+initializers, computed properties, and methods.
+The following `enum` defines a computed property and a method.
 
 ```swift
 enum Color: String, CaseIterable {
@@ -1078,7 +1152,16 @@ enum Color: String, CaseIterable {
     case green = "00ff00"
     case blue = "0000ff"
 
-    func getGreenHex() -> Substring {
+    // Computed property
+    var redHex: Substring {
+        let hex = self.rawValue
+        let start = hex.startIndex
+        let end = hex.index(start, offsetBy: 1)
+        return hex[start...end]
+    }
+
+    // Method
+    func greenHex() -> Substring {
         let hex = self.rawValue
         let start = hex.index(hex.startIndex, offsetBy: 2)
         let end = hex.index(start, offsetBy: 1)
@@ -1086,8 +1169,10 @@ enum Color: String, CaseIterable {
     }
 }
 
-print(Color.red.getGreenHex()) // 00
-print(Color.green.getGreenHex()) // ff
+print(Color.red.redHex) // ff
+print(Color.green.redHex) // 00
+print(Color.red.greenHex()) // 00
+print(Color.green.greenHex()) // ff
 ```
 
 ## Built-in Collection Types
@@ -1778,8 +1863,12 @@ switch computeScore(player1) {
 If the `default` case is omitted, there must be a `case`
 that matches every possible value of the expression
 (i.e. it must be exhaustive).
+When the `switch` expression is a `String`,
+it's not possible to have a `case` for every possible value
+and the `default` case is required.
 If the value of the `switch` expression is an `enum`,
-there must be a `case` that matches each value of the `enum`.
+there must either be a `case` that matches each value of the `enum`
+or the `default` case must be included.
 
 ### Iteration
 
