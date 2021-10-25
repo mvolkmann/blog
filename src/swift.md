@@ -3141,6 +3141,12 @@ the features of Swift that are annoying, at least in my opinion.
   This is surprising coming from Apple which
   has a reputation for building great UIs.
 
+- Code not re-evaluated
+
+  Sometimes after fixing an error reported by the compiler,
+  Xcode doesn't re-evaluate the code and the error remains.
+  Resuming Preview triggers it to compile the code again.
+
 ## Questions
 
 - Why is a default memberwise initializer is provided for structs,

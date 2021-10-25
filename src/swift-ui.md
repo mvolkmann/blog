@@ -240,38 +240,137 @@ For example, `someView.opacity(0)`.
 
 Here are the combiner views that are provided by SwiftUI.
 
-- `HStack`: lays out child views horizontally
+- `HStack`
 
-- `VStack`: lays out child views vertically
+  This lays out child views horizontally.
 
-- `ZStack`: stacks views from bottom to top
+  The child views are centered vertically by default.
+  To change this, add the `alignment` attribute which can be set to
+  `.top`, `.center`, `.bottom`, `.firstTextBaseline`, or `.lastTextBaseline`.
+
+  A default amount of space is added between each child
+  which seems to be 8 pixels (can't find this documented).
+  To change the space between child views, add the `spacing` attribute.
+
+  The following example shows the effect of
+  setting `alignment` to `.lastTextBaseLine`.
+
+  <img alt="SwiftUI HStack" style="width: 40%"
+    src="/blog/assets/SwiftUI-HStack.png?v={{pkg.version}}"
+    title="SwiftUI HStack">
+
+  ```swift
+  HStack(alignment: .lastTextBaseline, spacing: 0) {
+      Rectangle().fill(.red).frame(width: 100, height: 100).border(.black)
+      Rectangle().fill(.green).frame(width: 50, height: 50).border(.black)
+      Text("Line 1\nLine 2").padding(20).border(.black)
+  }.border(.blue)
+  ```
+
+- `VStack`
+
+  This lays out child views vertically.
+
+  The child views are centered horizontally by default.
+  To change this, add the `alignment` attribute which can be set to
+  `.leading`, `.center`, or `.trailing`.
+
+- `ZStack`
+
+  This stacks views from bottom to top.
+  It is ideal for adding a background to a set of views.
 
 - `LazyHStack`
 
-  This is similar to `HStack`, but only renders items when they are visible.
-  It is commonly used inside a `ScrollView`.
+  This is similar to `HStack`, but only
+  builds and renders child views when they are visible.
+  It is commonly used inside a `ScrollView` with `axes` set to `.horizontal`.
+
+  ```swift
+  ScrollView(.horizontal) {
+      LazyHStack {
+          ForEach(1..<100) {
+              Text(String($0))
+          }
+      }
+  }
+  ```
 
 - `LazyVStack`
 
-  This is similar to `VStack`, but only renders items when they are visible.
-  It is commonly used inside a `ScrollView`.
+  This is similar to `VStack`, but only
+  builds and renders child views when they are visible.
+  It is commonly used inside a `ScrollView` with `axes` set to `.vertical`,
+  which is the default.
+
+  ```swift
+  ScrollView {
+      LazyVStack {
+          ForEach(1..<101) {
+              Text(String($0))
+          }
+      }
+  }
+  ```
 
 - `LazyHGrid`
 
   This specifies a number of rows and adds columns as necessary.
-  The rows are described by an array of {% aTargetBlank
+  The grids are described by an array of {% aTargetBlank
   "https://developer.apple.com/documentation/swiftui/griditem", "GridItem" %}
   objects that each specify their size, spacing, and alignment.
   For example, a `GridItem` can adapt to the width of its content,
   but also have a minimum size of 25 by specifying
   `GridItem(.adaptive(minimum: 25))`.
 
+  See the example in `LazyVGrid` below.
+
 - `LazyVGrid`
 
-  This specifies a number of columns and adds rows as necessary.
-  The columns are described by an array of {% aTargetBlank
-  "https://developer.apple.com/documentation/swiftui/griditem", "GridItem" %}
-  objects that each specify their size, spacing, and alignment.
+  This is similar to `LazyHGrid`, but
+  specifies a number of columns and adds rows as necessary.
+
+  The following example demonstrates both `LazyHGrid` and `LazyVGrid`.
+
+  ```swift
+  struct ContentView: View {
+      private static let count = 3
+      private let isVertical = false // Why can't this be static?
+
+      // Describe the characteristics of each grid.
+      private static let gridItem = GridItem(
+          // This specifies the grid height in LazyHGrid
+          // or the grid width in LazyVGrid.
+          .fixed(40),
+          // This specifies the vertical spacing in LazyHGrid
+          // or horizontal spacing in LazyVGrid.
+          spacing: 10,
+          alignment: .center
+      )
+
+      var gridItems: [GridItem] = Array(repeating: gridItem, count: count)
+
+      var body: some View {
+          if isVertical {
+              ScrollView {
+                  LazyVGrid(columns: gridItems) {
+                      ForEach(1..<101) {
+                          Text(String($0)).padding(5).border(.blue)
+                      }
+                   }.border(.red)
+              }
+          } else {
+              ScrollView(.horizontal) {
+                  LazyHGrid(rows: gridItems) {
+                      ForEach(1..<101) {
+                          Text(String($0)).padding(5).border(.blue)
+                      }
+                  }.border(.red)
+              }
+          }
+      }
+  }
+  ```
 
 - `Form`
 - `Group`
@@ -282,18 +381,10 @@ Here are the combiner views that are provided by SwiftUI.
 
   This creates a scrollable view that is vertical by default,
   but can be changed to horizontal.
-  The following example creates a horizontally scrollable view
-  containing 20 numbered `Text` views.
-
-  ```swift
-  ScrollView(.horizontal) {
-      HStack(spacing: 10) {
-          ForEach(1..<21) { // 1...20 isn't allowed here
-              Text("Number \($0)").padding(5).border(.red, width: 2)
-          }
-      }
-  }
-  ```
+  It occupies all the space offered to it.
+  Scrolling reveals additional child views when all of them do not fit.
+  See examples of using this in the
+  descriptions of `LazyHStack` and `LazyVStack`.
 
 - `ScrollViewReader`
 - `ScrollViewProxy`
@@ -324,6 +415,15 @@ Here are the combiner views that are provided by SwiftUI.
 ### Component Views
 
 - `Text`
+
+  This view renders text.
+  If the text is too long to fit on a single line,
+  it is automatically wrapped to additional lines.
+  To prevent this, apply the `lineLimit` view modifier
+  and pass the number of lines that can be used (perhaps 1).
+  If the text doesn't fit in the allowed number of lines,
+  it will be elided and an ellipsis will appear at the end.
+
 - `TextField`
 - `SecureField`
 - `TextEditor`
@@ -670,6 +770,9 @@ Examples include `Circle` and `RoundedRectangle`.
 
 Combiner views give space to inflexible child views first and
 then divide the remaining space between the flexible child views.
+The priority with which combiner views give space to child views
+can be altered by applying the `layoutPriority` view modifier to child views.
+It is passed a float value that defaults to zero.
 
 When a combiner view contains at least one flexible view,
 it is also considered to be flexible.
