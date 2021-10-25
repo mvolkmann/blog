@@ -1762,8 +1762,8 @@ class Animal: CustomStringConvertible {
         self.name = name
     }
 
-    // This is a computed property that is defined
-    // in the CustomStringConvertible protocol.
+    // This is a computed property that is required
+    // by the CustomStringConvertible protocol.
     // It is used when a variable of this type
     // is printed or converted to a string.
     public var description: String { return name }
@@ -3109,52 +3109,37 @@ the features of Swift that are annoying, at least in my opinion.
   Swift should have copied the `${expression}` syntax already in use by other
   languages instead of using the `\(expression)` syntax that is unique to Swift.
 
-- Defaulting to named parameters
-
-  Arguments to most functions and methods are specified with
-  just a value (positionally) rather than using argument labels.
-  But that is only allowed for argument labels
-  that are specified to be an underscore.
-  The common case should be the default.
-
-- `in` keyword
-
-  The need for the `in` keyword in closures to
-  separate the parameter list from the statements seems odd.
-
 - Trailing closures
 
   The syntax for trailing closures is unique to Swift.
   It's nice when used with methods like `Array` `map`.
   However, the syntax looks strange when more than one
   is used in the same function/method call.
-  Using more that one shouldn't be supported.
+  Using more than one shouldn't be supported.
 
-- Going too far
+- Too many features in enumerations
 
-  Swift has many good features that it stretches too far.
-  Some might say programming language features that have
-  significant overlap with other features should not be supported.
-
-  Examples include:
-
-  - enumerations should not support initializers, properties, and methods
-  - enumerations should not support "recursive enumerations"
-  - associated types of enumerations should be limited to primitive types
-  - structs and classes have too much overlap in functionality
-
-- Too many optional unwrapping options
-
-  The `if let` syntax reads well.
-  It seems that in most cases this is
-  a better option than the `guard if` syntax.
+  They don't need to support initializers, computed properties,
+  methods, and recursive enumerations.
 
 - Some names are way too long
 
-  I'm trying to imagine a meeting between the Swift designers where
-  someone proposed that the name of the error property
-  that holds the message should be `localizedDescription`
-  and everyone in the room agreed.
+  Examples include:
+
+  - `localizedDescription`
+
+    This is an `Error` property that could have been named `message`.
+
+  - `CustomStringConvertible`
+
+    This is a protocol that could have been named `Describable`.
+
+- Lack of wait cursors
+
+  When creating a new project, there is a long pause after each step
+  where there is no indication that work is happening in the background.
+  This is surprising coming from Apple which
+  has a reputation for building great UIs.
 
 ## Questions
 
@@ -3188,10 +3173,6 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Why doesn't the `Character` type conform to the
   `Decodable` and `Encodable` protocols like the other primitive types?
-
-- Why is the `try` keyword allowed outside a `do` block
-  and what happens if the expression following it throws?
-  Does it just propagate the error up the call stack?
 
 - How is a new module defined and
   can it be implemented by multiple source files?

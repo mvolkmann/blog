@@ -477,7 +477,9 @@ with have inside and half outside.
 
   Each of these take an equal amount of the unused space
   inside the parent combiner view.
-  This can be compared to web applications that use
+  It accepts an optional `minLength` attribute which defaults to zero.
+
+  Using `Spacer` can be compared to web applications that use
   the CSS properties `display: flex;` and `justify-content`.
 
   | CSS justify-content value | Spacer placement              |
@@ -487,6 +489,10 @@ with have inside and half outside.
   | space-between             | one between each child view   |
 
 - `Divider`
+
+  This draws a line across the container.
+  The line is vertical in an `HStack` and horizontal in a `VStack`.
+  Apply the `padding` view modifier to add space around the line.
 
 TODO: Are `Color` and `LinearGradient` views?
 
