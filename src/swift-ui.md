@@ -639,7 +639,7 @@ For example, a ViewModel could get the result of a SQL query from the Model
 and turn it into an array of objects that it publishes to Views.
 
 Read-only data flows from the Model, through the ViewModel, and into the View.
-Views can ViewModel functions referred to as "intents"
+Views call ViewModel functions referred to as "intents"
 to notify it about user interactions.
 ViewModel methods can trigger Model updates.
 
@@ -702,7 +702,8 @@ struct Dog: CustomStringConvertible, Identifiable {
 // Alternatively, if the properties that can change are annotated with
 // the @Published property wrapper, changes will be published automatically.
 class Model: ObservableObject {
-    // The @Published property wrapper causes changes to be published.
+    // The @Published property wrapper causes changes in properties
+    // that are structs, not classes, to be published.
     @Published var dogs: [Dog] = []
 
     //private let logger = Logger()
@@ -715,7 +716,7 @@ class Model: ObservableObject {
         dogs.append(Dog(name: "Comet", breed: "Whippet"))
     }
 
-    /// Toggles whether a given dog is selected.
+    /// An "intent" that toggles whether a given dog is selected.
     func toggle(_ dog: Dog) {
         // This is not needed if properties have the @Published annotation.
         //objectWillChange.send() // notifies subscribers
@@ -754,6 +755,8 @@ struct DogView: View {
 
 struct ContentView: View {
     // Adding the @ObservedObject property wrapper subscribes to changes.
+    // Only views that are affected by observed changes are rebuilt,
+    // so it is efficient.
     // Selecting a dog mutates this model which causes this view to be rebuilt.
     @ObservedObject var model: Model
 
