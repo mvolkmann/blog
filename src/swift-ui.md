@@ -621,6 +621,25 @@ struct ContentView: View {
 }
 ```
 
+## View Layout
+
+Container views offer space to their child views.
+The child views can choose their size within the space offered to them.
+Container views then position the contained views knowing their sizes.
+Container views can also then choose their own size
+that perhaps differs from they offered to their child views.
+
+Some views are "inflexible" and want to be a specific size.
+Examples including `Text` and `Image` views.
+Other views are "flexible" and can adapt to the space offered to them.
+Examples include `Circle` and `RoundedRectangle`.
+
+Container views give space to inflexible child views first and
+then divide the remaining space between the flexible child views.
+
+When a container view contains at least one flexible view,
+it is also considered to be flexible.
+
 ## MVVM
 
 SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm
