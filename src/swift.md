@@ -617,8 +617,9 @@ do {
 ## Type Aliases
 
 A type alias assigns an alternate name to another type.
+By convention these names are CamelCase, beginning with an uppercase letter.
 
-One uses is to provide additional documentation for primitive types.
+One use is to provide additional documentation for primitive types.
 For example, the following documents the expected format of a `String`.
 
 ```swift
@@ -626,15 +627,17 @@ typealias MMDDYYYY = String
 var date: MMDDYYYY = "04161961"
 ```
 
-The type of an anonymous function can be assigned to a `typealias`
-to avoid repeating it and the possibility for typos.
+Another use of type aliases is to give a shorter name
+to a complicated type definition that is used multiple times.
+
+The type of an anonymous function can be assigned to a `typealias`.
 This is also useful for declaring the types of functions
 that are passed as arguments to other functions.
 For example, the product function above can be written as follows:
 
 ```swift
-typealias doublePairToDouble = (Double, Double) -> Double
-let product: doublePairToDouble = {$0 * $1}
+typealias DoublePairToDouble = (Double, Double) -> Double
+let product: DoublePairToDouble = {$0 * $1}
 print(product(2, 3))
 ```
 
@@ -1200,7 +1203,8 @@ The following example defines a `Stack`
 where all the elements have the same type.
 The element type must be specified when a `Stack` instance is created
 using a "type parameter".
-By convention, type parameter names start uppercase and are CamelCase.
+By convention, type parameter names are CamelCase,
+beginning with an uppercase letter.
 Any number of type parameters can be specified, separated by commas.
 
 ```swift
@@ -1363,9 +1367,9 @@ for (index, score) in scores.enumerated() {
 | ---------- | ----------------------------------------------------------------- |
 | `capacity` | number of elements that can be held without allocating more space |
 | `count`    | number of current elements                                        |
-| `first`    | first element                                                     |
+| `first`    | optional first element; `nil` when empty                          |
 | `isEmpty`  | `Bool` value indicating whether `count` is zero                   |
-| `last`     | last element                                                      |
+| `last`     | optional last element; `nil` when empty                           |
 
 `Array` instance methods include, but are not limited to the following:
 
@@ -2161,10 +2165,10 @@ struct Point {
 
     // This property has a property observer.
     var y: Double {
-        willSet {
+        willSet { // runs before changes; can access newValue
             print("y is about to change to \(newValue)")
         }
-        didSet {
+        didSet { // runs after changes; can access oldValue
             Point.maxY = Double.maximum(Point.maxY, y)
             print("y changed from \(oldValue) to \(y)")
         }

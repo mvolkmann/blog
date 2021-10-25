@@ -196,6 +196,9 @@ Views can render other views.
 
 Each view is a struct that implement the `View` protocol.
 This requires having a computed property named `body` with the type `Some View`.
+Most properties declared in a `View` struct should be `private`.
+Exceptions include the `body` property and
+any properties that are passed in when instances are created.
 
 Views are used for components and layout.
 Views that layout other views are often referred to as "combiner views".
@@ -632,8 +635,9 @@ Any state held in a view using the `@State` property modifier
 should be transient state such as data related to styling.
 
 Views reacts to changes published by ViewModels.
-Their `body` vars return new views
-any time the ViewModel data they use changes.
+Each View can be associates with any number of ViewModels.
+The `body` var of a View builds new views
+any time the data in ViewModels they use changes.
 Views are declarative rather than imperative
 because they describe what to render based on the current data,
 not when to render it.
