@@ -97,7 +97,7 @@ To developing an app:
 
 The "Source Control" menu supports many Git commands including
 Commit, Push, Pull, Fetch Changes, Stash Changes, and Discard All Changes.
-When commiting changes a window opens where
+When committing changes a window opens where
 side-by-side file diffs are displayed.
 Modified files are indicated the Navigator by added an "M" after their names.
 
@@ -125,6 +125,8 @@ Single-line comments begin with `//`.
 Multi-line comments are delimited by `/*` and `*/`.
 Multi-line comments can be nested which makes it easy to
 comment out blocks of code that contain multi-line comments.
+Documentation comments begin with `///` and appear before type definitions.
+This documentation appears when a name is option-clicked in Xcode.
 
 Xcode can toggle whether lines are commented.
 To comment/uncomment the current line or selected lines, press cmd-/.
@@ -1125,7 +1127,7 @@ printActivity(activity) // sleeping
 ```
 
 If an `enum` conforms to the `CaseIterable` protocol then
-its cases will be held in the `allCases` property.
+its cases will be held in the `allCases` static property.
 This can be used to iterate over the cases.
 If a value type is also specified, it must appear before `CaseIterable`.
 
@@ -1144,6 +1146,7 @@ for color in Color.allCases {
 
 Like structs and classes, enumerations can define
 initializers, computed properties, and methods.
+Enumerations cannot have regular (non-computed), properties.
 The following `enum` defines a computed property and a method.
 
 ```swift
@@ -1167,15 +1170,75 @@ enum Color: String, CaseIterable {
         let end = hex.index(start, offsetBy: 1)
         return hex[start...end]
     }
+
+
+    func temperature() {
+        // Methods can test for the case by switching on "self".
+        switch self {
+        case .red: print("hot")
+        case .green: print("comfortable")
+        case .blue: print("cold")
+        }
+    }
 }
 
 print(Color.red.redHex) // ff
 print(Color.green.redHex) // 00
 print(Color.red.greenHex()) // 00
 print(Color.green.greenHex()) // ff
+let color: Color = .red
+print(color.temperature()) // hot
+```
+
+## Generics
+
+Swift supports generic types.
+These can be used in many settings including
+struct, class, and function definitions.
+
+The following example defines a `Stack`
+where all the elements have the same type.
+The element type must be specified when a `Stack` instance is created
+using a "type parameter".
+By convention, type parameter names start uppercase and are CamelCase.
+Any number of type parameters can be specified, separated by commas.
+
+```swift
+struct Stack<Element> {
+    var elements: [Element] = []
+
+    mutating func push(_ item: Element) {
+        elements.append(item)
+    }
+
+    mutating func pop() -> Element {
+        return elements.removeLast()
+    }
+}
+
+var s = Stack<String>()
+s.push("Moe")
+s.push("Larry")
+s.push("Curly")
+//s.push(7) // Cannot convert value of type 'Int' to expected argument type 'String'
+print(s.pop()) // Curly
+print(s.pop()) // Larry
+print(s.pop()) // Moe
+```
+
+The type of a type parameter can be constrained to only types
+that conform to given protocols using the `where` keyword.
+For example:
+
+```swift
+struct Stack<Element> where Element: Equatable & Identifiable {
+    ...
+}
 ```
 
 ## Built-in Collection Types
+
+Swift provides several generic collection types.
 
 | Type         | Description                                                                                       |
 | ------------ | ------------------------------------------------------------------------------------------------- |
@@ -1269,6 +1332,19 @@ To iterate over the elements in an `Array`, use a `for`/`in` loop.
 
 ```swift
 for score in scores {
+    print(score)
+}
+```
+
+To iterate over the indices in an `Array`, use a `for`/`in` loop.
+
+```swift
+for index in 0..<scores.count {
+    print(score)
+}
+
+// This is equivalent and reads better.
+for index in scores.indices {
     print(score)
 }
 ```
@@ -1739,17 +1815,39 @@ evaluate(d) // Comet is a dog.\nhas tail? true
 ## Optionals
 
 Variables must be assigned a value before they are accessed
-unless they have an optional type indicated by a `?` after the type name.
-This allows the value to be `nil`.
+unless they have an `Optional` type.
+This is a generic `enum` with the following definition:
+
+```swift
+enum Optional<T> {
+    case none
+    case some(T) // associated data of type T
+}
+```
+
+Adding `?` after a type name is syntactic sugar
+for creating an `Optional` value.
+It allows the value to be `nil`.
+
+The following are equivalent:
+
+| Full Syntax                                  | Syntactic Sugar                       |
+| -------------------------------------------- | ------------------------------------- |
+| `var name: Optional<String> = .none`         | `var name: String?` (defaults to nil) |
+| `var name: Optional<String> = .some("Mark")` | `var name: String? = "Mark`           |
 
 There are several ways to extract the value from
 a variable or property with an optional type.
 
-- `if let unwrapped = someOptional { ... }`
+- if let
+
+  `if let unwrapped = someOptional { ... }`
 
   If the value is not `nil`, it is assigned to the variable `value`
-  and the block is executed.
+  (which is scoped to the block that follows) and the block is executed.
   If the value is `nil` the block is not executed.
+  An `else` block can be included to specify
+  code to run when the value is `nil`.
   Often the same name is used for `unwrapped` and `someOptional`
   to shadow the name in the scope of the block.
 
@@ -1758,20 +1856,28 @@ a variable or property with an optional type.
   The one on the left shadows the one on the right inside the block.
   For example, `if let result = result { ... }`
 
-- `let value = myOptionalObject?.someProperty;`
+- optional chaining
+
+  `let value = myOptionalObject?.someProperty;`
 
   This uses the optional chaining operator `?.`.
-  If `myOptionalObject` is `nil` the `value` will be set to `nil`.
+  If `myOptionalObject` is `nil`, `value` will be set to `nil`.
   Otherwise it will be set to the value of `someProperty` in the object.
   This operator can also precede method calls
   to avoid calling them if the receiver is `nil`.
 
-- `let value = myDictionary[someKey] ?? defaultValue`
+- nil-coalescing
+
+  `let value = myDictionary[someKey] ?? defaultValue`
 
   This uses the nil-coalescing operator `??`
-  to handle cases where a key is not found in a dictionary.
+  to get either the unwrapped value or a default value.
+  The example above gets a value from `Dictionary` if it exist
+  or a default value otherwise.
 
-- `guard let value = myOptional else { ... }
+- guard
+
+  `guard let value = myOptional else { ... }
 
   This uses a "guard" to
   assign the value of the optional to a variable if it is not `nil`
@@ -1781,12 +1887,14 @@ a variable or property with an optional type.
   to check the value of an argument an exit if it is unacceptable.
   For this reason, the `else` block usually contains a `return` statement.
 
-- `if myOptional != nil { let value = myOptional!; ... }`
+- force unwrap
+
+  `if myOptional != nil { let value = myOptional!; ... }`
 
   This uses the `!` to "force unwrap" the optional.
   If the `!` operator is applied to an optional set to `nil`
   the program will crash with a fatal error.
-  It is recommended to never use this operator.
+  Use this option only when the value should never be nil.
 
 Here are more examples of working with optionals.
 
@@ -1831,12 +1939,44 @@ Curly braces are required around all code blocks,
 even if they only contain a single statement.
 
 ```swift
-if score1 == 21, score2 <= 19 { // same as score1 == 21 && score2 <= 19
+if score1 == 21 && score2 <= 19 {
   print("Player 1 has won by at least 2.")
 } else if score1 > score2 {
   print("Player 1 is leading.")
 } else {
   print("Player 1 is not leading.")
+}
+```
+
+Conditions can be specified by a comma-separated list of expressions
+which must all evaluate to `true`.
+This is useful in `if let` and `guard let` statements.
+The advantage using commas has over using the `&&` operator
+is that `let` variables can be accessed in subsequent conditions.
+In the following example, assume that the `firstPlayer` method
+returns an optional `Player` object with a `score` property.
+
+```swift
+struct Player {
+  var name: String
+  var score: Int
+}
+
+struct Game {
+    var players: [Player] = []
+}
+
+let game = Game()
+
+// This gives the error "Cannot find 'player' in scope".
+// because the player variable is not available after &&.
+if let player = game.players.first && player.score == 0 {
+    print("first player has no score")
+}
+
+// This works because the player variable is available after the comma.
+if let player = game.players.first, player.score == 0 {
+    print("first player has no score")
 }
 ```
 
@@ -2008,6 +2148,7 @@ var dog2 = dog
 dog.age = 2
 print(dog.age, dog2.age) // 2 1
 
+/// This represents a 2D Cartesian point.
 struct Point {
     // This is a "type property".
     // Other languages refer to this as a "class property".
@@ -2848,7 +2989,25 @@ enter `swiftformat *.swift`.
 
 ### Xcode
 
-The primary IDE for creating macOS, iOS, and watchOS applications is Xcode.
+Xcode is the primary IDE for creating macOS, iOS, and watchOS applications.
+It is a passable IDE with many issues.
+
+- Xcode is slow.
+
+  After saving code changes it can
+  take a few seconds for it to identify syntax errors.
+
+- Xcode cannot format code on save.
+
+  You must select a section of code or the entire file and press ctrl-i.
+
+- Xcode supports Vim keybindings.
+
+  To enable this, select Editor ... Vim Mode.
+  However, it is very basic.
+  It does not support repeating commands with the period key,
+  defining macros, and other more advanced Vim features.
+
 The main Xcode window is divided into three main areas.
 The left side is the Navigator.
 The right side is the Inspector.
@@ -2871,6 +3030,18 @@ This is why `print` output never appears when running in Preview.
 This is really bad because the Simulator
 takes much longer to start than Preview!
 
+Option-click a name in Swift code to see its type and basic documentation.
+Click the "Open in Developer Documentation" link for more detail.
+
+Command-click a name to display a context sensitive menu
+that can include the following options:
+
+- Jump to definition
+- Fold: collapses a code block to an ellipsis; double-click ellipsis to re-open
+- Rename... TODO: THIS IS NOT PRESENT!
+- Callers...
+- and more
+
 To make the console area appear automatically when new text is written to it,
 select Xcode ... Preferences... ... Behaviors ... Generates output,
 click the "Show" checkbox, and select "Variables & Console View".
@@ -2879,14 +3050,6 @@ To open additional code panes, click the button the upper-right
 that is a rectangle containing a vertical line and a "+".
 The dropdown menu to the left of this button enables
 toggling the display of the Canvas area and much more.
-
-Xcode is a passable IDE with many issues.
-
-Xcode is slow. After saving code changes it can
-take a few seconds for it to identify syntax errors.
-
-Xcode cannot format code on save.
-You must select a section of code or the entire file and press ctrl-i.
 
 To set Xcode to check spelling while typing, select
 Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
@@ -2903,11 +3066,6 @@ The default device type used by the Simulator can be changed
 by selecting Product ... Destination ... Choose Destination...
 and selecting a device type.
 This must be done in each Xcode project.
-
-Xcode 13 adds support for Vim key bindings, but it is very basic.
-It does not support repeating commands with the period key,
-defining macros, and other more advanced Vim features.
-To enable this, select Editor ... Vim Mode.
 
 ### VS Code
 
