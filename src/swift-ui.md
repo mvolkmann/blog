@@ -171,36 +171,6 @@ loads the app in the Simulator, and starts it.
 The app is not automatically updates when code changes are saved.
 The triangle must be clicked again to repeat the whole build/load/start process.
 
-## MVVM
-
-SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm
-which separates application code into three groups.
-This differs from UIKit which encourages use of Model-View-Controller (MVC).
-
-The Model holds data and application logic.
-It is independent from the view code and has no knowledge of it.
-
-The View decides what to render and should be mostly stateless.
-Any state held in the view using the `@State` property modifier
-should be primarily related to styling and not application data.
-
-Views reacts to changes published by the ViewModel.
-Their `body` vars return new views
-any time the ViewModel data they use changes.
-Views are declarative rather than imperative
-because they describe what to render based on the current data,
-not when to render it.
-
-The ViewModel binds views to a model.
-It reacts to changes in the Model and
-optionally transforms it before sending it to the View.
-For example, it could get the result of a SQL query from the Model
-and turn it into an array of objects that it passes to the View.
-
-Read-only data flows from the Model, through the ViewModel, and into the View.
-
-TODO: Does the view send events to the ViewModel which sends them to the Model?
-
 ## Icons
 
 {% aTargetBlank "https://developer.apple.com/sf-symbols/", "SF Symbols" %}
@@ -259,6 +229,13 @@ However, no other Swift syntax is allowed in them.
 For iteration in a `ViewBuilder`, use a `ForEach` `View`.
 There is no corresponding view for conditional logic,
 so `if` and `switch` statements are used instead.
+
+To hide a view but still take up the space that would be occupied
+if the view was visible, consider setting its opacity to zero.
+This is done with the `opacity` view modifier.
+For example, `someView.opacity(0)`.
+
+Here are the combiner views that are provided by SwiftUI.
 
 - `HStack`: lays out child views horizontally
 
@@ -631,6 +608,172 @@ struct ContentView: View {
             // $ in front of status is needed for a two-way binding.
             MyTextField(label: "status", text: $status)
         }
+    }
+}
+```
+
+## MVVM
+
+SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm
+which separates application code into three groups.
+This differs from UIKit which encourages use of Model-View-Controller (MVC).
+
+Models holds data and application logic.
+They are independent from the view code and have no knowledge of it.
+
+Views decides what to render and should be mostly stateless.
+Any state held in a view using the `@State` property modifier
+should be transient state such as data related to styling.
+
+Views reacts to changes published by ViewModels.
+Their `body` vars return new views
+any time the ViewModel data they use changes.
+Views are declarative rather than imperative
+because they describe what to render based on the current data,
+not when to render it.
+
+ViewModels binds views to models.
+They reacts to changes in the Model and optionally transform data
+before publishing changes so that views can rebuild based on the changes.
+For example, a ViewModel could get the result of a SQL query from the Model
+and turn it into an array of objects that it publishes to Views.
+
+Read-only data flows from the Model, through the ViewModel, and into the View.
+Views can ViewModel functions referred to as "intents"
+to notify it about user interactions.
+ViewModel methods can trigger Model updates.
+
+Here is a basic example of using MVVM.
+It's not exactly MVVM because it combines the Model and ViewModel
+into a single class.
+This is perhaps acceptable in cases where Model data is
+presented as-is to the View without requiring any data transformation.
+
+Note the use of the `@Published` and `@ObservedObject` property wrappers.
+
+<img alt="SwiftUI MVVM demo" style="width: 40%"
+  src="/blog/assets/SwiftUI-MVVM.png?v={{pkg.version}}"
+  title="SwiftUI MVVM demo">
+
+```swift
+// DemoApp.swift
+import SwiftUI
+
+@main
+struct SwiftUI_MVVMApp: App {
+    var model = Model() // defined in Model.swift
+
+    var body: some Scene {
+        WindowGroup {
+            // This is how the View knows about the model.
+            ContentView(model: model)
+        }
+    }
+}
+```
+
+```swift
+// Model.swift
+import Foundation
+
+struct Dog: CustomStringConvertible, Identifiable {
+    private static var lastId = 0;
+
+    // This is a computed property required by the CustomStringConvertible protocol.
+    var description: String { "Dog: \(name) \(selected)" }
+
+    var breed: String
+    var id: Int // required by the Identifiable protocol
+    var name: String
+    var selected = false
+
+    init(name: String, breed: String) {
+        Dog.lastId += 1
+        id = Dog.lastId
+        self.name = name
+        self.breed = breed
+    }
+}
+
+// This must be a class instead of a struct
+// in order to conform to the ObservableObject protocol.
+// Things that do this gain an objectWillChange method that publishes changes.
+// This can be called directly before changes are made.
+// Alternatively, if the properties that can change are annotated with
+// the @Published property wrapper, changes will be published automatically.
+class Model: ObservableObject {
+    // The @Published property wrapper causes changes to be published.
+    @Published var dogs: [Dog] = []
+
+    //private let logger = Logger()
+
+    init() {
+        // Start with an initial set of dogs.
+        dogs.append(Dog(name: "Maisey", breed: "Treeing Walker Coonhound"))
+        dogs.append(Dog(name: "Ramsay", breed: "Native American Indian Dog"))
+        dogs.append(Dog(name: "Oscar", breed: "German Shorthaired Pointer"))
+        dogs.append(Dog(name: "Comet", breed: "Whippet"))
+    }
+
+    /// Toggles whether a given dog is selected.
+    func toggle(_ dog: Dog) {
+        // This is not needed if properties have the @Published annotation.
+        //objectWillChange.send() // notifies subscribers
+
+        // We can't use the "first" method to find the matching Dog
+        // because that would return a copy of the Dog struct.
+        // We need to be able to modify the struct in the array, not a copy.
+        let index = dogs.firstIndex(where: { $0.id == dog.id })
+        if let index = index {
+            dogs[index].selected.toggle()
+            let msg = "Model.select: selectedDog = \(String(describing: dogs[index]))"
+            print(msg)
+        }
+    }
+}
+```
+
+```swift
+// ContentView.swift
+import SwiftUI
+
+// This is a custom view that renders a dog description.
+// If the dog is selected, the text is made bold.
+struct DogView: View {
+    var dog: Dog
+
+    var body: some View {
+        let text = Text("\(dog.name) is a \(dog.breed)")
+        if dog.selected {
+            text.bold()
+        } else {
+            text
+        }
+    }
+}
+
+struct ContentView: View {
+    // Adding the @ObservedObject property wrapper subscribes to changes.
+    // Selecting a dog mutates this model which causes this view to be rebuilt.
+    @ObservedObject var model: Model
+
+    var body: some View {
+        VStack {
+            Text("Dogs (\(model.dogs.count))").font(.title).padding()
+            VStack(alignment: .leading) {
+                ForEach(model.dogs) { dog in
+                    DogView(dog: dog).onTapGesture {
+                        model.toggle(dog)
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(model: Model())
     }
 }
 ```
