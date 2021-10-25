@@ -2556,6 +2556,9 @@ The access control keywords include:
 - `fileprivate`: access from code in the same source file
 - `private`: access within enclosing declaration (such as a struct or class)
 
+The most commonly used access control keyword is `private`
+and the second most commonly used is `internal` which is the default.
+
 ## Ranges
 
 Swift supports four kinds of ranges.

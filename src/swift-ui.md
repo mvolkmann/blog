@@ -527,13 +527,19 @@ VStack {
 ### View State
 
 All views are immutable structs.
-Typically they get mutable data from a model.
+Typically they get data from a model.
 They can also have associated mutable data
 by applying the `@State` property wrapper to a property.
 
-Properties with `@State` are typically only used for
-temporary data related to styling details.
+Properties declared with `@State` usually include the `private`
+access control keyword because the data is only used by that view.
 Such data is held outside of the struct and the struct holds a pointer to it.
+Changes to these properties cause the view body to be rebuilt.
+
+Any state held in a view using the `@State` property modifier
+should be transient state such as data related to styling.
+It is recommended to use `@State` sparingly
+and prefer holding data in model objects instead.
 
 The following example holds the status of a stoplight
 in the "status" state property.
@@ -755,9 +761,10 @@ struct DogView: View {
 
 struct ContentView: View {
     // Adding the @ObservedObject property wrapper subscribes to changes.
-    // Only views that are affected by observed changes are rebuilt,
+    // Only view bodies that are affected by observed changes are rebuilt,
     // so it is efficient.
-    // Selecting a dog mutates this model which causes this view to be rebuilt.
+    // Selecting a dog mutates this model
+    // which causes this view body to be rebuilt.
     @ObservedObject var model: Model
 
     var body: some View {
