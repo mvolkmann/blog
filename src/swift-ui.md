@@ -490,9 +490,37 @@ with have inside and half outside.
 
 - `Divider`
 
-  This draws a line across the container.
+  This draws a light gray 1-pixel wide line across the container.
   The line is vertical in an `HStack` and horizontal in a `VStack`.
-  Apply the `padding` view modifier to add space around the line.
+
+  The line can be customized in several ways.
+
+  - To add space around the line, use the `padding` view modifier.
+
+    ```swift
+    Divider().padding(20)
+    ```
+
+  - To change the color of the line, use the `background` view modifier.
+
+    ```swift
+    Divider().background(.red)
+    ```
+
+  - To draw a thicker line, use the `frame` modifier.
+    This doesn't actually make the `Divider` thicker,
+    it just makes the area allocated wider and fills it with a color.
+
+    ```swift
+    Divider().background(.blue).frame(height: 20).background(.blue)
+    ```
+
+  - To avoid drawing the line all the way across the container,
+    use the `frame` view modifier and specify the `maxWidth` attribute.
+
+    ```swift
+    Divider().frame(maxWidth: 200)
+    ```
 
 TODO: Are `Color` and `LinearGradient` views?
 
@@ -627,12 +655,12 @@ struct ContentView: View {
 }
 ```
 
-## View Layout
+## Layout
 
-Container views offer space to their child views.
+Combiner views offer space to their child views.
 The child views can choose their size within the space offered to them.
-Container views then position the contained views knowing their sizes.
-Container views can also then choose their own size
+Combiner views then position the contained views knowing their sizes.
+Combiner views can also then choose their own size
 that perhaps differs from they offered to their child views.
 
 Some views are "inflexible" and want to be a specific size.
@@ -640,10 +668,10 @@ Examples including `Text` and `Image` views.
 Other views are "flexible" and can adapt to the space offered to them.
 Examples include `Circle` and `RoundedRectangle`.
 
-Container views give space to inflexible child views first and
+Combiner views give space to inflexible child views first and
 then divide the remaining space between the flexible child views.
 
-When a container view contains at least one flexible view,
+When a combiner view contains at least one flexible view,
 it is also considered to be flexible.
 
 ## MVVM
