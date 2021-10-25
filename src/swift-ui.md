@@ -390,6 +390,52 @@ Here are the combiner views that are provided by SwiftUI.
 - `ScrollViewProxy`
 
 - `List`
+
+  This displays a list of views in a single column.
+
+  The following example demonstrates using a `List` inside a `NavigationView`
+  to enable selecting ids of the objects represented by the rows.
+
+  ```swift
+  struct ContentView: View {
+      struct Dog: CustomStringConvertible, Identifiable, Hashable {
+          let id = UUID()
+          let name: String
+          let breed: String
+          var description: String { "\(name) - \(breed)" }
+      }
+
+      private var dogs = [
+          Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
+          Dog(name: "Ramsay", breed: "Native American Indian Dog"),
+          Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
+          Dog(name: "Comet", breed: "Whippet")
+      ]
+
+      @State private var selectedIds = Set<UUID>()
+
+      var body: some View {
+          VStack {
+              NavigationView {
+                  List(dogs, selection: $selectedIds) { dog in
+                      let desc = String(describing: dog)
+                      if selectedIds.contains(where: {$0 == dog.id}) {
+                          Text(desc).bold().foregroundColor(.green)
+                      } else {
+                          Text(desc)
+                      }
+                  }
+                  .navigationTitle("Dogs")
+                  // The EditButton in the toolbar toggles
+                  // the edit mode of the NavigationView.
+                  .toolbar { EditButton() }
+              }
+              Text("\(selectedIds.count) selections")
+          }
+      }
+  }
+  ```
+
 - `Section`
 - `ForEach`
 
