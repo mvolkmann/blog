@@ -304,13 +304,16 @@ struct Demo: Demoable {
     var instanceSetRequired: Int
 
     init(a1 p1: Int, a2 p2: Int) {
-        // Don't need to initialize instanceSetOptional because it is a constant.
+        // Don't need to initialize instanceSetOptional
+        // because it is a constant.
         instanceSetRequired = p1 + p2
     }
 
     // This method cannot mutate properties of this object.
     func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        //instanceSetRequired = p1 + p2 // not allowed because not a "mutating" method
+        // The next line is not allowed because
+        // this is not a "mutating" method.
+        //instanceSetRequired = p1 + p2
         return instanceSetOptional + instanceSetRequired + p1 + p2
     }
 
@@ -334,6 +337,10 @@ print(demo.instanceSetRequired) // 6
 
 Extensions, described in detail later, can be used to add
 default method implementations to protocols.
+This is used to define methods like `filter` on the `Sequence` protocol
+that is implemented by concrete types like
+`Array`, `Dictionary`, `Range`, `String`, and more.
+
 For example, we can define a default implementation
 of the `Demoable` protocol `instanceMethod` method so types
 that implement the protocol are not required to implement that method.
@@ -388,6 +395,11 @@ TODO: if I define a protocol named “Sized”,
 TODO: I think I can use that as a type in many contexts
 TODO: What is it about some protocols that prevents them
 TODO: from being used as types?
+
+In summary, when a type implements a protocol it can mean two things:
+
+1. The type may be required to implement some things.
+2. The type may be given implementations of some things through extensions.
 
 ## Functions
 

@@ -900,6 +900,9 @@ For a list of them, see {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
 "View Modifiers" %}.
 
+Many view modifiers are defined in extensions to the `View` protocol.
+This makes default implementations available to many kinds of views.
+
 When view modifiers are added to combiner views,
 they are passed down to all descendant views.
 In the following example, all the `Text` views are red
