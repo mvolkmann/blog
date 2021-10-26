@@ -3037,6 +3037,14 @@ This is why `print` output never appears when running in Preview.
 This is really bad because the Simulator
 takes much longer to start than Preview!
 
+Code is checked for errors while typing.
+Saving is not required.
+Lines with errors are indicated with red lines in the right gutter.
+Error messages are displayed in red boxes at the ends of lines
+that can be clicked to show more detail.
+Sometimes these contain a "Fix" button that can be clicked
+to automatically fix the error.
+
 Option-click a name in Swift code to see its type and basic documentation.
 Click the "Open in Developer Documentation" link for more detail.
 

@@ -373,68 +373,165 @@ Here are the combiner views that are provided by SwiftUI.
   ```
 
 - `Form`
+
+  This is a container of data entry views.
+
+  The following example demonstrates many common views used in forms.
+
+  ```swift
+  enum ShirtSize: String, CaseIterable {
+    case small
+    case medium
+    case large
+    case extraLarge
+  }
+
+  struct ContentView: View {
+      private static let blogUrl = "https://mvolkmann.github.io/blog"
+
+      // Typically form data would be tied to ViewModel properties
+      // rather than using @State.
+      @State private var bedTime: Date = Date()
+      @State private var birthday: Date = Date()
+      @State private var favoriteColor: Color = .yellow
+      @State private var firstName = ""
+      @State private var dogCount = 0
+      @State private var hungry = false
+      @State private var lastName = ""
+      @State private var motto = "This is my motto."
+      @State private var rating = 0.0
+      @State private var shirtSize: ShirtSize = .large
+
+      var isEditing = false
+
+      var body: some View {
+          NavigationView {
+              Form {
+                  Section(header: Text("Profile")) {
+                      TextField("First Name", text: $firstName)
+                      TextField("Last Name", text: $lastName)
+                      DatePicker(
+                          "Birthday",
+                          selection: $birthday,
+                          displayedComponents: .date
+                      )
+                      Toggle("Hungry?", isOn: $hungry)
+                  }
+                  Section(header: Text("Preferences")) {
+                      // Links work in Simulator, but not in Preview.
+                      Link(
+                          "Blog",
+                          destination: URL(string: ContentView.blogUrl)!
+                      )
+                      VStack {
+                          Text("Motto")
+                          // It seems TextEditor lineLimit is
+                          // only enforced on initial render.
+                          // It doesn't prevent more lines from being displayed
+                          // if the user types more text.
+                          TextEditor(text: $motto).lineLimit(2)
+                      }
+                      ColorPicker("Favorite Color", selection: $favoriteColor)
+                      DatePicker(
+                          Bed Time",
+                          selection: $bedTime,
+                          displayedComponents: .hourAndMinute
+                      )
+                      Picker("Shirt Size", selection: $shirtSize) {
+                          ForEach(ShirtSize.allCases, id: \.self) { size in
+                              Text("\(size.rawValue)").tag(size)
+                          }
+                      }
+                      HStack {
+                          Text("Rating")
+                          //TODO: Why does value have to be Float instead of Int?
+                          Slider(value: $rating, in: 0...10, step: 1)
+                          Text("\(Int(rating))")
+                      }
+                      HStack {
+                          Stepper("# of Dogs", value: $dogCount, in: 0...10)
+                          Text(String(dogCount))
+                      }
+                      Button("Save") {}
+                  }
+                }
+            }
+        }
+
+    }
+  ```
+
+  Common UI components that are not built into SwiftUI include:
+
+  - checkbox: alternative is Toggle
+  - image picker: must build or using a library
+  - multiple choice: alternative is List inside NavigationView with EditButton
+  - radio buttons: alternative is Picker (supported in macOS with
+    Picker and .pickerStyle(RadioGroupPickerStyle())
+  - toggle buttons: alternative is Picker
+
 - `Group`
 - `GroupBox`
 - `ControlGroup`
 
 - `ScrollView`
 
-  This creates a scrollable view that is vertical by default,
-  but can be changed to horizontal.
-  It occupies all the space offered to it.
-  Scrolling reveals additional child views when all of them do not fit.
-  See examples of using this in the
-  descriptions of `LazyHStack` and `LazyVStack`.
+This creates a scrollable view that is vertical by default,
+but can be changed to horizontal.
+It occupies all the space offered to it.
+Scrolling reveals additional child views when all of them do not fit.
+See examples of using this in the
+descriptions of `LazyHStack` and `LazyVStack`.
 
 - `ScrollViewReader`
 - `ScrollViewProxy`
 
 - `List`
 
-  This displays a list of views in a single column.
+This displays a list of views in a single column.
 
-  The following example demonstrates using a `List` inside a `NavigationView`
-  to enable selecting ids of the objects represented by the rows.
+The following example demonstrates using a `List` inside a `NavigationView`
+to enable selecting ids of the objects represented by the rows.
 
-  ```swift
-  struct ContentView: View {
-      struct Dog: CustomStringConvertible, Identifiable, Hashable {
-          let id = UUID()
-          let name: String
-          let breed: String
-          var description: String { "\(name) - \(breed)" }
-      }
+```swift
+struct ContentView: View {
+    struct Dog: CustomStringConvertible, Identifiable, Hashable {
+        let id = UUID()
+        let name: String
+        let breed: String
+        var description: String { "\(name) - \(breed)" }
+    }
 
-      private var dogs = [
-          Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
-          Dog(name: "Ramsay", breed: "Native American Indian Dog"),
-          Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
-          Dog(name: "Comet", breed: "Whippet")
-      ]
+    private var dogs = [
+        Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
+        Dog(name: "Ramsay", breed: "Native American Indian Dog"),
+        Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
+        Dog(name: "Comet", breed: "Whippet")
+    ]
 
-      @State private var selectedIds = Set<UUID>()
+    @State private var selectedIds = Set<UUID>()
 
-      var body: some View {
-          VStack {
-              NavigationView {
-                  List(dogs, selection: $selectedIds) { dog in
-                      let desc = String(describing: dog)
-                      if selectedIds.contains(where: {$0 == dog.id}) {
-                          Text(desc).bold().foregroundColor(.green)
-                      } else {
-                          Text(desc)
-                      }
-                  }
-                  .navigationTitle("Dogs")
-                  // The EditButton in the toolbar toggles
-                  // the edit mode of the NavigationView.
-                  .toolbar { EditButton() }
-              }
-              Text("\(selectedIds.count) selections")
-          }
-      }
-  }
-  ```
+    var body: some View {
+        VStack {
+            NavigationView {
+                List(dogs, selection: $selectedIds) { dog in
+                    let desc = String(describing: dog)
+                    if selectedIds.contains(where: {$0 == dog.id}) {
+                        Text(desc).bold().foregroundColor(.green)
+                    } else {
+                        Text(desc)
+                    }
+                }
+                .navigationTitle("Dogs")
+                // The EditButton in the toolbar toggles
+                // the edit mode of the NavigationView.
+                .toolbar { EditButton() }
+            }
+            Text("\(selectedIds.count) selections")
+        }
+    }
+}
+```
 
 - `Section`
 - `ForEach`
