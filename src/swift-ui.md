@@ -762,6 +762,19 @@ rather than creating views whose code is long and deeply nested.
 
 ### Drawing Views
 
+The `Shape` protocol inherits from the `View` protocol
+and there are many provided views that inherit from `Shape`.
+Examples include `Circle` and `Rectangle`.
+
+By default, all views that inherit from `Shape` are
+filled with the foreground color of their parent view.
+This can be changed using the `fill` view modifier.
+It takes an object of a type that implements the `ShapeStyle` protocol.
+Examples include `Color`, `AngularGradient`, `LinearGradient`,
+`RadialGradient`, and `ImagePaint`.
+
+An outline can be added to any `Shape` with the `.stroke` view modifier.
+
 Many of these views support both the `border` and `strokeBorder` view modifiers.
 The difference between these becomes apparent
 when the border width is greater than one.
@@ -769,12 +782,84 @@ when the border width is greater than one.
 with have inside and half outside.
 `strokeBorder` is drawn so none of the border is outside of the shape.
 
-- `Capsule`
-- `Circle`
-- `Ellipse`
+The following example draws several shapes.
+
+<img alt="SwiftUI Shapes" style="width: 40%"
+  src="/blog/assets/SwiftUI-Shapes.png?v={{pkg.version}}"
+  title="SwiftUI Shapes">
+
+```swift
+struct ContentView: View {
+    let linearGradient = LinearGradient(
+        gradient: Gradient(colors: [.red, .yellow]),
+        startPoint: .leading, // other values are .top and .bottom
+        endPoint: .trailing
+    )
+    let angularGradient = AngularGradient(
+        // It's usually best to return to the starting color.
+        gradient: Gradient(colors: [.yellow, .blue, .yellow]),
+        center: .center,
+        startAngle: .degrees(90),
+        endAngle: .degrees(90 + 360)
+    )
+    let radialGradient = RadialGradient(
+        gradient: Gradient(colors: [.red, .yellow]),
+        center: .center,
+        startRadius: 0,
+        endRadius: 20
+    )
+
+    func radialGradient(over size: CGSize) -> RadialGradient {
+        let diameter = min(size.width, size.height)
+        let radius = diameter / 2;
+        return RadialGradient(
+            // Colors go from inside to outside.
+            gradient: Gradient(colors: [.white, .yellow, .red]),
+            center: .center,
+            startRadius: 0,
+            endRadius: radius
+        )
+    }
+
+    var body: some View {
+        VStack {
+            ZStack {
+                Capsule().fill(.red)
+                Text("Capsule with solid color")
+            }
+            ZStack {
+                GeometryReader { geometry in
+                    Circle().fill(radialGradient(over: geometry.size))
+                }
+                Text("Circle\nwith\nRadialGradient")
+                    .multilineTextAlignment(.center)
+            }
+            ZStack {
+                Ellipse().fill(angularGradient)
+                Text("Ellipse with AngularGradient")
+            }
+            ZStack {
+                Rectangle().fill(linearGradient)
+                Text("Rectangle with LinearGradient")
+            }
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(ImagePaint(image: Image("Comet"), scale: 0.34))
+                Text("RoundedRectangle with ImagePaint")
+                .font(.largeTitle)
+                .foregroundColor(.purple)
+            }
+        }.padding()
+    }
+}
+```
+
+- `Capsule`: draws an oval
+- `Circle`: draws a circle
+- `Ellipse`: draws an ellipse
 - `Path`
-- `Rectangle`
-- `RoundedRectangle`
+- `Rectangle`: draws a rectangle
+- `RoundedRectangle`: draws a rectangle with rounded corners
 
 - `ContainerRelativeShape`
 - `OffsetShape`

@@ -3369,3 +3369,8 @@ the features of Swift that are annoying, at least in my opinion.
   can it be implemented by multiple source files?
 
 - Does Swift having anything like promises in JavaScript?
+
+- I wish Swift functions supported a shorthand syntax for arguments
+  when there is a variable with the same name.
+  For example, instead of `area(width: width, height: height)`
+  we could write `area(width:, height:)`.
