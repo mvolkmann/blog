@@ -342,6 +342,14 @@ extension Demoable {
 }
 ```
 
+TODO: I heard this in a Swift video: “Many protocols cannot be used as types,
+TODO: so protocols are rarely used this way. This is by design.”
+TODO: It’s not clear to me why this might be the case. For example,
+TODO: if I define a protocol named “Sized”,
+TODO: I think I can use that as a type in many contexts
+TODO: What is it about some protocols that prevents them
+TODO: from being used as types?
+
 ## Functions
 
 Functions are defined using the `func` keyword,
