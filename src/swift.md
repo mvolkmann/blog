@@ -388,6 +388,10 @@ func doThat(a p: MyType) {
 doThat(a: Drink(size: 2)) // Drink has size 2
 ```
 
+Protocols can use the type name `Self` to refer to
+the actual type that is implementing the protocol.
+This is the only place where the type `Self` can be used.
+
 Protocols that use generic types declare them in a different way
 than other types do.
 Rather than following the name with type parameters in angle brackets,
