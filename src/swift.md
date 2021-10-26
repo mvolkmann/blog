@@ -204,8 +204,12 @@ implement the protocol are not required to implement that method.
 They can however implement the method anyway
 to override the implementation specified in the extension.
 
-Examples of built-in protocols include `Collection`, `Comparable`,
-`Equatable`, `Hashable`, `Identifiable`, `Numeric`, and `Sequence`.
+Examples of commonly used built-in protocols include `Animatable`,
+`Collection`, `Comparable`, `CustomStringConvertible`, `Equatable`, `Hashable`,
+`Identifiable`, `Numeric`, `ObservedObject`, `Sequence`, and `View`.
+Other built-in protocols you might encounter include
+`App`, `Scene`, `Shape`, and `ViewModifier`.
+
 For many custom types Swift can provide a "synthesized implementation"
 of the `Comparable`, `Equatable`, and `Hashable` built-in protocols.
 All that is required is to state that a type implements the protocol
@@ -340,6 +344,36 @@ extension Demoable {
         return instanceSetOptional + instanceSetRequired + p1 + p2
     }
 }
+```
+
+The type of a function parameter can be specified to be anything
+that implements a list of protocols using the `where` keyword
+with the `&` operator between each protocol name.
+For example:
+
+```swift
+protocol HasSize {
+    var size: Int { get }
+}
+
+struct Drink: CustomStringConvertible, HasSize {
+    var description: String { "Drink has size \(size)"}
+    var size: Int;
+}
+
+// T can be any type that implements the
+// CustomStringConvertible and HasSize protocols.
+func doThis<T>(a p: T) where T: CustomStringConvertible & HasSize {
+    print(p)
+}
+doThis(a: Drink(size: 1)) // Drink has size 1
+
+// Alternate way to implement the code above using a typealias.
+typealias MyType = CustomStringConvertible & HasSize
+func doThat(a p: MyType) {
+    print(p)
+}
+doThat(a: Drink(size: 2)) // Drink has size 2
 ```
 
 TODO: I heard this in a Swift video: “Many protocols cannot be used as types,
