@@ -340,6 +340,11 @@ that implement the protocol are not required to implement that method.
 
 ```swift
 extension Demoable {
+    // This property now has a default implementation
+    // that is a computed property.
+    var instanceSetOptional: Int { instanceSetRequired * 2 }
+
+    // This instance method now has a default implementation.
     func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
         return instanceSetOptional + instanceSetRequired + p1 + p2
     }
