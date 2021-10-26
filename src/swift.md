@@ -174,245 +174,6 @@ Swift supports optional chaining so chains of references to optional values
 (see the "Optionals" section later) do not have to check for nil values.
 See the example in the Structs section.
 
-## Protocols
-
-A protocol is like an interface in other programming languages.
-It can describe type properties, instance properties,
-type method signatures, and instance method signatures.
-Properties can be constant (`let`) or variable (`var`).
-
-Other types (structs, classes, and enums)
-can declare that they conform to protocols by following their name
-with a colon and a comma-separated list of protocol names.
-The same syntax can be used by a protocol
-to inherit the requirements of other protocols.
-
-A protocol define a type that can be used in many places
-where concrete types can appear to state that any value
-whose concrete type implements the protocol is acceptable.
-This includes constant (`let`) types, variable (`var`) types,
-collection element types, function parameter types, function return types,
-and object property types.
-
-Unlike in method implementations, methods described in protocols
-cannot specify default parameter values.
-
-Default method implementations cannot be defined in a protocol,
-but they can be defined in an `extension` of the protocol.
-When this is done for a given method, types that
-implement the protocol are not required to implement that method.
-They can however implement the method anyway
-to override the implementation specified in the extension.
-
-Examples of commonly used built-in protocols include `Animatable`,
-`Collection`, `Comparable`, `CustomStringConvertible`, `Equatable`, `Hashable`,
-`Identifiable`, `Numeric`, `ObservedObject`, `Sequence`, and `View`.
-Other built-in protocols you might encounter include
-`App`, `Scene`, `Shape`, and `ViewModifier`.
-
-For many custom types Swift can provide a "synthesized implementation"
-of the `Comparable`, `Equatable`, and `Hashable` built-in protocols.
-All that is required is to state that a type implements the protocol
-and only have properties with types that also implement the protocol.
-
-Xcode can add stubs for a protocol to a type that claims to implement it.
-Click the red circle to the left of the error message
-"Type does not conform to protocol" and then click the "Fix" button.
-
-```swift
-protocol Shape {
-    func getArea() -> Double
-}
-
-// Structs can implement protocols,
-// but cannot inherit from other structs or classes.
-struct Triangle: Shape {
-    var base: Double
-    var height: Double
-
-    init(base: Double, height: Double) {
-        self.base = base
-        self.height = height
-    }
-
-    func getArea() -> Double {
-        base * height * 0.5
-    }
-}
-
-// Classes can implement protocols
-// and they can inherit from other classes.
-class Rectangle: Shape {
-    var height: Double
-    var width: Double
-
-    init(width: Double, height: Double) {
-        self.width = width
-        self.height = height
-    }
-
-    func getArea() -> Double {
-        width * height
-    }
-}
-
-// Any object that implements the Shape protocol can be passed.
-// Calling getArea on a shape demonstrates polymorphism because
-// what the call does is determined by the receiver type.
-func logShape(_ shape: Shape) {
-    print("area = \(shape.getArea())")
-}
-
-logShape(Triangle(base: 3, height: 4)) // area = 6
-logShape(Rectangle(width: 4, height: 5)) // area = 20
-```
-
-The following contrived example demonstrates many of the features of protocols.
-
-```swift
-protocol Demoable {
-    static var typeSetOptional: Int { get }
-    static var typeSetRequired: Int { get set }
-
-    static func typeMethod(a1 p1: Int, a2 p2: Int) -> Int
-
-    var instanceSetOptional: Int { get }
-    var instanceSetRequired: Int { get set }
-
-    // Implementations must have the "required" modifier before "init".
-    init(a1 p1: Int, a2 p2: Int)
-
-    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int
-    mutating func instanceMutatingMethod(a1 p1: Int, a2 p2: Int) -> Int
-}
-
-struct Demo: Demoable {
-    // This property can be a constant since "set" is optional.
-    static let typeSetOptional: Int = 1
-
-    // This property cannot be a constant since "set" is required.
-    static var typeSetRequired: Int = 2
-
-    static func typeMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        return p1 + p2
-    }
-
-    // This property can be a constant since "set" is optional.
-    let instanceSetOptional: Int = 3
-
-    // This property cannot be a constant since "set" is required.
-    var instanceSetRequired: Int
-
-    init(a1 p1: Int, a2 p2: Int) {
-        // Don't need to initialize instanceSetOptional
-        // because it is a constant.
-        instanceSetRequired = p1 + p2
-    }
-
-    // This method cannot mutate properties of this object.
-    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        // The next line is not allowed because
-        // this is not a "mutating" method.
-        //instanceSetRequired = p1 + p2
-        return instanceSetOptional + instanceSetRequired + p1 + p2
-    }
-
-    // This method can mutate properties of this object.
-    mutating func instanceMutatingMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        instanceSetRequired = instanceSetOptional + p1 + p2
-        return instanceSetRequired
-    }
-
-}
-
-var demo = Demo(a1: 7, a2: 8)
-print(Demo.typeSetOptional) // 1
-print(Demo.typeSetRequired) // 2
-print(demo.instanceSetOptional) // 3
-print(demo.instanceSetRequired) // 7 + 8 = 15
-print(demo.instanceMethod(a1: 1, a2: 2)) // 3 + 15 + 1 + 2 = 21
-print(demo.instanceMutatingMethod(a1: 1, a2: 2)) // 3 + 1 + 2 = 6
-print(demo.instanceSetRequired) // 6
-```
-
-Extensions, described in detail later, can be used to add
-default method implementations to protocols.
-This is used to define methods like `filter` on the `Sequence` protocol
-that is implemented by concrete types like
-`Array`, `Dictionary`, `Range`, `String`, and more.
-
-For example, we can define a default implementation
-of the `Demoable` protocol `instanceMethod` method so types
-that implement the protocol are not required to implement that method.
-
-```swift
-extension Demoable {
-    // This property now has a default implementation
-    // that is a computed property.
-    var instanceSetOptional: Int { instanceSetRequired * 2 }
-
-    // This instance method now has a default implementation.
-    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        return instanceSetOptional + instanceSetRequired + p1 + p2
-    }
-}
-```
-
-The type of a function parameter can be specified to be anything
-that implements a list of protocols using the `where` keyword
-with the `&` operator between each protocol name.
-For example:
-
-```swift
-protocol HasSize {
-    var size: Int { get }
-}
-
-struct Drink: CustomStringConvertible, HasSize {
-    var description: String { "Drink has size \(size)"}
-    var size: Int;
-}
-
-// T can be any type that implements the
-// CustomStringConvertible and HasSize protocols.
-func doThis<T>(a p: T) where T: CustomStringConvertible & HasSize {
-    print(p)
-}
-doThis(a: Drink(size: 1)) // Drink has size 1
-
-// Alternate way to implement the code above using a typealias.
-typealias MyType = CustomStringConvertible & HasSize
-func doThat(a p: MyType) {
-    print(p)
-}
-doThat(a: Drink(size: 2)) // Drink has size 2
-```
-
-Protocols can use the type name `Self` to refer to
-the actual type that is implementing the protocol.
-This is the only place where the type `Self` can be used.
-
-Protocols that use generic types declare them in a different way
-than other types do.
-Rather than following the name with type parameters in angle brackets,
-the first lines in the protocol body begin with the `associatedtype` keyword
-followed by a type parameter name and optional constraints.
-Constraints can be written as `where TypeParamName: SomeProtocol`
-or just `: SomeProtocol`.
-
-TODO: I heard this in a Swift video: “Many protocols cannot be used as types,
-TODO: so protocols are rarely used this way. This is by design.”
-TODO: It’s not clear to me why this might be the case. For example,
-TODO: if I define a protocol named “Sized”,
-TODO: I think I can use that as a type in many contexts
-TODO: What is it about some protocols that prevents them
-TODO: from being used as types?
-
-In summary, when a type implements a protocol it can mean two things:
-
-1. The type may be required to implement some things.
-2. The type may be given implementations of some things through extensions.
-
 ## Functions
 
 Functions are defined using the `func` keyword,
@@ -664,7 +425,9 @@ that discards their context after the function returns?
 
 Errors in that occur in Swift code are described by
 objects that implement the `Error` protocol.
-This is merely a marker protocol,
+A protocol is like an interface in other programming languages.
+These are described in detail later in the "Protocol" section.
+The `Error` protocol is merely a marker protocol,
 not requiring any properties or methods.
 Often errors are described by an `enum` that implements the `Error` protocol.
 Each `enum` `case` represents a variation of the error
@@ -2278,6 +2041,11 @@ var dog = Dog(breed: "Whippet", name: "Comet", age: 1)
 print("\(dog.name) is a \(dog.breed)") // Comet is a Whippet
 ```
 
+Properties of structs and classes whose values are allowed to be `nil`
+are considered to be `Optional`.
+The shorthand syntax for indicating this is to add a `?` after their type.
+Just like with optional variables, they must be unwrapped to access their value.
+
 If all of the properties are optional or have a default value,
 a default initializer that takes no arguments is provided.
 
@@ -2672,11 +2440,242 @@ clean up after actions taken in an initializer.
 It can perform cleanup of actions taken by any method.
 A better name would have been "cleanup" or "onDestroy".
 
-## Optional Properties
+## Protocols
 
-Properties of structs and classes whose values are allowed to be `nil`
-should have a `?` at end of their type.
-Just like with optional variables, they must be unwrapped to access their value.
+A protocol is like an interface in other programming languages.
+It can describe type properties, instance properties,
+type method signatures, and instance method signatures.
+Properties can be constant (`let`) or variable (`var`).
+
+Other types (structs, classes, and enums)
+can declare that they conform to protocols by following their name
+with a colon and a comma-separated list of protocol names.
+The same syntax can be used by a protocol
+to inherit the requirements of other protocols.
+
+A protocol define a type that can be used in many places
+where concrete types can appear to state that any value
+whose concrete type implements the protocol is acceptable.
+This includes constant (`let`) types, variable (`var`) types,
+collection element types, function parameter types, function return types,
+and object property types.
+
+Currently protocols that have "associated type requirements"
+cannot be used in place of a type.
+For progress on removing this restriction, see the {% aTargetBlank
+"https://github.com/apple/swift-evolution/blob/main/proposals/0309-unlock-existential-types-for-all-protocols.md",
+"Unlock existentials for all protocols" %} proposal.
+
+Unlike in method implementations, methods described in protocols
+cannot specify default parameter values.
+
+Default method implementations cannot be defined in a protocol,
+but they can be defined in an `extension` of the protocol.
+When this is done for a given method, types that
+implement the protocol are not required to implement that method.
+They can however implement the method anyway
+to override the implementation specified in the extension.
+
+Examples of commonly used built-in protocols include `Animatable`,
+`Collection`, `Comparable`, `CustomStringConvertible`, `Equatable`, `Hashable`,
+`Identifiable`, `Numeric`, `ObservedObject`, `Sequence`, and `View`.
+Other built-in protocols you might encounter include
+`App`, `Scene`, `Shape`, and `ViewModifier`.
+
+For many custom types Swift can provide a "synthesized implementation"
+of the `Comparable`, `Equatable`, and `Hashable` built-in protocols.
+All that is required is to state that a type implements the protocol
+and only have properties with types that also implement the protocol.
+
+Xcode can add stubs for a protocol to a type that claims to implement it.
+Click the red circle to the left of the error message
+"Type does not conform to protocol" and then click the "Fix" button.
+
+```swift
+protocol Shape {
+    func getArea() -> Double
+}
+
+// Structs can implement protocols,
+// but cannot inherit from other structs or classes.
+struct Triangle: Shape {
+    var base: Double
+    var height: Double
+
+    init(base: Double, height: Double) {
+        self.base = base
+        self.height = height
+    }
+
+    func getArea() -> Double {
+        base * height * 0.5
+    }
+}
+
+// Classes can implement protocols
+// and they can inherit from other classes.
+class Rectangle: Shape {
+    var height: Double
+    var width: Double
+
+    init(width: Double, height: Double) {
+        self.width = width
+        self.height = height
+    }
+
+    func getArea() -> Double {
+        width * height
+    }
+}
+
+// Any object that implements the Shape protocol can be passed.
+// Calling getArea on a shape demonstrates polymorphism because
+// what the call does is determined by the receiver type.
+func logShape(_ shape: Shape) {
+    print("area = \(shape.getArea())")
+}
+
+logShape(Triangle(base: 3, height: 4)) // area = 6
+logShape(Rectangle(width: 4, height: 5)) // area = 20
+```
+
+The following contrived example demonstrates many of the features of protocols.
+
+```swift
+protocol Demoable {
+    static var typeSetOptional: Int { get }
+    static var typeSetRequired: Int { get set }
+
+    static func typeMethod(a1 p1: Int, a2 p2: Int) -> Int
+
+    var instanceSetOptional: Int { get }
+    var instanceSetRequired: Int { get set }
+
+    // Implementations must have the "required" modifier before "init".
+    init(a1 p1: Int, a2 p2: Int)
+
+    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int
+    mutating func instanceMutatingMethod(a1 p1: Int, a2 p2: Int) -> Int
+}
+
+struct Demo: Demoable {
+    // This property can be a constant since "set" is optional.
+    static let typeSetOptional: Int = 1
+
+    // This property cannot be a constant since "set" is required.
+    static var typeSetRequired: Int = 2
+
+    static func typeMethod(a1 p1: Int, a2 p2: Int) -> Int {
+        return p1 + p2
+    }
+
+    // This property can be a constant since "set" is optional.
+    let instanceSetOptional: Int = 3
+
+    // This property cannot be a constant since "set" is required.
+    var instanceSetRequired: Int
+
+    init(a1 p1: Int, a2 p2: Int) {
+        // Don't need to initialize instanceSetOptional
+        // because it is a constant.
+        instanceSetRequired = p1 + p2
+    }
+
+    // This method cannot mutate properties of this object.
+    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
+        // The next line is not allowed because
+        // this is not a "mutating" method.
+        //instanceSetRequired = p1 + p2
+        return instanceSetOptional + instanceSetRequired + p1 + p2
+    }
+
+    // This method can mutate properties of this object.
+    mutating func instanceMutatingMethod(a1 p1: Int, a2 p2: Int) -> Int {
+        instanceSetRequired = instanceSetOptional + p1 + p2
+        return instanceSetRequired
+    }
+
+}
+
+var demo = Demo(a1: 7, a2: 8)
+print(Demo.typeSetOptional) // 1
+print(Demo.typeSetRequired) // 2
+print(demo.instanceSetOptional) // 3
+print(demo.instanceSetRequired) // 7 + 8 = 15
+print(demo.instanceMethod(a1: 1, a2: 2)) // 3 + 15 + 1 + 2 = 21
+print(demo.instanceMutatingMethod(a1: 1, a2: 2)) // 3 + 1 + 2 = 6
+print(demo.instanceSetRequired) // 6
+```
+
+Extensions, described in detail later, can be used to add
+default method implementations to protocols.
+This is used to define methods like `filter` on the `Sequence` protocol
+that is implemented by concrete types like
+`Array`, `Dictionary`, `Range`, `String`, and more.
+
+For example, we can define a default implementation
+of the `Demoable` protocol `instanceMethod` method so types
+that implement the protocol are not required to implement that method.
+
+```swift
+extension Demoable {
+    // This property now has a default implementation
+    // that is a computed property.
+    var instanceSetOptional: Int { instanceSetRequired * 2 }
+
+    // This instance method now has a default implementation.
+    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
+        return instanceSetOptional + instanceSetRequired + p1 + p2
+    }
+}
+```
+
+The type of a function parameter can be specified to be anything
+that implements a list of protocols using the `where` keyword
+with the `&` operator between each protocol name.
+For example:
+
+```swift
+protocol HasSize {
+    var size: Int { get }
+}
+
+struct Drink: CustomStringConvertible, HasSize {
+    var description: String { "Drink has size \(size)"}
+    var size: Int;
+}
+
+// T can be any type that implements the
+// CustomStringConvertible and HasSize protocols.
+func doThis<T>(a p: T) where T: CustomStringConvertible & HasSize {
+    print(p)
+}
+doThis(a: Drink(size: 1)) // Drink has size 1
+
+// Alternate way to implement the code above using a typealias.
+typealias MyType = CustomStringConvertible & HasSize
+func doThat(a p: MyType) {
+    print(p)
+}
+doThat(a: Drink(size: 2)) // Drink has size 2
+```
+
+Protocols can use the type name `Self` to refer to
+the actual type that is implementing the protocol.
+This is the only place where the type `Self` can be used.
+
+Protocols that use generic types declare them in a different way
+than other types do.
+Rather than following the name with type parameters in angle brackets,
+the first lines in the protocol body begin with the `associatedtype` keyword
+followed by a type parameter name and optional constraints.
+Constraints can be written as `where TypeParamName: SomeProtocol`
+or just `: SomeProtocol`.
+
+In summary, when a type implements a protocol it can mean two things:
+
+1. The type may be required to implement some things.
+2. The type may be given implementations of some things through extensions.
 
 ## `some` Keyword
 
@@ -3229,9 +3228,11 @@ that can include the following options:
 
 - Jump to definition
 - Fold: collapses a code block to an ellipsis; double-click ellipsis to re-open
-- Rename... TODO: THIS IS NOT PRESENT!
 - Callers...
 - and more
+
+In the past there was a "Rename..." option in this menu.
+It was moved to Editor ... Refactor ... Rename.
 
 To make the console area appear automatically when new text is written to it,
 select Xcode ... Preferences... ... Behaviors ... Generates output,
