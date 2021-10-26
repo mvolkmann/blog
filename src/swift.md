@@ -388,6 +388,14 @@ func doThat(a p: MyType) {
 doThat(a: Drink(size: 2)) // Drink has size 2
 ```
 
+Protocols that use generic types declare them in a different way
+than other types do.
+Rather than following the name with type parameters in angle brackets,
+the first lines in the protocol body begin with the `associatedtype` keyword
+followed by a type parameter name and optional constraints.
+Constraints can be written as `where TypeParamName: SomeProtocol`
+or just `: SomeProtocol`.
+
 TODO: I heard this in a Swift video: “Many protocols cannot be used as types,
 TODO: so protocols are rarely used this way. This is by design.”
 TODO: It’s not clear to me why this might be the case. For example,

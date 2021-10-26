@@ -28,6 +28,7 @@
     "asdict",
     "asinit",
     "assemblyscript",
+    "associatedtype",
     "astype",
     "asyncio",
     "attrgetter",
