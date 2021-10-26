@@ -189,6 +189,39 @@ Image(systemName: "heart").font(.largeTitle)) // one way to set font size
 Image(systemName: "cloud.snow").font(.system(size: 64)) // another way
 ```
 
+## Core Graphics (CG)
+
+Several types used in views have names that begin with "CG"
+which stands for "Core Graphics". These include:
+
+- `CGAffineTransform`
+
+  This holds a transformation matrix used in 2D transformations.
+
+- `CGFloat`
+
+  This holds a floating point value whose size depends on the CPU architecture.
+  It can be 32 or 64 bits.
+
+- `CGPoint`
+
+  This holds `x` and `y` properties that have `CGFloat` values.
+
+- `CGRect`
+
+  This holds an `origin` property that is a `CGPoint`
+  and a `size` property that is a `CGSize`.
+  It also has the following computed properties with `CGFloat` values:
+  `height`, `width`, `minX`, `maxX`, `minY`, `maxY`, `midX`, and `midY`.
+
+- `CGSize`
+
+  This holds `width` and `height` properties that have `CGFloat` values.
+
+- `CGVector`
+
+  This holds `dx` and `dy` properties that have `CGFloat` values.
+
 ## Views
 
 Every visible part of an app created with SwiftUI is a view.
@@ -279,6 +312,26 @@ Here are the combiner views that are provided by SwiftUI.
 
   This stacks views from bottom to top.
   It is ideal for adding a background to a set of views.
+
+  Here are three approaches to rendering text with a colored background,
+  one of which uses a `ZStack`.
+
+  ```swift
+  struct ContentView: View {
+      let bgColor: Color = .yellow
+      let text = "Test"
+
+      var body: some View {
+          VStack {
+              let rect = Rectangle().fill(bgColor).frame(width: 50, height: 40)
+              // Semicolons must separate multiple statements on the same line.
+              ZStack { rect; Text(text) }
+              Text(text).padding(10).background(Rectangle().foregroundColor(bgColor))
+              rect.overlay(Text(text))
+          }
+      }
+  }
+  ```
 
 - `LazyHStack`
 
@@ -549,6 +602,10 @@ struct ContentView: View {
 - `NavigationView`
 - `NavigationLink`
 - `OutlineGroup`
+
+  This displays a tree of data with disclosure angle brackets.
+  See my SwiftUI-OutlineGroup project and the questions in it.
+
 - `DisclosureGroup`
 - `TabView`
 - `HSplitView`
@@ -566,6 +623,13 @@ struct ContentView: View {
   and pass the number of lines that can be used (perhaps 1).
   If the text doesn't fit in the allowed number of lines,
   it will be elided and an ellipsis will appear at the end.
+
+  To set the foreground color, apply the `foregroundColor` view modifier.
+  To set the font size, apply the `font` view modifier.
+
+  ```swift
+  Text("Hello World").foregroundColor(.red).font(.system(size: 24))
+  ```
 
 - `TextField`
 - `SecureField`
@@ -688,7 +752,6 @@ with have inside and half outside.
 
 - `Capsule`
 - `Circle`
-- `Circle`
 - `Ellipse`
 - `Path`
 - `Rectangle`
@@ -709,12 +772,42 @@ with have inside and half outside.
 
 - `Anchor`
 - `Angle`
-- `GeometryProxy`
-- `GeometryReader`
+
 - `ProjectionTransform`
 - `UnitPoint`
 
 ### Other Views
+
+- `GeometryReader`
+
+  This is a view that takes all the space offered to it, wraps other views,
+  and provides its size which can be used in calculations.
+  The size is passed to a trailing closure and has the type `GeometryProxy`
+  which has a `size` property whose type is `CGSize`.
+
+  The following example gets the size of a `VStack` and displays it inside.
+
+  <img alt="SwiftUI GeometryReader" style="width: 40%"
+    src="/blog/assets/SwiftUI-GeometryReader.png?v={{pkg.version}}"
+    title="SwiftUI GeometryReader">
+
+  ```swift
+  VStack(spacing: 0) {
+      // The 3 children below are given equal heights.
+      Rectangle().fill(.red)
+      GeometryReader { geometry in
+          VStack() {
+              Text("width = \(geometry.size.width)")
+              Text("height = \(geometry.size.height)")
+          }
+          // This expands the size of the VStack to fill the
+          // GeometryReader so the contents are centered.
+          .frame(width: geometry.size.width,
+              height: geometry.size.height)
+           }
+      Rectangle().fill(.blue)
+  }
+  ```
 
 - `Spacer`
 
@@ -767,7 +860,7 @@ with have inside and half outside.
 
 TODO: Are `Color` and `LinearGradient` views?
 
-### View Modifiers
+## View Modifiers
 
 View modifiers are methods that can be called on a view to create
 a new view that is like the receiver, but modified in a specific way.
@@ -804,7 +897,7 @@ VStack {
 }.foregroundColor(.red)
 ```
 
-### View State
+## View State
 
 All views are immutable structs.
 Typically they get data from a model.
@@ -919,6 +1012,27 @@ It is passed a float value that defaults to zero.
 
 When a combiner view contains at least one flexible view,
 it is also considered to be flexible.
+
+Unsafe areas, such as the area at the top of iPhones that have a camera bump,
+are removed from offered space by default.
+Sometimes it is useful to draw in those areas.
+One example, show below, is displaying a background image.
+
+<img alt="SwiftUI Unsafe Areas" style="width: 40%"
+  src="/blog/assets/SwiftUI-UnsafeAreas.png?v={{pkg.version}}"
+  title="SwiftUI Unsafe Areas">
+
+```swift
+VStack {
+    Spacer()
+    Text("Comet the Whippet")
+        .foregroundColor(.white)
+        .font(.system(size: 36))
+    Spacer()
+}
+    .background(Image("Comet").resizable().scaledToFill())
+    .edgesIgnoringSafeArea(.all)
+```
 
 ## MVVM
 
