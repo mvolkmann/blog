@@ -996,7 +996,7 @@ For a list of them, see {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
 "View Modifiers" %}.
 
-Many view modifiers are defined in extensions to the `View` protocol.
+Many (all?) view modifiers are defined in extensions to the `View` protocol.
 This makes default implementations available to many kinds of views.
 
 When view modifiers are added to combiner views,
@@ -1014,6 +1014,10 @@ VStack {
     }
 }.foregroundColor(.red)
 ```
+
+In a way, view modifiers are like Svelte components that contain slots.
+They take a view to be "modified" and return a new view
+that typically contains the view passed to them.
 
 ## View State
 

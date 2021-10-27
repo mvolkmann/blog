@@ -368,7 +368,7 @@ The return type can be omitted when it can be inferred.
 Note the use of the `in` keyword to mark
 the end of the parameter list and the beginning of the statements.
 
-The following code defines and calls several anonymous functions.
+The following code defines and calls several closures.
 
 ```swift
 // This function has no parameters.
@@ -389,7 +389,7 @@ let product2 = {a: Double, b: Double in a * b}
 print(product2(2, 3))
 ```
 
-If the parameter types of an anonymous function can be inferred from usage,
+If the parameter types of a closure can be inferred from usage,
 the parameter list can be omitted and the parameter values can be
 referred to by index using the names `$0`, `$1`, and so on.
 
@@ -397,6 +397,12 @@ referred to by index using the names `$0`, `$1`, and so on.
 let numbers = [1, 3, 7]
 let doubled = numbers.map({$0 * 2}) // [2, 6, 14]
 ```
+
+If parameters to a closure are not used, they can be replaced by underscores.
+
+If a closure takes no arguments and just returns the value of an expression,
+it can be written as just the expression inside curly braces.
+For example, the closure `{ 7 }` takes no arguments and always returns 7.
 
 If the last parameters to a function or method are functions,
 they can be passed using using "trailing closures".
@@ -570,7 +576,7 @@ Another use of type aliases is to give a shorter name to a long name
 or complicated type definition that is used multiple times.
 For example, `typealias ToString = CustomStringConvertible`.
 
-The type of an anonymous function can be assigned to a `typealias`.
+The type of a closure can be assigned to a `typealias`.
 This is also useful for declaring the types of functions
 that are passed as arguments to other functions.
 For example, the product function above can be written as follows:
@@ -655,7 +661,7 @@ The `Bool` type has two possible values, `true` and `false`.
 | ------------- | ---------------------- |
 | `description` | text "true" or "false" |
 
-`Bool` static methods include, but are not limited to the following:
+`Bool` type methods include, but are not limited to the following:
 
 | Method     | Description                        |
 | ---------- | ---------------------------------- |
@@ -682,7 +688,7 @@ Global numeric constants include:
 | `M_PI`   | Double value of pi      |
 | `M_PI_2` | Double value of half pi |
 
-Number static properties include the following:
+Number type properties include the following:
 
 | Property                  | Description                               |
 | ------------------------- | ----------------------------------------- |
@@ -692,7 +698,7 @@ Number static properties include the following:
 | `min`                     | minimum value of `Int` type               |
 | `pi`                      | value of `Float` or `Double` Pi           |
 
-Number static methods include, but are not limited to the following:
+Number type methods include, but are not limited to the following:
 
 | Method                              | Description                                       |
 | ----------------------------------- | ------------------------------------------------- |
@@ -1070,7 +1076,7 @@ printActivity(activity) // sleeping
 ```
 
 If an `enum` conforms to the `CaseIterable` protocol then
-its cases will be held in the `allCases` static property.
+its cases will be held in the `allCases` type property.
 This can be used to iterate over the cases.
 If a value type is also specified, it must appear before `CaseIterable`.
 
@@ -2261,8 +2267,8 @@ A class can have:
 
 - one or more initializers (named `init`)
   that play the role of constructors in other languages
-- class-level (or "type") properties declared with `static`
-- class-level (or "type") methods declared with `static`
+- type (or class-level) properties declared with `static`
+- type (or class-level) methods declared with `static`
 - instance-level properties
 - instance-level methods
 - a superclass
@@ -2334,10 +2340,10 @@ class Point2 {
 ```
 
 Instance properties and instance methods that
-refer to static properties and methods must prefix them
+refer to type properties and methods must prefix them
 with the class name followed by a period.
-However, initializers and static methods do not require prefixing
-to refer to static properties and methods.
+However, initializers and type methods do not require prefixing
+to refer to type properties and methods.
 
 To implement a class (subclass) that inherits
 the properties and methods of another class (superclass),
@@ -3396,3 +3402,8 @@ the features of Swift that are annoying, at least in my opinion.
 
 - How can I change the default device used by new projects?
   It defaults to "iPod touch (7th generation)".
+
+- Why do protocols use a different syntax for type parameters
+  that functions, structs, and classes?
+  They use the `associatedtype` keyword
+  instead of placing type parameters in angle brackets.
