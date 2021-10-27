@@ -12,8 +12,9 @@ It is an alternative to its predecessor UIKit.
 
 By comparison SwiftUI ...
 
-- is currently less capable than UIKit.
-- is declarative in nature than imperative.
+- is currently less capable than UIKit
+- is declarative in nature than imperative
+- emphasizes use of structs over classes (UIKit uses classes)
 - requires far less code to do the same things
 
 ## Resources
@@ -1162,31 +1163,46 @@ SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm
 which separates application code into three groups.
 This differs from UIKit which encourages use of Model-View-Controller (MVC).
 
-Models holds data and application logic.
-They are independent from the view code and have no knowledge of it.
+Models ...
 
-Views decides what to render and should be mostly stateless.
+- holds data and application logic
+- have no knowledge of view code the uses the data
+
+Views ...
+
+- decide what to render
+- should be mostly stateless
+- are declarative rather than imperative because they describe
+  what to render based on the current data, not when to render it
+- subscribe to changes in ViewModels
+  using the `@ObservedObject` property wrapper
+- react to changes published by ViewModels by rebuilding their bodies
+- can be associated with any number of ViewModels
+- have a `body` var that rebuilds the view
+  any time data in ViewModels they use changes
+- can call the `onReceive` method to register a function to be called
+  when new data is received (couldn't get this to work)
+
 Any state held in a view using the `@State` property modifier
 should be transient state such as data related to styling.
 
-Views reacts to changes published by ViewModels.
-Each View can be associates with any number of ViewModels.
-The `body` var of a View builds new views
-any time the data in ViewModels they use changes.
-Views are declarative rather than imperative
-because they describe what to render based on the current data,
-not when to render it.
+ViewModels ...
 
-ViewModels bind views to models.
-They create and hold model instances, typically in `private` properties.
-They react to model changes by optionally transforming model data
-and publishing changes so views that observe them
-can be rebuilt based on the changes.
+- are classes (not structs) that implement the `ObservableObject` protocol
+- mark the properties whose values they publish
+  with the `@Published` property wrapper which is
+  a shorthand for explicitly calling `objectWillChange.send()`
+- create and hold model instances, typically in `private` properties
+- are passed to views
+- have no knowledge of the views that use them
+- are subscribed to by views to obtain model data
+- have methods (referred to as "intents")
+  that are called by by views to update model data
+- react to model changes by optionally transforming model data
+  and publishing changes
+
 For example, a ViewModel could get the result of a SQL query from the Model
 and turn it into an array of objects that it publishes to Views.
-
-ViewModels must be implemented as classes rather than structs
-in order to conform to the `ObservableObject` protocol.
 
 Read-only data flows from the Model, through the ViewModel, and into the View.
 Views call ViewModel functions referred to as "intents"
@@ -1332,6 +1348,10 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
+TODO: Add information about the @EnvironmentObject property wrapper
+TODO: which is used to share data between views.
+TODO: See https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views
+
 ## Modals
 
 Modal dialogs are implemented by displaying a "sheet".
@@ -1348,6 +1368,7 @@ to set it to false which hides the sheet.
 import SwiftUI
 
 struct MyModal: View {
+    //TODO: Add more detail on using the @Binding property wrapper.
     @Binding var show: Bool
     var message: String
 

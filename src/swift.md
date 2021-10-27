@@ -15,6 +15,8 @@ Key facts about Swift include the following:
 - goals are to be safe, fast, and expressive
 - strongly typed with type inference
 - supports both object-oriented and functional programming
+- has six major types:
+  structs, classes, enums, protocols, functions, and generics
 - a big language with a large number of features
   and a corresponding learning curve
 - built on {% aTargetBlank "https://llvm.org", "LLVM" %}
@@ -343,9 +345,31 @@ This seems like a feature to avoid!
 The type of a function is describe by its parameter types and return type.
 For example, the type of the `displaySum` function above is
 `(String, Int) -> Void`.
+The type of a function that takes no arguments and returns nothing
+is `() -> Void`.
+
 Function types can be used for variable, parameter, and return types.
-This means that compatible functions can be assigned variables,
+This means that compatible functions can be assigned to variables,
 passed to functions, and returned from functions.
+
+Argument labels are not used when calling a function stored in a variable
+because each function that can be assigned to the variable
+could specify different argument labels. For example:
+
+```swift
+typealias BinaryFn = (Double, Double) -> Double
+
+func add(n1: Double, n2: Double) -> Double { n1 + n2 }
+let subtract: BinaryFn = { n1, n2 in n1 - n2 }
+let multiply: BinaryFn = { $0 * $1 }
+
+var operation: BinaryFn = add
+print(operation(2, 3)) // 5.0
+operation = subtract
+print(operation(2, 3)) // -1.0
+operation = multiply
+print(operation(2, 3)) // 6.0
+```
 
 Functions can defined in the bodies of other functions
 to scope their usage.
@@ -2280,15 +2304,18 @@ print(p?.address?.zip ?? "no zip") // alternate way to handle optional; "no zip"
 Classes are similar to structs in many ways.
 By convention their names begin with an uppercase letter.
 
-Classes can do the following things that structs cannot.
+Classes do the following things that structs cannot.
 
 - refer to instances by reference rather than making a copy
 - inherit properties and methods from one other class
 - use type casting to determine if an object is an instance at runtime
 - define a "deinitializer" to perform cleanup when an instance is destroyed
+- use automatic reference counting (ARC) for garbage collection
 
 Classes are reference types. This means that assigning one to a variable
 assigns a reference to the same instance rather than making a copy.
+Use a class instead of struct when it is important to
+share data by holding multiple references to the same object.
 
 To define a class, use the `class` keyword.
 A class can have:
@@ -2304,6 +2331,8 @@ A class can have:
 The default value of a property cannot depend on the value of another property.
 
 Classes, unlike structs, are not provided with a default memberwise initializer.
+They are provided with an initializer that takes no arguments
+only if all of their properties have a default value,
 It's not clear why this difference exists.
 
 Definitions of `class` methods that modify properties of the receiver
@@ -2424,7 +2453,8 @@ to limit their visibility and/or scope their names.
 
 ## Initializers
 
-Structs and classes can define `init` methods.
+Structs and classes can define `init` methods
+that are called when instances are created.
 These must initialize ALL of non-optional properties
 that do not have a specified default value.
 These are referred to as "designated initializers".
