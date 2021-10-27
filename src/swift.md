@@ -566,8 +566,9 @@ typealias MMDDYYYY = String
 var date: MMDDYYYY = "04161961"
 ```
 
-Another use of type aliases is to give a shorter name
-to a complicated type definition that is used multiple times.
+Another use of type aliases is to give a shorter name to a long name
+or complicated type definition that is used multiple times.
+For example, `typealias ToString = CustomStringConvertible`.
 
 The type of an anonymous function can be assigned to a `typealias`.
 This is also useful for declaring the types of functions
@@ -2060,10 +2061,11 @@ print(dog.age, dog2.age) // 2 1
 
 A computed property is defined with a `get` function
 that computes the value each time it is referenced.
+These must be declared with `var` rather than `let`.
 It can optionally define a `set` function
 whose purpose is the change the values of properties used to
 compute the value so the result will be a given value.
-Typically it doesn't make sense to define
+Often it doesn't make sense to define
 the `set` function for a computed property.
 
 A lazy property is similar to a computed property,
@@ -3187,8 +3189,16 @@ It is a passable IDE with many issues.
 
   To enable this, select Editor ... Vim Mode.
   However, it is very basic.
+  No colon commands are supported.
+  This means changes cannot be saved with ":w"
+  and find/replaced cannot be performed with ":s/foo/bar".
+  Pressing the "/" key invokes Xcode find,
+  but does not support regular expressions.
   It does not support repeating commands with the period key,
   defining macros, and other more advanced Vim features.
+  For a list of supported Vim commands, see this {% aTargetBlank
+  "https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022",
+  "Apple Developer Forum post" %}.
 
 The main Xcode window is divided into three main areas.
 The left side is the Navigator.
@@ -3314,10 +3324,19 @@ the features of Swift that are annoying, at least in my opinion.
   - `localizedDescription`
 
     This is an `Error` property that could have been named `message`.
+    It can be given this name with
+
+    ```swift
+    extension Error {
+        var message: String { localizedDescription }
+    }
+    ```
 
   - `CustomStringConvertible`
 
-    This is a protocol that could have been named `Describable`.
+    This is a protocol that could have been named `ToString`.
+    It can be given this name with
+    `typealias ToString = CustomStringConvertible`.
 
 - Lack of wait cursors
 
@@ -3374,3 +3393,6 @@ the features of Swift that are annoying, at least in my opinion.
   when there is a variable with the same name.
   For example, instead of `area(width: width, height: height)`
   we could write `area(width:, height:)`.
+
+- How can I change the default device used by new projects?
+  It defaults to "iPod touch (7th generation)".

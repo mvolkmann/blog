@@ -877,6 +877,17 @@ struct ContentView: View {
 - `Anchor`
 - `Angle`
 
+  This is a struct that does not implement the `View` protocol.
+  Instances can be created using an initializer
+  that takes either a `degrees` or a `radians` argument.
+  The value can be obtained via either `degrees` or `radians` properties
+  and conversions are performed automatically.
+
+  ```swift
+  let angle = Angle(radians: Double.pi)
+  print(angle.degrees) // 180.0
+  ```
+
 - `ProjectionTransform`
 - `UnitPoint`
 
