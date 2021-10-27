@@ -134,6 +134,12 @@ And one more thing clicking this does is to
 trigger the Preview to resume if it is paused
 and rebuild the code.
 
+To rotate the display to landscape mode,
+click the button above the display that contains
+a square with a curved arrow on its upper-left corner.
+This only works when not in "Live Preview" mode.
+The same button appears in the Simulator.
+
 It is possible for the Preview area to show more than one preview.
 This is controlled by the `ContentView_Previews` struct
 defined in `ContentView.swift`.
@@ -611,10 +617,19 @@ struct ContentView: View {
 
   This view iterates of the elements of an array
   and renders the view specified in its `ViewBuilder`.
+
   The elements in the array must either conform to the `Identifiable` protocol
-  OR `id:` argument must be specified.
+  (which requires them to have an `id` property)
+  OR the `id:` argument must be set.
   The value of `id:` is a key path that specifies
   how to find a unique value in the element.
+  For example, the `String` type does not implement `Identifiable`.
+  To iterate over an array of `String` values:
+
+  ```swift
+  // \.self is a key path that refers to the entire object.
+  ForEach(stringArray, id: \.self) { ... }
+  ```
 
 - `DynamicViewContent`
 - `Table`
@@ -1421,6 +1436,8 @@ The sheet slides in from the bottom by default.
 
 The following example defines the custom view `MyModal`
 which is displayed in the sheet.
+Custom views, like any struct, can have properties
+that are passed in when instances are created.
 The `ContentView` struct declares the boolean property `showModal`
 and passes it to the `MyModal` struct as a binding.
 This allows the action of the "Close" button in `MyModal`
