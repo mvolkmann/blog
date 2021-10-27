@@ -1157,6 +1157,37 @@ VStack {
     .edgesIgnoringSafeArea(.all)
 ```
 
+## Event Handling
+
+Views support many methods whose names begin with "on"
+to register a function to be called when a given event occurs.
+These include:
+
+- `onTapGesture`
+- `onLongPressGesture`
+
+- `onDrag`
+- `onDrop`
+
+- `onAppear`
+- `onDisappear`
+
+- `onCommand`
+- `onCopyCommand`
+- `onCutCommand`
+- `onDeleteCommand`
+- `onExitCommand`
+- `onMoveCommand`
+- `onPasteCommand`
+- `onPlayPauseCommand`
+
+- `onChange`
+- `onContinueUserActivity`
+- `onHover`
+- `onOpenURL`
+- `onReceive`
+- `onSubmit`
+
 ## MVVM
 
 SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm

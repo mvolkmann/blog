@@ -750,7 +750,7 @@ Number instance methods include, but are not limited to the following:
 Many more math functions are defined in the "Foundation" framework.
 This "provides a base layer of functionality for apps and frameworks,
 including data storage and persistence, text processing,
-date and time calculations, sorting and filtering, and networking.
+date and time calculations, sorting and filtering, and networking."
 Many math functions can only be used if the Foundation framework is imported.
 
 ```swift
@@ -3418,6 +3418,13 @@ the features of Swift that are annoying, at least in my opinion.
   Sometimes after fixing an error reported by the compiler,
   Xcode doesn't re-evaluate the code and the error remains.
   Resuming Preview triggers it to compile the code again.
+
+- Flaky builds
+
+  Sometimes a project will fail to build
+  and produce unclear error messages.
+  Closing the project, reopening it, and building again
+  can resolve the mystery issues.
 
 ## Questions
 
