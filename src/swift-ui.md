@@ -1177,11 +1177,16 @@ Views are declarative rather than imperative
 because they describe what to render based on the current data,
 not when to render it.
 
-ViewModels binds views to models.
-They reacts to changes in the Model and optionally transform data
-before publishing changes so that views can rebuild based on the changes.
+ViewModels bind views to models.
+They create and hold model instances, typically in `private` properties.
+They react to model changes by optionally transforming model data
+and publishing changes so views that observe them
+can be rebuilt based on the changes.
 For example, a ViewModel could get the result of a SQL query from the Model
 and turn it into an array of objects that it publishes to Views.
+
+ViewModels must be implemented as classes rather than structs
+in order to conform to the `ObservableObject` protocol.
 
 Read-only data flows from the Model, through the ViewModel, and into the View.
 Views call ViewModel functions referred to as "intents"

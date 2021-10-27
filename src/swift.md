@@ -2009,8 +2009,10 @@ repeat {
 
 Structs define named groups of properties and methods.
 By convention their names begin with an uppercase letter.
-They can optionally conform to protocols which are
-similar to interfaces in other languages.
+
+Structs cannot inherit from another struct or class,
+but they can conform to any number of protocols which
+are similar to interfaces in other languages.
 
 Properties are declared with the `let` (immutable) and
 `var` (mutable) keywords, just like variables.
@@ -2068,11 +2070,37 @@ print(dog.age, dog2.age) // 2 1
 A computed property is defined with a `get` function
 that computes the value each time it is referenced.
 These must be declared with `var` rather than `let`.
-It can optionally define a `set` function
+A computed property can optionally define a `set` function
 whose purpose is the change the values of properties used to
 compute the value so the result will be a given value.
-Often it doesn't make sense to define
-the `set` function for a computed property.
+If there is no `set` function then a surrounding `get` block is not needed.
+Often there is no need for a `set` function.
+
+```swift
+struct Foo {
+    private var n = 1
+    var doubled: Int { n * 2 } // no set function
+    var tripled: Int {
+        get {
+            n * 3
+        }
+        set {
+            if newValue < 10 { n = newValue }
+        }
+    }
+}
+
+var foo = Foo() // n begins set to 1
+print(foo.tripled) // 3
+
+foo.tripled = 4 // changes n
+print(foo.doubled) // 8
+print(foo.tripled) // 12
+
+foo.tripled = 10 // doesn't change n
+print(foo.doubled) // 8
+print(foo.tripled) // 12
+```
 
 A lazy property is similar to a computed property,
 but its value is only computed the first time it is accessed.
@@ -2255,7 +2283,7 @@ By convention their names begin with an uppercase letter.
 Classes can do the following things that structs cannot.
 
 - refer to instances by reference rather than making a copy
-- inherit properties and methods from another
+- inherit properties and methods from one other class
 - use type casting to determine if an object is an instance at runtime
 - define a "deinitializer" to perform cleanup when an instance is destroyed
 
@@ -2745,6 +2773,10 @@ The access control keywords include:
 
 The most commonly used access control keyword is `private`
 and the second most commonly used is `internal` which is the default.
+
+Specifying `public private(set)` on a property means that
+the property can be accessed as if it were `public`,
+but can only be modified as if it were `private`.
 
 ## Ranges
 
@@ -3407,3 +3439,5 @@ the features of Swift that are annoying, at least in my opinion.
   that functions, structs, and classes?
   They use the `associatedtype` keyword
   instead of placing type parameters in angle brackets.
+
+- Can the `set` part of a computed property reject a potential change?
