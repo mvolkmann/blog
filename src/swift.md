@@ -97,6 +97,9 @@ To developing an app:
   - "Clone an existing project"
   - "Open a project or file"
 
+Another way to open an existing Xcode project
+is to double-click the `.xcodeproj` file that is created.
+
 The "Source Control" menu supports many Git commands including
 Commit, Push, Pull, Fetch Changes, Stash Changes, and Discard All Changes.
 When committing changes a window opens where
@@ -3229,6 +3232,9 @@ surround it with `#if targetEnvironment(simulator) ... #endif`.
 To format Swift code in Xcode, select the lines to be formatted (cmd-a for all)
 and press ctrl-i which is the keyboard shortcut
 for Editor ... Structure ... Re-Indent.
+The default code indentation is four spaces.
+Chained method calls that appear on separate lines are indented,
+but those chained onto trailing closures are not.
 
 Some options for Swift code formatting outside Xcode include
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}

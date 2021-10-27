@@ -320,8 +320,14 @@ Here are the combiner views that are provided by SwiftUI.
 
   ```swift
   HStack(alignment: .lastTextBaseline, spacing: 0) {
-      Rectangle().fill(.red).frame(width: 100, height: 100).border(.black)
-      Rectangle().fill(.green).frame(width: 50, height: 50).border(.black)
+      Rectangle()
+          .fill(.red)
+          .frame(width: 100, height: 100)
+          .border(.black)
+      Rectangle()
+          .fill(.green)
+          .frame(width: 50, height: 50)
+          .border(.black)
       Text("Line 1\nLine 2").padding(20).border(.black)
   }.border(.blue)
   ```
@@ -349,10 +355,15 @@ Here are the combiner views that are provided by SwiftUI.
 
       var body: some View {
           VStack {
-              let rect = Rectangle().fill(bgColor).frame(width: 50, height: 40)
-              // Semicolons must separate multiple statements on the same line.
+              let rect = Rectangle()
+                  .fill(bgColor)
+                  .frame(width: 50, height: 40)
+              // Semicolons must separate multiple statements
+              // on the same line.
               ZStack { rect; Text(text) }
-              Text(text).padding(10).background(Rectangle().foregroundColor(bgColor))
+              Text(text)
+                  .padding(10)
+                  .background(Rectangle().foregroundColor(bgColor))
               rect.overlay(Text(text))
           }
       }
@@ -457,6 +468,10 @@ Here are the combiner views that are provided by SwiftUI.
 
   The following example demonstrates many common views used in forms.
 
+  <img alt="SwiftUI Form" style="width: 40%"
+    src="/blog/assets/SwiftUI-Form.png?v={{pkg.version}}"
+    title="SwiftUI Form">
+
   ```swift
   enum ShirtSize: String, CaseIterable {
     case small
@@ -473,10 +488,9 @@ Here are the combiner views that are provided by SwiftUI.
       @State private var bedTime: Date = Date()
       @State private var birthday: Date = Date()
       @State private var favoriteColor: Color = .yellow
-      @State private var firstName = ""
       @State private var dogCount = 0
       @State private var hungry = false
-      @State private var lastName = ""
+      @State private var name = ""
       @State private var motto = "This is my motto."
       @State private var rating = 0.0
       @State private var shirtSize: ShirtSize = .large
@@ -487,14 +501,14 @@ Here are the combiner views that are provided by SwiftUI.
           NavigationView {
               Form {
                   Section(header: Text("Profile")) {
-                      TextField("First Name", text: $firstName)
-                      TextField("Last Name", text: $lastName)
+                      TextField("Name", text: $name)
                       DatePicker(
                           "Birthday",
                           selection: $birthday,
                           displayedComponents: .date
                       )
                       Toggle("Hungry?", isOn: $hungry)
+                          .toggleStyle(SwitchToggleStyle(tint: .red))
                   }
                   Section(header: Text("Preferences")) {
                       // Links work in Simulator, but not in Preview.
@@ -506,11 +520,14 @@ Here are the combiner views that are provided by SwiftUI.
                           Text("Motto")
                           // It seems TextEditor lineLimit is
                           // only enforced on initial render.
-                          // It doesn't prevent more lines from being displayed
-                          // if the user types more text.
+                          // It doesn't prevent more lines from being
+                          // displayed if the user types more text.
                           TextEditor(text: $motto).lineLimit(2)
                       }
-                      ColorPicker("Favorite Color", selection: $favoriteColor)
+                      ColorPicker(
+                          "Favorite Color",
+                          selection: $favoriteColor
+                      )
                       DatePicker(
                           Bed Time",
                           selection: $bedTime,
@@ -523,21 +540,34 @@ Here are the combiner views that are provided by SwiftUI.
                       }
                       HStack {
                           Text("Rating")
-                          //TODO: Why does value have to be Float instead of Int?
+                          //TODO: Why does value have to be Float
+                          //TODO: instead of Int?
                           Slider(value: $rating, in: 0...10, step: 1)
                           Text("\(Int(rating))")
                       }
                       HStack {
-                          Stepper("# of Dogs", value: $dogCount, in: 0...10)
+                          Stepper(
+                              "# of Dogs",
+                              value: $dogCount, in: 0...10
+                          )
                           Text(String(dogCount))
                       }
-                      Button("Save") {}
                   }
-                }
-            }
-        }
-
-    }
+              }
+              .navigationTitle("Profile")
+              // accentColor changes the color of many elements including
+              // the text cursor color, focus color, and Slider bar color.
+              // It does not affect the focus background color of Toggle
+              // views.  Use the "toggleStyle" view modifier for that.
+              .accentColor(.red)
+              .toolbar {
+                  ToolbarItemGroup(placement: .navigationBarTrailing) {
+                      Button("Save", action: saveUser)
+                  }
+              }
+          }
+      }
+  }
   ```
 
   Common UI components that are not built into SwiftUI include:
@@ -714,6 +744,11 @@ struct ContentView: View {
 - `PasteButton`
 
 - `Link`
+
+  This creates a hyperlink like an HTML `a` element.
+  Clicking it opens the associated URL in Safari.
+  This works in the Simulator, but Preview is not able to open Safari.
+
 - `Menu`
 
 - `Toggle`
