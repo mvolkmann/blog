@@ -855,6 +855,37 @@ struct ContentView: View {
 }
 ```
 
+The `Path` view supports many drawing commands.
+For example:
+
+<img alt="SwiftUI Path" style="width: 40%"
+  src="/blog/assets/SwiftUI-Path.png?v={{pkg.version}}"
+  title="SwiftUI Path">
+
+```swift
+struct ContentView: View {
+    let style = StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round)
+
+    var body: some View {
+        Path { path in
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: 0, y: 100))
+            path.addLine(to: CGPoint(x: 100, y: 100))
+            path.addLine(to: CGPoint(x: 100, y: 0))
+            //path.closeSubpath() // clsoes the path above
+
+            // Other path methods include:
+            // addArc, addCurve, addEllipse, addLines, addPath,
+            // addQuadCurve, addRect, addRects, addRelativeArc,
+            // and addRoundedRect
+        }
+        .stroke(Color.red, style: style)
+        .background(Rectangle().fill(.yellow))
+        .frame(width: 100, height: 100)
+    }
+}
+```
+
 - `Capsule`: draws an oval
 - `Circle`: draws a circle
 - `Ellipse`: draws an ellipse
