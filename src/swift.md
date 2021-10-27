@@ -1176,9 +1176,13 @@ The following example defines a `Stack`
 where all the elements have the same type.
 The element type must be specified when a `Stack` instance is created
 using a "type parameter".
+
+Any number of type parameters can be specified
+inside angle brackets, separated by commas.
 By convention, type parameter names are CamelCase,
 beginning with an uppercase letter.
-Any number of type parameters can be specified, separated by commas.
+Type parameters can be used anywhere a type can appear inside the definition
+including properties, variables, parameters, and return types.
 
 ```swift
 struct Stack<Element> {
@@ -3465,8 +3469,12 @@ the features of Swift that are annoying, at least in my opinion.
 - Why doesn't the `Character` type conform to the
   `Decodable` and `Encodable` protocols like the other primitive types?
 
-- How is a new module defined and
-  can it be implemented by multiple source files?
+- How is a new module defined?
+  Can it be implemented by multiple source files?
+  Why don't source files indicate what they use from other modules
+  in import statements?
+  Is the only way to determine where something being used comes from
+  to command-click and select "Jump to Definition..."?
 
 - Does Swift having anything like promises in JavaScript?
 
