@@ -1061,6 +1061,8 @@ TODO: Are `Color` and `LinearGradient` views?
 
 View modifiers are methods that can be called on a view to create
 a new view that is like the receiver, but modified in a specific way.
+Calls to view modifiers can be chained since each returns a new view.
+
 The following example uses the `foregroundColor`, `padding`, and `stroke`
 view modifiers.
 
@@ -1071,14 +1073,17 @@ RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).padding(.all)
 
 Some view modifiers can be applied to any view.
 Others are specific to certain kinds of views.
-For example, the `stroke` view modifier only applies to shapes.
+For example, the `stroke` view modifier used above only applies to shapes.
+
+The official documentation for the supplied view modifiers can be found at
+{% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
+"" %}.
 
 Commonly used view modifiers include:
 
-- `alert<S, A>(S, isPresented: Binding<Bool>, actions: () -> A)`
 - `background(alignment, content)`
 - `border(ShapeStyle, width: CGFloat = 1)`
-- `confirmationDialog<S, A>(S, isPresented: Binding<Bool>, titleVisibility: Visibility, actions: () -> A)`
 - `cornerRadius(CGFloat, antialiased: Bool)`
 - `edgesIgnoringSafeArea(Edge.Set)`
 - `font(Font?)`
@@ -1105,24 +1110,24 @@ Commonly used view modifiers include:
 - `truncationMode(Text.TruncationMode)`
 - `zIndex(Double)`
 
+The following example adds a shadow a `Text` view.
+
+```swift
+Text("After")
+    .padding()
+    .background(.yellow)
+    .shadow(color: .gray, radius: 3, x: 3, y: 3)
+```
+
 The event handling methods like `onTapGesture` area also view modifiers.
 
+Several view modifiers take a `ShapeStyle` object.
 Types that conform to the `ShapeStyle` protocol include
 `AngularGradient`, `Color`, `ForegroundStyle`, `ImagePaint`,
 `LinearGradient`, and `RadialGradient`.
 
-- TODO: Add more view modifiers here!
-  TODO: See list at https://developer.apple.com/documentation/swiftui/slider-view-modifiers.
-
-Calls to view modifiers can be chained since each returns a new view.
-
-View modifiers can be specific to certain types of views.
-For a list of them, see {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
-"View Modifiers" %}.
-
-Many (all?) view modifiers are defined in extensions to the `View` protocol.
-This makes default implementations available to many kinds of views.
+Many view modifiers are defined in extensions to the `View` protocol.
+This makes them to any kind of views.
 
 When view modifiers are added to combiner views,
 they are passed down to all descendant views.
@@ -1144,7 +1149,117 @@ In a way, view modifiers are like Svelte components that contain slots.
 They take a view to be "modified" and return a new view
 that typically contains the view passed to them.
 
-## View State
+Custom view modifiers can be created by defining
+a struct that implements the `ViewModifier` protocol.
+This requires implementing `body` method that takes
+content which is a `View` to be modified,
+and returns a new `View`.
+The code in the `body` method is similar to that in any custom view.
+
+The following code defines a custom `ViewModifier`
+that allows the view on which it is called to be collapsed.
+It wraps that view in a `VStack` containing two `HStack`s.
+The second `HStack` includes a `Button` containing a chevron icon.
+Clicking the `Button` toggles whether the first `HStack` is rendered.
+It also rotates the chevron icon.
+
+<img alt="SwiftUI ViewModifier" style="width: 50%"
+  src="/blog/assets/SwiftUI-ViewModifier.png?v={{pkg.version}}"
+  title="SwiftUI ViewModifier">
+
+```swift
+import SwiftUI
+
+struct Collapsable: ViewModifier {
+    private static let diameter = CGFloat(120)
+    private static var radius: CGFloat { diameter / 2 }
+
+    var bgColor: Color = .gray
+    var duration: Double = 0.5
+
+    @State var showContent = true
+
+    var halfCircle: some View {
+        Circle()
+            .trim(from: 0, to: 0.5)
+            .fill(bgColor)
+            .frame(
+                width: Collapsable.diameter,
+                height: Collapsable.radius
+            )
+            .offset(x: 0, y: -16)
+    }
+
+    private func toggle() {
+        withAnimation(.easeInOut(duration: duration)) {
+            showContent.toggle()
+        }
+    }
+
+    func body(content: Content) -> some View {
+        VStack {
+            if showContent {
+                HStack {
+                    Spacer()
+                    content
+                    Spacer()
+                }
+                .background(bgColor)
+
+                //TODO: Can you scale the height of the HStack
+                //TOOO: instead of using the default fade transition?
+                //.transition(.scale)
+                //.scaleEffect(showContent ? 1 : 0)
+                //.animation(.easeInOut(duration: 1))
+            }
+            HStack {
+                Spacer()
+                ZStack {
+                    Image(systemName: "chevron.down")
+                        .resizable()
+                        .frame(
+                            width: Collapsable.radius / 3,
+                            height: Collapsable.radius / 4
+                        )
+                        .onTapGesture { toggle() }
+                        .rotationEffect(
+                            Angle.degrees(showContent ? 180 : 0)
+                        )
+                        .offset(x: 0, y: -2)
+                        .background(halfCircle)
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+extension View {
+    func collapsable(
+        bgColor: Color = .black,
+        duration: Double = 0.5) -> some View {
+        modifier(Collapsable(bgColor: bgColor, duration: duration))
+    }
+}
+```
+
+The following code demonstrates using the custom `ViewModifier` defined above.
+
+```swift
+VStack {
+    Text("First line of content")
+    Text("Second line of content")
+}
+.padding()
+
+// This way of applying a view modifier doesn't use the View extension.
+//.modifier(Collapsable(bgColor: ContentView.bgColor))
+
+// This way uses the View extension and is preferred.
+.collapsable(bgColor: ContentView.bgColor)
+```
+
+# View State
 
 All views are immutable structs.
 Typically they get data from a model.
@@ -1507,9 +1622,12 @@ TODO: Add information about the @EnvironmentObject property wrapper
 TODO: which is used to share data between views.
 TODO: See https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views
 
-## Modals
+## Modal Dialogs
 
-Modal dialogs are implemented by displaying a "sheet".
+Basic modal dialogs can be created using the
+`alert` and `confirmationDialog` view modifiers
+
+Custom modal dialogs are implemented by displaying a "sheet".
 The sheet slides in from the bottom by default.
 
 The following example defines the custom view `MyModal`
