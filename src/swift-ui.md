@@ -1061,15 +1061,58 @@ TODO: Are `Color` and `LinearGradient` views?
 
 View modifiers are methods that can be called on a view to create
 a new view that is like the receiver, but modified in a specific way.
-For example:
+The following example uses the `foregroundColor`, `padding`, and `stroke`
+view modifiers.
 
 ```swift
-// foregroundColor is a view modifier.
 Text("Hello, World!").foregroundColor(.red)
-
-// stroke and padding are view modifiers.
 RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).padding(.all)
 ```
+
+Some view modifiers can be applied to any view.
+Others are specific to certain kinds of views.
+For example, the `stroke` view modifier only applies to shapes.
+
+Commonly used view modifiers include:
+
+- `alert<S, A>(S, isPresented: Binding<Bool>, actions: () -> A)`
+- `background(alignment, content)`
+- `border(ShapeStyle, width: CGFloat = 1)`
+- `confirmationDialog<S, A>(S, isPresented: Binding<Bool>, titleVisibility: Visibility, actions: () -> A)`
+- `cornerRadius(CGFloat, antialiased: Bool)`
+- `edgesIgnoringSafeArea(Edge.Set)`
+- `font(Font?)`
+- `foregroundColor(Color?)`
+- `foregroundStyle(ShapeStyle)`
+- `frame(width: CGFloat?, height: CGFloat?, Alignment)`
+- `border(ShapeStyle, width: CGFloat = 1)`
+- `lineLimit(Int?)`
+- `multilineTextAlignment(TextAlignment)`
+- `offset(x: CGFloat, y: CGFloat)`
+- `opacity(Double)`
+- `overlay(ShapeStyle)`
+- `padding(CGFloat)`
+- `position(x: CGFloat, y: CGFloat)`
+- `rotationEffect(Angle, anchor: UnitPoint)`
+- `scaledToFill()`
+- `scaledToFit()`
+- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
+- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
+- `textCase(Text.Case?)`
+- `tint(Color?)`
+- `transformEffect(CGAffineTransform)`
+- `transition(AnyTransition)`
+- `truncationMode(Text.TruncationMode)`
+- `zIndex(Double)`
+
+The event handling methods like `onTapGesture` area also view modifiers.
+
+Types that conform to the `ShapeStyle` protocol include
+`AngularGradient`, `Color`, `ForegroundStyle`, `ImagePaint`,
+`LinearGradient`, and `RadialGradient`.
+
+- TODO: Add more view modifiers here!
+  TODO: See list at https://developer.apple.com/documentation/swiftui/slider-view-modifiers.
 
 Calls to view modifiers can be chained since each returns a new view.
 
