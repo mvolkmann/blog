@@ -1674,6 +1674,7 @@ TODO: https://www.youtube.com/watch?v=2NowSN4qJUY&t=729s
 The `UserDefaults` class is "an interface to the user's defaults database,
 where you store key-value pairs persistently across launches of your app."
 The code below demonstrates using this to persist data about dogs as JSON.
+TODO: Can you store an array objects directory without encoding as JSON?
 
 ```swift
 struct Dog: Codable, CustomStringConvertible, Identifiable {

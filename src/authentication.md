@@ -7,6 +7,10 @@ layout: topic-layout.njk
 This page describes terminology and strategies
 related to implementing authentication in web applications.
 
+For an implementation of these ideas in a web app that uses
+Svelte and Node.js, see {% aTargetBlank
+"https://github.com/mvolkmann/svelte-account-demo", "svelte-account-demo" %}.
+
 ## Terminology
 
 **Encryption** typically encodes data using a key and an algorithm.
