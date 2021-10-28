@@ -1024,6 +1024,7 @@ enum ColorHex: String {
 When the type of a value can be inferred to be a specific `enum` type,
 a value can be specified with only a period followed by a `case` name
 as a shorthand.
+This is a distinguishing feature of Swift and is used frequently.
 
 ```swift
 var c1 = Color.red
@@ -1362,7 +1363,7 @@ for (index, score) in scores.enumerated() {
 | `dropFirst(Int) -> ArraySlice<Element>`                   | returns subsequence of elements after first n                                              |
 | `dropLast(Int) -> ArraySlice<Element>`                    | returns subsequence of elements before last n                                              |
 | `enumerated(t) -> EnumeratedSequence`                     | returns subsequence of (n, x) pairs where n is an index and x is the element at that index |
-| `filter((Element) -> Bool) -> [Element]                   | returns a new array containing a subset of the elements                                    |
+| `filter((Element) -> Bool) -> [Element]`                  | returns a new array containing a subset of the elements                                    |
 | `first(where: (Element) -> Bool) -> Element?`             | returns first element that satisfies predicate                                             |
 | `firstIndex(of: Element) -> Int?`                         | returns index of first element matching given element                                      |
 | `firstIndex(where: (Element) -> Bool) -> Int?`            | returns index of first element that satisfies predicate                                    |
@@ -3335,11 +3336,15 @@ To set Xcode to check spelling while typing, select
 Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
 
 When developing iOS apps it is useful to launch the app in the Simulator
-directly from Xcode. The Simulator can simulate many different devices.
-But Xcode will not automatically refresh the app in the Simulator
-when code changes are saved.
-The Preview panel is updated, but it is more limited in functionality
-than the Simulator.
+directly from Xcode.
+Preview and the Simulator can simulate many different devices.
+
+When code changes are save, Xcode will automatically update the app
+in Preview, but not in the Simulator.
+To update the app in the Simulator, press cmd-r
+while focus is in Xcode, not in the Simulator.
+
+Preview is more limited in functionality than the Simulator.
 TODO: List the differences between the Simulator app and the Preview pane.
 
 The default device type used by the Simulator can be changed
@@ -3431,10 +3436,12 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Flaky builds
 
-  Sometimes a project will fail to build
-  and produce unclear error messages.
-  Closing the project, reopening it, and building again
-  can resolve the mystery issues.
+  Sometimes a project will fail to build with no errors identified in the code.
+  Pressing the "Diagnostics" button displays error messages
+  that are typically not helpful.
+  Sometimes pressing the "Try Again" button results in a clean build.
+  Other times it is necessary to close the project, reopen it,
+  and building again to resolve the mystery issues.
 
 ## Questions
 
