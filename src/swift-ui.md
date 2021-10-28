@@ -1078,7 +1078,7 @@ For example, the `stroke` view modifier used above only applies to shapes.
 The official documentation for the supplied view modifiers can be found at
 {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
-"" %}.
+"View Modifiers" %}.
 
 Commonly used view modifiers include:
 
@@ -1161,7 +1161,8 @@ that allows the view on which it is called to be collapsed.
 It wraps that view in a `VStack` containing two `HStack`s.
 The second `HStack` includes a `Button` containing a chevron icon.
 Clicking the `Button` toggles whether the first `HStack` is rendered.
-It also rotates the chevron icon.
+It also rotates the chevron icon using animation
+which is covered later in the "Animation" section.
 
 <img alt="SwiftUI ViewModifier" style="width: 50%"
   src="/blog/assets/SwiftUI-ViewModifier.png?v={{pkg.version}}"
@@ -1259,7 +1260,7 @@ VStack {
 .collapsable(bgColor: ContentView.bgColor)
 ```
 
-# View State
+## View State
 
 All views are immutable structs.
 Typically they get data from a model.
@@ -1426,6 +1427,15 @@ These include:
 - `onOpenURL`
 - `onReceive`
 - `onSubmit`
+
+## Animation
+
+SwiftUI supports three ways of implementing animations.
+
+- wrapping code that that changes model or `@State` data
+  with a call to `withAnimation` (explicit)
+- using the `animation` view modifier (implicit)
+- including or excluding a view
 
 ## MVVM
 

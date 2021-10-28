@@ -3279,6 +3279,19 @@ It is a passable IDE with many issues.
   "https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022",
   "Apple Developer Forum post" %}.
 
+To choose light or dark mode, select from the dropdown at
+Xcode ... Preferences ... General ... Appearance.
+
+To choose a different theme, select Xcode ... Preferences ... Themes.
+From here you can add, delete, and select themes.
+I like the "Classic (Dark)" theme.
+
+To add a vertical line at a given column width,
+select Xcode ... Preferences ... Text Editing,
+check "Page guide column at:", and choose a column number.
+The indentation amount and type (spaces vs. tabs)
+can also be specified here.
+
 The main Xcode window is divided into three main areas.
 The left side is the Navigator.
 The right side is the Inspector.
