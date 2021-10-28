@@ -7,9 +7,16 @@ layout: topic-layout.njk
 This page describes terminology and strategies
 related to implementing authentication in web applications.
 
-For an implementation of these ideas in a web app that uses
-Svelte and Node.js, see {% aTargetBlank
-"https://github.com/mvolkmann/svelte-account-demo", "svelte-account-demo" %}.
+The strategies described here are used in a demonstration app found in the
+{% aTargetBlank "https://github.com/mvolkmann/authentication-fastify",
+"authentication-fastify" %} GitHub repo.
+The user interface is built with HTML, CSS, and JavaScript
+rather than using a particular web framework.
+Much of the interesting code can be found in the file `api/api.js`
+which is well-commented.
+
+Also see {% aTargetBlank "https://github.com/mvolkmann/svelte-account-demo",
+"svelte-account-demo" %} which uses Svelte and Node.js.
 
 ## Terminology
 
@@ -153,7 +160,3 @@ in order from least to most secure.
    required for uses like authentication.
    So generating a new rainbow table for each user
    is highly impractical.
-
-   This strategy is used in the demonstration app found in the
-   {% aTargetBlank "https://github.com/mvolkmann/authentication-fastify",
-   "authentication-fastify" %} GitHub repo.
