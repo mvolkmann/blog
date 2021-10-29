@@ -1420,6 +1420,10 @@ These include:
 - `onDrop`
 
 - `onAppear`
+
+  This takes a function to execute every time
+  the view on which it is applied is rendered.
+
 - `onDisappear`
 
 - `onCommand`
@@ -1498,11 +1502,7 @@ for experimenting with different kinds of animations.
 
 ```swift
 enum EasingType: String, CaseIterable {
-    case linear
-    case easeIn
-    case easeOut
-    case easeInOut
-    case spring
+    case forever, linear, easeIn, easeOut, easeInOut, spring
 }
 
 struct ContentView: View {
@@ -1517,6 +1517,9 @@ struct ContentView: View {
     private var easingFunction: Animation {
         switch easingType {
         case .linear: return Animation.linear(duration: 1)
+        case .forever: return Animation
+            .linear(duration: duration)
+            .repeatForever(autoreverses: false)
         case .easeIn: return Animation.easeIn(duration: 2)
         case .easeOut: return Animation.easeOut(duration: 2)
         case .easeInOut: return Animation.easeInOut(duration: 2)
@@ -1542,15 +1545,15 @@ struct ContentView: View {
 
             NavigationView { // Picker will be disabled without this.
                 Form {
+                    Toggle("Animate Color?", isOn: $color)
+                    Toggle("Animate Opacity?", isOn: $opacity)
+                    Toggle("Animate Rotation?", isOn: $rotate)
+                    Toggle("Animate Scale?", isOn: $scale)
                     Picker("Easing Function", selection: $easingType) {
                         ForEach(EasingType.allCases, id: \.self) { easingType in
                             Text("\(easingType.rawValue)").tag(easingType)
                         }
                     }
-                    Toggle("Animate Color?", isOn: $color)
-                    Toggle("Animate Opacity?", isOn: $opacity)
-                    Toggle("Animate Rotation?", isOn: $rotate)
-                    Toggle("Animate Scale?", isOn: $scale)
                     Button("Toggle") {
                         if color {
                             borderColor =
