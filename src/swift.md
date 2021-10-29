@@ -3381,6 +3381,17 @@ The setup steps are:
 - `npm run dev-package`
 - `code --install-extension out/sourcekit-lsp-vscode-dev.vsix`
 
+### Fastlane
+
+{% aTargetBlank "https://fastlane.tools", "Fastlane" %} is
+"the easiest way to build and release mobile apps."
+
+Fastlane provides the ability to:
+
+- distribute beta builds to testing services like TextFlight
+- publish to app stores by pushing a button
+- automatically code sign iOS apps
+
 ## Annoyances
 
 In a sense if you want to do web development,

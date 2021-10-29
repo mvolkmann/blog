@@ -498,7 +498,7 @@ Here are the combiner views that are provided by SwiftUI.
       var isEditing = false
 
       var body: some View {
-          NavigationView {
+          NavigationView { // Pickers will be disabled without this!
               Form {
                   Section(header: Text("Profile")) {
                       TextField("Name", text: $name)
@@ -529,7 +529,7 @@ Here are the combiner views that are provided by SwiftUI.
                           selection: $favoriteColor
                       )
                       DatePicker(
-                          Bed Time",
+                          "Bed Time",
                           selection: $bedTime,
                           displayedComponents: .hourAndMinute
                       )
@@ -1223,8 +1223,8 @@ struct Collapsable: ViewModifier {
                             height: Collapsable.radius / 4
                         )
                         .onTapGesture { toggle() }
-                        .rotationEffect(
-                            Angle.degrees(showContent ? 180 : 0)
+                        .rotationEffect( // Angle type is inferred
+                            .degrees(showContent ? 180 : 0)
                         )
                         .offset(x: 0, y: -2)
                         .background(halfCircle)
@@ -1432,10 +1432,110 @@ These include:
 
 SwiftUI supports three ways of implementing animations.
 
-- wrapping code that that changes model or `@State` data
-  with a call to `withAnimation` (explicit)
-- using the `animation` view modifier (implicit)
-- including or excluding a view
+- explicit: wrapping code that that changes model or `@State` data
+  with a call to `withAnimation`
+- implicit: using the `animation` view modifier
+- transition: triggered by adding or removing a view
+
+Key points to remember when implementing animations:
+
+1. Only changes to view modifier arguments and shapes are animated.
+2. Only views that are already on the screen
+   are affected by explicit and implicit animations.
+3. The `animation` view modifier applies to
+   all view modifiers chained before it, but not to those chained after it.
+4. Explicit animations do not prevent implicit animations.
+   Both can be applied concurrently.
+
+One way to achieve point #2 is to leave views on the screen permanently,
+but conditionally hide them by setting their opacity to zero.
+For example, `myView.opacity(show ? 1 : 0)`.
+
+Animations can specify a duration, delay, easing function,
+and number of times to repeat.
+Duration is the total time over which the animation takes place.
+Delay is the amount of time the animation waits to begin after being triggered.
+An easing function controls the speed at which an animation is applied
+over its duration.
+Provided easing functions include
+`linear`, `easeIn`, `easeOut`, `easeInOut` (default), and `spring`.
+Custom easing functions can be defined with the `?` function.
+
+<img alt="SwiftUI Animation" style="width: 40%"
+  src="/blog/assets/SwiftUI-Animation.png?v={{pkg.version}}"
+  title="SwiftUI Animation">
+
+```swift
+enum EasingType: String, CaseIterable {
+    case linear
+    case easeIn
+    case easeOut
+    case easeInOut
+    case spring
+}
+
+struct ContentView: View {
+    @State private var borderColor: Color = .red
+    @State private var color = false
+    @State private var easingType: EasingType = .linear
+    @State private var on = false
+    @State private var opacity = false
+    @State private var rotate = false
+    @State private var scale = false
+
+    private var easingFunction: Animation {
+        switch easingType {
+        case .linear: return Animation.linear(duration: 1)
+        case .easeIn: return Animation.easeIn(duration: 2)
+        case .easeOut: return Animation.easeOut(duration: 2)
+        case .easeInOut: return Animation.easeInOut(duration: 2)
+        case .spring: return Animation
+            .spring(dampingFraction: 0.5)
+            .speed(0.3)
+        }
+    }
+
+    var body: some View {
+        VStack {
+            VStack {
+                Text("First Line")
+                Text("Second Line")
+                Text("🎉").font(.largeTitle)
+            }
+            .padding()
+            .border(borderColor, width: 10)
+            .opacity(!opacity || on ? 1 : 0)
+            .scaleEffect(!scale || on ? 1 : 0)
+            .rotationEffect(.degrees(!rotate || on ? 0 : 360))
+            .animation(easingFunction) // implicit animation
+
+
+            NavigationView { // Picker will be disabled without this.
+                Form {
+                    Picker("Easing Function", selection: $easingType) {
+                        ForEach(EasingType.allCases, id: \.self) { easingType in
+                            Text("\(easingType.rawValue)").tag(easingType)
+                        }
+                    }
+                    Toggle("Animate Color?", isOn: $color)
+                    Toggle("Animate Opacity?", isOn: $opacity)
+                    Toggle("Animate Rotation?", isOn: $rotate)
+                    Toggle("Animate Scale?", isOn: $scale)
+                    Button("Toggle") {
+                        withAnimation { // explicit animation
+                            if color {
+                                borderColor =
+                                    borderColor == .red ? .blue : .red
+                            }
+                            on.toggle()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
 
 ## MVVM
 
