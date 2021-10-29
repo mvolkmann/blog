@@ -3365,6 +3365,22 @@ by selecting Product ... Destination ... Choose Destination...
 and selecting a device type.
 This must be done in each Xcode project.
 
+To run an app on a real iOS device:
+
+- attach the device with a USB cable
+- wait for the computer to recognize the device
+- select the device from the dropdown list of targets at the top
+  that includes the names of available simulators
+  (will have a generic name like "iPhone")
+- press the play button
+- enter the computer password
+- look for a new app icon to appear on the device
+- one-time setup
+  - open the Settings app
+  - select General ... VPN & Device Management
+  - tap the new app
+  - tap the "Trust" button
+
 ### VS Code
 
 For tips on writing Swift code in VS Code, see
