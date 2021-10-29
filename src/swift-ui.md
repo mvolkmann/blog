@@ -750,6 +750,12 @@ struct ContentView: View {
   }
   ```
 
+- `Color`
+
+  This creates a rectangle view with a specific background color
+  that grows to fill all the space offered to it.
+  For example, `Color.red` and `Color.clear` (transparent) are views.
+
 - `EditButton`
 - `PasteButton`
 
@@ -951,7 +957,38 @@ struct ContentView: View {
 - `Capsule`: draws an oval
 - `Circle`: draws a circle
 - `Ellipse`: draws an ellipse
+
 - `Path`
+
+  Like `Color`, `Path` also creates a view.
+  The following example creates a path that is both filled and stroked.
+
+  ```swift
+  // Define the path as a computed property so it can be
+  // used once for filling and once for stroking.
+  var path: Path {
+      Path { path in
+          path.move(to: CGPoint(x: halfWidth, y: halfWidth))
+          path.addLine(to: CGPoint(x: 100, y: 100))
+          path.addLine(to: CGPoint(x: 200, y: halfWidth))
+          path.closeSubpath()
+      }
+  }
+
+  // Inside some combiner view ...
+  ZStack {
+      path.fill(.yellow)
+      path.stroke(
+          .red,
+          style: StrokeStyle(
+              lineWidth: lineWidth,
+              lineCap: .round,
+              lineJoin: .round
+          )
+      )
+  }
+  ```
+
 - `Rectangle`: draws a rectangle
 - `RoundedRectangle`: draws a rectangle with rounded corners
 
