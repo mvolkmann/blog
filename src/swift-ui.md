@@ -778,10 +778,12 @@ struct ContentView: View {
 - `TupleView`
 
 Here is an example of using combiner and component views.
-Note how these can be assigned to a variable
-that is later referenced to render them.
-They can also be placed in a new struct
-from which instances are created to render them.
+Note how views can be defined in computed properties
+that are later referenced to render them.
+The type of these computed properties can be a specific combiner view type
+or the generic `some View`.
+Custom views can also be defined in a new struct that inherits from `View`
+Instances of these structs are created to render them.
 
 ```swift
 // This defines a custom View that is used below.
@@ -795,7 +797,7 @@ struct MyRow: View {
 }
 
 struct ContentView: View {
-    // Assigning a View to a variable
+    // Assigning a View to a computed property
     var row = HStack {
         Text("Four")
         Text("Five")
@@ -1186,7 +1188,7 @@ struct Collapsable: ViewModifier {
     private static var radius: CGFloat { diameter / 2 }
 
     var bgColor: Color = .gray
-    var duration: Double = 0.5
+    var duration: Double = 0.5 // in seconds
 
     @State var showContent = true
 
@@ -1444,6 +1446,11 @@ These include:
 
 ## Animation
 
+Many view properties can be animated.
+These include color, opacity, rotation, and scale.
+Note that font sizes cannot be animated,
+but views containing text can be scaled.
+
 SwiftUI supports three ways of implementing animations.
 
 - explicit: wraps code that changes model or `@State` data
@@ -1468,12 +1475,13 @@ Key points to remember when implementing animations:
    all view modifiers chained before it, but not to those chained after it.
 4. Explicit animations do not override or prevent implicit animations.
    Both can be applied concurrently.
+5. Animations are automatically and smoothly interrupted by new animations.
 
 One way to achieve point #2 is to leave views on the screen permanently,
 but conditionally hide them by setting their opacity to zero.
 For example, `myView.opacity(show ? 1 : 0)`.
 
-Animations can specify a duration, delay, easing function,
+Animations can specify a duration (in seconds), delay, easing function,
 and number of times to repeat.
 Duration is the total time over which the animation takes place.
 Delay is the amount of time the animation waits to begin after being triggered.
