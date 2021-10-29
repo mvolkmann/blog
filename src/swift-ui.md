@@ -1663,6 +1663,9 @@ When rendering the food items, `matchedGeometryEffect` is used
 to associate the `Text` view with a particular id in a given namespace.
 The following example demonstrates this.
 
+TODO: Why do the food names eventually disappear after being moved
+TODO: in both Preview and the Simulator?
+
 ```swift
 struct Food: Identifiable {
     var name: String
