@@ -3365,6 +3365,22 @@ by selecting Product ... Destination ... Choose Destination...
 and selecting a device type.
 This must be done in each Xcode project.
 
+To add app icons:
+
+- browse https://appicon.co
+- drag an image file into the drag area
+- check the checkboxes for the target devices
+- click the Generate button
+- open the Finder and go to the Downloads directory
+- double-click the `AppIcons.zip` file to expand it
+- open the `AppIcons` folder
+- open the `Assets.xcassets` folder to expose the `AppIcon.appiconset` folder
+- open an Xcode project
+- right-click `Assets.xcassets` in the Navigator and select "Show in Finder"
+- drag the `AppIcon.appiconset` folder from the Finder
+  into the directory opened by the previous command
+  and click the "Replace" button
+
 To run an app on a real iOS device:
 
 - attach the device with a USB cable
