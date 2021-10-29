@@ -1432,10 +1432,18 @@ These include:
 
 SwiftUI supports three ways of implementing animations.
 
-- explicit: wrapping code that that changes model or `@State` data
+- explicit: wraps code that changes model or `@State` data
   with a call to `withAnimation`
-- implicit: using the `animation` view modifier
-- transition: triggered by adding or removing a view
+- implicit: uses the `animation` view modifier
+- transition: triggers by adding or removing a view
+
+Explicit animations are the most commonly used
+because they are triggered by model/state changes
+which are typically made in response to user interactions.
+These can cause multiple views to animate concurrently.
+For example, the action of a `Button` can wrap calls to
+ViewModel intent functions in a closure passed to `withAnimation`.
+Most code that handles user events does this.
 
 Key points to remember when implementing animations:
 
@@ -1444,7 +1452,7 @@ Key points to remember when implementing animations:
    are affected by explicit and implicit animations.
 3. The `animation` view modifier applies to
    all view modifiers chained before it, but not to those chained after it.
-4. Explicit animations do not prevent implicit animations.
+4. Explicit animations do not override or prevent implicit animations.
    Both can be applied concurrently.
 
 One way to achieve point #2 is to leave views on the screen permanently,
@@ -1457,9 +1465,22 @@ Duration is the total time over which the animation takes place.
 Delay is the amount of time the animation waits to begin after being triggered.
 An easing function controls the speed at which an animation is applied
 over its duration.
+
 Provided easing functions include
 `linear`, `easeIn`, `easeOut`, `easeInOut` (default), and `spring`.
-Custom easing functions can be defined with the `?` function.
+These are static functions on the `Animation` struct.
+All but `spring` take a single, optional argument
+which is the `duration` in seconds.
+The `spring` function takes three optional arguments named
+`response`, `dampingFunction`, and `blendDuration`.
+For details, see {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/animation/spring(response:dampingfraction:blendduration:)",
+"spring" %}.
+
+Custom easing functions can be defined with the `timingCurve` function.
+
+The following example provides form elements
+for experimenting with different kinds of animations.
 
 <img alt="SwiftUI Animation" style="width: 40%"
   src="/blog/assets/SwiftUI-Animation.png?v={{pkg.version}}"
