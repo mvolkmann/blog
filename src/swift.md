@@ -3523,3 +3523,6 @@ the features of Swift that are annoying, at least in my opinion.
   instead of placing type parameters in angle brackets.
 
 - Can the `set` part of a computed property reject a potential change?
+
+- Why do `Picker` views appear to be disabled
+  unless they are wrapped in a `NavigationView` and a `Form`?

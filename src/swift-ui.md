@@ -205,6 +205,10 @@ which stands for "Core Graphics". These include:
 
   This holds a transformation matrix used in 2D transformations.
 
+- `CGColor`
+
+  TODO: Add information about this and compare to `Color` and `UIColor`.
+
 - `CGFloat`
 
   This holds a floating point value whose size depends on the CPU architecture.
@@ -250,6 +254,12 @@ Views can be given an explicit identifier with the `.id` method
 that is passed an identifier.
 This is useful in methods that take a view identifier
 like the `ScrollViewReader` method `scrollTo`.
+
+To cause a view to take the full width of the screen,
+apply the `frame` view modifier.
+For example, `myView.frame(maxWidth: .infinity)`.
+In can also be useful to specify the height.
+For example, `myView.frame(maxWidth: .infinity, height: 100)`.
 
 ### ViewBuilders
 
@@ -1435,7 +1445,7 @@ SwiftUI supports three ways of implementing animations.
 - explicit: wraps code that changes model or `@State` data
   with a call to `withAnimation`
 - implicit: uses the `animation` view modifier
-- transition: triggers by adding or removing a view
+- transition: triggers by inserting or removing a view
 
 Explicit animations are the most commonly used
 because they are triggered by model/state changes
@@ -1558,6 +1568,91 @@ struct ContentView: View {
 TODO: Add example of using an explicit animation with `withAnimation`.
 
 TODO: Add an example of using transitions.
+
+Transitions are specified when a view is defined,
+but they are only applied when the view is inserted or removed.
+This is implemented by using an `if` or `switch` statement inside a parent view.
+
+By default an `opacity` transition (fade) is used.
+This can be changed by applying the `transition` view modifier
+which is passed the kind of transition to perform.
+Transitions are defined as methods on the `AnyTransition` struct.
+
+Transitions can be applied to any kind of view including combiner views.
+
+Typically the provided `opacity`, `scale`, and `slide` transitions are used.
+The `identity` transition is used to specify that no transition should occur.
+Custom transitions can also be implemented.
+
+By default the transition is reversed when the view is removed.
+For example, `opacity` changes from 0 to 1 when the view is inserted,
+and from 1 to 0 when it is removed.
+This can be changed using the `asymmetric` transition function
+which allows specifying one transition for insertion
+and a different one for removal.
+
+Most insertion transitions do not currently work in Preview,
+but they do work in the Simulator.
+However, the Simulator often displays odd rendering artifacts.
+
+The following example demonstrates sliding a view
+in from the top when it is inserted and
+out to the right when it is removed.
+
+```swift
+struct ContentView: View {
+    @State private var include = false
+
+    let easeFn = Animation.easeInOut(duration: 1)
+
+    var body: some View {
+        VStack {
+            VStack {
+                if include {
+                    Text("Conditionally Included")
+                        .frame(maxWidth: .infinity) // use full screen width
+
+                        // This slides in from left and out to right.
+                        //.transition(.slide)
+
+                        // The animation call here should apply the
+                        // easing function when one is not specified
+                        // in the call to withAnimation, but it doesn't work.
+                        //.transition(.slide.animation(easeFn))
+
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .top),
+                            removal: .move(edge: .trailing)
+                        ))
+
+                        // This changes scale from 0 to 1 for insertion
+                        // and 1 to 0 for removal.
+                        //.transition(.scale)
+                }
+            }
+            .frame(maxWidth: .infinity, minHeight: 50) // use full width
+            .border(.red)
+
+            NavigationView {
+                Form {
+                    // If a Toggle is used instead of a Button
+                    // to toggle the value of "include",
+                    // there is no opportunity to use "withAnimation".
+                    //Toggle("Include Optional Text?", isOn: $include)
+
+                    Button("Toggle Optional Text") {
+                        //withAnimation {
+                        withAnimation(easeFn) {
+                            include.toggle()
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+```
 
 ## MVVM
 
