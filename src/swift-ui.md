@@ -1654,6 +1654,71 @@ struct ContentView: View {
 }
 ```
 
+The `matchedGeometryEffect` view modifier is used
+to smoothly move views between combiner views.
+For example, this can be used to move `Text` views that describe food items
+between lists of foods that available and those that have been selected.
+Each food item must have a unique id.
+When rendering the food items, `matchedGeometryEffect` is used
+to associate the `Text` view with a particular id in a given namespace.
+The following example demonstrates this.
+
+```swift
+struct Food: Identifiable {
+    var name: String
+    var selected: Bool = false
+    var id: String { name }
+}
+
+struct ContentView: View {
+    @Namespace private var foodNS
+
+    @State var foods: [Food] = [
+        Food(name: "Hamburger"),
+        Food(name: "Fries"),
+        Food(name: "Shake"),
+    ]
+
+    func toggle(food: Food) {
+        let index = foods.firstIndex(where: { $0.id == food.id })!
+        foods[index].selected.toggle()
+    }
+
+    var body: some View {
+        HStack {
+            VStack {
+                Text("Available")
+                List {
+                    ForEach(foods) { food in
+                        if !food.selected {
+                            Text(food.name)
+                                .matchedGeometryEffect(id: food.name, in: foodNS)
+                                .onTapGesture {
+                                    withAnimation { toggle(food: food) }
+                                }
+                        }
+                    }
+                }
+            }
+            VStack {
+                Text("Selected")
+                List {
+                    ForEach(foods) { food in
+                        if food.selected {
+                            Text(food.name)
+                                .matchedGeometryEffect(id: food.name, in: foodNS)
+                                .onTapGesture {
+                                    withAnimation { toggle(food: food) }
+                                }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ## MVVM
 
 SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm
