@@ -1682,6 +1682,20 @@ struct ContentView: View {
         Food(name: "Shake"),
     ]
 
+    func foodList(selected: Bool) -> some View {
+        List {
+            ForEach(foods) { food in
+                if food.selected == selected {
+                    Text(food.name)
+                        .matchedGeometryEffect(id: food.id, in: foodNS)
+                        .onTapGesture {
+                            withAnimation { toggle(food: food) }
+                        }
+                }
+            }
+        }
+    }
+
     func toggle(food: Food) {
         let index = foods.firstIndex(where: { $0.id == food.id })!
         foods[index].selected.toggle()
@@ -1691,31 +1705,11 @@ struct ContentView: View {
         HStack {
             VStack {
                 Text("Available")
-                List {
-                    ForEach(foods) { food in
-                        if !food.selected {
-                            Text(food.name)
-                                .matchedGeometryEffect(id: food.name, in: foodNS)
-                                .onTapGesture {
-                                    withAnimation { toggle(food: food) }
-                                }
-                        }
-                    }
-                }
+                foodList(selected: false)
             }
             VStack {
                 Text("Selected")
-                List {
-                    ForEach(foods) { food in
-                        if food.selected {
-                            Text(food.name)
-                                .matchedGeometryEffect(id: food.name, in: foodNS)
-                                .onTapGesture {
-                                    withAnimation { toggle(food: food) }
-                                }
-                        }
-                    }
-                }
+                foodList(selected: true)
             }
         }
     }
