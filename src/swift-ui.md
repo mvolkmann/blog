@@ -1530,7 +1530,6 @@ struct ContentView: View {
             .rotationEffect(.degrees(!rotate || on ? 0 : 360))
             .animation(easingFunction) // implicit animation
 
-
             NavigationView { // Picker will be disabled without this.
                 Form {
                     Picker("Easing Function", selection: $easingType) {
@@ -1543,13 +1542,11 @@ struct ContentView: View {
                     Toggle("Animate Rotation?", isOn: $rotate)
                     Toggle("Animate Scale?", isOn: $scale)
                     Button("Toggle") {
-                        withAnimation { // explicit animation
-                            if color {
-                                borderColor =
-                                    borderColor == .red ? .blue : .red
-                            }
-                            on.toggle()
+                        if color {
+                            borderColor =
+                                borderColor == .red ? .blue : .red
                         }
+                        on.toggle()
                     }
                 }
             }
@@ -1557,6 +1554,10 @@ struct ContentView: View {
     }
 }
 ```
+
+TODO: Add example of using an explicit animation with `withAnimation`.
+
+TODO: Add an example of using transitions.
 
 ## MVVM
 
