@@ -393,85 +393,142 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/buttons/",
     "Buttons" %}
 
-  - SwiftUI creates this with TODO
+  - several predefined button styles are supported including
+    - toggle: different from `Toggle` view
+    - pop-up: displays a menu of mutually exclusive options;
+      after choosing an option the button content can change to indicate the selection
+    - pull-down: displays a menu of items that relate to the button purpose;
+      button content never changes
+  - predefined sizes are small, medium, and large
+  - predefined styles include plain, gray, tinted,
+    and filled (used for most likely action)
+  - can include an SF Symbol icon
+  - can have a role of normal, primary, cancel, or destructive
+  - can be a close button (x in circle) that closes the parent view
+  - can be an info button (i in circle) that displays
+    information about the parent view
+  - SwiftUI creates this with `Button`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/color-wells/",
     "Color Wells" %}
 
-  - SwiftUI creates this with TODO
+  - displays a currently selected color in a circle
+  - when tapped, displays the system color picker to change the selected color
+  - SwiftUI creates this with `ColorPicker`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/context-menus/",
     "Context Menus" %}
 
-  - SwiftUI creates this with TODO
+  - displays a menu of context-sensitive items when an item is long pressed
+  - can contain sub-menus
+  - can include separators to group options
+  - SwiftUI creates this with `Menu`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/edit-menus/",
     "Edit Menus" %}
 
+  - a provided horizontal menu that is displayed when a long press
+    occurs in a text field, text view, web view, or image view
+  - by default contains buttons for Cut, Copy, Paste, Select, Select All, Delete, Replace..., Loop Up, and Share...
+  - can disable any of the default buttons to remove them
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/labels/",
     "Labels" %}
 
-  - SwiftUI creates this with TODO
+  - plain or styled text
+  - SwiftUI creates this with `Label` or `Text`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/page-controls/",
     "Page Controls" %}
 
+  - a row of indicator images that represent pages in a list
+  - can handle any number of pages
+  - image for current page is highlighted
+  - can customize images
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/",
     "Pickers" %}
 
-  - SwiftUI creates this with TODO
+  - displays distinct values in a scrollable list and allows users to select one
+  - SwiftUI creates this with `Picker` and `DatePicker`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/progress-indicators/",
     "Progress Indicators" %}
 
+  - informs users that an activity is running in the background
+  - can indicate how much longer it will run using a progress bar
+  - "activity indicators" are for indeterminant activities
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/refresh-content-controls/",
     "Refresh Content Controls" %}
 
+  - becomes visible when a user pulls down on a view to request a content reload
+  - usually used in a table view
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/segmented-controls/",
     "Segmented Controls" %}
 
-  - SwiftUI creates this with TODO
+  - set of toggle buttons
+  - can use in place of web UI radio buttons
+  - can use to select between different kinds of views
+  - SwiftUI creates this with `Picker(...).pickerStyle(.segmented)`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/sliders/",
     "Sliders" %}
 
+  - a horizontal track with a thumb that
+    slides between minimum and maximum values
+  - can display icons on leading and trailing ends
   - SwiftUI creates this with `Slider`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/steppers/",
     "Steppers" %}
 
+  - pair of minus and plus buttons that decrement and increment a value
+  - can replace "-" and "+" with images
+  - doesn't display current value
   - SwiftUI creates this with `Stepper`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/switches/",
     "Switches" %}
 
+  - a toggle between mutually-exclusive states
+  - can set tint to match app theme
+  - usually used in table rows with a label on the leading side
   - SwiftUI creates this with `Toggle`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/text-fields/",
     "Text Fields" %}
 
-  - SwiftUI creates this with `TextField`, `SecureField`, and `TextEditor`
+  - single line text input with fixed height
+  - usually has rounded corners
+  - brings up on-screen keyboard when tapped
+  - can contain placeholder text which is preferred over preceding with a label
+  - optionally includes a clear button (x in circle)
+  - can mask inputs like passwords
+  - can include images on leading and/or trailing sides
+  - can specify a keyboard type defined by the {% aTargetBlank
+    "https://developer.apple.com/documentation/uikit/uikeyboardtype",
+    "UIKeyboardType enum" %})
+  - SwiftUI creates this with `TextField`, `SecureField`,
+    and `TextEditor` (multi-line)
 
 ## Icons
 
