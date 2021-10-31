@@ -193,7 +193,9 @@ and how the described components map to SwiftUI views.
 
 ### Bars
 
-- Navigation Bars
+- {% aTargetBlank
+    "",
+    "Navigation Bars" %}
 
   - appears at top of screen below status bar
   - enables navigation through hierarchical screens
@@ -204,7 +206,9 @@ and how the described components map to SwiftUI views.
   - can use a Segmented Control in place of title
   - SwiftUI creates this with `NavigationView`
 
-- Search Bars
+- {% aTargetBlank
+    "",
+    "Search Bars" %}
 
   - an text input for entering search text
   - has magnifier glass icon
@@ -213,12 +217,16 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with `Text(...).searchable(text: ...)`
     (required to be inside a `NavigationView`?)
 
-- Side Bars
+- {% aTargetBlank
+    "",
+    "Side Bars" %}
 
   - leading navigation to top-level pages that is collapsable
   - SwiftUI creates this with TODO
 
-- Status Bars
+- {% aTargetBlank
+    "",
+    "Status Bars" %}
 
   - appears at top of screen above Navigation Bar
   - the system provided Status Bar displays the time on the left and indicators
@@ -226,13 +234,17 @@ and how the described components map to SwiftUI views.
   - can style to light or dark mode and customize colors
   - SwiftUI creates this with TODO
 
-- Tab Bars
+- {% aTargetBlank
+    "",
+    "Tab Bars" %}
 
   - used to navigate to top-level app sections (groups of related pages)
   - appears at bottom of screen
   - SwiftUI creates this with TODO
 
-- Toolbars
+- {% aTargetBlank
+    "",
+    "Toolbars" %}
 
   - contains buttons that perform page-specific actions
   - appears at bottom of screen
@@ -240,7 +252,9 @@ and how the described components map to SwiftUI views.
 
 ### Views
 
-- Action Sheets
+- {% aTargetBlank
+    "",
+    "Action Sheets" %}
 
   - alert that presents two or more choices related to the current context
   - on small screens, slides in from bottom
@@ -249,13 +263,17 @@ and how the described components map to SwiftUI views.
 
   - SwiftUI creates this with TODO
 
-- Activity Views
+- {% aTargetBlank
+    "",
+    "Activity Views" %}
 
   - set of activity buttons applicable in current context such as Copy, Add, or Find
   - appears as a Sheet or Popover
   - SwiftUI creates this with TODO
 
-- Alerts
+- {% aTargetBlank
+    "",
+    "Alerts" %}
 
   - modal dialog with a title, optional message,
     one or more buttons, and optional input text fields
@@ -263,7 +281,9 @@ and how the described components map to SwiftUI views.
   - minimize usage to important situations
   - SwiftUI creates this with `Button(...).alert(...)`
 
-- Collections
+- {% aTargetBlank
+    "",
+    "Collections" %}
 
   - manage an ordered set of content,
     like photos presented as a grid of thumbnails
@@ -272,19 +292,25 @@ and how the described components map to SwiftUI views.
   - swipe to scroll
   - SwiftUI creates this with TODO
 
-- Image Views
+- {% aTargetBlank
+    "",
+    "Image Views" %}
 
   - displays a single image or animated sequence
   - can fill entire display
   - SwiftUI creates this with TODO
 
-- Pages
+- {% aTargetBlank
+    "",
+    "Pages" %}
 
   - implements linear navigation between a set of related pages
     using either scrolling or page curl effects
   - SwiftUI creates this with TODO
 
-- Popovers
+- {% aTargetBlank
+    "",
+    "Popovers" %}
 
   - modal or non-modal dialog displayed in response to
     tapping a control or tapping in an area
@@ -294,7 +320,9 @@ and how the described components map to SwiftUI views.
   - avoid using on iPhones
   - SwiftUI creates this with TODO
 
-- Scroll Views
+- {% aTargetBlank
+    "",
+    "Scroll Views" %}
 
   - scrolls content larger than visible area
   - displays transient scrolling indicators
@@ -302,7 +330,9 @@ and how the described components map to SwiftUI views.
   - can support zooming
   - SwiftUI creates this with ScrollView
 
-- Sheets
+- {% aTargetBlank
+    "",
+    "Sheets" %}
 
   - a card that partially covers primary content
   - used to perform a task related to current context
@@ -311,7 +341,9 @@ and how the described components map to SwiftUI views.
   - modal by default
   - SwiftUI creates this with TODO
 
-- Split Views
+- {% aTargetBlank
+    "",
+    "Split Views" %}
 
   - presents hierarchical data with two or three columns:
     primary, supplementary, and content
@@ -323,7 +355,9 @@ and how the described components map to SwiftUI views.
     and content is the content of the selected email
   - SwiftUI creates this with TODO
 
-- Tables
+- {% aTargetBlank
+    "",
+    "Tables" %}
 
   - a scrolling, single-column or rows that are each divided into sections
   - can use for navigation in a Split View
@@ -332,18 +366,22 @@ and how the described components map to SwiftUI views.
   - TODO: Does iOS provide a data grid component?
   - SwiftUI creates this with TODO
 
-- {% aTargetBlank "https://developer.apple.com/design/human-interface-guidelines/ios/views/text-views/", "Text Views" %}
+- {% aTargetBlank
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/text-views/",
+    "Text Views" %}
 
   - multi-line styled text
   - optional scrolling
   - can control alignment, font, and color
-  - can be editable and if so can specify a keyboard type
+  - can be editable and if so can specify a keyboard type;
     (see the {% aTargetBlank
     "https://developer.apple.com/documentation/uikit/uikeyboardtype",
-    "UIKeyboardType enum" %).
+    "UIKeyboardType enum" %})
   - SwiftUI creates this with TODO
 
-- Web Views
+- {% aTargetBlank
+    "",
+    "Web Views" %}
 
   - renders embedded HTML or HTML from a web site
   - can enable forward and backward navigation
@@ -351,59 +389,87 @@ and how the described components map to SwiftUI views.
 
 ### Controls
 
-- Buttons
+- {% aTargetBlank
+    "",
+    "Buttons" %}
 
   - SwiftUI creates this with TODO
 
-- Color Wells
+- {% aTargetBlank
+    "",
+    "Color Wells" %}
 
   - SwiftUI creates this with TODO
 
-- Context Menus
+- {% aTargetBlank
+    "",
+    "Context Menus" %}
 
   - SwiftUI creates this with TODO
 
-- Edit Menus
+- {% aTargetBlank
+    "",
+    "Edit Menus" %}
 
   - SwiftUI creates this with TODO
 
-- Labels
+- {% aTargetBlank
+    "",
+    "Labels" %}
 
   - SwiftUI creates this with TODO
 
-- Page Controls
+- {% aTargetBlank
+    "",
+    "Page Controls" %}
 
   - SwiftUI creates this with TODO
 
-- Pickers
+- {% aTargetBlank
+    "",
+    "Pickers" %}
 
   - SwiftUI creates this with TODO
 
-- Progress Indicators
+- {% aTargetBlank
+    "",
+    "Progress Indicators" %}
 
   - SwiftUI creates this with TODO
 
-- Refresh Content Controls
+- {% aTargetBlank
+    "",
+    "Refresh Content Controls" %}
 
   - SwiftUI creates this with TODO
 
-- Segmented Controls
+- {% aTargetBlank
+    "",
+    "Segmented Controls" %}
 
   - SwiftUI creates this with TODO
 
-- Sliders
+- {% aTargetBlank
+    "",
+    "Sliders" %}
 
   - SwiftUI creates this with `Slider`
 
-- Steppers
+- {% aTargetBlank
+    "",
+    "Steppers" %}
 
   - SwiftUI creates this with `Stepper`
 
-- Switches
+- {% aTargetBlank
+    "",
+    "Switches" %}
 
   - SwiftUI creates this with `Toggle`
 
-- Text Fields
+- {% aTargetBlank
+    "",
+    "Text Fields" %}
 
   - SwiftUI creates this with `TextField`, `SecureField`, and `TextEditor`
 
