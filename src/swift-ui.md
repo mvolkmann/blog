@@ -194,7 +194,7 @@ and how the described components map to SwiftUI views.
 ### Bars
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/navigation-bars/",
     "Navigation Bars" %}
 
   - appears at top of screen below status bar
@@ -207,7 +207,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with `NavigationView`
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/search-bars/",
     "Search Bars" %}
 
   - an text input for entering search text
@@ -218,14 +218,14 @@ and how the described components map to SwiftUI views.
     (required to be inside a `NavigationView`?)
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/",
     "Side Bars" %}
 
   - leading navigation to top-level pages that is collapsable
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/",
     "Status Bars" %}
 
   - appears at top of screen above Navigation Bar
@@ -235,7 +235,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/tab-bars/",
     "Tab Bars" %}
 
   - used to navigate to top-level app sections (groups of related pages)
@@ -243,7 +243,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/toolbars/",
     "Toolbars" %}
 
   - contains buttons that perform page-specific actions
@@ -253,7 +253,7 @@ and how the described components map to SwiftUI views.
 ### Views
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/",
     "Action Sheets" %}
 
   - alert that presents two or more choices related to the current context
@@ -264,7 +264,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/activity-views/",
     "Activity Views" %}
 
   - set of activity buttons applicable in current context such as Copy, Add, or Find
@@ -272,7 +272,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/",
     "Alerts" %}
 
   - modal dialog with a title, optional message,
@@ -282,7 +282,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with `Button(...).alert(...)`
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/collections/",
     "Collections" %}
 
   - manage an ordered set of content,
@@ -293,7 +293,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/image-views/",
     "Image Views" %}
 
   - displays a single image or animated sequence
@@ -301,7 +301,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/pages/",
     "Pages" %}
 
   - implements linear navigation between a set of related pages
@@ -309,7 +309,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/popovers/",
     "Popovers" %}
 
   - modal or non-modal dialog displayed in response to
@@ -321,7 +321,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/scroll-views/",
     "Scroll Views" %}
 
   - scrolls content larger than visible area
@@ -331,7 +331,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with ScrollView
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/sheets/",
     "Sheets" %}
 
   - a card that partially covers primary content
@@ -342,7 +342,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/split-views/",
     "Split Views" %}
 
   - presents hierarchical data with two or three columns:
@@ -356,7 +356,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/tables/",
     "Tables" %}
 
   - a scrolling, single-column or rows that are each divided into sections
@@ -380,7 +380,7 @@ and how the described components map to SwiftUI views.
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/views/web-views/",
     "Web Views" %}
 
   - renders embedded HTML or HTML from a web site
@@ -390,85 +390,85 @@ and how the described components map to SwiftUI views.
 ### Controls
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/buttons/",
     "Buttons" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/color-wells/",
     "Color Wells" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/context-menus/",
     "Context Menus" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/edit-menus/",
     "Edit Menus" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/labels/",
     "Labels" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/page-controls/",
     "Page Controls" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/",
     "Pickers" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/progress-indicators/",
     "Progress Indicators" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/refresh-content-controls/",
     "Refresh Content Controls" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/segmented-controls/",
     "Segmented Controls" %}
 
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/sliders/",
     "Sliders" %}
 
   - SwiftUI creates this with `Slider`
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/steppers/",
     "Steppers" %}
 
   - SwiftUI creates this with `Stepper`
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/switches/",
     "Switches" %}
 
   - SwiftUI creates this with `Toggle`
 
 - {% aTargetBlank
-    "",
+    "https://developer.apple.com/design/human-interface-guidelines/ios/controls/text-fields/",
     "Text Fields" %}
 
   - SwiftUI creates this with `TextField`, `SecureField`, and `TextEditor`
