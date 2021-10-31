@@ -178,6 +178,178 @@ loads the app in the Simulator, and starts it.
 The app is not automatically updates when code changes are saved.
 The triangle must be clicked again to repeat the whole build/load/start process.
 
+## Apple Human Interface Guidelines (HIG)
+
+Apple documents guidelines for building user interfaces at {% aTargetBlank
+"https://developer.apple.com/design/human-interface-guidelines/",
+"Human Interface Guidelines" %}.
+This includes recommendations for macOS, iOS, watchOS, and tvOS
+user interfaces.
+
+The guidelines for iOS are divided into several categories,
+three of which are Bars, Views, and Controls.
+The following summarizes what is found in those sections
+and how the described components map to SwiftUI views.
+
+### Bars
+
+- Navigation Bars
+
+  - appears at top of screen below status bar
+  - enables navigation through hierarchical screens
+  - provides leading back button
+  - can have trailing buttons like Edit and Done
+  - can have a tint color
+  - can have an inline or large title
+  - can use a Segmented Control in place of title
+  - SwiftUI creates this with `NavigationView`
+
+- Search Bars
+
+  - an text input for entering search text
+  - has magnifier glass icon
+  - can display in a Navigation Bar
+  - can include clear and confirm buttons
+  - SwiftUI creates this with `Text(...).searchable(text: ...)`
+    (required to be inside a `NavigationView`?)
+
+- Side Bars
+
+  - leading navigation to top-level pages that is collapsable
+  - SwiftUI creates this with TODO
+
+- Status Bars
+
+  - appears at top of screen above Navigation Bar
+  - the system provided Status Bar displays the time on the left and indicators
+    for cell strength, WiFi strength, and batter remaining on the right
+  - can style to light or dark mode and customize colors
+  - SwiftUI creates this with TODO
+
+- Tab Bars
+
+  - used to navigate to top-level app sections (groups of related pages)
+  - appears at bottom of screen
+  - SwiftUI creates this with TODO
+
+- Toolbars
+
+  - contains buttons that perform page-specific actions
+  - appears at bottom of screen
+  - SwiftUI creates this with TODO
+
+### Views
+
+- Action Sheets
+
+  - SwiftUI creates this with TODO
+
+- Activity Views
+
+  - SwiftUI creates this with TODO
+
+- Alerts
+
+  - SwiftUI creates this with TODO
+
+- Collections
+
+  - SwiftUI creates this with TODO
+
+- Image Views
+
+  - SwiftUI creates this with TODO
+
+- Pages
+
+  - SwiftUI creates this with TODO
+
+- Popovers
+
+  - SwiftUI creates this with TODO
+
+- Scroll Views
+
+  - SwiftUI creates this with TODO
+
+- Sheets
+
+  - SwiftUI creates this with TODO
+
+- Split Views
+
+  - SwiftUI creates this with TODO
+
+- Tables
+
+  - SwiftUI creates this with TODO
+
+- Text Views
+
+  - SwiftUI creates this with TODO
+
+- Web Views
+
+  - SwiftUI creates this with TODO
+
+### Controls
+
+- Buttons
+
+  - SwiftUI creates this with TODO
+
+- Color Wells
+
+  - SwiftUI creates this with TODO
+
+- Context Menus
+
+  - SwiftUI creates this with TODO
+
+- Edit Menus
+
+  - SwiftUI creates this with TODO
+
+- Labels
+
+  - SwiftUI creates this with TODO
+
+- Page Controls
+
+  - SwiftUI creates this with TODO
+
+- Pickers
+
+  - SwiftUI creates this with TODO
+
+- Progress Indicators
+
+  - SwiftUI creates this with TODO
+
+- Refresh Content Controls
+
+  - SwiftUI creates this with TODO
+
+- Segmented Controls
+
+  - SwiftUI creates this with TODO
+
+- Sliders
+
+  - SwiftUI creates this with `Slider`
+
+- Steppers
+
+  - SwiftUI creates this with `Stepper`
+
+- Switches
+
+  - SwiftUI creates this with `Toggle`
+
+- Text Fields
+
+  - SwiftUI creates this with `TextField`, `SecureField`, and `TextEditor`
+
 ## Icons
 
 {% aTargetBlank "https://developer.apple.com/sf-symbols/", "SF Symbols" %}
@@ -608,6 +780,7 @@ descriptions of `LazyHStack` and `LazyVStack`.
 - `List`
 
 This displays a list of views in a single column.
+It also acts like `ForEach` for iterating over array elements.
 
 The following example demonstrates using a `List` inside a `NavigationView`
 to enable selecting ids of the objects represented by the rows.
@@ -1731,15 +1904,13 @@ struct ContentView: View {
     ]
 
     func foodList(selected: Bool) -> some View {
-        List {
-            ForEach(foods) { food in
-                if food.selected == selected {
-                    Text(food.name)
-                        .matchedGeometryEffect(id: food.id, in: foodNS)
-                        .onTapGesture {
-                            withAnimation { toggle(food: food) }
-                        }
-                }
+        List(foods) { food in
+            if food.selected == selected {
+                Text(food.name)
+                    .matchedGeometryEffect(id: food.id, in: foodNS)
+                    .onTapGesture {
+                        withAnimation { toggle(food: food) }
+                    }
             }
         }
     }

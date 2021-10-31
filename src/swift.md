@@ -3460,6 +3460,10 @@ the features of Swift that are annoying, at least in my opinion.
 
   Examples include:
 
+  - `convenience` keyword on `init` methods
+
+    Why is this even necessary?
+
   - `localizedDescription`
 
     This is an `Error` property that could have been named `message`.
@@ -3558,3 +3562,6 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Why do `Picker` views appear to be disabled
   unless they are wrapped in a `NavigationView` and a `Form`?
+
+- How can I make all new Xcode projects default to iOS 15?
+  Currently they default to iOS 14.
