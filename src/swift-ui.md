@@ -242,54 +242,111 @@ and how the described components map to SwiftUI views.
 
 - Action Sheets
 
+  - alert that presents two or more choices related to the current context
+  - on small screens, slides in from bottom
+  - on large screens, appears as a Popover
+  - can use to request confirmation before a destructive operation
+
   - SwiftUI creates this with TODO
 
 - Activity Views
 
+  - set of activity buttons applicable in current context such as Copy, Add, or Find
+  - appears as a Sheet or Popover
   - SwiftUI creates this with TODO
 
 - Alerts
 
-  - SwiftUI creates this with TODO
+  - modal dialog with a title, optional message,
+    one or more buttons, and optional input text fields
+  - avoid having more than two buttons
+  - minimize usage to important situations
+  - SwiftUI creates this with `Button(...).alert(...)`
 
 - Collections
 
+  - manage an ordered set of content,
+    like photos presented as a grid of thumbnails
+  - tap an item to select
+  - touch and hold an item to edit
+  - swipe to scroll
   - SwiftUI creates this with TODO
 
 - Image Views
 
+  - displays a single image or animated sequence
+  - can fill entire display
   - SwiftUI creates this with TODO
 
 - Pages
 
+  - implements linear navigation between a set of related pages
+    using either scrolling or page curl effects
   - SwiftUI creates this with TODO
 
 - Popovers
 
+  - modal or non-modal dialog displayed in response to
+    tapping a control or tapping in an area
+  - typically renders a "tail" pointing to what triggered it
+  - can contain many kinds of elements including
+    Navigation Bars, Toolbars, Tab Bars, and more
+  - avoid using on iPhones
   - SwiftUI creates this with TODO
 
 - Scroll Views
 
-  - SwiftUI creates this with TODO
+  - scrolls content larger than visible area
+  - displays transient scrolling indicators
+  - can operation in paging mode
+  - can support zooming
+  - SwiftUI creates this with ScrollView
 
 - Sheets
 
+  - a card that partially covers primary content
+  - used to perform a task related to current context
+  - top corners are rounded and can customize radius
+  - two available heights, large (default) and medium
+  - modal by default
   - SwiftUI creates this with TODO
 
 - Split Views
 
+  - presents hierarchical data with two or three columns:
+    primary, supplementary, and content
+  - selections in primary cause changes in supplementary
+  - selections in supplementary cause changes in content
+  - highlight current selections
+  - used in Mail app where primary is a list of mailboxes,
+    supplementary is a list of messages in the selected mailbox,
+    and content is the content of the selected email
   - SwiftUI creates this with TODO
 
 - Tables
 
+  - a scrolling, single-column or rows that are each divided into sections
+  - can use for navigation in a Split View
+  - three styles: plain, grouped, and inset grouped
+  - not a data grid like in other UI frameworks
+  - TODO: Does iOS provide a data grid component?
   - SwiftUI creates this with TODO
 
-- Text Views
+- {% aTargetBlank "https://developer.apple.com/design/human-interface-guidelines/ios/views/text-views/", "Text Views" %}
 
+  - multi-line styled text
+  - optional scrolling
+  - can control alignment, font, and color
+  - can be editable and if so can specify a keyboard type
+    (see the {% aTargetBlank
+    "https://developer.apple.com/documentation/uikit/uikeyboardtype",
+    "UIKeyboardType enum" %).
   - SwiftUI creates this with TODO
 
 - Web Views
 
+  - renders embedded HTML or HTML from a web site
+  - can enable forward and backward navigation
   - SwiftUI creates this with TODO
 
 ### Controls
