@@ -1091,22 +1091,27 @@ struct ContentView: View {
 
 - `Button`
 
+  The content of a `Button` can be specified in two ways,
+  passing a `String` as the first argument or using the `label` argument
+  which can be specified with a trailing closure.
+
+  `Button` specify a function to call when pressed using the `action` argument
+  which can also be written as a trailing closure.
+
   By default buttons have no background color and the text is the accent color.
-  When their role attribute is set to `.destructive`, the text is red.
-  When their role attribute is set to `.cancel`, `.none`, or not specified,
+  When their `role` attribute is set to `.destructive`, the text is red.
+  When their `role` attribute is set to `.cancel`, `.none`, or not specified,
   there is no visible change.
   When the `buttonStyle` view modifier is passed `.bordered`,
   the background is gray.
   When the `buttonStyle` view modifier is passed `.borderProminent`,
   the background is the accent color and the text is white.
 
-  Here are two ways to create a `Button`.
-
   ```swift
   // Button containing text and action specified with a trailing closure.
-  Button("My Label") {
+  Button("My Label", role: .destructive) {
       // code to run when button is pressed
-  }
+  }.buttonStyle(.borderProminent)
 
   // Button with an "action" argument whose value
   // can be a closure or a function reference
