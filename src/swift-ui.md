@@ -1086,6 +1086,7 @@ struct ContentView: View {
 
   Icons from SF Symbols can be used by specifying
   their name as the `systemName` argument.
+  For example, `Image(systemName: "cloud.snow")`.
 
 - `AsyncImage`
 
@@ -1205,6 +1206,14 @@ struct ContentView: View {
   ```
 
 - `Label`
+
+  This is a combination of an icon and text.
+  The icon appears before the text.
+
+  ```swift
+  Label("Rain", systemImage: "cloud.rain")
+  ```
+
 - `ProgressView`
 - `Gauge`
 
