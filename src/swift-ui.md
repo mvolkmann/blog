@@ -454,7 +454,7 @@ and how the described components map to SwiftUI views.
   - can handle any number of pages
   - image for current page is highlighted
   - can customize images
-  - TODO: SwiftUI many not support this yet.
+  - TODO: SwiftUI may not support this yet.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/",
@@ -478,7 +478,8 @@ and how the described components map to SwiftUI views.
 
   - becomes visible when a user pulls down on a view to request a content reload
   - usually used in a table view
-  - SwiftUI creates this with TODO
+  - SwiftUI creates this with the `refreshable` view modifier
+    which is often used on `List` views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/segmented-controls/",
@@ -488,6 +489,7 @@ and how the described components map to SwiftUI views.
   - can use in place of web UI radio buttons
   - can use to select between different kinds of views
   - SwiftUI creates this with `Picker(...).pickerStyle(.segmented)`
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/sliders/",
@@ -975,6 +977,10 @@ It also acts like `ForEach` for iterating over array elements.
 
 The following example demonstrates using a `List` inside a `NavigationView`
 to enable selecting ids of the objects represented by the rows.
+To select rows, tap "Edit" in the upper-right corner.
+
+This also demonstrates implementing "pull to refresh"
+using the `refreshable` view modifier.
 
 ```swift
 struct ContentView: View {
@@ -985,7 +991,7 @@ struct ContentView: View {
         var description: String { "\(name) - \(breed)" }
     }
 
-    private var dogs = [
+    @State private var dogs = [
         Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
         Dog(name: "Ramsay", breed: "Native American Indian Dog"),
         Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
@@ -993,6 +999,17 @@ struct ContentView: View {
     ]
 
     @State private var selectedIds = Set<UUID>()
+
+    func loadMore() async {
+        // This calls a REST service that returns nothing after 2 seconds.
+        let url = URL(string: "https://httpbin.org/delay/2")!
+        let request = URLRequest(url: url)
+        // Not using return value.
+        let _ = try! await URLSession.shared.data(for: request)
+
+        dogs.append(Dog(name: "Clarice", breed: "Whippet"))
+        dogs.append(Dog(name: "Vixen", breed: "Whippet"))
+    }
 
     var body: some View {
         VStack {
@@ -1009,7 +1026,7 @@ struct ContentView: View {
                 // The EditButton in the toolbar toggles
                 // the edit mode of the NavigationView.
                 .toolbar { EditButton() }
-            }
+            }.refreshable { await loadMore() }
             Text("\(selectedIds.count) selections")
         }
     }
@@ -1287,6 +1304,10 @@ struct ContentView: View {
   ```
 
 - `Gauge`
+
+  This shows a current value in relation to minimum and maximum values.
+  One example is a car fuel gauge.
+  This is currently only supported in watchOS.
 
 - `EmptyView`
 - `EquatableView`
