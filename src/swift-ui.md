@@ -469,7 +469,7 @@ and how the described components map to SwiftUI views.
 
   - informs users that an activity is running in the background
   - can indicate how much longer it will run using a progress bar
-  - "activity indicators" are for indeterminant activities
+  - "activity indicators" are for indeterminate activities
   - SwiftUI creates this with `ProgressView`.
 
 - {% aTargetBlank
@@ -1254,6 +1254,8 @@ struct ContentView: View {
 - `ProgressView`
 
   This displays a progress indicator.
+  The indeterminate style uses the standard Apple spinner.
+  The determinate style uses a thin progress bar.
 
   ```swift
   struct ContentView: View {
