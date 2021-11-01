@@ -615,6 +615,14 @@ For example, `myView.frame(maxWidth: .infinity)`.
 In can also be useful to specify the height.
 For example, `myView.frame(maxWidth: .infinity, height: 100)`.
 
+Many views utilize the app accent color, also referred to as "global tint".
+To set this, select the `Assets.xcassets` file in the Navigator,
+select "AccentColor", click the "Universal" swatch,
+and click the "Color" dropdown in the Inspector.
+Resume Preview to see the change.
+This does not affect `Toggle` views which required using the view modifier
+`.toggleStyle(SwitchToggleStyle(tint: someColor))`.
+
 ### ViewBuilders
 
 Combiner views can be passed a special kind of closure
@@ -1082,6 +1090,15 @@ struct ContentView: View {
 - `AsyncImage`
 
 - `Button`
+
+  By default buttons have no background color and the text is the accent color.
+  When their role attribute is set to `.destructive`, the text is red.
+  When their role attribute is set to `.cancel`, `.none`, or not specified,
+  there is no visible change.
+  When the `buttonStyle` view modifier is passed `.bordered`,
+  the background is gray.
+  When the `buttonStyle` view modifier is passed `.borderProminent`,
+  the background is the accent color and the text is white.
 
   Here are two ways to create a `Button`.
 
