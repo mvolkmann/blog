@@ -436,7 +436,8 @@ and how the described components map to SwiftUI views.
     occurs in a text field, text view, web view, or image view
   - by default contains buttons for Cut, Copy, Paste, Select, Select All, Delete, Replace..., Loop Up, and Share...
   - can disable any of the default buttons to remove them
-  - SwiftUI creates this with TODO
+  - SwiftUI provides this automatically when a long press occurs
+    in a `TextField` or `TextEditor`.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/labels/",
@@ -453,7 +454,7 @@ and how the described components map to SwiftUI views.
   - can handle any number of pages
   - image for current page is highlighted
   - can customize images
-  - SwiftUI creates this with TODO
+  - TODO: SwiftUI many not support this yet.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/",
@@ -469,7 +470,7 @@ and how the described components map to SwiftUI views.
   - informs users that an activity is running in the background
   - can indicate how much longer it will run using a progress bar
   - "activity indicators" are for indeterminant activities
-  - SwiftUI creates this with TODO
+  - SwiftUI creates this with `ProgressView`.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/refresh-content-controls/",
@@ -1192,17 +1193,53 @@ struct ContentView: View {
   clicked to decrement and increment a value.
 
 - `Picker`
+
+  This allows selecting an option from a list.
+  It displays the currently selected value.
+  Tapping it popups up a list of all the options
+  from which a new value can be selected.
+
+  ```swift
+  @State var shirtSize: ShirtSize = .sm
+
+  enum ShirtSize: String, CaseIterable {
+      case sm = "Small"
+      case md = "Medium"
+      case lg = "Large"
+      case xl = "Extra Large"
+  }
+
+  var body: some View {
+      Picker("Shirt Size", selection: $shirtSize) {
+          ForEach(ShirtSize.allCases, id: \.self) { size in
+              Text("\(size.rawValue)").tag(size)
+          }
+      }
+  }
+  ```
+
 - `DatePicker`
+
+  This allows selecting a date, time, or both.
+
+  ```swift
+  DatePicker(
+      "Birthday",
+      selection: $birthday, // a binding
+      displayedComponents: [.date, .hourAndMinute] // array or single value
+  )
+  ```
+
 - `ColorPicker`
 
   This renders a color well for displaying a currently selected color
   and changing the color using the system color picker.
 
   ```swift
-      ColorPicker(
-          "Favorite Color",
-          selection: $favoriteColor // a binding
-      )
+  ColorPicker(
+      "Favorite Color",
+      selection: $favoriteColor // a binding
+  )
   ```
 
 - `Label`
@@ -1215,6 +1252,38 @@ struct ContentView: View {
   ```
 
 - `ProgressView`
+
+  This displays a progress indicator.
+
+  ```swift
+  struct ContentView: View {
+      @State var progress = 0.0
+
+      func startTimer() {
+          // Run every 3 hundredths of a second.
+          // When "repeats" is false, this is like setTimeout in JavaScript.
+          // When "repeats" is true, this is like setInterval in JavaScript.
+          Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
+              progress += 0.01
+              if (progress >= 1) {
+                  timer.invalidate()
+                  progress = 0
+              }
+          }
+      }
+
+      var body: some View {
+          VStack {
+              if progress > 0 {
+                  ProgressView() // indeterminate
+                  ProgressView(value: progress).padding() // determinate
+              }
+          }
+          .onAppear { startTimer() }
+      }
+  }
+  ```
+
 - `Gauge`
 
 - `EmptyView`
