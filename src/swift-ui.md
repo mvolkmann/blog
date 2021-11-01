@@ -205,6 +205,7 @@ and how the described components map to SwiftUI views.
   - can have an inline or large title
   - can use a Segmented Control in place of title
   - SwiftUI creates this with `NavigationView`
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/search-bars/",
@@ -516,13 +517,12 @@ and how the described components map to SwiftUI views.
   - can set tint to match app theme
   - usually used in table rows with a label on the leading side
   - SwiftUI creates this with `Toggle`
-    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/text-fields/",
     "Text Fields" %}
 
-  - single line text input with fixed height
+  - single-line text input with fixed height
   - usually has rounded corners
   - brings up on-screen keyboard when tapped
   - can contain placeholder text which is preferred over preceding with a label
@@ -1088,8 +1088,74 @@ struct ContentView: View {
   ```
 
 - `TextField`
+
+  This provides single-line text entry.
+  It also works with non-String types using a `FormatStyle` object
+  to convert between `String` values and the type.
+  It takes label text, a binding to a variable, and an optional prompt.
+  In macOS apps, the label precedes the input area
+  and the prompt is used as placeholder text.
+  In iOS apps, no text precedes the input area
+  and the prompt or label is used as placeholder text.
+
+  The style can be set with the `textFieldStyle` view modifier.
+  The options are `plain` (default) and `roundedBorder`.
+  When the `plain` style is used, it's not obvious that the value can be edited.
+
+  Auto-capitalization of words is provided by default.
+  To disable this, pass `.none` to the `autocapitalization` view modifier.
+
+  Auto-correction is provided by default.
+  To disable this, pass `true` to the `disableAutocorrection` view modifier.
+
+  ```swift
+  // No prompt
+  TextField("First Name", text: $firstName).padding()
+
+  // Prompt specified
+  TextField(text: $lastName, prompt: Text("Required")) {
+      Text("Last Name")
+  }
+  .textFieldStyle(.roundedBorder)
+  .padding()
+
+  // Using a non-String value (Int)
+  // This doesn't provided arrows to increment and decrement the value
+  // and it doesn't prevent typing non-digit characters.
+  TextField("Score", value: $score, format: .number).padding()
+  ```
+
 - `SecureField`
+
+  This is like `TextField`, but obscures the characters that are typed.
+  It is typically used for sensitive data like
+  passwords and social security numbers.
+
+  ```swift
+  SecureField("Password", text: $password)
+      .autocapitalization(.none)
+      .disableAutocorrection(true)
+  ```
+
 - `TextEditor`
+
+  This provides multi-line text entry.
+  The number of lines can be limited,
+  but it seems the limit is only enforced on initial render.
+  It doesn't prevent more lines from being
+  displayed if the user types more text.
+  Use the `frame` view modifier to set the size.
+
+  ```swift
+  let lines = 3
+  TextEditor(text: $reasonForVisit)
+      .lineLimit(lines)
+      .frame(width: .infinity, height: CGFloat(lines * 24))
+      .overlay(
+          RoundedRectangle(cornerRadius: 5)
+              .stroke(Color(UIColor.lightGray))
+      )
+  ```
 
 - `Image`
 
@@ -1204,7 +1270,29 @@ struct ContentView: View {
 
 - `Toggle`
 
-  TODO: Add this detail.
+  This enables toggling between on and off states.
+  By default it renders as a switch with a circular thumb.
+
+  The app accent color does not affect switch-style rendering.
+  To change the color of the switch background,
+  use the `toggleStyle` view modifier to specify a tint.
+
+  A `Toggle` can also render as a button whose
+  color indicates whether it is off or on.
+  When it is off, the button background color is clear
+  and the text is the accent color.
+  When it is on, the button background color is the accent color
+  and the text is white.
+
+  The `Toggle` initializer takes a `String` to render
+  (either before the switch or inside the button)
+  and binding to a `Bool` value.
+
+  ```swift
+  Toggle("Hungry", isOn: $hungry).toggleStyle(SwitchToggleStyle(tint: .red))
+
+  Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
+  ```
 
 - `Slider`
 
