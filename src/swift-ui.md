@@ -489,7 +489,6 @@ and how the described components map to SwiftUI views.
   - can use in place of web UI radio buttons
   - can use to select between different kinds of views
   - SwiftUI creates this with `Picker(...).pickerStyle(.segmented)`
-    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/sliders/",
@@ -497,7 +496,7 @@ and how the described components map to SwiftUI views.
 
   - a horizontal track with a thumb that
     slides between minimum and maximum values
-  - can display icons on leading and trailing ends
+  - can display text and/or icons on leading and trailing ends
   - SwiftUI creates this with `Slider`
 
 - {% aTargetBlank
@@ -517,6 +516,7 @@ and how the described components map to SwiftUI views.
   - can set tint to match app theme
   - usually used in table rows with a label on the leading side
   - SwiftUI creates this with `Toggle`
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/text-fields/",
@@ -873,7 +873,7 @@ Here are the combiner views that are provided by SwiftUI.
       var isEditing = false
 
       var body: some View {
-          NavigationView { // Pickers will be disabled without this!
+          NavigationView {
               Form {
                   Section(header: Text("Profile")) {
                       TextField("Name", text: $name)
@@ -1203,18 +1203,65 @@ struct ContentView: View {
   ```
 
 - `Toggle`
+
+  TODO: Add this detail.
+
 - `Slider`
+
+  This renders a horizontal track with a thumb that
+  slides between minimum and maximum values.
+  Text and/or icons can be displayed at the leading and trailing ends.
+
+  ```swift
+  // No text or icons at ends.
+  Slider(value: $rating, in: 0...10, step: 1)
+
+  // Has text at ends and displays current value below.
+  VStack {
+      Slider(
+          value: $rating,
+          in: 0...10,
+          step: 1,
+          label: { Text("Rating") }, // not rendered
+          // The next two attributes must be closures that return the
+          // same kind of view.  Image and Text are common choices.
+          minimumValueLabel: { Image(systemName: "hand.thumbsdown") },
+          maximumValueLabel: { Image(systemName: "hand.thumbsup") }
+      ).padding()
+      Text("rating = \(Int(rating))")
+  }
+  ```
+
 - `Stepper`
 
   This displays "-" and "+" buttons that can be
-  clicked to decrement and increment a value.
+  tapped to decrement and increment a value.
+  It takes a label to display before the buttons,
+  a binding for the current value,
+  an optional range the value must remain inside, and
+  a closure to execute every time the `Stepper` changes the value.
+
+  ```swift
+  Stepper(
+      "# of Dogs: \(dogCount)",
+      value: $dogCount,
+      in: 0...10
+  ) { v in
+      tooManyDogs = dogCount > 2
+  }
+  ```
 
 - `Picker`
 
   This allows selecting an option from a list.
-  It displays the currently selected value.
+  By default, it displays the currently selected value.
   Tapping it popups up a list of all the options
   from which a new value can be selected.
+
+  Adding the `.pickerStyle(.segmented)` view modifier
+  changes it to be a "segmented control"
+  that looks like a horizontal series of buttons,
+  one for each option.
 
   ```swift
   @State var shirtSize: ShirtSize = .sm
@@ -1231,7 +1278,7 @@ struct ContentView: View {
           ForEach(ShirtSize.allCases, id: \.self) { size in
               Text("\(size.rawValue)").tag(size)
           }
-      }
+      } // .pickerStyle(.segmented)
   }
   ```
 
@@ -2518,7 +2565,8 @@ struct ContentView: View {
             HStack {
                 Stepper(
                     "# of Dogs: \(dogCount)",
-                    value: $dogCount, in: 0...10
+                    value: $dogCount,
+                    in: 0...10
                 ) { v in
                     tooManyDogs = dogCount > 2
                 }
