@@ -423,7 +423,7 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/context-menus/",
     "Context Menus" %}
 
-  - displays a menu of context-sensitive items when an item is long pressed
+  - displays a menu of context-sensitive items when the menu label is tapped
   - can contain sub-menus
   - can include separators to group options
   - SwiftUI creates this with `Menu`
@@ -1144,6 +1144,45 @@ struct ContentView: View {
 
 - `Menu`
 
+  This renders a label containing the menu title.
+  When clicked, a menu appears below the label
+  containing a vertical stack of buttons and sub-menus.
+  Include `Divider` views to separate groups of menu items.
+
+  The order of the buttons depends on the position of the menu.
+  If it is near the bottom of the display,
+  the button order is reversed in order to make all the buttons visible
+  and keep the first button close to the label.
+
+  ```swift
+  Menu("My Menu") {
+      Button("Option 1", action: {})
+      Button("Option 2", action: {})
+      Menu("Option 3") {
+          Button("Option 3.1", action: {})
+          Button("Option 3.2", action: {})
+      }
+  }
+  ```
+
+  The following example uses a `Menu` to
+  select the color uses to fill a `Rectangle`.
+
+  ```swift
+  @State var color = Color.red
+
+  var body: some View {
+      VStack {
+          Menu("Color") {
+              Button("Red") { color = .red }
+              Button("Green") { color = .green }
+              Button("Blue") { color = .blue }
+          }
+          Rectangle().fill(color).frame(width: 50, height: 50)
+      }
+  }
+  ```
+
 - `Toggle`
 - `Slider`
 - `Stepper`
@@ -1154,6 +1193,16 @@ struct ContentView: View {
 - `Picker`
 - `DatePicker`
 - `ColorPicker`
+
+  This renders a color well for displaying a currently selected color
+  and changing the color using the system color picker.
+
+  ```swift
+      ColorPicker(
+          "Favorite Color",
+          selection: $favoriteColor // a binding
+      )
+  ```
 
 - `Label`
 - `ProgressView`
