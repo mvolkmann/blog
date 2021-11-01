@@ -279,7 +279,9 @@ and how the described components map to SwiftUI views.
     one or more buttons, and optional input text fields
   - avoid having more than two buttons
   - minimize usage to important situations
-  - SwiftUI creates this with `Button(...).alert(...)`
+  - SwiftUI creates this with the `alert` method
+    that can be called on any kind of view.
+    See the "Alerts" section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/collections/",
@@ -1123,6 +1125,10 @@ struct ContentView: View {
 - `Toggle`
 - `Slider`
 - `Stepper`
+
+  This displays "-" and "+" buttons that can be
+  clicked to decrement and increment a value.
+
 - `Picker`
 - `DatePicker`
 - `ColorPicker`
@@ -2309,6 +2315,71 @@ struct ContentView_Previews: PreviewProvider {
 TODO: Add information about the @EnvironmentObject property wrapper
 TODO: which is used to share data between views.
 TODO: See https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views
+
+## Alerts
+
+Alerts are simple modal dialogs that contain
+a title, an optional message, and buttons.
+They are defined using the `alert` method
+that can be chained onto any view.
+They are displayed when a given binding is set to true.
+
+The buttons to display are described in the `actions` argument.
+Like any button, these can have associated actions.
+
+When there are more than two buttons,
+they are stacked vertically.
+Otherwise they are placed on one row.
+
+If no buttons are provided, a default "OK" button
+with a role of `.cancel` is provided.
+
+```swift
+struct ContentView: View {
+    @State var dogCount = 0
+    @State var pressed = false
+    @State var tooManyDogs = false
+
+    var body: some View {
+        VStack {
+            Button("Press Me") { pressed = true }
+            HStack {
+                Stepper(
+                    "# of Dogs: \(dogCount)",
+                    value: $dogCount, in: 0...10
+                ) { v in
+                    tooManyDogs = dogCount > 2
+                }
+            }.padding()
+        }
+        .alert(
+            "My Title",
+            isPresented: $pressed,
+            actions: {}, // no custom buttons
+            message: {
+                Text("My Message")
+            }
+        )
+        .alert(
+            "Dog Alert",
+            isPresented: $tooManyDogs,
+            actions: {
+                Button("OK") {
+                    print("pressed OK")
+                }
+                Button("Keep") {
+                    print("pressed Keep")
+                }
+            },
+            message: {
+                // Can only have a single Text view here,
+                // not any kind of View!
+                Text("You have too many dogs!")
+            }
+        )
+    }
+}
+```
 
 ## Modal Dialogs
 
