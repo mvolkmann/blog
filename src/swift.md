@@ -850,30 +850,30 @@ print(name[start...end]) // "ar"
 
 `String` instance methods include, but are not limited to the following:
 
-| Method                                       | Description                                                   |
-| -------------------------------------------- | ------------------------------------------------------------- |
-| `append(Character)`                          | appends a given `Character` to the receiver                   |
-| `append(String)`                             | appends a given `String` to the receiver                      |
-| `contains(Character) -> Bool`                | determines if receiver contains a given character             |
-| `dropFirst(Int) -> Substring`                | returns substring not including first n characters            |
-| `dropLast(Int) -> Substring`                 | returns substring not including last n characters             |
-| `firstIndex(of: Character or String) -> Int` | returns index of first occurrence of a character or substring |
-| `hasPrefix(String) -> Bool`                  | determines if receiver begins with a substring                |
-| `hasSuffix(String) -> Bool`                  | determines if receiver ends with a substring                  |
-| `insert(Character, at: index)`               | inserts a given `Character` in the receiver                   |
-| `lowercased() -> String`                     | returns lowercase version                                     |
-| `popLast() -> Character?`                    | removes and returns last character                            |
-| `prefix(Int) -> Substring`                   | returns first n characters                                    |
-| `remove(at: index)`                          | removes and returns the character at a given index            |
-| `removeAll()`                                | removes all characters                                        |
-| `removeFirst([n])`                           | removes first n characters, defaulting to 1                   |
-| `removeLast([n])`                            | removes last n characters, defaulting to 1                    |
-| `removeSubrange(Range)`                      | removes characters in `Range`                                 |
-| `replaceSubrange(Range, with: String)`       | replaces characters in a given range                          |
-| `split(separator: Character) -> [Substring]` | returns `Array` of substrings delimited by a given character  |
-| `sorted() -> [Character]`                    | returns `Array` of characters in sorted order                 |
-| `suffix(Int) -> Substring`                   | returns last n characters                                     |
-| `uppercased() -> String`                     | returns uppercase version                                     |
+| Method                                       | Description                                                    |
+| -------------------------------------------- | -------------------------------------------------------------- |
+| `append(Character)`                          | appends a given `Character` to the receiver                    |
+| `append(String)`                             | appends a given `String` to the receiver                       |
+| `contains(Character or String) -> Bool`      | determines if receiver contains a given character or substring |
+| `dropFirst(Int) -> Substring`                | returns substring not including first n characters             |
+| `dropLast(Int) -> Substring`                 | returns substring not including last n characters              |
+| `firstIndex(of: Character or String) -> Int` | returns index of first occurrence of a character or substring  |
+| `hasPrefix(String) -> Bool`                  | determines if receiver begins with a substring                 |
+| `hasSuffix(String) -> Bool`                  | determines if receiver ends with a substring                   |
+| `insert(Character, at: index)`               | inserts a given `Character` in the receiver                    |
+| `lowercased() -> String`                     | returns lowercase version                                      |
+| `popLast() -> Character?`                    | removes and returns last character                             |
+| `prefix(Int) -> Substring`                   | returns first n characters                                     |
+| `remove(at: index)`                          | removes and returns the character at a given index             |
+| `removeAll()`                                | removes all characters                                         |
+| `removeFirst([n])`                           | removes first n characters, defaulting to 1                    |
+| `removeLast([n])`                            | removes last n characters, defaulting to 1                     |
+| `removeSubrange(Range)`                      | removes characters in `Range`                                  |
+| `replaceSubrange(Range, with: String)`       | replaces characters in a given range                           |
+| `split(separator: Character) -> [Substring]` | returns `Array` of substrings delimited by a given character   |
+| `sorted() -> [Character]`                    | returns `Array` of characters in sorted order                  |
+| `suffix(Int) -> Substring`                   | returns last n characters                                      |
+| `uppercased() -> String`                     | returns uppercase version                                      |
 
 Getting the character at a given index requires using the `index` method
 which makes if quite verbose.
@@ -3236,7 +3236,8 @@ surround it with `#if targetEnvironment(simulator) ... #endif`.
 
 ## Tools
 
-To format Swift code in Xcode, select the lines to be formatted (cmd-a for all)
+To fix Swift code indentation in Xcode,
+select the lines to be fixed (cmd-a for all)
 and press ctrl-i which is the keyboard shortcut
 for Editor ... Structure ... Re-Indent.
 The default code indentation is four spaces.
@@ -3247,10 +3248,29 @@ Some options for Swift code formatting outside Xcode include
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
 and {% aTargetBlank "https://github.com/apple/swift-format", "swift-format" %}.
 
-To install SwiftFormat, enter `brew install swiftformat`.
+SwiftFormat can be run as a command-line tool or an Xcode extension
+
+To install for command-line usage, enter `brew install swiftformat`.
 To format a `.swift` file, enter `swiftformat file-name.swift`.
 To format all the `.swift` files in the current directory,
 enter `swiftformat *.swift`.
+
+To install SwiftFormat as an Xcode extension:
+
+- enter `brew install --cask swiftformat-for-xcode`
+- open the Finder and navigate to the Applications directory
+- double-click SwiftFormat
+- follow the instructions that are displayed
+- restart Xcode
+- add a keyboard shortcut
+  - select Xcode ... Preferences ... Key Bindings
+  - enter "SwiftFormat" in the Filter input
+  - double-click in the Key column for "SwiftFormat - Format File"
+  - press a key combination to assign like option-f
+
+To format all the lines in the current file,
+press the assigned keyboard shortcut or
+select Editor ... SwiftFormat ... Format File.
 
 ### Xcode
 
