@@ -205,7 +205,6 @@ and how the described components map to SwiftUI views.
   - can have an inline or large title
   - can use a Segmented Control in place of title
   - SwiftUI creates this with `NavigationView`
-    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/search-bars/",
@@ -217,6 +216,7 @@ and how the described components map to SwiftUI views.
   - can include clear and confirm buttons
   - SwiftUI creates this with `Text(...).searchable(text: ...)`
     (required to be inside a `NavigationView`?)
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/",
@@ -1061,9 +1061,13 @@ struct ContentView: View {
   It contains `NavigationLink` views that are similar to HTML anchor elements.
   Tapping them causes the associated view
   to be rendered inside the `NavigationView`.
-  GRONK: FINISH THIS!
+  See the "Navigation" section later.
 
 - `NavigationLink`
+
+  These are used inside a `NavigationView`.
+  See the "Navigation" section later.
+
 - `OutlineGroup`
 
   This displays a tree of data with disclosure angle brackets.
@@ -1071,6 +1075,53 @@ struct ContentView: View {
 
 - `DisclosureGroup`
 - `TabView`
+
+  This creates a row of buttons at the bottom of the display
+  that can be tapped to navigate to associated views.
+
+  <img alt="SwiftUI TabView" style="width: 40%"
+    src="/blog/assets/SwiftUI-TabView.png?v={{pkg.version}}"
+    title="SwiftUI TabView">
+
+  ```swift
+  struct Transportation: View {
+      var kind: String
+
+      var body: some View {
+          Text("Information about \(kind) transportation goes here.")
+              .navigationBarTitle("\(kind) Transportation")
+      }
+  }
+
+  struct ContentView: View {
+      var body: some View {
+          TabView {
+              Transportation(kind: "Car").tabItem {
+                  Image(systemName: "car")
+                  Text("Car")
+              }
+              Transportation(kind: "Bus").tabItem {
+                  Image(systemName: "bus")
+                  Text("Bus")
+              }
+              Transportation(kind: "Train").tabItem {
+                  Image(systemName: "tram")
+                  Text("Train")
+              }
+              Transportation(kind: "Airplane").tabItem {
+                  Image(systemName: "airplane")
+                  Text("Airplane")
+              }
+          }
+          .onAppear() {
+              UITabBar.appearance().backgroundColor = .systemGray5
+          }
+          // Change color of Image and Text views which defaults to blue.
+          .accentColor(.purple)
+      }
+  }
+  ```
+
 - `HSplitView`
 - `VSplitView`
 - `TimelineView`
@@ -1198,6 +1249,9 @@ struct ContentView: View {
   the background is gray.
   When the `buttonStyle` view modifier is passed `.borderProminent`,
   the background is the accent color and the text is white.
+
+  To change the text color, apply the `foregroundColor` view modifier.
+  To change the background color, apply the `background` view modifier.
 
   ```swift
   // Button containing text and action specified with a trailing closure.
