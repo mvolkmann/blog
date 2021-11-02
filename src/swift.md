@@ -3272,6 +3272,8 @@ To format all the lines in the current file,
 press the assigned keyboard shortcut or
 select Editor ... SwiftFormat ... Format File.
 
+There is currently no way to make Xcode format files on save.
+
 ### Xcode
 
 Xcode is the primary IDE for creating macOS, iOS, and watchOS applications.
