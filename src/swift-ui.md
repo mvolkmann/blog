@@ -2894,6 +2894,309 @@ struct ContentView_Previews: PreviewProvider {
 If the view inside a `NavigationLink` doesn't have a `navigationTitle`,
 the link to get back to it will just display "Back".
 
+Here is a more advanced example of using `NavigationView`.
+
+<img alt="SwiftUI NavigationView" style="width: 32%"
+  src="/blog/assets/SwiftUI-Navigation1.png?v={{pkg.version}}"
+  title="SwiftUI NavigationView">
+<img alt="SwiftUI NavigationView" style="width: 32%"
+  src="/blog/assets/SwiftUI-Navigation2.png?v={{pkg.version}}"
+  title="SwiftUI NavigationView">
+<img alt="SwiftUI NavigationView" style="width: 32%"
+  src="/blog/assets/SwiftUI-Navigation3.png?v={{pkg.version}}"
+  title="SwiftUI NavigationView">
+
+```swift
+// SwiftUI-NavigationApp.swift
+import SwiftUI
+
+@main
+struct SwiftUI_NavigationApp: App {
+    // This registers use of AppDelegate defined in AppDelegate.swift.
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+```
+
+```swift
+// AppDelegate.swift
+import UIKit
+
+// To use this, register it in the main .swift file.
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
+        // Change the appearance of the status and navigation bars.
+        // This is not currently possible using only SwiftUI,
+        // so we need to use the UIKit approach.
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .systemRed // a bit more muted than .red
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white
+            //.font: UIFont.monospacedSystemFont(ofSize: 36, weight: .black)
+        ]
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
+        return true
+    }
+}
+```
+
+```swift
+// ContentView.swift
+import SwiftUI
+
+// This data is shared between pages as an environment object.
+class SharedData: ObservableObject {
+    @Published var v1 = 0
+    @Published var v2 = "x"
+}
+
+// This displays data in an environment object
+// and allows users to modify the data.
+struct DataView: View {
+    // This is needed to gain access to the environment object.
+    @EnvironmentObject var data: SharedData
+
+    var body: some View {
+        VStack {
+            Text("v1 = \(data.v1)")
+            // Why does these buttons appear to become disabled
+            // after tapping them in the Simulator?
+            // This doesn't happen in Preview.
+            Button("Add 1") { data.v1 += 1 }.buttonStyle(.bordered)
+            Text("v2 = \(data.v2)")
+            Button("Update") { data.v2 += "x" }.buttonStyle(.bordered)
+        }
+    }
+}
+
+struct MainPage: View {
+    // This is needed to gain access to the environment object.
+    @EnvironmentObject var data: SharedData
+
+    // This can have a type other than String such as Int.
+    @State private var selection: String? = nil
+
+    // This is used to toggle between displaying page 4 and 5.
+    @State private var pageToggle = false
+
+    var body: some View {
+        VStack {
+            Text("This is on the main page.")
+
+            // This creates two links to ChildPage views.
+            ForEach(1..<3) { number in
+                NavigationLink(destination: ChildPage(number: number)) {
+                    Text("Go to child \(number) page")
+                }
+            }
+
+            // Tab-based navigation
+            // Also consider using the isActive argument which is an
+            // @State Bool that indicates if the link should be activated.
+            NavigationLink(
+                destination: ChildPage(number: 4),
+                tag: "four",
+                selection: $selection
+            ) {
+                Text("Go to four")
+            }
+            NavigationLink(
+                destination: ChildPage(number: 5),
+                tag: "five",
+                selection: $selection
+            ) {
+                Text("Go to five")
+            }
+
+            // Programatic navigation to the links above
+            Button("Mystery Page") {
+                // Could make a REST call here and use the data
+                // to determine the value of "selection".
+                selection = pageToggle ? "five" : "four"
+
+                // Could conditionally decide how to set "pageToggle"
+                // which is used above to determine the value of "selection".
+                pageToggle.toggle()
+
+                // Return to the current page after 2 seconds.
+                // This is like setTimeout in JavaScript.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    selection = nil
+                }
+            }
+
+            Text("data.v1 = \(data.v1)")
+
+            // Can attach an environment object to any view like this.
+            //NavigationLink(destination: DataView().environmentObject(data)) {
+
+            // But can also attach an environment object
+            // to the NavigationView (see below)
+            // to make it available in all linked views.
+            NavigationLink(destination: DataView()) {
+                Text("Go to DataView")
+            }
+        }
+    }
+}
+
+struct ChildPage: View {
+    var number: Int
+
+    var body: some View {
+        VStack {
+            Text("This is on the child \(number) page.")
+
+            // This creates three links to GrandchildPage views.
+            ForEach(1..<4) { number in
+                NavigationLink(destination: GrandchildPage(number: number)) {
+                    Text("Grandchild \(number)")
+                }
+            }
+        }
+        .navigationBarTitle("Child", displayMode: .inline)
+    }
+}
+
+struct GrandchildPage: View {
+    var number: Int
+
+    var body: some View {
+        Text("This is on the grandchild \(number) page.")
+            .navigationBarTitle("Grandchild", displayMode: .automatic)
+    }
+}
+
+struct ContentView: View {
+    // This is registered as an environment object below.
+    @ObservedObject var data = SharedData()
+
+    // Going fullscreen requires hiding both
+    // the status bar and the navigation bar.
+    // See where this is used below.
+    @State private var fullscreen = false
+
+    var body: some View {
+        // Usually NavigationView is only used at the top-level.
+        // One exception is when using multiple tabs
+        // where each has its own NavigationView.
+        //
+        // Currently SwiftUI only supports two customizations of the navbar.
+        // It can be hidden entirely or only the back button can be hidden.
+        // Other customizations require use of UIKit.
+        NavigationView {
+            VStack {
+                Button("Toggle Fullscreen") { fullscreen.toggle() }
+                MainPage()
+            }
+
+            // The navigationBarTitle goes on a view inside NavigationView,
+            // not on the NavigationView,
+            // because the title can change for each page.
+            // See other calls to this above.
+            // The optional "displayMode" attribute has three options:
+            // large (default), inline, and automatic.
+            // Automatic uses large for the top view and inline for others.
+            .navigationBarTitle("Main")
+
+            .navigationBarHidden(fullscreen)
+
+            // This adds buttons in the navigation bar,
+            // only for the view to which this is applied, which is
+            // the VStack above that is only rendered on the main page.
+            // If the background color of the navigation bar is changed,
+            // the color of these buttons typically should be changed also.
+            .navigationBarItems(
+                leading:
+                    Button("Down") { data.v1 -= 1 }
+                    .foregroundColor(.white),
+                trailing:
+                    HStack {
+                        Button("Up") { data.v1 += 1 }
+                        Button("Double") { data.v1 *= 2 }
+                    }.foregroundColor(.white)
+            )
+        }
+        .statusBar(hidden: fullscreen)
+
+        // This makes an @ObservedObject available
+        // to all linked views as an @EnvironmentObject.
+        // All views that use it will have their body property
+        // reevaluated if the value changes.
+        .environmentObject(data)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+Most SwiftUI code works on all platforms.
+However, watchOS does not support `NavigationView`.
+Here is a shim that provides a shell implementation
+so the same code that works in iOS can work in watchOS.
+
+To run this app as a watchOS app in the simulator:
+
+- select File ... New ... Target
+- click the watchOS tab
+- scroll down and select "Watch App for iOS App"
+- click Next
+- enter a product name
+- click Finish, then Activate
+
+TODO: Why does the Simulator always just display "Hello, World!"
+TODO: and not what is in this app?
+
+```swift
+#if os(watchOS)
+struct NavigationView<Content: View>: View {
+    let content: () -> Content
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            content()
+        }
+    }
+}
+#endif
+```
+
+macOS does not support the `navigationBarTitle` view modifier.
+Here is a shim that provides a shell implementation
+so the same code that works in iOS can work in macOS.
+
+To run this app as a macOS app in the simulator:
+
+- TODO: Determine these steps.
+
+```swift
+#if os(macOS)
+extension View {
+    func navigationBarTitle(_ title: String) -> some View {
+        self
+    }
+}
+#endif
+```
+
 ## Utility Functions
 
 The {% aTargetBlank
