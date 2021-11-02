@@ -223,7 +223,8 @@ and how the described components map to SwiftUI views.
     "Side Bar" %}
 
   - leading navigation to top-level pages that is collapsable
-  - SwiftUI creates this with TODO
+  - SwiftUI creates this by applying the `.listStyle(.sidebar)` view modifier
+    to a `List` view. See an example in the "Sidebar" section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/",
@@ -3245,6 +3246,189 @@ extension View {
     }
 }
 #endif
+```
+
+## Sidebars
+
+A sidebar is ...
+
+```swift
+// model.swift
+import Foundation
+
+struct Sport: Hashable {
+    var name: String
+    var teams: [Team] = []
+}
+
+struct Team: Hashable {
+    var name: String
+    var players: [Player] = []
+}
+
+struct Player: Hashable {
+    var name: String
+
+    init(_ name: String) {
+        self.name = name
+    }
+}
+
+class Model: ObservableObject {
+    var baseball = Sport(name: "Baseball")
+    var football = Sport(name: "Football")
+    var hockey = Sport(name: "Hockey")
+
+    @Published var sports: [Sport] = []
+
+    init() {
+        // Baseball data
+
+        var team = Team(name: "Cardinals")
+        team.players.append(Player("Yadier Molina"))
+        team.players.append(Player("Adam Wainwright"))
+        baseball.teams.append(team)
+
+        team = Team(name: "Cubs")
+        team.players.append(Player("Jason Heyward"))
+        team.players.append(Player("Patrick Wisdom"))
+        baseball.teams.append(team)
+
+        sports.append(baseball)
+
+        // Football data
+
+        team = Team(name: "Buccaneers")
+        team.players.append(Player("Tom Brady"))
+        team.players.append(Player("Rob Gronkowski"))
+        football.teams.append(team)
+
+        team = Team(name: "Packers")
+        team.players.append(Player("Aaron Rodgers"))
+        team.players.append(Player("Davante Adams"))
+        football.teams.append(team)
+
+        sports.append(football)
+
+        // Hockey data
+
+        team = Team(name: "Blues")
+        team.players.append(Player("Vladimir Tarsenko"))
+        team.players.append(Player("Jordan Binnington"))
+        hockey.teams.append(team)
+
+        team = Team(name: "Blackhawks")
+        team.players.append(Player("Marc-Andre Fleury"))
+        team.players.append(Player("Jonathan Toews"))
+        hockey.teams.append(team)
+
+        sports.append(hockey)
+    }
+}
+```
+
+```swift
+// SwiftUI-SidebarApp.swift
+import SwiftUI
+
+@main
+struct SwiftUI_SidebarApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView(model: Model())
+        }
+    }
+}
+```
+
+```swift
+// ContentView.swift
+import SwiftUI
+
+struct SportsView: View {
+    @ObservedObject var model: Model
+    @Binding var selectedSport: Sport?
+    @Binding var selectedTeam: Team?
+
+    var body: some View {
+        VStack {
+            Text("Sports").font(.headline)
+            List(model.sports, id: \.self) { sport in
+                NavigationLink(
+                    destination: TeamsView(
+                        selectedSport: $selectedSport,
+                        selectedTeam: $selectedTeam
+                    ),
+                    tag: sport,
+                    selection: $selectedSport
+                ) {
+                    Text(sport.name)
+                }
+            }.listStyle(.sidebar)
+        }
+    }
+}
+
+struct TeamsView: View {
+    @Binding var selectedSport: Sport?
+    @Binding var selectedTeam: Team?
+
+    var body: some View {
+        VStack {
+            Text(selectedSport?.name ?? "None").font(.headline)
+            List(selectedSport?.teams ?? [], id: \.self) { team in
+                NavigationLink(
+                    destination: PlayersView(
+                        selectedTeam: $selectedTeam
+                    ),
+                    tag: team,
+                    selection: $selectedTeam
+
+                ) {
+                    Text(team.name)
+                }
+            }
+        }
+    }
+}
+
+struct PlayersView: View {
+    @Binding var selectedTeam: Team?
+
+    var body: some View {
+        VStack {
+            Text(selectedTeam?.name ?? "None").font(.headline)
+            List(selectedTeam?.players ?? [], id: \.self) { player in
+                Text(player.name)
+            }
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var selectedSport: Sport?
+    @State private var selectedTeam: Team?
+
+    var model: Model
+
+    var body: some View {
+        NavigationView {
+            SportsView(
+                model: model,
+                selectedSport: $selectedSport,
+                selectedTeam: $selectedTeam
+            )
+            Text("Select a sport")
+            Text("Select a team")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(model: Model())
+    }
+}
 ```
 
 ## Utility Functions
