@@ -1142,6 +1142,10 @@ struct ContentView: View {
   the user can swipe through.
   Page controls with a dot representing each page are displayed at the bottom.
 
+  <img alt="SwiftUI TabView Pages" style="width: 40%"
+    src="/blog/assets/SwiftUI-TabView-Pages.png?v={{pkg.version}}"
+    title="SwiftUI TabView Pages">
+
   ```swift
   struct Page: View {
       var title: String
