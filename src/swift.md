@@ -3259,8 +3259,9 @@ To install SwiftFormat as an Xcode extension:
 
 - enter `brew install --cask swiftformat-for-xcode`
 - open the Finder and navigate to the Applications directory
-- double-click SwiftFormat
-- follow the instructions that are displayed
+- double-click the SwiftFormat app
+- follow the displayed instructions
+  (SwiftFormat app can also be used to customize the rules)
 - restart Xcode
 - add a keyboard shortcut
   - select Xcode ... Preferences ... Key Bindings
