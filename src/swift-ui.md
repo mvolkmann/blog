@@ -256,8 +256,9 @@ and how the described components map to SwiftUI views.
 
   - contains buttons that perform page-specific actions
   - appears at bottom of screen
-  - SwiftUI creates this with TODO
-    GRONK
+  - SwiftUI creates this with the `toolbar` view modifier
+    and `ToolbarItemGroup` or `ToolbarItem` views
+    See an example in the "Toolbars" section.
 
 ### Views
 
@@ -269,8 +270,8 @@ and how the described components map to SwiftUI views.
   - on small screens, slides in from bottom
   - on large screens, appears as a Popover
   - can use to request confirmation before a destructive operation
-
   - SwiftUI creates this with TODO
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/activity-views/",
@@ -2875,6 +2876,81 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+```
+
+## Toolbars
+
+Toolbars are collections of buttons that can be
+displayed at the top or bottom of the display.
+The are created by applying the `toolbar` view modifier
+to the top view inside a `NavigationView`.
+Single buttons can be described inside a `ToolbarItem` view.
+Multiple buttons can be described inside a `ToolbarItemGroup` view.
+
+If there are only two buttons in a toolbar,
+they are laid out as if there is a `Spacer` between them.
+For other layouts, add your own `Spacer` views.
+
+The placement of a toolbar is specified by the `placement` attribute
+in the `ToolbarItem` and `ToolbarItemGroup` views.
+Supported `placement` values include:
+
+- `.navigationBarLeading`: top, left-justified
+- `.navigationBarTrailing`: top, right-justified
+- `.bottomBar`: bottom, centered
+
+Other `placement` values seem to be unable to render multiple buttons.
+
+<img alt="SwiftUI Toolbars" style="width: 40%"
+  src="/blog/assets/SwiftUI-Toolbars.png?v={{pkg.version}}"
+  title="SwiftUI Toolbars">
+
+```swift
+struct ContentView: View {
+    @State var selection = "Tap a toolbar button."
+
+    var body: some View {
+        NavigationView {
+            Text(selection).padding()
+                .navigationTitle("Toolbar Demo")
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button(
+                            action: { selection = "planes" },
+                            label: { Image(systemName: "airplane") }
+                        )
+                        Button(
+                            action: { selection = "trains" },
+                            label: { Image(systemName: "tram") }
+                        )
+                        Button(
+                            action: { selection = "automobiles" },
+                            label: { Image(systemName: "car.fill") }
+                        )
+                    }
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Button(
+                            action: { selection = "hearts" },
+                            label: { Image(systemName: "suit.heart.fill") }
+                        )
+                        Button(
+                            action: { selection = "diamonds" },
+                            label: { Image(systemName: "suit.diamond.fill") }
+                        )
+                        Button(
+                            action: { selection = "clubs" },
+                            label: { Image(systemName: "suit.club.fill") }
+                        )
+                        Button(
+                            action: { selection = "spades" },
+                            label: { Image(systemName: "suit.spade.fill") }
+                        )
+                        Spacer()
+                    }
+                }
+        }
     }
 }
 ```
