@@ -195,7 +195,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/navigation-bars/",
-    "Navigation Bars" %}
+    "Navigation Bar" %}
 
   - appears at top of screen below status bar
   - enables navigation through hierarchical screens
@@ -209,7 +209,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/search-bars/",
-    "Search Bars" %}
+    "Search Bar" %}
 
   - an text input for entering search text
   - has magnifier glass icon
@@ -220,14 +220,14 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/",
-    "Side Bars" %}
+    "Side Bar" %}
 
   - leading navigation to top-level pages that is collapsable
   - SwiftUI creates this with TODO
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/",
-    "Status Bars" %}
+    "Status Bar" %}
 
   - appears at top of screen above Navigation Bar
   - the system provided Status Bar displays the time on the left and indicators
@@ -237,7 +237,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/tab-bars/",
-    "Tab Bars" %}
+    "Tab Bar" %}
 
   - used to navigate to top-level app sections (groups of related pages)
   - appears at bottom of screen
@@ -245,7 +245,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/toolbars/",
-    "Toolbars" %}
+    "Toolbar" %}
 
   - contains buttons that perform page-specific actions
   - appears at bottom of screen
@@ -255,7 +255,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/",
-    "Action Sheets" %}
+    "Action Sheet" %}
 
   - alert that presents two or more choices related to the current context
   - on small screens, slides in from bottom
@@ -266,7 +266,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/activity-views/",
-    "Activity Views" %}
+    "Activity View" %}
 
   - set of activity buttons applicable in current context such as Copy, Add, or Find
   - appears as a Sheet or Popover
@@ -274,7 +274,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/",
-    "Alerts" %}
+    "Alert" %}
 
   - modal dialog with a title, optional message,
     one or more buttons, and optional input text fields
@@ -286,7 +286,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/collections/",
-    "Collections" %}
+    "Collection" %}
 
   - manage an ordered set of content,
     like photos presented as a grid of thumbnails
@@ -297,7 +297,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/image-views/",
-    "Image Views" %}
+    "Image View" %}
 
   - displays a single image or animated sequence
   - can fill entire display
@@ -305,7 +305,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/pages/",
-    "Pages" %}
+    "Page" %}
 
   - implements linear navigation between a set of related pages
     using either scrolling or page curl effects
@@ -313,7 +313,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/popovers/",
-    "Popovers" %}
+    "Popover" %}
 
   - modal or non-modal dialog displayed in response to
     tapping a control or tapping in an area
@@ -325,7 +325,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/scroll-views/",
-    "Scroll Views" %}
+    "Scroll View" %}
 
   - scrolls content larger than visible area
   - displays transient scrolling indicators
@@ -335,7 +335,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/sheets/",
-    "Sheets" %}
+    "Sheet" %}
 
   - a card that partially covers primary content
   - used to perform a task related to current context
@@ -346,7 +346,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/split-views/",
-    "Split Views" %}
+    "Split View" %}
 
   - presents hierarchical data with two or three columns:
     primary, supplementary, and content
@@ -360,7 +360,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/tables/",
-    "Tables" %}
+    "Table" %}
 
   - a scrolling, single-column or rows that are each divided into sections
   - can use for navigation in a Split View
@@ -371,7 +371,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/text-views/",
-    "Text Views" %}
+    "Text View" %}
 
   - multi-line styled text
   - optional scrolling
@@ -384,7 +384,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/web-views/",
-    "Web Views" %}
+    "Web View" %}
 
   - renders embedded HTML or HTML from a web site
   - can enable forward and backward navigation
@@ -394,7 +394,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/buttons/",
-    "Buttons" %}
+    "Button" %}
 
   - several predefined button styles are supported including
     - toggle: different from `Toggle` view
@@ -414,7 +414,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/color-wells/",
-    "Color Wells" %}
+    "Color Well" %}
 
   - displays a currently selected color in a circle
   - when tapped, displays the system color picker to change the selected color
@@ -422,7 +422,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/context-menus/",
-    "Context Menus" %}
+    "Context Menu" %}
 
   - displays a menu of context-sensitive items when the menu label is tapped
   - can contain sub-menus
@@ -431,7 +431,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/edit-menus/",
-    "Edit Menus" %}
+    "Edit Menu" %}
 
   - a provided horizontal menu that is displayed when a long press
     occurs in a text field, text view, web view, or image view
@@ -442,14 +442,14 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/labels/",
-    "Labels" %}
+    "Label" %}
 
   - plain or styled text
   - SwiftUI creates this with `Label` or `Text`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/page-controls/",
-    "Page Controls" %}
+    "Page Control" %}
 
   - a row of indicator images that represent pages in a list
   - can handle any number of pages
@@ -459,14 +459,14 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/",
-    "Pickers" %}
+    "Picker" %}
 
   - displays distinct values in a scrollable list and allows users to select one
   - SwiftUI creates this with `Picker` and `DatePicker`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/progress-indicators/",
-    "Progress Indicators" %}
+    "Progress Indicator" %}
 
   - informs users that an activity is running in the background
   - can indicate how much longer it will run using a progress bar
@@ -475,7 +475,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/refresh-content-controls/",
-    "Refresh Content Controls" %}
+    "Refresh Content Control" %}
 
   - becomes visible when a user pulls down on a view to request a content reload
   - usually used in a table view
@@ -484,7 +484,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/segmented-controls/",
-    "Segmented Controls" %}
+    "Segmented Control" %}
 
   - set of toggle buttons
   - can use in place of web UI radio buttons
@@ -493,7 +493,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/sliders/",
-    "Sliders" %}
+    "Slider" %}
 
   - a horizontal track with a thumb that
     slides between minimum and maximum values
@@ -502,7 +502,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/steppers/",
-    "Steppers" %}
+    "Stepper" %}
 
   - pair of minus and plus buttons that decrement and increment a value
   - can replace "-" and "+" with images
@@ -511,7 +511,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/switches/",
-    "Switches" %}
+    "Switch" %}
 
   - a toggle between mutually-exclusive states
   - can set tint to match app theme
@@ -520,7 +520,7 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/text-fields/",
-    "Text Fields" %}
+    "Text Field" %}
 
   - single-line text input with fixed height
   - usually has rounded corners
@@ -1056,6 +1056,13 @@ struct ContentView: View {
 - `Table`
 
 - `NavigationView`
+
+  This marks an area where a stack of views will be rendered one at a time.
+  It contains `NavigationLink` views that are similar to HTML anchor elements.
+  Tapping them causes the associated view
+  to be rendered inside the `NavigationView`.
+  GRONK: FINISH THIS!
+
 - `NavigationLink`
 - `OutlineGroup`
 
