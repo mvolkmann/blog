@@ -270,16 +270,19 @@ and how the described components map to SwiftUI views.
   - on small screens, slides in from bottom
   - on large screens, appears as a Popover
   - can use to request confirmation before a destructive operation
-  - SwiftUI creates this with TODO
-    GRONK
+  - SwiftUI creates this with `ActionSheet`, but that is deprecated.
+    TODO: What takes its place?
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/activity-views/",
     "Activity View" %}
 
-  - set of activity buttons applicable in current context such as Copy, Add, or Find
+  - set of activity buttons applicable in current context
+    such as Copy, Add, or Find
+  - also referred to as a "share sheet"
   - appears as a Sheet or Popover
   - SwiftUI creates this with TODO
+    TODO: Is this supported in SwiftUI? Maybe UIKit is required.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/",
@@ -303,6 +306,7 @@ and how the described components map to SwiftUI views.
   - touch and hold an item to edit
   - swipe to scroll
   - SwiftUI creates this with TODO
+    TODO: Is this supported in SwiftUI? Maybe UIKit is required.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/image-views/",
@@ -310,7 +314,7 @@ and how the described components map to SwiftUI views.
 
   - displays a single image or animated sequence
   - can fill entire display
-  - SwiftUI creates this with TODO
+  - SwiftUI creates this with `Image`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/pages/",
@@ -319,6 +323,7 @@ and how the described components map to SwiftUI views.
   - implements linear navigation between a set of related pages
     using either scrolling or page curl effects
   - SwiftUI creates this with TODO
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/popovers/",
@@ -464,7 +469,9 @@ and how the described components map to SwiftUI views.
   - can handle any number of pages
   - image for current page is highlighted
   - can customize images
-  - TODO: SwiftUI may not support this yet.
+  - SwiftUI provides this in `TabView` when it has a
+    `tabViewStyle` view modifier with a value of `.page`.
+    See an example in the "TabView" description later.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/",
@@ -1131,6 +1138,54 @@ struct ContentView: View {
   }
   ```
 
+  Here's another example that displays a set of pages
+  the user can swipe through.
+  Page controls with a dot representing each page are displayed at the bottom.
+
+  ```swift
+  struct Page: View {
+      var title: String
+      var description: String
+      var imageName: String
+
+      var body: some View {
+         VStack {
+              Text(title).font(.headline)
+              Image(systemName: imageName)
+                  .resizable()
+                  .scaledToFit()
+                  .frame(width: 100, height: 100)
+                  .foregroundColor(.red)
+              Text(description)
+          }
+      }
+  }
+
+  struct ContentView: View {
+      var body: some View {
+          TabView {
+              Page(
+                  title: "Planes",
+                  description: "Fly like the wind!",
+                  imageName: "airplane"
+              )
+              Page(
+                  title: "Trains",
+                  description: "Travel the tracks!",
+                  imageName: "tram"
+              )
+              Page(
+                  title: "Automobiles",
+                  description: "Drive the open road!",
+                  imageName: "car"
+              )
+          }
+          .tabViewStyle(.page(indexDisplayMode: .always))
+          .indexViewStyle(.page(backgroundDisplayMode: .always))
+      }
+  }
+  ```
+
 - `HSplitView`
 - `VSplitView`
 - `TimelineView`
@@ -1240,6 +1295,8 @@ struct ContentView: View {
   For example, `Image(systemName: "cloud.snow")`.
 
 - `AsyncImage`
+
+  TODO: What is this?
 
 - `Button`
 
