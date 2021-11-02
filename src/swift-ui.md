@@ -220,9 +220,12 @@ and how the described components map to SwiftUI views.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/",
-    "Side Bar" %}
+    "Sidebar" %}
 
-  - leading navigation to top-level pages that is collapsable
+  - provides app-level navigation to top-level collections of content
+  - for example, the Mail app displays a list of mailboxes in a sidebar
+  - selecting an item in the sidebar changes what is displayed
+    in the pane that follows
   - SwiftUI creates this by applying the `.listStyle(.sidebar)` view modifier
     to a `List` view. See an example in the "Sidebar" section.
 
@@ -3250,7 +3253,21 @@ extension View {
 
 ## Sidebars
 
-A sidebar is ...
+A sidebar provides app-level navigation to top-level collections of content.
+For example, the Mail app displays a list of mailboxes in a sidebar.
+Selecting an item in the sidebar changes what is displayed
+in the pane that follows.
+SwiftUI creates a sidebar when the `.listStyle(.sidebar)` view modifier
+is applied to a `List` view.
+
+The following example uses a sidebar for selecting a sport.
+When a sport is selected, the pane to its right
+displays a list of teams in that sport and allows one to be selected.
+When a team is selected, the pane to its right
+displays a list of players on that team.
+
+TODO: Select a sport and a team, tap "Back", and select a different team.
+TODO: Why isn't the team pane dismissed?
 
 ```swift
 // model.swift
