@@ -214,9 +214,9 @@ and how the described components map to SwiftUI views.
   - has magnifier glass icon
   - can display in a Navigation Bar
   - can include clear and confirm buttons
-  - SwiftUI creates this with `Text(...).searchable(text: ...)`
-    (required to be inside a `NavigationView`?)
-    GRONK
+  - SwiftUI creates this with the `searchable` view modifier
+    that is applied to some view that is inside a `NavigationView`.
+    See an example in the "Search" section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/",
@@ -2207,6 +2207,56 @@ These include:
 - `onOpenURL`
 - `onReceive`
 - `onSubmit`
+
+## Search
+
+SwiftUI provides a search input containing a magnifier glass icon
+that is rendered by the `searchable` view modifier.
+This is typically applied to a `List` view.
+
+<img alt="SwiftUI Search" style="width: 40%"
+  src="/blog/assets/SwiftUI-Search.png?v={{pkg.version}}"
+  title="SwiftUI Search">
+
+```swift
+struct ContentView: View {
+    @State private var query = ""
+
+    private let people = [
+        "Mark",
+        "Tami",
+        "Amanda",
+        "Jeremy",
+        "Meghan",
+        "RC"
+    ]
+
+    // Computed property based on people and query.
+    private var matchingPeople: [String] {
+        let lower = query.lowercased()
+        return lower.isEmpty ?
+            people :
+            people.filter { $0.lowercased().contains(lower) }
+    }
+
+    var body: some View {
+        NavigationView {
+            List(matchingPeople, id: \.self) { person in
+                Text(person)
+            }
+            .searchable(
+                text: $query,
+                // Without this the search input will be hidden
+                // until the user drags down on the List.
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: "Person Name"
+            )
+            .autocapitalization(.none)
+            .navigationTitle("People")
+        }
+    }
+}
+```
 
 ## Animation
 
