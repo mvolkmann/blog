@@ -237,7 +237,10 @@ and how the described components map to SwiftUI views.
   - the system provided Status Bar displays the time on the left and indicators
     for cell strength, WiFi strength, and batter remaining on the right
   - can style to light or dark mode and customize colors
-  - SwiftUI creates this with TODO
+  - should not replace with a custom status bar
+  - can temporarily hide it, but should never permanently hide it
+  - to hide the system status bar, apply the `.statusBar(hidden: true)`
+    view modifier to the top `NavigationView`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/tab-bars/",
@@ -246,6 +249,7 @@ and how the described components map to SwiftUI views.
   - used to navigate to top-level app sections (groups of related pages)
   - appears at bottom of screen
   - SwiftUI creates this with TODO
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/toolbars/",
