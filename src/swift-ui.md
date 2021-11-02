@@ -178,6 +178,9 @@ loads the app in the Simulator, and starts it.
 The app is not automatically updates when code changes are saved.
 The triangle must be clicked again to repeat the whole build/load/start process.
 
+There are rendering issues with the "iPhone 12 mini" simulator,
+so choose a different device for now.
+
 ## Apple Human Interface Guidelines (HIG)
 
 Apple documents guidelines for building user interfaces at {% aTargetBlank
