@@ -248,8 +248,7 @@ and how the described components map to SwiftUI views.
 
   - used to navigate to top-level app sections (groups of related pages)
   - appears at bottom of screen
-  - SwiftUI creates this with TODO
-    GRONK
+  - SwiftUI creates this with `TabView`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/toolbars/",
@@ -258,6 +257,7 @@ and how the described components map to SwiftUI views.
   - contains buttons that perform page-specific actions
   - appears at bottom of screen
   - SwiftUI creates this with TODO
+    GRONK
 
 ### Views
 
