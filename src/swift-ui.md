@@ -825,6 +825,7 @@ Here are the combiner views that are provided by SwiftUI.
   specifies a number of columns and adds rows as necessary.
 
   The following example demonstrates both `LazyHGrid` and `LazyVGrid`.
+  It spreads a list of numbers over either rows or columns.
 
   ```swift
   struct ContentView: View {
@@ -848,7 +849,7 @@ Here are the combiner views that are provided by SwiftUI.
           if isVertical {
               ScrollView {
                   LazyVGrid(columns: gridItems) {
-                      ForEach(1..<101) {
+                      ForEach(1...100) {
                           Text(String($0)).padding(5).border(.blue)
                       }
                    }.border(.red)
@@ -861,6 +862,44 @@ Here are the combiner views that are provided by SwiftUI.
                       }
                   }.border(.red)
               }
+          }
+      }
+  }
+  ```
+
+  The following example demonstrates `LazyVGrid`
+  where the views created are intended for specific columns.
+
+  <img alt="SwiftUI LazyVGrid" style="width: 40%"
+    src="/blog/assets/SwiftUI-LazyVGrid.png?v={{pkg.version}}"
+    title="SwiftUI LazyVGrid">
+
+  ```swift
+  func intPow(_ base: Int, _ exponent: Int) -> Int {
+    let decimal = pow(Decimal(base), exponent)
+    return Int(truncating: NSDecimalNumber(decimal: decimal))
+  }
+
+  struct ContentView: View {
+      var body: some View {
+          let columns: [GridItem] =
+              Array(
+                  repeating: GridItem(.flexible(), alignment: .trailing),
+                  count: 3
+              )
+
+          ScrollView {
+              LazyVGrid(columns: columns) {
+                  Text("Number").font(.title)
+                  Text("Squared").font(.title)
+                  Text("Cubed").font(.title)
+                  ForEach(1 ... 50, id: \.self) { number in
+                      Text("\(number)")
+                      Text("\(intPow(number, 2))")
+                      Text("\(intPow(number, 3))")
+                  }
+              }
+              .padding(.horizontal)
           }
       }
   }
