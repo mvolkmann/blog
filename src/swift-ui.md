@@ -349,8 +349,7 @@ and how the described components map to SwiftUI views.
   - displays transient scrolling indicators
   - can operation in paging mode
   - can support zooming
-  - SwiftUI creates this with ScrollView
-    GRONK
+  - SwiftUI creates this with `ScrollView`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/sheets/",
@@ -361,7 +360,8 @@ and how the described components map to SwiftUI views.
   - top corners are rounded and can customize radius
   - two available heights, large (default) and medium
   - modal by default
-  - SwiftUI creates this with TODO
+  - SwiftUI creates this with the `sheet` view modifier.
+    See an example in the "Modal Dialogs" section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/split-views/",
@@ -375,7 +375,9 @@ and how the described components map to SwiftUI views.
   - used in Mail app where primary is a list of mailboxes,
     supplementary is a list of messages in the selected mailbox,
     and content is the content of the selected email
-  - SwiftUI creates this with TODO
+  - SwiftUI doesn't directly support this, but
+    similar functionality can be implemented using `NavigationView`.
+    This displays side-by-side views on iPads in landscape mode.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/tables/",
@@ -385,8 +387,13 @@ and how the described components map to SwiftUI views.
   - can use for navigation in a Split View
   - three styles: plain, grouped, and inset grouped
   - not a data grid like in other UI frameworks
-  - TODO: Does iOS provide a data grid component?
-  - SwiftUI creates this with TODO
+  - SwiftUI uses the `List` view in place of the UIKit `UITableView` view.
+    `List` is easier to use.
+    It doesn't require specifying the number of rows
+    and cells don't need to be configured.
+    Instead a `List` is composed of rows that each
+    know how to arrange and display their data.
+    See the "List" section below.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/text-views/",
@@ -400,6 +407,7 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/documentation/uikit/uikeyboardtype",
     "UIKeyboardType enum" %})
   - SwiftUI creates this with TODO
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/web-views/",
@@ -970,10 +978,10 @@ Here are the combiner views that are provided by SwiftUI.
 
   - checkbox: alternative is Toggle
   - image picker: must build or using a library
-  - multiple choice: alternative is List inside NavigationView with EditButton
-  - radio buttons: alternative is Picker (supported in macOS with
-    Picker and .pickerStyle(RadioGroupPickerStyle())
-  - toggle buttons: alternative is Picker
+  - multiple choice: alternative is `List` inside `NavigationView` with `EditButton`
+  - radio buttons: alternative is `Picker` (supported in macOS with
+    `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
+  - toggle buttons: alternative is `Picker`
 
 - `Group`
 - `GroupBox`
@@ -995,64 +1003,7 @@ descriptions of `LazyHStack` and `LazyVStack`.
 
 This displays a list of views in a single column.
 It also acts like `ForEach` for iterating over array elements.
-
-The following example demonstrates using a `List` inside a `NavigationView`
-to enable selecting ids of the objects represented by the rows.
-To select rows, tap "Edit" in the upper-right corner.
-
-This also demonstrates implementing "pull to refresh"
-using the `refreshable` view modifier.
-
-```swift
-struct ContentView: View {
-    struct Dog: CustomStringConvertible, Identifiable, Hashable {
-        let id = UUID()
-        let name: String
-        let breed: String
-        var description: String { "\(name) - \(breed)" }
-    }
-
-    @State private var dogs = [
-        Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
-        Dog(name: "Ramsay", breed: "Native American Indian Dog"),
-        Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
-        Dog(name: "Comet", breed: "Whippet")
-    ]
-
-    @State private var selectedIds = Set<UUID>()
-
-    func loadMore() async {
-        // This calls a REST service that returns nothing after 2 seconds.
-        let url = URL(string: "https://httpbin.org/delay/2")!
-        let request = URLRequest(url: url)
-        // Not using return value.
-        let _ = try! await URLSession.shared.data(for: request)
-
-        dogs.append(Dog(name: "Clarice", breed: "Whippet"))
-        dogs.append(Dog(name: "Vixen", breed: "Whippet"))
-    }
-
-    var body: some View {
-        VStack {
-            NavigationView {
-                List(dogs, selection: $selectedIds) { dog in
-                    let desc = String(describing: dog)
-                    if selectedIds.contains(where: {$0 == dog.id}) {
-                        Text(desc).bold().foregroundColor(.green)
-                    } else {
-                        Text(desc)
-                    }
-                }
-                .navigationTitle("Dogs")
-                // The EditButton in the toolbar toggles
-                // the edit mode of the NavigationView.
-                .toolbar { EditButton() }
-            }.refreshable { await loadMore() }
-            Text("\(selectedIds.count) selections")
-        }
-    }
-}
-```
+See more in the "List" section below.
 
 - `Section`
 - `ForEach`
@@ -2333,6 +2284,96 @@ struct ContentView: View {
 }
 ```
 
+## Lists
+
+This displays a list of views in a single column.
+It also can act like `ForEach` for iterating over array elements.
+
+The contents of a `List` can be any views.
+These can be grouped using the `Section` view.
+
+<img alt="SwiftUI List with Sections" style="width: 40%"
+  src="/blog/assets/SwiftUI-List1.png?v={{pkg.version}}"
+  title="SwiftUI List with Sections">
+
+```swift
+List {
+    Section("Breakfast") {
+        Text("pancakes")
+        Text("bacon")
+        Text("orange juice")
+    }
+    Section("Lunch") {
+        Text("sandwich")
+        Text("chips")
+        Text("lemonade")
+    }
+    Section("Dinner") {
+        Text("spaghetti")
+        Text("bread")
+        Text("water")
+    }
+}
+```
+
+The following example demonstrates using a `List` inside a `NavigationView`
+to enable selecting ids of the objects represented by the rows.
+To select rows, tap "Edit" in the upper-right corner.
+
+This also demonstrates implementing "pull to refresh"
+using the `refreshable` view modifier.
+
+```swift
+struct ContentView: View {
+    struct Dog: CustomStringConvertible, Identifiable, Hashable {
+        let id = UUID()
+        let name: String
+        let breed: String
+        var description: String { "\(name) - \(breed)" }
+    }
+
+    @State private var dogs = [
+        Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
+        Dog(name: "Ramsay", breed: "Native American Indian Dog"),
+        Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
+        Dog(name: "Comet", breed: "Whippet")
+    ]
+
+    @State private var selectedIds = Set<UUID>()
+
+    func loadMore() async {
+        // This calls a REST service that returns nothing after 2 seconds.
+        let url = URL(string: "https://httpbin.org/delay/2")!
+        let request = URLRequest(url: url)
+        // Not using return value.
+        let _ = try! await URLSession.shared.data(for: request)
+
+        dogs.append(Dog(name: "Clarice", breed: "Whippet"))
+        dogs.append(Dog(name: "Vixen", breed: "Whippet"))
+    }
+
+    var body: some View {
+        VStack {
+            NavigationView {
+                List(dogs, selection: $selectedIds) { dog in
+                    let desc = String(describing: dog)
+                    if selectedIds.contains(where: {$0 == dog.id}) {
+                        Text(desc).bold().foregroundColor(.green)
+                    } else {
+                        Text(desc)
+                    }
+                }
+                .navigationTitle("Dogs")
+                // The EditButton in the toolbar toggles
+                // the edit mode of the NavigationView.
+                .toolbar { EditButton() }
+            }.refreshable { await loadMore() }
+            Text("\(selectedIds.count) selections")
+        }
+    }
+}
+```
+
 ## Animation
 
 Many view properties can be animated.
@@ -2937,55 +2978,41 @@ This allows the action of the "Close" button in `MyModal`
 to set it to false which hides the sheet.
 
 ```swift
-import SwiftUI
+struct MySheetView: View {
+    // Approach #1
+    //@Binding var isPresented: Bool
 
-struct MyModal: View {
-    //TODO: Add more detail on using the @Binding property wrapper.
-    @Binding var show: Bool
-    var message: String
+    // Approach #2
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
-        VStack {
-            Text("My Modal").font(.title)
-            Spacer()
-            Text(message).padding(20)
-            Spacer()
-            Button("Close") { show = false }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black.opacity(0.2))
+        ZStack {
+            Color.yellow
+            VStack {
+                Text("This is my modal content.")
+                Button("Close") {
+                    //isPresented = false // Approach #1
+                    dismiss() // Approach #2
+                }.buttonStyle(.bordered)
+            }
+        }.edgesIgnoringSafeArea(.bottom)
     }
 }
 
 struct ContentView: View {
-    @State private var count = 0
-    @State private var message = "Opened once"
-    @State private var showModal = false
+    @State private var isSheetPresented = false
 
     var body: some View {
         VStack {
-            Text("Main View")
-            Button(action: {
-                count += 1
-                message = "Opened \(count) times"
-                showModal = true
-            }) {
-                Text("Show Modal")
-                .padding()
-                .background(.yellow)
-                .cornerRadius(10)
-            }
-            .sheet(isPresented: $showModal) {
-                // By default the sheet slides in from the bottom.
-                MyModal(show: $showModal, message: message)
-            }
+            Text("This is my main view.")
+            Button("Show Sheet") { isSheetPresented = true }
+                .buttonStyle(.bordered)
+                .sheet(isPresented: $isSheetPresented) {
+                    // Only need to pass this argument in approach #1.
+                    //MySheetView(isPresented: $isSheetPresented)
+                    MySheetView()
+                }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
 ```
