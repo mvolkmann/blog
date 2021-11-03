@@ -827,43 +827,56 @@ Here are the combiner views that are provided by SwiftUI.
   The following example demonstrates both `LazyHGrid` and `LazyVGrid`.
   It spreads a list of numbers over either rows or columns.
 
+  <img alt="SwiftUI LazyHGrid and LazyVGrid" style="width: 40%"
+      src="/blog/assets/SwiftUI-Lazy-Grids.png?v={{pkg.version}}"
+      title="SwiftUI LazyHGrid and LazyVGrid">
+
   ```swift
   struct ContentView: View {
-      private static let count = 3
-      private let isVertical = false // Why can't this be static?
+    private static let count = 4
+    @State private var isVertical = false // Why can't this be static?
 
-      // Describe the characteristics of each grid.
-      private static let gridItem = GridItem(
-          // This specifies the grid height in LazyHGrid
-          // or the grid width in LazyVGrid.
-          .fixed(40),
-          // This specifies the vertical spacing in LazyHGrid
-          // or horizontal spacing in LazyVGrid.
-          spacing: 10,
-          alignment: .center
-      )
+    // Describe the characteristics of each grid.
+    private static let gridItem = GridItem(
+        // This specifies the grid height in LazyHGrid
+        // or the grid width in LazyVGrid.
+        .fixed(40),
+        // This specifies the vertical spacing in LazyHGrid
+        // or horizontal spacing in LazyVGrid.
+        spacing: 10,
+        alignment: .trailing
+    )
 
-      var gridItems: [GridItem] = Array(repeating: gridItem, count: count)
+    var gridItems: [GridItem] = Array(repeating: gridItem, count: count)
 
-      var body: some View {
-          if isVertical {
-              ScrollView {
-                  LazyVGrid(columns: gridItems) {
-                      ForEach(1...100) {
-                          Text(String($0)).padding(5).border(.blue)
-                      }
-                   }.border(.red)
-              }
-          } else {
-              ScrollView(.horizontal) {
-                  LazyHGrid(rows: gridItems) {
-                      ForEach(1..<101) {
-                          Text(String($0)).padding(5).border(.blue)
-                      }
-                  }.border(.red)
-              }
-          }
-      }
+    var body: some View {
+        VStack {
+            if isVertical {
+                ScrollView {
+                    LazyVGrid(columns: gridItems) {
+                        ForEach(1..<101) {
+                            Text(String($0)).padding(5).border(.blue, width: 3)
+                        }
+                    }
+                    .padding()
+                    .border(.red, width: 5)
+                }
+            } else {
+                ScrollView(.horizontal) {
+                    LazyHGrid(rows: gridItems) {
+                        ForEach(1..<101) {
+                            Text(String($0)).padding(5).border(.blue, width: 3)
+                        }
+                    }
+                    .padding()
+                    .border(.red, width: 3)
+                }
+            }
+            Button("Toggle Direction") {
+                isVertical.toggle()
+            }.buttonStyle(.bordered)
+        }
+    }
   }
   ```
 
@@ -871,8 +884,8 @@ Here are the combiner views that are provided by SwiftUI.
   where the views created are intended for specific columns.
 
   <img alt="SwiftUI LazyVGrid" style="width: 40%"
-    src="/blog/assets/SwiftUI-LazyVGrid.png?v={{pkg.version}}"
-    title="SwiftUI LazyVGrid">
+      src="/blog/assets/SwiftUI-LazyVGrid.png?v={{pkg.version}}"
+      title="SwiftUI LazyVGrid">
 
   ```swift
   func intPow(_ base: Int, _ exponent: Int) -> Int {
