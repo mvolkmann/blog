@@ -889,8 +889,7 @@ Here are the combiner views that are provided by SwiftUI.
 
   ```swift
   func intPow(_ base: Int, _ exponent: Int) -> Int {
-    let decimal = pow(Decimal(base), exponent)
-    return Int(truncating: NSDecimalNumber(decimal: decimal))
+      Int(pow(Float(base), Float(exponent)))
   }
 
   struct ContentView: View {
