@@ -2290,10 +2290,10 @@ This displays a list of views in a single column.
 It also can act like `ForEach` for iterating over array elements.
 
 The contents of a `List` can be any views.
-These can be grouped using the `Section` view.
+These can be grouped using `Section` views.
 
 <img alt="SwiftUI List with Sections" style="width: 40%"
-  src="/blog/assets/SwiftUI-List1.png?v={{pkg.version}}"
+  src="/blog/assets/SwiftUI-List-Sections.png?v={{pkg.version}}"
   title="SwiftUI List with Sections">
 
 ```swift
@@ -2314,6 +2314,7 @@ List {
         Text("water")
     }
 }
+//.listStyle(.grouped) // for edge-to-edge display
 ```
 
 The following example demonstrates using a `List` inside a `NavigationView`
@@ -2322,6 +2323,12 @@ To select rows, tap "Edit" in the upper-right corner.
 
 This also demonstrates implementing "pull to refresh"
 using the `refreshable` view modifier.
+Dragging the list down displays an activity indicator
+and then adds new dogs to the list.
+
+<img alt="SwiftUI List with Selection" style="width: 40%"
+  src="/blog/assets/SwiftUI-List-Selection.png?v={{pkg.version}}"
+  title="SwiftUI List with Selection">
 
 ```swift
 struct ContentView: View {
@@ -2339,7 +2346,9 @@ struct ContentView: View {
         Dog(name: "Comet", breed: "Whippet")
     ]
 
+    //@State private var selection: UUID? // single selection
     @State private var selectedIds = Set<UUID>()
+
 
     func loadMore() async {
         // This calls a REST service that returns nothing after 2 seconds.
@@ -2369,6 +2378,71 @@ struct ContentView: View {
                 .toolbar { EditButton() }
             }.refreshable { await loadMore() }
             Text("\(selectedIds.count) selections")
+        }
+    }
+}
+```
+
+The following example is similar to the previous one,
+but allows rows to be deleted and moved.
+It seems that it isn't possible for a `List` to support
+row selection and also support deleting and moving rows.
+TODO: See https://developer.apple.com/forums/thread/693743
+
+<img alt="SwiftUI List with Delete and Move" style="width: 40%"
+  src="/blog/assets/SwiftUI-List-Delete-Move.png?v={{pkg.version}}"
+  title="SwiftUI List with Delete and Move">
+
+```swift
+struct Dog {
+    var name: String
+    var breed: String
+}
+
+struct DogRow: View {
+    var dog: Dog
+
+    var body: some View {
+        // TODO: How can you control the column widths?
+        HStack {
+            Text(dog.name)
+            Spacer()
+            Text(dog.breed)
+        }
+    }
+}
+
+struct ContentView: View {
+    @State var dogs = [
+        Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
+        Dog(name: "Ramsay", breed: "Native American Indian Dog"),
+        Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
+        Dog(name: "Comet", breed: "Whippet")
+    ]
+
+    private func deleteDog(at offsets: IndexSet) {
+        dogs.remove(atOffsets: offsets)
+    }
+
+    private func moveDog(source: IndexSet, destination: Int) {
+        dogs.move(fromOffsets: source, toOffset: destination)
+    }
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(dogs, id: \.name) { dog in
+                        DogRow(dog: dog)
+                    }
+                    .onDelete(perform: deleteDog)
+                    .onMove(perform: moveDog)
+                }
+                .listStyle(.grouped)
+                .toolbar {
+                    EditButton()
+                }
+            }
         }
     }
 }
