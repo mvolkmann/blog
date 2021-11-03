@@ -325,8 +325,9 @@ and how the described components map to SwiftUI views.
 
   - implements linear navigation between a set of related pages
     using either scrolling or page curl effects
-  - SwiftUI creates this with TODO
-    GRONK
+  - SwiftUI provides this in `TabView` when it has a
+    `tabViewStyle` view modifier with a value of `.page`.
+    See an example in the "TabView" description later.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/popovers/",
@@ -338,7 +339,7 @@ and how the described components map to SwiftUI views.
   - can contain many kinds of elements including
     Navigation Bars, Toolbars, Tab Bars, and more
   - avoid using on iPhones
-  - SwiftUI creates this with TODO
+  - SwiftUI creates this with the `popover` view modifier
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/scroll-views/",
@@ -349,6 +350,7 @@ and how the described components map to SwiftUI views.
   - can operation in paging mode
   - can support zooming
   - SwiftUI creates this with ScrollView
+    GRONK
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/sheets/",
@@ -2806,6 +2808,50 @@ struct ContentView_Previews: PreviewProvider {
 TODO: Add information about the @EnvironmentObject property wrapper
 TODO: which is used to share data between views.
 TODO: See https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views
+
+## Popovers
+
+Popovers are often used for tooltip or help text.
+
+The following example displays a popover above a `Text` view
+when a `Button` is tapped.
+On an iPad popovers are rendered like speech bubbles
+with a tail pointing at an associated view.
+On an iPhone popovers are rendered as sheets that slide in from the bottom.
+
+```swift
+func runAfter(seconds: Int, closure: @escaping () -> Void) {
+    DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now() + 2,
+        execute: closure
+    )
+}
+
+struct ContentView: View {
+    @State private var showHelp = false
+
+    var body: some View {
+        VStack(spacing: 30) {
+            Text("Some complex text goes here.")
+                .padding()
+                .background(Color(UIColor.lightGray))
+                .popover(isPresented: $showHelp) {
+                    Text("This is help text.").padding()
+                }
+
+            Button("Help") {
+                // Display popover for 2 seconds.
+                // SwiftUI doesn't support showing
+                // multiple popovers at the same time.
+                // If this is attempted, none will be displayed.
+                showHelp = true
+                runAfter(seconds: 2) { showHelp = false }
+            }
+            .buttonStyle(.bordered)
+        }
+    }
+}
+```
 
 ## Alerts
 
