@@ -2403,7 +2403,7 @@ struct DogRow: View {
     var dog: Dog
 
     var body: some View {
-        // TODO: How can you control the column widths?
+        // TODO: How can you control column widths so this renders like a table?
         HStack {
             Text(dog.name)
             Spacer()
