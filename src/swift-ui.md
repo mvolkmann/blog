@@ -3974,6 +3974,12 @@ where you store key-value pairs persistently across launches of your app."
 The code below demonstrates using this to persist data about dogs as JSON.
 TODO: Can you store an array objects directory without encoding as JSON?
 
+The `@AppStorage` property wrapper makes it easier to work with `UserDefaults`,
+but it is limited to the following types:
+`Bool`, `Int`, `Double`, `String`, `URL`, and `Data` (byte buffer).
+It can't be used in the example below because
+it stores an array of struct instances.
+
 ```swift
 struct Dog: Codable, CustomStringConvertible, Identifiable {
     var name: String
