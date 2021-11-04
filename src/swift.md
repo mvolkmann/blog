@@ -3321,8 +3321,8 @@ The main Xcode window is divided into three main areas.
 The left side is the Navigator.
 The right side is the Inspector.
 The center area is divided into three sections.
-The left section is for editing code.
-The right section is the Canvas which is used to test
+The center-left section is the Code Editor.
+The center-right section is the Canvas which is used to test
 Previews of an app outside of the Simulator or a real device.
 
 The bottom section is not visible by default.
@@ -3347,8 +3347,11 @@ that can be clicked to show more detail.
 Sometimes these contain a "Fix" button that can be clicked
 to automatically fix the error.
 
-Option-click a name in Swift code to see its type and basic documentation.
-Click the "Open in Developer Documentation" link for more detail.
+To see the name a basic documentation of a name in code, option-click it.
+For more detail, click the "Open in Developer Documentation".
+Alternatively, click the circled question mark at the top of the Inspector.
+The Inspector will then display help for
+anything name under the cursor in the Code Editor.
 
 Command-click a name to display a context sensitive menu
 that can include the following options:

@@ -56,6 +56,9 @@ A new "App" project begins with the following files.
   whose value implements the `Scene` protocol.
   The actual value is an instance of `WindowGroup`.
   This renders an instance of `ContentView` which is defined in the next file.
+  Apps for macOS and iPadOS can specify more than one window
+  in the `WindowGroup`, but iOS and watchOS apps cannot.
+  iOS will render all the windows as if they were in a `VStack`.
 
 - `ContentView.swift`
 
@@ -1038,8 +1041,38 @@ Here are the combiner views that are provided by SwiftUI.
   - toggle buttons: alternative is `Picker`
 
 - `Group`
+
+  This collects all its child views into a single view
+  without changing their layout.
+  View modifiers applied to the `Group` are applied to each of the children.
+
+  ```swift
+  Group {
+      Text("One")
+      Text("Two")
+  }.foregroundColor(.blue)
+  ```
+
 - `GroupBox`
+
+  This creates a logical grouping of other views
+  with an optional `Label` at the top.
+
+  ```swift
+  GroupBox(
+      label: Label("Wayne Gretzky",
+                   systemImage: "sportscourt").font(.title)
+  ) {
+      ScrollView {
+          Text(text)
+      }.frame(width: .infinity, height: 130)
+      Toggle("Like", isOn: $like)
+  }.padding()
+  ```
+
 - `ControlGroup`
+
+GRONK
 
 - `ScrollView`
 
