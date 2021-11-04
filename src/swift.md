@@ -2108,6 +2108,10 @@ print(dog.age, dog2.age) // 2 1
 A computed property is defined with a `get` function
 that computes the value each time it is referenced.
 These must be declared with `var` rather than `let`.
+These are similar to "reactive declarations" in Svelte,
+but differ in that they only update when referenced
+and do not trigger UI updates.
+
 A computed property can optionally define a `set` function
 whose purpose is the change the values of properties used to
 compute the value so the result will be a given value.
@@ -3483,6 +3487,42 @@ Fastlane provides the ability to:
 - distribute beta builds to testing services like TextFlight
 - publish to app stores by pushing a button
 - automatically code sign iOS apps
+
+## Apple Developer Program
+
+In order to submit apps to the App Store it is necessary
+to join the Apple Developer Program.
+This has an annual fee of $99 USD.
+
+Benefits include:
+
+- access to AppStore Connect
+
+  This is used to summit and manage your apps on the App Store.
+
+- access to TestFlight
+
+  This enables up to 10,000 users to download and test
+  beta versions of your apps.
+  In addition, up to 100 users can install your apps
+  directly on their devices for testing
+  without going through app review or the App Store
+  (referred to as "Ad Hoc").
+
+- access to Provisioning Portal
+
+  This is an online tool that takes developers through the steps
+  to test apps on iOS devices and prepare them for the App Store.
+
+- access to beta OS releases for all platforms
+
+  This includes iOS, iPadOS, macOS, watchOS, and tvOS.
+
+- access to App Analytics
+
+- support from Apple engineers
+
+  Submit a Technical Support Incident (TSI) to request help.
 
 ## Annoyances
 
