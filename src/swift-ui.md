@@ -1256,6 +1256,19 @@ See more in the "List" section below.
   Text("Hello World").foregroundColor(.red).font(.system(size: 24))
   ```
 
+  The `Text` view can only be passed a `String`.
+  Other types such as `Int` and `Double` must be converted to `String`.
+  Consider extending `Text` to add initializers for other types.
+  For example:
+
+  ```swift
+  extension Text {
+      init(_ number: Int) {
+          self.init(String(number))
+      }
+  }
+  ```
+
 - `TextField`
 
   This provides single-line text entry.
