@@ -21,7 +21,7 @@ By comparison SwiftUI ...
 
 ## Getting Started
 
-- open Xcode
+- open Xcode which includes Swift and SwiftUI
 - select "Create a new Xcode project"
 - select an Application type such as "App" and click "Next"
 - enter a Product Name
