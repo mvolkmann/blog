@@ -244,6 +244,7 @@ and how the described components map to SwiftUI views.
   - can temporarily hide it, but should never permanently hide it
   - to hide the system status bar, apply the `.statusBar(hidden: true)`
     view modifier to the top `NavigationView`
+  - SwiftUI needs nothing to support this because the system provides it
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/tab-bars/",
@@ -274,7 +275,7 @@ and how the described components map to SwiftUI views.
   - on large screens, appears as a Popover
   - can use to request confirmation before a destructive operation
   - SwiftUI creates this with `ActionSheet`, but that is deprecated.
-    TODO: What takes its place?
+    TODO: What takes its place? Perhaps it must be created using `Sheet`.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/activity-views/",
@@ -284,7 +285,7 @@ and how the described components map to SwiftUI views.
     such as Copy, Add, or Find
   - also referred to as a "share sheet"
   - appears as a Sheet or Popover
-  - SwiftUI creates this with TODO
+  - SwiftUI creates this with ???
     TODO: Is this supported in SwiftUI? Maybe UIKit is required.
 
 - {% aTargetBlank
@@ -295,7 +296,7 @@ and how the described components map to SwiftUI views.
     one or more buttons, and optional input text fields
   - avoid having more than two buttons
   - minimize usage to important situations
-  - SwiftUI creates this with the `alert` method
+  - SwiftUI creates this with the `alert` view modifier
     that can be called on any kind of view.
     See the "Alerts" section.
 
@@ -308,7 +309,7 @@ and how the described components map to SwiftUI views.
   - tap an item to select
   - touch and hold an item to edit
   - swipe to scroll
-  - SwiftUI creates this with TODO
+  - SwiftUI creates this with ???
     TODO: Is this supported in SwiftUI? Maybe UIKit is required.
 
 - {% aTargetBlank
@@ -415,8 +416,8 @@ and how the described components map to SwiftUI views.
 
   - renders embedded HTML or HTML from a web site
   - can enable forward and backward navigation
-  - SwiftUI creates this with TODO
-    GRONK
+  - SwiftUI does not include support for web views.
+    `WKWebView` can be used, but setting it up in SwiftUI app is not trivial.
 
 ### Controls
 
