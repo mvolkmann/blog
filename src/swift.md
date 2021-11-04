@@ -3347,7 +3347,7 @@ that can be clicked to show more detail.
 Sometimes these contain a "Fix" button that can be clicked
 to automatically fix the error.
 
-To see the name a basic documentation of a name in code, option-click it.
+To see basic documentation of a name in code, option-click it.
 For more detail, click the "Open in Developer Documentation".
 Alternatively, click the circled question mark at the top of the Inspector.
 The Inspector will then display help for
@@ -3358,8 +3358,21 @@ that can include the following options:
 
 - Jump to definition
 - Fold: collapses a code block to an ellipsis; double-click ellipsis to re-open
+- Show Quick Help
 - Callers...
-- and more
+- Edit All in Scope
+- Show SwiftUI Inspector
+- Embed in HStack
+- Embed in VStack
+- Embed in ZStack
+- Embed in List
+- Grow
+- Make Conditional
+- Repeat
+- Embed...
+- Extract to a Variable
+- Extract to a Method
+- Extract All Occurrences
 
 In the past there was a "Rename..." option in this menu.
 It was moved to Editor ... Refactor ... Rename.

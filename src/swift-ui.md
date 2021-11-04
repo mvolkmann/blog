@@ -4170,9 +4170,8 @@ edit the `preview` property defined in `Persistence.swift`.
 For example:
 
 ```swift
-
-``
+TODO: Add an example.
+```
 
 If you see errors that say "cannot find type 'SomeEntityName' in scope",
 restart Xcode.
-```
