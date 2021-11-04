@@ -406,8 +406,8 @@ and how the described components map to SwiftUI views.
     (see the {% aTargetBlank
     "https://developer.apple.com/documentation/uikit/uikeyboardtype",
     "UIKeyboardType enum" %})
-  - SwiftUI creates this with TODO
-    GRONK - read about using AttributedString with Text
+  - SwiftUI creates this with a combination of `Text` and `AttributedString`.
+    See the "AttributedString" section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/web-views/",
@@ -416,6 +416,7 @@ and how the described components map to SwiftUI views.
   - renders embedded HTML or HTML from a web site
   - can enable forward and backward navigation
   - SwiftUI creates this with TODO
+    GRONK
 
 ### Controls
 
