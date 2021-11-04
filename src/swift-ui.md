@@ -599,7 +599,9 @@ which stands for "Core Graphics". These include:
 
 - `CGColor`
 
-  TODO: Add information about this and compare to `Color` and `UIColor`.
+  `CGColor` is a type used by Core Graphics to represent colors.
+  It is typically only used to apply color operations in
+  Core Graphics contexts like CGImage and CGLayer.
 
 - `CGFloat`
 
@@ -1072,27 +1074,97 @@ Here are the combiner views that are provided by SwiftUI.
 
 - `ControlGroup`
 
-GRONK
+  This is usd to group related controls.
+  It is typically used with `Button` views.
+  There are two built-in styles, `automatic` (default) and `navigation`.
+
+  <img alt="SwiftUI ControlGroup" style="width: 40%"
+    src="/blog/assets/SwiftUI-ControlGroup.png?v={{pkg.version}}"
+    title="SwiftUI ControlGroup">
+
+  ```swift
+  ControlGroup {
+      Button("Cancel") {
+          print("canceling")
+      }
+      Button("Save") {
+          print("saving")
+      }
+  }
+  ControlGroup {
+      Button("Cancel") {
+          print("canceling")
+      }
+      Button("Save") {
+          print("saving")
+      }
+  }.controlGroupStyle(.navigation)
+  ```
 
 - `ScrollView`
 
-This creates a scrollable view that is vertical by default,
-but can be changed to horizontal.
-It occupies all the space offered to it.
-Scrolling reveals additional child views when all of them do not fit.
-See examples of using this in the
-descriptions of `LazyHStack` and `LazyVStack`.
+  This creates a scrollable view that is vertical by default,
+  but can be changed to horizontal.
+  It occupies all the space offered to it.
+  Scrolling reveals additional child views when all of them do not fit.
+  See examples of using this in the
+  descriptions of `LazyHStack` and `LazyVStack`.
 
 - `ScrollViewReader`
+
+  This is a view that supports programmatic scrolling.
+
+  <img alt="SwiftUI ScrollViewReader" style="width: 40%"
+    src="/blog/assets/SwiftUI-ScrollViewReader.png?v={{pkg.version}}"
+    title="SwiftUI ScrollViewReader">
+
+  ```swift
+  struct ContentView: View {
+    @Namespace var topId
+    @Namespace var bottomId
+
+    var body: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                Button("Scroll to Bottom") {
+                    withAnimation {
+                        proxy.scrollTo(bottomId)
+                    }
+                }
+                .id(topId)
+
+                VStack(spacing: 0) {
+                    ForEach(1 ..< 101) { i in
+                        Text(String(i))
+                    }
+                }
+
+                Button("Scroll to Top") {
+                    withAnimation {
+                        proxy.scrollTo(topId)
+                    }
+                }
+                .id(bottomId)
+            }
+        }
+    }
+  }
+  ```
+
 - `ScrollViewProxy`
+
+  TODO
 
 - `List`
 
-This displays a list of views in a single column.
-It also acts like `ForEach` for iterating over array elements.
-See more in the "List" section below.
+  This displays a list of views in a single column.
+  It also acts like `ForEach` for iterating over array elements.
+  See more in the "List" section below.
 
 - `Section`
+
+  TODO
+
 - `ForEach`
 
   This view iterates of the elements of an array
@@ -1112,7 +1184,12 @@ See more in the "List" section below.
   ```
 
 - `DynamicViewContent`
+
+  TODO
+
 - `Table`
+
+  TODO
 
 - `NavigationView`
 
@@ -1133,6 +1210,9 @@ See more in the "List" section below.
   See my SwiftUI-OutlineGroup project and the questions in it.
 
 - `DisclosureGroup`
+
+  TODO
+
 - `TabView`
 
   This creates a row of buttons at the bottom of the display
@@ -1234,8 +1314,16 @@ See more in the "List" section below.
   ```
 
 - `HSplitView`
+
+  TODO
+
 - `VSplitView`
+
+  TODO
+
 - `TimelineView`
+
+  TODO
 
 ### Component Views
 
@@ -1404,6 +1492,9 @@ See more in the "List" section below.
   This creates a rectangle view with a specific background color
   that grows to fill all the space offered to it.
   For example, `Color.red` and `Color.clear` (transparent) are views.
+
+  A `UIColor` can be converted to a `Color`.
+  For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
 
 - `EditButton`
 - `PasteButton`
