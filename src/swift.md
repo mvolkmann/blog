@@ -1932,6 +1932,10 @@ if score1 == 21 && score2 <= 19 {
 }
 ```
 
+Conditions being tested must evaluate to a `Bool`.
+Other types are not coerced to a `Bool` value.
+For example, an `Int` with a value of 0 is not treated as `false`.
+
 Conditions can be specified by a comma-separated list of expressions
 which must all evaluate to `true`.
 This is useful in `if let` and `guard let` statements.
