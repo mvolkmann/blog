@@ -407,7 +407,7 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/documentation/uikit/uikeyboardtype",
     "UIKeyboardType enum" %})
   - SwiftUI creates this with TODO
-    GRONK
+    GRONK - read about using AttributedString with Text
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/web-views/",
@@ -2207,6 +2207,110 @@ struct ContentView: View {
 }
 ```
 
+## AttributedString
+
+The `AttributedString` struct supports associating specific "attributes"
+with substrings in a `String` that it holds.
+For example, the string "Red Green Blue" can have attributes
+that specify the foreground color to use for each word.
+When rendered, it can apply the attributes to affect styling.
+
+For basic styling such as making parts of a string bold or italic,
+it is not necessary to use `AttributedString` because
+the `Text` view supports Markdown syntax.
+
+There are several approaches that can be used to associate attributes
+with substrings in an `AttributedString` instance.
+Adding extension methods to `AttributedString` and `Text`
+greatly simplifies this.
+
+<img alt="SwiftUI AttributedString" style="width: 50%"
+  src="/blog/assets/SwiftUI-AttributedString.png?v={{pkg.version}}"
+  title="SwiftUI AttributedString">
+
+```swift
+extension AttributedString {
+    // Style the range occupied by a given substring using a closure.
+    mutating func style(
+        text: String,
+        style: (inout AttributedSubstring) -> Void
+    ) {
+        if let range = self.range(of: text) {
+            style(&self[range])
+        }
+    }
+}
+
+extension Text {
+    // Creates a Text from a String and styles the entire value.
+    init(_ string: String, style: (inout AttributedString) -> Void) {
+        var attributedString = AttributedString(string)
+        style(&attributedString) // style using the closure
+        self.init(attributedString) // create a `Text`
+    }
+}
+
+struct ContentView: View {
+    @Environment(\.font) var font // default font
+
+    // Using extension to AttributedString
+    var demo: AttributedString {
+        var s = AttributedString("Red Green Blue")
+        s.style(text: "Red") {
+            $0.foregroundColor = .red
+            $0.font = .body.italic() // italic version of body font
+        }
+        s.style(text: "Green") {
+            $0.foregroundColor = .green
+        }
+        s.style(text: "Blue") {
+            $0.foregroundColor = .purple
+            // Use the italic version of either the default or body font.
+            $0.font = (font ?? .body).italic()
+        }
+        return s
+    }
+
+    var body: some View {
+        VStack {
+            // Using built-in Markdown support
+            Text("plain *italic* **bold** ~strike~ `code`, [link](https://apple.com)")
+
+            // Using a computed property defined above
+            Text(demo)
+
+            // Concatenating Text views that each have their own styles.
+            Text("Hello").foregroundColor(.red) +
+                Text(", ") +
+                Text("World").foregroundColor(.green) +
+                Text("!")
+
+            HStack {
+                // Using extension to Text.
+                Text("Red") {
+                    $0.foregroundColor = .red
+                    $0.font = Font.system(size: 24).bold().italic()
+                }
+                Text("Green") {
+                    $0.foregroundColor = .green
+                    $0.font = Font.system(size: 36, design: .monospaced)
+                }
+                Text("Blue") {
+                    $0.foregroundColor = .blue
+                    $0.underlineColor = .green // doesn't work
+                }
+            }
+
+            // Using extension to Text.
+            Text("Apple") {
+                $0.link = URL(string: "https://apple.com")
+                $0.underlineColor = .blue // doesn't work
+            }
+        }
+    }
+}
+```
+
 ## Layout
 
 Combiner views offer space to their child views.
@@ -2284,6 +2388,13 @@ These include:
 - `onOpenURL`
 - `onReceive`
 - `onSubmit`
+
+## Environment
+
+A collection of values are available to all views
+through the `@Environment` wrapper.
+
+TODO: See https://developer.apple.com/documentation/swiftui/environmentvalues.
 
 ## Search
 
