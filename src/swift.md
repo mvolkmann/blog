@@ -3236,45 +3236,6 @@ surround it with `#if targetEnvironment(simulator) ... #endif`.
 
 ## Tools
 
-To fix Swift code indentation in Xcode,
-select the lines to be fixed (cmd-a for all)
-and press ctrl-i which is the keyboard shortcut
-for Editor ... Structure ... Re-Indent.
-The default code indentation is four spaces.
-Chained method calls that appear on separate lines are indented,
-but those chained onto trailing closures are not.
-
-Some options for Swift code formatting outside Xcode include
-{% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
-and {% aTargetBlank "https://github.com/apple/swift-format", "swift-format" %}.
-
-SwiftFormat can be run as a command-line tool or an Xcode extension
-
-To install for command-line usage, enter `brew install swiftformat`.
-To format a `.swift` file, enter `swiftformat file-name.swift`.
-To format all the `.swift` files in the current directory,
-enter `swiftformat *.swift`.
-
-To install SwiftFormat as an Xcode extension:
-
-- enter `brew install --cask swiftformat-for-xcode`
-- open the Finder and navigate to the Applications directory
-- double-click the SwiftFormat app
-- follow the displayed instructions
-  (SwiftFormat app can also be used to customize the rules)
-- restart Xcode
-- add a keyboard shortcut
-  - select Xcode ... Preferences ... Key Bindings
-  - enter "SwiftFormat" in the Filter input
-  - double-click in the Key column for "SwiftFormat - Format File"
-  - press a key combination to assign like option-f
-
-To format all the lines in the current file,
-press the assigned keyboard shortcut or
-select Editor ... SwiftFormat ... Format File.
-
-There is currently no way to make Xcode format files on save.
-
 ### Xcode
 
 Xcode is the primary IDE for creating macOS, iOS, and watchOS applications.
@@ -3287,15 +3248,17 @@ It is a passable IDE with many issues.
 
 - Xcode cannot format code on save.
 
-  You must select a section of code or the entire file and press ctrl-i.
+  You can manually invoke code formatting and then manually save.
+  See the "Code Formatting" section below.
 
 - Xcode supports Vim keybindings.
 
   To enable this, select Editor ... Vim Mode.
-  However, it is very basic.
+
+  However, the Vim support is very basic.
   No colon commands are supported.
   This means changes cannot be saved with ":w"
-  and find/replaced cannot be performed with ":s/foo/bar".
+  and find/replace cannot be performed with ":s/foo/bar".
   Pressing the "/" key invokes Xcode find,
   but does not support regular expressions.
   It does not support repeating commands with the period key,
@@ -3303,6 +3266,12 @@ It is a passable IDE with many issues.
   For a list of supported Vim commands, see this {% aTargetBlank
   "https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022",
   "Apple Developer Forum post" %}.
+
+Xcode provides great intellisense and code completion.
+For function calls, press tab after entering each argument
+to advance to the next argument.
+If the last argument is a closure, press enter to
+automatically turn it into a trailing closure.
 
 To choose light or dark mode, select from the dropdown at
 Xcode ... Preferences ... General ... Appearance.
@@ -3357,19 +3326,24 @@ Command-click a name to display a context sensitive menu
 that can include the following options:
 
 - Jump to definition
-- Fold: collapses a code block to an ellipsis; double-click ellipsis to re-open
-- Show Quick Help
+- Fold - collapses a code block to an ellipsis; double-click ellipsis to re-open
+- Show Quick Help - same as option-click
 - Callers...
-- Edit All in Scope
-- Show SwiftUI Inspector
+- Edit All in Scope - doesn't seem to work with Vim keybindings
+- Rename
+- Show SwiftUI Inspector - opens inspector in a dialog
+  as an alternative to using Inspector on right side
+- Extract Subview - creates a new view named "ExtractedView"
+  that renders the selected view
 - Embed in HStack
 - Embed in VStack
 - Embed in ZStack
 - Embed in List
-- Grow
-- Make Conditional
-- Repeat
-- Embed...
+- Group - embeds in a `Group`
+- Make Conditional - surrounds in an `if`/`else`
+- Repeat - surrounds in a `ForEach` loop
+- Embed... - embeds in a placeholder view named `Container`
+  that must be renamed to a real view
 - Extract to a Variable
 - Extract to a Method
 - Extract All Occurrences
@@ -3408,7 +3382,7 @@ This must be done in each Xcode project.
 
 To add app icons:
 
-- browse https://appicon.co
+- browse <https://appicon.co>
 - drag an image file into the drag area
 - check the checkboxes for the target devices
 - click the Generate button
@@ -3437,6 +3411,47 @@ To run an app on a real iOS device:
   - select General ... VPN & Device Management
   - tap the new app
   - tap the "Trust" button
+
+### Code Formatting
+
+To fix Swift code indentation in Xcode,
+select the lines to be fixed (cmd-a for all)
+and press ctrl-i which is the keyboard shortcut
+for Editor ... Structure ... Re-Indent.
+The default code indentation is four spaces.
+Chained method calls that appear on separate lines are indented,
+but those chained onto trailing closures are not.
+
+Some options for Swift code formatting outside Xcode include
+{% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
+and {% aTargetBlank "https://github.com/apple/swift-format", "swift-format" %}.
+
+SwiftFormat can be run as a command-line tool or an Xcode extension
+
+To install for command-line usage, enter `brew install swiftformat`.
+To format a `.swift` file, enter `swiftformat file-name.swift`.
+To format all the `.swift` files in the current directory,
+enter `swiftformat *.swift`.
+
+To install SwiftFormat as an Xcode extension:
+
+- enter `brew install --cask swiftformat-for-xcode`
+- open the Finder and navigate to the Applications directory
+- double-click the SwiftFormat app
+- follow the displayed instructions
+  (SwiftFormat app can also be used to customize the rules)
+- restart Xcode
+- add a keyboard shortcut
+  - select Xcode ... Preferences ... Key Bindings
+  - enter "SwiftFormat" in the Filter input
+  - double-click in the Key column for "SwiftFormat - Format File"
+  - press a key combination to assign like option-f
+
+To format all the lines in the current file,
+press the assigned keyboard shortcut or
+select Editor ... SwiftFormat ... Format File.
+
+There is currently no way to make Xcode format files on save.
 
 ### VS Code
 
@@ -3606,3 +3621,5 @@ the features of Swift that are annoying, at least in my opinion.
 
 - How can I make all new Xcode projects default to iOS 15?
   Currently they default to iOS 14.
+
+- With over 3000 icons in SF Symbols, how can there be none related to sports?
