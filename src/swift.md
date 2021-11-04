@@ -459,17 +459,17 @@ that discards their context after the function returns?
 ## Error Handling
 
 Errors in that occur in Swift code are described by
-objects that implement the `Error` protocol.
+objects that conform to the `Error` protocol.
 A protocol is like an interface in other programming languages.
 These are described in detail later in the "Protocol" section.
 The `Error` protocol is merely a marker protocol,
 not requiring any properties or methods.
-Often errors are described by an `enum` that implements the `Error` protocol.
+Often errors are described by an `enum` that conforms to the `Error` protocol.
 Each `enum` `case` represents a variation of the error
 and specific cases are thrown.
 
 To throw an error, use the `throw` keyword followed by an
-instance of any type that implements the `Error` protocol.
+instance of any type that conforms to the `Error` protocol.
 
 To handle errors, use one of the following approaches:
 
@@ -627,7 +627,7 @@ For example, the following type alias is defined by Swift.
 typealias Codable = Decodble & Encodable
 ```
 
-Instances of types that implement this protocol
+Instances of types that conform to this protocol
 can be serialized and deserialized to and from formats like JSON.
 
 ```swift
@@ -1239,7 +1239,7 @@ However, when a constant is initialized to a collection instance,
 the elements in the collection cannot be modified.
 
 The class hierarchy of the built-in collections,
-including the protocols they implement, is:
+including the protocols to which they conform, is:
 
 - `Sequence` protocol
   - `Collection` protocol
@@ -1518,7 +1518,7 @@ They can be created by listing key/value pairs in square brackets,
 separated by commas.
 Keys and values are separated by colons.
 While typically the keys are strings,
-they can be any type that implements the `Hashable` protocol.
+they can be any type that conforms to the `Hashable` protocol.
 For details on the `Hashable` protocol, see the
 {% aTargetBlank "https://developer.apple.com/documentation/swift/hashable",
 "Apple Developer Documentation" %}.
@@ -2350,7 +2350,7 @@ cannot begin with `mutating` keyword.
 That is only applied to `struct` and `extension` methods.
 
 Typically structs are used instead of classes
-the need for inheritance is not anticipated.
+when the need for inheritance is not anticipated.
 
 Let's re-implement the "Point" struct as a class named "Point2".
 
@@ -2531,7 +2531,7 @@ to inherit the requirements of other protocols.
 
 A protocol define a type that can be used in many places
 where concrete types can appear to state that any value
-whose concrete type implements the protocol is acceptable.
+whose concrete type conforms to the protocol is acceptable.
 This includes constant (`let`) types, variable (`var`) types,
 collection element types, function parameter types, function return types,
 and object property types.
@@ -2548,7 +2548,7 @@ cannot specify default parameter values.
 Default method implementations cannot be defined in a protocol,
 but they can be defined in an `extension` of the protocol.
 When this is done for a given method, types that
-implement the protocol are not required to implement that method.
+conform to the protocol are not required to implement that method.
 They can however implement the method anyway
 to override the implementation specified in the extension.
 
@@ -2560,10 +2560,10 @@ Other built-in protocols you might encounter include
 
 For many custom types Swift can provide a "synthesized implementation"
 of the `Comparable`, `Equatable`, and `Hashable` built-in protocols.
-All that is required is to state that a type implements the protocol
-and only have properties with types that also implement the protocol.
+All that is required is to state that a type conforms to the protocol
+and only have properties with types that also conform to the protocol.
 
-Xcode can add stubs for a protocol to a type that claims to implement it.
+Xcode can add stubs for a protocol to a type that claims to conform to it.
 Click the red circle to the left of the error message
 "Type does not conform to protocol" and then click the "Fix" button.
 
@@ -2572,7 +2572,7 @@ protocol Shape {
     func getArea() -> Double
 }
 
-// Structs can implement protocols,
+// Structs can conform to protocols,
 // but cannot inherit from other structs or classes.
 struct Triangle: Shape {
     var base: Double
@@ -2588,8 +2588,8 @@ struct Triangle: Shape {
     }
 }
 
-// Classes can implement protocols
-// and they can inherit from other classes.
+// Classes can inherit from another class and
+// they can conform to any number of protocols.
 class Rectangle: Shape {
     var height: Double
     var width: Double
@@ -2604,7 +2604,7 @@ class Rectangle: Shape {
     }
 }
 
-// Any object that implements the Shape protocol can be passed.
+// Any object that conforms to the Shape protocol can be passed.
 // Calling getArea on a shape demonstrates polymorphism because
 // what the call does is determined by the receiver type.
 func logShape(_ shape: Shape) {
@@ -2686,12 +2686,12 @@ print(demo.instanceSetRequired) // 6
 Extensions, described in detail later, can be used to add
 default method implementations to protocols.
 This is used to define methods like `filter` on the `Sequence` protocol
-that is implemented by concrete types like
+that is conformed to by concrete types like
 `Array`, `Dictionary`, `Range`, `String`, and more.
 
 For example, we can define a default implementation
 of the `Demoable` protocol `instanceMethod` method so types
-that implement the protocol are not required to implement that method.
+that conform to the protocol are not required to implement that method.
 
 ```swift
 extension Demoable {
@@ -2707,7 +2707,7 @@ extension Demoable {
 ```
 
 The type of a function parameter can be specified to be anything
-that implements a list of protocols using the `where` keyword
+that conforms to a list of protocols using the `where` keyword
 with the `&` operator between each protocol name.
 For example:
 
@@ -2721,7 +2721,7 @@ struct Drink: CustomStringConvertible, HasSize {
     var size: Int;
 }
 
-// T can be any type that implements the
+// T can be any type that conforms to the
 // CustomStringConvertible and HasSize protocols.
 func doThis<T>(a p: T) where T: CustomStringConvertible & HasSize {
     print(p)
@@ -2737,7 +2737,7 @@ doThat(a: Drink(size: 2)) // Drink has size 2
 ```
 
 Protocols can use the type name `Self` to refer to
-the actual type that is implementing the protocol.
+the actual type that conforms to the protocol.
 This is the only place where the type `Self` can be used.
 
 Protocols that use generic types declare them in a different way
@@ -2748,7 +2748,7 @@ followed by a type parameter name and optional constraints.
 Constraints can be written as `where TypeParamName: SomeProtocol`
 or just `: SomeProtocol`.
 
-In summary, when a type implements a protocol it can mean two things:
+In summary, when a type conforms to a protocol it can mean two things:
 
 1. The type may be required to implement some things.
 2. The type may be given implementations of some things through extensions.
@@ -2756,7 +2756,7 @@ In summary, when a type implements a protocol it can mean two things:
 ## `some` Keyword
 
 The `some` keyword proceeds the name of a protocol to specify that a type
-(called an "opaque type") will be some type that implements the protocol.
+(called an "opaque type") will be some type that conforms to the protocol.
 In a way this is the opposite of using a generic type.
 Generic types allow calling code to specify the type that
 will be used by a function, struct, class, or enum.
@@ -2766,7 +2766,7 @@ to select the type to be used.
 A common place whether the `some` keyword is used is in SwiftUI views.
 Their `body` property has the type `some View`.
 The value of this property is a function that returns
-any kind of object that implements the View protocol.
+any kind of object that conforms to the View protocol.
 
 ## Implementing Operators
 
@@ -3033,10 +3033,10 @@ Serializing Swift types to JSON and deserializing JSON back to Swift types
 is supported by the `JSONEncoder` and `JSONDecoder` classes.
 These tasks are a bit more difficult in Swift than in JavaScript.
 
-Swift types must implement the `Encodable` and `Decodable` protocols
+Swift types must conform to the `Encodable` and `Decodable` protocols
 in order be converted to and from JSON.
 `Codable` is a typealias to `Decodable & Encodable`,
-so custom types typically just state that they implement that.
+so custom types typically just state that they conform to it.
 
 ```swift
 import Foundation

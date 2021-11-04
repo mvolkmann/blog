@@ -125,6 +125,7 @@ Key things to know about not being in this mode include:
 - Changes made in the Inspector update the Preview and the code,
   but they do not take effect until
   focus is moved out of the modified Navigator field.
+  This is a great way to learn about supported view modifiers and their syntax.
 
 To switch to "Live Preview" mode so tap events are honored,
 click the button with a triangle inside a circle.
