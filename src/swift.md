@@ -17,8 +17,9 @@ Key facts about Swift include the following:
 - supports both object-oriented and functional programming
 - has six major types:
   structs, classes, enums, protocols, functions, and generics
-- standout features including closure syntax, trailing closures, key paths,
-  and a succinct way to refer to enum cases when their type is inferred
+- standout features include computed properties, closure syntax,
+  trailing closures, key paths, and
+  a succinct way to refer to enum cases when their type is inferred
 - a big language with a large number of features
   and a corresponding learning curve
 - built on {% aTargetBlank "https://llvm.org", "LLVM" %}
@@ -3667,3 +3668,6 @@ the features of Swift that are annoying, at least in my opinion.
   Currently they default to iOS 14.
 
 - With over 3000 icons in SF Symbols, how can there be none related to sports?
+
+- Adoption of Swift and SwiftUI would be much higher if
+  there was a way to generate an Android app from a Swift app.

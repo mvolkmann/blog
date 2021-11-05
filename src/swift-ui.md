@@ -12,10 +12,17 @@ It is an alternative to its predecessor UIKit.
 
 By comparison SwiftUI ...
 
-- is currently less capable than UIKit
+- is currently missing some features of UIKit
+  (but UIKit can be used within SwiftUI apps)
 - is declarative in nature than imperative
 - emphasizes use of structs over classes (UIKit uses classes)
 - requires far less code to do the same things
+- only runs on iOS 13 and above
+- doesn't use Storyboard to build views
+- doesn't use `AppDelegate` or `SceneDelegate`
+  (read about these {% aTargetBlank
+  "https://learnappmaking.com/scene-delegate-app-delegate-xcode-11-ios-13/",
+  "here" %})
 
 ## Resources
 
@@ -84,10 +91,12 @@ A new "App" project begins with the following files.
 
 To add a particular kind of provided UI View in a `.swift` file,
 manually enter code or click where it should go in the code
-and click the "+" in the upper-right.
-Clicking the "+" displays a dialog with a list provided View types.
+and click the "+" in the upper-right of the Code Editor.
+Clicking the "+" displays the Object Library dialog
+that contains a list provided view types.
 Selecting one displays related documentation and code examples.
-Double-click a View type to insert code for it.
+Double-click a view type to insert code for it at the cursor
+or drag a view type to the desired code location.
 
 ### Canvas / Preview
 
@@ -639,7 +648,8 @@ Exceptions include the `body` property and
 any properties that are passed in when instances are created.
 
 Views are used for components and layout.
-Views that layout other views are often referred to as "combiner views".
+Views that layout other views are often referred to as
+"container" or "combiner" views.
 
 Functions that create views often take a `ViewBuilder` their last argument.
 These are typically written as trailing closures.
@@ -665,7 +675,7 @@ This does not affect `Toggle` views which required using the view modifier
 
 ### ViewBuilders
 
-Combiner views can be passed a special kind of closure
+Container views can be passed a special kind of closure
 as their last argument that is called a `ViewBuilder`.
 This uses list-oriented syntax to describe a list of
 one to ten other views that are combined into a single view.
@@ -698,9 +708,9 @@ For more information on these, see the {% aTargetBlank
 "https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
 "Result builders proposal" %}.
 
-### Combiner Views
+### Container Views
 
-Combiner views combine other views.
+Container views combine other views.
 They act as a container of other views
 and layout those views in a specific way.
 
@@ -709,7 +719,7 @@ if the view was visible, consider setting its opacity to zero.
 This is done with the `opacity` view modifier.
 For example, `someView.opacity(0)`.
 
-Here are the combiner views that are provided by SwiftUI.
+Here are the container views that are provided by SwiftUI.
 
 - `HStack`
 
@@ -1067,7 +1077,7 @@ Here are the combiner views that are provided by SwiftUI.
   ) {
       ScrollView {
           Text(text)
-      }.frame(width: .infinity, height: 130)
+      }.frame(maxWidth: .infinity, maxHeight: 130)
       Toggle("Like", isOn: $like)
   }.padding()
   ```
@@ -1384,7 +1394,9 @@ Here are the combiner views that are provided by SwiftUI.
 
   ```swift
   // No prompt
-  TextField("First Name", text: $firstName).padding()
+  TextField("First Name", text: $firstName)
+      .padding()
+      .textFieldStyle(.roundedBorder)
 
   // Prompt specified
   TextField(text: $lastName, prompt: Text("Required")) {
@@ -1396,7 +1408,9 @@ Here are the combiner views that are provided by SwiftUI.
   // Using a non-String value (Int)
   // This doesn't provided arrows to increment and decrement the value
   // and it doesn't prevent typing non-digit characters.
-  TextField("Score", value: $score, format: .number).padding()
+  TextField("Score", value: $score, format: .number)
+      .padding()
+      .textFieldStyle(.roundedBorder)
   ```
 
 - `SecureField`
@@ -1424,7 +1438,7 @@ Here are the combiner views that are provided by SwiftUI.
   let lines = 3
   TextEditor(text: $reasonForVisit)
       .lineLimit(lines)
-      .frame(width: .infinity, height: CGFloat(lines * 24))
+      .frame(maxWidth: .infinity, maxHeight: CGFloat(lines * 24))
       .overlay(
           RoundedRectangle(cornerRadius: 5)
               .stroke(Color(UIColor.lightGray))
@@ -1737,10 +1751,10 @@ Here are the combiner views that are provided by SwiftUI.
 - `AnyView`
 - `TupleView`
 
-Here is an example of using combiner and component views.
+Here is an example of using container and component views.
 Note how views can be defined in computed properties
 that are later referenced to render them.
-The type of these computed properties can be a specific combiner view type
+The type of these computed properties can be a specific container view type
 or the generic `some View`.
 Custom views can also be defined in a new struct that inherits from `View`
 Instances of these structs are created to render them.
@@ -1929,7 +1943,7 @@ struct ContentView: View {
       }
   }
 
-  // Inside some combiner view ...
+  // Inside some container view ...
   ZStack {
       path.fill(.yellow)
       path.stroke(
@@ -2012,7 +2026,7 @@ struct ContentView: View {
 - `Spacer`
 
   Each of these take an equal amount of the unused space
-  inside the parent combiner view.
+  inside the parent container view.
   It accepts an optional `minLength` attribute which defaults to zero.
 
   Using `Spacer` can be compared to web applications that use
@@ -2141,7 +2155,7 @@ Types that conform to the `ShapeStyle` protocol include
 Many view modifiers are defined in extensions to the `View` protocol.
 This makes them to any kind of views.
 
-When view modifiers are added to combiner views,
+When view modifiers are added to container views,
 they are passed down to all descendant views.
 In the following example, all the `Text` views are red
 because the `VStack` that contains them has
@@ -2472,10 +2486,10 @@ struct ContentView: View {
 
 ## Layout
 
-Combiner views offer space to their child views.
+Container views offer space to their child views.
 The child views can choose their size within the space offered to them.
-Combiner views then position the contained views knowing their sizes.
-Combiner views can also then choose their own size
+Container views then position the contained views knowing their sizes.
+Container views can also then choose their own size
 that perhaps differs from they offered to their child views.
 
 Some views are "inflexible" and want to be a specific size.
@@ -2483,13 +2497,13 @@ Examples including `Text` and `Image` views.
 Other views are "flexible" and can adapt to the space offered to them.
 Examples include `Circle` and `RoundedRectangle`.
 
-Combiner views give space to inflexible child views first and
+Container views give space to inflexible child views first and
 then divide the remaining space between the flexible child views.
-The priority with which combiner views give space to child views
+The priority with which container views give space to child views
 can be altered by applying the `layoutPriority` view modifier to child views.
 It is passed a float value that defaults to zero.
 
-When a combiner view contains at least one flexible view,
+When a container view contains at least one flexible view,
 it is also considered to be flexible.
 
 Unsafe areas, such as the area at the top of iPhones that have a camera bump,
@@ -2914,7 +2928,7 @@ This can be changed by applying the `transition` view modifier
 which is passed the kind of transition to perform.
 Transitions are defined as methods on the `AnyTransition` struct.
 
-Transitions can be applied to any kind of view including combiner views.
+Transitions can be applied to any kind of view including container views.
 
 Typically the provided `opacity`, `scale`, and `slide` transitions are used.
 The `identity` transition is used to specify that no transition should occur.
@@ -2991,7 +3005,7 @@ struct ContentView: View {
 ```
 
 The `matchedGeometryEffect` view modifier is used
-to smoothly move views between combiner views.
+to smoothly move views between container views.
 For example, this can be used to move `Text` views that describe food items
 between lists of foods that available and those that have been selected.
 Each food item must have a unique id.
