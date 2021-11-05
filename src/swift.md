@@ -17,7 +17,7 @@ Key facts about Swift include the following:
 - supports both object-oriented and functional programming
 - has six major types:
   structs, classes, enums, protocols, functions, and generics
-- standout features including closure syntax, trailing closures,
+- standout features including closure syntax, trailing closures, key paths,
   and a succinct way to refer to enum cases when their type is inferred
 - a big language with a large number of features
   and a corresponding learning curve

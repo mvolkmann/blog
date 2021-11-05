@@ -1153,7 +1153,8 @@ Here are the combiner views that are provided by SwiftUI.
 
 - `ScrollViewProxy`
 
-  TODO
+  An instance of this type is passed to the trailing closure
+  of `ScrollViewReader`. See the example above.
 
 - `List`
 
@@ -1163,7 +1164,10 @@ Here are the combiner views that are provided by SwiftUI.
 
 - `Section`
 
-  TODO
+  These break a view into sections that are optionally labelled.
+  They are also optionally collapsable.
+
+  TODO: Add an example.
 
 - `ForEach`
 
@@ -1464,8 +1468,14 @@ Here are the combiner views that are provided by SwiftUI.
   When the `buttonStyle` view modifier is passed `.borderProminent`,
   the background is the accent color and the text is white.
 
-  To change the text color, apply the `foregroundColor` view modifier.
-  To change the background color, apply the `background` view modifier.
+  To change the text color,
+  apply the `foregroundColor` view modifier passing it a `Color`.
+
+  To change the background color,
+  apply the `background` view modifier passing it a `Color`.
+
+  To disable a `Button`,
+  apply the `disabled` view modifier passing it a `Bool`.
 
   ```swift
   // Button containing text and action specified with a trailing closure.
@@ -2078,6 +2088,7 @@ Commonly used view modifiers include:
 - `background(alignment, content)`
 - `border(ShapeStyle, width: CGFloat = 1)`
 - `cornerRadius(CGFloat, antialiased: Bool)`
+- `disabled(Bool)` disables any form input such as a `Button`
 - `edgesIgnoringSafeArea(Edge.Set)`
 - `font(Font?)`
 - `foregroundColor(Color?)`
@@ -2090,6 +2101,14 @@ Commonly used view modifiers include:
 - `opacity(Double)`
 - `overlay(ShapeStyle)`
 - `padding(CGFloat)`
+
+  This can be passed a side which can be a single value or an array
+  of `.all` (default),
+  `.leading`, `.trailing`, `.horizontal` (same as `.leading` and `.trailing`),
+  `.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
+  It can also be passed a `CGFloat` value for the length.
+  The length defaults to `nil` and means to use the system default of 20.
+
 - `position(x: CGFloat, y: CGFloat)`
 - `rotationEffect(Angle, anchor: UnitPoint)`
 - `scaledToFill()`
