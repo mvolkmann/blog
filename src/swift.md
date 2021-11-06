@@ -3667,7 +3667,9 @@ the features of Swift that are annoying, at least in my opinion.
 - How can I make all new Xcode projects default to iOS 15?
   Currently they default to iOS 14.
 
-- With over 3000 icons in SF Symbols, how can there be none related to sports?
+- With over 3000 icons in SF Symbols,
+  how can there be none related to sports or pets?
+  Perhaps Apple feels that emojis should be used for these.
 
 - Adoption of Swift and SwiftUI would be much higher if
   there was a way to generate an Android app from a Swift app.

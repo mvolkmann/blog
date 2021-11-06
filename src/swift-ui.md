@@ -1052,6 +1052,12 @@ Here are the container views that are provided by SwiftUI.
     `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
   - toggle buttons: alternative is `Picker`
 
+- `Section`
+
+  These break a view into sections that are optionally labelled.
+  They are also optionally collapsable.
+  This was used in the `Form` example above.
+
 - `Group`
 
   This collects all its child views into a single view
@@ -1172,13 +1178,6 @@ Here are the container views that are provided by SwiftUI.
   It also acts like `ForEach` for iterating over array elements.
   See more in the "List" section below.
 
-- `Section`
-
-  These break a view into sections that are optionally labelled.
-  They are also optionally collapsable.
-
-  TODO: Add an example.
-
 - `ForEach`
 
   This view iterates of the elements of an array
@@ -1231,6 +1230,11 @@ Here are the container views that are provided by SwiftUI.
 
   This creates a row of buttons at the bottom of the display
   that can be tapped to navigate to associated views.
+
+  For the docs, "Tab views only support tab items of type Text, Image,
+  or an image followed by text. Passing any other type of view
+  results in a visible but empty tab item."
+  A good size for these images is 32x32.
 
   <img alt="SwiftUI TabView" style="width: 40%"
     src="/blog/assets/SwiftUI-TabView.png?v={{pkg.version}}"
@@ -1341,6 +1345,81 @@ Here are the container views that are provided by SwiftUI.
 
 ### Component Views
 
+- `Button`
+
+  The content of a `Button` can be specified in two ways,
+  passing a `String` as the first argument or using the `label` argument
+  which can be specified with a trailing closure.
+
+  `Button` specify a function to call when pressed using the `action` argument
+  which can also be written as a trailing closure.
+
+  By default buttons have no background color and the text is the accent color.
+  When their `role` attribute is set to `.destructive`, the text is red.
+  When their `role` attribute is set to `.cancel`, `.none`, or not specified,
+  there is no visible change.
+  When the `buttonStyle` view modifier is passed `.bordered`,
+  the background is gray.
+  When the `buttonStyle` view modifier is passed `.borderProminent`,
+  the background is the accent color and the text is white.
+
+  To change the text color,
+  apply the `foregroundColor` view modifier passing it a `Color`.
+
+  To change the background color,
+  apply the `background` view modifier passing it a `Color`.
+
+  To disable a `Button`,
+  apply the `disabled` view modifier passing it a `Bool`.
+
+  ```swift
+  // Button containing text and action specified with a trailing closure.
+  Button("My Label", role: .destructive) {
+      // code to run when button is pressed
+  }.buttonStyle(.borderProminent)
+
+  // Button with an "action" argument whose value
+  // can be a closure or a function reference
+  // and a "contents" argument whose value is a ViewBuilder
+  // that can be written as a trailing closure.
+  Button(action: {
+      // code to run when button is pressed
+  }) {
+      HStack {
+          Text("Heart")
+          Image(systemName: "heart")
+      }
+  }
+  ```
+
+- `Color`
+
+  This creates a rectangle view with a specific background color
+  that grows to fill all the space offered to it.
+  For example, `Color.red` and `Color.clear` (transparent) are views.
+
+  A `UIColor` can be converted to a `Color`.
+  For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
+
+- `Image`
+
+  This renders an image.
+  Many image formats are supported including PNG, JPEG, and HEIC.
+  Click `Assets.xcassets` in the Navigator to
+  associate a name with each image to be used.
+  Click the "+" in the lower-left to add an entry.
+  Give the entry a name and drag images into the 1x, 2x, and 3x boxes.
+  Pass the name to the `Image` view as an unlabelled argument.
+  For example, `Image("Comet")`.
+
+  Icons from SF Symbols can be used by specifying
+  their name as the `systemName` argument.
+  For example, `Image(systemName: "cloud.snow")`.
+
+- `AsyncImage`
+
+  TODO: What is this?
+
 - `Text`
 
   This view renders text.
@@ -1445,83 +1524,13 @@ Here are the container views that are provided by SwiftUI.
       )
   ```
 
-- `Image`
+- `EditButton`
 
-  This renders an image.
-  Many image formats are supported including PNG, JPEG, and HEIC.
-  Click `Assets.xcassets` in the Navigator to
-  associate a name with each image to be used.
-  Click the "+" in the lower-left to add an entry.
-  Give the entry a name and drag images into the 1x, 2x, and 3x boxes.
-  Pass the name to the `Image` view as an unlabelled argument.
-  For example, `Image("Comet")`.
+  TODO: Is this only used in a `List`?
 
-  Icons from SF Symbols can be used by specifying
-  their name as the `systemName` argument.
-  For example, `Image(systemName: "cloud.snow")`.
-
-- `AsyncImage`
+- `PasteButton`
 
   TODO: What is this?
-
-- `Button`
-
-  The content of a `Button` can be specified in two ways,
-  passing a `String` as the first argument or using the `label` argument
-  which can be specified with a trailing closure.
-
-  `Button` specify a function to call when pressed using the `action` argument
-  which can also be written as a trailing closure.
-
-  By default buttons have no background color and the text is the accent color.
-  When their `role` attribute is set to `.destructive`, the text is red.
-  When their `role` attribute is set to `.cancel`, `.none`, or not specified,
-  there is no visible change.
-  When the `buttonStyle` view modifier is passed `.bordered`,
-  the background is gray.
-  When the `buttonStyle` view modifier is passed `.borderProminent`,
-  the background is the accent color and the text is white.
-
-  To change the text color,
-  apply the `foregroundColor` view modifier passing it a `Color`.
-
-  To change the background color,
-  apply the `background` view modifier passing it a `Color`.
-
-  To disable a `Button`,
-  apply the `disabled` view modifier passing it a `Bool`.
-
-  ```swift
-  // Button containing text and action specified with a trailing closure.
-  Button("My Label", role: .destructive) {
-      // code to run when button is pressed
-  }.buttonStyle(.borderProminent)
-
-  // Button with an "action" argument whose value
-  // can be a closure or a function reference
-  // and a "contents" argument whose value is a ViewBuilder
-  // that can be written as a trailing closure.
-  Button(action: {
-      // code to run when button is pressed
-  }) {
-      HStack {
-          Text("Heart")
-          Image(systemName: "heart")
-      }
-  }
-  ```
-
-- `Color`
-
-  This creates a rectangle view with a specific background color
-  that grows to fill all the space offered to it.
-  For example, `Color.red` and `Color.clear` (transparent) are views.
-
-  A `UIColor` can be converted to a `Color`.
-  For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
-
-- `EditButton`
-- `PasteButton`
 
 - `Link`
 
@@ -4312,3 +4321,39 @@ TODO: Add an example.
 
 If you see errors that say "cannot find type 'SomeEntityName' in scope",
 restart Xcode.
+In some cases, such as renaming entities,
+it is necessary to clear existing data and start over.
+To do this:
+
+- clean the build folder by pressing cmd-shift-k
+- quit out of Xcode
+- cd to ~/Library/Developer/Xcode/DerivedData
+- run the `rm -rf` command on the directory for the project
+- restart Xcode
+
+### Step to use Core Data
+
+- Create a new file.
+- For the template, scroll down to "Core Data" and select "Data Model".
+  For most projects only one of these files is needed
+  and the default name of "Model.xcdatamodeld" is fine.
+- Add entities.
+  Each is given a default name of "Entity" that can be clicked to rename.
+- Add attributes to each entity.
+  Each is given a default name of "attribute" that can be clicked to rename.
+  Select a type from a drop-down list of primitive types
+  that includes "Data" for a byte buffer.
+- Optionally sort the attributes on their name or type
+  by clicking on the "Attribute" or "Type" column.
+- By default each attribute is "Optional". Uncheck that for required attributes.
+- Optionally specify a default value for each attribute.
+- Optionally specify validation criteria for each attribute.
+- Add relationships between entities
+  where each specifies a Relationship name, Destination, Type, and Delete Rule.
+  The Type can be "To One" or "To Many".
+  The Delete Rule can be "Nullify", "Cascade", or "Deny".
+  "Nullify" means instances can be deleted
+  without also deleting related entities.
+  "Cascade" means instances can be deleted
+  and related entities will also be deleted.
+  "Deny" means instances with related entities cannot be deleted.
