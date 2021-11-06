@@ -4126,6 +4126,7 @@ rather than a specific property inside it, use `\.self`.
 
 A SwiftUI context is ...
 Most apps only use a single context.
+TODO: Is this only used with Core Data?
 
 ## Environments
 
@@ -4266,11 +4267,16 @@ Core Data is an object/graph persistence framework.
 It supports many features including
 data validation, undo/redo, and lazy loading.
 
-The easiest way to setup use of Core Data is to
+One way to setup use of Core Data is to
 check the "Use Core Data" checkbox on the options panel
 when creating a new project.
-While it is possible to add the use of Core Data to an existing app,
-the setup steps are quite involved.
+This adds all the setup code and UI code for a simple app
+that allows creating, deleting, and listing `Item` entities.
+It can then be modified to work with other kinds of entities.
+
+Another way is to not check the "Use Core Data" checkbox
+and set it up manually.
+As shown below, the steps to do this are not difficult.
 
 The generated files setup use of Core Data.
 The file `{app-name}App.swift` registers an "environment"
@@ -4544,3 +4550,35 @@ on the entity (not the relationship property) that take a `DogEntity`
 and add to or remove from the `NSSet`.
 
 TODO: How can all instances of a given entity type be deleted?
+
+### Fetching Entities
+
+To fetching entities from an `NSManagedObjectContext`,
+create an `NSFetchRequest` that identifies an entity type.
+Optionally specify how the fetched entity instances should be sorted.
+Also, optionally specify filtering to be applied
+so that only a subset of the the entity instances will be fetched.
+
+For details on the syntax used to specify filtering, see {% aTargetBlank
+"https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html",
+"Predicate Format String Syntax" %}.
+
+```swift
+let request = NSFetchRequest<PersonEntity>(entityName: "PersonEntity")
+
+// Sort in ascending order on the "name" property.
+request.sortDescriptors = [
+    NSSortDescriptor(key: "name", ascending: true)
+]
+
+// Filter so only entities with a name beginning with "T" are fetched.
+let predicate = NSPredicate(format: "name == %@", "Tami")
+request.
+
+do {
+    people = try context.fetch(request)
+} catch {
+    print("fetchPeople error:", error)
+}
+
+```
