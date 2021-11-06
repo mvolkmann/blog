@@ -4334,26 +4334,177 @@ To do this:
 ### Step to use Core Data
 
 - Create a new file.
+
 - For the template, scroll down to "Core Data" and select "Data Model".
   For most projects only one of these files is needed
   and the default name of "Model.xcdatamodeld" is fine.
+
 - Add entities.
+  These are similar to tables in a relational database.
   Each is given a default name of "Entity" that can be clicked to rename.
+
 - Add attributes to each entity.
   Each is given a default name of "attribute" that can be clicked to rename.
   Select a type from a drop-down list of primitive types
   that includes "Data" for a byte buffer.
+
 - Optionally sort the attributes on their name or type
   by clicking on the "Attribute" or "Type" column.
+
 - By default each attribute is "Optional". Uncheck that for required attributes.
+
 - Optionally specify a default value for each attribute.
+
 - Optionally specify validation criteria for each attribute.
+
 - Add relationships between entities
   where each specifies a Relationship name, Destination, Type, and Delete Rule.
   The Type can be "To One" or "To Many".
   The Delete Rule can be "Nullify", "Cascade", or "Deny".
+
   "Nullify" means instances can be deleted
   without also deleting related entities.
+
   "Cascade" means instances can be deleted
   and related entities will also be deleted.
+
   "Deny" means instances with related entities cannot be deleted.
+
+- Also add reverse relationships if the code will need to traverse them.
+  For example, "PersonEntity" can have
+  an "owns" relationship "To Many" "DogEntity" and
+  "DogEntity" can have an "ownedBy" relationship "To One" "PersonEntity".
+
+- Create a view model class.
+  This can be defined in a file named "ViewModel.swift".
+  It can defined a class named "ViewModel" that inherits from `ObservableObject`
+  which is from the Combine framework.
+
+- Declare a `container` constant property as follows:
+
+  ```swift
+  let container: NSPersistentContainer
+  ```
+
+- Declare a `context` variable property as follows:
+
+  ```swift
+  var context: NSManagedObjectContext { container.viewContext }
+  ```
+
+- Declare a published array property to hold
+  all the instances of each entity type as follows:
+
+  ```swift
+  @Published var people: [PersonEntity] = []
+  ```
+
+- Define an initializer as follows:
+
+  ```swift
+  init() {
+      // "Model" here must be the name of the "Data Model" file.
+      container = NSPersistentContainer(name: "Model")
+
+      container.loadPersistentStores { _, error in
+          if let error = error {
+              print("error loading Core Data:", error)
+          } else {
+              self.fetchPeople()
+              // Possibly also fetch other kinds of entities here.
+          }
+      }
+  }
+  ```
+
+- Define a method for each entity type that fetches all of its instances.
+
+  ```swift
+  func fetchPeople() {
+      // "PersonEntity" here must be the name of the entity type.
+      let request = NSFetchRequest<PersonEntity>(entityName: "PersonEntity")
+      // Optionally specify how the instances should be sorted.
+      request.sortDescriptors = [
+          NSSortDescriptor(key: "name", ascending: true)
+      ]
+      do {
+          // people here must be the name of the
+          // @Published property declared above.
+          people = try context.fetch(request)
+      } catch {
+          print("fetchPeople error:", error)
+      }
+  }
+  ```
+
+- Define a method to save changes to any data in the context.
+
+  ```swift
+      func saveContext() {
+        do {
+            try context.save()
+
+            // Optionally refetch all the data from the context
+            // in order to have the latest in the UI.
+            // It seems very inefficient to fetch ALL the people again
+            // every time one is added, deleted, or updated!
+            fetchPeople()
+            // Possibly also fetch other kinds of entities here.
+        } catch {
+            print("saveContext error:", error)
+        }
+    }
+  ```
+
+- Define a method that the UI can call to add a new entity instance.
+
+  ```swift
+  func addPerson(name: String) {
+      let person = PersonEntity(context: context)
+      // Set all the attributes of the new entity instance.
+      person.name = name
+      saveContext()
+  }
+  ```
+
+- Define a method that the UI can call to delete an entity instance.
+
+  ```swift
+  func deletePerson(indexSet: IndexSet) {
+      guard let index = indexSet.first else { return }
+      context.delete(people[index])
+      saveContext()
+  }
+  ```
+
+- In each view that needs to access entity data,
+  declare a property with the `@StateObject` property wrapper
+  that has a type of `ViewModel`.
+
+  ```swift
+  @StateObject var vm: ViewModel
+  ```
+
+- To add an entity instance,
+  call an "add" method defined in `ViewModel.swift`.
+
+  ```swift
+  vm.addPerson(name: name)
+  ```
+
+- To delete an entity instance,
+  call a "delete" method defined in `ViewModel.swift`.
+  Often this is done with the `onDelete` view modifier on a `List`
+  because that provides an `IndexSet` of selected indexes.
+
+  ```swift
+  .onDelete(perform: vm.deletePerson)
+  ```
+
+- To update an entity instance directly modify the attributes
+  of an existing entity and then call the `saveContext` method
+
+  ```swift
+  person.name = "Some New Name"
+  vm.savePeople()
+  ```
