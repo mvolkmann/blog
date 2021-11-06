@@ -4342,6 +4342,8 @@ To do this:
 - Add entities.
   These are similar to tables in a relational database.
   Each is given a default name of "Entity" that can be clicked to rename.
+  It is recommended to give them names that end in "Entity"
+  so it is clear in code that uses them that they are Core Data entities.
 
 - Add attributes to each entity.
   Each is given a default name of "attribute" that can be clicked to rename.
@@ -4364,16 +4366,21 @@ To do this:
 
   "Nullify" means instances can be deleted
   without also deleting related entities.
+  References to deleted entities are set to `nil`.
 
   "Cascade" means instances can be deleted
   and related entities will also be deleted.
 
   "Deny" means instances with related entities cannot be deleted.
 
-- Also add reverse relationships if the code will need to traverse them.
+- Every relationships must have an inverse relationship, so add those.
   For example, "PersonEntity" can have
   an "owns" relationship "To Many" "DogEntity" and
   "DogEntity" can have an "ownedBy" relationship "To One" "PersonEntity".
+
+- Switch between viewing entities and their relationships
+  in "table" style or "graph" style by clicking
+  buttons in the lower-right labelled "Editor Style".
 
 - Create a view model class.
   This can be defined in a file named "ViewModel.swift".
@@ -4418,6 +4425,7 @@ To do this:
   ```
 
 - Define a method for each entity type that fetches all of its instances.
+  List is useful for displaying them in a `List`.
 
   ```swift
   func fetchPeople() {
@@ -4436,6 +4444,10 @@ To do this:
       }
   }
   ```
+
+- Optionally add filtering to the `request` object above.
+
+  TODO: Describe filter options here!
 
 - Define a method to save changes to any data in the context.
 
@@ -4508,3 +4520,31 @@ To do this:
   person.name = "Some New Name"
   vm.savePeople()
   ```
+
+TODO: Does "Core Data" work in Preview?
+
+### Entity objects
+
+Core Data entity objects have many properties and methods.
+
+Each attribute is represented by a property
+that can be directly accessed and modified.
+Changes are not persisted unless `context.save()` is called.
+
+Each relationship is represented by a property.
+
+Properties for "To One" relationships have
+an optional type matching the referenced entity type.
+For example, `DogEntity` with an `ownedBy` relationship to a `PersonEntity`
+has an `ownedBy` property with a type of `PersonEntity?`.
+This can be directly set to a different `PersonEntity` or `nil`.
+
+Properties for "To Many" relationships have
+an optional type matching the referenced entity type.
+For example, `PersonEntity` with an `owns` relationship to `DogEntity` instances
+has an `owns` property with a type of `NSSet?`.
+There will also be `addToOwns` and `removeFromOwns` methods
+on the entity (not the relationship property) that take a `DogEntity`
+and add to or remove from the `NSSet`.
+
+TODO: How can all instances of a given entity type be deleted?
