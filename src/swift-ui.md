@@ -4455,13 +4455,6 @@ To do this:
       func saveContext() {
         do {
             try context.save()
-
-            // Optionally refetch all the data from the context
-            // in order to have the latest in the UI.
-            // It seems very inefficient to fetch ALL the people again
-            // every time one is added, deleted, or updated!
-            fetchPeople()
-            // Possibly also fetch other kinds of entities here.
         } catch {
             print("saveContext error:", error)
         }
@@ -4476,6 +4469,8 @@ To do this:
       // Set all the attributes of the new entity instance.
       person.name = name
       saveContext()
+      people.append(person)
+      people.sort { ($0.name ?? "") < ($1.name ?? "") }
   }
   ```
 
@@ -4486,6 +4481,7 @@ To do this:
       guard let index = indexSet.first else { return }
       context.delete(people[index])
       saveContext()
+      people.remove(at: index)
   }
   ```
 
