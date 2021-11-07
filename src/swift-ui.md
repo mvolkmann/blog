@@ -1565,7 +1565,7 @@ Here are the container views that are provided by SwiftUI.
   select the color uses to fill a `Rectangle`.
 
   ```swift
-  @State var color = Color.red
+  @State private var color = Color.red
 
   var body: some View {
       VStack {
@@ -1653,17 +1653,57 @@ Here are the container views that are provided by SwiftUI.
 - `Picker`
 
   This allows selecting an option from a list.
-  By default, it displays the currently selected value.
-  Tapping it popups up a list of all the options
-  from which a new value can be selected.
+  It takes the text to display as a prompt and a `selection` argument
+  which is a binding that holds something to identify the selected value.
 
-  Adding the `.pickerStyle(.segmented)` view modifier
-  changes it to be a "segmented control"
-  that looks like a horizontal series of buttons,
-  one for each option.
+  The `pickerStyle` view modifier can be applied
+  to change the way the options are rendered.
+  The specified prompt is only rendered by some styles.
+  The values that can be passed to this include:
+
+  - `.automatic` (default)
+
+    This displays the prompt at the selected value.
+    When this is tapped, the options are rendered on a separate sheet.
+
+  - `.inline`
+
+    This displays the prompt and all the options (visible simultaneously)
+    in the current sheet.
+    The selected option is indicated by a check mark.
+
+  - `.menu`
+
+    This does not display the prompt and
+    only displays the currently selected value.
+    When the current value is tapped, all the options are
+    rendered in a dropdown menu inside the current sheet.
+
+  - `.radioGroup - not available in iOS
+
+  - `.segmented`
+
+    This does not display the prompt,
+    and renders the options as a "Segmented Control"
+    which is a horizontal row of buttons.
+    If there is insufficient room of the button text, it is elided.
+
+  - `.wheel`
+
+    This does not display the prompt,
+    and renders all the options as a scrollable wheel.
+    It requires sufficient vertical space to render properly
+    (a height of 300 works well).
+
+  When the options are generated using `ForEach` iterating over an array,
+  the selected value is described the `id` property values
+  of the array elements.
+  This can be changed by specify a `tag` value for each option.
+  The type of the `tag` values must match the type of the `selection` argument.
+  If these types differ, it will not be possible to select an option.
 
   ```swift
-  @State var shirtSize: ShirtSize = .sm
+  @State private var shirtSize: ShirtSize = .sm
 
   enum ShirtSize: String, CaseIterable {
       case sm = "Small"
@@ -1678,6 +1718,27 @@ Here are the container views that are provided by SwiftUI.
               Text("\(size.rawValue)").tag(size)
           }
       } // .pickerStyle(.segmented)
+  }
+  ```
+
+  Here's a more complex example where the `Picker` begins
+  with no option being selected.
+  Assume that `people` is an array of `Person` objects
+  that have an optional `name` property.
+
+  ```swift
+  @State private var selectedPersonIndex: Int = -1 // nothing selected
+
+  private var selectedPerson: Person? {
+      selectedPersonIndex == -1 ? nil : people[selectedPersonIndex]
+  }
+
+  ...
+
+  Picker("Owner", selection: $selectedPersonIndex) {
+      ForEach(people.indices) { index in
+          Text(people[index].name ?? "").tag(index)
+      }
   }
   ```
 
@@ -1722,7 +1783,7 @@ Here are the container views that are provided by SwiftUI.
 
   ```swift
   struct ContentView: View {
-      @State var progress = 0.0
+      @State private var progress = 0.0
 
       func startTimer() {
           // Run every 3 hundredths of a second.
@@ -2213,7 +2274,7 @@ struct Collapsable: ViewModifier {
     var bgColor: Color = .gray
     var duration: Double = 0.5 // in seconds
 
-    @State var showContent = true
+    @State private var showContent = true
 
     var halfCircle: some View {
         Circle()
@@ -2359,7 +2420,7 @@ struct MyTextField: View {
 
 // This file must define a struct named "ContentView".
 struct ContentView: View {
-    @State var status = "stop"
+    @State private var status = "stop"
 
     let lights: [Light] = [
         Light(id: "stop", color: .red),
@@ -2757,7 +2818,7 @@ struct DogRow: View {
 }
 
 struct ContentView: View {
-    @State var dogs = [
+    @State private var dogs = [
         Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
         Dog(name: "Ramsay", breed: "Native American Indian Dog"),
         Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
@@ -3035,7 +3096,7 @@ struct Food: Identifiable {
 struct ContentView: View {
     @Namespace private var foodNS
 
-    @State var foods: [Food] = [
+    @State private var foods: [Food] = [
         Food(name: "Hamburger"),
         Food(name: "Fries"),
         Food(name: "Shake"),
@@ -3332,9 +3393,9 @@ with a role of `.cancel` is provided.
 
 ```swift
 struct ContentView: View {
-    @State var dogCount = 0
-    @State var pressed = false
-    @State var tooManyDogs = false
+    @State private var dogCount = 0
+    @State private var pressed = false
+    @State private var tooManyDogs = false
 
     var body: some View {
         VStack {
@@ -3464,7 +3525,7 @@ Other `placement` values seem to be unable to render multiple buttons.
 
 ```swift
 struct ContentView: View {
-    @State var selection = "Tap a toolbar button."
+    @State private var selection = "Tap a toolbar button."
 
     var body: some View {
         NavigationView {
@@ -4496,7 +4557,7 @@ To do this:
   that has a type of `ViewModel`.
 
   ```swift
-  @StateObject var vm: ViewModel
+  @StateObject private var vm: ViewModel
   ```
 
 - To add an entity instance,
