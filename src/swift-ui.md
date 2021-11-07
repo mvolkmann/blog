@@ -663,7 +663,7 @@ To cause a view to take the full width of the screen,
 apply the `frame` view modifier.
 For example, `myView.frame(maxWidth: .infinity)`.
 In can also be useful to specify the height.
-For example, `myView.frame(maxWidth: .infinity, height: 100)`.
+For example, `myView.frame(maxWidth: .infinity, maxHeight: 100)`.
 
 Many views utilize the app accent color, also referred to as "global tint".
 To set this, select the `Assets.xcassets` file in the Navigator,
@@ -2177,7 +2177,8 @@ Commonly used view modifiers include:
 - `font(Font?)`
 - `foregroundColor(Color?)`
 - `foregroundStyle(ShapeStyle)`
-- `frame(width: CGFloat?, height: CGFloat?, Alignment)`
+- `frame(width: CGFloat?, height: CGFloat?, alignment: Alignment)`
+- `frame(maxWidth: CGFloat?, maxHeight: CGFloat?, alignment: Alignment)`
 - `border(ShapeStyle, width: CGFloat = 1)`
 - `lineLimit(Int?)`
 - `multilineTextAlignment(TextAlignment)`
