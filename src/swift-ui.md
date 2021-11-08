@@ -1180,12 +1180,14 @@ Here are the container views that are provided by SwiftUI.
 
 - `ForEach`
 
-  This view iterates of the elements of an array
+  This view iterates of the elements of a `RandomAccessCollection`
+  (includes `Array` and `Range` types)
   and renders the view specified in its `ViewBuilder`.
 
-  The elements in the array must either conform to the `Identifiable` protocol
-  (which requires them to have an `id` property)
+  The elements in the `RandomAccessCollection` must either conform to
+  the `Identifiable` protocol (which requires them to have an `id` property)
   OR the `id:` argument must be set.
+  Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`).
   The value of `id:` is a key path that specifies
   how to find a unique value in the element.
   For example, the `String` type does not implement `Identifiable`.

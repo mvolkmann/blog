@@ -1239,7 +1239,7 @@ the elements in the collection can be modified.
 However, when a constant is initialized to a collection instance,
 the elements in the collection cannot be modified.
 
-The class hierarchy of the built-in collections,
+A partial class hierarchy of the built-in collections,
 including the protocols to which they conform, is:
 
 - `Sequence` protocol
@@ -1248,8 +1248,16 @@ including the protocols to which they conform, is:
     - `Range` struct
     - `Set` struct
     - `Slice` struct
+    - `BidirectionalCollection` protocol
+      - `RandomAccessCollection` protocol
+        - `Array` struct
+        - `Data` struct - byte buffer
+        - `range` struct
+      - `Range` struct
+      - `String`
     - `MutableCollection` protocol
       - `Array` struct
+      - `Data` struct - byte buffer
       - `Dictionary.Values` struct
 
 The `Sequence` protocol defines operations for collections that
