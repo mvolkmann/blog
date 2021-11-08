@@ -2117,7 +2117,10 @@ print(dog.age, dog2.age) // 2 1
 A computed property is defined with a `get` function
 that computes the value each time it is referenced.
 These must be declared with `var` rather than `let`.
-These are similar to "reactive declarations" in Svelte,
+A type must be specified and is followed by
+a code block with no equal sign preceding it.
+
+Computed properties are similar to "reactive declarations" in Svelte,
 but differ in that they only update when referenced
 and do not trigger UI updates.
 

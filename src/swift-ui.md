@@ -1226,7 +1226,11 @@ Here are the container views that are provided by SwiftUI.
   This hides and shows its contents based on whether it is in an expanded state.
   By default it is not expanded.
   It can be expanded by tapping or by associating
-  a `Bool` binding that is programatically set to `true`.
+  a `Bool` binding that is programmatically set to `true`.
+
+  <img alt="SwiftUI DisclosureGroup" style="width: 40%"
+    src="/blog/assets/SwiftUI-DisclosureGroup.png?v={{pkg.version}}"
+    title="SwiftUI DisclosureGroup">
 
   ```swift
   @State private var cyclist = false
@@ -1357,15 +1361,39 @@ Here are the container views that are provided by SwiftUI.
 
 - `HSplitView`
 
-  TODO
+  This is a layout container that organized its children horizontally
+  and allows users to resize the children by dragging dividers between them.
+  It is only supported in macOS.
 
 - `VSplitView`
 
-  TODO
+  This is a layout container that organized its children vertically
+  and allows users to resize the children by dragging dividers between them.
+  It is only supported in macOS.
 
 - `TimelineView`
 
-  TODO
+  This is a container that re-renders its children at scheduled times.
+  The following example renders the date and time every second.
+  For example, "Nov 8, 2021 at 5:19:47".
+
+  ```swift
+  private var dateFormatter: DateFormatter {
+      let df = DateFormatter()
+      df.dateFormat = "MMM d, YYYY 'at' h:mm:ss a"
+      return df
+  }
+
+  private let schedule = PeriodicTimelineSchedule(from: Date(), by: 1)
+
+  var body: some View {
+      VStack {
+          TimelineView(schedule) { context in
+              Text(dateFormatter.string(from: context.date))
+          }
+      }
+  }
+  ```
 
 ### Component Views
 
