@@ -1198,13 +1198,10 @@ Here are the container views that are provided by SwiftUI.
   ForEach(stringArray, id: \.self) { ... }
   ```
 
-- `DynamicViewContent`
-
-  TODO
-
 - `Table`
 
-  TODO
+  This is only available in macOS 12 and above.
+  TODO: Try this in a macOS app!
 
 - `NavigationView`
 
@@ -1226,7 +1223,32 @@ Here are the container views that are provided by SwiftUI.
 
 - `DisclosureGroup`
 
-  TODO
+  This hides and shows its contents based on whether it is in an expanded state.
+  By default it is not expanded.
+  It can be expanded by tapping or by associating
+  a `Bool` binding that is programatically set to `true`.
+
+  ```swift
+  @State private var cyclist = false
+  @State private var firstName = ""
+  @State private var lastName = ""
+  @State private var personalExpanded = true
+  @State private var runner = false
+
+  var body: some View {
+      Form {
+          DisclosureGroup("Personal", isExpanded: $personalExpanded) {
+              TextField("First Name", text: $firstName)
+              TextField("Last Name", text: $lastName)
+          }
+
+          DisclosureGroup("Preferences") {
+              Toggle("Runner", isOn: $runner)
+              Toggle("Cyclist", isOn: $cyclist)
+          }
+      }
+  }
+  ```
 
 - `TabView`
 
