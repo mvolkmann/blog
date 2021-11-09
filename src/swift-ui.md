@@ -2686,7 +2686,50 @@ struct ContentView: View {
 
 ### @ObservedObject
 
-TODO: Describe this.
+This subscribes to an observable object
+and recomputes the associated view `body` when it changes.
+It is used in cases when an observable object is passed into a view.
+The following example demonstrates this.
+
+```swift
+class MyState: ObservableObject {
+    @Published var score: Int = 0
+    // Could declare additional published properties here.
+}
+
+struct ChildView: View {
+    @ObservedObject var share: MyState
+
+    var body: some View {
+        VStack {
+            Button("ChildView: Increment") {
+                // This also updates myState in ContentView.
+                share.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("ChildView: score = \(share.score)")
+        }
+    }
+}
+
+struct ContentView: View {
+    @StateObject var myState = MyState()
+
+    var body: some View {
+        VStack {
+            Button("ContentView: Increment") {
+                // This also updates share in ChildView.
+                myState.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("ContentView: score = \(myState.score)")
+
+            // Passing the @StateObject variable.
+            ChildView(share: myState)
+        }
+    }
+}
+```
 
 ## AttributedString
 
