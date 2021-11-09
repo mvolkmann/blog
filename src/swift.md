@@ -3696,3 +3696,6 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Adoption of Swift and SwiftUI would be much higher if
   there was a way to generate an Android app from a Swift app.
+
+- Why do SwiftUI `ViewBuilders` support `if` and `switch` statements,
+  but not `for` loops? We have to use the `ForEach` view instead.

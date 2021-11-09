@@ -1047,7 +1047,8 @@ Here are the container views that are provided by SwiftUI.
 
   - checkbox: alternative is Toggle
   - image picker: must build or using a library
-  - multiple choice: alternative is `List` inside `NavigationView` with `EditButton`
+  - multiple choice: alternative is `List`
+    inside `NavigationView` with `EditButton`
   - radio buttons: alternative is `Picker` (supported in macOS with
     `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
   - toggle buttons: alternative is `Picker`
@@ -1643,11 +1644,14 @@ var body: some View {
 
 - `EditButton`
 
-  TODO: Is this only used in a `List`?
+  This toggles the edit mode of a `List`.
+  It is typically added to a `List` using the `toolbar` view modifier.
+  See the example in the "Lists" section.
 
 - `PasteButton`
 
-  TODO: What is this?
+  This is only available in macOS 10.15 and above.
+  It renders a button for pasting data from the system clipboard.
 
 - `Link`
 
@@ -2259,8 +2263,6 @@ struct ContentView: View {
     Divider().frame(maxWidth: 200)
     ```
 
-TODO: Are `Color` and `LinearGradient` views?
-
 ## View Modifiers
 
 View modifiers are methods that can be called on a view to create
@@ -2422,7 +2424,7 @@ struct Collapsable: ViewModifier {
                 .background(bgColor)
 
                 //TODO: Can you scale the height of the HStack
-                //TOOO: instead of using the default fade transition?
+                //TODO: instead of using the default fade transition?
                 //.transition(.scale)
                 //.scaleEffect(showContent ? 1 : 0)
                 //.animation(.easeInOut(duration: 1))
@@ -2510,7 +2512,6 @@ struct CircleButton: View {
                 // Conditional logic can be implemented with an "if" statement,
                 // but iteration cannot be implemented with a "for-in" loop.
                 // A "ForEach" View must be used instead.
-                //TODO: Why the difference?
                 if selected {
                     Circle().strokeBorder(Color.black, lineWidth: 5)
                 }
@@ -2567,6 +2568,64 @@ struct ContentView: View {
     }
 }
 ```
+
+## Property Wrappers
+
+SwiftUI supports the following property wrappers:
+
+### @Binding
+
+This property wrapper is applied to properties of views
+that are passed bindings from parent views.
+It allows the child view to read and write a value that
+is owned by the parent view and passed in as an argument.
+
+```swift
+struct ChildView: View {
+    @Binding var n: Int
+
+    var body: some View {
+        VStack {
+            Text("ChildView: n = \(n)")
+            Button("Increment") {
+                n += 1
+            }
+            .buttonStyle(.bordered)
+        }
+    }
+}
+
+struct ParentView: View {
+    @State var number = 0
+
+    var body: some View {
+        VStack {
+            Text("ParentView: number = \(number)")
+            ChildView(n: $number) // $ is required to pass a binding
+        }
+    }
+}
+```
+
+### @Environment
+
+TODO: Describe this.
+
+### @EnvironmentObject
+
+TODO: Describe this.
+
+### @State
+
+TODO: Describe this.
+
+### @StateObject
+
+TODO: Describe this.
+
+### @ObservedObject
+
+TODO: Describe this.
 
 ## AttributedString
 
@@ -4759,5 +4818,4 @@ do {
 } catch {
     print("fetchPeople error:", error)
 }
-
 ```
