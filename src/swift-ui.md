@@ -2811,10 +2811,107 @@ These include:
 
 ## Environment
 
-A collection of values are available to all views
-through the `@Environment` wrapper.
+SwiftUI provides many values to all views through the "environment".
+Highlights includes:
 
-TODO: See https://developer.apple.com/documentation/swiftui/environmentvalues.
+- `accessibilityReduceMotion: Bool`
+
+  This captures the user preference for reducing motion.
+  It can be used to determine the kinds of animations that should be used.
+
+- `colorScheme: ColorScheme`
+
+  This is an `enum` with the cases `light` and `dark`.
+
+- `defaultWheelPickerItemHeight: CGFloat`
+
+  This can be used to calculate the `frame` height needed for a wheel picker.
+
+- `managedObjectContext: NSManagedObjectContext`
+
+  This holds the context being used for Core Data.
+
+- `locale: Locale`
+
+  This holds the current locale and can be used for internationalization.
+
+- `editMode: EditMode`
+
+  This indicates whether the user can currently edit view content.
+  It is an `enum` with the cases `active`, `inactive`,
+  and `transient` (temporary edit mode).
+
+- `font: Font?`
+
+  This describes the default font.
+
+Any view in the view hierarchy can access environment data
+using the `@Environment` property wrapper.
+
+It is also possible to add custom data to the environment.
+The following example demonstrates this by adding
+the custom environment value "primaryColor".
+Environment values provided by Apple are accessed and modified in the same way.
+
+```swift
+import SwiftUI
+
+// Defines a custom environment key and its default value.
+private struct PrimaryColorKey: EnvironmentKey {
+    static let defaultValue = Color.red
+}
+
+// Adds the custom environment value.
+extension EnvironmentValues {
+    var primaryColor: Color {
+        get { self[PrimaryColorKey.self] }
+        set { self[PrimaryColorKey.self] = newValue }
+    }
+}
+
+struct ChildView: View {
+    @Environment(\.primaryColor) var primaryColor
+
+    var body: some View {
+        VStack {
+            // Renders in blue.
+            Text("in ChildView").foregroundColor(primaryColor)
+            GrandchildView()
+        }
+    }
+}
+
+struct GrandchildView: View {
+    @Environment(\.primaryColor) var primaryColor
+
+    var body: some View {
+        // Renders in blue.
+        Text("in GrandchildView").foregroundColor(primaryColor)
+    }
+}
+
+struct ContentView: View {
+    @Environment(\.primaryColor) var primaryColor
+
+    var body: some View {
+        VStack {
+            // Renders in green.
+            Text("in ContentView").foregroundColor(primaryColor)
+            // Overrides default value of primaryColor
+            // for all views under ChildView.
+            ChildView().environment(\.primaryColor, .blue)
+
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Overrides default value of primaryColor for entire app.
+        ContentView().environment(\.primaryColor, .green)
+    }
+}
+```
 
 ## Search
 
