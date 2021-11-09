@@ -2609,11 +2609,13 @@ struct ParentView: View {
 
 ### @Environment
 
-TODO: Describe this.
+This is used to access environment values.
+See the "Environment" section.
 
 ### @EnvironmentObject
 
-TODO: Describe this.
+This is used to share access to an `ObservableObject` between views.
+See the "Environment" section.
 
 ### @State
 
@@ -2909,6 +2911,69 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         // Overrides default value of primaryColor for entire app.
         ContentView().environment(\.primaryColor, .green)
+    }
+}
+```
+
+The `@EnvironmentObject` property wrapper allows multiple views
+to share access to an `ObservableObject`.
+The following example demonstrates this.
+
+```swift
+// Environment objects must be defined by classes
+// that conform to the ObservableObject protocol
+// and they should publish at least one property.
+class SharedData: ObservableObject {
+    @Published var name = "Mark"
+    @Published var score = 0
+}
+
+struct ChildView: View {
+    // This value will be received from the environment.
+    @EnvironmentObject var sharedData: SharedData
+
+    var body: some View {
+        VStack {
+            Text("ChildView: name = \(sharedData.name)")
+            Text("ChildView: score = \(sharedData.score)")
+            Button("Increment Score") {
+                // This change will be published to all views
+                // that use the SharedData score property.
+                sharedData.score += 1
+            }
+            .buttonStyle(.bordered)
+            GrandchildView()
+        }
+        .environmentObject(sharedData)
+    }
+}
+
+struct GrandchildView: View {
+    // This value will be received from the environment.
+    @EnvironmentObject var sharedData: SharedData
+
+    var body: some View {
+        VStack {
+            Text("GrandchildView: name = \(sharedData.name)")
+            Text("GrandchildView: score = \(sharedData.score)")
+        }
+    }
+}
+
+struct ContentView: View {
+    @StateObject var sharedData = SharedData()
+
+    var body: some View {
+        VStack {
+            Text("ContentView: name = \(sharedData.name)")
+            Text("ContentView: score = \(sharedData.score)")
+            ChildView()
+        }
+        // All views inside this VStack can access the sharedData object.
+        // The environmentObject view modifier can be called
+        // multiple times, but only once for each type because
+        // the type is how the values are distinguished.
+        .environmentObject(sharedData)
     }
 }
 ```
@@ -3598,10 +3663,6 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
-
-TODO: Add information about the @EnvironmentObject property wrapper
-TODO: which is used to share data between views.
-TODO: See https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views
 
 ## Popovers
 
