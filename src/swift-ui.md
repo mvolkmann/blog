@@ -1201,58 +1201,95 @@ Here are the container views that are provided by SwiftUI.
 - `Table`
 
   This is only available in macOS 12 and above.
-  TODO: Try this in a macOS app!
-
-- `NavigationView`
-
-  This marks an area where a stack of views will be rendered one at a time.
-  It contains `NavigationLink` views that are similar to HTML anchor elements.
-  Tapping them causes the associated view
-  to be rendered inside the `NavigationView`.
-  See the "Navigation" section later.
-
-- `NavigationLink`
-
-  These are used inside a `NavigationView`.
-  See the "Navigation" section later.
-
-- `OutlineGroup`
-
-  This displays a tree of data with disclosure angle brackets.
-  See my SwiftUI-OutlineGroup project and the questions in it.
-
-- `DisclosureGroup`
-
-  This hides and shows its contents based on whether it is in an expanded state.
-  By default it is not expanded.
-  It can be expanded by tapping or by associating
-  a `Bool` binding that is programmatically set to `true`.
-
-  <img alt="SwiftUI DisclosureGroup" style="width: 40%"
-    src="/blog/assets/SwiftUI-DisclosureGroup.png?v={{pkg.version}}"
-    title="SwiftUI DisclosureGroup">
+  The following example demonstrates using a `Table`
+  that supports row selection and column sorting.
 
   ```swift
-  @State private var cyclist = false
-  @State private var firstName = ""
-  @State private var lastName = ""
-  @State private var personalExpanded = true
-  @State private var runner = false
+  struct Dog: Identifiable {
+    let name: String
+    let breed: String
+    let color: String
+    let id = UUID()
+  }
 
-  var body: some View {
-      Form {
-          DisclosureGroup("Personal", isExpanded: $personalExpanded) {
-              TextField("First Name", text: $firstName)
-              TextField("Last Name", text: $lastName)
-          }
+  private var dogs = [ // initially sorted on name
+      Dog(name: "Comet", breed: "Whippet", color: "black brindle"),
+      Dog(name: "Maisey", breed: "Treeing Walker Coonhound", color: "black"),
+      Dog(name: "Oscar", breed: "German Shorthaired Pointer", color: "white"),
+      Dog(name: "Ramsay", breed: "Native American Indian Dog", color: "gray")
+  ]
 
-          DisclosureGroup("Preferences") {
-              Toggle("Runner", isOn: $runner)
-              Toggle("Cyclist", isOn: $cyclist)
+  struct ContentView: View {
+      @State private var selectedDogs = Set<Dog.ID>()
+      @State private var sortOrder = [KeyPathComparator(\Dog.name)] // initial
+
+      var body: some View {
+          Table(dogs, selection: $selectedDogs, sortOrder: $sortOrder) {
+              TableColumn("Name", value: \.name)
+              TableColumn("Breed", value: \.breed)
+              TableColumn("Color", value: \.color)
           }
+          // Why do these view modifiers have no effect?
+          //.tableStyle(InsetTableStyle.inset(alternatesRowBackgrounds: true))
+          //.tableStyle(BorderedTableStyle.bordered(alternatesRowBackgrounds: true))
+
+          // Why does the first click on a table heading do nothing?
+          .onChange(of: sortOrder) { dogs.sort(using: $0) }
+          Text("\(selectedDogs.count) dogs selected")
       }
   }
   ```
+
+- `NavigationView`
+
+This marks an area where a stack of views will be rendered one at a time.
+It contains `NavigationLink` views that are similar to HTML anchor elements.
+Tapping them causes the associated view
+to be rendered inside the `NavigationView`.
+See the "Navigation" section later.
+
+- `NavigationLink`
+
+These are used inside a `NavigationView`.
+See the "Navigation" section later.
+
+- `OutlineGroup`
+
+This displays a tree of data with disclosure angle brackets.
+See my SwiftUI-OutlineGroup project and the questions in it.
+
+- `DisclosureGroup`
+
+This hides and shows its contents based on whether it is in an expanded state.
+By default it is not expanded.
+It can be expanded by tapping or by associating
+a `Bool` binding that is programmatically set to `true`.
+
+<img alt="SwiftUI DisclosureGroup" style="width: 40%"
+  src="/blog/assets/SwiftUI-DisclosureGroup.png?v={{pkg.version}}"
+  title="SwiftUI DisclosureGroup">
+
+```swift
+@State private var cyclist = false
+@State private var firstName = ""
+@State private var lastName = ""
+@State private var personalExpanded = true
+@State private var runner = false
+
+var body: some View {
+    Form {
+        DisclosureGroup("Personal", isExpanded: $personalExpanded) {
+            TextField("First Name", text: $firstName)
+            TextField("Last Name", text: $lastName)
+        }
+
+        DisclosureGroup("Preferences") {
+            Toggle("Runner", isOn: $runner)
+            Toggle("Cyclist", isOn: $cyclist)
+        }
+    }
+}
+```
 
 - `TabView`
 
@@ -1470,7 +1507,37 @@ Here are the container views that are provided by SwiftUI.
 
 - `AsyncImage`
 
-  TODO: What is this?
+  This asynchronously loads and displays an image.
+  It works in the Simulator, but not in Preview.
+  The following example renders the Swift logo.
+
+  <img alt="SwiftUI AsyncImage" style="width: 40%"
+    src="/blog/assets/SwiftUI-AsyncImage.png?v={{pkg.version}}"
+    title="SwiftUI AsyncImage">
+
+  ```swift
+  struct ContentView: View {
+    private let imageUrl =
+        "https://developer.apple.com/swift/images/swift-og.png"
+    private let size = 100.0
+
+    var body: some View {
+        VStack {
+            AsyncImage(
+                url: URL(string: imageUrl),
+                content: { image in
+                    image
+                        .resizable()
+                        .frame(width: size, height: size)
+                },
+                placeholder: { ProgressView() } // spinner
+            )
+        }
+    }
+  }
+  ```
+
+  TODO: Add an example.
 
 - `Text`
 

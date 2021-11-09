@@ -3287,6 +3287,18 @@ It is a passable IDE with many issues.
   "https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022",
   "Apple Developer Forum post" %}.
 
+To create a "Playground" for experimenting with code
+select File ... New ... Playground.
+
+To create a new project, select File ... New ... Project or press cmd-shift-n.
+Next, select a project template.
+These are organized by types which include
+"Multiplatform" (for apps that run in multiple OSes),
+"iOS", "macOS", "watchOS", "tvOS", "DriverKit", and "Other".
+The templates are further divided into the categories
+"Application", "Framework & Library", and "Other".
+Usually "App" under the "Application" category is the desired template.
+
 Xcode provides great intellisense and code completion.
 For function calls, press tab after entering each argument
 to advance to the next argument.
