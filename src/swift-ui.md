@@ -2619,7 +2619,20 @@ See the "Environment" section.
 
 ### @State
 
-TODO: Describe this.
+This enables view structs to maintain state.
+
+When the value of a normal struct property
+(declared without a property wrapper)
+is modified, a new instance of the struct is created.
+This happens because structs are value types.
+
+We don't want a new instance to be created for structs that represent views.
+Applying the `@State` property wrapper to a struct property
+prevents this because SwiftUI manages the value outside of the struct.
+When the value of this kind of property is changed,
+the view `body` is recomputed.
+
+This is somewhat like the `useState` hook in React.
 
 ### @StateObject
 
