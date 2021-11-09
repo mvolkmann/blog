@@ -2637,7 +2637,7 @@ the view `body` is recomputed.
 This is somewhat like the `useState` hook in React.
 
 An `@State` property can also store more complex types.
-However if it is used to store a class instance
+However if it is used to store a class instance (a reference type)
 and a property of the class is modified,
 the associated view `body` will not be recomputed.
 A new class instance must be created to trigger an update.
@@ -2651,7 +2651,38 @@ it copies every property of the struct.
 
 ### @StateObject
 
-TODO: Describe this.
+This creates an instance of an `ObservableObject`
+which is an object that publishes changes to its properties
+that are annotated with the `@Published` property wrapper.
+When the values of these properties change,
+the associated view `body` will be recomputed.
+
+Applying the `@StateObject` property wrapper
+to a view property that holds a class instance
+allows the view `body` to be recomputed when the
+value of any published property of the class instance is modified.
+The following example demonstrates this.
+
+```swift
+class MyState: ObservableObject {
+    @Published var score: Int = 0
+    // Could declare additional published properties here.
+}
+
+struct ContentView: View {
+    @StateObject var myState = MyState()
+
+    var body: some View {
+        VStack {
+            Button("Increment") {
+                myState.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("score = \(myState.score)")
+        }
+    }
+}
+```
 
 ### @ObservedObject
 
