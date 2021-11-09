@@ -1013,8 +1013,6 @@ Here are the container views that are provided by SwiftUI.
                       }
                       HStack {
                           Text("Rating")
-                          //TODO: Why does value have to be Float
-                          //TODO: instead of Int?
                           Slider(value: $rating, in: 0...10, step: 1)
                           Text("\(Int(rating))")
                       }
@@ -1730,6 +1728,7 @@ var body: some View {
 
   This renders a horizontal track with a thumb that
   slides between minimum and maximum values.
+  The current value must have the type `Float`, not `Int`.
   Text and/or icons can be displayed at the leading and trailing ends.
 
   ```swift
@@ -3245,15 +3244,28 @@ struct Dog {
     var breed: String
 }
 
+// This makes it easier to render text that has a specified width.
+struct SizedText: View {
+    private var text: String
+    private var width: Double
+
+    init(_ text: String, width: Double) {
+        self.text = text
+        self.width = width
+    }
+
+    var body: some View {
+        Text(text).frame(width: width, alignment: .leading)
+    }
+}
+
 struct DogRow: View {
     var dog: Dog
 
     var body: some View {
-        // TODO: How can you control column widths so this renders like a table?
         HStack {
-            Text(dog.name)
-            Spacer()
-            Text(dog.breed)
+            SizedText(dog.name, width: 100)
+            SizedText(dog.breed, width: 200)
         }
     }
 }
