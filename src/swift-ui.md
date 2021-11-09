@@ -2620,6 +2620,8 @@ See the "Environment" section.
 ### @State
 
 This enables view structs to maintain state.
+It is intended for storing basic values with types like
+`Bool`, `Int`, `Double`, and `String`.
 
 When the value of a normal struct property
 (declared without a property wrapper)
@@ -2633,6 +2635,19 @@ When the value of this kind of property is changed,
 the view `body` is recomputed.
 
 This is somewhat like the `useState` hook in React.
+
+An `@State` property can also store more complex types.
+However if it is used to store a class instance
+and a property of the class is modified,
+the associated view `body` will not be recomputed.
+A new class instance must be created to trigger an update.
+
+Note that using a `struct` instead of a `class`
+in the scenario described above does work.
+The reason is that changing the value of a struct property
+creates a new instance of the struct.
+However, this may no be desirable because
+it copies every property of the struct.
 
 ### @StateObject
 
