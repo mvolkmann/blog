@@ -1537,8 +1537,6 @@ var body: some View {
   }
   ```
 
-  TODO: Add an example.
-
 - `Text`
 
   This view renders text.
