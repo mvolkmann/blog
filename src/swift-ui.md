@@ -4357,7 +4357,7 @@ To run this app as a watchOS app in the simulator:
 - enter a product name
 - click Finish, then Activate
 
-TODO: Why does the Simulator always just display "Hello, World!"
+TODO: Why does the Apple Watch Simulator always just display "Hello, World!"
 TODO: and not what is in this app?
 
 ```swift
@@ -4382,9 +4382,8 @@ macOS does not support the `navigationBarTitle` view modifier.
 Here is a shim that provides a shell implementation
 so the same code that works in iOS can work in macOS.
 
-To run this app as a macOS app in the simulator:
-
-- TODO: Determine these steps.
+To run this app as a macOS app in the Simulator,
+either create the app as either a Multiplatform App or a macOS app.
 
 ```swift
 #if os(macOS)
@@ -4631,12 +4630,6 @@ let name = person[keyPath: namePath] // "Mark"
 All objects have the property `self` that refers to the whole object.
 To write a key path that refers to the whole object
 rather than a specific property inside it, use `\.self`.
-
-## Contexts
-
-A SwiftUI context is ...
-Most apps only use a single context.
-TODO: Is this only used with Core Data?
 
 ## Environments
 

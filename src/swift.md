@@ -792,7 +792,22 @@ Numeric foundation functions include:
 The `String` type is a `struct` that represents a sequence of Unicode characters.
 Literal `Character` and single-line `String` values
 are both delimited by double-quotes.
-Multi-line `String` values are delimited by triple double-quotes.
+
+Multi-line `String` values are delimited by triple double-quotes
+that are on their own lines.
+The lines of text between the delimiters should not be indented
+because indentation whitespace is retained.
+Newline characters other than the first and last are retained
+unless each line but the last ends with a backslash.
+For example:
+
+```swift
+let someParagraph = """
+The newline at the end of this line is retained.
+But the newline here is not retained \
+because the line ends with a backslash.
+"""
+```
 
 Strings are value types.
 This means that assigning a `String` variable to another
