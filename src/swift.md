@@ -594,7 +594,7 @@ do {
 A type alias assigns an alternate name to another type.
 By convention these names are CamelCase, beginning with an uppercase letter.
 
-One use is to provide additional documentation for primitive types.
+One use is to provide additional documentation for basic types.
 For example, the following documents the expected format of a `String`.
 
 ```swift
@@ -654,7 +654,10 @@ do {
 }
 ```
 
-## Primitive Types
+## Basic Types
+
+These are types that other programming languages refer to as primitive types.
+In Swift, values of these types are objects with properties and methods.
 
 | Type          | Description                                                  |
 | ------------- | ------------------------------------------------------------ |
@@ -1711,12 +1714,12 @@ Its value can also be inlined in the generated code.
 
 ## Type Checking and Casting
 
-Primitive type names can be used as functions
-to cast another primitive type to a given type.
+Basic type names can be used as functions
+to cast another basic type to a given type.
 The `Bool` and `Characters` types can be cast to and from a `String`,
 but no other types.
 
-The following code demonstrates the supported primitive type casts.
+The following code demonstrates the supported basic type casts.
 
 ```swift
 let b = true
@@ -3570,7 +3573,7 @@ your opinions about JavaScript don't matter.
 Web development is primary done with JavaScript (or TypeScript)
 and you have to accept that.
 
-In a similar way, kf you want to do iOS or Mac development,
+In a similar way, if you want to do iOS or Mac development,
 your opinions about Swift don't matter.
 Most developers prefer it over Objective-C and there are no other choices.
 
@@ -3673,7 +3676,7 @@ the features of Swift that are annoying, at least in my opinion.
   in front of every expression that can throw.
 
 - Why doesn't the `Character` type conform to the
-  `Decodable` and `Encodable` protocols like the other primitive types?
+  `Decodable` and `Encodable` protocols like the other basic types?
 
 - How is a new module defined?
   Can it be implemented by multiple source files?
@@ -3714,3 +3717,8 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Why do SwiftUI `ViewBuilders` support `if` and `switch` statements,
   but not `for` loops? We have to use the `ForEach` view instead.
+
+- I kind of miss the CSS ability to define styling across all of my views.
+
+- Learn how to use FontAwesome icons in a SwiftUI app.
+  See <https://iosexample.com/use-fontawesome-5-with-swiftui/>.
