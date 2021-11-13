@@ -3164,11 +3164,29 @@ do {
 }
 ```
 
-## HTTP Requests
+## Packages
+
+The {% aTargetBlank "https://www.swift.org/package-manager/",
+"Swift Package Manager" %} is a
+"tool for managing the distribution of Swift code".
+It is similar to npm for JavaScript.
+Installing the Swift compiler also installs the Swift package manager.
+
+To install a package, enter
+TODO: Finish this.
+
+## HTTP
 
 Sending HTTP requests and processing HTTP responses is fairly tedious.
 Perhaps using the new `async` and `await` keywords will make this easier,
 but those require macOS 12 or higher or an unknown iOS version.
+
+Another option is to use the {% aTargetBlank
+"https://github.com/swift-server/async-http-client", "AsyncHTTPClient" %}
+HTTP client library.
+
+The following example demonstrates sending an HTTP GET request
+without using a library.
 
 ```swift
 import Foundation
@@ -3236,6 +3254,47 @@ let task = URLSession.shared.dataTask(with: url) { data, response, error in
 
 task.resume()
 group.wait()
+```
+
+The next example demonstrates using the AsyncHTTPClient package.
+
+```swift
+TODO: Add this.
+```
+
+It is also possible to implement HTTP servers in Swift.
+The most popular package for doing this is
+{% aTargetBlank "https://github.com/vapor/vapor", "Vapor" %}.
+To install Vapor, first install
+{% aTargetBlank "https://brew.sh", "Homebrew" %}
+and then enter `brew install vapor`.
+
+To create, build, and run a new Vapor project:
+
+- Enter `vapor new {project-name} -n`.
+- Enter `open Package.swift` to open the project in Xcode
+  and install the dependencies.
+  This takes a couple of minutes to complete.
+- Press the play button in the upper-right to build and start the server.
+  The first build takes a couple of minutes to complete.
+
+The server listens on port 8080 by default.
+To change this, add the following in the `configure` function
+inside `Sources/App/Controllers/configure.swift`:
+
+```swift
+app.http.server.configuration.port = {new-port-number}
+```
+
+The routes are defined in `Sources/App/Controllers/routes.swift`.
+The only provided routes are `GET /`which returns "It works!"
+and`GET /hello` which returns "Hello, world!".
+
+The following example demonstrates using Vapor to implement
+a set of REST services for performing CRUD operations on a collection of dogs.
+
+```swift
+TODO: Add this.
 ```
 
 ## Shell Commands
