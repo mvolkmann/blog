@@ -499,16 +499,16 @@ To handle errors, use one of the following approaches:
   This is different from most programming languages where
   it is assumed that any statement in a `try` block can thrown.
 
-  Each `case` can be followed by a pattern, or list of patterns,
+  Each `catch` can be followed by a pattern, or list of patterns,
   that identify the kinds of errors it handles.
   To access data associated with errors caught by these cases,
   use the `let` syntax shown in the example code below.
 
-  A `case` with no pattern can appear at the end
+  A `catch` with no pattern can appear at the end
   and is used to handle all remaining kinds of errors.
   Inside this block the variable `error` is set to the value that was thrown.
 
-  If none of the cases handle the error type that has occurred,
+  If none of the catches handle the error type that has occurred,
   the error is propagated to the caller.
 
   If an error propagates to the top of the call chain and is not handled,
@@ -3290,11 +3290,121 @@ The routes are defined in `Sources/App/Controllers/routes.swift`.
 The only provided routes are `GET /`which returns "It works!"
 and`GET /hello` which returns "Hello, world!".
 
+After modifying the routes, stop the server
+by clicking the stop button (square) in the upper-right of Xcode
+and restart the server by clicking the play button.
+
 The following example demonstrates using Vapor to implement
 a set of REST services for performing CRUD operations on a collection of dogs.
 
 ```swift
-TODO: Add this.
+import Vapor
+
+// Must conform to the Content protocol
+// in order to return from a route.
+struct Dog: Content {
+    let id: Int
+    var name: String
+    var breed: String
+}
+
+struct NewDog: Content {
+    let name: String
+    let breed: String
+}
+
+var dogMap: [Int: Dog] = [:]
+
+var lastId = 0
+
+func addDog(name: String, breed: String) -> Dog {
+    lastId += 1
+    let dog = Dog(id: lastId, name: name, breed: breed)
+    dogMap[lastId] = dog
+    return dog
+}
+
+func setup() {
+    _ = addDog(name: "Maisey", breed: "Treeing Walker Coonhound")
+    _ = addDog(name: "Ramsay", breed: "Native American Indian Dog")
+    _ = addDog(name: "Oscar", breed: "German Shorthaired Pointer")
+    _ = addDog(name: "Comet", breed: "Whippet")
+}
+
+func routes(_ app: Application) throws {
+    setup()
+
+    // Could refactor to use a controller.
+
+    app.get { _ in "Hello, World!" }
+
+    // The Content-Type header will automatically be set to "application/json".
+    app.get("dog") { _ -> [Dog] in
+        Array(dogMap.values)
+    }
+
+    app.get("dog", ":id") { req -> Dog in
+        guard let id = req.parameters.get("id", as: Int.self) else {
+            throw Abort(.badRequest, reason: "missing id param")
+        }
+
+        if let dog = dogMap[id] {
+            return dog
+        } else {
+            throw Abort(.notFound)
+        }
+    }
+
+    app.post("dog") { req -> Dog in
+        guard let byteBuffer = req.body.data else {
+            throw Abort(.badRequest, reason: "invalid or missing body")
+        }
+
+        do {
+            let newDog = try JSONDecoder().decode(NewDog.self, from: byteBuffer)
+            return addDog(name: newDog.name, breed: newDog.breed)
+        } catch {
+            throw Abort(.badRequest, reason: "failed to decode body to Dog")
+        }
+    }
+
+    app.put("dog", ":id") { req -> Dog in
+        guard let id = req.parameters.get("id", as: Int.self) else {
+            throw Abort(.badRequest, reason: "missing id param")
+        }
+
+        // This creates a copy of the struct.
+        guard var dog = dogMap[id] else {
+            throw Abort(.notFound, reason: "no dog with id \(id) found")
+        }
+
+        guard let byteBuffer = req.body.data else {
+            throw Abort(.badRequest, reason: "invalid or missing body")
+        }
+
+        do {
+            let newDog = try JSONDecoder().decode(NewDog.self, from: byteBuffer)
+            // Update the copied struct.
+            dog.name = newDog.name
+            dog.breed = newDog.breed
+
+            // Update the value in dogMap.
+            dogMap[id] = dog
+            return dog
+        } catch {
+            throw Abort(.badRequest, reason: "failed to decode body to Dog")
+        }
+    }
+
+    app.delete("dog", ":id") { req -> HTTPStatus in
+        guard let id = req.parameters.get("id", as: Int.self) else {
+            throw Abort(.badRequest, reason: "missing id param")
+        }
+
+        let dog = dogMap.removeValue(forKey: id)
+        return dog == nil ? .notFound : .ok
+    }
+}
 ```
 
 ## Shell Commands
