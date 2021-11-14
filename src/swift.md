@@ -3256,10 +3256,17 @@ task.resume()
 group.wait()
 ```
 
-The next example demonstrates using the AsyncHTTPClient package.
+The next example demonstrates using the {% aTargetBlank
+"https://github.com/swift-server/async-http-client", "AsyncHTTPClient" %}
+package.
+To install this in a Swift app, select File ... Add Packages...
+and enter the GitHub URL in the search input in the upper-right
+which is <https://github.com/swift-server/async-http-client>.
+Select async-http-client and click the "Copy Dependency" button.
+This takes a few minutes to copy files into the app.
 
 ```swift
-TODO: Add this.
+TODO: Add this.  See the SwiftUI-AsyncHTTPClient app.
 ```
 
 It is also possible to implement HTTP servers in Swift.
@@ -3296,6 +3303,8 @@ and restart the server by clicking the play button.
 
 The following example demonstrates using Vapor to implement
 a set of REST services for performing CRUD operations on a collection of dogs.
+To start the server from a terminal, enter `vapor run`.
+This takes a couple of minutes the first time the server is started.
 
 ```swift
 import Vapor

@@ -597,6 +597,16 @@ Image(systemName: "heart").font(.largeTitle)) // one way to set font size
 Image(systemName: "cloud.snow").font(.system(size: 64)) // another way
 ```
 
+To use FontAwesome icons,
+select File ... Add Packages...
+and enter the URL https://github.com/onmyway133/FontAwesomeSwiftUI
+in the search input in the upper-right.
+Select FontAwesomeSwiftUI and press the "Add Package" button.
+
+To render a FontAwesome icon, call `FontAwesome.register()`
+and pass icons to the `Text` view.
+For example, `Text(AwesomeIcon.aws.rawValue)`.
+
 ## Core Graphics (CG)
 
 Several types used in views have names that begin with "CG"
