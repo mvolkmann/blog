@@ -3218,6 +3218,20 @@ the code from which it is referenced is running on the main thread.
 `Thread.current` holds a reference to the current thread object.
 These have `name` (ex. "main) and `number` (ex. 1) properties.
 
+To run code on the main thread after some number of seconds:
+
+```swift
+DispatchQueue.main.asyncAfter(deadline: .now() + 2) { some-code }
+```
+
+To run code on a given thread after some number of seconds:
+
+```swift
+DispatchQueue.global(qos: .qosName).asyncAfter(deadline: .now() + 2) {
+    some-code
+}
+```
+
 TODO: Finish this section!
 
 ## HTTP
