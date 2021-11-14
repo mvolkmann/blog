@@ -3608,16 +3608,35 @@ Models ...
 - holds data and application logic
 - have no knowledge of view code the uses the data
 
+ViewModels ...
+
+- are classes (not structs) that implement the `ObservableObject` protocol
+  (Making them classes allows multiple views
+  to share a reference to the same object.)
+- mark the properties whose values they publish
+  with the `@Published` property wrapper which is
+  a shorthand for explicitly calling `objectWillChange.send()`
+- are passed to views or created inside them and
+  held in properties with the `@StateObject` property wrapper
+  (which subscribes to ViewModel data)
+- have no knowledge of the views that use them
+- have methods (referred to as "intents")
+  that are called by by views to update model data
+- optionally create and hold model instances,
+  typically in `private` properties
+- react to model changes by optionally transforming model data
+  and publishing changes
+
 Views ...
 
 - decide what to render
 - should be mostly stateless
 - are declarative rather than imperative because they describe
   what to render based on the current data, not when to render it
-- subscribe to changes in ViewModels
-  using the `@ObservedObject` property wrapper
-- react to changes published by ViewModels by rebuilding their bodies
 - can be associated with any number of ViewModels
+- subscribe to changes in ViewModels by declaring properties
+  using the `@ObservedObject` or `@StateObject` property wrapper
+- react to changes published by ViewModels by rebuilding their bodies
 - have a `body` var that rebuilds the view
   any time data in ViewModels they use changes
 - can call the `onReceive` method to register a function to be called
@@ -3625,22 +3644,6 @@ Views ...
 
 Any state held in a view using the `@State` property modifier
 should be transient state such as data related to styling.
-
-ViewModels ...
-
-- are classes (not structs) that implement the `ObservableObject` protocol
-- mark the properties whose values they publish
-  with the `@Published` property wrapper which is
-  a shorthand for explicitly calling `objectWillChange.send()`
-- create and hold model instances, typically in `private` properties
-- are passed to views
-- have no knowledge of the views that use them
-- are subscribed to by views to obtain model data
-- have methods (referred to as "intents")
-  that are called by by views to update model data
-- react to model changes by optionally transforming model data
-  and publishing changes
-
 For example, a ViewModel could get the result of a SQL query from the Model
 and turn it into an array of objects that it publishes to Views.
 

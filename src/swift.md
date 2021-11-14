@@ -2503,9 +2503,9 @@ to limit their visibility and/or scope their names.
 
 Structs and classes can define `init` methods
 that are called when instances are created.
-These must initialize ALL of non-optional properties
-that do not have a specified default value.
-These are referred to as "designated initializers".
+They do not begin with the `func` keyword.
+Those that initialize ALL of non-optional properties (no default value)
+are referred to as "designated initializers".
 Designated initializers for classes
 must also initialize all inherited properties.
 
@@ -2542,7 +2542,9 @@ using a failable initializer.
 As with any optional value, callers must
 test and unwrap the value in order to use it.
 
-Deinitializers are methods named `deinit`,
+Deinitializers are methods named `deinit`.
+They do not begin with the `func` keyword, have no parameters,
+and cannot be followed by a pair of parentheses.
 If a struct or class defines this method,
 it will be called when any instance is destroyed.
 It is used to perform cleanup.
@@ -3172,101 +3174,256 @@ The {% aTargetBlank "https://www.swift.org/package-manager/",
 It is similar to npm for JavaScript.
 Installing the Swift compiler also installs the Swift package manager.
 
-To install a package, enter
-TODO: Finish this.
+To install a package in Xcode:
+
+- select File ... Add Packages...
+- Enter the GitHub URL of a package in the search input in the upper-right.
+- Select the package
+- Click the "Add Package" button.
+
+## Threads
+
+Swift applications can run code on multiple threads.
+All code that updates UI state and renders the UI should run on the main thread.
+
+To view the thread usage of an app running in Xcode,
+click the spray can icon at the top of the Navigator.
+This displays the "Debug Navigator".
+Click the "CPU" tab to the CPU usage on each of the active threads.
+
+To run code on a new thread:
+
+```swift
+// qos stands for Quality Of Service.
+DispatchQueue.global(qos: .qosName).async { some-code }
+// where qosName is one of
+// background - for maintenance or cleanup tasks
+// default - default qos used when none is specified
+// unspecified - for no specific purpose
+// userInitiated - for tasks that prevent active use of app
+// userInteractive - for animations, event handling, and UI updates
+// utility - for tasks the user does not actively track
+```
+
+When code running off of the main thread needs to update UI state,
+it should register a function to run on the main thread as follows:
+
+```swift
+Dispatch.main.async { some-code }
+```
+
+`Thread.isMainThread` is a `Bool` property that indicates whether
+the code from which it is referenced is running on the main thread.
+
+`Thread.current` holds a reference to the current thread object.
+These have `name` (ex. "main) and `number` (ex. 1) properties.
+
+TODO: Finish this section!
 
 ## HTTP
 
 Sending HTTP requests and processing HTTP responses is fairly tedious.
-Perhaps using the new `async` and `await` keywords will make this easier,
-but those require macOS 12 or higher or an unknown iOS version.
+Using the new `async` and `await` keywords
+and creating some utility functions makes this easier.
 
-Another option is to use the {% aTargetBlank
-"https://github.com/swift-server/async-http-client", "AsyncHTTPClient" %}
-HTTP client library.
+The following example demonstrates sending
+HTTP DELETE, GET, POST, and PUT requests.
 
-The following example demonstrates sending an HTTP GET request
-without using a library.
+Utility functions for sending HTTP requests
+are defined in `HttpUtil.swift` which follows.
 
 ```swift
 import Foundation
 
-// Codable combines Encodable and Decodable.
-// The Encodable part is not used in this example.
-struct Employee: Codable, CustomStringConvertible {
-    let employee_age: Int
-    let employee_name: String
-    let employee_salary: Int
-    let id: Int
-    let profile_image: String
+struct HttpUtil {
 
-    var description: String { "\(employee_name); age: \(employee_age)" }
-}
+    static func delete(from url: String, id: Int) async throws {
+        guard let url = URL(string: "\(url)/\(id)") else {
+            throw HTTPError.badUrl
+        }
 
-struct EmployeesResponse: Codable {
-    let status: String;
-    let data: [Employee]
-}
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        let (_, res) = try await URLSession.shared.data(for: request)
 
-let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees")!
-
-let group = DispatchGroup()
-group.enter()
-
-let task = URLSession.shared.dataTask(with: url) { data, response, error in
-    defer { group.leave() }
-
-    guard let data = data, error == nil else {
-        print("URLSession error:", error!.localizedDescription)
-        return
-    }
-
-    if let res = response as? HTTPURLResponse {
-        let contentType = res.value(forHTTPHeaderField: "Content-Type") ?? ""
-        if contentType.hasPrefix("text/html") {
-            let status = res.value(forHTTPHeaderField: "response") ?? "200"
-            if (status == "429") {
-                print("too many requests")
-            } else {
-              print("res =", res)
-              print("status =", status)
-            }
-            return
+        if let res = res as? HTTPURLResponse, res.statusCode != 200 {
+            throw HTTPError.badStatus(status: res.statusCode)
         }
     }
 
-    // Print the data which is in a byte array.
-    //print(String(data: data, encoding: .utf8) ?? "Bad Data")
-
-    do {
-        let json = try JSONDecoder().decode(EmployeesResponse.self, from: data)
-        if (json.status == "success") {
-            for employee in json.data {
-                print(employee)
-            }
-        } else {
-            print("service failed to return data")
+    static func get<T>(
+        from url: String,
+        type: T.Type
+    ) async throws -> T where T: Decodable {
+        guard let url = URL(string: url) else {
+            throw HTTPError.badUrl
         }
-    } catch {
-        print("error parsing JSON:", error.localizedDescription)
+
+        let (data, res) = try await URLSession.shared.data(from: url)
+        if let res = res as? HTTPURLResponse, res.statusCode != 200 {
+            throw HTTPError.badStatus(status: res.statusCode)
+        }
+        return try JSONDecoder().decode(type, from: data)
+    }
+
+    static func post<T, U>(
+        to url: String,
+        with data: T,
+        type: U.Type
+    ) async throws -> U where T: Encodable, U: Decodable {
+        return try await httpWithBody(to: url, method: "POST", with: data, type: type)
+    }
+
+    static func put<T, U>(
+        to url: String,
+        with data: T,
+        type: U.Type
+    ) async throws -> U where T: Encodable, U: Decodable {
+        return try await httpWithBody(to: url, method: "PUT", with: data, type: type)
+    }
+
+    private static func httpWithBody<T, U>(
+        to url: String,
+        method: String,
+        with data: T,
+        type: U.Type
+    ) async throws -> U where T: Encodable, U: Decodable {
+        guard let url = URL(string: url) else {
+            throw HTTPError.badUrl
+        }
+
+        guard let json = try? JSONEncoder().encode(data) else {
+            throw HTTPError.jsonEncode
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let (data, res) = try await URLSession.shared.upload(for: request, from: json)
+
+        if let res = res as? HTTPURLResponse, res.statusCode != 200 {
+            throw HTTPError.badStatus(status: res.statusCode)
+        }
+
+        return try JSONDecoder().decode(type, from: data)
     }
 }
-
-task.resume()
-group.wait()
 ```
 
-The next example demonstrates using the {% aTargetBlank
-"https://github.com/swift-server/async-http-client", "AsyncHTTPClient" %}
-package.
-To install this in a Swift app, select File ... Add Packages...
-and enter the GitHub URL in the search input in the upper-right
-which is <https://github.com/swift-server/async-http-client>.
-Select async-http-client and click the "Copy Dependency" button.
-This takes a few minutes to copy files into the app.
+A ViewModel that uses the utility functions above
+is defined in `ViewModel.swift` which follows.
+In a real app, most of the code in the `init` method below
+would be in various views.
+One of the views could create an instance of `ViewModel`
+with `@StateObject var vm = ViewModel()`
+and `vm` could be passed to the other views that need it.
 
 ```swift
-TODO: Add this.  See the SwiftUI-AsyncHTTPClient app.
+import Foundation
+
+struct Dog: Codable, CustomStringConvertible {
+    let id: Int
+    var name: String
+    var breed: String
+    var description: String { "\(name) is a \(breed)" }
+}
+
+// This only differs from Dog in that it doesn't have an id property.
+struct NewDog: Codable, CustomStringConvertible {
+    var name: String
+    var breed: String
+    var description: String { "\(name) is a \(breed)" }
+}
+
+// This defines a custom error type.
+enum HTTPError: Error {
+    case badStatus(status: Int)
+    case badUrl
+    case jsonEncode
+}
+
+extension HTTPError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .badStatus(let status):
+            return "bad status \(status)"
+        case .badUrl:
+            return "bad URL"
+        case .jsonEncode:
+            return "JSON encoding failed"
+        }
+    }
+}
+
+class ViewModel: ObservableObject {
+    @Published var dogs: [Dog] = []
+
+    private static let url = "http://localhost:8001/dog"
+
+    func deleteDog(id: Int) async throws {
+        return try await HttpUtil.delete(from: ViewModel.url, id: id)
+    }
+
+    func getDog(id: Int) async throws -> Dog {
+        let url = "\(ViewModel.url)/\(id)"
+        return try await HttpUtil.get(from: url, type: Dog.self)
+    }
+
+    func getDogs() async throws -> [Dog] {
+        return try await HttpUtil.get(from: ViewModel.url, type: [Dog].self)
+    }
+
+    func postDog(_ dog: NewDog) async throws -> Dog {
+        return try await HttpUtil.post(
+            to: ViewModel.url,
+            with: dog,
+            type: Dog.self
+        )
+    }
+
+    func putDog(_ dog: Dog) async throws -> Dog {
+        let url = "\(ViewModel.url)/\(dog.id)"
+        return try await HttpUtil.put(to: url, with: dog, type: Dog.self)
+    }
+
+    init() {
+        Task(priority: .medium) {
+            do {
+                // Create a new dog.
+                let newDog = try await postDog(
+                    NewDog(name: "Clarice", breed: "Whippet")
+                )
+                print("created dog with id \(newDog.id)")
+
+                // Get the dog with id 1.
+                var dog = try await getDog(id: 1)
+                print("first dog =", dog)
+
+                // Update an existing dog.
+                dog.name = "Moo"
+                dog.breed = "Cow"
+                _ = try await putDog(dog)
+
+                // Delete an existing dog.
+                try await deleteDog(id: 2)
+
+                // Get all the dogs.
+                let fetchedDogs = try await getDogs()
+                for dog in fetchedDogs {
+                    print("\(dog.name) is a \(dog.breed)")
+                }
+
+                // Update the published property dogs in the main thread.
+                DispatchQueue.main.async { [weak self] in
+                    self?.dogs = fetchedDogs
+                }
+            } catch {
+                print("error =", error.localizedDescription)
+            }
+        }
+    }
+}
 ```
 
 It is also possible to implement HTTP servers in Swift.
@@ -3855,6 +4012,9 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Why doesn't the `Character` type conform to the
   `Decodable` and `Encodable` protocols like the other basic types?
+- Why is the type `Int` abbreviated from Integer and
+  `Bool` is abbreviated from Boolean,
+  but the `Character` type is not abbreviated to `Char`?
 
 - How is a new module defined?
   Can it be implemented by multiple source files?
@@ -3897,6 +4057,3 @@ the features of Swift that are annoying, at least in my opinion.
   but not `for` loops? We have to use the `ForEach` view instead.
 
 - I kind of miss the CSS ability to define styling across all of my views.
-
-- Learn how to use FontAwesome icons in a SwiftUI app.
-  See <https://iosexample.com/use-fontawesome-5-with-swiftui/>.
