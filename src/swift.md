@@ -3535,16 +3535,22 @@ func routes(_ app: Application) throws {
         }
     }
 
-    app.post("dog") { req -> Dog in
+    app.post("dog") { req -> EventLoopFuture<Response> in
         guard let byteBuffer = req.body.data else {
             throw Abort(.badRequest, reason: "invalid or missing body")
         }
 
         do {
-            let newDog = try JSONDecoder().decode(NewDog.self, from: byteBuffer)
-            return addDog(name: newDog.name, breed: newDog.breed)
+            let newDog = try JSONDecoder()
+                .decode(NewDog.self, from: byteBuffer)
+            let dog = addDog(name: newDog.name, breed: newDog.breed)
+
+            var headers = HTTPHeaders()
+            headers.add(name: .location, value: "\(req.url)/\(dog.id)")
+            return dog.encodeResponse(
+                status: .created, headers: headers, for: req)
         } catch {
-            throw Abort(.badRequest, reason: "failed to decode body to Dog")
+            throw Abort(.badRequest, reason: error.localizedDescription)
         }
     }
 
