@@ -3541,8 +3541,7 @@ func routes(_ app: Application) throws {
         }
 
         do {
-            let newDog = try JSONDecoder()
-                .decode(NewDog.self, from: byteBuffer)
+            let newDog = try req.content.decode(NewDog.self)
             let dog = addDog(name: newDog.name, breed: newDog.breed)
 
             var headers = HTTPHeaders()
@@ -3569,7 +3568,8 @@ func routes(_ app: Application) throws {
         }
 
         do {
-            let newDog = try JSONDecoder().decode(NewDog.self, from: byteBuffer)
+            let newDog = try req.content.decode(NewDog.self)
+
             // Update the copied struct.
             dog.name = newDog.name
             dog.breed = newDog.breed
@@ -3592,6 +3592,13 @@ func routes(_ app: Application) throws {
     }
 }
 ```
+
+## Instruments
+
+Instruments is an app included with Xcode for analyzing ...
+To launch the app, select Xcode ... Open Developer Tool ... Instruments.
+To analyze HTTP traffic, choose Network.
+TODO: Learn how to use this.
 
 ## Shell Commands
 
