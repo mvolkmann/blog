@@ -3597,6 +3597,61 @@ struct ContentView: View {
 }
 ```
 
+## Audio
+
+The `AVAudioPlayer` class in the `AVKit` package
+can be used to play audio from files with formats like MP3.
+
+A good source of free audio files is
+{% aTargetBlank "https://freesoundslibrary.com", "Free Sounds Library" %}.
+Download audio files and copy them into an Xcode project next to `.swift` files.
+
+The following example creates buttons
+that each play a different sound when tapped.
+It relies on having the files `click.mp3` and `ding.mp3`
+copied into the project.
+
+```swift
+import AVKit
+import SwiftUI
+
+class SoundManager {
+    static let instance = SoundManager()
+
+    var player: AVAudioPlayer?
+
+    func play(name: String) {
+        guard let url =
+            Bundle.main.url(forResource: name, withExtension: ".mp3") else {
+                print("failed to load audio file \(name)")
+                return
+            }
+        do {
+            // Declaring player here does not work.  Why?
+            //let player = try AVAudioPlayer(contentsOf: url)
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        } catch {
+            print("error playing audio: \(error.localizedDescription)")
+        }
+    }
+}
+
+struct ContentView: View {
+
+    var body: some View {
+        VStack {
+            Button("Click") {
+                SoundManager.instance.play(name: "click")
+            }.buttonStyle(.bordered)
+            Button("Ding") {
+                SoundManager.instance.play(name: "ding")
+            }.buttonStyle(.bordered)
+        }
+    }
+}
+```
+
 ## MVVM
 
 SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm
