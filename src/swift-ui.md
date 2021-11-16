@@ -4930,16 +4930,20 @@ To do this:
 - Optionally sort the attributes on their name or type
   by clicking on the "Attribute" or "Type" column.
 
-- By default each attribute is "Optional". Uncheck that for required attributes.
+- By default each attribute is optional.
+  For any that are required, select the attribute and
+  uncheck the "Optional" checkbox in the inspector.
 
 - Optionally specify a default value for each attribute.
+  Select an attribute and enter a value for "Default Value" in the inspector.
 
 - Optionally specify validation criteria for each attribute.
+  Select an attribute and enter values for "Validation" in the inspector.
 
-- Add relationships between entities
-  where each specifies a Relationship name, Destination, Type, and Delete Rule.
-  The Type can be "To One" or "To Many".
-  The Delete Rule can be "Nullify", "Cascade", or "Deny".
+- Add relationships between entities where each specifies
+  a Relationship name, Destination, Type, and Delete Rule.
+  The "Type" in the Inspector can be "To One" or "To Many".
+  The "Delete Rule" in the Inspector can be "Nullify", "Cascade", or "Deny".
 
   "Nullify" means instances can be deleted
   without also deleting related entities.
@@ -4950,7 +4954,8 @@ To do this:
 
   "Deny" means instances with related entities cannot be deleted.
 
-- Every relationships must have an inverse relationship, so add those.
+- Every relationship typically should have an inverse relationship,
+  so add those.
   For example, "PersonEntity" can have
   an "owns" relationship "To Many" "DogEntity" and
   "DogEntity" can have an "ownedBy" relationship "To One" "PersonEntity".
@@ -4958,11 +4963,14 @@ To do this:
 - Switch between viewing entities and their relationships
   in "table" style or "graph" style by clicking
   buttons in the lower-right labelled "Editor Style".
+  In the graph view it may be necessary to toggle the relationships
+  in each entity by clicking the triangle to the left of "Relationships"
+  in order to see all of them.
 
 - Create a view model class.
   This can be defined in a file named "ViewModel.swift".
-  It can defined a class named "ViewModel" that inherits from `ObservableObject`
-  which is from the Combine framework.
+  It can define a class named "ViewModel" that inherits from `ObservableObject`
+  which comes from the Combine framework.
 
 - Declare a `container` constant property as follows:
 
@@ -4983,6 +4991,9 @@ To do this:
   @Published var people: [PersonEntity] = []
   ```
 
+- If Xcode doesn't recognize the entity types,
+  close the project and reopen it.
+
 - Define an initializer as follows:
 
   ```swift
@@ -5002,7 +5013,7 @@ To do this:
   ```
 
 - Define a method for each entity type that fetches all of its instances.
-  List is useful for displaying them in a `List`.
+  The `List` view is useful for displaying them in a list.
 
   ```swift
   func fetchPeople() {
@@ -5017,7 +5028,7 @@ To do this:
           // @Published property declared above.
           people = try context.fetch(request)
       } catch {
-          print("fetchPeople error:", error)
+          print("fetchPeople error:", error.localizedDescription)
       }
   }
   ```
@@ -5029,16 +5040,17 @@ To do this:
 - Define a method to save changes to any data in the context.
 
   ```swift
-      func saveContext() {
-        do {
-            try context.save()
-        } catch {
-            print("saveContext error:", error)
-        }
-    }
+  func saveContext() {
+      do {
+          try context.save()
+      } catch {
+          print("saveContext error:", error)
+      }
+  }
   ```
 
-- Define a method that the UI can call to add a new entity instance.
+- Define a method for each entity type that the UI can call
+  to add a new entity instance.
 
   ```swift
   func addPerson(name: String) {
@@ -5051,7 +5063,8 @@ To do this:
   }
   ```
 
-- Define a method that the UI can call to delete an entity instance.
+- Define a method for each entity type that the UI can call
+  to delete an entity instance.
 
   ```swift
   func deletePerson(indexSet: IndexSet) {
@@ -5065,9 +5078,11 @@ To do this:
 - In each view that needs to access entity data,
   declare a property with the `@StateObject` property wrapper
   that has a type of `ViewModel`.
+  Do not declare this to be `private` because
+  it will be passed in from a parent view.
 
   ```swift
-  @StateObject private var vm: ViewModel
+  @StateObject var vm: ViewModel
   ```
 
 - To add an entity instance,

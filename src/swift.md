@@ -13,31 +13,30 @@ Key facts about Swift include the following:
 - introduced by Apple at the 2014 WWDC conference
 - became open source under an Apache license in December 2015
 - goals are to be safe, fast, and expressive
+- a compiled language, but there is also an interpreter
 - strongly typed with type inference
 - supports both object-oriented and functional programming
+- a big language with a large number of features
+  and a corresponding learning curve
+- can be used to build applications for macOS, iOS, and Watch OS
+- can be used to command-line and server-side applications
 - has six major types:
   structs, classes, enums, protocols, functions, and generics
 - standout features include computed properties, closure syntax,
   trailing closures, key paths, and
   a succinct way to refer to enum cases when their type is inferred
-- a big language with a large number of features
-  and a corresponding learning curve
 - built on {% aTargetBlank "https://llvm.org", "LLVM" %}
   (Low Level Virtual Machine)
 - interoperates with {% aTargetBlank
   "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/",
   "Objective-C" %} code
-- can be used to build applications for macOS, iOS, and Watch OS
-- can be used to build command-line applications
-- can be used to build server-side applications
-- a compiled language, but there is also an interpreter
 - supports closures, tuples, and generics
 - includes a {% aTargetBlank
   "https://developer.apple.com/documentation/swift/swift_standard_library",
   "Standard Library" %}
 - compiler is slow, not swift
-- language makes almost no effort to be concise
-  and uses many long keywords and method names
+- language makes some efforts to be concise,
+  but also uses many long keywords and method names
 
 ## Resources
 
@@ -50,6 +49,8 @@ Key facts about Swift include the following:
   video series on Swift and SwiftUI by Paul Hudson - free
 - {% aTargetBlank "https://www.hackingwithswift.com/100", "100 Days of Swift" %}
   by Paul Hudson - free
+- {% aTargetBlank "https://www.youtube.com/channel/UCp25X4LzOLaksp5qY0YMUzg",
+  "Swiftful Thinking" %} YouTube videos by Nick Sarno - free
 - {% aTargetBlank "https://www.udemy.com/course/ios-13-app-development-bootcamp/",
   "iOS & Swift - The Complete iOS App Development Bootcamp" %}
   Udemy course by Angela Yu - $14.99
@@ -68,38 +69,42 @@ For other operating systems, download it from
 
 {% aTargetBlank "https://developer.apple.com/xcode/", "Xcode" %}
 is an IDE from Apple for creating apps for
-iPhone, iPad, Mac, Apple Watch, and Apple TV.
+iPhone, iPad, macOS, Apple Watch, and Apple TV.
 
 To experiment with Swift:
 
-- select File ... New ... Playground...
-- select a template such as "Blank" and press "Next"
-- enter a name for the playground
-- select the directory where it will be saved
-- enter code in the provided text editor
-- to run all of the code,
+- Select File ... New ... Playground...
+- Select a template such as "Blank" and press "Next".
+- Enter a name for the playground.
+- Select the directory where it will be saved.
+- Enter code in the provided text editor.
+- To run all of the code,
   click the blue triangle in the gutter after the last line,
-  press cmd-shift-return, or select Editor ... Run Playground
-- to run only the code up to and including a specific line,
-  hover over the line and click the play button that appears
-- `print` output appears in the console area at the bottom
+  press cmd-shift-return, or select Editor ... Run Playground.
+- To run only the code up to and including a specific line,
+  hover over the line and click the play button that appears.
+- Output from `print` calls appears in the console area at the bottom.
 
 Xcode is slow at evaluating a playground.
 It can take several seconds after saving a change
 for it to identify syntax errors.
 It can also take several seconds to run the code.
 
-Playgrounds treat files under “Sources” as a separate, unnamed module.
+Playgrounds treat files under “Sources” as separate, unnamed modules.
 To expose things defined in those files to the main playground code,
-declare them as `public`. They do not need to be "imported".
+declare them as `public`.
+They do not need to be "imported".
 
-To developing an app:
+To develop an app:
 
-- select one of the following:
-  - "Create a new Xcode project"
-  - "Clone an existing project"
-  - "Open a project or file"
+- Select File ... New ... Project... or press cmd-shift-n.
+- Select a target platform such as "iOS".
+- Select a template such as "App" and press "Next".
+- Enter a product name and press "Next".
+- Select the directory where it should be saved and press "Create".
 
+To open an existing app,
+select File ... TODO: FINISH THIS!
 Another way to open an existing Xcode project
 is to double-click the `.xcodeproj` file that is created.
 
