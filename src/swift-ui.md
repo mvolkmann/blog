@@ -4923,7 +4923,9 @@ To do this:
   so it is clear in code that uses them that they are Core Data entities.
 
 - Add attributes to each entity.
-  Each is given a default name of "attribute" that can be clicked to rename.
+  Each attribute is given a default name of "attribute"
+  that can be clicked to rename.
+  Some names, such as "description" and "for", are not allowed.
   Select a type from a drop-down list of primitive types
   that includes "Data" for a byte buffer.
 
