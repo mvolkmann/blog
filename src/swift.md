@@ -3711,6 +3711,74 @@ The center-left section is the Code Editor.
 The center-right section is the Canvas which is used to test
 Previews of an app outside of the Simulator or a real device.
 
+The Navigator has nine icon buttons at the top.
+
+- folder icon (first)
+
+  This displays a tree view of files in the project.
+
+- "x" in square icon (second)
+
+  This displays a list of files that have been modified (M)
+  or added (A).
+  Click a file to see its contents.
+  Click the button in the upper-right containing a right and left arrow
+  to see diffs.
+  Click the button to the right of that one containing horizontal lines
+  to display a menu of options including
+  "Inline Comparison" and "Side by Side Comparison" (preferred).
+  Oddly, in "Side by Side" mode the current version of the file
+  is shown on the left and the previous version is shown on the right.
+  To discard all changes to a file, right-click the file name
+  in the Navigator and select "Discard Changes in ...".
+
+- tree diagram icon (third)
+
+  This displays an alphabetized list of files.
+  Click a file to expand it to a list of the properties and methods it defines.
+  These can be clicked to navigate to their definition.
+  The "Hierarchical" and "Flat" options at the top of the list
+  seem identical.
+
+- magnifier glass icon (fourth)
+
+  This is used to find and replace text in the project.
+  Click "Find" to optionally switch to "Replace" mode.
+  Click "Text" to optionally switch to searching for "References",
+  "Definitions", "Regular Expression", or "Call Hierarchy".
+  Click "Containing" to optionally switch to
+  "Matching Word", "Starting With", or "Ending With".
+  Click "In Project" to optionally limit the search
+  to a specific project directory
+  and select "New Scope..." for advanced options.
+  Click "Ignoring Case" to optionally switch to "Matching Case".
+
+- warning icon (triangle icon containing exclamation point; fifth)
+
+  This displays "Buildtime" and "Runtime" issues.
+
+- diamond containing minus (sixth)
+
+  This displays a list of tests.
+  TODO: Can they be run individually from here?
+
+- spray can icon (seventh)
+
+  This displays information about CPU, Memory, Disk, and Network usage.
+  Click each of these to see detailed information.
+  For example, clicking CPU displays information about thread usage.
+
+- tag icon (eighth)
+
+  This displays debugging breakpoints.
+  TODO: Can they be disabled and/or deleted here?
+
+- document icon (ninth)
+
+  This displays historical information on recent project builds,
+  including error messages.
+  Click a build to see details.
+
 The bottom section is not visible by default.
 Drag the status row at the bottom up to expose it.
 The bottom section has two subsections.
@@ -4011,6 +4079,14 @@ the features of Swift that are annoying, at least in my opinion.
   Sometimes pressing the "Try Again" button results in a clean build.
   Other times it is necessary to close the project, reopen it,
   and building again to resolve the mystery issues.
+
+- Too many warnings about things developers cannot fix.
+
+  Common warnings include
+  "[LayoutConstraints] Unable to simultaneously satisfy constraints."
+  and "Will attempt to recover by breaking constraint",
+  followed by stack traces.
+  These make it difficult to find your own `print` output.
 
 ## Questions
 

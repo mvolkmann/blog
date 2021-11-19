@@ -1310,6 +1310,13 @@ var body: some View {
   results in a visible but empty tab item."
   A good size for these images is 32x32.
 
+  To use `TabView` in conjunction with `NavigationView`,
+  wrap each page in its own `NavigationView`
+  rather than placing the `TabView` inside a `NavigationView`.
+  Having a `NavigationView` for each page
+  allows use of the `toolbar` view modifier
+  to add a toolbar at the top of each page.
+
   <img alt="SwiftUI TabView" style="width: 40%"
     src="/blog/assets/SwiftUI-TabView.png?v={{pkg.version}}"
     title="SwiftUI TabView">
@@ -1458,7 +1465,7 @@ var body: some View {
   there is no visible change.
   When the `buttonStyle` view modifier is passed `.bordered`,
   the background is gray.
-  When the `buttonStyle` view modifier is passed `.borderProminent`,
+  When the `buttonStyle` view modifier is passed `.borderedProminent`,
   the background is the accent color and the text is white.
 
   To change the text color,
@@ -1474,7 +1481,7 @@ var body: some View {
   // Button containing text and action specified with a trailing closure.
   Button("My Label", role: .destructive) {
       // code to run when button is pressed
-  }.buttonStyle(.borderProminent)
+  }.buttonStyle(.borderedProminent)
 
   // Button with an "action" argument whose value
   // can be a closure or a function reference
@@ -4837,6 +4844,7 @@ TODO: https://www.youtube.com/watch?v=091Mdv_Rjb4
 Core Data is an object/graph persistence framework.
 It supports many features including
 data validation, undo/redo, and lazy loading.
+By default it stores data using SQLite.
 
 One way to setup use of Core Data is to
 check the "Use Core Data" checkbox on the options panel
@@ -4921,6 +4929,8 @@ To do this:
   Each is given a default name of "Entity" that can be clicked to rename.
   It is recommended to give them names that end in "Entity"
   so it is clear in code that uses them that they are Core Data entities.
+  For each entity, click the "Module" drop-down inside
+  the Inspector on the right, select "Current Product Module".
 
 - Add attributes to each entity.
   Each attribute is given a default name of "attribute"
@@ -5069,11 +5079,12 @@ To do this:
   to delete an entity instance.
 
   ```swift
-  func deletePerson(indexSet: IndexSet) {
-      guard let index = indexSet.first else { return }
-      context.delete(people[index])
+  func deletePeople(indexSet: IndexSet) {
+      for index in indexSet {
+          context.delete(people[index])
+          people.remove(at: index)
+      }
       saveContext()
-      people.remove(at: index)
   }
   ```
 
