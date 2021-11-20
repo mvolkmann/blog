@@ -3731,6 +3731,10 @@ The Navigator has nine icon buttons at the top.
   is shown on the left and the previous version is shown on the right.
   To discard all changes to a file, right-click the file name
   in the Navigator and select "Discard Changes in ...".
+  Right-click a file to see a pop-up menu that includes the options
+  "Commit" and "Discard Changes".
+  Oddly it seems the only way to commit multiple files at once
+  is to select "Commit..." from the "Source Control" menu.
 
 - tree diagram icon (third)
 
@@ -3936,7 +3940,11 @@ To format all the lines in the current file,
 press the assigned keyboard shortcut or
 select Editor ... SwiftFormat ... Format File.
 
-There is currently no way to make Xcode format files on save.
+There is currently no way within Xcode to format files on save.
+However, this can be configured using an Automator script
+and a System Preferences keyboard shortcut.
+The steps to configure this are described at {% aTargetBlank
+"https://luisramos.dev/xcode-format-and-save", "Xcode Format and Save" %}.
 
 ### VS Code
 

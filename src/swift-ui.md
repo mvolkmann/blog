@@ -2281,8 +2281,9 @@ struct ContentView: View {
 
 ## View Modifiers
 
-View modifiers are methods that can be called on a view to create
-a new view that is like the receiver, but modified in a specific way.
+View modifiers are methods that can be called on a view.
+They don't modify the view. They create a new view
+that is like the receiver, but modified in a specific way.
 Calls to view modifiers can be chained since each returns a new view.
 
 The following example uses the `foregroundColor`, `padding`, and `stroke`
