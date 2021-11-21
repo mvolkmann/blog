@@ -3644,33 +3644,6 @@ surround it with `#if targetEnvironment(simulator) ... #endif`.
 ### Xcode
 
 Xcode is the primary IDE for creating macOS, iOS, and watchOS applications.
-It is a passable IDE with many issues.
-
-- Xcode is slow.
-
-  After saving code changes it can
-  take a few seconds for it to identify syntax errors.
-
-- Xcode cannot format code on save.
-
-  You can manually invoke code formatting and then manually save.
-  See the "Code Formatting" section below.
-
-- Xcode supports Vim keybindings.
-
-  To enable this, select Editor ... Vim Mode.
-
-  However, the Vim support is very basic.
-  No colon commands are supported.
-  This means changes cannot be saved with ":w"
-  and find/replace cannot be performed with ":s/foo/bar".
-  Pressing the "/" key invokes Xcode find,
-  but does not support regular expressions.
-  It does not support repeating commands with the period key,
-  defining macros, and other more advanced Vim features.
-  For a list of supported Vim commands, see this {% aTargetBlank
-  "https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022",
-  "Apple Developer Forum post" %}.
 
 To create a "Playground" for experimenting with code
 select File ... New ... Playground.
@@ -3702,6 +3675,11 @@ select Xcode ... Preferences ... Text Editing,
 check "Page guide column at:", and choose a column number.
 The indentation amount and type (spaces vs. tabs)
 can also be specified here.
+
+To duplicate a source file, select it in the Navigator
+and click File ... Duplicate.
+Oddly the context sensitive menu that is displayed when
+a file in the Navigator is right clicked does not include this option.
 
 The main Xcode window is divided into three main areas.
 The left side is the Navigator.
@@ -3901,7 +3879,7 @@ To run an app on a real iOS device:
   - tap the new app
   - tap the "Trust" button
 
-### Code Formatting
+#### Code Formatting
 
 To fix Swift code indentation in Xcode,
 select the lines to be fixed (cmd-a for all)
@@ -3911,7 +3889,7 @@ The default code indentation is four spaces.
 Chained method calls that appear on separate lines are indented,
 but those chained onto trailing closures are not.
 
-Some options for Swift code formatting outside Xcode include
+Other options for Swift code formatting include
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
 and {% aTargetBlank "https://github.com/apple/swift-format", "swift-format" %}.
 
@@ -3945,6 +3923,32 @@ However, this can be configured using an Automator script
 and a System Preferences keyboard shortcut.
 The steps to configure this are described at {% aTargetBlank
 "https://luisramos.dev/xcode-format-and-save", "Xcode Format and Save" %}.
+
+#### Xcode Issues
+
+While Xcode is generally fine, it does have a few issues.
+
+- Xcode is slow.
+
+  After saving code changes it can take a few seconds
+  for it to identify syntax errors.
+  This may be caused by the Swift compiler being slow.
+
+- Xcode only supports limited Vim keybindings.
+
+  To enable this, select Editor ... Vim Mode.
+
+  However, the Vim support is very basic.
+  No colon commands are supported.
+  This means changes cannot be saved with ":w"
+  and find/replace cannot be performed with ":s/foo/bar".
+  Pressing the "/" key invokes Xcode find,
+  but does not support regular expressions.
+  It does not support repeating commands with the period key,
+  defining macros, and other more advanced Vim features.
+  For a list of supported Vim commands, see this {% aTargetBlank
+  "https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022",
+  "Apple Developer Forum post" %}.
 
 ### VS Code
 
