@@ -683,7 +683,7 @@ Resume Preview to see the change.
 This does not affect `Toggle` views which required using the view modifier
 `.toggleStyle(SwitchToggleStyle(tint: someColor))`.
 
-### ViewBuilders
+## ViewBuilders
 
 Container views can be passed a special kind of closure
 as their last argument that is called a `ViewBuilder`.
@@ -718,7 +718,7 @@ For more information on these, see the {% aTargetBlank
 "https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
 "Result builders proposal" %}.
 
-### Container Views
+## Container Views
 
 Container views combine other views.
 They act as a container of other views
@@ -731,525 +731,525 @@ For example, `someView.opacity(0)`.
 
 Here are the container views that are provided by SwiftUI.
 
-- `HStack`
+### `HStack`
 
-  This lays out child views horizontally.
+This lays out child views horizontally.
 
-  The child views are centered vertically by default.
-  To change this, add the `alignment` attribute which can be set to
-  `.top`, `.center`, `.bottom`, `.firstTextBaseline`, or `.lastTextBaseline`.
+The child views are centered vertically by default.
+To change this, add the `alignment` attribute which can be set to
+`.top`, `.center`, `.bottom`, `.firstTextBaseline`, or `.lastTextBaseline`.
 
-  A default amount of space is added between each child
-  which seems to be 8 pixels (can't find this documented).
-  To change the space between child views, add the `spacing` attribute.
+A default amount of space is added between each child
+which seems to be 8 pixels (can't find this documented).
+To change the space between child views, add the `spacing` attribute.
 
-  The following example shows the effect of
-  setting `alignment` to `.lastTextBaseLine`.
+The following example shows the effect of
+setting `alignment` to `.lastTextBaseLine`.
 
-  <img alt="SwiftUI HStack" style="width: 40%"
+<img alt="SwiftUI HStack" style="width: 40%"
     src="/blog/assets/SwiftUI-HStack.png?v={{pkg.version}}"
     title="SwiftUI HStack">
 
-  ```swift
-  HStack(alignment: .lastTextBaseline, spacing: 0) {
-      Rectangle()
-          .fill(.red)
-          .frame(width: 100, height: 100)
-          .border(.black)
-      Rectangle()
-          .fill(.green)
-          .frame(width: 50, height: 50)
-          .border(.black)
-      Text("Line 1\nLine 2").padding(20).border(.black)
-  }.border(.blue)
-  ```
+```swift
+HStack(alignment: .lastTextBaseline, spacing: 0) {
+    Rectangle()
+        .fill(.red)
+        .frame(width: 100, height: 100)
+        .border(.black)
+    Rectangle()
+        .fill(.green)
+        .frame(width: 50, height: 50)
+        .border(.black)
+    Text("Line 1\nLine 2").padding(20).border(.black)
+}.border(.blue)
+```
 
-- `VStack`
+### `VStack`
 
-  This lays out child views vertically.
+This lays out child views vertically.
 
-  The child views are centered horizontally by default.
-  To change this, add the `alignment` attribute which can be set to
-  `.leading`, `.center`, or `.trailing`.
+The child views are centered horizontally by default.
+To change this, add the `alignment` attribute which can be set to
+`.leading`, `.center`, or `.trailing`.
 
-- `ZStack`
+### `ZStack`
 
-  This stacks views from bottom to top.
-  It is ideal for adding a background to a set of views.
+This stacks views from bottom to top.
+It is ideal for adding a background to a set of views.
 
-  Here are three approaches to rendering text with a colored background,
-  one of which uses a `ZStack`.
+Here are three approaches to rendering text with a colored background,
+one of which uses a `ZStack`.
 
-  ```swift
-  struct ContentView: View {
-      let bgColor: Color = .yellow
-      let text = "Test"
-
-      var body: some View {
-          VStack {
-              let rect = Rectangle()
-                  .fill(bgColor)
-                  .frame(width: 50, height: 40)
-              // Semicolons must separate multiple statements
-              // on the same line.
-              ZStack { rect; Text(text) }
-              Text(text)
-                  .padding(10)
-                  .background(Rectangle().foregroundColor(bgColor))
-              rect.overlay(Text(text))
-          }
-      }
-  }
-  ```
-
-- `LazyHStack`
-
-  This is similar to `HStack`, but only
-  builds and renders child views when they are visible.
-  It is commonly used inside a `ScrollView` with `axes` set to `.horizontal`.
-
-  ```swift
-  ScrollView(.horizontal) {
-      LazyHStack {
-          ForEach(1..<100) {
-              Text(String($0))
-          }
-      }
-  }
-  ```
-
-- `LazyVStack`
-
-  This is similar to `VStack`, but only
-  builds and renders child views when they are visible.
-  It is commonly used inside a `ScrollView` with `axes` set to `.vertical`,
-  which is the default.
-
-  ```swift
-  ScrollView {
-      LazyVStack {
-          ForEach(1..<101) {
-              Text(String($0))
-          }
-      }
-  }
-  ```
-
-- `LazyHGrid`
-
-  This specifies a number of rows and adds columns as necessary.
-  The grids are described by an array of {% aTargetBlank
-  "https://developer.apple.com/documentation/swiftui/griditem", "GridItem" %}
-  objects that each specify their size, spacing, and alignment.
-  For example, a `GridItem` can adapt to the width of its content,
-  but also have a minimum size of 25 by specifying
-  `GridItem(.adaptive(minimum: 25))`.
-
-  See the example in `LazyVGrid` below.
-
-- `LazyVGrid`
-
-  This is similar to `LazyHGrid`, but
-  specifies a number of columns and adds rows as necessary.
-
-  The following example demonstrates both `LazyHGrid` and `LazyVGrid`.
-  It spreads a list of numbers over either rows or columns.
-
-  <img alt="SwiftUI LazyHGrid and LazyVGrid" style="width: 40%"
-      src="/blog/assets/SwiftUI-Lazy-Grids.png?v={{pkg.version}}"
-      title="SwiftUI LazyHGrid and LazyVGrid">
-
-  ```swift
-  struct ContentView: View {
-    private static let count = 4
-    @State private var isVertical = false // Why can't this be static?
-
-    // Describe the characteristics of each grid.
-    private static let gridItem = GridItem(
-        // This specifies the grid height in LazyHGrid
-        // or the grid width in LazyVGrid.
-        .fixed(40),
-        // This specifies the vertical spacing in LazyHGrid
-        // or horizontal spacing in LazyVGrid.
-        spacing: 10,
-        alignment: .trailing
-    )
-
-    var gridItems: [GridItem] = Array(repeating: gridItem, count: count)
+```swift
+struct ContentView: View {
+    let bgColor: Color = .yellow
+    let text = "Test"
 
     var body: some View {
         VStack {
-            if isVertical {
-                ScrollView {
-                    LazyVGrid(columns: gridItems) {
-                        ForEach(1..<101) {
-                            Text(String($0)).padding(5).border(.blue, width: 3)
-                        }
-                    }
-                    .padding()
-                    .border(.red, width: 5)
-                }
-            } else {
-                ScrollView(.horizontal) {
-                    LazyHGrid(rows: gridItems) {
-                        ForEach(1..<101) {
-                            Text(String($0)).padding(5).border(.blue, width: 3)
-                        }
-                    }
-                    .padding()
-                    .border(.red, width: 3)
-                }
-            }
-            Button("Toggle Direction") {
-                isVertical.toggle()
-            }.buttonStyle(.bordered)
+            let rect = Rectangle()
+                .fill(bgColor)
+                .frame(width: 50, height: 40)
+            // Semicolons must separate multiple statements
+            // on the same line.
+            ZStack { rect; Text(text) }
+            Text(text)
+                .padding(10)
+                .background(Rectangle().foregroundColor(bgColor))
+            rect.overlay(Text(text))
         }
     }
+}
+```
+
+### `LazyHStack`
+
+This is similar to `HStack`, but only
+builds and renders child views when they are visible.
+It is commonly used inside a `ScrollView` with `axes` set to `.horizontal`.
+
+```swift
+ScrollView(.horizontal) {
+    LazyHStack {
+        ForEach(1..<100) {
+            Text(String($0))
+        }
+    }
+}
+```
+
+### `LazyVStack`
+
+This is similar to `VStack`, but only
+builds and renders child views when they are visible.
+It is commonly used inside a `ScrollView` with `axes` set to `.vertical`,
+which is the default.
+
+```swift
+ScrollView {
+    LazyVStack {
+        ForEach(1..<101) {
+            Text(String($0))
+        }
+    }
+}
+```
+
+### `LazyHGrid`
+
+This specifies a number of rows and adds columns as necessary.
+The grids are described by an array of {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/griditem", "GridItem" %}
+objects that each specify their size, spacing, and alignment.
+For example, a `GridItem` can adapt to the width of its content,
+but also have a minimum size of 25 by specifying
+`GridItem(.adaptive(minimum: 25))`.
+
+See the example in `LazyVGrid` below.
+
+### `LazyVGrid`
+
+This is similar to `LazyHGrid`, but
+specifies a number of columns and adds rows as necessary.
+
+The following example demonstrates both `LazyHGrid` and `LazyVGrid`.
+It spreads a list of numbers over either rows or columns.
+
+<img alt="SwiftUI LazyHGrid and LazyVGrid" style="width: 40%"
+      src="/blog/assets/SwiftUI-Lazy-Grids.png?v={{pkg.version}}"
+      title="SwiftUI LazyHGrid and LazyVGrid">
+
+```swift
+struct ContentView: View {
+  private static let count = 4
+  @State private var isVertical = false // Why can't this be static?
+
+  // Describe the characteristics of each grid.
+  private static let gridItem = GridItem(
+      // This specifies the grid height in LazyHGrid
+      // or the grid width in LazyVGrid.
+      .fixed(40),
+      // This specifies the vertical spacing in LazyHGrid
+      // or horizontal spacing in LazyVGrid.
+      spacing: 10,
+      alignment: .trailing
+  )
+
+  var gridItems: [GridItem] = Array(repeating: gridItem, count: count)
+
+  var body: some View {
+      VStack {
+          if isVertical {
+              ScrollView {
+                  LazyVGrid(columns: gridItems) {
+                      ForEach(1..<101) {
+                          Text(String($0)).padding(5).border(.blue, width: 3)
+                      }
+                  }
+                  .padding()
+                  .border(.red, width: 5)
+              }
+          } else {
+              ScrollView(.horizontal) {
+                  LazyHGrid(rows: gridItems) {
+                      ForEach(1..<101) {
+                          Text(String($0)).padding(5).border(.blue, width: 3)
+                      }
+                  }
+                  .padding()
+                  .border(.red, width: 3)
+              }
+          }
+          Button("Toggle Direction") {
+              isVertical.toggle()
+          }.buttonStyle(.bordered)
+      }
   }
-  ```
+}
+```
 
-  The following example demonstrates `LazyVGrid`
-  where the views created are intended for specific columns.
+The following example demonstrates `LazyVGrid`
+where the views created are intended for specific columns.
 
-  <img alt="SwiftUI LazyVGrid" style="width: 40%"
+<img alt="SwiftUI LazyVGrid" style="width: 40%"
       src="/blog/assets/SwiftUI-LazyVGrid.png?v={{pkg.version}}"
       title="SwiftUI LazyVGrid">
 
-  ```swift
-  func intPow(_ base: Int, _ exponent: Int) -> Int {
-      Int(pow(Float(base), Float(exponent)))
-  }
+```swift
+func intPow(_ base: Int, _ exponent: Int) -> Int {
+    Int(pow(Float(base), Float(exponent)))
+}
 
-  struct ContentView: View {
-      var body: some View {
-          let columns: [GridItem] =
-              Array(
-                  repeating: GridItem(.flexible(), alignment: .trailing),
-                  count: 3
-              )
+struct ContentView: View {
+    var body: some View {
+        let columns: [GridItem] =
+            Array(
+                repeating: GridItem(.flexible(), alignment: .trailing),
+                count: 3
+            )
 
-          ScrollView {
-              LazyVGrid(columns: columns) {
-                  Text("Number").font(.title)
-                  Text("Squared").font(.title)
-                  Text("Cubed").font(.title)
-                  ForEach(1 ... 50, id: \.self) { number in
-                      Text("\(number)")
-                      Text("\(intPow(number, 2))")
-                      Text("\(intPow(number, 3))")
-                  }
-              }
-              .padding(.horizontal)
-          }
-      }
-  }
-  ```
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                Text("Number").font(.title)
+                Text("Squared").font(.title)
+                Text("Cubed").font(.title)
+                ForEach(1 ... 50, id: \.self) { number in
+                    Text("\(number)")
+                    Text("\(intPow(number, 2))")
+                    Text("\(intPow(number, 3))")
+                }
+            }
+            .padding(.horizontal)
+        }
+    }
+}
+```
 
-- `Form`
+### `Form`
 
-  This is a container of data entry views.
+This is a container of data entry views.
 
-  The following example demonstrates many common views used in forms.
+The following example demonstrates many common views used in forms.
 
-  <img alt="SwiftUI Form" style="width: 40%"
+<img alt="SwiftUI Form" style="width: 40%"
     src="/blog/assets/SwiftUI-Form.png?v={{pkg.version}}"
     title="SwiftUI Form">
 
-  ```swift
-  enum ShirtSize: String, CaseIterable {
-    case small
-    case medium
-    case large
-    case extraLarge
-  }
+```swift
+enum ShirtSize: String, CaseIterable {
+  case small
+  case medium
+  case large
+  case extraLarge
+}
 
-  struct ContentView: View {
-      private static let blogUrl = "https://mvolkmann.github.io/blog"
+struct ContentView: View {
+    private static let blogUrl = "https://mvolkmann.github.io/blog"
 
-      // Typically form data would be tied to ViewModel properties
-      // rather than using @State.
-      @State private var bedTime: Date = Date()
-      @State private var birthday: Date = Date()
-      @State private var favoriteColor: Color = .yellow
-      @State private var dogCount = 0
-      @State private var hungry = false
-      @State private var name = ""
-      @State private var motto = "This is my motto."
-      @State private var rating = 0.0
-      @State private var shirtSize: ShirtSize = .large
+    // Typically form data would be tied to ViewModel properties
+    // rather than using @State.
+    @State private var bedTime: Date = Date()
+    @State private var birthday: Date = Date()
+    @State private var favoriteColor: Color = .yellow
+    @State private var dogCount = 0
+    @State private var hungry = false
+    @State private var name = ""
+    @State private var motto = "This is my motto."
+    @State private var rating = 0.0
+    @State private var shirtSize: ShirtSize = .large
 
-      var isEditing = false
-
-      var body: some View {
-          NavigationView {
-              Form {
-                  Section(header: Text("Profile")) {
-                      TextField("Name", text: $name)
-                      DatePicker(
-                          "Birthday",
-                          selection: $birthday,
-                          displayedComponents: .date
-                      )
-                      Toggle("Hungry?", isOn: $hungry)
-                          .toggleStyle(SwitchToggleStyle(tint: .red))
-                  }
-                  Section(header: Text("Preferences")) {
-                      // Links work in Simulator, but not in Preview.
-                      Link(
-                          "Blog",
-                          destination: URL(string: ContentView.blogUrl)!
-                      )
-                      VStack {
-                          Text("Motto")
-                          // It seems TextEditor lineLimit is
-                          // only enforced on initial render.
-                          // It doesn't prevent more lines from being
-                          // displayed if the user types more text.
-                          TextEditor(text: $motto).lineLimit(2)
-                      }
-                      ColorPicker(
-                          "Favorite Color",
-                          selection: $favoriteColor
-                      )
-                      DatePicker(
-                          "Bed Time",
-                          selection: $bedTime,
-                          displayedComponents: .hourAndMinute
-                      )
-                      Picker("Shirt Size", selection: $shirtSize) {
-                          ForEach(ShirtSize.allCases, id: \.self) { size in
-                              Text("\(size.rawValue)").tag(size)
-                          }
-                      }
-                      HStack {
-                          Text("Rating")
-                          Slider(value: $rating, in: 0...10, step: 1)
-                          Text("\(Int(rating))")
-                      }
-                      HStack {
-                          Stepper(
-                              "# of Dogs",
-                              value: $dogCount, in: 0...10
-                          )
-                          Text(String(dogCount))
-                      }
-                  }
-              }
-              .navigationTitle("Profile")
-              // accentColor changes the color of many elements including
-              // the text cursor color, focus color, and Slider bar color.
-              // It does not affect the focus background color of Toggle
-              // views.  Use the "toggleStyle" view modifier for that.
-              .accentColor(.red)
-              .toolbar {
-                  ToolbarItemGroup(placement: .navigationBarTrailing) {
-                      Button("Save", action: saveUser)
-                  }
-              }
-          }
-      }
-  }
-  ```
-
-  Common UI components that are not built into SwiftUI include:
-
-  - checkbox: alternative is Toggle
-  - image picker: must build or using a library
-  - multiple choice: alternative is `List`
-    inside `NavigationView` with `EditButton`
-  - radio buttons: alternative is `Picker` (supported in macOS with
-    `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
-  - toggle buttons: alternative is `Picker`
-
-- `Section`
-
-  These break a view into sections that are optionally labelled.
-  They are also optionally collapsable.
-  This was used in the `Form` example above.
-
-- `Group`
-
-  This collects all its child views into a single view
-  without changing their layout.
-  View modifiers applied to the `Group` are applied to each of the children.
-
-  ```swift
-  Group {
-      Text("One")
-      Text("Two")
-  }.foregroundColor(.blue)
-  ```
-
-- `GroupBox`
-
-  This creates a logical grouping of other views
-  with an optional `Label` at the top.
-
-  ```swift
-  GroupBox(
-      label: Label("Wayne Gretzky",
-                   systemImage: "sportscourt").font(.title)
-  ) {
-      ScrollView {
-          Text(text)
-      }.frame(maxWidth: .infinity, maxHeight: 130)
-      Toggle("Like", isOn: $like)
-  }.padding()
-  ```
-
-- `ControlGroup`
-
-  This is usd to group related controls.
-  It is typically used with `Button` views.
-  There are two built-in styles, `automatic` (default) and `navigation`.
-
-  <img alt="SwiftUI ControlGroup" style="width: 40%"
-    src="/blog/assets/SwiftUI-ControlGroup.png?v={{pkg.version}}"
-    title="SwiftUI ControlGroup">
-
-  ```swift
-  ControlGroup {
-      Button("Cancel") {
-          print("canceling")
-      }
-      Button("Save") {
-          print("saving")
-      }
-  }
-  ControlGroup {
-      Button("Cancel") {
-          print("canceling")
-      }
-      Button("Save") {
-          print("saving")
-      }
-  }.controlGroupStyle(.navigation)
-  ```
-
-- `ScrollView`
-
-  This creates a scrollable view that is vertical by default,
-  but can be changed to horizontal.
-  It occupies all the space offered to it.
-  Scrolling reveals additional child views when all of them do not fit.
-  See examples of using this in the
-  descriptions of `LazyHStack` and `LazyVStack`.
-
-- `ScrollViewReader`
-
-  This is a view that supports programmatic scrolling.
-
-  <img alt="SwiftUI ScrollViewReader" style="width: 40%"
-    src="/blog/assets/SwiftUI-ScrollViewReader.png?v={{pkg.version}}"
-    title="SwiftUI ScrollViewReader">
-
-  ```swift
-  struct ContentView: View {
-    @Namespace var topId
-    @Namespace var bottomId
+    var isEditing = false
 
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                Button("Scroll to Bottom") {
-                    withAnimation {
-                        proxy.scrollTo(bottomId)
+        NavigationView {
+            Form {
+                Section(header: Text("Profile")) {
+                    TextField("Name", text: $name)
+                    DatePicker(
+                        "Birthday",
+                        selection: $birthday,
+                        displayedComponents: .date
+                    )
+                    Toggle("Hungry?", isOn: $hungry)
+                        .toggleStyle(SwitchToggleStyle(tint: .red))
+                }
+                Section(header: Text("Preferences")) {
+                    // Links work in Simulator, but not in Preview.
+                    Link(
+                        "Blog",
+                        destination: URL(string: ContentView.blogUrl)!
+                    )
+                    VStack {
+                        Text("Motto")
+                        // It seems TextEditor lineLimit is
+                        // only enforced on initial render.
+                        // It doesn't prevent more lines from being
+                        // displayed if the user types more text.
+                        TextEditor(text: $motto).lineLimit(2)
+                    }
+                    ColorPicker(
+                        "Favorite Color",
+                        selection: $favoriteColor
+                    )
+                    DatePicker(
+                        "Bed Time",
+                        selection: $bedTime,
+                        displayedComponents: .hourAndMinute
+                    )
+                    Picker("Shirt Size", selection: $shirtSize) {
+                        ForEach(ShirtSize.allCases, id: \.self) { size in
+                            Text("\(size.rawValue)").tag(size)
+                        }
+                    }
+                    HStack {
+                        Text("Rating")
+                        Slider(value: $rating, in: 0...10, step: 1)
+                        Text("\(Int(rating))")
+                    }
+                    HStack {
+                        Stepper(
+                            "# of Dogs",
+                            value: $dogCount, in: 0...10
+                        )
+                        Text(String(dogCount))
                     }
                 }
-                .id(topId)
-
-                VStack(spacing: 0) {
-                    ForEach(1 ..< 101) { i in
-                        Text(String(i))
-                    }
+            }
+            .navigationTitle("Profile")
+            // accentColor changes the color of many elements including
+            // the text cursor color, focus color, and Slider bar color.
+            // It does not affect the focus background color of Toggle
+            // views.  Use the "toggleStyle" view modifier for that.
+            .accentColor(.red)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button("Save", action: saveUser)
                 }
-
-                Button("Scroll to Top") {
-                    withAnimation {
-                        proxy.scrollTo(topId)
-                    }
-                }
-                .id(bottomId)
             }
         }
     }
-  }
-  ```
+}
+```
 
-- `ScrollViewProxy`
+Common UI components that are not built into SwiftUI include:
 
-  An instance of this type is passed to the trailing closure
-  of `ScrollViewReader`. See the example above.
+- checkbox: alternative is Toggle
+- image picker: must build or using a library
+- multiple choice: alternative is `List`
+  inside `NavigationView` with `EditButton`
+- radio buttons: alternative is `Picker` (supported in macOS with
+  `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
+- toggle buttons: alternative is `Picker`
 
-- `List`
+### `Section`
 
-  This displays a list of views in a single column.
-  It also acts like `ForEach` for iterating over array elements.
-  See more in the "List" section below.
+These break a view into sections that are optionally labelled.
+They are also optionally collapsable.
+This was used in the `Form` example above.
 
-- `ForEach`
+### `Group`
 
-  This view iterates of the elements of a `RandomAccessCollection`
-  (includes `Array` and `Range` types)
-  and renders the view specified in its `ViewBuilder`.
+This collects all its child views into a single view
+without changing their layout.
+View modifiers applied to the `Group` are applied to each of the children.
 
-  The elements in the `RandomAccessCollection` must either conform to
-  the `Identifiable` protocol (which requires them to have an `id` property)
-  OR the `id:` argument must be set.
-  Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`).
-  The value of `id:` is a key path that specifies
-  how to find a unique value in the element.
-  For example, the `String` type does not implement `Identifiable`.
-  To iterate over an array of `String` values:
+```swift
+Group {
+    Text("One")
+    Text("Two")
+}.foregroundColor(.blue)
+```
 
-  ```swift
-  // \.self is a key path that refers to the entire object.
-  ForEach(stringArray, id: \.self) { ... }
-  ```
+### `GroupBox`
 
-- `Table`
+This creates a logical grouping of other views
+with an optional `Label` at the top.
 
-  This is only available in macOS 12 and above.
-  The following example demonstrates using a `Table`
-  that supports row selection and column sorting.
+```swift
+GroupBox(
+    label: Label("Wayne Gretzky",
+                 systemImage: "sportscourt").font(.title)
+) {
+    ScrollView {
+        Text(text)
+    }.frame(maxWidth: .infinity, maxHeight: 130)
+    Toggle("Like", isOn: $like)
+}.padding()
+```
 
-  ```swift
-  struct Dog: Identifiable {
-    let name: String
-    let breed: String
-    let color: String
-    let id = UUID()
-  }
+### `ControlGroup`
 
-  private var dogs = [ // initially sorted on name
-      Dog(name: "Comet", breed: "Whippet", color: "black brindle"),
-      Dog(name: "Maisey", breed: "Treeing Walker Coonhound", color: "black"),
-      Dog(name: "Oscar", breed: "German Shorthaired Pointer", color: "white"),
-      Dog(name: "Ramsay", breed: "Native American Indian Dog", color: "gray")
-  ]
+This is usd to group related controls.
+It is typically used with `Button` views.
+There are two built-in styles, `automatic` (default) and `navigation`.
 
-  struct ContentView: View {
-      @State private var selectedDogs = Set<Dog.ID>()
-      @State private var sortOrder = [KeyPathComparator(\Dog.name)] // initial
+<img alt="SwiftUI ControlGroup" style="width: 40%"
+    src="/blog/assets/SwiftUI-ControlGroup.png?v={{pkg.version}}"
+    title="SwiftUI ControlGroup">
 
-      var body: some View {
-          Table(dogs, selection: $selectedDogs, sortOrder: $sortOrder) {
-              TableColumn("Name", value: \.name)
-              TableColumn("Breed", value: \.breed)
-              TableColumn("Color", value: \.color)
+```swift
+ControlGroup {
+    Button("Cancel") {
+        print("canceling")
+    }
+    Button("Save") {
+        print("saving")
+    }
+}
+ControlGroup {
+    Button("Cancel") {
+        print("canceling")
+    }
+    Button("Save") {
+        print("saving")
+    }
+}.controlGroupStyle(.navigation)
+```
+
+### `ScrollView`
+
+This creates a scrollable view that is vertical by default,
+but can be changed to horizontal.
+It occupies all the space offered to it.
+Scrolling reveals additional child views when all of them do not fit.
+See examples of using this in the
+descriptions of `LazyHStack` and `LazyVStack`.
+
+### `ScrollViewReader`
+
+This is a view that supports programmatic scrolling.
+
+<img alt="SwiftUI ScrollViewReader" style="width: 40%"
+    src="/blog/assets/SwiftUI-ScrollViewReader.png?v={{pkg.version}}"
+    title="SwiftUI ScrollViewReader">
+
+```swift
+struct ContentView: View {
+  @Namespace var topId
+  @Namespace var bottomId
+
+  var body: some View {
+      ScrollViewReader { proxy in
+          ScrollView {
+              Button("Scroll to Bottom") {
+                  withAnimation {
+                      proxy.scrollTo(bottomId)
+                  }
+              }
+              .id(topId)
+
+              VStack(spacing: 0) {
+                  ForEach(1 ..< 101) { i in
+                      Text(String(i))
+                  }
+              }
+
+              Button("Scroll to Top") {
+                  withAnimation {
+                      proxy.scrollTo(topId)
+                  }
+              }
+              .id(bottomId)
           }
-          // Why do these view modifiers have no effect?
-          //.tableStyle(InsetTableStyle.inset(alternatesRowBackgrounds: true))
-          //.tableStyle(BorderedTableStyle.bordered(alternatesRowBackgrounds: true))
-
-          // Why does the first click on a table heading do nothing?
-          .onChange(of: sortOrder) { dogs.sort(using: $0) }
-          Text("\(selectedDogs.count) dogs selected")
       }
   }
-  ```
+}
+```
 
-- `NavigationView`
+### `ScrollViewProxy`
+
+An instance of this type is passed to the trailing closure
+of `ScrollViewReader`. See the example above.
+
+### `List`
+
+This displays a list of views in a single column.
+It also acts like `ForEach` for iterating over array elements.
+See more in the "List" section below.
+
+### `ForEach`
+
+This view iterates of the elements of a `RandomAccessCollection`
+(includes `Array` and `Range` types)
+and renders the view specified in its `ViewBuilder`.
+
+The elements in the `RandomAccessCollection` must either conform to
+the `Identifiable` protocol (which requires them to have an `id` property)
+OR the `id:` argument must be set.
+Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`).
+The value of `id:` is a key path that specifies
+how to find a unique value in the element.
+For example, the `String` type does not implement `Identifiable`.
+To iterate over an array of `String` values:
+
+```swift
+// \.self is a key path that refers to the entire object.
+ForEach(stringArray, id: \.self) { ... }
+```
+
+### `Table`
+
+This is only available in macOS 12 and above.
+The following example demonstrates using a `Table`
+that supports row selection and column sorting.
+
+```swift
+struct Dog: Identifiable {
+  let name: String
+  let breed: String
+  let color: String
+  let id = UUID()
+}
+
+private var dogs = [ // initially sorted on name
+    Dog(name: "Comet", breed: "Whippet", color: "black brindle"),
+    Dog(name: "Maisey", breed: "Treeing Walker Coonhound", color: "black"),
+    Dog(name: "Oscar", breed: "German Shorthaired Pointer", color: "white"),
+    Dog(name: "Ramsay", breed: "Native American Indian Dog", color: "gray")
+]
+
+struct ContentView: View {
+    @State private var selectedDogs = Set<Dog.ID>()
+    @State private var sortOrder = [KeyPathComparator(\Dog.name)] // initial
+
+    var body: some View {
+        Table(dogs, selection: $selectedDogs, sortOrder: $sortOrder) {
+            TableColumn("Name", value: \.name)
+            TableColumn("Breed", value: \.breed)
+            TableColumn("Color", value: \.color)
+        }
+        // Why do these view modifiers have no effect?
+        //.tableStyle(InsetTableStyle.inset(alternatesRowBackgrounds: true))
+        //.tableStyle(BorderedTableStyle.bordered(alternatesRowBackgrounds: true))
+
+        // Why does the first click on a table heading do nothing?
+        .onChange(of: sortOrder) { dogs.sort(using: $0) }
+        Text("\(selectedDogs.count) dogs selected")
+    }
+}
+```
+
+### `NavigationView`
 
 This marks an area where a stack of views will be rendered one at a time.
 It contains `NavigationLink` views that are similar to HTML anchor elements.
@@ -1257,17 +1257,17 @@ Tapping them causes the associated view
 to be rendered inside the `NavigationView`.
 See the "Navigation" section later.
 
-- `NavigationLink`
+### `NavigationLink`
 
 These are used inside a `NavigationView`.
 See the "Navigation" section later.
 
-- `OutlineGroup`
+### `OutlineGroup`
 
 This displays a tree of data with disclosure angle brackets.
 See my SwiftUI-OutlineGroup project and the questions in it.
 
-- `DisclosureGroup`
+### `DisclosureGroup`
 
 This hides and shows its contents based on whether it is in an expanded state.
 By default it is not expanded.
@@ -1300,663 +1300,674 @@ var body: some View {
 }
 ```
 
-- `TabView`
+### `TabView`
 
-  This creates a row of buttons at the bottom of the display
-  that can be tapped to navigate to associated views.
+This creates a row of buttons at the bottom of the display
+that can be tapped to navigate to associated views.
 
-  For the docs, "Tab views only support tab items of type Text, Image,
-  or an image followed by text. Passing any other type of view
-  results in a visible but empty tab item."
-  A good size for these images is 32x32.
+For the docs, "Tab views only support tab items of type Text, Image,
+or an image followed by text. Passing any other type of view
+results in a visible but empty tab item."
+A good size for these images is 32x32.
 
-  To use `TabView` in conjunction with `NavigationView`,
-  wrap each page in its own `NavigationView`
-  rather than placing the `TabView` inside a `NavigationView`.
-  Having a `NavigationView` for each page
-  allows use of the `toolbar` view modifier
-  to add a toolbar at the top of each page.
+To use `TabView` in conjunction with `NavigationView`,
+wrap each page in its own `NavigationView`
+rather than placing the `TabView` inside a `NavigationView`.
+Having a `NavigationView` for each page
+allows use of the `toolbar` view modifier
+to add a toolbar at the top of each page.
 
-  <img alt="SwiftUI TabView" style="width: 40%"
+<img alt="SwiftUI TabView" style="width: 40%"
     src="/blog/assets/SwiftUI-TabView.png?v={{pkg.version}}"
     title="SwiftUI TabView">
 
-  ```swift
-  struct Transportation: View {
-      var kind: String
+```swift
+struct Transportation: View {
+    var kind: String
 
-      var body: some View {
-          Text("Information about \(kind) transportation goes here.")
-              .navigationBarTitle("\(kind) Transportation")
-      }
-  }
+    var body: some View {
+        Text("Information about \(kind) transportation goes here.")
+            .navigationBarTitle("\(kind) Transportation")
+    }
+}
 
-  struct ContentView: View {
-      var body: some View {
-          TabView {
-              Transportation(kind: "Car").tabItem {
-                  Image(systemName: "car")
-                  Text("Car")
-              }
-              Transportation(kind: "Bus").tabItem {
-                  Image(systemName: "bus")
-                  Text("Bus")
-              }
-              Transportation(kind: "Train").tabItem {
-                  Image(systemName: "tram")
-                  Text("Train")
-              }
-              Transportation(kind: "Airplane").tabItem {
-                  Image(systemName: "airplane")
-                  Text("Airplane")
-              }
-          }
-          .onAppear() {
-              UITabBar.appearance().backgroundColor = .systemGray5
-          }
-          // Change color of Image and Text views which defaults to blue.
-          .accentColor(.purple)
-      }
-  }
-  ```
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            Transportation(kind: "Car").tabItem {
+                Image(systemName: "car")
+                Text("Car")
+            }
+            Transportation(kind: "Bus").tabItem {
+                Image(systemName: "bus")
+                Text("Bus")
+            }
+            Transportation(kind: "Train").tabItem {
+                Image(systemName: "tram")
+                Text("Train")
+            }
+            Transportation(kind: "Airplane").tabItem {
+                Image(systemName: "airplane")
+                Text("Airplane")
+            }
+        }
+        .onAppear() {
+            UITabBar.appearance().backgroundColor = .systemGray5
+        }
+        // Change color of Image and Text views which defaults to blue.
+        .accentColor(.purple)
+    }
+}
+```
 
-  Here's another example that displays a set of pages
-  the user can swipe through.
-  Page controls with a dot representing each page are displayed at the bottom.
+Here's another example that displays a set of pages
+the user can swipe through.
+Page controls with a dot representing each page are displayed at the bottom.
 
-  <img alt="SwiftUI TabView Pages" style="width: 40%"
+<img alt="SwiftUI TabView Pages" style="width: 40%"
     src="/blog/assets/SwiftUI-TabView-Pages.png?v={{pkg.version}}"
     title="SwiftUI TabView Pages">
 
-  ```swift
-  struct Page: View {
-      var title: String
-      var description: String
-      var imageName: String
+```swift
+struct Page: View {
+    var title: String
+    var description: String
+    var imageName: String
 
-      var body: some View {
-         VStack {
-              Text(title).font(.headline)
-              Image(systemName: imageName)
-                  .resizable()
-                  .scaledToFit()
-                  .frame(width: 100, height: 100)
-                  .foregroundColor(.red)
-              Text(description)
-          }
-      }
-  }
+    var body: some View {
+       VStack {
+            Text(title).font(.headline)
+            Image(systemName: imageName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .foregroundColor(.red)
+            Text(description)
+        }
+    }
+}
 
-  struct ContentView: View {
-      var body: some View {
-          TabView {
-              Page(
-                  title: "Planes",
-                  description: "Fly like the wind!",
-                  imageName: "airplane"
-              )
-              Page(
-                  title: "Trains",
-                  description: "Travel the tracks!",
-                  imageName: "tram"
-              )
-              Page(
-                  title: "Automobiles",
-                  description: "Drive the open road!",
-                  imageName: "car"
-              )
-          }
-          .tabViewStyle(.page(indexDisplayMode: .always))
-          .indexViewStyle(.page(backgroundDisplayMode: .always))
-      }
-  }
-  ```
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            Page(
+                title: "Planes",
+                description: "Fly like the wind!",
+                imageName: "airplane"
+            )
+            Page(
+                title: "Trains",
+                description: "Travel the tracks!",
+                imageName: "tram"
+            )
+            Page(
+                title: "Automobiles",
+                description: "Drive the open road!",
+                imageName: "car"
+            )
+        }
+        .tabViewStyle(.page(indexDisplayMode: .always))
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
+    }
+}
+```
 
-- `HSplitView`
+### `HSplitView`
 
-  This is a layout container that organized its children horizontally
-  and allows users to resize the children by dragging dividers between them.
-  It is only supported in macOS.
+This is a layout container that organized its children horizontally
+and allows users to resize the children by dragging dividers between them.
+It is only supported in macOS.
 
-- `VSplitView`
+### `VSplitView`
 
-  This is a layout container that organized its children vertically
-  and allows users to resize the children by dragging dividers between them.
-  It is only supported in macOS.
+This is a layout container that organized its children vertically
+and allows users to resize the children by dragging dividers between them.
+It is only supported in macOS.
 
-- `TimelineView`
+### `TimelineView`
 
-  This is a container that re-renders its children at scheduled times.
-  The following example renders the date and time every second.
-  For example, "Nov 8, 2021 at 5:19:47".
+This is a container that re-renders its children at scheduled times.
+The following example renders the date and time every second.
+For example, "Nov 8, 2021 at 5:19:47".
 
-  ```swift
-  private var dateFormatter: DateFormatter {
-      let df = DateFormatter()
-      df.dateFormat = "MMM d, YYYY 'at' h:mm:ss a"
-      return df
-  }
+```swift
+private var dateFormatter: DateFormatter {
+    let df = DateFormatter()
+    df.dateFormat = "MMM d, YYYY 'at' h:mm:ss a"
+    return df
+}
 
-  private let schedule = PeriodicTimelineSchedule(from: Date(), by: 1)
+private let schedule = PeriodicTimelineSchedule(from: Date(), by: 1)
 
-  var body: some View {
-      VStack {
-          TimelineView(schedule) { context in
-              Text(dateFormatter.string(from: context.date))
-          }
-      }
-  }
-  ```
+var body: some View {
+    VStack {
+        TimelineView(schedule) { context in
+            Text(dateFormatter.string(from: context.date))
+        }
+    }
+}
+```
 
-### Component Views
+## Component Views
 
-- `Button`
+### `Button`
 
-  The content of a `Button` can be specified in two ways,
-  passing a `String` as the first argument or using the `label` argument
-  which can be specified with a trailing closure.
+The content of a `Button` can be specified in two ways,
+passing a `String` as the first argument or using the `label` argument
+which can be specified with a trailing closure.
 
-  `Button` specify a function to call when pressed using the `action` argument
-  which can also be written as a trailing closure.
+`Button` specify a function to call when pressed using the `action` argument
+which can also be written as a trailing closure.
 
-  By default buttons have no background color and the text is the accent color.
-  When their `role` attribute is set to `.destructive`, the text is red.
-  When their `role` attribute is set to `.cancel`, `.none`, or not specified,
-  there is no visible change.
-  When the `buttonStyle` view modifier is passed `.bordered`,
-  the background is gray.
-  When the `buttonStyle` view modifier is passed `.borderedProminent`,
-  the background is the accent color and the text is white.
+By default buttons have no background color and the text is the accent color.
+When their `role` attribute is set to `.destructive`, the text is red.
+When their `role` attribute is set to `.cancel`, `.none`, or not specified,
+there is no visible change.
+When the `buttonStyle` view modifier is passed `.bordered`,
+the background is gray.
+When the `buttonStyle` view modifier is passed `.borderedProminent`,
+the background is the accent color and the text is white.
 
-  To change the text color,
-  apply the `foregroundColor` view modifier passing it a `Color`.
+To change the text color,
+apply the `foregroundColor` view modifier passing it a `Color`.
 
-  To change the background color,
-  apply the `background` view modifier passing it a `Color`.
+To change the background color,
+apply the `background` view modifier passing it a `Color`.
 
-  To disable a `Button`,
-  apply the `disabled` view modifier passing it a `Bool`.
+To disable a `Button`,
+apply the `disabled` view modifier passing it a `Bool`.
 
-  ```swift
-  // Button containing text and action specified with a trailing closure.
-  Button("My Label", role: .destructive) {
-      // code to run when button is pressed
-  }.buttonStyle(.borderedProminent)
+```swift
+// Button containing text and action specified with a trailing closure.
+Button("My Label", role: .destructive) {
+    // code to run when button is pressed
+}.buttonStyle(.borderedProminent)
 
-  // Button with an "action" argument whose value
-  // can be a closure or a function reference
-  // and a "contents" argument whose value is a ViewBuilder
-  // that can be written as a trailing closure.
-  Button(action: {
-      // code to run when button is pressed
-  }) {
-      HStack {
-          Text("Heart")
-          Image(systemName: "heart")
-      }
-  }
-  ```
+// Button with an "action" argument whose value
+// can be a closure or a function reference
+// and a "contents" argument whose value is a ViewBuilder
+// that can be written as a trailing closure.
+Button(action: {
+    // code to run when button is pressed
+}) {
+    HStack {
+        Text("Heart")
+        Image(systemName: "heart")
+    }
+}
+```
 
-- `Color`
+### `Color`
 
-  This creates a rectangle view with a specific background color
-  that grows to fill all the space offered to it.
-  For example, `Color.red` and `Color.clear` (transparent) are views.
+This creates a rectangle view with a specific background color
+that grows to fill all the space offered to it.
+For example, `Color.red` and `Color.clear` (transparent) are views.
 
-  A `UIColor` can be converted to a `Color`.
-  For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
+A `UIColor` can be converted to a `Color`.
+For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
 
-- `Image`
+### `Image`
 
-  This renders an image.
-  Many image formats are supported including PNG, JPEG, and HEIC.
-  Click `Assets.xcassets` in the Navigator to
-  associate a name with each image to be used.
-  Click the "+" in the lower-left to add an entry.
-  Give the entry a name and drag images into the 1x, 2x, and 3x boxes.
-  Pass the name to the `Image` view as an unlabelled argument.
-  For example, `Image("Comet")`.
+This renders an image.
+Many image formats are supported including PNG, JPEG, and HEIC.
+Click `Assets.xcassets` in the Navigator to
+associate a name with each image to be used.
+Click the "+" in the lower-left to add an entry.
+Give the entry a name and drag images into the 1x, 2x, and 3x boxes.
+Pass the name to the `Image` view as an unlabelled argument.
+For example, `Image("Comet")`.
 
-  Icons from SF Symbols can be used by specifying
-  their name as the `systemName` argument.
-  For example, `Image(systemName: "cloud.snow")`.
+Icons from SF Symbols can be used by specifying
+their name as the `systemName` argument.
+For example, `Image(systemName: "cloud.snow")`.
 
-- `AsyncImage`
+### `AsyncImage`
 
-  This asynchronously loads and displays an image.
-  It works in the Simulator, but not in Preview.
-  The following example renders the Swift logo.
+This asynchronously loads and displays an image.
+It works in the Simulator, but not in Preview.
+The following example renders the Swift logo.
 
-  <img alt="SwiftUI AsyncImage" style="width: 40%"
+<img alt="SwiftUI AsyncImage" style="width: 40%"
     src="/blog/assets/SwiftUI-AsyncImage.png?v={{pkg.version}}"
     title="SwiftUI AsyncImage">
 
-  ```swift
-  struct ContentView: View {
-    private let imageUrl =
-        "https://developer.apple.com/swift/images/swift-og.png"
-    private let size = 100.0
-
-    var body: some View {
-        VStack {
-            AsyncImage(
-                url: URL(string: imageUrl),
-                content: { image in
-                    image
-                        .resizable()
-                        .frame(width: size, height: size)
-                },
-                placeholder: { ProgressView() } // spinner
-            )
-        }
-    }
-  }
-  ```
-
-- `Text`
-
-  This view renders text.
-  If the text is too long to fit on a single line,
-  it is automatically wrapped to additional lines.
-  To prevent this, apply the `lineLimit` view modifier
-  and pass the number of lines that can be used (perhaps 1).
-  If the text doesn't fit in the allowed number of lines,
-  it will be elided and an ellipsis will appear at the end.
-
-  To set the foreground color, apply the `foregroundColor` view modifier.
-  To set the font size, apply the `font` view modifier.
-
-  ```swift
-  Text("Hello World").foregroundColor(.red).font(.system(size: 24))
-  ```
-
-  The `Text` view can only be passed a `String`.
-  Other types such as `Int` and `Double` must be converted to `String`.
-  Consider extending `Text` to add initializers for other types.
-  For example:
-
-  ```swift
-  extension Text {
-      init(_ number: Int) {
-          self.init(String(number))
-      }
-  }
-  ```
-
-- `TextField`
-
-  This provides single-line text entry.
-  It also works with non-String types using a `FormatStyle` object
-  to convert between `String` values and the type.
-  It takes label text, a binding to a variable, and an optional prompt.
-  In macOS apps, the label precedes the input area
-  and the prompt is used as placeholder text.
-  In iOS apps, no text precedes the input area
-  and the prompt or label is used as placeholder text.
-
-  The style can be set with the `textFieldStyle` view modifier.
-  The options are `plain` (default) and `roundedBorder`.
-  When the `plain` style is used, it's not obvious that the value can be edited.
-
-  Auto-capitalization of words is provided by default.
-  To disable this, pass `.none` to the `autocapitalization` view modifier.
-
-  Auto-correction is provided by default.
-  To disable this, pass `true` to the `disableAutocorrection` view modifier.
-
-  ```swift
-  // No prompt
-  TextField("First Name", text: $firstName)
-      .padding()
-      .textFieldStyle(.roundedBorder)
-
-  // Prompt specified
-  TextField(text: $lastName, prompt: Text("Required")) {
-      Text("Last Name")
-  }
-  .textFieldStyle(.roundedBorder)
-  .padding()
-
-  // Using a non-String value (Int)
-  // This doesn't provided arrows to increment and decrement the value
-  // and it doesn't prevent typing non-digit characters.
-  TextField("Score", value: $score, format: .number)
-      .padding()
-      .textFieldStyle(.roundedBorder)
-  ```
-
-- `SecureField`
-
-  This is like `TextField`, but obscures the characters that are typed.
-  It is typically used for sensitive data like
-  passwords and social security numbers.
-
-  ```swift
-  SecureField("Password", text: $password)
-      .autocapitalization(.none)
-      .disableAutocorrection(true)
-  ```
-
-- `TextEditor`
-
-  This provides multi-line text entry.
-  The number of lines can be limited,
-  but it seems the limit is only enforced on initial render.
-  It doesn't prevent more lines from being
-  displayed if the user types more text.
-  Use the `frame` view modifier to set the size.
-
-  ```swift
-  let lines = 3
-  TextEditor(text: $reasonForVisit)
-      .lineLimit(lines)
-      .frame(maxWidth: .infinity, maxHeight: CGFloat(lines * 24))
-      .overlay(
-          RoundedRectangle(cornerRadius: 5)
-              .stroke(Color(UIColor.lightGray))
-      )
-  ```
-
-- `EditButton`
-
-  This toggles the edit mode of a `List`.
-  It is typically added to a `List` using the `toolbar` view modifier.
-  See the example in the "Lists" section.
-
-- `PasteButton`
-
-  This is only available in macOS 10.15 and above.
-  It renders a button for pasting data from the system clipboard.
-
-- `Link`
-
-  This creates a hyperlink like an HTML `a` element.
-  Clicking it opens the associated URL in Safari.
-  This works in the Simulator, but Preview is not able to open Safari.
-
-- `Menu`
-
-  This renders a label containing the menu title.
-  When clicked, a menu appears below the label
-  containing a vertical stack of buttons and sub-menus.
-  Include `Divider` views to separate groups of menu items.
-
-  The order of the buttons depends on the position of the menu.
-  If it is near the bottom of the display,
-  the button order is reversed in order to make all the buttons visible
-  and keep the first button close to the label.
-
-  ```swift
-  Menu("My Menu") {
-      Button("Option 1", action: {})
-      Button("Option 2", action: {})
-      Menu("Option 3") {
-          Button("Option 3.1", action: {})
-          Button("Option 3.2", action: {})
-      }
-  }
-  ```
-
-  The following example uses a `Menu` to
-  select the color uses to fill a `Rectangle`.
-
-  ```swift
-  @State private var color = Color.red
+```swift
+struct ContentView: View {
+  private let imageUrl =
+      "https://developer.apple.com/swift/images/swift-og.png"
+  private let size = 100.0
 
   var body: some View {
       VStack {
-          Menu("Color") {
-              Button("Red") { color = .red }
-              Button("Green") { color = .green }
-              Button("Blue") { color = .blue }
-          }
-          Rectangle().fill(color).frame(width: 50, height: 50)
+          AsyncImage(
+              url: URL(string: imageUrl),
+              content: { image in
+                  image
+                      .resizable()
+                      .frame(width: size, height: size)
+              },
+              placeholder: { ProgressView() } // spinner
+          )
       }
   }
-  ```
+}
+```
 
-- `Toggle`
+### `Text`
 
-  This enables toggling between on and off states.
-  By default it renders as a switch with a circular thumb.
+This view renders text.
+If the text is too long to fit on a single line,
+it is automatically wrapped to additional lines.
+To prevent this, apply the `lineLimit` view modifier
+and pass the number of lines that can be used (perhaps 1).
+If the text doesn't fit in the allowed number of lines,
+it will be elided and an ellipsis will appear at the end.
 
-  The app accent color does not affect switch-style rendering.
-  To change the color of the switch background,
-  use the `toggleStyle` view modifier to specify a tint.
+To set the foreground color, apply the `foregroundColor` view modifier.
+To set the font size, apply the `font` view modifier.
 
-  A `Toggle` can also render as a button whose
-  color indicates whether it is off or on.
-  When it is off, the button background color is clear
-  and the text is the accent color.
-  When it is on, the button background color is the accent color
-  and the text is white.
+```swift
+Text("Hello World").foregroundColor(.red).font(.system(size: 24))
+```
 
-  The `Toggle` initializer takes a `String` to render
-  (either before the switch or inside the button)
-  and binding to a `Bool` value.
+The `Text` view can only be passed a `String`.
+Other types such as `Int` and `Double` must be converted to `String`.
+Consider extending `Text` to add initializers for other types.
+For example:
 
-  ```swift
-  Toggle("Hungry", isOn: $hungry).toggleStyle(SwitchToggleStyle(tint: .red))
+```swift
+extension Text {
+    init(_ number: Int) {
+        self.init(String(number))
+    }
+}
+```
 
-  Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
-  ```
+### `TextField`
 
-- `Slider`
+This provides single-line text entry.
+It also works with non-String types using a `FormatStyle` object
+to convert between `String` values and the type.
+It takes label text, a binding to a variable, and an optional prompt.
+In macOS apps, the label precedes the input area
+and the prompt is used as placeholder text.
+In iOS apps, no text precedes the input area
+and the prompt or label is used as placeholder text.
 
-  This renders a horizontal track with a thumb that
-  slides between minimum and maximum values.
-  The current value must have the type `Float`, not `Int`.
-  Text and/or icons can be displayed at the leading and trailing ends.
+The style can be set with the `textFieldStyle` view modifier.
+The options are `plain` (default) and `roundedBorder`.
+When the `plain` style is used, it's not obvious that the value can be edited.
 
-  ```swift
-  // No text or icons at ends.
-  Slider(value: $rating, in: 0...10, step: 1)
+Auto-capitalization of words is provided by default.
+To disable this, pass `.none` to the `autocapitalization` view modifier.
 
-  // Has text at ends and displays current value below.
-  VStack {
-      Slider(
-          value: $rating,
-          in: 0...10,
-          step: 1,
-          label: { Text("Rating") }, // not rendered
-          // The next two attributes must be closures that return the
-          // same kind of view.  Image and Text are common choices.
-          minimumValueLabel: { Image(systemName: "hand.thumbsdown") },
-          maximumValueLabel: { Image(systemName: "hand.thumbsup") }
-      ).padding()
-      Text("rating = \(Int(rating))")
-  }
-  ```
+Auto-correction is provided by default.
+To disable this, pass `true` to the `disableAutocorrection` view modifier.
 
-- `Stepper`
+```swift
+// No prompt
+TextField("First Name", text: $firstName)
+    .padding()
+    .textFieldStyle(.roundedBorder)
 
-  This displays "-" and "+" buttons that can be
-  tapped to decrement and increment a value.
-  It takes a label to display before the buttons,
-  a binding for the current value,
-  an optional range the value must remain inside, and
-  a closure to execute every time the `Stepper` changes the value.
+// Prompt specified
+TextField(text: $lastName, prompt: Text("Required")) {
+    Text("Last Name")
+}
+.textFieldStyle(.roundedBorder)
+.padding()
 
-  ```swift
-  Stepper(
-      "# of Dogs: \(dogCount)",
-      value: $dogCount,
-      in: 0...10
-  ) { v in
-      tooManyDogs = dogCount > 2
-  }
-  ```
+// Using a non-String value (Int)
+// This doesn't provided arrows to increment and decrement the value
+// and it doesn't prevent typing non-digit characters.
+TextField("Score", value: $score, format: .number)
+    .padding()
+    .textFieldStyle(.roundedBorder)
+```
 
-- `Picker`
+### `SecureField`
 
-  This allows selecting an option from a list.
-  It takes the text to display as a prompt and a `selection` argument
-  which is a binding that holds something to identify the selected value.
+This is like `TextField`, but obscures the characters that are typed.
+It is typically used for sensitive data like
+passwords and social security numbers.
 
-  The `pickerStyle` view modifier can be applied
-  to change the way the options are rendered.
-  The specified prompt is only rendered by some styles.
-  The values that can be passed to this include:
+```swift
+SecureField("Password", text: $password)
+    .autocapitalization(.none)
+    .disableAutocorrection(true)
+```
 
-  - `.automatic` (default)
+### `TextEditor`
 
-    This displays the prompt at the selected value.
-    When this is tapped, the options are rendered on a separate sheet.
+This provides multi-line text entry.
+The number of lines can be limited,
+but it seems the limit is only enforced on initial render.
+It doesn't prevent more lines from being
+displayed if the user types more text.
+Use the `frame` view modifier to set the size.
 
-  - `.inline`
+```swift
+let lines = 3
+TextEditor(text: $reasonForVisit)
+    .lineLimit(lines)
+    .frame(maxWidth: .infinity, maxHeight: CGFloat(lines * 24))
+    .overlay(
+        RoundedRectangle(cornerRadius: 5)
+            .stroke(Color(UIColor.lightGray))
+    )
+```
 
-    This displays the prompt and all the options (visible simultaneously)
-    in the current sheet.
-    The selected option is indicated by a check mark.
+### `EditButton`
 
-  - `.menu`
+This toggles the edit mode of a `List`.
+It is typically added to a `List` using the `toolbar` view modifier.
+See the example in the "Lists" section.
 
-    This does not display the prompt and
-    only displays the currently selected value.
-    When the current value is tapped, all the options are
-    rendered in a dropdown menu inside the current sheet.
+### `PasteButton`
 
-  - `.radioGroup - not available in iOS
+This is only available in macOS 10.15 and above.
+It renders a button for pasting data from the system clipboard.
 
-  - `.segmented`
+### `Link`
 
-    This does not display the prompt,
-    and renders the options as a "Segmented Control"
-    which is a horizontal row of buttons.
-    If there is insufficient room of the button text, it is elided.
+This creates a hyperlink like an HTML `a` element.
+Clicking it opens the associated URL in Safari.
+This works in the Simulator, but Preview is not able to open Safari.
 
-  - `.wheel`
+### `Menu`
 
-    This does not display the prompt,
-    and renders all the options as a scrollable wheel.
-    It requires sufficient vertical space to render properly
-    (a height of 300 works well).
+This renders a label containing the menu title.
+When clicked, a menu appears below the label
+containing a vertical stack of buttons and sub-menus.
+Include `Divider` views to separate groups of menu items.
 
-  When the options are generated using `ForEach` iterating over an array,
-  the selected value is described the `id` property values
-  of the array elements.
-  This can be changed by specify a `tag` value for each option.
-  The type of the `tag` values must match the type of the `selection` argument.
-  If these types differ, it will not be possible to select an option.
+The order of the buttons depends on the position of the menu.
+If it is near the bottom of the display,
+the button order is reversed in order to make all the buttons visible
+and keep the first button close to the label.
 
-  ```swift
-  @State private var shirtSize: ShirtSize = .sm
+```swift
+Menu("My Menu") {
+    Button("Option 1", action: {})
+    Button("Option 2", action: {})
+    Menu("Option 3") {
+        Button("Option 3.1", action: {})
+        Button("Option 3.2", action: {})
+    }
+}
+```
 
-  enum ShirtSize: String, CaseIterable {
-      case sm = "Small"
-      case md = "Medium"
-      case lg = "Large"
-      case xl = "Extra Large"
-  }
+The following example uses a `Menu` to
+select the color uses to fill a `Rectangle`.
 
-  var body: some View {
-      Picker("Shirt Size", selection: $shirtSize) {
-          ForEach(ShirtSize.allCases, id: \.self) { size in
-              Text("\(size.rawValue)").tag(size)
-          }
-      } // .pickerStyle(.segmented)
-  }
-  ```
+```swift
+@State private var color = Color.red
 
-  Here's a more complex example where the `Picker` begins
-  with no option being selected.
-  Assume that `people` is an array of `Person` objects
-  that have an optional `name` property.
+var body: some View {
+    VStack {
+        Menu("Color") {
+            Button("Red") { color = .red }
+            Button("Green") { color = .green }
+            Button("Blue") { color = .blue }
+        }
+        Rectangle().fill(color).frame(width: 50, height: 50)
+    }
+}
+```
 
-  ```swift
-  @State private var selectedPersonIndex: Int = -1 // nothing selected
+### `Toggle`
 
-  private var selectedPerson: Person? {
-      selectedPersonIndex == -1 ? nil : people[selectedPersonIndex]
-  }
+This enables toggling between on and off states.
+By default it renders as a switch with a circular thumb.
 
-  ...
+The app accent color does not affect switch-style rendering.
+To change the color of the switch background,
+use the `toggleStyle` view modifier to specify a tint.
 
-  Picker("Owner", selection: $selectedPersonIndex) {
-      ForEach(people.indices) { index in
-          Text(people[index].name ?? "").tag(index)
-      }
-  }
-  ```
+A `Toggle` can also render as a button whose
+color indicates whether it is off or on.
+When it is off, the button background color is clear
+and the text is the accent color.
+When it is on, the button background color is the accent color
+and the text is white.
 
-- `DatePicker`
+The `Toggle` initializer takes a `String` to render
+(either before the switch or inside the button)
+and binding to a `Bool` value.
 
-  This allows selecting a date, time, or both.
+```swift
+Toggle("Hungry", isOn: $hungry).toggleStyle(SwitchToggleStyle(tint: .red))
 
-  ```swift
-  DatePicker(
-      "Birthday",
-      selection: $birthday, // a binding
-      displayedComponents: [.date, .hourAndMinute] // array or single value
-  )
-  ```
+Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
+```
 
-- `ColorPicker`
+### `Slider`
 
-  This renders a color well for displaying a currently selected color
-  and changing the color using the system color picker.
+This renders a horizontal track with a thumb that
+slides between minimum and maximum values.
+The current value must have the type `Float`, not `Int`.
+Text and/or icons can be displayed at the leading and trailing ends.
 
-  ```swift
-  ColorPicker(
-      "Favorite Color",
-      selection: $favoriteColor // a binding
-  )
-  ```
+```swift
+// No text or icons at ends.
+Slider(value: $rating, in: 0...10, step: 1)
 
-- `Label`
+// Has text at ends and displays current value below.
+VStack {
+    Slider(
+        value: $rating,
+        in: 0...10,
+        step: 1,
+        label: { Text("Rating") }, // not rendered
+        // The next two attributes must be closures that return the
+        // same kind of view.  Image and Text are common choices.
+        minimumValueLabel: { Image(systemName: "hand.thumbsdown") },
+        maximumValueLabel: { Image(systemName: "hand.thumbsup") }
+    ).padding()
+    Text("rating = \(Int(rating))")
+}
+```
 
-  This is a combination of an icon and text.
-  The icon appears before the text.
+### `Stepper`
 
-  ```swift
-  Label("Rain", systemImage: "cloud.rain")
-  ```
+This displays "-" and "+" buttons that can be
+tapped to decrement and increment a value.
+It takes a label to display before the buttons,
+a binding for the current value,
+an optional range the value must remain inside, and
+a closure to execute every time the `Stepper` changes the value.
 
-- `ProgressView`
+```swift
+Stepper(
+    "# of Dogs: \(dogCount)",
+    value: $dogCount,
+    in: 0...10
+) { v in
+    tooManyDogs = dogCount > 2
+}
+```
 
-  This displays a progress indicator.
-  The indeterminate style uses the standard Apple spinner.
-  The determinate style uses a thin progress bar.
+### `Picker`
 
-  ```swift
-  struct ContentView: View {
-      @State private var progress = 0.0
+This allows selecting an option from a list.
+It takes the text to display as a prompt and a `selection` argument
+which is a binding that holds something to identify the selected value.
 
-      func startTimer() {
-          // Run every 3 hundredths of a second.
-          // When "repeats" is false, this is like setTimeout in JavaScript.
-          // When "repeats" is true, this is like setInterval in JavaScript.
-          Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
-              progress += 0.01
-              if (progress >= 1) {
-                  timer.invalidate()
-                  progress = 0
-              }
-          }
-      }
+The `pickerStyle` view modifier can be applied
+to change the way the options are rendered.
+The specified prompt is only rendered by some styles.
+The values that can be passed to this include:
 
-      var body: some View {
-          VStack {
-              if progress > 0 {
-                  ProgressView() // indeterminate
-                  ProgressView(value: progress).padding() // determinate
-              }
-          }
-          .onAppear { startTimer() }
-      }
-  }
-  ```
+- `.automatic` (default)
 
-- `Gauge`
+  This displays the prompt at the selected value.
+  When this is tapped, the options are rendered on a separate sheet.
 
-  This shows a current value in relation to minimum and maximum values.
-  One example is a car fuel gauge.
-  This is currently only supported in watchOS.
+- `.inline`
 
-- `EmptyView`
-- `EquatableView`
-- `AnyView`
-- `TupleView`
+  This displays the prompt and all the options (visible simultaneously)
+  in the current sheet.
+  The selected option is indicated by a check mark.
+
+- `.menu`
+
+  This does not display the prompt and
+  only displays the currently selected value.
+  When the current value is tapped, all the options are
+  rendered in a dropdown menu inside the current sheet.
+
+- `.radioGroup - not available in iOS
+
+- `.segmented`
+
+  This does not display the prompt,
+  and renders the options as a "Segmented Control"
+  which is a horizontal row of buttons.
+  If there is insufficient room of the button text, it is elided.
+
+- `.wheel`
+
+  This does not display the prompt,
+  and renders all the options as a scrollable wheel.
+  It requires sufficient vertical space to render properly
+  (a height of 300 works well).
+
+When the options are generated using `ForEach` iterating over an array,
+the selected value is described the `id` property values
+of the array elements.
+This can be changed by specify a `tag` value for each option.
+The type of the `tag` values must match the type of the `selection` argument.
+If these types differ, it will not be possible to select an option.
+
+```swift
+@State private var shirtSize: ShirtSize = .sm
+
+enum ShirtSize: String, CaseIterable {
+    case sm = "Small"
+    case md = "Medium"
+    case lg = "Large"
+    case xl = "Extra Large"
+}
+
+var body: some View {
+    Picker("Shirt Size", selection: $shirtSize) {
+        ForEach(ShirtSize.allCases, id: \.self) { size in
+            Text("\(size.rawValue)").tag(size)
+        }
+    } // .pickerStyle(.segmented)
+}
+```
+
+Here's a more complex example where the `Picker` begins
+with no option being selected.
+Assume that `people` is an array of `Person` objects
+that have an optional `name` property.
+
+```swift
+@State private var selectedPersonIndex: Int = -1 // nothing selected
+
+private var selectedPerson: Person? {
+    selectedPersonIndex == -1 ? nil : people[selectedPersonIndex]
+}
+
+...
+
+Picker("Owner", selection: $selectedPersonIndex) {
+    ForEach(people.indices) { index in
+        Text(people[index].name ?? "").tag(index)
+    }
+}
+```
+
+### `DatePicker`
+
+This allows selecting a date, time, or both.
+
+```swift
+DatePicker(
+    "Birthday",
+    selection: $birthday, // a binding
+    displayedComponents: [.date, .hourAndMinute] // array or single value
+)
+```
+
+### `ColorPicker`
+
+This renders a color well for displaying a currently selected color
+and changing the color using the system color picker.
+
+```swift
+ColorPicker(
+    "Favorite Color",
+    selection: $favoriteColor // a binding
+)
+```
+
+### `Label`
+
+This is a combination of an icon and text.
+The icon appears before the text.
+
+```swift
+Label("Rain", systemImage: "cloud.rain")
+```
+
+### `ProgressView`
+
+This displays a progress indicator.
+The indeterminate style uses the standard Apple spinner.
+The determinate style uses a thin progress bar.
+
+```swift
+struct ContentView: View {
+    @State private var progress = 0.0
+
+    func startTimer() {
+        // Run every 3 hundredths of a second.
+        // When "repeats" is false, this is like setTimeout in JavaScript.
+        // When "repeats" is true, this is like setInterval in JavaScript.
+        Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
+            progress += 0.01
+            if (progress >= 1) {
+                timer.invalidate()
+                progress = 0
+            }
+        }
+    }
+
+    var body: some View {
+        VStack {
+            if progress > 0 {
+                ProgressView() // indeterminate
+                ProgressView(value: progress).padding() // determinate
+            }
+        }
+        .onAppear { startTimer() }
+    }
+}
+```
+
+### `Gauge`
+
+This shows a current value in relation to minimum and maximum values.
+One example is a car fuel gauge.
+This is currently only supported in watchOS.
+
+### `EmptyView`
+
+TODO: What is this?
+
+### `EquatableView`
+
+TODO: What is this?
+
+### `AnyView`
+
+TODO: What is this?
+
+### `TupleView`
+
+TODO: What is this?
 
 Here is an example of using container and component views.
 Note how views can be defined in computed properties
@@ -2004,7 +2015,7 @@ Note how `ContentView` uses the view `MyRow`.
 It is preferred to create small views like this and compose them
 rather than creating views whose code is long and deeply nested.
 
-### Drawing Views
+## Drawing Views
 
 The `Shape` protocol inherits from the `View` protocol
 and there are many provided views that inherit from `Shape`.
@@ -2129,155 +2140,203 @@ struct ContentView: View {
 }
 ```
 
-- `Capsule`: draws an oval
-- `Circle`: draws a circle
-- `Ellipse`: draws an ellipse
+### `Capsule`
 
-- `Path`
+This draws an oval.
 
-  Like `Color`, `Path` also creates a view.
-  The following example creates a path that is both filled and stroked.
+### `Circle`
 
-  ```swift
-  // Define the path as a computed property so it can be
-  // used once for filling and once for stroking.
-  var path: Path {
-      Path { path in
-          path.move(to: CGPoint(x: halfWidth, y: halfWidth))
-          path.addLine(to: CGPoint(x: 100, y: 100))
-          path.addLine(to: CGPoint(x: 200, y: halfWidth))
-          path.closeSubpath()
-      }
-  }
+This draws a circle.
 
-  // Inside some container view ...
-  ZStack {
-      path.fill(.yellow)
-      path.stroke(
-          .red,
-          style: StrokeStyle(
-              lineWidth: lineWidth,
-              lineCap: .round,
-              lineJoin: .round
-          )
-      )
-  }
-  ```
+### `Ellipse`
 
-- `Rectangle`: draws a rectangle
-- `RoundedRectangle`: draws a rectangle with rounded corners
+This draws an ellipse.
 
-- `ContainerRelativeShape`
-- `OffsetShape`
-- `RotatedShape`
-- `ScaledShape`
-- `TransformedShape`
+### `Path`
 
-- `AnyShapeShape`
+Like `Color`, `Path` also creates a view.
+The following example creates a path that is both filled and stroked.
 
-- `AnimatablePair`
-- `Animation`
-- `AnyTransition`
-- `EmptyAnimatableData`
+```swift
+// Define the path as a computed property so it can be
+// used once for filling and once for stroking.
+var path: Path {
+    Path { path in
+        path.move(to: CGPoint(x: halfWidth, y: halfWidth))
+        path.addLine(to: CGPoint(x: 100, y: 100))
+        path.addLine(to: CGPoint(x: 200, y: halfWidth))
+        path.closeSubpath()
+    }
+}
 
-- `Anchor`
-- `Angle`
+// Inside some container view ...
+ZStack {
+    path.fill(.yellow)
+    path.stroke(
+        .red,
+        style: StrokeStyle(
+            lineWidth: lineWidth,
+            lineCap: .round,
+            lineJoin: .round
+        )
+    )
+}
+```
 
-  This is a struct that does not implement the `View` protocol.
-  Instances can be created using an initializer
-  that takes either a `degrees` or a `radians` argument.
-  The value can be obtained via either `degrees` or `radians` properties
-  and conversions are performed automatically.
+### `Rectangle`
 
-  ```swift
-  let angle = Angle(radians: Double.pi)
-  print(angle.degrees) // 180.0
-  ```
+This draws a rectangle.
 
-- `ProjectionTransform`
-- `UnitPoint`
+### `RoundedRectangle`
 
-### Other Views
+This draws a rectangle with rounded corners.
 
-- `GeometryReader`
+### `ContainerRelativeShape`
 
-  This is a view that takes all the space offered to it, wraps other views,
-  and provides its size which can be used in calculations.
-  The size is passed to a trailing closure and has the type `GeometryProxy`
-  which has a `size` property whose type is `CGSize`.
+TODO: What is this?
 
-  The following example gets the size of a `VStack` and displays it inside.
+### `OffsetShape`
 
-  <img alt="SwiftUI GeometryReader" style="width: 40%"
+TODO: What is this?
+
+### `RotatedShape`
+
+TODO: What is this?
+
+### `ScaledShape`
+
+TODO: What is this?
+
+### `TransformedShape`
+
+TODO: What is this?
+
+### `AnyShapeShape`
+
+TODO: What is this?
+
+### `AnimatablePair`
+
+TODO: What is this?
+
+### `Animation`
+
+TODO: What is this?
+
+### `AnyTransition`
+
+TODO: What is this?
+
+### `EmptyAnimatableData`
+
+TODO: What is this?
+
+### `Anchor`
+
+TODO: What is this?
+
+### `Angle`
+
+This is a struct that does not implement the `View` protocol.
+Instances can be created using an initializer
+that takes either a `degrees` or a `radians` argument.
+The value can be obtained via either `degrees` or `radians` properties
+and conversions are performed automatically.
+
+```swift
+let angle = Angle(radians: Double.pi)
+print(angle.degrees) // 180.0
+```
+
+### `ProjectionTransform`
+
+TODO: What is this?
+
+### `UnitPoint`
+
+TODO: What is this?
+
+## Other Views
+
+### `GeometryReader`
+
+This is a view that takes all the space offered to it, wraps other views,
+and provides its size which can be used in calculations.
+The size is passed to a trailing closure and has the type `GeometryProxy`
+which has a `size` property whose type is `CGSize`.
+
+The following example gets the size of a `VStack` and displays it inside.
+
+<img alt="SwiftUI GeometryReader" style="width: 40%"
     src="/blog/assets/SwiftUI-GeometryReader.png?v={{pkg.version}}"
     title="SwiftUI GeometryReader">
 
+```swift
+VStack(spacing: 0) {
+    // The 3 children below are given equal heights.
+    Rectangle().fill(.red)
+    GeometryReader { geometry in
+        VStack() {
+            Text("width = \(geometry.size.width)")
+            Text("height = \(geometry.size.height)")
+        }
+        // This expands the size of the VStack to fill the
+        // GeometryReader so the contents are centered.
+        .frame(width: geometry.size.width,
+            height: geometry.size.height)
+         }
+    Rectangle().fill(.blue)
+}
+```
+
+### `Spacer`
+
+Each of these take an equal amount of the unused space
+inside the parent container view.
+It accepts an optional `minLength` attribute which defaults to zero.
+
+Using `Spacer` can be compared to web applications that use
+the CSS properties `display: flex;` and `justify-content`.
+
+| CSS justify-content value | Spacer placement              |
+| ------------------------- | ----------------------------- |
+| flex-start                | at end of list of views       |
+| flex-end                  | at beginning of list of views |
+| space-between             | one between each child view   |
+
+### `Divider`
+
+This draws a light gray 1-pixel wide line across the container.
+The line is vertical in an `HStack` and horizontal in a `VStack`.
+
+The line can be customized in several ways.
+
+- To add space around the line, use the `padding` view modifier.
+
   ```swift
-  VStack(spacing: 0) {
-      // The 3 children below are given equal heights.
-      Rectangle().fill(.red)
-      GeometryReader { geometry in
-          VStack() {
-              Text("width = \(geometry.size.width)")
-              Text("height = \(geometry.size.height)")
-          }
-          // This expands the size of the VStack to fill the
-          // GeometryReader so the contents are centered.
-          .frame(width: geometry.size.width,
-              height: geometry.size.height)
-           }
-      Rectangle().fill(.blue)
-  }
+  Divider().padding(20)
   ```
 
-- `Spacer`
+- To change the color of the line, use the `background` view modifier.
 
-  Each of these take an equal amount of the unused space
-  inside the parent container view.
-  It accepts an optional `minLength` attribute which defaults to zero.
+  ```swift
+  Divider().background(.red)
+  ```
 
-  Using `Spacer` can be compared to web applications that use
-  the CSS properties `display: flex;` and `justify-content`.
+- To draw a thicker line, use the `frame` modifier.
+  This doesn't actually make the `Divider` thicker,
+  it just makes the area allocated wider and fills it with a color.
 
-  | CSS justify-content value | Spacer placement              |
-  | ------------------------- | ----------------------------- |
-  | flex-start                | at end of list of views       |
-  | flex-end                  | at beginning of list of views |
-  | space-between             | one between each child view   |
+  ```swift
+  Divider().background(.blue).frame(height: 20).background(.blue)
+  ```
 
-- `Divider`
+- To avoid drawing the line all the way across the container,
+  use the `frame` view modifier and specify the `maxWidth` attribute.
 
-  This draws a light gray 1-pixel wide line across the container.
-  The line is vertical in an `HStack` and horizontal in a `VStack`.
-
-  The line can be customized in several ways.
-
-  - To add space around the line, use the `padding` view modifier.
-
-    ```swift
-    Divider().padding(20)
-    ```
-
-  - To change the color of the line, use the `background` view modifier.
-
-    ```swift
-    Divider().background(.red)
-    ```
-
-  - To draw a thicker line, use the `frame` modifier.
-    This doesn't actually make the `Divider` thicker,
-    it just makes the area allocated wider and fills it with a color.
-
-    ```swift
-    Divider().background(.blue).frame(height: 20).background(.blue)
-    ```
-
-  - To avoid drawing the line all the way across the container,
-    use the `frame` view modifier and specify the `maxWidth` attribute.
-
-    ```swift
-    Divider().frame(maxWidth: 200)
-    ```
+  ```swift
+  Divider().frame(maxWidth: 200)
+  ```
 
 ## View Modifiers
 
@@ -4892,6 +4951,44 @@ Double-click the name to change it.
 These become the names of generated class definitions,
 so they should begin with an uppercase letter.
 The generated classes inherit from `NSManagedObject`.
+
+By default, for each entity the value of Class ... Codegen
+shown in the Inspector is "Class Definition".
+This means that Xcode will automatically generate a class for the entity
+and it will not appear as a source file in the Navigator.
+Typically this is the desired option.
+
+To generate sources files for entity classes that appear in the Navigator:
+
+- Select Editor ... Create NSManagedObject Subclass...".
+- Change the Codegen option to "Manual/None".
+- Select a model and click "Next" (most projects only have one).
+- Select the entities for which a class should be generated and click "Next".
+- Select the project subdirectory where the source files should be written.
+  TODO: It seems this is ignored at the files are
+  TODO: always written to the top project directory.
+- Click "Create".
+
+This generates two source files for each entity,
+`{entity-name}+CoreDataClass.swift` and
+`{entity-name}+CoreDataProperties.swift`.
+
+The "Class" file defines a class for the entity
+that inherits from `NSManagedObject`.
+This file should not be modified.
+
+The "Properties" file defines extensions to the entity that define
+a `fetchRequest` method that fetches all the instances of the entity,
+properties that correspond to the entity attributes,
+and methods for adding and removing other kinds of entities
+that have a relationship to this one.
+This file can be modified to add methods.
+
+When "Class Definition" is set to "Category/Extension",
+the "Create NSManagedObject Subclass..." menu item
+only generates "Properties" files.
+This avoids the possibility of editing the "Class" files.
+TODO: Why does this also generate "Class" files?
 
 To add attributes to an entity,
 click the "+" at the bottom of the attribute list.
