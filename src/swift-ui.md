@@ -1800,8 +1800,7 @@ The values that can be passed to this include:
 
 - `.automatic` (default)
 
-  This displays the prompt at the selected value.
-  When this is tapped, the options are rendered on a separate sheet.
+This selects a style based on the context in which the `Picker` is used.
 
 - `.inline`
 
@@ -1829,8 +1828,11 @@ The values that can be passed to this include:
 
   This does not display the prompt,
   and renders all the options as a scrollable wheel.
-  It requires sufficient vertical space to render properly
-  (a height of 300 works well).
+  It requires sufficient vertical space to render properly.
+  A height of 300 works well.
+
+TODO: What style displays the prompt at the selected value and
+TODO: when tapped displays the options on a separate sheet?
 
 When the options are generated using `ForEach` iterating over an array,
 the selected value is described the `id` property values
@@ -4899,25 +4901,28 @@ TODO: https://www.youtube.com/watch?v=bRpFHqv0tRQ&t=701s
 
 ## Core Data
 
-TODO: https://www.youtube.com/watch?v=091Mdv_Rjb4
-
 Core Data is an object/graph persistence framework.
 It supports many features including
 data validation, undo/redo, and lazy loading.
 By default it stores data using SQLite.
+
+TODO: Does "Core Data" work in Preview?
 
 One way to setup use of Core Data is to
 check the "Use Core Data" checkbox on the options panel
 when creating a new project.
 This adds all the setup code and UI code for a simple app
 that allows creating, deleting, and listing `Item` entities.
-It can then be modified to work with other kinds of entities.
+The app can be modified to work with other kinds of entities.
 
-Another way is to not check the "Use Core Data" checkbox
-and set it up manually.
-As shown below, the steps to do this are not difficult.
+Another approach is to uncheck the "Use Core Data" checkbox
+and set up use of Core Data manually.
+The steps to do this are shown later.
 
-The generated files setup use of Core Data.
+### "Use Core Data" Option
+
+When the "Use Core Data" checkbox is checked,
+the generated files configure the use of Core Data.
 The file `{app-name}App.swift` registers an "environment"
 with the main `ContentView` that uses
 a `PersistenceController` instance defined in `Persistence.swift`
@@ -4940,70 +4945,91 @@ When finished, click the "Done" button at the top
 that replaced the "Edit" button.
 From here you can edit the code to provide your own CRUD functionality.
 
-To define additional entity types that can be persisted,
-and possibly delete the provided `Item` type,
+### Defining Entities
+
+To define Core Data entity types,
 click the `{app-name}.xcdatamodeld` file in the Navigator pane.
 This will display an entity editor.
 
-To add entities, click the "Add Entity" button at the bottom.
+If the "Use Core Data" option was checked,
+consider deleting the provided `Item` entity
+and any code that is specific to it.
+
+If the "Use Core Data" option was not checked, create a model file.
+Right-click in the Navigator and select "New File...".
+For the template, scroll down to "Core Data" and select "Data Model".
+For most projects only one of these files is needed
+and the default name of "Model.xcdatamodeld" is fine.
+
+Entities are similar to tables in a relational database.
+Add entities to the model by clicking the "Add Entity" button at the bottom.
 This will create an empty entity named "Entity".
 Double-click the name to change it.
 These become the names of generated class definitions,
 so they should begin with an uppercase letter.
+It is recommended to give them names that end in "Entity"
+so it is clear in code that uses them that they are Core Data entities.
 The generated classes inherit from `NSManagedObject`.
 
-By default, for each entity the value of Class ... Codegen
-shown in the Inspector is "Class Definition".
-This means that Xcode will automatically generate a class for the entity
-and it will not appear as a source file in the Navigator.
-Typically this is the desired option.
+For each entity, click the "Module" drop-down inside
+the Inspector on the right, select "Current Product Module".
+TODO: Is this really desirable? What is the benefit?
 
-To generate sources files for entity classes that appear in the Navigator:
+Add attributes to each entity by
+clicking the "+" at the bottom of the attribute list.
+Each attribute is given a default name of "attribute".
+Double-click the name to change it.
+Some names, such as "description" and "for", are not allowed.
+Select a type from a drop-down list of primitive types
+that includes "Data" for a byte buffer.
 
-- Select Editor ... Create NSManagedObject Subclass...".
-- Change the Codegen option to "Manual/None".
-- Select a model and click "Next" (most projects only have one).
-- Select the entities for which a class should be generated and click "Next".
-- Select the project subdirectory where the source files should be written.
-  TODO: It seems this is ignored at the files are
-  TODO: always written to the top project directory.
-- Click "Create".
+Optionally sort the attributes.
+They can be sorted on their name or type
+by clicking on the "Attribute" or "Type" column heading.
 
-This generates two source files for each entity,
-`{entity-name}+CoreDataClass.swift` and
-`{entity-name}+CoreDataProperties.swift`.
+Mark the optional attributes.
+By default each attribute is optional.
+For any that are required, select the attribute and
+uncheck the "Optional" checkbox in the inspector.
 
-The "Class" file defines a class for the entity
-that inherits from `NSManagedObject`.
-This file should not be modified.
+Optionally specify default values for each attribute.
+Select an attribute and enter a value for "Default Value" in the inspector.
 
-The "Properties" file defines extensions to the entity that define
-a `fetchRequest` method that fetches all the instances of the entity,
-properties that correspond to the entity attributes,
-and methods for adding and removing other kinds of entities
-that have a relationship to this one.
-This file can be modified to add methods.
+Optionally specify validation criteria for each attribute.
+Select an attribute and enter values for "Validation" in the inspector.
 
-When "Class Definition" is set to "Category/Extension",
-the "Create NSManagedObject Subclass..." menu item
-only generates "Properties" files.
-This avoids the possibility of editing the "Class" files.
-TODO: Why does this also generate "Class" files?
+Optionally add relationships between entities.
+Each relationship specifies a
+Relationship name, Destination, Type, and Delete Rule.
+The "Type" in the Inspector can be "To One" or "To Many".
 
-To add attributes to an entity,
-click the "+" at the bottom of the attribute list.
-For each attribute, enter a name and select a type.
+Relationships have a "Delete Rule" in the Inspector
+that can be "Nullify", "Cascade", or "Deny".
 
-To create an initial set of objects,
-edit the `preview` property defined in `Persistence.swift`.
-For example:
+"Nullify" means instances can be deleted
+without also deleting related entities.
+References to deleted entities are set to `nil`.
 
-```swift
-TODO: Add an example.
-```
+"Cascade" means instances can be deleted
+and related entities will also be deleted.
 
-If you see errors that say "cannot find type 'SomeEntityName' in scope",
-restart Xcode.
+"Deny" means instances with related entities cannot be deleted.
+
+Specify inverse relationships for most relationships.
+For example, "PersonEntity" can have
+an "owns" relationship "To Many" "DogEntity" and
+"DogEntity" can have an "ownedBy" relationship "To One" "PersonEntity".
+
+Optionally view the entities and their relationships as a graph.
+To switch between viewing entities and their relationships
+in "table" style or "graph" style,
+click the buttons in the lower-right labelled "Editor Style".
+In the graph view it may be necessary to toggle the relationships
+in each entity by clicking the triangle to the left of "Relationships"
+in order to see all of them.
+
+If you see the error "cannot find type 'SomeEntityName' in scope",
+close and reopen the project in Xcode.
 In some cases, such as renaming entities,
 it is necessary to clear existing data and start over.
 To do this:
@@ -5014,70 +5040,78 @@ To do this:
 - run the `rm -rf` command on the directory for the project
 - restart Xcode
 
-### Step to use Core Data
+### Entity Codegen
 
-- Create a new file.
+When an entity is selected in the Core Data model editor, the Inspector
+displays its configuration options.
+One of these is "Codegen" that has a default value of "Class Definition".
+This means that Xcode will automatically generate a class definition
+for the entity.
+Typically this is the desired option.
 
-- For the template, scroll down to "Core Data" and select "Data Model".
-  For most projects only one of these files is needed
-  and the default name of "Model.xcdatamodeld" is fine.
+By default, the source files for generated entity classes
+do not appear in the Navigator.
+However, they can be viewed by selecting
+Product ... Show Build Folder in Finder.
+The source files can be found in the ridiculously deep directory structure
+Build/Intermediates.noindex/{app-name}.build/Debug-iphonesimulator/
+{app-name}.build/DerivedSources/CoreDataGenerated/Model directory.
 
-- Add entities.
-  These are similar to tables in a relational database.
-  Each is given a default name of "Entity" that can be clicked to rename.
-  It is recommended to give them names that end in "Entity"
-  so it is clear in code that uses them that they are Core Data entities.
-  For each entity, click the "Module" drop-down inside
-  the Inspector on the right, select "Current Product Module".
+There are two generated files for each entity.
+`{entity-name}+CoreDataClass.swift` defines the class
+and should not be modified.
+`{entity-name}+CoreDataProperties.swift` defines extensions to the class
+and can only be safely modified to add computed properties and methods.
 
-- Add attributes to each entity.
-  Each attribute is given a default name of "attribute"
-  that can be clicked to rename.
-  Some names, such as "description" and "for", are not allowed.
-  Select a type from a drop-down list of primitive types
-  that includes "Data" for a byte buffer.
+Choosing a different value for the entity "Codegen" enables
+generating entity sources files that appear in the Navigator.
+The "Manual/None" option means that Xcode will not automatically generate
+either of the files described above.
+The "Category/Extension" option means that Xcode will
+generate the `{entity-name}+CoreDataClass.swift` files,
+but not the `{entity-name}+CoreDataProperties.swift` files.
+TODO: Why does this also generate "Class" files?
 
-- Optionally sort the attributes on their name or type
-  by clicking on the "Attribute" or "Type" column.
+To request generation of source files for entities whose
+"Codegen" option is a value other than "Class Definition":
 
-- By default each attribute is optional.
-  For any that are required, select the attribute and
-  uncheck the "Optional" checkbox in the inspector.
+- Select Editor ... Create NSManagedObject Subclass...
+- Select a model and click "Next". Most projects only have one model.
+- Select the entities for which code should be generated and click "Next".
+- Select the project subdirectory where the source files should be written.
+  TODO: It seems this is ignored at the files are
+  TODO: always written to the top project directory.
+- Click "Create".
 
-- Optionally specify a default value for each attribute.
-  Select an attribute and enter a value for "Default Value" in the inspector.
+The generated "Class" files define a class for an entity
+that inherits from `NSManagedObject`.
+These file should not be modified.
 
-- Optionally specify validation criteria for each attribute.
-  Select an attribute and enter values for "Validation" in the inspector.
+The generated "Properties" files define extensions to the entity that
+include a `fetchRequest` method that fetches all the instances of the entity,
+properties that correspond to the entity attributes,
+and methods for adding and removing other kinds of entities
+that have a relationship to this one.
+These file can be modified to add computed properties and methods.
 
-- Add relationships between entities where each specifies
-  a Relationship name, Destination, Type, and Delete Rule.
-  The "Type" in the Inspector can be "To One" or "To Many".
-  The "Delete Rule" in the Inspector can be "Nullify", "Cascade", or "Deny".
+## @FetchRequest vs. ViewModel
 
-  "Nullify" means instances can be deleted
-  without also deleting related entities.
-  References to deleted entities are set to `nil`.
+There are two popular ways for views to access data from Core Data.
+One is to use `@FetchRequest`.
+The other is to define a ViewModel class that views can use
+which abstracts the use of Core Data away from them.
 
-  "Cascade" means instances can be deleted
-  and related entities will also be deleted.
+#### Using @FetchRequest
 
-  "Deny" means instances with related entities cannot be deleted.
+TODO: Add this based on SwiftUI-GiftTrack code.
 
-- Every relationship typically should have an inverse relationship,
-  so add those.
-  For example, "PersonEntity" can have
-  an "owns" relationship "To Many" "DogEntity" and
-  "DogEntity" can have an "ownedBy" relationship "To One" "PersonEntity".
+#### Using a ViewModel
 
-- Switch between viewing entities and their relationships
-  in "table" style or "graph" style by clicking
-  buttons in the lower-right labelled "Editor Style".
-  In the graph view it may be necessary to toggle the relationships
-  in each entity by clicking the triangle to the left of "Relationships"
-  in order to see all of them.
+Here are the steps to define and use a ViewModel
+for accessing data in Core Data.
 
 - Create a view model class.
+
   This can be defined in a file named "ViewModel.swift".
   It can define a class named "ViewModel" that inherits from `ObservableObject`
   which comes from the Combine framework.
@@ -5220,8 +5254,6 @@ To do this:
   vm.savePeople()
   ```
 
-TODO: Does "Core Data" work in Preview?
-
 ### Entity objects
 
 Core Data entity objects have many properties and methods.
@@ -5269,8 +5301,7 @@ request.sortDescriptors = [
 ]
 
 // Filter so only entities with a name beginning with "T" are fetched.
-let predicate = NSPredicate(format: "name == %@", "Tami")
-request.
+request.predicate = NSPredicate(format: "name == %@", "Tami")
 
 do {
     people = try context.fetch(request)
