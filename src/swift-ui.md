@@ -5094,7 +5094,7 @@ and methods for adding and removing other kinds of entities
 that have a relationship to this one.
 These file can be modified to add computed properties and methods.
 
-## @FetchRequest vs. ViewModel
+### @FetchRequest vs. ViewModel
 
 There are two popular ways for views to access data from Core Data.
 One is to use `@FetchRequest`.
@@ -5254,7 +5254,7 @@ for accessing data in Core Data.
   vm.savePeople()
   ```
 
-### Entity objects
+### Entity Objects
 
 Core Data entity objects have many properties and methods.
 
@@ -5268,15 +5268,16 @@ Properties for "To One" relationships have
 an optional type matching the referenced entity type.
 For example, `DogEntity` with an `ownedBy` relationship to a `PersonEntity`
 has an `ownedBy` property with a type of `PersonEntity?`.
-This can be directly set to a different `PersonEntity` or `nil`.
+This can be directly set to a `PersonEntity` or `nil`.
+For example, `someDog.ownedBy = somePerson` or `someDog.ownedBy = nil`.
 
-Properties for "To Many" relationships have
-an optional type matching the referenced entity type.
+Properties for "To Many" relationships have a type of optional `NSSet`.
 For example, `PersonEntity` with an `owns` relationship to `DogEntity` instances
-has an `owns` property with a type of `NSSet?`.
-There will also be `addToOwns` and `removeFromOwns` methods
-on the entity (not the relationship property) that take a `DogEntity`
-and add to or remove from the `NSSet`.
+has an `owns` property whose type is `NSSet?`.
+There are also `addToOwns` and `removeFromOwns` methods on the entity
+that take a `DogEntity` and add to or remove from the `NSSet`.
+For example, `somePerson.addToOwns(someDog)`
+or `somePerson.removeFromOwns(someDog)`.
 
 TODO: How can all instances of a given entity type be deleted?
 
