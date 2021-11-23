@@ -1806,12 +1806,18 @@ The values that can be passed to this include:
   and no `pickerStyle` is specified,
   clicking the `Picker` displays the options on a separate page.
 
-  <img alt="SwiftUI Picker" style="width: 40%"
-    src="/blog/assets/SwiftUI-Picker1.png?v={{pkg.version}}"
-    title="SwiftUI Picker automatic before clicking">
-  <img alt="SwiftUI Picker" style="width: 40%"
-    src="/blog/assets/SwiftUI-Picker2.png?v={{pkg.version}}"
-    title="SwiftUI Picker automatic after clicking">
+  <figure>
+    <img alt="SwiftUI Picker" style="width: 60%"
+      src="/blog/assets/SwiftUI-Picker1.png?v={{pkg.version}}"
+      title="SwiftUI Picker automatic before clicking">
+    <figcaption>automatic picker before clicking</figcaption>
+  </figure>
+  <figure>
+    <img alt="SwiftUI Picker" style="width: 60%"
+      src="/blog/assets/SwiftUI-Picker2.png?v={{pkg.version}}"
+      title="SwiftUI Picker automatic after clicking">
+    <figcaption>automatic picker new page after clicking</figcaption>
+  </figure>
 
 - `.inline`
 
@@ -1830,12 +1836,18 @@ The values that can be passed to this include:
   There is no limit to the number of options that can appear in the menu
   and it will scroll vertically if they do not all fit on the screen.
 
-  <img alt="SwiftUI Picker" style="width: 40%"
-    src="/blog/assets/SwiftUI-Picker-Menu1.png?v={{pkg.version}}"
-    title="SwiftUI Picker menu before clicking">
-  <img alt="SwiftUI Picker" style="width: 40%"
-    src="/blog/assets/SwiftUI-Picker-Menu2.png?v={{pkg.version}}"
-    title="SwiftUI Picker menu after clicking">
+  <figure>
+    <img alt="SwiftUI Picker" style="width: 40%"
+      src="/blog/assets/SwiftUI-Picker-Menu1.png?v={{pkg.version}}"
+      title="SwiftUI Picker menu before clicking">
+    <figcaption>menu picker before clicking</figcaption>
+  </figure>
+  <figure>
+    <img alt="SwiftUI Picker" style="width: 40%"
+      src="/blog/assets/SwiftUI-Picker-Menu2.png?v={{pkg.version}}"
+      title="SwiftUI Picker menu after clicking">
+    <figcaption>menu picker after clicking</figcaption>
+  </figure>
 
 - `.radioGroup - not available in iOS
 
@@ -1847,9 +1859,12 @@ The values that can be passed to this include:
   There is no limit to the number of options,
   but their text will be elided if it doesn't fit inside the buttons.
 
-  <img alt="SwiftUI Picker segmented" style="width: 40%"
-    src="/blog/assets/SwiftUI-Picker-segmented.png?v={{pkg.version}}"
-    title="SwiftUI Picker segmented">
+  <figure>
+    <img alt="SwiftUI Picker segmented" style="width: 40%"
+      src="/blog/assets/SwiftUI-Picker-segmented.png?v={{pkg.version}}"
+      title="SwiftUI Picker segmented">
+    <figcaption>segmented picker</figcaption>
+  </figure>
 
 - `.wheel`
 
@@ -1858,9 +1873,12 @@ The values that can be passed to this include:
   It requires sufficient vertical space to render properly.
   A height of 300 works well.
 
-  <img alt="SwiftUI Picker wheel" style="width: 40%"
-    src="/blog/assets/SwiftUI-Picker-wheel.png?v={{pkg.version}}"
-    title="SwiftUI Picker wheel">
+  <figure>
+    <img alt="SwiftUI Picker wheel" style="width: 40%"
+      src="/blog/assets/SwiftUI-Picker-wheel.png?v={{pkg.version}}"
+      title="SwiftUI Picker wheel">
+    <figcaption>wheel picker</figcaption>
+  </figure>
 
 When the options are generated using `ForEach` iterating over an array,
 the selected value is described the `id` property values
