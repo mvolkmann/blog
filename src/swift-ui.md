@@ -1880,6 +1880,18 @@ The values that can be passed to this include:
     <figcaption>wheel picker</figcaption>
   </figure>
 
+The font and background colors used by a `Picker`
+can be customized in limited ways.
+
+To set the background color, apply the `background` view modifier
+to the `Picker`. For example, `.background(Color.yellow.opacity(0.3))`.
+
+To set the font and foreground color, apply the `font` and `foregroundColor`
+view modifiers to the `Text` views used to render the options.
+For example, `.font(.headline).foregroundColor(.red)`.
+This only applies to `automatic` and `wheel` pickers,
+not `menu` or `segmented` pickers.
+
 When the options are generated using `ForEach` iterating over an array,
 the selected value is described the `id` property values
 of the array elements.
