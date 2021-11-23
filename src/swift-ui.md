@@ -1800,13 +1800,26 @@ The values that can be passed to this include:
 
 - `.automatic` (default)
 
-This selects a style based on the context in which the `Picker` is used.
+  This selects a style based on the context in which the `Picker` is used.
+  It is typically either `.menu` or `.wheel`.
+  When the `Picker` is inside a `Form` which is inside a `NavigationView`
+  and no `pickerStyle` is specified,
+  clicking the `Picker` displays the options on a separate page.
+
+  <img alt="SwiftUI Picker" style="width: 40%"
+    src="/blog/assets/SwiftUI-Picker1.png?v={{pkg.version}}"
+    title="SwiftUI Picker automatic before clicking">
+  <img alt="SwiftUI Picker" style="width: 40%"
+    src="/blog/assets/SwiftUI-Picker2.png?v={{pkg.version}}"
+    title="SwiftUI Picker automatic after clicking">
 
 - `.inline`
 
   This displays the prompt and all the options (visible simultaneously)
   in the current sheet.
   The selected option is indicated by a check mark.
+  This works when the `Picker` is inside a `Form`.
+  Otherwise it uses the `.wheel` style.
 
 - `.menu`
 
@@ -1814,6 +1827,15 @@ This selects a style based on the context in which the `Picker` is used.
   only displays the currently selected value.
   When the current value is tapped, all the options are
   rendered in a dropdown menu inside the current sheet.
+  There is no limit to the number of options that can appear in the menu
+  and it will scroll vertically if they do not all fit on the screen.
+
+  <img alt="SwiftUI Picker" style="width: 40%"
+    src="/blog/assets/SwiftUI-Picker-Menu1.png?v={{pkg.version}}"
+    title="SwiftUI Picker menu before clicking">
+  <img alt="SwiftUI Picker" style="width: 40%"
+    src="/blog/assets/SwiftUI-Picker-Menu2.png?v={{pkg.version}}"
+    title="SwiftUI Picker menu after clicking">
 
 - `.radioGroup - not available in iOS
 
@@ -1822,7 +1844,12 @@ This selects a style based on the context in which the `Picker` is used.
   This does not display the prompt,
   and renders the options as a "Segmented Control"
   which is a horizontal row of buttons.
-  If there is insufficient room of the button text, it is elided.
+  There is no limit to the number of options,
+  but their text will be elided if it doesn't fit inside the buttons.
+
+  <img alt="SwiftUI Picker segmented" style="width: 40%"
+    src="/blog/assets/SwiftUI-Picker-segmented.png?v={{pkg.version}}"
+    title="SwiftUI Picker segmented">
 
 - `.wheel`
 
@@ -1831,8 +1858,9 @@ This selects a style based on the context in which the `Picker` is used.
   It requires sufficient vertical space to render properly.
   A height of 300 works well.
 
-TODO: What style displays the prompt at the selected value and
-TODO: when tapped displays the options on a separate sheet?
+  <img alt="SwiftUI Picker wheel" style="width: 40%"
+    src="/blog/assets/SwiftUI-Picker-wheel.png?v={{pkg.version}}"
+    title="SwiftUI Picker wheel">
 
 When the options are generated using `ForEach` iterating over an array,
 the selected value is described the `id` property values

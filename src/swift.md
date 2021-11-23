@@ -3761,6 +3761,9 @@ The Navigator has nine icon buttons at the top.
   including error messages.
   Click a build to see details.
 
+To sort the files displayed in a directory shown in the Navigator,
+right-click the directory and select "Sort by Name" or "Sort by Type".
+
 The bottom section is not visible by default.
 Drag the status row at the bottom up to expose it.
 The bottom section has two subsections.
