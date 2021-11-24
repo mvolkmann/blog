@@ -1741,6 +1741,10 @@ Toggle("Hungry", isOn: $hungry).toggleStyle(SwitchToggleStyle(tint: .red))
 Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
 ```
 
+<img alt="SwiftUI Toggle" style="width: 60%"
+    src="/blog/assets/SwiftUI-Toggle.png?v={{pkg.version}}"
+    title="SwiftUI Toggle">
+
 ### `Slider`
 
 This renders a horizontal track with a thumb that
@@ -4287,6 +4291,13 @@ struct ContentView_Previews: PreviewProvider {
 
 If the view inside a `NavigationLink` doesn't have a `navigationTitle`,
 the link to get back to it will just display "Back".
+
+To go back to the previous view programmatically,
+add the following to a view and call `dismiss` with no arguments.
+
+```swift
+@Environment(\.dismiss) var dismiss
+```
 
 Here is a more advanced example of using `NavigationView`.
 

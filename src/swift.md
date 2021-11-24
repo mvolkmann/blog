@@ -4180,3 +4180,9 @@ the features of Swift that are annoying, at least in my opinion.
   but not `for` loops? We have to use the `ForEach` view instead.
 
 - I kind of miss the CSS ability to define styling across all of my views.
+
+- Adding an editor pane in Xcode displays the currently selected file,
+  but it also remains displayed in the original editor pane.
+  I want it to only be in the new editor pane.
+  It would be even better if a file could be dragged to the right edge
+  to create a new editor pane like in VS Code.
