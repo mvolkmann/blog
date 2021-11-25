@@ -3294,6 +3294,9 @@ struct ContentView: View {
 
 This displays a list of views in a single column.
 It also can act like `ForEach` for iterating over array elements.
+If a `List` contains more items that can be rendered at once,
+it automatically provides scrolling.
+There is no need to wrap it in a `ScrollView`.
 
 The contents of a `List` can be any views.
 These can be grouped using `Section` views.

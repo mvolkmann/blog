@@ -3689,6 +3689,8 @@ The center-left section is the Code Editor.
 The center-right section is the Canvas which is used to test
 Previews of an app outside of the Simulator or a real device.
 
+#### Navigator
+
 The Navigator has nine icon buttons at the top.
 
 - folder icon (first)
@@ -3764,19 +3766,7 @@ The Navigator has nine icon buttons at the top.
 To sort the files displayed in a directory shown in the Navigator,
 right-click the directory and select "Sort by Name" or "Sort by Type".
 
-The bottom section is not visible by default.
-Drag the status row at the bottom up to expose it.
-The bottom section has two subsections.
-The left side of the bottom section is for the debugging.
-The right side of the bottom section is for the console output
-such as that from `print` function calls.
-Click the trashcan icon in the lower-right to clear the output.
-The output from `print` calls only appears when running in the debug mode.
-Xcode used to support debug mode in Previews,
-but now it is only supported in the Simulator.
-This is why `print` output never appears when running in Preview.
-This is really bad because the Simulator
-takes much longer to start than Preview!
+#### Editor
 
 Code is checked for errors while typing.
 Saving is not required.
@@ -3821,10 +3811,6 @@ that can include the following options:
 In the past there was a "Rename..." option in this menu.
 It was moved to Editor ... Refactor ... Rename.
 
-To make the console area appear automatically when new text is written to it,
-select Xcode ... Preferences... ... Behaviors ... Generates output,
-click the "Show" checkbox, and select "Variables & Console View".
-
 To open additional code panes, click the button the upper-right
 that is a rectangle containing a vertical line and a "+".
 The dropdown menu to the left of this button enables
@@ -3833,11 +3819,33 @@ toggling the display of the Canvas area and much more.
 To set Xcode to check spelling while typing, select
 Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
 
+#### Console
+
+The bottom section is not visible by default.
+Drag the status row at the bottom up to expose it.
+The bottom section has two subsections.
+The left side of the bottom section is for the debugging.
+The right side of the bottom section is for the console output
+such as that from `print` function calls.
+Click the trashcan icon in the lower-right to clear the output.
+The output from `print` calls only appears when running in the debug mode.
+Xcode used to support debug mode in Previews,
+but now it is only supported in the Simulator.
+This is why `print` output never appears when running in Preview.
+This is really bad because the Simulator
+takes much longer to start than Preview!
+
+To make the console area appear automatically when new text is written to it,
+select Xcode ... Preferences... ... Behaviors ... Generates output,
+click the "Show" checkbox, and select "Variables & Console View".
+
+#### Simulator
+
 When developing iOS apps it is useful to launch the app in the Simulator
 directly from Xcode.
 Preview and the Simulator can simulate many different devices.
 
-When code changes are save, Xcode will automatically update the app
+When code changes are saved, Xcode will automatically update the app
 in Preview, but not in the Simulator.
 To update the app in the Simulator, press cmd-r
 while focus is in Xcode, not in the Simulator.
@@ -3849,6 +3857,8 @@ The default device type used by the Simulator can be changed
 by selecting Product ... Destination ... Choose Destination...
 and selecting a device type.
 This must be done in each Xcode project.
+
+#### App Icons
 
 To add app icons:
 
@@ -3865,6 +3875,8 @@ To add app icons:
 - drag the `AppIcon.appiconset` folder from the Finder
   into the directory opened by the previous command
   and click the "Replace" button
+
+#### Running on a Device
 
 To run an app on a real iOS device:
 
