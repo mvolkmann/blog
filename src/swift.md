@@ -1460,10 +1460,10 @@ print(evens) // [4, 10, 16]
 // This shows three ways to use the Array reduce method to sum numbers.
 
 // Passing a closure as the last argument.
-//let sum = data.reduce(0, {acc: Int, n: Int in acc + n}) // 38
+let sum = data.reduce(0, {acc: Int, n: Int in acc + n}) // 38
 
 // Using a trailing closure.
-//let sum = data.reduce(0) {acc: Int, n: Int in acc + n} // 38
+let sum = data.reduce(0) {acc: Int, n: Int in acc + n} // 38
 
 // Passing a binary operator.
 // This works because binary operators are
@@ -4186,3 +4186,6 @@ the features of Swift that are annoying, at least in my opinion.
   I want it to only be in the new editor pane.
   It would be even better if a file could be dragged to the right edge
   to create a new editor pane like in VS Code.
+
+- Is there a fuzzy search in Xcode to quickly open a file?
+  This would be similar to cmd-p in VS Code.

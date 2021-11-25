@@ -1360,6 +1360,22 @@ struct ContentView: View {
 }
 ```
 
+By default the first tab is initially displayed.
+To start on another tab, add a state variable
+that holds the tag of the desired initial tab.
+
+```swift
+@State private var selection = 3
+...
+TabView(selection: $selection) {
+    ...
+    SomeView().tabItem {
+        ...
+    }
+    .tag(3)
+}
+```
+
 Here's another example that displays a set of pages
 the user can swipe through.
 Page controls with a dot representing each page are displayed at the bottom.
@@ -1673,6 +1689,10 @@ It renders a button for pasting data from the system clipboard.
 This creates a hyperlink like an HTML `a` element.
 Clicking it opens the associated URL in Safari.
 This works in the Simulator, but Preview is not able to open Safari.
+
+```swift
+Link("link", destination: url)
+```
 
 ### `Menu`
 
