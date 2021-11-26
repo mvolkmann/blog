@@ -1975,6 +1975,57 @@ DatePicker(
 )
 ```
 
+Apply the `datePickerStyle` view modifier to choose a style.
+The options that can be passed to this include:
+
+- `.automatic` - This is the default and is the same as `.compact` in iOS.
+
+- `.compact` - This renders date in a button that can be tapped
+  to render the `.graphical` controls for changing the date.
+
+  <figure>
+    <img alt="SwiftUI DatePicker compact style" style="width: 60%"
+      src="/blog/assets/SwiftUI-DatePicker-compact1.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker compact style">
+    <figcaption>DatePicker compact style</figcaption>
+  </figure>
+  <figure>
+    <img alt="SwiftUI DatePicker compact style after tapping" style="width: 60%"
+      src="/blog/assets/SwiftUI-DatePicker-compact2.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker compact style after tapping">
+    <figcaption>DatePicker compact style after tapping</figcaption>
+  </figure>
+  <figure>
+    <img alt="SwiftUI DatePicker compact style after tapping month-year" style="width: 60%"
+      src="/blog/assets/SwiftUI-DatePicker-compact3.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker compact style after tapping month-year">
+    <figcaption>DatePicker compact style after tapping month-year</figcaption>
+  </figure>
+
+- `.field` - This not available in iOS.
+
+- `.graphical` - The renders a calendar view that contains controls for
+  picking a month and year, going to the previous or next month,
+  and selecting a day of the month.
+
+  <figure>
+    <img alt="SwiftUI DatePicker graphical style" style="width: 60%"
+      src="/blog/assets/SwiftUI-DatePicker-graphical.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker graphical style">
+    <figcaption>DatePicker graphical style</figcaption>
+  </figure>
+
+- `.stepperField` - This not available in iOS.
+
+- `.wheel` - This provides separate wheel pickers for month, day, and year.
+
+  <figure>
+    <img alt="SwiftUI DatePicker wheel style" style="width: 60%"
+      src="/blog/assets/SwiftUI-DatePicker-wheel.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker wheel style">
+    <figcaption>DatePicker wheel style</figcaption>
+  </figure>
+
 ### `ColorPicker`
 
 This renders a color well for displaying a currently selected color

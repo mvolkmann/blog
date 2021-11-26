@@ -3880,19 +3880,20 @@ To add app icons:
 
 To run an app on a real iOS device:
 
-- attach the device with a USB cable
-- wait for the computer to recognize the device
-- select the device from the dropdown list of targets at the top
-  that includes the names of available simulators
-  (will have a generic name like "iPhone")
-- press the play button
-- enter the computer password
-- look for a new app icon to appear on the device
-- one-time setup
-  - open the Settings app
-  - select General ... VPN & Device Management
-  - tap the new app
-  - tap the "Trust" button
+- Attach the device with a USB cable.
+- Wait for the computer to recognize the device.
+  It will appear in the left nav. of the Finder under "Locations".
+- In Xcode, select the device from the dropdown list of targets at the top
+  that includes the names of available simulators.
+  It will have a generic name like "iPhone".
+- Press the play button.
+- Enter the computer password.
+- Look for a new app icon to appear on the device.
+- One-time setup on the device:
+  - Open the Settings app.
+  - Select General ... VPN & Device Management.
+  - Tap the new app.
+  - Tap the "Trust" button.
 
 #### Code Formatting
 
