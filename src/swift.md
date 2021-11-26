@@ -3689,6 +3689,12 @@ The center-left section is the Code Editor.
 The center-right section is the Canvas which is used to test
 Previews of an app outside of the Simulator or a real device.
 
+To give the app a different name from the project:
+
+- In the Navigator, select the root project directory.
+- In the editor that appears, select the first entry under "Targets".
+- In the General tab under Identity, modify the "Display Name".
+
 #### Navigator
 
 The Navigator has nine icon buttons at the top.
