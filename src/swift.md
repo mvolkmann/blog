@@ -3693,7 +3693,12 @@ To give the app a different name from the project:
 
 - In the Navigator, select the root project directory.
 - In the editor that appears, select the first entry under "Targets".
+- Rename "Development Assets" under "Development".
 - In the General tab under Identity, modify the "Display Name".
+- In the Navigator, rename the root directory
+  and the directory below that with the same name.
+
+TODO: I'm not confident all of these steps are correct or required.
 
 #### Navigator
 

@@ -1196,6 +1196,10 @@ and renders the view specified in its `ViewBuilder`.
 The elements in the `RandomAccessCollection` must either conform to
 the `Identifiable` protocol (which requires them to have an `id` property)
 OR the `id:` argument must be set.
+This is important! If the elements are not `Identifiable`
+and no `id:` argument is supplied, the view
+may not update property when the collection changes.
+
 Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`).
 The value of `id:` is a key path that specifies
 how to find a unique value in the element.
