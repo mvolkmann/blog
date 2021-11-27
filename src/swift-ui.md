@@ -5053,7 +5053,8 @@ It supports many features including
 data validation, undo/redo, and lazy loading.
 By default it stores data using SQLite.
 
-TODO: Does "Core Data" work in Preview?
+Apps that use Core Data will not run in Preview mode.
+The Simulator must be used instead.
 
 One way to setup use of Core Data is to
 check the "Use Core Data" checkbox on the options panel
