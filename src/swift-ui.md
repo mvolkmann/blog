@@ -760,6 +760,10 @@ To define a custom named color pair, one for light mode and one for dark:
 - In the Inspector, select a color.
 - Click the "Dark" swatch.
 - In the Inspector, select a color.
+  Consider selecting the same color used for "Any Appearance".
+  Then click the "Show Color Panel" button,
+  change the slider type drop-down to "HSB Sliders",
+  and reduce the value for Brightness (perhaps to 50%).
 
 To use a custom color in code, enter `Color("some-name")`.
 
