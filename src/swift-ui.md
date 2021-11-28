@@ -718,6 +718,44 @@ For more information on these, see the {% aTargetBlank
 "https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
 "Result builders proposal" %}.
 
+## Colors
+
+Colors are defined by the `Color` struct.
+It provides many static properties for predefined colors
+and many initializers for specifying custom colors.
+
+A "color literal" displays a color swatch in source code.
+To create one, enter `Color(#colorLiteral())`.
+The part passed to `Color` will be replaced by a color swatch.
+Double-click the swatch to select a different color.
+
+It is recommended to use the predefined system colors
+because they are dynamic, meaning that the actual color used
+automatically changes when switching between light and dark mode.
+
+There are several ways to switch between light and dark mode in the simulator.
+
+1. Press cmd-shift-a (easiest).
+2. Open the Settings app, select Developer,
+   and change the "Dark Appearance" toggle.
+3. Apply the following view modifier to the top-most view:
+   `.preferredColorScheme(.dark)` or `.light`
+4. Apply the following view modifier to the top-most view:
+   `.environment(\.colorScheme, .light)` or `.dark`
+
+To define a custom named color pair, one for light mode and one for dark:
+
+- In the Navigator, select the "Assets.xcassets" file.
+- Right-click in the list of assets and select "New Color Set".
+- Change the default name "Color" to the name that will be specified in code.
+- Click the "Any Appearance" swatch (used for light mode).
+- Click the "Attributes" tab in the Inspector (4th tab with sliders icon).
+- In the Inspector, select a color.
+- Click the "Dark" swatch.
+- In the Inspector, select a color.
+
+To use a custom color in code, enter `Color("some-name")`.
+
 ## Container Views
 
 Container views combine other views.
