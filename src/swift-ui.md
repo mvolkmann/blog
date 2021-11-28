@@ -728,10 +728,17 @@ A "color literal" displays a color swatch in source code.
 To create one, enter `Color(#colorLiteral())`.
 The part passed to `Color` will be replaced by a color swatch.
 Double-click the swatch to select a different color.
+Click the "Other..." button to open the system color picker
+which provides many more ways to select a color.
 
 It is recommended to use the predefined system colors
 because they are dynamic, meaning that the actual color used
 automatically changes when switching between light and dark mode.
+To use these in code, enter `Color(UIColor.system`
+and select a system color from the code completion popup.
+
+Typically `Color.primary` is used for text because it
+automatically switches between black for light mode and white for dark mode.
 
 There are several ways to switch between light and dark mode in the simulator.
 
