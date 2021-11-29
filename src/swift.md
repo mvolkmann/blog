@@ -3716,6 +3716,10 @@ The Navigator has nine icon buttons at the top.
   Another option is to select all the files to be moved to a subdirectory,
   right-click one of them, and select "New Group From Selection".
 
+  To open a file, click its name.
+  To "quickly open" a file by typing part of its name,
+  select File ... Open Quickly..." or press cmd-shift-o.
+
 - "x" in square icon (second)
 
   This displays a list of files that have been modified (M)
