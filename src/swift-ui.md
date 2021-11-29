@@ -739,6 +739,7 @@ and select a system color from the code completion popup.
 
 Typically `Color.primary` is used for text because it
 automatically switches between black for light mode and white for dark mode.
+This is the default `foregroundColor` of `Text` views.
 
 There are several ways to switch between light and dark mode in the simulator.
 
@@ -5017,7 +5018,6 @@ func deleteData(for key: String) {
 
 func getData<T>(for key: String, defaultingTo defaultValue: T) -> T where T: Decodable {
     if let data = UserDefaults.standard.data(forKey: key) {
-        print("init: data =", data)
         if let decoded = try? JSONDecoder().decode(T.self, from: data) {
             return decoded
         }
@@ -5027,9 +5027,6 @@ func getData<T>(for key: String, defaultingTo defaultValue: T) -> T where T: Dec
 
 func setData<T>(for key: String, to value: T) where T: Encodable {
     if let encoded = try? JSONEncoder().encode(value) {
-        if let json = String(data: encoded, encoding: .utf8) {
-            print("setData: json =", json)
-        }
         UserDefaults.standard.set(encoded, forKey: key)
     }
 }

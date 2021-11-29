@@ -3868,6 +3868,9 @@ When code changes are saved, Xcode will automatically update the app
 in Preview, but not in the Simulator.
 To update the app in the Simulator, press cmd-r
 while focus is in Xcode, not in the Simulator.
+If there are errors or warnings, the number of each will be displayed
+on the right side of the code editor header.
+Click either to display the messages in the "Issue Navigator".
 
 Preview is more limited in functionality than the Simulator.
 TODO: List the differences between the Simulator app and the Preview pane.
