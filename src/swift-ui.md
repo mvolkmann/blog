@@ -2672,6 +2672,26 @@ Commonly used view modifiers include:
 - `overlay(ShapeStyle)`
 - `padding(CGFloat)`
 
+The following view modifiers change the styling
+of specific kinds of predefined views.
+
+- `buttonStyle(ButtonStyle)`
+- `controlGroupStyle(ControlGroupStyle)`
+- `datePickerStyle(DatePickerStyle)`
+- `gaugeStyle(GaugeStyle)`
+- `indexViewStyle(IndexViewStyle)`
+- `labelStyle(LabelStyle)`
+- `menuStyle(MenuStyle)`
+- `navigationViewStyle(NavigationViewStyle)`
+- `pickerStyle(PickerStyle)`
+- `progressViewStyle(ProgressViewStyle)`
+- `presentedWindowStyle(WindowStyle)`
+- `presentedWindowToolbarStyle(WindowToolbarStyle)`
+- `tableStyle(TableStyle)`
+- `tabViewStyle(TabViewStyle)`
+- `textFieldStyle(TextFieldStyle)`
+- `toggleStyle(ToggleStyle)`
+
   This can be passed a side which can be a single value or an array
   of `.all` (default),
   `.leading`, `.trailing`, `.horizontal` (same as `.leading` and `.trailing`),
