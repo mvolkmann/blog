@@ -1358,6 +1358,10 @@ var body: some View {
 
 This creates a row of buttons at the bottom of the display
 that can be tapped to navigate to associated views.
+If there are more than five buttons, the first four will render followed by
+along with a "More" button.
+The "More" button can be tapped to go a view
+a tappable list of the remaining options.
 
 For the docs, "Tab views only support tab items of type Text, Image,
 or an image followed by text. Passing any other type of view
@@ -1591,6 +1595,31 @@ Icons from SF Symbols can be used by specifying
 their name as the `systemName` argument.
 For example, `Image(systemName: "cloud.snow")`.
 
+`Image` views are not resizable by default.
+To make them resizable, apply the `resizable` view modifier.
+
+To maintain the original aspect ratio,
+apply the `aspectRatio` view modifier.
+This takes a `contentMode` argument which can
+have the values `.fill` and `.fit`.
+
+To change an `Image` to have a size different from its default,
+apply the `frame` view modifier.
+
+A new size can cause the image to skew.
+To clip an image to a given shape, apply the `clipShape` view modifier.
+
+The order in which these view modifiers are applied is important.
+Here is an example of correct usage.
+
+```swift
+Image("some-name")
+    .resizable()
+    .aspectRatio(contentMode: .fill)
+    .frame(width: 300, height: 300)
+    .clipShape(Circle())
+```
+
 ### `AsyncImage`
 
 This asynchronously loads and displays an image.
@@ -1666,7 +1695,8 @@ and the prompt or label is used as placeholder text.
 
 The style can be set with the `textFieldStyle` view modifier.
 The options are `plain` (default) and `roundedBorder`.
-When the `plain` style is used, it's not obvious that the value can be edited.
+When the `plain` style is used, it's not obvious that the value can be edited
+unless it is wrapped in a `Form`.
 
 Auto-capitalization of words is provided by default.
 To disable this, pass `.none` to the `autocapitalization` view modifier.
