@@ -683,6 +683,48 @@ Resume Preview to see the change.
 This does not affect `Toggle` views which required using the view modifier
 `.toggleStyle(SwitchToggleStyle(tint: someColor))`.
 
+### `@State`
+
+Views can hold state using the `@State` property modifier.
+This essentially creates a constant pointer inside a view struct
+to non-constant data held outside the view struct.
+
+To initialize a state property based on data passed to an initializer,
+prefix the state name with an underscore and set it to a a `State` object.
+
+The following example demonstrates using component state.
+
+```swift
+import SwiftUI
+
+struct Counter: View {
+    @State private var count = 0
+
+    init() {}
+
+    init(start: Int) {
+        _count = State(initialValue: start)
+    }
+
+    var body: some View {
+        HStack {
+            Button("-") { count -= 1 }
+            Text("\(count)")
+            Button("+") { count += 1 }
+        }.font(.system(size: 24))
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Counter()
+            Counter(start: 7)
+        }
+    }
+}
+```
+
 ## ViewBuilders
 
 Container views can be passed a special kind of closure
@@ -1571,6 +1613,33 @@ Button(action: {
 }
 ```
 
+When there are multiple buttons on the same row of a `Form` or `List`,
+tapping any of them runs all of their actions
+instead of just the action of the tapped `Button`.
+One fix for this is to add `.buttonStyle(.borderless)` to each of the buttons.
+This is demonstrated in the simple app below.
+
+```swift
+struct ContentView: View {
+    @State var number = 0
+
+    var body: some View {
+        // VStack { // no issues
+        // List { // has bug
+        Form { // has bug
+            HStack {
+                Button("One") { number = 1 }
+                Button("Two") { number = 2 }
+                Button("Three") { number = 3 }
+            }
+            .buttonStyle(.borderless) // fixes the bug
+
+            Text("You tapped button #\(number)").padding()
+        }
+    }
+}
+```
+
 ### `Color`
 
 This creates a rectangle view with a specific background color
@@ -1602,6 +1671,8 @@ To maintain the original aspect ratio,
 apply the `aspectRatio` view modifier.
 This takes a `contentMode` argument which can
 have the values `.fill` and `.fit`.
+These are equivalent: `.aspectRatio(contentMode: .fill)` and `.scaledToFill()`.
+These are equivalent: `.aspectRatio(contentMode: .fit)` and `.scaledToFit()`.
 
 To change an `Image` to have a size different from its default,
 apply the `frame` view modifier.
@@ -1615,7 +1686,7 @@ Here is an example of correct usage.
 ```swift
 Image("some-name")
     .resizable()
-    .aspectRatio(contentMode: .fill)
+    .scaledToFill()
     .frame(width: 300, height: 300)
     .clipShape(Circle())
 ```
@@ -3886,6 +3957,23 @@ struct ContentView: View {
 }
 ```
 
+## Camera
+
+To enable camera access in a SwiftUI app:
+
+1. In the Navigator, select the root group to open the project editor.
+2. In the project editor, select the target.
+3. Select the "Info" tab.
+4. Click the "+" after any existing key to create a new key.
+5. For the key name enter "Privacy - Camera Usage Description".
+6. For the key value, enter a user prompt like "Please allow camera access."
+
+Preview and the Simulator cannot access the camera.
+To test camera access, run the app on a real device.
+
+TODO: Add detail on taking photos from an app
+TODO: and access images in the Photos app.
+
 ## Audio
 
 The `AVAudioPlayer` class in the `AVKit` package
@@ -5534,3 +5622,10 @@ do {
     print("fetchPeople error:", error)
 }
 ```
+
+### Starting Over
+
+The easiest way to delete the data an app has stored in Core Data
+and start over with a clean slate
+is to delete the app from the Simulator or a device
+and reinstall it.
