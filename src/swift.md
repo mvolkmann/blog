@@ -3254,6 +3254,25 @@ are defined in `HttpUtil.swift` which follows.
 ```swift
 import Foundation
 
+enum HTTPError: Error {
+    case badStatus(status: Int)
+    case badUrl
+    case jsonEncode
+}
+
+extension HTTPError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .badStatus(let status):
+            return "bad status \(status)"
+        case .badUrl:
+            return "bad URL"
+        case .jsonEncode:
+            return "JSON encoding failed"
+        }
+    }
+}
+
 struct HttpUtil {
 
     static func delete(from url: String, id: Int) async throws {
@@ -3353,26 +3372,6 @@ struct NewDog: Codable, CustomStringConvertible {
     var name: String
     var breed: String
     var description: String { "\(name) is a \(breed)" }
-}
-
-// This defines a custom error type.
-enum HTTPError: Error {
-    case badStatus(status: Int)
-    case badUrl
-    case jsonEncode
-}
-
-extension HTTPError: LocalizedError {
-    public var errorDescription: String? {
-        switch self {
-        case .badStatus(let status):
-            return "bad status \(status)"
-        case .badUrl:
-            return "bad URL"
-        case .jsonEncode:
-            return "JSON encoding failed"
-        }
-    }
 }
 
 class ViewModel: ObservableObject {

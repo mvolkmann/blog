@@ -3991,8 +3991,22 @@ To enable camera access in a SwiftUI app:
 Preview and the Simulator cannot access the camera.
 To test camera access, run the app on a real device.
 
-TODO: Add detail on taking photos from an app
-TODO: and access images in the Photos app.
+TODO: Add detail on taking photos from an app.
+
+## Photo Library
+
+TODO: Add detail on accessing images in the Photos app.
+
+## Scanning Codes
+
+The library "CodeScan" makes this easy. The YouTube video
+{% aTargetBlank "https://youtu.be/GlWEBQ2Tvjc",
+"Scanning QR codes with SwiftUI" %} demonstrates using this.
+
+- Select File ... Add Packages...
+- Enter "https://github.com/twostraws/CodeScanner" in the search input
+- Click the "Add Package" button.
+- Click the next "Add Package" button.
 
 ## Audio
 
@@ -5229,6 +5243,49 @@ struct ContentView: View {
 ## Combine
 
 TODO: https://www.youtube.com/watch?v=bRpFHqv0tRQ&t=701s
+
+## Secrets
+
+Some apps need to use data that should be not be visible to users
+such as keys and passwords that are required to invoke REST services.
+Here is one approach to keep these secret.
+
+1. Create a new file and select "Configuration Settings File"
+   from the "Other" category.
+1. Name the file `Secrets.xcconfig`.
+1. Add secrets in this file where each line has the format
+   `SOME_SECRET_KEY = SOME_SECRET_VALUE`.
+1. In the Navigator, select the top project group.
+1. In the project editor, select the "Info" tab.
+1. Under "Configurations", expand the "Debug" and "Release" sections.
+1. Add "Secrets" to the app name under each of these
+   by clicking "None" and selecting "Secrets".
+1. In the project editor left nav, click the target.
+1. Open the "Custom iOS Target Properties" section.
+1. For each secret
+   - hover over any existing key
+   - click the "+" to add another property.
+   - enter a key, select a type, and enter a value
+1. Access secret value in code as follows:
+
+```swift
+let secretValue = Bundle.main.object(
+    forInfoDictionaryKey: "SOME_SECRET_KEY"
+) as? String
+```
+
+If the secret values used by the release version of the app
+need to differ from those used by the debug version,
+create a different Configuration Settings File for each
+(perhaps with the names `SecretsDebug.xcconfig` and `SecretsRelease.xcconfig`)
+and register them appropriately on the 'Info" tab.
+
+Add the Configuration Settings Files to `.gitignore`
+to keep them out of version control.
+Consider checking in a template Configuration Settings File
+that doesn't contain real values
+in order to document the secret keys that are required.
+In addition, add the generated file `{app-name}-Info.plist` to `.gitignore`.
 
 ## Core Data
 
