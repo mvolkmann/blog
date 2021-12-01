@@ -5258,15 +5258,16 @@ Here is one approach to keep these secret.
 1. In the Navigator, select the top project group.
 1. In the project editor, select the "Info" tab.
 1. Under "Configurations", expand the "Debug" and "Release" sections.
-1. Add "Secrets" to the app name under each of these
+1. Add register the new file with the app name under each of these
    by clicking "None" and selecting "Secrets".
 1. In the project editor left nav, click the target.
 1. Open the "Custom iOS Target Properties" section.
 1. For each secret
-   - hover over any existing key
-   - click the "+" to add another property.
-   - enter a key, select a type, and enter a value
-1. Access secret value in code as follows:
+   - Hover over any existing key.
+   - Click the "+" to add another property.
+   - Enter a key, select a type, and enter a value
+
+Access secret values in code as follows:
 
 ```swift
 let secretValue = Bundle.main.object(
