@@ -653,9 +653,14 @@ Views can render other views.
 
 Each view is a struct that implement the `View` protocol.
 This requires having a computed property named `body` with the type `Some View`.
+
 Most properties declared in a `View` struct should be `private`.
 Exceptions include the `body` property and
 any properties that are passed in when instances are created.
+The `body` value is a `ViewBuilder` that
+can contain up to 10 child view instances.
+The `Group` view can be used to work around this limitation
+since each `Group` only counts as one view instance.
 
 Views are used for components and layout.
 Views that layout other views are often referred to as
