@@ -112,7 +112,11 @@ The "Source Control" menu supports many Git commands including
 Commit, Push, Pull, Fetch Changes, Stash Changes, and Discard All Changes.
 When committing changes a window opens where
 side-by-side file diffs are displayed.
-Modified files are indicated the Navigator by added an "M" after their names.
+By default the new version is displayed on the left.
+To switch this select Preferences ... Source Control ... Comparison View
+... Local Revision on Right Side.
+Modified files are indicated the Navigator by adding an "M" after their name.
+Added files have an "A" after their name.
 
 ## Using the Interpreter
 

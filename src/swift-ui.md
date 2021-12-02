@@ -659,6 +659,8 @@ Exceptions include the `body` property and
 any properties that are passed in when instances are created.
 The `body` value is a `ViewBuilder` that
 can contain up to 10 child view instances.
+When this limit is exceeded, the rather unhelpful error
+"Extra argument in call" will be reported.
 The `Group` view can be used to work around this limitation
 since each `Group` only counts as one view instance.
 
@@ -2250,7 +2252,8 @@ This is currently only supported in watchOS.
 
 ### `EmptyView`
 
-TODO: What is this?
+This renders nothing.  It is useful in cases where
+a view needs to be returned, but there is nothing to display.
 
 ### `EquatableView`
 
