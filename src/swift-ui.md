@@ -2252,7 +2252,7 @@ This is currently only supported in watchOS.
 
 ### `EmptyView`
 
-This renders nothing.  It is useful in cases where
+This renders nothing. It is useful in cases where
 a view needs to be returned, but there is nothing to display.
 
 ### `EquatableView`
@@ -3688,6 +3688,8 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 List {
+                    // The onDelete and onMove methods exists on ForEach,
+                    // but not on List because a List can include static rows.
                     ForEach(dogs, id: \.name) { dog in
                         DogRow(dog: dog)
                     }
@@ -5637,7 +5639,7 @@ for accessing data in Core Data.
 
 - To delete an entity instance,
   call a "delete" method defined in `ViewModel.swift`.
-  Often this is done with the `onDelete` view modifier on a `List`
+  Often this is done with the `onDelete` view modifier on a `ForEach`
   because that provides an `IndexSet` of selected indexes.
 
   ```swift
