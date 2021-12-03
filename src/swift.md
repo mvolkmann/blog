@@ -108,16 +108,6 @@ select File ... TODO: FINISH THIS!
 Another way to open an existing Xcode project
 is to double-click the `.xcodeproj` file that is created.
 
-The "Source Control" menu supports many Git commands including
-Commit, Push, Pull, Fetch Changes, Stash Changes, and Discard All Changes.
-When committing changes a window opens where
-side-by-side file diffs are displayed.
-By default the new version is displayed on the left.
-To switch this select Preferences ... Source Control ... Comparison View
-... Local Revision on Right Side.
-Modified files are indicated the Navigator by adding an "M" after their name.
-Added files have an "A" after their name.
-
 ## Using the Interpreter
 
 To start the interpreter as a REPL (Read Eval Print Loop), enter `swift`.
@@ -3684,6 +3674,9 @@ and click File ... Duplicate.
 Oddly the context sensitive menu that is displayed when
 a file in the Navigator is right clicked does not include this option.
 
+Occasionally it is useful to delete all generated files and start over.
+To do this, select Product ... Clean Build Folder or press cmd-shift-k.
+
 The main Xcode window is divided into three main areas.
 The left side is the Navigator.
 The right side is the Inspector.
@@ -3968,6 +3961,24 @@ However, this can be configured using an Automator script
 and a System Preferences keyboard shortcut.
 The steps to configure this are described at {% aTargetBlank
 "https://luisramos.dev/xcode-format-and-save", "Xcode Format and Save" %}.
+
+#### Source Control
+
+The "Source Control" menu supports many Git commands including
+Commit, Push, Pull, Fetch Changes, Stash Changes, and Discard All Changes.
+The keyboard shortcut for committing changes is cmd-option-c.
+A dialog will open that lists the modified files.
+Modified files are indicated the Navigator by adding an "M" after their name.
+Added files have an "A" after their name.
+Select a file to see side-by-side diffs.
+By default the new version is displayed on the left.
+To switch this select Preferences ... Source Control ... Comparison View
+... Local Revision on Right Side.
+By default the checkbox for each file is checked.
+Uncheck any that should not be committed.
+To commit the checked files, click the "Commit Files" button.
+To also push the changes to a remote repository,
+check the "Push to remote" checkbox before pressing the "Commit Files" button.
 
 #### Xcode Issues
 
