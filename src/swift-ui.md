@@ -5717,3 +5717,30 @@ The easiest way to delete the data an app has stored in Core Data
 and start over with a clean slate
 is to delete the app from the Simulator or a device
 and reinstall it.
+
+## StoreKit
+
+{% aTargetBlank "https://developer.apple.com/documentation/storekit",
+"StoreKit" %} is an Apple framework that supports
+in-app purchases, ad network attribution, Apple Music integration,
+and enabling app ratings and reviews.
+
+To use StoreKit in an app:
+
+- Create a new file.
+- Select
+
+## App Demos
+
+One approach for demonstrating iOS apps to others is to use QuickTime.
+The steps to do this follow.
+
+1. Attach an iPhone to a computer running macOS using a USB cable.
+1. Launch the QuickTime Player application.
+1. Select File ... New Movie Recording.
+1. Click the drop-down next to the record button and select "iPhone".
+1. Connect with another user using a video chat service
+   that supports screen sharing such as Google Meet.
+1. Share your screen.
+1. Demonstrate apps on the iPhone.
+1. When finished, quit QuickTime Player and eject the iPhone from Finder.
