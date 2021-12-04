@@ -5743,4 +5743,5 @@ The steps to do this follow.
    that supports screen sharing such as Google Meet.
 1. Share your screen.
 1. Demonstrate apps on the iPhone.
-1. When finished, quit QuickTime Player and eject the iPhone from Finder.
+1. When finished, quit QuickTime Player without saving the recorded movie
+   and eject the iPhone from Finder.
