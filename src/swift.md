@@ -857,7 +857,7 @@ let end = name.index(start, offsetBy: 1)
 print(name[start...end]) // "ar"
 ```
 
-Comparing strings in a case-insenstive way is quite verbose.
+Comparing strings in a case-insensitive way is quite verbose.
 
 ```swift
 if s1.name?.caseInsensitiveCompare(s2) == .orderedSame {
@@ -4163,6 +4163,10 @@ the features of Swift that are annoying, at least in my opinion.
   and "Will attempt to recover by breaking constraint",
   followed by stack traces.
   These make it difficult to find your own `print` output.
+
+- If a view attempts to render more than 10 sub-views,
+  an error message is output that doesn't explain that limit,
+  or worse, building the app just never finishes.
 
 ## Questions
 

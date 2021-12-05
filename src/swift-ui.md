@@ -5266,9 +5266,10 @@ Here is one approach to keep these secret.
 1. Add secrets in this file where each line has the format
    `SOME_SECRET_KEY = SOME_SECRET_VALUE`.
 1. In the Navigator, select the top project group.
-1. In the project editor, select the "Info" tab.
+1. In the project editor left nav, select the project.
+1. Select the "Info" tab.
 1. Under "Configurations", expand the "Debug" and "Release" sections.
-1. Add register the new file with the app name under each of these
+1. Register the new file with the app name under each of these
    by clicking "None" and selecting "Secrets".
 1. In the project editor left nav, click the target.
 1. Open the "Custom iOS Target Properties" section.
