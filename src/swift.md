@@ -857,6 +857,14 @@ let end = name.index(start, offsetBy: 1)
 print(name[start...end]) // "ar"
 ```
 
+Comparing strings in a case-insenstive way is quite verbose.
+
+```swift
+if s1.name?.caseInsensitiveCompare(s2) == .orderedSame {
+    print("s1 and s2 are the same when not considering case.")
+}
+```
+
 `String` instance properties include the following:
 
 | Property  | Description                                     |
