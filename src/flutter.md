@@ -56,24 +56,21 @@ using the {% aTargetBlank "https://dart.dev", "Dart programming language" %}.
 
   - I couldn't get this to find Android Studio!
 
-- To create an app:
+## Creating and Running an App
 
-  Enter `flutter create app_name`.
-  Hyphens are not allowed in app names, but underscores are.
+To create an app, enter `flutter create app_name`.
+Hyphens are not allowed in app names, but underscores are.
 
-- `cd app_name`
+To run an app, cd to the app directory and enter `flutter run`.
+If the iOS Simulator is running, the app will run there.
+If an Android emulator is running, the app will run there.
+Otherwise it will run in the Chrome web browser.
 
-- To run an app:
+To deploy an app to an iOS device:
 
-  Enter `flutter run`.
-  If the iOS Simulator is running, the app will run there.
-  If an Android emulator is running, the app will run there.
-  Otherwise it will run in the Chrome web browser.
-
-- To deploy an app to a device:
-  - Install CocoaPods by entering `sudo gem install cocoapods`.
-  - Follow the Xcode signing flow to provision your project.
-  - Enter `flutter run`.
+- Install CocoaPods by entering `sudo gem install cocoapods`.
+- Follow the Xcode signing flow to provision your project.
+- Enter `flutter run`.
 
 ## Hot Reloading
 
@@ -91,20 +88,11 @@ If the app is run from a terminal with `flutter run`
 then hot reloading will only occur if focus is moved to the terminal
 and the "r" key is pressed.
 
-## Widgets
+## Basic Widgets
 
-### Appbar
+### DefaultTextStyle
 
-This is a Material Design application bar that appears at the top of an app.
-It can contain other widgets such as `TabBar` and `FlexibleSpaceBar`.
-
-### Column
-
-This renders a vertical list of child widgets.
-
-### Container
-
-This applies positioning and sizing to other widgets.
+This is the style applied to text that doesn't have an explicit style.
 
 ### ElevatedButton
 
@@ -128,18 +116,67 @@ This renders an image.
 This renders a rectangle that represents where
 other widgets will be added in the future.
 
-### Row
+### RichText
 
-This renders a horizontal list of child widgets.
+This renders runs of text that each used different styles.
+It uses `TextSpan` objects.
+
+### Text
+
+This renders a run of text with a single style.
+
+## Material Widgets
+
+These widgets use Material Design styling.
+
+### Appbar
+
+This is a Material Design application bar that appears at the top of an app.
+It can contain other widgets such as `TabBar` and `FlexibleSpaceBar`.
+
+### BottomNavigationBar
+
+This renders a bottom navigation bar containing buttons
+that can be tapped to switch between top-level views.
+
+### Drawer
+
+This renders a panel that slides in from the left side
+and contains navigation links.
+
+### MaterialApp
+
+This wraps a set of widgets that commonly appear in Material Design apps.
 
 ### Scaffold
 
 This provides the structure of a Material Design layout.
 It can show drawers, snack bars, and bottom sheets.
 
-### Text
+### SliverAppBar
 
-This renders a run of text with a single style.
+This renders a top app bar and contains a `CustomScrollView`.
+
+### TabBar
+
+This renders a horizontal row of tabs.
+
+### TabBarView
+
+This renders a page that corresponds to a tab in a `TabBar`.
+
+### TabController
+
+This handles rendering a `TabBarView`
+when its corresponding `TabBar` tab is tapped.
+
+### TabPageSelector
+
+This renders a "circular indicators"? for each tab in `TabBarView`.
+
+### WidgetsApp
+
+This wraps a set of widgets that typically appear in an app.
 
 ## Cupertino Widgets
 
@@ -256,4 +293,78 @@ This renders an iOS-style input text field.
 This renders an iOS-style wheel picker
 for entering hours, minutes, and seconds.
 
-## Layouts
+## Single-Child Layout Widgets
+
+### Align
+
+### AspectRatio
+
+### Baseline
+
+### Center
+
+### ConstrainedBox
+
+### Container
+
+This applies positioning and sizing to other widgets.
+
+### CustomSingleChildLayout
+
+### Expanded
+
+### FittedBox
+
+### FractionallySizedBox
+
+### IntrinsicHeight
+
+### IntrinsicWidth
+
+### LimitedBox
+
+### Offstage
+
+### OverflowBox
+
+### Padding
+
+### SizedBox
+
+### SizedOverflowBox
+
+### Transform
+
+## Multiple-Child Layout Widgets
+
+### Column
+
+This renders a vertical list of child widgets.
+
+### CustomMultiChildLayout
+
+### Flow
+
+### GridView
+
+### IndexedStack
+
+### LayoutBuilder
+
+### ListBody
+
+### ListView
+
+### Row
+
+This renders a horizontal list of child widgets.
+
+### Stack
+
+### Table
+
+### Wrap
+
+## Sliver Widgets
+
+Are these iOS-style layout widgets?
