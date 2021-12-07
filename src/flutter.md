@@ -454,8 +454,10 @@ Container(
     color: Colors.yellow,
     // CSS: background-color: yellow;
     ),
-  padding: const EdgeInsets.all(20),
-  // CSS: padding: 20px;
+  margin: const EdgeInsets.all(20),
+  // CSS: margin: 20px;
+  padding: const EdgeInsets.all(10),
+  // CSS: padding: 10px;
 ),
 ```
 
