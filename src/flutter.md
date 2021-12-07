@@ -162,14 +162,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // This is a one-line description used by devices
-        // to identify the app for users.
-        // On Android titles appear above task manager app snapshots
-        // displayed when users press the "recent apps" button.
-        // On iOS this value is not used.
-        title: 'My Title',
-        theme: ThemeData(primarySwatch: Colors.amber),
-        home: const MyPage());
+      // This is a one-line description used by devices
+      // to identify the app for users.
+      // On Android titles appear above task manager app snapshots
+      // displayed when users press the "recent apps" button.
+      // On iOS this value is not used.
+      title: 'My Title',
+      theme: ThemeData(primarySwatch: Colors.amber),
+      home: const MyPage(),
+    );
   }
 }
 
@@ -179,10 +180,11 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('My App'),
-        ),
-        body: const Text('Hello, World!'));
+      appBar: AppBar(
+        title: const Text('My App'),
+      ),
+      body: const Text('Hello, World!'),
+    );
   }
 }
 ```
@@ -204,9 +206,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     print('MyApp.build entered');
     return const CupertinoApp(
-        theme:
-            CupertinoThemeData(barBackgroundColor: CupertinoColors.activeBlue),
-        home: MyPage());
+      theme:
+        CupertinoThemeData(barBackgroundColor: CupertinoColors.activeBlue),
+      home: MyPage(),
+    );
   }
 }
 
@@ -216,10 +219,11 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          middle: Text('My App'),
-        ),
-        child: Center(child: Text('Hello, World!')));
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('My App'),
+      ),
+      child: Center(child: Text('Hello, World!')),
+    );
   }
 }
 ```
@@ -254,7 +258,31 @@ Text('Hello, World!',
     //color: CupertinoColors.systemRed,
     fontFamily: 'Corinthia',
     fontSize: 64,
-    fontWeight: FontWeight.bold))
+    fontWeight: FontWeight.bold,
+  ),
+)
+```
+
+## Styling
+
+One way to add styling to a widget is to wrap it in a `Container` widget.
+The following example adds padding, a background color, and a border
+to a `Text` widget. The equivalent CSS property is shown in comments.
+
+```dart
+Container(
+  child: const Text('Hello, World!'),
+  decoration: BoxDecoration(
+    border: Border.all(color: Colors.blue, width: 5),
+    // CSS: border 5px solid blue;
+    borderRadius: const BorderRadius.all(Radius.circular(10)),
+    // CSS: border-radius: 10px;
+    color: Colors.yellow,
+    // CSS: background-color: yellow;
+    ),
+  padding: const EdgeInsets.all(20),
+  // CSS: padding: 20px;
+),
 ```
 
 ## Basic Widgets
