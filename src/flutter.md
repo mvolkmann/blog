@@ -285,6 +285,9 @@ Container(
 ),
 ```
 
+A `Container` widget can be given a specific size by adding
+`width` and/or `height` parameters whose values are number.
+
 ## Basic Widgets
 
 All the predefined widgets are documented in the {% aTargetBlank
