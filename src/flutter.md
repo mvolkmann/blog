@@ -128,8 +128,11 @@ updates the running app without losing state.
 
 When using VS Code, install the Flutter extension.
 This provides great auto-complete support.
+
 Run the app from VS Code by selecting
 Run ... Start Debugging or Run ... Run Without Debugging.
+The simulated or real device to use can be selected
+from a menu in the VS Code footer.
 
 If the app is run from a terminal with `flutter run`
 then hot reloading will only occur if focus is moved to the terminal
@@ -212,6 +215,8 @@ The first extends `StatefulWidget`, defines a constructor,
 and overrides the `createState` method.
 The second extends `State`, defines state fields,
 and overrides the `build` method.
+Storing the state in a separate class
+allows the widget class to remain immutable.
 Stateful widgets render initially and again each time their state changes.
 
 It is common for `build` methods return a nested set of widgets
@@ -310,7 +315,24 @@ class Counter extends StatefulWidget {
 
 class _CounterState extends State<Counter> {
   static const textStyle = TextStyle(fontSize: 36);
-  int count = 0; // the state
+
+  // Declare state fields here.
+  int count = 0;
+
+  // Define this optional method to fetch initial state values.
+  @override
+  void initState() {
+      // Fetch initial state values.
+      super.initState();
+  }
+
+  // Define this optional method to perform
+  // state cleanup when the widget is disposed.
+  @override
+  void dispose() {
+      // Cleanup after state data here.
+      super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -318,6 +340,7 @@ class _CounterState extends State<Counter> {
       TextButton(
         child: const Text('-', style: textStyle),
         // The button is disabled when onPressed is null.
+        // State must modified inside functions that are passed to setState.
         onPressed: count <= 0 ? null : () => setState(() => count -= 1),
       ),
       Text('$count', style: textStyle),
@@ -818,6 +841,52 @@ It is similar to a SwiftUI `VStack`.
 
 #### ListView
 
+This displays a scrollable list of widgets.
+The list is vertical by default, but can be changed to horizontal.
+Here's an example of creating a scrollable list of colors.
+
+```dart
+class ColorList extends StatelessWidget {
+  const ColorList({Key? key}) : super(key: key);
+
+  final List<String> names = const [
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'blue',
+    'purple',
+    'white',
+    'gray',
+    'black',
+    'brown'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.all(10),
+      child: SizedBox(
+        height: 100,
+        child: ListView.builder(
+          itemCount: names.length,
+          // This function is called once for each index value in itemCount
+          // to programmatically create a child widgets.
+          itemBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 20,
+              child: Text(names[index]),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+```
+
 #### Row
 
 This renders a horizontal list of child widgets.
@@ -841,6 +910,17 @@ Are these iOS-style layout widgets?
 Icons are provided by the CupertinoIcons package
 which is documented at {% aTargetBlank
 "https://pub.dev/packages/cupertino_icons", "cupertino_icons" %}.
+
+## Persisting State
+
+There are many approaches to persisting app data
+so it is not lost when an app is closed.
+One approach is use the built-in `SharedPreference` class.
+Another is to use a library like
+{% aTargetBlank "https://bloclibrary.dev/", "bloc" %} or
+{% aTargetBlank "https://pub.dev/packages/provider", "provider" %}.
+Yet another is to use {% aTargetBlank
+"https://docs.flutter.dev/cookbook/persistence/sqlite", "SQLite" %}.
 
 ## Annoyances
 
