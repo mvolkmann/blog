@@ -135,6 +135,20 @@ The Flutter naming convention for these parameters
 is to use `child` for passing a single widget
 and `children` for passing an array of widgets.
 
+## Styling Widgets
+
+Some widgets take another widget as a parameter and apply styling.
+Examples include `Container`, `MediaQuery`, `Padding`, `Theme`.
+
+## Layout Widgets
+
+Some widgets take other widgets as a parameter
+and layout them out in a specific way.
+See the "Layout" section below for details.
+Commonly used layout widgets include
+`Center`, `Column`, `Container`, `Expanded`, `Flow`, `GridView`,
+`ListView`, `Padding`, `Row`, `SizedBox`, `Stack`, `Table`, and `Wrap`.
+
 ## Stateless vs. Stateful Widgets
 
 Every widget is either stateless or stateful.
