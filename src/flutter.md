@@ -918,7 +918,9 @@ so it is not lost when an app is closed.
 One approach is use the built-in `SharedPreference` class.
 Another is to use a library like
 {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} or
-{% aTargetBlank "https://pub.dev/packages/provider", "provider" %}.
+{% aTargetBlank "https://pub.dev/packages/provider", "provider" %}, or
+{% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
+"cubit" %}.
 Yet another is to use {% aTargetBlank
 "https://docs.flutter.dev/cookbook/persistence/sqlite", "SQLite" %}.
 
