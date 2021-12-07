@@ -3916,7 +3916,7 @@ To run an app on a real iOS device:
 - In Xcode, select the device from the dropdown list of targets at the top
   that includes the names of available simulators.
   It will have a generic name like "iPhone".
-- Press the play button.
+- Press the play button or cmd-r.
 - Enter the computer password.
 - Look for a new app icon to appear on the device.
 - One-time setup on the device:
@@ -3924,6 +3924,16 @@ To run an app on a real iOS device:
   - Select General ... VPN & Device Management.
   - Tap the new app.
   - Tap the "Trust" button.
+
+To run an app on a real iOS device wirelessly:
+
+- The device must be on the same WiFi network as the computer.
+- In Xcode, select Window ... Devices and Simulators.
+- In the dialog that is opened, select the device in the left nav.
+- Check the "Connect vis network" checkbox.
+- In the Finder, eject the device.
+- Disconnect the device from the computer.
+- Press the play button or cmd-r.
 
 #### Code Formatting
 

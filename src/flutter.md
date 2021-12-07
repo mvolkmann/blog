@@ -26,6 +26,11 @@ There are many provided widgets and custom ones can be defined.
   - Download and unzip it.
   - Add the path to the `flutter/bin` directory
     to the `PATH` environment variable.
+  - Later, to upgrade to the latest version enter the following commands:
+    - `flutter upgrade`
+    - `flutter clean`
+    - `flutter pub get`
+    - `flutter pub upgrade`
 
 - To enable testing on iOS:
 
@@ -122,12 +127,43 @@ After every code change is saved Flutter
 updates the running app without losing state.
 
 When using VS Code, install the Flutter extension.
+This provides great auto-complete support.
 Run the app from VS Code by selecting
 Run ... Start Debugging or Run ... Run Without Debugging.
 
 If the app is run from a terminal with `flutter run`
 then hot reloading will only occur if focus is moved to the terminal
 and the "r" key is pressed.
+
+## Running on Devices
+
+To run a Flutter app on a connected iPhone:
+
+- From a terminal, enter `sudo gem install cocoapods`.
+- Attach the phone to the computer with a USB cable.
+- Unlock the phone.
+- From a terminal running bash, cd to the top project directory.
+- Enter `open ios/Runner.xcworkspace` to launch Xcode.
+- Select "iPhone" from the device drop-down in the header.
+- Click "Runner" at the top of the Navigator.
+- Click the "Signing & Capabilities" tab.
+- Select your team from the Team drop-down.
+- Enter a unique "Bundle Identifier", perhaps containing
+  your email address and the project name.
+- option #1 - In Xcode, press the run button or cmd-r.
+- option #2 - From a terminal, enter `flutter run` and
+  select `iPhone` from the list of device options.
+  TODO: Neither of these options worked!
+
+To run a Flutter app on an iPhone wirelessly:
+
+- The iPhone must be on the same WiFi network as the computer.
+- In Xcode, select Window ... Devices and Simulators.
+- In the dialog that is opened, select "iPhone" in the left nav.
+- Check the "Connect vis network" checkbox.
+- In the Finder, eject the iPhone.
+- Disconnect the iPhone from the computer.
+- Run the Flutter app using one of the options above.
 
 ## Material vs. Cupertino
 
@@ -463,6 +499,41 @@ Container(
 
 A `Container` widget can be given a specific size by adding
 `width` and/or `height` parameters whose values are number.
+
+## Icons
+
+The `Icon` widget renders an icon from a large provided set of icons.
+For example, the following renders a music note icon.
+
+```dart
+Icon(Icons.audiotrack, color: Colors.red, size: 30)
+```
+
+## Images
+
+The `Image` widget renders an image from a URL.
+For example, the following renders a photo of an owl.
+
+```dart
+Image.network(
+  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
+)
+```
+
+To render an image from a local file,
+
+- Create an `images` directory.
+- Copy an image to that directory (ex. `comet.jpg`).
+- Edit `pubspec.yaml` and add the following:
+
+  ```yaml
+  assets:
+    - images/comet.jpg
+  ```
+
+- TODO: Use what to render it?
+
+To render an image from an `AssetBundle` ...
 
 ## Basic Widgets
 
