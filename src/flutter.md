@@ -66,11 +66,29 @@ If the iOS Simulator is running, the app will run there.
 If an Android emulator is running, the app will run there.
 Otherwise it will run in the Chrome web browser.
 
+The default app renders a header that displays an app title,
+some text, a number, and a button in the lower-right
+that increments the number.
+
+The starting point of the app is the file `lib/main.dart`.
+This defines the `main` function that all Dart apps must have.
+
 To deploy an app to an iOS device:
 
 - Install CocoaPods by entering `sudo gem install cocoapods`.
 - Follow the Xcode signing flow to provision your project.
 - Enter `flutter run`.
+- TODO: TEST ALL OF THIS!
+
+## Linting
+
+Flutter apps provide default code linting.
+The rules can be configured in the provided file `analysis_options.yaml`.
+To disable the rule that complains about using the `print` function,
+uncomment the line that contains `avoid_print: false`.
+To enable the rule that complains about literal strings
+using double quotes instead of single,
+uncomment the line that contains `prefer_single_quotes: true`.
 
 ## Hot Reloading
 
@@ -88,7 +106,150 @@ If the app is run from a terminal with `flutter run`
 then hot reloading will only occur if focus is moved to the terminal
 and the "r" key is pressed.
 
+## Material vs. Cupertino
+
+Material Design can be used on any platform, not just Android.
+When a Flutter app uses this, it will have Material look and feel
+on all devices, including iOS.
+
+Use the Cupertino library to have an iOS look and feel.
+This also works on all platforms.
+However, due to licensing restrictions it won't
+have the correct fonts on Android.
+
+## Basic Flutter App Structure
+
+Here is an example of the structure of a basic Flutter app
+that uses Material Design.
+
+```dart
+import 'package:flutter/material.dart';
+
+// This defines the starting point of all Dart apps.
+void main() {
+  // When creating instances of immutable classes,
+  // constructor calls should be preceded by "const".
+  // This enables sharing references to instances create with
+  // the same arguments which optimizes memory.
+  // These instances are created at compile-time.
+  // All fields of immutable classes must be
+  // declared with the "final" keyword.
+  runApp(const MyApp());
+}
+
+// This class is also used by tests.
+// See the supplied test/widget_test.dart file.
+class MyApp extends StatelessWidget {
+  // All widget constructors must take an optional parameter of type "Key".
+  // This uniquely identifies a widget instance and is
+  // important when widgets will be added, removed, or reordered.
+  // Often no key value is provided.
+  // One way to specify a key value is `key: UniqueKey()`.
+  // Widget constructors can also take additional parameters.
+  const MyApp({Key? key}) : super(key: key);
+
+  // Widget build methods describe what a widget renders.
+  // In stateless widgets it is only called once (true?).
+  // In stateful widgets it is called initially
+  // and again every time the state changes.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        // This is a one-line description used by devices
+        // to identify the app for users.
+        // On Android titles appear above task manager app snapshots
+        // displayed when users press the "recent apps" button.
+        // On iOS this value is not used.
+        title: 'My Title',
+        theme: ThemeData(primarySwatch: Colors.amber),
+        home: const MyPage());
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('My App'),
+        ),
+        body: const Text('Hello, World!'));
+  }
+}
+```
+
+Here is an example of the structure of a basic Flutter app
+that uses Cupertino theming.
+
+```dart
+import 'package:flutter/cupertino.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('MyApp.build entered');
+    return const CupertinoApp(
+        theme:
+            CupertinoThemeData(barBackgroundColor: CupertinoColors.activeBlue),
+        home: MyPage());
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          middle: Text('My App'),
+        ),
+        child: Center(child: Text('Hello, World!')));
+  }
+}
+```
+
+## Fonts
+
+To use custom fonts:
+
+- Download font files such as `.ttf` files.
+- Create a directory named `fonts` in the Flutter project.
+- Copy the font files into this directory.
+- Modify the `pubspec.yaml` file and add the following
+  which assumes the font to be added is named "Corinthia":
+
+  ```yaml
+  fonts:
+    - family: Corinthia
+      fonts:
+        - asset: fonts/Corinthia-Bold.ttf
+        - asset: fonts/Corinthia-Regular.ttf
+  ```
+
+To change the font family, size, and weight used to render text,
+specify the `style` parameter. For example:
+
+```dart
+Text('Hello, World!',
+  style: TextStyle(
+    fontFamily: 'Corinthia',
+    fontSize: 64,
+    fontWeight: FontWeight.bold))
+```
+
 ## Basic Widgets
+
+All the predefined widgets are documented in the {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets", "Widget Catalog" %}.
 
 ### DefaultTextStyle
 
@@ -128,6 +289,9 @@ This renders a run of text with a single style.
 ## Material Widgets
 
 These widgets use Material Design styling.
+They are documented at {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/material",
+"Cupertino (iOS-style) widgets" %}.
 
 ### Appbar
 
@@ -181,6 +345,9 @@ This wraps a set of widgets that typically appear in an app.
 ## Cupertino Widgets
 
 These widgets use iOS styling rather than Material Design.
+They are documented at {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/cupertino",
+"Cupertino (iOS-style) widgets" %}.
 
 ### CupertinoActionSheet
 
@@ -293,78 +460,104 @@ This renders an iOS-style input text field.
 This renders an iOS-style wheel picker
 for entering hours, minutes, and seconds.
 
-## Single-Child Layout Widgets
+## Layout Widgets
 
-### Align
+The layout widgets are documented at {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/layout",
+"Cupertino (iOS-style) widgets" %}.
 
-### AspectRatio
+### Single-Child Layout Widgets
 
-### Baseline
+#### Align
 
-### Center
+#### AspectRatio
 
-### ConstrainedBox
+#### Baseline
 
-### Container
+#### Center
+
+#### ConstrainedBox
+
+#### Container
 
 This applies positioning and sizing to other widgets.
 
-### CustomSingleChildLayout
+#### CustomSingleChildLayout
 
-### Expanded
+#### Expanded
 
-### FittedBox
+#### FittedBox
 
-### FractionallySizedBox
+#### FractionallySizedBox
 
-### IntrinsicHeight
+#### IntrinsicHeight
 
-### IntrinsicWidth
+#### IntrinsicWidth
 
-### LimitedBox
+#### LimitedBox
 
-### Offstage
+#### Offstage
 
-### OverflowBox
+#### OverflowBox
 
-### Padding
+#### Padding
 
-### SizedBox
+#### SizedBox
 
-### SizedOverflowBox
+#### SizedOverflowBox
 
-### Transform
+#### Transform
 
-## Multiple-Child Layout Widgets
+### Multiple-Child Layout Widgets
 
-### Column
+#### Column
 
 This renders a vertical list of child widgets.
+It is similar to a SwiftUI `VStack`.
 
-### CustomMultiChildLayout
+#### CustomMultiChildLayout
 
-### Flow
+#### Flow
 
-### GridView
+#### GridView
 
-### IndexedStack
+#### IndexedStack
 
-### LayoutBuilder
+#### LayoutBuilder
 
-### ListBody
+#### ListBody
 
-### ListView
+#### ListView
 
-### Row
+#### Row
 
 This renders a horizontal list of child widgets.
+It is similar to a SwiftUI `HStack`.
 
-### Stack
+#### Stack
 
-### Table
+This renders widgets on top of each other.
+It is similar to a SwiftUI `ZStack`.
 
-### Wrap
+#### Table
 
-## Sliver Widgets
+#### Wrap
+
+### Sliver Widgets
 
 Are these iOS-style layout widgets?
+
+### Icons
+
+Icons are provided by the CupertinoIcons package
+which is documented at {% aTargetBlank
+"https://pub.dev/packages/cupertino_icons", "cupertino_icons" %}.
+
+## Annoyances
+
+- The VS Code Flutter extension displays a comment after the closing paren
+  of all widgets. It isn't really in the code, but adds visual clutter.
+  I haven't found a way to disable it yet.
+
+- Dart wants many constructor calls to be preceded by the `const` keyword.
+  This makes the code verbose.
