@@ -90,6 +90,13 @@ To enable the rule that complains about literal strings
 using double quotes instead of single,
 uncomment the line that contains `prefer_single_quotes: true`.
 
+## Code Formatting
+
+Formatting of Dart code is provided by {% aTargetBlank
+"https://dart.dev/tools/dart-format", "dart format" %}.
+To get the best formatting, include a comma after every function parameter,
+even the last one.
+
 ## Hot Reloading
 
 Flutter has great hot reloading!
@@ -241,6 +248,10 @@ specify the `style` parameter. For example:
 ```dart
 Text('Hello, World!',
   style: TextStyle(
+    backgroundColor: Colors.yellow,
+    //backgroundColor: CupertinoColors.systemYellow,
+    color: Colors.red,
+    //color: CupertinoColors.systemRed,
     fontFamily: 'Corinthia',
     fontSize: 64,
     fontWeight: FontWeight.bold))
