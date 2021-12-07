@@ -10,6 +10,9 @@ layout: topic-layout.njk
 enables writing mobile, web, desktop, and embedded apps
 using the {% aTargetBlank "https://dart.dev", "Dart programming language" %}.
 
+Everything rendered by a Flutter app is rendered by a widget.
+There are many provided widgets and custom ones can be defined.
+
 ## Resources
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
@@ -123,6 +126,150 @@ Use the Cupertino library to have an iOS look and feel.
 This also works on all platforms.
 However, due to licensing restrictions it won't
 have the correct fonts on Android.
+
+## Container Widgets
+
+Many widgets accept other widgets as parameters
+and render them with a specific styling or layout.
+The Flutter naming convention for these parameters
+is to use `child` for passing a single widget
+and `children` for passing an array of widgets.
+
+## Stateless vs. Stateful Widgets
+
+Every widget is either stateless or stateful.
+
+Stateless widgets are defined by a class that
+extends `StatelessWidget`, defines a constructor,
+and overrides the `build` method.
+Stateless widgets render one time based parameters passed to them.
+
+Stateful widgets are defined by a pair of classes.
+The first extends `StatefulWidget`, defines a constructor,
+and overrides the `createState` method.
+The second extends `State`, defines state fields,
+and overrides the `build` method.
+Stateful widgets render initially and again each time their state changes.
+
+It is common for `build` methods return a nested set of widgets
+rather than just a single widget.
+
+Flutter-compatible editors provide snippets for defining new widgets
+that dramatically reduce the amount of code that must be typed.
+In VS Code, type "s" and select
+"Flutter stateful widget" or "Flutter stateful widget".
+
+Stateless widgets begin with the following code
+which defines a single class:
+
+```dart
+class SomeName extends StatelessWidget {
+  // Note the odd Dart syntax for constructors.
+  const SomeName({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+    );
+  }
+}
+```
+
+Stateful widgets begin with the following code
+which defines a pair of related classes:
+
+```dart
+class SomeName extends StatefulWidget {
+  const SomeName ({ Key? key }) : super(key: key);
+
+  @override
+  _SomeName State createState() => _SomeName State();
+}
+
+class _SomeName State extends State<SomeName > {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+    );
+  }
+}
+```
+
+Here is an example of a stateless widget that renders a greeting
+for a given name.
+
+<img alt="Flutter Greet" style="width: 60%"
+    src="/blog/assets/Flutter-Greet.png?v={{pkg.version}}"
+    title="Flutter Greet">
+
+```dart
+class Greet extends StatelessWidget {
+  final String name;
+
+  const Greet({Key? key, required this.name}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(
+        'Hello, $name!',
+        style: const TextStyle(
+          color: Colors.red,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.orange, width: 3),
+        color: Colors.yellow,
+      ),
+      padding: const EdgeInsets.all(10),
+    );
+  }
+}
+```
+
+Here is an example of a stateful widget that maintains a count
+and provides buttons for incrementing and decrementing the count.
+
+<img alt="Flutter Counter" style="width: 60%"
+    src="/blog/assets/Flutter-Counter.png?v={{pkg.version}}"
+    title="Flutter Counter">
+
+```dart
+class Counter extends StatefulWidget {
+  const Counter({Key? key}) : super(key: key);
+
+  @override
+  _CounterState createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  static const textStyle = TextStyle(fontSize: 36);
+  int count = 0; // the state
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      TextButton(
+        child: const Text('-', style: textStyle),
+        // The button is disabled when onPressed is null.
+        onPressed: count <= 0 ? null : () => setState(() => count -= 1),
+      ),
+      Text('$count', style: textStyle),
+      TextButton(
+        child: const Text('+', style: textStyle),
+        onPressed: () => setState(() => count += 1),
+      ),
+      ElevatedButton(
+        child: const Text('Reset'),
+        onPressed: () => setState(() => count = 0),
+      ),
+    ]);
+  }
+}
+```
 
 ## Basic Flutter App Structure
 
