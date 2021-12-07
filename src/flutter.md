@@ -93,6 +93,19 @@ To enable the rule that complains about literal strings
 using double quotes instead of single,
 uncomment the line that contains `prefer_single_quotes: true`.
 
+When creating instances of immutable classes, constructor calls that are
+only passed static arguments should be preceded by the `const` keyword.
+This enables sharing references to instances create with
+the same arguments which optimizes memory.
+These instances are created at compile-time.
+As nice as this sounds, the linter will complain constantly
+about missing or incorrectly applied `const` keywords.
+To avoid these warnings, add the following rule configuration.
+
+```yaml
+prefer_const_constructors: false
+```
+
 ## Code Formatting
 
 Formatting of Dart code is provided by {% aTargetBlank
