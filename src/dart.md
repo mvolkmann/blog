@@ -111,11 +111,17 @@ All positional arguments must preceded the named ones.
 
 Positional arguments can be required or optional.
 All required positional arguments must appear before optional ones
-and all the optional ones must be inside square brackets.
-For example:
+and all the optional arguments must be inside square brackets.
+In the following example, `req1` and `req2` are required parameters
+and `opt1` and `opt2` are optional.
+If only two arguments are passed,
+`opt1` is set to its default value of `0`
+and `opt2` is set to `null`.
 
 ```dart
-TODO: Add this!
+demo(int req1, int req2, [int opt1 = 0, int? opt2]) {
+  ...
+}
 ```
 
 Named parameters are declared inside curly braces.
@@ -138,6 +144,8 @@ Trailing commas are allowed after the last parameter in function definitions
 and after the last argument in function calls.
 This causes `dart format` to place each
 parameter or argument on a separate line.
+
+Functions that do not explicitly return a value evaluate to `null`.
 
 ## Classes
 
