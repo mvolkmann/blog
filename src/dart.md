@@ -245,6 +245,43 @@ do {
 } while (i > 0);
 ```
 
+## Exceptions
+
+To throw an exception, use the `throw` keyword followed by an object
+that extends from `Exception` or `Error`.
+Builtin `Exception` subclasses include
+`FormatException`, `IOException`, `TimeoutException`, and more.
+Builtin `Error` subclasses include `ArgumentError`, `AssertionError`,
+`OutOfMemoryError`, `TypeError`, `UnimplementedError`, and more.
+Custom subclasses or `Exception` and `Error` can also be defined.
+
+For example:
+
+```dart
+throw FormatException('invalid phone number');
+```
+
+To catch an exception, use the `try`, `catch`, and `finally` keywords.
+Errors should not be caught because they are expected to crash the program.
+For example:
+
+```dart
+try {
+  // code that can throw
+} on FormatException {
+  // catching a specific kind of exception,
+  // but not using the exception object
+} on IOException catch (e) {
+  // catching a specific kind of exception,
+  // and using the exception object
+} catch (e) {
+  // catching any kind of exception
+  // and using the exception object
+} finally {
+  // code to run regardless of whether there was a thrown
+}
+```
+
 ## Access Specifiers
 
 Dart does not support keywords to indicate access levels
