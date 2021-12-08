@@ -101,8 +101,10 @@ var n = 19;
 
 ## Print
 
-The `print` function takes a single `String` and writes it to stdout.
-Literal `String` values are delimited by single or double quotes.
+The `print` function takes a single argument and writes it to stdout.
+If the argument is not a `String`,
+it will be converted to a `String` which is output.
+If the argument is a `String`, it can use interpolation.
 To include the value of a variable in a `String`, use `$variableName`.
 To include the value of an expression in a `String`, use `${expression}`.
 
@@ -216,7 +218,16 @@ unless there is a `case` for each possible value.
 
 ## Iteration
 
-TODO: Add this.
+Dart supports three statements for implementing iteration,
+`for`, `while`, and `do-while`.
+
+Here are examples of each:
+
+```dart
+for (var i = 1; i <= 10; i++) {
+    print(i);
+}
+```
 
 ## Access Specifiers
 
