@@ -37,9 +37,21 @@ is an online editor for experimenting with Dart features.
 ## Creating and Running Programs
 
 Dart source files have a `.dart` file extension.
-One `.dart` file can import another using the `import` command.
+A `.dart` file can import others using the `import` statement.
+
 The `main` function defines the starting point of a program.
-To run a `.dart` file that defines a `main` function, enter `dart {name}.dart`.
+It is passed a `List` of command-line arguments.
+The type can be omitted, specified as just `List`,
+or specified as `List<String>`.
+
+```dart
+main(args) {
+  args.forEach((arg) => print('arg = $arg'));
+}
+```
+
+To run a `.dart` file that defines a `main` function,
+enter `dart {name}.dart [arguments]`.
 
 ## Types
 
