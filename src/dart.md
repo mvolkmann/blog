@@ -224,9 +224,25 @@ Dart supports three statements for implementing iteration,
 Here are examples of each:
 
 ```dart
-for (var i = 1; i <= 10; i++) {
-    print(i);
+for (var i = 1; i <= 5; i++) {
+  print(i); // 1 to 5
 }
+
+var dogs = ['Maisey', 'Ramsay', 'Oscar', 'Comet'];
+for (var dog in dogs) {
+  print(dog); // each dog name
+}
+
+var i = 1;
+while (i <= 5) {
+  print(i); // 1 to 5
+  i++;
+}
+
+do {
+  print(i); // 6 to 1
+  i--;
+} while (i > 0);
 ```
 
 ## Access Specifiers
