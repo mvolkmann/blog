@@ -64,6 +64,11 @@ Dart supports the following built-in collection types:
 Dart supports type inference, so types
 do not need to specified if they can be inferred from values.
 
+By default no type allows the value `null`.
+To allow this prepend `?` to the type name.
+For example, a variable of type `String?` can be set to `null`,
+but a variable of type `String` cannot.
+
 ## Variables
 
 Variables are declared with a type or
@@ -103,9 +108,20 @@ main() => print(sum(2, 3)); // 5
 
 Functions can take both position and named arguments.
 All positional arguments must preceded the named ones.
+
+Positional arguments can be required or optional.
+All required positional arguments must appear before optional ones
+and all the optional ones must be inside square brackets.
+For example:
+
+```dart
+TODO: Add this!
+```
+
 Named parameters are declared inside curly braces.
-Named parameters that are required must either
-begin with the `required` keyword or have a default value.
+Named parameters are optional if their type ends with `?` or they
+have a default value specified by following the name with `=` and a value.
+Named parameters that are required must begin with the `required` keyword.
 For example:
 
 ```dart
@@ -118,9 +134,10 @@ main() {
 }
 ```
 
-Trailing commas are allowed after the last argument in function calls.
-This causes `dart format` to place each argument on a separate line.
-
+Trailing commas are allowed after the last parameter in function definitions
+and after the last argument in function calls.
+This causes `dart format` to place each
+parameter or argument on a separate line.
 
 ## Classes
 
@@ -248,13 +265,6 @@ Variables and class fields whose values are
 set once at run-time and then never changed
 should be declared with the keyword `final`.
 When the type is a object or array, the contents can be changed.
-
-## Null Safety
-
-By default variables cannot have the value `null`.
-To enable this their type must be prepended with a question mark.
-For example, a variable of type `String?` can be set to `null`,
-but a variable of type `String` cannot.
 
 ## Tooling
 
