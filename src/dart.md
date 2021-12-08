@@ -20,10 +20,19 @@ Currently Dart is primarily used by the
 for building mobile, web, and desktop applications.
 
 The syntax of Dart is somewhat similar to Java.
+Statements are terminated by semi-colons.
+Indentation is typically two spaces.
 
 ## Resources
 
 - [title](https://some.url)
+
+## Editors
+
+Many code editors can be used for writing Dart programs.
+Popular options include VS Code, Intellij IDEA, and Android Studio.
+{% aTargetBlank "https://dartpad.dev", "DartPad" %}
+is an online editor for experimenting with Dart features.
 
 ## Creating and Running Programs
 
@@ -32,18 +41,96 @@ One `.dart` file can import another using the `import` command.
 The `main` function defines the starting point of a program.
 To run a `.dart` file that defines a `main` function, enter `dart {name}.dart`.
 
-## Compiling
-
-The `dart compile {format}` command compiles Dart code to other formats.
-The `exe` format creates an executable program for the current platform
-which can be Windows, macOS, or Linux.
-The `js` format compiles Dart code to JavaScript
-that includes an implementation of the Dart runtime.
-
 ## Types
+
+Dart supports the following built-in basic types:
+
+- `void`: means a value is never used
+- `null`:
+- `bool`: boolean value with literal values `true` and `false`
+- `int`: 64-bit integer
+- `double`: 64-bit floating point number
+- `String`: sequence of UTF-16 characters delimited by single or double quotes
+
+Note that there is no `float` type.
+The `double` type is used for all floating point numbers.
+
+Dart supports the following built-in collection types:
+
+- `List`: ordered collection of values (see the `List` section)
+- `Set`: unordered collection of unique values (see the `Set` section)
+- `Map`: unordered collection of key/value pairs (see the `Map` section)
 
 Dart supports type inference, so types
 do not need to specified if they can be inferred from values.
+
+## Variables
+
+Variables are declared with a type or
+the `var` keyword to obtain the type through type inference.
+For example, these are equivalent:
+
+```dart
+int n = 19;
+var n = 19;
+```
+
+## Functions
+
+Dart functions are represented by objects with the type `Function`.
+They are first class which means they can be assigned variables,
+passed to other functions, and returned from other functions.
+
+Functions have the following syntax:
+
+````dart
+return-type fn-name(parameter-list) {
+  statements
+}
+```
+
+Functions that only return the value of a single expression
+can use a shorthand syntax where
+`=> expression;` is short for `{ return expression; }`.
+
+Specifying parameter types and the return type are optional.
+For example, the following is a valid function definition:
+
+```dart
+sum(n1, n2) => n1 + n2;
+main() => print(sum(2, 3)); // 5
+```
+
+Functions can take both position and named arguments.
+All positional arguments must preceded the named ones.
+Named parameters are declared inside curly braces.
+Named parameters that are required must either
+begin with the `required` keyword or have a default value.
+For example:
+
+```dart
+//int product(int n, {required int by}) => n * by;
+int product(int n, {int by = 0}) => n * by;
+
+main() {
+  print(product(2, by: 3)); // 6
+  print(product(4)); // 4
+}
+```
+
+Trailing commas are allowed after the last argument in function calls.
+This causes `dart format` to place each argument on a separate line.
+
+
+## Classes
+
+## Method Cascades
+
+Method cascades provide a way to invoke several methods on the same object.
+
+## Mixins
+
+## Concurrency with Isolates
 
 ## Access Specifiers
 
@@ -69,7 +156,7 @@ class Point {
   // This is an alternate way to write the constructor above.
   //Point(this.x, this.y);
 }
-```
+````
 
 If a class doesn't define a constructor,
 a no-arg constructor that doesn't initialize any fields is provided.
@@ -141,6 +228,7 @@ For example, `var numbers = {3, 7, 19};`
 ## Maps
 
 A map is a collection of key/value pairs.
+The keys and values can have any type.
 A literal map is written as a
 comma-separated list of pairs surrounded by curly braces.
 Each pair is written as a key followed by a colon and a value.
@@ -168,12 +256,27 @@ To enable this their type must be prepended with a question mark.
 For example, a variable of type `String?` can be set to `null`,
 but a variable of type `String` cannot.
 
-## Code Formatting
+## Tooling
 
-Formatting of Dart code is provided by {% aTargetBlank
-"https://dart.dev/tools/dart-format", "dart format" %}.
-To get the best formatting, include a comma after every function parameter,
-even the last one.
+### Code Formatting
+
+Formatting of Dart code is provided by the {% aTargetBlank
+"https://dart.dev/tools/dart-format", "dart format" %} command.
+
+To get the best formatting, include a comma after every function argument,
+even the last one. This places each argument on a separate line.
+
+### Compiling
+
+The `dart compile {format}` command compiles Dart code to other formats.
+The `exe` format creates an executable program for the current platform
+which can be Windows, macOS, or Linux.
+The `js` format compiles Dart code to JavaScript
+that includes an implementation of the Dart runtime.
+
+### Testing
+
+The `dart test` command runs tests.
 
 ## Annoyances
 
