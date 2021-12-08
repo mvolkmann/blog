@@ -110,8 +110,11 @@ Functions can take both position and named arguments.
 All positional arguments must preceded the named ones.
 
 Positional arguments can be required or optional.
-All required positional arguments must appear before optional ones
-and all the optional arguments must be inside square brackets.
+All required positional arguments must appear before the optional ones.
+Required parameters cannot be given default values.
+All optional arguments must be inside square brackets.
+They must either have a default value or an optional type (ending with `?`).
+
 In the following example, `req1` and `req2` are required parameters
 and `opt1` and `opt2` are optional.
 If only two arguments are passed,
@@ -125,9 +128,9 @@ demo(int req1, int req2, [int opt1 = 0, int? opt2]) {
 ```
 
 Named parameters are declared inside curly braces.
-Named parameters are optional if their type ends with `?` or they
-have a default value specified by following the name with `=` and a value.
-Named parameters that are required must begin with the `required` keyword.
+If they are optional, they must either have a default value
+or an optional type (ending with `?`).
+If they are required, the `required` keyword must appear before their type.
 For example:
 
 ```dart
