@@ -251,12 +251,30 @@ void main() {
 }
 ```
 
-## Arrays
+## Lists
 
 Arrays in Dart are `List` objects.
 A literal array is written as a
 comma-separated list of values surrounded by square brackets.
 For example, `var numbers = [3, 7, 19];`
+
+To iterate over the elements of a `List`,
+use a `for/in` loop or the `forEach` method.
+For example:
+
+```dart
+const dogs = ['Maisey', 'Ramsay', 'Oscar', 'Comet'];
+
+for (var dog in dogs) {
+  print(dog);
+}
+
+// Same as above.
+dogs.forEach((dog) => print(dog));
+
+// Same as above.
+dogs.forEach(print);
+```
 
 ## Sets
 
