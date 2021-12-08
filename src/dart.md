@@ -92,6 +92,13 @@ int n = 19;
 var n = 19;
 ```
 
+## Print
+
+The `print` function takes a single `String` and writes it to stdout.
+Literal `String` values are delimited by single or double quotes.
+To include the value of a variable in a `String`, use `$variableName`.
+To include the value of an expression in a `String`, use `${expression}`.
+
 ## Functions
 
 Dart functions are represented by objects with the type `Function`.
@@ -183,9 +190,13 @@ A compiler error is generated if such access is attempted.
 However, private names within an application or library
 are still accessible by code in the same application or library.
 
-## Constructors
+## Classes
 
-Constructors are methods with the same name as the class.
+Classes defined fields to hold data, constructors to create instances,
+and methods to operate on the data.
+
+Constructors are defined as methods with the same name as the class.
+For example:
 
 ```dart
 class Point {
@@ -252,6 +263,31 @@ void main() {
   print('pt = $pt'); // pt = (2.0, 3.0)
   pt = Point.same(4);
   print('pt = $pt'); // pt = (4.0, 4.0)
+}
+```
+
+Here is one more example that demonstrates a constructor
+that takes named parameters.
+
+```dart
+class Person {
+  String name;
+  int? _age;
+
+  // The first parameter is required and the second is optional.
+  Person({required this.name, int? age}) {
+    _age = age;
+  }
+}
+
+void main() {
+  var p1 = Person(name: 'Mark', age: 60);
+  print('p1.name = ${p1.name}'); // Mark
+  print('p1._age = ${p1._age}'); // 60
+
+  var p2 = Person(name: 'Tami');
+  print('p2.name = ${p2.name}'); // Tami
+  print('p2._age = ${p2._age}'); // null
 }
 ```
 
