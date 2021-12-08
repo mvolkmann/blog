@@ -175,9 +175,13 @@ Method cascades provide a way to invoke several methods on the same object.
 ## Access Specifiers
 
 Dart does not support keywords to indicate access levels
-of things like classes, functions, and variables.
-Instead it relies on the convention of prefixing names with an underscore
-to indicate that they should be treated as private.
+of things like functions, classes, fields, and methods.
+Instead add an underscore prefix to a name to indicate that it is private.
+This is enforced at the library level.
+Private names in a library are not accessible outside the library.
+A compiler error is generated if such access is attempted.
+However, private names within an application or library
+are still accessible by code in the same application or library.
 
 ## Constructors
 
