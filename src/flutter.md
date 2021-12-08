@@ -9,6 +9,8 @@ layout: topic-layout.njk
 {% aTargetBlank "https://flutter.dev", "Flutter" %}
 enables writing mobile, web, desktop, and embedded apps
 using the {% aTargetBlank "https://dart.dev", "Dart programming language" %}.
+For details on the Dart programming language,
+see this <a href="../dart/">page</a>.
 
 Everything rendered by a Flutter app is rendered by a widget.
 There are many provided widgets and custom ones can be defined.
@@ -356,6 +358,9 @@ class _CounterState extends State<Counter> {
   }
 }
 ```
+
+A widget `build` method can return only `Container()`
+in order to render nothing.
 
 ## Basic Flutter App Structure
 
@@ -924,11 +929,38 @@ Another is to use a library like
 Yet another is to use {% aTargetBlank
 "https://docs.flutter.dev/cookbook/persistence/sqlite", "SQLite" %}.
 
+## Packages
+
+The official package registry for Flutter is
+{% aTargetBlank "https://pub.dev", "pub.dev" %}.
+Search for packages or see categorized lists of
+"Flutter Favorites", "Most popular packages", "Top Flutter packages",
+"Top Dart packages", and "Package of the Week".
+
+To install a package in a Flutter project,
+enter `flutter pub add {package-name}`.
+This downloads the code to the `~/.pub-cache/hosted` directory
+which contains subdirectories like `pub.dartlang.org`.
+This allows the downloaded code to be shared
+between all of your Flutter projects.
+It also updates the dependency list in the `pubspec.yaml` file,
+which is the Flutter equivalent of a Node.js `package.json` file.
+
+To upgrade the versions of all installed packages,
+enter `flutter pub upgrade`.
+To upgrade the version of a specific installed packages,
+enter `flutter pub upgrade {package-name}`.
+
+To remove an installed package, enter `flutter pub remove {package-name}`.
+
+Dependencies can also be specified by manually editing the `pubspec.yaml` file.
+When this is done, enter `flutter pub get` to download the new dependencies.
+
+In each of the commands in this section,
+the `flutter` command can be replaced by the `dart` command.
+
 ## Annoyances
 
 - The VS Code Flutter extension displays a comment after the closing paren
   of all widgets. It isn't really in the code, but adds visual clutter.
   I haven't found a way to disable it yet.
-
-- Dart wants many constructor calls to be preceded by the `const` keyword.
-  This makes the code verbose.

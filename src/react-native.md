@@ -61,3 +61,9 @@ Expo and the React Native CLI.
   - Attached the device to the computer using a USB cable.
   - Open the app in Xcode.
   - Register for an Apple developer account.
+
+## Icons
+
+See {% aTargetBlank "https://github.com/oblador/react-native-vector-icons",
+"react-native-vector-icons" %} and
+{% aTargetBlank "https://icons.expo.fyi", "@expo/vector-icons" %}.
