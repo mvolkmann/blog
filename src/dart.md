@@ -152,6 +152,17 @@ To allow this prepend `?` to the type name.
 For example, a variable of type `String?` can be set to `null`,
 but a variable of type `String` cannot.
 
+Enumerations are defined with the `enum` keyword.
+They cannot be defined inside a function.
+For example:
+
+```dart
+enum Color { red, green, blue }
+```
+
+TODO: What does Dart call the enum cases?
+TODO: Can enum cases be assigned values?
+
 ## Generics
 
 TODO: Add this.
@@ -222,8 +233,8 @@ Specifying parameter types and the return type are optional.
 For example, the following is a valid function definition:
 
 ```dart
-sum(n1, n2) => n1 + n2;
-main() => print(sum(2, 3)); // 5
+add(n1, n2) => n1 + n2;
+main() => print(add(2, 3)); // 5
 ```
 
 Functions can take both position and named arguments.
@@ -254,12 +265,12 @@ If they are required, the `required` keyword must appear before their type.
 For example:
 
 ```dart
-//int product(int n, {required int by}) => n * by;
-int product(int n, {int by = 0}) => n * by;
+//int multiply(int n, {required int by}) => n * by;
+int multiply(int n, {int by = 0}) => n * by;
 
 main() {
-  print(product(2, by: 3)); // 6
-  print(product(4)); // 4
+  print(multiply(2, by: 3)); // 6
+  print(multiply(4)); // 4
 }
 ```
 
@@ -283,9 +294,11 @@ Functions that do not explicitly return a value evaluate to `null`.
 Dart supports two statements for implementing conditional logic,
 `if` and `switch`.
 
-Here is an example of an `if` statement.
+Here are examples of `if` statements.
 
 ```dart
+if (temperature < 30) print('stay inside'); // braces are optional
+
 if (temperature > 80) {
     print('hot');
 } else if (temperature < 40) {
@@ -296,7 +309,9 @@ if (temperature > 80) {
 ```
 
 The `switch` statement compares values of type `int` or `String`,
-enumerated types, or compile-time constants.  Here is an example.
+enumerated types, or compile-time constants.
+Curly braces around the cases are required.
+Here is an example.
 
 ```dart
 enum Color { red, green, blue }
@@ -324,11 +339,16 @@ Dart supports three statements for implementing iteration,
 Here are examples of each:
 
 ```dart
+for (var i = 1; i <= 5; i++) print(i); // 1 to 5; braces are optional
+
 for (var i = 1; i <= 5; i++) {
   print(i); // 1 to 5
 }
 
 var dogs = ['Maisey', 'Ramsay', 'Oscar', 'Comet'];
+
+for (var dog in dogs) print(dog); // each dog name; braces are optional
+
 for (var dog in dogs) {
   print(dog); // each dog name
 }
@@ -521,12 +541,16 @@ dogs.forEach((dog) => print(dog));
 dogs.forEach(print);
 ```
 
+TODO: Add a table of commonly used methods.
+
 ## Sets
 
 A set is an unordered collection of unique values.
 A literal set is written as a
 comma-separated list of values surrounded by curly braces.
 For example, `var numbers = {3, 7, 19};`
+
+TODO: Add a table of commonly used methods.
 
 ## Maps
 
@@ -536,6 +560,8 @@ A literal map is written as a
 comma-separated list of pairs surrounded by curly braces.
 Each pair is written as a key followed by a colon and a value.
 When a key is a string, it must be delimited by single or double quotes.
+
+TODO: Add a table of commonly used methods.
 
 ## Constants
 
