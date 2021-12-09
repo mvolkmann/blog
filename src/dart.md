@@ -6,11 +6,15 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://dart.dev", "Dart" %}
-is a general purpose programming language from Google.
+<img alt="Dart logo" style="width: 40%"
+    src="/blog/assets/Dart-logo.png?v={{pkg.version}}"
+    title="Dart logo">
+
+{% aTargetBlank "https://dart.dev", "Dart" %} is a
+general purpose, strongly typed, programming language from Google.
 It was first announced in October, 2012.
 
-The original purpose of Dart was to be an alternative to JavaScript
+The original goal of Dart was to be an alternative to JavaScript
 for running code in web browsers.
 The Chrome browser planned to include a Dart VM for this purpose,
 but that plan has been abandoned in favor of compiling to JavaScript.
@@ -21,9 +25,13 @@ for building mobile, web, and desktop applications.
 
 The syntax of Dart is somewhat similar to Java.
 Statements are terminated by semi-colons.
+Parentheses surround conditions.
+Curly braces surround blocks of code.
 Indentation is typically two spaces.
 
 ## Resources
+
+TODO: Add resources.
 
 - [title](https://some.url)
 
@@ -33,6 +41,28 @@ Many code editors can be used for writing Dart programs.
 Popular options include VS Code, Intellij IDEA, and Android Studio.
 {% aTargetBlank "https://dartpad.dev", "DartPad" %}
 is an online editor for experimenting with Dart features.
+
+Recommended VS Code extensions for Dart include:
+
+- {% aTargetBlank
+  "https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code",
+  "Dart" %}
+
+  "Provides tools for effectively editing, refactoring, running,
+  and reloading Flutter mobile apps."
+
+- {% aTargetBlank
+  "https://marketplace.visualstudio.com/items?itemName=BendixMa.dart-data-class-generator",
+  "Dart Data Class Generator" %}
+
+  "Create dart data classes easily, fast and
+  without writing boilerplate or running code generation."
+
+- {% aTargetBlank
+  "https://marketplace.visualstudio.com/items?itemName=jeroen-meijer.pubspec-assist",
+  "Pubspec Assist" %}
+
+  "To easily add dependencies to your Dart and Flutter project's pubspec.yaml."
 
 ## Creating and Running Programs
 
@@ -53,6 +83,37 @@ main(args) {
 To run a `.dart` file that defines a `main` function,
 enter `dart {name}.dart [arguments]`.
 
+## Dart SDK
+
+The Dart SDK includes all the tools needed to
+create, build, and run Dart applications.
+It can be downloaded from
+{% aTargetBlank "https://dart.dev/get-dart", "get-dart" %}
+which provides instructions for installing in Windows, Linux, and macOS.
+
+The Flutter SDK includes the Dart SDK.
+
+After installing the Dart SDK, enter "dart" in a terminal
+to see all the subcommand options.
+
+To create a new Dart project, enter `dart create -t {type} {project-name}`
+where `type` is `console-simple`, `console-full`,
+`package-simple`, `server-shelf`, or `web-simple`.
+
+The Dart SDK contains three compilers.
+
+1. Just In Time (JIT) compiler  
+   This compiles Dart code to an intermediate format
+   and runs it in a virtual machine, which is ideal during development.
+
+1. Ahead Of Time (AOT) compiler  
+   This compiles and builds an executable for a Dart program,
+   which is ideal for releasing a finished application.
+
+1. JavaScript (JS) compiler  
+   This compiles a Dart program to JavaScript,
+   which allows it to be run in a web browser.
+
 ## Keywords
 
 For a list of keywords in the Dart language
@@ -62,10 +123,13 @@ with links to their descriptions, see {% aTargetBlank
 
 ## Types
 
+All values in Dart are objects from some class.
+This is even true for basic types like `bool`, `int`, and `double`.
+
 Dart supports the following built-in basic types:
 
 - `void`: means a value is never used
-- `null`:
+- `null`: represents not having a value
 - `bool`: boolean value with literal values `true` and `false`
 - `int`: 64-bit integer
 - `double`: 64-bit floating point number
@@ -88,16 +152,44 @@ To allow this prepend `?` to the type name.
 For example, a variable of type `String?` can be set to `null`,
 but a variable of type `String` cannot.
 
+## Generics
+
+TODO: Add this.
+
 ## Variables
 
-Variables are declared with a type or
-the `var` keyword to obtain the type through type inference.
-For example, these are equivalent:
+There are three ways to declare variables.
 
-```dart
-int n = 19;
-var n = 19;
-```
+1. With a type
+
+   For example, `int score;`
+
+1. With the `var` keyword
+
+   The type is obtained through type inference.
+   For example, these are equivalent:
+
+   ```dart
+   int n = 19;
+   var n = 19;
+   ```
+
+   When a `var` declaration is not initialized,
+   it is treated like `dynamic` which is described next.
+
+1. With the `dynamic` keyword
+
+   The type can change throughout the lifetime of the variable
+   based on the value currently assigned. For example:
+
+   ```dart
+   dynamic n = 19;
+   n = 3.14;
+   n = "changed";
+   ```
+
+To get the runtime type of an object, access the `runtimeType` property.
+This has a type of `Type` which has a `toString` method.
 
 ## Print
 
@@ -114,7 +206,7 @@ Dart functions are represented by objects with the type `Function`.
 They are first class which means they can be assigned variables,
 passed to other functions, and returned from other functions.
 
-Functions have the following syntax:
+Named function definitions have the following syntax:
 
 ````dart
 return-type fn-name(parameter-list) {
@@ -169,6 +261,14 @@ main() {
   print(product(2, by: 3)); // 6
   print(product(4)); // 4
 }
+```
+
+Anonymous function definitions are written like named function definitions,
+but omit the name.  For example:
+
+```dart
+var numbers = [3, 7, 9];
+numbers.forEach((n) => n * 2);
 ```
 
 Trailing commas are allowed after the last parameter in function definitions
