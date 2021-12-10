@@ -620,16 +620,16 @@ to iterate over its elements.
 
 The `Iterable` class provides the following properties:
 
-| Property     | Description                                                   |
-| ------------ | ------------------------------------------------------------- |
-| `first`      | returns the first element                                     |
-| `hashCode`   | returns the hash code                                         |
-| `isEmpty`    | returns a boolean indicating if there are no elements         |
-| `isNotEmpty` | returns a boolean indicating if there is at least one element |
-| `iterator`   | returns a iterator for iterating over the elements            |
-| `last`       | returns the last element                                      |
-| `length`     | returns the number of elements                                |
-| `single`     | if only one element, returns it; otherwise throws             |
+| Property     | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `first`      | first element                                       |
+| `hashCode`   | hash code                                           |
+| `isEmpty`    | boolean indicating if there are no elements         |
+| `isNotEmpty` | boolean indicating if there is at least one element |
+| `iterator`   | for iterating over elements                         |
+| `last`       | last element                                        |
+| `length`     | number of elements                                  |
+| `single`     | if only one element, that element; otherwise throws |
 
 The `Iterable` class provides the following methods (some omitted):
 
@@ -726,7 +726,7 @@ In addition to the methods provided by the `Iterable` class,
 
 ### Sets
 
-A set is an unordered collection of unique values.
+A `Set` is an unordered collection of unique values.
 A literal set is written as a
 comma-separated list of values surrounded by curly braces.
 For example, `var numbers = {3, 7, 19};`
@@ -754,14 +754,42 @@ In addition to the methods provided by the `Iterable` class,
 
 ### Maps
 
-A map is a collection of key/value pairs.
+A `Map` is a collection of key/value pairs.
 The keys and values can have any type.
+Unlike `List` and `Set`, this class is not a subclass of `Iterable`.
+
 A literal map is written as a
 comma-separated list of pairs surrounded by curly braces.
 Each pair is written as a key followed by a colon and a value.
 When a key is a string, it must be delimited by single or double quotes.
 
-TODO: Add a table of commonly used methods.
+The `Map` class provides the following properties:
+
+| Property     | Description                                                            |
+| ------------ | ---------------------------------------------------------------------- |
+| `entries`    | `Iterable` over `MapEntry` objects (have `key` and `value` properties) |
+| `isEmpty`    | boolean indicating if there are no key/value pairs                     |
+| `isNotEmpty` | boolean indicating if there is at least one key/value pair             |
+| `keys`       | `Iterable` over keys                                                   |
+| `length`     | number of key/value pairs                                              |
+| `values`     | `Iterable` over values                                                 |
+
+The `Map` class provides the following methods (some omitted):
+
+| Method                                                  | Description                                                              |
+| ------------------------------------------------------- | ------------------------------------------------------------------------ | --- |
+| `addAll(Map<K, V> other)`                               | adds all key/value pairs in another `Map` to this one                    |
+| `addEntries(Iterable<MapEntry<K, V>> newEntries)`       | adds all `MapEntry` objects in an `Iterable`                             |     |
+| `clear()`                                               | removes all key/value pairs                                              |
+| `containsKey(Object? key)`                              | returns a boolean indicating if a given key is present                   |
+| `containsValue(Object? value)`                          | returns a boolean indicating if a given value is present                 |
+| `forEach(void action(K key, V value)`                   | executes a function on each key/value pair                               |
+| `map<K2, V2>(MapEntry<K2, V2> convert(K key, V value))` | returns a new `Map` created by calling a function on each key/value pair |
+| `putIfAbsent(K key, V ifAbsent()`                       | returns the value for a given key and adds a value if not present        |
+| `remove(Object? key)`                                   | removes a key/value pair if present                                      |
+| `removeWhere(bool test(K key, V value)`                 | removes all key/value pairs that pass a test                             |
+| `update(K key, V update(V value)`                       | updates the value for a given key to the value returned by a function    |
+| `updateAll(V update(K key, V value)`                    | updates all values to the value returned by a function                   |
 
 ## Constants
 
