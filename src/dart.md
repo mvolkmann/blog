@@ -126,6 +126,11 @@ The `dart create` command creates the following files and directories:
   This directory is not provided, but should be created to hold `.dart` files
   that define functions and classes used by other `.dart` files in the project.
 
+  Files in the `bin` directory import files from here using the syntax
+  `import 'package:{project-name}/{file-name}.dart';`
+  For files in subdirectories of the `lib` directory,
+  add subdirectories after the project name.
+
 - `.packages`
 
   This file is deprecated.
@@ -692,7 +697,8 @@ that includes an implementation of the Dart runtime.
 Dart tests using the `test` package.
 To install this in a Dart project, enter `dart pub add test --dev`.
 
-Here is an example of code to be tested in the file `lib/math.dart`.
+Here is an example of code to be tested in the file `lib/math.dart`
+that is inside a project named `hello_world`.
 
 ```dart
 double add(double n1, double n2) {
@@ -704,7 +710,7 @@ Here is an example of test code in the file `test/math_test.dart`.
 
 ```dart
 import 'package:test/test.dart';
-import '../lib/math.dart';
+import 'package:hello_world/math.dart';
 
 void main() {
   test('add works', () {
@@ -714,6 +720,7 @@ void main() {
 ```
 
 The `expect` function takes an actual value and an expected value.
+TODO: Are there other forms of calling this?
 
 To run all the tests in a project, enter `dart test`.
 This is a bit slow the first time it is run,
