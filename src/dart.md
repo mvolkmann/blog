@@ -109,7 +109,8 @@ The `dart create` command creates the following files and directories:
 
 - `bin`
 
-  This directory contains `.dart` source files.
+  This directory contains `.dart` source files
+  that are meant to be executed.
 
 - `bin/hello_world.dart`
 
@@ -119,6 +120,11 @@ The `dart create` command creates the following files and directories:
 
   This file lists directories and files that
   should not be added to a Git repository.
+
+- `lib`
+
+  This directory is not provided, but should be created to hold `.dart` files
+  that define functions and classes used by other `.dart` files in the project.
 
 - `.packages`
 
@@ -183,6 +189,15 @@ For a list of keywords in the Dart language
 with links to their descriptions, see {% aTargetBlank
 "https://dart.dev/guides/language/language-tour#keywords",
 "Language Tour - Keywords" %}.
+
+## Comments
+
+Comments in Dart are written like in many other programming languages.
+
+- Single-line comments begin with `//`.
+- Multi-line comments are delimited by `/*` and `*/`.
+- Documentation comments begin with `///` or are delimited by `/**` and `*/`.
+  These are used to generate documentation from source files.
 
 ## Types
 
@@ -674,7 +689,58 @@ that includes an implementation of the Dart runtime.
 
 ### Testing
 
-The `dart test` command runs tests.
+Dart tests using the `test` package.
+To install this in a Dart project, enter `dart pub add test --dev`.
+
+Here is an example of code to be tested in the file `lib/math.dart`.
+
+```dart
+double add(double n1, double n2) {
+  return n1 + n2;
+}
+```
+
+Here is an example of test code in the file `test/math_test.dart`.
+
+```dart
+import 'package:test/test.dart';
+import '../lib/math.dart';
+
+void main() {
+  test('add works', () {
+    expect(add(2, 3), 5);
+  });
+}
+```
+
+The `expect` function takes an actual value and an expected value.
+
+To run all the tests in a project, enter `dart test`.
+This is a bit slow the first time it is run,
+but subsequent runs are much faster.
+If all of the tests pass, this will output "All tests passed!".
+Otherwise it will output "Some tests failed."
+along with expected and actual results.
+
+Tests can be grouped into suites sing the `group` function
+which takes a name and a function that
+calls the `test` and `group` functions.
+For example:
+
+```dart
+import 'package:test/test.dart';
+import 'dart:math';
+
+void main() {
+  group('math', () {
+    group('trigonometry', () {
+      test('sin works', () {
+        expect(sin(pi / 2), 1);
+      });
+    });
+  });
+}
+```
 
 ## Annoyances
 
