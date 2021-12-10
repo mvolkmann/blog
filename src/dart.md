@@ -31,9 +31,10 @@ Indentation is typically two spaces.
 
 ## Resources
 
-TODO: Add resources.
+TODO: Add more resources.
 
-- [title](https://some.url)
+- [Dart home page](https://dart.dev)
+- [Effective Dart](https://dart.dev/guides/language/effective-dart)
 
 ## Editors
 
@@ -82,6 +83,68 @@ main(args) {
 
 To run a `.dart` file that defines a `main` function,
 enter `dart {name}.dart [arguments]`.
+
+It is not necessary to create a Dart "project"
+in order to write and run Dart code, but doing so provides many benefits.
+It gives a project a standard directory structure,
+makes it easy to add dependencies,
+enables writing tests,
+makes it easy to publish packages to
+{% aTargetBlank "https://pub.dev", "pub.dev" %},
+and much more.
+
+To create a new Dart project, enter `dart create {project-name}`.
+For example:
+
+- `dart create hello_world`  
+   Dart prefers underscores over hyphens in names.
+- `cd hello_world`
+- `dart run` (outputs "Hello world!")
+
+The `dart create` command creates the following files and directories:
+
+- `.dart_tool/package_config.json`
+
+  This file is used to resolve Dart package names to `.dart` files.
+
+- `bin`
+
+  This directory contains `.dart` source files.
+
+- `bin/hello_world.dart`
+
+  This Dart source file is the project starting point.
+
+- `.gitignore`
+
+  This file lists directories and files that
+  should not be added to a Git repository.
+
+- `.packages`
+
+  This file is deprecated.
+
+- `analysis_options.yaml`
+
+  This file configures Dart linting rules.
+
+- `CHANGELOG.md`
+
+  This file describes versions of the project.
+
+- `pubspec.lock`
+
+  This file records dependency versions.
+  It is similar to `package-lock.json` in Node.js projects.
+
+- `pubspec.yaml`
+
+  This file describes project dependencies and more.
+  It is similar to `package.json` in Node.js projects.
+
+- `README.md`
+
+  This MarkDown file describes the project.
 
 ## Dart SDK
 
