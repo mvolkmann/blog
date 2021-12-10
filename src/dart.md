@@ -602,12 +602,14 @@ TODO: Describe the `late` keyword.
 ## Collections
 
 Dart provides many collection classes.
-Built-in classes that can be used without importing
+Built-in collection classes that can be used without importing
 include `List`, `Set`, and `Map`.
 Other collection classes are defined in the package `dart:collection`
 and must be imported. These include `DoubleLinkedQueue`, `HashMap`, `HashSet`,
 `LinkedHashMap`, `LinkedHashSet`, `LinkedList`, `ListQueue`, `Queue`,
 and `SplayTreeMap`, `SplayTreeSet`.
+
+### Iterable
 
 The following collection classes all have `Iterable` as a superclass:
 `DoubleLinkedQueue`, `IterableBase`, `IterableMixin`,
@@ -629,13 +631,14 @@ The `Iterable` class provides the following properties:
 | `length`     | returns the number of elements                                |
 | `single`     | if only one element, returns it; otherwise throws             |
 
-The `Iterable` class provides the following methods (not all listed):
+The `Iterable` class provides the following methods (some omitted):
 
 | Method                                                           | Description                                                                        |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | `any(bool test(E element))`                                      | returns a boolean indicating if any element passes the test                        |
 | `contains(Object? element)`                                      | returns a boolean indicating if a given element is present                         |
 | `elementAt(int index)`                                           | returns the element at a given index or throws `RangeError` if not found           |
+| `expand<T>(Iterable<T> toElements(E element))`                   | returns an `Iterable` over the flatten elements                                    |
 | `every(bool test(E element))`                                    | returns a boolean indicating if every element passes the test                      |
 | `firstWhere(bool test(E element), {E orElse()?})`                | returns the first element that passes the test or the `orElse` value               |
 | `fold<T>(T initialValue, T combine(T previousValue, E element))` | reduces a collection to a single value                                             |
@@ -653,9 +656,7 @@ The `Iterable` class provides the following methods (not all listed):
 | `toSet()`                                                        | creates and returns a `Set` containing the same elements                           |
 | `toString()`                                                     | returns the `String` representation                                                |
 | `where(bool test(E element))`                                    | returns an `Iterable` over all the elements that pass the test                     |
-| `whereType()`                                                    | returns a new collection of elements with a given type                             |
-
-The built-in collection classes are described below.
+| `whereType<T>()`                                                 | returns a new collection of elements with a given type                             |
 
 ### Lists
 
@@ -692,23 +693,36 @@ filled by a generator function,
 In addition to the properties provided by the `Iterable` class,
 `List` objects support the following properties:
 
-| Property | Description |
-| -------- | ----------- |
-| ``       |             |
+| Property   | Description                                      |
+| ---------- | ------------------------------------------------ |
+| `reversed` | an `Iterable` over the elements in reverse order |
 
 In addition to the methods provided by the `Iterable` class,
-`List` objects support the following methods:
+`List` objects support the following methods (some omitted):
 
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
-| ``     |             |
-| ``     |             |
-| ``     |             |
-| ``     |             |
-| ``     |             |
-
-TODO: Add a table of commonly used methods.
+| Method                                                       | Description                                                    |
+| ------------------------------------------------------------ | -------------------------------------------------------------- |
+| `add(E value)`                                               | adds an element                                                |
+| `addAll(Iterable<E> iterable)`                               | adds all the elements in another collection                    |
+| `clear()`                                                    | removes all the elements                                       |
+| `fillRange(int start, int end, [E? fillValue])`              | sets the elements in a range to a given value or null          |
+| `getRange(int start, int end)`                               | returns an `Iterable` over a range of elements                 |
+| `indexOf(E element, [int start = 0])`                        | return the first index of a given element                      |
+| `indexWhere(bool test(E element), [int start = 0])`          | returns the index of the first element that passes the test    |
+| `insert(int index, E element)`                               | inserts an element at a given index                            |
+| `insertAll(int index, Iterable<E> iterable)`                 | inserts all the elements in an `Iterable` at a given index     |
+| `lastIndexOf(E element, [int? start])`                       | returns the last index of a given element                      |
+| `lastIndexWhere(bool test(E element), [int? start])`         | returns the index of the last element that passes the test     |
+| `remove(Object? value)`                                      | removes the first occurrence of an element                     |
+| `removeAt(int index)`                                        | removes the element at a given index                           |
+| `removeLast()`                                               | removes the last element; use `removeAt(0)` to remove first    |
+| `removeRange(int start, int end)`                            | removes the elements in a given range                          |
+| `removeWhere(bool test(E element))`                          | removes all elements that pass a test                          |
+| `replaceRange(int start, int end, Iterable<E> replacements)` | replaces elements in a given range with those in an `Iterable` |
+| `retainWhere(bool test(E element))`                          | removes all elements that do not pass a test                   |
+| `shuffle([Random? random])`                                  | randomly reorders the elements in place                        |
+| `sort([int compare(E a, E b)?])`                             | sorts the elements in place using a `Comparator` function      |
+| `sublist(int start, [int? end])`                             | returns a new `List` that is a subset                          |
 
 ### Sets
 
@@ -717,7 +731,26 @@ A literal set is written as a
 comma-separated list of values surrounded by curly braces.
 For example, `var numbers = {3, 7, 19};`
 
-TODO: Add a table of commonly used methods.
+No properties are added beyond those provided by the `Iterable` class.
+
+In addition to the methods provided by the `Iterable` class,
+`Set` objects support the following methods (some omitted):
+
+| Method                                  | Description                                                                   |
+| --------------------------------------- | ----------------------------------------------------------------------------- |
+| `add(E value)`                          | adds an element                                                               |
+| `addAll(Iterable<E> iterable)`          | adds all the elements in another collection                                   |
+| `clear()`                               | removes all the elements                                                      |
+| `contains(Object? value)`               | returns a boolean indicating if an element is present                         |
+| `containsAll(Iterable<Object>? other)`  | returns a boolean indicating if all the elements in an `Iterable` are present |
+| `difference(Set<Object?> other)`        | returns a new `Set` containing all elements in this one not found in `other`  |
+| `lookup(Object? object)`                | returns `object` if found in the `Set` or `null`                              |
+| `remove(Object? value)`                 | removes the first occurrence of an element                                    |
+| `removeAll(Iterable<Object?> elements)` | removes all the elements in an `Iterable`                                     |
+| `removeWhere(bool test(E element))`     | removes all elements that pass a test                                         |
+| `retainAll(Iterable<Object?> elements)` | removes all the elements not in an `Iterable`                                 |
+| `retainWhere(bool test(E element))`     | removes all elements that do not pass a test                                  |
+| `union(Set<E> other)`                   | returns a new `Set` containing all elements in this one and `other`           |
 
 ### Maps
 
