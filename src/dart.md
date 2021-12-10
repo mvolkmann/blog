@@ -488,7 +488,7 @@ try {
 ## Access Specifiers
 
 Dart does not support keywords to indicate access levels
-of things like functions, classes, fields, and methods.
+of things like functions, classes, properties, and methods.
 Instead add an underscore prefix to a name to indicate that it is private.
 This is enforced at the library level.
 Private names in a library are not accessible outside the library.
@@ -498,7 +498,7 @@ are still accessible by code in the same application or library.
 
 ## Classes
 
-Classes defined fields to hold data, constructors to create instances,
+Classes defined properties to hold data, constructors to create instances,
 and methods to operate on the data.
 
 Constructors are defined as methods with the same name as the class.
@@ -520,7 +520,7 @@ class Point {
 ````
 
 If a class doesn't define a constructor,
-a no-arg constructor that doesn't initialize any fields is provided.
+a no-arg constructor that doesn't initialize any properties is provided.
 If the class has a superclass,
 the default constructor calls its no-arg constructor.
 
@@ -535,7 +535,7 @@ named constructor for initializing `x` and `y` to the same value.
   }
 ```
 
-Constructors can initialize fields before their body runs.
+Constructors can initialize properties before their body runs.
 For example, the following is an alternate way
 to write the previous named constructor.
 This has no body, but a body could be added by replacing the closing semi-colon
@@ -599,9 +599,67 @@ void main() {
 
 TODO: Describe the `late` keyword.
 
-## Lists
+## Collections
 
-Arrays in Dart are `List` objects.
+Dart provides many collection classes.
+Built-in classes that can be used without importing
+include `List`, `Set`, and `Map`.
+Other collection classes are defined in the package `dart:collection`
+and must be imported. These include `DoubleLinkedQueue`, `HashMap`, `HashSet`,
+`LinkedHashMap`, `LinkedHashSet`, `LinkedList`, `ListQueue`, `Queue`,
+and `SplayTreeMap`, `SplayTreeSet`.
+
+The following collection classes all have `Iterable` as a superclass:
+`DoubleLinkedQueue`, `IterableBase`, `IterableMixin`,
+`LinkedList`, `List`, `ListQueue`, `Queue`, `Runes`, and `Set`.
+
+Any `Iterable` collection can be used in a `for-in` loop
+to iterate over its elements.
+
+The `Iterable` class provides the following properties:
+
+| Property     | Description                                                   |
+| ------------ | ------------------------------------------------------------- |
+| `first`      | returns the first element                                     |
+| `hashCode`   | returns the hash code                                         |
+| `isEmpty`    | returns a boolean indicating if there are no elements         |
+| `isNotEmpty` | returns a boolean indicating if there is at least one element |
+| `iterator`   | returns a iterator for iterating over the elements            |
+| `last`       | returns the last element                                      |
+| `length`     | returns the number of elements                                |
+| `single`     | if only one element, returns it; otherwise throws             |
+
+The `Iterable` class provides the following methods (not all listed):
+
+| Method                                                           | Description                                                                        |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `any(bool test(E element))`                                      | returns a boolean indicating if any element passes the test                        |
+| `contains(Object? element)`                                      | returns a boolean indicating if a given element is present                         |
+| `elementAt(int index)`                                           | returns the element at a given index or throws `RangeError` if not found           |
+| `every(bool test(E element))`                                    | returns a boolean indicating if every element passes the test                      |
+| `firstWhere(bool test(E element), {E orElse()?})`                | returns the first element that passes the test or the `orElse` value               |
+| `fold<T>(T initialValue, T combine(T previousValue, E element))` | reduces a collection to a single value                                             |
+| `forEach(void action(E element))`                                | invokes `action` on each element                                                   |
+| `join([String separator = ""])`                                  | returns a string formed by concatenating the string representation of each element |
+| `lastWhere(bool test(E element), {E orElse()?})`                 | returns the last element that passes the test or the `orElse` value                |
+| `map<T>(T toElement(E e))`                                       | returns a new collection of the results of calling a function on each element      |
+| `reduce(E combine(E value, E element))`                          | same as `fold` but uses the first element as the initial value                     |
+| `singleWhere(bool test(E element), {E orElse()?})`               | similar to `firstWhere`, but throws if more than one element passes the test       |
+| `skip(int count)`                                                | returns an `Iterable` that begins after `count` elements                           |
+| `skipWhile(bool test(E value))`                                  | returns an `Iterable` that begins after the initial elements that pass the test    |
+| `take(int count)`                                                | returns an `Iterable` over the first `count` elements (opposite of `skip`)         |
+| `takeWhile(bool test(E value))`                                  | returns an `Iterable` that ends after the initial elements that pass the test      |
+| `toList(bool growable = true)`                                   | creates and returns a `List` containing the same elements                          |
+| `toSet()`                                                        | creates and returns a `Set` containing the same elements                           |
+| `toString()`                                                     | returns the `String` representation                                                |
+| `where(bool test(E element))`                                    | returns an `Iterable` over all the elements that pass the test                     |
+| `whereType()`                                                    | returns a new collection of elements with a given type                             |
+
+The built-in collection classes are described below.
+
+### Lists
+
+Arrays in Dart are represented by `List` objects.
 A literal array is written as a
 comma-separated list of values surrounded by square brackets.
 For example, `var numbers = [3, 7, 19];`
@@ -624,9 +682,35 @@ dogs.forEach((dog) => print(dog));
 dogs.forEach(print);
 ```
 
+The `List` class is generic and implements extends from the `Iterable` class.
+It provides many constructors that support creating lists that are
+empty,
+filled to a given length with the same value,
+filled from another `Iterable` (either modifiable or unmodifiable),
+filled by a generator function,
+
+In addition to the properties provided by the `Iterable` class,
+`List` objects support the following properties:
+
+| Property | Description |
+| -------- | ----------- |
+| ``       |             |
+
+In addition to the methods provided by the `Iterable` class,
+`List` objects support the following methods:
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
+| ``     |             |
+| ``     |             |
+| ``     |             |
+| ``     |             |
+| ``     |             |
+
 TODO: Add a table of commonly used methods.
 
-## Sets
+### Sets
 
 A set is an unordered collection of unique values.
 A literal set is written as a
@@ -635,7 +719,7 @@ For example, `var numbers = {3, 7, 19};`
 
 TODO: Add a table of commonly used methods.
 
-## Maps
+### Maps
 
 A map is a collection of key/value pairs.
 The keys and values can have any type.
@@ -650,11 +734,11 @@ TODO: Add a table of commonly used methods.
 
 Variables whose values are known at compile-time
 should be declared with the keyword `const`.
-Class fields whose values are known at compile-time
+Class properties whose values are known at compile-time
 should be declared with the keywords `static const`.
 When the type is a object or array, the contents also cannot be changed.
 
-Variables and class fields whose values are
+Variables and class properties whose values are
 set once at run-time and then never changed
 should be declared with the keyword `final`.
 When the type is a object or array, the contents can be changed.
