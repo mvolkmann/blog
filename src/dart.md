@@ -38,6 +38,7 @@ TODO: Add more resources.
 
 - [Dart home page](https://dart.dev)
 - [Effective Dart](https://dart.dev/guides/language/effective-dart)
+- [Dart Complete Course](https://youtu.be/F3JuuYuOUK4)
 
 ## Editors
 
