@@ -523,6 +523,27 @@ A `Pattern` is a `RegExp` or `String` object.
 Dart regular expressions use the same syntax as JavaScript regular expressions.
 
 A `RegExp` object is created with `RegExp(r'reg-ex-here');`.
+
+The `String` class defines the following properties.
+
+| Property          | Description                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------- |
+| `isCaseSensitive` | `bool` indicating if matches are case-sensitive (defaults to `true`)                  |
+| `isDotAll`        | `bool` indicating if periods should match line terminators (defaults to `false`)      |
+| `isMultiline`     | `bool` indicating if multiline matching will be performed (defaults to `false`)       |
+| `isUnicode`       | `bool` indicating if whether Unicode matching will be performed (defaults to `false`) |
+| `pattern`         | regular expression as a `String`                                                      |
+
+The `RegExp` class defines the following instance methods.
+
+| Method                                         | Description                                                                            |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `allMatches(String input, [int start = 0])`    | returns `Iterable<RegExpMatch>` for iterating over matches                             |
+| `firstMatch(String input)`                     | returns `RegExpMatch?` for first match found or null                                   |
+| `hasMatch(String input)`                       | returns `bool` indicating if a match was found                                         |
+| `matchAsPrefix(String input, [int start = 0])` | returns a `Match?` that is null unless a match is found at the start                   |
+| `stringMatch(String input)`                    | returns a `String?` substring of first match in input or null (ignores capture groups) |
+
 The following example creates a regular expression that
 matches strings starting with "The " and ending with " win.".
 It captures all the characters in between.
