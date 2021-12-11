@@ -404,6 +404,15 @@ enum Color { red, green, blue }
 TODO: What does Dart call the enum cases?
 TODO: Can enum cases be assigned values?
 
+### bool type
+
+Instances of the `bool` class represent a boolean value.
+The only values are the literal values `true` and `false`.
+
+The `bool` class doesn't add any interesting properties or methods,
+but it defines the following operators:
+`&` (and), `|` (or), and `^` (xor).
+
 ### Number types
 
 The `int` and `double` classes are the only number types supported by Dart.
@@ -602,6 +611,22 @@ An individual character (code unit) can be
 accessed with square brackets and an index.
 For example, the first character of a string `s` is obtained with `s[0]`.
 
+There are two ways to embed newline characters in a string.
+The following code demonstrates these:
+
+```dart
+  var s1 = 'first\nsecond';
+  print(s1);
+  var s2 = '''first
+second''';
+  print(s2);
+```
+
+Raw strings are strings where backslash character is not treated specially.
+They are indicated by preceding the opening delimiter with "r".
+For example, `r'first\nsecond'` does not treat `\n` as a newline character.
+Raw strings useful when defining regular expressions.
+
 Defining custom classes that extend the `String` class is not allowed.
 
 The `String` class defines the following properties:
@@ -664,6 +689,8 @@ A `Pattern` is a `RegExp` or `String` object.
 Dart regular expressions use the same syntax as JavaScript regular expressions.
 
 A `RegExp` object is created with `RegExp(r'reg-ex-here');`.
+Recall that placing "r" before a literal string creates a "raw string"
+that doesn't treat the `\` character specially.
 
 The `String` class defines the following properties:
 
@@ -1042,6 +1069,9 @@ Functions that do not explicitly return a value evaluate to `null`.
 Dart supports two statements for implementing conditional logic,
 `if` and `switch`.
 
+The condition specified in an `if` statement must be
+an expression that evaluates to a `bool` value.
+
 Here are examples of `if` statements.
 
 ```dart
@@ -1083,6 +1113,8 @@ unless there is a `case` for each possible value.
 
 Dart supports three statements for implementing iteration,
 `for`, `while`, and `do-while`.
+The condition specified in each of these must be
+an expression that evaluates to a `bool` value.
 
 Here are examples of each:
 
