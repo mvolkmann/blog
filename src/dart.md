@@ -594,6 +594,9 @@ To include the value of a variable, include `$variableName`.
 To include the value of an expression, include `${expression}`.
 
 Strings can be concatenated with the `+` operator.
+The `+` operator is not needed to concatenate literal strings.
+Literal strings can be written next to each other,
+separated only by a space, to concatenate them.
 
 An individual character (code unit) can be
 accessed with square brackets and an index.
