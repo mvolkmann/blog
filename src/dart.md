@@ -29,6 +29,9 @@ Parentheses surround conditions.
 Curly braces surround blocks of code.
 Indentation is typically two spaces.
 
+Dart supports operator overloading to define the meaning
+of operators when applied to instances of custom classes.
+
 ## Resources
 
 TODO: Add more resources.
@@ -130,6 +133,9 @@ The `dart create` command creates the following files and directories:
   `import 'package:{project-name}/{file-name}.dart';`
   For files in subdirectories of the `lib` directory,
   add subdirectories after the project name.
+  For example, `import 'package:{project-name}/{subdir-name}/{file-name}.dart';`
+
+import 'package:hello_world/math.dart';
 
 - `.packages`
 
@@ -143,15 +149,51 @@ The `dart create` command creates the following files and directories:
 
   This file describes versions of the project.
 
-- `pubspec.lock`
-
-  This file records dependency versions.
-  It is similar to `package-lock.json` in Node.js projects.
-
 - `pubspec.yaml`
 
   This file describes project dependencies and more.
   It is similar to `package.json` in Node.js projects.
+  The properties that are optional are indicated in the list below.
+
+  - `name`: package name (can use underscores, but not hyphens)
+  - `description`: package description
+  - `version`: using semver major.minor.patch convention
+  - `homepage`: optional URL
+  - `repository`: optional URL
+  - `issue_tracker`: optional URL
+  - `documentation`: optional URL
+
+  - `publish_to`: information for publishing to pub.dev
+  - `environment`: describes supported Dart versions
+  - `dependencies`: list of packages needed at runtime; can omit if none
+  - `dev_dependencies`: list of packages only needed for development; can omit if none
+
+  There are three supported syntaxes for
+  specifying acceptable versions of a dependency.
+
+  1. specific semver; ex. `1.2.3`
+  1. semver range; ex. `>=1.2.3 <2.0.0`
+  1. caret semver; ex. `^1.2.3` (means same as above)
+
+  The caret semver syntax is preferred.
+  It has a slightly different meaning when the major version is zero.
+  For example, `^0.1.2` is the same as `>=0.1.2 <0.2.0`.
+
+  Most dependencies come from pub.dev, but it is also possible
+  to install dependencies from other sources such a Git repositories
+  and packages in the `packages` directory of the current project.
+
+- `pubspec.lock`
+
+  This file records the exact versions of each installed dependency.
+  It is similar to `package-lock.json` in Node.js projects.
+
+  When this file doesn't exist, running the `pub get` command
+  installs the versions of the dependencies specified in `pubspec.yaml`
+  and creates this file to record the installed versions.
+
+  When this file exists, running the `pub get` command
+  installs the versions of the dependencies specified here.
 
 - `README.md`
 
@@ -183,6 +225,10 @@ The Dart SDK contains three compilers.
 1. Ahead Of Time (AOT) compiler  
    This compiles and builds an executable for a Dart program,
    which is ideal for releasing a finished application.
+   It performs type flow analysis and removes unused code
+   in order to produce a smaller executable.
+   It also performs optimizations such as inlining code
+   in order to produce a faster executable.
 
 1. JavaScript (JS) compiler  
    This compiles a Dart program to JavaScript,
@@ -209,14 +255,22 @@ Comments in Dart are written like in many other programming languages.
 All values in Dart are objects from some class.
 This is even true for basic types like `bool`, `int`, and `double`.
 
+All types except `Null` are subclasses of the `Object` class.
+
 Dart supports the following built-in basic types:
 
 - `void`: means a value is never used
-- `null`: represents not having a value
+- `Null`: represents not having a value
 - `bool`: boolean value with literal values `true` and `false`
 - `int`: 64-bit integer
 - `double`: 64-bit floating point number
 - `String`: sequence of UTF-16 characters delimited by single or double quotes
+- `Never`: has no values
+
+The keyword `null` refers to the only instance of the `Null` type.
+
+The `Never` type is the type of `throw` expressions,
+and is the return type of functions that always throw.
 
 Note that there is no `float` type.
 The `double` type is used for all floating point numbers.
@@ -232,8 +286,11 @@ do not need to specified if they can be inferred from values.
 
 By default no type allows the value `null`.
 To allow this prepend `?` to the type name.
-For example, a variable of type `String?` can be set to `null`,
-but a variable of type `String` cannot.
+For example, a variable of type `String` cannot be set to `null`,
+but a variable of type `String?` can.
+The compiler requires handling cases where a nullable value might be `null`.
+This results in detecting errors involving `null` values
+at compile-time rather than runtime.
 
 Enumerations are defined with the `enum` keyword.
 They cannot be defined inside a function.
@@ -245,6 +302,139 @@ enum Color { red, green, blue }
 
 TODO: What does Dart call the enum cases?
 TODO: Can enum cases be assigned values?
+
+## Number types
+
+The `int` and `double` classes are the only number types supported by Dart.
+Both inherit from the `num` class and both represent 64-bit values.
+Custom classes are not allowed to inherit from the `num` class.
+
+### num Class
+
+The `num` class defines the following properties.
+
+| Property     | Description                                              |
+| ------------ | -------------------------------------------------------- |
+| `isFinite`   | `bool` indicating whether the number is finite           |
+| `isInfinite` | `bool` indicating whether the number is infinite         |
+| `inNaN`      | `bool` indicating whether this is the Not-a-Number value |
+| `isNegative` | `bool` indicating whether the number is negative         |
+| `sign`       | -1, 0, or 1                                              |
+
+The `num` class defines the following instance methods.
+
+| Method                                       | Description                                                          |
+| -------------------------------------------- | -------------------------------------------------------------------- |
+| `abs()`                                      | returns absolute value                                               |
+| `ceil()`                                     | returns least integer not smaller                                    |
+| `ceilToDouble()`                             | same as `ceil`, but returns a `double`                               |
+| `clamp(num lower, num upper)`                | returns n < lower ? lower : n > upper ? upper : n                    |
+| `compareTo(num other)`                       | returns comparator `int` value                                       |
+| `floor()`                                    | returns greatest integer not greater                                 |
+| `floorToDouble()`                            | same as `floor`, but returns a `double`                              |
+| `remainder()`                                | returns remainder of truncating division (modulo)                    |
+| `round()`                                    | returns closest integer                                              |
+| `roundToDouble()`                            | same as `round`, but returns a `double`                              |
+| `toDouble()`                                 | returns number as a `double`                                         |
+| `toInt()`                                    | returns number as an `int`                                           |
+| `toString()`                                 | returns number as a `String`                                         |
+| `toStringAsExponential(int? fractionDigits)` | returns `String` representation in exponential form                  |
+| `toStringAsFixed(int fractionDigits)`        | returns `String` representation with fixed number of fraction digits |
+| `toStringAsPrecision(int precision)`         | returns `String` representation with `precision` significant digits  |
+| `truncate()`                                 | returns `int` result of truncating fractional digits                 |
+| `truncateToDouble()`                         | same as `truncate`, but returns a `double`                           |
+
+The `num` class defines the following static methods.
+
+| Method                                              | Description                                          |
+| --------------------------------------------------- | ---------------------------------------------------- |
+| `parse(String input, [num onError(String input)?])` | returns `num` obtained by parsing a `String`         |
+| `tryParse(String input)`                            | same as `parse`, but returns `null` if parsing fails |
+
+The `parse` method throws if parsing fails or calls `onError` if supplied.
+
+The `num` class defines the `-` unary operator.
+It also defines the following binary operators:
+`+`, `-`, `*`, `/`, `<`, `<=`, `==`, `>`, `>=`, and `~/` (truncating division).
+TODO: Where is the binary operator `!=` is defined? It's not on the `int` class.
+
+### int Class
+
+The `int` class adds the following properties
+to those defined in the `num` class.
+
+| Property    | Description                              |
+| ----------- | ---------------------------------------- |
+| `bitLength` | minimum number of bits required to store |
+| `isEven`    | `bool` indicating if even                |
+| `isOdd`     | `bool` indicating if odd                 |
+
+The `int` class adds the following methods
+to those defined in the `num` class.
+
+| Method                            | Description                                                 |
+| --------------------------------- | ----------------------------------------------------------- |
+| `gcd(int other)`                  | returns greatest common divisor                             |
+| `modInverse(int other)`           | returns modular multiplicative inverse?                     |
+| `modPow(int exponent, int other)` | returns number to power exponent mod other                  |
+| `toRadixString(int radix)`        | returns `String` representation of number with a given base |
+| `toSigned(int width)`             | returns least significant bits, retaining sign bit          |
+| `toUnsigned(int width)`           | returns least significant bits, not retaining sign bit      |
+
+The `toRadixString` method can be used to convert decimal values to hexidecimal.
+For example, `255.toRadixString(16)` returns the `String` `ff`.
+
+The `int` class adds the following binary operators
+to those defined in the `num` class.
+`&` (bitwise and), `|` (bitwise or),
+`^` (bitwise exclusive or), `~` (bitwise negate)
+`<<` (signed bit shift left), `>>` (signed bit shift right),
+and `>>>` (unsigned bit shift right).
+Note that there is no operator for unsigned bit shift left.
+
+### double Class
+
+The `double` class adds no properties, instance methods,
+static methods, or operators beyond those defined in the `num` class.
+
+The `double` class defines the following constants
+that must be prefixed with `double.`.
+
+| Constant           | Description                                        |
+| ------------------ | -------------------------------------------------- |
+| `infinity`         | represents an infinite positive number             |
+| `maxFinite`        | largest positive floating point number in 64 bits  |
+| `minPositive`      | smallest positive floating point number in 64 bits |
+| `nan`              | represents a value that is not a valid number      |
+| `negativeInfinity` | represents an infinite negative number             |
+
+### `math` Package
+
+The Dart `math` package class defines the following properties.
+
+| Property | Description |
+| -------- | ----------- |
+| ``       |             |
+
+The Dart `math` package defines the following methods.
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
+
+## String type
+
+The `String` class defines the following properties.
+
+| Property | Description |
+| -------- | ----------- |
+| ``       |             |
+
+The `String` class defines the following instance methods.
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
 
 ## Generics
 
@@ -302,9 +492,18 @@ passed to other functions, and returned from other functions.
 
 Named function definitions have the following syntax:
 
-````dart
+```dart
 return-type fn-name(parameter-list) {
   statements
+}
+```
+
+Anonymous functions have similar syntax, but the name is omitted
+and the return type is inferred.
+
+```dart
+(parameter-list {
+   statements
 }
 ```
 
@@ -358,7 +557,7 @@ main() {
 ```
 
 Anonymous function definitions are written like named function definitions,
-but omit the name.  For example:
+but omit the name. For example:
 
 ```dart
 var numbers = [3, 7, 9];
@@ -517,7 +716,7 @@ class Point {
   // This is an alternate way to write the constructor above.
   //Point(this.x, this.y);
 }
-````
+```
 
 If a class doesn't define a constructor,
 a no-arg constructor that doesn't initialize any properties is provided.
@@ -624,8 +823,8 @@ The `Iterable` class provides the following properties:
 | ------------ | --------------------------------------------------- |
 | `first`      | first element                                       |
 | `hashCode`   | hash code                                           |
-| `isEmpty`    | boolean indicating if there are no elements         |
-| `isNotEmpty` | boolean indicating if there is at least one element |
+| `isEmpty`    | `bool` indicating if there are no elements          |
+| `isNotEmpty` | `bool` indicating if there is at least one element  |
 | `iterator`   | for iterating over elements                         |
 | `last`       | last element                                        |
 | `length`     | number of elements                                  |
@@ -635,11 +834,11 @@ The `Iterable` class provides the following methods (some omitted):
 
 | Method                                                           | Description                                                                        |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `any(bool test(E element))`                                      | returns a boolean indicating if any element passes the test                        |
-| `contains(Object? element)`                                      | returns a boolean indicating if a given element is present                         |
+| `any(bool test(E element))`                                      | returns a `bool` indicating if any element passes the test                         |
+| `contains(Object? element)`                                      | returns a `bool` indicating if a given element is present                          |
 | `elementAt(int index)`                                           | returns the element at a given index or throws `RangeError` if not found           |
 | `expand<T>(Iterable<T> toElements(E element))`                   | returns an `Iterable` over the flatten elements                                    |
-| `every(bool test(E element))`                                    | returns a boolean indicating if every element passes the test                      |
+| `every(bool test(E element))`                                    | returns a `bool` indicating if every element passes the test                       |
 | `firstWhere(bool test(E element), {E orElse()?})`                | returns the first element that passes the test or the `orElse` value               |
 | `fold<T>(T initialValue, T combine(T previousValue, E element))` | reduces a collection to a single value                                             |
 | `forEach(void action(E element))`                                | invokes `action` on each element                                                   |
@@ -736,21 +935,21 @@ No properties are added beyond those provided by the `Iterable` class.
 In addition to the methods provided by the `Iterable` class,
 `Set` objects support the following methods (some omitted):
 
-| Method                                  | Description                                                                   |
-| --------------------------------------- | ----------------------------------------------------------------------------- |
-| `add(E value)`                          | adds an element                                                               |
-| `addAll(Iterable<E> iterable)`          | adds all the elements in another collection                                   |
-| `clear()`                               | removes all the elements                                                      |
-| `contains(Object? value)`               | returns a boolean indicating if an element is present                         |
-| `containsAll(Iterable<Object>? other)`  | returns a boolean indicating if all the elements in an `Iterable` are present |
-| `difference(Set<Object?> other)`        | returns a new `Set` containing all elements in this one not found in `other`  |
-| `lookup(Object? object)`                | returns `object` if found in the `Set` or `null`                              |
-| `remove(Object? value)`                 | removes the first occurrence of an element                                    |
-| `removeAll(Iterable<Object?> elements)` | removes all the elements in an `Iterable`                                     |
-| `removeWhere(bool test(E element))`     | removes all elements that pass a test                                         |
-| `retainAll(Iterable<Object?> elements)` | removes all the elements not in an `Iterable`                                 |
-| `retainWhere(bool test(E element))`     | removes all elements that do not pass a test                                  |
-| `union(Set<E> other)`                   | returns a new `Set` containing all elements in this one and `other`           |
+| Method                                  | Description                                                                  |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| `add(E value)`                          | adds an element                                                              |
+| `addAll(Iterable<E> iterable)`          | adds all the elements in another collection                                  |
+| `clear()`                               | removes all the elements                                                     |
+| `contains(Object? value)`               | returns a `bool` indicating if an element is present                         |
+| `containsAll(Iterable<Object>? other)`  | returns a `bool` indicating if all the elements in an `Iterable` are present |
+| `difference(Set<Object?> other)`        | returns a new `Set` containing all elements in this one not found in `other` |
+| `lookup(Object? object)`                | returns `object` if found in the `Set` or `null`                             |
+| `remove(Object? value)`                 | removes the first occurrence of an element                                   |
+| `removeAll(Iterable<Object?> elements)` | removes all the elements in an `Iterable`                                    |
+| `removeWhere(bool test(E element))`     | removes all elements that pass a test                                        |
+| `retainAll(Iterable<Object?> elements)` | removes all the elements not in an `Iterable`                                |
+| `retainWhere(bool test(E element))`     | removes all elements that do not pass a test                                 |
+| `union(Set<E> other)`                   | returns a new `Set` containing all elements in this one and `other`          |
 
 ### Maps
 
@@ -768,8 +967,8 @@ The `Map` class provides the following properties:
 | Property     | Description                                                            |
 | ------------ | ---------------------------------------------------------------------- |
 | `entries`    | `Iterable` over `MapEntry` objects (have `key` and `value` properties) |
-| `isEmpty`    | boolean indicating if there are no key/value pairs                     |
-| `isNotEmpty` | boolean indicating if there is at least one key/value pair             |
+| `isEmpty`    | `bool` indicating if there are no key/value pairs                      |
+| `isNotEmpty` | `bool` indicating if there is at least one key/value pair              |
 | `keys`       | `Iterable` over keys                                                   |
 | `length`     | number of key/value pairs                                              |
 | `values`     | `Iterable` over values                                                 |
@@ -781,8 +980,8 @@ The `Map` class provides the following methods (some omitted):
 | `addAll(Map<K, V> other)`                               | adds all key/value pairs in another `Map` to this one                    |
 | `addEntries(Iterable<MapEntry<K, V>> newEntries)`       | adds all `MapEntry` objects in an `Iterable`                             |     |
 | `clear()`                                               | removes all key/value pairs                                              |
-| `containsKey(Object? key)`                              | returns a boolean indicating if a given key is present                   |
-| `containsValue(Object? value)`                          | returns a boolean indicating if a given value is present                 |
+| `containsKey(Object? key)`                              | returns a `bool` indicating if a given key is present                    |
+| `containsValue(Object? value)`                          | returns a `bool` indicating if a given value is present                  |
 | `forEach(void action(K key, V value)`                   | executes a function on each key/value pair                               |
 | `map<K2, V2>(MapEntry<K2, V2> convert(K key, V value))` | returns a new `Map` created by calling a function on each key/value pair |
 | `putIfAbsent(K key, V ifAbsent()`                       | returns the value for a given key and adds a value if not present        |
@@ -851,14 +1050,16 @@ double add(double n1, double n2) {
 }
 ```
 
+Test files should be placed in the `test` directory
+and have names that end with `_test.dart`.
 Here is an example of test code in the file `test/math_test.dart`.
 
 ```dart
 import 'package:test/test.dart';
-import 'package:hello_world/math.dart';
+import 'package:demo/math.dart'; // demo is the project name
 
 void main() {
-  test('add works', () {
+  test('add works', () { // passing an anonymous function to test
     expect(add(2, 3), 5);
   });
 }
@@ -873,6 +1074,12 @@ but subsequent runs are much faster.
 If all of the tests pass, this will output "All tests passed!".
 Otherwise it will output "Some tests failed."
 along with expected and actual results.
+
+To run tests from inside VS Code, click the beaker icon in the left nav
+to display the test panel.
+Then click one of the play buttons at the top (non-debug or debug).
+To run a single test, hover over it in the test panel
+to reveal play buttons and click one of them.
 
 Tests can be grouped into suites sing the `group` function
 which takes a name and a function that
