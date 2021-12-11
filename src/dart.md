@@ -348,15 +348,6 @@ final List<int> l5 = const [1, 2];
 print(l5); // [1, 2]
 ```
 
-## Print
-
-The `print` function takes a single argument and writes it to stdout.
-If the argument is not a `String`,
-it will be converted to a `String` which is output.
-If the argument is a `String`, it can use interpolation.
-To include the value of a variable in a `String`, use `$variableName`.
-To include the value of an expression in a `String`, use `${expression}`.
-
 ## Types
 
 All values in Dart are objects from some class.
@@ -475,6 +466,10 @@ The `num` class defines the following operators:
 | binary comparison               | `<`, `<=`, `==`, `!=`, `>`, `>=`                                   |
 | shorthand arithmetic assignment | `+=`, `-=`, `*=`, `/=`, `~/=` (truncating division), `%=` (modulo) |
 
+The `++` and `--` operators can be placed on either side of a `num` value.
+When on the left, a new value is computed before it is used.
+When on the right, the value is used before a new value is computed.
+
 The fact that these operators take operands of type `num`
 means that they can be applied to mixed operands
 where one is an `int` and the other is a `double`.
@@ -503,7 +498,7 @@ to those defined in the `num` class (some omitted):
 | `toSigned(int width)`      | returns least significant bits, retaining sign bit          |
 | `toUnsigned(int width)`    | returns least significant bits, not retaining sign bit      |
 
-The `toRadixString` method can be used to convert decimal values to hexidecimal.
+The `toRadixString` method can be used to convert decimal values to hexadecimal.
 For example, `255.toRadixString(16)` returns the `String` `ff`.
 
 The `int` class adds the following operators
@@ -590,8 +585,13 @@ Instances of the `String` class hold an immutable sequence of UTF-16 characters.
 TODO: Why does the name of this type start uppercase,
 TODO: but the `bool`, `int`, and `double` types start lowercase?
 
-Literal strings are delimited by single or double quotes.
-Multiline strings are limited by a pair of three single or double quotes.
+Literal single line strings are delimited by single or double quotes.
+Literal multi-line strings are delimited
+by a pair of three single or double quotes.
+
+Literal strings can use interpolations.
+To include the value of a variable, include `$variableName`.
+To include the value of an expression, include `${expression}`.
 
 Strings can be concatenated with the `+` operator.
 
@@ -920,6 +920,32 @@ The `Map` class provides the following methods (some omitted):
 | `removeWhere(bool test(K key, V value)`                 | removes all key/value pairs that pass a test                             |
 | `update(K key, V update(V value)`                       | updates the value for a given key to the value returned by a function    |
 | `updateAll(V update(K key, V value)`                    | updates all values to the value returned by a function                   |
+
+## Print
+
+The `print` function takes a single argument and writes it to stdout.
+
+If the argument is not a `String`, it will be converted
+to a `String` by calling the `toString` method of the value.
+For example:
+
+```dart
+class Dog {
+  String name;
+  String breed;
+
+  // Shorthand constructor - see Class section
+  Dog(this.name, this.breed);
+
+  @override
+  String toString() => '$name is a $breed.';
+}
+
+void main() {
+  var d = Dog('Comet', 'Whippet');
+  print(d); // Comet is a Whippet.
+}
+```
 
 ## Functions
 
