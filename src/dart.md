@@ -516,6 +516,35 @@ The `String` class defines the following binary operators:
 `==` (same code units), `[index]` (gets code unit at index).
 For example `'ho ' * 3` creates the `String` `'ho ho ho '`.
 
+## Regular Expressions
+
+A `Pattern` is a `RegExp` or `String` object.
+
+Dart regular expressions use the same syntax as JavaScript regular expressions.
+
+A `RegExp` object is created with `RegExp(r'reg-ex-here');`.
+The following example creates a regular expression that
+matches strings starting with "The " and ending with " win.".
+It captures all the characters in between.
+
+```dart
+var re = RegExp(r'^The (.+) win\.$');
+var s = 'The St. Louis Blues win.';
+var match = re.firstMatch(s);
+if (match != null) {
+  print(match.group(1)); // St. Louis Blues
+}
+```
+
+The optional named constructor parameter `multiLine`
+has a `bool` value that indicates whether it should
+match at the beginning and end of every line.
+This defaults to `false`.
+
+The optional named constructor parameter `caseSensitive`
+has a `bool` value that indicates whether matching should be case-sensitive.
+This defaults to `true`.
+
 ## Generics
 
 TODO: Add this.
