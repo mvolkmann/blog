@@ -484,32 +484,32 @@ The `String` class defines the following properties.
 
 The `String` class defines the following instance methods.
 
-| Method                                                                                | Description |
-| ------------------------------------------------------------------------------------- | ----------- |
-| `allMatches(String s, [int start = 0])`                                               |             |
-| `codeUnitAt(int index)`                                                               |             |
-| `compareTo(String other)`                                                             |             |
-| `contains(Pattern other, [int start = 0])`                                            |             |
-| `endsWith(String other)`                                                              |             |
-| `indexOf(Pattern other, [int start = 0])`                                             |             |
-| `lastIndexOf(Pattern other, [int start = 0])`                                         |             |
-| `matchAsPrefix(String other, [int start = 0])`                                        |             |
-| `padLeft(int width, [String padding = ' '])`                                          |             |
-| `padRight(int width, [String padding = ' '])`                                         |             |
-| `replaceAll(Pattern from, String replace)`                                            |             |
-| `replaceAllMapped(Pattern from, String replace(Match match), [int start = 0])`        |             |
-| `replaceFirst(Pattern from, [int start = 0])`                                         |             |
-| `replaceFirstMapped(Pattern from, String replace(Match match), [int start = 0])`      |             |
-| `replaceRange(int start, int? end, String replacement)`                               |             |
-| `split(Pattern pattern)`                                                              |             |
-| `splitMapJoin(Pattern pattern, {String onMatch(Match)?, String onNonMatch(String)?})` |             |
-| `startsWith(Pattern pattern, [int index = 0])`                                        |             |
-| `substring(int start, [int? end])`                                                    |             |
-| `toLowerCase()`                                                                       |             |
-| `toUpperCase()`                                                                       |             |
-| `trim()`                                                                              |             |
-| `trimLeft()`                                                                          |             |
-| `trimRight()`                                                                         |             |
+| Method                                                                                | Description                                                                                          |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `allMatches(String s, [int start = 0])`                                               | returns `Iterable<Match>` over matching substrings                                                   |
+| `codeUnitAt(int index)`                                                               | returns code unit at a given index; same as `[index]`                                                |
+| `compareTo(String other)`                                                             | returns comparator value typically used for sorting                                                  |
+| `contains(Pattern other, [int start = 0])`                                            | returns `bool` indicating if a pattern is contained                                                  |
+| `endsWith(String other)`                                                              | returns `bool` indicating if ends with another `String`                                              |
+| `indexOf(Pattern other, [int start = 0])`                                             | returns `int` index where a `Pattern` is first found                                                 |
+| `lastIndexOf(Pattern other, [int start = 0])`                                         | returns `int` index where a `Pattern` is last found                                                  |
+| `matchAsPrefix(String other, [int start = 0])`                                        | returns first `Match` or null of a `String`                                                          |
+| `padLeft(int width, [String padding = ' '])`                                          | returns new `String` padded on left to a given width                                                 |
+| `padRight(int width, [String padding = ' '])`                                         | returns new `String` padded on right to a given width                                                |
+| `replaceAll(Pattern from, String replace)`                                            | returns new `String` where all `Pattern` matches are replaced by a `String`                          |
+| `replaceAllMapped(Pattern from, String replace(Match match), [int start = 0])`        | returns new `String` where all `Pattern` matches are replaced by a computed value                    |
+| `replaceFirst(Pattern from, String to, [int start = 0])`                              | returns new `String` where first `Pattern` match is replaced by a `String`                           |
+| `replaceFirstMapped(Pattern from, String replace(Match match), [int start = 0])`      | returns new `String` where first `Pattern` match is replaced by a computed value                     |
+| `replaceRange(int start, int? end, String replacement)`                               | returns new `String` where a substring range is replaced by a `String`                               |
+| `split(Pattern pattern)`                                                              | returns a `List<String>` of substrings obtained by splitting on a `Pattern`                          |
+| `splitMapJoin(Pattern pattern, {String onMatch(Match)?, String onNonMatch(String)?})` | returns new `String` formed by splitting on a `Pattern`, converting parts, and concatenating results |
+| `startsWith(Pattern pattern, [int index = 0])`                                        | returns `bool` indicating if starts with another `String`                                            |
+| `substring(int start, [int? end])`                                                    | returns new `String` that is a substring defined by indexes                                          |
+| `toLowerCase()`                                                                       | returns new `String` where all characters are converted to lowercase                                 |
+| `toUpperCase()`                                                                       | returns new `String` where all characters are convert to uppercase                                   |
+| `trim()`                                                                              | returns new `String` formed by removing leading and trailing whitespace                              |
+| `trimLeft()`                                                                          | returns new `String` formed by removing leading whitespace                                           |
+| `trimRight()`                                                                         | returns new `String` formed by removing trailing whitespace                                          |
 
 The `String` class defines the following binary operators:
 `+` (concatenation), `*` (repeated n times),
