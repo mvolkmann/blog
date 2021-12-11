@@ -459,17 +459,62 @@ The Dart `math` package defines the following functions.
 
 ## String type
 
+Instances of the `String` class hold an immutable sequence of UTF-16 characters.
+
+Literal strings are delimited by single or double quotes.
+Multiline strings are limited by a pair of three single or double quotes.
+
+Strings can be concatenated with the `+` operator.
+
+An individual character (code unit) can be
+accessed with square brackets and an index.
+For example, the first character of a string `s` is obtained with `s[0]`.
+
+Defining custom classes that extend the `String` class is not allowed.
+
 The `String` class defines the following properties.
 
-| Property | Description |
-| -------- | ----------- |
-| ``       |             |
+| Property     | Description                                  |
+| ------------ | -------------------------------------------- |
+| `codeUnits`  | a `List<int>` of the characters (code units) |
+| `isEmpty`    | `bool` indicating if empty                   |
+| `isNotEmpty` | `bool` indicating if not empty               |
+| `length`     | number of characters (code units)            |
+| `runes`      | `Iterable` over the characters (code units)  |
 
 The `String` class defines the following instance methods.
 
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
+| Method                                                                                | Description |
+| ------------------------------------------------------------------------------------- | ----------- |
+| `allMatches(String s, [int start = 0])`                                               |             |
+| `codeUnitAt(int index)`                                                               |             |
+| `compareTo(String other)`                                                             |             |
+| `contains(Pattern other, [int start = 0])`                                            |             |
+| `endsWith(String other)`                                                              |             |
+| `indexOf(Pattern other, [int start = 0])`                                             |             |
+| `lastIndexOf(Pattern other, [int start = 0])`                                         |             |
+| `matchAsPrefix(String other, [int start = 0])`                                        |             |
+| `padLeft(int width, [String padding = ' '])`                                          |             |
+| `padRight(int width, [String padding = ' '])`                                         |             |
+| `replaceAll(Pattern from, String replace)`                                            |             |
+| `replaceAllMapped(Pattern from, String replace(Match match), [int start = 0])`        |             |
+| `replaceFirst(Pattern from, [int start = 0])`                                         |             |
+| `replaceFirstMapped(Pattern from, String replace(Match match), [int start = 0])`      |             |
+| `replaceRange(int start, int? end, String replacement)`                               |             |
+| `split(Pattern pattern)`                                                              |             |
+| `splitMapJoin(Pattern pattern, {String onMatch(Match)?, String onNonMatch(String)?})` |             |
+| `startsWith(Pattern pattern, [int index = 0])`                                        |             |
+| `substring(int start, [int? end])`                                                    |             |
+| `toLowerCase()`                                                                       |             |
+| `toUpperCase()`                                                                       |             |
+| `trim()`                                                                              |             |
+| `trimLeft()`                                                                          |             |
+| `trimRight()`                                                                         |             |
+
+The `String` class defines the following binary operators:
+`+` (concatenation), `*` (repeated n times),
+`==` (same code units), `[index]` (gets code unit at index).
+For example `'ho ' * 3` creates the `String` `'ho ho ho '`.
 
 ## Generics
 
