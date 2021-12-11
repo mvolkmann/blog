@@ -770,7 +770,22 @@ TODO: Add more detail on this?
 
 ### Generic Types
 
-TODO: Add this.
+Generics, a.k.a parameterized types,
+allow writing functions, classes, and methods
+whose functionality differs based on the types of values
+passed when they are called.
+Using generics often reduces code duplication.
+
+The collection classes make use of this.
+For example, when creating a `List`, the type of
+the elements it can hold are specific using generics.
+The following are equivalent:
+
+```dart
+List<int> numbers = [1, 2, 3]; // type is specified on variable
+var numbers = <int>[1, 2, 3]; // type is specified on value
+var numbers = [1, 2, 3]; // type is inferred
+```
 
 ## Collection Types
 
@@ -1308,6 +1323,10 @@ void main() {
 ```
 
 TODO: Describe the `late` keyword.
+
+Classes can be marked as `abstract` which prevents creating instances of them.
+Abstract classes are useful for defining
+functionality to be inherited by other classes.
 
 ## Method Cascades
 
