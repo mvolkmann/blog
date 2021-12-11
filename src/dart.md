@@ -410,17 +410,52 @@ that must be prefixed with `double.`.
 
 ### `math` Package
 
-The Dart `math` package class defines the following properties.
+The Dart `math` package does not need to be installed,
+but it must be imported in order to use the items it defines.
 
-| Property | Description |
-| -------- | ----------- |
-| ``       |             |
+```dart
+import 'dart:math';
+```
 
-The Dart `math` package defines the following methods.
+The Dart `math` package class defines the following classes.
 
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
+| Class                             | Description                                                              |
+| --------------------------------- | ------------------------------------------------------------------------ |
+| `MutableRectangle<T extends num>` | represents a mutable rectangle that is axis-aligned (not rotated)        |
+| `Point<T extends num>`            | represents an immutable 2D point                                         |
+| `Random`                          | provides methods that generate random `bool`, `int`, and `double` values |
+| `Rectangle<T extends num>`        | represents an immutable rectangle that is axis-aligned (not rotated)     |
+
+The Dart `math` package class defines the following constants.
+
+| Constant  | Description                          |
+| --------- | ------------------------------------ |
+| `e`       | base of natural logarithms; 2.718... |
+| `ln2`     | natural log of 2; 0.693...           |
+| `ln10`    | natural log of 10; 2.30...           |
+| `log2e`   | base 2 log of e; 1.44...             |
+| `log10e`  | base 10 log of e; 0.434...           |
+| `pi`      | PI; 3.14...                          |
+| `sqrt1_2` | square root of 1/2; 0.707...         |
+| `sqrt2`   | square root of 2; 1.41...            |
+
+The Dart `math` package defines the following functions.
+
+| Function                           | Description                     |
+| ---------------------------------- | ------------------------------- |
+| `acos(num x)`                      | returns arc cosine of x         |
+| `asin(num x)`                      | returns arc sine of x           |
+| `atan(num x)`                      | returns arc tangent of x        |
+| `atan2(num x, num y)`              | returns arc tangent of y/x      |
+| `cos(num radians)`                 | returns cosine of radians       |
+| `exp(num x)`                       | returns e to the power x        |
+| `log(num x)`                       | returns log base e of x         |
+| `max<T extends num>(num T, num T)` | returns larger of two numbers   |
+| `min<T extends num>(num T, num T)` | returns smaller of two numbers  |
+| `pow(num x, num exponent)`         | returns x to the power exponent |
+| `sin(num radians)`                 | returns sine of radians         |
+| `sqrt(num x)`                      | returns square root of x        |
+| `tan(num radians)`                 | returns tangent of radians      |
 
 ## String type
 
