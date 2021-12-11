@@ -303,13 +303,13 @@ enum Color { red, green, blue }
 TODO: What does Dart call the enum cases?
 TODO: Can enum cases be assigned values?
 
-## Number types
+### Number types
 
 The `int` and `double` classes are the only number types supported by Dart.
 Both inherit from the `num` class and both represent 64-bit values.
 Custom classes are not allowed to inherit from the `num` class.
 
-### num Class
+#### num Class
 
 Variables declared with the `num` type can be
 assigned both `int` and `double` values.
@@ -361,7 +361,7 @@ It also defines the following binary operators:
 `+`, `-`, `*`, `/`, `<`, `<=`, `==`, `>`, `>=`, and `~/` (truncating division).
 TODO: Where is the binary operator `!=` is defined? It's not on the `int` class.
 
-### int Class
+#### int Class
 
 The `int` class adds the following properties
 to those defined in the `num` class:
@@ -393,7 +393,7 @@ to those defined in the `num` class:
 and `>>>` (unsigned bit shift right).
 Note that there is no operator for unsigned bit shift left.
 
-### double Class
+#### double Class
 
 The `double` class adds no properties, instance methods,
 static methods, or operators beyond those defined in the `num` class.
@@ -409,7 +409,7 @@ that must be prefixed with `double.`:
 | `nan`              | represents a value that is not a valid number      |
 | `negativeInfinity` | represents an infinite negative number             |
 
-### `math` Package
+#### `math` Package
 
 The Dart `math` package does not need to be installed,
 but it must be imported in order to use the items it defines.
@@ -458,9 +458,12 @@ The Dart `math` package defines the following functions:
 | `sqrt(num x)`                      | returns square root of x        |
 | `tan(num radians)`                 | returns tangent of radians      |
 
-## String type
+### String type
 
 Instances of the `String` class hold an immutable sequence of UTF-16 characters.
+
+TODO: Why does the name of this type start uppercase,
+TODO: but the `bool`, `int`, and `double` types start lowercase?
 
 Literal strings are delimited by single or double quotes.
 Multiline strings are limited by a pair of three single or double quotes.
@@ -517,7 +520,7 @@ The `String` class defines the following binary operators:
 `==` (same code units), `[index]` (gets code unit at index).
 For example `'ho ' * 3` creates the `String` `'ho ho ho '`.
 
-## Regular Expressions
+### Regular Expressions
 
 A `Pattern` is a `RegExp` or `String` object.
 
@@ -567,7 +570,28 @@ The optional named constructor parameter `caseSensitive`
 has a `bool` value that indicates whether matching should be case-sensitive.
 This defaults to `true`.
 
-## Generics
+### Type Casts
+
+The `as` keyword casts a value of one type to another.
+For example, if a variable of type `Object` currently holds a `String` value,
+it can be cast to a `String` so that
+methods from that class can be called on the value.
+
+```dart
+Object obj = 'test';
+print((obj as String).length);
+```
+
+This throws if the cast is not valid.
+
+```dart
+Object obj = 7;
+print((obj as String).length); // throws "Script error."
+```
+
+TODO: Add more detail on this?
+
+### Generic Types
 
 TODO: Add this.
 
