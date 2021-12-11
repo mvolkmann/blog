@@ -250,6 +250,113 @@ Comments in Dart are written like in many other programming languages.
 - Documentation comments begin with `///` or are delimited by `/**` and `*/`.
   These are used to generate documentation from source files.
 
+## Variables
+
+There are three ways to declare variables.
+
+1. With a type
+
+   For example, `int score;`
+
+1. With the `var` keyword
+
+   The type is obtained through type inference.
+   For example, these are equivalent:
+
+   ```dart
+   int n = 19;
+   var n = 19;
+   ```
+
+   When a `var` declaration is not initialized,
+   it is treated like `dynamic` which is described next.
+
+1. With the `dynamic` keyword
+
+   The type can change throughout the lifetime of the variable
+   based on the value currently assigned. For example:
+
+   ```dart
+   dynamic n = 19;
+   n = 3.14;
+   n = "changed";
+   ```
+
+To get the runtime type of an object, access the `runtimeType` property.
+This has a type of `Type` which has a `toString` method.
+
+## Immutability with const and final
+
+Variables whose values are known at compile-time
+should be declared with the keyword `const`.
+Class properties whose values are known at compile-time
+should be declared with the keywords `static const`.
+This prevents assigning a new value,
+and also prevents modifying the value
+(for example, adding elements to a `List`).
+
+The `const` keyword can be applied to top-level variables,
+local variables in functions, and class static properties.
+It cannot be applied to class instance properties.
+
+Variables and class properties whose values should be
+set once at run-time and never changed
+should be declared with the keyword `final`.
+This prevents assigning a new value,
+but does not prevent modifying the value.
+
+The meaning of the `const` and `final` keywords depends on
+whether they are applied to a variable or its initial value.
+There are two aspects to consider,
+whether a new value can be assigned to the variable and
+whether its value can be modified (ex. adding elements to a list).
+This is demonstrated in the code below.
+
+```dart
+List<int> l1 = [1, 2];
+//var l1 = <int>[1, 2]; // alternate way to write previous line
+l1.add(3); // can modify current value
+l1 = [3, 4]; // can assign a new value
+print(l1); // [3, 4]
+
+// const here makes the variable AND its value immutable.
+// Adding const after "=" and before the value is redundant.
+const List<int> l2 = [1, 2];
+//l2.add(3); // throws UnsupportedError at runtime
+//l2 = [3, 4]; // cannot assign a new value
+print(l2); // [1, 2]
+
+// Adding const only before the value makes the value immutable,
+// but a new value can be assigned to the variable.
+List<int> l3 = const [1, 2];
+//l3.add(3); // throws UnsupportedError at runtime
+l3 = [3, 4]; // can assign a new value
+print(l3); // [3, 4]
+
+// final here means the variable can only be assigned a value once,
+// but its value can be modified.
+final List<int> l4 = [1, 2];
+l4.add(3); // can modify current value
+//l4 = [3, 4]; // cannot assign a new value
+print(l4); // [1, 2, 3]
+
+// This is the same as the l2 declaration
+// which is preferred because it is shorter.
+final List<int> l5 = const [1, 2];
+//l5.add(3); // throws UnsupportedError at runtime
+//l5 = [3, 4]; // cannot assign a new value
+print(l5); // [1, 2]
+```
+
+## Print
+
+The `print` function takes a single argument and writes it to stdout.
+If the argument is not a `String`,
+it will be converted to a `String` which is output.
+If the argument is a `String`, it can use interpolation.
+To include the value of a variable in a `String`, use `$variableName`.
+To include the value of an expression in a `String`, use `${expression}`.
+
 ## Types
 
 All values in Dart are objects from some class.
@@ -595,49 +702,197 @@ TODO: Add more detail on this?
 
 TODO: Add this.
 
-## Variables
+## Collection Types
 
-There are three ways to declare variables.
+Dart provides many collection classes.
+Built-in collection classes that can be used without importing
+include `List`, `Set`, and `Map`.
+Other collection classes are defined in the package `dart:collection`
+and must be imported. These include `DoubleLinkedQueue`, `HashMap`, `HashSet`,
+`LinkedHashMap`, `LinkedHashSet`, `LinkedList`, `ListQueue`, `Queue`,
+and `SplayTreeMap`, `SplayTreeSet`.
 
-1. With a type
+### Iterable
 
-   For example, `int score;`
+The following collection classes all have `Iterable` as a superclass:
+`DoubleLinkedQueue`, `IterableBase`, `IterableMixin`,
+`LinkedList`, `List`, `ListQueue`, `Queue`, `Runes`, and `Set`.
 
-1. With the `var` keyword
+Any `Iterable` collection can be used in a `for-in` loop
+to iterate over its elements.
 
-   The type is obtained through type inference.
-   For example, these are equivalent:
+The `Iterable` class provides the following properties:
 
-   ```dart
-   int n = 19;
-   var n = 19;
-   ```
+| Property     | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `first`      | first element                                       |
+| `hashCode`   | hash code                                           |
+| `isEmpty`    | `bool` indicating if there are no elements          |
+| `isNotEmpty` | `bool` indicating if there is at least one element  |
+| `iterator`   | for iterating over elements                         |
+| `last`       | last element                                        |
+| `length`     | number of elements                                  |
+| `single`     | if only one element, that element; otherwise throws |
 
-   When a `var` declaration is not initialized,
-   it is treated like `dynamic` which is described next.
+The `Iterable` class provides the following methods (some omitted):
 
-1. With the `dynamic` keyword
+| Method                                                           | Description                                                                        |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `any(bool test(E element))`                                      | returns a `bool` indicating if any element passes the test                         |
+| `contains(Object? element)`                                      | returns a `bool` indicating if a given element is present                          |
+| `elementAt(int index)`                                           | returns the element at a given index or throws `RangeError` if not found           |
+| `expand<T>(Iterable<T> toElements(E element))`                   | returns an `Iterable` over the flatten elements                                    |
+| `every(bool test(E element))`                                    | returns a `bool` indicating if every element passes the test                       |
+| `firstWhere(bool test(E element), {E orElse()?})`                | returns the first element that passes the test or the `orElse` value               |
+| `fold<T>(T initialValue, T combine(T previousValue, E element))` | reduces a collection to a single value                                             |
+| `forEach(void action(E element))`                                | invokes `action` on each element                                                   |
+| `join([String separator = ""])`                                  | returns a string formed by concatenating the string representation of each element |
+| `lastWhere(bool test(E element), {E orElse()?})`                 | returns the last element that passes the test or the `orElse` value                |
+| `map<T>(T toElement(E e))`                                       | returns a new collection of the results of calling a function on each element      |
+| `reduce(E combine(E value, E element))`                          | same as `fold` but uses the first element as the initial value                     |
+| `singleWhere(bool test(E element), {E orElse()?})`               | similar to `firstWhere`, but throws if more than one element passes the test       |
+| `skip(int count)`                                                | returns an `Iterable` that begins after `count` elements                           |
+| `skipWhile(bool test(E value))`                                  | returns an `Iterable` that begins after the initial elements that pass the test    |
+| `take(int count)`                                                | returns an `Iterable` over the first `count` elements (opposite of `skip`)         |
+| `takeWhile(bool test(E value))`                                  | returns an `Iterable` that ends after the initial elements that pass the test      |
+| `toList(bool growable = true)`                                   | creates and returns a `List` containing the same elements                          |
+| `toSet()`                                                        | creates and returns a `Set` containing the same elements                           |
+| `toString()`                                                     | returns the `String` representation                                                |
+| `where(bool test(E element))`                                    | returns an `Iterable` over all the elements that pass the test                     |
+| `whereType<T>()`                                                 | returns a new collection of elements with a given type                             |
 
-   The type can change throughout the lifetime of the variable
-   based on the value currently assigned. For example:
+### Lists
 
-   ```dart
-   dynamic n = 19;
-   n = 3.14;
-   n = "changed";
-   ```
+Arrays in Dart are represented by `List` objects.
+A literal array is written as a
+comma-separated list of values surrounded by square brackets.
+For example, `var numbers = [3, 7, 19];`
 
-To get the runtime type of an object, access the `runtimeType` property.
-This has a type of `Type` which has a `toString` method.
+To iterate over the elements of a `List`,
+use a `for/in` loop or the `forEach` method.
+For example:
 
-## Print
+```dart
+const dogs = ['Maisey', 'Ramsay', 'Oscar', 'Comet'];
 
-The `print` function takes a single argument and writes it to stdout.
-If the argument is not a `String`,
-it will be converted to a `String` which is output.
-If the argument is a `String`, it can use interpolation.
-To include the value of a variable in a `String`, use `$variableName`.
-To include the value of an expression in a `String`, use `${expression}`.
+for (var dog in dogs) {
+  print(dog);
+}
+
+// Same as above.
+dogs.forEach((dog) => print(dog));
+
+// Same as above.
+dogs.forEach(print);
+```
+
+The `List` class is generic and implements extends from the `Iterable` class.
+It provides many constructors that support creating lists that are
+empty,
+filled to a given length with the same value,
+filled from another `Iterable` (either modifiable or unmodifiable),
+filled by a generator function,
+
+In addition to the properties provided by the `Iterable` class,
+`List` objects support the following properties:
+
+| Property   | Description                                      |
+| ---------- | ------------------------------------------------ |
+| `reversed` | an `Iterable` over the elements in reverse order |
+
+In addition to the methods provided by the `Iterable` class,
+`List` objects support the following methods (some omitted):
+
+| Method                                                       | Description                                                    |
+| ------------------------------------------------------------ | -------------------------------------------------------------- |
+| `add(E value)`                                               | adds an element                                                |
+| `addAll(Iterable<E> iterable)`                               | adds all the elements in another collection                    |
+| `clear()`                                                    | removes all the elements                                       |
+| `fillRange(int start, int end, [E? fillValue])`              | sets the elements in a range to a given value or null          |
+| `getRange(int start, int end)`                               | returns an `Iterable` over a range of elements                 |
+| `indexOf(E element, [int start = 0])`                        | return the first index of a given element                      |
+| `indexWhere(bool test(E element), [int start = 0])`          | returns the index of the first element that passes the test    |
+| `insert(int index, E element)`                               | inserts an element at a given index                            |
+| `insertAll(int index, Iterable<E> iterable)`                 | inserts all the elements in an `Iterable` at a given index     |
+| `lastIndexOf(E element, [int? start])`                       | returns the last index of a given element                      |
+| `lastIndexWhere(bool test(E element), [int? start])`         | returns the index of the last element that passes the test     |
+| `remove(Object? value)`                                      | removes the first occurrence of an element                     |
+| `removeAt(int index)`                                        | removes the element at a given index                           |
+| `removeLast()`                                               | removes the last element; use `removeAt(0)` to remove first    |
+| `removeRange(int start, int end)`                            | removes the elements in a given range                          |
+| `removeWhere(bool test(E element))`                          | removes all elements that pass a test                          |
+| `replaceRange(int start, int end, Iterable<E> replacements)` | replaces elements in a given range with those in an `Iterable` |
+| `retainWhere(bool test(E element))`                          | removes all elements that do not pass a test                   |
+| `shuffle([Random? random])`                                  | randomly reorders the elements in place                        |
+| `sort([int compare(E a, E b)?])`                             | sorts the elements in place using a `Comparator` function      |
+| `sublist(int start, [int? end])`                             | returns a new `List` that is a subset                          |
+
+### Sets
+
+A `Set` is an unordered collection of unique values.
+A literal set is written as a
+comma-separated list of values surrounded by curly braces.
+For example, `var numbers = {3, 7, 19};`
+
+No properties are added beyond those provided by the `Iterable` class.
+
+In addition to the methods provided by the `Iterable` class,
+`Set` objects support the following methods (some omitted):
+
+| Method                                  | Description                                                                  |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| `add(E value)`                          | adds an element                                                              |
+| `addAll(Iterable<E> iterable)`          | adds all the elements in another collection                                  |
+| `clear()`                               | removes all the elements                                                     |
+| `contains(Object? value)`               | returns a `bool` indicating if an element is present                         |
+| `containsAll(Iterable<Object>? other)`  | returns a `bool` indicating if all the elements in an `Iterable` are present |
+| `difference(Set<Object?> other)`        | returns a new `Set` containing all elements in this one not found in `other` |
+| `lookup(Object? object)`                | returns `object` if found in the `Set` or `null`                             |
+| `remove(Object? value)`                 | removes the first occurrence of an element                                   |
+| `removeAll(Iterable<Object?> elements)` | removes all the elements in an `Iterable`                                    |
+| `removeWhere(bool test(E element))`     | removes all elements that pass a test                                        |
+| `retainAll(Iterable<Object?> elements)` | removes all the elements not in an `Iterable`                                |
+| `retainWhere(bool test(E element))`     | removes all elements that do not pass a test                                 |
+| `union(Set<E> other)`                   | returns a new `Set` containing all elements in this one and `other`          |
+
+### Maps
+
+A `Map` is a collection of key/value pairs.
+The keys and values can have any type.
+Unlike `List` and `Set`, this class is not a subclass of `Iterable`.
+
+A literal map is written as a
+comma-separated list of pairs surrounded by curly braces.
+Each pair is written as a key followed by a colon and a value.
+When a key is a string, it must be delimited by single or double quotes.
+
+The `Map` class provides the following properties:
+
+| Property     | Description                                                            |
+| ------------ | ---------------------------------------------------------------------- |
+| `entries`    | `Iterable` over `MapEntry` objects (have `key` and `value` properties) |
+| `isEmpty`    | `bool` indicating if there are no key/value pairs                      |
+| `isNotEmpty` | `bool` indicating if there is at least one key/value pair              |
+| `keys`       | `Iterable` over keys                                                   |
+| `length`     | number of key/value pairs                                              |
+| `values`     | `Iterable` over values                                                 |
+
+The `Map` class provides the following methods (some omitted):
+
+| Method                                                  | Description                                                              |
+| ------------------------------------------------------- | ------------------------------------------------------------------------ | --- |
+| `addAll(Map<K, V> other)`                               | adds all key/value pairs in another `Map` to this one                    |
+| `addEntries(Iterable<MapEntry<K, V>> newEntries)`       | adds all `MapEntry` objects in an `Iterable`                             |     |
+| `clear()`                                               | removes all key/value pairs                                              |
+| `containsKey(Object? key)`                              | returns a `bool` indicating if a given key is present                    |
+| `containsValue(Object? value)`                          | returns a `bool` indicating if a given value is present                  |
+| `forEach(void action(K key, V value)`                   | executes a function on each key/value pair                               |
+| `map<K2, V2>(MapEntry<K2, V2> convert(K key, V value))` | returns a new `Map` created by calling a function on each key/value pair |
+| `putIfAbsent(K key, V ifAbsent()`                       | returns the value for a given key and adds a value if not present        |
+| `remove(Object? key)`                                   | removes a key/value pair if present                                      |
+| `removeWhere(bool test(K key, V value)`                 | removes all key/value pairs that pass a test                             |
+| `update(K key, V update(V value)`                       | updates the value for a given key to the value returned by a function    |
+| `updateAll(V update(K key, V value)`                    | updates all values to the value returned by a function                   |
 
 ## Functions
 
@@ -953,214 +1208,10 @@ void main() {
 
 TODO: Describe the `late` keyword.
 
-## Collections
-
-Dart provides many collection classes.
-Built-in collection classes that can be used without importing
-include `List`, `Set`, and `Map`.
-Other collection classes are defined in the package `dart:collection`
-and must be imported. These include `DoubleLinkedQueue`, `HashMap`, `HashSet`,
-`LinkedHashMap`, `LinkedHashSet`, `LinkedList`, `ListQueue`, `Queue`,
-and `SplayTreeMap`, `SplayTreeSet`.
-
-### Iterable
-
-The following collection classes all have `Iterable` as a superclass:
-`DoubleLinkedQueue`, `IterableBase`, `IterableMixin`,
-`LinkedList`, `List`, `ListQueue`, `Queue`, `Runes`, and `Set`.
-
-Any `Iterable` collection can be used in a `for-in` loop
-to iterate over its elements.
-
-The `Iterable` class provides the following properties:
-
-| Property     | Description                                         |
-| ------------ | --------------------------------------------------- |
-| `first`      | first element                                       |
-| `hashCode`   | hash code                                           |
-| `isEmpty`    | `bool` indicating if there are no elements          |
-| `isNotEmpty` | `bool` indicating if there is at least one element  |
-| `iterator`   | for iterating over elements                         |
-| `last`       | last element                                        |
-| `length`     | number of elements                                  |
-| `single`     | if only one element, that element; otherwise throws |
-
-The `Iterable` class provides the following methods (some omitted):
-
-| Method                                                           | Description                                                                        |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `any(bool test(E element))`                                      | returns a `bool` indicating if any element passes the test                         |
-| `contains(Object? element)`                                      | returns a `bool` indicating if a given element is present                          |
-| `elementAt(int index)`                                           | returns the element at a given index or throws `RangeError` if not found           |
-| `expand<T>(Iterable<T> toElements(E element))`                   | returns an `Iterable` over the flatten elements                                    |
-| `every(bool test(E element))`                                    | returns a `bool` indicating if every element passes the test                       |
-| `firstWhere(bool test(E element), {E orElse()?})`                | returns the first element that passes the test or the `orElse` value               |
-| `fold<T>(T initialValue, T combine(T previousValue, E element))` | reduces a collection to a single value                                             |
-| `forEach(void action(E element))`                                | invokes `action` on each element                                                   |
-| `join([String separator = ""])`                                  | returns a string formed by concatenating the string representation of each element |
-| `lastWhere(bool test(E element), {E orElse()?})`                 | returns the last element that passes the test or the `orElse` value                |
-| `map<T>(T toElement(E e))`                                       | returns a new collection of the results of calling a function on each element      |
-| `reduce(E combine(E value, E element))`                          | same as `fold` but uses the first element as the initial value                     |
-| `singleWhere(bool test(E element), {E orElse()?})`               | similar to `firstWhere`, but throws if more than one element passes the test       |
-| `skip(int count)`                                                | returns an `Iterable` that begins after `count` elements                           |
-| `skipWhile(bool test(E value))`                                  | returns an `Iterable` that begins after the initial elements that pass the test    |
-| `take(int count)`                                                | returns an `Iterable` over the first `count` elements (opposite of `skip`)         |
-| `takeWhile(bool test(E value))`                                  | returns an `Iterable` that ends after the initial elements that pass the test      |
-| `toList(bool growable = true)`                                   | creates and returns a `List` containing the same elements                          |
-| `toSet()`                                                        | creates and returns a `Set` containing the same elements                           |
-| `toString()`                                                     | returns the `String` representation                                                |
-| `where(bool test(E element))`                                    | returns an `Iterable` over all the elements that pass the test                     |
-| `whereType<T>()`                                                 | returns a new collection of elements with a given type                             |
-
-### Lists
-
-Arrays in Dart are represented by `List` objects.
-A literal array is written as a
-comma-separated list of values surrounded by square brackets.
-For example, `var numbers = [3, 7, 19];`
-
-To iterate over the elements of a `List`,
-use a `for/in` loop or the `forEach` method.
-For example:
-
-```dart
-const dogs = ['Maisey', 'Ramsay', 'Oscar', 'Comet'];
-
-for (var dog in dogs) {
-  print(dog);
-}
-
-// Same as above.
-dogs.forEach((dog) => print(dog));
-
-// Same as above.
-dogs.forEach(print);
-```
-
-The `List` class is generic and implements extends from the `Iterable` class.
-It provides many constructors that support creating lists that are
-empty,
-filled to a given length with the same value,
-filled from another `Iterable` (either modifiable or unmodifiable),
-filled by a generator function,
-
-In addition to the properties provided by the `Iterable` class,
-`List` objects support the following properties:
-
-| Property   | Description                                      |
-| ---------- | ------------------------------------------------ |
-| `reversed` | an `Iterable` over the elements in reverse order |
-
-In addition to the methods provided by the `Iterable` class,
-`List` objects support the following methods (some omitted):
-
-| Method                                                       | Description                                                    |
-| ------------------------------------------------------------ | -------------------------------------------------------------- |
-| `add(E value)`                                               | adds an element                                                |
-| `addAll(Iterable<E> iterable)`                               | adds all the elements in another collection                    |
-| `clear()`                                                    | removes all the elements                                       |
-| `fillRange(int start, int end, [E? fillValue])`              | sets the elements in a range to a given value or null          |
-| `getRange(int start, int end)`                               | returns an `Iterable` over a range of elements                 |
-| `indexOf(E element, [int start = 0])`                        | return the first index of a given element                      |
-| `indexWhere(bool test(E element), [int start = 0])`          | returns the index of the first element that passes the test    |
-| `insert(int index, E element)`                               | inserts an element at a given index                            |
-| `insertAll(int index, Iterable<E> iterable)`                 | inserts all the elements in an `Iterable` at a given index     |
-| `lastIndexOf(E element, [int? start])`                       | returns the last index of a given element                      |
-| `lastIndexWhere(bool test(E element), [int? start])`         | returns the index of the last element that passes the test     |
-| `remove(Object? value)`                                      | removes the first occurrence of an element                     |
-| `removeAt(int index)`                                        | removes the element at a given index                           |
-| `removeLast()`                                               | removes the last element; use `removeAt(0)` to remove first    |
-| `removeRange(int start, int end)`                            | removes the elements in a given range                          |
-| `removeWhere(bool test(E element))`                          | removes all elements that pass a test                          |
-| `replaceRange(int start, int end, Iterable<E> replacements)` | replaces elements in a given range with those in an `Iterable` |
-| `retainWhere(bool test(E element))`                          | removes all elements that do not pass a test                   |
-| `shuffle([Random? random])`                                  | randomly reorders the elements in place                        |
-| `sort([int compare(E a, E b)?])`                             | sorts the elements in place using a `Comparator` function      |
-| `sublist(int start, [int? end])`                             | returns a new `List` that is a subset                          |
-
-### Sets
-
-A `Set` is an unordered collection of unique values.
-A literal set is written as a
-comma-separated list of values surrounded by curly braces.
-For example, `var numbers = {3, 7, 19};`
-
-No properties are added beyond those provided by the `Iterable` class.
-
-In addition to the methods provided by the `Iterable` class,
-`Set` objects support the following methods (some omitted):
-
-| Method                                  | Description                                                                  |
-| --------------------------------------- | ---------------------------------------------------------------------------- |
-| `add(E value)`                          | adds an element                                                              |
-| `addAll(Iterable<E> iterable)`          | adds all the elements in another collection                                  |
-| `clear()`                               | removes all the elements                                                     |
-| `contains(Object? value)`               | returns a `bool` indicating if an element is present                         |
-| `containsAll(Iterable<Object>? other)`  | returns a `bool` indicating if all the elements in an `Iterable` are present |
-| `difference(Set<Object?> other)`        | returns a new `Set` containing all elements in this one not found in `other` |
-| `lookup(Object? object)`                | returns `object` if found in the `Set` or `null`                             |
-| `remove(Object? value)`                 | removes the first occurrence of an element                                   |
-| `removeAll(Iterable<Object?> elements)` | removes all the elements in an `Iterable`                                    |
-| `removeWhere(bool test(E element))`     | removes all elements that pass a test                                        |
-| `retainAll(Iterable<Object?> elements)` | removes all the elements not in an `Iterable`                                |
-| `retainWhere(bool test(E element))`     | removes all elements that do not pass a test                                 |
-| `union(Set<E> other)`                   | returns a new `Set` containing all elements in this one and `other`          |
-
-### Maps
-
-A `Map` is a collection of key/value pairs.
-The keys and values can have any type.
-Unlike `List` and `Set`, this class is not a subclass of `Iterable`.
-
-A literal map is written as a
-comma-separated list of pairs surrounded by curly braces.
-Each pair is written as a key followed by a colon and a value.
-When a key is a string, it must be delimited by single or double quotes.
-
-The `Map` class provides the following properties:
-
-| Property     | Description                                                            |
-| ------------ | ---------------------------------------------------------------------- |
-| `entries`    | `Iterable` over `MapEntry` objects (have `key` and `value` properties) |
-| `isEmpty`    | `bool` indicating if there are no key/value pairs                      |
-| `isNotEmpty` | `bool` indicating if there is at least one key/value pair              |
-| `keys`       | `Iterable` over keys                                                   |
-| `length`     | number of key/value pairs                                              |
-| `values`     | `Iterable` over values                                                 |
-
-The `Map` class provides the following methods (some omitted):
-
-| Method                                                  | Description                                                              |
-| ------------------------------------------------------- | ------------------------------------------------------------------------ | --- |
-| `addAll(Map<K, V> other)`                               | adds all key/value pairs in another `Map` to this one                    |
-| `addEntries(Iterable<MapEntry<K, V>> newEntries)`       | adds all `MapEntry` objects in an `Iterable`                             |     |
-| `clear()`                                               | removes all key/value pairs                                              |
-| `containsKey(Object? key)`                              | returns a `bool` indicating if a given key is present                    |
-| `containsValue(Object? value)`                          | returns a `bool` indicating if a given value is present                  |
-| `forEach(void action(K key, V value)`                   | executes a function on each key/value pair                               |
-| `map<K2, V2>(MapEntry<K2, V2> convert(K key, V value))` | returns a new `Map` created by calling a function on each key/value pair |
-| `putIfAbsent(K key, V ifAbsent()`                       | returns the value for a given key and adds a value if not present        |
-| `remove(Object? key)`                                   | removes a key/value pair if present                                      |
-| `removeWhere(bool test(K key, V value)`                 | removes all key/value pairs that pass a test                             |
-| `update(K key, V update(V value)`                       | updates the value for a given key to the value returned by a function    |
-| `updateAll(V update(K key, V value)`                    | updates all values to the value returned by a function                   |
-
-## Constants
-
-Variables whose values are known at compile-time
-should be declared with the keyword `const`.
-Class properties whose values are known at compile-time
-should be declared with the keywords `static const`.
-When the type is a object or array, the contents also cannot be changed.
-
-Variables and class properties whose values are
-set once at run-time and then never changed
-should be declared with the keyword `final`.
-When the type is a object or array, the contents can be changed.
-
 ## Method Cascades
 
-Method cascades provide a way to invoke several methods on the same object.
+Method cascades provide a way to invoke several methods on the same object
+using the `..` operator.
 TODO: Add more detail.
 
 ## Mixins
