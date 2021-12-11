@@ -374,6 +374,9 @@ Dart supports the following built-in basic types:
 - `String`: sequence of UTF-16 characters delimited by single or double quotes
 - `Never`: has no values
 
+The `void` type is used at the return type
+of functions that do not return anything.
+
 The keyword `null` refers to the only instance of the `Null` type.
 
 The `Never` type is the type of `throw` expressions,
@@ -463,10 +466,21 @@ The `num` class defines the following static methods:
 
 The `parse` method throws if parsing fails or calls `onError` if supplied.
 
-The `num` class defines the `-` unary operator.
-It also defines the following binary operators:
-`+`, `-`, `*`, `/`, `<`, `<=`, `==`, `>`, `>=`, and `~/` (truncating division).
-TODO: Where is the binary operator `!=` is defined? It's not on the `int` class.
+The `num` class defines the following operators:
+
+| Category                        | Operators                                                          |
+| ------------------------------- | ------------------------------------------------------------------ |
+| unary                           | `-`, `++` (increment by 1), `--` (decrement by 1)                  |
+| binary arithmetic               | `+`, `-`, `*`, `/`, `~/` (truncating division), `%` (modulo)       |
+| binary comparison               | `<`, `<=`, `==`, `!=`, `>`, `>=`                                   |
+| shorthand arithmetic assignment | `+=`, `-=`, `*=`, `/=`, `~/=` (truncating division), `%=` (modulo) |
+
+The fact that these operators take operands of type `num`
+means that they can be applied to mixed operands
+where one is an `int` and the other is a `double`.
+
+Dividing by zero results in the `double.infinity` constant
+rather than throwing an error.
 
 #### int Class
 
@@ -492,12 +506,16 @@ to those defined in the `num` class (some omitted):
 The `toRadixString` method can be used to convert decimal values to hexidecimal.
 For example, `255.toRadixString(16)` returns the `String` `ff`.
 
-The `int` class adds the following binary operators
+The `int` class adds the following operators
 to those defined in the `num` class:
-`&` (bitwise and), `|` (bitwise or),
-`^` (bitwise exclusive or), `~` (bitwise negate)
-`<<` (signed bit shift left), `>>` (signed bit shift right),
-and `>>>` (unsigned bit shift right).
+
+| Category                       | Operators                                                                             |
+| ------------------------------ | ------------------------------------------------------------------------------------- |
+| bitwise                        | `&` (and), `\|`(or),`^`(xor),`~` (negate)                                             |
+| bit shift                      | `<<` (signed shift left), `>>` (signed shift right), and `>>>` (unsigned shift right) |
+| shorthand bitwise assignment   | `&=` (and), `\|=`(or),`^=` (xor)                                                      |
+| shorthand bit shift assignment | `<<=`, `>>-`, and `>>>==`                                                             |
+
 Note that there is no operator for unsigned bit shift left.
 
 #### double Class
@@ -626,6 +644,15 @@ The `String` class defines the following binary operators:
 `+` (concatenation), `*` (repeated n times),
 `==` (same code units), `[index]` (gets code unit at index).
 For example `'ho ' * 3` creates the `String` `'ho ho ho '`.
+
+The table below summarized converting between numbers and strings.
+
+| Conversion           | Code              |
+| -------------------- | ----------------- |
+| `int` to `String`    | `i.toString()`    |
+| `double` to `String` | `d.toString()`    |
+| `String` to `int`    | `int.parse(s)`    |
+| `String` to `double` | `double.parse(s)` |
 
 ### Regular Expressions
 
