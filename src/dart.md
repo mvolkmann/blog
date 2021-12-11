@@ -311,7 +311,7 @@ Custom classes are not allowed to inherit from the `num` class.
 
 ### num Class
 
-The `num` class defines the following properties.
+The `num` class defines the following properties:
 
 | Property     | Description                                              |
 | ------------ | -------------------------------------------------------- |
@@ -321,7 +321,7 @@ The `num` class defines the following properties.
 | `isNegative` | `bool` indicating whether the number is negative         |
 | `sign`       | -1, 0, or 1                                              |
 
-The `num` class defines the following instance methods.
+The `num` class defines the following instance methods:
 
 | Method                                       | Description                                                          |
 | -------------------------------------------- | -------------------------------------------------------------------- |
@@ -344,7 +344,7 @@ The `num` class defines the following instance methods.
 | `truncate()`                                 | returns `int` result of truncating fractional digits                 |
 | `truncateToDouble()`                         | same as `truncate`, but returns a `double`                           |
 
-The `num` class defines the following static methods.
+The `num` class defines the following static methods:
 
 | Method                                              | Description                                          |
 | --------------------------------------------------- | ---------------------------------------------------- |
@@ -361,7 +361,7 @@ TODO: Where is the binary operator `!=` is defined? It's not on the `int` class.
 ### int Class
 
 The `int` class adds the following properties
-to those defined in the `num` class.
+to those defined in the `num` class:
 
 | Property    | Description                              |
 | ----------- | ---------------------------------------- |
@@ -370,22 +370,20 @@ to those defined in the `num` class.
 | `isOdd`     | `bool` indicating if odd                 |
 
 The `int` class adds the following methods
-to those defined in the `num` class.
+to those defined in the `num` class (some omitted):
 
-| Method                            | Description                                                 |
-| --------------------------------- | ----------------------------------------------------------- |
-| `gcd(int other)`                  | returns greatest common divisor                             |
-| `modInverse(int other)`           | returns modular multiplicative inverse?                     |
-| `modPow(int exponent, int other)` | returns number to power exponent mod other                  |
-| `toRadixString(int radix)`        | returns `String` representation of number with a given base |
-| `toSigned(int width)`             | returns least significant bits, retaining sign bit          |
-| `toUnsigned(int width)`           | returns least significant bits, not retaining sign bit      |
+| Method                     | Description                                                 |
+| -------------------------- | ----------------------------------------------------------- |
+| `gcd(int other)`           | returns greatest common divisor                             |
+| `toRadixString(int radix)` | returns `String` representation of number with a given base |
+| `toSigned(int width)`      | returns least significant bits, retaining sign bit          |
+| `toUnsigned(int width)`    | returns least significant bits, not retaining sign bit      |
 
 The `toRadixString` method can be used to convert decimal values to hexidecimal.
 For example, `255.toRadixString(16)` returns the `String` `ff`.
 
 The `int` class adds the following binary operators
-to those defined in the `num` class.
+to those defined in the `num` class:
 `&` (bitwise and), `|` (bitwise or),
 `^` (bitwise exclusive or), `~` (bitwise negate)
 `<<` (signed bit shift left), `>>` (signed bit shift right),
@@ -398,7 +396,7 @@ The `double` class adds no properties, instance methods,
 static methods, or operators beyond those defined in the `num` class.
 
 The `double` class defines the following constants
-that must be prefixed with `double.`.
+that must be prefixed with `double.`:
 
 | Constant           | Description                                        |
 | ------------------ | -------------------------------------------------- |
@@ -417,7 +415,7 @@ but it must be imported in order to use the items it defines.
 import 'dart:math';
 ```
 
-The Dart `math` package class defines the following classes.
+The Dart `math` package class defines the following classes:
 
 | Class                             | Description                                                              |
 | --------------------------------- | ------------------------------------------------------------------------ |
@@ -426,7 +424,7 @@ The Dart `math` package class defines the following classes.
 | `Random`                          | provides methods that generate random `bool`, `int`, and `double` values |
 | `Rectangle<T extends num>`        | represents an immutable rectangle that is axis-aligned (not rotated)     |
 
-The Dart `math` package class defines the following constants.
+The Dart `math` package class defines the following constants:
 
 | Constant  | Description                          |
 | --------- | ------------------------------------ |
@@ -439,7 +437,7 @@ The Dart `math` package class defines the following constants.
 | `sqrt1_2` | square root of 1/2; 0.707...         |
 | `sqrt2`   | square root of 2; 1.41...            |
 
-The Dart `math` package defines the following functions.
+The Dart `math` package defines the following functions:
 
 | Function                           | Description                     |
 | ---------------------------------- | ------------------------------- |
@@ -472,7 +470,7 @@ For example, the first character of a string `s` is obtained with `s[0]`.
 
 Defining custom classes that extend the `String` class is not allowed.
 
-The `String` class defines the following properties.
+The `String` class defines the following properties:
 
 | Property     | Description                                  |
 | ------------ | -------------------------------------------- |
@@ -482,7 +480,7 @@ The `String` class defines the following properties.
 | `length`     | number of characters (code units)            |
 | `runes`      | `Iterable` over the characters (code units)  |
 
-The `String` class defines the following instance methods.
+The `String` class defines the following instance methods:
 
 | Method                                                                                | Description                                                                                          |
 | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -524,7 +522,7 @@ Dart regular expressions use the same syntax as JavaScript regular expressions.
 
 A `RegExp` object is created with `RegExp(r'reg-ex-here');`.
 
-The `String` class defines the following properties.
+The `String` class defines the following properties:
 
 | Property          | Description                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------- |
@@ -534,7 +532,7 @@ The `String` class defines the following properties.
 | `isUnicode`       | `bool` indicating if whether Unicode matching will be performed (defaults to `false`) |
 | `pattern`         | regular expression as a `String`                                                      |
 
-The `RegExp` class defines the following instance methods.
+The `RegExp` class defines the following instance methods:
 
 | Method                                         | Description                                                                            |
 | ---------------------------------------------- | -------------------------------------------------------------------------------------- |
