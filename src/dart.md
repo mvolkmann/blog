@@ -484,6 +484,18 @@ The fact that these operators take operands of type `num`
 means that they can be applied to mixed operands
 where one is an `int` and the other is a `double`.
 
+Even though operator definitions look like methods,
+they cannot be called like methods.
+For example, the documentation for `+` operator in the `num` class
+shows `num operator +(num other);`.
+
+```dart
+var n = 2;
+n.+(3); // This does not work!
+n += 3; // This works.
+print(n);
+```
+
 Dividing by zero results in the `double.infinity` constant
 rather than throwing an error.
 
