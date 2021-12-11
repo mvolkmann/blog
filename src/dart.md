@@ -311,6 +311,9 @@ Custom classes are not allowed to inherit from the `num` class.
 
 ### num Class
 
+Variables declared with the `num` type can be
+assigned both `int` and `double` values.
+
 The `num` class defines the following properties:
 
 | Property     | Description                                              |
