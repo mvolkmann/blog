@@ -799,7 +799,7 @@ A `RegExp` object is created with `RegExp(r'reg-ex-here');`.
 Recall that placing "r" before a literal string creates a "raw string"
 that doesn't treat the `\` character specially.
 
-The `String` class defines the following properties:
+The `RegExp` class defines the following properties:
 
 | Property          | Description                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------- |
@@ -840,6 +840,29 @@ This defaults to `false`.
 The optional named constructor parameter `caseSensitive`
 has a `bool` value that indicates whether matching should be case-sensitive.
 This defaults to `true`.
+
+The `RegExpMatch` class extends the `Match` class.
+Instances of this class describe a regular expression matching result.
+
+The `RegExpMatch` class defines the following properties:
+
+| Property     | Description                                        |
+| ------------ | -------------------------------------------------- |
+| `end`        | index where the match ends plus 1                  |
+| `groupCount` | number of captured groups                          |
+| `input`      | entire string from which the match was found       |
+| `pattern`    | a `Pattern` object describing the matching pattern |
+| `start`      | index where the match begins                       |
+
+The `RegExpMatch` class defines the following instance methods:
+
+| Method                           | Description                                                |
+| -------------------------------- | ---------------------------------------------------------- |
+| `group(int groupIndex)`          | `String` matched at a given group index                    |
+| `groups(List<int> groupIndices)` | List of `String` values matched at specified group indices |
+
+The `[index]` operator can be used in place of
+the `group` method retrieve the same value.
 
 ### DateTime class
 
@@ -1345,9 +1368,9 @@ The `Map` class provides the following properties:
 The `Map` class provides the following methods (some omitted):
 
 | Method                                                  | Description                                                              |
-| ------------------------------------------------------- | ------------------------------------------------------------------------ | --- |
+| ------------------------------------------------------- | ------------------------------------------------------------------------ |
 | `addAll(Map<K, V> other)`                               | adds all key/value pairs in another `Map` to this one                    |
-| `addEntries(Iterable<MapEntry<K, V>> newEntries)`       | adds all `MapEntry` objects in an `Iterable`                             |     |
+| `addEntries(Iterable<MapEntry<K, V>> newEntries)`       | adds all `MapEntry` objects in an `Iterable`                             |
 | `clear()`                                               | removes all key/value pairs                                              |
 | `containsKey(Object? key)`                              | returns a `bool` indicating if a given key is present                    |
 | `containsValue(Object? value)`                          | returns a `bool` indicating if a given value is present                  |
@@ -1358,6 +1381,10 @@ The `Map` class provides the following methods (some omitted):
 | `removeWhere(bool test(K key, V value)`                 | removes all key/value pairs that pass a test                             |
 | `update(K key, V update(V value)`                       | updates the value for a given key to the value returned by a function    |
 | `updateAll(V update(K key, V value)`                    | updates all values to the value returned by a function                   |
+
+The `MapEntry` class represents a single key/value pair from a `Map`.
+To create one, call the `MapEntry` constructor passing it a key and a value.
+These objects have `key` and `value` properties and a `toString` method.
 
 ## Print
 
