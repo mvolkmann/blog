@@ -905,6 +905,52 @@ The `DateTime` class defines the following instance methods:
 | `toString()`                       | returns `String` in human-readable format                                                 |
 | `toUtc()`                          | returns `DateTime` converted to UTC                                                       |
 
+### Duration class
+
+The `Duration` class is used to create objects that represent a span to time.
+The constructor takes the following named parameters
+that are all optional and default to zero:
+`days`, `hours`, `minutes`, `seconds`, `milliseconds`, and `microseconds`.
+
+The `Duration` class defines the following constants:
+
+- `HOURS_PER_DAY`
+- `MICROSECONDS_PER_DAY`
+- `MICROSECONDS_PER_HOUR`
+- `MICROSECONDS_PER_MILLISECOND`
+- `MICROSECONDS_PER_MINUTE`
+- `MICROSECONDS_PER_SECOND`
+- `MILLISECONDS_PER_DAY`
+- `MILLISECONDS_PER_HOUR`
+- `MILLISECONDS_PER_MINUTE`
+- `MILLISECONDS_PER_SECOND`
+- `MINUTES_PER_DAY`
+- `MINUTES_PER_HOUR`
+- `SECONDS_PER_DAY`
+- `SECONDS_PER_HOUR`
+- `SECONDS_PER_MINUTE`
+- `ZERO`
+
+The `Duration` class defines the following properties:
+
+| Property         | Description                        |
+| ---------------- | ---------------------------------- |
+| `inDays`         | `int` number of whole days         |
+| `inHours`        | `int` number of whole hours        |
+| `inMicroseconds` | `int` number of whole microseconds |
+| `inMilliseconds` | `int` number of whole milliseconds |
+| `inMinutes`      | `int` number of whole minutes      |
+| `inSeconds`      | `int` number of whole seconds      |
+| `isNegative`     | `bool` indicating if negative      |
+
+The `Duration` class defines the following instance methods:
+
+| Method                      | Description                                                       |
+| --------------------------- | ----------------------------------------------------------------- |
+| `abs()`                     | returns new `Duration` that is the absolute value of the receiver |
+| `compareTo(Duration other)` | returns comparator value, often used for sorting                  |
+| `toString()`                | returns `String` representation                                   |
+
 ### Type Casts
 
 The `as` keyword casts a value of one type to another.
