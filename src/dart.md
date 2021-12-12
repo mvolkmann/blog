@@ -311,7 +311,10 @@ whether they are applied to a variable or its initial value.
 There are two aspects to consider,
 whether a new value can be assigned to the variable and
 whether its value can be modified (ex. adding elements to a list).
-This is demonstrated in the code below.
+
+The following code demonstrates using the `const` and `final` keywords
+in conjunction with declaring and creating `List` collection objects.
+The same principles apply to other kinds of collections.
 
 ```dart
 List<int> l1 = [1, 2];
@@ -893,6 +896,19 @@ A literal array is written as a
 comma-separated list of values surrounded by square brackets.
 For example, `var numbers = [3, 7, 19];`
 
+There are three ways to declare and initialize a variable that holds a `List`.
+
+```dart
+// type List<int> is inferred
+var l1 = [1, 2, 3];
+
+// type List<int> is specified on the value
+var l1 = <int>[1, 2, 3];
+
+// type List<int> is specified on the variable
+List<int> l1 = [1, 2, 3];
+```
+
 To iterate over the elements of a `List`,
 use a `for/in` loop or the `forEach` method.
 For example:
@@ -918,14 +934,19 @@ The following examples demonstrate this:
 ```dart
 import 'dart:math';
 
-// Creates a List of int values from start to end - 1.
+// Creates a List of int values from start to end - 1
+// using the List.generate constructor.
 Iterable<int> range(int start, int end) =>
     List.generate(end - start, (i) => start + i);
 
 void main() {
   // Get the squares of a odd numbers in the range [0, 10).
-  var numbers = [for (var i in range(0, 10)) if (i % 2 == 1) pow(i, 2)];
-  print(numbers); // [1, 9, 25, 49, 81]
+  var squares = [for (var i = 1; i < 10; i += 2) pow(i, 2)];
+
+  // Same using a different approach.
+  // Get the squares of a odd numbers in the range [0, 10).
+  squares = [for (var i in range(0, 10)) if (i % 2 == 1) pow(i, 2)];
+  print(squares); // [1, 9, 25, 49, 81]
 
   // Find all the [x, y, z] values where
   // x^2 + y^2 = z^2 up to a maximum value of 20.
@@ -986,12 +1007,17 @@ A `Set` is an unordered collection of unique values.
 A literal set is written as a
 comma-separated list of values surrounded by curly braces.
 
-The following demonstrates three ways to declare and create a `Set`:
+There are three ways to declare and initialize a variable that holds a `Set`.
 
 ```dart
-var colors = {'red', 'green', 'blue'}; // element type is inferred
-var colors = <String>{'red', 'green', 'blue'}; // value type is specified
-Set<String> colors = {'red', 'green', 'blue'}; // variable type is specified
+// type Set<String> is inferred
+var colors = {'red', 'green', 'blue'};
+
+// type Set<String> is specified on the value
+var colors = <String>{'red', 'green', 'blue'};
+
+// type Set<String> is specified on the variable
+Set<String> colors = {'red', 'green', 'blue'};
 ```
 
 No properties are added beyond those provided by the `Iterable` class.
