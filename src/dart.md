@@ -69,6 +69,56 @@ Recommended VS Code extensions for Dart include:
 
   "To easily add dependencies to your Dart and Flutter project's pubspec.yaml."
 
+## pub.dev
+
+{% aTargetBlank "https://pub.dev", "pub.dev" %} is the
+official package repository for Dart and Flutter apps.
+Packages here are listed in five catagories:
+"Flutter Favorites", "Most popular packages", "Top Flutter packages",
+"Top Dart packages", and "Package of the Week".
+
+There are two kinds of packages.
+"Library packages" are used as dependencies of other packages.
+"Application packages" are meant to be run
+and can depend on library packages.
+
+Some notable packages to consider using include:
+
+- http
+
+  "A composable, multi-platform, Future-based API for HTTP requests."
+
+- json_serializable
+
+  "Automatically generate code for converting to and from JSON
+  by annotating Dart classes."
+
+- hive
+
+  "Lightweight and blazing fast key-value database"
+
+- lints
+
+  "Official Dart lint rules. Defines the 'core' and 'recommended'
+  set of lints suggested by the Dart team."  
+  Use of these lint rules is enabled by the following line
+  found in the `analysis_options.yaml` file:
+
+  ```yaml
+  include: package:lints/recommended.yaml
+  ```
+
+  Edit the `analysis_options.yaml` file to configure the use of specific rules.
+  An older set of lint rules called `pedantic` is deprecated.
+  Another set of lint rules to consider using is {% aTargetBlank
+  "https://pub.dev/packages/very_good_analysis", "Very Good Analysis" %}.
+
+The official Dart package manager is `pub`.
+This is similar to `npm` for Node.js.
+In the same way that `npm` relies on the files
+`package.json` and `package-lock.json` to manage dependencies,
+`pub` relies on the files `pubspec.yaml` and `pubspec.lock` (also a YAML file).
+
 ## Creating and Running Programs
 
 Dart source files have a `.dart` file extension.
@@ -98,12 +148,25 @@ makes it easy to publish packages to
 and much more.
 
 To create a new Dart project, enter `dart create {project-name}`.
+Dart prefers underscores over hyphens in names.
 For example:
 
-- `dart create hello_world`  
-   Dart prefers underscores over hyphens in names.
-- `cd hello_world`
-- `dart run` (outputs "Hello world!")
+```bash
+dart create hello_world
+```
+
+To run a Dart project, cd to the project directory and enter `dart run`.
+For example:
+
+```dart
+cd hello_world`
+dart run # outputs "Hello world!"
+```
+
+To analyze a Dart project for syntax errors and lint rule violations,
+enter `dart analyze`.
+TODO: Why does this always output "No issues found!" even when
+TODO: there are syntax errors and lint rule violations?
 
 The `dart create` command creates the following files and directories:
 
@@ -127,8 +190,9 @@ The `dart create` command creates the following files and directories:
 
 - `lib`
 
-  This directory is not provided, but should be created to hold `.dart` files
-  that define functions and classes used by other `.dart` files in the project.
+  This directory is not provided, but should be created to
+  hold `.dart` files that define libraries of functions and classes
+  used by other `.dart` files in the project.
 
   Files in the `bin` directory import files from here using the syntax
   `import 'package:{project-name}/{file-name}.dart';`
@@ -199,6 +263,10 @@ import 'package:hello_world/math.dart';
 - `README.md`
 
   This MarkDown file describes the project.
+
+A Dart project is actually a Dart package.
+This means it is possible for it to be deployed to pub.dev
+and its public API can be shared with other Dart packages.
 
 ## Dart SDK
 
