@@ -1052,6 +1052,19 @@ comma-separated list of pairs surrounded by curly braces.
 Each pair is written as a key followed by a colon and a value.
 When a key is a string, it must be delimited by single or double quotes.
 
+There are three ways to declare and initialize a variable that holds a `Map`.
+
+```dart
+// type Map<String, int> is inferred
+var colorMap = {'red': 1, 'green': 2, 'blue': 3};
+
+// type Map<String, int> is specified on the value
+var colorMap = <String, int>{'red': 1, 'green': 2, 'blue': 3};
+
+// type Map<String, int> is specified on the variable
+Map<String, int> colorMap = {'red': 1, 'green': 2, 'blue': 3};
+```
+
 The `Map` class provides the following properties:
 
 | Property     | Description                                                            |
