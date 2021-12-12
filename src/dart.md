@@ -480,6 +480,11 @@ The `++` and `--` operators can be placed on either side of a `num` value.
 When on the left, a new value is computed before it is used.
 When on the right, the value is used before a new value is computed.
 
+Note that there is no `^` or `**` for exponentiation
+like in many other programming languages.
+Instead, import the `dart:math` package and
+use the `pow(number, exponent)` function.
+
 The fact that these operators take operands of type `num`
 means that they can be applied to mixed operands
 where one is an `int` and the other is a `double`.
@@ -904,6 +909,34 @@ dogs.forEach((dog) => print(dog));
 
 // Same as above.
 dogs.forEach(print);
+```
+
+Literal lists can include logic to determine the elements,
+referred to as "list comprehension".
+The following examples demonstrate this:
+
+```dart
+import 'dart:math';
+
+// Creates a List of int values from start to end - 1.
+Iterable<int> range(int start, int end) =>
+    List.generate(end - start, (i) => start + i);
+
+void main() {
+  // Get the squares of a odd numbers in the range [0, 10).
+  var numbers = [for (var i in range(0, 10)) if (i % 2 == 1) pow(i, 2)];
+  print(numbers); // [1, 9, 25, 49, 81]
+
+  // Find all the [x, y, z] values where
+  // x^2 + y^2 = z^2 up to a maximum value of 20.
+  var pythagorean = [
+    for (var x in range(1, 20))
+      for (var y in range(x, 20)) // start at x
+        for (var z in range(y, 20)) // start at y
+          if (x * x + y * y == z * z) [x, y, z]
+  ];
+  print(pythagorean); // [[3, 4, 5], [5, 12, 13], [6, 8, 10], [8, 15, 17], [9, 12, 15]]
+}
 ```
 
 The `List` class is generic and implements extends from the `Iterable` class.
