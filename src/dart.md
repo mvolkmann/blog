@@ -832,12 +832,20 @@ and optionally accepts `int` values for the
 month, day, hour, minute, second, and milliseconds.
 The month and day default to one.
 The minute, second, and milliseconds default to zero.
-For example:
+Other ways to create `DateTime` objects include
+the static `parse` method and the constructors
+`DateTime.fromMillisecondsSinceEpoch`, `DateTime.now`, and `DateTime.utc`.
+
+The following code demonstrates various ways to create `DateTime` objects.
 
 ```dart
-var birthday = DateTime(1961, 4, 16); // defaults to local time
+var birthday = DateTime(1961, 4, 16); // in local time
 var birthdayUtc = DateTime.utc(1961, 4, 16); // in UTC
-var now = DateTime.now();
+var nowLocal = DateTime.now(); // in local time
+
+// Defaults to local time, but can request UTC.
+var epoch = DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
+print(epoch); // 1970-01-01 00:00:00.000Z
 ```
 
 The `DateTime.parse` constructor takes a string
