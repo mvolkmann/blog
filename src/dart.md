@@ -1469,11 +1469,67 @@ void main() {
 }
 ```
 
-## Method Cascades
+## Cascade Operator
 
-Method cascades provide a way to invoke several methods on the same object
-using the `..` operator.
-TODO: Add more detail.
+The cascade operator (`..`) is used to
+set multiple properties of an object or
+call multiple methods on an object.
+In the case of calling methods, it is useful when the methods
+do not return the receiver, making method chaining impossible.
+
+The following examples demonstrate the cascade operator:
+
+```dart
+var left = 20;
+var top = 10;
+var width = 100;
+var height = 50;
+var r = MutableRectangle(left, top, width, height);
+print(r); // Rectangle (20, 10) 100 x 50
+
+r
+  ..left = 30
+  ..top = 0
+  ..width = 200
+  .. height = 30;
+print(r); // Rectangle (30, 0) 200 x 30
+
+var numbers = [7, 3, 9, 2];
+numbers
+  ..sort() // [2, 3, 7, 9]
+  ..add(10) // [2, 3, 7, 9, 10]
+  ..insert(0, 1) // [1, 2, 3, 7, 9, 10]
+  ..removeWhere((n) => n % 2 == 0); // [1, 3, 7, 9]
+print(numbers); // [1, 3, 7, 9]
+```
+
+The null-aware cascade operator `?..`
+evaluates to null if the left side is `null`,
+avoiding calling a method on `null`.
+It should only be used for the first cascade in a series of them.
+The following example applies the null-aware cascade operator
+to the result of calling the `getSquare` function which can return `null`:
+
+```dart
+import 'dart:math';
+
+MutableRectangle? getSquare(double size) {
+  if (size <= 0) return null;
+  return MutableRectangle(0, 0, size, size);
+}
+
+void main() {
+  var square = getSquare(5)
+    ?..width *= 2 // double the width
+    ..height *= 2; // double the height
+  print(square); // Rectangle (0, 0) 10 x 10
+
+  square = getSquare(0)
+    ?..width *= 2 // won't run when square is null
+    ..height *= 2; // won't run when square is null
+  print(square); // null
+}
+```
 
 ## Mixins
 
