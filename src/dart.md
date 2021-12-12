@@ -1025,10 +1025,8 @@ The following example demonstrates implementing a generic function.
 It takes any `Iterable` containing `num` values and returns its sum.
 
 ```dart
-num sum<T extends Iterable<num>>(T numbers) {
-  //TODO: Why doesn't this compile?
-  //TODO: See https://stackoverflow.com/questions/70323210/dart-generic-function-for-iterablenum
-  return numbers.reduce((acc, n) => acc + n);
+N sum<N extends num>(Iterable<N> numbers) {
+  return numbers.reduce((acc, n) => (acc + n) as N);
 }
 
 void main() {
