@@ -848,6 +848,9 @@ var epoch = DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
 print(epoch); // 1970-01-01 00:00:00.000Z
 ```
 
+There isn't an easy way to create `DateTime` objects
+for timezones other than the local one and UTC.
+
 The `DateTime.parse` constructor takes a string
 that matches a subset of ISO 8601 of the standard.
 Examples include `'1961-04-16 10:19:00'` (local time zone),
