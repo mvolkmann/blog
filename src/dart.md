@@ -1001,6 +1001,36 @@ print((obj as String).length); // throws "Script error."
 
 TODO: Add more detail on this?
 
+### Timer class
+
+The `Timer` class executes a callback function after a given `Duration`
+either once or repeatedly.
+It provides capabilities similar to the JavaScript functions
+`setTimeout` and `setInterval`.
+The `Timer` class is defined in the `dart:async` package which must be imported.
+
+The following example demonstrates creating `Timers`
+that fire just once and repeatedly:
+
+```dart
+import 'dart:async';
+
+void main() {
+  print('starting timer');
+  var timer = Timer(Duration(seconds: 2), () {
+    print('finished timer');
+  });
+  //timer.cancel();
+
+  var count = 0;
+  Timer.periodic(Duration(seconds: 1), (timer) {
+    print('isActive = ${timer.isActive}; tick = ${timer.tick}');
+    count++;
+    if (count >= 5) timer.cancel();
+  });
+}
+```
+
 ### Generic Types
 
 Generics, a.k.a parameterized types,
