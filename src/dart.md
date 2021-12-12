@@ -1020,6 +1020,12 @@ var colors = <String>{'red', 'green', 'blue'};
 Set<String> colors = {'red', 'green', 'blue'};
 ```
 
+The literal syntax `<value-type>{}` creates an empty `Set`.
+The literal syntax `<key-type, value-type>{}` creates an empty `Map`.
+The literal syntax `{}` creates an empty `Map` with unspecified
+key and value types whose types must be inferred from the variable type.
+It does not create an empty `Set`.
+
 No properties are added beyond those provided by the `Iterable` class.
 
 In addition to the methods provided by the `Iterable` class,
