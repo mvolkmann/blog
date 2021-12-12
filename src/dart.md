@@ -776,7 +776,7 @@ whose functionality differs based on the types of values
 passed when they are called.
 Using generics often reduces code duplication.
 
-The collection classes make use of this.
+The collection classes, described next, make use of this.
 For example, when creating a `List`, the type of
 the elements it can hold are specific using generics.
 The following are equivalent:
@@ -785,6 +785,41 @@ The following are equivalent:
 List<int> numbers = [1, 2, 3]; // type is specified on variable
 var numbers = <int>[1, 2, 3]; // type is specified on value
 var numbers = [1, 2, 3]; // type is inferred
+```
+
+To create a collection that can hold values of any type, use `dynamic`.
+For example:
+
+```dart
+List<dynamic> anyList = [
+  null, true, 7, 3.14, 'hello', <String>{'red', 'green', 'blue'}
+];
+
+for (var value in anyList) {
+  print(value.runtimeType);
+}
+```
+
+Typically parameterized types have single-letter, uppercase names like `T`.
+Any number of these can be specified inside angle brackets.
+They can be constrained to only types that extend a given class
+using the `extends` keyword,
+or left unconstrained in which case values of any type can be used.
+
+The following example demonstrates implementing a generic function.
+It takes any `Iterable` containing `num` values and returns its sum.
+
+```dart
+num sum<T extends Iterable<num>>(T numbers) {
+  //TODO: Why doesn't this compile?
+  //TODO: See https://stackoverflow.com/questions/70323210/dart-generic-function-for-iterablenum
+  return numbers.reduce((acc, n) => acc + n);
+}
+
+void main() {
+  print(sum([1, 2, 3])); // List; 6
+  print(sum({1, 2, 3})); // Set; 6
+}
 ```
 
 ## Collection Types
@@ -917,7 +952,14 @@ In addition to the methods provided by the `Iterable` class,
 A `Set` is an unordered collection of unique values.
 A literal set is written as a
 comma-separated list of values surrounded by curly braces.
-For example, `var numbers = {3, 7, 19};`
+
+The following demonstrates three ways to declare and create a `Set`:
+
+```dart
+var colors = {'red', 'green', 'blue'}; // element type is inferred
+var colors = <String>{'red', 'green', 'blue'}; // value type is specified
+Set<String> colors = {'red', 'green', 'blue'}; // variable type is specified
+```
 
 No properties are added beyond those provided by the `Iterable` class.
 
@@ -1002,6 +1044,63 @@ class Dog {
 void main() {
   var d = Dog('Comet', 'Whippet');
   print(d); // Comet is a Whippet.
+}
+```
+
+### Spread Operators
+
+The spread operator `...` spreads a collection inside another.
+
+```dart
+var colors = ['red', 'green', 'blue'];
+var moreColors = ['black', ...colors, 'white'];
+print(moreColors);
+
+var fruits = {'b': 'banana', 'c': 'cherry'};
+var moreFruits = {'a': 'apple', ...fruits, 'd': 'date'};
+print(moreFruits);
+```
+
+The null-aware spread operator `...?` only spreads when the value is not null.
+
+```dart
+Map<String, String>? maybeFruits;
+var evenMoreFruits = {'a': 'apple', ...fruits, ...?maybeFruits, 'd': 'date'};
+print(evenMoreFruits);
+```
+
+## Nullable Values
+
+Dart provides special operators for dealing with nullable values.
+The following example demonstrates these.
+
+```dart
+import 'dart:math';
+
+var random = Random();
+String? randomString() => random.nextBool() ? 'test' : null;
+
+void main() {
+  String? s;
+  s = randomString(); // 'test' or null
+  print('s = $s');
+
+  // The ?. operator evaluates to null if the value on the left is null.
+  // Otherwise it evaluates to the property or method on the right.
+  print(s?.toUpperCase());
+
+  // The ?? operator provides an alternative value to use
+  // if the value on the left is null.
+  print(s ?? 'missing value');
+
+  // The ??= operator assigns a value to a variable
+  // only if the variable value is currently null.
+  s ??= 'supplied value';
+  print(s);
+
+  // The !. operator asserts that that vale on the left is not null.
+  // The program will crash with "Script error." if it is null.
+  print(s!.toUpperCase());
 }
 ```
 
@@ -1327,6 +1426,48 @@ TODO: Describe the `late` keyword.
 Classes can be marked as `abstract` which prevents creating instances of them.
 Abstract classes are useful for defining
 functionality to be inherited by other classes.
+
+Interface in other programming languages are collections of method signatures
+that some classes implement.
+Dart doesn't support defining "interfaces",
+but `abstract` classes can be used for this purpose.
+For example:
+
+```dart
+import 'dart:math';
+
+abstract class Shape {
+    // All classes that extend Shape must
+    // implement a method with this signature.
+    double getArea();
+}
+
+class Rectangle extends Shape {
+    double height;
+    double width;
+
+    Rectangle({required this.width, required this.height});
+
+    @override
+    double getArea() => width * height;
+}
+
+class Circle extends Shape {
+    double radius;
+
+    Circle({required this.radius});
+
+    @override
+    double getArea() => pi * pow(radius, 2);
+}
+
+void main() {
+  var r = Rectangle(width: 3, height: 4);
+  var c = Circle(radius: 5);
+  print(r.getArea()); // 12
+  print(c.getArea()); // 78.5...
+}
+```
 
 ## Method Cascades
 
