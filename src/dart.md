@@ -435,6 +435,7 @@ Dart supports the following built-in basic types:
 - `int`: 64-bit integer
 - `double`: 64-bit floating point number
 - `String`: sequence of UTF-16 characters delimited by single or double quotes
+- `Symbol`: represents an operator or identifier with literal syntax `#name`
 - `Never`: has no values
 
 The `void` type is used at the return type
@@ -465,16 +466,33 @@ The compiler requires handling cases where a nullable value might be `null`.
 This results in detecting errors involving `null` values
 at compile-time rather than runtime.
 
-Enumerations are defined with the `enum` keyword.
-They cannot be defined inside a function.
+### Enumerations
+
+Enumerations are a special kind of class defined with the `enum` keyword.
+The are often used in `switch` statements.
+
+Each value in an `enum` is assigned an index starting from zero.
+They cannot be assigned different numeric values.
+
+Enumerations cannot be defined inside a function.
+
 For example:
 
 ```dart
 enum Color { red, green, blue }
-```
 
-TODO: What does Dart call the enum cases?
-TODO: Can enum cases be assigned values?
+void printColor(Color c) {
+  print('$c, index=${c.index}');
+}
+
+void main() {
+  printColor(Color.values[1]); // Color.blue, index=1
+
+  for (var color in Color.values) {
+    printColor(color);
+  }
+}
+```
 
 ### bool type
 
@@ -1396,7 +1414,7 @@ void main() {
 
 ## Functions
 
-Dart functions are represented by objects with the type `Function`.
+Dart functions are represented by objects from the `Function` class.
 They are first class which means they can be assigned variables,
 passed to other functions, and returned from other functions.
 
