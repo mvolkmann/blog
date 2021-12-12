@@ -823,6 +823,88 @@ The optional named constructor parameter `caseSensitive`
 has a `bool` value that indicates whether matching should be case-sensitive.
 This defaults to `true`.
 
+### DateTime class
+
+The `DateTime` class is used to create objects
+that represent an instant in time.
+The constructor requires and `int` value for the year
+and optionally accepts `int` values for the
+month, day, hour, minute, second, and milliseconds.
+The month and day default to one.
+The minute, second, and milliseconds default to zero.
+For example:
+
+```dart
+var birthday = DateTime(1961, 4, 16); // defaults to local time
+var birthdayUtc = DateTime.utc(1961, 4, 16); // in UTC
+var now = DateTime.now();
+```
+
+The `DateTime.parse` constructor takes a string
+that matches a subset of ISO 8601 of the standard.
+Examples include `'1961-04-16 10:19:00'` (local time zone),
+`'19610416T101900'` (same with T separating date from time),
+and `'1961-04-16 10:19:00Z'` (UTC).
+
+The `DateTime` class defines the following constants:
+
+- `DAYS_PER_WEEK` (7)
+- `MONTHS_PER_YEAR` (12)
+
+- `JANUARY` (1)
+- `FEBRUARY` (2)
+- `MARCH` (2)
+- `APRIL` (4)
+- `MAY` (5)
+- `JUNE` (6)
+- `JULY` (7)
+- `AUGUST` (8)
+- `SEPTEMBER` (9)
+- `OCTOBER` (10)
+- `NOVEMBER` (11)
+- `DECEMBER` (12)
+
+- `MONDAY` (1)
+- `TUESDAY` (2)
+- `WEDNESDAY` (3)
+- `THURSDAY` (4)
+- `FRIDAY` (5)
+- `SATURDAY` (6)
+- `SUNDAY` (7)
+
+The `DateTime` class defines the following properties:
+
+| Property                 | Description                               |
+| ------------------------ | ----------------------------------------- |
+| `day`                    | day of month; 1 to 31                     |
+| `hour`                   | 0 to 23                                   |
+| `isUtc`                  | `bool`                                    |
+| `millisecond`            | 0 to 999                                  |
+| `millisecondsSinceEpoch` | milliseconds since 1970-01-01T00:00:00Z   |
+| `minute`                 | 0 to 59                                   |
+| `month`                  | 1 to 12                                   |
+| `second`                 | 0 to 59                                   |
+| `timeZoneName`           | timezone abbreviation such as CST         |
+| `timeZoneOffset`         | difference from UTC (ex. -6:00:00.00-0.0) |
+| `weekday`                | MONDAY (1) to SUNDAY (7)                  |
+| `year`                   | includes all digits (4 for current year)  |
+
+The `DateTime` class defines the following instance methods:
+
+| Method                             | Description                                                                               |
+| ---------------------------------- | ----------------------------------------------------------------------------------------- |
+| `add(Duration duration)`           | returns new `DateTime` with duration added                                                |
+| `compareTo(DateTime other)`        | returns comparator value, often used for sorting                                          |
+| `difference(DateTime other)`       | returns `Duration` between receiver and other                                             |
+| `isAfter(DateTime other)`          | returns `bool` indicating if receiver is after other                                      |
+| `isAtSameMomentAs(DateTime other)` | returns `bool` indicating if receiver is at same moment as other, regardless of time zone |
+| `isBefore()`                       | returns `bool` indicating if receiver is before other                                     |
+| `subtract()`                       | returns new `DateTime` with duration subtracted                                           |
+| `toIso8601String()`                | returns `String` in format 'yyyy-MM-ddTHH:mm:ss.sssZ, omitting Z if not UTC               |
+| `toLocal()`                        | returns `DateTime` converted to local                                                     |
+| `toString()`                       | returns `String` in human-readable format                                                 |
+| `toUtc()`                          | returns `DateTime` converted to UTC                                                       |
+
 ### Type Casts
 
 The `as` keyword casts a value of one type to another.
