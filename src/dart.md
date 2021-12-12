@@ -889,6 +889,13 @@ The `Iterable` class provides the following methods (some omitted):
 | `where(bool test(E element))`                                    | returns an `Iterable` over all the elements that pass the test                     |
 | `whereType<T>()`                                                 | returns a new collection of elements with a given type                             |
 
+The differences between the `List` methods `fold` and `map` is that
+`fold` takes an initial value and `map` does not.
+In the first iteration of the `fold` method,
+the combine function is called with `initialValue` and the first element.
+In the first iteration of the `reduce` method,
+the combine function is called with the first and second elements.
+
 ### Lists
 
 Arrays in Dart are represented by `List` objects.
