@@ -1860,7 +1860,8 @@ void main() {
 }
 ```
 
-Non-private properties are automatically given getter and setter methods
+Non-private properties (including those marked `late final` but not `final`)
+are automatically given getter and setter methods
 which allow them to be accessed and set from outside their class.
 Getter and setter methods can be provided for private properties.
 Getters can be used to implement computed properties.
