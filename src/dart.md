@@ -1789,6 +1789,9 @@ try {
 }
 ```
 
+When a function catches an exception,
+it can rethrow the exception so the caller can handle it.
+
 The `Range` and `RangeException` classes defined above
 can be used as follows:
 
@@ -1817,10 +1820,10 @@ are still accessible by code in the same application or library.
 
 ## Classes
 
-Classes defined properties to hold data, constructors to create instances,
+Classes define properties to hold data, constructors to create instances,
 and methods to operate on the data.
 
-Constructors are defined as methods with the same name as the class.
+A constructor is defined as a method with the same name as the class.
 For example:
 
 ```dart
@@ -1833,7 +1836,7 @@ class Point {
     this.y = y;
   }
 
-  // This is an alternate way to write the constructor above.
+  // Alternate, preferred way to write the constructor above.
   //Point(this.x, this.y);
 }
 ```
@@ -1854,6 +1857,9 @@ named constructor for initializing `x` and `y` to the same value.
   }
 ```
 
+The create an object from a class, call one of its constructors
+in the same was as calling a function, without a `new` keyword.
+
 Constructors can initialize properties before their body runs.
 For example, the following is an alternate way
 to write the previous named constructor.
@@ -1873,9 +1879,7 @@ class Point {
 
   Point(this.x, this.y);
 
-  Point.same(double value): x = value, y = value {
-    print('I ran!');
-  }
+  Point.same(double value): x = value, y = value;
 
   @override
   String toString() {
