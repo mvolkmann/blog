@@ -629,8 +629,11 @@ n += 3; // This works.
 print(n);
 ```
 
-Dividing by zero results in the `double.infinity` constant
-rather than throwing an error.
+Dividing by zero with the `/` operator results in
+the `double.infinity` constant rather than throwing an exception.
+When the integer division operator `~/` is used instead,
+an `UnsupportedError` is thrown.
+Note that `IntegerDivisionByZeroException` is deprecated.
 
 #### int Class
 
@@ -1711,15 +1714,11 @@ The `break` statement exits the loop.
 The `continue` statement skips the remainder of the current iteration
 and proceeds to the beginning of the next iteration, if any.
 
-## Exceptions
+## Exception Handling
 
-To throw an exception, use the `throw` keyword followed by an object
-that extends from `Exception` or `Error`.
-Builtin `Exception` subclasses include
-`FormatException`, `IOException`, `TimeoutException`, and more.
-Builtin `Error` subclasses include `ArgumentError`, `AssertionError`,
-`OutOfMemoryError`, `TypeError`, `UnimplementedError`, and more.
-Custom subclasses or `Exception` and `Error` can also be defined.
+To throw an exception, use the `throw` keyword followed by any object.
+Typically the object is one that extends from `Exception` or `Error`,
+but this is not required. For example, throwing a `String` is allowed.
 
 For example:
 
@@ -1727,8 +1726,50 @@ For example:
 throw FormatException('invalid phone number');
 ```
 
+In general exception can be caught and handled,
+but errors should result in the program terminating.
+
+Builtin `Exception` subclasses include
+`FormatException`, `IOException`, `TimeoutException`, and more.
+
+Builtin `Error` subclasses include `ArgumentError`, `AssertionError`,
+`OutOfMemoryError`, `TypeError`, `UnimplementedError`, and more.
+Custom subclasses or `Exception` and `Error` can also be defined.
+
+Custom exception classes can be created by defining and instantiating
+classes that implement `Exception` or `Error`.
+For example:
+
+```dart
+class RangeException implements Exception {
+  String message;
+
+  RangeException(this.message);
+
+  @override
+  String toString() => message;
+}
+
+class Range {
+  num lower;
+  num upper;
+
+  Range({required this.lower, required this.upper});
+
+  bool includes(num value) => lower <= value && value <= upper;
+
+  void assertIncludes(num value) {
+    if (value < lower) {
+      throw RangeException('value $value is less than lower bound $lower');
+    }
+    if (value > upper) {
+      throw RangeException('value $value is greater than upper bound $upper');
+    }
+  }
+}
+```
+
 To catch an exception, use the `try`, `catch`, and `finally` keywords.
-Errors should not be caught because they are expected to crash the program.
 For example:
 
 ```dart
@@ -1745,6 +1786,21 @@ try {
   // and using the exception object
 } finally {
   // code to run regardless of whether there was a thrown
+}
+```
+
+The `Range` and `RangeException` classes defined above
+can be used as follows:
+
+```dart
+var range = Range(lower: 1, upper: 10);
+try {
+  range.assertIncludes(3); // doesn't throw
+  range.assertIncludes(0); // throws
+} on RangeException catch (e) {
+  print(e); // value 0 is less than lower bound 1
+} catch (e) {
+  print("something else went wrong");
 }
 ```
 
