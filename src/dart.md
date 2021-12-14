@@ -1920,6 +1920,39 @@ void main() {
 }
 ```
 
+A class can inherit the properties and methods of one other class
+using the `extend` keyword.
+Classes that do not explicitly extend another class
+implicitly extend the built-in `Object` class.
+
+The `Object` class provides the following properties:
+
+| Property      | Description                                     |
+| ------------- | ----------------------------------------------- |
+| `hashCode`    | an `int` value generated from object properties |
+| `runtimeType` | a `Type` object describing the object type      |
+
+The `Object` class provides the following methods:
+
+| Method                                | Description                                               |
+| ------------------------------------- | --------------------------------------------------------- |
+| `noSuchMethod(Invocation invocation)` | called when a non-existent method is called on the object |
+| `toString()`                          | returns the `String` representation of the object         |
+
+The `Invocation` object passed to the `noSuchMethod` method
+provides the following properties:
+
+| Property              | Description                                             |
+| --------------------- | ------------------------------------------------------- |
+| `isAccessor`          | `bool` indicating whether a getter or setter was called |
+| `isGetter`            | `bool` indicating whether a getter was called           |
+| `isMethod`            | `bool` indicating whether a method was called           |
+| `isSetter`            | `bool` indicating whether a setter was called           |
+| `memberName`          | `Symbol` name of the invoked member                     |
+| `namedArguments`      | `Map` of named arguments                                |
+| `positionalArguments` | `List` of positional arguments                          |
+| `typeArguments`       | `List` of argument types                                |
+
 TODO: Describe the `late` keyword.
 
 Classes can be marked as `abstract` which prevents creating instances of them.
