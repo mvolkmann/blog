@@ -1652,6 +1652,18 @@ switch (color) {
 When an `enum` value is being evaluated, the `default` clause is required
 unless there is a `case` for each possible value.
 
+The `assert` statement asserts that a condition is true.
+If it is not, an optional message is printed
+and the program exits with an `AssertionError`.
+These statements are only executed when enabled.
+To run a Dart program with asserts enabled,
+enter `dart run --enable-assert`.
+For example:
+
+```dart
+assert(!worldEnding(), 'So long.');
+```
+
 ## Iteration
 
 Dart supports three statements for implementing iteration,
