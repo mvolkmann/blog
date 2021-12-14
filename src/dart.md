@@ -1444,6 +1444,9 @@ class Dog {
   // Shorthand constructor - see Class section
   Dog(this.name, this.breed);
 
+  // Methods that override a superclass method should
+  // be annotated with @override.  In this case we are
+  // overriding the toString method in the Object class.
   @override
   String toString() => '$name is a $breed.';
 }
@@ -1908,7 +1911,7 @@ class Person {
   Person({required this.name, this.age});
 
   @override
-  String toString() => age == null ? name : '$name is $age.';
+  String toString() => age == null ? name : '$name is $age years old';
 }
 
 void main() {
@@ -1966,13 +1969,12 @@ class SoftwareEngineer extends Person {
     required this.primaryLanguage
   }) : super(name: name, age: age);
 
+  // This method calls the superclass method with the same name
+  // using the super keyword.
   @override
   String toString() {
-    if (super.age == null) {
-      return '$name knows $primaryLanguage.';
-    } else {
-      return '$name is ${super.age} years old and knows $primaryLanguage.';
-    }
+    var connector = age == null ? '' : ' and';
+    return '${super.toString()}$connector knows $primaryLanguage.';
   }
 }
 
