@@ -1868,7 +1868,51 @@ Settings can validate new values and throw when they are invalid.
 The following code demonstrates writing getter and setter methods.
 
 ```dart
-TODO: Add this!
+class Person {
+  String _name;
+  DateTime? birthday;
+
+  Person(String name, [this.birthday]) : _name = name;
+
+  // This getter computes its value.
+  int get age {
+    if (birthday == null) return 0;
+    var now = DateTime.now();
+    var years = now.year - birthday!.year;
+    var month = birthday!.month;
+    if (now.month < month || (now.month == month && now.day < birthday!.day)) {
+      years--;
+    }
+    return years;
+  }
+
+  String get name => _name;
+
+  // This setter performs validation.
+  set name(String newName) {
+    if (newName.isEmpty) throw "Person name cannot be empty";
+    _name = newName;
+  }
+
+  @override
+  String toString() => birthday == null ? name : '$name is $age years old.';
+}
+
+void main() {
+  var p1 = Person('Mark', DateTime(1961, DateTime.april, 16));
+  var p2 = Person('Tami');
+  print(p1);
+  print(p2);
+
+  try {
+  p2.name = 'Tamara';
+  print(p2);
+  p2.name = ''; // throws
+  print(p2);
+  } catch (e) {
+    print(e); // Person name cannot be empty
+  }
+}
 ```
 
 If a class doesn't define a constructor,
