@@ -1901,22 +1901,22 @@ that takes named parameters.
 ```dart
 class Person {
   String name;
-  int? _age;
+  int? age;
 
+  // This constructor only has named parameters.
   // The first parameter is required and the second is optional.
-  Person({required this.name, int? age}) {
-    _age = age;
-  }
+  Person({required this.name, this.age});
+
+  @override
+  String toString() => age == null ? name : '$name is $age.';
 }
 
 void main() {
   var p1 = Person(name: 'Mark', age: 60);
-  print('p1.name = ${p1.name}'); // Mark
-  print('p1._age = ${p1._age}'); // 60
+  print(p1); // Mark is 60.
 
   var p2 = Person(name: 'Tami');
-  print('p2.name = ${p2.name}'); // Tami
-  print('p2._age = ${p2._age}'); // null
+  print(p2); // Tami
 }
 ```
 
@@ -1952,6 +1952,38 @@ provides the following properties:
 | `namedArguments`      | `Map` of named arguments                                |
 | `positionalArguments` | `List` of positional arguments                          |
 | `typeArguments`       | `List` of argument types                                |
+
+The following code demonstrates creating a
+subclass of the `Person` class defined above.
+
+```dart
+class SoftwareEngineer extends Person {
+  String primaryLanguage;
+
+  SoftwareEngineer({
+    required String name,
+    int? age,
+    required this.primaryLanguage
+  }) : super(name: name, age: age);
+
+  @override
+  String toString() {
+    if (super.age == null) {
+      return '$name knows $primaryLanguage.';
+    } else {
+      return '$name is ${super.age} years old and knows $primaryLanguage.';
+    }
+  }
+}
+
+void main() {
+  var p3 = SoftwareEngineer(name: 'Mark', age: 60, primaryLanguage: 'Dart');
+  print(p3);
+
+  var p4 = SoftwareEngineer(name: 'Tami', primaryLanguage: 'JavaScript');
+  print(p4);
+}
+```
 
 TODO: Describe the `late` keyword.
 
