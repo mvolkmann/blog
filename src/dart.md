@@ -831,221 +831,7 @@ The table below summarized converting between numbers and strings.
 | `String` to `int`    | `int.parse(s)`    |
 | `String` to `double` | `double.parse(s)` |
 
-### Regular Expressions
-
-A `Pattern` is a `RegExp` or `String` object.
-
-Dart regular expressions use the same syntax as JavaScript regular expressions.
-
-A `RegExp` object is created with `RegExp(r'reg-ex-here');`.
-Recall that placing "r" before a literal string creates a "raw string"
-that doesn't treat the `\` character specially.
-
-The `RegExp` class defines the following properties:
-
-| Property          | Description                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------- |
-| `isCaseSensitive` | `bool` indicating if matches are case-sensitive (defaults to `true`)                  |
-| `isDotAll`        | `bool` indicating if periods should match line terminators (defaults to `false`)      |
-| `isMultiline`     | `bool` indicating if multiline matching will be performed (defaults to `false`)       |
-| `isUnicode`       | `bool` indicating if whether Unicode matching will be performed (defaults to `false`) |
-| `pattern`         | regular expression as a `String`                                                      |
-
-The `RegExp` class defines the following instance methods:
-
-| Method                                         | Description                                                                            |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `allMatches(String input, [int start = 0])`    | returns `Iterable<RegExpMatch>` for iterating over matches                             |
-| `firstMatch(String input)`                     | returns `RegExpMatch?` for first match found or null                                   |
-| `hasMatch(String input)`                       | returns `bool` indicating if a match was found                                         |
-| `matchAsPrefix(String input, [int start = 0])` | returns a `Match?` that is null unless a match is found at the start                   |
-| `stringMatch(String input)`                    | returns a `String?` substring of first match in input or null (ignores capture groups) |
-
-The following example creates a regular expression that
-matches strings starting with "The " and ending with " win.".
-It captures all the characters in between.
-
-```dart
-var re = RegExp(r'^The (.+) win\.$');
-var s = 'The St. Louis Blues win.';
-var match = re.firstMatch(s);
-if (match != null) {
-  print(match.group(1)); // St. Louis Blues
-}
-```
-
-The optional named constructor parameter `multiLine`
-has a `bool` value that indicates whether it should
-match at the beginning and end of every line.
-This defaults to `false`.
-
-The optional named constructor parameter `caseSensitive`
-has a `bool` value that indicates whether matching should be case-sensitive.
-This defaults to `true`.
-
-The `RegExpMatch` class extends the `Match` class.
-Instances of this class describe a regular expression matching result.
-
-The `RegExpMatch` class defines the following properties:
-
-| Property     | Description                                        |
-| ------------ | -------------------------------------------------- |
-| `end`        | index where the match ends plus 1                  |
-| `groupCount` | number of captured groups                          |
-| `input`      | entire string from which the match was found       |
-| `pattern`    | a `Pattern` object describing the matching pattern |
-| `start`      | index where the match begins                       |
-
-The `RegExpMatch` class defines the following instance methods:
-
-| Method                           | Description                                                |
-| -------------------------------- | ---------------------------------------------------------- |
-| `group(int groupIndex)`          | `String` matched at a given group index                    |
-| `groups(List<int> groupIndices)` | List of `String` values matched at specified group indices |
-
-The `[index]` operator can be used in place of
-the `group` method retrieve the same value.
-
-### DateTime class
-
-The `DateTime` class is used to create objects
-that represent an instant in time.
-The constructor requires and `int` value for the year
-and optionally accepts `int` values for the
-month, day, hour, minute, second, and milliseconds.
-The month and day default to one.
-The minute, second, and milliseconds default to zero.
-Other ways to create `DateTime` objects include
-the static `parse` method and the constructors
-`DateTime.fromMillisecondsSinceEpoch`, `DateTime.now`, and `DateTime.utc`.
-
-The following code demonstrates various ways to create `DateTime` objects.
-
-```dart
-var birthday = DateTime(1961, 4, 16); // in local time
-var birthdayUtc = DateTime.utc(1961, 4, 16); // in UTC
-var nowLocal = DateTime.now(); // in local time
-
-// Defaults to local time, but can request UTC.
-var epoch = DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
-print(epoch); // 1970-01-01 00:00:00.000Z
-```
-
-There isn't an easy way to create `DateTime` objects
-for timezones other than the local one and UTC.
-
-The `DateTime.parse` constructor takes a string
-that matches a subset of ISO 8601 of the standard.
-Examples include `'1961-04-16 10:19:00'` (local time zone),
-`'19610416T101900'` (same with T separating date from time),
-and `'1961-04-16 10:19:00Z'` (UTC).
-
-The `DateTime` class defines the following constants:
-
-- `daysPerWeek` (7)
-- `monthsPerYear` (12)
-
-- `january` (1)
-- `february` (2)
-- `march` (2)
-- `april` (4)
-- `may` (5)
-- `june` (6)
-- `july` (7)
-- `august` (8)
-- `september` (9)
-- `october` (10)
-- `november` (11)
-- `december` (12)
-
-- `monday` (1)
-- `tuesday` (2)
-- `wednesday` (3)
-- `thursday` (4)
-- `friday` (5)
-- `saturday` (6)
-- `sunday` (7)
-
-The `DateTime` class defines the following properties:
-
-| Property                 | Description                               |
-| ------------------------ | ----------------------------------------- |
-| `day`                    | day of month; 1 to 31                     |
-| `hour`                   | 0 to 23                                   |
-| `isUtc`                  | `bool`                                    |
-| `millisecond`            | 0 to 999                                  |
-| `millisecondsSinceEpoch` | milliseconds since 1970-01-01T00:00:00Z   |
-| `minute`                 | 0 to 59                                   |
-| `month`                  | 1 to 12                                   |
-| `second`                 | 0 to 59                                   |
-| `timeZoneName`           | timezone abbreviation such as CST         |
-| `timeZoneOffset`         | difference from UTC (ex. -6:00:00.00-0.0) |
-| `weekday`                | MONDAY (1) to SUNDAY (7)                  |
-| `year`                   | includes all digits (4 for current year)  |
-
-The `DateTime` class defines the following instance methods:
-
-| Method                             | Description                                                                               |
-| ---------------------------------- | ----------------------------------------------------------------------------------------- |
-| `add(Duration duration)`           | returns new `DateTime` with duration added                                                |
-| `compareTo(DateTime other)`        | returns comparator value, often used for sorting                                          |
-| `difference(DateTime other)`       | returns `Duration` between receiver and other                                             |
-| `isAfter(DateTime other)`          | returns `bool` indicating if receiver is after other                                      |
-| `isAtSameMomentAs(DateTime other)` | returns `bool` indicating if receiver is at same moment as other, regardless of time zone |
-| `isBefore()`                       | returns `bool` indicating if receiver is before other                                     |
-| `subtract()`                       | returns new `DateTime` with duration subtracted                                           |
-| `toIso8601String()`                | returns `String` in format 'yyyy-MM-ddTHH:mm:ss.sssZ, omitting Z if not UTC               |
-| `toLocal()`                        | returns `DateTime` converted to local                                                     |
-| `toString()`                       | returns `String` in human-readable format                                                 |
-| `toUtc()`                          | returns `DateTime` converted to UTC                                                       |
-
-### Duration class
-
-The `Duration` class is used to create objects that represent a span to time.
-The constructor takes the following named parameters
-that are all optional and default to zero:
-`days`, `hours`, `minutes`, `seconds`, `milliseconds`, and `microseconds`.
-
-The `Duration` class defines the following constants:
-
-- `HOURS_PER_DAY`
-- `MICROSECONDS_PER_DAY`
-- `MICROSECONDS_PER_HOUR`
-- `MICROSECONDS_PER_MILLISECOND`
-- `MICROSECONDS_PER_MINUTE`
-- `MICROSECONDS_PER_SECOND`
-- `MILLISECONDS_PER_DAY`
-- `MILLISECONDS_PER_HOUR`
-- `MILLISECONDS_PER_MINUTE`
-- `MILLISECONDS_PER_SECOND`
-- `MINUTES_PER_DAY`
-- `MINUTES_PER_HOUR`
-- `SECONDS_PER_DAY`
-- `SECONDS_PER_HOUR`
-- `SECONDS_PER_MINUTE`
-- `ZERO`
-
-The `Duration` class defines the following properties:
-
-| Property         | Description                        |
-| ---------------- | ---------------------------------- |
-| `inDays`         | `int` number of whole days         |
-| `inHours`        | `int` number of whole hours        |
-| `inMicroseconds` | `int` number of whole microseconds |
-| `inMilliseconds` | `int` number of whole milliseconds |
-| `inMinutes`      | `int` number of whole minutes      |
-| `inSeconds`      | `int` number of whole seconds      |
-| `isNegative`     | `bool` indicating if negative      |
-
-The `Duration` class defines the following instance methods:
-
-| Method                      | Description                                                       |
-| --------------------------- | ----------------------------------------------------------------- |
-| `abs()`                     | returns new `Duration` that is the absolute value of the receiver |
-| `compareTo(Duration other)` | returns comparator value, often used for sorting                  |
-| `toString()`                | returns `String` representation                                   |
-
-### Type Casts
+## Type Casts
 
 The `as` keyword casts a value of one type to another.
 For example, if a variable of type `Object` currently holds a `String` value,
@@ -1066,37 +852,7 @@ print((obj as String).length); // throws "Script error."
 
 TODO: Add more detail on this?
 
-### Timer class
-
-The `Timer` class executes a callback function after a given `Duration`
-either once or repeatedly.
-It provides capabilities similar to the JavaScript functions
-`setTimeout` and `setInterval`.
-The `Timer` class is defined in the `dart:async` package which must be imported.
-
-The following example demonstrates creating `Timers`
-that fire just once and repeatedly:
-
-```dart
-import 'dart:async';
-
-void main() {
-  print('starting timer');
-  var timer = Timer(Duration(seconds: 2), () {
-    print('finished timer');
-  });
-  //timer.cancel();
-
-  var count = 0;
-  Timer.periodic(Duration(seconds: 1), (timer) {
-    print('isActive = ${timer.isActive}; tick = ${timer.tick}');
-    count++;
-    if (count >= 5) timer.cancel();
-  });
-}
-```
-
-### Generic Types
+## Generic Types
 
 Generics, a.k.a parameterized types,
 allow writing functions, classes, and methods
@@ -1457,7 +1213,338 @@ void main() {
 }
 ```
 
-### Spread Operators
+## Additional Core Classes
+
+The `dart:core` package defines all the basic types
+like `bool`, `int`, `double`, and `String`.
+It also defines collection types like `List`, `Set`, and `Map`.
+Highlights of other classes defined here are described below.
+
+### DateTime class
+
+The `DateTime` class is used to create objects
+that represent an instant in time.
+The constructor requires and `int` value for the year
+and optionally accepts `int` values for the
+month, day, hour, minute, second, and milliseconds.
+The month and day default to one.
+The minute, second, and milliseconds default to zero.
+Other ways to create `DateTime` objects include
+the static `parse` method and the constructors
+`DateTime.fromMillisecondsSinceEpoch`, `DateTime.now`, and `DateTime.utc`.
+
+The following code demonstrates various ways to create `DateTime` objects.
+
+```dart
+var birthday = DateTime(1961, 4, 16); // in local time
+var birthdayUtc = DateTime.utc(1961, 4, 16); // in UTC
+var nowLocal = DateTime.now(); // in local time
+
+// Defaults to local time, but can request UTC.
+var epoch = DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
+print(epoch); // 1970-01-01 00:00:00.000Z
+```
+
+There isn't an easy way to create `DateTime` objects
+for timezones other than the local one and UTC.
+
+The `DateTime.parse` constructor takes a string
+that matches a subset of ISO 8601 of the standard.
+Examples include `'1961-04-16 10:19:00'` (local time zone),
+`'19610416T101900'` (same with T separating date from time),
+and `'1961-04-16 10:19:00Z'` (UTC).
+
+The `DateTime` class defines the following constants:
+
+- `daysPerWeek` (7)
+- `monthsPerYear` (12)
+
+- `january` (1)
+- `february` (2)
+- `march` (2)
+- `april` (4)
+- `may` (5)
+- `june` (6)
+- `july` (7)
+- `august` (8)
+- `september` (9)
+- `october` (10)
+- `november` (11)
+- `december` (12)
+
+- `monday` (1)
+- `tuesday` (2)
+- `wednesday` (3)
+- `thursday` (4)
+- `friday` (5)
+- `saturday` (6)
+- `sunday` (7)
+
+The `DateTime` class defines the following properties:
+
+| Property                 | Description                               |
+| ------------------------ | ----------------------------------------- |
+| `day`                    | day of month; 1 to 31                     |
+| `hour`                   | 0 to 23                                   |
+| `isUtc`                  | `bool`                                    |
+| `millisecond`            | 0 to 999                                  |
+| `millisecondsSinceEpoch` | milliseconds since 1970-01-01T00:00:00Z   |
+| `minute`                 | 0 to 59                                   |
+| `month`                  | 1 to 12                                   |
+| `second`                 | 0 to 59                                   |
+| `timeZoneName`           | timezone abbreviation such as CST         |
+| `timeZoneOffset`         | difference from UTC (ex. -6:00:00.00-0.0) |
+| `weekday`                | MONDAY (1) to SUNDAY (7)                  |
+| `year`                   | includes all digits (4 for current year)  |
+
+The `DateTime` class defines the following instance methods:
+
+| Method                             | Description                                                                               |
+| ---------------------------------- | ----------------------------------------------------------------------------------------- |
+| `add(Duration duration)`           | returns new `DateTime` with duration added                                                |
+| `compareTo(DateTime other)`        | returns comparator value, often used for sorting                                          |
+| `difference(DateTime other)`       | returns `Duration` between receiver and other                                             |
+| `isAfter(DateTime other)`          | returns `bool` indicating if receiver is after other                                      |
+| `isAtSameMomentAs(DateTime other)` | returns `bool` indicating if receiver is at same moment as other, regardless of time zone |
+| `isBefore()`                       | returns `bool` indicating if receiver is before other                                     |
+| `subtract()`                       | returns new `DateTime` with duration subtracted                                           |
+| `toIso8601String()`                | returns `String` in format 'yyyy-MM-ddTHH:mm:ss.sssZ, omitting Z if not UTC               |
+| `toLocal()`                        | returns `DateTime` converted to local                                                     |
+| `toString()`                       | returns `String` in human-readable format                                                 |
+| `toUtc()`                          | returns `DateTime` converted to UTC                                                       |
+
+### Duration class
+
+The `Duration` class is used to create objects that represent a span to time.
+The constructor takes the following named parameters
+that are all optional and default to zero:
+`days`, `hours`, `minutes`, `seconds`, `milliseconds`, and `microseconds`.
+
+The `Duration` class defines the following constants:
+
+- `HOURS_PER_DAY`
+- `MICROSECONDS_PER_DAY`
+- `MICROSECONDS_PER_HOUR`
+- `MICROSECONDS_PER_MILLISECOND`
+- `MICROSECONDS_PER_MINUTE`
+- `MICROSECONDS_PER_SECOND`
+- `MILLISECONDS_PER_DAY`
+- `MILLISECONDS_PER_HOUR`
+- `MILLISECONDS_PER_MINUTE`
+- `MILLISECONDS_PER_SECOND`
+- `MINUTES_PER_DAY`
+- `MINUTES_PER_HOUR`
+- `SECONDS_PER_DAY`
+- `SECONDS_PER_HOUR`
+- `SECONDS_PER_MINUTE`
+- `ZERO`
+
+The `Duration` class defines the following properties:
+
+| Property         | Description                        |
+| ---------------- | ---------------------------------- |
+| `inDays`         | `int` number of whole days         |
+| `inHours`        | `int` number of whole hours        |
+| `inMicroseconds` | `int` number of whole microseconds |
+| `inMilliseconds` | `int` number of whole milliseconds |
+| `inMinutes`      | `int` number of whole minutes      |
+| `inSeconds`      | `int` number of whole seconds      |
+| `isNegative`     | `bool` indicating if negative      |
+
+The `Duration` class defines the following instance methods:
+
+| Method                      | Description                                                       |
+| --------------------------- | ----------------------------------------------------------------- |
+| `abs()`                     | returns new `Duration` that is the absolute value of the receiver |
+| `compareTo(Duration other)` | returns comparator value, often used for sorting                  |
+| `toString()`                | returns `String` representation                                   |
+
+### Regular Expressions
+
+A `Pattern` is a `RegExp` or `String` object.
+
+Dart regular expressions use the same syntax as JavaScript regular expressions.
+
+A `RegExp` object is created with `RegExp(r'reg-ex-here');`.
+Recall that placing "r" before a literal string creates a "raw string"
+that doesn't treat the `\` character specially.
+
+The `RegExp` class defines the following properties:
+
+| Property          | Description                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------- |
+| `isCaseSensitive` | `bool` indicating if matches are case-sensitive (defaults to `true`)                  |
+| `isDotAll`        | `bool` indicating if periods should match line terminators (defaults to `false`)      |
+| `isMultiline`     | `bool` indicating if multiline matching will be performed (defaults to `false`)       |
+| `isUnicode`       | `bool` indicating if whether Unicode matching will be performed (defaults to `false`) |
+| `pattern`         | regular expression as a `String`                                                      |
+
+The `RegExp` class defines the following instance methods:
+
+| Method                                         | Description                                                                            |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `allMatches(String input, [int start = 0])`    | returns `Iterable<RegExpMatch>` for iterating over matches                             |
+| `firstMatch(String input)`                     | returns `RegExpMatch?` for first match found or null                                   |
+| `hasMatch(String input)`                       | returns `bool` indicating if a match was found                                         |
+| `matchAsPrefix(String input, [int start = 0])` | returns a `Match?` that is null unless a match is found at the start                   |
+| `stringMatch(String input)`                    | returns a `String?` substring of first match in input or null (ignores capture groups) |
+
+The following example creates a regular expression that
+matches strings starting with "The " and ending with " win.".
+It captures all the characters in between.
+
+```dart
+var re = RegExp(r'^The (.+) win\.$');
+var s = 'The St. Louis Blues win.';
+var match = re.firstMatch(s);
+if (match != null) {
+  print(match.group(1)); // St. Louis Blues
+}
+```
+
+The optional named constructor parameter `multiLine`
+has a `bool` value that indicates whether it should
+match at the beginning and end of every line.
+This defaults to `false`.
+
+The optional named constructor parameter `caseSensitive`
+has a `bool` value that indicates whether matching should be case-sensitive.
+This defaults to `true`.
+
+The `RegExpMatch` class extends the `Match` class.
+Instances of this class describe a regular expression matching result.
+
+The `RegExpMatch` class defines the following properties:
+
+| Property     | Description                                        |
+| ------------ | -------------------------------------------------- |
+| `end`        | index where the match ends plus 1                  |
+| `groupCount` | number of captured groups                          |
+| `input`      | entire string from which the match was found       |
+| `pattern`    | a `Pattern` object describing the matching pattern |
+| `start`      | index where the match begins                       |
+
+The `RegExpMatch` class defines the following instance methods:
+
+| Method                           | Description                                                |
+| -------------------------------- | ---------------------------------------------------------- |
+| `group(int groupIndex)`          | `String` matched at a given group index                    |
+| `groups(List<int> groupIndices)` | List of `String` values matched at specified group indices |
+
+The `[index]` operator can be used in place of
+the `group` method retrieve the same value.
+
+### Stopwatch Class
+
+The `Stopwatch` class is used to measure elapsed time in a section of code.
+
+The `Stopwatch` class defines the following properties.
+
+| Property              | Description                                   |
+| --------------------- | --------------------------------------------- |
+| `elapsed`             | `elapsedTicks` converted to a `Duration`      |
+| `elapsedMicroseconds` | `int` microseconds (1e-6 second)              |
+| `elapsedMilliseconds` | `int` milliseconds (1e-3 second)              |
+| `elapsedTicks`        | number clock ticks                            |
+| `frequency`           | number of ticks in a second                   |
+| `isRunning`           | `bool` indicating if the stopwatch is running |
+
+The number of clock "ticks" in a second is equal to the `frequency` property.
+A common value is 1,000,000.
+
+The `elapsedTicks` property has the same value as `elapsedMicroseconds`
+if `frequency` is 1e6.
+
+The `Stopwatch` class defines the following instance methods:
+
+| Method    | Description                                  |
+| --------- | -------------------------------------------- |
+| `reset()` | resets all the `elapsed*` properties to zero |
+| `start()` | starts the stopwatch                         |
+| `stop()`  | stops the stopwatch                          |
+
+The following code demonstrates using the `Stopwatch` class:
+
+```dart
+import 'dart:math';
+
+void main() {
+  var sw = Stopwatch();
+  sw.start();
+  var sum = 0;
+  for (var i = 0; i < 1000000000; i++) {
+    sum += pow(i, 3) as int;
+  }
+  sw.stop();
+  print(sum);
+  print('elapsed = ${sw.elapsed.inMilliseconds} ms');
+}
+```
+
+### StringBuffer Class
+
+The `StringBuffer` class supports efficient, incremental building of strings.
+It defines the following properties.
+
+| Property     | Description                             |
+| ------------ | --------------------------------------- |
+| `isEmpty`    | `bool` indicating whether `length` == 0 |
+| `isNotEmpty` | `bool` indicating whether `length` >= 0 |
+| `length`     | number of code points                   |
+
+The `StringBuffer` class defines the following instance methods:
+
+| Method                                                | Description                                                                               |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `clear()`                                             | clears all code points                                                                    |
+| `toString()`                                          | `String` equivalent                                                                       |
+| `write(Object? object)`                               | writes `String` representation of `object`                                                |
+| `writeAll(Iterable objects, [String separator = ''])` | writes `String` representation of all objects in an `Iterable` with an optional separator |
+| `writeCharCode(int charCode)`                         | writes a single code point                                                                |
+| `writeln([Object? obj = ''])`                         | same as `write(Object? object)`, but adds newline                                         |
+
+TODO: Add this.
+
+### Timer class
+
+The `Timer` class executes a callback function after a given `Duration`
+either once or repeatedly.
+It provides capabilities similar to the JavaScript functions
+`setTimeout` and `setInterval`.
+The `Timer` class is defined in the `dart:async` package which must be imported.
+
+The following example demonstrates creating `Timers`
+that fire just once and repeatedly:
+
+````dart
+import 'dart:async';
+
+void main() {
+  print('starting timer');
+  var timer = Timer(Duration(seconds: 2), () {
+    print('finished timer');
+  });
+  //timer.cancel();
+
+  var count = 0;
+  Timer.periodic(Duration(seconds: 1), (timer) {
+    print('isActive = ${timer.isActive}; tick = ${timer.tick}');
+    count++;
+    if (count >= 5) timer.cancel();
+  });
+}
+``
+### Uri Class
+
+TODO: Add this.
+
+
+### UriData Class
+
+TODO: Add this.
+
+
+## Spread Operators
 
 The spread operator `...` spreads a collection inside another.
 
@@ -1469,7 +1556,7 @@ print(moreColors);
 var fruits = {'b': 'banana', 'c': 'cherry'};
 var moreFruits = {'a': 'apple', ...fruits, 'd': 'date'};
 print(moreFruits);
-```
+````
 
 The null-aware spread operator `...?` only spreads when the value is not null.
 
