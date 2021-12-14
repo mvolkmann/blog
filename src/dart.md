@@ -1860,6 +1860,17 @@ void main() {
 }
 ```
 
+Non-private properties are automatically given getter and setter methods.
+These can be provided for private properties.
+Getters can be used to implement computed properties.
+Settings can validate new values and throw when they are invalid.
+
+The following code demonstrates writing getter and setter methods.
+
+```dart
+TODO: Add this!
+```
+
 If a class doesn't define a constructor,
 a no-arg constructor that doesn't initialize any properties is provided.
 If the class has a superclass,
@@ -1871,8 +1882,8 @@ named constructor for initializing `x` and `y` to the same value.
 
 ```dart
   Point.same(double value) {
-      this.x = value;
-      this.y = value;
+    this.x = value;
+    this.y = value;
   }
 ```
 
