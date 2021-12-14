@@ -122,7 +122,6 @@ In the same way that `npm` relies on the files
 ## Creating and Running Programs
 
 Dart source files have a `.dart` file extension.
-A `.dart` file can import others using the `import` statement.
 
 The `main` function defines the starting point of a program.
 It is passed a `List` of command-line arguments.
@@ -199,8 +198,6 @@ The `dart create` command creates the following files and directories:
   For files in subdirectories of the `lib` directory,
   add subdirectories after the project name.
   For example, `import 'package:{project-name}/{subdir-name}/{file-name}.dart';`
-
-import 'package:hello_world/math.dart';
 
 - `.packages`
 
@@ -420,6 +417,26 @@ final List<int> l5 = const [1, 2];
 print(l5); // [1, 2]
 ```
 
+## Importing packages
+
+A `.dart` file can import packages using the `import` statement.
+The following imports the `dart:math` package
+and places all its top-level public names (such as `pi` and `sin`)
+in the current namespace:
+
+```dart
+import 'dart:math';
+```
+
+To avoid conflicting with names already in the current namespace,
+use the `as` keyword.
+
+```dart
+import 'dart:math' as math;
+```
+
+Now names like `pi` can be referred to with `math.pi`.
+
 ## Types
 
 All values in Dart are objects from some class.
@@ -465,6 +482,28 @@ but a variable of type `String?` can.
 The compiler requires handling cases where a nullable value might be `null`.
 This results in detecting errors involving `null` values
 at compile-time rather than runtime.
+
+The `is` operator tests whether a variable currently holds
+a value of a given type and evaluates to a `bool`.
+For example:
+
+```dart
+void evaluate(num n) {
+  if (n is int) {
+    // n is cast to int inside this block.
+    print('$n is ${n.isOdd ? 'odd' : 'even'}.');
+  }
+}
+
+void main() {
+  num n = 3.1;
+  evaluate(n); // outputs nothing
+  n = 7;
+  evaluate(n); // outputs "7 is odd."
+}
+```
+
+The `is!` operator performs the opposite test.
 
 ### Enumerations
 
@@ -622,7 +661,7 @@ to those defined in the `num` class:
 
 | Category                       | Operators                                                                             |
 | ------------------------------ | ------------------------------------------------------------------------------------- |
-| bitwise                        | `&` (and), `\|`(or),`^`(xor),`~` (negate)                                             |
+| bitwise                        | `&` (and), `\|`(or), `^`(xor), `~` (complement)                                       |
 | bit shift                      | `<<` (signed shift left), `>>` (signed shift right), and `>>>` (unsigned shift right) |
 | shorthand bitwise assignment   | `&=` (and), `\|=`(or),`^=` (xor)                                                      |
 | shorthand bit shift assignment | `<<=`, `>>-`, and `>>>==`                                                             |
@@ -1434,6 +1473,9 @@ var evenMoreFruits = {'a': 'apple', ...fruits, ...?maybeFruits, 'd': 'date'};
 print(evenMoreFruits);
 ```
 
+The spread operator cannot be used to expand a `List` into function arguments.
+Function.apply(add, numbers)
+
 ## Nullable Values
 
 Dart provides special operators for dealing with nullable values.
@@ -1504,7 +1546,16 @@ add(n1, n2) => n1 + n2;
 main() => print(add(2, 3)); // 5
 ```
 
-Functions can take both position and named arguments.
+The spread operator cannot be used to expand a `List` into function arguments.
+The static `apply` method on the `Function` class can be used for this purpose.
+For example:
+
+```dart
+var numbers = [2, 3];
+print(Function.apply(add, numbers)); // 5
+```
+
+Functions can take both positional and named arguments.
 All positional arguments must preceded the named ones.
 
 Positional arguments can be required or optional.
@@ -1607,6 +1658,12 @@ Dart supports three statements for implementing iteration,
 `for`, `while`, and `do-while`.
 The condition specified in each of these must be
 an expression that evaluates to a `bool` value.
+The `for` and `while` loops are top-tested.
+They perform a test at the beginning of each iteration
+and so may not execute their bodies at all.
+The `do-while` loop is bottom-tested.
+It performs a test after each iteration
+and so will always execute the body at least once
 
 Here are examples of each:
 
@@ -1636,6 +1693,11 @@ do {
   i--;
 } while (i > 0);
 ```
+
+All three kinds of loops support the `break` and `continue` statements.
+The `break` statement exits the loop.
+The `continue` statement skips the remainder of the current iteration
+and proceeds to the beginning of the next iteration, if any.
 
 ## Exceptions
 
