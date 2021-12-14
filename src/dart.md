@@ -1824,24 +1824,39 @@ A compile-time error is generated if such access is attempted.
 
 ## Classes
 
-Classes define properties to hold data, constructors to create instances,
+Classes define properties to hold data (a.k.a fields),
+constructors to create instances,
 and methods to operate on the data.
 
 A constructor is defined as a method with the same name as the class.
 For example:
 
 ```dart
+import 'dart:math';
+
 class Point {
   double x = 0;
   double y = 0;
 
+  /* Long way to write a constructor this is not preferred.
   Point(double x, double y) {
     this.x = x;
     this.y = y;
   }
+  */
 
-  // Alternate, preferred way to write the constructor above.
-  //Point(this.x, this.y);
+  // Another way to write the constructor using an initializer list.
+  //Point(double x, double y) : this.x = x, this.y = y;
+
+  // Preferred way to write this constructor.
+  Point(this.x, this.y);
+
+  double get distanceFromOrigin => sqrt(pow(x, 2) + pow(y, 2));
+}
+
+void main() {
+  var p = Point(3, 4);
+  print(p.distanceFromOrigin); // 5
 }
 ```
 
