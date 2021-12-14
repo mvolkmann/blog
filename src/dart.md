@@ -1860,10 +1860,11 @@ void main() {
 }
 ```
 
-Non-private properties are automatically given getter and setter methods.
-These can be provided for private properties.
+Non-private properties are automatically given getter and setter methods
+which allow them to be accessed and set from outside their class.
+Getter and setter methods can be provided for private properties.
 Getters can be used to implement computed properties.
-Settings can validate new values and throw when they are invalid.
+Setters can validate new values and throw when they are invalid.
 
 The following code demonstrates writing getter and setter methods.
 
@@ -1886,9 +1887,10 @@ class Person {
     return years;
   }
 
+  // This getter simply provides read-only access to a private property.
   String get name => _name;
 
-  // This setter performs validation.
+  // This setter performs validation before setting a private property.
   set name(String newName) {
     if (newName.isEmpty) throw "Person name cannot be empty";
     _name = newName;
