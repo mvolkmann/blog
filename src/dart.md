@@ -1150,7 +1150,7 @@ comma-separated list of pairs surrounded by curly braces.
 Each pair is written as a key followed by a colon and a value.
 When a key is a string, it must be delimited by single or double quotes.
 
-There are three ways to declare and initialize a variable that holds a `Map`.
+There are several ways to declare and initialize a variable that holds a `Map`.
 
 ```dart
 // type Map<String, int> is inferred
@@ -1161,6 +1161,42 @@ var colorMap = <String, int>{'red': 1, 'green': 2, 'blue': 3};
 
 // type Map<String, int> is specified on the variable
 Map<String, int> colorMap = {'red': 1, 'green': 2, 'blue': 3};
+
+// This map has String keys and values of any type.
+Map<String, dynamic> dog = {'name': 'Comet', 'age': 1, 'isFast': true};
+
+// The following creates an empty map where
+// keys and values both have the type dynamic.
+var myMap = {}; // same as Map()
+```
+
+Values of `Map` keys can be retrieved with the `[]` operator.
+This returns a nullable value.
+For example:
+
+```dart
+var colorMap = {'red': 1, 'green': 2, 'blue': 3};
+int? number = colorMap['blue'];
+print(number ?? 'not found'); // 3
+if (number != null) {
+  print(number); // 3
+}
+```
+
+The spread operator `...` can be used to spread `Map` objects into others.
+For example:
+
+```dart
+var map1 = {'apple': 'red', 'banana': 'yellow'};
+var map2 = {'cherry': 'red', 'grape': 'green'};
+var map3 = {
+  'lemon': 'yellow',
+  ...map1,
+  'blueberry': 'blue',
+  ...map2,
+  'watermelon': 'pink'
+};
+print(map3); // all the key/value pairs
 ```
 
 The `Map` class provides the following properties:
