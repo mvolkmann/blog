@@ -759,7 +759,7 @@ The `+` operator is not needed to concatenate literal strings.
 Literal strings can be written next to each other,
 separated only by a space, to concatenate them.
 
-An individual character (code unit) can be
+An individual character (code point) can be
 accessed with square brackets and an index.
 For example, the first character of a string `s` is obtained with `s[0]`.
 
@@ -774,6 +774,13 @@ second''';
   print(s2);
 ```
 
+Unicode character codes can be embedded in a `String` with `\u{hex-code}`.
+For example:
+
+```dart
+print('Do you prefer a \u{1F436} or \u{1F431}?'); // Do you prefer a 🐶 or 🐱?
+```
+
 Raw strings are strings where backslash character is not treated specially.
 They are indicated by preceding the opening delimiter with "r".
 For example, `r'first\nsecond'` does not treat `\n` as a newline character.
@@ -783,20 +790,20 @@ Defining custom classes that extend the `String` class is not allowed.
 
 The `String` class defines the following properties:
 
-| Property     | Description                                  |
-| ------------ | -------------------------------------------- |
-| `codeUnits`  | a `List<int>` of the characters (code units) |
-| `isEmpty`    | `bool` indicating if empty                   |
-| `isNotEmpty` | `bool` indicating if not empty               |
-| `length`     | number of characters (code units)            |
-| `runes`      | `Iterable` over the characters (code units)  |
+| Property     | Description                                   |
+| ------------ | --------------------------------------------- |
+| `codeUnits`  | a `List<int>` of the characters (code points) |
+| `isEmpty`    | `bool` indicating if empty                    |
+| `isNotEmpty` | `bool` indicating if not empty                |
+| `length`     | number of characters (code points)            |
+| `runes`      | `Iterable` over the characters (code points)  |
 
 The `String` class defines the following instance methods:
 
 | Method                                                                                | Description                                                                                          |
 | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `allMatches(String s, [int start = 0])`                                               | returns `Iterable<Match>` over matching substrings                                                   |
-| `codeUnitAt(int index)`                                                               | returns code unit at a given index; same as `[index]`                                                |
+| `codeUnitAt(int index)`                                                               | returns code point at a given index; same as `[index]`                                               |
 | `compareTo(String other)`                                                             | returns comparator value typically used for sorting                                                  |
 | `contains(Pattern other, [int start = 0])`                                            | returns `bool` indicating if a pattern is contained                                                  |
 | `endsWith(String other)`                                                              | returns `bool` indicating if ends with another `String`                                              |
@@ -822,7 +829,7 @@ The `String` class defines the following instance methods:
 
 The `String` class defines the following binary operators:
 `+` (concatenation), `*` (repeated n times),
-`==` (same code units), `[index]` (gets code unit at index).
+`==` (same code points), `[index]` (gets code point at index).
 For example `'ho ' * 3` creates the `String` `'ho ho ho '`.
 
 The table below summarized converting between numbers and strings.
@@ -1667,7 +1674,7 @@ print(evenMoreFruits);
 ```
 
 The spread operator cannot be used to expand a `List` into function arguments.
-Function.apply(add, numbers)
+Use that static method `Function.apply` for this purpose.
 
 ## Nullable Values
 
@@ -1772,7 +1779,9 @@ demo(int req1, int req2, [int opt1 = 0, int? opt2]) {
 Named parameters are declared inside curly braces.
 If they are optional, they must either have a default value
 or an optional type (ending with `?`).
-If they are required, the `required` keyword must appear before their type.
+Default values can be preceded by `=` or `:`, but `=` is preferred.
+If a named parameter is required,
+the `required` keyword must appear before its type.
 For example:
 
 ```dart
@@ -2015,7 +2024,8 @@ Classes define properties to hold data (a.k.a fields),
 constructors to create instances,
 and methods to operate on the data.
 
-A constructor is defined as a method with the same name as the class.
+A constructor is defined as a method with no return type
+and the same name as the class.
 For example:
 
 ```dart
@@ -2025,7 +2035,7 @@ class Point {
   double x = 0;
   double y = 0;
 
-  /* Long way to write a constructor this is not preferred.
+  /* Long way to write a constructor that is not preferred.
   Point(double x, double y) {
     this.x = x;
     this.y = y;
@@ -2033,9 +2043,11 @@ class Point {
   */
 
   // Another way to write the constructor using an initializer list.
+  // Note that a body is not required.
   //Point(double x, double y) : this.x = x, this.y = y;
 
-  // Preferred way to write this constructor.
+  // Preferred way to write this constructor that
+  // handles assigning argument values to instance properties.
   Point(this.x, this.y);
 
   double get distanceFromOrigin => sqrt(pow(x, 2) + pow(y, 2));
@@ -2046,6 +2058,20 @@ void main() {
   print(p.distanceFromOrigin); // 5
 }
 ```
+
+When class properties have default values, during instance creation
+those are assigned before the constructor is called.
+Those values can be used in a constructor
+to compute the values of other properties.
+
+Static properties which exist outside of any instance
+cannot be set in a constructor.
+
+Local variables in an instance method that have the same name as an instance property or method ...
+The keyword `this` is only needed to disambiguate
+property and method references from local variables with the same names.
+When there is no name conflict, preceding property and method names
+with `this.` is not required, and is discouraged.
 
 Non-private properties (including those marked `late final` but not `final`)
 are automatically given getter and setter methods
