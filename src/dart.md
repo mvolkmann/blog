@@ -1322,22 +1322,22 @@ that are all optional and default to zero:
 
 The `Duration` class defines the following constants:
 
-- `HOURS_PER_DAY`
-- `MICROSECONDS_PER_DAY`
-- `MICROSECONDS_PER_HOUR`
-- `MICROSECONDS_PER_MILLISECOND`
-- `MICROSECONDS_PER_MINUTE`
-- `MICROSECONDS_PER_SECOND`
-- `MILLISECONDS_PER_DAY`
-- `MILLISECONDS_PER_HOUR`
-- `MILLISECONDS_PER_MINUTE`
-- `MILLISECONDS_PER_SECOND`
-- `MINUTES_PER_DAY`
-- `MINUTES_PER_HOUR`
-- `SECONDS_PER_DAY`
-- `SECONDS_PER_HOUR`
-- `SECONDS_PER_MINUTE`
-- `ZERO`
+- `hoursPerDay`
+- `microsecondsPerDay`
+- `microsecondsPerHour`
+- `microsecondsPerMillisecond`
+- `microsecondsPerMinute`
+- `microsecondsPerSecond`
+- `millisecondsPerDay`
+- `millisecondsPerHour`
+- `millisecondsPerMinute`
+- `millisecondsPerSecond`
+- `minutesPerDay`
+- `minutesPerHour`
+- `secondsPerDay`
+- `secondsPerHour`
+- `secondsPerMinute`
+- `zero`
 
 The `Duration` class defines the following properties:
 
@@ -1596,10 +1596,6 @@ print('query = ${uri.query}'); // color=yellow&size=10
 print('queryParametersAll = ${uri.queryParametersAll}'); // {color: [yellow], size: [10]}
 print('fragment = ${uri.fragment}'); // my-hash
 ```
-
-### UriData Class
-
-TODO: Add this.
 
 ## Spread Operators
 
