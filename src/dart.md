@@ -1503,8 +1503,6 @@ The `StringBuffer` class defines the following instance methods:
 | `writeCharCode(int charCode)`                         | writes a single code point                                                                |
 | `writeln([Object? obj = ''])`                         | same as `write(Object? object)`, but adds newline                                         |
 
-TODO: Add this.
-
 ### Timer class
 
 The `Timer` class executes a callback function after a given `Duration`
@@ -1516,7 +1514,7 @@ The `Timer` class is defined in the `dart:async` package which must be imported.
 The following example demonstrates creating `Timers`
 that fire just once and repeatedly:
 
-````dart
+```dart
 import 'dart:async';
 
 void main() {
@@ -1533,16 +1531,75 @@ void main() {
     if (count >= 5) timer.cancel();
   });
 }
-``
+```
+
 ### Uri Class
 
-TODO: Add this.
+The `Uri` class represents a parsed URI.
+It provides many constructors for creating a `Uri` object.
 
+The `Uri` class defines the following properties.
+
+| Property             | Description                                                              |
+| -------------------- | ------------------------------------------------------------------------ |
+| `authority`          | same `String` value as `host`                                            |
+| `data`               | `UriData` object describing a data URI                                   |
+| `fragment`           | `String` hash portion without leading `#`                                |
+| `hasAbsolutePath`    | `bool` indicating whether the URI has an absolute path                   |
+| `hasAuthority`       | `bool` indicating whether the URI has an authority (or domain) part      |
+| `hasEmptyPath`       | `bool` indicating whether the URI is missing a path                      |
+| `hasFragment`        | `bool` indicating whether the URI has a fragment (or hash) part          |
+| `hasPort`            | `bool` indicating whether the URI has a specified port                   |
+| `hasQuery`           | `bool` indicating whether the URI has query parameters                   |
+| `hasScheme`          | `bool` indicating whether the URI has a specified scheme such as "https" |
+| `host`               | `String` domain                                                          |
+| `isAbsolute`         | `bool` indicating whether the URI is absolute; false for relative        |
+| `origin`             | `String` `scheme` and `host` combined                                    |
+| `path`               | `String` path portion that follows `host`                                |
+| `pathSegments`       | `List<String>` of `path` parts                                           |
+| `port`               | `int` port that optionally follows `host`                                |
+| `query`              | `String` containing all query parameters                                 |
+| `queryParameters`    | `Map<String, String>` of all query parameters                            |
+| `queryParametersAll` | `Map<String, List<String>>` of all query parameters including duplicates |
+| `scheme`             | `String` such as "http", "https", or "data"                              |
+| `userInfo`           | `String` optional username and password that can precede `host`          |
+
+The `Uri` class defines the following instance methods:
+
+| Method                        | Description                                                  |
+| ----------------------------- | ------------------------------------------------------------ |
+| `isScheme(String scheme)`     | returns `Bool` indicating whether the URI has a given scheme |
+| `normalizedPath()`            | returns a new `Uri` object that is normalized                |
+| `removeFragment()`            | returns a new `Uri` without the fragment (or hash) portion   |
+| `replace(...)`                | returns a new `Uri` with given parts replaced                |
+| `resolve(String reference)`   | returns a new `Uri` resolved relative to a URL `String`      |
+| `resolveUri(Uri reference)`   | returns a new `Uri` resolved relative to another `Uri`       |
+| `toFilePath({bool? windows})` | returns corresponding `String` file path                     |
+| `toString()`                  | returns `String` representation                              |
+
+The following code demonstrates parsing a URL string
+using the static `parse` method and
+extracting its components from fields of a `Uri` object.
+There are many other static methods not described here.
+
+```dart
+var url = 'https://mvolkmann.github.io/foo/bar?color=yellow&size=10#my-hash';
+var uri = Uri.parse(url);
+print('scheme = ${uri.scheme}'); // https
+print('authority = ${uri.authority}'); // mvolkmann.github.io
+print('host = ${uri.host}'); // mvolkmann.github.io
+print('port = ${uri.port}'); // 443?
+print('origin = ${uri.origin}'); // https://mvolkmann.github.io
+print('path = ${uri.path}'); // /foo/bar
+print('pathSegments = ${uri.pathSegments}'); // ['foo', 'bar']
+print('query = ${uri.query}'); // color=yellow&size=10
+print('queryParametersAll = ${uri.queryParametersAll}'); // {color: [yellow], size: [10]}
+print('fragment = ${uri.fragment}'); // my-hash
+```
 
 ### UriData Class
 
 TODO: Add this.
-
 
 ## Spread Operators
 
@@ -1556,7 +1613,7 @@ print(moreColors);
 var fruits = {'b': 'banana', 'c': 'cherry'};
 var moreFruits = {'a': 'apple', ...fruits, 'd': 'date'};
 print(moreFruits);
-````
+```
 
 The null-aware spread operator `...?` only spreads when the value is not null.
 
