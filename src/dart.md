@@ -442,6 +442,9 @@ Now names like `pi` can be referred to with `math.pi`.
 All values in Dart are objects from some class.
 This is even true for basic types like `bool`, `int`, and `double`.
 
+These and many other classes are defined in the `dart:core` package.
+Classes defined here do not need to be imported.
+
 All types except `Null` are subclasses of the `Object` class.
 
 Dart supports the following built-in basic types:
@@ -1088,7 +1091,7 @@ A `Set` is an unordered collection of unique values.
 A literal set is written as a
 comma-separated list of values surrounded by curly braces.
 
-There are three ways to declare and initialize a variable that holds a `Set`.
+There are several ways to declare and initialize a variable that holds a `Set`.
 
 ```dart
 // type Set<String> is inferred
@@ -1099,6 +1102,14 @@ var colors = <String>{'red', 'green', 'blue'};
 
 // type Set<String> is specified on the variable
 Set<String> colors = {'red', 'green', 'blue'};
+
+var colors = Set<String>();
+colors.add('red');
+colors.add('green');
+colors.add('blue');
+
+// The following creates an empty Map, not an empty Set.
+// var colors = {};
 ```
 
 The literal syntax `<value-type>{}` creates an empty `Set`.
@@ -1218,7 +1229,7 @@ void main() {
 The `dart:core` package defines all the basic types
 like `bool`, `int`, `double`, and `String`.
 It also defines collection types like `List`, `Set`, and `Map`.
-Highlights of other classes defined here are described below.
+Highlights of other classes defined in `dart:core` are described below.
 
 ### DateTime class
 
