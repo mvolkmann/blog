@@ -1777,8 +1777,9 @@ demo(int req1, int req2, [int opt1 = 0, int? opt2]) {
 ```
 
 Named parameters are declared inside curly braces.
-If they are optional, they must either have a default value
-or an optional type (ending with `?`).
+These must follow all the positional parameters, if any.
+When named parameters are optional, they must either
+have a default value or a nullable type (ending with `?`).
 Default values can be preceded by `=` or `:`, but `=` is preferred.
 If a named parameter is required,
 the `required` keyword must appear before its type.
@@ -2032,8 +2033,8 @@ For example:
 import 'dart:math';
 
 class Point {
-  double x = 0;
-  double y = 0;
+  double x;
+  double y0;
 
   /* Long way to write a constructor that is not preferred.
   Point(double x, double y) {
@@ -2042,13 +2043,21 @@ class Point {
   }
   */
 
-  // Another way to write the constructor using an initializer list.
-  // Note that a body is not required.
+  // Another way to write the constructor is to use an initializer list.
+  // Note that having a body is optional.
   //Point(double x, double y) : this.x = x, this.y = y;
 
   // Preferred way to write this constructor that
   // handles assigning argument values to instance properties.
   Point(this.x, this.y);
+
+  // To make x and y be optional named parameters with default values,
+  // change the previous constructor to the following:
+  //Point({this.x = 0, this.y = 0});
+
+  // To make x and y be required named parameters,
+  // change the previous constructor to the following:
+  //Point({required this.x, required this.y});
 
   double get distanceFromOrigin => sqrt(pow(x, 2) + pow(y, 2));
 }
@@ -2064,10 +2073,15 @@ those are assigned before the constructor is called.
 Those values can be used in a constructor
 to compute the values of other properties.
 
+Here's a somewhat advanced rule regarding constructors.
+Properties marked as `final` that are not also marked as `late`
+and have a non-nullable type must be
+initialized before the constructor body is reached.
+Typically this is done in the initializer list.
+
 Static properties which exist outside of any instance
 cannot be set in a constructor.
 
-Local variables in an instance method that have the same name as an instance property or method ...
 The keyword `this` is only needed to disambiguate
 property and method references from local variables with the same names.
 When there is no name conflict, preceding property and method names
@@ -2136,29 +2150,29 @@ a no-arg constructor that doesn't initialize any properties is provided.
 If the class has a superclass,
 the default constructor calls its no-arg constructor.
 
-Additional "named constructors" can be provided.
-For example, the `Point` class above could have a
-named constructor for initializing `x` and `y` to the same value.
+A class can only have one "regular constructor",
+but it can have any number of "named constructors".
+These begin with the the class name followed by a period and a unique name.
+For example, the `Point` class above could have
+a named constructor for creating an origin point
+and another for initializing `x` and `y` to the same value.
+
+An "initializer list" is a list of property assignments
+that follow the parameter list and a colon.
+Both initializer lists and bodies are optional in constructors.
+When both are present, the assignments in the initializer list
+occur before the body is executed.
+The named constructors below demonstrate
+including an initializer list and omitting a body.
 
 ```dart
-  Point.same(double value) {
-    this.x = value;
-    this.y = value;
-  }
+  Point.origin() : x = 0, y = 0;
+
+  Point.same(double value) : x = value, y = value;
 ```
 
 The create an object from a class, call one of its constructors
 in the same was as calling a function, without a `new` keyword.
-
-Constructors can initialize properties before their body runs.
-For example, the following is an alternate way
-to write the previous named constructor.
-This has no body, but a body could be added by replacing the closing semi-colon
-with a block of code surrounded by curly braces.
-
-```dart
-  Point.same(double value): x = value, y = value;
-```
 
 Pulling all of this together we can write the following:
 
@@ -2168,7 +2182,7 @@ class Point {
   double y = 0;
 
   Point(this.x, this.y);
-
+  Point.origin() : x = 0, y = 0;
   Point.same(double value): x = value, y = value;
 
   @override
@@ -2180,6 +2194,8 @@ class Point {
 void main() {
   var pt = Point(2, 3);
   print('pt = $pt'); // pt = (2.0, 3.0)
+  pt = Point.origin();
+  print('pt = $pt'); // pt = (0.0, 0.0)
   pt = Point.same(4);
   print('pt = $pt'); // pt = (4.0, 4.0)
 }
