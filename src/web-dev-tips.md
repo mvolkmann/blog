@@ -2219,6 +2219,18 @@ If none is found, they are positioned relative to the browser window.
 
 The `sticky` value is often used to keep `table` headings in view
 when a table is scrolled vertically.
+To do this, add the following CSS rules:
+
+```css
+table {
+  position: relative;
+}
+
+table > thead th {
+  position: sticky;
+  top: 0;
+}
+```
 
 The following example demonstrates using `absolute` to
 position elements at the four corners of an ancestor element

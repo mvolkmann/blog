@@ -2068,6 +2068,16 @@ void main() {
 }
 ```
 
+If multiple `Point` objects are created with the same `x` and `y` values,
+they will be separate objects in memory.
+To prevent this, mark all the properties as `final`
+and mark all the constructors as `const`.
+The following version of the `Point` class demonstrates this:
+
+```dart
+TODO: ADD THIS!
+```
+
 When class properties have default values, during instance creation
 those are assigned before the constructor is called.
 Those values can be used in a constructor
@@ -2226,10 +2236,10 @@ void main() {
 }
 ```
 
-A class can inherit the properties and methods of one other class
-using the `extend` keyword.
-Classes that do not explicitly extend another class
-implicitly extend the built-in `Object` class.
+## Object Class
+
+All Dart classes inherit directly or indirectly from the `Object` class.
+This means all objects have the properties and methods defined by that class.
 
 The `Object` class provides the following properties:
 
@@ -2245,8 +2255,10 @@ The `Object` class provides the following methods:
 | `noSuchMethod(Invocation invocation)` | called when a non-existent method is called on the object |
 | `toString()`                          | returns the `String` representation of the object         |
 
+## Invocation Class
+
 The `Invocation` object passed to the `noSuchMethod` method
-provides the following properties:
+of the `Object` class provides the following properties:
 
 | Property              | Description                                             |
 | --------------------- | ------------------------------------------------------- |
@@ -2259,8 +2271,86 @@ provides the following properties:
 | `positionalArguments` | `List` of positional arguments                          |
 | `typeArguments`       | `List` of argument types                                |
 
+## noSuchMethod Method
+
+The `noSuchMethod` method defined by the `Object` class
+is available in all objects.
+The default implementation throws a ???.
+This can be overridden to customize the handling of
+references to undefined object members.
+
+The following code demonstrates the data available inside a `noSuchMethod`
+
+```dart
+class Demo {
+  @override
+  noSuchMethod(Invocation invocation) {
+    var name = invocation.memberName;
+    if (invocation.isAccessor) {
+      if (invocation.isGetter) print('$name is a getter');
+      if (invocation.isSetter) print('$name is a setter');
+    }
+    if (invocation.isMethod) {
+      print('$name is a method.');
+
+      // Type arguments are generic parameters between angle brackets.
+      var typeArgs = invocation.typeArguments;
+      if (typeArgs.isNotEmpty) print('type arguments are ${typeArgs}');
+
+      var posArgs = invocation.positionalArguments;
+      if (posArgs.isNotEmpty) print('positional arguments are ${posArgs}');
+
+      var namedArgs = invocation.namedArguments;
+      if (namedArgs.isNotEmpty) print('named arguments are ${namedArgs}');
+    }
+  }
+}
+
+main() {
+  dynamic demo = Demo();
+
+  print(demo.one);
+  // Output is:
+  // Symbol("one") is a getter
+  // null
+
+  demo.two = 'test';
+  // Output is:
+  // Symbol("two=") is a setter
+
+  demo.three('a1', 'a2', a3: true, a4: 4);
+  // Output is:
+  // Symbol("three") is a method.
+  // positional arguments are [a1, a2]
+  // named arguments are {Symbol("a3"): true, Symbol("a4"): 4}
+
+  demo.four<bool, int>(1, 2, 3);
+  // Output is:
+  // Symbol("four") is a method.
+  // type arguments are [bool, int]
+  // positional arguments are [1, 2, 3]
+}
+```
+
+One use of `noSuchMethod` is implementing domain specific languages (DSL).
+The following code demonstrates a basic XML builder
+that can be used to generate a `String` of HTML.
+
+```dart
+TODO: Add this.
+```
+
+## Inheritance
+
+A class can inherit the properties and methods of one other class
+using the `extend` keyword.
+Classes that do not explicitly extend another class
+implicitly extend the built-in `Object` class.
+
 The following code demonstrates creating a
 subclass of the `Person` class defined above.
+Note how the `super` keyword is used to call a superclass constructor
+or superclass method whose name matches one in the subclass.
 
 ```dart
 class SoftwareEngineer extends Person {
