@@ -2170,7 +2170,7 @@ class Person {
   String _name;
   DateTime? birthday;
 
-  Person(String name, [this.birthday]) : _name = name;
+  Person({required String name, this.birthday}) : _name = name;
 
   // This getter computes its value.
   int get age {
@@ -2200,14 +2200,14 @@ class Person {
 }
 
 void main() {
-  var p1 = Person('Mark', DateTime(1961, DateTime.april, 16));
-  var p2 = Person('Tami');
-  print(p1);
-  print(p2);
+  var p1 = Person(name: 'Mark', birthday: DateTime(1961, DateTime.april, 16));
+  var p2 = Person(name: 'Tami');
+  print(p1); // Mark is 60 years old.
+  print(p2); // Tami
 
   try {
   p2.name = 'Tamara';
-  print(p2);
+  print(p2); // Tamara
   p2.name = ''; // throws
   print(p2);
   } catch (e) {
