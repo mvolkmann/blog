@@ -2100,16 +2100,6 @@ void main() {
 }
 ```
 
-If multiple `Point` objects are created with the same `x` and `y` values,
-they will be separate objects in memory.
-To prevent this, mark all the properties as `final`
-and mark all the constructors as `const`.
-The following version of the `Point` class demonstrates this:
-
-```dart
-TODO: ADD THIS!
-```
-
 When class properties have default values, during instance creation
 those are assigned before the constructor is called.
 Those values can be used in a constructor
@@ -2265,6 +2255,31 @@ void main() {
 
   var p2 = Person(name: 'Tami');
   print(p2); // Tami
+}
+```
+
+A normal constructor creates an object, but doesn't explicitly return it.
+A "factory constructor" can call a normal constructor with computed arguments,
+modify the object it creates, and return it.
+One use is to implement a singleton class
+where it is not possible create additional instances.
+
+```dart
+class MySingleton {
+    // This is a private, named constructor.
+    MySingleton._private();
+
+    // This creates an instance of this class.
+    static final _instance = MySingleton._private();
+
+    // This factory constructor always returns the same instance.
+    factory MySingleton() => _instance;
+}
+
+void main() {
+  var obj1 = MySingleton();
+  var obj2 = MySingleton();
+  print(identical(obj1, obj2)); // true
 }
 ```
 
