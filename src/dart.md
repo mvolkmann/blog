@@ -2130,6 +2130,8 @@ property and method references from local variables with the same names.
 When there is no name conflict, preceding property and method names
 with `this.` is not required, and is discouraged.
 
+TODO: Describe the `late` keyword.
+
 ### Getters and Setters
 
 When object properties are accessed, Dart actually
@@ -2452,6 +2454,50 @@ void main() {
 }
 ```
 
+### Inheritance
+
+A class can inherit the properties and methods of **one** other class
+using the `extend` keyword.
+Classes that do not explicitly extend another class
+implicitly extend the built-in `Object` class.
+This means all classes extend `Object`.
+
+The following code demonstrates creating a
+subclass of the `Person` class defined above.
+Note how the `super` keyword is used to call a superclass constructor
+or superclass method whose name matches one in the subclass.
+The superclass constructor can be called from an initializer list.
+
+```dart
+class SoftwareEngineer extends Person {
+  String primaryLanguage;
+
+  SoftwareEngineer({
+    required String name,
+    int? age,
+    required this.primaryLanguage
+  }) : super(name: name, age: age);
+
+  // This method calls the superclass method with the same name
+  // using the super keyword.
+  @override
+  String toString() {
+    var connector = age == null ? '' : ' and';
+    return '${super.toString()}$connector knows $primaryLanguage.';
+  }
+}
+
+void main() {
+  var p3 = SoftwareEngineer(name: 'Mark', age: 60, primaryLanguage: 'Dart');
+  print(p3);
+
+  var p4 = SoftwareEngineer(name: 'Tami', primaryLanguage: 'JavaScript');
+  print(p4);
+}
+```
+
+To call a named constructor of a superclass, use `super.theName(arguments)`.
+
 ### Abstract Classes (Interfaces)
 
 Classes can be marked with the `abstract` keyword
@@ -2743,52 +2789,6 @@ The code above outputs the following:
 ```
 
 {% endraw %}
-
-## Inheritance
-
-A class can inherit the properties and methods of one other class
-using the `extend` keyword.
-Classes that do not explicitly extend another class
-implicitly extend the built-in `Object` class.
-This means all classes extend `Object`.
-
-The following code demonstrates creating a
-subclass of the `Person` class defined above.
-Note how the `super` keyword is used to call a superclass constructor
-or superclass method whose name matches one in the subclass.
-The superclass constructor can be called from an initializer list.
-
-```dart
-class SoftwareEngineer extends Person {
-  String primaryLanguage;
-
-  SoftwareEngineer({
-    required String name,
-    int? age,
-    required this.primaryLanguage
-  }) : super(name: name, age: age);
-
-  // This method calls the superclass method with the same name
-  // using the super keyword.
-  @override
-  String toString() {
-    var connector = age == null ? '' : ' and';
-    return '${super.toString()}$connector knows $primaryLanguage.';
-  }
-}
-
-void main() {
-  var p3 = SoftwareEngineer(name: 'Mark', age: 60, primaryLanguage: 'Dart');
-  print(p3);
-
-  var p4 = SoftwareEngineer(name: 'Tami', primaryLanguage: 'JavaScript');
-  print(p4);
-}
-```
-
-To call a named constructor of a superclass, use `super.theName(arguments)`.
-
-TODO: Describe the `late` keyword.
 
 ## Cascade Operator
 
