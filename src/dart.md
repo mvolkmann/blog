@@ -980,7 +980,7 @@ the combine function is called with `initialValue` and the first element.
 In the first iteration of the `reduce` method,
 the combine function is called with the first and second elements.
 
-### Lists
+### List Class
 
 Arrays in Dart are represented by `List` objects.
 A literal array is written as a
@@ -1019,6 +1019,13 @@ dogs.forEach(print);
 ```
 
 Two lists can be concatenated to create a new `List` with the `+` operator.
+For example:
+
+```dart
+var list1 = [1, 2];
+var list2 = [3, 4];
+var list3 = list1 + list2; // [1, 2, 3, 4]
+```
 
 Literal lists can include logic to determine the elements,
 referred to as "list comprehension".
@@ -1094,7 +1101,7 @@ In addition to the methods provided by the `Iterable` class,
 | `sort([int compare(E a, E b)?])`                             | sorts the elements in place using a `Comparator` function      |
 | `sublist(int start, [int? end])`                             | returns a new `List` that is a subset                          |
 
-### Sets
+### Set Class
 
 A `Set` is an unordered collection of unique values.
 A literal set is written as a
@@ -1148,7 +1155,7 @@ In addition to the methods provided by the `Iterable` class,
 | `retainWhere(bool test(E element))`     | removes all elements that do not pass a test                                 |
 | `union(Set<E> other)`                   | returns a new `Set` containing all elements in this one and `other`          |
 
-### Maps
+### Map Class
 
 A `Map` is a collection of key/value pairs.
 The keys and values can have any type.
@@ -2404,7 +2411,9 @@ class XMLBuilder {
 }
 
 main() {
+  // This must be declared dynamic in order for noSuchMethod to work.
   dynamic b = XMLBuilder();
+
   // Dart requires named arguments to follow positional arguments.
   // This uses named arguments to describe XML attributes
   // and positional arguments to represent child elements and text content.
