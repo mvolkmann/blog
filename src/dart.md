@@ -2463,6 +2463,13 @@ When a body is present, subclasses can use the method as is or override it.
 When a body is not present, a semicolon is placed after the parameter list
 and subclasses must override the method to provide a body.
 
+A class can `implement` any number of other classes.
+For example, `class A implements B, C { ... }`
+means that class `A` will implement
+every method described in classes `B` and `C`,
+regardless of whether `B` and `C` are abstract
+and regardless of whether their methods include bodies.
+
 Interface in other programming languages are
 collections of method signatures that some classes implement.
 Dart doesn't support defining "interfaces",
