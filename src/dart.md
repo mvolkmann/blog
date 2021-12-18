@@ -2339,79 +2339,88 @@ The following code demonstrates a basic XML builder
 that can be used to generate a `String` of HTML.
 
 ```dart
-String indentLines(List lines) {
+// Creates an indented String from lines of XML.
+String formatLines(List lines) {
   var level = 0;
   var s = '';
-  for (var line in lines) {
-    var l = line as String;
-    var endTag = l.startsWith('</');
-    if (endTag) level--;
-    s += '  ' * level + l + '\n';
-    var startTag = !endTag && l.startsWith('<') && l.endsWith('>') && !l.endsWith('/>');
-    if (startTag) level++;
+  for (var l in lines) {
+    var line = l as String;
+    var isEndTag = line.startsWith('</');
+    if (isEndTag) level--;
+    s += ('  ' * level) + line + '\n';
+    var isStartTag = !isEndTag &&
+        line.startsWith('<') &&
+        line.endsWith('>') &&
+        !line.endsWith('/>');
+    if (isStartTag) level++;
   }
   return s;
 }
 
+// Extracts the name of a Symbol.
+// symbol.toString() returns 'Symbol("some-name")'.
 String symbolName(Symbol symbol) {
   var name = symbol.toString().substring(8);
   return name.substring(0, name.lastIndexOf('"'));
 }
 
 class XMLBuilder {
-  // This returns a List<String> representing output lines.
+  // Returns a List<String> representing lines of XML.
   @override
   noSuchMethod(Invocation invocation) {
+    // The member name is the name of an element to create.
     var name = symbolName(invocation.memberName);
+
+    // Only method invocations are supported.
     if (!invocation.isMethod) throw 'unsupported accessor $name';
+
     var tag = '<$name';
     var lines = [];
 
-    var posArgs = invocation.positionalArguments;
-    var namedArgs = invocation.namedArguments;
-
-    if (posArgs.isNotEmpty) {
-      for (var arg in posArgs) {
-        // Positional arguments that are calls to XMLBuilder methods
-        // return null, so we have to check for that.
-        if (arg != null) {
-          if (arg is List) {
-            lines.addAll(arg);
-          } else {
-            lines.add(arg);
-          }
-        }
+    // Positional arguments represent child elements and text content.
+    for (var arg in invocation.positionalArguments) {
+      if (arg is List) {
+        lines.addAll(arg);
+      } else {
+        lines.add(arg);
       }
     }
 
-    namedArgs.forEach((key, value) {
+    // Named arguments represent attributes of the current element.
+    invocation.namedArguments.forEach((key, value) {
       tag += ' ${symbolName(key)}="$value"';
     });
 
-    if (posArgs.isEmpty) {
-      tag += ' />';
-      lines.add(tag);
+    if (invocation.positionalArguments.isEmpty) { // no children
+      lines.add(tag + ' />'); // closes element in shorthand way
     } else {
-      lines.insert(0, tag + '>');
-      lines.add('</$name>');
+      // Children have already been added to lines.
+      lines.insert(0, tag + '>'); // adds start tag before children
+      lines.add('</$name>'); // adds end tag after children
     }
+
     return lines;
   }
 }
 
 main() {
   dynamic b = XMLBuilder();
-  var result = b.html(
+  // Dart requires named arguments to follow positional arguments.
+  // This uses named arguments to describe XML attributes
+  // and positional arguments to represent child elements and text content.
+  // So unfortunately XML attributes must be described
+  // after child elements and text content.
+  var lines = b.html(
     b.head(
       b.title("My Title"),
-      b.link(href: 'my-styles.css')
+      b.link(href: 'my-styles.css'),
     ),
     b.body(
       b.h1('My Header'),
-      b.p('Hello, World!', style: 'color: red')
-    )
+      b.p('Hello, World!', style: 'color: red'),
+    ),
   );
-  print(indentLines(result));
+  print(formatLines(lines));
 }
 ```
 

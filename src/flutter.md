@@ -15,6 +15,10 @@ see this <a href="../dart/">page</a>.
 Everything rendered by a Flutter app is rendered by a widget.
 There are many provided widgets and custom ones can be defined.
 
+The Flutter framework is implemented in Dart,
+except for the {% aTargetBlank "https://skia.org", "Skia" %}
+2D graphics library which is implemented in C++.
+
 ## Resources
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
