@@ -1299,60 +1299,6 @@ void main() {
 }
 ```
 
-When overriding a superclass method, the parameter types
-can be made more restrictive using the `covariant` keyword.
-The following code demonstrates using this keyword.
-
-```dart
-import 'dart:math';
-
-abstract class Shape {
-  double area();
-  bool same(Shape shape);
-}
-
-class Circle extends Shape {
-  double x; // center
-  double y; // center
-  double radius;
-
-  Circle({required this.radius, this.x = 0, this.y = 0});
-
-  @override double area() => pi * pow(radius, 2);
-
-  @override bool same(covariant Circle other) =>
-    x == other.x && y == other.y && radius == other.radius;
-}
-
-class Rectangle extends Shape {
-  double x; // left
-  double y; // bottom
-  double height;
-  double width;
-
-  Rectangle({required this.height, required this.width, this.x = 0, this.y = 0});
-
-  @override double area() => width * height;
-
-  @override bool same(covariant Rectangle other) =>
-    x == other.x && y == other.y && height == other.height && width == other.width;
-}
-
-void main() {
-  var c = Circle(radius: 5);
-  print(c.area()); // 78.5...
-
-  var r = Rectangle(width: 6, height: 3, x: 2, y: 4);
-  print(r.area()); // 18
-
-  print(c.same(Circle(radius: 5))); // true
-  print(c.same(Circle(radius: 3))); // false
-
-  print(r.same(Rectangle(width: 6, height: 3, x: 2, y: 4))); // true
-  print(r.same(Rectangle(width: 6, height: 3))); // false
-}
-```
-
 ## Additional Core Classes
 
 The `dart:core` package defines all the basic types
@@ -2107,9 +2053,20 @@ A compile-time error is generated if such access is attempted.
 
 ## Classes
 
-Classes define properties to hold data (a.k.a fields),
-constructors to create instances,
-and methods to operate on the data.
+Classes define:
+
+- class properties (a.k.a. fields) to hold data
+  not associated with a specific instance
+- instance properties (a.k.a. fields) to hold data
+  associated with a specific instance
+- constructors to create instances
+- class methods to operate on class properties
+  and possibly instances passed to them
+- instance methods to operate on data in a specific instance
+- operators to return data computed from an instance
+  and possibly one other instance (for binary operators)
+
+### Constructors
 
 A constructor is defined as a method with no return type
 and the same name as the class.
@@ -2154,7 +2111,7 @@ void main() {
 }
 ```
 
-When class properties have default values, during instance creation
+When instance properties have default values, during instance creation
 those are assigned before the constructor is called.
 Those values can be used in a constructor
 to compute the values of other properties.
@@ -2172,6 +2129,8 @@ The keyword `this` is only needed to disambiguate
 property and method references from local variables with the same names.
 When there is no name conflict, preceding property and method names
 with `this.` is not required, and is discouraged.
+
+### Getters and Setters
 
 When object properties are accessed, Dart actually
 calls a "getter" or "setter" method.
@@ -2275,12 +2234,7 @@ a no-arg constructor that doesn't initialize any properties is provided.
 If the class has a superclass,
 the default constructor calls its no-arg constructor.
 
-A class can only have one "regular constructor",
-but it can have any number of "named constructors".
-These begin with the the class name followed by a period and a unique name.
-For example, the `Point` class above could have
-a named constructor for creating an origin point
-and another for initializing `x` and `y` to the same value.
+### Initializer Lists
 
 An "initializer list" is a list of property assignments
 that follow the parameter list and a colon.
@@ -2289,6 +2243,15 @@ When both are present, the assignments in the initializer list
 occur before the body is executed.
 The named constructors below demonstrate
 including an initializer list and omitting a body.
+
+### Named Constructors
+
+A class can only have one "regular constructor",
+but it can have any number of "named constructors".
+These begin with the the class name followed by a period and a unique name.
+For example, the `Point` class above could have
+a named constructor for creating an origin point
+and another for initializing `x` and `y` to the same value.
 
 ```dart
   Point.origin() : x = 0, y = 0;
@@ -2351,6 +2314,8 @@ void main() {
 }
 ```
 
+### Instance Methods
+
 Classes can define instance methods.
 These look like function definitions,
 but differ in that they can use the `this` keyword.
@@ -2375,6 +2340,8 @@ void main() {
   print(pt); // (3, 1)
 }
 ```
+
+### Class Methods
 
 Classes can define class methods.
 These look like instance methods, but are preceded by the `static` keyword.
@@ -2432,6 +2399,8 @@ void main() {
 }
 ```
 
+### Operators
+
 Operators are similar to instance methods, but include the keyword "operator".
 Only operator names supported by Dart can be defined.
 For example, there is no `@` operator in Dart,
@@ -2456,6 +2425,8 @@ void main() {
 }
 ```
 
+### Factory Constructors
+
 A normal constructor creates an object, but doesn't explicitly return it.
 A "factory constructor" can call a normal constructor with computed arguments,
 modify the object it creates, and return it.
@@ -2478,6 +2449,71 @@ void main() {
   var obj1 = MySingleton();
   var obj2 = MySingleton();
   print(identical(obj1, obj2)); // true
+}
+```
+
+### Abstract Classes (Interfaces)
+
+Classes can be marked as `abstract` which prevents creating instances of them.
+Abstract classes are useful for defining
+functionality to be inherited by other classes.
+
+Interface in other programming languages are collections of method signatures
+that some classes implement.
+Dart doesn't support defining "interfaces",
+but `abstract` classes can be used for this purpose.
+
+When overriding a superclass method, the parameter types
+can be made more restrictive using the `covariant` keyword.
+The following code demonstrates using this keyword.
+
+```dart
+import 'dart:math';
+
+abstract class Shape {
+  double area();
+  bool same(Shape shape);
+}
+
+class Circle extends Shape {
+  double x; // center
+  double y; // center
+  double radius;
+
+  Circle({required this.radius, this.x = 0, this.y = 0});
+
+  @override double area() => pi * pow(radius, 2);
+
+  @override bool same(covariant Circle other) =>
+    x == other.x && y == other.y && radius == other.radius;
+}
+
+class Rectangle extends Shape {
+  double x; // left
+  double y; // bottom
+  double height;
+  double width;
+
+  Rectangle({required this.height, required this.width, this.x = 0, this.y = 0});
+
+  @override double area() => width * height;
+
+  @override bool same(covariant Rectangle other) =>
+    x == other.x && y == other.y && height == other.height && width == other.width;
+}
+
+void main() {
+  var c = Circle(radius: 5);
+  print(c.area()); // 78.5...
+
+  var r = Rectangle(width: 6, height: 3, x: 2, y: 4);
+  print(r.area()); // 18
+
+  print(c.same(Circle(radius: 5))); // true
+  print(c.same(Circle(radius: 3))); // false
+
+  print(r.same(Rectangle(width: 6, height: 3, x: 2, y: 4))); // true
+  print(r.same(Rectangle(width: 6, height: 3))); // false
 }
 ```
 
@@ -2733,52 +2769,6 @@ void main() {
 To call a named constructor of a superclass, use `super.theName(arguments)`.
 
 TODO: Describe the `late` keyword.
-
-Classes can be marked as `abstract` which prevents creating instances of them.
-Abstract classes are useful for defining
-functionality to be inherited by other classes.
-
-Interface in other programming languages are collections of method signatures
-that some classes implement.
-Dart doesn't support defining "interfaces",
-but `abstract` classes can be used for this purpose.
-For example:
-
-```dart
-import 'dart:math';
-
-abstract class Shape {
-    // All classes that extend Shape must
-    // implement a method with this signature.
-    double getArea();
-}
-
-class Rectangle extends Shape {
-    double height;
-    double width;
-
-    Rectangle({required this.width, required this.height});
-
-    @override
-    double getArea() => width * height;
-}
-
-class Circle extends Shape {
-    double radius;
-
-    Circle({required this.radius});
-
-    @override
-    double getArea() => pi * pow(radius, 2);
-}
-
-void main() {
-  var r = Rectangle(width: 3, height: 4);
-  var c = Circle(radius: 5);
-  print(r.getArea()); // 12
-  print(c.getArea()); // 78.5...
-}
-```
 
 ## Cascade Operator
 
