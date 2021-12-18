@@ -2119,14 +2119,51 @@ property and method references from local variables with the same names.
 When there is no name conflict, preceding property and method names
 with `this.` is not required, and is discouraged.
 
+When object properties are accessed, Dart actually
+calls a "getter" or "setter" method.
 Non-private properties (including those marked `late final` but not `final`)
 are automatically given getter and setter methods
 which allow them to be accessed and set from outside their class.
 Getter and setter methods can be provided for private properties.
-Getters can be used to implement computed properties.
+Getters can also be used to implement computed properties.
 Setters can validate new values and throw when they are invalid.
 
 The following code demonstrates writing getter and setter methods.
+Typically the properties on which they operate are made private
+to prevent direct access.
+
+```dart
+class Point {
+  double _x = 0;
+  double y = 0;
+
+  double get x {
+    print('in getter for x');
+    return _x;
+  }
+
+  set x(double x) {
+    print('in setter for x');
+    _x = x;
+  }
+
+  Point(x, this.y) : _x = x;
+
+  @override
+  String toString() {
+    return '($_x, $y}';
+  }
+}
+
+void main() {
+  var pt = Point(2, 3);
+  pt.x = 7; // outputs "in setter for x"
+  print(pt.x); // outputs "in getter for x" and 7
+}
+```
+
+The following code demonstrates implementing
+a read-only property and a computed property:
 
 ```dart
 class Person {
@@ -2147,7 +2184,9 @@ class Person {
     return years;
   }
 
-  // This getter simply provides read-only access to a private property.
+  // This getter simply provides access to a private property.
+  // The property is read-only because
+  // it is private and no setter is defined.
   String get name => _name;
 
   // This setter performs validation before setting a private property.
