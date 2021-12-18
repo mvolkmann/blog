@@ -2454,14 +2454,27 @@ void main() {
 
 ### Abstract Classes (Interfaces)
 
-Classes can be marked as `abstract` which prevents creating instances of them.
-Abstract classes are useful for defining
-functionality to be inherited by other classes.
+Classes can be marked with the `abstract` keyword
+which prevents creating instances of them.
+Abstract classes are useful for defining functionality
+to be implemented or inherited by other classes.
+Including bodies in the methods of an abstract class is optional.
+When a body is present, subclasses can use the method as is or override it.
+When a body is not present, a semicolon is placed after the parameter list
+and subclasses must override the method to provide a body.
 
-Interface in other programming languages are collections of method signatures
-that some classes implement.
+Interface in other programming languages are
+collections of method signatures that some classes implement.
 Dart doesn't support defining "interfaces",
 but `abstract` classes can be used for this purpose.
+
+A subclass of an abstract class must implement all methods
+described in the abstract class that do not have bodies.
+If a subclass implements all the methods,
+it can use the `implements` keyword instead of the `extends` keyword
+to express its relationship to the abstract class.
+But if a subclass wants to inherit methods from an abstract class
+that contain bodies, it must use the `extends` keyword.
 
 When overriding a superclass method, the parameter types
 can be made more restrictive using the `covariant` keyword.
@@ -2475,7 +2488,7 @@ abstract class Shape {
   bool same(Shape shape);
 }
 
-class Circle extends Shape {
+class Circle implements Shape {
   double x; // center
   double y; // center
   double radius;
@@ -2488,7 +2501,7 @@ class Circle extends Shape {
     x == other.x && y == other.y && radius == other.radius;
 }
 
-class Rectangle extends Shape {
+class Rectangle implements Shape {
   double x; // left
   double y; // bottom
   double height;
