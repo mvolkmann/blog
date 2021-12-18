@@ -419,6 +419,8 @@ print(l5); // [1, 2]
 
 In order to create instances of a class that are compile-time constants,
 all fields must be final and the constructor must be marked const.
+When this is done, constructor calls with same argument values
+return references to the same object.
 The following code demonstrates this:
 
 ```dart
@@ -431,7 +433,7 @@ class Point {
 
 main() {
   var p1 = const Point(1, 2); // compile-time constant
-  var p2 = const Point(1, 2); // compile-time constant
+  const p2 = Point(1, 2); // alternate way to create a compile-time constant
   var p3 = Point(1, 2); // not a constant
   print(identical(p1, p2)); // true - same object
   print(identical(p1, p3)); // false - not same object
