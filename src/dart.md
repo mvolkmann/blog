@@ -2284,6 +2284,9 @@ void main() {
 ```
 
 Operators are similar to instance methods, but include the keyword "operator".
+Only operator names supported by Dart can be defined.
+For example, there is no `@` operator in Dart,
+so custom classes cannot define it.
 The following code defines the "+" operator for the `Point` class.
 This returns a new `Point` and does not modify the `Point` on the left.
 
