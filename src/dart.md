@@ -2514,6 +2514,7 @@ For example, `class A implements B, C { ... }`
 means that class `A` will implement
 every method described in classes `B` and `C`,
 regardless of whether `B` and `C` are abstract
+(because every class defines an interface)
 and regardless of whether their methods include bodies.
 
 Interface in other programming languages are
@@ -2582,6 +2583,14 @@ void main() {
   print(r.same(Rectangle(width: 6, height: 3))); // false
 }
 ```
+
+In addition to defining methods,
+abstract classes can define instance properties.
+Classes that implement such an abstract class must also define
+the same instance properties and annotate them with `@override`.
+This is useful when an abstract class defines methods with bodies
+that require certain instance properties to be present
+and subclasses will inherit those method implementations.
 
 ## Object Class
 
