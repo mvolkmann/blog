@@ -2151,7 +2151,7 @@ class Point {
 
   @override
   String toString() {
-    return '($_x, $y}';
+    return '($_x, $y)';
   }
 }
 
@@ -2258,7 +2258,7 @@ class Point {
 
   @override
   String toString() {
-    return '($x, $y}';
+    return '($x, $y)';
   }
 }
 
@@ -2319,6 +2319,62 @@ void main() {
   var pt = Point(2, 3);
   pt.translate(1, -2);
   print(pt); // (3, 1)
+}
+```
+
+Classes can define class methods.
+These look like instance methods, but are preceded by the `static` keyword.
+They cannot use the `this` keyword because
+they aren't associated with a specific instance,
+but they can access static properties
+and the instance properties of objects passed to them.
+The following example demonstrates a static method in the `Point` class
+that takes a `List` of `Point` objects
+and returns a `Point` in the center of them.
+It also defines a static property that holds
+the number of `Point` objects that have been created.
+
+```dart
+import 'dart:math';
+
+class Point {
+  static int instanceCount = 0;
+  double x = 0;
+  double y = 0;
+
+  Point(this.x, this.y) {
+    instanceCount++;
+  }
+
+  static Point centerOf(List<Point> points) {
+    if (points.isEmpty) return Point(0, 0);
+
+    final first = points[0];
+    var minX = first.x;
+    var minY = first.y;
+    var maxX = first.x;
+    var maxY = first.y;
+    //for (var point in points) {
+    for (var i = 1; i < points.length; i++) {
+      var point = points[i];
+      minX = min(minX, point.x);
+      minY = min(minY, point.y);
+      maxX = max(maxX, point.x);
+      maxY = max(maxY, point.y);
+    }
+    return Point((maxX + minX) / 2, (maxY + minY) / 2);
+  }
+
+  @override
+  String toString() {
+    return '($x, $y)';
+  }
+}
+
+void main() {
+  var points = [Point(1, 1), Point(5, 4), Point(7, 2)];
+  print(Point.instanceCount); // 3
+  print(Point.centerOf(points)); // (4, 2.5)
 }
 ```
 
