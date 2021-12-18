@@ -355,7 +355,7 @@ This has a type of `Type` which has a `toString` method.
 
 Variables whose values are known at compile-time
 should be declared with the keyword `const`.
-Class properties whose values are known at compile-time
+Class properties whose values are **known at compile-time**
 should be declared with the keywords `static const`.
 This prevents assigning a new value,
 and also prevents modifying the value
