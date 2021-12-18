@@ -1299,6 +1299,60 @@ void main() {
 }
 ```
 
+When overriding a superclass method, the parameter types
+can be made more restrictive using the `covariant` keyword.
+The following code demonstrates using this keyword.
+
+```dart
+import 'dart:math';
+
+abstract class Shape {
+  double area();
+  bool same(Shape shape);
+}
+
+class Circle extends Shape {
+  double x; // center
+  double y; // center
+  double radius;
+
+  Circle({required this.radius, this.x = 0, this.y = 0});
+
+  @override double area() => pi * pow(radius, 2);
+
+  @override bool same(covariant Circle other) =>
+    x == other.x && y == other.y && radius == other.radius;
+}
+
+class Rectangle extends Shape {
+  double x; // left
+  double y; // bottom
+  double height;
+  double width;
+
+  Rectangle({required this.height, required this.width, this.x = 0, this.y = 0});
+
+  @override double area() => width * height;
+
+  @override bool same(covariant Rectangle other) =>
+    x == other.x && y == other.y && height == other.height && width == other.width;
+}
+
+void main() {
+  var c = Circle(radius: 5);
+  print(c.area()); // 78.5...
+
+  var r = Rectangle(width: 6, height: 3, x: 2, y: 4);
+  print(r.area()); // 18
+
+  print(c.same(Circle(radius: 5))); // true
+  print(c.same(Circle(radius: 3))); // false
+
+  print(r.same(Rectangle(width: 6, height: 3, x: 2, y: 4))); // true
+  print(r.same(Rectangle(width: 6, height: 3))); // false
+}
+```
+
 ## Additional Core Classes
 
 The `dart:core` package defines all the basic types
@@ -2640,11 +2694,13 @@ A class can inherit the properties and methods of one other class
 using the `extend` keyword.
 Classes that do not explicitly extend another class
 implicitly extend the built-in `Object` class.
+This means all classes extend `Object`.
 
 The following code demonstrates creating a
 subclass of the `Person` class defined above.
 Note how the `super` keyword is used to call a superclass constructor
 or superclass method whose name matches one in the subclass.
+The superclass constructor can be called from an initializer list.
 
 ```dart
 class SoftwareEngineer extends Person {
@@ -2673,6 +2729,8 @@ void main() {
   print(p4);
 }
 ```
+
+To call a named constructor of a superclass, use `super.theName(arguments)`.
 
 TODO: Describe the `late` keyword.
 
