@@ -2517,6 +2517,12 @@ regardless of whether `B` and `C` are abstract
 (because every class defines an interface)
 and regardless of whether their methods include bodies.
 
+The order which classes are listed after the `implements` keyword matters.
+Method lookup occurs from right to left (last one in wins).
+For example, in `class A extends B implements C, D { ... }`,
+if `B`, `C`, and `D` all implement the same method,
+the version in `D` will take precedence.
+
 Interface in other programming languages are
 collections of method signatures that some classes implement.
 Dart doesn't support defining "interfaces",
@@ -2631,7 +2637,7 @@ of the `Object` class provides the following properties:
 
 The `noSuchMethod` method defined by the `Object` class
 is available in all objects.
-The default implementation throws a ???.
+The default implementation throws `NoSuchMethodError`.
 This can be overridden to customize the handling of
 references to undefined object members.
 
@@ -2690,7 +2696,7 @@ main() {
 
 One use of `noSuchMethod` is implementing domain specific languages (DSL).
 The following code demonstrates a basic XML builder
-that can be used to generate a `String` of HTML.
+that can be used to generate HTML.
 
 ```dart
 // Creates an indented String from lines of XML.
@@ -2721,7 +2727,7 @@ String symbolName(Symbol symbol) {
 class XMLBuilder {
   // Returns a List<String> representing lines of XML.
   @override
-  noSuchMethod(Invocation invocation) {
+  dynamic noSuchMethod(Invocation invocation) {
     // The member name is the name of an element to create.
     var name = symbolName(invocation.memberName);
 
