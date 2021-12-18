@@ -739,7 +739,7 @@ The Dart `math` package defines the following functions:
 | `sqrt(num x)`                      | returns square root of x        |
 | `tan(num radians)`                 | returns tangent of radians      |
 
-### String type
+### String Class
 
 Instances of the `String` class hold an immutable sequence of UTF-16 characters.
 
@@ -1017,6 +1017,8 @@ dogs.forEach((dog) => print(dog));
 // Same as above.
 dogs.forEach(print);
 ```
+
+Two lists can be concatenated to create a new `List` with the `+` operator.
 
 Literal lists can include logic to determine the elements,
 referred to as "list comprehension".
@@ -2307,7 +2309,7 @@ class Demo {
 }
 
 main() {
-  dynamic demo = Demo();
+  dynamic demo = Demo(); // type must be dynamic
 
   print(demo.one);
   // Output is:
@@ -2337,8 +2339,100 @@ The following code demonstrates a basic XML builder
 that can be used to generate a `String` of HTML.
 
 ```dart
-TODO: Add this.
+String indentLines(List lines) {
+  var level = 0;
+  var s = '';
+  for (var line in lines) {
+    var l = line as String;
+    var endTag = l.startsWith('</');
+    if (endTag) level--;
+    s += '  ' * level + l + '\n';
+    var startTag = !endTag && l.startsWith('<') && l.endsWith('>') && !l.endsWith('/>');
+    if (startTag) level++;
+  }
+  return s;
+}
+
+String symbolName(Symbol symbol) {
+  var name = symbol.toString().substring(8);
+  return name.substring(0, name.lastIndexOf('"'));
+}
+
+class XMLBuilder {
+  // This returns a List<String> representing output lines.
+  @override
+  noSuchMethod(Invocation invocation) {
+    var name = symbolName(invocation.memberName);
+    if (!invocation.isMethod) throw 'unsupported accessor $name';
+    var tag = '<$name';
+    var lines = [];
+
+    var posArgs = invocation.positionalArguments;
+    var namedArgs = invocation.namedArguments;
+
+    if (posArgs.isNotEmpty) {
+      for (var arg in posArgs) {
+        // Positional arguments that are calls to XMLBuilder methods
+        // return null, so we have to check for that.
+        if (arg != null) {
+          if (arg is List) {
+            lines.addAll(arg);
+          } else {
+            lines.add(arg);
+          }
+        }
+      }
+    }
+
+    namedArgs.forEach((key, value) {
+      tag += ' ${symbolName(key)}="$value"';
+    });
+
+    if (posArgs.isEmpty) {
+      tag += ' />';
+      lines.add(tag);
+    } else {
+      lines.insert(0, tag + '>');
+      lines.add('</$name>');
+    }
+    return lines;
+  }
+}
+
+main() {
+  dynamic b = XMLBuilder();
+  var result = b.html(
+    b.head(
+      b.title("My Title"),
+      b.link(href: 'my-styles.css')
+    ),
+    b.body(
+      b.h1('My Header'),
+      b.p('Hello, World!', style: 'color: red')
+    )
+  );
+  print(indentLines(result));
+}
 ```
+
+The code above outputs the following:
+
+{% raw %}
+
+```html
+<html>
+  <head>
+    <title>My Title</title>
+    <link href="my-styles.css" />
+  </head>
+  <body>
+    <h1>My Header</h1>
+    <p style="color: red">Hello, World!</p>
+  </body>
+</html>
+```
+
+{% endraw %}
 
 ## Inheritance
 
