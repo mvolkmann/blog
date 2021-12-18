@@ -417,6 +417,27 @@ final List<int> l5 = const [1, 2];
 print(l5); // [1, 2]
 ```
 
+In order to create instances of a class that are compile-time constants,
+all fields must be final and the constructor must be marked const.
+The following code demonstrates this:
+
+```dart
+class Point {
+  final double x;
+  final double y;
+
+  const Point(this.x, this.y);
+}
+
+main() {
+  var p1 = const Point(1, 2); // compile-time constant
+  var p2 = const Point(1, 2); // compile-time constant
+  var p3 = Point(1, 2); // not a constant
+  print(identical(p1, p2)); // true - same object
+  print(identical(p1, p3)); // false - not same object
+}
+```
+
 ## Importing packages
 
 A `.dart` file can import packages using the `import` statement.
