@@ -2225,11 +2225,11 @@ class Point {
 
 void main() {
   var pt = Point(2, 3);
-  print('pt = $pt'); // pt = (2.0, 3.0)
+  print(pt); // (2.0, 3.0)
   pt = Point.origin();
-  print('pt = $pt'); // pt = (0.0, 0.0)
+  print(pt); // (0.0, 0.0)
   pt = Point.same(4);
-  print('pt = $pt'); // pt = (4.0, 4.0)
+  print(pt); // (4.0, 4.0)
 }
 ```
 
@@ -2279,7 +2279,28 @@ class Point {
 void main() {
   var pt = Point(2, 3);
   pt.translate(1, -2);
-  print('pt = $pt'); // pt = (3.0, 1.0)
+  print(pt); // (3, 1)
+}
+```
+
+Operators are similar to instance methods, but include the keyword "operator".
+The following code defines the "+" operator for the `Point` class.
+This returns a new `Point` and does not modify the `Point` on the left.
+
+```dart
+class Point {
+  ... same as before ...
+
+  Point operator +(Point other) {
+      return Point(x + other.x, y + other.y);
+  }
+}
+
+void main() {
+  var pt1 = Point(2, 3);
+  var pt2 = Point(1, 2);
+  var pt3 = pt1 + pt2;
+  print(pt3); // (3, 5)
 }
 ```
 
