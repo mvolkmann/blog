@@ -2258,10 +2258,35 @@ void main() {
 }
 ```
 
+Classes can define instance methods.
+These look like function definitions,
+but differ in that they can use the `this` keyword.
+For example, the following instance method
+can be added to the `Point` class defined above:
+
+```dart
+class Point {
+ ... same as before ...
+
+  void translate(double dx, double dy) {
+    // We don't need "this." before x and y here because
+    // there is no name conflict with local variables.
+    x += dx;
+    y += dy;
+  }
+}
+
+void main() {
+  var pt = Point(2, 3);
+  pt.translate(1, -2);
+  print('pt = $pt'); // pt = (3.0, 1.0)
+}
+```
+
 A normal constructor creates an object, but doesn't explicitly return it.
 A "factory constructor" can call a normal constructor with computed arguments,
 modify the object it creates, and return it.
-One use is to implement a singleton class
+One use of a factory constructor is to implement a singleton class
 where it is not possible create additional instances.
 
 ```dart
