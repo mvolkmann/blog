@@ -6699,6 +6699,18 @@ Live Server supports many more {% aTargetBlank
 
 ## Miscellaneous
 
+### Local HTTP File Server
+
+There are many tools for serving local files over HTTP.
+This useful for testing HTML, CSS, and JavaScript in a web browser.
+One option is {% aTargetBlank "https://github.com/http-party/http-server", "http-server" %}
+in npm.
+
+To use this, enter `npx http-server` and note the port number it selects.
+Then browse `localhost:{port-number}`.
+
+### Kill Listening Port
+
 Frequently, when starting a server locally to test a web app,
 an error message is output stating that
 the port the server tried to use is being used by another process.
