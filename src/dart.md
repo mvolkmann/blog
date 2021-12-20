@@ -2622,6 +2622,15 @@ Regardless of how a mixin is defined, it cannot do any of the following:
 
 To mix a mixin into a class, use the `with` keyword.
 A class can use any number mixins.
+The class can then access any of the mixin properties and methods.
+It can also override any of the mixin methods.
+
+When calling a method on a class that extends another class
+and mixes in multiple mixins, the order of the mixins matters.
+The `extends` keyword must appear before the `with` keyword.
+Suppose we have `class A extends B with C, D`
+and `B`, `C`, and `D` all define a method with the same name.
+The last one in wins, so the version in `D` is used.
 
 The following code demonstrates defining two mixins
 and mixing both into the same class:
@@ -2696,6 +2705,41 @@ main() {
   print('my BMI = ${me.getBmi()}'); // 22.06...
   print('wife BMI = ${wife.getBmi()}'); // 19.94...
   print('distance = ${me.distanceFrom(wife)}'); // 5
+}
+```
+
+A mixin can be restricted to only be applicable
+to classes that extend a given class.
+For example, the first line of the `Sized` mixin above
+could be changed to `mixin Sized on Animal`
+to only allow it to be mixed into subclasses of `Animal`.
+
+### Extensions
+
+An extension adds properties and methods to an existing class,
+including core Dart classes.
+
+The following code adds a property and a method to the `String` class.
+
+```dart
+extension StringExtension on String {
+  // Property that holds the first character or null.
+  String? get first => isEmpty ? null : this[0];
+
+  // Method that returns the last character or null.
+  // This demonstrates adding a method, but it would be
+  // better to make this a computed property like "first".
+  String? last() => isEmpty ? null : this[length - 1];
+
+  // Method that returns a new String with the characters in reverse order.
+  String reverse() => String.fromCharCodes(codeUnits.reversed);
+}
+
+main() {
+  var name = 'Mark';
+  print(name.first); // 'M'
+  print(name.last()); // 'k'
+  print(name.reverse()); // 'kraM'
 }
 ```
 
