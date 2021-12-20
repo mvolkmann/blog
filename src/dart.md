@@ -2598,6 +2598,107 @@ This is useful when an abstract class defines methods with bodies
 that require certain instance properties to be present
 and subclasses will inherit those method implementations.
 
+### Mixins
+
+Mixins provide a way to share property definitions
+and method implementations between classes.
+
+There are three ways to define a mixin.
+
+1. Use the `mixin` keyword (preferred).
+1. Define a class with no constructor.
+1. Define an abstract class.
+
+Recall that classes have a constructor and can be extended.
+Also recall that abstract classes can be implemented.
+
+Regardless of how a mixin is defined, it cannot do any of the following:
+
+- have a constructor that is used to create instances
+- be used with the `extends` keyword
+  to act as the superclass of another class
+- be used with the `implements` keyword
+  to define methods another class must implement
+
+To mix a mixin into a class, use the `with` keyword.
+A class can use any number mixins.
+
+The following code demonstrates defining two mixins
+and mixing both into the same class:
+
+```dart
+import 'dart:math';
+
+// Objects that are "Sized" have a height and weight.
+mixin Sized {
+  double height = 0; // in feet
+  double weight = 0; // in pounds
+
+  void setSize({required double height, required double weight}) {
+    this.height = height;
+    this.weight = weight;
+  }
+
+  double getBmi() {
+    var kg = weight * 0.453592;
+    var meters = height * 0.3048;
+    return kg / pow(meters, 2);
+  }
+}
+
+// Objects that are "Located" have x and y coordinates.
+mixin Located {
+  double x = 0;
+  double y = 0;
+
+  void setLocation({required double x, required double y}) {
+    this.x = x;
+    this.y = y;
+  }
+
+  double distanceFrom(Located other) {
+    return sqrt(pow(x - other.x, 2) + pow(y - other.y, 2));
+  }
+}
+
+class Animal {
+  String species;
+
+  Animal({required this.species});
+}
+
+// A class can only extend one other class,
+// but it can mixin any number of mixins.
+class Human extends Animal with Located, Sized {
+  String name;
+
+  Human({required this.name}) : super(species: 'homo sapiens');
+}
+
+// We can define additional classes that mixin
+// one or both of the Located and Sized mixins.
+
+main() {
+  var me = Human(name: 'Mark');
+  me.setSize(height: 6.17, weight: 172);
+  me.setLocation(x: 0, y: 0);
+
+  var wife = Human(name: 'Tami');
+  // As an alternative to calling setSize,
+  // we can set the height and weight properties directly.
+  wife.height = 5.42;
+  wife.weight = 120;
+  // As an alternative to calling setLocation,
+  // we can set the x and y properties directly.
+  wife.x = 3;
+  wife.y = 4;
+
+  print('my BMI = ${me.getBmi()}'); // 22.06...
+  print('wife BMI = ${wife.getBmi()}'); // 19.94...
+  print('distance = ${me.distanceFrom(wife)}'); // 5
+}
+```
+
 ## Object Class
 
 All Dart classes inherit directly or indirectly from the `Object` class.
