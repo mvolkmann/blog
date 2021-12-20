@@ -306,6 +306,8 @@ class Greet extends StatelessWidget {
 
 Here is an example of a stateful widget that maintains a count
 and provides buttons for incrementing and decrementing the count.
+The `setState` method defined by the `State` class
+is similar to the `setState` function in React.
 
 <img alt="Flutter Counter" style="width: 60%"
     src="/blog/assets/Flutter-Counter.png?v={{pkg.version}}"
@@ -924,14 +926,15 @@ which is documented at {% aTargetBlank
 
 There are many approaches to persisting app data
 so it is not lost when an app is closed.
-One approach is use the built-in `SharedPreference` class.
-Another is to use a library like
-{% aTargetBlank "https://bloclibrary.dev/", "bloc" %} or
-{% aTargetBlank "https://pub.dev/packages/provider", "provider" %}, or
-{% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
-"cubit" %}.
-Yet another is to use {% aTargetBlank
-"https://docs.flutter.dev/cookbook/persistence/sqlite", "SQLite" %}.
+
+- built-in `SharedPreference` class
+- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} library
+- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
+  (similar to the Context API in React)
+- {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
+  "cubit" %} library
+- {% aTargetBlank "https://docs.flutter.dev/cookbook/persistence/sqlite",
+  "SQLite" %} database on the device
 
 ## Packages
 
