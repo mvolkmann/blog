@@ -3096,6 +3096,8 @@ in subdirectories nested at any depth below the `lib` directory.
 All names defined in a library, including private ones,
 are accessible throughout the library.
 
+### import Statement
+
 Libraries are imported into other `.dart` files with an `import` statement.
 For example, suppose a project in a directory named `my_project`
 defines a library in the file `lib/math/geometry.dart`.
@@ -3145,13 +3147,27 @@ void main() {
 }
 ```
 
+The Dart analyzer will issue a warning if an `import` statement
+uses a relative file path (starting with `./` or `../`) to navigate
+from files outside the `lib` directory to files inside it.
+Instead `import` paths for files under the `lib` directory
+should begin with `package:{project_name}/` as shown above.
+
+Relative file paths in `import` statements
+from files inside the `lib` directory
+to files outside it are not supported.
+But relative file paths can be used in `import` statements between
+files that are both under the `lib` directory or both outside it.
+
+### Libraries Defined By Multiple Files
+
 Often a library is defined by a single source file,
 but libraries can be defined by multiple files.
 There are two ways to do this.
 One approach involves the `export` statement.
 The other involves the `part` and `part of` statements.
 
-### export Statement
+#### export Statement
 
 For example, a `math` library can be divided into the files
 `math.dart`, `algebra.dart`, `geometry.dart`, and `trigonometry.dart`.
@@ -3166,7 +3182,7 @@ export 'trigonometry.dart';
 Importing `math.dart` provides access to the names it defines
 and also the names defined the files that it exports.
 
-### part and part of Statements
+#### part and part of Statements
 
 Using the same example, the `math.dart` file can contain
 the following `part` statements instead of `export` statements:
