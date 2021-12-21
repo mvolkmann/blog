@@ -918,13 +918,25 @@ for (var value in anyList) {
 ```
 
 Typically parameterized types have single-letter, uppercase names like `T`.
-Any number of these can be specified inside angle brackets.
+Common names for type parameters include:
+
+- `E` for Element
+- `K` for Key
+- `R` for Return type
+- `T` for Type
+- `V` for Value
+
+Longer, more descriptive names, like `Event` and `State` can also be used.
+
+Any number of type parameters can be specified inside angle brackets.
 They can be constrained to only types that extend a given class
 using the `extends` keyword,
 or left unconstrained in which case values of any type can be used.
 
 The following example demonstrates implementing a generic function.
 It takes any `Iterable` containing `num` values and returns its sum.
+This means it works with both `int` and `double` values
+since their superclass is `num`.
 
 ```dart
 N sum<N extends num>(Iterable<N> numbers) {
@@ -939,17 +951,18 @@ void main() {
 
 ## Collection Types
 
-Dart provides many collection classes.
+Dart provides many generic collection classes.
 Built-in collection classes that can be used without importing
 include `List`, `Set`, and `Map`.
 Other collection classes are defined in the package `dart:collection`
-and must be imported. These include `DoubleLinkedQueue`, `HashMap`, `HashSet`,
+and must be imported.
+These include `DoubleLinkedQueue`, `HashMap`, `HashSet`,
 `LinkedHashMap`, `LinkedHashSet`, `LinkedList`, `ListQueue`, `Queue`,
 and `SplayTreeMap`, `SplayTreeSet`.
 
 ### Iterable
 
-The following collection classes all have `Iterable` as a superclass:
+The following generic collection classes all have `Iterable` as a superclass:
 `DoubleLinkedQueue`, `IterableBase`, `IterableMixin`,
 `LinkedList`, `List`, `ListQueue`, `Queue`, `Runes`, and `Set`.
 
@@ -2597,6 +2610,64 @@ the same instance properties and annotate them with `@override`.
 This is useful when an abstract class defines methods with bodies
 that require certain instance properties to be present
 and subclasses will inherit those method implementations.
+
+The following example defines a generic class `Pair`.
+This class implements the core abstract class `Comparable`
+which describes the `compareTo` method.
+Instances of the `Pair` class hold a pair of values that have the same type.
+That type must also implement the `Comparable` interface.
+Note how this is enforced on the generic type parameter
+using the `extends` keyword.
+
+The `List` `sort` method can sort any values that implement `Comparable`.
+It can also sort values that do not implement `Comparable`
+if it is passed a function for performing comparisons.
+But that is not necessary for `Pair` objects.
+
+```dart
+class Pair<T extends Comparable> implements Comparable<Pair<T>> {
+  T first;
+  T second;
+
+  Pair(this.first, this.second);
+
+  @override
+  int compareTo(Pair<T> other) {
+    var result = first.compareTo(other.first);
+    if (result == 0) result = second.compareTo(other.second);
+    return result;
+  }
+
+  @override
+  String toString() => '($first, $second)';
+}
+
+main() {
+  var intPairs = [
+    Pair(1, 2),
+    Pair(4, 3),
+    Pair(2, 7),
+    Pair(0, 4),
+    Pair(4, 3),
+    Pair(3, 1)
+  ];
+  intPairs.sort();
+  print(intPairs); // [(0, 4), (1, 2), (2, 7), (3, 1), (4, 3), (4, 3)]
+
+  var stringPairs = [
+    Pair('red', 'apple'),
+    Pair('green', 'grape'),
+    Pair('orange', 'peach'),
+    Pair('yellow', 'banana'),
+    Pair('pink', 'watermelon'),
+    Pair('orange', 'orange')
+  ];
+  stringPairs.sort();
+  print(stringPairs);
+  // [(green, grape), (orange, orange), (orange, peach),
+  //  (pink, watermelon), (red, apple), (yellow, banana)]
+}
+```
 
 ### Mixins
 
