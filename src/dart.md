@@ -3090,6 +3090,8 @@ void main() {
 
 Every `.dart` file defines a "library".
 Typically these are placed in the `lib` directory of a project.
+They can be placed at the top of the `lib` directory or
+in subdirectories nested at any depth below the `lib` directory.
 
 All names defined in a library, including private ones,
 are accessible throughout the library.
@@ -3104,8 +3106,9 @@ with the following:
 import 'package:my_project/math/geometry.dart';
 ```
 
-This makes all the public names defined in `geometry.dart`
+This makes all the non-private names defined in `geometry.dart`
 available in `my_project.dart`.
+
 To avoid name conflicts with names defined in the importing file
 with those in the imported file,
 the import can be changed to the following:
