@@ -3271,6 +3271,9 @@ import 'package:test/test.dart';
 
 void main() {
   test('add works', () { // passing an anonymous function to test
+    expect(add(0, 0), 0);
+    expect(add(1, 0), 1);
+    expect(add(0, 1), 1);
     expect(add(2, 3), 5);
   });
 }
@@ -3280,6 +3283,11 @@ The `expect` function takes an actual value and an expected value.
 It also accepts the optional named parameters `reason` and `skip`.
 The `reason` parameter is a `String` to be displayed
 when the actual and expected values do not match.
+
+If the actual and expected values in a call to `expect` do not match,
+it throws a `TestFailure` exception.
+This prevents other calls to `expect` in the same `test` function
+from being evaluated.
 
 To temporarily skip evaluating an `expect`,
 set the `skip` parameter to `true` or any `String`.
@@ -3311,8 +3319,8 @@ To run all the tests in a project, enter `dart test`.
 This is a bit slow the first time it is run,
 but subsequent runs are much faster.
 If all of the tests pass, this will output "All tests passed!".
-Otherwise it will output "Some tests failed."
-along with expected and actual results.
+Otherwise it will output the expected and actual results
+of the failed tests, followed by "Some tests failed."
 
 To run tests from inside VS Code, click the beaker icon in the left nav
 to display the test panel.
@@ -3320,7 +3328,7 @@ Then click one of the play buttons at the top (non-debug or debug).
 To run a single test, hover over it in the test panel
 to reveal play buttons and click one of them.
 
-Tests can be grouped into suites sing the `group` function
+Tests can be grouped into suites using the `group` function
 which takes a name and a function that
 calls the `test` and `group` functions.
 For example:
