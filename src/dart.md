@@ -3241,11 +3241,21 @@ that includes an implementation of the Dart runtime.
 
 ### Testing
 
-Dart tests using the `test` package.
+Dart unit tests can be implementing using the `test` package.
 To install this in a Dart project, enter `dart pub add test --dev`.
 
+Test source files should be placed in the `test` directory.
+The directory structure under `test` should
+mirror the directory structure under `lib`.
+There should be one test source file corresponding to
+each `.dart` file under the `lib` directory.
+
+Each test source file name should match the name of the file
+for which it provides tests, but must end with `_test.dart`.
+And each must import the file that it tests.
+
 Here is an example of code to be tested in the file `lib/math.dart`
-that is inside a project named `hello_world`.
+that is inside a project named `demo`.
 
 ```dart
 double add(double n1, double n2) {
@@ -3253,13 +3263,11 @@ double add(double n1, double n2) {
 }
 ```
 
-Test files should be placed in the `test` directory
-and have names that end with `_test.dart`.
 Here is an example of test code in the file `test/math_test.dart`.
 
 ```dart
-import 'package:test/test.dart';
 import 'package:demo/math.dart'; // demo is the project name
+import 'package:test/test.dart';
 
 void main() {
   test('add works', () { // passing an anonymous function to test
@@ -3269,7 +3277,35 @@ void main() {
 ```
 
 The `expect` function takes an actual value and an expected value.
-TODO: Are there other forms of calling this?
+It also accepts the optional named parameters `reason` and `skip`.
+The `reason` parameter is a `String` to be displayed
+when the actual and expected values do not match.
+
+To temporarily skip evaluating an `expect`,
+set the `skip` parameter to `true` or any `String`.
+When `skip` is set to `true`, `expect` will output
+"Skip expect: ({reason-or-expected-value})".
+When `skip` is set to a `String`, `expect` will output
+"Skip expect: {skip-value}".
+Note that the arguments to `expect` are evaluated
+regardless of the value of `skip`.
+
+Suppose we want to test the function `processOrder`
+on orders that contain multiple items, one item, and zero items,
+and the function returns a `bool`
+indicating whether the order was successfully processed.
+Here are examples of `expect` calls with a `skip` value.
+
+```dart
+expect(processOrder(multipleOrder), true, skip: true);
+// outputs "Skip expect: (true)" which isn't descriptive
+
+expect(processOrder(singleOrder), true, reason: 'single order', skip: true);
+// outputs "Skip expect: single order"
+
+expect(processOrder(emptyOrder), true, skip: 'not implemented yet');
+// outputs "Skip expect: not implemented yet"
+```
 
 To run all the tests in a project, enter `dart test`.
 This is a bit slow the first time it is run,
