@@ -3328,6 +3328,8 @@ When `skip` is set to a `String`, `expect` will output
 Note that the arguments to `expect` are evaluated
 regardless of the value of `skip`.
 
+TODO: Can you skip a `test` or `group`?
+
 Suppose we want to test the function `processOrder`
 on orders that contain multiple items, one item, and zero items,
 and the function returns a `bool`
@@ -3344,6 +3346,10 @@ expect(processOrder(singleOrder), true, reason: 'single order', skip: true);
 expect(processOrder(emptyOrder), true, skip: 'not implemented yet');
 // outputs "Skip expect: not implemented yet"
 ```
+
+The `test` and `group` functions also support a `skip` named parameter
+for skipping execution of a test or entire group of tests.
+It works the same way as does in the `expect` function.
 
 To run all the tests in a project, enter `dart test`.
 This is a bit slow the first time it is run,

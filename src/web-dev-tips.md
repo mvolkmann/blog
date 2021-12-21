@@ -5582,6 +5582,31 @@ much longer than the actual processing time.
 | IE11    | 17                     | 11                        |
 | Safari  | 17                     | 6                         |
 
+### Downloading a File
+
+There is no builtin function for downloading a file
+containing generated text.
+This is useful in situations like generating CSV.
+
+Here is a function that does this by creating an anchor tag,
+configuring it to download a file with a given name,
+adding it to the DOM, clicking it, and removing it from the DOM.
+
+```js
+function downloadFile(filename, content) {
+  const element = document.createElement('a');
+  element.setAttribute(
+    'href',
+    'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
+  );
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+```
+
 ### Intersection Observer API
 
 The {% aTargetBlank
