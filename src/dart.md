@@ -3284,10 +3284,40 @@ It also accepts the optional named parameters `reason` and `skip`.
 The `reason` parameter is a `String` to be displayed
 when the actual and expected values do not match.
 
+The expected value can be a {% aTargetBlank
+"https://pub.dev/documentation/matcher/latest/matcher/matcher-library.html",
+"matcher" %}.
+This supports more complex validation such as the following:
+
+```dart
+expect(getFullName(user), allOf([
+  startsWith('R'),
+  contains('Mark'),
+  endsWith('Volkmann')
+]));
+```
+
 If the actual and expected values in a call to `expect` do not match,
 it throws a `TestFailure` exception.
 This prevents other calls to `expect` in the same `test` function
 from being evaluated.
+
+To test that an expression throws a specific kind of exception,
+use the `throwsA` function. For example:
+
+```dart
+void main() {
+  int intDivide(int n1, int n2) => n1 ~/ n2;
+
+  test('integer division works', () {
+    expect(intDivide(7, 2), 3);
+    expect(
+      () => intDivide(1, 0),
+      throwsA(isA<IntegerDivisionByZeroException>()),
+    );
+  });
+}
+```
 
 To temporarily skip evaluating an `expect`,
 set the `skip` parameter to `true` or any `String`.
