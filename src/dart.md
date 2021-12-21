@@ -3088,8 +3088,11 @@ void main() {
 
 ## Libraries
 
-Every `.dart` file is a "library".
+Every `.dart` file defines a "library".
 Typically these are placed in the `lib` directory of a project.
+
+All names defined in a library, including private ones,
+are accessible throughout the library.
 
 Libraries are imported into other `.dart` files with an `import` statement.
 For example, suppose a project in a directory named `my_project`
@@ -3138,6 +3141,55 @@ void main() {
   print(c.area); // 78.5...
 }
 ```
+
+Often a library is defined by a single source file,
+but libraries can be defined by multiple files.
+There are two ways to do this.
+One approach involves the `export` statement.
+The other involves the `part` and `part of` statements.
+
+### export Statement
+
+For example, a `math` library can be divided into the files
+`math.dart`, `algebra.dart`, `geometry.dart`, and `trigonometry.dart`.
+The `math.dart` file can contain the following `export` statements:
+
+```dart
+export 'algebra.dart';
+export 'geometry.dart';
+export 'trigonometry.dart';
+```
+
+Importing `math.dart` provides access to the names it defines
+and also the names defined the files that it exports.
+
+### part and part of Statements
+
+Using the same example, the `math.dart` file can contain
+the following `part` statements instead of `export` statements:
+
+```dart
+part 'algebra.dart';
+part 'geometry.dart';
+part 'trigonometry.dart';
+```
+
+The `algebra.dart`, `geometry.dart`, and `trigonometry.dart` files must
+contain the following `part of` statement referring back to `math.dart`:
+
+```dart
+part of 'math.dart';
+```
+
+All `import` statements needed by these four `.dart` files must
+appear in file containing the `part` statements (`main.dart` in this case)
+and they must appear before the `part` statements.
+The files containing `part of` statements cannot contain `import` statements.
+
+As with using `export` statements, importing `math.dart` provides access to
+the names it defines and also the names defined in its `part` files.
+
+TODO: Why would `part` and `part of` every be preferred over `exports`?
 
 ## Concurrency
 
