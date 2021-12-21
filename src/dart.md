@@ -3347,7 +3347,8 @@ expect(processOrder(emptyOrder), true, skip: 'not implemented yet');
 // outputs "Skip expect: not implemented yet"
 ```
 
-The `test` and `group` functions also support a `skip` named parameter
+The `test` function and `group` function (described below)
+also support a `skip` named parameter
 for skipping execution of a test or entire group of tests.
 It works the same way as does in the `expect` function.
 
