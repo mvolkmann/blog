@@ -3217,9 +3217,93 @@ the names defined in the files they reference.
 
 ## Concurrency
 
-See the `async` and `await` keywords.
-Also, read about "Isolates".
-TODO: Add more here.
+TODO: Add an intro. paragraph here.
+TODO: See the `async` and `await` keywords.
+
+### Futures
+
+The `dart:async` library defines the `Future` class.
+A `Future` represents the result of code that will run in the future
+inside the current thread.
+It is similar to a `Promise` in JavaScript.
+
+Execution of these is managed by the event loop.
+Asynchronous tasks are placed on either
+the regular task queue or the microtask queue.
+Tasks on the microtask queue have a higher priority.
+
+The `Future` class defines many named constructors.
+
+To execute code after a given `Duration`,
+create a `Future` with the `Future.delayed` constructor.
+For example:
+
+```dart
+main() {
+  print('first');
+  Future.delayed(const Duration(seconds: 1), () {
+    print('third');
+  });
+  print('second');
+}
+```
+
+Functions can return a `Future`.
+Calling code can wait from the `Future` to succeed or fail.
+There are two approaches that can be used.
+One approach is to use the `then` and `catchError` methods.
+The other approach is to use the `async` and `await` keywords
+which requires importing the `dart:async` library.
+
+The following code demonstrates using `then` and `catchError`.
+
+```dart
+Future<int> getFutureScore(int player) {
+  return Future<int>.delayed(const Duration(seconds: 1), () {
+    if (player == 1) return 7;
+    throw 'unknown player $player';
+  });
+}
+
+void main() {
+  getFutureScore(1) // throws if argument isn't 1
+    .then((int score) {
+      print('score = $score');
+    })
+    .catchError((error) {
+      print('error = $error');
+    });
+}
+```
+
+The following code demonstrates using `async` and `await`.
+
+```dart
+import 'dart:async';
+
+// The same getFutureScore function above goes here.
+
+void main() async {
+  try {
+    int score = await getFutureScore(1); // throws if argument isn't 1
+    print('score = $score');
+  } catch (e) {
+    print('error = $e');
+  }
+}
+```
+
+## Streams
+
+The `dart:async` library defines the `Stream` class.
+
+### Isolates
+
+All Dart code runs in an isolate.
+Each isolate is executed in a single thread.
+The `main` function of a Dart program and everything it invokes
+runs in the main isolate provided by Dart.
+Additional isolates can be created to run code in new threads.
 
 ## Tooling
 
@@ -3351,6 +3435,9 @@ The `test` function and `group` function (described below)
 also support a `skip` named parameter
 for skipping execution of a test or entire group of tests.
 It works the same way as does in the `expect` function.
+Unfortunately, because named parameters must follow positional ones,
+the `skip` parameter must appear after the body of the `test` or `group`
+which makes it difficult to spot when reading code.
 
 To run all the tests in a project, enter `dart test`.
 This is a bit slow the first time it is run,
