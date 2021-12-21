@@ -3181,6 +3181,10 @@ export 'trigonometry.dart';
 
 Importing `math.dart` provides access to the names it defines
 and also the names defined the files that it exports.
+The exported files can also be imported individually in source files
+that do not need access to names defined in all the exported files.
+But the names in the exported files cannot be used
+inside the file that exports them.
 
 #### part and part of Statements
 
@@ -3203,12 +3207,13 @@ part of 'math.dart';
 All `import` statements needed by these four `.dart` files must
 appear in file containing the `part` statements (`main.dart` in this case)
 and they must appear before the `part` statements.
-The files containing `part of` statements cannot contain `import` statements.
+Files containing `part of` statements cannot contain `import` statements.
 
 As with using `export` statements, importing `math.dart` provides access to
 the names it defines and also the names defined in its `part` files.
-
-TODO: Why would `part` and `part of` every be preferred over `exports`?
+Files containing `part of` statements cannot be imported.
+Files containing `part` statements can use
+the names defined in the files they reference.
 
 ## Concurrency
 
