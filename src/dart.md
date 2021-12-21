@@ -889,18 +889,21 @@ TODO: Add more detail on this?
 
 Generics, a.k.a parameterized types,
 allow writing functions, classes, and methods
-whose functionality differs based on the types of values
-passed when they are called.
-Using generics often reduces code duplication.
+that accept values of multiple types.
+Their functionality can differ based on the types of values provided.
+Using generics often reduces code duplication
+in cases where multiple blocks of code
+only differ in the types on which they operate.
 
-The collection classes, described next, make use of this.
+Generics are often used to implement new kinds of collections.
+The core collection classes, described in the next section, do exactly this.
 For example, when creating a `List`, the type of
 the elements it can hold are specific using generics.
 The following are equivalent:
 
 ```dart
-List<int> numbers = [1, 2, 3]; // type is specified on variable
-var numbers = <int>[1, 2, 3]; // type is specified on value
+List<int> numbers = [1, 2, 3]; // type is specified on the variable
+var numbers = <int>[1, 2, 3]; // type is specified on the value
 var numbers = [1, 2, 3]; // type is inferred
 ```
 
@@ -3083,9 +3086,58 @@ void main() {
 }
 ```
 
-## Mixins
+## Libraries
 
-TODO: Add this.
+Every `.dart` file is a "library".
+Typically these are placed in the `lib` directory of a project.
+
+Libraries are imported into other `.dart` files with an `import` statement.
+For example, suppose a project in a directory named `my_project`
+defines a library in the file `lib/math/geometry.dart`.
+This library can be imported by the file `bin/my_project.dart`
+with the following:
+
+```dart
+import 'package:my_project/math/geometry.dart';
+```
+
+This makes all the public names defined in `geometry.dart`
+available in `my_project.dart`.
+To avoid name conflicts with names defined in the importing file
+with those in the imported file,
+the import can be changed to the following:
+
+```dart
+import 'package:my_project/math/geometry.dart' as geometry;
+```
+
+With this change the names defined in `geometry.dart`
+must be referred to with a `geometry.` prefix.
+
+The following code is example content from `lib/math/geometry.dart`:
+
+```dart
+import 'dart:math';
+
+class Circle {
+  double radius;
+
+  Circle({required this.radius});
+
+  double get area => pi * pow(radius, 2);
+}
+```
+
+The following code is example content of `bin/my_project.dart`:
+
+```dart
+import 'package:my_project/math/geometry.dart' as geometry;
+
+void main() {
+  var c = geometry.Circle(radius: 5);
+  print(c.area); // 78.5...
+}
+```
 
 ## Concurrency
 
