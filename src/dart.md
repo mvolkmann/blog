@@ -3227,9 +3227,9 @@ A `Future` represents the result of code that will run in the future
 inside the current thread.
 It is similar to a `Promise` in JavaScript.
 
-Execution of these is managed by the event loop.
+Execution of these is managed by the event loop described in the next section.
 Asynchronous tasks are placed on either
-the regular task queue or the microtask queue.
+the event queue or the microtask queue.
 Tasks on the microtask queue have a higher priority.
 
 The `Future` class defines many named constructors.
@@ -3292,6 +3292,23 @@ void main() async {
   }
 }
 ```
+
+## Event Loop
+
+The Dart event loop is responsible for executing function calls
+placed on the event and microtask queues.
+Asynchronous functions such as those passed to a constructor
+of the `Future` class are placed at the end of one of these queues.
+When the current function finishes executing,
+the event loop selects the next function to execute.
+If the microtask queue is not empty,
+the function at its beginning is selected (FIFO order).
+Otherwise the function at the beginning
+of the event queue is selected (also FIFO order).
+When a function starts executing,
+all other functions must wait until it completes.
+When the function completes, if there are no more
+functions in the queues then the program exits.
 
 ## Streams
 
