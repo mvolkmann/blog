@@ -3218,7 +3218,6 @@ the names defined in the files they reference.
 ## Concurrency
 
 TODO: Add an intro. paragraph here.
-TODO: See the `async` and `await` keywords.
 
 ### Futures
 
@@ -3277,11 +3276,27 @@ void main() {
 ```
 
 The following code demonstrates using `async` and `await`.
+The `await` keyword can only be used inside functions marked `async`.
+Such functions always return a `Future` even if one isn't explicitly created.
 
 ```dart
 import 'dart:async';
 
-// The same getFutureScore function above goes here.
+Future<int> getFutureScore(int player) {
+  return Future<int>.delayed(const Duration(seconds: 1), () {
+    if (player == 1) return 7;
+    throw 'unknown player $player';
+  });
+}
+
+// If the delay in the previous function isn't needed, it can be
+// rewritten as follows.  Note the addition of the async keyword.
+/*
+Future<int> getFutureScore(int player) async {
+  if (player == 1) return 7;
+  throw 'unknown player $player';
+}
+*/
 
 void main() async {
   try {
@@ -3309,6 +3324,9 @@ that cannot be evaluated until after the current function completes.
 `Future.value` is similar to JavaScript `Promise.resolve`.
 
 `Future.error` is similar to JavaScript `Promise.reject`.
+
+TODO: Does the dart:async library provide an equivalent of JS Promise.all
+TODO: for an Iterable of Futures?
 
 The following code demonstrates the use of each of these constructors
 and explains the order in which the `Future` objects will be evaluated.
