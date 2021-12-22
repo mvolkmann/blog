@@ -3297,14 +3297,18 @@ The following table summarizes the `Future` class constructors.
 Each of these place a `Future` on either the event or microtask queue
 that cannot be evaluated until after the current function completes.
 
-| Constructor        | Queue     | Description                                                                        |
-| ------------------ | --------- | ---------------------------------------------------------------------------------- |
-| `Future`           | event     | creates a `Future` that can run as soon as the current function completes          |
-| `Future.delayed`   | event     | similar to first constructor, but must wait for at least the specified `Duration`  |
-| `Future.error`     | microtask | creates a `Future` that fails with a given error                                   |
-| `Future.microtask` | microtask | same as first constructor, but uses the microtask queue                            |
-| `Future.sync`      | microtask | runs function immediately and places its result (success or failure) in a `Future` |
-| `Future.value`     | microtask | creates a `Future` that succeeds with a given value                                |
+| Constructor        | Queue     | Description                                                                     |
+| ------------------ | --------- | ------------------------------------------------------------------------------- |
+| `Future`           | event     | creates a `Future` that can run as soon as the current function completes       |
+| `Future.delayed`   | event     | similar to 1st constructor, but must wait for at least the specified `Duration` |
+| `Future.error`     | microtask | creates a `Future` that fails with a given error                                |
+| `Future.microtask` | microtask | same as 1st constructor, but uses the microtask queue                           |
+| `Future.sync`      | microtask | runs function immediately and places result (success or failure) in a `Future`  |
+| `Future.value`     | microtask | creates a `Future` that succeeds with a given value                             |
+
+`Future.value` is similar to JavaScript `Promise.resolve`.
+
+`Future.error` is similar to JavaScript `Promise.reject`.
 
 The following code demonstrates the use of each of these constructors
 and explains the order in which the `Future` objects will be evaluated.
@@ -3315,20 +3319,31 @@ and the contents of the event (E) and microtask (M) queues.
 ```dart
 void main() {
   // O: empty, E: empty, M: empty
+
   print(1);
   // O: 1, E: empty, M: empty
+
   Future(() => 7).then(print);
   // O: 1, E: 7, M: empty
+
   Future.delayed(const Duration(seconds: 1), () => 8).then(print);
   // O: 1, E: D8 7, M: empty; D8 here means the value 8 is delayed.
+
   Future.error(3).catchError(print); // treating 3 as an error value
   // O: 1, E: D8 7, M: 3
+
   Future.microtask(() => 4).then(print);
   // O: 1, E: D8 7, M: 4 3
+  // The previous line could be replaced by
+  // scheduleMicrotask(() => print(4));
+  // which requires importing "dart:async".
+
   Future.sync(() => 5).then(print);
   // O: 1, E: D8 7, M: 5 4 3
+
   Future.value(6).then(print);
   // O: 1, E: D8 7, M: 6 5 4 3
+
   print(2);
   // O: 1 2, E: D8 7, M: 6 5 4 3
 
