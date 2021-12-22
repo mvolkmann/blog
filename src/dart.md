@@ -3298,6 +3298,9 @@ Future<int> getFutureScore(int player) async {
 }
 */
 
+// The placement of the "async" keyword differs from JavaScript.
+// Instead of at the beginning of a function definition,
+// it belongs after the parameter list and before the body.
 void main() async {
   try {
     int score = await getFutureScore(1); // throws if argument isn't 1
@@ -3401,7 +3404,7 @@ The `dart:async` library defines the `Stream` class.
 ### Isolates
 
 All Dart code runs in an isolate.
-Each isolate is executed in a single thread.
+Each isolate is executed in a single thread and has its own event loop.
 The `main` function of a Dart program and everything it invokes
 runs in the main isolate provided by Dart.
 Additional isolates can be created to run code in new threads.
