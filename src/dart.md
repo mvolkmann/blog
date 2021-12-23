@@ -3400,7 +3400,106 @@ functions in the queues then the program exits.
 ### Streams
 
 The `dart:async` library defines the `Stream` class.
-A Dart stream is like a list of `Future`s.
+A Dart `Stream` is like a list of `Future` objects.
+It delivers zero or more values and errors over time.
+
+The table below distinguishes four kinds of values in Dart:
+
+|                 | Synchronous   | Asynchronous |
+| --------------- | ------------- | ------------ |
+| single value    | `T`           | `Future<T>`  |
+| multiple values | `Iterator<T>` | `Stream<T>`  |
+
+A `Stream` can specify functions to call when:
+
+- data is ready
+- an error occurs
+- the `Stream` completes
+
+Many provided library functions return a `Stream` object.
+Examples include:
+
+- `dart:io` `File` class `openRead` method
+- TODO: others?
+
+There are two kinds of streams, single subscription and broadcast.
+Single subscription streams can only have one listener
+and an error occurs if an attempt is made to add more.
+Broadcast streams can have any number of listeners.
+A broadcast stream can be created from a single subscription stream
+by calling its `asBroadcastStream` method.
+
+If a `Stream` generates data and there are no listeners,
+the data is lost. It is not cached for delivering later.
+
+The `Stream` class support the following constructors for creating an instance:
+
+| Constructor                                         | Description                                               |
+| --------------------------------------------------- | --------------------------------------------------------- |
+| `Stream()`                                          | TODO: ???                                                 |
+| `Stream.empty()`                                    | creates empty broadcast stream                            |
+| `Stream.error(Object error)`                        | creates stream that emits a single error                  |
+| `Stream.eventTransformed(Stream source, sinkFn)`    | creates stream of transformed events from another stream  |
+| `Stream.fromFuture(Future<T> future)`               | creates stream of single value from a `Future`            |
+| `Stream.fromFutures(Iterable<Future<T>> futures)`   | creates stream of values from `Iterable` of `Future`s     |
+| `Stream.fromIterable(Iterable<T> elements)`         | creates stream of `Iterable` elements                     |
+| `Stream.multi(onListenFn)`                          | advanced; see docs                                        |
+| `Stream.periodic(Duration period, [computationFn])` | creates stream that emits events at a given time interval |
+| `Stream.value()`                                    | creates stream that emits a single value                  |
+
+`Stream` objects have the following instance properties,
+all of which are read-only:
+
+| Property      | Description                                                      |
+| ------------- | ---------------------------------------------------------------- |
+| `first`       | first element                                                    |
+| `isBroadcast` | `bool` indicating whether this is a broadcast stream             |
+| `isEmpty`     | `Future<bool>` indicating whether there are zero elements        |
+| `last`        | last element                                                     |
+| `length`      | `Future<int>` number of elements                                 |
+| `single`      | `Future<T>` single value; error if zero or more than one element |
+
+The `Stream` class support the following instance methods:
+
+| Method                                               | Description                                                                                                                |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `any(testFn)`                                        | returns `Future<bool>` indicating if any element passes a test                                                             |
+| `asBroadcastStream()`                                | returns a broadcast stream that emits the same elements                                                                    |
+| `asyncExpand(convertFn)`                             | returns stream whose elements come from streams returned by calling `convertFn` on each element                            |
+| `asyncMap(convertFn)`                                | returns stream whose elements come from calling `convertFn` on each element                                                |
+| `cast<R>()`                                          | returns stream where each element is cast to type `R`                                                                      |
+| `contains(Object? value)`                            | returns `Future<bool>` indicating if any element is == to `value`                                                          |
+| `distinct([bool equals(T previous, T next)])`        | returns stream of elements not equal to previous using `==` or provided `equals` function                                  |
+| `drain()`                                            | discards remaining elements in stream                                                                                      |
+| `elementAt(int index)`                               | returns `Future<T>` value at given index                                                                                   |
+| `every(testFn)`                                      | returns `Future<bool>` indicating if every element passes a test                                                           |
+| `expand(convertFn)`                                  | returns stream of values in `Iterable`s returned by calling `convertFn` on each element                                    |
+| `firstWhere(testFn)`                                 | returns `Future<T>` first element that passes a test                                                                       |
+| `fold<S>(S initialValue, combineFn)`                 | returns `Future<S>` obtained by combining all elements (like `Iterable` `fold`)                                            |
+| `forEach(actionFn)`                                  | returns `Future` with no value after calling `actionFn` on each element                                                    |
+| `handleError(onErrorFn, testFn)`                     | returns stream that can ignore or transform errors that pass a test                                                        |
+| `join([String separator = ""])`                      | returns `Future<String>` formed by concatenating all the lements with an optional separator                                |
+| `lastWhere(testFn)`                                  | returns `Future<T>` last element that passes a test                                                                        |
+| `listen(onDataFn, {onError, onDone, cancelOnError})` | adds a listener and returns `StreamSubscription<T>`                                                                        |
+| `map(convertFn)`                                     | returns stream formed by calling `convertFn` on each element (like `Iterable` `map`)                                       |
+| `pipe(streamConsumer)`                               | pipes all elements into a `StreamConsumer` and returns `Future` result value                                               |
+| `reduce(combineFn)`                                  | returns `Future` obtained by combining all elements (like `Iterable` `reduce`)                                             |
+| `singleWhere(testFn)`                                | returns stream that only contains the first element that passes a test                                                     |
+| `skip(int count)`                                    | returns stream that begins after first `count` elements                                                                    |
+| `skipWhile(testFn)`                                  | returns stream that begins at first element that does not pass a test                                                      |
+| `take(int count)`                                    | returns stream containing the first `count` elements                                                                       |
+| `takeWhile(testFn)`                                  | returns stream containing all initial elements that pass a test                                                            |
+| `timeout(Duration timeLimit, onTimeoutFn)`           | returns stream that emits same elements; if `timeLimit` passes after last emitted element, `onTimeoutFn` can generate more |
+| `toList()`                                           | returns `Future<List<T>>` containing all the elements                                                                      |
+| `toSet()`                                            | returns `Future<Set<T>>` containing all the elements                                                                       |
+| `transform(streamTransformer)`                       | returns stream created by a `StreamTransformer` which transforms the entire stream, not necessarily one element at a time  |
+| `where(testFn)`                                      | returns stream containing only elements that pass a test                                                                   |
+
+The following code demonstrates creating and processing a stream:
+
+```dart
+TODO: Add this
+```
 
 ### Isolates
 
