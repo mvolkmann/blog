@@ -3495,7 +3495,55 @@ The `Stream` class support the following instance methods:
 | `transform(streamTransformer)`                       | returns stream created by a `StreamTransformer` which transforms the entire stream, not necessarily one element at a time  |
 | `where(testFn)`                                      | returns stream containing only elements that pass a test                                                                   |
 
+The `StreamSubscription` object returned by the `Stream` `listen` method
+has the instance property `isPaused` and the instance methods
+`cancel`, `onData`, `onDone`, `onError`, `pause`, and `resume`.
+
 The following code demonstrates creating and processing a stream:
+
+```dart
+import 'dart:async';
+
+void main() async {
+  // "late" is needed here so it can be used inside the callback below.
+  late StreamSubscription sub;
+
+  var stream = Stream.periodic(Duration(milliseconds: 500), (int count) {
+    if (count == 3) throw 'bad thing happened';
+    if (count == 6) sub.cancel();
+    return count * 100;
+  });
+
+  // Wrap the periodic stream in one that handles errors.
+  stream = stream.handleError((error) {
+    print('got error $error');
+  });
+
+  sub = stream.listen(
+    (element) {
+      print('received $element');
+      //if (element > 500) sub.cancel();
+    },
+    onError: (error) {
+      print('got error $error');
+    }
+  );
+}
+```
+
+The output from the code above is:
+
+```text
+received 0
+received 100
+received 200
+got error bad thing happened
+received 400
+received 500
+```
+
+The following code demonstrates reading lines from a file one at a time
+using a `Stream`:
 
 ```dart
 TODO: Add this
