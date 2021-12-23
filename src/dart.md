@@ -3825,6 +3825,12 @@ void main() async {
 }
 ```
 
+Flutter simplifies running code in a new thread
+by providing the `compute` function.
+This takes a function and data to be passed to it.
+It creates a new `Isolate`, runs the function in it,
+and returns a `Future` that provides the result when it succeeds.
+
 ## Tooling
 
 ### Code Formatting
