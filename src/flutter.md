@@ -19,6 +19,9 @@ The Flutter framework is implemented in Dart,
 except for the {% aTargetBlank "https://skia.org", "Skia" %}
 2D graphics library which is implemented in C++.
 
+{% aTargetBlank "https://flutterflow.io", "FlutterFlow" %} is a
+relatively new, low-code tool for building Flutter applications.
+
 ## Resources
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)

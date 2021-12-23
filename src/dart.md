@@ -3271,7 +3271,15 @@ void main() {
 
 ## Concurrency
 
-TODO: Add an intro. paragraph here.
+The `dart:async` library provides many classes
+that support asynchronous programming.
+These include `Future`, `Stream`, `StreamSubscription`, and `Timer`.
+
+In addition, the `dart:isolate` library provides classes
+that support running code in a new thread.
+These include `Isolate`, `ReceivePort`, and `SendPort`.
+
+Each of these classes are described in the following sections.
 
 ### Futures
 
@@ -3320,6 +3328,8 @@ Future<int> getFutureScore(int player) {
 
 void main() {
   getFutureScore(1) // throws if argument isn't 1
+    // The function passed to "then" is
+    // referred to as a "completion handler".
     .then((int score) {
       print('score = $score');
     })
@@ -3696,8 +3706,14 @@ merge streams, and more.
 
 ### Isolates
 
-All Dart code runs in an `Isolate` which is
-a class defined by the `dart:isolate` library.
+All Dart code runs in an "isolate" which is described by
+the `Isolate` class defined by the `dart:isolate` library.
+The `main` function of a Dart program and everything it invokes
+runs in the main isolate which is provided by Dart.
+
+Additional isolates can be created to run code in new threads.
+This is useful for computationally intensive tasks.
+
 Each isolate is executed in a single thread
 and has its own memory and event loop.
 
@@ -3705,16 +3721,13 @@ The `dart:isolate` library cannot be used in Dart applications
 that are compiled to JavaScript.
 This means it cannot be used inside DartPad.
 
-The `main` function of a Dart program and everything it invokes
-runs in the main isolate provided by Dart.
-Additional isolates can be created to run code in new threads.
-
 Isolates can only communicate by sending messages.
 Each isolate can create multiple `ReceivePort` objects.
 Each `ReceivePort` object has a corresponding `SendPort` object
 that can be accessed through the `sendPort` property of the `ReceivePort`.
-When a message is sent using this `SendPort`,
-it is received by its `ReceivePort`.
+To send a message, call the `send` method on a `SendPort` object.
+To receive these messages, call the `listen` method
+on the corresponding `ReceivePort` object.
 
 Each new isolate is given a function to execute.
 An isolate is terminated and removed when this function exits
