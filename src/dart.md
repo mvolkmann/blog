@@ -3434,6 +3434,9 @@ void main() {
 }
 ```
 
+Flutter provides the `FutureBuilder` class which
+builds widgets from a single value returned by a `Future`.
+
 ### Event Loop
 
 The Dart event loop is responsible for executing function calls
@@ -3532,7 +3535,7 @@ The `Stream` class support the following instance methods:
 | `handleError(onErrorFn, testFn)`                     | returns stream that can ignore or transform errors that pass a test                                                        |
 | `join([String separator = ""])`                      | returns `Future<String>` formed by concatenating all the lements with an optional separator                                |
 | `lastWhere(testFn)`                                  | returns `Future<T>` last element that passes a test                                                                        |
-| `listen(onDataFn, {onError, onDone, cancelOnError})` | adds a listener and returns `StreamSubscription<T>`                                                                        |
+| `listen(onDataFn, {onError, onDone, cancelOnError})` | adds a listener and returns `StreamSubscription<T>`; `cancelOnError` defaults to `true`                                    |
 | `map(convertFn)`                                     | returns stream formed by calling `convertFn` on each element (like `Iterable` `map`)                                       |
 | `pipe(streamConsumer)`                               | pipes all elements into a `StreamConsumer` and returns `Future` result value                                               |
 | `reduce(combineFn)`                                  | returns `Future` obtained by combining all elements (like `Iterable` `reduce`)                                             |
@@ -3589,7 +3592,7 @@ got error bad thing happened
 500
 ```
 
-Another way to create a `Stream` is to create a `StreamController`
+Another way to build a `Stream` is to create a `StreamController`
 which holds a `Stream` in one of its properties.
 
 The `StreamController` class has the following instance properties:
@@ -3654,12 +3657,13 @@ void main() {
 }
 ```
 
-The following code demonstrates reading lines from a file one at a time
-using a `Stream`:
+Flutter provides the `StreamBuilder` class
+which builds widgets from data in a `Stream`.
 
-```dart
-TODO: Add this
-```
+For more advanced stream processing, see the pub.dev package
+{% aTargetBlank "https://pub.dev/packages/async", "async" %}.
+It provides classes that can cache elements, memoized elements,
+merge streams, and more.
 
 ### Isolates
 
