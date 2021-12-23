@@ -28,6 +28,31 @@ relatively new, low-code tool for building Flutter applications.
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 - [online documentation](https://flutter.dev/docs)
 
+## Comparison to React Native
+
+Of the mobile frameworks that target both Android and iOS,
+React Native and Flutter are the most popular.
+The table below compares these two options.
+
+| Topic                       | React Native          | Flutter |
+| --------------------------- | --------------------- | ------- |
+| developed by                | Facebook              | Google  |
+| programming language        | JavaScript/TypeScript | Dart    |
+| resulting app sizes         | large                 | medium  |
+| hot reloading time          | slow                  | fast    |
+| runtime performance         | somewhat slow         | faster  |
+| GitHub stars as of 12/23/21 | 100K                  | 134K    |
+| version as of 12/23/21      | 0.66.4                | 2.8.1   |
+
+Companies using React Native include
+Airbnb, Baidui, Bloomberg, Discord, Facebook, Instagram, Oculus, Pinterest,
+Salesforce, Shopify, Skype, Tesla, Uber Eats, Walmart, and Wix.
+
+Companies using Flutter include
+Alibaba, Amazon, Betterment, BMW, Etsy, Google Ads, Google Pay,
+Hamilton Musical, iRobot, New York Times, Phillips Hue, Realtor.com,
+Supabase, Tonal, and Toyota.
+
 ## Setup
 
 - Install the Flutter SDK.
@@ -72,6 +97,14 @@ relatively new, low-code tool for building Flutter applications.
 - Verify the installation by entering `flutter doctor`.
 
   - I couldn't get this to find Android Studio!
+
+## Tools
+
+Flutter provides a command-line tool
+for deploying apps to the Google Play store.
+TODO: What is this?
+React Native requires a third-party tool for deploying apps
+that is more complex.
 
 ## Creating and Running an App
 
