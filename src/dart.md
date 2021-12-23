@@ -3410,7 +3410,7 @@ Each isolate is executed in a single thread
 and has its own memory and event loop.
 
 The `dart:isolate` library cannot be used in Dart applications
-that are compiled to JavaScript (true?).
+that are compiled to JavaScript.
 This means it cannot be used inside DartPad.
 
 The `main` function of a Dart program and everything it invokes
@@ -3418,12 +3418,13 @@ runs in the main isolate provided by Dart.
 Additional isolates can be created to run code in new threads.
 
 Isolates can only communicate by sending messages.
-Each isolate can create multiple `ReceivePort` objects
-and each of those has a corresponding `SendPort`.
-When a message is sent using a `SendPort`,
-it is received by a `ReceivePort`.
+Each isolate can create multiple `ReceivePort` objects.
+Each `ReceivePort` object has a corresponding `SendPort` object
+that can be accessed through the `sendPort` property of the `ReceivePort`.
+When a message is sent using this `SendPort`,
+it is received by its `ReceivePort`.
 
-Each isolate is given a function to execute.
+Each new isolate is given a function to execute.
 An isolate is terminated and removed when this function exits
 or when another isolate calls its `kill` method.
 An isolate stops running temporarily
@@ -3434,22 +3435,22 @@ The `Isolate` class support the following class methods:
 | Method              | Description                                                    |
 | ------------------- | -------------------------------------------------------------- |
 | `exit()`            | terminates the current isolate                                 |
-| `spawn()`           | creates a new isolate using the same code as the current one   |
-| `spawnUri(Uri uri)` | creates a new isolate that runs code from a library at the uri |
+| `spawn()`           | creates a new isolate that runs a given function               |
+| `spawnUri(Uri uri)` | creates a new isolate that runs code from a library at the URI |
 
 `Isolate` objects support the following instance methods:
 
-| Method                                | Description                                                              |
-| ------------------------------------- | ------------------------------------------------------------------------ |
-| `addErrorListener(SendPort port)`     | requests for uncaught errors to be sent to `port`                        |
-| `addOnExitListener(SendPort port)`    | requests for a message to be sent to `port` when the isolate terminates  |
-| `kill()`                              | requests the isolate to terminate                                        |
-| `pause()`                             | requests the isolate to pause execution until ?                          |
-| `ping(SendPort port)`                 | requests the isolate to send a message to `port` to verify it is running |
-| `removeErrorListener(SendPort port)`  | stops listening for uncaught error messages                              |
-| `removeOnExitListener(SendPort port)` | stops listening for an exit message                                      |
-| `resume()`                            | resumes execution after a call to `pause`                                |
-| `setErrorsFatal(bool fatal)`          | sets whether uncaught errors should terminate the isolate                |
+| Method                                | Description                                                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------ |
+| `addErrorListener(SendPort port)`     | requests for uncaught errors to be sent to `port`                              |
+| `addOnExitListener(SendPort port)`    | requests for a message to be sent to `port` when the isolate terminates        |
+| `kill()`                              | requests the isolate to terminate                                              |
+| `pause()`                             | requests the isolate to pause execution until `resume` is called               |
+| `ping(SendPort port)`                 | requests the isolate to send a message to `port` to verify it is running       |
+| `removeErrorListener(SendPort port)`  | stops listening for uncaught error messages                                    |
+| `removeOnExitListener(SendPort port)` | stops listening for an exit message                                            |
+| `resume()`                            | resumes execution after a call to `pause`                                      |
+| `setErrorsFatal(bool fatal)`          | sets whether uncaught errors should terminate the isolate (defaults to `true`) |
 
 The following code demonstrates creating a new `Isolate` to
 call a REST service and compute a value based on what it returns.
@@ -3465,7 +3466,11 @@ import 'package:http/http.dart' as http;
 // in which it runs.  In order for it to communicate back to
 // the Isolate that spawned it, it is passed a SendPort.
 void getAverageSalary(SendPort sendPort) async {
+    // This is a free, public REST service that returns
+    // an array of objects that describe employees.
+    // Each contains an "employee_salary" property.
   var restUrl = 'http://dummy.restapiexample.com/api/v1/employees';
+
   // http.get returns a Future, but it runs in the current thread.
   // Calling this in a new Isolate allows it to run in another thread
   // and avoid blocking the event loop of the main Isolate.
