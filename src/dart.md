@@ -3830,6 +3830,8 @@ by providing the `compute` function.
 This takes a function and data to be passed to it.
 It creates a new `Isolate`, runs the function in it,
 and returns a `Future` that provides the result when it succeeds.
+Use the `await` keyword inside an `async` function
+or the `then` method to get the result.
 
 ## Tooling
 
