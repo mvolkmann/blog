@@ -3215,6 +3215,60 @@ Files containing `part of` statements cannot be imported.
 Files containing `part` statements can use
 the names defined in the files they reference.
 
+## File I/O
+
+The `dart:io` library supports all kinds of input and output,
+including reading and writing files.
+
+The following code demonstrates reading a file into a `List` of lines.
+The entire file is read into memory, so this isn't applicable for large files.
+
+```dart
+import 'dart:async';
+import 'dart:io';
+
+void main() async {
+  var file = File('BeverlyHillbillies.txt');
+  var lines = await file.readAsLines();
+  for (var line in lines) {
+    print(line);
+  }
+}
+```
+
+The `openRead` method can be used to read a file
+that is too large to fit in memory.
+The following code demonstrates this:
+
+```dart
+import 'dart:convert'; // for LineSplitter
+import 'dart:io'; // for File
+
+void main() {
+  var stream = File('BeverlyHillbillies.txt')
+    .openRead()
+    .transform(utf8.decoder)
+    .transform(LineSplitter());
+  stream.listen((line) {
+    print(line);
+  });
+}
+```
+
+The `openWrite method can be used to write to a file.
+
+```dart
+import 'dart:io'; // for File
+
+void main() {
+  // By default this overwrites the file if it exists.
+  var sink = File('my-file.txt').openWrite();
+  sink.writeln('1st line');
+  sink.writeln('2nd line');
+  sink.close();
+}
+```
+
 ## Concurrency
 
 TODO: Add an intro. paragraph here.
@@ -3416,11 +3470,9 @@ A `Stream` can specify functions to call when:
 - an error occurs
 - the `Stream` completes
 
-Many provided library functions return a `Stream` object.
-Examples include:
-
-- `dart:io` `File` class `openRead` method
-- TODO: others?
+Some provided library functions,
+such as the `openRead` method of the `File` class,
+return a `Stream` object.
 
 There are two kinds of streams, single subscription and broadcast.
 Single subscription streams can only have one listener
