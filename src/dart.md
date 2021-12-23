@@ -3469,9 +3469,9 @@ The table below distinguishes four kinds of values in Dart:
 
 A `Stream` can specify functions to call when:
 
-- data is ready
-- an error occurs
-- the `Stream` completes
+- data is ready (first positional argument to `listen`)
+- an error occurs (`onError` named argument to `listen`)
+- the `Stream` completes (`onDone` named argument to `listen`)
 
 Some provided library functions,
 such as the `openRead` method of the `File` class,
@@ -3491,7 +3491,7 @@ The `Stream` class support the following constructors for creating an instance:
 
 | Constructor                                         | Description                                               |
 | --------------------------------------------------- | --------------------------------------------------------- |
-| `Stream()`                                          | TODO: ???                                                 |
+| `Stream()`                                          | probably not used directly                                |
 | `Stream.empty()`                                    | creates empty broadcast stream                            |
 | `Stream.error(Object error)`                        | creates stream that emits a single error                  |
 | `Stream.eventTransformed(Stream source, sinkFn)`    | creates stream of transformed events from another stream  |
@@ -3563,6 +3563,7 @@ void main() {
   // "late" is needed here so it can be used inside the callback below.
   late StreamSubscription sub;
 
+  // The value of "tick" starts at zero and increments by one.
   var stream = Stream.periodic(Duration(seconds: 1), (int tick) {
     if (tick == 3) throw 'rejecting $tick';
     if (tick == 6) sub.cancel();
@@ -3594,6 +3595,13 @@ got error bad thing happened
 
 Another way to build a `Stream` is to create a `StreamController`
 which holds a `Stream` in one of its properties.
+
+The `StreamController` class support the following constructors:
+
+| Constructor                    | Description                      |
+| ------------------------------ | -------------------------------- |
+| `StreamController()`           | for a single subscription stream |
+| `StreamController.broadcast()` | for a broadcast stream           |
 
 The `StreamController` class has the following instance properties:
 
@@ -3643,7 +3651,7 @@ void main() {
     }
   });
 
-  controller.stream.listen(
+  controller.stream.listen( // returns a StreamSubscription
     (element) {
       print(element);
     },
@@ -3655,6 +3663,20 @@ void main() {
     },
   );
 }
+```
+
+The call to the `listen` method above can be replaced by
+the following `for` loop which exits when the stream is closed.
+
+```dart
+  // "handleError" returns a new Stream where
+  // errors are handled by a supplied function.
+  var stream = controller.stream.handleError(
+    (error) { print('got error "$error"'); }
+  );
+  await for (final value in stream) {
+    print(value);
+  }
 ```
 
 Flutter provides the `StreamBuilder` class
