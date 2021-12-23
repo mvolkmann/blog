@@ -936,6 +936,12 @@ so it is not lost when an app is closed.
 - {% aTargetBlank "https://docs.flutter.dev/cookbook/persistence/sqlite",
   "SQLite" %} database on the device
 
+## Tests
+
+TODO: How can widget tests be implemented?
+
+TODO: How can end-to-end tests be implemented?
+
 ## Packages
 
 The official package registry for Flutter is

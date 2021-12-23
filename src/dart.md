@@ -3679,6 +3679,13 @@ the following `for` loop which exits when the stream is closed.
   }
 ```
 
+The `for` loop above can be replaced by
+a call to the `Stream` `forEach` method.
+
+```dart
+  await stream.forEach(print);
+```
+
 Flutter provides the `StreamBuilder` class
 which builds widgets from data in a `Stream`.
 
