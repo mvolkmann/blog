@@ -3451,8 +3451,10 @@ The `Isolate` class support the following class methods:
 | `resume()`                            | resumes execution after a call to `pause`                                |
 | `setErrorsFatal(bool fatal)`          | sets whether uncaught errors should terminate the isolate                |
 
-The following code demonstrates using an `Isolate` to
+The following code demonstrates creating a new `Isolate` to
 call a REST service and compute a value based on what it returns.
+This avoids blocking the event loop of the main `Isolate` which
+allows a Flutter UI to remain responsive while waiting for data to return.
 
 ```dart
 import 'dart:convert'; // for jsonDecode
@@ -3464,6 +3466,9 @@ import 'package:http/http.dart' as http;
 // the Isolate that spawned it, it is passed a SendPort.
 void getAverageSalary(SendPort sendPort) async {
   var restUrl = 'http://dummy.restapiexample.com/api/v1/employees';
+  // http.get returns a Future, but it runs in the current thread.
+  // Calling this in a new Isolate allows it to run in another thread
+  // and avoid blocking the event loop of the main Isolate.
   var response = await http.get(Uri.parse(restUrl));
 
   var status = response.statusCode;
@@ -3508,9 +3513,11 @@ void main() async {
     errorPort.close();
   });
 
-  // Wait for the first value to arrive on the successPort stream.
-  // This approach doesn't work because if an error is received above,
+  // Some Isolate examples show this approach of
+  // waiting for the first value to arrive on the successPort stream.
+  // But we can't use this approach because if an error is received above,
   // we need to close successPort in order to exit the program.
+  // Doing that would cause an error in this commented out line.
   //var averageSalary = await successPort.first;
 
   successPort.listen((averageSalary) {
