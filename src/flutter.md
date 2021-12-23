@@ -44,6 +44,24 @@ The table below compares these two options.
 | GitHub stars as of 12/23/21 | 100K                  | 134K    |
 | version as of 12/23/21      | 0.66.4                | 2.8.1   |
 
+React Native is an attractive choice for development teams that
+already have experience in web technologies in general and React in particular.
+It is possible to share some code between React and React Native applications.
+
+Flutter targets more than just Android and iOS.
+It also targets web apps and desktop apps running on Windows, macOS, and Linux.
+
+Because everything rendered by Flutter is just drawn on a canvas,
+it can take advantage of device GPUs.
+This is one reason it has better performance than React Native.
+
+Flutter uses {% aTargetBlank "https://skia.org", "Skia" %}
+to draw everything it renders.
+"Skia is an open source 2D graphics library which provides common APIs
+that work across a variety of hardware and software platforms.
+It serves as the graphics engine for Google Chrome and Chrome OS,
+Android, Flutter, Mozilla Firefox and Firefox OS, and many other products."
+
 Companies using React Native include
 Airbnb, Baidui, Bloomberg, Discord, Facebook, Instagram, Oculus, Pinterest,
 Salesforce, Shopify, Skype, Tesla, Uber Eats, Walmart, and Wix.
