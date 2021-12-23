@@ -3380,7 +3380,7 @@ void main() {
 }
 ```
 
-## Event Loop
+### Event Loop
 
 The Dart event loop is responsible for executing function calls
 placed on the event and microtask queues.
@@ -3397,17 +3397,129 @@ all other functions must wait until it completes.
 When the function completes, if there are no more
 functions in the queues then the program exits.
 
-## Streams
+### Streams
 
 The `dart:async` library defines the `Stream` class.
+A Dart stream is like a list of `Future`s.
 
 ### Isolates
 
-All Dart code runs in an isolate.
-Each isolate is executed in a single thread and has its own event loop.
+All Dart code runs in an `Isolate` which is
+a class defined by the `dart:isolate` library.
+Each isolate is executed in a single thread
+and has its own memory and event loop.
+
+The `dart:isolate` library cannot be used in Dart applications
+that are compiled to JavaScript (true?).
+This means it cannot be used inside DartPad.
+
 The `main` function of a Dart program and everything it invokes
 runs in the main isolate provided by Dart.
 Additional isolates can be created to run code in new threads.
+
+Isolates can only communicate by sending messages.
+Each isolate can create multiple `ReceivePort` objects
+and each of those has a corresponding `SendPort`.
+When a message is sent using a `SendPort`,
+it is received by a `ReceivePort`.
+
+Each isolate is given a function to execute.
+An isolate is terminated and removed when this function exits
+or when another isolate calls its `kill` method.
+An isolate stops running temporarily
+when another isolate calls its `pause` method.
+
+The `Isolate` class support the following class methods:
+
+| Method              | Description                                                    |
+| ------------------- | -------------------------------------------------------------- |
+| `exit()`            | terminates the current isolate                                 |
+| `spawn()`           | creates a new isolate using the same code as the current one   |
+| `spawnUri(Uri uri)` | creates a new isolate that runs code from a library at the uri |
+
+`Isolate` objects support the following instance methods:
+
+| Method                                | Description                                                              |
+| ------------------------------------- | ------------------------------------------------------------------------ |
+| `addErrorListener(SendPort port)`     | requests for uncaught errors to be sent to `port`                        |
+| `addOnExitListener(SendPort port)`    | requests for a message to be sent to `port` when the isolate terminates  |
+| `kill()`                              | requests the isolate to terminate                                        |
+| `pause()`                             | requests the isolate to pause execution until ?                          |
+| `ping(SendPort port)`                 | requests the isolate to send a message to `port` to verify it is running |
+| `removeErrorListener(SendPort port)`  | stops listening for uncaught error messages                              |
+| `removeOnExitListener(SendPort port)` | stops listening for an exit message                                      |
+| `resume()`                            | resumes execution after a call to `pause`                                |
+| `setErrorsFatal(bool fatal)`          | sets whether uncaught errors should terminate the isolate                |
+
+The following code demonstrates using an `Isolate` to
+call a REST service and compute a value based on what it returns.
+
+```dart
+import 'dart:convert'; // for jsonDecode
+import 'dart:isolate';
+import 'package:http/http.dart' as http;
+
+// This Dart function doesn't know anything about the Isolate
+// in which it runs.  In order for it to communicate back to
+// the Isolate that spawned it, it is passed a SendPort.
+void getAverageSalary(SendPort sendPort) async {
+  var restUrl = 'http://dummy.restapiexample.com/api/v1/employees';
+  var response = await http.get(Uri.parse(restUrl));
+
+  var status = response.statusCode;
+  if (status == 200) {
+    try {
+      var employees = jsonDecode(response.body)['data'];
+      var total = employees.fold(0, (acc, e) {
+        var salary = e['employee_salary'] as int;
+        return acc + salary;
+      });
+      sendPort.send(total / employees.length);
+    } catch (e) {
+      throw e;
+    }
+  } else {
+    // When this REST service returns a 429 status, the body is HTML.
+    // There's no easy way to extract a message from it,
+    // but the title element contains "Too Many Requests".
+    throw status == 429 ? 'too many requests' : 'bad status $status';
+  }
+}
+
+void main() async {
+  // This receives a successful result from the Isolate spawned below.
+  var successPort = ReceivePort();
+
+  // Isolate.spawn creates and runs a new Isolate
+  // 1st argument is a function to run in the new Isolate.
+  // 2nd argument is an argument to pass to the specified function.
+  var myIsolate = await Isolate.spawn(getAverageSalary, successPort.sendPort);
+  // There many methods that can be called on myIsolate,
+  // but only addErrorListener is used here.
+
+  // This receives an error from the Isolate spawned above.
+  var errorPort = ReceivePort();
+  myIsolate.addErrorListener(errorPort.sendPort);
+  errorPort.listen((error) {
+    var message = error[0];
+    print('got error: $message');
+
+    successPort.close();
+    errorPort.close();
+  });
+
+  // Wait for the first value to arrive on the successPort stream.
+  // This approach doesn't work because if an error is received above,
+  // we need to close successPort in order to exit the program.
+  //var averageSalary = await successPort.first;
+
+  successPort.listen((averageSalary) {
+    print('average salary is ${averageSalary.toStringAsFixed(2)}');
+    successPort.close();
+    errorPort.close();
+  });
+}
+```
 
 ## Tooling
 
