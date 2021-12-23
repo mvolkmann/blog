@@ -3447,7 +3447,7 @@ The `Stream` class support the following constructors for creating an instance:
 | `Stream.periodic(Duration period, [computationFn])` | creates stream that emits events at a given time interval |
 | `Stream.value()`                                    | creates stream that emits a single value                  |
 
-`Stream` objects have the following instance properties,
+The `Stream` class has the following instance properties,
 all of which are read-only:
 
 | Property      | Description                                                      |
@@ -3504,29 +3504,24 @@ The following code demonstrates creating and processing a stream:
 ```dart
 import 'dart:async';
 
-void main() async {
+void main() {
   // "late" is needed here so it can be used inside the callback below.
   late StreamSubscription sub;
 
-  var stream = Stream.periodic(Duration(milliseconds: 500), (int count) {
-    if (count == 3) throw 'bad thing happened';
-    if (count == 6) sub.cancel();
-    return count * 100;
+  var stream = Stream.periodic(Duration(seconds: 1), (int tick) {
+    if (tick == 3) throw 'rejecting $tick';
+    if (tick == 6) sub.cancel();
+    return tick * 100;
   });
 
   // Wrap the periodic stream in one that handles errors.
   stream = stream.handleError((error) {
-    print('got error $error');
+    print('got error "$error"');
   });
 
   sub = stream.listen(
-    (element) {
-      print('received $element');
-      //if (element > 500) sub.cancel();
-    },
-    onError: (error) {
-      print('got error $error');
-    }
+    (element) { print(element); },
+    onError: (error) { print('got error $error'); }
   );
 }
 ```
@@ -3534,12 +3529,77 @@ void main() async {
 The output from the code above is:
 
 ```text
-received 0
-received 100
-received 200
+0
+100
+200
 got error bad thing happened
-received 400
-received 500
+400
+500
+```
+
+Another way to create a `Stream` is to create a `StreamController`
+which holds a `Stream` in one of its properties.
+
+The `StreamController` class has the following instance properties:
+
+| Property      | Description                                                        |
+| ------------- | ------------------------------------------------------------------ |
+| `done`        | read-only `bool` that indicates no more elements will be sent      |
+| `hasListener` | read-only `bool` that indicates whether there is a listener        |
+| `isClosed`    | read-only `bool` that indicates no more elements can be added      |
+| `isPaused`    | read-only `bool` that indicates elements cannot currently be added |
+| `onCancel`    | function called when the stream is canceled                        |
+| `onListen`    | function called when a listener is registered                      |
+| `onPause`     | function called when the stream is paused                          |
+| `onResume`    | function called when the stream is resumed                         |
+| `sink`        | a `StreamSink` that has `add`, `addError`, and `close` methods     |
+| `stream`      | the `Stream` being controlled                                      |
+
+The `StreamController` class support the following instance methods:
+
+| Method                   | Description                                    |
+| ------------------------ | ---------------------------------------------- |
+| `add(T element)`         | adds an element to the stream being controlled |
+| `addError(Object error)` | adds an error to the stream being controlled   |
+| `close()`                | closes the stream being controlled             |
+
+The following code demonstrates another way to implement the previous example.
+The only differences in the output are that it
+doesn't begin with zero and it outputs "done" at the end.
+
+```dart
+import 'dart:async';
+
+void main() {
+  var controller = StreamController<int>();
+
+  Timer.periodic(Duration(seconds: 1), (Timer t) {
+    var value = t.tick;
+    switch (value) {
+      case 3:
+        controller.sink.addError('rejecting $value');
+        break;
+      case 6:
+        t.cancel();
+        controller.close();
+        break;
+      default:
+        controller.sink.add(value * 100);
+    }
+  });
+
+  controller.stream.listen(
+    (element) {
+      print(element);
+    },
+    onDone: () {
+      print('done');
+    },
+    onError: (error) {
+      print('got error "$error"');
+    },
+  );
+}
 ```
 
 The following code demonstrates reading lines from a file one at a time
