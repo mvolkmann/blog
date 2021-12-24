@@ -625,9 +625,9 @@ The `num` class defines the following operators:
 
 | Category                        | Operators                                                          |
 | ------------------------------- | ------------------------------------------------------------------ |
-| unary                           | `-`, `++` (increment by 1), `--` (decrement by 1)                  |
+| unary arithmetic                | `-`, `++` (increment by 1), `--` (decrement by 1)                  |
 | binary arithmetic               | `+`, `-`, `*`, `/`, `~/` (truncating division), `%` (modulo)       |
-| binary comparison               | `<`, `<=`, `==`, `!=`, `>`, `>=`                                   |
+| relational                      | `<`, `<=`, `==`, `!=`, `>`, `>=`                                   |
 | shorthand arithmetic assignment | `+=`, `-=`, `*=`, `/=`, `~/=` (truncating division), `%=` (modulo) |
 
 The `++` and `--` operators can be placed on either side of a `num` value.
@@ -1159,6 +1159,15 @@ In addition to the methods provided by the `Iterable` class,
 | `shuffle([Random? random])`                                  | randomly reorders the elements in place                        |
 | `sort([int compare(E a, E b)?])`                             | sorts the elements in place using a `Comparator` function      |
 | `sublist(int start, [int? end])`                             | returns a new `List` that is a subset                          |
+
+The `List` class supports the following operators:
+
+| Operator   | Description                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------- |
+| `+`        | returns a new `List` formed by concatenating two                                                    |
+| `==`       | returns `bool` indicating if operands are the same `List` in memory, not just contain same elements |
+| `[index]`  | returns the element at a given index                                                                |
+| `[index]=` | sets the element at a given index                                                                   |
 
 ### Set Class
 
