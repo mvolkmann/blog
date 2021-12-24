@@ -348,6 +348,80 @@ There are three ways to declare variables.
    n = "changed";
    ```
 
+Non-nullable top-level variables (not declared inside a function or class)
+and non-nullable static class properties must be initialized.
+Non-nullable local variables in functions
+do not need to be given a value until their first use.
+
+The `late` keyword has two primary uses.
+
+First, it can be applied to a variable declaration with a non-null type
+that is not initialized.
+This state that the variable will be initialized before its first use.
+It allows a nested function to refer to the variable as long as
+the function is not called until after the variable is initialized.
+See an example of this in the "Streams" section.
+
+Second, it causes a value used for initialization
+to be lazily evaluated, regardless of whether it is a
+function call, method call, or computed property.
+The following code demonstrates this:
+
+```dart
+int myFunction() {
+  print('in myFunction');
+  return 2;
+}
+
+class Demo {
+  // Instance properties like computedProperty cannot be used to initialize
+  // another instance property unless the "late" keyword is used.
+  late int a = computedProperty;
+
+  late int b = myFunction();
+
+  // Instance methods like myMethod cannot be used to initialize
+  // another instance property unless the "late" keyword is used.
+  late int c = myMethod();
+
+  int get computedProperty {
+    print('in computedProperty');
+    return 1;
+  }
+
+  int myMethod() {
+    print('in myMethod');
+    return 3;
+  }
+}
+
+void main() {
+  var demo = Demo();
+  print('created object');
+  print(demo.a);
+  print('retrieved a');
+  print(demo.b);
+  print('retrieved b');
+  print(demo.c);
+  print('retrieved c');
+}
+```
+
+The code above produces the following output:
+
+```dart
+created object
+in computedProperty
+1
+retrieved a
+in myFunction
+2
+retrieved b
+in myMethod
+3
+retrieved c
+```
+
 To get the runtime type of an object, access the `runtimeType` property.
 This has a type of `Type` which has a `toString` method.
 
@@ -443,7 +517,10 @@ main() {
 
 The `identical` function tests whether two values refer to the same object.
 By default the `==` operator performs the same test,
-but classes can override this to have a different meaning.
+but classes can override this to have a different meaning
+such as comparing object properties.
+The collection classes `List`, `Set`, and `Map`
+do not override the `==` operator.
 
 ## Importing packages
 
@@ -1792,7 +1869,9 @@ void main() {
   s ??= 'supplied value';
   print(s);
 
-  // The !. operator asserts that that vale on the left is not null.
+  // The !. operator asserts that the value on the left is not null.
+  // It essentially casts away nullability.
+  // s! here is equivalent to (s as String).
   // The program will crash with "Script error." if it is null.
   print(s!.toUpperCase());
 }
@@ -1814,6 +1893,10 @@ return-type fn-name(parameter-list) {
   statements
 }
 ```
+
+Functions with a return type other than `void`
+must return a value or throw an exception/error.
+Functions with a return type of `void` always return `null`.
 
 Anonymous functions have similar syntax, but the name is omitted
 and the return type is inferred.
@@ -2348,7 +2431,7 @@ Here's a somewhat advanced rule regarding constructors.
 Properties marked as `final` that are not also marked as `late`
 and have a non-nullable type must be
 initialized before the constructor body is reached.
-Typically this is done in the initializer list.
+Typically this is done in the constructor initializer list.
 
 Static properties which exist outside of any instance
 cannot be set in a constructor.
@@ -2357,8 +2440,6 @@ The keyword `this` is only needed to disambiguate
 property and method references from local variables with the same names.
 When there is no name conflict, preceding property and method names
 with `this.` is not required, and is discouraged.
-
-TODO: Describe the `late` keyword.
 
 ### Getters and Setters
 
@@ -2568,6 +2649,23 @@ void main() {
   var pt = Point(2, 3);
   pt.translate(1, -2);
   print(pt); // (3, 1)
+}
+```
+
+When a variable holds a nullable object reference,
+method calls on the variable must check for null.
+For example:
+
+```dart
+int listSum(List<int>? list) {
+  return list == null ? 0 : list.reduce((acc, n) => acc + n);
+}
+
+void main() {
+  List<int>? numbers;
+  print(listSum(numbers)); // 0
+  numbers = [1, 2, 3];
+  print(listSum(numbers)); // 6
 }
 ```
 
