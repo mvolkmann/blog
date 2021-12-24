@@ -1988,8 +1988,6 @@ using the function invocation operator `()`,
 the `call` instance method, and the static `apply` method.
 The following code demonstrates these:
 
-{% raw %}
-
 ```dart
 // This function takes two required positional parameters
 // and two optional named parameters.
@@ -2015,8 +2013,6 @@ void main() {
   print(Function.apply(sum, [15, 10], {#min: 10, #max: 19})); // 19
 }
 ```
-
-{% endraw %}
 
 The spread operator cannot be used to expand a `List` into function arguments.
 However, the static `apply` method on the `Function` class (shown above)
