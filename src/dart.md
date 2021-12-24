@@ -12,7 +12,8 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://dart.dev", "Dart" %} is a
 general purpose, strongly typed, programming language from Google.
-It was first announced in October, 2012.
+It has a "sound type system" which means it can never be in an unknown state.
+Dart was first announced in October, 2012.
 
 The original goal of Dart was to be an alternative to JavaScript
 for running code in web browsers.
@@ -318,6 +319,13 @@ Comments in Dart are written like in many other programming languages.
 
 ## Variables
 
+There are four kinds of variables in Dart.
+
+1. top-level, global variables declared outside any function or class
+1. local variables in a function or method of a class, including parameters
+1. static properties in a class
+1. instance properties in a class
+
 There are three ways to declare variables.
 
 1. With a type
@@ -348,6 +356,10 @@ There are three ways to declare variables.
    n = "changed";
    ```
 
+By default variables do not have a default value and cannot be set to `null`.
+To allow setting a variable to `null` its type must be followed by `?`.
+When this is done, the variable is initialized to `null` by default.
+
 Non-nullable top-level variables (not declared inside a function or class)
 and non-nullable static class properties must be initialized.
 Non-nullable local variables in functions
@@ -367,6 +379,8 @@ a `LateInitializationError` is thrown.
 Second, it causes a value used for initialization
 to be lazily evaluated, regardless of whether it is a
 function call, method call, or computed property.
+The means the initialization function is not called until
+the first time the property is accessed.
 The following code demonstrates this:
 
 ```dart
@@ -400,11 +414,11 @@ class Demo {
 void main() {
   var demo = Demo();
   print('created object');
-  print(demo.a);
+  print(demo.a); // triggers initialization of the "a" property
   print('retrieved a');
-  print(demo.b);
+  print(demo.b); // triggers initialization of the "b" property
   print('retrieved b');
-  print(demo.c);
+  print(demo.c); // triggers initialization of the "c" property
   print('retrieved c');
 }
 ```
@@ -424,7 +438,7 @@ in myMethod
 retrieved c
 ```
 
-To get the runtime type of an object, access the `runtimeType` property.
+To get the runtime type of any object, access its `runtimeType` property.
 This has a type of `Type` which has a `toString` method.
 
 ## Immutability with const and final
@@ -542,12 +556,15 @@ use the `as` keyword.
 import 'dart:math' as math;
 ```
 
-Now names like `pi` can be referred to with `math.pi`.
+Now names like `pi` can be referred to with `math.pi`
+and functions like `sqrt` can be referred to with `math.sqrt`.
 
 ## Types
 
 All values in Dart are objects from some class.
-This is even true for basic types like `bool`, `int`, and `double`.
+This is even true for basic types like `bool`, `int`, `double`, and `String`.
+For example, the literal values `true`, `7`, `3.14`, and `'test'`
+are all objects.
 
 These and many other classes are defined in the `dart:core` package.
 Classes defined here do not need to be imported.
