@@ -1785,6 +1785,9 @@ Dart functions are represented by objects from the `Function` class.
 They are first class which means they can be assigned variables,
 passed to other functions, and returned from other functions.
 
+All Dart functions, including anonymous ones, are closures.
+This means they have access to in-scope variables declared outside the function.
+
 Named function definitions have the following syntax:
 
 ```dart
@@ -2039,6 +2042,7 @@ void main() async {
 
 Dart supports two statements for implementing conditional logic,
 `if` and `switch`.
+It also supports the ternary operator `? :`.
 
 The condition specified in an `if` statement must be
 an expression that evaluates to a `bool` value.
@@ -2060,7 +2064,7 @@ if (temperature > 80) {
 The `switch` statement compares values of type `int` or `String`,
 enumerated types, or compile-time constants.
 Curly braces around the cases are required.
-Here is an example.
+Here is an example of a `switch` statement.
 
 ```dart
 enum Color { red, green, blue }
@@ -2079,6 +2083,18 @@ switch (color) {
 
 When an `enum` value is being evaluated, the `default` clause is required
 unless there is a `case` for each possible value.
+
+The ternary operator selects a value based on boolean expressions.
+For example:
+
+```dart
+print(coinSide == 'heads' ? 'You win.' : 'You lose.');
+
+var assessment =
+  temperature >= 80 ? 'hot' :
+  temperature <= 32 ? 'cold' :
+  'comfortable';
+```
 
 The `assert` statement asserts that a condition is true.
 If it is not, an optional message is printed
