@@ -965,7 +965,7 @@ and `SplayTreeMap`, `SplayTreeSet`.
 
 ### Iterable
 
-The `Iterable` class represents a collection of values
+The `Iterable` generic class represents a collection of values
 that are accessed sequentially.
 The values can be lazily computed when requested
 and an infinite number of values can be generated.
@@ -985,7 +985,7 @@ The `Iterable` class provides the following constructors:
 | `Iterable.empty()`                                      | contains no values                              |
 | `Iterable.generate(int count, E generator(int index)?)` | generates values on request                     |
 
-The `Iterable` class provides the following properties:
+The `Iterable` class provides the following read-only properties:
 
 | Property     | Description                                         |
 | ------------ | --------------------------------------------------- |
@@ -993,7 +993,7 @@ The `Iterable` class provides the following properties:
 | `hashCode`   | hash code                                           |
 | `isEmpty`    | `bool` indicating if there are no elements          |
 | `isNotEmpty` | `bool` indicating if there is at least one element  |
-| `iterator`   | for iterating over elements                         |
+| `iterator`   | `Iterator` object used to iterate over elements     |
 | `last`       | last element                                        |
 | `length`     | number of elements                                  |
 | `single`     | if only one element, that element; otherwise throws |
@@ -1031,6 +1031,13 @@ In the first iteration of the `fold` method,
 the combine function is called with `initialValue` and the first element.
 In the first iteration of the `reduce` method,
 the combine function is called with the first and second elements.
+
+The `Iterator` generic class provides
+the read-only instance property `current` which holds the current element and
+the instance method `moveNext()` which sets `current` to the next element
+and returns a `bool` indicating if there is another element.
+Instances of this class are not typically used directly.
+Instead, syntax like the `for-in` loop are used to iterate over an `Iterable`.
 
 ### List Class
 
