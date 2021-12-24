@@ -1858,6 +1858,112 @@ parameter or argument on a separate line.
 
 Functions that do not explicitly return a value evaluate to `null`.
 
+## Generator Functions
+
+Generator functions generate values on demand in a lazy fashion.
+
+Generator functions use the `yield` keyword to return a single value.
+They can also use the `yield*` keyword to return all the values
+from another generator function individually.
+This serves as a shorter alternative to iterating over
+the values from another generator and returning each one.
+
+Synchronous generator functions include the `sync*` keyword
+after the parameter list and before the body.
+They always return an `Iterator` and
+must generate a value as soon as requested.
+
+The following synchronous generator function generates `int` values
+in a given range which can be open-ended.
+
+```dart
+Iterable<int> range(int start, [int? end]) sync* {
+  if (end == null) {
+    var i = start;
+    while (true) {
+      yield i++;
+    }
+  } else {
+    for (var i = start; i <= end; i++) {
+      yield i;
+    }
+  }
+}
+
+// This demonstrates several ways to use the "range" function.
+// All except the last print the numbers 1 through 5.
+void main() {
+  for (var i in range(1, 5)) {
+    print(i);
+  }
+
+  for (var i in range(1)) {
+    print(i);
+    if (i == 5) break;
+  }
+
+  for (var i in range(1).take(5)) {
+    print(i);
+  }
+
+  // Prints the first five positive integers that are multiples of 3.
+  for (var i in range(1).where((n) => n % 3 == 0).take(5)) {
+    print(i); // prints 3, 6, 9, 12, and 15
+  }
+}
+```
+
+Asynchronous generator functions are sometimes useful, but not frequently used.
+They include the `async*` keyword
+after the parameter list and before the body.
+They always return a `Stream` and
+can return a `Future` for values that will be computed later.
+
+The following asynchronous generator function
+reads text files containing player scores on separate lines.
+Each file contains the scores of a single player.
+
+```dart
+import 'dart:async';
+import 'dart:io';
+
+class PlayerAverage {
+  String player;
+  double average;
+
+  PlayerAverage(this.player, this.average);
+
+  @override
+  String toString() => '$player average score is $average.';
+}
+
+Stream<PlayerAverage> computeAverageScores(List<String> players) async* {
+  for (var player in players) {
+    var lines = await File('scores-$player.txt').readAsLines();
+    var total = lines.fold(0, (int acc, String line) => acc + int.parse(line));
+    var average = total / lines.length;
+    print('$player average is $average.');
+    yield PlayerAverage(player, average);
+  }
+}
+
+void main() async {
+  var players = ['Mark', 'Tami', 'Amanda', 'Jeremy'];
+
+  PlayerAverage? winner;
+  await for (var result in computeAverageScores(players)) {
+    if (winner == null || result.average > winner.average) winner = result;
+  }
+
+  if (winner != null) {
+    print(
+      'The winner is ${winner.player} '
+      'with an average score of ${winner.average}.'
+    );
+  }
+}
+```
+
 ## Conditional Logic
 
 Dart supports two statements for implementing conditional logic,
@@ -3269,7 +3375,7 @@ void main() {
 }
 ```
 
-## Concurrency
+## Asynchronous Programming
 
 The `dart:async` library provides many classes
 that support asynchronous programming.
