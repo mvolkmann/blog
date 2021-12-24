@@ -357,10 +357,12 @@ The `late` keyword has two primary uses.
 
 First, it can be applied to a variable declaration with a non-null type
 that is not initialized.
-This state that the variable will be initialized before its first use.
+This states that the variable will be initialized before its first use.
 It allows a nested function to refer to the variable as long as
 the function is not called until after the variable is initialized.
 See an example of this in the "Streams" section.
+If a `late` variable is used before it is initialized,
+a `LateInitializationError` is thrown.
 
 Second, it causes a value used for initialization
 to be lazily evaluated, regardless of whether it is a
