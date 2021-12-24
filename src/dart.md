@@ -1906,10 +1906,9 @@ void main() {
     print(i);
   }
 
-  // Prints the first five positive integers that are multiples of 3.
-  for (var i in range(1).where((n) => n % 3 == 0).take(5)) {
-    print(i); // prints 3, 6, 9, 12, and 15
-  }
+  // Prints the first five positive integers that are multiples of 3
+  // which are 3, 6, 9, 12, and 15.
+  range(1).where((n) => n % 3 == 0).take(5).forEach(print);
 }
 ```
 
