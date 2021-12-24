@@ -1814,13 +1814,13 @@ add(n1, n2) => n1 + n2;
 main() => print(add(2, 3)); // 5
 ```
 
-Functions can take both positional and named arguments.
-All positional arguments must preceded the named ones.
+Functions can have both positional and named parameters.
+All positional parameters must preceded the named ones.
 
-Positional arguments can be required or optional.
-All required positional arguments must appear before the optional ones.
-Required parameters cannot be given default values.
-All optional arguments must be inside square brackets.
+Positional parameters can be required or optional.
+All required positional parameters must appear before the optional ones.
+Required positional parameters cannot be given default values.
+Optional positional parameters must appear inside square brackets.
 They must either have a default value or an optional type (ending with `?`).
 
 In the following example, `req1` and `req2` are required parameters
@@ -1837,15 +1837,17 @@ demo(int req1, int req2, [int opt1 = 0, int? opt2]) {
 
 Named parameters are declared inside curly braces.
 These must follow all the positional parameters, if any.
-When named parameters are optional, they must either
+Named parameters are optional by default and must either
 have a default value or a nullable type (ending with `?`).
 Default values can be preceded by `=` or `:`, but `=` is preferred.
-If a named parameter is required,
-the `required` keyword must appear before its type.
+To make a named parameter required, add the `required` keyword before its type.
 For example:
 
 ```dart
+// In this version, the named parameter "by" is required.
 //int multiply(int n, {required int by}) => n * by;
+
+// In this version, the named parameter "by" is optional.
 int multiply(int n, {int by = 0}) => n * by;
 
 main() {
@@ -1855,8 +1857,8 @@ main() {
 ```
 
 There are three ways to call a function,
-using the call operator `()`, the `call` instance method,
-and the static `apply` method.
+using the function invocation operator `()`,
+the `call` instance method, and the static `apply` method.
 The following code demonstrates these:
 
 ```dart
@@ -1890,7 +1892,10 @@ However, the static `apply` method on the `Function` class (shown above)
 can be used for this purpose.
 
 Anonymous function definitions are written like named function definitions,
-but omit the name. For example:
+but omit the name.
+Unlike in JavaScript, parentheses are required around the parameter list
+even when there is only one parameter.
+For example:
 
 ```dart
 var numbers = [3, 7, 9];
