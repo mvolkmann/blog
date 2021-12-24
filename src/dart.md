@@ -565,8 +565,13 @@ Instances of the `bool` class represent a boolean value.
 The only values are the literal values `true` and `false`.
 
 The `bool` class doesn't add any interesting properties or methods,
-but it defines the following operators:
+but it defines the following bitwise operators:
 `&` (and), `|` (or), and `^` (xor).
+
+In addition, the logical operators `&&` (and), `||` (or), and `!` (not)
+can be applied to `bool` values.
+TODO: Where are these defined? Why aren't they defined by the `bool` class?
+These have lower precedence than bitwise operators.
 
 ### Number types
 
