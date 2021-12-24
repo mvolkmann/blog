@@ -1814,13 +1814,16 @@ add(n1, n2) => n1 + n2;
 main() => print(add(2, 3)); // 5
 ```
 
-Functions can have both positional and named parameters.
-All positional parameters must preceded the named ones.
+Functions can have both positional and named parameters
+and each of these can be required or optional.
+The order of these in both function declarations and calls to functions
+must be required positional parameters,
+followed by optional positional parameters,
+followed by named parameters in any order.
 
-Positional parameters can be required or optional.
-All required positional parameters must appear before the optional ones.
 Required positional parameters cannot be given default values.
-Optional positional parameters must appear inside square brackets.
+Optional positional parameters must appear inside square brackets
+after the required positional parameters.
 They must either have a default value or an optional type (ending with `?`).
 
 In the following example, `req1` and `req2` are required parameters
