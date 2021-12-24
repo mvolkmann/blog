@@ -1814,15 +1814,6 @@ add(n1, n2) => n1 + n2;
 main() => print(add(2, 3)); // 5
 ```
 
-The spread operator cannot be used to expand a `List` into function arguments.
-The static `apply` method on the `Function` class can be used for this purpose.
-For example:
-
-```dart
-var numbers = [2, 3];
-print(Function.apply(add, numbers)); // 5
-```
-
 Functions can take both positional and named arguments.
 All positional arguments must preceded the named ones.
 
@@ -1862,6 +1853,41 @@ main() {
   print(multiply(4)); // 4
 }
 ```
+
+There are three ways to call a function,
+using the call operator `()`, the `call` instance method,
+and the static `apply` method.
+The following code demonstrates these:
+
+```dart
+// This function takes two required positional parameters
+// and two optional named parameters.
+num sum(num n1, num n2, {num? min, num? max}) {
+  var result = n1 + n2;
+  if (min != null && result < min) return min;
+  if (max != null && result > max) return max;
+  return result;
+}
+
+void main() {
+  print(sum(1, 2)); // 3
+  print(sum(1, 2, min: 10)); // 10
+
+  print(sum.call(1, 2)); // 3
+  print(sum.call(1, 2, min: 10)); // 10
+
+  // First argument to apply is a function to call.
+  // Second argument to apply is an optional List of positional arguments.
+  // Third argument to apply is an optional Map<Symbol, dynamic> of named arguments.
+  print(Function.apply(sum, [1, 2])); // 3
+  print(Function.apply(sum, [1, 2], {#min: 10})); // 10
+  print(Function.apply(sum, [15, 10], {#min: 10, #max: 19})); // 19
+}
+```
+
+The spread operator cannot be used to expand a `List` into function arguments.
+However, the static `apply` method on the `Function` class (shown above)
+can be used for this purpose.
 
 Anonymous function definitions are written like named function definitions,
 but omit the name. For example:
@@ -2933,7 +2959,8 @@ to only allow it to be mixed into subclasses of `Animal`.
 
 ### Extensions
 
-An extension adds properties and methods to an existing class,
+The `extension` keyword is used to
+add properties and methods to an existing class,
 including core Dart classes.
 
 The following code adds a property and a method to the `String` class.
