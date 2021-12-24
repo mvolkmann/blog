@@ -883,7 +883,7 @@ Object obj = 7;
 print((obj as String).length); // throws "Script error."
 ```
 
-TODO: Add more detail on this?
+TODO: Add more detail on type casts?
 
 ## Generic Types
 
@@ -965,12 +965,25 @@ and `SplayTreeMap`, `SplayTreeSet`.
 
 ### Iterable
 
+The `Iterable` class represents a collection of values
+that are accessed sequentially.
+The values can be lazily computed when requested
+and an infinite number of values can be generated.
+
 The following generic collection classes all have `Iterable` as a superclass:
 `DoubleLinkedQueue`, `IterableBase`, `IterableMixin`,
 `LinkedList`, `List`, `ListQueue`, `Queue`, `Runes`, and `Set`.
 
 Any `Iterable` collection can be used in a `for-in` loop
 to iterate over its elements.
+
+The `Iterable` class provides the following constructors:
+
+| Constructor                                             | Description                                     |
+| ------------------------------------------------------- | ----------------------------------------------- |
+| `Iterable()`                                            | used as superclass of classes that are iterable |
+| `Iterable.empty()`                                      | contains no values                              |
+| `Iterable.generate(int count, E generator(int index)?)` | generates values on request                     |
 
 The `Iterable` class provides the following properties:
 
@@ -1861,6 +1874,7 @@ Functions that do not explicitly return a value evaluate to `null`.
 ## Generator Functions
 
 Generator functions generate values on demand in a lazy fashion.
+The values it generates are not computed until they are requested.
 
 Generator functions use the `yield` keyword to return a single value.
 They can also use the `yield*` keyword to return all the values
@@ -3822,9 +3836,10 @@ a call to the `Stream` `forEach` method.
 Flutter provides the `StreamBuilder` class
 which builds widgets from data in a `Stream`.
 
-For more advanced stream processing, see the pub.dev package
-{% aTargetBlank "https://pub.dev/packages/async", "async" %}.
-It provides classes that can cache elements, memoized elements,
+For more advanced stream processing, see the pub.dev packages
+{% aTargetBlank "https://pub.dev/packages/async", "async" %} and
+{% aTargetBlank "https://pub.dev/packages/async", "rxdart" %}.
+These provides classes that can cache elements, memoized elements,
 merge streams, and more.
 
 ### Isolates

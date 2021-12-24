@@ -61,6 +61,9 @@ to draw everything it renders.
 that work across a variety of hardware and software platforms.
 It serves as the graphics engine for Google Chrome and Chrome OS,
 Android, Flutter, Mozilla Firefox and Firefox OS, and many other products."
+{% aTargetBlank "https://developer.android.com/jetpack/compose",
+"Jetpack Compose" %}, a toolkit for building native Android applications,
+also uses Skia.
 
 Companies using React Native include
 Airbnb, Baidui, Bloomberg, Discord, Facebook, Instagram, Oculus, Pinterest,
