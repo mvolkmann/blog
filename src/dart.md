@@ -1912,6 +1912,20 @@ void main() {
 }
 ```
 
+The `Iterable` `generator` method provides an easy way
+to generate a fixed number of values.
+It is passed the number of values to generate and
+a function that takes an index and returns a computed value.
+For example, the `range` function above can be replaced by the following
+if an end value is always supplied.
+
+```dart
+Iterable<int> range(int start, int end) {
+  var count = end - start + 1;
+  return Iterable<int>.generate(count, (index) => index + start);
+}
+```
+
 Asynchronous generator functions are sometimes useful, but not frequently used.
 They include the `async*` keyword
 after the parameter list and before the body.
@@ -1950,6 +1964,9 @@ void main() async {
   var players = ['Mark', 'Tami', 'Amanda', 'Jeremy'];
 
   PlayerAverage? winner;
+  // Note the use of "async for" to iterate over
+  // values in a Stream inside an async function.
+  // Only use this when it is certain that the Stream will complete.
   await for (var result in computeAverageScores(players)) {
     if (winner == null || result.average > winner.average) winner = result;
   }
@@ -3444,7 +3461,8 @@ void main() {
 }
 ```
 
-The following code demonstrates using `async` and `await`.
+The following code demonstrates using the `async` and `await` keywords.
+These work similarly to the same keywords in JavaScript.
 The `await` keyword can only be used inside functions marked `async`.
 Such functions always return a `Future` even if one isn't explicitly created.
 
