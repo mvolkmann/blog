@@ -435,10 +435,15 @@ main() {
   var p1 = const Point(1, 2); // compile-time constant
   const p2 = Point(1, 2); // alternate way to create a compile-time constant
   var p3 = Point(1, 2); // not a constant
+  print(p1 == p2); // true - same object
   print(identical(p1, p2)); // true - same object
   print(identical(p1, p3)); // false - not same object
 }
 ```
+
+The `identical` function tests whether two values refer to the same object.
+By default the `==` operator performs the same test,
+but classes can override this to have a different meaning.
 
 ## Importing packages
 
