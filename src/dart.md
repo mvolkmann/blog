@@ -35,11 +35,15 @@ of operators when applied to instances of custom classes.
 
 ## Resources
 
-TODO: Add more resources.
-
-- [Dart home page](https://dart.dev)
-- [Effective Dart](https://dart.dev/guides/language/effective-dart)
-- [Dart Complete Course](https://youtu.be/F3JuuYuOUK4)
+- {% aTargetBlank "https://dart.dev", "Dart home page" %}
+- {% aTargetBlank "https://dart.dev/guides/language/spec",
+  "Dart Language Specification" %}
+- {% aTargetBlank "https://dart.dev/guides/language/effective-dart",
+  "Effective Dart" %} - tips to "write consistent, robust, and fast code"
+- {% aTargetBlank "https://www.youtube.com/watch?v=F3JuuYuOUK4",
+  "Dart Complete Course" %} - on Youtube by Flutterly/WCKD
+- {% aTargetBlank "https://dartpad.dev/", "DartPad" %} -
+  web-based editor for experimenting with Dart
 
 ## Editors
 
@@ -300,6 +304,10 @@ The Dart SDK contains three compilers.
 1. JavaScript (JS) compiler  
    This compiles a Dart program to JavaScript,
    which allows it to be run in a web browser.
+   The ability to do this is an important goal of the Dart language
+   and influenced many of its syntax decisions.
+   Some Dart libraries only run on the server or in Flutter
+   and cannot be compiled to JavaScript.
 
 ## Keywords
 
@@ -1943,6 +1951,11 @@ The order of these in both function declarations and calls to functions
 must be required positional parameters,
 followed by optional positional parameters,
 followed by named parameters in any order.
+
+A future version of Dart will allow named parameters
+to appear anywhere in an argument list.
+See {% aTargetBlank "https://github.com/dart-lang/sdk/issues/47451",
+"issue 47451" %}.
 
 Required positional parameters cannot be given default values.
 Optional positional parameters must appear inside square brackets
