@@ -983,13 +983,12 @@ print((obj as String).length);
 ```
 
 This throws if the cast is not valid.
+For example:
 
 ```dart
 Object obj = 7;
 print((obj as String).length); // throws "Script error."
 ```
-
-TODO: Add more detail on type casts?
 
 ## Generic Types
 
@@ -1982,6 +1981,9 @@ main() {
   print(multiply(4)); // 4
 }
 ```
+
+Dart does not support variadic functions
+which are functions that accept a variable number of arguments.
 
 There are three ways to call a function,
 using the function invocation operator `()`,
@@ -3675,6 +3677,8 @@ void main() {
 
 The following code demonstrates using the `async` and `await` keywords.
 These work similarly to the same keywords in JavaScript.
+They allow asynchronous code to read more like synchronous code,
+including the ability to use `try/catch` to handle errors thrown in a `Future`.
 The `await` keyword can only be used inside functions marked `async`.
 Such functions always return a `Future` even if one isn't explicitly created.
 
@@ -3727,8 +3731,26 @@ that cannot be evaluated until after the current function completes.
 
 `Future.error` is similar to JavaScript `Promise.reject`.
 
-TODO: Does the dart:async library provide an equivalent of JS Promise.all
-TODO: for an Iterable of Futures?
+The `Future` class provides the following instance methods:
+TODO: Finish filling in this table.
+
+| Method           | Description |
+| ---------------- | ----------- |
+| `asStream()`     |             |
+| `catchError()`   |             |
+| `then()`         |             |
+| `timeout()`      |             |
+| `whenComplete()` |             |
+
+The `Future` class provides the following static methods:
+TODO: Finish filling in this table.
+
+| Method      | Description |
+| ----------- | ----------- |
+| `any()`     |             |
+| `doWhile()` |             |
+| `forEach()` |             |
+| `wait()`    |             |
 
 The following code demonstrates the use of each of these constructors
 and explains the order in which the `Future` objects will be evaluated.
@@ -3933,7 +3955,7 @@ The output from the code above is:
 0
 100
 200
-got error bad thing happened
+got error rejecting 3
 400
 500
 ```
