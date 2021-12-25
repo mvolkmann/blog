@@ -3727,30 +3727,34 @@ that cannot be evaluated until after the current function completes.
 | `Future.sync`      | microtask | runs function immediately and places result (success or failure) in a `Future`  |
 | `Future.value`     | microtask | creates a `Future` that succeeds with a given value                             |
 
-`Future.value` is similar to JavaScript `Promise.resolve`.
+`Future.value` is similar to the JavaScript `Promise.resolve` method.
 
-`Future.error` is similar to JavaScript `Promise.reject`.
+`Future.error` is similar to the JavaScript `Promise.reject` method.
 
 The `Future` class provides the following instance methods:
-TODO: Finish filling in this table.
 
-| Method           | Description |
-| ---------------- | ----------- |
-| `asStream()`     |             |
-| `catchError()`   |             |
-| `then()`         |             |
-| `timeout()`      |             |
-| `whenComplete()` |             |
+| Method                                       | Description                                                                                                          |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `asStream()`                                 | returns `Stream<T>` emitting the single result                                                                       |
+| `catchError(onErrorFn, [testFn])`            | returns `Future<T>`; asynchronous equivalent of a `catch` block; if testFn is supplied, only handles matching errors |
+| `then(onValueFn, [onErrorFn])`               | returns `Future<T>` and registers callbacks for success and optionally error                                         |
+| `timeout(Duration timeLimit, {onTimeout()?}` | returns `Future<T>` that acts like receiver, but calls `onTimeout` if `timeLimit` passes before completing           |
+| `whenComplete(actionFn)`                     | returns `Future<T>`; asynchronous equivalent of a `finally` block                                                    |
 
 The `Future` class provides the following static methods:
-TODO: Finish filling in this table.
 
-| Method      | Description |
-| ----------- | ----------- |
-| `any()`     |             |
-| `doWhile()` |             |
-| `forEach()` |             |
-| `wait()`    |             |
+| Method                                                            | Description                                                                                             |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `any(Iterable<Future> futures)`                                   | returns `Future<T>` that completes with result of first `Future` that completes                         |
+| `doWhile(FutureOr<bool> action())`                                | calls `action` repeatedly until it returns `false`                                                      |
+| `forEach(Iterable<T> elements, FutureOr action(T element))`       | returns `Future` that completes with `null` after `action` is called on each element; results not saved |
+| `wait(Iterable<Future> futures, {bool eagerError=false, cleanup)` | returns `Future<List<T>>` that completes with results of multiple `Future`s after all complete          |
+
+`Future.any` is similar to the JavaScript
+`Promise.any` and `Promise.race` methods.
+
+`Future.wait` is similar to the JavaScript
+`Promise.all` and `Promise.allSettled` methods.
 
 The following code demonstrates the use of each of these constructors
 and explains the order in which the `Future` objects will be evaluated.
