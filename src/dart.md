@@ -4315,7 +4315,15 @@ When `skip` is set to a `String`, `expect` will output
 Note that the arguments to `expect` are evaluated
 regardless of the value of `skip`.
 
-TODO: Can you skip a `test` or `group`?
+To skip running a test, pass the named parameter `skip`
+with a string message to the `test` function.
+
+To skip running a group of tests, pass the named parameter `skip`
+with a string message to the `group` function.
+
+To skip running all the tests in a source file,
+add the `@Skip(message)` annotation
+to the top of the file before `import` statements.
 
 Suppose we want to test the function `processOrder`
 on orders that contain multiple items, one item, and zero items,
