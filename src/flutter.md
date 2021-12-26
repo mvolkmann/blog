@@ -167,6 +167,9 @@ that increments the number.
 The starting point of the app is the file `lib/main.dart`.
 This defines the `main` function that all Dart apps must have.
 
+To avoid committing generated files to a Git repository,
+add `/android` and `/ios` to the provided `.gitignore` file.
+
 ## Linting
 
 Flutter apps provide default code linting.
