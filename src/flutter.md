@@ -334,13 +334,14 @@ This provides many things including:
 
     This toggles between light mode and dark mode.
     When using `MaterialApp` light mode is defined by the `theme` property,
-    dark mode is defined by the `darkTheme` property,
-    and the `themeMode` property must be set to `ThemeMode.system`.
+    dark mode is defined by the `darkTheme` property.
+    A good default for `darkTheme` is `ThemeData.dark()`.
     For example:
 
     ```dart
     theme: ThemeData(primarySwatch: Colors.blue),
     darkTheme: ThemeData.dark(),
+    // This selects light/dark mode based on user preference in their OS.
     themeMode: ThemeMode.system,
     ```
 
