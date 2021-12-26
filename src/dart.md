@@ -4398,5 +4398,13 @@ void main() {
 
 ## Annoyances
 
+- Dart Format should be able to indent lines nicely without requiring
+  a trailing comma after the last argument to every function call.
+
+- Dart should support a shorthand for named parameters
+  when there is an in-scope variable with the same name.
+  For example, instead of `Person(name: name, birthday: birthday)`
+  we should be able to write `Person(name:, birthday:)`.
+
 - Dart wants many constructor calls to be preceded by the `const` keyword.
   This makes the code verbose.

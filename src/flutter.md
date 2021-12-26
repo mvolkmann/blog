@@ -77,6 +77,14 @@ Alibaba, Amazon, Betterment, BMW, Etsy, Google Ads, Google Pay,
 Hamilton Musical, iRobot, New York Times, Phillips Hue, Realtor.com,
 Supabase, Tonal, and Toyota.
 
+## Terminology
+
+The software used to test an app on a specific kind of device
+without using a real device goes by different names.
+For Android devices this is referred to as an "emulator".
+For iOS devices this is referred to as a "simulator".
+This document refers to both as a simulator.
+
 ## Setup
 
 - Install the Flutter SDK.
@@ -201,13 +209,17 @@ If the app is run from a compatible editor, the app will
 automatically update after saving code changes without losing state.
 Compatible editors include Android Studio, IntelliJ, VS Code, and emacs.
 
-When using VS Code, install the Flutter extension.
-This provides great auto-complete support.
-
 To run a Flutter app from VS Code, select
-Run ... Start Debugging or Run ... Run Without Debugging.
+Run ... Start Debugging (F5) or Run ... Run Without Debugging (ctrl-F5).
 The simulated or real device to use can be selected
 from a menu in the VS Code footer.
+
+## Debugging
+
+When a Flutter app is run from a terminal,
+pressing "p" displays blue outlines of all widgets.
+This is useful to understand the position and size of each widget.
+Press "p" again to toggle this off.
 
 ## Running on Devices
 
@@ -249,6 +261,106 @@ Use the Cupertino library to have an iOS look and feel.
 This also works on all platforms.
 However, due to licensing restrictions it won't
 have the correct fonts on Android.
+
+## VS Code
+
+Install the Flutter extension.
+This provides many things including:
+
+- great auto-complete support
+- phantom comments after the last lines of multi-line widget constructor calls
+  to make it easy to spot where they end
+- Flutter-specific entries in the status bar that include:
+
+  - Flutter SDK version (ex Flutter 2.8.1)
+  - device name being simulated (ex. iPhone 13 (ios simulator))
+    that can be clicked to select a different device
+
+- Flutter-specific command palette commands that include:
+
+  - Change SDK
+  - Clean Project
+  - Focus on Outline View
+  - Get Packages
+  - Hot Reload
+
+  - Inspect Widget
+
+    After running this command, click a widget in the simulator.
+    The widget will be highlighted in the simulator,
+    its name will be displayed in a tooltip,
+    and the corresponding code will be highlighted in VS Code.
+    To turn this off, run the "Flutter: Cancel Widget Inspection" command.
+
+  - Launch Emulator
+  - List Outdated Packages
+  - New Project
+
+  - Open DevTools
+
+    This opens a drop-down for selecting the DevTools page to open.
+    The options are "Widget Inspector", "CPU Profiler", "Memory",
+    "Performance", "Network", and "Logging".
+    There is also an option to "Open DevTools in Web Browser"
+    inside of inside VS Code.
+
+  - Open DevTools Performance Page
+
+  - Open DevTools Widget Inspector
+
+    This is an incredibly useful debugging tool!
+    It displays the widget tree on the left.
+    Selecting a widget displays details about it on the right.
+    The "Layout Explorer" tab displays layout details for the widget.
+    The "Details Tree" tab displays the properties of the widget.
+
+  - Open Observatory Timeline
+  - Override Platform
+  - Run Flutter Doctor
+  - Run Flutter Upgrade
+  - Save Screenshot
+
+  - Select Device
+
+    This displays a list of device name that can be simulated.
+    Select one to change the device type that will be used.
+    This can start the iOS Simulator and Android Emulator,
+    so it is not necessary to manually do this from outside of VS Code.
+    But it is still necessary to select a specific device type
+    and run the app.
+
+  - Toggle Baseline Painting
+  - Toggle Brightness
+
+    This toggles between light mode and dark mode.
+    When using `MaterialApp` light mode is defined by the `theme` property,
+    dark mode is defined by the `darkTheme` property,
+    and the `themeMode` property must be set to `ThemeMode.system`.
+
+  - Toggle Debug Painting
+
+    This displays a light blue outline around each widget
+    to aid in understanding the current widget layout.
+
+  - Toggle Debug-Mode Banner
+
+    To hides/shows the red debug banner in the upper-right corner.
+
+  - Toggle Performance Overlay
+
+  - Toggle Repaint Rainbow
+
+    This draws a thick, colored outline on all widgets
+    that were repainted due to the last user interaction.
+    The colors rotate to indicate that a previously repainted widget
+    was repainted yet again.
+
+  - Toggle Slow Animations
+
+    This slows down animations to enable visual inspection.
+
+  - Upgrade Packages
+  - Upgrade Packages (--major-versions)
 
 ## Container Widgets
 
