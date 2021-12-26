@@ -336,6 +336,13 @@ This provides many things including:
     When using `MaterialApp` light mode is defined by the `theme` property,
     dark mode is defined by the `darkTheme` property,
     and the `themeMode` property must be set to `ThemeMode.system`.
+    For example:
+
+    ```dart
+    theme: ThemeData(primarySwatch: Colors.blue),
+    darkTheme: ThemeData.dark(),
+    themeMode: ThemeMode.system,
+    ```
 
   - Toggle Debug Painting
 
