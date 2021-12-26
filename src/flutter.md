@@ -271,8 +271,23 @@ Install the Flutter extension.
 This provides many things including:
 
 - great auto-complete support
+
+- snippets
+
+  - `stless` adds template code for creating a stateless widget
+  - `stful` adds template code for creating a stateful widget
+
+  The code added by these requires importing a library that defines
+  the `StatelessWidget` and `StatefulWidget` classes.
+  For example:
+
+  ```dart
+  import 'package:flutter/material.dart';
+  ```
+
 - phantom comments after the last lines of multi-line widget constructor calls
   to make it easy to spot where they end
+
 - Flutter-specific entries in the status bar that include:
 
   - Flutter SDK version (ex Flutter 2.8.1)
