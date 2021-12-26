@@ -12,7 +12,7 @@ using the {% aTargetBlank "https://dart.dev", "Dart programming language" %}.
 For details on the Dart programming language,
 see this <a href="../dart/">page</a>.
 
-Everything rendered by a Flutter app is rendered by a widget.
+Everything rendered by a Flutter app is rendered by a "widget".
 There are many provided widgets and custom ones can be defined.
 
 The Flutter framework is implemented in Dart,
@@ -24,9 +24,12 @@ relatively new, low-code tool for building Flutter applications.
 
 ## Resources
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-- [online documentation](https://flutter.dev/docs)
+- {% aTargetBlank "https://flutter.dev/", "Flutter home page" %}
+- {% aTargetBlank "https://flutter.dev/docs", "Flutter official documentation" %}
+- {% aTargetBlank "https://flutter.dev/docs/get-started/codelab",
+  "Write your first Flutter app" %}
+- {% aTargetBlank "https://flutter.dev/docs/cookbook",
+  "Cookbook: Useful Flutter samples" %}
 
 ## Comparison to React Native
 
@@ -117,7 +120,14 @@ Supabase, Tonal, and Toyota.
 
 - Verify the installation by entering `flutter doctor`.
 
-  - I couldn't get this to find Android Studio!
+  - If you get the error "cmdline-tools component is missing",
+    enter `sdkmanager --install "cmdline-tools" and then "latest".
+  - If this gives the error
+    "java.lang.NoClassDefFoundError: javax/xml/bind/annotation/XmlSchema",
+    start "Android Studio", select Tools ... SDK Manager, select
+    Appearance & Behavior ... System Settings ... Android SDK ... SDK Tools,
+    check "Android SDK Command-line tools (latest)",
+    and click the Apply button.
 
 ## Tools
 
