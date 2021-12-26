@@ -84,7 +84,8 @@ Supabase, Tonal, and Toyota.
   - Download and unzip it.
   - Add the path to the `flutter/bin` directory
     to the `PATH` environment variable.
-  - Later, to upgrade to the latest version enter the following commands:
+  - Later, to upgrade a project to the latest version, cd to the project
+    and enter the following commands:
     - `flutter upgrade`
     - `flutter clean`
     - `flutter pub get`
@@ -146,6 +147,10 @@ To run an app, cd to the app directory and enter `flutter run`.
 If the iOS Simulator is running, the app will run there.
 If an Android emulator is running, the app will run there.
 Otherwise it will run in the Chrome web browser.
+This will take about 1.5 minutes to start the first time it is run
+and about 10 seconds after that.
+But typically the app will remain running and
+changes will be deployed with hot reload nearly instantly.
 
 The default app renders a header that displays an app title,
 some text, a number, and a button in the lower-right
@@ -153,13 +158,6 @@ that increments the number.
 
 The starting point of the app is the file `lib/main.dart`.
 This defines the `main` function that all Dart apps must have.
-
-To deploy an app to an iOS device:
-
-- Install CocoaPods by entering `sudo gem install cocoapods`.
-- Follow the Xcode signing flow to provision your project.
-- Enter `flutter run`.
-- TODO: TEST ALL OF THIS!
 
 ## Linting
 
@@ -194,22 +192,22 @@ even the last one.
 ## Hot Reloading
 
 Flutter has great hot reloading!
-This requires using a compatible editor which includes
-Android Studio, IntelliJ, VS Code, and emacs.
-After every code change is saved Flutter
-updates the running app without losing state.
-
-When using VS Code, install the Flutter extension.
-This provides great auto-complete support.
-
-Run the app from VS Code by selecting
-Run ... Start Debugging or Run ... Run Without Debugging.
-The simulated or real device to use can be selected
-from a menu in the VS Code footer.
 
 If the app is run from a terminal with `flutter run`
 then hot reloading will only occur if focus is moved to the terminal
 and the "r" key is pressed.
+
+If the app is run from a compatible editor, the app will
+automatically update after saving code changes without losing state.
+Compatible editors include Android Studio, IntelliJ, VS Code, and emacs.
+
+When using VS Code, install the Flutter extension.
+This provides great auto-complete support.
+
+To run a Flutter app from VS Code, select
+Run ... Start Debugging or Run ... Run Without Debugging.
+The simulated or real device to use can be selected
+from a menu in the VS Code footer.
 
 ## Running on Devices
 
