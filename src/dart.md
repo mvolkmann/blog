@@ -118,6 +118,17 @@ Some notable packages to consider using include:
   Another set of lint rules to consider using is {% aTargetBlank
   "https://pub.dev/packages/very_good_analysis", "Very Good Analysis" %}.
 
+  Here are some recommended rule configurations that include
+  suppressing warnings about use of the `const` keyword:
+
+  ```yaml
+  avoid_print: false
+  prefer_const_constructors: false
+  prefer_const_constructors_in_immutables: false
+  prefer_const_literals_to_create_immutables: false
+  prefer_single_quotes: true
+  ```
+
 The official Dart package manager is `pub`.
 This is similar to `npm` for Node.js.
 In the same way that `npm` relies on the files

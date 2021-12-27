@@ -668,6 +668,57 @@ class MyPage extends StatelessWidget {
 }
 ```
 
+## Managing State
+
+For state that is only used by a single widget instance,
+use `setState` inside that widget.
+For example:
+
+```dart
+TODO: Add this
+```
+
+For state that must be shared across multiple widget instances,
+a recommended approach is to use the provider library.
+
+### provider Library
+
+The steps to use the provider library are:
+
+1. Add dependency to `pubspec.yaml`.
+
+   ```yaml
+   dependencies:
+     provider: ^6.0.1
+   ```
+
+2. Install by entering `flutter pub get`.
+
+3. Create provider classes that holds state and defines getters and setters.
+
+   ```dart
+   class Count extends ChangeNotifier {
+     var _count = 0;
+
+     void decrement() {
+       _count -= 1;
+       notifyListeners();
+     }
+
+     void increment() {
+       _count += 1;
+       notifyListeners();
+     }
+
+     void reset() {
+       _count = 0;
+       notifyListeners();
+     }
+   }
+   ```
+
+4. ???
+
 ## Fonts
 
 To use custom fonts:
@@ -1277,3 +1328,7 @@ the `flutter` command can be replaced by the `dart` command.
 - The VS Code Flutter extension displays a comment after the closing paren
   of all widgets. It isn't really in the code, but adds visual clutter.
   I haven't found a way to disable it yet.
+
+- The `Row` and `Column` widgets need to take a `spacing` parameter
+  like the `Wrap` widget does so it isn't necessary to do tedious things
+  like adding a `SizedBox` between each child to leave space between them.
