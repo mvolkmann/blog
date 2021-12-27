@@ -1093,6 +1093,7 @@ To use this, call the `spacing` method on the value passed
 in the `children` argument. For example, `[...].spacing(20)`.
 The same approach can be used with the
 `children` parameter of the `Row` widget.
+Thanks to Pat Niemeyer for this suggestion!
 
 #### CustomMultiChildLayout
 
