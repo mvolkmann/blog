@@ -1070,6 +1070,30 @@ Values of the `TextDirection` enum include
 
 Values of the `VerticalDirection` enum include `down` (default) and `up`.
 
+There is no parameter that controls the space between the children.
+One way to add space between them is to insert `SizedBox` widgets.
+To make this easier, consider adding an extension to the `List<Widget>` type
+as follows in a file named `widget_extension.dart`.
+
+```dart
+import 'package:flutter/material.dart';
+
+extension WidgetExtension<Widget> on List<Widget> {
+  /// Adds a SizedBox between all Widgets in the List.
+  List<Widget> spacing(double size) {
+    for (int i = length - 1; i > 0; i--) {
+      insert(i, SizedBox(width: size, height: size) as Widget);
+    }
+    return this;
+  }
+}
+```
+
+To use this, call the `spacing` method on the value passed
+in the `children` argument. For example, `[...].spacing(20)`.
+The same approach can be used with the
+`children` parameter of the `Row` widget.
+
 #### CustomMultiChildLayout
 
 #### Flow
