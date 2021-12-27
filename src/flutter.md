@@ -680,6 +680,8 @@ TODO: Add this
 
 For state that must be shared across multiple widget instances,
 a recommended approach is to use the provider library.
+In June, 2019 Chris Sells, the Flutter Project Manager, said
+"Provider is the recommended way to do State Management for apps of all sizes."
 
 ### provider Library
 
@@ -694,19 +696,27 @@ The steps to use the provider library are:
 
 2. Install by entering `flutter pub get`.
 
-3. Create provider classes that holds state and defines getters and setters.
+3. Create `ChangeNotifier` classes that hold state,
+   define methods for modifying it, and define getters and setters.
+   For example, the following can be defined
+   in the file `lib/count_state.dart`:
 
    ```dart
-   class Count extends ChangeNotifier {
+   import 'package:flutter/foundation.dart'; // defines ChangeNotifier
+
+   class CountState extends ChangeNotifier {
+     // Can declare any number of state variables here.
      var _count = 0;
 
+     int get count => _count;
+
      void decrement() {
-       _count -= 1;
+       _count--;
        notifyListeners();
      }
 
      void increment() {
-       _count += 1;
+       _count++;
        notifyListeners();
      }
 
@@ -717,7 +727,125 @@ The steps to use the provider library are:
    }
    ```
 
-4. ???
+4. Create an instance of each `ChangeNotifier` class
+   in the lowest part of the widget tree where they are needed.
+   For example, the following can appear in the file `lib/main.dart`:
+
+   ```dart
+   import 'package:flutter/material.dart';
+   import 'package:provider/provider.dart';
+   import 'count_state.dart';
+   import 'counter.dart';
+   import 'report.dart';
+
+   return MaterialApp(
+     ...
+     home: ChangeNotifierProvider(
+       create: (context) => CountState(),
+       child: HomePage(title: 'My App'),
+     ),
+   );
+
+   // The build method of the HomePage widget can include:
+   children: <Widget>[
+     Counter(),
+     Report(),
+   ],
+   ```
+
+5. Use the state in descendant widgets of the one
+   where its `ChangeNotifier` class was created.
+   For example, here is `lib/counter.dart`:
+
+   ```dart
+   import 'package:flutter/material.dart';
+   import 'package:provider/provider.dart';
+   import 'circle_button.dart';
+   import 'count_state.dart';
+   import 'widget_extensions.dart';
+
+   class Counter extends StatelessWidget {
+     Counter({Key? key}) : super(key: key);
+
+     @override
+     Widget build(BuildContext context) {
+       var countState = Provider.of<CountState>(context);
+       var children = <Widget>[
+         CircleButton(
+           color: Colors.red,
+           onPressed: () {
+             countState.decrement();
+           },
+           size: 50,
+           text: '-'),
+         Text(countState.count.toString(), style: TextStyle(fontSize: 50)),
+         CircleButton(
+           onPressed: () {
+             countState.increment();
+           },
+           size: 50,
+           text: '+'),
+       ].hSpacing(10);
+
+       return Row(
+         children: children,
+         mainAxisAlignment: MainAxisAlignment.center,
+       );
+     }
+   }
+   ```
+
+   There are two approaches for access provider state.
+   The first is to use `Provider.of`.
+   The second is to use `Consumer`.
+   `Consumer` is a widget, so it can be only be used in a widget tree.
+   It makes the code more deeply nested.
+   `Provider.of` is a constructor,
+   so it can be used anywhere in a Dart function.
+
+   Both approaches are demonstrated in `lib/report.dart` below:
+
+   ```dart
+   import 'package:flutter/material.dart';
+   import 'package:provider/provider.dart';
+   import 'count_state.dart';
+   import 'widget_extensions.dart';
+
+   class Report extends StatelessWidget {
+     const Report({Key? key}) : super(key: key);
+
+     @override
+     Widget build(BuildContext context) {
+       var countState = Provider.of<CountState>(context);
+       return Row(
+         children: [
+           Text('Report: ${countState.count}'),
+           ElevatedButton(
+             child: Text('Reset'),
+             onPressed: () {
+             countState.reset();
+           }),
+         ].hSpacing(10),
+         mainAxisAlignment: MainAxisAlignment.center,
+       );
+
+       /*
+       return Consumer<CountState>(builder: (context, data, child) {
+         return Row(
+           children: [ Text('Report: ${data.count}'),
+             ElevatedButton(
+               child: Text('Reset'),
+               onPressed: () {
+                 data.reset();
+               }),
+           ].hSpacing(10),
+           mainAxisAlignment: MainAxisAlignment.center,
+         );
+       });
+       */
+     }
+   }
+   ```
 
 ## Fonts
 
