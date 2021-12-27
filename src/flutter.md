@@ -388,27 +388,20 @@ This provides many things including:
   - Upgrade Packages
   - Upgrade Packages (--major-versions)
 
-## Container Widgets
+## Widget Types
 
-Many widgets accept other widgets as parameters
-and render them with a specific styling or layout.
-The Flutter naming convention for these parameters
-is to use `child` for passing a single widget
-and `children` for passing an array of widgets.
+Widgets that accept other widgets as arguments typically have
+a parameter named `child` for one or `children` for multiple.
 
-## Styling Widgets
-
-Some widgets take another widget as a parameter and apply styling.
-Examples include `Container`, `MediaQuery`, `Padding`, `Theme`.
-
-## Layout Widgets
-
-Some widgets take other widgets as a parameter
-and layout them out in a specific way.
-See the "Layout" section below for details.
+Widgets with a `children` parameter that layout those widgets
+in a specific way can be referred to as "layout widgets".
 Commonly used layout widgets include
 `Center`, `Column`, `Container`, `Expanded`, `Flow`, `GridView`,
 `ListView`, `Padding`, `Row`, `SizedBox`, `Stack`, `Table`, and `Wrap`.
+
+Some widgets take a single widget as a parameter and apply styling.
+Examples include `Container`, `MediaQuery`, `Padding`, `Theme`.
+These can be referred to as "styling widgets".
 
 ## Stateless vs. Stateful Widgets
 
@@ -1040,6 +1033,40 @@ This applies positioning and sizing to other widgets.
 
 This renders a vertical list of child widgets.
 It is similar to a SwiftUI `VStack`.
+The "main" axis is vertical and the "cross" axis is horizontal.
+
+This constructor for widget takes the following named parameters,
+all of which are optional.
+
+| Parameter            | Type                      |
+| -------------------- | ------------------------- |
+| `children`           | `List<Widget>`            |
+| `crossAxisAlignment` | `CrossAxisAlignment` enum |
+| `mainAxisAlignment`  | `MainAxisAlignment` enum  |
+| `mainAxisSize`       | `MainAxisSize` enum       |
+| `textBaseline?`      | `TextBaseline` enum       |
+| `textDirection?`     | `TextDirection` enum      |
+| `verticalDirection`  | `VerticalDirection` enum  |
+
+Typically only `children`, `crossAxisAlignment`,
+`mainAxisAlignment`, and `mainAxisSize` are specified.
+
+Values of the `CrossAxisAlignment` enum include
+`start`, `center` (default), `end`, `stretch`, and `baseline` (aligns text baselines).
+
+Values of the `MainAxisAlignment` enum include
+`start` (default), `center`, `end`, `spaceAround`, `spaceBetween`, and `spaceEvenly`.
+
+Values of the `MainSize` enum include
+`max` (uses all available space; default) and
+`min` (uses on what is needed to fit children).
+
+Values of the `TextBaseline` enum include `alphabetic` and `ideographic`.
+
+Values of the `TextDirection` enum include
+`ltr` (left to right) and `rtl` (right to left).
+
+Values of the `VerticalDirection` enum include `down` (default) and `up`.
 
 #### CustomMultiChildLayout
 
