@@ -1052,10 +1052,12 @@ Typically only `children`, `crossAxisAlignment`,
 `mainAxisAlignment`, and `mainAxisSize` are specified.
 
 Values of the `CrossAxisAlignment` enum include
-`start`, `center` (default), `end`, `stretch`, and `baseline` (aligns text baselines).
+`start`, `center` (default), `end`,
+`stretch`, and `baseline` (aligns text baselines).
 
 Values of the `MainAxisAlignment` enum include
-`start` (default), `center`, `end`, `spaceAround`, `spaceBetween`, and `spaceEvenly`.
+`start` (default), `center`, `end`,
+`spaceAround`, `spaceBetween`, and `spaceEvenly`.
 
 Values of the `MainSize` enum include
 `max` (uses all available space; default) and
@@ -1132,6 +1134,10 @@ class ColorList extends StatelessWidget {
 
 This renders a horizontal list of child widgets.
 It is similar to a SwiftUI `HStack`.
+The "main" axis is horizontal and the "cross" axis is vertical.
+
+This constructor for widget takes the
+same named parameters as the `Column` widget.
 
 #### Stack
 
@@ -1141,6 +1147,45 @@ It is similar to a SwiftUI `ZStack`.
 #### Table
 
 #### Wrap
+
+This renders widgets in rows or columns.
+It is similar to the `Row` and `Column` widgets,
+but differs in that it wraps children to multiple rows or columns
+when they do not all fit in a single row or column.
+
+This constructor for widget takes the following named parameters,
+all of which are optional.
+
+| Parameter            | Type                      |
+| -------------------- | ------------------------- |
+| `alignment`          | `WrapAlignment` enum      |
+| `children`           | `List<Widget>`            |
+| `clipBehavior`       | `Clip` enum               |
+| `crossAxisAlignment` | `WrapCrossAlignment` enum |
+| `direction`          | `Axis`                    |
+| `runAlignment`       | `WrapAlignment` enum      |
+| `runSpacing`         | `double`; defaults to 0.0 |
+| `spacing`            | `double`; defaults to 0.0 |
+| `textDirection`      | `TextDirection`           |
+| `verticalDirection`  | `VerticalDirection` enum  |
+
+The `children` are divided into "runs" that fit in a single row or column.
+The `runAlignment` and `runSpacing` parameters apply to entire runs.
+The `alignment` and `spacing` parameters apply to the children of each "run".
+
+Values of the `Axis` enum include `horizontal` (default) and `vertical`.
+
+Values of the `Clip` enum include
+`antiAlias`, `antiAliasWithSaveLayer`, `hardEdge`, and `none` (default).
+
+Values of the `TextDirection` and `VerticalDirection` enums were
+described with the `Column` widget above.
+
+Values of the `WrapAlignment` enum include
+`start` (default), `center`, `end`,
+`spaceAround`, `spaceBetween`, and `spaceEvenly`.
+
+Values of the `WrapCrossAlignment` enum include
 
 ### Sliver Widgets
 
