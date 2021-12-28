@@ -138,6 +138,8 @@ In the same way that `npm` relies on the files
 ## Creating and Running Programs
 
 Dart source files have a `.dart` file extension.
+It is recommended that their names be all lowercase
+with multiple words separated by underscores.
 
 The `main` function defines the starting point of a program.
 It is passed a `List` of command-line arguments.
@@ -163,7 +165,8 @@ makes it easy to publish packages to
 and much more.
 
 To create a new Dart project, enter `dart create {project-name}`.
-Dart prefers underscores over hyphens in names.
+Dart prefers underscores over hyphens
+in both project names and source file names.
 For example:
 
 ```bash

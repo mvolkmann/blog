@@ -212,10 +212,13 @@ even the last one.
 ## Hot Reloading
 
 Flutter has great hot reloading!
+This loads code changes and preserves state.
 
 If the app is run from a terminal with `flutter run`
 then hot reloading will only occur if focus is moved to the terminal
 and the "r" key is pressed.
+To perform a "hot restart" which loads code changes,
+but resets state to initial values, press "shift-r".
 
 If the app is run from a compatible editor, the app will
 automatically update after saving code changes without losing state.
@@ -1088,6 +1091,7 @@ They are documented at {% aTargetBlank
 | `Switch`               |                                                                     |
 | `TextButton`           | button with no visible border                                       |
 | `TextField`            |                                                                     |
+| `TextFormField`        |                                                                     |
 | `ToggleButtons`        |                                                                     |
 | `YearPicker`           |                                                                     |
 
@@ -1518,3 +1522,12 @@ the `flutter` command can be replaced by the `dart` command.
   on its own so we don't need to litter our code with that keyword.
 
 - Needing to pass a `Key` and `BuildContext` to so many things is annoying.
+
+- When running a Flutter app from VS Code,
+  it seems that the output from `print` function calls goes nowhere.
+  If the same app is run from a terminal, `print` output appears there.
+
+- Sometimes after a hot reload the simulator will
+  display an error message in yellow text on a red background.
+  There may not really be an error in the code.
+  Restarting the app can make the problem go away.
