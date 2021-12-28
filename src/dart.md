@@ -989,6 +989,17 @@ The table below summarized converting between numbers and strings.
 | `String` to `int`    | `int.parse(s)`    |
 | `String` to `double` | `double.parse(s)` |
 
+### Type Aliases
+
+To define a name for a type, use a `typedef` statement.
+For example:
+
+```dart
+typedef StringToAnyMap = Map<String, dynamic>;
+
+typedef Callback = void Function(String);
+```
+
 ## Type Casts
 
 The `as` keyword casts a value of one type to another.
@@ -2515,6 +2526,7 @@ class Point {
     return _x;
   }
 
+  // Setter methods should not have a return type.
   set x(double x) {
     print('in setter for x');
     _x = x;

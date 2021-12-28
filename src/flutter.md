@@ -799,9 +799,11 @@ The steps to use the provider library are:
    The first is to use `Provider.of`.
    The second is to use `Consumer`.
    `Consumer` is a widget, so it can be only be used in a widget tree.
-   It makes the code more deeply nested.
+   It is good for updating a specific widget when state changes,
+   but it makes the code more deeply nested.
    `Provider.of` is a constructor,
-   so it can be used anywhere in a Dart function.
+   so it can be used anywhere in a Dart function
+   and used to provide state access to multiple widgets.
 
    Both approaches are demonstrated in `lib/report.dart` below:
 
@@ -944,7 +946,7 @@ To render an image from a local file,
 
 To render an image from an `AssetBundle` ...
 
-## Basic Widgets
+## Display Widgets
 
 All the predefined widgets are documented in the {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets", "Widget Catalog" %}.
@@ -990,6 +992,82 @@ These widgets use Material Design styling.
 They are documented at {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/material",
 "Cupertino (iOS-style) widgets" %}.
+
+### App Structure Widgets
+
+| Widget              | Description |
+| ------------------- | ----------- |
+| `AppBar`            |             |
+| `BottomAppBar`      |             |
+| `MaterialApp`       |             |
+| `NavigationBar`     |             |
+| `NavigationToolbar` |             |
+| `Router`            |             |
+| `Scaffold`          |             |
+
+### Display Widgets
+
+| Widget              | Description           |
+| ------------------- | --------------------- |
+| `Banner`            |                       |
+| `Canvas`            |                       |
+| `CircleAvatar`      |                       |
+| `Divider`           | horizontal, thin line |
+| `ErrorWidget`       |                       |
+| `ExpandIcon`        |                       |
+| `FileImage`         |                       |
+| `Icon`              |                       |
+| `Image`             |                       |
+| `ImageIcon`         |                       |
+| `NetworkImage`      |                       |
+| `Placeholder`       |                       |
+| `ProgressIndicator` |                       |
+| `RichText`          |                       |
+| `Snackbar`          |                       |
+| `Text`              |                       |
+| `Tooltip`           |                       |
+| `VerticalDivider`   | vertical, thin line   |
+
+### Dialog Widgets
+
+| Widget                  | Description |
+| ----------------------- | ----------- |
+| `AboutDialog`           |             |
+| `AlertDialog`           |             |
+| `DatePickerDialog`      |             |
+| `DateRangePickerDialog` |             |
+| `Dialog`                |             |
+| `SimpleDialog`          |             |
+| `TimePickerDialog`      |             |
+
+### Input Widgets
+
+| Widget                 | Description |
+| ---------------------- | ----------- |
+| `Autocomplete`         |             |
+| `BackButton`           |             |
+| `CloseButton`          |             |
+| `CalendarDatePicker`   |             |
+| `Checkbox`             |             |
+| `DropdownButton`       |             |
+| `EditableText`         |             |
+| `FloatingActionButton` |             |
+| `Form`                 |             |
+| `IconButton`           |             |
+| `OutlineButton`        |             |
+| `PopupMenuButton`      |             |
+| `Radio`                |             |
+| `RangeSlider`          |             |
+| `ReorderableList`      |             |
+| `Scrollbar`            |             |
+| `Slider`               |             |
+| `Stepper`              |             |
+| `Switch`               |             |
+| `TabBar`               |             |
+| `TextButton`           |             |
+| `TextField`            |             |
+| `ToggleButtons`        |             |
+| `YearPicker`           |             |
 
 ### Appbar
 
@@ -1457,6 +1535,6 @@ the `flutter` command can be replaced by the `dart` command.
   of all widgets. It isn't really in the code, but adds visual clutter.
   I haven't found a way to disable it yet.
 
-- The `Row` and `Column` widgets need to take a `spacing` parameter
+- The `Row`, `Column`, and `Flex` widgets need to take a `spacing` parameter
   like the `Wrap` widget does so it isn't necessary to do tedious things
   like adding a `SizedBox` between each child to leave space between them.
