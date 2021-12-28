@@ -993,17 +993,21 @@ They are documented at {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/material",
 "Cupertino (iOS-style) widgets" %}.
 
-### App Structure Widgets
+### Material App Structure Widgets
 
-| Widget              | Description |
-| ------------------- | ----------- |
-| `AppBar`            |             |
-| `BottomAppBar`      |             |
-| `MaterialApp`       |             |
-| `NavigationBar`     |             |
-| `NavigationToolbar` |             |
-| `Router`            |             |
-| `Scaffold`          |             |
+| Widget              | Description                                                                       |
+| ------------------- | --------------------------------------------------------------------------------- |
+| `AppBar`            | appears at top of app; contains other widgets such as `TabBar`                    |
+| `BottomAppBar`      | appears at bottom of app; contains buttons used to switch between top-level views |
+| `Drawer`            | panel that slides in from left and contains navigation links                      |
+| `MaterialApp`       | top of app; wraps many other widgets                                              |
+| `NavigationBar`     |                                                                                   |
+| `NavigationToolbar` |                                                                                   |
+| `Router`            |                                                                                   |
+| `Scaffold`          | provides app structure; can show `Drawer`, `Snackbar`, and bottom sheets          |
+| `TabBar`            | horizontal row of tabs                                                            |
+| `TabBarView`        | page that corresponds to a `TabBar` tab                                           |
+| `TabPageSelector`   | renders dots that indicate current carousel item; click to switch                 |
 
 ### Display Widgets
 
@@ -1063,60 +1067,10 @@ They are documented at {% aTargetBlank
 | `Slider`               |             |
 | `Stepper`              |             |
 | `Switch`               |             |
-| `TabBar`               |             |
 | `TextButton`           |             |
 | `TextField`            |             |
 | `ToggleButtons`        |             |
 | `YearPicker`           |             |
-
-### Appbar
-
-This is a Material Design application bar that appears at the top of an app.
-It can contain other widgets such as `TabBar` and `FlexibleSpaceBar`.
-
-### BottomNavigationBar
-
-This renders a bottom navigation bar containing buttons
-that can be tapped to switch between top-level views.
-
-### Drawer
-
-This renders a panel that slides in from the left side
-and contains navigation links.
-
-### MaterialApp
-
-This wraps a set of widgets that commonly appear in Material Design apps.
-
-### Scaffold
-
-This provides the structure of a Material Design layout.
-It can show drawers, snack bars, and bottom sheets.
-
-### SliverAppBar
-
-This renders a top app bar and contains a `CustomScrollView`.
-
-### TabBar
-
-This renders a horizontal row of tabs.
-
-### TabBarView
-
-This renders a page that corresponds to a tab in a `TabBar`.
-
-### TabController
-
-This handles rendering a `TabBarView`
-when its corresponding `TabBar` tab is tapped.
-
-### TabPageSelector
-
-This renders a "circular indicators"? for each tab in `TabBarView`.
-
-### WidgetsApp
-
-This wraps a set of widgets that typically appear in an app.
 
 ## Cupertino Widgets
 
