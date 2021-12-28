@@ -167,6 +167,8 @@ that increments the number.
 The starting point of the app is the file `lib/main.dart`.
 This defines the `main` function that all Dart apps must have.
 
+See the recommended linting configuration in the next section.
+
 To avoid committing generated files to a Git repository,
 add `/android` and `/ios` to the provided `.gitignore` file.
 
@@ -187,10 +189,17 @@ the same arguments which optimizes memory.
 These instances are created at compile-time.
 As nice as this sounds, the linter will complain constantly
 about missing or incorrectly applied `const` keywords.
-To avoid these warnings, add the following rule configuration.
+To avoid these and other warnings,
+the following rule configuration is recommended.
 
 ```yaml
-prefer_const_constructors: false
+linter:
+  rules:
+    avoid_print: false
+    prefer_const_constructors: false
+    prefer_const_constructors_in_immutables: false
+    prefer_const_literals_to_create_immutables: false
+    prefer_single_quotes: true
 ```
 
 ## Code Formatting
@@ -285,8 +294,16 @@ This provides many things including:
   import 'package:flutter/material.dart';
   ```
 
-- phantom comments after the last lines of multi-line widget constructor calls
-  to make it easy to spot where they end
+- phantom comments
+
+  These appear after the last lines of multi-line widget constructor calls
+  to make it easy to spot where they end.
+  If you feel that these add too much visual clutter,
+  disable them by adding the following line in `settings.json`:
+
+  ```json
+    "dart.closingLabels": false,
+  ```
 
 - Flutter-specific entries in the status bar that include:
 
@@ -410,6 +427,7 @@ Every widget is either stateless or stateful.
 Stateless widgets are defined by a class that
 extends `StatelessWidget`, defines a constructor,
 and overrides the `build` method.
+All properties in a `StatelessWidget` must be declared `final`.
 Stateless widgets render one time based parameters passed to them.
 
 Stateful widgets are defined by a pair of classes.
@@ -993,7 +1011,7 @@ They are documented at {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/material",
 "Cupertino (iOS-style) widgets" %}.
 
-### Material App Structure Widgets
+### Structure Widgets
 
 | Widget              | Description                                                                       |
 | ------------------- | --------------------------------------------------------------------------------- |
@@ -1046,31 +1064,32 @@ They are documented at {% aTargetBlank
 
 ### Input Widgets
 
-| Widget                 | Description |
-| ---------------------- | ----------- |
-| `Autocomplete`         |             |
-| `BackButton`           |             |
-| `CloseButton`          |             |
-| `CalendarDatePicker`   |             |
-| `Checkbox`             |             |
-| `DropdownButton`       |             |
-| `EditableText`         |             |
-| `FloatingActionButton` |             |
-| `Form`                 |             |
-| `IconButton`           |             |
-| `OutlineButton`        |             |
-| `PopupMenuButton`      |             |
-| `Radio`                |             |
-| `RangeSlider`          |             |
-| `ReorderableList`      |             |
-| `Scrollbar`            |             |
-| `Slider`               |             |
-| `Stepper`              |             |
-| `Switch`               |             |
-| `TextButton`           |             |
-| `TextField`            |             |
-| `ToggleButtons`        |             |
-| `YearPicker`           |             |
+| Widget                 | Description                                                         |
+| ---------------------- | ------------------------------------------------------------------- |
+| `Autocomplete`         |                                                                     |
+| `BackButton`           |                                                                     |
+| `CloseButton`          |                                                                     |
+| `CalendarDatePicker`   |                                                                     |
+| `Checkbox`             |                                                                     |
+| `DropdownButton`       |                                                                     |
+| `EditableText`         |                                                                     |
+| `ElevatedButton`       | button with a background color that appears raised above background |
+| `FloatingActionButton` |                                                                     |
+| `Form`                 |                                                                     |
+| `IconButton`           |                                                                     |
+| `OutlinedButton`       | a `TextButton` with an outlined border                              |
+| `PopupMenuButton`      |                                                                     |
+| `Radio`                |                                                                     |
+| `RangeSlider`          |                                                                     |
+| `ReorderableList`      |                                                                     |
+| `Scrollbar`            |                                                                     |
+| `Slider`               |                                                                     |
+| `Stepper`              |                                                                     |
+| `Switch`               |                                                                     |
+| `TextButton`           | button with no visible border                                       |
+| `TextField`            |                                                                     |
+| `ToggleButtons`        |                                                                     |
+| `YearPicker`           |                                                                     |
 
 ## Cupertino Widgets
 
@@ -1492,3 +1511,10 @@ the `flutter` command can be replaced by the `dart` command.
 - The `Row`, `Column`, and `Flex` widgets need to take a `spacing` parameter
   like the `Wrap` widget does so it isn't necessary to do tedious things
   like adding a `SizedBox` between each child to leave space between them.
+
+- The default linting rule settings related to use of the `const` keyword
+  are incredibly annoying!
+  I wish Dart could figure out what should be `const`
+  on its own so we don't need to litter our code with that keyword.
+
+- Needing to pass a `Key` and `BuildContext` to so many things is annoying.
