@@ -1156,6 +1156,10 @@ class BottomNavigationState extends State<BottomNavigation> {
 Here is an example of using the helper class above to add a
 `BottomNavigationBar` to an app:
 
+<img alt="Flutter BottomNavigationBar" style="width: 40%"
+    src="/blog/assets/flutter-bottomnavigationbar.png?v={{pkg.version}}"
+    title="Flutter BottomNavigationBar">
+
 ```dart
 import 'package:flutter/material.dart';
 import 'about_page.dart';
