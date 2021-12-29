@@ -909,7 +909,7 @@ Each page is responsible for configuring its layout
 which often includes a `Scaffold` and `AppBar`.
 The `AppBar` provides a `<` back button for returning to the previous route.
 For consistency it is useful to define a class that provides this structure
-and define page widgets that use this class.
+and then define page widgets that use this class.
 For example:
 
 ```dart
@@ -967,7 +967,7 @@ with the `routes` argument to the `MaterialApp` widget.
 Assigning names to routes makes it easier to
 refer to them from multiple widgets.
 It is recommended to define route names as static constants in each page class,
-except the page class for the home route.
+(as shown above) except the page class for the home route.
 For example:
 
 ```dart
@@ -1046,6 +1046,16 @@ Using named routes instead of unnamed routes has two downsides.
 First, the constructor of the page widgets cannot take custom arguments.
 Second, the mechanism described above for passing arguments to a named route
 does not allow type checking to be performed at compile-time.
+
+Another way to implement a kind of navigation
+is using the `BottomNavigationBar` widget.
+This provides a row of buttons at the button of the screen
+representing each page of the app.
+It works best when there are three to five pages.
+Clicking a button
+This approach doesn't use `Navigator` and routes are not pushed onto a stack.
+
+TODO: Add example code from flutter_bottomnavigationbar project.
 
 ## Fonts
 
