@@ -892,10 +892,14 @@ The steps to use the provider library are:
 The `Navigator` class supports programmatic navigation
 between pages of an app, also referred to as "routes".
 
+Visited routes are maintained on a stack.
+Navigating to a new route pushes the route onto the stack.
+Returning to the previous route pops the current route from the stack.
+
 Each page is responsible for configuring its layout
 which often includes a `Scaffold` and `AppBar`.
 For consistency it is useful to define a class that provides this
-and define page widgets that extend this class.
+and define page widgets that use this class.
 For example:
 
 ```dart
@@ -923,23 +927,30 @@ class MyPage extends StatelessWidget {
 }
 ```
 
-Here is an example of a page class that extends `MyPage`:
+Here is an example of a page class that uses `MyPage`:
 
 ```dart
 import 'package:flutter/material.dart';
 import 'my_page.dart';
 
-class HelpPage extends MyPage {
-  HelpPage({Key? key})
-      : super(
-          key: key,
-          title: 'Help',
-          child: Center(child: Text('Help is coming soon!')),
-        );
+class HelpPage extends StatelessWidget {
+  const HelpPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MyPage(
+      title: 'Help',
+      child: Column(
+        children: <Widget>[
+          Text('Help is coming soon!')
+        ],
+      )
+    );
+  }
 }
 ```
 
-The app class, typically defined in `lib/main.dart` can register named routes
+The app class, typically defined in `lib/main.dart`, can register named routes
 with the `routes` argument to the `MaterialApp` widget.
 For example:
 
@@ -976,6 +987,8 @@ ElevatedButton(
   },
 )
 ```
+
+To programmatically return to the previous page call `Navigator.pop(context)`.
 
 ## Fonts
 
