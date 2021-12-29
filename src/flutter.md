@@ -894,6 +894,13 @@ The steps to use the provider library are:
 
 ## Navigation
 
+There are two primary ways to implement page navigation in Flutter.
+One approach uses the `Navigator` class and
+the other uses the `BottomNavigationBar` widget.
+Each approach is described below.
+
+### Navigator Class
+
 The `Navigator` class supports programmatic navigation
 between pages of an app, also referred to as "routes".
 It provides platform-aware transitions
@@ -1047,15 +1054,18 @@ First, the constructor of the page widgets cannot take custom arguments.
 Second, the mechanism described above for passing arguments to a named route
 does not allow type checking to be performed at compile-time.
 
-Another way to implement a kind of navigation
-is using the `BottomNavigationBar` widget.
-This approach doesn't use `Navigator` and routes are not pushed onto a stack.
+### BottomNavigationBar Widget
 
-The `BottomNavigationBar` widget renders a row of buttons
-at the button of the screen representing each page of the app.
+This approach to page navigation displays
+a row of buttons at the bottom of page,
+one for each top-level page in the app.
+Clicking a button causes the corresponding page to be rendered.
+It doesn't use the `Navigator` class and routes are not pushed onto a stack.
+
+The `BottomNavigationBar` widget renders the row of buttons.
 It works best when there are three to five pages.
-It doesn't actually implement navigation to another page
-or rendering different widgets. That part is left up to you.
+This widget doesn't implement page navigation.
+That part is left up to you, but is not difficult.
 
 The steps to use `BottomNavigationBar` are:
 
@@ -1074,12 +1084,12 @@ The steps to use `BottomNavigationBar` are:
       for the icon and label of the selected page
     - `items` set to a `List<BottomNavigationBarItem>`
       where each element describes the `icon` and `label`
-      to display in the bottom bar for each option
+      to display in the bottom bar for one of the pages
 
 That's a lot of details to get right!
 Fortunately the code for doing all of this is typically the same in every app.
 The helper class below handles all of this.
-It can be shared across apps.
+The code can be copied and used without modification in any Flutter app.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -1099,7 +1109,10 @@ class NavOption {
 class BottomNavigation extends StatefulWidget {
   final List<NavOption> options;
 
-  const BottomNavigation({Key? key, required this.options}) : super(key: key);
+  const BottomNavigation({
+    Key? key,
+    required this.options,
+  }) : super(key: key);
 
   @override
   State<BottomNavigation> createState() => BottomNavigationState();
