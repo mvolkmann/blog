@@ -115,7 +115,12 @@ This document refers to both as a simulator.
   Enter `open -a Simulator`.
   This works in Bash and Fish, but not in Nushell.
 
-- To start an Android emulator:
+- To start an Android emulator from VS Code:
+
+  - Select "Flutter: Launch Emulator" from the Command Palette.
+  - Select a device type.
+
+- To start an Android emulator from outside VS Code:
 
   - Launch the Android Studio app.
   - Select Tools ... AVD Manager
@@ -891,14 +896,19 @@ The steps to use the provider library are:
 
 The `Navigator` class supports programmatic navigation
 between pages of an app, also referred to as "routes".
+It provides platform-aware transitions
+whose animations differ between Android and iOS.
+Android page transitions slide up from the bottom.
+iOS page transitions slide in from the left.
 
 Visited routes are maintained on a stack.
-Navigating to a new route pushes the route onto the stack.
-Returning to the previous route pops the current route from the stack.
+Pushing a route onto the stack navigates to it.
+Popping a route from the stack returns to the previous route.
 
 Each page is responsible for configuring its layout
 which often includes a `Scaffold` and `AppBar`.
-For consistency it is useful to define a class that provides this
+The `AppBar` provides a `<` back button for returning to the previous route.
+For consistency it is useful to define a class that provides this structure
 and define page widgets that use this class.
 For example:
 
@@ -934,6 +944,8 @@ import 'package:flutter/material.dart';
 import 'my_page.dart';
 
 class HelpPage extends StatelessWidget {
+  static const route = '/help'; // used when registering this route
+
   const HelpPage({Key? key}) : super(key: key);
 
   @override
@@ -952,6 +964,10 @@ class HelpPage extends StatelessWidget {
 
 The app class, typically defined in `lib/main.dart`, can register named routes
 with the `routes` argument to the `MaterialApp` widget.
+Assigning names to routes makes it easier to
+refer to them from multiple widgets.
+It is recommended to define route names as static constants in each page class,
+except the page class for the home route.
 For example:
 
 ```dart
@@ -966,17 +982,19 @@ import 'home_page.dart';
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      home: HomePage(), // the '/' route
       routes: {
-        '/': (_) => HomePage(),
-        '/about': (_) => AboutPage(),
-        '/help': (_) => HelpPage(),
+        AboutPage.route: (_) => AboutPage(),
+        HelpPage.route: (_) => HelpPage(),
       },
     );
   }
 ```
 
-To navigate from the current page to the page of a named route
-call the `Navigator.pushNamed` method.
+Call the `Navigator.pushNamed` method to
+push a named route on the stack and navigate to it.
+Call the `Navigator.pushReplacementNamed` method to
+replace top route on stack with a named route and navigate to it.
 For example:
 
 ```dart
@@ -988,10 +1006,23 @@ ElevatedButton(
 )
 ```
 
+To pass arguments to a named route, add the `arguments` named argument in the
+call to `Navigator.pushNamed` with a value that can be any kind of object.
+
+To retrieve the arguments value inside the page widget,
+add the following line in the `build` method:
+
+```dart
+final arguments = ModalRoute.of(context)!.settings.arguments;
+```
+
 To programmatically return to the previous page call `Navigator.pop(context)`.
 
 Routes are not required to be named.
-To navigate to an unnamed route, call the `Navigator.push` method.
+Call the `Navigator.push` method to
+push an unnamed route on the stack and navigate to it.
+Call the `Navigator.pushReplacement` method to
+replace top route on stack with an unnamed route and navigate to it.
 For example:
 
 ```dart
@@ -1007,6 +1038,14 @@ ElevatedButton(
   ),
 )
 ```
+
+Using a `builder` above allows Flutter to
+delay creating the route widget until it is needed.
+
+Using named routes instead of unnamed routes has two downsides.
+First, the constructor of the page widgets cannot take custom arguments.
+Second, the mechanism described above for passing arguments to a named route
+does not allow type checking to be performed at compile-time.
 
 ## Fonts
 
