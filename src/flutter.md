@@ -170,7 +170,24 @@ This defines the `main` function that all Dart apps must have.
 See the recommended linting configuration in the next section.
 
 To avoid committing generated files to a Git repository,
-add `/android` and `/ios` to the provided `.gitignore` file.
+edit `.gitignore` file,
+replace the lines at the bottom that
+begin with `/android` with just `/android`,
+and add the line `/ios`.gitignore` file.
+
+There are many things that can be deleted
+from the file `lib/main.dart` including:
+
+- all the comments
+- the `_counter` property
+- the `_incrementCounter` method
+- the `floatingActionButton` argument to the `Scaffold` widget
+
+Other changes that should be made include:
+
+- Change the `title` argument to the `MaterialApp` widget.
+- Change the `title` argument to the `MyHomePage` widget.
+- Replace the widgets in the `children` `List` passed to the `Column` widget.
 
 ## Linting
 
@@ -1531,3 +1548,5 @@ the `flutter` command can be replaced by the `dart` command.
   display an error message in yellow text on a red background.
   There may not really be an error in the code.
   Restarting the app can make the problem go away.
+
+- The need to pass `context` and `key` in so many places is annoying.
