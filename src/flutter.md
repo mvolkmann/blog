@@ -990,6 +990,24 @@ ElevatedButton(
 
 To programmatically return to the previous page call `Navigator.pop(context)`.
 
+Routes are not required to be named.
+To navigate to an unnamed route, call the `Navigator.push` method.
+For example:
+
+```dart
+ElevatedButton(
+  child: Text('Go to SomePage'),
+  onPressed: () => Navigator.push(
+    context,
+    MaterialPageRoute<void>(
+      builder: (BuildContext context) {
+        return SomePage();
+      },
+    ),
+  ),
+)
+```
+
 ## Fonts
 
 To use custom fonts:
