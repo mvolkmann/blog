@@ -887,6 +887,96 @@ The steps to use the provider library are:
    }
    ```
 
+## Navigation
+
+The `Navigator` class supports programmatic navigation
+between pages of an app, also referred to as "routes".
+
+Each page is responsible for configuring its layout
+which often includes a `Scaffold` and `AppBar`.
+For consistency it is useful to define a class that provides this
+and define page widgets that extend this class.
+For example:
+
+```dart
+import 'package:flutter/material.dart';
+
+class MyPage extends StatelessWidget {
+  final Widget child;
+  final String title;
+
+  const MyPage({
+    Key? key,
+    required this.title,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: child,
+    );
+  }
+}
+```
+
+Here is an example of a page class that extends `MyPage`:
+
+```dart
+import 'package:flutter/material.dart';
+import 'my_page.dart';
+
+class HelpPage extends MyPage {
+  HelpPage({Key? key})
+      : super(
+          key: key,
+          title: 'Help',
+          child: Center(child: Text('Help is coming soon!')),
+        );
+}
+```
+
+The app class, typically defined in `lib/main.dart` can register named routes
+with the `routes` argument to the `MaterialApp` widget.
+For example:
+
+```dart
+import 'about_page.dart';
+import 'help_page.dart';
+import 'home_page.dart';
+...
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Navigation',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      routes: {
+        '/': (_) => HomePage(),
+        '/about': (_) => AboutPage(),
+        '/help': (_) => HelpPage(),
+      },
+    );
+  }
+```
+
+To navigate from the current page to the page of a named route
+call the `Navigator.pushNamed` method.
+For example:
+
+```dart
+ElevatedButton(
+  child: Text('About'),
+  onPressed: () {
+    Navigator.pushNamed(context, '/about');
+  },
+)
+```
+
 ## Fonts
 
 To use custom fonts:
