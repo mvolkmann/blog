@@ -1049,13 +1049,132 @@ does not allow type checking to be performed at compile-time.
 
 Another way to implement a kind of navigation
 is using the `BottomNavigationBar` widget.
-This provides a row of buttons at the button of the screen
-representing each page of the app.
-It works best when there are three to five pages.
-Clicking a button
 This approach doesn't use `Navigator` and routes are not pushed onto a stack.
 
-TODO: Add example code from flutter_bottomnavigationbar project.
+The `BottomNavigationBar` widget renders a row of buttons
+at the button of the screen representing each page of the app.
+It works best when there are three to five pages.
+It doesn't actually implement navigation to another page
+or rendering different widgets. That part is left up to you.
+
+The steps to use `BottomNavigationBar` are:
+
+- Create a stateful widget.
+- In the `build` method return a `Scaffold` widget
+  with the following named arguments:
+  - `appBar` set to an `AppBar` instance that specifies
+    the title to be displayed for the current page
+  - `body` set to the widget to display for the current page
+  - `bottomNavigationBar` set to a `BottomNavigationBar` instance
+    created with the following named arguments:
+    - `currentIndex` set to the index of the currently selected page
+    - `onTap` set to a function that takes a selected index
+      and saves it in the state of the stateful widget being defined
+    - `selectedItemColor` set to the color to use
+      for the icon and label of the selected page
+    - `items` set to a `List<BottomNavigationBarItem>`
+      where each element describes the `icon` and `label`
+      to display in the bottom bar for each option
+
+That's a lot of details to get right!
+Fortunately the code for doing all of this is typically the same in every app.
+The helper class below handles all of this.
+It can be shared across apps.
+
+```dart
+import 'package:flutter/material.dart';
+
+class NavOption {
+  final IconData icon;
+  final String label;
+  final Widget widget;
+
+  const NavOption({
+    required this.icon,
+    required this.label,
+    required this.widget,
+  });
+}
+
+class BottomNavigation extends StatefulWidget {
+  final List<NavOption> options;
+
+  const BottomNavigation({Key? key, required this.options}) : super(key: key);
+
+  @override
+  State<BottomNavigation> createState() => BottomNavigationState();
+}
+
+//TODO: Why can't this class be made private with a leading underscore?
+class BottomNavigationState extends State<BottomNavigation> {
+  int _pageIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    var items = widget.options
+        .map(
+          (option) => BottomNavigationBarItem(
+            icon: Icon(option.icon),
+            label: option.label,
+          ),
+        )
+        .toList();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.options[_pageIndex].label),
+      ),
+      body: Center(child: widget.options[_pageIndex].widget),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _pageIndex,
+        onTap: (int index) {
+          setState(() {
+            _pageIndex = index;
+          });
+        },
+        selectedItemColor: Colors.green,
+        items: items,
+      ),
+    );
+  }
+}
+```
+
+Here is an example of using the helper class above to add a
+`BottomNavigationBar` to an app:
+
+```dart
+import 'package:flutter/material.dart';
+import 'about_page.dart';
+import 'bottom_navigation.dart';
+import 'home_page.dart';
+import 'settings_page.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  static const options = <NavOption>[
+    NavOption(icon: Icons.info, label: 'About', widget: AboutPage()),
+    NavOption(icon: Icons.home, label: 'Home', widget: HomePage()),
+    NavOption(icon: Icons.settings, label: 'Settings', widget: SettingsPage()),
+  ];
+
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'BottomNavigationBar Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: BottomNavigation(options: options),
+    );
+  }
+}
+```
 
 ## Fonts
 
