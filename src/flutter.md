@@ -430,6 +430,110 @@ This provides many things including:
   - Upgrade Packages
   - Upgrade Packages (--major-versions)
 
+## Basic Flutter App Structure
+
+Here is an example of the structure of a basic Flutter app
+that uses Material Design.
+
+```dart
+import 'package:flutter/material.dart';
+
+// This defines the starting point of all Dart apps.
+void main() {
+  // When creating instances of immutable classes,
+  // constructor calls should be preceded by "const".
+  // This enables sharing references to instances create with
+  // the same arguments which optimizes memory.
+  // These instances are created at compile-time.
+  // All fields of immutable classes must be
+  // declared with the "final" keyword.
+  runApp(const MyApp());
+}
+
+// This class is also used by tests.
+// See the supplied test/widget_test.dart file.
+class MyApp extends StatelessWidget {
+  // All widget constructors must take an optional parameter of type "Key".
+  // This uniquely identifies a widget instance and is
+  // important when widgets will be added, removed, or reordered.
+  // Often no key value is provided.
+  // One way to specify a key value is `key: UniqueKey()`.
+  // Widget constructors can also take additional parameters.
+  const MyApp({Key? key}) : super(key: key);
+
+  // Widget build methods describe what a widget renders.
+  // In stateless widgets it is only called once (true?).
+  // In stateful widgets it is called initially
+  // and again every time the state changes.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      // This is a one-line description used by devices
+      // to identify the app for users.
+      // On Android titles appear above task manager app snapshots
+      // displayed when users press the "recent apps" button.
+      // On iOS this value is not used.
+      title: 'My Title',
+      theme: ThemeData(primarySwatch: Colors.amber),
+      home: const MyPage(),
+    );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My App'),
+      ),
+      body: const Text('Hello, World!'),
+    );
+  }
+}
+```
+
+Here is an example of the structure of a basic Flutter app
+that uses Cupertino theming.
+
+```dart
+import 'package:flutter/cupertino.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('MyApp.build entered');
+    return const CupertinoApp(
+      theme:
+        CupertinoThemeData(barBackgroundColor: CupertinoColors.activeBlue),
+      home: MyPage(),
+    );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('My App'),
+      ),
+      child: Center(child: Text('Hello, World!')),
+    );
+  }
+}
+```
+
 ## Widget Types
 
 Widgets that accept other widgets as arguments typically have
@@ -445,7 +549,7 @@ Some widgets take a single widget as a parameter and apply styling.
 Examples include `Container`, `MediaQuery`, `Padding`, `Theme`.
 These can be referred to as "styling widgets".
 
-## Stateless vs. Stateful Widgets
+### Stateless vs. Stateful Widgets
 
 Every widget is either stateless or stateful.
 
@@ -607,109 +711,104 @@ class _CounterState extends State<Counter> {
 A widget `build` method can return only `Container()`
 in order to render nothing.
 
-## Basic Flutter App Structure
+### Structure Widgets
 
-Here is an example of the structure of a basic Flutter app
-that uses Material Design.
+| Widget              | Description                                                                       |
+| ------------------- | --------------------------------------------------------------------------------- |
+| `AppBar`            | appears at top of app; contains other widgets such as `TabBar`                    |
+| `BottomAppBar`      | appears at bottom of app; contains buttons used to switch between top-level views |
+| `Drawer`            | panel that slides in from left and contains navigation links                      |
+| `MaterialApp`       | top of app; wraps many other widgets                                              |
+| `NavigationBar`     |                                                                                   |
+| `NavigationToolbar` |                                                                                   |
+| `Router`            |                                                                                   |
+| `Scaffold`          | provides app structure; can show `Drawer`, `Snackbar`, and bottom sheets          |
+| `TabBar`            | horizontal row of tabs                                                            |
+| `TabBarView`        | page that corresponds to a `TabBar` tab                                           |
+| `TabPageSelector`   | renders dots that indicate current carousel item; click to switch                 |
 
-```dart
-import 'package:flutter/material.dart';
+### Layout Widgets
 
-// This defines the starting point of all Dart apps.
-void main() {
-  // When creating instances of immutable classes,
-  // constructor calls should be preceded by "const".
-  // This enables sharing references to instances create with
-  // the same arguments which optimizes memory.
-  // These instances are created at compile-time.
-  // All fields of immutable classes must be
-  // declared with the "final" keyword.
-  runApp(const MyApp());
-}
+| Widget      | Description                                                                            |
+| ----------- | -------------------------------------------------------------------------------------- |
+| `Center`    | centers its child in the available space                                               |
+| `Column`    | arranges widgets vertically (like `HStack` in SwiftUI)                                 |
+| `Container` |                                                                                        |
+| `Expanded`  |                                                                                        |
+| `Flow`      |                                                                                        |
+| `GridView`  |                                                                                        |
+| `ListView`  |                                                                                        |
+| `Padding`   |                                                                                        |
+| `Row`       | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
+| `SizedBox`  |                                                                                        |
+| `Stack`     | stacks widgets vertically (like `ZStack` in SwiftUI)                                   |
+| `Table`     |                                                                                        |
+| `Wrap`      | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
 
-// This class is also used by tests.
-// See the supplied test/widget_test.dart file.
-class MyApp extends StatelessWidget {
-  // All widget constructors must take an optional parameter of type "Key".
-  // This uniquely identifies a widget instance and is
-  // important when widgets will be added, removed, or reordered.
-  // Often no key value is provided.
-  // One way to specify a key value is `key: UniqueKey()`.
-  // Widget constructors can also take additional parameters.
-  const MyApp({Key? key}) : super(key: key);
+### Display Widgets
 
-  // Widget build methods describe what a widget renders.
-  // In stateless widgets it is only called once (true?).
-  // In stateful widgets it is called initially
-  // and again every time the state changes.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // This is a one-line description used by devices
-      // to identify the app for users.
-      // On Android titles appear above task manager app snapshots
-      // displayed when users press the "recent apps" button.
-      // On iOS this value is not used.
-      title: 'My Title',
-      theme: ThemeData(primarySwatch: Colors.amber),
-      home: const MyPage(),
-    );
-  }
-}
+| Widget              | Description           |
+| ------------------- | --------------------- |
+| `Banner`            |                       |
+| `Canvas`            |                       |
+| `CircleAvatar`      |                       |
+| `Divider`           | horizontal, thin line |
+| `ErrorWidget`       |                       |
+| `ExpandIcon`        |                       |
+| `FileImage`         |                       |
+| `Icon`              |                       |
+| `Image`             |                       |
+| `ImageIcon`         |                       |
+| `NetworkImage`      |                       |
+| `Placeholder`       |                       |
+| `ProgressIndicator` |                       |
+| `RichText`          |                       |
+| `Snackbar`          |                       |
+| `Text`              |                       |
+| `Tooltip`           |                       |
+| `VerticalDivider`   | vertical, thin line   |
 
-class MyPage extends StatelessWidget {
-  const MyPage({Key? key}) : super(key: key);
+### Dialog Widgets
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My App'),
-      ),
-      body: const Text('Hello, World!'),
-    );
-  }
-}
-```
+| Widget                  | Description |
+| ----------------------- | ----------- |
+| `AboutDialog`           |             |
+| `AlertDialog`           |             |
+| `DatePickerDialog`      |             |
+| `DateRangePickerDialog` |             |
+| `Dialog`                |             |
+| `SimpleDialog`          |             |
+| `TimePickerDialog`      |             |
 
-Here is an example of the structure of a basic Flutter app
-that uses Cupertino theming.
+### Input Widgets
 
-```dart
-import 'package:flutter/cupertino.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    print('MyApp.build entered');
-    return const CupertinoApp(
-      theme:
-        CupertinoThemeData(barBackgroundColor: CupertinoColors.activeBlue),
-      home: MyPage(),
-    );
-  }
-}
-
-class MyPage extends StatelessWidget {
-  const MyPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('My App'),
-      ),
-      child: Center(child: Text('Hello, World!')),
-    );
-  }
-}
-```
+| Widget                 | Description                                                         |
+| ---------------------- | ------------------------------------------------------------------- |
+| `Autocomplete`         |                                                                     |
+| `BackButton`           |                                                                     |
+| `CloseButton`          |                                                                     |
+| `CalendarDatePicker`   |                                                                     |
+| `Checkbox`             |                                                                     |
+| `DropdownButton`       |                                                                     |
+| `EditableText`         |                                                                     |
+| `ElevatedButton`       | button with a background color that appears raised above background |
+| `FloatingActionButton` |                                                                     |
+| `Form`                 |                                                                     |
+| `IconButton`           |                                                                     |
+| `OutlinedButton`       | a `TextButton` with an outlined border                              |
+| `PopupMenuButton`      |                                                                     |
+| `Radio`                |                                                                     |
+| `RangeSlider`          |                                                                     |
+| `ReorderableList`      |                                                                     |
+| `Scrollbar`            |                                                                     |
+| `Slider`               |                                                                     |
+| `Stepper`              |                                                                     |
+| `Switch`               |                                                                     |
+| `TextButton`           | button with no visible border                                       |
+| `TextField`            |                                                                     |
+| `TextFormField`        |                                                                     |
+| `ToggleButtons`        |                                                                     |
+| `YearPicker`           |                                                                     |
 
 ## Managing State
 
@@ -1788,87 +1887,6 @@ These widgets use Material Design styling.
 They are documented at {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/material",
 "Cupertino (iOS-style) widgets" %}.
-
-### Structure Widgets
-
-| Widget              | Description                                                                       |
-| ------------------- | --------------------------------------------------------------------------------- |
-| `AppBar`            | appears at top of app; contains other widgets such as `TabBar`                    |
-| `BottomAppBar`      | appears at bottom of app; contains buttons used to switch between top-level views |
-| `Drawer`            | panel that slides in from left and contains navigation links                      |
-| `MaterialApp`       | top of app; wraps many other widgets                                              |
-| `NavigationBar`     |                                                                                   |
-| `NavigationToolbar` |                                                                                   |
-| `Router`            |                                                                                   |
-| `Scaffold`          | provides app structure; can show `Drawer`, `Snackbar`, and bottom sheets          |
-| `TabBar`            | horizontal row of tabs                                                            |
-| `TabBarView`        | page that corresponds to a `TabBar` tab                                           |
-| `TabPageSelector`   | renders dots that indicate current carousel item; click to switch                 |
-
-### Display Widgets
-
-| Widget              | Description           |
-| ------------------- | --------------------- |
-| `Banner`            |                       |
-| `Canvas`            |                       |
-| `CircleAvatar`      |                       |
-| `Divider`           | horizontal, thin line |
-| `ErrorWidget`       |                       |
-| `ExpandIcon`        |                       |
-| `FileImage`         |                       |
-| `Icon`              |                       |
-| `Image`             |                       |
-| `ImageIcon`         |                       |
-| `NetworkImage`      |                       |
-| `Placeholder`       |                       |
-| `ProgressIndicator` |                       |
-| `RichText`          |                       |
-| `Snackbar`          |                       |
-| `Text`              |                       |
-| `Tooltip`           |                       |
-| `VerticalDivider`   | vertical, thin line   |
-
-### Dialog Widgets
-
-| Widget                  | Description |
-| ----------------------- | ----------- |
-| `AboutDialog`           |             |
-| `AlertDialog`           |             |
-| `DatePickerDialog`      |             |
-| `DateRangePickerDialog` |             |
-| `Dialog`                |             |
-| `SimpleDialog`          |             |
-| `TimePickerDialog`      |             |
-
-### Input Widgets
-
-| Widget                 | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
-| `Autocomplete`         |                                                                     |
-| `BackButton`           |                                                                     |
-| `CloseButton`          |                                                                     |
-| `CalendarDatePicker`   |                                                                     |
-| `Checkbox`             |                                                                     |
-| `DropdownButton`       |                                                                     |
-| `EditableText`         |                                                                     |
-| `ElevatedButton`       | button with a background color that appears raised above background |
-| `FloatingActionButton` |                                                                     |
-| `Form`                 |                                                                     |
-| `IconButton`           |                                                                     |
-| `OutlinedButton`       | a `TextButton` with an outlined border                              |
-| `PopupMenuButton`      |                                                                     |
-| `Radio`                |                                                                     |
-| `RangeSlider`          |                                                                     |
-| `ReorderableList`      |                                                                     |
-| `Scrollbar`            |                                                                     |
-| `Slider`               |                                                                     |
-| `Stepper`              |                                                                     |
-| `Switch`               |                                                                     |
-| `TextButton`           | button with no visible border                                       |
-| `TextField`            |                                                                     |
-| `TextFormField`        |                                                                     |
-| `ToggleButtons`        |                                                                     |
-| `YearPicker`           |                                                                     |
 
 ## Cupertino Widgets
 
