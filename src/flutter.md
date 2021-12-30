@@ -1380,10 +1380,10 @@ To display a bottom sheet, call the function
 `showBottomSheet` (for non-modal) or `showModalBottomSheet` (for modal).
 These functions take many arguments, but the most commonly used are:
 
-- `context` - any `BuildContext` that is inside the `Scaffold`
-- `builder` - function that takes a `BuildContext`
+- `context`: any `BuildContext` that is inside the `Scaffold`
+- `builder`: function that takes a `BuildContext`
   and returns a widget to render
-- `backgroundColor` - a `Color` object
+- `backgroundColor`: a `Color` object
 
 It is recommended to return a `SafeArea` widget from the `builder` function
 that wraps the widget to be rendered.
@@ -1517,9 +1517,120 @@ class MyHomePage extends StatelessWidget {
 }
 ```
 
-## Snackbars
+## SnackBars
 
-TODO: Add this content!
+SnackBars are similar to bottom sheets.
+Both slide in from the bottom.
+But SnackBars are intended for short messages that only appear briefly.
+
+The `SnackBar` constructor takes many arguments, but the most commonly used are:
+
+- `action`: a `SnackBarAction` object that acts like a `TextButton`
+- `backgroundColor`: a `Color` object
+- `behavior`: a `SnackBarBehavior` enum with values
+  `fixed` (default; displays above widgets fixed at the bottom of the screen
+  like `BottomNavigationBar` and `FloatingActionButton`) and
+  `floating` (displays on top of widgets fixed at the bottom of the screen)
+- `content`: any widget to display
+- `dismissDirection`: `DismissDirection` enum that defaults to `down`
+- `duration`: `Duration` object that defaults to 4 seconds
+- `elevation`: `double` z-index; defaults to 6;
+  set to `0` for a flat look that has no shadow
+- `margin`: `EdgeInsetsGeometry` object applied outside `SnackBar`
+  when `width` is not specified
+- `padding`: `EdgeInsetsGeometry` object applied inside `SnackBar`
+- `width`: `double` width of `SnackBar`
+  that defaults to the device width minus the `margin`
+
+A failed assertion is triggered if both `margin` and `width` are specified.
+
+The `SnackBarAction` constructor takes the following arguments:
+
+- `disabledTextColor`: `Color` used for text after the `SnackBar` is dismissed
+- `label`: `String` to display; does not wrap so keep this short
+- `textColor`: `Color` used for text before the `SnackBar` is dismissed;
+  defaults to the `ThemeData` `primarySwatch` color
+- `onPressed`: function to call when the label is tapped
+
+Here is an example of a `SnackBar` that displays an error message.
+Some of the `SnackBar` arguments are commented out
+just to show valid values for them.
+
+<img alt="Flutter SnackBar" style="width: 40%"
+    src="/blog/assets/flutter-snackbar.png?v={{pkg.version}}"
+    title="Flutter SnackBar">
+
+```dart
+class MyHomePage extends StatelessWidget {
+  final String title;
+
+  final snackBar = SnackBar(
+    action: SnackBarAction(
+      label: 'Panic',
+      onPressed: () => print('got press'),
+      textColor: Colors.white,
+    ),
+    backgroundColor: Colors.red.shade900,
+    //behavior: SnackBarBehavior.floating,
+    content: Row(
+      children: [
+        Icon(Icons.error_outline, color: Colors.white, size: 32),
+        SizedBox(width: 16),
+        // Using Expanded allows the text to wrap.
+        Expanded(
+          child: Text(
+            'This is a long sentence that will require wrapping.',
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ],
+    ),
+    //dismissDirection: DismissDirection.up,
+    duration: Duration(seconds: 10),
+    //elevation: 0,
+    //margin: EdgeInsets.all(10),
+    //padding: EdgeInsets.all(10),
+    //shape: StadiumBorder(),
+    //width: 200,
+  );
+
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text('Show SnackBar #1'),
+              onPressed: () {
+                ScaffoldMessenger.of(context)
+                  // If another SnackBar is currently displayed, remove it.
+                  // There are two methods that do this.
+                  //..hideCurrentSnackBar() // runs exit animation
+                  ..removeCurrentSnackBar() // does not run exit animation
+                  // Now show the new SnackBar.
+                  ..showSnackBar(snackBar);
+              },
+            ),
+            ElevatedButton(
+              child: Text('Show SnackBar #2'),
+              onPressed: () {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
 ## Fonts
 
