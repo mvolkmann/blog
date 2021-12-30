@@ -1224,8 +1224,8 @@ var list2 = [3, 4];
 var list3 = list1 + list2; // [1, 2, 3, 4]
 ```
 
-Literal lists can include logic to determine the elements,
-referred to as "list comprehension".
+Literal lists can include logic to determine the elements to include.
+This is referred to as "list comprehension".
 The following examples demonstrate this:
 
 ```dart

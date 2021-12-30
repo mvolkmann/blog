@@ -1369,6 +1369,154 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+## Bottom Sheets
+
+Bottom sheets are a less intrusive alternative to dialogs.
+They slide up from the bottom and can be dragged back down by the user
+or closed programmatically.
+They can be modal or non-modal.
+
+To display a bottom sheet, call the function
+`showBottomSheet` (for non-modal) or `showModalBottomSheet` (for modal).
+These functions take many arguments, but the most commonly used are:
+
+- `context` - any `BuildContext` that is inside the `Scaffold`
+- `builder` - function that takes a `BuildContext`
+  and returns a widget to render
+- `backgroundColor` - a `Color` object
+
+It is recommended to return a `SafeArea` widget from the `builder` function
+that wraps the widget to be rendered.
+This avoid having the bottom sheet overlap unsafe areas such as a status bar.
+
+Non-modal bottom sheets do not automatically span the width of the device.
+To achieve this, wrap the `SafeArea` child in a `SizedBox` and
+pass it the `width` argument with a value of `double.infinity`.
+
+If the `SafeArea` child is a `Column` widget,
+it will not automatically have its height adjusted to match its content.
+To do this, wrap the `Column` widget in a `SizedBox` and pass it the
+`mainAxisSize` argument with a value of `MainAxisSize.min`.
+
+While the user can close the bottom sheet by dragging it down,
+it may be desirable to include a close button
+that calls `Navigator.pop(context)` to close it.
+
+The following helper function addresses all the concerns described above.
+
+```dart
+import 'package:flutter/material.dart';
+
+void openBottomSheet({
+  Color backgroundColor = Colors.blue,
+  required BuildContext context,
+  required Widget widget,
+  bool modal = false,
+  bool includeCloseButton = false,
+}) {
+  var fn = modal ? showModalBottomSheet : showBottomSheet;
+  fn<void>(
+    backgroundColor: backgroundColor,
+    context: context,
+    builder: (context) => SafeArea(
+      child: SizedBox(
+        child: Column(
+          children: [
+            widget,
+            if (includeCloseButton)
+              ElevatedButton(
+                child: Text('Close'),
+                onPressed: () => Navigator.pop(context),
+              )
+          ],
+          mainAxisSize: MainAxisSize.min,
+        ),
+        width: double.infinity,
+      ),
+    ),
+  );
+}
+```
+
+Here is an example of using the helper function above
+to display a non-modal and modal bottom sheet:
+
+```dart
+import 'package:flutter/material.dart';
+import 'bottom_sheet.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter BottomSheet Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'BottomSheet Demo'),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  final sheetWidget = Text(
+    'I am in a BottomSheet.',
+    style: TextStyle(color: Colors.white, fontSize: 24),
+  );
+
+  final String title;
+
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        // Using Builder just to get a Context inside Scaffold
+        // so the showBottomSheet function can find the Scaffold.
+        child: Builder(
+          builder: (context) {
+            var nonModalButton = ElevatedButton(
+              child: Text('Show Non-Modal BottomSheet'),
+              onPressed: () => openBottomSheet(
+                backgroundColor: Colors.green,
+                context: context,
+                includeCloseButton: true,
+                modal: false,
+                widget: sheetWidget,
+              ),
+            );
+
+            var modalButton = ElevatedButton(
+              child: Text('Show Modal BottomSheet'),
+              onPressed: () => openBottomSheet(
+                context: context,
+                modal: true,
+                widget: sheetWidget,
+              ),
+            );
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[nonModalButton, modalButton],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+```
+
 ## Fonts
 
 To use custom fonts:
