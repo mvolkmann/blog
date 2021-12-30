@@ -1517,6 +1517,10 @@ class MyHomePage extends StatelessWidget {
 }
 ```
 
+## Snackbars
+
+TODO: Add this content!
+
 ## Fonts
 
 To use custom fonts:
