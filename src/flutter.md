@@ -894,9 +894,10 @@ The steps to use the provider library are:
 
 ## Navigation
 
-There are two primary ways to implement page navigation in Flutter.
-One approach uses the `Navigator` class and
-the other uses the `BottomNavigationBar` widget.
+There are three primary ways to implement page navigation in Flutter.
+The first uses the `Navigator` class.
+The second uses the `BottomNavigationBar` widget.
+And the third uses the `Drawer` widget.
 Each approach is described below.
 
 ### Navigator Class
@@ -1089,7 +1090,7 @@ The steps to use `BottomNavigationBar` are:
 That's a lot of details to get right!
 Fortunately the code for doing all of this is typically the same in every app.
 The helper class below handles all of this.
-The code can be copied and used without modification in any Flutter app.
+This code can be copied and used without modification in any Flutter app.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -1153,8 +1154,8 @@ class BottomNavigationState extends State<BottomNavigation> {
 }
 ```
 
-Here is an example of using the helper class above to add a
-`BottomNavigationBar` to an app:
+Here is an example of using the helper class above
+to add a `BottomNavigationBar` to an app:
 
 <img alt="Flutter BottomNavigationBar" style="width: 40%"
     src="/blog/assets/flutter-bottomnavigationbar.png?v={{pkg.version}}"
@@ -1188,6 +1189,181 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BottomNavigation(options: options),
+    );
+  }
+}
+```
+
+### Drawer Widget
+
+This approach to page navigation uses a hamburger menu
+that slides in from the left to display a list of page links.
+Clicking a page link causes the corresponding page to be rendered.
+It doesn't use the `Navigator` class and routes are not pushed onto a stack.
+
+The `Drawer` widget doesn't implement page navigation.
+That part is left up to you, but is not difficult.
+
+The steps to use `Drawer` are:
+
+- Create a stateful widget.
+- In the `build` method return a `Scaffold` widget
+  with the following named arguments:
+  - `appBar` set to an `AppBar` instance that specifies
+    the title to be displayed for the current page
+  - `body` set to the widget to display for the current page
+  - `drawer` set to a `Drawer` instance
+    created with the following named arguments:
+    - `color` set to the drawer background color
+    - `drawer` set to a `Drawer` widget
+      with a `child` argument set to a `Container` widget
+      with a `child` argument set to a `ListView` widget
+      with a `children` argument set to a `List`
+    - The `List` should contain a `DrawerHeader` widget
+      and one `ListTile` widget for each page link.
+    - The `DrawerHeader` widget has a `child` argument
+      that can be set to any widget.
+    - The `ListTile` widget has the arguments
+      `leading` (typically set to an icon),
+      `title` (typically set to a `Text` widget), and
+      `onTap` (set to a function to call when the `ListTile` is tapped).
+    - The `onTap` function should set state that affects
+      the `appBar` `title` value and
+      the `Scaffold` body where the selected page is rendered.
+
+That's a lot of details to get right!
+Fortunately the code for doing all of this is typically the same in every app.
+The helper class below handles all of this.
+This code can be copied and used without modification in any Flutter app.
+
+```dart
+import 'package:flutter/material.dart';
+import 'widget_extensions.dart';
+
+class DrawerItem {
+  final String title;
+  final IconData icon;
+  final Widget widget;
+
+  DrawerItem({
+    required this.title,
+    required this.icon,
+    required this.widget,
+  });
+}
+
+class DrawerScaffold extends StatefulWidget {
+  final List<DrawerItem> drawerItems;
+
+  final Color? bgColor;
+  final Color? fgColor;
+  final double width;
+
+  DrawerScaffold({
+    Key? key,
+    required this.drawerItems,
+    this.bgColor,
+    this.fgColor,
+    this.width = 140,
+  }) : super(key: key);
+
+  @override
+  State<DrawerScaffold> createState() => _DrawerScaffoldState();
+}
+
+class _DrawerScaffoldState extends State<DrawerScaffold> {
+  var pageIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    var drawerBgColor = widget.bgColor ?? Colors.blue.shade700;
+    var drawerFgColor = widget.fgColor ?? Colors.white;
+
+    var listTiles = [];
+    for (var i = 0; i < widget.drawerItems.length; i++) {
+      var pageItem = widget.drawerItems[i];
+      listTiles.add(ListTile(
+        leading: Icon(pageItem.icon, color: drawerFgColor),
+        minLeadingWidth: 10, // decreases space between leading and title
+        title: Text(
+          pageItem.title,
+          style: TextStyle(color: drawerFgColor),
+        ),
+        onTap: () {
+          setState(() => pageIndex = i);
+          Navigator.pop(context);
+        },
+      ));
+    }
+
+    return Scaffold(
+      // Scaffolds with an AppBar automatically
+      // get a hamburger menu on the left side.
+      appBar: AppBar(
+        title: Text(widget.drawerItems[pageIndex].title),
+      ),
+      body: Center(child: widget.drawerItems[pageIndex].widget),
+      drawer: SizedBox(
+        width: widget.width,
+        child: Drawer(
+          child: Container(
+            color: drawerBgColor,
+            child: ListView(
+              padding: EdgeInsets.zero, // removes default padding
+              children: [
+                DrawerHeader(
+                  child: IconButton(
+                    color: drawerFgColor,
+                    icon: Icon(Icons.menu),
+                    onPressed: () => Navigator.pop(context),
+                  ).align(),
+                  padding: EdgeInsets.zero, // removes default padding
+                  // This size lines up the two hamburger icons perfectly.
+                ).size(width: 0, height: 110),
+                ...listTiles,
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+Here is an example of using the helper class above
+to add a `Drawer` to an app:
+
+<img alt="Flutter Drawer" style="width: 40%"
+    src="/blog/assets/flutter-drawer.png?v={{pkg.version}}"
+    title="Flutter Drawer">
+
+```dart
+import 'package:flutter/material.dart';
+import 'about_page.dart';
+import 'drawer_scaffold.dart';
+import 'home_page.dart';
+import 'settings_page.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  static final drawerItems = <DrawerItem>[
+    DrawerItem(title: 'About', icon: Icons.info, widget: AboutPage()),
+    DrawerItem(title: 'Home', icon: Icons.home, widget: HomePage()),
+    DrawerItem(title: 'Settings', icon: Icons.settings, widget: SettingsPage()),
+  ];
+
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Drawer Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: DrawerScaffold(drawerItems: drawerItems),
     );
   }
 }
@@ -1255,6 +1431,15 @@ Container(
 A `Container` widget can be given a specific size by adding
 `width` and/or `height` parameters whose values are number.
 
+## Colors
+
+The `Colors` class defines a large number of colors as static constants.
+For example, `Colors.pink.shade700` is a specific shade of pink.
+
+To see all the colors defined by the `Colors` class,
+see the documentation for the {% aTargetBlank
+"https://api.flutter.dev/flutter/material/Colors-class.html", "Colors class" %}.
+
 ## Icons
 
 The `Icon` widget renders an icon from a large provided set of icons.
@@ -1263,6 +1448,10 @@ For example, the following renders a music note icon.
 ```dart
 Icon(Icons.audiotrack, color: Colors.red, size: 30)
 ```
+
+To see all the icons defined by the `Icons` class,
+see the documentation for the {% aTargetBlank
+"https://api.flutter.dev/flutter/material/Icons-class.html", "Icons class" %}.
 
 ## Images
 
