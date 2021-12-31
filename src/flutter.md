@@ -2328,3 +2328,13 @@ the `flutter` command can be replaced by the `dart` command.
   Restarting the app can make the problem go away.
 
 - The need to pass `context` and `key` in so many places is annoying.
+
+- The error screen shown in the simulator when there is a runtime error
+  displays the message in yellow on a red background.
+  This combination is somewhat hard on the eyes.
+
+- The error screen often does not provide
+  the filename and line number of the error.
+  It is displayed, in the terminal where the app is running,
+  but it is buried in a long stack trace
+  which makes it difficult to find.
