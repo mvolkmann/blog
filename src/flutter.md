@@ -737,7 +737,7 @@ in order to render nothing.
 | `Expanded`  |                                                                                        |
 | `Flow`      |                                                                                        |
 | `GridView`  |                                                                                        |
-| `ListView`  |                                                                                        |
+| `ListView`  | arranges widgets vertically like `Column`, but scrolls when needed                     |
 | `Padding`   |                                                                                        |
 | `Row`       | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
 | `SizedBox`  |                                                                                        |
@@ -782,33 +782,33 @@ in order to render nothing.
 
 ### Input Widgets
 
-| Widget                 | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
-| `Autocomplete`         |                                                                     |
-| `BackButton`           |                                                                     |
-| `CloseButton`          |                                                                     |
-| `CalendarDatePicker`   |                                                                     |
-| `Checkbox`             |                                                                     |
-| `DropdownButton`       |                                                                     |
-| `EditableText`         |                                                                     |
-| `ElevatedButton`       | button with a background color that appears raised above background |
-| `FloatingActionButton` |                                                                     |
-| `Form`                 |                                                                     |
-| `IconButton`           |                                                                     |
-| `OutlinedButton`       | a `TextButton` with an outlined border                              |
-| `PopupMenuButton`      |                                                                     |
-| `Radio`                |                                                                     |
-| `RangeSlider`          |                                                                     |
-| `ReorderableList`      |                                                                     |
-| `Scrollbar`            |                                                                     |
-| `Slider`               |                                                                     |
-| `Stepper`              |                                                                     |
-| `Switch`               |                                                                     |
-| `TextButton`           | button with no visible border                                       |
-| `TextField`            |                                                                     |
-| `TextFormField`        |                                                                     |
-| `ToggleButtons`        |                                                                     |
-| `YearPicker`           |                                                                     |
+| Widget                 | Description                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| `Autocomplete`         |                                                                                              |
+| `BackButton`           |                                                                                              |
+| `CloseButton`          |                                                                                              |
+| `CalendarDatePicker`   |                                                                                              |
+| `Checkbox`             |                                                                                              |
+| `DropdownButton`       |                                                                                              |
+| `EditableText`         |                                                                                              |
+| `ElevatedButton`       | button with a background color that appears raised above background                          |
+| `FloatingActionButton` | circular (typically) button "that hovers over other content to promote a primary action"     |
+| `Form`                 | container for grouping form fields; see `autovalidateMode` property and `createState` method |
+| `IconButton`           |                                                                                              |
+| `OutlinedButton`       | a `TextButton` with an outlined border                                                       |
+| `PopupMenuButton`      |                                                                                              |
+| `Radio`                |                                                                                              |
+| `RangeSlider`          |                                                                                              |
+| `ReorderableList`      |                                                                                              |
+| `Scrollbar`            |                                                                                              |
+| `Slider`               |                                                                                              |
+| `Stepper`              |                                                                                              |
+| `Switch`               |                                                                                              |
+| `TextButton`           | button with no visible border                                                                |
+| `TextField`            |                                                                                              |
+| `TextFormField`        |                                                                                              |
+| `ToggleButtons`        |                                                                                              |
+| `YearPicker`           |                                                                                              |
 
 ## Managing State
 

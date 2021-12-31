@@ -654,34 +654,6 @@ void main() {
 
 The `is!` operator performs the opposite test.
 
-### Enumerations
-
-Enumerations are a special kind of class defined with the `enum` keyword.
-The are often used in `switch` statements.
-
-Each value in an `enum` is assigned an index starting from zero.
-They cannot be assigned different numeric values.
-
-Enumerations cannot be defined inside a function.
-
-For example:
-
-```dart
-enum Color { red, green, blue }
-
-void printColor(Color c) {
-  print('$c, index=${c.index}');
-}
-
-void main() {
-  printColor(Color.values[1]); // Color.blue, index=1
-
-  for (var color in Color.values) {
-    printColor(color);
-  }
-}
-```
-
 ### bool type
 
 Instances of the `bool` class represent a boolean value.
@@ -991,6 +963,39 @@ The table below summarized converting between numbers and strings.
 | `double` to `String` | `d.toString()`    |
 | `String` to `int`    | `int.parse(s)`    |
 | `String` to `double` | `double.parse(s)` |
+
+### Enumerations
+
+Enumerations are a special kind of class defined with the `enum` keyword.
+The are often used in `switch` statements.
+
+Each value in an `enum` is assigned an index starting from zero.
+They cannot be assigned different numeric values.
+
+Enumerations cannot be defined inside a function.
+
+For example:
+
+```dart
+enum Color { red, green, blue }
+
+void printColor(Color c) {
+  print('$c, index=${c.index}');
+}
+
+void main() {
+  printColor(Color.values[1]); // Color.blue, index=1
+
+  for (var color in Color.values) {
+    printColor(color);
+  }
+}
+```
+
+To get the `String` value of an `enum` in Flutter,
+import `package:flutter/foundation.dart` and
+pass an `enum` value to the `describeEnum` function.
+For example: `describeEnum(Color.blue)` returns the `String` `'blue'`.
 
 ### Type Aliases
 
