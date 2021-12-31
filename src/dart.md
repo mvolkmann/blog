@@ -992,8 +992,11 @@ void main() {
 }
 ```
 
-To get the `String` value of an `enum` in Flutter,
-import `package:flutter/foundation.dart` and
+The `toString` method on `enum` values returns a `String`
+that contains the `enum` name followed by a period and the `enum` value.
+For example, `Color.blue.toString()` returns `'Color.blue'`.
+To get a `String` with the `enum` name and period in Flutter,
+add `import 'package:flutter/foundation.dart';` and
 pass an `enum` value to the `describeEnum` function.
 For example: `describeEnum(Color.blue)` returns the `String` `'blue'`.
 
