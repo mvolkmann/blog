@@ -537,7 +537,9 @@ class MyPage extends StatelessWidget {
 ## Widget Types
 
 Widgets that accept other widgets as arguments typically have
-a parameter named `child` for one or `children` for multiple.
+a parameter named `child` with the type `Widget` for one
+or `children` with a type of `List<Widget>` for multiple.
+TODO: Which isn't the type of `children` `Iterable<Widget>`?
 
 Widgets with a `children` parameter that layout those widgets
 in a specific way can be referred to as "layout widgets".
