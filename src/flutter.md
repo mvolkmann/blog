@@ -784,33 +784,33 @@ in order to render nothing.
 
 ### Input Widgets
 
-| Widget                 | Description                                                                                  |
-| ---------------------- | -------------------------------------------------------------------------------------------- |
-| `Autocomplete`         |                                                                                              |
-| `BackButton`           |                                                                                              |
-| `CloseButton`          |                                                                                              |
-| `CalendarDatePicker`   |                                                                                              |
-| `Checkbox`             |                                                                                              |
-| `DropdownButton`       |                                                                                              |
-| `EditableText`         |                                                                                              |
-| `ElevatedButton`       | button with a background color that appears raised above background                          |
-| `FloatingActionButton` | circular (typically) button "that hovers over other content to promote a primary action"     |
-| `Form`                 | container for grouping form fields; see `autovalidateMode` property and `createState` method |
-| `IconButton`           |                                                                                              |
-| `OutlinedButton`       | a `TextButton` with an outlined border                                                       |
-| `PopupMenuButton`      |                                                                                              |
-| `Radio`                |                                                                                              |
-| `RangeSlider`          |                                                                                              |
-| `ReorderableList`      |                                                                                              |
-| `Scrollbar`            |                                                                                              |
-| `Slider`               |                                                                                              |
-| `Stepper`              |                                                                                              |
-| `Switch`               |                                                                                              |
-| `TextButton`           | button with no visible border                                                                |
-| `TextField`            |                                                                                              |
-| `TextFormField`        |                                                                                              |
-| `ToggleButtons`        |                                                                                              |
-| `YearPicker`           |                                                                                              |
+| Widget                 | Description                                                                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `Autocomplete`         |                                                                                                                                    |
+| `BackButton`           | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| `CloseButton`          | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| `CalendarDatePicker`   | inline calendar date picker                                                                                                        |
+| `Checkbox`             | checkbox for toggling a `bool` value                                                                                               |
+| `DropdownButton`       | dropdown menu with `DropdownMenuItem` children similar to the HTML `select` element with `option` children                         |
+| `EditableText`         | from the `TextField` docs, "EditableText ... is the raw text editing control at the heart of a TextField ... rarely used directly" |
+| `ElevatedButton`       | button containing any widget with a background color that appears raised above background                                          |
+| `FloatingActionButton` | circular (typically) button "that hovers over other content to promote a primary action"                                           |
+| `Form`                 | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
+| `IconButton`           | button containing an `Icon`                                                                                                        |
+| `OutlinedButton`       | a `TextButton` with an outlined border                                                                                             |
+| `PopupMenuButton`      |                                                                                                                                    |
+| `Radio`                | radio button for selecting between mutually exclusive options                                                                      |
+| `RangeSlider`          | slider for selecting the minimum and maximum values from a range of `double` values                                                |
+| `ReorderableList`      |                                                                                                                                    |
+| `Scrollbar`            |                                                                                                                                    |
+| `Slider`               | slider for selecting a double value from a given range of `double` values                                                          |
+| `Stepper`              |                                                                                                                                    |
+| `Switch`               | toggle switch for selecting a `bool` value                                                                                         |
+| `TextButton`           | button containing any widget, not just `Text`, with no visible border                                                              |
+| `TextField`            | basic text input                                                                                                                   |
+| `TextFormField`        | like `TextField`, but supports validation                                                                                          |
+| `ToggleButtons`        | set of toggle buttons, typically used to choose between exclusive options                                                          |
+| `YearPicker`           | scrollable list of years to pick from (I can't get this to work!)                                                                  |
 
 ## Managing State
 
