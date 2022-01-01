@@ -798,7 +798,7 @@ in order to render nothing.
 | `Form`                 | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
 | `IconButton`           | button containing an `Icon`                                                                                                        |
 | `OutlinedButton`       | a `TextButton` with an outlined border                                                                                             |
-| `PopupMenuButton`      |                                                                                                                                    |
+| `PopupMenuButton`      | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
 | `Radio`                | radio button for selecting between mutually exclusive options                                                                      |
 | `RangeSlider`          | slider for selecting the minimum and maximum values from a range of `double` values                                                |
 | `ReorderableList`      |                                                                                                                                    |
@@ -811,6 +811,10 @@ in order to render nothing.
 | `TextFormField`        | like `TextField`, but supports validation                                                                                          |
 | `ToggleButtons`        | set of toggle buttons, typically used to choose between exclusive options                                                          |
 | `YearPicker`           | scrollable list of years to pick from (I can't get this to work!)                                                                  |
+
+Basic usage of all of these widgets is demonstrated in the Flutter project at
+{% aTargetBlank "https://github.com/mvolkmann/flutter_input",
+"flutter_input" %}.
 
 ## Managing State
 
