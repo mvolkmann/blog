@@ -774,21 +774,22 @@ See the sample app in the GitHub repo {% aTargetBlank
 
 ### Layout Widgets
 
-| Widget      | Description                                                                            |
-| ----------- | -------------------------------------------------------------------------------------- |
-| `Center`    | centers its child in the available space                                               |
-| `Column`    | arranges widgets vertically (like `HStack` in SwiftUI)                                 |
-| `Container` |                                                                                        |
-| `Expanded`  |                                                                                        |
-| `Flow`      |                                                                                        |
-| `GridView`  |                                                                                        |
-| `ListView`  | arranges widgets vertically like `Column`, but scrolls when needed                     |
-| `Padding`   |                                                                                        |
-| `Row`       | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
-| `SizedBox`  |                                                                                        |
-| `Stack`     | stacks widgets vertically (like `ZStack` in SwiftUI)                                   |
-| `Table`     |                                                                                        |
-| `Wrap`      | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
+| Widget      | Description                                                                                                                   |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `Center`    | centers its child in the available space                                                                                      |
+| `Column`    | arranges widgets vertically (like `HStack` in SwiftUI)                                                                        |
+| `Container` | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
+| `Expanded`  | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
+| `Flexible`  | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
+| `Flow`      | advanced; "optimized for repositioning children using transformation matrices"                                                |
+| `GridView`  | "scrollable, 2D array of widgets"                                                                                             |
+| `ListView`  | arranges widgets vertically like `Column`, but scrolls when needed                                                            |
+| `Padding`   | "insets its child by the given padding"                                                                                       |
+| `Row`       | arranges widgets horizontally (like `HStack` in SwiftUI)                                                                      |
+| `SizedBox`  | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
+| `Stack`     | stacks widgets vertically (like `ZStack` in SwiftUI)                                                                          |
+| `Table`     | "uses the table layout algorithm for its children"                                                                            |
+| `Wrap`      | arranges widgets horizontally or vertically and wraps to a new row or column as needed                                        |
 
 ### Display Widgets
 
@@ -844,8 +845,7 @@ See the sample app in the GitHub repo {% aTargetBlank
 | `PopupMenuButton`      | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
 | `Radio`                | radio button for selecting between mutually exclusive options                                                                      |
 | `RangeSlider`          | slider for selecting the minimum and maximum values from a range of `double` values                                                |
-| `ReorderableList`      |                                                                                                                                    |
-| `Scrollbar`            |                                                                                                                                    |
+| `ReorderableList`      | scrollable container where child widgets can be dragged to reorder them                                                            |
 | `Slider`               | slider for selecting a double value from a given range of `double` values                                                          |
 | `Stepper`              | "displays progress through a sequence of steps" like in a wizard UI; not frequently used                                           |
 | `Switch`               | toggle switch for selecting a `bool` value                                                                                         |
