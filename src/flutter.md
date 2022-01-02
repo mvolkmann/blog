@@ -715,6 +715,20 @@ in order to render nothing.
 
 ### Structure Widgets
 
+It is common for Flutter apps to have the following top-level structure:
+
+- `MaterialApp`
+  - `Scaffold`
+    - `AppBar`
+      - toolbar row (logical grouping)
+        - `leading` `Widget`
+        - `title` `Widget`
+        - `actions` `List<Widget>`
+      - `flexible` `Widget`
+      - `bottom` `Widget` (often contains a `TabBar`)
+      - `BottomAppBar` (alternative to `TabBar` inside `AppBar`)
+    - `drawer` `Widget` (typically is a `SizedBox` containing a `Drawer`)
+
 | Widget              | Description                                                                       |
 | ------------------- | --------------------------------------------------------------------------------- |
 | `AppBar`            | appears at top of app; contains other widgets such as `TabBar`                    |
@@ -739,20 +753,21 @@ and includes the `leading`, `title`, and `actions` widgets.
 
 The `AppBar` constructor takes the following named parameters and more:
 
-| Parameter Name     | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| `leading`          | `Widget` displayed on left side of top row                |
-| `title`            | `Widget` displayed in center of top row                   |
-| `actions`          | `List<Widget>` displayed on right side of top row         |
-| `flexibleSpace`    | `Widget` displayed between top and bottom rows            |
-| `bottom`           | `Widget` displayed on bottom row                          |
-| `backgroundColor`  | `Color` of background                                     |
-| `foregroundColor`  | `Color` of foreground                                     |
-| `titleSpacing`     | `double` space on left and right side of `title` `Widget` |
-| `leadingWidth`     | `double` width of `leading` `Widget`                      |
-| `toolbarHeight`    | `double` height of the toolbar (first row)                |
-| `toolbarTextStyle` | `TextStyle` of the toolbar widgets                        |
-| `titleTextStyle`   | `TextStyle` of `title` `Widget`                           |
+| Parameter Name     | Description                                                  |
+| ------------------ | ------------------------------------------------------------ |
+| `actions`          | `List<Widget>` displayed on right side of top row            |
+| `backgroundColor`  | `Color` of background                                        |
+| `bottom`           | `PreferredSizeWidget` displayed on bottom row (ex. `TabBar`) |
+| `centerTitle`      | `bool` defaults to `false`, but typically want `true`        |
+| `flexibleSpace`    | `Widget` displayed between top and bottom rows               |
+| `foregroundColor`  | `Color` of foreground                                        |
+| `leading`          | `Widget` displayed on left side of top row                   |
+| `leadingWidth`     | `double` width of `leading` `Widget`                         |
+| `title`            | `Widget` displayed in center of top row                      |
+| `titleSpacing`     | `double` space on left and right side of `title` `Widget`    |
+| `titleTextStyle`   | `TextStyle` of `title` `Widget`                              |
+| `toolbarHeight`    | `double` height of the toolbar (first row)                   |
+| `toolbarTextStyle` | `TextStyle` of the toolbar widgets                           |
 
 ### Layout Widgets
 
