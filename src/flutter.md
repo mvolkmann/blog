@@ -729,6 +729,31 @@ in order to render nothing.
 | `TabBarView`        | page that corresponds to a `TabBar` tab                                           |
 | `TabPageSelector`   | renders dots that indicate current carousel item; click to switch                 |
 
+The `AppBar` widget holds several other widgets referred to as
+`leading`, `title`, `actions`, `flexibleSpace`, and `bottom`.
+See the diagram in the
+{% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html",
+"official docs" %}.
+The first row is referred to as the "toolbar" in documentation
+and includes the `leading`, `title`, and `actions` widgets.
+
+The `AppBar` constructor takes the following named parameters and more:
+
+| Parameter Name     | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `leading`          | `Widget` displayed on left side of top row                |
+| `title`            | `Widget` displayed in center of top row                   |
+| `actions`          | `List<Widget>` displayed on right side of top row         |
+| `flexibleSpace`    | `Widget` displayed between top and bottom rows            |
+| `bottom`           | `Widget` displayed on bottom row                          |
+| `backgroundColor`  | `Color` of background                                     |
+| `foregroundColor`  | `Color` of foreground                                     |
+| `titleSpacing`     | `double` space on left and right side of `title` `Widget` |
+| `leadingWidth`     | `double` width of `leading` `Widget`                      |
+| `toolbarHeight`    | `double` height of the toolbar (first row)                |
+| `toolbarTextStyle` | `TextStyle` of the toolbar widgets                        |
+| `titleTextStyle`   | `TextStyle` of `title` `Widget`                           |
+
 ### Layout Widgets
 
 | Widget      | Description                                                                            |
@@ -786,7 +811,7 @@ in order to render nothing.
 
 | Widget                 | Description                                                                                                                        |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `Autocomplete`         |                                                                                                                                    |
+| `Autocomplete`         | text input for selecting from a list of options where only options that match the entered text are displayed                       |
 | `BackButton`           | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
 | `CloseButton`          | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
 | `CalendarDatePicker`   | inline calendar date picker                                                                                                        |
@@ -804,7 +829,7 @@ in order to render nothing.
 | `ReorderableList`      |                                                                                                                                    |
 | `Scrollbar`            |                                                                                                                                    |
 | `Slider`               | slider for selecting a double value from a given range of `double` values                                                          |
-| `Stepper`              |                                                                                                                                    |
+| `Stepper`              | "displays progress through a sequence of steps" like in a wizard UI; not frequently used                                           |
 | `Switch`               | toggle switch for selecting a `bool` value                                                                                         |
 | `TextButton`           | button containing any widget, not just `Text`, with no visible border                                                              |
 | `TextField`            | basic text input                                                                                                                   |
