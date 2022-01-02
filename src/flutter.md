@@ -759,7 +759,7 @@ The `AppBar` constructor takes the following named parameters and more:
 | `backgroundColor`  | `Color` of background                                        |
 | `bottom`           | `PreferredSizeWidget` displayed on bottom row (ex. `TabBar`) |
 | `centerTitle`      | `bool` defaults to `false`, but typically want `true`        |
-| `flexibleSpace`    | `Widget` displayed between top and bottom rows               |
+| `flexibleSpace`    | `Widget` stacked behind the toolbar and the bottom widget    |
 | `foregroundColor`  | `Color` of foreground                                        |
 | `leading`          | `Widget` displayed on left side of top row                   |
 | `leadingWidth`     | `double` width of `leading` `Widget`                         |
@@ -768,6 +768,9 @@ The `AppBar` constructor takes the following named parameters and more:
 | `titleTextStyle`   | `TextStyle` of `title` `Widget`                              |
 | `toolbarHeight`    | `double` height of the toolbar (first row)                   |
 | `toolbarTextStyle` | `TextStyle` of the toolbar widgets                           |
+
+See the sample app in the GitHub repo {% aTargetBlank
+"https://github.com/mvolkmann/flutter_appbar", "flutter_appbar" %}.
 
 ### Layout Widgets
 
