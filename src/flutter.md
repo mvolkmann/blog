@@ -340,6 +340,9 @@ This provides many things including:
   - Extract Local Variable
   - Extract Widget
 
+  The "Extract" commands are great for breaking up deeply nested widget trees!
+  The convention for extracted method names is to being with "\_build".
+
   Select multiple widgets and press cmd-period or click the lightbulb icon
   to open a context menu with the following options:
 
@@ -507,6 +510,8 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // The Scaffold widget provides a basic UI structure
     // that is common to many mobile apps.
+    // To avoid drawing in unsafe ares like notches,
+    // wrap the Scaffold widget in a `SafeArea` widget.
     return Scaffold(
       // The AppBar constructor accepts many more arguments
       // that are described later.
