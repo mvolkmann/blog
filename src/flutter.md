@@ -910,8 +910,13 @@ Transform.rotate(angle: -pi / 4.0, child: someWidget);
 
 The following code uses a transformation matrix
 to translate, rotate, and scale a given widget:
+It requires adding the "vector_math" library to `pubspec.yaml`.
 
 ```dart
+import 'package:vector_math/vector_math_64.dart' as vm;
+
+...
+
 Widget transform({
   required Widget child,
   double angle = 0.0, // in radians
@@ -927,6 +932,8 @@ Widget transform({
   var matrix = Matrix4.compose(translationVector, rotation, scaleVector);
   return Transform(transform: matrix, child: child);
 }
+
+...
 
 // In some widget list ...
 transform(child: someWidget, dx: 100.0, dy: 20.0, angle: -pi / 4, scale: 0.7);
