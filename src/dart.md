@@ -963,6 +963,16 @@ The `String` class defines the following instance methods:
 | `trimLeft()`                                                                          | returns new `String` formed by removing leading whitespace                                           |
 | `trimRight()`                                                                         | returns new `String` formed by removing trailing whitespace                                          |
 
+To sort a `List` of `String` values in place,
+use the `List` `sort` method and the `String` `compareTo` method.
+For example:
+
+```dart
+var names = <String>['Maisey', 'Ramsay', 'Oscar', 'Comet'];
+names.sort((a, b) => a.compareTo(b));
+// names now contains ['Comet', 'Maisey', 'Oscar', 'Ramsay']
+```
+
 The `String` class defines the following binary operators:
 `+` (concatenation), `*` (repeated n times),
 `==` (same code points), `[index]` (gets code point at index).
