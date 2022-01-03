@@ -437,6 +437,7 @@ Here is an example of the structure of a basic Flutter app
 that uses Material Design.
 
 ```dart
+// This import is required to use the provided Material Design widgets.
 import 'package:flutter/material.dart';
 
 // This defines the starting point of all Dart apps.
@@ -466,6 +467,8 @@ class MyApp extends StatelessWidget {
   // In stateless widgets it is only called once (true?).
   // In stateful widgets it is called initially
   // and again every time the state changes.
+  // Typically the topmost widget build method returns
+  // an instance of MaterialApp which follows Material Design.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -476,7 +479,7 @@ class MyApp extends StatelessWidget {
       // On iOS this value is not used.
       title: 'My Title',
       theme: ThemeData(primarySwatch: Colors.amber),
-      home: const MyPage(),
+      home: const MyPage(), // starting page
     );
   }
 }
@@ -486,7 +489,11 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The Scaffold widget provides a basic UI structure
+    // that is common to many mobile apps.
     return Scaffold(
+      // The AppBar constructor accepts many more arguments
+      // that are described later.
       appBar: AppBar(
         title: const Text('My App'),
       ),
@@ -534,6 +541,9 @@ class MyPage extends StatelessWidget {
 ```
 
 ## Widget Types
+
+All the predefined widgets are documented in the {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets", "Widget Catalog" %}.
 
 Widgets that accept other widgets as arguments typically have
 a parameter named `child` with the type `Widget` for one
@@ -743,6 +753,41 @@ It is common for Flutter apps to have the following top-level structure:
 | `TabBarView`        | page that corresponds to a `TabBar` tab                                           |
 | `TabPageSelector`   | renders dots that indicate current carousel item; click to switch                 |
 
+#### MaterialApp Widget
+
+The `MaterialApp` widget is topmost widget
+of applications that use Material Design.
+
+The `MaterialApp` constructor takes the following named parameters and more:
+
+| Parameter Name | Description                                                                        |
+| -------------- | ---------------------------------------------------------------------------------- |
+| `darkTheme`    | `ThemeData` to use when running in dark mode                                       |
+| `home`         | `Widget` to render for the default route ('/')                                     |
+| `initialRoute` | `String` name of first route to render when using `Navigator`                      |
+| `routes`       | `Map` of route names to `WidgetBuilder` instances                                  |
+| `theme`        | `ThemeData` to use when running in light mode                                      |
+| `title`        | single-line `String` that describes the app; only rendered in Android task manager |
+
+#### Scaffold Widget
+
+The `Scaffold` widget "implements the basic material design layout structure."
+The `MaterialApp` constructor `home` argument is typically set to a
+custom widget whose `build` method returns an instance of the `Scaffold` class.
+
+The `Scaffold` constructor takes the following named parameters and more:
+
+| Parameter Name         | Description                                                                                                          |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `appBar`               | `AppBar` to display at the top                                                                                       |
+| `backgroundColor`      | `Color` for background                                                                                               |
+| `body`                 | `Widget` that provides the primary content                                                                           |
+| `bottomNavigationBar`  | `Widget` to display at the bottom; typically an instance of `BottomNavigationBar`                                    |
+| `drawer`               | `Widget` to slide in (usually from left) when hamburger icon is tapped; typically a `SizedBox` containing a `Drawer` |
+| `floatingActionButton` | `Widget` (usually a `FloatingActionButton` to display over other content in lower-right                              |
+
+#### AppBar Widget
+
 The `AppBar` widget holds several other widgets referred to as
 `leading`, `title`, `actions`, `flexibleSpace`, and `bottom`.
 See the diagram in the
@@ -814,6 +859,41 @@ See the sample app in the GitHub repo {% aTargetBlank
 | `Tooltip`           |                       |
 | `VerticalDivider`   | vertical, thin line   |
 
+### DefaultTextStyle
+
+This is the style applied to text that doesn't have an explicit style.
+
+### ElevatedButton
+
+This is a Material Design button that elevates when pressed.
+Should it be the opposite?
+
+### FlutterLogo
+
+This renders the Flutter logo.
+
+### Icon
+
+This renders a Material Design icon.
+
+### Image
+
+This renders an image.
+
+### Placeholder
+
+This renders a rectangle that represents where
+other widgets will be added in the future.
+
+### RichText
+
+This renders runs of text that each used different styles.
+It uses `TextSpan` objects.
+
+### Text
+
+This renders a run of text with a single style.
+
 ### Dialog Widgets
 
 | Widget                  | Description |
@@ -858,6 +938,388 @@ See the sample app in the GitHub repo {% aTargetBlank
 Basic usage of all of these widgets is demonstrated in the Flutter project at
 {% aTargetBlank "https://github.com/mvolkmann/flutter_input",
 "flutter_input" %}.
+
+## Material Widgets
+
+These widgets use Material Design styling.
+They are documented at {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/material",
+"Cupertino (iOS-style) widgets" %}.
+
+## Cupertino Widgets
+
+These widgets use iOS styling rather than Material Design.
+They are documented at {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/cupertino",
+"Cupertino (iOS-style) widgets" %}.
+
+### CupertinoActionSheet
+
+This renders a modal that slides up from the bottom
+to allow selection from a set of options.
+It is sometimes used for confirmation dialogs.
+
+### CupertinoActivityIndicator
+
+This renders an iOS-style spinner.
+
+### CupertinoAlertDialog
+
+This renders an iOS-style alert dialog with
+a title, message, and set of buttons.
+
+### CupertinoButton
+
+This renders an iOS-style button that can be tapped to execute associated code.
+
+### CupertinoContextMenu
+
+This renders an iOS-style modal containing a set of tappable options
+when a specific widget is long-pressed.
+
+### CupertinoDatePicker
+
+This renders an iOS-style wheel picker for entering a date and time.
+
+### CupertinoDialogAction
+
+This renders a button with no background color or border.
+It is typically usd in `CupertinoAlertDialog`.
+
+### CupertinoFullscreenDialogTransition
+
+This is an iOS-style transition that is used to render fullscreen dialogs.
+
+### CupertinoNavigationBar
+
+This renders an iOS-style top navigation bar.
+It is typically used with `CupertinoPageScaffold`.
+
+### CupertinoPageScaffold
+
+This renders a common iOS-style page layout.
+
+### CupertinoPageTransition
+
+This provides an iOS-style page transition animation.
+
+### CupertinoPicker
+
+This renders an iOS-style wheel picker.
+
+### CupertinoPopupSurface
+
+This renders a rounded rectangle for an alert dialog or action sheet.
+
+### CupertinoScrollbar
+
+This renders an iOS-style scrollbar.
+
+### CupertinoSearchTextField
+
+This renders an iOS-style search input.
+
+### CupertinoSegmentedControl
+
+This renders an iOS-style segmented control
+which is a horizontal list of mutually-exclusive buttons.
+
+### CupertinoSlider
+
+This renders a slider for selecting a value from a range.
+
+### CupertinoSlidingSegmentedControl
+
+This renders an iOS-style segmented control
+which is a horizontal list of buttons.
+
+### CupertinoSliverNavigationBar
+
+This renders an iOS-style navigation bar with a large title.
+
+### CupertinoSwitch
+
+This renders an iOS-style switch (like the SwiftUI `Toggle` view)
+
+### CupertinoTabBar
+
+This is an iOS-style bottom tab bar
+that is typically used with `CupertinoTabScaffold`.
+
+### CupertinoTabScaffold
+
+This positions a tab bar below the display of select tab content.
+
+### CupertinoTabView
+
+This supports "parallel navigation"? between tabs
+and is typically used with `CupertinoTabScaffold`.
+
+### CupertinoTextField
+
+This renders an iOS-style input text field.
+
+### CupertinoTimerPicker
+
+This renders an iOS-style wheel picker
+for entering hours, minutes, and seconds.
+
+## Layout Widgets
+
+The layout widgets are documented at {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/layout",
+"Cupertino (iOS-style) widgets" %}.
+
+### Single-Child Layout Widgets
+
+#### Align
+
+#### AspectRatio
+
+#### Baseline
+
+#### Center
+
+#### ConstrainedBox
+
+#### Container
+
+This applies positioning and sizing to other widgets.
+
+#### CustomSingleChildLayout
+
+#### Expanded
+
+#### FittedBox
+
+#### FractionallySizedBox
+
+#### IntrinsicHeight
+
+#### IntrinsicWidth
+
+#### LimitedBox
+
+#### Offstage
+
+#### OverflowBox
+
+#### Padding
+
+#### SizedBox
+
+#### SizedOverflowBox
+
+#### Transform
+
+### Multiple-Child Layout Widgets
+
+#### Column
+
+This renders a vertical list of child widgets.
+It is similar to a SwiftUI `VStack`.
+The "main" axis is vertical and the "cross" axis is horizontal.
+
+This constructor for widget takes the following named parameters,
+all of which are optional.
+
+| Parameter            | Type                      |
+| -------------------- | ------------------------- |
+| `children`           | `List<Widget>`            |
+| `crossAxisAlignment` | `CrossAxisAlignment` enum |
+| `mainAxisAlignment`  | `MainAxisAlignment` enum  |
+| `mainAxisSize`       | `MainAxisSize` enum       |
+| `textBaseline?`      | `TextBaseline` enum       |
+| `textDirection?`     | `TextDirection` enum      |
+| `verticalDirection`  | `VerticalDirection` enum  |
+
+Typically only `children`, `crossAxisAlignment`,
+`mainAxisAlignment`, and `mainAxisSize` are specified.
+
+Values of the `CrossAxisAlignment` enum include
+`start`, `center` (default), `end`,
+`stretch`, and `baseline` (aligns text baselines).
+
+Values of the `MainAxisAlignment` enum include
+`start` (default), `center`, `end`,
+`spaceAround`, `spaceBetween`, and `spaceEvenly`.
+
+Values of the `MainSize` enum include
+`max` (uses all available space; default) and
+`min` (uses on what is needed to fit children).
+
+Values of the `TextBaseline` enum include `alphabetic` and `ideographic`.
+
+Values of the `TextDirection` enum include
+`ltr` (left to right) and `rtl` (right to left).
+
+Values of the `VerticalDirection` enum include `down` (default) and `up`.
+
+There is no parameter that controls the space between the children.
+One way to add space between them is to insert `SizedBox` widgets.
+To make this easier, consider adding an extension to the `List<Widget>` type
+as follows in a file named `widget_extension.dart`.
+
+```dart
+import 'package:flutter/material.dart';
+
+extension WidgetExtension<Widget> on List<Widget> {
+  /// Adds a SizedBox between all Widgets in the List.
+  List<Widget> spacing(double size) {
+    for (int i = length - 1; i > 0; i--) {
+      insert(i, SizedBox(width: size, height: size) as Widget);
+    }
+    return this;
+  }
+}
+```
+
+To use this, call the `spacing` method on the value passed
+in the `children` argument. For example, `[...].spacing(20)`.
+The same approach can be used with the
+`children` parameter of the `Row` widget.
+Thanks to Pat Niemeyer for this suggestion!
+
+#### CustomMultiChildLayout
+
+#### Flow
+
+#### GridView
+
+#### IndexedStack
+
+#### LayoutBuilder
+
+#### ListBody
+
+#### ListView
+
+This displays a scrollable list of widgets.
+The list is vertical by default, but can be changed to horizontal.
+Here's an example of creating a scrollable list of colors.
+
+```dart
+class ColorList extends StatelessWidget {
+  const ColorList({Key? key}) : super(key: key);
+
+  final List<String> names = const [
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'blue',
+    'purple',
+    'white',
+    'gray',
+    'black',
+    'brown'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.all(10),
+      child: SizedBox(
+        height: 100,
+        child: ListView.builder(
+          itemCount: names.length,
+          // This function is called once for each index value in itemCount
+          // to programmatically create a child widgets.
+          itemBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 20,
+              child: Text(names[index]),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+```
+
+#### Row
+
+This renders a horizontal list of child widgets.
+It is similar to a SwiftUI `HStack`.
+The "main" axis is horizontal and the "cross" axis is vertical.
+
+This constructor for widget takes the
+same named parameters as the `Column` widget.
+
+#### Stack
+
+This renders widgets on top of each other.
+It is similar to a SwiftUI `ZStack`.
+
+#### Table
+
+#### Wrap
+
+This renders widgets in rows or columns.
+It is similar to the `Row` and `Column` widgets,
+but differs in that it wraps children to multiple rows or columns
+when they do not all fit in a single row or column.
+
+This constructor for widget takes the following named parameters,
+all of which are optional.
+
+| Parameter            | Type                      |
+| -------------------- | ------------------------- |
+| `alignment`          | `WrapAlignment` enum      |
+| `children`           | `List<Widget>`            |
+| `clipBehavior`       | `Clip` enum               |
+| `crossAxisAlignment` | `WrapCrossAlignment` enum |
+| `direction`          | `Axis`                    |
+| `runAlignment`       | `WrapAlignment` enum      |
+| `runSpacing`         | `double`; defaults to 0.0 |
+| `spacing`            | `double`; defaults to 0.0 |
+| `textDirection`      | `TextDirection`           |
+| `verticalDirection`  | `VerticalDirection` enum  |
+
+The `children` are divided into "runs" that fit in a single row or column.
+The `runAlignment` and `runSpacing` parameters apply to entire runs.
+The `alignment` and `spacing` parameters apply to the children of each "run".
+
+Values of the `Axis` enum include `horizontal` (default) and `vertical`.
+
+Values of the `Clip` enum include
+`antiAlias`, `antiAliasWithSaveLayer`, `hardEdge`, and `none` (default).
+
+Values of the `TextDirection` and `VerticalDirection` enums were
+described with the `Column` widget above.
+
+Values of the `WrapAlignment` enum include
+`start` (default), `center`, `end`,
+`spaceAround`, `spaceBetween`, and `spaceEvenly`.
+
+Values of the `WrapCrossAlignment` enum include
+
+### Sliver Widgets
+
+Are these iOS-style layout widgets?
+
+### Icons
+
+Icons are provided by the CupertinoIcons package
+which is documented at {% aTargetBlank
+"https://pub.dev/packages/cupertino_icons", "cupertino_icons" %}.
+
+## Persisting State
+
+There are many approaches to persisting app data
+so it is not lost when an app is closed.
+
+- built-in `SharedPreference` class
+- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} library
+- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
+  (similar to the Context API in React)
+- {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
+  "cubit" %} library
+- {% aTargetBlank "https://docs.flutter.dev/cookbook/persistence/sqlite",
+  "SQLite" %} database on the device
 
 ## Managing State
 
@@ -1039,6 +1501,14 @@ The steps to use the provider library are:
      }
    }
    ```
+
+### GetX Library
+
+TODO: Add information about this.
+
+### RiverPod Library
+
+TODO: Add information about this.
 
 ## Navigation
 
@@ -1883,428 +2353,6 @@ To render an image from a local file,
 - TODO: Use what to render it?
 
 To render an image from an `AssetBundle` ...
-
-## Display Widgets
-
-All the predefined widgets are documented in the {% aTargetBlank
-"https://docs.flutter.dev/development/ui/widgets", "Widget Catalog" %}.
-
-### DefaultTextStyle
-
-This is the style applied to text that doesn't have an explicit style.
-
-### ElevatedButton
-
-This is a Material Design button that elevates when pressed.
-Should it be the opposite?
-
-### FlutterLogo
-
-This renders the Flutter logo.
-
-### Icon
-
-This renders a Material Design icon.
-
-### Image
-
-This renders an image.
-
-### Placeholder
-
-This renders a rectangle that represents where
-other widgets will be added in the future.
-
-### RichText
-
-This renders runs of text that each used different styles.
-It uses `TextSpan` objects.
-
-### Text
-
-This renders a run of text with a single style.
-
-## Material Widgets
-
-These widgets use Material Design styling.
-They are documented at {% aTargetBlank
-"https://docs.flutter.dev/development/ui/widgets/material",
-"Cupertino (iOS-style) widgets" %}.
-
-## Cupertino Widgets
-
-These widgets use iOS styling rather than Material Design.
-They are documented at {% aTargetBlank
-"https://docs.flutter.dev/development/ui/widgets/cupertino",
-"Cupertino (iOS-style) widgets" %}.
-
-### CupertinoActionSheet
-
-This renders a modal that slides up from the bottom
-to allow selection from a set of options.
-It is sometimes used for confirmation dialogs.
-
-### CupertinoActivityIndicator
-
-This renders an iOS-style spinner.
-
-### CupertinoAlertDialog
-
-This renders an iOS-style alert dialog with
-a title, message, and set of buttons.
-
-### CupertinoButton
-
-This renders an iOS-style button that can be tapped to execute associated code.
-
-### CupertinoContextMenu
-
-This renders an iOS-style modal containing a set of tappable options
-when a specific widget is long-pressed.
-
-### CupertinoDatePicker
-
-This renders an iOS-style wheel picker for entering a date and time.
-
-### CupertinoDialogAction
-
-This renders a button with no background color or border.
-It is typically usd in `CupertinoAlertDialog`.
-
-### CupertinoFullscreenDialogTransition
-
-This is an iOS-style transition that is used to render fullscreen dialogs.
-
-### CupertinoNavigationBar
-
-This renders an iOS-style top navigation bar.
-It is typically used with `CupertinoPageScaffold`.
-
-### CupertinoPageScaffold
-
-This renders a common iOS-style page layout.
-
-### CupertinoPageTransition
-
-This provides an iOS-style page transition animation.
-
-### CupertinoPicker
-
-This renders an iOS-style wheel picker.
-
-### CupertinoPopupSurface
-
-This renders a rounded rectangle for an alert dialog or action sheet.
-
-### CupertinoScrollbar
-
-This renders an iOS-style scrollbar.
-
-### CupertinoSearchTextField
-
-This renders an iOS-style search input.
-
-### CupertinoSegmentedControl
-
-This renders an iOS-style segmented control
-which is a horizontal list of mutually-exclusive buttons.
-
-### CupertinoSlider
-
-This renders a slider for selecting a value from a range.
-
-### CupertinoSlidingSegmentedControl
-
-This renders an iOS-style segmented control
-which is a horizontal list of buttons.
-
-### CupertinoSliverNavigationBar
-
-This renders an iOS-style navigation bar with a large title.
-
-### CupertinoSwitch
-
-This renders an iOS-style switch (like the SwiftUI `Toggle` view)
-
-### CupertinoTabBar
-
-This is an iOS-style bottom tab bar
-that is typically used with `CupertinoTabScaffold`.
-
-### CupertinoTabScaffold
-
-This positions a tab bar below the display of select tab content.
-
-### CupertinoTabView
-
-This supports "parallel navigation"? between tabs
-and is typically used with `CupertinoTabScaffold`.
-
-### CupertinoTextField
-
-This renders an iOS-style input text field.
-
-### CupertinoTimerPicker
-
-This renders an iOS-style wheel picker
-for entering hours, minutes, and seconds.
-
-## Layout Widgets
-
-The layout widgets are documented at {% aTargetBlank
-"https://docs.flutter.dev/development/ui/widgets/layout",
-"Cupertino (iOS-style) widgets" %}.
-
-### Single-Child Layout Widgets
-
-#### Align
-
-#### AspectRatio
-
-#### Baseline
-
-#### Center
-
-#### ConstrainedBox
-
-#### Container
-
-This applies positioning and sizing to other widgets.
-
-#### CustomSingleChildLayout
-
-#### Expanded
-
-#### FittedBox
-
-#### FractionallySizedBox
-
-#### IntrinsicHeight
-
-#### IntrinsicWidth
-
-#### LimitedBox
-
-#### Offstage
-
-#### OverflowBox
-
-#### Padding
-
-#### SizedBox
-
-#### SizedOverflowBox
-
-#### Transform
-
-### Multiple-Child Layout Widgets
-
-#### Column
-
-This renders a vertical list of child widgets.
-It is similar to a SwiftUI `VStack`.
-The "main" axis is vertical and the "cross" axis is horizontal.
-
-This constructor for widget takes the following named parameters,
-all of which are optional.
-
-| Parameter            | Type                      |
-| -------------------- | ------------------------- |
-| `children`           | `List<Widget>`            |
-| `crossAxisAlignment` | `CrossAxisAlignment` enum |
-| `mainAxisAlignment`  | `MainAxisAlignment` enum  |
-| `mainAxisSize`       | `MainAxisSize` enum       |
-| `textBaseline?`      | `TextBaseline` enum       |
-| `textDirection?`     | `TextDirection` enum      |
-| `verticalDirection`  | `VerticalDirection` enum  |
-
-Typically only `children`, `crossAxisAlignment`,
-`mainAxisAlignment`, and `mainAxisSize` are specified.
-
-Values of the `CrossAxisAlignment` enum include
-`start`, `center` (default), `end`,
-`stretch`, and `baseline` (aligns text baselines).
-
-Values of the `MainAxisAlignment` enum include
-`start` (default), `center`, `end`,
-`spaceAround`, `spaceBetween`, and `spaceEvenly`.
-
-Values of the `MainSize` enum include
-`max` (uses all available space; default) and
-`min` (uses on what is needed to fit children).
-
-Values of the `TextBaseline` enum include `alphabetic` and `ideographic`.
-
-Values of the `TextDirection` enum include
-`ltr` (left to right) and `rtl` (right to left).
-
-Values of the `VerticalDirection` enum include `down` (default) and `up`.
-
-There is no parameter that controls the space between the children.
-One way to add space between them is to insert `SizedBox` widgets.
-To make this easier, consider adding an extension to the `List<Widget>` type
-as follows in a file named `widget_extension.dart`.
-
-```dart
-import 'package:flutter/material.dart';
-
-extension WidgetExtension<Widget> on List<Widget> {
-  /// Adds a SizedBox between all Widgets in the List.
-  List<Widget> spacing(double size) {
-    for (int i = length - 1; i > 0; i--) {
-      insert(i, SizedBox(width: size, height: size) as Widget);
-    }
-    return this;
-  }
-}
-```
-
-To use this, call the `spacing` method on the value passed
-in the `children` argument. For example, `[...].spacing(20)`.
-The same approach can be used with the
-`children` parameter of the `Row` widget.
-Thanks to Pat Niemeyer for this suggestion!
-
-#### CustomMultiChildLayout
-
-#### Flow
-
-#### GridView
-
-#### IndexedStack
-
-#### LayoutBuilder
-
-#### ListBody
-
-#### ListView
-
-This displays a scrollable list of widgets.
-The list is vertical by default, but can be changed to horizontal.
-Here's an example of creating a scrollable list of colors.
-
-```dart
-class ColorList extends StatelessWidget {
-  const ColorList({Key? key}) : super(key: key);
-
-  final List<String> names = const [
-    'red',
-    'orange',
-    'yellow',
-    'green',
-    'blue',
-    'purple',
-    'white',
-    'gray',
-    'black',
-    'brown'
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      padding: EdgeInsets.all(10),
-      child: SizedBox(
-        height: 100,
-        child: ListView.builder(
-          itemCount: names.length,
-          // This function is called once for each index value in itemCount
-          // to programmatically create a child widgets.
-          itemBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              height: 20,
-              child: Text(names[index]),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-```
-
-#### Row
-
-This renders a horizontal list of child widgets.
-It is similar to a SwiftUI `HStack`.
-The "main" axis is horizontal and the "cross" axis is vertical.
-
-This constructor for widget takes the
-same named parameters as the `Column` widget.
-
-#### Stack
-
-This renders widgets on top of each other.
-It is similar to a SwiftUI `ZStack`.
-
-#### Table
-
-#### Wrap
-
-This renders widgets in rows or columns.
-It is similar to the `Row` and `Column` widgets,
-but differs in that it wraps children to multiple rows or columns
-when they do not all fit in a single row or column.
-
-This constructor for widget takes the following named parameters,
-all of which are optional.
-
-| Parameter            | Type                      |
-| -------------------- | ------------------------- |
-| `alignment`          | `WrapAlignment` enum      |
-| `children`           | `List<Widget>`            |
-| `clipBehavior`       | `Clip` enum               |
-| `crossAxisAlignment` | `WrapCrossAlignment` enum |
-| `direction`          | `Axis`                    |
-| `runAlignment`       | `WrapAlignment` enum      |
-| `runSpacing`         | `double`; defaults to 0.0 |
-| `spacing`            | `double`; defaults to 0.0 |
-| `textDirection`      | `TextDirection`           |
-| `verticalDirection`  | `VerticalDirection` enum  |
-
-The `children` are divided into "runs" that fit in a single row or column.
-The `runAlignment` and `runSpacing` parameters apply to entire runs.
-The `alignment` and `spacing` parameters apply to the children of each "run".
-
-Values of the `Axis` enum include `horizontal` (default) and `vertical`.
-
-Values of the `Clip` enum include
-`antiAlias`, `antiAliasWithSaveLayer`, `hardEdge`, and `none` (default).
-
-Values of the `TextDirection` and `VerticalDirection` enums were
-described with the `Column` widget above.
-
-Values of the `WrapAlignment` enum include
-`start` (default), `center`, `end`,
-`spaceAround`, `spaceBetween`, and `spaceEvenly`.
-
-Values of the `WrapCrossAlignment` enum include
-
-### Sliver Widgets
-
-Are these iOS-style layout widgets?
-
-### Icons
-
-Icons are provided by the CupertinoIcons package
-which is documented at {% aTargetBlank
-"https://pub.dev/packages/cupertino_icons", "cupertino_icons" %}.
-
-## Persisting State
-
-There are many approaches to persisting app data
-so it is not lost when an app is closed.
-
-- built-in `SharedPreference` class
-- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} library
-- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
-  (similar to the Context API in React)
-- {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
-  "cubit" %} library
-- {% aTargetBlank "https://docs.flutter.dev/cookbook/persistence/sqlite",
-  "SQLite" %} database on the device
 
 ## Tests
 
