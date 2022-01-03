@@ -1413,13 +1413,14 @@ Map<String, dynamic> dog = {'name': 'Comet', 'age': 1, 'isFast': true};
 var myMap = {}; // same as Map()
 ```
 
-Values of `Map` keys can be retrieved with the `[]` operator.
+Values of `Map` keys are retrieved with the `[]` operator.
 This returns a nullable value.
+They cannot be retrieved with dot syntax like in JavaScript.
 For example:
 
 ```dart
 var colorMap = {'red': 1, 'green': 2, 'blue': 3};
-int? number = colorMap['blue'];
+int? number = colorMap['blue']; // not colorMap.blue
 print(number ?? 'not found'); // 3
 if (number != null) {
   print(number); // 3
