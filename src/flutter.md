@@ -913,6 +913,15 @@ and others accept multiple `children`.
 | `SizedOverflowBox`        |                                                                                                                               |
 | `Transform`               | transforms its child by translating, rotating, and scaling it                                                                 |
 
+One use of the `Expanded` widget is to push the widgets
+that follow it inside a `Row` or `Column` to the end.
+The `Expanded` class extends from the `Flexible` class.
+
+The `Flexible` widget behaves nearly identically to the `Expanded` widget.
+But a `Flexible` widget will take on
+the size of its child if the child has a fixed size.
+Otherwise it will choose its size just like `Expanded`.
+
 The following code translates a given widget:
 
 ```dart
