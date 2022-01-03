@@ -761,8 +761,7 @@ class _CounterState extends State<Counter> {
 }
 ```
 
-A widget `build` method can return only `Container()`
-in order to render nothing.
+A widget `build` method can return an empty `Container()` to render nothing.
 
 ### Material Structure Widgets
 
@@ -893,7 +892,49 @@ and others accept multiple `children`.
 | `Padding`                 | "insets its child by the given padding"                                                                                       |
 | `SizedBox`                | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
 | `SizedOverflowBox`        |                                                                                                                               |
-| `Transform`               |                                                                                                                               |
+| `Transform`               | transforms its child by translating, rotating, and scaling it                                                                 |
+
+The following code translates a given widget:
+
+```dart
+var dx = 100.0; // x values increase going right
+var dy = 20.0; // y values increases going down
+return Transform.translate(child: button, offset: Offset(dx, dy));
+```
+
+The following code rotates a given widget by 45 degrees counterclockwise:
+
+```dart
+Transform.rotate(angle: -pi / 4.0, child: someWidget);
+```
+
+The following code uses a transformation matrix
+to translate, rotate, and scale a given widget:
+
+```dart
+Widget transform({
+  required Widget child,
+  double angle = 0.0, // in radians
+  double dx = 0.0,
+  double dy = 0.0,
+  double scale = 1.0,
+}) {
+  var translationVector = vm.Vector3(dx, dy, 0);
+  var axis = vm.Vector3(0, 0, 1); // z axis
+  var rotation = vm.Quaternion.axisAngle(axis, angle);
+  // Use scale for both x and y, but no change in z.
+  var scaleVector = vm.Vector3(scale, scale, 1);
+  var matrix = Matrix4.compose(translationVector, rotation, scaleVector);
+  return Transform(transform: matrix, child: child);
+}
+
+// In some widget list ...
+transform(child: someWidget, dx: 100.0, dy: 20.0, angle: -pi / 4, scale: 0.7);
+```
+
+The `Container` widget can add many kinds of "decorations" including
+colors, gradients, borders, shadows, images,
+and shapes (only rectangles and circles).
 
 #### Multi-child Layout Widgets
 
