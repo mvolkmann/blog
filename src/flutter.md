@@ -571,10 +571,6 @@ Some Material widgets are platform-ware meaning that
 they are styled different on iOS versus Android.
 However, some have Material look and feel on all devices, including iOS.
 
-Cupertino widgets can also be used on all platforms.
-However, due to licensing restrictions it won't
-use the correct fonts on Android.
-
 Material widgets are documented at {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/material",
 "Material Component widgets" %}.
@@ -584,6 +580,21 @@ To use Material widgets in a Dart source file, add the following import:
 ```dart
 import 'package:flutter/material.dart';
 ```
+
+Cupertino widgets can also be used on all platforms.
+However, due to licensing restrictions it won't
+use the correct fonts on Android.
+
+To use Cupertino widgets in a Dart source file, add the following import:
+
+```dart
+import 'package:flutter/cupertino.dart';
+```
+
+All widgets have a `build` method that is passed a `BuildContext` object.
+This can be used to traverse up and down the widget tree.
+One use is for finding ancestor styles
+so they can be applied to the current widget.
 
 ### Child Widgets
 
@@ -1147,6 +1158,25 @@ Values of the `WrapCrossAlignment` enum include
 | `Text`              | renders a run of text with a single style                                           |
 | `Tooltip`           |                                                                                     |
 | `VerticalDivider`   | vertical, thin line                                                                 |
+
+The primary widgets for rendering text are `Text` and `RichText`.
+Both automatically wrap their text if needed by default,
+but this can be changed by setting their `overflow` argument to
+a value from the `TextOverflow` enum.
+These include `clip`, `ellipsis`, `fade`, and `visible`.
+
+`Text` renders text with a single style
+including color, font, font size, and weight.
+It takes a `style` argument whose value can be a `TextStyle` object
+or a property from the object obtain from `Theme.of(context).textTheme`
+(ex. `headline6`).
+
+`RichText` renders runs of text that can each have a different style.
+It takes a `text` argument whose value is a `TextSpan` widget
+with a `children` argument that is typically a `List` of `TextSpan` widgets.
+The top `TextSpan` widget can specify the
+default `style` for the child `TextSpan` widgets.
+The child `TextSpan` widgets can override that style.
 
 ### Material Dialog Widgets
 
@@ -2213,6 +2243,16 @@ Text('Hello, World!',
 )
 ```
 
+Another way to get fonts is use the "google_fonts" package.
+This provides over 1000 fonts.
+Add this as a dependency in `pubspec.yaml`.
+Instead of downloading each of the fonts, they are
+fetched via HTTP at runtime and cached in the app's file system.
+For instructions on using this, see {% aTargetBlank
+"https://pub.dev/documentation/google_fonts/latest/",
+"google_fonts documentation" %}.
+TODO: I could not get this to work!
+
 ## Styling
 
 One way to add styling to a widget is to wrap it in a `Container` widget.
@@ -2279,18 +2319,20 @@ Image.network(
 
 To render an image from a local file,
 
-- Create an `images` directory.
-- Copy an image to that directory (ex. `comet.jpg`).
+- Create an `assets` directory at the top of the project directory.
+  This can have subdirectories for different kinds of assets
+  such as audio, fonts, icons, images, and video.
+- Create an `images` directory inside the `assets` directory.
+- Copy image files into the `assets/images` directory.
 - Edit `pubspec.yaml` and add the following:
 
   ```yaml
   assets:
-    - images/comet.jpg
+    - assets/
   ```
 
-- TODO: Use what to render it?
-
-To render an image from an `AssetBundle` ...
+- Create an `Image` widget to render the image.
+  For example, `Image.asset('assets/images/comet.jpg')`
 
 ## Tests
 
