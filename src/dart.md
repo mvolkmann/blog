@@ -60,8 +60,9 @@ Recommended VS Code extensions for Dart include:
 
   "Provides tools for effectively editing, refactoring, running,
   and reloading Flutter mobile apps."
-  For example, place the cursor over an undefined name
-  and select "Import library ..." from the Command Palette.
+  For example, place the cursor over an undefined name,
+  click the lightbulb icon or open the Command Palette,
+  and select "Import library ...".
 
 - {% aTargetBlank
   "https://marketplace.visualstudio.com/items?itemName=BendixMa.dart-data-class-generator",

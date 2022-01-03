@@ -440,16 +440,16 @@ that uses Material Design.
 import 'package:flutter/material.dart';
 
 // This defines the starting point of all Dart apps.
-void main() {
-  // When creating instances of immutable classes,
-  // constructor calls should be preceded by "const".
-  // This enables sharing references to instances create with
-  // the same arguments which optimizes memory.
-  // These instances are created at compile-time.
-  // All fields of immutable classes must be
-  // declared with the "final" keyword.
-  runApp(const MyApp());
-}
+// The object passed to the runApp function must be an instance
+// of a class that extends StatelessWidget or StatefulWidget.
+// When creating instances of immutable classes,
+// constructor calls should be preceded by "const".
+// This enables sharing references to instances create with
+// the same arguments which optimizes memory.
+// These instances are created at compile-time.
+// All fields of immutable classes must be
+// declared with the "final" keyword.
+void main() => runApp(const MyApp());
 
 // This class is also used by tests.
 // See the supplied test/widget_test.dart file.
@@ -502,9 +502,7 @@ that uses Cupertino theming.
 ```dart
 import 'package:flutter/cupertino.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -1318,9 +1316,7 @@ import 'bottom_navigation.dart';
 import 'home_page.dart';
 import 'settings_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   static const options = <NavOption>[
@@ -1495,9 +1491,7 @@ import 'drawer_scaffold.dart';
 import 'home_page.dart';
 import 'settings_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   static final drawerItems = <DrawerItem>[
@@ -1595,9 +1589,7 @@ to display a non-modal and modal bottom sheet:
 import 'package:flutter/material.dart';
 import 'bottom_sheet.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
