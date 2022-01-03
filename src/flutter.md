@@ -288,17 +288,6 @@ To run a Flutter app on an iPhone wirelessly:
 - Disconnect the iPhone from the computer.
 - Run the Flutter app using one of the options above.
 
-## Material vs. Cupertino
-
-Material Design can be used on any platform, not just Android.
-When a Flutter app uses this, it will have Material look and feel
-on all devices, including iOS.
-
-Use the Cupertino library to have an iOS look and feel.
-This also works on all platforms.
-However, due to licensing restrictions it won't
-have the correct fonts on Android.
-
 ## VS Code
 
 Install the Flutter extension.
@@ -330,6 +319,33 @@ This provides many things including:
   ```json
     "dart.closingLabels": false,
   ```
+
+- Flutter-specific context menus
+
+  Place the cursor on a widget and press cmd-period or click the lightbulb icon
+  to open a context menu with the following options:
+
+  - Move widget down
+  - Move widget up
+  - Wrap with Builder
+  - Wrap with Center
+  - Wrap with Column
+  - Wrap with Container
+  - Wrap with Padding
+  - Wrap with Row
+  - Wrap with SizedBox
+  - Wrap with StreamBuilder
+  - Wrap with widget... (prompts for name)
+  - Extract Method
+  - Extract Local Variable
+  - Extract Widget
+
+  Select multiple widgets and press cmd-period or click the lightbulb icon
+  to open a context menu with the following options:
+
+  - Wrap with Column
+  - Wrap with Row
+  - Extract Local Variable
 
 - Flutter-specific entries in the status bar that include:
 
@@ -550,7 +566,16 @@ one for Material Design and
 one for iOS theming (referred to as "Cupertino").
 The Cupertino widgets are described later.
 
-Material Design themed widgets are documented at {% aTargetBlank
+Material widgets can be used on any platform, not just Android.
+Some Material widgets are platform-ware meaning that
+they are styled different on iOS versus Android.
+However, some have Material look and feel on all devices, including iOS.
+
+Cupertino widgets can also be used on all platforms.
+However, due to licensing restrictions it won't
+use the correct fonts on Android.
+
+Material widgets are documented at {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/material",
 "Material Component widgets" %}.
 
@@ -567,15 +592,16 @@ a parameter named `child` with the type `Widget` for one
 or `children` with a type of `List<Widget>` for multiple.
 TODO: Why isn't the type of `children` `Iterable<Widget>`?
 
-Widgets with a `children` parameter that layout those widgets
-in a specific way can be referred to as "multi-child layout widgets".
-Commonly used layout widgets include
-`Center`, `Column`, `Container`, `Expanded`, `Flow`, `GridView`,
-`ListView`, `Padding`, `Row`, `SizedBox`, `Stack`, `Table`, and `Wrap`.
+Some widgets take a single widget in a `child` parameter and apply styling.
+The Flutter docs refer to these as "single-child layout widgets".
+Examples include `Center`, `Container`, `Expanded`,
+`Flexible`, `Padding`, and `SizedBox`.
 
-Some widgets take a single widget as a parameter and apply styling.
-Examples include `Container`, `MediaQuery`, `Padding`, `Theme`.
-These can be referred to as "single-child layout widgets".
+Other widgets take multiple widgets in a `children` parameter
+and lay them out in a specific way.
+The Flutter docs refer to these as "multi-child layout widgets".
+Examples include `Column`, `GridView`, `ListView`,
+`Row`, `Stack`, `Table`, and `Wrap`.
 
 ### Material Stateless vs. Stateful Widgets
 
@@ -758,7 +784,7 @@ It is common for Flutter apps to have the following top-level structure:
 | ------------------- | --------------------------------------------------------------------------------- |
 | `AppBar`            | appears at top of app; contains other widgets such as `TabBar`                    |
 | `BottomAppBar`      | appears at bottom of app; contains buttons used to switch between top-level views |
-| `Drawer`            | panel that slides in from left and contains navigation links                      |
+| `Drawer`            | panel that slides in from left (by default) and can contain navigation links      |
 | `MaterialApp`       | top of app; wraps many other widgets                                              |
 | `NavigationBar`     |                                                                                   |
 | `NavigationToolbar` |                                                                                   |
@@ -800,6 +826,9 @@ The `Scaffold` constructor takes the following named parameters and more:
 | `bottomNavigationBar`  | `Widget` to display at the bottom; typically an instance of `BottomNavigationBar`                                    |
 | `drawer`               | `Widget` to slide in (usually from left) when hamburger icon is tapped; typically a `SizedBox` containing a `Drawer` |
 | `floatingActionButton` | `Widget` (usually a `FloatingActionButton` to display over other content in lower-right                              |
+
+When the `drawer` argument is provided, a hamburger menu icon is provided
+on the left side of the `AppBar`.
 
 #### AppBar Widget
 
@@ -846,9 +875,9 @@ and others accept multiple `children`.
 | Widget                    | Description                                                                                                                   |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `Align`                   |                                                                                                                               |
-| `AspectRatio`             |                                                                                                                               |
+| `AspectRatio`             | sizes its child to a specific aspect ratio                                                                                    |
 | `Baseline`                |                                                                                                                               |
-| `Center`                  | centers its child in the available space                                                                                      |
+| `Center`                  | centers its child horizontally and vertically in the available space                                                          |
 | `ConstrainedBox`          |                                                                                                                               |
 | `Container`               | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
 | `CustomSingleChildLayout` |                                                                                                                               |
