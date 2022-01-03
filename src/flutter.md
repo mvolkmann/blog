@@ -510,8 +510,6 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // The Scaffold widget provides a basic UI structure
     // that is common to many mobile apps.
-    // To avoid drawing in unsafe ares like notches,
-    // wrap the Scaffold widget in a `SafeArea` widget.
     return Scaffold(
       // The AppBar constructor accepts many more arguments
       // that are described later.
@@ -523,6 +521,11 @@ class MyPage extends StatelessWidget {
   }
 }
 ```
+
+To avoid drawing in unsafe areas such as those that contain notches,
+wrap the `Scaffold` widget in a `SafeArea` widget.
+However, this looks worse because the areas to the
+left and right of the notch will just be black and empty.
 
 Here is an example of the structure of a basic Flutter app
 that uses Cupertino theming.
