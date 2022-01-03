@@ -313,6 +313,7 @@ This provides many things including:
 
   The code added by these requires importing a library that defines
   the `StatelessWidget` and `StatefulWidget` classes.
+  These classes are described later.
   For example:
 
   ```dart
@@ -558,7 +559,8 @@ Every widget is either stateless or stateful.
 Stateless widgets are defined by a class that
 extends `StatelessWidget`, defines a constructor,
 and overrides the `build` method.
-All properties in a `StatelessWidget` must be declared `final`.
+All properties in a `StatelessWidget` must be declared `final`
+which makes them immutable.
 Stateless widgets render one time based parameters passed to them.
 
 Stateful widgets are defined by a pair of classes.
