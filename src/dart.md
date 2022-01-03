@@ -68,6 +68,19 @@ Recommended VS Code extensions for Dart include:
   "Create dart data classes easily, fast and
   without writing boilerplate or running code generation."
 
+  To generate a constructor for a class definition
+  that has `final` properties and no constructor,
+  place the cursor over one of the properties, press cmd-period,
+  and select "Create constructor for final fields" from the context menu.
+
+  To generate many methods for a class definition
+  that has `final` properties and no constructor,
+  open the Command Palette and select
+  "Dart Data Class Generator: Generate from class properties".
+  This generates a constructor that takes named parameters,
+  and the following methods: `copyWith`, `fromJson`, `fromMap`,
+  `hashCode`, `toMap`, `toString`, and `operator ==`.
+
 - {% aTargetBlank
   "https://marketplace.visualstudio.com/items?itemName=jeroen-meijer.pubspec-assist",
   "Pubspec Assist" %}
