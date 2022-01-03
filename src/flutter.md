@@ -540,27 +540,44 @@ class MyPage extends StatelessWidget {
 }
 ```
 
-## Widget Types
+## Widgets
 
 All the predefined widgets are documented in the {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets", "Widget Catalog" %}.
 
+Flutter provides two sets of themed widgets,
+one for Material Design and
+one for iOS theming (referred to as "Cupertino").
+The Cupertino widgets are described later.
+
+Material Design themed widgets are documented at {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/material",
+"Material Component widgets" %}.
+
+To use Material widgets in a Dart source file, add the following import:
+
+```dart
+import 'package:flutter/material.dart';
+```
+
+### Child Widgets
+
 Widgets that accept other widgets as arguments typically have
 a parameter named `child` with the type `Widget` for one
 or `children` with a type of `List<Widget>` for multiple.
-TODO: Which isn't the type of `children` `Iterable<Widget>`?
+TODO: Why isn't the type of `children` `Iterable<Widget>`?
 
 Widgets with a `children` parameter that layout those widgets
-in a specific way can be referred to as "layout widgets".
+in a specific way can be referred to as "multi-child layout widgets".
 Commonly used layout widgets include
 `Center`, `Column`, `Container`, `Expanded`, `Flow`, `GridView`,
 `ListView`, `Padding`, `Row`, `SizedBox`, `Stack`, `Table`, and `Wrap`.
 
 Some widgets take a single widget as a parameter and apply styling.
 Examples include `Container`, `MediaQuery`, `Padding`, `Theme`.
-These can be referred to as "styling widgets".
+These can be referred to as "single-child layout widgets".
 
-### Stateless vs. Stateful Widgets
+### Material Stateless vs. Stateful Widgets
 
 Every widget is either stateless or stateful.
 
@@ -619,9 +636,7 @@ class SomeName extends StatefulWidget {
 class _SomeName State extends State<SomeName > {
   @override
   Widget build(BuildContext context) {
-    return Container(
-
-    );
+    return {some-widget};
   }
 }
 ```
@@ -723,7 +738,7 @@ class _CounterState extends State<Counter> {
 A widget `build` method can return only `Container()`
 in order to render nothing.
 
-### Structure Widgets
+### Material Structure Widgets
 
 It is common for Flutter apps to have the following top-level structure:
 
@@ -817,304 +832,58 @@ The `AppBar` constructor takes the following named parameters and more:
 See the sample app in the GitHub repo {% aTargetBlank
 "https://github.com/mvolkmann/flutter_appbar", "flutter_appbar" %}.
 
-### Layout Widgets
-
-| Widget      | Description                                                                                                                   |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `Center`    | centers its child in the available space                                                                                      |
-| `Column`    | arranges widgets vertically (like `HStack` in SwiftUI)                                                                        |
-| `Container` | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
-| `Expanded`  | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
-| `Flexible`  | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
-| `Flow`      | advanced; "optimized for repositioning children using transformation matrices"                                                |
-| `GridView`  | "scrollable, 2D array of widgets"                                                                                             |
-| `ListView`  | arranges widgets vertically like `Column`, but scrolls when needed                                                            |
-| `Padding`   | "insets its child by the given padding"                                                                                       |
-| `Row`       | arranges widgets horizontally (like `HStack` in SwiftUI)                                                                      |
-| `SizedBox`  | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
-| `Stack`     | stacks widgets vertically (like `ZStack` in SwiftUI)                                                                          |
-| `Table`     | "uses the table layout algorithm for its children"                                                                            |
-| `Wrap`      | arranges widgets horizontally or vertically and wraps to a new row or column as needed                                        |
-
-### Display Widgets
-
-| Widget              | Description           |
-| ------------------- | --------------------- |
-| `Banner`            |                       |
-| `Canvas`            |                       |
-| `CircleAvatar`      |                       |
-| `Divider`           | horizontal, thin line |
-| `ErrorWidget`       |                       |
-| `ExpandIcon`        |                       |
-| `FileImage`         |                       |
-| `Icon`              |                       |
-| `Image`             |                       |
-| `ImageIcon`         |                       |
-| `NetworkImage`      |                       |
-| `Placeholder`       |                       |
-| `ProgressIndicator` |                       |
-| `RichText`          |                       |
-| `Snackbar`          |                       |
-| `Text`              |                       |
-| `Tooltip`           |                       |
-| `VerticalDivider`   | vertical, thin line   |
-
-### DefaultTextStyle
-
-This is the style applied to text that doesn't have an explicit style.
-
-### ElevatedButton
-
-This is a Material Design button that elevates when pressed.
-Should it be the opposite?
-
-### FlutterLogo
-
-This renders the Flutter logo.
-
-### Icon
-
-This renders a Material Design icon.
-
-### Image
-
-This renders an image.
-
-### Placeholder
-
-This renders a rectangle that represents where
-other widgets will be added in the future.
-
-### RichText
-
-This renders runs of text that each used different styles.
-It uses `TextSpan` objects.
-
-### Text
-
-This renders a run of text with a single style.
-
-### Dialog Widgets
-
-| Widget                  | Description |
-| ----------------------- | ----------- |
-| `AboutDialog`           |             |
-| `AlertDialog`           |             |
-| `DatePickerDialog`      |             |
-| `DateRangePickerDialog` |             |
-| `Dialog`                |             |
-| `SimpleDialog`          |             |
-| `TimePickerDialog`      |             |
-
-### Input Widgets
-
-| Widget                 | Description                                                                                                                        |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `Autocomplete`         | text input for selecting from a list of options where only options that match the entered text are displayed                       |
-| `BackButton`           | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
-| `CloseButton`          | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
-| `CalendarDatePicker`   | inline calendar date picker                                                                                                        |
-| `Checkbox`             | checkbox for toggling a `bool` value                                                                                               |
-| `DropdownButton`       | dropdown menu with `DropdownMenuItem` children similar to the HTML `select` element with `option` children                         |
-| `EditableText`         | from the `TextField` docs, "EditableText ... is the raw text editing control at the heart of a TextField ... rarely used directly" |
-| `ElevatedButton`       | button containing any widget with a background color that appears raised above background                                          |
-| `FloatingActionButton` | circular (typically) button "that hovers over other content to promote a primary action"                                           |
-| `Form`                 | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
-| `IconButton`           | button containing an `Icon`                                                                                                        |
-| `OutlinedButton`       | a `TextButton` with an outlined border                                                                                             |
-| `PopupMenuButton`      | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
-| `Radio`                | radio button for selecting between mutually exclusive options                                                                      |
-| `RangeSlider`          | slider for selecting the minimum and maximum values from a range of `double` values                                                |
-| `ReorderableList`      | scrollable container where child widgets can be dragged to reorder them                                                            |
-| `Slider`               | slider for selecting a double value from a given range of `double` values                                                          |
-| `Stepper`              | "displays progress through a sequence of steps" like in a wizard UI; not frequently used                                           |
-| `Switch`               | toggle switch for selecting a `bool` value                                                                                         |
-| `TextButton`           | button containing any widget, not just `Text`, with no visible border                                                              |
-| `TextField`            | basic text input                                                                                                                   |
-| `TextFormField`        | like `TextField`, but supports validation                                                                                          |
-| `ToggleButtons`        | set of toggle buttons, typically used to choose between exclusive options                                                          |
-| `YearPicker`           | scrollable list of years to pick from (I can't get this to work!)                                                                  |
-
-Basic usage of all of these widgets is demonstrated in the Flutter project at
-{% aTargetBlank "https://github.com/mvolkmann/flutter_input",
-"flutter_input" %}.
-
-## Material Widgets
-
-These widgets use Material Design styling.
-They are documented at {% aTargetBlank
-"https://docs.flutter.dev/development/ui/widgets/material",
-"Cupertino (iOS-style) widgets" %}.
-
-## Cupertino Widgets
-
-These widgets use iOS styling rather than Material Design.
-They are documented at {% aTargetBlank
-"https://docs.flutter.dev/development/ui/widgets/cupertino",
-"Cupertino (iOS-style) widgets" %}.
-
-### CupertinoActionSheet
-
-This renders a modal that slides up from the bottom
-to allow selection from a set of options.
-It is sometimes used for confirmation dialogs.
-
-### CupertinoActivityIndicator
-
-This renders an iOS-style spinner.
-
-### CupertinoAlertDialog
-
-This renders an iOS-style alert dialog with
-a title, message, and set of buttons.
-
-### CupertinoButton
-
-This renders an iOS-style button that can be tapped to execute associated code.
-
-### CupertinoContextMenu
-
-This renders an iOS-style modal containing a set of tappable options
-when a specific widget is long-pressed.
-
-### CupertinoDatePicker
-
-This renders an iOS-style wheel picker for entering a date and time.
-
-### CupertinoDialogAction
-
-This renders a button with no background color or border.
-It is typically usd in `CupertinoAlertDialog`.
-
-### CupertinoFullscreenDialogTransition
-
-This is an iOS-style transition that is used to render fullscreen dialogs.
-
-### CupertinoNavigationBar
-
-This renders an iOS-style top navigation bar.
-It is typically used with `CupertinoPageScaffold`.
-
-### CupertinoPageScaffold
-
-This renders a common iOS-style page layout.
-
-### CupertinoPageTransition
-
-This provides an iOS-style page transition animation.
-
-### CupertinoPicker
-
-This renders an iOS-style wheel picker.
-
-### CupertinoPopupSurface
-
-This renders a rounded rectangle for an alert dialog or action sheet.
-
-### CupertinoScrollbar
-
-This renders an iOS-style scrollbar.
-
-### CupertinoSearchTextField
-
-This renders an iOS-style search input.
-
-### CupertinoSegmentedControl
-
-This renders an iOS-style segmented control
-which is a horizontal list of mutually-exclusive buttons.
-
-### CupertinoSlider
-
-This renders a slider for selecting a value from a range.
-
-### CupertinoSlidingSegmentedControl
-
-This renders an iOS-style segmented control
-which is a horizontal list of buttons.
-
-### CupertinoSliverNavigationBar
-
-This renders an iOS-style navigation bar with a large title.
-
-### CupertinoSwitch
-
-This renders an iOS-style switch (like the SwiftUI `Toggle` view)
-
-### CupertinoTabBar
-
-This is an iOS-style bottom tab bar
-that is typically used with `CupertinoTabScaffold`.
-
-### CupertinoTabScaffold
-
-This positions a tab bar below the display of select tab content.
-
-### CupertinoTabView
-
-This supports "parallel navigation"? between tabs
-and is typically used with `CupertinoTabScaffold`.
-
-### CupertinoTextField
-
-This renders an iOS-style input text field.
-
-### CupertinoTimerPicker
-
-This renders an iOS-style wheel picker
-for entering hours, minutes, and seconds.
-
-## Layout Widgets
+### Material Layout Widgets
 
 The layout widgets are documented at {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/layout",
-"Cupertino (iOS-style) widgets" %}.
+"Layout widgets" %}.
 
-### Single-Child Layout Widgets
+Some layout widgets accept a single `child`
+and others accept multiple `children`.
 
-#### Align
+#### Single-child Layout Widgets
 
-#### AspectRatio
+| Widget                    | Description                                                                                                                   |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `Align`                   |                                                                                                                               |
+| `AspectRatio`             |                                                                                                                               |
+| `Baseline`                |                                                                                                                               |
+| `Center`                  | centers its child in the available space                                                                                      |
+| `ConstrainedBox`          |                                                                                                                               |
+| `Container`               | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
+| `CustomSingleChildLayout` |                                                                                                                               |
+| `Expanded`                | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
+| `FittedBox`               |                                                                                                                               |
+| `Flexible`                | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
+| `FractionallySizedBox`    |                                                                                                                               |
+| `IntrinsicHeight`         |                                                                                                                               |
+| `IntrinsicWidth`          |                                                                                                                               |
+| `LimitedBox`              |                                                                                                                               |
+| `Offstage`                |                                                                                                                               |
+| `OverflowBox`             |                                                                                                                               |
+| `Padding`                 | "insets its child by the given padding"                                                                                       |
+| `SizedBox`                | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
+| `SizedOverflowBox`        |                                                                                                                               |
+| `Transform`               |                                                                                                                               |
 
-#### Baseline
+#### Multi-child Layout Widgets
 
-#### Center
+| Widget                   | Description                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| `Column`                 | arranges widgets vertically (like `HStack` in SwiftUI)                                 |
+| `CustomMultiChildLayout` |                                                                                        |
+| `Flow`                   | advanced; "optimized for repositioning children using transformation matrices"         |
+| `GridView`               | "scrollable, 2D array of widgets"                                                      |
+| `IndexedStack`           |                                                                                        |
+| `LayoutBuilder`          |                                                                                        |
+| `ListBody`               |                                                                                        |
+| `ListView`               | arranges widgets vertically like `Column`, but scrolls when needed                     |
+| `Row`                    | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
+| `Stack`                  | stacks widgets on top of each other (like `ZStack` in SwiftUI)                         |
+| `Table`                  | "uses the table layout algorithm for its children"                                     |
+| `Wrap`                   | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
 
-#### ConstrainedBox
-
-#### Container
-
-This applies positioning and sizing to other widgets.
-
-#### CustomSingleChildLayout
-
-#### Expanded
-
-#### FittedBox
-
-#### FractionallySizedBox
-
-#### IntrinsicHeight
-
-#### IntrinsicWidth
-
-#### LimitedBox
-
-#### Offstage
-
-#### OverflowBox
-
-#### Padding
-
-#### SizedBox
-
-#### SizedOverflowBox
-
-#### Transform
-
-### Multiple-Child Layout Widgets
-
-#### Column
+##### Column
 
 This renders a vertical list of child widgets.
 It is similar to a SwiftUI `VStack`.
@@ -1180,19 +949,7 @@ The same approach can be used with the
 `children` parameter of the `Row` widget.
 Thanks to Pat Niemeyer for this suggestion!
 
-#### CustomMultiChildLayout
-
-#### Flow
-
-#### GridView
-
-#### IndexedStack
-
-#### LayoutBuilder
-
-#### ListBody
-
-#### ListView
+##### ListView
 
 This displays a scrollable list of widgets.
 The list is vertical by default, but can be changed to horizontal.
@@ -1240,7 +997,7 @@ class ColorList extends StatelessWidget {
 }
 ```
 
-#### Row
+##### Row
 
 This renders a horizontal list of child widgets.
 It is similar to a SwiftUI `HStack`.
@@ -1249,14 +1006,7 @@ The "main" axis is horizontal and the "cross" axis is vertical.
 This constructor for widget takes the
 same named parameters as the `Column` widget.
 
-#### Stack
-
-This renders widgets on top of each other.
-It is similar to a SwiftUI `ZStack`.
-
-#### Table
-
-#### Wrap
+##### Wrap
 
 This renders widgets in rows or columns.
 It is similar to the `Row` and `Column` widgets,
@@ -1297,15 +1047,122 @@ Values of the `WrapAlignment` enum include
 
 Values of the `WrapCrossAlignment` enum include
 
-### Sliver Widgets
+### Material Display Widgets
 
-Are these iOS-style layout widgets?
+| Widget              | Description                                                                         |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| `Banner`            |                                                                                     |
+| `Canvas`            |                                                                                     |
+| `CircleAvatar`      |                                                                                     |
+| `Divider`           | horizontal, thin line                                                               |
+| `ErrorWidget`       |                                                                                     |
+| `ExpandIcon`        |                                                                                     |
+| `FileImage`         |                                                                                     |
+| `FlutterLogo`       | renders the Flutter logo                                                            |
+| `Icon`              | renders an icon                                                                     |
+| `Image`             | renders an image                                                                    |
+| `ImageIcon`         |                                                                                     |
+| `NetworkImage`      |                                                                                     |
+| `Placeholder`       | renders a rectangle that represents where other widgets will be added in the future |
+| `ProgressIndicator` |                                                                                     |
+| `RichText`          | renders runs of text that each use different styles; uses `TextSpan` objects        |
+| `Snackbar`          |                                                                                     |
+| `Text`              | renders a run of text with a single style                                           |
+| `Tooltip`           |                                                                                     |
+| `VerticalDivider`   | vertical, thin line                                                                 |
 
-### Icons
+### Material Dialog Widgets
 
-Icons are provided by the CupertinoIcons package
-which is documented at {% aTargetBlank
-"https://pub.dev/packages/cupertino_icons", "cupertino_icons" %}.
+| Widget                  | Description |
+| ----------------------- | ----------- |
+| `AboutDialog`           |             |
+| `AlertDialog`           |             |
+| `DatePickerDialog`      |             |
+| `DateRangePickerDialog` |             |
+| `Dialog`                |             |
+| `SimpleDialog`          |             |
+| `TimePickerDialog`      |             |
+
+### Material Input Widgets
+
+| Widget                 | Description                                                                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `Autocomplete`         | text input for selecting from a list of options where only options that match the entered text are displayed                       |
+| `BackButton`           | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| `CloseButton`          | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| `CalendarDatePicker`   | inline calendar date picker                                                                                                        |
+| `Checkbox`             | checkbox for toggling a `bool` value                                                                                               |
+| `DropdownButton`       | dropdown menu with `DropdownMenuItem` children similar to the HTML `select` element with `option` children                         |
+| `EditableText`         | from the `TextField` docs, "EditableText ... is the raw text editing control at the heart of a TextField ... rarely used directly" |
+| `ElevatedButton`       | button containing any widget with a background color whose elevation increases when pressed                                        |
+| `FloatingActionButton` | circular (typically) button "that hovers over other content to promote a primary action"                                           |
+| `Form`                 | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
+| `IconButton`           | button containing an `Icon`                                                                                                        |
+| `OutlinedButton`       | a `TextButton` with an outlined border                                                                                             |
+| `PopupMenuButton`      | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
+| `Radio`                | radio button for selecting between mutually exclusive options                                                                      |
+| `RangeSlider`          | slider for selecting the minimum and maximum values from a range of `double` values                                                |
+| `ReorderableList`      | scrollable container where child widgets can be dragged to reorder them                                                            |
+| `Slider`               | slider for selecting a double value from a given range of `double` values                                                          |
+| `Stepper`              | "displays progress through a sequence of steps" like in a wizard UI; not frequently used                                           |
+| `Switch`               | toggle switch for selecting a `bool` value                                                                                         |
+| `TextButton`           | button containing any widget, not just `Text`, with no visible border                                                              |
+| `TextField`            | basic text input                                                                                                                   |
+| `TextFormField`        | like `TextField`, but supports validation                                                                                          |
+| `ToggleButtons`        | set of toggle buttons, typically used to choose between exclusive options                                                          |
+| `YearPicker`           | scrollable list of years to pick from (I can't get this to work!)                                                                  |
+
+Basic usage of all of these widgets is demonstrated in the Flutter project at
+{% aTargetBlank "https://github.com/mvolkmann/flutter_input",
+"flutter_input" %}.
+
+### Other Material Classes
+
+| Class              | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `DefaultTextStyle` | style applied to text that doesn't have an explicit style |
+| ``                 | `                                                         |
+
+### Cupertino Widgets
+
+These widgets use iOS styling rather than Material Design.
+They are documented at {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/cupertino",
+"Cupertino (iOS-style) widgets" %}.
+
+To use Cupertino widgets in a Dart source file, add the following import:
+
+```dart
+import 'package:flutter/cupertino.dart';
+```
+
+| Widget                                | Description                                                                                                        |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `CupertinoActionSheet`                | modal that slides up from bottom to allow selection from a set of options; sometimes used for confirmation dialogs |
+| `CupertinoActivityIndicator`          | iOS-style spinner                                                                                                  |
+| `CupertinoAlertDialog`                | iOS-style alert dialog with a title, message, and set of buttons                                                   |
+| `CupertinoButton`                     | iOS-style button that can be tapped to execute associated code                                                     |
+| `CupertinoContextMenu`                | iOS-style modal containing a set of tappable options rendered when a specific widget is long-pressed               |
+| `CupertinoDatePicker`                 | iOS-style wheel picker for entering a date and time                                                                |
+| `CupertinoDialogAction`               | button with no background color or border, typically used in `CupertinoAlertDialog`                                |
+| `CupertinoFullScreenDialogTransition` | iOS-style transition used to render fullscreen dialogs                                                             |
+| `CupertinoNavigationBar`              | iOS-style top navigation bar typically used with `CupertinoPageScaffold`                                           |
+| `CupertinoPageScaffold`               | common iOS-style page layout                                                                                       |
+| `CupertinoPageTransition`             | iOS-style page transition animation                                                                                |
+| `CupertinoPicker`                     | iOS-style wheel picker                                                                                             |
+| `CupertinoPopupSurface`               | rounded rectangle for an alert dialog or action sheet                                                              |
+| `CupertinoScrollbar`                  | iOS-style scrollbar                                                                                                |
+| `CupertinoSearchTextField`            | iOS-style search input                                                                                             |
+| `CupertinoSegmentedControl`           | iOS-style segmented control which is a horizontal list of mutually-exclusive buttons                               |
+| `CupertinoSlider`                     | iOS-style slider for selecting a value from a range                                                                |
+| `CupertinoSlidingSegmentedControl`    | iOS-style segmented control which is a horizontal list of buttons                                                  |
+| `CupertinoSliverNavigationBar`        | iOS-style navigation bar with a large title                                                                        |
+| `CupertinoSwitch`                     | iOS-style switch (like the SwiftUI `Toggle` view)                                                                  |
+| `CupertinoTabBar`                     | iOS-style bottom tab bar that is typically used with `CupertinoTabScaffold`                                        |
+| `CupertinoTabScaffold`                | positions a tab bar below the display of select tab content                                                        |
+| `CupertinoTabView`                    | supports "parallel navigation"? between tabs; typically used with `CupertinoTabScaffold`                           |
+| `CupertinoTextField`                  | iOS-style input text field                                                                                         |
+| `CupertinoTimerPicker`                | iOS-style wheel picker for entering hours, minutes, and seconds                                                    |
 
 ## Persisting State
 
@@ -2327,6 +2184,10 @@ Icon(Icons.audiotrack, color: Colors.red, size: 30)
 To see all the icons defined by the `Icons` class,
 see the documentation for the {% aTargetBlank
 "https://api.flutter.dev/flutter/material/Icons-class.html", "Icons class" %}.
+
+Cupertino icons are provided by the "Cupertino Icons" package
+which is documented at {% aTargetBlank
+"https://pub.dev/packages/cupertino_icons", "cupertino_icons" %}.
 
 ## Images
 
