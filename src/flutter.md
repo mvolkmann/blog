@@ -916,6 +916,8 @@ and others accept multiple `children`.
 One use of the `Expanded` widget is to push the widgets
 that follow it inside a `Row` or `Column` to the end.
 The `Expanded` class extends from the `Flexible` class.
+But take a `flex` argument that defaults to `1`
+and works similarly to the CSS `flex` property.
 
 The `Flexible` widget behaves nearly identically to the `Expanded` widget.
 But a `Flexible` widget will take on
