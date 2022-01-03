@@ -2334,6 +2334,15 @@ To render an image from a local file,
 - Create an `Image` widget to render the image.
   For example, `Image.asset('assets/images/comet.jpg')`
 
+To clip an image to an ellipse, use the `ClipOval` widget.
+Clearly the person that named this widget doesn't know geometry.
+The shape will be a circle if the image width and height are equal.
+For example:
+
+```dart
+ClipOval(child: Image.asset('assets/images/comet.jpg'))
+```
+
 ## Tests
 
 TODO: How can widget tests be implemented?
