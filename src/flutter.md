@@ -450,6 +450,12 @@ This provides many things including:
   - Upgrade Packages
   - Upgrade Packages (--major-versions)
 
+- Installs and updates dependencies
+
+  This happens automatically when changes to `pubspec.yaml` are saved.
+  However, it will not recognized new classes and functions until
+  "Developer: Reload Window" is selected from the Command Palette.
+
 ## Basic Flutter App Structure
 
 Here is an example of the structure of a basic Flutter app
@@ -978,6 +984,8 @@ colors, gradients, borders, shadows, images,
 and shapes (only rectangles and circles).
 
 #### Multi-child Layout Widgets
+
+TODO: Finish added descriptions in this table.
 
 | Widget                   | Description                                                                            |
 | ------------------------ | -------------------------------------------------------------------------------------- |
