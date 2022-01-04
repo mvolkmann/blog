@@ -2403,10 +2403,18 @@ depending on if the button is pressed, hovered, focused, disabled, etc."
 
 To use a theme property for a different purpose,
 obtain the value using `Theme.of(context).propertyName`.
-For example:
+This uses the `BuildContext` object passed to `Theme.of`
+to traverse up the widget tree to find a `Theme` widget.
+It then returns its `ThemeData` object.
+The traversal only happens once per widget instance
+and a reference to the `ThemeData` object is then stored in the widget.
+
+The following code finds the theme `disabledColor` value
+and uses it in a `Text` widget:
 
 ```dart
 // This defaults to light gray.
+// "context" here is a BuildContext object
 var disabledColor = Theme.of(context).disabledColor;
 ...
 Text('some dimmed text', style: TextStyle(color: disabledColor)),
