@@ -1837,6 +1837,12 @@ void main() {
 }
 ```
 
+When `Timer.periodic` is used in a Flutter widget, the timer needs to be
+stopped when the widget instance is removed from the screen.
+To do this, capture the return value,
+override the widget `dispose` method,
+and call `timer.cancel()` and `super.dispose()` inside it.
+
 ### Uri Class
 
 The `Uri` class represents a parsed URI.
