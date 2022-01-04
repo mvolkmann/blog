@@ -2386,11 +2386,15 @@ to be used for all `ElevatedButtonWidgets` in an app as follows:
           ),
         ),
         primarySwatch: Colors.blue,
+      ),
+    );
 ```
 
+The `ButtonStyle` `background` argument
+must be set to a `MaterialStateProperty` object.
 From the documentation for the {% aTargetBlank
 "https://api.flutter.dev/flutter/material/ButtonStyle-class.html",
-"ButtonStyle"} class,
+"ButtonStyle" %} class,
 "Many of the `ButtonStyle` properties are `MaterialStateProperty` objects
 which resolve to different values depending on the button's state.
 For example the `Color` properties are defined with
