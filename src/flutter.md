@@ -295,7 +295,12 @@ To run a Flutter app on an iPhone wirelessly:
 ## VS Code
 
 Install the Flutter extension.
-This provides many things including:
+This uses the {% aTargetBlank
+"https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server",
+"Dart Analysis Server" %}, as does Android Studio,
+to power many IDE operations.
+
+This extension provides many things including:
 
 - great auto-complete support
 
@@ -329,6 +334,7 @@ This provides many things including:
   Place the cursor on a widget and press cmd-period or click the lightbulb icon
   to open a context menu with the following options:
 
+  - Remove this widget (keeps `child` and `children` widgets)
   - Move widget down
   - Move widget up
   - Wrap with Builder
@@ -340,12 +346,23 @@ This provides many things including:
   - Wrap with SizedBox
   - Wrap with StreamBuilder
   - Wrap with widget... (prompts for name)
-  - Extract Method
+  - Extract Method (replaces selected code with a call )
   - Extract Local Variable
   - Extract Widget
 
   The "Extract" commands are great for breaking up deeply nested widget trees!
-  The convention for extracted method names is to being with "\_build".
+
+  The "Extract Method" command creates a new method containing
+  the selected code and replaces it with a call to the method.
+  The convention for extracted method names is to begin with "\_build".
+
+  The "Extract Local Variable" command creates a local variable
+  that is initialized to the selected widget
+  and replaces it with a reference to the variable.
+
+  The "Extract Widget" command creates a new `Widget` subclass
+  whose `build` method includes the selected widget (only one)
+  and replaces it with an instance of the new widget.
 
   Select multiple widgets and press cmd-period or click the lightbulb icon
   to open a context menu with the following options:
@@ -631,6 +648,14 @@ and lay them out in a specific way.
 The Flutter docs refer to these as "multi-child layout widgets".
 Examples include `Column`, `GridView`, `ListView`,
 `Row`, `Stack`, `Table`, and `Wrap`.
+
+The `List.generate` static method can be used to
+generate a `List` of widgets based on an index.
+For example:
+
+```dart
+Column(children: List.generate(3, (index) => Text('${index + 1}'))),
+```
 
 ### Material Stateless vs. Stateful Widgets
 
