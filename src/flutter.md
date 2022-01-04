@@ -530,7 +530,7 @@ class MyApp extends StatelessWidget {
       // displayed when users press the "recent apps" button.
       // On iOS this value is not used.
       title: 'My Title',
-      theme: ThemeData(primarySwatch: Colors.amber),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const MyPage(), // starting page
     );
   }
@@ -2400,6 +2400,17 @@ which resolve to different values depending on the button's state.
 For example the `Color` properties are defined with
 `MaterialStateProperty<Color>` and can resolve to different colors
 depending on if the button is pressed, hovered, focused, disabled, etc."
+
+To use a theme property for a different purpose,
+obtain the value using `Theme.of(context).propertyName`.
+For example:
+
+```dart
+// This defaults to light gray.
+var disabledColor = Theme.of(context).disabledColor;
+...
+Text('some dimmed text', style: TextStyle(color: disabledColor)),
+```
 
 ## Icons
 
