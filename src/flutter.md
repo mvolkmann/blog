@@ -2407,16 +2407,20 @@ class _MyPainter extends CustomPainter {
     final maxX = size.width - inset;
     const minY = inset;
     final maxY = size.height - inset;
-    path.moveTo(minX, minY);
-    path.lineTo(maxX, minY);
-    path.lineTo((minX + maxX) / 2, maxY);
-    path.lineTo(minX, minY);
+    // Create a List of points for a triangle.
+    var points = <Offset>[
+        Offset((minX + maxX) / 2, minY),
+        Offset(maxX, maxY),
+        Offset(minX, maxY),
+    ];
+    path.addPolygon(points, true); // true to close
     path.close();
 
     final paint = Paint()
       ..color = Colors.red
-      ..style = PaintingStyle.stroke
+      ..style = PaintingStyle.fill // or .stroke
       ..strokeWidth = 5;
+    // Convert the path to pixels.
     canvas.drawPath(path, paint);
   }
 
