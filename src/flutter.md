@@ -479,6 +479,10 @@ This extension provides many things including:
   However, it will not recognized new classes and functions until
   "Developer: Reload Window" is selected from the Command Palette.
 
+To view the implementation code for Flutter classes, cmd-click a class name.
+For example, try this on `MaterialApp`.
+From this file, continue using cmd-click on other class names to see their code.
+
 ## Basic Flutter App Structure
 
 Here is an example of the structure of a basic Flutter app
@@ -550,6 +554,14 @@ class MyPage extends StatelessWidget {
   }
 }
 ```
+
+The styling defined by the `ThemeData` object
+that is passed to the `MaterialApp` constructor
+can affect all other widgets in the app.
+The ThemeData constructor takes a large number of arguments.
+For details, see {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ThemeData/ThemeData.html",
+"ThemeData constructor" %}.
 
 To avoid drawing in unsafe areas such as those that contain notches,
 wrap the `Scaffold` widget in a `SafeArea` widget.
