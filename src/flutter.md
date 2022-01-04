@@ -1143,6 +1143,13 @@ Thanks to Pat Niemeyer for this suggestion!
 
 This displays a scrollable list of widgets.
 The list is vertical by default, but can be changed to horizontal.
+
+Scrolling widgets like `ListView` must
+be inside a parent widget that has a constrained size.
+This means a `ListView` cannot be a direct child of a `Column` widget,
+but it can be a child of an `Expanded` widget
+that is a child of a `Column` widget.
+
 Here's an example of creating a scrollable list of colors.
 
 ```dart
@@ -1186,6 +1193,11 @@ class ColorList extends StatelessWidget {
   }
 }
 ```
+
+The way scrolling feels is defined by the `ScrollingPhysics` class.
+This provides platform-specific scrolling
+so it feels different between Android and IOS.
+If desired this can be overridden.
 
 ##### Row
 
