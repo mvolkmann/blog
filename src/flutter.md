@@ -18,6 +18,10 @@ There are many provided widgets and custom ones can be defined.
 The Flutter framework is implemented in Dart,
 except for the {% aTargetBlank "https://skia.org", "Skia" %}
 2D graphics library which is implemented in C++.
+Flutter is not the only user of Skia. From {% aTargetBlank
+"https://www.chromium.org/developers/design-documents/graphics-and-skia",
+"Graphics and Skia" %}, "Chrome uses Skia
+for nearly all graphics operations, including text rendering."
 
 {% aTargetBlank "https://flutterflow.io", "FlutterFlow" %} is a
 relatively new, low-code tool for building Flutter applications.
