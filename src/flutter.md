@@ -671,9 +671,20 @@ For example:
 Column(children: List.generate(3, (index) => Text('${index + 1}'))),
 ```
 
-### Material Stateless vs. Stateful Widgets
+### Stateless vs. Stateful Widgets
 
 Every widget is either stateless or stateful.
+
+Flutter-compatible editors provide snippets for defining new widgets
+that dramatically reduce the amount of code that must be typed.
+In a VS Code editor, enter "st" and select
+"Flutter stateful widget" or "Flutter stateful widget".
+
+In both cases the `build` method returns a single widget,
+but that widget typically has additional child widgets.
+This can return an empty `Container()` to render nothing.
+
+#### Stateless Widgets
 
 Stateless widgets are defined by a class that
 extends `StatelessWidget`, defines a constructor,
@@ -682,31 +693,11 @@ All properties in a `StatelessWidget` must be declared `final`
 which makes them immutable.
 Stateless widgets render one time based parameters passed to them.
 
-Stateful widgets are defined by a pair of classes.
-The first class extends `StatefulWidget`,
-defines final properties, defines a constructor, and
-overrides the `createState` method to create an instance of the second class.
-The second class can be private and
-be defined in the same source file as the first.
-It extends `State`, defines state fields, and overrides the `build` method
-Storing the state in a separate class
-allows the widget class to remain immutable.
-Stateful widgets render initially and again each time their state changes.
-
-The `build` method returns a single widget,
-but that widget typically has additional child widgets.
-
-Flutter-compatible editors provide snippets for defining new widgets
-that dramatically reduce the amount of code that must be typed.
-In VS Code, type "s" and select
-"Flutter stateful widget" or "Flutter stateful widget".
-
-Stateless widgets begin with the following code
+New stateless widgets begin with the following code
 which defines a single class:
 
 ```dart
 class SomeName extends StatelessWidget {
-  // Note the odd Dart syntax for constructors.
   const SomeName({ Key? key }) : super(key: key);
 
   @override
@@ -714,25 +705,6 @@ class SomeName extends StatelessWidget {
     return Container(
 
     );
-  }
-}
-```
-
-Stateful widgets begin with the following code
-which defines a pair of related classes:
-
-```dart
-class SomeName extends StatefulWidget {
-  const SomeName ({ Key? key }) : super(key: key);
-
-  @override
-  _SomeName State createState() => _SomeName State();
-}
-
-class _SomeName State extends State<SomeName > {
-  @override
-  Widget build(BuildContext context) {
-    return {some-widget};
   }
 }
 ```
@@ -770,8 +742,43 @@ class Greet extends StatelessWidget {
 }
 ```
 
+#### Stateful Widgets
+
+Stateful widgets are defined by a pair of classes.
+The first class extends `StatefulWidget`,
+defines final properties, defines a constructor, and
+overrides the `createState` method to create an instance of the second class.
+The second class can be private and
+be defined in the same source file as the first.
+It extends `State`, defines state properties,
+and overrides the `build` method.
+Storing the state in a separate class
+allows the widget class to remain immutable.
+Stateful widgets render initially and again each time their state changes.
+
+New stateful widgets begin with the following code
+which defines a pair of related classes:
+
+```dart
+class SomeName extends StatefulWidget {
+  const SomeName ({ Key? key }) : super(key: key);
+
+  @override
+  _SomeNameState createState() => _SomeNameState();
+}
+
+class _SomeNameState extends State<SomeName> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+    );
+  }
+}
+```
+
 Here is an example of a stateful widget that maintains a count
-and provides buttons for incrementing and decrementing the count.
+and provides buttons for incrementing and decrementing a count.
 The `setState` method defined by the `State` class
 is similar to the `setState` function in React.
 This is described in more detail later in the "Managing State" section.
@@ -831,7 +838,19 @@ class _CounterState extends State<Counter> {
 }
 ```
 
-A widget `build` method can return an empty `Container()` to render nothing.
+Methods inherited from the `State` class that can be overridden,
+listed in the order in which they are called, include:
+
+1. `initState`: performs one-time initialization
+   that depends on the context or the widget
+1. `didChangeDependencies`: performs initialization involving inherited widgets
+   which are widgets that "propagate information down the tree"
+1. `build`: builds the UI for this widget
+1. `didUpdateWidget`: called after every call to `build`
+1. `reasssemble`: called in development when a hot reload occurs
+1. `deactivate`: called when a widget subtree containing this `State` object
+   is removed
+1. `dispose`: called after `deactivate` unless the widget subtree is reinserted
 
 ### Material Structure Widgets
 
@@ -1368,8 +1387,12 @@ Two popular packages are RiverPod and GetX.
 
 The `setState` function marks the current widget as "dirty" which
 causes its `build` method to be called again in order to rebuild its UI.
+
 Typically changes to state properties are made
 in a callback function that is passed to `setState`.
+Avoid time consuming code inside these callback functions.
+This code should be limited to assignments to state properties
+and not computing new values.
 For example:
 
 ```dart
