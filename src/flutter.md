@@ -2339,7 +2339,7 @@ which is documented at {% aTargetBlank
 
 ## Images
 
-The `Image` widget renders an image from a URL.
+The `Image` widget renders an image from a URL or local file.
 For example, the following renders a photo of an owl.
 
 ```dart
@@ -2372,6 +2372,18 @@ For example:
 
 ```dart
 ClipOval(child: Image.asset('assets/images/comet.jpg'))
+```
+
+The `Image` widget does not support SVG files.
+To render SVGs, add a dependency on the pub.dev package flutter_svg.
+To use this, create an `assets` directory and
+register it in `pubspec.yaml` as shown above.
+Then write code like the following:
+
+```dart
+import 'package:flutter_svg/flutter_svg.dart';
+...
+SvgPicture.asset('assets/images/some_filename.svg'),
 ```
 
 ## Tests
