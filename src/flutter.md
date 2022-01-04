@@ -1145,10 +1145,11 @@ This displays a scrollable list of widgets.
 The list is vertical by default, but can be changed to horizontal.
 
 Scrolling widgets like `ListView` must
-be inside a parent widget that has a constrained size.
-This means a `ListView` cannot be a direct child of a `Column` widget,
-but it can be a child of an `Expanded` widget
-that is a child of a `Column` widget.
+be inside a widget that has a constrained size.
+This means a `ListView` cannot be a direct child
+of a widget like `Row` or `Column`.
+But it can be a child of a `SizedBox` widget or
+an `Expanded` widget that is a child of a widget with a constrained size.
 
 Here's an example of creating a scrollable list of colors.
 
