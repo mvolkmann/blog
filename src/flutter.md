@@ -838,19 +838,19 @@ class _CounterState extends State<Counter> {
 }
 ```
 
-Methods inherited from the `State` class that can be overridden,
-listed in the order in which they are called, include:
+Lifecycle methods inherited from the `State` class that can be overridden,
+listed in the order in which they are called,
+are described in the following table:
 
-1. `initState`: performs one-time initialization
-   that depends on the context or the widget
-1. `didChangeDependencies`: performs initialization involving inherited widgets
-   which are widgets that "propagate information down the tree"
-1. `build`: builds the UI for this widget
-1. `didUpdateWidget`: called after every call to `build`
-1. `reasssemble`: called in development when a hot reload occurs
-1. `deactivate`: called when a widget subtree containing this `State` object
-   is removed
-1. `dispose`: called after `deactivate` unless the widget subtree is reinserted
+| Method                  | Description                                                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `initState`             | performs one-time initialization of non-final properties that depends on the context or the widget               |
+| `didChangeDependencies` | performs initialization involving inherited widgets which are widgets that "propagate information down the tree" |
+| `build`                 | builds the UI for this widget; only method that MUST be overridden                                               |
+| `didUpdateWidget`       | called after every call to `build`; rarely overridden                                                            |
+| `reassemble`            | called in development when a hot reload occurs                                                                   |
+| `deactivate`            | called when a widget subtree containing this `State` object is removed; rarely overridden                        |
+| `dispose`               | called after `deactivate` unless the widget subtree is reinserted                                                |
 
 ### Material Structure Widgets
 
