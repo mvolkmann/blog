@@ -924,6 +924,10 @@ But a `Flexible` widget will take on
 the size of its child if the child has a fixed size.
 Otherwise it will choose its size just like `Expanded`.
 
+The `Expanded` and `Flexible` widgets can only be children
+of a widget that extends from the `Flex` widget.
+Currently the only provided widgets that do that are `Row` and `Column`.
+
 The following code translates a given widget:
 
 ```dart
