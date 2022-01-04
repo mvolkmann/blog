@@ -683,16 +683,18 @@ which makes them immutable.
 Stateless widgets render one time based parameters passed to them.
 
 Stateful widgets are defined by a pair of classes.
-The first extends `StatefulWidget`, defines a constructor,
-and overrides the `createState` method.
-The second extends `State`, defines state fields,
-and overrides the `build` method.
+The first class extends `StatefulWidget`,
+defines final properties, defines a constructor, and
+overrides the `createState` method to create an instance of the second class.
+The second class can be private and
+be defined in the same source file as the first.
+It extends `State`, defines state fields, and overrides the `build` method
 Storing the state in a separate class
 allows the widget class to remain immutable.
 Stateful widgets render initially and again each time their state changes.
 
-It is common for `build` methods return a nested set of widgets
-rather than just a single widget.
+The `build` method returns a single widget,
+but that widget typically has additional child widgets.
 
 Flutter-compatible editors provide snippets for defining new widgets
 that dramatically reduce the amount of code that must be typed.
@@ -2368,8 +2370,12 @@ see the documentation for the {% aTargetBlank
 Flutter uses theme objects to describe styling that should be applied
 to various kinds of widgets throughout an app.
 This begins with the `ThemeData` object that is
-specified in the `MaterialApp` `theme` argument.
+specified in the `MaterialApp` `theme` (used for light mode)
+and `darkTheme` arguments.
 If no theme is specified, Flutter provides a default theme.
+
+Most Material and Cupertino widgets are theme-aware.
+This means their styling is affected by the theme specified in the app widget.
 
 For example, it is possible to specify the background color
 to be used for all `ElevatedButtonWidgets` in an app as follows:
