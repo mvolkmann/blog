@@ -2386,6 +2386,65 @@ import 'package:flutter_svg/flutter_svg.dart';
 SvgPicture.asset('assets/images/some_filename.svg'),
 ```
 
+## Drawing
+
+To draw on a widget, use the `CustomPaint` widget.
+This is similar to using the HTML `canvas` and `svg` elements.
+
+There are two steps required.
+First, define a class that extends the `CustomPainter` class.
+This includes a `paint` method that takes a `Canvas` and draws on it.
+
+```dart
+class _MyPainter extends CustomPainter {
+  _MyPainter() : super();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final path = Path();
+    const inset = 10.0;
+    const minX = inset;
+    final maxX = size.width - inset;
+    const minY = inset;
+    final maxY = size.height - inset;
+    path.moveTo(minX, minY);
+    path.lineTo(maxX, minY);
+    path.lineTo((minX + maxX) / 2, maxY);
+    path.lineTo(minX, minY);
+    path.close();
+
+    final paint = Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 5;
+    canvas.drawPath(path, paint);
+  }
+
+  // Returning false optimizes for drawings
+  // that do not change based on state.
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
+```
+
+The `Path` class supports a large number of methods
+for describing what should be drawn. These include:
+`addArc`, `addOval`, `addPath`, `addPolygon`, `addRect`, `addRRect`, `arcTo`,
+`arcToPoint`, `conicTo`, `cubicTo`, `lineTo`, `moveTo`, `quadraticBezierTo`,
+`relativeArcToPoint`, `relativeConicTo`, `relativeLineTo`, `relativeMoveTo`,
+and `relativeQuadraticBezierTo`.
+Also see the static Path method combine.
+
+Second, render the drawing described by the class above
+on another widget using the `CustomPaint` widget.
+
+```dart
+    return CustomPaint(
+      painter: _MyPainter(),
+      child: SizedBox(width: 200, height: 100),
+    );
+```
+
 ## Tests
 
 TODO: How can widget tests be implemented?
