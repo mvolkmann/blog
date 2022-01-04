@@ -416,6 +416,7 @@
     "linspace",
     "listdir",
     "listitems",
+    "listview",
     "liveserver",
     "lmplot",
     "LOCALAPPDATA",

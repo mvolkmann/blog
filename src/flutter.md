@@ -1195,6 +1195,57 @@ class ColorList extends StatelessWidget {
 }
 ```
 
+A `ListView` can be scrolled programmatically
+by creating a `ScrollController` object and setting it as the `controller`.
+For example:
+
+<img alt="Flutter ListView with Controller" style="width: 40%"
+    src="/blog/assets/flutter-listview-with-controller.png?v={{pkg.version}}"
+    title="Flutter ListView with Controller">
+
+```dart
+    var controller = ScrollController();
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        children: [
+          SizedBox(
+            height: 150,
+            width: 100,
+            child: Scrollbar(
+              child: ListView(
+                controller: controller,
+                children: List.generate(
+                  20,
+                  (index) => Text('Item #${index + 1}'),
+                ),
+              ),
+            ),
+          ),
+          ElevatedButton(
+            child: Text('Top'),
+            onPressed: () {
+              controller.animateTo(
+                0,
+                duration: Duration(seconds: 1),
+                curve: ElasticInOutCurve(),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+```
+
+Flutter can optimize the rendering of scrollable lists
+that contains a large number of children
+by reusing the same set of child widgets with different data.
+For example:
+
+```dart
+
+```
+
 The way scrolling feels is defined by the `ScrollingPhysics` class.
 This provides platform-specific scrolling
 so it feels different between Android and IOS.
