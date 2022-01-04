@@ -774,6 +774,7 @@ Here is an example of a stateful widget that maintains a count
 and provides buttons for incrementing and decrementing the count.
 The `setState` method defined by the `State` class
 is similar to the `setState` function in React.
+This is described in more detail later in the "Managing State" section.
 
 <img alt="Flutter Counter" style="width: 60%"
     src="/blog/assets/Flutter-Counter.png?v={{pkg.version}}"
@@ -814,7 +815,6 @@ class _CounterState extends State<Counter> {
       TextButton(
         child: const Text('-', style: textStyle),
         // The button is disabled when onPressed is null.
-        // State must modified inside functions that are passed to setState.
         onPressed: count <= 0 ? null : () => setState(() => count -= 1),
       ),
       Text('$count', style: textStyle),
@@ -1295,6 +1295,10 @@ The child `TextSpan` widgets can override that style.
 | `ToggleButtons`        | set of toggle buttons, typically used to choose between exclusive options                                                          |
 | `YearPicker`           | scrollable list of years to pick from (I can't get this to work!)                                                                  |
 
+Many of these widgets render buttons, including
+`DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
+`IconButton`, and `TextButton`.
+
 Basic usage of all of these widgets is demonstrated in the Flutter project at
 {% aTargetBlank "https://github.com/mvolkmann/flutter_input",
 "flutter_input" %}.
@@ -1347,34 +1351,41 @@ import 'package:flutter/cupertino.dart';
 | `CupertinoTextField`                  | iOS-style input text field                                                                                         |
 | `CupertinoTimerPicker`                | iOS-style wheel picker for entering hours, minutes, and seconds                                                    |
 
-## Persisting State
-
-There are many approaches to persisting app data
-so it is not lost when an app is closed.
-
-- built-in `SharedPreference` class
-- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} library
-- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
-  (similar to the Context API in React)
-- {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
-  "cubit" %} library
-- {% aTargetBlank "https://docs.flutter.dev/cookbook/persistence/sqlite",
-  "SQLite" %} database on the device
-
 ## Managing State
 
-For state that is only used by a single widget instance,
-use `setState` inside that widget.
-For example:
-
-```dart
-TODO: Add this
-```
+For state that is only used by a single stateful widget instance,
+call the `setState` function from inside that widget.
 
 For state that must be shared across multiple widget instances,
 a recommended approach is to use the provider library.
 In June, 2019 Chris Sells, the Flutter Project Manager, said
 "Provider is the recommended way to do State Management for apps of all sizes."
+
+There are many other state management options provided by the community.
+Two popular packages are RiverPod and GetX.
+
+### setState Function
+
+The `setState` function marks the current widget as "dirty" which
+causes its `build` method to be called again in order to rebuild its UI.
+Typically changes to state properties are made
+in a callback function that is passed to `setState`.
+For example:
+
+```dart
+setState(() {
+  _counter++;
+});
+```
+
+Changes to state properties can also be made before the call to `setState`
+and it can be passed a callback function that does nothing.
+For example:
+
+```dart
+_counter++;
+setState(() {});
+```
 
 ### provider Library
 
@@ -1549,6 +1560,20 @@ TODO: Add information about this.
 ### RiverPod Library
 
 TODO: Add information about this.
+
+## Persisting State
+
+There are many approaches to persisting app data
+so it is not lost when an app is closed.
+
+- built-in `SharedPreference` class
+- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} library
+- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
+  (similar to the Context API in React)
+- {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
+  "cubit" %} library
+- {% aTargetBlank "https://docs.flutter.dev/cookbook/persistence/sqlite",
+  "SQLite" %} database on the device
 
 ## Navigation
 
