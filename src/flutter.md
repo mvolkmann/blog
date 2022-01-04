@@ -2437,6 +2437,9 @@ Also see the static Path method combine.
 
 Second, render the drawing described by the class above
 on another widget using the `CustomPaint` widget.
+Often the targeted widget is an empty `SizedBox`,
+but it can be any widget and the drawing
+appears on top of what that widget renders.
 
 ```dart
     return CustomPaint(
