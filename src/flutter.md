@@ -2363,6 +2363,40 @@ To see all the colors defined by the `Colors` class,
 see the documentation for the {% aTargetBlank
 "https://api.flutter.dev/flutter/material/Colors-class.html", "Colors class" %}.
 
+## Themes
+
+Flutter uses theme objects to describe styling that should be applied
+to various kinds of widgets throughout an app.
+This begins with the `ThemeData` object that is
+specified in the `MaterialApp` `theme` argument.
+If no theme is specified, Flutter provides a default theme.
+
+For example, it is possible to specify the background color
+to be used for all `ElevatedButtonWidgets` in an app as follows:
+
+```dart
+    return MaterialApp(
+      ...
+      theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.red,
+            ),
+          ),
+        ),
+        primarySwatch: Colors.blue,
+```
+
+From the documentation for the {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ButtonStyle-class.html",
+"ButtonStyle"} class,
+"Many of the `ButtonStyle` properties are `MaterialStateProperty` objects
+which resolve to different values depending on the button's state.
+For example the `Color` properties are defined with
+`MaterialStateProperty<Color>` and can resolve to different colors
+depending on if the button is pressed, hovered, focused, disabled, etc."
+
 ## Icons
 
 The `Icon` widget renders an icon from a large provided set of icons.
