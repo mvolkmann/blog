@@ -1195,6 +1195,9 @@ class ColorList extends StatelessWidget {
 }
 ```
 
+To provide a visual indication of scroll position and
+the number of items in a `ListView`, wrap it in a `Scrollbar` widget.
+
 A `ListView` can be scrolled programmatically
 by creating a `ScrollController` object and setting it as the `controller`.
 For example:
@@ -1228,7 +1231,7 @@ For example:
               controller.animateTo(
                 0,
                 duration: Duration(seconds: 1),
-                curve: ElasticInOutCurve(),
+                curve: Curves.easeInOut,
               );
             },
           ),
