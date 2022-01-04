@@ -363,6 +363,8 @@ This extension provides many things including:
   The "Extract Widget" command creates a new `Widget` subclass
   whose `build` method includes the selected widget (only one)
   and replaces it with an instance of the new widget.
+  The new class definition can be moved to a new source file
+  so it can be reused from multiple source files.
 
   Select multiple widgets and press cmd-period or click the lightbulb icon
   to open a context menu with the following options:
