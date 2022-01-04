@@ -983,22 +983,29 @@ and others accept multiple `children`.
 | `SizedOverflowBox`        |                                                                                                                               |
 | `Transform`               | transforms its child by translating, rotating, and scaling it                                                                 |
 
+The `Expanded` class extends from the `Flexible` class.
+Both take a `flex` argument that defaults to `1`
+and works similarly to the CSS `flex` property.
+The percentage of the available space given to
+an `Expanded` or `Flexible` widget is the
+percentage that their `flex` value represents out of
+the total of the `flex` values in the same parent widget.
+
+The `Expanded` and `Flexible` widgets can only be children
+of a widget that extends from the `Flex` widget.
+Currently the only provided widgets that do that are `Row` and `Column`.
+
 One use of the `Expanded` widget is to push the widgets
 that follow it inside a `Row` or `Column` to the end.
-The `Expanded` class extends from the `Flexible` class.
-But take a `flex` argument that defaults to `1`
-and works similarly to the CSS `flex` property.
 
 The `Flexible` widget behaves nearly identically to the `Expanded` widget.
 But a `Flexible` widget will take on
 the size of its child if the child has a fixed size.
 Otherwise it will choose its size just like `Expanded`.
 
-The `Expanded` and `Flexible` widgets can only be children
-of a widget that extends from the `Flex` widget.
-Currently the only provided widgets that do that are `Row` and `Column`.
+The `Transform` widget applies transformations to its `child` widget.
 
-The following code translates a given widget:
+The following code translates its `child` widget:
 
 ```dart
 var dx = 100.0; // x values increase going right
@@ -1006,7 +1013,7 @@ var dy = 20.0; // y values increases going down
 return Transform.translate(child: button, offset: Offset(dx, dy));
 ```
 
-The following code rotates a given widget by 45 degrees counterclockwise:
+The following code rotates its child widget by 45 degrees counterclockwise:
 
 ```dart
 Transform.rotate(angle: -pi / 4.0, child: someWidget);
