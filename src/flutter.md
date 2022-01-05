@@ -1241,12 +1241,20 @@ For example:
 ```
 
 Flutter can optimize the rendering of scrollable lists
-that contains a large number of children
-by reusing the same set of child widgets with different data.
-For example:
+that contain many children with the same type.
+It does this by reusing the same set of child widgets but with different data.
+Only the number of child widgets that
+can be visible at the same time are created.
+To change the previous example to this optimization,
+replace the lines that create the `ListView` with the following:
 
 ```dart
-
+              child: ListView.builder(
+                controller: controller,
+                itemBuilder: (context, index) => Text('Item #${index + 1}'),
+                itemCount: 20,
+                itemExtent: 20, // height of each item
+              ),
 ```
 
 The way scrolling feels is defined by the `ScrollingPhysics` class.
