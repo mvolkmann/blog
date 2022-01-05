@@ -1447,6 +1447,45 @@ import 'package:flutter/cupertino.dart';
 | `CupertinoTextField`                  | iOS-style input text field                                                                                         |
 | `CupertinoTimerPicker`                | iOS-style wheel picker for entering hours, minutes, and seconds                                                    |
 
+## Form Validation
+
+The `Form` widget supports form validation.
+
+The `Form` widget takes a `children` argument that is a `List` of widgets.
+Widget classes that extend {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/FormField-class.html",
+"`FormField`" %} support a `validator` argument.
+This can be set to a function that is passed the current value.
+The function should return a `String` error message when the value is invalid,
+and `null` when the value is valid.
+
+The only provided widgets that extend `FormField` are
+`TextFormField`, `DropdownButtonFormField`, and `CupertinoTextFormFieldRow`.
+Additional widget classes can be defined to
+add validation to other input widgets.
+TODO: Show one of these from the video at
+TODO: https://www.youtube.com/watch?v=1vHf5kQ0E2I?
+
+Invalid fields are changed to have `errorColor` accents (typically red)
+and an error message is displayed below them.
+
+By default the form fields are not automatically validated.
+This means that invalid values can be entered
+and no error messages will be displayed.
+To validate a `Form`, call `formKey.currentState!.validate()`
+which returns a `bool` indicating if the form is valid.
+
+To perform validation automatically, set the `Form`
+`autovalidateMode` argument to a value from the `AutovalidateMode` enum.
+There are three values to choose from.
+`disabled` never automatically performs validation and is the default.
+`always` performs every time the form state changes
+which could occur programmatically.
+`onUserInteraction` performs validation every time a user changes a form input.
+
+To disable a button in a `Form` when the form is invalid,
+set its `onPressed` argument to `null`.
+
 ## Managing State
 
 For state that is only used by a single stateful widget instance,
