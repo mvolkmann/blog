@@ -789,31 +789,25 @@ This is described in more detail later in the "Managing State" section.
 
 ```dart
 class Counter extends StatefulWidget {
-  const Counter({Key? key}) : super(key: key);
+  final int initialValue;
+
+  const Counter({Key? key, this.initialValue = 0}) : super(key: key);
 
   @override
   _CounterState createState() => _CounterState();
 }
 
 class _CounterState extends State<Counter> {
+  var _count = 0;
+
   static const textStyle = TextStyle(fontSize: 36);
 
-  // Declare state fields here.
-  int count = 0;
-
-  // Define this optional method to fetch initial state values.
   @override
   void initState() {
-      // Fetch initial state values.
+      // Note the use of "widget." to refer to
+      // properties in the associated stateful widget.
+      _count = widget.initialState;
       super.initState();
-  }
-
-  // Define this optional method to perform
-  // state cleanup when the widget is disposed.
-  @override
-  void dispose() {
-      // Cleanup after state data here.
-      super.dispose();
   }
 
   @override
@@ -822,16 +816,16 @@ class _CounterState extends State<Counter> {
       TextButton(
         child: const Text('-', style: textStyle),
         // The button is disabled when onPressed is null.
-        onPressed: count <= 0 ? null : () => setState(() => count -= 1),
+        onPressed: _count <= 0 ? null : () => setState(() => _count -= 1),
       ),
-      Text('$count', style: textStyle),
+      Text('$_count', style: textStyle),
       TextButton(
         child: const Text('+', style: textStyle),
-        onPressed: () => setState(() => count += 1),
+        onPressed: () => setState(() => _count += 1),
       ),
       ElevatedButton(
         child: const Text('Reset'),
-        onPressed: () => setState(() => count = 0),
+        onPressed: () => setState(() => _count = 0),
       ),
     ]);
   }
