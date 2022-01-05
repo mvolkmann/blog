@@ -1241,18 +1241,19 @@ For example:
 ```
 
 Flutter can optimize the rendering of scrollable lists
-that contain many children with the same type.
-It does this by reusing the same set of child widgets but with different data.
-Only the number of child widgets that
-can be visible at the same time are created.
-To change the previous example to this optimization,
+that contain many children with the same type using "deferred rendering".
+Rather than creating all the child widgets
+that will appear in the list up front,
+it only creates the number that can be visible at the same time.
+It reuses those widgets when the list is scrolled, by just changing their data.
+To modify the previous example to take advantage of this optimization,
 replace the lines that create the `ListView` with the following:
 
 ```dart
               child: ListView.builder(
                 controller: controller,
                 itemBuilder: (context, index) => Text('Item #${index + 1}'),
-                itemCount: 20,
+                itemCount: 20, // omit for an infinite list
                 itemExtent: 20, // height of each item
               ),
 ```
