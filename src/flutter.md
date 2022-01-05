@@ -804,10 +804,10 @@ class _CounterState extends State<Counter> {
 
   @override
   void initState() {
-      // Note the use of "widget." to refer to
-      // properties in the associated stateful widget.
-      _count = widget.initialState;
-      super.initState();
+    // Note the use of "widget." to refer to
+    // properties in the associated stateful widget.
+    _count = widget.initialValue;
+    super.initState();
   }
 
   @override
