@@ -1398,7 +1398,7 @@ The highlights are described in the following table:
 | -------------- | --------------------------------------------------------------------- |
 | `autoCorrect`  | `bool` indicating of the value should be auto-corrected               |
 | `controller`   | `TextEditingController` (described below)                             |
-| `decoration`   | `InputDecoration`                                                     |
+| `decoration`   | `InputDecoration` that specifies styling details                      |
 | `keyboardType` | `TextInputType`                                                       |
 | `maxLength`    | `int` maximum length defaulting to no limit                           |
 | `maxLines`     | `int` defaulting to `1`                                               |
@@ -1407,7 +1407,7 @@ The highlights are described in the following table:
 | `readOnly`     | `bool` indicating if the value cannot currently be modified           |
 | `style`        | `TextStyle`                                                           |
 
-The `TextFormField` constructor takes the following addtional optional arguments.
+The `TextFormField` constructor takes the following additional optional arguments.
 
 | Argument       | Description                                                        |
 | -------------- | ------------------------------------------------------------------ |
@@ -1422,6 +1422,30 @@ support adding listeners that are notified when the value changes.
 Note that `TextField` and `TextFormField` widgets
 are not required to have a controller.
 They can instead obtain new values using an `onChanged` callback.
+
+The `InputDecoration` class specifies styling to be applied
+described by optional arguments passed to its constructor.
+The highlights are described in the following table:
+
+| Argument     | Description                                                  |
+| ------------ | ------------------------------------------------------------ |
+| `errorText`  | `String` displayed below the input typically in red          |
+| `helperText` | `String` displayed below the input when there is `errorText` |
+| `hintText`   | `String` displayed inside the input when no value is entered |
+| `icon`       | `Widget` displayed before the input                          |
+| `label`      | `Widget`                                                     |
+| `labelText`  | `String` that indicates the meaning of the input             |
+| `prefix`     | `Widget` displayed inside the input before entered text      |
+| `prefixIcon` | `Widget` displayed inside the input before entered text      |
+| `prefixText` | `String` displayed inside the input before entered text      |
+| `suffix`     | `Widget` displayed inside the input after entered text       |
+| `suffixIcon` | `Widget` displayed inside the input after entered text       |
+| `suffixText` | `String` displayed inside the input after entered text       |
+
+It is not valid to specify both `prefix` and `prefixText`.
+Likewise, it is not valid to specify both `suffix` and `suffixText`.
+
+The `TextInputType` class
 
 Many of these widgets render buttons, including
 `DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
