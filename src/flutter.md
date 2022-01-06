@@ -1715,6 +1715,14 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
+Some examples of using the `Form` widget show
+calling `_formKey.currentState!.save` when the user taps a button
+to indicate that they are ready to do something with the form data.
+This calls the `onSaved` method on each of the form fields.
+I prefer saving new values of form fields when the user changes them
+using the callback specified in their `onChanged` arguments
+as shown above.
+
 ## Managing State
 
 For state that is only used by a single stateful widget instance,
