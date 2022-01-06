@@ -1391,8 +1391,37 @@ The child `TextSpan` widgets can override that style.
 | `ToggleButtons`        | set of toggle buttons, typically used to choose between exclusive options                                                          |
 | `YearPicker`           | scrollable list of years to pick from (I can't get this to work!)                                                                  |
 
-To obscure the text in a `TextField` or `TextFormField`,
-such as for a password, add the `obscureText` argument set to `true`.
+The `TextField` and `TextFormField` constructors take many optional arguments.
+The highlights are described in the following table:
+
+| Argument       | Description                                                           |
+| -------------- | --------------------------------------------------------------------- |
+| `autoCorrect`  | `bool` indicating of the value should be auto-corrected               |
+| `controller`   | `TextEditingController` (described below)                             |
+| `decoration`   | `InputDecoration`                                                     |
+| `keyboardType` | `TextInputType`                                                       |
+| `maxLength`    | `int` maximum length defaulting to no limit                           |
+| `maxLines`     | `int` defaulting to `1`                                               |
+| `obscureText`  | `bool` indicating of the value should be obscured (ex. for passwords) |
+| `onChanged`    | function called with new value when the user changes it               |
+| `readOnly`     | `bool` indicating if the value cannot currently be modified           |
+| `style`        | `TextStyle`                                                           |
+
+The `TextFormField` constructor takes the following addtional optional arguments.
+
+| Argument       | Description                                                        |
+| -------------- | ------------------------------------------------------------------ |
+| `initialValue` | `String` initial value                                             |
+| `validator`    | function called when value changes (see "Form Validation" section) |
+
+Instances of the `TextEditingController` class can be passed to the
+`TextField` and `TextFormField` constructors in their `controller` argument.
+These objects specify the initial value, hold the current value,
+can return the currently selected text, and
+support adding listeners that are notified when the value changes.
+Note that `TextField` and `TextFormField` widgets
+are not required to have a controller.
+They can instead obtain new values using an `onChanged` callback.
 
 Many of these widgets render buttons, including
 `DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
