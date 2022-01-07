@@ -507,12 +507,9 @@ void main() => runApp(const MyApp());
 // This class is also used by tests.
 // See the supplied test/widget_test.dart file.
 class MyApp extends StatelessWidget {
-  // All widget constructors must take an optional parameter of type "Key".
-  // This uniquely identifies a widget instance and is
-  // important when widgets will be added, removed, or reordered.
-  // Often no key value is provided.
-  // One way to specify a key value is `key: UniqueKey()`.
-  // Widget constructors can also take additional parameters.
+  // All widget constructors take an optional parameter of type "Key".
+  // Usually this argument is not needed.  Keys are discussed later.
+  // Widget constructors can also have additional parameters.
   const MyApp({Key? key}) : super(key: key);
 
   // Widget build methods describe what a widget renders.
@@ -644,6 +641,13 @@ All widgets have a `build` method that is passed a `BuildContext` object.
 This can be used to traverse up and down the widget tree.
 One use is for finding ancestor styles
 so they can be applied to the current widget.
+
+All widget constructors must take an optional parameter
+named "key" that has the type "Key".
+This uniquely identifies a widget instance and is
+important when widgets will be added, removed, or reordered.
+Often no key is necessary.
+One way to get a key value with the constructor call `UniqueKey()`.
 
 ### Child Widgets
 
