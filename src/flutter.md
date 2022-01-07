@@ -606,10 +606,14 @@ class MyPage extends StatelessWidget {
 
 An app can detect the current platform and use that information
 to render different widgets or implement different logic.
+
 To get the platform, get a `ThemeData` object from `Theme.of(context)`.
 That has a `platform` property which holds a `TargetPlatform` enum value.
 Possible values include `android`, `fuchsia`,
 `iOS`, `Linux`, `macOS`, and `windows`.
+{% aTargetBlank "https://fuchsia.dev", "Fuchsia" %} is an
+experimental operating system being developed by Google.
+
 For example:
 
 ```dart
