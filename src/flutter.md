@@ -2020,10 +2020,9 @@ so it is not lost when an app is closed.
 
 ## Navigation
 
-There are three primary ways to implement page navigation in Flutter.
-The first uses the `Navigator` class.
-The second uses the `BottomNavigationBar` widget.
-And the third uses the `Drawer` widget.
+There are many ways to implement page navigation in Flutter.
+Four that are described here involve using the `Navigator` class
+and the widgets `BottomNavigationBar`, `Drawer`, and `PageView`.
 Each approach is described below.
 
 ### Navigator Class
@@ -2172,6 +2171,10 @@ ElevatedButton(
   ),
 )
 ```
+
+`MaterialPageRoute` creates a platform-aware transition between routes.
+This means that the animation that occurs during a page transition
+differs between Android and iOS.
 
 Using a `builder` above allows Flutter to
 delay creating the route widget until it is needed.
@@ -2490,6 +2493,10 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+### PageView Widget
+
+TODO: Describe this based on the video at https://youtu.be/8bO1_saEwjw.
 
 ## Bottom Sheets
 
