@@ -1399,7 +1399,7 @@ The highlights are described in the following table:
 | `autoCorrect`  | `bool` indicating of the value should be auto-corrected               |
 | `controller`   | `TextEditingController` (described below)                             |
 | `decoration`   | `InputDecoration` that specifies styling details                      |
-| `keyboardType` | `TextInputType`                                                       |
+| `keyboardType` | `TextInputType` that requests a certain kind of on-screen keyboard    |
 | `maxLength`    | `int` maximum length defaulting to no limit                           |
 | `maxLines`     | `int` defaulting to `1`                                               |
 | `obscureText`  | `bool` indicating of the value should be obscured (ex. for passwords) |
@@ -1417,7 +1417,7 @@ The `TextFormField` constructor takes the following additional optional argument
 Instances of the `TextEditingController` class can be passed to the
 `TextField` and `TextFormField` constructors in their `controller` argument.
 These objects specify the initial value, hold the current value,
-can return the currently selected text, and
+can return the currently selected text, can clear the value, and
 support adding listeners that are notified when the value changes.
 Note that `TextField` and `TextFormField` widgets
 are not required to have a controller.
@@ -1445,7 +1445,17 @@ The highlights are described in the following table:
 It is not valid to specify both `prefix` and `prefixText`.
 Likewise, it is not valid to specify both `suffix` and `suffixText`.
 
-The `TextInputType` class
+The `TextInputType` class defines static properties
+for various kinds of on-screen keyboards.
+These properties include `datetime`, `emailAddress`, `multiline`, `name`,
+`none` (no on-screen keyboard), `number`, `phone`, `streetAddress`,
+`text`, `url`, and `visiblePassword`.
+For example, to get an on-screen keyboard that is
+optimized for entering numbers,
+specify `keyboardType: TextInputType.number`.
+
+> In the iOS simulator, the on-screen keyboard will not appear
+> unless it is toggled on by pressing cmd-k.
 
 Many of these widgets render buttons, including
 `DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
@@ -1505,7 +1515,7 @@ import 'package:flutter/cupertino.dart';
 
 ## Form Validation
 
-The `Form` widget supports form validation.
+The `Form` widget supports form validation based on the form fields inside it.
 It takes a `children` argument that is a `List` of widgets.
 
 Widget classes that extend {% aTargetBlank
