@@ -602,6 +602,27 @@ class MyPage extends StatelessWidget {
 }
 ```
 
+## Platform Detection
+
+An app can detect the current platform and use that information
+to render different widgets or implement different logic.
+To get the platform, get a `ThemeData` object from `Theme.of(context)`.
+That has a `platform` property which holds a `TargetPlatform` enum value.
+Possible values include `android`, `fuchsia`,
+`iOS`, `Linux`, `macOS`, and `windows`.
+For example:
+
+```dart
+var platform = Theme.of(context).platform;
+if (platform == TargetPlatform.iOS) {
+  print('detected iOS');
+}
+```
+
+Dart applications can get the platform using
+`import 'dart.io' show Platform;`,
+but this cannot be used in Flutter apps.
+
 ## Widgets
 
 All the predefined widgets are documented in the {% aTargetBlank
