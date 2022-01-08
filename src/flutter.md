@@ -1006,7 +1006,36 @@ and others accept multiple `children`.
 | `SizedOverflowBox`        |                                                                                                                               |
 | `Transform`               | transforms its child by translating, rotating, and scaling it                                                                 |
 
-The `Expanded` class extends from the `Flexible` class.
+##### Center Widget
+
+The `Center` widget centers its child in
+the available space of the parent widget by default.
+If the `heightFactor` argument is specified,
+it will center the child in a height that is
+the child height multiplied by the `heightFactor`.
+The `widthFactor` argument works similarly,
+but affects the width in which the child is centered.
+
+##### Container Widget
+
+The `Container` widget is the most customizable single-child layout widget.
+The most frequently used arguments are described below:
+
+| Argument      | Description                                                                                                |
+| ------------- | ---------------------------------------------------------------------------------------------------------- |
+| `color`       | `Color` of the background (conflicts with `decoration`)                                                    |
+| `padding`     | `EdgeInsets` that specifies the padding to apply inside                                                    |
+| `constraints` | `BoxConstraints` that constrains the minimum and maximum width and height                                  |
+| `alignment`   | `Alignment` that specifies the alignment of the `child` inside                                             |
+| `width`       | `double` width of container (conflicts with `constraints`)                                                 |
+| `height`      | `double` height of container (conflicts with `constraints`)                                                |
+| `decoration`  | `BoxDecoration` that can specify a `color`, `border`, `borderRadius`, `boxShadow`, `gradient`, and `shape` |
+
+TODO: Are the only supported shapes rectangles and circles?
+
+##### Expanded and Flexible Widgets
+
+The `Expanded` widget extends from the `Flexible` widget.
 Both take a `flex` argument that defaults to `1`
 and works similarly to the CSS `flex` property.
 The percentage of the available space given to
@@ -1025,6 +1054,8 @@ The `Flexible` widget behaves nearly identically to the `Expanded` widget.
 But a `Flexible` widget will take on
 the size of its child if the child has a fixed size.
 Otherwise it will choose its size just like `Expanded`.
+
+##### Transform Widget
 
 The `Transform` widget applies transformations to its `child` widget.
 
@@ -1072,10 +1103,6 @@ Widget transform({
 // In some widget list ...
 transform(child: someWidget, dx: 100.0, dy: 20.0, angle: -pi / 4, scale: 0.7);
 ```
-
-The `Container` widget can add many kinds of "decorations" including
-colors, gradients, borders, shadows, images,
-and shapes (only rectangles and circles).
 
 #### Multi-child Layout Widgets
 
