@@ -1123,7 +1123,7 @@ TODO: Finish added descriptions in this table.
 | `Table`                  | "uses the table layout algorithm for its children"                                     |
 | `Wrap`                   | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
 
-##### Column
+##### Column Widget
 
 This renders a vertical list of child widgets.
 It is similar to a SwiftUI `VStack`.
@@ -1189,7 +1189,7 @@ The same approach can be used with the
 `children` parameter of the `Row` widget.
 Thanks to Pat Niemeyer for this suggestion!
 
-##### ListView
+##### ListView Widget
 
 This displays a scrollable list of widgets.
 The list is vertical by default, but can be changed to horizontal.
@@ -1313,7 +1313,7 @@ This provides platform-specific scrolling
 so it feels different between Android and IOS.
 If desired this can be overridden.
 
-##### Row
+##### Row Widget
 
 This renders a horizontal list of child widgets.
 It is similar to a SwiftUI `HStack`.
@@ -1322,7 +1322,7 @@ The "main" axis is horizontal and the "cross" axis is vertical.
 This constructor for widget takes the
 same named parameters as the `Column` widget.
 
-##### Wrap
+##### Wrap Widget
 
 This renders widgets in rows or columns.
 It is similar to the `Row` and `Column` widgets,
