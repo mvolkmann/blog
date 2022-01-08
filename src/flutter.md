@@ -1420,6 +1420,16 @@ The child `TextSpan` widgets can override that style.
 | `ToggleButtons`        | set of toggle buttons, typically used to choose between exclusive options                                                          |
 | `YearPicker`           | scrollable list of years to pick from (I can't get this to work!)                                                                  |
 
+Many of these widgets render buttons, including
+`DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
+`IconButton`, and `TextButton`.
+
+Basic usage of all of these widgets is demonstrated in the Flutter project at
+{% aTargetBlank "https://github.com/mvolkmann/flutter_input",
+"flutter_input" %}.
+
+#### TextField and TextFormField
+
 The `TextField` and `TextFormField` constructors take many optional arguments.
 The highlights are described in the following table:
 
@@ -1483,16 +1493,42 @@ For example, to get an on-screen keyboard that is
 optimized for entering numbers,
 specify `keyboardType: TextInputType.number`.
 
-> In the iOS simulator, the on-screen keyboard will not appear
-> unless it is toggled on by pressing cmd-k.
+In mobile apps an on-screen keyboard appears when focus is a text field.
+In the iOS simulator, the on-screen keyboard will not appear
+unless it is toggled on by pressing cmd-k.
 
-Many of these widgets render buttons, including
-`DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
-`IconButton`, and `TextButton`.
+When focus leaves a text field and is not in a new text field,
+the keyboard should be hidden.
+This occurs by default in Android, but not in iOS.
+To make this happen in iOS, define to following widget
+and wrap the top widget (typically `MaterialApp`) in it.
 
-Basic usage of all of these widgets is demonstrated in the Flutter project at
-{% aTargetBlank "https://github.com/mvolkmann/flutter_input",
-"flutter_input" %}.
+```dart
+import 'package:flutter/material.dart';
+
+class DismissKeyboard extends StatelessWidget {
+  final Widget child;
+
+  const DismissKeyboard({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
+      },
+      child: child,
+    );
+  }
+}
+```
 
 ### Other Material Classes
 
