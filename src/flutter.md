@@ -1493,6 +1493,41 @@ For example, to get an on-screen keyboard that is
 optimized for entering numbers,
 specify `keyboardType: TextInputType.number`.
 
+The following code demonstrates creating a `TextFormField`
+for entering a dollar amount.
+It uses `prefix` and `suffix` widgets.
+
+<img alt="Flutter TextFormField with prefix and suffix" style="width: 60%"
+    src="/blog/assets/flutter-textformfield-prefix-suffix.png?v={{pkg.version}}"
+    title="Flutter TextFormField with prefix and suffix">
+
+```dart
+    TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        contentPadding: EdgeInsets.zero,
+        helperText: 'Enter the price in whole U.S. dollars.',
+        hintText: 'price in USD',
+        labelText: 'Price',
+        prefix: Container(
+          child: MyText('\$', color: Colors.white),
+          color: Colors.green,
+          margin: EdgeInsets.only(right: 10),
+          padding: EdgeInsets.all(10),
+        ),
+        suffix: Container(
+          child: MyText('.00', color: Colors.white),
+          color: Colors.green,
+          margin: EdgeInsets.only(left: 10),
+          padding: EdgeInsets.all(10),
+        ),
+      ),
+      initialValue: '0',
+      keyboardType: TextInputType.number,
+      maxLength: 7,
+    );
+```
+
 In mobile apps an on-screen keyboard appears when focus is a text field.
 In the iOS simulator, the on-screen keyboard will not appear
 unless it is toggled on by pressing cmd-k.
