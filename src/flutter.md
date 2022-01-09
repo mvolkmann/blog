@@ -1460,12 +1460,12 @@ including color, font, font size, and weight.
 Highlights of the arguments that can be passed to the `Text` constructor
 are described below:
 
-| Argument    | Description                                                                                                |
-| ----------- | ---------------------------------------------------------------------------------------------------------- |
-| `maxLines`  | `int` limit on number of lines to display; defaults to no limit                                            |
-| `overflow`  | `TextOverflow` enum with values `clip`, `ellipsis`, `fade`, and `visible`                                  |
-| `style`     | `TextStyle` object or property from the object obtain from `Theme.of(context).textTheme` (ex. `headline6`) |
-| `textAlign` | `TextAlign` enum value                                                                                     |
+| Argument    | Description                                                                           |
+| ----------- | ------------------------------------------------------------------------------------- |
+| `maxLines`  | `int` limit on number of lines to display; defaults to no limit                       |
+| `overflow`  | `TextOverflow` enum with values `clip`, `ellipsis`, `fade`, and `visible`             |
+| `style`     | `TextStyle` object or a property from `Theme.of(context).textTheme` (ex. `headline6`) |
+| `textAlign` | `TextAlign` enum value                                                                |
 
 The `TextAlign` enum that has the values
 `left`, `center`, `right`, `justify`, `start`, and `end`.
