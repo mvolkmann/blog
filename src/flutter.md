@@ -1454,7 +1454,7 @@ but this can be changed by setting their `overflow` argument to
 a value from the `TextOverflow` enum.
 These include `clip`, `ellipsis`, `fade`, and `visible`.
 
-`Text` renders text with a single style
+The `Text` widget renders text with a single style
 including color, font, font size, and weight.
 It takes a `style` argument whose value can be a `TextStyle` object
 or a property from the object obtain from `Theme.of(context).textTheme`
@@ -1472,6 +1472,7 @@ are described below:
 | `fontSize`        | `double` font size                                                          |
 | `fontStyle`       | `FontStyle` enum value `normal` or `italic`                                 |
 | `fontWeight`      | `FontWeight` constant `normal`, `bold`, or `wn00` where n is 1-9            |
+| `shadows`         | `List<Shadow>` describing shadows to be applied                             |
 
 Lines created by the `decoration` argument can be styled with the
 `decorationColor` (takes a `Color`),
@@ -1480,7 +1481,10 @@ Lines created by the `decoration` argument can be styled with the
 The values of the `TextDecorationStyle` enum include
 `dashed`, `dotted`, `double`, `solid`, and `wavy`.
 
-`RichText` renders runs of text that can each have a different style.
+The `Shadow` constructor takes the arguments
+`color`, `offset`, and `blurRadius`.
+
+The `RichText` widget renders runs of text that can each have a different style.
 It takes a `text` argument whose value is a `TextSpan` widget
 with a `children` argument that is typically a `List` of `TextSpan` widgets.
 The top `TextSpan` widget can specify the
