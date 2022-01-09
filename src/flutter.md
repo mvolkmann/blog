@@ -1136,7 +1136,7 @@ of the `children` argument constructor argument.
 
 The "main" axis is vertical and the "cross" axis is horizontal.
 
-This constructor for widget takes the following named parameters,
+The constructor for this widget takes the following named parameters,
 all of which are optional.
 
 | Parameter            | Type                                                        |
@@ -1334,6 +1334,26 @@ The "main" axis is horizontal and the "cross" axis is vertical.
 This constructor for widget takes the
 same named parameters as the `Column` widget.
 
+##### Stack Widget
+
+This renders child widgets on top of each other
+the first child on the bottom and the last child on top.
+It is similar to a SwiftUI `ZStack`.
+
+The constructor for this widget takes the following named parameters,
+all of which are optional.
+
+| Parameter        | Type                                                          |
+| ---------------- | ------------------------------------------------------------- |
+| `alignment`      | `AlignmentDirectional` class constant; defaults to `topStart` |
+| `children`       | `List<Widget>` of child widgets                               |
+| `textDirection?` | `TextDirection` enum; defaults to `ltr` for "left to right"   |
+
+Values of the `AlignmentDirection` enum include  
+`topStart`, `topCenter`, `topEnd`,  
+`bottomStart`, `bottomCenter`, `bottomEnd`,  
+`centerStart`, `center`, and `centerEnd`.
+
 ##### Wrap Widget
 
 This renders widgets in rows or columns.
@@ -1341,12 +1361,12 @@ It is similar to the `Row` and `Column` widgets,
 but differs in that it wraps children to multiple rows or columns
 when they do not all fit in a single row or column.
 
-This constructor for widget takes the following named parameters,
+The constructor for this widget takes the following named parameters,
 all of which are optional.
 
 | Parameter            | Type                                                                             |
 | -------------------- | -------------------------------------------------------------------------------- |
-| `alignment`          | main axis alignment within runs`WrapAlignment` enum; defaults to `start`         |
+| `alignment`          | main axis alignment within runs; `WrapAlignment` enum; defaults to `start`       |
 | `children`           | `List<Widget>` of child widgets                                                  |
 | `crossAxisAlignment` | cross axis alignment within runs; `WrapCrossAlignment` enum; defaults to `start` |
 | `direction`          | `Axis` enum; defaults to `horizontal`                                            |
