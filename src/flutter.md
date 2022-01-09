@@ -1525,14 +1525,23 @@ are described below:
 Highlights of the arguments that can be passed to the `TextSpan` constructor
 are described below:
 
-| Argument   | Description                                 |
-| ---------- | ------------------------------------------- |
-| `text`     | `String` text                               |
-| `children` | `List<InlineSpan>` of additional text spans |
-| `style`    | `TextStyle` object (described earlier)      |
+| Argument     | Description                                                 |
+| ------------ | ----------------------------------------------------------- |
+| `text`       | `String` text                                               |
+| `children`   | `List<InlineSpan>` of additional text spans                 |
+| `recognizer` | `GestureRecognizer` object such as a `TapGestureRecognizer` |
+| `style`      | `TextStyle` object (described earlier)                      |
 
 TODO: Does the text color default to the background color causing it to be
 TODO: invisible and fixed by specifying a color in the `style` argument?
+
+Providing a `List` of text spans enables specifying different styling for each.
+The styling of each text span defaults to the styling of its parent.
+
+The optional `recognizer` argument is typically set to
+a `TapGestureRecognizer` which extends `GestureRecognizer`.
+Its constructor takes an `onTap` argument
+which is a function to call when a tap is detected.
 
 ### Material Dialog Widgets
 
