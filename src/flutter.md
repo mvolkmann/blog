@@ -1139,14 +1139,14 @@ The "main" axis is vertical and the "cross" axis is horizontal.
 This constructor for widget takes the following named parameters,
 all of which are optional.
 
-| Parameter            | Type                                                            |
-| -------------------- | --------------------------------------------------------------- |
-| `children`           | `List<Widget>` of child widgets                                 |
-| `crossAxisAlignment` | `CrossAxisAlignment` enum that defaults to `center`             |
-| `mainAxisAlignment`  | `MainAxisAlignment` enum that defaults to `start`               |
-| `mainAxisSize`       | `MainAxisSize` enum that defaults to `max`                      |
-| `textDirection?`     | `TextDirection` enum that defaults to `ltr` for "left to right" |
-| `verticalDirection`  | `VerticalDirection` enum that defaults to `down`                |
+| Parameter            | Type                                                        |
+| -------------------- | ----------------------------------------------------------- |
+| `children`           | `List<Widget>` of child widgets                             |
+| `crossAxisAlignment` | `CrossAxisAlignment` enum; defaults to `center`             |
+| `mainAxisAlignment`  | `MainAxisAlignment` enum; defaults to `start`               |
+| `mainAxisSize`       | `MainAxisSize` enum; defaults to `max`                      |
+| `textDirection?`     | `TextDirection` enum; defaults to `ltr` for "left to right" |
+| `verticalDirection`  | `VerticalDirection` enum; defaults to `down`                |
 
 Typically only `children`, `crossAxisAlignment`,
 `mainAxisAlignment`, and `mainAxisSize` are specified.
@@ -1344,27 +1344,23 @@ when they do not all fit in a single row or column.
 This constructor for widget takes the following named parameters,
 all of which are optional.
 
-| Parameter            | Type                                                            |
-| -------------------- | --------------------------------------------------------------- |
-| `alignment`          | `WrapAlignment` enum that defaults to `start`                   |
-| `children`           | `List<Widget>`                                                  |
-| `clipBehavior`       | `Clip` enum                                                     |
-| `crossAxisAlignment` | `WrapCrossAlignment` enum                                       |
-| `direction`          | `Axis` enum that defaults to `horizontal`                       |
-| `runAlignment`       | `WrapAlignment` enum that defaults to `start`                   |
-| `runSpacing`         | `double`; defaults to 0.0                                       |
-| `spacing`            | `double`; defaults to 0.0                                       |
-| `textDirection?`     | `TextDirection` enum that defaults to `ltr` for "left to right" |
-| `verticalDirection`  | `VerticalDirection` enum that defaults to `down`                |
+| Parameter            | Type                                                                             |
+| -------------------- | -------------------------------------------------------------------------------- |
+| `alignment`          | main axis alignment within runs`WrapAlignment` enum; defaults to `start`         |
+| `children`           | `List<Widget>` of child widgets                                                  |
+| `crossAxisAlignment` | cross axis alignment within runs; `WrapCrossAlignment` enum; defaults to `start` |
+| `direction`          | `Axis` enum; defaults to `horizontal`                                            |
+| `runAlignment`       | cross axis alignment of entire runs, `WrapAlignment` enum; defaults to `start`   |
+| `runSpacing`         | `double`; defaults to 0.0                                                        |
+| `spacing`            | `double`; defaults to 0.0                                                        |
+| `textDirection?`     | `TextDirection` enum; defaults to `ltr` for "left to right"                      |
+| `verticalDirection`  | `VerticalDirection` enum; defaults to `down`                                     |
 
 The `children` are divided into "runs" that fit in a single row or column.
 The `runAlignment` and `runSpacing` parameters apply to entire runs.
 The `alignment` and `spacing` parameters apply to the children of each "run".
 
 Values of the `Axis` enum include `horizontal` (default) and `vertical`.
-
-Values of the `Clip` enum include
-`antiAlias`, `antiAliasWithSaveLayer`, `hardEdge`, and `none` (default).
 
 Values of the `TextDirection` and `VerticalDirection` enums were
 described with the `Column` widget above.
