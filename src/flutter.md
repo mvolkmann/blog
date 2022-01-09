@@ -1540,6 +1540,10 @@ Classes that extend `InlineSpan` include `TextSpan` and `WidgetSpan`.
 `WidgetSpan` objects represent a tree of widgets.
 This means it is possible for a `RichText` widget to render
 runs of both text and other widgets.
+The `WidgetSpan` constructor takes
+a `child` argument that specifies a widget to render and
+an `alignment` argument that specifies how to align the widget
+vertically with respect to text specified in `TextSpan` objects.
 
 Providing a `List` of text spans enables specifying different styling for each.
 The styling of each text span defaults to the styling of its parent.
