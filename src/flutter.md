@@ -93,7 +93,11 @@ This document refers to both as a simulator.
 
 - Install the Flutter SDK.
 
-  - Download and unzip it.
+  - In macOS, updated to the latest version of the operating system.
+  - Download an OS-specific version of Flutter from
+    {% aTargetBlank "https://docs.flutter.dev/get-started/install", "here" %}.
+  - Unzip the downloaded file.
+  - Move the "flutter" directory your preferred directory.
   - Add the path to the `flutter/bin` directory
     to the `PATH` environment variable.
   - Later, to upgrade a project to the latest version, cd to the project
@@ -1127,20 +1131,25 @@ TODO: Finish added descriptions in this table.
 
 This renders a vertical list of child widgets.
 It is similar to a SwiftUI `VStack`.
+The child widgets are specified in a `List` that is the value
+of the `children` argument constructor argument.
+
+A `Column` widget consumes all the available space in its parent widget.
+
 The "main" axis is vertical and the "cross" axis is horizontal.
 
 This constructor for widget takes the following named parameters,
 all of which are optional.
 
-| Parameter            | Type                      |
-| -------------------- | ------------------------- |
-| `children`           | `List<Widget>`            |
-| `crossAxisAlignment` | `CrossAxisAlignment` enum |
-| `mainAxisAlignment`  | `MainAxisAlignment` enum  |
-| `mainAxisSize`       | `MainAxisSize` enum       |
-| `textBaseline?`      | `TextBaseline` enum       |
-| `textDirection?`     | `TextDirection` enum      |
-| `verticalDirection`  | `VerticalDirection` enum  |
+| Parameter            | Type                                                            |
+| -------------------- | --------------------------------------------------------------- |
+| `children`           | `List<Widget>` of child widgets                                 |
+| `crossAxisAlignment` | `CrossAxisAlignment` enum that defaults to `center`             |
+| `mainAxisAlignment`  | `MainAxisAlignment` enum that defaults to `start`               |
+| `mainAxisSize`       | `MainAxisSize` enum that defaults to `max`                      |
+| `textBaseline?`      | `TextBaseline` enum                                             |
+| `textDirection?`     | `TextDirection` enum that defaults to `ltr` for "left to right" |
+| `verticalDirection`  | `VerticalDirection` enum that defaults to `down`                |
 
 Typically only `children`, `crossAxisAlignment`,
 `mainAxisAlignment`, and `mainAxisSize` are specified.
