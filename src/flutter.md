@@ -1059,6 +1059,22 @@ But a `Flexible` widget will take on
 the size of its child if the child has a fixed size.
 Otherwise it will choose its size just like `Expanded`.
 
+##### Padding Widget
+
+The `Padding` widget adds padding to its `child` widget.
+The constructor `child` argument specifies the `Widget` to be padded.
+
+The constructor `padding` argument takes an `EdgeInsets` object
+that specifies the amount of padding to add to each side.
+There are several `EdgeInsets` named constructors summarized below.
+All their arguments are `double` values.
+
+| Constructor                                                   | Description                                 |
+| ------------------------------------------------------------- | ------------------------------------------- |
+| `EdgeInsets.all(value)`                                       | same on all four sides                      |
+| `EdgeInsets.symmetric({horizontal = 0, vertical = 0})`        | same for left/right and same for top/bottom |
+| `EdgeInsets.only({left = 0, right = 0, top = 0, bottom = 0})` | can differ on all four sides                |
+
 ##### Transform Widget
 
 The `Transform` widget applies transformations to its `child` widget.
