@@ -1134,8 +1134,6 @@ It is similar to a SwiftUI `VStack`.
 The child widgets are specified in a `List` that is the value
 of the `children` argument constructor argument.
 
-A `Column` widget consumes all the available space in its parent widget.
-
 The "main" axis is vertical and the "cross" axis is horizontal.
 
 This constructor for widget takes the following named parameters,
@@ -1147,7 +1145,6 @@ all of which are optional.
 | `crossAxisAlignment` | `CrossAxisAlignment` enum that defaults to `center`             |
 | `mainAxisAlignment`  | `MainAxisAlignment` enum that defaults to `start`               |
 | `mainAxisSize`       | `MainAxisSize` enum that defaults to `max`                      |
-| `textBaseline?`      | `TextBaseline` enum                                             |
 | `textDirection?`     | `TextDirection` enum that defaults to `ltr` for "left to right" |
 | `verticalDirection`  | `VerticalDirection` enum that defaults to `down`                |
 
@@ -1157,21 +1154,27 @@ Typically only `children`, `crossAxisAlignment`,
 Values of the `CrossAxisAlignment` enum include
 `start`, `center` (default), `end`,
 `stretch`, and `baseline` (aligns text baselines).
+These have a similar effect to the CSS `align-items` property.
 
 Values of the `MainAxisAlignment` enum include
 `start` (default), `center`, `end`,
 `spaceAround`, `spaceBetween`, and `spaceEvenly`.
+These have a similar effect to the CSS `justify-content` property.
 
-Values of the `MainSize` enum include
-`max` (uses all available space; default) and
-`min` (uses on what is needed to fit children).
+Values of the `MainAxisSize` enum include
+`max` (uses all available height in parent widget; default) and
+`min` (uses only what is needed to fit children).
 
-Values of the `TextBaseline` enum include `alphabetic` and `ideographic`.
-
+The `textDirection` argument specifies the
+order in which to layout children horizontally.
 Values of the `TextDirection` enum include
 `ltr` (left to right) and `rtl` (right to left).
 
+The `verticalDirection` argument specifies the
+order in which to layout children vertically.
 Values of the `VerticalDirection` enum include `down` (default) and `up`.
+When the value is `down`, child widgets are placed from top to bottom.
+When the value is `up`, child widgets are placed from bottom to top.
 
 There is no parameter that controls the space between the children.
 One way to add space between them is to insert `SizedBox` widgets.
