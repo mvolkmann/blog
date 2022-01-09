@@ -1454,6 +1454,8 @@ but this can be changed by setting their `overflow` argument to
 a value from the `TextOverflow` enum.
 These include `clip`, `ellipsis`, `fade`, and `visible`.
 
+#### Text Widget
+
 The `Text` widget renders text with a single style
 including color, font, font size, and weight.
 
@@ -1501,12 +1503,36 @@ The `Shadow` constructor takes the arguments `color` (a `Color`),
 `offset` (an `Offset` object with `dx` and `dy` properties),
 and `blurRadius` (a `double`).
 
+#### RichText Widget
+
 The `RichText` widget renders runs of text that can each have a different style.
 It takes a `text` argument whose value is a `TextSpan` widget
 with a `children` argument that is typically a `List` of `TextSpan` widgets.
 The top `TextSpan` widget can specify the
 default `style` for the child `TextSpan` widgets.
 The child `TextSpan` widgets can override that style.
+
+Highlights of the arguments that can be passed to the `RichText` constructor
+are described below:
+
+| Argument       | Description                                                                              |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| `maxLines`     | `int` limit on number of lines to display; defaults to no limit                          |
+| `text`         | `InlineSpan` object; typically a `TextSpan` (described below) which extends `InlineSpan` |
+| `textAlign`    | `TextAlign` enum value                                                                   |
+| `textOverflow` | `TextOverflow` enum with values `clip`, `ellipsis`, `fade`, and `visible`                |
+
+Highlights of the arguments that can be passed to the `TextSpan` constructor
+are described below:
+
+| Argument   | Description                                 |
+| ---------- | ------------------------------------------- |
+| `text`     | `String` text                               |
+| `children` | `List<InlineSpan>` of additional text spans |
+| `style`    | `TextStyle` object (described earlier)      |
+
+TODO: Does the text color default to the background color causing it to be
+TODO: invisible and fixed by specifying a color in the `style` argument?
 
 ### Material Dialog Widgets
 
