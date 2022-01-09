@@ -1067,7 +1067,7 @@ The constructor `child` argument specifies the `Widget` to be padded.
 The constructor `padding` argument takes an `EdgeInsets` object
 that specifies the amount of padding to add to each side.
 There are several `EdgeInsets` named constructors summarized below.
-All their arguments are `double` values.
+All their arguments are `double` values that default to `0` when not specified.
 
 | Constructor                                                   | Description                                 |
 | ------------------------------------------------------------- | ------------------------------------------- |
@@ -1700,6 +1700,47 @@ import 'package:flutter/cupertino.dart';
 | `CupertinoTabView`                    | supports "parallel navigation"? between tabs; typically used with `CupertinoTabScaffold`                           |
 | `CupertinoTextField`                  | iOS-style input text field                                                                                         |
 | `CupertinoTimerPicker`                | iOS-style wheel picker for entering hours, minutes, and seconds                                                    |
+
+## Responsive UIs
+
+Flutter can build UIs that respond to the current device size.
+The `MediaQuery` class provides a way to obtain a `MediaQueryData` object
+that holds information about many aspects of the display
+including size and user preferences.
+Typically this is used inside the `build` method of a widget
+which is passed a `BuildContext` object.
+
+```dart
+MediaQueryData data = MediaQuery.of(context);
+```
+
+Highlights of the properties `MediaQueryData` objects are described below:
+
+| Property            | Description                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| `disableAnimations` | `bool` indicating whether animations should be reduced                                         |
+| `orientation`       | `Orientation` enum with the values `portrait` and `landscape`                                  |
+| `size`              | `Size` object with many properties listed below                                                |
+| `viewInsets`        | `EdgeInsets` object describing completely obscured parts of screen (ex. on-screen keyboard)    |
+| `viewPadding`       | `EdgeInsets` object describing partially obscured parts of screen (ex. notches and status bar) |
+
+The `padding` property is an `EdgeInsets` object
+that describes partially obscured parts of screen
+which are not also currently completely obscured.
+This is complex and likely not useful.
+For example, a bottom area that is always partially obscured
+might be temporarily completely obscured by an on-screen keyboard.
+Suppose `viewInsets.bottom` has a value of `340`
+representing the height of the on-screen keyboard
+and `viewPadding.bottom` has a value of `30`
+representing the height of a handle.
+In this case `padding.bottom` would have a value of `0`.
+
+`EdgeInsets` objects have the properties
+`left`, `right`, `top`, `bottom`, and more.
+
+`Size` objects have the properties
+`height`, `width`, `aspectRatio`, `longestSize`, and `shortestSize`.
 
 ## Form Validation
 
