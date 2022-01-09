@@ -1344,18 +1344,18 @@ when they do not all fit in a single row or column.
 This constructor for widget takes the following named parameters,
 all of which are optional.
 
-| Parameter            | Type                      |
-| -------------------- | ------------------------- |
-| `alignment`          | `WrapAlignment` enum      |
-| `children`           | `List<Widget>`            |
-| `clipBehavior`       | `Clip` enum               |
-| `crossAxisAlignment` | `WrapCrossAlignment` enum |
-| `direction`          | `Axis`                    |
-| `runAlignment`       | `WrapAlignment` enum      |
-| `runSpacing`         | `double`; defaults to 0.0 |
-| `spacing`            | `double`; defaults to 0.0 |
-| `textDirection`      | `TextDirection`           |
-| `verticalDirection`  | `VerticalDirection` enum  |
+| Parameter            | Type                                                            |
+| -------------------- | --------------------------------------------------------------- |
+| `alignment`          | `WrapAlignment` enum that defaults to `start`                   |
+| `children`           | `List<Widget>`                                                  |
+| `clipBehavior`       | `Clip` enum                                                     |
+| `crossAxisAlignment` | `WrapCrossAlignment` enum                                       |
+| `direction`          | `Axis` enum that defaults to `horizontal`                       |
+| `runAlignment`       | `WrapAlignment` enum that defaults to `start`                   |
+| `runSpacing`         | `double`; defaults to 0.0                                       |
+| `spacing`            | `double`; defaults to 0.0                                       |
+| `textDirection?`     | `TextDirection` enum that defaults to `ltr` for "left to right" |
+| `verticalDirection`  | `VerticalDirection` enum that defaults to `down`                |
 
 The `children` are divided into "runs" that fit in a single row or column.
 The `runAlignment` and `runSpacing` parameters apply to entire runs.
@@ -1372,8 +1372,11 @@ described with the `Column` widget above.
 Values of the `WrapAlignment` enum include
 `start` (default), `center`, `end`,
 `spaceAround`, `spaceBetween`, and `spaceEvenly`.
+These have a similar effect to the CSS `justify-content` property.
 
 Values of the `WrapCrossAlignment` enum include
+`start` (default), `center`, and `end`,
+These have a similar effect to the CSS `align-items` property.
 
 ### Material Display Widgets
 
