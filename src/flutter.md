@@ -1456,9 +1456,18 @@ These include `clip`, `ellipsis`, `fade`, and `visible`.
 
 The `Text` widget renders text with a single style
 including color, font, font size, and weight.
-It takes a `style` argument whose value can be a `TextStyle` object
-or a property from the object obtain from `Theme.of(context).textTheme`
+
+The `Text` constructor takes a `style` argument
+whose value can be a `TextStyle` object or
+a property from the object obtain from `Theme.of(context).textTheme`
 (ex. `headline6`).
+
+The `Text` constructor also takes a `textAlign` argument
+whose value can be a `TextAlign` enum that has the values
+`left`, `center`, `right`, `justify`, `start`, and `end`.
+When `textDirection` is `TextDirection.ltr`,
+`start` has the same meaning as `left` and
+`end` has the same meaning as `right`.
 
 Highlights of the arguments that can be passed to the `TextStyle` constructor
 are described below:
