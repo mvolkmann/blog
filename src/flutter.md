@@ -1340,19 +1340,33 @@ This renders child widgets on top of each other
 the first child on the bottom and the last child on top.
 It is similar to a SwiftUI `ZStack`.
 
+The width and height of a `Stack` matches that of its parent
+if the parent has a fixed size.
+Otherwise the width is the width of its widest child
+and the height is the height of its tallest child.
+
 The constructor for this widget takes the following named parameters,
 all of which are optional.
 
-| Parameter        | Type                                                          |
-| ---------------- | ------------------------------------------------------------- |
-| `alignment`      | `AlignmentDirectional` class constant; defaults to `topStart` |
-| `children`       | `List<Widget>` of child widgets                               |
-| `textDirection?` | `TextDirection` enum; defaults to `ltr` for "left to right"   |
+| Parameter        | Type                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
+| `alignment`      | `AlignmentDirectional` class constant; defaults to `topStart`                                    |
+| `children`       | `List<Widget>` of child widgets                                                                  |
+| `clipBehavior`   | `Clip` enum; specifies whether positioned children partially outside the `Stack` will be clipped |
+| `fit?`           | `StackFit` enum; specifies how to size non-positioned children                                   |
+| `textDirection?` | `TextDirection` enum; defaults to `ltr` for "left to right"                                      |
 
 Values of the `AlignmentDirection` enum include  
 `topStart`, `topCenter`, `topEnd`,  
 `bottomStart`, `bottomCenter`, `bottomEnd`,  
 `centerStart`, `center`, and `centerEnd`.
+
+To position a child widget at a certain location inside a `Stack`,
+wrap it in a `Position` widget whose constructor takes a `child` argument.
+To set the horizontal position, specify either the `left` or `right` argument.
+To set the vertical position, specify either the `top` or `bottom` argument.
+Each specifies the distance from the given side.
+To constrain the size the child, specify the `width` and `height` arguments.
 
 ##### Wrap Widget
 
