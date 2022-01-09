@@ -1463,14 +1463,22 @@ or a property from the object obtain from `Theme.of(context).textTheme`
 Highlights of the arguments that can be passed to the `TextStyle` constructor
 are described below:
 
-| Argument          | Description                                                      |
-| ----------------- | ---------------------------------------------------------------- |
-| `backgroundColor` | `Color` of background                                            |
-| `color`           | `Color` of foreground                                            |
-| `fontFamily`      | `String` name of a font family                                   |
-| `fontSize`        | `double` font size                                               |
-| `fontStyle`       | `FontStyle` enum value `normal` or `italic`                      |
-| `fontWeight`      | `FontWeight` constant `normal`, `bold`, or `wn00` where n is 1-9 |
+| Argument          | Description                                                                 |
+| ----------------- | --------------------------------------------------------------------------- |
+| `backgroundColor` | `Color` of background                                                       |
+| `color`           | `Color` of foreground                                                       |
+| `decoration`      | `TextDecoration` constant `none`, `underline`, `lineThrough`, or `overline` |
+| `fontFamily`      | `String` name of a font family                                              |
+| `fontSize`        | `double` font size                                                          |
+| `fontStyle`       | `FontStyle` enum value `normal` or `italic`                                 |
+| `fontWeight`      | `FontWeight` constant `normal`, `bold`, or `wn00` where n is 1-9            |
+
+Lines created by the `decoration` argument can be styled with the
+`decorationColor` (takes a `Color`),
+`decorationStyle` (takes a `TextDecorationStyle` enum value), and
+`decorationThickness` (takes a `double`) arguments.
+The values of the `TextDecorationStyle` enum include
+`dashed`, `dotted`, `double`, `solid`, and `wavy`.
 
 `RichText` renders runs of text that can each have a different style.
 It takes a `text` argument whose value is a `TextSpan` widget
