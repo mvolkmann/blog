@@ -1716,13 +1716,16 @@ MediaQueryData data = MediaQuery.of(context);
 
 Highlights of the properties `MediaQueryData` objects are described below:
 
-| Property            | Description                                                                                    |
-| ------------------- | ---------------------------------------------------------------------------------------------- |
-| `disableAnimations` | `bool` indicating whether animations should be reduced                                         |
-| `orientation`       | `Orientation` enum with the values `portrait` and `landscape`                                  |
-| `size`              | `Size` object with many properties listed below                                                |
-| `viewInsets`        | `EdgeInsets` object describing completely obscured parts of screen (ex. on-screen keyboard)    |
-| `viewPadding`       | `EdgeInsets` object describing partially obscured parts of screen (ex. notches and status bar) |
+| Property            | Description                                                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------- |
+| `disableAnimations` | `bool` indicating whether animations should be reduced                                          |
+| `orientation`       | `Orientation` enum with the values `portrait` and `landscape`                                   |
+| `size`              | `Size` object with many properties listed below                                                 |
+| `viewInsets`        | `EdgeInsets` object describing completely obscured parts of screen (ex. on-screen keyboard)     |
+| `viewPadding`       | `EdgeInsets` object describing partially obscured parts of screen (ex. notches and status bars) |
+
+The `orientation` property can be used to implement different widget layouts
+based on whether the device is in portrait or layout mode.
 
 The `padding` property is an `EdgeInsets` object
 that describes partially obscured parts of screen
@@ -1741,6 +1744,14 @@ In this case `padding.bottom` would have a value of `0`.
 
 `Size` objects have the properties
 `height`, `width`, `aspectRatio`, `longestSize`, and `shortestSize`.
+This information can be used to size widgets so they occupy
+a specific percentage of the screen width and/or height.
+
+The `viewInsets` and `viewPadding` properties can be
+used to avoid rendering widgets in unsafe areas of the screen
+such as notches and status bars.
+However, an easier way to accomplish this is to
+wrap the `Scaffold` widget in a `SafeArea` widget.
 
 ## Form Validation
 
