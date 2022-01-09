@@ -1457,17 +1457,24 @@ These include `clip`, `ellipsis`, `fade`, and `visible`.
 The `Text` widget renders text with a single style
 including color, font, font size, and weight.
 
-The `Text` constructor takes a `style` argument
-whose value can be a `TextStyle` object or
-a property from the object obtain from `Theme.of(context).textTheme`
-(ex. `headline6`).
+Highlights of the arguments that can be passed to the `Text` constructor
+are described below:
 
-The `Text` constructor also takes a `textAlign` argument
-whose value can be a `TextAlign` enum that has the values
+| Argument    | Description                                                                                                |
+| ----------- | ---------------------------------------------------------------------------------------------------------- |
+| `maxLines`  | `int` limit on number of lines to display; defaults to no limit                                            |
+| `overflow`  | `TextOverflow` enum with values `clip`, `ellipsis`, `fade`, and `visible`                                  |
+| `style`     | `TextStyle` object or property from the object obtain from `Theme.of(context).textTheme` (ex. `headline6`) |
+| `textAlign` | `TextAlign` enum value                                                                                     |
+
+The `TextAlign` enum that has the values
 `left`, `center`, `right`, `justify`, `start`, and `end`.
 When `textDirection` is `TextDirection.ltr`,
 `start` has the same meaning as `left` and
 `end` has the same meaning as `right`.
+
+The `overflow` property only takes effect when `maxLines` is specified
+and that number of lines is exceeded.
 
 Highlights of the arguments that can be passed to the `TextStyle` constructor
 are described below:
