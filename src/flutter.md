@@ -1515,25 +1515,31 @@ The child `TextSpan` widgets can override that style.
 Highlights of the arguments that can be passed to the `RichText` constructor
 are described below:
 
-| Argument       | Description                                                                              |
-| -------------- | ---------------------------------------------------------------------------------------- |
-| `maxLines`     | `int` limit on number of lines to display; defaults to no limit                          |
-| `text`         | `InlineSpan` object; typically a `TextSpan` (described below) which extends `InlineSpan` |
-| `textAlign`    | `TextAlign` enum value                                                                   |
-| `textOverflow` | `TextOverflow` enum with values `clip`, `ellipsis`, `fade`, and `visible`                |
+| Argument       | Description                                                               |
+| -------------- | ------------------------------------------------------------------------- |
+| `maxLines`     | `int` limit on number of lines to display; defaults to no limit           |
+| `text`         | `InlineSpan` object (see commonly used subclasses below)                  |
+| `textAlign`    | `TextAlign` enum value                                                    |
+| `textOverflow` | `TextOverflow` enum with values `clip`, `ellipsis`, `fade`, and `visible` |
 
 Highlights of the arguments that can be passed to the `TextSpan` constructor
 are described below:
 
-| Argument     | Description                                                 |
-| ------------ | ----------------------------------------------------------- |
-| `text`       | `String` text                                               |
-| `children`   | `List<InlineSpan>` of additional text spans                 |
-| `recognizer` | `GestureRecognizer` object such as a `TapGestureRecognizer` |
-| `style`      | `TextStyle` object (described earlier)                      |
+| Argument     | Description                                                          |
+| ------------ | -------------------------------------------------------------------- |
+| `text`       | `String` text                                                        |
+| `children`   | `List<InlineSpan>` of additional objects that implement `InlineSpan` |
+| `recognizer` | `GestureRecognizer` object such as a `TapGestureRecognizer`          |
+| `style`      | `TextStyle` object (described earlier)                               |
 
 TODO: Does the text color default to the background color causing it to be
 TODO: invisible and fixed by specifying a color in the `style` argument?
+
+Classes that extend `InlineSpan` include `TextSpan` and `WidgetSpan`.
+`TextSpan` objects represent a tree of text and
+`WidgetSpan` objects represent a tree of widgets.
+This means it is possible for a `RichText` widget to render
+runs of both text and other widgets.
 
 Providing a `List` of text spans enables specifying different styling for each.
 The styling of each text span defaults to the styling of its parent.
