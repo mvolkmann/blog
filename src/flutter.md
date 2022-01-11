@@ -111,22 +111,19 @@ This document refers to both as a simulator.
 
   - Install Xcode.
 
-- To enable testing on Android:
+<!-- - To enable testing on Android: -->
 
-  - Install Android Studio, even when using a different editor such as VS Code.
-  - Install the Android SDK using Homebrew.
-    - `brew tap homebrew/cask`
-    - `brew install --cask android-sdk`
+- Install {% aTargetBlank "https://developer.android.com/studio",
+  "Android Studio" %}, even when using a different editor such as VS Code.
+- Install the Android SDK using Homebrew.
+
+  - `brew tap homebrew/cask`
+  - `brew install --cask android-sdk`
 
 - To start the iOS Simulator:
 
   Enter `open -a Simulator`.
-  This works in Bash and Fish, but not in Nushell.
-
-- To start an Android emulator from VS Code:
-
-  - Select "Flutter: Launch Emulator" from the Command Palette.
-  - Select a device type.
+  This works in Bash, zsh, and Fish, but not in Nushell.
 
 - To start an Android emulator from outside VS Code:
 
@@ -139,6 +136,13 @@ This document refers to both as a simulator.
     - Click "Finish".
   - To start an emulator, click a play button (green triangle)
     in the "Actions" column of one of the devices.
+
+- To start an Android emulator from VS Code:
+
+  - Install the "Flutter" extension.
+  - Select "Flutter: Launch Emulator" from the Command Palette.
+  - Select a device type.
+    This requires installing AVDs in Android Studio.
 
 - Verify the installation by entering `flutter doctor`.
 
