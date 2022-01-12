@@ -89,11 +89,11 @@ For Android devices this is referred to as an "emulator".
 For iOS devices this is referred to as a "simulator".
 This document refers to both as a simulator.
 
-## Setup
+## Setup (macOS-specific)
 
 - Install the Flutter SDK.
 
-  - In macOS, updated to the latest version of the operating system.
+  - Update to the latest version of macOS.
   - Download an OS-specific version of Flutter from
     {% aTargetBlank "https://docs.flutter.dev/get-started/install", "here" %}.
   - Unzip the downloaded file.
@@ -107,18 +107,44 @@ This document refers to both as a simulator.
     - `flutter pub get`
     - `flutter pub upgrade`
 
+- Install CocoaPods by entering `sudo gem install cocoapods`.
+
 - To enable testing on iOS:
 
   - Install Xcode.
 
-<!-- - To enable testing on Android: -->
+- To enable testing on Android:
 
-- Install {% aTargetBlank "https://developer.android.com/studio",
-  "Android Studio" %}, even when using a different editor such as VS Code.
-- Install the Android SDK using Homebrew.
+  - Warning: This seems complicated and error prone!
+  - Install {% aTargetBlank "https://developer.android.com/studio",
+    "Android Studio" %}, even when using a different editor such as VS Code.
+  - Select Android Studio ... Preferences ... Appearance & Behavior ...
+    System Settings ... Android SDK ... SDK Tools.
+  - Check "Android SDK Command-line Tools (latest).
+  - Press "OK", "OK", and "Finish".
+  - Enter `flutter doctor --android-licenses`
 
-  - `brew tap homebrew/cask`
-  - `brew install --cask android-sdk`
+  - Install the Android SDK using Homebrew.
+
+    - `brew tap homebrew/cask`
+    - `brew install --cask android-sdk`
+
+  - Enter `sdkmanager --install "cmdline-tools;latest"`
+
+- Verify the installation by entering `flutter doctor`.
+
+  - Fix any issues identified using the commands recommended in the output.
+  - Run `flutter doctor` again to verify that all the issues have been resolved.
+  - If you get the error "cmdline-tools component is missing",
+    enter `sdkmanager --install "cmdline-tools" and then "latest".
+  - If this gives the error
+    "java.lang.NoClassDefFoundError: javax/xml/bind/annotation/XmlSchema",
+    start "Android Studio", select Tools ... SDK Manager, select
+    Appearance & Behavior ... System Settings ... Android SDK ... SDK Tools,
+    check "Android SDK Command-line tools (latest)",
+    and click the Apply button.
+    Then from a terminal enter `flutter doctor --android-licenses`.
+    There is no need to run the `sdkmanager` command again.
 
 - To start the iOS Simulator:
 
@@ -128,7 +154,7 @@ This document refers to both as a simulator.
 - To start an Android emulator from outside VS Code:
 
   - Launch the Android Studio app.
-  - Select Tools ... AVD Manager
+  - Select Tools ... AVD Manager or More Actions ... AVD Manager
   - To create a new virtual device:
     - Click the "+ Create Virtual Device" button at the bottom.
     - Select a device such as "Pixel 5" and click "Next".
@@ -139,21 +165,11 @@ This document refers to both as a simulator.
 
 - To start an Android emulator from VS Code:
 
+  - Install AVDs in Android Studio.
+  - Restart VS Code.
   - Install the "Flutter" extension.
   - Select "Flutter: Launch Emulator" from the Command Palette.
   - Select a device type.
-    This requires installing AVDs in Android Studio.
-
-- Verify the installation by entering `flutter doctor`.
-
-  - If you get the error "cmdline-tools component is missing",
-    enter `sdkmanager --install "cmdline-tools" and then "latest".
-  - If this gives the error
-    "java.lang.NoClassDefFoundError: javax/xml/bind/annotation/XmlSchema",
-    start "Android Studio", select Tools ... SDK Manager, select
-    Appearance & Behavior ... System Settings ... Android SDK ... SDK Tools,
-    check "Android SDK Command-line tools (latest)",
-    and click the Apply button.
 
 ## Tools
 
