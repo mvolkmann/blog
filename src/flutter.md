@@ -2160,6 +2160,27 @@ import 'package:flutter/cupertino.dart';
 | `CupertinoTextField`                  | iOS-style input text field                                                                                         |
 | `CupertinoTimerPicker`                | iOS-style wheel picker for entering hours, minutes, and seconds                                                    |
 
+## Model-View-Controller
+
+One recommended pattern for organizing a Flutter project
+is to follow the Model-View-Controller (MVC) pattern.
+For example, a project can have subdirectories under the `lib` directory
+named `models`, `controllers`, and `views`.
+
+The `models` directory holds Dart source files that define classes
+that each describe a particular kind of data use in the application.
+In an application that supports scheduling meetings,
+the model classes could include `User` and `Meeting`.
+
+The `controllers` directory holds Dart source files that define classes
+that each define methods for performing actions supported by the application.
+For example, methods could include `createUser`, `updateUser`, `deleteUser`,
+`createMeeting`, `updateMeeting`, `deleteMeeting`, and `sendMeetingInvites`.
+
+The `views` directory holds Dart source files that define widgets
+that render the user interface of the application.
+For example, widgets could include `User`, `Meeting`, and `Calendar`.
+
 ## Responsive UIs
 
 Flutter can build UIs that respond to the current device size.
@@ -3200,6 +3221,8 @@ They slide up from the bottom and can be dragged back down by the user
 or closed programmatically.
 They can be modal or non-modal.
 
+Bottom sheets attach themselves to the nearest `Scaffold` widget.
+
 To display a bottom sheet, call the function
 `showBottomSheet` (for non-modal) or `showModalBottomSheet` (for modal).
 These functions take many arguments, but the most commonly used are:
@@ -3225,6 +3248,9 @@ To do this, wrap the `Column` widget in a `SizedBox` and pass it the
 While the user can close the bottom sheet by dragging it down,
 it may be desirable to include a close button
 that calls `Navigator.pop(context)` to close it.
+Alternatively, capture the controller returned by
+the `showBottomSheet` or `showModalBottomSheet` function
+and call the `close` method on that controller object.
 
 The following helper function addresses all the concerns described above.
 
@@ -3309,7 +3335,7 @@ class MyHomePage extends StatelessWidget {
           builder: (context) {
             var nonModalButton = ElevatedButton(
               child: Text('Show Non-Modal BottomSheet'),
-              onPressed: () => openBottomSheet(
+              onPressed: () => openBottomSheet( // function defined above
                 backgroundColor: Colors.green,
                 context: context,
                 includeCloseButton: true,
