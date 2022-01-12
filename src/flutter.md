@@ -2169,17 +2169,26 @@ named `models`, `controllers`, and `views`.
 
 The `models` directory holds Dart source files that define classes
 that each describe a particular kind of data use in the application.
+Theses classes focus on data representation and not business rules.
 In an application that supports scheduling meetings,
 the model classes could include `User` and `Meeting`.
+To make it easy for other classes to import all of the model classes
+consider creating the file `data_layer.dart` that contains
+one `export` statement for each model source file.
 
-The `controllers` directory holds Dart source files that define classes
-that each define methods for performing actions supported by the application.
+The `controllers` directory holds Dart source files
+that define classes the business rules of the application.
+These classes define methods for performing
+actions supported by the application.
 For example, methods could include `createUser`, `updateUser`, `deleteUser`,
 `createMeeting`, `updateMeeting`, `deleteMeeting`, and `sendMeetingInvites`.
 
 The `views` directory holds Dart source files that define widgets
 that render the user interface of the application.
 For example, widgets could include `User`, `Meeting`, and `Calendar`.
+
+Some applications choose to create classes that
+combine the roles of models and controllers.
 
 ## Responsive UIs
 
