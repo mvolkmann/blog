@@ -1609,6 +1609,10 @@ These functions are described in the following table:
 | `showDatePicker`      | provides an easier way to display a `DatePickerDialog` than using the above functions      |
 | `showDatePickerRange` | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
 
+Note that `showDatePickerRange` displays a full-screen modal dialog
+while the other `show` functions
+display modal dialogs that do not cover the full screen.
+
 The following code simplifies the use of `AlertDialog`
 and provides the functions `alert` and `confirm`
 which are similar to their HTML counterparts.
@@ -1695,6 +1699,36 @@ class MyAlertDialog extends StatelessWidget {
 ```
 
 The following code demonstrates using each of the supported dialog types.
+
+<img alt="Flutter Dialogs" style="width: 30%"
+    src="/blog/assets/flutter-dialogs.png?v={{pkg.version}}"
+    title="Flutter Dialogs">
+<img alt="Flutter About Dialog" style="width: 30%"
+    src="/blog/assets/flutter-dialog-about.png?v={{pkg.version}}"
+    title="Flutter About Dialog">
+<img alt="Flutter About Dialog Licenses" style="width: 30%"
+    src="/blog/assets/flutter-dialog-about-licenses.png?v={{pkg.version}}"
+    title="Flutter About Dialog Licenses">
+
+<img alt="Flutter Material Alert Dialog" style="width: 30%"
+    src="/blog/assets/flutter-dialog-alert.png?v={{pkg.version}}"
+    title="Flutter Material Alert Dialog">
+<img alt="Flutter Cupertino Alert Dialog" style="width: 30%"
+    src="/blog/assets/flutter-dialog-alert-cupertino.png?v={{pkg.version}}"
+    title="Flutter Cupertino Alert Dialog">
+<img alt="Flutter Confirm Dialog" style="width: 30%"
+    src="/blog/assets/flutter-dialog-confirm.png?v={{pkg.version}}"
+    title="Flutter Confirm Dialog">
+
+<img alt="Flutter Date Picker Dialog" style="width: 30%"
+    src="/blog/assets/flutter-dialog-date-picker.png?v={{pkg.version}}"
+    title="Flutter Date Picker Dialog">
+<img alt="Flutter Date Range Dialog" style="width: 30%"
+    src="/blog/assets/flutter-dialog-date-range.png?v={{pkg.version}}"
+    title="Flutter Date Range Dialog">
+<img alt="Flutter Time Picker Dialog" style="width: 30%"
+    src="/blog/assets/flutter-dialog-time-picker.png?v={{pkg.version}}"
+    title="Flutter Time Picker Dialog">
 
 ```dart
 import 'package:flutter/material.dart';
