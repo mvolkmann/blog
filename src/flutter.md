@@ -22,10 +22,10 @@ Flutter is not the only user of Skia. From {% aTargetBlank
 "https://www.chromium.org/developers/design-documents/graphics-and-skia",
 "Graphics and Skia" %}, "Chrome uses Skia
 for nearly all graphics operations, including text rendering."
-From {% aTargetBlank "https://en.wikipedia.org/wiki/Skia_Graphics_Engine", "Wikipedia" %},
-"the library (Skia) is used as of 2021 in Google Chrome, Chrome OS,
-Chromium OS, Mozilla Firefox, Mozilla Thunderbird, Android, Firefox OS,
-LibreOffice, Flutter and Avalonia."
+From {% aTargetBlank "https://en.wikipedia.org/wiki/Skia_Graphics_Engine",
+"Wikipedia" %}, "the library (Skia) is used as of 2021 in
+Google Chrome, Chrome OS, Chromium OS, Mozilla Firefox,
+Mozilla Thunderbird, Android, Firefox OS, LibreOffice, Flutter and Avalonia."
 
 {% aTargetBlank "https://flutterflow.io", "FlutterFlow" %} is a
 relatively new, low-code tool for building Flutter applications.
@@ -1580,17 +1580,285 @@ a `TapGestureRecognizer` which extends `GestureRecognizer`.
 Its constructor takes an `onTap` argument
 which is a function to call when a tap is detected.
 
-### Material Dialog Widgets
+### Dialog Widgets
 
-| Widget                  | Description |
-| ----------------------- | ----------- |
-| `AboutDialog`           |             |
-| `AlertDialog`           |             |
-| `DatePickerDialog`      |             |
-| `DateRangePickerDialog` |             |
-| `Dialog`                |             |
-| `SimpleDialog`          |             |
-| `TimePickerDialog`      |             |
+Flutter provides many widgets that render modal dialogs.
+Each of these are described in the following table:
+
+| Widget                  | Description                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AboutDialog`           | contains the "application's icon, name, version number, and copyright, plus a button to show licenses for software used by the application" |
+| `AlertDialog`           | creates a dialog containing a message and some buttons                                                                                      |
+| `CupertinoAlertDialog`  | iOS-themed version of `AlertDialog`                                                                                                         |
+| `DatePickerDialog`      | contains help text and a `CalendarDatePicker`                                                                                               |
+| `DateRangePickerDialog` | contains help text and a `CalendarDatePicker` that supports selecting both a start and end date                                             |
+| `Dialog`                | used by other dialogs, but not by extending; not typically used directly                                                                    |
+| `SimpleDialog`          | contains a title and a list of clickable `SimpleDialogOption` options                                                                       |
+| `TimePickerDialog`      | contains a "lollipop" UI for selecting an hour and minute in a day with toggle buttons for AM and PM                                        |
+
+Flutter also provides a set of functions that show a dialog.
+All of these `returns a `Future` that completes
+when the user does something to dismiss the dialog.
+These functions are described in the following table:
+
+| Function              | Description                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| `showDialog`          | displays any dialog returned by the function specified in its `builder` argument           |
+| `showCupertinoDialog` | like `showDialog`, but themed for iOS                                                      |
+| `showGeneralDialog`   | like `showDialog` but supports customizing the transition used to display the dialog       |
+| `showDatePicker`      | provides an easier way to display a `DatePickerDialog` than using the above functions      |
+| `showDatePickerRange` | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
+
+The following code simplifies the use of `AlertDialog`
+and provides the functions `alert` and `confirm`
+which are similar to their HTML counterparts.
+
+```dart
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+/// Displays an AlertDialog with an OK button
+/// which just closes the dialog.  No value is returned.
+Future<void> alert({
+  required BuildContext context,
+  required String title,
+  required String message,
+  bool cupertino = false,
+}) async {
+  await showDialog<String>(
+    context: context,
+    builder: (_) => MyAlertDialog(
+      cupertino: cupertino,
+      title: title,
+      message: message,
+      options: ['OK'],
+    ),
+  );
+}
+
+/// Displays an AlertDialog with No and Yes buttons
+/// and returns a Future that succeeds with a String
+/// that is the text on the pressed button.
+Future<String?> confirm({
+  required BuildContext context,
+  required String title,
+  required String message,
+  bool cupertino = false,
+}) async {
+  return await showDialog<String>(
+    context: context,
+    builder: (_) => MyAlertDialog(
+      title: title,
+      message: message,
+      options: ['No', 'Yes'],
+    ),
+  );
+}
+
+class MyAlertDialog extends StatelessWidget {
+  final bool cupertino;
+  final String title;
+  final String message;
+  final List<String> options;
+
+  MyAlertDialog({
+    Key? key,
+    this.cupertino = false,
+    required this.title,
+    required this.message,
+    required this.options,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var buttons = options
+        .map(
+          (option) => TextButton(
+            onPressed: () => Navigator.pop(context, option),
+            child: Text(option),
+          ),
+        )
+        .toList();
+    return cupertino
+        ? CupertinoAlertDialog(
+            title: Text(title),
+            content: Text(message),
+            actions: buttons,
+          )
+        : AlertDialog(
+            title: Text(title),
+            content: Text(message),
+            actions: buttons,
+          );
+  }
+}
+```
+
+The following code demonstrates using each of the supported dialog types.
+
+```dart
+import 'package:flutter/material.dart';
+import 'my_alert_dialog.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Dialog Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  void _alert({
+    required BuildContext context,
+    bool cupertino = false,
+    required String message,
+  }) {
+    alert(
+      context: context,
+      cupertino: cupertino,
+      title: 'Alert',
+      message: message,
+    );
+  }
+
+  void _confirm({
+    required BuildContext context,
+    required String question,
+  }) async {
+    var answer = await confirm(
+      context: context,
+      title: 'Confirm',
+      message: question,
+    );
+    print('answer = $answer');
+  }
+
+  void _pickDate({required BuildContext context}) async {
+    var dateTime = DateTime.now();
+    var newDateTime = await showDatePicker(
+      context: context,
+      helpText: 'Select a date.',
+      initialDate: dateTime,
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2030, 12, 31),
+    );
+    print('newDateTime = $newDateTime');
+  }
+
+  void _pickDateRange({required BuildContext context}) async {
+    var dateRange = DateTimeRange(
+      start: DateTime(2022, 4, 16),
+      end: DateTime(2022, 5, 3),
+    );
+    // Click the start date, then click the end date.
+    // Click again to start over, selecting a new start date.
+    // The days in between will be shaded
+    // to indicate that they are in the range.
+    var newDateRange = await showDateRangePicker(
+      context: context,
+      helpText: 'Select start and end dates.',
+      initialDateRange: dateRange,
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2030, 12, 31),
+    );
+    print('newDateRange = $newDateRange');
+  }
+
+  void _pickTime(BuildContext context) async {
+    var time = TimeOfDay(hour: 10, minute: 19);
+    var newTime = await showDialog(
+      context: context,
+      builder: (_) => TimePickerDialog(
+        helpText: 'Select a time.',
+        initialTime: time,
+      ),
+    );
+    print('newTime = $newTime');
+  }
+
+  void _showAbout(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (_) => AboutDialog(
+              applicationIcon: Icon(Icons.ac_unit_outlined),
+              applicationName: 'Dialog Demos',
+              applicationVersion: '1.0.0',
+              applicationLegalese: 'All rights reserved.',
+            ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dialog Demo'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text('About...'),
+              onPressed: () => _showAbout(context),
+            ),
+            ElevatedButton(
+              child: Text('Show Material Alert Dialog'),
+              onPressed: () => _alert(
+                context: context,
+                message: 'Something interesting happened.',
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Show Cupertino Alert Dialog'),
+              onPressed: () => _alert(
+                context: context,
+                cupertino: true,
+                message: 'Something interesting happened.',
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Show Confirm Dialog'),
+              onPressed: () => _confirm(
+                context: context,
+                question: 'Are you sure?',
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Show DatePickerDialog'),
+              onPressed: () {
+                _pickDate(context: context);
+              },
+            ),
+            ElevatedButton(
+              child: Text('Select Date Range'),
+              onPressed: () => _pickDateRange(context: context),
+            ),
+            ElevatedButton(
+              child: Text('Select Time'),
+              onPressed: () => _pickTime(context),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
 ### Material Input Widgets
 
