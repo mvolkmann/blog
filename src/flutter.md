@@ -22,6 +22,10 @@ Flutter is not the only user of Skia. From {% aTargetBlank
 "https://www.chromium.org/developers/design-documents/graphics-and-skia",
 "Graphics and Skia" %}, "Chrome uses Skia
 for nearly all graphics operations, including text rendering."
+From {% aTargetBlank "https://en.wikipedia.org/wiki/Skia_Graphics_Engine", "Wikipedia" %},
+"the library (Skia) is used as of 2021 in Google Chrome, Chrome OS,
+Chromium OS, Mozilla Firefox, Mozilla Thunderbird, Android, Firefox OS,
+LibreOffice, Flutter and Avalonia."
 
 {% aTargetBlank "https://flutterflow.io", "FlutterFlow" %} is a
 relatively new, low-code tool for building Flutter applications.
@@ -148,7 +152,7 @@ This document refers to both as a simulator.
 
 - To start the iOS Simulator:
 
-  Enter `open -a Simulator`.
+  Enter `open -a simulator`.
   This works in Bash, zsh, and Fish, but not in Nushell.
 
 - To start an Android emulator from outside VS Code:
@@ -170,6 +174,9 @@ This document refers to both as a simulator.
   - Install the "Flutter" extension.
   - Select "Flutter: Launch Emulator" from the Command Palette.
   - Select a device type.
+  - If the device name in the lower-right reads "Chrome (web javascript):",
+    click it and then click "Enable android for this project".
+    Click the device name again and click "Enable iOS for this project".
 
 ## Tools
 
