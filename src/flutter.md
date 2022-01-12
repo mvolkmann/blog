@@ -2099,6 +2099,10 @@ class DismissKeyboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      // If a TextField has focus, causing the on-screen keyboard to appear,
+      // this code will detect taps outside of it and hide the keyboard.
+      // However, if what is tapped is a button, this code will not be invoked.
+      // It seems that buttons swallow this event.
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus &&
@@ -2111,6 +2115,51 @@ class DismissKeyboard extends StatelessWidget {
   }
 }
 ```
+
+Another option is to hide the on-screen keyboard if the user scrolls the page.
+For each custom widget class that defines a page in the app
+that supports scrolling using a `ListView` widget, do the following:
+
+1. Declare in property that holds an instance of `ScrollController`.
+
+   ```dart
+   var scrollController = ScrollController();
+   ```
+
+1. Override the `initState` method.
+
+   ```dart
+   @override
+   void initState() {
+     super.initState();
+     scrollController.addListener(() {
+       // Remove focus from the TextField that
+       // triggered the on-screen keyboard to open.
+       FocusScope.of(context).requestFocus(FocusNode());
+     });
+   }
+   ```
+
+1. Override the `dispose` method.
+
+   ```dart
+   @override
+   void dispose() {
+     scrollController.dispose();
+     super.dispose();
+   }
+   ```
+
+1. Pass the `ScrollController` instance to the `ListView`.
+
+   ```dart
+   ListView(
+     controller: scrollController,
+     children: <Widget>[
+       ...
+     ],
+   )
+   ```
 
 ### Other Material Classes
 
