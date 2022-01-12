@@ -1607,9 +1607,23 @@ These functions are described in the following table:
 | `showCupertinoDialog` | like `showDialog`, but themed for iOS                                                      |
 | `showGeneralDialog`   | like `showDialog` but supports customizing the transition used to display the dialog       |
 | `showDatePicker`      | provides an easier way to display a `DatePickerDialog` than using the above functions      |
-| `showDatePickerRange` | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
+| `showDateRangePicker` | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
 
-Note that `showDatePickerRange` displays a full-screen modal dialog
+By default, dialogs created with the `showDialog` function
+are dismissed if a user taps outside them. To prevent this,
+pass the `barrierDismissible` argument with a value of `false`.
+
+Dialogs created with the `showCupertinoDialog` and `showGeneralDialog` functions
+have the opposite default.
+To cause them to be dismissed if a user taps outside them,
+pass the `barrierDismissible` argument with a value of `true`.
+
+Dialogs created with the `showDatePicker` and `showDatePickerRange` functions
+are always dismissed if a user taps outside them.
+They do not take a `barrierDismissible` argument,
+so this behavior cannot be changed.
+
+The `showDatePickerRange` displays a full-screen modal dialog
 while the other `show` functions
 display modal dialogs that do not cover the full screen.
 
