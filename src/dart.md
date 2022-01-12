@@ -3702,7 +3702,12 @@ Each of these classes are described in the following sections.
 The `dart:async` library defines the `Future` class.
 A `Future` represents the result of code that will run in the future
 inside the current thread.
-It is similar to a `Promise` in JavaScript.
+
+A Dart `Future` is similar to a JavaScript `Promise`.
+Terminology differs slightly.
+JavaScript promises are said to either "resolve" or "reject".
+Dart futures are said to either
+"complete with a value" or "complete with an error".
 
 Execution of these is managed by the event loop described in the next section.
 Asynchronous tasks are placed on either

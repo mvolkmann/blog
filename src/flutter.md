@@ -1631,6 +1631,7 @@ Future<void> alert({
 }) async {
   await showDialog<String>(
     context: context,
+    // The builder function can return any kind of dialog.
     builder: (_) => MyAlertDialog(
       cupertino: cupertino,
       title: title,
@@ -1675,6 +1676,8 @@ class MyAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Dialogs are treated like routes, so to close a dialog and
+    // return the previous route, call Navigator.of(context).pop().
     var buttons = options
         .map(
           (option) => TextButton(
@@ -1686,13 +1689,13 @@ class MyAlertDialog extends StatelessWidget {
     return cupertino
         ? CupertinoAlertDialog(
             title: Text(title),
-            content: Text(message),
-            actions: buttons,
+            content: Text(message), // can be any widget
+            actions: buttons, // typically a List of TextButton widgets
           )
         : AlertDialog(
             title: Text(title),
-            content: Text(message),
-            actions: buttons,
+            content: Text(message), // can be any widget
+            actions: buttons, // typically a List of TextButton widgets
           );
   }
 }
