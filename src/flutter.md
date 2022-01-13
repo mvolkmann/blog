@@ -1973,6 +1973,7 @@ class MyHomePage extends StatelessWidget {
 Many of these widgets render buttons, including
 `DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
 `IconButton`, and `TextButton`.
+An earlier widget named `FlatButton` has been deprecated.
 
 Basic usage of all of these widgets is demonstrated in the Flutter project at
 {% aTargetBlank "https://github.com/mvolkmann/flutter_input",
@@ -2567,7 +2568,7 @@ I prefer saving new values of form fields when the user changes them
 using the callback specified in their `onChanged` arguments
 as shown above.
 
-## Managing State
+## State Management
 
 For state that is only used by a single stateful widget instance,
 call the `setState` function from inside that widget.
@@ -2779,9 +2780,355 @@ The steps to use the provider library are:
    }
    ```
 
-### GetX Library
+### GetX Framework
 
-TODO: Add information about this.
+{% aTargetBlank "https://pub.dev/packages/get", "GetX" %}
+is a Flutter framework that provides a dependency manager,
+state manager, navigation manager, and utility functions.
+It can be found in pub.dev under the name "get".
+
+#### Dependency Management
+
+GetX dependency management provides a way to register an object
+in an ancestor widget and get a reference to it in decendant widgets.
+This removes the need to explicitly pass objects
+down through the widget hierarchy.
+It provides a kind of dependency injection.
+
+To register an object, call `Get.put`. For example:
+
+```dart
+// There is no need to capture a reference in a variable
+// if the instance is not used in this file.
+Get.put(PlayerController());
+
+// Capture a reference if needed in this file.
+final GameController gamectrl = Get.put(GameController());
+```
+
+To get a reference to a registered object, call `Get.find`.
+For example:
+
+```dart
+final playerCtrl = Get.find<PlayerController>();
+final gameCtrl = Get.find<GameController>();
+```
+
+This assumes that only one instance of each class is needed.
+To register and find multiple instances of the same class,
+include the `tag` argument in calls to `Get.put` and `Get.find`.
+This must be a `String` that uniquely identifies an instance.
+Consider using `static` properties to hold tag names and
+place them in source files that can be imported everywhere they are needed.
+
+An alternative to `Get.put` is to use `Get.lazyPut`.
+This takes a function that creates and returns the object to be registered.
+The function is not called until the
+first call to `Get.find` that requests the object.
+This avoids creating and registering objects
+that are never used in a given user session.
+For example:
+
+```dart
+get.lazyPut(() => PlayerController());
+```
+
+The examples above show registering and finding controller objects,
+but any kind of object can be used.
+
+#### State Management
+
+GetX supports several approaches to managing state in a Flutter app.
+This section only covers the approach that is seen as the easiest.
+The steps require are:
+
+1. Create controller classes that hold and update state
+   that must be shared across multiple widgets.
+   These must extend `GetxController`.
+1. Define state properties in the controller classes.
+   Typically these are private.
+1. Define methods (getters, setters, and others) to provide access to state.
+   Call `update()` at the end of any method that modifies state
+   in order to notify listeners.
+1. Add `.obs` after state property values to make them observable.
+   This returns a value of a type whose name begins with `Rx`
+   such as `RxString`.
+1. Register the controller classes using `Get.put`
+   near the top of the widget tree.
+1. Get references to controller classes using `Get.find`
+   in any widgets that need to get or set state.
+1. Wrap widgets that need to be updated when state changes
+   with the `Obx` widget.
+   This runs a function passed to it every time that state it uses changes
+   and the function should return a new widget instance
+   created with the new state.
+
+The following Flutter app demonstrates each of the steps above.
+It is composed of two controllers for managing state
+and three custom widgets that update and display the state.
+The user can enter a player name and a series of scores.
+The total and average of the scores is calculated and displayed.
+Code for this app is in
+{% aTargetBlank "https://github.com/mvolkmann/flutter_getx", "GitHub" %}.
+
+<img alt="GetX Demo" style="width: 40%"
+    src="/blog/assets/flutter-getx-demo.png?v={{pkg.version}}"
+    title="GetX Demo">
+
+Here are examples of controller classes:
+
+```dart
+// player_controller.dart
+import 'package:get/get.dart';
+
+class PlayerController extends GetxController {
+  final _name = 'Mark'.obs; // observable String
+
+  // _name is an RxString.
+  // We need to add .value to get its value.
+  String get name => _name.value;
+
+  set name(String value) {
+    _name.value = value;
+    update();
+  }
+}
+```
+
+```dart
+// game_controller.dart
+import 'package:get/get.dart';
+
+int sum(List<int> numbers) =>
+    numbers.isEmpty ? 0 : numbers.reduce((acc, score) => acc + score);
+
+class GameController extends GetxController {
+  final _scores = <int>[].obs; // observable List of int values
+
+  void addScore(int score) {
+    _scores.add(score);
+    update(); // notifies listeners
+  }
+
+  void clearScores() {
+    _scores.clear();
+    update();
+  }
+
+  double get average => _scores.isEmpty ? 0 : sum(_scores) / _scores.length;
+
+  int get count => _scores.length;
+
+  int get total => sum(_scores);
+}
+```
+
+Here is the app entry point that registers the controllers:
+
+```dart
+// main.dart
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'game_controller.dart';
+import 'player_controller.dart';
+import 'player_entry.dart';
+import 'score_entry.dart';
+import 'score_report.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Change MaterialApp to GetMaterialApp here to use features of GetX
+    // not related to state management such as navigation.
+    return MaterialApp(
+      title: 'GetX Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Register controllers with GetX so other widgets can find them.
+    final GameController gameCtrl = Get.put(GameController());
+    Get.put(PlayerController());
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('GetX Demo'),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              PlayerEntry(),
+              SizedBox(height: 10),
+              ScoreEntry(),
+              SizedBox(height: 10),
+              Obx(() => Text('Number of scores = ${gameCtrl.count}')),
+              ScoreReport(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+Here are widgets that use the controllers:
+
+```dart
+// player_entry.dart
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'player_controller.dart';
+
+// This needs to be stateful in order
+// to hold a TextEditingController instance.
+class PlayerEntry extends StatefulWidget {
+  const PlayerEntry({Key? key}) : super(key: key);
+
+  @override
+  _PlayerEntryState createState() => _PlayerEntryState();
+}
+
+class _PlayerEntryState extends State<PlayerEntry> {
+  final playerCtrl = Get.find<PlayerController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'player name',
+              labelText: 'Player',
+            ),
+            initialValue: playerCtrl.name,
+            onChanged: (String name) {
+              playerCtrl.name = name;
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+```
+
+```dart
+// score_entry.dart
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'game_controller.dart';
+
+// This needs to be stateful in order
+// to hold a TextEditingController instance.
+class ScoreEntry extends StatefulWidget {
+  const ScoreEntry({Key? key}) : super(key: key);
+
+  @override
+  _ScoreEntryState createState() => _ScoreEntryState();
+}
+
+class _ScoreEntryState extends State<ScoreEntry> {
+  final gameCtrl = Get.find<GameController>();
+
+  final tec = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          controller: tec,
+          decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'score',
+              labelText: 'Score'),
+          keyboardType: TextInputType.number,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // This is necessary so onPressed can be updated
+            // when the text in the TextEditingController changes.
+            ValueListenableBuilder<TextEditingValue>(
+              valueListenable: tec,
+              builder: (context, value, child) {
+                return ElevatedButton(
+                  child: Text('Save'),
+                  onPressed: value.text.isEmpty ? null : save,
+                );
+              },
+            ),
+            SizedBox(width: 10),
+            ElevatedButton(
+              child: Text('Reset'),
+              onPressed: () => gameCtrl.clearScores(),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  void save() {
+    var score = int.parse(tec.text);
+    if (score != 0) gameCtrl.addScore(score);
+    tec.clear();
+  }
+}
+```
+
+```dart
+// score_report.dart
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'game_controller.dart';
+import 'player_controller.dart';
+
+class ScoreReport extends StatelessWidget {
+  final gameCtrl = Get.find<GameController>();
+  final playerCtrl = Get.find<PlayerController>();
+
+  ScoreReport({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      // Widgets that need to update when controller data changes
+      // need to be wrapped in Obx.
+      Obx(() => Text('Player is ${playerCtrl.name}')),
+      Obx(() => Text('Total is ${gameCtrl.total}')),
+      Obx(() => Text('Average is ${gameCtrl.average.toStringAsFixed(2)}')),
+    ]);
+  }
+}
+```
+
+#### Route Management
+
+TODO: Add this.
+
+#### Utilities
+
+TODO: Add this.
 
 ### RiverPod Library
 
