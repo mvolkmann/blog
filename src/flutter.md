@@ -507,8 +507,11 @@ This extension provides many things including:
 - Installs and updates dependencies
 
   This happens automatically when changes to `pubspec.yaml` are saved.
-  However, it will not recognized new classes and functions until
+  However, it will not recognize new classes and functions until
   "Developer: Reload Window" is selected from the Command Palette.
+
+  Alternatively, a package can be installed and added in `pubspec.yaml`
+  by entering `flutter pub add {package-name}` in a terminal.
 
 To view the implementation code for Flutter classes, cmd-click a class name.
 For example, try this on `MaterialApp`.
@@ -2574,7 +2577,13 @@ a recommended approach is to use the provider library.
 In June, 2019 Chris Sells, the Flutter Project Manager, said
 "Provider is the recommended way to do State Management for apps of all sizes."
 
-There are many other state management options provided by the community.
+There are many other state management options.
+One option provided by Flutter is to use `InheritedWidget`.
+This is a relatively complicated way to share mutable state.
+that is explained well in this {% aTargetBlank
+"https://www.youtube.com/watch?v=utrvu-eow6U", "YouTube video" %}.
+
+Many state management options are provided by the community.
 Two popular packages are RiverPod and GetX.
 
 ### setState Function
