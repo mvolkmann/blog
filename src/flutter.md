@@ -3475,14 +3475,14 @@ void main() => runApp(ProviderScope(child: MyApp()));
 
 All the kinds of providers supported by Riverpod are summarized below.
 
-| Provider                 | Description                                                                                                      |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| `Provider`               | provides read-only data synchronously                                                                            |
-| `StateProvider`          | like `Provider`, but has `state` getter and setter methods for changing value from outside                       |
-| `FutureProvider`         | provides read-only data asynchronously                                                                           |
-| `StreamProvider`         |                                                                                                                  |
-| `ChangeNotifierProvider` | state is mutable; must call `notifyListeners` after changing; state is exposed and modifiable outside            |
-| `StateNotifierProvider`  | state is immutable; replacing state automatically notifies listeners; state is not exposed or modifiable outside |
+| Provider                 | Description                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| `Provider`               | provides read-only data synchronously                                                    |
+| `StateProvider`          | provides writable data synchronously with `state` getter and setter methods              |
+| `FutureProvider`         | provides read-only data asynchronously                                                   |
+| `StreamProvider`         | provides a stream of read-only data, updated as new data becomes available               |
+| `ChangeNotifierProvider` | state is mutable; must call `notifyListeners` after changing                             |
+| `StateNotifierProvider`  | state is immutable but can be replaced; replacing state automatically notifies listeners |
 
 The following app demonstrates basic usage of each provider type.
 Code for this app is in
