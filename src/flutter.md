@@ -3043,6 +3043,14 @@ is a Flutter framework that provides a dependency manager,
 state manager, navigation manager, and utility functions.
 It can be found in pub.dev under the name "get".
 
+GetX has a reputation for being easier to use
+than other Flutter state management libraries.
+One critisism is that it is a very large library
+that provides much more than state management.
+It can bloat the size of applications that only use it for state management.
+Another issue is that the official documentation is
+difficult to navigate and doesn't provide many usage examples.
+
 #### Dependency Management
 
 GetX dependency management provides a way to register an object
