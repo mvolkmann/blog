@@ -3441,7 +3441,8 @@ It addresses several issues with provider including:
 
 1. provider does not support asynchronous state.
 
-1. provider does not force code to handle all possible states.
+1. provider does not force code to handle all possible states
+   with compile-time checks.
    For example, a state that returns a `Future` can be
    pending, complete with a value, or complete with an error.
 
@@ -3474,16 +3475,524 @@ void main() => runApp(ProviderScope(child: MyApp()));
 
 All the kinds of providers supported by Riverpod are summarized below.
 
-| Provider                 | Description                                                                                        |
-| ------------------------ | -------------------------------------------------------------------------------------------------- |
-| `Provider`               | provides a reference to an object that cannot be changed from outside                              |
-| `StateProvider`          | like `Provider`, but has `state` getter and setter methods for changing the value from the outside |
-| `StateNotifierProvider`  |                                                                                                    |
-| `ChangeNotifierProvider` |                                                                                                    |
-| `FutureProvider`         |                                                                                                    |
-| `StreamProvider`         |                                                                                                    |
+| Provider                 | Description                                                                                                      |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `Provider`               | provides read-only data synchronously                                                                            |
+| `StateProvider`          | like `Provider`, but has `state` getter and setter methods for changing value from outside                       |
+| `FutureProvider`         | provides read-only data asynchronously                                                                           |
+| `StreamProvider`         |                                                                                                                  |
+| `ChangeNotifierProvider` | state is mutable; must call `notifyListeners` after changing; state is exposed and modifiable outside            |
+| `StateNotifierProvider`  | state is immutable; replacing state automatically notifies listeners; state is not exposed or modifiable outside |
 
-TODO: Add information about this.
+The following app demonstrates basic usage of each provider type.
+Code for this app is in
+{% aTargetBlank "https://github.com/mvolkmann/flutter_riverpod_demo", "GitHub" %}.
+
+<img alt="Riverpod Demo" style="width: 40%"
+    src="/blog/assets/flutter-riverpod-demo.png?v={{pkg.version}}"
+    title="Riverpod Demo">
+
+```dart
+// main.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'change_notifier_page.dart';
+import 'computed_provider_page.dart';
+import 'future_provider_page.dart';
+import 'provider_page.dart';
+import 'state_notifier_page.dart';
+import 'state_provider_page.dart';
+import 'stream_provider_page.dart';
+
+void main() => runApp(ProviderScope(child: MyApp()));
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Riverpod Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Home(),
+      routes: {
+        ProviderPage.route: (_) => ProviderPage(),
+        StateProviderPage.route: (_) => StateProviderPage(),
+        FutureProviderPage.route: (_) => FutureProviderPage(),
+        StreamProviderPage.route: (_) => StreamProviderPage(),
+        ComputedProviderPage.route: (_) => ComputedProviderPage(),
+        ChangeNotifierPage.route: (_) => ChangeNotifierPage(),
+        StateNotifierPage.route: (_) => StateNotifierPage(),
+      },
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Riverpod Demo'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text('Provider'),
+              onPressed: () {
+                Navigator.pushNamed(context, ProviderPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('StateProvider'),
+              onPressed: () {
+                Navigator.pushNamed(context, StateProviderPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('FutureProvider'),
+              onPressed: () {
+                Navigator.pushNamed(context, FutureProviderPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('StreamProvider'),
+              onPressed: () {
+                Navigator.pushNamed(context, StreamProviderPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('ComputedProvider'),
+              onPressed: () {
+                Navigator.pushNamed(context, ComputedProviderPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('ChangeNotifier'),
+              onPressed: () {
+                Navigator.pushNamed(context, ChangeNotifierPage.route);
+              },
+            ),
+            ElevatedButton(
+              child: Text('StateNotifier'),
+              onPressed: () {
+                Navigator.pushNamed(context, StateNotifierPage.route);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+```dart
+// provider_page.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// This provide a single, immutable value.
+// The ref parameter can be used to access other providers.
+// This could be used to compute the value of this provider.
+final greetingProvider = Provider((ref) => 'Hello, World!');
+
+// Extending ConsumerWidget instead of StatelessWidget
+// causes a WidgetRef argument to be passed to the build method.
+// ConsumerWidget extends ConsumerStatefulWidget which extends StatefulWidget.
+class ProviderPage extends ConsumerWidget {
+  static const route = '/provider';
+
+  ProviderPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // This is one way to access the state of a provider
+    // that makes it available throughout this widget.
+    // When the value changes, this entire widget will be rebuilt.
+    final greeting = ref.watch(greetingProvider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Provider Demo'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(greeting),
+            // This is another way to access the state of a provider
+            // that limits the scope to a single child widget.
+            // When the value changes, only this child widget will be rebuilt.
+            Consumer(builder: (context, ref, child) {
+              final greeting = ref.watch(greetingProvider);
+              return Text(greeting);
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+```dart
+// state_provider_page.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// Adding ".autoDispose" causes the provider to lose its state
+// there are no longer any widgets listening to it.
+// The value will reset to zero every time we return to this page.
+final counterStateProvider = StateProvider.autoDispose<int>((ref) => 0);
+
+// Extending ConsumerWidget instead of StatelessWidget
+// causes a WidgetRef argument to be passed to the build method.
+// ConsumerWidget extends ConsumerStatefulWidget which extends StatefulWidget.
+class StateProviderPage extends ConsumerWidget {
+  static const route = '/state-provider';
+
+  StateProviderPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final counter = ref.watch(counterStateProvider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('StateProvider Demo'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('$counter'),
+            FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => incrementCounter(ref),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void incrementCounter(ref) {
+    // This is overly complex!
+    ref.read(counterStateProvider.state).state += 1;
+  }
+}
+```
+
+```dart
+// future_provider_page.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// FutureProvider automatically caches results.
+// Adding ".autoDispose" causes it to lose the cached value
+// when there are no longer any widgets listening to it.
+// Every time we return to this page, it will be recomputed.
+final futureProvider = FutureProvider.autoDispose<int>((ref) async {
+  // Simulate time to make a API request.
+  await Future.delayed(Duration(seconds: 2));
+  return 19;
+});
+
+class FutureProviderPage extends ConsumerWidget {
+  static const route = '/future-provider';
+
+  FutureProviderPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final score = ref.watch(futureProvider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('FutureProvider Demo'),
+      ),
+      body: Center(
+        child: score.when(
+          loading: () => CircularProgressIndicator(),
+          data: (value) => Text('$value'),
+          error: (e, stack) => Text('Error: $e'),
+        ),
+      ),
+    );
+  }
+}
+```
+
+```dart
+// stream_provider_pagedart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// StreamProvider automatically continues using the same stream.
+// Adding ".autoDispose" causes it to dispose of the strean
+// when there are no longer any widgets listening to it.
+// Every time we return to this page, it will
+// create a new stream starting from the beginning.
+final streamProvider = StreamProvider.autoDispose<int>(
+  (ref) => Stream.periodic(Duration(seconds: 1), (index) => index + 1),
+);
+
+class StreamProviderPage extends ConsumerWidget {
+  static const route = '/stream-provider';
+
+  StreamProviderPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final stream = ref.watch(streamProvider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('StreamProvider Demo'),
+      ),
+      body: Center(
+        child: stream.when(
+          loading: () => CircularProgressIndicator(),
+          data: (value) => Text('$value'),
+          error: (e, stack) => Text('Error: $e'),
+        ),
+        //TODO: What can't this be used instead of the above code?
+        //child: buildStream(stream),
+      ),
+    );
+  }
+
+  Widget buildStream(stream) {
+    return stream.when(
+      loading: () => CircularProgressIndicator(),
+      data: (value) => Text('$value'),
+      error: (e, stack) => Text('Error: $e'),
+    );
+  }
+}
+```
+
+```dart
+// computed_provider_page.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final priceStateProvider = StateProvider<double>((ref) => 100);
+final taxStateProvider = StateProvider<double>((ref) => 0.075);
+final totalStateProvider = StateProvider<double>((ref) {
+  final price = ref.watch(priceStateProvider);
+  final tax = ref.watch(taxStateProvider);
+  return price * (1 + tax);
+});
+
+class ComputedProviderPage extends ConsumerWidget {
+  static const route = '/scoped-provider';
+
+  ComputedProviderPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final total = ref.watch(totalStateProvider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('ComputedProvider Demo'),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              numberField('Price', priceStateProvider, ref),
+              SizedBox(height: 10),
+              numberField('Tax', taxStateProvider, ref),
+              SizedBox(height: 10),
+              Text('Total: \$${total.toStringAsFixed(2)}'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  TextFormField numberField(
+    String label,
+    StateProvider provider,
+    WidgetRef ref,
+  ) {
+    final value = ref.watch(provider);
+    return TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: label,
+      ),
+      initialValue: value.toString(),
+      keyboardType: TextInputType.number,
+      onChanged: (String value) => setValue(provider, ref, value),
+    );
+  }
+
+  void setValue(StateProvider provider, ref, value) {
+    ref.read(provider.state).state = double.parse(value);
+  }
+}
+```
+
+```dart
+// change_notifier_page.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class DogChangeNotifier extends ChangeNotifier {
+  String _breed = 'Whippet';
+  String _name = 'Comet';
+
+  void update({String? breed, String? name}) {
+    if (breed != null) _breed = breed;
+    if (name != null) _name = name;
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    print('DogNotifier dispose called');
+    super.dispose();
+  }
+
+  @override
+  String toString() => '$_name is a $_breed.';
+}
+
+// Adding ".autoDispose" causes the provider to lose its state
+// there are no longer any widgets listening to it.
+// It also enables its "dispose" method to be called.
+final dogChangeNotifierProvider =
+    ChangeNotifierProvider.autoDispose<DogChangeNotifier>(
+  (ref) => DogChangeNotifier(),
+);
+
+class ChangeNotifierPage extends ConsumerWidget {
+  static const route = '/change-notifier';
+
+  ChangeNotifierPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dog = ref.watch(dogChangeNotifierProvider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Provider Demo'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(dog.toString()),
+            ElevatedButton(
+              child: Text('Change Dog'),
+              onPressed: () {
+                dog.update(breed: 'GSP', name: 'Oscar');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+```dart
+// state_notifier_page.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// This is an immutable class.
+class Dog {
+  final String breed;
+  final String name;
+
+  const Dog({
+    this.breed = 'Whippet',
+    this.name = 'Comet',
+  });
+
+  Dog copy({String? breed, String? name}) => Dog(
+        breed: breed ?? this.breed,
+        name: name ?? this.name,
+      );
+
+  @override
+  String toString() => '$name is a $breed.';
+}
+
+class DogStateNotifier extends StateNotifier<Dog> {
+  DogStateNotifier() : super(Dog());
+
+  void setBreed(String breed) {
+    state = state.copy(breed: breed);
+  }
+
+  void setName(String name) {
+    state = state.copy(name: name);
+  }
+
+  @override
+  void dispose() {
+    print('DogStateNotifier dispose called');
+    super.dispose();
+  }
+}
+
+// Adding ".autoDispose" causes the provider to lose its state
+// there are no longer any widgets listening to it.
+// It also enables its "dispose" method to be called.
+final dogNotifierProvider =
+    StateNotifierProvider.autoDispose<DogStateNotifier, Dog>(
+  (ref) => DogStateNotifier(),
+);
+
+class StateNotifierPage extends ConsumerWidget {
+  static const route = '/state-notifier';
+
+  StateNotifierPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dog = ref.watch(dogNotifierProvider);
+    final notifier = ref.read(dogNotifierProvider.notifier);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Provider Demo'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(dog.toString()),
+            ElevatedButton(
+              child: Text('State Dog'),
+              onPressed: () {
+                notifier.setBreed('GSP');
+                notifier.setName('Oscar');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
 ## Persisting State
 
