@@ -3124,11 +3124,49 @@ class ScoreReport extends StatelessWidget {
 
 #### Route Management
 
-TODO: Add this.
+To register page routes, specify the `getPages` argument
+in the `GetMaterialApp` constructor call.
+The value should be a `List` of `GetPage` calls.
+Each of these is passsed `name` and `page` arguments.
+The `name` argument value is a `String`.
+The `page` argument value is a function that returns a page widget.
+
+GetX provides many functions that navigate to a new page.
+The most useful of these functions are summarized below:
+
+| Function   | Description                                                         | Documentation                                                                                                                         |
+| ---------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `Get.back` | goes back to previous route, popping current route off of the stack | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/back.html", "back" %} |
+| `Get.to`   | goes to a new route, pushing it onto the stack                      | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html", "to" %}     |
+| `Get.off`  | pops current route and pushes new route                             | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html", "to" %}     |
+
+TODO: Add an example of using GetX route management.
 
 #### Utilities
 
+GetX provides many utility functions.
+In order to use these, the topmost widget must be
+changed from `MaterialApp` to `GetMaterialApp`.
+The most useful of these functions are summarized below:
+
+| Function            | Description                                                       | Documentation                                                                                                                                              |
+| ------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Get.bottomSheet`   | displays a bottom sheet                                           | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionBottomSheet/bottomSheet.html", "bottomSheet" %} |
+| `Get.defaultDialog` | displays a dialog                                                 | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionDialog/defaultDialog.html", "defaultDialog" %}  |
+| `Get.snackbar`      | displays a snackbar                                               | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionSnackbar/snackbar.html", "snackbar" %}          |
+| `Get.changeTheme`   | changes to a given theme such as `ThemeData.dark()`               | {% aTargetBlank "", "" %}                                                                                                                                  |
+| `GetUtils.isEmail`  | returns a `bool` incideing if a `String` is a valid email address | {% aTargetBlank "", "" %}                                                                                                                                  |
+| ``                  |                                                                   | {% aTargetBlank "", "" %}                                                                                                                                  |
+| ``                  |                                                                   | {% aTargetBlank "", "" %}                                                                                                                                  |
+| ``                  |                                                                   | {% aTargetBlank "", "" %}                                                                                                                                  |
+| ``                  |                                                                   | {% aTargetBlank "", "" %}                                                                                                                                  |
+| ``                  |                                                                   | {% aTargetBlank "", "" %}                                                                                                                                  |
+| ``                  |                                                                   | {% aTargetBlank "", "" %}                                                                                                                                  |
+
 TODO: Add this.
+
+GetX provides language translation using the `.tr` getter functino
+and the `Get.changeLocale` function.`
 
 ### RiverPod Library
 
