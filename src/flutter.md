@@ -3426,6 +3426,63 @@ TODO: Provide an example of using this.
 
 ### RiverPod Library
 
+{% aTargetBlank "https://riverpod.dev", "Riverpod" %}
+was created by Remi Rousselet, who is the same developer that created
+{% aTargetBlank "https://pub.dev/packages/provider", "provider" %}.
+It addresses several issues with provider including:
+
+1. provider depends on Flutter and
+   cannot be used in non-Flutter Dart appliations.
+   For example, getting state references requires access to a
+   Flutter `BuildContext` which limits where they can be obtained.
+
+1. provider only supports keeping state in a single instance
+   of each state class.
+
+1. provider does not support asynchronous state.
+
+1. provider does not force code to handle all possible states.
+   For example, a state that returns a `Future` can be
+   pending, complete with a value, or complete with an error.
+
+There are three libraries for using Riverpod.
+
+1. {% aTargetBlank
+   "https://github.com/rrousselGit/river_pod/tree/master/packages/riverpod",
+   "riverpod" %} for non-Flutter Dart applications.
+1. {% aTargetBlank "https://pub.dev/packages/flutter_riverpod",
+   "flutter_riverpod" %} for Flutter applications.
+1. {% aTargetBlank "https://pub.dev/packages/hooks_riverpod",
+   "hooks_riverpod" %} for Flutter applications
+   that also use {% aTargetBlank
+   "https://github.com/rrousselGit/flutter_hooks", "flutter_hooks" %}.
+
+Only use of flutter_riverpod v2 is described here.
+
+Riverpod providers are objects that encapsulate state,
+provide methods for modifying the state,
+and support listening for changes.
+They are typically declared as global constants.
+
+In order for a Flutter application to use Riverpod,
+it must wrap the topmost application widget in a `ProviderScope`.
+For example:
+
+```dart
+void main() => runApp(ProviderScope(child: MyApp()));
+```
+
+All the kinds of providers supported by Riverpod are summarized below.
+
+| Provider                 | Description                                                                                        |
+| ------------------------ | -------------------------------------------------------------------------------------------------- |
+| `Provider`               | provides a reference to an object that cannot be changed from outside                              |
+| `StateProvider`          | like `Provider`, but has `state` getter and setter methods for changing the value from the outside |
+| `StateNotifierProvider`  |                                                                                                    |
+| `ChangeNotifierProvider` |                                                                                                    |
+| `FutureProvider`         |                                                                                                    |
+| `StreamProvider`         |                                                                                                    |
+
 TODO: Add information about this.
 
 ## Persisting State
