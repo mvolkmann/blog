@@ -2625,7 +2625,7 @@ The steps to use the provider library are:
      provider: ^6.0.1
    ```
 
-2. Install by entering `flutter pub get`.
+2. Install by entering `flutter pub get` unless your IDE does this for you.
 
 3. Create `ChangeNotifier` classes that hold state,
    define methods for modifying it, and define getters and setters.
@@ -2779,6 +2779,262 @@ The steps to use the provider library are:
      }
    }
    ```
+
+The following Flutter app provides a more
+full-featured demonstration of using provider.
+The same app will be shown later using other state management libraries.
+It is composed of two `ChangeNotifier` subclasses for managing state
+and three custom widgets that update and display the state.
+The user can enter a player name and a series of scores.
+The total and average of the scores is calculated and displayed.
+Code for this app is in
+{% aTargetBlank "https://github.com/mvolkmann/flutter_provider", "GitHub" %}.
+
+<img alt="provider Demo" style="width: 40%"
+    src="/blog/assets/flutter-provider-demo.png?v={{pkg.version}}"
+    title="provider Demo">
+
+Here are examples of `ChangeNotifier` subclasses:
+
+```dart
+// player_state.dart
+import 'package:flutter/foundation.dart'; // defines ChangeNotifier
+
+class PlayerState extends ChangeNotifier {
+  var _name = 'Mark';
+
+  String get name => _name;
+
+  set name(String value) {
+    _name = value;
+    notifyListeners();
+  }
+}
+```
+
+```dart
+// game_state.dart
+import 'package:flutter/foundation.dart'; // defines ChangeNotifier
+
+int sum(List<int> numbers) =>
+    numbers.isEmpty ? 0 : numbers.reduce((acc, score) => acc + score);
+
+class GameState extends ChangeNotifier {
+  final _scores = <int>[];
+
+  void addScore(int score) {
+    _scores.add(score);
+    notifyListeners();
+  }
+
+  void clearScores() {
+    _scores.clear();
+    notifyListeners();
+  }
+
+  double get average => _scores.isEmpty ? 0 : sum(_scores) / _scores.length;
+
+  int get count => _scores.length;
+
+  int get total => sum(_scores);
+}
+```
+
+Here is the app entry point that registers the `ChangeNotifier` subclasses:
+
+```dart
+// main.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'game_state.dart';
+import 'player_entry.dart';
+import 'player_state.dart';
+import 'score_entry.dart';
+import 'score_report.dart';
+
+void main() => runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => GameState()),
+          ChangeNotifierProvider(create: (context) => PlayerState()),
+        ],
+        child: MyApp(),
+      ),
+    );
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'provider Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Home(),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final gameState = Provider.of<GameState>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('provider Demo'),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              PlayerEntry(),
+              SizedBox(height: 10),
+              ScoreEntry(),
+              SizedBox(height: 10),
+              Text('Number of scores = ${gameState.count}'),
+              ScoreReport(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+Here are widgets that use the `ChangeNotifier` subclasses:
+
+```dart
+// player_entry.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'player_state.dart';
+
+class PlayerEntry extends StatelessWidget {
+  const PlayerEntry({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final playerState = Provider.of<PlayerState>(context, listen: false);
+
+    return Row(
+      children: [
+        Expanded(
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'player name',
+              labelText: 'Player',
+            ),
+            initialValue: playerState.name,
+            onChanged: (String name) {
+              playerState.name = name;
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+```
+
+```dart
+// score_entry.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'game_state.dart';
+
+// This needs to be stateful in order
+// to hold a TextEditingController instance.
+class ScoreEntry extends StatefulWidget {
+  const ScoreEntry({Key? key}) : super(key: key);
+
+  @override
+  _ScoreEntryState createState() => _ScoreEntryState();
+}
+
+class _ScoreEntryState extends State<ScoreEntry> {
+  final tec = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final gameState = Provider.of<GameState>(context, listen: false);
+
+    return Column(
+      children: [
+        TextField(
+          controller: tec,
+          decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'score',
+              labelText: 'Score'),
+          keyboardType: TextInputType.number,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // This is necessary so onPressed can be updated
+            // when the text in the TextEditingController changes.
+            ValueListenableBuilder<TextEditingValue>(
+              valueListenable: tec,
+              builder: (context, value, child) {
+                return ElevatedButton(
+                  child: Text('Save'),
+                  onPressed: value.text.isEmpty ? null : () => save(gameState),
+                );
+              },
+            ),
+            SizedBox(width: 10),
+            ElevatedButton(
+              child: Text('Reset'),
+              onPressed: () => gameState.clearScores(),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  void save(gameState) {
+    var score = int.parse(tec.text);
+    if (score != 0) gameState.addScore(score);
+    tec.clear();
+  }
+}
+```
+
+```dart
+// score_report.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'game_state.dart';
+import 'player_state.dart';
+
+class ScoreReport extends StatelessWidget {
+  ScoreReport({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final gameState = Provider.of<GameState>(context);
+    final playerState = Provider.of<PlayerState>(context);
+
+    return Column(children: [
+      // Widgets that need to update when controller data changes
+      // need to be wrapped in Obx.
+      Text('Player is ${playerState.name}'),
+      Text('Total is ${gameState.total}'),
+      Text('Average is ${gameState.average.toStringAsFixed(2)}'),
+    ]);
+  }
+}
+```
 
 ### GetX Framework
 
@@ -3163,10 +3419,9 @@ The most useful of these functions are summarized below:
 | `GetUtils.isURL`         | returns a `bool` indicaing if a `String` is a valid URL                          | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isURL.html", "isURL" %}                               |
 | `GetUtils.snakeCase`     | returns snake_case version of a `String`                                         | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/snakeCase.html", "snakeCase" %}                       |
 
-TODO: Add this.
-
 GetX provides language translation using the `.tr` getter functino
 and the `Get.changeLocale` function.`
+TODO: Provide an example of using this.
 
 ### RiverPod Library
 
