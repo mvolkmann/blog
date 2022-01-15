@@ -2031,8 +2031,16 @@ But another consideration is the ability to specify an initial value.
 The only way to do this with at `TextField` is to use a `TextEditingController`
 which can also be done with a `TextFormField`.
 
-The following code demonstrates using a `TextField` with an initial value.
+The following code demonstrates using a `TextField` with an initial value
+that is specified using a `TextEditingController`.
 When the user types a new value, the `Text` below it is updated.
+The `TextField` contains an `IconButton` that when clicked clears the value.
+This code and the related code that follows can be found in {% aTargetBlank
+"https://github.com/mvolkmann/flutter_testfield_vs_textformfield", "GitHub" %}.
+
+<img alt="Flutter TextField" style="width: 60%"
+    src="/blog/assets/flutter-textfield.png?v={{pkg.version}}"
+    title="Flutter TextField">
 
 ```dart
 import 'package:flutter/material.dart';
@@ -2056,13 +2064,17 @@ class _Greet1State extends State<Greet1> {
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Name',
+            suffixIcon: IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () => setState(() => tec.text = ''),
+            ),
           ),
         ),
         // This is needed to listen for changes in the TextEditingController.
         ValueListenableBuilder<TextEditingValue>(
           valueListenable: tec,
           builder: (context, value, child) {
-            return Text('Hello, ${tec.text}');
+            return Text(tec.text.isEmpty ? '' : 'Hello, ${tec.text}!');
           },
         ),
       ],
@@ -2071,10 +2083,15 @@ class _Greet1State extends State<Greet1> {
 }
 ```
 
-The following code demonstrates the same thing as above,
-but using a `TextFormField`. Note how this code less complex.
-For this reason it is often preferrable to use `TextFormField`
-even when validation is not needed.
+The following code demonstrates the same functionality as above,
+but using a `TextFormField`.
+Since this code is less complex, it can be preferrable
+to use `TextFormField` even when validation is not needed.
+However, if there is a need to update the `initialValue`,
+this will not work because the initial value cannot be changed.
+Unlike in the previous example, when the `IconButton` is tapped,
+the value in the `TextFormField` is not cleared.
+This can only be done when using a `TextEditingController`.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -2097,22 +2114,115 @@ class _Greet2State extends State<Greet2> {
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Name',
+            suffixIcon: IconButton(
+              icon: Icon(Icons.close),
+              //TODO: Why doesn't this work?
+              onPressed: () => setState(() => name = ''),
+            ),
           ),
           initialValue: name,
           onChanged: (String value) {
             setState(() => name = value);
           },
         ),
-        Text('Hello, $name'),
+        Text(name.isEmpty ? '' : 'Hello, $name!'),
       ],
     );
   }
 }
 ```
 
-The `InputDecoration` class specifies styling to be applied
-described by optional arguments passed to its constructor.
-The highlights are described in the following table:
+The bottom line is that text input in Flutter is a bit complicated.
+Like many things in Flutter, a good approach
+is to wrap the complexity in a custom widget and
+use that everywhere instead of directly using provided widgets.
+This also provides an opportunity to specify app-specific styling.
+The following code demonstrates a custom widget that does this.
+
+```dart
+import 'package:flutter/material.dart';
+
+class EasyTextField extends StatefulWidget {
+  final String label;
+  final ValueChanged<String>? onChanged;
+  final String value;
+
+  const EasyTextField({
+    Key? key,
+    required this.label,
+    required this.onChanged,
+    this.value = '',
+  }) : super(key: key);
+
+  @override
+  _EasyTextFieldState createState() => _EasyTextFieldState();
+}
+
+class _EasyTextFieldState extends State<EasyTextField> {
+  final tec = TextEditingController();
+
+  @override
+  void initState() {
+    tec.text = widget.value;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: tec,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: widget.label,
+        suffixIcon: IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            setState(() => tec.text = '');
+            widget.onChanged!('');
+          },
+        ),
+      ),
+      onChanged: widget.onChanged,
+    );
+  }
+}
+```
+
+Here is an example of using the custom widget defined above.
+Note how much simpler this component is than
+the `Greet1` and `Greet2` components shown above.
+
+```dart
+import 'package:flutter/material.dart';
+import 'easy_text_field.dart';
+
+class Greet3 extends StatefulWidget {
+  const Greet3({Key? key}) : super(key: key);
+
+  @override
+  _Greet3State createState() => _Greet3State();
+}
+
+class _Greet3State extends State<Greet3> {
+  var name = 'Mark';
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        EasyTextField(
+          label: 'Name',
+          value: name,
+          onChanged: (String value) {
+            setState(() => name = value);
+          },
+        ),
+        Text(name.isEmpty ? '' : 'Hello, $name!'),
+      ],
+    );
+  }
+}
+```
 
 | Argument     | Description                                                  |
 | ------------ | ------------------------------------------------------------ |
