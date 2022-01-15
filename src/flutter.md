@@ -2156,7 +2156,8 @@ class _MyPasswordFieldState extends State<MyPasswordField> {
 
 Instances of the `TextEditingController` class can be passed to the
 `TextField` and `TextFormField` constructors in their `controller` argument.
-These objects specify the initial value, hold the current value,
+These objects specify the initial value,
+hold the current value (in their `text` property),
 can return the currently selected text, can clear the value, and
 support adding listeners that are notified when the value changes.
 Note that `TextField` and `TextFormField` widgets
@@ -2286,9 +2287,9 @@ class _Greet2State extends State<Greet2> {
 
 The bottom line is that text input in Flutter is a bit complicated.
 Like many things in Flutter, a good approach
-is to wrap the complexity in a custom widget and
-use that everywhere instead of directly using provided widgets.
-This also provides an opportunity to specify app-specific styling.
+is to wrap complexity in custom widgets and
+use them everywhere instead of directly using provided widgets.
+This also provides an opportunity to specify application-specific styling.
 The following code demonstrates a custom widget that does this.
 
 ```dart
@@ -5399,7 +5400,23 @@ When this is done, enter `flutter pub get` to download the new dependencies.
 In each of the commands in this section,
 the `flutter` command can be replaced by the `dart` command.
 
+## Advice
+
+- Create lots of custom widgets that hide the complexity of provided widgets
+  and provide application-specific styling.
+
+- Create extentions to provided Flutter classes that simplify there use.
+  Examples can be found in {% aTargetBlank
+  "https://github.com/mvolkmann/flutter_input/blob/main/lib/widget_extensions.dart",
+  "GitHub" %}.
+
+- Add a comma after every function argument value
+  so Dart code formatting works better.
+
 ## Annoyances
+
+- Dart needs to support type inference of enum values the way Swift does.
+  For example, instead of `color: Colors.red,` I want to use `color: .red,`.
 
 - The VS Code Flutter extension displays a comment after the closing paren
   of all widgets. It isn't really in the code, but adds visual clutter.
@@ -5412,20 +5429,14 @@ the `flutter` command can be replaced by the `dart` command.
 - The default linting rule settings related to use of the `const` keyword
   are incredibly annoying!
   I wish Dart could figure out what should be `const`
-  on its own so we don't need to litter our code with that keyword.
+  on its own so we wouldn't need to litter our code with that keyword.
 
-- Needing to pass a `Key` and `BuildContext` to so many things is annoying.
-
-- When running a Flutter app from VS Code,
-  it seems that the output from `print` function calls goes nowhere.
-  If the same app is run from a terminal, `print` output appears there.
+- The need to pass `context` and `key` in so many places is annoying.
 
 - Sometimes after a hot reload the simulator will
   display an error message in yellow text on a red background.
   There may not really be an error in the code.
   Restarting the app can make the problem go away.
-
-- The need to pass `context` and `key` in so many places is annoying.
 
 - The error screen shown in the simulator when there is a runtime error
   displays the message in yellow on a red background.

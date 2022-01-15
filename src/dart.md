@@ -4478,5 +4478,8 @@ void main() {
   For example, instead of `Person(name: name, birthday: birthday)`
   we should be able to write `Person(name:, birthday:)`.
 
+- Dart needs to support type inference of enum values the way Swift does.
+  For example, instead of `color: Colors.red,` I want to use `color: .red,`.
+
 - Dart wants many constructor calls to be preceded by the `const` keyword.
   This makes the code verbose.
