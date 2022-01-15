@@ -1057,13 +1057,13 @@ The most frequently used arguments are described below:
 
 | Argument      | Description                                                                                                |
 | ------------- | ---------------------------------------------------------------------------------------------------------- |
-| `color`       | `Color` of the background (conflicts with `decoration`)                                                    |
-| `padding`     | `EdgeInsets` that specifies the padding to apply inside                                                    |
-| `constraints` | `BoxConstraints` that constrains the minimum and maximum width and height                                  |
 | `alignment`   | `Alignment` that specifies the alignment of the `child` inside                                             |
-| `width`       | `double` width of container (conflicts with `constraints`)                                                 |
-| `height`      | `double` height of container (conflicts with `constraints`)                                                |
+| `color`       | `Color` of the background (conflicts with `decoration`)                                                    |
+| `constraints` | `BoxConstraints` that constrains the minimum and maximum width and height                                  |
 | `decoration`  | `BoxDecoration` that can specify a `color`, `border`, `borderRadius`, `boxShadow`, `gradient`, and `shape` |
+| `height`      | `double` height of container (conflicts with `constraints`)                                                |
+| `padding`     | `EdgeInsets` that specifies the padding to apply inside                                                    |
+| `width`       | `double` width of container (conflicts with `constraints`)                                                 |
 
 TODO: Are the only supported shapes rectangles and circles?
 
@@ -1376,6 +1376,8 @@ If desired this can be overridden.
 This renders a horizontal list of child widgets.
 It is similar to a SwiftUI `HStack`.
 The "main" axis is horizontal and the "cross" axis is vertical.
+By default it takes all the available width of its parent because
+its `mainAxisSize` argument defaults to `MainAxisSize.max`.
 
 This constructor for widget takes the
 same named parameters as the `Column` widget.
