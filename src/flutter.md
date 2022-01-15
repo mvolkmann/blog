@@ -5395,12 +5395,18 @@ enter `flutter pub upgrade {package-name}`.
 To remove an installed package, enter `flutter pub remove {package-name}`.
 
 Dependencies can also be specified by manually editing the `pubspec.yaml` file.
-When this is done, enter `flutter pub get` to download the new dependencies.
+IDEs generally recognize the changes and
+automatically install the new dependencies for you.
+When using an editor that doesn't do this,
+enter `flutter pub get` to download and install them.
 
 In each of the commands in this section,
 the `flutter` command can be replaced by the `dart` command.
 
 ## Advice
+
+- Flutter prefers project and file names that separate words
+  with underscores instead of hyphens, so use those.
 
 - Create lots of custom widgets that hide the complexity of provided widgets
   and provide application-specific styling.
