@@ -2056,6 +2056,14 @@ class _Greet1State extends State<Greet1> {
   final tec = TextEditingController(text: 'Mark'); // initial value
 
   @override
+  void initState() {
+    super.initState();
+    // This triggers a rebuild of the widget
+    // so the suffixIcon can be reevaluated.
+    tec.addListener(() => setState(() {}));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -2064,10 +2072,12 @@ class _Greet1State extends State<Greet1> {
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Name',
-            suffixIcon: IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () => setState(() => tec.text = ''),
-            ),
+            suffixIcon: tec.text.isEmpty
+                ? Container(width: 0)
+                : IconButton(
+                    icon: Icon(Icons.close, size: 18),
+                    onPressed: () => setState(() => tec.text = ''),
+                  ),
           ),
         ),
         // This is needed to listen for changes in the TextEditingController.
@@ -2114,14 +2124,17 @@ class _Greet2State extends State<Greet2> {
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Name',
-            suffixIcon: IconButton(
-              icon: Icon(Icons.close),
-              //TODO: Why doesn't this work?
-              onPressed: () => setState(() => name = ''),
-            ),
+            suffixIcon: name.isEmpty
+                ? Container(width: 0)
+                : IconButton(
+                    icon: Icon(Icons.close, size: 18),
+                    // This doesn't clear the text displayed!
+                    onPressed: () => setState(() => name = ''),
+                  ),
           ),
           initialValue: name,
           onChanged: (String value) {
+            // This doesn't clear the text displayed!
             setState(() => name = value);
           },
         ),
@@ -2174,13 +2187,20 @@ class _EasyTextFieldState extends State<EasyTextField> {
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: widget.label,
-        suffixIcon: IconButton(
-          icon: Icon(Icons.close),
-          onPressed: () {
-            setState(() => tec.text = '');
-            widget.onChanged!('');
-          },
-        ),
+        suffixIcon: tec.text.isEmpty
+            ? Container(width: 0)
+            : IconButton(
+                icon: Icon(Icons.close, size: 18),
+                onPressed: () {
+                  setState(() => tec.text = '');
+                  // This causes a new value for
+                  // the "value" parameter to be passed in
+                  // which allows the suffixIcon to be reevaluated.
+                  // Unlike in Greet1 there is no need to
+                  // add a listener to the TextEditingController.
+                  widget.onChanged!('');
+                },
+              ),
       ),
       onChanged: widget.onChanged,
     );
@@ -2190,7 +2210,7 @@ class _EasyTextFieldState extends State<EasyTextField> {
 
 Here is an example of using the custom widget defined above.
 Note how much simpler this component is than
-the `Greet1` and `Greet2` components shown above.
+the `Greet1` and `Greet2` components.
 
 ```dart
 import 'package:flutter/material.dart';
