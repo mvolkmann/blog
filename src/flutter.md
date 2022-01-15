@@ -2008,6 +2008,10 @@ The highlights are described in the following table:
 | `readOnly`     | `bool` indicating if the value cannot currently be modified           |
 | `style`        | `TextStyle`                                                           |
 
+Specify the `maxLength` argument causes the number of characters entered
+and the maximum length to be displayed below the input, right justified.
+For example, "4/10" means 4 characters have been entered out of a maximum of 10.
+
 The `TextFormField` constructor takes the following additional optional arguments.
 
 | Argument       | Description                                                        |
@@ -2021,7 +2025,8 @@ The highlights are described in the following table:
 
 | Argument     | Description                                                  |
 | ------------ | ------------------------------------------------------------ |
-| `errorText`  | `String` displayed below the input typically in red          |
+| `border`     | `InputBorder` describing a kind of border to be added        |
+| `errorText`  | `String` displayed below the input, typically in red         |
 | `helperText` | `String` displayed below the input when there is `errorText` |
 | `hintText`   | `String` displayed inside the input when no value is entered |
 | `icon`       | `Widget` displayed before the input                          |
@@ -2033,6 +2038,10 @@ The highlights are described in the following table:
 | `suffix`     | `Widget` displayed inside the input after entered text       |
 | `suffixIcon` | `Widget` displayed inside the input after entered text       |
 | `suffixText` | `String` displayed inside the input after entered text       |
+
+When `errorText` is set, the border and label (if any) become red.
+Set this to `null` to indicate that the value is valid
+and no error message should be displayed.
 
 It is not valid to specify both `prefix` and `prefixText`.
 Likewise, it is not valid to specify both `suffix` and `suffixText`.
@@ -2079,6 +2088,70 @@ It uses `prefix` and `suffix` widgets.
       keyboardType: TextInputType.number,
       maxLength: 7,
     );
+```
+
+The `icon`, `prefixIcon`, and `suffixIcon` arguments
+can be set to any widget, not just an `Icon`.
+For example, they can be be `IconButton` widgets
+in order to execute code when they are tapped.
+A ternary operator can be used to display different icons
+based on the current state.
+
+The following code demonstrates creating a custom widget
+for entering passwords that allows the user to
+toggle between obscuring and showing the value.
+The `suffixIcon` is an `IconButton` that toggles the value of `obscureText`.
+
+```dart
+import 'package:flutter/material.dart';
+
+typedef ValidatorFn = String? Function(String?)?;
+
+class MyPasswordField extends StatefulWidget {
+  final String initialValue;
+  final String labelText;
+  final void Function(String) onChanged;
+  // Optional function for validating the entered password.
+  final ValidatorFn validator;
+
+  const MyPasswordField({
+    Key? key,
+    this.initialValue = '',
+    this.labelText = '',
+    this.validator,
+    required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  _MyPasswordFieldState createState() => _MyPasswordFieldState();
+}
+
+class _MyPasswordFieldState extends State<MyPasswordField> {
+  var obscure = true;
+
+  @override
+  Widget build(BuildContext context) {
+    var validator = widget.validator;
+    return TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: widget.labelText,
+        suffixIcon: IconButton(
+          // The icon will either be an eye to show the text
+          // or an eye with a slash through it to obscure the text.
+          icon: Icon(obscure ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            setState(() => obscure = !obscure);
+          },
+        ),
+      ),
+      initialValue: widget.initialValue,
+      obscureText: obscure,
+      onChanged: (String value) => widget.onChanged(value),
+      validator: validator,
+    );
+  }
+}
 ```
 
 Instances of the `TextEditingController` class can be passed to the
