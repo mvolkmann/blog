@@ -155,6 +155,11 @@ This document refers to both as a simulator.
   Enter `open -a simulator`.
   This works in Bash, zsh, and Fish, but not in Nushell.
 
+- To start the iOS Simulator from VS Code:
+
+  - Install the Flutter extension.
+  - Select "Start iOS Simulator" from the device menu in the lower-right.
+
 - To start an Android emulator from outside VS Code:
 
   - Launch the Android Studio app.
@@ -281,10 +286,12 @@ If the app is run from a compatible editor, the app will
 automatically update after saving code changes without losing state.
 Compatible editors include Android Studio, IntelliJ, VS Code, and emacs.
 
-To run a Flutter app from VS Code, select
-Run ... Start Debugging (F5) or Run ... Run Without Debugging (ctrl-F5).
-The simulated or real device to use can be selected
-from a menu in the VS Code footer.
+To run a Flutter app from VS Code, select a simulated or real device to use
+from a menu on the right side of the VS Code footer.
+The select Run ... Start Debugging (F5)
+or Run ... Run Without Debugging (ctrl-F5).
+The first time this is run for a given application
+it takes around a minute to start.
 
 ## Debugging
 
@@ -696,8 +703,11 @@ To use Cupertino widgets in a Dart source file, add the following import:
 import 'package:flutter/cupertino.dart';
 ```
 
-All widgets have a `build` method that is passed a `BuildContext` object.
-This can be used to traverse up and down the widget tree.
+All widgets have a `build` method that is passed a {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/BuildContext-class.html",
+"BuildContext" %} object.
+This provides "a handle to the location of a widget in the widget tree."
+It can be used to traverse up and down the widget tree.
 One use is for finding ancestor styles
 so they can be applied to the current widget.
 
