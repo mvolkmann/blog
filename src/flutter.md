@@ -2571,21 +2571,12 @@ as shown above.
 ## State Management
 
 For state that is only used by a single stateful widget instance,
-call the `setState` function from inside that widget.
+use the `setState` function from inside that widget.
 
 For state that must be shared across multiple widget instances,
-a recommended approach is to use the provider library.
-In June, 2019 Chris Sells, the Flutter Project Manager, said
-"Provider is the recommended way to do State Management for apps of all sizes."
-
-There are many other state management options.
-One option provided by Flutter is to use `InheritedWidget`.
-This is a relatively complicated way to share mutable state.
-that is explained well in this {% aTargetBlank
-"https://www.youtube.com/watch?v=utrvu-eow6U", "YouTube video" %}.
-
-Many state management options are provided by the community.
-Two popular packages are RiverPod and GetX.
+it is recommended to choose a state management library
+provided by the community.
+Three popular packages are provider, GetX, and Riverpod.
 
 ### setState Function
 
@@ -2624,10 +2615,16 @@ The {% aTargetBlank
 "If you are new to Flutter and you don’t have a strong reason
 to choose another approach (Redux, Rx, hooks, etc.),
 this is probably the approach you should start with."
+In June 2019 Chris Sells, the Flutter Project Manager, said
+"Provider is the recommended way to do State Management for apps of all sizes."
 
-The provider library is a wrapper around the {% aTargetBlank
+The provider library was created by Remi Rousselet.
+It is a wrapper around the {% aTargetBlank
 "https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html",
-"InheritedWidget" %}.
+"InheritedWidget" %} which is
+a relatively complicated way to share mutable state.
+`InheriteWidget` is explained well in this {% aTargetBlank
+"https://www.youtube.com/watch?v=utrvu-eow6U", "YouTube video" %}.
 
 The steps to use the provider library are:
 
