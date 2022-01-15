@@ -1223,7 +1223,10 @@ When the value is `down`, child widgets are placed from top to bottom.
 When the value is `up`, child widgets are placed from bottom to top.
 
 There is no parameter that controls the space between the children.
-One way to add space between them is to insert `SizedBox` widgets.
+This seems like a huge oversight,
+especially since the `Wrap` widget takes a `spacing` argument!
+One way to add space between them is to insert `SizedBox` widgets
+that specify a `height` argument.
 To make this easier, consider adding an extension to the `List<Widget>` type
 as follows in a file named `widget_extension.dart`.
 
@@ -1381,6 +1384,12 @@ its `mainAxisSize` argument defaults to `MainAxisSize.max`.
 
 This constructor for widget takes the
 same named parameters as the `Column` widget.
+
+There is no parameter that controls the space between the children.
+This seems like a huge oversight,
+especially since the `Wrap` widget takes a `spacing` argument!
+One way to add space between them is to insert `SizedBox` widgets
+that specify a `width` argument.
 
 ##### Stack Widget
 
@@ -2579,6 +2588,7 @@ For state that must be shared across multiple widget instances,
 it is recommended to choose a state management library
 provided by the community.
 Three popular packages are provider, GetX, and Riverpod.
+These reduce the need for stateful widgets.
 
 ### setState Function
 
