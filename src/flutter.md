@@ -3495,6 +3495,20 @@ All the kinds of providers supported by Riverpod are summarized below.
 | `ChangeNotifierProvider` | state is mutable; must call `notifyListeners` after changing                             |
 | `StateNotifierProvider`  | state is immutable but can be replaced; replacing state automatically notifies listeners |
 
+The first four options are best suited when
+it is acceptable to work with state objects as a whole.
+`StateProvider` is the only one of thees options
+that supports updating state and that is done by
+replacing entire objects rather than updating individual properties.
+
+`ChangeNotifierProvider` is a good choice when there is a need
+to update individual properties of state objects
+rather than replacing entire objects.
+
+`StateNotifierProvider` is a good alternative to `ChangeNotifierProvider`
+when there is a desire for state objects to be immutable.
+It also has the advantage that change notification is automatic.
+
 The following app demonstrates basic usage of each provider type.
 Code for this app is in
 {% aTargetBlank "https://github.com/mvolkmann/flutter_riverpod_demo", "GitHub" %}.
@@ -3616,7 +3630,8 @@ final greetingProvider = Provider((ref) => 'Hello, World!');
 
 // Extending ConsumerWidget instead of StatelessWidget
 // causes a WidgetRef argument to be passed to the build method.
-// ConsumerWidget extends ConsumerStatefulWidget which extends StatefulWidget.
+// ConsumerWidget extends ConsumerStatefulWidget
+// which extends StatefulWidget.
 class ProviderPage extends ConsumerWidget {
   static const route = '/provider';
 
@@ -3628,7 +3643,8 @@ class ProviderPage extends ConsumerWidget {
 
     // This is one way to access the state of a provider
     // that makes it available throughout this widget.
-    // When the value changes, this entire widget will be rebuilt.
+    // When the value changes,
+    // this entire widget will be rebuilt.
     final greeting = ref.watch(greetingProvider);
 
     return Scaffold(
@@ -3666,9 +3682,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // The value will reset to zero every time we return to this page.
 final counterStateProvider = StateProvider.autoDispose<int>((ref) => 0);
 
-// Extending ConsumerWidget instead of StatelessWidget
-// causes a WidgetRef argument to be passed to the build method.
-// ConsumerWidget extends ConsumerStatefulWidget which extends StatefulWidget.
 class StateProviderPage extends ConsumerWidget {
   static const route = '/state-provider';
 
