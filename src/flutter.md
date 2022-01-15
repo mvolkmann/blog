@@ -2015,7 +2015,9 @@ The `TextFormField` constructor takes the following additional optional argument
 | `initialValue` | `String` initial value                                             |
 | `validator`    | function called when value changes (see "Form Validation" section) |
 
-The `InputDecoration` constructor takes the following additional optional arguments.
+The `InputDecoration` class specifies styling to be applied
+described by optional arguments passed to its constructor.
+The highlights are described in the following table:
 
 | Argument     | Description                                                  |
 | ------------ | ------------------------------------------------------------ |
