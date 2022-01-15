@@ -3434,7 +3434,7 @@ GetX provides language translation using the `.tr` getter functino
 and the `Get.changeLocale` function.`
 TODO: Provide an example of using this.
 
-### RiverPod Library
+### Riverpod Library
 
 {% aTargetBlank "https://riverpod.dev", "Riverpod" %}
 was created by Remi Rousselet, who is the same developer that created
