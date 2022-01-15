@@ -2616,6 +2616,19 @@ setState(() {});
 
 ### provider Library
 
+The {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
+is is the state management approach recommended by the Flutter team.
+The {% aTargetBlank
+"https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple",
+"official docs" %} say
+"If you are new to Flutter and you don’t have a strong reason
+to choose another approach (Redux, Rx, hooks, etc.),
+this is probably the approach you should start with."
+
+The provider library is a wrapper around the {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html",
+"InheritedWidget" %}.
+
 The steps to use the provider library are:
 
 1. Add dependency to `pubspec.yaml`.
