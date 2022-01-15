@@ -2024,6 +2024,92 @@ Note that `TextField` and `TextFormField` widgets
 are not required to have a controller.
 They can instead obtain new values using an `onChanged` callback.
 
+On the surface it seems the main reason to prefer
+using `TextFormField` over `TextField` is to
+place it inside a `Form` and have validation.
+But another consideration is the ability to specify an initial value.
+The only way to do this with at `TextField` is to use a `TextEditingController`
+which can also be done with a `TextFormField`.
+
+The following code demonstrates using a `TextField` with an initial value.
+When the user types a new value, the `Text` below it is updated.
+
+```dart
+import 'package:flutter/material.dart';
+
+class Greet1 extends StatefulWidget {
+  const Greet1({Key? key}) : super(key: key);
+
+  @override
+  _Greet1State createState() => _Greet1State();
+}
+
+class _Greet1State extends State<Greet1> {
+  final tec = TextEditingController(text: 'Mark'); // initial value
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          controller: tec,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Name',
+          ),
+        ),
+        // This is needed to listen for changes in the TextEditingController.
+        ValueListenableBuilder<TextEditingValue>(
+          valueListenable: tec,
+          builder: (context, value, child) {
+            return Text('Hello, ${tec.text}');
+          },
+        ),
+      ],
+    );
+  }
+}
+```
+
+The following code demonstrates the same thing as above,
+but using a `TextFormField`. Note how this code less complex.
+For this reason it is often preferrable to use `TextFormField`
+even when validation is not needed.
+
+```dart
+import 'package:flutter/material.dart';
+
+class Greet2 extends StatefulWidget {
+  const Greet2({Key? key}) : super(key: key);
+
+  @override
+  _Greet2State createState() => _Greet2State();
+}
+
+class _Greet2State extends State<Greet2> {
+  var name = 'Mark'; // initial value
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextFormField(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Name',
+          ),
+          initialValue: name,
+          onChanged: (String value) {
+            setState(() => name = value);
+          },
+        ),
+        Text('Hello, $name'),
+      ],
+    );
+  }
+}
+```
+
 The `InputDecoration` class specifies styling to be applied
 described by optional arguments passed to its constructor.
 The highlights are described in the following table:
