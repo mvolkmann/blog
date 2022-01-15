@@ -3429,6 +3429,7 @@ TODO: Provide an example of using this.
 {% aTargetBlank "https://riverpod.dev", "Riverpod" %}
 was created by Remi Rousselet, who is the same developer that created
 {% aTargetBlank "https://pub.dev/packages/provider", "provider" %}.
+The name comes from rearranging the letters in "provider".
 It addresses several issues with provider including:
 
 1. provider depends on Flutter and
@@ -3477,7 +3478,7 @@ All the kinds of providers supported by Riverpod are summarized below.
 
 | Provider                 | Description                                                                              |
 | ------------------------ | ---------------------------------------------------------------------------------------- |
-| `Provider`               | provides read-only data synchronously                                                    |
+| `Provider`               | provides read-only data synchronously; can modify its own value over time                |
 | `StateProvider`          | provides writable data synchronously with `state` getter and setter methods              |
 | `FutureProvider`         | provides read-only data asynchronously                                                   |
 | `StreamProvider`         | provides a stream of read-only data, updated as new data becomes available               |
@@ -3613,6 +3614,8 @@ class ProviderPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var watch = ref.watch; // used later
+
     // This is one way to access the state of a provider
     // that makes it available throughout this widget.
     // When the value changes, this entire widget will be rebuilt.
@@ -3627,6 +3630,7 @@ class ProviderPage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(greeting),
+            Text(watch(greetingProvider)), // same as previous line
             // This is another way to access the state of a provider
             // that limits the scope to a single child widget.
             // When the value changes, only this child widget will be rebuilt.
