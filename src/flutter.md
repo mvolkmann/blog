@@ -2015,6 +2015,70 @@ The `TextFormField` constructor takes the following additional optional argument
 | `initialValue` | `String` initial value                                             |
 | `validator`    | function called when value changes (see "Form Validation" section) |
 
+The `InputDecoration` constructor takes the following additional optional arguments.
+
+| Argument     | Description                                                  |
+| ------------ | ------------------------------------------------------------ |
+| `errorText`  | `String` displayed below the input typically in red          |
+| `helperText` | `String` displayed below the input when there is `errorText` |
+| `hintText`   | `String` displayed inside the input when no value is entered |
+| `icon`       | `Widget` displayed before the input                          |
+| `label`      | `Widget`                                                     |
+| `labelText`  | `String` that indicates the meaning of the input             |
+| `prefix`     | `Widget` displayed inside the input before entered text      |
+| `prefixIcon` | `Widget` displayed inside the input before entered text      |
+| `prefixText` | `String` displayed inside the input before entered text      |
+| `suffix`     | `Widget` displayed inside the input after entered text       |
+| `suffixIcon` | `Widget` displayed inside the input after entered text       |
+| `suffixText` | `String` displayed inside the input after entered text       |
+
+It is not valid to specify both `prefix` and `prefixText`.
+Likewise, it is not valid to specify both `suffix` and `suffixText`.
+
+The `TextInputType` class defines static properties
+for various kinds of on-screen keyboards.
+These properties include `datetime`, `emailAddress`, `multiline`, `name`,
+`none` (no on-screen keyboard), `number`, `phone`, `streetAddress`,
+`text`, `url`, and `visiblePassword`.
+For example, to get an on-screen keyboard that is
+optimized for entering numbers,
+specify `keyboardType: TextInputType.number`.
+
+The following code demonstrates creating a `TextFormField`
+for entering a dollar amount.
+It uses `prefix` and `suffix` widgets.
+
+<img alt="Flutter TextFormField with prefix and suffix" style="width: 60%"
+    src="/blog/assets/flutter-textformfield-prefix-suffix.png?v={{pkg.version}}"
+    title="Flutter TextFormField with prefix and suffix">
+
+```dart
+    TextFormField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        contentPadding: EdgeInsets.zero,
+        helperText: 'Enter the price in whole U.S. dollars.',
+        hintText: 'price in USD',
+        labelText: 'Price',
+        prefix: Container(
+          child: MyText('\$', color: Colors.white),
+          color: Colors.green,
+          margin: EdgeInsets.only(right: 10),
+          padding: EdgeInsets.all(10),
+        ),
+        suffix: Container(
+          child: MyText('.00', color: Colors.white),
+          color: Colors.green,
+          margin: EdgeInsets.only(left: 10),
+          padding: EdgeInsets.all(10),
+        ),
+      ),
+      initialValue: '0',
+      keyboardType: TextInputType.number,
+      maxLength: 7,
+    );
+```
+
 Instances of the `TextEditingController` class can be passed to the
 `TextField` and `TextFormField` constructors in their `controller` argument.
 These objects specify the initial value, hold the current value,
@@ -2242,68 +2306,6 @@ class _Greet3State extends State<Greet3> {
     );
   }
 }
-```
-
-| Argument     | Description                                                  |
-| ------------ | ------------------------------------------------------------ |
-| `errorText`  | `String` displayed below the input typically in red          |
-| `helperText` | `String` displayed below the input when there is `errorText` |
-| `hintText`   | `String` displayed inside the input when no value is entered |
-| `icon`       | `Widget` displayed before the input                          |
-| `label`      | `Widget`                                                     |
-| `labelText`  | `String` that indicates the meaning of the input             |
-| `prefix`     | `Widget` displayed inside the input before entered text      |
-| `prefixIcon` | `Widget` displayed inside the input before entered text      |
-| `prefixText` | `String` displayed inside the input before entered text      |
-| `suffix`     | `Widget` displayed inside the input after entered text       |
-| `suffixIcon` | `Widget` displayed inside the input after entered text       |
-| `suffixText` | `String` displayed inside the input after entered text       |
-
-It is not valid to specify both `prefix` and `prefixText`.
-Likewise, it is not valid to specify both `suffix` and `suffixText`.
-
-The `TextInputType` class defines static properties
-for various kinds of on-screen keyboards.
-These properties include `datetime`, `emailAddress`, `multiline`, `name`,
-`none` (no on-screen keyboard), `number`, `phone`, `streetAddress`,
-`text`, `url`, and `visiblePassword`.
-For example, to get an on-screen keyboard that is
-optimized for entering numbers,
-specify `keyboardType: TextInputType.number`.
-
-The following code demonstrates creating a `TextFormField`
-for entering a dollar amount.
-It uses `prefix` and `suffix` widgets.
-
-<img alt="Flutter TextFormField with prefix and suffix" style="width: 60%"
-    src="/blog/assets/flutter-textformfield-prefix-suffix.png?v={{pkg.version}}"
-    title="Flutter TextFormField with prefix and suffix">
-
-```dart
-    TextFormField(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        contentPadding: EdgeInsets.zero,
-        helperText: 'Enter the price in whole U.S. dollars.',
-        hintText: 'price in USD',
-        labelText: 'Price',
-        prefix: Container(
-          child: MyText('\$', color: Colors.white),
-          color: Colors.green,
-          margin: EdgeInsets.only(right: 10),
-          padding: EdgeInsets.all(10),
-        ),
-        suffix: Container(
-          child: MyText('.00', color: Colors.white),
-          color: Colors.green,
-          margin: EdgeInsets.only(left: 10),
-          padding: EdgeInsets.all(10),
-        ),
-      ),
-      initialValue: '0',
-      keyboardType: TextInputType.number,
-      maxLength: 7,
-    );
 ```
 
 In mobile apps an on-screen keyboard appears when focus is a text field.
