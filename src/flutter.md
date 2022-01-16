@@ -1047,8 +1047,6 @@ and others accept multiple `children`.
 The most commonly used widgets for laying out a single child widget
 are described below:
 
-TODO: Finish this table.
-
 | Widget                                                                                                               | Description                                                                                                                   |
 | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Align-class.html", "Align" %}                               | specifies where its child should be positioned within its parent (ex. `Alignment.bottomRight`)                                |
@@ -1062,11 +1060,11 @@ TODO: Finish this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FractionallySizedBox-class.html", "FractionallySizedBox" %} | "sizes its child to a fraction of the total available space"; can specify `widthFactor`, `heightFactor`, and `alignment`      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html", "LayoutBuilder" %}               | provides min/max width/height constraints that can be used to decide how/what a child component should render                 |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LimitedBox-class.html", "LimitedBox" %}                     | "box that limits its size only when unconstrained"; useful for wrapping unconstrained children of a `ListView`                |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/OverflowBox-class.html", "OverflowBox" %}                   |                                                                                                                               |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Padding-class.html", "Padding" %}                           | "insets its child by the given padding"                                                                                       |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizedBox-class.html", "SizedBox" %}                         | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizedOverflowBox-class.html", "SizedOverflowBox" %}         |                                                                                                                               |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Transform-class.html", "Transform" %}                       | transforms its child by translating, rotating, and scaling it                                                                 |
+
+Details for some of the the single-child layout widgets are provided below.
 
 ##### Center Widget
 
@@ -1192,14 +1190,15 @@ are described below:
 | Widget                                                                                               | Description                                                                            |
 | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Column-class.html", "Column" %}             | arranges widgets vertically (like `HStack` in SwiftUI)                                 |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Flow-class.html", "Flow" %}                 | advanced; "optimized for repositioning children using transformation matrices"         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/GridView-class.html", "GridView" %}         | "scrollable, 2D array of widgets"                                                      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/IndexedStack-class.html", "IndexedStack" %} | "shows a single child from a list", "the one with the given index"                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ListView-class.html", "ListView" %}         | arranges widgets vertically like `Column`, but scrolls when needed                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Row-class.html", "Row" %}                   | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Stack-class.html", "Stack" %}               | stacks widgets on top of each other (like `ZStack` in SwiftUI)                         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Table-class.html", "Table" %}               | "uses the table layout algorithm for its children"                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Table-class.html", "Table" %}               | similar to `GridView`, but is more configurable and doesn't scroll                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Wrap-class.html", "Wrap" %}                 | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
+
+Details for some of the the multi-child layout widgets are provided below.
 
 ##### Column Widget
 
@@ -1389,12 +1388,12 @@ To modify the previous example to take advantage of this optimization,
 replace the lines that create the `ListView` with the following:
 
 ```dart
-              child: ListView.builder(
-                controller: controller,
-                itemBuilder: (context, index) => Text('Item #${index + 1}'),
-                itemCount: 20, // omit for an infinite list
-                itemExtent: 20, // height of each item
-              ),
+child: ListView.builder(
+  controller: controller,
+  itemBuilder: (context, index) => Text('Item #${index + 1}'),
+  itemCount: 20, // omit for an infinite list
+  itemExtent: 20, // height of each item
+),
 ```
 
 The way scrolling feels is defined by the `ScrollingPhysics` class.
