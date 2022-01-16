@@ -1044,28 +1044,31 @@ and others accept multiple `children`.
 
 #### Single-child Layout Widgets
 
-| Widget                    | Description                                                                                                                   |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `Align`                   |                                                                                                                               |
-| `AspectRatio`             | sizes its child to a specific aspect ratio                                                                                    |
-| `Baseline`                |                                                                                                                               |
-| `Center`                  | centers its child horizontally and vertically in the available space                                                          |
-| `ConstrainedBox`          |                                                                                                                               |
-| `Container`               | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
-| `CustomSingleChildLayout` |                                                                                                                               |
-| `Expanded`                | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
-| `FittedBox`               |                                                                                                                               |
-| `Flexible`                | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
-| `FractionallySizedBox`    |                                                                                                                               |
-| `IntrinsicHeight`         |                                                                                                                               |
-| `IntrinsicWidth`          |                                                                                                                               |
-| `LimitedBox`              |                                                                                                                               |
-| `Offstage`                |                                                                                                                               |
-| `OverflowBox`             |                                                                                                                               |
-| `Padding`                 | "insets its child by the given padding"                                                                                       |
-| `SizedBox`                | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
-| `SizedOverflowBox`        |                                                                                                                               |
-| `Transform`               | transforms its child by translating, rotating, and scaling it                                                                 |
+TODO: Finish this table.
+
+| Widget                                                                                                                     | Description                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Align-class.html", "Align" %}                                     |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AspectRatio-class.html", "AspectRatio" %}                         | sizes its child to a specific aspect ratio                                                                                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Baseline-class.html", "Baseline" %}                               |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Center-class.html", "Center" %}                                   | centers its child horizontally and vertically in the available space                                                          |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html", "ConstrainedBox" %}                   |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Container-class.html", "Container" %}                             | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/CustomSingleChildLayout-class.html", "CustomSingleChildLayout" %} |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Expanded-class.html", "Expanded" %}                               | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FittedBox-class.html", "FittedBox" %}                             |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Flexible-class.html", "Flexible" %}                               | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FractionallySizedBox-class.html", "FractionallySizedBox" %}       |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/IntrinsicHeight-class.html", "IntrinsicHeight" %}                 |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/IntrinsicWidth-class.html", "IntrinsicWidth" %}                   |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html", "LayoutBuilder" %}                     | provides min/max width/height constraints that can be used to decide how/what a child component should render                 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LimitedBox-class.html", "LimitedBox" %}                           |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Offstage-class.html", "Offstage" %}                               |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/OverflowBox-class.html", "OverflowBox" %}                         |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Padding-class.html", "Padding" %}                                 | "insets its child by the given padding"                                                                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizedBox-class.html", "SizedBox" %}                               | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizedOverflowBox-class.html", "SizedOverflowBox" %}               |                                                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Transform-class.html", "Transform" %}                             | transforms its child by translating, rotating, and scaling it                                                                 |
 
 ##### Center Widget
 
@@ -1185,22 +1188,20 @@ transform(child: someWidget, dx: 100.0, dy: 20.0, angle: -pi / 4, scale: 0.7);
 
 #### Multi-child Layout Widgets
 
-TODO: Finish added descriptions in this table.
+The most commonluy used widgets for laying out multiple child widgets
+are described below:
 
-| Widget                   | Description                                                                            |
-| ------------------------ | -------------------------------------------------------------------------------------- |
-| `Column`                 | arranges widgets vertically (like `HStack` in SwiftUI)                                 |
-| `CustomMultiChildLayout` |                                                                                        |
-| `Flow`                   | advanced; "optimized for repositioning children using transformation matrices"         |
-| `GridView`               | "scrollable, 2D array of widgets"                                                      |
-| `IndexedStack`           |                                                                                        |
-| `LayoutBuilder`          |                                                                                        |
-| `ListBody`               |                                                                                        |
-| `ListView`               | arranges widgets vertically like `Column`, but scrolls when needed                     |
-| `Row`                    | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
-| `Stack`                  | stacks widgets on top of each other (like `ZStack` in SwiftUI)                         |
-| `Table`                  | "uses the table layout algorithm for its children"                                     |
-| `Wrap`                   | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
+| Widget                                                                                               | Description                                                                            |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Column-class.html", "Column" %}             | arranges widgets vertically (like `HStack` in SwiftUI)                                 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Flow-class.html", "Flow" %}                 | advanced; "optimized for repositioning children using transformation matrices"         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/GridView-class.html", "GridView" %}         | "scrollable, 2D array of widgets"                                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/IndexedStack-class.html", "IndexedStack" %} | "shows a single child from a list", "the one with the given index"                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ListView-class.html", "ListView" %}         | arranges widgets vertically like `Column`, but scrolls when needed                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Row-class.html", "Row" %}                   | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Stack-class.html", "Stack" %}               | stacks widgets on top of each other (like `ZStack` in SwiftUI)                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Table-class.html", "Table" %}               | "uses the table layout algorithm for its children"                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Wrap-class.html", "Wrap" %}                 | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
 
 ##### Column Widget
 
