@@ -1641,21 +1641,18 @@ The `Image` class supports many named constructors.
 
 To render an image stored in the `assets` directory of a application:
 
-- Create an `assets` directory with an `images` directory inside it.
-- Add image files in this directory.
-- Modify `pubspec.yaml` so the following exists:
-
-  ```yaml
-  flutter:
-    assets:
-      - assets/images/
-  ```
-
-- Use the `Image.asset` constructor. For example:
-
-  ```dart
-  Image.asset('assets/images/comet.jpg')
-  ```
+1. Create an `assets` directory with an `images` directory inside it.
+1. Add image files in this directory.
+1. Modify `pubspec.yaml` so the following exists:
+   ```yaml
+   flutter:
+     assets:
+       - assets/images/
+   ```
+1. Use the `Image.asset` constructor. For example:
+   ```dart
+   Image.asset('assets/images/comet.jpg')
+   ```
 
 To render an image from a URL, use `Image.network(someUrl)`.
 To provide an indication of the loading progress,
@@ -1680,8 +1677,6 @@ Image.network(
   },
 )
 ```
-
-To render an image from the device, use `Image.file(pathToFile)`.
 
 #### Text Widget
 
