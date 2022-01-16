@@ -387,6 +387,10 @@ This extension provides many things including:
   - Extract Method (replaces selected code with a call )
   - Extract Local Variable
   - Extract Widget
+  - Convert to StatefulWidget (only when on line declaring a StatelessWidget)
+
+  There is no option to convert a `StatefulWidget` to a `StatelessWidget`
+  because that would require deleting code that the developer should approve.
 
   The "Extract" commands are great for breaking up deeply nested widget trees!
 
@@ -708,8 +712,9 @@ All widgets have a `build` method that is passed a {% aTargetBlank
 "BuildContext" %} object.
 This provides "a handle to the location of a widget in the widget tree."
 It can be used to traverse up and down the widget tree.
-One use is for finding ancestor styles
-so they can be applied to the current widget.
+Supposedly one use is for finding ancestor styles
+so they can be applied to the current widget,
+but it's not apparent how this can be done.
 
 All widget constructors must take an optional parameter
 named "key" that has the type "Key".
@@ -1477,27 +1482,28 @@ described with the `Column` widget above.
 
 ### Material Display Widgets
 
-| Widget              | Description                                                                         |
-| ------------------- | ----------------------------------------------------------------------------------- |
-| `Banner`            |                                                                                     |
-| `Canvas`            |                                                                                     |
-| `CircleAvatar`      |                                                                                     |
-| `Divider`           | horizontal, thin line                                                               |
-| `ErrorWidget`       |                                                                                     |
-| `ExpandIcon`        |                                                                                     |
-| `FileImage`         |                                                                                     |
-| `FlutterLogo`       | renders the Flutter logo                                                            |
-| `Icon`              | renders an icon                                                                     |
-| `Image`             | renders an image                                                                    |
-| `ImageIcon`         |                                                                                     |
-| `NetworkImage`      |                                                                                     |
-| `Placeholder`       | renders a rectangle that represents where other widgets will be added in the future |
-| `ProgressIndicator` |                                                                                     |
-| `RichText`          | renders runs of text that each use different styles; uses `TextSpan` objects        |
-| `Snackbar`          |                                                                                     |
-| `Text`              | renders a run of text with a single style                                           |
-| `Tooltip`           |                                                                                     |
-| `VerticalDivider`   | vertical, thin line                                                                 |
+| Widget                      | Description                                                                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `Banner`                    |                                                                                                                   |
+| `Canvas`                    |                                                                                                                   |
+| `CircleAvatar`              |                                                                                                                   |
+| `CircularProgressIndicator` | rotating icon used to indicate that background activity is occurring, such as waiting for an API call to complete |
+| `Divider`                   | horizontal, thin line                                                                                             |
+| `ErrorWidget`               |                                                                                                                   |
+| `ExpandIcon`                |                                                                                                                   |
+| `FileImage`                 |                                                                                                                   |
+| `FlutterLogo`               | renders the Flutter logo                                                                                          |
+| `Icon`                      | renders an icon                                                                                                   |
+| `Image`                     | renders an image                                                                                                  |
+| `ImageIcon`                 |                                                                                                                   |
+| `NetworkImage`              |                                                                                                                   |
+| `Placeholder`               | renders a rectangle that represents where other widgets will be added in the future                               |
+| `ProgressIndicator`         |                                                                                                                   |
+| `RichText`                  | renders runs of text that each use different styles; uses `TextSpan` objects                                      |
+| `Snackbar`                  |                                                                                                                   |
+| `Text`                      | renders a run of text with a single style                                                                         |
+| `Tooltip`                   |                                                                                                                   |
+| `VerticalDivider`           | vertical, thin line                                                                                               |
 
 The primary widgets for rendering text are `Text` and `RichText`.
 Both automatically wrap their text if needed by default,
@@ -2953,7 +2959,9 @@ The steps to use the provider library are:
 
 2. Install by entering `flutter pub get` unless your IDE does this for you.
 
-3. Create `ChangeNotifier` classes that hold state,
+3. Create {% aTargetBlank
+   "https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html",
+   "ChangeNotifier" %} classes that hold state,
    define methods for modifying it, and define getters and setters.
    For example, the following can be defined
    in the file `lib/count_state.dart`:
@@ -4829,7 +4837,164 @@ class MyApp extends StatelessWidget {
 
 ### PageView Widget
 
-TODO: Describe this based on the video at https://youtu.be/8bO1_saEwjw.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/PageView-class.html",
+"PageView" %} widget provides a carousel-like scrollable list of pages.
+Users can swipe through viewing the pages one at a time
+or the current page can be changed programmatically.
+Page transitions are animated by default and the animation can be customized.
+
+The following code demonstrates using `PageView`:
+
+<img alt="Flutter PageView" style="width: 40%"
+    src="/blog/assets/flutter-pageview.png?v={{pkg.version}}"
+    title="Flutter PageView">
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'PageView Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Home(),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final PageController _controller = PageController();
+  var _pageIndex = 0;
+  final _pages = <Widget>[Page1(), Page2(), Page3()];
+
+  IconButton _buildButton(bool forward) {
+    var hide = forward ? _pageIndex >= _pages.length - 1 : _pageIndex == 0;
+    var icon = forward ? Icons.arrow_forward_ios : Icons.arrow_back_ios;
+    var method = forward ? _controller.nextPage : _controller.previousPage;
+    return IconButton(
+      icon: Icon(icon),
+      onPressed: hide
+          ? null
+          : () {
+              method(
+                curve: Curves.easeInOut,
+                duration: Duration(seconds: 1),
+              );
+              setState(() => _pageIndex += forward ? 1 : -1);
+            },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PageView Demo'),
+        leading: _buildButton(false),
+        actions: [_buildButton(true)],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                children: _pages,
+                controller: _controller,
+                onPageChanged: (index) {
+                  setState(() => _pageIndex = index);
+                },
+                //scrollDirection: Axis.vertical,
+              ),
+            ),
+            SizedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (var index = 0; index < _pages.length; index++)
+                    IconButton(
+                      icon: Icon(
+                        Icons.circle,
+                        color:
+                            index == _pageIndex ? Colors.black : Colors.black26,
+                        size: 16,
+                      ),
+                      onPressed: () {
+                        _controller.animateToPage(
+                          index,
+                          duration: Duration(seconds: 1),
+                          curve: Curves.easeInOut,
+                        );
+                        setState(() => _pageIndex = index);
+                      },
+                    ),
+                ],
+              ),
+              height: 30,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Page1 extends StatelessWidget {
+  const Page1({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text('This is page #1.'),
+      ),
+      color: Colors.pink[100],
+    );
+  }
+}
+
+class Page2 extends StatelessWidget {
+  const Page2({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text('This is page #2.'),
+      ),
+      color: Colors.yellow[100],
+    );
+  }
+}
+
+class Page3 extends StatelessWidget {
+  const Page3({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text('This is page #3.'),
+      ),
+      color: Colors.blue[100],
+    );
+  }
+}
+```
 
 ## Bottom Sheets
 
