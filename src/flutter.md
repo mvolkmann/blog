@@ -952,19 +952,19 @@ It is common for Flutter apps to have the following top-level structure:
       - `BottomAppBar` (alternative to `TabBar` inside `AppBar`)
     - `drawer` `Widget` (typically is a `SizedBox` containing a `Drawer`)
 
-| Widget              | Description                                                                       |
-| ------------------- | --------------------------------------------------------------------------------- |
-| `AppBar`            | appears at top of app; contains other widgets such as `TabBar`                    |
-| `BottomAppBar`      | appears at bottom of app; contains buttons used to switch between top-level views |
-| `Drawer`            | panel that slides in from left (by default) and can contain navigation links      |
-| `MaterialApp`       | top of app; wraps many other widgets                                              |
-| `NavigationBar`     |                                                                                   |
-| `NavigationToolbar` |                                                                                   |
-| `Router`            |                                                                                   |
-| `Scaffold`          | provides app structure; can show `Drawer`, `Snackbar`, and bottom sheets          |
-| `TabBar`            | horizontal row of tabs                                                            |
-| `TabBarView`        | page that corresponds to a `TabBar` tab                                           |
-| `TabPageSelector`   | renders dots that indicate current carousel item; click to switch                 |
+| Widget                                                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html", "AppBar" %}                       | appears at top of app; contains other widgets such as `TabBar`                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}           | appears at bottom of app; contains buttons used to switch between top-level views |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                       | panel that slides in from left (by default) and can contain navigation links      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}             | top of app; wraps many other widgets                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}         |                                                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationToolbar-class.html", "NavigationToolbar" %} |                                                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Router-class.html", "Router" %}                       |                                                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                   | provides app structure; can show `Drawer`, `Snackbar`, and bottom sheets          |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                       | horizontal row of tabs                                                            |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}               | page that corresponds to a `TabBar` tab                                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}     | renders dots that indicate current carousel item; click to switch                 |
 
 #### MaterialApp Widget
 
@@ -1510,9 +1510,7 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/FlutterLogo-class.html", "FlutterLogo" %}                             | renders the Flutter logo; can specify the size                                                                      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Icon-class.html", "Icon" %}                                           | renders an icon; typically passed an `IconData` object from a constant in the `Icons` class                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Image-class.html", "Image" %}                                         | renders an image from a source such as a URL, local file, or `AssetBundle`                                          |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/ImageIcon-class.html", "ImageIcon" %}                                 |                                                                                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html", "LinearProgressIndicator" %}     | line used to indicate that background activity is occurring, such as waiting for an API call to complete            |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/NetworkImage-class.html", "NetworkImage" %}                           |                                                                                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Placeholder-class.html", "Placeholder" %}                             | renders a rectangle that represents where other widgets will be added in the future                                 |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ProgressIndicator-class.html", "ProgressIndicator" %}                 |                                                                                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/RichText-class.html", "RichText" %}                                   | renders runs of text that each use different styles; uses `TextSpan` objects                                        |
@@ -1520,6 +1518,8 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Text-class.html", "Text" %}                                           | renders a run of text with a single style                                                                           |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Tooltip-class.html", "Tooltip" %}                                     |                                                                                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/VerticalDivider-class.html", "VerticalDivider" %}                     | vertical, thin line                                                                                                 |
+
+TODO: Show an example of using Placeholder?
 
 The primary widgets for rendering text are `Text` and `RichText`.
 Both automatically wrap their text if needed by default,
@@ -5097,6 +5097,7 @@ class _HomeState extends State<Home> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  // TODO: Could you use TabPageSelector to render these dots?
                   for (var index = 0; index < _pages.length; index++)
                     IconButton(
                       icon: Icon(
