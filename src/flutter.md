@@ -329,7 +329,8 @@ To run a Flutter app on a connected iPhone:
     matching the provided destination specifier".
 
 Only Xcode option #1 has worked for me.
-All the options options take a couple of minutes to complete.
+All the options take a couple of minutes to complete
+the first time they are run for an app.
 
 To run a Flutter app on an iPhone wirelessly:
 
@@ -1091,7 +1092,9 @@ The most frequently used arguments are described below:
 | `padding`     | `EdgeInsets` that specifies the padding to apply inside                                                    |
 | `width`       | `double` width of container (conflicts with `constraints`)                                                 |
 
-TODO: Are the only supported shapes rectangles and circles?
+The `decoration` argument takes a `BoxDecoration` object
+that has a `shape` property.
+The only supported values are `circle` and `rectangle`.
 
 ##### Expanded and Flexible Widgets
 
