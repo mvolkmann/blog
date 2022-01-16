@@ -963,7 +963,7 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}        |                                                                                   |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/NavigationToolbar-class.html", "NavigationToolbar" %} |                                                                                   |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Router-class.html", "Router" %}                       |                                                                                   |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                  | provides app structure; can show `Drawer`, `Snackbar`, and bottom sheets          |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                  | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets          |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                      | horizontal row of tabs                                                            |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}              | page that corresponds to a `TabBar` tab                                           |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}    | renders dots that indicate current carousel item; click to switch                 |
@@ -1513,15 +1513,12 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Icon-class.html", "Icon" %}                                           | renders an icon; typically passed an `IconData` object from a constant in the `Icons` class                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Image-class.html", "Image" %}                                         | renders an image from a source such as a URL, local file, or `AssetBundle`                                          |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html", "LinearProgressIndicator" %}     | line used to indicate that background activity is occurring, such as waiting for an API call to complete            |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Placeholder-class.html", "Placeholder" %}                             | renders a rectangle that represents where other widgets will be added in the future                                 |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/ProgressIndicator-class.html", "ProgressIndicator" %}                 |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Placeholder-class.html", "Placeholder" %}                             | renders a rectangle containing diagonal lines that represents where future widgets will be placed                   |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/RichText-class.html", "RichText" %}                                   | renders runs of text that each use different styles; uses `TextSpan` objects                                        |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Snackbar-class.html", "Snackbar" %}                                   |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/SnackBar-class.html", "SnackBar" %}                                   | renders "a lightweight message with an optional action which briefly displays at the bottom of the screen"          |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Text-class.html", "Text" %}                                           | renders a run of text with a single style                                                                           |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Tooltip-class.html", "Tooltip" %}                                     |                                                                                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/VerticalDivider-class.html", "VerticalDivider" %}                     | vertical, thin line                                                                                                 |
-
-TODO: Show an example of using Placeholder?
 
 The primary widgets for rendering text are `Text` and `RichText`.
 Both automatically wrap their text if needed by default,
@@ -1678,6 +1675,28 @@ Image.network(
     return LinearProgressIndicator(value: percent);
   },
 )
+```
+
+#### SnackBar Widget
+
+The following code displays a `Snackbar` when a button is pressed.
+This is typically done inside a `build` method
+so a `BuildContext` object is available.
+
+```dart
+ElevatedButton(
+  child: Text('Snack'),
+  onPressed: () {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text('Time for a snack!'),
+          duration: Duration(seconds: 3), // defaults to 4 seconds
+        ),
+      );
+  },
+),
 ```
 
 #### Text Widget
