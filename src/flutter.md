@@ -1509,8 +1509,9 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ExpandIcon-class.html", "ExpandIcon" %}                               | "rotating expand/collapse button"; "rotates 180 degrees when pressed, then reverts the animation on a second press" |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/FlutterLogo-class.html", "FlutterLogo" %}                             | renders the Flutter logo; can specify the size                                                                      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Icon-class.html", "Icon" %}                                           | renders an icon; typically passed an `IconData` object from a constant in the `Icons` class                         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Image-class.html", "Image" %}                                         | renders an image                                                                                                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Image-class.html", "Image" %}                                         | renders an image from a source such as a URL, local file, or `AssetBundle`                                          |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ImageIcon-class.html", "ImageIcon" %}                                 |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html", "LinearProgressIndicator" %}     | line used to indicate that background activity is occurring, such as waiting for an API call to complete            |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/NetworkImage-class.html", "NetworkImage" %}                           |                                                                                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Placeholder-class.html", "Placeholder" %}                             | renders a rectangle that represents where other widgets will be added in the future                                 |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ProgressIndicator-class.html", "ProgressIndicator" %}                 |                                                                                                                     |
@@ -1528,7 +1529,7 @@ These include `clip`, `ellipsis`, `fade`, and `visible`.
 
 Details for some of the display widgets are provided below.
 
-#### CircleAvatar
+#### CircleAvatar Widget
 
 The `CircleAvatar` widget displays an image representing a user in a circle.
 The image can be specified using the `backgroundImage` or `child` arguments.
@@ -1563,7 +1564,19 @@ CircleAvatar(
 ),
 ```
 
-#### ExpandIcon and AnimatedContainer
+#### CircularProgressIndicator and LinearProgressIndicator
+
+Both of these widgets are used to indicate that some activity,
+such as an API call, is occuring in the background.
+And both have determinant and indeterminant forms.
+They use colors from `ThemeData.accentColor` by default,
+but the colors can be customized.
+For determinant progress indicators, set the `value` argument
+to a state variable that is updated to a value between 0 and 1
+when progress occurs.
+The `CircularProgressIndicator` constructor takes a `strokeWidth` argument.
+
+#### ExpandIcon and AnimatedContainer Widgets
 
 The `ExpandIcon` widget renders an icon button that toggles between
 a down and up pointing angle bracket when tapped by rotating it.
@@ -1589,7 +1602,7 @@ AnimatedContainer(
 ),
 ```
 
-#### Icon
+#### Icon Widget
 
 The `Icon` widget renders an icon.
 The icon to render is specified by the first positional argument
@@ -1605,6 +1618,71 @@ The following example displays a large, red fire extinguisher icon.
 ```dart
 Icon(Icons.fire_extinguisher, size: 100, color: Colors.red)
 ```
+
+#### Image Widget
+
+The `Image` widget renders an image.
+Supported image formats include
+BMP, GIF (including animated), JPEG, PNG, WBMP, and WebP.
+
+The `width` and `height` arguments specify its size.
+
+The `fit` argument specifies how the image
+should be sized within the given space.
+Options come from the `BoxFit` enum and include
+`contain` (default; centers and scales, leaving blank space),
+`cover` (centers and clips), and `fill` (changes aspect ratio).
+
+The `semanticLabel` argument provides a text description
+that is displayed by assistive technologies,
+similar to the HTML `image` `alt` attribute.
+
+The `Image` class supports many named constructors.
+
+To render an image stored in the `assets` directory of a application:
+
+- Create an `assets` directory with an `images` directory inside it.
+- Add image files in this directory.
+- Modify `pubspec.yaml` so the following exists:
+
+  ```yaml
+  flutter:
+    assets:
+      - assets/images/
+  ```
+
+- Use the `Image.asset` constructor. For example:
+
+  ```dart
+  Image.asset('assets/images/comet.jpg')
+  ```
+
+To render an image from a URL, use `Image.network(someUrl)`.
+To provide an indication of the loading progress,
+use a `LinearProgressIndicator`.
+Images are cached, so the progress indicator will likely
+only be displayed the first time the app requests the image.
+
+For example:
+TODO: Get this progress indicator to work!
+
+```dart
+Image.network(
+  'https://avatars.githubusercontent.com/u/79312?v=4',
+  width: 200,
+  height: 100,
+  fit: BoxFit.cover,
+  loadingBuilder: (context, child, progress) {
+    if (progress == null) return child;
+    var bytes = progress.cumulativeBytesLoaded;
+    var total = progress.expectedTotalBytes ?? 1;
+    var percent = bytes / total;
+    return LinearProgressIndicator(value: percent);
+  },
+)
+```
+
+To render an image from the device, use `Image.file(pathToFile)`.
 
 #### Text Widget
 
