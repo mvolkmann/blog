@@ -1501,15 +1501,14 @@ TODO: Finish filling in this table.
 
 | Widget                                                                                                                          | Description                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Banner-class.html", "Banner" %}                                        | "displays a diagonal message above the corner of another widget"                                                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Banner-class.html", "Banner" %}                                        | "displays a diagonal message above the corner of another widget"; can specify the corner                            |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/CircleAvatar-class.html", "CircleAvatar" %}                           | "circle that represents a user"                                                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html", "CircularProgressIndicator" %} | rotating icon used to indicate that background activity is occurring, such as waiting for an API call to complete   |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Divider-class.html", "Divider" %}                                     | "thin horizontal line, with padding on either side"line                                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Divider-class.html", "Divider" %}                                     | "thin horizontal line, with padding on either side"                                                                 |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ErrorWidget-class.html", "ErrorWidget" %}                              | "renders an exception's message"; useful in an error dialog                                                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ExpandIcon-class.html", "ExpandIcon" %}                               | "rotating expand/collapse button"; "rotates 180 degrees when pressed, then reverts the animation on a second press" |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/FileImage-class.html", "FileImage" %}                                 |                                                                                                                     |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/FlutterLogo-class.html", "FlutterLogo" %}                             | renders the Flutter logo                                                                                            |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Icon-class.html", "Icon" %}                                           | renders an icon                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/FlutterLogo-class.html", "FlutterLogo" %}                             | renders the Flutter logo; can specify the size                                                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Icon-class.html", "Icon" %}                                           | renders an icon; typically passed an `IconData` object from a constant in the `Icons` class                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Image-class.html", "Image" %}                                         | renders an image                                                                                                    |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ImageIcon-class.html", "ImageIcon" %}                                 |                                                                                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/NetworkImage-class.html", "NetworkImage" %}                           |                                                                                                                     |
@@ -1588,6 +1587,23 @@ AnimatedContainer(
   curve: Curves.easeInOut,
   height: isExpanded ? 20 : 0,
 ),
+```
+
+#### Icon
+
+The `Icon` widget renders an icon.
+The icon to render is specified by the first positional argument
+whose value must be an `IconData` object.
+Typically these come from constants in the `Icons` class.
+Other arguments commonly used inlude `color` and `size`.
+The following example displays a large, red fire extinguisher icon.
+
+<img alt="Flutter Icon" style="width: 10%"
+  src="/blog/assets/flutter-icon-fire-extinguisher.png?v={{pkg.version}}"
+  title="Flutter Icon">
+
+```dart
+Icon(Icons.fire_extinguisher, size: 100, color: Colors.red)
 ```
 
 #### Text Widget
