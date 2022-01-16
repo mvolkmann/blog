@@ -281,7 +281,7 @@ Compatible editors include Android Studio, IntelliJ, VS Code, and emacs.
 To run a Flutter app from VS Code, select a simulated or real device to use
 from a menu on the right side of the VS Code footer.
 The select Run ... Start Debugging (F5)
-or Run ... Run Without Debugging (ctrl-F5).
+or Run ... Run Without Debugging (ctrl-fn-F5).
 The first time this is run for a given application
 it takes around a minute to start.
 
@@ -323,7 +323,7 @@ To run a Flutter app on a connected iPhone:
 
 - In VS Code
   - Select "iPhone (ios)" from the device drop-down in the footer.
-  - Select Run ... Run Without Debugging
+  - Select Run ... Run Without Debugging (ctrl-fn-F5).
   - At "Select Environment" prompt, select "Dart & Flutter".
   - This gives the error "Unable to find a destination
     matching the provided destination specifier".
@@ -960,9 +960,9 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}          | appears at bottom of app; contains buttons used to switch between top-level views |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                      | panel that slides in from left (by default) and can contain navigation links      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}            | top of app; wraps many other widgets                                              |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}        |                                                                                   |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/NavigationToolbar-class.html", "NavigationToolbar" %} |                                                                                   |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Router-class.html", "Router" %}                       |                                                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}        | TODO                                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/NavigationToolbar-class.html", "NavigationToolbar" %} | TODO                                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Router-class.html", "Router" %}                       | TODO                                                                              |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                  | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets          |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                      | horizontal row of tabs                                                            |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}              | page that corresponds to a `TabBar` tab                                           |
@@ -1498,8 +1498,6 @@ described with the `Column` widget above.
 ### Display Widgets
 
 The most commonly used widgets for displaying content are described below:
-
-TODO: Finish filling in this table.
 
 | Widget                                                                                                                          | Description                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
