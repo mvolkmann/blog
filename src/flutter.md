@@ -803,7 +803,7 @@ Here is an example of a stateless widget that renders a greeting
 for a given name.
 
 <img alt="Flutter Greet" style="width: 60%"
-    src="/blog/assets/Flutter-Greet.png?v={{pkg.version}}"
+    src="/blog/assets/flutter-greet.png?v={{pkg.version}}"
     title="Flutter Greet">
 
 ```dart
@@ -1033,7 +1033,7 @@ The `AppBar` constructor takes the following named parameters and more:
 See the sample app in the GitHub repo {% aTargetBlank
 "https://github.com/mvolkmann/flutter_appbar", "flutter_appbar" %}.
 
-### Material Layout Widgets
+### Layout Widgets
 
 The layout widgets are documented at {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/layout",
@@ -1493,7 +1493,7 @@ These have a similar effect to the CSS `align-items` property.
 Values of the `TextDirection` and `VerticalDirection` enums were
 described with the `Column` widget above.
 
-### Material Display Widgets
+### Display Widgets
 
 The most commonly used widgets for displaying content are described below:
 
@@ -1528,6 +1528,38 @@ a value from the `TextOverflow` enum.
 These include `clip`, `ellipsis`, `fade`, and `visible`.
 
 Details for some of the display widgets are provided below.
+
+#### CircleAvatar
+
+The `CircleAvatar` widget displays an image representing a user in a circle.
+The image can be specified using the `backgroundImage` or `child` arguments.
+The following code demonstrates each option:
+
+<img alt="Flutter CircleAvatar" style="width: 60%"
+    src="/blog/assets/flutter-circleavatar.png?v={{pkg.version}}"
+    title="Flutter CircleAvatar">
+<img>
+
+```dart
+CircleAvatar(
+  backgroundImage: NetworkImage(
+    'https://avatars.githubusercontent.com/u/79312?v=4',
+    scale: 0.5, // does not scale the image!
+  ),
+  radius: avatarSize / 2,
+),
+
+CircleAvatar(
+  child: ClipOval(
+    child: Image.network(
+      'https://avatars.githubusercontent.com/u/79312?v=4',
+      height: avatarSize,
+      width: avatarSize,
+    ),
+  ),
+  radius: avatarSize / 2,
+),
+```
 
 #### ExpandIcon and AnimatedContainer
 
