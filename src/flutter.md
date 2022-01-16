@@ -1065,7 +1065,7 @@ are described below:
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizedBox-class.html", "SizedBox" %}                         | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Transform-class.html", "Transform" %}                       | transforms its child by translating, rotating, and scaling it                                                                 |
 
-Details for some of the the single-child layout widgets are provided below.
+Details for some of the single-child layout widgets are provided below.
 
 ##### Center Widget
 
@@ -1199,7 +1199,7 @@ are described below:
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Table-class.html", "Table" %}               | similar to `GridView`, but is more configurable and doesn't scroll                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Wrap-class.html", "Wrap" %}                 | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
 
-Details for some of the the multi-child layout widgets are provided below.
+Details for some of the multi-child layout widgets are provided below.
 
 ##### Column Widget
 
@@ -1526,6 +1526,8 @@ Both automatically wrap their text if needed by default,
 but this can be changed by setting their `overflow` argument to
 a value from the `TextOverflow` enum.
 These include `clip`, `ellipsis`, `fade`, and `visible`.
+
+Details for some of the display widgets are provided below.
 
 #### ExpandIcon and AnimatedContainer
 
