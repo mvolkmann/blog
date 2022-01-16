@@ -1050,6 +1050,7 @@ are described below:
 | Widget                                                                                                               | Description                                                                                                                   |
 | -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Align-class.html", "Align" %}                               | specifies where its child should be positioned within its parent (ex. `Alignment.bottomRight`)                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html", "AnimatedContainer" %}       | like `Container`, but "gradually changes its values over a period of time"; provides implicit animations                      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AspectRatio-class.html", "AspectRatio" %}                   | sizes its child to a specific aspect ratio                                                                                    |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Center-class.html", "Center" %}                             | centers its child horizontally and vertically in the available space                                                          |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html", "ConstrainedBox" %}             | "imposes additional constraints on its child" which include min and max width and height                                      |
@@ -1494,34 +1495,63 @@ described with the `Column` widget above.
 
 ### Material Display Widgets
 
-| Widget                      | Description                                                                                                       |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `Banner`                    |                                                                                                                   |
-| `Canvas`                    |                                                                                                                   |
-| `CircleAvatar`              |                                                                                                                   |
-| `CircularProgressIndicator` | rotating icon used to indicate that background activity is occurring, such as waiting for an API call to complete |
-| `Divider`                   | horizontal, thin line                                                                                             |
-| `ErrorWidget`               |                                                                                                                   |
-| `ExpandIcon`                |                                                                                                                   |
-| `FileImage`                 |                                                                                                                   |
-| `FlutterLogo`               | renders the Flutter logo                                                                                          |
-| `Icon`                      | renders an icon                                                                                                   |
-| `Image`                     | renders an image                                                                                                  |
-| `ImageIcon`                 |                                                                                                                   |
-| `NetworkImage`              |                                                                                                                   |
-| `Placeholder`               | renders a rectangle that represents where other widgets will be added in the future                               |
-| `ProgressIndicator`         |                                                                                                                   |
-| `RichText`                  | renders runs of text that each use different styles; uses `TextSpan` objects                                      |
-| `Snackbar`                  |                                                                                                                   |
-| `Text`                      | renders a run of text with a single style                                                                         |
-| `Tooltip`                   |                                                                                                                   |
-| `VerticalDivider`           | vertical, thin line                                                                                               |
+The most commonly used widgets for displaying content are described below:
+
+TODO: Finish filling in this table.
+
+| Widget                                                                                                                          | Description                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Banner-class.html", "Banner" %}                                        | "displays a diagonal message above the corner of another widget"                                                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/CircleAvatar-class.html", "CircleAvatar" %}                           | "circle that represents a user"                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html", "CircularProgressIndicator" %} | rotating icon used to indicate that background activity is occurring, such as waiting for an API call to complete   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Divider-class.html", "Divider" %}                                     | "thin horizontal line, with padding on either side"line                                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ErrorWidget-class.html", "ErrorWidget" %}                              | "renders an exception's message"; useful in an error dialog                                                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ExpandIcon-class.html", "ExpandIcon" %}                               | "rotating expand/collapse button"; "rotates 180 degrees when pressed, then reverts the animation on a second press" |
+| {% aTargetBlank "", "FileImage" %}                                                                                              |                                                                                                                     |
+| {% aTargetBlank "", "FlutterLogo" %}                                                                                            | renders the Flutter logo                                                                                            |
+| {% aTargetBlank "", "Icon" %}                                                                                                   | renders an icon                                                                                                     |
+| {% aTargetBlank "", "Image" %}                                                                                                  | renders an image                                                                                                    |
+| {% aTargetBlank "", "ImageIcon" %}                                                                                              |                                                                                                                     |
+| {% aTargetBlank "", "NetworkImage" %}                                                                                           |                                                                                                                     |
+| {% aTargetBlank "", "Placeholder" %}                                                                                            | renders a rectangle that represents where other widgets will be added in the future                                 |
+| {% aTargetBlank "", "ProgressIndicator" %}                                                                                      |                                                                                                                     |
+| {% aTargetBlank "", "RichText" %}                                                                                               | renders runs of text that each use different styles; uses `TextSpan` objects                                        |
+| {% aTargetBlank "", "Snackbar" %}                                                                                               |                                                                                                                     |
+| {% aTargetBlank "", "Text" %}                                                                                                   | renders a run of text with a single style                                                                           |
+| {% aTargetBlank "", "Tooltip" %}                                                                                                |                                                                                                                     |
+| {% aTargetBlank "", "VerticalDivider" %}                                                                                        | vertical, thin line                                                                                                 |
 
 The primary widgets for rendering text are `Text` and `RichText`.
 Both automatically wrap their text if needed by default,
 but this can be changed by setting their `overflow` argument to
 a value from the `TextOverflow` enum.
 These include `clip`, `ellipsis`, `fade`, and `visible`.
+
+#### ExpandIcon and AnimatedContainer
+
+The `ExpandIcon` widget renders an icon button that toggles between
+a down and up pointing angle bracket when tapped by rotating it.
+Its `isExpanded` argument dictates the direction and
+its `onPressed` argument can change the value inside a `StatefulWidget`.
+This can be used in combination with an `AnimatedContainer`
+to show and hide content.
+
+The following code demonstrates hiding and showing a `Text` widget
+by toggling its `height` between `0` and `20`:
+
+```dart
+ExpandIcon(
+    isExpanded: isExpanded,
+    onPressed: (_) {
+      setState(() => isExpanded = !isExpanded);
+    }),
+AnimatedContainer(
+  child: Text('I am showing!'),
+  duration: Duration(milliseconds: 500),
+  curve: Curves.easeInOut,
+  height: isExpanded ? 20 : 0,
+),
+```
 
 #### Text Widget
 
