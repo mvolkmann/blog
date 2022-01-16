@@ -1535,7 +1535,7 @@ The `CircleAvatar` widget displays an image representing a user in a circle.
 The image can be specified using the `backgroundImage` or `child` arguments.
 The following code demonstrates each option:
 
-<img alt="Flutter CircleAvatar" style="width: 60%"
+<img alt="Flutter CircleAvatar" style="width: 40%"
     src="/blog/assets/flutter-circleavatar.png?v={{pkg.version}}"
     title="Flutter CircleAvatar">
 <img>
