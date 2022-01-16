@@ -4842,6 +4842,9 @@ The {% aTargetBlank
 "PageView" %} widget provides a carousel-like scrollable list of pages.
 Users can swipe through viewing the pages one at a time
 or the current page can be changed programmatically.
+
+Pages scroll horizontally by default, but can be changed to scroll vertically.
+
 Page transitions are animated by default and the animation can be customized.
 
 The following code demonstrates using `PageView`:
