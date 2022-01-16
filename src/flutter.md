@@ -1664,13 +1664,12 @@ Images are cached, so the progress indicator will likely
 only be displayed the first time the app requests the image.
 
 For example:
-TODO: Get this progress indicator to work!
 
 ```dart
 Image.network(
   'https://avatars.githubusercontent.com/u/79312?v=4',
   width: 200,
-  height: 100,
+  height: 200,
   fit: BoxFit.cover,
   loadingBuilder: (context, child, progress) {
     if (progress == null) return child;
