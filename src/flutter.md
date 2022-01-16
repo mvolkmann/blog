@@ -952,19 +952,21 @@ It is common for Flutter apps to have the following top-level structure:
       - `BottomAppBar` (alternative to `TabBar` inside `AppBar`)
     - `drawer` `Widget` (typically is a `SizedBox` containing a `Drawer`)
 
-| Widget                                                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html", "AppBar" %}                       | appears at top of app; contains other widgets such as `TabBar`                    |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}           | appears at bottom of app; contains buttons used to switch between top-level views |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                       | panel that slides in from left (by default) and can contain navigation links      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}             | top of app; wraps many other widgets                                              |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}         |                                                                                   |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationToolbar-class.html", "NavigationToolbar" %} |                                                                                   |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Router-class.html", "Router" %}                       |                                                                                   |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                   | provides app structure; can show `Drawer`, `Snackbar`, and bottom sheets          |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                       | horizontal row of tabs                                                            |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}               | page that corresponds to a `TabBar` tab                                           |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}     | renders dots that indicate current carousel item; click to switch                 |
+TODO: Finish filling in this table.
+
+| Widget                                                                                                         | Description                                                                       |
+| -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html", "AppBar" %}                      | appears at top of app; contains other widgets such as `TabBar`                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}          | appears at bottom of app; contains buttons used to switch between top-level views |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                      | panel that slides in from left (by default) and can contain navigation links      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}            | top of app; wraps many other widgets                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}        |                                                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/NavigationToolbar-class.html", "NavigationToolbar" %} |                                                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Router-class.html", "Router" %}                       |                                                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                  | provides app structure; can show `Drawer`, `Snackbar`, and bottom sheets          |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                      | horizontal row of tabs                                                            |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}              | page that corresponds to a `TabBar` tab                                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}    | renders dots that indicate current carousel item; click to switch                 |
 
 #### MaterialApp Widget
 
