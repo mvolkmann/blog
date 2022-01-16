@@ -1517,8 +1517,8 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/RichText-class.html", "RichText" %}                                   | renders runs of text that each use different styles; uses `TextSpan` objects                                        |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/SnackBar-class.html", "SnackBar" %}                                   | renders "a lightweight message with an optional action which briefly displays at the bottom of the screen"          |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Text-class.html", "Text" %}                                           | renders a run of text with a single style                                                                           |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Tooltip-class.html", "Tooltip" %}                                     |                                                                                                                     |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/VerticalDivider-class.html", "VerticalDivider" %}                     | vertical, thin line                                                                                                 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Tooltip-class.html", "Tooltip" %}                                     | used to explain the functionality of a button or other tappable UI widget; press and hold to display                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/VerticalDivider-class.html", "VerticalDivider" %}                     | "thin vertical line, with padding on either side"                                                                   |
 
 The primary widgets for rendering text are `Text` and `RichText`.
 Both automatically wrap their text if needed by default,
@@ -1799,6 +1799,41 @@ The optional `recognizer` argument is typically set to
 a `TapGestureRecognizer` which extends `GestureRecognizer`.
 Its constructor takes an `onTap` argument
 which is a function to call when a tap is detected.
+
+#### Tooltip Widget
+
+Tooltips briefly describe the functionality of
+a button or other tappable UI widget.
+To see a tooltip, users must press and hold on a widget that has a tooltip.
+
+Highlights of the arguments that can be passed to the `Tooltip` constructor
+are described below:
+
+| Argument       | Description                                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `child`        | `Widget` to which the `Tooltip` belongs                                                                          |
+| `message`      | `String` text to display                                                                                         |
+| `preferBelow`  | `bool` indicating whether the tooltip should be displayed below rather than above the widget; defaults to `true` |
+| `richMessage`  | `InlineSpan` rich text to display instead of plain text                                                          |
+| `showDuration` | `Duration` that the tooltip should be displayed after long press is released; defaults to 1.5 seconds            |
+| `triggerMode`  | `TooltipTriggerMode` enum value of `longPress` (default), `tap`, or `manual`                                     |
+
+The following code creates a button that has a tooltip:
+
+```dart
+Tooltip(
+  child: ElevatedButton(
+    child: Text('Press Me'),
+    onPressed: () => print('got ElevatedButton press'),
+  ),
+  message: 'I am a tooltip!',
+)
+```
+
+The `IconButton` takes a `tooltip` argument, which simplifies adding a tooltip.
+
+The `triggerMode` can only be set to `tap` for widgets
+that do not have an `onPressed` argument value.
 
 ### Dialog Widgets
 
