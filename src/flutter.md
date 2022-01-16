@@ -1507,19 +1507,19 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Divider-class.html", "Divider" %}                                     | "thin horizontal line, with padding on either side"line                                                             |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ErrorWidget-class.html", "ErrorWidget" %}                              | "renders an exception's message"; useful in an error dialog                                                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ExpandIcon-class.html", "ExpandIcon" %}                               | "rotating expand/collapse button"; "rotates 180 degrees when pressed, then reverts the animation on a second press" |
-| {% aTargetBlank "", "FileImage" %}                                                                                              |                                                                                                                     |
-| {% aTargetBlank "", "FlutterLogo" %}                                                                                            | renders the Flutter logo                                                                                            |
-| {% aTargetBlank "", "Icon" %}                                                                                                   | renders an icon                                                                                                     |
-| {% aTargetBlank "", "Image" %}                                                                                                  | renders an image                                                                                                    |
-| {% aTargetBlank "", "ImageIcon" %}                                                                                              |                                                                                                                     |
-| {% aTargetBlank "", "NetworkImage" %}                                                                                           |                                                                                                                     |
-| {% aTargetBlank "", "Placeholder" %}                                                                                            | renders a rectangle that represents where other widgets will be added in the future                                 |
-| {% aTargetBlank "", "ProgressIndicator" %}                                                                                      |                                                                                                                     |
-| {% aTargetBlank "", "RichText" %}                                                                                               | renders runs of text that each use different styles; uses `TextSpan` objects                                        |
-| {% aTargetBlank "", "Snackbar" %}                                                                                               |                                                                                                                     |
-| {% aTargetBlank "", "Text" %}                                                                                                   | renders a run of text with a single style                                                                           |
-| {% aTargetBlank "", "Tooltip" %}                                                                                                |                                                                                                                     |
-| {% aTargetBlank "", "VerticalDivider" %}                                                                                        | vertical, thin line                                                                                                 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/FileImage-class.html", "FileImage" %}                                 |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/FlutterLogo-class.html", "FlutterLogo" %}                             | renders the Flutter logo                                                                                            |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Icon-class.html", "Icon" %}                                           | renders an icon                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Image-class.html", "Image" %}                                         | renders an image                                                                                                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ImageIcon-class.html", "ImageIcon" %}                                 |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/NetworkImage-class.html", "NetworkImage" %}                           |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Placeholder-class.html", "Placeholder" %}                             | renders a rectangle that represents where other widgets will be added in the future                                 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ProgressIndicator-class.html", "ProgressIndicator" %}                 |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/RichText-class.html", "RichText" %}                                   | renders runs of text that each use different styles; uses `TextSpan` objects                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Snackbar-class.html", "Snackbar" %}                                   |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Text-class.html", "Text" %}                                           | renders a run of text with a single style                                                                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Tooltip-class.html", "Tooltip" %}                                     |                                                                                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/VerticalDivider-class.html", "VerticalDivider" %}                     | vertical, thin line                                                                                                 |
 
 The primary widgets for rendering text are `Text` and `RichText`.
 Both automatically wrap their text if needed by default,
@@ -1531,8 +1531,8 @@ These include `clip`, `ellipsis`, `fade`, and `visible`.
 
 The `ExpandIcon` widget renders an icon button that toggles between
 a down and up pointing angle bracket when tapped by rotating it.
-Its `isExpanded` argument dictates the direction and
-its `onPressed` argument can change the value inside a `StatefulWidget`.
+The `isExpanded` argument dictates the direction and
+the `onPressed` argument can change the value inside a `StatefulWidget`.
 This can be used in combination with an `AnimatedContainer`
 to show and hide content.
 
