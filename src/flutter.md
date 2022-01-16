@@ -302,7 +302,7 @@ To run a Flutter app on a connected iPhone:
 - Enter `open ios/Runner.xcworkspace` to launch Xcode.
 - Click "Runner" at the top of the Navigator.
 
-- In XCode
+- In Xcode
 
   - Select "iPhone" from the device drop-down in the header.
   - Click "Runner" at the top of the Navigator.
@@ -315,13 +315,11 @@ To run a Flutter app on a connected iPhone:
   - option #1
     - In Xcode, press the run button (triangle) or cmd-r.
     - There will be several dialog prompts for your Mac password.
-    - This is the only option that has worked for me.
   - option #2
     - From a terminal, enter `flutter run`.
     - Select `iPhone` from the list of device options.
     - This gives the error "Unable to find a destination
       matching the provided destination specifier".
-  - Both options take a couple of minutes
 
 - In VS Code
   - Select "iPhone (ios)" from the device drop-down in the footer.
@@ -329,6 +327,9 @@ To run a Flutter app on a connected iPhone:
   - At "Select Environment" prompt, select "Dart & Flutter".
   - This gives the error "Unable to find a destination
     matching the provided destination specifier".
+
+Only Xcode option #1 has worked for me.
+All the options options take a couple of minutes to complete.
 
 To run a Flutter app on an iPhone wirelessly:
 
