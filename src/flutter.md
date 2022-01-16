@@ -1541,6 +1541,8 @@ The following code demonstrates each option:
 <img>
 
 ```dart
+// This doesn't scale the image correctly,
+// but will if wrapped in a Column widget.  Why?
 CircleAvatar(
   backgroundImage: NetworkImage(
     'https://avatars.githubusercontent.com/u/79312?v=4',
@@ -1549,6 +1551,7 @@ CircleAvatar(
   radius: avatarSize / 2,
 ),
 
+// This scales the image correctly.
 CircleAvatar(
   child: ClipOval(
     child: Image.network(
@@ -1665,8 +1668,10 @@ are described below:
 | `recognizer` | `GestureRecognizer` object such as a `TapGestureRecognizer`          |
 | `style`      | `TextStyle` object (described earlier)                               |
 
-TODO: Does the text color default to the background color causing it to be
-TODO: invisible and fixed by specifying a color in the `style` argument?
+If the `style` argument is omitted or doesn't specify a color,
+the text is invisible.
+It's possible that the color defaults to the background color,
+but I haven't found any documentation to confirm this.
 
 Classes that extend `InlineSpan` include `TextSpan` and `WidgetSpan`.
 `TextSpan` objects represent a tree of text and
