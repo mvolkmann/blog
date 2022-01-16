@@ -1830,7 +1830,8 @@ Tooltip(
 )
 ```
 
-The `IconButton` takes a `tooltip` argument, which simplifies adding a tooltip.
+The `FloatingActionButton`, `IconButton`, and `PopupMenuButton` widgets
+all takes a `tooltip` argument, which simplifies adding a tooltip.
 
 The `triggerMode` can only be set to `tap` for widgets
 that do not have an `onPressed` argument value.
