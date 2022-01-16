@@ -183,14 +183,6 @@ This document refers to both as a simulator.
     click it and then click "Enable android for this project".
     Click the device name again and click "Enable iOS for this project".
 
-## Tools
-
-Flutter provides a command-line tool
-for deploying apps to the Google Play store.
-TODO: What is this?
-React Native requires a third-party tool for deploying apps
-that is more complex.
-
 ## Creating and Running an App
 
 To create an app, enter `flutter create app_name`.
@@ -304,21 +296,39 @@ Press "p" again to toggle this off.
 
 To run a Flutter app on a connected iPhone:
 
-- From a terminal, enter `sudo gem install cocoapods`.
 - Attach the phone to the computer with a USB cable.
-- Unlock the phone.
+- Unlock the phone and "trust it.
 - From a terminal running bash, cd to the top project directory.
 - Enter `open ios/Runner.xcworkspace` to launch Xcode.
-- Select "iPhone" from the device drop-down in the header.
 - Click "Runner" at the top of the Navigator.
-- Click the "Signing & Capabilities" tab.
-- Select your team from the Team drop-down.
-- Enter a unique "Bundle Identifier", perhaps containing
-  your email address and the project name.
-- option #1 - In Xcode, press the run button or cmd-r.
-- option #2 - From a terminal, enter `flutter run` and
-  select `iPhone` from the list of device options.
-  TODO: Neither of these options worked!
+
+- In XCode
+
+  - Select "iPhone" from the device drop-down in the header.
+  - Click "Runner" at the top of the Navigator.
+  - Click the "Signing & Capabilities" tab.
+  - Select your team from the Team drop-down.
+    This can be your Apple ID.
+    After entering this the first time, enter your Apple ID password.
+  - Enter a unique "Bundle Identifier", perhaps containing
+    your email address, a hyphen, and the project name.
+  - option #1
+    - In Xcode, press the run button (triangle) or cmd-r.
+    - There will be several dialog prompts for your Mac password.
+    - This is the only option that has worked for me.
+  - option #2
+    - From a terminal, enter `flutter run`.
+    - Select `iPhone` from the list of device options.
+    - This gives the error "Unable to find a destination
+      matching the provided destination specifier".
+  - Both options take a couple of minutes
+
+- In VS Code
+  - Select "iPhone (ios)" from the device drop-down in the footer.
+  - Select Run ... Run Without Debugging
+  - At "Select Environment" prompt, select "Dart & Flutter".
+  - This gives the error "Unable to find a destination
+    matching the provided destination specifier".
 
 To run a Flutter app on an iPhone wirelessly:
 
