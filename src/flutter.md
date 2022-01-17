@@ -952,22 +952,20 @@ It is common for Flutter apps to have the following top-level structure:
       - `BottomAppBar` (alternative to `TabBar` inside `AppBar`)
     - `drawer` `Widget` (typically is a `SizedBox` containing a `Drawer`)
 
-TODO: Finish filling in this table.
+The most commonly used application structure widgets are described below:
 
-| Widget                                                                                                              | Description                                                                                  |
-| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html", "AppBar" %}                           | appears at top of app; contains other widgets such as `TabBar`                               |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}               | appears at bottom of app; contains buttons used to switch between top-level views            |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html", "BottomNavigationBar" %} | row of tappable icons and labels typically used to navigate to a page; styled for Material 2 |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                           | panel that slides in from left (by default) and can contain navigation links                 |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}                 | top of app; wraps many other widgets                                                         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}             | similar to `BottomNavigationBar`, but styled for Material 3; still renders at bottom         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/NavigationToolbar-class.html", "NavigationToolbar" %}      | TODO                                                                                         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Router-class.html", "Router" %}                            | TODO                                                                                         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                       | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets                     |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                           | horizontal row of tabs                                                                       |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}                   | page that corresponds to a `TabBar` tab                                                      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}         | renders dots that indicate current carousel item; click to switch                            |
+| Widget                                                                                                              | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html", "AppBar" %}                           | appears at top of app; can contain "leading", "title", "actions" and a `TabBar`                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}               | appears at bottom of app; contains buttons used to switch between top-level views                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html", "BottomNavigationBar" %} | row of tappable icons and labels typically used to navigate to a page; styled for Material 2            |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                           | panel that slides in from left (by default) and can contain navigation links                            |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}                 | topmost widget; "wraps a number of widgets that are commonly required for material design applications" |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}             | similar to `BottomNavigationBar`, but styled for Material 3; still renders at bottom                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                       | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets (like modals)                  |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                           | horizontal row of tabs                                                                                  |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}                   | a page that corresponds to a `TabBar` tab                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}         | renders dots that indicate current carousel item; click to switch                                       |
 
 See examples of using `ButtomNavigationBar` and `NavigationBar`
 in the "Navigation" section below.
