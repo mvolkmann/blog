@@ -954,19 +954,23 @@ It is common for Flutter apps to have the following top-level structure:
 
 TODO: Finish filling in this table.
 
-| Widget                                                                                                         | Description                                                                       |
-| -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html", "AppBar" %}                      | appears at top of app; contains other widgets such as `TabBar`                    |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}          | appears at bottom of app; contains buttons used to switch between top-level views |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                      | panel that slides in from left (by default) and can contain navigation links      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}            | top of app; wraps many other widgets                                              |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}        | TODO - top instead of bottom?                                                     |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/NavigationToolbar-class.html", "NavigationToolbar" %} | TODO                                                                              |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Router-class.html", "Router" %}                       | TODO                                                                              |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                  | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets          |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                      | horizontal row of tabs                                                            |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}              | page that corresponds to a `TabBar` tab                                           |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}    | renders dots that indicate current carousel item; click to switch                 |
+| Widget                                                                                                              | Description                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html", "AppBar" %}                           | appears at top of app; contains other widgets such as `TabBar`                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}               | appears at bottom of app; contains buttons used to switch between top-level views            |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html", "BottomNavigationBar" %} | row of tappable icons and labels typically used to navigate to a page; styled for Material 2 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                           | panel that slides in from left (by default) and can contain navigation links                 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}                 | top of app; wraps many other widgets                                                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}             | similar to `BottomNavigationBar`, but styled for Material 3; still renders at bottom         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/NavigationToolbar-class.html", "NavigationToolbar" %}      | TODO                                                                                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Router-class.html", "Router" %}                            | TODO                                                                                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                       | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                           | horizontal row of tabs                                                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}                   | page that corresponds to a `TabBar` tab                                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}         | renders dots that indicate current carousel item; click to switch                            |
+
+See examples of using `ButtomNavigationBar` and `NavigationBar`
+in the "Navigation" section below.
 
 #### MaterialApp Widget
 
@@ -4876,6 +4880,8 @@ class BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     var items = widget.options
         .map(
+          // To use NavigationBar instead,
+          // change BottomNavigationBarItem to NavigationDestination.
           (option) => BottomNavigationBarItem(
             icon: Icon(option.icon),
             label: option.label,
@@ -4888,14 +4894,22 @@ class BottomNavigationState extends State<BottomNavigation> {
         title: Text(widget.options[_pageIndex].label),
       ),
       body: Center(child: widget.options[_pageIndex].widget),
+      // Can change BottomNavigationBar to NavigationBar.
       bottomNavigationBar: BottomNavigationBar(
+        // To use NavigationBar instead,
+        // change currentIndex to NavigationDestination.
         currentIndex: _pageIndex,
+        // To use NavigationBar instead,
+        // change onTap to onDestinationSelected.
         onTap: (int index) {
-          setState(() {
-            _pageIndex = index;
-          });
+          setState(() => _pageIndex = index);
         },
+        // To use NavigationBar instead, remove this argument.
+        // The selected item will automatically
+        // be given a unique background color.
         selectedItemColor: Colors.green,
+        // To use NavigationBar instead,
+        // change items to destinations.
         items: items,
       ),
     );
