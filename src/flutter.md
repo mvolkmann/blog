@@ -960,7 +960,7 @@ TODO: Finish filling in this table.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/BottomAppBar-class.html", "BottomAppBar" %}          | appears at bottom of app; contains buttons used to switch between top-level views |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Drawer-class.html", "Drawer" %}                      | panel that slides in from left (by default) and can contain navigation links      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/MaterialApp-class.html", "MaterialApp" %}            | top of app; wraps many other widgets                                              |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}        | TODO                                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/NavigationBar-class.html", "NavigationBar" %}        | TODO - top instead of bottom?                                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/NavigationToolbar-class.html", "NavigationToolbar" %} | TODO                                                                              |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Router-class.html", "Router" %}                       | TODO                                                                              |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                  | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets          |
@@ -2757,6 +2757,61 @@ import 'package:flutter/cupertino.dart';
 | `CupertinoTabView`                    | supports "parallel navigation"? between tabs; typically used with `CupertinoTabScaffold`                           |
 | `CupertinoTextField`                  | iOS-style input text field                                                                                         |
 | `CupertinoTimerPicker`                | iOS-style wheel picker for entering hours, minutes, and seconds                                                    |
+
+#### CupertinoDatePicker
+
+This is an alternative to the Material UI `CalendarDatePicker` widget.
+It allow the user to select a date, time, or both.
+
+The following code demonstrates this:
+
+```dart
+Container(
+  child: CupertinoDatePicker(
+    initialDateTime: DateTime.now(),
+    minimumYear: 1990,
+    maximumYear: 2030,
+
+    // Will get "Failed assert" after changing this.
+    // Restart the app to resolve.
+    //mode: CupertinoDatePickerMode.dateAndTime, // default
+    mode: CupertinoDatePickerMode.date,
+    //mode: CupertinoDatePickerMode.time,
+
+    onDateTimeChanged: (DateTime value) {
+      print('You selected $value');
+    },
+  ),
+  height: 200, // height of wheel; affects # of visible options
+);
+```
+
+#### CupertinoPicker
+
+This is an alternative to the Material UI `DropdownButton` widget.
+It allow the user to select an option from a wheel-like display.
+
+The following code allows the user to select from a `List` of words.
+
+```dart
+Container(
+  child: CupertinoPicker.builder(
+    childCount: words.length,
+    itemBuilder: (context, index) => Text(words[index]),
+    itemExtent: 30, // height of each item
+    onSelectedItemChanged: (int index) {
+      // This fires while dragging the wheel,
+      // not just when it is released.
+      print('You selected ${words[index]}');
+    },
+  ),
+  // This makes it clear the vertical space that is occupied.
+  decoration: BoxDecoration(
+    border: Border.all(color: Colors.red),
+  ),
+  height: 150, // height of wheel; affects # of visible items
+);
+```
 
 ## Model-View-Controller
 
