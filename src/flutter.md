@@ -965,7 +965,7 @@ The most commonly used application structure widgets are described below:
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}                       | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets (like modals)                  |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBar-class.html", "TabBar" %}                           | horizontal row of tabs                                                                                  |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/TabBarView-class.html", "TabBarView" %}                   | a page that corresponds to a `TabBar` tab                                                               |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}         | renders dots that indicate current carousel item; click to switch                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TabPageSelector-class.html", "TabPageSelector" %}         | renders dots that indicate current carousel item; cannot click to switch                                |
 
 See examples of using `ButtomNavigationBar` and `NavigationBar`
 in the "Navigation" section below.
@@ -5283,11 +5283,11 @@ class _HomeState extends State<Home> {
                 //scrollDirection: Axis.vertical,
               ),
             ),
+            // See notes on using TabPageSelector instead below.
             SizedBox(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // TODO: Could you use TabPageSelector to render these dots?
                   for (var index = 0; index < _pages.length; index++)
                     IconButton(
                       icon: Icon(
@@ -5354,6 +5354,83 @@ class Page3 extends StatelessWidget {
         child: Text('This is page #3.'),
       ),
       color: Colors.blue[100],
+    );
+  }
+}
+```
+
+The `TabPageSelector` widget can be used to render the dots
+instead creating our own with the `IconButton` widget.
+But the dots it creates cannot be tapped to change the page.
+If all that is needed is to indicate the current page,
+the following version of the `_HomeState` class above achieves this.
+
+```dart
+// The mixin is required in order to set the TabController vsync argument.
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  final PageController _controller = PageController();
+  final _pages = <Widget>[Page1(), Page2(), Page3()];
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: _pages.length, vsync: this);
+  }
+
+  IconButton _buildButton(bool forward) {
+    var index = _tabController.index;
+    var hide = forward ? index >= _pages.length - 1 : index == 0;
+    var icon = forward ? Icons.arrow_forward_ios : Icons.arrow_back_ios;
+    var method = forward ? _controller.nextPage : _controller.previousPage;
+    return IconButton(
+      icon: Icon(icon),
+      onPressed: hide
+          ? null
+          : () {
+              method(
+                curve: Curves.easeInOut,
+                duration: Duration(seconds: 1),
+              );
+              setPageIndex(_tabController.index + (forward ? 1 : -1));
+            },
+    );
+  }
+
+  void setPageIndex(int pageIndex) {
+    setState(() {
+      _tabController.index = pageIndex;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PageView Demo'),
+        leading: _buildButton(false),
+        actions: [_buildButton(true)],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                children: _pages,
+                controller: _controller,
+                onPageChanged: setPageIndex,
+                //scrollDirection: Axis.vertical,
+              ),
+            ),
+            TabPageSelector(
+              color: Colors.pink, // optional
+              controller: _tabController,
+              indicatorSize: 20, // optional
+              selectedColor: Colors.purple, // optional
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
