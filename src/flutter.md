@@ -4080,8 +4080,6 @@ The most useful of these functions are summarized below:
 | `Get.to`   | goes to a new route, pushing it onto the stack                      | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html", "to" %}     |
 | `Get.off`  | pops current route and pushes new route                             | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html", "to" %}     |
 
-TODO: Add an example of using GetX route management?
-
 #### Utilities
 
 GetX provides many utility functions.
@@ -4105,7 +4103,6 @@ The most useful of these functions are summarized below:
 
 GetX provides language translation using the `.tr` getter functino
 and the `Get.changeLocale` function.`
-TODO: Provide an example of using this?
 
 ### Riverpod Library
 
