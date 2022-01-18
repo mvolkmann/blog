@@ -972,7 +972,9 @@ in the "Navigation" section below.
 
 #### MaterialApp Widget
 
-The `MaterialApp` widget is topmost widget
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/MaterialApp-class.html",
+"MaterialApp" %} widget is topmost widget
 of applications that use Material Design.
 
 The `MaterialApp` constructor takes the following named parameters and more:
@@ -988,7 +990,9 @@ The `MaterialApp` constructor takes the following named parameters and more:
 
 #### Scaffold Widget
 
-The `Scaffold` widget "implements the basic material design layout structure."
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/Scaffold-class.html", "Scaffold" %}
+widget "implements the basic material design layout structure."
 The `MaterialApp` constructor `home` argument is typically set to a
 custom widget whose `build` method returns an instance of the `Scaffold` class.
 
@@ -1008,7 +1012,9 @@ on the left side of the `AppBar`.
 
 #### AppBar Widget
 
-The `AppBar` widget holds several other widgets referred to as
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/AppBar-class.html", "AppBar" %}
+widget holds several other widgets referred to as
 `leading`, `title`, `actions`, `flexibleSpace`, and `bottom`.
 See the diagram in the
 {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html",
@@ -1073,7 +1079,9 @@ Details for some of the single-child layout widgets are provided below.
 
 ##### Center Widget
 
-The `Center` widget centers its child in
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Center-class.html", "Center" %}
+widget centers its child in
 the available space of the parent widget by default.
 If the `heightFactor` argument is specified,
 it will center the child in a height that is
@@ -1083,7 +1091,9 @@ but affects the width in which the child is centered.
 
 ##### Container Widget
 
-The `Container` widget is the most customizable single-child layout widget.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Container-class.html", "Container" %}
+widget is the most customizable single-child layout widget.
 The most frequently used arguments are described below:
 
 | Argument      | Description                                                                                                |
@@ -1102,7 +1112,11 @@ The only supported values are `circle` and `rectangle`.
 
 ##### Expanded and Flexible Widgets
 
-The `Expanded` widget extends from the `Flexible` widget.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Expanded-class.html", "Expanded" %}
+widget extends from the {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Flexible-class.html", "Flexible" %}
+widget.
 Both take a `flex` argument that defaults to `1`
 and works similarly to the CSS `flex` property.
 The percentage of the available space given to
@@ -1124,7 +1138,9 @@ Otherwise it will choose its size just like `Expanded`.
 
 ##### Padding Widget
 
-The `Padding` widget adds padding to its `child` widget.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Padding-class.html", "Padding" %}
+widget adds padding to its `child` widget.
 The constructor `child` argument specifies the `Widget` to be padded.
 
 The constructor `padding` argument takes an `EdgeInsets` object
@@ -1140,7 +1156,9 @@ All their arguments are `double` values that default to `0` when not specified.
 
 ##### Transform Widget
 
-The `Transform` widget applies transformations to its `child` widget.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Transform-class.html", "Transform" %}
+widget applies transformations to its `child` widget.
 
 The following code translates its `child` widget:
 
@@ -1207,7 +1225,9 @@ Details for some of the multi-child layout widgets are provided below.
 
 ##### Column Widget
 
-This renders a vertical list of child widgets.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Column-class.html", "Column" %}
+widget renders a vertical list of child widgets.
 It is similar to a SwiftUI `VStack`.
 The child widgets are specified in a `List` that is the value
 of the `children` argument constructor argument.
@@ -1284,7 +1304,9 @@ Thanks to Pat Niemeyer for this suggestion!
 
 ##### ListView Widget
 
-This displays a scrollable list of widgets.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/ListView-class.html", "ListView" %}
+widget displays a scrollable list of widgets.
 The list is vertical by default, but can be changed to horizontal.
 
 Scrolling widgets like `ListView` must
@@ -1408,7 +1430,9 @@ If desired this can be overridden.
 
 ##### Row Widget
 
-This renders a horizontal list of child widgets.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Row-class.html", "Row" %}
+widget renders a horizontal list of child widgets.
 It is similar to a SwiftUI `HStack`.
 The "main" axis is horizontal and the "cross" axis is vertical.
 By default it takes all the available width of its parent because
@@ -1425,7 +1449,9 @@ that specify a `width` argument.
 
 ##### Stack Widget
 
-This renders child widgets on top of each other
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Stack-class.html", "Stack" %}
+widget renders child widgets on top of each other
 the first child on the bottom and the last child on top.
 It is similar to a SwiftUI `ZStack`.
 
@@ -1459,7 +1485,9 @@ To constrain the size the child, specify the `width` and `height` arguments.
 
 ##### Wrap Widget
 
-This renders widgets in rows or columns.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Wrap-class.html", "Wrap" %}
+widget renders widgets in rows or columns.
 It is similar to the `Row` and `Column` widgets,
 but differs in that it wraps children to multiple rows or columns
 when they do not all fit in a single row or column.
@@ -1530,7 +1558,9 @@ Details for some of the display widgets are provided below.
 
 #### CircleAvatar Widget
 
-The `CircleAvatar` widget displays an image representing a user in a circle.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/CircleAvatar-class.html", "CircleAvatar" %}
+widget displays an image representing a user in a circle.
 The image can be specified using the `backgroundImage` or `child` arguments.
 The following code demonstrates each option:
 
@@ -1565,7 +1595,12 @@ CircleAvatar(
 
 #### CircularProgressIndicator and LinearProgressIndicator
 
-Both of these widgets are used to indicate that some activity,
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html",
+"CircularProgressIndicator" %} and {% aTargetBlank
+"https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html",
+"LinearProgressIndicator" %} widgets
+are both used to indicate that some activity,
 such as an API call, is occuring in the background.
 And both have determinant and indeterminant forms.
 They use colors from `ThemeData.accentColor` by default,
@@ -1577,12 +1612,15 @@ The `CircularProgressIndicator` constructor takes a `strokeWidth` argument.
 
 #### ExpandIcon and AnimatedContainer Widgets
 
-The `ExpandIcon` widget renders an icon button that toggles between
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ExpandIcon-class.html",
+"ExpandIcon" %} widget renders an icon button that toggles between
 a down and up pointing angle bracket when tapped by rotating it.
 The `isExpanded` argument dictates the direction and
 the `onPressed` argument can change the value inside a `StatefulWidget`.
-This can be used in combination with an `AnimatedContainer`
-to show and hide content.
+This can be used in combination with an {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html",
+"AnimatedContainer" %} to show and hide content.
 
 The following code demonstrates hiding and showing a `Text` widget
 by toggling its `height` between `0` and `20`:
@@ -1603,7 +1641,9 @@ AnimatedContainer(
 
 #### Icon Widget
 
-The `Icon` widget renders an icon.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/Icon-class.html", "Icon" %}
+widget renders an icon.
 The icon to render is specified by the first positional argument
 whose value must be an `IconData` object.
 Typically these come from constants in the `Icons` class.
@@ -1620,7 +1660,9 @@ Icon(Icons.fire_extinguisher, size: 100, color: Colors.red)
 
 #### Image Widget
 
-The `Image` widget renders an image.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/Image-class.html", "Image" %}
+widget renders an image.
 Supported image formats include
 BMP, GIF (including animated), JPEG, PNG, WBMP, and WebP.
 
@@ -1679,6 +1721,11 @@ Image.network(
 
 #### SnackBar Widget
 
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/SnackBar-class.html", "SnackBar" %}
+widget renders "a lightweight message with an optional action
+which briefly displays at the bottom of the screen."
+
 The following code displays a `Snackbar` when a button is pressed.
 This is typically done inside a `build` method
 so a `BuildContext` object is available.
@@ -1701,7 +1748,9 @@ ElevatedButton(
 
 #### Text Widget
 
-The `Text` widget renders text with a single style
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/Text-class.html", "Text" %}
+widget renders text with a single style
 including color, font, font size, and weight.
 
 Highlights of the arguments that can be passed to the `Text` constructor
@@ -1750,7 +1799,9 @@ and `blurRadius` (a `double`).
 
 #### RichText Widget
 
-The `RichText` widget renders runs of text that can each have a different style.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/RichText-class.html", "RichText" %}
+widget renders runs of text that can each have a different style.
 It takes a `text` argument whose value is a `TextSpan` widget
 with a `children` argument that is typically a `List` of `TextSpan` widgets.
 The top `TextSpan` widget can specify the
@@ -1802,7 +1853,9 @@ which is a function to call when a tap is detected.
 
 #### Tooltip Widget
 
-Tooltips briefly describe the functionality of
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/Tooltip-class.html", "Tooltip" %}
+widget briefly describe the functionality of
 a button or other tappable UI widget.
 To see a tooltip, users must press and hold on a widget that has a tooltip.
 
@@ -1841,16 +1894,16 @@ that do not have an `onPressed` argument value.
 Flutter provides many widgets that render modal dialogs.
 Each of these are described in the following table:
 
-| Widget                  | Description                                                                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AboutDialog`           | contains the "application's icon, name, version number, and copyright, plus a button to show licenses for software used by the application" |
-| `AlertDialog`           | creates a dialog containing a message and some buttons                                                                                      |
-| `CupertinoAlertDialog`  | iOS-themed version of `AlertDialog`                                                                                                         |
-| `DatePickerDialog`      | contains help text and a `CalendarDatePicker`                                                                                               |
-| `DateRangePickerDialog` | contains help text and a `CalendarDatePicker` that supports selecting both a start and end date                                             |
-| `Dialog`                | used by other dialogs, but not by extending; not typically used directly                                                                    |
-| `SimpleDialog`          | contains a title and a list of clickable `SimpleDialogOption` options                                                                       |
-| `TimePickerDialog`      | contains a "lollipop" UI for selecting an hour and minute in a day with toggle buttons for AM and PM                                        |
+| Widget                                                                                                                  | Description                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/AboutDialog-class.html", "AboutDialog" %}                     | contains the "application's icon, name, version number, and copyright, plus a button to show licenses for software used by the application" |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/AlertDialog-class.html", "AlertDialog" %}                     | creates a dialog containing a message and some buttons                                                                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoAlertDialog-class.html", "CupertinoAlertDialog" %}  | iOS-themed version of `AlertDialog`                                                                                                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/DatePickerDialog-class.html", "DatePickerDialog" %}           | contains help text and a `CalendarDatePicker`                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/DateRangePickerDialog-class.html", "DateRangePickerDialog" %} | contains help text and a `CalendarDatePicker` that supports selecting both a start and end date                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Dialog-class.html", "Dialog" %}                               | used by other dialogs, but not by extending; not typically used directly                                                                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/SimpleDialog-class.html", "SimpleDialog" %}                   | contains a title and a list of clickable `SimpleDialogOption` options                                                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TimePickerDialog-class.html", "TimePickerDialog" %}           | contains a "lollipop" UI for selecting an hour and minute in a day with toggle buttons for AM and PM                                        |
 
 Flutter also provides a set of functions that show a dialog.
 All of these `returns a `Future` that completes
@@ -2196,32 +2249,32 @@ class MyHomePage extends StatelessWidget {
 
 ### Material Input Widgets
 
-| Widget                 | Description                                                                                                                        |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `Autocomplete`         | text input for selecting from a list of options where only options that match the entered text are displayed                       |
-| `BackButton`           | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
-| `CloseButton`          | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
-| `CalendarDatePicker`   | inline calendar date picker                                                                                                        |
-| `Checkbox`             | checkbox for toggling a `bool` value                                                                                               |
-| `DropdownButton`       | dropdown menu with `DropdownMenuItem` children similar to the HTML `select` element with `option` children                         |
-| `EditableText`         | from the `TextField` docs, "EditableText ... is the raw text editing control at the heart of a TextField ... rarely used directly" |
-| `ElevatedButton`       | button containing any widget with a background color whose elevation increases when pressed                                        |
-| `FloatingActionButton` | circular (typically) button "that hovers over other content to promote a primary action"                                           |
-| `Form`                 | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
-| `IconButton`           | button containing an `Icon`                                                                                                        |
-| `OutlinedButton`       | a `TextButton` with an outlined border                                                                                             |
-| `PopupMenuButton`      | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
-| `Radio`                | radio button for selecting between mutually exclusive options                                                                      |
-| `RangeSlider`          | slider for selecting the minimum and maximum values from a range of `double` values                                                |
-| `ReorderableList`      | scrollable container where child widgets can be dragged to reorder them                                                            |
-| `Slider`               | slider for selecting a double value from a given range of `double` values                                                          |
-| `Stepper`              | "displays progress through a sequence of steps" like in a wizard UI; not frequently used                                           |
-| `Switch`               | toggle switch for selecting a `bool` value                                                                                         |
-| `TextButton`           | button containing any widget, not just `Text`, with no visible border                                                              |
-| `TextField`            | basic text input                                                                                                                   |
-| `TextFormField`        | like `TextField`, but supports validation                                                                                          |
-| `ToggleButtons`        | set of toggle buttons, typically used to choose between exclusive options                                                          |
-| `YearPicker`           | scrollable list of years to pick from (I can't get this to work!)                                                                  |
+| Widget                                                                                                                | Description                                                                                                                        |
+| --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Autocomplete-class.html", "Autocomplete" %}                 | text input for selecting from a list of options where only options that match the entered text are displayed                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/BackButton-class.html", "BackButton" %}                     | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/CloseButton-class.html", "CloseButton" %}                   | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html", "CalendarDatePicker" %}     | inline calendar date picker                                                                                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Checkbox-class.html", "Checkbox" %}                         | checkbox for toggling a `bool` value                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/DropdownButton-class.html", "DropdownButton" %}             | dropdown menu with `DropdownMenuItem` children similar to the HTML `select` element with `option` children                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/EditableText-class.html", "EditableText" %}                  | from the `TextField` docs, "EditableText ... is the raw text editing control at the heart of a TextField ... rarely used directly" |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ElevatedButton-class.html", "ElevatedButton" %}             | button containing any widget with a background color whose elevation increases when pressed                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/FloatingActionButton-class.html", "FloatingActionButton" %} | circular (typically) button "that hovers over other content to promote a primary action"                                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Form-class.html", "Form" %}                                  | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/IconButton-class.html", "IconButton" %}                     | button containing an `Icon`                                                                                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/OutlinedButton-class.html", "OutlinedButton" %}             | a `TextButton` with an outlined border                                                                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/PopupMenuButton-class.html", "PopupMenuButton" %}           | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Radio-class.html", "Radio" %}                               | radio button for selecting between mutually exclusive options                                                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/RangeSlider-class.html", "RangeSlider" %}                   | slider for selecting the minimum and maximum values from a range of `double` values                                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ReorderableList-class.html", "ReorderableList" %}            | scrollable container where child widgets can be dragged to reorder them                                                            |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Slider-class.html", "Slider" %}                             | slider for selecting a double value from a given range of `double` values                                                          |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Stepper-class.html", "Stepper" %}                           | "displays progress through a sequence of steps" like in a wizard UI; not frequently used                                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Switch-class.html", "Switch" %}                             | toggle switch for selecting a `bool` value                                                                                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TextButton-class.html", "TextButton" %}                     | button containing any widget, not just `Text`, with no visible border                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TextField-class.html", "TextField" %}                       | basic text input                                                                                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TextFormField-class.html", "TextFormField" %}               | like `TextField`, but supports validation                                                                                          |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ToggleButtons-class.html", "ToggleButtons" %}               | set of toggle buttons, typically used to choose between exclusive options                                                          |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/YearPicker-class.html", "YearPicker" %}                     | scrollable list of years to pick from (I can't get this to work!)                                                                  |
 
 Many of these widgets render buttons, including
 `DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
@@ -2234,7 +2287,11 @@ Basic usage of all of these widgets is demonstrated in the Flutter project at
 
 #### TextField and TextFormField
 
-The `TextField` and `TextFormField` constructors take many optional arguments.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/TextField-class.html",
+"TextField" %} and {% aTargetBlank
+"https://api.flutter.dev/flutter/material/TextFormField-class.html",
+"TextFormField" %} widget constructors take many optional arguments.
 The highlights are described in the following table:
 
 | Argument       | Description                                                           |
@@ -2717,7 +2774,8 @@ that supports scrolling using a `ListView` widget, do the following:
 | Class              | Description                                               |
 | ------------------ | --------------------------------------------------------- |
 | `DefaultTextStyle` | style applied to text that doesn't have an explicit style |
-| ``                 | `                                                         |
+
+TODO: Add more here?
 
 ### Cupertino Widgets
 
@@ -2732,37 +2790,42 @@ To use Cupertino widgets in a Dart source file, add the following import:
 import 'package:flutter/cupertino.dart';
 ```
 
-| Widget                                | Description                                                                                                        |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `CupertinoActionSheet`                | modal that slides up from bottom to allow selection from a set of options; sometimes used for confirmation dialogs |
-| `CupertinoActivityIndicator`          | iOS-style spinner                                                                                                  |
-| `CupertinoAlertDialog`                | iOS-style alert dialog with a title, message, and set of buttons                                                   |
-| `CupertinoButton`                     | iOS-style button that can be tapped to execute associated code                                                     |
-| `CupertinoContextMenu`                | iOS-style modal containing a set of tappable options rendered when a specific widget is long-pressed               |
-| `CupertinoDatePicker`                 | iOS-style wheel picker for entering a date and time                                                                |
-| `CupertinoDialogAction`               | button with no background color or border, typically used in `CupertinoAlertDialog`                                |
-| `CupertinoFullScreenDialogTransition` | iOS-style transition used to render fullscreen dialogs                                                             |
-| `CupertinoNavigationBar`              | iOS-style top navigation bar typically used with `CupertinoPageScaffold`                                           |
-| `CupertinoPageScaffold`               | common iOS-style page layout                                                                                       |
-| `CupertinoPageTransition`             | iOS-style page transition animation                                                                                |
-| `CupertinoPicker`                     | iOS-style wheel picker                                                                                             |
-| `CupertinoPopupSurface`               | rounded rectangle for an alert dialog or action sheet                                                              |
-| `CupertinoScrollbar`                  | iOS-style scrollbar                                                                                                |
-| `CupertinoSearchTextField`            | iOS-style search input                                                                                             |
-| `CupertinoSegmentedControl`           | iOS-style segmented control which is a horizontal list of mutually-exclusive buttons                               |
-| `CupertinoSlider`                     | iOS-style slider for selecting a value from a range                                                                |
-| `CupertinoSlidingSegmentedControl`    | iOS-style segmented control which is a horizontal list of buttons                                                  |
-| `CupertinoSliverNavigationBar`        | iOS-style navigation bar with a large title                                                                        |
-| `CupertinoSwitch`                     | iOS-style switch (like the SwiftUI `Toggle` view)                                                                  |
-| `CupertinoTabBar`                     | iOS-style bottom tab bar that is typically used with `CupertinoTabScaffold`                                        |
-| `CupertinoTabScaffold`                | positions a tab bar below the display of select tab content                                                        |
-| `CupertinoTabView`                    | supports "parallel navigation"? between tabs; typically used with `CupertinoTabScaffold`                           |
-| `CupertinoTextField`                  | iOS-style input text field                                                                                         |
-| `CupertinoTimerPicker`                | iOS-style wheel picker for entering hours, minutes, and seconds                                                    |
+| Widget                                                                                                                                               | Description                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoActionSheet-class.html", "CupertinoActionSheet" %}                               | modal that slides up from bottom to allow selection from a set of options; sometimes used for confirmation dialogs |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoActivityIndicator-class.html", "CupertinoActivityIndicator" %}                   | iOS-style spinner                                                                                                  |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoAlertDialog-class.html", "CupertinoAlertDialog" %}                               | iOS-style alert dialog with a title, message, and set of buttons                                                   |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoButton-class.html", "CupertinoButton" %}                                         | iOS-style button that can be tapped to execute associated code                                                     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoContextMenu-class.html", "CupertinoContextMenu" %}                               | iOS-style modal containing a set of tappable options rendered when a specific widget is long-pressed               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoDatePicker-class.html", "CupertinoDatePicker" %}                                 | iOS-style wheel picker for entering a date and time                                                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoDialogAction-class.html", "CupertinoDialogAction" %}                             | button with no background color or border, typically used in `CupertinoAlertDialog`                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoFullscreenDialogTransition-class.html", "CupertinoFullScreenDialogTransition" %} | iOS-style transition used to render fullscreen dialogs                                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoNavigationBar-class.html", "CupertinoNavigationBar" %}                           | iOS-style top navigation bar typically used with `CupertinoPageScaffold`                                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoPageScaffold-class.html", "CupertinoPageScaffold" %}                             | common iOS-style page layout                                                                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoPageTransition-class.html", "CupertinoPageTransition" %}                         | iOS-style page transition animation                                                                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoPicker-class.html", "CupertinoPicker" %}                                         | iOS-style wheel picker                                                                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoPopupSurface-class.html", "CupertinoPopupSurface" %}                             | rounded rectangle for an alert dialog or action sheet                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoScrollbar-class.html", "CupertinoScrollbar" %}                                   | iOS-style scrollbar                                                                                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoSearchTextField-class.html", "CupertinoSearchTextField" %}                       | iOS-style search input                                                                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoSegmentedControl-class.html", "CupertinoSegmentedControl" %}                     | iOS-style segmented control which is a horizontal list of mutually-exclusive buttons                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoSlider-class.html", "CupertinoSlider" %}                                         | iOS-style slider for selecting a value from a range                                                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoSlidingSegmentedControl-class.html", "CupertinoSlidingSegmentedControl" %}       | iOS-style segmented control which is a horizontal list of buttons                                                  |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoSliverNavigationBar-class.html", "CupertinoSliverNavigationBar" %}               | iOS-style navigation bar with a large title                                                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoSwitch-class.html", "CupertinoSwitch" %}                                         | iOS-style switch (like the SwiftUI `Toggle` view)                                                                  |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoTabBar-class.html", "CupertinoTabBar" %}                                         | iOS-style bottom tab bar that is typically used with `CupertinoTabScaffold`                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html", "CupertinoTabScaffold" %}                               | positions a tab bar below the display of select tab content                                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoTabView-class.html", "CupertinoTabView" %}                                       | supports "parallel navigation"? between tabs; typically used with `CupertinoTabScaffold`                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoTextField-class.html", "CupertinoTextField" %}                                   | iOS-style input text field                                                                                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoTimerPicker-class.html", "CupertinoTimerPicker" %}                               | iOS-style wheel picker for entering hours, minutes, and seconds that represent a countdown timer                   |
 
 #### CupertinoDatePicker
 
-This is an alternative to the Material UI `CalendarDatePicker` widget.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/cupertino/CupertinoDatePicker-class.html",
+"CupertinoDatePicker" %} widget is an alternative
+to the Material UI {% aTargetBlank
+"https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html",
+"CalendarDatePicker" %} widget.
 It allow the user to select a date, time, or both.
 
 The following code demonstrates this:
@@ -2790,7 +2853,12 @@ Container(
 
 #### CupertinoPicker
 
-This is an alternative to the Material UI `DropdownButton` widget.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/cupertino/CupertinoPicker-class.html",
+"CupertinoPicker" %} widget is an alternative
+to the Material UI {% aTargetBlank
+"https://api.flutter.dev/flutter/material/DropdownButton-class.html",
+"DropdownButton" %} widget.
 It allow the user to select an option from a wheel-like display.
 
 The following code allows the user to select from a `List` of words.
@@ -4012,7 +4080,7 @@ The most useful of these functions are summarized below:
 | `Get.to`   | goes to a new route, pushing it onto the stack                      | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html", "to" %}     |
 | `Get.off`  | pops current route and pushes new route                             | {% aTargetBlank "https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html", "to" %}     |
 
-TODO: Add an example of using GetX route management.
+TODO: Add an example of using GetX route management?
 
 #### Utilities
 
@@ -4037,7 +4105,7 @@ The most useful of these functions are summarized below:
 
 GetX provides language translation using the `.tr` getter functino
 and the `Get.changeLocale` function.`
-TODO: Provide an example of using this.
+TODO: Provide an example of using this?
 
 ### Riverpod Library
 
