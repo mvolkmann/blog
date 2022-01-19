@@ -5978,9 +5978,261 @@ appears on top of what that widget renders.
 
 ## Tests
 
-TODO: How can widget tests be implemented?
+Three kinds of tests can be written for Flutter applications.
+These include unit tests, widget tests, and integration tests.
 
-TODO: How can end-to-end tests be implemented?
+Flutter projects created with the `flutter create` command
+already have a dev dependency on the `flutter_test` package
+which is built on the `test` package.
+Do not add a dependency on {% aTargetBlank
+"https://pub.dev/packages/test", "test" %} in`pubspec.yaml`.
+This will likely cause a "version solving failed" error
+when the tests are run.
+
+The {% aTarget
+"https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html",
+"flutter_test" %} library defines many
+classes, constants, and functions used to implement tests.
+
+Commonly used test constants are described below:
+
+| Constants         | Description                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| `findsNothing`    | asserts that the widget tree contains no matching widgets          |
+| `findsOneWidget`  | asserts that the widget tree contains a single matching widget     |
+| `findsWidget`     | asserts that the widget tree contains at least one matching widget |
+| `isFalse`         |                                                                    |
+| `isNan`           |                                                                    |
+| `isNegative`      |                                                                    |
+| `isNonNegative`   |                                                                    |
+| `isNonPositive`   |                                                                    |
+| `isNonZero`       |                                                                    |
+| `isNotEmpty`      |                                                                    |
+| `isNotNan`        |                                                                    |
+| `isNotNull`       |                                                                    |
+| `isNull`          |                                                                    |
+| `isPositive`      |                                                                    |
+| `isTrue`          |                                                                    |
+| `isZero`          |                                                                    |
+| `returnsNormally` |                                                                    |
+| `throwsException` |                                                                    |
+
+Commonly used test functions are described below:
+
+| Function               | Description                                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| `addTearDown`          | registers a function to call after the current test completes                               |
+| `allOf`                | returns a matcher that matches if all the argument matchers (limit of 7) match              |
+| `anyElement`           | returns a matcher that matches if any element in an `Iterable` matches a value or `Matcher` |
+| `anyOf`                |                                                                                             |
+| `closeTo`              |                                                                                             |
+| `compareLists`         |                                                                                             |
+| `contains`             |                                                                                             |
+| `containsAll`          |                                                                                             |
+| `containsAllInORder`   |                                                                                             |
+| `containsPair`         |                                                                                             |
+| `endsWith`             |                                                                                             |
+| `equals`               |                                                                                             |
+| `equalsIgnoringCase`   |                                                                                             |
+| `everyElement`         |                                                                                             |
+| `expect`               | THE MOST COMMONLY USED FUNCTION.                                                            |
+| `expectAsync{n}`       |                                                                                             |
+| `fail`                 |                                                                                             |
+| `findsNWidgets`        |                                                                                             |
+| `greaterThan`          |                                                                                             |
+| `greaterThanOrEqualTo` |                                                                                             |
+| `group`                | defines a group (or suite) of tests                                                         |
+| `hasLength`            |                                                                                             |
+| `inClosedOpenRange`    |                                                                                             |
+| `inExclusiveRange`     |                                                                                             |
+| `inInclusiveRange`     |                                                                                             |
+| `inOpenClosedRange`    |                                                                                             |
+| `isA`                  |                                                                                             |
+| `isIn`                 |                                                                                             |
+| `isInstanceOf`         |                                                                                             |
+| `isNot`                |                                                                                             |
+| `isSameColorAs`        |                                                                                             |
+| `lessThan`             |                                                                                             |
+| `lessThanOrEqualTo`    |                                                                                             |
+| `markTestSkipped`      |                                                                                             |
+| `matches`              |                                                                                             |
+| `moreOrLessEquals`     |                                                                                             |
+| `same`                 |                                                                                             |
+| `setUp`                | registers a function to call before each test                                               |
+| `setUpAll`             | registers a function to call once before the first test                                     |
+| `startsWith`           |                                                                                             |
+| `tearDown`             | registers a function to call after each test                                                |
+| `tearDownAll`          | registers a function to call once after the last test                                       |
+| `test`                 | defines a single unit test                                                                  |
+| `testWidgets`          | defines a single widget test                                                                |
+| `within`               |                                                                                             |
+
+### Unit Tests
+
+Flutter unit tests are for testing logic, not the UI.
+
+To implement a unit test for classes and functions defined in
+the file `lib/sample.dart`, create the file `test/sample_test.dart`.
+
+In VS Code, right-click a source file in the `lib` directory
+to be tested in the Navigator and select "Go to Tests".
+If a corresponding test file exists in the `test` directory,
+it will be opened. If not, VS Code will offer to create it.
+
+The provided test code contains a single call to `testWidgets`,
+passing it a function that takes a `WidgetTester` object.
+For non-widget tests, change this to a `test` function
+that is passed a function that takes no arguments.
+
+Each test file defines a `main` function.
+This should contain calls to the global `test` function.
+The `test` function takes a `String` description and a
+no-arg function that contains calls to the global `assert` function.
+The `assert` function takes an actual value and an expected value.
+
+To create test suites that group tests,
+call the global `group` function, passing it a `String` description
+and a no-arg function that contains several calls to the `test` function.
+
+To run all the tests from a terminal, enter `flutter test`.
+Currently there is no option to run tests in a "watch" mode
+to automatically rerun them when code changes are saved.
+To run only tests in specific files, specify a file path after the command.
+For example, `flutter test test/my_widget_test.dart`.
+
+When viewing a test file in VS Code,
+there will be "Run" and "Debug" links above the `main` function
+and each call to the `group` and `test` functions.
+Click those links to run or debug the corresponding code.
+If a test passes, VS Code will display a green, circled checkbox
+in the gutter to the left of the `test` function call.
+If a test fails, VS Code will display a red, circled "X" in the same location
+along with the expected and actual values of the ailed `assert` call.
+Each `group` call will have a similar gutter icon
+indicating whether all of its tests passed or any failed.
+After attempting to fix the failed tests, rerun them
+and repeat until all the tests have a green checkmark.
+
+### Widget Tests
+
+Flutter widget tests for testing individual Flutter widgets.
+
+New Flutter projects ship with a file named `widget_test.dart`.
+Use this is as an example when writing additional tests.
+
+To test Dart code that does not involve widgets, call the `test` function.
+These calls can be grouped into test suites using the `group` function.
+For example:
+
+```dart
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  group('math', () {
+    test('addition', () {
+      expect(0 + 0, 0);
+      expect(0 + 1, 1);
+      expect(1 + 1, 2);
+    });
+
+    test('multiplication', () {
+      expect(0 * 0, 0);
+      expect(0 * 1, 0);
+      expect(1 * 1, 1);
+    });
+  });
+}
+```
+
+To test Dart code that creates and interacts with widgets,
+call the `testWidgets` function.
+These calls can also be grouped into test suites using the `group` function.
+For example:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_pageview/main.dart';
+
+void main() {
+  testWidgets('PageView', (WidgetTester tester) async {
+    // Build app and trigger a frame.
+    await tester.pumpWidget(const MyApp());
+
+    // Verify the contents of the first page.
+    expect(find.text('This is page #1.'), findsOneWidget);
+
+    // Tap the '>' IconButton to go to next page.
+    await tester.tap(find.byIcon(Icons.arrow_forward_ios));
+
+    // Wait for the page transition animation to complete.
+    await tester.pump(Duration(seconds: 1));
+
+    // Verify that the page changed.
+    expect(find.text('This is page #2.'), findsOneWidget);
+  });
+}
+```
+
+The `testWidgets` function takes a function as its second argument.
+That function is passed a `WidgetTester` object which has many methods
+for creating widget instances and interacting with them.
+
+The most commonly used `WidgetTester` properties are described below:
+
+| Property          | Description                               |
+| ----------------- | ----------------------------------------- |
+| `testDescription` | `String` name of the test that is running |
+| ``                |                                           |
+| ``                |                                           |
+| ``                |                                           |
+| ``                |                                           |
+
+To find a widget in a test, call methods on the global variable `find`
+provided by the flutter_test package.
+The `find.byKey` method ...
+The `find.byType` method ...
+
+The most commonly used `WidgetTester` methods are described below:
+
+| Method                      | Description                                                              |
+| --------------------------- | ------------------------------------------------------------------------ |
+| `drag(...)`                 | drags a given widget by a specified offset                               |
+| `enterText(Finder, String)` | moves focus to a text input widget and replaces its contents             |
+| `fling(...)`                | executes a fling gesture from the center of a widget over some offset    |
+| `flingFrom(...)`            | executes a fling gesture from a starting location over some offset       |
+| `getRect(Finder)`           | gets the `Rect` of a widget                                              |
+| `getSize(Finder)`           | gets the `Size` of a widget                                              |
+| `longPressj(...)`           | executes a long press at the center of a widget                          |
+| `longPressAt(...)`          | executes a long press at a given location                                |
+| `pageBack()`                | dismisses the current page                                               |
+| `printToConsole(String)`    | prints a `String` to the console; can also use the Dart `print` function |
+| `pump`                      | triggers a new "frame" (rebuilding the UI) after an optional duration`   |
+| `pumpAndSettle`             |                                                                          |
+| `pumpBenchmark`             |                                                                          |
+| `pumpFrames`                |                                                                          |
+| `pumpWidget`                |                                                                          |
+| `restartAndRestore`         |                                                                          |
+| `restoreFrom`               |                                                                          |
+| `runAsync`                  |                                                                          |
+| `sendEventToBinding`        |                                                                          |
+| `showKeyboard`              |                                                                          |
+| `takeException`             |                                                                          |
+| ``                          |                                                                          |
+| ``                          |                                                                          |
+| ``                          |                                                                          |
+| ``                          |                                                                          |
+| ``                          |                                                                          |
+
+For example, you can send tap and scroll gestures.
+You can also use WidgetTester to find child widgets in the widget
+tree, read text, and verify that the values of widget properties are correct.
+
+### Integration Tests
+
+Flutter integration tests are for testing an app as a whole.
+
+TODO: Finish this section.
 
 ## Packages
 
