@@ -6343,17 +6343,27 @@ void main() {
       expect(find.text(expectedText), findsOneWidget);
     }
 
+    bool buttonEnabled(button) =>
+        tester.widget<IconButton>(button).onPressed != null;
+
     await tester.pumpWidget(MyApp());
 
     var backBtn = find.byKey(ValueKey('backBtn'));
     var forwardBtn = find.byKey(ValueKey('forwardBtn'));
 
-    // Verify that we can change pages with the forward and back buttons.
     expect(find.text('This is page #1.'), findsOneWidget);
+
+    // Verify that we can change pages with the forward and back buttons.
+    expect(buttonEnabled(backBtn), isFalse);
+    expect(buttonEnabled(forwardBtn), isTrue);
     await changePage(forwardBtn, 'This is page #2.');
+    expect(buttonEnabled(backBtn), isTrue);
     await changePage(forwardBtn, 'This is page #3.');
+    expect(buttonEnabled(forwardBtn), isFalse);
     await changePage(backBtn, 'This is page #2.');
+    expect(buttonEnabled(forwardBtn), isTrue);
     await changePage(backBtn, 'This is page #1.');
+    expect(buttonEnabled(backBtn), isFalse);
   });
 
   testWidgets('swipe left and right', (WidgetTester tester) async {
