@@ -5996,6 +5996,8 @@ classes, constants, and functions used to implement tests.
 
 Commonly used test constants are described below:
 
+TODO: Finish this table.
+
 | Constants         | Description                                                        |
 | ----------------- | ------------------------------------------------------------------ |
 | `findsNothing`    | asserts that the widget tree contains no matching widgets          |
@@ -6018,6 +6020,8 @@ Commonly used test constants are described below:
 | `throwsException` |                                                                    |
 
 Commonly used test functions are described below:
+
+TODO: Finish this table.
 
 | Function               | Description                                                                                 |
 | ---------------------- | ------------------------------------------------------------------------------------------- |
@@ -6183,6 +6187,8 @@ for creating widget instances and interacting with them.
 
 The most commonly used `WidgetTester` properties are described below:
 
+TODO: Finish this table.
+
 | Property          | Description                               |
 | ----------------- | ----------------------------------------- |
 | `testDescription` | `String` name of the test that is running |
@@ -6197,6 +6203,8 @@ The `find.byKey` method ...
 The `find.byType` method ...
 
 The most commonly used `WidgetTester` methods are described below:
+
+TODO: Finish this table.
 
 | Method                      | Description                                                              |
 | --------------------------- | ------------------------------------------------------------------------ |
@@ -6280,13 +6288,25 @@ Flutter integration tests are for testing an app as a whole.
     }
    ```
 
-1. With a simulator running, enter `flutter devices`
-   and copy the id of the simulator to use for running the test.
+1. Run the test by entering `flutter test integration_test/app_test.dart`.
+   You will prompted to select where the test should be run.
+   For example, if an iPhone is attached to the computer with a USB cable
+   and the iOS simulator is running, you could see the following:
 
-1. Run the test by entering
-   `flutter test integration_test/app_test.dart -d {device-id}`
+   ```text
+   [1]: iPhone (00008020-001A7D141A9A002E)
+   [2]: iPhone 13 (46325045-B5FE-4313-BBD5-10A7D1178B50)
+   [3]: Chrome (chrome)
+   ```
 
-TODO: Finish this section.
+   Press 1, 2, or 3 to select one.
+
+   Alternatively to run the test on a device,
+   enter `flutter devices` to see a list of available devices.
+   Copy the id of a device where the test should be run and enter
+   `flutter test integration_test/app_test.dart -d {device-id}`.
+
+Even a basic integration test will take 1-2 minutes to start.
 
 ## Packages
 
