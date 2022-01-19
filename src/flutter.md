@@ -5247,6 +5247,7 @@ class _HomeState extends State<Home> {
     var method = forward ? _controller.nextPage : _controller.previousPage;
     return IconButton(
       icon: Icon(icon),
+      key: Key(forward ? 'forwardBtn' : 'backBtn'),
       onPressed: hide
           ? null
           : () {
@@ -5293,6 +5294,7 @@ class _HomeState extends State<Home> {
                             index == _pageIndex ? Colors.black : Colors.black26,
                         size: 16,
                       ),
+                      key: Key('dot${index + 1}'),
                       onPressed: () {
                         _controller.animateToPage(
                           index,
@@ -5313,16 +5315,48 @@ class _HomeState extends State<Home> {
   }
 }
 
-class Page1 extends StatelessWidget {
+class Page1 extends StatefulWidget {
   const Page1({Key? key}) : super(key: key);
+
+  @override
+  State<Page1> createState() => _Page1State();
+}
+
+class _Page1State extends State<Page1> {
+  var name = '';
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Text('This is page #1.'),
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(children: [
+          Text('This is page #1.'),
+          TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              filled: true,
+              fillColor: Colors.white,
+              labelText: 'Name',
+            ),
+            initialValue: name,
+            key: Key('nameField'),
+            onChanged: (String value) {
+              setState(() => name = value);
+            },
+          ),
+          Text(name.isEmpty ? '' : 'Hello, $name!'),
+          ElevatedButton(
+            child: Text('SHOUT'),
+            key: Key('shoutBtn'),
+            onPressed: () {
+              setState(() => name = name.toUpperCase());
+            },
+          ),
+        ]),
       ),
       color: Colors.pink[100],
+      key: Key('page1'),
     );
   }
 }
@@ -5337,6 +5371,7 @@ class Page2 extends StatelessWidget {
         child: Text('This is page #2.'),
       ),
       color: Colors.yellow[100],
+      key: Key('page2'),
     );
   }
 }
@@ -5351,6 +5386,7 @@ class Page3 extends StatelessWidget {
         child: Text('This is page #3.'),
       ),
       color: Colors.blue[100],
+      key: Key('page3'),
     );
   }
 }
@@ -6073,7 +6109,7 @@ TODO: Finish this table.
 
 ### Unit Tests
 
-Flutter unit tests are for testing logic, not the UI.
+Flutter unit tests are for testing logic, not widgets.
 
 To implement a unit test for classes and functions defined in
 the file `lib/sample.dart`, create the file `test/sample_test.dart`.
@@ -6092,98 +6128,137 @@ Each test file defines a `main` function.
 This should contain calls to the global `test` function.
 The `test` function takes a `String` description and a
 no-arg function that contains calls to the global `assert` function.
-The `assert` function takes an actual value and an expected value.
+The `expect` function takes an actual value and an expected value.
 
-To create test suites that group tests,
-call the global `group` function, passing it a `String` description
-and a no-arg function that contains several calls to the `test` function.
+To create test suites that group tests, call the global `group` function,
+passing it a `String` description and
+a no-arg function that contains several calls to the `test` function.
 
-To run all the tests from a terminal, enter `flutter test`.
+To run all the test files from a terminal, enter `flutter test`.
 Currently there is no option to run tests in a "watch" mode
 to automatically rerun them when code changes are saved.
 To run only tests in specific files, specify a file path after the command.
-For example, `flutter test test/my_widget_test.dart`.
+For example, `flutter test test/home_test.dart`.
 
 When viewing a test file in VS Code,
 there will be "Run" and "Debug" links above the `main` function
 and each call to the `group` and `test` functions.
-Click those links to run or debug the corresponding code.
+Click those links to run or debug only the corresponding code.
 
 If a test passes, VS Code will display a green, circled checkbox
 in the gutter to the left of the `test` function call.
 If a test fails, VS Code will display a red, circled "X" in the same location
-along with the expected and actual values of the ailed `assert` call.
+along with the expected and actual values of the failed `expect` call.
 Each `group` call will have a similar gutter icon
 indicating whether all of its tests passed or any failed.
+
 After attempting to fix the failed tests, rerun them
 and repeat until all the tests have a green checkmark.
 Tests can be rerun by clicking the green and red gutter icons
-or clicking the "Run" and "Debug" links.
+or by clicking the "Run" and "Debug" links.
 
-### Widget Tests
-
-Flutter widget tests for testing individual Flutter widgets.
-
-New Flutter projects ship with a file named `widget_test.dart`.
-Use this is as an example when writing additional tests.
-
-To test Dart code that does not involve widgets, call the `test` function.
-These calls can be grouped into test suites using the `group` function.
-For example:
+The following code provides a basic example of a unit test source file:
 
 ```dart
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_pageview/math.dart';
 
 void main() {
   group('math', () {
     test('addition', () {
-      expect(0 + 0, 0);
-      expect(0 + 1, 1);
-      expect(1 + 1, 2);
+      expect(add(0, 0), 0);
+      expect(add(0, 1), 1);
+      expect(add(1, 1), 2);
     });
 
     test('multiplication', () {
-      expect(0 * 0, 0);
-      expect(0 * 1, 0);
-      expect(1 * 1, 1);
+      expect(multiply(0, 0), 0);
+      expect(multiply(0, 1), 0);
+      expect(multiply(1, 1), 1);
     });
   });
 }
 ```
 
-To test Dart code that creates and interacts with widgets,
-call the `testWidgets` function.
-These calls can also be grouped into test suites using the `group` function.
-For example:
+### Widget Tests
+
+Flutter widget tests are for testing individual widgets.
+
+New Flutter projects ship with a file named `widget_test.dart`.
+Use this is as an example when writing widget tests.
+
+In contains a `main` function that makes
+a single call to the `testWidgets` function.
+This is passed a description `String` and
+a function that is passed a `WidgetTester` object.
+The `WidgetTester` object is key to interacting with widgets.
+This includes tapping buttons, entering text, and dragging widgets.
+
+Modify the provided function passed to `testWidgets`
+and add more similar calls to define additional tests.
+
+The function passed to `testWidget` should do four basic things:
+
+1. Render an app widget.
+1. Find widgets within the app to be used by the test using the `find` object.
+1. Interact with the widgets that were found.
+1. Make assertions about the state of the UI after the interactions.
+
+The `find` object support several methods for finding widgets in different ways.
+The most commonly used methods are described below:
+
+| `find` Method | Description                                                               |
+| ------------- | ------------------------------------------------------------------------- |
+| `byIcon`      | pass an `IconData` object such as those in constants of the `Icons` class |
+| `byKey`       | pass a `ValueKey` object that created with a key string                   |
+| `byType`      | pass a widget `Type`; only works when a single widget matches             |
+| `text`        | pass a `String` to find a widget containing it                            |
+
+Suppose an app renders the following button:
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_pageview/main.dart';
-
-void main() {
-  testWidgets('PageView', (WidgetTester tester) async {
-    // Build app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
-    // Verify the contents of the first page.
-    expect(find.text('This is page #1.'), findsOneWidget);
-
-    // Tap the '>' IconButton to go to next page.
-    await tester.tap(find.byIcon(Icons.arrow_forward_ios));
-
-    // Wait for the page transition animation to complete.
-    await tester.pump(Duration(seconds: 1));
-
-    // Verify that the page changed.
-    expect(find.text('This is page #2.'), findsOneWidget);
-  });
-}
+ElevatedButton(
+  child: Text('Press Me'),
+  key: Key('myButton'),
+  onPress: () { print('got press')},
+);
 ```
 
-The `testWidgets` function takes a function as its second argument.
-That function is passed a `WidgetTester` object which has many methods
-for creating widget instances and interacting with them.
+A test can find this button using any of the following:
+
+```dart
+var myButton = find.byKey(ValueKey('myButton'));
+var myButton = find.text('Press Me');
+var myButton = find.byType(ElevatedButton);
+```
+
+Once the button is found, it can be tapped with the following:
+
+```dart
+await tester.tap(myButton);
+```
+
+If a `TextField` or `TextFormField` widget is found,
+text can be entered into it with the following:
+
+```dart
+await tester.enterText(myTextField, 'some text');
+```
+
+After interacting with widgets, call the `WidgetTester` {% aTargetBlank
+"https://api.flutter.dev/flutter/flutter_test/WidgetTester/pump.html",
+"pump" %} or {% aTargetBlank
+"https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html",
+"pumpAndSettle" %} method to rebuild the UI.
+Both methods return a `Future` to `await` before making assertions.
+By default the `pumpAndSettle` method repeatedly calls `pump`
+every 100ms until there are no longer any frames scheduled.
+It is the safest way to ensure that the UI is in the intended state
+before calling the `expect` function.
+
+```dart
+await tester.pumpAndSettle();
+```
 
 The most commonly used `WidgetTester` properties are described below:
 
@@ -6196,11 +6271,6 @@ TODO: Finish this table.
 | ``                |                                           |
 | ``                |                                           |
 | ``                |                                           |
-
-To find a widget in a test, call methods on the global variable `find`
-provided by the flutter_test package.
-The `find.byKey` method ...
-The `find.byType` method ...
 
 The most commonly used `WidgetTester` methods are described below:
 
@@ -6235,9 +6305,12 @@ TODO: Finish this table.
 | ``                          |                                                                          |
 | ``                          |                                                                          |
 
-For example, you can send tap and scroll gestures.
-You can also use WidgetTester to find child widgets in the widget
-tree, read text, and verify that the values of widget properties are correct.
+The following code provides widget tests for the `PageView` demo app
+presented earlier.
+
+```dart
+
+```
 
 ### Integration Tests
 
