@@ -5989,7 +5989,7 @@ Do not add a dependency on {% aTargetBlank
 This will likely cause a "version solving failed" error
 when the tests are run.
 
-The {% aTarget
+The {% aTargetBlank
 "https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html",
 "flutter_test" %} library defines many
 classes, constants, and functions used to implement tests.
@@ -6104,6 +6104,7 @@ When viewing a test file in VS Code,
 there will be "Run" and "Debug" links above the `main` function
 and each call to the `group` and `test` functions.
 Click those links to run or debug the corresponding code.
+
 If a test passes, VS Code will display a green, circled checkbox
 in the gutter to the left of the `test` function call.
 If a test fails, VS Code will display a red, circled "X" in the same location
@@ -6112,6 +6113,8 @@ Each `group` call will have a similar gutter icon
 indicating whether all of its tests passed or any failed.
 After attempting to fix the failed tests, rerun them
 and repeat until all the tests have a green checkmark.
+Tests can be rerun by clicking the green and red gutter icons
+or clicking the "Run" and "Debug" links.
 
 ### Widget Tests
 
@@ -6231,6 +6234,57 @@ tree, read text, and verify that the values of widget properties are correct.
 ### Integration Tests
 
 Flutter integration tests are for testing an app as a whole.
+
+1. Edit `pubspec.yaml` and add the following under `dev_dependencies`:
+
+   ```yaml
+   integration_test:
+     sdk: flutter
+   ```
+
+1. Create a top-level directory named "integration_test".
+
+1. Create the file `app_test.dart` in this directory.
+
+1. Add code in `app_test.dart` similar to the following:
+
+   ```dart
+   import 'package:flutter_test/flutter_test.dart';
+    import 'package:integration_test/integration_test.dart';
+
+    import 'package:introduction/main.dart' as app;
+
+    void main() {
+      IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+      group('end-to-end test', () {
+        testWidgets('tap floating action button and verify counter',
+            (WidgetTester tester) async {
+          app.main();
+          await tester.pumpAndSettle();
+
+          // Verify counter starts at 0.
+          expect(find.text('0'), findsOneWidget);
+
+          // Find and tap the floating action button.
+          final Finder fab = find.byTooltip('Increment');
+          await tester.tap(fab);
+
+          // Rebuild the UI, triggering a new frame.
+          await tester.pumpAndSettle();
+
+          // Verify counter increments by 1.
+          expect(find.text('1'), findsOneWidget);
+        });
+      });
+    }
+   ```
+
+1. With a simulator running, enter `flutter devices`
+   and copy the id of the simulator to use for running the test.
+
+1. Run the test by entering
+   `flutter test integration_test/app_test.dart -d {device-id}`
 
 TODO: Finish this section.
 
