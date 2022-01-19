@@ -6030,30 +6030,28 @@ The {% aTargetBlank
 "flutter_test" %} library defines many
 classes, constants, and functions used to implement tests.
 
-Commonly used test constants are described below:
+Commonly used test constants are described below.
+All of these are `Matcher` objects that match certain values.
 
-TODO: Finish this table.
-
-| Constants         | Description                                                        |
-| ----------------- | ------------------------------------------------------------------ |
-| `findsNothing`    | asserts that the widget tree contains no matching widgets          |
-| `findsOneWidget`  | asserts that the widget tree contains a single matching widget     |
-| `findsWidget`     | asserts that the widget tree contains at least one matching widget |
-| `isFalse`         |                                                                    |
-| `isNan`           |                                                                    |
-| `isNegative`      |                                                                    |
-| `isNonNegative`   |                                                                    |
-| `isNonPositive`   |                                                                    |
-| `isNonZero`       |                                                                    |
-| `isNotEmpty`      |                                                                    |
-| `isNotNan`        |                                                                    |
-| `isNotNull`       |                                                                    |
-| `isNull`          |                                                                    |
-| `isPositive`      |                                                                    |
-| `isTrue`          |                                                                    |
-| `isZero`          |                                                                    |
-| `returnsNormally` |                                                                    |
-| `throwsException` |                                                                    |
+| Constants         | Matches                                                |
+| ----------------- | ------------------------------------------------------ |
+| `findsNothing`    | widget tree that contains no matching widgets          |
+| `findsOneWidget`  | widget tree that contains a single matching widget     |
+| `findsWidget`     | widget tree that contains at least one matching widget |
+| `isFalse`         | everything but `true`                                  |
+| `isNan`           | number value `NaN`                                     |
+| `isNegative`      | any negative number                                    |
+| `isNonNegative`   | zero or any positive number                            |
+| `isNonPositive`   | zero or any negative number                            |
+| `isNonZero`       | any number except zero                                 |
+| `isNotNan`        | any number except `NaN`                                |
+| `isNotNull`       | any value except `null`                                |
+| `isNull`          | only `null`                                            |
+| `isPositive`      | any positive number                                    |
+| `isTrue`          | only `true`                                            |
+| `isZero`          | only zero                                              |
+| `returnsNormally` | function call that does not throw an exception         |
+| `throwsException` | function call that throws an exception                 |
 
 Commonly used test functions are described below:
 
