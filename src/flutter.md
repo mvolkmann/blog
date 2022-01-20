@@ -6016,6 +6016,24 @@ appears on top of what that widget renders.
 
 Three kinds of tests can be written for Flutter applications.
 These include unit tests, widget tests, and integration tests.
+Unit and widget tests always run headless, not requiring a simulator or device.
+Integration tests always run in a simulator, web browser or device.
+Unit and widget tests run fairly quickly.
+Integration tests take a long time to build and start,
+often around two minutes.
+
+In general each test is composed of three sections: arrange, act, and assert.
+The arrange section creates the environment needed by the test.
+For example, in a widget test this
+renders the widget with certain characteristics.
+The act section performs actions on the environment.
+For example, in a widget test this might include
+entering text and clicking buttons.
+The assert part makes assertions about the expected state of the environment.
+For example, in a widget test this might assert that specific text
+is present on the screen or that a button becomes enabled.
+
+TODO: How do you generate code coverage reports from running tests?
 
 Flutter projects created with the `flutter create` command
 already have a dev dependency on the `flutter_test` package
@@ -6108,6 +6126,7 @@ TODO: Finish this table.
 ### Unit Tests
 
 Flutter unit tests are for testing logic, not widgets.
+Each unit test is intended to test a single function, method, or class.
 
 To implement a unit test for classes and functions defined in
 the file `lib/sample.dart`, create the file `test/sample_test.dart`.
@@ -6118,19 +6137,28 @@ If a corresponding test file exists in the `test` directory,
 it will be opened. If not, VS Code will offer to create it.
 
 The provided test code contains a single call to `testWidgets`,
-passing it a function that takes a `WidgetTester` object.
+passing it a function that takes a {% aTargetBlank
+"https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html",
+"WidgetTester" %} object.
 For non-widget tests, change this to a `test` function
 that is passed a function that takes no arguments.
 
 Each test file defines a `main` function.
 This should contain calls to the global `test` function.
-The `test` function takes a `String` description and a
-no-arg function that contains calls to the global `assert` function.
-The `expect` function takes an actual value and an expected value.
+The `test` function takes positional arguments for a description (`String`)
+and a no-arg function that contains calls to the global `expect` function.
+It also takes the named argument `skip` (`bool` or `String` describing why)
+and several others.
+
+The `expect` function takes positional arguments for an
+actual value and a matcher (expected value or `Matcher` object).
+It also takes the named arguments `reason` (`String`)
+and `skip` (`bool` or `String` describing why).
 
 To create test suites that group tests, call the global `group` function,
-passing it a `String` description and
+passing it positional arguments for a description (`String`) and
 a no-arg function that contains several calls to the `test` function.
+It also takes the named argument `skip` (`bool` or `String` describing why).
 
 To run all the test files from a terminal, enter `flutter test`.
 Currently there is no option to run tests in a "watch" mode
@@ -6188,7 +6216,9 @@ Use this is as an example when writing widget tests.
 In contains a `main` function that makes
 a single call to the `testWidgets` function.
 This is passed a description `String` and
-a function that is passed a `WidgetTester` object.
+a function that is passed a {% aTargetBlank
+"https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html",
+"WidgetTester" %} object.
 The `WidgetTester` object is key to interacting with widgets.
 This includes tapping buttons, entering text, and dragging widgets.
 
@@ -6209,8 +6239,15 @@ The most commonly used methods are described below:
 | ------------- | ------------------------------------------------------------------------- |
 | `byIcon`      | pass an `IconData` object such as those in constants of the `Icons` class |
 | `byKey`       | pass a `ValueKey` object that created with a key string                   |
-| `byType`      | pass a widget `Type`; only works when a single widget matches             |
+| `byType`      | pass a widget `Type`; returns a `Finder` object                           |
 | `text`        | pass a `String` to find a widget containing it                            |
+
+Key strings assigned to widgets should be unique throughout the app.
+
+To get individual widgets from a `Finder` object,
+use the properties `first`, and `last` and the method `at(int index)`.
+Interestingly there is no way to determine
+the number of matches that were found.
 
 Suppose an app renders the following button:
 
@@ -6227,13 +6264,29 @@ A test can find this button using any of the following:
 ```dart
 var myButton = find.byKey(ValueKey('myButton'));
 var myButton = find.text('Press Me');
-var myButton = find.byType(ElevatedButton);
+var myButton = find.byType(ElevatedButton).first;
 ```
 
 Once the button is found, it can be tapped with the following:
 
 ```dart
 await tester.tap(myButton);
+```
+
+If `find.byType` finds a single match,
+it can be acted on without using the `first` property.
+For example:
+
+```dart
+var buttons = find.byType(ElevatedButton);
+// These are equivalent when only one match is found.
+await tester.tap(buttons.first);
+await tester.tap(buttons);
+// But if more than one match is found,
+// the previous line results in the following error:
+// The finder "2 widgets with type ElevatedButton" ...
+// (used in a call to "tap()") ambiguously found multiple
+// matching widgets.  The "tap()" method needs a single target.
 ```
 
 If a `TextField` or `TextFormField` widget is found,
@@ -6455,7 +6508,8 @@ Flutter integration tests are for testing an app as a whole.
     }
    ```
 
-1. Run the test by entering `flutter test integration_test/app_test.dart`.
+1. Run the test by entering `flutter test integration_test`.
+   This runs all of the test source files in the `integration_test` directory.
    You will prompted to select where the test should be run.
    For example, if an iPhone is attached to the computer with a USB cable
    and the iOS simulator is running, you could see the following:
@@ -6468,7 +6522,7 @@ Flutter integration tests are for testing an app as a whole.
 
    Press 1, 2, or 3 to select one.
 
-   Alternatively to run the test on a device,
+   Alternatively to run the test on a specific device,
    enter `flutter devices` to see a list of available devices.
    Copy the id of a device where the test should be run and enter
    `flutter test integration_test/app_test.dart -d {device-id}`.
@@ -6480,6 +6534,25 @@ presented earlier.
 
 ```dart
 TODO: See flutter_pageview/integration_test/app_test.dart
+Add code from this file once all the tests are passing.
+```
+
+### Mocking
+
+Mocking in tests supplies canned results from functions
+that are not meant to be tested.
+For example, a function that makes an API call
+can be mocked to return the same data every time.
+This allows tests to focus specific functionality being tested.
+It also allows tests to run without requiring an internet connection.
+
+The preferred mocking library for Flutter tests is
+{% aTargetBlank "https://pub.dev/packages/mockito", "mockito" %}.
+
+The following code demonstrates using mockito:
+
+```dart
+TODO: Add this.
 ```
 
 ## Packages
