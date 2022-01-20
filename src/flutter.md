@@ -6465,6 +6465,23 @@ void main() {
 
 Flutter integration tests are for testing an app as a whole.
 
+The code written for integration tests is
+nearly identical to the code written for widget tests.
+Both use the `find` object, a `WidgetTester` object
+for interacting with widgets, and the `expect` function.
+
+The way that integration tests render the app to be tested is a bit different.
+Rather than calling `await tester.pumpWidget(SomeWidget());`, integration tests
+call `IntegrationTestWidgetsFlutterBinding.ensureInitialized();`
+outside the test functions and call the following inside each test:
+
+```dart
+app.main();
+await tester.pumpAndSettle();
+```
+
+The steps to setup and create an integration test are:
+
 1. Edit `pubspec.yaml` and add the following under `dev_dependencies`:
 
    ```yaml
@@ -6480,34 +6497,34 @@ Flutter integration tests are for testing an app as a whole.
 
    ```dart
    import 'package:flutter_test/flutter_test.dart';
-    import 'package:integration_test/integration_test.dart';
+   import 'package:integration_test/integration_test.dart';
 
-    import 'package:introduction/main.dart' as app;
+   import 'package:introduction/main.dart' as app;
 
-    void main() {
-      IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+   void main() {
+     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-      group('end-to-end test', () {
-        testWidgets('tap floating action button and verify counter',
-            (WidgetTester tester) async {
-          app.main();
-          await tester.pumpAndSettle();
+     group('end-to-end test', () {
+       testWidgets('tap floating action button and verify counter',
+           (WidgetTester tester) async {
+         app.main();
+         await tester.pumpAndSettle();
 
-          // Verify counter starts at 0.
-          expect(find.text('0'), findsOneWidget);
+         // Verify counter starts at 0.
+         expect(find.text('0'), findsOneWidget);
 
-          // Find and tap the floating action button.
-          final Finder fab = find.byTooltip('Increment');
-          await tester.tap(fab);
+         // Find and tap the floating action button.
+         final Finder fab = find.byTooltip('Increment');
+         await tester.tap(fab);
 
-          // Rebuild the UI, triggering a new frame.
-          await tester.pumpAndSettle();
+         // Rebuild the UI, triggering a new frame.
+         await tester.pumpAndSettle();
 
-          // Verify counter increments by 1.
-          expect(find.text('1'), findsOneWidget);
-        });
-      });
-    }
+         // Verify counter increments by 1.
+         expect(find.text('1'), findsOneWidget);
+       });
+     });
+   }
    ```
 
 1. Run the test by entering `flutter test integration_test`.
@@ -6529,7 +6546,7 @@ Flutter integration tests are for testing an app as a whole.
    Copy the id of a device where the test should be run and enter
    `flutter test integration_test/app_test.dart -d {device-id}`.
 
-Even a basic integration test will take 1-2 minutes to start.
+Even a basic integration test will take 1-2 minutes to build and start.
 
 The following code provides integration testing for the `PageView` demo app
 presented earlier.
