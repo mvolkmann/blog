@@ -6050,6 +6050,8 @@ classes, constants, and functions used to implement tests.
 
 Commonly used test constants are described below.
 All of these are `Matcher` objects that match certain values.
+These are used as the second positional argument
+in calls to the `expect` function.
 
 | Constants         | Matches                                                |
 | ----------------- | ------------------------------------------------------ |
