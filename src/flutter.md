@@ -6541,6 +6541,11 @@ The steps to setup and create an integration test are:
 
    Press 1, 2, or 3 to select one.
 
+   This only runs the first test file it finds in the `integration_test` directory.
+   To run others one at a time, add their name after the directory name.
+   For example, enter `flutter test integration_test/second_text.dart`.
+   To run all the test files, enter `flutter test integration_test/*.dart`.
+
    Alternatively to run the test on a specific device,
    enter `flutter devices` to see a list of available devices.
    Copy the id of a device where the test should be run and enter
