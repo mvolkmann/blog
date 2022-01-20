@@ -1026,6 +1026,16 @@ add `import 'package:flutter/foundation.dart';` and
 pass an `enum` value to the `describeEnum` function.
 For example: `describeEnum(Color.blue)` returns the `String` `'blue'`.
 
+There is a {% aTargetBlank "https://github.com/dart-lang/language/issues/357",
+"proposal" %} to allow omitting enum names when referring to their values
+if the enum type can be inferred.
+For example, in Flutter it is common to see arguments whose type is
+`MaterialColor` which extends `ColorSwatch` which extends `Color`.
+One example is the `primarySwatch` argument to the `ThemeData` constructor.
+With this proposal, `primarySwatch: Colors.blue` could be
+shortened to `primarySwatch: .blue` because the Dart compiler
+can infer that the value can be a `Color` enum value.
+
 ### Type Aliases
 
 To define a name for a type, use a `typedef` statement.

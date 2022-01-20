@@ -6475,6 +6475,13 @@ Flutter integration tests are for testing an app as a whole.
 
 Even a basic integration test will take 1-2 minutes to start.
 
+The following code provides integration testing for the `PageView` demo app
+presented earlier.
+
+```dart
+TODO: See flutter_pageview/integration_test/app_test.dart
+```
+
 ## Packages
 
 The official package registry for Flutter is
