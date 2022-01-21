@@ -6075,55 +6075,48 @@ in calls to the `expect` function.
 
 Commonly used test functions are described below:
 
-TODO: Finish this table.
-
-| Function               | Description                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------- |
-| `addTearDown`          | registers a function to call after the current test completes                               |
-| `allOf`                | returns a matcher that matches if all the argument matchers (limit of 7) match              |
-| `anyElement`           | returns a matcher that matches if any element in an `Iterable` matches a value or `Matcher` |
-| `anyOf`                |                                                                                             |
-| `closeTo`              |                                                                                             |
-| `compareLists`         |                                                                                             |
-| `contains`             |                                                                                             |
-| `containsAll`          |                                                                                             |
-| `containsAllInORder`   |                                                                                             |
-| `containsPair`         |                                                                                             |
-| `endsWith`             |                                                                                             |
-| `equals`               |                                                                                             |
-| `equalsIgnoringCase`   |                                                                                             |
-| `everyElement`         |                                                                                             |
-| `expect`               | THE MOST COMMONLY USED FUNCTION.                                                            |
-| `expectAsync{n}`       |                                                                                             |
-| `fail`                 |                                                                                             |
-| `findsNWidgets`        |                                                                                             |
-| `greaterThan`          |                                                                                             |
-| `greaterThanOrEqualTo` |                                                                                             |
-| `group`                | defines a group (or suite) of tests                                                         |
-| `hasLength`            |                                                                                             |
-| `inClosedOpenRange`    |                                                                                             |
-| `inExclusiveRange`     |                                                                                             |
-| `inInclusiveRange`     |                                                                                             |
-| `inOpenClosedRange`    |                                                                                             |
-| `isA`                  |                                                                                             |
-| `isIn`                 |                                                                                             |
-| `isInstanceOf`         |                                                                                             |
-| `isNot`                |                                                                                             |
-| `isSameColorAs`        |                                                                                             |
-| `lessThan`             |                                                                                             |
-| `lessThanOrEqualTo`    |                                                                                             |
-| `markTestSkipped`      |                                                                                             |
-| `matches`              |                                                                                             |
-| `moreOrLessEquals`     |                                                                                             |
-| `same`                 |                                                                                             |
-| `setUp`                | registers a function to call before each test                                               |
-| `setUpAll`             | registers a function to call once before the first test                                     |
-| `startsWith`           |                                                                                             |
-| `tearDown`             | registers a function to call after each test                                                |
-| `tearDownAll`          | registers a function to call once after the last test                                       |
-| `test`                 | defines a single unit test                                                                  |
-| `testWidgets`          | defines a single widget test                                                                |
-| `within`               |                                                                                             |
+| Function               | Description                                                                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `addTearDown`          | registers a function to call after the current test completes                                                                                               |
+| `allOf`                | returns `Matcher` that matches if all of the argument matchers (limit of 7) match                                                                           |
+| `anyElement`           | returns `Matcher` that matches if any element in an `Iterable` matches a value or `Matcher`                                                                 |
+| `anyOf`                | returns `Matcher` that matches if any of the argument matchers (limit of 7) match                                                                           |
+| `closeTo`              | returns `Matcher` that matches if a number is within a delta of a given value                                                                               |
+| `contains`             | returns `Matcher` that matches if a value "contains" an expected value; specialized for `String`, `Map`, and `Iterable` values                              |
+| `containsPair`         | returns `Matcher` that matches a `Map` containing a given key/value pair                                                                                    |
+| `containsValue`        | returns `Matcher` that matches a `Map` containing a given value (ignores keys)                                                                              |
+| `endsWith`             | returns `Matcher` that matches a `String` that ends with a given substring                                                                                  |
+| `equals`               | returns `Matcher` that matches any object that is "structurally equal" to a given value                                                                     |
+| `equalsIgnoringCase`   | returns `Matcher` that matches a `String` that equal to a given `String` ignoring case substring                                                            |
+| `everyElement`         | returns `Matcher` that matches any `Iterable` where all the elements match a given value or `Matcher`                                                       |
+| `expect`               | assets that a value matches another value or `Matcher`; very commonly used                                                                                  |
+| `fail`                 | throws `TestFailure` with a given `String` message                                                                                                          |
+| `findsNWidgets`        | returns `Matcher` that matches a `Finder` that finds a given number of matching widgets; alternative to `findsNothing`, `findsOneWidget`, and `findsWidget` |
+| `greaterThan`          | returns `Matcher` that matches any value greater than a given value                                                                                         |
+| `greaterThanOrEqualTo` | returns `Matcher` that matches any value greater than or equal to a given value                                                                             |
+| `group`                | creates a group (or suite) of tests                                                                                                                         |
+| `hasLength`            | returns `Matcher` that matches any object with a `length` property whose value is a given value                                                             |
+| `inClosedOpenRange`    | returns `Matcher` that matches any number in the range [low, high); closed includes and open excludes                                                       |
+| `inExclusiveRange`     | returns `Matcher` that matches any number in the range (low, high)                                                                                          |
+| `inInclusiveRange`     | returns `Matcher` that matches any number in the range [low, high]                                                                                          |
+| `inOpenClosedRange`    | returns `Matcher` that matches any number in the range (low, high]                                                                                          |
+| `isA`                  | returns `Matcher` that matches any value that is or extends/implements a given type                                                                         |
+| `isIn`                 | returns `Matcher` that matches if an expected value value "contains" a given value; opposite of `contains` values                                           |
+| `isInstanceOf`         | returns `Matcher` that matches any value that is exactly a given type                                                                                       |
+| `isNot`                | returns `Matcher` that gives the opposite result of a given `Matcher`                                                                                       |
+| `lessThan`             | returns `Matcher` that matches any value less than a given value                                                                                            |
+| `lessThanOrEqualTo`    | returns `Matcher` that matches any value less than or equal to a given value                                                                                |
+| `matches`              | returns `Matcher` that matches a `String` that matches a given `Pattern` (regular expression)                                                               |
+| `moreOrLessEquals`     | returns `Matcher` that matches a `double` that is within a given epsilon of another                                                                         |
+| `same`                 | returns `Matcher` that matches an object that is the same object as another reference                                                                       |
+| `setUp`                | registers a function to call before each test                                                                                                               |
+| `setUpAll`             | registers a function to call once before the first test                                                                                                     |
+| `startsWith`           | returns `Matcher` that matches a `String` that starts with a given substring                                                                                |
+| `tearDown`             | registers a function to call after each test                                                                                                                |
+| `tearDownAll`          | registers a function to call once after the last test                                                                                                       |
+| `test`                 | defines a single unit test                                                                                                                                  |
+| `testWidgets`          | defines a single widget test                                                                                                                                |
+| `within`               | returns `Matcher` that matches a number that is within a "distance" of another, computed by a `DistanceFunction`                                            |
 
 ### Unit Tests
 
