@@ -20,7 +20,6 @@ Here are the steps required:
 
    ```js
    babel({
-     babelHelpers: 'runtime',
      extensions: ['.js', '.mjs', '.html', '.svelte'],
      exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
      presets: [
@@ -43,7 +42,8 @@ Here are the steps required:
            useESModules: true
          }
        ]
-     ]
+     ],
+     runtimeHelpers: true
    }),
    ```
 

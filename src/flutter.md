@@ -6184,6 +6184,8 @@ After attempting to fix the failed tests, rerun them
 and repeat until all the tests have a green checkmark.
 Tests can be rerun by clicking the green and red gutter icons
 or by clicking the "Run" and "Debug" links.
+It can take a couple of seconds before it is apparent
+that tests have started running again.
 
 The following code provides a basic example of a unit test source file:
 
