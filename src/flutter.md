@@ -740,7 +740,8 @@ One way to get a key value with the constructor call `UniqueKey()`.
 Widgets that accept other widgets as arguments typically have
 a parameter named `child` with the type `Widget` for one
 or `children` with a type of `List<Widget>` for multiple.
-TODO: Why isn't the type of `children` `Iterable<Widget>`?
+It seems like the type should be `Iterable<Widget>`.
+TODO: Why isn't it?
 
 Some widgets take a single widget in a `child` parameter and apply styling.
 The Flutter docs refer to these as "single-child layout widgets".
@@ -6033,8 +6034,6 @@ The assert part makes assertions about the expected state of the environment.
 For example, in a widget test this might assert that specific text
 is present on the screen or that a button becomes enabled.
 
-TODO: How do you generate code coverage reports from running tests?
-
 Flutter projects created with the `flutter create` command
 already have a dev dependency on the `flutter_test` package
 which is built on the `test` package.
@@ -6308,50 +6307,28 @@ before calling the `expect` function.
 await tester.pumpAndSettle();
 ```
 
-The most commonly used `WidgetTester` properties are described below:
-
-TODO: Finish this table.
-
-| Property          | Description                               |
-| ----------------- | ----------------------------------------- |
-| `testDescription` | `String` name of the test that is running |
-| ``                |                                           |
-| ``                |                                           |
-| ``                |                                           |
-| ``                |                                           |
+Objects from the `WidgetTester` class have a `testDescription` property
+that holds the `String` description of the currently running test.
+It may be useful to include this in error messages.
 
 The most commonly used `WidgetTester` methods are described below:
 
-TODO: Finish this table.
-
-| Method                      | Description                                                              |
-| --------------------------- | ------------------------------------------------------------------------ |
-| `drag(...)`                 | drags a given widget by a specified offset                               |
-| `enterText(Finder, String)` | moves focus to a text input widget and replaces its contents             |
-| `fling(...)`                | executes a fling gesture from the center of a widget over some offset    |
-| `flingFrom(...)`            | executes a fling gesture from a starting location over some offset       |
-| `getRect(Finder)`           | gets the `Rect` of a widget                                              |
-| `getSize(Finder)`           | gets the `Size` of a widget                                              |
-| `longPressj(...)`           | executes a long press at the center of a widget                          |
-| `longPressAt(...)`          | executes a long press at a given location                                |
-| `pageBack()`                | dismisses the current page                                               |
-| `printToConsole(String)`    | prints a `String` to the console; can also use the Dart `print` function |
-| `pump`                      | triggers a new "frame" (rebuilding the UI) after an optional duration`   |
-| `pumpAndSettle`             |                                                                          |
-| `pumpBenchmark`             |                                                                          |
-| `pumpFrames`                |                                                                          |
-| `pumpWidget`                |                                                                          |
-| `restartAndRestore`         |                                                                          |
-| `restoreFrom`               |                                                                          |
-| `runAsync`                  |                                                                          |
-| `sendEventToBinding`        |                                                                          |
-| `showKeyboard`              |                                                                          |
-| `takeException`             |                                                                          |
-| ``                          |                                                                          |
-| ``                          |                                                                          |
-| ``                          |                                                                          |
-| ``                          |                                                                          |
-| ``                          |                                                                          |
+| Method                      | Description                                                                                                     |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `drag(...)`                 | drags a given widget by a specified offset                                                                      |
+| `enterText(Finder, String)` | moves focus to a text input widget and replaces its contents                                                    |
+| `fling(...)`                | executes a fling gesture from the center of a widget over some offset                                           |
+| `flingFrom(...)`            | executes a fling gesture from a starting location over some offset                                              |
+| `getRect(Finder)`           | gets the `Rect` of a widget                                                                                     |
+| `getSize(Finder)`           | gets the `Size` of a widget                                                                                     |
+| `longPressj(...)`           | executes a long press at the center of a widget                                                                 |
+| `longPressAt(...)`          | executes a long press at a given location                                                                       |
+| `pageBack()`                | dismisses the current page                                                                                      |
+| `printToConsole(String)`    | prints a `String` to the console; can also use the Dart `print` function                                        |
+| `pump`                      | triggers a new "frame" (rebuilding the UI) after an optional duration                                           |
+| `pumpAndSettle`             | "repeatedly calls pump with the given duration until there are no longer any frames scheduled"; frequently used |
+| `pumpWidget`                | "renders the UI from the given widget"                                                                          |
+| `showKeyboard`              | moves focus to a given text input widget, triggering display of an on-screen keyboard                           |
 
 The following code provides widget tests for the `PageView` demo app
 presented earlier.
@@ -6671,6 +6648,41 @@ The following code demonstrates using mockito:
 ```dart
 TODO: Add this.
 ```
+
+### Test Coverage
+
+The `flutter test` command can generate test coverage data.
+To measure and report on test coverage:
+
+1. Run tests with the `--coverage` flag.
+   This creates the file `coverage/lcov.info`.
+
+   ```bash
+   flutter test --coverage test/*.dart
+   ```
+
+1. Generate an HTML report using the `genhtml` command.
+
+   To install this on macOS using Homebrew,
+   enter `brew install lcov`.
+
+   ```bash
+   genhtml -o coverage coverage/lcov.info
+   ```
+
+1. View the report.
+
+   ```bash
+   open coverage/index.html
+   ```
+
+The following screenshot shows a sample test coverage report.
+Click the links for each source file to see
+detail on the lines covered by a test.
+
+<img alt="Test Coverage" style="width: 80%"
+    src="/blog/assets/flutter-lcov.png?v={{pkg.version}}"
+    title="Test Coverage">
 
 ## Packages
 
