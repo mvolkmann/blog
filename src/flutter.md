@@ -6657,7 +6657,8 @@ It also allows tests to run without requiring an internet connection.
 
 The preferred mocking library for Flutter tests is
 {% aTargetBlank "https://pub.dev/packages/mockito", "mockito" %}.
-To use this, add `mockito` to the list of `devdependencies` in `pubspec.yaml`.
+To use this, add `build_runner` and `mockito`
+to the list of `dev_dependencies` in `pubspec.yaml`.
 
 The following code demonstrates using mockito:
 

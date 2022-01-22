@@ -587,6 +587,20 @@ in the current namespace:
 import 'dart:math';
 ```
 
+To import only a subset of the names defined in another file,
+use the `show` keyword.
+
+```dart
+import 'dart:math' show pi, sqrt;
+```
+
+To import all names defined in another file except some,
+use the `hide` keyword.
+
+```dart
+import 'dart:math' hide acos, asin, atan, atan2;
+```
+
 To avoid conflicting with names already in the current namespace,
 use the `as` keyword.
 
