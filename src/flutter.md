@@ -6182,7 +6182,9 @@ and repeat until all the tests have a green checkmark.
 Tests can be rerun by clicking the green and red gutter icons
 or by clicking the "Run" and "Debug" links.
 It can take a few seconds before it is apparent
-that tests have started running again.
+that tests have started running again, but
+a beaker icon appears in the Activity Bar (left side column of icons).
+with a blue clock indicator.
 
 The following code provides a basic example of a unit test source file:
 
@@ -6657,8 +6659,7 @@ It also allows tests to run without requiring an internet connection.
 
 The preferred mocking library for Flutter tests is
 {% aTargetBlank "https://pub.dev/packages/mockito", "mockito" %}.
-To use this, add `build_runner` and `mockito`
-to the list of `dev_dependencies` in `pubspec.yaml`.
+To use this, add `mockito` to the list of `dev_dependencies` in `pubspec.yaml`.
 
 The following code demonstrates using mockito:
 
