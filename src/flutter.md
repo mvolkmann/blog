@@ -6181,7 +6181,7 @@ After attempting to fix the failed tests, rerun them
 and repeat until all the tests have a green checkmark.
 Tests can be rerun by clicking the green and red gutter icons
 or by clicking the "Run" and "Debug" links.
-It can take a couple of seconds before it is apparent
+It can take a few seconds before it is apparent
 that tests have started running again.
 
 The following code provides a basic example of a unit test source file:
@@ -6338,7 +6338,7 @@ The most commonly used `WidgetTester` methods are described below:
 
 The following code provides widget tests for the `PageView` demo app
 presented earlier.
-Why `MyApp` can be viewed as a "single widget",
+While `MyApp` can be viewed as a "single widget",
 widget tests typically test widgets lower in the widget tree.
 
 ```dart
@@ -6350,7 +6350,15 @@ import 'package:flutter_pageview/main.dart';
 void main() {
   testWidgets('Page1', (WidgetTester tester) async {
     // Build the app and trigger the first frame.
-    await tester.pumpWidget(MyApp());
+    // When testing a widget that does not return a `MaterialApp` widget,
+    // tests generally need to begin with the following:
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: MyWidget(), // widget being tested
+        ),
+      ),
+    );
 
     // Find widgets.
     var shoutBtn = find.byKey(ValueKey('shoutBtn'));
@@ -6379,6 +6387,8 @@ void main() {
     bool buttonEnabled(button) =>
         tester.widget<IconButton>(button).onPressed != null;
 
+    // Build the app and trigger the first frame.
+    // Note that MyApp creates a `MaterialApp` that creates a `Scaffold`.
     await tester.pumpWidget(MyApp());
 
     var backBtn = find.byKey(ValueKey('backBtn'));

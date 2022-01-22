@@ -892,6 +892,7 @@ by a pair of three single or double quotes.
 Literal strings can use interpolations.
 To include the value of a variable, include `$variableName`.
 To include the value of an expression, include `${expression}`.
+To include a literal `$` in a string, escape it with `\$`.
 
 Strings can be concatenated with the `+` operator.
 The `+` operator is not needed to concatenate literal strings.
