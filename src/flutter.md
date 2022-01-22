@@ -6205,6 +6205,7 @@ void main() {
 ### Widget Tests
 
 Flutter widget tests are for testing individual widgets.
+Each test should focus on a single widget.
 
 New Flutter projects ship with a file named `widget_test.dart`.
 Use this is as an example when writing widget tests.
@@ -6332,6 +6333,8 @@ The most commonly used `WidgetTester` methods are described below:
 
 The following code provides widget tests for the `PageView` demo app
 presented earlier.
+Why `MyApp` can be viewed as a "single widget",
+widget tests typically test widgets lower in the widget tree.
 
 ```dart
 import 'package:flutter/material.dart';
@@ -6637,11 +6640,12 @@ Mocking in tests supplies canned results from functions
 that are not meant to be tested.
 For example, a function that makes an API call
 can be mocked to return the same data every time.
-This allows tests to focus specific functionality being tested.
+This allows tests to focus on specific functionality being tested.
 It also allows tests to run without requiring an internet connection.
 
 The preferred mocking library for Flutter tests is
 {% aTargetBlank "https://pub.dev/packages/mockito", "mockito" %}.
+To use this, add `mockito` to the list of `devdependencies` in `pubspec.yaml`.
 
 The following code demonstrates using mockito:
 
