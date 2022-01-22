@@ -6141,8 +6141,13 @@ Each test file defines a `main` function.
 This should contain calls to the global `test` function.
 The `test` function takes positional arguments for a description (`String`)
 and a no-arg function that contains calls to the global `expect` function.
-It also takes the named argument `skip` (`bool` or `String` describing why)
-and several others.
+
+The `test` function also takes the named argument `skip`
+(`bool` or `String` describing why) and several others.
+Unfortunatly since Dart requires named arguments
+to follow all positional arguments, the `skip` argument
+must follow the no-arg function that defines the test.
+This makes it difficult to spot the skipped tests.
 
 The `expect` function takes positional arguments for an
 actual value and a matcher (expected value or `Matcher` object).
@@ -6582,9 +6587,7 @@ void main() {
     await changePage(backBtn, 'This is page #1.');
   });
 
-  testWidgets(
-    'swipe left and right',
-    (WidgetTester tester) async {
+  testWidgets('swipe left and right', (WidgetTester tester) async {
       Future<void> swipe(page, swipeLeft, expectedText) async {
         //TODO: How can we get the device width in a test?
         double deviceWidth = 600; // MediaQuery.of(context).size.width;
@@ -6613,7 +6616,6 @@ void main() {
       await swipe(page2, true, 'This is page #1.'); // goes backward
       await swipe(page1, true, 'This is page #1.'); // stays on same page
     },
-    skip: true,
   );
 
   testWidgets('tap dots', (WidgetTester tester) async {

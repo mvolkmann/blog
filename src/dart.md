@@ -2448,6 +2448,7 @@ try {
 
 When a function catches an exception,
 it can rethrow the exception so the caller can handle it.
+Dart statement `rethrow;` is equivalent to `throw e;` and is preferred.
 
 The `Range` and `RangeException` classes defined above
 can be used as follows:
