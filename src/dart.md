@@ -576,6 +576,14 @@ such as comparing object properties.
 The collection classes `List`, `Set`, and `Map`
 do not override the `==` operator.
 
+To test whether two objects contain the same properties and values,
+consider using the {% aTargetBlank
+"https://pub.dev/packages/equatable", "equatable" %} library.
+Custom classes can extend `Equatable` to
+override the `==` operator and the `hashCode` method
+so instances are compared by value instead of by reference.
+For classes that already have a superclass, use `EquatableMixin`.
+
 ## Importing packages
 
 A `.dart` file can import packages using the `import` statement.

@@ -6088,7 +6088,8 @@ Commonly used test functions are described below:
 | `equals`               | returns `Matcher` that matches any object that is "structurally equal" to a given value                                                                     |
 | `equalsIgnoringCase`   | returns `Matcher` that matches a `String` that equal to a given `String` ignoring case substring                                                            |
 | `everyElement`         | returns `Matcher` that matches any `Iterable` where all the elements match a given value or `Matcher`                                                       |
-| `expect`               | assets that a value matches another value or `Matcher`; very commonly used                                                                                  |
+| `expect`               | asserts that a value matches another value or `Matcher`; very commonly used                                                                                 |
+| `expectLater`          | asserts that a `Future` completes with a value that matches another value or `Matcher` (such as `emitsInOrder`)                                             |
 | `fail`                 | throws `TestFailure` with a given `String` message                                                                                                          |
 | `findsNWidgets`        | returns `Matcher` that matches a `Finder` that finds a given number of matching widgets; alternative to `findsNothing`, `findsOneWidget`, and `findsWidget` |
 | `greaterThan`          | returns `Matcher` that matches any value greater than a given value                                                                                         |
@@ -6115,6 +6116,7 @@ Commonly used test functions are described below:
 | `tearDownAll`          | registers a function to call once after the last test                                                                                                       |
 | `test`                 | defines a single unit test                                                                                                                                  |
 | `testWidgets`          | defines a single widget test                                                                                                                                |
+| `throwsA`              | returns `Matcher` that matches a function, `Future`, or function that returns a `Future` that matches a given `Matcher`                                     |
 | `within`               | returns `Matcher` that matches a number that is within a "distance" of another, computed by a `DistanceFunction`                                            |
 
 ### Unit Tests
