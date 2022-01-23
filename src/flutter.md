@@ -740,8 +740,9 @@ One way to get a key value with the constructor call `UniqueKey()`.
 Widgets that accept other widgets as arguments typically have
 a parameter named `child` with the type `Widget` for one
 or `children` with a type of `List<Widget>` for multiple.
-It seems like the type should be `Iterable<Widget>`.
-TODO: Why isn't it?
+One possible reason that the type of `children` is not `Iterable<Widget>`
+is that it would enable lazy instantiation which might
+make it difficult to maintain 60 FPS refresh rates.
 
 Some widgets take a single widget in a `child` parameter and apply styling.
 The Flutter docs refer to these as "single-child layout widgets".
