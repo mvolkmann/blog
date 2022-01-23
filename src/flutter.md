@@ -5806,7 +5806,7 @@ Text('Hello, World!',
 )
 ```
 
-Another way to get fonts is use the {% aTarget
+Another way to get fonts is use the {% aTargetBlank
 "https://pub.dev/packages/google_fonts", "google_fonts" %} package.
 This provides over 1000 fonts.
 Instead of downloading each of the fonts, they are
@@ -5827,8 +5827,8 @@ The steps to use this are:
    ```dart
    Text(
      'This is Google Fonts',
-     style: GoogleFonts.getFont( // downloads font dynamically
-       'Lato',
+     style: GoogleFonts.getFont(
+       'Dancing Script',
        textStyle: TextStyle(
          color: Colors.purple,
          fontSize: 30,
@@ -5839,12 +5839,30 @@ The steps to use this are:
    ),
    Text(
     'This is Google Fonts',
-    style: GoogleFonts.lato(), // requires font to already be downloaded
+    // alternative to getFont using method names that are font names
+    style: GoogleFonts.dancingScript(),
    ),
    ```
 
 Both the `getFont` method and specific font methods accept a
 `textStyle` argument for specifying their color, font size, and more.
+
+If matching font files are found in the
+assets directory specified in `pubspec.yaml`,
+those will be used in instead of downloading new font files.
+
+Create the directory `asssets/fonts` and add the following in `pubspec.yaml`:
+
+```yaml
+assets:
+  - assets/fonts/
+```
+
+To download font files ahead of time, browse {% aTargetBlank
+"https:/fonts.google.com", "fonts.google.com" %}.
+For example, download the "Dancing Script" font
+and move all the `.ttf` files in the downloaded `static` directory
+to a project `assets/fonts` directory.
 
 In order for runtime font fetching to work in macOS,
 a `.entitlements` file much contain the following:
