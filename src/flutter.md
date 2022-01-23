@@ -6788,6 +6788,14 @@ These include `any`, `anyNamed`, `argThat`, and `captureThat`.
 For more details, see the {% aTargetBlank
 "https://pub.dev/packages/mockito", "offical mockito documentation" %}.
 
+Another mocking approach to consider is implementing a service registry class.
+This class becomes the authority on
+deciding which service instances should be used.
+It can be configured to use mock service instances
+instead of real ones when tests are being run.
+A downside of this approach is that all code that uses services
+must be modified to get instances from the service registry class.
+
 ### Test Coverage
 
 The `flutter test` command can generate test coverage data.
