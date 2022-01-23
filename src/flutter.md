@@ -5826,17 +5826,33 @@ The steps to use this are:
 
    ```dart
    Text(
-    'This is Google Fonts',
-    style: GoogleFonts.lato(), // requires font to already be downloaded
+     'This is Google Fonts',
+     style: GoogleFonts.getFont( // downloads font dynamically
+       'Lato',
+       textStyle: TextStyle(
+         color: Colors.purple,
+         fontSize: 30,
+         fontStyle: FontStyle.italic,
+         fontWeight: FontWeight.bold,
+       ),
+     ),
    ),
    Text(
     'This is Google Fonts',
-    style: GoogleFonts.getFont('Lato'), // downloads font dynamically
+    style: GoogleFonts.lato(), // requires font to already be downloaded
    ),
    ```
 
 Both the `getFont` method and specific font methods accept a
 `textStyle` argument for specifying their color, font size, and more.
+
+In order for runtime font fetching to work in macOS,
+a `.entitlements` file much contain the following:
+
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+```
 
 ## Styling
 
