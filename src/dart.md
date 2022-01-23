@@ -910,6 +910,7 @@ TODO: but the `bool`, `int`, and `double` types start lowercase?
 Literal single line strings are delimited by single or double quotes.
 Literal multi-line strings are delimited
 by a pair of three single or double quotes.
+All newlines, except a leading newline if it exists, are retained.
 
 Literal strings can use interpolations.
 To include the value of a variable, include `$variableName`.
