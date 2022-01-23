@@ -2287,6 +2287,41 @@ Basic usage of all of these widgets is demonstrated in the Flutter project at
 {% aTargetBlank "https://github.com/mvolkmann/flutter_input",
 "flutter_input" %}.
 
+#### ElevatedButton
+
+The most commonly used button widget is {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ElevatedButton-class.html",
+"ElevatedButton" %}.
+
+The most commonly used constructor arguments are summaried below:
+
+| Argument    | Description                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| `child`     | a `Widget` to render inside the button; typically `Text` or `Icon` |
+| `key`       | a `Key` often used for finding the widget in a test                |
+| `onPressed` | function to call when the button is tapped                         |
+| `style`     | a `ButtonStyle` specifying styling details                         |
+
+The `style` argument can specify background color, foreground color,
+font size, shadow, and more.
+The easiest way to specify the `style` value is
+with the `ElevatedButton.styleFrom` function.
+
+The following code demonstrates creating an `ElevatedButton`:
+
+```dart
+ElevatedButton(
+  child: const Text('Press Me'),
+  onPressed: () => print('got press'),
+  style: ElevatedButton.styleFrom(
+    padding: EdgeInsets.all(10),
+    primary: Colors.red, // background color
+    onPrimary: Colors.yellow, // foreground color
+    textStyle: TextStyle(fontSize: 30),
+  ),
+)
+```
+
 #### TextField and TextFormField
 
 The {% aTargetBlank
@@ -4934,11 +4969,10 @@ class BottomNavigation extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<BottomNavigation> createState() => BottomNavigationState();
+  State<BottomNavigation> createState() => _BottomNavigationState();
 }
 
-//TODO: Why can't this class be made private with a leading underscore?
-class BottomNavigationState extends State<BottomNavigation> {
+class _BottomNavigationState extends State<BottomNavigation> {
   int _pageIndex = 0;
 
   @override
