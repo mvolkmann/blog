@@ -5806,15 +5806,37 @@ Text('Hello, World!',
 )
 ```
 
-Another way to get fonts is use the "google_fonts" package.
+Another way to get fonts is use the {% aTarget
+"https://pub.dev/packages/google_fonts", "google_fonts" %} package.
 This provides over 1000 fonts.
-Add this as a dependency in `pubspec.yaml`.
 Instead of downloading each of the fonts, they are
 fetched via HTTP at runtime and cached in the app's file system.
-For instructions on using this, see {% aTargetBlank
-"https://pub.dev/documentation/google_fonts/latest/",
-"google_fonts documentation" %}.
-TODO: I could not get this to work!
+
+The steps to use this are:
+
+1. Add `google_fonts` as a dependency in `pubspec.yaml`.
+1. Add the following import in all `.dart` files
+   that wish to use the fonts.
+
+   ```dart
+   import 'package:google_fonts/google_fonts.dart';
+   ```
+
+1. Use the `GoogleFonts` class to select fonts.
+
+   ```dart
+   Text(
+    'This is Google Fonts',
+    style: GoogleFonts.lato(), // requires font to already be downloaded
+   ),
+   Text(
+    'This is Google Fonts',
+    style: GoogleFonts.getFont('Lato'), // downloads font dynamically
+   ),
+   ```
+
+Both the `getFont` method and specific font methods accept a
+`textStyle` argument for specifying their color, font size, and more.
 
 ## Styling
 
