@@ -6660,15 +6660,133 @@ can be mocked to return the same data every time.
 This allows tests to focus on specific functionality being tested.
 It also allows tests to run without requiring an internet connection.
 
-The preferred mocking library for Flutter tests is
+The {% aTargetBlank "", "http" %} library includes
+the ability to mock responses to HTTP requests.
+
+The steps to use this are:
+
+1. Add `http` to the list of `dependencies` in `pubspec.yaml`.
+
+1. Add the following imports in a test file:
+
+   ```dart
+   import 'package:flutter_test/flutter_test.dart'; // defines test and expect
+   import 'package:http/http.dart'; // defines Response
+   import 'package:http/testing.dart'; // defines MockClient
+   ```
+
+1. Create a `MockClient` that specifies HTTP responses for given HTTP requests.
+   For example:
+
+   ```dart
+   final client = MockClient((request) async {
+     if (request.url.toString() != Employees.url) return Response('', 404);
+
+     var mockJson =
+         '{"data": [{"employee_salary": 100}, {"employee_salary": 200}]}';
+     const headers = {'content-type': 'application/json'};
+     return Response(mockJson, 200, headers: headers);
+   });
+   ```
+
+1. Tell the code being tested to use `MockClient` in place of
+   the normal `Client` instance provided by the `http` library.
+
+   There are multiple ways to do this.
+   One way is to define a static property in the class being tested
+   like the following which can be directly set from a test.
+   Then use this inside the class being tested for sending all HTTP requests.
+
+   ```dart
+   static var client = Client();
+   ```
+
+Mock operations other than HTTP requests
+is simplified by using a mocking library.
+The preferred Flutter mocking library is
 {% aTargetBlank "https://pub.dev/packages/mockito", "mockito" %}.
-To use this, add `mockito` to the list of `dev_dependencies` in `pubspec.yaml`.
+This generates code for mock implementations of classes
+and provides methods that are useful in writing tests.
 
-The following code demonstrates using mockito:
+The steps to use mockito are:
 
-```dart
-TODO: Add this.
-```
+1. Add `mockito` and `build_runner` to
+   the list of `dev_dependencies` in `pubspec.yaml`.
+
+1. In the main `.dart` file of the app, add the following imports:
+
+   ```dart
+   import 'package:mockito/annotations.dart';
+   import 'package:mockito/mockito.dart';
+   // One of these for each class that will be mocked.
+   import 'some-class.mocks.dart';
+   ```
+
+1. Add the following annotation before the `main` function:
+
+   ```dart
+   // List each class to be mocked.
+   @GenerateMocks([SomeClass1, SomeClass2, ...])
+   void main() {
+   ```
+
+1. Generate `.dart` files for the classes to be mocked
+   by entering `dart run build_runner build`.
+   These classes have the same functionality as the classes they mock,
+   but gain new methods used for verifying and stubbing calls.
+
+1. Call the following methods in tests to
+   verify calls to methods of stubbed objects:
+
+   - `verify(call)`
+
+     This causes a test to fail if the call has not occurred.
+     `call` here can have the syntax
+     `mockedObject.someMethod(someArguments)` or `mockedObject.someGetter`.
+     This can be followed by `.called(n)` to
+     verify that the call occurred `n` times.
+     `n` can be a number of a matcher like `greaterThan(n)`.
+
+   - `verifyInOrder([call1, call2, ...])`
+
+     This causes a test to fail if the calls
+     were not all made in the order specified.
+
+   - `verifyNever(call)`
+
+     This causes a test to fail if the call has occurred.
+
+1. Call the following methods in tests to change what is
+   returned or thrown from methods of stubbed objects:
+
+   - `when(call).thenReturn(value)`
+
+     This changes a specific call to always return a fixed value.
+     To return a `Future` or `Stream`, use `thenAnswer` instead
+     which is described below.
+
+   - `when(call).thenThrows(SomeException(someArguments))`
+
+     This changes a specific call to always throw a fixed exception.
+
+   - `when(call).thenAnswer((_) { code to calculate response })`
+
+     This changes a specific call to calculate a different value to return.
+
+   If a call matches multiple stubs, the one defined last is used.
+
+Mockito provides "argument matchers" that can be used in
+calls passed to `when` in place of each argument value.
+These include `any`, `anyNamed`, `argThat`, and `captureThat`.
+
+- `any`: matches any positional argument value
+- `anyNamed`: matches any named argument value with a given name
+- `argThat`: matches any positional or named argument that matches a given `Matcher`
+- `captureThat`: matches the same as `argThat`, but also captures the value
+  so it can be used in a test assertion
+
+For more details, see the {% aTargetBlank
+"https://pub.dev/packages/mockito", "offical mockito documentation" %}.
 
 ### Test Coverage
 
