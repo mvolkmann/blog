@@ -1593,6 +1593,24 @@ These have a similar effect to the CSS `align-items` property.
 Values of the `TextDirection` and `VerticalDirection` enums were
 described with the `Column` widget above.
 
+### Spacer Widget
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Spacer-class.html", "Spacer" %}
+widget "creates an adjustable, empty spacer that can be used to
+tune the spacing between widgets in a `Flex` container, like `Row` or `Column`.
+It takes up all available space.
+
+When there is more than one `Spacer` widget in a `Row` or `Column`,
+the available space is divided between them.
+By default they are all given the same amount of space,
+but this can be changed by specifying an `int` `flex` argument.
+This works similarly to CSS flexbox layout.
+
+An alternative to using `Spacer` widgets is to specify
+the `mainAxisAlignment` argument in a `Row` or `Column`
+which accepts values like `spaceAround`, `spaceBetween`, and `spaceEvenly`.
+
 ### Display Widgets
 
 The most commonly used widgets for displaying content are described below:
