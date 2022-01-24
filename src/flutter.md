@@ -285,6 +285,18 @@ or Run ... Run Without Debugging (ctrl-fn-F5).
 The first time this is run for a given application
 it takes around a minute to start.
 
+Running a Flutter app from VS Code opens the following floating toolbar:
+
+<img alt="VS Code Flutter Toolbar" style="width: 80%"
+    src="/blog/assets/flutter-vs-code-toolbar.png?v={{pkg.version}}"
+    title="VS Code Flutter Toolbar">
+
+The orange lightning bolt does a hot reload of the app.
+The green circular arrow restarts the app.
+The red square stops the app.
+The blue magnifier glass opens the Widget Inspector
+which gives details about widget nesting, layout, and sizes.
+
 ## Debugging
 
 When a Flutter app is run from a terminal,
@@ -587,6 +599,8 @@ class MyApp extends StatelessWidget {
       // displayed when users press the "recent apps" button.
       // On iOS this value is not used.
       title: 'My Title',
+      // primarySwatch is a MaterialColor object that specifies
+      // many shades of colors to be used throughout the app.
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const MyPage(), // starting page
     );
@@ -1079,6 +1093,23 @@ The layout widgets are documented at {% aTargetBlank
 Some layout widgets accept a single `child`
 and others accept multiple `children`.
 
+When the children of a layout widget do not all fit within it,
+diagonally yellow and black warning bars are displayed.
+The example below shows what happens when a `Row` containing
+six colored squares is rendered and
+they do not all fit within the screen width.
+
+<img alt="widget overflow" style="width: 60%"
+    src="/blog/assets/flutter-widget-overflow.png?v={{pkg.version}}"
+    title="widget overflow">
+<img>
+
+One way to fix widget overflow is to nest children in a {% aTargetBlank
+"https://docs.flutter.dev/development/ui/widgets/scrolling",
+"widget that supports scrolling" %}.
+These included `GridView`, `ListView`, `PageView`,
+`ReorderableListView`, `SingleChildScrollView`, and more.
+
 #### Single-child Layout Widgets
 
 The most commonly used widgets for laying out a single child widget
@@ -1288,6 +1319,8 @@ Values of the `CrossAxisAlignment` enum include
 `start`, `center` (default), `end`,
 `stretch`, and `baseline` (aligns text baselines).
 These have a similar effect to the CSS `align-items` property.
+The `stretch` value causes it to take all available space
+in the cross-axis direction.
 
 Values of the `MainAxisAlignment` enum include
 `start` (default), `center`, `end`,
@@ -6058,6 +6091,12 @@ For example:
 ```dart
 ClipOval(child: Image.asset('assets/images/comet.jpg'))
 ```
+
+To blend a color with an image, specify the color with the `color` argument
+and add the `colorBlendMode` argument to specify how it should be blended.
+The `colorBlendMode` value should be one of the constants defined in the
+{% aTargetBlank "https://api.flutter.dev/flutter/dart-ui/BlendMode.html",
+"BlendMode" %} class.
 
 The `Image` widget does not support SVG files.
 To render SVGs, add a dependency on the pub.dev package flutter_svg.
