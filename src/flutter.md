@@ -940,6 +940,24 @@ are described in the following table:
 
 ### Material Structure Widgets
 
+Every Flutter app needs to begin by rendering an "app" widget.
+Two common choices are `MaterialApp` and `CupertinoApp`.
+The app widget provides a place to store app-wide information such as
+behavior flags, theming data, route data, the home widget, and more.
+The app widget doesn't render anything and instead
+delegates that resposibility to its home widget
+which typically renders a scaffold.
+
+A scaffold provides UI structure by defining a place to render
+widgets like the following:
+
+- app bar: typically contains a title and buttons
+- bottom navigation bar: contains buttons for navigating between pages
+- bottom sheet: slides up from the bottom; similar to a dialog
+- drawer: typically slides in from the left
+- floating action button: for primary action
+- body: the main widget
+
 It is common for Flutter apps to have the following top-level structure:
 
 - `MaterialApp`
