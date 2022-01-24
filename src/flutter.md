@@ -354,6 +354,9 @@ This extension provides many things including:
 
 - great auto-complete support
 
+  Press ctrl-space when inside a function or method argument list
+  to see a list of supported named arguments.
+
 - snippets
 
   - `stless` adds template code for creating a stateless widget
@@ -1060,6 +1063,10 @@ The `AppBar` constructor takes the following named parameters and more:
 | `toolbarHeight`    | `double` height of the toolbar (first row)                   |
 | `toolbarTextStyle` | `TextStyle` of the toolbar widgets                           |
 
+The `bottom` parameter is typically used for page navigation buttons
+to be displayed near the top of the UI
+as an alternative to the `Scaffold` `botttomNavigationBar`.
+
 See the sample app in the GitHub repo {% aTargetBlank
 "https://github.com/mvolkmann/flutter_appbar", "flutter_appbar" %}.
 
@@ -1114,6 +1121,8 @@ but affects the width in which the child is centered.
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/widgets/Container-class.html", "Container" %}
 widget is the most customizable single-child layout widget.
+By default its size is the size of its only child.
+
 The most frequently used arguments are described below:
 
 | Argument      | Description                                                                                                |
@@ -1123,8 +1132,14 @@ The most frequently used arguments are described below:
 | `constraints` | `BoxConstraints` that constrains the minimum and maximum width and height                                  |
 | `decoration`  | `BoxDecoration` that can specify a `color`, `border`, `borderRadius`, `boxShadow`, `gradient`, and `shape` |
 | `height`      | `double` height of container (conflicts with `constraints`)                                                |
+| `margin`      | `EdgeInsets` that specifies the margin to apply outside                                                    |
 | `padding`     | `EdgeInsets` that specifies the padding to apply inside                                                    |
 | `width`       | `double` width of container (conflicts with `constraints`)                                                 |
+
+To consume all the available width in the parent,
+set `width` to `double.infinity`.
+Likewise, to consume all the available height in the parent,
+set `height` to `double.infinity`.
 
 The `decoration` argument takes a `BoxDecoration` object
 that has a `shape` property.
