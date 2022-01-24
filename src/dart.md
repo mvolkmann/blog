@@ -64,6 +64,11 @@ Recommended VS Code extensions for Dart include:
   click the lightbulb icon or open the Command Palette,
   and select "Import library ...".
 
+  This extension provides many command palette entries including
+  "Dart: Add Dependency" and "Dart: Add Dev Dependency".
+  These prompt for a pub.dev library name,
+  update the `pubspec.yaml` file, and download the library.
+
 - {% aTargetBlank
   "https://marketplace.visualstudio.com/items?itemName=BendixMa.dart-data-class-generator",
   "Dart Data Class Generator" %}
