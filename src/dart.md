@@ -95,6 +95,14 @@ Recommended VS Code extensions for Dart include:
 
   "To easily add dependencies to your Dart and Flutter project's pubspec.yaml."
 
+## pub
+
+The official Dart package manager is `pub`.
+This is similar to `npm` for Node.js.
+In the same way that `npm` relies on the files
+`package.json` and `package-lock.json` to manage dependencies,
+`pub` relies on the files `pubspec.yaml` and `pubspec.lock` (also a YAML file).
+
 ## pub.dev
 
 {% aTargetBlank "https://pub.dev", "pub.dev" %} is the
@@ -110,20 +118,26 @@ and can depend on library packages.
 
 Some notable packages to consider using include:
 
-- http
+- {% aTargetBlank "https://pub.dev/packages/fpdart", "fpdart" %}
+
+  "Functional programming in Dart and Flutter.
+  All the main functional programming types and patterns
+  fully documented, tested, and with examples."
+
+- {% aTargetBlank "https://pub.dev/packages/http", "http" %}
 
   "A composable, multi-platform, Future-based API for HTTP requests."
 
-- json_serializable
+- {% aTargetBlank "", "json_serializable" %}
 
   "Automatically generate code for converting to and from JSON
   by annotating Dart classes."
 
-- hive
+- {% aTargetBlank "https://pub.dev/packages/hive", "hive" %}
 
   "Lightweight and blazing fast key-value database"
 
-- lints
+- {% aTargetBlank "https://pub.dev/packages/lints", "lints" %}
 
   "Official Dart lint rules. Defines the 'core' and 'recommended'
   set of lints suggested by the Dart team."  
@@ -150,11 +164,9 @@ Some notable packages to consider using include:
   prefer_single_quotes: true
   ```
 
-The official Dart package manager is `pub`.
-This is similar to `npm` for Node.js.
-In the same way that `npm` relies on the files
-`package.json` and `package-lock.json` to manage dependencies,
-`pub` relies on the files `pubspec.yaml` and `pubspec.lock` (also a YAML file).
+- {% aTargetBlank "https://pub.dev/packages/sqflite", "sqflite" %}
+
+  "SQLite plugin for Flutter."
 
 ## Creating and Running Programs
 
