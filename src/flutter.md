@@ -3397,6 +3397,14 @@ _counter++;
 setState(() {});
 ```
 
+### Callback Functions
+
+TODO: Describe this as a way for child widgets to send data to their parent widgets.
+
+### InheritedWidget
+
+TODO: Describe using this.
+
 ### provider Library
 
 The {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
