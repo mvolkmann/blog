@@ -3526,6 +3526,10 @@ class ChildWidget extends StatelessWidget {
 
 The {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
 is is the state management approach recommended by the Flutter team.
+It is "A wrapper around `InheritedWidget`
+to make them easier to use and more reusable."
+It vastly reduces the amount of boilerplate code that must be written.
+
 The {% aTargetBlank
 "https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple",
 "official docs" %} say
