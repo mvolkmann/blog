@@ -1130,23 +1130,24 @@ These included `GridView`, `ListView`, `PageView`,
 The most commonly used widgets for laying out a single child widget
 are described below:
 
-| Widget                                                                                                               | Description                                                                                                                   |
-| -------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Align-class.html", "Align" %}                               | specifies where its child should be positioned within its parent (ex. `Alignment.bottomRight`)                                |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html", "AnimatedContainer" %}       | like `Container`, but "gradually changes its values over a period of time"; provides implicit animations                      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AspectRatio-class.html", "AspectRatio" %}                   | sizes its child to a specific aspect ratio                                                                                    |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Center-class.html", "Center" %}                             | centers its child horizontally and vertically in the available space                                                          |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html", "ConstrainedBox" %}             | "imposes additional constraints on its child" which include min and max width and height                                      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Container-class.html", "Container" %}                       | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Expanded-class.html", "Expanded" %}                         | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FittedBox-class.html", "FittedBox" %}                       | "scales and positions its child within itself" including clipping                                                             |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Flexible-class.html", "Flexible" %}                         | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FractionallySizedBox-class.html", "FractionallySizedBox" %} | "sizes its child to a fraction of the total available space"; can specify `widthFactor`, `heightFactor`, and `alignment`      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html", "LayoutBuilder" %}               | provides min/max width/height constraints that can be used to decide how/what a child component should render                 |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LimitedBox-class.html", "LimitedBox" %}                     | "box that limits its size only when unconstrained"; useful for wrapping unconstrained children of a `ListView`                |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Padding-class.html", "Padding" %}                           | "insets its child by the given padding"                                                                                       |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizedBox-class.html", "SizedBox" %}                         | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Transform-class.html", "Transform" %}                       | transforms its child by translating, rotating, and scaling it                                                                 |
+| Widget                                                                                                                 | Description                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Align-class.html", "Align" %}                                 | specifies where its child should be positioned within its parent (ex. `Alignment.bottomRight`)                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html", "AnimatedContainer" %}         | like `Container`, but "gradually changes its values over a period of time"; provides implicit animations                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AspectRatio-class.html", "AspectRatio" %}                     | sizes its child to a specific aspect ratio                                                                                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Center-class.html", "Center" %}                               | centers its child horizontally and vertically in the available space                                                          |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html", "ConstrainedBox" %}               | "imposes additional constraints on its child" which include min and max width and height                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Container-class.html", "Container" %}                         | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Expanded-class.html", "Expanded" %}                           | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FittedBox-class.html", "FittedBox" %}                         | "scales and positions its child within itself" including clipping                                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Flexible-class.html", "Flexible" %}                           | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FractionallySizedBox-class.html", "FractionallySizedBox" %}   | "sizes its child to a fraction of the total available space"; can specify `widthFactor`, `heightFactor`, and `alignment`      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html", "LayoutBuilder" %}                 | provides min/max width/height constraints that can be used to decide how/what a child component should render                 |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LimitedBox-class.html", "LimitedBox" %}                       | "box that limits its size only when unconstrained"; useful for wrapping unconstrained children of a `ListView`                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Padding-class.html", "Padding" %}                             | "insets its child by the given padding"                                                                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html", "SingleChildScrollView" %} | "box in which a single widget can be scrolled"                                                                                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizedBox-class.html", "SizedBox" %}                           | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Transform-class.html", "Transform" %}                         | transforms its child by translating, rotating, and scaling it                                                                 |
 
 Details for some of the single-child layout widgets are provided below.
 
@@ -1234,6 +1235,139 @@ All their arguments are `double` values that default to `0` when not specified.
 | `EdgeInsets.all(value)`                                       | same on all four sides                      |
 | `EdgeInsets.symmetric({horizontal = 0, vertical = 0})`        | same for left/right and same for top/bottom |
 | `EdgeInsets.only({left = 0, right = 0, top = 0, bottom = 0})` | can differ on all four sides                |
+
+##### SingleChildScrollView Widget
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html",
+"SingleChildScrollView" %} widget allows a single child widget to be scrolled.
+It is most commonly wrapped around a `Row` or `Column` widget.
+When there is a need to scroll a large number of widgets vertically,
+using `ListView` is more efficient because it only renders the visible widgets.
+
+The following code demonstrates wrapping `SingleChildScrollView`
+around both a `Row` and a `Column`.
+It also demonstrates the alternative of using `ListView`.
+
+<img alt="Flutter SingleChildScrollView" style="width: 40%"
+    src="/blog/assets/flutter-singlechildscrollview.png?v={{pkg.version}}"
+    title="Flutter SingleChildScrollView">
+
+```dart
+import 'package:flutter/material.dart';
+
+extension WidgetExtension on Widget {
+  /// Wraps a widget in a Container that has a border.
+  Widget border({Color color = Colors.red}) {
+    return Container(
+      child: this,
+      decoration: BoxDecoration(border: Border.all(color: color)),
+    );
+  }
+
+  /// Wraps a widget in a Padding with given padding on all sides.
+  Widget padding(double size) {
+    return Padding(child: this, padding: EdgeInsets.all(size));
+  }
+}
+
+const itemCount = 20;
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Layout',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Home(),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My Demo'),
+      ),
+      body: Column(
+        children: [
+          ScrollableRow().border().padding(10),
+          SizedBox(
+            height: 200,
+            width: double.infinity,
+            child: ScrollableColumn(),
+          ).border().padding(10),
+          SizedBox(
+            height: 200,
+            child: MyListView(),
+          ).border().padding(10),
+        ],
+      ),
+    );
+  }
+}
+
+class ScrollableRow extends StatelessWidget {
+  const ScrollableRow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: <Widget>[
+          for (var i = 1; i <= itemCount; i++) Text('Text #$i').padding(5),
+        ],
+      ),
+    );
+  }
+}
+
+class ScrollableColumn extends StatelessWidget {
+  const ScrollableColumn({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          for (var i = 1; i <= itemCount; i++) Text('Text #$i').padding(5),
+        ],
+      ),
+    );
+  }
+}
+
+class MyListView extends StatelessWidget {
+  const MyListView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return Text('Text #${index + 1}').padding(5);
+      },
+      itemCount: itemCount,
+    );
+  }
+}
+```
 
 ##### Transform Widget
 
@@ -1907,6 +2041,7 @@ It takes a `text` argument whose value is a `TextSpan` widget
 with a `children` argument that is typically a `List` of `TextSpan` widgets.
 The top `TextSpan` widget can specify the
 default `style` for the child `TextSpan` widgets.
+Typically the text color must be specified because it defaults to white.
 The child `TextSpan` widgets can override that style.
 
 Highlights of the arguments that can be passed to the `RichText` constructor
@@ -3528,7 +3663,8 @@ The {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
 is is the state management approach recommended by the Flutter team.
 It is "A wrapper around `InheritedWidget`
 to make them easier to use and more reusable."
-It vastly reduces the amount of boilerplate code that must be written.
+It vastly reduces the amount of boilerplate code that must be written
+and provides many features not present in `InheritedWidget`.
 
 The {% aTargetBlank
 "https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple",
