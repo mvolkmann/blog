@@ -187,6 +187,10 @@ This document refers to both as a simulator.
 
 To create an app, enter `flutter create app_name`.
 Hyphens are not allowed in app names, but underscores are.
+This generates a basic counter app with a single page.
+To generate a starter app with navigation to multiple pages
+and a settings pages for selecting light/dark mode,
+enter `flutter create --template=skeleton app_name`.
 
 To run an app, cd to the app directory and enter `flutter run`.
 If the iOS Simulator is running, the app will run there.
@@ -453,6 +457,17 @@ This extension provides many things including:
   - Change SDK
   - Clean Project
   - Focus on Outline View
+  - Fix All
+
+    To configure VS Code to "Fix All" automatically on save,
+    all the following to `settings.json`:
+
+    ```json
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    ```
+
   - Get Packages
   - Hot Reload
 
@@ -2365,7 +2380,13 @@ class MyHomePage extends StatelessWidget {
 Many of these widgets render buttons, including
 `DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
 `IconButton`, and `TextButton`.
-An earlier widget named `FlatButton` has been deprecated.
+Flutter 2.0 renamed three button widgets.
+
+```text
+FlatButton    -> TextButton
+RaisedButton  -> ElevatedButton
+OutlineButton -> OutlinedButton
+```
 
 Basic usage of all of these widgets is demonstrated in the Flutter project at
 {% aTargetBlank "https://github.com/mvolkmann/flutter_input",
@@ -6196,11 +6217,15 @@ but it can be any widget and the drawing
 appears on top of what that widget renders.
 
 ```dart
-    return CustomPaint(
-      painter: _MyPainter(),
-      child: SizedBox(width: 200, height: 100),
-    );
+return CustomPaint(
+  painter: _MyPainter(),
+  child: SizedBox(width: 200, height: 100),
+);
 ```
+
+## Animations
+
+TODO: Add this section.
 
 ## Tests
 
@@ -7026,6 +7051,9 @@ The official package registry for Flutter is
 Search for packages or see categorized lists of
 "Flutter Favorites", "Most popular packages", "Top Flutter packages",
 "Top Dart packages", and "Package of the Week".
+
+Some popular packages from pub.dev are described
+on my {% aTargetBlank "/blog/topics/#/blog/dart", "Dart" %} page.
 
 To install a package in a Flutter project,
 enter `flutter pub add {package-name}`.

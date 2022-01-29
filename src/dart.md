@@ -118,6 +118,17 @@ and can depend on library packages.
 
 Some notable packages to consider using include:
 
+- {% aTargetBlank "https://pub.dev/packages/data_table_2", "data_table_2" %}
+
+  This is a "substitute for Flutter's stock `DataTable` and
+  `PaginatedDataTable` widgets with fixed header/sticky top row
+  and other useful features missing in the originals."
+
+- {% aTargetBlank "https://pub.dev/packages/drift", "drift" %}
+
+  "Drift is a reactive persistence library for Flutter and Dart,
+  built on top of sqlite."
+
 - {% aTargetBlank "https://pub.dev/packages/fpdart", "fpdart" %}
 
   "Functional programming in Dart and Flutter.
@@ -164,9 +175,31 @@ Some notable packages to consider using include:
   prefer_single_quotes: true
   ```
 
+- {% aTargetBlank "https://pub.dev/packages/nil", "nil" %}
+
+  This is "a simple widget to add in the widget tree
+  when you want to show nothing.
+  Sometimes, according to a condition, we want to display nothing.
+  Usually when we can't return null,
+  we would return something like const SizedBox()."
+
 - {% aTargetBlank "https://pub.dev/packages/sqflite", "sqflite" %}
 
   "SQLite plugin for Flutter."
+
+- {% aTargetBlank "https://pub.dev/packages/status_change", "status_change" %}
+
+  This is a Flutter widget that displays progress through a set of wizard steps.
+
+- {% aTargetBlank "https://pub.dev/packages/supabase", "supabase" %}
+
+  "Supabase is an open source Firebase alternative. We are a service to:"
+
+  - listen to database changes
+  - query your tables, including filtering, pagination, and deeply nested relationships (like GraphQL)
+  - create, update, and delete rows
+  - manage your users and their permissions
+  - interact with your database using a simple UI
 
 ## Creating and Running Programs
 
