@@ -3424,7 +3424,103 @@ TODO: Describe this as a way for child widgets to send data to their parent widg
 
 ### InheritedWidget
 
-TODO: Describe using this.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html",
+"InheritedWidget" %} class is a base class for
+classes that wish to share data with descendant widgets.
+They take a child widget to wrap around.
+Instances are immutable, but they can
+hold objects whose properties can be mutated.
+
+`InheritedWidget` does not provide a method to
+notify descendants of property changes.
+To achieve that, wrap it in a `StatefulWidget` or use `ChangeNotifier`.
+All of that gets fairly verbose.
+This is why using other state management solutions
+such as provider (discussed next) are more popular.
+
+Here is a basic example of using `InheritedWidget` just to pass data down.
+It does not provide a way to modify the data.
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class AppState {
+  var count = 19;
+  var name = 'Mark';
+}
+
+class InheritedState extends InheritedWidget {
+  final state = AppState();
+
+  InheritedState({
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
+
+  // This is a convenience method to make it easier
+  // for descendant widgets to get an instance.
+  static InheritedState of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<InheritedState>()
+          as InheritedState;
+
+  @override
+  bool updateShouldNotify(InheritedState oldWidget) {
+    return oldWidget.state != state;
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'InheritedWidget Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      // This wraps HomePage in InheritedState so
+      // any descendant widgets can get the state.
+      home: InheritedState(child: HomePage()),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('InheritedWidget Demo'),
+      ),
+      body: Center(
+        child: ChildWidget(),
+      ),
+    );
+  }
+}
+
+class ChildWidget extends StatelessWidget {
+  const ChildWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = InheritedState.of(context).state;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('count = ${state.count}'),
+        Text('name = ${state.name}'),
+      ],
+    );
+  }
+}
+```
 
 ### provider Library
 
@@ -7060,7 +7156,6 @@ enter `flutter pub add {package-name}`.
 This downloads the code to the `~/.pub-cache/hosted` directory
 which contains subdirectories like `pub.dartlang.org`.
 This allows the downloaded code to be shared
-between all of your Flutter projects.
 It also updates the dependency list in the `pubspec.yaml` file,
 which is the Flutter equivalent of a Node.js `package.json` file.
 
