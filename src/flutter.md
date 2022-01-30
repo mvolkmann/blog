@@ -1082,6 +1082,7 @@ The `AppBar` constructor takes the following named parameters and more:
 | `backgroundColor`  | `Color` of background                                        |
 | `bottom`           | `PreferredSizeWidget` displayed on bottom row (ex. `TabBar`) |
 | `centerTitle`      | `bool` defaults to `false`, but typically want `true`        |
+| `elevation`        | `double` defaults 4; set to 0 remove remove bottom shadow    |
 | `flexibleSpace`    | `Widget` stacked behind the toolbar and the bottom widget    |
 | `foregroundColor`  | `Color` of foreground                                        |
 | `leading`          | `Widget` displayed on left side of top row                   |
