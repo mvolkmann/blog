@@ -762,8 +762,8 @@ but it's not apparent how this can be done.
 
 All widget constructors must take an optional parameter
 named "key" that has the type "Key".
-This uniquely identifies a widget instance and is
-important when widgets will be added, removed, or reordered.
+This uniquely identifies sibling widget instances of the same type.
+It is important when widgets will be added, removed, or reordered.
 Often no key is necessary.
 One way to get a key value with the constructor call `UniqueKey()`.
 
@@ -822,7 +822,7 @@ which defines a single class:
 
 ```dart
 class SomeName extends StatelessWidget {
-  const SomeName({ Key? key }) : super(key: key);
+  const SomeName({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -885,7 +885,7 @@ which defines a pair of related classes:
 
 ```dart
 class SomeName extends StatefulWidget {
-  const SomeName ({ Key? key }) : super(key: key);
+  const SomeName ({Key? key}) : super(key: key);
 
   @override
   _SomeNameState createState() => _SomeNameState();
@@ -1046,6 +1046,7 @@ property are `primarySwatch` and `textTheme`.
 `primarySwatch` is a `MaterialColor` object that specifies
 many shades of colors to be used throughout the app.
 `textTheme` sets the styling of many kinds of text.
+TODO: How can you set the default color of all `Icon` widgets?
 
 For example:
 
