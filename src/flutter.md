@@ -1040,6 +1040,25 @@ The `MaterialApp` constructor takes the following named parameters and more:
 | `theme`        | `ThemeData` to use when running in light mode                                      |
 | `title`        | single-line `String` that describes the app; only rendered in Android task manager |
 
+The most common properties to set in {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ThemeData-class.html", "ThemeData" %}
+property are `primarySwatch` and `textTheme`.
+`primarySwatch` is a `MaterialColor` object that specifies
+many shades of colors to be used throughout the app.
+`textTheme` sets the styling of many kinds of text.
+
+For example:
+
+```dart
+theme: ThemeData(
+  primarySwatch: Colors.blue,
+  textTheme: TextTheme(
+    // Material default text style
+    bodyText2: TextStyle(color: Colors.purple),
+  ),
+),
+```
+
 #### Scaffold Widget
 
 The {% aTargetBlank
