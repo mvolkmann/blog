@@ -1545,7 +1545,8 @@ Thanks to Pat Niemeyer for this suggestion!
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/widgets/ListView-class.html", "ListView" %}
 widget displays a scrollable list of widgets.
-The list is vertical by default, but can be changed to horizontal.
+The list is vertical by default, but can be changed to horizontal
+by setting the `scrollDirection` named argument to `Axis.horizontal`.
 
 Scrolling widgets like `ListView` must
 be inside a widget that has a constrained size.
