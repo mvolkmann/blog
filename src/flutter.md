@@ -1067,6 +1067,8 @@ The {% aTargetBlank
 widget "implements the basic material design layout structure."
 The `MaterialApp` constructor `home` argument is typically set to a
 custom widget whose `build` method returns an instance of the `Scaffold` class.
+It is common for each "page" of an app to have its own `Scaffold`
+so it can customize the `AppBar`.
 
 The `Scaffold` constructor takes the following named parameters and more:
 
