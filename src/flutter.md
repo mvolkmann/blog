@@ -1162,6 +1162,54 @@ as an alternative to the `Scaffold` `botttomNavigationBar`.
 See the sample app in the GitHub repo {% aTargetBlank
 "https://github.com/mvolkmann/flutter_appbar", "flutter_appbar" %}.
 
+### Cuperino Structure Widgets
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/cupertino/cupertino-library.html",
+"cupertino library" %} defines widgets that implement iOS theming.
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/cupertino/CupertinoApp-class.html",
+"CupertinoApp" %} widget is topmost widget in Cupertino apps.
+
+The `CupertinoApp` constructor takes the following named parameters and more:
+
+| Parameter Name | Description                                                                        |
+| -------------- | ---------------------------------------------------------------------------------- |
+| `color`        | primary `Color`                                                                    |
+| `home`         | `Widget` to render for the default route ('/')                                     |
+| `initialRoute` | `String` name of first route to render when using `Navigator`                      |
+| `routes`       | `Map` of route names to `WidgetBuilder` instances                                  |
+| `theme`        | `CupertinoThemeData` for global styling                                            |
+| `title`        | single-line `String` that describes the app; only rendered in Android task manager |
+
+The `home` `Widget` is typically either a {% aTargetBlank
+"https://api.flutter.dev/flutter/cupertino/CupertinoPageScaffold-class.html",
+"CupertinoPageScaffold" %} or a {% aTargetBlank
+"https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html",
+"CuptertinonTabScaffold" %}.
+
+The `CupertinoPageScaffold` constructor takes the following named parameters and more:
+
+| Parameter Name    | Description                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| `backgroundColor` | `Color` for background                                                               |
+| `navigationBar`   | `Widget` to display at the bottom; typically an instance of `CupertinoNavigationBar` |
+
+The `CupertinoTabScaffold` constructor takes the following named parameters and more:
+
+| Parameter Name    | Description                                                                                                |
+| ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| `backgroundColor` | `Color` for background                                                                                     |
+| `tabBar`          | `CupertinoTabBar` to display at the bottom                                                                 |
+| `tabBuilder`      | `IndexedWidgetBuilder` function that returns tab content for a given index; typically a `CupertinoTabView` |
+
+Pages rendered for a specific tab can render `CupertinoPageScaffold` widgets
+to enable navigating through a different stack of pages for each tab.
+
+Note that neither Cupertino scaffold widget supports a `FloatingActionButton`.
+To render one in a Cupertino app, ... TODO: Finish this.
+
 ### Layout Widgets
 
 The layout widgets are documented at {% aTargetBlank
@@ -2631,6 +2679,34 @@ ElevatedButton(
   ),
 )
 ```
+
+#### FloatingActionButton
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/FloatingActionButton-class.html",
+"FloatingActionButton" %} widget "is a circular icon button
+that hovers over content to promote a primary action".
+
+Typically these are used as the value of the `floatingActionButton`
+argument to a scaffold.
+To customize the location, specify the
+scaffold argument `floatingActionButtonLocation`.
+
+| Argument          | Description                                               |
+| ----------------- | --------------------------------------------------------- |
+| `backgroundColor` | `Color` of button background                              |
+| `child`           | `Widget` to render inside button                          |
+| `foregroundColor` | `Color` of button foreground                              |
+| `isExtended`      | `bool` indicating                                         |
+| `mini`            | `bool` indicating if a smaller version should be rendered |
+| `onPressed`       | `VoidCallback` function to call when pressed              |
+
+TODO: Is the best way to add a FloatingActionButton to a Cupertino app
+TODO: to use the Scaffold widget?
+
+TODO: Document typical Cupertino widget hierarchy after the same for Material?
+
+TODO: Finish this
 
 #### TextField and TextFormField
 
