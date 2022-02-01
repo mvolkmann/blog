@@ -2606,7 +2606,7 @@ class MyHomePage extends StatelessWidget {
 }
 ```
 
-### Material Input Widgets
+### Input Widgets
 
 | Widget                                                                                                                | Description                                                                                                                        |
 | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -2650,7 +2650,7 @@ Basic usage of all of these widgets is demonstrated in the Flutter project at
 {% aTargetBlank "https://github.com/mvolkmann/flutter_input",
 "flutter_input" %}.
 
-#### ElevatedButton
+#### ElevatedButton Widget
 
 The most commonly used button widget is {% aTargetBlank
 "https://api.flutter.dev/flutter/material/ElevatedButton-class.html",
@@ -2685,35 +2685,43 @@ ElevatedButton(
 )
 ```
 
-#### FloatingActionButton
+#### FloatingActionButton Widget
 
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/material/FloatingActionButton-class.html",
 "FloatingActionButton" %} widget "is a circular icon button
 that hovers over content to promote a primary action".
+Typically these are used as the value of the
+`Scaffold` `floatingActionButton` argument.
 
-Typically these are used as the value of the `floatingActionButton`
-argument to a scaffold.
 To customize the location, specify the
-scaffold argument `floatingActionButtonLocation`.
+`Scaffold` `floatingActionButtonLocation` argument
+which takes constant defined in the {% aTargetBlank
+"https://api.flutter.dev/flutter/material/FloatingActionButtonLocation-class.html",
+"FloatingActionButtonLocation" %} class.
+Most of the constants place the button near the bottom of the screen,
+including the default of `endFloat`.
+Exceptions to this have names that end in "Top".
 
-| Argument          | Description                                               |
-| ----------------- | --------------------------------------------------------- |
-| `backgroundColor` | `Color` of button background                              |
-| `child`           | `Widget` to render inside button                          |
-| `foregroundColor` | `Color` of button foreground                              |
-| `isExtended`      | `bool` indicating                                         |
-| `mini`            | `bool` indicating if a smaller version should be rendered |
-| `onPressed`       | `VoidCallback` function to call when pressed              |
+The most commonly used constructor arguments are summaried below:
 
-TODO: Is the best way to add a FloatingActionButton to a Cupertino app
-TODO: to use the Scaffold widget?
+| Argument          | Description                                                                    |
+| ----------------- | ------------------------------------------------------------------------------ |
+| `backgroundColor` | `Color` of button background                                                   |
+| `child`           | `Widget` to render inside button                                               |
+| `foregroundColor` | `Color` of button foreground                                                   |
+| `mini`            | `bool` indicating if a smaller version should be rendered; defaults to `false` |
+| `onPressed`       | `VoidCallback` function to call when pressed                                   |
 
-TODO: Document typical Cupertino widget hierarchy after the same for Material?
+The named constructor `FloatingActionButton.large` is similar to
+the normal constructor, but creates a ridulously large button.
 
-TODO: Finish this
+The named constructor `FloatingActionButton.extended`
+removes the `child` argument, and adds the `icon` and `label` arguments.
+Rather than creating a circle button, tt creates an oval button
+in order to accommodate an icon on the left and a label on the right.
 
-#### TextField and TextFormField
+#### TextField and TextFormField Widgets
 
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/material/TextField-class.html",
@@ -3246,7 +3254,7 @@ import 'package:flutter/cupertino.dart';
 | {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoTextField-class.html", "CupertinoTextField" %}                                   | iOS-style input text field                                                                                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoTimerPicker-class.html", "CupertinoTimerPicker" %}                               | iOS-style wheel picker for entering hours, minutes, and seconds that represent a countdown timer                   |
 
-#### CupertinoDatePicker
+#### CupertinoDatePicker Widget
 
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/cupertino/CupertinoDatePicker-class.html",
@@ -3279,7 +3287,7 @@ Container(
 );
 ```
 
-#### CupertinoPicker
+#### CupertinoPicker Widget
 
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/cupertino/CupertinoPicker-class.html",
