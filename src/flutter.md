@@ -760,12 +760,52 @@ Supposedly one use is for finding ancestor styles
 so they can be applied to the current widget,
 but it's not apparent how this can be done.
 
+### Keys
+
 All widget constructors must take an optional parameter
 named "key" that has the type "Key".
-This uniquely identifies sibling widget instances of the same type.
-It is important when widgets will be added, removed, or reordered.
-Often no key is necessary.
-One way to get a key value with the constructor call `UniqueKey()`.
+Typically it is only necessary to specify keys when there is
+a possiblity that multiple sibling widget instances of the same type
+will be added, removed, or reordered in the widget tree.
+This can only occur in a `StatefulWidget`.
+
+Flutter keys have several uses:
+
+- preserve state when widgets are added, removed, or reordered
+- preserve scroll location
+
+Flutter provides two kinds of keys, `LocalKey` and `GlobalKey`.
+Local keys are only guaranteed to be unique within their parent widget.
+Global keys are guaranteed to be unique across the entire app.
+They are useful when the parent of widgets might change,
+ensuring that their key will remain unique amoung new sibling widgets.
+Global keys are also useful to render the same widget
+on multiple pages of an app.
+
+The `LocalKey` and `GlobalKey` classes serve as a
+superclass to the key classes described in the following table:
+
+| Key Superclass | Key Class          | Description                                                                      |
+| -------------- | ------------------ | -------------------------------------------------------------------------------- |
+| `LocalKey`     | `UniqueKey`        | automatically creates a unique key with no constructor argument                  |
+| `LocalKey`     | `ValueKey`         | uniqueness is based on a value passed to the constructor                         |
+| `LocalKey`     | `ObjectKey`        | uniqueness is based on the identity of an object passed to the constructor       |
+| `GlobalKey`    | `LabeledGlobalKey` | constructor takes a `String` useful for debugging, but not used for key identity |
+| `GlobalKey`    | `GlobalObjectKey`  | uniqueness is based on the identity of an object passed to the constructor       |
+
+Use "value" keys when widgets can be uniquely identified by a single value.
+For example, widgets that render information about people
+might be uniquely identified by their mobile phone number.
+
+Use "object" keys when widgets can be only be uniquely identified
+by a the collection of values in objects.
+For example, widgets that render information about dogs
+might only be uniquely identified by the combination
+of their name, breed, and owner.
+
+Use `UniqueKey` to guarantee that all widgets are distinct
+from all others regardless of their associate data
+or position within the widget tree.
 
 ### Child Widgets
 
@@ -1167,6 +1207,7 @@ are described below:
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FractionallySizedBox-class.html", "FractionallySizedBox" %}   | "sizes its child to a fraction of the total available space"; can specify `widthFactor`, `heightFactor`, and `alignment`      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html", "LayoutBuilder" %}                 | provides min/max width/height constraints that can be used to decide how/what a child component should render                 |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/LimitedBox-class.html", "LimitedBox" %}                       | "box that limits its size only when unconstrained"; useful for wrapping unconstrained children of a `ListView`                |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ListTile-class.html", "ListTile" %}                           | "single fixed-height row that typically contains some text as well as a leading or trailing icon"                             |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Padding-class.html", "Padding" %}                             | "insets its child by the given padding"                                                                                       |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html", "SingleChildScrollView" %} | "box in which a single widget can be scrolled"                                                                                |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizedBox-class.html", "SizedBox" %}                           | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
@@ -1240,6 +1281,10 @@ The `Flexible` widget behaves nearly identically to the `Expanded` widget.
 But a `Flexible` widget will take on
 the size of its child if the child has a fixed size.
 Otherwise it will choose its size just like `Expanded`.
+
+##### ListTile Widget
+
+TODO: Add more detail on this.
 
 ##### Padding Widget
 
@@ -1589,6 +1634,7 @@ class ColorList extends StatelessWidget {
           // This function is called once for each index value in itemCount
           // to programmatically create a child widgets.
           itemBuilder: (BuildContext context, int index) {
+            //TODO: Is it more common to use ListTile here?
             return SizedBox(
               height: 20,
               child: Text(names[index]),
