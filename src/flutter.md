@@ -1187,13 +1187,14 @@ The `home` `Widget` is typically either a {% aTargetBlank
 "https://api.flutter.dev/flutter/cupertino/CupertinoPageScaffold-class.html",
 "CupertinoPageScaffold" %} or a {% aTargetBlank
 "https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html",
-"CuptertinonTabScaffold" %}.
+"CupertinoTabScaffold" %}.
 
 The `CupertinoPageScaffold` constructor takes the following named parameters and more:
 
 | Parameter Name    | Description                                                                          |
 | ----------------- | ------------------------------------------------------------------------------------ |
 | `backgroundColor` | `Color` for background                                                               |
+| `child`           | `Widget` that provides the primary content                                           |
 | `navigationBar`   | `Widget` to display at the bottom; typically an instance of `CupertinoNavigationBar` |
 
 The `CupertinoTabScaffold` constructor takes the following named parameters and more:
@@ -1208,7 +1209,11 @@ Pages rendered for a specific tab can render `CupertinoPageScaffold` widgets
 to enable navigating through a different stack of pages for each tab.
 
 Note that neither Cupertino scaffold widget supports a `FloatingActionButton`.
-To render one in a Cupertino app, ... TODO: Finish this.
+To render one in a Cupertino app,
+set the `CupertinoPageScaffold` `child` argument to a `Scaffold` widget
+and set the `Scaffold` `floatingActionButton` argument.
+For an example, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_floatingactionbutton", "GitHub repo" %}.
 
 ### Layout Widgets
 
