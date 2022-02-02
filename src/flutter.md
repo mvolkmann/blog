@@ -1347,21 +1347,23 @@ It is frequently used inside a `List` widget.
 
 The most commonly used constructor arguments are summaried below:
 
-| Argument            | Description                                                                          |
-| ------------------- | ------------------------------------------------------------------------------------ |
-| `enabled`           | `bool` indicating whether it can be selected                                         |
-| `iconColor`         | `Color` of icons                                                                     |
-| `isThreeLine`       | `bool` indicating whether extra vertical space should be reserved for the `subtitle` |
-| `leading`           | `Widget` placed at the beginning; typically an icon                                  |
-| `onTap`             | `GestureTapCallback` function to call when tapped                                    |
-| `selected`          | `bool` indicating whether it is selected                                             |
-| `selectedColor`     | `Color` of background when selected                                                  |
-| `selectedTileColor` | `Color` of background when selected                                                  |
-| `subtitle`          | `Widget` placed in the center, below the `title`                                     |
-| `textColor`         | `Color` of text                                                                      |
-| `tileColor`         | `Color` of background when not selected                                              |
-| `title`             | `Widget` placed in the center                                                        |
-| `trailing`          | `Widget` placed at the end; typically an icon                                        |
+| Argument            | Description                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `enabled`           | `bool` indicating whether it can be selected                                          |
+| `contentPadding`    | `EdgeInsets` that defaults to `EdgeInsets.symmetric(horizontal: 16)`                  |
+| `iconColor`         | `Color` of icons                                                                      |
+| `isThreeLine`       | `bool` indicating whether extra vertical space should be reserved for the `subtitle`  |
+| `leading`           | `Widget` placed at the beginning; typically an icon                                   |
+| `onTap`             | `GestureTapCallback` function to call when tapped                                     |
+| `selected`          | `bool` indicating whether it is selected                                              |
+| `selectedColor`     | `Color` of background when selected                                                   |
+| `selectedTileColor` | `Color` of background when selected                                                   |
+| `subtitle`          | `Widget` placed in the center, below the `title`                                      |
+| `textColor`         | `Color` of text                                                                       |
+| `tileColor`         | `Color` of background when not selected                                               |
+| `title`             | `Widget` placed in the center                                                         |
+| `trailing`          | `Widget` placed at the end; typically an icon                                         |
+| `visualDensity`     | `VisualDensity` constant that specifies "how compact the listt tile's layout will be" |
 
 If the `subtitle` argument is set to a `Text` widget,
 it will wrap to any number of lines and respects newline characters.
@@ -1680,7 +1682,8 @@ Thanks to Pat Niemeyer for this suggestion!
 
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/widgets/ListView-class.html", "ListView" %}
-widget displays a scrollable list of widgets.
+widget displays a scrollable list of widgets
+that are often `ListTile` widgets.
 The list is vertical by default, but can be changed to horizontal
 by setting the `scrollDirection` named argument to `Axis.horizontal`.
 
@@ -1717,18 +1720,22 @@ class ColorList extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.all(10),
       child: SizedBox(
-        height: 100,
-        child: ListView.builder(
+        height: 300,
+        child: ListView.separated(
           itemCount: names.length,
           // This function is called once for each index value in itemCount
           // to programmatically create a child widgets.
           itemBuilder: (BuildContext context, int index) {
-            //TODO: Is it more common to use ListTile here?
-            return SizedBox(
-              height: 20,
-              child: Text(names[index]),
+            return ListTile(
+              contentPadding: EdgeInsets.all(0), // removes horizontal padding
+              title: Text(names[index]),
+              visualDensity: VisualDensity.compact,
             );
           },
+          separatorBuilder: (_, index) => Divider(
+            color: Colors.black45,
+            height: 1,
+          ),
         ),
       ),
     );
