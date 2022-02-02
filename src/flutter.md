@@ -2694,15 +2694,6 @@ that hovers over content to promote a primary action".
 Typically these are used as the value of the
 `Scaffold` `floatingActionButton` argument.
 
-To customize the location, specify the
-`Scaffold` `floatingActionButtonLocation` argument
-which takes constant defined in the {% aTargetBlank
-"https://api.flutter.dev/flutter/material/FloatingActionButtonLocation-class.html",
-"FloatingActionButtonLocation" %} class.
-Most of the constants place the button near the bottom of the screen,
-including the default of `endFloat`.
-Exceptions to this have names that end in "Top".
-
 The most commonly used constructor arguments are summaried below:
 
 | Argument          | Description                                                                    |
@@ -2712,6 +2703,20 @@ The most commonly used constructor arguments are summaried below:
 | `foregroundColor` | `Color` of button foreground                                                   |
 | `mini`            | `bool` indicating if a smaller version should be rendered; defaults to `false` |
 | `onPressed`       | `VoidCallback` function to call when pressed                                   |
+
+To customize the location of the button, specify the
+`Scaffold` `floatingActionButtonLocation` argument
+which takes constant defined in the {% aTargetBlank
+"https://api.flutter.dev/flutter/material/FloatingActionButtonLocation-class.html",
+"FloatingActionButtonLocation" %} class.
+Most of the constants place the button near the bottom of the screen,
+including the default of `endFloat` which places it in the lower-right corner.
+Constants with names names that end in "Top"
+place the button near the top of the screen.
+Constants with names that begin with "mini"
+do not reduce the size of the button.
+Instead the correctly position the button
+when its `mini` argument is set to `true`.
 
 The named constructor `FloatingActionButton.large` is similar to
 the normal constructor, but creates a ridulously large button.
@@ -3318,6 +3323,25 @@ Container(
   height: 150, // height of wheel; affects # of visible items
 );
 ```
+
+## Swipe to Delete
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/Dismissible-class.html",
+"Dismissible" %} widget allows a widget to be dragged out of view.
+The `onDismissed` argument can be set to a function
+to a function that typically updates the state
+so the widget will not be rendered again.
+
+Typically widgets that can be dismissed are
+displayed in a `List` containing `ListTile` widgets.
+
+TODO: Show a simple example
+
+One downside of the `Dismissible` widget is that it does not
+expose a delete button and wait for the user to tap it.
+This can be achieved by ...
+TODO: Finish this.
 
 ## Model-View-Controller
 
