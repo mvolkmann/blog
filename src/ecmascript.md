@@ -8,6 +8,8 @@ layout: topic-layout.njk
 
 - dynamic imports
 
+  This enables deciding what to import at runtime.
+
   ```js
   import('/some/name.js').then(module => {
     // use the module
