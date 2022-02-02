@@ -2781,7 +2781,7 @@ The highlights are described in the following table:
 | Argument       | Description                                                           |
 | -------------- | --------------------------------------------------------------------- |
 | `autoCorrect`  | `bool` indicating of the value should be auto-corrected               |
-| `controller`   | `TextEditingController` (described below)                             |
+| `controller`   | `TextEditingController` (described later)                             |
 | `decoration`   | `InputDecoration` that specifies styling details                      |
 | `keyboardType` | `TextInputType` that requests a certain kind of on-screen keyboard    |
 | `maxLength`    | `int` maximum length defaulting to no limit                           |
@@ -2789,7 +2789,7 @@ The highlights are described in the following table:
 | `obscureText`  | `bool` indicating of the value should be obscured (ex. for passwords) |
 | `onChanged`    | function called with new value when the user changes it               |
 | `readOnly`     | `bool` indicating if the value cannot currently be modified           |
-| `style`        | `TextStyle`                                                           |
+| `style`        | `TextStyle` of text being edited                                      |
 
 Specify the `maxLength` argument causes the number of characters entered
 and the maximum length to be displayed below the input, right justified.
@@ -2937,7 +2937,9 @@ class _MyPasswordFieldState extends State<MyPasswordField> {
 }
 ```
 
-Instances of the `TextEditingController` class can be passed to the
+Instances of the {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/TextEditingController-class.html",
+"TextEditingController" %} class can be passed to the
 `TextField` and `TextFormField` constructors in their `controller` argument.
 These objects specify the initial value,
 hold the current value (in their `text` property),
@@ -3252,14 +3254,6 @@ that supports scrolling using a `ListView` widget, do the following:
      ],
    )
    ```
-
-### Other Material Classes
-
-| Class              | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| `DefaultTextStyle` | style applied to text that doesn't have an explicit style |
-
-TODO: Add more here?
 
 ### Cupertino Widgets
 
@@ -3796,7 +3790,115 @@ setState(() {});
 
 ### Callback Functions
 
-TODO: Describe this as a way for child widgets to send data to their parent widgets.
+One way for a child widget to pass data to its parent widget
+is to pass a function from the parent to the child
+and have the child call the function with data to be shared.
+
+The following code demonstrates this approach.
+The `Home` widget renders a `Numbers` widget and passes it a callback function.
+The `Numbers` widget renders two `TextField` widgets
+where the user can enter numbers.
+When either `TextField` value is changed,
+it computes their sum and passes it to the parent widget, `Home`,
+using the callback function.
+
+```dart
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  var sum = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Callback Demo'),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Numbers(callback: (value) {
+              setState(() => sum = value);
+            }),
+            Text('The sum is $sum.'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+typedef NumbersCallback = void Function(int value);
+
+class Numbers extends StatefulWidget {
+  final NumbersCallback callback;
+
+  Numbers({required this.callback, Key? key}) : super(key: key);
+
+  @override
+  State<Numbers> createState() => _NumbersState();
+}
+
+class _NumbersState extends State<Numbers> {
+  final controller1 = TextEditingController();
+  final controller2 = TextEditingController();
+
+  @override
+  initState() {
+    super.initState();
+    // When the text in either TextField is changed,
+    // compute a new sum and send to the parent widget
+    // using the callback function.
+    controller1.addListener(compute);
+    controller2.addListener(compute);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        _buildTextField(controller: controller1),
+        Icon(Icons.add),
+        _buildTextField(controller: controller2),
+      ],
+    );
+  }
+
+  Widget _buildTextField({required TextEditingController controller}) {
+    return SizedBox(
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+        ),
+        keyboardType: TextInputType.number,
+      ),
+      width: 70,
+    );
+  }
+
+  void compute() {
+    var number1 = controllerToInt(controller1);
+    var number2 = controllerToInt(controller2);
+    widget.callback(number1 + number2);
+  }
+
+  int controllerToInt(TextEditingController controller) {
+    try {
+      // int.parse throws if the text cannot be converted to an int.
+      return int.parse(controller.value.text);
+    } catch (e) {
+      return 0;
+    }
+  }
+}
+```
 
 ### InheritedWidget
 
