@@ -5511,12 +5511,28 @@ class HelpPage extends StatelessWidget {
 }
 ```
 
-The app class, typically defined in `lib/main.dart`, can register named routes
-with the `routes` argument to the `MaterialApp` widget.
+To navigate to a new page, push it onto the navigation stack.
+One way to do this is to specify the widget responsible for
+rendering the new page with the {% aTargetBlank
+"https://api.flutter.dev/flutter/material/MaterialPageRoute-class.html",
+"MaterialPageRoute" %} class.
+For example:
+
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => SomeWidget()),
+);
+```
+
+To programmatically return to the previous page call `Navigator.pop(context)`.
+
+Another approach is for the app class, typically defined in `lib/main.dart`,
+to register named routes with the `routes` argument to the `MaterialApp` widget.
 Assigning names to routes makes it easier to
 refer to them from multiple widgets.
 It is recommended to define route names as static constants in each page class,
-(as shown above) except the page class for the home route.
+(as shown above) except for the page class of the home route.
 For example:
 
 ```dart
@@ -5564,8 +5580,6 @@ add the following line in the `build` method:
 ```dart
 final arguments = ModalRoute.of(context)!.settings.arguments;
 ```
-
-To programmatically return to the previous page call `Navigator.pop(context)`.
 
 Routes are not required to be named.
 Call the `Navigator.push` method to
@@ -6804,7 +6818,7 @@ return CustomPaint(
 
 ## Animations
 
-TODO: Add this section.
+TODO: Finish this section.
 
 ## Tests
 
