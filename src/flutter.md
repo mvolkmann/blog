@@ -1337,6 +1337,38 @@ Otherwise it will choose its size just like `Expanded`.
 
 ##### ListTile Widget
 
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ListTile-class.html",
+"ListTile" %} widget renders a fixed-height row that contains text
+and optional leading and trailing icons.
+It is frequently used inside a `List` widget.
+
+The most commonly used constructor arguments are summaried below:
+
+| Argument            | Description                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------ |
+| `enabled`           | `bool` indicating whether it can be selected                                         |
+| `iconColor`         | `Color` of icons                                                                     |
+| `isThreeLine`       | `bool` indicating whether extra vertical space should be reserved for the `subtitle` |
+| `leading`           | `Widget` placed at the beginning; typically an icon                                  |
+| `onTap`             | `GestureTapCallback` function to call when tapped                                    |
+| `selected`          | `bool` indicating whether it is selected                                             |
+| `selectedColor`     | `Color` of background when selected                                                  |
+| `selectedTileColor` | `Color` of background when selected                                                  |
+| `subtitle`          | `Widget` placed in the center, below the `title`                                     |
+| `textColor`         | `Color` of text                                                                      |
+| `tileColor`         | `Color` of background when not selected                                              |
+| `title`             | `Widget` placed in the center                                                        |
+| `trailing`          | `Widget` placed at the end; typically an icon                                        |
+
+If the `subtitle` argument is set to a `Text` widget,
+it will wrap to any number of lines and respects newline characters.
+This allows each `ListTile` instance to have a different height.
+
+If the `isThreeLine` argument is set to `true`,
+space for a minimum of two lines of subtitle will be reserved
+regardless of whether the subtitle needs two lines.
+
 TODO: Add more detail on this.
 
 ##### Padding Widget
