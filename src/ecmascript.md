@@ -51,7 +51,7 @@ layout: topic-layout.njk
 
   supports arbitrarily large integer values
 
-- `String` `matchAlls` method
+- `String` `matchAll` method
 
   returns iterator over all matches of a
   regular expression that must have "g" flag
