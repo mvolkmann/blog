@@ -1340,7 +1340,9 @@ Otherwise it will choose its size just like `Expanded`.
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/material/ListTile-class.html",
 "ListTile" %} widget renders a fixed-height row that contains text
-and optional leading and trailing icons.
+and optional leading and trailing widgets that are typically icons.
+By default the text is left justified in the space that remains
+after the leading and trailing widgets take their space.
 It is frequently used inside a `List` widget.
 
 The most commonly used constructor arguments are summaried below:
