@@ -7,7 +7,7 @@ layout: topic-layout.njk
 ## Overview
 
 <img alt="Dart logo" style="width: 40%"
-    src="/blog/assets/Dart-logo.png?v={{pkg.version}}"
+    src="/blog/assets/dart-logo.png?v={{pkg.version}}"
     title="Dart logo">
 
 {% aTargetBlank "https://dart.dev", "Dart" %} is a

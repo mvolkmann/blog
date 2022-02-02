@@ -1369,6 +1369,10 @@ If the `isThreeLine` argument is set to `true`,
 space for a minimum of two lines of subtitle will be reserved
 regardless of whether the subtitle needs two lines.
 
+If the `enabled` argument is set to `false`,
+the color of all the widgets inside is changed to light gray
+and taps and long presses are ignored.
+
 TODO: Add more detail on this.
 
 ##### Padding Widget
