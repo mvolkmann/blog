@@ -3267,6 +3267,16 @@ To use Cupertino widgets in a Dart source file, add the following import:
 import 'package:flutter/cupertino.dart';
 ```
 
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/cupertino/CupertinoColors-class.html",
+"CupertinoColors" %} class defines constants for colors
+that are commonly used in iOS apps.
+The type of these constants is `CupertinoDynamicColor` which extends `Color`,
+so they can be used anywhere a `Color` value is expected.
+Examples include `activeBlue`, `destructiveRed`, `inactiveGray`,
+`label`, `lightBackgroundGray`, `link`, `placeholderText`,
+`separator`, `systemBackground`, and `systemBlue`.
+
 | Widget                                                                                                                                               | Description                                                                                                        |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoActionSheet-class.html", "CupertinoActionSheet" %}                               | modal that slides up from bottom to allow selection from a set of options; sometimes used for confirmation dialogs |
