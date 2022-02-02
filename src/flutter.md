@@ -1375,8 +1375,6 @@ If the `enabled` argument is set to `false`,
 the color of all the widgets inside is changed to light gray
 and taps and long presses are ignored.
 
-TODO: Add more detail on this.
-
 ##### Padding Widget
 
 The {% aTargetBlank
@@ -3367,19 +3365,24 @@ Container(
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/widgets/Dismissible-class.html",
 "Dismissible" %} widget allows a widget to be dragged out of view.
-The `onDismissed` argument can be set to a function
-to a function that typically updates the state
-so the widget will not be rendered again.
+The `onDismissed` argument can be set to a function that usually
+updates the state so the widget will not be rendered again.
 
 Typically widgets that can be dismissed are
 displayed in a `List` containing `ListTile` widgets.
 
-TODO: Show a simple example
-
-One downside of the `Dismissible` widget is that it does not
-expose a delete button and wait for the user to tap it.
-This can be achieved by ...
-TODO: Finish this.
+Using the `Dismissble` widget is not a good option for
+implementing a list with "swipe to delete" behavior.
+While a background containing a "Delete" button
+can be exposed when the user drags a tile to the left,
+it is hidden when they release the tile
+which gives them no opportunity to tap the button.
+A better option is to use the {% aTargetBlank
+"https://pub.dev/packages/flutter_swipe_action_cell",
+"flutter_swipe_action_cell" %} library.
+For an example, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_dismissible/blob/main/lib/main.dart",
+"GitHub repo" %}.
 
 ## Model-View-Controller
 
