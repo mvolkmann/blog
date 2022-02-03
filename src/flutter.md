@@ -6829,10 +6829,8 @@ For official documentation on Flutter animations, see {% aTargetBlank
 This page contains six videos on the topic
 and a flow chart for deciding which kind of animation to use.
 
-Implicit animations are supported by many provided widgets
-whose names begin with "Animated".
-It is also possible to create custom widgets that support animation
-by using `TweenAnimationBuilder`.
+Implicit animations are supported by many provided widgets,
+most of whose names begin with "Animated".
 There are animated versions of many non-animated widgets.
 These include
 `AnimatedAlign`,
@@ -6863,6 +6861,9 @@ These include
 `ScaleTransition`,
 `SizeTransition`, and
 `SlideTransition`.
+
+It is also possible to define custom widgets that support implicit animation
+using `TweenAnimationBuilder`.
 
 Explicit animations are used in cases where an animation
 needs to occur repeatedly or when fine-grained control is needed.
