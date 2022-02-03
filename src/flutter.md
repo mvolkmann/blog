@@ -6822,6 +6822,10 @@ return CustomPaint(
 
 ## Animations
 
+Flutter animations provide a way to rebuild parts of the widget tree
+on every frame with a goal of rendering at least 60 frames per second (fps).
+Typically Flutter widget building is fast enough to support this.
+
 For official documentation on Flutter animations, see {% aTargetBlank
 "https://docs.flutter.dev/development/ui/animations",
 "Introduction to animations" %}.
@@ -7037,6 +7041,100 @@ class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
     if (widget.onComplete != null) future.whenComplete(widget.onComplete!);
 
     return transition;
+  }
+}
+```
+
+#### Animation From Scratch
+
+The code in this section demonstrates how
+most Flutter animations work under the covers.
+
+First, let's see how we can implement animatating a number from 0 to 100
+over a duration of 5 seconds in the easiest way possible.
+
+```dart
+import 'package:flutter/material.dart';
+
+class HighLevelAnimation extends StatelessWidget {
+  const HighLevelAnimation({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder(
+      tween: IntTween(begin: 0, end: 100),
+      duration: const Duration(seconds: 5),
+      builder: (BuildContext context, int number, Widget? child) {
+        return Text('$number');
+      },
+    );
+  }
+}
+```
+
+Now let's see how this can be implemented using lower level Flutter classes.
+Typically it isn't necessary to work at this level,
+but it is interesting to get a taste of how
+higher level animations are actually implemented.
+
+Objects from the `Ticker` class take a function
+and invoke it once per animation frame
+after their `start` method is called.
+Their `dispose` method should be called when they are no longer needed.
+
+To simplify managing a `Ticker`, apply the `SingleTTickerProviderStateMixin`
+mixin to the `State` of a `StatefulWidget`.
+
+An `AnimationController` object can get a `Ticker` instance from such a class
+by setting its `vsync` constructor argument to `this`.
+Call the `addListener` method of the controller
+to register a funtion to be called once per animation frame.
+This can update the state of the widget
+which can change what the widget renders.
+Call the `forward` method of the controller to start the animation.
+
+```dart
+import 'package:flutter/material.dart';
+
+class LowLevelAnimation extends StatefulWidget {
+  const LowLevelAnimation({Key? key}) : super(key: key);
+
+  @override
+  _LowLevelAnimationState createState() => _LowLevelAnimationState();
+}
+
+class _LowLevelAnimationState extends State<LowLevelAnimation>
+    with SingleTickerProviderStateMixin<LowLevelAnimation> {
+  late AnimationController _controller;
+  int number = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(seconds: 5),
+      vsync: this,
+    );
+    _controller.addListener(_update);
+    _controller.forward(); // starts animation
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _update() {
+    setState(() {
+      // _controller.value is a number between 0 and 1.
+      number = (_controller.value * 100).round();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('$number');
   }
 }
 ```
