@@ -7009,8 +7009,12 @@ but uses a larger values for `height` and `width`.
 When the user navigates from one page to the other,
 the `Hero` `child` in the current page will
 animate to the `Hero` `child` in the new page.
-This provides a nice effect that keeps the attention
-of the user focused on the `Hero` content.
+In our example this works when navigating
+from the list view to the detail view,
+and also when navigating back to the list view.
+
+The `Hero` widget provides a nice effect that
+keeps the attention of the user focused on the `Hero` content.
 
 ### Custom Implicit Animation
 
