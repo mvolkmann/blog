@@ -6958,11 +6958,14 @@ widget instances to be created at compile time.
 ### Custom Explicit Animation
 
 As an examle of a custom explicit animation,
-we can define a `FadeIn` widget that takes
-a `child` argument whose value is a `Widget` and
-a `duration` argument whose value is a `Duration`.
+we can define a `FadeIn` widget that takes three arguments.
+The `child` argument takes the `Widget` to fade into view.
+The optional `duration` argument takes the `Duration` over which to fade in
+and defaults to one second.
+The optional `onComplete` argument takes a `VoidCallback`
+to call when the animation completes.
 
-It can be used as follows:
+The `FadeIn` widget can be used as follows:
 
 ```dart
 FadeIn(
@@ -6984,10 +6987,12 @@ class FadeIn extends StatefulWidget {
 
   final Widget child;
   final Duration duration;
+  final VoidCallback? onComplete;
 
   FadeIn({
     required this.child,
     this.duration = defaultDuration,
+    this.onComplete,
     Key? key,
   }) : super(key: key);
 
@@ -7014,7 +7019,12 @@ class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
       opacity: _animation,
       child: widget.child,
     );
-    _controller.forward(); // starts the animation
+
+    // Start the animation.
+    var future = _controller.forward();
+
+    if (widget.onComplete != null) future.whenComplete(widget.onComplete!);
+
     return transition;
   }
 }
