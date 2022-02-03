@@ -5515,7 +5515,11 @@ To navigate to a new page, push it onto the navigation stack.
 One way to do this is to specify the widget responsible for
 rendering the new page with the {% aTargetBlank
 "https://api.flutter.dev/flutter/material/MaterialPageRoute-class.html",
-"MaterialPageRoute" %} class.
+"MaterialPageRoute" %} or {% aTargetBlank
+"https://api.flutter.dev/flutter/cupertino/CupertinoPageRoute-class.html",
+"CupertinoPageRoute" %} class.
+These differ in the transition animation they provide.
+
 For example:
 
 ```dart
