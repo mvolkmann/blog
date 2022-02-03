@@ -6818,6 +6818,12 @@ return CustomPaint(
 
 ## Animations
 
+For official documentation on Flutter animations, see {% aTargetBlank
+"https://docs.flutter.dev/development/ui/animations",
+"Introduction to animations" %}.
+This page contains six videos on the topic
+and a flow chart for deciding which kind of animation to use.
+
 Flutter supports two kinds of animations, implicit and explict.
 Implicit animations are generally easier to use, but provide less control.
 Explicit animations are generally more difficult to use,
@@ -6848,23 +6854,19 @@ These are listed in the table below.
 | `position`              | `AnimatedPositioned` and `AnimatedPositionedDirectional` | `PositionedTransition`, `RelativePositionedTransition`, and `SlideTransition` |
 | `rotation`              | `AnimatedRotation`                                       | `RotationTransition`                                                          |
 | `scale`                 | `AnimatedScale`                                          | `ScaleTransition`                                                             |
+| `shadow`                | `AnimatedPhysicalModel`                                  |                                                                               |
 | `size`                  | `AnimatedSize`                                           | `SizeTransition`                                                              |
 | text style              | `AnimatedDefaultTextStyle`                               | `DefaultTextStyleTransition`                                                  |
 | widget pair showing one | `AnimatedSwitcher` and `AnimatedCrossFade`               |                                                                               |
 
-Other implicit animations include `AnimatedBuilder`, `AnimatedModalBarrier`,
-`AnimatedPhysicalModel`, `AnimatedWidget`, and `AnimatedWidgetBaseState`.
-
-Other explicit animations include `Hero`?
-
 In order of difficulty from easiest to most difficult,
 the options for implementing animattions are
 
-1. `Animated{property}`
-1. `TweenAnimationBuilder`
-1. `{property}Transition`
-1. `AnimatedWidget`
-1. `CustomPainter`
+1. Built-in implicit animations: `Animated{property}`
+1. Custom implicit animations": `TweenAnimationBuilder`
+1. Built-in explicit animations: `{property}Transition`
+1. Custom explicit animations: `AnimatedWidget`
+1. Custom drawing animations: `CustomPainter`
 
 ### Implicit Animations
 
@@ -6888,20 +6890,36 @@ class for a graphical represenation of each of the built-in easing curves.
 Some easing curves bounce, meaning that the direction of the animation
 reverses at some point and then goes forward again, possibly multiple times.
 
-`AnimatedContainer` provides implicit animation of multiple properties.
+The `AnimatedModalBarrier` widget is an animated version
+of the `ModalBarrier` widget.
+Both prevent interaction with widgets that are behind it.
+They are typically used to implement modal dialogs.
 
-`TweenAnimationBuilder` is used to create custom implicit animations.
+The `AnimatedPhysicalModel` widget is an animated version
+of the `PhysicalModel` widget.
+Both add a shadow to a shape based on `elevation` and other arguments.
+
+The `AnimatedContainer` widget provides
+implicit animation of multiple properties.
+
+The `TweenAnimationBuilder` class is used to create custom implicit animations.
 
 ### Explicit Animations
 
 Built-in explicit animations have names of the form “{property}Transition”.
 For custom "standalone" explicit animations,
 consider creating a class that extends `AnimatedWidget`.
-Otherwise use `AnimatedBuilder`.
+Otherwise create custom explicit animations using `AnimatedBuilder`.
 If these approaches have performance issues, consider using `CustomPainter`.
 
 Built-in explicit animations all extend `AnimatedWidget`.
+This automatically rebuilds when a given `Listenable` changes.
 
+The {% aTargetBlank
+"https://docs.flutter.dev/development/ui/animations/hero-animations",
+"Hero" %} widget animates a widget between two routes or pages.
+
+TODO: This seems to not be true!
 Explict animations require the use of an `AnimationController`
 that is maintained inside a `StatefulWidget`
 that mixes in `SingleTickerProviderStateMixin` (using the “with” keyword).
@@ -6916,61 +6934,26 @@ The `AnimationController` constructor takes the arguments
 Add `..repeat()` at end of the `AnimationController` constructor call
 to repeat forever.
 
+TODO: This seems to not be true!
+TODO: I haven't found which widget constructors have an argument of this type.
 Pass an `AnimationController` instance to
 the `controller` argument of an explicit animation.
 
-The controller has the methods “stop”, “repeat” (to restart), animateTo(value-btw-0-and-1), and fling(velocity) (to advance to a new value).
+The controller has the methods `stop`, `repeat` (to restart),
+`animateTo(value-btw-0-and-1)`, and
+`fling(velocity)` (to advance to a new value).
 Multiple animations can be controlled by the same controller instance.
 
 Explicit animations can be composed to perform multiple, simultaneous animations.
 
-AnimatedWidget and AnimatedBuilder are used together to create a custom explicit animation.
-AnimatedBuilder takes a “child” argument which is used to avoid recreating the widget that is being animated on each animation change. This is a performance optimization. Note that this is not necessary if the widget being animated has a const constructor because that allows widget instances to be created at compile time.
-
-For official documentation on Flutter animations, see {% aTargetBlank
-"https://docs.flutter.dev/development/ui/animations",
-"Introduction to animations" %}.
-This page contains six videos on the topic
-and a flow chart for deciding which kind of animation to use.
-
-Implicit animations are supported by many provided widgets,
-most of whose names begin with "Animated".
-There are animated versions of many non-animated widgets.
-These include
-`AnimatedAlign`,
-`AnimatedBuilder`,
-`AnimatedContainer`,
-`AnimatedCrossFade`,
-`AnimatedDefaultTextStyle`,
-`AnimatedList`,
-`AnimatedListState`,
-`AnimatedModalBarrier`,
-`AnimatedOpacity`,
-`AnimatedPadding`,
-`AnimatedPhysicalModel`,
-`AnimatedPositioned`,
-`AnimatedPositionedDirectional`,
-`AnimatedRotation`,
-`AnimatedScale`,
-`AnimatedSize`,
-`AnimatedSlide`,
-`AnimatedSwitcher`,
-`AnimatedWidget`,
-`AnimatedWidgetBaseState`,
-`DecoratedBoxTransition`,
-`FadeTransition`,
-`Hero`,
-`PositionedTransition`,
-`RotationTransition`,
-`ScaleTransition`,
-`SizeTransition`, and
-`SlideTransition`.
-
-It is also possible to define custom widgets that support implicit animation
-using `TweenAnimationBuilder`.
-
-Explicit animations are used in cases where an animation
-needs to occur repeatedly or when fine-grained control is needed.
+`AnimatedWidget` and `AnimatedBuilder` are used together
+to create a custom explicit animation.
+`AnimatedBuilder` takes a `child` argument which is used to
+avoid recreating the widget that is being animated on each animation change.
+This is a performance optimization.
+Note that this is not necessary if the widget being animated
+has a `const` constructor because that allows
+widget instances to be created at compile time.
 
 ### Animated Drawings
 
