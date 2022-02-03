@@ -6955,6 +6955,71 @@ Note that this is not necessary if the widget being animated
 has a `const` constructor because that allows
 widget instances to be created at compile time.
 
+### Custom Explicit Animation
+
+As an examle of a custom explicit animation,
+we can define a `FadeIn` widget that takes
+a `child` argument whose value is a `Widget` and
+a `duration` argument whose value is a `Duration`.
+
+It can be used as follows:
+
+```dart
+FadeIn(
+  child: Text(
+    'This text will fade in.',
+    style: TextStyle(fontSize: 30),
+  ),
+  duration: Duration(seconds: 2),
+),
+```
+
+The implementation of `FadeIn` follows:
+
+```dart
+import 'package:flutter/material.dart';
+
+class FadeIn extends StatefulWidget {
+  static const defaultDuration = Duration(seconds: 1);
+
+  final Widget child;
+  final Duration duration;
+
+  FadeIn({
+    required this.child,
+    this.duration = defaultDuration,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<FadeIn> createState() => _FadeInState();
+}
+
+class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
+  late Animation<double> _animation;
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var transition = FadeTransition(
+      opacity: _animation,
+      child: widget.child,
+    );
+    _controller.forward(); // starts the animation
+    return transition;
+  }
+}
+```
+
 ### Animated Drawings
 
 For animations of drawings rather than widgets,
