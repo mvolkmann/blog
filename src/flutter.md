@@ -7057,6 +7057,9 @@ class FadeIn extends StatelessWidget {
     return TweenAnimationBuilder(
       child: child,
       duration: duration,
+      // This tweens between two double values.
+      // It is also possible to tween between
+      // non-numeric values such as colors.
       tween: Tween(begin: 0.0, end: 1.0),
       builder: (_, double value, Widget? child) =>
           Opacity(child: child, opacity: value),
