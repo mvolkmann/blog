@@ -6944,9 +6944,19 @@ TODO: I haven't found which widget constructors have an argument of this type.
 Pass an `AnimationController` instance to
 the `controller` argument of an explicit animation.
 
-The controller has the methods `stop`, `repeat` (to restart),
-`animateTo(value-btw-0-and-1)`, and
-`fling(velocity)` (to advance to a new value).
+The most commonly used `AnimationController` methods are described below:
+
+| Method                      | Description                                                  |
+| --------------------------- | ------------------------------------------------------------ |
+| `addListener(VoidCallback)` | listens for value changes; sometimes used to call `setState` |
+| `animateTo(double target)`  | animates value from current to target                        |
+| `dispose()`                 | frees resources                                              |
+| `forward()`                 | animates value from `lowerBound` to `upperBound`             |
+| `repeat()`                  | same as `forward`, but repeats when end is reached           |
+| `reset()`                   | stops animation and sets value to `lowerBound`               |
+| `reverse()`                 | animates value from `upperBound` to `lowerBound`             |
+| `stop()`                    | stops animation                                              |
+
 Multiple animations can be controlled by the same controller instance.
 
 Explicit animations can be composed to perform multiple, simultaneous animations.
