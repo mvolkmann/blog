@@ -7018,6 +7018,13 @@ class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
   }
 
   @override
+  dispose() {
+    _controller.dispose();
+    // _animation does not have a dispose method.
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var transition = FadeTransition(
       opacity: _animation,
