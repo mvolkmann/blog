@@ -6963,9 +6963,9 @@ Note that this is not necessary if the widget being animated
 has a `const` constructor because that allows
 widget instances to be created at compile time.
 
-### Custom Explicit Animation
+### Custom Implicit Animation
 
-As an examle of a custom explicit animation,
+As an example of a custom explicit animation,
 we can define a `FadeIn` widget that takes three arguments.
 The `child` argument takes the `Widget` to fade into view.
 The optional `duration` argument takes the `Duration` over which to fade in
@@ -6984,6 +6984,64 @@ FadeIn(
   duration: Duration(seconds: 2),
 ),
 ```
+
+This can be implemented by a `StatefulWidget`
+that renders an `AnimatedOpacity` widget as follows:
+
+```dart
+import 'package:flutter/material.dart';
+
+class FadeIn extends StatefulWidget {
+  static const defaultDuration = Duration(seconds: 1);
+
+  final Widget child;
+  final Duration duration;
+  final VoidCallback? onComplete;
+
+  FadeIn({
+    required this.child,
+    this.duration = defaultDuration,
+    this.onComplete,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<FadeIn> createState() => _FadeInState();
+}
+
+class _FadeInState extends State<FadeIn> {
+  double _opacity = 0;
+
+  @override
+  void initState() {
+    // Change the opacity to 1 after this widget is rendered.
+    Future(() {
+      setState(() => _opacity = 1);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedOpacity(
+      child: widget.child,
+      duration: widget.duration,
+      opacity: _opacity,
+      onEnd: widget.onComplete,
+    );
+  }
+}
+```
+
+### Custom Explicit Animation
+
+As an example of a custom explicit animation,
+we can define the same thing as in the previous section.
+This time we will use the mixin `SingleTickerProviderStateMixin`,
+a `FadeTransition` explicit animation,
+an `AnimationController`, and the `Tween` class.
+Clearly this approach requires more code,
+but it is interesting to see how lower-level classes
+can be used to achieve the same result.
 
 The implementation of `FadeIn` follows:
 
