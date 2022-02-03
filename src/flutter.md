@@ -7108,38 +7108,58 @@ class FadeIn extends StatefulWidget {
 }
 
 class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
-  late Animation<double> _animation;
+  late Animation<Color?> _colorAnimation;
+  late Animation<double> _opacityAnimation;
   late AnimationController _controller;
 
   @override
   void initState() {
     _controller = AnimationController(
-      vsync: this,
       duration: widget.duration,
+      vsync: this, // a TickerProvider
     );
-    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+
+    // To see all the values the controller takes on ...
+    //_controller.addListener(() => print(_controller.value));
+
+    _opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+
+    _colorAnimation =
+      ColorTween(begin: Colors.blue, end: Colors.red).animate(_controller);
+
+    TickerFuture future = _controller.forward(); // start the animation
+    if (widget.onComplete != null) future.whenComplete(widget.onComplete!);
   }
 
   @override
   dispose() {
     _controller.dispose();
-    // _animation does not have a dispose method.
+    // Animations do not have a dispose method.
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var transition = FadeTransition(
-      opacity: _animation,
+    /*
+    // To only animate opacity ...
+    return FadeTransition(
+      opacity: _opacityAnimation,
       child: widget.child,
     );
+    */
 
-    // Start the animation.
-    var future = _controller.forward();
-
-    if (widget.onComplete != null) future.whenComplete(widget.onComplete!);
-
-    return transition;
+    // To animate both opacity and color ...
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (BuildContext context, _) {
+        var color = _colorAnimation.value;
+        var opacity = _opacityAnimation.value;
+        return DefaultTextStyle(
+          child: widget.child,
+          style: TextStyle(color: color!.withOpacity(opacity)),
+        );
+      },
+    );
   }
 }
 ```
