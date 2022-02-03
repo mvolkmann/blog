@@ -6820,7 +6820,7 @@ return CustomPaint(
 );
 ```
 
-## Animations
+## Animation
 
 Flutter animations provide a way to rebuild parts of the widget tree
 on every frame with a goal of rendering at least 60 frames per second (fps).
@@ -6876,7 +6876,7 @@ the options for implementing animattions are
 1. Custom explicit animations: `AnimatedWidget`
 1. Custom drawing animations: `CustomPainter`
 
-### Implicit Animations
+### Implicit Animation
 
 Built-in implicit animations have names of the form `Animated{property}`.
 They animate changes to a specific property.
@@ -6912,7 +6912,7 @@ implicit animation of multiple properties.
 
 The `TweenAnimationBuilder` class is used to create custom implicit animations.
 
-### Explicit Animations
+### Explicit Animation
 
 Built-in explicit animations have names of the form “{property}Transition”.
 For custom "standalone" explicit animations,
@@ -6922,10 +6922,6 @@ If these approaches have performance issues, consider using `CustomPainter`.
 
 Built-in explicit animations all extend `AnimatedWidget`.
 This automatically rebuilds when a given `Listenable` changes.
-
-The {% aTargetBlank
-"https://docs.flutter.dev/development/ui/animations/hero-animations",
-"Hero" %} widget animates a widget between two routes or pages.
 
 TODO: This seems to not be true!
 Explict animations require the use of an `AnimationController`
@@ -6962,6 +6958,58 @@ This is a performance optimization.
 Note that this is not necessary if the widget being animated
 has a `const` constructor because that allows
 widget instances to be created at compile time.
+
+### Hero Widget
+
+The {% aTargetBlank
+"https://docs.flutter.dev/development/ui/animations/hero-animations",
+"Hero" %} widget animates a widget between two routes or pages.
+For example, suppose an app has a page that renders a `ListView`.
+This contains a `ListTile` widget for each item.
+Each of these displays a thumbnail image and a description.
+
+<img alt="Flutter Hero List View" style="width: 50%"
+    src="/blog/assets/flutter-hero-1.png?v={{pkg.version}}"
+    title="Flutter Hero List View">
+
+Tapping a `ListTile` navigates to the detail page that displays
+a larger version of the image and detailed information about the item.
+
+<img alt="Flutter Hero Detail View" style="width: 50%"
+    src="/blog/assets/flutter-hero-2.png?v={{pkg.version}}"
+    title="Flutter Hero Detail View">
+
+The image on each page can be wrapped in a `Hero` widget
+which takes `tag` and `child` arguments.
+The `tag` values can be any kind of object that uniquely identifies the image
+such as a `String` or `ObjectKey`.
+The `child` values can be `Image.asset` widgets
+or any widget type that the two pages have in common.
+The only requirement is for the `tag` value to be the
+same in both pages for corresponding `child` values.
+
+Here is the `Hero` widget from the list view page
+that is inside a `ListTile` widget:
+
+```dart
+Hero(
+  tag: ObjectKey(dog);
+  child: SizedBox(
+    child: Image.asset('assets/images/${dog.photoFileName}'),
+    height: thumbnailSize,
+    width: thumbnailSize,
+  ),
+)
+```
+
+The `Hero` widget in the detail page is the same as above,
+but uses a larger values for `height` and `width`.
+
+When the user navigates from one page to the other,
+the `Hero` `child` in the current page will
+animate to the `Hero` `child` in the new page.
+This provides a nice effect that keeps the attention
+of the user focused on the `Hero` content.
 
 ### Custom Implicit Animation
 
@@ -7103,7 +7151,7 @@ class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
 }
 ```
 
-#### Animation From Scratch
+### Animation From Scratch
 
 The code in this section demonstrates how
 most Flutter animations work under the covers.
