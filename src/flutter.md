@@ -6855,7 +6855,7 @@ These are listed in the table below.
 | `decoration`            |                                                          | `DecoratedBoxTransition`                                                      |
 | `List` items            | `AnimatedList` and `AnimatedListState`                   |                                                                               |
 | `Listenable` value      | `AnimatedWidget`                                         |                                                                               |
-| multiple properties     | `AnimatedContainer`                                      |                                                                               |
+| multiple properties     | `AnimatedContainer`                                      | `TweenAnimationBuilder`                                                       |
 | `offset`                | `AnimatedSlide`                                          |                                                                               |
 | `opacity`               | `AnimatedOpacity`                                        | `FadeTransition`                                                              |
 | `padding`               | `AnimatedPadding`                                        |                                                                               |
@@ -6911,6 +6911,7 @@ The `AnimatedContainer` widget provides
 implicit animation of multiple properties.
 
 The `TweenAnimationBuilder` class is used to create custom implicit animations.
+For an example, see the "Animation From Scratch" section below.
 
 ### Explicit Animation
 
@@ -7037,9 +7038,7 @@ This can be implemented by a `StatefulWidget`
 that renders an `AnimatedOpacity` widget as follows:
 
 ```dart
-import 'package:flutter/material.dart';
-
-class FadeIn extends StatefulWidget {
+class FadeIn extends StatelessWidget {
   static const defaultDuration = Duration(seconds: 1);
 
   final Widget child;
@@ -7054,27 +7053,14 @@ class FadeIn extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<FadeIn> createState() => _FadeInState();
-}
-
-class _FadeInState extends State<FadeIn> {
-  double _opacity = 0;
-
-  @override
-  void initState() {
-    // Change the opacity to 1 after this widget is rendered.
-    Future(() {
-      setState(() => _opacity = 1);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      child: widget.child,
-      duration: widget.duration,
-      opacity: _opacity,
-      onEnd: widget.onComplete,
+    return TweenAnimationBuilder(
+      child: child,
+      duration: duration,
+      tween: Tween(begin: 0.0, end: 1.0),
+      builder: (_, double value, Widget? child) =>
+          Opacity(child: child, opacity: value),
+      onEnd: onComplete,
     );
   }
 }
