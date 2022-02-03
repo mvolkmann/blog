@@ -6818,6 +6818,55 @@ return CustomPaint(
 
 ## Animations
 
+Flutter supports two kinds of animations, implicit and explict.
+Implicit animations are generally easier to use, but provide less control.
+Explicit animations are generally more difficult to use,
+but provide more control.
+
+For official documentation on Flutter animations, see {% aTargetBlank
+"https://docs.flutter.dev/development/ui/animations",
+"Introduction to animations" %}.
+This page contains six videos on the topic
+and a flow chart for deciding which kind of animation to use.
+
+Implicit animations are supported by many provided widgets
+whose names begin with "Animated".
+It is also possible to create custom widgets that support animation
+by using `TweenAnimationBuilder`.
+There are animated versions of many non-animated widgets.
+These include
+`AnimatedAlign`,
+`AnimatedBuilder`,
+`AnimatedContainer`,
+`AnimatedCrossFade`,
+`AnimatedDefaultTextStyle`,
+`AnimatedList`,
+`AnimatedListState`,
+`AnimatedModalBarrier`,
+`AnimatedOpacity`,
+`AnimatedPadding`,
+`AnimatedPhysicalModel`,
+`AnimatedPositioned`,
+`AnimatedPositionedDirectional`,
+`AnimatedRotation`,
+`AnimatedScale`,
+`AnimatedSize`,
+`AnimatedSlide`,
+`AnimatedSwitcher`,
+`AnimatedWidget`,
+`AnimatedWidgetBaseState`,
+`DecoratedBoxTransition`,
+`FadeTransition`,
+`Hero`,
+`PositionedTransition`,
+`RotationTransition`,
+`ScaleTransition`,
+`SizeTransition`, and
+`SlideTransition`.
+
+Explicit animations are used in cases where an animation
+needs to occur repeatedly or when fine-grained control is needed.
+
 TODO: Finish this section.
 
 ## Tests
