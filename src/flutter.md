@@ -6823,6 +6823,87 @@ Implicit animations are generally easier to use, but provide less control.
 Explicit animations are generally more difficult to use,
 but provide more control.
 
+Use an implicit animation unless any of the following are true,
+in which case an explicit animation must be used.
+
+- The animation should repeat while some condition is true,
+  including being on some screen.
+- The animation is discontinuous, such as a circle whose
+  radius increases and then jumps back to the beginning radius.
+- Multiple widgets will be animated in a coordinated fashion.
+
+Built-in implicit animations have names of the form “Animated{property}”.
+AnimatedContainer provides implicit animation of multiple properties.
+They animate changes to a specific property and are used inside a StatefulWidget (or use StreamBuilder or FutureBuilder) to allow a property to be changed.
+They add the arguments “duration” and “curve”.
+See all the built-in curve values including several which bounce or are discontinuous.
+TweenAnimationBuilder creates custom implicit animations.
+
+Built-in explicit animations have names of the form “{property}Transition”.
+For “standalone” custom explicit animations, create a class that extends AnimatedWidget.
+Otherwise use AnimatedBuilder to create a custom explicit animation.
+If these approaches have performance issues, use CustomPainter.
+
+In order of difficulty from easiest to most difficult, the options are
+Animated{property}, TweenAnimationBuilder, {property}Transition, AnimatedWidget, CustomPainter
+
+There are implicit animation versions of many non-animated widgets.
+
+| Property to Animate     | Implicit Animation                                       | Explicit Animation                           |
+| ----------------------- | -------------------------------------------------------- | -------------------------------------------- |
+| alignment               | `AnimatedAlign`                                          |                                              |
+| `decoration`            |                                                          | `DecoratedBoxTransition`                     |
+| `List` items            | `AnimattedList` and `AnimatedListState`                  |                                              |
+| `Listenable` value      | `AnimatedWidget`                                         |                                              |
+| multiple properties     | `AnimatedContainer`                                      |                                              |
+| `offset`                | `AnimatedSlide`                                          |                                              |
+| `opacity`               | `AnimatedOpacity`                                        | `FadeTransition`                             |
+| `padding`               | `AnimatedPadding`                                        |                                              |
+| `position`              | `AnimatedPositioned` and `AnimatedPositionedDirectional` | `PositionedTransition` and `SlideTransition` |
+| `rotation`              | `AnimatedRotation`                                       | `RotationTransition`                         |
+| `scale`                 | `AnimatedScale`                                          | `ScaleTransition`                            |
+| `size`                  | `AnimatedSize`                                           | `SizeTransition`                             |
+| text style              | `AnimatedDefaultTextStyle`                               |                                              |
+| widget pair showing one | `AnimatedSwitcher` and `AnimatedCrossFade`               |                                              |
+
+Other implicit animations include `AnimatedBuilder`, `AnimatedModalBarrier`,
+`AnimatedPhysicalModel`, `AnimatedWidget`, and `AnimatedWidgetBaseState`.
+
+Other explicit animations include `Hero`?
+
+Built-in implicit animations all extend `ImplicitlyAnimatedWidget`.
+and built-in explicit animations all extend `AnimatedWidget`.
+
+Explict animations use an `AnimationController` that is maintained
+inside a `StatefulWidget` that mixes in `SingleTickerProviderStateMixin`
+(using the “with” keyword).
+Create an instance of `AnimationController` in the `initState` method
+and dispose of it in the `dispose` method.
+This avoids creating a new instance of the controller
+each time the `build` method is invoked.
+
+AnimationController takes the arguments “duration” (represents seconds per repeat) and “vsync” (typically set to this).
+Add “..repeat()” at end of AnimationController constructor call to repeat forever.
+Pass an AnimationController instance to some argument of an explicit animation.
+The controller has the methods “stop”, “repeat” (to restart), animateTo(value-btw-0-and-1), and fling(velocity) (to advance to a new value).
+Multiple animations can be controlled by the same controller instance.
+Built-in explicit animations include:
+AlignTransition
+DecoratedBoxTransition
+DefaultTextStyleTransition
+FadeTransition
+PositionedTransition
+RelativePositionedTransition
+RotationTransition
+ScaleTransition
+SizeTransition
+SlideTransition
+
+These can be composed to perform multiple, simultaneous animations.
+
+AnimatedWidget and AnimatedBuilder are used together to create a custom explicit animation.
+AnimatedBuilder takes a “child” argument which is used to avoid recreating the widget that is being animated on each animation change. This is a performance optimization. Note that this is not necessary if the widget being animated has a const constructor because that allows widget instances to be created at compile time.
+
 For official documentation on Flutter animations, see {% aTargetBlank
 "https://docs.flutter.dev/development/ui/animations",
 "Introduction to animations" %}.
