@@ -7061,6 +7061,78 @@ Note that this is not necessary if the widget being animated
 has a `const` constructor because that allows
 widget instances to be created at compile time.
 
+### AnimatedSwitcher Widget
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/AnimatedSwitcher-class.html",
+"AnimatedSwitcher" %} widget renders a given widget
+and then animates displaying a different widget
+when the value of its `child` argument changes.
+By default it uses a `FadeTransition`.
+This can be changed by specifying the `transitionBuilder` argument.
+It is important for each of the widgets to have a different `key` value.
+
+The following code demonstrates using `AnimatedSwitcher`
+to cycle through a set of images that are stored
+in the `assets/images` directory of the application.
+
+```dart
+import 'package:flutter/material.dart';
+
+class ImageCycle extends StatefulWidget {
+  final List<String> fileNames;
+
+  const ImageCycle({required this.fileNames, Key? key}) : super(key: key);
+
+  @override
+  _ImageCycleState createState() => _ImageCycleState();
+}
+
+class _ImageCycleState extends State<ImageCycle> {
+  int index = 0;
+  late List<Widget> images;
+
+  @override
+  void initState() {
+    const imageSize = 200.0;
+    images = widget.fileNames
+        .map(
+          (fileName) => SizedBox(
+            child: Image.asset('assets/images/$fileName'),
+            height: imageSize,
+            key: ValueKey(fileName), // must have this!
+            width: imageSize,
+          ),
+        )
+        .toList();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      AnimatedSwitcher(
+        child: images[index],
+        duration: Duration(seconds: 1),
+        /*
+        transitionBuilder: (child, animation) =>
+            //FadeTransition(child: child, opacity: animation), // default
+            ScaleTransition(child: child, scale: animation),
+        */
+      ),
+      ElevatedButton(
+        child: Text('Next'),
+        onPressed: () {
+          setState(() {
+            index = (index + 1) % widget.fileNames.length;
+          });
+        },
+      )
+    ]);
+  }
+}
+```
+
 ### Hero Widget
 
 The {% aTargetBlank
