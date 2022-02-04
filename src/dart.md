@@ -1574,7 +1574,7 @@ These objects have `key` and `value` properties and a `toString` method.
 
 ## Print
 
-The `print` function takes a single argument and writes it to stdout.
+The `print` function takes a single `String` argument and writes it to stdout.
 
 If the argument is not a `String`, it will be converted
 to a `String` by calling the `toString` method of the value.
@@ -4558,6 +4558,8 @@ void main() {
 - Dart Format should be able to indent lines nicely without requiring
   a trailing comma after the last argument to every function call.
 
+- It would be nice if Dart didn't require semi-colons at the end of statements.
+
 - Dart should support a shorthand for named parameters
   when there is an in-scope variable with the same name.
   For example, instead of `Person(name: name, birthday: birthday)`
@@ -4568,3 +4570,10 @@ void main() {
 
 - Dart wants many constructor calls to be preceded by the `const` keyword.
   This makes the code verbose.
+
+- The `Iterable` methods `forEach`, `map`, and `where`
+  do not provide the index of the current element.
+  We can define `extension` methods to address this,
+  but Dart really should provide this.
+  See `lib/extensions/iterable_extension.dart`
+  in my collection of starter file.
