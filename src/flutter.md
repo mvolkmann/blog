@@ -364,6 +364,11 @@ To run a Flutter app on an iPhone wirelessly:
 
 ## VS Code
 
+VS Code has great support for Dart and Flutter,
+expecially when the extensions described below are installed.
+
+### Dart Extension
+
 Install the {% aTargetBlank
 "https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code",
 "Dart extension" %}.
@@ -380,6 +385,8 @@ This extension provides many things including:
 - automatic package installation and upgrades when `pubspec.yaml` is modified
 - "Dart: Sort Members" command to sort methods (not properties) in a class
 - "Organize Imports" command to order import statements
+
+### Flutter Extension
 
 Install the {% aTargetBlank
 "https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter",
@@ -591,6 +598,45 @@ This extension provides many things including:
 To view the implementation code for Flutter classes, cmd-click a class name.
 For example, try this on `MaterialApp`.
 From this file, continue using cmd-click on other class names to see their code.
+
+### Awesome Flutter Snippets Extension
+
+It is recommended to install the {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=Nash.awesome-flutter-snippets",
+"Awesome Flutter Snippets" %} extension.
+This provides snippets for
+"a collection of commonly used Flutter classes and methods."
+Highlights are described below:
+
+| Snippet                 | Description                              |
+| ----------------------- | ---------------------------------------- |
+| `build`                 | `build` method                           |
+| `cupeapp`               | Cupertino app                            |
+| `dis`                   | `dispose` method                         |
+| `f-test`                | `test` function                          |
+| `importC`               | import Cupertino package                 |
+| `importFT`              | import Flutter Test package              |
+| `importM`               | import Material package                  |
+| `initS`                 | `initState` method                       |
+| `listViewB`             | `ListView.builder` constructor call      |
+| `listViewS`             | `ListView.separated` constructor call    |
+| `mateapp`               | Material app                             |
+| `statefulW`             | stateful widget classes                  |
+| `statelessW`            | stateless widget class                   |
+| `toStr`                 | `toString` method                        |
+| `tweenAnimationBuilder` | `TweenAnimationBuilder` constructor call |
+| `widgetTest`            | `testWidgets` function                   |
+
+### Todo Tree Extension
+
+It is recommended to install the {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree",
+"Todo Tree" %} extension.
+This extension adds a tree icon to the activity bar.
+When clicked, it displays a directory tree in the navigator area
+that shows files and lines within them that have comments that contain
+"TODO", "FIXME" (or alternatives "FIXIT" and "FIX"), or "BUG".
+Clicking an identified line opens the file and positions the cursor on the line.
 
 ## Basic Flutter App Structure
 
