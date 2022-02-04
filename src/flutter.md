@@ -364,12 +364,30 @@ To run a Flutter app on an iPhone wirelessly:
 
 ## VS Code
 
-Install the Flutter extension.
+Install the {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code",
+"Dart extension" %}.
+This extension provides many things including:
+
+- syntax highlighting
+- code completion
+- snippets
+- refactoring and code fixes (see lightbulb icon)
+- code formatting
+- support for `editor.formatOnSave` and `editor.formatOnType`
+- automatic hot reloads for Flutter
+- switching between devices and simulators for Flutter
+- automatic package installation and upgrades when `pubspec.yaml` is modified
+- "Dart: Sort Members" command to sort methods (not properties) in a class
+- "Organize Imports" command to order import statements
+
+Install the {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter",
+"Flutter extension" %}.
 This uses the {% aTargetBlank
 "https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server",
 "Dart Analysis Server" %}, as does Android Studio,
 to power many IDE operations.
-
 This extension provides many things including:
 
 - great auto-complete support
