@@ -7027,16 +7027,26 @@ The `AnimationController` constructor takes the arguments
 
 The most commonly used `AnimationController` methods are described below:
 
-| Method                      | Description                                                  |
-| --------------------------- | ------------------------------------------------------------ |
-| `addListener(VoidCallback)` | listens for value changes; sometimes used to call `setState` |
-| `animateTo(double target)`  | animates value from current to target                        |
-| `dispose()`                 | frees resources                                              |
-| `forward()`                 | animates value from `lowerBound` to `upperBound`             |
-| `repeat()`                  | same as `forward`, but repeats when end is reached           |
-| `reset()`                   | stops animation and sets value to `lowerBound`               |
-| `reverse()`                 | animates value from `upperBound` to `lowerBound`             |
-| `stop()`                    | stops animation                                              |
+| Method                                       | Description                                                  |
+| -------------------------------------------- | ------------------------------------------------------------ |
+| `addListener(VoidCallback)`                  | listens for value changes; sometimes used to call `setState` |
+| `addStatusListener(AnimationStatusCallback)` | listens for animation status changes                         |
+| `animateTo(double target)`                   | animates value from current to target                        |
+| `dispose()`                                  | frees resources                                              |
+| `forward()`                                  | animates value from `lowerBound` to `upperBound`             |
+| `repeat()`                                   | same as `forward`, but repeats when end is reached           |
+| `reset()`                                    | stops animation and sets value to `lowerBound`               |
+| `reverse()`                                  | animates value from `upperBound` to `lowerBound`             |
+| `stop()`                                     | stops animation                                              |
+
+The listener function passed to `addStatusListener`
+is passed an {% aTargetBlank
+"https://api.flutter.dev/flutter/animation/AnimationStatus.html",
+"AnimationStatus" %} constant.
+When the `forward` method is called,
+the status begins as `forward` and ends as `completed`.
+When the `reverse` method is called,
+the status begins as `reverse` and ends as `dismissed`.
 
 TODO: What methods take an argument of type `AnimationController`?
 TODO: The `Tween` `animate` method takes one as its first positional argument.
