@@ -908,17 +908,29 @@ class Greet extends StatelessWidget {
 
 #### Stateful Widgets
 
-Stateful widgets are defined by a pair of classes.
+Stateful widgets render initially and again each time their state changes.
+
+Stateful widgets are defined by {% aTargetBlank
+"https://flutteragency.com/stateful-widgets-defined-as-two-classes/",
+"two classes" %}.
+
 The first class extends `StatefulWidget`,
 defines final properties, defines a constructor, and
 overrides the `createState` method to create an instance of the second class.
-The second class can be private and
-be defined in the same source file as the first.
-It extends `State`, defines state properties,
+This class is immutable because all Flutter widgets must be immutable.
+This helps Flutter performance when rebuilding the UI.
+
+The second class extends `State`, defines state properties,
 and overrides the `build` method.
+It can be private and
+be defined in the same source file as the first.
 Storing the state in a separate class
 allows the widget class to remain immutable.
-Stateful widgets render initially and again each time their state changes.
+
+There is an {% aTargetBlank "https://github.com/dart-lang/language/issues/329",
+"on-going discussion" %} about whether it would be possible
+to define stateful widgets in another way that
+doesn't require defining two classes.
 
 New stateful widgets begin with the following code
 which defines a pair of related classes:
@@ -6928,6 +6940,14 @@ TODO: This seems to not be true!
 Explict animations require the use of an `AnimationController`
 that is maintained inside a `StatefulWidget`
 that mixes in `SingleTickerProviderStateMixin` (using the “with” keyword).
+
+An `AnimationController` typically produces 60 values per second.
+By default the values are between 0 and 1.
+The controller passes each new value to all registered listener functions.
+
+To produce values in another range or with a type other than `double`,
+use the `Tween` class or its subclasses such as `ColorTween`.
+
 Create an instance of `AnimationController` in the `initState` method
 and dispose of it in the `dispose` method.
 This avoids creating a new instance of the controller
@@ -6936,13 +6956,6 @@ each time the `build` method is invoked.
 The `AnimationController` constructor takes the arguments
 `duration` (represents seconds per repeat) and
 `vsync` (typically set to `this`).
-Add `..repeat()` at end of the `AnimationController` constructor call
-to repeat forever.
-
-TODO: This seems to not be true!
-TODO: I haven't found which widget constructors have an argument of this type.
-Pass an `AnimationController` instance to
-the `controller` argument of an explicit animation.
 
 The most commonly used `AnimationController` methods are described below:
 
@@ -6957,7 +6970,17 @@ The most commonly used `AnimationController` methods are described below:
 | `reverse()`                 | animates value from `upperBound` to `lowerBound`             |
 | `stop()`                    | stops animation                                              |
 
+TODO: What methods take an argument of type `AnimationController`?
+TODO: The `Tween` `animate` method takes one as its first positional argument.
+TODO: The `AnimationBuilder` contructor takes one in its `animation` argument.
+TODO: Are there others?
+
 Multiple animations can be controlled by the same controller instance.
+
+TODO: This seems to not be true!
+TODO: I haven't found which widget constructors have an argument of this type.
+Pass an `AnimationController` instance to
+the `controller` argument of an explicit animation.
 
 Explicit animations can be composed to perform multiple, simultaneous animations.
 
