@@ -6,6 +6,10 @@ layout: topic-layout.njk
 
 ## Overview
 
+<img alt="Flutter logo" style="width: 40%"
+    src="/blog/assets/flutter-logo.svg?v={{pkg.version}}"
+    title="Flutter logo">
+
 {% aTargetBlank "https://flutter.dev", "Flutter" %}
 enables writing mobile, web, desktop, and embedded apps
 using the {% aTargetBlank "https://dart.dev", "Dart programming language" %}.
