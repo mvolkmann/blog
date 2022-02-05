@@ -6972,9 +6972,13 @@ the amount of time over which the animation should take place.
 The `curve` argument takes a `Curve` object
 that specifies an easing curve to use.`
 This controls the rate of change in an animation over its duration.
+
 See the {% aTargetBlank
 "https://api.flutter.dev/flutter/animation/Curves-class.html", "Curves" %}
 class for a graphical represenation of each of the built-in easing curves.
+In the page linked above, each curve has a play button.
+Clicking it animates movement along the curve and demonstrates
+how it would affect translation, rotation, scale, and opacity.
 Some easing curves bounce, meaning that the direction of the animation
 reverses at some point and then goes forward again, possibly multiple times.
 
@@ -7015,6 +7019,8 @@ The controller passes each new value to all registered listener functions.
 
 To produce values in another range or with a type other than `double`,
 use the `Tween` class or its subclasses such as `ColorTween`.
+To use a sequence of values from multiple `Tween` objects,
+use the `TweenSequence` class.
 
 Create an instance of `AnimationController` in the `initState` method
 and dispose of it in the `dispose` method.
@@ -7044,9 +7050,9 @@ is passed an {% aTargetBlank
 "https://api.flutter.dev/flutter/animation/AnimationStatus.html",
 "AnimationStatus" %} constant.
 When the `forward` method is called,
-the status begins as `forward` and ends as `completed`.
+the status begins as `forward` and ends as `completed` (at end).
 When the `reverse` method is called,
-the status begins as `reverse` and ends as `dismissed`.
+the status begins as `reverse` and ends as `dismissed` (at beginning).
 
 TODO: What methods take an argument of type `AnimationController`?
 TODO: The `Tween` `animate` method takes one as its first positional argument.
@@ -7243,6 +7249,7 @@ class FadeIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return TweenAnimationBuilder(
       child: child,
+      //curve: Curves.easeInOut,
       duration: duration,
       // This tweens between two double values.
       // It is also possible to tween between
@@ -8323,9 +8330,13 @@ the `flutter` command can be replaced by the `dart` command.
 - Dart needs to support type inference of enum values the way Swift does.
   For example, instead of `color: Colors.red,` I want to use `color: .red,`.
 
+- Flutter needs to find a way to define stateful widgets without defining two classes.
+  See this {% aTargetBlank "https://github.com/dart-lang/language/issues/329",
+  "on-going discussion" %}.
+
 - The VS Code Flutter extension displays a comment after the closing paren
   of all widgets. It isn't really in the code, but adds visual clutter.
-  I haven't found a way to disable it yet.
+  This can be disabled. See "Phantom Comments" in the "VS Code" section.
 
 - The `Row`, `Column`, and `Flex` widgets need to take a `spacing` parameter
   like the `Wrap` widget does so it isn't necessary to do tedious things
