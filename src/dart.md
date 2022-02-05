@@ -456,11 +456,15 @@ do not need to be given a value until their first use.
 The `late` keyword has two primary uses.
 
 First, it can be applied to a variable declaration with a non-null type
-that is not initialized.
+that is not yet initialized.
 This states that the variable will be initialized before its first use.
-It allows a nested function to refer to the variable as long as
+This allows a nested function to refer to the variable as long as
 the function is not called until after the variable is initialized.
 See an example of this in the "Streams" section.
+
+In a Flutter `StatefulWidget` subclass,
+this typically happens in the `initState` method.
+
 If a `late` variable is used before it is initialized,
 a `LateInitializationError` is thrown.
 

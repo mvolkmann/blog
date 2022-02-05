@@ -832,6 +832,11 @@ Supposedly one use is for finding ancestor styles
 so they can be applied to the current widget,
 but it's not apparent how this can be done.
 
+To run code after the `build` method of a widget has been called the first time,
+pass a function to `WidgetsBinding.instance?.addPostFrameCallback`.
+Often this is done in the `initState` method
+of the `State` class for a `StatefulWidget`.
+
 ### Keys
 
 All widget constructors must take an optional parameter
@@ -1413,6 +1418,7 @@ Currently the only provided widgets that do that are `Row` and `Column`.
 
 One use of the `Expanded` widget is to push the widgets
 that follow it inside a `Row` or `Column` to the end.
+Another use is to scale an `Image` widget to fit in the available space.
 
 The `Flexible` widget behaves nearly identically to the `Expanded` widget.
 But a `Flexible` widget will take on
@@ -1478,6 +1484,9 @@ All their arguments are `double` values that default to `0` when not specified.
 | `EdgeInsets.all(value)`                                       | same on all four sides                      |
 | `EdgeInsets.symmetric({horizontal = 0, vertical = 0})`        | same for left/right and same for top/bottom |
 | `EdgeInsets.only({left = 0, right = 0, top = 0, bottom = 0})` | can differ on all four sides                |
+
+Unlike the `Container` widget, the `Padding` widget
+does not support specifying a background color.
 
 ##### SingleChildScrollView Widget
 
@@ -6698,6 +6707,7 @@ For example, `Colors.pink.shade700` is a specific shade of pink.
 To see all the colors defined by the `Colors` class,
 see the documentation for the {% aTargetBlank
 "https://api.flutter.dev/flutter/material/Colors-class.html", "Colors class" %}.
+Note that `grey` is one of the defined colors, but `gray` is not.
 
 To get a color from the current theme, call the `Theme.of(context)` method.
 For example, to get the error color, use `Theme.of(context).errorColor`.
@@ -7457,6 +7467,25 @@ consider using the libraries
 {% aTargetBlank "https://pub.dev/packages/lottie", "lottie" %} in pub.dev.
 
 TODO: Finish this section.
+
+### More on Animation
+
+For more on animation, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_animation", "GitHub repo" %}
+which contains a Flutter project that uses several animations.
+These include:
+
+- `Hero` for animating thumbnail images on a list page
+  to larger images on detail pages.
+- `SingleTickerProviderStateMixin`, `AnimationController`, `TweenSequence`,
+  and `AnimatedBuilder` to animate the size of an icon up and back down.
+- `SingleTickerProviderStateMixin`, `AnimationController`, `Tween`, and
+  `ColorTween` to animate the opacity and color of a `Text` widget.
+- `AnimatedSwitcher` and `ScaleTransition`
+  to cycle through a set of `Image` widgets.
+- `AnimatedList`, `SlideTransition`,
+  `WidgetsBinding.instance?.addPostFrameCallback`, and `Future.delayed`
+  to slide `ListTile` widgets in from the right in staggered fashion.
 
 ## Tests
 
