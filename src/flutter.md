@@ -2881,6 +2881,32 @@ removes the `child` argument, and adds the `icon` and `label` arguments.
 Rather than creating a circle button, tt creates an oval button
 in order to accommodate an icon on the left and a label on the right.
 
+Typically there is one `FloatingActionButton` per `Scaffold`.
+To have more than one, wrap them in a `Row` or `Column`.
+The following code creates two `FloatingActionButton` widgets
+and places them in the lower-left and lower-right corners of the screen.
+
+```dart
+// Scaffold arguments
+floatingActionButton: Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 30),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      FloatingActionButton(
+        child: Text('FAB1'),
+        onPressed: () { ... },
+      ),
+      FloatingActionButton(
+        child: Text('FAB2'),
+        onPressed: () { ... },
+      ),
+    ],
+  ),
+),
+floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+```
+
 #### TextField and TextFormField Widgets
 
 The {% aTargetBlank
