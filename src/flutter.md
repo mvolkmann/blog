@@ -659,6 +659,10 @@ import 'package:flutter/material.dart';
 // declared with the "final" keyword.
 void main() => runApp(const MyApp());
 
+// There is no need to create the MyApp class below.
+// Instead, the MaterialApp widget it creates
+// can be passed directly to the runApp function.
+
 // This class is also used by tests.
 // See the supplied test/widget_test.dart file.
 class MyApp extends StatelessWidget {
@@ -1015,7 +1019,7 @@ class _SomeNameState extends State<SomeName> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      ...
     );
   }
 }
@@ -1512,22 +1516,19 @@ extension WidgetExtension on Widget {
 
 const itemCount = 20;
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Layout',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+void main() => runApp(
+      MaterialApp(
+        title: 'Flutter Layout',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          textTheme: TextTheme(
+            // Material default text style
+            bodyText2: TextStyle(color: Colors.purple),
+          ),
+        ),
+        home: const Home(),
       ),
-      home: const Home(),
     );
-  }
-}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
