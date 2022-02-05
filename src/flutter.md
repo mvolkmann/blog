@@ -893,14 +893,36 @@ One possible reason that the type of `children` is not `Iterable<Widget>`
 is that it would enable lazy instantiation which might
 make it difficult to maintain 60 FPS refresh rates.
 
+The `List` value of a `children` argument can use the `if` and `for` keywords.
+The `if` keyword is used to conditionally add a child widget.
+The `for` keyword is used to add multiple child widgets,
+one for each element in an `Iterable`.
+For example:
+
+```dart
+Column(
+  children: [
+    Text('Always present'),
+
+    // The if condition must be followed by a single widget.
+    // Curly braces are not allowed.
+    if (score > 90) Text('Good job!'),
+
+    // The for loop must be followed by a single widget.
+    // Curly braces are not allowed.
+    for (var student in students) Text(student.name),
+  ],
+)
+```
+
 Some widgets take a single widget in a `child` parameter and apply styling.
-The Flutter docs refer to these as "single-child layout widgets".
+The Flutter documentation refers to these as "single-child layout widgets".
 Examples include `Center`, `Container`, `Expanded`,
 `Flexible`, `Padding`, and `SizedBox`.
 
 Other widgets take multiple widgets in a `children` parameter
 and lay them out in a specific way.
-The Flutter docs refer to these as "multi-child layout widgets".
+The Flutter documentation refers to these as "multi-child layout widgets".
 Examples include `Column`, `GridView`, `ListView`,
 `Row`, `Stack`, `Table`, and `Wrap`.
 
@@ -1221,7 +1243,7 @@ widget holds several other widgets referred to as
 `leading`, `title`, `actions`, `flexibleSpace`, and `bottom`.
 See the diagram in the
 {% aTargetBlank "https://api.flutter.dev/flutter/material/AppBar-class.html",
-"official docs" %}.
+"official documntation" %}.
 The first row is referred to as the "toolbar" in documentation
 and includes the `leading`, `title`, and `actions` widgets.
 
@@ -4101,7 +4123,7 @@ and provides many features not present in `InheritedWidget`.
 
 The {% aTargetBlank
 "https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple",
-"official docs" %} say
+"official documentation" %} says
 "If you are new to Flutter and you don’t have a strong reason
 to choose another approach (Redux, Rx, hooks, etc.),
 this is probably the approach you should start with."
