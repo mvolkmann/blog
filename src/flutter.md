@@ -8372,6 +8372,13 @@ the `flutter` command can be replaced by the `dart` command.
   like the `Wrap` widget does so it isn't necessary to do tedious things
   like adding a `SizedBox` between each child to leave space between them.
 
+- It is often convenient to use the `Iterable` methods `map` and `filter`
+  to create a new `Iterable`.
+  But many Flutter properties and methods arguments
+  require a `List` instead of an `Iterable`.
+  This requires calling `.toList()` on the `Iterable` to create a `List`.
+  I wish Flutter had more support for `Iterable` so this wouldn't be necessary.
+
 - The default linting rule settings related to use of the `const` keyword
   are incredibly annoying!
   I wish Dart could figure out what should be `const`
