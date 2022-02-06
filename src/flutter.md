@@ -1079,10 +1079,10 @@ class _CounterState extends State<Counter> {
 
   @override
   void initState() {
+    super.initState(); // call at beginning of initState
     // Note the use of "widget." to refer to
     // properties in the associated stateful widget.
     _count = widget.initialValue;
-    super.initState();
   }
 
   @override
@@ -1120,6 +1120,10 @@ are described in the following table:
 | `reassemble`            | called in development when a hot reload occurs                                                                   |
 | `deactivate`            | called when a widget subtree containing this `State` object is removed; rarely overridden                        |
 | `dispose`               | called after `deactivate` unless the widget subtree is reinserted                                                |
+
+The `initState` method should begin with `super.initState();`.
+
+The `dispose` method should end with `super.dispose();`.
 
 ### Material Structure Widgets
 
@@ -7534,6 +7538,16 @@ These include:
 - `AnimatedList`, `SlideTransition`,
   `WidgetsBinding.instance?.addPostFrameCallback`, and `Future.delayed`
   to slide `ListTile` widgets in from the right in staggered fashion.
+
+## Audio
+
+The {% aTargetBlank "https://pub.dev/packages/audioplayers", "audioplayers" %}
+library is a popular option for playing audio files in Flutter applications.
+It is fairly low-level and has some quirks.
+For a working example that provides a simplified layer over this library
+and a widget that provides a play/pause button, a stop button,
+and a progress bar, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_audio", "GitHub repo" %}.
 
 ## Tests
 
