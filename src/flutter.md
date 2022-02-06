@@ -7549,6 +7549,16 @@ and a widget that provides a play/pause button, a stop button,
 and a progress bar, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_audio", "GitHub repo" %}.
 
+## GeoLocation
+
+The {% aTargetBlank "https://pub.dev/packages/geolocation", "geolocation" %}
+library is a popular option for getting
+the current latitude and longitude of a device.
+For a basic example app that uses this library, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_geolocation", "GitHub repo" %}.
+The README contains instructions on configuring Android and iOS
+to request permission for obtaining geolocation data.
+
 ## Tests
 
 Three kinds of tests can be written for Flutter applications.
