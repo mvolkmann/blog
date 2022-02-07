@@ -7697,6 +7697,135 @@ For a basic example app that uses this library, see this {% aTargetBlank
 The README contains instructions on configuring Android and iOS
 to request permission for obtaining geolocation data.
 
+## SQLite
+
+The SQLite database is a popular choice for persisting data on mobile devices.
+The pub.dev library
+{% aTargetBlank "https://pub.dev/packages/sqflite", "sqlite" %}
+is the most popular way to access a SQLite database in a Flutter application.
+
+The steps to use sqflite are:
+
+1. Add the `path` and `sqflite` dependencies in `pubspec.yaml`.
+
+1. Define model classes like the following
+   corresponding to each database table:
+
+   ```dart
+   class Dog {
+     final int id;
+     final int age;
+     final String breed;
+     final String name;
+
+     Dog({required this.age, required this.breed, required this.name});
+
+     Map<String, dynamic> toMap() {
+       return {'id': id, 'age': age, 'breed': breed, 'name': name};
+     }
+
+     // For debugging
+     @override
+     String toString() {
+       return 'Dog{id: $id, name: $name, breed: $breed, age: $age}';
+     }
+   }
+   ```
+
+1. Get a connection to the database.
+
+   ```dart
+   WidgetsFlutterBinding.ensureInitialized();
+   final database = openDatabase(
+     join(await getDatabasesPath(), 'doggie_database.db'),
+     ...
+   );
+   ```
+
+1. Create a table corresponding to each model class
+   by inserting code like the following where `...` appears above.
+
+   ```dart
+     onCreate: (db, version) {
+       //TODO: Will this automatically assign auto-incrementing ids?
+       return db.execute(
+        'CREATE TABLE dogs(' +
+        'id integer primary key, age integer, breed text, name text)',
+       );
+     },
+     // The version provides a path to perform database upgrades and downgrades.
+     version: 1,
+   ```
+
+1. Write a function that inserts a record.
+
+   ```dart
+   Future<void> insertDog(Dog dog) async {
+     final db = await database;
+     await db.insert(
+       'dogs',
+       dog.toMap(),
+       conflictAlgorithm: ConflictAlgorithm.replace,
+     );
+   }
+
+   var comet = Dog(name: 'Comet', breed: 'Whippet', age: 1);
+   await insertDog(comet);
+   ```
+
+1. Write a function that retrieves records.
+
+   ```dart
+   Future<List<Dog>> getDogs() async {
+     final db = await database;
+     final List<Map<String, dynamic>> maps = await db.query('dogs');
+     return List.generate(maps.length, (index) {
+       var map = maps[index];
+       return Dog(
+         id: map['id'],
+         age: map['age'],
+         breed: map['breed'],
+         name: map['name'],
+       );
+     });
+   }
+
+   var dogs = await getDogs();
+   ```
+
+1. Write a function that updates a record.
+
+   ```dart
+   Future<void> updateDog(Dog dog) async {
+     final db = await database;
+     await db.update(
+       'dogs',
+       dog.toMap(),
+       where: 'id = ?',
+       // This prevents SQL injection.
+       whereArgs: [dog.id],
+     );
+   }
+
+   comet.age += 1;
+   await updateDog(comet);
+   ```
+
+1. Write a function that deletes a record.
+
+   ```dart
+   Future<void> deleteDog(int id) async {
+     final db = await database;
+     await db.delete(
+       'dogs',
+       where: 'id = ?',
+       whereArgs: [id],
+     );
+   }
+
+   await deleteDog(comet.id);
+   ```
+
 ## Tests
 
 Three kinds of tests can be written for Flutter applications.
