@@ -317,7 +317,7 @@ Press "p" again to toggle this off.
 To run a Flutter app on a connected iPhone:
 
 - Attach the phone to the computer with a USB cable.
-- Unlock the phone and "trust it.
+- Unlock the phone and "trust" it.
 - From a terminal running bash, cd to the top project directory.
 - Enter `open ios/Runner.xcworkspace` to launch Xcode.
 - Click "Runner" at the top of the Navigator.
@@ -7548,6 +7548,55 @@ For a working example that provides a simplified layer over this library
 and a widget that provides a play/pause button, a stop button,
 and a progress bar, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_audio", "GitHub repo" %}.
+
+## Camera
+
+The {% aTargetBlank "https://pub.dev/packages/camera", "camera" %} library
+in pub.dev provides access to device cameras in Android, iOS, and the web.
+See this excellent {% aTargetBlank
+"https://docs.flutter.dev/cookbook/plugins/picture-using-camera",
+"cookbook page" %} for step-by-step instructions on using this library,
+including example code.
+
+Apps that use the `camera` library can be run in an Android emulator
+which provides a simulated camera.
+But they cannot be run in the iOS Simulator
+because that does not provide any cameras.
+
+To use a device camera in a Flutter app:
+
+1. Add the following dependencies in `pubspec.yaml`:`
+
+   `camera`, `path`, and `path_provider`
+
+1. For Android, edit `android/app/build.gradle` and
+   change the value of `android / defaultConfig / minSdkVersion`
+   from `flutter.minSdkVersion` to `23`.
+
+1. For iOS, add the following lines in `ios/Runner/Info.plist`
+   inside the `<dict>` element:
+
+   ```xml
+   <key>NSCameraUsageDescription</key>
+   <string>Explanation on why the camera access is needed.</string>
+   ```
+
+1. Get access to a camera with the following code.
+   There can be multiple cameras such as front and rear facing.
+
+   ```dart
+   WidgetsFlutterBinding.ensureInitialized();
+   final cameras = await availableCameras();
+   final firstCamera = cameras.first;
+   ```
+
+1. Create and initialize a `CameraController`.
+1. Use a `CameraPreview` to display what the camera is seeing.
+1. Use `CameraController` to capture a photo.
+1. Use an `Image` widget to display the photo.
+
+For an example app that uses the camera library, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_camera", "GitHub repo" %}.
 
 ## GeoLocation
 
