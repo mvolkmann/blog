@@ -7561,21 +7561,32 @@ and a widget that provides a play/pause button, a stop button,
 and a progress bar, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_audio", "GitHub repo" %}.
 
-## Camera
+## Camera and Photo Library
+
+There are several pub.dev libraries that support device camera access.
+
+Android emulators provide a simulated camera
+where the user can pan around in a room that contains a television,
+book shelves, a cat, a dog, and a kitchen.
+
+The iOS Simulator does not support a camera,
+so apps that require camera access must be run on iOS devices.
+
+### camera Library
 
 The {% aTargetBlank "https://pub.dev/packages/camera", "camera" %} library
 in pub.dev provides access to device cameras in Android, iOS, and the web.
+It does not provide access to device photo libraries.
 See this excellent {% aTargetBlank
 "https://docs.flutter.dev/cookbook/plugins/picture-using-camera",
-"cookbook page" %} for step-by-step instructions on using this library,
+"cookbook page" %} for step-by-step instructions on using the "camera" library,
 including example code.
 
-Apps that use the `camera` library can be run in an Android emulator
-which provides a simulated camera.
-But they cannot be run in the iOS Simulator
-because that does not provide any cameras.
+While the "camera" library is popular, it is not nearly as easy to use or
+as full-featured as the {% aTargetBlank "https://pub.dev/packages/image_picker",
+"image_picker" %} library which is described in the next section.
 
-To use a device camera in a Flutter app:
+To use the "camara" library:
 
 1. Add the following dependencies in `pubspec.yaml`:`
 
@@ -7607,8 +7618,53 @@ To use a device camera in a Flutter app:
 1. Use `CameraController` to capture a photo.
 1. Use an `Image` widget to display the photo.
 
-For an example app that uses the camera library, see this {% aTargetBlank
+For an example Flutter app that uses the "camera" library,
+see the "main" branch of this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_camera", "GitHub repo" %}.
+
+### image_picker Library
+
+The {% aTargetBlank "https://pub.dev/packages/image_picker",
+"image_picker" %} library in pub.dev provides
+access to device cameras and photo libraries in Android and iOS.
+
+To use this library:
+
+1. For iOS, add the following lines in `ios/Runner/Info.plist`
+   inside the `<dict>` element with app-specific descriptions:
+
+   ```xml
+    <key>NSCameraUsageDescription</key>
+    <string>Camera access is needed to demonstrate the "image_picker" library.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Microphone access is needed to demonstrate the "image_picker" library.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Photo library access is needed to demonstrate the "image_picker" library.</string>
+   ```
+
+1. To take a photo with the camera:
+
+   ```dart
+   XFile? image = await _picker.pickImage(source: ImageSource.camera);
+   ```
+
+1. To select an image from the photo library:
+
+   ```dart
+   XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+   ```
+
+1. The `XFile` object has `name` and `path` properties.
+   To render an image:
+
+   ```dart
+   Image(image: FileImage(File(_selectedXFile!.path))),
+   ```
+
+For an example Flutter app that uses the "image_picker" library,
+see the "image_picker" branch of this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_camera/tree/image_picker",
+"GitHub repo" %}.
 
 ## GeoLocation
 
