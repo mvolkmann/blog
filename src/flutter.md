@@ -320,7 +320,6 @@ To run a Flutter app on a connected iPhone:
 - Unlock the phone and "trust" it.
 - From a terminal running bash, cd to the top project directory.
 - Enter `open ios/Runner.xcworkspace` to launch Xcode.
-- Click "Runner" at the top of the Navigator.
 
 - In Xcode
 
@@ -352,11 +351,26 @@ Only Xcode option #1 has worked for me.
 All the options take a couple of minutes to complete
 the first time they are run for an app.
 
+After the phone is ejected, the Flutter app will stop working on the device
+unless it is built in "release" mode.
+To do this in Xcode:
+
+- Select Product ... Scheme ... Edit Scheme... which opens a dialog.
+- Click "Run" in the left nav (selected by default).
+- Select the "Info" tab (selected by default).
+- Change "Build Configuration" to "Release".
+- Click the "Close" button.
+- Attach an iPhone to the computer with a USB cable.
+- Select "iPhone" from the device drop-down in the header.
+- Click the triangle run button.
+- Wait for the project to build and copy to the iPhone.
+
 To run a Flutter app on an iPhone wirelessly:
 
 - The iPhone must be on the same WiFi network as the computer.
 - In Xcode, select Window ... Devices and Simulators.
 - In the dialog that is opened, select "iPhone" in the left nav.
+  (I couldn't get my device to appear!)
 - Check the "Connect vis network" checkbox.
 - In the Finder, eject the iPhone.
 - Disconnect the iPhone from the computer.
