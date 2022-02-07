@@ -331,6 +331,7 @@ To run a Flutter app on a connected iPhone:
     After entering this the first time, enter your Apple ID password.
   - Enter a unique "Bundle Identifier", perhaps containing
     your email address, a hyphen, and the project name.
+    Underscores are automatically changed to hyphens.
   - option #1
     - In Xcode, press the run button (triangle) or cmd-r.
     - There will be several dialog prompts for your Mac password.
