@@ -6992,23 +6992,23 @@ in which case an explicit animation must be used.
 There are implicit animation versions of many non-animated widgets.
 These are listed in the table below.
 
-| Property to Animate     | Implicit Animation                                       | Explicit Animation                                                            |
-| ----------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `alignment`             | `AnimatedAlign`                                          | `AlignTransition`                                                             |
-| `decoration`            |                                                          | `DecoratedBoxTransition`                                                      |
-| `List` items            | `AnimatedList` and `AnimatedListState`                   |                                                                               |
-| `Listenable` value      | `AnimatedWidget`                                         |                                                                               |
-| multiple properties     | `AnimatedContainer`                                      | `TweenAnimationBuilder`                                                       |
-| `offset`                | `AnimatedSlide`                                          |                                                                               |
-| `opacity`               | `AnimatedOpacity`                                        | `FadeTransition`                                                              |
-| `padding`               | `AnimatedPadding`                                        |                                                                               |
-| `position`              | `AnimatedPositioned` and `AnimatedPositionedDirectional` | `PositionedTransition`, `RelativePositionedTransition`, and `SlideTransition` |
-| `rotation`              | `AnimatedRotation`                                       | `RotationTransition`                                                          |
-| `scale`                 | `AnimatedScale`                                          | `ScaleTransition`                                                             |
-| `shadow`                | `AnimatedPhysicalModel`                                  |                                                                               |
-| `size`                  | `AnimatedSize`                                           | `SizeTransition`                                                              |
-| text style              | `AnimatedDefaultTextStyle`                               | `DefaultTextStyleTransition`                                                  |
-| widget pair showing one | `AnimatedSwitcher` and `AnimatedCrossFade`               |                                                                               |
+| Property to Animate     | Implicit Animation                                                                                                                                                                                                                                          | Explicit Animation                                                                                                                                                                                                                                                                                                                                                         |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `alignment`             | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedAlign-class.html", "AnimatedAlign" %}                                                                                                                                                      | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AlignTransition-class.html", "AlignTransition" %}                                                                                                                                                                                                                                                                 |
+| `decoration`            |                                                                                                                                                                                                                                                             | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/DecoratedBoxTransition-class.html", "DecoratedBoxTransition" %}                                                                                                                                                                                                                                                   |
+| `List` items            | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedList-class.html", "AnimatedList" %} and {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedListState-class.html", "AnimatedListState" %}                                     |                                                                                                                                                                                                                                                                                                                                                                            |
+| `Listenable` value      | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedWidget-class.html", "AnimatedWidget" %}                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                            |
+| multiple properties     | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html", "AnimatedContainer" %}                                                                                                                                              | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/TweenAnimationBuilder-class.html", "TweenAnimationBuilder" %}                                                                                                                                                                                                                                                     |
+| `offset`                | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedSlide-class.html", "AnimatedSlide" %}                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                            |
+| `opacity`               | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedOpacity-class.html", "AnimatedOpacity" %}                                                                                                                                                  | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/FadeTransition-class.html", "FadeTransition" %}                                                                                                                                                                                                                                                                   |
+| `padding`               | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedPadding-class.html", "AnimatedPadding" %}                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                            |
+| `position`              | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedPositioned-class.html", "AnimatedPositioned" %} and {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedPositionedDirectional-class.html", "AnimatedPositionedDirectional" %} | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/PositionedTransition-class.html", "PositionedTransition" %}, {% aTargetBlank "https://api.flutter.dev/flutter/widgets/RelativePositionedTransition-class.html", "RelativePositionedTransition" %}, and {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SlideTransition-class.html", "SlideTransition" %} |
+| `rotation`              | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedRotation-class.html", "AnimatedRotation" %}                                                                                                                                                | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/RotationTransition-class.html", "RotationTransition" %}                                                                                                                                                                                                                                                           |
+| `scale`                 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedScale-class.html", "AnimatedScale" %}                                                                                                                                                      | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ScaleTransition-class.html", "ScaleTransition" %}                                                                                                                                                                                                                                                                 |
+| `shadow`                | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedPhysicalModel-class.html", "AnimatedPhysicalModel" %}                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                            |
+| `size`                  | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedSize-class.html", "AnimatedSize" %}                                                                                                                                                        | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/SizeTransition-class.html", "SizeTransition" %}                                                                                                                                                                                                                                                                   |
+| text style              | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedDefaultTextStyle-class.html", "AnimatedDefaultTextStyle" %}                                                                                                                                | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/DefaultTextStyleTransition-class.html", "DefaultTextStyleTransition" %}                                                                                                                                                                                                                                           |
+| widget pair showing one | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedSwitcher-class.html", "AnimatedSwitcher" %} and {% aTargetBlank "https://api.flutter.dev/flutter/widgets/AnimatedCrossFade-class.html", "AnimatedCrossFade" %}                             |                                                                                                                                                                                                                                                                                                                                                                            |
 
 In order of difficulty from easiest to most difficult,
 the options for implementing animattions are
@@ -7057,7 +7057,12 @@ Both add a shadow to a shape based on `elevation` and other arguments.
 The `AnimatedContainer` widget provides
 implicit animation of multiple properties.
 
-The `TweenAnimationBuilder` class is used to create custom implicit animations.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/AnimatedBuilder/AnimatedBuilder.html",
+"AnimationBuilder" %} and {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/TweenAnimationBuilder-class.html",
+"TweenAnimationBuilder" %} classes
+are used to create custom implicit animations.
 For an example, see the "Animation From Scratch" section below.
 
 ### Explicit Animation
@@ -7071,14 +7076,28 @@ If these approaches have performance issues, consider using `CustomPainter`.
 Built-in explicit animations all extend `AnimatedWidget`.
 This automatically rebuilds when a given `Listenable` changes.
 
-TODO: This seems to not be true!
-Explict animations require the use of an `AnimationController`
-that is maintained inside a `StatefulWidget`
-that mixes in `SingleTickerProviderStateMixin` (using the “with” keyword).
+Explict animations require the use of an {% aTargetBlank
+"https://api.flutter.dev/flutter/animation/AnimationController-class.html",
+"AnimationController" %} that is maintained inside a `StatefulWidget`.
+This produces values that are typically in the range 0 to 1.
+They also require a {% aTargetBlank
+"https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html",
+"TickerProvider" %} to provide a `Ticker`.
+A {% aTargetBlank "https://api.flutter.dev/flutter/scheduler/Ticker-class.html",
+"Ticker" %} calls a callback function
+once for each animation frame that is rendered.
+Often the `Ticker` is provided by the mixin {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/SingleTickerProviderStateMixin-mixin.html",
+"SingleTickerProviderStateMixin" %}.
 
-An `AnimationController` typically produces 60 values per second.
-By default the values are between 0 and 1.
-The controller passes each new value to all registered listener functions.
+An `AnimationController` typically obtains
+60 values per second from the `Ticker` and
+passes each value to all registered listener functions.
+It can:
+
+- change the lower and upper bounds to something other than 0 and 1
+- set an animation to a specific value (starts at lower bound)
+- play an animation forward (current to upper) or backward (current to lower)
 
 To produce values in another range or with a type other than `double`,
 use the `Tween` class or its subclasses such as `ColorTween`.
@@ -7117,19 +7136,14 @@ the status begins as `forward` and ends as `completed` (at end).
 When the `reverse` method is called,
 the status begins as `reverse` and ends as `dismissed` (at beginning).
 
-TODO: What methods take an argument of type `AnimationController`?
-TODO: The `Tween` `animate` method takes one as its first positional argument.
-TODO: The `AnimationBuilder` contructor takes one in its `animation` argument.
-TODO: Are there others?
+Classes that use an `AnimationController` typically
+have a constructor argument of type `Animation` (like `FadeTransition`)
+or have an `animate` method (like `Tween`).
 
 Multiple animations can be controlled by the same controller instance.
 
-TODO: This seems to not be true!
-TODO: I haven't found which widget constructors have an argument of this type.
-Pass an `AnimationController` instance to
-the `controller` argument of an explicit animation.
-
-Explicit animations can be composed to perform multiple, simultaneous animations.
+Explicit animations can be composed
+to perform multiple, simultaneous animations.
 
 `AnimatedWidget` and `AnimatedBuilder` are used together
 to create a custom explicit animation.
@@ -7517,8 +7531,6 @@ For animations of drawings rather than widgets,
 consider using the libraries
 {% aTargetBlank "https://pub.dev/packages/rive", "rive" %} and
 {% aTargetBlank "https://pub.dev/packages/lottie", "lottie" %} in pub.dev.
-
-TODO: Finish this section.
 
 ### More on Animation
 
