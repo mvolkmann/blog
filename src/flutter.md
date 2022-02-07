@@ -7642,6 +7642,12 @@ To use this library:
     <string>Photo library access is needed to demonstrate the "image_picker" library.</string>
    ```
 
+1. Create an `ImagePicker` instance:
+
+   ```dart
+   final _picker = ImagePicker();
+   ```
+
 1. To take a photo with the camera:
 
    ```dart
