@@ -21,8 +21,8 @@ These are documented here.
 ## App Bar
 
 An "app bar" appears at the top of the screen.
-It contains three areas that from left to right
-are referred to as "leading", "title", and "trailing".
+It contains three areas that from left to right are referred to as
+"leading", "title", and "trailing" (called "actions" in Flutter).
 The title typically contains a page name, but an be an icon.
 The leading and trailing areas typically contain one or more buttons
 that often contain icons.

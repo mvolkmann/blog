@@ -3636,7 +3636,8 @@ wrap the `Scaffold` widget in a `SafeArea` widget.
 
 ## Form Validation
 
-The `Form` widget supports form validation based on the form fields inside it.
+The {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Form-class.html",
+"Form" %} widget supports form validation based on the form fields inside it.
 It takes a `children` argument that is a `List` of widgets.
 
 Widget classes that extend {% aTargetBlank
@@ -7736,7 +7737,7 @@ The steps to use sqflite are:
 
    ```dart
    WidgetsFlutterBinding.ensureInitialized();
-   final database = openDatabase(
+   final database = await openDatabase(
      join(await getDatabasesPath(), 'doggie_database.db'),
      ...
    );
@@ -7759,9 +7760,8 @@ The steps to use sqflite are:
 1. Write a function that inserts a record.
 
    ```dart
-   Future<void> insertDog(Dog dog) async {
-     final db = await database;
-     await db.insert(
+   Future<void> insertDog(Dog dog) {
+     return database.insert(
        'dogs',
        dog.toMap(),
        conflictAlgorithm: ConflictAlgorithm.replace,
@@ -7769,15 +7769,14 @@ The steps to use sqflite are:
    }
 
    var comet = Dog(name: 'Comet', breed: 'Whippet', age: 1);
-   await insertDog(comet);
+   var id = await insertDog(comet);
    ```
 
 1. Write a function that retrieves records.
 
    ```dart
    Future<List<Dog>> getDogs() async {
-     final db = await database;
-     final List<Map<String, dynamic>> maps = await db.query('dogs');
+     final List<Map<String, dynamic>> maps = await database.query('dogs');
      return List.generate(maps.length, (index) {
        var map = maps[index];
        return Dog(
@@ -7795,9 +7794,8 @@ The steps to use sqflite are:
 1. Write a function that updates a record.
 
    ```dart
-   Future<void> updateDog(Dog dog) async {
-     final db = await database;
-     await db.update(
+   Future<void> updateDog(Dog dog) {
+     return database.update(
        'dogs',
        dog.toMap(),
        where: 'id = ?',
@@ -7813,9 +7811,8 @@ The steps to use sqflite are:
 1. Write a function that deletes a record.
 
    ```dart
-   Future<void> deleteDog(int id) async {
-     final db = await database;
-     await db.delete(
+   Future<void> deleteDog(int id) {
+     return database.delete(
        'dogs',
        where: 'id = ?',
        whereArgs: [id],
@@ -7824,6 +7821,9 @@ The steps to use sqflite are:
 
    await deleteDog(comet.id);
    ```
+
+For a working example, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_sqlite", "GitHub repo" %}.
 
 ## Tests
 
