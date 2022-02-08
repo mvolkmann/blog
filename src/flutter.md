@@ -7747,10 +7747,9 @@ The steps to use sqflite are:
 
    ```dart
      onCreate: (db, version) {
-       //TODO: Will this automatically assign auto-incrementing ids?
        return db.execute(
-        'create table dogs(' +
-        'id integer primary key, age integer, breed text, name text)',
+        'create table if not exists dogs(' +
+        'id integer primary key autoincrement, age integer, breed text, name text)',
        );
      },
      // The version provides a path to perform database upgrades and downgrades.
