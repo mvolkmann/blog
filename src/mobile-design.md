@@ -11,6 +11,13 @@ that run on phones and tablets,
 there are common elements that appear in most such apps.
 These are documented here.
 
+<figure style="width: 90%">
+  <img alt="Mobile App Elements" style="width: 90%"
+    src="/blog/assets/mobile-app-elements.svg?v={{pkg.version}}"
+    title="Mobile App Elements">
+  <figcaption>Mobile App Elements</figcaption>
+</figure>
+
 ## App Bar
 
 An "app bar" appears at the top of the screen.
