@@ -7749,7 +7749,7 @@ The steps to use sqflite are:
      onCreate: (db, version) {
        //TODO: Will this automatically assign auto-incrementing ids?
        return db.execute(
-        'CREATE TABLE dogs(' +
+        'create table dogs(' +
         'id integer primary key, age integer, breed text, name text)',
        );
      },
