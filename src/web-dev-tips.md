@@ -3612,6 +3612,39 @@ in `localStorage` and restore it each time they revisit the site.
 </html>
 ```
 
+### Custom fonts with `@font-face`
+
+To use a custom font in a web app:
+
+1. Download a font file in one of the supported formats
+   (includes "opentype", "truetype", and "woff")
+   and place it in a directory where public files are served.
+
+1. Add the `@font-face` at-rule outside any CSS rule
+   in a global CSS file, not one specific to a single component.
+   For example:
+
+   ```css
+   @font-face {
+     font-family: 'Ebrima';
+     src: url('/fonts/ebrima.ttf') format('truetype');
+   }
+   ```
+
+1. Refer to the new font family using the `font-family` CSS property.
+   For example:
+
+   ```css
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6 {
+     font-family: 'Ebrima';
+   }
+   ```
+
 ### clip-path property
 
 The CSS {% aTargetBlank
