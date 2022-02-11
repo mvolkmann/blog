@@ -2104,6 +2104,8 @@ These include `clip`, `ellipsis`, `fade`, and `visible`.
 There are many more display widgets provided in pub.dev.
 For example, the {% aTargetBlank "https://pub.dev/packages/badges",
 "badges package" %} provides the `Badge` widgets.
+For a demo, see this {% aTargetBlank
+"https://www.youtube.com/watch?v=_CIHLJHVoN8", "YouTube video" %}.
 
 Details for some of the display widgets are provided below.
 
