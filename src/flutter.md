@@ -297,6 +297,34 @@ To run a Flutter app from VS Code:
 The first time this is run for a given application
 it takes around a minute to start.
 
+Sometimes it is necessary to change `build.gradle` files
+used for Android builds.
+
+The Kotlin version can be changed by modifying the following
+in the file `android/build.gradle`:
+
+```text
+buildscript {
+    ext.kotlin_version = '1.6.0'
+    ...
+}
+```
+
+The Flutter SDK version can be changed by modifing the following
+in the file `android/app/build.gradle`:
+
+```text
+android {
+   ...
+    defaultConfig {
+        ...
+        minSdkVersion 21
+        ...
+    }
+    ...
+}
+```
+
 Running a Flutter app from VS Code opens the following floating toolbar:
 
 <img alt="VS Code Flutter Toolbar" style="width: 80%"
