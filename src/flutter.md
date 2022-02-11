@@ -372,7 +372,7 @@ To run a Flutter app on an iPhone wirelessly:
 - In Xcode, select Window ... Devices and Simulators.
 - In the dialog that is opened, select "iPhone" in the left nav.
   (I couldn't get my device to appear!)
-- Check the "Connect vis network" checkbox.
+- Check the "Connect via network" checkbox.
 - In the Finder, eject the iPhone.
 - Disconnect the iPhone from the computer.
 - Run the Flutter app using one of the options above.
@@ -7824,6 +7824,26 @@ The steps to use sqflite are:
 
 For a working example, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_sqlite", "GitHub repo" %}.
+
+## AppIcons
+
+The steps to customize the launcher icon used by a Flutter app are:
+
+1. Browse {% aTargetBlank "https://appicon.co", "https://appicon.co" %}.
+1. Upload a square image with a recommended size of 1024 x 1024.
+1. Select the desired target platform checkboxes,
+   perhaps only iPhone and Android.
+1. Click the "Generate" button.
+1. Unzip the file that is downloaded.
+1. Delete all the directories whose names begin with "mipmap"
+   in the `android/app/src/main/res` directory of your project.
+1. Copy the directories whose names begin with "mipmap"
+   from the android directory in the unzipped files
+   into the `android/app/src/main/res` directory.
+1. Delete the `ios/Runner/Assets.xcassets` directory.
+1. Copy the `Assets.xcassets` directory in the unzipped files
+   into the `ios/Runner` directory.
+1. Redeploy the app to a device.
 
 ## Tests
 
