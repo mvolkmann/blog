@@ -286,10 +286,14 @@ If the app is run from a compatible editor, the app will
 automatically update after saving code changes without losing state.
 Compatible editors include Android Studio, IntelliJ, VS Code, and emacs.
 
-To run a Flutter app from VS Code, select a simulated or real device to use
-from a menu on the right side of the VS Code footer.
-The select Run ... Start Debugging (F5)
-or Run ... Run Without Debugging (ctrl-fn-F5).
+To run a Flutter app from VS Code:
+
+- Select a simulated or real device to use
+  from a menu on the right side of the VS Code footer.
+- Select a `.dart` file such as `lib/main.dart`.
+- Select Run ... Start Debugging (F5) or
+  Run ... Run Without Debugging (fn-ctrl-F5).
+
 The first time this is run for a given application
 it takes around a minute to start.
 
