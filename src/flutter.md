@@ -2101,6 +2101,10 @@ but this can be changed by setting their `overflow` argument to
 a value from the `TextOverflow` enum.
 These include `clip`, `ellipsis`, `fade`, and `visible`.
 
+There are many more display widgets provided in pub.dev.
+For example, the {% aTargetBlank "https://pub.dev/packages/badges",
+"badges package" %} provides the `Badge` widgets.
+
 Details for some of the display widgets are provided below.
 
 #### CircleAvatar Widget
