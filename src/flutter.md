@@ -7829,21 +7829,23 @@ For a working example, see this {% aTargetBlank
 
 The steps to customize the launcher icon used by a Flutter app are:
 
-1. Browse {% aTargetBlank "https://appicon.co", "https://appicon.co" %}.
-1. Upload a square image with a recommended size of 1024 x 1024.
-1. Select the desired target platform checkboxes,
-   perhaps only iPhone and Android.
-1. Click the "Generate" button.
-1. Unzip the file that is downloaded.
-1. Delete all the directories whose names begin with "mipmap"
-   in the `android/app/src/main/res` directory of your project.
-1. Copy the directories whose names begin with "mipmap"
-   from the android directory in the unzipped files
-   into the `android/app/src/main/res` directory.
-1. Delete the `ios/Runner/Assets.xcassets` directory.
-1. Copy the `Assets.xcassets` directory in the unzipped files
-   into the `ios/Runner` directory.
-1. Redeploy the app to a device.
+1. Enter `flutter pub add flutter_launcher_icons`
+1. Edit `pubspec.yaml` and add the following at the end:
+
+   ```yaml
+   flutter_icons:
+     android: 'launcher_icon'
+     ios: true
+     image_path: 'assets/icon/icon.png'
+     remove_alpha_ios: true
+   ```
+
+1. Create the directory `assets/icon` in the project.
+1. Copy a square PNG file into this file and name it `icon.png`.
+1. Edit `android/app/build.gradle` and change
+   `minSdkVersion flutter.minSdkVersion` to `minSdkVersion 21`
+   (or at least version 16)
+1. Enter `flutter pub run flutter_launcher_icons:main`
 
 ## Tests
 
