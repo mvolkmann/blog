@@ -401,6 +401,21 @@ This extension provides many things including:
 - "Dart: Sort Members" command to sort methods (not properties) in a class
 - "Organize Imports" command to order import statements
 
+Consider adding the following in `settings.json`:
+
+```json
+  "[dart]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  },
+```
+
 ### Flutter Extension
 
 Install the {% aTargetBlank
