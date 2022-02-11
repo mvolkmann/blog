@@ -2988,18 +2988,19 @@ The {% aTargetBlank
 "TextFormField" %} widget constructors take many optional arguments.
 The highlights are described in the following table:
 
-| Argument       | Description                                                           |
-| -------------- | --------------------------------------------------------------------- |
-| `autoCorrect`  | `bool` indicating of the value should be auto-corrected               |
-| `controller`   | `TextEditingController` (described later)                             |
-| `decoration`   | `InputDecoration` that specifies styling details                      |
-| `keyboardType` | `TextInputType` that requests a certain kind of on-screen keyboard    |
-| `maxLength`    | `int` maximum length defaulting to no limit                           |
-| `maxLines`     | `int` defaulting to `1`                                               |
-| `obscureText`  | `bool` indicating of the value should be obscured (ex. for passwords) |
-| `onChanged`    | function called with new value when the user changes it               |
-| `readOnly`     | `bool` indicating if the value cannot currently be modified           |
-| `style`        | `TextStyle` of text being edited                                      |
+| Argument          | Description                                                           |
+| ----------------- | --------------------------------------------------------------------- |
+| `autoCorrect`     | `bool` indicating of the value should be auto-corrected               |
+| `controller`      | `TextEditingController` (described later)                             |
+| `decoration`      | `InputDecoration` that specifies styling details                      |
+| `inputFormatters` | `List<TextInputFormatter>?` input validation                          |
+| `keyboardType`    | `TextInputType` that requests a certain kind of on-screen keyboard    |
+| `maxLength`       | `int` maximum length defaulting to no limit                           |
+| `maxLines`        | `int` defaulting to `1`                                               |
+| `obscureText`     | `bool` indicating of the value should be obscured (ex. for passwords) |
+| `onChanged`       | function called with new value when the user changes it               |
+| `readOnly`        | `bool` indicating if the value cannot currently be modified           |
+| `style`           | `TextStyle` of text being edited                                      |
 
 Specify the `maxLength` argument causes the number of characters entered
 and the maximum length to be displayed below the input, right justified.
@@ -3078,6 +3079,11 @@ It uses `prefix` and `suffix` widgets.
         ),
       ),
       initialValue: '0',
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ],
+      // This is not enough to restrict the value entered.
+      // inputFormatters must also be specified.
       keyboardType: TextInputType.number,
       maxLength: 7,
     );
