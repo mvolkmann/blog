@@ -8527,7 +8527,7 @@ void main() {
     await swipe(page1, true, 'This is page #1.'); // stays on same page
   });
 
-
+  testWidgets('tap dots', (WidgetTester tester) async {
     Future<void> tapDot(int number) async {
       var dot = find.byKey(ValueKey('dot$number'));
       await tester.tap(dot);
