@@ -1262,8 +1262,11 @@ The most common properties to set in {% aTargetBlank
 property are `primarySwatch` and `textTheme`.
 `primarySwatch` is a `MaterialColor` object that specifies
 many shades of colors to be used throughout the app.
-`textTheme` sets the styling of many kinds of text.
-TODO: How can you set the default color of all `Icon` widgets?
+
+To set the default color of icons, set the `iconTheme` property
+of the `ThemeData` object used for the `theme` property
+to an object like `IconThemeData(color: Colors.orange)`.
+This does not affect the color of `IconButton` widgets.
 
 For example:
 
