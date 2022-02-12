@@ -144,7 +144,7 @@ body {
         & > iframe {
           border: none;
           box-sizing: border-box;
-          padding: 0.5rem;
+          padding: 0 0.5rem;
           transition-duration: 500ms; // matches setTimeout in topics.js
           transition-property: opacity;
           width: 100%;

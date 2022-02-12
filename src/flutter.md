@@ -1342,7 +1342,7 @@ as an alternative to the `Scaffold` `botttomNavigationBar`.
 See the sample app in the GitHub repo {% aTargetBlank
 "https://github.com/mvolkmann/flutter_appbar", "flutter_appbar" %}.
 
-### Cuperino Structure Widgets
+### Cupertino Structure Widgets
 
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/cupertino/cupertino-library.html",
@@ -5409,7 +5409,7 @@ class StreamProviderPage extends ConsumerWidget {
           data: (value) => Text('$value'),
           error: (e, stack) => Text('Error: $e'),
         ),
-        //TODO: What can't this be used instead of the above code?
+        //TODO: Why can't this be used instead of the above code?
         //child: buildStream(stream),
       ),
     );
@@ -8498,37 +8498,36 @@ void main() {
   });
 
   testWidgets('swipe left and right', (WidgetTester tester) async {
-      Future<void> swipe(page, swipeLeft, expectedText) async {
-        //TODO: How can we get the device width in a test?
-        double deviceWidth = 600; // MediaQuery.of(context).size.width;
+    var deviceWidth = 0.0;
 
-        var offset = Offset(deviceWidth * (swipeLeft ? 1 : -1), 0);
-        var speed = 300.0; // pixels per second
-        await tester.fling(page, offset, speed);
-        await tester.pumpAndSettle();
-
-        //TODO: Why does this fail in this integration test,
-        //TODO: but it passes in a widget test with the SAME CODE?
-        expect(find.text(expectedText), findsOneWidget);
-      }
-
-      app.main();
+    Future<void> swipe(page, swipeLeft, expectedText) async {
+      var offset = Offset(deviceWidth * (swipeLeft ? 1 : -1), 0);
+      var speed = 300.0; // pixels per second
+      await tester.fling(page, offset, speed);
       await tester.pumpAndSettle();
 
-      var page1 = find.byKey(ValueKey('page1'));
-      var page2 = find.byKey(ValueKey('page2'));
-      var page3 = find.byKey(ValueKey('page3'));
+      expect(find.text(expectedText), findsOneWidget);
+    }
 
-      await swipe(page1, false, 'This is page #2.'); // goes forward
-      await swipe(page2, false, 'This is page #3.'); // goes forward
-      await swipe(page3, false, 'This is page #3.'); // stays on same page
-      await swipe(page3, true, 'This is page #2.'); // goes backward
-      await swipe(page2, true, 'This is page #1.'); // goes backward
-      await swipe(page1, true, 'This is page #1.'); // stays on same page
-    },
-  );
+    await tester.pumpWidget(MyApp());
 
-  testWidgets('tap dots', (WidgetTester tester) async {
+    // Get the device width.
+    final BuildContext context = tester.element(find.byType(Container));
+    deviceWidth = MediaQuery.of(context).size.width;
+
+    var page1 = find.byKey(ValueKey('page1'));
+    var page2 = find.byKey(ValueKey('page2'));
+    var page3 = find.byKey(ValueKey('page3'));
+
+    await swipe(page1, false, 'This is page #2.'); // goes forward
+    await swipe(page2, false, 'This is page #3.'); // goes forward
+    await swipe(page3, false, 'This is page #3.'); // stays on same page
+    await swipe(page3, true, 'This is page #2.'); // goes backward
+    await swipe(page2, true, 'This is page #1.'); // goes backward
+    await swipe(page1, true, 'This is page #1.'); // stays on same page
+  });
+
+
     Future<void> tapDot(int number) async {
       var dot = find.byKey(ValueKey('dot$number'));
       await tester.tap(dot);
