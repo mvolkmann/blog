@@ -3533,7 +3533,7 @@ The {% aTargetBlank
 to the Material UI {% aTargetBlank
 "https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html",
 "CalendarDatePicker" %} widget.
-It allow the user to select a date, time, or both.
+It allows the user to select a date, time, or both by spinning 3D wheels.
 
 The following code demonstrates this:
 
@@ -3558,6 +3558,11 @@ Container(
 );
 ```
 
+Currently thewre are no enum values in `CupertinoDatePickerMode`
+to request getting only a month and year or only a month and day.
+See this {% aTargetBlank
+"https://github.com/flutter/flutter/issues/93508", "issue" %}.
+
 #### CupertinoPicker Widget
 
 The {% aTargetBlank
@@ -3566,7 +3571,7 @@ The {% aTargetBlank
 to the Material UI {% aTargetBlank
 "https://api.flutter.dev/flutter/material/DropdownButton-class.html",
 "DropdownButton" %} widget.
-It allow the user to select an option from a wheel-like display.
+It allows the user to select an option from a wheel-like display.
 
 The following code allows the user to select from a `List` of words.
 
