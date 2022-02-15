@@ -2495,17 +2495,17 @@ Each of these are described in the following table:
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/TimePickerDialog-class.html", "TimePickerDialog" %}           | contains a "lollipop" UI for selecting an hour and minute in a day with toggle buttons for AM and PM                                        |
 
 Flutter also provides a set of functions that show a dialog.
-All of these `returns a `Future` that completes
+All of these return a `Future` that completes
 when the user does something to dismiss the dialog.
 These functions are described in the following table:
 
-| Function              | Description                                                                                |
-| --------------------- | ------------------------------------------------------------------------------------------ |
-| `showDialog`          | displays any dialog returned by the function specified in its `builder` argument           |
-| `showCupertinoDialog` | like `showDialog`, but themed for iOS                                                      |
-| `showGeneralDialog`   | like `showDialog` but supports customizing the transition used to display the dialog       |
-| `showDatePicker`      | provides an easier way to display a `DatePickerDialog` than using the above functions      |
-| `showDateRangePicker` | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
+| Function                                                                                                       | Description                                                                                |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDialog.html", "showDialog" %}                    | displays any dialog returned by the function specified in its `builder` argument           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/showCupertinoDialog.html", "showCupertinoDialog" %} | like `showDialog`, but themed for iOS                                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/showGeneralDialog.html", "showGeneralDialog" %}       | like `showDialog` but supports customizing the transition used to display the dialog       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDatePicker.html", "showDatePicker" %}            | provides an easier way to display a `DatePickerDialog` than using the above functions      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDateRangePicker.html", "showDateRangePicker" %}  | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
 
 By default, dialogs created with the `showDialog` function
 are dismissed if a user taps outside them. To prevent this,

@@ -553,6 +553,10 @@ should be declared with the keyword `final`.
 This prevents assigning a new value,
 but does not prevent modifying the value.
 
+In general,
+`final` is used in Dart everywhere `const` would be used in JavaScript and
+`var` is used in Dart everywhere `let` would be used in JavaScript.
+
 The meaning of the `const` and `final` keywords depends on
 whether they are applied to a variable or its initial value.
 There are two aspects to consider,
@@ -1567,7 +1571,7 @@ The `Map` class provides the following methods (some omitted):
 | `forEach(void action(K key, V value)`                   | executes a function on each key/value pair                               |
 | `map<K2, V2>(MapEntry<K2, V2> convert(K key, V value))` | returns a new `Map` created by calling a function on each key/value pair |
 | `putIfAbsent(K key, V ifAbsent()`                       | returns the value for a given key and adds a value if not present        |
-| `remove(Object? key)`                                   | removes a key/value pair if present                                      |
+| `remove(Object? key)`                                   | removes a key/value pair with a given key if present                     |
 | `removeWhere(bool test(K key, V value)`                 | removes all key/value pairs that pass a test                             |
 | `update(K key, V update(V value)`                       | updates the value for a given key to the value returned by a function    |
 | `updateAll(V update(K key, V value)`                    | updates all values to the value returned by a function                   |
