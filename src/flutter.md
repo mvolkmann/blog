@@ -2478,364 +2478,6 @@ all takes a `tooltip` argument, which simplifies adding a tooltip.
 The `triggerMode` can only be set to `tap` for widgets
 that do not have an `onPressed` argument value.
 
-### Dialog Widgets
-
-Flutter provides many widgets that render modal dialogs.
-Each of these are described in the following table:
-
-| Widget                                                                                                                  | Description                                                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/AboutDialog-class.html", "AboutDialog" %}                     | contains the "application's icon, name, version number, and copyright, plus a button to show licenses for software used by the application" |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/AlertDialog-class.html", "AlertDialog" %}                     | creates a dialog containing a message and some buttons                                                                                      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoAlertDialog-class.html", "CupertinoAlertDialog" %}  | iOS-themed version of `AlertDialog`                                                                                                         |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/DatePickerDialog-class.html", "DatePickerDialog" %}           | contains help text and a `CalendarDatePicker`                                                                                               |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/DateRangePickerDialog-class.html", "DateRangePickerDialog" %} | contains help text and a `CalendarDatePicker` that supports selecting both a start and end date                                             |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/Dialog-class.html", "Dialog" %}                               | used by other dialogs, but not by extending; not typically used directly                                                                    |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/SimpleDialog-class.html", "SimpleDialog" %}                   | contains a title and a list of clickable `SimpleDialogOption` options                                                                       |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/TimePickerDialog-class.html", "TimePickerDialog" %}           | contains a "lollipop" UI for selecting an hour and minute in a day with toggle buttons for AM and PM                                        |
-
-Flutter also provides a set of functions that show a dialog.
-All of these return a `Future` that completes
-when the user does something to dismiss the dialog.
-These functions are described in the following table:
-
-| Function                                                                                                       | Description                                                                                |
-| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDialog.html", "showDialog" %}                    | displays any dialog returned by the function specified in its `builder` argument           |
-| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/showCupertinoDialog.html", "showCupertinoDialog" %} | like `showDialog`, but themed for iOS                                                      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/showGeneralDialog.html", "showGeneralDialog" %}       | like `showDialog` but supports customizing the transition used to display the dialog       |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDatePicker.html", "showDatePicker" %}            | provides an easier way to display a `DatePickerDialog` than using the above functions      |
-| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDateRangePicker.html", "showDateRangePicker" %}  | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
-
-By default, dialogs created with the `showDialog` function
-are dismissed if a user taps outside them. To prevent this,
-pass the `barrierDismissible` argument with a value of `false`.
-
-Dialogs created with the `showCupertinoDialog` and `showGeneralDialog` functions
-have the opposite default.
-To cause them to be dismissed if a user taps outside them,
-pass the `barrierDismissible` argument with a value of `true`.
-
-Dialogs created with the `showDatePicker` and `showDatePickerRange` functions
-are always dismissed if a user taps outside them.
-They do not take a `barrierDismissible` argument,
-so this behavior cannot be changed.
-
-The `showDatePickerRange` displays a full-screen modal dialog
-while the other `show` functions
-display modal dialogs that do not cover the full screen.
-
-The following code simplifies the use of `AlertDialog`
-and provides the functions `alert` and `confirm`
-which are similar to their HTML counterparts.
-
-```dart
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-/// Displays an AlertDialog with an OK button
-/// which just closes the dialog.  No value is returned.
-Future<void> alert({
-  required BuildContext context,
-  required String title,
-  required String message,
-  bool cupertino = false,
-}) async {
-  await showDialog<String>(
-    context: context,
-    // The builder function can return any kind of dialog.
-    builder: (_) => MyAlertDialog(
-      cupertino: cupertino,
-      title: title,
-      message: message,
-      options: ['OK'],
-    ),
-  );
-}
-
-/// Displays an AlertDialog with No and Yes buttons
-/// and returns a Future that succeeds with a String
-/// that is the text on the pressed button.
-Future<String?> confirm({
-  required BuildContext context,
-  required String title,
-  required String message,
-  bool cupertino = false,
-}) async {
-  return await showDialog<String>(
-    context: context,
-    builder: (_) => MyAlertDialog(
-      title: title,
-      message: message,
-      options: ['No', 'Yes'],
-    ),
-  );
-}
-
-class MyAlertDialog extends StatelessWidget {
-  final bool cupertino;
-  final String title;
-  final String message;
-  final List<String> options;
-
-  MyAlertDialog({
-    Key? key,
-    this.cupertino = false,
-    required this.title,
-    required this.message,
-    required this.options,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // Dialogs are treated like routes, so to close a dialog and
-    // return the previous route, call Navigator.of(context).pop().
-    var buttons = options
-        .map(
-          (option) => TextButton(
-            onPressed: () => Navigator.pop(context, option),
-            child: Text(option),
-          ),
-        )
-        .toList();
-    return cupertino
-        ? CupertinoAlertDialog(
-            title: Text(title),
-            content: Text(message), // can be any widget
-            actions: buttons, // typically a List of TextButton widgets
-          )
-        : AlertDialog(
-            title: Text(title),
-            content: Text(message), // can be any widget
-            actions: buttons, // typically a List of TextButton widgets
-          );
-  }
-}
-```
-
-The following code demonstrates using each of the supported dialog types.
-
-<figure style="width: 30%">
-  <img alt="Flutter Dialogs"
-    src="/blog/assets/flutter-dialogs.png?v={{pkg.version}}"
-    title="Flutter Dialogs">
-  <figcaption>Flutter Dialogs</figcaption>
-</figure>
-<figure style="width: 30%">
-  <img alt="Flutter About Dialog"
-    src="/blog/assets/flutter-dialog-about.png?v={{pkg.version}}"
-    title="Flutter About Dialog">
-  <figcaption>Flutter About Dialog</figcaption>
-</figure>
-<figure style="width: 30%">
-  <img alt="Flutter About Dialog Licenses"
-    src="/blog/assets/flutter-dialog-about-licenses.png?v={{pkg.version}}"
-    title="Flutter About Dialog Licenses">
-  <figcaption>Flutter About Dialog Licenses</figcaption>
-</figure>
-
-<figure style="width: 30%">
-  <img alt="Flutter Material Alert Dialog"
-    src="/blog/assets/flutter-dialog-alert.png?v={{pkg.version}}"
-    title="Flutter Material Alert Dialog">
-  <figcaption>Flutter Material Alert Dialog</figcaption>
-</figure>
-<figure style="width: 30%">
-  <img alt="Flutter Cupertino Alert Dialog"
-    src="/blog/assets/flutter-dialog-alert-cupertino.png?v={{pkg.version}}"
-    title="Flutter Cupertino Alert Dialog">
-  <figcaption>Flutter Cupertino Alert Dialog</figcaption>
-</figure>
-<figure style="width: 30%">
-  <img alt="Flutter Confirm Dialog"
-    src="/blog/assets/flutter-dialog-confirm.png?v={{pkg.version}}"
-    title="Flutter Confirm Dialog">
-  <figcaption>Flutter Confirm Dialog</figcaption>
-</figure>
-
-<figure style="width: 30%">
-  <img alt="Flutter Date Picker Dialog"
-    src="/blog/assets/flutter-dialog-date-picker.png?v={{pkg.version}}"
-    title="Flutter Date Picker Dialog">
-  <figcaption>Flutter Date Picker Dialog</figcaption>
-</figure>
-<figure style="width: 30%">
-  <img alt="Flutter Date Range Dialog"
-    src="/blog/assets/flutter-dialog-date-range.png?v={{pkg.version}}"
-    title="Flutter Date Range Dialog">
-  <figcaption>Flutter Date Range Dialog</figcaption>
-</figure>
-<figure style="width: 30%">
-  <img alt="Flutter Time Picker Dialog"
-    src="/blog/assets/flutter-dialog-time-picker.png?v={{pkg.version}}"
-    title="Flutter Time Picker Dialog">
-  <figcaption>Flutter Time Picker Dialog</figcaption>
-</figure>
-
-```dart
-import 'package:flutter/material.dart';
-import 'my_alert_dialog.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Dialog Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  void _alert({
-    required BuildContext context,
-    bool cupertino = false,
-    required String message,
-  }) {
-    alert(
-      context: context,
-      cupertino: cupertino,
-      title: 'Alert',
-      message: message,
-    );
-  }
-
-  void _confirm({
-    required BuildContext context,
-    required String question,
-  }) async {
-    var answer = await confirm(
-      context: context,
-      title: 'Confirm',
-      message: question,
-    );
-    print('answer = $answer');
-  }
-
-  void _pickDate({required BuildContext context}) async {
-    var dateTime = DateTime.now();
-    var newDateTime = await showDatePicker(
-      context: context,
-      helpText: 'Select a date.',
-      initialDate: dateTime,
-      firstDate: DateTime(1970),
-      lastDate: DateTime(2030, 12, 31),
-    );
-    print('newDateTime = $newDateTime');
-  }
-
-  void _pickDateRange({required BuildContext context}) async {
-    var dateRange = DateTimeRange(
-      start: DateTime(2022, 4, 16),
-      end: DateTime(2022, 5, 3),
-    );
-    // Click the start date, then click the end date.
-    // Click again to start over, selecting a new start date.
-    // The days in between will be shaded
-    // to indicate that they are in the range.
-    var newDateRange = await showDateRangePicker(
-      context: context,
-      helpText: 'Select start and end dates.',
-      initialDateRange: dateRange,
-      firstDate: DateTime(1970),
-      lastDate: DateTime(2030, 12, 31),
-    );
-    print('newDateRange = $newDateRange');
-  }
-
-  void _pickTime(BuildContext context) async {
-    var time = TimeOfDay(hour: 10, minute: 19);
-    var newTime = await showDialog(
-      context: context,
-      builder: (_) => TimePickerDialog(
-        helpText: 'Select a time.',
-        initialTime: time,
-      ),
-    );
-    print('newTime = $newTime');
-  }
-
-  void _showAbout(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (_) => AboutDialog(
-              applicationIcon: Icon(Icons.ac_unit_outlined),
-              applicationName: 'Dialog Demos',
-              applicationVersion: '1.0.0',
-              applicationLegalese: 'All rights reserved.',
-            ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Dialog Demo'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              child: Text('About...'),
-              onPressed: () => _showAbout(context),
-            ),
-            ElevatedButton(
-              child: Text('Show Material Alert Dialog'),
-              onPressed: () => _alert(
-                context: context,
-                message: 'Something interesting happened.',
-              ),
-            ),
-            ElevatedButton(
-              child: Text('Show Cupertino Alert Dialog'),
-              onPressed: () => _alert(
-                context: context,
-                cupertino: true,
-                message: 'Something interesting happened.',
-              ),
-            ),
-            ElevatedButton(
-              child: Text('Show Confirm Dialog'),
-              onPressed: () => _confirm(
-                context: context,
-                question: 'Are you sure?',
-              ),
-            ),
-            ElevatedButton(
-              child: Text('Show DatePickerDialog'),
-              onPressed: () {
-                _pickDate(context: context);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Select Date Range'),
-              onPressed: () => _pickDateRange(context: context),
-            ),
-            ElevatedButton(
-              child: Text('Select Time'),
-              onPressed: () => _pickTime(context),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-```
-
 ### Input Widgets
 
 | Widget                                                                                                                | Description                                                                                                                        |
@@ -3473,6 +3115,630 @@ that supports scrolling using a `ListView` widget, do the following:
      ],
    )
    ```
+
+### Dialog Widgets
+
+Flutter provides many widgets that render modal dialogs.
+Each of these are described in the following table:
+
+| Widget                                                                                                                  | Description                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/AboutDialog-class.html", "AboutDialog" %}                     | contains the "application's icon, name, version number, and copyright, plus a button to show licenses for software used by the application" |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/AlertDialog-class.html", "AlertDialog" %}                     | creates a dialog containing a message and some buttons                                                                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/CupertinoAlertDialog-class.html", "CupertinoAlertDialog" %}  | iOS-themed version of `AlertDialog`                                                                                                         |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/DatePickerDialog-class.html", "DatePickerDialog" %}           | contains help text and a `CalendarDatePicker`                                                                                               |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/DateRangePickerDialog-class.html", "DateRangePickerDialog" %} | contains help text and a `CalendarDatePicker` that supports selecting both a start and end date                                             |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Dialog-class.html", "Dialog" %}                               | used by other dialogs, but not by extending; not typically used directly                                                                    |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/SimpleDialog-class.html", "SimpleDialog" %}                   | contains a title and a list of clickable `SimpleDialogOption` options                                                                       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/TimePickerDialog-class.html", "TimePickerDialog" %}           | contains a "lollipop" UI for selecting an hour and minute in a day with toggle buttons for AM and PM                                        |
+
+Flutter also provides a set of functions that show a dialog.
+All of these return a `Future` that completes
+when the user does something to dismiss the dialog.
+These functions are described in the following table:
+
+| Function                                                                                                       | Description                                                                                |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDialog.html", "showDialog" %}                    | displays any dialog returned by the function specified in its `builder` argument           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/cupertino/showCupertinoDialog.html", "showCupertinoDialog" %} | like `showDialog`, but themed for iOS                                                      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/widgets/showGeneralDialog.html", "showGeneralDialog" %}       | like `showDialog` but supports customizing the transition used to display the dialog       |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDatePicker.html", "showDatePicker" %}            | provides an easier way to display a `DatePickerDialog` than using the above functions      |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/showDateRangePicker.html", "showDateRangePicker" %}  | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
+
+By default, dialogs created with the `showDialog` function
+are dismissed if a user taps outside them. To prevent this,
+pass the `barrierDismissible` argument with a value of `false`.
+
+Dialogs created with the `showCupertinoDialog` and `showGeneralDialog` functions
+have the opposite default.
+To cause them to be dismissed if a user taps outside them,
+pass the `barrierDismissible` argument with a value of `true`.
+
+Dialogs created with the `showDatePicker` and `showDatePickerRange` functions
+are always dismissed if a user taps outside them.
+They do not take a `barrierDismissible` argument,
+so this behavior cannot be changed.
+
+The `showDatePickerRange` displays a full-screen modal dialog
+while the other `show` functions
+display modal dialogs that do not cover the full screen.
+
+The following code simplifies the use of `AlertDialog`
+and provides the functions `alert` and `confirm`
+which are similar to their HTML counterparts.
+
+```dart
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+/// Displays an AlertDialog with an OK button
+/// which just closes the dialog.  No value is returned.
+Future<void> alert({
+  required BuildContext context,
+  required String title,
+  required String message,
+  bool cupertino = false,
+}) async {
+  await showDialog<String>(
+    context: context,
+    // The builder function can return any kind of dialog.
+    builder: (_) => MyAlertDialog(
+      cupertino: cupertino,
+      title: title,
+      message: message,
+      options: ['OK'],
+    ),
+  );
+}
+
+/// Displays an AlertDialog with No and Yes buttons
+/// and returns a Future that succeeds with a String
+/// that is the text on the pressed button.
+Future<String?> confirm({
+  required BuildContext context,
+  required String title,
+  required String message,
+  bool cupertino = false,
+}) async {
+  return await showDialog<String>(
+    context: context,
+    builder: (_) => MyAlertDialog(
+      title: title,
+      message: message,
+      options: ['No', 'Yes'],
+    ),
+  );
+}
+
+class MyAlertDialog extends StatelessWidget {
+  final bool cupertino;
+  final String title;
+  final String message;
+  final List<String> options;
+
+  MyAlertDialog({
+    Key? key,
+    this.cupertino = false,
+    required this.title,
+    required this.message,
+    required this.options,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Dialogs are treated like routes, so to close a dialog and
+    // return the previous route, call Navigator.of(context).pop().
+    var buttons = options
+        .map(
+          (option) => TextButton(
+            onPressed: () => Navigator.pop(context, option),
+            child: Text(option),
+          ),
+        )
+        .toList();
+    return cupertino
+        ? CupertinoAlertDialog(
+            title: Text(title),
+            content: Text(message), // can be any widget
+            actions: buttons, // typically a List of TextButton widgets
+          )
+        : AlertDialog(
+            title: Text(title),
+            content: Text(message), // can be any widget
+            actions: buttons, // typically a List of TextButton widgets
+          );
+  }
+}
+```
+
+The following code demonstrates using each of the supported dialog types.
+
+<figure style="width: 30%">
+  <img alt="Flutter Dialogs"
+    src="/blog/assets/flutter-dialogs.png?v={{pkg.version}}"
+    title="Flutter Dialogs">
+  <figcaption>Flutter Dialogs</figcaption>
+</figure>
+<figure style="width: 30%">
+  <img alt="Flutter About Dialog"
+    src="/blog/assets/flutter-dialog-about.png?v={{pkg.version}}"
+    title="Flutter About Dialog">
+  <figcaption>Flutter About Dialog</figcaption>
+</figure>
+<figure style="width: 30%">
+  <img alt="Flutter About Dialog Licenses"
+    src="/blog/assets/flutter-dialog-about-licenses.png?v={{pkg.version}}"
+    title="Flutter About Dialog Licenses">
+  <figcaption>Flutter About Dialog Licenses</figcaption>
+</figure>
+
+<figure style="width: 30%">
+  <img alt="Flutter Material Alert Dialog"
+    src="/blog/assets/flutter-dialog-alert.png?v={{pkg.version}}"
+    title="Flutter Material Alert Dialog">
+  <figcaption>Flutter Material Alert Dialog</figcaption>
+</figure>
+<figure style="width: 30%">
+  <img alt="Flutter Cupertino Alert Dialog"
+    src="/blog/assets/flutter-dialog-alert-cupertino.png?v={{pkg.version}}"
+    title="Flutter Cupertino Alert Dialog">
+  <figcaption>Flutter Cupertino Alert Dialog</figcaption>
+</figure>
+<figure style="width: 30%">
+  <img alt="Flutter Confirm Dialog"
+    src="/blog/assets/flutter-dialog-confirm.png?v={{pkg.version}}"
+    title="Flutter Confirm Dialog">
+  <figcaption>Flutter Confirm Dialog</figcaption>
+</figure>
+
+<figure style="width: 30%">
+  <img alt="Flutter Date Picker Dialog"
+    src="/blog/assets/flutter-dialog-date-picker.png?v={{pkg.version}}"
+    title="Flutter Date Picker Dialog">
+  <figcaption>Flutter Date Picker Dialog</figcaption>
+</figure>
+<figure style="width: 30%">
+  <img alt="Flutter Date Range Dialog"
+    src="/blog/assets/flutter-dialog-date-range.png?v={{pkg.version}}"
+    title="Flutter Date Range Dialog">
+  <figcaption>Flutter Date Range Dialog</figcaption>
+</figure>
+<figure style="width: 30%">
+  <img alt="Flutter Time Picker Dialog"
+    src="/blog/assets/flutter-dialog-time-picker.png?v={{pkg.version}}"
+    title="Flutter Time Picker Dialog">
+  <figcaption>Flutter Time Picker Dialog</figcaption>
+</figure>
+
+```dart
+import 'package:flutter/material.dart';
+import 'my_alert_dialog.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Dialog Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  void _alert({
+    required BuildContext context,
+    bool cupertino = false,
+    required String message,
+  }) {
+    alert(
+      context: context,
+      cupertino: cupertino,
+      title: 'Alert',
+      message: message,
+    );
+  }
+
+  void _confirm({
+    required BuildContext context,
+    required String question,
+  }) async {
+    var answer = await confirm(
+      context: context,
+      title: 'Confirm',
+      message: question,
+    );
+    print('answer = $answer');
+  }
+
+  void _pickDate({required BuildContext context}) async {
+    var dateTime = DateTime.now();
+    var newDateTime = await showDatePicker(
+      context: context,
+      helpText: 'Select a date.',
+      initialDate: dateTime,
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2030, 12, 31),
+    );
+    print('newDateTime = $newDateTime');
+  }
+
+  void _pickDateRange({required BuildContext context}) async {
+    var dateRange = DateTimeRange(
+      start: DateTime(2022, 4, 16),
+      end: DateTime(2022, 5, 3),
+    );
+    // Click the start date, then click the end date.
+    // Click again to start over, selecting a new start date.
+    // The days in between will be shaded
+    // to indicate that they are in the range.
+    var newDateRange = await showDateRangePicker(
+      context: context,
+      helpText: 'Select start and end dates.',
+      initialDateRange: dateRange,
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2030, 12, 31),
+    );
+    print('newDateRange = $newDateRange');
+  }
+
+  void _pickTime(BuildContext context) async {
+    var time = TimeOfDay(hour: 10, minute: 19);
+    var newTime = await showDialog(
+      context: context,
+      builder: (_) => TimePickerDialog(
+        helpText: 'Select a time.',
+        initialTime: time,
+      ),
+    );
+    print('newTime = $newTime');
+  }
+
+  void _showAbout(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (_) => AboutDialog(
+              applicationIcon: Icon(Icons.ac_unit_outlined),
+              applicationName: 'Dialog Demos',
+              applicationVersion: '1.0.0',
+              applicationLegalese: 'All rights reserved.',
+            ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dialog Demo'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text('About...'),
+              onPressed: () => _showAbout(context),
+            ),
+            ElevatedButton(
+              child: Text('Show Material Alert Dialog'),
+              onPressed: () => _alert(
+                context: context,
+                message: 'Something interesting happened.',
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Show Cupertino Alert Dialog'),
+              onPressed: () => _alert(
+                context: context,
+                cupertino: true,
+                message: 'Something interesting happened.',
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Show Confirm Dialog'),
+              onPressed: () => _confirm(
+                context: context,
+                question: 'Are you sure?',
+              ),
+            ),
+            ElevatedButton(
+              child: Text('Show DatePickerDialog'),
+              onPressed: () {
+                _pickDate(context: context);
+              },
+            ),
+            ElevatedButton(
+              child: Text('Select Date Range'),
+              onPressed: () => _pickDateRange(context: context),
+            ),
+            ElevatedButton(
+              child: Text('Select Time'),
+              onPressed: () => _pickTime(context),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+### Bottom Sheets
+
+Bottom sheets are a less intrusive alternative to dialogs.
+They slide up from the bottom and can be dragged back down by the user
+or closed programmatically.
+They can be modal or non-modal.
+
+Bottom sheets attach themselves to the nearest `Scaffold` widget.
+
+To display a bottom sheet, call the function
+`showBottomSheet` (for non-modal) or `showModalBottomSheet` (for modal).
+These functions take many arguments, but the most commonly used are:
+
+- `context`: any `BuildContext` that is inside the `Scaffold`
+- `builder`: function that takes a `BuildContext`
+  and returns a widget to render
+- `backgroundColor`: a `Color` object
+
+It is recommended to return a `SafeArea` widget from the `builder` function
+that wraps the widget to be rendered.
+This avoid having the bottom sheet overlap unsafe areas such as a status bar.
+
+Non-modal bottom sheets do not automatically span the width of the device.
+To achieve this, wrap the `SafeArea` child in a `SizedBox` and
+pass it the `width` argument with a value of `double.infinity`.
+
+If the `SafeArea` child is a `Column` widget,
+it will not automatically have its height adjusted to match its content.
+To do this, wrap the `Column` widget in a `SizedBox` and pass it the
+`mainAxisSize` argument with a value of `MainAxisSize.min`.
+
+While the user can close the bottom sheet by dragging it down,
+it may be desirable to include a close button
+that calls `Navigator.pop(context)` to close it.
+Alternatively, capture the controller returned by
+the `showBottomSheet` or `showModalBottomSheet` function
+and call the `close` method on that controller object.
+
+The following helper function addresses all the concerns described above.
+
+```dart
+import 'package:flutter/material.dart';
+
+void openBottomSheet({
+  Color backgroundColor = Colors.blue,
+  required BuildContext context,
+  required Widget widget,
+  bool modal = false,
+  bool includeCloseButton = false,
+}) {
+  var fn = modal ? showModalBottomSheet : showBottomSheet;
+  fn<void>(
+    backgroundColor: backgroundColor,
+    context: context,
+    builder: (context) => SafeArea(
+      child: SizedBox(
+        child: Column(
+          children: [
+            widget,
+            if (includeCloseButton)
+              ElevatedButton(
+                child: Text('Close'),
+                onPressed: () => Navigator.pop(context),
+              )
+          ],
+          mainAxisSize: MainAxisSize.min,
+        ),
+        width: double.infinity,
+      ),
+    ),
+  );
+}
+```
+
+Here is an example of using the helper function above
+to display a non-modal and modal bottom sheet:
+
+```dart
+import 'package:flutter/material.dart';
+import 'bottom_sheet.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter BottomSheet Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'BottomSheet Demo'),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  final sheetWidget = Text(
+    'I am in a BottomSheet.',
+    style: TextStyle(color: Colors.white, fontSize: 24),
+  );
+
+  final String title;
+
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        // Using Builder just to get a Context inside Scaffold
+        // so the showBottomSheet function can find the Scaffold.
+        child: Builder(
+          builder: (context) {
+            var nonModalButton = ElevatedButton(
+              child: Text('Show Non-Modal BottomSheet'),
+              onPressed: () => openBottomSheet( // function defined above
+                backgroundColor: Colors.green,
+                context: context,
+                includeCloseButton: true,
+                modal: false,
+                widget: sheetWidget,
+              ),
+            );
+
+            var modalButton = ElevatedButton(
+              child: Text('Show Modal BottomSheet'),
+              onPressed: () => openBottomSheet(
+                context: context,
+                modal: true,
+                widget: sheetWidget,
+              ),
+            );
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[nonModalButton, modalButton],
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+```
+
+### SnackBars
+
+SnackBars are similar to bottom sheets.
+Both slide in from the bottom.
+But SnackBars are intended for short messages that only appear briefly.
+
+The `SnackBar` constructor takes many arguments, but the most commonly used are:
+
+- `action`: a `SnackBarAction` object that acts like a `TextButton`
+- `backgroundColor`: a `Color` object
+- `behavior`: a `SnackBarBehavior` enum with values
+  `fixed` (default; displays above widgets fixed at the bottom of the screen
+  like `BottomNavigationBar` and `FloatingActionButton`) and
+  `floating` (displays on top of widgets fixed at the bottom of the screen)
+- `content`: any widget to display
+- `dismissDirection`: `DismissDirection` enum that defaults to `down`
+- `duration`: `Duration` object that defaults to 4 seconds
+- `elevation`: `double` z-index; defaults to 6;
+  set to `0` for a flat look that has no shadow
+- `margin`: `EdgeInsetsGeometry` object applied outside `SnackBar`
+  when `width` is not specified
+- `padding`: `EdgeInsetsGeometry` object applied inside `SnackBar`
+- `width`: `double` width of `SnackBar`
+  that defaults to the device width minus the `margin`
+
+A failed assertion is triggered if both `margin` and `width` are specified.
+
+The `SnackBarAction` constructor takes the following arguments:
+
+- `disabledTextColor`: `Color` used for text after the `SnackBar` is dismissed
+- `label`: `String` to display; does not wrap so keep this short
+- `textColor`: `Color` used for text before the `SnackBar` is dismissed;
+  defaults to the `ThemeData` `primarySwatch` color
+- `onPressed`: function to call when the label is tapped
+
+Here is an example of a `SnackBar` that displays an error message.
+Some of the `SnackBar` arguments are commented out
+just to show valid values for them.
+
+<img alt="Flutter SnackBar" style="width: 40%"
+    src="/blog/assets/flutter-snackbar.png?v={{pkg.version}}"
+    title="Flutter SnackBar">
+
+```dart
+class MyHomePage extends StatelessWidget {
+  final String title;
+
+  final snackBar = SnackBar(
+    action: SnackBarAction(
+      label: 'Panic',
+      onPressed: () => print('got press'),
+      textColor: Colors.white,
+    ),
+    backgroundColor: Colors.red.shade900,
+    //behavior: SnackBarBehavior.floating,
+    content: Row(
+      children: [
+        Icon(Icons.error_outline, color: Colors.white, size: 32),
+        SizedBox(width: 16),
+        // Using Expanded allows the text to wrap.
+        Expanded(
+          child: Text(
+            'This is a long sentence that will require wrapping.',
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      ],
+    ),
+    //dismissDirection: DismissDirection.up,
+    duration: Duration(seconds: 10),
+    //elevation: 0,
+    //margin: EdgeInsets.all(10),
+    //padding: EdgeInsets.all(10),
+    //shape: StadiumBorder(),
+    //width: 200,
+  );
+
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text('Show SnackBar #1'),
+              onPressed: () {
+                ScaffoldMessenger.of(context)
+                  // If another SnackBar is currently displayed, remove it.
+                  // There are two methods that do this.
+                  //..hideCurrentSnackBar() // runs exit animation
+                  ..removeCurrentSnackBar() // does not run exit animation
+                  // Now show the new SnackBar.
+                  ..showSnackBar(snackBar);
+              },
+            ),
+            ElevatedButton(
+              child: Text('Show SnackBar #2'),
+              onPressed: () {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
 ### Cupertino Widgets
 
@@ -6433,272 +6699,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               indicatorSize: 20, // optional
               selectedColor: Colors.purple, // optional
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-```
-
-## Bottom Sheets
-
-Bottom sheets are a less intrusive alternative to dialogs.
-They slide up from the bottom and can be dragged back down by the user
-or closed programmatically.
-They can be modal or non-modal.
-
-Bottom sheets attach themselves to the nearest `Scaffold` widget.
-
-To display a bottom sheet, call the function
-`showBottomSheet` (for non-modal) or `showModalBottomSheet` (for modal).
-These functions take many arguments, but the most commonly used are:
-
-- `context`: any `BuildContext` that is inside the `Scaffold`
-- `builder`: function that takes a `BuildContext`
-  and returns a widget to render
-- `backgroundColor`: a `Color` object
-
-It is recommended to return a `SafeArea` widget from the `builder` function
-that wraps the widget to be rendered.
-This avoid having the bottom sheet overlap unsafe areas such as a status bar.
-
-Non-modal bottom sheets do not automatically span the width of the device.
-To achieve this, wrap the `SafeArea` child in a `SizedBox` and
-pass it the `width` argument with a value of `double.infinity`.
-
-If the `SafeArea` child is a `Column` widget,
-it will not automatically have its height adjusted to match its content.
-To do this, wrap the `Column` widget in a `SizedBox` and pass it the
-`mainAxisSize` argument with a value of `MainAxisSize.min`.
-
-While the user can close the bottom sheet by dragging it down,
-it may be desirable to include a close button
-that calls `Navigator.pop(context)` to close it.
-Alternatively, capture the controller returned by
-the `showBottomSheet` or `showModalBottomSheet` function
-and call the `close` method on that controller object.
-
-The following helper function addresses all the concerns described above.
-
-```dart
-import 'package:flutter/material.dart';
-
-void openBottomSheet({
-  Color backgroundColor = Colors.blue,
-  required BuildContext context,
-  required Widget widget,
-  bool modal = false,
-  bool includeCloseButton = false,
-}) {
-  var fn = modal ? showModalBottomSheet : showBottomSheet;
-  fn<void>(
-    backgroundColor: backgroundColor,
-    context: context,
-    builder: (context) => SafeArea(
-      child: SizedBox(
-        child: Column(
-          children: [
-            widget,
-            if (includeCloseButton)
-              ElevatedButton(
-                child: Text('Close'),
-                onPressed: () => Navigator.pop(context),
-              )
-          ],
-          mainAxisSize: MainAxisSize.min,
-        ),
-        width: double.infinity,
-      ),
-    ),
-  );
-}
-```
-
-Here is an example of using the helper function above
-to display a non-modal and modal bottom sheet:
-
-```dart
-import 'package:flutter/material.dart';
-import 'bottom_sheet.dart';
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter BottomSheet Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'BottomSheet Demo'),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final sheetWidget = Text(
-    'I am in a BottomSheet.',
-    style: TextStyle(color: Colors.white, fontSize: 24),
-  );
-
-  final String title;
-
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        // Using Builder just to get a Context inside Scaffold
-        // so the showBottomSheet function can find the Scaffold.
-        child: Builder(
-          builder: (context) {
-            var nonModalButton = ElevatedButton(
-              child: Text('Show Non-Modal BottomSheet'),
-              onPressed: () => openBottomSheet( // function defined above
-                backgroundColor: Colors.green,
-                context: context,
-                includeCloseButton: true,
-                modal: false,
-                widget: sheetWidget,
-              ),
-            );
-
-            var modalButton = ElevatedButton(
-              child: Text('Show Modal BottomSheet'),
-              onPressed: () => openBottomSheet(
-                context: context,
-                modal: true,
-                widget: sheetWidget,
-              ),
-            );
-
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[nonModalButton, modalButton],
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-```
-
-## SnackBars
-
-SnackBars are similar to bottom sheets.
-Both slide in from the bottom.
-But SnackBars are intended for short messages that only appear briefly.
-
-The `SnackBar` constructor takes many arguments, but the most commonly used are:
-
-- `action`: a `SnackBarAction` object that acts like a `TextButton`
-- `backgroundColor`: a `Color` object
-- `behavior`: a `SnackBarBehavior` enum with values
-  `fixed` (default; displays above widgets fixed at the bottom of the screen
-  like `BottomNavigationBar` and `FloatingActionButton`) and
-  `floating` (displays on top of widgets fixed at the bottom of the screen)
-- `content`: any widget to display
-- `dismissDirection`: `DismissDirection` enum that defaults to `down`
-- `duration`: `Duration` object that defaults to 4 seconds
-- `elevation`: `double` z-index; defaults to 6;
-  set to `0` for a flat look that has no shadow
-- `margin`: `EdgeInsetsGeometry` object applied outside `SnackBar`
-  when `width` is not specified
-- `padding`: `EdgeInsetsGeometry` object applied inside `SnackBar`
-- `width`: `double` width of `SnackBar`
-  that defaults to the device width minus the `margin`
-
-A failed assertion is triggered if both `margin` and `width` are specified.
-
-The `SnackBarAction` constructor takes the following arguments:
-
-- `disabledTextColor`: `Color` used for text after the `SnackBar` is dismissed
-- `label`: `String` to display; does not wrap so keep this short
-- `textColor`: `Color` used for text before the `SnackBar` is dismissed;
-  defaults to the `ThemeData` `primarySwatch` color
-- `onPressed`: function to call when the label is tapped
-
-Here is an example of a `SnackBar` that displays an error message.
-Some of the `SnackBar` arguments are commented out
-just to show valid values for them.
-
-<img alt="Flutter SnackBar" style="width: 40%"
-    src="/blog/assets/flutter-snackbar.png?v={{pkg.version}}"
-    title="Flutter SnackBar">
-
-```dart
-class MyHomePage extends StatelessWidget {
-  final String title;
-
-  final snackBar = SnackBar(
-    action: SnackBarAction(
-      label: 'Panic',
-      onPressed: () => print('got press'),
-      textColor: Colors.white,
-    ),
-    backgroundColor: Colors.red.shade900,
-    //behavior: SnackBarBehavior.floating,
-    content: Row(
-      children: [
-        Icon(Icons.error_outline, color: Colors.white, size: 32),
-        SizedBox(width: 16),
-        // Using Expanded allows the text to wrap.
-        Expanded(
-          child: Text(
-            'This is a long sentence that will require wrapping.',
-            style: TextStyle(fontSize: 18),
-          ),
-        ),
-      ],
-    ),
-    //dismissDirection: DismissDirection.up,
-    duration: Duration(seconds: 10),
-    //elevation: 0,
-    //margin: EdgeInsets.all(10),
-    //padding: EdgeInsets.all(10),
-    //shape: StadiumBorder(),
-    //width: 200,
-  );
-
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              child: Text('Show SnackBar #1'),
-              onPressed: () {
-                ScaffoldMessenger.of(context)
-                  // If another SnackBar is currently displayed, remove it.
-                  // There are two methods that do this.
-                  //..hideCurrentSnackBar() // runs exit animation
-                  ..removeCurrentSnackBar() // does not run exit animation
-                  // Now show the new SnackBar.
-                  ..showSnackBar(snackBar);
-              },
-            ),
-            ElevatedButton(
-              child: Text('Show SnackBar #2'),
-              onPressed: () {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(snackBar);
-              },
-            )
           ],
         ),
       ),
