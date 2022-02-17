@@ -5912,6 +5912,55 @@ class StateNotifierPage extends ConsumerWidget {
 }
 ```
 
+## Asynchronous Data
+
+In some cases it is desireable to load data in an asynchronous way
+before rendering a given widget.
+One way to do this is to use the {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html",
+"FutureBuilder" %} widget.
+This is typically used in the `build` method of a `StatefulWidget`.
+
+The `future` argument should be set to a `Future` object.
+This is typically is returned by function that obtains data asynchronously,
+perhaps by sending an HTTP request or querying a database.
+
+The `builder` argument should be set to a function
+that takes a `BuildContext` and an `AsyncSnapshot`.
+The function returns a `Widget` to render that is selected
+based on the value of `snapshot.connectionState`.
+Possible values include `none`, `waiting`, `active`, and `done`.
+
+If an error occurs in the `Future`,
+the `snapshot.hasError` property is set to `true` and
+the `snapshot.error` property is set to an object describing the error.
+
+`FutureBuilder` calls `setState` when the `Future` completes
+to trigger rebuilding the widget.
+This means that the `Future` can set state properties
+without the need to call `setState`.
+
+The following code demonstrates basic usage of `FutureBuilder`:
+
+```dart
+Container(
+  child: FutureBuilder(
+    // Passing context can be useful when
+    // using a state management approach like provider.
+    future: _loadData(context),
+    builder: (context, snapshot) {
+      if (snapshot.hasError) {
+        return Text('Error fetching data: ${snapshot.error}');
+      }
+      if (snapshot.connectionState != ConnectionState.done) {
+        return CircularProgressIndicator();
+      }
+      return Text(_loadedData);
+    },
+  ),
+)
+```
+
 ## Persisting State
 
 There are many approaches to persisting app data
