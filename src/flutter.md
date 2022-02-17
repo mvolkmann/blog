@@ -3533,7 +3533,8 @@ The {% aTargetBlank
 to the Material UI {% aTargetBlank
 "https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html",
 "CalendarDatePicker" %} widget.
-It allows the user to select a date, time, or both by spinning 3D wheels.
+It allows the user to select a date, time, or both
+by spinning wheel-like displays.
 
 The following code demonstrates this:
 
@@ -3587,7 +3588,7 @@ Container(
       print('You selected ${words[index]}');
     },
   ),
-  // This makes it clear the vertical space that is occupied.
+  // This makes the vertical space that is occupied clear.
   decoration: BoxDecoration(
     border: Border.all(color: Colors.red),
   ),

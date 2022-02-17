@@ -795,6 +795,22 @@ include the content, `padding`, and `border`, but not the `margin`.
 Frequently this is the desired value.
 There are no other supported values for the `box-sizing` property.
 
+### `border-radius` property
+
+The `border-radius` property changes the corners of an element.
+to be curved instead of square.
+Specify one value for circular corners (same for each corner),
+two values for elliptical corners, or
+four values for a different curve in each corner.
+The possible values are quite complex.
+See {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius", "MDN" %}
+for details.
+
+To change the shape of an element to an oval,
+set `border-radius` to a large pixel value such as `999px`.
+This actually uses a value that is half the length of the shortest side.
+
 ### `box-shadow` property
 
 The `box-shadow` property adds shadows to
