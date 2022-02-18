@@ -3790,9 +3790,11 @@ These include `Isolate`, `ReceivePort`, and `SendPort`.
 
 Each of these classes are described in the following sections.
 
-### Futures
+### Future Class
 
-The `dart:async` library defines the `Future` class.
+The `dart:async` library defines the {% aTargetBlank
+"https://api.dart.dev/stable/2.16.1/dart-async/Future-class.html",
+"Future" %} class.
 A `Future` represents the result of code that will run in the future
 inside the current thread.
 
@@ -3985,6 +3987,56 @@ void main() {
 
 Flutter provides the `FutureBuilder` class which
 builds widgets from a single value returned by a `Future`.
+
+### Completer Class
+
+The `dart:async` library defines the {% aTargetBlank
+"https://api.dart.dev/stable/2.16.1/dart-async/Completer-class.html",
+"Future" %} class.
+It is used to create and manage a `Future`.
+
+Instances of `Completer` have the properties `future` and `isCompleted`.
+They also have the methods `complete(value)` and `completeError(error)`.
+
+The following code demonstates using a `Completer`
+to implement a function used in a Flutter app
+for confirming an action such as deleting data.
+
+```dart
+Future<bool> confirm(BuildContext context, String question) {
+  final completer = Completer<bool>();
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(question),
+      content: Column(
+        children: [
+          Row(
+            children: [
+              ElevatedButton(
+                child: Text('Cancel'),
+                onPressed: () {
+                  completer.complete(false);
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                child: Text('OK'),
+                onPressed: () {
+                  completer.complete(true);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+          )
+        ],
+      ),
+    ),
+  );
+  return completer.future;
+}
+```
 
 ### Event Loop
 
