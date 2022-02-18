@@ -3992,7 +3992,7 @@ builds widgets from a single value returned by a `Future`.
 
 The `dart:async` library defines the {% aTargetBlank
 "https://api.dart.dev/stable/2.16.1/dart-async/Completer-class.html",
-"Future" %} class.
+"Completer" %} class.
 It is used to create and manage a `Future`.
 
 Instances of `Completer` have the properties `future` and `isCompleted`.
