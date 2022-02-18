@@ -7775,6 +7775,13 @@ To use this library:
     <string>Photo library access is needed to demonstrate the "image_picker" library.</string>
    ```
 
+1. Add the following imports:
+
+   ```dart
+   import 'dart:io' show File;
+   import 'package:image_picker/image_picker.dart';
+   ```
+
 1. Create an `ImagePicker` instance:
 
    ```dart
@@ -7793,12 +7800,17 @@ To use this library:
    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
    ```
 
+1. Save the selected `XFile` value in the state of a `StatefulWidget`.
+
 1. The `XFile` object has `name` and `path` properties.
-   To render an image:
+   To render an image using the selected `XFile` value:
 
    ```dart
    Image(image: FileImage(File(_selectedXFile!.path))),
    ```
+
+1. Restart the app to install the `pickImage` plugin.
+   Unless this is done, a MissingPluginException will occur.
 
 For an example Flutter app that uses the "image_picker" library,
 see the "image_picker" branch of this {% aTargetBlank
