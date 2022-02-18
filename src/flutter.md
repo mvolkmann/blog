@@ -3227,7 +3227,7 @@ class MyAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Dialogs are treated like routes, so to close a dialog and
-    // return the previous route, call Navigator.of(context).pop().
+    // return the previous route, call Navigator.pop(context).
     var buttons = options
         .map(
           (option) => TextButton(
