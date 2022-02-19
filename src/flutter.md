@@ -7978,13 +7978,22 @@ The steps to customize the launcher icon used by a Flutter app are:
 
 ## Tests
 
-Three kinds of tests can be written for Flutter applications.
+Three primary kinds of tests can be written for Flutter applications.
 These include unit tests, widget tests, and integration tests.
 Unit and widget tests always run headless, not requiring a simulator or device.
 Integration tests always run in a simulator, web browser or device.
 Unit and widget tests run fairly quickly.
 Integration tests take a long time to build and start,
 often around two minutes.
+
+An additional kind of test is supported by the {% aTargetBlank
+"https://pub.dev/packages/golden_toolkit", "golden_toolkit" %} package.
+It is used to implement tests that capture an image of a widget
+and compare it to a previously captured image.
+These are regression tests that test fail if the images differ.
+For those familiar with the {% aTargetBlank "https://jestjs.io", "Jest" %}
+testing framework for web applications,
+golden_toolkit is similar to Jest snapshot tests.
 
 In general each test is composed of three sections: arrange, act, and assert.
 The arrange section creates the environment needed by the test.
