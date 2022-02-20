@@ -355,6 +355,9 @@ To run a Flutter app on a connected iPhone:
 
 - In Xcode
 
+  - To change the target version of iOS,
+    select PROJECT ... Runner ... Basic and
+    set "iOS Deployment Target" to the desired version
   - Select "iPhone" from the device drop-down in the header.
   - Click "Runner" at the top of the Navigator.
   - Click the "Signing & Capabilities" tab.
@@ -7828,13 +7831,17 @@ see the "image_picker" branch of this {% aTargetBlank
 
 ## GeoLocation
 
-The {% aTargetBlank "https://pub.dev/packages/geolocation", "geolocation" %}
+The {% aTargetBlank "https://pub.dev/packages/geolocator", "geolocator" %}
 library is a popular option for getting
 the current latitude and longitude of a device.
 For a basic example app that uses this library, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_geolocation", "GitHub repo" %}.
 The README contains instructions on configuring Android and iOS
 to request permission for obtaining geolocation data.
+
+By default the iOS Simulator always returns a location in San Francisco.
+This can be changed to use a different mock location,
+but it cannot detect the location of the computer on which it is running.
 
 ## Google Maps
 
@@ -7909,13 +7916,15 @@ To display a map of a given location with Google Maps:
 
    ```dart
    const cameraPosition = CameraPosition(
-     target: LatLng(37.773972, -122.431297), // San Fransisco
+     target: LatLng(37.773972, -122.431297), // San Francisco
      zoom: 11.5, // max is usually 21
    );
    GoogleMap(initialCameraPosition: cameraPosition),
    ```
 
 1. If the app is already running, stop it and restart it.
+
+TODO: How can you enable zooming on the map?
 
 ## SQLite
 
