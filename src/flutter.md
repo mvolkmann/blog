@@ -7840,8 +7840,8 @@ to request permission for obtaining geolocation data.
 
 To display a map of a given location with Google Maps:
 
-1. Install {% aTargetBlank "https://pub.dev/packages/google_maps_flutter",
-   "google_maps_flutter" %} from pub.dev.
+1. Install the {% aTargetBlank "https://pub.dev/packages/google_maps_flutter",
+   "google_maps_flutter" %} plugin from pub.dev.
 
 1. Get an API key.
 
@@ -7857,14 +7857,6 @@ To display a map of a given location with Google Maps:
    - Click "+ CREATE CREDENIALS".
    - Click "API key".
    - Copy the API key that is displayed.
-   - Create the file `lib/secrets.dart` containing a line like the following:
-
-     ```dart
-     const googleMapsApiKey = 'AIzaSyBa8V_VTzgkZ9S1T3ixqLo_6l109D0w8lU';
-     ```
-
-   - Add this file in `.gitignore` so the API key will not be present
-     in the repository.
    - Click the "CLOSE" button.
 
 1. Enable APIs.
@@ -7922,6 +7914,8 @@ To display a map of a given location with Google Maps:
    );
    GoogleMap(initialCameraPosition: cameraPosition),
    ```
+
+1. If the app is already running, stop it and restart it.
 
 ## SQLite
 
