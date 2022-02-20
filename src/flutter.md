@@ -1083,10 +1083,19 @@ This helps Flutter performance when rebuilding the UI.
 
 The second class extends `State`, defines state properties,
 and overrides the `build` method.
-It can be private and
-be defined in the same source file as the first.
+It can be defined in the same source file as the first.
 Storing the state in a separate class
 allows the widget class to remain immutable.
+
+By convention the state classes are private,
+indicated by having a name that begins with an underscore.
+When a class is private, there isn't a good reason
+the makes its properties private,
+so the property names do not need to begin with an underscore.
+
+State instances hold a reference to their associated `StatefulWidget` instance
+in the property `widget`.
+This allows them to access properties in the widget instance.
 
 There is an {% aTargetBlank "https://github.com/dart-lang/language/issues/329",
 "on-going discussion" %} about whether it would be possible
@@ -1135,7 +1144,7 @@ class Counter extends StatefulWidget {
 }
 
 class _CounterState extends State<Counter> {
-  var _count = 0;
+  var count = 0;
 
   static const textStyle = TextStyle(fontSize: 36);
 
@@ -1144,7 +1153,7 @@ class _CounterState extends State<Counter> {
     super.initState(); // call at beginning of initState
     // Note the use of "widget." to refer to
     // properties in the associated stateful widget.
-    _count = widget.initialValue;
+    count = widget.initialValue;
   }
 
   @override
@@ -1153,16 +1162,16 @@ class _CounterState extends State<Counter> {
       TextButton(
         child: const Text('-', style: textStyle),
         // The button is disabled when onPressed is null.
-        onPressed: _count <= 0 ? null : () => setState(() => _count -= 1),
+        onPressed: count <= 0 ? null : () => setState(() => count -= 1),
       ),
-      Text('$_count', style: textStyle),
+      Text('$count', style: textStyle),
       TextButton(
         child: const Text('+', style: textStyle),
-        onPressed: () => setState(() => _count += 1),
+        onPressed: () => setState(() => count += 1),
       ),
       ElevatedButton(
         child: const Text('Reset'),
-        onPressed: () => setState(() => _count = 0),
+        onPressed: () => setState(() => count = 0),
       ),
     ]);
   }
@@ -7826,6 +7835,46 @@ For a basic example app that uses this library, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_geolocation", "GitHub repo" %}.
 The README contains instructions on configuring Android and iOS
 to request permission for obtaining geolocation data.
+
+## Google Maps
+
+To display a map of a given location with Google Maps:
+
+1. Install {% aTargetBlank "https://pub.dev/packages/google_maps_flutter",
+   "google_maps_flutter" %} from pub.dev.
+
+1. Get an API key.
+
+   - Browse the {% aTargetBlank "https://mapsplatform.google.com",
+     "Google Maps Platform" %}.
+   - Click the "Get Started" button.
+   - Click the project dropdown in the header.
+   - In the dialog that opens, click "NEW PROJECT".
+   - Enter a name for the project.
+   - Click the "CREATE" button.
+   - Click "SELECT PROJECT".
+   - In the left nav, click "Credentials".
+   - Click "+ CREATE CREDENIALS".
+   - Click "API key".
+   - Copy the API key that is displayed.
+   - Create the file `lib/secrets.dart` containing a line like the following:
+
+     ```dart
+     const googleMapsApiKey = 'AIzaSyBa8V_VTzgkZ9S1T3ixqLo_6l109D0w8lU';
+     ```
+
+   - Add this file in `.gitignore` so the API key will not be present
+     in the repository.
+   - Click the "CLOSE" button.
+
+1. Enable APIs.
+
+   - In the left nav, click "APIs".
+   - Click "Maps SDK for Android".
+   - Click the "ENABLE" button.
+   - Under "Additional APIs, click "Maps SDK for iOS".
+   - Click the "ENABLE" button.
+   - Optionally click and enable "Dierestions API" under "Additional APIs".
 
 ## SQLite
 
