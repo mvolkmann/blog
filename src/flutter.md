@@ -7909,17 +7909,43 @@ To display a map of a given location with Google Maps:
    - Add the following import:
 
    ```dart
+   import 'package:flutter/foundation.dart' show Factory;
+   import 'package:flutter/gestures.dart';
    import 'package:google_maps_flutter/google_maps_flutter.dart';
    ```
 
    - Render a map with the following:
 
    ```dart
-   const cameraPosition = CameraPosition(
-     target: LatLng(37.773972, -122.431297), // San Francisco
+   // Get position using geolocator plugin from pub.dev.
+   final latLng = LatLng(position!.latitude, position!.longitude);
+   final cameraPosition = CameraPosition(
+     target: latLng,
      zoom: 11.5, // max is usually 21
    );
-   GoogleMap(initialCameraPosition: cameraPosition),
+   final marker = Marker(
+     markerId: MarkerId('my-location'),
+     position: latLng,
+   );
+   // This enables the GoogleMap widget to receive touch events
+   // for panning and zooming even when inside a ListView
+   // that would otherwise intercept those gestures.
+   final gestureRecognizers = {
+      new Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
+   };
+
+   GoogleMap(
+     gestureRecognizers: gestureRecognizers,
+     initialCameraPosition: cameraPosition,
+     //mapToolbarEnabled: true,
+     mapType: MapType.normal, // or .hybrid or .satellite
+     markers: {marker},
+     //myLocationEnabled: true,
+     //myLocationButtonEnabled: true,
+     //scrollGesturesEnabled: true,
+     //zoomControlsEnabled: true,
+     //zoomGesturesEnabled: true,
+   )
    ```
 
 1. If the app is already running, stop it and restart it.
