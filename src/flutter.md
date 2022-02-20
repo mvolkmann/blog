@@ -7874,7 +7874,54 @@ To display a map of a given location with Google Maps:
    - Click the "ENABLE" button.
    - Under "Additional APIs, click "Maps SDK for iOS".
    - Click the "ENABLE" button.
-   - Optionally click and enable "Dierestions API" under "Additional APIs".
+   - Optionally click and enable "Directions API" under "Additional APIs".
+
+1. Edit `android/app/src/main/AndroidManifest.xml` and add the following
+   after the `meta-data` element for `flutterEmbedding`:
+
+   ```xml
+   <meta-data
+       android:name="com.google.android.geo.API_KEY"
+       android:value="your-api-key" />
+   ```
+
+1. Add this file in `.gitignore` so the API key is no exposed
+   in the Git repository.
+   s
+1. Edit `ios/Runner/AppDelegate.swift`.
+
+   - Add the following import after the existing imports:
+
+     ```swift
+     import GoogleMaps
+     ```
+
+   - Add the following line as the first line in the `application` function:
+
+     ```swift
+     GMSServices.provideAPIKey("your-api-key");
+     ```
+
+1. Add this file in `.gitignore` so the API key is no exposed
+   in the Git repository.
+
+1. Display a map.
+
+   - Add the following import:
+
+   ```dart
+   import 'package:google_maps_flutter/google_maps_flutter.dart';
+   ```
+
+   - Render a map with the following:
+
+   ```dart
+   const cameraPosition = CameraPosition(
+     target: LatLng(37.773972, -122.431297), // San Fransisco
+     zoom: 11.5, // max is usually 21
+   );
+   GoogleMap(initialCameraPosition: cameraPosition),
+   ```
 
 ## SQLite
 
