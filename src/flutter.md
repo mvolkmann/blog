@@ -806,6 +806,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     print('MyApp.build entered');
     return const CupertinoApp(
+      // This is needed to enable using some
+      // Material widgets inside a Cupertion app.
+      // Also wrap those widgets in a Material widget.
+      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        DefaultMaterialLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
       theme:
         CupertinoThemeData(barBackgroundColor: CupertinoColors.activeBlue),
       home: MyPage(),
