@@ -7906,56 +7906,85 @@ To display a map of a given location with Google Maps:
 
 1. Display a map.
 
-   - Add the following import:
+   - Add the following imports:
 
    ```dart
+   import 'dart:async' show Completer;
    import 'package:flutter/foundation.dart' show Factory;
    import 'package:flutter/gestures.dart';
    import 'package:google_maps_flutter/google_maps_flutter.dart';
    ```
 
-   - Render a map with the following:
+   - Render a map with the following code inside a `StatefulWidget`.
+     Zoom controls are only supported in Android. See {% aTargetBlank
+     "https://github.com/flutter/plugins/pull/831#discussion_r400472577",
+     "this discussion" %}.
+     The code below adds its own zoom in and zoom out buttons
+     for a consistent UI in Android and iOS.
+     It wraps the `GoogleMap` widget in a `Stack`
+     and positioning buttons over the map.
 
    ```dart
-   // Get position using geolocator plugin from pub.dev.
-   final latLng = LatLng(position!.latitude, position!.longitude);
-   final cameraPosition = CameraPosition(
-     target: latLng,
-     zoom: 11.5, // max is usually 21
-   );
-   final marker = Marker(
-     markerId: MarkerId('my-location'),
-     position: latLng,
-   );
-   // This enables the GoogleMap widget to receive touch events
-   // for panning and zooming even when inside a ListView
-   // that would otherwise intercept those gestures.
-   final gestureRecognizers = {
-      new Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
-   };
+   final controllerCompleter = Completer<GoogleMapController>();
 
-   GoogleMap(
-     gestureRecognizers: gestureRecognizers,
-     initialCameraPosition: cameraPosition,
-     //mapToolbarEnabled: true,
-     mapType: MapType.normal, // or .hybrid or .satellite
-     markers: {marker},
-     //myLocationEnabled: true,
-     //myLocationButtonEnabled: true,
-     //scrollGesturesEnabled: true,
-     //zoomControlsEnabled: true,
-     //zoomGesturesEnabled: true,
-   )
+   // Call this to render the map
+   Widget buildMap() {
+     // position is a Position object from geolocator plugin.
+     final latLng = LatLng(position!.latitude, position!.longitude);
+     final cameraPosition = CameraPosition(target: latLng, zoom: zoom);
+     final marker = Marker(markerId: MarkerId('my-location'), position: latLng);
+
+     // This allows the GoogleMap widget to process gestures for
+     // panning and zooming the map even if it is inside a ListView
+     // which would otherwise capture all of those gestures.
+     final gestureRecognizers = {
+       Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
+     };
+
+     return SizedBox(
+       child: Stack(
+         children: [
+           GoogleMap(
+             gestureRecognizers: gestureRecognizers,
+             initialCameraPosition: cameraPosition,
+             onMapCreated: (GoogleMapController controller) {
+               controllerCompleter.complete(controller);
+             },
+             mapType: MapType.normal, // or .hybrid or .satellite
+             markers: {marker},
+             myLocationButtonEnabled: false, // hides provided lower-right button
+           ),
+           Positioned(
+             child: FloatingActionButton.small(
+               child: Icon(Icons.add),
+               onPressed: () => changeCamera(latLng, ++zoom),
+             ),
+             bottom: 45,
+             right: 0,
+           ),
+           Positioned(
+             child: FloatingActionButton.small(
+               child: Icon(Icons.remove),
+               onPressed: () => changeCamera(latLng, --zoom),
+             ),
+             bottom: 0,
+             right: 0,
+           ),
+         ],
+       ),
+       height: 200,
+       width: double.infinity,
+     );
+   }
+
+   void changeCamera(LatLng latLng, double zoom) async {
+     final controller = await controllerCompleter.future;
+     controller.moveCamera(CameraUpdate.newCameraPosition(
+     CameraPosition(target: latLng, zoom: zoom)));
+   }
    ```
 
 1. If the app is already running, stop it and restart it.
-
-Zoom controls are only present in Android. See {% aTargetBlank
-"https://github.com/flutter/plugins/pull/831#discussion_r400472577",
-"this discussion" %}.
-or iOS, manually add them by wrapping the `GoogleMap` widget in a `Stack`
-and positioning buttons over the map.
-TODO: Copy latest coder from flutter_gift_track to here!
 
 ## SQLite
 
@@ -7971,26 +8000,26 @@ The steps to use sqflite are:
 1. Define model classes like the following
    corresponding to each database table:
 
-   ```dart
-   class Dog {
-     final int id;
-     final int age;
-     final String breed;
-     final String name;
+```dart
+class Dog {
+  final int id;
+  final int age;
+  final String breed;
+  final String name;
 
-     Dog({required this.age, required this.breed, required this.name});
+  Dog({required this.age, required this.breed, required this.name});
 
-     Map<String, dynamic> toMap() {
-       return {'id': id, 'age': age, 'breed': breed, 'name': name};
-     }
+  Map<String, dynamic> toMap() {
+    return {'id': id, 'age': age, 'breed': breed, 'name': name};
+  }
 
-     // For debugging
-     @override
-     String toString() {
-       return 'Dog{id: $id, name: $name, breed: $breed, age: $age}';
-     }
-   }
-   ```
+  // For debugging
+  @override
+  String toString() {
+    return 'Dog{id: $id, name: $name, breed: $breed, age: $age}';
+  }
+}
+```
 
 1. Get a connection to the database.
 
