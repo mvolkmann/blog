@@ -7950,7 +7950,12 @@ To display a map of a given location with Google Maps:
 
 1. If the app is already running, stop it and restart it.
 
-TODO: How can you enable zooming on the map?
+Zoom controls are only present in Android. See {% aTargetBlank
+"https://github.com/flutter/plugins/pull/831#discussion_r400472577",
+"this discussion" %}.
+or iOS, manually add them by wrapping the `GoogleMap` widget in a `Stack`
+and positioning buttons over the map.
+TODO: Copy latest coder from flutter_gift_track to here!
 
 ## SQLite
 
