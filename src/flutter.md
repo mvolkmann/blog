@@ -2624,10 +2624,12 @@ floatingActionButton: Padding(
     children: [
       FloatingActionButton(
         child: Text('FAB1'),
+        heroTag: 'fab1',
         onPressed: () { ... },
       ),
       FloatingActionButton(
         child: Text('FAB2'),
+        heroTag: 'fab2',
         onPressed: () { ... },
       ),
     ],
@@ -2635,6 +2637,13 @@ floatingActionButton: Padding(
 ),
 floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 ```
+
+When a page contains more than one `FloatingActionButton`,
+each must be given a unique `heroTag` `String` value.
+
+It is also possible to use `FloatingActionButton` widgets
+outside of the `Scaffold` `floatingActionButton` argument
+like any other widget.
 
 #### TextField and TextFormField Widgets
 
