@@ -1198,6 +1198,8 @@ are described in the following table:
 The `initState` method should begin with `super.initState();`.
 
 The `dispose` method should end with `super.dispose();`.
+It is frequently used to call the `dispose` method on controller objects
+such as `TextEditingController`.
 
 ### Material Structure Widgets
 
