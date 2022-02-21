@@ -1389,6 +1389,7 @@ The `home` `Widget` is typically either a {% aTargetBlank
 "CupertinoPageScaffold" %} or a {% aTargetBlank
 "https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html",
 "CupertinoTabScaffold" %}.
+It is common to use a `CupertionPageScaffold` inside a `CupertinoTabScaffold`.
 
 The `CupertinoPageScaffold` constructor takes the following named parameters and more:
 
