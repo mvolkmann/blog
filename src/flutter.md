@@ -8132,7 +8132,7 @@ class Dog {
 For a working example, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_sqlite", "GitHub repo" %}.
 
-## AppIcons
+## App Icons
 
 The steps to customize the launcher icon used by a Flutter app are:
 
@@ -8978,6 +8978,20 @@ detail on the lines covered by a test.
 <img alt="Test Coverage" style="width: 80%"
     src="/blog/assets/flutter-lcov.png?v={{pkg.version}}"
     title="Test Coverage">
+
+## Deploying to App Stores
+
+Popular services that simpilify deploying Flutter apps
+to the Google Play Store and the iOS App Store include
+{% aTargetBlank "https://docs.fastlane.tools", "fastlane" %},
+{% aTargetBlank "https://blog.codemagic.io/getting-started-with-codemagic/",
+"Codemagic" %}, {% aTargetBlank
+"https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html",
+"Bitrise" %}, and {% aTargetBlank
+"https://appcircle.io/blog/guide-to-automated-mobile-ci-cd-for-flutter-projects-with-appcircle/",
+"Appcircle" %}.
+
+TODO: Add more detail on at least one of these options.
 
 ## Packages
 
