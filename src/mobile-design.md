@@ -95,14 +95,14 @@ containing a plus sign navigates to a screen for entering text for a new tweet.
 Usually each screen within an app either has one FAB or none,
 but it is possible to have more than one.
 Typically FABs are displayed near the lower-right corner of the screen.
-But the can also be displayed in the lower-left, lower-center,
+But they can also be displayed in the lower-left, lower-center,
 upper-left, upper-center, or upper-right.
 
 ## Search
 
 Searching the data of an app is typically initiated by
 tapping a button containing a magnifying glass icon.
-Tapping this opens a text input at the button of the app bar.
+Tapping this opens a text input at the bottom of the app bar.
 
 ## iOS-specific Design
 
