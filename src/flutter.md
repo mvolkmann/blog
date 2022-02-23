@@ -1269,14 +1269,15 @@ of applications that use Material Design.
 
 The `MaterialApp` constructor takes the following named parameters and more:
 
-| Parameter Name | Description                                                                        |
-| -------------- | ---------------------------------------------------------------------------------- |
-| `darkTheme`    | `ThemeData` to use when running in dark mode                                       |
-| `home`         | `Widget` to render for the default route ('/')                                     |
-| `initialRoute` | `String` name of first route to render when using `Navigator`                      |
-| `routes`       | `Map` of route names to `WidgetBuilder` instances                                  |
-| `theme`        | `ThemeData` to use when running in light mode                                      |
-| `title`        | single-line `String` that describes the app; only rendered in Android task manager |
+| Parameter Name               | Description                                                                                                                                    |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `darkTheme`                  | `ThemeData` to use when running in dark mode                                                                                                   |
+| `debugShowCheckedModeBanner` | `bool` that determines if a diagonal DEBUG banner should be displayed in the upper-right corner when running in debug mode (`true` by default) |
+| `home`                       | `Widget` to render for the default route ('/')                                                                                                 |
+| `initialRoute`               | `String` name of first route to render when using `Navigator`                                                                                  |
+| `routes`                     | `Map` of route names to `WidgetBuilder` instances                                                                                              |
+| `theme`                      | `ThemeData` to use when running in light mode                                                                                                  |
+| `title`                      | single-line `String` that describes the app; only rendered in Android task manager                                                             |
 
 The most common properties to set in {% aTargetBlank
 "https://api.flutter.dev/flutter/material/ThemeData-class.html", "ThemeData" %}
