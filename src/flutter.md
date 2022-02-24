@@ -8994,6 +8994,13 @@ is {% aTargetBlank "https://docs.revenuecat.com/docs/flutter", "RevenueCat" %}.
 This is a commercial service, but it is free for a single developer
 and up to 10,000 USD in monthly tracked revenue (MTR).
 
+### RevenueCat
+
+The steps to use RevenueCat are:
+
+1. Install the `purchase_flutter` plugin.
+   TODO: Finish this!
+
 ## Deploying to App Stores
 
 Popular services that simpilify deploying Flutter apps
