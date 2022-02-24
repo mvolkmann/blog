@@ -8987,6 +8987,7 @@ is to use the pub.dev package {% aTargetBlank
 "https://pub.dev/packages/in_app_purchase", "in_app_purchase" %}.
 Click the link after "codelab" for a detailed guide.
 This requires having a backend such as Firebase.
+This is a good option for apps that are using Firebase for other purposes
 
 One way to enable in-app purchases that does not require configuring a backend
 is {% aTargetBlank "https://docs.revenuecat.com/docs/flutter", "RevenueCat" %}.
