@@ -472,7 +472,7 @@ This extension provides many things including:
   - `stless` adds template code for creating a stateless widget
   - `stful` adds template code for creating a stateful widget
 
-  The code added by these requires importing a library that defines
+  The code added by these requires importing a package that defines
   the `StatelessWidget` and `StatefulWidget` classes.
   These classes are described later.
   For example:
@@ -702,6 +702,46 @@ When clicked, it displays a directory tree in the navigator area
 that shows files and lines within them that have comments that contain
 "TODO", "FIXME" (or alternatives "FIXIT" and "FIX"), or "BUG".
 Clicking an identified line opens the file and positions the cursor on the line.
+
+## Packages
+
+The official package registry for Flutter is
+{% aTargetBlank "https://pub.dev", "pub.dev" %}.
+It hosts a large number of packages and plugins.
+The distinction between these is that
+plugins provide integration with platform features such as cameras.
+Sometimes packages are also referred to as libraries.
+
+To find packages, search for them by name or browse the categorized lists of
+"Flutter Favorites", "Most popular packages", "Top Flutter packages",
+"Top Dart packages", and "Package of the Week".
+
+Some popular packages from pub.dev are described
+on my {% aTargetBlank "/blog/topics/#/blog/dart", "Dart" %} page.
+
+To install a package in a Flutter project,
+enter `flutter pub add {package-name}`.
+This downloads the code to the `~/.pub-cache/hosted` directory
+which contains subdirectories like `pub.dartlang.org`.
+This allows the downloaded code to be shared
+It also updates the dependency list in the `pubspec.yaml` file,
+which is the Flutter equivalent of a Node.js `package.json` file.
+
+To upgrade the versions of all installed packages,
+enter `flutter pub upgrade`.
+To upgrade the version of a specific installed packages,
+enter `flutter pub upgrade {package-name}`.
+
+To remove an installed package, enter `flutter pub remove {package-name}`.
+
+Dependencies can also be specified by manually editing the `pubspec.yaml` file.
+IDEs generally recognize the changes and
+automatically install the new dependencies for you.
+When using an editor that doesn't do this,
+enter `flutter pub get` to download and install them.
+
+In each of the commands in this section,
+the `flutter` command can be replaced by the `dart` command.
 
 ## Basic Flutter App Structure
 
@@ -1754,7 +1794,7 @@ Transform.rotate(angle: -pi / 4.0, child: someWidget);
 
 The following code uses a transformation matrix
 to translate, rotate, and scale a given widget:
-It requires adding the "vector_math" library to `pubspec.yaml`.
+It requires adding the "vector_math" package to `pubspec.yaml`.
 
 ```dart
 import 'package:vector_math/vector_math_64.dart' as vm;
@@ -3913,7 +3953,7 @@ it is hidden when they release the tile
 which gives them no opportunity to tap the button.
 A better option is to use the {% aTargetBlank
 "https://pub.dev/packages/flutter_swipe_action_cell",
-"flutter_swipe_action_cell" %} library.
+"flutter_swipe_action_cell" %} package.
 For an example, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_dismissible/blob/main/lib/main.dart",
 "GitHub repo" %}.
@@ -4280,7 +4320,7 @@ For state that is only used by a single stateful widget instance,
 use the `setState` function from inside that widget.
 
 For state that must be shared across multiple widget instances,
-it is recommended to choose a state management library
+it is recommended to choose a state management package
 provided by the community.
 Three popular packages are provider, GetX, and Riverpod.
 These reduce the need for stateful widgets.
@@ -4524,9 +4564,9 @@ class ChildWidget extends StatelessWidget {
 }
 ```
 
-### provider Library
+### provider Package
 
-The {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
+The {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} package
 is is the state management approach recommended by the Flutter team.
 It is "A wrapper around `InheritedWidget`
 to make them easier to use and more reusable."
@@ -4542,7 +4582,7 @@ this is probably the approach you should start with."
 In June 2019 Chris Sells, the Flutter Project Manager, said
 "Provider is the recommended way to do State Management for apps of all sizes."
 
-The provider library was created by Remi Rousselet.
+The provider package was created by Remi Rousselet.
 It is a wrapper around the {% aTargetBlank
 "https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html",
 "InheritedWidget" %} which is
@@ -4550,7 +4590,7 @@ a relatively complicated way to share mutable state.
 `InheriteWidget` is explained well in this {% aTargetBlank
 "https://www.youtube.com/watch?v=utrvu-eow6U", "YouTube video" %}.
 
-The steps to use the provider library are:
+The steps to use the provider package are:
 
 1. Add dependency to `pubspec.yaml`.
 
@@ -4726,7 +4766,7 @@ class Report extends StatelessWidget {
 
 The following Flutter app provides a more
 full-featured demonstration of using provider.
-The same app will be shown later using other state management libraries.
+The same app will be shown later using other state management packages.
 It is composed of two `ChangeNotifier` subclasses for managing state
 and three custom widgets that update and display the state.
 The user can enter a player name and a series of scores.
@@ -4988,8 +5028,8 @@ state manager, navigation manager, and utility functions.
 It can be found in pub.dev under the name "get".
 
 GetX has a reputation for being easier to use
-than other Flutter state management libraries.
-One critisism is that it is a very large library
+than other Flutter state management packages.
+One critisism is that it is a very large package
 that provides much more than state management.
 It can bloat the size of applications that only use it for state management.
 Another issue is that the official documentation is
@@ -5365,7 +5405,7 @@ The most useful of these functions are summarized below:
 GetX provides language translation using the `.tr` getter functino
 and the `Get.changeLocale` function.`
 
-### Riverpod Library
+### Riverpod Package
 
 {% aTargetBlank "https://riverpod.dev", "Riverpod" %}
 was created by Remi Rousselet, who is the same developer that created
@@ -5388,7 +5428,7 @@ It addresses several issues with provider including:
    For example, a state that returns a `Future` can be
    pending, complete with a value, or complete with an error.
 
-There are three libraries for using Riverpod.
+There are three packages for using Riverpod.
 
 1. {% aTargetBlank
    "https://github.com/rrousselGit/river_pod/tree/master/packages/riverpod",
@@ -6007,11 +6047,11 @@ There are many approaches to persisting app data
 so it is not lost when an app is closed.
 
 - built-in `SharedPreference` class
-- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} library
-- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} library
+- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} package
+- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} package
   (similar to the Context API in React)
 - {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
-  "cubit" %} library
+  "cubit" %} package
 - {% aTargetBlank "https://docs.flutter.dev/cookbook/persistence/sqlite",
   "SQLite" %} database on the device
 
@@ -7701,7 +7741,7 @@ class _LowLevelAnimationState extends State<LowLevelAnimation>
 ### Animated Drawings
 
 For animations of drawings rather than widgets,
-consider using the libraries
+consider using the packages
 {% aTargetBlank "https://pub.dev/packages/rive", "rive" %} and
 {% aTargetBlank "https://pub.dev/packages/lottie", "lottie" %} in pub.dev.
 
@@ -7727,16 +7767,16 @@ These include:
 ## Audio
 
 The {% aTargetBlank "https://pub.dev/packages/audioplayers", "audioplayers" %}
-library is a popular option for playing audio files in Flutter applications.
+plugin is a popular option for playing audio files in Flutter applications.
 It is fairly low-level and has some quirks.
-For a working example that provides a simplified layer over this library
+For a working example that provides a simplified layer over this plugin
 and a widget that provides a play/pause button, a stop button,
 and a progress bar, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_audio", "GitHub repo" %}.
 
-## Camera and Photo Library
+## Camera and Photo Plugins
 
-There are several pub.dev libraries that support device camera access.
+There are several pub.dev plugins that support device camera access.
 
 Android emulators provide a simulated camera
 where the user can pan around in a room that contains a television,
@@ -7745,21 +7785,21 @@ book shelves, a cat, a dog, and a kitchen.
 The iOS Simulator does not support a camera,
 so apps that require camera access must be run on iOS devices.
 
-### camera Library
+### camera Plugin
 
-The {% aTargetBlank "https://pub.dev/packages/camera", "camera" %} library
+The {% aTargetBlank "https://pub.dev/packages/camera", "camera" %} plugin
 in pub.dev provides access to device cameras in Android, iOS, and the web.
 It does not provide access to device photo libraries.
 See this excellent {% aTargetBlank
 "https://docs.flutter.dev/cookbook/plugins/picture-using-camera",
-"cookbook page" %} for step-by-step instructions on using the "camera" library,
+"cookbook page" %} for step-by-step instructions on using the "camera" plugin,
 including example code.
 
-While the "camera" library is popular, it is not nearly as easy to use or
+While the "camera" plugin is popular, it is not nearly as easy to use or
 as full-featured as the {% aTargetBlank "https://pub.dev/packages/image_picker",
-"image_picker" %} library which is described in the next section.
+"image_picker" %} plugin which is described in the next section.
 
-To use the "camara" library:
+To use the "camara" plugin:
 
 1. Add the following dependencies in `pubspec.yaml`:`
 
@@ -7791,28 +7831,28 @@ To use the "camara" library:
 1. Use `CameraController` to capture a photo.
 1. Use an `Image` widget to display the photo.
 
-For an example Flutter app that uses the "camera" library,
+For an example Flutter app that uses the "camera" plugin,
 see the "main" branch of this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_camera", "GitHub repo" %}.
 
-### image_picker Library
+### image_picker Plugin
 
 The {% aTargetBlank "https://pub.dev/packages/image_picker",
-"image_picker" %} library in pub.dev provides
+"image_picker" %} plugin in pub.dev provides
 access to device cameras and photo libraries in Android and iOS.
 
-To use this library:
+To use this plugin:
 
 1. For iOS, add the following lines in `ios/Runner/Info.plist`
    inside the `<dict>` element with app-specific descriptions:
 
    ```xml
     <key>NSCameraUsageDescription</key>
-    <string>Camera access is needed to demonstrate the "image_picker" library.</string>
+    <string>Camera access is needed to demonstrate the "image_picker" plugin.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Microphone access is needed to demonstrate the "image_picker" library.</string>
+    <string>Microphone access is needed to demonstrate the "image_picker" plugin.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Photo library access is needed to demonstrate the "image_picker" library.</string>
+    <string>Photo library access is needed to demonstrate the "image_picker" plugin.</string>
    ```
 
 1. Add the following imports:
@@ -7852,7 +7892,7 @@ To use this library:
 1. Restart the app to install the `pickImage` plugin.
    Unless this is done, a MissingPluginException will occur.
 
-For an example Flutter app that uses the "image_picker" library,
+For an example Flutter app that uses the "image_picker" plugin,
 see the "image_picker" branch of this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_camera/tree/image_picker",
 "GitHub repo" %}.
@@ -7860,9 +7900,9 @@ see the "image_picker" branch of this {% aTargetBlank
 ## GeoLocation
 
 The {% aTargetBlank "https://pub.dev/packages/geolocator", "geolocator" %}
-library is a popular option for getting
+package is a popular option for getting
 the current latitude and longitude of a device.
-For a basic example app that uses this library, see this {% aTargetBlank
+For a basic example app that uses this package, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_geolocation", "GitHub repo" %}.
 The README contains instructions on configuring Android and iOS
 to request permission for obtaining geolocation data.
@@ -8017,7 +8057,7 @@ To display a map of a given location with Google Maps:
 ## SQLite
 
 The SQLite database is a popular choice for persisting data on mobile devices.
-The pub.dev library
+The pub.dev package
 {% aTargetBlank "https://pub.dev/packages/sqflite", "sqlite" %}
 is the most popular way to access a SQLite database in a Flutter application.
 
@@ -8203,7 +8243,7 @@ when the tests are run.
 
 The {% aTargetBlank
 "https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html",
-"flutter_test" %} library defines many
+"flutter_test" %} package defines many
 classes, constants, and functions used to implement tests.
 
 Commonly used test constants are described below.
@@ -8817,7 +8857,7 @@ can be mocked to return the same data every time.
 This allows tests to focus on specific functionality being tested.
 It also allows tests to run without requiring an internet connection.
 
-The {% aTargetBlank "", "http" %} library includes
+The {% aTargetBlank "", "http" %} package includes
 the ability to mock responses to HTTP requests.
 
 The steps to use this are:
@@ -8847,7 +8887,7 @@ The steps to use this are:
    ```
 
 1. Tell the code being tested to use `MockClient` in place of
-   the normal `Client` instance provided by the `http` library.
+   the normal `Client` instance provided by the `http` package.
 
    There are multiple ways to do this.
    One way is to define a static property in the class being tested
@@ -8859,8 +8899,8 @@ The steps to use this are:
    ```
 
 Mock operations other than HTTP requests
-is simplified by using a mocking library.
-The preferred Flutter mocking library is
+is simplified by using a mocking package.
+The preferred Flutter mocking package is
 {% aTargetBlank "https://pub.dev/packages/mockito", "mockito" %}.
 This generates code for mock implementations of classes
 and provides methods that are useful in writing tests.
@@ -9041,41 +9081,6 @@ Enter all the requested information, including
 uploading a photo of an official ID such as a driver's licences.
 It can take a few days to receive notification
 that your identity has been verified.
-
-## Packages
-
-The official package registry for Flutter is
-{% aTargetBlank "https://pub.dev", "pub.dev" %}.
-Search for packages or see categorized lists of
-"Flutter Favorites", "Most popular packages", "Top Flutter packages",
-"Top Dart packages", and "Package of the Week".
-
-Some popular packages from pub.dev are described
-on my {% aTargetBlank "/blog/topics/#/blog/dart", "Dart" %} page.
-
-To install a package in a Flutter project,
-enter `flutter pub add {package-name}`.
-This downloads the code to the `~/.pub-cache/hosted` directory
-which contains subdirectories like `pub.dartlang.org`.
-This allows the downloaded code to be shared
-It also updates the dependency list in the `pubspec.yaml` file,
-which is the Flutter equivalent of a Node.js `package.json` file.
-
-To upgrade the versions of all installed packages,
-enter `flutter pub upgrade`.
-To upgrade the version of a specific installed packages,
-enter `flutter pub upgrade {package-name}`.
-
-To remove an installed package, enter `flutter pub remove {package-name}`.
-
-Dependencies can also be specified by manually editing the `pubspec.yaml` file.
-IDEs generally recognize the changes and
-automatically install the new dependencies for you.
-When using an editor that doesn't do this,
-enter `flutter pub get` to download and install them.
-
-In each of the commands in this section,
-the `flutter` command can be replaced by the `dart` command.
 
 ## Advice
 
