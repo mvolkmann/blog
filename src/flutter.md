@@ -8980,6 +8980,19 @@ detail on the lines covered by a test.
     src="/blog/assets/flutter-lcov.png?v={{pkg.version}}"
     title="Test Coverage">
 
+## In-App Purchases
+
+One approach to enabling in-app purchases in a Flutter app
+is to use the pub.dev package {% aTargetBlank
+"https://pub.dev/packages/in_app_purchase", "in_app_purchase" %}.
+Click the link after "codelab" for a detailed guide.
+This requires having a backend such as Firebase.
+
+One way to enable in-app purchases that does not require configuring a backend
+is {% aTargetBlank "https://docs.revenuecat.com/docs/flutter", "RevenueCat" %}.
+This is a commercial service, but it is free for a single developer
+and up to 10,000 USD in monthly tracked revenue (MTR).
+
 ## Deploying to App Stores
 
 Popular services that simpilify deploying Flutter apps
