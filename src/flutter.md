@@ -4605,13 +4605,21 @@ The steps to use the provider library are:
    import 'counter.dart';
    import 'report.dart';
 
-   return MaterialApp(
+   class MyApp extends StatelessWidget {
+     const MyApp({Key? key}) : super(key: key);
+
+     @override
+     Widget build(BuildContext context) {
+       return ChangeNotifierProvider<CountState>(
+         create: (context) => CountState(),
+         child: MaterialApp(
+           home: HomePage(title: 'My App'),
+           ..
+         ),
+       );
+     }
      ...
-     home: ChangeNotifierProvider(
-       create: (context) => CountState(),
-       child: HomePage(title: 'My App'),
-     ),
-   );
+   }
 
    // The build method of the HomePage widget can include:
    children: <Widget>[
@@ -4662,59 +4670,59 @@ The steps to use the provider library are:
    }
    ```
 
-   There are two approaches for access provider state.
-   The first is to use `Provider.of`.
-   The second is to use `Consumer`.
-   `Consumer` is a widget, so it can be only be used in a widget tree.
-   It is good for updating a specific widget when state changes,
-   but it makes the code more deeply nested.
-   `Provider.of` is a constructor,
-   so it can be used anywhere in a Dart function
-   and used to provide state access to multiple widgets.
+There are two approaches for access provider state.
+The first is to use `Provider.of`.
+The second is to use `Consumer`.
+`Consumer` is a widget, so it can be only be used in a widget tree.
+It is good for updating a specific widget when state changes,
+but it makes the code more deeply nested.
+`Provider.of` is a constructor,
+so it can be used anywhere in a Dart function
+and used to provide state access to multiple widgets.
 
-   Both approaches are demonstrated in `lib/report.dart` below:
+Both approaches are demonstrated in `lib/report.dart` below:
 
-   ```dart
-   import 'package:flutter/material.dart';
-   import 'package:provider/provider.dart';
-   import 'count_state.dart';
-   import 'widget_extensions.dart';
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'count_state.dart';
+import 'widget_extensions.dart';
 
-   class Report extends StatelessWidget {
-     const Report({Key? key}) : super(key: key);
+class Report extends StatelessWidget {
+  const Report({Key? key}) : super(key: key);
 
-     @override
-     Widget build(BuildContext context) {
-       var countState = Provider.of<CountState>(context);
-       return Row(
-         children: [
-           Text('Report: ${countState.count}'),
-           ElevatedButton(
-             child: Text('Reset'),
-             onPressed: () {
-             countState.reset();
-           }),
-         ].hSpacing(10),
-         mainAxisAlignment: MainAxisAlignment.center,
-       );
+  @override
+  Widget build(BuildContext context) {
+    var countState = Provider.of<CountState>(context);
+    return Row(
+      children: [
+        Text('Report: ${countState.count}'),
+        ElevatedButton(
+          child: Text('Reset'),
+          onPressed: () {
+          countState.reset();
+        }),
+      ].hSpacing(10),
+      mainAxisAlignment: MainAxisAlignment.center,
+    );
 
-       /*
-       return Consumer<CountState>(builder: (context, data, child) {
-         return Row(
-           children: [ Text('Report: ${data.count}'),
-             ElevatedButton(
-               child: Text('Reset'),
-               onPressed: () {
-                 data.reset();
-               }),
-           ].hSpacing(10),
-           mainAxisAlignment: MainAxisAlignment.center,
-         );
-       });
-       */
-     }
-   }
-   ```
+    /*
+    return Consumer<CountState>(builder: (context, data, child) {
+      return Row(
+        children: [ Text('Report: ${data.count}'),
+          ElevatedButton(
+            child: Text('Reset'),
+            onPressed: () {
+              data.reset();
+            }),
+        ].hSpacing(10),
+        mainAxisAlignment: MainAxisAlignment.center,
+      );
+    });
+    */
+  }
+}
+```
 
 The following Flutter app provides a more
 full-featured demonstration of using provider.
