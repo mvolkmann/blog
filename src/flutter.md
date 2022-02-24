@@ -8994,6 +8994,25 @@ to the Google Play Store and the iOS App Store include
 
 TODO: Add more detail on at least one of these options.
 
+### Google Play
+
+A Google Developer account is required
+to deploy apps to the Google Play store.
+To create an account, browse the {% aTargetBlank
+"https://play.google.com/console/", "Google Play console" %}
+and click one of the "Get Started" links,
+either for "Yourself" or "An organization or business".
+Enter all the required data and click the "Create account and pay" button.
+Enter credit card information and complete the payment process
+to pay a one-time 25 USD fee.
+
+You will receive an email requesting identity verification.
+Click the "Verify" button in the email.
+Enter all the requested information, including
+uploading a photo of an official ID such as a driver's licences.
+It can take a few days to receive notification
+that your identity has been verified.
+
 ## Packages
 
 The official package registry for Flutter is
