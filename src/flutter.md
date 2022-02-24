@@ -9035,7 +9035,7 @@ is to use the pub.dev package {% aTargetBlank
 "https://pub.dev/packages/in_app_purchase", "in_app_purchase" %}.
 Click the link after "codelab" for a detailed guide.
 This requires having a backend such as Firebase.
-This is a good option for apps that are using Firebase for other purposes
+It is a good option for apps that are using Firebase for other purposes
 
 One way to enable in-app purchases that does not require configuring a backend
 is {% aTargetBlank "https://docs.revenuecat.com/docs/flutter", "RevenueCat" %}.
@@ -9046,8 +9046,68 @@ and up to 10,000 USD in monthly tracked revenue (MTR).
 
 The steps to use RevenueCat are:
 
-1. Install the `purchase_flutter` plugin.
-   TODO: Finish this!
+1. Add the `purchases_flutter` package in `pubspec.yaml`.
+1. In `ios/Podfile`, uncomment the following line:
+
+   ```text
+   # platform :ios, '9.0'
+   ```
+
+1. Enter `open ios/Runner.xcworkspace` to launch Xcode.
+
+1. Open the project in Xcode.
+
+1. Add a button in the app to show purchase options.
+
+1. Browse {% aTargetBlank "https://www.revenuecat.com", "revenuecat.com" %}.
+1. Click the "Get Started ->" button.
+1. Enter data for a new account and click the "Sign Up" button.
+1. Enter a name for the project and click the "Create project" button.
+1. To deploy to the Google Play Store:
+
+   - Browse the {% aTargetBlank "https://play.google.com/console/",
+     "Google Play Console" %} and select a developer account.
+   - In the left nav., click "Setup", then "API access".
+   - Click the "Choose a project to link" button.
+   - Click the "I agree" button to agree to the terms of service.
+   - Select the "Create new project" radio button.
+   - Click the "Link project" button.
+   - Click "Create new service account".
+   - In the dialog that appears, click the "Google Cloud Platform" link
+     which will open a new browser tab.
+   - Click "+ CREATE SERVICE ACCOUNT".
+   - For "Service account name", enter the app name.
+   - Do not change the "Service account ID".
+   - For "Service account description", enter a brief description of the app.
+   - Click the "CREATE AND CONTINUE" button.
+   - Add the roles "Pub/Sub" ... "Pub/Sub Admin"
+     and "Monitoring" ... "Monitoring Viewer"
+   - Click the "CONTINUE" button.
+   - Click the "DONE" button.
+   - If the newly creaed service account doesn't appear in the table
+     refresh the page.
+   - Click the vertical ellipsis in the Actions column for the service account
+     and select "Manage Keys".
+   - Click the "ADD KEY" dropdown and select "Create new key".
+   - Select the "JSON" radio button and click the "CREATE" button.
+   - A `.json` file containing a private key file will be downloaded.
+   - Click the "CLOSE" button.
+   - Close the browser tab for the Google Cloud Console.
+   - Back in the browser tab for the Google Play Console,
+     click the "DONE" button in the dialog.
+   - In the "Service accounts" section of the page,
+     find the row for the newly created service account a click "Grant access".
+   - Click the "Account permissions" tab.
+   - Check both of the checkboxes in the "Financial data" section.
+   - Click the "Invite User" button in lower-left corner of the page.
+   - In the dialog that appears, click the "Send Invite" button.
+   - Click the row for the new service account.
+   - Click the "Add app" dropdown and select the app in the dialog.
+     NO APPS APPEARED FOR ME!
+
+1. For each platform to be supported, click its button
+   and enter the requested data.
+1.
 
 ## Deploying to App Stores
 
@@ -9082,11 +9142,140 @@ uploading a photo of an official ID such as a driver's licences.
 It can take a few days to receive notification
 that your identity has been verified.
 
+Android apps are bundled in `.adk` files.
+To generate one, enter `flutter build apk`.
+This takes several minutes to complete.
+
+To upload an app to the Google Play store:
+
+- Browse the {% aTargetBlank "https://play.google.com/console/",
+  "Goole Play Console" %}.
+- Select your developer account.
+- Click the "Create app" button.
+- Enter an app name as it should appear in the store.
+- Specify whether it is a game or app.
+- Specify whether it is free or paid.
+- Check the "Developer Program Policies" checkbox.
+- Check the "Play App Signing" checkbox.
+- Check the "US export laws" checkbox.
+- Click the "Create app" button.
+
+- Optionally enable early testing before review by
+  adding tester email addresses and pressing the "Save changes" button.
+
+  - Click "Create email list".
+  - Enter a "List name".
+  - For each tester email address, enter it in the "Add email addresses"
+    text input and press the return key to add it.
+  - For "Feedback URL or email address", enter your own email address.
+  - Click the "Save changes" button in the lower-right.
+  - Click the "Create" button in the dialog that appears.
+  - Click the "Save changes" button in the lower-right.
+
+- Click the "Releases" tab.
+- Click "Create new release".
+- Keep this browser tab open until an app bundle
+  has been created so it can be uploaded here.
+  The steps belwo build the app bundle file.
+
+- Create an upload keystore in macOS or Linux
+  by entering the following command and answering questions.
+  Enter a password when requested and remember it.
+  For apps created by an individual as opposed to a company, consider using
+  an email address for both "organizational unit" and "organization".
+
+  ```bash
+  keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload --storetype JKS
+  ```
+
+  This creates the file `upload-keystore.jks` in your home directory.
+
+- In the `android` directory at the top of the project directory,
+  create the file `key.properties` containing the following:
+
+  ```text
+  storePassword={keystore-password}
+  keyPassword={keystore-password}
+  keyAlias=upload
+  storeFile={path-to-upload-keystore.jks}
+  ```
+
+- Add `android/key.properties` to `.gitignore`.
+
+- Edit the `android/app/build.gradle` file.
+
+  - Add the following before the line that begins with `android {`:
+
+    ```text
+    def keystoreProperties = new Properties()
+    def keystorePropertiesFile = rootProject.file('key.properties')
+    if (keystorePropertiesFile.exists()) {
+      keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    }
+    ```
+
+  - Replace the `buildTypes` block with the following:
+
+    ```text
+    signingConfigs {
+      release {
+        keyAlias keystoreProperties['keyAlias']
+        keyPassword keystoreProperties['keyPassword']
+        storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+        storePassword keystoreProperties['storePassword']
+      }
+    }
+    buildTypes {
+      release {
+        signingConfig signingConfigs.release
+      }
+    }
+    ```
+
+- Edit the `android/app/src/main/AndroidManifest.xml` file.
+
+  - Change the `application` element `android:label` attribute value
+    to the actual name of the application.
+
+  - Add the following line after the other `uses-permission` elements
+    if the app needs internet access, such as accessing Google Maps:
+
+    ```text
+    <uses-permission android:name="android.permission.INTERNET" />
+    ```
+
+- Edit the `android/app/build.gradle` file.
+
+  - Correct the value of `applicationId` under `android` ... `defaultConfig`
+  - Verify the values of `compileSdkVersion`, `minSdkVersion`.
+
+- Edit the `android/local.properties` file
+  and verify the values `flutter.buildMode` and version properties.
+
+- Build an app bundle by entering `flutter build appbundle`
+  in the top app directory.
+
+- Return to the Google Play Console browser tab
+  and upload the generated app bundle file
+  `build/app/outputs/bundle/release/app-release.aab`.
+
+- The "Release name" will default to "1 (1.0.0)", but this can be changed.
+
+- Change the release notes.
+
+- Click "Save" in the lower-left.
+
+- Click the "Review release" button in the lower-left.
+
+- Fix any errors and warnings that are identified.
+
+- Click the "Start rollout to internal testing" button in the lower-right.
+
 ## Advice
 
 - Flutter prefers project and file names that separate words
   with underscores instead of hyphens, so use those.
-
+  `
 - Create lots of custom widgets that hide the complexity of provided widgets
   and provide application-specific styling.
 
