@@ -9033,87 +9033,6 @@ detail on the lines covered by a test.
     src="/blog/assets/flutter-lcov.png?v={{pkg.version}}"
     title="Test Coverage">
 
-## In-App Purchases
-
-One approach to enabling in-app purchases in a Flutter app
-is to use the pub.dev package {% aTargetBlank
-"https://pub.dev/packages/in_app_purchase", "in_app_purchase" %}.
-Click the link after "codelab" for a detailed guide.
-This requires having a backend such as Firebase.
-It is a good option for apps that are using Firebase for other purposes
-
-One way to enable in-app purchases that does not require configuring a backend
-is {% aTargetBlank "https://docs.revenuecat.com/docs/flutter", "RevenueCat" %}.
-This is a commercial service, but it is free for a single developer
-and up to 10,000 USD in monthly tracked revenue (MTR).
-
-### RevenueCat
-
-The steps to use RevenueCat are:
-
-1. Add the `purchases_flutter` package in `pubspec.yaml`.
-1. In `ios/Podfile`, uncomment the following line:
-
-   ```text
-   # platform :ios, '9.0'
-   ```
-
-1. Enter `open ios/Runner.xcworkspace` to launch Xcode.
-
-1. Open the project in Xcode.
-
-1. Add a button in the app to show purchase options.
-
-1. Browse {% aTargetBlank "https://www.revenuecat.com", "revenuecat.com" %}.
-1. Click the "Get Started ->" button.
-1. Enter data for a new account and click the "Sign Up" button.
-1. Enter a name for the project and click the "Create project" button.
-1. To deploy to the Google Play Store:
-
-   - Browse the {% aTargetBlank "https://play.google.com/console/",
-     "Google Play Console" %} and select a developer account.
-   - In the left nav., click "Setup", then "API access".
-   - Click the "Choose a project to link" button.
-   - Click the "I agree" button to agree to the terms of service.
-   - Select the "Create new project" radio button.
-   - Click the "Link project" button.
-   - Click "Create new service account".
-   - In the dialog that appears, click the "Google Cloud Platform" link
-     which will open a new browser tab.
-   - Click "+ CREATE SERVICE ACCOUNT".
-   - For "Service account name", enter the app name.
-   - Do not change the "Service account ID".
-   - For "Service account description", enter a brief description of the app.
-   - Click the "CREATE AND CONTINUE" button.
-   - Add the roles "Pub/Sub" ... "Pub/Sub Admin"
-     and "Monitoring" ... "Monitoring Viewer"
-   - Click the "CONTINUE" button.
-   - Click the "DONE" button.
-   - If the newly creaed service account doesn't appear in the table
-     refresh the page.
-   - Click the vertical ellipsis in the Actions column for the service account
-     and select "Manage Keys".
-   - Click the "ADD KEY" dropdown and select "Create new key".
-   - Select the "JSON" radio button and click the "CREATE" button.
-   - A `.json` file containing a private key file will be downloaded.
-   - Click the "CLOSE" button.
-   - Close the browser tab for the Google Cloud Console.
-   - Back in the browser tab for the Google Play Console,
-     click the "DONE" button in the dialog.
-   - In the "Service accounts" section of the page,
-     find the row for the newly created service account a click "Grant access".
-   - Click the "Account permissions" tab.
-   - Check both of the checkboxes in the "Financial data" section.
-   - Click the "Invite User" button in lower-left corner of the page.
-   - In the dialog that appears, click the "Send Invite" button.
-   - Click the row for the new service account.
-   - Click the "Add app" dropdown and select the app in the dialog.
-     NO APPS APPEARED FOR ME!
-
-1. For each platform to be supported, click its button
-   and enter the requested data.
-1.
-
 ## Deploying to App Stores
 
 Popular services that simpilify deploying Flutter apps
@@ -9288,6 +9207,14 @@ To upload an app to the Google Play store:
 - Check the "US export laws" checkbox.
 - Click the "Create app" button in the lower-right corner.
 
+- In the left-nav, select "Developer page".
+- Enter a "Developer Name", "Physical address", "Promotional Text",
+  and "Website address".
+- Upload a "Developer icon" that is exactly 512x512px.
+- Upload a "Header image" that is exactly 4096x2304px.
+- Select a "Featured app" to appear on your developer page.
+- Click the "Save" button in the lower-right corner.
+
 - In the left-nav, select "Production".
 - Click the "Countries/regions" tab.
 - Click "Add countries/regions".
@@ -9339,6 +9266,133 @@ To upload an app to the Google Play store:
   and clicking the "Save changes" button in the lower-right corner.
 
 - Click the "Start rollout to internal testing" button in the lower-right.
+
+- In the left-nav, click "All apps" to see the status of all your apps.
+- Click the row of an app to see details about it.
+- Click "View on Google Play" ... I see "We're sorry,
+  the requested URL was not found on this server."
+
+In order to collect money for paid apps and apps that have in-app purchases,
+a payment profile must be created.
+
+- Browse the {% aTargetBlank "https://play.google.com/console/",
+  "Google Play Console" %} and elect your developer account.
+- In the left nav., click "Payments profile".
+- Click the "Create payments profile".
+- Click your name.
+- If you are operating as an individual as opposed to a business,
+  uncheck the checkbox for "Use legal business info name, contact, address".
+- Enter your mailing address.
+- Enter a business name which can be your email address.
+- Optionally enter your website URL.
+- For "What do you sell" dropdown, select "Computer Software".
+- For "Customer support email", enter your email address.
+- For "Credit card statement name", enter a credit card name such as "Visa".
+- Click the "Submit" button in the lower-right corner.
+- On the "Payment profile" page, click "Manage account group".
+- Click the "Create account group" button.
+- Verify the "Account group name", modifying it if necessary.
+- Click the "Create account group" button in the lower-right corner.
+- Click "Start".
+- For "Developer accounts owned by your legal entity", select "No".
+- For "Developer accounts with similar brand features", select "No".
+- Click the "Save" button in the lower-right corner.
+- Click "Review and enroll".
+- Click the "Confirm and view terms" button in the lower-right corner.
+- Click the "Accept and enroll" button in the lower-right corner.
+
+### iOS App Store
+
+TODO: Add this section.
+
+## In-App Purchases
+
+One approach to enabling in-app purchases in a Flutter app
+is to use the pub.dev package {% aTargetBlank
+"https://pub.dev/packages/in_app_purchase", "in_app_purchase" %}.
+Click the link after "codelab" for a detailed guide.
+This requires having a backend such as Firebase.
+It is a good option for apps that are using Firebase for other purposes
+
+One way to enable in-app purchases that does not require configuring a backend
+is {% aTargetBlank "https://docs.revenuecat.com/docs/flutter", "RevenueCat" %}.
+This is a commercial service, but it is free for a single developer
+and up to 10,000 USD in monthly tracked revenue (MTR).
+
+### RevenueCat
+
+The steps to use RevenueCat are:
+
+1. Add the `purchases_flutter` package in `pubspec.yaml`.
+1. In `ios/Podfile`, uncomment the following line:
+
+   ```text
+   # platform :ios, '9.0'
+   ```
+
+1. Enter `open ios/Runner.xcworkspace` to launch Xcode.
+
+1. Open the project in Xcode.
+
+1. Add a button in the app to show purchase options.
+
+1. Browse {% aTargetBlank "https://www.revenuecat.com", "revenuecat.com" %}.
+1. Click the "Get Started ->" button.
+1. Enter data for a new account and click the "Sign Up" button.
+1. Enter a name for the project and click the "Create project" button.
+1. Deploy the app to the stores.
+   The steps to do this are provided in the previous section.
+   Before building the app bundle, add the following line in
+   `android/app/src/main/AndroidManifest.xml`
+   after the other `uses-permission` elements:
+
+   ```xml
+   <uses-permission android:name="android.vending.BILLING" />
+   ```
+
+1. Associate your RevenueCat account with the app.
+
+   - In the left nav., click "Setup", then "API access".
+   - Click the "Choose a project to link" button.
+   - Click the "I agree" button to agree to the terms of service.
+   - Select the "Create new project" radio button.
+   - Click the "Link project" button.
+   - Click "Create new service account".
+   - In the dialog that appears, click the "Google Cloud Platform" link
+     which will open a new browser tab.
+   - Click "+ CREATE SERVICE ACCOUNT".
+   - For "Service account name", enter the app name.
+   - Do not change the "Service account ID".
+   - For "Service account description", enter a brief description of the app.
+   - Click the "CREATE AND CONTINUE" button.
+   - Add the roles "Pub/Sub" ... "Pub/Sub Admin"
+     and "Monitoring" ... "Monitoring Viewer"
+   - Click the "CONTINUE" button.
+   - Click the "DONE" button.
+   - If the newly creaed service account doesn't appear in the table
+     refresh the page.
+   - Click the vertical ellipsis in the Actions column for the service account
+     and select "Manage Keys".
+   - Click the "ADD KEY" dropdown and select "Create new key".
+   - Select the "JSON" radio button and click the "CREATE" button.
+   - A `.json` file containing a private key file will be downloaded.
+   - Click the "CLOSE" button.
+   - Close the browser tab for the Google Cloud Console.
+   - Back in the browser tab for the Google Play Console,
+     click the "DONE" button in the dialog.
+   - In the "Service accounts" section of the page,
+     find the row for the newly created service account a click "Grant access".
+   - Click the "Account permissions" tab.
+   - Check both of the checkboxes in the "Financial data" section.
+   - Click the "Invite User" button in lower-left corner of the page.
+   - In the dialog that appears, click the "Send Invite" button.
+   - Click the row for the new service account.
+   - Click the "Add app" dropdown and select the app in the dialog.
+     NO APPS APPEARED FOR ME!
+
+1. For each platform to be supported, click its button
+   and enter the requested data.
+1.
 
 ## Advice
 
