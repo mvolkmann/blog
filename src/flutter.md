@@ -9158,7 +9158,11 @@ Examples include `-t android` and `-t ios`.
 
 A Google Developer account is required
 to deploy apps to the Google Play store.
-To create an account, browse the {% aTargetBlank
+If you do not already have a Google account, create that first
+by browsing {% aTargetBlank "https://accounts.google.com/",
+"accounts.google.com" %}.
+
+To create a developer account, browse the {% aTargetBlank
 "https://play.google.com/console/", "Google Play console" %}
 and click one of the "Get Started" links,
 either for "Yourself" or "An organization or business".
@@ -9173,44 +9177,14 @@ uploading a photo of an official ID such as a driver's licences.
 It can take a few days to receive notification
 that your identity has been verified.
 
-Android apps are bundled in `.adk` files.
+Android apps are bundled in `.apk` files.
 To generate one, enter `flutter build apk`.
 This takes several minutes to complete.
 
 To upload an app to the Google Play store:
 
-- Browse the {% aTargetBlank "https://play.google.com/console/",
-  "Goole Play Console" %}.
-- Select your developer account.
-- Click the "Create app" button.
-- Enter an app name as it should appear in the store.
-- Specify whether it is a game or app.
-- Specify whether it is free or paid.
-- Check the "Developer Program Policies" checkbox.
-- Check the "Play App Signing" checkbox.
-- Check the "US export laws" checkbox.
-- Click the "Create app" button.
-
-- Optionally enable early testing before review by
-  adding tester email addresses and pressing the "Save changes" button.
-
-  - Click "Create email list".
-  - Enter a "List name".
-  - For each tester email address, enter it in the "Add email addresses"
-    text input and press the return key to add it.
-  - For "Feedback URL or email address", enter your own email address.
-  - Click the "Save changes" button in the lower-right.
-  - Click the "Create" button in the dialog that appears.
-  - Click the "Save changes" button in the lower-right.
-
-- Click the "Releases" tab.
-- Click "Create new release".
-- Keep this browser tab open until an app bundle
-  has been created so it can be uploaded here.
-  The steps belwo build the app bundle file.
-
-- Create an upload keystore in macOS or Linux
-  by entering the following command and answering questions.
+- Create an upload keystore by entering the command below
+  (specific to macOS or Linux) and answering questions.
   Enter a password when requested and remember it.
   For apps created by an individual as opposed to a company, consider using
   an email address for both "organizational unit" and "organization".
@@ -9220,6 +9194,9 @@ To upload an app to the Google Play store:
   ```
 
   This creates the file `upload-keystore.jks` in your home directory.
+  Move the file into the project `android/app` directory.
+  Verify that `.gitignore` contains `**.*.jks`
+  so no keystore files are committed to the repository.
 
 - In the `android` directory at the top of the project directory,
   create the file `key.properties` containing the following:
@@ -9228,7 +9205,7 @@ To upload an app to the Google Play store:
   storePassword={keystore-password}
   keyPassword={keystore-password}
   keyAlias=upload
-  storeFile={path-to-upload-keystore.jks}
+  storeFile=../app/upload-keystore.jks
   ```
 
 - Add `android/key.properties` to `.gitignore`.
@@ -9280,11 +9257,76 @@ To upload an app to the Google Play store:
   - Correct the value of `applicationId` under `android` ... `defaultConfig`
   - Verify the values of `compileSdkVersion`, `minSdkVersion`.
 
-- Edit the `android/local.properties` file
-  and verify the values `flutter.buildMode` and version properties.
+- Edit the `android/local.properties` file and verify the values.
+  `flutter.buildMode` can be set to `release`, `profile`, or `debug`.
+  Do not modify `flutter.versionName` or `flutter.versionCode`.
+  Those are autmatically updated using the value of `version` in `pubspec.yaml`.
+  This is a value like `1.0.1+2` where
+  the part before the `+` is a semantic version
+  that is used for the value of `flutter.versionName`
+  and the part after the plus is an incrementing integer
+  that is used for the value of `flutter.versionCode`.
 
-- Build an app bundle by entering `flutter build appbundle`
-  in the top app directory.
+- Build an app bundle.
+
+  - In a terminal, cd to the top app directory.
+  - Enter `flutter clean` to delete any previous build artifacts.
+  - Enter `flutter build appbundle` to build a new app bundle.
+  - This creates the file `build/app/outputs/bundle/release/app-release.aab`.
+
+- Browse the {% aTargetBlank "https://play.google.com/console/",
+  "Goole Play Console" %}.
+- Select your developer account.
+- Click the "Create app" button.
+- Enter an app name as it should appear in the store.
+- Choose a language such as "English (United States) - en-US".
+- Specify whether it is a game or app.
+- Specify whether it is free or paid.
+- Check the "Developer Program Policies" checkbox.
+- Check the "Play App Signing" checkbox.
+- Check the "US export laws" checkbox.
+- Click the "Create app" button in the lower-right corner.
+- In the left-nav, select "Store presence", then "Main store listing".
+- Scroll down a bit and enter all the information requested,
+  including app screenshots (at least two).
+  Screenshots can be created by clicking
+  the camera button in the Android emulator.
+- Click the "Save" button the lower-right corner.
+- In the left-nav under "Store presence", click "Store settings".
+- Select "App" or "Game".
+- Select a category such as "Productivity".
+- Optionally add tags such as "Personal Assistant".
+- Enter a contact email address and website for the app.
+- Click the "Save" button the lower-right corner.
+- Optionally enable early testing before review.
+  - In the left-nav, click "Testing", then "Closed Testing".
+  - Click "Manage track".
+  - Click the "Create new release" button.
+  - Click "Upload" and upload the `.aab` bundle file created earlier.
+    This takes a couple of minutes.
+    If it fails with a message like "Version code 1 has already been used,
+    modify the values of `flutter.versionName` and `flutter.versionCode`
+    in the file `android/local.properties`, create a new bundle file,
+    and upload that.
+  - Enter a release name and release notes.
+  - Click the
+
+adding tester email addresses and pressing the "Save changes" button.
+
+- Click "Create email list".
+- Enter a "List name".
+- For each tester email address, enter it in the "Add email addresses"
+  text input and press the return key to add it.
+- For "Feedback URL or email address", enter your own email address.
+- Click the "Save changes" button in the lower-right.
+- Click the "Create" button in the dialog that appears.
+- Click the "Save changes" button in the lower-right.
+
+- Click the "Releases" tab.
+- Click "Create new release".
+- Keep this browser tab open until an app bundle
+  has been created so it can be uploaded here.
+  The steps belwo build the app bundle file.
 
 - Return to the Google Play Console browser tab
   and upload the generated app bundle file
