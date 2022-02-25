@@ -9277,6 +9277,7 @@ To upload an app to the Google Play store:
 - Browse the {% aTargetBlank "https://play.google.com/console/",
   "Goole Play Console" %}.
 - Select your developer account.
+
 - Click the "Create app" button.
 - Enter an app name as it should appear in the store.
 - Choose a language such as "English (United States) - en-US".
@@ -9286,69 +9287,58 @@ To upload an app to the Google Play store:
 - Check the "Play App Signing" checkbox.
 - Check the "US export laws" checkbox.
 - Click the "Create app" button in the lower-right corner.
+
+- In the left-nav, select "Production".
+- Click the "Countries/regions" tab.
+- Click "Add countries/regions".
+- Check the checkboxes for the desired countries.
+- Click the "Add countries/regions" button in the lower-right corner.
+- Click the "Add" button in the dialog that appears.
+
 - In the left-nav, select "Store presence", then "Main store listing".
 - Scroll down a bit and enter all the information requested,
   including app screenshots (at least two).
   Screenshots can be created by clicking
   the camera button in the Android emulator.
 - Click the "Save" button the lower-right corner.
+
 - In the left-nav under "Store presence", click "Store settings".
 - Select "App" or "Game".
 - Select a category such as "Productivity".
 - Optionally add tags such as "Personal Assistant".
 - Enter a contact email address and website for the app.
 - Click the "Save" button the lower-right corner.
+
 - Optionally enable early testing before review.
   - In the left-nav, click "Testing", then "Closed Testing".
   - Click "Manage track".
   - Click the "Create new release" button.
-  - Click "Upload" and upload the `.aab` bundle file created earlier.
-    This takes a couple of minutes.
-    If it fails with a message like "Version code 1 has already been used,
-    modify the values of `flutter.versionName` and `flutter.versionCode`
-    in the file `android/local.properties`, create a new bundle file,
-    and upload that.
-  - Enter a release name and release notes.
-  - Click the
+- Otherwise create a release by ... TODO
 
-adding tester email addresses and pressing the "Save changes" button.
-
-- Click "Create email list".
-- Enter a "List name".
-- For each tester email address, enter it in the "Add email addresses"
-  text input and press the return key to add it.
-- For "Feedback URL or email address", enter your own email address.
-- Click the "Save changes" button in the lower-right.
-- Click the "Create" button in the dialog that appears.
-- Click the "Save changes" button in the lower-right.
-
-- Click the "Releases" tab.
-- Click "Create new release".
-- Keep this browser tab open until an app bundle
-  has been created so it can be uploaded here.
-  The steps belwo build the app bundle file.
-
-- Return to the Google Play Console browser tab
-  and upload the generated app bundle file
-  `build/app/outputs/bundle/release/app-release.aab`.
-
-- The "Release name" will default to "1 (1.0.0)", but this can be changed.
-
-- Change the release notes.
-
-- Click "Save" in the lower-left.
-
-- Click the "Review release" button in the lower-left.
-
+- Click "Upload" and upload the `.aab` bundle file created earlier.
+  This takes a couple of minutes.
+  If it fails with a message like "Version code 1 has already been used,
+  modify the values of `flutter.versionName` and `flutter.versionCode`
+  in the file `android/local.properties`, create a new bundle file,
+  and upload that.
+- Enter a release name and release notes.
+- Click the "Save" button in lower-right corner.
+- Click the "Review release" button in lower-right corner.
 - Fix any errors and warnings that are identified.
 
+- In the left-nav, click "Dashboard".
+- Look for items that are not proceeded by a green checkmark
+  and complete them. Examples of items that may not be completed yet include
+  "Data safety", "Select testers", and "Review and roll out the release".
+- The "Data safety" section requires entering the URL of your privacy policy.
+  Creating one can be complicated. For a basic example, see one of mine
+  {% aTargetBlank "https://mvolkmann.github.io/privacy-policy.html", "here" %}.
+- The "Select testers" section requires creating at least one email list,
+  entering the email addresses of the testers in each email list,
+  checking the checkbox for more or more of the created email lists,
+  and clicking the "Save changes" button in the lower-right corner.
+
 - Click the "Start rollout to internal testing" button in the lower-right.
-
-- In the Google Play Console web site,
-  select Testing ... Open testing in the left nav.
-
-  - Add countries where the test app will be available.
-  - Upload the app bundle again?
 
 ## Advice
 
