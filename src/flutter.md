@@ -205,6 +205,9 @@ and about 10 seconds after that.
 But typically the app will remain running and
 changes will be deployed with hot reload nearly instantly.
 
+In the next section we will see how to
+run a Flutter app from inside VS Code.
+
 The default app renders a header that displays an app title,
 some text, a number, and a button in the lower-right
 that increments the number.
@@ -233,6 +236,59 @@ Other changes that should be made include:
 - Change the `title` argument to the `MaterialApp` widget.
 - Change the `title` argument to the `MyHomePage` widget.
 - Replace the widgets in the `children` `List` passed to the `Column` widget.
+
+## Running From VS Code
+
+To run a Flutter app from VS Code:
+
+- Select a simulated or real device to use
+  from a menu on the right side of the VS Code footer.
+- Select a `.dart` file such as `lib/main.dart`.
+- Select Run ... Start Debugging (F5) or
+  Run ... Run Without Debugging (fn-ctrl-F5).
+
+The first time this is run for a given application
+it takes around a minute to start.
+
+Sometimes it is necessary to change `build.gradle` files
+used for Android builds.
+
+The Kotlin version can be changed by modifying the following
+in the file `android/build.gradle`:
+
+```text
+buildscript {
+    ext.kotlin_version = '1.6.0'
+    ...
+}
+```
+
+The Flutter SDK version can be changed by modifing the following
+in the file `android/app/build.gradle`:
+
+```text
+android {
+   ...
+    defaultConfig {
+        ...
+        minSdkVersion 21
+        ...
+    }
+    ...
+}
+```
+
+Running a Flutter app from VS Code opens the following floating toolbar:
+
+<img alt="VS Code Flutter Toolbar" style="width: 80%"
+    src="/blog/assets/flutter-vs-code-toolbar.png?v={{pkg.version}}"
+    title="VS Code Flutter Toolbar">
+
+The orange lightning bolt does a hot reload of the app.
+The green circular arrow restarts the app.
+The red square stops the app.
+The blue magnifier glass opens the Widget Inspector
+which gives details about widget nesting, layout, and sizes.
 
 ## Linting
 
@@ -285,57 +341,6 @@ but resets state to initial values, press "shift-r".
 If the app is run from a compatible editor, the app will
 automatically update after saving code changes without losing state.
 Compatible editors include Android Studio, IntelliJ, VS Code, and emacs.
-
-To run a Flutter app from VS Code:
-
-- Select a simulated or real device to use
-  from a menu on the right side of the VS Code footer.
-- Select a `.dart` file such as `lib/main.dart`.
-- Select Run ... Start Debugging (F5) or
-  Run ... Run Without Debugging (fn-ctrl-F5).
-
-The first time this is run for a given application
-it takes around a minute to start.
-
-Sometimes it is necessary to change `build.gradle` files
-used for Android builds.
-
-The Kotlin version can be changed by modifying the following
-in the file `android/build.gradle`:
-
-```text
-buildscript {
-    ext.kotlin_version = '1.6.0'
-    ...
-}
-```
-
-The Flutter SDK version can be changed by modifing the following
-in the file `android/app/build.gradle`:
-
-```text
-android {
-   ...
-    defaultConfig {
-        ...
-        minSdkVersion 21
-        ...
-    }
-    ...
-}
-```
-
-Running a Flutter app from VS Code opens the following floating toolbar:
-
-<img alt="VS Code Flutter Toolbar" style="width: 80%"
-    src="/blog/assets/flutter-vs-code-toolbar.png?v={{pkg.version}}"
-    title="VS Code Flutter Toolbar">
-
-The orange lightning bolt does a hot reload of the app.
-The green circular arrow restarts the app.
-The red square stops the app.
-The blue magnifier glass opens the Widget Inspector
-which gives details about widget nesting, layout, and sizes.
 
 ## Debugging
 
