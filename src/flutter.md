@@ -8192,11 +8192,11 @@ The steps to customize the launcher icon used by a Flutter app are:
    flutter_icons:
      android: 'launcher_icon'
      ios: true
-     image_path: 'assets/icon/icon.png'
+     image_path: 'assets/images/icon.png'
      remove_alpha_ios: true
    ```
 
-1. Create the directory `assets/icon` in the project.
+1. Create the directory `assets/images` in the project.
 1. Copy a square PNG file into this file and name it `icon.png`.
 1. Edit `android/app/build.gradle` and change
    `minSdkVersion flutter.minSdkVersion` to `minSdkVersion 21`
@@ -9270,6 +9270,12 @@ To upload an app to the Google Play store:
 - Fix any errors and warnings that are identified.
 
 - Click the "Start rollout to internal testing" button in the lower-right.
+
+- In the Google Play Console web site,
+  select Testing ... Open testing in the left nav.
+
+  - Add countries where the test app will be available.
+  - Upload the app bundle again?
 
 ## Advice
 
