@@ -9321,20 +9321,24 @@ and up to 10,000 USD in monthly tracked revenue (MTR).
 
 ### RevenueCat
 
-The steps to use RevenueCat are:
+RevenueCat requires store setup of in-app purchases and subscriptions.
+Do setup in-app purchases in the Google Play Console:
 
-1. Add the `purchases_flutter` package in `pubspec.yaml`.
-1. In `ios/Podfile`, uncomment the following line:
+1. Browse the {% aTargetBlank "https://play.google.com/console/",
+   "Google Play Console" %} and elect your developer account.
+1. In the left nav., click "All apps".
+1. Click the row describing the app to which in-app payments will be added.
+1. In the left-nav, scroll down to the "Monetize" section,
+   click "Products", then click "In-app products".
+1. Click the "Create product" button.
+1. Enter a "Product ID", "Name", "Description", and "Default Price".
+   The product ID should be unique across all of your apps,
+   so it is recommended for it to begin with the app name.
+   It can contain underscores and periods, but not hyphens.
+1. Click the "Save" button in the lower-right corner
+1. Click the "Activate" button in the lower-right corner
 
-   ```text
-   # platform :ios, '9.0'
-   ```
-
-1. Enter `open ios/Runner.xcworkspace` to launch Xcode.
-
-1. Open the project in Xcode.
-
-1. Add a button in the app to show purchase options.
+Describing subscriptions is similar to describing one-time in-app payments.
 
 1. Browse {% aTargetBlank "https://www.revenuecat.com", "revenuecat.com" %}.
 1. Click the "Get Started ->" button.
@@ -9350,49 +9354,72 @@ The steps to use RevenueCat are:
    <uses-permission android:name="android.vending.BILLING" />
    ```
 
+The steps to use RevenueCat are:
+
+1. Browse {% aTargetBlank "https://www.revenuecat.com", "revenuecat.com" %}.
+1. Click the "Get Started" button.
+1. Enter account information and click the "Sign Up" button.
+1. Enter an "App name".
+1. Enter the "App Bundle ID"
+1. Enter the "Google Play package" which is the bundle ID.
+
 1. Associate your RevenueCat account with the app.
 
-   - In the left nav., click "Setup", then "API access".
-   - Click the "Choose a project to link" button.
-   - Click the "I agree" button to agree to the terms of service.
-   - Select the "Create new project" radio button.
-   - Click the "Link project" button.
-   - Click "Create new service account".
-   - In the dialog that appears, click the "Google Cloud Platform" link
-     which will open a new browser tab.
-   - Click "+ CREATE SERVICE ACCOUNT".
-   - For "Service account name", enter the app name.
-   - Do not change the "Service account ID".
-   - For "Service account description", enter a brief description of the app.
-   - Click the "CREATE AND CONTINUE" button.
-   - Add the roles "Pub/Sub" ... "Pub/Sub Admin"
-     and "Monitoring" ... "Monitoring Viewer"
-   - Click the "CONTINUE" button.
-   - Click the "DONE" button.
-   - If the newly creaed service account doesn't appear in the table
-     refresh the page.
-   - Click the vertical ellipsis in the Actions column for the service account
-     and select "Manage Keys".
-   - Click the "ADD KEY" dropdown and select "Create new key".
-   - Select the "JSON" radio button and click the "CREATE" button.
-   - A `.json` file containing a private key file will be downloaded.
-   - Click the "CLOSE" button.
-   - Close the browser tab for the Google Cloud Console.
-   - Back in the browser tab for the Google Play Console,
-     click the "DONE" button in the dialog.
-   - In the "Service accounts" section of the page,
-     find the row for the newly created service account a click "Grant access".
-   - Click the "Account permissions" tab.
-   - Check both of the checkboxes in the "Financial data" section.
-   - Click the "Invite User" button in lower-left corner of the page.
-   - In the dialog that appears, click the "Send Invite" button.
-   - Click the row for the new service account.
-   - Click the "Add app" dropdown and select the app in the dialog.
-     NO APPS APPEARED FOR ME!
+TODO: STOPPED HERE!
+
+- In the left nav., click "Setup", then "API access".
+- Click the "Choose a project to link" button.
+- Click the "I agree" button to agree to the terms of service.
+- Select the "Create new project" radio button.
+- Click the "Link project" button.
+- Click "Create new service account".
+- In the dialog that appears, click the "Google Cloud Platform" link
+  which will open a new browser tab.
+- Click "+ CREATE SERVICE ACCOUNT".
+- For "Service account name", enter the app name.
+- Do not change the "Service account ID".
+- For "Service account description", enter a brief description of the app.
+- Click the "CREATE AND CONTINUE" button.
+- Add the roles "Pub/Sub" ... "Pub/Sub Admin"
+  and "Monitoring" ... "Monitoring Viewer"
+- Click the "CONTINUE" button.
+- Click the "DONE" button.
+- If the newly creaed service account doesn't appear in the table
+  refresh the page.
+- Click the vertical ellipsis in the Actions column for the service account
+  and select "Manage Keys".
+- Click the "ADD KEY" dropdown and select "Create new key".
+- Select the "JSON" radio button and click the "CREATE" button.
+- A `.json` file containing a private key file will be downloaded.
+- Click the "CLOSE" button.
+- Close the browser tab for the Google Cloud Console.
+- Back in the browser tab for the Google Play Console,
+  click the "DONE" button in the dialog.
+- In the "Service accounts" section of the page,
+  find the row for the newly created service account a click "Grant access".
+- Click the "Account permissions" tab.
+- Check both of the checkboxes in the "Financial data" section.
+- Click the "Invite User" button in lower-left corner of the page.
+- In the dialog that appears, click the "Send Invite" button.
+- Click the row for the new service account.
+- Click the "Add app" dropdown and select the app in the dialog.
+  NO APPS APPEARED FOR ME!
 
 1. For each platform to be supported, click its button
    and enter the requested data.
 1.
+
+In the Flutter app:
+
+1. Add the `purchases_flutter` package in `pubspec.yaml`.
+1. In `ios/Podfile`, uncomment the following line:
+
+   ```text
+   # platform :ios, '9.0'
+   ```
+
+1. Add a button in the app to show purchase options.
+1. TODO: Add more steps to display the offers!
 
 ## Advice
 
