@@ -9123,6 +9123,32 @@ to the Google Play Store and the iOS App Store include
 
 TODO: Add more detail on at least one of these options.
 
+### Renaming
+
+Before deploying a new app it may be desirable to rename it.
+The easiest way to do this is to use the pub.dev package
+{% aTargetBlank "https://pub.dev/packages/rename", "rename" %}.
+This updates `appName` and `bundleId`.
+
+The steps to use this are:
+
+1. Install the `rename` command by entering
+   `flutter pub global activate rename`.
+1. Change the `appName` by entering
+   `flutter pub global run rename --appname {new-app-name}`.
+1. Change the `bundleId` by entering
+   `flutter pub global run rename --bundleId {new-bundle_id}`.
+   The bundle id must include at least one period.
+   It must be unique across all apps in the world.
+   One way to achieve this it to begin with your reverse internet domain
+   such as `com.objectcomputing.`.
+   Another way is to begin with your email adddress
+   such as `r.mark.volkmann.gmail.`.
+
+To target a specific platform rather than all,
+add `-t {platform}` at the end of each `rename` command.
+Examples include `-t android` and `-t ios`.
+
 ### Google Play
 
 A Google Developer account is required
