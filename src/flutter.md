@@ -8116,6 +8116,13 @@ class Dog {
    WidgetsFlutterBinding.ensureInitialized();
    final database = await openDatabase(
      join(await getDatabasesPath(), 'doggie_database.db'),
+     onConfigure: (db) async {
+       // Foreign keys must be enabled in order to use them
+       // and support cascading deletes.
+       await db.execute('pragma foreign_keys = ON');
+     },
+     // The version can be used to perform database upgrades and downgrades.
+     version: 1,
      ...
    );
    ```
