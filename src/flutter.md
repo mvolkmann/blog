@@ -2187,6 +2187,7 @@ The most commonly used widgets for displaying content are described below:
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Divider-class.html", "Divider" %}                                     | "thin horizontal line, with padding on either side"                                                                 |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/ErrorWidget-class.html", "ErrorWidget" %}                              | "renders an exception's message"; useful in an error dialog                                                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ExpandIcon-class.html", "ExpandIcon" %}                               | "rotating expand/collapse button"; "rotates 180 degrees when pressed, then reverts the animation on a second press" |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ExpansionPanelList-class.html", "ExpansionPanelList" %}               | list of `ExpansionPanel` widgets that can be expanded and collapsed by clicking                                     |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/FlutterLogo-class.html", "FlutterLogo" %}                             | renders the Flutter logo; can specify the size                                                                      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Icon-class.html", "Icon" %}                                           | renders an icon; typically passed an `IconData` object from a constant in the `Icons` class                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Image-class.html", "Image" %}                                         | renders an image from a source such as a URL, local file, or `AssetBundle`                                          |
@@ -2294,6 +2295,21 @@ AnimatedContainer(
   height: isExpanded ? 20 : 0,
 ),
 ```
+
+#### ExpansionPanelList Widget
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ExpansionPanelList-class.html",
+"ExpansionPanelList" %} widget renders a vertical list
+of `ExpansionPanel` widgets that can be expanded and collapsed by clicking.
+
+For a concise explanation of its usage, see this {% aTargetBlank
+"https://www.youtube.com/watch?v=2aJZzRMziJc", "Flutter Widget of the week" %}
+YouTube video.
+
+For example code, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_expansionpanel/blob/main/lib/main.dart",
+"GitHub repo" %}.
 
 #### Icon Widget
 
