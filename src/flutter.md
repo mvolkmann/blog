@@ -9096,11 +9096,14 @@ uploading a photo of an official ID such as a driver's licences.
 It can take a few days to receive notification
 that your identity has been verified.
 
-Android apps are bundled in `.apk` files.
-To generate one, enter `flutter build apk`.
-This takes several minutes to complete.
+Android apps can be bundled in either an
+Android Package (`.apk`) or Android App Bundle (`.aab`) file.
+Bundle files are smaller and are preferred.
+To generate an `.apk` file, enter `flutter build apk`.
+To generate an `.aab` file, enter `flutter build appbundle`.
+These commands takes several minutes to complete.
 
-To upload an app to the Google Play store:
+To prepare for uploading an app to the Google Play store:
 
 - Create an upload keystore by entering the command below
   (specific to macOS or Linux) and answering questions.
@@ -9202,10 +9205,29 @@ To upload an app to the Google Play store:
 - Choose a language such as "English (United States) - en-US".
 - Specify whether it is a game or app.
 - Specify whether it is free or paid.
+  Once an app is published as free, it cannot be changed to paid.
 - Check the "Developer Program Policies" checkbox.
 - Check the "Play App Signing" checkbox.
 - Check the "US export laws" checkbox.
 - Click the "Create app" button in the lower-right corner.
+
+At this point you can select the new app or an existing app.
+There are two ways to use the Google Play Console.
+
+The first way to use the Google Play Console
+is to select "Dashboard" in the left nav and then
+work through all the sections it contains in order.
+Once the app is deployed, the sections presented in the Dashboard will change.
+For example, once an app is deployed to production,
+the dashboard will no longer offer to
+help with creating a test version of the app.
+This is the preferred approach, especially for developers
+that are new to use the Google Play Console.
+
+The second way to use the Google Play Console is to
+click left-nav items in the order you would like to complete them.
+This requires more knowledge of the available sections.
+This is the approach described below.
 
 - In the left-nav, select "Developer page".
 - Enter a "Developer Name", "Physical address", "Promotional Text",
@@ -9218,7 +9240,8 @@ To upload an app to the Google Play store:
 - In the left-nav, select "Production".
 - Click the "Countries/regions" tab.
 - Click "Add countries/regions".
-- Check the checkboxes for the desired countries.
+- Select "All countries/regioins" or
+  check the checkboxes for the desired countries.
 - Click the "Add countries/regions" button in the lower-right corner.
 - Click the "Add" button in the dialog that appears.
 
@@ -9248,7 +9271,8 @@ To upload an app to the Google Play store:
   modify the values of `flutter.versionName` and `flutter.versionCode`
   in the file `android/local.properties`, create a new bundle file,
   and upload that.
-- Enter a release name and release notes.
+- A "Release name" will be filled in automatically, but can be changed.
+- Enter text for "Release notes".
 - Click the "Save" button in lower-right corner.
 - Click the "Review release" button in lower-right corner.
 - Fix any errors and warnings that are identified.
