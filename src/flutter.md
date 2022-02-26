@@ -9283,7 +9283,14 @@ This is the approach described below.
   "Data safety", "Select testers", and "Review and roll out the release".
 - The "Data safety" section requires entering the URL of your privacy policy.
   Creating one can be complicated. For a basic example, see one of mine
-  {% aTargetBlank "https://mvolkmann.github.io/privacy-policy.html", "here" %}.
+  {% aTargetBlank
+  "https://github.com/mvolkmann/flutter_gift_track/blob/main/privacy-policy.md",
+  "here" %}.
+  This can also be found in the left nav
+  by navigating to Policy ... App content ... Privacy Policy.
+  An easy approach to hosting this content is to create it as a Markdown file
+  inside the GitHub repository of your applicaion
+  and linking directly to that file within GitHub.
 - The "Select testers" section requires creating at least one email list,
   entering the email addresses of the testers in each email list,
   checking the checkbox for more or more of the created email lists,
