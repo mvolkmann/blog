@@ -9290,6 +9290,17 @@ This is the approach described below.
   and clicking the "Save changes" button in the lower-right corner.
 
 - Click the "Start rollout to internal testing" button in the lower-right.
+- In the left-nav under the "Release" section,
+  click "Setup", then "Internal app sharing".
+- In the "Manage Testers" section,
+  select "Anyone you shared the link with can download".
+- Click the "Save changes" button in the lower-right corner.
+- In the left-nav under the "Release" section,
+  click "Testing", then "Internal testing".
+- Scroll down to the "How testers join your test"
+  and click "Copy link".
+- Paste that link in an email to your testers.
+  This should allow them to download the app onto their devices.
 
 - In the left-nav, click "All apps" to see the status of all your apps.
 - Click the row of an app to see details about it.
