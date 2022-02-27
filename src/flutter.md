@@ -9521,6 +9521,8 @@ In the Flutter app:
 - The `Row`, `Column`, and `Flex` widgets need to take a `spacing` parameter
   like the `Wrap` widget does so it isn't necessary to do tedious things
   like adding a `SizedBox` between each child to leave space between them.
+  My `widget_extensions.dart` file adds a `gap` method to `Row` and `Column`.
+  It also adds many methods to `Widget` and `List<Widget>`.
 
 - It is often convenient to use the `Iterable` methods `map` and `filter`
   to create a new `Iterable`.
