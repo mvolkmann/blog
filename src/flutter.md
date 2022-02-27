@@ -9368,7 +9368,10 @@ a payment profile must be created.
 
 ### iOS App Store
 
-TODO: Add this section.
+Note that the value of `PRODUCT_BUNDLE_IDENTIFIER` cannot contain underscores.
+This is specified in the file `ios/Runner.xcodeproj/project.pbxproj`.
+
+TODO: Finish this section.
 
 ## In-App Purchases
 

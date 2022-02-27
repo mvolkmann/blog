@@ -1227,6 +1227,12 @@ These include `DoubleLinkedQueue`, `HashMap`, `HashSet`,
 `LinkedHashMap`, `LinkedHashSet`, `LinkedList`, `ListQueue`, `Queue`,
 and `SplayTreeMap`, `SplayTreeSet`.
 
+For even more collection functions, classes, and extensions,
+see {% aTargetBlank
+"https://api.flutter.dev/flutter/package-collection_collection/package-collection_collection-library.html",
+"package:collection" %} which is included in the Flutter SDK.
+Some of the capabilities of this package are described later in this section.
+
 ### Iterable
 
 The `Iterable` generic class represents a collection of values
@@ -1579,6 +1585,60 @@ The `Map` class provides the following methods (some omitted):
 The `MapEntry` class represents a single key/value pair from a `Map`.
 To create one, call the `MapEntry` constructor passing it a key and a value.
 These objects have `key` and `value` properties and a `toString` method.
+
+### package:collection
+
+The {% aTargetBlank
+"https://pub.dev/documentation/collection/latest/collection/collection-library.html",
+"collection library" %} is a collection of functions, classes, and extensions
+that extend the capabilities of the collections provided by Dart.
+These are briefly described in this {% aTargetBlank
+"https://www.youtube.com/watch?v=Ymw9xfRucK0",
+"Flutter Package of the Week" %} YouTube video.
+
+To uses this package, add the following `import`:
+
+```dart
+import 'package:collection/collection.dart';
+```
+
+A few examples of the added functionality are described below.
+Browse the documentation for many more.
+
+To test whether two `List` objects contain the same elements in the same order,
+use `ListEquality().equals(list1, list2)`.
+
+To test whether two collections contain the contents,
+use `DeepCollectionEquality().equals(collection1, collection2)`.
+
+The {% aTargetBlank
+"https://pub.dev/documentation/collection/latest/collection/IterableIntegerExtension.html",
+"IterableIntegerExtension" %} and {% aTargetBlank
+"https://pub.dev/documentation/collection/latest/collection/IterableDoubleExtension.html",
+"IterableDoubleExtension" %} extensions
+add the methods `average` and `sum` to `Iterables` of `int` and `double` values.
+Just importing the `collection` package adds all the extensions it defines.
+To get the sum of a `List` of numbers, use `myList.sum`.
+To get the average of a `List` of numbers, use `myList.average`.
+
+The {% aTargetBlank
+"https://pub.dev/documentation/collection/latest/collection/IterableExtension.html",
+"IterableExtension" %} adds properties and methods to
+all objects that implement the `Iterable` interface.
+
+To get the first element of an `Iterable` or `null` if it is empty,
+use the `firstOrNull` property.
+
+To get the last element of an `Iterable` or `null` if it is empty,
+use the `lastOrNull` property.
+
+The `Iterable` methods
+`foldIndexed`, `forEachIndexed`, `mapIndexed`, and `reduceIndexed`
+are like their counterparts `fold`, `forEach`, `map`, and `reduce`,
+but differ in that they pass the index of each element
+to the function passed to them.
+
+There are many more `Iterable` methods described in the documentation.
 
 ## Print
 
