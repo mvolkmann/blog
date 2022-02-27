@@ -1633,8 +1633,8 @@ To get the last element of an `Iterable` or `null` if it is empty,
 use the `lastOrNull` property.
 
 The `Iterable` methods
-`foldIndexed`, `forEachIndexed`, `mapIndexed`, and `reduceIndexed`
-are like their counterparts `fold`, `forEach`, `map`, and `reduce`,
+`foldIndexed`, `forEachIndexed`, `mapIndexed`, `reduceIndexed`, and `whereIndexed`
+are like their counterparts `fold`, `forEach`, `map`, `reduce`, and `where`
 but differ in that they pass the index of each element
 to the function passed to them.
 
