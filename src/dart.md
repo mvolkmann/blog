@@ -4690,10 +4690,3 @@ void main() {
 
 - Dart wants many constructor calls to be preceded by the `const` keyword.
   This makes the code verbose.
-
-- The `Iterable` methods `forEach`, `map`, and `where`
-  do not provide the index of the current element.
-  We can define `extension` methods to address this,
-  but Dart really should provide this.
-  See `lib/extensions/iterable_extension.dart`
-  in my collection of starter file.
