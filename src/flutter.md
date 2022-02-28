@@ -8079,7 +8079,7 @@ To display a map of a given location with Google Maps:
 
 The SQLite database is a popular choice for persisting data on mobile devices.
 The pub.dev package
-{% aTargetBlank "https://pub.dev/packages/sqflite", "sqlite" %}
+{% aTargetBlank "https://pub.dev/packages/sqflite", "sqflite" %}
 is the most popular way to access a SQLite database in a Flutter application.
 
 The steps to use sqflite are:

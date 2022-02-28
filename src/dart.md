@@ -692,12 +692,18 @@ All types except `Null` are subclasses of the `Object` class.
 Dart supports the following built-in basic types:
 
 - `void`: means a value is never used
-- `Null`: represents not having a value
-- `bool`: boolean value with literal values `true` and `false`
-- `int`: 64-bit integer
-- `double`: 64-bit floating point number
-- `String`: sequence of UTF-16 characters delimited by single or double quotes
-- `Symbol`: represents an operator or identifier with literal syntax `#name`
+- {% aTargetBlank "https://api.dart.dev/stable/2.16.1/dart-core/Null-class.html",
+  "Null" %}: represents not having a value
+- {% aTargetBlank "https://api.dart.dev/stable/2.16.1/dart-core/bool-class.html",
+  "bool" %}: boolean value with literal values `true` and `false`
+- {% aTargetBlank "https://api.dart.dev/stable/2.16.1/dart-core/int-class.html",
+  "int" %}: 64-bit integer
+- {% aTargetBlank "https://api.dart.dev/stable/2.16.1/dart-core/double-class.html",
+  "double" %}: 64-bit floating point number
+- {% aTargetBlank "https://api.dart.dev/stable/2.16.1/dart-core/String-class.html",
+  "String" %}: sequence of UTF-16 characters delimited by single or double quotes
+- {% aTargetBlank "https://api.dart.dev/stable/2.16.1/dart-core/Symbol-class.html",
+  "Symbol" %}: represents an operator or identifier with literal syntax `#name`
 - `Never`: has no values
 
 The `void` type is used at the return type
