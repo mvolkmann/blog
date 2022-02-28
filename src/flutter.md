@@ -4343,7 +4343,16 @@ use the `setState` function from inside that widget.
 For state that must be shared across multiple widget instances,
 it is recommended to choose a state management package
 provided by the community.
-Three popular packages are provider, GetX, and Riverpod.
+Popular packages include:
+
+- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} package
+  (similar to the Context API in React)
+- {% aTargetBlank "https://pub.dev/packages/get", "GetX" %}
+- {% aTargetBlank "https://riverpod.dev", "Riverpod" %}
+- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %}
+- {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
+  "cubit" %}
+
 These reduce the need for stateful widgets.
 
 ### setState Function
@@ -6066,15 +6075,150 @@ Container(
 
 There are many approaches to persisting app data
 so it is not lost when an app is closed.
+Two popular options are:
 
-- built-in `SharedPreference` class
-- {% aTargetBlank "https://bloclibrary.dev/", "bloc" %} package
-- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} package
-  (similar to the Context API in React)
-- {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
-  "cubit" %} package
+- {% aTargetBlank "https://pub.dev/packages/shared_preferences",
+  "shared_preferences" %} package
 - {% aTargetBlank "https://docs.flutter.dev/cookbook/persistence/sqlite",
   "SQLite" %} database on the device
+
+### shared_preferences Package
+
+TODO: Add information about this. See usage in flutter_gift_track.
+
+### SQLite
+
+The SQLite database is a popular choice for persisting data on mobile devices.
+The pub.dev package
+{% aTargetBlank "https://pub.dev/packages/sqflite", "sqflite" %}
+is the most popular way to access a SQLite database in a Flutter application.
+
+The steps to use sqflite are:
+
+1. Add the `path` and `sqflite` dependencies in `pubspec.yaml`.
+
+1. Define model classes like the following
+   corresponding to each database table:
+
+```dart
+class Dog {
+  final int id;
+  final int age;
+  final String breed;
+  final String name;
+
+  Dog({required this.age, required this.breed, required this.name});
+
+  Map<String, dynamic> toMap() {
+    return {'id': id, 'age': age, 'breed': breed, 'name': name};
+  }
+
+  // For debugging
+  @override
+  String toString() {
+    return 'Dog{id: $id, name: $name, breed: $breed, age: $age}';
+  }
+}
+```
+
+1. Get a connection to the database.
+
+   ```dart
+   WidgetsFlutterBinding.ensureInitialized();
+   final database = await openDatabase(
+     join(await getDatabasesPath(), 'doggie_database.db'),
+     onConfigure: (db) async {
+       // Foreign keys must be enabled in order to use them
+       // and support cascading deletes.
+       await db.execute('pragma foreign_keys = ON');
+     },
+     // The version can be used to perform database upgrades and downgrades.
+     version: 1,
+     ...
+   );
+   ```
+
+1. Create a table corresponding to each model class
+   by inserting code like the following where `...` appears above.
+
+   ```dart
+     onCreate: (db, version) {
+       return db.execute(
+        'create table if not exists dogs(' +
+        'id integer primary key autoincrement, age integer, breed text, name text)',
+       );
+     },
+     // The version provides a path to perform database upgrades and downgrades.
+     version: 1,
+   ```
+
+1. Write a function that inserts a record.
+
+   ```dart
+   Future<void> insertDog(Dog dog) {
+     return database.insert(
+       'dogs',
+       dog.toMap(),
+       conflictAlgorithm: ConflictAlgorithm.replace,
+     );
+   }
+
+   var comet = Dog(name: 'Comet', breed: 'Whippet', age: 1);
+   var id = await insertDog(comet);
+   ```
+
+1. Write a function that retrieves records.
+
+   ```dart
+   Future<List<Dog>> getDogs() async {
+     final List<Map<String, dynamic>> maps = await database.query('dogs');
+     return List.generate(maps.length, (index) {
+       var map = maps[index];
+       return Dog(
+         id: map['id'],
+         age: map['age'],
+         breed: map['breed'],
+         name: map['name'],
+       );
+     });
+   }
+
+   var dogs = await getDogs();
+   ```
+
+1. Write a function that updates a record.
+
+   ```dart
+   Future<void> updateDog(Dog dog) {
+     return database.update(
+       'dogs',
+       dog.toMap(),
+       where: 'id = ?',
+       // This prevents SQL injection.
+       whereArgs: [dog.id],
+     );
+   }
+
+   comet.age += 1;
+   await updateDog(comet);
+   ```
+
+1. Write a function that deletes a record.
+
+   ```dart
+   Future<void> deleteDog(int id) {
+     return database.delete(
+       'dogs',
+       where: 'id = ?',
+       whereArgs: [id],
+     );
+   }
+
+   await deleteDog(comet.id);
+   ```
+
+For a working example, see this {% aTargetBlank
+"https://github.com/mvolkmann/flutter_sqlite", "GitHub repo" %}.
 
 ## Navigation
 
@@ -8074,140 +8218,6 @@ To display a map of a given location with Google Maps:
    ```
 
 1. If the app is already running, stop it and restart it.
-
-## SQLite
-
-The SQLite database is a popular choice for persisting data on mobile devices.
-The pub.dev package
-{% aTargetBlank "https://pub.dev/packages/sqflite", "sqflite" %}
-is the most popular way to access a SQLite database in a Flutter application.
-
-The steps to use sqflite are:
-
-1. Add the `path` and `sqflite` dependencies in `pubspec.yaml`.
-
-1. Define model classes like the following
-   corresponding to each database table:
-
-```dart
-class Dog {
-  final int id;
-  final int age;
-  final String breed;
-  final String name;
-
-  Dog({required this.age, required this.breed, required this.name});
-
-  Map<String, dynamic> toMap() {
-    return {'id': id, 'age': age, 'breed': breed, 'name': name};
-  }
-
-  // For debugging
-  @override
-  String toString() {
-    return 'Dog{id: $id, name: $name, breed: $breed, age: $age}';
-  }
-}
-```
-
-1. Get a connection to the database.
-
-   ```dart
-   WidgetsFlutterBinding.ensureInitialized();
-   final database = await openDatabase(
-     join(await getDatabasesPath(), 'doggie_database.db'),
-     onConfigure: (db) async {
-       // Foreign keys must be enabled in order to use them
-       // and support cascading deletes.
-       await db.execute('pragma foreign_keys = ON');
-     },
-     // The version can be used to perform database upgrades and downgrades.
-     version: 1,
-     ...
-   );
-   ```
-
-1. Create a table corresponding to each model class
-   by inserting code like the following where `...` appears above.
-
-   ```dart
-     onCreate: (db, version) {
-       return db.execute(
-        'create table if not exists dogs(' +
-        'id integer primary key autoincrement, age integer, breed text, name text)',
-       );
-     },
-     // The version provides a path to perform database upgrades and downgrades.
-     version: 1,
-   ```
-
-1. Write a function that inserts a record.
-
-   ```dart
-   Future<void> insertDog(Dog dog) {
-     return database.insert(
-       'dogs',
-       dog.toMap(),
-       conflictAlgorithm: ConflictAlgorithm.replace,
-     );
-   }
-
-   var comet = Dog(name: 'Comet', breed: 'Whippet', age: 1);
-   var id = await insertDog(comet);
-   ```
-
-1. Write a function that retrieves records.
-
-   ```dart
-   Future<List<Dog>> getDogs() async {
-     final List<Map<String, dynamic>> maps = await database.query('dogs');
-     return List.generate(maps.length, (index) {
-       var map = maps[index];
-       return Dog(
-         id: map['id'],
-         age: map['age'],
-         breed: map['breed'],
-         name: map['name'],
-       );
-     });
-   }
-
-   var dogs = await getDogs();
-   ```
-
-1. Write a function that updates a record.
-
-   ```dart
-   Future<void> updateDog(Dog dog) {
-     return database.update(
-       'dogs',
-       dog.toMap(),
-       where: 'id = ?',
-       // This prevents SQL injection.
-       whereArgs: [dog.id],
-     );
-   }
-
-   comet.age += 1;
-   await updateDog(comet);
-   ```
-
-1. Write a function that deletes a record.
-
-   ```dart
-   Future<void> deleteDog(int id) {
-     return database.delete(
-       'dogs',
-       where: 'id = ?',
-       whereArgs: [id],
-     );
-   }
-
-   await deleteDog(comet.id);
-   ```
-
-For a working example, see this {% aTargetBlank
-"https://github.com/mvolkmann/flutter_sqlite", "GitHub repo" %}.
 
 ## App Icons
 
