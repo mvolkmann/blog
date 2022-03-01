@@ -9409,6 +9409,7 @@ For the Google Play Store:
    The product ID should be unique across all of your apps,
    so it is recommended for it to begin with the app name.
    It can contain underscores and periods, but not hyphens.
+   The product ID must be used as the product identifier in RevenueCat.
 1. Click the "Save" button in the lower-right corner
 1. Click the "Activate" button in the lower-right corner
 
@@ -9450,11 +9451,28 @@ configure RevenueCat by following these steps:
    entitlements to unlock for users after they purchase a specific product.
    "Offerings are the selection of products that are offered to a user."
 1. Click "Products" in the left nav and create one.
+   Use the "Product ID" entered in the Google Play Console
+   for the RevenueCat Product Identifier.
 1. Click "Entitlements" in the left nav and create one.
    Attach a product to each entitlement.
 1. Click "Offerings" in the left nav and create one.
    Create a package for each offering
-   and attach a product to each package.
+   and attach products to each package.
+   For example, a product can include a package for Andriod and
+   a package for iOS so the user can use the feature on both platforms.
+1. Go to the RevenueCat dashboard.
+1. Click the "Projects" dropdown at the top
+   and select the previously created project.
+1. In the left nav, click "API Keys".
+1. In the "Public app-specific API keys" section, click "Show key".
+1. Click the copy button after the key.
+1. Create the file `lib/secrets.dart` and add the following line:
+
+   ```dart
+   const revenueCatApiKey = 'the-copied-key';
+   ```
+
+1. Add `lib/secrets.dart` to `.gitignore`.
 
 1. Add the following line in `android/app/src/main/AndroidManifest.xml`
    after the other `uses-permission` elements:
