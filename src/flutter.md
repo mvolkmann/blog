@@ -9216,7 +9216,7 @@ To prepare for uploading an app to the Google Play store:
 
 - Edit the value of `version` in the `pubspec.yaml` file.
   This is a value like `1.0.1+2`.
-  This is used to automatically update `android/local.properties`.
+  It is used to automatically update `android/local.properties`.
   The part before the `+` is a semantic version
   that is used for the value of `flutter.versionName`
   and the part after the plus is an incrementing integer
@@ -9259,12 +9259,29 @@ There are two ways to use the Google Play Console.
 The first way to use the Google Play Console
 is to select "Dashboard" in the left nav and then
 work through all the sections it contains in order.
+This is the preferred approach, especially for developers
+that are new to use the Google Play Console.
+
+To see the tasks to be completed in each section,
+click ther "View tasks" dropdown.
+Clicking on a task to be completed will open a new page
+for answering questions.
+Typically after answering all of the questions for a tasks
+you will need to click "Save" (near the bottom)
+and then "<- Dashbard" (near the top) to return to the Dashboard
+and see the next task to be completed.s
+If there is no "<- Dashboard" link, click "Dashboard" in the left nav.
+
 Once the app is deployed, the sections presented in the Dashboard will change.
 For example, once an app is deployed to production,
 the dashboard will no longer offer to
 help with creating a test version of the app.
-This is the preferred approach, especially for developers
-that are new to use the Google Play Console.
+
+To share the app with testers:
+
+- In the left nav, click "Testing", then "Internal Testing".
+- Scroll to the bottom of the page and click "Copy Link".
+- Email this link to the testers
 
 The second way to use the Google Play Console is to
 click left-nav items in the order you would like to complete them.
@@ -9389,26 +9406,29 @@ a payment profile must be created.
 
 - Edit the value of `version` in the `pubspec.yaml` file.
   This is a value like `1.0.1+2`.
-  This is used to automatically update `android/local.properties`.
+  It is used to automatically update `android/local.properties`.
   The part before the `+` is a semantic version
   that is used for the value of `flutter.versionName`
   and the part after the plus is an incrementing integer
   that is used for the value of `flutter.versionCode`.
-
-- Edit the `android/local.properties` file and update the values.
-  `flutter.buildMode` can be set to `release`, `profile`, or `debug`.
+- Edit the `android/local.properties` file
+  and verify the value of `flutter.buildMode`.
+  It can be set to `release`, `profile`, or `debug`.
   Do not modify `flutter.versionName` or `flutter.versionCode`.
   Those are automatically updated using the value of `version` in `pubspec.yaml`.
-
-- Update the version number displayed in the app if that is being done.
-  This might appear on an "About" page.
-
-- In the left-nav, click "Testing", then "Closed Testing".
-- Click "Manage track" at the end of a row for an existing track.
-- Click the "Create new release" button.
+- If the app displays its version number, perhaps on an "About" page,
+  update it to match.
 - Create a new app bundle by entering `flutter build appbundle`.
   This creates the file `build/app/outputs/bundle/release/app-release.aab`.
+- Browse the {% aTargetBlank "https://play.google.com/console/",
+  "Goole Play Console" %}.
+- Select your developer account.
+- Click the row of the app being updated.
+- In the left-nav, click "Testing", then "Closed Testing".
+- Click "Manage track" at the end of a row for an existing track.
+- Click the "Edit release" button.
 - Click "Upload" and upload the new `.aab` file.
+
 - Delete the previously uploaded app bundle by clicking the vertical ellipsis
   near the end of its row and selecting "Remove app bundle".
   In the dialog that appears, click "Remove".
@@ -9442,7 +9462,8 @@ and up to 10,000 USD in monthly tracked revenue (MTR).
 ### RevenueCat
 
 RevenueCat requires store setup of in-app purchases and subscriptions.
-Do setup in-app purchases in the Google Play Console:
+
+For the Google Play Store:
 
 1. Browse the {% aTargetBlank "https://play.google.com/console/",
    "Google Play Console" %} and elect your developer account.
@@ -9458,37 +9479,38 @@ Do setup in-app purchases in the Google Play Console:
 1. Click the "Save" button in the lower-right corner
 1. Click the "Activate" button in the lower-right corner
 
+For the iOS App Store:
+
+TODO: Add these steps.
+
 Describing subscriptions is similar to describing one-time in-app payments.
+
+After configuring in-app purchases in the stores,
+configure RevenueCat by following these steps:
 
 1. Browse {% aTargetBlank "https://www.revenuecat.com", "revenuecat.com" %}.
 1. Click the "Get Started ->" button.
-1. Enter data for a new account and click the "Sign Up" button.
+1. If you do not already have an account,
+   enter account information and click the "Sign Up" button.
+1. Click "Setup your first project".
 1. Enter a name for the project and click the "Create project" button.
-1. Deploy the app to the stores.
-   The steps to do this are provided in the previous section.
-   Before building the app bundle, add the following line in
-   `android/app/src/main/AndroidManifest.xml`
+1. Click a platform button such as "App Store" or "Play Store".
+1. Enter the "App name"
+1. Enter the "Google Play package" which is the bundle ID.
+
+1. TODO: Information missing here!
+1. Click the "Create project" button.
+1. Add the following line in `android/app/src/main/AndroidManifest.xml`
    after the other `uses-permission` elements:
 
    ```xml
    <uses-permission android:name="android.vending.BILLING" />
    ```
 
-The steps to use RevenueCat are:
+1. Build a new app bundle by entering `flutter build appbundle`.
+1. Deploy the new app bundle to the stores.
+   The steps to do this are provided in the previous section.
 
-1. Browse {% aTargetBlank "https://www.revenuecat.com", "revenuecat.com" %}.
-1. Click the "Get Started" button.
-1. Enter account information and click the "Sign Up" button.
-1. Enter an "App name".
-1. Enter the "App Bundle ID"
-1. Enter the "Google Play package" which is the bundle ID.
-
-1. Associate your RevenueCat account with the app.
-
-TODO: STOPPED HERE!
-
-- In the left nav., click "Setup", then "API access".
-- Click the "Choose a project to link" button.
 - Click the "I agree" button to agree to the terms of service.
 - Select the "Create new project" radio button.
 - Click the "Link project" button.
