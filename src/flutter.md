@@ -9371,7 +9371,7 @@ a payment profile must be created.
 - Search for the app name.
 - Email the app URL to testers and ask them to install and test it.
 
-## iOS App Store
+### iOS App Store
 
 Note that the value of `PRODUCT_BUNDLE_IDENTIFIER` cannot contain underscores.
 This is specified in the file `ios/Runner.xcodeproj/project.pbxproj`.
@@ -9431,12 +9431,27 @@ configure RevenueCat by following these steps:
 1. Enter the "App name"
 1. Enter the "Google Play package" which is the bundle ID.
 1. Create a "Service Account credentials JSON" file.
-   THIS IS EXTREMEMLY COMPLICATED!!!
-   See the "How do I create this?" link.
-   TODO: RESUME HERE!
+   This is very complicated.
+   The steps are described {% aTargetBlank
+   "https://docs.revenuecat.com/docs/creating-play-service-credentials",
+   "here" %}.
+   After all of this you will see the message in the Google Cloud Console page:
+   "It can take up to 36 hours for your Play Service Credentials
+   to work properly with the Google Play Developer API.
+   You may see "Invalid Play Store credentials" errors and be
+   unable to make purchases with RevenueCat until this happens."
+1. Back on the RevenueCat "Get Started" page,
+   click, "2. Configure entitlements", click an app name,
+   and click "Entitlements" in the left nav.
+1. For each entitlement, click "+ New" and enter
+   a name and description for each entitlement that can be purchased.
+   Entitlements can be combined to in offerings which are created next.
+1. Click, "3. Configure an Offering", click an app name,
+   and click "Offerings" in the left nav.
+1. For each offering, click "+ New" and enter
+   a name and description for each offering that can be purchased.
+   These are the in-app purchases.
 
-1. TODO: Information missing here!
-1. Click the "Create project" button.
 1. Add the following line in `android/app/src/main/AndroidManifest.xml`
    after the other `uses-permission` elements:
 
@@ -9447,46 +9462,6 @@ configure RevenueCat by following these steps:
 1. Build a new app bundle by entering `flutter build appbundle`.
 1. Deploy the new app bundle to the stores.
    The steps to do this are provided in the previous section.
-
-- Click the "I agree" button to agree to the terms of service.
-- Select the "Create new project" radio button.
-- Click the "Link project" button.
-- Click "Create new service account".
-- In the dialog that appears, click the "Google Cloud Platform" link
-  which will open a new browser tab.
-- Click "+ CREATE SERVICE ACCOUNT".
-- For "Service account name", enter the app name.
-- Do not change the "Service account ID".
-- For "Service account description", enter a brief description of the app.
-- Click the "CREATE AND CONTINUE" button.
-- Add the roles "Pub/Sub" ... "Pub/Sub Admin"
-  and "Monitoring" ... "Monitoring Viewer"
-- Click the "CONTINUE" button.
-- Click the "DONE" button.
-- If the newly creaed service account doesn't appear in the table
-  refresh the page.
-- Click the vertical ellipsis in the Actions column for the service account
-  and select "Manage Keys".
-- Click the "ADD KEY" dropdown and select "Create new key".
-- Select the "JSON" radio button and click the "CREATE" button.
-- A `.json` file containing a private key file will be downloaded.
-- Click the "CLOSE" button.
-- Close the browser tab for the Google Cloud Console.
-- Back in the browser tab for the Google Play Console,
-  click the "DONE" button in the dialog.
-- In the "Service accounts" section of the page,
-  find the row for the newly created service account a click "Grant access".
-- Click the "Account permissions" tab.
-- Check both of the checkboxes in the "Financial data" section.
-- Click the "Invite User" button in lower-left corner of the page.
-- In the dialog that appears, click the "Send Invite" button.
-- Click the row for the new service account.
-- Click the "Add app" dropdown and select the app in the dialog.
-  NO APPS APPEARED FOR ME!
-
-1. For each platform to be supported, click its button
-   and enter the requested data.
-1.
 
 In the Flutter app:
 

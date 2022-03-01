@@ -969,7 +969,7 @@ Descriptions below that begin with "determines if"
 mean that a Boolean value is returned.
 
 | Python built-in function                         | Description                                                                                            | Closest JavaScript equivalent                                        |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- | --- | -------- |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- | --- |
 | `abs(x)`                                         | returns absolute value                                                                                 | `Math.abs(x)`                                                        |
 | `all(iterable)`                                  | determines if all elements are `True`<br>in a Boolean context                                          | `arr.every(predicate)`                                               |
 | `any(iterable)`                                  | determines if any element is `True`<br>in a Boolean context                                            | `arr.some(predicate)`                                                |
@@ -994,7 +994,7 @@ mean that a Boolean value is returned.
 | `float(x)`                                       | returns floating point number<br>created from a number or string                                       | `parseFloat(x)`                                                      |
 | `format(value, fmt)`                             | returns string created by formatting a value<br>using a format string                                  | use template literals                                                |
 | `frozenset(iterable)`                            | returns `frozenset` (immutable set) object<br>created from iterable                                    | `Object.freeze(obj)`                                                 |
-| `getattr(obj, name [, default])`                 | returns attribute value                                                                                | `obj[name]                                                           |     | default` |
+| `geattr(obj, name [, default])`                  | returns attribute value                                                                                | `obj[name] \|\| default`                                             |
 | `globals()`                                      | returns dictionary containing the<br>current global symbol table                                       | not supported                                                        |
 | `hasattr(obj, name)`                             | determines if object has a given attribute                                                             | `name in obj`                                                        |
 | `hash(obj)`                                      | returns hash value of object                                                                           | not supported                                                        |
@@ -1034,7 +1034,7 @@ mean that a Boolean value is returned.
 | `super()`                                        | returns a proxy object for<br>calling superclass methods                                               | `super` keyword                                                      |
 | `tuple([iterable])`                              | creates a tuple, optionally<br>populated from an iterable                                              | not supported                                                        |
 | `type()` returns class object                    | returns the type of a value                                                                            | `typeof v` returns string<br>`v.constructor` is constructor function |
-| `vars(obj)`                                      | returns a `dict` view of<br>the attributes in an object                                                | not supported                                                        |     |          |
+| `vars(obj)`                                      | returns a `dict` view of<br>the attributes in an object                                                | not supported                                                        |
 | `zip(iterables)`                                 | returns an iterator that aggregates<br>elements from multiple iterables                                | not built-in;<br>can use Lodash `zip` function                       |
 
 <br>
