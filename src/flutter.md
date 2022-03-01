@@ -9292,99 +9292,25 @@ help with creating a test version of the app.
 
 To share the app with testers:
 
-- In the left nav, click "Testing", then "Internal Testing".
-- Scroll to the bottom of the page and click "Copy Link".
-- Email this link to the testers
+- In the left nav, click "Testing".
+- To only allow a limited group of internal testers (up to 100)
+  to test the app, click "Internal Testing".
+- To only allow invited testers (unlimited)
+  to test the app, click "Closed Testing".
+- To allow anyone to test the app, click "Open Testing".
+
+- If using "Open Testing"
+
+  - Click the "New release" button.
+  - Upload a new app bundle file.
+  - Browse {% aTargetBlank "https://play.google.com/store?hl=en_US&gl=US",
+    "play.google.com" %}.
+  - Search for the app name.
+  - Email the app URL to testers and ask them to install and test it.
 
 The second way to use the Google Play Console is to
 click left-nav items in the order you would like to complete them.
 This requires more knowledge of the available sections.
-This is the approach described below.
-
-- In the left-nav, select "Developer page".
-- Enter a "Developer Name", "Physical address", "Promotional Text",
-  and "Website address".
-- Upload a "Developer icon" that is exactly 512x512px.
-- Upload a "Header image" that is exactly 4096x2304px.
-- Select a "Featured app" to appear on your developer page.
-- Click the "Save" button in the lower-right corner.
-
-- In the left-nav, select "Production".
-- Click the "Countries/regions" tab.
-- Click "Add countries/regions".
-- Select "All countries/regioins" or
-  check the checkboxes for the desired countries.
-- Click the "Add countries/regions" button in the lower-right corner.
-- Click the "Add" button in the dialog that appears.
-
-- In the left-nav, select "Store presence", then "Main store listing".
-- Scroll down a bit and enter all the information requested,
-  including app screenshots (at least two).
-  Screenshots can be created by clicking
-  the camera button in the Android emulator.
-- Click the "Save" button the lower-right corner.
-
-- In the left-nav under "Store presence", click "Store settings".
-- Select "App" or "Game".
-- Select a category such as "Productivity".
-- Optionally add tags such as "Personal Assistant".
-- Enter a contact email address and website for the app.
-- Click the "Save" button the lower-right corner.
-
-- Optionally enable early testing before review.
-  - In the left-nav, click "Testing", then "Closed Testing".
-  - Click "Manage track".
-  - Click the "Create new release" button.
-- Otherwise create a release by ... TODO
-
-- Click "Upload" and upload the `.aab` bundle file created earlier.
-  This takes a couple of minutes.
-  If it fails with a message like "Version code 1 has already been used,
-  modify the values of `flutter.versionName` and `flutter.versionCode`
-  in the file `android/local.properties`, create a new bundle file,
-  and upload that.
-- A "Release name" will be filled in automatically, but can be changed.
-- Enter text for "Release notes".
-- Click the "Save" button in lower-right corner.
-- Click the "Review release" button in lower-right corner.
-- Fix any errors and warnings that are identified.
-
-- In the left-nav, click "Dashboard".
-- Look for items that are not proceeded by a green checkmark
-  and complete them. Examples of items that may not be completed yet include
-  "Data safety", "Select testers", and "Review and roll out the release".
-- The "Data safety" section requires entering the URL of your privacy policy.
-  Creating one can be complicated. For a basic example, see one of mine
-  {% aTargetBlank
-  "https://github.com/mvolkmann/flutter_gift_track/blob/main/privacy-policy.md",
-  "here" %}.
-  This can also be found in the left nav
-  by navigating to Policy ... App content ... Privacy Policy.
-  An easy approach to hosting this content is to create it as a Markdown file
-  inside the GitHub repository of your applicaion
-  and linking directly to that file within GitHub.
-- The "Select testers" section requires creating at least one email list,
-  entering the email addresses of the testers in each email list,
-  checking the checkbox for more or more of the created email lists,
-  and clicking the "Save changes" button in the lower-right corner.
-
-- Click the "Start rollout to internal testing" button in the lower-right.
-- In the left-nav under the "Release" section,
-  click "Setup", then "Internal app sharing".
-- In the "Manage Testers" section,
-  select "Anyone you shared the link with can download".
-- Click the "Save changes" button in the lower-right corner.
-- In the left-nav under the "Release" section,
-  click "Testing", then "Internal testing".
-- Scroll down to the "How testers join your test"
-  and click "Copy link".
-- Paste that link in an email to your testers.
-  This should allow them to download the app onto their devices.
-
-- In the left-nav, click "All apps" to see the status of all your apps.
-- Click the row of an app to see details about it.
-- Click "View on Google Play" ... I see "We're sorry,
-  the requested URL was not found on this server."
 
 In order to collect money for paid apps and apps that have in-app purchases,
 a payment profile must be created.
@@ -9437,21 +9363,15 @@ a payment profile must be created.
   "Goole Play Console" %}.
 - Select your developer account.
 - Click the row of the app being updated.
-- In the left-nav, click "Testing", then "Closed Testing".
-- Click "Manage track" at the end of a row for an existing track.
-- Click the "Edit release" button.
+- In the left-nav, click "Testing", then "Open Testing".
+- Click the "New release" button.
 - Click "Upload" and upload the new `.aab` file.
+- Browse {% aTargetBlank "https://play.google.com/store?hl=en_US&gl=US",
+  "play.google.com" %}.
+- Search for the app name.
+- Email the app URL to testers and ask them to install and test it.
 
-- Delete the previously uploaded app bundle by clicking the vertical ellipsis
-  near the end of its row and selecting "Remove app bundle".
-  In the dialog that appears, click "Remove".
-- Click "Save" in the lower-right corner.
-- Click the "Review Release" button in the lower-right corner.
-- Click the "Start rollout to Alpha".
-  In the dialog that appears, click "Rollout".
-- TODO: I don't think this worked!
-
-### iOS App Store
+## iOS App Store
 
 Note that the value of `PRODUCT_BUNDLE_IDENTIFIER` cannot contain underscores.
 This is specified in the file `ios/Runner.xcodeproj/project.pbxproj`.
