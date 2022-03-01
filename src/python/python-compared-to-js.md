@@ -446,7 +446,7 @@ The related keyword `nonlocal` enables functions to
 access variables in ancestor scopes that are not global.
 
 | Topic                         | JavaScript                                                                     | Python                                                    |
-| ----------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- | ------- | ------------- |
+| ----------------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- |
 | constant declaration          | `const NAME = value;`                                                          | `NAME = value`                                            |
 | variable declaration          | `let name = value;`                                                            | `name = value`                                            |
 | get type of value in variable | `typeof v` and `v.constructor.name`                                            | `type v:`                                                 |
@@ -461,10 +461,10 @@ access variables in ancestor scopes that are not global.
 | exponentiation                | `name **= expr`                                                                | same                                                      |
 | mod (remainder)               | `name %= expr`                                                                 | same                                                      |
 | logical and                   | `name &&= expr`                                                                | not supported                                             |
-| logical or                    | `name                                                                          |                                                           | = expr` | not supported |
+| logical or                    | `name \|\|= expr`                                                              | not supported                                             |
 | logical xor                   | `name ^= expr`                                                                 | not supported                                             |
 | bitwise and                   | `name &= expr`                                                                 | same                                                      |
-| bitwise or                    | `name                                                                          | = expr`                                                   | same    |
+| bitwise or                    | `name \|= expr`                                                                | same                                                      |
 | bitwise xor                   | `name ^= expr`                                                                 | same                                                      |
 | signed bit shift              | `<<=` (left), `>>=` (right)                                                    | same                                                      |
 | unsigned bit shift            | `<<<=` (left), `>>>=` (right)                                                  | not supported                                             |
@@ -969,7 +969,7 @@ Descriptions below that begin with "determines if"
 mean that a Boolean value is returned.
 
 | Python built-in function                         | Description                                                                                            | Closest JavaScript equivalent                                        |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- | --- |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
 | `abs(x)`                                         | returns absolute value                                                                                 | `Math.abs(x)`                                                        |
 | `all(iterable)`                                  | determines if all elements are `True`<br>in a Boolean context                                          | `arr.every(predicate)`                                               |
 | `any(iterable)`                                  | determines if any element is `True`<br>in a Boolean context                                            | `arr.some(predicate)`                                                |
@@ -1029,7 +1029,7 @@ mean that a Boolean value is returned.
 | `setattr(obj, name, value)`                      | sets an attribute of an object                                                                         | `obj[name] = value`                                                  |
 | `slice(stop)` or<br>`slice(start, stop[, step])` | returns a `slice` object that<br>describes a set of indexes;<br>used to retrieve data at those indexes | not supported                                                        |
 | `sorted(iterable[, key])`                        | returns a sorted version<br>of an iterable as a `list`                                                 | `arr.sort([compareFn])`<br>sorts in place                            |
-| `str(obj)`                                       | returns a human-readable string<br>representation of an object                                         | `obj.toString()`                                                     | :   |
+| `str(obj)`                                       | returns a human-readable string<br>representation of an object                                         | `obj.toString()`                                                     |
 | `sum(iterable)`                                  | returns the sum of<br>numbers in an iterable                                                           | `arr.reduce((acc, n) => acc + n)`                                    |
 | `super()`                                        | returns a proxy object for<br>calling superclass methods                                               | `super` keyword                                                      |
 | `tuple([iterable])`                              | creates a tuple, optionally<br>populated from an iterable                                              | not supported                                                        |
@@ -1058,15 +1058,15 @@ The Python `float` and `int` functions do not support this.
 
 ## Boolean operations
 
-| Operation   | JavaScript | Python      |
-| ----------- | ---------- | ----------- | ---- | ---------- |
-| and         | `b1 && b2` | `b1 and b2` |
-| or          | `b1        |             | b2`  | `b1 or b2` |
-| not         | `!b`       | `not b`     |
-| bitwise and | `b1 & b2`  | same        |
-| bitwise or  | `b1        | b2`         | same |
-| bitwise not | `~b`       | same        |
-| bitwise xor | `b1 ^ b2`  | same        |
+| Operation   | JavaScript   | Python      |
+| ----------- | ------------ | ----------- |
+| and         | `b1 && b2`   | `b1 and b2` |
+| or          | `b1 \|\| b2` | `b1 or b2`  |
+| not         | `!b`         | `not b`     |
+| bitwise and | `b1 & b2`    | same        |
+| bitwise or  | `b1 \| b2`   | same        |
+| bitwise not | `~b`         | same        |
+| bitwise xor | `b1 ^ b2`    | same        |
 
 ## Numeric operations
 
