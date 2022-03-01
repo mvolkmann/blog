@@ -9441,16 +9441,20 @@ configure RevenueCat by following these steps:
    You may see "Invalid Play Store credentials" errors and be
    unable to make purchases with RevenueCat until this happens."
 1. Back on the RevenueCat "Get Started" page,
-   click, "2. Configure entitlements", click an app name,
-   and click "Entitlements" in the left nav.
-1. For each entitlement, click "+ New" and enter
-   a name and description for each entitlement that can be purchased.
-   Entitlements can be combined to in offerings which are created next.
-1. Click, "3. Configure an Offering", click an app name,
-   and click "Offerings" in the left nav.
-1. For each offering, click "+ New" and enter
-   a name and description for each offering that can be purchased.
-   These are the in-app purchases.
+   click, "2. Configure entitlements" and click an app name.
+   This page supports creating products, entitlements, and offerings.
+   From the docs,
+   "An entitlement represents a level of access, features,
+   or content that a user is "entitled" to."
+   "Attach products to entitlements. These let RevenueCat know which
+   entitlements to unlock for users after they purchase a specific product.
+   "Offerings are the selection of products that are offered to a user."
+1. Click "Products" in the left nav and create one.
+1. Click "Entitlements" in the left nav and create one.
+   Attach a product to each entitlement.
+1. Click "Offerings" in the left nav and create one.
+   Create a package for each offering
+   and attach a product to each package.
 
 1. Add the following line in `android/app/src/main/AndroidManifest.xml`
    after the other `uses-permission` elements:
