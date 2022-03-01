@@ -9136,6 +9136,8 @@ To generate an `.apk` file, enter `flutter build apk`.
 To generate an `.aab` file, enter `flutter build appbundle`.
 These commands takes several minutes to complete.
 
+### First-time Deployment
+
 To prepare for uploading an app to the Google Play store:
 
 - Create an upload keystore by entering the command below
@@ -9212,15 +9214,22 @@ To prepare for uploading an app to the Google Play store:
   - Correct the value of `applicationId` under `android` ... `defaultConfig`
   - Verify the values of `compileSdkVersion`, `minSdkVersion`.
 
-- Edit the `android/local.properties` file and verify the values.
-  `flutter.buildMode` can be set to `release`, `profile`, or `debug`.
-  Do not modify `flutter.versionName` or `flutter.versionCode`.
-  Those are autmatically updated using the value of `version` in `pubspec.yaml`.
-  This is a value like `1.0.1+2` where
-  the part before the `+` is a semantic version
+- Edit the value of `version` in the `pubspec.yaml` file.
+  This is a value like `1.0.1+2`.
+  This is used to automatically update `android/local.properties`.
+  The part before the `+` is a semantic version
   that is used for the value of `flutter.versionName`
   and the part after the plus is an incrementing integer
   that is used for the value of `flutter.versionCode`.
+
+- Edit the `android/local.properties` file
+  and verify the value of `flutter.buildMode`.
+  It can be set to `release`, `profile`, or `debug`.
+  Do not modify `flutter.versionName` or `flutter.versionCode`.
+  Those are automatically updated using the value of `version` in `pubspec.yaml`.
+
+- Update the version number displayed in the app if that is being done.
+  This might appear on an "About" page.
 
 - Build an app bundle.
 
@@ -9375,6 +9384,39 @@ a payment profile must be created.
 - Click "Review and enroll".
 - Click the "Confirm and view terms" button in the lower-right corner.
 - Click the "Accept and enroll" button in the lower-right corner.
+
+### Deploying an Update
+
+- Edit the value of `version` in the `pubspec.yaml` file.
+  This is a value like `1.0.1+2`.
+  This is used to automatically update `android/local.properties`.
+  The part before the `+` is a semantic version
+  that is used for the value of `flutter.versionName`
+  and the part after the plus is an incrementing integer
+  that is used for the value of `flutter.versionCode`.
+
+- Edit the `android/local.properties` file and update the values.
+  `flutter.buildMode` can be set to `release`, `profile`, or `debug`.
+  Do not modify `flutter.versionName` or `flutter.versionCode`.
+  Those are automatically updated using the value of `version` in `pubspec.yaml`.
+
+- Update the version number displayed in the app if that is being done.
+  This might appear on an "About" page.
+
+- In the left-nav, click "Testing", then "Closed Testing".
+- Click "Manage track" at the end of a row for an existing track.
+- Click the "Create new release" button.
+- Create a new app bundle by entering `flutter build appbundle`.
+  This creates the file `build/app/outputs/bundle/release/app-release.aab`.
+- Click "Upload" and upload the new `.aab` file.
+- Delete the previously uploaded app bundle by clicking the vertical ellipsis
+  near the end of its row and selecting "Remove app bundle".
+  In the dialog that appears, click "Remove".
+- Click "Save" in the lower-right corner.
+- Click the "Review Release" button in the lower-right corner.
+- Click the "Start rollout to Alpha".
+  In the dialog that appears, click "Rollout".
+- TODO: I don't think this worked!
 
 ### iOS App Store
 
