@@ -290,6 +290,19 @@ The red square stops the app.
 The blue magnifier glass opens the Widget Inspector
 which gives details about widget nesting, layout, and sizes.
 
+## Android Default Package
+
+By default a new project uses the Java package `com.example`.
+To change this, follow these steps:
+
+- Create the new package directory structure below the
+  `android/app/src/main/kotlin directory.
+- Under this directory, move the file `com/example/MainActivity.kt`
+  into the new package directory and modify its
+  `package` statement to refer to the new package.
+- From the top project directory, enter `flutter clean` and `flutter run`
+  to rebuild the project with the new package name.
+
 ## Linting
 
 Flutter apps provide default code linting.
@@ -9497,6 +9510,10 @@ configure RevenueCat by following these steps:
 1. Click a platform button such as "App Store" or "Play Store".
 1. Enter the "App name"
 1. Enter the "Google Play package" which is the bundle ID.
+1. Create a "Service Account credentials JSON" file.
+   THIS IS EXTREMEMLY COMPLICATED!!!
+   See the "How do I create this?" link.
+   TODO: RESUME HERE!
 
 1. TODO: Information missing here!
 1. Click the "Create project" button.
