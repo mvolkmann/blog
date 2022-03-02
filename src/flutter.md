@@ -6106,6 +6106,9 @@ The pub.dev package
 {% aTargetBlank "https://pub.dev/packages/sqflite", "sqflite" %}
 is the most popular way to access a SQLite database in a Flutter application.
 
+See a short introduction {% aTargetBlank
+"https://www.youtube.com/watch?v=HefHf5B1YM0", "YouTube video" %}.
+
 The steps to use sqflite are:
 
 1. Add the `path` and `sqflite` dependencies in `pubspec.yaml`.
@@ -9500,6 +9503,9 @@ In the Flutter app:
 When testing in an Android Emulator, choose a device type
 where "Play Store" is enabled.
 "Pixel 4 API 30" enables this, but "Pixel 5 API 30" does not.
+
+After the app launches on the emulator,
+launch the "Google Play" app and sign in.
 
 ## Advice
 
