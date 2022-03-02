@@ -2638,6 +2638,12 @@ Classes define:
 - operators to return data computed from an instance
   and possibly one other instance (for binary operators)
 
+Definitions of immutable classes can be
+proceeded by the `@immutable` annotation.
+This requires all fields to be declared with the `final` keyword.
+The compiler will output a warning if the class
+defines any non-final fields
+
 ### Constructors
 
 A constructor is defined as a method with no return type
