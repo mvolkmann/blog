@@ -2024,13 +2024,13 @@ The values that can be passed to this include:
 
   <figure>
     <img alt="SwiftUI Picker" style="width: 40%"
-      src="/blog/assets/SwiftUI-Picker-Menu1.png?v={{pkg.version}}"
+      src="/blog/assets/SwiftUI-Picker-menu1.png?v={{pkg.version}}"
       title="SwiftUI Picker menu before clicking">
     <figcaption>menu picker before clicking</figcaption>
   </figure>
   <figure>
     <img alt="SwiftUI Picker" style="width: 40%"
-      src="/blog/assets/SwiftUI-Picker-Menu2.png?v={{pkg.version}}"
+      src="/blog/assets/SwiftUI-Picker-menu2.png?v={{pkg.version}}"
       title="SwiftUI Picker menu after clicking">
     <figcaption>menu picker after clicking</figcaption>
   </figure>
