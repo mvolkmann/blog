@@ -7945,6 +7945,41 @@ These include:
   `WidgetsBinding.instance?.addPostFrameCallback`, and `Future.delayed`
   to slide `ListTile` widgets in from the right in staggered fashion.
 
+## Browsing URLs
+
+The pub.dev package {% aTargetBlank "https://pub.dev/packages/url_launcher",
+"url_launcher" %} supports launching another app to process a given URL.
+This includes browsing a web page (`https://somesite.com`),
+dialing the phone (`tel://+1 123 456 7890`),
+sending an email (`mailto:somebody@somewhere.com`), and
+sending a text message (`sms:+1 123 456 7890`).
+
+See a short introduction {% aTargetBlank
+"https://www.youtube.com/watch?v=qYxRYB1oszw", "YouTube video" %}.
+
+The ability to launch other apps for browsing URLs
+must be specifically configured for Android and iOS.
+See the {% aTargetBlank "https://pub.dev/packages/url_launcher",
+"url_launcher" %} web page for details.
+After modifying the configuration files, restart the app
+in order for the changes to take effect.
+
+The following code opens the default browser to browse the Flutter web site
+when an `IconButton` is pressed:
+
+```dart
+import 'package:url_launcher/url_launcher.dart';
+...
+final url = 'https://flutter.dev';
+...
+IconButton(
+  icon: Icon(Icons.open_in_browser),
+  onPressed: () async {
+    if (await canLaunch(url)) launch(url);
+  },
+),
+```
+
 ## Audio
 
 The {% aTargetBlank "https://pub.dev/packages/audioplayers", "audioplayers" %}
