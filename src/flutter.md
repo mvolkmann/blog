@@ -9497,6 +9497,10 @@ In the Flutter app:
 1. Add a button in the app to show purchase options.
 1. TODO: Add more steps to display the offers!
 
+When testing in an Android Emulator, choose a device type
+where "Play Store" is enabled.
+"Pixel 4 API 30" enables this, but "Pixel 5 API 30" does not.
+
 ## Advice
 
 - Flutter prefers project and file names that separate words
