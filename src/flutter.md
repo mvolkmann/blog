@@ -4358,13 +4358,14 @@ it is recommended to choose a state management package
 provided by the community.
 Popular packages include:
 
-- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} package
-  (similar to the Context API in React)
-- {% aTargetBlank "https://pub.dev/packages/get", "GetX" %}
-- {% aTargetBlank "https://riverpod.dev", "Riverpod" %}
 - {% aTargetBlank "https://bloclibrary.dev/", "bloc" %}
 - {% aTargetBlank "https://pub.dev/documentation/flutter_cubit/latest/",
   "cubit" %}
+- {% aTargetBlank "https://pub.dev/packages/get_it", "get_it" %}
+- {% aTargetBlank "https://pub.dev/packages/get", "GetX" %}
+- {% aTargetBlank "https://pub.dev/packages/provider", "provider" %} package
+  (similar to the Context API in React)
+- {% aTargetBlank "https://riverpod.dev", "Riverpod" %}
 
 These reduce the need for stateful widgets.
 
