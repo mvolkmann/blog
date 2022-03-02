@@ -6098,7 +6098,42 @@ Two popular options are:
 
 ### shared_preferences Package
 
-TODO: Add information about this. See usage in flutter_gift_track.
+The pub.dev package {% aTargetBlank
+"https://pub.dev/packages/shared_preferences", "shared_preferences" %}
+"wraps platform-specific persistent storage for simple data."
+It is used to hold key/value pairs where the keys are strings and the
+values have the types `bool`, `int`, `double`, `String`, or `List<String>`.
+
+The following code demonstrates writing functions
+that set, get, and remove values of specific keys.
+
+```dart
+import 'package:shared_preferences/shared_preferences.dart';
+
+void setDemo() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('happy', true);
+  await prefs.setInt('counter', 19);
+  await prefs.setDouble('distance', 3.14);
+  await prefs.setString('message', 'Hello');
+  await prefs.setStringList('message', ['red', 'orange', 'yellow']);
+}
+
+void getDemo() {
+  final prefs = await SharedPreferences.getInstance();
+  final happy = prefs.getBool('happy');
+  final counter = prefs.getInt('counter');
+  final distance = prefs.getDouble('distance');
+  final message = prefs.getString('message');
+  final colors = prefs.getStringList('colors');
+}
+
+void removeDemo() {
+  final prefs = await SharedPreferences.getInstance();
+  final success = await prefs.remove('counter');
+  if (success) print('The counter value was removed.');
+}
+```
 
 ### SQLite
 
