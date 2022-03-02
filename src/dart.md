@@ -249,8 +249,6 @@ dart run # outputs "Hello world!"
 
 To analyze a Dart project for syntax errors and lint rule violations,
 enter `dart analyze`.
-TODO: Why does this always output "No issues found!" even when
-TODO: there are syntax errors and lint rule violations?
 
 The `dart create` command creates the following files and directories:
 
@@ -767,8 +765,8 @@ but it defines the following bitwise operators:
 
 In addition, the logical operators `&&` (and), `||` (or), and `!` (not)
 can be applied to `bool` values.
-TODO: Where are these defined? Why aren't they defined by the `bool` class?
 These have lower precedence than bitwise operators.
+TODO: Where are these defined? Why aren't they defined by the `bool` class?
 
 ### Number types
 
