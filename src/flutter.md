@@ -8328,6 +8328,68 @@ The steps to customize the launcher icon used by a Flutter app are:
    (or at least version 16)
 1. Enter `flutter pub run flutter_launcher_icons:main`
 
+## Splash Screens
+
+The pub.dev package {% aTargetBlank "https://pub.dev/packages/splashscreen",
+"splashscreen" %} displays a splash screen for a given number of seconds
+when an app starts and they displays the main screen of the app.
+
+One issue with this package is that the latest version in pub.dev (1.3.5)
+does not support null safety.
+But there is a version in the GitHub repository that does.
+To use that version, add the following dependency in `pubspec.yaml`:
+
+```yaml
+splashscreen:
+  git:
+    url: https://github.com/DPLYR-dev/SplashScreenFlutterPackage.git
+    ref: master
+```
+
+To add a splash screen, change the `build` method of the home screen
+to something like the following:
+
+```dart
+  Widget build(BuildContext context) {
+    return SplashScreen(
+      backgroundColor: Colors.yellow,
+
+      image: Image.asset('assets/images/hobbit-book.jpg'),
+      // This is the height of the image.
+      photoSize: 230.0,
+
+      // This is rendered under the image.
+      title: Text(
+        'Splashscreen Demo',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+
+      // This causes a loading spinner to be rendered
+      // until the splash screen goes away.
+      // It is rendered under the title.
+      useLoader: true,
+      loaderColor: Colors.red,
+
+      // This is rendered under the loading spinner.
+      loadingText: Text('The fun will start soon.'),
+      loadingTextPadding: EdgeInsets.all(20),
+
+      // Not sure what this affects.
+      styleTextUnderTheLoader: TextStyle(),
+
+      // The splash screen will be displayed for this duration.
+      seconds: 10,
+
+      // The widget returned by this function will be
+      // rendered when the splash screen goes away.
+      navigateAfterSeconds: _afterSplash(),
+    );
+  }
+```
+
 ## Tests
 
 Three primary kinds of tests can be written for Flutter applications.
