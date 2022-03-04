@@ -7324,6 +7324,31 @@ import 'package:flutter_svg/flutter_svg.dart';
 SvgPicture.asset('assets/images/some_filename.svg'),
 ```
 
+## Zooming and Panning
+
+Zooming and panning is especially useful with images,
+but can also be applied to other widgets.
+The built-in way to implement this is to use `InteractiveViewer`.
+The pub.dev package {% aTargetBlank "https://pub.dev/packages/photo_view",
+"photo_view" %} provides some additional features.
+
+To zoom in and out in the iOS Simulator using a trackpad,
+hold down the option key and use two fingers on the trackpad.
+
+The following code demonstates applying `InteractiveViewer` to an image:
+
+```dart
+InteractiveViewer(child: Image.asset('assets/images/some-photo.jpg'))
+```
+
+The following code demonstates using the `photo_view` package:
+
+```dart
+import 'package:photo_view/photo_view.dart';
+...
+PhotoView(imageProvider: AssetImage('assets/images/some-photo.jpg'))
+```
+
 ## Drawing
 
 To draw on a widget, use the `CustomPaint` widget.
