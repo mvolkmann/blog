@@ -373,9 +373,8 @@ To run a Flutter app on a connected iPhone:
 
 - In Xcode
 
-  - To change the target version of iOS,
-    select PROJECT ... Runner ... Basic and
-    set "iOS Deployment Target" to the desired version
+  - Select PROJECT ... Runner ... Inf and
+    set "iOS Deployment Target" to the target iOS version.
   - Select "iPhone" from the device drop-down in the header.
   - Click "Runner" at the top of the Navigator.
   - Click the "Signing & Capabilities" tab.
@@ -1494,7 +1493,6 @@ they do not all fit within the screen width.
 <img alt="widget overflow" style="width: 60%"
     src="/blog/assets/flutter-widget-overflow.png?v={{pkg.version}}"
     title="widget overflow">
-<img>
 
 One way to fix widget overflow is to nest children in a {% aTargetBlank
 "https://docs.flutter.dev/development/ui/widgets/scrolling",
@@ -2237,7 +2235,6 @@ The following code demonstrates each option:
 <img alt="Flutter CircleAvatar" style="width: 40%"
     src="/blog/assets/flutter-circleavatar.png?v={{pkg.version}}"
     title="Flutter CircleAvatar">
-<img>
 
 ```dart
 // This doesn't scale the image correctly,
@@ -7391,6 +7388,127 @@ return CustomPaint(
   painter: _MyPainter(),
   child: SizedBox(width: 200, height: 100),
 );
+```
+
+## Charts
+
+The pub.dev package {% aTargetBlank "https://pub.dev/packages/fl_chart",
+"fl_chart" %} draws line, bar, pie, scatter, and radar charts.
+The charts are quite fancy and even support animations.
+
+The following code demonstrates creating a simple bar chart.
+Other kinds are charts are created in a similar way.
+
+<img alt="fl_chart bar chart" style="width: 50%"
+    src="/blog/assets/flutter-fl_chart.png?v={{pkg.version}}"
+    title="fl_chart bar chart">
+
+```dart
+import 'package:collection/collection.dart'; // for mapIndexed method
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+
+import './extensions/widget_extensions.dart';
+
+const title = 'My App';
+
+void main() => runApp(
+      MaterialApp(
+        title: title,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const Home(),
+      ),
+    );
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final xTitles = ['Mark', 'Tami', 'Amanda', 'Jeremy'];
+  final yValues = <double>[6, 7, 10, 8];
+
+  @override
+  Widget build(BuildContext context) {
+    final barGroups = yValues
+        .mapIndexed(
+          (index, y) => getBar(x: index, y: y),
+        )
+        .toList();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Column(
+        children: [
+          BarChart(
+            BarChartData(
+              axisTitleData: FlAxisTitleData(
+                bottomTitle: getAxisTitle('Person', 30),
+                leftTitle: getAxisTitle('Score'),
+              ),
+              borderData: FlBorderData(
+                border: const Border(
+                  top: BorderSide.none,
+                  right: BorderSide.none,
+                  left: BorderSide(width: 1), // y-axis
+                  bottom: BorderSide(width: 1), // x-axis
+                ),
+              ),
+              barGroups: barGroups,
+              // This hides the faint, dashed grid lines.
+              gridData: FlGridData(show: false),
+              titlesData: FlTitlesData(
+                bottomTitles: SideTitles(
+                  showTitles: true,
+                  getTitles: (index) => xTitles[index.toInt()],
+                  rotateAngle: -45,
+                ),
+                leftTitles: SideTitles(
+                  showTitles: true,
+                  // Only show titles with no decimal places.
+                  getTitles: (value) =>
+                      value % 1 == 0 ? '${value.toInt()}' : '',
+                ),
+                topTitles: SideTitles(showTitles: false),
+                rightTitles: SideTitles(showTitles: false),
+              ),
+            ),
+          ).padding(20).expanded,
+        ],
+      ),
+    );
+  }
+
+  BarChartGroupData getBar({required int x, required double y}) {
+    const width = 30.0;
+    return BarChartGroupData(x: x, barRods: [
+      BarChartRodData(
+        //borderRadius: BorderRadius.zero,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(width / 2),
+        ),
+        colors: [Colors.blue],
+        width: width,
+        y: y,
+      ),
+    ]);
+  }
+
+  AxisTitle getAxisTitle(String title, [double margin = 0.0]) {
+    return AxisTitle(
+      margin: margin,
+      showTitle: true,
+      textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      titleText: title,
+    );
+  }
+}
 ```
 
 ## Animation
