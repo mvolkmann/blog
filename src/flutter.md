@@ -10,11 +10,11 @@ layout: topic-layout.njk
     src="/blog/assets/flutter-logo.svg?v={{pkg.version}}"
     title="Flutter logo">
 
-{% aTargetBlank "https://flutter.dev", "Flutter" %}
+{% aTargetBlank "https://flutter.dev", "Flutter" %}, originally named "Sky",
 enables writing mobile, web, desktop, and embedded apps
-using the {% aTargetBlank "https://dart.dev", "Dart programming language" %}.
+It uses the {% aTargetBlank "https://dart.dev", "Dart programming language" %}.
 For details on the Dart programming language,
-see this <a href="../dart/">page</a>.
+see this <a href="../dart/">blog page</a>.
 
 Everything rendered by a Flutter app is rendered by a "widget".
 There are many provided widgets and custom ones can be defined.
