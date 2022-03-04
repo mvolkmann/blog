@@ -8540,6 +8540,93 @@ class _HomeState extends State<Home> {
 }
 ```
 
+## Logging
+
+It can be helpful to output messsges to the terminal when debugging an app.
+This can be done using the Dart `print` function.
+
+For even better logging output, consider using the pub.dev package
+{% aTargetBlank "https://pub.dev/packages/logger", "logger" %}.
+
+The following code demonstrates using this.
+When the buttons are pressed in order, the colored output
+shown in the screenshot is produced in the terminal.
+
+<img alt="Flutter loggerUI" style="width: 30%"
+    src="/blog/assets/flutter-logger-ui.png?v={{pkg.version}}"
+    title="Flutter logger UI">
+<img alt="Flutter logger output" style="width: 65%"
+    src="/blog/assets/flutter-logger-output.png?v={{pkg.version}}"
+    title="Flutter logger output">
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+
+const title = 'My App';
+
+void main() => runApp(
+      MaterialApp(
+        title: title,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const Home(),
+      ),
+    );
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final logger = Logger();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text('Verbose'),
+              onPressed: () => logger.v('This is a verbose message.'),
+            ),
+            ElevatedButton(
+              child: Text('Debug'),
+              onPressed: () => logger.d('This is a debug message.'),
+            ),
+            ElevatedButton(
+              child: Text('Info'),
+              onPressed: () => logger.i('This is an info message.'),
+            ),
+            ElevatedButton(
+              child: Text('Warning'),
+              onPressed: () => logger.w('This is a warning message.'),
+            ),
+            ElevatedButton(
+              child: Text('Error'),
+              onPressed: () => logger.e('This is an error message.'),
+            ),
+            ElevatedButton(
+              child: Text('WTF'),
+              onPressed: () => logger.wtf('This is a wtf message.'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
 ## Tests
 
 Three primary kinds of tests can be written for Flutter applications.
