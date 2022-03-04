@@ -7328,12 +7328,21 @@ SvgPicture.asset('assets/images/some_filename.svg'),
 
 Zooming and panning is especially useful with images,
 but can also be applied to other widgets.
+
 The built-in way to implement this is to use `InteractiveViewer`.
+This is suitable for most use cases.
+
 The pub.dev package {% aTargetBlank "https://pub.dev/packages/photo_view",
-"photo_view" %} provides some additional features.
+"photo_view" %} provides additional features such as
+rotating and photo galleries.
 
 To zoom in and out in the iOS Simulator using a trackpad,
 hold down the option key and use two fingers on the trackpad.
+To pan, just drag.
+
+To zoom in and out in an Android emulator on macOS using a trackpad,
+hold down the command key and press down and drag two fingers on the trackpad.
+To pan, just drag
 
 The following code demonstates applying `InteractiveViewer` to an image:
 
