@@ -3255,6 +3255,7 @@ These functions are described in the following table:
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/showGeneralDialog.html", "showGeneralDialog" %}       | like `showDialog` but supports customizing the transition used to display the dialog       |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/showDatePicker.html", "showDatePicker" %}            | provides an easier way to display a `DatePickerDialog` than using the above functions      |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/showDateRangePicker.html", "showDateRangePicker" %}  | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/showTimePicker.html", "showTimePicker" %}            | provides an easier way to display a `TimePickerDialog` than using the above functions      |
 
 By default, dialogs created with the `showDialog` function
 are dismissed if a user taps outside them. To prevent this,
@@ -3265,8 +3266,8 @@ have the opposite default.
 To cause them to be dismissed if a user taps outside them,
 pass the `barrierDismissible` argument with a value of `true`.
 
-Dialogs created with the `showDatePicker` and `showDatePickerRange` functions
-are always dismissed if a user taps outside them.
+Dialogs created with the `showDatePicker`, `showDatePickerRange`, and
+`showTimePicker` functions are always dismissed if a user taps outside them.
 They do not take a `barrierDismissible` argument,
 so this behavior cannot be changed.
 
