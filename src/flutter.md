@@ -236,6 +236,8 @@ Other changes that should be made include:
 - Change the `title` argument to the `MaterialApp` widget.
 - Change the `title` argument to the `MyHomePage` widget.
 - Replace the widgets in the `children` `List` passed to the `Column` widget.
+- Remove the dependency on `cupertino_icons` in `pubspec.yaml`
+  if those icons are not being used.
 
 ## Running From VS Code
 
