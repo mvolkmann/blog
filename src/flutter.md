@@ -6256,7 +6256,7 @@ class _HomeState extends State<Home> {
 
     var temperature = initialTemperature;
     final random = Random();
-    // Every second randomly change the temperature.
+    // Every second emit a new temperature.
     stream = Stream.periodic(Duration(seconds: 1), (_) {
       final up = random.nextBool();
       final delta = random.nextDouble(); // 0 <= delta < 1
@@ -6277,7 +6277,7 @@ class _HomeState extends State<Home> {
               initialData: initialTemperature,
               stream: stream,
               builder: (context, snapshot) {
-                if (snapshot.hasError) return Text('error: ${snapshot.error}');
+                if (snapshot.hasError) return Text('${snapshot.error}');
                 if (!snapshot.hasData) return CircularProgressIndicator();
                 return Text('current temperature: ${snapshot.data}');
               },
