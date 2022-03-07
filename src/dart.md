@@ -1069,12 +1069,13 @@ For example `'ho ' * 3` creates the `String` `'ho ho ho '`.
 
 The table below summarized converting between numbers and strings.
 
-| Conversion           | Code              |
-| -------------------- | ----------------- |
-| `int` to `String`    | `i.toString()`    |
-| `double` to `String` | `d.toString()`    |
-| `String` to `int`    | `int.parse(s)`    |
-| `String` to `double` | `double.parse(s)` |
+| Conversion           | Code                               |
+| -------------------- | ---------------------------------- |
+| `int` to `String`    | `i.toString()`                     |
+| `double` to `String` | `d.toString()`                     |
+| `double` to `String` | `d.toStringAsFixed(decimalPlaces)` |
+| `String` to `int`    | `int.parse(s)`                     |
+| `String` to `double` | `double.parse(s)`                  |
 
 ### Enumerations
 
