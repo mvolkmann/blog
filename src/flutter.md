@@ -6167,8 +6167,11 @@ Two options for achieving this are to use the {% aTargetBlank
 
 ### FutureBuilder Widget
 
-The FutureBuilder widget is typically used
-in the `build` method of a `StatefulWidget`.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html",
+"FutureBuilder" %} widget builds a widget based on
+whether a `Future` has completed and its value.
+It is typically used in the `build` method of a `StatefulWidget`.
 
 The `future` argument should be set to a `Future` object.
 This is typically is returned by function that obtains data asynchronously,
@@ -6212,7 +6215,80 @@ Container(
 
 ### StreamBuilder Widget
 
-TODO: Add this.
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html",
+"StreamBuilder" %} widget rebuilds a single widget
+in response to new data becoming available on a stream.
+It is typically used in the `build` method of a `StatefulWidget`.
+
+The following code demonstrates using `StreamBuilder` to
+simulate updating the temperature every second:
+
+```dart
+import 'dart:async';
+import 'dart:math';
+import 'package:flutter/material.dart';
+
+const title = 'My App';
+
+void main() => runApp(
+      MaterialApp(
+        title: title,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const Home(),
+      ),
+    );
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  static const initialTemperature = 50.0;
+  late Stream stream; // of temperature values
+
+  @override
+  void initState() {
+    super.initState();
+
+    var temperature = initialTemperature;
+    final random = Random();
+    // Every second randomly change the temperature.
+    stream = Stream.periodic(Duration(seconds: 1), (_) {
+      final up = random.nextBool();
+      final delta = random.nextDouble(); // 0 <= delta < 1
+      temperature += up ? delta : -delta;
+      return temperature.toStringAsFixed(1);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            StreamBuilder(
+              initialData: initialTemperature,
+              stream: stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) return Text('error: ${snapshot.error}');
+                if (!snapshot.hasData) return CircularProgressIndicator();
+                return Text('current temperature: ${snapshot.data}');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
 ## Persisting State
 
