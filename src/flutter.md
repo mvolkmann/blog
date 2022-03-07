@@ -609,7 +609,11 @@ This extension provides many things including:
     This is an incredibly useful debugging tool!
     It displays the widget tree on the left.
     Selecting a widget displays details about it on the right.
+
     The "Layout Explorer" tab displays layout details for the widget.
+    Click "Show Guidelines" at the top to see lines in the simulator that
+    indicate the location and size of each widget that is currently displayed.
+
     The "Details Tree" tab displays the properties of the widget.
 
   - Open Observatory Timeline
@@ -2346,6 +2350,9 @@ The {% aTargetBlank
 widget renders an image.
 Supported image formats include
 BMP, GIF (including animated), JPEG, PNG, WBMP, and WebP.
+
+For a short introduction, see this {% aTargetBlank
+"https://www.youtube.com/watch?v=7oIAs-0G4mw", "YouTube video" %}.
 
 The `width` and `height` arguments specify its size.
 
