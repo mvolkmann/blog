@@ -6159,10 +6159,16 @@ class StateNotifierPage extends ConsumerWidget {
 
 In some cases it is desireable to load data in an asynchronous way
 before rendering a given widget.
-One way to do this is to use the {% aTargetBlank
+Two options for achieving this are to use the {% aTargetBlank
 "https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html",
-"FutureBuilder" %} widget.
-This is typically used in the `build` method of a `StatefulWidget`.
+"FutureBuilder" %} or {% aTargetBlank
+"https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html",
+"StreamBuilder" %} widgets.
+
+### FutureBuilder Widget
+
+The FutureBuilder widget is typically used
+in the `build` method of a `StatefulWidget`.
 
 The `future` argument should be set to a `Future` object.
 This is typically is returned by function that obtains data asynchronously,
@@ -6203,6 +6209,10 @@ Container(
   ),
 )
 ```
+
+### StreamBuilder Widget
+
+TODO: Add this.
 
 ## Persisting State
 
