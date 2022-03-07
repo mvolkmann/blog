@@ -4120,6 +4120,193 @@ class _HomeState extends State<Home> {
 }
 ```
 
+## Search with Type-Ahead
+
+Searching a list of options with type-ahead matching can be implemented
+using a combination of {% aTargetBlank
+"https://api.flutter.dev/flutter/material/showSearch.html",
+"showSearch" %} function and the {% aTargetBlank
+"https://api.flutter.dev/flutter/material/SDelegate-class.html",
+"SearchDelegate" %} class.
+
+The following example demonstrates implementing selection of a hockey team
+either by tapping a name or by tapping the search button
+and entering a partial name to find one using typeahead.
+
+<div style="display: flex; align-items: flex-start; gap: 1rem">
+  <img alt="Flutter showSearch #1" style="width: 40%"
+    src="/blog/assets/flutter-showSearch-1.png?v={{pkg.version}}"
+    title="Flutter showSearch #1">
+  <img alt="Flutter showSearch #2" style="width: 40%"
+    src="/blog/assets/flutter-showSearch-2.png?v={{pkg.version}}"
+    title="Flutter showSearch #2">
+</div>
+
+Here is the file `team_search_delegate.dart`
+which defines a class that extends `SearchDelegate`.
+This implements the ability to search with type-ahead.
+
+```dart
+import 'package:flutter/material.dart';
+
+class TeamSearchDelegate extends SearchDelegate<String> {
+  final List<String> teams;
+
+  TeamSearchDelegate({required this.teams});
+
+  // These appear on the right side of the search bar.
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () => query = '',
+      ),
+    ];
+  }
+
+  // This appears on the left side of the search bar.
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () => close(context, ''),
+    );
+  }
+
+  // This is never called in the current app.
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final q = query.toLowerCase();
+    final results = teams.where((team) => team.toLowerCase().contains(q));
+    return ListView.builder(
+      itemCount: results.length,
+      itemBuilder: (context, index) => ListTile(
+        title: Text(results.elementAt(index)),
+        onTap: () {
+          query = results.elementAt(index);
+          close(context, query);
+        },
+      ),
+    );
+  }
+}
+```
+
+Here is the the file `main.dart`
+which defines the main part of the UI:
+
+```dart
+import 'package:flutter/material.dart';
+import './extensions/widget_extensions.dart';
+import './team_search_delegate.dart';
+
+const teams = [
+  'Anaheim Ducks',
+  'Arizona Coyotes',
+  'Boston Bruins',
+  'Buffalo Sabres',
+  'Calgary Flames',
+  'Carolina Hurricanes',
+  'Chicago Blackhawks',
+  'Colorado Avalanche',
+  'Columbus Blue Jackets',
+  'Dallas Stars',
+  'Detroit Red Wings',
+  'Edmonton Oilers',
+  'Florida Panthers',
+  'Los Angeles Kings',
+  'Minnesota Wild',
+  'Montréal Canadiens',
+  'Nashville Predators',
+  'New Jersey Devils',
+  'New York Islanders',
+  'New York Rangers',
+  'Ottawa Senators',
+  'Philadelphia Flyers',
+  'Pittsburgh Penguins',
+  'San Jose Sharks',
+  'Seattle Kraken',
+  'St. Louis Blues',
+  'Tampa Bay Lightning',
+  'Toronto Maple Leafs',
+  'Vancouver Canucks',
+  'Vegas Golden Knights',
+  'Washington Capitals',
+  'Winnipeg Jets',
+];
+const title = 'My App';
+
+void main() => runApp(
+      MaterialApp(
+        title: title,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const Home(),
+      ),
+    );
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final delegate = TeamSearchDelegate(teams: teams);
+  var selectedTeam = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () async {
+              final selection =
+                  await showSearch(context: context, delegate: delegate);
+              if (selection != null && selection.isNotEmpty) {
+                setState(() => selectedTeam = selection);
+              }
+            },
+          ),
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(selectedTeam.isEmpty
+                ? 'Select a team.'
+                : 'You selected $selectedTeam.'),
+            Scrollbar(
+              child: ListView.builder(
+                itemCount: teams.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(teams[index]),
+                    onTap: () {
+                      setState(() => selectedTeam = teams[index]);
+                    },
+                  );
+                },
+              ),
+            ).expanded,
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
 ## Model-View-Controller
 
 One recommended pattern for organizing a Flutter project
