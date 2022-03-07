@@ -9101,7 +9101,10 @@ class _HomeState extends State<Home> {
 ## Logging
 
 It can be helpful to output messsges to the terminal when debugging an app.
-This can be done using the Dart `print` function.
+This can be done using the Dart {% aTargetBlank
+"https://api.dart.dev/be/148625/dart-core/print.html", "print" %} and
+{% aTargetBlank "https://api.flutter.dev/flutter/foundation/debugPrint.html",
+"debugPrint" %} functions.
 
 For even better logging output, consider using the pub.dev package
 {% aTargetBlank "https://pub.dev/packages/logger", "logger" %}.
