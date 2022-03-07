@@ -2219,7 +2219,7 @@ These include `clip`, `ellipsis`, `fade`, and `visible`.
 There are many more display widgets provided in pub.dev.
 For example, the {% aTargetBlank "https://pub.dev/packages/badges",
 "badges package" %} provides the `Badge` widgets.
-For a demo, see this {% aTargetBlank
+For a short introduction, see this {% aTargetBlank
 "https://www.youtube.com/watch?v=_CIHLJHVoN8", "YouTube video" %}.
 
 Details for some of the display widgets are provided below.
@@ -2313,9 +2313,8 @@ The {% aTargetBlank
 "ExpansionPanelList" %} widget renders a vertical list
 of `ExpansionPanel` widgets that can be expanded and collapsed by clicking.
 
-For a concise explanation of its usage, see this {% aTargetBlank
-"https://www.youtube.com/watch?v=2aJZzRMziJc", "Flutter Widget of the week" %}
-YouTube video.
+For a short introduction, see this {% aTargetBlank
+"https://www.youtube.com/watch?v=2aJZzRMziJc", "YouTube video" %}.
 
 For example code, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_expansionpanel/blob/main/lib/main.dart",
@@ -3989,6 +3988,129 @@ For an example, see this {% aTargetBlank
 "https://github.com/mvolkmann/flutter_dismissible/blob/main/lib/main.dart",
 "GitHub repo" %}.
 
+## Pull to Refresh
+
+The {% aTargetBlank
+"https://api.flutter.dev/flutter/material/RefreshIndicator-class.html",
+"RefreshIndicator" %} widget wraps a vertical scroll view
+and provides the "pull to refresh" capability.
+
+For a short introduction, see this {% aTargetBlank
+"https://www.youtube.com/watch?v=ORApMlzwMdM", "YouTube video" %}.
+
+The following code demonstrates using the RefreshIndicator widget.
+Dragging the list down when the top item is displayed
+cause three more items to be added to the beginning
+until there are no more items to load.
+
+<img alt="Flutter RefreshIndicator" style="width: 60%"
+    src="/blog/assets/flutter-refreshindicator.png?v={{pkg.version}}"
+    title="Flutter RefreshIndicator">
+
+```dart
+import 'package:flutter/material.dart';
+import './extensions/widget_extensions.dart';
+
+const title = 'My App';
+
+void main() => runApp(
+      MaterialApp(
+        title: title,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: Home(),
+      ),
+    );
+
+class Home extends StatefulWidget {
+  Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final itemsToLoad = [
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'blue',
+    'purple',
+    'white',
+    'gray',
+    'black',
+    'brown',
+    'aqua',
+    'teal',
+    'amber',
+    'turquoise',
+    'peach',
+  ];
+  final itemsToShow = <String>[];
+  final keyRefresh = GlobalKey<RefreshIndicatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Wait for the build method to complete and then
+    // trigger a call to the onRefresh function of the RefreshIndicator
+    // which causes the indicator to display.
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) => keyRefresh.currentState?.show());
+  }
+
+  void addItem() {
+    if (itemsToLoad.isNotEmpty) {
+      itemsToShow.insert(0, itemsToLoad.removeAt(0));
+    }
+  }
+
+  Future<void> loadItems() async {
+    await Future.delayed(Duration(seconds: 1)); // simulates API call
+    setState(() {
+      // Items are added to the beginning of the list.
+      // Another approach is to completely replace the list with new data.
+      addItem();
+      addItem();
+      addItem();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: Column(
+        children: [
+          Text('Pull to refresh.'),
+          // This can only be used with a vertical scroll view
+          RefreshIndicator(
+            key: keyRefresh,
+            // This function updates the scrollable contents,
+            // in this case the items in a ListView.
+            // The refresh indicator disappears when
+            // the promise returned by this function completes.
+            onRefresh: loadItems,
+            child: Scrollbar(
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: itemsToShow.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: ListTile(title: Text(itemsToShow[index])),
+                  );
+                },
+              ),
+            ),
+          ).expanded,
+        ],
+      ),
+    );
+  }
+}
+```
+
 ## Model-View-Controller
 
 One recommended pattern for organizing a Flutter project
@@ -4628,7 +4750,7 @@ It is a wrapper around the {% aTargetBlank
 "https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html",
 "InheritedWidget" %} which is
 a relatively complicated way to share mutable state.
-`InheriteWidget` is explained well in this {% aTargetBlank
+For a short introduction, see this {% aTargetBlank
 "https://www.youtube.com/watch?v=utrvu-eow6U", "YouTube video" %}.
 
 The steps to use the provider package are:
@@ -6139,7 +6261,7 @@ The pub.dev package
 {% aTargetBlank "https://pub.dev/packages/sqflite", "sqflite" %}
 is the most popular way to access a SQLite database in a Flutter application.
 
-See a short introduction {% aTargetBlank
+For a short introduction, see this {% aTargetBlank
 "https://www.youtube.com/watch?v=HefHf5B1YM0", "YouTube video" %}.
 
 The steps to use sqflite are:
@@ -8144,7 +8266,7 @@ dialing the phone (`tel://+1 123 456 7890`),
 sending an email (`mailto:somebody@somewhere.com`), and
 sending a text message (`sms:+1 123 456 7890`).
 
-See a short introduction {% aTargetBlank
+For a short introduction, see this {% aTargetBlank
 "https://www.youtube.com/watch?v=qYxRYB1oszw", "YouTube video" %}.
 
 The ability to launch other apps for browsing URLs
