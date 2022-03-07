@@ -6158,6 +6158,8 @@ class Dog {
 
   Dog({required this.age, required this.breed, required this.name});
 
+  // Dart doesn't support introspection,
+  // so this conversion cannot be automated.
   Map<String, dynamic> toMap() {
     return {'id': id, 'age': age, 'breed': breed, 'name': name};
   }
@@ -9617,6 +9619,12 @@ to the Google Play Store and the iOS App Store include
 "Appcircle" %}.
 
 TODO: Add more detail on at least one of these options.
+
+The pub.dev package {% aTargetBlank "https://pub.dev/packages/rename",
+"rename" %} "helps you to change your flutter project's
+AppName and BundleId for different platforms."
+
+The Google app review process typically takes less than two days to complete.
 
 ### Renaming
 
