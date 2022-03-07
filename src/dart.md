@@ -2384,7 +2384,7 @@ void main() async {
   var players = ['Mark', 'Tami', 'Amanda', 'Jeremy'];
 
   PlayerAverage? winner;
-  // Note the use of "async for" to iterate over
+  // Note the use of "await for" to iterate over
   // values in a Stream inside an async function.
   // Only use this when it is certain that the Stream will complete.
   await for (var result in computeAverageScores(players)) {
