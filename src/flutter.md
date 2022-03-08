@@ -2599,6 +2599,7 @@ that do not have an `onPressed` argument value.
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/FloatingActionButton-class.html", "FloatingActionButton" %} | circular (typically) button "that hovers over other content to promote a primary action"                                           |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Form-class.html", "Form" %}                                  | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/IconButton-class.html", "IconButton" %}                     | button containing an `Icon`                                                                                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/InputChip-class.html", "InputChip" %}                       | an oval containing a label, optional avatar, an optional delete icon, and a checkmark when selected, that responds to taps         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/OutlinedButton-class.html", "OutlinedButton" %}             | a `TextButton` with an outlined border                                                                                             |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/PopupMenuButton-class.html", "PopupMenuButton" %}           | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Radio-class.html", "Radio" %}                               | radio button for selecting between mutually exclusive options                                                                      |
@@ -2632,18 +2633,19 @@ Basic usage of all of these widgets is demonstrated in the Flutter project at
 
 Flutter provides four kinds of "chip" widgets.
 All of them render an oval containing a label optionally preceded by an avatar.
-A {% aTargetBlank
-"https://api.flutter.dev/flutter/material/ActionChip-class.html",
-"ActionChip" %} responds to taps.
-A {% aTargetBlank
-"https://api.flutter.dev/flutter/material/Chip-class.html", "Chip" %}
-can include a delete icon that deletes the chip when tapped.
-A {% aTargetBlank
-"https://api.flutter.dev/flutter/material/ChoiceChip-class.html",
-"ChoiceChip" %} exists in a set where only one can be selected.
-A {% aTargetBlank
-"https://api.flutter.dev/flutter/material/FilterChip-class.html",
-"FilterChip" %} | displays a checkmark when selected.
+The table below indicates the event handling supported by each:
+
+| Chip Type                                                                                         | onPressed | onSelected | onDeleted |
+| ------------------------------------------------------------------------------------------------- | :-------: | :--------: | :-------: |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ActionChip-class.html", "ActionChip" %} |     X     |            |           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Chip-class.html", "Chip" %}             |           |            |     X     |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ChoiceChip-class.html", "ChoiceChip" %} |           |     X      |           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/FilterChip-class.html", "FilterChip" %} |           |     X      |           |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/InputChip-class.html", "InputChip" %}   |     X     |     X      |     X     |
+
+The difference between `ChoiceChip` and `FilterChip` is that
+the former only allows one instance in a set to be selected
+whereas the latter allows any number of instances to be selected.
 
 The following code demonstrates using each kind of chip:
 
