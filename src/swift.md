@@ -1499,7 +1499,8 @@ print(zipped[2].0) // 3.48
 
 ### Sets
 
-Sets can be created by passing elements to the `Set` function.
+Sets are created by assigning an `Array` literal
+or by passing elements to the `Set` initializer.
 
 ```swift
 // The type of the following is inferred to be Set<String>.
@@ -1599,8 +1600,8 @@ let color = fruitColors["banana"]; // Optional("yellow")
 To delete a key pair:
 
 ```swift
-fruitColors["banana"] = nil
-fruitColors.removeValue(forKey: "banana")
+fruitColors.removeValue(forKey: "banana") // returns value
+fruitColors["banana"] = nil // same, but shorter and doesn't return value
 ```
 
 To iterate over the keys and values in a `Dictionary`, use a `for`/`in` loop.
@@ -1650,7 +1651,7 @@ for color in fruitColors.values { // can add .sorted()
 | `removeAll()`                                         | removes all pairs                                                               |
 | `removeValue(forKey: key) -> prevValue`               | removes pair with given key and returns previous value or `nil`                 |
 | `sorted(by: (Element, Element) -> Bool) => [Element]` | returns `Array` of elements sorted using a comparator function                  |
-| `updateValue(newValue, forKey: key) -> prevValue`     | sets value of given key and returns previous value or `nil`                     |
+| `updateValue(newValue, forKey: key) -> prevValue`     | sets value of given key and returns previous value or `nil` if not present      |
 
 Here are examples of using some of these methods.
 
@@ -1661,7 +1662,7 @@ let someOdd = scoreDict.contains(where: {$0.value % 2 == 1}) // true
 let odds = scoreDict.filter({$0.value % 2 == 1}) // includes Mark & Jeremy elements
 let upperNames = scoreDict.map({$0.key.uppercased()}) // array of uppercase names
 let doubledScoresDict = scoreDict.mapValues({$0 * 2}) // scoreDict w/ doubled scores
-//scoreDict.removeValue(forKey: "Mark")
+scoreDict.removeValue(forKey: "Mark")
 let sorted = scoreDict.sorted(by: {$0.value > $1.value}); // descending
 ```
 
@@ -1669,15 +1670,16 @@ let sorted = scoreDict.sorted(by: {$0.value > $1.value}); // descending
 
 To define a tuple type, provide a list of elements types in parentheses.
 These can be named or unnamed.
+Access elements by zero-based index or by name.
 
 ```swift
 typealias MyUnnamedTuple = (Bool, Int, String)
 let t1: MyUnnamedTuple = (true, 19, "Mark")
-print(t1.1) // 19
+print(t1.1) // accessed by zero-based index; 19
 
 typealias MyNamedTuple = (happy: Bool, score: Int, name: String)
 let t2: MyNamedTuple = (happy: true, score: 19, name: "Mark")
-print(t2.score) // 19
+print(t2.score) // accessed by name; 19
 ```
 
 The elements of a tuple can be assigned to variables using destructuring,
@@ -1695,7 +1697,8 @@ Swift only supports destructuring of tuples, not arrays or objects.
 Mutable variables are declared with the `var` keyword.
 Immutable variables are declared with the `let` keyword.
 This is an unfortunate choice for JavaScript developers where
-`let` is for mutable variables and `const` is for immutable variables.
+`let` is used for mutable variables and
+`const` is used for immutable variables.
 
 Variable names can be followed by a colon and a type.
 They can also be followed by `=` and an initial value.
@@ -1731,7 +1734,7 @@ Swift is able to optimized storage of `let` variables more than `var` variables.
 Because the value of a `let` variable never changes, its size is known.
 This allows it to be allocated on the stack rather than the heap.
 Data on the stack can be accessed more efficiently.
-Its value can also be inlined in the generated code.
+Values of `let` variables can also be inlined in the generated code.
 
 ## Type Checking and Casting
 
@@ -1767,14 +1770,17 @@ print(String(d)) // "3.14159"
 print(String(c)) // "4"
 
 let bStr = "true"
+print(Character(s)) // "7"; Fatal Error if Strig contains more than one character
+// The remaining examples use nil-coalescing
+// because the typecasts return nil if they fail.
 print(Bool(bStr) ?? false) // true
 print(Int(s) ?? 0) // 7
 print(Float(s) ?? 0) // 7.0
 print(Double(s) ?? 0) // 7.0
-print(Character(s)) // "7"; Fatal Error if Strig contains more than one character
 ```
 
-The `is` operator is used to check the type of an expression.
+The `is` operator is used to check the type of an expression
+and returns a `Bool`.
 
 The `as?` operator is used to downcast a
 value of a superclass type to a value of a subclass type.
@@ -1802,6 +1808,8 @@ class Cat: Animal {
 
     init(name: String, declawed: Bool) {
         self.declawed = declawed
+        // All properities in this class must be initialized
+        // before the superclass init method is called.
         super.init(name: name)
     }
 }
@@ -1877,14 +1885,12 @@ a variable or property with an optional type.
 
   If the value is not `nil`, it is assigned to the variable `value`
   (which is scoped to the block that follows) and the block is executed.
-  If the value is `nil` the block is not executed.
+  If the value is `nil`, the block is not executed.
   An `else` block can be included to specify
   code to run when the value is `nil`.
-  Often the same name is used for `unwrapped` and `someOptional`
-  to shadow the name in the scope of the block.
 
-  It is common to unwrap an optional held in a variable
-  into a variable with the same name.
+  It is common to unwrap an optional held in a variable (`someOptional` above)
+  into a variable with the same name (`unwrapped` above).
   The one on the left shadows the one on the right inside the block.
   For example, `if let result = result { ... }`
 
@@ -1904,37 +1910,36 @@ a variable or property with an optional type.
 
   This uses the nil-coalescing operator `??`
   to get either the unwrapped value or a default value.
-  The example above gets a value from `Dictionary` if it exist
-  or a default value otherwise.
+  The example above gets a value from `myDictionary` if it exist
+  or uses a default value.
 
 - guard
 
-  `guard let value = myOptional else { ... }
+  `guard let value = myOptional else { ... }`
 
   This uses a "guard" to
-  assign the value of the optional to a variable if it is not `nil`
+  assign the value of an optional to a variable if it is not `nil`
   or run the code in the `else` block if it is `nil`.
   In a sense this it the opposite of the `if let` syntax.
   It is typically used near the beginning of function bodies
-  to check the value of an argument an exit if it is unacceptable.
+  to check the value of an argument and exit if it is unacceptable.
   For this reason, the `else` block usually contains a `return` statement.
 
 - force unwrap
 
   `if myOptional != nil { let value = myOptional!; ... }`
 
-  This uses the `!` to "force unwrap" the optional.
-  If the `!` operator is applied to an optional set to `nil`
-  the program will crash with a fatal error.
-  Use this option only when the value should never be nil.
+  This uses the `!` operator to "force unwrap" an optional.
+  If the optional set to `nil`, the program will crash with a fatal error.
+  Use this option only when the value should never be `nil`.
 
 Here are more examples of working with optionals.
 
 ```swift
 var message: String? // optional type
 
-// Tests for a value AND unwraps into another variable if not nil.
-// It then executes a block of code depending on whether the value was nil.
+// Test for a value AND unwrap into another variable if not nil.
+// Executes a block of code depending on whether the value is nil.
 if let msg = message {
     print(msg) // doesn't print
 } else {
