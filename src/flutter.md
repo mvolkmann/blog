@@ -2584,14 +2584,18 @@ that do not have an `onPressed` argument value.
 
 | Widget                                                                                                                | Description                                                                                                                        |
 | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ActionChip-class.html", "ActionChip" %}                     | an oval containing a label and an optional avatar that responds to taps                                                            |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Autocomplete-class.html", "Autocomplete" %}                 | text input for selecting from a list of options where only options that match the entered text are displayed                       |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/BackButton-class.html", "BackButton" %}                     | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/Chip-class.html", "Chip" %}                                 | an oval containing a label, optional avatar, and optional delete icon                                                              |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/ChoiceChip-class.html", "ChoiceChip" %}                     | an oval containing a label and an optional avatar that exists in a set where only one can be selected                              |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/CloseButton-class.html", "CloseButton" %}                   | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html", "CalendarDatePicker" %}     | inline calendar date picker                                                                                                        |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/Checkbox-class.html", "Checkbox" %}                         | checkbox for toggling a `bool` value                                                                                               |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/DropdownButton-class.html", "DropdownButton" %}             | dropdown menu with `DropdownMenuItem` children similar to the HTML `select` element with `option` children                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/EditableText-class.html", "EditableText" %}                  | from the `TextField` docs, "EditableText ... is the raw text editing control at the heart of a TextField ... rarely used directly" |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/ElevatedButton-class.html", "ElevatedButton" %}             | button containing any widget with a background color whose elevation increases when pressed                                        |
+| {% aTargetBlank "https://api.flutter.dev/flutter/material/FilterChip-class.html", "FilterChip" %}                     | an oval containing a label, optional avatar, and a checkmark when selected                                                         |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/FloatingActionButton-class.html", "FloatingActionButton" %} | circular (typically) button "that hovers over other content to promote a primary action"                                           |
 | {% aTargetBlank "https://api.flutter.dev/flutter/widgets/Form-class.html", "Form" %}                                  | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
 | {% aTargetBlank "https://api.flutter.dev/flutter/material/IconButton-class.html", "IconButton" %}                     | button containing an `Icon`                                                                                                        |
@@ -2623,6 +2627,29 @@ OutlineButton -> OutlinedButton
 Basic usage of all of these widgets is demonstrated in the Flutter project at
 {% aTargetBlank "https://github.com/mvolkmann/flutter_input",
 "flutter_input" %}.
+
+#### Chips
+
+Flutter provides four kinds of "chip" widgets.
+All of them render an oval containing a label optionally preceded by an avatar.
+A {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ActionChip-class.html",
+"ActionChip" %} responds to taps.
+A {% aTargetBlank
+"https://api.flutter.dev/flutter/material/Chip-class.html", "Chip" %}
+can include a delete icon that deletes the chip when tapped.
+A {% aTargetBlank
+"https://api.flutter.dev/flutter/material/ChoiceChip-class.html",
+"ChoiceChip" %} exists in a set where only one can be selected.
+A {% aTargetBlank
+"https://api.flutter.dev/flutter/material/FilterChip-class.html",
+"FilterChip" %} | displays a checkmark when selected.
+
+The following code demonstrates using each kind of chip:
+
+```dart
+TODO: Add this.
+```
 
 #### ElevatedButton Widget
 
