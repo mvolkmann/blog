@@ -194,7 +194,7 @@ The parentheses are required even for functions that have no parameters.
 
 When the return type of a function cannot be inferred
 and no return type is specified, it defaults to the `Void` type
-which is an empty tuple (`()`).
+The `Void` type has a single value which is an empty tuple (`()`).
 
 To call a function, specify the function name
 followed by arguments in parentheses.
@@ -1270,7 +1270,7 @@ Swift provides several generic collection types.
 | `Array`      | indexed collection of values with the same type                                                   |
 | `Dictionary` | collection of key/value pairs where all keys have the same type and all values have the same type |
 | `Set`        | unordered collection of values with the same type and no duplicates                               |
-| tuple        | fixed-length, ordered collection of values that have type that can differ                         |
+| tuple        | fixed-length, ordered collection of values whose types can differ                                 |
 
 All of these types are defined as structs.
 
@@ -1279,8 +1279,8 @@ the elements in the collection can be modified.
 However, when a constant is initialized to a collection instance,
 the elements in the collection cannot be modified.
 
-A partial class hierarchy of the built-in collections,
-including the protocols to which they conform, is:
+The following is a partial class hierarchy of the built-in collections,
+including the protocols to which they conform:
 
 - `Sequence` protocol
   - `Collection` protocol
@@ -1311,8 +1311,6 @@ and accessed by an indexed subscript".
 The `MutableCollection` protocol defines operations that
 change the values of elements.
 Methods include `reverse`, `shuffle`, and `sort`.
-
-The `Void` type has a single value which is an empty tuple.
 
 When an instance is assigned to another variable or passed to a function,
 a copy-on-write version is created that shares the data with the original.
@@ -1358,7 +1356,7 @@ To change values at specific indexes:
 
 ```swift
 scores[0] = 4 // now [4, 5, 10, 3, 9]
-scores[2...3] = [1, 2] // inclusive range; now [4 5, 1, 2, 9]
+scores[2...3] = [1, 2] // inclusive range; now [4, 5, 1, 2, 9]
 ```
 
 To iterate over the elements in an `Array`, use a `for`/`in` loop.
@@ -1382,7 +1380,8 @@ for index in scores.indices {
 }
 ```
 
-To also access the index of each value, use the `enumerated` method.
+To access both the index and value of each element,
+use the `enumerated` method.
 
 ```swift
 for (index, score) in scores.enumerated() {
@@ -1407,18 +1406,18 @@ for (index, score) in scores.enumerated() {
 | `allSatisfy((Element) -> Bool) -> Bool`                   | determines if every element satisfies predicate; like JS `every`                           |
 | `append(Element)`                                         | adds new element at end                                                                    |
 | `append(contentsOf: S)`                                   | adds elements in `S` at end                                                                |
-| `compactMap<T>((Element) -> T) -> [T]`                    | returns Array of non-nil values returned by function                                       |
+| `compactMap<T>((Element) -> T) -> [T]`                    | returns `Array` of non-nil values returned by function                                     |
 | `contains(Element) -> Bool`                               | determines if an element is a member                                                       |
 | `contains(where: (Element) -> Bool) -> Bool`              | determines if some element satisfies predicate; like JS `some`                             |
 | `drop(while: (Element) -> Bool) -> ArraySlice<Element>`   | returns subsequence of elements after those at beginning that match predicate              |
 | `dropFirst(Int) -> ArraySlice<Element>`                   | returns subsequence of elements after first n                                              |
 | `dropLast(Int) -> ArraySlice<Element>`                    | returns subsequence of elements before last n                                              |
 | `enumerated(t) -> EnumeratedSequence`                     | returns subsequence of (n, x) pairs where n is an index and x is the element at that index |
-| `filter((Element) -> Bool) -> [Element]`                  | returns a new array containing a subset of the elements                                    |
+| `filter((Element) -> Bool) -> [Element]`                  | returns a new array containing a subset of the elements that match predicate               |
 | `first(where: (Element) -> Bool) -> Element?`             | returns first element that satisfies predicate                                             |
 | `firstIndex(of: Element) -> Int?`                         | returns index of first element matching given element                                      |
 | `firstIndex(where: (Element) -> Bool) -> Int?`            | returns index of first element that satisfies predicate                                    |
-| `flatMap<T>((Element) -> T) -> [T]`                       | like `map`, but concatenates results                                                       |
+| `flatMap<T>((Element) -> T) -> [T]`                       | like `map`, but concatenates results that are arrays                                       |
 | `forEach((Element) -> Void)`                              | passes each element to given function                                                      |
 | `last(where: (Element) -> Bool) -> Element?`              | returns last element that matches a predicate                                              |
 | `lastIndex(of: Element) -> Int?`                          | returns index of last element matching element                                             |
@@ -1431,20 +1430,20 @@ for (index, score) in scores.enumerated() {
 | `max((Element, Element) -> Bool) -> Element?`             | returns maximum element as determined by a comparator                                      |
 | `min() -> Element?`                                       | returns minimum element                                                                    |
 | `min((Element, Element) -> Bool) -> Element?`             | returns minimum element as determined by a comparator                                      |
-| `partition(by: (Element) -> Bool) -> Int`                 | reorders elements using a predicate so all false are before all true                       |
-| `popLast() -> Element?`                                   | removes last element and returns it; returns nil if empty                                  |
+| `partition(by: (Element) -> Bool) -> Int`                 | reorders elements using a predicate so all `false` are before all `true`                   |
+| `popLast() -> Element?`                                   | removes last element and returns it; returns `nil` if empty                                |
 | `prefix(Int) -> ArraySlice<Element>`                      | returns subsequence of first n elements                                                    |
 | `prefix(while: (Element) -> Bool) -> ArraySlice<Element>` | returns subsequence of first elements that match a predicate                               |
-| `randomElement()`                                         | a random element                                                                           |
+| `randomElement()`                                         | returns a random element                                                                   |
 | `reduce(Result, (Result, Element) -> Result) -> Result`   | takes an initial value and a function; returns result of combining elements                |
 | `remove(at: Int) -> Element`                              | removes element at given index and returns it                                              |
+| `removeAll(keepingCapacity: Bool)`                        | removes all elements, optionally retaining the capacity                                    |
+| `removeAll(where: (Element) -> Bool)`                     | removes all elements that match a predicate                                                |
 | `removeFirst() -> Element`                                | removes first element and returns it                                                       |
 | `removeFirst(Int)`                                        | removes given number of elements from beginning                                            |
 | `removeLast() -> Element`                                 | removes last element and returns it; crashes if empty                                      |
 | `removeLast(Int)`                                         | removes given number of elements from end                                                  |
 | `removeSubrange(Range<Int>)`                              | removes elements in range                                                                  |
-| `removeAll(keepingCapacity: Bool)`                        | removes all elements, optionally keeping the capacity                                      |
-| `removeAll(where: (Element) -> Bool)`                     | removes all elements that match a predicate                                                |
 | `replaceSubrange(Range<Int>, with: C)`                    | replaces elements in the range with elements in `C`                                        |
 | `reserveCapacity(Int)`                                    | reserves enough space for at least the given number of elements                            |
 | `reverse()`                                               | reverses the elements in place                                                             |
@@ -1455,8 +1454,8 @@ for (index, score) in scores.enumerated() {
 | `sort(by: (Element, Element) -> Bool)`                    | sorts elements in place using a given comparator                                           |
 | `sorted() -> [Element]`                                   | returns new array of elements in sorted order                                              |
 | `sorted(by: (Element, Element) -> Bool) -> [Element]`     | returns new array of elements in sorted using a given comparator                           |
-| `subscript(Int)`                                          | element at given index                                                                     |
-| `subscript(Range<Int>)`                                   | `ArraySlice` of elements in given range                                                    |
+| `subscript(Int)`                                          | returns element at given index                                                             |
+| `subscript(Range<Int>)`                                   | returns `ArraySlice` of elements in given range                                            |
 | `suffix(Int) -> ArraySlice<Element>`                      | returns subsequence of last n elements                                                     |
 | `suffix(while: (Element) -> Bool) -> ArraySlice<Element>` | returns subsequence of last elements that match a predicate                                |
 | `swapAt(Int, Int)`                                        | swaps elements at the given indexes                                                        |
