@@ -2524,7 +2524,8 @@ They do not begin with the `func` keyword.
 Those that initialize ALL of non-optional properties (no default value)
 are referred to as "designated initializers".
 Designated initializers for classes
-must also initialize all inherited properties.
+must also initialize all inherited properties,
+typically by calling a superclass `init` method.
 
 As seen earlier, structs provided a default initializer.
 Structs are not required to explicitly defining more.
@@ -2542,16 +2543,17 @@ it must indicate that it is overriding the one in the superclass
 by adding the `override` keyword before `init`.
 
 Just like with functions and other kinds of methods,
-using `_` for an argument label allows its value to be passed without a label.
+`init` methods can use `_` for argument labels
+to allow values to be passed without a label.
 
 "Convenience initializers" are `init` methods that invoke another
 designated or convenience initializer in the same struct or class.
 These must be labeled with the `convenience` keyword.
-Why doesn't Swift allow any `init` method to do this?
+TODO: Why doesn't Swift allow any `init` method to do this?
 Congratulations Swift for having what may be
 the longest keyword in any programming language!
 
-"Failable initializers" are `init?` methods that can return `nil`
+"Failable initializers" are methods named `init?` that can return `nil`
 to prevent an instance from being created
 if the supplied arguments are deemed invalid.
 An optional value is returned when an instance is created
@@ -2559,12 +2561,11 @@ using a failable initializer.
 As with any optional value, callers must
 test and unwrap the value in order to use it.
 
-Deinitializers are methods named `deinit`.
+Deinitializers are methods named `deinit` that are used to perform cleanup.
 They do not begin with the `func` keyword, have no parameters,
 and cannot be followed by a pair of parentheses.
 If a struct or class defines this method,
 it will be called when any instance is destroyed.
-It is used to perform cleanup.
 
 I have two issues with the method name `deinit`.
 First, "deinitialize" is not a word.
