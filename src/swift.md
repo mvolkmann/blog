@@ -157,7 +157,7 @@ To comment/uncomment the current line or selected lines, press cmd-/.
 | unary sign     | `+` (positive), `-` (negative)                       |
 | closed range   | `a...b` (inclusive upper), `a..<b` (exclusive upper) |
 | open range     | `a...`, `...b`, `..<b`                               |
-| nil-coalescing | a `??` b (value is a if not nil and b otherwise)     |
+| nil-coalescing | a `??` b (value is `a` if not nil and `b` otherwise) |
 | bit shift      | `<<`, `>>`, `&<<`, `&>>`                             |
 | bitwise        | `&` (and), `\|` (or), `^` (xor)                      |
 | types          | `is` (type check), `as`, `as?`, `as!` (type cast)    |
@@ -180,8 +180,9 @@ the result is truncated to an `Int`, not rounded.
 
 The nil coalescing operator in `a ?? b` is shorthand for `a != nil ? a! : b`.
 
-Swift supports optional chaining so chains of references to optional values
-(see the "Optionals" section later) do not have to check for nil values.
+Swift supports optional chaining with the `?.` operator
+so chains of references to optional values (see the "Optionals" section later)
+do not have to check for nil values.
 See the example in the Structs section.
 
 ## Functions
@@ -235,11 +236,11 @@ let quantity = 2
 let orderNumber = order(item: item, quantity: quantity)
 ```
 
-When an argument label is underscore,
-the function must be called with only a value for that parameter.
+When an argument label is underscore, it is a positional argument.
+The function must be called with only a value for that parameter.
 Otherwise calls must include the argument label.
 A function can have a mixture of parameters with argument labels
-and parameters with none (indicated by `_`).
+and positional parameters.
 
 ```swift
 func add(_ n1: Int, _ n2: Int) -> Int {
@@ -275,7 +276,7 @@ Doing so makes the corresponding argument optional.
 All parameters with default values must
 follow those that do not have a default value.
 
-Calls to a function must provided all the required arguments.
+Calls to a function must provide all the required arguments.
 Each argument is specified by the argument label, a colon, and a value.
 These must appear in the same orders as the corresponding parameters.
 The rationale for this is that it can make some calls more expressive,
@@ -300,7 +301,8 @@ let dailySugarPct = getDailyPercentage(of: sugar, in: frostedFlakes)
 Code hints provided by Xcode help developers know
 the argument labels and types that must be provided.
 
-A "variadic" parameter accepts multiple values of the same type.
+A "variadic" parameter accepts multiple values of the same type,
+indicated by following the type with three periods.
 The parameter value will be a constant array of values.
 
 ```swift
@@ -313,7 +315,7 @@ func displaySum(label: String, numbers: Int...) {
 Function names can be overloaded based on their parameter types.
 
 To return multiple values, return a tuple
-by returning a list of values inside parentheses.
+which is written as a list of values inside parentheses.
 
 ```swift
 func getAvgSum(_ numbers: [Float]) -> (Float, Float) {
@@ -333,13 +335,15 @@ let rgbDict: [String : RGB] = [
     "blue": (red: 0, green: 0, blue: 255)
 ]
 
+// The question mark at the end of the return type
+// indicates that the function might return nil.
 func getRgb(_ color: String) -> RGB? {
     return rgbDict[color]
 }
 
 print(getRgb("red")) // (red: 255, green: 0, blue: 0)
 print(getRgb("green")) // (red: 0, green: 255, blue: 0)
-print(getRgb("pink")) // nill
+print(getRgb("pink")) // nil
 ```
 
 By default, parameters cannot be modified in function bodies.
@@ -350,7 +354,7 @@ This only works if the value passed in is a variable (`var`)
 rather than a constant (`let`).
 This seems like a feature to avoid!
 
-The type of a function is describe by its parameter types and return type.
+The type of a function is described by its parameter types and return type.
 For example, the type of the `displaySum` function above is
 `(String, Int) -> Void`.
 The type of a function that takes no arguments and returns nothing
@@ -385,10 +389,10 @@ Otherwise they are global and can be called from anywhere.
 Nested functions can be returned by their enclosing function
 to allow them to be called from outside.
 
-Function currying creates a new version of an existing function that
-takes one fewer arguments and uses a fixed value for the omitted argument.
+Swift does not support function currying.
+This creates a new version of an existing function that
+takes one fewer argument and uses a fixed value for the omitted argument.
 JavaScript functions support this using the `bind` method.
-Swift does not support this.
 
 ## Closures
 
@@ -410,15 +414,15 @@ let printTime = {
     dateFormatter.dateFormat = "M/d/yyyy"
     print(dateFormatter.string(from: date))
 }
-printTime()
+printTime() // 3/8/2022
 
-// This function specifies all the types.
+// This function specifies all of its parmeter types and the return type.
 let product = {(a: Double, b: Double) -> Double in a * b}
-print(product(2, 3))
+print(product(2, 3)) // 6.0
 
 // This function omits the return type because it can be inferred.
-let product2 = {a: Double, b: Double in a * b}
-print(product2(2, 3))
+let product2 = {(a: Double, b: Double) in a * b}
+print(product2(2, 3)) // 6.0
 ```
 
 If the parameter types of a closure can be inferred from usage,
@@ -430,14 +434,15 @@ let numbers = [1, 3, 7]
 let doubled = numbers.map({$0 * 2}) // [2, 6, 14]
 ```
 
-If parameters to a closure are not used, they can be replaced by underscores.
+If parameters to a closure are not used,
+their names can be replaced by underscores.
 
 If a closure takes no arguments and just returns the value of an expression,
 it can be written as just the expression inside curly braces.
 For example, the closure `{ 7 }` takes no arguments and always returns 7.
 
 If the last parameters to a function or method are functions,
-they can be passed using using "trailing closures".
+they can be passed using "trailing closures".
 Typically this is only done for the last argument.
 For example, these are equivalent:
 
@@ -448,15 +453,12 @@ let total = prices.reduce(0) { result, price in result + price }
 let total = prices.reduce(0, {$0 + $1})
 ```
 
-If no other arguments are being passed to the function,
-the parentheses for its argument list can be omitted.
-
 Closures can be passed as arguments to other functions.
 If the receiving function has asynchronous behavior
 that invokes the closure after the function returns,
 the closure parameter must be declared to be `@escaping`.
-Why is this required?
-Are non-escaping closures handled in an optimized way
+TODO: Why is this required?
+TODO: Are non-escaping closures handled in an optimized way
 that discards their context after the function returns?
 
 ## Error Handling
@@ -480,6 +482,7 @@ To handle errors, use one of the following approaches:
 
   This is done by adding the `throws` keyword
   after the parameter list and before the return type.
+  It is not possible to indicate the kinds of errors that can be thrown.
   For example:
 
   ```swift
@@ -488,10 +491,7 @@ To handle errors, use one of the following approaches:
   }
   ```
 
-  Note that it is not required, or even possible,
-  to indicate the kinds of errors that can be thrown.
-
-- use a do/catch statement
+- use a `do`/`catch` statement
 
   The `do` statement supports having any number of associated `catch` blocks
   that each handle different kinds of errors.
@@ -528,19 +528,19 @@ To handle errors, use one of the following approaches:
 
   If an expression or statement technically can throw,
   but should never throw given the way it is being used,
-  one option is to precede it with `try!`.
+  it can be preceded with `try!`.
   This frees the code from needing the handle errors.
   If the code actually does throw,
   the program will terminate with a fatal error.
 
-A `defer` block contains code the execute
+A `defer` block contains code to execute
 before its containing block or function exits,
 regardless of whether an error was thrown.
-This is similar to "finally" blocks in other languages.
+This is similar to a "finally" block in other languages.
 The code in a `defer` block typically performs cleanup activities
 such as closing files or database connections.
 
-Here is an example of using the do/catch syntax.
+The following code demonstrates using the `do`/`catch` syntax:
 
 ```swift
 enum IntError: Error {
@@ -557,7 +557,8 @@ struct PositiveInteger {
         if (n < 0) { throw IntError.negative(n) }
         if (n == 0) { throw IntError.zero }
         if (n > max) { throw IntError.tooHigh(n, max: max) }
-        if (n == 7) { throw IntError.other } // for testing catch with no pattern
+        // This is used to test a catch with no pattern.
+        if (n == 7) { throw IntError.other }
         self.n = n
     }
 }
@@ -609,7 +610,7 @@ or complicated type definition that is used multiple times.
 For example, `typealias ToString = CustomStringConvertible`.
 
 The type of a closure can be assigned to a `typealias`.
-This is also useful for declaring the types of functions
+This is useful for declaring the types of functions
 that are passed as arguments to other functions.
 For example, the product function above can be written as follows:
 
@@ -656,9 +657,8 @@ do {
 }
 ```
 
-## Basic Types
+## Primitive Types
 
-These are types that other programming languages refer to as primitive types.
 In Swift, values of these types are objects with properties and methods.
 
 | Type          | Description                                                  |
@@ -676,14 +676,14 @@ In Swift, values of these types are objects with properties and methods.
 All of these types are defined as structs and are therefore immutable.
 
 Variables of these types cannot be set to `nil`
-unless a `?` follows the type to indicated that it is optional.
+unless a `?` follows the type to indicate that it is optional.
 See the "Optionals" section later.
 
-The `try` function returns the type of its argument as a `String`.
+The `type` function returns the type of its argument as a `String`.
 
 ```swift
 var c: Character = "x"
-print(type(of: c)) // Character
+print(type(of: c)) // "Character"
 ```
 
 ### Bool Type
@@ -692,9 +692,9 @@ The `Bool` type has two possible values, `true` and `false`.
 
 `Bool` instance properties include the following:
 
-| Property      | Description            |
-| ------------- | ---------------------- |
-| `description` | text "true" or "false" |
+| Property      | Description                |
+| ------------- | -------------------------- |
+| `description` | `String` "true" or "false" |
 
 `Bool` type methods include, but are not limited to the following:
 
@@ -717,11 +717,11 @@ But some are not shared by all of these types.
 
 Global numeric constants include:
 
-| Name     | Description             |
-| -------- | ----------------------- |
-| `M_E`    | Double value of e       |
-| `M_PI`   | Double value of pi      |
-| `M_PI_2` | Double value of half pi |
+| Name     | Description               |
+| -------- | ------------------------- |
+| `M_E`    | `Double` value of e       |
+| `M_PI`   | `Double` value of pi      |
+| `M_PI_2` | `Double` value of half pi |
 
 Number type properties include the following:
 
@@ -749,16 +749,16 @@ let r = Int.random(in: 0...10)
 
 Number instance methods include, but are not limited to the following:
 
-| Method                          | Description                                                 |
-| ------------------------------- | ----------------------------------------------------------- |
-| `isMultiple(of: Int) -> Bool    | determines if the Int receiver is a multiple of another Int |
-| `remainder(dividingBy: Double)` | returns remainder                                           |
-| `round()`                       | mutates value to rounded value                              |
-| `rounded() -> Double`           | returns rounded value                                       |
-| `signum() -> Int`               | returns -1, 0, or 1                                         |
-| `squareRoot()`                  | returns square root                                         |
+| Method                          | Description                                                     |
+| ------------------------------- | --------------------------------------------------------------- |
+| `isMultiple(of: Int) -> Bool`   | determines if the `Int` receiver is a multiple of another `Int` |
+| `remainder(dividingBy: Double)` | returns remainder                                               |
+| `round()`                       | mutates value to rounded value                                  |
+| `rounded() -> Double`           | returns rounded value                                           |
+| `signum() -> Int`               | returns -1, 0, or 1                                             |
+| `squareRoot()`                  | returns square root                                             |
 
-Many more math functions are defined in the "Foundation" framework.
+Many more math functions are defined in the `Foundation` framework.
 This "provides a base layer of functionality for apps and frameworks,
 including data storage and persistence, text processing,
 date and time calculations, sorting and filtering, and networking."
@@ -770,14 +770,14 @@ print(abs(3.7)) // gives absolute value which is 3.
 print(sin(45.0)) // 0.8509...
 ```
 
-Numeric foundation functions include:
+Numeric `Foundation` functions include:
 
 | Function              | Description                               |
 | --------------------- | ----------------------------------------- |
 | `abs(number)`         | returns absolute value                    |
 | `ceil(number)`        | returns ceiling value                     |
 | `floor(number)`       | returns floor value                       |
-| `round(number)`       | returns rounded value                     |
+| `rounded(number)`     | returns rounded value                     |
 | `sign(number)`        | returns -1, 0, or 1                       |
 | `trunc(number)`       | returns truncated value                   |
 | `pow(base, exponent)` | returns a number raised to a power        |
@@ -830,7 +830,7 @@ print("item \(item) costs \(price * (1 + taxRate))")
 A new string can be created by concatenating existing strings
 using the `+` operator.
 
-A string can be appended to an existing variable string
+A string can be appended to an existing string variable
 using the `+=` operator.
 
 To iterate over the characters in a `String`,
@@ -844,28 +844,7 @@ for c in name {
 }
 
 name.forEach({(c: Character) -> Void in print(c)})
-name.forEach({c in print(c)})
-```
-
-Indexes into strings have the type `String.Index` rather than `Int`.
-This makes many string operations more verbose that in other languages
-because obtaining a `String.Index` value requires a method call.
-
-For example, the following gets the 2nd and 3rd characters of a string.
-
-```swift
-let name = "Mark"
-let start = name.index(name.startIndex, offsetBy: 1)
-let end = name.index(start, offsetBy: 1)
-print(name[start...end]) // "ar"
-```
-
-Comparing strings in a case-insensitive way is quite verbose.
-
-```swift
-if s1.name?.caseInsensitiveCompare(s2) == .orderedSame {
-    print("s1 and s2 are the same when not considering case.")
-}
+name.forEach({c in print(c)}) // same as previous line
 ```
 
 `String` instance properties include the following:
@@ -904,6 +883,19 @@ if s1.name?.caseInsensitiveCompare(s2) == .orderedSame {
 | `suffix(Int) -> Substring`                   | returns last n characters                                      |
 | `uppercased() -> String`                     | returns uppercase version                                      |
 
+Indexes into strings have the type `String.Index` rather than `Int`.
+This makes many string operations more verbose than in other languages
+because obtaining a `String.Index` value requires a method call.
+
+For example, the following gets the 2nd and 3rd characters of a string.
+
+```swift
+let name = "Mark"
+let start = name.index(name.startIndex, offsetBy: 1)
+let end = name.index(start, offsetBy: 1)
+print(name[start...end]) // "ar"
+```
+
 Getting the character at a given index requires using the `index` method
 which makes if quite verbose.
 
@@ -922,6 +914,14 @@ extension String: BidirectionalCollection {
 print(name[2]) // "r"
 ```
 
+Comparing strings in a case-insensitive way is quite verbose.
+
+```swift
+if s1.name?.caseInsensitiveCompare(s2) == .orderedSame {
+    print("s1 and s2 are the same when not considering case.")
+}
+```
+
 Strings that contain numbers can be converted to numbers using casting
 which returns an optional.
 The following code demonstrates three approaches.
@@ -938,10 +938,12 @@ if let number = Int(i) {
     print(number * 2) // 6
 }
 
+// Using nil-coalescing
 print((Float(f) ?? 0) + 2) // 5.14
 
 let number = Double(d)
 if number != nil {
+    // Using force unwrap
     print(number! + 2) // 5.14159
 }
 ```
@@ -953,29 +955,29 @@ Literal `Character` values are delimited by double-quotes.
 
 `Character` instance properties include the following:
 
-| Property           | Description                                                 |
-| ------------------ | ----------------------------------------------------------- |
-| `asciiValue`       | the `UInt8` ASCII value, if it is an ASCII character        |
-| `description`      | textual representation                                      |
-| `hashValue`        | the `Int` hash value                                        |
-| `hexDigitValue`    | the `Int` hex value                                         |
-| `isASCII`          | `Bool` value                                                |
-| `isCased`          | `Bool` value indicating if it is changed by case conversion |
-| `isCurrencySymbol` | `Bool` value                                                |
-| `isHexDigit`       | `Bool` value                                                |
-| `isLetter`         | `Bool` value                                                |
-| `isLowercase`      | `Bool` value                                                |
-| `isMathSymbol`     | `Bool` value                                                |
-| `isNewline`        | `Bool` value                                                |
-| `isNumber`         | `Bool` value                                                |
-| `isPunctuation`    | `Bool` value                                                |
-| `isSymbol`         | `Bool` value                                                |
-| `isUppercase`      | `Bool` value                                                |
-| `isWhitespace`     | `Bool` value                                                |
-| `isWholeNumber`    | `Bool` value; What single-digit numbers are not whole?      |
-| `utf16`            | the UTF-16 encoding value                                   |
-| `utf8`             | the UTF-8 encoding value                                    |
-| `wholeNumberValue` | the `Int` value                                             |
+| Property           | Description                                                          |
+| ------------------ | -------------------------------------------------------------------- |
+| `asciiValue`       | `UInt8` ASCII value, if it is an ASCII character                     |
+| `description`      | textual representation                                               |
+| `hashValue`        | `Int` hash value                                                     |
+| `hexDigitValue`    | `Int` hex value                                                      |
+| `isASCII`          | `Bool` value                                                         |
+| `isCased`          | `Bool` value indicating if it is changed by case conversion          |
+| `isCurrencySymbol` | `Bool` value                                                         |
+| `isHexDigit`       | `Bool` value                                                         |
+| `isLetter`         | `Bool` value                                                         |
+| `isLowercase`      | `Bool` value                                                         |
+| `isMathSymbol`     | `Bool` value                                                         |
+| `isNewline`        | `Bool` value                                                         |
+| `isNumber`         | `Bool` value; true for Unicode characters that represent a fraction  |
+| `isPunctuation`    | `Bool` value                                                         |
+| `isSymbol`         | `Bool` value                                                         |
+| `isUppercase`      | `Bool` value                                                         |
+| `isWhitespace`     | `Bool` value                                                         |
+| `isWholeNumber`    | `Bool` value; false for Unicode characters that represent a fraction |
+| `utf16`            | UTF-16 encoding value                                                |
+| `utf8`             | UTF-8 encoding value                                                 |
+| `wholeNumberValue` | `Int` value                                                          |
 
 `Character` instance methods include, but are not limited to the following:
 
@@ -986,9 +988,13 @@ Literal `Character` values are delimited by double-quotes.
 
 ## Ranges
 
+The lower bound of a range is always inclusive,
+but the upper bound can be exclusive or inclusive.
 A literal `Range` including the numbers 2, 3, and 4
-can be defined with `2..<5` or `2...4`.
-This can be assigned to a variable.
+can be defined with `2..<5` (exclusive upper bound)
+or `2...4` (inclusive upper bound).
+
+A range can be assigned to a variable.
 
 ```swift
 let r = 2...4
@@ -1025,9 +1031,9 @@ it is copied rather than using a reference.
 When `case` values are provided,
 their type must be specified after the `enum` name.
 These values are accessed with the `rawValue` property.
-Why doesn't an enum name evaluate to its value like in other languages
+TODO: Why doesn't an enum name evaluate to its value like in other languages
 so `rawValue` would not be needed?
-Why isn't this property just named `value`?
+TODO: Why isn't this property just named `value`?
 
 If a type is provided after the `enum` name,
 any cases without specified values are given default values.
@@ -1076,10 +1082,10 @@ switch c1 {
 An enumeration `case` value can have associated data specified as a list.
 Each piece of associated data:
 
-- must specify their type
-- can have a name for documentation, but are identified by position when used
-- can have a default value which makes it optional to
-  specifying a value when creating an instance
+- must specify its type
+- can have a name for documentation, but is identified by position when used
+- can have a default value which makes it optional
+  to specify a value when creating an instance
 
 Typically a `switch` statement is used to evaluate `enum` instances
 and take different actions based on the `case`.
@@ -1096,6 +1102,8 @@ enum Activity {
     case sleep // no associated data
 }
 
+// CustomStringConvertible is a protocol implemented by types that can
+// be converted to a string using the computed property "description".
 struct Bike: CustomStringConvertible {
     var brand: String
     var model: String
@@ -1116,9 +1124,9 @@ func printActivity(_ activity: Activity) {
     case .swim(let g, let inP):
         print("swimming \(inP ? "in" : "out of") a pool \(g ? "with" : "without") goggles")
     case .bike(let bike):
-        print("riding a \(bike)")
+        print("riding a \(bike)") // uses description
     case .run(let shoes):
-        print("running in \(shoes) shoes")
+        print("running in \(shoes) shoes") // uses description
     case .sleep:
         print("sleeping")
     }
@@ -1152,9 +1160,9 @@ for color in Color.allCases {
 }
 ```
 
-Like structs and classes, enumerations can define
+Like structs and classes (described later), enumerations can define
 initializers, computed properties, and methods.
-Enumerations cannot have regular (non-computed), properties.
+Enumerations cannot have regular (non-computed) properties.
 The following `enum` defines a computed property and a method.
 
 ```swift
@@ -1244,6 +1252,10 @@ that conform to given protocols using the `where` keyword.
 For example:
 
 ```swift
+// The Equatable protocol requires a type
+// to impelment the == and != operators.
+// The Identifiable protocol requires a type
+// to have an "id" property that uniquely identifies an instance.
 struct Stack<Element> where Element: Equatable & Identifiable {
     ...
 }
