@@ -988,11 +988,32 @@ Literal `Character` values are delimited by double-quotes.
 
 ## Ranges
 
-The lower bound of a range is always inclusive,
-but the upper bound can be exclusive or inclusive.
-A literal `Range` including the numbers 2, 3, and 4
-can be defined with `2..<5` (exclusive upper bound)
-or `2...4` (inclusive upper bound).
+There are many uses of ranges including:
+
+- iterating over a range of values
+- checking whether a value is in a range
+- extracting a subset of data from a collection
+- modifying a subset of a collection
+
+Swift supports four kinds of ranges.
+
+- `Range`: `start..<end`
+
+  This is half-open, meaning that the end index is not included.
+  `CountableRange` is a typealias of this type.
+
+- `ClosedRange`: `start...end`
+  This is a closed, meaning that the end index is included.
+  `CountableClosedRange` is a typealias of this type.
+
+- `PartialRangeFrom`: `start...`
+
+  This is one-sided,
+  meaning that the end index is not specified.
+
+- `PartialRangeUpTo`: `..<end`
+  This is one-sided at the end,
+  meaning that the start index is not specified.
 
 A range can be assigned to a variable.
 
@@ -2587,7 +2608,7 @@ with a colon and a comma-separated list of protocol names.
 The same syntax can be used by a protocol
 to inherit the requirements of other protocols.
 
-A protocol define a type that can be used in many places
+A protocol defines a type that can be used in many places
 where concrete types can appear to state that any value
 whose concrete type conforms to the protocol is acceptable.
 This includes constant (`let`) types, variable (`var`) types,
@@ -2606,24 +2627,26 @@ cannot specify default parameter values.
 Default method implementations cannot be defined in a protocol,
 but they can be defined in an `extension` of the protocol.
 When this is done for a given method, types that
-conform to the protocol are not required to implement that method.
-They can however implement the method anyway
-to override the implementation specified in the extension.
+conform to the protocol are not required to implement the method.
+However, can implement the method to
+override the implementation specified in the extension.
 
 Examples of commonly used built-in protocols include `Animatable`,
 `Collection`, `Comparable`, `CustomStringConvertible`, `Equatable`, `Hashable`,
 `Identifiable`, `Numeric`, `ObservedObject`, `Sequence`, and `View`.
-Other built-in protocols you might encounter include
+Other built-in protocols that may be encountered include
 `App`, `Scene`, `Shape`, and `ViewModifier`.
 
 For many custom types Swift can provide a "synthesized implementation"
 of the `Comparable`, `Equatable`, and `Hashable` built-in protocols.
 All that is required is to state that a type conforms to the protocol
-and only have properties with types that also conform to the protocol.
+and only define properties with types that also conform to the protocol.
 
 Xcode can add stubs for a protocol to a type that claims to conform to it.
 Click the red circle to the left of the error message
 "Type does not conform to protocol" and then click the "Fix" button.
+
+The following code demonstrates defining and using a custom protocol.
 
 ```swift
 protocol Shape {
@@ -2662,8 +2685,9 @@ class Rectangle: Shape {
     }
 }
 
-// Any object that conforms to the Shape protocol can be passed.
-// Calling getArea on a shape demonstrates polymorphism because
+// Any object that conforms to the Shape protocol
+// can be passed to this function.
+// Calling getArea on a Shape demonstrates polymorphism because
 // what the call does is determined by the receiver type.
 func logShape(_ shape: Shape) {
     print("area = \(shape.getArea())")
@@ -2685,7 +2709,6 @@ protocol Demoable {
     var instanceSetOptional: Int { get }
     var instanceSetRequired: Int { get set }
 
-    // Implementations must have the "required" modifier before "init".
     init(a1 p1: Int, a2 p2: Int)
 
     func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int
@@ -2728,7 +2751,6 @@ struct Demo: Demoable {
         instanceSetRequired = instanceSetOptional + p1 + p2
         return instanceSetRequired
     }
-
 }
 
 var demo = Demo(a1: 7, a2: 8)
@@ -2786,7 +2808,7 @@ func doThis<T>(a p: T) where T: CustomStringConvertible & HasSize {
 }
 doThis(a: Drink(size: 1)) // Drink has size 1
 
-// Alternate way to implement the code above using a typealias.
+// Alternate way to implement the code above is to use a typealias.
 typealias MyType = CustomStringConvertible & HasSize
 func doThat(a p: MyType) {
     print(p)
@@ -2875,35 +2897,6 @@ and the second most commonly used is `internal` which is the default.
 Specifying `public private(set)` on a property means that
 the property can be accessed as if it were `public`,
 but can only be modified as if it were `private`.
-
-## Ranges
-
-Swift supports four kinds of ranges.
-
-- `Range`: `start..<end`
-
-  This is half-open, meaning that the end index is not included.
-  `CountableRange` is a typealias of this type.
-
-- `ClosedRange`: `start...end`
-  This is a closed, meaning that the end index is included.
-  `CountableClosedRange` is a typealias of this type.
-
-- `PartialRangeFrom`: `start...`
-
-  This is one-sided,
-  meaning that the end index is not specified.
-
-- `PartialRangeUpTo`: `..<end`
-  This is one-sided at the end,
-  meaning that the start index is not specified.
-
-There are many uses of ranges, including:
-
-- iterating over a range of values
-- checking whether a value is in a range
-- extracting a subset of data from a collection
-- modifying a subset of a collection
 
 ## Extensions
 
