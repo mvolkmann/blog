@@ -1965,15 +1965,13 @@ printMessage(message) // no output
 ## Control Structures
 
 Swift does not require parentheses around conditions in control structures.
-It does require the code to be executed to be
-in a block surrounded by curly braces.
+It does require the code to be executed to be in a block
+surrounded by curly braces, even if they only contain a single statement.
 
 ### Conditional Logic
 
 Conditional logic is implemented with the `if` statement
 that can optionally include `else if` and `else` parts.
-Curly braces are required around all code blocks,
-even if they only contain a single statement.
 
 ```swift
 if score1 == 21 && score2 <= 19 {
@@ -1986,7 +1984,7 @@ if score1 == 21 && score2 <= 19 {
 ```
 
 Conditions being tested must evaluate to a `Bool`.
-Other types are not coerced to a `Bool` value.
+Other types are not automatically coerced to a `Bool` value.
 For example, an `Int` with a value of 0 is not treated as `false`.
 
 Conditions can be specified by a comma-separated list of expressions
@@ -1994,6 +1992,7 @@ which must all evaluate to `true`.
 This is useful in `if let` and `guard let` statements.
 The advantage using commas has over using the `&&` operator
 is that `let` variables can be accessed in subsequent conditions.
+
 In the following example, assume that the `firstPlayer` method
 returns an optional `Player` object with a `score` property.
 
@@ -2010,12 +2009,12 @@ struct Game {
 let game = Game()
 
 // This gives the error "Cannot find 'player' in scope".
-// because the player variable is not available after &&.
+// because the player variable IS NOT available after &&.
 if let player = game.players.first && player.score == 0 {
     print("first player has no score")
 }
 
-// This works because the player variable is available after the comma.
+// This works because the player variable IS available after the comma.
 if let player = game.players.first, player.score == 0 {
     print("first player has no score")
 }
@@ -2042,8 +2041,8 @@ switch computeScore(player1) {
 ```
 
 If the `default` case is omitted, there must be a `case`
-that matches every possible value of the expression
-(i.e. it must be exhaustive).
+that matches every possible value of the expression,
+i.e. it must be exhaustive.
 When the `switch` expression is a `String`,
 it's not possible to have a `case` for every possible value
 and the `default` case is required.
@@ -2053,7 +2052,7 @@ or the `default` case must be included.
 
 ### Iteration
 
-To iterate over a range of integers, use a for-in loop with a range operator.
+To iterate over a range of integers, use a `for`-`in` loop with a range operator.
 See the "Ranges" section for more detail on these.
 
 If the current iteration value is not needed,
@@ -2066,12 +2065,12 @@ for frame in 1...10 {
 
 let times = 3
 for _ in 0..<times {
-    print("Hello") // prints for 0, 1, and 2 (3 times)
+    print("Hello") // prints 3 times
 }
 ```
 
 To iterate over all the elements of a sequence (such as an array),
-use a for-in loop.
+use a `for`-`in` loop.
 
 ```swift
 let names = ["Maisey", "Ramsay", "Oscar", "Comet"]
@@ -2088,7 +2087,8 @@ while condition {
 }
 ```
 
-For a bottom-tested loop that always runs at least once, use a `repeat` loop.
+For a bottom-tested loop that always runs at least once,
+use a `repeat`-`while` loop.
 
 ```swift
 repeat {
