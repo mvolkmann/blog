@@ -24,13 +24,13 @@ Key facts about Swift include the following:
   structs, classes, enums, protocols, functions, and generics
 - standout features include computed properties, closure syntax,
   trailing closures, key paths, and
-  a succinct way to refer to enum cases when their type is inferred
+  a succinct way to refer to enum cases when their type can be inferred
 - built on {% aTargetBlank "https://llvm.org", "LLVM" %}
   (Low Level Virtual Machine)
 - interoperates with {% aTargetBlank
   "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/",
   "Objective-C" %} code
-- supports closures, tuples, and generics
+- supports tuples
 - includes a {% aTargetBlank
   "https://developer.apple.com/documentation/swift/swift_standard_library",
   "Standard Library" %}
@@ -84,11 +84,11 @@ To experiment with Swift:
 - To run only the code up to and including a specific line,
   hover over the line and click the play button that appears.
 - Output from `print` calls appears in the console area at the bottom.
+- If the console area is not visible, drag up from the bottom to expose it.
 
 Xcode is slow at evaluating a playground.
 It can take several seconds after saving a change
-for it to identify syntax errors.
-It can also take several seconds to run the code.
+for it to identify syntax errors and run the code.
 
 Playgrounds treat files under “Sources” as separate, unnamed modules.
 To expose things defined in those files to the main playground code,
@@ -100,13 +100,16 @@ To develop an app:
 - Select File ... New ... Project... or press cmd-shift-n.
 - Select a target platform such as "iOS".
 - Select a template such as "App" and press "Next".
-- Enter a product name and press "Next".
-- Select the directory where it should be saved and press "Create".
+- Enter a product name, select a team,
+  enter an "Organization Identifier" (can be your email address),
+  and press "Next".
+- Select the directory where the project should be saved and press "Create".
 
 To open an existing app,
-select File ... TODO: FINISH THIS!
+select File ... Open Recent ... {project-path} or
+select File ... Open, navigate to the project directory, and click "Open".
 Another way to open an existing Xcode project
-is to double-click the `.xcodeproj` file that is created.
+is to double-click its `.xcodeproj` file.
 
 ## Using the Interpreter
 
@@ -114,7 +117,7 @@ To start the interpreter as a REPL (Read Eval Print Loop), enter `swift`.
 Then enter Swift statements to be evaluated.
 For example, enter `print(1 + 2)`.
 
-To run the interpreter on code in a file, enter `swift file-path`.
+To run the interpreter on code in a file, enter `swift {file-path}`.
 For example, create the file `greet.swift` containing `print("Hello, World!")`
 and enter `swift greet.swift` to run it.
 
