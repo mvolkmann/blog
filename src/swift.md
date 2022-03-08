@@ -2131,7 +2131,7 @@ No default memberwise initializer is provided for classes.
 
 An instance of a struct or class is created by
 calling the struct name as a function,
-passing arguments required by an initializer.
+and passing arguments required by an initializer.
 Note that unlike in many other languages,
 use a `new` keyword is not required.
 
@@ -2164,10 +2164,6 @@ These must be declared with `var` rather than `let`.
 A type must be specified and is followed by
 a code block with no equal sign preceding it.
 
-Computed properties are similar to "reactive declarations" in Svelte,
-but differ in that they only update when referenced
-and do not trigger UI updates.
-
 A computed property can optionally define a `set` function
 whose purpose is the change the values of properties used to
 compute the value so the result will be a given value.
@@ -2183,21 +2179,17 @@ struct Foo {
             n * 3
         }
         set {
-            if newValue < 10 { n = newValue }
+            n = newValue / 3 // truncates
         }
     }
 }
 
-var foo = Foo() // n begins set to 1
-print(foo.tripled) // 3
+var foo = Foo() // n is initially set to 1
+print(foo.tripled) // 1 * 3 = 3
 
-foo.tripled = 4 // changes n
-print(foo.doubled) // 8
-print(foo.tripled) // 12
-
-foo.tripled = 10 // doesn't change n
-print(foo.doubled) // 8
-print(foo.tripled) // 12
+foo.tripled = 9 // changes n to 3
+print(foo.doubled) // 3 * 2 = 6
+print(foo.tripled) // 3 * 3 = 9
 ```
 
 A lazy property is similar to a computed property,
@@ -2219,14 +2211,14 @@ import Foundation // needed to use functions like sin, cos, and atan
 struct Dog {
     var breed: String
     var name: String
-    var age = 0 // has a default value; type is inferred to be Int
+    var age = 0 // has default value; type inferred to be Int
 }
 
 //var dog = Dog(breed: "Whippet", name: "Comet") // uses default value for age
 var dog = Dog(breed: "Whippet", name: "Comet", age: 1)
 print("\(dog.name) is a \(dog.age) year old \(dog.breed)")
 
-var dog2 = dog
+var dog2 = dog // creates a copy
 dog.age = 2
 print(dog.age, dog2.age) // 2 1
 
@@ -2235,7 +2227,7 @@ struct Point {
     // This is a "type property".
     // Other languages refer to this as a "class property".
     // This is used to keep track of the largest y value
-    // ever assigned to any instances of a Point struct.
+    // ever assigned to any instance of a Point struct.
     static var maxY = -Double.greatestFiniteMagnitude
 
     // This is a basic property.
@@ -2254,7 +2246,7 @@ struct Point {
 
     // A "memberwise initializer" is automatically supplied.
     // Writing this yourself enables doing more
-    // than just assigning property values.
+    // than just assign property values.
     init(x: Double, y: Double) {
         // self. is only needed here because there is a
         // parameter name with the same name as the property being set.
@@ -2294,8 +2286,8 @@ struct Point {
         }
     }
 
-    // This is a lazy property.
-    // Its value is computed by a function only the first time it is referenced.
+    // This is a lazy property.  Its value is computed by
+    // a function only the first time it is referenced.
     lazy var initialDistance: Double = {
         print("computing lazy property")
         return (x*x + y*y).squareRoot()
@@ -2323,7 +2315,7 @@ print("initial distance =", pt.initialDistance) // 5
 pt.distanceFromOrigin = 10 // invokes computed property set function
 pt.log() // invokes instance method; (6, 8)
 print(pt.distanceFromOrigin2) // invokes computed property; 10
-print("initial distance =", pt.initialDistance) // 5
+print("initial distance =", pt.initialDistance) // uses previous value; 5
 
 pt.y = 2 // invokes a property observer
 
@@ -2340,6 +2332,7 @@ print(Point.maxY) // 9
 Swift supports optional chaining so chains of references to optional values
 do not have to check for nil values.
 The result is either an `Optional` value or `nil`.
+The following code demonstrates this.
 
 ```swift
 struct Address {
@@ -2476,8 +2469,8 @@ with the class name followed by a period.
 However, initializers and type methods do not require prefixing
 to refer to type properties and methods.
 
-To implement a class (subclass) that inherits
-the properties and methods of another class (superclass),
+To implement a subclass that inherits
+the properties and methods of a superclass,
 add a colon after the subclass name followed by the superclass name.
 
 Methods in a subclass that override methods in the superclass
@@ -2510,8 +2503,6 @@ class Programmer: Person {
         super.init(name: name)
     }
 
-    // The "override" keyword is required to
-    // override methods in the superclass.
     override func log() {
         let langs = languages.joined(separator: " & ")
         print("\(name) is a programmer that knows \(langs).")
