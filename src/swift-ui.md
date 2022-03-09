@@ -5852,3 +5852,23 @@ The steps to do this follow.
 1. Demonstrate apps on the iPhone.
 1. When finished, quit QuickTime Player without saving the recorded movie
    and eject the iPhone from Finder.
+
+## Questions
+
+- Why do `Picker` views appear to be disabled
+  unless they are wrapped in a `NavigationView` and a `Form`?
+
+- How can I change the default device used by new projects?
+  It defaults to "iPod touch (7th generation)".
+
+- With over 3000 icons in SF Symbols,
+  how can there be none related to sports or pets?
+  Perhaps Apple feels that emojis should be used for these.
+
+- Adoption of Swift and SwiftUI would be much higher if
+  there was a way to generate an Android app from a Swift app.
+
+- Why do SwiftUI `ViewBuilders` support `if` and `switch` statements,
+  but not `for` loops? We have to use the `ForEach` view instead.
+
+- I miss the CSS ability to define styling across all of my views.

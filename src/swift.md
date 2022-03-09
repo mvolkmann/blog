@@ -65,7 +65,7 @@ To install Swift on macOS, install Xcode from the macOS App Store.
 For other operating systems, download it from
 {% aTargetBlank "https://swift.org/download/", "Download Swift" %}.
 
-## Using Xcode
+## Getting Started With Xcode
 
 {% aTargetBlank "https://developer.apple.com/xcode/", "Xcode" %}
 is an IDE from Apple for creating apps for
@@ -111,6 +111,8 @@ select File ... Open, navigate to the project directory, and click "Open".
 Another way to open an existing Xcode project
 is to double-click its `.xcodeproj` file.
 
+For more on Xcode, see the "Xcode" section later.
+
 ## Using the Interpreter
 
 To start the interpreter as a REPL (Read Eval Print Loop), enter `swift`.
@@ -128,6 +130,21 @@ The most commonly used commands are described in the table below.
 | ------- | -------------------------------- |
 | `:exit` | exits the interpreter            |
 | `:help` | prints help on all REPL commands |
+
+## Packages
+
+The {% aTargetBlank "https://www.swift.org/package-manager/",
+"Swift Package Manager" %} is a
+"tool for managing the distribution of Swift code".
+It is similar to npm for JavaScript.
+Installing the Swift compiler also installs the Swift package manager.
+
+To install a package in Xcode:
+
+- select File ... Add Packages...
+- Enter the GitHub URL of a package in the search input in the upper-right.
+- Select the package
+- Click the "Add Package" button.
 
 ## Comments
 
@@ -597,7 +614,7 @@ do {
 A type alias assigns an alternate name to another type.
 By convention these names are CamelCase, beginning with an uppercase letter.
 
-One use is to provide additional documentation for basic types.
+One use is to provide additional documentation for primitive types.
 For example, the following documents the expected format of a `String`.
 
 ```swift
@@ -1760,11 +1777,11 @@ Values of `let` variables can also be inlined in the generated code.
 ## Type Checking and Casting
 
 Basic type names can be used as functions
-to cast another basic type to a given type.
+to cast another primitive type to a given type.
 The `Bool` and `Characters` types can be cast to and from a `String`,
 but no other types.
 
-The following code demonstrates the supported basic type casts.
+The following code demonstrates the supported primitive type casts.
 
 ```swift
 let b = true
@@ -2833,71 +2850,6 @@ In summary, when a type conforms to a protocol it can mean two things:
 1. The type may be required to implement some things.
 2. The type may be given implementations of some things through extensions.
 
-## `some` Keyword
-
-The `some` keyword proceeds the name of a protocol to specify that a type
-(called an "opaque type") will be some type that conforms to the protocol.
-In a way this is the opposite of using a generic type.
-Generic types allow calling code to specify the type that
-will be used by a function, struct, class, or enum.
-Opaque types allow a function, struct, class, or enum
-to select the type to be used.
-
-A common place whether the `some` keyword is used is in SwiftUI views.
-Their `body` property has the type `some View`.
-The value of this property is a function that returns
-any kind of object that conforms to the View protocol.
-
-## Implementing Operators
-
-Built-in operators can be implemented for custom types.
-For example, the following code defines a way to add two colors.
-
-```swift
-struct Color {
-    var red = 0
-    var green = 0
-    var blue = 0
-
-    static func +(c1: Color, c2: Color) -> Color {
-        let r = (c1.red + c2.red) % 256
-        let g = (c1.green + c2.green) % 256
-        let b = (c1.blue + c2.blue) % 256
-        return Color(red: r, green: g, blue: b)
-    }
-}
-
-let c1 = Color(red: 255, green: 0, blue: 0)
-let c2 = Color(red: 0, green: 0, blue: 255)
-let c3 = c1 + c2
-print(c3)
-```
-
-A similar approach can be used to implement an operator
-in an existing type using an `extension`.
-
-## Access Control
-
-Swift supports many keywords for controlling access
-to values like functions, structs, classes, and
-and the properties and methods of structs and classes.
-These keywords appear at the beginning of declarations for these kinds of values.
-
-The access control keywords include:
-
-- `open`: access from anywhere; only for classes and class members
-- `public`: same as `open` except cannot be subclasses or overridden
-- `internal`: access from any source in in the same module (default level)
-- `fileprivate`: access from code in the same source file
-- `private`: access within enclosing declaration (such as a struct or class)
-
-The most commonly used access control keyword is `private`
-and the second most commonly used is `internal` which is the default.
-
-Specifying `public private(set)` on a property means that
-the property can be accessed as if it were `public`,
-but can only be modified as if it were `private`.
-
 ## Extensions
 
 Extensions add functionality to existing types,
@@ -3037,7 +2989,15 @@ public extension String {
         return self[start...end]
     }
 }
+```
 
+The following code demonstrates using the methods
+added by the extension above.
+It uses the built-in {% aTargetBlank
+"https://developer.apple.com/documentation/swift/1541112-assert",
+"assert" %} function.
+
+```swift
 var text = "Mark"
 
 // Positive indexes
@@ -3077,6 +3037,71 @@ assert(text == "Meet")
 text[..<2] = "Goa"
 assert(text == "Goat")
 ```
+
+## `some` Keyword
+
+The `some` keyword proceeds the name of a protocol to specify that a type
+(called an "opaque type") will be some type that conforms to the protocol.
+In a way this is the opposite of using a generic type.
+Generic types allow calling code to specify the type that
+will be used by a function, struct, class, or enum.
+Opaque types allow a function, struct, class, or enum
+to select the type to be used.
+
+A common place whether the `some` keyword is used is in SwiftUI views.
+Their `body` property has the type `some View`.
+The value of this property is a function that returns
+any kind of object that conforms to the View protocol.
+
+## Implementing Operators
+
+Built-in operators can be implemented for custom types.
+For example, the following code defines a way to add two colors.
+
+```swift
+struct Color {
+    var red = 0
+    var green = 0
+    var blue = 0
+
+    static func +(c1: Color, c2: Color) -> Color {
+        let r = (c1.red + c2.red) % 256
+        let g = (c1.green + c2.green) % 256
+        let b = (c1.blue + c2.blue) % 256
+        return Color(red: r, green: g, blue: b)
+    }
+}
+
+let c1 = Color(red: 255, green: 0, blue: 0)
+let c2 = Color(red: 0, green: 0, blue: 255)
+let c3 = c1 + c2
+print(c3)
+```
+
+A similar approach can be used to implement an operator
+in an existing type using an `extension`.
+
+## Access Control
+
+Swift supports many keywords for controlling access
+to values like functions, structs, classes, and
+and the properties and methods of structs and classes.
+These keywords appear at the beginning of declarations for these kinds of values.
+
+The access control keywords include:
+
+- `open`: access from anywhere; only for classes and class members
+- `public`: same as `open` except cannot be subclasses or overridden
+- `internal`: access from any source in in the same module (default level)
+- `fileprivate`: access from code in the same source file
+- `private`: access within enclosing declaration (such as a struct or class)
+
+The most commonly used access control keyword is `private`
+and the second most commonly used is `internal` which is the default.
+
+Specifying `public private(set)` on a property means that
+the property can be accessed as if it were `public`,
+but can only be modified as if it were `private`.
 
 ## JSON
 
@@ -3126,7 +3151,6 @@ if let json = String(data: encoded, encoding: .utf8) {
     // The data method returns an optional.
     if let data = json.data(using: .utf8) {
         // Decode the JSON into a Demo objet.
-        // Is Demo.self a constructor?
         let demo2: Demo? = try? decoder.decode(Demo.self, from: data)
         if (demo2 != nil) { print("Demo object =", demo2!) }
     }
@@ -3155,9 +3179,10 @@ var filePath = dirUrl.appendingPathComponent("demo.txt")
 // Write to the file.
 let text = "Hello, World!"
 do {
-    // Setting atomically to true means that it will write to an auxillary file
-    // first and then rename that file to the target file to guarantee that
-    // the file won't be partially written if the app crashes while writing.
+    // Setting atomically to true means that it will
+    // write to an auxillary file first and then
+    // rename that file to the target file to guarantee that the file
+    // won't be partially written if the app crashes while writing.
     try text.write(to: filePath, atomically: true, encoding: .utf8)
     print("wrote file")
 } catch {
@@ -3177,30 +3202,15 @@ do {
 }
 ```
 
-## Packages
-
-The {% aTargetBlank "https://www.swift.org/package-manager/",
-"Swift Package Manager" %} is a
-"tool for managing the distribution of Swift code".
-It is similar to npm for JavaScript.
-Installing the Swift compiler also installs the Swift package manager.
-
-To install a package in Xcode:
-
-- select File ... Add Packages...
-- Enter the GitHub URL of a package in the search input in the upper-right.
-- Select the package
-- Click the "Add Package" button.
-
 ## Threads
 
-Swift applications can run code on multiple threads.
+Swift applications can run code in multiple threads.
 All code that updates UI state and renders the UI should run on the main thread.
 
 To view the thread usage of an app running in Xcode,
 click the spray can icon at the top of the Navigator.
 This displays the "Debug Navigator".
-Click the "CPU" tab to the CPU usage on each of the active threads.
+Click the "CPU" tab to see the CPU usage on each of the active threads.
 
 To run code on a new thread:
 
@@ -3227,9 +3237,9 @@ Dispatch.main.async { some-code }
 the code from which it is referenced is running on the main thread.
 
 `Thread.current` holds a reference to the current thread object.
-These have `name` (ex. "main) and `number` (ex. 1) properties.
+These have `name` (ex. "main") and `number` (ex. 1) properties.
 
-To run code on the main thread after some number of seconds:
+To run code on the main thread after some number of seconds (ex. 2):
 
 ```swift
 DispatchQueue.main.asyncAfter(deadline: .now() + 2) { some-code }
@@ -3243,19 +3253,19 @@ DispatchQueue.global(qos: .qosName).asyncAfter(deadline: .now() + 2) {
 }
 ```
 
-TODO: Finish this section!
+TODO: Add more detail?
 
 ## HTTP
 
-Sending HTTP requests and processing HTTP responses is fairly tedious.
+Sending HTTP requests and processing HTTP responses in Swift is fairly tedious.
 Using the new `async` and `await` keywords
 and creating some utility functions makes this easier.
 
 The following example demonstrates sending
 HTTP DELETE, GET, POST, and PUT requests.
 
-Utility functions for sending HTTP requests
-are defined in `HttpUtil.swift` which follows.
+Utility functions for sending HTTP requests below
+are defined in the file `HttpUtil.swift`.
 
 ```swift
 import Foundation
@@ -3355,10 +3365,10 @@ struct HttpUtil {
 }
 ```
 
-A ViewModel that uses the utility functions above
+A SwiftUI `ViewModel` that uses the utility functions above
 is defined in `ViewModel.swift` which follows.
 In a real app, most of the code in the `init` method below
-would be in various views.
+would be placed in various views.
 One of the views could create an instance of `ViewModel`
 with `@StateObject var vm = ViewModel()`
 and `vm` could be passed to the other views that need it.
@@ -3476,7 +3486,7 @@ app.http.server.configuration.port = {new-port-number}
 
 The routes are defined in `Sources/App/Controllers/routes.swift`.
 The only provided routes are `GET /`which returns "It works!"
-and`GET /hello` which returns "Hello, world!".
+and `GET /hello` which returns "Hello, world!".
 
 After modifying the routes, stop the server
 by clicking the stop button (square) in the upper-right of Xcode
@@ -3606,9 +3616,12 @@ func routes(_ app: Application) throws {
 ## Instruments
 
 Instruments is an app included with Xcode for analyzing ...
+
 To launch the app, select Xcode ... Open Developer Tool ... Instruments.
+
 To analyze HTTP traffic, choose Network.
-TODO: Learn how to use this.
+
+TODO: Add more detail.
 
 ## Shell Commands
 
@@ -3650,6 +3663,14 @@ surround it with `#if targetEnvironment(simulator) ... #endif`.
 
 Xcode is the primary IDE for creating macOS, iOS, and watchOS applications.
 
+The main Xcode window is divided into three main areas.
+The left side is the Navigator.
+The right side is the Inspector.
+The center area is divided into three sections.
+The center-left section is the Code Editor.
+The center-right section is the Canvas which is used to test
+Previews of an app outside of the Simulator or a real device.
+
 To create a "Playground" for experimenting with code
 select File ... New ... Playground.
 
@@ -3662,13 +3683,20 @@ The templates are further divided into the categories
 "Application", "Framework & Library", and "Other".
 Usually "App" under the "Application" category is the desired template.
 
+To open a file within a project in an editor pane,
+select File ... Open Quickly... (or press cmd-shift-o),
+enter part of the file name (at least three characters),
+and click the file within the list that appears.
+This also works with any kind of name including
+types, variables, functions, structs, classes, properties, and methods.
+
 Xcode provides great intellisense and code completion.
 For function calls, press tab after entering each argument
 to advance to the next argument.
-If the last argument is a closure, press enter to
+If the last argument is a closure, press return to
 automatically turn it into a trailing closure.
 
-To choose light or dark mode, select from the dropdown at
+To choose between light and dark mode, select from the dropdown at
 Xcode ... Preferences ... General ... Appearance.
 
 To choose a different theme, select Xcode ... Preferences ... Themes.
@@ -3689,14 +3717,6 @@ a file in the Navigator is right clicked does not include this option.
 Occasionally it is useful to delete all generated files and start over.
 To do this, select Product ... Clean Build Folder or press cmd-shift-k.
 
-The main Xcode window is divided into three main areas.
-The left side is the Navigator.
-The right side is the Inspector.
-The center area is divided into three sections.
-The center-left section is the Code Editor.
-The center-right section is the Canvas which is used to test
-Previews of an app outside of the Simulator or a real device.
-
 To give the app a different name from the project:
 
 - In the Navigator, select the root project directory.
@@ -3705,8 +3725,7 @@ To give the app a different name from the project:
 - In the General tab under Identity, modify the "Display Name".
 - In the Navigator, rename the root directory
   and the directory below that with the same name.
-
-TODO: I'm not confident all of these steps are correct or required.
+- TODO: I'm not confident all of these steps are correct or required.
 
 #### Navigator
 
@@ -3728,20 +3747,29 @@ The Navigator has nine icon buttons at the top.
   To "quickly open" a file by typing part of its name,
   select File ... Open Quickly..." or press cmd-shift-o.
 
+  To sort the files displayed in a directory shown in the Navigator,
+  right-click the directory and select "Sort by Name" or "Sort by Type".
+
 - "x" in square icon (second)
 
   This displays a list of files that have been modified (M)
   or added (A).
+
   Click a file to see its contents.
+
   Click the button in the upper-right containing a right and left arrow
   to see diffs.
+
   Click the button to the right of that one containing horizontal lines
   to display a menu of options including
   "Inline Comparison" and "Side by Side Comparison" (preferred).
   Oddly, in "Side by Side" mode the current version of the file
   is shown on the left and the previous version is shown on the right.
+  See the "Source Control" section below for the steps to fix this.
+
   To discard all changes to a file, right-click the file name
   in the Navigator and select "Discard Changes in ...".
+
   Right-click a file to see a pop-up menu that includes the options
   "Commit" and "Discard Changes".
   Oddly it seems the only way to commit multiple files at once
@@ -3758,14 +3786,19 @@ The Navigator has nine icon buttons at the top.
 - magnifier glass icon (fourth)
 
   This is used to find and replace text in the project.
+
   Click "Find" to optionally switch to "Replace" mode.
+
   Click "Text" to optionally switch to searching for "References",
   "Definitions", "Regular Expression", or "Call Hierarchy".
+
   Click "Containing" to optionally switch to
   "Matching Word", "Starting With", or "Ending With".
+
   Click "In Project" to optionally limit the search
   to a specific project directory
   and select "New Scope..." for advanced options.
+
   Click "Ignoring Case" to optionally switch to "Matching Case".
 
 - warning icon (triangle icon containing exclamation point; fifth)
@@ -3781,7 +3814,7 @@ The Navigator has nine icon buttons at the top.
 
   This displays information about CPU, Memory, Disk, and Network usage.
   Click each of these to see detailed information.
-  For example, clicking CPU displays information about thread usage.
+  For example, clicking "CPU" displays information about thread usage.
 
 - tag icon (eighth)
 
@@ -3793,9 +3826,6 @@ The Navigator has nine icon buttons at the top.
   This displays historical information on recent project builds,
   including error messages.
   Click a build to see details.
-
-To sort the files displayed in a directory shown in the Navigator,
-right-click the directory and select "Sort by Name" or "Sort by Type".
 
 #### Editor
 
@@ -3817,7 +3847,8 @@ Command-click a name to display a context sensitive menu
 that can include the following options:
 
 - Jump to definition
-- Fold - collapses a code block to an ellipsis; double-click ellipsis to re-open
+- Fold - collapses a code block to an ellipsis;
+  double-click the ellipsis to re-open
 - Show Quick Help - same as option-click
 - Callers...
 - Edit All in Scope - doesn't seem to work with Vim keybindings
@@ -3847,7 +3878,7 @@ that is a rectangle containing a vertical line and a "+".
 The dropdown menu to the left of this button enables
 toggling the display of the Canvas area and much more.
 
-To set Xcode to check spelling while typing, select
+To configure Xcode to check spelling while typing, select
 Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
 
 #### Console
@@ -3955,7 +3986,7 @@ and {% aTargetBlank "https://github.com/apple/swift-format", "swift-format" %}.
 
 SwiftFormat can be run as a command-line tool or an Xcode extension
 
-To install for command-line usage, enter `brew install swiftformat`.
+To install SwiftFormat for command-line usage, enter `brew install swiftformat`.
 To format a `.swift` file, enter `swiftformat file-name.swift`.
 To format all the `.swift` files in the current directory,
 enter `swiftformat *.swift`.
@@ -3966,7 +3997,7 @@ To install SwiftFormat as an Xcode extension:
 - open the Finder and navigate to the Applications directory
 - double-click the SwiftFormat app
 - follow the displayed instructions
-  (SwiftFormat app can also be used to customize the rules)
+- The SwiftFormat app can also be used to customize the rules.
 - restart Xcode
 - add a keyboard shortcut
   - select Xcode ... Preferences ... Key Bindings
@@ -3988,16 +4019,20 @@ The steps to configure this are described at {% aTargetBlank
 
 The "Source Control" menu supports many Git commands including
 Commit, Push, Pull, Fetch Changes, Stash Changes, and Discard All Changes.
+
 The keyboard shortcut for committing changes is cmd-option-c.
 A dialog will open that lists the modified files.
-Modified files are indicated the Navigator by adding an "M" after their name.
+Modified files are indicated in the Navigator by adding an "M" after their name.
 Added files have an "A" after their name.
+
 Select a file to see side-by-side diffs.
 By default the new version is displayed on the left.
-To switch this select Preferences ... Source Control ... Comparison View
+To switch this, select Preferences ... Source Control ... Comparison View
 ... Local Revision on Right Side.
+
 By default the checkbox for each file is checked.
 Uncheck any that should not be committed.
+
 To commit the checked files, click the "Commit Files" button.
 To also push the changes to a remote repository,
 check the "Push to remote" checkbox before pressing the "Commit Files" button.
@@ -4016,12 +4051,12 @@ While Xcode is generally fine, it does have a few issues.
 
   To enable this, select Editor ... Vim Mode.
 
-  However, the Vim support is very basic.
+  The Vim support is very basic.
   No colon commands are supported.
   This means changes cannot be saved with ":w"
   and find/replace cannot be performed with ":s/foo/bar".
   Pressing the "/" key invokes Xcode find,
-  but does not support regular expressions.
+  but it does not support regular expressions.
   It does not support repeating commands with the period key,
   defining macros, and other more advanced Vim features.
   For a list of supported Vim commands, see this {% aTargetBlank
@@ -4055,6 +4090,8 @@ Fastlane provides the ability to:
 - publish to app stores by pushing a button
 - automatically code sign iOS apps
 
+TODO: Add more detail. Does this only help after the first manual deployment?
+
 ## Apple Developer Program
 
 In order to submit apps to the App Store it is necessary
@@ -4065,7 +4102,7 @@ Benefits include:
 
 - access to AppStore Connect
 
-  This is used to summit and manage your apps on the App Store.
+  This is used to summit and manage apps on the App Store.
 
 - access to TestFlight
 
@@ -4098,7 +4135,7 @@ your opinions about JavaScript don't matter.
 Web development is primary done with JavaScript (or TypeScript)
 and you have to accept that.
 
-In a similar way, if you want to do iOS or Mac development,
+In a similar way, if you want to do native iOS or Mac development,
 your opinions about Swift don't matter.
 Most developers prefer it over Objective-C and there are no other choices.
 
@@ -4120,8 +4157,8 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Too many features in enumerations
 
-  They don't need to support initializers, computed properties,
-  methods, and recursive enumerations.
+  It's not clear that enumerations t need to support initializers,
+  computed properties, methods, and recursive enumerations.
 
 - Some names are way too long
 
@@ -4151,7 +4188,7 @@ the features of Swift that are annoying, at least in my opinion.
 - Lack of wait cursors
 
   When creating a new project, there is a long pause after each step
-  where there is no indication that work is happening in the background.
+  and there is no indication that work is happening in the background.
   This is surprising coming from Apple which
   has a reputation for building great UIs.
 
@@ -4168,19 +4205,19 @@ the features of Swift that are annoying, at least in my opinion.
   that are typically not helpful.
   Sometimes pressing the "Try Again" button results in a clean build.
   Other times it is necessary to close the project, reopen it,
-  and building again to resolve the mystery issues.
+  and build again to resolve the mystery issues.
 
-- Too many warnings about things developers cannot fix.
+- Too many warnings about things developers cannot fix
 
   Common warnings include
-  "[LayoutConstraints] Unable to simultaneously satisfy constraints."
+  "[LayoutConstraints] Unable to simultaneously satisfy constraints"
   and "Will attempt to recover by breaking constraint",
-  followed by stack traces.
+  followed by long stack traces.
   These make it difficult to find your own `print` output.
 
 - If a view attempts to render more than 10 sub-views,
-  an error message is output that doesn't explain that limit,
-  or worse, building the app just never finishes.
+  an error message is output that doesn't explain that limit
+  ... or worse, building the app just never finishes.
 
 ## Questions
 
@@ -4190,7 +4227,7 @@ the features of Swift that are annoying, at least in my opinion.
 - Why do `struct` methods that modify properties
   have to be marked with the `mutating` keyword,
   but `class` methods that modify properties
-  are not required to do do this and in fact cannot do it?
+  are not required to do do this, and in fact cannot do it?
 
 - The compiler knows whether a struct method modifies properties.
   It reports an error if a non-modifying method is marked as `mutating`.
@@ -4213,7 +4250,7 @@ the features of Swift that are annoying, at least in my opinion.
   in front of every expression that can throw.
 
 - Why doesn't the `Character` type conform to the
-  `Decodable` and `Encodable` protocols like the other basic types?
+  `Decodable` and `Encodable` protocols like the other primitive types?
 - Why is the type `Int` abbreviated from Integer and
   `Bool` is abbreviated from Boolean,
   but the `Character` type is not abbreviated to `Char`?
@@ -4225,15 +4262,13 @@ the features of Swift that are annoying, at least in my opinion.
   Is the only way to determine where something being used comes from
   to command-click and select "Jump to Definition..."?
 
-- Does Swift having anything like promises in JavaScript?
+- Does Swift having anything like promises in JavaScript
+  or futures in Dart?
 
 - I wish Swift functions supported a shorthand syntax for arguments
   when there is a variable with the same name.
   For example, instead of `area(width: width, height: height)`
   we could write `area(width:, height:)`.
-
-- How can I change the default device used by new projects?
-  It defaults to "iPod touch (7th generation)".
 
 - Why do protocols use a different syntax for type parameters
   that functions, structs, and classes?
@@ -4242,29 +4277,11 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Can the `set` part of a computed property reject a potential change?
 
-- Why do `Picker` views appear to be disabled
-  unless they are wrapped in a `NavigationView` and a `Form`?
-
 - How can I make all new Xcode projects default to iOS 15?
   Currently they default to iOS 14.
-
-- With over 3000 icons in SF Symbols,
-  how can there be none related to sports or pets?
-  Perhaps Apple feels that emojis should be used for these.
-
-- Adoption of Swift and SwiftUI would be much higher if
-  there was a way to generate an Android app from a Swift app.
-
-- Why do SwiftUI `ViewBuilders` support `if` and `switch` statements,
-  but not `for` loops? We have to use the `ForEach` view instead.
-
-- I kind of miss the CSS ability to define styling across all of my views.
 
 - Adding an editor pane in Xcode displays the currently selected file,
   but it also remains displayed in the original editor pane.
   I want it to only be in the new editor pane.
   It would be even better if a file could be dragged to the right edge
   to create a new editor pane like in VS Code.
-
-- Is there a fuzzy search in Xcode to quickly open a file?
-  This would be similar to cmd-p in VS Code.
