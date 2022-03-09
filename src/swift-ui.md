@@ -215,7 +215,7 @@ and how the described components map to SwiftUI views.
   - can have trailing buttons like "Edit" and "Done"
   - can have a tint color
   - can have an inline or large title
-  - can use a "segmented control" in place of title
+  - can use a "Segmented Control" in place of title
   - SwiftUI creates this with `NavigationView`
 
 - {% aTargetBlank
@@ -1180,6 +1180,10 @@ Group {
 This creates a logical grouping of other views
 with an optional `Label` at the top.
 
+<img alt="SwiftUI GroupBox" style="width: 40%"
+    src="/blog/assets/SwiftUI-GroupBox.png?v={{pkg.version}}"
+    title="SwiftUI GroupBox">
+
 ```swift
 GroupBox(
     label: Label("Wayne Gretzky",
@@ -1194,7 +1198,7 @@ GroupBox(
 
 ### `ControlGroup`
 
-This is usd to group related controls.
+This groups related controls.
 It is typically used with `Button` views.
 There are two built-in styles, `automatic` (default) and `navigation`.
 
@@ -1280,7 +1284,7 @@ of `ScrollViewReader`. See the example above.
 
 This displays a list of views in a single column.
 It also acts like `ForEach` for iterating over array elements.
-See more in the "List" section below.
+For more detail, see the "List" section below.
 
 ### `ForEach`
 
@@ -1364,7 +1368,9 @@ See the "Navigation" section later.
 ### `OutlineGroup`
 
 This displays a tree of data with disclosure angle brackets.
-See my SwiftUI-OutlineGroup project and the questions in it.
+See my {% aTargetBlank
+"https://github.com/mvolkmann/SwiftUI-OutlineGroup/blob/main/SwiftUI-OutlineGroup/ContentView.swift",
+"SwiftUI-OutlineGroup" %} project and the questions in it.
 
 ### `DisclosureGroup`
 
@@ -1405,10 +1411,10 @@ This creates a row of buttons at the bottom of the display
 that can be tapped to navigate to associated views.
 If there are more than five buttons, the first four will render followed by
 along with a "More" button.
-The "More" button can be tapped to go a view
+The "More" button can be tapped to go a view containing
 a tappable list of the remaining options.
 
-For the docs, "Tab views only support tab items of type Text, Image,
+From the docs, "Tab views only support tab items of type Text, Image,
 or an image followed by text. Passing any other type of view
 results in a visible but empty tab item."
 A good size for these images is 32x32.
@@ -1533,13 +1539,13 @@ struct ContentView: View {
 
 ### `HSplitView`
 
-This is a layout container that organized its children horizontally
+This is a layout container that organizes its children horizontally
 and allows users to resize the children by dragging dividers between them.
 It is only supported in macOS.
 
 ### `VSplitView`
 
-This is a layout container that organized its children vertically
+This is a layout container that organizes its children vertically
 and allows users to resize the children by dragging dividers between them.
 It is only supported in macOS.
 
@@ -1575,7 +1581,8 @@ The content of a `Button` can be specified in two ways,
 passing a `String` as the first argument or using the `label` argument
 which can be specified with a trailing closure.
 
-`Button` specify a function to call when pressed using the `action` argument
+A `Button` specifies a function to call when pressed
+using the `action` argument
 which can also be written as a trailing closure.
 
 By default buttons have no background color and the text is the accent color.
@@ -1645,7 +1652,7 @@ struct ContentView: View {
 
 ### `Color`
 
-This creates a rectangle view with a specific background color
+This creates a rectangular view with a specific background color
 that grows to fill all the space offered to it.
 For example, `Color.red` and `Color.clear` (transparent) are views.
 
@@ -1656,8 +1663,7 @@ For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
 
 This renders an image.
 Many image formats are supported including PNG, JPEG, and HEIC.
-Click `Assets.xcassets` in the Navigator to
-associate a name with each image to be used.
+To add images, click `Assets.xcassets` in the Navigator.
 Click the "+" in the lower-left to add an entry.
 Give the entry a name and drag images into the 1x, 2x, and 3x boxes.
 Pass the name to the `Image` view as an unlabelled argument.
@@ -1675,7 +1681,7 @@ apply the `aspectRatio` view modifier.
 This takes a `contentMode` argument which can
 have the values `.fill` and `.fit`.
 These are equivalent: `.aspectRatio(contentMode: .fill)` and `.scaledToFill()`.
-These are equivalent: `.aspectRatio(contentMode: .fit)` and `.scaledToFit()`.
+And these are equivalent: `.aspectRatio(contentMode: .fit)` and `.scaledToFit()`.
 
 To change an `Image` to have a size different from its default,
 apply the `frame` view modifier.
@@ -1706,23 +1712,23 @@ The following example renders the Swift logo.
 
 ```swift
 struct ContentView: View {
-  private let imageUrl =
-      "https://developer.apple.com/swift/images/swift-og.png"
-  private let size = 100.0
+    private let imageUrl =
+        "https://developer.apple.com/swift/images/swift-og.png"
+    private let size = 100.0
 
-  var body: some View {
-      VStack {
-          AsyncImage(
-              url: URL(string: imageUrl),
-              content: { image in
-                  image
-                      .resizable()
-                      .frame(width: size, height: size)
-              },
-              placeholder: { ProgressView() } // spinner
-          )
-      }
-  }
+    var body: some View {
+        VStack {
+            AsyncImage(
+                url: URL(string: imageUrl),
+                content: { image in
+                    image
+                        .resizable()
+                        .frame(width: size, height: size)
+                },
+                placeholder: { ProgressView() } // spinner
+            )
+        }
+    }
 }
 ```
 
@@ -1792,7 +1798,7 @@ TextField(text: $lastName, prompt: Text("Required")) {
 .padding()
 
 // Using a non-String value (Int)
-// This doesn't provided arrows to increment and decrement the value
+// This doesn't provide arrows to increment and decrement the value
 // and it doesn't prevent typing non-digit characters.
 TextField("Score", value: $score, format: .number)
     .padding()
@@ -1876,7 +1882,7 @@ Menu("My Menu") {
 ```
 
 The following example uses a `Menu` to
-select the color uses to fill a `Rectangle`.
+select the color used to fill a `Rectangle`.
 
 ```swift
 @State private var color = Color.red
@@ -1911,7 +1917,7 @@ and the text is white.
 
 The `Toggle` initializer takes a `String` to render
 (either before the switch or inside the button)
-and binding to a `Bool` value.
+and a binding to a `Bool` value.
 
 ```swift
 Toggle("Hungry", isOn: $hungry).toggleStyle(SwitchToggleStyle(tint: .red))
@@ -1929,6 +1935,10 @@ This renders a horizontal track with a thumb that
 slides between minimum and maximum values.
 The current value must have the type `Float`, not `Int`.
 Text and/or icons can be displayed at the leading and trailing ends.
+
+<img alt="SwiftUI Slider" style="width: 60%"
+    src="/blog/assets/SwiftUI-Slider.png?v={{pkg.version}}"
+    title="SwiftUI Slider">
 
 ```swift
 // No text or icons at ends.
@@ -1959,14 +1969,22 @@ a binding for the current value,
 an optional range the value must remain inside, and
 a closure to execute every time the `Stepper` changes the value.
 
+<img alt="SwiftUI Stepper" style="width: 60%"
+    src="/blog/assets/SwiftUI-Stepper.png?v={{pkg.version}}"
+    title="SwiftUI Stepper">
+
 ```swift
-Stepper(
-    "# of Dogs: \(dogCount)",
-    value: $dogCount,
-    in: 0...10
-) { v in
-    tooManyDogs = dogCount > 2
-}
+VStack {
+    Stepper(
+        "# of Dogs: \(dogCount)",
+        value: $dogCount,
+        in: 0...10
+    ) { v in
+        tooManyDogs = dogCount > 2
+    }
+
+    Text("Too Many Dogs? \(String(tooManyDogs))")
+}.padding()
 ```
 
 ### `Picker`
@@ -1989,13 +2007,13 @@ The values that can be passed to this include:
   clicking the `Picker` displays the options on a separate page.
 
   <figure>
-    <img alt="SwiftUI Picker" style="width: 60%"
+    <img alt="SwiftUI Picker"
       src="/blog/assets/SwiftUI-Picker1.png?v={{pkg.version}}"
       title="SwiftUI Picker automatic before clicking">
     <figcaption>automatic picker before clicking</figcaption>
   </figure>
   <figure>
-    <img alt="SwiftUI Picker" style="width: 60%"
+    <img alt="SwiftUI Picker"
       src="/blog/assets/SwiftUI-Picker2.png?v={{pkg.version}}"
       title="SwiftUI Picker automatic after clicking">
     <figcaption>automatic picker new page after clicking</figcaption>
@@ -2019,19 +2037,19 @@ The values that can be passed to this include:
   and it will scroll vertically if they do not all fit on the screen.
 
   <figure>
-    <img alt="SwiftUI Picker" style="width: 40%"
+    <img alt="SwiftUI Picker"
       src="/blog/assets/SwiftUI-Picker-menu1.png?v={{pkg.version}}"
       title="SwiftUI Picker menu before clicking">
     <figcaption>menu picker before clicking</figcaption>
   </figure>
   <figure>
-    <img alt="SwiftUI Picker" style="width: 40%"
+    <img alt="SwiftUI Picker"
       src="/blog/assets/SwiftUI-Picker-menu2.png?v={{pkg.version}}"
       title="SwiftUI Picker menu after clicking">
     <figcaption>menu picker after clicking</figcaption>
   </figure>
 
-- `.radioGroup - not available in iOS
+- `.radioGroup` - not available in iOS
 
 - `.segmented`
 
@@ -2042,7 +2060,7 @@ The values that can be passed to this include:
   but their text will be elided if it doesn't fit inside the buttons.
 
   <figure>
-    <img alt="SwiftUI Picker segmented" style="width: 40%"
+    <img alt="SwiftUI Picker segmented"
       src="/blog/assets/SwiftUI-Picker-segmented.png?v={{pkg.version}}"
       title="SwiftUI Picker segmented">
     <figcaption>segmented picker</figcaption>
@@ -2056,7 +2074,7 @@ The values that can be passed to this include:
   A height of 300 works well.
 
   <figure>
-    <img alt="SwiftUI Picker wheel" style="width: 40%"
+    <img alt="SwiftUI Picker wheel"
       src="/blog/assets/SwiftUI-Picker-wheel.png?v={{pkg.version}}"
       title="SwiftUI Picker wheel">
     <figcaption>wheel picker</figcaption>
@@ -2075,9 +2093,9 @@ This only applies to `automatic` and `wheel` pickers,
 not `menu` or `segmented` pickers.
 
 When the options are generated using `ForEach` iterating over an array,
-the selected value is described the `id` property values
+the selected value is described by the `id` property values
 of the array elements.
-This can be changed by specify a `tag` value for each option.
+This can be changed by specifying a `tag` value for each option.
 The type of the `tag` values must match the type of the `selection` argument.
 If these types differ, it will not be possible to select an option.
 
@@ -2139,25 +2157,25 @@ The options that can be passed to this include:
 - `.automatic` - This is the default and is the same as `.compact` in iOS.
 
 - `.compact` - This renders date in a button that can be tapped
-  to render the `.graphical` controls for changing the date.
+  to render the `.graphical` controls (see below) for changing the date.
 
   <figure>
-    <img alt="SwiftUI DatePicker compact style" style="width: 60%"
+    <img alt="SwiftUI DatePicker compact style"
       src="/blog/assets/SwiftUI-DatePicker-compact1.png?v={{pkg.version}}"
       title="SwiftUI DatePicker compact style">
     <figcaption>DatePicker compact style</figcaption>
   </figure>
   <figure>
-    <img alt="SwiftUI DatePicker compact style after tapping" style="width: 60%"
+    <img alt="SwiftUI DatePicker compact style after tapping"
       src="/blog/assets/SwiftUI-DatePicker-compact2.png?v={{pkg.version}}"
       title="SwiftUI DatePicker compact style after tapping">
     <figcaption>DatePicker compact style after tapping</figcaption>
   </figure>
   <figure>
-    <img alt="SwiftUI DatePicker compact style after tapping month-year" style="width: 60%"
+    <img alt="SwiftUI DatePicker compact style after tapping month-year"
       src="/blog/assets/SwiftUI-DatePicker-compact3.png?v={{pkg.version}}"
       title="SwiftUI DatePicker compact style after tapping month-year">
-    <figcaption>DatePicker compact style after tapping month-year</figcaption>
+    <figcaption>DatePicker compact style after tapping </figcaption>
   </figure>
 
 - `.field` - This not available in iOS.
@@ -2167,7 +2185,7 @@ The options that can be passed to this include:
   and selecting a day of the month.
 
   <figure>
-    <img alt="SwiftUI DatePicker graphical style" style="width: 60%"
+    <img alt="SwiftUI DatePicker graphical style"
       src="/blog/assets/SwiftUI-DatePicker-graphical.png?v={{pkg.version}}"
       title="SwiftUI DatePicker graphical style">
     <figcaption>DatePicker graphical style</figcaption>
@@ -2178,7 +2196,7 @@ The options that can be passed to this include:
 - `.wheel` - This provides separate wheel pickers for month, day, and year.
 
   <figure>
-    <img alt="SwiftUI DatePicker wheel style" style="width: 60%"
+    <img alt="SwiftUI DatePicker wheel style"
       src="/blog/assets/SwiftUI-DatePicker-wheel.png?v={{pkg.version}}"
       title="SwiftUI DatePicker wheel style">
     <figcaption>DatePicker wheel style</figcaption>
@@ -2188,6 +2206,19 @@ The options that can be passed to this include:
 
 This renders a color well for displaying a currently selected color
 and changing the color using the system color picker.
+
+<figure>
+  <img alt="SwiftUI ColorPicker before tap"
+    src="/blog/assets/SwiftUI-ColorPicker1.png?v={{pkg.version}}"
+    title="SwiftUI ColorPicker before tap">
+  <figcaption>ColorPicker before tap</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI ColorPicker after tap"
+    src="/blog/assets/SwiftUI-ColorPicker2.png?v={{pkg.version}}"
+    title="SwiftUI ColorPicker after tap">
+  <figcaption>ColorPicker after tap</figcaption>
+</figure>
 
 ```swift
 ColorPicker(
@@ -2222,7 +2253,7 @@ struct ContentView: View {
         Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
             progress += 0.01
             if (progress >= 1) {
-                timer.invalidate()
+                timer.invalidate() // stops Timer
                 progress = 0
             }
         }
@@ -2263,13 +2294,15 @@ TODO: What is this?
 
 TODO: What is this?
 
-Here is an example of using container and component views.
+## Combining Container and Component Views
+
+The following code demonstrtrates using both container and component views.
 Note how views can be defined in computed properties
 that are later referenced to render them.
 The type of these computed properties can be a specific container view type
-or the generic `some View`.
+or the generic type `some View`.
 Custom views can also be defined in a new struct that inherits from `View`
-Instances of these structs are created to render them.
+Instances of these structs can be created to render them.
 
 ```swift
 // This defines a custom View that is used below.
@@ -2283,7 +2316,7 @@ struct MyRow: View {
 }
 
 struct ContentView: View {
-    // Assigning a View to a computed property
+    // This assigna a View to a computed property.
     var row = HStack {
         Text("Four")
         Text("Five")
@@ -2296,10 +2329,10 @@ struct ContentView: View {
                 Text("Two")
                 Text("Three")
             }
-            // Referring to a variable to get a View
-            // and chaining View modifiers
+            // This refers to a variable to get a View
+            // and chains View modifiers onto it.
             row.padding().border(.red)
-            MyRow() // Creating a custom View instance
+            MyRow() // This creates a custom View instance.
         }
     }
 }
