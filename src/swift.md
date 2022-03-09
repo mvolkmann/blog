@@ -4263,7 +4263,9 @@ the features of Swift that are annoying, at least in my opinion.
   to command-click and select "Jump to Definition..."?
 
 - Does Swift having anything like promises in JavaScript
-  or futures in Dart?
+  or futures in Dart? See {% aTargetBlank
+  "https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
+  "Swift Concurrency" %}.
 
 - I wish Swift functions supported a shorthand syntax for arguments
   when there is a variable with the same name.
