@@ -24,8 +24,6 @@ By comparison SwiftUI ...
   "https://learnappmaking.com/scene-delegate-app-delegate-xcode-11-ios-13/",
   "here" %})
 
-## Resources
-
 ## Getting Started
 
 - open Xcode which includes Swift and SwiftUI
@@ -42,15 +40,14 @@ By comparison SwiftUI ...
 - select the directory where the project will be stored and click "Create"
 
 Press the black, right-pointing triangle near the top
-to build and run the starting version of the app
-in the simulator.
+to build and run the initial version of the app in the simulator.
 
 To change the device being simulated,
 click the device drop-down after the app name near the top
 and select the device type (such as "iPhone 12 mini").
 
 To change the target version of iOS,
-click the app name at the top of the Navigator
+click the app name at the top of the Navigator,
 click the "General" tab, and
 select an iOS version from the dropdown in the "Deployment info" section.
 
@@ -143,8 +140,7 @@ To switch to "Live Preview" mode so tap events are honored,
 click the button with a triangle inside a circle.
 This also enables scrolling by dragging
 which is not possible in the default mode.
-And one more thing clicking this does is to
-trigger the Preview to resume if it is paused
+Clicking this also triggers the Preview to resume if it is paused
 and rebuild the code.
 
 To rotate the display to landscape mode,
@@ -186,12 +182,12 @@ hover over it and click the "Delete" button that appears.
 ### Simulator
 
 To run the app in the Simulator, click the black triangle at the top.
-That builds the app, launches the Simulator (if not already running),
+This builds the app, launches the Simulator (if not already running),
 loads the app in the Simulator, and starts it.
-The app is not automatically updates when code changes are saved.
+The app is not automatically updated when code changes are saved.
 The triangle must be clicked again to repeat the whole build/load/start process.
 
-There are rendering issues with the "iPhone 12 mini" simulator,
+There are known rendering issues with the "iPhone 12 mini" simulator,
 so choose a different device for now.
 
 ## Apple Human Interface Guidelines (HIG)
@@ -215,23 +211,23 @@ and how the described components map to SwiftUI views.
 
   - appears at top of screen below status bar
   - enables navigation through hierarchical screens
-  - provides leading back button
-  - can have trailing buttons like Edit and Done
+  - provides a leading back button
+  - can have trailing buttons like "Edit" and "Done"
   - can have a tint color
   - can have an inline or large title
-  - can use a Segmented Control in place of title
+  - can use a "segmented control" in place of title
   - SwiftUI creates this with `NavigationView`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/search-bars/",
     "Search Bar" %}
 
-  - an text input for entering search text
+  - a text input for entering search text
   - has magnifier glass icon
   - can display in a Navigation Bar
   - can include clear and confirm buttons
   - SwiftUI creates this with the `searchable` view modifier
-    that is applied to some view that is inside a `NavigationView`.
+    can be applied to a view that is inside a `NavigationView`.
     See an example in the "Search" section.
 
 - {% aTargetBlank
@@ -251,7 +247,7 @@ and how the described components map to SwiftUI views.
 
   - appears at top of screen above Navigation Bar
   - the system provided Status Bar displays the time on the left and indicators
-    for cell strength, WiFi strength, and batter remaining on the right
+    for cell strength, WiFi strength, and battery remaining on the right
   - can style to light or dark mode and customize colors
   - should not replace with a custom status bar
   - can temporarily hide it, but should never permanently hide it
@@ -274,7 +270,7 @@ and how the described components map to SwiftUI views.
   - contains buttons that perform page-specific actions
   - appears at bottom of screen
   - SwiftUI creates this with the `toolbar` view modifier
-    and `ToolbarItemGroup` or `ToolbarItem` views
+    and `ToolbarItemGroup` or `ToolbarItem` views.
     See an example in the "Toolbars" section.
 
 ### Views
@@ -283,7 +279,7 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/",
     "Action Sheet" %}
 
-  - alert that presents two or more choices related to the current context
+  - an alert that presents two or more choices related to the current context
   - on small screens, slides in from bottom
   - on large screens, appears as a Popover
   - can use to request confirmation before a destructive operation
@@ -294,18 +290,18 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/activity-views/",
     "Activity View" %}
 
-  - set of activity buttons applicable in current context
+  - a set of activity buttons applicable in current context
     such as Copy, Add, or Find
   - also referred to as a "share sheet"
   - appears as a Sheet or Popover
-  - SwiftUI creates this with ???
+  - SwiftUI creates this with what?
     TODO: Is this supported in SwiftUI? Maybe UIKit is required.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/",
     "Alert" %}
 
-  - modal dialog with a title, optional message,
+  - a modal dialog with a title, optional message,
     one or more buttons, and optional input text fields
   - avoid having more than two buttons
   - minimize usage to important situations
@@ -317,20 +313,20 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/collections/",
     "Collection" %}
 
-  - manage an ordered set of content,
+  - manages an ordered set of content,
     like photos presented as a grid of thumbnails
   - tap an item to select
   - touch and hold an item to edit
   - swipe to scroll
-  - SwiftUI creates this with ???
+  - SwiftUI creates this with what?
     TODO: Is this supported in SwiftUI? Maybe UIKit is required.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/image-views/",
     "Image View" %}
 
-  - displays a single image or animated sequence
-  - can fill entire display
+  - displays a single image or an animated sequence
+  - can fill the entire display
   - SwiftUI creates this with `Image`
 
 - {% aTargetBlank
@@ -341,13 +337,13 @@ and how the described components map to SwiftUI views.
     using either scrolling or page curl effects
   - SwiftUI provides this in `TabView` when it has a
     `tabViewStyle` view modifier with a value of `.page`.
-    See an example in the "TabView" description later.
+    See an example in the `TabView` section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/popovers/",
     "Popover" %}
 
-  - modal or non-modal dialog displayed in response to
+  - a modal or non-modal dialog displayed in response to
     tapping a control or tapping in an area
   - typically renders a "tail" pointing to what triggered it
   - can contain many kinds of elements including
@@ -359,9 +355,9 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/scroll-views/",
     "Scroll View" %}
 
-  - scrolls content larger than visible area
+  - scrolls content larger than the visible area
   - displays transient scrolling indicators
-  - can operation in paging mode
+  - can operate in paging mode
   - can support zooming
   - SwiftUI creates this with `ScrollView`
 
@@ -369,10 +365,10 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/sheets/",
     "Sheet" %}
 
-  - a card that partially covers primary content
+  - a card that partially covers the primary content
   - used to perform a task related to current context
-  - top corners are rounded and can customize radius
-  - two available heights, large (default) and medium
+  - top corners are rounded and can customize the radius
+  - there are two available heights, large (default) and medium
   - modal by default
   - SwiftUI creates this with the `sheet` view modifier.
     See an example in the "Modal Dialogs" section.
@@ -385,7 +381,7 @@ and how the described components map to SwiftUI views.
     primary, supplementary, and content
   - selections in primary cause changes in supplementary
   - selections in supplementary cause changes in content
-  - highlight current selections
+  - highlights current selections
   - used in Mail app where primary is a list of mailboxes,
     supplementary is a list of messages in the selected mailbox,
     and content is the content of the selected email
@@ -397,17 +393,17 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/tables/",
     "Table" %}
 
-  - a scrolling, single-column or rows that are each divided into sections
+  - a scrolling, single-column of rows that are each divided into sections
   - can use for navigation in a Split View
   - three styles: plain, grouped, and inset grouped
   - not a data grid like in other UI frameworks
   - SwiftUI uses the `List` view in place of the UIKit `UITableView` view.
     `List` is easier to use.
-    It doesn't require specifying the number of rows
+    It doesn't require specifying the number of rows,
     and cells don't need to be configured.
     Instead a `List` is composed of rows that each
     know how to arrange and display their data.
-    See the "List" section below.
+    See the "List" section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/text-views/",
@@ -417,11 +413,11 @@ and how the described components map to SwiftUI views.
   - optional scrolling
   - can control alignment, font, and color
   - can be editable and if so can specify a keyboard type;
-    (see the {% aTargetBlank
+    see the {% aTargetBlank
     "https://developer.apple.com/documentation/uikit/uikeyboardtype",
-    "UIKeyboardType enum" %})
+    "UIKeyboardType enum" %}
   - SwiftUI creates this with a combination of `Text` and `AttributedString`.
-    See the "AttributedString" section.
+    See the `AttributedString` section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/web-views/",
@@ -449,8 +445,8 @@ and how the described components map to SwiftUI views.
     and filled (used for most likely action)
   - can include an SF Symbol icon
   - can have a role of normal, primary, cancel, or destructive
-  - can be a close button (x in circle) that closes the parent view
-  - can be an info button (i in circle) that displays
+  - can be a close button (x in a circle) that closes the parent view
+  - can be an info button (i in a circle) that displays
     information about the parent view
   - SwiftUI creates this with `Button`
 
@@ -477,10 +473,10 @@ and how the described components map to SwiftUI views.
 
   - a provided horizontal menu that is displayed when a long press
     occurs in a text field, text view, web view, or image view
-  - by default contains buttons for Cut, Copy, Paste, Select, Select All, Delete, Replace..., Loop Up, and Share...
+  - by default contains buttons for Cut, Copy, Paste, Select, Select All, Delete, Replace..., Look Up, and Share...
   - can disable any of the default buttons to remove them
   - SwiftUI provides this automatically when a long press occurs
-    in a `TextField` or `TextEditor`.
+    in a `TextField` or `TextEditor`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/labels/",
@@ -499,7 +495,7 @@ and how the described components map to SwiftUI views.
   - can customize images
   - SwiftUI provides this in `TabView` when it has a
     `tabViewStyle` view modifier with a value of `.page`.
-    See an example in the "TabView" description later.
+    See an example in the `TabView` section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/",
@@ -515,7 +511,7 @@ and how the described components map to SwiftUI views.
   - informs users that an activity is running in the background
   - can indicate how much longer it will run using a progress bar
   - "activity indicators" are for indeterminate activities
-  - SwiftUI creates this with `ProgressView`.
+  - SwiftUI creates this with `ProgressView`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/refresh-content-controls/",
@@ -524,13 +520,13 @@ and how the described components map to SwiftUI views.
   - becomes visible when a user pulls down on a view to request a content reload
   - usually used in a table view
   - SwiftUI creates this with the `refreshable` view modifier
-    which is often used on `List` views.
+    which is often used on `List` views
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/segmented-controls/",
     "Segmented Control" %}
 
-  - set of toggle buttons
+  - a set of toggle buttons
   - can use in place of web UI radio buttons
   - can use to select between different kinds of views
   - SwiftUI creates this with `Picker(...).pickerStyle(.segmented)`
@@ -570,12 +566,12 @@ and how the described components map to SwiftUI views.
   - usually has rounded corners
   - brings up on-screen keyboard when tapped
   - can contain placeholder text which is preferred over preceding with a label
-  - optionally includes a clear button (x in circle)
+  - optionally includes a clear button (x in a circle)
   - can mask inputs like passwords
   - can include images on leading and/or trailing sides
   - can specify a keyboard type defined by the {% aTargetBlank
     "https://developer.apple.com/documentation/uikit/uikeyboardtype",
-    "UIKeyboardType enum" %})
+    "UIKeyboardType enum" %}
   - SwiftUI creates this with `TextField`, `SecureField`,
     and `TextEditor` (multi-line)
 
@@ -651,7 +647,7 @@ which stands for "Core Graphics". These include:
 Every visible part of an app created with SwiftUI is a view.
 Views can render other views.
 
-Each view is a struct that implement the `View` protocol.
+Each view is a struct that implements the `View` protocol.
 This requires having a computed property named `body` with the type `Some View`.
 
 Most properties declared in a `View` struct should be `private`.
@@ -664,7 +660,7 @@ When this limit is exceeded, the rather unhelpful error
 The `Group` view can be used to work around this limitation
 since each `Group` only counts as one view instance.
 
-Views are used for components and layout.
+Views are used for both components and layout.
 Views that layout other views are often referred to as
 "container" or "combiner" views.
 
@@ -697,7 +693,7 @@ This essentially creates a constant pointer inside a view struct
 to non-constant data held outside the view struct.
 
 To initialize a state property based on data passed to an initializer,
-prefix the state name with an underscore and set it to a a `State` object.
+prefix the state name with an underscore and set it to a `State` object.
 
 The following example demonstrates using component state.
 
@@ -707,7 +703,7 @@ import SwiftUI
 struct Counter: View {
     @State private var count = 0
 
-    init() {}
+    init() {} // starts with default count value
 
     init(start: Int) {
         _count = State(initialValue: start)
@@ -735,7 +731,7 @@ struct ContentView: View {
 ## ViewBuilders
 
 Container views can be passed a special kind of closure
-as their last argument that is called a `ViewBuilder`.
+as their last argument called a `ViewBuilder`.
 This uses list-oriented syntax to describe a list of
 one to ten other views that are combined into a single view.
 Note that a `ForEach` view counts as a single view.
@@ -819,8 +815,7 @@ To use a custom color in code, enter `Color("some-name")`.
 
 ## Container Views
 
-Container views combine other views.
-They act as a container of other views
+Container views act as a container of other views
 and layout those views in a specific way.
 
 To hide a view but still take up the space that would be occupied
@@ -1142,6 +1137,7 @@ struct ContentView: View {
             .accentColor(.red)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    // The saveUser function is not shown here.
                     Button("Save", action: saveUser)
                 }
             }
@@ -1153,10 +1149,10 @@ struct ContentView: View {
 Common UI components that are not built into SwiftUI include:
 
 - checkbox: alternative is Toggle
-- image picker: must build or using a library
+- image picker: must build or use a library
 - multiple choice: alternative is `List`
-  inside `NavigationView` with `EditButton`
-- radio buttons: alternative is `Picker` (supported in macOS with
+  inside `NavigationView` with an `EditButton`
+- radio buttons: alternative is `Picker`, supported in macOS with
   `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
 - toggle buttons: alternative is `Picker`
 
