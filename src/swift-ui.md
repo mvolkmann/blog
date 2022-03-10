@@ -5210,6 +5210,8 @@ TODO: Watch this {% aTargetBlank
 
 ## Network Requests
 
+See the "HTTP" section in my blog page on Swift.
+
 TODO: Watch this {% aTargetBlank
 "https://www.youtube.com/watch?v=2NowSN4qJUY&t=729s", "video" %}.
 
@@ -5430,8 +5432,8 @@ If the "Use Core Data" option was checked,
 consider deleting the provided `Item` entity
 and any code that is specific to it.
 
-If the "Use Core Data" option was not checked, create a model file.
-Right-click in the Navigator and select "New File...".
+Create a model file by right-clicking in the Navigator
+and selecting "New File...".
 For the template, scroll down to "Core Data" and select "Data Model".
 For most projects only one of these files is needed
 and the default name of "Model.xcdatamodeld" is fine.
@@ -5439,7 +5441,7 @@ and the default name of "Model.xcdatamodeld" is fine.
 Entities are similar to tables in a relational database.
 Add entities to the model by clicking the "Add Entity" button at the bottom.
 This will create an empty entity named "Entity".
-Double-click the name to change it.
+Double-click the name and change it.
 These become the names of generated class definitions,
 so they should begin with an uppercase letter.
 It is recommended to give them names that end in "Entity"
@@ -5453,16 +5455,15 @@ TODO: Is this really desirable? What is the benefit?
 Add attributes to each entity by
 clicking the "+" at the bottom of the attribute list.
 Each attribute is given a default name of "attribute".
-Double-click the name to change it.
+Double-click the name and change it.
 Some names, such as "description" and "for", are not allowed.
-Select a type from a drop-down list of primitive types
-that includes "Data" for a byte buffer.
+Select a type from a drop-down list of primitive types.
+The type "Data" is for byte buffers.
 
 Optionally sort the attributes.
 They can be sorted on their name or type
 by clicking on the "Attribute" or "Type" column heading.
 
-Mark the optional attributes.
 By default each attribute is optional.
 For any that are required, select the attribute and
 uncheck the "Optional" checkbox in the inspector.
@@ -5478,8 +5479,7 @@ Each relationship specifies a
 Relationship name, Destination, Type, and Delete Rule.
 The "Type" in the Inspector can be "To One" or "To Many".
 
-Relationships have a "Delete Rule" in the Inspector
-that can be "Nullify", "Cascade", or "Deny".
+The "Delete Rule" in the Inspector can be "Nullify", "Cascade", or "Deny".
 
 "Nullify" means instances can be deleted
 without also deleting related entities.
@@ -5497,9 +5497,9 @@ an "owns" relationship "To Many" "DogEntity" and
 
 Optionally view the entities and their relationships as a graph.
 To switch between viewing entities and their relationships
-in "table" style or "graph" style,
+in "table" or "graph" style,
 click the buttons in the lower-right labelled "Editor Style".
-In the graph view it may be necessary to toggle the relationships
+In graph view it may be necessary to toggle the relationships
 in each entity by clicking the triangle to the left of "Relationships"
 in order to see all of them.
 
@@ -5517,8 +5517,8 @@ To do this:
 
 ### Entity Codegen
 
-When an entity is selected in the Core Data model editor, the Inspector
-displays its configuration options.
+When an entity is selected in the Core Data model editor,
+the Inspector displays its configuration options.
 One of these is "Codegen" that has a default value of "Class Definition".
 This means that Xcode will automatically generate a class definition
 for the entity.
@@ -5536,7 +5536,7 @@ There are two generated files for each entity.
 `{entity-name}+CoreDataClass.swift` defines the class
 and should not be modified.
 `{entity-name}+CoreDataProperties.swift` defines extensions to the class
-and can only be safely modified to add computed properties and methods.
+and can be safely modified to add computed properties and methods.
 
 Choosing a different value for the entity "Codegen" enables
 generating entity sources files that appear in the Navigator.
@@ -5548,14 +5548,14 @@ but not the `{entity-name}+CoreDataProperties.swift` files.
 TODO: Why does this also generate "Class" files?
 
 To request generation of source files for entities whose
-"Codegen" option is a value other than "Class Definition":
+"Codegen" option is set to a value other than "Class Definition":
 
 - Select Editor ... Create NSManagedObject Subclass...
 - Select a model and click "Next". Most projects only have one model.
 - Select the entities for which code should be generated and click "Next".
 - Select the project subdirectory where the source files should be written.
-  TODO: It seems this is ignored at the files are
-  TODO: always written to the top project directory.
+  TODO: It seems this is ignored and the files are
+  always written to the top project directory.
 - Click "Create".
 
 The generated "Class" files define a class for an entity
@@ -5563,11 +5563,12 @@ that inherits from `NSManagedObject`.
 These file should not be modified.
 
 The generated "Properties" files define extensions to the entity that
-include a `fetchRequest` method that fetches all the instances of the entity,
+include a `fetchRequest` method.
+This fetches all the instances of the entity,
 properties that correspond to the entity attributes,
 and methods for adding and removing other kinds of entities
 that have a relationship to this one.
-These file can be modified to add computed properties and methods.
+Theses file can be modified to add computed properties and methods.
 
 ### @FetchRequest vs. ViewModel
 
@@ -5578,7 +5579,7 @@ which abstracts the use of Core Data away from them.
 
 #### Using @FetchRequest
 
-TODO: Add this based on SwiftUI-GiftTrack code.
+TODO: Add this based on code in your SwiftUI-GiftTrack project.
 
 #### Using a ViewModel
 
@@ -5758,7 +5759,7 @@ TODO: How can all instances of a given entity type be deleted?
 
 ### Fetching Entities
 
-To fetching entities from an `NSManagedObjectContext`,
+To fetch entities from an `NSManagedObjectContext`,
 create an `NSFetchRequest` that identifies an entity type.
 Optionally specify how the fetched entity instances should be sorted.
 Also, optionally specify filtering to be applied
@@ -5777,7 +5778,7 @@ request.sortDescriptors = [
 ]
 
 // Filter so only entities with a name beginning with "T" are fetched.
-request.predicate = NSPredicate(format: "name == %@", "Tami")
+request.predicate = NSPredicate(format: "name beginswith %@", "T")
 
 do {
     people = try context.fetch(request)
@@ -5816,7 +5817,7 @@ To use StoreKit in an app:
    To find this, click the top entry in the Navigator, select the "General" tab,
    and note the value of Identity ... Bundle Identifier.
 1. Enter a price.
-1. Under "Localizations", double-click "English (U.S.)".
+1. Under "Localizations", double-click an option such as "English (U.S.)".
 1. Enter a "Display Name".
    This can be the same as the Reference Name entered above.
 1. Enter a "Description" of the purchasable item.
@@ -5913,8 +5914,9 @@ To use StoreKit in an app:
 
 ## App Demos
 
-One approach for demonstrating iOS apps to others is to use QuickTime.
-The steps to do this follow.
+One approach for demonstrating iOS apps to others
+using a real device instead of the Simulator is to use QuickTime.
+The steps to do this are:
 
 1. Attach an iPhone to a computer running macOS using a USB cable.
 1. Launch the QuickTime Player application.
@@ -5929,9 +5931,6 @@ The steps to do this follow.
 
 ## Questions
 
-- Why do `Picker` views appear to be disabled
-  unless they are wrapped in a `NavigationView` and a `Form`?
-
 - How can I change the default device used by new projects?
   It defaults to "iPod touch (7th generation)".
 
@@ -5945,4 +5944,9 @@ The steps to do this follow.
 - Why do SwiftUI `ViewBuilders` support `if` and `switch` statements,
   but not `for` loops? We have to use the `ForEach` view instead.
 
-- I miss the CSS ability to define styling across all of my views.
+- Why doesn't SwiftUI provide a way to specify default styling
+  that applies to all views in an app,
+  similar to CSS for web applications?
+
+- Why do `Picker` views appear to be disabled
+  unless they are wrapped in a `NavigationView` and a `Form`?
