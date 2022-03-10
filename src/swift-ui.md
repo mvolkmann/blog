@@ -1751,15 +1751,23 @@ with an optional `Label` at the top.
     title="SwiftUI GroupBox">
 
 ```swift
-GroupBox(
-    label: Label("Wayne Gretzky",
-                 systemImage: "sportscourt").font(.title)
-) {
-    ScrollView {
-        Text(text)
-    }.frame(maxWidth: .infinity, maxHeight: 130)
-    Toggle("Like", isOn: $like)
-}.padding()
+struct ContentView: View {
+    static let text = "Known as the Great One, Wayne Gretzky holds more NHL records than any other player in history."
+
+    @State private var like = true
+
+    var body: some View {
+        GroupBox(
+            label: Label("Wayne Gretzky",
+                         systemImage: "sportscourt").font(.title)
+        ) {
+            ScrollView {
+                Text(ContentView.text)
+            }.frame(maxWidth: .infinity, maxHeight: 130)
+            Toggle("Like", isOn: $like)
+        }.padding()
+    }
+}
 ```
 
 ### `ControlGroup`
@@ -3454,7 +3462,10 @@ SwiftUI provides a search input containing a magnifier glass icon
 that is rendered by the `searchable` view modifier.
 This is typically applied to a `List` view.
 
-<img alt="SwiftUI Search" style="width: 40%"
+The following code demonstrates filtering a `List`
+using the `searchable` view modifier.
+
+<img alt="SwiftUI Search" style="width: 50%"
   src="/blog/assets/SwiftUI-Search.png?v={{pkg.version}}"
   title="SwiftUI Search">
 
@@ -3479,6 +3490,7 @@ struct ContentView: View {
             people.filter { $0.lowercased().contains(lower) }
     }
 
+    // This is rebuilt when the value of query changes.
     var body: some View {
         NavigationView {
             List(matchingPeople, id: \.self) { person in
@@ -3500,8 +3512,9 @@ struct ContentView: View {
 
 ## Lists
 
-This displays a list of views in a single column.
+A `List` view displays a list of other views in a single column.
 It also can act like `ForEach` for iterating over array elements.
+
 If a `List` contains more items that can be rendered at once,
 it automatically provides scrolling.
 There is no need to wrap it in a `ScrollView`.
@@ -3543,9 +3556,24 @@ using the `refreshable` view modifier.
 Dragging the list down displays an activity indicator
 and then adds new dogs to the list.
 
-<img alt="SwiftUI List with Selection" style="width: 40%"
-  src="/blog/assets/SwiftUI-List-Selection.png?v={{pkg.version}}"
-  title="SwiftUI List with Selection">
+<figure>
+  <img alt="SwiftUI List with Selection Before" style="width: 40%"
+    src="/blog/assets/SwiftUI-List-Selection1.png?v={{pkg.version}}"
+    title="SwiftUI List with Selection Befor">
+  <figcaption>Before item selection</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI List with Selection During" style="width: 40%"
+    src="/blog/assets/SwiftUI-List-Selection2.png?v={{pkg.version}}"
+    title="SwiftUI List with Selection During">
+  <figcaption>During item selection</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI List with Selection After" style="width: 40%"
+    src="/blog/assets/SwiftUI-List-Selection3.png?v={{pkg.version}}"
+    title="SwiftUI List with Selection After">
+  <figcaption>After selecting items</figcaption>
+</figure>
 
 ```swift
 struct ContentView: View {
@@ -3564,14 +3592,13 @@ struct ContentView: View {
     ]
 
     //@State private var selection: UUID? // single selection
-    @State private var selectedIds = Set<UUID>()
-
+    @State private var selectedIds = Set<UUID>() // multiple selection
 
     func loadMore() async {
         // This calls a REST service that returns nothing after 2 seconds.
         let url = URL(string: "https://httpbin.org/delay/2")!
         let request = URLRequest(url: url)
-        // Not using return value.
+        // Not using the return value for this example.
         let _ = try! await URLSession.shared.data(for: request)
 
         dogs.append(Dog(name: "Clarice", breed: "Whippet"))
@@ -3604,7 +3631,8 @@ The following example is similar to the previous one,
 but allows rows to be deleted and moved.
 It seems that it isn't possible for a `List` to support
 row selection and also support deleting and moving rows.
-TODO: See https://developer.apple.com/forums/thread/693743
+See this {% aTargetBlank "https://developer.apple.com/forums/thread/693743",
+"forum thread" %}.
 
 <img alt="SwiftUI List with Delete and Move" style="width: 40%"
   src="/blog/assets/SwiftUI-List-Delete-Move.png?v={{pkg.version}}"
@@ -3663,7 +3691,8 @@ struct ContentView: View {
             VStack {
                 List {
                     // The onDelete and onMove methods exists on ForEach,
-                    // but not on List because a List can include static rows.
+                    // but not on List because
+                    // a List can include static rows.
                     ForEach(dogs, id: \.name) { dog in
                         DogRow(dog: dog)
                     }
