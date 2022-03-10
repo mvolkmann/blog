@@ -688,14 +688,29 @@ This does not affect `Toggle` views which required using the view modifier
 
 ### `@State`
 
-Views can hold state using the `@State` property modifier.
+All views are immutable structs.
+Typically they get data from a model object.
+They can also have associated mutable data
+by applying the `@State` property wrapper to a property.
 This essentially creates a constant pointer inside a view struct
 to non-constant data held outside the view struct.
+Changes to these properties cause the view body to be rebuilt.
 
-To initialize a state property based on data passed to an initializer,
-prefix the state name with an underscore and set it to a `State` object.
+Properties declared with `@State` usually include the `private`
+access control keyword because the data is only used by that view.
 
-The following example demonstrates using component state.
+Any state held in a view using the `@State` property modifier
+should be transient state such as data related to styling.
+It is recommended to use `@State` sparingly
+and prefer holding data in model objects instead.
+
+To initialize a state property based on
+data passed to an initializer (`init` method),
+prefix the state name with an underscore
+and set it to a `State` object.
+
+The following example demonstrates using component state
+to implement a counter view:
 
 ```swift
 import SwiftUI
@@ -710,6 +725,7 @@ struct Counter: View {
     }
 
     var body: some View {
+        // HStack is a container view that arranges it children horizontally.
         HStack {
             Button("-") { count -= 1 }
             Text("\(count)")
@@ -720,9 +736,91 @@ struct Counter: View {
 
 struct ContentView: View {
     var body: some View {
+        // VStack is a container view that arranges it children vertically.
         VStack {
             Counter()
             Counter(start: 7)
+        }
+    }
+}
+```
+
+The following example holds the status of a stoplight
+in a state propery named "status".
+Note the use of `$` before the name to
+get a two-way binding with a `TextField`.
+
+<img alt="SwiftUI Stoplight" style="width: 50%"
+  src="/blog/assets/SwiftUI-Stoplight.png?v={{pkg.version}}"
+  title="SwiftUI Stoplight">
+
+```swift
+import SwiftUI
+
+struct CircleButton: View {
+    var color: Color
+    var selected: Bool = false
+    var action: () -> Void // a function
+
+    var body: some View {
+        Button(action: action, label: {
+            ZStack {
+                Circle().fill(color)
+                // Conditional logic can be implemented with an "if" statement,
+                // but iteration cannot be implemented with a "for-in" loop.
+                // A "ForEach" View must be used instead.
+                if selected {
+                    Circle().strokeBorder(Color.black, lineWidth: 5)
+                }
+            }
+        })
+    }
+}
+
+struct Light: Identifiable {
+    let id: String
+    let color: Color
+}
+
+struct MyTextField: View {
+    var label: String
+    var text: Binding<String>
+
+    var body: some View {
+        TextField(label, text: text)
+            .autocapitalization(.none)
+            .padding()
+            .textFieldStyle(.roundedBorder)
+    }
+}
+
+// This file must define a struct named "ContentView".
+struct ContentView: View {
+    @State private var status = "stop"
+
+    let lights: [Light] = [
+        Light(id: "stop", color: .red),
+        Light(id: "yield", color: .yellow),
+        Light(id: "go", color: .green)
+    ]
+
+    var body: some View {
+        VStack {
+            // When iterating over elements that do not conform to
+            // the `Identifiable` protocol, add the "id:" argument
+            // whose value is a key path that specifies
+            // how to find something unique in the element.
+            ForEach(lights) { light in
+                CircleButton(
+                    color: light.color,
+                    selected: status == light.id
+                ) {
+                    status = light.id
+                }
+            }
+            // $ in front of status is needed for a two-way binding.
+            // $ in front of status is needed for a two-way binding.
+            MyTextField(label: "status", text: $status)
         }
     }
 }
@@ -762,6 +860,412 @@ A `ViewBuilder` is a kind of result builder.
 For more information on these, see the {% aTargetBlank
 "https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
 "Result builders proposal" %}.
+
+## View Modifiers
+
+View modifiers are methods that can be called on a view.
+They don't modify the view. They create a new view
+that is like the receiver, but modified in a specific way.
+Calls to view modifiers can be chained since each returns a new view.
+
+The following example uses the `foregroundColor`, `padding`, and `stroke`
+view modifiers.
+
+```swift
+Text("Hello, World!").foregroundColor(.red)
+RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).padding(.all)
+```
+
+Some view modifiers can be applied to any view.
+Others are specific to certain kinds of views.
+For example, the `stroke` view modifier can only be applied
+to views that implement the `Shape` protocol.
+
+The official documentation for the supplied view modifiers can be found at
+{% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
+"View Modifiers" %}.
+
+Commonly used view modifiers include:
+
+- `background(alignment, content)`
+- `border(ShapeStyle, width: CGFloat = 1)`
+- `cornerRadius(CGFloat, antialiased: Bool)`
+- `disabled(Bool)` disables any form input such as a `Button`
+- `edgesIgnoringSafeArea(Edge.Set)`
+- `font(Font?)`
+- `foregroundColor(Color?)`
+- `foregroundStyle(ShapeStyle)`
+- `frame(width: CGFloat?, height: CGFloat?, alignment: Alignment)`
+- `frame(maxWidth: CGFloat?, maxHeight: CGFloat?, alignment: Alignment)`
+- `border(ShapeStyle, width: CGFloat = 1)`
+- `lineLimit(Int?)`
+- `multilineTextAlignment(TextAlignment)`
+- `offset(x: CGFloat, y: CGFloat)`
+- `opacity(Double)`
+- `overlay(ShapeStyle)`
+- `padding(CGFloat)`
+
+The following view modifiers change the styling
+of specific kinds of predefined views.
+
+- `buttonStyle(ButtonStyle)`
+- `controlGroupStyle(ControlGroupStyle)`
+- `datePickerStyle(DatePickerStyle)`
+- `gaugeStyle(GaugeStyle)`
+- `indexViewStyle(IndexViewStyle)`
+- `labelStyle(LabelStyle)`
+- `menuStyle(MenuStyle)`
+- `navigationViewStyle(NavigationViewStyle)`
+- `pickerStyle(PickerStyle)`
+- `progressViewStyle(ProgressViewStyle)`
+- `presentedWindowStyle(WindowStyle)`
+- `presentedWindowToolbarStyle(WindowToolbarStyle)`
+- `tableStyle(TableStyle)`
+- `tabViewStyle(TabViewStyle)`
+- `textFieldStyle(TextFieldStyle)`
+- `toggleStyle(ToggleStyle)`
+
+  This can be passed a side which can be a single value or an array
+  of `.all` (default),
+  `.leading`, `.trailing`, `.horizontal` (same as `.leading` and `.trailing`),
+  `.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
+  It can also be passed a `CGFloat` value for the length.
+  The length defaults to `nil` and means to use the system default of 20.
+
+- `position(x: CGFloat, y: CGFloat)`
+- `rotationEffect(Angle, anchor: UnitPoint)`
+- `scaledToFill()`
+- `scaledToFit()`
+- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
+- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
+- `textCase(Text.Case?)`
+- `tint(Color?)`
+- `transformEffect(CGAffineTransform)`
+- `transition(AnyTransition)`
+- `truncationMode(Text.TruncationMode)`
+- `zIndex(Double)`
+
+The following example adds a shadow to a `Text` view:
+
+<img alt="SwiftUI Shadow" style="width: 60%"
+  src="/blog/assets/SwiftUI-Shadow.png?v={{pkg.version}}"
+  title="SwiftUI Shadow">
+
+```swift
+Text("Shadow Demo")
+    .padding()
+    .background(.yellow)
+    .shadow(color: .gray, radius: 3, x: 3, y: 3)
+```
+
+The event handling methods like `onTapGesture` area also view modifiers.
+
+Several view modifiers take a `ShapeStyle` object.
+Types that conform to the `ShapeStyle` protocol include
+`AngularGradient`, `Color`, `ForegroundStyle`, `ImagePaint`,
+`LinearGradient`, and `RadialGradient`.
+
+Many view modifiers are defined in extensions to the `View` protocol.
+This makes them applicable to any kind of view.
+
+When view modifiers are added to container views,
+they are passed down to all descendant views.
+In the following example, all the `Text` views are red
+because the `VStack` that contains them has
+a view modifier that sets the foreground color.
+
+```swift
+VStack {
+    Text("Alpha")
+    HStack {
+        Text("Beta")
+        Text("Gamma")
+    }
+}.foregroundColor(.red)
+```
+
+In a way, view modifiers are like Svelte components that contain slots.
+They take a view to be "modified" and return a new view
+that typically contains the view passed to them.
+
+Custom view modifiers can be created by defining
+a struct that implements the `ViewModifier` protocol.
+This requires implementing `body` method that takes
+content which is a `View` to be modified,
+and returns a new `View`.
+The code in the `body` method is similar to that in any custom view.
+
+The following code defines a custom `ViewModifier`
+that allows the view on which it is called to be collapsed.
+It wraps that view in a `VStack` containing two `HStack`s.
+The second `HStack` includes a `Button` containing a chevron icon.
+Clicking the `Button` toggles whether the first `HStack` is rendered.
+It also rotates the chevron icon using animation
+which is covered later in the "Animation" section.
+
+<img alt="SwiftUI ViewModifier" style="width: 70%"
+  src="/blog/assets/SwiftUI-ViewModifier.png?v={{pkg.version}}"
+  title="SwiftUI ViewModifier">
+
+```swift
+import SwiftUI
+
+struct Collapsable: ViewModifier {
+    private static let diameter = CGFloat(120)
+    private static var radius: CGFloat { diameter / 2 }
+
+    var bgColor: Color = .gray
+    var duration: Double = 0.5 // in seconds
+
+    @State private var showContent = true
+
+    var halfCircle: some View {
+        Circle()
+            .trim(from: 0, to: 0.5)
+            .fill(bgColor)
+            .frame(
+                width: Collapsable.diameter,
+                height: Collapsable.radius
+            )
+            .offset(x: 0, y: -16)
+    }
+
+    private func toggle() {
+        withAnimation(.easeInOut(duration: duration)) {
+            showContent.toggle()
+        }
+    }
+
+    func body(content: Content) -> some View {
+        VStack {
+            if showContent {
+                HStack {
+                    Spacer()
+                    content
+                    Spacer()
+                }
+                .background(bgColor)
+
+                //TODO: Can you scale the height of the HStack
+                //TODO: instead of using the default fade transition?
+                //.transition(.scale)
+                //.scaleEffect(showContent ? 1 : 0)
+                //.animation(.easeInOut(duration: 1))
+            }
+            HStack {
+                Spacer()
+                ZStack {
+                    Image(systemName: "chevron.down")
+                        .resizable()
+                        .frame(
+                            width: Collapsable.radius / 3,
+                            height: Collapsable.radius / 4
+                        )
+                        .onTapGesture { toggle() }
+                        .rotationEffect( // Angle type is inferred
+                            .degrees(showContent ? 180 : 0)
+                        )
+                        .offset(x: 0, y: -2)
+                        .background(halfCircle)
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+extension View {
+    func collapsable(
+        bgColor: Color = .black,
+        duration: Double = 0.5) -> some View {
+        modifier(Collapsable(bgColor: bgColor, duration: duration))
+    }
+}
+```
+
+The following code demonstrates using the custom `ViewModifier` defined above.
+
+```swift
+VStack {
+    Text("First line of content")
+    Text("Second line of content")
+}
+.padding()
+
+// This way of applying a view modifier doesn't use the View extension.
+//.modifier(Collapsable(bgColor: ContentView.bgColor))
+
+// This way uses the View extension and is preferred.
+.collapsable(bgColor: ContentView.bgColor)
+```
+
+## Property Wrappers
+
+Swift property wrappers attach logic to the properties
+of classes, structs, and enums.
+
+SwiftUI supports the following property wrappers:
+
+### @Binding
+
+This property wrapper is applied to properties of views
+that are passed bindings from parent views.
+It allows the child view to read and write a value that
+is owned by the parent view and passed in as an argument.
+
+```swift
+struct ChildView: View {
+    @Binding var n: Int
+
+    var body: some View {
+        VStack {
+            Text("ChildView: n = \(n)")
+            Button("Increment") {
+                n += 1
+            }
+            .buttonStyle(.bordered)
+        }
+    }
+}
+
+struct ParentView: View {
+    @State var number = 0
+
+    var body: some View {
+        VStack {
+            Text("ParentView: number = \(number)")
+            ChildView(n: $number) // $ is required to pass a binding
+        }
+    }
+}
+```
+
+### @Environment
+
+This is used to access environment values.
+See the "Environment" section.
+
+### @EnvironmentObject
+
+This is used to share access to an `ObservableObject` between views.
+See the "Environment" section.
+
+### @State
+
+This property wrapper was described earlierx
+near the end of the section on "Views".
+It enables view structs to maintain state.
+This is intended for storing basic values with types like
+`Bool`, `Int`, `Double`, and `String`.
+
+When the value of a normal struct property
+(declared without a property wrapper)
+is modified, a new instance of the struct is created.
+This happens because structs are value types.
+
+We don't want a new instance to be created for structs that represent views.
+Applying the `@State` property wrapper to a struct property
+prevents this because SwiftUI manages the value outside of the struct.
+When the value of this kind of property is changed,
+the view `body` is recomputed.
+
+This is somewhat like the `useState` hook in React.
+
+An `@State` property can also store more complex types.
+However if it is used to store a class instance (a reference type)
+and a property of the class is modified,
+the associated view `body` will not be recomputed.
+A new class instance must be created to trigger an update.
+
+Note that using a `struct` instead of a `class`
+in the scenario described above does work.
+The reason is that changing the value of a struct property
+creates a new instance of the struct.
+However, this may not be desirable because
+it copies every property of the struct.
+
+### @StateObject
+
+This creates an instance of an `ObservableObject`
+which is an object that publishes changes to its properties
+that are annotated with the `@Published` property wrapper.
+When the values of these properties change,
+the associated view `body` will be recomputed.
+
+Applying the `@StateObject` property wrapper
+to a view property that holds a class instance
+allows the view `body` to be recomputed when the
+value of any published property of the class instance is modified.
+The following example demonstrates this.
+
+```swift
+class MyState: ObservableObject {
+    @Published var score: Int = 0
+    // Could declare additional published properties here.
+}
+
+struct ContentView: View {
+    @StateObject var myState = MyState()
+
+    var body: some View {
+        VStack {
+            Button("Increment") {
+                myState.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("score = \(myState.score)")
+        }
+    }
+}
+```
+
+### @ObservedObject
+
+This subscribes to an observable object
+and recomputes the associated view `body` when it changes.
+It is used in cases when an observable object is passed into a view.
+The following example demonstrates this.
+
+```swift
+class MyState: ObservableObject {
+    @Published var score: Int = 0
+    // Could declare additional published properties here.
+}
+
+struct ChildView: View {
+    @ObservedObject var share: MyState
+
+    var body: some View {
+        VStack {
+            Button("ChildView: Increment") {
+                // This also updates myState in ContentView.
+                share.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("ChildView: score = \(share.score)")
+        }
+    }
+}
+
+struct ContentView: View {
+    @StateObject var myState = MyState()
+
+    var body: some View {
+        VStack {
+            Button("ContentView: Increment") {
+                // This also updates share in ChildView.
+                myState.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("ContentView: score = \(myState.score)")
+
+            // Passing the @StateObject variable.
+            ChildView(share: myState)
+        }
+    }
+}
+```
 
 ## Colors
 
@@ -2361,10 +2865,10 @@ Many of these views support both the `border` and `strokeBorder` view modifiers.
 The difference between these becomes apparent
 when the border width is greater than one.
 `border` is drawn so it is centered on the edge of the shape
-with have inside and half outside.
+with half inside and half outside.
 `strokeBorder` is drawn so none of the border is outside of the shape.
 
-The following example draws several shapes.
+The following example code draws several shapes:
 
 <img alt="SwiftUI Shapes" style="width: 40%"
   src="/blog/assets/SwiftUI-Shapes.png?v={{pkg.version}}"
@@ -2436,62 +2940,38 @@ struct ContentView: View {
 }
 ```
 
-The `Path` view supports many drawing commands.
-For example:
+### `Angle`
+
+This is a struct that does not implement the `View` protocol,
+but is used by several drawing views.
+Instances can be created using an initializer
+that takes either a `degrees` or a `radians` argument.
+The value can be obtained via either `degrees` or `radians` properties
+and conversions are performed automatically.
+
+```swift
+let angle = Angle(radians: Double.pi)
+print(angle.degrees) // 180.0
+```
+
+### `Path`
+
+Like `Color`, `Path` also creates a view.
+The following example draws a path for a triangle
+that is both filled and stroked.
 
 <img alt="SwiftUI Path" style="width: 40%"
   src="/blog/assets/SwiftUI-Path.png?v={{pkg.version}}"
   title="SwiftUI Path">
 
 ```swift
-struct ContentView: View {
-    let style = StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round)
-
-    var body: some View {
-        Path { path in
-            path.move(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: 0, y: 100))
-            path.addLine(to: CGPoint(x: 100, y: 100))
-            path.addLine(to: CGPoint(x: 100, y: 0))
-            //path.closeSubpath() // clsoes the path above
-
-            // Other path methods include:
-            // addArc, addCurve, addEllipse, addLines, addPath,
-            // addQuadCurve, addRect, addRects, addRelativeArc,
-            // and addRoundedRect
-        }
-        .stroke(Color.red, style: style)
-        .background(Rectangle().fill(.yellow))
-        .frame(width: 100, height: 100)
-    }
-}
-```
-
-### `Capsule`
-
-This draws an oval.
-
-### `Circle`
-
-This draws a circle.
-
-### `Ellipse`
-
-This draws an ellipse.
-
-### `Path`
-
-Like `Color`, `Path` also creates a view.
-The following example creates a path that is both filled and stroked.
-
-```swift
 // Define the path as a computed property so it can be
 // used once for filling and once for stroking.
 var path: Path {
     Path { path in
-        path.move(to: CGPoint(x: halfWidth, y: halfWidth))
-        path.addLine(to: CGPoint(x: 100, y: 100))
-        path.addLine(to: CGPoint(x: 200, y: halfWidth))
+        path.move(to: CGPoint(x: 0, y: width))
+        path.addLine(to: CGPoint(x: halfWidth, y: 0))
+        path.addLine(to: CGPoint(x: width, y: width))
         path.closeSubpath()
     }
 }
@@ -2510,78 +2990,32 @@ ZStack {
 }
 ```
 
-### `Rectangle`
+The `Path` view supports many drawing methods including:
+`addArc`, `addCurve`, `addEllipse`, `addLines`, `addPath`, `addQuadCurve`,
+`addRect`, `addRects`, `addRelativeArc`, and `addRoundedRect`.
 
-This draws a rectangle.
+### Other Drawing Views
 
-### `RoundedRectangle`
+Many drawing views draw exactly what their name implies.
+These include `Circle`, `Ellipse`, `Rectangle`,
+and `RoundedRectangle` (has rounded corners).
 
-This draws a rectangle with rounded corners.
+Other drawing views are less obvious from their name, including:
 
-### `ContainerRelativeShape`
-
-TODO: What is this?
-
-### `OffsetShape`
-
-TODO: What is this?
-
-### `RotatedShape`
-
-TODO: What is this?
-
-### `ScaledShape`
-
-TODO: What is this?
-
-### `TransformedShape`
-
-TODO: What is this?
-
-### `AnyShapeShape`
-
-TODO: What is this?
-
-### `AnimatablePair`
-
-TODO: What is this?
-
-### `Animation`
-
-TODO: What is this?
-
-### `AnyTransition`
-
-TODO: What is this?
-
-### `EmptyAnimatableData`
-
-TODO: What is this?
-
-### `Anchor`
-
-TODO: What is this?
-
-### `Angle`
-
-This is a struct that does not implement the `View` protocol.
-Instances can be created using an initializer
-that takes either a `degrees` or a `radians` argument.
-The value can be obtained via either `degrees` or `radians` properties
-and conversions are performed automatically.
-
-```swift
-let angle = Angle(radians: Double.pi)
-print(angle.degrees) // 180.0
-```
-
-### `ProjectionTransform`
-
-TODO: What is this?
-
-### `UnitPoint`
-
-TODO: What is this?
+- `Anchor`: ?
+- `AnimatablePair`: ?
+- `Animation`: ?
+- `AnyShapeShape`: ?
+- `AnyTransition`: ?
+- `Capsule`: draws an oval
+- `ContainerRelativeShape`: ?
+- `EmptyAnimatableData`: ?
+- `OffsetShape`: ?
+- `ProjectionTransform`: ?
+- `RotatedShape`: ?
+- `ScaledShape`: ?
+- `TransformedShape`: ?
+- `UnitPoint`: ?
 
 ## Other Views
 
@@ -2618,12 +3052,13 @@ VStack(spacing: 0) {
 
 ### `Spacer`
 
-Each of these take an equal amount of the unused space
-inside the parent container view.
+Each `Spacer` view takes an equal amount of the unused space
+inside its parent container view.
 It accepts an optional `minLength` attribute which defaults to zero.
 
 Using `Spacer` can be compared to web applications that use
-the CSS properties `display: flex;` and `justify-content`.
+the CSS properties `display: flex;` and `justify-content`
+with the values shown in the following table:
 
 | CSS justify-content value | Spacer placement              |
 | ------------------------- | ----------------------------- |
@@ -2633,10 +3068,10 @@ the CSS properties `display: flex;` and `justify-content`.
 
 ### `Divider`
 
-This draws a light gray 1-pixel wide line across the container.
+This draws a light gray, 1-pixel wide line across the container.
 The line is vertical in an `HStack` and horizontal in a `VStack`.
 
-The line can be customized in several ways.
+The line can be customized in several ways:
 
 - To add space around the line, use the `padding` view modifier.
 
@@ -2664,495 +3099,6 @@ The line can be customized in several ways.
   ```swift
   Divider().frame(maxWidth: 200)
   ```
-
-## View Modifiers
-
-View modifiers are methods that can be called on a view.
-They don't modify the view. They create a new view
-that is like the receiver, but modified in a specific way.
-Calls to view modifiers can be chained since each returns a new view.
-
-The following example uses the `foregroundColor`, `padding`, and `stroke`
-view modifiers.
-
-```swift
-Text("Hello, World!").foregroundColor(.red)
-RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).padding(.all)
-```
-
-Some view modifiers can be applied to any view.
-Others are specific to certain kinds of views.
-For example, the `stroke` view modifier used above only applies to shapes.
-
-The official documentation for the supplied view modifiers can be found at
-{% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
-"View Modifiers" %}.
-
-Commonly used view modifiers include:
-
-- `background(alignment, content)`
-- `border(ShapeStyle, width: CGFloat = 1)`
-- `cornerRadius(CGFloat, antialiased: Bool)`
-- `disabled(Bool)` disables any form input such as a `Button`
-- `edgesIgnoringSafeArea(Edge.Set)`
-- `font(Font?)`
-- `foregroundColor(Color?)`
-- `foregroundStyle(ShapeStyle)`
-- `frame(width: CGFloat?, height: CGFloat?, alignment: Alignment)`
-- `frame(maxWidth: CGFloat?, maxHeight: CGFloat?, alignment: Alignment)`
-- `border(ShapeStyle, width: CGFloat = 1)`
-- `lineLimit(Int?)`
-- `multilineTextAlignment(TextAlignment)`
-- `offset(x: CGFloat, y: CGFloat)`
-- `opacity(Double)`
-- `overlay(ShapeStyle)`
-- `padding(CGFloat)`
-
-The following view modifiers change the styling
-of specific kinds of predefined views.
-
-- `buttonStyle(ButtonStyle)`
-- `controlGroupStyle(ControlGroupStyle)`
-- `datePickerStyle(DatePickerStyle)`
-- `gaugeStyle(GaugeStyle)`
-- `indexViewStyle(IndexViewStyle)`
-- `labelStyle(LabelStyle)`
-- `menuStyle(MenuStyle)`
-- `navigationViewStyle(NavigationViewStyle)`
-- `pickerStyle(PickerStyle)`
-- `progressViewStyle(ProgressViewStyle)`
-- `presentedWindowStyle(WindowStyle)`
-- `presentedWindowToolbarStyle(WindowToolbarStyle)`
-- `tableStyle(TableStyle)`
-- `tabViewStyle(TabViewStyle)`
-- `textFieldStyle(TextFieldStyle)`
-- `toggleStyle(ToggleStyle)`
-
-  This can be passed a side which can be a single value or an array
-  of `.all` (default),
-  `.leading`, `.trailing`, `.horizontal` (same as `.leading` and `.trailing`),
-  `.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
-  It can also be passed a `CGFloat` value for the length.
-  The length defaults to `nil` and means to use the system default of 20.
-
-- `position(x: CGFloat, y: CGFloat)`
-- `rotationEffect(Angle, anchor: UnitPoint)`
-- `scaledToFill()`
-- `scaledToFit()`
-- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
-- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
-- `textCase(Text.Case?)`
-- `tint(Color?)`
-- `transformEffect(CGAffineTransform)`
-- `transition(AnyTransition)`
-- `truncationMode(Text.TruncationMode)`
-- `zIndex(Double)`
-
-The following example adds a shadow a `Text` view.
-
-```swift
-Text("After")
-    .padding()
-    .background(.yellow)
-    .shadow(color: .gray, radius: 3, x: 3, y: 3)
-```
-
-The event handling methods like `onTapGesture` area also view modifiers.
-
-Several view modifiers take a `ShapeStyle` object.
-Types that conform to the `ShapeStyle` protocol include
-`AngularGradient`, `Color`, `ForegroundStyle`, `ImagePaint`,
-`LinearGradient`, and `RadialGradient`.
-
-Many view modifiers are defined in extensions to the `View` protocol.
-This makes them to any kind of views.
-
-When view modifiers are added to container views,
-they are passed down to all descendant views.
-In the following example, all the `Text` views are red
-because the `VStack` that contains them has
-a view modifier that sets the foreground color.
-
-```swift
-VStack {
-    Text("Alpha")
-    HStack {
-        Text("Beta")
-        Text("Gamma")
-    }
-}.foregroundColor(.red)
-```
-
-In a way, view modifiers are like Svelte components that contain slots.
-They take a view to be "modified" and return a new view
-that typically contains the view passed to them.
-
-Custom view modifiers can be created by defining
-a struct that implements the `ViewModifier` protocol.
-This requires implementing `body` method that takes
-content which is a `View` to be modified,
-and returns a new `View`.
-The code in the `body` method is similar to that in any custom view.
-
-The following code defines a custom `ViewModifier`
-that allows the view on which it is called to be collapsed.
-It wraps that view in a `VStack` containing two `HStack`s.
-The second `HStack` includes a `Button` containing a chevron icon.
-Clicking the `Button` toggles whether the first `HStack` is rendered.
-It also rotates the chevron icon using animation
-which is covered later in the "Animation" section.
-
-<img alt="SwiftUI ViewModifier" style="width: 50%"
-  src="/blog/assets/SwiftUI-ViewModifier.png?v={{pkg.version}}"
-  title="SwiftUI ViewModifier">
-
-```swift
-import SwiftUI
-
-struct Collapsable: ViewModifier {
-    private static let diameter = CGFloat(120)
-    private static var radius: CGFloat { diameter / 2 }
-
-    var bgColor: Color = .gray
-    var duration: Double = 0.5 // in seconds
-
-    @State private var showContent = true
-
-    var halfCircle: some View {
-        Circle()
-            .trim(from: 0, to: 0.5)
-            .fill(bgColor)
-            .frame(
-                width: Collapsable.diameter,
-                height: Collapsable.radius
-            )
-            .offset(x: 0, y: -16)
-    }
-
-    private func toggle() {
-        withAnimation(.easeInOut(duration: duration)) {
-            showContent.toggle()
-        }
-    }
-
-    func body(content: Content) -> some View {
-        VStack {
-            if showContent {
-                HStack {
-                    Spacer()
-                    content
-                    Spacer()
-                }
-                .background(bgColor)
-
-                //TODO: Can you scale the height of the HStack
-                //TODO: instead of using the default fade transition?
-                //.transition(.scale)
-                //.scaleEffect(showContent ? 1 : 0)
-                //.animation(.easeInOut(duration: 1))
-            }
-            HStack {
-                Spacer()
-                ZStack {
-                    Image(systemName: "chevron.down")
-                        .resizable()
-                        .frame(
-                            width: Collapsable.radius / 3,
-                            height: Collapsable.radius / 4
-                        )
-                        .onTapGesture { toggle() }
-                        .rotationEffect( // Angle type is inferred
-                            .degrees(showContent ? 180 : 0)
-                        )
-                        .offset(x: 0, y: -2)
-                        .background(halfCircle)
-                }
-                Spacer()
-            }
-        }
-    }
-}
-
-extension View {
-    func collapsable(
-        bgColor: Color = .black,
-        duration: Double = 0.5) -> some View {
-        modifier(Collapsable(bgColor: bgColor, duration: duration))
-    }
-}
-```
-
-The following code demonstrates using the custom `ViewModifier` defined above.
-
-```swift
-VStack {
-    Text("First line of content")
-    Text("Second line of content")
-}
-.padding()
-
-// This way of applying a view modifier doesn't use the View extension.
-//.modifier(Collapsable(bgColor: ContentView.bgColor))
-
-// This way uses the View extension and is preferred.
-.collapsable(bgColor: ContentView.bgColor)
-```
-
-## View State
-
-All views are immutable structs.
-Typically they get data from a model.
-They can also have associated mutable data
-by applying the `@State` property wrapper to a property.
-
-Properties declared with `@State` usually include the `private`
-access control keyword because the data is only used by that view.
-Such data is held outside of the struct and the struct holds a pointer to it.
-Changes to these properties cause the view body to be rebuilt.
-
-Any state held in a view using the `@State` property modifier
-should be transient state such as data related to styling.
-It is recommended to use `@State` sparingly
-and prefer holding data in model objects instead.
-
-The following example holds the status of a stoplight
-in the "status" state property.
-Note the use of `$` before the name to get a two-way binding with a `TextField`.
-
-```swift
-import SwiftUI
-
-struct CircleButton: View {
-    var color: Color
-    var selected: Bool = false
-    var action: () -> Void // a function
-
-    var body: some View {
-        Button(action: action, label: {
-            ZStack {
-                Circle().fill(color)
-                // Conditional logic can be implemented with an "if" statement,
-                // but iteration cannot be implemented with a "for-in" loop.
-                // A "ForEach" View must be used instead.
-                if selected {
-                    Circle().strokeBorder(Color.black, lineWidth: 5)
-                }
-            }
-        })
-    }
-}
-
-struct Light: Identifiable {
-    let id: String
-    let color: Color
-}
-
-struct MyTextField: View {
-    var label: String
-    var text: Binding<String>
-
-    var body: some View {
-        TextField(label, text: text)
-            .autocapitalization(.none)
-            .padding()
-            .textFieldStyle(.roundedBorder)
-    }
-}
-
-// This file must define a struct named "ContentView".
-struct ContentView: View {
-    @State private var status = "stop"
-
-    let lights: [Light] = [
-        Light(id: "stop", color: .red),
-        Light(id: "yield", color: .yellow),
-        Light(id: "go", color: .green)
-    ]
-
-    var body: some View {
-        VStack {
-            // When iterating over elements that do not conform to
-            // the `Identifiable` protocol, add the "id:" argument
-            // whose value is a key path that specifies
-            // how to find something unique in the element.
-            ForEach(lights) { light in
-                CircleButton(
-                    color: light.color,
-                    selected: status == light.id
-                ) {
-                    status = light.id
-                }
-            }
-            // $ in front of status is needed for a two-way binding.
-            // $ in front of status is needed for a two-way binding.
-            MyTextField(label: "status", text: $status)
-        }
-    }
-}
-```
-
-## Property Wrappers
-
-SwiftUI supports the following property wrappers:
-
-### @Binding
-
-This property wrapper is applied to properties of views
-that are passed bindings from parent views.
-It allows the child view to read and write a value that
-is owned by the parent view and passed in as an argument.
-
-```swift
-struct ChildView: View {
-    @Binding var n: Int
-
-    var body: some View {
-        VStack {
-            Text("ChildView: n = \(n)")
-            Button("Increment") {
-                n += 1
-            }
-            .buttonStyle(.bordered)
-        }
-    }
-}
-
-struct ParentView: View {
-    @State var number = 0
-
-    var body: some View {
-        VStack {
-            Text("ParentView: number = \(number)")
-            ChildView(n: $number) // $ is required to pass a binding
-        }
-    }
-}
-```
-
-### @Environment
-
-This is used to access environment values.
-See the "Environment" section.
-
-### @EnvironmentObject
-
-This is used to share access to an `ObservableObject` between views.
-See the "Environment" section.
-
-### @State
-
-This enables view structs to maintain state.
-It is intended for storing basic values with types like
-`Bool`, `Int`, `Double`, and `String`.
-
-When the value of a normal struct property
-(declared without a property wrapper)
-is modified, a new instance of the struct is created.
-This happens because structs are value types.
-
-We don't want a new instance to be created for structs that represent views.
-Applying the `@State` property wrapper to a struct property
-prevents this because SwiftUI manages the value outside of the struct.
-When the value of this kind of property is changed,
-the view `body` is recomputed.
-
-This is somewhat like the `useState` hook in React.
-
-An `@State` property can also store more complex types.
-However if it is used to store a class instance (a reference type)
-and a property of the class is modified,
-the associated view `body` will not be recomputed.
-A new class instance must be created to trigger an update.
-
-Note that using a `struct` instead of a `class`
-in the scenario described above does work.
-The reason is that changing the value of a struct property
-creates a new instance of the struct.
-However, this may no be desirable because
-it copies every property of the struct.
-
-### @StateObject
-
-This creates an instance of an `ObservableObject`
-which is an object that publishes changes to its properties
-that are annotated with the `@Published` property wrapper.
-When the values of these properties change,
-the associated view `body` will be recomputed.
-
-Applying the `@StateObject` property wrapper
-to a view property that holds a class instance
-allows the view `body` to be recomputed when the
-value of any published property of the class instance is modified.
-The following example demonstrates this.
-
-```swift
-class MyState: ObservableObject {
-    @Published var score: Int = 0
-    // Could declare additional published properties here.
-}
-
-struct ContentView: View {
-    @StateObject var myState = MyState()
-
-    var body: some View {
-        VStack {
-            Button("Increment") {
-                myState.score += 1
-            }
-            .buttonStyle(.bordered)
-            Text("score = \(myState.score)")
-        }
-    }
-}
-```
-
-### @ObservedObject
-
-This subscribes to an observable object
-and recomputes the associated view `body` when it changes.
-It is used in cases when an observable object is passed into a view.
-The following example demonstrates this.
-
-```swift
-class MyState: ObservableObject {
-    @Published var score: Int = 0
-    // Could declare additional published properties here.
-}
-
-struct ChildView: View {
-    @ObservedObject var share: MyState
-
-    var body: some View {
-        VStack {
-            Button("ChildView: Increment") {
-                // This also updates myState in ContentView.
-                share.score += 1
-            }
-            .buttonStyle(.bordered)
-            Text("ChildView: score = \(share.score)")
-        }
-    }
-}
-
-struct ContentView: View {
-    @StateObject var myState = MyState()
-
-    var body: some View {
-        VStack {
-            Button("ContentView: Increment") {
-                // This also updates share in ChildView.
-                myState.score += 1
-            }
-            .buttonStyle(.bordered)
-            Text("ContentView: score = \(myState.score)")
-
-            // Passing the @StateObject variable.
-            ChildView(share: myState)
-        }
-    }
-}
-```
 
 ## AttributedString
 
