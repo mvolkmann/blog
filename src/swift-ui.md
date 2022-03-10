@@ -5218,7 +5218,7 @@ TODO: Watch this {% aTargetBlank
 The `UserDefaults` class is "an interface to the user's defaults database,
 where you store key-value pairs persistently across launches of your app."
 The code below demonstrates using this to persist data about dogs as JSON.
-TODO: Can you store an array objects directory without encoding as JSON?
+TODO: Can you store an array objects directly without encoding as JSON?
 
 The `@AppStorage` property wrapper makes it easier to work with `UserDefaults`,
 but it is limited to the following types:
@@ -5318,16 +5318,24 @@ struct ContentView: View {
 
 ## Combine
 
-TODO: https://www.youtube.com/watch?v=bRpFHqv0tRQ&t=701s
+From the official docs, "The Combine framework provides
+a declarative Swift API for processing values over time.
+These values can represent many kinds of asynchronous events.
+Combine declares publishers to expose values that can change over time,
+and subscribers to receive those values from the publishers."
+
+TODO: Watch this {% aTargetBlank
+"https://www.youtube.com/watch?v=bRpFHqv0tRQ&t=701s" , "video" %}.
 
 ## Secrets
 
 Some apps need to use data that should be not be visible to users
-such as keys and passwords that are required to invoke REST services.
-Here is one approach to keep these secret.
+and show not be stored in version control systems.
+This includes keys and passwords that are required to invoke REST services.
+Here is one approach to store these secrets.
 
-1. Create a new file and select "Configuration Settings File"
-   from the "Other" category.
+1. Create a new file, select the "Other" category,
+   and select "Configuration Settings File".
 1. Name the file `Secrets.xcconfig`.
 1. Add secrets in this file where each line has the format
    `SOME_SECRET_KEY = SOME_SECRET_VALUE`.
