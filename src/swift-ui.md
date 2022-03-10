@@ -4567,6 +4567,19 @@ The example below renders four pages.
 Page 1 contains links to pages 2 and 3.
 Page 3 contains a link to page 4.
 
+<img alt="SwiftUI NavigationLink page 1" style="width: 24%"
+  src="/blog/assets/SwiftUI-navigation-page1.png?v={{pkg.version}}"
+  title="SwiftUI NavigationLink page 1">
+<img alt="SwiftUI NavigationLink page 2" style="width: 24%"
+  src="/blog/assets/SwiftUI-navigation-page2.png?v={{pkg.version}}"
+  title="SwiftUI NavigationLink page 2">
+<img alt="SwiftUI NavigationLink page 3" style="width: 24%"
+  src="/blog/assets/SwiftUI-navigation-page3.png?v={{pkg.version}}"
+  title="SwiftUI NavigationLink page 3">
+<img alt="SwiftUI NavigationLink page 4j" style="width: 24%"
+  src="/blog/assets/SwiftUI-navigation-page4.png?v={{pkg.version}}"
+  title="SwiftUI NavigationLink page 4">
+
 ```swift
 import SwiftUI
 
@@ -4621,16 +4634,10 @@ struct ContentView: View {
         }
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 ```
 
 If the view inside a `NavigationLink` doesn't have a `navigationTitle`,
-the link to get back to it will just display "Back".
+the link to go back will just display "Back".
 
 To go back to the previous view programmatically,
 add the following to a view and call `dismiss` with no arguments.
@@ -4881,12 +4888,6 @@ struct ContentView: View {
         .environmentObject(data)
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 ```
 
 Most SwiftUI code works on all platforms.
@@ -4904,7 +4905,7 @@ To run this app as a watchOS app in the simulator:
 - click Finish, then Activate
 
 TODO: Why does the Apple Watch Simulator always just display "Hello, World!"
-TODO: and not what is in this app?
+and not what is in this app?
 
 ```swift
 #if os(watchOS)
@@ -4929,7 +4930,7 @@ Here is a shim that provides a shell implementation
 so the same code that works in iOS can work in macOS.
 
 To run this app as a macOS app in the Simulator,
-either create the app as either a Multiplatform App or a macOS app.
+create the app as either a Multiplatform App or a macOS app.
 
 ```swift
 #if os(macOS)
@@ -4944,9 +4945,10 @@ extension View {
 ## Sidebars
 
 A sidebar provides app-level navigation to top-level collections of content.
-For example, the Mail app displays a list of mailboxes in a sidebar.
+For example, the iOS Mail app displays a list of mailboxes in a sidebar.
 Selecting an item in the sidebar changes what is displayed
 in the pane that follows.
+
 SwiftUI creates a sidebar when the `.listStyle(.sidebar)` view modifier
 is applied to a `List` view.
 
@@ -4956,8 +4958,15 @@ displays a list of teams in that sport and allows one to be selected.
 When a team is selected, the pane to its right
 displays a list of players on that team.
 
-TODO: Select a sport and a team, tap "Back", and select a different team.
-TODO: Why isn't the team pane dismissed?
+<img alt="SwiftUI Sidebar Page 1" style="width: 32%"
+  src="/blog/assets/SwiftUI-sidebars1.png?v={{pkg.version}}"
+  title="SwiftUI Sidebar Page 1">
+<img alt="SwiftUI Sidebar Page 2" style="width: 32%"
+  src="/blog/assets/SwiftUI-sidebars2.png?v={{pkg.version}}"
+  title="SwiftUI Sidebar Page 2">
+<img alt="SwiftUI Sidebar Page 3" style="width: 32%"
+  src="/blog/assets/SwiftUI-sidebars3.png?v={{pkg.version}}"
+  title="SwiftUI Sidebar Page 3">
 
 ```swift
 // model.swift
@@ -5165,6 +5174,11 @@ struct Person {
 let namePath = \Person.name
 ```
 
+Key paths can also refer to deeply nested properties.
+For example, if the `Person` struct contained an `address` property
+that referred to an `Address` struct that contained a `country` property
+then the key path `\Person.address.country` would refer to it.
+
 A key path can be used to get the value of a property
 from an instance of a struct or class. For example:
 
@@ -5179,10 +5193,10 @@ rather than a specific property inside it, use `\.self`.
 
 ## Environments
 
-A SwiftUI environment specifies key/value pairs that affect
-all sub-views of the view on which they are specified.
+A SwiftUI environment specifies key/value pairs that available
+in (and can effect) all sub-views of the view on which they are specified.
 For example, if a font is specified on a `VStack` then it
-becomes the default found for all views nested inside it at any depth.
+becomes the default font for all views nested inside it at any depth.
 
 To dump the contents on the current environment of a view,
 chain the following onto the view:
@@ -5191,11 +5205,13 @@ chain the following onto the view:
 .transformEnvironment(\.self) { dump($0) }
 ```
 
-TODO: https://www.youtube.com/watch?v=SUiITSkAqAo&t=548s
+TODO: Watch this {% aTargetBlank
+"https://www.youtube.com/watch?v=SUiITSkAqAo&t=548s", "video" %}.
 
 ## Network Requests
 
-TODO: https://www.youtube.com/watch?v=2NowSN4qJUY&t=729s
+TODO: Watch this {% aTargetBlank
+"https://www.youtube.com/watch?v=2NowSN4qJUY&t=729s", "video" %}.
 
 ## UserDefaults
 
