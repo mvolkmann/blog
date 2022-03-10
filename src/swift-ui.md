@@ -3718,10 +3718,10 @@ but views containing text can be scaled.
 
 SwiftUI supports three ways of implementing animations.
 
-- explicit: wraps code that changes model or `@State` data
+- explicit: wraps code that changes a model or `@State` data
   with a call to `withAnimation`
 - implicit: uses the `animation` view modifier
-- transition: triggers by inserting or removing a view
+- transition: triggers when a view is inserted or removed
 
 Explicit animations are the most commonly used
 because they are triggered by model/state changes
@@ -3750,7 +3750,7 @@ Animations can specify a duration (in seconds), delay, easing function,
 and number of times to repeat.
 Duration is the total time over which the animation takes place.
 Delay is the amount of time the animation waits to begin after being triggered.
-An easing function controls the speed at which an animation is applied
+An easing function controls the speed at which an animation advances
 over its duration.
 
 Provided easing functions include
@@ -3760,11 +3760,13 @@ All but `spring` take a single, optional argument
 which is the `duration` in seconds.
 The `spring` function takes three optional arguments named
 `response`, `dampingFunction`, and `blendDuration`.
-For details, see {% aTargetBlank
+For details, see the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/animation/spring(response:dampingfraction:blendduration:)",
-"spring" %}.
+"spring method" %}.
 
-Custom easing functions can be defined with the `timingCurve` function.
+Custom easing functions can be defined with the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/animation/timingcurve(_:_:_:_:duration:)",
+"timingCurve" %} function.
 
 The following example provides form elements
 for experimenting with different kinds of animations.
@@ -3814,7 +3816,7 @@ struct ContentView: View {
             .opacity(!opacity || on ? 1 : 0)
             .scaleEffect(!scale || on ? 1 : 0)
             .rotationEffect(.degrees(!rotate || on ? 0 : 360))
-            .animation(easingFunction) // implicit animation
+            .animation(easingFunction, value: on ? 1 : 0) // implicit animation
 
             NavigationView { // Picker will be disabled without this.
                 Form {
@@ -3841,11 +3843,8 @@ struct ContentView: View {
 }
 ```
 
-TODO: Add example of using an explicit animation with `withAnimation`.
-
-TODO: Add an example of using transitions.
-
-Transitions are specified when a view is defined,
+Transitions can be applied to any kind of view including container views.
+They are specified when a view is defined,
 but they are only applied when the view is inserted or removed.
 This is implemented by using an `if` or `switch` statement inside a parent view.
 
@@ -3853,8 +3852,6 @@ By default an `opacity` transition (fade) is used.
 This can be changed by applying the `transition` view modifier
 which is passed the kind of transition to perform.
 Transitions are defined as methods on the `AnyTransition` struct.
-
-Transitions can be applied to any kind of view including container views.
 
 Typically the provided `opacity`, `scale`, and `slide` transitions are used.
 The `identity` transition is used to specify that no transition should occur.
@@ -3937,10 +3934,8 @@ between lists of foods that available and those that have been selected.
 Each food item must have a unique id.
 When rendering the food items, `matchedGeometryEffect` is used
 to associate the `Text` view with a particular id in a given namespace.
-The following example demonstrates this.
 
-TODO: Why do the food names eventually disappear after being moved
-TODO: in both Preview and the Simulator?
+The following code demonstrates this:
 
 ```swift
 struct Food: Identifiable {
@@ -3990,6 +3985,9 @@ struct ContentView: View {
 }
 ```
 
+TODO: Why do the food names eventually disappear after being moved
+in both Preview and the Simulator?
+
 ## Camera
 
 To enable camera access in a SwiftUI app:
@@ -4010,16 +4008,19 @@ TODO: Add detail on taking photos from an app.
 
 TODO: Add detail on accessing images in the Photos app.
 
-## Scanning Codes
+## Scanning QR Codes and Barcodes
 
 The library "CodeScan" makes this easy. The YouTube video
-{% aTargetBlank "https://youtu.be/GlWEBQ2Tvjc",
+{% aTargetBlank "https://www.youtube.com/watch?v=j3MODOPZINs",
 "Scanning QR codes with SwiftUI" %} demonstrates using this.
 
 - Select File ... Add Packages...
-- Enter "https://github.com/twostraws/CodeScanner" in the search input
+- Enter {% aTargetBlank "https://github.com/twostraws/CodeScanner",
+  "CodeScanner" %}" in the search input
 - Click the "Add Package" button.
 - Click the next "Add Package" button.
+
+TODO: Add more deail on using this package.
 
 ## Audio
 
@@ -4062,7 +4063,6 @@ class SoundManager {
 }
 
 struct ContentView: View {
-
     var body: some View {
         VStack {
             Button("Click") {
@@ -4082,10 +4082,13 @@ SwiftUI encourages use of the Model-View-ViewModel (MVVM) paradigm
 which separates application code into three groups.
 This differs from UIKit which encourages use of Model-View-Controller (MVC).
 
+Any state held in a view using the `@State` property modifier
+should be transient state such as data related to styling.
+
 Models ...
 
 - holds data and application logic
-- have no knowledge of view code the uses the data
+- have no knowledge of the view code the uses the data
 
 ViewModels ...
 
@@ -4099,7 +4102,7 @@ ViewModels ...
   held in properties with the `@StateObject` property wrapper
   (which subscribes to ViewModel data)
 - have no knowledge of the views that use them
-- have methods (referred to as "intents")
+- have methods referred to as "intents"
   that are called by by views to update model data
 - optionally create and hold model instances,
   typically in `private` properties
@@ -4117,12 +4120,10 @@ Views ...
   using the `@ObservedObject` or `@StateObject` property wrapper
 - react to changes published by ViewModels by rebuilding their bodies
 - have a `body` var that rebuilds the view
-  any time data in ViewModels they use changes
+  any time there are changes in the data of ViewModels they use
 - can call the `onReceive` method to register a function to be called
-  when new data is received (couldn't get this to work)
+  when new data is received (I couldn't get this to work.)
 
-Any state held in a view using the `@State` property modifier
-should be transient state such as data related to styling.
 For example, a ViewModel could get the result of a SQL query from the Model
 and turn it into an array of objects that it publishes to Views.
 
@@ -4167,13 +4168,13 @@ import Foundation
 struct Dog: CustomStringConvertible, Identifiable {
     private static var lastId = 0;
 
-    // This is a computed property required by the CustomStringConvertible protocol.
-    var description: String { "Dog: \(name) \(selected)" }
-
     var breed: String
     var id: Int // required by the Identifiable protocol
     var name: String
     var selected = false
+
+    // This is a computed property required by the CustomStringConvertible protocol.
+    var description: String { "Dog: \(name) \(selected)" }
 
     init(name: String, breed: String) {
         Dog.lastId += 1
@@ -4185,10 +4186,11 @@ struct Dog: CustomStringConvertible, Identifiable {
 
 // This must be a class instead of a struct
 // in order to conform to the ObservableObject protocol.
-// Things that do this gain an objectWillChange method that publishes changes.
+// Classes that do this gain an objectWillChange method
+// that publishes changes.
 // This can be called directly before changes are made.
-// Alternatively, if the properties that can change are annotated with
-// the @Published property wrapper, changes will be published automatically.
+// Alternatively, if the properties that can change are annotated with the
+// @Published property wrapper, changes will be published automatically.
 class Model: ObservableObject {
     // The @Published property wrapper causes changes in properties
     // that are structs, not classes, to be published.
@@ -4280,6 +4282,19 @@ On an iPad popovers are rendered like speech bubbles
 with a tail pointing at an associated view.
 On an iPhone popovers are rendered as sheets that slide in from the bottom.
 
+<figure>
+  <img alt="SwiftUI Popover before tap" style="width: 60%"
+    src="/blog/assets/SwiftUI-popover1.png?v={{pkg.version}}"
+    title="SwiftUI Popover before tap">
+  <figcaption>popover before tapping</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI Popover after tap" style="width: 60%"
+    src="/blog/assets/SwiftUI-popover2.png?v={{pkg.version}}"
+    title="SwiftUI Popover after tap">
+  <figcaption>popover after tapping</figcaption>
+</figure>
+
 ```swift
 func runAfter(seconds: Int, closure: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(
@@ -4332,6 +4347,25 @@ Otherwise they are placed on one row.
 If no buttons are provided, a default "OK" button
 with a role of `.cancel` is provided.
 
+<figure>
+  <img alt="SwiftUI alert before taps" style="width: 60%"
+    src="/blog/assets/SwiftUI-alert1.png?v={{pkg.version}}"
+    title="SwiftUI alert before taps">
+  <figcaption>alert demo before taps</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI alert after tapping Press Me" style="width: 60%"
+    src="/blog/assets/SwiftUI-alert2.png?v={{pkg.version}}"
+    title="SwiftUI alert after tapping Press Me">
+  <figcaption>alert demo after tapping Press Me</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI alert after tapping + too many times" style="width: 60%"
+    src="/blog/assets/SwiftUI-alert3.png?v={{pkg.version}}"
+    title="SwiftUI alert after tapping + too many times">
+  <figcaption>alert demo after tapping + too many times</figcaption>
+</figure>
+
 ```swift
 struct ContentView: View {
     @State private var dogCount = 0
@@ -4383,7 +4417,7 @@ struct ContentView: View {
 ## Modal Dialogs
 
 Basic modal dialogs can be created using the
-`alert` and `confirmationDialog` view modifiers
+`alert` and `confirmationDialog` view modifiers.
 
 Custom modal dialogs are implemented by displaying a "sheet".
 The sheet slides in from the bottom by default.
@@ -4395,7 +4429,20 @@ that are passed in when instances are created.
 The `ContentView` struct declares the boolean property `showModal`
 and passes it to the `MyModal` struct as a binding.
 This allows the action of the "Close" button in `MyModal`
-to set it to false which hides the sheet.
+to set it to `false` which hides the sheet.
+
+<figure>
+  <img alt="SwiftUI sheet before tap" style="width: 60%"
+    src="/blog/assets/SwiftUI-sheet1.png?v={{pkg.version}}"
+    title="SwiftUI sheet before tap">
+  <figcaption>sheet demo before tap</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI sheet after tap" style="width: 60%"
+    src="/blog/assets/SwiftUI-sheet2.png?v={{pkg.version}}"
+    title="SwiftUI sheet after tap">
+  <figcaption>sheet demo after tap</figcaption>
+</figure>
 
 ```swift
 struct MySheetView: View {
