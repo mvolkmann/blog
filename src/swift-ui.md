@@ -686,7 +686,7 @@ Resume Preview to see the change.
 This does not affect `Toggle` views which required using the view modifier
 `.toggleStyle(SwitchToggleStyle(tint: someColor))`.
 
-### `@State`
+### @State Property Wrapper
 
 All views are immutable structs.
 Typically they get data from a model object.
@@ -1148,12 +1148,74 @@ See the "Environment" section.
 
 ### @EnvironmentObject
 
-This is used to share access to an `ObservableObject` between views.
-See the "Environment" section.
+The `@EnvironmentObject` property wrapper allows multiple views
+to share access to an `ObservableObject`.
+
+The following code demonstrates this.
+It works in the Simulator, but not in Preview.
+
+```swift
+// Environment objects must be defined by classes
+// that conform to the ObservableObject protocol
+// and they should publish at least one property.
+class SharedData: ObservableObject {
+    @Published var name = "Mark"
+    @Published var score = 0
+}
+
+struct ChildView: View {
+    // This value will be received from the environment.
+    @EnvironmentObject var sharedData: SharedData
+
+    var body: some View {
+        VStack {
+            Text("ChildView: name = \(sharedData.name)")
+            Text("ChildView: score = \(sharedData.score)")
+            Button("Increment Score") {
+                // This change will be published to all views
+                // that use the SharedData score property.
+                sharedData.score += 1
+            }
+            .buttonStyle(.bordered)
+            GrandchildView()
+        }
+        .environmentObject(sharedData)
+    }
+}
+
+struct GrandchildView: View {
+    // This value will be received from the environment.
+    @EnvironmentObject var sharedData: SharedData
+
+    var body: some View {
+        VStack {
+            Text("GrandchildView: name = \(sharedData.name)")
+            Text("GrandchildView: score = \(sharedData.score)")
+        }
+    }
+}
+
+struct ContentView: View {
+    @StateObject var sharedData = SharedData()
+
+    var body: some View {
+        VStack {
+            Text("ContentView: name = \(sharedData.name)")
+            Text("ContentView: score = \(sharedData.score)")
+            ChildView()
+        }
+        // All views inside this VStack can access the sharedData object.
+        // The environmentObject view modifier can be called
+        // multiple times, but only once for each type because
+        // the type is how the values are distinguished.
+        .environmentObject(sharedData)
+    }
+}
+```
 
 ### @State
 
-This property wrapper was described earlierx
+This property wrapper was described earlier
 near the end of the section on "Views".
 It enables view structs to maintain state.
 This is intended for storing basic values with types like
@@ -3135,11 +3197,11 @@ extension AttributedString {
 }
 
 extension Text {
-    // Creates a Text from a String and styles the entire value.
+    // Creates a Text view from a String and styles the entire value.
     init(_ string: String, style: (inout AttributedString) -> Void) {
         var attributedString = AttributedString(string)
         style(&attributedString) // style using the closure
-        self.init(attributedString) // create a `Text`
+        self.init(attributedString) // create a Text view
     }
 }
 
@@ -3204,7 +3266,7 @@ struct ContentView: View {
 }
 ```
 
-## Layout
+## Layout Details
 
 Container views offer space to their child views.
 The child views can choose their size within the space offered to them.
@@ -3229,7 +3291,7 @@ it is also considered to be flexible.
 Unsafe areas, such as the area at the top of iPhones that have a camera bump,
 are removed from offered space by default.
 Sometimes it is useful to draw in those areas.
-One example, show below, is displaying a background image.
+One example, shown below, is displaying a background image.
 
 <img alt="SwiftUI Unsafe Areas" style="width: 40%"
   src="/blog/assets/SwiftUI-UnsafeAreas.png?v={{pkg.version}}"
@@ -3244,7 +3306,7 @@ VStack {
     Spacer()
 }
     .background(Image("Comet").resizable().scaledToFill())
-    .edgesIgnoringSafeArea(.all)
+    .edgesIgnoringSafeArea(.all) // allows drawing in unsafe areas
 ```
 
 ## Event Handling
@@ -3285,7 +3347,9 @@ These include:
 ## Environment
 
 SwiftUI provides many values to all views through the "environment".
-Highlights include:
+Any view in the view hierarchy can access environment data`using the`@Environment` property wrapper.
+
+Highlights of environment data include:
 
 - `accessibilityReduceMotion: Bool`
 
@@ -3306,7 +3370,7 @@ Highlights include:
 
 - `locale: Locale`
 
-  This holds the current locale and can be used for internationalization.
+  This holds the current locale which can be used for internationalization.
 
 - `editMode: EditMode`
 
@@ -3318,9 +3382,6 @@ Highlights include:
 
   This describes the default font.
 
-Any view in the view hierarchy can access environment data
-using the `@Environment` property wrapper.
-
 It is also possible to add custom data to the environment.
 The following example demonstrates this by adding
 the custom environment value "primaryColor".
@@ -3329,12 +3390,12 @@ Environment values provided by Apple are accessed and modified in the same way.
 ```swift
 import SwiftUI
 
-// Defines a custom environment key and its default value.
+// Define a custom environment key and its default value.
 private struct PrimaryColorKey: EnvironmentKey {
     static let defaultValue = Color.red
 }
 
-// Adds the custom environment value.
+// Add the custom environment value.
 extension EnvironmentValues {
     var primaryColor: Color {
         get { self[PrimaryColorKey.self] }
@@ -3368,9 +3429,10 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            // Renders in green.
+            // Renders in red when run in the Simulator
+            // and in green when run in Preview.
             Text("in ContentView").foregroundColor(primaryColor)
-            // Overrides default value of primaryColor
+            // Override the default value of primaryColor
             // for all views under ChildView.
             ChildView().environment(\.primaryColor, .blue)
 
@@ -3380,71 +3442,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        // Overrides default value of primaryColor for entire app.
+        // Override the default value of primaryColor for entire app.
         ContentView().environment(\.primaryColor, .green)
-    }
-}
-```
-
-The `@EnvironmentObject` property wrapper allows multiple views
-to share access to an `ObservableObject`.
-The following example demonstrates this.
-
-```swift
-// Environment objects must be defined by classes
-// that conform to the ObservableObject protocol
-// and they should publish at least one property.
-class SharedData: ObservableObject {
-    @Published var name = "Mark"
-    @Published var score = 0
-}
-
-struct ChildView: View {
-    // This value will be received from the environment.
-    @EnvironmentObject var sharedData: SharedData
-
-    var body: some View {
-        VStack {
-            Text("ChildView: name = \(sharedData.name)")
-            Text("ChildView: score = \(sharedData.score)")
-            Button("Increment Score") {
-                // This change will be published to all views
-                // that use the SharedData score property.
-                sharedData.score += 1
-            }
-            .buttonStyle(.bordered)
-            GrandchildView()
-        }
-        .environmentObject(sharedData)
-    }
-}
-
-struct GrandchildView: View {
-    // This value will be received from the environment.
-    @EnvironmentObject var sharedData: SharedData
-
-    var body: some View {
-        VStack {
-            Text("GrandchildView: name = \(sharedData.name)")
-            Text("GrandchildView: score = \(sharedData.score)")
-        }
-    }
-}
-
-struct ContentView: View {
-    @StateObject var sharedData = SharedData()
-
-    var body: some View {
-        VStack {
-            Text("ContentView: name = \(sharedData.name)")
-            Text("ContentView: score = \(sharedData.score)")
-            ChildView()
-        }
-        // All views inside this VStack can access the sharedData object.
-        // The environmentObject view modifier can be called
-        // multiple times, but only once for each type because
-        // the type is how the values are distinguished.
-        .environmentObject(sharedData)
     }
 }
 ```
