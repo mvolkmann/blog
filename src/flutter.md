@@ -375,17 +375,21 @@ To run a Flutter app on a connected iPhone:
 
 - In Xcode
 
-  - Select PROJECT ... Runner ... Inf and
+  - Click "Runner" at the top of the Navigator.
+  - In the editor area, select PROJECT ... Runner ... Info and
     set "iOS Deployment Target" to the target iOS version.
   - Select "iPhone" from the device drop-down in the header.
-  - Click "Runner" at the top of the Navigator.
-  - Click the "Signing & Capabilities" tab.
+  - Select TARGETS ... Runner ... Signing & Capabilities.
   - Select your team from the Team drop-down.
     This can be your Apple ID.
     After entering this the first time, enter your Apple ID password.
   - Enter a unique "Bundle Identifier", perhaps containing
     your email address, a hyphen, and the project name.
     Underscores are automatically changed to hyphens.
+  - Click the "Build Settings" tab.
+  - Under Packaging ... Product Bundle Identifier,
+    change the values for Debug, Profile, and Release
+    to match the "Bundle Identifier" entered earlier.
   - option #1
     - In Xcode, press the run button (triangle) or cmd-r.
     - There will be several dialog prompts for your Mac password.
