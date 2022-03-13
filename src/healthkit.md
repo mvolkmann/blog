@@ -81,28 +81,30 @@ The data available includes:
 
 - Activity
 
-  - step count
-  - distance walking/running
-  - distance cycling
-  - push count while using a wheelchair
-  - swimming stroke count
-  - distance swimming
-  - distance downhill snow sports
-  - basal energy burned
   - active energy burned
-  - flights climbed (stairs)
-  - Nike fuel points earned
   - Apple exercise time
-  - VO2 max
+  - Apple move time
+  - Apple stand time
+  - basal energy burned
+  - distance cycling
+  - distance downhill snow sports
+  - distance swimming
+  - distance walking/running
+  - flights climbed (stairs)
   - low cardio fitness event
+  - Nike fuel points earned
+  - push count while using a wheelchair
+  - step count
+  - swimming stroke count
+  - VO2 max
 
 - Body Measurements
 
-  - height
+  - body fat percentage
   - body mass
   - body mass index
+  - height
   - lean body mass
-  - body fat percentage
   - waist circumference
 
 - Reproductive Health
@@ -115,33 +117,52 @@ The data available includes:
   - menstrual flow
   - ovulation test result
   - pregnancy
-  - sexual activity
   - pregnancy test result
   - progesterone test result
+  - sexual activity
 
 - Hearing
 
   - environmental audio exposure
-  - headphone audio exposure
   - environmental audio exposure event
+  - headphone audio exposure
   - headphone audio exposure event
 
 - Vital Signs
 
+  - blood pressure
+  - blood pressure diastolic
+  - blood pressure systolic
+  - body temperature
+  - electrocardiogram data
   - heart rate
-  - low heart rate event
-  - high heart rate event
-  - irregular heart rhythm event
-  - resting heart rate
   - heart rate variability SDNN (standard deviation of {% aTargetBlank
     "https://hexoskin.zendesk.com/hc/en-us/articles/360045123314-Difference-between-RR-interval-and-NN-interval",
     "NN intervals" %})
-  - walking heart rate average
   - heartbeat series
-  - electrocardiogram data
+  - high heart rate event
+  - irregular heart rhythm event
+  - low heart rate event
   - oxygen saturation
-  - body temperature
-  - blood pressure
-  - blood pressure systolic
-  - blood pressure diastolic
   - respiratory rate
+  - resting heart rate
+  - walking heart rate average
+
+## Querying
+
+If the user denies permission to access a particular kind of data
+and the app is run again later,
+it will not prompt the user for permission again.
+TODO: Can you detect in an app that a permission was denied?
+To grant permission later:
+
+1. Launch the Health app.
+1. Tap the "Sharing" button at the bottom.
+1. Tap "Apps".
+1. Tap the name of an app that wants permissions.
+1. Enable/disable specific permissions or tap "Turn on all".
+
+Apps do not crash or throw an error if they query data
+for which the user has not granted permission.
+If the query is for a single value, ? is returned.
+If the query is for a sequence of data, an empty Array is returned.

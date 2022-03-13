@@ -3159,6 +3159,60 @@ if let json = String(data: encoded, encoding: .utf8) {
 }
 ```
 
+## Concurrency
+
+See {% aTargetBlank
+"https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
+"Swift Concurrency" %}.
+
+Swift 5.5 added support for the `async` and `await` keywords.
+This was announced at the WWDC 2021 event.
+
+Functions that use the `await` keyword must include the `async` keyword
+after their parameter list.
+
+For example:
+
+```swift
+func getPets() async -> Pets? {
+  do {
+    let dogs = await getDogs()
+    let cats = await getCats()
+    return Pets(dogs: dogs, cats: cats)
+  } catch {
+    print("error: \(error)")
+    return nil
+  }
+}
+```
+
+To bridge between functions that take callback functions,
+referred to as "completion handlers", use the {% aTargetBlank
+"https://developer.apple.com/documentation/swift/3814988-withcheckedcontinuation",
+"withCheckedContinuation" %} function.
+See this post from {% aTargetBlank
+"https://www.hackingwithswift.com/quick-start/concurrency/how-to-use-continuations-to-convert-completion-handlers-into-async-functions",
+"Hacking with Swift" %}.
+
+Suppose `getData` is a function that takes a completion handler.
+To call this function inside an `async` function
+so callers can use the `await` keyword:
+
+```swift
+//TODO: Verify this!
+func getDataAsync() async -> SomeData {
+  return await withCheckedContinuation { continuation in
+    getData(completion: { result, error in
+      if error {
+        continuation.resume(throwing: error)
+      } else {
+        continuation.resume(returning: result)
+      }
+    })
+  }
+}
+```
+
 ## File I/O
 
 To write and read files, use the `FileManager` class.
@@ -4261,11 +4315,6 @@ the features of Swift that are annoying, at least in my opinion.
   in import statements?
   Is the only way to determine where something being used comes from
   to command-click and select "Jump to Definition..."?
-
-- Does Swift having anything like promises in JavaScript
-  or futures in Dart? See {% aTargetBlank
-  "https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
-  "Swift Concurrency" %}.
 
 - I wish Swift functions supported a shorthand syntax for arguments
   when there is a variable with the same name.
