@@ -33,7 +33,7 @@ See my project flutter_health which is not yet working.
 
 1. Create a new iOS App project in Xcode.
 1. Click the top entry in the Navigator.
-1. Select TARGETS ... Runner ... Info.
+1. Select TARGETS ... {app-name} ... Info.
 1. Hover over one the entries and click the "+" button to add one.
 1. Add the key "Privacy - Health Share Usage Description"
 1. Enter a value like "This app needs to access your health data."
@@ -153,7 +153,7 @@ The data available includes:
 If the user denies permission to access a particular kind of data
 and the app is run again later,
 it will not prompt the user for permission again.
-TODO: Can you detect in an app that a permission was denied?
+
 To grant permission later:
 
 1. Launch the Health app.
@@ -162,7 +162,10 @@ To grant permission later:
 1. Tap the name of an app that wants permissions.
 1. Enable/disable specific permissions or tap "Turn on all".
 
-Apps do not crash or throw an error if they query data
+An error is thrown if an app attempts to write data
+for which the usser has not granted permission.
+
+Apps do not crash or throw an error if they attempt to read data
 for which the user has not granted permission.
 If the query is for a single value, ? is returned.
 If the query is for a sequence of data, an empty Array is returned.
