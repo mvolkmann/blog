@@ -148,7 +148,15 @@ The data available includes:
   - resting heart rate
   - walking heart rate average
 
-## Querying
+## Permissions
+
+The first time a user runs an app that uses HealthKit
+it will prompt for permission to access health data.
+Separate toggle switches are displayed
+for each kind of data to be written
+and each kind of data to be read.
+For example, a user can grant access to read their weight (a.k.a. bodyMass),
+but deny permission to write their weight.
 
 If the user denies permission to access a particular kind of data
 and the app is run again later,
