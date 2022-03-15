@@ -160,7 +160,7 @@ for which the user has not granted permission.
 If the query is for a single value, ? is returned.
 If the query is for a sequence of data, an empty Array is returned.
 
-## Data Class Hierarchy
+## Class Hierarchy
 
 - {% aTargetBlank
   "https://developer.apple.com/documentation/healthkit/hkhealthstore",
@@ -173,6 +173,11 @@ If the query is for a sequence of data, an empty Array is returned.
   "HKObject" %}
 
   "A piece of data that can be stored inside the HealthKit store."
+
+  This stores a UUID for the value (`uuid`),
+  the device that generated the data (`device`),
+  the app that created the object (`sourceRevision`),
+  and metadata in a map with `String` keys (`metadata`).
 
   - {% aTargetBlank
     "https://developer.apple.com/documentation/healthkit/hksample",
@@ -217,10 +222,8 @@ If the query is for a sequence of data, an empty Array is returned.
 
       "A workout sample that stores information about a single physical activity."
 
-HealthKit data types are defined {% aTargetBlank
-"https://developer.apple.com/documentation/healthkit/data_types",
-"HKObjectType" %} subclasses.
-The subclasses include:
+      This can include multiple values with different units such as
+      meters run, flights of stairs climbed, and calories burned.
 
 - {% aTargetBlank
   "https://developer.apple.com/documentation/healthkit/hkobjecttype",
@@ -240,6 +243,8 @@ The subclasses include:
     "HKCharacteristicType" %}
 
     "A type that represents data that doesn’t typically change over time."
+
+    Examples include birthday and blood type.
 
   - {% aTargetBlank
     "https://developer.apple.com/documentation/healthkit/hksampletype",
@@ -303,6 +308,19 @@ The subclasses include:
       "HKWorkoutType" %}
 
       "A type that identifies samples that store information about a workout."
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/healthkit/hkquantity",
+  "HKQuantity" %}
+
+  "An object that stores a value for a given unit."
+
+  The numeric value and unit this stores cannot be directly accessed.
+  Instead call the `doubleValue` method which
+  returns the value after converting it to a specified unit.
+  For example, the value may be stored in meters,
+  but can be retrieved in miles.
+  There is no need to writing code to do unit conversions.
 
 - {% aTargetBlank
   "https://developer.apple.com/documentation/healthkit/hkquery",
