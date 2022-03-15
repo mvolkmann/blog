@@ -3112,12 +3112,6 @@ regardless of whether `B` and `C` are abstract
 (because every class defines an interface)
 and regardless of whether their methods include bodies.
 
-The order which classes are listed after the `implements` keyword matters.
-Method lookup occurs from right to left (last one in wins).
-For example, in `class A extends B implements C, D { ... }`,
-if `B`, `C`, and `D` all implement the same method,
-the version in `D` will take precedence.
-
 Interface in other programming languages are
 collections of method signatures that some classes implement.
 Dart doesn't support defining "interfaces",
@@ -3277,6 +3271,12 @@ To mix a mixin into a class, use the `with` keyword.
 A class can use any number mixins.
 The class can then access any of the mixin properties and methods.
 It can also override any of the mixin methods.
+
+The order which classes are listed after the `with` keyword matters.
+Method lookup occurs from right to left (last one in wins).
+For example, in `class A extends B with C, D { ... }`,
+if `B`, `C`, and `D` all implement the same method,
+the version in `D` will take precedence.
 
 When calling a method on a class that extends another class
 and mixes in multiple mixins, the order of the mixins matters.

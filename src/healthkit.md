@@ -390,7 +390,10 @@ The subclasses include:
     "HKStatisticsQuery" %}
 
     "A query that performs statistical calculations over a set of
-    matching quantity samples, and returns the results."
+    matching quantity samples, and returns the results.
+    You can use statistical queries to calculate the minimum, maximum,
+    or average value of a set of discrete quantities,
+    or use them to calculate the sum for cumulative quantities."
 
   - {% aTargetBlank
     "https://developer.apple.com/documentation/healthkit/hkverifiableclinicalrecordquery",
@@ -418,9 +421,24 @@ The subclasses include:
   "An object that represents the result of calculating the minimum, maximum,
   average, or sum over a set of samples from the HealthKit store."
 
+  Properties include `startDate`, `endDate`, `quantityType`, and `sources`.
+  Methods include `averageQuantity`, `duration`, `maximumQuantity`,
+  `minimumQuantity`, `mostRecentQuantity`, `mostRecentQuantityDateInterval`,
+  and `sumQuantity`.
+
 - {% aTargetBlank
   "https://developer.apple.com/documentation/healthkit/hkstatisticscollection",
   "HKStatisticsCollection" %}
 
   "An object that manages a collection of statistics,
   representing the results calculated over separate time intervals."
+
+  Duplicate data collected from multiple devices can be automatically ignored.
+
+## Reading Data
+
+TODO: Add examples from the HealthKitDemo app.
+
+## Writing Data
+
+TODO: Add examples from the HealthKitDemo app.
