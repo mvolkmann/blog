@@ -29,46 +29,9 @@ can access data from both Apple HealthKit and Android "Google Fit".
 
 See my project flutter_health which is not yet working.
 
-## Steps to Use
-
-1. Create a new iOS App project in Xcode.
-1. Click the top entry in the Navigator.
-1. Select TARGETS ... {app-name} ... Info.
-1. Hover over one the entries and click the "+" button to add one.
-1. Add the key "Privacy - Health Share Usage Description"
-1. Enter a value like "This app needs to access your health data."
-1. Hover over one the entries and click the "+" button to add another.
-1. Add the key "Privacy - Health Update Usage Description"
-1. Enter a value like "This app needs to update your health data."
-1. Click the target under "TARGETS" which has the same name as the app.
-1. Click the "Signing & Capabilities" tab.
-1. Click "+ Capability".
-1. Type "h" and double-click "HealthKit".
-
-HealthKit cannot be used in the Simulator,
-so the app must be run on a real device.
-
 ## Available Data
 
-HealthKit data types are defined {% aTargetBlank
-"https://developer.apple.com/documentation/healthkit/data_types",
-"HKObjectType" %} subclasses.
-The subclasses include:
-
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkcharacteristictype", "HKCharacteristicType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkquantitytype", "HKQuantityType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkcategorytype", "HKCategoryType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkcorrelationtype", "HKCorrelationType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkactivitysummarytype", "HKActivitySummaryType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkaudiogramsampletype", "HKAudiogramSampleType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramtype", "HKElectrocardiogramType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkseriestype", "HKSeriesType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkclinicaltype", "HKClinicialType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkworkouttype", "HKWorkoutType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hkobjecttype", "HKObjectType" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/healthkit/hksampletype", "HKSampleType" %}
-
-The data available includes:
+The data available in HealthKit includes:
 
 - Characteristics
 
@@ -148,6 +111,25 @@ The data available includes:
   - resting heart rate
   - walking heart rate average
 
+## Steps to Use
+
+1. Create a new iOS App project in Xcode.
+1. Click the top entry in the Navigator.
+1. Select TARGETS ... {app-name} ... Info.
+1. Hover over one the entries and click the "+" button to add one.
+1. Add the key "Privacy - Health Share Usage Description"
+1. Enter a value like "This app needs to access your health data."
+1. Hover over one the entries and click the "+" button to add another.
+1. Add the key "Privacy - Health Update Usage Description"
+1. Enter a value like "This app needs to update your health data."
+1. Click the target under "TARGETS" which has the same name as the app.
+1. Click the "Signing & Capabilities" tab.
+1. Click "+ Capability".
+1. Type "h" and double-click "HealthKit".
+
+HealthKit cannot be used in the Simulator,
+so the app must be run on a real device.
+
 ## Permissions
 
 The first time a user runs an app that uses HealthKit
@@ -180,48 +162,265 @@ If the query is for a sequence of data, an empty Array is returned.
 
 ## Data Class Hierarchy
 
-- HKHealthStore
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/healthkit/hkhealthstore",
+  "HKHealthStore" %}
 
-- HKObject
+  "The access point for all data managed by HealthKit."
 
-  - HKSample
-    - HKCategorySample
-    - HKCorrelation
-    - HKQuantitySample
-      - HKCummulativeQuantitySample
-      - HKDiscreteQuantitySample
-    - HKWorkout
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/healthkit/hkobject",
+  "HKObject" %}
 
-- HKObjectType
+  "A piece of data that can be stored inside the HealthKit store."
 
-  - HKActivitySummaryType
-  - HKCharacteristicType
-  - HKDocumentType
-  - HKSampleType
-    - HKAudiogramSampleType
-    - HKCategoryType
-    - HKClinicalType
-    - HKCorrelationType
-    - HKElectrocardiogramType
-    - HKQuantityType
-    - HKSeriesType
-    - HKWorkoutType
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hksample",
+    "HKSample" %}
 
-- HKQuery
+    "A HealthKit sample represents a piece of data
+    associated with a start and end time."
 
-  - HKActivitySummaryQuery
-  - HKAnchoredObjectQuery
-  - HKCorrelationQuery
-  - HKDocumentQuery
-  - HKElectrocardiogramQuery
-  - HKHeartbeatSeriesQuery
-  - HKObserverQuery
-  - HKQuantitySeriesSampleQuery
-  - HKSampleQuery
-  - HKSourceQuery
-  - HKStatisticsCollectionQuery
-  - HKStatisticsQuery
-  - HKVerifiableClinicalRecordQuery
-  - HKWorkoutRouteQuery
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkcategorysample",
+      "HKCategorySample" %}
 
-- HKQueryDescriptor
+      "A sample with values from a short list of possible values."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkcorrelation",
+      "HKCorrelation" %}
+
+      "A sample that groups multiple related samples into a single entry."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkquantitysample",
+      "HKQuantitySample" %}
+
+      "A sample that represents a quantity, including the value and the units."
+
+      - {% aTargetBlank
+        "https://developer.apple.com/documentation/healthkit/hkcumulativequantitysample",
+        "HKCummulativeQuantitySample" %}
+
+        "A sample that represents a cumulative quantity."
+
+      - {% aTargetBlank
+        "https://developer.apple.com/documentation/healthkit/hkdiscretequantitysample",
+        "HKDiscreteQuantitySample" %}
+
+        "A sample that represents a discrete quantity."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkworkout",
+      "HKWorkout" %}
+
+      "A workout sample that stores information about a single physical activity."
+
+HealthKit data types are defined {% aTargetBlank
+"https://developer.apple.com/documentation/healthkit/data_types",
+"HKObjectType" %} subclasses.
+The subclasses include:
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/healthkit/hkobjecttype",
+  "HKObjectType" %}
+
+  "An abstract superclass with subclasses that identify
+  a specific type of data for the HealthKit store."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkactivitysummarytype",
+    "HKActivitySummaryType" %}
+
+    "A type that identifies activity summary objects."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkcharacteristictype",
+    "HKCharacteristicType" %}
+
+    "A type that represents data that doesn’t typically change over time."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hksampletype",
+    "HKSampleType" %}
+
+    "An abstract superclass for all classes that identify a
+    specific type of sample when working with the HealthKit store."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkaudiogramsampletype",
+      "HKAudiogramSampleType" %}
+
+      "An abstract superclass for all classes that identify a
+      specific type of sample when working with the HealthKit store."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkcategorytype",
+      "HKCategoryType" %}
+
+      "A type that identifies samples that contain
+      a value from a small set of possible values."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkclinicaltype",
+      "HKClinicalType" %}
+
+      "A type that identifies samples that contain clinical record data."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkcorrelationtype",
+      "HKCorrelationType" %}
+
+      "A type that identifies samples that group multiple subsamples."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkdocumenttype",
+      "HKDocumentType" %}
+
+      "A sample type used to create queries for documents."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramtype",
+      "HKElectrocardiogramType" %}
+
+      "A type that identifies samples containing electrocardiogram data."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkquantitytype",
+      "HKQuantityType" %}
+
+      "A type that identifies samples that store numerical values."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkseriestype",
+      "HKSeriesType" %}
+
+      "A type that indicates the data stored in a series sample."
+
+    - {% aTargetBlank
+      "https://developer.apple.com/documentation/healthkit/hkworkouttype",
+      "HKWorkoutType" %}
+
+      "A type that identifies samples that store information about a workout."
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/healthkit/hkquery",
+  "HKQuery" %}
+
+  "An abstract class for all the query classes in HealthKit."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkactivitysummaryquery",
+    "HKActivitySummaryQuery" %}
+
+    "A query for reading activity summary objects from the HealthKit store."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkanchoredobjectquery",
+    "HKAnchoredObjectQuery" %}
+
+    "A query that returns changes to the HealthKit store, including a snapshot
+    of new changes and continuous monitoring as a long-running query."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkcorrelationquery",
+    "HKCorrelationQuery" %}
+
+    "A query that performs complex searches based on the correlation’s contents,
+    and returns a snapshot of all matching samples."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkdocumentquery",
+    "HKDocumentQuery" %}
+
+    "A query that returns a snapshot of all matching documents
+    currently saved in the HealthKit store."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramquery",
+    "HKElectrocardiogramQuery" %}
+
+    "A query that returns the underlying voltage measurements
+    for an electrocardiogram sample."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkheartbeatseriesquery",
+    "HKHeartbeatSeriesQuery" %}
+
+    "A query that returns the heartbeat data
+    contained in a heartbeat series sample."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkobserverquery",
+    "HKObserverQuery" %}
+
+    "A long-running query that monitors the HealthKit store and updates
+    your app when the HealthKit store saves or deletes a matching sample."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkquantityseriessamplequery",
+    "HKQuantitySeriesSampleQuery" %}
+
+    "A query that accesses the series data associated with a quantity sample."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hksamplequery",
+    "HKSampleQuery" %}
+
+    "A general query that returns a snapshot of all the
+    matching samples currently saved in the HealthKit store."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hksourcequery",
+    "HKSourceQuery" %}
+
+    "A query that returns a list of sources, such as apps and devices,
+    that have saved matching queries to the HealthKit store."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkstatisticscollectionquery",
+    "HKStatisticsCollectionQuery" %}
+
+    "A query that performs multiple statistics queries
+    over a series of fixed-length time intervals."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkstatisticsquery",
+    "HKStatisticsQuery" %}
+
+    "A query that performs statistical calculations over a set of
+    matching quantity samples, and returns the results."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkverifiableclinicalrecordquery",
+    "HKVerifiableClinicalRecordQuery" %}
+
+    "A query for one-time access to a SMART Health Card."
+
+  - {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkworkoutroutequery",
+    "HKWorkoutRouteQuery" %}
+
+    "A query to access the location data stored in a workout route."
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/healthkit/hkquerydescriptor?changes=_5",
+  "HKQueryDescriptor" %}
+
+  "A descriptor that specifies a set of samples
+  based on the data type and a predicate."
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/healthkit/hkstatistics",
+  "HKStatistics" %}
+
+  "An object that represents the result of calculating the minimum, maximum,
+  average, or sum over a set of samples from the HealthKit store."
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/healthkit/hkstatisticscollection",
+  "HKStatisticsCollection" %}
+
+  "An object that manages a collection of statistics,
+  representing the results calculated over separate time intervals."
