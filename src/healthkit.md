@@ -177,3 +177,51 @@ Apps do not crash or throw an error if they attempt to read data
 for which the user has not granted permission.
 If the query is for a single value, ? is returned.
 If the query is for a sequence of data, an empty Array is returned.
+
+## Data Class Hierarchy
+
+- HKHealthStore
+
+- HKObject
+
+  - HKSample
+    - HKCategorySample
+    - HKCorrelation
+    - HKQuantitySample
+      - HKCummulativeQuantitySample
+      - HKDiscreteQuantitySample
+    - HKWorkout
+
+- HKObjectType
+
+  - HKActivitySummaryType
+  - HKCharacteristicType
+  - HKDocumentType
+  - HKSampleType
+    - HKAudiogramSampleType
+    - HKCategoryType
+    - HKClinicalType
+    - HKCorrelationType
+    - HKElectrocardiogramType
+    - HKQuantityType
+    - HKSeriesType
+    - HKWorkoutType
+
+- HKQuery
+
+  - HKActivitySummaryQuery
+  - HKAnchoredObjectQuery
+  - HKCorrelationQuery
+  - HKDocumentQuery
+  - HKElectrocardiogramQuery
+  - HKHeartbeatSeriesQuery
+  - HKObserverQuery
+  - HKQuantitySeriesSampleQuery
+  - HKSampleQuery
+  - HKSourceQuery
+  - HKStatisticsCollectionQuery
+  - HKStatisticsQuery
+  - HKVerifiableClinicalRecordQuery
+  - HKWorkoutRouteQuery
+
+- HKQueryDescriptor
