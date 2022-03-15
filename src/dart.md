@@ -3264,8 +3264,9 @@ Regardless of how a mixin is defined, it cannot do any of the following:
 - have a constructor that is used to create instances
 - be used with the `extends` keyword
   to act as the superclass of another class
-- be used with the `implements` keyword
-  to define methods another class must implement
+
+A mixin can be used with the `implements` keyword
+to define methods that a class must implement.
 
 To mix a mixin into a class, use the `with` keyword.
 A class can use any number mixins.
