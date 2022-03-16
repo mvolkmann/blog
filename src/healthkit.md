@@ -91,46 +91,46 @@ The data available in HealthKit includes:
 
 - Dietary (`HKQuantityType`)
 
-  - dietary biotin
-  - dietary caffeine
-  - dietary calcium
-  - dietary carbohydrates
-  - dietary chloride
-  - dietary cholesterol
-  - dietary chromium
-  - dietary copper
-  - dietary energy consumed
-  - dietary fat monounsaturated
-  - dietary fat polyunsaturated
-  - dietary fat saturated
-  - dietary fat total
-  - dietary fiber
-  - dietary folate
-  - dietary iodine
-  - dietary iron
-  - dietary magnesium
-  - dietary manganese
-  - dietary molybdenum
-  - dietary niacin
-  - dietary pantothebnic acid
-  - dietary phosphorus
-  - dietary potassium
-  - dietary protein
-  - dietary riboflavin
-  - dietary selenium
-  - dietary sodium
-  - dietary sugar
-  - dietary thiamin
-  - dietary vitamin A
-  - dietary vitamin B12
-  - dietary vitamin B6
-  - dietary vitamin C
-  - dietary vitamin D
-  - dietary vitamin E
-  - dietary vitamin A
-  - dietary vitamin K
-  - dietary water
-  - dietary zinc
+  - `dietaryBiotin`
+  - `dietaryCaffeine`
+  - `dietaryCalcium`
+  - `dietaryCarbohydrates`
+  - `dietaryChloride`
+  - `dietaryCholesterol`
+  - `dietaryChromium`
+  - `dietaryCopper`
+  - `dietaryEnergyConsumed`
+  - `dietaryFatMonounsaturated`
+  - `dietaryFatPolyunsaturated`
+  - `dietaryFatSaturated`
+  - `dietaryFatTotal`
+  - `dietaryFiber`
+  - `dietaryFolate`
+  - `dietaryIodine`
+  - `dietaryIron`
+  - `dietaryMagnesium`
+  - `dietaryManganese`
+  - `dietaryMolybdenum`
+  - `dietaryNiacin`
+  - `dietaryPantothebnicAcid`
+  - `dietaryPhosphorus`
+  - `dietaryPotassium`
+  - `dietaryProtein`
+  - `dietaryRiboflavin`
+  - `dietarySelenium`
+  - `dietarySodium`
+  - `dietarySugar`
+  - `dietaryThiamin`
+  - `dietaryVitaminA`
+  - `dietaryVitaminB12`
+  - `dietaryVitaminB6`
+  - `dietaryVitaminC`
+  - `dietaryVitaminD`
+  - `dietaryVitaminE`
+  - `dietaryVitaminA`
+  - `dietaryVitaminK`
+  - `dietaryWater`
+  - `dietaryZinc`
 
 - Hearing (`HKQuantityType`)
 
