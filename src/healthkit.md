@@ -33,15 +33,6 @@ See my project flutter_health which is not yet working.
 
 The data available in HealthKit includes:
 
-- Characteristics (`HKCharacteristicType`)
-
-  - activity move mode (`activityMoveMode`)
-  - biological sex (`biologicalSex`)
-  - blood type (`bloodType`)
-  - date of birth (`dateOfBirth`)
-  - Fitzpatrick skin type (`fitzpatrickSkinType`)
-  - wheel chair use (`wheelchairUse`)
-
 - Activity (`HKQuantityType`)
 
   - active energy burned (`.activeEnergyBurned`)
@@ -61,7 +52,17 @@ The data available in HealthKit includes:
   - step count (`stepCount`)
   - swimming stroke count (`swimmingStrokeCount`)
   - VO2 max (`vo2Max`)
+  - `walkingSpeed`
+  - `walkingStepLength`
   - wheelchair push count (`pushCount`)
+
+- Blood (`HKQuantityType`)
+
+  - `bloodAlcoholContent`
+  - `bloodGlucose`
+  - `bloodPressureDiastolic`
+  - `bloodPressureSystolic`
+  - `oxygenSaturation`
 
 - Body Measurements (`HKQuantityType`)
 
@@ -69,8 +70,24 @@ The data available in HealthKit includes:
   - body mass (`bodyMass`)
   - body mass index (`bodyMassIndex`)
   - height (`height`)
-  - lean body mass
+  - lean body mass (`leanBodyMass`)
   - waist circumference (`waistCircumference`)
+
+- Breathing (`HKQuantityType`)
+
+  - forced expiratory volume 1 (`forcedExpiratoryVolume1`)
+  - `inhalerUsage`
+  - `peakExpiratoryFlowRate`
+  - `respiratoryRate`
+
+- Characteristics (`HKCharacteristicType`)
+
+  - activity move mode (`activityMoveMode`)
+  - biological sex (`biologicalSex`)
+  - blood type (`bloodType`)
+  - date of birth (`dateOfBirth`)
+  - Fitzpatrick skin type (`fitzpatrickSkinType`)
+  - wheel chair use (`wheelchairUse`)
 
 - Dietary (`HKQuantityType`)
 
@@ -115,6 +132,18 @@ The data available in HealthKit includes:
   - dietary water
   - dietary zinc
 
+- Hearing (`HKQuantityType`)
+
+  - environmental audio exposure (`environmentalAudioExposure`)
+  - environmental audio exposure event
+  - headphone audio exposure (`headphoneAudioExposure`)
+  - headphone audio exposure event
+
+- Heart (`HKQuantityType`)
+
+  - `restingHeartRate`
+  - `walkingHeartRateAverage`
+
 - Reproductive Health (`HKQuantityType`)
 
   - basal body temperature (`basalBodyTemperature`)
@@ -129,20 +158,11 @@ The data available in HealthKit includes:
   - progesterone test result
   - sexual activity
 
-- Hearing (`HKQuantityType`)
-
-  - environmental audio exposure
-  - environmental audio exposure event
-  - headphone audio exposure (`headphoneAudioExposure`)
-  - headphone audio exposure event
-
 - Vital Signs (`HKQuantityType`)
 
-  - blood pressure
-  - blood pressure diastolic (`.bloodPressureDiastolic`)
-  - blood pressure systolic (`.bloodPressureSystolic`)
   - body temperature (`bodyTemperature`)
   - electrocardiogram data
+  - forced vital capacity (`forcedVitalCapacity`)
   - heart rate (`heartRate`)
   - heart rate variability SDNN (`heartRateVariabilitySDNN)
 
@@ -155,16 +175,22 @@ The data available in HealthKit includes:
   - irregular heart rhythm event
   - low heart rate event
   - oxygen saturation
-  - respiratory rate
-  - resting heart rate
   - walking heart rate average
 
 - Other (`HKQuantityType`)
 
-  - blood alcohol content (`bloodAlcoholContent`)
-  - blood glucose (`bloodGlucose`)
+  - `insulinDelivery`
+  - `numberOfAlcoholicBeverages`
   - number of times fallen (`numberOfTimesFallen`)
+  - `peripheralPerfusionIndex`
   - walking steadiness (`appleWalkingSteadiness`)
+  - `electroDermalActivity`
+  - `sixMinuteWalkTestDistance`
+  - `stairAscentSpeed`
+  - `stairDescentSpeed`
+  - `uvExposure`
+  - `walkingAsymmetryPercentage`
+  - `walkingDoubleSupportPercentage`
 
 ## Steps to Use
 
