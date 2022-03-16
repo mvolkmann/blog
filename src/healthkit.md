@@ -38,6 +38,7 @@ The data available in HealthKit includes:
   - `activeEnergyBurned`
   - `appleExerciseTime`
   - `appleMoveTime`
+  - `appleStandHour` (`HKCategoryTypeIdentifier`)
   - `appleStandTime`
   - `basalEnergyBurned`
   - `distanceCycling`
@@ -46,6 +47,7 @@ The data available in HealthKit includes:
   - `distanceWalkingRunning`
   - `distanceWheelchair`
   - `flightsClimbed` (stairs)
+  - `lowCardioFitnessEvent` (`HKCategoryTypeIdentifier`)
   - `nikeFuel` (points earned)
   - `pushCount` (wheelchair)
   - `stepCount`
@@ -53,7 +55,6 @@ The data available in HealthKit includes:
   - `vo2Max`
   - `walkingSpeed`
   - `walkingStepLength`
-  - low cardio fitness event
 
 - Blood (`HKQuantityType`)
 
@@ -134,37 +135,41 @@ The data available in HealthKit includes:
 - Hearing (`HKQuantityType`)
 
   - `environmentalAudioExposure`
-  - environmental audio exposure event
+  - `environmentalAudioExposureEvent` (`HKCategoryTypeIdentifier`)
   - `headphoneAudioExposure`
-  - headphone audio exposure event
+  - `headphoneAudioExposureEvent` (`HKCategoryTypeIdentifier`)
 
 - Heart (`HKQuantityType`)
 
-  - heartbeat series
-  - high heart rate event
-  - irregular heart rhythm event
-  - low heart rate event
+  - heartbeat series (see {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkheartbeatseriesquery",
+    "HKHeartbeatSeriesQuery" %})
+  - `highHeartRateEvent` (`HKCategoryTypeIdentifier`)
+  - `irregularHeartRhythmEvent` (`HKCategoryTypeIdentifier`)
+  - `lowHeartRateEvent` (`HKCategoryTypeIdentifier`)
   - `restingHeartRate`
   - `walkingHeartRateAverage`
 
-- Reproductive Health (`HKQuantityType`)
+- Reproductive Health (`HKCategoryTypeIdentifier`)
 
-  - `basalBodyTemperature`
-  - cervical mucus quality
-  - contraceptive
-  - inter-menstrual bleeding
-  - lactation
-  - menstrual flow
-  - ovulation test result
-  - pregnancy
-  - pregnancy test result
-  - progesterone test result
-  - sexual activity
+  - `basalBodyTemperature` (`HKQuantityType`)
+  - `cervicalMucusQuality`
+  - `contraceptive`
+  - `intermenstrualBleeding`
+  - `lactation`
+  - `menstrualFlow`
+  - `ovulationTestResult`
+  - `pregnancy`
+  - `pregnancyTestResult`
+  - `progesteroneTestResult`
+  - `sexualActivity`
 
 - Vital Signs (`HKQuantityType`)
 
   - `bodyTemperature`
-  - electrocardiogram data
+  - electrocardiogram data (see {% aTargetBlank
+    "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramquery",
+    "HKElectrocardiogramQuery" %})
   - `forcedVitalCapacity`
   - `heartRate`
   - `heartRateVariabilitySDNN`
@@ -176,6 +181,7 @@ The data available in HealthKit includes:
 - Other (`HKQuantityType`)
 
   - `appleWalkingSteadiness`
+  - `appleWalkingSteadinessEvent` (`HKCategoryTypeIdentifier`)
   - `electrodermalActivity`
   - `insulinDelivery`
   - `numberOfAlcoholicBeverages`
