@@ -82,7 +82,7 @@ The data available in HealthKit includes:
 
 - Characteristics (`HKCharacteristicType`)
 
-  - `activityMoveMode`
+  - `activityMoveMode` (TODO: What is this?)
   - `biologicalSex`
   - `bloodType`
   - `dateOfBirth`
@@ -141,9 +141,14 @@ The data available in HealthKit includes:
 
 - Heart (`HKQuantityType`)
 
-  - heartbeat series (see {% aTargetBlank
+  - heartbeat series
+
+    See {% aTargetBlank
     "https://developer.apple.com/documentation/healthkit/hkheartbeatseriesquery",
-    "HKHeartbeatSeriesQuery" %})
+    "HKHeartbeatSeriesQuery" %}.
+
+  - `heartRate`
+  - `heartRateVariabilitySDNN`
   - `highHeartRateEvent` (`HKCategoryTypeIdentifier`)
   - `irregularHeartRhythmEvent` (`HKCategoryTypeIdentifier`)
   - `lowHeartRateEvent` (`HKCategoryTypeIdentifier`)
@@ -167,12 +172,14 @@ The data available in HealthKit includes:
 - Vital Signs (`HKQuantityType`)
 
   - `bodyTemperature`
-  - electrocardiogram data (see {% aTargetBlank
+
+  - electrocardiogram data
+
+    See {% aTargetBlank
     "https://developer.apple.com/documentation/healthkit/hkelectrocardiogramquery",
-    "HKElectrocardiogramQuery" %})
+    "HKElectrocardiogramQuery" %}.
+
   - `forcedVitalCapacity`
-  - `heartRate`
-  - `heartRateVariabilitySDNN`
 
     This is the standard deviation of {% aTargetBlank
     "https://hexoskin.zendesk.com/hc/en-us/articles/360045123314-Difference-between-RR-interval-and-NN-interval",
