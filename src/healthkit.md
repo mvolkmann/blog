@@ -35,26 +35,26 @@ The data available in HealthKit includes:
 
 - Activity (`HKQuantityType`)
 
-  - active energy burned (`.activeEnergyBurned`)
-  - basal body temperature (`basalBodyTemperature`)
-  - basal energy burned (`basalEnergyBurned`)
-  - distance cycling (`distanceCycling`)
-  - distance downhill snow sports (`distanceDownhillSnowSports`)
-  - distance swimming (`distanceSwimming`)
-  - distance walking/running (`distanceWalkingRunning`)
-  - distance wheelchair (`distanceWheelchair`)
-  - exercise time (`.appleExerciseTime`)
-  - flights climbed (stairs) (`flightsClimbed`)
-  - low cardio fitness event (``)
-  - move time (`appleMoveTime`)
-  - Nike fuel points earned (`nikeFuel`)
-  - stand time (`appleStandTime`)
-  - step count (`stepCount`)
-  - swimming stroke count (`swimmingStrokeCount`)
-  - VO2 max (`vo2Max`)
+  - `.activeEnergyBurned`
+  - `.appleExerciseTime`
+  - `appleMoveTime`
+  - `appleStandTime`
+  - `basalBodyTemperature`
+  - `basalEnergyBurned`
+  - `distanceCycling`
+  - `distanceDownhillSnowSports`
+  - `distanceSwimming`
+  - `distanceWalkingRunning`
+  - `distanceWheelchair`
+  - `flightsClimbed` (stairs)
+  - `nikeFuel` (points earned)
+  - `pushCount` (wheelchair)
+  - `stepCount`
+  - `swimmingStrokeCount`
+  - `vo2Max`
   - `walkingSpeed`
   - `walkingStepLength`
-  - wheelchair push count (`pushCount`)
+  - low cardio fitness event (``)
 
 - Blood (`HKQuantityType`)
 
@@ -66,28 +66,28 @@ The data available in HealthKit includes:
 
 - Body Measurements (`HKQuantityType`)
 
-  - body fat percentage (`bodyFatPercentage`)
-  - body mass (`bodyMass`)
-  - body mass index (`bodyMassIndex`)
-  - height (`height`)
-  - lean body mass (`leanBodyMass`)
-  - waist circumference (`waistCircumference`)
+  - `bodyFatPercentage`
+  - `bodyMass`
+  - `bodyMassIndex`
+  - `height`
+  - `leanBodyMass`
+  - `waistCircumference`
 
 - Breathing (`HKQuantityType`)
 
-  - forced expiratory volume 1 (`forcedExpiratoryVolume1`)
+  - `forcedExpiratoryVolume1`
   - `inhalerUsage`
   - `peakExpiratoryFlowRate`
   - `respiratoryRate`
 
 - Characteristics (`HKCharacteristicType`)
 
-  - activity move mode (`activityMoveMode`)
-  - biological sex (`biologicalSex`)
-  - blood type (`bloodType`)
-  - date of birth (`dateOfBirth`)
-  - Fitzpatrick skin type (`fitzpatrickSkinType`)
-  - wheel chair use (`wheelchairUse`)
+  - `activityMoveMode`
+  - `biologicalSex`
+  - `bloodType`
+  - `dateOfBirth`
+  - `fitzpatrickSkinType`
+  - `wheelchairUse`
 
 - Dietary (`HKQuantityType`)
 
@@ -134,9 +134,9 @@ The data available in HealthKit includes:
 
 - Hearing (`HKQuantityType`)
 
-  - environmental audio exposure (`environmentalAudioExposure`)
+  - `environmentalAudioExposure`
   - environmental audio exposure event
-  - headphone audio exposure (`headphoneAudioExposure`)
+  - `headphoneAudioExposure`
   - headphone audio exposure event
 
 - Heart (`HKQuantityType`)
@@ -146,7 +146,7 @@ The data available in HealthKit includes:
 
 - Reproductive Health (`HKQuantityType`)
 
-  - basal body temperature (`basalBodyTemperature`)
+  - `basalBodyTemperature`
   - cervical mucus quality
   - contraceptive
   - inter-menstrual bleeding
@@ -160,11 +160,11 @@ The data available in HealthKit includes:
 
 - Vital Signs (`HKQuantityType`)
 
-  - body temperature (`bodyTemperature`)
+  - `bodyTemperature`
   - electrocardiogram data
-  - forced vital capacity (`forcedVitalCapacity`)
-  - heart rate (`heartRate`)
-  - heart rate variability SDNN (`heartRateVariabilitySDNN)
+  - `forcedVitalCapacity`
+  - `heartRate`
+  - `heartRateVariabilitySDNN`
 
     This is the standard deviation of {% aTargetBlank
     "https://hexoskin.zendesk.com/hc/en-us/articles/360045123314-Difference-between-RR-interval-and-NN-interval",
@@ -179,12 +179,12 @@ The data available in HealthKit includes:
 
 - Other (`HKQuantityType`)
 
+  - `appleWalkingSteadiness`
+  - `electroDermalActivity`
   - `insulinDelivery`
   - `numberOfAlcoholicBeverages`
-  - number of times fallen (`numberOfTimesFallen`)
+  - `numberOfTimesFallen`
   - `peripheralPerfusionIndex`
-  - walking steadiness (`appleWalkingSteadiness`)
-  - `electroDermalActivity`
   - `sixMinuteWalkTestDistance`
   - `stairAscentSpeed`
   - `stairDescentSpeed`
