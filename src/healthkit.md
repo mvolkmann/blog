@@ -141,6 +141,11 @@ The data available in HealthKit includes:
 
 - Heart (`HKQuantityType`)
 
+  - heartbeat series
+  - high heart rate event
+  - irregular heart rhythm event
+  - low heart rate event
+  - oxygen saturation
   - `restingHeartRate`
   - `walkingHeartRateAverage`
 
@@ -169,13 +174,6 @@ The data available in HealthKit includes:
     This is the standard deviation of {% aTargetBlank
     "https://hexoskin.zendesk.com/hc/en-us/articles/360045123314-Difference-between-RR-interval-and-NN-interval",
     "NN intervals" %}.
-
-  - heartbeat series
-  - high heart rate event
-  - irregular heart rhythm event
-  - low heart rate event
-  - oxygen saturation
-  - walking heart rate average
 
 - Other (`HKQuantityType`)
 
