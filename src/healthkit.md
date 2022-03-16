@@ -33,46 +33,91 @@ See my project flutter_health which is not yet working.
 
 The data available in HealthKit includes:
 
-- Characteristics
+- Characteristics (`HKCharacteristicType`)
 
-  - activity move mode
-  - biological sex
-  - blood type
-  - date of birth
-  - Fitzpatrick skin type
-  - wheel chair use
+  - activity move mode (`activityMoveMode`)
+  - biological sex (`biologicalSex`)
+  - blood type (`bloodType`)
+  - date of birth (`dateOfBirth`)
+  - Fitzpatrick skin type (`fitzpatrickSkinType`)
+  - wheel chair use (`wheelchairUse`)
 
-- Activity
+- Activity (`HKQuantityType`)
 
-  - active energy burned
-  - Apple exercise time
-  - Apple move time
-  - Apple stand time
-  - basal energy burned
-  - distance cycling
-  - distance downhill snow sports
-  - distance swimming
-  - distance walking/running
-  - flights climbed (stairs)
-  - low cardio fitness event
-  - Nike fuel points earned
-  - push count while using a wheelchair
-  - step count
-  - swimming stroke count
-  - VO2 max
+  - active energy burned (`.activeEnergyBurned`)
+  - basal body temperature (`basalBodyTemperature`)
+  - basal energy burned (`basalEnergyBurned`)
+  - distance cycling (`distanceCycling`)
+  - distance downhill snow sports (`distanceDownhillSnowSports`)
+  - distance swimming (`distanceSwimming`)
+  - distance walking/running (`distanceWalkingRunning`)
+  - distance wheelchair (`distanceWheelchair`)
+  - exercise time (`.appleExerciseTime`)
+  - flights climbed (stairs) (`flightsClimbed`)
+  - low cardio fitness event (``)
+  - move time (`appleMoveTime`)
+  - Nike fuel points earned (`nikeFuel`)
+  - stand time (`appleStandTime`)
+  - step count (`stepCount`)
+  - swimming stroke count (`swimmingStrokeCount`)
+  - VO2 max (`vo2Max`)
+  - wheelchair push count (`pushCount`)
 
-- Body Measurements
+- Body Measurements (`HKQuantityType`)
 
-  - body fat percentage
-  - body mass
-  - body mass index
-  - height
+  - body fat percentage (`bodyFatPercentage`)
+  - body mass (`bodyMass`)
+  - body mass index (`bodyMassIndex`)
+  - height (`height`)
   - lean body mass
-  - waist circumference
+  - waist circumference (`waistCircumference`)
 
-- Reproductive Health
+- Dietary (`HKQuantityType`)
 
-  - basal body temperature
+  - dietary biotin
+  - dietary caffeine
+  - dietary calcium
+  - dietary carbohydrates
+  - dietary chloride
+  - dietary cholesterol
+  - dietary chromium
+  - dietary copper
+  - dietary energy consumed
+  - dietary fat monounsaturated
+  - dietary fat polyunsaturated
+  - dietary fat saturated
+  - dietary fat total
+  - dietary fiber
+  - dietary folate
+  - dietary iodine
+  - dietary iron
+  - dietary magnesium
+  - dietary manganese
+  - dietary molybdenum
+  - dietary niacin
+  - dietary pantothebnic acid
+  - dietary phosphorus
+  - dietary potassium
+  - dietary protein
+  - dietary riboflavin
+  - dietary selenium
+  - dietary sodium
+  - dietary sugar
+  - dietary thiamin
+  - dietary vitamin A
+  - dietary vitamin B12
+  - dietary vitamin B6
+  - dietary vitamin C
+  - dietary vitamin D
+  - dietary vitamin E
+  - dietary vitamin A
+  - dietary vitamin K
+  - dietary water
+  - dietary zinc
+
+- Reproductive Health (`HKQuantityType`)
+
+  - basal body temperature (`basalBodyTemperature`)
   - cervical mucus quality
   - contraceptive
   - inter-menstrual bleeding
@@ -84,24 +129,27 @@ The data available in HealthKit includes:
   - progesterone test result
   - sexual activity
 
-- Hearing
+- Hearing (`HKQuantityType`)
 
   - environmental audio exposure
   - environmental audio exposure event
-  - headphone audio exposure
+  - headphone audio exposure (`headphoneAudioExposure`)
   - headphone audio exposure event
 
-- Vital Signs
+- Vital Signs (`HKQuantityType`)
 
   - blood pressure
-  - blood pressure diastolic
-  - blood pressure systolic
-  - body temperature
+  - blood pressure diastolic (`.bloodPressureDiastolic`)
+  - blood pressure systolic (`.bloodPressureSystolic`)
+  - body temperature (`bodyTemperature`)
   - electrocardiogram data
-  - heart rate
-  - heart rate variability SDNN (standard deviation of {% aTargetBlank
+  - heart rate (`heartRate`)
+  - heart rate variability SDNN (`heartRateVariabilitySDNN)
+
+    This is the standard deviation of {% aTargetBlank
     "https://hexoskin.zendesk.com/hc/en-us/articles/360045123314-Difference-between-RR-interval-and-NN-interval",
-    "NN intervals" %})
+    "NN intervals" %}.
+
   - heartbeat series
   - high heart rate event
   - irregular heart rhythm event
@@ -110,6 +158,13 @@ The data available in HealthKit includes:
   - respiratory rate
   - resting heart rate
   - walking heart rate average
+
+- Other (`HKQuantityType`)
+
+  - blood alcohol content (`bloodAlcoholContent`)
+  - blood glucose (`bloodGlucose`)
+  - number of times fallen (`numberOfTimesFallen`)
+  - walking steadiness (`appleWalkingSteadiness`)
 
 ## Steps to Use
 
