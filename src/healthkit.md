@@ -35,11 +35,10 @@ The data available in HealthKit includes:
 
 - Activity (`HKQuantityType`)
 
-  - `.activeEnergyBurned`
-  - `.appleExerciseTime`
+  - `activeEnergyBurned`
+  - `appleExerciseTime`
   - `appleMoveTime`
   - `appleStandTime`
-  - `basalBodyTemperature`
   - `basalEnergyBurned`
   - `distanceCycling`
   - `distanceDownhillSnowSports`
@@ -54,7 +53,7 @@ The data available in HealthKit includes:
   - `vo2Max`
   - `walkingSpeed`
   - `walkingStepLength`
-  - low cardio fitness event (``)
+  - low cardio fitness event
 
 - Blood (`HKQuantityType`)
 
@@ -112,7 +111,7 @@ The data available in HealthKit includes:
   - `dietaryManganese`
   - `dietaryMolybdenum`
   - `dietaryNiacin`
-  - `dietaryPantothebnicAcid`
+  - `dietaryPantothenicAcid`
   - `dietaryPhosphorus`
   - `dietaryPotassium`
   - `dietaryProtein`
@@ -145,7 +144,6 @@ The data available in HealthKit includes:
   - high heart rate event
   - irregular heart rhythm event
   - low heart rate event
-  - oxygen saturation
   - `restingHeartRate`
   - `walkingHeartRateAverage`
 
@@ -178,7 +176,7 @@ The data available in HealthKit includes:
 - Other (`HKQuantityType`)
 
   - `appleWalkingSteadiness`
-  - `electroDermalActivity`
+  - `electrodermalActivity`
   - `insulinDelivery`
   - `numberOfAlcoholicBeverages`
   - `numberOfTimesFallen`
