@@ -35,9 +35,26 @@ Features that the Realtime Database and Cloud Firestore have in common include:
 - data syncs across multiple clients in near realtime
 - data remains available when clients go offline
 
+For details on the differences and cost of each option, see {% aTargetBlank
+"https://firebase.google.com/docs/firestore/rtdb-vs-firestore",
+"Choose a databsase" %}.
+
 TODO: Can data be modified when offline and re-synced when back online?
 
-TODO: Summarize the cost
+## Pricing
+
+For details, see the {% aTargetBlank "https://firebase.google.com/pricing",
+"Pricing" %} page.
+There are two pricing plans, "Spark" and "Blaze".
+
+The Realtime Database only charges for bandwidth and storage
+and does so at a higher rate thatn Cloud Firestore.
+Is there are minimum cost of $5/month?
+
+The Cloud Firestore database charges for
+read, write, and delete operations performed.
+It is free for small usages.
+Daily spending limits can be enforced.
 
 browse firebase.google.com
 click the “Get Started” button
