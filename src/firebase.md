@@ -125,50 +125,53 @@ Read/write restrictions on a node also apply to all nodes below it.
 - copy the JavaScript code needed to configure the use of Firebase and paste it into the web app
 - import {initializeApp} from ‘firebase/app’;
 - import {getDatabase, onValue, ref, set} from ‘firebase/database’;
-- const firebaseConfig = {…};
-- const app = initializeApp(firebaseConfig);
-- const db = getDatabase(); // can call multiple times; returns same object
-- const userRef = ref(db, ‘/users/ + userId);
-- set(userRef, userObject); // replaces node if one already exists at the path
-- const emailRef = ref(db, `/users/${userId}/email`);
+- `const firebaseConfig = {…}`;
+- `const app = initializeApp(firebaseConfig);`
+- `const db = getDatabase();` // can call multiple times; returns same object
+- `const userRef = ref(db, '/users/' + userId);`
+- `set(userRef, userObject);` // replaces node if one already exists at the path
+- `const emailRef = ref(db, '/users/${userId}/email')`;
 - // The onValue callback is called initially and again every time the value changes.
 - // Does this use a WebSocket?
-- onValue(emailRef, snapshot => {
-- const email = snapshot.val();
+- `onValue(emailRef, snapshot => {`
+- `const email = snapshot.val();`
 - // Display the email.
-- });
+- `});`
 
 How can you delete a node and all its descendants?
 
 To watch a list of nodes with a common parent node …
+
+```js
 const parentRef = ref(db, parentPath);
 onValue(
-parentRef,
-snapshot => {
-snapshot.forEach(childSnapshot => {
-const childKey = childSnapshot.key;
-const childValue = childSnapshot.val();
-// Do something with child value.
-});
-},
-{onlyOnce: true} // Does this mean we aren’t watching for changes?
+  parentRef,
+  snapshot => {
+    snapshot.forEach(childSnapshot => {
+      const childKey = childSnapshot.key;
+      const childValue = childSnapshot.val();
+      // Do something with child value.
+    });
+  },
+  {onlyOnce: true} // Does this mean we aren’t watching for changes?
 );
+```
 
 Rather than watching for any changes to the children of a parent node,
 we can listen for specific events.
 
-onChildAdded(parentRef, data => { … });
+`onChildAdded(parentRef, data => { … });`
 
 - triggered once for each existing child and again every time a new child is added
 
-onChildChanged(parentRef, data => { … });
+`onChildChanged(parentRef, data => { … });`
 
-onChildRemoved(parentRef, data => { … });
+`onChildRemoved(parentRef, data => { … });`
 
 There are web framework specific libraries for Firebase including
 AngularFire, ReactFire, SvelteFire, and VueFire.
 
-Swift Details
+## Swift Details
 
 - create a Swift project in Xcode
 - when creating a Firebase project, paste in the bundle id from the Xcode project
