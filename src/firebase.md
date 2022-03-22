@@ -106,56 +106,18 @@ Read/write restrictions on a node also apply to all nodes below it.
 1. Click "Project settings".
 1. Click the "General" tab.
 1. Scroll down to the "Your apps" section
-1. Click an app type: iOS, Android, web, or Unity.
-1. If web is selected
-   - Enter an "App nickname".
-   - Click the "Register app" button.
-   - Select the "Use npm" radio button.
-   - Follow the instructions that are displayed.
-   - Move the line that sets `firebaseConfig` to `src/secrets.js`
-     and add `export` in front of it.
-   - Add `src/secrets.js` to `.gitignore`
-   - Import `firebaseConfig` from `secrets.js`
-     in the file where `initializeApp` is called.
-   - Back in the web browser, click "Continue to console".
-
-- enter an app nickname
-- check the "Also set up Firebase Hosting for this app" checkbox
-- click "Register app"
-- copy the JavaScript code needed to configure the use of Firebase and paste it into the web app
-- import {initializeApp} from ‘firebase/app’;
-- import {getDatabase, onValue, ref, set} from ‘firebase/database’;
-- `const firebaseConfig = {…}`;
-- `const app = initializeApp(firebaseConfig);`
-- `const db = getDatabase();` // can call multiple times; returns same object
-- `const userRef = ref(db, '/users/' + userId);`
-- `set(userRef, userObject);` // replaces node if one already exists at the path
-- `const emailRef = ref(db, '/users/${userId}/email')`;
-- // The onValue callback is called initially and again every time the value changes.
-- // Does this use a WebSocket?
-- `onValue(emailRef, snapshot => {`
-- `const email = snapshot.val();`
-- // Display the email.
-- `});`
-
-How can you delete a node and all its descendants?
-
-To watch a list of nodes with a common parent node …
-
-```js
-const parentRef = ref(db, parentPath);
-onValue(
-  parentRef,
-  snapshot => {
-    snapshot.forEach(childSnapshot => {
-      const childKey = childSnapshot.key;
-      const childValue = childSnapshot.val();
-      // Do something with child value.
-    });
-  },
-  {onlyOnce: true} // Does this mean we aren’t watching for changes?
-);
-```
+1. If buttons for app types are not displayed, click the "Add app" button.
+1. Click button for the web app type.
+1. Enter an "App nickname".
+1. Click the "Register app" button.
+1. Select the "Use npm" radio button.
+1. Follow the instructions that are displayed.
+1. Move the line that sets `firebaseConfig` to `src/secrets.js`
+   and add `export` in front of it.
+1. Add `src/secrets.js` to `.gitignore`
+1. Import `firebaseConfig` from `secrets.js`
+   in the file where `initializeApp` is called.
+1. Back in the web browser, click "Continue to console".
 
 Rather than watching for any changes to the children of a parent node,
 we can listen for specific events.
@@ -170,6 +132,41 @@ we can listen for specific events.
 
 There are web framework specific libraries for Firebase including
 AngularFire, ReactFire, SvelteFire, and VueFire.
+
+## Using in an iOS App
+
+1. In a web browser, navigate to the Firebase project.
+1. In the left nav., click the gear icon after "Project Overview".
+1. Click "Project settings".
+1. Click the "General" tab.
+1. Scroll down to the "Your apps" section
+1. If buttons for app types are not displayed, click the "Add app" button.
+1. Click button for the iOS app type.
+1. Enter the bundle identifier from the iOS app.
+   To find this, open the iOS app in Xcode,
+   select the top entry in the Navigator,
+   select the first entry under "TARGETS",
+   and see "Bundle Identifier" in the "Identity" section.
+1. Enter an "App nickname".
+1. Click the "Register app" button.
+1. Click the "Download GoogleService-Info.plist" button.
+1. In Xcode, right-click the top entry in the Navigator,
+   select "Add Files to ...", and add the file "GoogleService-Info.plist".
+1. Click the "Next" button.
+1. In Xcode, select File ... Add Packages.
+1. Enter the URL "https://github.com/firebase/firebase-ios-sdk"
+   in the search input.
+1. Select "firebase-ios-sdk".
+1. Click the "Add Package" button.
+1. Wait for the package to be verified, downloaded, and installed.
+1. This takes a LONG time to complete!
+1. In the dialog that appears, select other Firebase libraries to be installed.
+   Check "FirebaseFirestore" and press the "Add Package" button.
+1. Back in the web browser, click the "Next" button.
+1. Copy the Swift initialization code that is displayed
+   into the file `AppDelegate.swift`.
+   Perhaps the only change needed is to add `import Firebase` at the top.
+1. Click the "Next" button.
 
 ## Swift Details
 
