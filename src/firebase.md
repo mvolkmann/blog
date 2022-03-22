@@ -167,6 +167,7 @@ AngularFire, ReactFire, SvelteFire, and VueFire.
    into the file `AppDelegate.swift`.
    Perhaps the only change needed is to add `import Firebase` at the top.
 1. Click the "Next" button.
+1. Click "Continue to console".
 
 ## Swift Details
 
