@@ -212,6 +212,8 @@ It supports adding, updating, and deleting the documents in this collection.
   src="/blog/assets/firestore-svelte.png?v={{pkg.version}}"
   title="Firestore in Svelte">
 
+{% raw %}
+
 ```html
 <script>
   import {initializeApp} from 'firebase/app';
@@ -370,3 +372,5 @@ It supports adding, updating, and deleting the documents in this collection.
   }
 </style>
 ```
+
+{% endraw %}
