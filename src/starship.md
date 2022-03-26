@@ -65,7 +65,7 @@ To enable the use of Starship in each shell:
 - for Fish, edit `.config/fish/config.fish` and add  
   `starship init fish | source`
 
-- for Nushell, edit `$(config path)` and add  
+- for Nushell, edit `$nu.config-path` and add  
   `prompt = "starship prompt"`
 
 - for Powershell, edit `Microsoft.PowerShell_profile.ps1` and add  

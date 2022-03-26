@@ -173,8 +173,10 @@ the directories listed in the `path` configuration setting
 are searched to find a matching executable.
 To run a command in the `path` that happens to have the same name
 as a Nushell command, prefix the command name with `^`.
+{% raw %}
 For example, `^ls *.html` uses the `ls` command defined in root shell
 rather than the version defined by Nushell.
+{% endraw %}
 
 For detailed documentation on Nushell commands, see the
 {% aTargetBlank "https://www.nushell.sh/book/", "Book" %}
@@ -249,14 +251,14 @@ They are `host`, `path`, `query`, and `scheme` (ex. http).
 The configuration for Nushell is stored in a
 {% aTargetBlank "https://github.com/toml-lang/toml", "TOML" %}
 (Tom's Obvious, Minimal Language) file
-whose path can be obtained by entering `config path`.
+whose path can be obtained by entering `echo $nu.config-path`.
 Configuration settings can be changed by editing this file
 or using the `config` subcommands described below.
 Changes to the config file only affect new shell sessions,
 not the current one.
 
-To edit the config file with Vim, enter `vim (config path)`.
-To edit the config file with VS Code, enter `code (config path)`.
+To edit the config file with Vim, enter `vim $nu.config-path`.
+To edit the config file with VS Code, enter `code $nu.config-path`.
 When editing the config file using VS Code,
 consider installing the "TOML Language Support" extension
 which profiles syntax highlighting and formatting.

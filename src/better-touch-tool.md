@@ -56,17 +56,18 @@ I created the following keyboard shortcuts
 mapped to the indicated actions:
 
 - fn ←: "Resize Window to Left Third"
-- fn →: "Resize Window to Right Third"
-- fn ↑: "Maximize Window to Top Half"
-- fn ↓: "Maximize Window to Bottom Half"
-- fn t: "Maximize Window to Top Half" same as fn ↑
-- fn b: "Maximize Window to Bottom Half" same as fn ↓
-- fn l: "Maximize Window Left" (half)
 - fn c: "Resize Window to Middle Third"
-- fn r: "Maximize Window Right" (half)
+- fn →: "Resize Window to Right Third"
+
+- fn l: "Maximize Window Left Half"
+- fn r: "Maximize Window Right Half"
+- fn ↑: "Maximize Window to Top Half"
+- fn t: same as above
+- fn ↓: "Maximize Window to Bottom Half"
+- fn b: same as above
+
 - fn C: "Maximize Window Left" and "Center Window"  
   resizes to half width, full height, and centers horizontally
+
 - fn m: "Maximize Window"
 - fn n: "Center Window on Next Monitor"
-- fn N: "Maximize Window on Next Monitor"
-- fn R: "Restore Old Window Size"
