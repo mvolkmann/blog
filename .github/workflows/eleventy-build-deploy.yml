@@ -2,31 +2,20 @@ name: Eleventy build and deploy
 on:
   push:
     branches: [master]
-  watch:
-    types: [started] # to trigger by starring the repo - why "started"?
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: manual trigger
-        if: github.event_name == 'watch'
-        run: echo "I was manually triggered."
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
       - run: npm ci
-      - name: get day of week for today
-        uses: ./src/actions/day-of-week
-      - name: get day of week for my birthday
-        uses: ./src/actions/day-of-week
-        with:
-          date: '1961-4-16'
       - run: npm run lint
       - run: npm run format
       - run: npm run build
       - name: site deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
