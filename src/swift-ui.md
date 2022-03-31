@@ -5375,6 +5375,37 @@ that doesn't contain real values
 in order to document the secret keys that are required.
 In addition, add the generated file `{app-name}-Info.plist` to `.gitignore`.
 
+## Background Tasks
+
+Apple introduced the BackgroundTasks framework in 2019 as part of iOS 13.
+
+See {% aTargetBlank
+"https://www.spaceotechnologies.com/ios-background-task-framework-app-update/",
+"How To Use iOS Background Tasks Framework" %}.
+
+To run tasks while an app is in the background:
+
+1. Select the top project entry in the Navigator.
+1. Click the top entry under TARGETS
+1. Click the "Signing & Capabilities" tab.
+1. Click the "+" to add a capability.
+1. In the dialog that appears, double-click "Background Modes".
+1. Check the checkboxes for "Background fetch" and "Background processing".
+1. Click the "Info" tab.
+1. Expand the "Custom iOS Target Properties" section if not already expanded.
+1. Click the row of the last entry and then click the circled "+" that appears.
+1. Add the key "Permitted background task scheduler identifiers"
+1. Set the type to "Array".
+1. For each background tasks
+
+   1. Click the "+" on that row to add an item.
+   1. The item type should be "String".
+   1. Set the value to a unique string.
+   1. Register a task.
+
+1. Edit the file "AppDelegate.swift".
+1. Add `import BackgroundTasks`
+
 ## Core Data
 
 Core Data is an object/graph persistence framework.
