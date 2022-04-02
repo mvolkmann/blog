@@ -136,8 +136,14 @@ The data available in HealthKit includes:
 
   - `environmentalAudioExposure`
   - `environmentalAudioExposureEvent` (`HKCategoryTypeIdentifier`)
+
+    "sent when the average sound level reaches or exceeds
+    a specified threshold for three minutes"
+
   - `headphoneAudioExposure`
   - `headphoneAudioExposureEvent` (`HKCategoryTypeIdentifier`)
+
+    "when the device generates a notification about loud headphone audio"
 
 - Heart (`HKQuantityType`)
 
@@ -150,8 +156,18 @@ The data available in HealthKit includes:
   - `heartRate`
   - `heartRateVariabilitySDNN`
   - `highHeartRateEvent` (`HKCategoryTypeIdentifier`)
+
+    For example, "Your heart rate rose above 120 BPM while you
+    seemed to be inactive for 10 minutes starting at 10:06 AM."
+
   - `irregularHeartRhythmEvent` (`HKCategoryTypeIdentifier`)
+
+    "might be suggestive of atrial fibrillation (AFib)"
+
   - `lowHeartRateEvent` (`HKCategoryTypeIdentifier`)
+
+    This is similar to a `highHeartRateEvent`.
+
   - `restingHeartRate`
   - `walkingHeartRateAverage`
 
@@ -189,6 +205,10 @@ The data available in HealthKit includes:
 
   - `appleWalkingSteadiness`
   - `appleWalkingSteadinessEvent` (`HKCategoryTypeIdentifier`)
+
+    "an incident where the user showed a
+    reduced score for their gait's steadiness"
+
   - `electrodermalActivity`
   - `insulinDelivery`
   - `numberOfAlcoholicBeverages`
