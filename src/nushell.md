@@ -39,13 +39,9 @@ in the pipeline can begin receiving that output as its input.
 Some commands such as `echo` and `ls` are lazy.
 This means they do not produce output unless
 something is requesting data from their output stream.
-One way to do this it to pipe their output to the `autoview` command
-which determines how to render the data based on its type.
-Piping to `autoview` occurs implicitly in the shell
-after the last command in a pipeline.
-So the command `ls` is processed as if `ls | autoview` was entered.
+Commands executed in the shell automatically have their output requested.
 When semicolons are used to separate multiple pipelines on the same line,
-`autoview` is only applied to the last pipeline.
+the shell only requests output from the last pipeline.
 For example, `let a = 2; let b = 3; $a + $b` outputs `5`.
 
 Color coding is applied to commands as they are typed.
@@ -80,7 +76,7 @@ Examples include the `where` and `sort-by` commands.
 
 Commands that take input and display it or write it somewhere such as file
 are referred to as "outputs" or "sinks".
-Examples include the `autoview` and `save` commands.
+An example is the `save` command.
 
 ## Installing
 
@@ -88,6 +84,8 @@ There are many options for installing or upgrading Nushell.
 
 If you have Rust installed, enter `cargo install nu`.
 This takes around seven minutes to complete.
+It installs the `nu` executable in `$HOME/.cargo/bin`
+which is in my `PATH` environment variable.
 
 If you are on macOS and have Homebrew installed, enter `brew install nushell`.
 Note that Homebrew may install a version
@@ -105,18 +103,10 @@ To see the extra features this includes, search for "extra" at
 
 ## Upgrading
 
-My `PATH` environment variable contains `/usr/local/bin`.
-I created a symbolic link in that directory
-to where the Rust `cargo` command installs executables.
-The one-time setup commands to do this are:
-
-- `cd /usr/local/bin`
-- `ln -s $HOME/.cargo/bin/nu nu`
-
 When a new version of Nushell comes out, here are the steps to upgrade.
 These have been tested in macOS, but not in other platforms.
 
-- enter `nu` to see the current version
+- enter `nu -v` to see the current version
 
 - optionally update the Rust toolchain if tools may be out of date
   by entering `rustup update`
@@ -134,7 +124,8 @@ After installing Nushell, enter `nu` in a terminal to start a shell.
 
 For help, enter `help`.
 For a list of Nushell commands and custom commands, enter `help commands`.
-In version 0.28.0 there are 105 Nushell commands.
+In version 0.60.0 there are 262 Nushell commands.
+
 For help on a specific command,
 enter `help {command-name}` or {command-name} -h`.
 For more detail on supported commands, see the {% aTargetBlank
@@ -147,23 +138,26 @@ Later we will see how to define custom commands
 so they are automatically available in new Nushell sessions.
 
 ```bash
+def contains-any-case [text: string, substring: string] {
+  $text | str contains --insensitive $substring
+}
+
 def help-text [s: string] {
   help commands |
-    select name description |
-    append (help commands | get subcommands ) |
-    flatten |
-    where description =~ $s || name =~ $s
+    select name usage extra_usage |
+    where ((
+      contains-any-case $it.name $s) || (
+      contains-any-case $it.usage $s) || (
+      contains-any-case $it.extra_usage $s))
 }
 ```
-
-TODO: Does this work in v0.32.0?
 
 </aside>
 
 Like in all shells, commands are executed by typing them
-and pressing the enter key.
-Multi-line commands can be entered by pressing enter
-before a block, delimited by square brackets or curly braces, is complete.
+and pressing the return key.
+Multi-line commands can be entered by pressing return before a block,
+delimited by square brackets or curly braces, until complete.
 
 Nushell has great command recall and completion like the Fish and Zsh shells.
 Command recall even supports multi-line command editing.
@@ -174,7 +168,8 @@ are searched to find a matching executable.
 To run a command in the `path` that happens to have the same name
 as a Nushell command, prefix the command name with `^`.
 {% raw %}
-For example, `^ls *.html` uses the `ls` command defined in root shell
+For example, `^find -name '*.svelte' | xargs grep import`
+uses the `find` command defined in root shell
 rather than the version defined by Nushell.
 {% endraw %}
 
@@ -1632,12 +1627,13 @@ The many Nushell commands that operate on tables
 are summarized in the table below.
 Examples of using many of them appear in the sub-sections that follow.
 
+TODO: Add more commands here that have been added.
+
 | Command                    | Description                                                                                                               |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `all?`                     | determines if any row in a table matches a given condition                                                                |
 | `any?`                     | determines if all rows in a table match a given condition                                                                 |
 | `append`                   | creates a new table by appending a single row to an existing table                                                        |
-| `autoview`                 | renders data as a table or list                                                                                           |
 | `compact`                  | removes empty rows                                                                                                        |
 | `drop n`                   | removes the last `n` rows (`n` defaults to 1)                                                                             |
 | `drop column n`            | removes the last `n` columns (`n` defaults to 1)                                                                          |
