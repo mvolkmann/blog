@@ -183,11 +183,11 @@ For more help, join the {% aTargetBlank
 ## Subcommands
 
 Subcommands provide a way of grouping commands under a common "namespace".
-Examples of such built-in namespaces include
-`date`, `from`, `to`, `math`, `str`, `url`.
+Examples of such built-in namespaces include `date`, `from`,
+`into`, `math`, `path`, `random`, `str`, `to`, and `url`.
 
 The `date` subcommands are
-`format`, `list-timezone`, `now`, `to-table`, and `to-timezone`.
+`format`, `humanize`, `list-timezone`, `now`, `to-table`, and `to-timezone`.
 
 The `from` subcommands convert data from a given format to a table.
 They are
@@ -195,39 +195,37 @@ They are
 `url`, `vcf`, `xlsx`, `xml`, `yaml`, and `yml`.
 
 The `into` subcommands convert values to another type.
-They are `binary`, `int`, and `string`.
+They are `binary`, `bool`, `datetime`, `decimal`, `duration`,
+`filesize`, `int`, and `string`.
 For example, `echo '19' | into int` gives the integer 19.
-
-The `query` command queries various data formats.
-Currently the only supported subcommand is `json`.
-For example, `echo '{"foo": 1, "bar": 2}' | query json bar`
-gives the integer 2.
-
-The `to` subcommands convert a table into a given output format and
-are commonly piped to the `save` command to write the result to a file.
-They are
-`csv`, `html`, `json`, `md`, `toml`, `tsv`, `url`, `xml`, and `yaml`.
 
 The `math` subcommands perform math calculations.
 They are
 `abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
 `product`, `round`, `sqrt`, `stddev`, `sum`, and `variance`.
-Also see the commands `inc`, `into-int`, `random`, and `seq`.
 
 The `path` subcommands operate on file paths.
 The table below describes these and shows the result of entering
 `echo ~/Documents/demo.txt | path {subcommand}`.
 
-| Subcommand  | Description                                                                                                                        |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `basename`  | returns the filename portion (`demo.txt`)                                                                                          |
-| `dirname`   | returns the directory path (`~/Documents`)                                                                                         |
-| `exists`    | returns a boolean indicating if the file exists;<br>can only return `true` for expanded paths                                      |
-| `expand`    | returns the expanded path (`/Users/mark/Documents/demo.txt`)                                                                       |
-| `extension` | returns the file extension (`txt`)                                                                                                 |
-| `filestem`  | returns the filename with the the extension (`demo`)                                                                               |
-| `join`      | returns the result of joining two partial paths<br>`echo '~/Documents' \| path join -a demo.txt`<br>returns `~/Documents/demo.txt` |
-| `type`      | returns `Dir` or `File`                                                                                                            |
+| Subcommand    | Description                                                                                                                        |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `basename`    | returns the filename portion (`demo.txt`)                                                                                          |
+| `dirname`     | returns the directory path (`~/Documents`)                                                                                         |
+| `exists`      | returns a boolean indicating if the file exists;<br>can only return `true` for expanded paths                                      |
+| `expand`      | returns the expanded path (`/Users/mark/Documents/demo.txt`)                                                                       |
+| `join`        | returns the result of joining two partial paths<br>`echo '~/Documents' \| path join -a demo.txt`<br>returns `~/Documents/demo.txt` |
+| `parse`       | converts a path to structured data including `parent` (directory path), `stem` (filename w/o extension), and `extension`           |
+| `relative-to` | returns a path relative to another                                                                                                 |
+| `split`       | returns the parts of a path split by a separator                                                                                   |
+| `type`        | returns `Dir` or `File`                                                                                                            |
+
+TODO: RESUME UPDATES HERE!
+
+The `query` command queries various data formats.
+Currently the only supported subcommand is `json`.
+For example, `echo '{"foo": 1, "bar": 2}' | query json bar`
+gives the integer 2.
 
 The `str` subcommands perform string operations.
 They are
@@ -237,6 +235,11 @@ They are
 `snake-case`, `starts-with`, `substring`, `to-datetime`, `to-decimal`,
 `to-int`, `trim`, and `upcase`.
 Also see the commands `build-string`, `char`, `format`, and `size`.
+
+The `to` subcommands convert a table into a given output format and
+are commonly piped to the `save` command to write the result to a file.
+They are
+`csv`, `html`, `json`, `md`, `toml`, `tsv`, `url`, `xml`, and `yaml`.
 
 The `url` subcommands get information from a URL.
 They are `host`, `path`, `query`, and `scheme` (ex. http).

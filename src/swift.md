@@ -65,7 +65,62 @@ To install Swift on macOS, install Xcode from the macOS App Store.
 For other operating systems, download it from
 {% aTargetBlank "https://swift.org/download/", "Download Swift" %}.
 
-## Getting Started With Xcode
+## Editing
+
+Most Swift developers use Xcode as their editor/IDE.
+However, there are good reasons to use VS Code in addition to Xcode.
+
+VS Code as the following advantages over Xcode:
+
+- "Format on save" can run a Swift formatter such as SwiftFormat
+  which is similar to a combination of the JavaScript tools
+  ESLint (with autofix) and Prettier.
+- Git integration is better. You can see at a glance
+  which files have been added or modified and
+  see side-by-side diffs without initiating a commit.
+- Snippet support is much better.
+  A snippet can refer to built-in variables
+  for inserting things like the current file name
+  and placeholders can be repeated so
+  the same entered text can be inserted in multiple places.
+- Files in the Navigator pane are always listed in alphabetical order.
+- The Vim support in VS Code (provided by the Vim extension)
+  is far better than the Vim support in Xcode
+  (enabled by checking "Vim mode" on the Editor menu).
+  In VS Code, the dot command (for repeating the last command)
+  and macros (for recording and repeating a sequence of operations)
+  are supported.
+
+However, Xcode also has the following advantages over VS Code:
+
+- Syntax error messages are displayed inline with the code where they appear.
+- iOS projects can be run in the Simulator and on devices
+  directly from Xcode.
+
+I recommend simulataneously opening a project in both VS Code and Xcode
+and switching between them as needed to get the benefits of both.
+When a change is made to a file that is open in both,
+the other will automatically update to show the change.
+
+### Getting Started with VS Code
+
+Install the Swift and SwiftFormat extensions.
+
+In "User Settings" under Text Editor ... Formatting, enable "Format on Save".
+
+Create the file `.swiftformat` in the top project directory
+with contents like the following:
+
+```text
+--maxwidth 80
+--ranges no-space
+--swiftversion 5.6
+```
+
+For more options supported by SwiftFormat, see {% aTargetBlank
+"https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md", "Rules" %}.
+
+### Getting Started With Xcode
 
 {% aTargetBlank "https://developer.apple.com/xcode/", "Xcode" %}
 is an IDE from Apple for creating apps for
