@@ -75,6 +75,8 @@ VS Code as the following advantages over Xcode:
 - "Format on save" can run a Swift formatter such as SwiftFormat
   which is similar to a combination of the JavaScript tools
   ESLint (with autofix) and Prettier.
+  To format code in Xcode, select the lines to be formatted
+  and press ctrl-shift-i.
 - Git integration is better. You can see at a glance
   which files have been added or modified and
   see side-by-side diffs without initiating a commit.
@@ -3805,12 +3807,12 @@ to advance to the next argument.
 If the last argument is a closure, press return to
 automatically turn it into a trailing closure.
 
-To choose between light and dark mode, select from the dropdown at
-Xcode ... Preferences ... General ... Appearance.
-
 To choose a different theme, select Xcode ... Preferences ... Themes.
 From here you can add, delete, and select themes.
 I like the "Classic (Dark)" theme.
+This only affects editor windows. To change the entire Xcode UI
+to use a dark theme regardless of the system setting,
+select Preferences ... General and select "Dark" from the Appearance dropdown.
 
 To add a vertical line at a given column width,
 select Xcode ... Preferences ... Text Editing,
