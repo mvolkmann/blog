@@ -167,11 +167,11 @@ For example "images giraffe".
 To view a map of a location using Google Maps enter "maps {location}".
 For example "maps london".
 
-To open Gmail, enter "gmail" optionally followed by a searcy query.
+To open Gmail, enter "gmail" optionally followed by a search query.
 
-To open Google Drive, enter "drive" optionally followed by a searcy query.
+To open Google Drive, enter "drive" optionally followed by a search query.
 
-To open Twitter, enter "twitter" optionally followed by a searcy query.
+To open Twitter, enter "twitter" optionally followed by a search query.
 
 To search Wikipedia, enter "wiki {search-term}".
 
