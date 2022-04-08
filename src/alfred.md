@@ -64,6 +64,16 @@ or press the hotkey which defaults to cmd-option-c.
 To paste a saved clipboard entry, click it or
 navigate to it with the up and down arrow keys and press return.
 
+## Music
+
+To play songs in the Music app, open the Alfred search box and enter "itunes".
+This will prompt for enabling access to the Music app mini player.
+Once this is done, enter "itunes" to open the mini player
+where a song can be selected.
+
+The keyword for launching the mini player can be changed to "music"
+in the Alfred Preferences under Features ... Music.
+
 ## Snippets
 
 To create snippets, open Alfred, select "Features" in the left nav,
@@ -109,3 +119,38 @@ For example, enter "1p bank" in the Alfred search box
 to login to the Bank of America website.
 
 TODO: Much more is coming soon!
+
+## Web Searches
+
+After opening the Alfred search box, try the following.
+
+To search for help on Alfred, enter "help {search-term}".
+
+To perform a web search, enter "google {search-terms}".
+or "duck {search-terms}" (to use DuckDuckGo).
+For example "google baseball cardinals".
+
+To find images, enter "images {search-terms}".
+For example "images giraffe".
+
+To view a map of a location using Google Maps enter "maps {location}".
+For example "maps london".
+
+To open Gmail, enter "gmail" optionally followed by a searcy query.
+
+To open Google Drive, enter "drive" optionally followed by a searcy query.
+
+To open Twitter, enter "twitter" optionally followed by a searcy query.
+
+To search Wikipedia, enter "wiki {search-term}".
+
+To search Amazon, enter "amazon {search-term}".
+
+To search IMDB, enter "imdb {search-term}".
+
+To search YouTube, enter "youtube {search-term}".
+
+To translate a phrase enter "translate {phrase}".
+For example "translate nice to meet you".
+This will open a Google Translate page where
+you can select the source and target languages.
