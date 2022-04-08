@@ -62,7 +62,33 @@ navigate to it with the up and down arrow keys and press return.
 ## File Actions
 
 To open a list of actions that can be performed on a selected file,
-press the right arrow key
+press the right arrow key.
+
+Supported actions include:
+
+- Add file to Buffer
+- Browse Folder in Alfred
+- Copy [with Replace] to...
+- Copy File to Clipboard
+- Copy Path to Clipboard
+- Copy to...
+- Delete
+- Get Info
+- Move [with Replace] to...
+- Move to...
+- Open
+- Open Terminal Here
+- Open with...
+- Paste as Plain Text
+- Reveal in Finder
+
+The order in which these options appear can be configured
+to show the most recently used options first.
+
+To use iTerm instead of the Terminal app in the "Open Terminal Here" action,
+see {% aTargetBlank
+"https://github.com/vitorgalvao/custom-alfred-iterm-scripts#copy-the-script",
+"custom-alfred-iterm-scripts" %}.
 
 ## Music
 
