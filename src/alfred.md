@@ -59,6 +59,19 @@ by simply typing the affix character(s) followed by the keyword.
 For example, I created a snippet named "full name" with the keyword "rmv".
 Typing "!rmv" expands to "R. Mark Volkmann".
 
+Snippet text can include the following {% aTargetBlank
+"https://www.alfredapp.com/help/workflows/advanced/placeholders/",
+"dynamic placeholders" %}:
+
+- `{clipboard}`
+- `{cursor}` - moves the cursor to this spot after expanding
+- `{date}`
+- `{datetime}`
+- `{time}`
+
+These can include a format specifier.
+For example, `{date.long}` and `{time -10m -30s:long}`.
+
 ## 1Password Integration
 
 To enable access to 1Password from Alfred:
