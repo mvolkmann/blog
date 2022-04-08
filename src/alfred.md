@@ -24,6 +24,13 @@ By default, an Alfred search box is opened by pressing option-space.
 To modify this, open the preferences, select "General" in the left nav,
 and change the "Alfred Hotkey".
 
+## Calculator
+
+To perform a mathematical computation and place the result on the clipboard,
+open the Alfred search box, enter "=" followed by a mathematical expression,
+and press enter.
+Then paste where the result is desired.
+
 ## File Actions
 
 To open a list of actions that can be performed on a selected file,
