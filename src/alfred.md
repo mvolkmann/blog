@@ -42,6 +42,23 @@ or press the hotkey which defaults to cmd-option-c.
 To paste a saved clipboard entry, click it or
 navigate to it with the up and down arrow keys and press return.
 
+## Snippets
+
+To create snippets, open Alfred, select "Features" in the left nav,
+and select "Snippets".
+
+Create collections to hold groups of related snippets.
+Each collection has a name and can have "affix" characters
+that must be typed before snippet keyword in the collection.
+A common affix is a single exclamation point.
+
+Create snippets inside the collections.
+Each snippet has a name, a keyword, and snippet (expansion text).
+Check "Auto expansion allowed" to allow the snippet to be used
+by simply typing the affix character(s) followed by the keyword.
+For example, I created a snippet named "full name" with the keyword "rmv".
+Typing "!rmv" expands to "R. Mark Volkmann".
+
 ## 1Password Integration
 
 To enable access to 1Password from Alfred:
