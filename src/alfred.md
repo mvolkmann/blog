@@ -26,9 +26,12 @@ and change the "Alfred Hotkey".
 
 ## Calculator
 
-To perform a mathematical computation and place the result on the clipboard,
-open the Alfred search box, enter "=" followed by a mathematical expression
-(ex. "=sin(45)"), and press enter.
+To perform a mathematical computation open the Alfred search box,
+enter "=" followed by a mathematical expression.
+Examples include "=sqrt(3^2 + 4^2)" and "=sin(45)".
+The result is displayed below the search box.
+
+To place the result on the clipboard, press enter.
 Then paste where the result is desired.
 
 The supported functions are:
