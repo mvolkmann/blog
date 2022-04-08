@@ -46,11 +46,6 @@ The supported functions are:
 - log, log2, ln, exp
 - near (?)
 
-## File Actions
-
-To open a list of actions that can be performed on a selected file,
-press the right arrow key
-
 ## Clipboard
 
 To enable clipboard management,
@@ -64,6 +59,11 @@ or press the hotkey which defaults to cmd-option-c.
 To paste a saved clipboard entry, click it or
 navigate to it with the up and down arrow keys and press return.
 
+## File Actions
+
+To open a list of actions that can be performed on a selected file,
+press the right arrow key
+
 ## Music
 
 To play songs in the Music app, open the Alfred search box and enter "itunes".
@@ -73,6 +73,20 @@ where a song can be selected.
 
 The keyword for launching the mini player can be changed to "music"
 in the Alfred Preferences under Features ... Music.
+
+## 1Password Integration
+
+To enable access to 1Password from Alfred:
+
+1. Open 1Password preferences, click the Advanced tab,
+   and check "Enable integration with 3rd party apps".
+1. Open Alfred, select "Features" in the left nav,
+   select "1Password", and check "Enable 1Password Bookmarks".
+
+This supports quickly logging into any site
+whose URL and credentials are stored in 1Password.
+For example, enter "1p bank" in the Alfred search box
+to login to the Bank of America website.
 
 ## Snippets
 
@@ -103,22 +117,6 @@ Snippet text can include the following {% aTargetBlank
 
 These can include a format specifier.
 For example, `{date.long}` and `{time -10m -30s:long}`.
-
-## 1Password Integration
-
-To enable access to 1Password from Alfred:
-
-1. Open 1Password preferences, click the Advanced tab,
-   and check "Enable integration with 3rd party apps".
-1. Open Alfred, select "Features" in the left nav,
-   select "1Password", and check "Enable 1Password Bookmarks".
-
-This supports quickly logging into any site
-whose URL and credentials are stored in 1Password.
-For example, enter "1p bank" in the Alfred search box
-to login to the Bank of America website.
-
-TODO: Much more is coming soon!
 
 ## Web Searches
 
