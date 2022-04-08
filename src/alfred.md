@@ -92,13 +92,13 @@ see {% aTargetBlank
 
 ## Music
 
-To play songs in the Music app, open the Alfred search box and enter "itunes".
-This will prompt for enabling access to the Music app mini player.
-Once this is done, enter "itunes" to open the mini player
-where a song can be selected.
+In the Alfred Preferences under Features ... Music,
+change the keyword for launching the "Mini Player" from "itunes" to "music".
 
-The keyword for launching the mini player can be changed to "music"
-in the Alfred Preferences under Features ... Music.
+To play songs in the Music app, open the Alfred search box and enter "music".
+This will prompt for enabling access to the Music app mini player.
+Once this is done, enter "music" and select "Show Music.app Mini Player"
+where a song can be selected.
 
 ## 1Password Integration
 
