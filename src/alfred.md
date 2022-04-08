@@ -24,6 +24,13 @@ By default, an Alfred search box is opened by pressing option-space.
 To modify this, open the preferences, select "General" in the left nav,
 and change the "Alfred Hotkey".
 
+If you are comfortable using Alfred as a replacement for Spotlight,
+consider changing the hotkey to cmd-space
+which is the default hotkey for Spotlight.
+Before making this change, open System Preferences,
+select Spotlight, press the "Keyboard Shortcuts..." button,
+and uncheck "Show Spotlight search" which uses cmd-space.
+
 ## Calculator
 
 To perform a mathematical computation open the Alfred search box,
