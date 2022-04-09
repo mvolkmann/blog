@@ -71,7 +71,7 @@ Here you can check options including "Preferences", "Contacts",
 
 Under "Search Scope", verify that "macOS Applications folder"
 and "Folders in Home" are checked.
-Additional directories can also be specified
+Additional directories can also be specifiedG
 and many are included by default.
 Delete any that are not desired.
 
@@ -290,7 +290,7 @@ see {% aTargetBlank
 The {% aTargetBlank "https://github.com/jaroslawhartman/TimeZones-Alfred",
 "TimeZones-Alfred" %} workflow enables
 quickly finding information about another location including
-current time, day of week, date, telephone prefix, tiomezone, and UTC offset.
+current time, day of week, date, telephone prefix, timezone, and UTC offset.
 
 To install this, click the "releases" link near the bottom of the page,
 click "TimeZones-v2.40.zip" to download it,
@@ -370,12 +370,17 @@ Some recommended workflows include:
   Enter "e {name}" to search for an emoji.
   Select one and press return key to copy to clipboard.
 
-- {% aTargetBlank "", "Word Search" %}
-- {% aTargetBlank "", "Flutter Docs" %}
-- {% aTargetBlank "", "npms" %}
-- {% aTargetBlank "", "Swift Playground" %}
-- {% aTargetBlank "", "Dash" %} developer docs
-- {% aTargetBlank "", "GitHub" %}
-- {% aTargetBlank "", "Google Drive" %}
-- {% aTargetBlank "", "Convert" %}
-- {% aTargetBlank "", "Emoji Collection" %}
+- {% aTargetBlank "http://www.packal.org/workflow/github", "GitHub" %}
+
+  This searches GitHub repositories, their files, issues, and more.
+  I couldn't get this to work. See this {% aTargetBlank
+  "https://github.com/gharlan/alfred-github-workflow/issues/132", "issue" %}.
+
+- {% aTargetBlank "http://www.packal.org/workflow/kill-process", "Kill" %}
+
+  This kills the process with a specified name.
+
+- {% aTargetBlank "http://www.packal.org/workflow/timezones", "TimeZones" %}
+
+  This enables quickly finding information about a location including
+  current time, day of week, date, telephone prefix, tiomezone, and UTC offset.
