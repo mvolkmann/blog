@@ -11,8 +11,16 @@ that provides a more powerful replacement for the built-in Spotlight app.
 
 This is a free app, however many features are
 only available if the "PowerPack" is purchased.
-TODO: List the PowerPack features: clipboard history?, workflows?, ...
-TODO: Verify by installing free version on Tami's iMac.
+The extra features include:
+
+- Contacts integration - shows contact information in a popup and supports interactions with the fields
+- Clipboard History - stores multiple instances copied text and images for later reuse
+- Music Mini Player - provides a quick way to select a song or album to play
+- 1Password integration - logs into a website stored in 1Password
+- Snippets - replace entered prefix and keyword characters with associated text
+- Universal Actions - perform operations on a selected file other than opening
+- Terminal/Shell - open directories in Terminal and execute shell commands
+- Workflows - extend the capabilities of Alfred with scripts
 
 ## Preferences
 
@@ -123,6 +131,23 @@ or press the hotkey which defaults to cmd-option-c.
 To paste a saved clipboard entry, click it or
 navigate to it with the up and down arrow keys and press return.
 
+## Contacts
+
+Without the Powerpack, entering part of a contact name, selecting a match,
+and pressing the return key opens it in the Contacts app.
+
+With the Powerpack, details of the matching contact are displayed
+in Alfred.
+
+Select a field such as birthday, note, or phone number
+and pressing the return key copies it to the clipboard.
+
+Select an email address and press the return key
+to compose a new email in the Mail app.
+
+Select a physical address and press the return key
+to display it in Apple Maps.
+
 ## Dictionary
 
 To lookup the meaning of a word in the Dictionary app, enter "define {word}".
@@ -202,6 +227,10 @@ For example, enter "1p bank" in the Alfred search box
 to login to the Bank of America website.
 
 ## Snippets
+
+A snippet is text identified by a keyword and an optional prefix (such as !).
+When the prefix and keyword are entered,
+they are replaced by the associated text.
 
 To create snippets, open Alfred, select "Features" in the left nav,
 and select "Snippets".
@@ -325,7 +354,8 @@ alfred://customsearch/Mozilla%20Developer%20Network%20Search/mdn/utf8/plus/https
 ## Workflows
 
 Workflows extend the capabilities of Alfred.
-They are implemented in AppleScript.
+They are implemented in a scripting language such as
+AppleScript, bash, JavaScript, Perl, php, Python, Ruby, and zsh.
 You can write your own or use workflows implemented by others.
 
 Two sources of free Alfred workflows are
@@ -335,6 +365,11 @@ Two sources of free Alfred workflows are
 Some recommended workflows include:
 
 - {% aTargetBlank "http://www.packal.org/workflow/emoji-taco", "Emoji Taco" %}
+
+  After installing, enter "init emoji" to complete installation.
+  Enter "e {name}" to search for an emoji.
+  Select one and press return key to copy to clipboard.
+
 - {% aTargetBlank "", "Word Search" %}
 - {% aTargetBlank "", "Flutter Docs" %}
 - {% aTargetBlank "", "npms" %}
