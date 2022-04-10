@@ -103,7 +103,7 @@ enter "=" followed by a mathematical expression.
 Examples include "=sqrt(3^2 + 4^2)" and "=sin(45)".
 The result is displayed below the search box.
 
-To place the result on the clipboard, press enter.
+To place the result on the clipboard, press the return key.
 Then paste where the result is desired.
 
 The supported functions are:
@@ -118,7 +118,7 @@ The supported functions are:
 - log, log2, ln, exp
 - near (?)
 
-## Clipboard History
+## Clipboard History - PowerPack-only
 
 To enable use of clipboard history,
 open Alfred, select "Features" in the left nav,
@@ -153,32 +153,6 @@ to display it in Apple Maps.
 To lookup the meaning of a word in the Dictionary app, enter "define {word}".
 To find the spelling of a word, enter "spell {guess}".
 
-## File Actions
-
-To open a list of actions that can be performed on a selected file,
-press the right arrow key.
-
-Supported actions include:
-
-- Add file to Buffer
-- Browse Folder in Alfred
-- Copy [with Replace] to...
-- Copy File to Clipboard
-- Copy Path to Clipboard
-- Copy to...
-- Delete
-- Get Info
-- Move [with Replace] to...
-- Move to...
-- Open
-- Open Terminal Here
-- Open with...
-- Paste as Plain Text
-- Reveal in Finder
-
-The order in which these options appear can be configured
-to show the most recently used options first.
-
 ## File Preview
 
 To open a preview of the selected file using "Quick Look", press the shift key.
@@ -197,7 +171,7 @@ To search for files containing certain text, enter "in {text}".
 
 To search for a file and reveal it in the Finder, enter "find {file-name}".
 
-## Music
+## Music - PowerPack-only
 
 In the Alfred Preferences under Features ... Music:
 
@@ -212,7 +186,7 @@ This will prompt for enabling access to the Music app mini player.
 Once this is done, enter "music" and select "Show Music.app Mini Player"
 where a song can be selected.
 
-## 1Password Integration
+## 1Password Integration - PowerPack-only
 
 To enable access to 1Password from Alfred:
 
@@ -226,7 +200,7 @@ logging into any site whose URL and credentials are stored in 1Password.
 For example, enter "1p bank" in the Alfred search box
 to login to the Bank of America website.
 
-## Snippets
+## Snippets - PowerPack-only
 
 A snippet is text identified by a keyword and an optional prefix (such as !).
 When the prefix and keyword are entered,
@@ -283,7 +257,7 @@ beginning of the pane name and press the return key.
 For example, "disp" for the Display pane,
 "keyb" for the Keyboard pane, and "gen" for the General pane.
 
-## Terminal
+## Terminal - PowerPack-only
 
 To run a command in a terminal window, enter "> {command}"
 If the Terminal app is not running, it will be launched.
@@ -307,6 +281,32 @@ and double-click the "TimeZones" file found in the Downloads directory.
 
 To use this, open the Alfred search input and enter "tz {location}".
 For example, "tz london".
+
+## Universal Actions on Files - PowerPack-only
+
+To open a list of actions that can be performed on a selected file,
+press the right arrow key.
+
+Supported actions include:
+
+- Add file to Buffer
+- Browse Folder in Alfred
+- Copy [with Replace] to...
+- Copy File to Clipboard
+- Copy Path to Clipboard
+- Copy to...
+- Delete
+- Get Info
+- Move [with Replace] to...
+- Move to...
+- Open
+- Open Terminal Here
+- Open with...
+- Paste as Plain Text
+- Reveal in Finder
+
+The order in which these options appear can be configured
+to show the most recently used options first.
 
 ## Web Searches
 
@@ -360,7 +360,7 @@ copy the following text and paste it in the Alfred search box:
 alfred://customsearch/Mozilla%20Developer%20Network%20Search/mdn/utf8/plus/https://developer.mozilla.org/en-US/search?q={query}
 ```
 
-## Workflows
+## Workflows - PowerPack-only
 
 Workflows extend the capabilities of Alfred.
 They are implemented in a scripting language such as
