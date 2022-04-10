@@ -32,8 +32,8 @@ Click "General" in the left nav. and do the following:
 
 - Check "Launch Alfred at login".
 - In the "Where are you" dropdown, select your location.
-- Click the "Request Permissions..." button and follow the instructions
-  to make the required changes in System Preferences.
+- Click the "Request Permissions..." button
+- Follow the instructions to make the required changes in System Preferences.
 
 ## Opening
 
@@ -99,8 +99,8 @@ enter a part of the bookmark text.
 ## Calculator
 
 To perform a mathematical computation open the Alfred search box,
-enter "=" followed by a mathematical expression.
-Examples include "=sqrt(3^2 + 4^2)" and "=sin(45)".
+enter "`=`" followed by a mathematical expression.
+Examples include "`=sqrt(3^2 + 4^2)`" and "`=sin(45)`".
 The result is displayed below the search box.
 
 To place the result on the clipboard, press the return key.
@@ -150,8 +150,8 @@ to display it in Apple Maps.
 
 ## Dictionary
 
-To lookup the meaning of a word in the Dictionary app, enter "define {word}".
-To find the spelling of a word, enter "spell {guess}".
+To lookup the meaning of a word in the Dictionary app, enter "`define {word}`".
+To find the spelling of a word, enter "`spell {guess}`".
 
 ## File Preview
 
@@ -164,12 +164,12 @@ select "Previews", and check the "Quick Look" and "Previews" checkboxes.
 
 ## File Search
 
-To search for a file by name and open it, enter "open {file-name}".
+To search for a file by name and open it, enter "`open {file-name}`".
 Typically this is the same as just entering the file name.
 
-To search for files containing certain text, enter "in {text}".
+To search for files containing certain text, enter "`in {text}`".
 
-To search for a file and reveal it in the Finder, enter "find {file-name}".
+To search for a file and reveal it in the Finder, enter "`find {file-name}`".
 
 ## Music - PowerPack-only
 
@@ -181,9 +181,9 @@ In the Alfred Preferences under Features ... Music:
   - Check "Show these keywords in Alfred Default Results" so you can
     enter commands like "play", "pause", "next", "previous", and "mute".
 
-To play songs in the Music app, open the Alfred search box and enter "music".
+To play songs in the Music app, open the Alfred search box and enter "`music`".
 This will prompt for enabling access to the Music app mini player.
-Once this is done, enter "music" and select "Show Music.app Mini Player"
+Once this is done, enter "`music`" and select "Show Music.app Mini Player"
 where a song can be selected.
 
 ## 1Password Integration - PowerPack-only
@@ -197,7 +197,7 @@ To enable access to 1Password from Alfred:
 
 This supports quickly opening a 1Password item and
 logging into any site whose URL and credentials are stored in 1Password.
-For example, enter "1p bank" in the Alfred search box
+For example, enter "`1p bank`" in the Alfred search box
 to login to the Bank of America website.
 
 ## Snippets - PowerPack-only
@@ -251,7 +251,7 @@ Alfred supports many commands that act on the system including:
 ## System Preferences
 
 To open the System Preferences app,
-open the Alfred search box, enter "system p" and press the return key.
+open the Alfred search box, enter "`system p`" and press the return key.
 To open it on a specific pane, enter the
 beginning of the pane name and press the return key.
 For example, "disp" for the Display pane,
@@ -259,7 +259,7 @@ For example, "disp" for the Display pane,
 
 ## Terminal - PowerPack-only
 
-To run a command in a terminal window, enter "> {command}"
+To run a command in a terminal window, enter "`> {command}`"
 If the Terminal app is not running, it will be launched.
 If it is already running, the command will run in the active Terminal window.
 
@@ -279,7 +279,7 @@ To install this, click the "releases" link near the bottom of the page,
 click "TimeZones-v2.40.zip" to download it,
 and double-click the "TimeZones" file found in the Downloads directory.
 
-To use this, open the Alfred search input and enter "tz {location}".
+To use this, open the Alfred search input and enter "`tz {location}`".
 For example, "tz london".
 
 ## Universal Actions on Files - PowerPack-only
@@ -312,36 +312,36 @@ to show the most recently used options first.
 
 After opening the Alfred search box, try the following.
 
-To search for help on Alfred, enter "help {search-term}".
+To search for help on Alfred, enter "`help {search-term}`".
 
-To perform a web search, enter "google {search-terms}".
-or "duck {search-terms}" (to use DuckDuckGo).
-For example "google baseball cardinals".
+To perform a web search, enter "`google {search-terms}`".
+or "`duck {search-terms}`" (to use DuckDuckGo).
+For example "`google baseball cardinals`".
 
-To find images, enter "images {search-terms}".
-For example "images giraffe".
-I changed this keyword to just "image".
+To find images, enter "`images {search-terms}`".
+For example "`images giraffe`".
+I changed this keyword to just "`image`".
 
-To view a map of a location using Google Maps enter "maps {location}".
-For example "maps london".
-I changed this keyword to just "map".
+To view a map of a location using Google Maps enter "`maps {location}`".
+For example "`maps london`".
+I changed this keyword to just "`map`".
 
-To open Gmail, enter "gmail" optionally followed by a search query.
+To open Gmail, enter "`gmail`" optionally followed by a search query.
 
-To open Google Drive, enter "drive" optionally followed by a search query.
+To open Google Drive, enter "`drive`" optionally followed by a search query.
 
-To open Twitter, enter "twitter" optionally followed by a search query.
+To open Twitter, enter "`twitter`" optionally followed by a search query.
 
-To search Wikipedia, enter "wiki {search-term}".
+To search Wikipedia, enter "`wiki {search-term}`".
 
-To search Amazon, enter "amazon {search-term}".
+To search Amazon, enter "`amazon {search-term}`".
 
-To search IMDB, enter "imdb {search-term}".
+To search IMDB, enter "`imdb {search-term}`".
 
-To search YouTube, enter "youtube {search-term}".
+To search YouTube, enter "`youtube {search-term}`".
 
-To translate a phrase enter "translate {phrase}".
-For example "translate nice to meet you".
+To translate a phrase enter "`translate {phrase}`".
+For example "`translate nice to meet you`".
 This will open a Google Translate page where
 you can select the source and target languages.
 
@@ -375,8 +375,9 @@ Some recommended workflows include:
 
 - {% aTargetBlank "http://www.packal.org/workflow/emoji-taco", "Emoji Taco" %}
 
-  After installing, enter "init emoji" to complete installation.
-  Enter "e {name}" to search for an emoji.
+  After installing, enter "`init emoji`" to complete installation.
+  Progress will be displayed.
+  After installation completes, enter "`e {name}`" to search for an emoji.
   Select one and press return key to copy to clipboard.
 
 - {% aTargetBlank "http://www.packal.org/workflow/github", "GitHub" %}
