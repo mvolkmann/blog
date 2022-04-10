@@ -66,10 +66,8 @@ mapped to the indicated actions:
 
 - fn L: "Maximize Window Left Half"
 - fn R: "Maximize Window Right Half"
-- fn ↑: "Maximize Window to Top Half"
-- fn t: same as above
-- fn ↓: "Maximize Window to Bottom Half"
-- fn b: same as above
+- fn t: "Maximize Window to Top Half"
+- fn b: "Maximize Window to Bottom Half"
 
 - fn m: "Maximize Window"
 - fn n: "Center Window on Next Monitor"
