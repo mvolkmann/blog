@@ -274,6 +274,15 @@ Alfred supports many commands that act on the system including:
 - sleep
 - trash - to view contents
 
+## System Preferences
+
+To open the System Preferences app,
+open the Alfred search box, enter "system p" and press the return key.
+To open it on a specific pane, enter the
+beginning of the pane name and press the return key.
+For example, "disp" for the Display pane,
+"keyb" for the Keyboard pane, and "gen" for the General pane.
+
 ## Terminal
 
 To run a command in a terminal window, enter "> {command}"
