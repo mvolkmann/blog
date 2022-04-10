@@ -397,7 +397,15 @@ Some recommended workflows include:
 
   ## Custom Workflows - PowerPack-only
 
-  To create a custom workflow:
+  Let's walk through an example of creating a custom workflow.
+  This can be used to delete the process that is listening on a given port.
+  In the end we want to create the workflow diagram shown below.
+
+  <img alt="Alfred custom workflow" style="width: 60%"
+    src="/blog/assets/alfred-custom-workflow.png?v={{pkg.version}}"
+    title="Alfred custom workflow">
+
+  The steps to create this workflow are:
 
   - Open the Alfred Preferences.
   - Select "Workflows" in the left nav.
@@ -427,11 +435,29 @@ Some recommended workflows include:
     pid=$(lsof -n -iTCP:$1 -sTCP:LISTEN -t)
     if [[ $pid ]]; then
       kill $pid
+      echo -n Process $pid was killed.
+    else
+      echo -n No process is listening on port $1.
     fi
     ```
 
   - Click the Save button.
   - Drag a line from "Keyword" box to the "Run Script" box to connect them.
+
+  - Right-click on the workflow canvas and select Outputs ... Post Notification.
+    This will display a notification dialog
+    that displays the output of the script.
+  - In the dialog that appears, enter a title (ex. "Kill Listening Process")
+    and text (ex. "{query}").
+  - Click the Save button.
+  - Drag a line from "Run Script" box
+    to the "Post Notification" box to connect them.
+
+  - Right-click on the workflow canvas and select Outputs ... Play Sound.
+  - In the dialog that appears, select a sound (ex. Tink).
+  - Click the Save button.
+  - Drag a line from "Run Script" box
+    to the "Play Sound" box to connect them.
 
 To run this workflow, open the Alfred search box
 and enter "`klp {port-number}`".
