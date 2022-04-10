@@ -394,3 +394,44 @@ Some recommended workflows include:
 
   This enables quickly finding information about a location including
   current time, day of week, date, telephone prefix, tiomezone, and UTC offset.
+
+  ## Custom Workflows - PowerPack-only
+
+  To create a custom workflow:
+
+  - Open the Alfred Preferences.
+  - Select "Workflows" in the left nav.
+  - Click the "+" button at the bottom.
+  - Select "Blank Workflow".
+  - In the dialog that appears, enter a name and description.
+    For example, "Kill Listening Process" and
+    "kills the process listening on a given port number".
+  - Optionally drag an image file to the "Drop workflow icon above" box.
+  - Click the "Create" button.
+  - Right-click on the workflow canvas and select Inputs ... Keyword.
+  - In the dialog that appears,
+    enter a keyword will be used to trigger the workflow.
+    For example, "klp".
+  - Select between "Argument Required", "Argument Optional", and "No Argument".
+  - Enter a title. For example, "Kill Listening Process".
+  - Click the Save button.
+  - Right-click on the workflow canvas and select Actions ... Run Script.
+  - In the dialog that appears, select a language such as `/bin/bash`.
+  - If an argument is allowed, select how it will be accessed.
+    The options are "with input as argv" (preferred for shell scripts)
+    and "with input as {query}".
+  - Enter code for the script. For example, this script
+    kills the process that is listening on a given port:
+
+    ```bash
+    pid=$(lsof -n -iTCP:$1 -sTCP:LISTEN -t)
+    if [[ $pid ]]; then
+      kill $pid
+    fi
+    ```
+
+  - Click the Save button.
+  - Drag a line from "Keyword" box to the "Run Script" box to connect them.
+
+To run this workflow, open the Alfred search box
+and enter "`klp {port-number}`".
