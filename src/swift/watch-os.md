@@ -76,11 +76,8 @@ struct TimerView: View {
     @Binding var isPresented: Bool
     @State var timerValue: Int
 
-    @State var timer: Timer?
-
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
-            timer in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             if timerValue > 0 {
                 timerValue -= 1
             } else {
