@@ -1,6 +1,8 @@
 ---
 eleventyNavigation:
   key: SwiftUI
+  parent: Swift
+  order: 2
 layout: topic-layout.njk
 ---
 
