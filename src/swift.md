@@ -2484,8 +2484,8 @@ A class can have:
 
 - one or more initializers (named `init`)
   that play the role of constructors in other languages
-- type (or class-level) properties declared with `static`
-- type (or class-level) methods declared with `static`
+- type (or class-level) properties declared with `class` instead of `static`
+- type (or class-level) methods declared with `class` instead of `static`
 - instance-level properties
 - instance-level methods
 - a superclass

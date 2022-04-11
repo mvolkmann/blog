@@ -380,6 +380,9 @@ Some recommended workflows include:
   After installation completes, enter "`e {name}`" to search for an emoji.
   Select one and press return key to copy to clipboard.
 
+  This is alternative to pressing the globe (fn) key to open the emoji picker
+  ... which seems better than using this workflow.
+
 - {% aTargetBlank "http://www.packal.org/workflow/github", "GitHub" %}
 
   This searches GitHub repositories, their files, issues, and more.
@@ -459,5 +462,13 @@ Some recommended workflows include:
   - Drag a line from "Run Script" box
     to the "Play Sound" box to connect them.
 
+An alternative way to create and connect an item is to
+click on the connector tab of the preceding item,
+select the type of item to create, and fill in the details.
+This automatically connects the new item to the preceing one.
+
 To run this workflow, open the Alfred search box
 and enter "`klp {port-number}`".
+
+A workflow can define any number of trigger items and associated workflows.
+Typically these are all related in some way.
