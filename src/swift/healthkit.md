@@ -1,6 +1,8 @@
 ---
 eleventyNavigation:
   key: HealthKit
+  parent: Swift
+  order: 4
 layout: topic-layout.njk
 ---
 
@@ -239,6 +241,14 @@ The data available in HealthKit includes:
 
 HealthKit cannot be used in the Simulator,
 so the app must be run on a real device.
+
+## Background Delivery
+
+To enable background delivery of HealthKit events:
+
+1. Navigate to the "Signing & Capabilities" tab for the Target.
+1. Add a provisioning profile (see separate post)
+1. In the HealthKit section, check the "Background Delivery" checkbox
 
 ## Permissions
 

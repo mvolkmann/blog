@@ -163,6 +163,8 @@ To install it:
 For more install options, see the
 {% aTargetBlank "https://deno.land/", "main Deno website" %}.
 
+To update to the latest version, enter `deno upgrade`.
+
 ## Options
 
 To get help on `deno` options, enter `deno help`, `deno --help`, or `deno -h`.
