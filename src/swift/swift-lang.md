@@ -3383,13 +3383,13 @@ are defined in the file `HttpUtil.swift`.
 ```swift
 import Foundation
 
-enum HTTPError: Error {
+enum HttpError: Error {
     case badStatus(status: Int)
     case badUrl
     case jsonEncode
 }
 
-extension HTTPError: LocalizedError {
+extension HttpError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .badStatus(let status):
@@ -3406,7 +3406,7 @@ struct HttpUtil {
 
     static func delete(from url: String, id: Int) async throws {
         guard let url = URL(string: "\(url)/\(id)") else {
-            throw HTTPError.badUrl
+            throw HttpError.badUrl
         }
 
         var request = URLRequest(url: url)
@@ -3414,7 +3414,7 @@ struct HttpUtil {
         let (_, res) = try await URLSession.shared.data(for: request)
 
         if let res = res as? HTTPURLResponse, res.statusCode != 200 {
-            throw HTTPError.badStatus(status: res.statusCode)
+            throw HttpError.badStatus(status: res.statusCode)
         }
     }
 
@@ -3423,12 +3423,12 @@ struct HttpUtil {
         type: T.Type
     ) async throws -> T where T: Decodable {
         guard let url = URL(string: url) else {
-            throw HTTPError.badUrl
+            throw HttpError.badUrl
         }
 
         let (data, res) = try await URLSession.shared.data(from: url)
         if let res = res as? HTTPURLResponse, res.statusCode != 200 {
-            throw HTTPError.badStatus(status: res.statusCode)
+            throw HttpError.badStatus(status: res.statusCode)
         }
         return try JSONDecoder().decode(type, from: data)
     }
@@ -3456,11 +3456,11 @@ struct HttpUtil {
         type: U.Type
     ) async throws -> U where T: Encodable, U: Decodable {
         guard let url = URL(string: url) else {
-            throw HTTPError.badUrl
+            throw HttpError.badUrl
         }
 
         guard let json = try? JSONEncoder().encode(data) else {
-            throw HTTPError.jsonEncode
+            throw HttpError.jsonEncode
         }
 
         var request = URLRequest(url: url)
@@ -3470,7 +3470,7 @@ struct HttpUtil {
         let (data, res) = try await URLSession.shared.upload(for: request, from: json)
 
         if let res = res as? HTTPURLResponse, res.statusCode != 200 {
-            throw HTTPError.badStatus(status: res.statusCode)
+            throw HttpError.badStatus(status: res.statusCode)
         }
 
         return try JSONDecoder().decode(type, from: data)
