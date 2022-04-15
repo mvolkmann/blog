@@ -8,6 +8,9 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://sveltematerialui.com/", "Svelte Material UI" %}
 is a library of Svelte components that implement Material UI.
+It is implemented in TypeScript.
+It uses Sass for styling theme files.
+
 For a list of supported components, click the link above
 and see the list in the left nav.
 
@@ -15,28 +18,95 @@ To install it in a Svelte project:
 
 1. `cd` to the project root directory.
 
-1. `npm install svelte-material-ui`
+1. Install the individual components that will be used.
+   For example, `npm install -D @smui/button`.
 
-1. `npm install @smui/common`
+1. Install smui-theme with `npm install -D smui-theme`.
 
-1. Copy `node_modules/svelte-material-ui/bare.css`
-   to `public/svelte-material-ui.css`.
+1. Create theme files by entering `npx smui-theme template src/theme`.
+   This creates `src/theme/_smui-theme.scss` and
+   `src/theme/dark/_smui-theme.scss`.
+   To change the theme, including colors, modify these files.
 
-1. Add the following in `public/index.html` after the last `<link>` tag:
+1. Add the following scripts in `package.json`:
 
-   ```html
-   <link rel="stylesheet" href="/svelte-material-ui.css" />
+   ```json
+   "smui-dark": "smui-theme compile static/smui-dark.css -i src/theme/dark",
+   "smui-light": "smui-theme compile static/smui-light.css -i src/theme",
+   "theme": "npm run smui-light && npm run smui-dark",
    ```
 
-1. To use Material Icons,
-   add the following in `public/index.html` after the last `<link>` tag:
+1. Enter `npm run theme` to generate CSS files in the `static` directory.
+   Repeat this every time a theme file is modified
+   or a new SMUI component is installed.
+
+1. Edit `src/app.html` and add the following lines before `%svelte.head%`:
 
    ```html
    <link
      rel="stylesheet"
      href="https://fonts.googleapis.com/icon?family=Material+Icons"
    />
+   <link
+     rel="stylesheet"
+     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
+   />
+   <link
+     rel="stylesheet"
+     href="https://fonts.googleapis.com/css?family=Roboto+Mono"
+   />
+   <link rel="stylesheet" href="/smui-light.css" />
    ```
+
+1. Edit `svelte.config.js` and add the following inside the `kit` object:
+
+   ```js
+   vite: {
+     ssr: {
+       noExternal: [/^@material\//, /^@smui(?:-extra)?\//];
+     }
+   }
+   ```
+
+1. Customize colors
+
+   - Browse [MUI Colors](https://ematerialui.co/colors/)
+     to see names for recommended colors.
+   - Edit `.scss` files for light and dark themes under `src/themes`
+     These already import `@material/theme/color-palette`
+     which provides access to those colors.
+   - For example, change the value for `$primary` to `color-palette.$indigo-400`
+     and run `npm run theme` to update the theme `.css` files in `src/static`.
+   - Make a similar change to the other Sass color variables.
+
+1. Add a top app bar.
+
+   - Enter `npm install -D @smui/top-app-bar`.
+   - Copy the example code for a "page level" standard top app bar from
+     [Top App Bar](https://sveltematerialui.com/demo/top-app-bar/).
+   - Create the file `src/routes/__layout.svelte` and paste the code there.
+     This will be used as the layout for every page.
+   - Replace the contents of the `AutoAdjust` element with `<slot />`.
+   - Enter `npm install -D @smui/icon-button`
+     because that component is used in the pasted code.
+   - Enter `npm run theme` to update the theme `.css` files.
+   - Create the file `static/global.css` and add the following content:
+
+     ```css
+     body {
+       margin: 0;
+     }
+
+     main {
+       padding: 1rem;
+     }
+     ```
+
+- Edit `src/app.html` and add the following after the existing `link` elements:
+
+  ```html
+  <link rel="stylesheet" href="/global.css" />
+  ```
 
 Here's an example of using the `Button` and `Switch` components
 in a Svelte component.
