@@ -6,6 +6,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Overview
+
 {% aTargetBlank "https://sveltematerialui.com/", "Svelte Material UI" %}
 is a library of Svelte components that implement Material UI.
 It is implemented in TypeScript.
@@ -13,6 +15,8 @@ It uses Sass for styling theme files.
 
 For a list of supported components, click the link above
 and see the list in the left nav.
+
+## Installing
 
 To install it in a Svelte project:
 
@@ -58,45 +62,122 @@ To install it in a Svelte project:
    <link rel="stylesheet" href="/smui-light.css" />
    ```
 
-1. Customize colors
+## Colors
 
-   - Browse [MUI Colors](https://ematerialui.co/colors/)
-     to see names for recommended colors.
-   - Edit `.scss` files for light and dark themes under `src/themes`
-     These already import `@material/theme/color-palette`
-     which provides access to those colors.
-   - For example, change the value for `$primary` to `color-palette.$indigo-400`
-     and run `npm run theme` to update the theme `.css` files in `src/static`.
-   - Make a similar change to the other Sass color variables.
+To customize theme colors:
 
-1. Add a top app bar.
+- Browse {% aTargetBlank "https://materialui.co/colors/", "MUI Colors" %}
+  to see names for recommended colors.
+- Edit `.scss` files for light and dark themes under `src/themes`
+  These already import `@material/theme/color-palette`
+  which provides access to those colors.
+- For example, change the value for `$primary` to `color-palette.$indigo-400`
+  and run `npm run theme` to update the theme `.css` files in `src/static`.
+- Make a similar change to the other Sass color variables.
 
-   - Enter `npm install -D @smui/top-app-bar`.
-   - Copy the example code for a "page level" standard top app bar from
-     [Top App Bar](https://sveltematerialui.com/demo/top-app-bar/).
-   - Create the file `src/routes/__layout.svelte` and paste the code there.
-     This will be used as the layout for every page.
-   - Replace the contents of the `AutoAdjust` element with `<slot />`.
-   - Enter `npm install -D @smui/icon-button`
-     because that component is used in the pasted code.
-   - Enter `npm run theme` to update the theme `.css` files.
-   - Create the file `static/global.css` and add the following content:
+## Top App Bar
 
-     ```css
-     body {
-       margin: 0;
-     }
+To add a top app bar:
 
-     main {
-       padding: 1rem;
-     }
-     ```
+- Enter `npm install -D @smui/top-app-bar`.
+- Copy the example code for a "page level" standard top app bar from
+  {% aTargetBlank "https://sveltematerialui.com/demo/top-app-bar/",
+  "Top App Bar" %}.
+- Create the file `src/routes/__layout.svelte` and paste the code there.
+  This will be used as the layout for every page.
+- Replace the contents of the `AutoAdjust` element with `<slot />`.
+- Enter `npm install -D @smui/icon-button`
+  because that component is used in the pasted code.
+- Enter `npm run theme` to update the theme `.css` files.
+- Create the file `static/global.css` and add the following content:
+
+  ```css
+  body {
+    margin: 0;
+  }
+
+  main {
+    padding: 1rem;
+  }
+  ```
 
 - Edit `src/app.html` and add the following after the existing `link` elements:
 
   ```html
   <link rel="stylesheet" href="/global.css" />
   ```
+
+## Light/Dark Modes
+
+To add the ability to toggle between light and dark mode,
+change `src/routes/__layout.svelte` to the following:
+
+```html
+<script lang="ts">
+  import {onMount} from 'svelte';
+  import type {TopAppBarComponentDev} from '@smui/top-app-bar';
+  import TopAppBar, {Row, Section, Title, AutoAdjust} from '@smui/top-app-bar';
+  import IconButton from '@smui/icon-button';
+
+  let darkTheme: boolean;
+  let topAppBar: TopAppBarComponentDev;
+
+  $: modeLabel = `switch to ${darkTheme ? 'light' : 'dark'} mode`;
+
+  // This icon represents the mode to which the user can switch.
+  $: modeIcon = darkTheme ? 'light_mode' : 'dark_mode';
+
+  onMount(() => {
+    darkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  const toggleMode = () => (darkTheme = !darkTheme);
+</script>
+
+<svelte:head>
+  {#if darkTheme === undefined}
+  <link
+    rel="stylesheet"
+    href="/smui-light.css"
+    media="(prefers-color-scheme: light)"
+  />
+  <link
+    rel="stylesheet"
+    href="/smui-dark.css"
+    media="screen and (prefers-color-scheme: dark)"
+  />
+  {:else if darkTheme}
+  <link rel="stylesheet" href="/smui-light.css" media="print" />
+  <link rel="stylesheet" href="/smui-dark.css" media="screen" />
+  {:else}
+  <link rel="stylesheet" href="/smui-light.css" />
+  {/if}
+</svelte:head>
+
+<TopAppBar bind:this="{topAppBar}" variant="standard">
+  <Row>
+    <section>
+      <IconButton class="material-icons">menu</IconButton>
+      <title>Standard</title>
+    </section>
+    <section align="end" toolbar>
+      <IconButton
+        aria-label="{modeLabel}"
+        class="material-icons"
+        on:click="{toggleMode}"
+        title="{modeLabel}"
+      >
+        {modeIcon}
+      </IconButton>
+    </section>
+  </Row>
+</TopAppBar>
+<AutoAdjust {topAppBar}>
+  <slot />
+</AutoAdjust>
+```
+
+## Example Component
 
 Here's an example of using the `Button` and `Switch` components
 in a Svelte component.
