@@ -103,14 +103,20 @@ To add a top app bar:
 
 - Edit `src/app.html` and add the following after the existing `link` elements:
 
+  {% raw %}
+
   ```html
   <link rel="stylesheet" href="/global.css" />
   ```
+
+  {% endraw %}
 
 ## Light/Dark Modes
 
 To add the ability to toggle between light and dark mode,
 change `src/routes/__layout.svelte` to the following:
+
+{% raw %}
 
 ```html
 <script lang="ts">
@@ -177,6 +183,8 @@ change `src/routes/__layout.svelte` to the following:
 </AutoAdjust>
 ```
 
+{% endraw %}
+
 ## Example Component
 
 Here's an example of using the `Button` and `Switch` components
@@ -184,6 +192,8 @@ in a Svelte component.
 
 <img alt="app screenshot" class="keep-size"
   src="/blog/assets/svelte-material-ui.png?v={{pkg.version}}">
+
+{% raw %}
 
 ```html
 <script>
@@ -203,3 +213,5 @@ in a Svelte component.
   <p>likeIceCream = {likeIceCream}</p>
 </main>
 ```
+
+{% endraw %}
