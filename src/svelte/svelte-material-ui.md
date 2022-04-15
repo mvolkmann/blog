@@ -58,16 +58,6 @@ To install it in a Svelte project:
    <link rel="stylesheet" href="/smui-light.css" />
    ```
 
-1. Edit `svelte.config.js` and add the following inside the `kit` object:
-
-   ```js
-   vite: {
-     ssr: {
-       noExternal: [/^@material\//, /^@smui(?:-extra)?\//];
-     }
-   }
-   ```
-
 1. Customize colors
 
    - Browse [MUI Colors](https://ematerialui.co/colors/)
