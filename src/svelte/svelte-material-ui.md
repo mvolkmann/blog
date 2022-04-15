@@ -185,6 +185,10 @@ change `src/routes/__layout.svelte` to the following:
 
 {% endraw %}
 
+The code above uses
+<a href="https://fonts.google.com/icons?selected=Material%2BIcons"
+rel="noopener" target="_blank">Material Icons</a>.
+
 ## Example Component
 
 Here's an example of using the `Button` and `Switch` components
