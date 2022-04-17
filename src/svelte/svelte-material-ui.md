@@ -8,13 +8,17 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://sveltematerialui.com/", "Svelte Material UI" %}
+{% aTargetBlank "https://sveltematerialui.com/", "Svelte Material UI" %} (SMUI)
 is a library of Svelte components that implement Material UI.
 It is implemented in TypeScript.
 It uses Sass for styling theme files.
 
 For a list of supported components, click the link above
 and see the list in the left nav.
+
+The creator of SMUI, Hunter Perrin, created a great video
+detailing how to get started using this library on
+{% aTargetBlank "https://www.youtube.com/watch?v=OyjZ7dezADw", "YouTube" %}.
 
 ## Installing
 
@@ -41,6 +45,7 @@ To install it in a Svelte project:
    ```
 
 1. Enter `npm run theme` to generate CSS files in the `static` directory.
+   THIS IS CRITICAL!
    Repeat this every time a theme file is modified
    or a new SMUI component is installed.
 
