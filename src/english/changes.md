@@ -1,8 +1,9 @@
 ---
 css: '/blog/assets/english.css'
 eleventyNavigation:
-  key: English
-extraTitle: "... and how I'd change it"
+  key: Changes
+  parent: English
+extraTitle: 'I would make to English'
 layout: topic-layout.njk
 ---
 
