@@ -22,7 +22,7 @@ Valid uses of a comma include:
 - delimit items in a list
 
   "Her favorite colors are blue, green, and purple."
-  (uses Oxford comma rather than serial comma)
+  (uses Oxford comma, also known as serial comma)
 
 - delimit adjectives
 
@@ -88,6 +88,14 @@ Valid uses of an apostrophe include:
   then the apostrophe belongs after the "s".
 
   The girls' dresses are blue." (multiple girls)
+
+  Names that end in "s" are treated like singular nouns.
+
+  "Have you read Keats's poems?" (Keats is singular a name that ends in "s".)
+
+  An exception is made if the name if the name ends an "iz" sound.
+
+  "Laws were written on Moses' tablets."
 
 - time or quantity
 
