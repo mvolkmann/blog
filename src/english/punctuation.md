@@ -46,7 +46,7 @@ Valid uses of a comma include:
 
 - end a statement with a question
 
-  "The didn't actually write that, did you?"
+  "You didn't actually write that, did you?"
 
 - follow direct address
 
