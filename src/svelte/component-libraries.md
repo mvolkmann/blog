@@ -40,6 +40,14 @@ For details on installing and using this library, see my post at
 For an example of using this library, see my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
 
+<img alt="SMUI single select closed" style="width: 25%"
+  src="/blog/assets/smui-single-select1.png?v={{pkg.version}}"
+  title="SMUI single select closed">
+
+<img alt="SMUI single select open" style="width: 60%"
+  src="/blog/assets/smui-single-select2.png?v={{pkg.version}}"
+  title="SMUI single select open">
+
 ## svelte-calendar
 
 {% aTargetBlank "https://6edesign.github.io/svelte-calendar/",
@@ -74,6 +82,10 @@ offering advanced features.
 For an example of using this library, see my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
 
+<img alt="svelte-fullcalendar" style="width: 70%"
+  src="/blog/assets/svelte-fullcalendar.png?v={{pkg.version}}"
+  title="svelte-fullcalendar">
+
 ## Svelte MultiSelect
 
 {% aTargetBlank "https://svelte-multiselect.netlify.app",
@@ -84,6 +96,10 @@ with an "x" that can be clicked to deselect it.
 
 For an example of using this component, see my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
+
+<img alt="svelte-multiselect" style="width: 70%"
+  src="/blog/assets/svelte-multiselect.png?v={{pkg.version}}"
+  title="svelte-multiselect">
 
 ## svelte-time-picker
 
@@ -99,13 +115,24 @@ but this is done by click the hour number above the clock face.
 For an example of using this component, see my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
 
-## <input type="date">
+<img alt="svelte-time-picker hour" style="width: 40%"
+  src="/blog/assets/svelte-time-picker-hour.png?v={{pkg.version}}"
+  title="svelte-time-picker hour">
+<img alt="svelte-time-picker minute" style="width: 40%"
+  src="/blog/assets/svelte-time-picker-minute.png?v={{pkg.version}}"
+  title="svelte-time-picker minute">
+
+## HTML input type="date"
 
 Using the HTML `input` element with a `type` of "date" works,
 but has a number of issues documented in {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date#using_date_inputs",
 "MDN" %}. Chief among the issues is consistent browser support.
 For this reason, I recommend using a date picker component.
+
+<img alt="input type date" style="width: 40%"
+  src="/blog/assets/input-type-date.png?v={{pkg.version}}"
+  title="input type date">
 
 ## Custom Date Picker
 
@@ -116,10 +143,22 @@ However, it can be found in my GitHub repository {% aTargetBlank
 See the file `DatePicker.svelte`.
 This has been used successfully on a real project.
 
-## <input type="time">
+<img alt="Svelte custom date picker single" style="width: 60%"
+  src="/blog/assets/svelte-custom-date-picker-single.png?v={{pkg.version}}"
+  title="Svelte custom date picker single">
+
+<img alt="Svelte custom date picker range" style="width: 70%"
+  src="/blog/assets/svelte-custom-date-picker-range.png?v={{pkg.version}}"
+  title="Svelte custom date picker range">
+
+## HTML input type="time"
 
 Using the HTML `input` element with a `type` of "time"
 is a reasonable option for allowing users to select a single time value.
 
 For an example of using thi , see my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
+
+<img alt="input type time" style="width: 30%"
+  src="/blog/assets/input-type-time-chrome.png?v={{pkg.version}}"
+  title="input type time">
