@@ -98,3 +98,28 @@ but this is done by click the hour number above the clock face.
 
 For an example of using this component, see my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
+
+## <input type="date">
+
+Using the HTML `input` element with a `type` of "date" works,
+but has a number of issues documented in {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date#using_date_inputs",
+"MDN" %}. Chief among the issues is consistent browser support.
+For this reason, I recommend using a date picker component.
+
+## Custom Date Picker
+
+I have implemented a date picker that is
+not yet available in its own GitHub repository.
+However, it can be found in my GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
+See the file `DatePicker.svelte`.
+This has been used successfully on a real project.
+
+## <input type="time">
+
+Using the HTML `input` element with a `type` of "time"
+is a reasonable option for allowing users to select a single time value.
+
+For an example of using thi , see my GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
