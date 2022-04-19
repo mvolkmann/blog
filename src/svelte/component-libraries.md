@@ -162,3 +162,8 @@ For an example of using thi , see my GitHub repository {% aTargetBlank
 <img alt="input type time" style="width: 30%"
   src="/blog/assets/input-type-time-chrome.png?v={{pkg.version}}"
   title="input type time">
+
+## Toast UI Calendar
+
+The Toast UI {% aTargetBlank "https://ui.toast.com/tui-calendar", "Calendar" %}
+component is an alternative to the FullCalendar component described earlier.
