@@ -9,8 +9,7 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://sveltematerialui.com/", "Svelte Material UI" %} (SMUI)
 is a library of Svelte components that implement Material UI.
-It is implemented in TypeScript.
-It uses Sass for styling theme files.
+It is implemented in TypeScript and uses Sass for style theme files.
 
 For a list of supported components, click the link above
 and see the list in the left nav.
