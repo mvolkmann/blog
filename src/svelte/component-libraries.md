@@ -86,3 +86,15 @@ For an example of using this component, see my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
 
 ## svelte-time-picker
+
+{% aTargetBlank "https://gitlab.com/public-e-soa-com/svelte-time-picker#readme",
+"svelte-time-picker" %} is a time picker component for Svelte.
+It uses the lollypop style, which many users may find confusing.
+The hour is selected by dragging a circle around the perimeter of a clock face.
+When the mouse is released, the clock face changes
+to display minutes instead of hours.
+It is not obvious how to return to the hour clock face,
+but this is done by click the hour number above the clock face.
+
+For an example of using this component, see my GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
