@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: ESLint and Prettier with Svelte
   parent: Svelte
-  order: 2
 layout: topic-layout.njk
 ---
 

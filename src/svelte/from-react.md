@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Svelte from React Components
   parent: Svelte
-  order: 3
 layout: topic-layout.njk
 ---
 

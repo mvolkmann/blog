@@ -1,8 +1,7 @@
 ---
 eleventyNavigation:
-  key: Svelte Material UI
+  key: Svelte Material UI (SMUI)
   parent: Svelte
-  order: 9
 layout: topic-layout.njk
 ---
 

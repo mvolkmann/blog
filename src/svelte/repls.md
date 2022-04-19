@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: REPLs
   parent: Svelte
-  order: 12
 layout: topic-layout.njk
 ---
 

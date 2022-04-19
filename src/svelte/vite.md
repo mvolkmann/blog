@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Vite
   parent: Svelte
-  order: 10
 layout: topic-layout.njk
 ---
 

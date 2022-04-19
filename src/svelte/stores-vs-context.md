@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Stores vs. Context
   parent: Svelte
-  order: 7
 layout: topic-layout.njk
 ---
 

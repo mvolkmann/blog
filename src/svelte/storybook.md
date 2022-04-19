@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Svelte and Storybook
   parent: Svelte
-  order: 6
 layout: topic-layout.njk
 ---
 
