@@ -167,3 +167,5 @@ For an example of using thi , see my GitHub repository {% aTargetBlank
 
 The Toast UI {% aTargetBlank "https://ui.toast.com/tui-calendar", "Calendar" %}
 component is an alternative to the FullCalendar component described earlier.
+It seems to have a large number of features and is free.
+But so far I haven't been able to get it to work.
