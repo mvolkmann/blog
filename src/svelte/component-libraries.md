@@ -29,9 +29,9 @@ It is implemented in TypeScript and uses Sass for style theme files.
 For a list of supported components, click the link above
 and see the list in the left nav.
 
-The creator of SMUI, Hunter Perrin, created a great video
-detailing how to get started using this library on
-{% aTargetBlank "https://www.youtube.com/watch?v=OyjZ7dezADw", "YouTube" %}.
+The creator of SMUI, Hunter Perrin, created a great
+{% aTargetBlank "https://www.youtube.com/watch?v=OyjZ7dezADw", "YouTube" %}
+video detailing how to get started using this library.
 
 For details on installing and using this library, see my post at
 {% aTargetBlank "/blog/topics/#/blog/svelte/svelte-material-ui",
@@ -40,13 +40,23 @@ For details on installing and using this library, see my post at
 For an example of using this library, see my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
 
-<img alt="SMUI single select closed" style="width: 25%"
-  src="/blog/assets/smui-single-select1.png?v={{pkg.version}}"
-  title="SMUI single select closed">
+<div>
+  <figure style="width: 25%">
+    <img alt="SMUI single select closed"
+      src="/blog/assets/smui-single-select1.png?v={{pkg.version}}"
+      title="SMUI single select closed">
+    <figcaption>SMUI single select in closed state</figcaption>
+  </figure>
+</div>
 
-<img alt="SMUI single select open" style="width: 60%"
-  src="/blog/assets/smui-single-select2.png?v={{pkg.version}}"
-  title="SMUI single select open">
+<div>
+  <figure style="width: 60%">
+  <img alt="SMUI single select open"
+    src="/blog/assets/smui-single-select2.png?v={{pkg.version}}"
+    title="SMUI single select open">
+    <figcaption>SMUI single select in open state</figcaption>
+  </figure>
+</div>
 
 ## svelte-calendar
 
@@ -141,7 +151,6 @@ not yet available in its own GitHub repository.
 However, it can be found in my GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
 See the file `DatePicker.svelte`.
-This has been used successfully on a real project.
 
 <img alt="Svelte custom date picker single" style="width: 60%"
   src="/blog/assets/svelte-custom-date-picker-single.png?v={{pkg.version}}"
@@ -150,6 +159,18 @@ This has been used successfully on a real project.
 <img alt="Svelte custom date picker range" style="width: 70%"
   src="/blog/assets/svelte-custom-date-picker-range.png?v={{pkg.version}}"
   title="Svelte custom date picker range">
+
+## Custom Date Range
+
+I have implemented a date range picker that is
+not yet available in its own GitHub repository.
+However, it can be found in my GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/sveltekit-smui-demo", "sveltekit-smui-demo" %}.
+See the file `DateRange.svelte`.
+
+<img alt="custom date range" style="width: 80%"
+  src="/blog/assets/svelte-custom-date-range.png?v={{pkg.version}}"
+  title="custom date range">
 
 ## HTML input type="time"
 
