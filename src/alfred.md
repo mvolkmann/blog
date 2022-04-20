@@ -282,6 +282,16 @@ and double-click the "TimeZones" file found in the Downloads directory.
 To use this, open the Alfred search input and enter "`tz {location}`".
 For example, "tz london".
 
+## Universal Actions on Apps - PowerPack-only
+
+To open a list of actions that can be performed on a selected app,
+press the right arrow key.
+
+Supported actions include "Recent documents".
+With this selected, press the return key, navigate to a document or directory,
+and press the return key again to open the document/directory in the app.
+This is very useful for opening projects in VS Code or Xcode!
+
 ## Universal Actions on Files - PowerPack-only
 
 To open a list of actions that can be performed on a selected file,
