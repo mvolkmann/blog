@@ -18,7 +18,8 @@ Each version remains available for download for 90 days.
 
 ### Part 1 - Creating an Identifier
 
-1. Browse <developer.apple.com> and sign in.
+1. Browse {% aTargetBlank "https://developer.apple.com",
+   "developer.apple.com" %} and sign in.
 1. In the top nav bar, click "Account".
 1. Click the large "Certificates, Identifiers & Profiles" button.
 1. In the left nav, click "Identifiers".
@@ -40,7 +41,8 @@ Each version remains available for download for 90 days.
 
 ### Part 2 - Creating an App
 
-1. Browse <appstoreconnect.apple.com>
+1. Browse {% aTargetBlank "https://appstoreconnect.apple.com",
+   "appstoreconnect.apple.com" %}.
 1. Click the large "My Apps" button.
 1. Click the "+" button after "Apps".
 1. Select "New App".
@@ -124,7 +126,7 @@ Each version remains available for download for 90 days.
    - Select apps to expose from the Apps dropdown.
    - Click the "Invite" button.
 
-### Add External Testing Users
+### Part 5 - Add External Testing Users
 
 1. Click the "+" after "External Testing" in the left nav.
 1. Enter a group name.
@@ -144,7 +146,7 @@ Each version remains available for download for 90 days.
    after which the testers should receive an email containing
    a link that will allow them to download the app from TestFlight.
 
-### Part 5 - Instructions for test users
+### Part 6 - Instructions for test users
 
 1. You receive an email with the subject
    "You've been invited to the App Store Connect".
