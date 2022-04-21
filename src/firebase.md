@@ -37,7 +37,7 @@ Features that the Realtime Database and Cloud Firestore have in common include:
 
 For details on the differences and cost of each option, see {% aTargetBlank
 "https://firebase.google.com/docs/firestore/rtdb-vs-firestore",
-"Choose a databsase" %}.
+"Choose a database" %}.
 
 TODO: Can data be modified when offline and re-synced when back online?
 
@@ -48,7 +48,7 @@ For details, see the {% aTargetBlank "https://firebase.google.com/pricing",
 There are two pricing plans, "Spark" and "Blaze".
 
 The Realtime Database only charges for bandwidth and storage
-and does so at a higher rate thatn Cloud Firestore.
+and does so at a higher rate than Cloud Firestore.
 Is there are minimum cost of $5/month?
 
 The Cloud Firestore database charges for
@@ -372,3 +372,16 @@ It supports adding, updating, and deleting the documents in this collection.
 ```
 
 {% endraw %}
+
+## Authentication
+
+To enable use of Firebase authentication:
+
+- Browse the {% aTargetBlank "https://console.firebase.google.com",
+  "Firebase Console" %}.
+- Click a project box.
+- In the left nav, click "Authentication".
+- Click the "Get started" button.
+- Select a sign-in method such as "Email/Password".
+- Toggle "Email/Password" to enable it.
+- Click the "Save" button.
