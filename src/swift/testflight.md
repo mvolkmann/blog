@@ -145,6 +145,13 @@ Each version remains available for download for 90 days.
 1. Wait for an approval email from Apple,
    after which the testers should receive an email containing
    a link that will allow them to download the app from TestFlight.
+1. If a build of the app is rejected, it will display a status of "Rejected"
+   on the "App Store Connect" web page.
+   To see the reasons for the rejection:
+
+   - Click the "App Store" link in the top nav.
+   - Click "App Review" in the left nav.
+   - Click the "Resolve" link on the far right.
 
 ### Part 6 - Instructions for test users
 
