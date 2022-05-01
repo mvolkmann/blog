@@ -203,6 +203,8 @@ To run the image in a container, enter
 The `-v` flag says that the file path `/data` inside the container
 should be mapped to the file path `$HOME/data` outside the container.
 
+Include the `-v` flag with a mapping once per volume to be shared.
+
 Another way to use a volume is to explicitly define it.
 
 - cd to the local directory to be shared.
@@ -211,6 +213,8 @@ Another way to use a volume is to explicitly define it.
 - List the defined volumes by entering `docker volume ls`.
 - Run the image in a container with the `--mount` flag as follows:
   `docker run --rm --mount source=data,target=/data volume-demo`
+
+Include the `--mount` flag with a mapping once per volume to be shared.
 
 ## SvelteKit
 
