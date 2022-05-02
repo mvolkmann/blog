@@ -74,9 +74,9 @@ Each version remains available for download for 90 days.
    subsequent build with the same value for "Version".
 1. Verify that the file "Assets.xcassets" defines the image set "AppIcons"
    that contains icons for both iPhone and iPad.
-1. In the device list, choose "Any iOS Device".
+1. In the device list at the top, choose "Any iOS Device".
 1. Select Product ... Archive.
-   This can take a few minutes to complete.
+   This can take a few minutes to complete on a fast machine.
 1. Click the "Distribute App" button.
 1. Select the "App Store Connect" radio button.
 1. Click the "Next" button.
@@ -93,14 +93,15 @@ Each version remains available for download for 90 days.
      and save it somewhere on your hard drive.
    - Click the "Next" button.
 1. Click the "Upload" button.
+   This can take a few minutes to complete on a fast machine.
 1. When processing completes, if you see the message "Missing Compliance",
    click the "Manage" link after the message and answer some encryption questions.
    If sending HTTP requests using HTTPS, you will have to submit a form
    to the U.S. government which is explained in the encryption questions.
 
-### Part 4 - Distribute App
+### Part 4 - Distributing an App
 
-1. Return to the App Store Connect web page and the TestFlight tab.
+1. Return to the App Store Connect web page and the "TestFlight" tab.
 1. Click the "Create Group" link to add testers.
 1. Enter a group name.
 1. Check the "Enable automatic distribution" checkbox.
@@ -126,7 +127,14 @@ Each version remains available for download for 90 days.
    - Select apps to expose from the Apps dropdown.
    - Click the "Invite" button.
 
-### Part 5 - Add External Testing Users
+### Part 5 - App Configuration
+
+1. Return to the App Store Connect web page and the "App Store" tab.
+1. Click the large button for the app.
+1. Visit each section linked in the left nav and supply any missing information.
+   There are many things that must be specified, especially under "App Privacy"!
+
+### Part 6 - Adding External Testing Users
 
 1. Click the "+" after "External Testing" in the left nav.
 1. Enter a group name.
@@ -153,7 +161,28 @@ Each version remains available for download for 90 days.
    - Click "App Review" in the left nav.
    - Click the "Resolve" link on the far right.
 
-### Part 6 - Instructions for test users
+### Part 7 - Submit for Review
+
+1. Return to the App Store Connect web page and the "TestFlight" tab.
+1. Expand the row for the version that was just uploaded.
+1. Address an issues identified in the "STATUS" column.
+1. Wait for the status to change to "Ready to Submit".
+1. Add a review group.
+1. Click the "Submit for Review" button? VERIFY THIS AGAIN!
+
+### Part 8 - Resolve App Review Issues
+
+1. Return to the App Store Connect web page and the "App Store" tab.
+1. Click the large button for the app.
+1. In the left nav, click "App Review".
+1. If the "REVIEW STATUS" column shows "Rejected",
+   click the "Resolve" link at the end of the row.
+1. Read the messages explaining why the app was rejected.
+1. Address all of the issues and verify that they are no longer present
+   when running the app locally.
+1. Resubmit the app for a new review.
+
+### Part 9 - Instructions for Test Users
 
 1. You receive an email with the subject
    "You've been invited to the App Store Connect".
