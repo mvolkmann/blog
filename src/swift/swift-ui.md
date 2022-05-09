@@ -5855,6 +5855,12 @@ To combine these:
 
 CloudKit prefixes all record and field names with "CD\_",
 which is an abbreviation for "Core Data".
+A system record named "Users" is created by default.
+These records cannot be queried.
+
+By default, a private database is created.
+This is restricted to the current app user,
+but is shared across all of their devices.
 
 To enable querying records from the CloudKit Dashboard website:
 
@@ -5869,9 +5875,11 @@ To enable querying records from the CloudKit Dashboard website:
    verify that an "Index Type" of "Queryable" is selected,
    and click the "Save Changes" button.
 1. Under "Data" in the left nav, click "Records".
-1. In the "Record Type" dropdown, select a record name.
+1. In the Database dropdown, select "Private Database".
 1. In the Zone dropdown, select the zone created for you
-   by `NSPersistentCloudKitDatabase`.
+   by `NSPersistentCloudKitDatabase` which is named
+   "com.apple.coredata.cloudkit.zone", not "\_defaultZone".
+1. In the "Record Type" dropdown, select a record name.
 1. Click the "Query Records" button.
    Note that after adding records in the app it can take a minute
    until they appear in the CloudKit Dashboard.
