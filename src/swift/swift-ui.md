@@ -5832,7 +5832,7 @@ and reinstall it.
 The contents of a Core Data database can be automatically synchronized
 with a CloudKit database in iCloud.
 
-When the database is "private", the data is
+When the database is "private" (the default), the data is
 shared between all devices owned by a single user.
 When the database is "public", the data is
 shared between all users and all devices.
@@ -5853,8 +5853,11 @@ but they use different terminology.
 
 Conversions between these types are performed automatically by
 `NSPersistentCloudKitContainer`.
+The file `Model.swift` in the example app,
+creates a container of this type and ties it to the model
+defined in the file `Model.xcdatamodeld`.
 
-To combine these:
+To combine the use of Core Data and CloudKit:
 
 1. Create a new app and check the "Use Core Data"
    and "Host in CloudKit" checkboxes.
@@ -5865,6 +5868,7 @@ To combine these:
    followed by a period and the app name.
 1. Add the "Background Modes" capability.
 1. Check the "Remote notifications" checkbox.
+1. Add source files similar to those in the example app linked above.
 
 CloudKit prefixes all record and field names with "CD\_",
 which is an abbreviation for "Core Data".
@@ -5877,7 +5881,8 @@ but is shared across all of their devices.
 
 To enable querying records from the CloudKit Dashboard website:
 
-1. Browse the CloudKit Dashboard at https://icloud.developer.apple.com/dashboard/.
+1. Browse the CloudKit Dashboard at
+   https://icloud.developer.apple.com/dashboard/.
 1. Click the big "CloudKit Database" button.
 1. Select a CloudKit database from the dropdown at the top.
 1. In the left nav under "Schema", click "Indexes".
