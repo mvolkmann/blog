@@ -5958,6 +5958,8 @@ To configure this:
 1. Click the Finish button.
 1. Click the Activate button.
 
+1. In the Navigator, select the application folder
+   that contains the file `ContentView.swift`.
 1. Select File ... New ... File...
 1. Under the "Resources" section, click "SiriKit Intent Definition File".
 1. Click the Next button.
@@ -5983,9 +5985,9 @@ For each parameter of an intent:
 
 For each shortcut phrase to be supported:
 
-1. Scroll down to the "Shortcut apps" section.
-1. Select the "Input Parameter". For example, "color".
-1. Select the "Key Parameter". For example, "color".
+1. Scroll down to the "Shortcut app" section.
+1. Select the "Input Parameter" if one is needed. For example, "color".
+1. Select the "Key Parameter" if one is needed. For example, "color".
 1. Enter a "Summary" such as "change background to color".
    The word "color" will be highlighted because it is the name of a parameter.
 
@@ -5999,6 +6001,10 @@ For each shortcut phrase to be supported:
    and enter text for the "Voice-Only Dialog".
 
 1. Select Product ... Build.
+1. Attach an iPhone to the computer with a USB cable.
+1. Select the iPhone from the device menu at the top.
+1. Select Product ... Run or click the run triangle.
+1. Why does it prompt "Choose an app to run"?
 
 ## StoreKit
 
