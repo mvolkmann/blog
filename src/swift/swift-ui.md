@@ -5945,9 +5945,9 @@ To configure this:
 1. Select "IntentsUI.framework".
 1. Click the Add button.
 
-1. Select the "Info" tab.
-1. Open the "NSUserActivityTypes" key.
-1. Add items describing the activities to be triggered by Siri.
+1. In the Navigator, select the file `Info.plist`.
+1. Add the key "NSUserActivityTypes" and set the type to "Array".
+1. Add elements describing the activities to be triggered by Siri.
    For example, "SetBackgroundIntent".
 
 1. Select File ... New ... Target...
