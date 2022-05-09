@@ -5829,6 +5829,19 @@ and reinstall it.
 
 ### CloudKit Integration
 
+The contents of a Core Data database can be automatically synchronized
+with a CloudKit database in iCloud.
+
+When the database is "private", the data is
+shared between all devices owned by a single user.
+When the database is "public", the data is
+shared between all users and all devices.
+When the database is "shared", the data is
+shared only with specific users.
+
+For a working example, see this {% aTargetBlank
+"https://github.com/mvolkmann/swiftui-cloudkit-core-data", "GitHub project" %}.
+
 Both Core Data and CloudKit support storing structured data,
 but they use different terminology.
 
