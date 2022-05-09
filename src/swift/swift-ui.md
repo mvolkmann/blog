@@ -5883,6 +5883,20 @@ To enable querying records from the CloudKit Dashboard website:
 1. Click the "Query Records" button.
    Note that after adding records in the app it can take a minute
    until they appear in the CloudKit Dashboard.
+1. To create a new record, click the "+" button after the "Records" heading,
+   select a record type from the "Type" dropdown,
+   select "Create New Record", enter a record name in the "CD_entityName" input,
+   enter attribute values in the remaining inputs,
+   and click the "Save" button.
+   Relationship attribute values must be set to the unique id string
+   of record to which they refer.
+1. To modify record attributes, click a record name (blue link),
+   edit data in the inspector panel on the right,
+   click the "Save" button.
+   To undo changes before saving them, click the "Reload" button.
+1. To see changes in the record table, re-run the query.
+1. To delete a record, click a record name (blue link),
+   click the "Delete" button, and confirm by clicking another "Delete" button.
 
 ## Siri
 
