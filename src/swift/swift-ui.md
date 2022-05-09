@@ -748,7 +748,7 @@ struct ContentView: View {
 ```
 
 The following example holds the status of a stoplight
-in a state propery named "status".
+in a state property named "status".
 Note the use of `$` before the name to
 get a two-way binding with a `TextField`.
 
@@ -5826,6 +5826,139 @@ The easiest way to delete the data an app has stored in Core Data
 and start over with a clean slate
 is to delete the app from the Simulator or a device
 and reinstall it.
+
+### CloudKit Integration
+
+Both Core Data and CloudKit support storing structured data,
+but they use different terminology.
+
+| Topic   | Core Data              | CloudKit                       |
+| ------- | ---------------------- | ------------------------------ |
+| objects | `NSManagedObject`      | `CKRecord`                     |
+| models  | `NSManagedObjectModel` | `Schema`                       |
+| stores  | `NSPersistentStore`    | `CKRecordZone` or `CKDatabase` |
+
+Conversions between these types are performed automatically by
+`NSPersistentCloudKitContainer`.
+
+To combine these:
+
+1. Create a new app and check the "Use Core Data"
+   and "Host in CloudKit" checkboxes.
+1. Add the "iCloud" capability.
+1. Under "Services", check the "CloudKit" checkbox.
+1. Under "Containers", click the "+" button and enter a container name
+   that is "iCloud." plus your reverse internet domain
+   followed by a period and the app name.
+1. Add the "Background Modes" capability.
+1. Check the "Remote notifications" checkbox.
+
+CloudKit prefixes all record and field names with "CD\_",
+which is an abbreviation for "Core Data".
+
+To enable querying records from the CloudKit Dashboard website:
+
+1. Browse the CloudKit Dashboard at https://icloud.developer.apple.com/dashboard/.
+1. Click the big "CloudKit Database" button.
+1. Select a CloudKit database from the dropdown at the top.
+1. In the left nav under "Schema", click "Indexes".
+1. For each record type, select it,
+   click "Add Basic Index", select "recordName" from the dropdown,
+   verify that an "Index Type" of "Queryable" is selected,
+   click "Add Basic Index" again, select "modifiedTimestamp" from the dropdown,
+   verify that an "Index Type" of "Queryable" is selected,
+   and click the "Save Changes" button.
+1. Under "Data" in the left nav, click "Records".
+1. In the "Record Type" dropdown, select a record name.
+1. In the Zone dropdown, select the zone created for you
+   by `NSPersistentCloudKitDatabase`.
+1. Click the "Query Records" button.
+   Note that after adding records in the app it can take a minute
+   until they appear in the CloudKit Dashboard.
+
+## Siri
+
+Siri can be used to trigger actions within an app.
+To configure this:
+
+1. Select the project at the top of the Navigator view.
+1. Select the topmost target.
+1. Select the "Signing & Capabilities" tab.
+1. Select to top entry under "TARGETS".
+1. Click the "+" button in the upper-left.
+1. Add the "Siri" capability.
+1. Select the "Info" tab
+1. Under "Custom iOS Target Properties", hover over the last row.
+1. Click the "+" button.
+1. Select the key "Privacy - Siri Usage Description"
+1. Enter the reason Siri is being used.
+   For example, "Siri is used to trigger app actions by voice."
+
+1. Select the "General" tab.
+1. Scroll down to the "Frameworks, Libraries, and Embedded Content" section.
+1. Click the "+" button.
+1. Enter "intent".
+1. Select "Intents.framework".
+1. Click the Add button.
+1. Click the "+" button.
+1. Enter "intent".
+1. Select "IntentsUI.framework".
+1. Click the Add button.
+
+1. Select the "Info" tab.
+1. Open the "NSUserActivityTypes" key.
+1. Add items describing the activities to be triggered by Siri.
+   For example, "SetBackgroundIntent".
+
+1. Select File ... New ... Target...
+1. Under the "Application Extension" section, click "Intents UI Extension".
+1. Click the Next button.
+1. In the "Product Name" input, enter the current app name
+   followed by "Intent" with no spaces.
+1. Click the Finish button.
+1. Click the Activate button.
+
+1. Select File ... New ... File...
+1. Under the "Resources" section, click "SiriKit Intent Definition File".
+1. Click the Next button.
+1. Verify that all the "Targets" checkboxes are checked.
+1. Click the Create button.
+
+For each intent to be added:
+
+1. In the Navigator, select the file "Intents.intentdefinition".
+1. Click the "+" in the lower-left.
+1. Select "New Intent".
+1. Rename the intent from it's default name of "Intent".
+   The name must begin with a capital letter, for example, "SetBackground".
+1. Enter a human-readable "Description".
+1. Select a "Category" such as "Set".
+
+For each parameter of an intent:
+
+1. Click the "+" in under "Parameters".
+1. Select a "Type" such as "String".
+1. Under "Siri Dialog", enter a "Prompt".
+   For example, "Say the name of a color".
+
+For each shortcut phrase to be supported:
+
+1. Scroll down to the "Shortcut apps" section.
+1. Select the "Input Parameter". For example, "color".
+1. Select the "Key Parameter". For example, "color".
+1. Enter a "Summary" such as "change background to color".
+   The word "color" will be highlighted because it is the name of a parameter.
+
+1. Scroll down to the "Suggestions" section.
+1. Verify that the "Supports background execution" checkbox is checked.
+
+1. In the intents editor left nav, select "Response".
+1. In the "Response Templates" section, select "success"
+   and enter text for the "Voice-Only Dialog".
+1. In the "Response Templates" section, select "failure"
+   and enter text for the "Voice-Only Dialog".
+
+1. Select Product ... Build.
 
 ## StoreKit
 
