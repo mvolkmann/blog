@@ -53,3 +53,17 @@ To create a watch face complication that launches a custom app when tapped:
 1. Scroll down to the "Complications" section.
 1. Tap a complication.
 1. Scroll to the custom app and tap it.
+
+The app icon should appear as the complication icon,
+but all I see so far is two dashes in its place.
+Perhaps this happens because the app was not downloaded from the store
+or perhaps it is a watchOS bug.
+
+## Display Name
+
+To change the display name of a watchOS app:
+
+1. Select the top entry in the Navigator.
+1. Under TARGETS, select the target whose name ends in " App".
+1. Change the value of "Display Name".
+1. Deploy the app again.
