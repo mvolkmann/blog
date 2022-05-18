@@ -79,13 +79,12 @@ To enable collecting code coverage data:
 
 To test SwiftUI Views, install the {% aTargetBlank
 "https://github.com/nalexn/ViewInspector", "ViewInspector" %} framework.
+This works in conjunction with XCTest.
 
 1. Select the topmost entry in the Navigator.
-1. Under "TARGETS", Select the main app target.
-1. Expand the "Frameworks, Libraries, and Embedded Content" section.
-1. Click the "+" button to add a framework.
-1. Click the "Add Other..." dropdown at the bottom.
-1. Select "Add package dependency...".
+1. Select the project.
+1. Click the "Package Dependencies" tab.
+1. Click the "+" button to add a package.
 1. In the search input, enter "ViewInspector".
 1. Select "ViewInspector".
 1. Click the "Add Package" button.
