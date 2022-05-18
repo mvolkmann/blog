@@ -23,7 +23,16 @@ XCTest is a unit testing framework for SwiftUI.
    the project name followed by "Tests".
    This contains a `.swift` file with the same name.
 
-1. Edit the provided `.swift` file.
+1. Click the "+" button at the bottom of the left nav to create another target.
+1. Select "UI Testing Bundle".
+1. Click the "Next" button.
+1. Click the "Finish" button.
+
+   Note that a new folder appears in the Navigator whose name is
+   the project name followed by "UITests".
+   This contains a `.swift` file with the same name.
+
+1. Edit the provided `.swift` files in the two new targets.
 1. To make all the source files in the project available to the test,
    add the line `@testable import {project-name}` before the class definition.
 1. Add test methods whose names begin with "test".
@@ -77,9 +86,7 @@ To enable collecting code coverage data:
 
 ## View Testing
 
-To test SwiftUI Views, install the {% aTargetBlank
-"https://github.com/nalexn/ViewInspector", "ViewInspector" %} framework.
-This works in conjunction with XCTest.
+TODO: Update this based on what you have learned about recording interactions.
 
 1. Select the topmost entry in the Navigator.
 1. Select the project.
@@ -88,6 +95,10 @@ This works in conjunction with XCTest.
 1. In the search input, enter "ViewInspector".
 1. Select "ViewInspector".
 1. Click the "Add Package" button.
+1. In the "Add to target" dropdown,
+   select the target whose name ends in "UITests".
 1. Click the next "Add Package" button.
-1. This should add an `inspect` method to each view,
-   but it isn't currently working!
+1. Add `import ViewInspector` at the top of all test `.swift` files
+   that test views.
+1. To make all the source files in the project available to the test,
+   add the line `@testable import {project-name}` before the class definition.
