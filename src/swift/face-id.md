@@ -18,7 +18,8 @@ using either Face ID or Touch ID.
 1. Click the "Info" tab.
 1. Click the "+" button to the right of the last key in the table.
 1. Enter the key "Privacy - Face ID Usage Description".
-1. Enter a value that describes why Face ID is being used.
+1. Enter a value that describes why Face ID is being used such as
+   "We want to ensure that only you can view your data."
 
 ## Implementation
 
