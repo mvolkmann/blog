@@ -27,7 +27,7 @@ using either Face ID or Touch ID.
 1. Add the following:
 
    ```swift
-   @State private var isUnlocked = false
+   @State private var authenticated = false
 
    func authenticate() {
        let context = LAContext()
@@ -43,7 +43,7 @@ using either Face ID or Touch ID.
                localizedReason: reason
            ) { success, error in
                if success {
-                   isUnlocked = true
+                   authenticated = true
                } else {
                    // The user did not authenticate.
                }
@@ -54,7 +54,16 @@ using either Face ID or Touch ID.
    }
    ```
 
-1. Use the value of `isUnlocked` to decide what to render.
+1. Add a call to `onAppear` to the top View returned by the `body`
+   that calls the `authenticate` function.
+
+   ```swift
+   .onAppear {
+       authenticate()
+   }
+   ```
+
+1. Use the value of `authenticated` to decide what to render.
 1. Provide an alternate way for users to authenticate
    such as entering a username and password
    in case there are reasons they cannot currently use Face ID.
