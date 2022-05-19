@@ -11,7 +11,7 @@ layout: topic-layout.njk
 XCTest is a unit testing framework for SwiftUI.
 "XC" is an abbreviation for "Xcode".
 
-## Configuration
+## Unit Test Configuration
 
 1. Select the topmost entry in the Navigator.
 1. Click the "+" button at the bottom of the left nav to create a new target.
@@ -23,6 +23,11 @@ XCTest is a unit testing framework for SwiftUI.
    the project name followed by "Tests".
    This contains a `.swift` file with the same name.
 
+1. Edit the provided `.swift` files in the new target.
+
+## UI Test Configuration
+
+1. Select the topmost entry in the Navigator.
 1. Click the "+" button at the bottom of the left nav to create another target.
 1. Select "UI Testing Bundle".
 1. Click the "Next" button.
@@ -32,9 +37,13 @@ XCTest is a unit testing framework for SwiftUI.
    the project name followed by "UITests".
    This contains a `.swift` file with the same name.
 
-1. Edit the provided `.swift` files in the two new targets.
+1. Edit the provided `.swift` files in the new target.
+
+## Implementing Tests
+
 1. To make all the source files in the project available to the test,
-   add the line `@testable import {project-name}` before the class definition.
+   add the line `@testable import {project-name}`
+   before each test class definition.
 1. Add test methods whose names begin with "test".
 1. To make an assertion, call one of the `XCTAssert{kind}` functions.
 
@@ -44,6 +53,8 @@ XCTest is a unit testing framework for SwiftUI.
    `NoThrow`, and `ThrowsError`.
    Each of these has a version that takes and does not take an error message.
 
+## Running Tests
+
 1. To run a single test method, click the diamond where the
    line number of the first line of the method (starts with `func`)
    would normally appear.
@@ -52,6 +63,11 @@ XCTest is a unit testing framework for SwiftUI.
 1. To run all the tests in Navigator folder, click the diamond
    to the right of the folder name.
 1. To run all the tests, select Product ... Test or press cmd-u.
+
+In UI tests, the on-screen keyboard doesn't always appear.
+If it doesn't, tests that require typing in text fields will fail.
+To fix this, go the Simulator app, select I/O ... Keyboard,
+and unselect "Connect Hardware Keyboard".
 
 ## Test Results
 
@@ -86,19 +102,73 @@ To enable collecting code coverage data:
 
 ## View Testing
 
-TODO: Update this based on what you have learned about recording interactions.
+To generate test code by recording user interactions:
 
-1. Select the topmost entry in the Navigator.
-1. Select the project.
-1. Click the "Package Dependencies" tab.
-1. Click the "+" button to add a package.
-1. In the search input, enter "ViewInspector".
-1. Select "ViewInspector".
-1. Click the "Add Package" button.
-1. In the "Add to target" dropdown,
-   select the target whose name ends in "UITests".
-1. Click the next "Add Package" button.
-1. Add `import ViewInspector` at the top of all test `.swift` files
-   that test views.
-1. To make all the source files in the project available to the test,
-   add the line `@testable import {project-name}` before the class definition.
+1. Click inside a test function where code should be inserted.
+1. Click the red "record" circle at the bottom of the editor pane
+   of the test source file.
+1. Wait for the app to begin running in the Simulator.
+1. Interact with the UI to navigation to the point within the app
+   where assertions should be made. This includes tapping text fields
+   to move focus into them, typing text, tapping buttons,
+   and selecting items from pickers.
+1. Optionally manually improve the generated test code.
+1. Add assertions about what should be in the UI.
+
+## Add extension to XCTestCase class
+
+Add utility methods to the `XCTestCase` class to simplify writing tests.
+For example:
+
+```swift
+import XCTest
+
+extension XCTestCase {
+    static var app = XCUIApplication()
+
+    func buttonExists(_ label: String) throws {
+        XCTAssertTrue(XCTestCase.app.buttons[label].exists)
+    }
+
+    func enterSecureText(label: String, text: String) {
+        XCTestCase.app.secureTextFields[label].tap()
+        for char in text {
+            XCTestCase.app.keys[String(char)].tap()
+        }
+
+        /* Tests fail with this approach.
+        let field = XCTestCase.app.secureTextFields[label]
+        field.tap()
+        field.typeText(text)
+        */
+    }
+
+    func enterText(label: String, text: String) {
+        XCTestCase.app.textFields[label].tap()
+        for char in text {
+            let key = XCTestCase.app.keys[String(char)]
+            key.tap()
+        }
+
+        /* Tests fail with this approach.
+        let field = XCTestCase.app.textFields[label]
+        field.tap()
+        field.typeText(text)
+        */
+    }
+
+    func tapButton(label: String) {
+        XCTestCase.app.buttons[label].tap()
+    }
+
+    func textExists(_ text: String) throws {
+        XCTAssertTrue(XCTestCase.app.staticTexts[text].exists)
+    }
+}
+```
+
+In the `setUpWithError` method of test files, add the following:
+
+```swift
+XCTestCase.app.launch()
+```

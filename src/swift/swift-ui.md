@@ -2892,7 +2892,7 @@ struct MyRow: View {
 }
 
 struct ContentView: View {
-    // This assigna a View to a computed property.
+    // This assigns a View to a computed property.
     var row = HStack {
         Text("Four")
         Text("Five")
