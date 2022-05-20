@@ -172,3 +172,24 @@ In the `setUpWithError` method of test files, add the following:
 ```swift
 XCTestCase.app.launch()
 ```
+
+## Run from Command Line
+
+To enable this, enter
+`sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
+
+`cd` to a directory containing a `.xcodeproj` file.
+
+To get lists of targets, build configurations, and schemes
+defined in an Xcode project, enter `xcodebuild -list`
+
+To get a list of available devices supported by the simulator,
+enter `xcrun simctl list devices`
+
+To build and run all the XCTests,
+enter an `xcodebuild` command similar to the the following:
+
+```bash
+xcodebuild test -scheme MyApp \
+  -destination 'platform=iOS Simulator,name=iPhone 13,OS=15.5'
+```
