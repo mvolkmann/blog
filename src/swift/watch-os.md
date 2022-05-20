@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: watchOS
   parent: Swift
-  order: 3
 layout: topic-layout.njk
 ---
 

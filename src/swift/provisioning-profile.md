@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Provisioning Profiles
   parent: Swift
-  order: 5
 layout: topic-layout.njk
 ---
 

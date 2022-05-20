@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: TestFlight
   parent: Swift
-  order: 4
 layout: topic-layout.njk
 ---
 

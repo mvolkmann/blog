@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: XCTest
   parent: Swift
-  order: 3
 layout: topic-layout.njk
 ---
 
@@ -53,7 +52,7 @@ XCTest is a unit testing framework for SwiftUI.
    `NoThrow`, and `ThrowsError`.
    Each of these has a version that takes and does not take an error message.
 
-## Running Tests
+## Running Tests in Xcode
 
 1. To run a single test method, click the diamond where the
    line number of the first line of the method (starts with `func`)
@@ -69,7 +68,7 @@ If it doesn't, tests that require typing in text fields will fail.
 To fix this, go the Simulator app, select I/O ... Keyboard,
 and unselect "Connect Hardware Keyboard".
 
-## Test Results
+## Viewing Test Results
 
 To see a report on test results:
 
@@ -100,7 +99,7 @@ To enable collecting code coverage data:
 1. Expand the test folder displayed to see the coverage percentage
    of each source file.
 
-## View Testing
+## UI View Testing
 
 To generate test code by recording user interactions:
 
@@ -115,7 +114,7 @@ To generate test code by recording user interactions:
 1. Optionally manually improve the generated test code.
 1. Add assertions about what should be in the UI.
 
-## Add extension to XCTestCase class
+## Add Utility Methods
 
 Add utility methods to the `XCTestCase` class to simplify writing tests.
 For example:
@@ -175,8 +174,15 @@ XCTestCase.app.launch()
 
 ## Run from Command Line
 
+See {% aTargetBlank
+"https://www.appsdeveloperblog.com/run-xcode-unit-tests-from-the-command-line/",
+"Run Xcode Unit Tests From The Command Line" %}.
+
 To enable this, enter
 `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
+
+Start the Simulator app. Will the tests fail without this?
+To toggle between light and dark mode, select Features ... Toggle Appearance.
 
 `cd` to a directory containing a `.xcodeproj` file.
 
@@ -190,6 +196,18 @@ To build and run all the XCTests,
 enter an `xcodebuild` command similar to the the following:
 
 ```bash
-xcodebuild test -scheme MyApp \
-  -destination 'platform=iOS Simulator,name=iPhone 13,OS=15.5'
+xcodebuild \
+  -scheme MyApp \
+  -destination 'name=iPhone 13'
+  -enableCodeCoverage YES \
+  clean test
 ```
+
+Add `-quiet` to reduce the output and only show errors.
+
+If
+
+## GitHub Actions
+
+See {% aTargetBlank "https://vmois.dev/xcode-github-actions/",
+"How to use GitHub Actions for testing Xcode project" %}.
