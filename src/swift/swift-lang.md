@@ -3840,6 +3840,41 @@ To give the app a different name from the project:
   and the directory below that with the same name.
 - TODO: I'm not confident all of these steps are correct or required.
 
+#### New Files
+
+To create a new file within a project,
+select File ... New ... File... or press cmd-n.
+This will display a dialog that prompts for a file type
+followed by another that prompts for the file name
+and directory where it should be saved.
+
+When a new `.swift` file is created,
+by default it includes comment lines at the top
+like these where several placeholders are replaced:
+
+```swift
+//
+//  ___FILENAME___
+//  ___PACKAGENAME___
+//
+//  Created by ___FULLUSERNAME___ on ___DATE___.
+//  ___COPYRIGHT___
+//
+```
+
+To change this see {% aTargetBlank
+"https://useyourloaf.com/blog/changing-xcode-header-comment/",
+"Changing Xcode Header Comment" %}. The steps are:
+
+1. In Xcode, create a "Property List" file
+   with the name `IDETemplateMacros.plist` and
+   save it in `~/Library/Developer/Xcode/UserData`.
+1. Add the key `FILEHEADER' whose value is
+   what you would like to see in the supplied comments.
+
+Even if you enter no value, a comment with "//" and an empty line
+will still be added at the beginning of each new Swift file.
+
 #### Navigator
 
 The Navigator has nine icon buttons at the top.
