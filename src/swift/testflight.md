@@ -56,23 +56,26 @@ Each version remains available for download for 90 days.
 1. Click the "Create" button.
 1. If a spinner is displayed for a long time, refresh the browser.
 1. The "App Store" tab is selected by default and all the fields
-   on this page must be completed to deploy to the app store,
-   but to just deploy to TestFlight, click the "TestFlight" tab.
+   on this page must be completed to deploy to the app store.
+   But to just deploy to TestFlight, click the "TestFlight" tab.
 
 ### Part 3 - Creating a Build
 
-- Open the app in Xcode.
-
+1. Open the app in Xcode.
 1. Select the top entry in the Navigator.
 1. Select the first entry under TARGETS.
 1. Click the General tab.
 1. Set "Version" to "0.1.0" for the initial build
    which is a semantic version number.
    Modify this each time new bug fixes or features are being deployed.
+   (It seems I had to set all the "MARKETING_VERSION" values to "1"
+   it order to successfully upload a build.)
 1. Set "Build" to "1". Increment this for each
    subsequent build with the same value for "Version".
 1. Verify that the file "Assets.xcassets" defines the image set "AppIcons"
-   that contains icons for both iPhone and iPad.
+   that contains icons for both iPhone and iPad (if building for both).
+1. If a paired watchOS app is included, the watch app will have its own
+   "Assets.xcassets" file that must contain "AppIcons" for the watch.
 1. In the device list at the top, choose "Any iOS Device".
 1. Select Product ... Archive.
    This can take a few minutes to complete on a fast machine.
@@ -82,6 +85,8 @@ Each version remains available for download for 90 days.
 1. Select the "Upload" radio button.
 1. Click the "Next" button.
 1. In the dialog that appears, uncheck "Manage Version and Build Number".
+   (If you get the error "Metadata/Info.plist Mismatch" when
+   uploading the archive, try again with this checkbox checked.)
 1. Click the "Next" button.
 1. Select the "Automatically manage signing" radio button.
 1. Click the "Next" button.
@@ -101,7 +106,18 @@ Each version remains available for download for 90 days.
 ### Part 4 - Distributing an App
 
 1. Return to the App Store Connect web page and the "TestFlight" tab.
-1. Click the "Create Group" link to add testers.
+1. In the Build section, select an uploaded built to use.
+1. In the "App Previews and Screenshots" section,
+   add at least one screenshot for each supported device size.
+   These must have specific pixel dimensions.
+   To capture them, run the app in a simulator once
+   for a device that has the desired size.
+   In the Simulator app, select File ... Save Screen
+   which saves a screenshot in the Desktop directory.
+   On the App Store Connect page,
+   click "Prepare for Submission" in the left nav.
+   Drag the screenshot files into the area under "Version Information".
+1. Click the "Create Group" link in the light blue rectangle to add testers.
 1. Enter a group name.
 1. Check the "Enable automatic distribution" checkbox.
 1. Click the "Create" button.
@@ -129,9 +145,16 @@ Each version remains available for download for 90 days.
 ### Part 5 - App Configuration
 
 1. Return to the App Store Connect web page and the "App Store" tab.
-1. Click the large button for the app.
+1. If the page for the app is not already displayed,
+   click the large button containing the app name.
 1. Visit each section linked in the left nav and supply any missing information.
    There are many things that must be specified, especially under "App Privacy"!
+   For each section, click the "Save" button
+   after entering all the required data.
+1. Click "Prepare for Submission" in the left nav.
+1. Click the "Add for Review" button in the upper-right.
+1. If you see "Unable to Add for Review",
+   supply all the missing information that is listed.
 
 ### Part 6 - Adding External Testing Users
 
