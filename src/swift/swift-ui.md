@@ -171,6 +171,10 @@ Note that if any of the previews are in "Live Preview" mode,
 only that preview will be displayed.
 Exit out of that mode to get the other previews to display again.
 
+To reduce the size of previews to only show their content
+and not the surrounding device chrome,
+call `.previewLayout(.sizeThatFits)`.
+
 ### Inspector
 
 The Inspector shows commonly used modifiers of the selected view.
@@ -1133,10 +1137,11 @@ SwiftUI supports the following property wrappers:
 
 ### @Binding
 
-This property wrapper is applied to properties of views
-that are passed bindings from parent views.
-It allows the child view to read and write a value that
-is owned by the parent view and passed in as an argument.
+This property wrapper is applied to a property of a child view
+that is passed a binding (`$` syntax) from a parent view.
+It connects a child property to a parent property.
+This allows the child view to get and set a property that
+is owned by a parent view and si passed in as an argument.
 
 ```swift
 struct ChildView: View {
@@ -4117,7 +4122,13 @@ should be transient state such as data related to styling.
 Models ...
 
 - holds data and application logic
-- have no knowledge of the view code the uses the data
+- have no knowledge of the view code that uses the data
+- are structs that typically conform to the `Identifiable` protocol
+  which requires having an `id` property (can have an `UUID` value);
+  allows iterating over them in a `ForEach` loop
+
+  For a unique `String` value, use `UUID().uuidString`.
+  This is useful for inserting in a database.
 
 ViewModels ...
 

@@ -3802,6 +3802,7 @@ enter part of the file name (at least three characters),
 and click the file within the list that appears.
 This also works with any kind of name including
 types, variables, functions, structs, classes, properties, and methods.
+It even works with framework types.
 
 Xcode provides great intellisense and code completion.
 For function calls, press tab after entering each argument
