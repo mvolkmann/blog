@@ -154,15 +154,19 @@ The same button appears in the Simulator.
 It is possible for the Preview area to show more than one preview.
 This is controlled by the `ContentView_Previews` struct
 defined in `ContentView.swift`.
-For example, the following renders the app in light mode, the app in dark mode,
-and a single component to test in isolation from the rest of the app.
+For example, the following renders
+`ContentView` in portrait orientation and light mode,
+`ContentView` in landscape orientation and dark mode.
 
 ```swift
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().preferredColorScheme(.light)
-        ContentView().preferredColorScheme(.dark)
-        CircleButton(color: .blue) { } // action that does nothing
+        ContentView()
+            .previewInterfaceOrientation(.portrait)
+            .preferredColorScheme(.light)
+        ContentView()
+            .previewInterfaceOrientation(.landscapeLeft)
+            .preferredColorScheme(.dark)
     }
 }
 ```
