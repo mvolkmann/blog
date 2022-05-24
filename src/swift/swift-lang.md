@@ -4183,12 +4183,13 @@ The steps to configure this are described at {% aTargetBlank
 The "Source Control" menu supports many Git commands including
 Commit, Push, Pull, Fetch Changes, Stash Changes, and Discard All Changes.
 
-The keyboard shortcut for committing changes is cmd-option-c.
-A dialog will open that lists the modified files.
 Modified files are indicated in the Navigator by adding an "M" after their name.
 Added files have an "A" after their name.
 
-Select a file to see side-by-side diffs.
+To start the process of committing changes, select Source Control ... Commit...
+or press cmd-option-c (conflicts with my Alfred settings).
+A dialog will open that lists the modified files.
+Select a file in this dialog to see side-by-side diffs.
 By default the new version is displayed on the left.
 To switch this, select Preferences ... Source Control ... Comparison View
 ... Local Revision on Right Side.
@@ -4197,8 +4198,9 @@ By default the checkbox for each file is checked.
 Uncheck any that should not be committed.
 
 To commit the checked files, click the "Commit Files" button.
-To also push the changes to a remote repository,
-check the "Push to remote" checkbox before pressing the "Commit Files" button.
+To also push the changes to a remote repository, check the
+"Push to remote" checkbox before pressing the "Commit Files" button
+or commit the changes first and then select Source Control ... Push....
 
 #### Xcode Issues
 
