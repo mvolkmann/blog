@@ -191,14 +191,41 @@ hover over it and click the "Delete" button that appears.
 
 ### Simulator
 
-To run the app in the Simulator, click the black triangle at the top.
+To run the app in the Simulator, click the triangle at the top.
 This builds the app, launches the Simulator (if not already running),
 loads the app in the Simulator, and starts it.
 The app is not automatically updated when code changes are saved.
-The triangle must be clicked again to repeat the whole build/load/start process.
+Click the triangle again to repeat the entire build/load/start process.
 
 There are known rendering issues with the "iPhone 12 mini" simulator,
 so choose a different device for now.
+
+To change the Simulator orientation, press cmd-◀ and cmd-▶.
+
+To control whether the text is entered using the computer keyboard or the
+on-screen keyboard, select IO ... Keyboard ... Connect Hardware ... Keyboard
+to toggle its value.
+
+To switch between light and drag mode, select Features ... Toggle Appearance
+or press cmd-A.
+
+To simulate the use of Face ID, select Features ... Face ID and then select
+Enrolled (approves use of Face ID), Matching Face (simulates a match),
+or Non-Matching Face (simulates failure to match).
+
+To save a screenshot of the simulator, select File ... Save Screen.
+A `.png` file whose name begins with "Simulator Screen Shot" followed by
+the device name, date, and time will be saved in the Desktop directory.
+These are useful for uploading to `https://appstoreconnect.apple.com/`
+when submitting an app to the App Store.
+
+To save a video of a Simulator session, select File ... Record Screen.
+When finished, click the stop button at the top of the simulator.
+A `.mp4` file whose name begins with "Simulator Screen Recording" followed by
+the device name, date, and time will be saved in the Desktop directory.
+Double-click the file to play it in the "QuickTime Player" app.
+
+There are many more features in the Simulator menus.
 
 ## Apple Human Interface Guidelines (HIG)
 
