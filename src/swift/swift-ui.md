@@ -688,6 +688,27 @@ Resume Preview to see the change.
 This does not affect `Toggle` views which required using the view modifier
 `.toggleStyle(SwitchToggleStyle(tint: someColor))`.
 
+### Extracting Views
+
+When the `body` of a view is longer than what can be displayed on the screen
+it is a good idea to extract some of the content.
+There are three options for doing this.
+
+1. Move some of the content to a computed property.
+2. Move some of the content to a method.
+3. Move some of the content to a new struct that
+   inherits from `View` and has its own `body` property.
+
+The last two options are useful when arguments need to be passed
+to customize what is rendered.
+
+Command-click a view to get a context menu that contains the options
+"Extract to Variable", "Extract to Method", and "Extract Subview".
+
+If a new struct is created and it might be used by other source files,
+it should be placed in its own source file.
+Otherwise it can reside in the same source file from which it was extracted.
+
 ### @State Property Wrapper
 
 All views are immutable structs.
@@ -1079,7 +1100,7 @@ struct Collapsable: ViewModifier {
 }
 
 extension View {
-    func collapsable(
+    func collapsible(
         bgColor: Color = .black,
         duration: Double = 0.5) -> some View {
         modifier(Collapsable(bgColor: bgColor, duration: duration))
@@ -1100,7 +1121,7 @@ VStack {
 //.modifier(Collapsable(bgColor: ContentView.bgColor))
 
 // This way uses the View extension and is preferred.
-.collapsable(bgColor: ContentView.bgColor)
+.collapsible(bgColor: ContentView.bgColor)
 ```
 
 ## Property Wrappers
@@ -1391,6 +1412,11 @@ To hide a view but still take up the space that would be occupied
 if the view was visible, consider setting its opacity to zero.
 This is done with the `opacity` view modifier.
 For example, `someView.opacity(0)`.
+
+To automate wrapping views in a container view,
+select them and command-click to get a context menu that contains the options
+"Embed in HStack", "Embed in VStack", "Embed in ZStack", "Embed in List",
+and "Embed..." (for embedding in an arbitrary container).
 
 Here are the container views that are provided by SwiftUI.
 
@@ -1728,7 +1754,7 @@ Common UI components that are not built into SwiftUI include:
 ### `Section`
 
 These break a view into sections that are optionally labelled.
-They are also optionally collapsable.
+They are also optionally collapsible.
 This was used in the `Form` example above.
 
 ### `Group`
