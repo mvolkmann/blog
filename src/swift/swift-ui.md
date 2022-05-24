@@ -723,6 +723,31 @@ Resume Preview to see the change.
 This does not affect `Toggle` views which required using the view modifier
 `.toggleStyle(SwitchToggleStyle(tint: someColor))`.
 
+### Constants
+
+Custom views often make use of constants.
+One recommended way to define constants that are used by multiple source files
+is to place them in the file `Constants.swift`.
+The contents of this file could be similar to the following:
+
+```swift
+import SwiftUI
+
+struct Constants {
+    static let someValue = 19
+
+    struct Colors {
+        static let background = Color(hex: 0xf1faff)
+        static let disabled = Color.gray
+        static let primary = Color(hex: 0x006197)
+        static let secondary = Color(hex: 0x3eb3e5)
+    }
+}
+```
+
+Note how a nested struct is used to group related constants.
+An example reference to one of these is `Constants.Colors.primary`.
+
 ### Extracting Views
 
 When the `body` of a view is longer than what can be displayed on the screen
