@@ -726,6 +726,7 @@ struct Counter: View {
         _count = State(initialValue: start)
     }
 
+    // a computed property
     var body: some View {
         // HStack is a container view that arranges it children horizontally.
         HStack {

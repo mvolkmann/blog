@@ -3158,7 +3158,7 @@ The access control keywords include:
 The most commonly used access control keyword is `private`
 and the second most commonly used is `internal` which is the default.
 
-Specifying `public private(set)` on a property means that
+Specifying `private(set)` on a property means that
 the property can be accessed as if it were `public`,
 but can only be modified as if it were `private`.
 
@@ -4051,8 +4051,8 @@ click the "Show" checkbox, and select "Variables & Console View".
 
 #### Simulator
 
-When developing iOS apps it is useful to launch the app in the Simulator
-directly from Xcode.
+When developing iOS apps it is useful to launch the app
+in the Simulator app directly from Xcode.
 Preview and the Simulator can simulate many different devices.
 
 When code changes are saved, Xcode will automatically update the app
@@ -4070,6 +4070,20 @@ The default device type used by the Simulator can be changed
 by selecting Product ... Destination ... Choose Destination...
 and selecting a device type.
 This must be done in each Xcode project.
+
+#### Pragma Marks
+
+Each section of a source file can be preceded by a special comment
+called a "pragma mark".
+The syntax is `// MARK: - SectionName` where SectionName is typically something
+like `Nested Types`, `Constants`, `Properties`, `Initializers`, or `Methods`.
+Xcode will display these section names in the Minimap and
+in the dropdown of source file elements at the top of the Editor pane.
+The `-` in the comment is optional and causes a
+horizontal line to be drawn above the section name.
+
+To toggle display of the Minimap, select Editor ... Minimap
+or press cmd-ctrl-M.
 
 #### App Icons
 
