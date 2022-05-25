@@ -1120,6 +1120,7 @@ Each `case` has a name and an optional value that can be
 any type, though `Int`, and `String` are common types.
 By convention both `enum` names and `case` names use camel-case,
 but `enum` names begin uppercase and `case` names begin lowercase.
+These names should be singular rather than plural.
 
 Enums are value types like structs.
 When an enum value is assigned to a variable or passed to a function,
@@ -2197,6 +2198,7 @@ repeat {
 
 Structs define named groups of properties and methods.
 By convention their names begin with an uppercase letter.
+Typically these names are singular rather than plural.
 
 Structs cannot inherit from another struct or class,
 but they can conform to any number of protocols which
@@ -2467,6 +2469,7 @@ print(p?.address?.zip ?? "no zip") // alternate way to handle optional; "no zip"
 
 Classes are similar to structs in many ways.
 By convention their names begin with an uppercase letter.
+Typically these names are singular rather than plural.
 
 Classes do the following things that structs cannot.
 

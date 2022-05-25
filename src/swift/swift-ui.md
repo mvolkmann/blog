@@ -221,8 +221,10 @@ when submitting an app to the App Store.
 
 To save a video of a Simulator session, select File ... Record Screen.
 When finished, click the stop button at the top of the simulator.
+Right-click on the video thumbnail that appears
+and select where it should be saved.
 A `.mp4` file whose name begins with "Simulator Screen Recording" followed by
-the device name, date, and time will be saved in the Desktop directory.
+the device name, date, and time will be saved in the selected location.
 Double-click the file to play it in the "QuickTime Player" app.
 
 There are many more features in the Simulator menus.
