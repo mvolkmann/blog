@@ -6225,6 +6225,70 @@ To use StoreKit in an app:
    from "None" to "Configuration.storekit".
 1. Click the "Close" button.
 
+## UIKit Integration
+
+The UIKit framework preceded the SwiftUI framework.
+While SwiftUI is the future, it is still missing some features of UIKit.
+
+It is possible to embed the use of UIKit in a SwiftUI app.
+The key to doing this is to wrap UIKit views in a `UIRepresentable` wrapper.
+
+Here is an example of wrapping the use of `UITextField`
+so it can be used in the SwiftUI app.
+One feature this has that is missing from the SwiftUI `TextField` view
+is the ability to include a clear button on the trailing end
+that is an "X" in a circle. Tapping this clears the value.
+
+```swift
+import SwiftUI
+
+struct MyUITextField: UIViewRepresentable {
+    var placeholder = ""
+    @Binding var text: String
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(text: $text)
+    }
+
+    func makeUIView(context: Context) -> UITextField {
+        let textField = UITextField()
+
+        textField.borderStyle = .roundedRect
+        textField.clearButtonMode = .whileEditing
+        textField.delegate = context.coordinator
+        textField.placeholder = placeholder
+
+        return textField
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = text
+    }
+
+    class Coordinator: NSObject, UITextFieldDelegate {
+        @Binding var text: String
+
+        init(text: Binding<String>) {
+            self._text = text
+        }
+
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            print("in textFieldDidChangeSelection")
+            text = textField.text ?? ""
+        }
+    }
+}
+```
+
+To use this inside a SwiftUI view, add code like the following:
+
+```swift
+@State private var firstName = "Mark"
+...
+MyUITextField(placeholder: "First Name", text: $firstName)
+    .frame(height: 31)
+```
+
 ## App Demos
 
 One approach for demonstrating iOS apps to others
