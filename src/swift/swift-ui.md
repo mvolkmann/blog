@@ -2969,6 +2969,65 @@ TODO: What is this?
 
 TODO: What is this?
 
+## Floating Action Button
+
+SwiftUI does not provide a floating action button view.
+This is a circular button that hovers of the content of a screen.
+They typically appear in the lower-right or lower-left corner of the screen.
+Floating action buttons are popular in Android applications.
+
+The following code demonstrates one way to
+implement a floating action button in SwiftUI:
+
+```swift
+import SwiftUI
+
+struct FloatingActionButton: View {
+    var label: String = "+"
+    var action: () -> Void
+
+    let diameter: CGFloat = 70
+    let shadow: CGFloat = 3
+
+    var body: some View {
+        Button(
+            action: action,
+            label: {
+                ZStack(alignment: .center) {
+                    Circle()
+                        .background(Color.blue)
+                        .frame(width: diameter, height: diameter)
+                    Text(label)
+                        .font(.system(size: 60))
+                        .foregroundColor(.white)
+                        .padding(.bottom, 7)
+                        .frame(height: diameter)
+                }
+            }
+        )
+        .cornerRadius(diameter / 2)
+        .padding(.trailing, 35)
+        .shadow(
+            color: .black.opacity(0.3),
+            radius: shadow,
+            x: shadow,
+            y: shadow
+        )
+    }
+}
+
+struct FloatingActionButton_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack(alignment: .bottomTrailing) {
+            Color.yellow.ignoresSafeArea()
+            FloatingActionButton() {
+                print("got tap")
+            }
+        }
+    }
+}
+```
+
 ## Combining Container and Component Views
 
 The following code demonstrtrates using both container and component views.
