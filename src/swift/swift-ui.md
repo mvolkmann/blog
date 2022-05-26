@@ -104,10 +104,11 @@ To hide/show the Canvas area, select Editor ... Canvas.
 If Preview isn't running inside the Canvas area,
 press the "Resume" button at the top to start it.
 
-By default the Canvas area is only displayed
-when the file `ContentView.swift` is selected.
-To keep it displayed even when a different file is selected,
-select `ContentView.swift` and
+By default a preview of the view is only displayed
+when the file that defines it is selected in the Navigator.
+To keep the preview of a specific view in the Canvas area
+even when a different file is selected,
+select its source file in the Navigator and
 click the pin icon in the lower-left of the Canvas.
 
 When code changes are saved and there are no errors,
@@ -144,6 +145,9 @@ This also enables scrolling by dragging
 which is not possible in the default mode.
 Clicking this also triggers the Preview to resume if it is paused
 and rebuild the code.
+
+Output from `print` calls does not appear in the Debug area
+when interacting with a preview.
 
 To rotate the display to landscape mode,
 click the button above the display that contains
