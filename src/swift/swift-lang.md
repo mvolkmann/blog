@@ -3927,11 +3927,12 @@ The Navigator has nine icon buttons at the top.
 
   This displays a tree view of files in the project.
 
-  Files can be organized into subdirectories.
-  To create a new subdirectory, right-click on an
-  existing directory or file and select "New Group".
-  This creates a directory named "New Group" which can be renamed.
-  Existing files can then be dragged into the new directory.
+  Files can be organized into groups.
+  To create a new group, right-click on an
+  existing group or file and select "New Group".
+  This creates a group and a directory on the file system
+  named "New Group" which can be renamed.
+  Existing files can then be dragged into the new group.
   Another option is to select all the files to be moved to a subdirectory,
   right-click one of them, and select "New Group From Selection".
 
