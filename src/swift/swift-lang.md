@@ -537,6 +537,11 @@ TODO: Why is this required?
 TODO: Are non-escaping closures handled in an optimized way
 that discards their context after the function returns?
 
+When an escaping closure reference `self`,
+typically the closure parameter list should be preceded by `[weak self]`
+so the object that uses the escaping closure can be garbage collected
+when there are no longer references to it.
+
 ## Error Handling
 
 Errors in that occur in Swift code are described by
@@ -605,9 +610,15 @@ To handle errors, use one of the following approaches:
   If an expression or statement technically can throw,
   but should never throw given the way it is being used,
   it can be preceded with `try!`.
-  This frees the code from needing the handle errors.
+  This performs a force unwrap of the result and
+  frees the code from needing the handle errors.
   If the code actually does throw,
   the program will terminate with a fatal error.
+  For this reason is not frequently used.
+
+We have seen three variations of trying something that can throw
+which are `try`, `try?`, and `try!`.
+It is important to understand the differences between these.
 
 A `defer` block contains code to execute
 before its containing block or function exits,
@@ -3229,6 +3240,9 @@ See {% aTargetBlank
 
 Swift 5.5 added support for the `async` and `await` keywords.
 This was announced at the WWDC 2021 event.
+It offers an alternative to passing escaping closures or the Combine framework
+and allows the compiler to provide more and better error messages
+than with those approaches.
 
 Functions that use the `await` keyword must include the `async` keyword
 after their parameter list.
@@ -3245,6 +3259,22 @@ func getPets() async -> Pets? {
     print("error: \(error)")
     return nil
   }
+}
+```
+
+Async functions must be called from an asynchronous context.
+This can be another `async` function.
+Another option is to embed the calls in a `Task`.
+For example:
+
+```swift
+Task {
+    do {
+        let photo = try await getPhoto("some-name")
+        // Do something with photo.
+    } catch {
+        print("error getting photo: \(error.localizedDescription)")
+    }
 }
 ```
 
@@ -3344,6 +3374,15 @@ DispatchQueue.global(qos: .qosName).async { some-code }
 
 When code running off of the main thread needs to update UI state,
 it should register a function to run on the main thread as follows:
+
+```swift
+await MainActor.run { some-code }
+```
+
+The code above must be run in an asynchronous context
+such as an `async` function or a `Task`.
+
+To run code on the main thread from a synchronous context:
 
 ```swift
 Dispatch.main.async { some-code }
@@ -3538,6 +3577,7 @@ class ViewModel: ObservableObject {
     }
 
     init() {
+        // Task creates an asynchronous context that can use the await keyword.
         Task(priority: .medium) {
             do {
                 // Create a new dog.

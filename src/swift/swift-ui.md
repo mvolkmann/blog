@@ -1432,7 +1432,7 @@ which provides many more ways to select a color.
 It is recommended to use the predefined system colors
 because they are dynamic, meaning that the actual color used
 automatically changes when switching between light and dark mode.
-To use these in code, enter `Color(UIColor.system`
+To use these in code, enter `Color(UIColor.system)`
 and select a system color from the code completion popup.
 
 Typically `Color.primary` is used for text because it
@@ -1465,6 +1465,11 @@ To define a custom named color pair, one for light mode and one for dark:
   and reduce the value for Brightness (perhaps to 50%).
 
 To use a custom color in code, enter `Color("some-name")`.
+
+UIKit uses `UIColor` instead of `Color`.
+To create a `UIColor` from a `Color`,
+pass the `Color` to a `UIColor` initializer.
+For example, `let redUIColor = UIColor(Color.red)`.
 
 ## Container Views
 
