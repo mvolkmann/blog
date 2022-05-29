@@ -143,6 +143,8 @@ To experiment with Swift:
 - To run only the code up to and including a specific line,
   hover over the line and click the play button that appears.
 - Output from `print` calls appears in the console area at the bottom.
+  The `print` function takes any number of arguments
+  and outputs them with a space between each.
 - If the console area is not visible, drag up from the bottom to expose it.
 
 Xcode is slow at evaluating a playground.
@@ -879,7 +881,7 @@ Numeric `Foundation` functions include:
 | `acos(number)`        | returns arc cosine in radians             |
 | `atan(number)`        | returns arc tangent in radians            |
 
-### String Type
+### String and Character Type
 
 The `String` type is a `struct` that represents a sequence of Unicode characters.
 Literal `Character` and single-line `String` values
@@ -911,7 +913,8 @@ To insert expressions in string values use the string interpolation syntax.
 let item = "milk"
 let price = 2.59
 let taxRate = 0.8
-print("item \(item) costs \(price * (1 + taxRate))")
+print("item \(item) costs \(price * (1 + taxRate))") // single string
+print("item", item, "costs", price * (1 + taxRate)) // alternative
 ```
 
 A new string can be created by concatenating existing strings
@@ -4078,12 +4081,15 @@ Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
 
 The bottom section is not visible by default.
 Drag the status row at the bottom up to expose it.
+
 The bottom section has two subsections.
 The left side of the bottom section is for the debugging.
 The right side of the bottom section is for the console output
 such as that from `print` function calls.
+
 Click the trashcan icon in the lower-right to clear the output.
 The output from `print` calls only appears when running in the debug mode.
+
 Xcode used to support debug mode in Previews,
 but now it is only supported in the Simulator.
 This is why `print` output never appears when running in Preview.

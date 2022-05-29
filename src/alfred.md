@@ -128,6 +128,8 @@ Every time text or images are copied to the clipboard,
 they will be saved in the Alfred clipboard history.
 To view them, open the Alfred search input and type "clipboard"
 or press the hotkey which defaults to cmd-option-c.
+(I changed this to cmd-shift-c to avoid
+conflicting with a keyboard shortcut in Xcode.)
 To paste a saved clipboard entry, click it or
 navigate to it with the up and down arrow keys and press return.
 

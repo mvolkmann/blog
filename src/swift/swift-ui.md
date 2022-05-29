@@ -100,7 +100,8 @@ or drag a view type to the desired code location.
 ### Canvas / Preview
 
 The Canvas area displays Previews of the UI running outside of a simulator.
-To hide/show the Canvas area, select Editor ... Canvas.
+To hide/show the Canvas area, select Editor ... Canvas
+or press cmd-option-return.
 If Preview isn't running inside the Canvas area,
 press the "Resume" button at the top to start it.
 
@@ -206,9 +207,10 @@ so choose a different device for now.
 
 To change the Simulator orientation, press cmd-◀ and cmd-▶.
 
-To control whether the text is entered using the computer keyboard or the
-on-screen keyboard, select IO ... Keyboard ... Connect Hardware ... Keyboard
-to toggle its value.
+To toggle whether the text is entered using the computer keyboard
+or the on-screen keyboard,
+select IO ... Keyboard ... Connect Hardware ... Keyboard
+or press cmd-K.
 
 To switch between light and drag mode, select Features ... Toggle Appearance
 or press cmd-A.
