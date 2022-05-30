@@ -3821,14 +3821,18 @@ surround it with `#if targetEnvironment(simulator) ... #endif`.
 ### Xcode
 
 Xcode is the primary IDE for creating macOS, iOS, and watchOS applications.
+It contains many panels that are described below:
 
-The main Xcode window is divided into three main areas.
-The left side is the Navigator.
-The right side is the Inspector.
-The center area is divided into three sections.
-The center-left section is the Code Editor.
-The center-right section is the Canvas which is used to test
-Previews of an app outside of the Simulator or a real device.
+| Area      | Location     | Purpose                                       | Toggle With      |
+| --------- | ------------ | --------------------------------------------- | ---------------- |
+| Navigator | left         | display files, search results, and more       | cmd-zero         |
+| Editor    | center left  | view and edit code and data in selected files | none             |
+| Canvas    | center right | view and interact with Previews               | cmd-option-p     |
+| Minimap   | right        | display zoomed out view of entire file        | cmd-ctrl-shift-m |
+| Inspector | right        | view and editing details about selected item  | cmd-option-zero  |
+| Debug     | bottom       | display print output and more                 | cmd-shift-y      |
+
+Previews allow testing a single view outside of the Simulator or a real device.
 
 To create a "Playground" for experimenting with code
 select File ... New ... Playground.
