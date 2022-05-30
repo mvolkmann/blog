@@ -196,42 +196,69 @@ hover over it and click the "Delete" button that appears.
 
 ### Simulator
 
-To run the app in the Simulator, click the triangle at the top.
+When developing iOS, watchOS, and macOS apps, it is useful to
+launch the app in the Simulator app directly from Xcode.
+Preview and the Simulator can simulate many different devices.
+
+To run the app in the Simulator, click the triangle at the top
+or press cmd-r while focus is in Xcode (not in the Simulator).
 This builds the app, launches the Simulator (if not already running),
 loads the app in the Simulator, and starts it.
-The app is not automatically updated when code changes are saved.
-Click the triangle again to repeat the entire build/load/start process.
+
+Unlike in Previews, the app is not automatically updated
+when code changes are saved.
+Click the triangle or press cmd-r again
+to repeat the entire build/load/start process.
+
+If there are errors or warnings, the number of each will be displayed
+on the right side of the code editor header.
+Click either number to display the messages in the "Issue Navigator".
+
+Preview is more limited in functionality than the Simulator.
+TODO: List the differences between the Simulator app and the Preview pane.
+
+The default device type used by the Simulator can be changed
+by selecting Product ... Destination ... Choose Destination...
+and selecting a device type.
+This must be done in each Xcode project.
 
 There are known rendering issues with the "iPhone 12 mini" simulator,
 so choose a different device for now.
 
-To change the Simulator orientation, press cmd-◀ and cmd-▶.
+The Simulator supports many useful keyboard shortcuts.
 
-To toggle whether the text is entered using the computer keyboard
-or the on-screen keyboard,
-select IO ... Keyboard ... Connect Hardware ... Keyboard
-or press cmd-K.
+| Action                                        | Menu Item                                         | Keyboard Shortcut |
+| --------------------------------------------- | ------------------------------------------------- | ----------------- |
+| change orientation                            | Device ... Rotate {Left \| Right}                 | cmd-◀ and cmd-▶   |
+| toggle use of computer keyboard to enter text | IO ... Keyboard ... Connect Hardware ... Keyboard | cmd-shift-k       |
+| switch between light and dark mode            | Features ... Toggle Appearance                    | cmd-shift-a       |
+| copy screen to clipboard                      | Edit ... Copy Screen                              | cmd-ctrl-c        |
+| save screen shot as .png file                 | File ... Save Screen                              | cmd-s             |
+| save session video as .mp4 file               | File ... Record Screen                            | cmd-r             |
+| simulate use of Face ID                       | Features ... Face ID ... option                   | rarely used       |
+| show home screen                              | Device ... Home                                   | cmd-shift-h       |
+| show app switcher (to switch or quit apps)    | Device ... App Switcher                           | cmd-ctrl-shift-h  |
 
-To switch between light and drag mode, select Features ... Toggle Appearance
-or press cmd-A.
+Screenshot file names begin with "Simulator Screen Shot" followed by
+the device name, date, and time.
+They are saved in the Desktop directory.
+These screenshots are useful for uploading to
+`https://appstoreconnect.apple.com/` when submitting an app to the App Store.
 
-To simulate the use of Face ID, select Features ... Face ID and then select
-Enrolled (approves use of Face ID), Matching Face (simulates a match),
-or Non-Matching Face (simulates failure to match).
-
-To save a screenshot of the simulator, select File ... Save Screen.
-A `.png` file whose name begins with "Simulator Screen Shot" followed by
-the device name, date, and time will be saved in the Desktop directory.
-These are useful for uploading to `https://appstoreconnect.apple.com/`
-when submitting an app to the App Store.
-
-To save a video of a Simulator session, select File ... Record Screen.
-When finished, click the stop button at the top of the simulator.
+When finished recording a session video,
+click the stop button at the top of the simulator.
 Right-click on the video thumbnail that appears
-and select where it should be saved.
-A `.mp4` file whose name begins with "Simulator Screen Recording" followed by
-the device name, date, and time will be saved in the selected location.
+and select the directory where it should be saved.
+
+Screen recording file names begins with "Simulator Screen Recording" followed
+by the device name, date, and time will be saved in the selected location.
 Double-click the file to play it in the "QuickTime Player" app.
+These are useful for demos and to share with designers and clients
+to discuss app features.
+
+Face ID options include Enrolled (approves use of Face ID),
+Matching Face (simulates a match),
+and Non-Matching Face (simulates failure to match).
 
 There are many more features in the Simulator menus.
 
