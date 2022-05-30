@@ -42,22 +42,35 @@ Key facts about Swift include the following:
 
 ## Resources
 
-- main site - {% aTargetBlank "https://swift.org", "https://swift.org" %}
+- Swift home page - {% aTargetBlank "https://swift.org", "https://swift.org" %}
+
 - {% aTargetBlank "https://docs.swift.org/swift-book/",
   "The Swift Programming Language Book" %}
+
+- {% aTargetBlank "https://www.apple.com/swift/playgrounds/",
+  "Swift Playgrounds" %} iOS app - free
+
 - {% aTargetBlank "https://cs193p.sites.stanford.edu",
   "Stanford CS193p - Developing Apps for iOS" %} course by Paul Hegarty - free
+
 - {% aTargetBlank "https://www.youtube.com/c/PaulHudson", "Hacking with Swift" %}
-  video series on Swift and SwiftUI by Paul Hudson - free
+  video series on Swift and SwiftUI by Paul Hudson (@twostraws) - free
+
 - {% aTargetBlank "https://www.hackingwithswift.com/100", "100 Days of Swift" %}
-  by Paul Hudson - free
+  by Paul Hudson (@twostraws) - free
+
 - {% aTargetBlank "https://www.youtube.com/channel/UCp25X4LzOLaksp5qY0YMUzg",
   "Swiftful Thinking" %} YouTube videos by Nick Sarno - free
+
+- {% aTargetBlank "https://www.swiftbysundell.com", "Swift by Sundell" %}
+  by John Sundell
+
+- {% aTargetBlank "https://codewithchris.com/swift-tutorial/", "Code With Chris" %}
+  by Chris Ching
+
 - {% aTargetBlank "https://www.udemy.com/course/ios-13-app-development-bootcamp/",
   "iOS & Swift - The Complete iOS App Development Bootcamp" %}
   Udemy course by Angela Yu - $14.99
-- {% aTargetBlank "https://www.apple.com/swift/playgrounds/",
-  "Swift Playgrounds" %} iOS app - free
 
 ## Installing
 
