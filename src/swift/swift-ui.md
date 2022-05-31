@@ -1130,7 +1130,7 @@ which is covered later in the "Animation" section.
 ```swift
 import SwiftUI
 
-struct Collapsable: ViewModifier {
+struct Collapsible: ViewModifier {
     private static let diameter = CGFloat(120)
     private static var radius: CGFloat { diameter / 2 }
 
@@ -1144,8 +1144,8 @@ struct Collapsable: ViewModifier {
             .trim(from: 0, to: 0.5)
             .fill(bgColor)
             .frame(
-                width: Collapsable.diameter,
-                height: Collapsable.radius
+                width: Collapsible.diameter,
+                height: Collapsible.radius
             )
             .offset(x: 0, y: -16)
     }
@@ -1178,8 +1178,8 @@ struct Collapsable: ViewModifier {
                     Image(systemName: "chevron.down")
                         .resizable()
                         .frame(
-                            width: Collapsable.radius / 3,
-                            height: Collapsable.radius / 4
+                            width: Collapsible.radius / 3,
+                            height: Collapsible.radius / 4
                         )
                         .onTapGesture { toggle() }
                         .rotationEffect( // Angle type is inferred
@@ -1198,7 +1198,7 @@ extension View {
     func collapsible(
         bgColor: Color = .black,
         duration: Double = 0.5) -> some View {
-        modifier(Collapsable(bgColor: bgColor, duration: duration))
+        modifier(Collapsible(bgColor: bgColor, duration: duration))
     }
 }
 ```
@@ -1213,7 +1213,7 @@ VStack {
 .padding()
 
 // This way of applying a view modifier doesn't use the View extension.
-//.modifier(Collapsable(bgColor: ContentView.bgColor))
+//.modifier(Collapsible(bgColor: ContentView.bgColor))
 
 // This way uses the View extension and is preferred.
 .collapsible(bgColor: ContentView.bgColor)
@@ -3059,7 +3059,7 @@ struct FloatingActionButton_Previews: PreviewProvider {
 
 ## Combining Container and Component Views
 
-The following code demonstrtrates using both container and component views.
+The following code demonstrates using both container and component views.
 Note how views can be defined in computed properties
 that are later referenced to render them.
 The type of these computed properties can be a specific container view type
@@ -3748,7 +3748,7 @@ and then adds new dogs to the list.
 <figure>
   <img alt="SwiftUI List with Selection Before" style="width: 40%"
     src="/blog/assets/SwiftUI-List-Selection1.png?v={{pkg.version}}"
-    title="SwiftUI List with Selection Befor">
+    title="SwiftUI List with Selection Before">
   <figcaption>Before item selection</figcaption>
 </figure>
 <figure>
@@ -4209,7 +4209,7 @@ The library "CodeScan" makes this easy. The YouTube video
 - Click the "Add Package" button.
 - Click the next "Add Package" button.
 
-TODO: Add more deail on using this package.
+TODO: Add more detail on using this package.
 
 ## Audio
 
@@ -4965,7 +4965,7 @@ struct MainPage: View {
                 Text("Go to five")
             }
 
-            // Programatic navigation to the links above
+            // Programmatic navigation to the links above
             Button("Mystery Page") {
                 // Could make a REST call here and use the data
                 // to determine the value of "selection".
@@ -5028,10 +5028,10 @@ struct ContentView: View {
     // This is registered as an environment object below.
     @ObservedObject var data = SharedData()
 
-    // Going fullscreen requires hiding both
+    // Going full screen requires hiding both
     // the status bar and the navigation bar.
     // See where this is used below.
-    @State private var fullscreen = false
+    @State private var fullScreen = false
 
     var body: some View {
         // Usually NavigationView is only used at the top-level.
@@ -5043,7 +5043,7 @@ struct ContentView: View {
         // Other customizations require use of UIKit.
         NavigationView {
             VStack {
-                Button("Toggle Fullscreen") { fullscreen.toggle() }
+                Button("Toggle Full Screen") { fullScreen.toggle() }
                 MainPage()
             }
 
@@ -5056,7 +5056,7 @@ struct ContentView: View {
             // Automatic uses large for the top view and inline for others.
             .navigationBarTitle("Main")
 
-            .navigationBarHidden(fullscreen)
+            .navigationBarHidden(fullScreen)
 
             // This adds buttons in the navigation bar,
             // only for the view to which this is applied, which is
@@ -5074,7 +5074,7 @@ struct ContentView: View {
                     }.foregroundColor(.white)
             )
         }
-        .statusBar(hidden: fullscreen)
+        .statusBar(hidden: fullScreen)
 
         // This makes an @ObservedObject available
         // to all linked views as an @EnvironmentObject.

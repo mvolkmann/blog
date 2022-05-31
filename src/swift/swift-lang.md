@@ -114,7 +114,7 @@ However, Xcode also has the following advantages over VS Code:
 - iOS projects can be run in the Simulator and on devices
   directly from Xcode.
 
-I recommend simulataneously opening a project in both VS Code and Xcode
+I recommend simultaneously opening a project in both VS Code and Xcode
 and switching between them as needed to get the benefits of both.
 When a change is made to a file that is open in both,
 the other will automatically update to show the change.
@@ -507,7 +507,7 @@ let printTime = {
 }
 printTime() // 3/8/2022
 
-// This function specifies all of its parmeter types and the return type.
+// This function specifies all of its parameter types and the return type.
 let product = {(a: Double, b: Double) -> Double in a * b}
 print(product(2, 3)) // 6.0
 
@@ -1378,7 +1378,7 @@ For example:
 
 ```swift
 // The Equatable protocol requires a type
-// to impelment the == and != operators.
+// to implement the == and != operators.
 // The Identifiable protocol requires a type
 // to have an "id" property that uniquely identifies an instance.
 struct Stack<Element> where Element: Equatable & Identifiable {
@@ -1895,7 +1895,7 @@ print(String(d)) // "3.14159"
 print(String(c)) // "4"
 
 let bStr = "true"
-print(Character(s)) // "7"; Fatal Error if Strig contains more than one character
+print(Character(s)) // "7"; Fatal Error if String contains more than one character
 // The remaining examples use nil-coalescing
 // because the typecasts return nil if they fail.
 print(Bool(bStr) ?? false) // true
@@ -1933,7 +1933,7 @@ class Cat: Animal {
 
     init(name: String, declawed: Bool) {
         self.declawed = declawed
-        // All properities in this class must be initialized
+        // All properties in this class must be initialized
         // before the superclass init method is called.
         super.init(name: name)
     }
