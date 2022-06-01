@@ -3836,14 +3836,14 @@ surround it with `#if targetEnvironment(simulator) ... #endif`.
 Xcode is the primary IDE for creating macOS, iOS, and watchOS applications.
 It contains many panels that are described below:
 
-| Area      | Location     | Purpose                                       | Toggle With      |
-| --------- | ------------ | --------------------------------------------- | ---------------- |
-| Navigator | left         | display files, search results, and more       | cmd-zero         |
-| Editor    | center left  | view and edit code and data in selected files | none             |
-| Canvas    | center right | view and interact with Previews               | cmd-option-p     |
-| Minimap   | right        | display zoomed out view of entire file        | cmd-ctrl-shift-m |
-| Inspector | right        | view and editing details about selected item  | cmd-option-zero  |
-| Debug     | bottom       | display print output and more                 | cmd-shift-y      |
+| Area      | Location     | Purpose                                       | Toggle With                                                       |
+| --------- | ------------ | --------------------------------------------- | ----------------------------------------------------------------- |
+| Navigator | left         | display files, search results, and more       | View ... Navigators ... {Hide\|Show Navigator} or cmd-zero        |
+| Editor    | center left  | view and edit code and data in selected files | none                                                              |
+| Canvas    | center right | view and interact with Previews               | Editor ... Canvas or cmd-option-return                            |
+| Minimap   | right        | display zoomed out view of entire file        | Editor ... Minimap or cmd-ctrl-shift-m                            |
+| Inspector | right        | view and editing details about selected item  | View ... Inspectors ... {Hide\|Show Inspector} or cmd-option-zero |
+| Debug     | bottom       | display print output and more                 | View ... Debug Area ... {Hide\|Show Debug Area} or cmd-shift-y    |
 
 Previews allow testing a single view outside of the Simulator or a real device.
 

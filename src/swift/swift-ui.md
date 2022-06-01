@@ -260,6 +260,11 @@ Face ID options include Enrolled (approves use of Face ID),
 Matching Face (simulates a match),
 and Non-Matching Face (simulates failure to match).
 
+To erase all data and settings,
+select Device ... Erase All Content and Settings...
+This can be useful to run an app without having any data cached
+from previous runs, such as authentication details.
+
 There are many more features in the Simulator menus.
 
 ## Apple Human Interface Guidelines (HIG)
@@ -2208,7 +2213,7 @@ struct Page: View {
             Text(title).font(.headline)
             Image(systemName: imageName)
                 .resizable()
-                .scaledToFit()
+                .scaledToFit() // needed?
                 .frame(width: 100, height: 100)
                 .foregroundColor(.red)
             Text(description)
@@ -2853,6 +2858,14 @@ DatePicker(
     selection: $birthday, // a binding
     displayedComponents: [.date, .hourAndMinute] // array or single value
 )
+```
+
+To hide the label, pass an empty string
+and call the `labelsHidden` view modifier.
+
+```swift
+DatePicker("", selection: $birthday, displayedComponents: .date)
+    .labelsHidden()
 ```
 
 Apply the `datePickerStyle` view modifier to choose a style.
