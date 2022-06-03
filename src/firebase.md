@@ -83,6 +83,12 @@ There are two types of databases to choose between,
 1. click "Next"
 1. select a location (ex. "us-central") and click "Enable"
 1. wait for provisioning to complete
+1. Click the "Rules" tab.
+1. Change the line `allow read, write: if true;` to
+   `allow read, write: if true;` to allow everyone to read and write.
+   Consider locking this down more. See {% aTargetBlank
+   "https://firebase.google.com/docs/firestore/security/rules-conditions",
+   "Writing conditions for Cloud Firestore Security Rules" %}.
 
 ## Realtime Database
 
