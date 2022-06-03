@@ -5416,6 +5416,16 @@ chain the following onto the view:
 TODO: Watch this {% aTargetBlank
 "https://www.youtube.com/watch?v=SUiITSkAqAo&t=548s", "video" %}.
 
+## Device ID
+
+To get the unique ID of the current device:
+
+```swift
+if let uuid = UIDevice.current.identifierForVendor?.uuidString {
+    // use uuid
+}
+```
+
 ## Network Requests
 
 See the "HTTP" section in my blog page on Swift.

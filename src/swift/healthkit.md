@@ -272,7 +272,7 @@ To grant permission later:
 1. Enable/disable specific permissions or tap "Turn on all".
 
 An error is thrown if an app attempts to write data
-for which the usser has not granted permission.
+for which the user has not granted permission.
 
 Apps do not crash or throw an error if they attempt to read data
 for which the user has not granted permission.
