@@ -72,14 +72,15 @@ Each version remains available for download for 90 days.
    it order to successfully upload a build.)
 1. Set "Build" to "1". Increment this for each
    subsequent build with the same value for "Version".
-1. Verify that the file "Assets.xcassets" defines the image set "AppIcons"
+1. Repeat the previous two steps for each target using matching values.
+1. Verify that the file "Assets.xcassets" defines the image set "AppIcon"
    that contains icons for both iPhone and iPad (if building for both).
 1. If a paired watchOS app is included, the watch app will have its own
-   "Assets.xcassets" file that must contain "AppIcons" for the watch.
+   "Assets.xcassets" file that must contain "AppIcon" for the watch.
 1. In the device list at the top, choose "Any iOS Device".
 1. Select Product ... Archive.
    This can take a few minutes to complete on a fast machine.
-1. Click the "Distribute App" button.
+1. In the dialog that appears, click the "Distribute App" button.
 1. Select the "App Store Connect" radio button.
 1. Click the "Next" button.
 1. Select the "Upload" radio button.
@@ -102,11 +103,14 @@ Each version remains available for download for 90 days.
    click the "Manage" link after the message and answer some encryption questions.
    If sending HTTP requests using HTTPS, you will have to submit a form
    to the U.S. government which is explained in the encryption questions.
+1. If you see a dialog with the message "App {app-name} successfully uploaded.",
+   click the "Done" button.
 
 ### Part 4 - Distributing an App
 
 1. Return to the App Store Connect web page and the "TestFlight" tab.
 1. In the Build section, select an uploaded built to use.
+   If it says "Processing", wait for that to change.
 1. In the "App Previews and Screenshots" section,
    add at least one screenshot for each supported device size.
    These must have specific pixel dimensions.
@@ -126,21 +130,6 @@ Each version remains available for download for 90 days.
 1. If the app does not require sign in, check and uncheck that checkbox.
    Otherwise the form will not be considered complete.
 1. Click the "Save" button in the upper-right.
-
-### This part did not work! Skip to the next section.
-
-1. Click the "+" after "Testers".
-1. Click the "Users and Access" link which opens a new browser tab.
-1. Click "Testers" under "Sandbox" in the left nav.
-1. For each tester to be added to the group:
-   - Click the "+" after "Sandbox Testers".
-   - Enter first name, last name, and email.
-   - Enter a password and confirm value ("testthis").
-   - Enter a secret question and answer ("question" and "answer").
-   - Select the birthday and country of the test user.
-   - Check the checkboxes for the appropriate roles.
-   - Select apps to expose from the Apps dropdown.
-   - Click the "Invite" button.
 
 ### Part 5 - App Configuration
 
@@ -186,10 +175,12 @@ Each version remains available for download for 90 days.
 ### Part 7 - Submit for Review
 
 1. Return to the App Store Connect web page and the "TestFlight" tab.
-1. Expand the row for the version that was just uploaded.
-1. Address an issues identified in the "STATUS" column.
+1. In the table, click the build number link
+   for the version that was just uploaded.
+1. Address an issues, if any, identified in the "STATUS" column.
 1. Wait for the status to change to "Ready to Submit".
-1. Add a review group.
+1. If there are no entries under "Group" (for testers), add at least one.
+1. Click the "Save" button in the upper-right.
 1. Click the "Submit for Review" button? VERIFY THIS AGAIN!
 
 ### Part 8 - Resolve App Review Issues

@@ -3248,6 +3248,15 @@ if let json = String(data: encoded, encoding: .utf8) {
 }
 ```
 
+To read JSON from a file in a project into a variable whose type
+is described by `SomeType` (typically a struct),
+use the `Bundle` class as follows:
+
+```swift
+// VERIFY THIS!
+let json = Bundle.main.decode(SomeType.self, from: "some-file.json")
+```
+
 ## Concurrency
 
 See {% aTargetBlank
