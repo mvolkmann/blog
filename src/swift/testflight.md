@@ -184,6 +184,9 @@ Each version remains available for download for 90 days.
 1. Select at least one group to test the new app build.
 1. Click the "Save" button in the upper-right? VERIFY THIS AGAIN!
 1. Click the "Submit for Review" button? VERIFY THIS AGAIN!
+1. Return to the previous page that lists versions of the app and note
+   that the submitted version now has a status of "Waiting for Review".
+1. It can take a couple of days for Apple to review the new build.
 
 ### Part 8 - Resolve App Review Issues
 
