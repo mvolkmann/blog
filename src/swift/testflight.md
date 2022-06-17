@@ -177,10 +177,12 @@ Each version remains available for download for 90 days.
 1. Return to the App Store Connect web page and the "TestFlight" tab.
 1. In the table, click the build number link
    for the version that was just uploaded.
-1. Address an issues, if any, identified in the "STATUS" column.
+1. Address issues, if any, identified in the "STATUS" column.
 1. Wait for the status to change to "Ready to Submit".
-1. If there are no entries under "Group" (for testers), add at least one.
-1. Click the "Save" button in the upper-right.
+1. Click the "+" to the right of "Groups".
+1. If there are no tester groups, add at least one.
+1. Select at least one group to test the new app build.
+1. Click the "Save" button in the upper-right? VERIFY THIS AGAIN!
 1. Click the "Submit for Review" button? VERIFY THIS AGAIN!
 
 ### Part 8 - Resolve App Review Issues
