@@ -81,6 +81,7 @@ Each version remains available for download for 90 days.
 1. Select Product ... Archive.
    This can take a few minutes to complete on a fast machine.
 1. In the dialog that appears, click the "Distribute App" button.
+   This dialog may be on a different screen and behind other windows.
 1. Select the "App Store Connect" radio button.
 1. Click the "Next" button.
 1. Select the "Upload" radio button.
@@ -105,31 +106,54 @@ Each version remains available for download for 90 days.
    to the U.S. government which is explained in the encryption questions.
 1. If you see a dialog with the message "App {app-name} successfully uploaded.",
    click the "Done" button.
+1. Close the "Archives" dialog.
 
 ### Part 4 - Distributing an App
 
-1. Return to the App Store Connect web page and the "TestFlight" tab.
-1. In the Build section, select an uploaded built to use.
-   If it says "Processing", wait for that to change.
-1. In the "App Previews and Screenshots" section,
-   add at least one screenshot for each supported device size.
-   These must have specific pixel dimensions.
-   To capture them, run the app in a simulator once
-   for a device that has the desired size.
-   In the Simulator app, select File ... Save Screen
-   which saves a screenshot in the Desktop directory.
-   On the App Store Connect page,
-   click "Prepare for Submission" in the left nav.
-   Drag the screenshot files into the area under "Version Information".
-1. Click the "Create Group" link in the light blue rectangle to add testers.
-1. Enter a group name.
-1. Check the "Enable automatic distribution" checkbox.
-1. Click the "Create" button.
-1. Click "Test Information" under "General Information" in the left nav.
-1. Complete the ENTIRE form.
-1. If the app does not require sign in, check and uncheck that checkbox.
-   Otherwise the form will not be considered complete.
-1. Click the "Save" button in the upper-right.
+1. Return to the {% aTargetBlank "https://appstoreconnect.apple.com/",
+   "App Store Connect" %} web page.
+1. Login with your Apple ID.
+1. Click the large "My Apps" button.
+1. Click the app to be distributed.
+1. Click the "TestFlight" tab.
+1. If the build to be distributed has a status of "Processing",
+   refresh the page periodically until that changes.
+1. If the build to be distributed has a status of "Missing Compliance",
+   click the "Manage" link and answer the questions asked.
+   The status should change to "Ready to Submit".
+1. Click the build number to be distributed (ex. 4).
+
+1. If this is the first time distributing this app ...
+
+   1. In the "App Previews and Screenshots" section,
+      add at least one screenshot for each supported device size.
+      These must have specific pixel dimensions.
+      To capture them, run the app in a simulator once
+      for a device that has the desired size.
+      In the Simulator app, select File ... Save Screen
+      which saves a screenshot in the Desktop directory.
+      On the App Store Connect page,
+      click "Prepare for Submission" in the left nav.
+      Drag the screenshot files into the area under "Version Information".
+   1. Click the "Create Group" link in the light blue rectangle to add testers.
+   1. Enter a group name.
+   1. Check the "Enable automatic distribution" checkbox.
+   1. Click the "Create" button.
+   1. Click "Test Information" under "General Information" in the left nav.
+   1. Complete the ENTIRE form.
+   1. If the app does not require sign in, check and uncheck that checkbox.
+      Otherwise the form will not be considered complete.
+   1. Click the "Save" button in the upper-right.
+
+1. Click the circled "+" after "Group".
+1. In the dialog that appears, check at least one group name.
+1. Click the "Next" button.
+1. Enter a description of what testers should test.
+1. Click the "Submit for Review" button.
+1. Click the back link near the top of the page that says "iOS Builds".
+1. Verify that the status changed to "Waiting for Review".
+   Testers will receive an email about the new version in a day or two.
+   The status of this build will change to "Testing".
 
 ### Part 5 - App Configuration
 
