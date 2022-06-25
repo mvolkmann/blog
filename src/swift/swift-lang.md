@@ -812,7 +812,23 @@ The `Bool` type has two possible values, `true` and `false`.
 
 Note that `myBool.toggle()` is equivalent to `myBool = !myBool`.
 
-### Number Types
+### Numeric Types
+
+The type hierarchy of Swift numeric types is:
+
+- Numeric
+  - BinaryInteger
+    - UnsignedInteger
+      - UInt\*
+    - SignedInteger
+      - Int\*
+    - FixedWidthInteger
+      - Int* and UInt*
+  - SignedNumeric
+    - SignedInteger (see above)
+    - FloatingPoint
+      - BinaryFloatingPoint
+        - CGFloat, Float\*, and Double
 
 The `Int`, `Float`, and `Double` types have some common properties and methods.
 But some are not shared by all of these types.
