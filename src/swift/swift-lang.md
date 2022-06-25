@@ -3984,6 +3984,12 @@ The Navigator has nine icon buttons at the top.
   To open a file, click its name.
   To "quickly open" a file by typing part of its name,
   select File ... Open Quickly..." or press cmd-shift-o.
+  Both of these open a temporary view of the file,
+  indicated by the file name in the tab being in italic.
+  If there is already a temporary view tab and another file is opened, the
+  temporary view content will be replaced by the new file content.
+  To change the temporary view to a permanent view,
+  double click its tab or edit its contents.
 
   To sort the files displayed in a directory shown in the Navigator,
   right-click the directory and select "Sort by Name" or "Sort by Type".
