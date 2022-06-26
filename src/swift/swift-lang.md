@@ -4031,19 +4031,37 @@ The Navigator has nine icon buttons at the top.
 
   This is used to find and replace text in the project.
 
+  <img alt="Xcode Find" class="keep-size"
+    src="/blog/assets/xcode-find-navigator.png?v={{pkg.version}}">
+
   Click "Find" to optionally switch to "Replace" mode.
+
+  <img alt="Xcode Find" class="keep-size"
+    src="/blog/assets/xcode-find-navigator-dropdown1.png?v={{pkg.version}}">
 
   Click "Text" to optionally switch to searching for "References",
   "Definitions", "Regular Expression", or "Call Hierarchy".
 
+  <img alt="Xcode Find" class="keep-size"
+    src="/blog/assets/xcode-find-navigator-dropdown2.png?v={{pkg.version}}">
+
   Click "Containing" to optionally switch to
   "Matching Word", "Starting With", or "Ending With".
+
+  <img alt="Xcode Find" class="keep-size"
+    src="/blog/assets/xcode-find-navigator-dropdown3.png?v={{pkg.version}}">
 
   Click "In Project" to optionally limit the search
   to a specific project directory
   and select "New Scope..." for advanced options.
 
+  <img alt="Xcode Find" class="keep-size"
+    src="/blog/assets/xcode-find-navigator-dropdown4.png?v={{pkg.version}}">
+
   Click "Ignoring Case" to optionally switch to "Matching Case".
+
+  <img alt="Xcode Find" class="keep-size"
+    src="/blog/assets/xcode-find-navigator-dropdown5.png?v={{pkg.version}}">
 
 - warning icon (triangle icon containing exclamation point; fifth)
 
