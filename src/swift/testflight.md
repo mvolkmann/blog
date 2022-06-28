@@ -100,13 +100,11 @@ Each version remains available for download for 90 days.
    - Click the "Next" button.
 1. Click the "Upload" button.
    This can take a few minutes to complete on a fast machine.
-1. When processing completes, if you see the message "Missing Compliance",
-   click the "Manage" link after the message and answer some encryption questions.
-   If sending HTTP requests using HTTPS, you will have to submit a form
+1. If sending HTTP requests using HTTPS, you will have to submit a form
    to the U.S. government which is explained in the encryption questions.
-1. If you see a dialog with the message "App {app-name} successfully uploaded.",
-   click the "Done" button.
-1. Close the "Archives" dialog.
+   After answering the questions displayed in a dialog,
+   click the "Start Internal Testing" button.
+   The status should change to "Ready to Submit"
 
 ### Part 4 - Distributing an App
 
@@ -116,9 +114,9 @@ Each version remains available for download for 90 days.
 1. Click the large "My Apps" button.
 1. Click the app to be distributed.
 1. Click the "TestFlight" tab.
-1. If the build to be distributed has a status of "Processing",
+1. If the build to be distributed has a STATUS of "Processing",
    refresh the page periodically until that changes.
-1. If the build to be distributed has a status of "Missing Compliance",
+1. If the build to be distributed has a STATUS of "Missing Compliance",
    click the "Manage" link and answer the questions asked.
    The status should change to "Ready to Submit".
 1. Click the build number to be distributed (ex. 4).
