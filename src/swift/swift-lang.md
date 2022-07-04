@@ -65,6 +65,9 @@ Key facts about Swift include the following:
 - {% aTargetBlank "https://www.swiftbysundell.com", "Swift by Sundell" %}
   by John Sundell
 
+- {% aTargetBlank "https://www.youtube.com/c/StewartLynch", "CreaTECH Solutions" %}
+  YouTube videos by StewartLynch- free
+
 - {% aTargetBlank "https://codewithchris.com/swift-tutorial/", "Code With Chris" %}
   by Chris Ching
 
