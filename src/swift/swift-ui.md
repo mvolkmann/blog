@@ -3382,7 +3382,10 @@ When rendered, it can apply the attributes to affect styling.
 
 For basic styling such as making parts of a string bold or italic,
 it is not necessary to use `AttributedString` because
-the `Text` view supports Markdown syntax.
+the `Text` view supports a subset of Markdown syntax.
+However, this only works when a literal `String` is passed.
+To pass a variable of type `String` that contains Markdown syntax,
+use `Text(.init(myVariable))`.
 
 There are several approaches that can be used to associate attributes
 with substrings in an `AttributedString` instance.
