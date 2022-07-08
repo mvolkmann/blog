@@ -14,7 +14,13 @@ It is not a full tutorial on the language.
 
 Of course there is no consensus on the features
 that are desirable in a programming language,
-so the features presented here are driven by my own opinions.
+so the features presented here are driven by my own preferences.
+
+Today Swift is primarily used for implementing applications that run on
+iPhones, iPads, Apple Watches, and Mac computers.
+However, it can also be used to implement server-side code
+such as REST services. One way to do this is to utilize the
+{% aTargetBlank "https://vapor.codes", "Vapor" %} framework.
 
 ## Less Noise
 
@@ -26,25 +32,32 @@ Swift does not follow either of those conventions.
 It trades requiring parentheses around conditions
 for mandating braces around code blocks.
 
-In the examples below, note that the `let` keyword declares a constant
-and the `var` keyword declares a variable.
+In the examples below, note that
+the `let` keyword declares a constant (cannot change) and
+the `var` keyword declares a variable (can change).
+
+### if statement
 
 ```swift
-import Foundation
-
 let score = Int.random(in: 0...30)
 print("score =", score)
 
-// Demonstrate an if statement.
+// Can write on a single line.
+if score == 0 { print("Start the game!") }
+
+// Can spread over multiple lines.
 if score == 21 {
     print("You win!")
 } else if score > 21 {
     print("You lose.")
 } else {
-    print("Still playing.")
+    print("Still playing ...")
 }
+```
 
-// Demonstrate a switch statement.
+### switch statement
+
+```swift
 switch score {
 case 21:
     print("You win!")
@@ -55,11 +68,16 @@ case let s where s > 21: // alternative using a where clause
 default:
     print("Still playing.")
 }
+```
 
-// Demonstrate for loops.
+### for loop
 
+```swift
 // Create a deck of playing cards.
-let ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+let ranks = [
+    "2", "3", "4", "5", "6", "7", "8", "9",
+    "10", "J", "Q", "K", "A"
+]
 let suits = ["♥️", "♦️", "♣️", "♠️"]
 var deck: [String] = []
 for rank in ranks {
@@ -74,22 +92,31 @@ var hand: [String] = []
 for _ in 1...5 {
     hand.append(deck.removeFirst())
 }
-print(hand)
+print(hand) // ["3♦️", "3♣️", "7♥️", "8♥️", "K♦️"]
+```
 
-// Prepare to demonstrate more loops.
+### while loop
+
+```swift
 var temperature = 0
 func doSomething() {
     print("temperature is", temperature)
+    // The loop below stops when this generates a high temperature.
     temperature = Int.random(in: 0...100)
 }
 
-// Demonstrate a while loop.
+// top-tested loop
 while temperature < 80 {
     doSomething()
 }
+```
 
-// Demonstrate a repeat-while loop.
+### repeat-while loop
+
+```swift
 temperature = 0
+
+// bottom-tested loop
 repeat {
     doSomething()
 } while temperature < 80
@@ -109,192 +136,92 @@ let distance = 1.23 // same
 let name: String = "Mark"
 let name = "Mark" // same
 
-// In SwiftUI, Text is a struct and Color is an enum.
+// SwiftUI is a library for creating user interfaces.
+// It defines a Text struct and a Color enum.
 Text("Hello, World!").foregroundColor(Color.red)
-Text("Hello, World!").foregroundColor(.red) // same
+// This line is the same because the type Color is inferred.
+Text("Hello, World!").foregroundColor(.red)
 ```
+
+Closures (a kind of anonymous function) are described later.
+Parameter types typically are not needed in closures
+because they can be inferred based on the caller.
 
 ## Optionals
 
-Variables in Swift cannot be set to nil be default.
-When one of these has a type like `Bool`, `Int`, `Double`, `String`,
-or any object type (`struct`, `enum`, or `class`)
-its value must always be a value of the corresponding type.
+The Swift value `nil` represents the absence of a value.
+By default, variables cannot be set to `nil`.
+They must always have a value of the declared type, even initially.
 To allow a variable to be set to `nil`,
-its type must be followed by a question mark
-which makes it an "optional".
+its type must be followed by a question mark which makes it "optional".
 
 ```swift
-var name: String? // initial value will be nil
+var name: String? // initial value is nil
 ...
 name = "Mark"
 ```
 
-There are several ways to test whether a variable holds the value `nil`
+There are several ways, demonstrated below,
+to test whether a variable holds the value `nil`
 and access its value when it is not `nil`.
 The Swift compiler generates an error message if code attempts
 to access a variable of an optional type without checking for `nil`.
 
-````swift
+```swift
 if name != nil {
     print("name is \(name!)") // ! performs a "force unwrap"
 }
 
-// This assigns the unwrapped value of the variable "name" to the
-// shadowing local variable "name" only if its value is not nil.
+// An "if let" statement assigns the unwrapped value of the
+// optional variable on the right side of the equal sign
+// to a local variable on the left side
+// ONLY IF its value is not nil.
+// Often the local variable has the same name as the optional variable
+// and shadows within the block.
 // In Swift 5.7, this can be written as "if let name {".
 if let name = name {
     print("name is \(name)")
 }
 
-// This uses the nil coalescing operator ??.
+// This uses the nil coalescing operator ?? to choose
+// either the wrapped value or the value on the right side.
 print("name is \(name ?? "unknown")")
 
-var name: String? // initial value will be nil
-//name = "Mark"
-
-if name != nil {
-    print("name is \(name!)") // ! performs a "force unwrap"
-}
-
-// This assigns the unwrapped value of the variable "name" to the
-// shadowing local variable "name" only if its value is not nil.
-// In Swift 5.7, this can be written as "if let name {".
-if let name = name {
-    print("name is \(name)")
-}
-
-// This uses the nil coalescing operator ??.
-print("name is \(name ?? "unknown")")
-
-// This uses optional chaining (?.) to access a property
-// on a variable of an optional type.
-// Optional chaining can also be used to call a method on such a variable.
+// This uses optional chaining (?.) to
+// access a property on an optional variable.
+// Optional chaining can also be used to
+// call a method on an optional variable.
 print("name length is \(name?.count ?? 0)")
-```
-
-## Function Argument Labels
-
-Functions and methods in Swift can take parameters.
-Each parameter can be given an "argument label" whose purpose
-is to make calls to them read in a more English-like manner.
-When a parameter has no argument label, it defaults to the parameter name.
-
-The `Person` type can be used as follows:
-
-```swift
-let personA = Person(name: "Mark")
-let personB = Person(name: "Tami")
-let date = Date() // now
-personA.marry(spouse: personB, on: date)
-personA.report() // Mark is married to Tami.
-```
-
-The arguments in a call must appear in the same order in which they are defined
-in order to support being read by a developer in the expected way.
-In the example above, reading "marry spouse on" sounds correct,
-but reading "marry on spouse" does not.
-
-To make an argument positional rather than named,
-specify an underscore for its argument label.
-For example:
-
-```swift
-func multiply(_ n1: Double, by n2: Double) -> Double {
-    // When a function only contains a single expression,
-    // the "return" keyword is inferred.
-    n1 * n2
-}
-
-print(multiply(2, by: 3)) // 6.0
-```
-
-## Closure Syntax
-
-The syntax for anonymous functions in Swift is
-an open brace, a comma-separated list of parameters,
-the keyword "in", the function body, and a close brace.
-Anonymous functions capture variables in their environment
-which makes them closures.
-Typically closures are passed as arguments to other functions.
-For example:
-
-```swift
-let numbers = [1, 2, 3, 4]
-// The first argument to reduce is an initial value.
-// The second argument is a closure that takes the
-// accumulated value (so far) and the next value from the array.
-let sum = numbers.reduce(0, { acc, n in acc + n })
-print("sum =", sum) // 10
-```
-
-When the last argument to a function is a closure,
-it can be written as a "trailing closure".
-
-```swift
-let sum = numbers.reduce(0) { acc, n in acc + n }
-```
-
-Trailing closures are especially useful for readability
-when they contain multiple statements.
-
-```swift
-let sum = numbers.reduce(0) { acc, n in
-    // We could do more here.
-    return acc + n
-}
-```
-
-It is not necessary to specify argument names for a closure.
-They can instead use the positional names $0, $1, and so on.
-
-```swift
-let sum = numbers.reduce(0) { $0 + $1 }
-```
-
-## Computed Properties
-
-Properties of a struct, class, or enum can be computed
-based on the values of other properties.
-
-```swift
-struct Race {
-    let kilometers: Double
-
-    var miles: Double {
-        kilometers * 0.621
-    }
-}
-
-let race = Race(kilometers: 5)
-print(race.miles) // 3.105
 ```
 
 ## Custom Types
 
-There are three ways to define custom types in Swift.
-The `struct`, `class`, and `enum` keywords all
-define a type with properties and methods.
-These differ from each other in a few ways.
+The `struct`, `class`, and `enum` keywords
+provide three ways to define custom types.
+These differ from each other in a few ways, but they
+all support defining a type that has properties and methods.
 
 Structs and enums are "value types".
 When an instance is assigned to a variable or passed to a function,
 a copy is created. Technically a copy is not made until
 there is an attempt to modify it (copy on write).
 
-Here is an example of defining a struct and creating an instance.
 `CustomStringConvertible` is a "protocol" defined by Swift.
 A protocol is like an "interface" in other programming languages.
-Following a struct, class, or enum name with a colon and a protocol name
+Following a `struct`, `class`, or `enum` name with a colon and a protocol name
 states that the type will conform to the protocol.
-That means it will implement all the computed properties and methods
-required by the protocol.
+That means it will implement all the
+computed properties and methods required by the protocol.
+
+Here is an example of defining a struct, creating an instance, and using it.
 
 ```swift
 struct Dog: CustomStringConvertible {
     let name: String
     let breed: String
 
+    // This is a computed property required by
+    // the CustomStringConvertible protocol.
     var description: String {
         "\(name) is a \(breed)."
     }
@@ -308,20 +235,19 @@ Classes are "reference types".
 Multiple variables can refer to the same instance and
 passing an instance to a function passes a reference rather than a copy.
 
-Here is an example of defining a class and creating an instance.
+Here is an example of defining a class, creating an instance, and using it.
 
 ```swift
+import Foundation // for the Date struct
+
 class Person {
     // Properties
 
-    // "spouse" and "on" are argument names, used by callers.
-    // "person" and "date" are argument names, used inside the function.
-    // If the argument label "spouse" was omitted, it would default to "person".
     let name: String
     var spouse: Person? // optional
     var weddingDate: Date? // optional
 
-    // Initializers
+    // Initializers (can have more than one)
 
     init(name: String) {
         self.name = name
@@ -329,14 +255,18 @@ class Person {
 
     // Methods
 
+    // "spouse" and "on" are argument labels, used by callers.
+    // "person" and "date" are parameter names, used inside the function.
+    // If the argument label "spouse" was omitted, it would default to "person".
     func marry(spouse person: Person, on date: Date) {
         self.spouse = person
         self.weddingDate = date
     }
 
     func report() {
-        // This assigns the unwrapped value of the property "spouse" to the
-        // shadowing local variable "spouse" only if its value is not nil.
+        // This assigns the unwrapped value of the optional property "spouse"
+        // to the shadowing local variable "spouse"
+        // only if its value is not nil.
         if let spouse = spouse {
             print("\(name) is married to \(spouse.name).")
         } else {
@@ -349,8 +279,19 @@ var personA = Person(name: "Mark")
 var personB = Person(name: "Tami")
 let date = Date() // now
 personA.marry(spouse: personB, on: date)
-personA.report()
+personA.report() // Mark is married to Tami.
 ```
+
+Functions and methods typically have parameters.
+Each parameter can be given an "argument label" whose purpose
+is to make calls to them read in a more English-like manner.
+When a parameter has no argument label, it defaults to the parameter name.
+
+The arguments in a function or method call must appear
+in the same order in which they are defined
+in order to support being read by a developer in the expected way.
+In the example above, reading "marry spouse on" sounds correct,
+but reading "marry on spouse" does not.
 
 Enums define a fixed set of values that instances can have,
 referred to as "cases".
@@ -406,6 +347,89 @@ shape = Shape.square(side: 2)
 print(shape.area) // 4.0
 shape = Shape.rectangle(width: 3, height: 4)
 print(shape.area) // 12.0
+```
+
+## Positional Parameters
+
+Positional parameters are used far less frequently
+than named parameters is typical Swift code.
+However, there are valid reasons to use them.
+
+To make a function or method parameter positional rather than named,
+specify an underscore for its argument label.
+For example:
+
+```swift
+func multiply(_ n1: Double, by n2: Double) -> Double {
+    // When a function only contains a single expression,
+    // the "return" keyword is inferred.
+    n1 * n2
+}
+
+print(multiply(2, by: 3)) // 6.0
+```
+
+## Closure Syntax
+
+The syntax for anonymous functions in Swift is
+an open brace, a comma-separated list of parameters,
+the keyword "in", the function body, and a close brace.
+Anonymous functions capture variables in their environment
+which makes them "closures".
+Typically closures are passed as arguments to other functions.
+
+Here are examples of passing a closure to the `reduce` method
+of the builtin `Array` struct.
+
+```swift
+let numbers = [1, 2, 3, 4]
+// The first argument to reduce is an initial value.
+// The second argument is a closure that takes the
+// accumulated value (so far) and the next value from the array.
+let sum = numbers.reduce(0, { acc, n in acc + n })
+print("sum =", sum) // 10
+```
+
+When the last argument to a function is a closure,
+it can be written as a "trailing closure".
+
+```swift
+let sum = numbers.reduce(0) { acc, n in acc + n }
+```
+
+Trailing closures are especially useful for readability
+when they contain multiple statements.
+
+```swift
+let sum = numbers.reduce(0) { acc, n in
+    // We could do more here.
+    return acc + n
+}
+```
+
+It is not necessary to specify argument names for a closure.
+They can instead use the positional names $0, $1, and so on.
+
+```swift
+let sum = numbers.reduce(0) { $0 + $1 }
+```
+
+## Computed Properties
+
+Properties of a struct, class, or enum can be computed
+based on the values of other properties.
+
+```swift
+struct Race {
+    let kilometers: Double
+
+    var miles: Double {
+        kilometers * 0.621
+    }
+}
+
+let race = Race(kilometers: 5)
+print(race.miles) // 3.105
 ```
 
 ## Guards
@@ -503,4 +527,3 @@ stating that a type conforms to the protocol is all that is required.
 
 TODO: Include an example of defining and using a custom protocol.
 TODO: Include an example of using an extension to define default implementations of protocol methods.
-````
