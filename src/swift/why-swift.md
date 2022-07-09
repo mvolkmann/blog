@@ -32,9 +32,14 @@ Swift does not follow either of those conventions.
 It trades requiring parentheses around conditions
 for mandating braces around code blocks.
 
-In the examples below, note that
-the `let` keyword declares a constant (cannot change) and
-the `var` keyword declares a variable (can change).
+In the examples below, note that:
+
+- The `let` keyword declares a constant (cannot change).
+- The `var` keyword declares a variable (can change).
+- Literal strings must be surrounded by double quotes.
+- A range of numbers is defined using the `...` or `..<` operator.
+  If a number appears on both sides of the operator, it is a closed range.
+  If a number appears on only one side, it is an open range.
 
 ### if statement
 
@@ -156,6 +161,120 @@ Closures (a kind of anonymous function) are described later.
 Parameter types typically are not needed in closures
 because they can be inferred based on the caller.
 
+## Collections
+
+The most commonly used builtin collection types are
+`Array`, `Dictionary`, `Set`, and tuples.
+Each of these specify the types of the elements
+and each has a literal syntax.
+
+### Arrays
+
+Arrays store an ordered collection of values that have the same type
+or a common supertype.
+
+Here is an example of defining and using an `Array`.
+
+```swift
+// The type of this array is inferred to be [String],
+// which can also be written as Array<String>.
+var dogNames = ["Maisey", "Ramsay", "Oscar"]
+dogNames.append("Comet")
+dogNames[2] = "Oscar Wilde"
+print(dogNames[3]) // Comet
+for name in dogNames {
+    print(name)
+}
+```
+
+### Dictionaries
+
+Dictionaries store an unordered collection of key/value pairs
+where the keys must be unique.
+
+Here is an example of defining and using a `Dictionary`.
+
+```swift
+// The type of this Dictionary is inferred to be [String:String]
+// which can also be written as Dictionary<String, String>.
+// The first type is the type of the keys and
+// the second type is the type of the values.
+var languageCreators = [
+    "Java": "James Gosling",
+    "JavaScript": "Brendan Eich",
+    "Python": "Guido van Rossum",
+    "Rust": "Graydon Hoare"
+]
+languageCreators["Swift"] = "Chris Lattner"
+
+// Getting the value for a key in a Dictionary returns an "optional".
+// These are described in the next section.
+// The nil-coalescing operator (??) is used here to handle the
+// possibility that the key "Swift" may not exist in the Dictionary.
+print("Swift was created by \(languageCreators["Swift"] ?? "unknown").")
+
+for (language, creator) in languageCreators {
+    print("\(language) was created by \(creator).")
+}
+```
+
+### Sets
+
+Sets store an unordered collection of unique values.
+
+Here is an example of defining and using a `Set`.
+
+```swift
+var uniqueNumbers: Set<Int> = []
+
+// Fill the set with up to 10 random integers from 1 to 10.
+for _ in 1...10 {
+    uniqueNumbers.insert(Int.random(in: 1...10))
+}
+
+print(uniqueNumbers) // can contain fewer than 10 values
+print(uniqueNumbers.contains(7)) // true or false
+```
+
+### Tuples
+
+A tuple is an ordered collection of a fixed size
+whose values whose types can differ.
+
+Here is an example of defining a function that returns a tuple,
+calling it, and using the return value.
+
+```swift
+// Gets the minimum, maximum, and average of the numbers in an Array,
+// returned as a tuple of optional Double values
+// which will be nil if the Array is empty.
+func statistics(_ values: [Double]) -> (Double?, Double?, Double?) {
+    let sum = values.reduce(0) { $0 + $1 }
+    let average = values.isEmpty ? nil : sum / Double(values.count)
+    return (values.min(), values.max(), average)
+}
+
+let numbers = [3.0, 7.0, 1.0, 4.0]
+let results = statistics(numbers)
+// Note the use of the indices 0, 1, and 2 to get values within the tuple.
+if let minimum = results.0 { print("minimum is \(minimum)") } // 1.0
+if let maximum = results.1 { print("maximum is \(maximum)") } // 7.0
+if let average = results.2 { print("average is \(average)") } // 3.75
+
+// This function is similar to the previous one, but returns a "named tuple".
+// An alternative to consider is using a struct.
+typealias StatisticsTuple = (min: Double?, max: Double?, avg: Double?)
+func statistics2(_ values: [Double]) -> StatisticsTuple {
+    let sum = values.reduce(0) { $0 + $1 }
+    let average = values.isEmpty ? nil : sum / Double(values.count)
+    return (min: values.min(), max: values.max(), avg: average)
+}
+let results2 = statistics2(numbers)
+if let minimum = results2.min { print("minimum is \(minimum)") } // 1.0
+if let maximum = results2.max { print("maximum is \(maximum)") } // 7.0
+if let average = results2.avg { print("average is \(average)") } // 3.75
+```
+
 ## Optionals
 
 The Swift value `nil` represents the absence of a value.
@@ -192,7 +311,7 @@ if let name = name {
     print("name is \(name)")
 }
 
-// This uses the nil coalescing operator ?? to choose
+// This uses the nil-coalescing operator ?? to choose
 // either the wrapped value or the value on the right side.
 print("name is \(name ?? "unknown")")
 
