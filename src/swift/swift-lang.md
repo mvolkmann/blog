@@ -2303,22 +2303,28 @@ dog.age = 2 // This change doesn't affect dog2.
 print(dog.age, dog2.age) // 2 1
 ```
 
-A computed property is defined with a `get` function
-that computes the value each time it is referenced.
-These must be declared with `var` rather than `let`.
+Properties of a struct, class, or enum can be computed
+based on the values of other properties.
+Computed properties must be declared with `var` rather than `let`.
 A type must be specified and is followed by
 a code block with no equal sign preceding it.
 
-A computed property can optionally define a `set` function
+Computed properties always define a `get` function
+that computes the value every time it is referenced.
+They can optionally define a `set` function
 whose purpose is the change the values of properties used to
 compute the value so the result will be a given value.
 If there is no `set` function then a surrounding `get` block is not needed.
 Often there is no need for a `set` function.
 
 ```swift
-struct Foo {
+struct Counter {
     private var n = 1
-    var doubled: Int { n * 2 } // no set function
+
+    // Computed property with no set function.
+    var doubled: Int { n * 2 }
+
+    // Computed property with both get and set functions.
     var tripled: Int {
         get {
             n * 3
@@ -2329,12 +2335,12 @@ struct Foo {
     }
 }
 
-var foo = Foo() // n is initially set to 1
-print(foo.tripled) // 1 * 3 = 3
+var counter = Counter() // n is initially set to 1
+print(counter.tripled) // returns 1 * 3 = 3, but doesn't change n
 
-foo.tripled = 9 // changes n to 3
-print(foo.doubled) // 3 * 2 = 6
-print(foo.tripled) // 3 * 3 = 9
+counter.tripled = 9 // changes n to 3
+print(counter.doubled) // 3 * 2 = 6
+print(counter.tripled) // 3 * 3 = 9
 ```
 
 A lazy property is similar to a computed property,

@@ -22,7 +22,7 @@ However, it can also be used to implement server-side code
 such as REST services. One way to do this is to utilize the
 {% aTargetBlank "https://vapor.codes", "Vapor" %} framework.
 
-## Less Noise
+## Quieter Syntax
 
 Many programming languages have a syntax that is
 modelled after the C programming language where
@@ -57,15 +57,19 @@ if score == 21 {
 
 ### switch statement
 
+Switch statements must be exhaustive.
+This means they must either include a `case` that matches every possible value
+or they must include a `default` case.
+
 ```swift
 switch score {
-case 21:
+case 21: // matches a single value
     print("You win!")
-case 22...: // open-ended range
+case 22...: // matches an open-ended range
     print("You lose.")
 case let s where s > 21: // alternative using a where clause
     print("You lose.")
-default:
+default: // matches all other values
     print("Still playing.")
 }
 ```
@@ -79,9 +83,13 @@ let ranks = [
     "10", "J", "Q", "K", "A"
 ]
 let suits = ["♥️", "♦️", "♣️", "♠️"]
-var deck: [String] = []
+var deck: [String] = [] // Array of String values
 for rank in ranks {
     for suit in suits {
+        // The syntax \(expression) inside a literal String
+        // is used for String interpolation.
+        // Many other languages use ${expression} for this.
+        // It's unclear why Swift chose a different syntax.
         deck.append("\(rank)\(suit)")
     }
 }
@@ -138,6 +146,7 @@ let name = "Mark" // same
 
 // SwiftUI is a library for creating user interfaces.
 // It defines a Text struct and a Color enum.
+// Structs and enums are described later.
 Text("Hello, World!").foregroundColor(Color.red)
 // This line is the same because the type Color is inferred.
 Text("Hello, World!").foregroundColor(.red)
@@ -194,6 +203,74 @@ print("name is \(name ?? "unknown")")
 print("name length is \(name?.count ?? 0)")
 ```
 
+## Properties
+
+Swift provides three ways to define custom types,
+using a struct, class, or enum.
+Each of these is described in the next section.
+For now all you need to know is that
+each of these can define properties and methods.
+
+Properties are either "stored" or "computed".
+Every instance of a type stores its own values
+of all stored properties defined by the type.
+Computed properties are computed based on the values of other properties
+each time they are accessed.
+They are not stored in instances of the type.
+
+Computed properties must be declared with
+the `var` keyword rather than the `let` keyword.
+A type must be specified (cannot be inferred) and
+is followed by a code block with no equal sign preceding it.
+
+Computed properties always define a `get` function
+that computes the value every time it is referenced.
+They can optionally define a `set` function
+whose purpose is the change the values of properties used to
+compute the value so the result will be a given value.
+If there is no `set` function then a surrounding `get` block is not needed.
+This is the case for most computed properties.
+
+Here are examples of structs that define computed properties.
+
+```swift
+struct Race {
+    let kilometers: Double // stored property
+
+    // computed property with no set function
+    var miles: Double {
+        kilometers * 0.621
+    }
+}
+
+let race = Race(kilometers: 5)
+print(race.miles) // 3.105
+
+struct Counter {
+    private var n = 1
+
+    // computed property with no set function
+    var doubled: Int { n * 2 }
+
+    // computed property with both get and set functions
+    var tripled: Int {
+        get {
+            n * 3
+        }
+        set {
+            n = newValue / 3 // truncates
+        }
+    }
+}
+
+var counter = Counter() // n is initially set to 1
+print(counter.tripled) // returns 1 * 3 = 3, but doesn't change n
+
+counter.tripled = 9 // changes n to 3
+print(counter.doubled) // 3 * 2 = 6; doesn't change n
+print(counter.tripled) // 3 * 3 = 9; doesn't change n
+```
+
 ## Custom Types
 
 The `struct`, `class`, and `enum` keywords
@@ -201,17 +278,26 @@ provide three ways to define custom types.
 These differ from each other in a few ways, but they
 all support defining a type that has properties and methods.
 
+### Structs
+
 Structs and enums are "value types".
 When an instance is assigned to a variable or passed to a function,
-a copy is created. Technically a copy is not made until
+a shallow copy is created. Technically a copy is not made until
 there is an attempt to modify it (copy on write).
 
-`CustomStringConvertible` is a "protocol" defined by Swift.
+Structs are used far more frequently than classes in typical Swift code.
+Nearly all builtin types are structs, including `Bool`, `Int`, `Double`,
+`Character`, `String`, `Array`, `Set`, `Dictionary`, `Range`, and `Date`.
+
 A protocol is like an "interface" in other programming languages.
 Following a `struct`, `class`, or `enum` name with a colon and a protocol name
 states that the type will conform to the protocol.
 That means it will implement all the
 computed properties and methods required by the protocol.
+One example of a protocol that is defined by Swift is `CustomStringConvertible`.
+Instances of types that conform to this protocol
+can be automatically converted to a `String` representation
+when printed or used in a `String` interpolation.
 
 Here is an example of defining a struct, creating an instance, and using it.
 
@@ -230,6 +316,8 @@ struct Dog: CustomStringConvertible {
 let dog = Dog(name: "Comet", breed: "Whippet")
 print(dog) // Comet is a Whippet.
 ```
+
+### Classes
 
 Classes are "reference types".
 Multiple variables can refer to the same instance and
@@ -293,7 +381,10 @@ in order to support being read by a developer in the expected way.
 In the example above, reading "marry spouse on" sounds correct,
 but reading "marry on spouse" does not.
 
-Enums define a fixed set of values that instances can have,
+### Enums
+
+As stated earlier, enums are value types.
+They define a fixed set of values that instances can have,
 referred to as "cases".
 Many programming languages support enums, but Swift takes the concept farther
 by allowing each case to have different associated data
@@ -348,6 +439,43 @@ print(shape.area) // 4.0
 shape = Shape.rectangle(width: 3, height: 4)
 print(shape.area) // 12.0
 ```
+
+## Access Control
+
+Swift supports many keywords for controlling access
+to values like functions, structs, classes, and
+and the properties and methods of structs and classes.
+These keywords appear at the beginning of declarations for these kinds of values.
+
+The access control keywords include:
+
+- `open`: access from anywhere; only for classes and class members
+- `public`: same as `open` except cannot be subclasses or overridden
+- `internal`: access from any source in in the same module (default level)
+- `fileprivate`: access from code in the same source file
+- `private`: access within enclosing declaration (such as a struct or class)
+
+The most commonly used access control keyword is `private`
+and the second most commonly used is `internal` which is the default.
+
+Specifying `private(set)` on a property means that
+the property can be accessed as if it were `public`,
+but can only be modified as if it were `private`.
+
+## Imports
+
+To use values such as structs defined by a framework such as
+Foundation, SwiftUI, or UIKit, it is necessary to import the framework.
+For example, `import Foundation`.
+It is not necessary or even supported to list specific values to be imported.
+Importing a framework makes all of its `public` values available.
+
+It is also not necessary or supported to import files or values
+in the current project.
+All files in the project have access to all non-private values
+defined in any file within the project.
+This is somewhat surprising for developers
+coming from other programming languages.
 
 ## Positional Parameters
 
@@ -414,24 +542,6 @@ They can instead use the positional names $0, $1, and so on.
 let sum = numbers.reduce(0) { $0 + $1 }
 ```
 
-## Computed Properties
-
-Properties of a struct, class, or enum can be computed
-based on the values of other properties.
-
-```swift
-struct Race {
-    let kilometers: Double
-
-    var miles: Double {
-        kilometers * 0.621
-    }
-}
-
-let race = Race(kilometers: 5)
-print(race.miles) // 3.105
-```
-
 ## Guards
 
 Guards provide a clear way to check for conditions that are necessary
@@ -449,10 +559,10 @@ func countOccurrences(in items: [String], of target: String?) -> Int {
     }
 }
 
-var names = ["Maisey", "Ramsay", "Oscar", "Comet"]
-print(countOccurrences(in: names, of: "a")) // 3
+var dogNames = ["Maisey", "Ramsay", "Oscar", "Comet"]
+print(countOccurrences(in: dogNames, of: "a")) // 3
 print(countOccurrences(in: [], of: "a")) // 0
-print(countOccurrences(in: names, of: nil)) // 0
+print(countOccurrences(in: dogNames, of: nil)) // 0
 ```
 
 ## Extensions
@@ -527,3 +637,16 @@ stating that a type conforms to the protocol is all that is required.
 
 TODO: Include an example of defining and using a custom protocol.
 TODO: Include an example of using an extension to define default implementations of protocol methods.
+
+## Conclusion
+
+I hope this article has piqued your interest in the Swift programming language.
+Topics that deserve further study include:
+
+- generics: pretty much the same as in other languages
+- `async` and `await` keywords
+- tasks
+- actors
+- structured concurrency
+- SwiftUI
+- Xcode IDE
