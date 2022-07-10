@@ -3197,21 +3197,20 @@ in an existing type using an `extension`.
 
 ## Access Control
 
-Swift supports many keywords for controlling access
-to values like functions, structs, classes, and
-and the properties and methods of structs and classes.
-These keywords appear at the beginning of declarations for these kinds of values.
+Swift supports many keywords for controlling access to values like
+functions, types, and the properties and methods of types.
+These keywords appear at the beginning of declarations.
 
 The access control keywords include:
 
-- `open`: access from anywhere; only for classes and class members
-- `public`: same as `open` except cannot be subclasses or overridden
-- `internal`: access from any source in in the same module (default level)
-- `fileprivate`: access from code in the same source file
-- `private`: access within enclosing declaration (such as a struct or class)
+- `open`: access from anywhere; only used for classes and class members
+- `public`: same as `open` except cannot be used in subclasses or overridden
+- `internal`: access from any source in the same module (default level)
+- `fileprivate`: access only from code in the same source file
+- `private`: access only within enclosing declaration (such as a struct or class)
 
-The most commonly used access control keyword is `private`
-and the second most commonly used is `internal` which is the default.
+The most commonly used access control keyword is `private`.
+The second most commonly used is `internal`, which is the default.
 
 Specifying `private(set)` on a property means that
 the property can be accessed as if it were `public`,

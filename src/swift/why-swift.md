@@ -546,32 +546,57 @@ personA.marry(spouse: personB, on: date)
 personA.report() // Mark is married to Tami.
 ```
 
+TODO: The rest of this section needs to be in it new section
+TODO: the precedes the current one.
+TODO: However, it currently refers to code in this section!
+
 Functions and methods typically have parameters.
 Each parameter can be given an "argument label" whose purpose
 is to make calls to them read in a more English-like manner.
 Typically these are prepositions such as "at", "between", "by",
-"for", "from", "in", "inside", "of", "on", "to", and "with".
+"for", "from", "in", "inside", "of", "on", "to", or "with".
 When a parameter has no argument label, it defaults to the parameter name.
 
 The arguments in a function or method call must appear
 in the same order in which they are defined
-in order to support being read by a developer in the expected way.
-In the example above, reading "marry spouse on" sounds correct,
-but reading "marry on spouse" does not.
+in order to support being read by developers in the expected way.
+For example, reading "marry spouse on" above sounds correct,
+but reading "marry on spouse" would not.
+
+Positional parameters are used far less frequently
+than named parameters in typical Swift code.
+However, there are valid reasons to use them.
+
+To make a parameter positional rather than named,
+specify an underscore for its argument label.
+For example:
+
+```swift
+func multiply(_ n1: Double, by n2: Double) -> Double {
+    n1 * n2
+}
+
+print(multiply(2, by: 3)) // 6.0
+```
 
 ### Enums
 
 As stated earlier, enums are value types.
 They define a fixed set of values that instances can have,
 referred to as "cases".
-Many programming languages support enums, but Swift takes the concept farther
-by allowing each case to have different associated data
-and allowing definition of computed properties and methods.
+
+Many programming languages support enums, but Swift takes the concept farther.
+In Swift, each case can have different associated data.
+Also, computed properties and methods can be defined
+just like in structs and classes.
 
 Here is an example of defining enums and creating instances.
 
 ```swift
+// The cases of this enum do not have associated data.
 enum Language {
+    // When the cases have no associated data,
+    // they can be define with a single case statement.
     case english, french, german, spanish
 
     // Method
@@ -592,6 +617,7 @@ enum Language {
 let lang = Language.french
 print(lang.greet()) // Bonjour
 
+// The cases of this enum have associated data.
 enum Shape {
     case circle(radius: Double)
     case square(side: Double)
@@ -620,21 +646,20 @@ print(shape.area) // 12.0
 
 ## Access Control
 
-Swift supports many keywords for controlling access
-to values like functions, structs, classes, and
-and the properties and methods of structs and classes.
-These keywords appear at the beginning of declarations for these kinds of values.
+Swift supports many keywords for controlling access to values like
+functions, types, and the properties and methods of types.
+These keywords appear at the beginning of declarations.
 
 The access control keywords include:
 
-- `open`: access from anywhere; only for classes and class members
-- `public`: same as `open` except cannot be subclasses or overridden
-- `internal`: access from any source in in the same module (default level)
-- `fileprivate`: access from code in the same source file
-- `private`: access within enclosing declaration (such as a struct or class)
+- `open`: access from anywhere; only used for classes and class members
+- `public`: same as `open` except cannot be used in subclasses or overridden
+- `internal`: access from any source in the same module (default level)
+- `fileprivate`: access only from code in the same source file
+- `private`: access only within enclosing declaration (such as a struct or class)
 
-The most commonly used access control keyword is `private`
-and the second most commonly used is `internal` which is the default.
+The most commonly used access control keyword is `private`.
+The second most commonly used is `internal`, which is the default.
 
 Specifying `private(set)` on a property means that
 the property can be accessed as if it were `public`,
@@ -642,45 +667,28 @@ but can only be modified as if it were `private`.
 
 ## Imports
 
-To use values such as structs defined by a framework such as
-Foundation, SwiftUI, or UIKit, it is necessary to import the framework.
+To use values such as structs that are
+defined by a framework (such as Foundation, SwiftUI, or UIKit),
+it is necessary to import the framework.
 For example, `import Foundation`.
+
 It is not necessary or even supported to list specific values to be imported.
-Importing a framework makes all of its `public` values available.
+Importing a framework makes all of its `open` and `public` values available.
 
 It is also not necessary or supported to import files or values
-in the current project.
-All files in the project have access to all non-private values
+defined in the current project.
+All files in a project have access to all non-private values
 defined in any file within the project.
 This is somewhat surprising for developers
 coming from other programming languages.
 
-## Positional Parameters
-
-Positional parameters are used far less frequently
-than named parameters is typical Swift code.
-However, there are valid reasons to use them.
-
-To make a function or method parameter positional rather than named,
-specify an underscore for its argument label.
-For example:
-
-```swift
-func multiply(_ n1: Double, by n2: Double) -> Double {
-    // When a function only contains a single expression,
-    // the "return" keyword is inferred.
-    n1 * n2
-}
-
-print(multiply(2, by: 3)) // 6.0
-```
-
 ## Closure Syntax
 
-The syntax for anonymous functions in Swift is
+The syntax for anonymous functions is
 an open brace, a comma-separated list of parameters,
 the keyword "in", the function body, and a close brace.
-Anonymous functions capture variables in their environment
+Swift anonymous functions capture variables in their environment,
+making them available inside their function body,
 which makes them "closures".
 Typically closures are passed as arguments to other functions.
 
@@ -698,12 +706,14 @@ print("sum =", sum) // 10
 
 When the last argument to a function is a closure,
 it can be written as a "trailing closure".
+These have the same syntax as any closure,
+but immediately follow the function call.
 
 ```swift
 let sum = numbers.reduce(0) { acc, n in acc + n }
 ```
 
-Trailing closures are especially useful for readability
+Trailing closures are especially useful for improving readability
 when they contain multiple statements.
 
 ```swift
@@ -714,9 +724,10 @@ let sum = numbers.reduce(0) { acc, n in
 ```
 
 It is not necessary to specify argument names for a closure.
-They can instead use the positional names $0, $1, and so on.
+The positional names $0, $1, and so on can be used instead.
 
 ```swift
+// Here $0 represents the accumulator and $1 represents the next array item.
 let sum = numbers.reduce(0) { $0 + $1 }
 ```
 
@@ -724,42 +735,47 @@ let sum = numbers.reduce(0) { $0 + $1 }
 
 Guards provide a clear way to check for conditions that are necessary
 in order to continue execution of a function.
-They have an associated block of code that is require to exit the current scope.
+They have an associated block of code
+that is required to exit the current scope.
 Guards are typically used at or near the beginning of functions.
 
 ```swift
+// Returns the number of items in a array that contain a given String.
 func countOccurrences(in items: [String], of target: String?) -> Int {
+    // If the items Array is empty, there can be no occurrences.
     guard items.count > 0 else { return 0 }
+
+    // If the target String is nil, there is nothing to find.
     guard let target = target else { return 0 }
 
     return items.reduce(0) { acc, item in
+        // The optional target was unwrapped above.
         acc + (item.contains(target) ? 1 : 0)
     }
 }
 
 var dogNames = ["Maisey", "Ramsay", "Oscar", "Comet"]
-print(countOccurrences(in: dogNames, of: "a")) // 3
 print(countOccurrences(in: [], of: "a")) // 0
 print(countOccurrences(in: dogNames, of: nil)) // 0
+print(countOccurrences(in: dogNames, of: "a")) // 3
 ```
 
 ## Extensions
 
-Extensions can add methods and computed properties to existing types,
+Extensions add methods and computed properties to existing types,
 even builtin types.
-For example, the following code demonstrates adding computed properties
-to the `Date` type and accessing them on a `Date` object.
+
+Here is an example of an extension that adds computed properties
+to the `Date` type and accesses them on a `Date` object.
 
 ```swift
 extension Date {
     var dayOfWeek: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.dateFormat = "EEEE" // gets name of day
         return dateFormatter.string(from: self)
     }
 
-    // Returns a String representation of the Date in "yyyy-mm-dd" format
-    // with no time display.
     var ymd: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -791,7 +807,7 @@ struct Person {
 }
 
 var me = Person(name: "Mark", age: 61)
-me.age = 19
+me.age = 19 //TODO: Describe the output.
 ```
 
 ## Conclusion
