@@ -111,7 +111,7 @@ greet(salutation: "Hola") // Hola World
 greet(salutation: "Hola", name: "Mark") // Hola Mark
 ```
 
-## Quieter Syntax
+## Control Structures
 
 Many programming languages have a syntax that is
 modelled after the C programming language where
@@ -738,7 +738,7 @@ defined in any file within the project.
 This is somewhat surprising for developers
 coming from other programming languages.
 
-## Closure Syntax
+## Closures
 
 The syntax for anonymous functions is
 an open brace, a comma-separated list of parameters,
