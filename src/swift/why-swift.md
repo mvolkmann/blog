@@ -275,9 +275,12 @@ if let minimum = results.0 { print("minimum is \(minimum)") } // 1.0
 if let maximum = results.1 { print("maximum is \(maximum)") } // 7.0
 if let average = results.2 { print("average is \(average)") } // 3.75
 
+// Type aliases give a name to type and
+// are useful to avoid repeating long type descriptions.
+typealias StatisticsTuple = (min: Double?, max: Double?, avg: Double?)
+
 // This function is similar to the previous one, but returns a "named tuple".
 // An alternative to consider is using a struct.
-typealias StatisticsTuple = (min: Double?, max: Double?, avg: Double?)
 func statistics2(_ values: [Double]) -> StatisticsTuple {
     let sum = values.reduce(0) { $0 + $1 }
     let average = values.isEmpty ? nil : sum / Double(values.count)
@@ -766,7 +769,7 @@ Extensions add methods and computed properties to existing types,
 even builtin types.
 
 Here is an example of an extension that adds computed properties
-to the `Date` type and accesses them on a `Date` object.
+to the `Date` type and accesses them on a `Date` instance.
 
 ```swift
 extension Date {
@@ -790,24 +793,43 @@ print(now.ymd) // 2022-07-08
 
 ## Property Observers
 
-Property observers watch for changes to a specific property of an object.
+Property observers watch for changes to a
+specific stored property of an type instance
+and perform actions before and/or after changes occur.
+
+They are defined by optional `willSet` and `didSet` functions.
+It is not necessary to define both, when only one is needed.
+
+The `willSet` function cannot prevent the change from happening, but
+the `didSet` function can revert to the old value if the new value is invalid.
 
 ```swift
 struct Person {
     let name: String
     var age: Int {
         willSet {
+            // Swift provides the variable "newValue" to
+            // access the new value that is not yet assigned.
             print("about to change from \(age) to \(newValue)")
-            //TODO: Can you prevent the change?
         }
         didSet {
-            print("changed from \(oldValue) to \(age)")
+            // Swift provides the variable "oldValue" to
+            // access the previously assigned value.
+            if age >= 0 {
+                print("changed from \(oldValue) to \(age)")
+            } else {
+                age = oldValue // reverts to previous value
+                print("reverted to \(oldValue)")
+            }
         }
     }
 }
 
 var me = Person(name: "Mark", age: 61)
-me.age = 19 //TODO: Describe the output.
+me.age = 19 // about to change from 61 to 19; changed from 61 to 19
+print("age is \(me.age)") // age is 19
+me.age = -5 // about to change from 19 to -5; reverted to 19
+print("age is \(me.age)") // age is 19
 ```
 
 ## Conclusion
