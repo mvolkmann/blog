@@ -10,17 +10,106 @@ layout: topic-layout.njk
 
 This article highlights many features of the Swift programming language
 that make it an attractive alternative to other programming languages.
-It is not a full tutorial on the language.
-
-Of course there is no consensus on the features
-that are desirable in a programming language,
-so the features presented here are driven by my own preferences.
+For a more complete introduction to Swift, see {% aTargetBlank
+"https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html",
+"A Swift Tour" %}.
 
 Today Swift is primarily used for implementing applications that
 run on iPhones, iPads, Apple Watches, and Mac computers.
 However, it can also be used to implement server-side code
 such as REST services. One way to do this is to utilize the
 {% aTargetBlank "https://vapor.codes", "Vapor" %} framework.
+
+## Functions
+
+Functions are defined with the `func` keyword followed by
+a name, parameter list, optional return type, and body.
+
+In functions with a return type where the body contains a single expression,
+the `return` keyword is implied to precede it.
+
+Functions that do not specify a return type cannot return a value.
+
+Each parameter is described by an optional argument label,
+a parameter name, a type, and an optional default value.
+Argument labels are used in calls to functions
+to specify the values to be passed.
+Parameter names are used to access the values inside the function body.
+
+The argument label for each parameter has three possibilities:
+
+- omitted, defaulting to the same as the parameter name
+- a name other than an underscore
+- an underscore which makes it positional
+
+To demonstrate these options, here are four ways to define a
+simple function that returns the result of multiplying two numbers.
+
+```swift
+// No parameters have argument labels.
+func multiplyV1(first: Double, second: Double) -> Double {
+    first * second
+}
+print(multiplyV1(first: 2, second: 3)) // 6
+
+// All parameters have argument labels.
+func multiplyV2(number first: Double, by second: Double) -> Double {
+    first * second
+}
+print(multiplyV2(number: 2, by: 3)) // 6
+
+// The first parameter is positional and the second has an argument label.
+// Positional parameters can appear before and/or after named parameters.
+func multiplyV3(_ first: Double, by second: Double) -> Double {
+    first * second
+}
+print(multiplyV3(2, by: 3)) // 6
+
+// All parameters are positional.
+func multiplyV4(_ first: Double, _ second: Double) -> Double {
+    first * second
+}
+print(multiplyV4(2, 3)) // 6
+```
+
+The purpose of argument labels is to
+make calls to functions read in a more English-like manner.
+Typically argument labels are prepositions such as "at", "between", "by",
+"for", "from", "in", "inside", "of", "on", "to", or "with".
+
+The arguments in a function call must appear
+in the same order in which they are defined
+in order to support being read by developers in the expected way.
+For example, later we will see the definition of a `Person` class
+that defines a `marry` method.
+Here's an example of a call to this method:
+
+```swift
+personA.marry(spouse: personB, on: date)
+```
+
+Reading "marry spouse on" feels correct,
+but reading "marry on spouse" would not.
+
+Positional parameters are used far less frequently
+than named parameters in typical Swift code.
+
+Parameters can be given default values.
+This allows them to be omitted in calls.
+However, specifying a default value for a parameter
+does not remove the need specify its type.
+
+For example:
+
+```swift
+func greet(salutation: String = "Hello", name: String = "World") {
+    print(salutation, name)
+}
+greet() // Hello World
+greet(name: "Mark") // Hello Mark
+greet(salutation: "Hola") // Hola World
+greet(salutation: "Hola", name: "Mark") // Hola Mark
+```
 
 ## Quieter Syntax
 
@@ -373,8 +462,6 @@ If there is no `set` function then a surrounding `get` block is not needed.
 This is the case for most computed properties.
 
 Here are examples of structs that define computed properties.
-Note that when a code block only contains a single expression,
-the `return` keyword is implied to proceed it.
 
 ```swift
 struct Race {
@@ -524,7 +611,6 @@ class Person {
 
     // "spouse" and "on" are argument labels, used by callers.
     // "person" and "date" are parameter names, used inside the function.
-    // If the argument label "spouse" was omitted, it would default to "person".
     func marry(spouse person: Person, on date: Date) {
         self.spouse = person
         self.weddingDate = date
@@ -547,39 +633,6 @@ var personB = Person(name: "Tami")
 let date = Date() // now
 personA.marry(spouse: personB, on: date)
 personA.report() // Mark is married to Tami.
-```
-
-TODO: The rest of this section needs to be in it new section
-TODO: the precedes the current one.
-TODO: However, it currently refers to code in this section!
-
-Functions and methods typically have parameters.
-Each parameter can be given an "argument label" whose purpose
-is to make calls to them read in a more English-like manner.
-Typically these are prepositions such as "at", "between", "by",
-"for", "from", "in", "inside", "of", "on", "to", or "with".
-When a parameter has no argument label, it defaults to the parameter name.
-
-The arguments in a function or method call must appear
-in the same order in which they are defined
-in order to support being read by developers in the expected way.
-For example, reading "marry spouse on" above sounds correct,
-but reading "marry on spouse" would not.
-
-Positional parameters are used far less frequently
-than named parameters in typical Swift code.
-However, there are valid reasons to use them.
-
-To make a parameter positional rather than named,
-specify an underscore for its argument label.
-For example:
-
-```swift
-func multiply(_ n1: Double, by n2: Double) -> Double {
-    n1 * n2
-}
-
-print(multiply(2, by: 3)) // 6.0
 ```
 
 ### Enums
