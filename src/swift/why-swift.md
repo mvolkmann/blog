@@ -165,21 +165,21 @@ Text(title).multilineTextAlignment(TextAlignment.center)
 Text(title).multilineTextAlignment(.center) // same
 ```
 
-Closures (a kind of anonymous function) are described later.
+A closure is a kind of anonymous function that is described later.
 Parameter types typically are not needed in closures
-because they can be inferred based on the caller.
+because they can be inferred based the types the caller passes.
 
 ## Collections
 
 The most commonly used builtin collection types are
 `Array`, `Dictionary`, `Set`, and tuples.
-Each of these specify the types of the elements
+Each of these specify the types of the items they can contain
 and each has a literal syntax.
 
 ### Arrays
 
-Arrays store an ordered collection of values that have the same type
-or a common supertype.
+Arrays store an ordered collection of values
+that have the same type or a common supertype.
 
 Here is an example of defining and using an `Array`.
 
@@ -187,9 +187,12 @@ Here is an example of defining and using an `Array`.
 // The type of this array is inferred to be [String],
 // which can also be written as Array<String>.
 var dogNames = ["Maisey", "Ramsay", "Oscar"]
+
 dogNames.append("Comet")
 dogNames[2] = "Oscar Wilde"
 print(dogNames[3]) // Comet
+
+// A for loop can iterate over the items in an Array.
 for name in dogNames {
     print(name)
 }
@@ -205,8 +208,8 @@ Here is an example of defining and using a `Dictionary`.
 ```swift
 // The type of this Dictionary is inferred to be [String:String]
 // which can also be written as Dictionary<String, String>.
-// The first type is the type of the keys and
-// the second type is the type of the values.
+// The first type is that of the keys and
+// the second type is that of the values.
 var languageCreators = [
     "Java": "James Gosling",
     "JavaScript": "Brendan Eich",
@@ -215,12 +218,13 @@ var languageCreators = [
 ]
 languageCreators["Swift"] = "Chris Lattner"
 
-// Getting the value for a key in a Dictionary returns an "optional".
-// These are described in the next section.
-// The nil-coalescing operator (??) is used here to handle the
-// possibility that the key "Swift" may not exist in the Dictionary.
+// Getting the value for a key in a Dictionary returns an "optional"
+// because it is possible that the key does not exist.
+// Optionals are described in the next section.
+// The nil-coalescing operator (??) is used here to handle a missing key.
 print("Swift was created by \(languageCreators["Swift"] ?? "unknown").")
 
+// A for loop can iterate over tuples of key/value pairs in a Dictionary.
 for (language, creator) in languageCreators {
     print("\(language) was created by \(creator).")
 }
@@ -235,19 +239,19 @@ Here is an example of defining and using a `Set`.
 ```swift
 var uniqueNumbers: Set<Int> = []
 
-// Fill the set with up to 10 random integers from 1 to 10.
-for _ in 1...10 {
+// Fill the set with up to 5 random integers from 1 to 10.
+for _ in 1...5 {
     uniqueNumbers.insert(Int.random(in: 1...10))
 }
 
-print(uniqueNumbers) // can contain fewer than 10 values
+print(uniqueNumbers) // can contain fewer than 5 values
 print(uniqueNumbers.contains(7)) // true or false
 ```
 
 ### Tuples
 
 A tuple is an ordered collection of a fixed size
-whose values whose types can differ.
+whose value have types that can differ.
 
 Here is an example of defining a function that returns a tuple,
 calling it, and using the return value.
@@ -258,13 +262,15 @@ calling it, and using the return value.
 // which will be nil if the Array is empty.
 func statistics(_ values: [Double]) -> (Double?, Double?, Double?) {
     let sum = values.reduce(0) { $0 + $1 }
+    // Dividing an Int by an Int truncates the result.
+    // To get a Double result, at least one of the operands must be a Double.
     let average = values.isEmpty ? nil : sum / Double(values.count)
     return (values.min(), values.max(), average)
 }
 
 let numbers = [3.0, 7.0, 1.0, 4.0]
 let results = statistics(numbers)
-// Note the use of the indices 0, 1, and 2 to get values within the tuple.
+// Note the use of the tuple indices 0, 1, and 2 to get values within the tuple.
 if let minimum = results.0 { print("minimum is \(minimum)") } // 1.0
 if let maximum = results.1 { print("maximum is \(maximum)") } // 7.0
 if let average = results.2 { print("average is \(average)") } // 3.75
@@ -285,7 +291,7 @@ if let average = results2.avg { print("average is \(average)") } // 3.75
 
 ## Optionals
 
-The Swift value `nil` represents the absence of a value.
+The value `nil` represents the absence of a value.
 By default, variables cannot be set to `nil`.
 They must always have a value of the declared type, even initially.
 To allow a variable to be set to `nil`,
@@ -297,37 +303,42 @@ var name: String? // initial value is nil
 name = "Mark"
 ```
 
+The Swift compiler generates an error if code attempts to
+access a variable of an optional type without checking for `nil`.
 There are several ways, demonstrated below,
 to test whether a variable holds the value `nil`
 and access its value when it is not `nil`.
-The Swift compiler generates an error message if code attempts
-to access a variable of an optional type without checking for `nil`.
 
 ```swift
 if name != nil {
-    print("name is \(name!)") // ! performs a "force unwrap"
+    // The ! operator performs a "force unwrap"
+    // to get the wrapped value of an optional.
+    print("name is \(name!)") // name is Mark
 }
 
-// An "if let" statement assigns the unwrapped value of the
-// optional variable on the right side of the equal sign
+// An "if let" statement assigns the wrapped value
+// of an optional on the right side of the equal sign
 // to a local variable on the left side
 // ONLY IF its value is not nil.
-// Often the local variable has the same name as the optional variable
-// and shadows within the block.
-// In Swift 5.7, this can be written as "if let name {".
+// Often the local variable has the same name as the
+// optional variable and shadows within the block.
+// In Swift 5.7+, this can be shorted to "if let name {".
 if let name = name {
-    print("name is \(name)")
+    print("name is \(name)") // name is Mark
 }
 
-// This uses the nil-coalescing operator ?? to choose
-// either the wrapped value or the value on the right side.
-print("name is \(name ?? "unknown")")
+// The nil-coalescing operator ?? requires an optional on the left side
+// and a non-optional on the right side.
+// If the optional is not nil, the result is the wrapped value.
+// Otherwise the result is the right side value.
+print("name is \(name ?? "unknown")") // name is Mark
 
-// This uses optional chaining (?.) to
-// access a property on an optional variable.
-// Optional chaining can also be used to
-// call a method on an optional variable.
-print("name length is \(name?.count ?? 0)")
+// The optional chaining operator ?. is applied to an optional.
+// It evaluates to nil if the value of the optional is nil.
+// Otherwise it evaluates a member of the wrapped value
+// which can be a property or a method.
+print("name length is \(name?.count ?? 0)") // 4
+print("upper name is \(name?.uppercased() ?? "")") // upper name is MARK
 ```
 
 ## Properties
@@ -342,16 +353,16 @@ Properties are either "stored" or "computed".
 Every instance of a type stores its own values
 of all stored properties defined by the type.
 Computed properties are computed based on the values of other properties
-each time they are accessed.
+every time they are accessed.
 They are not stored in instances of the type.
 
 Computed properties must be declared with
-the `var` keyword rather than the `let` keyword.
-A type must be specified (cannot be inferred) and
-is followed by a code block with no equal sign preceding it.
+the `var` keyword rather than `let`.
+A type must be specified (cannot be inferred)
+and is followed by a code block.
 
 Computed properties always define a `get` function
-that computes the value every time it is referenced.
+that computes the value.
 They can optionally define a `set` function
 whose purpose is the change the values of properties used to
 compute the value so the result will be a given value.
@@ -377,6 +388,8 @@ struct Race {
     }
 }
 
+// Unlike in many languages, the "new" keyword
+// is not needed to create an instance of a type.
 let race = Race(kilometers: 5)
 print(race.miles) // 3.105
 
@@ -392,6 +405,7 @@ struct Counter {
             n * 3
         }
         set {
+            // Swift provides the variable "newValue".
             n = newValue / 3 // truncates
         }
     }
@@ -409,29 +423,49 @@ print(counter.tripled) // 3 * 3 = 9; doesn't change n
 
 The `struct`, `class`, and `enum` keywords
 provide three ways to define custom types.
-These differ from each other in a few ways, but they
+These differ from each other in several ways, but they
 all support defining a type that has properties and methods.
+Methods are defined in the same way as functions,
+but appear inside a `struct`, `class`, or `enum`.
+
+### Protocols
+
+Protocols are similar to interfaces in some other programming languages.
+They define a set of computed properties and methods
+that other types (structs, enums, and classes) must implement.
+
+A type definition indicates that it conforms to one or more protocols
+by following the type name with a colon and
+a comma-separated list of protocol names.
+For example: `struct Dog: CustomStringConvertible {`.
+
+There are many protocols defined by Swift and custom protocols can be defined.
+Commonly used protocols defined by Swift include:
+
+- `CustomStringConvertible` - must define the computed property `description`
+- `Identifiable` - must define the computed property `id`
+- `Equatable` - must define the `==` operator for comparing instances
+- `Comparable` - must define the `==` and `<` operators for comparing instances
+- `Hashable` - must define the `hash` method
+
+The Swift compiler can synthesize the implementations of several protocols.
+This means that for types that only contain properties with basic types,
+stating that a type conforms to the protocol is all that is required.
+
+Instances of types that conform to the `CustomStringConvertible` protocol
+can be automatically converted to a `String` representation
+when printed or used in a `String` interpolation.
 
 ### Structs
 
 Structs and enums are "value types".
 When an instance is assigned to a variable or passed to a function,
 a shallow copy is created. Technically a copy is not made until
-there is an attempt to modify it (copy on write).
+there is an attempt to modify it using a "copy on write" strategy.
 
 Structs are used far more frequently than classes in typical Swift code.
 Nearly all builtin types are structs, including `Bool`, `Int`, `Double`,
 `Character`, `String`, `Array`, `Set`, `Dictionary`, `Range`, and `Date`.
-
-A protocol is like an "interface" in other programming languages.
-Following a `struct`, `class`, or `enum` name with a colon and a protocol name
-states that the type will conform to the protocol.
-That means it will implement all the
-computed properties and methods required by the protocol.
-One example of a protocol that is defined by Swift is `CustomStringConvertible`.
-Instances of types that conform to this protocol
-can be automatically converted to a `String` representation
-when printed or used in a `String` interpolation.
 
 Here is an example of defining a struct, creating an instance, and using it.
 
@@ -447,7 +481,13 @@ struct Dog: CustomStringConvertible {
     }
 }
 
+// By default, structs are given a "memberwise-initializer"
+// that takes one argument for each stored property
+// in the order in which they are defined.
+// Structs are not required to define additional initializers, but can
+// in order to provide additional ways to create instances.
 let dog = Dog(name: "Comet", breed: "Whippet")
+
 print(dog) // Comet is a Whippet.
 ```
 
@@ -460,7 +500,7 @@ passing an instance to a function passes a reference rather than a copy.
 Here is an example of defining a class, creating an instance, and using it.
 
 ```swift
-import Foundation // for the Date struct
+import Foundation // need to use the Date struct
 
 class Person {
     // Properties
@@ -471,6 +511,8 @@ class Person {
 
     // Initializers (can have more than one)
 
+    // Classes are not given a "memberwise-initializer",
+    // so they are required to define at least one initializer.
     init(name: String) {
         self.name = name
     }
@@ -486,7 +528,7 @@ class Person {
     }
 
     func report() {
-        // This assigns the unwrapped value of the optional property "spouse"
+        // This assigns the wrapped value of the optional property "spouse"
         // to the shadowing local variable "spouse"
         // only if its value is not nil.
         if let spouse = spouse {
@@ -751,28 +793,6 @@ struct Person {
 var me = Person(name: "Mark", age: 61)
 me.age = 19
 ```
-
-## Protocols
-
-Protocols are similar to interfaces in some other programming languages.
-They define a set of computed properties and methods
-that other types (structs, enums, and classes) must implement.
-
-There are many protocols defined by Swift and custom protocols can be defined.
-Commonly used protocols defined by Swift include:
-
-- `Equatable` - must define the `==` operator for comparing instances
-- `Comparable` - must define the `==` and `<` operators for comparing instances
-- `Hashable` - must define the `hash` method
-- `Identifiable` - must define the computed property `id`
-- `CustomStringConvertible` - must define the computed property `description`
-
-The Swift compiler can synthesize the implementations of several protocols.
-This means that for types that only contain properties with basic types,
-stating that a type conforms to the protocol is all that is required.
-
-TODO: Include an example of defining and using a custom protocol.
-TODO: Include an example of using an extension to define default implementations of protocol methods.
 
 ## Conclusion
 
