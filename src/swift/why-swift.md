@@ -16,8 +16,8 @@ Of course there is no consensus on the features
 that are desirable in a programming language,
 so the features presented here are driven by my own preferences.
 
-Today Swift is primarily used for implementing applications that run on
-iPhones, iPads, Apple Watches, and Mac computers.
+Today Swift is primarily used for implementing applications that
+run on iPhones, iPads, Apple Watches, and Mac computers.
 However, it can also be used to implement server-side code
 such as REST services. One way to do this is to utilize the
 {% aTargetBlank "https://vapor.codes", "Vapor" %} framework.
@@ -30,14 +30,14 @@ conditions are surrounded by parentheses and
 statements are terminated by semicolons.
 Swift does not follow either of those conventions.
 It trades requiring parentheses around conditions
-for mandating braces around code blocks.
+for requiring braces around code blocks.
 
 In the examples below, note that:
 
 - The `let` keyword declares a constant (cannot change).
 - The `var` keyword declares a variable (can change).
 - Literal strings must be surrounded by double quotes.
-- A range of numbers is defined using the `...` or `..<` operator.
+- A range of numbers is defined using the `...` and `..<` operators.
   If a number appears on both sides of the operator, it is a closed range.
   If a number appears on only one side, it is an open range.
 
@@ -45,7 +45,6 @@ In the examples below, note that:
 
 ```swift
 let score = Int.random(in: 0...30)
-print("score =", score)
 
 // Can write on a single line.
 if score == 0 { print("Start the game!") }
@@ -62,14 +61,16 @@ if score == 21 {
 
 ### switch statement
 
-Switch statements must be exhaustive.
-This means they must either include a `case` that matches every possible value
+Switch statements must be exhaustive which means means
+they must either include a `case` that matches every possible value
 or they must include a `default` case.
 
 ```swift
 switch score {
 case 21: // matches a single value
     print("You win!")
+    // Control does not flow into the next case,
+    // so a break statement is not necessary.
 case 22...: // matches an open-ended range
     print("You lose.")
 case let s where s > 21: // alternative using a where clause
@@ -105,14 +106,14 @@ var hand: [String] = []
 for _ in 1...5 {
     hand.append(deck.removeFirst())
 }
-print(hand) // ["3♦️", "3♣️", "7♥️", "8♥️", "K♦️"]
+print(hand) // ex. ["3♦️", "3♣️", "7♥️", "8♥️", "K♦️"]
 ```
 
 ### while loop
 
 ```swift
 var temperature = 0
-func doSomething() {
+func forecast() {
     print("temperature is", temperature)
     // The loop below stops when this generates a high temperature.
     temperature = Int.random(in: 0...100)
@@ -120,7 +121,7 @@ func doSomething() {
 
 // top-tested loop
 while temperature < 80 {
-    doSomething()
+    forecast()
 }
 ```
 
@@ -131,13 +132,14 @@ temperature = 0
 
 // bottom-tested loop
 repeat {
-    doSomething()
+    forecast()
 } while temperature < 80
 ```
 
 ## Type Inference
 
-Swift provides great type inference.
+There are many cases when it is unnecessary to specify types
+because Swift infers them.
 
 ```swift
 let score: Int = 19
@@ -149,12 +151,18 @@ let distance = 1.23 // same
 let name: String = "Mark"
 let name = "Mark" // same
 
-// SwiftUI is a library for creating user interfaces.
+// SwiftUI is a framework for creating user interfaces.
 // It defines a Text struct and a Color enum.
 // Structs and enums are described later.
+// foregroundColor is a method that takes a Color which is
+// a struct with static properties for many common colors.
 Text("Hello, World!").foregroundColor(Color.red)
-// This line is the same because the type Color is inferred.
-Text("Hello, World!").foregroundColor(.red)
+Text("Hello, World!").foregroundColor(.red) // same
+
+// multilineTextAlignment is a method that takes a TextAlignment
+// which is an enum with cases for each supported option.
+Text(title).multilineTextAlignment(TextAlignment.center)
+Text(title).multilineTextAlignment(.center) // same
 ```
 
 Closures (a kind of anonymous function) are described later.
@@ -351,6 +359,8 @@ If there is no `set` function then a surrounding `get` block is not needed.
 This is the case for most computed properties.
 
 Here are examples of structs that define computed properties.
+Note that when a code block only contains a single expression,
+the `return` keyword is implied to proceed it.
 
 ```swift
 struct Race {
@@ -358,7 +368,12 @@ struct Race {
 
     // computed property with no set function
     var miles: Double {
-        kilometers * 0.621
+        /* long version
+        get {
+            kilometers * 0.621
+        }
+        */
+        kilometers * 0.621 // short version
     }
 }
 
@@ -492,6 +507,8 @@ personA.report() // Mark is married to Tami.
 Functions and methods typically have parameters.
 Each parameter can be given an "argument label" whose purpose
 is to make calls to them read in a more English-like manner.
+Typically these are prepositions such as "at", "between", "by",
+"for", "from", "in", "inside", "of", "on", "to", and "with".
 When a parameter has no argument label, it defaults to the parameter name.
 
 The arguments in a function or method call must appear
