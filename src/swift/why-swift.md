@@ -14,6 +14,12 @@ For a more complete introduction to Swift, see {% aTargetBlank
 "https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html",
 "A Swift Tour" %}.
 
+My goal is to provide clear, concise descriptions of a large number
+of fundamental Swift concepts along with short, illustrative code snippets.
+If you are familiar with at least one programming language
+that supports object-oriented concepts, I'm confident this will be
+enough to get you started reading and writing Swift code.
+
 Today Swift is primarily used for implementing applications that
 run on iPhones, iPads, Apple Watches, and Mac computers.
 However, it can also be used to implement server-side code
