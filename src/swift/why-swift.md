@@ -21,11 +21,26 @@ If you are familiar with at least one programming language
 that supports object-oriented concepts, I'm confident this will be
 enough to get you started reading and writing Swift code.
 
+Swift is supported in macOS, Linux, and Windows.
+For details, see {% aTargetBlank
+"https://www.swift.org/platform-support/", "Platform Support" %}.
+
 Today Swift is primarily used for implementing applications that
 run on iPhones, iPads, Apple Watches, and Mac computers.
 However, it can also be used to implement server-side code
 such as REST services. One way to do this is to utilize the
 {% aTargetBlank "https://vapor.codes", "Vapor" %} framework.
+
+It is also possible to develop Android apps using Swift
+with the Swift Compiler for Android Development Environment
+({% aTargetBlank "https://www.scade.io/10-scade2beta/", "SCADE" %}).
+
+There are many open source examples of apps developed using Swift and the
+{% aTargetBlank "https://developer.apple.com/xcode/swiftui/", "SwiftUI" %}
+framework. For a basic example,
+see my Running Calculator app for watchOS in {% aTargetBlank
+"https://github.com/mvolkmann/swiftui-running-calculator/blob/main/RunningCalculator%20WatchKit%20Extension/RunningCalculatorApp.swift",
+"GitHub" %}.
 
 ## Functions
 
