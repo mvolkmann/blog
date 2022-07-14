@@ -8,7 +8,8 @@ layout: topic-layout.njk
 
 # What makes Swift a great programming language?
 
-This article highlights many features of the Swift programming language
+This article highlights many features of the {% aTargetBlank
+"https://developer.apple.com/swift/", "Swift" %} programming language
 that make it an attractive alternative to other programming languages.
 For a more complete introduction to Swift, see {% aTargetBlank
 "https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html",
