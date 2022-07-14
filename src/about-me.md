@@ -13,9 +13,9 @@ src="https://avatars0.githubusercontent.com/u/79312?s=460&v=4">
 I am a Partner and Distinguished Software Engineer
 at Object Computing, Inc. (OCI) in St. Louis
 where I have provided software consulting and training since 1996.
-As a consultant, I have assisted many companies with
-JavaScript, Node.js, Svelte, React, Vue, Angular, and more.
-Mark has created and taught many courses on topics including
+As a consultant, I have assisted many companies with Swift, SwiftUI,
+JavaScript, TypeScript, Node.js, Svelte, React, Vue, Angular, and more.
+I have also created and taught many courses on topics including
 React, Vue, AngularJS, Node.js, jQuery, JavaScript,
 HTML5, CSS3, Ruby, Java, and XML.
 
@@ -24,7 +24,7 @@ I am the author of the Manning book
 
 I am a frequent presenter at St. Louis area user groups.
 I have presented at many conferences including
-Nordic.js, Jfokus, NDC Oslo, Strange Loop, MidwestJS,
+iJS London, Nordic.js, Jfokus, NDC Oslo, Strange Loop, MidwestJS,
 No Fluff Just Stuff, and XML DevCon.
 
 I frequently write articles on various software development topics.
