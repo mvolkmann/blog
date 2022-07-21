@@ -7,9 +7,7 @@ This privacy notice for r.mark.volkmann@gmail.com
 collect, store, use, and/or share ("process") your information
 when you use our services ("Services"), such as when you:
 
-- Download and use our application(s), such as our
-  mobile application RunCalc, or any other application of ours
-  that links to this privacy notice
+- Download and use any application that links to this privacy notice
 - Engage with us in other related ways,
   including any sales, marketing, or events
 
