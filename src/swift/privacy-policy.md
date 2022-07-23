@@ -1,3 +1,10 @@
+---
+eleventyNavigation:
+  key: Privacy Policy
+  parent: Swift
+layout: topic-layout.njk
+---
+
 # PRIVACY NOTICE
 
 _last updated July 21, 2022_
