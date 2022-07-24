@@ -89,3 +89,20 @@ line_length:
 
 For documentation on supported rules, see the {% aTargetBlank
 "https://realm.github.io/SwiftLint/rule-directory.html", "Rule Directory" %}.
+
+## Selective Disabling
+
+To disable specific rules for a specific type or function definition,
+add the following immediately before it:
+
+```swift
+// swiftlint:disable rule1 rule2 rule3
+```
+
+To do this for a section of code, surround it as follows:
+
+```swift
+// swiftlint:disable rule1 rule2 rule3
+... code ...
+// swiftlint:enable rule1 rule2 rule3
+```
