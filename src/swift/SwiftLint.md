@@ -39,12 +39,13 @@ To configure Xcode to run SwiftLint every time the project is built:
 1. Select the topmost entry in the file navigator.
 1. Select the primary target.
 1. Select the "Build Phases" tab.
-1. Click the "+" in the upper-left to create a new build
+1. Click the "+" in the upper-left.
 1. Select "New Run Script Phase".
 1. Rename the new run script phase to "SwiftLint".
-1. Paste the following shell script code in the Shell input:
+1. Paste the following shell script code in the Shell input.
+   This assumes that SwiftLint was installed using Homebrew.
 
-   ```sh
+   ```shell
    export PATH="$PATH:/opt/homebrew/bin"
    if which swiftlint > /dev/null; then
      swiftlint
@@ -64,6 +65,10 @@ Here is an example:
 disabled_rules:
   - todo
 
+// This is a list of rules to enable that are disabled by default.
+opt_in_rules:
+  - closure_end_indentation
+
 // This customizes a specific rule.
 identifier_name:
   min_length:
@@ -78,10 +83,6 @@ line_length:
   warning: 100
   error: 120
   ignores_urls: true
-
-// This is a list of rules to enable that are disabled by default.
-opt_in_rules:
-  - closure_end_indentation
 ```
 
 ## Rules
