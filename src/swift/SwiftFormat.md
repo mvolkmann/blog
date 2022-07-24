@@ -17,7 +17,8 @@ One way to install SwiftFormat is to use
 Enter `brew install swiftformat`.
 
 For other options, see the {% aTargetBlank
-"https://github.com/nicklockwood/SwiftFormat", "SwiftFormat home page" %}.
+"https://github.com/nicklockwood/SwiftFormat#how-do-i-install-it",
+"How do I install it?" %}.
 
 Create the file `.swift-version` in each project root directory
 that contains the version of Swift being used such as "5.6".
