@@ -61,15 +61,15 @@ at the root of each project.
 Here is an example:
 
 ```yaml
-// This is a list of rules to disable that are enabled by default.
+# This is a list of rules to disable that are enabled by default.
 disabled_rules:
   - todo
 
-// This is a list of rules to enable that are disabled by default.
+# This is a list of rules to enable that are disabled by default.
 opt_in_rules:
   - closure_end_indentation
 
-// This customizes a specific rule.
+# This customizes a specific rule.
 identifier_name:
   min_length:
     error: 3
@@ -78,7 +78,7 @@ identifier_name:
     - dy
     - id
 
-// This customizes a specific rule.
+# This customizes a specific rule.
 line_length:
   warning: 100
   error: 120
