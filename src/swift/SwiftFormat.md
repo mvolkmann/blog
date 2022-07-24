@@ -77,6 +77,7 @@ Here is an example:
 ```
 --commas inline
 --disable spaceInsideComments
+--hexgrouping 2
 ```
 
 ## Rules
