@@ -66,6 +66,7 @@ To configure a keyboard shortcut for this:
 1. If that keyboard shortcut is already in use,
    a message at the bottom of the dialog will describe the current mapping.
    Choose another keyboard shortcut to avoid disabling the current mapping.
+1. Close the Preferences dialog.
 
 There is no built-in way to configure a keyboard shortcut
 for running SwiftFormat inside Xcode and
