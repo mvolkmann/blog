@@ -56,12 +56,25 @@ To run SwiftFormat inside Xcode on a single `.swift` file:
 1. Open the file inside Xcode.
 1. Select Editor ... Swift Format ... Format File to format the entire file.
 
-SwiftFormat will continue working inside Xcode
-after quitting the "SwiftFormat for Xcode" app.
+To configure a keyboard shortcut for this:
+
+1. Select Xcode ... Preferences ... Key Bindings
+1. Type "SwiftFormat" in the the filter input on the right.
+1. In the row that begins with "SwiftFormat - Format File",
+   double-click in the "Key" column.
+1. Type the desired keyboard shortcut (ex. option-f).
+1. If that keyboard shortcut is already in use,
+   a message at the bottom of the dialog will describe the current mapping.
+   Choose another keyboard shortcut to avoid disabling the current mapping.
 
 There is no built-in way to configure a keyboard shortcut
 for running SwiftFormat inside Xcode and
-there is currently no way to configure it to run every time a file is saved.
+
+SwiftFormat will continue working inside Xcode
+after quitting the "SwiftFormat for Xcode" app.
+
+There is currently no way to configure Xcode to run SwiftFormat
+every time a file is saved.
 
 To configure Xcode to run SwiftFormat every time the project is built, see
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat#xcode-build-phase",
