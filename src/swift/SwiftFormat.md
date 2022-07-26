@@ -62,7 +62,8 @@ To configure a keyboard shortcut for this:
 1. Type "SwiftFormat" in the the filter input on the right.
 1. In the row that begins with "SwiftFormat - Format File",
    double-click in the "Key" column.
-1. Type the desired keyboard shortcut (ex. option-f).
+1. Type the desired keyboard shortcut (ex. cmd-s).
+   Using cmd-s will format the file AND save it.
 1. If that keyboard shortcut is already in use,
    a message at the bottom of the dialog will describe the current mapping.
    Choose another keyboard shortcut to avoid disabling the current mapping.
