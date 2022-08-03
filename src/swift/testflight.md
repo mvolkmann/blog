@@ -72,6 +72,9 @@ Each version remains available for download for 90 days.
    it order to successfully upload a build.)
 1. Set "Build" to "1". Increment this for each
    subsequent build with the same value for "Version".
+1. After "App Icon", enter "AppIcon" which
+   should be the asset name of the application icon.
+1. After "App Icon Source", check the "Include all app icon assets" checkbox.
 1. Repeat the previous two steps for each target using matching values.
 1. Verify that the file "Assets.xcassets" defines the image set "AppIcon"
    that contains icons for both iPhone and iPad (if building for both).
