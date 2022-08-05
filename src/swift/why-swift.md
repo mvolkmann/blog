@@ -362,10 +362,10 @@ print(uniqueNumbers.contains(7)) // true or false
 ### Tuples
 
 A tuple is an ordered collection of a fixed size
-whose value have types that can differ.
+whose items can have differing types.
 
 Here is an example of defining a function that returns a tuple,
-calling it, and using the return value.
+calling the function, and using the return value.
 
 ```swift
 // Gets the minimum, maximum, and average of the numbers in an Array,
@@ -390,7 +390,7 @@ if let average = results.2 { print("average is \(average)") } // 3.75
 // are useful to avoid repeating long type descriptions.
 typealias StatisticsTuple = (min: Double?, max: Double?, avg: Double?)
 
-// This function is similar to the previous one, but returns a "named tuple".
+// This function is similar to the previous one but returns a "named tuple".
 // An alternative to consider is using a struct.
 func statistics2(_ values: [Double]) -> StatisticsTuple {
     let sum = values.reduce(0) { $0 + $1 }
@@ -409,7 +409,7 @@ The value `nil` represents the absence of a value.
 By default, variables cannot be set to `nil`.
 They must always have a value of the declared type, even initially.
 To allow a variable to be set to `nil`,
-its type must be followed by a question mark which makes it "optional".
+its type must be followed by a question mark which makes it optional.
 
 ```swift
 var name: String? // initial value is nil
@@ -457,8 +457,7 @@ print("upper name is \(name?.uppercased() ?? "")") // upper name is MARK
 
 ## Properties
 
-Swift provides three ways to define custom types,
-using a struct, class, or enum.
+Swift provides three ways to define custom types: struct, class, and enum.
 Each of these is described in the next section.
 For now all you need to know is that
 each of these can define properties and methods.
@@ -478,7 +477,7 @@ and is followed by a code block.
 Computed properties always define a `get` function
 that computes the value.
 They can optionally define a `set` function
-whose purpose is the change the values of properties used to
+whose purpose is to change the values of properties used to
 compute the value so the result will be a given value.
 If there is no `set` function then a surrounding `get` block is not needed.
 This is the case for most computed properties.
@@ -533,12 +532,16 @@ print(counter.tripled) // 3 * 3 = 9; doesn't change n
 
 ## Custom Types
 
-The `struct`, `class`, and `enum` keywords
+As stated above, the `struct`, `class`, and `enum` keywords
 provide three ways to define custom types.
 These differ from each other in several ways, but they
 all support defining a type that has properties and methods.
-Methods are defined in the same way as functions,
+Methods are defined in the same way as functions
 but appear inside a `struct`, `class`, or `enum`.
+
+Before describing structs, classes, and enums,
+it is useful to understand the concept of "protocols" which are
+a kind of contract to which a custom type can conform.
 
 ### Protocols
 
@@ -554,14 +557,14 @@ For example: `struct Dog: CustomStringConvertible {`.
 There are many protocols defined by Swift and custom protocols can be defined.
 Commonly used protocols defined by Swift include:
 
-- `CustomStringConvertible` - must define the computed property `description`
-- `Identifiable` - must define the computed property `id`
-- `Equatable` - must define the `==` operator for comparing instances
-- `Comparable` - must define the `==` and `<` operators for comparing instances
-- `Hashable` - must define the `hash` method
+- `CustomStringConvertible`: must define the computed property `description`
+- `Identifiable`: must define the computed property `id`
+- `Equatable`: must define the `==` operator for comparing instances
+- `Comparable`: must define the `==` and `<` operators for comparing instances
+- `Hashable`: must define the `hash` method
 
 The Swift compiler can synthesize the implementations of several protocols.
-This means that for types that only contain properties with basic types,
+This means that for types that contain only properties with basic types,
 stating that a type conforms to the protocol is all that is required.
 
 Instances of types that conform to the `CustomStringConvertible` protocol
@@ -596,8 +599,8 @@ struct Dog: CustomStringConvertible {
 // By default, structs are given a "memberwise-initializer"
 // that takes one argument for each stored property
 // in the order in which they are defined.
-// Structs are not required to define additional initializers, but can
-// in order to provide additional ways to create instances.
+// Structs are not required to define additional initializers,
+// but they can in order to define additional ways to create instances.
 let dog = Dog(name: "Comet", breed: "Whippet")
 
 print(dog) // Comet is a Whippet.
@@ -632,7 +635,7 @@ class Person {
     // Methods
 
     // "spouse" and "on" are argument labels, used by callers.
-    // "person" and "date" are parameter names, used inside the function.
+    // "person" and "date" are parameter names used inside the function.
     func marry(spouse person: Person, on date: Date) {
         self.spouse = person
         self.weddingDate = date
@@ -674,7 +677,7 @@ Here is an example of defining enums and creating instances.
 // The cases of this enum do not have associated data.
 enum Language {
     // When the cases have no associated data,
-    // they can be define with a single case statement.
+    // they can be defined with a single case statement.
     case english, french, german, spanish
 
     // Method
@@ -741,7 +744,7 @@ The second most commonly used is `internal`, which is the default.
 
 Specifying `private(set)` on a property means that
 the property can be accessed as if it were `public`,
-but can only be modified as if it were `private`.
+but it can only be modified as if it were `private`.
 
 ## Imports
 
@@ -784,7 +787,7 @@ print("sum =", sum) // 10
 
 When the last argument to a function is a closure,
 it can be written as a "trailing closure".
-These have the same syntax as any closure,
+These have the same syntax as any closure
 but immediately follow the function call.
 
 ```swift
@@ -873,7 +876,7 @@ specific stored property of an type instance
 and perform actions before and/or after changes occur.
 
 They are defined by optional `willSet` and `didSet` functions.
-It is not necessary to define both, when only one is needed.
+It is not necessary to define both when only one is needed.
 
 The `willSet` function cannot prevent the change from happening, but
 the `didSet` function can revert to the old value if the new value is invalid.
