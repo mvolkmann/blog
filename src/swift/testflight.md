@@ -67,11 +67,12 @@ Each version remains available for download for 90 days.
 1. Click the General tab.
 1. Set "Version" to "0.1.0" for the initial build
    which is a semantic version number.
-   Modify this each time new bug fixes or features are being deployed.
+   Typically this is modified each time new features or bug fixes
+   are being deployed but changing this is not required.
    (It seems I had to set all the "MARKETING_VERSION" values to "1"
    it order to successfully upload a build.)
-1. Set "Build" to "1". Increment this for each
-   subsequent build with the same value for "Version".
+1. Set "Build" to "1". Increment this for each subsequent build.
+   It does not need to match the value of "Version".
 1. After "App Icon", enter "AppIcon" which
    should be the asset name of the application icon.
 1. After "App Icon Source", check the "Include all app icon assets" checkbox.
