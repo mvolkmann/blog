@@ -27,7 +27,7 @@ For details, see {% aTargetBlank
 
 Today Swift is primarily used for implementing applications that
 run on iPhones, iPads, Apple Watches, and Mac computers.
-However, it can also be used to implement server-side code
+However, it can also be used to implement server-side code,
 such as REST services. One way to do this is to utilize the
 {% aTargetBlank "https://vapor.codes", "Vapor" %} framework.
 
@@ -62,7 +62,7 @@ The argument label for each parameter has three possibilities:
 
 - omitted, defaulting to the same as the parameter name
 - a name other than an underscore
-- an underscore which makes it positional
+- an underscore, which makes it positional
 
 To demonstrate these options, here are four ways to define a
 simple function that returns the result of multiplying two numbers.
@@ -284,7 +284,7 @@ because they can be inferred based on the types the caller passes.
 
 The most commonly used builtin collection types are
 `Array`, `Dictionary`, `Set`, and tuples.
-Each of these specify the types of the items they can contain
+Each of these specifies the types of the items it can contain,
 and each has a literal syntax.
 
 ### Arrays
@@ -409,7 +409,7 @@ The value `nil` represents the absence of a value.
 By default, variables cannot be set to `nil`.
 They must always have a value of the declared type, even initially.
 To allow a variable to be set to `nil`,
-its type must be followed by a question mark which makes it optional.
+its type must be followed by a question mark, which makes it optional.
 
 ```swift
 var name: String? // initial value is nil
@@ -479,7 +479,7 @@ that computes the value.
 They can optionally define a `set` function
 whose purpose is to change the values of properties used to
 compute the value so the result will be a given value.
-If there is no `set` function then a surrounding `get` block is not needed.
+If there is no `set` function, a surrounding `get` block is not needed.
 This is the case for most computed properties.
 
 Here are examples of structs that define computed properties.
@@ -609,7 +609,7 @@ print(dog) // Comet is a Whippet.
 ### Classes
 
 Classes are "reference types".
-Multiple variables can refer to the same instance and
+Multiple variables can refer to the same instance, and
 passing an instance to a function passes a reference rather than a copy.
 
 Here is an example of defining a class, creating an instance, and using it.
@@ -668,7 +668,7 @@ referred to as "cases".
 
 Many programming languages support enums, but Swift takes the concept farther.
 In Swift, each case can have different associated data.
-Also, computed properties and methods can be defined
+Also, computed properties and methods can be defined,
 just like in structs and classes.
 
 Here is an example of defining enums and creating instances.
@@ -743,8 +743,8 @@ The most commonly used access control keyword is `private`.
 The second most commonly used is `internal`, which is the default.
 
 Specifying `private(set)` on a property means that
-the property can be accessed as if it were `public`,
-but it can only be modified as if it were `private`.
+the property can be accessed as if it is `public`,
+but it can only be modified as if it is `private`.
 
 ## Imports
 
@@ -872,7 +872,7 @@ print(now.ymd) // 2022-07-08
 ## Property Observers
 
 Property observers watch for changes to a
-specific stored property of an type instance
+specific stored property of a type instance
 and perform actions before and/or after changes occur.
 
 They are defined by optional `willSet` and `didSet` functions.
