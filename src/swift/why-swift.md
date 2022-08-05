@@ -119,7 +119,7 @@ than named parameters in typical Swift code.
 Parameters can be given default values.
 This allows them to be omitted in calls.
 However, specifying a default value for a parameter
-does not remove the need specify its type.
+does not remove the need to specify its type.
 
 For example:
 
@@ -136,7 +136,7 @@ greet(salutation: "Hola", name: "Mark") // Hola Mark
 ## Control Structures
 
 Many programming languages have a syntax that is
-modelled after the C programming language where
+modeled after the C programming language where
 conditions are surrounded by parentheses and
 statements are terminated by semicolons.
 Swift does not follow either of those conventions.
@@ -172,7 +172,7 @@ if score == 21 {
 
 ### switch statement
 
-Switch statements must be exhaustive which means means
+Switch statements must be exhaustive which means
 they must either include a `case` that matches every possible value
 or they must include a `default` case.
 
@@ -278,7 +278,7 @@ Text(title).multilineTextAlignment(.center) // same
 
 A closure is a kind of anonymous function that is described later.
 Parameter types typically are not needed in closures
-because they can be inferred based the types the caller passes.
+because they can be inferred based on the types the caller passes.
 
 ## Collections
 

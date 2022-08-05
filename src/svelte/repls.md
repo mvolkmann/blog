@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 This is a list of links to interesting Svelte REPLs I have created.
 
-- {% aTargetBlankNoVersion "https://svelte.dev/repl/67235fc3a6a1490790d5122805e45c35?version=3.42.4", "Action Demo" %}
+- {% aTargetBlankNoVersion "https://svelte.dev/repl/67235fc3a6a1490790d5122805e45c35?version=3.42.4", "Action and Slot Demo" %}
 - {% aTargetBlankNoVersion "https://svelte.dev/repl/4dc64fc81d174ce983d6d0950588aa95?version=3.42.4", "Counter" %}
 - {% aTargetBlankNoVersion "https://svelte.dev/repl/5fc4b5dd5dec49d2be3fa160693372ce?version=3.42.4", "Crossfade Demo" %}
 - {% aTargetBlankNoVersion "https://svelte.dev/repl/082e308f9fe44bcb98621dab346c2e85?version=3.42.4", "Custom Transition (spin)" %}
