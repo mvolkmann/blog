@@ -52,3 +52,30 @@ with which you will interact most frequently.
 To reset the colors back to the defaults
 and reset the start screen to its default values,
 tap "Settings" and tap the "Reset" button.
+
+## Gift Details
+
+The amount of detail that can be entered for each gift is up to you.
+
+<img alt="GiftTrack Gift Form" style="width: 40%"
+    src="/blog/assets/GiftTrack-GiftForm.png?v={{pkg.version}}"
+    title="GiftTrack Gift Form">
+
+Here's a list of the information that can be entered for a gift.
+All but the gift name are optional.
+
+- Gift Name
+- Description
+- Price in whole dollars
+- Purchased? - This indicates whether the gift is merely an idea
+  or has already been purchased.
+- Website URL - This is an address of a web page that describes the gift.
+- Photo - This is a photo of the gift,
+  taken with your phone camera or found in your photo library.
+- Image URL - This is a web address of a photo of the gift.
+- Location - This is a description of where the gift can be found.
+  For gifts that have not yet been purchased,
+  this could be the name of a store where the gift can be purchased.
+  For gifts that have been purchased, this could be
+  a location in your home where the gift has been hidden.
+- Map - This is a map that shows where the gift can be purchased.
