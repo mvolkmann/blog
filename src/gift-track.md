@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Overview
+
 GiftTrack is an iOS application for keeping track of
 gift ideas and purchased gifts for
 multiple people and multiple occasions throughout the year.
@@ -15,22 +17,25 @@ To use the app:
 2. Tap "Occasions" and add occasions.
 3. Tap "Gifts" and add gifts for specific people and occasions.
 
-Gift descriptions can include ...
-TODO: Add a screenshot and describe all the possible inputs.
-
 The app is free but is limited to
 tracking gifts for two people and two occasions.
 If you attempt to add more people or occasions,
 you will be prompted to make an in-app purchase which
 enables tracking gifts for an unlimited number of people and occasions.
 
+## Deleting Data
+
 To delete a person, occasion, or gift, swipe left
 to reveal a "Delete" button and tap it.
+
+## Moving and Copying Gifts
 
 To move or copy a gift to a different person and/or occasion,
 tap the gift, tap the "Move" or "Copy" button,
 select the target person and occasion,
 and tap the "Move" or "Copy" button again.
+
+## Customizing Colors and Start Screen
 
 To change the background and title colors, tap "Settings",
 tap one of the color circles, and select a new color.
