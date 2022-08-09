@@ -36,13 +36,18 @@ When prompted about merging contacts, click "Don't Merge".
 The record type "Users" is provided by default
 and is a collection of iCloud user accounts.
 
-Each container has a development and production databases.
+A container is a space in the cloud that stores all of your saved data.
+Each application can have its own container or
+a container can be shared between multiple apps.
+Each container has development and production databases.
 
 The web-based CloudKit Console supports
 querying, creating, updating, and deleting records.
 
+To add the use of CloudKit to a project:
+
 1. Click the top item in the Navigator.
-1. Click the first target.
+1. Click the main target.
 1. Click the "Signing and Capabilities" tab.
 1. Click the "+" in the upper-right to add a capability.
 1. Double-click "iCloud".
@@ -60,11 +65,6 @@ querying, creating, updating, and deleting records.
 1. Click the "CloudKit Console" button.
 1. Sign in using your Apple Developer account
 1. Click the big "CloudKit Database" button.
-
-1. In the first dropdown under "Records", select "Private Database"
-   to store data that is not shared with other users.
-
-1. . Here we can create a default container for the app. A container is a space in the cloud that stores all of your saved data. You can use a container per application or a single container to share data between multiple apps.
 
 After the first record is saved in the container,
 make the records of that type queryable.
