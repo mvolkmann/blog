@@ -22,8 +22,23 @@ Factors to consider include:
 For iOS the preferred approach is to use the SwiftUI framework
 with the Swift programming language.
 
-For Android the preferred approach is to use the ? framework
+For Android the preferred approach is to use the Jetpack Compose framework (release in July 2021)
 with the Kotlin programming language.
+Jetpack Compose was created by Google and is well-supported (promoted?) by Intellij.
+Jetpack Compose replaces the "View?" API in the same way that
+on iOS, SwiftUI replaces UIKit.
+
+|                            | Android         | iOS         |
+| -------------------------- | --------------- | ----------- |
+| imperative framework       | XML Views       | UIKit       |
+| declarative framework      | Jetpack Compose | SwiftUI     |
+| older programming language | Java            | Objective C |
+| newer programming language | Kotlin          | Swift       |
+| preferred IDE              | Android Studio  | Xcode       |
+
+TODO: Change all the things in the table above to be links to their main sites.
+
+Retrofit is the standard networking library for Android apps.
 
 ### Pros
 
