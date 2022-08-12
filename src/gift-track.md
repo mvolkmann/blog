@@ -71,7 +71,7 @@ All but the gift name are optional.
 
 - Gift Name
 - Description
-- Price in whole dollars
+- Price in U.S. dollars
 - Purchased? - This indicates whether the gift is merely an idea
   or has already been purchased.
 - Website URL - This is an address of a web page that describes the gift.
