@@ -6263,7 +6263,7 @@ To use StoreKit in an app:
     class StoreKitStore: NSObject, ObservableObject {
         // This is a Set of purchasable product ids.
         private var allProductIdentifiers =
-            Set(["r.mark.volkmann-gmail.com.gift-track"])
+            Set(["r.mark.volkmann.gmail.com.GiftTrack"])
 
         private var productsRequest: SKProductsRequest?
 
