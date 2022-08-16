@@ -11,7 +11,7 @@ CloudKit supports three kinds of databases.
 
 - Public is for databases that are shared between all users of an application.
 - Private is for databases that are only for the current user of an application.
-- Shared is for databases that are shared between multiple applications.
+- Shared is for databases that are shared between multiple ???.
 
 A database has a collection of "record types"
 which are like tables in a relational database.
