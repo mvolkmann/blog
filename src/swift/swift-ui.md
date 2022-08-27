@@ -2471,6 +2471,24 @@ extension Text {
 }
 ```
 
+The `minimumScaleFactor(percent)` view modifier can be applied to a `Text` view.
+It causes the font size to be scaled down in order to get the text
+to fit within its frame.
+For example, `Text(myTitle).font(.title).minimumScaleFactor(0.75)`
+will use the `title` font size if the text will fit,
+but will scale as low as 75% of that font size.
+It uses the largest size that will fit that is between
+100% and 75% of the requested font size.
+If the text doesn't fit at 75% of the requested font size,
+it will be elided (truncated with ... at the end).
+
+The `lineLimit(n)` view modifier can be applied to a `Text` view.
+It limits the number of lines on which the text can be wrapped.
+If more lines are needed, the text is elided.
+
+Both view modifiers described above can be applied to the same `Text` view
+to achieve both effects.
+
 ### `TextField`
 
 This provides single-line text entry.
