@@ -788,6 +788,21 @@ struct Constants {
 Note how a nested struct is used to group related constants.
 An example reference to one of these is `Constants.Colors.primary`.
 
+### Running Code When View Appears
+
+There are three ways to specify code to run
+when a view is created or first appears.
+
+1. Place code in the view initializer (`init`).
+1. Attached an `onAppear` view modifier to the outermost view
+   returned by the `body` function.
+1. Attached an `task` view modifier to the outermost view
+   returned by the `body` function.
+
+The `task` view modifier takes a closure that can use the `await` keyword.
+The `onAppear` view modifier also takes a closure,
+but its code can only use the `await` keyword if it is wrapped in a `Task`.
+
 ### Extracting Views
 
 When the `body` of a view is longer than what can be displayed on the screen
@@ -799,15 +814,14 @@ There are three options for doing this.
 3. Move some of the content to a new struct that
    inherits from `View` and has its own `body` property.
 
-The last two options are useful when arguments need to be passed
-to customize what is rendered.
+Creating a computed property is useful for cases where the extracted code
+is only useful in the current view and no arguments need to be provided.
+Creating a method is similar, but allows arguments to be passed.
+Creating a new struct is useful when the new view might be used by other views.
+In this case, consider moving it to its own source file.
 
 Command-click a view to get a context menu that contains the options
 "Extract to Variable", "Extract to Method", and "Extract Subview".
-
-If a new struct is created and it might be used by other source files,
-it should be placed in its own source file.
-Otherwise it can reside in the same source file from which it was extracted.
 
 ### @State Property Wrapper
 
