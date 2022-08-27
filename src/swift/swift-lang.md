@@ -2199,14 +2199,16 @@ or the `default` case must be included.
 To iterate over a range of integers, use a `for`-`in` loop with a range operator.
 See the "Ranges" section for more detail on these.
 
-If the current iteration value is not needed,
-use an underscore for the variable name.
-
 ```swift
 for frame in 1...10 {
     print(frame) // prints integers from 1 to 10 inclusive
 }
+```
 
+If the current iteration value is not needed,
+use an underscore for the variable name.
+
+```swift
 let times = 3
 for _ in 0..<times {
     print("Hello") // prints 3 times
@@ -2220,6 +2222,29 @@ use a `for`-`in` loop.
 let names = ["Maisey", "Ramsay", "Oscar", "Comet"]
 for name in names { // variable name does not need to be declared
     print(name)
+}
+```
+
+A `where` clause can be added to restrict the items processed.
+
+```swift
+enum Size { case small, medium, large }
+
+struct Dog {
+    let name: String
+    let breed: String
+    let size: Size
+}
+
+let dogs = [
+    Dog(name: "Maisey", breed: "Treeing Walker Coonhound", size: .medium),
+    Dog(name: "Ramsay", breed: "Native American Indian Dog", size: .large),
+    Dog(name: "Oscar", breed: "German Shorthaired Pointer", size: .medium),
+    Dog(name: "Comet", breed: "Whippet", size: .small),
+]
+
+for dog in dogs where dog.size == .medium {
+    print(dog.name) // Maisey and Oscar
 }
 ```
 
