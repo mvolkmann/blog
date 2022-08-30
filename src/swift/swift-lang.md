@@ -1772,6 +1772,34 @@ for color in fruitColors.values { // can add .sorted()
 }
 ```
 
+The `default` argument provides default values for missing keys.
+
+```swift
+// This holds the sum of the scores for each person.
+var scoreMap: [String: Int] = [:]
+
+func addScore(_ score: Int, to name: String) {
+    scoreMap[name, default: 0] += score
+}
+
+addScore(85, to: "Mark")
+addScore(90, to: "Tami")
+addScore(93, to: "Mark")
+print(scoreMap) // ["Mark": 178, "Tami": 90]
+
+// This holds an Array of all the scores for each person.
+var scoresMap: [String: [Int]] = [:]
+
+func collectScore(_ score: Int, to name: String) {
+    scoresMap[name, default: []].append(score)
+}
+
+collectScore(85, to: "Mark")
+collectScore(90, to: "Tami")
+collectScore(93, to: "Mark")
+print(scoresMap) // ["Mark": [85, 93], "Tami": [90]]
+```
+
 `Dictionary` instance properties include the following:
 
 | Property   | Description                                                    |
