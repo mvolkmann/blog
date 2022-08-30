@@ -1108,6 +1108,28 @@ Literal `Character` values are delimited by double-quotes.
 | `lowercased()` | returns `Character` that is lowercase version |
 | `uppercased()` | returns `Character` that is uppercase version |
 
+## Dates
+
+Swift provides the `Date` and `Calendar` structs for operating on dates.
+
+TODO: Add more detail here with lots of examples!
+
+Date/time strings in ISO 8601 format have content like "2022-08-30T15:39:19Z".
+To convert one of these strings to a Swift `Date`:
+
+```swift
+let formatter = ISO8601DateFormatter()
+let date = formatter.date(from: dateString) ?? .now
+```
+
+To get the number of days between two dates:
+
+```swift
+let days = Calendar.current.dateComponents(
+    [.day], from: date1, to: date2
+).day ?? 0
+```
+
 ## Ranges
 
 There are many uses of ranges including:
@@ -3332,6 +3354,18 @@ use the `Bundle` class as follows:
 ```swift
 // VERIFY THIS!
 let json = Bundle.main.decode(SomeType.self, from: "some-file.json")
+```
+
+To convert JSON data that uses snake-case in keys to camel-case names,
+
+```swift
+decoder.keyDecodingStrategy = .convertFromSnakeCase
+```
+
+To convert ISO 8601 date strings to Swift dates:
+
+```swift
+decoder.dateDecodingStrategy = .iso8601
 ```
 
 ## Concurrency

@@ -10,6 +10,8 @@ layout: topic-layout.njk
 - Create a new iOS app in Xcode.
   The project name will be the name of the widget displayed to the user,
   so choose a name that will be meaningful to users.
+- To enable users to configure the widget, check the checkbox for
+  "Include Configuration Intent"
 - Select File ... New ... Target...
 - Select "Widget Extension".
 - Click the "Next" button.
@@ -52,3 +54,7 @@ When adding source files within the widget folder of the Navigator,
 add them to the widget extension target.
 To do this, click a file in the Navigator, open the Inspector on the right,
 and click the checkbox for the target under "Target Membership".
+
+## Data
+
+Widgets can get data from network calls.
