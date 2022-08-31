@@ -4068,6 +4068,11 @@ To change this see {% aTargetBlank
 Even if you enter no value, a comment with "//" and an empty line
 will still be added at the beginning of each new Swift file.
 
+By default files are only accessible from their associated target.
+If an app has multiple targets and a source file should be shared between them,
+select the file in the Navigator, open the Inspector on the right,
+and check the checkboxes for each target that should have access to the file.
+
 #### Navigator
 
 The Navigator has nine icon buttons at the top.
