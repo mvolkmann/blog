@@ -913,6 +913,15 @@ Numeric `Foundation` functions include:
 | `acos(number)`        | returns arc cosine in radians             |
 | `atan(number)`        | returns arc tangent in radians            |
 
+To format a `Double` value as a `String` with a limited number of decimal places
+use the `String` initializer that takes a format string and the value.
+For example:
+
+```swift
+let angle = 57.2169308
+let formatted = String(format: "Angle: %.2f", angle) // 57.22
+```
+
 ### String and Character Type
 
 The `String` type is a `struct` that represents a sequence of Unicode characters.

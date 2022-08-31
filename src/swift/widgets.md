@@ -58,3 +58,45 @@ and click the checkbox for the target under "Target Membership".
 ## Data
 
 Widgets can get data from network calls.
+
+## Widget Sizes
+
+Four sizes can be supported.
+These are represented by the
+
+To specify the sizes a widget supports, call `.supportedFamilies(sizes)`
+on the `IntentConfiguration` object returned by the `body` computed property
+of the struct that inherits from `Widget`.
+The value passed to this (`sizes`) is an array of `WidgetFamily` enum values
+that include `.systemSmall`, `.systemMedium`, `.systemLarge`,
+and `systemExtraLarge`.
+
+When users install the widget they can select one of the supported sizes.
+The selected size can be determined from the following environment value:
+
+```swift
+@Environment(\.widgetFamily) var family
+```
+
+This value can be used in the `body` computed property
+of the struct that inherits from `View` to decide what to render.
+
+## Reload Budget
+
+In order to conserve system resources and battery,
+iOS limits the number of times a widget can be reloaded each day.
+A typical number of daily refreshes is between 40 and 70
+which is approximately every 15 to 60 minutes.
+
+For more detail, see {% aTargetBlank
+"https://developer.apple.com/documentation/widgetkit/keeping-a-widget-up-to-date",
+"Keeping a Widget Up To Date" %}.
+
+## Widget Title
+
+The title displayed under the widget is the display name of the associated app.
+To configure this, clicking the top entry in the Navigator,
+select the app target, click the "General" tab,
+and enter a title in the "Display Name" input in the "Identity" section.
+The widget target also has a "Display Name" value
+but it's unclear how that is used.

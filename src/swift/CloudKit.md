@@ -86,3 +86,9 @@ make the records of that type queryable.
 For a good example of using CloudKit including performing CRUD operations
 and subscribing to be notified of changes see
 {% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo", "CloudKitDemo" %}.
+
+## Querying
+
+When querying for records, to limit the fields included in the returned data,
+set the `desiredKeys` property on the `CKQueryOperation` object
+to an array of property name strings.
