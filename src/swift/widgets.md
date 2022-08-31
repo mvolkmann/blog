@@ -150,3 +150,14 @@ WidgetCenter.shared.getCurrentConfigurations { result in
     }
 }
 ```
+
+## "Live Activities" Widgets
+
+iOS 16 beta 4 adds support for live activities widgets on the lock screen.
+These are supported by the new ActivityKit framework.
+
+From {% aTargetBlank "https://developer.apple.com/news/?id=hi37aek8",
+"Apple News and Updates" %},
+"Live Activities and ActivityKit won’t be included
+in the initial public release of iOS 16.
+Later this year, they'll be publicly available in an update."
