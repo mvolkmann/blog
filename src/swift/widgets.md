@@ -201,6 +201,36 @@ WidgetCenter.shared.getCurrentConfigurations { result in
 To run widget code instead of app code from Xcode,
 select the widget target from the target dropdown at the top.
 
+## Making a Widget Configurable
+
+The steps to make a widget configurable are:
+
+1. Verify that the widget target contains a `.intentdefinition` file.
+   If not, add a new file to the target and
+   select the "SiriKit Intent Definition File" template.
+1. Associate this file with the app and widget targets by
+   checking the appropriate checkboxes in the file Inspector.
+1. Add and define parameters.
+
+The screenshot below shows defining a parameter called "Name"
+that allows the user to enter a name.
+
+<img alt="Widget Intent Configuration" style="width: 80%"
+    src="/blog/assets/SwiftUI-widget-intent-configuration.png?v={{pkg.version}}"
+    title="Widget Intent Configuration">
+
+Note that a "Type" (set to "String"), a "Default Value",
+and a "Siri Dialog Prompt" are provided.
+
+The parameter values entered by user, or their default values, can be
+accessed in the `getTimeline` method of the widgets `IntentTimelineProvider.
+This is where entry objects that provide data to the widget are created.
+For example, to access the value of the "Name" parameter in the screenshot above:
+
+```swift
+let name = configuration.value(forKey: "Name") as? String ?? "unknown"
+```
+
 ## Customizing "Add Widget" Button Color
 
 When users go through the process of adding a widget,
@@ -215,6 +245,7 @@ To customize this for a given widget:
 
 A widget can include multiple tap targets that each
 open the associated app on a different screen.
+
 TODO: Show how to implement this.
 
 ## Supporting Multiple Widgets
@@ -236,6 +267,8 @@ struct AppNameWidgets: WidgetBundle {
     }
 }
 ```
+
+Remove the `@main` annotation from each of the widgets?
 
 ## Lock Screen Widgets
 
