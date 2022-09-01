@@ -14,34 +14,70 @@ that each launch the app starting on a different screen.
 As of iOS 16 there are three kinds of widgets:
 home screen widgets, lock screen widgets, and live activity widgets.
 
-## Managing Widgets
+## Managing Home Screen Widgets
 
-To add a widget:
+To add a home screen widget:
 
-- install the app
-- long press any home screen
-- tap the "+" in the upper-left
-- scroll down to find the app name and tap it
-- scroll horizontally until the desired size preview is displayed
-- tap the "Add Widget" button
+- Install the app.
+- Long press any home screen.
+- Tap the "+" in the upper-left.
+- Scroll down to find the app name and tap it.
+- Scroll horizontally until the desired size preview is displayed.
+- Tap the "Add Widget" button.
 
 To rearrange widgets:
 
-- long press any home screen
-- drag widgets to their desired location
-- press the "Done" button in the upper-right
+- Long press any home screen.
+- Drag widgets to their desired location.
+- Press the "Done" button in the upper-right.
 
 To remove a widget:
 
-- long press the widget
-- select "Remove Widget"
+- Long press the widget.
+- Select "Remove Widget".
 
 To configure a widget:
 
-- long press the widget
-- select "Edit Widget" (only appears for widgets that support editing)
-- make choices from the presented options
-- tap outside the widget to save the changes and close it
+- Long press the widget.
+- Select "Edit Widget" (only appears for widgets that support editing).
+- Make choices from the presented options.
+- Tap outside the widget to save the changes and close it.
+
+## Managing Lock Screen Widgets
+
+Lock screen widgets are only supported in iOS 16 and above.
+
+Lock screens display a selected wallpaper. It seems that wallpapers
+created before iOS 16 do not support lock screen widgets. Apparently
+lock screen widgets can only be added to wallpapers created in iOS 16.
+
+To select a lock screen wallpaper to customize:
+
+- Long press on the current lock screen.
+- Authenticate with Face ID if requested.
+- Scroll horizontally to select the wallpaper to customize.
+- Tap the "Customize" button below a wallpaper or
+  tap the "+" button on the "ADD NEW" wallpaper to create a new one.
+  If the "Customize" button below a pre-iOS 16 wallpaper is tapped,
+  the only option is "ADD NEW".
+
+An alternative way to select a wallpaper to customize is to:
+
+- Open the Settings app.
+- Select "Wallpaper".
+- Tap the "Customize" button below an existing wallpaper
+  or tap "Add New Wallpaper".
+- Tap "Add New".
+
+To customize the widgets on a wallpaper:
+
+- Tap the outlined area below the time
+  to display a sheet of widgets that can be added.
+- Select any number widgets to add, but only as many as will fit in the area.
+- Close the sheet by tapping the "X" button or tapping outside the sheet.
+
+To delete a lock screen widget from the wallpaper being customized,
+tap it and then tap the "-" button that appears.
 
 ## Setup Steps
 
@@ -195,6 +231,12 @@ WidgetCenter.shared.getCurrentConfigurations { result in
     }
 }
 ```
+
+## Full Example
+
+For a full example of a widget, see the file {% aTargetBlank
+"https://github.com/mvolkmann/SwiftChartsDemo/blob/main/Widgets/HelloWidget.swift",
+"HelloWidget.swift" %} in the SwiftChartsDemo project.
 
 ## Running Widget Code
 
