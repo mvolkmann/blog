@@ -5,6 +5,44 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Overview
+
+Widgets provide a view of data associated with an app.
+Tapping them launches the associated app.
+A widget can define multiple touch targets
+that each launch the app starting on a different screen.
+As of iOS 16 there are three kinds of widgets:
+home screen widgets, lock screen widgets, and live activity widgets.
+
+## Managing Widgets
+
+To add a widget:
+
+- install the app
+- long press any home screen
+- tap the "+" in the upper-left
+- scroll down to find the app name and tap it
+- scroll horizontally until the desired size preview is displayed
+- tap the "Add Widget" button
+
+To rearrange widgets:
+
+- long press any home screen
+- drag widgets to their desired location
+- press the "Done" button in the upper-right
+
+To remove a widget:
+
+- long press the widget
+- select "Remove Widget"
+
+To configure a widget:
+
+- long press the widget
+- select "Edit Widget" (only appears for widgets that support editing)
+- make choices from the presented options
+- tap outside the widget to save the changes and close it
+
 ## Setup Steps
 
 - Create a new iOS app in Xcode.
@@ -113,6 +151,9 @@ as described in the "Reload Budget" section above.
 Each widget defines a `Provider` struct that includes a `getTimeline` method.
 This method creates an array of objects that inherit from `TimelineEntry`.
 These provide data to the widget.
+They must contain a `date` property of type `Date`,
+but can include additional properties.
+They can define methods, but none are required.
 The array must contain at least one entry object.
 
 The next step is to create a `Timeline` object that
@@ -159,6 +200,22 @@ WidgetCenter.shared.getCurrentConfigurations { result in
 
 To run widget code instead of app code from Xcode,
 select the widget target from the target dropdown at the top.
+
+## Customizing "Add Widget" Button Color
+
+When users go through the process of adding a widget,
+the "Add Widget" button has a default blue color.
+To customize this for a given widget:
+
+- select the `Assets.xcassets` file of the widget in the Navigator
+- select "AccentColor"
+- select a color
+
+## Multiple Tap Targets
+
+A widget can include multiple tap targets that each
+open the associated app on a different screen.
+TODO: Show how to implement this.
 
 ## Supporting Multiple Widgets
 
