@@ -160,6 +160,26 @@ WidgetCenter.shared.getCurrentConfigurations { result in
 To run widget code instead of app code from Xcode,
 select the widget target from the target dropdown at the top.
 
+## Supporting Multiple Widgets
+
+To support more than one widget in an app,
+implement each widget as describe above
+and then define a `WidgetBundle` struct in the target of the widgets.
+For example:
+
+```swift
+import SwiftUI
+import WidgetKit
+
+@main
+struct AppNameWidgets: WidgetBundle {
+    var body: some Widget {
+        MyFirstWidget()
+        MySecondWidget()
+    }
+}
+```
+
 ## Lock Screen Widgets
 
 See {% aTargetBlank
