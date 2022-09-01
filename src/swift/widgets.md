@@ -81,6 +81,10 @@ The selected size can be determined from the following environment value:
 This value can be used in the `body` computed property
 of the struct that inherits from `View` to decide what to render.
 
+To determine the selected widget size in the `getTimeline` method
+in order to provide different entry data based on this,
+use `context.family` which has an enum value of type `WidgetFamily`.
+
 ## Reload Budget
 
 In order to conserve system resources and battery,
@@ -150,6 +154,17 @@ WidgetCenter.shared.getCurrentConfigurations { result in
     }
 }
 ```
+
+## Running Widget Code
+
+To run widget code instead of app code from Xcode,
+select the widget target from the target dropdown at the top.
+
+## Lock Screen Widgets
+
+See {% aTargetBlank
+"https://swiftwithmajid.com/2022/08/30/lock-screen-widgets-in-swiftui/",
+"Lock screen widgets with SwiftUI" %}.
 
 ## "Live Activities" Widgets
 
