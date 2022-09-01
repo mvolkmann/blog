@@ -161,3 +161,44 @@ From {% aTargetBlank "https://developer.apple.com/news/?id=hi37aek8",
 "Live Activities and ActivityKit won’t be included
 in the initial public release of iOS 16.
 Later this year, they'll be publicly available in an update."
+
+From {% aTargetBlank
+"https://developer.apple.com/documentation/activitykit/displaying-live-data-on-the-lock-screen-with-live-activities",
+
+"Displaying live data on the Lock Screen with Live Activities" %},
+"A Live Activity can be active for up to eight hours
+unless your app or the user explicitly ends it.
+After this limit, the system automatically ends a Live Activity
+if the user or your app hasn’t ended it.
+In this ended state, the Live Activity remains on the Lock Screen for
+up to four additional hours before the system removes it.
+The user can also choose to remove it.
+As a result, a Live Activity remains on the Lock Screen
+for a maximum of twelve hours."
+
+"Although Live Activities leverage WidgetKit’s functionality,
+they aren’t widgets. In contrast to the timeline mechanism you
+use to update the user interface of your widgets,
+you update a Live Activity from your app with ActivityKit
+or with remote push notifications."
+
+"To add support for Live Activities to your app:"
+
+- Create a widget extension if you haven’t already added one to your app.
+- Open your app’s `Info.plist` file and add an entry with the key
+  `NSSupportsLiveActivities` of type Boolean with the value `YES`.
+- In your code, define a set of `ActivityAttributes` and
+  the `Activity.ContentState` for your Live Activities.
+  You’ll use them to start, update, and end a Live Activity.
+- Add code to create a widget and return an `ActivityConfiguration`
+  in your widget implementation as shown in the example below.
+- If your app already contains a widget, add your Live Activity to your
+  `WidgetBundle` or create one as described in Creating a Widget Extension.
+  Skip this step if you only add a widget extension to support Live Activities.
+- Add code to start, update, and end the Live Activity
+  and to create its user interface as described below.
+
+How can you enable live activities in the Settings app of the phone?
+
+How can you use `areActivitiesEnabled` and `activityStateUpdates`
+to detect whether live activities are enabled on the phone?
