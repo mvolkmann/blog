@@ -224,10 +224,63 @@ The app can do this by importing `WidgetKit`
 and running code like the following:
 
 ```swift
+// This reloads the timeline of all widgets associated with the app.
+WidgetCenter.shared.reloadAllTimelines()
+
+// This approach can be used to only reload the timeline of some of the widgets.
 WidgetCenter.shared.getCurrentConfigurations { result in
     guard case .success(let widgets) = result else { return }
     for widget in widgets {
+        // Could just call this with a hardcoded widget kind value.
         WidgetCenter.shared.reloadTimelines(ofKind: widget.kind)
+    }
+}
+```
+
+## Touch Targets in Widgets
+
+All widget sizes except small can define multiple touch targets
+that when tapped open the associated app and navigate to a specific screen.
+
+When a small-sized widget is tapped, it can navigate to
+a single specific screen in the app by calling
+`.widgetURL("some-screen-identifier")`
+on the outermost view rendered by the widget.
+
+To define touch targets, wrap parts of the widget view
+in `Link` views that specify a `destination` URL.
+For example:
+
+```swift
+Link(destination: URL(string: "screen-id-1")!) {
+    // A section of the widget view goes here.
+}
+```
+
+Suppose the app uses a `TabView` for displaying the main screens.
+In the source file that defines the `App` sub-struct
+add code like the following:
+
+```swift
+@State private var selectedTag = "screen-id-1"
+
+var body: some Scene {
+    WindowGroup {
+        TabView(selection: $selectedTab) {
+            FirstScreen()
+                .tabItem {
+                    Label("Screen 1", systemImage: "some-icon")
+                }
+                .tag("screen-id-1")
+            SecondScreen()
+                .tabItem {
+                    Label("Screen 2", systemImage: "another-icon")
+                }
+                .tag("screen-id-2")
+        }
+        .onOpenURL { url in
+            selectedTag = url.absoluteString
+        }
     }
 }
 ```
