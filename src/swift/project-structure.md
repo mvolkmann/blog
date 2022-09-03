@@ -205,10 +205,12 @@ myVeryLongFunctionName(
 ## Use SwiftLint
 
 See <a href="./SwiftLint/">SwiftLint</a>.
+Avoid enforcing code rules whose violations cannot be detected by this tool.
 
 ## Use SwiftFormat
 
 See <a href="./SwiftFormat/">SwiftFormat</a>.
+Avoid requiring formatting that cannot be automated using this tool.
 
 ## Access Specifiers
 
