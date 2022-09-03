@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-This post documents my recommended structure for SwiftUI projects.
+This post documents my recommended structure and practices for SwiftUI projects.
 
 ## Groups
 
@@ -25,28 +25,33 @@ Recommended group names include:
   This group contains files that define extensions to builtin structs
   like `Date`, `String`, and `View`.
   These tend to be copied from project to project as they evolve.
+  The names of files in this group should end with "Extension".
 
 - Models
 
   This group contains files that define model structs, classes, and enums.
-  These hold all the data used by the app.
+  Instances of these hold all the data used by the app.
+  The names of files in this group do not need to end with "Model".
 
 - Screens
 
   This group contains files that implement entire screens of the app
   as opposed to sections of a screen.
   Screens typically use views defined in the Views group.
+  The names of files in this group should end with "Screen".
 
 - Services
 
   This group contains files that abstract away the details of
   network communication and interactions of packages like
   Core Data, CloudKit, and HealthKit.
+  The names of files in this group should end with "Service".
 
 - Views
 
   This group contains files that define views used by
   screens and other views.
+  The names of files in this group do not need to end with "View".
 
 - ViewModels
 
@@ -54,6 +59,7 @@ Recommended group names include:
   inherit from `ObservableObject`, define `@Published` properties,
   and define methods that operate on the data they encapsulate.
   Views can use the properties and methods in these classes.
+  The names of files in this group should end with "ViewModel".
 
 ## Group and file order
 
@@ -62,56 +68,90 @@ belong above all the groups.
 The groups follow these files and should be in alphabetical order.
 The files within each group should be in alphabetical order.
 
-## File name suffixes within groups
+## View Models
 
-The names of files in the "Extensions" group should end with "Extension".
-The names of files in the "Screens" group should end with "Screen".
-The names of files in the "Services" group should end with "Service".
-The names of files in the "ViewModels" group should end with "ViewModel".
-The names of files in all other groups
-do not need to end with a particular suffix.
-
-## When to use View Models
-
-In strict implementations of the MVVM pattern,
+In strict implementations of the MVVM pattern
 views get all their state data from view models
 and delegate all their non-view logic to view models.
 
 In less strict implementations of the MVVM pattern,
 state data and logic that is specific to a single view
 is implemented in the view using `@State` properties.
+Only state data and logic that is used by multiple views
+is implemented in view model classes.
 
-## When to use Services
+## Services
 
 Services are `.swift` files that abstract away the details of
-network communication and interactions of packages like
+network communication and interactions with packages like
 Core Data, CloudKit, and HealthKit.
-Prefer using methods of services instead of directly coding
-such interactions in view models or views.
+View and view model source files should prefer using methods of services
+instead of directly coding such interactions.
 
-## Defining Constants
+## Constants
 
 The Swift naming convention for constants is the same as for variables.
-They begin with a lowercase letter and use camel-case,
-unlike many other programming languages that use all uppercase
+They begin with a lowercase letter and use camel-case.
+This differs from most other programming languages that use all uppercase.
+
 There are several ways to define constants in Swift.
 
+One approach is to define static properties.
+
 ```swift
-private static let myConstant1 = "some value"
-private static let myConstant2 = "other value"
+private static let defaultName = "Anonymous"
+private static let defaultSize = 6.2
+```
 
-enum MyConstants {
-    static let static let myConstant1 = "some value"
-    static let static let myConstant2 = "other value"
-}
+Another approach is to wrap them in a case-less `enum`.
+Using an `enum` instead of a `struct` or `class` prevents
+creating instances of the wrapping construct.
 
+```swift
 enum MyConstants {
-    case myConstant1 = "some value"
-    case myConstant2 = "other value"
+    static let static let defaultName = "Anonymous"
+    static let static let defaultSize = 6.2
 }
 ```
 
-kk## Order of sections within files and use of pragma marks
+Yet another approach is to use a normal `enum`.
+This has the advantage that `switch` statements
+can enforce exhaustive handling of the cases.
+However, it requires all cases to have the same type.
+
+```swift
+enum MyConstants {
+    case defaultSize = 6.2
+    case smallSize = 3.1
+    case largeSize = 13.1
+}
+```
+
+## Order Within Files
+
+A recommended order for groups of items in a source file is:
+
+1. initializers
+1. constants
+1. state properties (properties with property wrappers like
+   `@Environment`, `@EnvironmentObject`, `@Published`, and `@State`)
+1. non-state properties (both normal and computed)
+1. methods
+
+## Pragma Marks
+
+Files over a certain size in number of lines
+should include pragma marks to separate sections.
+This adds labels in the Xcode final breadcrumb dropdown
+which makes it easier to select and jump to a specific item.
+
+Each pragma mark is a single-line comment following the pattern:
+
+```swift
+// MARK: - section-name
+```
+
+Including the hyphen adds a divider line in the breadcrumb dropdown.
 
 ## Indentation and wrapping style
 
@@ -120,9 +160,27 @@ Use 4-space indentation.
 Most lines that are longer than 80 characters should be wrapped to be no longer
 than that in order to allow comfortably viewing two or three files side-by-side.
 
-Function signatures and calls that do not fit on a single line (80 characters)
-should place each parameter/argument on a separate line indented
-by four additional spaces. For example:
+`Array` and `Dictionary` literals that do not fit on a single line
+should place each item on a separate line,
+indented by four additional spaces. For example:
+
+```swift
+let colorNames = [
+    "Red",
+    "Green",
+    "Blue"
+]
+
+let colorNameToHex = [
+    "Red": "ff0000",
+    "Green": "00ff00",
+    "Blue": "0000ff"
+]
+```
+
+Function signatures and calls that do not fit on a single line
+should place each parameter/argument on a separate line,
+indented by four additional spaces. For example:
 
 ```swift
 func myVeryLongFunctionName(
@@ -159,8 +217,23 @@ Newer APIs utilize the Swift `async` and `await` keywords.
 
 Calls to functions that take a completion handler can be wrapped in
 an `async` function so they can be used in a more modern way.
-For example:
+This pattern is illustrated by the following contrived example.
+both `myAsyncFunction` and `oldStyleFunction` could take arguments.
 
 ```swift
-TODO: ADD THIS!
+func myAsyncFunction() async throws -> SomeReturnType {
+    // The "return" here is only necessary if some code precedes it.
+    return try await withCheckedThrowingContinuation { continuation in
+        // The trailing closure here is the completion handler.
+        oldStyleFunction() { result, error in
+            if let error = error {
+                continuation.resume(throwing: error)
+            } else if let result = result {
+                continuation.resume(returning: result)
+            } else {
+                continuation.resume(throwing: "no result found")
+            }
+        }
+    }
+}
 ```
