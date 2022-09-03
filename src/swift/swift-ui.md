@@ -1911,8 +1911,10 @@ struct ContentView: View {
 
     var body: some View {
         GroupBox(
-            label: Label("Wayne Gretzky",
-                         systemImage: "sportscourt").font(.title)
+            label: Label(
+                "Wayne Gretzky",
+                systemImage: "sportscourt"
+            ).font(.title)
         ) {
             ScrollView {
                 Text(ContentView.text)
@@ -2990,8 +2992,13 @@ ColorPicker(
 
 ### `Label`
 
-This is a combination of an icon and text.
-The icon appears before the text.
+This is a combination of an icon and text
+where the icon appears before the text.
+It takes a String for the text and an `systemImage` string
+that is the name of an icon in SF Symbols.
+By default both the icon and the text are displayed.
+To render only the text, add the modifier `.labelStyle(TitleOnlyLabelStyle)`.
+To render only the icon, add the modifier `.labelStyle(IconOnlyLabelStyle)`.
 
 ```swift
 Label("Rain", systemImage: "cloud.rain")
