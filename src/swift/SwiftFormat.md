@@ -87,7 +87,7 @@ To configure Xcode to run SwiftFormat every time the project is built, see
 To configure the rules used by SwiftFormat,
 create the file `.swiftformat` at the root of each project.
 This file should contain one line for each desired command-line option.
-Here are recommended rule seetings:
+Here are recommended rule settings:
 
 ```
 --hexgrouping 2,2
