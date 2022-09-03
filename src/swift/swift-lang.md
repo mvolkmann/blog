@@ -2773,6 +2773,9 @@ var mark = Programmer(name: "Mark", languages: ["JavaScript", "Swift"])
 mark.log() // Mark is a programmer that knows JavaScript & Swift.
 ```
 
+Marking classes as `final` prevents defining subclasses
+and can improve build times.
+
 Definitions of both classes and structs can be nested inside each other
 to limit their visibility and/or scope their names.
 

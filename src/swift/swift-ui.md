@@ -3615,7 +3615,8 @@ These include:
 ## Environment
 
 SwiftUI provides many values to all views through the "environment".
-Any view in the view hierarchy can access environment data`using the`@Environment` property wrapper.
+Any view in the view hierarchy can access environment data
+using the `@Environment` property wrapper.
 
 Highlights of environment data include:
 
@@ -3651,6 +3652,8 @@ Highlights of environment data include:
   This describes the default font.
 
 It is also possible to add custom data to the environment.
+Any view below the view where the environment data is added can access it.
+
 The following example demonstrates this by adding
 the custom environment value "primaryColor".
 Environment values provided by Apple are accessed and modified in the same way.

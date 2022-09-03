@@ -5,7 +5,10 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Using CloudKit requires an Apple Developer account.
+## Overview
+
+CloudKit is an Apple cloud-based database solution that is similar to Firebase.
+Using it requires an Apple Developer account.
 
 CloudKit supports three kinds of databases.
 
@@ -86,6 +89,11 @@ make the records of that type queryable.
 For a good example of using CloudKit including performing CRUD operations
 and subscribing to be notified of changes see
 {% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo", "CloudKitDemo" %}.
+
+## Sample Code
+
+See the app {% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo",
+"CloudKitDemo" %}.
 
 ## Querying
 
