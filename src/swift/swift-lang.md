@@ -50,9 +50,6 @@ Key facts about Swift include the following:
 - {% aTargetBlank "https://www.apple.com/swift/playgrounds/",
   "Swift Playgrounds" %} iOS app - free
 
-- {% aTargetBlank "https://cs193p.sites.stanford.edu",
-  "Stanford CS193p - Developing Apps for iOS" %} course by Paul Hegarty - free
-
 - {% aTargetBlank "https://www.youtube.com/c/PaulHudson", "Hacking with Swift" %}
   video series on Swift and SwiftUI by Paul Hudson (@twostraws) - free
 
@@ -68,8 +65,14 @@ Key facts about Swift include the following:
 - {% aTargetBlank "https://www.youtube.com/c/StewartLynch", "CreaTECH Solutions" %}
   YouTube videos by StewartLynch- free
 
+- {% aTargetBlank "https://seanallen.co", "Sean Allen" %}
+  YouTube videos and paid courses
+
 - {% aTargetBlank "https://codewithchris.com/swift-tutorial/", "Code With Chris" %}
   by Chris Ching
+
+- {% aTargetBlank "https://cs193p.sites.stanford.edu",
+  "Stanford CS193p - Developing Apps for iOS" %} course by Paul Hegarty - free
 
 - {% aTargetBlank "https://www.udemy.com/course/ios-13-app-development-bootcamp/",
   "iOS & Swift - The Complete iOS App Development Bootcamp" %}
