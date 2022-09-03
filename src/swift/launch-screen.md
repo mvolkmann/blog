@@ -51,3 +51,9 @@ When testing the launch screen in the Simulator,
 if it fails to show the latest code changes,
 select Device ... Restart to clear its cache
 and run the app again.
+
+## Device Details
+
+When testing the launch screen in the Simulator,
+if it fails to show the latest code changes,
+it may be necessary to restart the device.
