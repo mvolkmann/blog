@@ -26,7 +26,7 @@ that contains the version of Swift being used such as "5.6".
 ## Running from a Terminal
 
 To run SwiftFormat from a terminal,
-cd to a project directory and enter `swiftformat .`.
+cd to a project directory and enter `swiftformat --swiftversion 5.7 .`.
 This will output the number of files that were modified
 and the number of files that were evaluated.
 
