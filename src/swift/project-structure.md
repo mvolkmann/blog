@@ -165,12 +165,14 @@ should place each item on a separate line,
 indented by four additional spaces. For example:
 
 ```swift
+// SwiftFormat "--wrapcollections before-first" does this.
 let colorNames = [
     "Red",
     "Green",
     "Blue"
 ]
 
+// SwiftFormat "--wrapcollections before-first" does this.
 let colorNameToHex = [
     "Red": "ff0000",
     "Green": "00ff00",
@@ -183,6 +185,7 @@ should place each parameter/argument on a separate line,
 indented by four additional spaces. For example:
 
 ```swift
+// SwiftFormat "--wrapparameters before-first" does this.
 func myVeryLongFunctionName(
     veryLongLabelNumber1: Type1,
     veryLongLabelNumber2: Type2,
@@ -191,6 +194,7 @@ func myVeryLongFunctionName(
     ... code goes here ...
 }
 
+// SwiftFormat "--wraparguments before-first" does this.
 myVeryLongFunctionName(
     veryLongLabelNumber1: veryLongValueNumber1,
     veryLongLabelNumber2: veryLongValueNumber2,
