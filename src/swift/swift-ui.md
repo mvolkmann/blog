@@ -840,10 +840,14 @@ Changes to these properties cause the view body to be rebuilt.
 Properties declared with `@State` usually include the `private`
 access control keyword because the data is only used by that view.
 
-Any state held in a view using the `@State` property modifier
-should be transient state such as data related to styling.
-It is recommended to use `@State` sparingly
-and prefer holding data in model objects instead.
+Updates to `@State` properties should occur in the main queue.
+To do this from asynchronous code, wrap the update as follows:
+
+```swift
+DispatchQueue.main.async {
+    myState = newValue
+}
+```
 
 To initialize a state property based on
 data passed to an initializer (`init` method),
