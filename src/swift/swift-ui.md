@@ -559,8 +559,12 @@ and how the described components map to SwiftUI views.
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/labels/",
     "Label" %}
 
-  - plain or styled text
-  - SwiftUI creates this with `Label` or `Text`
+  - renders an icon and/or text
+  - takes a String for the text and an `systemImage` string
+    that is the name of an icon in SF Symbols
+  - by default displays both
+  - to render only the text, add the modifier `.labelStyle(TitleOnlyLabelStyle)`
+  - to render only the icon, add the modifier `.labelStyle(IconOnlyLabelStyle)`
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/page-controls/",
@@ -1522,9 +1526,6 @@ UIKit uses `UIColor` instead of `Color`.
 To create a `UIColor` from a `Color`,
 pass the `Color` to a `UIColor` initializer.
 For example, `let redUIColor = UIColor(Color.red)`.
-
-iOS 16 adds the `gradient` modifier on `Color` objects
-that provides a subtle gradient effect.
 
 ## Container Views
 
@@ -2596,10 +2597,18 @@ It renders a button for pasting data from the system clipboard.
 
 This creates a hyperlink like an HTML `a` element.
 Clicking it opens the associated URL in Safari.
-This works in the Simulator, but Preview is not able to open Safari.
+These work in the Simulator, but Preview is not able to open Safari.
 
 ```swift
-Link("link", destination: url)
+Link(
+    "link text",
+    destination: URL(string: "https://some-domain/some-path"
+)
+
+Link(
+    destination: URL(string: "https://some-domain/some-path"),
+    label: SomeView
+)
 ```
 
 ### `Menu`
