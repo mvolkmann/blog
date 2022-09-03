@@ -237,3 +237,10 @@ func myAsyncFunction() async throws -> SomeReturnType {
     }
 }
 ```
+
+## Emojis in Debug Messages
+
+In order to make debugging messages stand out in the console,
+begin them with an emoji such as ✅ or ❌.
+
+To add an emoji in Xcode, press cmd-ctrl-space.
