@@ -1523,6 +1523,9 @@ To create a `UIColor` from a `Color`,
 pass the `Color` to a `UIColor` initializer.
 For example, `let redUIColor = UIColor(Color.red)`.
 
+iOS 16 adds the `gradient` modifier on `Color` objects
+that provides a subtle gradient effect.
+
 ## Container Views
 
 Container views act as a container of other views

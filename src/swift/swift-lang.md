@@ -1124,7 +1124,28 @@ Literal `Character` values are delimited by double-quotes.
 
 Swift provides the `Date` and `Calendar` structs for operating on dates.
 
-TODO: Add more detail here with lots of examples!
+The `formatted` method can return part of a `Date` as a `String`.
+For example:
+
+```swift
+let now = Date() // run on September 3, 2022 at 2:16:41 PM
+print(now.formatted(.dateTime.day())) // 3
+print(now.formatted(.dateTime.dayOfYear())) // 246
+print(now.formatted(.dateTime.era())) // AD
+print(now.formatted(.dateTime.hour())) // 2 PM
+print(now.formatted(.dateTime.minute())) // 16
+print(now.formatted(.dateTime.month(.wide))) // September
+print(now.formatted(.dateTime.quarter())) // Q3
+print(now.formatted(.dateTime.second())) // 41
+print(now.formatted(.dateTime.timeZone())) // CDT
+print(now.formatted(.dateTime.week())) // 36
+print(now.formatted(.dateTime.weekday(.wide))) // Saturday
+print(now.formatted(.dateTime.year())) // 2022
+```
+
+For more date formatting options, see {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/dateformatter",
+"DateFormatter" %}.
 
 Date/time strings in ISO 8601 format have content like "2022-08-30T15:39:19Z".
 To convert one of these strings to a Swift `Date`:
