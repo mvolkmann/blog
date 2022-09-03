@@ -87,12 +87,17 @@ To configure Xcode to run SwiftFormat every time the project is built, see
 To configure the rules used by SwiftFormat,
 create the file `.swiftformat` at the root of each project.
 This file should contain one line for each desired command-line option.
-Here is an example:
+Here are recommended rule seetings:
 
 ```
---commas inline
---disable spaceInsideComments
---hexgrouping 2
+--hexgrouping 2,2
+--indent 4
+--maxwidth 80
+--wraparguments before-first
+--wrapcollections before-first
+--wrapconditions after-first
+--wrapparameters before-first
+--disable trailingCommas,wrapMultilineStatementBraces
 ```
 
 ## Rules
