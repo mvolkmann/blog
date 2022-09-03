@@ -206,6 +206,13 @@ See <a href="./SwiftLint/">SwiftLint</a>.
 
 See <a href="./SwiftFormat/">SwiftFormat</a>.
 
+## Access Specifiers
+
+Apply the most restrictive access specifiers possible
+to avoid unintentionally access items.
+For example, most properties and many methods
+in structs and classes should be `private`.
+
 ## Preference for async/await over completion handlers (callbacks)
 
 Many older APIs provide asynchronous functions that take
