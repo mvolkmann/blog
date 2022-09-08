@@ -304,8 +304,12 @@ to reveal customization options.
 The steps to make a widget configurable are:
 
 1. Verify that the widget target contains a `.intentdefinition` file.
-   If not, add a new file to the target and
-   select the "SiriKit Intent Definition File" template.
+   If not, add a new file to the target,
+   select the "SiriKit Intent Definition File" template,
+   click the "+" in the lower left,
+   select select "New Intent",
+   check the checkbox for "Intent is eligible for widgets", and
+   uncheck the two checkboxes related to Siri.
 1. Associate this file with the app and widget targets by
    checking the appropriate checkboxes in the file Inspector.
 1. Add and define parameters.
