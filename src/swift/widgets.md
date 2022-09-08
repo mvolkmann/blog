@@ -116,12 +116,6 @@ options include:
 - `after` to get a new timeline after a specified date/time
 - `never` to only get a new timeline when the app makes one available
 
-## Configuration
-
-Widgets can have static configuration that users cannot customize
-or an `IntentConfiguration` which allows users to long press the widget
-to reveal customization options.
-
 ## Adding Files
 
 When adding source files within the widget folder of the Navigator,
@@ -302,6 +296,10 @@ To run widget code instead of app code from Xcode,
 select the widget target from the target dropdown at the top.
 
 ## Making a Widget Configurable
+
+Widgets can have static configuration that users cannot customize
+or an `IntentConfiguration` which allows users to long press the widget
+to reveal customization options.
 
 The steps to make a widget configurable are:
 
