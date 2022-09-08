@@ -285,6 +285,11 @@ var body: some Scene {
 }
 ```
 
+## Debugging Output
+
+To see output from `print` calls in widget code inside the Xcode console,
+run the widget target instead of the app target.
+
 ## Full Example
 
 For a full example of a widget, see the file {% aTargetBlank
@@ -364,6 +369,34 @@ struct AppNameWidgets: WidgetBundle {
 ```
 
 Remove the `@main` annotation from each of the widgets?
+
+## Sharing Data Between App and Widgets
+
+1. Select the top entry in the navigator.
+1. Click the app target.
+1. Click the "Signing & Capabilities" tab.
+1. Click the "+" in the upper left.
+1. Double-click "App Groups".
+1. Click the "+" in the "App Groups" section.
+1. Enter "group." and the bundle identifier.
+1. Click the widget target.
+1. Repeat the previous steps to add the same app group.
+
+`@AppStorage` provides an easier way to access data in UserDefaults.
+But supposedly widgets cannot use that.
+To access UserDefaults data in a widget `Provider` struct,
+
+1. Add the following at the top of the struct definition:
+
+   ```swift
+   let userDefaults = UserDefaults(suiteName: "group.com.empowerme.EMR")!
+   ```
+
+1. In the `getTimeline` method, get a value with the following:
+
+   ```swift
+   let someValue = userDefaults.string(forKey: "someKey") ?? "someDefault"
+   ```
 
 ## Lock Screen Widgets
 
