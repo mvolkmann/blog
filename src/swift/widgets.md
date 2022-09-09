@@ -310,8 +310,16 @@ The steps to make a widget configurable are:
    select select "New Intent",
    check the checkbox for "Intent is eligible for widgets", and
    uncheck the two checkboxes related to Siri.
-1. Associate this file with the app and widget targets by
-   checking the appropriate checkboxes in the file Inspector.
+1. If not already present, add an intent named "Configuration".
+1. Check the "Intent is eligible for widgets" checkbox.
+1. Associate the `.intentdefinition` file with the app and widget target
+   by checking the appropriate checkboxes in the file Inspector.
+1. Create an `Info.plist` file in the widget directory.
+1. Associate the `Info.plist` file with the widget target
+   by checking the appropriate checkboxes in the file Inspector.
+1. Add an array property named "NSUserActivityTypes".
+1. Add an element to the array with the value "ConfigurationIntent".
+
 1. Add and define parameters.
 
 The screenshot below shows defining a parameter called "Name"
