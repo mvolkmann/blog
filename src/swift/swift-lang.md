@@ -4082,18 +4082,11 @@ like these where several placeholders are replaced:
 //
 ```
 
-To change this see {% aTargetBlank
-"https://useyourloaf.com/blog/changing-xcode-header-comment/",
-"Changing Xcode Header Comment" %}. The steps are:
+To prevent Xcode from adding the comment lines above to new files, edit the file
+`/Applications/Xcode.app/Contents/Developer/Library/Xcode/Templates/File Templates/Multiplatform/Source/Swift File.xctemplate/__FILEBASENAME__.swift`
+and delete the line `//___FILEHEADER__` and the blank line that follows.
 
-1. In Xcode, create a "Property List" file
-   with the name `IDETemplateMacros.plist` and
-   save it in `~/Library/Developer/Xcode/UserData`.
-1. Add the key `FILEHEADER' whose value is
-   what you would like to see in the supplied comments.
-
-Even if you enter no value, a comment with "//" and an empty line
-will still be added at the beginning of each new Swift file.
+#### Mapping Files to Targets
 
 By default files are only accessible from their associated target.
 If an app has multiple targets and a source file should be shared between them,

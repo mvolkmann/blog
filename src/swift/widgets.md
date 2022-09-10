@@ -315,8 +315,7 @@ The steps to make a widget configurable are:
 1. Associate the `.intentdefinition` file with the app and widget target
    by checking the appropriate checkboxes in the file Inspector.
 1. Create an `Info.plist` file in the widget directory.
-1. Associate the `Info.plist` file with the widget target
-   by checking the appropriate checkboxes in the file Inspector.
+1. Do not associate the `Info.plist` file with the widget target.
 1. Add an array property named "NSUserActivityTypes".
 1. Add an element to the array with the value "ConfigurationIntent".
 
