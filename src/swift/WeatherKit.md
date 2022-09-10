@@ -59,3 +59,6 @@ from an app. I got the errors "Mescal Failed",
 "Error Domain=WeatherDaemon.WDSJWTAuthenticatorService.Errors", and
 "Encountered an error when fetching weather data subset"
 when I tried immediately.
+
+See this {% aTargetBlank "https://developer.apple.com/forums/thread/710839",
+"forum post" %}.
