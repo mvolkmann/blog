@@ -84,20 +84,22 @@ tap it and then tap the "-" button that appears.
 - Create a new iOS app in Xcode.
   The project name will be the name of the widget displayed to the user,
   so choose a name that will be meaningful to users.
-- To enable users to configure the widget, check the checkbox for
-  "Include Configuration Intent"
 - Select File ... New ... Target...
 - Select "Widget Extension".
 - Click the "Next" button.
-- In "Product Name", enter a widget name typically ending in "Widget".
+- In "Product Name", enter a name such as simply
+  "Widget" when the app with have only one associated widget
+  or "Widgets" when the app with have multiple associated widget.
+- To enable users to configure the widget, check the checkbox for
+  "Include Configuration Intent"
 - Click the "Finish" button.
 - Click the "Activate" button.
 
 This creates a new folder in the Navigator
-whose name matches the widget name.
+whose name matches the new target name.
 This folder will contain a `.swift` file
-whose name also matches the widget name.
-The file contains starting code that only renders the current time.
+whose name also matches the target name.
+This file contains starting code that only renders the current time.
 
 ## Terminology
 
@@ -118,10 +120,20 @@ options include:
 
 ## Adding Files
 
-When adding source files within the widget folder of the Navigator,
+After adding source files within the widget group in the Navigator,
 add them to the widget extension target.
 To do this, click a file in the Navigator, open the Inspector on the right,
-and click the checkbox for the target under "Target Membership".
+and click the checkbox for the widget target under "Target Membership".
+
+## Static Widgets
+
+Static widgets cannot be configured by the user.
+
+```swift
+
+```
+
+## Configurable Widgets
 
 ## Data
 
