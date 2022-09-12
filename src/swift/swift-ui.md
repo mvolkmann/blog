@@ -3941,21 +3941,14 @@ struct ContentView: View {
         Dog(name: "Comet", breed: "Whippet")
     ]
 
-    private func deleteDog(at offsets: IndexSet) {
-        dogs.remove(atOffsets: offsets)
-    }
-
-    private func moveDog(source: IndexSet, destination: Int) {
-        dogs.move(fromOffsets: source, toOffset: destination)
-    }
-
     var body: some View {
         NavigationView {
             VStack {
                 List {
+                    // A nested ForEach is required in order to
+                    // enable swipe to delete/move.
                     // The onDelete and onMove methods exists on ForEach,
-                    // but not on List because
-                    // a List can include static rows.
+                    // but not on List because a List can include static rows.
                     ForEach(dogs, id: \.name) { dog in
                         DogRow(dog: dog)
                     }
@@ -3968,6 +3961,14 @@ struct ContentView: View {
                 }
             }
         }
+    }
+
+    private func deleteDog(at offsets: IndexSet) {
+        dogs.remove(atOffsets: offsets)
+    }
+
+    private func moveDog(source: IndexSet, destination: Int) {
+        dogs.move(fromOffsets: source, toOffset: destination)
     }
 }
 ```
