@@ -24,12 +24,12 @@ See the WWDC 2022 video {% aTargetBlank
 1. Click the "Continue" button.
 1. Enter an app description.
 1. Paste the app bundle ID.
-1. Under "Capabilities", check the checkbox for "WeatherKit".
+1. Under "Capabilities", check the checkbox for WeatherKit.
 1. Click the "Continue" button.
-1. In the left nav, click "Services".
-1. Under "WeatherKit", click "View".
-1. Click the "Continue" button.
-1. Click the "Register" button.
+1. Click the "App Services" tab.
+1. Check the checkbox for WeatherKit.
+1. Click the "Save" button.
+
 1. Is it also necessary to create a provisioning profile here?
 
    1. In the left nav, click "Profiles".
@@ -45,20 +45,25 @@ See the WWDC 2022 video {% aTargetBlank
    1. Enter a profile name (could use the app name).
    1. Click the "Generate" button.
    1. Click the "Download" button.
+   1. In the Finder, open the "Downloads" directory.
    1. Double-click the downloaded `.mobileprovision` file
       to install the profile.
 
 1. In Xcode, click the top entry in the Navigator.
-1. Select the target that will use WeatherKit.
-1. Click the "Signing & Capabilities" tab.
-1. Click the "+" in the upper-left.
-1. Find WeatherKit and double-click it.
+1. For each target that will use WeatherKit.
 
-It may be necessary to wait a half hour before trying to use WeatherKit
-from an app. I got the errors "Mescal Failed",
+   1. Select the target.
+   1. Click the "Signing & Capabilities" tab.
+   1. Click the "+" in the upper-left.
+   1. Verify that the correct Team is selected.
+   1. Find WeatherKit and double-click it.
+
+Wait around 30 minutes for the WeatherKit service to be enabled for your app.
+
+I got the errors "Mescal Failed",
 "Error Domain=WeatherDaemon.WDSJWTAuthenticatorService.Errors", and
 "Encountered an error when fetching weather data subset"
-when I tried immediately.
+when I ran the app.
 
 See this {% aTargetBlank "https://developer.apple.com/forums/thread/710839",
 "forum post" %}.
