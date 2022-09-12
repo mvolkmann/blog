@@ -800,10 +800,14 @@ when a view is created or first appears.
 1. Place code in the view initializer (`init`).
 1. Attached an `onAppear` view modifier to the outermost view
    returned by the `body` function.
-1. Attached an `task` view modifier to the outermost view
+1. Attached a `task` view modifier to the outermost view
    returned by the `body` function.
 
-The `task` view modifier takes a closure that can use the `await` keyword.
+The `task` view modifier takes a closure that is run in an asynchronous content
+and so can use the `await` keyword.
+If the user navigates away from the view before the code is run,
+certain asynchronous tasks such as network requests are automatically cancelled.
+
 The `onAppear` view modifier also takes a closure,
 but its code can only use the `await` keyword if it is wrapped in a `Task`.
 
@@ -2177,20 +2181,16 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Transportation(kind: "Car").tabItem {
-                Image(systemName: "car")
-                Text("Car")
+                Label("Car", systemImage: "car")
             }
             Transportation(kind: "Bus").tabItem {
-                Image(systemName: "bus")
-                Text("Bus")
+                Label("Bus", systemImage: "bus")
             }
             Transportation(kind: "Train").tabItem {
-                Image(systemName: "tram")
-                Text("Train")
+                Label("Train", systemImage: "tram")
             }
             Transportation(kind: "Airplane").tabItem {
-                Image(systemName: "airplane")
-                Text("Airplane")
+                Label("Airplane", systemImage: "airplane")
             }
         }
         .onAppear() {
