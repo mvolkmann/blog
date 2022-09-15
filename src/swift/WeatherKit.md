@@ -31,25 +31,6 @@ See the WWDC 2022 video {% aTargetBlank
 1. Click the "Continue" button.
 1. Click the "Register" button.
 
-1. Is it also necessary to create a provisioning profile here?
-
-   1. In the left nav, click "Profiles".
-   1. Click the "+" after the heading "Profiles".
-   1. Select the "iOS App Development" radio button.
-   1. Click the "Continue" button.
-   1. Select an app ID from the dropdown.
-   1. Click the "Continue" button.
-   1. Select an existing certificate.
-   1. Click the "Continue" button.
-   1. Select the checkboxes for the devices to be included.
-   1. Click the "Continue" button.
-   1. Enter a profile name (could use the app name).
-   1. Click the "Generate" button.
-   1. Click the "Download" button.
-   1. In the Finder, open the "Downloads" directory.
-   1. Double-click the downloaded `.mobileprovision` file
-      to install the profile.
-
 1. In Xcode, click the top entry in the Navigator.
 1. For each target that will use WeatherKit.
 
@@ -60,12 +41,60 @@ See the WWDC 2022 video {% aTargetBlank
       the upper-right corner of the developer.apple.com web page.
    1. Find WeatherKit and double-click it.
 
-Wait around 30 minutes for the WeatherKit service to be enabled for your app.
+It may be necessary to wait around 30 minutes
+for the WeatherKit service to be enabled for your app.
 
-I got the errors "Mescal Failed",
-"Error Domain=WeatherDaemon.WDSJWTAuthenticatorService.Errors", and
-"Encountered an error when fetching weather data subset"
-when I ran the app.
+## Sample Code
 
-See this {% aTargetBlank "https://developer.apple.com/forums/thread/710839",
-"forum post" %}.
+```swift
+import SwiftUI
+import WeatherKit
+
+struct ContentView: View {
+    @StateObject private var locationManager = LocationManager()
+
+    let weatherService = WeatherService.shared
+    @State private var weather: Weather?
+
+    private var temperature: String {
+        guard let weather else { return "" }
+        let current = weather.currentWeather
+        return current.wind.formatted()
+    }
+
+    private var wind: String {
+        guard let weather else { return "" }
+        let current = weather.currentWeather
+        return current.wind.formatted()
+    }
+
+    var body: some View {
+        VStack {
+            Text("WeatherKitDemo").font(.headline)
+            Text("Temperature: \(temperature)")
+            Text("Wind: \(wind)")
+        }
+        .padding()
+        .task(id: locationManager.currentLocation) {
+            do {
+                if let location = locationManager.currentLocation {
+                    weather = try await weatherService.weather(for: location)
+                }
+            } catch {
+                print("ContentView.body: error =", error)
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+## Limitations
+
+Weather data cannot be retrieved in a preview or in the Simulator.
+A real device must be used.
