@@ -46,6 +46,11 @@ for the WeatherKit service to be enabled for your app.
 
 ## Sample Code
 
+See the demo project {% aTargetBlank
+"https://github.com/mvolkmann/WeatherKitDemo", "WeatherKitDemo" %} in GitHub.
+
+Here is some of the code from that project:
+
 ```swift
 import SwiftUI
 import WeatherKit
