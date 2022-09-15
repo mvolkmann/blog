@@ -28,7 +28,8 @@ See the WWDC 2022 video {% aTargetBlank
 1. Click the "Continue" button.
 1. Click the "App Services" tab.
 1. Check the checkbox for WeatherKit.
-1. Click the "Save" button.
+1. Click the "Continue" button.
+1. Click the "Register" button.
 
 1. Is it also necessary to create a provisioning profile here?
 
@@ -55,7 +56,8 @@ See the WWDC 2022 video {% aTargetBlank
    1. Select the target.
    1. Click the "Signing & Capabilities" tab.
    1. Click the "+" in the upper-left.
-   1. Verify that the correct Team is selected.
+   1. Verify that the correct Team is selected which is listed in
+      the upper-right corner of the developer.apple.com web page.
    1. Find WeatherKit and double-click it.
 
 Wait around 30 minutes for the WeatherKit service to be enabled for your app.
