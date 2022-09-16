@@ -7,6 +7,14 @@ layout: topic-layout.njk
 
 ## Overview
 
+WeatherKit provides a variety of weather data for a given location
+including condition, temperature, humidity, precipitation, wind,
+and weather alerts.
+Usage is free for up to 500,000 calls per month
+and has a monthly cost beyond that.
+
+WeatherKit requires iOS 16+.
+
 See the WWDC 2022 video {% aTargetBlank
 "https://developer.apple.com/videos/play/wwdc2022/10003/", "Meet WeatherKit" %}.
 
