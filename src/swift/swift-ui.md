@@ -6474,6 +6474,8 @@ One approach for demonstrating iOS apps to others
 using a real device instead of the Simulator is to use QuickTime.
 The steps to do this are:
 
+1. Enable "Developer Mode" on an iPhone
+   (Settings ... Privacy & Security ... Developer Mode).
 1. Attach an iPhone to a computer running macOS using a USB cable.
 1. Launch the QuickTime Player application.
 1. Select File ... New Movie Recording.
