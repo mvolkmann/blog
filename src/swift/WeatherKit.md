@@ -56,56 +56,14 @@ for the WeatherKit service to be enabled for your app.
 
 See the demo project {% aTargetBlank
 "https://github.com/mvolkmann/WeatherKitDemo", "WeatherKitDemo" %} in GitHub.
+Here are screenshots from this app in light and dark mode.
 
-Here is some of the code from that project:
-
-```swift
-import SwiftUI
-import WeatherKit
-
-struct ContentView: View {
-    @StateObject private var locationManager = LocationManager()
-
-    let weatherService = WeatherService.shared
-    @State private var weather: Weather?
-
-    private var temperature: String {
-        guard let weather else { return "" }
-        let current = weather.currentWeather
-        return current.wind.formatted()
-    }
-
-    private var wind: String {
-        guard let weather else { return "" }
-        let current = weather.currentWeather
-        return current.wind.formatted()
-    }
-
-    var body: some View {
-        VStack {
-            Text("WeatherKitDemo").font(.headline)
-            Text("Temperature: \(temperature)")
-            Text("Wind: \(wind)")
-        }
-        .padding()
-        .task(id: locationManager.currentLocation) {
-            do {
-                if let location = locationManager.currentLocation {
-                    weather = try await weatherService.weather(for: location)
-                }
-            } catch {
-                print("ContentView.body: error =", error)
-            }
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-```
+<img alt="WeatherKit Demo light" style="width: 40%"
+  src="/blog/assets/WeatherKitDemo-light.png?v={{pkg.version}}"
+  title="WeatherKit Demo light">
+<img alt="WeatherKit Demo dark" style="width: 40%"
+  src="/blog/assets/WeatherKitDemo-dark.png?v={{pkg.version}}"
+  title="WeatherKit Demo dark">
 
 ## Limitations
 
