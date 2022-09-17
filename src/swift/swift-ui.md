@@ -2237,7 +2237,7 @@ struct Page: View {
             Text(title).font(.headline)
             Image(systemName: imageName)
                 .resizable()
-                .scaledToFit() // needed?
+                .scaledToFit() // or .scaledToFill()
                 .frame(width: 100, height: 100)
                 .foregroundColor(.red)
             Text(description)
@@ -3065,6 +3065,66 @@ TODO: What is this?
 ### `TupleView`
 
 TODO: What is this?
+
+## Fonts
+
+The `font` view modifier specifies the font, size, and weight
+to be used in a view.
+This is typically applied to `Text` views and
+`Image` views that display an SF Symbol icon.
+
+Here are examples of using the default system font:
+
+```swift
+Text("Hello").font(.system(size: 24, weight: .bold))
+Image(systemName: "cloud.snow").font(.system(size: 64))
+```
+
+Another option is to use dynamic fonts whose size changes
+based on user preferences.
+The dynamic font names, from largest to smallest size, are:
+
+- largeTitle
+- title
+- title2
+- title3
+- headline // same size as .body but bold
+- body
+- callout
+- subheadline
+- footnote
+- caption
+- caption2
+
+Users can scale the dynamic fonts used in all apps from
+Settings ... Display & Brightness ... Text Size.
+Move the slider to one of the seven options.
+The middle option (4th one) is the default.
+The screenshots below show all the dynamic fonts in the largest (1st option),
+default (4th option), and smallest (7th option) text sizes.
+
+<img alt="SwiftUI large dynamic fonts" style="width: 30%"
+  src="/blog/assets/SwiftUI-dynamic-fonts-large.png?v={{pkg.version}}"
+  title="SwiftUI large dynamic fonts">
+<img alt="SwiftUI medium dynamic fonts" style="width: 30%"
+  src="/blog/assets/SwiftUI-dynamic-fonts-medium.png?v={{pkg.version}}"
+  title="SwiftUI medium dynamic fonts">
+<img alt="SwiftUI small dynamic fonts" style="width: 30%"
+  src="/blog/assets/SwiftUI-dynamic-fonts-small.png?v={{pkg.version}}"
+  title="SwiftUI small dynamic fonts">
+
+Fonts can be scaled even larger using an accessibility option.
+Select Settings ... Accessibility ... Display & Text Size ... Larger Text.
+Enable "Larger Accessibility Sizes" and move the slider to one of the 12 options.
+The screenshot below shows all the dynamic fonts in the largest possible
+accessibility size.
+
+<img alt="SwiftUI accessibility dynamic fonts" style="width: 30%"
+  src="/blog/assets/SwiftUI-dynamic-fonts-accessibility.jpg?v={{pkg.version}}"
+  title="SwiftUI accessibility dynamic fonts">
+
+In apps that use dynamic fonts, test all screens at various font size
+preferences to verify that the resulting layout is acceptable.
 
 ## Floating Action Button
 
@@ -4963,7 +5023,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appearance.backgroundColor = .systemRed // a bit more muted than .red
         appearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.white
-            //.font: UIFont.monospacedSystemFont(ofSize: 36, weight: .black)
+            //.font: UIFont.monospacedSystemFont(ofSize: 36, weight: .bold)
         ]
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
 
