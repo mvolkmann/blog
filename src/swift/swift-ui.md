@@ -58,6 +58,8 @@ A new "App" project begins with the following files.
 - `{app-name}.swift`
 
   This defines the main struct which implements the `App` protocol.
+  It is preceded by the `@main` attribute
+  which marks the entry point of the app.
   It has computed property named `body`
   whose value implements the `Scene` protocol.
   The actual value is an instance of `WindowGroup`.
@@ -1480,17 +1482,13 @@ it copies every property of the struct.
 
 ### @StateObject
 
-This creates an instance of an `ObservableObject`
+The `@StateObject` property wrapper is used to
+create an instance of an `ObservableObject`
 which is an object that publishes changes to its properties
 that are annotated with the `@Published` property wrapper.
 When the values of these properties change,
 the associated view `body` will be recomputed.
-
-Applying the `@StateObject` property wrapper
-to a view property that holds a class instance
-allows the view `body` to be recomputed when the
-value of any published property of the class instance is modified.
-The following example demonstrates this.
+The following example demonstrates this:
 
 ```swift
 class MyState: ObservableObject {
@@ -1515,10 +1513,12 @@ struct ContentView: View {
 
 ### @ObservedObject
 
-This subscribes to an observable object
+The `@ObservedObject` property wrapper marks a property
+that receives an instance of an `ObservableObject` subclass
+that is passed in from a parent view.
+This subscribes to changes published by an observable object
 and recomputes the associated view `body` when it changes.
-It is used in cases when an observable object is passed into a view.
-The following example demonstrates this.
+The following example demonstrates this:
 
 ```swift
 class MyState: ObservableObject {
@@ -2061,34 +2061,34 @@ This is a view that supports programmatic scrolling.
 
 ```swift
 struct ContentView: View {
-  @Namespace var topId
-  @Namespace var bottomId
+    @Namespace var topId
+    @Namespace var bottomId
 
-  var body: some View {
-      ScrollViewReader { proxy in
-          ScrollView {
-              Button("Scroll to Bottom") {
-                  withAnimation {
-                      proxy.scrollTo(bottomId)
-                  }
-              }
-              .id(topId)
+    var body: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                Button("Scroll to Bottom") {
+                    withAnimation {
+                        proxy.scrollTo(bottomId)
+                    }
+                }
+                .id(topId)
 
-              VStack(spacing: 0) {
-                  ForEach(1 ..< 101) { i in
-                      Text(String(i))
-                  }
-              }
+                VStack(spacing: 0) {
+                    ForEach(1 ..< 101) { i in
+                        Text(String(i))
+                    }
+                }
 
-              Button("Scroll to Top") {
-                  withAnimation {
-                      proxy.scrollTo(topId)
-                  }
-              }
-              .id(bottomId)
-          }
-      }
-  }
+                Button("Scroll to Top") {
+                    withAnimation {
+                        proxy.scrollTo(topId)
+                    }
+                }
+                .id(bottomId)
+            }
+        }
+    }
 }
 ```
 
@@ -6672,7 +6672,7 @@ App Clip by checking the appropriate checkboxes in the Inspector.
 App Clips differ from widgets in that they can be interactive
 whereas widgets cannot.
 
-## Questions
+## Questions/Thoughts
 
 - How can I change the default device used by new projects?
   It defaults to "iPod touch (7th generation)".
@@ -6686,6 +6686,9 @@ whereas widgets cannot.
 
 - Why do SwiftUI `ViewBuilders` support `if` and `switch` statements,
   but not `for` loops? We have to use the `ForEach` view instead.
+
+- Some method names seem longer than they should be.
+  For example, `onTapGesture` could be just `onTap`.
 
 - Why doesn't SwiftUI provide a way to specify default styling
   that applies to all views in an app,

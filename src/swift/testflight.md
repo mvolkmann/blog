@@ -200,6 +200,9 @@ Each version remains available for download for 90 days.
    - Click "App Review" in the left nav.
    - Click the "Resolve" link on the far right.
 
+Test users must install the TestFlight app on their devices
+in order to download test builds of the app and provide feedback.
+
 ### Part 7 - Submit for Review
 
 1. Return to the App Store Connect web page and the "TestFlight" tab.

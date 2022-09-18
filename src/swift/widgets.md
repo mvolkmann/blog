@@ -8,9 +8,15 @@ layout: topic-layout.njk
 ## Overview
 
 Widgets provide a view of data associated with an app.
-Tapping them launches the associated app.
+Tapping a widget launches the associated app.
 A widget can define multiple touch targets
 that each launch the app starting on a different screen.
+
+Widgets are read-only and cannot use input views like `Button` and `TextField`.
+If such views are included, the widget will compile and the views will render.
+However, tapping input views will launch the associated app
+rather than allow the user to interact with them.
+
 As of iOS 16 there are three kinds of widgets:
 home screen widgets, lock screen widgets, and live activity widgets.
 

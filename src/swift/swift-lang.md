@@ -226,6 +226,22 @@ To install a package in Xcode:
 - Select the package
 - Click the "Add Package" button.
 
+## Libraries
+
+Xcode is aware of many standard libraries such as SwiftUI and UIKit.
+To use the public types, functions, and values that a library defines,
+import them. For example, `import SwiftUI`.
+
+Packages that are added to a project as described in the previous section
+must also be imported.
+
+It is possible for two libraries/packages to define the same names.
+One approach to resolve such conflicts is to prefix the names
+with the name of the library/package.
+For example, `SwiftUI.List`.
+Another approach is to define type aliases and use those names.
+For example, `typealias SUIList = SwiftUI.List`.
+
 ## Comments
 
 Single-line comments begin with `//`.
