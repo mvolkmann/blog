@@ -307,11 +307,12 @@ but a different rendering mode can be selected.
 
 The rendering modes include:
 
-- Monochrome - single color
+- Monochrome - single color; seems the same as hierarchical
 - Hierarchical - single color with multiple opacity levels
 - Palette - two or three colors
 - Multicolor - seems the same as hierarchical
-- Automatic - uses the preferred rendering mode of the icon
+- Automatic - preferred rendering mode of the icon of is used;
+  corresponds to not specifying a mode, not a real mode
 
 Icons that support variable colors are grouped in the "Variable" category.
 These display additional parts of the icon as a percentage value increases.
