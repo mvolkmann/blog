@@ -3466,6 +3466,20 @@ Task {
 }
 ```
 
+The code in a `Task` runs asynchronously.
+For example, when the following function is called
+the output will be 1, 3, 2.
+
+```
+func taskDemo() {
+    print("1")
+    Task {
+        print("2")
+    }
+    print("3")
+}
+```
+
 To bridge between functions that take callback functions,
 referred to as "completion handlers", use the {% aTargetBlank
 "https://developer.apple.com/documentation/swift/3814988-withcheckedcontinuation",
