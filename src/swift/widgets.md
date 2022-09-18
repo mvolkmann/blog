@@ -91,7 +91,7 @@ tap it and then tap the "-" button that appears.
   "Widget" when the app with have only one associated widget
   or "Widgets" when the app with have multiple associated widget.
 - To enable users to configure the widget, check the checkbox for
-  "Include Configuration Intent"
+  "Include Configuration Intent".
 - Click the "Finish" button.
 - Click the "Activate" button.
 
@@ -127,7 +127,8 @@ and click the checkbox for the widget target under "Target Membership".
 
 ## Static Widgets
 
-Static widgets cannot be configured by the user.
+Static widgets cannot be configured by the user
+and have a somewhat simpler implementation.
 
 ```swift
 
@@ -410,7 +411,7 @@ To access UserDefaults data in a widget `Provider` struct,
 1. Add the following at the top of the struct definition:
 
    ```swift
-   let userDefaults = UserDefaults(suiteName: "group.com.empowerme.EMR")!
+   let userDefaults = UserDefaults(suiteName: "group.some.group.id")!
    ```
 
 1. In the `getTimeline` method, get a value with the following:
