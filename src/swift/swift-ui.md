@@ -2436,8 +2436,11 @@ Image("some-name")
 ### `AsyncImage`
 
 This asynchronously loads and displays an image.
+A specified placeholder image is displayed
+while the specified image is being downloaded.
 It works in the Simulator, but not in Preview.
-The following example renders the Swift logo.
+
+The following example renders the Swift logo:
 
 <img alt="SwiftUI AsyncImage" style="width: 40%"
     src="/blog/assets/SwiftUI-AsyncImage.png?v={{pkg.version}}"
@@ -2464,6 +2467,12 @@ struct ContentView: View {
     }
 }
 ```
+
+`AsyncImage` does not cache downloaded images,
+so they can be downloaded multiple times.
+To cache the images, see this {% aTargetBlank
+"https://stackoverflow.com/questions/69214543/how-can-i-add-caching-to-asyncimage",
+"Stack Overflow post" %}.
 
 ### `Text`
 
