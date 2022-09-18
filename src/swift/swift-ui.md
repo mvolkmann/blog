@@ -1048,7 +1048,6 @@ struct ContentView: View {
                 }
             }
             // $ in front of status is needed for a two-way binding.
-            // $ in front of status is needed for a two-way binding.
             MyTextField(label: "status", text: $status)
         }
     }
@@ -1370,6 +1369,8 @@ struct ParentView: View {
     }
 }
 ```
+
+To pass a binding to a constant value, use `.constant(value)`.
 
 ### @Environment
 
@@ -4513,6 +4514,7 @@ ViewModels ...
 - are classes (not structs) that implement the `ObservableObject` protocol
   (Making them classes allows multiple views
   to share a reference to the same object.)
+- should be marked `final` to prevent subclassing and decrease build times
 - mark the properties whose values they publish
   with the `@Published` property wrapper which is
   a shorthand for explicitly calling `objectWillChange.send()`
@@ -4892,6 +4894,8 @@ struct ContentView: View {
             Text("This is my main view.")
             Button("Show Sheet") { isSheetPresented = true }
                 .buttonStyle(.bordered)
+                // This slides up from the bottom and covers ~90% of the screen.
+                // To cover the entire screen, call fullScreenCover instead.
                 .sheet(isPresented: $isSheetPresented) {
                     // Only need to pass this argument in approach #1.
                     //MySheetView(isPresented: $isSheetPresented)

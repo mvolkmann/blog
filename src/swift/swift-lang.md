@@ -4042,6 +4042,11 @@ check "Page guide column at:", and choose a column number.
 The indentation amount and type (spaces vs. tabs)
 can also be specified here.
 
+To enable code folding, select Preferences ... Text Editing ... Display ... Code Folding Ribbon.
+This adds a code folding ribbon on the left side of editor panes.
+Click in the ribbon to fold the code at the corresponding line.
+To unfold, click again or double-click the ellipsis in the code.
+
 To duplicate a source file, select it in the Navigator
 and click File ... Duplicate.
 Oddly the context sensitive menu that is displayed when
