@@ -69,6 +69,8 @@ Each version remains available for download for 90 days.
    which is a semantic version number.
    Typically this is modified each time new features or bug fixes
    are being deployed but changing this is not required.
+   An advantage of only incrementing the build number
+   is that a new review of the app will not be triggered.
    (It seems I had to set all the "MARKETING_VERSION" values to "1"
    it order to successfully upload a build.)
 1. Set "Build" to "1". Increment this for each subsequent build.
@@ -234,3 +236,9 @@ Each version remains available for download for 90 days.
 1. Click the "Accept Invitation" link in the email.
 1. A new page opens in mobile Safari.
 1. Enter your Apple ID and password to login.
+
+### Part 10 - Sales
+
+To see statistics on app sales, browse
+{% aTargetBlank "https://appstoreconnect.apple.com", "App Store Connect" %}
+and click "Sales and Trends".
