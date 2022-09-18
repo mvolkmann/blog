@@ -2398,20 +2398,33 @@ A `Button` specifies a function to call when pressed
 using the `action` argument
 which can also be written as a trailing closure.
 
-By default buttons have no background color and the text is the accent color.
-When their `role` attribute is set to `.destructive`, the text is red.
-When their `role` attribute is set to `.cancel`, `.none`, or not specified,
-there is no visible change.
+By default buttons have no border, no background color,
+and the text is the accent color.
+
 When the `buttonStyle` view modifier is passed `.bordered`,
 the background is gray.
 When the `buttonStyle` view modifier is passed `.borderedProminent`,
 the background is the accent color and the text is white.
+In both cases no actual border is drawn.
+They just add a background color inside a rounded rectangle.
+
+To change the border shape, apply the `buttonBorderShape` view modifier
+passing it `.capsule`, `.roundedRectangle`,
+or `.roundedRectangle(radius: cornerRadius)`.
+This only takes effect when the `buttonStyle` view modifier is also applied.
 
 To change the text color,
 apply the `foregroundColor` view modifier passing it a `Color`.
 
+When their `role` attribute is set to `.destructive`, the text is red.
+When their `role` attribute is set to `.cancel`, `.none`, or not specified,
+there is no visible change.
+
 To change the background color,
-apply the `background` view modifier passing it a `Color`.
+apply the `tint` view modifier passing it a `Color`.
+
+To change the size, apply the `controlSize` modifier,
+passing it `.small` or `.large` (default is `.regular`).
 
 To disable a `Button`,
 apply the `disabled` view modifier passing it a `Bool`.
