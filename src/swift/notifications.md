@@ -312,7 +312,7 @@ extension LocalNotificationManager: UNUserNotificationCenterDelegate {
 }
 ```
 
-## Example App
+### Example App
 
 For an example of sending local notifications
 using the utility type defined above, see the {% aTargetBlank
