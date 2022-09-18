@@ -6652,6 +6652,26 @@ The steps to do this are:
 1. When finished, quit QuickTime Player without saving the recorded movie
    and eject the iPhone from Finder.
 
+## App Clips
+
+From the Apple {% aTargetBlank
+"https://developer.apple.com/documentation/app_clips/",
+"App Clips documentation" %}
+"An App Clip is a lightweight version of your app that
+offers users access to some of the app’s functionality."
+
+App Clips binaries must be small.
+For iOS 15 and before the limit is 10 MB.
+For iOS 16 and beyond the limit is 15 MB.
+
+To implement an app clip for an existing app,
+create a new target from the "App Clip" template.
+Select source files in the main app that should be shared with the
+App Clip by checking the appropriate checkboxes in the Inspector.
+
+App Clips differ from widgets in that they can be interactive
+whereas widgets cannot.
+
 ## Questions
 
 - How can I change the default device used by new projects?
