@@ -103,7 +103,8 @@ The Canvas area displays Previews of the UI running outside of a simulator.
 To hide/show the Canvas area, select Editor ... Canvas
 or press cmd-option-return.
 If Preview isn't running inside the Canvas area,
-press the "Resume" button at the top to start it.
+press the "Resume" button at the top to start it
+or press cmd-option-p.
 
 By default a preview of the view is only displayed
 when the file that defines it is selected in the Navigator.
@@ -116,10 +117,21 @@ When code changes are saved and there are no errors,
 the Preview is automatically updated.
 When there are errors, the Preview pauses and must be manually restarted
 by click the "Resume" button or pressing cmd-option-p.
-TODO: Are there other things that cause the Preview to pause?
 
 If the Canvas area displays the message "Failed to build" in the upper-left,
 click the "Diagnostics" button in the upper-right to see error messages.
+
+Typically views are added to the `body` of the currently selected source file
+by typing code into the editor pane.
+Another way to do this is to:
+
+- Open the Preview.
+- Open the Library (press cmd-shift-l).
+- Select the "Show the Views Library" tab.
+- Drag a view over the Preview without dropping it.
+- Note the popup below the Preview that indicates how it will be added.
+- Drop the view onto the Preview.
+- Configure the view in the Inspector on the right.
 
 To zoom in and out on the Preview area,
 click the magnifier glass icons in the lower right (minus and plus)
@@ -279,6 +291,57 @@ The guidelines for iOS are divided into several categories,
 three of which are Bars, Views, and Controls.
 The following summarizes what is found in those sections
 and how the described components map to SwiftUI views.
+
+## SF Symbols
+
+SF Symbols is a macOS app from Apple that provides over 4,000 icons.
+These can be rendered in custom app using the `Image` view
+with the `systemName` argument.
+
+Some symbols support multiple rendering modes
+that enable using different colors for parts of the icon.
+To see the available rendering modes for a given icon,
+select the icon and click the paint brush tab in the Inspector on the right.
+Each icon has a preferred rendering mode,
+but a different rendering mode can be selected.
+
+The rendering modes include:
+
+- Monochrome - single color
+- Hierarchical - single color with multiple opacity levels
+- Palette - two or three colors
+- Multicolor - seems the same as hierarchical
+- Automatic - uses the preferred rendering mode of the icon
+
+Icons that support variable colors are grouped in the "Variable" category.
+These display additional parts of the icon as a percentage value increases.
+To see this in action:
+
+- Select one of the icons in the "Variable category.
+- Select the paint brush tab in the Inspector on the right.
+- Select any rendering mode.
+- Activate variable color mode by clicking the
+  button to the left of the percentage slider.
+- Drag the slider to change the percentage value.
+- Note that all the displayed icons update to show the effect.
+
+Here's an example of using such an icon:
+
+```swift
+@State private var percent = 0.0
+...
+Image(systemName: "cellularbars", variableValue: percent)
+Button("Decrease") {
+    if percent > 0 { percent -= 0.1 }
+}
+Button("Increase") {
+    if percent < 1 { percent += 0.1 }
+}
+```
+
+See the {% aTargetBlank
+"https://github.com/mvolkmann/SFSymbolsDemo/tree/main", "SFSymbolsDemo" %}
+app in GitHub.
 
 ### Bars
 
@@ -659,7 +722,7 @@ and how the described components map to SwiftUI views.
 ## Icons
 
 {% aTargetBlank "https://developer.apple.com/sf-symbols/", "SF Symbols" %}
-is a library of over 3000 icons provided by Apple.
+is a library of over 4000 icons provided by Apple.
 To use it, browse the website linked above and click the "Download" link.
 This downloads a `.dmg` file.
 Double-click this and double-click the `.pkg` file icon to install
@@ -672,6 +735,21 @@ To use an icon in a SwiftUI app, add an `Image` view. For example:
 ```swift
 Image(systemName: "heart").font(.largeTitle)) // one way to set font size
 Image(systemName: "cloud.snow").font(.system(size: 64)) // another way
+```
+
+The size, weight, and color of an SF Symbols icon
+can be specified using the same view modifiers
+as are used to style `Text` views.
+
+Some SF Symbols do not have a 1-1 aspect ratio,
+so using the `frame` modifier with the same values for `width` and `height`
+can skew them.
+
+Some SF Symbols support multiple colors and optional parts.
+For example:
+
+```swift
+
 ```
 
 To use FontAwesome icons,
@@ -6561,8 +6639,8 @@ The steps to do this are:
 - How can I change the default device used by new projects?
   It defaults to "iPod touch (7th generation)".
 
-- With over 3000 icons in SF Symbols,
-  how can there be none related to sports or pets?
+- With over 4000 icons in SF Symbols,
+  how can there be none related to animals?
   Perhaps Apple feels that emojis should be used for these.
 
 - Adoption of Swift and SwiftUI would be much higher if
