@@ -4629,8 +4629,6 @@ class Model: ObservableObject {
     // that are structs, not classes, to be published.
     @Published var dogs: [Dog] = []
 
-    //private let logger = Logger()
-
     init() {
         // Start with an initial set of dogs.
         dogs.append(Dog(name: "Maisey", breed: "Treeing Walker Coonhound"))
