@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-iOS supports two kinds of notifications.
+iOS supports two kinds of user notifications.
 Local notifications are sent from an app running on the device.
 Remote (or push) notifications are sent from a server.
 
@@ -117,6 +117,8 @@ class LocalNotificationManager: NSObject, ObservableObject {
 
         // This allows presenting notifications scheduled by this app
         // while it is in the foreground.
+        // Without this, local notifications sent while
+        // the app is in the foreground will not be presented.
         notificationCenter.delegate = self
     }
 
