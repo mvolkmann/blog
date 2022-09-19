@@ -3184,19 +3184,21 @@ Image(systemName: "cloud.snow").font(.system(size: 64))
 
 Another option is to use dynamic fonts whose size changes
 based on user preferences.
-The dynamic font names, from largest to smallest size, are:
+The dynamic font names are listed below in order from largest to smallest size.
+Each is followed by the corresponding fixed size
+when the user has not changed their text size preference.
 
-- largeTitle
-- title
-- title2
-- title3
-- headline // same size as .body but bold
-- body
-- callout
-- subheadline
-- footnote
-- caption
-- caption2
+- largeTitle (35)
+- title (28)
+- title2 (23)
+- title3 (20)
+- headline (17) // same size as .body but bold
+- body (17)
+- callout (16)
+- subheadline (15)
+- footnote (13)
+- caption (12)
+- caption2 (11)
 
 Users can scale the dynamic fonts used in all apps from
 Settings ... Display & Brightness ... Text Size.

@@ -11,6 +11,9 @@ iOS supports two kinds of user notifications.
 Local notifications are sent from an app running on the device.
 Remote (or push) notifications are sent from a server.
 
+TODO: In addition to displaying notifications,
+can an app listen for notifications and act on them?
+
 ## Local Notifications
 
 Stewart Lynch created an excellent 4-part series of YouTube videos
