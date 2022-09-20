@@ -1583,6 +1583,35 @@ Typically `Color.primary` is used for text because it
 automatically switches between black for light mode and white for dark mode.
 This is the default `foregroundColor` of `Text` views.
 
+SwiftUI uses the following color terminology:
+
+- Accent Color
+
+  This is the primary theme color of controls in an app
+  such as `Button` and `TextField`.
+  It is typically be specified by setting `AccentColor` in `Assets.xcassets`.
+  This is preferred over calling the `accentColor` view modifier in code.
+  Different colors can be specified for light and dark mode.
+  Controls use the accent color for their default tint color.
+
+  Accent color is not automatically applied to
+  text-based views like `Text` and `Label`.
+  To apply the accent color to text-based views,
+  call `.foregroundColor(.accentColor)` on them.
+
+- Tint
+
+  This overrides the default accent color of controls.
+  It is not applied to text-based views.
+  It is set by calling the `tint` view modifier on a specific view.
+  User preferences cannot override this.
+
+- Foreground Color
+
+  This takes precedence over both the tint and accent color of a view.
+  It is typically only applied to text-based views.
+  To set it, call the `foregroundColor` view modifier on a specific view.
+
 There are several ways to switch between light and dark mode in the simulator.
 
 1. Press cmd-shift-a (easiest).

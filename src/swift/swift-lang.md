@@ -4394,11 +4394,19 @@ The Navigator has nine icon buttons at the top.
 
 Code is checked for errors while typing.
 Saving is not required.
-Lines with errors are indicated with red lines in the right gutter.
-Error messages are displayed in red boxes at the ends of lines
-that can be clicked to show more detail.
-Sometimes these contain a "Fix" button that can be clicked
+
+Lines with errors are indicated with red bars in the right gutter.
+By default these contains the number of errors on the line,
+an error icon (circle containing an "X"), and the first error message.
+Click anywhere in the red bar to fully display all the error messages.
+Sometimes errors contain a "Fix" button that can be clicked
 to automatically fix the error.
+
+To hide the first error message, only displaying
+the number of errors and the error icon,
+select Preferences ... General ... Issues ... Show Minimized.
+With this setting, click anywhere on a red bar,
+to see the text for all the errors on the line.
 
 To see basic documentation of a name in code, option-click it.
 For more detail, click the "Open in Developer Documentation".
