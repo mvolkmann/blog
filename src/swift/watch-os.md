@@ -194,9 +194,12 @@ To create an app that runs on both an iPhone and Apple Watch (companion apps):
 
 1. In Xcode, select File ... New ... Project...
 1. Select the "watchOS" tab.
-1. Select "iOS App with Watch App".
+1. Select "App".
 1. Click the "Next" button.
 1. Enter a project name.
+1. Select the "Watch App with New Companion iOS App" radio button.
+1. Click the "Next" button.
+1. Select the directory where the project will be saved.
 1. Click the "Create" button.
 
 The iOS app is defined by files in the "{project-name}" directory.
@@ -229,14 +232,19 @@ that can be launched together:
 
 1. Click the device dropdown at the top of Xcode.
 1. Select "Add Additional Simulators..." which opens a dialog.
-1. Click the "Simulators" tab in the left nav.
-1. Click the "+" at the bottom of the left nav.
-1. Enter a name like "iPhone 13 + Watch 7".
-1. Select an iPhone model from the "Device Type" dropdown.
+1. Enter a name such as "iPhone 14 Pro + Apple Watch 7".
+1. Select the phone device type such as "iPhone 14 Pro".
 1. Check the "Paired Apple Watch" checkbox.
 1. Click the "Next" button.
 1. Select a Watch model from the "Device Type" dropdown.
+
+1. Click the "+" at the bottom of the left nav.
+1. Select an iPhone model from the "Device Type" dropdown
+   such as "Apple Watch Series 7 (45mm)".
+1. Select an OS version from the "OS Version" dropdown
+   such as "watchOS 9.0".
 1. Click the "Create" button.
+1. The new simulator should appear in the list on the left of the dialog.
 1. Close the dialog.
 1. Select the newly created simulator pair name from the device dropdown.
 
@@ -246,9 +254,17 @@ To run both the iPhone and Apple Watch apps in the Simulator:
 1. Press the play button (triangle) to run the iOS app in the Simulator.
 1. Click the dropdown at the top that is displaying the current app name.
 1. Select the entry that begins with the app name and ends with " WatchKit App".
-1. From the device dropdown at the top, select an Apple Watch model.
 1. Press the play button (triangle) again
    to run the watchOS app in the Simulator.
 1. The debug console at the bottom will show the output from one of the apps.
    To see output from the other app, select it from the app name dropdown
    at the top of the debug console.
+
+To run on real devices, enable developer mode on both the phone and watch.
+On the phone, ADD THIS DETAIL.
+On the watch, launch the Settings app and select
+Privacy & Security ... Developer Mode and toggle it on.
+
+For an example app, see {% aTargetBlank
+"https://github.com/mvolkmann/watch-with-ios-2", "watch-with-ios-2" %}
+in GitHub.
