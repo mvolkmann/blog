@@ -76,6 +76,16 @@ Each of these are demonstrated in the examples below.
     }
 ```
 
+## Links
+
+To include links to related source files, ...
+
+## Content From Other Files
+
+To include documentation found in other files within the project, ...
+
+## Quick Help
+
 Option-click a name in a source file to see its documentation
 in "Quick Help" which appears in a popup window.
 
