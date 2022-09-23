@@ -34,8 +34,10 @@ and scenarios where calling them is expensive.
 The first paragraph is the primary description.
 All subsequent paragraphs appear in the "Discussion" section.
 
-There are two options for documenting function and method parameters
-as show in the examples below.
+There are two options for documenting function and method parameters,
+one way to document return values, and
+one way to document errors that can be thrown.
+Each of these are demonstrated in the examples below.
 
 ```swift
     /// Computes a monthly loan payment.
@@ -47,6 +49,7 @@ as show in the examples below.
     ///   - years: number of years in the loan
     ///   - interestRate: interest rate compounded monthly
     /// - Returns: the monthly payment
+    /// - Throws: `Finance.negative` if any argument is negative
     func monthlyPayment1(
         principal _: Int,
         years _: Int,
@@ -63,6 +66,7 @@ as show in the examples below.
     /// - Parameter years: number of years in the loan
     /// - Parameter interestRate: interest rate compounded monthly
     /// - Returns: the monthly payment
+    /// - Throws: `Finance.negative` if any argument is negative
     func monthlyPayment2(
         principal _: Int,
         years _: Int,
