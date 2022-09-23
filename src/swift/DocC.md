@@ -51,9 +51,9 @@ Each of these are demonstrated in the examples below.
     /// - Returns: the monthly payment
     /// - Throws: `Finance.negative` if any argument is negative
     func monthlyPayment1(
-        principal _: Int,
-        years _: Int,
-        interestRate _: Double
+        principal: Int,
+        years: Int,
+        interestRate: Double
     ) -> Double {
         return 1000
     }
@@ -68,9 +68,9 @@ Each of these are demonstrated in the examples below.
     /// - Returns: the monthly payment
     /// - Throws: `Finance.negative` if any argument is negative
     func monthlyPayment2(
-        principal _: Int,
-        years _: Int,
-        interestRate _: Double
+        principal: Int,
+        years: Int,
+        interestRate: Double
     ) -> Double {
         return 1000
     }
@@ -78,11 +78,27 @@ Each of these are demonstrated in the examples below.
 
 ## Links
 
-To include links to related source files, ...
+To include links to related items, use "symbol links".
+These are strings in double backticks where the text is
+the name of a type, a method signature, or a function signature.
+For example:
 
-## Content From Other Files
+```swift
+/// Also see ``SomeStruct``.
 
-To include documentation found in other files within the project, ...
+/// Also see ``SomeStruct/monthlyPayment(principal:years:interestRate)``.
+```
+
+For more detail on symbol links, see {% aTargetBlank
+"https://developer.apple.com/documentation/xcode/formatting-your-documentation-content",
+"Formatting Your Documentation Content" %}.
+
+## Content From Extension Files
+
+To include documentation found in other files within the project
+called "extension files", ...
+
+See https://developer.apple.com/documentation/xcode/adding-supplemental-content-to-a-documentation-catalog.
 
 ## Quick Help
 
