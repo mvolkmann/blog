@@ -25,27 +25,27 @@ There are two options for documenting function and method parameters
 as show in the examples below.
 
 ```swift
-/// computes a monthly loan payment.
-/// - parameters:
+/// Computes a monthly loan payment.
+/// - Parameters:
 ///   - principal: total loan amount
 ///   - years: number of years in the loan
 ///   - interestRate: interest rate compounded monthly
-func monthlypayment(
+func monthlyPayment(
     principal: int,
     years: int,
-    interestrate: double
+    interestRate: double
 ) -> double {
     ...
 }
 
-/// computes a monthly loan payment.
-/// - parameter principal: total loan amount
-/// - parameter years: number of years in the loan
-/// - parameter interestRate: interest rate compounded monthly
-func monthlypayment(
+/// Computes a monthly loan payment.
+/// - Parameter principal: total loan amount
+/// - Parameter years: number of years in the loan
+/// - Parameter interestRate: interest rate compounded monthly
+func monthlyPayment(
     principal: int,
     years: int,
-    interestrate: double
+    interestRate: double
 ) -> double {
     ...
 }
