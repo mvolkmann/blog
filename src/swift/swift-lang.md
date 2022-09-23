@@ -21,9 +21,10 @@ Key facts about Swift include the following:
 - a big language with a large number of features
   and a corresponding learning curve
 - can be used to build applications for macOS, iOS, and Watch OS
-- can be used to command-line and server-side applications
+- can be used to build command-line and server-side applications
 - has six major types:
   structs, classes, enums, protocols, functions, and generics
+- supports tuples
 - standout features include computed properties, closure syntax,
   trailing closures, key paths, and
   a succinct way to refer to enum cases when their type can be inferred
@@ -32,7 +33,6 @@ Key facts about Swift include the following:
 - interoperates with {% aTargetBlank
   "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/",
   "Objective-C" %} code
-- supports tuples
 - includes a {% aTargetBlank
   "https://developer.apple.com/documentation/swift/swift_standard_library",
   "Standard Library" %}
@@ -93,11 +93,14 @@ However, there are good reasons to use VS Code in addition to Xcode.
 
 VS Code as the following advantages over Xcode:
 
-- "Format on save" can run a Swift formatter such as SwiftFormat
-  which is similar to a combination of the JavaScript tools
-  ESLint (with autofix) and Prettier.
+- There is a built-way to format code every time changes to a file are saved.
   To format code in Xcode, select the lines to be formatted
   and press ctrl-shift-i.
+  Xcode can be configured to run
+  {% aTargetBlank "/blog/topics/#/blog/swift/SwiftFormat/", "SwiftFormat" %} on save,
+  but this requires a number of undocumented steps.
+  SwiftFormat is a separate tool that is similar to a combination of
+  the JavaScript tools ESLint (with autofix) and Prettier.
 - Git integration is better. You can see at a glance
   which files have been added or modified and
   see side-by-side diffs without initiating a commit.

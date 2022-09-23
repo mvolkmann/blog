@@ -219,6 +219,69 @@ to avoid unintentionally access items.
 For example, most properties and many methods
 in structs and classes should be `private`.
 
+## Protocols
+
+There are two ways for a type to implement a protocol,
+directly or indirectly using an extension.
+
+In the direct approach, all protocols implemented by a type
+are specified at the beginning of the type definition.
+Methods required by each protocol are defined inside
+the definition of the type.
+
+Here is an example of the direct approach.
+While the example defines an `enum`, the same approach
+can be used with `struct` and `class` definitions.
+
+```swift
+enum HTTPError: Error, LocalizedError {
+    case badStatus(status: Int)
+    case badUrl
+    case jsonEncode
+
+    public var message: String? {
+        switch self {
+        case let .badStatus(status):
+            return "bad status \(status)"
+        case .badUrl:
+            return "bad URL"
+        case .jsonEncode:
+            return "JSON encoding failed"
+        }
+    }
+}
+```
+
+In the indirect approach, each protocol implemented by a type
+is associated with it using a separate extension.
+This has the benefit of making it clear which methods
+are associated with each protocol being implemented.
+
+Here is an example of the direct approach:
+
+```swift
+enum HTTPError: Error {
+    case badStatus(status: Int)
+    case badUrl
+    case jsonEncode
+}
+
+extension HTTPError: LocalizedError {
+    public var message: String? {
+        switch self {
+        case let .badStatus(status):
+            return "bad status \(status)"
+        case .badUrl:
+            return "bad URL"
+        case .jsonEncode:
+            return "JSON encoding failed"
+        }
+    }
+}
+```
+
+Most Swift developers seem to prefer the indirect approach.
+
 ## Preference for async/await over completion handlers (callbacks)
 
 Many older APIs provide asynchronous functions that take
