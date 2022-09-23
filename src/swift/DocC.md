@@ -15,41 +15,65 @@ The documentation also be converted to an HTML-based website.
 
 ## Documentation Comments
 
-Documentation comments are single-line comments that begin with `///`.
-And these before each type, property, method, and function definition.
+Documentation comments are single-line comments that begin with `///`
+or multi-line comments that begin with `/**` and end with `*/`.
+Add these before each type, property, method, and function definition.
 
 Documentation is only generated for `public` items.
 For non-public item documentation, use double rather than triple slash comments.
+
+In documentation comments that include multiple paragraphs,
+separate the paragraphs with a line that only contains `///`.
+
+When documenting properties, describe their meaning,
+valid values, and default values if any.
+
+When documenting functions and methods, describe what they do,
+any side effects, whether they perform any asynchronous actions,
+and scenarios where calling them is expensive.
+The first paragraph is the primary description.
+All subsequent paragraphs appear in the "Discussion" section.
 
 There are two options for documenting function and method parameters
 as show in the examples below.
 
 ```swift
-/// Computes a monthly loan payment.
-/// - Parameters:
-///   - principal: total loan amount
-///   - years: number of years in the loan
-///   - interestRate: interest rate compounded monthly
-func monthlyPayment(
-    principal: int,
-    years: int,
-    interestRate: double
-) -> double {
-    ...
-}
+    /// Computes a monthly loan payment.
+    ///
+    /// This assumes the interest should be compounded monthly.
+    ///
+    /// - Parameters:
+    ///   - principal: total loan amount
+    ///   - years: number of years in the loan
+    ///   - interestRate: interest rate compounded monthly
+    /// - Returns: the monthly payment
+    func monthlyPayment1(
+        principal _: Int,
+        years _: Int,
+        interestRate _: Double
+    ) -> Double {
+        return 1000
+    }
 
-/// Computes a monthly loan payment.
-/// - Parameter principal: total loan amount
-/// - Parameter years: number of years in the loan
-/// - Parameter interestRate: interest rate compounded monthly
-func monthlyPayment(
-    principal: int,
-    years: int,
-    interestRate: double
-) -> double {
-    ...
-}
+    /// Computes a monthly loan payment.
+    ///
+    /// This assumes the interest should be compounded monthly.
+    ///
+    /// - Parameter principal: total loan amount
+    /// - Parameter years: number of years in the loan
+    /// - Parameter interestRate: interest rate compounded monthly
+    /// - Returns: the monthly payment
+    func monthlyPayment2(
+        principal _: Int,
+        years _: Int,
+        interestRate _: Double
+    ) -> Double {
+        return 1000
+    }
 ```
+
+Option-click a name in a source file to see its documentation
+in "Quick Help" which appears in a popup window.
 
 ## Generating Documentation
 
