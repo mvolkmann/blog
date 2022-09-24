@@ -144,3 +144,6 @@ To use a new version of a package:
   enter the package name in the search input.
 
 TODO: Is this really the best way?
+TODO: If the selected "Dependency Rule" is "Up to Next ...",
+TODO: can it automatically use a newer version
+TODO: every time the app is built?
