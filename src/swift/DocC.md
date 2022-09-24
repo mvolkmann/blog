@@ -109,13 +109,6 @@ For example, `[Swift](https://www.swift.org)`.
 MarkDown syntax can also be used to include
 images, bulleted lists, numbered lists, and tables.
 
-## Content From Extension Files
-
-To include documentation found in other files within the project
-called "extension files", ...
-
-See https://developer.apple.com/documentation/xcode/adding-supplemental-content-to-a-documentation-catalog.
-
 ## Quick Help
 
 Option-click a name in a source file to see its documentation
@@ -182,9 +175,27 @@ Additional sections in the left nav include:
   This section includes "Link Presentation", "Safari app extensions",
   and more.
 
+## Documentation Catalogs
+
+A documentation catalog file improves the initial page
+displayed in the documentation window.
+To add a documentation catalog to a project:
+
+- Right-click the top entry in the Navigator.
+- Select "Add File...".
+- Choose "Documentation Catalog".
+- Click the Next button.
+- Enter a name. The default name "Documentation.docc is fine.
+- Click the Create button.
+
+This adds a directory with the specified name
+that includes the file `Documentation.md`.
+Edit this file to describe the project
+and provide an overview of the files inside it.
+
 ## Other Options
 
-Options not covered here include adding catalogs,
+Options not covered here include adding
 articles, tutorials, and extension files.
 
 ## Resources
