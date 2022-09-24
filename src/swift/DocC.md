@@ -8,8 +8,13 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://developer.apple.com/documentation/docc", "DocC" %}
-is a documentation compiler.
-It reads a variant of MarkDown text from project source files
+stands for "Documentation Compiler".
+It generates nicely formatted documentation for the public items
+in Swift packages and frameworks.
+It is not intended to generate documentation for applications
+or for developers working on the internals of a package/framework.
+
+DocC reads a variant of MarkDown text from project source files
 and converts it into a format that can be displayed nicely inside Xcode.
 The documentation also be converted to an HTML-based website.
 
@@ -179,9 +184,11 @@ Additional sections in the left nav include:
 
 A documentation catalog file improves the initial page
 displayed in the documentation window.
+TODO: Does this only work for frameworks and packages, not apps?
+
 To add a documentation catalog to a project:
 
-- Right-click the top entry in the Navigator.
+- Right-click a package group in the Navigator.
 - Select "Add File...".
 - Choose "Documentation Catalog".
 - Click the Next button.
