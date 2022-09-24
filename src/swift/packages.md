@@ -63,6 +63,8 @@ The file `Package.swift` is the package manifest.
 It lists all the source files to be included
 and the packages on which this package depends.
 
+Here is an example manifest for a package that defines two targets.
+
 ```swift
 import PackageDescription
 
