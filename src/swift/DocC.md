@@ -18,6 +18,8 @@ The documentation also be converted to an HTML-based website.
 Documentation comments are single-line comments that begin with `///`
 or multi-line comments that begin with `/**` and end with `*/`.
 Add these before each type, property, method, and function definition.
+This can be done manually or by command clicking the first line of
+a definition, selecting "Add Documentation", and supplying more detail.
 
 Documentation is only generated for `public` items.
 For non-public item documentation, use double rather than triple slash comments.
@@ -76,7 +78,7 @@ Each of these are demonstrated in the examples below.
     }
 ```
 
-## Links
+## Symbol Links
 
 To include links to related items, use "symbol links".
 These are strings in double backticks where the text is
@@ -86,12 +88,26 @@ For example:
 ```swift
 /// Also see ``SomeStruct``.
 
-/// Also see ``SomeStruct/monthlyPayment(principal:years:interestRate)``.
+/// Also see ``SomeStruct/someProperty``.
+
+/// Also see ``SomeStruct/someMethod(param1:param2:)``.
 ```
 
-For more detail on symbol links, see {% aTargetBlank
-"https://developer.apple.com/documentation/xcode/formatting-your-documentation-content",
-"Formatting Your Documentation Content" %}.
+Xcode suggests possible completions while typing symbol links,
+making their creation less error prone.
+
+To navigate to the source of a symbol link, command-click it.
+
+Symbol links can be absolute or relative to the current source file.
+For example, if the symbol link to the `someMethod` appears inside
+the `SomeStruct.swift` source file then `SomeStruct/` can be omitted.
+
+## Web Links
+
+To include links to web pages, use MarkDown syntax.
+For example, `[Swift](https://www.swift.org)`.
+MarkDown syntax can also be used to include
+images, bulleted lists, numbered lists, and tables.
 
 ## Content From Extension Files
 
@@ -107,11 +123,18 @@ in "Quick Help" which appears in a popup window.
 
 ## Generating Documentation
 
-To generate DocC documentation for a project opened in Xcode,
-select Product ... Build Documentation or press cmd-ctrl-shift-d.
+There are three ways to generate DocC documentation for an Xcode project.
+
+1. In Xcode select Product ... Build Documentation or press cmd-ctrl-shift-d.
+1. In Xcode "Build Settings", set "Build Documentation During Build" to Yes
+   to automatically build documentation every time the project is compiled.
+1. Run the command "xcodebuild docbuild" from a terminal or in a CI pipeline.
 
 After generating the documentation, a documentation window is opened.
-This window has a left nav that contains lists of names.
+
+## Documentation Window
+
+Documentation windows have a left nav that contains lists of names.
 Clicking a name displays its documentation in the main area.
 
 The left nav begins with a section titled "Workspace Documentation".
@@ -159,6 +182,16 @@ Additional sections in the left nav include:
   This section includes "Link Presentation", "Safari app extensions",
   and more.
 
-```
+## Other Options
 
-```
+Options not covered here include adding catalogs,
+articles, tutorials, and extension files.
+
+## Resources
+
+For more detail on symbol links, see {% aTargetBlank
+"https://developer.apple.com/documentation/xcode/formatting-your-documentation-content",
+"Formatting Your Documentation Content" %}.
+Also see the article {% aTargetBlank
+"https://www.raywenderlich.com/34919511-docc-tutorial-for-swift-getting-started",
+"DocC Tutorial for Swift : Getting Started" %}.
