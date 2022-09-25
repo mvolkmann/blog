@@ -10,7 +10,13 @@ layout: topic-layout.njk
 {% aTargetBlank "https://www.swift.org/package-manager/",
 "Swift Package Manager" %} (SPM) provides a standard way to
 define and use software packages in Swift applications.
+SPM is preferred over other packaging options such as
+{% aTargetBlank "https://cocoapods.org", "CocoaPods" %} and
+{% aTargetBlank "https://github.com/Carthage/Carthage", "Carthage" %}
+because it is provided by Apple and is integrated into Xcode.
+
 Packages can contain unit tests and can depend of other packages.
+Dependencies on packages are expressed using Git URLs.
 
 Packages typically reside in their own Git repository.
 These repositories can be public or private.
@@ -18,7 +24,16 @@ For details on using private Git repositories see {% aTargetBlank
 "https://developer.apple.com/documentation/xcode/building-swift-packages-or-apps-that-use-them-in-continuous-integration-workflows",
 "Building Swift Packages or Apps that Use Them in Continuous Integration Workflows" %}
 
-Dependencies on packages are expressed using Git URLs.
+## Benefits
+
+There are several benefits to factoring out code from a large application
+into packages that each reside in their own source control repository.
+
+- It enables sharing code with other applications and packages.
+- It decreases application build times since the code that
+  has been moved to packages does not need to be compiled.
+- It allows developers to focus on code with a specific purpose.
+- It reduces the possibilities for source control merge conflicts.
 
 ## Creating a Package
 
