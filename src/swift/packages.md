@@ -149,15 +149,6 @@ To use a package from an application or other package:
 
 ## Updating a Package
 
-To use a new version of a package:
-
-- Remove the dependency on the previous version.
-- Add a dependency on the new version.
-  It is not necessary to paste the package Git URL again.
-  Since the package is already know to this project,
-  enter the package name in the search input.
-
-TODO: Is this really the best way?
-TODO: If the selected "Dependency Rule" is "Up to Next ...",
-TODO: can it automatically use a newer version
-TODO: every time the app is built?
+To use the latest version of all dependencies that are
+compatible with the selected dependency rule for each,
+select File ... Packages ... Update to Latest Package Versions.
