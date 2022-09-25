@@ -178,3 +178,16 @@ To add assets such as color sets and image sets to a package:
 - Build the package and verify that there are no errors.
 - Commit and push the changes to Git.
 - Tag the commit and push the new tag.
+
+Here is an example of a package method that returns a SwiftUI `Image`:
+
+```swift
+    public func comet(size: Double) -> some View {
+        // This looks for the image inside the .xcassets file in this package
+        // instead of looking in the .xcassets file of the using application.
+        Image(uiImage: UIImage(named: "Comet", in: .module, with: nil)!)
+            .resizable()
+            .scaledToFit()
+            .frame(width: size, height: size)
+    }
+```
