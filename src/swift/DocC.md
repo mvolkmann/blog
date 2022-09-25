@@ -213,8 +213,18 @@ created (the default is fine), select the directory where it will be stored,
 and click the "Export" button.
 
 The exported file will have an extension of `.doccarchive`.
-It can be shared with other developers.
+It can be shared with other developers using email or other means.
 Double-clicking the file opens the documentation in Xcode.
+
+For more information about exporting documentation, see {% aTargetBlank
+"https://developer.apple.com/documentation/xcode/distributing-documentation-to-external-developers",
+"Distributing Documentation to External Developers" %}.
+
+Documentation archive files includes a single-page web app
+for rendering the documentation on the web.
+The steps required to deploy this vary based on the web server being used.
+See the section titled "Host a Documentation Archive on Your Website"
+at the link above.
 
 ## Other Options
 
