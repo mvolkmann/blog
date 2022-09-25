@@ -106,8 +106,14 @@ Each version remains available for download for 90 days.
    - Click the "Next" button.
 1. Click the "Upload" button.
    This can take a few minutes to complete on a fast machine.
-1. If sending HTTP requests using HTTPS, you will have to submit a form
-   to the U.S. government which is explained in the encryption questions.
+1. You will be asked if the app uses encryption,
+   such as sending HTTP requests using HTTPS.
+   For apps that do not use encryption, the question can be suppressed
+   by adding the Boolean key "App Uses Non-Exempt Encryption"
+   in the target Info tab with a value of "NO".
+   For apps that do use encryption,
+   you will have to submit a form to the U.S. government
+   which is explained in the encryption questions.
    After answering the questions displayed in a dialog,
    click the "Start Internal Testing" button.
    The status should change to "Ready to Submit"
