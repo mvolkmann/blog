@@ -14,6 +14,9 @@ Packages can contain unit tests and can depend of other packages.
 
 Packages typically reside in their own Git repository.
 These repositories can be public or private.
+For details on using private Git repositories see {% aTargetBlank
+"https://developer.apple.com/documentation/xcode/building-swift-packages-or-apps-that-use-them-in-continuous-integration-workflows",
+"Building Swift Packages or Apps that Use Them in Continuous Integration Workflows" %}
 
 Dependencies on packages are expressed using Git URLs.
 
@@ -33,6 +36,9 @@ The initial package contents are:
 - README .md
 
   Enter a description of the package and usage instructions here.
+  This can also include license information,
+  supported operating systems, supported Swift versions,
+  contact information, and tutorials.
 
 - Package.swift
 
@@ -141,7 +147,7 @@ The new tag only exists in the local repository.
 To push it to the remote repository,
 open a terminal window and enter `git push origin --tags`.
 
-## Using a Package
+## Using Packages
 
 To use a package from an application or other package:
 
@@ -157,6 +163,9 @@ To use a package from an application or other package:
   - Click the "+" button at the bottom.
 
 - Paste the Git URL into the search input.
+  This renders the Markdown found in the `README.md` file of the package.
+  TODO: Why doesn't this work for my `RMVGeometry` package?
+
 - In the "Dependency Rule" dropdown, select one of the following options
   where the repository tags are semantic version numbers:
 
