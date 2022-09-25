@@ -862,6 +862,8 @@ struct Constants {
     static let someValue = 19
 
     struct Colors {
+        // This uses a custom Color initializer takes a hex parameter.
+        // It is defined in a Color extension in the Colors section below.
         static let background = Color(hex: 0xf1faff)
         static let disabled = Color.gray
         static let primary = Color(hex: 0x006197)
@@ -1624,7 +1626,7 @@ There are several ways to switch between light and dark mode in the simulator.
 
 To define a custom named color pair, one for light mode and one for dark:
 
-- In the Navigator, select the "Assets.xcassets" file.
+- In the Navigator, select the `Assets.xcassets` file.
 - Right-click in the list of assets and select "New Color Set".
 - Change the default name "Color" to the name that will be specified in code.
 - Click the "Any Appearance" swatch (used for light mode).
@@ -1638,6 +1640,29 @@ To define a custom named color pair, one for light mode and one for dark:
   and reduce the value for Brightness (perhaps to 50%).
 
 To use a custom color in code, enter `Color("some-name")`.
+To avoid typos when using these named colors, consider defining a
+`Color` extension that defines computed properties like the following:
+
+```swift
+extension Color {
+    static var danger: Color { Color("Danger") }
+    static var success: Color { Color("Success") }
+
+    // This custom initializer enables creating colors based on hex codes.
+    init(hex: UInt, alpha: Double = 1) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xFF) / 255,
+            green: Double((hex >> 8) & 0xFF) / 255,
+            blue: Double(hex & 0xFF) / 255,
+            opacity: alpha
+        )
+    }
+
+    // This uses the custom initializer above.
+    static let background = Color(hex: 0xf1faff)
+}
+```
 
 UIKit uses `UIColor` instead of `Color`.
 To create a `UIColor` from a `Color`,
