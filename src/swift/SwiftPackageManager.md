@@ -63,6 +63,7 @@ The initial package contents are:
   This defines the package name, products, dependencies, and targets.
   It is referred to as the "manifest file" and takes the place of
   having a `.xcodeproj` file as is present in applications.
+  This file is similar to a `package.json` file in a Node.js project.
 
 - Sources
 
