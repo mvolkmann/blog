@@ -30,7 +30,7 @@ To create a new package in Xcode:
 
 The initial package contents are:
 
-- README.md
+- README .md
 
   Enter a description of the package and usage instructions here.
 
@@ -97,6 +97,19 @@ let package = Package(
 )
 ```
 
+## Unit Tests
+
+Xcode does not provide a way to run code in a package project,
+so it is important to include unit tests.
+This enables verifying the functionality of a package
+before deploying the initial version or changes to it.
+
+## Documentation
+
+Package documentation is provided by the README .md file and by
+{% aTargetBlank "/blog/topics/#/blog/swift/DocC/", "DocC" %}
+comments in the code.
+
 ## Available Features
 
 To state that items in a library should only be available
@@ -143,8 +156,10 @@ To use a package from an application or other package:
 - In the "Dependency Rule" dropdown, select one of the following options
   where the repository tags are semantic version numbers:
 
-  - Version: Up to Next Major - latest tag with a specified major version
-  - Version: Up to Next Minor - latest tag with a specified major.minor version
+  - Version: Up to Next Major -
+    latest tag with a specified major version (most common)
+  - Version: Up to Next Minor -
+    latest tag with a specified major.minor version
   - Version: Range - latest tag in a specified range
   - Version: Exact - specific tag
   - Branch: latest commit on a specific branch
