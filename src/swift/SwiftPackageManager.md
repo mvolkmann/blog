@@ -24,6 +24,9 @@ For details on using private Git repositories see {% aTargetBlank
 "https://developer.apple.com/documentation/xcode/building-swift-packages-or-apps-that-use-them-in-continuous-integration-workflows",
 "Building Swift Packages or Apps that Use Them in Continuous Integration Workflows" %}
 
+For a simple package example, see {% aTargetBlank
+"https://github.com/mvolkmann/RMVGeometry", "RMVGeometry" %}.
+
 ## Benefits
 
 There are several benefits to factoring out code from a large application
@@ -182,7 +185,7 @@ To use a package from an application or other package:
 
 - Paste the Git URL into the search input.
   This renders the Markdown found in the `README.md` file of the package.
-  TODO: Why doesn't this work for my `RMVGeometry` package?
+  TODO: Why doesn't this work for many packages including `RMVGeometry` package?
 
 - In the "Dependency Rule" dropdown, select one of the following options
   where the repository tags are semantic version numbers:

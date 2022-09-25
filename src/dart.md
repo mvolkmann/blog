@@ -342,7 +342,7 @@ The `dart create` command creates the following files and directories:
 
 - `README.md`
 
-  This MarkDown file describes the project.
+  This Markdown file describes the project.
 
 A Dart project is actually a Dart package.
 This means it is possible for it to be deployed to pub.dev

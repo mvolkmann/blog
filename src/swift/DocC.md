@@ -14,7 +14,7 @@ in Swift packages and frameworks.
 It is not intended to generate documentation for applications
 or for developers working on the internals of a package/framework.
 
-DocC reads a variant of MarkDown text from project source files
+DocC reads a variant of Markdown text from project source files
 and converts it into a format that can be displayed nicely inside Xcode.
 The documentation also be converted to an HTML-based website.
 
@@ -109,9 +109,9 @@ the `SomeStruct.swift` source file then `SomeStruct/` can be omitted.
 
 ## Web Links
 
-To include links to web pages, use MarkDown syntax.
+To include links to web pages, use Markdown syntax.
 For example, `[Swift](https://www.swift.org)`.
-MarkDown syntax can also be used to include
+Markdown syntax can also be used to include
 images, bulleted lists, numbered lists, and tables.
 
 ## Quick Help
