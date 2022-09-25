@@ -228,6 +228,10 @@ If there are errors or warnings, the number of each will be displayed
 on the right side of the code editor header.
 Click either number to display the messages in the "Issue Navigator".
 
+For UI views that support pinch-to-zoom such as maps,
+that can be performed in the Simulator by holding down the option key
+and using two fingers on a trackpad.
+
 Preview is more limited in functionality than the Simulator.
 TODO: List the differences between the Simulator app and the Preview pane.
 
@@ -2668,6 +2672,15 @@ If more lines are needed, the text is elided.
 
 Both view modifiers described above can be applied to the same `Text` view
 to achieve both effects.
+
+To render text with multiple styles and no space between them,
+use the "+" operator between `Text` views. For example:
+
+```swift
+Text("Red").foregroundColor(.red) +
+Text("Green").foregroundColor(.green) +
+Text("Blue").foregroundColor(.blue)
+```
 
 ### `TextField`
 
