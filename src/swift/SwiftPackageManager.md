@@ -129,6 +129,8 @@ so it is important to include unit tests.
 This enables verifying the functionality of a package
 before deploying the initial version or changes to it.
 
+To run all of the tests in a package, select Product ... Test or press cmd-u.
+
 ## Documentation
 
 Package documentation is provided by the README .md file and by
@@ -161,6 +163,7 @@ To add a tag to the current commit of a Swift package:
 The new tag only exists in the local repository.
 To push it to the remote repository,
 open a terminal window and enter `git push origin --tags`.
+It seems odd that Xcode doesn't provide a way to do this!
 
 ## Using Packages
 
