@@ -204,12 +204,15 @@ and provide an overview of the files inside it.
 
 ## Exporting
 
-To export package documentation, open a documentation window,
+To export package documentation from Xcode, open a documentation window,
 right-click the package, and select "Export...".
+This can be done in the package project
+or from an application that uses the package.
 In the dialog that appears, optionally change the name of the file to be
 created (the default is fine), select the directory where it will be stored,
 and click the "Export" button.
-The file will have an extension of `.doccarchive`.
+
+The exported file will have an extension of `.doccarchive`.
 It can be shared with other developers.
 Double-clicking the file opens the documentation in Xcode.
 
