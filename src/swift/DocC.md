@@ -9,10 +9,10 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://developer.apple.com/documentation/docc", "DocC" %}
 stands for "Documentation Compiler".
-It generates nicely formatted documentation for the public items
-in Swift packages and frameworks.
+It generates nicely formatted documentation for
+the public items in Swift packages.
 It is not intended to generate documentation for applications
-or for developers working on the internals of a package/framework.
+or for the internal (non-public) features of a package.
 
 DocC reads a variant of Markdown text from project source files
 and converts it into a format that can be displayed nicely inside Xcode.
