@@ -94,6 +94,14 @@ let package = Package(
 )
 ```
 
+## Available Features
+
+To state that items in a library should only be available
+in applications that require at least a certain version of iOS,
+add an `@available(iOS {version}, *)` attribute before the item definition
+where `{version}` is an iOS version like `16.0`.
+This is alway needed when an item uses SwiftUI.
+
 ## Using GitHub
 
 Swift packages are frequently stored in a GitHub repository.
@@ -118,10 +126,16 @@ open a terminal window and enter `git push origin --tags`.
 To use a package from an application or other package:
 
 - Open the application or package that will use the package in Xcode.
-- Select the top entry in the Navigator.
-- Select the project.
-- Click the "Package Dependencies" tab.
-- Click the "+" button at the bottom.
+
+- Select File ... Add Packages... .
+
+  Alternatively this longer set of steps can be used:
+
+  - Select the top entry in the Navigator.
+  - Select the project.
+  - Click the "Package Dependencies" tab.
+  - Click the "+" button at the bottom.
+
 - Paste the Git URL into the search input.
 - In the "Dependency Rule" dropdown, select one of the options.
 - Enter a semantic version number.
