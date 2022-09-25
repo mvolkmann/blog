@@ -117,7 +117,9 @@ images, bulleted lists, numbered lists, and tables.
 ## Quick Help
 
 Option-click a name in a source file to see its documentation
-in "Quick Help" which appears in a popup window.
+in "Quick Help" which appears in a documentation window.
+If the messsage "no documentation available" appears,
+select Product ... Build Documentation.
 
 ## Generating Documentation
 
@@ -199,6 +201,17 @@ This adds a directory with the specified name
 that includes the file `Documentation.md`.
 Edit this file to describe the project
 and provide an overview of the files inside it.
+
+## Exporting
+
+To export package documentation, open a documentation window,
+right-click the package, and select "Export...".
+In the dialog that appears, optionally change the name of the file to be
+created (the default is fine), select the directory where it will be stored,
+and click the "Export" button.
+The file will have an extension of `.doccarchive`.
+It can be shared with other developers.
+Double-clicking the file opens the documentation in Xcode.
 
 ## Other Options
 
