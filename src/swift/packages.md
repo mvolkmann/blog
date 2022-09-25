@@ -147,8 +147,34 @@ To use a package from an application or other package:
 - Add code that uses the public types, functions, and values
   defined in the imported package targets.
 
-## Updating a Package
+## Updating Packages
 
-To use the latest version of all dependencies that are
+To modify an application to use the latest version of all of its dependencies,
 compatible with the selected dependency rule for each,
 select File ... Packages ... Update to Latest Package Versions.
+
+## Adding Assets to a Package
+
+To add assets such as color sets and image sets to a package:
+
+- For a target the will use assets, right-click
+  the target folder under the `Sources` folder.
+- Select "New Folder".
+- Name the new folder `Resources`.
+- Right-click the new `Resources` folder.
+- Select "New File...".
+- Select "Asset Catalog".
+- Click the "Next" button.
+- The file `Media.xcassets` will be added.
+- Add image and color sets in the same way as
+  adding them to `Assets.xcassets` in an application.
+- Edit the manifest file `Package.swift`.
+- Add an argument like the following to the `.target` call for the target:
+
+  ```swift
+  resources: [.process("{TargetName}/Resources/Media.xcassets")]
+  ```
+
+- Build the package and verify that there are no errors.
+- Commit and push the changes to Git.
+- Tag the commit and push the new tag.
