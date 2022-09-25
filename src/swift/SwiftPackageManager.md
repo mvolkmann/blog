@@ -176,9 +176,37 @@ To use a package from an application or other package:
 
 ## Updating Packages
 
-To modify an application to use the latest version of all of its dependencies,
-compatible with the selected dependency rule for each,
+To update the version of a single package dependency to the latest version
+that is compatible with the dependency rule for specified for the package,
+right-click the dependency near the bottom of the Navigator
+and select "Update Package".
+
+To update the version of all of the application dependencies,
 select File ... Packages ... Update to Latest Package Versions.
+
+Application projects contain the file
+`{project-name}.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved`.
+This file records the exact version of each package dependency being used.
+It is similar to a `package-lock.json` file in a Node.js project.
+
+The `Package.resolved` file can be checked into version control to enable
+all developers on a team to use the same versions of all the dependencies.
+This file is updated when a new package dependency is added
+and when an existing package dependency is updated.
+
+Other options in the File ... Packages menu include:
+
+- Reset Package Caches
+
+  This deletes all local package data and downloads all the
+  dependencies again from their Git repositories.
+  Sometimes this can be used to resolve odd build errors.
+
+- Resolve Package Versions
+
+  This updates the version of each dependency being used
+  to be the version specified in the `Package.resolved` file.
+  It is useful when another team member has updated that file.
 
 ## Adding Assets to a Package
 
