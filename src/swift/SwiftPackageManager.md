@@ -1,18 +1,21 @@
 ---
 eleventyNavigation:
-  key: Packages
+  key: Swift Package Manager
   parent: Swift
 layout: topic-layout.njk
 ---
 
 ## Overview
 
-Packages are code libraries that can be used by applications and other packages.
+{% aTargetBlank "https://www.swift.org/package-manager/",
+"Swift Package Manager" %} (SPM) provides a standard way to
+define and use software packages in Swift applications.
+Packages can contain unit tests and can depend of other packages.
 
 Packages typically reside in their own Git repository.
+These repositories can be public or private.
 
-Packages can be added as a dependency in multiple applications
-using their GitHub URL.
+Dependencies on packages are expressed using Git URLs.
 
 ## Creating a Package
 
@@ -137,7 +140,16 @@ To use a package from an application or other package:
   - Click the "+" button at the bottom.
 
 - Paste the Git URL into the search input.
-- In the "Dependency Rule" dropdown, select one of the options.
+- In the "Dependency Rule" dropdown, select one of the following options
+  where the repository tags are semantic version numbers:
+
+  - Version: Up to Next Major - latest tag with a specified major version
+  - Version: Up to Next Minor - latest tag with a specified major.minor version
+  - Version: Range - latest tag in a specified range
+  - Version: Exact - specific tag
+  - Branch: latest commit on a specific branch
+  - Commit: specific commit
+
 - Enter a semantic version number.
 - Click the "Add Package" button.
 - In the confirmation dialog that appears,
