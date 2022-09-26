@@ -140,15 +140,78 @@ To view the web-based CloudKit Dashboard:
 - In the left nav, click "CloudKit Console".
 - Click the "CloudKit Database" button.
 - Select a container from the dropdown at the top.
+- Select a database type: Public, Private, or Shared
 
-To view all the records of a given type:
+## Schemas
 
-- Click the "RECORD TYPE" dropdown and select one.
-- Click the "Query Records" button.
+In the left nav under "Schema", click "Record Types".
 
 To define a new record type:
 
-- TODO
+- Click the "+" after "Record Types".
+- Enter a name.
+- For each field
+
+  - Click the "+" after "Fields".
+  - Enter a name.
+  - Select a type from the "Type" dropdown.
+
+    The supported types are limited to those that
+    conform to `CKRecordValueProtocol`. These include:
+
+    - Asset
+    - Bytes
+    - Location
+    - Double
+    - Int(64)
+    - Reference
+    - String
+    - Date/Time
+    - Encrypted Bytes
+    - Encrypted String
+
+    Most of these also have a "(List)" option for a collection of values.
+
+  - Click the "Done" button.
+
+- Click the "Save" button.
+
+To view and edit the schema for an existing record type,
+click the name of a record type.
+
+To add a field to a selected record type:
+
+- Click the "+" after "Record Fields".
+- Enter a name.
+- Select a type from the "Type" dropdown.
+
+To edit or delete a field in the selected record type,
+click the ellipsis at the end of the row for the field
+and select "Edit" or "Delete".
+
+To delete a record type and all records of that type:
+
+- Click the name of a record type.
+- Click the ellipsis in the upper right.
+- Select "Delete Record Type...".
+- Click the "Delete" button.
+
+## Data
+
+To view all the records of a given type:
+
+- In the left nav under "Data", click "Records".
+- Select a record type from the "RECORD TYPE" dropdown.
+- Click the "Query Records" button.
+
+Values of fields with a type of "Asset" can be downloaded from here.
+
+To define a new record type:
+
+- Click the "+" after "Records".
+- Select "Create New Record".
+- In the area that appears on the right side,
+  replace the default name and select a type.
 
 To create a new record:
 
@@ -157,3 +220,27 @@ To create a new record:
 To delete a record:
 
 - TODO
+
+## Assets
+
+Records can have fields with a type of "Asset".
+The data for these is stored outside of the record data
+and is referenced from records by URLs.
+
+TODO: Try this.
+
+## Push Notifications
+
+It is possible receive a push notification every time
+a record of a specific record type is created, updated, or deleted.
+This can be used to keep multiple devices in sync.
+
+Push notifications are only sent to apps running in real devices,
+not to apps running in the Simulator.
+
+## Production Databases
+
+Once a database has been switched from "Development" to "Production",
+it is no longer possible to delete record types.
+New record types can be added and existing record types can be modified.
+TODO: Can fields in records be deleted?

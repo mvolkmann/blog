@@ -326,4 +326,7 @@ project in GitHub.
 
 ## Remote Notifications
 
-TODO: Add this content.
+The "Push Notifications" capability is automatically added
+when the "iCloud" capability is added.
+
+TODO: Add more content.

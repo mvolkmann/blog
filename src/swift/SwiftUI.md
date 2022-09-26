@@ -885,10 +885,10 @@ There are three ways to specify code to run
 when a view is created or first appears.
 
 1. Place code in the view initializer (`init`).
-1. Attached an `onAppear` view modifier to the outermost view
-   returned by the `body` function.
-1. Attached a `task` view modifier to the outermost view
-   returned by the `body` function.
+1. For synchronous code, attach an `onAppear` view modifier
+   to the outermost view returned by the `body` function.
+1. For asynchronous code, attach a `task` view modifier
+   to the outermost view returned by the `body` function.
 
 The `task` view modifier takes a closure that is run in an asynchronous content
 and so can use the `await` keyword.
