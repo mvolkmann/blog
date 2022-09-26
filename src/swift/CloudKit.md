@@ -13,10 +13,21 @@ Using CloudKit requires an Apple Developer account.
 
 CloudKit supports three kinds of databases.
 
-- Public is for databases that are shared between all users of an application.
-- Private is for databases that are only for the current user of an application.
+- Public
+
+  These are for databases that are shared between all users of an application.
+  The space used counts against the iCloud limit of the app.
+
+- Private
+
+  These are for databases that are only accessible
+  by the current user of an application.
   The space used counts against the iCloud limit of each user.
-- Shared is for databases that are shared between multiple ???.
+
+- Shared
+
+  These are for databases that are shared between multiple ???.
+  Is the space used counted against the iCloud limit of the app?
 
 A database has a collection of "record types"
 which are like tables in a relational database.
@@ -97,6 +108,16 @@ make the records of that type queryable.
 For a good example of using CloudKit including performing CRUD operations
 and subscribing to be notified of changes see
 {% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo", "CloudKitDemo" %}.
+
+## Terminology
+
+- Container: TODO
+- Database: TODO
+- Record: TODO
+- Reference: TODO
+- Operation: TODO
+
+  Use convenience APIs or `CKOperation` for full power.
 
 ## Sample Code
 
