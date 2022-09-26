@@ -198,7 +198,7 @@ To delete a record type and all records of that type:
 
 ## Data
 
-To view all the records of a given type:
+To view (query) all the records of a given type:
 
 - In the left nav under "Data", click "Records".
 - Select a record type from the "RECORD TYPE" dropdown.
@@ -206,18 +206,20 @@ To view all the records of a given type:
 
 Values of fields with a type of "Asset" can be downloaded from here.
 
-To define a new record type:
+To create a new record of the selected record type:
 
 - Click the "+" after "Records".
 - Select "Create New Record".
 - In the area that appears on the right side,
-  replace the default name and select a type.
+  enter values for each of the fields.
+  Typically the fields under "Metadata" should not be modified.
+- Click the "Save" button.
 
-To create a new record:
+To update an existing record:
 
 - TODO
 
-To delete a record:
+To delete an existing record:
 
 - TODO
 
