@@ -8,12 +8,14 @@ layout: topic-layout.njk
 ## Overview
 
 CloudKit is an Apple cloud-based database solution that is similar to Firebase.
-Using it requires an Apple Developer account.
+It provides a generous amount of free storage.
+Using CloudKit requires an Apple Developer account.
 
 CloudKit supports three kinds of databases.
 
 - Public is for databases that are shared between all users of an application.
 - Private is for databases that are only for the current user of an application.
+  The space used counts against the iCloud limit of each user.
 - Shared is for databases that are shared between multiple ???.
 
 A database has a collection of "record types"
@@ -25,9 +27,15 @@ A default zone named "\_defaultZone" is provided.
 
 "Subscriptions" all apps to subscribe to a database
 in order to be notified about changes.
+This enables synchronizing changes across devices.
+For example, a user with an iPhone and an iPad can
+enter data on one device and have it automatically appear on the other.
 
 "Indexes" improve query performance,
 removing the need to search through records sequentially.
+
+Applications that use CloudKit do not need to include a login screen
+because users are authenticated based on their Apple ID.
 
 "Security Roles" restrict database access.
 
@@ -100,3 +108,31 @@ See the app {% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo",
 When querying for records, to limit the fields included in the returned data,
 set the `desiredKeys` property on the `CKQueryOperation` object
 to an array of property name strings.
+
+## Dashboard
+
+To view the web-based CloudKit Dashboard:
+
+- Browse `developer.apple.com`.
+- Click "Account".
+- Sign in.
+- In the left nav, click "CloudKit Console".
+- Click the "CloudKit Database" button.
+- Select a container from the dropdown at the top.
+
+To view all the records of a given type:
+
+- Click the "RECORD TYPE" dropdown and select one.
+- Click the "Query Records" button.
+
+To define a new record type:
+
+- TODO
+
+To create a new record:
+
+- TODO
+
+To delete a record:
+
+- TODO
