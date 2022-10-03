@@ -935,6 +935,8 @@ Numeric `Foundation` functions include:
 | `acos(number)`        | returns arc cosine in radians             |
 | `atan(number)`        | returns arc tangent in radians            |
 
+To create an `Int` by rounding a `Double`, use `Int(myDouble.rounded())`.
+
 To format a `Double` value as a `String` with a limited number of decimal places
 use the `String` initializer that takes a format string and the value.
 For example:

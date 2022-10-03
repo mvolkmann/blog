@@ -33,7 +33,7 @@ The app has four tabs.
 The first tab "Fruits" uses a `NavigationStack` to allow the user
 to select a fruit from a `List` of `NavigationLink` views.
 
-?v={{pkg.version}}
+TODO: What is wrong with these img tags?
 <img alt="Fruits List" href="/blog/assets/swiftui-navigation-01-fruits.png?v={{pkg.version}}" />
 
 When a fruit is selected, a view that displays "You chose {fruit-emoji}."
