@@ -33,12 +33,13 @@ The app has four tabs.
 The first tab "Fruits" uses a `NavigationStack` to allow the user
 to select a fruit from a `List` of `NavigationLink` views.
 
-<img alt="Fruits List" href="images/swiftui-navigation-01-fruits.png" />
+?v={{pkg.version}}
+<img alt="Fruits List" href="/blog/assets/swiftui-navigation-01-fruits.png?v={{pkg.version}}" />
 
 When a fruit is selected, a view that displays "You chose {fruit-emoji}."
 is pushed onto the navigation stack.
 
-<img alt="Fruits Detail" href="images/swiftui-navigation-02-fruit.png" />
+<img alt="Fruits Detail" href="/blog/assets/swiftui-navigation-02-fruit.png?v={{pkg.version}}" />
 
 Click "< Fruits" in the upper-left to return to the list of fruits.
 The "Show Favorite" button at the bottom demonstrates a `NavigationList`
@@ -52,12 +53,12 @@ that takes advantage of the fact that the only registered
 The second tab "Authors" uses a `NavigationStack` to allow the user
 to select an `Author` from a `List` of `NavigationLink` views.
 
-<img alt="Authors List" href="images/swiftui-navigation-03-authors.png" />
+<img alt="Authors List" href="/blog/assets/swiftui-navigation-03-authors.png?v={{pkg.version}}" />
 
 When an author is selected, a view that displays specific information
 about the author is pushed onto the navigation stack.
 
-<img alt="Author Detail" href="images/swiftui-navigation-04-author.png" />
+<img alt="Author Detail" href="/blog/assets/swiftui-navigation-04-author.png?v={{pkg.version}}" />
 
 There are four `navigationDestination` registrations that handle the types:
 
@@ -74,12 +75,12 @@ and displays information about that author.
 The third tab "Countries Stack" uses a `NavigationStack` to allow the user
 to select a `Country` from a `List` of `NavigationLink` views.
 
-<img alt="Countries List" href="images/swiftui-navigation-05-stack.png" />
+<img alt="Countries List" href="/blog/assets/swiftui-navigation-05-stack.png?v={{pkg.version}}" />
 
 When a country is selected, a view that displays a list of
 cities in the country is pushed onto the navigation stack.
 
-<img alt="Cities List" href="images/swiftui-navigation-06-stack.png" />
+<img alt="Cities List" href="/blog/assets/swiftui-navigation-06-stack.png?v={{pkg.version}}" />
 
 Each city is represented by a `NavigationLink`. Tapping one of these pushes
 a view onto the stack that displays detailed information about that city.
@@ -90,7 +91,7 @@ is displayed below the city data.
 The "Back to Countries" button demonstrates popping back to
 the initial view in this tab.
 
-<img alt="City Detail" href="images/swiftui-navigation-07-stack.png" />
+<img alt="City Detail" href="/blog/assets/swiftui-navigation-07-stack.png?v={{pkg.version}}" />
 
 ### Countries Split tab
 
@@ -102,8 +103,8 @@ the second column contains a list of cities in the selected country,
 and the third column contains detail about the selected city.
 Having a "Back to Countries" button doesn't apply in this scenario.
 
-<img alt="Countries List" href="images/swiftui-navigation-08-split.png" />
+<img alt="Countries List" href="/blog/assets/swiftui-navigation-08-split.png?v={{pkg.version}}" />
 
-<img alt="Cities List" href="images/swiftui-navigation-09-split.png" />
+<img alt="Cities List" href="/blog/assets/swiftui-navigation-09-split.png?v={{pkg.version}}" />
 
-<img alt="City Detail" href="images/swiftui-navigation-10-split.png" />
+<img alt="City Detail" href="/blog/assets/swiftui-navigation-10-split.png?v={{pkg.version}}" />
