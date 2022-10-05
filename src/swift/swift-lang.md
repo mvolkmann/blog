@@ -2,9 +2,13 @@
 eleventyNavigation:
   key: Swift Language
   parent: Swift
-  order: 1
+  order: 2
 layout: topic-layout.njk
 ---
+
+<img alt="Swift logo" style="width: 30%"
+  src="/blog/assets/swift-logo.png?v={{pkg.version}}"
+  title="Swift logo">
 
 ## Overview
 

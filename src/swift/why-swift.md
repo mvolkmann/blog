@@ -6,6 +6,10 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<img alt="Swift logo" style="width: 30%"
+  src="/blog/assets/swift-logo.png?v={{pkg.version}}"
+  title="Swift logo">
+
 # What makes Swift a great programming language?
 
 This article highlights many features of the {% aTargetBlank
