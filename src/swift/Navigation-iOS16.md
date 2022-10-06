@@ -96,7 +96,9 @@ the initial view in this tab.
 
 The fourth tab "Countries Split" is similar to the third tab,
 but uses a `NavigationSplitView` instead of a `NavigationStack`.
-This provides a three-column view where
+A `NavigationSplitView` can have two of three sections arranged horizontally.
+These are named "sidebar", "content" (optional), and "detail".
+This app uses a three-column view where
 the first column contains a list of countries,
 the second column contains a list of cities in the selected country,
 and the third column contains detail about the selected city.
