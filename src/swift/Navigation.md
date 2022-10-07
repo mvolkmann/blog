@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Navigation in iOS 16
+  key: Navigation
   parent: Swift
 layout: topic-layout.njk
 ---
