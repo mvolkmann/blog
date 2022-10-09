@@ -1940,7 +1940,7 @@ struct ContentView: View {
     var isEditing = false
 
     var body: some View {
-        NavigationView {
+        NavigationView { // deprecated in iOS 16
             Form {
                 Section(header: Text("Profile")) {
                     TextField("Name", text: $name)
@@ -2235,10 +2235,16 @@ Tapping them causes the associated view
 to be rendered inside the `NavigationView`.
 See the "Navigation" section later.
 
+This is deprecated in iOS 16. See the new approach at
+{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
+
 ### `NavigationLink`
 
 These are used inside a `NavigationView`.
 See the "Navigation" section later.
+
+This is deprecated in iOS 16. See the new approach at
+{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
 
 ### `OutlineGroup`
 
@@ -5062,6 +5068,9 @@ struct ContentView: View {
 ```
 
 ## Navigation
+
+The approach described here is deprecated in iOS 16. See the new approach at
+{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
 
 The `NavigationView` view marks the spot where
 the views associated with `NavigationLinks` will be rendered.
