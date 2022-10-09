@@ -1057,6 +1057,18 @@ if number != nil {
 }
 ```
 
+To create a `String` from a number with a specific format,
+use the `NumberFormatter` class. For example,
+this creates a `String` where that contains grouping commas:
+
+```swift
+let value = 1234567
+let formatter = NumberFormatter()
+formatter.numberStyle = .decimal
+let number = NSNumber(value: value)
+let formatted = formatter.string(from: number) ?? "" // 1,234,567
+```
+
 ### Character Type
 
 The `Character` type is a `struct` that represents a single Unicode character.
