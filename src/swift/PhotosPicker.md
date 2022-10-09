@@ -16,7 +16,7 @@ select assets from their photo library than using {% aTargetBlank
 "https://developer.apple.com/documentation/uikit/uiimagepickercontroller",
 "UIPickerController" %} from UIKit.
 
-See the excellent YouTube videos from Steward Lynch, {% aTargetBlank
+See the excellent YouTube videos from Stewart Lynch, {% aTargetBlank
 "https://www.youtube.com/watch?v=gfUBKhZLcK0", "PhotosPicker - SwiftUI" %}.
 
 ## Example App

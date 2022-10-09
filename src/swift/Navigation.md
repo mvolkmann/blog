@@ -14,7 +14,7 @@ See the WWDC 2022 video on the new navigation API titled
 "https://developer.apple.com/videos/play/wwdc2022/10054/",
 "The SwiftUI cookbook for navigation" %}.
 
-Also see the excellent YouTube videos from Steward Lynch:
+Also see the excellent YouTube videos from Stewart Lynch:
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=6-OeaFfDXXw", "NavigationStack in iOS 16" %}
 - {% aTargetBlank "https://www.youtube.com/watch?v=pwP3_OX2G9A", "Back to Root and Deep Links" %}
