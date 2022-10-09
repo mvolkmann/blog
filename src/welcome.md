@@ -2,7 +2,10 @@
 layout: topic-layout.njk
 ---
 
-# Welcome to My Blog
-
-Select a topic from the menu on the left
-to read something more interesting than this.
+<div style="display: flex; flex-direction: column; align-items: center; margin: auto; width: 300px">
+  <h1>Welcome to My Blog</h1>
+  <p>
+    Select a topic from the menu on the left
+    to read something more interesting than this.
+  </p>
+</div>
