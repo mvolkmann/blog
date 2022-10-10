@@ -1069,6 +1069,11 @@ let number = NSNumber(value: value)
 let formatted = formatter.string(from: number) ?? "" // 1,234,567
 ```
 
+The `formatted` method can be applied to many kinds of values
+to produce a formatted string.
+See the example code at {% aTargetBlank
+"https://github.com/mvolkmann/FormattingDemo/tree/main", "FormattingDemo" %}.
+
 ### Character Type
 
 The `Character` type is a `struct` that represents a single Unicode character.
