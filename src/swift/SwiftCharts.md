@@ -80,6 +80,21 @@ and the `ForEach` can be removed.
 The `Chart` initializer can be passed a collection over which to iterate
 to get the data for each mark.
 
+To set the height of a chart and its background color,
+apply the `chartPlotStyle` view modifier to the `Chart`.
+For example:
+
+```swift
+Chart {
+    ...
+}
+.chartPlotStyle { plotArea in
+    plotArea
+        .frame(height: 400)
+        .background(.yellow.opacity(0.2))
+}
+```
+
 ## `BarMark`
 
 These are used to display bar charts.
@@ -170,7 +185,21 @@ Chart {
 ## Legends
 
 By default, a legend is displayed below each chart.
-To hide the legend, ...
-To move the legend, ...
+
+To hide the legend, apply the `chartLegend` view modifier to the `Chart`,
+passing a value of `.hidden`.
+For example:
+
+```swift
+Chart { ... }.chartLegend(.hidden)
+```
+
+To change the legend position, apply the `chartLegend` view modifier to the `Chart`,
+passing the `position` argument with a value like `.top`, `.trailing`, or `.leading`.
+For example:
+
+```swift
+Chart { ... }.chartLegend(position: .top)
+```
 
 ## Animation
