@@ -2414,6 +2414,10 @@ struct ContentView: View {
 }
 ```
 
+Specific tab bar destinations can hide the tab bar by applying
+the view modifier `.toolbar(.hidden, for: .tabBar)` view modifier
+to the destination view.
+
 ### `HSplitView`
 
 This is a layout container that organizes its children horizontally
@@ -2709,6 +2713,9 @@ To disable this, pass `.none` to the `autocapitalization` view modifier.
 
 Auto-correction is provided by default.
 To disable this, pass `true` to the `disableAutocorrection` view modifier.
+
+To allow entering multiple lines of text,
+set the `axis` argument to `.vertical`.
 
 ```swift
 // No prompt
@@ -3563,6 +3570,15 @@ The `Path` view supports many drawing methods including:
 Many drawing views draw exactly what their name implies.
 These include `Circle`, `Ellipse`, `Rectangle`,
 and `RoundedRectangle` (has rounded corners).
+
+To add a drop shadow to a shape, apply the `fill` view modifier.
+For example:
+
+```swift
+Circle()
+    .fill(.yellow.shadow(.drop(color: .black, radius: 10)))
+    .frame(width: 100)
+```
 
 Other drawing views are less obvious from their name, including:
 
@@ -4991,6 +5007,26 @@ struct ContentView: View {
     }
 }
 ```
+
+To change the vertical size of a sheet,
+apply the `presentationDetents` view modifier
+to the top view passed to `.sheet` with an array of size specifiers
+which can be `.medium` or `.large`.
+The first value specifies the default size of the sheet.
+The optional second value specifies the size of the sheet
+if the user taps on the drag indicator or drags it up.
+For example, `.presentationDetents([.medium, .large])`.
+
+For more precise sizing, pass `.fraction` and `.height` values.
+
+When only one size is specified, the drag indicator is not displayed.
+When two sizes are specified, the drag indicator is displayed.
+To change the visibility of the drag indicator,
+apply the `presentationDragIndicator` view modifier
+to the top view passed to `.sheet` with a `Bool` value.
+
+To display full screen sheet, use the `.fullScreenCover` view modifier
+in place of the `.sheet` view modifier.
 
 ## Toolbars
 
