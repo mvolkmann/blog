@@ -205,7 +205,7 @@ Chart { ... }.chartLegend(position: .top)
 ## Scrolling
 
 To create a chart that is larger that its allocation screen space
-and can be scrolled to view all the content:
+and can be scrolled horizontally to view all the content:
 
 1. Embed the `Chart` in a `ScrollView(.horizontal)`.
 1. Apply the `frame` view modifier to the `ScrollView`
@@ -225,6 +225,14 @@ and can be scrolled to view all the content:
            .background(.yellow.opacity(0.2))
        }
    ```
+
+The y-axis will only be visible when scrolled all the way to the right.
+The y-axis can be moved to the leading edge of the chart,
+but then it would only be visible when scrolled all the way to the left.
+
+To scroll vertically instead of horizontally,
+embed the `Chart` in a `ScrollView` without passing `.horizontal`
+and set the `ScrollView` height instead of the width.
 
 ## Event Handling
 
