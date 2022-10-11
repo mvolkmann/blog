@@ -130,6 +130,8 @@ BarMark(x: value1, y: value2)
 }
 ```
 
+Negative values cause the bar to be rendered below the zero value.
+
 ## `LineMark`
 
 These are used to display line charts.
@@ -152,6 +154,21 @@ These are often used to display heat maps.
 These add a vertical line in vertical charts
 or a horizontal line in horizontal charts.
 One example use if for indicating the average value.
+
+To add an text annotation to a `RuleMark`,
+apply the `annotation` view modifier.
+The following example adds a red, dashed, horizontal line at
+the y value that is the average of the quantitative values being plotted.
+The text "Average" appears below this line beginning at its leading end.
+
+```swift
+RuleMark(y: .value("Average", average))
+    .foregroundStyle(.red)
+    .lineStyle(StrokeStyle(lineWidth: 1, dash: [10]))
+    .annotation(position: .bottom, alignment: .leading) {
+         Text("Average").font(.caption)
+    }
+```
 
 ## Axis Labels
 
@@ -284,11 +301,7 @@ struct BarChartDemo: View {
                         }
                         // Display a red, dashed, vertical line.
                         .foregroundStyle(.red)
-                        .lineStyle(.init(
-                            lineWidth: 1,
-                            dash: [10],
-                            dashPhase: 5
-                        ))
+                        .lineStyle(StrokeStyle(dash: [10, 5]))
                   }
               }
         }
