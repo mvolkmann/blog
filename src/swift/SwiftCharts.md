@@ -21,23 +21,23 @@ combine to develop a broad range of data-driven charts."
 Swift Charts supports creating bar charts, line charts,
 area charts, scatter plots, and heat maps.
 
-By default charts occupy all the space made available to them
-by their parent view.
-
-Pie charts are not supported. This was an intentional omission
+Pie charts are not supported. This is an intentional omission
 based on the opinion that pie charts are often not the best choice
 for indicating the differences between values that are somewhat close.
 
-Values to be plotted can be quantitative (numbers),
-nominal (`String` objects or enums with `String` values),
-or temporal (Date objects representing a date or time).
+Values to be plotted can be quantitative (`Int` or `Double`),
+nominal (`String` or enums with `String` values),
+or temporal (`Date` representing a date or time).
 
-One axis must correspond to quantitative data
-and the other axis must correspond to nominal or temporal data.
-If y values are quantitative then the chart will be vertical
+One axis must correspond to quantitative data and
+the other axis must correspond to either nominal or temporal data.
+If the y values are quantitative then the chart will be vertical
 and the x values will be used for x-axis labels.
-If x values are quantitative then the chart will be horizontal.
+If the x values are quantitative then the chart will be horizontal.
 and the y values will be used for y-axis labels.
+
+By default charts occupy all the space made available to them
+by their parent view.
 
 ## Resources
 
@@ -51,8 +51,8 @@ See the excellent YouTube videos from Stewart Lynch:
 ## Example App
 
 See {% aTargetBlank "https://github.com/mvolkmann/ChartsDemo", "ChartsDemo" %}
-which demonstrates nearly everything shared in the
-Steward Lynch videos linked above.
+which is a SwiftUI app that demonstrates nearly everything
+shared in the Steward Lynch videos linked above.
 
 ## Marks
 
@@ -62,19 +62,19 @@ Each of these serve as direct children of the {% aTargetBlank
 They include:
 
 - {% aTargetBlank "https://developer.apple.com/documentation/charts/areamark", "AreaMark" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/charts/barmark", "BarMark" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/charts/linemark", "LineMark" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/charts/pointmark", "PointMark" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/charts/rectanglemark", "RectangleMark" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/charts/rulemark", "RuleMark" %}
-- {% aTargetBlank "https://developer.apple.com/documentation/charts/barmark", "BarMark" %}
 
-The initializer for each kind of mark takes `x` and `y` values
+The initializer for each mark type takes `x` and `y` arguments
 that have the type {% aTargetBlank
 "https://developer.apple.com/documentation/charts/plottablevalue",
 "PlottableValue" %}.
 Instances are created by calling the `PlottableValue` static method `value`
-which takes a `String` label and
-a value that can be a number, `String`, or `Date`.
+which takes a `String` label and a value that can be
+a number (quantitative), `String` (nominal), or `Date` (temporal).
 
 It is typical to iterate over a collection of objects
 that hold data to be plotted using `ForEach`
@@ -86,15 +86,14 @@ If the only child view of the `Chart` is a `ForEach`,
 the collection can be passed to the `Chart` initializer
 and the `ForEach` can be removed.
 
-## Basics
-
 ## `Chart`
 
-The `Chart` initializer can be passed a collection over which to iterate
-to get the data for each mark.
+The {% aTargetBlank "https://developer.apple.com/documentation/charts/chart",
+"Chart" %} view contains marks that define the chart to be displayed.
 
-To set the height of a chart and its background color,
-apply the `chartPlotStyle` view modifier to the `Chart`.
+To set the height of a chart and its background color, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/chart/chartplotstyle(content:)",
+"chartPlotStyle" %} view modifier to the `Chart`.
 For example:
 
 ```swift
@@ -108,12 +107,25 @@ Chart {
 }
 ```
 
+To customize the x-axis, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/chart/chartxaxis(content:)",
+"chartXAxis" %} view modifier.
+To customize the y-axis, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/chart/chartyaxis(content:)",
+"chartYAxis" %} view modifier.
+For more on these, see the "Axis Labels" section below.
+
+To detect tap and drag gestures on the chart, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/chart/chartoverlay(alignment:content:)",
+"chartOverlay" %} view modifier.
+For more on this, see the "Event Handling" section below.
+
 ## `BarMark`
 
-These are used to display bar charts.
+Instances of the `BarMark` struct describe individual bars in a bar charts.
 
-Bars can be stacked by including multiple instances with the same
-`x` value (for vertical bar charts) or `y` value (for horizontal bar charts).
+Bars can be stacked by including multiple instances
+with the same nominal or temporal value.
 
 For a stacked bar chart, create multiple `BarMark` views
 with the same `x` value (for vertical) or `y` value (for horizontal).
@@ -259,6 +271,9 @@ and can be scrolled horizontally to view all the content:
 The y-axis will only be visible when scrolled all the way to the right.
 The y-axis can be moved to the leading edge of the chart,
 but then it would only be visible when scrolled all the way to the left.
+Swift Charts really needs an option to
+make the y-axis sticky in horizontally scrolling charts and
+make the x-axis sticky in vertically scrolling charts.
 
 To scroll vertically instead of horizontally,
 embed the `Chart` in a `ScrollView` without passing `.horizontal`
