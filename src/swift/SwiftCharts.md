@@ -262,16 +262,27 @@ struct BarChartDemo: View {
 
     private func chartOverlay(proxy: ChartProxy) -> some View {
         GeometryReader { geometry in
-            Rectangle()
+            let areaX = geometry[proxy.plotAreaFrame].origin.x
+            return Rectangle()
                 .fill(.clear)
                 .contentShape(Rectangle())
+
+                // Handle tap gestures.
+                .onTapGesture { value in
+                    let x = value.x - areaX
+                    if let category: String = proxy.value(atX: x) {
+                        let data = categoryToDataMap[category]
+                        print("got tap on", data)
+                    }
+                }
+
+                // Handle drag gestures.
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            let x = value.location.x -
-                                geometry[proxy.plotAreaFrame].origin.x
-                            if let key: String = proxy.value(atX: x) {
-                                selectedData = keyToDataMap[key]
+                            let x = value.location.x - areaX
+                            if let category: String = proxy.value(atX: x) {
+                                selectedData = categoryToDataMap[category]
                             }
                         }
                         .onEnded { _ in selectedData = nil }
