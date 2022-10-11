@@ -206,28 +206,55 @@ Chart { ... }.chartLegend(position: .top)
 
 To listen for tap and drag gestures on a chart,
 apply the `chartOverlay` view modifier to the `Chart`.
-For example, the following code displays an annotation
-above a bar chart when dragging across the bars:
+For example, the following somewhat complex code displays
+an annotation above a bar chart when dragging across the bars:
 
 ```swift
 struct BarChartDemo: View {
     @State private var selectedData: MyDataStruct?
 
-    var body: some View {
-        Chart(objects) { data in
-            // Add BarMarks here.
+    private var annotation: some View {
+        VStack {
+            if let selectedData {
+                Text(selectedData.key)
+                Text("\(selectedData.quantity)")
+            }
+        }
+        .padding(5)
+        .background {
+            RoundedRectangle(cornerRadius: 5, style: .continuous)
+                .fill(annotationFill)
+        }
+        .foregroundColor(Color(.label))
+    }
 
-            if data.category == selectedData?.category {
-                RuleMark(x: category)
-                    .annotation(position: annotationPosition(index)) {
-                        annotation
-                    }
-                    .foregroundStyle(.red)
-                    .lineStyle(.init(
-                        lineWidth: 1,
-                        dash: [10],
-                        dashPhase: 5
-                    ))
+    private var annotationFill: some ShapeStyle {
+        let fillColor: Color = colorScheme == .light ?
+            .white : Color(.secondarySystemBackground)
+        return fillColor.shadow(.drop(radius: 3))
+    }
+
+    var body: some View {
+        Chart {
+            ForEach(objects.indices, id: \.self) { index in
+                let object = objects[index]
+                let key = PlottableValue.value("Key Title", object.key)
+
+                BarMark(x: key, y: .value("Quantity", object.quantity))
+
+                if object.key == selectedData?.key {
+                    RuleMark(x: key)
+                        .annotation(position: annotationPosition(index)) {
+                            annotation
+                        }
+                        // Display a red, dashed, vertical line.
+                        .foregroundStyle(.red)
+                        .lineStyle(.init(
+                            lineWidth: 1,
+                            dash: [10],
+                            dashPhase: 5
+                        ))
+                  }
               }
         }
         .chartOverlay { proxy in chartOverlay(proxy: proxy) }
