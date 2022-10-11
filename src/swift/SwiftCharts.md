@@ -94,6 +94,27 @@ with the `foregroundStyle` view modifier.
 To automatically choose a different color for each corresponding `BarMark`,
 use `.foregroundStyle(by: .value("some label", data.someProperty))`.
 
+In bar charts that use temporal data, the unit defaults to `.hour`.
+In this case the axis that represents the temporal values
+is scaled to accommodate 24 bars in each day.
+To instead display bars that correspond to entire days,
+pass the `unit` argument to the `BarMark` initializer with a value of `.day`.
+
+To annotate a bar, apply the `annotation` view modifier to a `BarMark`.
+This renders a given view above the bar.
+
+For example:
+
+```swift
+BarMark(x: value1, y: value2)
+    .annotation(position: .overlay) {
+        Text("\(data.quantity)")
+            .bold()
+            .foregroundColor(.white)
+    }
+}
+```
+
 ## `LineMark`
 
 These are used to display line charts.
@@ -116,6 +137,35 @@ These are often used to display heat maps.
 These add a vertical line in vertical charts
 or a horizontal line in horizontal charts.
 One example use if for indicating the average value.
+
+## Axis Labels
+
+To customize axis labels, apply the `chartXAxis`
+and/or `chartYAxis` view modifiers to the `Chart`.
+Each of these take a closure.
+If the closure is empty, the axis is hidden.
+
+To customize axis labels, call `AxisMarks` inside the previous closure.
+This takes another closure that is passed a value.
+Inside this closure, call `AxisValueLabel` and specify
+what should be displayed for the given value.
+To center labels below their bar,
+pass the `centered` argument with a value of `true`.
+For example:
+
+```swift
+Chart {
+    ...
+}
+.chartXAxis {
+    AxisMarks { value in
+        AxisValueLabel(
+            format: .dateTime.month().day(),
+            centered: true
+        )
+    }
+}
+```
 
 ## Legends
 
