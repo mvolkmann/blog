@@ -39,7 +39,20 @@ and the x values will be used for x-axis labels.
 If x values are quantitative then the chart will be horizontal.
 and the y values will be used for y-axis labels.
 
+## Resources
+
+See the excellent YouTube videos from Stewart Lynch:
+
+- {% aTargetBlank "https://www.youtube.com/watch?v=dIvE-E8nlsA",
+  "Charts Framework 1 - BarCharts Introduction" %}
+- {% aTargetBlank "https://www.youtube.com/watch?v=lB3poCA8ZN4",
+  "Charts Framework 2 - Visualizing Large Data Sets with Bar Charts" %}
+
 ## Example App
+
+See {% aTargetBlank "https://github.com/mvolkmann/ChartsDemo", "ChartsDemo" %}
+which demonstrates nearly everything shared in the
+Steward Lynch videos linked above.
 
 ## Marks
 
