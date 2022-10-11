@@ -202,10 +202,37 @@ For example:
 Chart { ... }.chartLegend(position: .top)
 ```
 
+## Scrolling
+
+To create a chart that is larger that its allocation screen space
+and can be scrolled to view all the content:
+
+1. Embed the `Chart` in a `ScrollView(.horizontal)`.
+1. Apply the `frame` view modifier to the `ScrollView`
+   to set its display width. For example:
+
+   ```swift
+   .frame(width: 400)
+   ```
+
+1. Apply the `chartPlotStyle` view modifier to the `Chart`
+   to set the chart width and height. For example:
+
+   ```swift
+   .chartPlotStyle { plotArea in
+       plotArea
+           .frame(width: 1000, height: 400)
+           .background(.yellow.opacity(0.2))
+       }
+   ```
+
 ## Event Handling
 
 To listen for tap and drag gestures on a chart,
 apply the `chartOverlay` view modifier to the `Chart`.
+Note that drag gestures will not be captured
+if the `Chart` is inside a `ScrollView`.
+
 For example, the following somewhat complex code displays
 an annotation above a bar chart when dragging across the bars:
 
