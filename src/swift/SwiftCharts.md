@@ -202,4 +202,56 @@ For example:
 Chart { ... }.chartLegend(position: .top)
 ```
 
+## Event Handling
+
+To listen for tap and drag gestures on a chart,
+apply the `chartOverlay` view modifier to the `Chart`.
+For example, the following code displays an annotation
+above a bar chart when dragging across the bars:
+
+```swift
+struct BarChartDemo: View {
+    @State private var selectedData: MyDataStruct?
+
+    var body: some View {
+        Chart(objects) { data in
+            // Add BarMarks here.
+
+            if data.category == selectedData?.category {
+                RuleMark(x: category)
+                    .annotation(position: annotationPosition(index)) {
+                        annotation
+                    }
+                    .foregroundStyle(.red)
+                    .lineStyle(.init(
+                        lineWidth: 1,
+                        dash: [10],
+                        dashPhase: 5
+                    ))
+              }
+        }
+        .chartOverlay { proxy in chartOverlay(proxy: proxy) }
+    }
+
+    private func chartOverlay(proxy: ChartProxy) -> some View {
+        GeometryReader { geometry in
+            Rectangle()
+                .fill(.clear)
+                .contentShape(Rectangle())
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            let x = value.location.x -
+                                geometry[proxy.plotAreaFrame].origin.x
+                            if let key: String = proxy.value(atX: x) {
+                                selectedData = keyToDataMap[key]
+                            }
+                        }
+                        .onEnded { _ in selectedData = nil }
+                )
+        }
+    }
+}
+```
+
 ## Animation
