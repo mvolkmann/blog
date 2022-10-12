@@ -167,6 +167,10 @@ To assign a different color to each corresponding `LineMark`,
 apply the `foregroundStyle` view modifier
 as described in the `BarMark` section above.
 
+To smooth the lines, apply the `interpolationMethod` view modifier
+to each `LineMark` with the value `.monotone`, `.cardinal`, or
+`.catmullRom` (formulated by Edwin Catmull and Raphael Rom).
+
 ## `PointMark`
 
 These are used to display scatter plots or to add points to line charts.
@@ -185,11 +189,12 @@ Shading below two areas with different colors
 is not currently supported.
 
 The example app draws one line for male data and one line for female data.
-Toggling the "Show Area" option causes it to only shade below the male line.
+Toggling the "Show Area" option causes it to only shade below the male line
+due to this restriction.
 
 ## `RectangleMark`
 
-These are often used to display heat maps.
+These are used to display heat maps.
 
 ## `RuleMark`
 
