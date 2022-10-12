@@ -178,6 +178,13 @@ See the examples in the `PointMark` section below.
 To smooth the lines, apply the `interpolationMethod` view modifier
 to each `LineMark` with the value `.monotone`, `.cardinal`, or
 `.catmullRom` (formulated by Edwin Catmull and Raphael Rom).
+For example:
+
+```swift
+LineMark(x: ageCategory, y: male)
+    .foregroundStyle(by: .value("Male", "Male"))
+    .interpolationMethod(.catmullRom)
+```
 
 ## `PointMark`
 
