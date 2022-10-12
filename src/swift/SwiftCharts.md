@@ -124,25 +124,29 @@ For more on this, see the "Event Handling" section below.
 
 Instances of the `BarMark` struct describe individual bars in a bar charts.
 
+Negative quantitative values cause the bar to be rendered
+below the typical x-axis..
+
 Bars can be stacked by including multiple instances
 with the same nominal or temporal value.
 
-For a stacked bar chart, create multiple `BarMark` views
-with the same `x` value (for vertical) or `y` value (for horizontal).
-Assign a different color to each `BarMark`
-with the `foregroundStyle` view modifier.
-To automatically choose a different color for each corresponding `BarMark`,
-use `.foregroundStyle(by: .value("some label", data.someProperty))`.
+To assign a different color to each corresponding `BarMark`,
+apply the `foregroundStyle` view modifier.
+This can be passed a specific `Color`.
+To allow Swift Charts to automatically choose a different color
+for each corresponding `BarMark`, use
+`.foregroundStyle(by: .value("some label", data.someProperty))`.
 
 In bar charts that use temporal data, the unit defaults to `.hour`.
-In this case the axis that represents the temporal values
+With this unit the axis that represents the temporal values
 is scaled to accommodate 24 bars in each day.
 To instead display bars that correspond to entire days,
 pass the `unit` argument to the `BarMark` initializer with a value of `.day`.
 
 To annotate a bar, apply the `annotation` view modifier to a `BarMark`.
-This renders a given view above the bar.
-
+By default this renders a given view above the bar.
+To position the annotation on the center of the bar,
+pass the `position` argument with a value of `.overlay`.
 For example:
 
 ```swift
@@ -155,20 +159,33 @@ BarMark(x: value1, y: value2)
 }
 ```
 
-Negative values cause the bar to be rendered below the zero value.
-
 ## `LineMark`
 
 These are used to display line charts.
+
+To assign a different color to each corresponding `LineMark`,
+apply the `foregroundStyle` view modifier
+as described in the `BarMark` section above.
 
 ## `PointMark`
 
 These are used to display scatter plots or to add points to line charts.
 
+To assign a different color to each corresponding `PointMark`,
+apply the `foregroundStyle` view modifier
+as described in the `BarMark` section above.
+
 ## `AreaMark`
 
 These are used to display area charts which shade the
 area below what would otherwise be a line chart.
+
+There can only be one area on the chart.
+Shading below two areas with different colors
+is not currently supported.
+
+The example app draws one line for male data and one line for female data.
+Toggling the "Show Area" option causes it to only shade below the male line.
 
 ## `RectangleMark`
 
