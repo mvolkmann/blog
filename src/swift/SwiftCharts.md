@@ -167,6 +167,14 @@ To assign a different color to each corresponding `LineMark`,
 apply the `foregroundStyle` view modifier
 as described in the `BarMark` section above.
 
+To display points at the ends of each line,
+add a `PointMark` (described in the next section)
+after each `LineMark` with the same `x` and `y` values.
+
+An alternative to adding `PointMark` instances is to
+apply the `symbol` view modifier to the `LineMark` instances.
+See the examples in the `PointMark` section below.
+
 To smooth the lines, apply the `interpolationMethod` view modifier
 to each `LineMark` with the value `.monotone`, `.cardinal`, or
 `.catmullRom` (formulated by Edwin Catmull and Raphael Rom).
@@ -178,6 +186,24 @@ These are used to display scatter plots or to add points to line charts.
 To assign a different color to each corresponding `PointMark`,
 apply the `foregroundStyle` view modifier
 as described in the `BarMark` section above.
+
+To display a symbol instead of a filled circle for each point,
+apply the `symbol` view modifier to each `PointMark`
+passing it a `by` argument whose value identifies a data series.
+For example:
+
+```swift
+PointMark(x: ageCategory, y: male)
+    .foregroundStyle(.blue)
+    .symbol(by: .value("Gender", "Male"))
+PointMark(x: category, y: female)
+    .foregroundStyle(.red)
+    .symbol(by: .value("Gender", "Female"))
+```
+
+The values `"Male"` and `"Female"` identify the data series
+to which each point belongs.
+These values could come of the data objects rather than being literal values.
 
 ## `AreaMark`
 
