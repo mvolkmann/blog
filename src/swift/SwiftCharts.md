@@ -41,12 +41,15 @@ by their parent view.
 
 ## Resources
 
-See the excellent YouTube videos from Stewart Lynch:
-
+- {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/10136/",
+  "Hello Swift Charts" %} from Apple WWDC 2022
+- {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/10137",
+  "Swift Charts: Raise the bar" %} from Apple WWDC 2022
 - {% aTargetBlank "https://www.youtube.com/watch?v=dIvE-E8nlsA",
-  "Charts Framework 1 - BarCharts Introduction" %}
+  "Charts Framework 1 - BarCharts Introduction" %} from Stewart Lynch
 - {% aTargetBlank "https://www.youtube.com/watch?v=lB3poCA8ZN4",
   "Charts Framework 2 - Visualizing Large Data Sets with Bar Charts" %}
+  from Stewart Lynch
 
 ## Example App
 
@@ -79,12 +82,14 @@ a number (quantitative), `String` (nominal), or `Date` (temporal).
 It is typical to iterate over a collection of objects
 that hold data to be plotted using `ForEach`
 and create one or more marks from each object.
-These objects must conform to the `Identifiable` protocol
-which requires an `id` property.
+If these objects do not conform to the `Identifiable` protocol,
+which requires an `id` property, add the `id` argument to the `ForEach`
+to specify a key path that uniquely identifiers each object.
 
 If the only child view of the `Chart` is a `ForEach`,
 the collection can be passed to the `Chart` initializer
 and the `ForEach` can be removed.
+The `Chart` initializer also supports the `id` argument.
 
 ## `Chart`
 
@@ -127,15 +132,36 @@ Instances of the `BarMark` struct describe individual bars in a bar charts.
 Negative quantitative values cause the bar to be rendered
 below the typical x-axis..
 
-Bars can be stacked by including multiple instances
-with the same nominal or temporal value.
-
 To assign a different color to each corresponding `BarMark`,
 apply the `foregroundStyle` view modifier.
 This can be passed a specific `Color`.
-To allow Swift Charts to automatically choose a different color
-for each corresponding `BarMark`, use
-`.foregroundStyle(by: .value("some label", data.someProperty))`.
+To allow Swift Charts to automatically
+choose a different color for the marks in each data series,
+pass the `by` argument that identifies the data series.
+For example:
+
+```swift
+BarMark(x: ageCategory, y: .value("Male", statistic.male))
+    .foregroundStyle(by: .value("Gender", "Male"))
+BarMark(x: ageCategory, y: .value("Female", statistic.female))
+    .foregroundStyle(by: .value("Gender", "Female"))
+```
+
+Bars are automatically stacked when there are multiple instances
+with the same nominal or temporal value.
+To display the corresponding bars side-by-side instead of stacking them,
+apply the `position` view modifier,
+passing the `by` argument that identifies the data series.
+For example:
+
+```swift
+BarMark(x: ageCategory, y: .value("Male", statistic.male))
+    .foregroundStyle(by: .value("Gender", "Male"))
+    .position(by: .value("Gender", "Male"))
+BarMark(x: ageCategory, y: .value("Female", statistic.female))
+    .foregroundStyle(by: .value("Gender", "Female"))
+    .position(by: .value("Gender", "Female"))
+```
 
 In bar charts that use temporal data, the unit defaults to `.hour`.
 With this unit the axis that represents the temporal values
@@ -433,3 +459,10 @@ struct BarChartDemo: View {
 ```
 
 ## Animation
+
+## Accessibility
+
+To make charts accessible, apply the `accessibilityLabel`
+and `accessibilityValue` view modifiers to each mark.
+For visually impaired users, the text passed to these
+will be spoken when VoiceOver is activated.
