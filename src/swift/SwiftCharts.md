@@ -175,6 +175,15 @@ An alternative to adding `PointMark` instances is to
 apply the `symbol` view modifier to the `LineMark` instances.
 See the examples in the `PointMark` section below.
 
+To change the line style, apply the `lineStyle` view modifier
+to each `LineMark`. For example, the following uses a dashed line:
+
+```swift
+LineMark(x: ageCategory, y: male)
+    .foregroundStyle(by: .value("Male", "Male"))
+    .lineStyle(StrokeStyle(lineWidth: 1, dash: [10]))
+```
+
 To smooth the lines, apply the `interpolationMethod` view modifier
 to each `LineMark` with the value `.monotone`, `.cardinal`, or
 `.catmullRom` (formulated by Edwin Catmull and Raphael Rom).
