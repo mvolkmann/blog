@@ -250,11 +250,12 @@ These values could come of the data objects rather than being literal values.
 ## `AreaMark`
 
 These are used to display area charts which shade the
-area below what would otherwise be a line chart.
+area below single values in a data series
+(by specifying the `y` argument) or
+between two values in a data series
+(by specifying the `yStart` and `yEnd` arguments).
 
-There can only be one area on the chart.
-Shading below two areas with different colors
-is not currently supported.
+Areas can be stacked, but cannot overlap.
 
 The example app draws one line for male data and one line for female data.
 Toggling the "Show Area" option causes it to only shade below the male line
