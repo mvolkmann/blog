@@ -580,7 +580,7 @@ One way to implement this is described below.
    ```
 
 1. In the loop inside the `Chart` where marks are created,
-   determine if the current data point should be animated now,
+   determine if the current data point should be shown now,
    base its value on that, and use that value in the mark.
 
    ```swift
@@ -591,6 +591,9 @@ One way to implement this is described below.
 1. When the chart appears, call the `animateChart` function.
 
    ```swift
+   Chart {
+       // chart content goes here
+   }
    .onAppear { animateChart() }
    ```
 
