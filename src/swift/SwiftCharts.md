@@ -95,8 +95,10 @@ For more on these, see the "Axis Labels" section below.
 
 To detect tap and drag gestures on the chart, apply the {% aTargetBlank
 "https://developer.apple.com/documentation/charts/chart/chartoverlay(alignment:content:)",
-"chartOverlay" %} view modifier.
-For more on this, see the "Event Handling" section below.
+"chartOverlay" %} view modifier or the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/chart/chartbackground(alignment:content:)",
+"chartBackground" %} view modifier.
+For more on these, see the "Event Handling" section below.
 
 ## Marks
 
@@ -523,7 +525,7 @@ struct BarChartDemo: View {
     }
 
     private func chartOverlay(proxy: ChartProxy) -> some View {
-        GeometryReader { geometry in
+        GeometryReader { geometry in // of the overlay view
             let areaX = geometry[proxy.plotAreaFrame].origin.x
             return Rectangle()
                 .fill(.clear)
@@ -532,6 +534,11 @@ struct BarChartDemo: View {
                 // Handle tap gestures.
                 .onTapGesture { value in
                     let x = value.x - areaX
+
+                    // The ChartProxy "position" method translates a
+                    // data value to a coordinate value within the chart.
+                    // The ChartProxy "value" method translates a
+                    // coordinate value within the chart to a data value.
                     if let category: String = proxy.value(atX: x) {
                         let data = categoryToDataMap[category]
                         print("got tap on", data)
@@ -555,6 +562,9 @@ struct BarChartDemo: View {
 ```
 
 ## Animation
+
+TODO: Add this section based on what you did in your SwiftChartsDemo project.
+TODO: See the `animatedGraph` method in `HealthChartView.swift`.
 
 ## Accessibility
 
