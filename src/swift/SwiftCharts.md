@@ -284,14 +284,14 @@ TODO: Add more detail here on how to create a heat map.
 
 ### `RuleMark`
 
-These add a vertical line (setting only the `x` value)
-or a horizontal line (setting only the `y` value).
-One example use if for indicating the average value.
+These add a vertical line (when only the `x` value is set)
+or a horizontal line (when only the `y` value is set).
 
 To add an text annotation to a `RuleMark`,
 apply the `annotation` view modifier.
-The following example adds a red, dashed, horizontal line at
-the y value that is the average of the quantitative values being plotted.
+
+The following example adds a red, dashed, horizontal line at the y value
+that is the average of the quantitative values being plotted.
 The text "Average" appears below this line beginning at its leading end.
 
 ```swift
@@ -302,6 +302,13 @@ RuleMark(y: .value("Average", average))
          Text("Average").font(.caption)
     }
 ```
+
+The example in the "Event Handling" section below
+listens for drag events on the chart and
+adds a red, dashed, vertical line
+through the mark being dragged over.
+Information about the data point is displayed
+at the top of the line, above the chart.
 
 ## Series Colors
 
@@ -524,6 +531,15 @@ struct BarChartDemo: View {
               }
         }
         .chartOverlay { proxy in chartOverlay(proxy: proxy) }
+    }
+
+    // This choose a position based on whether
+    // the data point is near one of the chart edges.
+    private func annotationPosition(_ index: Int) -> AnnotationPosition {
+        let percent = Double(index) / Double(vm.statistics.count)
+        return percent < 0.1 ? .topTrailing :
+            percent > 0.95 ? .topLeading :
+            .top
     }
 
     private func chartOverlay(proxy: ChartProxy) -> some View {
