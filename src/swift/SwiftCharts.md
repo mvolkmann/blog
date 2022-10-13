@@ -134,7 +134,7 @@ the collection can be passed to the `Chart` initializer
 and the `ForEach` can be removed.
 The `Chart` initializer also supports the `id` argument.
 
-## `BarMark`
+### `BarMark`
 
 Instances of the `BarMark` struct describe individual bars in a bar charts.
 
@@ -194,7 +194,7 @@ BarMark(x: value1, y: value2)
 }
 ```
 
-## `LineMark`
+### `LineMark`
 
 These are used to display line charts.
 
@@ -230,7 +230,7 @@ LineMark(x: ageCategory, y: male)
     .interpolationMethod(.catmullRom)
 ```
 
-## `PointMark`
+### `PointMark`
 
 These are used to display scatter plots or to add points to line charts.
 
@@ -256,7 +256,7 @@ The values `"Male"` and `"Female"` identify the data series
 to which each point belongs.
 These values could come of the data objects rather than being literal values.
 
-## `AreaMark`
+### `AreaMark`
 
 These are used to display area charts which shade the
 area below single values in a data series
@@ -276,11 +276,13 @@ The example app draws one line for male data and one line for female data.
 Toggling the "Show Area" option causes it to only shade below the male line
 due to this restriction.
 
-## `RectangleMark`
+### `RectangleMark`
 
 These are used to display heat maps.
 
-## `RuleMark`
+TODO: Add more detail here on how to create a heat map.
+
+### `RuleMark`
 
 These add a vertical line (setting only the `x` value)
 or a horizontal line (setting only the `y` value).
@@ -317,7 +319,7 @@ Chart {
 ])
 ```
 
-## Axis Mark
+## Axis Marks
 
 Axis marks can be added to the x-axis and y-axis.
 Each is composed of three optional parts,
@@ -563,8 +565,58 @@ struct BarChartDemo: View {
 
 ## Animation
 
-TODO: Add this section based on what you did in your SwiftChartsDemo project.
-TODO: See the `animatedGraph` method in `HealthChartView.swift`.
+Charts can be animated using `withAnimation` and
+changing the values to be plotted from zero to their actual value.
+This can be done at a different point in time for each data point
+so they each animate individually.
+
+One way to implement this is described below.
+
+1. Add a state variable to hold an array of `Bool` values
+   that indicate the data points that should shown now.
+
+   ```swift
+   @State private var show: [Bool] = []
+   ```
+
+1. In the loop inside the `Chart` where marks are created,
+   determine if the current data point should be animated now,
+   base its value on that, and use that value in the mark.
+
+   ```swift
+   let shouldShow = index < show.count && show[index] == true
+   let value = shouldShow ? data[index].quantity : 0
+   ```
+
+1. When the chart appears, call the `animateChart` function.
+
+   ```swift
+   .onAppear { animateChart() }
+   ```
+
+1. Add the following function:
+
+   ```swift
+   private func animateChart() {
+       show = []
+       for index in vm.statistics.indices {
+           // Delay rendering each data point
+           // a bit longer than the previous one.
+           DispatchQueue.main.asyncAfter(
+               deadline: .now() + Double(index) * 0.05
+           ) {
+               let spring = 0.5
+               withAnimation(.interactiveSpring(
+                   response: spring,
+                   dampingFraction: spring,
+                   blendDuration: spring
+               )) {
+                   show.append(true)
+               }
+           }
+       }
+   }
+   ```
 
 ## Accessibility
 
