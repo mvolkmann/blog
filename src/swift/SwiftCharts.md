@@ -25,8 +25,8 @@ Pie charts are not supported. This is an intentional omission
 based on the opinion that pie charts are often not the best choice
 for indicating the differences between values that are somewhat close.
 
-Values to be plotted can be quantitative (`Int` or `Double`),
-nominal (`String` or enums with `String` values),
+Values to be plotted can be quantitative (`Int`, `Double`, or `Decimal`),
+nominal (`String` or enum with `String` values),
 or temporal (`Date` representing a date or time).
 
 One axis must correspond to quantitative data and
@@ -255,6 +255,12 @@ area below single values in a data series
 between two values in a data series
 (by specifying the `yStart` and `yEnd` arguments).
 
+An example where shading a range of values is useful is when creating
+a chart that shows a series of minimum, average, and maximum values.
+`LineMark` instances can be used to plot the average values.
+`AreaMark` instances can be used to shade
+the area between the minimum and maximum values.
+
 Areas can be stacked, but cannot overlap.
 
 The example app draws one line for male data and one line for female data.
@@ -267,8 +273,8 @@ These are used to display heat maps.
 
 ## `RuleMark`
 
-These add a vertical line in vertical charts
-or a horizontal line in horizontal charts.
+These add a vertical line (setting only the `x` value)
+or a horizontal line (setting only the `y` value).
 One example use if for indicating the average value.
 
 To add an text annotation to a `RuleMark`,
@@ -284,6 +290,22 @@ RuleMark(y: .value("Average", average))
     .annotation(position: .bottom, alignment: .leading) {
          Text("Average").font(.caption)
     }
+```
+
+## Series Colors
+
+To set the color to be used for each data series by its name,
+apply the `chartForegroundStyleScale` view modifier to the `Chart`.
+For example:
+
+```swift
+Chart {
+    // chart content goes here
+}
+.chartForegroundStyleScale([
+    "Male": .blue,
+    "Female": .red,
+])
 ```
 
 ## Axis Labels
@@ -333,6 +355,22 @@ For example:
 
 ```swift
 Chart { ... }.chartLegend(position: .top)
+```
+
+## Scale
+
+Swift Charts automatically determines the minimum and maximum
+quantitative values to be plotted and
+selects appropriate x-axis and y-axis scales.
+The default axis scales can be overridden by applying
+the `chartYScale` and `chartXScale` view modifiers to the `Chart`.
+For example:
+
+```swift
+Chart {
+    // chart content goes here
+}
+.chartYScale(domain: 19 ... 157)
 ```
 
 ## Scrolling
