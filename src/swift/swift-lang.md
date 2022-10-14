@@ -1070,7 +1070,7 @@ let formatted = formatter.string(from: number) ?? "" // 1,234,567
 ```
 
 The `formatted` method can be applied to many kinds of values
-to produce a formatted string.
+to produce a locale-specific, formatted string.
 See the example code at {% aTargetBlank
 "https://github.com/mvolkmann/FormattingDemo/tree/main", "FormattingDemo" %}.
 
