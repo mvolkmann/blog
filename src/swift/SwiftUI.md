@@ -891,9 +891,16 @@ when a view is created or first appears.
    to the outermost view returned by the `body` function.
 
 The `task` view modifier takes a closure that is run in an asynchronous content
-and so can use the `await` keyword.
+and the code inside it can use the `await` keyword.
 If the user navigates away from the view before the code is run,
 certain asynchronous tasks such as network requests are automatically cancelled.
+
+To rerun the code in a `task` closure every time the value of
+an observable property such as a `@State` variable changes,
+include the `id` argument.
+
+By default the task is run at the highest priority.
+To give it a lower priority, include the `priority` argument.
 
 The `onAppear` view modifier also takes a closure,
 but its code can only use the `await` keyword if it is wrapped in a `Task`.
@@ -3846,6 +3853,7 @@ These include:
 
   This takes a function to execute every time
   the view on which it is applied is rendered.
+  Also see the `task` method.
 
 - `onDisappear`
 
