@@ -23,8 +23,7 @@ See the WWDC 2022 video {% aTargetBlank
 1. Browse {% aTargetBlank "https://developer.apple.com",
    "developer.apple.com" %}.
 1. Click "Account" and sign in.
-1. Click "Certificates, Identifiers & Profiles".
-1. In the left nav, click "Identifiers".
+1. Under "Certificates, Identifiers & Profiles", click "Identifiers".
 1. Click the "+" after the heading "Identifiers".
 1. Select the "App IDs" radio button.
 1. Click the "Continue" button.

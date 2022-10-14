@@ -310,6 +310,175 @@ through the mark being dragged over.
 Information about the data point is displayed
 at the top of the line, above the chart.
 
+## Example Charts
+
+This example plots hourly temperature forecasts from hard-coded data.
+It could of course come from WeatherKit.
+
+The code can be found at {% aTargetBlank
+"https://github.com/mvolkmann/SwiftChartsBasic", "SwiftChartsBasic" %}.
+
+There is a segmented `Picker` at the top that enables switching between
+two chart representations. The first is the bar chart and the second
+is a combination of a line chart, area chart, and point chart.
+
+<img alt="Swift Charts bar chart" style="width: 45%"
+  src="/blog/assets/swift-charts-bar.png?v={{pkg.version}}"
+  title="Swift Charts bar chart">
+<img alt="Swift Charts line/area/point chart" style="width: 45%"
+  src="/blog/assets/swift-charts-line-area-point.png?v={{pkg.version}}"
+  title="Swift Charts line/area/point chart">
+
+The bars and points are assigned a color that selected from
+a gradient based on the temperature value they represent.
+This is done using the following `Array` extension:
+
+```swift
+import SwiftUI
+
+extension Array where Element: UIColor {
+    /// Gets a color that is a given percentage through an array of Colors.
+    /// - Parameters:
+    ///   - percentage: Double between 0.0 and 1.0
+    /// - Returns: Color object
+    func colorAt(percentage: Double) -> Color {
+        guard percentage > 0 else { return Color(first ?? .clear) }
+        guard percentage < 1 else { return Color(last ?? .clear) }
+
+        let floatIndex = percentage * Double(count - 1)
+        let leftIndex = Int(floatIndex.rounded(.down))
+        let rightIndex = Int(floatIndex.rounded(.up))
+        let defaultIndex = Int(floatIndex.rounded())
+
+        let leftColor = self[leftIndex]
+        let rightColor = self[rightIndex]
+        let fallbackColor = self[defaultIndex]
+
+        var (r1, g1, b1, a1): (CGFloat, CGFloat, CGFloat, CGFloat) =
+            (0, 0, 0, 0)
+        guard leftColor.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
+        else { return Color(fallbackColor) }
+
+        var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) =
+            (0, 0, 0, 0)
+        guard rightColor.getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+        else { return Color(fallbackColor) }
+
+        let subPercentage = floatIndex - Double(leftIndex)
+        let uiColor = UIColor(
+            red: CGFloat(r1 + (r2 - r1) * subPercentage),
+            green: CGFloat(g1 + (g2 - g1) * subPercentage),
+            blue: CGFloat(b1 + (b2 - b1) * subPercentage),
+            alpha: CGFloat(a1 + (a2 - a1) * subPercentage)
+        )
+        return Color(uiColor)
+    }
+}
+```
+
+Here is the code the renders the charts:
+
+```swift
+import Charts
+import SwiftUI
+
+extension Date {
+    // Creates a Date object for a given hour in the current day.
+    static func hour(_ hour: Int) -> Date {
+        var components = Calendar.current.dateComponents(
+            [.year, .month, .day],
+            from: Date()
+        )
+        components.hour = hour
+        return Calendar.current.date(from: components)!
+    }
+}
+
+struct Weather: Identifiable {
+    let dateTime: Date
+    let temperature: Double
+    var id: Date { dateTime }
+}
+
+// This is the data to be plotted.
+private let forecast: [Weather] = [
+    .init(dateTime: Date.hour(8), temperature: 43.0),
+    .init(dateTime: Date.hour(9), temperature: 48.0),
+    .init(dateTime: Date.hour(10), temperature: 55.0),
+    .init(dateTime: Date.hour(11), temperature: 60.0),
+    .init(dateTime: Date.hour(12), temperature: 64.0),
+    .init(dateTime: Date.hour(13), temperature: 67.0),
+    .init(dateTime: Date.hour(14), temperature: 69.0),
+    .init(dateTime: Date.hour(15), temperature: 70.0),
+    .init(dateTime: Date.hour(16), temperature: 71.0),
+    .init(dateTime: Date.hour(17), temperature: 71.0),
+    .init(dateTime: Date.hour(18), temperature: 69.0),
+    .init(dateTime: Date.hour(19), temperature: 67.0),
+    .init(dateTime: Date.hour(20), temperature: 65.0),
+    .init(dateTime: Date.hour(21), temperature: 63.0),
+    .init(dateTime: Date.hour(22), temperature: 61.0),
+    .init(dateTime: Date.hour(23), temperature: 58.0),
+    .init(dateTime: Date.hour(24), temperature: 55.0)
+]
+
+struct ContentView: View {
+    @State private var chartType: String = "bar"
+
+    let areaColor = LinearGradient(
+        gradient: Gradient(colors: [.yellow, .blue]),
+        startPoint: .top,
+        endPoint: .bottom
+    )
+
+    // This is used to select bar and point colors
+    // based on the temperature they represent.
+    let colors: [UIColor] = [.blue, .yellow, .red]
+
+    var body: some View {
+        VStack {
+            Picker("Chart Type", selection: $chartType) {
+                Text("Bar").tag("bar")
+                Text("Line").tag("line")
+            }
+            .pickerStyle(.segmented)
+
+            Chart(forecast) { data in
+                let time = PlottableValue.value("Time", data.dateTime)
+                let temp = PlottableValue.value("Temperature", data.temperature)
+                let color = color(for: data.temperature)
+                if chartType == "bar" {
+                    // Each BarMark can be a different color.
+                    BarMark(x: time, y: temp)
+                        .foregroundStyle(color)
+                } else {
+                    // Each PointMark can be a different color,
+                    // but LineMarks and AreaMarks cannot.
+                    // They can however be gradient colors.
+                    LineMark(x: time, y: temp)
+                        .foregroundStyle(.blue)
+                        .interpolationMethod(.catmullRom)
+                    AreaMark(x: time, y: temp)
+                        .foregroundStyle(areaColor.opacity(0.7))
+                    PointMark(x: time, y: temp)
+                        .foregroundStyle(color)
+                }
+            }
+        }
+        .padding()
+    }
+
+    // This returns a color to use for a given temperature.
+    func color(for temperature: Double) -> Color {
+        let low = 30.0
+        let high = 100.0
+        let percentage = temperature <= low ? 0.0 :
+            temperature >= high ? 1.0 :
+            (temperature - low) / (high - low)
+        return colors.colorAt(percentage: percentage)
+    }
+}
+```
+
 ## Series Colors
 
 To set the color to be used for each data series by its name,
