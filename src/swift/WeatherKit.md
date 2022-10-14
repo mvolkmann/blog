@@ -64,6 +64,18 @@ Here are screenshots from this app in light and dark mode.
   src="/blog/assets/WeatherKitDemo-dark.png?v={{pkg.version}}"
   title="WeatherKit Demo dark">
 
+## Temperature Conversion
+
+To create a new `Measurement<UnitTemperature>` value from an existing one
+using a different unit, call the `converted` method.
+The existing object typically uses the locale-specific unit.
+For example:
+
+```swift
+let celsius = temperature.converted(to: .celsius)
+let fahrenheit = temperature.converted(to: .fahrenheit)
+```
+
 ## Limitations
 
 Weather data cannot be retrieved in a preview or in the Simulator.
