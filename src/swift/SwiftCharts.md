@@ -645,6 +645,27 @@ To scroll vertically instead of horizontally,
 embed the `Chart` in a `ScrollView` without passing `.horizontal`
 and set the `ScrollView` height instead of the width.
 
+## Background and Overlay
+
+The `chartBackground` view modifier can be applied to a `Chart`
+to specify any view that should be rendered behind the chart marks.
+
+The `chartOverlay` view modifier can be applied to a `Chart`
+to specify any view that should be rendered on top of the chart marks.
+
+For example:
+
+```swift
+Chart {
+    // chart content goes here
+}
+.chartBackground { _ in
+    Image(systemName: "flag.checkered")
+        .resizable()
+        .frame(width: 300, height: 300)
+}
+```
+
 ## Event Handling
 
 To listen for tap and drag gestures on a chart,
