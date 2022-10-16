@@ -5702,6 +5702,41 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
+## Size Classes
+
+The environment variables `horizontalSizeClass` and `verticalSizeClass`
+can be used to get a rough idea of
+the amount of screen space available in those directions.
+The values of these variables can change when a device
+is rotated between portrait and landscape mode.
+The values of these variables is either `.regular` or `.compact`.
+
+To make the values of these variables available in a custom view:
+
+```swift
+@Environment(
+    \.horizontalSizeClass
+) var horizontalSizeClass: UserInterfaceSizeClass?
+@Environment(
+    \.verticalSizeClass
+) var verticalSizeClass: UserInterfaceSizeClass?
+```
+
+To test the value of these variables, add code similar to the following:
+
+```swift
+if horizontalSizeClass == .compact {
+    Text("Compact")
+} else {
+    Text("Regular")
+}
+if verticalSizeClass == .compact {
+    Text("Compact")
+} else {
+    Text("Regular")
+}
+```
+
 ## Utility Functions
 
 The {% aTargetBlank

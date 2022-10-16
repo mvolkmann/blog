@@ -678,6 +678,7 @@ an annotation above a bar chart when dragging across the bars:
 
 ```swift
 struct BarChartDemo: View {
+    @Environment(\.colorScheme) private var colorScheme
     @State private var selectedData: MyDataStruct?
 
     private var annotation: some View {
@@ -723,7 +724,7 @@ struct BarChartDemo: View {
         .chartOverlay { proxy in chartOverlay(proxy: proxy) }
     }
 
-    // This choose a position based on whether
+    // This chooses a position based on whether
     // the data point is near one of the chart edges.
     private func annotationPosition(_ index: Int) -> AnnotationPosition {
         let percent = Double(index) / Double(vm.statistics.count)
@@ -734,14 +735,14 @@ struct BarChartDemo: View {
 
     private func chartOverlay(proxy: ChartProxy) -> some View {
         GeometryReader { geometry in // of the overlay view
-            let areaX = geometry[proxy.plotAreaFrame].origin.x
-            return Rectangle()
+            let origin = geometry[proxy.plotAreaFrame].origin
+            Rectangle()
                 .fill(.clear)
                 .contentShape(Rectangle())
 
                 // Handle tap gestures.
                 .onTapGesture { value in
-                    let x = value.x - areaX
+                    let x = value.x - origin.x
 
                     // The ChartProxy "position" method translates a
                     // data value to a coordinate value within the chart.
@@ -757,7 +758,7 @@ struct BarChartDemo: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            let x = value.location.x - areaX
+                            let x = value.location.x - origin.x
                             if let category: String = proxy.value(atX: x) {
                                 selectedData = categoryToDataMap[category]
                             }
