@@ -48,6 +48,8 @@ currently being edited by selecting a menu option:
 1. Open "System Preferences".
 1. Click "Extensions".
 1. In the left nav, select "Xcode Source Editor".
+   If this is missing, see this {% aTargetBlank
+   "https://github.com/nicklockwood/SwiftFormat/issues/494", "issue" %}.
 1. Check the checkbox for "SwiftFormat".
 1. Restart Xcode.
 
