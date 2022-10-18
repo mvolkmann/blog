@@ -55,14 +55,21 @@ for the WeatherKit service to be enabled for your app.
 
 See the demo project {% aTargetBlank
 "https://github.com/mvolkmann/WeatherKitDemo", "WeatherKitDemo" %} in GitHub.
-Here are screenshots from this app in light and dark mode.
+Here are screenshots from this app:
 
-<img alt="WeatherKit Demo light" style="width: 40%"
-  src="/blog/assets/WeatherKitDemo-light.png?v={{pkg.version}}"
-  title="WeatherKit Demo light">
-<img alt="WeatherKit Demo dark" style="width: 40%"
-  src="/blog/assets/WeatherKitDemo-dark.png?v={{pkg.version}}"
-  title="WeatherKit Demo dark">
+<img alt="WeatherKit Current" style="width: 40%"
+  src="/blog/assets/weatherkit-current.jpg?v={{pkg.version}}"
+  title="WeatherKit Current">
+<img alt="WeatherKit Forecast" style="width: 40%"
+  src="/blog/assets/weatherkit-forecast.jpg?v={{pkg.version}}"
+  title="WeatherKit Forecast">
+
+<img alt="WeatherKit Current" style="width: 40%"
+  src="/blog/assets/weatherkit-chart.jpg?v={{pkg.version}}"
+  title="WeatherKit Chart">
+<img alt="WeatherKit Heat Map" style="width: 40%"
+  src="/blog/assets/weatherkit-heatmap.jpg?v={{pkg.version}}"
+  title="WeatherKit Heat Map">
 
 ## Temperature Conversion
 

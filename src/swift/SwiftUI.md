@@ -41,6 +41,9 @@ By comparison SwiftUI ...
 - click "Next"
 - select the directory where the project will be stored and click "Create"
 
+The file name of the generated file that extends `App` is the
+app name followed by "App", but this can be changed to any name.
+
 To change the device being simulated,
 click the device drop-down after the app name near the top
 and select the device type (such as "iPhone 13").
@@ -52,6 +55,11 @@ To change the target version of iOS,
 click the app name at the top of the Navigator,
 click the "General" tab, and
 select an iOS version from the dropdown in the "Deployment info" section.
+
+To change the name displayed below the app icon,
+click the app name at the top of the Navigator,
+select the app target, and
+modify the value of "Display Name".
 
 A new "App" project begins with the following files.
 
