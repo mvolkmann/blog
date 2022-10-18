@@ -2181,8 +2181,10 @@ This is important! If the elements are not `Identifiable`
 and no `id:` argument is supplied, the view
 may not update property when the collection changes.
 
-Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`).
-The value of `id:` is a key path that specifies
+Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`)
+unless the `id` argument key path `\.self` is specified.
+
+The value of the `id` argument is a key path that specifies
 how to find a unique value in the element.
 For example, the `String` type does not implement `Identifiable`.
 To iterate over an array of `String` values:
