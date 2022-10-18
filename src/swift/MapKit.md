@@ -33,12 +33,34 @@ See the demo app at {% aTargetBlank
   src="/blog/assets/mapkit-browse-place.jpg?v={{pkg.version}}"
   title="MapKit Browse Place">
 
+TODO: Add many more sections!
+
 ## Showing Current Location
 
 To show the current location of the user on the map,
-set `showUserLocation` to `true`.
+add the `showUserLocation` argument with a value of `true`
+to the `Map` initializer call.
+
+```swift
+Map(
+    ...
+     showsUserLocation: true,
+     ...
+)
+```
 
 ## Simulator
 
-In the Simulator the location defaults to San Jose.
+To simulate a drag event, simply click and drag.
+
+To zoom in, double-click.
+To zoom out, hold down the option key and click.
+Another option is to hold down the option key to display
+two circles that represent finger touch points.
+Drag the circles closer together to zoom out
+and farther apart to zoom in.
+
+In the Simulator the location defaults to the location of
+Apple headquarters in Cupertino, California near San Jose.
 To change this, select Features ... Location ... Custom Location...
+and enter latitude and longitude values.
