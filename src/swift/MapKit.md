@@ -14,6 +14,7 @@ The maps can contain markers that can be tappable
 to invoke app-specific actions.
 
 "LookAround" capabilities can be added to display street level views.
+See https://developer.apple.com/videos/play/wwdc2022/10035/.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/mapkit/mklocalsearch",
