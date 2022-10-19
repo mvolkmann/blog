@@ -2755,6 +2755,18 @@ TextField("Score", value: $score, format: .number)
     .textFieldStyle(.roundedBorder)
 ```
 
+To use good foreground and background colors in both light and dark mode
+use the following:
+
+```swift
+TextField("my placeholder", text: $locationVM.searchQuery)
+    .padding(10)
+    .background(
+        RoundedRectangle(cornerRadius: 10).fill(.background)
+    )
+    .foregroundColor(.primary)
+```
+
 ### `SecureField`
 
 This is like `TextField`, but obscures the characters that are typed.
