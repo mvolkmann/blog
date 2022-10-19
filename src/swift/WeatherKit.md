@@ -58,17 +58,17 @@ See the demo project {% aTargetBlank
 Here are screenshots from this app:
 
 <img alt="WeatherKit Current" style="width: 40%"
-  src="/blog/assets/weatherkit-current.jpg?v={{pkg.version}}"
+  src="/blog/assets/weatherkit-current.png?v={{pkg.version}}"
   title="WeatherKit Current">
 <img alt="WeatherKit Forecast" style="width: 40%"
-  src="/blog/assets/weatherkit-forecast.jpg?v={{pkg.version}}"
+  src="/blog/assets/weatherkit-forecast.png?v={{pkg.version}}"
   title="WeatherKit Forecast">
 
 <img alt="WeatherKit Current" style="width: 40%"
-  src="/blog/assets/weatherkit-chart.jpg?v={{pkg.version}}"
+  src="/blog/assets/weatherkit-chart.png?v={{pkg.version}}"
   title="WeatherKit Chart">
 <img alt="WeatherKit Heat Map" style="width: 40%"
-  src="/blog/assets/weatherkit-heatmap.jpg?v={{pkg.version}}"
+  src="/blog/assets/weatherkit-heatmap.png?v={{pkg.version}}"
   title="WeatherKit Heat Map">
 
 ## Temperature Conversion
