@@ -2816,6 +2816,9 @@ This creates a hyperlink like an HTML `a` element.
 Clicking it opens the associated URL in Safari.
 These work in the Simulator, but Preview is not able to open Safari.
 
+When using this it may be necessary to add the key "Supports Document Browser"
+with the Boolean value "YES" in the target Info tab to remove a build warning.
+
 ```swift
 Link(
     "link text",

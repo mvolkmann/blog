@@ -36,6 +36,27 @@ See the demo app at {% aTargetBlank
 
 TODO: Add many more sections!
 
+## Resources
+
+- {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/10035/",
+  "What's new in MapKit" %} from WWDC 2022
+- {% aTargetBlank
+  "https://holyswift.app/new-mapkit-configurations-with-swiftui/",
+  "New MapKit Configurations with SwiftUI" %}
+
+## Getting Started
+
+To enable use of MapKit in a project:
+
+- Select the top entry in the file navigator.
+- Select the main target.
+- Select the "Signing & Capabilities" tab.
+- Click the "+ Capability" button in the upper-left.
+- Enter "MapKit".
+- Double-click that capability to add it to the project.
+- Check the checkboxes for the desired routing modes such as
+  "Bike", "Car", and "Pedestrian".
+
 ## Showing Current Location
 
 To show the current location of the user on the map,
