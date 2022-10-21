@@ -48,8 +48,7 @@ currently being edited by selecting a menu option:
 1. Open "System Preferences".
 1. Click "Extensions".
 1. In the left nav, select "Xcode Source Editor".
-   If this is missing, see this {% aTargetBlank
-   "https://github.com/nicklockwood/SwiftFormat/issues/494", "issue" %}.
+   If this is missing, see the WARNING section below.
 1. Check the checkbox for "SwiftFormat".
 1. Restart Xcode.
 
@@ -83,6 +82,22 @@ every time a file is saved.
 To configure Xcode to run SwiftFormat every time the project is built, see
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat#xcode-build-phase",
 "Xcode build phase" %}.
+
+### WARNING
+
+Periodically Xcode loses the ability to run SwiftFormat.
+This happens when System Preferences ... Extensions
+loses the left nav entry for "Xcode Source Editor".
+Pressing cmd-s will do nothing but make a sound.
+To fix this, enter the following commands from a terminal:
+
+```bash
+PATH=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support:"$PATH"
+$ lsregister -f /Applications/Xcode.app # or whatever executable name is used
+```
+
+This tip was found in this GitHub {% aTargetBlank
+"https://github.com/nicklockwood/SwiftFormat/issues/494", "issue" %}.
 
 ## Configuration
 
