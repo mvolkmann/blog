@@ -2966,6 +2966,9 @@ This allows selecting an option from a list.
 It takes the text to display as a prompt and a `selection` argument
 which is a binding that holds something to identify the selected value.
 
+The label text passed to the `Picker` initializer
+is only displayed if the `Picker` is inside a `Form` or `List`.
+
 The `pickerStyle` view modifier can be applied
 to change the way the options are rendered.
 The specified prompt is only rendered by some styles.
