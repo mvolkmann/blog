@@ -200,6 +200,9 @@ that can include the following options:
 - Extract to a Method
 - Extract All Occurrences
 
+Note that the "Extract Subview" option and the "Embed in \*" options
+only appear a preview is displayed and a view name is command-clicked.
+
 In the past there was a "Rename..." option in this menu.
 It was moved to Editor ... Refactor ... Rename.
 
