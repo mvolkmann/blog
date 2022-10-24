@@ -3895,6 +3895,15 @@ These include:
 - `onPlayPauseCommand`
 
 - `onChange`
+
+  This registers a closure to be invoked
+  when the value of a given state property changes.
+  The closure is passed the new value.
+  If the closure takes no arguments, the somewhat confusing error message
+  "Type '()' cannot conform to 'Equatable'" will appear.
+  To fix this, add a parameter to the closure
+  which can be `_` if the value is not used.
+
 - `onContinueUserActivity`
 - `onHover`
 - `onOpenURL`
