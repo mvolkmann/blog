@@ -2040,7 +2040,10 @@ Common UI components that are not built into SwiftUI include:
 
 `Section` views break a view into sections that are optionally labelled.
 They are also optionally collapsible.
-These are used in the `Form` section above and in the `List` section below.
+
+`Section` views are only useful inside collection views like
+`Form`, `List`, and `Picker`.
+See the examples in the `Form` section above and in the `List` section below.
 
 ### `Group`
 
