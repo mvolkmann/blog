@@ -3263,6 +3263,14 @@ struct ContentView: View {
 }
 ```
 
+To change the size of an indeterminate `ProgressView`
+apply the `scaleEffect` modifier. For example:
+
+```swift
+ProgressView()
+    .scaleEffect(x: 3, y: 3, anchor: .center)
+```
+
 ### `Gauge`
 
 This shows a current value in relation to minimum and maximum values.
