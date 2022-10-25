@@ -59,6 +59,8 @@ XCTest is a unit testing framework for SwiftUI.
 1. To run a single test method, click the diamond where the
    line number of the first line of the method (starts with `func`)
    would normally appear.
+   If the diamonds don't appear, click and different source file
+   and they click back on the test file.
 1. To run all the test methods in the file, click the diamond where the
    line number of the first line of the class would normally appear.
 1. To run all the tests in Navigator folder, click the diamond
