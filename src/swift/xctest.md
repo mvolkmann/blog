@@ -13,6 +13,7 @@ XCTest is a unit testing framework for SwiftUI.
 ## Unit Test Configuration
 
 1. Select the topmost entry in the Navigator.
+1. Select the main target.
 1. Click the "+" button at the bottom of the left nav to create a new target.
 1. Select "Unit Testing Bundle".
 1. Click the "Next" button.
@@ -43,6 +44,7 @@ XCTest is a unit testing framework for SwiftUI.
 1. To make all the source files in the project available to the test,
    add the line `@testable import {project-name}`
    before each test class definition.
+   Replace hyphens with underscores.
 1. Add test methods whose names begin with "test".
 1. To make an assertion, call one of the `XCTAssert{kind}` functions.
 
