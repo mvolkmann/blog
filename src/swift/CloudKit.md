@@ -73,20 +73,21 @@ To add the use of CloudKit to a project:
 1. Click the "Signing and Capabilities" tab.
 1. Click the "+" in the upper-right to add a capability.
 1. Double-click "iCloud".
-1. Under "Services", check the "CloudKit" checkbox.
-   Also check "Key-value storage" and/or "iCloud Documents"
-1. Click the "CloudKit Console" button to open a web page at
-   https://icloud.developer.apple.com/dashboard/home/teams/{your-team-id}.
+1. Under "Services", check all the checkboxes.
+   These include "Key-value storage", "iCloud Documents", and "CloudKit".
 1. Click the "+" under "Containers" and enter a name for the new container.
    This needs to be unique among all CloudKit containers,
-   so consider using the bundle id of the app.
+   so consider using the bundle id of the app prefixes by "iCloud.".
 1. Periodically click the refresh button below the list of containers
    until the new container name changes color from red to white,
    indicating that the container has been created.
    This can take a couple of minutes.
-1. Click the "CloudKit Console" button.
+1. Click the "CloudKit Console" button to open the website at
+   https://icloud.developer.apple.com/dashboard/home/teams/{your-team-id}.
 1. Sign in using your Apple Developer account
 1. Click the big "CloudKit Database" button.
+1. Click the container dropdown at the top and
+   select the container name created above.
 
 After the first record is saved in the container,
 make the records of that type queryable.
@@ -122,7 +123,8 @@ and subscribing to be notified of changes see
 ## Sample Code
 
 See the app {% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo",
-"CloudKitDemo" %}.
+"CloudKitDemo" %} which demonstrates performing all the CRUD operations
+on records in a CloudKit database.
 
 ## Querying
 
