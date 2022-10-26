@@ -57,7 +57,8 @@ The table below compares these two options.
 | hot reloading time          | slow                  | fast    |
 | runtime performance         | somewhat slow         | faster  |
 | GitHub stars as of 12/23/21 | 100K                  | 134K    |
-| version as of 12/23/21      | 0.66.4                | 2.8.1   |
+| GitHub stars as of 10/26/22 | 105K                  | 146K    |
+| version as of 10/26/22      | 0.70.4                | 3.3     |
 
 React Native is an attractive choice for development teams that
 already have experience in web technologies in general and React in particular.
@@ -65,6 +66,12 @@ It is possible to share some code between React and React Native applications.
 
 Flutter targets more than just Android and iOS.
 It also targets web apps and desktop apps running on Windows, macOS, and Linux.
+
+Dart is arguably a better programming language that JavaScript,
+in part due to its null safety guarantees.
+
+Flutter provides a richer set of pre-built widgets than React Native does.
+This makes it faster to get started and encourages more consistent apps.
 
 Because everything rendered by Flutter is just drawn on a canvas,
 it can take advantage of device GPUs.
@@ -81,13 +88,14 @@ Android, Flutter, Mozilla Firefox and Firefox OS, and many other products."
 also uses Skia.
 
 Companies using React Native include
-Airbnb, Baidui, Bloomberg, Discord, Facebook, Instagram, Oculus, Pinterest,
-Salesforce, Shopify, Skype, Tesla, Uber Eats, Walmart, and Wix.
+Airbnb, Baidui, Bloomberg, Coinbase, Discord, Facebook, Instagram, NerdWallet,
+NFL, Oculus, Pinterest, PlayStation App, PUMA, Salesforce, Shopify, Skype,
+Tableau, Tesla, Uber Eats, Walmart, and Wix.
 
 Companies using Flutter include
-Alibaba, Amazon, Betterment, BMW, Etsy, Google Ads, Google Pay,
+Alibaba, Amazon, Betterment, BMW, eBay, Etsy, Google Ads, Google Pay,
 Hamilton Musical, iRobot, New York Times, Phillips Hue, Realtor.com,
-Supabase, Tonal, and Toyota.
+Rive, Supabase, Tonal, Toyota, and US Department of Veterans Affairs.
 
 ## Terminology
 
