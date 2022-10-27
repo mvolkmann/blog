@@ -208,11 +208,12 @@ To delete a record type and all records of that type:
 - Select "Delete Record Type...".
 - Click the "Delete" button.
 
-## Data
+## Records
 
 To view (query) all the records of a given type:
 
 - In the left nav under "Data", click "Records".
+- Select the database to be used: Public, Private, or Shared.
 - Select a record type from the "RECORD TYPE" dropdown.
 - Click the "Query Records" button.
 
