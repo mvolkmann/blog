@@ -106,6 +106,16 @@ make the records of that type queryable.
 1. In the "Record Types" dropdown, select the new record name.
 1. Click the "Query Records" button to display all the records of that type.
 
+To enable use of subscriptions:
+
+1. Click the top item in the Navigator.
+1. Click the first target.
+1. Click the "Signing and Capabilities" tab.
+1. Click the "+" in the upper-right to add a capability.
+1. Double-click "Background Modes".
+1. Under "Modes", check the "Background fetch"
+   and "Remote notifications" checkboxes.
+
 For a good example of using CloudKit including performing CRUD operations
 and subscribing to be notified of changes see
 {% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo", "CloudKitDemo" %}.
