@@ -85,7 +85,8 @@ To configure Xcode to run SwiftFormat every time the project is built, see
 
 ### WARNING
 
-Periodically Xcode loses the ability to run SwiftFormat.
+Periodically Xcode loses the ability to run SwiftFormat and
+the Editor menu will no longer contain "SwiftFormat" at the bottom.
 This happens when System Preferences ... Extensions
 loses the left nav entry for "Xcode Source Editor".
 Pressing cmd-s will do nothing but make a sound.

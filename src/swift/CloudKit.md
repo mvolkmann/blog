@@ -184,6 +184,9 @@ To define a new record type:
 
     Most of these also have a "(List)" option for a collection of values.
 
+    There does not seem to be a way to require a field
+    to have a value that is unique across all records.
+
   - Click the "Done" button.
 
 - Click the "Save" button.
@@ -214,6 +217,7 @@ To view (query) all the records of a given type:
 
 - In the left nav under "Data", click "Records".
 - Select the database to be used: Public, Private, or Shared.
+  This always resets to "Public" rather than remembering the last selection.
 - Select a record type from the "RECORD TYPE" dropdown.
 - Click the "Query Records" button.
 
