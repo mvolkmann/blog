@@ -136,10 +136,6 @@ and click the checkbox for the widget target under "Target Membership".
 Static widgets cannot be configured by the user
 and have a somewhat simpler implementation.
 
-```swift
-
-```
-
 ## Configurable Widgets
 
 ## Data
