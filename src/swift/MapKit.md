@@ -44,6 +44,20 @@ TODO: Add many more sections!
   "https://holyswift.app/new-mapkit-configurations-with-swiftui/",
   "New MapKit Configurations with SwiftUI" %}
 
+## Map vs MKMapView
+
+MapKit added the {% aTargetBlank
+"https://developer.apple.com/documentation/mapkit/map", "Map" %} view in iOS14.
+`Map` only supports a subset of the features available in
+{% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkmapview",
+"MKMapView" %}.
+For this reason it is often desirable to define a struct that
+conforms using `UIViewRepresentable` and wraps access to `MKMapView`.
+
+TODO: List the features that `Map` is missing!
+See https://developer.apple.com/forums/thread/659748 where it says
+"iOS 14 SwiftUI Map() is missing a lot of the functionality of MKMapView. I just tried to create a "pure" SwiftUI app, with Map(), for converting a sequence of taps on a map into a polyline. TapGesture does not report the View location of the tap, nor does Map() have access to the convert to coordinate method."
+
 ## Getting Started
 
 To enable use of MapKit in a project:

@@ -295,6 +295,15 @@ select File ... Open, navigate to the project directory, and click "Open".
 Another way to open an existing Xcode project
 is to double-click its `.xcodeproj` file.
 
+## Building
+
+To build a project, select Product ... Build or press cmd-b.
+
+To hear sounds that indicate whether the build was successful or failed,
+select Xcode ... Preferences ... Behaviors.
+Then select "Succeeds, check "Play sound", and select a sound.
+Repeat for "Fails" and select a different sound.
+
 ## Previews
 
 Previews allow testing a single view outside of the Simulator or a real device.
