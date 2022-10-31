@@ -2045,6 +2045,11 @@ They are also optionally collapsible.
 `Form`, `List`, and `Picker`.
 See the examples in the `Form` section above and in the `List` section below.
 
+`Section` titles are made all uppercase by default.
+To prevent this, apply the `textCase` view modifier passing it `nil`.
+The first letter will still be capitalized,
+but the remaining characters will not be modified.
+
 ### `Group`
 
 This collects all its child views into a single view
@@ -2485,6 +2490,8 @@ which can be specified with a trailing closure.
 A `Button` specifies a function to call when pressed
 using the `action` argument
 which can also be written as a trailing closure.
+The `action` argument is ignored for `Button` views that are inside a `List`.
+In that case use the `onTapGesture` modifier instead.
 
 By default buttons have no border, no background color,
 and the text is the accent color.
