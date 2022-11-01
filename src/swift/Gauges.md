@@ -99,4 +99,9 @@ Supported argument values include:
   There does not seem to be a way to specify separate colors
   for the background and foreground circles.
 
-TODO: Include screenshots here!
+<img alt="SwiftUI Linear Gauges" style="width: 45%"
+  src="/blog/assets/swiftui-gauges-linear.png?v={{pkg.version}}"
+  title="SwiftUI Linear Gauges">
+<img alt="SwiftUI Circular Gauges" style="width: 45%"
+  src="/blog/assets/swiftui-gauges-circular.png?v={{pkg.version}}"
+  title="SwiftUI Circular Gauges">
