@@ -168,6 +168,19 @@ The most commonly used commands are described in the table below.
 | `:exit` | exits the interpreter            |
 | `:help` | prints help on all REPL commands |
 
+## Global `print` Function
+
+The global {% aTargetBlank
+"https://developer.apple.com/documentation/swift/print(_:separator:terminator:)",
+"print" %} function takes any number of arguments and prints them to stdout.
+
+The literal expressions `#file`, `#fileID`, `#function`, `#line`, and `#column`
+can be used to provide context. For example:
+
+```swift
+print("\(#fileID) \(#function) score =", score)
+```
+
 ## Packages
 
 The {% aTargetBlank "https://www.swift.org/package-manager/",
