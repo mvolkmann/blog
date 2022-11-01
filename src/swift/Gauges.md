@@ -33,9 +33,70 @@ The `Gauge` view takes the following arguments:
 The `gaugeStyle` view modifier specifies the kind of gauge to be displayed.
 Supported argument values include:
 
-- `.linearCapacity`: ?
-- `.accessoryLinear`: ?
-- `.accessoryLinearCapacity`: ?
-- `.accessoryCircular`: ?
-- `.accessoryCircularCapacity`: ?
-- others?
+- `.linearCapacity`
+
+  This displays a horizontal bar representing the entire range of values.
+  This bar is gray by default and there does not seem to be a way to change it.
+  The current value is indicated by drawing a bar in the specified tint color
+  on top of the background bar starting from the left.
+
+  A `label`, if provided, is displayed above the bar.
+
+  The `currentValueLabel`, if provided, is displayed below the bar.
+
+  The `minimumValueLabel` and `maximumValueLabel`, if provided,
+  are displayed on the leading and trailing edge.
+  If one is provided, the other must also be provided.
+  They cannot be `nil` or an `EmptyView`, but they can be `Text("")`.
+
+- `.accessoryLinear`
+
+  This displays a thinner bar than `.linearCapacity`.
+
+  The current value is indicated by a circle drawn on the bar that
+  has the specified tint color and includes a small amount of clear padding.
+  If the tint is a gradient, the circle color takes on the
+  appropriate color at its position within the gradient.
+
+  A `label` is required but is not displayed.
+
+  The `currentValueLabel`, if provided, is displayed on the leading edge
+  only if the `minimumValueLabel` and `maximumValueLabel` are not provided.
+  The `minimumValueLabel` and `maximumValueLabel` values, if provided,
+  appear on the leading and trailing edges.
+
+- `.accessoryLinearCapacity`
+
+  This is similar to `.linearCapacity`, but draws a thinner bar.
+
+- `.accessoryCircular`
+
+  This displays a circle that is open at the bottom where either a `label`
+  or `minimumValueLabel` and `maximumValueLabel` can be displayed.
+
+  The current value is indicated by a circle drawn on the bar that
+  has the specified tint color and includes a small amount of clear padding.
+  If the tint is a gradient, the circle color takes on the
+  appropriate color at its position within the gradient.
+
+  The `currentValueLabel` is displayed in the center.
+
+  The opening at the bottom of the circle can contain
+  either the `currentValueLabel` or
+  the pair `minimumValueLabel` and `maximumValueLabel`.
+
+- `.accessoryCircularCapacity`
+
+  This displays a complete circle that can
+  include `currentValueLabel` in the center.
+
+  The `label`, `minimumValueLabel`, and `maximumValueLabel` are not used.
+
+  The circle color is a dim version of the specified tint
+  and the current value is indicated by
+  drawing an arc in the specified tint color
+  starting at the top of the circle and going clockwise.
+  There does not seem to be a way to specify separate colors
+  for the background and foreground circles.
+
+TODO: Include screenshots here!

@@ -211,8 +211,73 @@ that is a rectangle containing a vertical line and a "+".
 The dropdown menu to the left of this button enables
 toggling the display of the Canvas area and much more.
 
+## Code Completion
+
+Xcode provides great intellisense and code completion.
+
+When accepting a function completion, only non-dimmed arguments are included.
+To also include the dimmed arguments, hold down the option key
+before selecting a completion.
+To include a selected subset of the arguments,
+type the beginning of each of their names in a single string and press return.
+For example, `.frame(mina` gives `.frame(minWidth: , alignment: )`.
+
+For function calls, press tab after entering each argument
+to advance to the next argument.
+If the last argument is a closure, press return to
+automatically turn it into a trailing closure.
+
+### Spell Checking
+
 To configure Xcode to check spelling while typing, select
 Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
+A faint red line will be displayed under all misspelled words.
+
+### Code Folding
+
+To enable code folding, select Xcode ... Preferences ... Text Editing
+and check the checkbox for "Code folding ribbon".
+
+To fold the code in any construct (function, argument list, struct, class, ...),
+click the corresponding section in the code folding ribbon.
+
+To unfold code, click the ">" in the code folding ribbon
+or double-click "..." in the code.
+
+To enable code folding,
+
+### Multiple Cursors
+
+To get multiple cursors so the same changes
+can be made in multiple locations simultaneously:
+
+- Move the cursor to the first location.
+- If using Vim keybindings, enter insert mode.
+- Hold down the ctrl and shift keys and click additional locations.
+- Type the changes.
+
+### Replacing a Rectangular Selection
+
+- If using Vim keybindings, enter insert mode.
+- Hold down the option key and
+  select a rectangular region using the mouse or trackpad.
+- Type the text that will replace the selected portion of each line.
+
+### Rename All in Scope
+
+One approach is to use refactoring as follows:
+
+- Right-click one occurrence.
+- Select Refactor ... Rename from the context menu.
+- Make the change in the current instance and all instances will change.
+- Click the "Rename" button in the upper-right.
+
+Another approach is to use "Edit All in Scope" as follows:
+
+- Place the cursor on one of the occurrences.
+- Press cmd-ctrl-e.
+- Make the change in the current instance and all instances will change.
+- Press the return key or click outside the change.
 
 ## Console
 
@@ -304,6 +369,34 @@ select Xcode ... Preferences ... Behaviors.
 Then select "Succeeds, check "Play sound", and select a sound.
 Repeat for "Fails" and select a different sound.
 
+## Clean Builds
+
+Occasionally it is useful to delete all generated files and start over.
+To do this, select Product ... Clean Build Folder or press cmd-shift-k.
+
+## Running
+
+To run an app:
+
+- Select a simulator device or real device from the dropdown in the top center.
+- Select Product ... Run or press cmd-r.
+
+Devices must be connected to the computer via a cable
+unless they have been configured to run wirelessly.
+To configure a device to run apps wirelessly:
+
+- Attach the device to the computer with a cable.
+- Select Window ... Devices and Simulators.
+- In the window that appears, select the device.
+- Check the "Connect via network" checkbox.
+- Ensure that the device is on the same Wi-Fi network as the computer.
+
+To run an app on the device wirelessly:
+
+- Disconnect the device from the computer.
+- Select the device from the dropdown in the top center.
+- Run the app.
+
 ## Previews
 
 Previews allow testing a single view outside of the Simulator or a real device.
@@ -317,14 +410,6 @@ and click the file within the list that appears.
 This also works with any kind of name including
 types, variables, functions, structs, classes, properties, and methods.
 It even works with framework types.
-
-## Code Completion
-
-Xcode provides great intellisense and code completion.
-For function calls, press tab after entering each argument
-to advance to the next argument.
-If the last argument is a closure, press return to
-automatically turn it into a trailing closure.
 
 ## Themes
 
@@ -361,11 +446,6 @@ To duplicate a source file, select it in the Navigator
 and click File ... Duplicate.
 Oddly the context sensitive menu that is displayed when
 a file in the Navigator is right clicked does not include this option.
-
-## Clean Builds
-
-Occasionally it is useful to delete all generated files and start over.
-To do this, select Product ... Clean Build Folder or press cmd-shift-k.
 
 ## App Name
 

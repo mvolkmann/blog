@@ -216,83 +216,6 @@ Click a modifier to add it to the Inspector.
 To stop displaying a modifier in the Inspector,
 hover over it and click the "Delete" button that appears.
 
-### Simulator
-
-When developing iOS, watchOS, and macOS apps, it is useful to
-launch the app in the Simulator app directly from Xcode.
-Preview and the Simulator can simulate many different devices.
-
-To run the app in the Simulator, click the triangle at the top
-or press cmd-r while focus is in Xcode (not in the Simulator).
-This builds the app, launches the Simulator (if not already running),
-loads the app in the Simulator, and starts it.
-
-Unlike in Previews, the app is not automatically updated
-when code changes are saved.
-Click the triangle or press cmd-r again
-to repeat the entire build/load/start process.
-
-If there are errors or warnings, the number of each will be displayed
-on the right side of the code editor header.
-Click either number to display the messages in the "Issue Navigator".
-
-For UI views that support pinch-to-zoom such as maps,
-that can be performed in the Simulator by holding down the option key
-and using two fingers on a trackpad.
-
-Preview is more limited in functionality than the Simulator.
-TODO: List the differences between the Simulator app and the Preview pane.
-
-The default device type used by the Simulator can be changed
-by selecting Product ... Destination ... Choose Destination...
-and selecting a device type.
-This must be done in each Xcode project.
-
-There are known rendering issues with the "iPhone 12 mini" simulator,
-so choose a different device for now.
-
-The Simulator supports many useful keyboard shortcuts.
-
-| Action                                        | Menu Item                                         | Keyboard Shortcut |
-| --------------------------------------------- | ------------------------------------------------- | ----------------- |
-| change orientation                            | Device ... Rotate {Left \| Right}                 | cmd-◀ and cmd-▶   |
-| toggle use of computer keyboard to enter text | IO ... Keyboard ... Connect Hardware ... Keyboard | cmd-shift-k       |
-| switch between light and dark mode            | Features ... Toggle Appearance                    | cmd-shift-a       |
-| copy screen to clipboard                      | Edit ... Copy Screen                              | cmd-ctrl-c        |
-| save screen shot as .png file                 | File ... Save Screen                              | cmd-s             |
-| save session video as .mp4 file               | File ... Record Screen                            | cmd-r             |
-| simulate use of Face ID                       | Features ... Face ID ... option                   | rarely used       |
-| show home screen                              | Device ... Home                                   | cmd-shift-h       |
-| show app switcher (to switch or quit apps)    | Device ... App Switcher                           | cmd-ctrl-shift-h  |
-
-Screenshot file names begin with "Simulator Screen Shot" followed by
-the device name, date, and time.
-They are saved in the Desktop directory.
-These screenshots are useful for uploading to
-`https://appstoreconnect.apple.com/` when submitting an app to the App Store.
-
-When finished recording a session video,
-click the stop button at the top of the simulator.
-Right-click on the video thumbnail that appears
-and select the directory where it should be saved.
-
-Screen recording file names begins with "Simulator Screen Recording" followed
-by the device name, date, and time will be saved in the selected location.
-Double-click the file to play it in the "QuickTime Player" app.
-These are useful for demos and to share with designers and clients
-to discuss app features.
-
-Face ID options include Enrolled (approves use of Face ID),
-Matching Face (simulates a match),
-and Non-Matching Face (simulates failure to match).
-
-To erase all data and settings,
-select Device ... Erase All Content and Settings...
-This can be useful to run an app without having any data cached
-from previous runs, such as authentication details.
-
-There are many more features in the Simulator menus.
-
 ## Apple Human Interface Guidelines (HIG)
 
 Apple documents guidelines for building user interfaces at {% aTargetBlank
@@ -887,7 +810,7 @@ struct Constants {
 Note how a nested struct is used to group related constants.
 An example reference to one of these is `Constants.Colors.primary`.
 
-### Running Code When View Appears
+### Executing Code When View Appears
 
 There are three ways to specify code to run
 when a view is created or first appears.
@@ -2047,8 +1970,6 @@ See the examples in the `Form` section above and in the `List` section below.
 
 `Section` titles are made all uppercase by default.
 To prevent this, apply the `textCase` view modifier passing it `nil`.
-The first letter will still be capitalized,
-but the remaining characters will not be modified.
 
 ### `Group`
 
@@ -2685,7 +2606,13 @@ Consider extending `Text` to add initializers for other types.
 For example:
 
 ```swift
+import SwiftUI
+
 extension Text {
+    init(_ number: Double) {
+        self.init(String(number))
+    }
+
     init(_ number: Int) {
         self.init(String(number))
     }
@@ -3927,6 +3854,22 @@ These include:
 - `onOpenURL`
 - `onReceive`
 - `onSubmit`
+
+The `View` method `onTapGesture` has a needlessly long name.
+To use `onTap` instead, add this extension method:
+
+```swift
+import SwiftUI
+
+extension View {
+    public func onTap(
+        count: Int = 1,
+        perform: @escaping () -> Void
+    ) -> some View {
+        onTapGesture(count: count, perform: perform)
+    }
+}
+```
 
 ## Environment
 
