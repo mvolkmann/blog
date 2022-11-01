@@ -211,7 +211,12 @@ that is a rectangle containing a vertical line and a "+".
 The dropdown menu to the left of this button enables
 toggling the display of the Canvas area and much more.
 
-## Code Completion
+### Matching Braces
+
+To find the matching brace for a given brace,
+hold down the command key and hover over a brace.
+
+### Code Completion
 
 Xcode provides great intellisense and code completion.
 

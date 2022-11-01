@@ -211,6 +211,23 @@ This documentation appears when a name is option-clicked in Xcode.
 Xcode can toggle whether lines are commented.
 To comment/uncomment the current line or selected lines, press cmd-/.
 
+Comments whose purpose is to remind you to make a change later
+can be written in three ways:
+
+- `// TODO: some text`
+
+  This approach is not flagged when the project is built.
+
+- `#warning("some text")`
+
+  This approach results in a warning message when the project is built
+  which makes it less likely that it will be forgotten.
+
+- `#error("some text")`
+
+  This approach results in an error message when the project is built
+  which makes it impossible to forget.
+
 ## Operators
 
 | Category       | Operators                                            |
