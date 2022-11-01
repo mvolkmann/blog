@@ -23,9 +23,9 @@ by Stewart Lynch.
 
 The `Gauge` view takes the following arguments:
 
-- `value`: a `Double`
-- `in`: a `Double` `Range`
-- `label`: closure that returns a view to describe the gauge
+- `value`: required `Double` or `Int`
+- `in`: an optional `Double` or `Int` `Range` that defaults to `0...1`
+- `label`: required closure that returns a view to describe the gauge
 - `currentValueLabel`: optional closure that returns a view to display the current value
 - `minimumValueLabel`: optional closure that returns a view to display the minimum value
 - `maximumValueLabel`: optional closure that returns a view to display the maximum value
@@ -40,9 +40,11 @@ Supported argument values include:
   The current value is indicated by drawing a bar in the specified tint color
   on top of the background bar starting from the left.
 
-  A `label`, if provided, is displayed above the bar.
+  A `label`, if provided, is displayed
+  above the bar centered horizontally.
 
-  The `currentValueLabel`, if provided, is displayed below the bar.
+  The `currentValueLabel`, if provided, is displayed
+  below the bar centered horizontally.
 
   The `minimumValueLabel` and `maximumValueLabel`, if provided,
   are displayed on the leading and trailing edge.
@@ -68,6 +70,14 @@ Supported argument values include:
 - `.accessoryLinearCapacity`
 
   This is similar to `.linearCapacity`, but draws a thinner bar.
+
+  The `label` is displayed above the bar,
+  but on the leading edge instead of being centered horizontally.
+
+  The `currentValueLabel` is displayed below the bar,
+  but on the leading edge instead of being centered horizontally.
+
+  Gradient tints are not supported in this style.
 
 - `.accessoryCircular`
 
