@@ -102,9 +102,8 @@ Supported argument values include:
 
   The `label`, `minimumValueLabel`, and `maximumValueLabel` are not used.
 
-  The circle color is a dim version of the specified tint
-  and the current value is indicated by
-  drawing an arc in the specified tint color
+  The circle color uses a lower opacity version of the specified tint color.
+  The current value is indicated by drawing an arc in the specified tint color
   starting at the top of the circle and going clockwise.
   There does not seem to be a way to specify separate colors
   for the background and foreground circles.
