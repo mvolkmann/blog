@@ -1,8 +1,9 @@
----
+--
 eleventyNavigation:
-  key: TestFlight
-  parent: Swift
+key: TestFlight
+parent: Swift
 layout: topic-layout.njk
+
 ---
 
 ## Overview
@@ -117,6 +118,21 @@ Each version remains available for download for 90 days.
    After answering the questions displayed in a dialog,
    click the "Start Internal Testing" button.
    The status should change to "Ready to Submit"
+
+#### Encryption
+
+By default every time an app is submitted
+there will be a prompt related to use of encryption.
+A dialog will appear with the title "Export Compliance Information"
+and the question "Does your app use encryption?".
+To avoid the need to answer this question
+every time a new version of the app is released:
+
+- Select the top entry in the Navigator.
+- Select the main target.
+- Click the "Info" tab.
+- Click the "+" button in any row.
+- Add the key "App Uses Non-Exempt Encryption" with the value "YES" or "NO".
 
 ### Part 4 - Distributing an App
 
@@ -251,3 +267,10 @@ in order to download test builds of the app and provide feedback.
 To see statistics on app sales, browse
 {% aTargetBlank "https://appstoreconnect.apple.com", "App Store Connect" %}
 and click "Sales and Trends".
+
+## Feedback
+
+To see feedback from TestFlight users inside Xcode:
+
+- Select Window ... Organizer.
+- Click "Feedback".

@@ -221,12 +221,13 @@ can be written in three ways:
 - `#warning("some text")`
 
   This approach results in a warning message when the project is built
-  which makes it less likely that it will be forgotten.
+  which makes it less likely to be overlooked than a TODO comment.
+  The project will still build successfully.
 
 - `#error("some text")`
 
   This approach results in an error message when the project is built
-  which makes it impossible to forget.
+  which makes it impossible to forget because the project will not build.
 
 ## Operators
 

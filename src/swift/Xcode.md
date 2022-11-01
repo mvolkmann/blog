@@ -151,7 +151,7 @@ The Navigator has nine icon buttons at the top.
 
 ## Editor
 
-Code is checked for errors while typing.
+Code entered in an editor pane is checked for errors while typing.
 Saving is not required.
 
 Lines with errors are indicated with red bars in the right gutter.
@@ -206,8 +206,18 @@ only appear a preview is displayed and a view name is command-clicked.
 In the past there was a "Rename..." option in this menu.
 It was moved to Editor ... Refactor ... Rename.
 
-To open additional code panes, click the button the upper-right
-that is a rectangle containing a vertical line and a "+".
+### Multiple Editor Panes
+
+To open a file in a new split pane,
+hold down the option key and click the file in the Navigator.
+
+Alternatively, click the button the upper-right
+that is a rectangle containing a vertical line and a "+" to open
+a split pane containing the same file in the the currently editor pane.
+
+To open a new split below the current one instead of to the right,
+open down the option key before clicking the button.
+
 The dropdown menu to the left of this button enables
 toggling the display of the Canvas area and much more.
 
@@ -373,6 +383,14 @@ To hear sounds that indicate whether the build was successful or failed,
 select Xcode ... Preferences ... Behaviors.
 Then select "Succeeds, check "Play sound", and select a sound.
 Repeat for "Fails" and select a different sound.
+
+To see how long it takes each build to complete
+after the text "Build Succeeded" in the title bar,
+enter the following command in a terminal window:
+
+```bash
+defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
+```
 
 ## Clean Builds
 
