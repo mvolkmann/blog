@@ -13,9 +13,19 @@ Users can pan and zoom to adjust their view of the map.
 The maps can contain markers that can be tappable
 to invoke app-specific actions.
 
-"LookAround" capabilities, introduced in iOS16,
+"Look Around" capabilities, introduced in iOS16,
 can be added to display street level views.
 See https://developer.apple.com/videos/play/wwdc2022/10035/.
+Countries and cities for which Look Around support has been added
+are listed at {% aTargetBlank
+"https://www.apple.com/ios/feature-availability/#maps-look-around",
+"Maps: Look Around" %}.
+
+When using the Apple Maps app,
+if Look Around is available for the current map location then
+a button containing a binocular icon will appear in the lower-left.
+Tap the button to open a Look Around view.
+This works in iOS, but doesn't not seem to work in macOS.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/mapkit/mklocalsearch",

@@ -173,15 +173,15 @@ Alternatively, click the circled question mark at the top of the Inspector.
 The Inspector will then display help for
 anything name under the cursor in the Code Editor.
 
-Command-click a name to display a context sensitive menu
+Command-click a name to display a context menu
 that can include the following options:
 
-- Jump to definition
+- Jump to Definition - same as cmd-ctrl-click to bypass context menu
 - Fold - collapses a code block to an ellipsis;
   double-click the ellipsis to re-open
-- Show Quick Help - same as option-click
+- Show Quick Help - same as option-click to bypass context menu
 - Callers...
-- Edit All in Scope - doesn't seem to work with Vim keybindings
+- Edit All in Scope - with Vim keybindings must be in insert mode
 - Rename
 - Show SwiftUI Inspector - opens inspector in a dialog
   as an alternative to using Inspector on right side
