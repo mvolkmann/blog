@@ -210,6 +210,8 @@ It was moved to Editor ... Refactor ... Rename.
 
 To open a file in a new split pane,
 hold down the option key and click the file in the Navigator.
+If the file is already open, to open another view in a new split pane
+hold down the option key and click the existing editor tab.
 
 Alternatively, click the button the upper-right
 that is a rectangle containing a vertical line and a "+" to open

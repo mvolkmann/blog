@@ -16,10 +16,36 @@ to invoke app-specific actions.
 "Look Around" capabilities, introduced in iOS16,
 can be added to display street level views.
 See https://developer.apple.com/videos/play/wwdc2022/10035/.
+
 Countries and cities for which Look Around support has been added
 are listed at {% aTargetBlank
 "https://www.apple.com/ios/feature-availability/#maps-look-around",
 "Maps: Look Around" %}.
+
+The list includes the following U.S. cities:
+
+- Atlanta, Georgia
+- Boston, Massachusetts
+- Chicago, Illinois
+- Denver, Colorado
+- Detroit, Michigan
+- Dublin, Ireland
+- Houston, Texas
+- Las Vegas, Nevada
+- Los Angeles, California
+- Miami, Florida
+- New York, New York
+- Philadelphia, Pennsylvania
+- Phoenix, Arizona
+- Portland, Oregon
+- San Diego, California
+- San Francisco, California
+- Santa Cruz, California
+- Seattle, Washington
+- Washington, D.C.
+
+The list also includes many cities outside the U.S.
+such as Berlin, Germany, London, United Kingdom, and Venice, Italy.
 
 When using the Apple Maps app,
 if Look Around is available for the current map location then
@@ -80,6 +106,25 @@ These are often used to draw routes from one map location to another.
 `MKMapView` is able to load custom map tiles for a map background
 instead of relying on the default map tiles.
 `Map` is not able to do this.
+
+## Relationships
+
+{% aTargetBlank "https://developer.apple.com/documentation/mapkitjs/place",
+"MKPlacemark" %} objects provide a description of a map location.
+This class inherits from the `CLPlacemark` class.
+
+{% aTargetBlank "https://developer.apple.com/documentation/corelocation/clplacemark",
+"CLPlacemark" %} objects also provide a description of a map location.
+The `location` property is a `CLLocation`
+
+{% aTargetBlank "https://developer.apple.com/documentation/corelocation/cllocation",
+"CLLocation" %} holds latitude, longitude, and course information.
+The `coordinate` property has the type `CLLocationCoordinate2D`.
+
+{% aTargetBlank "https://developer.apple.com/documentation/corelocation/cllocationcoordinate2d",
+"CLLocationCoordinate2D" %} holds latitude and longitude values.
+
+MKPlacemark -> CLLocation -> CLLocationCoordinate2D
 
 ## Getting Started
 
