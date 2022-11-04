@@ -36,6 +36,48 @@ See the demo app at {% aTargetBlank
   src="/blog/assets/mapkit-browse-place.jpg?v={{pkg.version}}"
   title="MapKit Browse Place">
 
+## Annotations
+
+Annotations are markers that are rendered on a map.
+The easiest way to add annotations is to use the provided {% aTargetBlank
+"https://developer.apple.com/documentation/mapkit/mkmarkerannotationview",
+"MKMarkerAnnotationView" %} which displays a pin in a bubble.
+
+Custom annotations can be created using {% aTargetBlank
+"https://developer.apple.com/documentation/mapkit/mkannotationview",
+"MKAnnotationView" %}.
+See the Swiftful Thinking YouTube video {% aTargetBlank
+"https://www.youtube.com/watch?v=javFZbCYGfc",
+"Custom Map Annotation Pins for SwiftUI MapKit Map" %}.
+
+## Overlays
+
+Overlays draw on top of a map.
+A common example is drawing route lines that
+indicate how to travel from one location to another.
+
+The provided subclasses of {% aTargetBlank
+"https://developer.apple.com/documentation/mapkit/mkoverlayrenderer",
+"MKOverlayRenderer" %} include:
+
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkcirclerenderer",
+  "MKCircleRenderer" %} - fills and strokes a circle
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkpolylinerenderer",
+  "MKPolylineRenderer" %} - like MKPolygonRender but
+  doesn't fill because the shape isn't necessarily closed
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkpolygonrenderer",
+  "MKPolygonRenderer" %} - fills and strokes
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer",
+  "MKOverlayPathRenderer" %} - renders shape defined by a CGPath
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mktileoverlayrenderer",
+  "MKTileOverlayRenderer" %} for bitmap images
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkgradientpolygonrenderer",
+  "MKGradientPolygonRenderer" %} - like MKPolylineRenderer but uses gradient color
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkmultipolygonrenderer",
+  "MKMultiPolygonRenderer" %} - renders multiple polygons
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkmultipolylinerenderer",
+  "MKMultiPolylineRenderer" %} - renders multiple polylines
+
 ## Directions
 
 Driving and walking directions are available in most cities.
