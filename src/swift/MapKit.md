@@ -45,6 +45,8 @@ For a list, see {% aTargetBlank
 "iOS and iPadOS 16 Feature Availability" %}.
 Click the "Transit" link in the "Maps" section.
 Transit directions are not currently available in London or Paris.
+Actually I've never been able to get transit directions
+from the `MKDirections` `calculate` method in any city!
 
 The list also includes many cities outside the U.S.
 such as Berlin, Germany, London, United Kingdom, and Venice, Italy.
