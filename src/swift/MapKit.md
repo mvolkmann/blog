@@ -13,6 +13,49 @@ Users can pan and zoom to adjust their view of the map.
 The maps can contain markers that can be tappable
 to invoke app-specific actions.
 
+## Resources
+
+- {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/10035/",
+  "What's new in MapKit" %} from WWDC 2022
+- {% aTargetBlank
+  "https://holyswift.app/new-mapkit-configurations-with-swiftui/",
+  "New MapKit Configurations with SwiftUI" %}
+
+## Example App
+
+See the demo app at {% aTargetBlank
+"https://github.com/mvolkmann/swiftui-mapkit", "swiftui-mapkit" %}.
+
+<img alt="MapKit Initial" style="width: 32%"
+  src="/blog/assets/mapkit-initial.jpg?v={{pkg.version}}"
+  title="MapKit Initial">
+<img alt="MapKit Selected Place" style="width: 32%"
+  src="/blog/assets/mapkit-selected-place.jpg?v={{pkg.version}}"
+  title="MapKit Selected Place">
+<img alt="MapKit Browse Place" style="width: 32%"
+  src="/blog/assets/mapkit-browse-place.jpg?v={{pkg.version}}"
+  title="MapKit Browse Place">
+
+## Directions
+
+Driving and walking directions are available in most cities.
+But as of 2022, transit directions are only available in around 80 cities.
+For a list, see {% aTargetBlank
+"https://www.apple.com/ios/feature-availability/#maps-look-around",
+"iOS and iPadOS 16 Feature Availability" %}.
+Click the "Transit" link in the "Maps" section.
+Transit directions are not currently available in London or Paris.
+
+The list also includes many cities outside the U.S.
+such as Berlin, Germany, London, United Kingdom, and Venice, Italy.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/mapkit/mklocalsearch",
+"MKLocalSearch" %} class can be used to search for places that match given text
+and markers for each match can be added to the map.
+
+## Look Around
+
 "Look Around" capabilities, introduced in iOS16,
 can be added to display street level views.
 See https://developer.apple.com/videos/play/wwdc2022/10035/.
@@ -20,7 +63,8 @@ See https://developer.apple.com/videos/play/wwdc2022/10035/.
 Countries and cities for which Look Around support has been added
 are listed at {% aTargetBlank
 "https://www.apple.com/ios/feature-availability/#maps-look-around",
-"Maps: Look Around" %}.
+"iOS and iPadOS 16 Feature Availability" %}.
+Click the "Look Around" link in the "Maps" section.
 
 The list includes the following U.S. cities:
 
@@ -44,42 +88,11 @@ The list includes the following U.S. cities:
 - Seattle, Washington
 - Washington, D.C.
 
-The list also includes many cities outside the U.S.
-such as Berlin, Germany, London, United Kingdom, and Venice, Italy.
-
 When using the Apple Maps app,
 if Look Around is available for the current map location then
 a button containing a binocular icon will appear in the lower-left.
 Tap the button to open a Look Around view.
-This works in iOS, but doesn't not seem to work in macOS.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/mapkit/mklocalsearch",
-"MKLocalSearch" %} class can be used to search for places that match given text
-and markers for each match can be added to the map.
-
-See the demo app at {% aTargetBlank
-"https://github.com/mvolkmann/swiftui-mapkit", "swiftui-mapkit" %}.
-
-<img alt="MapKit Initial" style="width: 32%"
-  src="/blog/assets/mapkit-initial.jpg?v={{pkg.version}}"
-  title="MapKit Initial">
-<img alt="MapKit Selected Place" style="width: 32%"
-  src="/blog/assets/mapkit-selected-place.jpg?v={{pkg.version}}"
-  title="MapKit Selected Place">
-<img alt="MapKit Browse Place" style="width: 32%"
-  src="/blog/assets/mapkit-browse-place.jpg?v={{pkg.version}}"
-  title="MapKit Browse Place">
-
-TODO: Add many more sections!
-
-## Resources
-
-- {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/10035/",
-  "What's new in MapKit" %} from WWDC 2022
-- {% aTargetBlank
-  "https://holyswift.app/new-mapkit-configurations-with-swiftui/",
-  "New MapKit Configurations with SwiftUI" %}
+This works in iOS Maps app, but doesn't not seem to work in macOS Maps app.
 
 ## Map vs MKMapView
 
@@ -168,3 +181,7 @@ In the Simulator the location defaults to the location of
 Apple headquarters in Cupertino, California near San Jose.
 To change this, select Features ... Location ... Custom Location...
 and enter latitude and longitude values.
+
+## More
+
+TODO: Add many more sections!
