@@ -46,6 +46,9 @@ north (positive) or south (negative) angle from the equator
 which circles the Earth midway between the north and south poles.
 The latitude is zero degrees at the equator,
 90 degrees at the north pole, and -90 degrees at the south pole.
+Positive values are sometimes followed by "N" for North.
+Negative values are sometimes written without the minus sign
+and are following by "S" for South.
 
 A longitude value specifies the east (positive) or west (negative) angle
 from the Prime Meridian (Greenwich) which runs from the north to south pole,
@@ -53,6 +56,9 @@ passing through the Royal Observatory in Greenwich, England (near London).
 The longitude is zero degrees at the Prime Meridian,
 -180 degrees moving halfway around the Earth to the west,
 and 180 degrees moving halfway around the Earth to the east.
+Positive values are sometimes followed by "E" for East.
+Negative values are sometimes written without the minus sign
+and are following by "W" for West.
 
 We can perform conversions between latitude/longitude angles and distances
 by assuming that the Earth is a perfect sphere.
@@ -80,6 +86,39 @@ d = cos(lπ / 180) * r / 360
 
 The values for d and r will have the same unit.
 For example, if r is given in meters then d will be in meters.
+
+## Map Points
+
+MapKit provides the {% aTargetBlank
+"https://developer.apple.com/documentation/mapkit/mkmappoint",
+"MKMapPoint" %} struct which represents an Earth coordinate
+that has been projected onto a two-dimensional map.
+
+To create an `MKMapPoint` for a given `CLLocationCoordinate2D` object
+which holds latitude and longitude values:
+
+```
+let mapPoint = MKMapPoint(coordinate)
+```
+
+`MKMapPoint` objects have the following properties:
+
+- `x`: a `Double` that is the x-coordinate on a 2D map
+- `y`: a `Double` that is the y-coordinate on a 2D map
+- `coordinate`: a `CLLocationCoordinate2D` that holds
+  the Earth latitude and longitude values
+
+To calculate the distance between two `MKMapPoint` objects:
+
+```
+let distance = mapPoint1.distance(to: mapPoint2)
+```
+
+To calculate the distance between to `CLLocationCoordinate2D` objects:
+
+```
+let distance = MKMapPoint(coordinate1).distance(to: MKMapPoint(coordinate2))
+```
 
 ## Annotations
 
