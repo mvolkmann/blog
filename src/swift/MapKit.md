@@ -68,15 +68,17 @@ and so is not a perfect sphere.
 The average radius of the Earth is 6,371 kilometers or 6,371,000 meters.
 The circumference of the Earth at the equator is
 approximately 40,075.017 kilometers.
+The circumference of the Earth through the poles is
+approximately 40,007.863 kilometers.
 
-The distance spanned by a latitude angle of one degree is 1,853 meters
+The distance spanned by a latitude angle of one degree is 1,852 meters
 regardless of the longitude.
 
 The distance spanned by a longitude angle varies based on the latitude.
 One degree of longitude spans a distance of approximately
 111.319 kilometers at the equator but spans 0 kilometers at the poles.
 
-The formula to complete the distance of one degree of longitude
+The formula to compute the distance of one degree of longitude
 at a given latitude is the following where
 d is the distance, r is the sphere radius, and l is the latitude in degrees:
 
