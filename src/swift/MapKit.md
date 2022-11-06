@@ -36,6 +36,51 @@ See the demo app at {% aTargetBlank
   src="/blog/assets/mapkit-browse-place.jpg?v={{pkg.version}}"
   title="MapKit Browse Place">
 
+## Distance vs. Angle
+
+Some MapKit methods require passing distances in meters and others require
+passing distances in latitude and longitude deltas which are angles.
+
+A latitude value specifies the
+north (positive) or south (negative) angle from the equator
+which circles the Earth midway between the north and south poles.
+The latitude is zero degrees at the equator,
+90 degrees at the north pole, and -90 degrees at the south pole.
+
+A longitude value specifies the east (positive) or west (negative) angle
+from the Prime Meridian (Greenwich) which runs from the north to south pole,
+passing through the Royal Observatory in Greenwich, England (near London).
+The longitude is zero degrees at the Prime Meridian,
+-180 degrees moving halfway around the Earth to the west,
+and 180 degrees moving halfway around the Earth to the east.
+
+We can perform conversions between latitude/longitude angles and distances
+by assuming that the Earth is a perfect sphere.
+The conversions are approximate because the Earth bulges at the equator
+and so is not a perfect sphere.
+
+The average radius of the Earth is 6,371 kilometers or 6,371,000 meters.
+The circumference of the Earth at the equator is
+approximately 40,075.017 kilometers.
+
+The distance spanned by a latitude angle of one degree is 1,853 meters
+regardless of the longitude.
+
+The distance spanned by a longitude angle varies based on the latitude.
+One degree of longitude spans a distance of approximately
+111.319 kilometers at the equator but spans 0 kilometers at the poles.
+
+The formula to complete the distance of one degree of longitude
+at a given latitude is the following where
+d is the distance, r is the sphere radius, and l is the latitude in degrees:
+
+```
+d = cos(lπ / 180) * r / 360
+```
+
+The values for d and r will have the same unit.
+For example, if r is given in meters then d will be in meters.
+
 ## Annotations
 
 Annotations are markers that are rendered on a map.
@@ -61,22 +106,22 @@ The provided subclasses of {% aTargetBlank
 "MKOverlayRenderer" %} include:
 
 - {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkcirclerenderer",
-  "MKCircleRenderer" %} - fills and strokes a circle
-- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkpolylinerenderer",
-  "MKPolylineRenderer" %} - like MKPolygonRender but
-  doesn't fill because the shape isn't necessarily closed
+  "MKCircleRenderer" %} fills and strokes a circle
 - {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkpolygonrenderer",
-  "MKPolygonRenderer" %} - fills and strokes
+  "MKPolygonRenderer" %} fills and strokes a polygon
+- {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkpolylinerenderer",
+  "MKPolylineRenderer" %} is like MKPolygonRender but doesn't fill
+  because the shape isn't necessarily closed
 - {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer",
-  "MKOverlayPathRenderer" %} - renders shape defined by a CGPath
+  "MKOverlayPathRenderer" %} renders a shape defined by a CGPath
 - {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mktileoverlayrenderer",
-  "MKTileOverlayRenderer" %} for bitmap images
+  "MKTileOverlayRenderer" %} renders a bitmap image over a map tile
 - {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkgradientpolygonrenderer",
-  "MKGradientPolygonRenderer" %} - like MKPolylineRenderer but uses gradient color
+  "MKGradientPolygonRenderer" %} is like MKPolylineRenderer but uses gradient color
 - {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkmultipolygonrenderer",
-  "MKMultiPolygonRenderer" %} - renders multiple polygons
+  "MKMultiPolygonRenderer" %} renders multiple polygons
 - {% aTargetBlank "https://developer.apple.com/documentation/mapkit/mkmultipolylinerenderer",
-  "MKMultiPolylineRenderer" %} - renders multiple polylines
+  "MKMultiPolylineRenderer" %} renders multiple polylines
 
 ## Directions
 
