@@ -102,8 +102,13 @@ This tip was found in this GitHub {% aTargetBlank
 
 ## Configuration
 
-To configure the rules used by SwiftFormat,
-create the file `.swiftformat` at the root of each project.
+The app "SwiftFormat for Xcode" is installed
+by the "brew install" command described above.
+When running SwiftFormat from Xcode, use this app to configure the rules.
+
+When running SwiftFormat from the command line,
+configure the rules by creating the file `.swiftformat`
+at the root of each project.
 This file should contain one line for each desired command-line option.
 Here are recommended rule settings:
 
@@ -111,6 +116,7 @@ Here are recommended rule settings:
 --hexgrouping 2,2
 --indent 4
 --maxwidth 80
+--unusedarguments unnamed-only
 --wraparguments before-first
 --wrapcollections before-first
 --wrapconditions after-first
