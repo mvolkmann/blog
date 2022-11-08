@@ -2327,13 +2327,22 @@ for _ in 0..<times {
 }
 ```
 
-To iterate over all the elements of a sequence (such as an array),
+To iterate over elements in a sequence (such as an array),
 use a `for`-`in` loop.
 
 ```swift
 let names = ["Maisey", "Ramsay", "Oscar", "Comet"]
 for name in names { // variable name does not need to be declared
     print(name)
+}
+```
+
+To iterate over elements in a sequence and also get index values,
+use the `enumerated` method.
+
+```swift
+for (index, name) in names.enumerated() {
+    print("\(index + 1): \(name)")
 }
 ```
 
