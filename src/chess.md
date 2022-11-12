@@ -9,6 +9,16 @@ I am not a highly rated chess player, so these are just
 guidelines that beginner to intermediate players might find useful.
 
 1. Attempt to control the center of the board.
+
+   The board below shows some ideal positions for pieces that have been
+   developed to control the center of the board.
+   Of course your opponent will likely not allow you to move to these positions
+   but it is a good goal.
+
+   <img alt="controlling center" style="width: 60%"
+     src="/blog/assets/chess-controlling-center.png?v={{pkg.version}}"
+     title="controlling center">
+
 1. Look for potential attacks from opponent.
 1. Count the number of pieces attacking and defending each square
    and consider the values of the pieces that would be exchanged.
