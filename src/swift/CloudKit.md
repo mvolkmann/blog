@@ -179,20 +179,23 @@ To add the use of CloudKit to a project:
    https://icloud.developer.apple.com/dashboard/home/teams/{your-team-id}.
 1. Sign in using your Apple Developer account
 1. Click the big "CloudKit Database" button.
+
+## CloudKit Console
+
+To view the web-based CloudKit Console, click the "CloudKit Console" button
+in Xcode as described above OR follow these steps:
+
+1. Browse `developer.apple.com`.
+1. Click "Account".
+1. Sign in.
+1. In the left nav, click "CloudKit Console".
+1. Click the "CloudKit Database" button.
+
+Now that you are browsing the console:
+
 1. Click the container dropdown at the top and
-   select the container name created above.
-
-## Dashboard
-
-To view the web-based CloudKit Dashboard:
-
-- Browse `developer.apple.com`.
-- Click "Account".
-- Sign in.
-- In the left nav, click "CloudKit Console".
-- Click the "CloudKit Database" button.
-- Select a container from the dropdown at the top.
-- Select a database type: Public, Private, or Shared
+   select a container name being used by the app.
+1. Select a database type: Public, Private, or Shared
 
 ### Schemas
 
