@@ -94,7 +94,7 @@ To fix this, enter the following commands from a terminal:
 
 ```bash
 PATH=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support:"$PATH"
-$ lsregister -f /Applications/Xcode.app # or whatever executable name is used
+lsregister -f /Applications/Xcode.app # or whatever executable name is used
 ```
 
 This tip was found in this GitHub {% aTargetBlank
