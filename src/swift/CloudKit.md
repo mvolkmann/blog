@@ -206,7 +206,7 @@ To view the web-based CloudKit Dashboard:
 - Select a container from the dropdown at the top.
 - Select a database type: Public, Private, or Shared
 
-## Schemas
+### Schemas
 
 In the left nav under "Schema", click "Record Types".
 
@@ -263,7 +263,7 @@ To delete a record type and all records of that type:
 - Select "Delete Record Type...".
 - Click the "Delete" button.
 
-## Records
+### Records
 
 To view (query) all the records of a given type:
 
@@ -272,6 +272,9 @@ To view (query) all the records of a given type:
   This always resets to "Public" rather than remembering the last selection.
 - Select a record type from the "RECORD TYPE" dropdown.
 - Click the "Query Records" button.
+
+Values in the "NAME" column are returned in a property named "recordID".
+There is no conflict if a record type has a field named "name".
 
 Values of fields with a type of "Asset" can be downloaded from here.
 
@@ -297,7 +300,7 @@ click the red "Delete" button at the bottom of the right pane.
 
 To delete an existing record in code see the "CloudKit in Code" section below.
 
-## Assets
+### Assets
 
 Records can have fields with a type of "Asset".
 The data for these is stored outside of the record data
