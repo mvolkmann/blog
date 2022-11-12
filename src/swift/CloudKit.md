@@ -7,9 +7,12 @@ layout: topic-layout.njk
 
 ## Overview
 
-CloudKit is an Apple cloud-based database solution that is similar to Firebase.
+CloudKit is an Apple-provided cloud-based database solution
+that is similar to Firebase.
 It provides a generous amount of free storage.
-Using CloudKit requires an Apple Developer account.
+Developers need an Apple Developer account in order to use CloudKit in an app.
+Users of the app need an Apple ID and must configure the use of iCloud
+in the Settings app of their devices.
 
 CloudKit supports three kinds of databases.
 
@@ -29,96 +32,14 @@ CloudKit supports three kinds of databases.
   These are for sharing specific records in a private database
   with other users.
 
-A database has a collection of "record types"
-which are like tables in a relational database.
-Each record type has a collection of fields.
-
-"Zones" are used to segregate the data in databases.
-A default zone named "\_defaultZone" is provided.
-
-"Subscriptions" all apps to subscribe to a database
-in order to be notified about changes.
-This enables synchronizing changes across devices.
-For example, a user with an iPhone and an iPad can
-enter data on one device and have it automatically appear on the other.
-
-"Indexes" improve query performance,
-removing the need to search through records sequentially.
-
 Applications that use CloudKit do not need to include a login screen
 because users are authenticated based on their Apple ID.
-
-"Security Roles" restrict database access.
-
-When testing in the Simulator, sign in to your iCloud
-by opening the Settings app, clicking "Sign in to your iPhone",
-and entering your Apple ID and password.
-When prompted about merging contacts, click "Don't Merge".
 
 The record type "Users" is provided by default
 and is a collection of iCloud user accounts.
 
-A container is a space in the cloud that stores all of your saved data.
-Each application can have its own container or
-a container can be shared between multiple apps.
-Each container has development and production databases.
-
 The web-based CloudKit Console supports
 querying, creating, updating, and deleting records.
-
-To add the use of CloudKit to a project:
-
-1. Click the top item in the Navigator.
-1. Click the main target.
-1. Click the "Signing and Capabilities" tab.
-1. Click the "+" in the upper-right to add a capability.
-1. Double-click "iCloud".
-1. Under "Services", check all the checkboxes.
-   These include "Key-value storage", "iCloud Documents", and "CloudKit".
-1. Click the "+" under "Containers" and enter a name for the new container.
-   This needs to be unique among all CloudKit containers,
-   so consider using the bundle id of the app prefixes by "iCloud.".
-1. Periodically click the refresh button below the list of containers
-   until the new container name changes color from red to white,
-   indicating that the container has been created.
-   This can take a couple of minutes.
-1. Click the "CloudKit Console" button to open the website at
-   https://icloud.developer.apple.com/dashboard/home/teams/{your-team-id}.
-1. Sign in using your Apple Developer account
-1. Click the big "CloudKit Database" button.
-1. Click the container dropdown at the top and
-   select the container name created above.
-
-After the first record is saved in the container,
-make the records of that type queryable.
-
-1. Click the top item in the Navigator.
-1. Click the first target.
-1. Click the "Signing and Capabilities" tab.
-1. Click the "CloudKit Console" button
-1. In the left nav under "Schemas", click "Indexes".
-1. Click the name of the new record type.
-1. Click "Add Basic Index".
-1. In the "Select an option" dropdown, select "recordName".
-1. It should be marked as "Queryable".
-1. Click the "Save Changes" button.
-1. In the left nav under "Data", click "Records".
-1. In the "Record Types" dropdown, select the new record name.
-1. Click the "Query Records" button to display all the records of that type.
-
-To enable use of subscriptions:
-
-1. Click the top item in the Navigator.
-1. Click the first target.
-1. Click the "Signing and Capabilities" tab.
-1. Click the "+" in the upper-right to add a capability.
-1. Double-click "Background Modes".
-1. Under "Modes", check the "Background fetch"
-   and "Remote notifications" checkboxes.
-
-For a good example of using CloudKit including performing CRUD operations
-and subscribing to be notified of changes see
-{% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo", "CloudKitDemo" %}.
 
 ## Terminology
 
@@ -126,7 +47,9 @@ and subscribing to be notified of changes see
 
   A CloudKit container is a collection of one, two, or three databases
   where one is public, one is private, and one shared.
+  Each of these can have a development and production version.
 
+  An app can have its own container or it can share a container with other apps.
   An app can access multiple containers.
 
 - Database
@@ -136,10 +59,20 @@ and subscribing to be notified of changes see
   Record types are similar to relational database tables
   and NoSQL database collections.
 
+- Record Type
+
+  Each record type is defined by a collection of fields
+  that have a name and a data type.
+
 - Record
 
   A CloudKit record is a collection of field values
   whose types are defined by a record type.
+
+- Index
+
+  Indexes improve query performance,
+  removing the need to search through records sequentially.
 
 - Reference
 
@@ -147,6 +80,18 @@ and subscribing to be notified of changes see
   used to refer to one record from another.
   The target record can have a different record type
   or the same record type.
+
+- Security Roles
+
+  Security Roles restrict database access.
+
+- Subscriptions
+
+  Subscriptions allow apps to subscribe to a database
+  in order to be notified about changes.
+  This enables synchronizing changes across devices.
+  For example, a user with an iPhone and an iPad can
+  enter data on one device and have it automatically appear on the other.
 
 - Operation
 
@@ -182,17 +127,60 @@ and subscribing to be notified of changes see
     "https://developer.apple.com/documentation/cloudkit/ckquery", "CKQuery" %}
     object.
 
+- Zones
+
+  Zones are used to segregate the data in private databases,
+  not public or shared.
+  They support saving related records in batches.
+  A default zone named "\_defaultZone" is provided.
+  There is no requirement to create additional zones.
+
 ## Sample Code
 
 See the app {% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo",
 "CloudKitDemo" %} which demonstrates performing all the CRUD operations
 on records in a CloudKit database.
 
-## Querying
+## Adding CloudKit to a Project
 
-When querying for records, to limit the fields included in the returned data,
-set the `desiredKeys` property on the `CKQueryOperation` object
-to an array of property name strings.
+To add the use of CloudKit to a project:
+
+1. Click the top item in the Navigator.
+1. Click the main target.
+1. Click the "Signing and Capabilities" tab.
+1. Click the "+" in the upper-right to add a capability.
+1. Double-click "iCloud".
+1. Under "Services", check the checkboxes for the desired services.
+   Typically only "CloudKit" is checked. The options are:
+
+   - "Key-value storage" holds up to 1024 key/value pairs
+     and is sometimes use to store user preferences.
+   - "iCloud Documents" stores data as files that are accessed using
+     `UIDocument` (for iOS) or `NSDocument` (for macOS).
+     This is similar to a file system with a directory hierarchy.
+   - "CloudKit" stores records defined by a record types.
+     These records can contain references to other records.
+     This is similar to a relational database.
+     These records can be used directly
+     or they can mirror the use of Core Data.
+
+1. Click the "+" under "Containers" and enter a name for the new container.
+   This needs to be unique among all CloudKit containers,
+   so consider using using the app bundle ID.
+   The prefix "iCloud-" will be automatically added to the container name.
+   Sadly containers cannot be deleted,
+   so if you create one with a name you don't like,
+   just create another one and don't use the previous container.
+1. Periodically click the refresh button below the list of containers
+   until the new container name changes color from red to white,
+   indicating that the container has been created.
+   This can take a couple of minutes.
+1. Click the "CloudKit Console" button to open the website at
+   https://icloud.developer.apple.com/dashboard/home/teams/{your-team-id}.
+1. Sign in using your Apple Developer account
+1. Click the big "CloudKit Database" button.
+1. Click the container dropdown at the top and
+   select the container name created above.
 
 ## Dashboard
 
@@ -263,6 +251,31 @@ To delete a record type and all records of that type:
 - Select "Delete Record Type...".
 - Click the "Delete" button.
 
+## Making Records Queryable
+
+After the first record is saved in the container,
+make the records of that type queryable.
+
+1. Click the top item in the Navigator.
+1. Click the first target.
+1. Click the "Signing and Capabilities" tab.
+1. Click the "CloudKit Console" button
+1. In the left nav under "Schemas", click "Indexes".
+1. Click the name of the new record type.
+1. Click "Add Basic Index".
+1. In the "Select an option" dropdown, select "recordName".
+1. It should be marked as "Queryable".
+1. Click the "Save Changes" button.
+1. In the left nav under "Data", click "Records".
+1. In the "Record Types" dropdown, select the new record name.
+1. Click the "Query Records" button to display all the records of that type.
+
+## Querying
+
+When querying for records, to limit the fields included in the returned data,
+set the `desiredKeys` property on the `CKQueryOperation` object
+to an array of property name strings.
+
 ### Records
 
 To view (query) all the records of a given type:
@@ -308,6 +321,22 @@ and is referenced from records by URLs.
 
 TODO: Try this.
 
+## Subscriptions
+
+To enable use of subscriptions:
+
+1. Click the top item in the Navigator.
+1. Click the first target.
+1. Click the "Signing and Capabilities" tab.
+1. Click the "+" in the upper-right to add a capability.
+1. Double-click "Background Modes".
+1. Under "Modes", check the "Background fetch"
+   and "Remote notifications" checkboxes.
+
+For a good example of using CloudKit including performing CRUD operations
+and subscribing to be notified of changes see
+{% aTargetBlank "https://github.com/mvolkmann/CloudKitDemo", "CloudKitDemo" %}.
+
 ## Push Notifications
 
 It is possible receive a push notification every time
@@ -316,6 +345,14 @@ This can be used to keep multiple devices in sync.
 
 Push notifications are only sent to apps running in real devices,
 not to apps running in the Simulator.
+
+## Simulator Testing
+
+When testing in the Simulator, sign in to your iCloud
+by opening the Settings app within the Simulator,
+clicking "Sign in to your iPhone",
+and entering your Apple ID and password.
+When prompted about merging contacts, click "Don't Merge".
 
 ## Production Databases
 
