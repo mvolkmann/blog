@@ -3504,8 +3504,10 @@ func taskDemo() {
 
 To bridge between functions that take callback functions,
 referred to as "completion handlers", use the {% aTargetBlank
-"https://developer.apple.com/documentation/swift/3814988-withcheckedcontinuation",
-"withCheckedContinuation" %} function.
+"https://developer.apple.com/documentation/swift/withcheckedcontinuation(function:_:)",
+"withCheckedContinuation" %} or the {% aTargetBlank
+"https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)",
+"withCheckedThrowingContinuation" %} function.
 See this post from {% aTargetBlank
 "https://www.hackingwithswift.com/quick-start/concurrency/how-to-use-continuations-to-convert-completion-handlers-into-async-functions",
 "Hacking with Swift" %}.
@@ -3516,7 +3518,7 @@ so callers can use the `await` keyword:
 
 ```swift
 func getDataAsync() async -> SomeData {
-  return await withCheckedContinuation { continuation in
+  return await withCheckedThrowingContinuation { continuation in
     getData(completion: { result, error in
       if let error {
         continuation.resume(throwing: error)
