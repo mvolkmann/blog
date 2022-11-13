@@ -387,6 +387,8 @@ The following code is a heavily modified version of {% aTargetBlank
 
 This requires defining a class for each record type
 that conforms to the `CloudKitable` protocol.
+The name should be singular.
+For example, the class for the `People` record type should be `Person`.
 An example of such a class follows:
 
 ```swift
@@ -397,7 +399,7 @@ final class Person: CloudKitable, Hashable, Identifiable {
         self.record = record
     }
 
-    var id: String { name }
+    var id: String { record.recordID.recordName }
 
     var record: CKRecord
 
@@ -406,16 +408,19 @@ final class Person: CloudKitable, Hashable, Identifiable {
 
     // The Hashable protocol conforms to the Equatable protocol.
     // This is required by the Equatable protocol.
-    static func == (lhs: Area, rhs: Area) -> Bool {
-        lhs.name == rhs.name
+    static func == (lhs: Person, rhs: Person) -> Bool {
+        lhs.record == rhs.record
     }
 
     // When present, this is used by the Hashable protocol.
     func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
+        hasher.combine(record)
     }
 }
 ```
+
+The `CloudKit` struct below provides methods for
+interacting with a CloudKit database.
 
 ```swift
 import CloudKit
