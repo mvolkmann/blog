@@ -3515,11 +3515,10 @@ To call this function inside an `async` function
 so callers can use the `await` keyword:
 
 ```swift
-//TODO: Verify this!
 func getDataAsync() async -> SomeData {
   return await withCheckedContinuation { continuation in
     getData(completion: { result, error in
-      if error {
+      if let error {
         continuation.resume(throwing: error)
       } else {
         continuation.resume(returning: result)
