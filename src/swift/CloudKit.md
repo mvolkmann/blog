@@ -219,7 +219,7 @@ To define a new record type:
     The supported types are limited to those that
     conform to `CKRecordValueProtocol`. These include:
 
-    - Asset
+    - Asset (for data such as images, audio, and video)
     - Bytes
     - Location
     - Double
@@ -279,8 +279,7 @@ must have an index with the type "Queryable".
 
 ### Querying
 
-To view (query) all the records of a given record type
-in the "CloudKit Console":
+To view (query) all the records of a given record type:
 
 1. In the left nav under "Data", click "Records".
 1. In the database dropdown, select
@@ -293,8 +292,6 @@ Values in the "NAME" column are returned in a property named "recordID".
 There is no conflict if a record type has a field named "name".
 
 Values of fields with a type of "Asset" can be downloaded from here.
-
-To query records from code, see the "CloudKit in Code" section later.
 
 ### Records
 
@@ -387,13 +384,38 @@ TODO: Can fields in records be deleted?
 The following code is a heavily modified version of {% aTargetBlank
 "https://github.com/SwiftfulThinking/SwiftUI-Advanced-Learning/blob/main/SwiftfulThinkingAdvancedLearning/CloudKitBootcamps/CloudKitUtility.swift",
 "CloudKitUtility.swift" %} from Nick Sarno of Swiftful Thinking.
-It requires defining a class for each record type
-that conforms to the `CloudKitable` protocol.
-An example of such a class, named `Person`, follows this code.
 
-When querying for records, to limit the fields included in the returned data,
-set the `desiredKeys` property on the `CKQueryOperation` object
-to an array of property name strings.
+This requires defining a class for each record type
+that conforms to the `CloudKitable` protocol.
+An example of such a class follows:
+
+```swift
+import CloudKit
+
+final class Person: CloudKitable, Hashable, Identifiable {
+    init(record: CKRecord) {
+        self.record = record
+    }
+
+    var id: String { name }
+
+    var record: CKRecord
+
+    var firstName: String { record["firstName"] as? String ?? "" }
+    var lastName: String { record["lastName"] as? String ?? "" }
+
+    // The Hashable protocol conforms to the Equatable protocol.
+    // This is required by the Equatable protocol.
+    static func == (lhs: Area, rhs: Area) -> Bool {
+        lhs.name == rhs.name
+    }
+
+    // When present, this is used by the Hashable protocol.
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
+}
+```
 
 ```swift
 import CloudKit
@@ -551,30 +573,6 @@ struct CloudKit {
 }
 ```
 
-Here is a example of a class that conforms to the `CloudKitable` protocol.
-
-```swift
-import CloudKit
-
-final class Person: CloudKitable, Hashable, Identifiable {
-    init(record: CKRecord) {
-        self.record = record
-    }
-
-    var id: String { name }
-
-    var record: CKRecord
-
-    var name: String { record["name"] as? String ?? "" }
-
-    // This is required by the Equatable protocol.
-    static func == (lhs: Area, rhs: Area) -> Bool {
-        lhs.name == rhs.name
-    }
-
-    // This is used by the Hashable protocol.
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-    }
-}
-```
+When querying for records, to limit the fields included in the returned data,
+set the `desiredKeys` property on the `CKQueryOperation` object
+to an array of property name strings.
