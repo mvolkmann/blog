@@ -3518,7 +3518,7 @@ so callers can use the `await` keyword:
 
 ```swift
 func getDataAsync() async -> SomeData {
-  return await withCheckedThrowingContinuation { continuation in
+  return try await withCheckedThrowingContinuation { continuation in
     getData(completion: { result, error in
       if let error {
         continuation.resume(throwing: error)

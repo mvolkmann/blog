@@ -131,7 +131,7 @@ querying, creating, updating, and deleting records.
 
   Zones are used to segregate the data in private databases,
   not public or shared.
-  They support saving related records in batches.
+  They support operating on related records in batches.
   A default zone named "\_defaultZone" is provided.
   There is no requirement to create additional zones.
 
@@ -206,47 +206,47 @@ In the left nav under "Schema", click "Record Types".
 
 To define a new record type:
 
-- Click the "+" after "Record Types".
-- Enter a camel case name that begins uppercase and is plural
-  (ex. "People" or "Pets").
-- Click the "Save" button or press the return key.
-- For each field in the record type:
+1. Click the "+" after "Record Types".
+1. Enter a camel case name that begins uppercase and is plural
+   (ex. "People" or "Pets").
+1. Click the "Save" button or press the return key.
+1. For each field in the record type:
 
-  - Click the "+" after " Record Fields".
-  - Enter a camel case name that begins lowercase.
-  - Select a type from the "Type" dropdown.
+   1. Click the "+" after " Record Fields".
+   1. Enter a camel case name that begins lowercase.
+   1. Select a type from the "Type" dropdown.
 
-    The supported types are limited to those that
-    conform to `CKRecordValueProtocol`. These include:
+      The supported types are limited to those that
+      conform to `CKRecordValueProtocol`. These include:
 
-    - Asset (for data such as images, audio, and video)
-    - Bytes
-    - Location
-    - Double
-    - Int(64)
-    - Reference
-    - String
-    - Date/Time
-    - Encrypted Bytes
-    - Encrypted String
+      - Asset (for data such as images, audio, and video)
+      - Bytes
+      - Location
+      - Double
+      - Int(64)
+      - Reference
+      - String
+      - Date/Time
+      - Encrypted Bytes
+      - Encrypted String
 
-    Most of these also have a "(List)" option for a collection of values.
+      Most of these also have a "(List)" option for a collection of values.
 
-    There does not seem to be a way to require a field
-    to have a value that is unique across all records.
+      There does not seem to be a way to require a field
+      to have a value that is unique across all records.
 
-  - Click the "Done" button.
+   1. Click the "Done" button.
 
-- Click the "Save" button.
+1. Click the "Save" button.
 
 To view and edit the schema for an existing record type,
 click the name of a record type.
 
 To add a field to a selected record type:
 
-- Click the "+" after "Record Fields".
-- Enter a name.
-- Select a type from the "Type" dropdown.
+1. Click the "+" after "Record Fields".
+1. Enter a name.
+1. Select a type from the "Type" dropdown.
 
 To edit or delete a field in the selected record type,
 click the ellipsis at the end of the row for the field
@@ -254,12 +254,12 @@ and select "Edit" or "Delete".
 
 To delete a record type and all records of that type:
 
-- Click the name of a record type.
-- Click the ellipsis in the upper right.
-- Select "Delete Record Type...".
-- Click the "Delete" button.
+1. Click the name of a record type.
+1. Click the ellipsis in the upper right.
+1. Select "Delete Record Type...".
+1. Click the "Delete" button.
 
-## Adding Indexes
+### Adding Indexes
 
 To make records of a particular record type queryable:
 
@@ -297,28 +297,29 @@ Values of fields with a type of "Asset" can be downloaded from here.
 
 To create a new record of a given currently selected record type:
 
-- Click the "+" after "Records".
-- Select "Create New Record".
-- In the right pane, enter values for each of the fields.
-  Typically the fields under "Metadata" should not be modified.
-- Click the "Save" button.
+1. In the left nav under "Data", click "Records".
+1. Click the "+" after "Records".
+1. Select "Create New Record".
+1. In the right pane, enter values for each of the fields.
+   Typically the fields under "Metadata" should not be modified.
+1. Click the "Save" button.
 
 The new record will not automatically appear in the displayed list of records.
 To see it, click the "Query Records" button again.
 
 To update an existing record:
 
-- Click the unique id of the record to update
-  which is in the first column labelled "NAME".
-- Modify any of the field values that appear in the right pane.
-- Click the blue "Save" button at the bottom of the right pane.
+1. Click the unique id of the record to update
+   which is in the first column labelled "NAME".
+1. Modify any of the field values that appear in the right pane.
+1. Click the blue "Save" button at the bottom of the right pane.
 
 To delete an existing record:
 
-- Click the unique id of the record to delete
-  which is in the first column labelled "NAME".
-- Click the red "Delete" button at the bottom of the right pane.
-- In the confirmation dialog that appears, click the blue "Delete" button.
+1. Click the unique id of the record to delete
+   which is in the first column labelled "NAME".
+1. Click the red "Delete" button at the bottom of the right pane.
+1. In the confirmation dialog that appears, click the blue "Delete" button.
 
 ### Assets
 
@@ -326,6 +327,18 @@ Records can have fields with a type of "Asset".
 This is useful for data such as images, audio, and video.
 The data for asset fields is stored outside of the record data
 and is referenced from records by URLs.
+
+TODO: Try this.
+
+### Zones
+
+To create a new zone:
+
+1. In the left nav under "Data", click "Records".
+1. Click the "+" after "Zones".
+1. In the right pane, select a database type such as "Private Database".
+1. Enter a zone name.
+1. Click the blue "Save" button.
 
 TODO: Try this.
 
