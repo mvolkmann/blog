@@ -171,6 +171,9 @@ To add the use of CloudKit to a project:
    Sadly containers cannot be deleted,
    so if you create one with a name you don't like,
    just create another one and don't use the previous container.
+   You can hide containers from appearing in the "CloudKit Console" dropdown.
+   To do this, click the dropdown, click "Manage Containers",
+   and toggle off any containers you wish to hide.
 1. Periodically click the refresh button below the list of containers
    until the new container name changes color from red to white,
    indicating that the container has been created.
@@ -204,11 +207,13 @@ In the left nav under "Schema", click "Record Types".
 To define a new record type:
 
 - Click the "+" after "Record Types".
-- Enter a name.
-- For each field
+- Enter a camel case name that begins uppercase and is plural
+  (ex. "People" or "Pets").
+- Click the "Save" button or press the return key.
+- For each field in the record type:
 
-  - Click the "+" after "Fields".
-  - Enter a name.
+  - Click the "+" after " Record Fields".
+  - Enter a camel case name that begins lowercase.
   - Select a type from the "Type" dropdown.
 
     The supported types are limited to those that
@@ -254,79 +259,82 @@ To delete a record type and all records of that type:
 - Select "Delete Record Type...".
 - Click the "Delete" button.
 
-## Making Records Queryable
+## Adding Indexes
 
-After the first record is saved in the container,
-make the records of that type queryable.
+To make records of a particular record type queryable:
 
-1. Click the top item in the Navigator.
-1. Click the first target.
-1. Click the "Signing and Capabilities" tab.
-1. Click the "CloudKit Console" button
+1. Open the "CloudKit Console".
 1. In the left nav under "Schemas", click "Indexes".
 1. Click the name of the new record type.
 1. Click "Add Basic Index".
-1. In the "Select an option" dropdown, select "recordName".
-1. It should be marked as "Queryable".
-1. Click the "Save Changes" button.
+1. In the "Select an option" dropdown, select the field to index.
+1. In the dropdown under the "INDEX TYPE" column, select the
+   index type which can be "Queryable", "Searchable", or "Sortable".
+   TODO: What is the difference between Queryable and Searchable?
+1. When finished adding indexes, click the "Save Changes" button.
+
+To make a record type queryable, its "recordName" field,
+which holds the unique id of each record,
+must have an index with the type "Queryable".
+
+### Querying
+
+To view (query) all the records of a given record type
+in the "CloudKit Console":
+
 1. In the left nav under "Data", click "Records".
-1. In the "Record Types" dropdown, select the new record name.
-1. Click the "Query Records" button to display all the records of that type.
-
-## Querying
-
-When querying for records, to limit the fields included in the returned data,
-set the `desiredKeys` property on the `CKQueryOperation` object
-to an array of property name strings.
-
-### Records
-
-To view (query) all the records of a given type:
-
-- In the left nav under "Data", click "Records".
-- Select the database to be used: Public, Private, or Shared.
-  This always resets to "Public" rather than remembering the last selection.
-- Select a record type from the "RECORD TYPE" dropdown.
-- Click the "Query Records" button.
+1. In the database dropdown, select
+   "Public Database", "Private Database", or "Shared Database".
+   This always resets to "Public" rather than remembering the last selection.
+1. In the "RECORD TYPE" dropdown, select a record type.
+1. Click the "Query Records" button.
 
 Values in the "NAME" column are returned in a property named "recordID".
 There is no conflict if a record type has a field named "name".
 
 Values of fields with a type of "Asset" can be downloaded from here.
 
-To create a new record of the selected record type:
+To query records from code, see the "CloudKit in Code" section later.
+
+### Records
+
+To create a new record of a given currently selected record type:
 
 - Click the "+" after "Records".
 - Select "Create New Record".
-- In the area that appears on the right side,
-  enter values for each of the fields.
+- In the right pane, enter values for each of the fields.
   Typically the fields under "Metadata" should not be modified.
 - Click the "Save" button.
 
-To update an existing record in the CloudKit Console,
-select a record to display its details in a right pane,
-change any of the field values, and
-click the blue "Save" button at the bottom of the right pane.
+The new record will not automatically appear in the displayed list of records.
+To see it, click the "Query Records" button again.
 
-To update an existing record in code see the "CloudKit in Code" section below.
+To update an existing record:
 
-To delete an existing record in the CloudKit Console,
-select a record to display its details in a right pane and
-click the red "Delete" button at the bottom of the right pane.
+- Click the unique id of the record to update
+  which is in the first column labelled "NAME".
+- Modify any of the field values that appear in the right pane.
+- Click the blue "Save" button at the bottom of the right pane.
 
-To delete an existing record in code see the "CloudKit in Code" section below.
+To delete an existing record:
+
+- Click the unique id of the record to delete
+  which is in the first column labelled "NAME".
+- Click the red "Delete" button at the bottom of the right pane.
+- In the confirmation dialog that appears, click the blue "Delete" button.
 
 ### Assets
 
 Records can have fields with a type of "Asset".
-The data for these is stored outside of the record data
+This is useful for data such as images, audio, and video.
+The data for asset fields is stored outside of the record data
 and is referenced from records by URLs.
 
 TODO: Try this.
 
 ## Subscriptions
 
-To enable use of subscriptions:
+To enable use of subscriptions from Xcode:
 
 1. Click the top item in the Navigator.
 1. Click the first target.
@@ -351,17 +359,27 @@ not to apps running in the Simulator.
 
 ## Simulator Testing
 
-When testing in the Simulator, sign in to your iCloud
-by opening the Settings app within the Simulator,
-clicking "Sign in to your iPhone",
-and entering your Apple ID and password.
-When prompted about merging contacts, click "Don't Merge".
+In order to test apps that use CloudKit in the Simulator,
+it is necessary to sign in to your iCloud account. To do this:
+
+- Open the Settings app within the Simulator.
+- Click "Sign in to your iPhone".
+- Enter your Apple ID and password.
+- When prompted about merging contacts, click "Don't Merge".
 
 ## Production Databases
 
-Once a database has been switched from "Development" to "Production",
+When an app that uses CloudKit is ready for production use,
+perhaps being released to the App Store,
+switch the database from "Development" to "Production" mode.
+To do this, change the dropdown in the upper-left
+that reads "Development" to "Production".
+
+Once a container is in production mode,
 it is no longer possible to delete record types.
-New record types can be added and existing record types can be modified.
+New record types can still be added and
+existing record types still can be modified.
+
 TODO: Can fields in records be deleted?
 
 ## CloudKit in Code
@@ -372,6 +390,10 @@ The following code is a heavily modified version of {% aTargetBlank
 It requires defining a class for each record type
 that conforms to the `CloudKitable` protocol.
 An example of such a class, named `Person`, follows this code.
+
+When querying for records, to limit the fields included in the returned data,
+set the `desiredKeys` property on the `CKQueryOperation` object
+to an array of property name strings.
 
 ```swift
 import CloudKit
