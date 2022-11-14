@@ -131,9 +131,12 @@ querying, creating, updating, and deleting records.
 
   Zones are used to segregate the data in private databases,
   not public or shared.
-  They support operating on related records in batches.
+  Zones support operating on related records in batches.
+  For example, all records in a zone can be deleted with
+  a single call to `database.delete(withRecordZoneID: zoneID)`.
   A default zone named "\_defaultZone" is provided.
-  There is no requirement to create additional zones.
+  There is no requirement to create additional zones
+  but doing so can be useful.
 
 ## Sample Code
 
@@ -332,6 +335,10 @@ TODO: Try this.
 
 ### Zones
 
+One reason to create a custom zone and create records in it
+can be deleted while the default zone cannot.
+This provides an easy way to clear the database.
+
 To create a new zone:
 
 1. In the left nav under "Data", click "Records".
@@ -398,9 +405,9 @@ The following code is a heavily modified version of {% aTargetBlank
 "https://github.com/SwiftfulThinking/SwiftUI-Advanced-Learning/blob/main/SwiftfulThinkingAdvancedLearning/CloudKitBootcamps/CloudKitUtility.swift",
 "CloudKitUtility.swift" %} from Nick Sarno of Swiftful Thinking.
 
-This requires defining a class for each record type
-that conforms to the `CloudKitable` protocol.
-The name should be singular.
+Define a class corresponding to each record type that
+conforms to the `CloudKitable` protocol defined below.
+The class name should be singular.
 For example, the class for the `People` record type should be `Person`.
 An example of such a class follows:
 
@@ -408,16 +415,29 @@ An example of such a class follows:
 import CloudKit
 
 final class Person: CloudKitable, Hashable, Identifiable {
+    init(firstName: String, lastName: String) {
+        record = CloudKit.createRecord(recordType: "People")
+        record["firstName"] = firstName
+        record["lastName"] = lastName
+    }
+
     init(record: CKRecord) {
         self.record = record
     }
 
+    var firstName: String {
+        get { record["firstName"] as? String ?? "" }
+        set { record["firstName"] = newValue }
+    }
+
     var id: String { record.recordID.recordName }
 
-    var record: CKRecord
+    var lastName: String {
+        get { record["lastName"] as? String ?? "" }
+        set { record["lastName"] = newValue }
+    }
 
-    var firstName: String { record["firstName"] as? String ?? "" }
-    var lastName: String { record["lastName"] as? String ?? "" }
+    var record: CKRecord
 
     // The Hashable protocol conforms to the Equatable protocol.
     // This is required by the Equatable protocol.
@@ -425,7 +445,7 @@ final class Person: CloudKitable, Hashable, Identifiable {
         lhs.record == rhs.record
     }
 
-    // When present, this is used by the Hashable protocol.
+    // When present, this method is used by the Hashable protocol.
     func hash(into hasher: inout Hasher) {
         hasher.combine(record)
     }
@@ -435,9 +455,13 @@ final class Person: CloudKitable, Hashable, Identifiable {
 The `CloudKit` struct below provides methods for
 interacting with a CloudKit database.
 
+Note that when new records are created or records are updated,
+it can take up to a minute for CloudKit to index the changes.
+The new/modified records are not returned by subsequent queries
+until indexes is completed.
+
 ```swift
 import CloudKit
-import UIKit
 
 protocol CloudKitable {
     // This must be an optional initializer
@@ -451,9 +475,14 @@ protocol CloudKitable {
 struct CloudKit {
     typealias Cursor = CKQueryOperation.Cursor
 
+    // Using a custom zone enables performing batch operations
+    // such as deleting all the records of every record type.
+    // See the deleteZone method below.
+    static var zone = CKRecordZone(zoneName: "my-zone")
+
     // MARK: - Initializer
 
-    init(containerId: String, usePublic: Bool = false) {
+    init(containerID: String, usePublic: Bool = false) {
         // TODO: This doesn't result in pointing to the correct container.  Why?
         // container = CKContainer.default()
 
@@ -463,7 +492,7 @@ struct CloudKit {
         // TODO: Why did it use this identifier instead of the one
         // TODO: specified in Signing & Capabilities ... Containers?
 
-        container = CKContainer(identifier: containerId)
+        container = CKContainer(identifier: containerID)
 
         database = usePublic ?
             container.publicCloudDatabase :
@@ -532,11 +561,61 @@ struct CloudKit {
     // MARK: - CRUD Methods
 
     // "C" in CRUD.
+
     func create<T: CloudKitable>(item: T) async throws {
         try await database.save(item.record)
     }
 
+    static func createRecord(recordType: String) -> CKRecord {
+        CKRecord(
+            recordType: recordType,
+            recordID: CKRecord.ID(zoneID: Self.zone.zoneID)
+        )
+    }
+
+    func createZone() async throws {
+        let zone = CKRecordZone(zoneID: Self.zone.zoneID)
+        try await database.save(zone)
+    }
+
+    func recreateZone() async throws {
+        try await deleteZone()
+        try await createZone()
+    }
+
+    // "D" in CRUD.
+
+    func delete<T: CloudKitable>(item: T) async throws {
+        try await database.deleteRecord(withID: item.record.recordID)
+    }
+
+    func deleteAll(recordType: String) async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            database.delete(withRecordZoneID: Self.zone.zoneID) { _, error in
+                if let error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
+        }
+    }
+
+    func deleteZone() async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            // In iOS 16, this method still requires a completion handler.
+            database.delete(withRecordZoneID: Self.zone.zoneID) { _, error in
+                if let error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume()
+                }
+            }
+        }
+    }
+
     // "R" in CRUD.
+
     func retrieve<T: CloudKitable>(
         recordType: CKRecord.RecordType,
         predicate: NSPredicate = NSPredicate(value: true), // gets all
@@ -547,6 +626,7 @@ struct CloudKit {
         query.sortDescriptors = sortDescriptors
         let (results, cursor) = try await database.records(
             matching: query,
+            inZoneWith: Self.zone.zoneID,
             resultsLimit: resultsLimit
         )
 
@@ -562,6 +642,7 @@ struct CloudKit {
         return objects
     }
 
+    // This uses a cursor to recursively retrieve all the requested records.
     private func retrieveMore<T: CloudKitable>(
         _ cursor: Cursor?, _ objects: inout [T]
     ) async throws {
@@ -580,13 +661,9 @@ struct CloudKit {
     }
 
     // "U" in CRUD.
+
     func update<T: CloudKitable>(item: T) async throws {
         try await database.save(item.record)
-    }
-
-    // "D" in CRUD.
-    func delete<T: CloudKitable>(item: T) async throws {
-        try await database.deleteRecord(withID: item.record.recordID)
     }
 }
 ```
@@ -594,3 +671,11 @@ struct CloudKit {
 When querying for records, to limit the fields included in the returned data,
 set the `desiredKeys` property on the `CKQueryOperation` object
 to an array of property name strings.
+
+## Key-value Storage
+
+TODO: Document using this kind of CloudKit storage.
+
+# iCloud Documents
+
+TODO: Document using this kind of CloudKit storage.
