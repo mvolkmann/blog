@@ -391,16 +391,42 @@ it is necessary to sign in to your iCloud account. To do this:
 
 When an app that uses CloudKit is ready for production use,
 perhaps being released to the App Store,
-switch the database from "Development" to "Production" mode.
-To do this, change the dropdown in the upper-left
-that reads "Development" to "Production".
+deploy the container to production.
+Apps in the App Store can only access production containers.
 
-Once a container is in production mode,
-it is no longer possible to delete record types.
+From {% aTargetBlank
+"https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/deploying_an_icloud_container_s_schema",
+"Managing iCloud Containers" %}, "Deploying the schema copies its
+record types, fields, and indexes to the production environment,
+but doesn’t copy any records."
+
+To deploy a container to production:
+
+- Browse the container in the CloudKit Console.
+- Near the bottom the left nav, click "Deploy Schema Changes...".
+- Review the Record Types, Indexes, and Security Roles to be deployed.
+- Click the blue "Deploy" button.
+- Change the dropdown in the upper-left from "Development" to "Production"
+  to view the production container.
+
+Records in the development container will remain.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/deploying_an_icloud_container_s_schema",
+"Managing iCloud Containers" %}, page also says:
+"To prevent conflicts, you can’t
+delete record types or fields that are already in production.
+Every time you deploy the development schema, its
+additive changes merge into the production schema.
+For testing purposes, your app in development can access
+either the development or the production environment."
+This means that once a container deployed to production,
+it is no longer possible to delete record types
+or delete fields in record types.
 New record types can still be added and
-existing record types still can be modified.
-
-TODO: Can fields in records be deleted?
+new fields can be added to existing record types
+by making the changes in the development container
+and redeploying the schema changes to production.
 
 ## CloudKit in Code
 
