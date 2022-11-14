@@ -42,3 +42,5 @@ guidelines that beginner to intermediate players might find useful.
 1. Utilized the king in the end game, especially to protect pawns.
 1. Utilize "head on a stick" moves where a piece is
    defended by a pawn that is one rank behind it.
+1. Sometimes it is good to take a piece that is protected because
+   if they take back they expose a more valuable piece.
