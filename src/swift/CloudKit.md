@@ -276,8 +276,8 @@ To make records of a particular record type queryable:
 
    - Queryable indexes are used to find records based on a field value.
    - Searchable indexes are used to perform full text searches
-     on string fields using the `CONTAINS` predicate operator.
-   - Sortable indexes are used to sort the query results on a specific field.
+     on a string field using the `CONTAINS` predicate operator.
+   - Sortable indexes are used to sort query results on a field.
 
 1. When finished adding indexes, click the "Save Changes" button.
 
