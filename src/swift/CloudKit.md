@@ -387,7 +387,7 @@ it is necessary to sign in to your iCloud account. To do this:
 - Enter your Apple ID and password.
 - When prompted about merging contacts, click "Don't Merge".
 
-## Production Databases
+## Production Containers
 
 When an app that uses CloudKit is ready for production use,
 perhaps being released to the App Store,
