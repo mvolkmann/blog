@@ -347,8 +347,6 @@ To create a new zone:
 1. Enter a zone name.
 1. Click the blue "Save" button.
 
-TODO: Try this.
-
 ## Subscriptions
 
 To enable use of subscriptions from Xcode:
@@ -481,17 +479,10 @@ struct CloudKit {
 
     // MARK: - Initializer
 
-    init(containerID: String, usePublic: Bool = false) {
-        // TODO: This doesn't result in pointing to the correct container.  Why?
-        // container = CKContainer.default()
-
-        // I discovered the container identifier by looking in CloudKitDemo.entitlements.
-        // "CloudKit Console" button in "Signing & Capabilities"
-        // under "Ubiquity Container Identifiers".
-        // TODO: Why did it use this identifier instead of the one
-        // TODO: specified in Signing & Capabilities ... Containers?
-
-        container = CKContainer(identifier: containerID)
+    init(usePublic: Bool = false) {
+        // The detail container is the one selected in
+        // Signing & Capabilities ... iCloud ... Containers.
+        container = CKContainer.default()
 
         database = usePublic ?
             container.publicCloudDatabase :
