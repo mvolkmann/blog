@@ -8,6 +8,8 @@ These are my notes on chess strategies.
 I am not a highly rated chess player, so these are just
 guidelines that beginner to intermediate players might find useful.
 
+## Strategies
+
 1. Attempt to control the center of the board.
 
    The board below shows some ideal positions for pieces that have been
@@ -19,7 +21,8 @@ guidelines that beginner to intermediate players might find useful.
      src="/blog/assets/chess-controlling-center.png?v={{pkg.version}}"
      title="controlling center">
 
-1. Look for potential attacks from opponent.
+1. Look for potential attacks from opponent, especially ones that
+   put you in check AND threaten other pieces.
 1. Count the number of pieces attacking and defending each square
    and consider the values of the pieces that would be exchanged.
 1. When planning the next move, verify that it isn't
@@ -44,3 +47,17 @@ guidelines that beginner to intermediate players might find useful.
    defended by a pawn that is one rank behind it.
 1. Sometimes it is good to take a piece that is protected because
    if they take back they expose a more valuable piece.
+
+## Notation
+
+King = K
+Knight = N
+Queen = 0
+Rook = R
+Bishop = B
+Pawn = just square moved to
+Capture = X
+Check = +
+Checkmate = #
+Castle Kingside = 0-0
+Castle Queenside = 0.0.0

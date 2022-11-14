@@ -1489,6 +1489,15 @@ struct Stack<Element> where Element: Equatable & Identifiable {
 }
 ```
 
+There are two ways to define functions that take generic arguments.
+These are equivalent, but the second is easier to read.
+
+```swift
+func update<T: CloudKitable>(item: T) async throws { ... }
+
+func update(item: some CloudKitable) async throws { ... }
+```
+
 ## Built-in Collection Types
 
 Swift provides several generic collection types.
