@@ -273,7 +273,12 @@ To make records of a particular record type queryable:
 1. In the "Select an option" dropdown, select the field to index.
 1. In the dropdown under the "INDEX TYPE" column, select the
    index type which can be "Queryable", "Searchable", or "Sortable".
-   TODO: What is the difference between Queryable and Searchable?
+
+   - Queryable indexes are used to find records based on a field value.
+   - Searchable indexes are used to perform full text searches
+     on string fields using the `CONTAINS` predicate operator.
+   - Sortable indexes are used to sort the query results on a specific field.
+
 1. When finished adding indexes, click the "Save Changes" button.
 
 To make a record type queryable, its "recordName" field,
