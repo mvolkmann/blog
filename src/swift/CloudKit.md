@@ -796,6 +796,12 @@ kvStore.synchronize()
 let value = kvStore.string(forKey: "data")
 ```
 
-# iCloud Documents
+## iCloud Documents
 
 TODO: Document using this kind of CloudKit storage.
+
+## Subscriptions
+
+TODO: Can you subscribe to all three kinds of stores?
+
+TODO: Add examples.
