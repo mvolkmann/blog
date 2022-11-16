@@ -691,7 +691,77 @@ struct CloudKit {
 }
 ```
 
-When querying for records, to limit the fields included in the returned data,
+Below are examples of using the `CloudKit` struct above to perform
+CRUD operations with the `Person` class and the `People` record type:
+After running this code, browse the CloudKit Console and
+query records in private database and in the zone "my-zone".
+
+When new records are created or records are updated, it
+can take up to a minute for CloudKit to index the changes.
+The new/modified records are not returned by
+subsequent queries until indexing is completed.
+
+```swift
+Task {
+    do {
+        let ck = CloudKit()
+
+        try await ck.recreateZone()
+
+        // Create some records.
+
+        let tami = Person(firstName: "Tamara", lastName: "Volkmann")
+        try await ck.create(item: tami)
+
+        let amanda = Person(firstName: "Amanda", lastName: "Nelson")
+        try await ck.create(item: amanda)
+
+        let jeremy = Person(firstName: "Jeremy", lastName: "Volkmann")
+        try await ck.create(item: jeremy)
+
+        // Pet is a class similar to Person above.
+        // Each instance holds name and ownedBy properties.
+        // The ownedBy property holds a reference to a Person.
+        let ref = CKRecord.Reference(
+            recordID: tami.record.recordID,
+            action: .deleteSelf
+        )
+        let comet = Pet(name: "Comet", ownedBy: ref)
+        try await ck.create(item: comet)
+
+        // Retrieve some records.
+        // WARNING: As explained above, the new records
+        // will not be available immediately!
+
+        let people = try await ck.retrieve(
+            recordType: "People"
+        ) as [Person]
+        for person in people {
+            print("person =", person.firstName, person.lastName)
+        }
+
+        let pets = try await ck.retrieve(
+            recordType: "Pets"
+        ) as [Pet]
+        for pet in pets {
+            print("pet =", pet.name)
+        }
+
+        // Delete a record.
+        try await ck.delete(item: people[0])
+
+        // Update a record.
+        let item = pets[0]
+        item.name = "Fireball"
+        try await ck.update(item: item)
+    } catch {
+        print("CRUD error:", error)
+    }
+}
+```
+
+When querying for records, all the fields are returned by default.
+To limit the fields included in the returned data,
 set the `desiredKeys` property on the `CKQueryOperation` object
 to an array of property name strings.
 

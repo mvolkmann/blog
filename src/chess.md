@@ -34,7 +34,7 @@ guidelines that beginner to intermediate players might find useful.
 1. Having two bishops and no knights is typically slightly better (half point?)
    than having only two knights or having only one bishop and one knight.
 1. Plan and defend against forks.
-1. Plan and defend against skewers.
+1. Plan and defend against skewers such as pinning a piece to the king or queen.
 1. Plan and defend against discovered attacks.
 1. Avoid moving the same piece twice because it loses a tempo (turn).
 1. Usually avoid moving backwards.
