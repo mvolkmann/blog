@@ -767,7 +767,34 @@ to an array of property name strings.
 
 ## Key-value Storage
 
-TODO: Document using this kind of CloudKit storage.
+An iCloud container can hold a collection of key-value pairs.
+They are accessed from code using the {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/nsubiquitouskeyvaluestore",
+"NSUbiquitousKeyValueStore" %} class.
+
+This class is similar to {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/userdefaults",
+"UserDefaults" %} class.
+The main difference is that `UseDefaults` data
+only resides on the device where the app runs,
+whereas `NSUbiquitousKeyValueStore` data resides in iCloud
+and is shared between all the devices of a user.
+
+The class `NSUbiquitousKeyValueStore` has the following limits:
+
+- A single key cannot exceed 64 bytes using UTF-8 encoding.
+- A single key-value pair cannot exceed 1 MB.
+- A maximum of 1024 key-value pairs can be saved.
+- The total storage limit is 1 MB.
+
+TODO: Try this in your CloudKitDemo2 project!
+
+```swift
+var kvStore = NSUbiquitousKeyValueStore()
+kvStore.set(value, forKey: "some-key")
+kvStore.synchronize()
+let value = kvStore.string(forKey: "data")
+```
 
 # iCloud Documents
 
