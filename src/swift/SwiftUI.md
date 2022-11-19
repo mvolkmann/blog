@@ -2,7 +2,7 @@
 eleventyNavigation:
   key: SwiftUI
   parent: Swift
-  order: 2
+  order: 3
 layout: topic-layout.njk
 ---
 
