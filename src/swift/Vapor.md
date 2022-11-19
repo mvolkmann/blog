@@ -49,12 +49,12 @@ both path parameters and query parameters.
 import Vapor
 
 func routes(_ app: Application) throws {
-    // This is a provided route for "/".
+    // route is /
     app.get { _ in
         "It works!"
     }
 
-    // This is a provided route for "/hello".
+    // route is /hello
     // Return type of the function passed to `app.get`
     // specifies the kind of data returned.
     app.get("hello") { _ -> String in
@@ -62,7 +62,7 @@ func routes(_ app: Application) throws {
     }
 
     // This demonstrates using path parameters.
-    // An example URL is "/greet/Tami".
+    // route example is /greet/Tami
     // The `get` method takes any number of string arguments
     // that each represent a path part that can be
     // constant (like "greet") or variable (like ":name").
@@ -73,15 +73,20 @@ func routes(_ app: Application) throws {
         // This demonstrates getting the value of a variable path parameter.
         // Variable path parameters will never be nil,
         // so a forced unwrap is safe.
-        let name = req.parameters.get("name")!
+        guard let name = req.parameters.get("name") else {
+            throw Abort(.badRequest)
+        }
         return "Hello, \(name)!"
     }
 
     // This demonstrates using query parameters.
-    // An example URL is "/divide?dividend=5&divisor=2" which returns "2.5.
     app.get("divide") { req -> Double in
-        let dividend: Double = req.query["dividend"] ?? 0
-        let divisor: Double = req.query["divisor"] ?? 1
+        guard let dividend: Double = req.query["dividend"] else {
+            throw Abort(.badRequest)
+        }
+        guard let divisor: Double = req.query["divisor"] else {
+            throw Abort(.badRequest)
+        }
         return dividend / divisor
     }
 
@@ -89,16 +94,43 @@ func routes(_ app: Application) throws {
     // The struct below describes the supported query parameters.
     // They can be required or optional (by using `?`).
     struct Divide: Content {
-        var dividend: Double?
-        var divisor: Double?
+        var dividend: Double
+        var divisor: Double
     }
 
     // This uses the struct above to decode the query parameters.
     app.get("divide2") { req -> Double in
         let query = try req.query.decode(Divide.self)
-        let dividend = query.dividend ?? 0
-        let divisor = query.divisor ?? 1 // avoiding divide by zero errors
-        return dividend / divisor
+        return query.dividend / query.divisor
+    }
+}
+```
+
+## Returning JSON
+
+The following code is from the `routes.swift` file.
+It demonstrates returning JSON.
+
+```swift
+import Vapor
+
+func routes(_ app: Application) throws {
+    // The Content protocol combines
+    // Decodable, Encodable, and RequestDecodable.
+    struct Address: Content {
+        let street: String
+        let city: String
+        let state: String
+        let zip: Int
+    }
+
+    app.get("address") { _ -> Address in
+        Address(
+            street: "123 Some Lane",
+            city: "Somewhere",
+            state: "CA",
+            zip: 12345
+        )
     }
 }
 ```
