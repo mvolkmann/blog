@@ -132,5 +132,21 @@ func routes(_ app: Application) throws {
             zip: 12345
         )
     }
+
+    app.get("addresses") { _ -> [Address] in
+        let a1 = Address(
+            street: "123 Some Lane",
+            city: "Somewhere",
+            state: "CA",
+            zip: 12345
+        )
+        let a2 = Address(
+            street: "456 Some Street",
+            city: "Nowhere",
+            state: "CA",
+            zip: 98765
+        )
+        return [a1, a2]
+    }
 }
 ```
