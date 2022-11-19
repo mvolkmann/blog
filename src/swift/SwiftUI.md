@@ -2423,6 +2423,7 @@ When the `buttonStyle` view modifier is passed `.borderedProminent`,
 the background is the accent color and the text is white.
 In both cases no actual border is drawn.
 They just add a background color inside a rounded rectangle.
+To change the background color, apply the `tint` view modifier.
 
 To change the border shape, apply the `buttonBorderShape` view modifier
 passing it `.capsule`, `.roundedRectangle`,
