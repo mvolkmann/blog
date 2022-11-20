@@ -2686,9 +2686,9 @@ TextField(text: $lastName, prompt: Text("Required")) {
 .padding()
 
 // Using a non-String value (Int)
-// This doesn't provide arrows to increment and decrement the value
-// and it doesn't prevent typing non-digit characters.
+// This doesn't provide arrows to increment and decrement the value.
 TextField("Score", value: $score, format: .number)
+    .keyboardType(.numberPad)
     .padding()
     .textFieldStyle(.roundedBorder)
 ```
