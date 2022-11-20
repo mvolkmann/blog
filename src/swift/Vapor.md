@@ -14,12 +14,21 @@ for macOS that is written in Swift.
 
 1. Install {% aTargetBlank "https://brew.sh", "Homebrew" %}.
 1. Enter `brew install vapor`
+1. Add a package dependency to the Xcode project.
+   1. Click the top entry in the Navigator.
+   1. Click the project name.
+   1. Click the "Package Dependencies" tab.
+   1. Search for the URL https://github.com/vapor/vapor.
+   1. Click the "Add Package" button.
+      TODO: I thought this would add Vapor code completions and
+      access to its source code, but it didnt!
+   1. In the dialog that appears, click the "Add Package" button again.
 
 ## Project Creation
 
 To create a Vapor project, enter `vapor new {project-name}`
 
-## Server Running
+## Running Server
 
 To run the server, enter `vapor run`.
 The server listens on port 8080 by default.
@@ -106,10 +115,14 @@ func routes(_ app: Application) throws {
 }
 ```
 
-## Returning JSON
+## JSON Support
+
+The {% aTargetBlank "https://docs.vapor.codes/basics/content/", "Content" %}
+API supports parsing JSON in request bodies
+and generating JSON for response bodies.
 
 The following code is from the `routes.swift` file.
-It demonstrates returning JSON.
+It demonstrates defining routes that return JSON.
 
 ```swift
 import Vapor
@@ -150,3 +163,45 @@ func routes(_ app: Application) throws {
     }
 }
 ```
+
+## Database Support
+
+Routes can perform CRUD operations on databases.
+The supported databases are MongoDB, MySQL, PostgreSQL, and SQLite.
+
+Object Relational Mapper (ORM) support is provided by the
+{% aTargetBlank "https://docs.vapor.codes/fluent/overview/", "Fluent" %}
+framework.
+
+## HTML Generation
+
+Routes can return server-rendered HTML using the
+{% aTargetBlank "https://docs.vapor.codes/leaf/getting-started/", "Leaf" %}
+templating language.
+
+## Request Validation
+
+Routes can validate the HTTP requests sent to them using the {% aTargetBlank
+"https://docs.vapor.codes/basics/validation/", "Validation" %} API.
+It can validate query parameters and request bodies.
+
+One motivation for using this is that it provides human-readable error messages.
+
+## Sending HTTP Requests
+
+Routes can send HTTP requests to endpoints on other servers using the
+{% aTargetBlank "https://docs.vapor.codes/basics/client/", "Client" %} API.
+This is built on the {% aTargetBlank
+"https://swift-server.github.io/async-http-client/docs/current/AsyncHTTPClient/index.html",
+"AsyncHTTPClient" %} package which can also be used in Swift client apps.
+However, the code is not any simpler than using {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/urlsession",
+"URLSession" %}.
+
+## Environments
+
+Routes can use the {% aTargetBlank
+"https://docs.vapor.codes/basics/environment/", "Environment" %} API
+to modifier their behavior based on the current environment
+such as production, development, or testing.
+One use is to select the database instance that is accessed.
