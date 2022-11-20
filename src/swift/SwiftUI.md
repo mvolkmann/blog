@@ -2705,6 +2705,44 @@ TextField("my placeholder", text: $locationVM.searchQuery)
     .foregroundColor(.primary)
 ```
 
+It's good practice to provide a way for the user to dismiss the keyboard.
+One approach is to add a button at the top of the keyboard.
+The following code does this:
+
+```swift
+TextField(...)
+    .toolbar {
+        ToolbarItemGroup(placement: .keyboard) {
+            Button(action: dismissKeyboard) {
+                Image(
+                    systemName: "keyboard.chevron.compact.down"
+                )
+            }
+        }
+    }
+```
+
+The `dismissKeyboard` function above can be defined in a `View` extension
+as follows:
+
+```swift
+import SwiftUI
+
+extension View {
+    #if os(iOS) // not supported in watchOS
+        @available(iOSApplicationExtension, unavailable)
+        func dismissKeyboard() {
+            UIApplication.shared.sendAction(
+                #selector(UIResponder.resignFirstResponder),
+                to: nil,
+                from: nil,
+                for: nil
+            )
+        }
+    #endif
+}
+```
+
 ### `SecureField`
 
 This is like `TextField`, but obscures the characters that are typed.
