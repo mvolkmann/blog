@@ -4108,6 +4108,14 @@ List {
 //.listStyle(.grouped) // for edge-to-edge display
 ```
 
+To change the style of the `List`, apply the `listStyle` view modifier
+which takes the enum values `grouped`, `inset`, `insetGrouped`, `plain`,
+and `sidebar`.
+
+To remove horizontal padding that is added to list elements by default,
+apply the `.listRowInsets(EdgeInsets())` view modifier
+to each child of the `List`.
+
 The following example demonstrates using a `List` inside a `NavigationView`
 to enable selecting ids of the objects represented by the rows.
 To select rows, tap "Edit" in the upper-right corner.
