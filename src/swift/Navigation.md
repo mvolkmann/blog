@@ -30,10 +30,15 @@ The app has four tabs.
 
 ### Fruits tab
 
-The first tab "Fruits" uses a `NavigationStack` to allow the user
+The first tab "Fruits" is implemented in the file `FruitListView.swift`.
+It uses a `NavigationStack` to allow the user
 to select a fruit from a `List` of `NavigationLink` views.
 
 <img alt="Fruits List" src="/blog/assets/swiftui-navigation-01-fruits.png?v={{pkg.version}}">
+
+Nested inside the `NavigationStack` are instances of `NavigationLink`.
+This struct supports many initializers, some of which take a `value` argument.
+When these links are tapped, their value is placed on the stack.
 
 When a fruit is selected, a view that displays "You chose {fruit-emoji}."
 is pushed onto the navigation stack.
@@ -49,7 +54,8 @@ that takes advantage of the fact that the only registered
 
 ### Authors tab
 
-The second tab "Authors" uses a `NavigationStack` to allow the user
+The second tab "Authors" is implemented in the file `AuthorListView`.
+It uses a `NavigationStack` to allow the user
 to select an `Author` from a `List` of `NavigationLink` views.
 
 <img alt="Authors List" src="/blog/assets/swiftui-navigation-03-authors.png?v={{pkg.version}}" />
@@ -68,6 +74,25 @@ There are four `navigationDestination` registrations that handle the types:
 
 The "Random" button selects a random author
 and displays information about that author.
+
+Unlike in the Fruits tab, a `path` is passed to `NavigationStack`.
+This can be an instance of `NavigationPath` or any array of any type
+whose values conform to the `Codable` and `Hashable` protocols.
+Many builtin types such as `String` already conform to both of these protocols.
+
+It seems the `NavigationStack` is only populated when
+the `NavigationLink` instances supply the `value` argument.
+This enables modifying the stack to navigate to another screen.
+For example, the following code navigates to the "root" screen:
+
+```swift
+path.removeLast(path.count)
+```
+
+If the path passed to `NavigationStack` is an `Array` of any type
+instead of a `NavigationPath` instance and it is held in state,
+navigate to the "root" screen by
+setting the that state variable to an empty array.
 
 ### Countries Stack tab
 
