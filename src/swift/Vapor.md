@@ -28,16 +28,44 @@ for macOS that is written in Swift.
 
 To create a Vapor project, enter `vapor new {project-name}`
 
+If not using a database, enter "N" for "use Fluent?".
+
+If not generating HTML, enter "N" for "use Leaf?".
+
+To edit code in the project, cd to the newly created project directory
+and enter `vapor xcode` to open the project in Xcode.
+This will trigger the necessary downloads.
+
 ## Running Server
 
 To run the server, enter `vapor run`.
 The server listens on port 8080 by default.
+
 To verify that it is working,
-browse localhost:8080 which outputs "It works!" or
+browse localhost:8080/ which outputs "It works!" or
 browse localhost:8080/hello which outputs "Hello, world!".
+These routes are defined in the provided `Sources/App/routes.swift` file.
 
 There does not seem to be support for listening for code changes
 and automatically restarting the server (like nodemon in Node.js).
+
+## Directory Structure
+
+The provided directory structure is:
+
+- `Sources`
+  - `App`
+    - `Controllers`
+      - `routes.swift` - implements `route` function that defines endpoints
+    - `Migrations` - for database migrations
+    - `Models` - for model objects that map to database tables/collections
+    - `configure.swift` - implements `configure` function that
+      configures database access and calls the `routes` function
+  - `Run`
+    - `main.swift` - entry point that calls the `configure` function
+- `Tests`
+  - `AppTests`
+    - `AppTests.swift` - implements unit tests using XCTest and XCTVapor
 
 ## Defining Routes
 
@@ -79,12 +107,25 @@ func routes(_ app: Application) throws {
     // "**" matches any number of path parts with any values.
     // (Can "**" only be used as the last argument?)
     app.get("greet", ":name") { req -> String in
-        // This demonstrates getting the value of a variable path parameter.
-        // Variable path parameters will never be nil,
-        // so a forced unwrap is safe.
+        // This demonstrates getting the String value
+        // of a variable path parameter.
+        // These are never be nil, so a forced unwrap is safe.
         guard let name = req.parameters.get("name") else {
             throw Abort(.badRequest)
         }
+
+        // This demonstrates getting the non-String value
+        // of a variable path parameter.
+        // If an incompatible value is provided,
+        // a "not found" response will be returned.
+        /*
+        guard let age = req.parameters.get("age", as: Int.self) else {
+            // This is one of the many supported error types.
+            // For more, see the error types section below.
+            throw Abort(.badRequest)
+        }
+        */
+
         return "Hello, \(name)!"
     }
 
@@ -114,6 +155,14 @@ func routes(_ app: Application) throws {
     }
 }
 ```
+
+## Error Types
+
+Errors thrown from Vapor routes can use the {% aTargetBlank
+"https://apple.github.io/swift-nio/docs/current/NIOHTTP1/Enums/HTTPResponseStatus.html",
+"HTTPResponseStatus" %} enumeration defined by the {% aTargetBlank
+"https://apple.github.io/swift-nio/docs/current/NIOCore/",
+"SwiftNIO" %} library (see the NIOHTTP1 module).
 
 ## JSON Support
 
