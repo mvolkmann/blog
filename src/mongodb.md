@@ -245,6 +245,13 @@ use a query like the following:
 { "createdAt": {$gt: new Date('2022-11-23')} }
 ```
 
+To find documents with a property that matches a regular expression,
+use a query like the following:
+
+```text
+{ "itemNumber": {$regex: /^Comet/} }
+```
+
 ## MongoDB from JavaScript
 
 Now that we have seen how to use the MongoDB shell,
