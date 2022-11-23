@@ -233,6 +233,18 @@ db.dropDatabase()
 show dbs
 ```
 
+## MongoDB Compass
+
+TODO: Add more detail.
+
+For documents that have date properties,
+to find those from today and newer
+use a query like the following:
+
+```text
+{ "createdAt": {$gt: new Date('2022-11-23')} }
+```
+
 ## MongoDB from JavaScript
 
 Now that we have seen how to use the MongoDB shell,

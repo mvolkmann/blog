@@ -7,7 +7,8 @@ layout: topic-layout.njk
 
 ## Overview
 
-XCTest is a unit testing framework for SwiftUI.
+{% aTargetBlank "https://developer.apple.com/documentation/xctest", "XCTest" %}
+is a unit testing framework for SwiftUI.
 "XC" is an abbreviation for "Xcode".
 
 ## Unit Test Configuration
@@ -19,9 +20,10 @@ XCTest is a unit testing framework for SwiftUI.
 1. Click the "Next" button.
 1. Click the "Finish" button.
 
-   Note that a new folder appears in the Navigator whose name is
-   the project name followed by "Tests".
-   This contains a `.swift` file with the same name.
+   This creates a new folder that appears in the Navigator
+   whose name is the project name followed by "Tests".
+   The new folder contains a `.swift` file with the same name
+   containing starter test code.
 
 1. Edit the provided `.swift` files in the new target.
 
@@ -33,9 +35,10 @@ XCTest is a unit testing framework for SwiftUI.
 1. Click the "Next" button.
 1. Click the "Finish" button.
 
-   Note that a new folder appears in the Navigator whose name is
-   the project name followed by "UITests".
-   This contains a `.swift` file with the same name.
+   This creates a new folder that appears in the Navigator
+   whose name is the project name followed by "UITests".
+   The new folder contains a `.swift` file with the same name
+   containing starter test code.
 
 1. Edit the provided `.swift` files in the new target.
 
@@ -54,17 +57,33 @@ XCTest is a unit testing framework for SwiftUI.
    `NoThrow`, and `ThrowsError`.
    Each of these has a version that takes and does not take an error message.
 
+   For documentation on the provided assertion functions, see {% aTargetBlank
+   "https://developer.apple.com/documentation/xctest", "Test Assertions" %}
+   (scroll down a bit).
+
+   Here is an example of an assertion that verifies that a function
+   throws a specific error:
+
+   ```swift
+   XCTAssertThrowsError(
+      try getData(date: Date()),
+      "failed to get data"
+   ) { error in
+      let myError = error as? MyErrorType
+      XCTAssertEqual(myError, MyErrorType.invalidDate)
+   }
+   ```
+
 ## Running Tests in Xcode
 
 1. To run a single test method, click the diamond where the
-   line number of the first line of the method (starts with `func`)
-   would normally appear.
-   If the diamonds don't appear, click and different source file
+   line number of the first line of the method would normally appear.
+   If the diamonds don't appear, click a different source file
    and they click back on the test file.
 1. To run all the test methods in the file, click the diamond where the
    line number of the first line of the class would normally appear.
-1. To run all the tests in Navigator folder, click the diamond
-   to the right of the folder name.
+1. To run all the tests in Navigator folder,
+   click the diamond to the right of the folder name.
 1. To run all the tests, select Product ... Test or press cmd-u.
 
 In UI tests, the on-screen keyboard doesn't always appear.
@@ -120,8 +139,8 @@ To generate test code by recording user interactions:
 
 ## Add Utility Methods
 
-Add utility methods to the `XCTestCase` class to simplify writing tests.
-For example:
+Add utility methods in an extension of the `XCTestCase` class
+to simplify writing tests. For example:
 
 ```swift
 import XCTest
