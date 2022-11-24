@@ -1455,6 +1455,16 @@ struct ContentView: View {
 }
 ```
 
+To initialize a state variable in an `init` method,
+write code like the following:
+
+```swift
+    init() {
+        // Note the underscore prefix on the variable name.
+        _myState = StateObject(wrappedValue: someValue)
+    }
+```
+
 ### @ObservedObject
 
 The `@ObservedObject` property wrapper marks a property
