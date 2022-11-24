@@ -48,8 +48,20 @@ is a unit testing framework for SwiftUI.
    add the line `@testable import {project-name}`
    before each test class definition.
    Replace hyphens with underscores.
+
+1. Define setup steps.
+
+   For setup that cannot throw, override the `setUp` method.
+   For setup that can throw, override the `setUpWithError` method.
+
+1. Define tear down steps.
+
+   For tear down that cannot throw, override the `tearDown` method.
+   For tear down that can throw, override the `tearDownWithError` method.
+
 1. Add test methods whose names begin with "test".
-1. To make an assertion, call one of the `XCTAssert{kind}` functions.
+
+1. Make assertions by calling the `XCTAssert{kind}` functions.
 
    Assertion kind values include `Nil`, `NotNil`, `True`, `False`,
    `Equal`, `NotEqual`, `Identical`,
@@ -71,6 +83,19 @@ is a unit testing framework for SwiftUI.
    ) { error in
       let myError = error as? MyErrorType
       XCTAssertEqual(myError, MyErrorType.invalidDate)
+   }
+   ```
+
+   An alternative to using `XCTAssertThrowsError` is ot use `do` and `catch`
+   along with {% aTargetBlank
+   "https://developer.apple.com/documentation/xctest/xctfail", "XCTFail" %}
+   as follows:
+
+   ```swift
+   do {
+       try someAsyncFunction(someArguments)
+   } catch {
+       XCTFail("some message")
    }
    ```
 

@@ -1628,7 +1628,7 @@ and "Embed..." (for embedding in an arbitrary container).
 
 Here are the container views that are provided by SwiftUI.
 
-### `HStack`
+### HStack
 
 This lays out child views horizontally.
 
@@ -1661,7 +1661,7 @@ HStack(alignment: .lastTextBaseline, spacing: 0) {
 }.border(.blue)
 ```
 
-### `VStack`
+### VStack
 
 This lays out child views vertically.
 
@@ -1669,7 +1669,7 @@ The child views are centered horizontally by default.
 To change this, add the `alignment` attribute which can be set to
 `.leading`, `.center`, or `.trailing`.
 
-### `ZStack`
+### ZStack
 
 This stacks views from bottom to top.
 It is ideal for adding a background to a set of views.
@@ -1699,11 +1699,12 @@ struct ContentView: View {
 }
 ```
 
-### `LazyHStack`
+### LazyHStack
 
 This is similar to `HStack`, but only
 builds and renders child views when they are visible.
-It is commonly used inside a `ScrollView` with `axes` set to `.horizontal`.
+`LazyHStack` is commonly used inside a `ScrollView`
+with `axes` set to `.horizontal`.
 
 ```swift
 ScrollView(.horizontal) {
@@ -1715,11 +1716,12 @@ ScrollView(.horizontal) {
 }
 ```
 
-### `LazyVStack`
+### LazyVStack
 
 This is similar to `VStack`, but only
 builds and renders child views when they are visible.
-It is commonly used inside a `ScrollView` with `axes` set to `.vertical`,
+`LazyVStack` is commonly used inside a `ScrollView`
+with `axes` set to `.vertical`,
 which is the default.
 
 ```swift
@@ -1732,7 +1734,7 @@ ScrollView {
 }
 ```
 
-### `LazyHGrid`
+### LazyHGrid
 
 This specifies a number of rows and adds columns as necessary.
 The grids are described by an array of {% aTargetBlank
@@ -1744,7 +1746,7 @@ but also have a minimum size of 25 by specifying
 
 See the example in `LazyVGrid` below.
 
-### `LazyVGrid`
+### LazyVGrid
 
 This is similar to `LazyHGrid`, but
 specifies a number of columns and adds rows as necessary.
@@ -1842,7 +1844,7 @@ struct ContentView: View {
 }
 ```
 
-### `Form`
+### Form
 
 This is a container of data entry views.
 
@@ -1959,7 +1961,7 @@ Common UI components that are not built into SwiftUI include:
   `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
 - toggle buttons: alternative is `Picker`
 
-### `Section`
+### Section
 
 `Section` views break a view into sections that are optionally labelled.
 They are also optionally collapsible.
@@ -1971,7 +1973,7 @@ See the examples in the `Form` section above and in the `List` section below.
 `Section` titles are made all uppercase by default.
 To prevent this, apply the `textCase` view modifier passing it `nil`.
 
-### `Group`
+### Group
 
 This collects all its child views into a single view
 without changing their layout.
@@ -1984,7 +1986,7 @@ Group {
 }.foregroundColor(.blue)
 ```
 
-### `GroupBox`
+### GroupBox
 
 This creates a logical grouping of other views
 with an optional `Label` at the top.
@@ -2015,7 +2017,7 @@ struct ContentView: View {
 }
 ```
 
-### `ControlGroup`
+### ControlGroup
 
 This groups related controls.
 It is typically used with `Button` views.
@@ -2044,16 +2046,23 @@ ControlGroup {
 }.controlGroupStyle(.navigation)
 ```
 
-### `ScrollView`
+### ScrollView
 
 This creates a scrollable view that is vertical by default,
 but can be changed to horizontal.
 It occupies all the space offered to it.
 Scrolling reveals additional child views when all of them do not fit.
-See examples of using this in the
+
+To hide the scroll bars (scroll indicators),
+pass the `showIndicators` argument with a value of `false`
+to the `ScrollView` initializer.
+
+Another way to gain the ability to scroll is to use a `List` view.
+
+See examples of using `ScrollView` in the
 descriptions of `LazyHStack` and `LazyVStack`.
 
-### `ScrollViewReader`
+### ScrollViewReader
 
 This is a view that supports programmatic scrolling.
 
@@ -2094,18 +2103,225 @@ struct ContentView: View {
 }
 ```
 
-### `ScrollViewProxy`
+### ScrollViewProxy
 
 An instance of this type is passed to the trailing closure
 of `ScrollViewReader`. See the example above.
 
-### `List`
+### List
 
-This displays a list of views in a single column.
-It also acts like `ForEach` for iterating over array elements.
-For more detail, see the "List" section below.
+A `List` view displays a list of other views in a single, scrollable column.
+It is not necessary to wrap a `List` in a `ScrollView`
+to gain the ability to scroll.
 
-### `ForEach`
+A `List` can act like `ForEach` for iterating over array elements.
+It is not necessary to place a `ForEach` inside a `List`
+in order to iterate over the elements of a sequence.
+
+If a `List` contains more items that can be rendered at once,
+it automatically provides scrolling.
+There is no need to wrap it in a `ScrollView`.
+
+The contents of a `List` can be any views.
+These can be grouped using `Section` views.
+
+<img alt="SwiftUI List with Sections" style="width: 40%"
+  src="/blog/assets/SwiftUI-List-Sections.png?v={{pkg.version}}"
+  title="SwiftUI List with Sections">
+
+```swift
+List {
+    Section("Breakfast") {
+        Text("pancakes")
+        Text("bacon")
+        Text("orange juice")
+    }
+    Section("Lunch") {
+        Text("sandwich")
+        Text("chips")
+        Text("lemonade")
+    }
+    Section("Dinner") {
+        Text("spaghetti")
+        Text("bread")
+        Text("water")
+    }
+}
+//.listStyle(.grouped) // for edge-to-edge display
+```
+
+To change the style of the `List`, apply the `listStyle` view modifier
+which takes the enum values `grouped`, `inset`, `insetGrouped`, `plain`,
+and `sidebar`.
+
+To remove horizontal padding that is added to list elements by default,
+apply the `.listRowInsets(EdgeInsets())` view modifier
+to each child of the `List`.
+
+The following example demonstrates using a `List` inside a `NavigationView`
+to enable selecting ids of the objects represented by the rows.
+To select rows, tap "Edit" in the upper-right corner.
+
+This also demonstrates implementing "pull to refresh"
+using the `refreshable` view modifier.
+Dragging the list down displays an activity indicator
+and then adds new dogs to the list.
+
+<figure>
+  <img alt="SwiftUI List with Selection Before" style="width: 40%"
+    src="/blog/assets/SwiftUI-List-Selection1.png?v={{pkg.version}}"
+    title="SwiftUI List with Selection Before">
+  <figcaption>Before item selection</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI List with Selection During" style="width: 40%"
+    src="/blog/assets/SwiftUI-List-Selection2.png?v={{pkg.version}}"
+    title="SwiftUI List with Selection During">
+  <figcaption>During item selection</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI List with Selection After" style="width: 40%"
+    src="/blog/assets/SwiftUI-List-Selection3.png?v={{pkg.version}}"
+    title="SwiftUI List with Selection After">
+  <figcaption>After selecting items</figcaption>
+</figure>
+
+```swift
+struct ContentView: View {
+    struct Dog: CustomStringConvertible, Identifiable, Hashable {
+        let id = UUID()
+        let name: String
+        let breed: String
+        var description: String { "\(name) - \(breed)" }
+    }
+
+    @State private var dogs = [
+        Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
+        Dog(name: "Ramsay", breed: "Native American Indian Dog"),
+        Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
+        Dog(name: "Comet", breed: "Whippet")
+    ]
+
+    //@State private var selection: UUID? // single selection
+    @State private var selectedIds = Set<UUID>() // multiple selection
+
+    func loadMore() async {
+        // This calls a REST service that returns nothing after 2 seconds.
+        let url = URL(string: "https://httpbin.org/delay/2")!
+        let request = URLRequest(url: url)
+        // Not using the return value for this example.
+        let _ = try! await URLSession.shared.data(for: request)
+
+        dogs.append(Dog(name: "Clarice", breed: "Whippet"))
+        dogs.append(Dog(name: "Vixen", breed: "Whippet"))
+    }
+
+    var body: some View {
+        VStack {
+            NavigationView {
+                List(dogs, selection: $selectedIds) { dog in
+                    let desc = String(describing: dog)
+                    if selectedIds.contains(where: {$0 == dog.id}) {
+                        Text(desc).bold().foregroundColor(.green)
+                    } else {
+                        Text(desc)
+                    }
+                }
+                .navigationTitle("Dogs")
+                // The EditButton in the toolbar toggles
+                // the edit mode of the NavigationView.
+                .toolbar { EditButton() }
+            }.refreshable { await loadMore() }
+            Text("\(selectedIds.count) selections")
+        }
+    }
+}
+```
+
+The following example is similar to the previous one,
+but allows rows to be deleted and moved.
+It seems that it isn't possible for a `List` to support
+row selection and also support deleting and moving rows.
+See this {% aTargetBlank "https://developer.apple.com/forums/thread/693743",
+"forum thread" %}.
+
+<img alt="SwiftUI List with Delete and Move" style="width: 40%"
+  src="/blog/assets/SwiftUI-List-Delete-Move.png?v={{pkg.version}}"
+  title="SwiftUI List with Delete and Move">
+
+```swift
+struct Dog {
+    var name: String
+    var breed: String
+}
+
+// This makes it easier to render text that has a specified width.
+struct SizedText: View {
+    private var text: String
+    private var width: Double
+
+    init(_ text: String, width: Double) {
+        self.text = text
+        self.width = width
+    }
+
+    var body: some View {
+        Text(text).frame(width: width, alignment: .leading)
+    }
+}
+
+struct DogRow: View {
+    var dog: Dog
+
+    var body: some View {
+        HStack {
+            SizedText(dog.name, width: 100)
+            SizedText(dog.breed, width: 200)
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var dogs = [
+        Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
+        Dog(name: "Ramsay", breed: "Native American Indian Dog"),
+        Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
+        Dog(name: "Comet", breed: "Whippet")
+    ]
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                List {
+                    // A nested ForEach is required in order to
+                    // enable swipe to delete/move.
+                    // The onDelete and onMove methods exists on ForEach,
+                    // but not on List because a List can include static rows.
+                    ForEach(dogs, id: \.name) { dog in
+                        DogRow(dog: dog)
+                    }
+                    .onDelete(perform: deleteDog)
+                    .onMove(perform: moveDog)
+                }
+                .listStyle(.grouped)
+                .toolbar {
+                    EditButton()
+                }
+            }
+        }
+    }
+
+    private func deleteDog(at offsets: IndexSet) {
+        dogs.remove(atOffsets: offsets)
+    }
+
+    private func moveDog(source: IndexSet, destination: Int) {
+        dogs.move(fromOffsets: source, toOffset: destination)
+    }
+}
+```
+
+### ForEach
 
 This view iterates of the elements of a `RandomAccessCollection`
 (includes `Array` and `Range` types)
@@ -2131,7 +2347,7 @@ To iterate over an array of `String` values:
 ForEach(stringArray, id: \.self) { ... }
 ```
 
-### `Table`
+### Table
 
 This is only available in macOS 12 and above.
 The following example demonstrates using a `Table`
@@ -2173,7 +2389,7 @@ struct ContentView: View {
 }
 ```
 
-### `NavigationView`
+### NavigationView
 
 This marks an area where a stack of views will be rendered one at a time.
 It contains `NavigationLink` views that are similar to HTML anchor elements.
@@ -2184,7 +2400,7 @@ See the "Navigation" section later.
 This is deprecated in iOS 16. See the new approach at
 {% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
 
-### `NavigationLink`
+### NavigationLink
 
 These are used inside a `NavigationView`.
 See the "Navigation" section later.
@@ -2192,14 +2408,14 @@ See the "Navigation" section later.
 This is deprecated in iOS 16. See the new approach at
 {% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
 
-### `OutlineGroup`
+### OutlineGroup
 
 This displays a tree of data with disclosure angle brackets.
 See my {% aTargetBlank
 "https://github.com/mvolkmann/SwiftUI-OutlineGroup/blob/main/SwiftUI-OutlineGroup/ContentView.swift",
 "SwiftUI-OutlineGroup" %} project and the questions in it.
 
-### `DisclosureGroup`
+### DisclosureGroup
 
 This hides and shows its contents based on whether it is in an expanded state.
 By default it is not expanded.
@@ -2232,7 +2448,7 @@ var body: some View {
 }
 ```
 
-### `TabView`
+### TabView
 
 This creates a row of buttons at the bottom of the display
 that can be tapped to navigate to associated views.
@@ -2364,19 +2580,19 @@ Specific tab bar destinations can hide the tab bar by applying
 the view modifier `.toolbar(.hidden, for: .tabBar)` view modifier
 to the destination view.
 
-### `HSplitView`
+### HSplitView
 
 This is a layout container that organizes its children horizontally
 and allows users to resize the children by dragging dividers between them.
 It is only supported in macOS.
 
-### `VSplitView`
+### VSplitView
 
 This is a layout container that organizes its children vertically
 and allows users to resize the children by dragging dividers between them.
 It is only supported in macOS.
 
-### `TimelineView`
+### TimelineView
 
 This is a container that re-renders its children at scheduled times.
 The following example renders the date and time every second.
@@ -2402,7 +2618,7 @@ var body: some View {
 
 ## Component Views
 
-### `Button`
+### Button
 
 The content of a `Button` can be specified in two ways,
 passing a `String` as the first argument or using the `label` argument
@@ -2493,7 +2709,7 @@ struct ContentView: View {
 }
 ```
 
-### `Color`
+### Color
 
 This creates a rectangular view with a specific background color
 that grows to fill all the space offered to it.
@@ -2502,7 +2718,7 @@ For example, `Color.red` and `Color.clear` (transparent) are views.
 A `UIColor` can be converted to a `Color`.
 For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
 
-### `Image`
+### Image
 
 This renders an image.
 Many image formats are supported including PNG, JPEG, and HEIC.
@@ -2543,7 +2759,7 @@ Image("some-name")
     .clipShape(Circle())
 ```
 
-### `AsyncImage`
+### AsyncImage
 
 This asynchronously loads and displays an image.
 A specified placeholder image is displayed
@@ -2584,7 +2800,7 @@ To cache the images, see this {% aTargetBlank
 "https://stackoverflow.com/questions/69214543/how-can-i-add-caching-to-asyncimage",
 "Stack Overflow post" %}.
 
-### `Text`
+### Text
 
 This view renders text.
 If the text is too long to fit on a single line,
@@ -2647,7 +2863,7 @@ Text("Green").foregroundColor(.green) +
 Text("Blue").foregroundColor(.blue)
 ```
 
-### `TextField`
+### TextField
 
 This provides single-line text entry.
 It also works with non-String types using a `FormatStyle` object
@@ -2743,7 +2959,7 @@ extension View {
 }
 ```
 
-### `SecureField`
+### SecureField
 
 This is like `TextField`, but obscures the characters that are typed.
 It is typically used for sensitive data like
@@ -2755,7 +2971,7 @@ SecureField("Password", text: $password)
     .disableAutocorrection(true)
 ```
 
-### `TextEditor`
+### TextEditor
 
 This provides multi-line text entry.
 The number of lines can be limited,
@@ -2775,18 +2991,18 @@ TextEditor(text: $reasonForVisit)
     )
 ```
 
-### `EditButton`
+### EditButton
 
 This toggles the edit mode of a `List`.
 It is typically added to a `List` using the `toolbar` view modifier.
 See the example in the "Lists" section.
 
-### `PasteButton`
+### PasteButton
 
 This is only available in macOS 10.15 and above.
 It renders a button for pasting data from the system clipboard.
 
-### `Link`
+### Link
 
 This creates a hyperlink like an HTML `a` element.
 Clicking it opens the associated URL in Safari.
@@ -2807,7 +3023,7 @@ Link(
 )
 ```
 
-### `Menu`
+### Menu
 
 This renders a label containing the menu title.
 When clicked, a menu appears below the label
@@ -2848,7 +3064,7 @@ var body: some View {
 }
 ```
 
-### `Toggle`
+### Toggle
 
 This enables toggling between on and off states.
 By default it renders as a switch with a circular thumb.
@@ -2878,7 +3094,7 @@ Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
     src="/blog/assets/SwiftUI-Toggle.png?v={{pkg.version}}"
     title="SwiftUI Toggle">
 
-### `Slider`
+### Slider
 
 This renders a horizontal track with a thumb that
 slides between minimum and maximum values.
@@ -2909,7 +3125,7 @@ VStack {
 }
 ```
 
-### `Stepper`
+### Stepper
 
 This displays "-" and "+" buttons that can be
 tapped to decrement and increment a value.
@@ -2936,7 +3152,7 @@ VStack {
 }.padding()
 ```
 
-### `Picker`
+### Picker
 
 This allows selecting an option from a list.
 It takes the text to display as a prompt and a `selection` argument
@@ -3091,7 +3307,7 @@ Picker("Owner", selection: $selectedPersonIndex) {
 }
 ```
 
-### `DatePicker`
+### DatePicker
 
 This allows selecting a date, time, or both.
 
@@ -3162,7 +3378,7 @@ The options that can be passed to this include:
     <figcaption>DatePicker wheel style</figcaption>
   </figure>
 
-### `ColorPicker`
+### ColorPicker
 
 This renders a color well for displaying a currently selected color
 and changing the color using the system color picker.
@@ -3187,7 +3403,7 @@ ColorPicker(
 )
 ```
 
-### `Label`
+### Label
 
 This is a combination of an icon and text
 where the icon appears before the text.
@@ -3201,7 +3417,7 @@ To render only the icon, add the modifier `.labelStyle(IconOnlyLabelStyle)`.
 Label("Rain", systemImage: "cloud.rain")
 ```
 
-### `ProgressView`
+### ProgressView
 
 This displays a progress indicator.
 The indeterminate style uses the standard Apple spinner.
@@ -3244,26 +3460,26 @@ ProgressView()
     .scaleEffect(x: 3, y: 3, anchor: .center)
 ```
 
-### `Gauge`
+### Gauge
 
 This shows a current value in relation to minimum and maximum values.
 One example is a car fuel gauge.
 This is currently only supported in watchOS.
 
-### `EmptyView`
+### EmptyView
 
 This renders nothing. It is useful in cases where
 a view needs to be returned, but there is nothing to display.
 
-### `EquatableView`
+### EquatableView
 
 TODO: What is this?
 
-### `AnyView`
+### AnyView
 
 TODO: What is this?
 
-### `TupleView`
+### TupleView
 
 TODO: What is this?
 
@@ -3530,7 +3746,7 @@ struct ContentView: View {
 }
 ```
 
-### `Angle`
+### Angle
 
 This is a struct that does not implement the `View` protocol,
 but is used by several drawing views.
@@ -3544,7 +3760,7 @@ let angle = Angle(radians: Double.pi)
 print(angle.degrees) // 180.0
 ```
 
-### `Path`
+### Path
 
 Like `Color`, `Path` also creates a view.
 The following example draws a path for a triangle
@@ -3618,7 +3834,7 @@ Other drawing views are less obvious from their name, including:
 
 ## Other Views
 
-### `GeometryReader`
+### GeometryReader
 
 This is a view that takes all the space offered to it, wraps other views,
 and provides its size which can be used in calculations.
@@ -3649,7 +3865,7 @@ VStack(spacing: 0) {
 }
 ```
 
-### `Spacer`
+### Spacer
 
 Each `Spacer` view takes an equal amount of the unused space
 inside its parent container view.
@@ -3665,7 +3881,7 @@ with the values shown in the following table:
 | flex-end                  | at beginning of list of views |
 | space-between             | one between each child view   |
 
-### `Divider`
+### Divider
 
 This draws a light gray, 1-pixel wide line across the container.
 The line is vertical in an `HStack` and horizontal in a `VStack`.
@@ -4071,214 +4287,6 @@ struct ContentView: View {
 }
 ```
 
-## `List`
-
-A `List` view displays a list of other views in a single column.
-It also can act like `ForEach` for iterating over array elements.
-
-If a `List` contains more items that can be rendered at once,
-it automatically provides scrolling.
-There is no need to wrap it in a `ScrollView`.
-
-The contents of a `List` can be any views.
-These can be grouped using `Section` views.
-
-<img alt="SwiftUI List with Sections" style="width: 40%"
-  src="/blog/assets/SwiftUI-List-Sections.png?v={{pkg.version}}"
-  title="SwiftUI List with Sections">
-
-```swift
-List {
-    Section("Breakfast") {
-        Text("pancakes")
-        Text("bacon")
-        Text("orange juice")
-    }
-    Section("Lunch") {
-        Text("sandwich")
-        Text("chips")
-        Text("lemonade")
-    }
-    Section("Dinner") {
-        Text("spaghetti")
-        Text("bread")
-        Text("water")
-    }
-}
-//.listStyle(.grouped) // for edge-to-edge display
-```
-
-To change the style of the `List`, apply the `listStyle` view modifier
-which takes the enum values `grouped`, `inset`, `insetGrouped`, `plain`,
-and `sidebar`.
-
-To remove horizontal padding that is added to list elements by default,
-apply the `.listRowInsets(EdgeInsets())` view modifier
-to each child of the `List`.
-
-The following example demonstrates using a `List` inside a `NavigationView`
-to enable selecting ids of the objects represented by the rows.
-To select rows, tap "Edit" in the upper-right corner.
-
-This also demonstrates implementing "pull to refresh"
-using the `refreshable` view modifier.
-Dragging the list down displays an activity indicator
-and then adds new dogs to the list.
-
-<figure>
-  <img alt="SwiftUI List with Selection Before" style="width: 40%"
-    src="/blog/assets/SwiftUI-List-Selection1.png?v={{pkg.version}}"
-    title="SwiftUI List with Selection Before">
-  <figcaption>Before item selection</figcaption>
-</figure>
-<figure>
-  <img alt="SwiftUI List with Selection During" style="width: 40%"
-    src="/blog/assets/SwiftUI-List-Selection2.png?v={{pkg.version}}"
-    title="SwiftUI List with Selection During">
-  <figcaption>During item selection</figcaption>
-</figure>
-<figure>
-  <img alt="SwiftUI List with Selection After" style="width: 40%"
-    src="/blog/assets/SwiftUI-List-Selection3.png?v={{pkg.version}}"
-    title="SwiftUI List with Selection After">
-  <figcaption>After selecting items</figcaption>
-</figure>
-
-```swift
-struct ContentView: View {
-    struct Dog: CustomStringConvertible, Identifiable, Hashable {
-        let id = UUID()
-        let name: String
-        let breed: String
-        var description: String { "\(name) - \(breed)" }
-    }
-
-    @State private var dogs = [
-        Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
-        Dog(name: "Ramsay", breed: "Native American Indian Dog"),
-        Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
-        Dog(name: "Comet", breed: "Whippet")
-    ]
-
-    //@State private var selection: UUID? // single selection
-    @State private var selectedIds = Set<UUID>() // multiple selection
-
-    func loadMore() async {
-        // This calls a REST service that returns nothing after 2 seconds.
-        let url = URL(string: "https://httpbin.org/delay/2")!
-        let request = URLRequest(url: url)
-        // Not using the return value for this example.
-        let _ = try! await URLSession.shared.data(for: request)
-
-        dogs.append(Dog(name: "Clarice", breed: "Whippet"))
-        dogs.append(Dog(name: "Vixen", breed: "Whippet"))
-    }
-
-    var body: some View {
-        VStack {
-            NavigationView {
-                List(dogs, selection: $selectedIds) { dog in
-                    let desc = String(describing: dog)
-                    if selectedIds.contains(where: {$0 == dog.id}) {
-                        Text(desc).bold().foregroundColor(.green)
-                    } else {
-                        Text(desc)
-                    }
-                }
-                .navigationTitle("Dogs")
-                // The EditButton in the toolbar toggles
-                // the edit mode of the NavigationView.
-                .toolbar { EditButton() }
-            }.refreshable { await loadMore() }
-            Text("\(selectedIds.count) selections")
-        }
-    }
-}
-```
-
-The following example is similar to the previous one,
-but allows rows to be deleted and moved.
-It seems that it isn't possible for a `List` to support
-row selection and also support deleting and moving rows.
-See this {% aTargetBlank "https://developer.apple.com/forums/thread/693743",
-"forum thread" %}.
-
-<img alt="SwiftUI List with Delete and Move" style="width: 40%"
-  src="/blog/assets/SwiftUI-List-Delete-Move.png?v={{pkg.version}}"
-  title="SwiftUI List with Delete and Move">
-
-```swift
-struct Dog {
-    var name: String
-    var breed: String
-}
-
-// This makes it easier to render text that has a specified width.
-struct SizedText: View {
-    private var text: String
-    private var width: Double
-
-    init(_ text: String, width: Double) {
-        self.text = text
-        self.width = width
-    }
-
-    var body: some View {
-        Text(text).frame(width: width, alignment: .leading)
-    }
-}
-
-struct DogRow: View {
-    var dog: Dog
-
-    var body: some View {
-        HStack {
-            SizedText(dog.name, width: 100)
-            SizedText(dog.breed, width: 200)
-        }
-    }
-}
-
-struct ContentView: View {
-    @State private var dogs = [
-        Dog(name: "Maisey", breed: "Treeing Walker Coonhound"),
-        Dog(name: "Ramsay", breed: "Native American Indian Dog"),
-        Dog(name: "Oscar", breed: "German Shorthaired Pointer"),
-        Dog(name: "Comet", breed: "Whippet")
-    ]
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                List {
-                    // A nested ForEach is required in order to
-                    // enable swipe to delete/move.
-                    // The onDelete and onMove methods exists on ForEach,
-                    // but not on List because a List can include static rows.
-                    ForEach(dogs, id: \.name) { dog in
-                        DogRow(dog: dog)
-                    }
-                    .onDelete(perform: deleteDog)
-                    .onMove(perform: moveDog)
-                }
-                .listStyle(.grouped)
-                .toolbar {
-                    EditButton()
-                }
-            }
-        }
-    }
-
-    private func deleteDog(at offsets: IndexSet) {
-        dogs.remove(atOffsets: offsets)
-    }
-
-    private func moveDog(source: IndexSet, destination: Int) {
-        dogs.move(fromOffsets: source, toOffset: destination)
-    }
-}
-```
-
 ## Animation
 
 Many view properties can be animated.
@@ -4644,6 +4652,32 @@ struct ContentView: View {
         }
     }
 }
+```
+
+## Dialing Phone
+
+To initiate making a phone call using the Phone app,
+use code like the following:
+
+```swift
+guard let url = URL(string: "tel://\(phoneNumber)") else {
+    print("Phone: invalid phone number \(phoneNumber)")
+    return
+}
+UIApplication.shared.open(url)
+```
+
+## Sending Text Messages
+
+To initiate sending a custom text message using the Messages app,
+use code like the following:
+
+```swift
+guard let url = URL(string: "sms:+1\(phoneNumber)") else {
+    print("Phone: invalid phone number \(phoneNumber)")
+    return
+}
+UIApplication.shared.open(url)
 ```
 
 ## MVVM

@@ -94,6 +94,9 @@ The Navigator has nine icon buttons at the top.
   <img alt="Xcode Find" class="keep-size"
     src="/blog/assets/xcode-find-navigator.png?v={{pkg.version}}">
 
+  Click the magnifier glass icon to see a dropdown
+  containing past searches that can be clicked to recall them.
+
   Click "Find" to optionally switch to "Replace" mode.
 
   <img alt="Xcode Find" class="keep-size"
