@@ -33,3 +33,8 @@ It returns a new `Publisher` that publishes the transformed values.
 This method is similar to the `map` method,
 but the closure is allowed to throw an error.
 If it does, publishing will stop.
+
+There are many more `try` versions of `Publisher` methods. These include
+`tryAllSatisify`, `tryCompactMap`, `tryContains`, `tryDrop`, `tryFilter`,
+`tryFirst`, `tryLast`, `tryMax`, `tryMin`, `tryPrefix`, `tryReduce`,
+`tryRemoveDuplicates`, and `tryScan` methods.
