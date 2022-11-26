@@ -2931,6 +2931,81 @@ TextField("my placeholder", text: $locationVM.searchQuery)
     .foregroundColor(.primary)
 ```
 
+### Controlling Focus
+
+The `@FocusState` property wrapper is used to
+track and modify which input view currently has focus.
+The following code demonstrates its use:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    enum Field: Hashable {
+        case firstName, lastName
+    }
+
+    @FocusState private var focus: Field? // cannot initialize here
+
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var message = ""
+    @State private var showError = false
+    @State private var showWelcome = false
+
+    var body: some View {
+        VStack {
+            TextField("First Name", text: $firstName)
+                .focused($focus, equals: .firstName)
+            TextField("Last Name", text: $lastName)
+                .focused($focus, equals: .lastName)
+            Button("Submit", action: submit)
+                .buttonStyle(.borderedProminent)
+            Spacer()
+        }
+        .autocorrectionDisabled(true)
+        .textFieldStyle(.roundedBorder)
+        .padding()
+        .onAppear {
+            focus = .firstName // initial focus
+        }
+        .alert(
+            "Invalid Input",
+            isPresented: $showError,
+            actions: {}, // no custom buttons
+            message: { Text(message) }
+        )
+        .alert(
+            "Welcome",
+            isPresented: $showWelcome,
+            actions: {}, // no custom buttons
+            message: { Text("Hello, \(firstName) \(lastName)!") }
+        )
+    }
+
+    private func submit() {
+        if firstName.isEmpty {
+            message = "First name is required"
+            focus = .firstName
+        } else if lastName.isEmpty {
+            message = "Last name is required"
+            focus = .lastName
+        } else if lastName.count < 2 {
+            message = "Last name is too short"
+            focus = .lastName
+        } else {
+            message = ""
+            focus = nil // dismisses keyboard
+        }
+
+        showWelcome = message.isEmpty
+        showError = !showWelcome
+    }
+}
+```
+
+### Dismissing Keyboard
+
 It's good practice to provide a way for the user to dismiss the keyboard.
 One approach is to add a button at the top of the keyboard.
 The following code does this:

@@ -280,6 +280,7 @@ When an `Int` is divided by an `Int` using the `/` operator,
 the result is truncated to an `Int`, not rounded.
 
 The nil coalescing operator in `a ?? b` is shorthand for `a != nil ? a! : b`.
+This is often used to provide a default value to use when `a` is `nil`.
 
 Swift supports optional chaining with the `?.` operator
 so chains of references to optional values (see the "Optionals" section later)
@@ -3459,9 +3460,11 @@ See {% aTargetBlank
 
 Swift 5.5 added support for the `async` and `await` keywords.
 This was announced at the WWDC 2021 event.
-It offers an alternative to passing escaping closures or the Combine framework
-and allows the compiler to provide more and better error messages
-than with those approaches.
+It offers an alternative to
+passing escaping closures (a.k.a. completion handlers)
+or using the Combine framework.
+Using async/await allows the compiler to provide more and better error messages
+than with other approaches.
 
 Functions that use the `await` keyword must include the `async` keyword
 after their parameter list.

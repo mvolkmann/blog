@@ -237,19 +237,26 @@ show dbs
 
 TODO: Add more detail.
 
+To find documents based on multiple property values,
+use a query like the following:
+
+```text
+{ type: 3, itemNumber: '' }
+```
+
 For documents that have date properties,
 to find those from today and newer
 use a query like the following:
 
 ```text
-{ "createdAt": {$gt: new Date('2022-11-23')} }
+{ createdAt: { $gt: new Date('2022-11-25') } }
 ```
 
 To find documents with a property that matches a regular expression,
 use a query like the following:
 
 ```text
-{ "itemNumber": {$regex: /^Comet/} }
+{ itemNumber: { $regex: /^Comet/ } }
 ```
 
 ## MongoDB from JavaScript

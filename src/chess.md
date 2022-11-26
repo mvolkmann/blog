@@ -25,7 +25,6 @@ guidelines that beginner to intermediate players might find useful.
 1. Don't push kingside pawns more than two ranks away from king.
 1. Don't take the queen out too early.
 1. Trade side pawns (files C and F) for center pawns (files D and E).
-1. Avoid doubling pawns unless doing so wins a piece.
 1. Look for potential attacks from opponent, especially ones that
    put you in check AND threaten other pieces.
 1. Count the number of pieces attacking and defending each square
@@ -33,7 +32,9 @@ guidelines that beginner to intermediate players might find useful.
 1. When planning the next move, verify that it isn't
    weakening the defense of your pieces.
 1. Avoid blocking your own pieces, especially behind pawns.
-1. Avoid pawn attacks that result to multiple pawns in the same file.
+1. Avoid pawn attacks that result to multiple pawns in the same file (doubled)
+   unless doing so wins a piece.
+1. Watch for "en passant" pawn captures.
 1. Avoid placing knights on the edge of the board
    because that leaves them with fewer target squares.
 1. Try to move rooks to open files and connect them so they protect each other.
@@ -58,6 +59,9 @@ guidelines that beginner to intermediate players might find useful.
    if they take back they expose a more valuable piece.
 1. Activate your king in the end game, especially
    when the opponent queen has been captured.
+1. A stalemate occurs when a players king is not in check and they have
+   no legal moves. Avoid putting the opponent in this position when winning
+   and try to get into this position when losing.
 
 ## Notation
 
