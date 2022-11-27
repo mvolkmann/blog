@@ -22,3 +22,11 @@ See the excellent YouTube videos from Stewart Lynch, {% aTargetBlank
 See {% aTargetBlank "https://github.com/mvolkmann/AnyLayoutDemo",
 "AnyLayoutDemo" %} which demonstrates everything
 shared in the Steward Lynch video linked above.
+
+## Layout Protocol
+
+TODO: Add detail.
+
+## AnyLayout Struct
+
+TODO: Add detail.

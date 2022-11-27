@@ -477,7 +477,7 @@ Some recommended workflows include:
 An alternative way to create and connect an item is to
 click on the connector tab of the preceding item,
 select the type of item to create, and fill in the details.
-This automatically connects the new item to the preceing one.
+This automatically connects the new item to the preceding one.
 
 To run this workflow, open the Alfred search box
 and enter "`klp {port-number}`".

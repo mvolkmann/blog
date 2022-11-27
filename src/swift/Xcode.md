@@ -528,3 +528,96 @@ By default files are only accessible from their associated target.
 If an app has multiple targets and a source file should be shared between them,
 select the file in the Navigator, open the Inspector on the right,
 and check the checkboxes for each target that should have access to the file.
+
+## Schemes
+
+A "scheme" defines a target to build,
+the configuration settings to use when building it,
+and a set of tests to run after the target is built.
+
+Every project begins with a default scheme whose name matches the project name.
+
+To access the schemes of a project, click the project name in the top center
+(just to the left of the device dropdown).
+This opens a dropdown menu that contains a menu item for each existing scheme
+and the following options:
+
+- "Edit Scheme..."
+
+  This opens a dialog where the currently selected scheme can be edited.
+
+- "New Scheme..."
+
+  This opens a dialog where a new scheme for a selected target can be created.
+
+- "Manage Schemes..."
+
+  This opens a dialog that lists the existing schemes,
+  allows them to be deleted, allows new schemes to be created,
+  and allows importing schemes from other projects.
+
+Schemes are defined by six phases that include
+Build, Run, Test, Profile, Analyze, and Archive.
+
+The Build phase specifies:
+
+- shell scripts to run BEFORE the build begins (pre-actions)
+- emails to send BEFORE the build begins (pre-actions)
+- build options
+- shell scripts to run AFTER the build ends (post-actions)
+- emails to send AFTER the build ends (post-actions)
+
+The Run phase specifies many things including:
+
+- shell scripts to run BEFORE the run begins (pre-actions)
+- emails to send BEFORE the run begins (pre-actions)
+- run options including:
+
+  - whether to run the app in a debug or release build configuration
+  - argument to be passed to the executable
+    (access these in the `App` subclass `init` method with
+    `CommandLine.arguments` which is an `Array` of `String`s).
+  - environment variables to be set before executing
+  - diagnostics to collect while the target executes
+
+- shell scripts to run AFTER the run ends (post-actions)
+- emails to send AFTER the run ends (post-actions)
+
+The Test phase specifies:
+
+- shell scripts to run BEFORE the tests begin (pre-actions)
+- emails to send BEFORE the tests begin (pre-actions)
+- test options including:
+
+  - whether to run the tests in a debug or release build configuration
+  - argument to be passed to the tests when they are executed
+  - environment variables to be set before the tests are executed
+  - the user language (ex. Spanish)
+  - the user region (ex. Americas ... Mexico)
+  - whether screenshots should be collected
+  - whether screenshots for successful tests should be deleted
+  - whether code coverage data should be collected
+  - diagnostics to collect while the tests execute
+
+- shell scripts to run AFTER the tests end (post-actions)
+- emails to send AFTER the tests end (post-actions)
+
+The Profile phase specifies:
+
+- shell scripts to run BEFORE profiling begins (pre-actions)
+- emails to send BEFORE profiling begins (pre-actions)
+- profiling options including:
+
+  - argument to be passed to the executable
+  - environment variables to be set before executing
+
+- shell scripts to run AFTER profiling ends (post-actions)
+- emails to send AFTER profiling ends (post-actions)
+
+The Analyze phase only specifies whether a
+Debug or Release build configuration should used.
+TODO: What does this phase do?
+
+The Archive phase specifies the archive name and
+whether a Debug or Release build configuration should used.
+TODO: What is an "archive"?
