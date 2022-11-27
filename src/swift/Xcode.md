@@ -576,11 +576,22 @@ The Run phase specifies many things including:
   - whether to run the app in a debug or release build configuration
   - argument to be passed to the executable
 
+    TODO: Are these only boolean flags (present or not)?
+
+    TODO: Do the names need to begin with a dash?
+
     Access these in the `App` subclass `init` method with
     `CommandLine.arguments` or `ProcessInfo.processInfo.arguments`
-    which are both an `Array` of `String`s.
+    which have the type `[String]`.
 
   - environment variables to be set before executing
+
+    Each environment variable has a name and a value.
+
+    Access these in the `App` subclass `init` method with
+    `ProcessInfo.processInfo.environment`
+    which has the type `[String:String]`.
+
   - diagnostics to collect while the target executes
 
 - shell scripts to run AFTER the run ends (post-actions)
@@ -594,7 +605,15 @@ The Test phase specifies:
 
   - whether to run the tests in a debug or release build configuration
   - argument to be passed to the tests when they are executed
+
+    These can also be set in test code by assigning a `[String]`
+    to `app.launchArguments`.
+
   - environment variables to be set before the tests are executed
+
+    These can also be set in test code by assigning a `[String:String]`
+    to `app.launchEnvironment`.
+
   - the user language (ex. Spanish)
   - the user region (ex. Americas ... Mexico)
   - whether screenshots should be collected
