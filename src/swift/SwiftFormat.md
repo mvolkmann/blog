@@ -100,6 +100,26 @@ lsregister -f /Applications/Xcode.app # or whatever executable name is used
 This tip was found in this GitHub {% aTargetBlank
 "https://github.com/nicklockwood/SwiftFormat/issues/494", "issue" %}.
 
+Since this fix is required periodically, it's a good idea to
+write a script that does this and an alias to make it easy to run.
+Here is the script `fix-swift-format`:
+
+```bash
+#!/usr/bin/env bash
+# This fixes the use of SwiftFormat in Xcode.
+PATH=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support:"$PATH"
+lsregister -f /Applications/Xcode.app
+```
+
+Here is the alias definition from `.zshrc`:
+
+```bash
+alias fixsf="fix-swift-format"
+```
+
+Now when "format on save" stops working in Xcode
+you can just enter `fixsf` from a terminal.
+
 ## Configuration
 
 The app "SwiftFormat for Xcode" is installed

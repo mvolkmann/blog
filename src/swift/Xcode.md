@@ -643,3 +643,72 @@ TODO: What does this phase do?
 The Archive phase specifies the archive name and
 whether a Debug or Release build configuration should used.
 TODO: What is an "archive"?
+
+## Hot Reload
+
+While Previews usually automatically update
+when changes to a project file are saved,
+this behavior is inconsistent.
+Also, some app features are not supported when running in a preview.
+
+For these reasons it would be great if apps running in the Simulator
+could automatically build and reload when changes to a project file are saved.
+By default Xcode does not automatically do this, but this can be configured.
+
+Krzysztof Zabłocki describes a way to implement this in his article
+{% aTargetBlank "https://www.merowing.info/hot-reloading-in-swift/",
+"Hot Reloading in Swift" %}. This uses his {% aTargetBlank
+"https://github.com/krzysztofzablocki/Inject", "Inject" %} package.
+
+The one-time steps are:
+
+1. Browse the GitHub repo {% aTargetBlank
+   "https://github.com/johnno1962/InjectionIII/releases", "InjectionIII" %}
+   and download the file `InjectionIII.app.zip`.
+   The file `InjectionIII.app` will appear in the `Downloads` directory.
+1. Drag the downloaded app to the `Applications` directory.
+1. Double-click the app to run it.
+   This is a menu bar app that adds an icon.
+   This app MUST BE RUNNING for hot reloading to work!
+   Clicking the icon opens a menu of options.
+   Verify that "File Watcher" is selected.
+
+The per-project steps are:
+
+1. Open an iOS project in Xcode.
+1. Select File ... Add Packages...
+1. Paste the URL "https://github.com/krzysztofzablocki/Inject"
+   into the search input.
+1. Select "Inject" in the list of matching packages.
+1. Click the "Add Package" button.
+1. Click the next "Add Package" button.
+1. Select the top item in the Navigator.
+1. Select the main target.
+1. Click the "Build Settings" tab.
+1. Scroll down to the "Linking" section.
+1. Expand the option "Other Linking Flags" entry.
+1. Paste "-Xlinker -interposable" as the value in the "Debug" row.
+1. Open the `ContentView.swift` file.
+1. Add `import Inject`
+1. Add the property `@ObservedObject private var iO = Inject.observer`
+1. Chain a call to `.enableInjection()` at the end of what `body` returns.
+1. Run the project in the Simulator.
+
+Note that the added code does not need to be removed before releasing
+the app to production because it does nothing unless it is run in debug mode.
+
+After following the setup instructions above,
+the first time the app is run in the Simulator
+a dialog will appear for selecting the project directory to watch.
+Alternatively, click the menu bar icon for the InjectionIII app
+and select "Add Directory".
+
+After selecting this another dialog will appear
+for selecting the `.xcodeproj` project file to watch.
+
+Another dialog will appear requesting access to ?.
+
+After making code changes and saving them,
+click on the Simulator to trigger rebuilding and reloading the app.
+
+THIS WORKED ONE TIME, BUT I CANNOT GET IT TO WORK FOR ANOTHER PROJECT!
