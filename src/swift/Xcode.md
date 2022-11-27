@@ -575,8 +575,11 @@ The Run phase specifies many things including:
 
   - whether to run the app in a debug or release build configuration
   - argument to be passed to the executable
-    (access these in the `App` subclass `init` method with
-    `CommandLine.arguments` which is an `Array` of `String`s).
+
+    Access these in the `App` subclass `init` method with
+    `CommandLine.arguments` or `ProcessInfo.processInfo.arguments`
+    which are both an `Array` of `String`s.
+
   - environment variables to be set before executing
   - diagnostics to collect while the target executes
 
