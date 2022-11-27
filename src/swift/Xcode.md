@@ -681,39 +681,34 @@ The per-project steps are:
 
 1. Open an iOS project in Xcode.
 1. Select File ... Add Packages...
-1. Paste the URL "https://github.com/krzysztofzablocki/Inject"
-   into the search input.
+1. Enter "Inject" in the search input or
+   paste the URL "https://github.com/krzysztofzablocki/Inject".
 1. Select "Inject" in the list of matching packages.
 1. Click the "Add Package" button.
 1. Click the next "Add Package" button.
 1. Select the top item in the Navigator.
 1. Select the main target.
 1. Click the "Build Settings" tab.
-1. Scroll down to the "Linking" section.
-1. Expand the option "Other Linking Flags" entry.
-1. Paste "-Xlinker -interposable" as the value in the "Debug" row.
+1. Enter "Other Linker Flags" in the filter input.
+1. Expand the "Other Linking Flags" row.
+1. For the value of the "Debug" row, paste `-Xlinker -interposable`
 1. Open the `ContentView.swift` file.
 1. Add `import Inject`
 1. Add the property `@ObservedObject private var iO = Inject.observer`
 1. Chain a call to `.enableInjection()` at the end of what `body` returns.
+1. Click the InjectionIII menu bar icon and select "Open Project".
+   If the menu bar icon is not present,
+   double-click the InjectionIII app to launch it.
+1. Select the directory that contains the `.xcodeproj` project file.
+1. Click the "Select Project Directory" button.
 1. Run the project in the Simulator.
 
 Note that the added code does not need to be removed before releasing
 the app to production because it does nothing unless it is run in debug mode.
 
-After following the setup instructions above,
-the first time the app is run in the Simulator
-a dialog will appear for selecting the project directory to watch.
-This directory must include a `.xcodeproj` file.
-Alternatively, click the menu bar icon for the InjectionIII app
-and select "Add Directory".
-
-After selecting the project directory, another dialog will appear for
-selecting the `.xcodeproj` project file that defines the project to be updated.
-
-If the directory being watched nested inside the
-`Desktop` or `Documents` directory, another dialog will appear
-requesting access to permission to access files in those directories.
+If the directory being watched is nested inside the
+`Desktop` or `Documents` directory, another dialog map appear
+requesting permission to access files in those directories.
 
 After making code changes and saving them,
 make the Simulator the active app
@@ -724,3 +719,17 @@ to be updated before the app is reloaded in the Simulator.
 
 It seems that some changes do not get injected into the running app.
 For example changes to property initial values do not take effect.
+In the code below, hot reload will not pick up
+a change to the value of the `name` property.
+
+```swift
+    private let name = "Mark"
+
+    var body: some View {
+        VStack {
+            Text("Hello, \(name)!")
+        }
+        .padding()
+        .enableInjection()
+    }
+```
