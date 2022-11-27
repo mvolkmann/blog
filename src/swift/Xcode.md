@@ -653,12 +653,16 @@ Also, some app features are not supported when running in a preview.
 
 For these reasons it would be great if apps running in the Simulator
 could automatically build and reload when changes to a project file are saved.
-By default Xcode does not automatically do this, but this can be configured.
+By default Xcode does not do this automatically, but it can be configured.
 
 Krzysztof Zabłocki describes a way to implement this in his article
 {% aTargetBlank "https://www.merowing.info/hot-reloading-in-swift/",
 "Hot Reloading in Swift" %}. This uses his {% aTargetBlank
 "https://github.com/krzysztofzablocki/Inject", "Inject" %} package.
+The solution involves installing an app that watches specified directories
+for file changes. When a file change is detected, it is rebuilt
+and injected into the app without rebuilding the entire app.
+The updated version of the app is then loaded into the Simulator.
 
 The one-time steps are:
 
@@ -700,15 +704,23 @@ the app to production because it does nothing unless it is run in debug mode.
 After following the setup instructions above,
 the first time the app is run in the Simulator
 a dialog will appear for selecting the project directory to watch.
+This directory must include a `.xcodeproj` file.
 Alternatively, click the menu bar icon for the InjectionIII app
 and select "Add Directory".
 
-After selecting this another dialog will appear
-for selecting the `.xcodeproj` project file to watch.
+After selecting the project directory, another dialog will appear for
+selecting the `.xcodeproj` project file that defines the project to be updated.
 
-Another dialog will appear requesting access to ?.
+If the directory being watched nested inside the
+`Desktop` or `Documents` directory, another dialog will appear
+requesting access to permission to access files in those directories.
 
 After making code changes and saving them,
-click on the Simulator to trigger rebuilding and reloading the app.
+make the Simulator the active app
+in order to trigger updating and reloading the app.
+To do this, click the Simulator or press cmd-tab to toggle to it.
+The need to do this is annoying, but it does allow multiple files
+to be updated before the app is reloaded in the Simulator.
 
-THIS WORKED ONE TIME, BUT I CANNOT GET IT TO WORK FOR ANOTHER PROJECT!
+It seems that some changes do not get injected into the running app.
+For example changes to property initial values do not take effect.
