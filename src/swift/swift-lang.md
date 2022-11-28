@@ -2411,6 +2411,24 @@ Properties are declared with the `let` (immutable) and
 Mutable properties can only be modified if the instance is also mutable
 (assigned to a `var`).
 
+Changing a mutable struct property creates a new instance of the struct
+rather than modifying the single property of the existing instance.
+For example:
+
+```swift
+struct Person {
+    var name: String // using `var` makes this a mutable property
+}
+
+// We must use `var` here instead of `let`
+// to enable changing mutable properties.
+var p = Person(name: "Mark")
+
+// This changes `p` to refer to a
+// new instance of the `Person` struct.
+p.name = "Tami"
+```
+
 Immutable properties must be given a value when an instance is initialized
 and cannot be changed after that.
 
