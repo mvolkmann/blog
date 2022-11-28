@@ -716,20 +716,12 @@ in order to trigger updating and reloading the app.
 To do this, click the Simulator or press cmd-tab to toggle to it.
 The need to do this is annoying, but it does allow multiple files
 to be updated before the app is reloaded in the Simulator.
+See this {% aTargetBlank
+"https://github.com/johnno1962/InjectionIII/issues/426", "issue" %}.
 
 It seems that some changes do not get injected into the running app.
 For example changes to property initial values do not take effect.
+See this {% aTargetBlank
+"https://github.com/johnno1962/InjectionIII/issues/425", "issue" %}.
 In the code below, hot reload will not pick up
 a change to the value of the `name` property.
-
-```swift
-    private let name = "Mark"
-
-    var body: some View {
-        VStack {
-            Text("Hello, \(name)!")
-        }
-        .padding()
-        .enableInjection()
-    }
-```
