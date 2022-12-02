@@ -709,13 +709,13 @@ the app to production because it does nothing unless it is run in debug mode.
 If the directory being watched is nested inside the
 `Desktop` or `Documents` directory, another dialog map appear
 requesting permission to access files in those directories.
+https://github.com/johnno1962/InjectionIII/releases?v=1.0.20
 
-After making code changes and saving them,
-make the Simulator the active app
-in order to trigger updating and reloading the app.
-To do this, click the Simulator or press cmd-tab to toggle to it.
-The need to do this is annoying, but it does allow multiple files
-to be updated before the app is reloaded in the Simulator.
+If you override the cmd-s keybinding to run something like
+"SwiftFormat - Format File" and also save changes,
+pressing it will not trigger the Simulator to update.
+In this case the Simulator will update
+if you active any other app besides Xcode.
 See this {% aTargetBlank
 "https://github.com/johnno1962/InjectionIII/issues/426", "issue" %}.
 

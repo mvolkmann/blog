@@ -1856,7 +1856,11 @@ struct ContentView: View {
 
 ### Form
 
-This is a container of data entry views.
+This is a container of data input views.
+Embedding data input views in a `Form`
+instead of another container such as `VStack`
+can change the way they look and feel.
+One example of a data input that changes is `Picker`.
 
 The following example demonstrates many common views used in forms.
 
