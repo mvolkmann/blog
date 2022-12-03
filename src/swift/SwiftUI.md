@@ -2991,8 +2991,9 @@ Text(stooges, format: .list(type: .or)) // Moe, Larry, or Curly
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/foundation/measurement",
-"Measurement" %} struct is used to specify a quantity (`Double`)
-with a unit of measure.
+"Measurement" %} struct from the Foundation library
+is used to specify a quantity (`Double`) with a unit of measure.
+
 The supported quantity types include `UnitAcceleration`, `UnitAngle`,
 `UnitArea`, `UnitDispersion`, `UnitDuration`, `UnitElectricalCharge`,
 `UnitElectricalCurrent`, `UnitEnergy`, `UnitFrequency`, `UnitFuelEfficiency`,
