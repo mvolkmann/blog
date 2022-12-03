@@ -51,13 +51,19 @@ that this is typically not necessary.
 - enter an Organization Identifier such as your email address
 - select the Interface such as "SwiftUI"
 - select the Language such as "Swift"
-- check "Use Core Data" to persist data in a local database
-- check "Include Tests" to enable writing unit tests
+- check "Use Core Data" to enable persisting data in a local database
+- check "Include Tests" to get a jump start on enable writing unit tests
 - click "Next"
 - select the directory where the project will be stored and click "Create"
 
-The file name of the generated file that extends `App` is the
-app name followed by "App", but this can be changed to any name.
+The new project will have the following structure and files:
+
+- `{ProjectName}` group
+  - `{ProjectName}App.swift` - starting point
+  - `ContentView.swift` - defines the top-most view
+  - `Assets.xcassets` - holds images, colors, audio, and video
+  - `Preview Content` group
+    - `Preview Assets.xcassets` - holds assets only used to previews of views
 
 To change the device being simulated,
 click the device drop-down after the app name near the top
