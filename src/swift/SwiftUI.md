@@ -2993,6 +2993,10 @@ The {% aTargetBlank
 "https://developer.apple.com/documentation/foundation/measurement",
 "Measurement" %} struct from the Foundation library
 is used to specify a quantity (`Double`) with a unit of measure.
+Values of this type can be passed to the `Text` initializer
+along with a `format` argument of type {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/measurement/formatstyle",
+"Measurement.FormatStyle" %}.
 
 The supported quantity types include `UnitAcceleration`, `UnitAngle`,
 `UnitArea`, `UnitDispersion`, `UnitDuration`, `UnitElectricalCharge`,
@@ -3019,6 +3023,8 @@ let imperialWidth = Measurement(value: 7, unit: UnitLength.inches)
 // the app is run in the United States where
 // the Imperial system is used rather the Metric system.
 Text(metricLength, format: .measurement(width: .wide)) // 3.9 inches
+Text(metricLength, format: .measurement(width: .abbreviated)) // 3.9 in
+Text(metricLength, format: .measurement(width: .narrow)) // 3.9"
 Text(imperialWidth, format: .measurement(width: .wide)) // 7 inches
 
 // Measurements support many operators including +, -, *, /.
