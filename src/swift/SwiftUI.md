@@ -2978,7 +2978,12 @@ if a `format` argument with a compatible value is also passed.
 For example:
 
 ```swift
-// These the current date.
+// These format currency values, but do not perform currency conversion.
+let price = 123.456
+Text(price, format: .currency(code: "USD")) // $123.46
+Text(price, format: .currency(code: "GBP")) // ￡123.46
+
+// These format the current date.
 Text(Date(), format: .dateTime) // 12/3/2022, 11:17 AM
 Text(Date(), format: .iso8601) // 2022-12-03T17:17:56Z
 
