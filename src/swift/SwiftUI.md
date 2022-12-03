@@ -3033,7 +3033,7 @@ Text(metricLength, format: .measurement(width: .narrow)) // 3.9"
 Text(imperialWidth, format: .measurement(width: .wide)) // 7 inches
 
 // Measurements support many operators including +, -, *, /.
-// These return a new `Measurement` instances.
+// These operators return a new `Measurement` instance.
 // Only one operand can be a `Measurement`.
 // The other must be a number.
 

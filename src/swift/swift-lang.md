@@ -932,6 +932,53 @@ let angle = 57.2169308
 let formatted = String(format: "Angle: %.2f", angle) // 57.22
 ```
 
+### Measurement Type
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/measurement",
+"Measurement" %} struct from the Foundation library
+is used to specify a quantity (`Double`) with a unit of measure.
+Values of this type can be passed to the `Text` initializer
+along with a `format` argument of type {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/measurement/formatstyle",
+"Measurement.FormatStyle" %}.
+
+The supported quantity types include `UnitAcceleration`, `UnitAngle`,
+`UnitArea`, `UnitDispersion`, `UnitDuration`, `UnitElectricalCharge`,
+`UnitElectricalCurrent`, `UnitEnergy`, `UnitFrequency`, `UnitFuelEfficiency`,
+`UnitIlluminance`, `UnitLength`, `UnitMass`, `UnitPoint`, `UnitPower`,
+`UnitPressure`, `UnitSpeed`, `UnitTemperature`, and `UnitVolume`.
+Each of these define a set of class properties that specify the supported units.
+For example, `UnitLength` defines the metric system class properties
+`millimeters`, `centimeters`, `meters`, and `kilometers`,
+the imperial system class properties `inches`, `feet`, `yards`, and `miles`,
+and many more.
+
+A `Measurement` has a `value` and a `unit`.
+
+Measurements support many operators including `+`, `-`, `*`, `/`.
+These operators return a new `Measurement` instance.
+Only one operand can be a `Measurement`. The other must be a number.
+
+Measurements support comparison operators like ==, <, and >.
+
+Measurements can be converted to compatible units.
+
+For example:
+
+```swift
+let metricLength = Measurement(value: 10, unit: UnitLength.centimeters)
+let imperialWidth = Measurement(value: 7, unit: UnitLength.inches)
+let metricWidth = imperialWidth.converted(to: metricLength.unit)
+let metricArea = Measurement(
+    value: metricLength.value * metricWidth.value,
+    unit: UnitArea.squareCentimeters
+) // 177.8 square centimeters
+```
+
+The SwiftUI `Text` view supports displaying `Measurement` instances
+including their value and unit.
+
 ### String and Character Type
 
 The `String` type is a `struct` that represents a sequence of Unicode characters.
