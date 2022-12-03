@@ -58,12 +58,58 @@ that this is typically not necessary.
 
 The new project will have the following structure and files:
 
-- `{ProjectName}` group
-  - `{ProjectName}App.swift` - starting point
-  - `ContentView.swift` - defines the top-most view
-  - `Assets.xcassets` - holds images, colors, audio, and video
-  - `Preview Content` group
-    - `Preview Assets.xcassets` - holds assets only used to previews of views
+A new "App" project begins with a group that has the same name as the project.
+The group contains the following files:
+
+- `{ProjectName}App.swift`
+
+  This defines the main struct which implements the `App` protocol.
+  It is preceded by the `@main` attribute
+  which marks the entry point of the app.
+  It has computed property named `body`
+  whose value implements the `Scene` protocol.
+  The actual value is an instance of `WindowGroup`.
+  This renders an instance of `ContentView` which is defined in the next file.
+  Apps for macOS and iPadOS can specify more than one window
+  in the `WindowGroup`, but iOS and watchOS apps cannot.
+  iOS will render all the windows as if they were in a `VStack`.
+
+- `ContentView.swift`
+
+  This defines the `ContentView` struct which implements the `View` protocol
+  and is the topmost view.
+  It also defines the `ContentView_Previews` struct
+  which describes the previews that should display in the Canvas area.
+  This can be one or more views that are each displayed in a separate Preview.
+
+- `Assets.xcassets`
+
+  This associates names with assets such as
+  colors, images, audio files, and video files.
+
+- `Preview Content` group
+
+  This contains the file `Preview Assets.xcassets`
+  which holds assets that are only used to previews of views.
+
+- `{ProjectName}.xcodeproj`
+
+  This file is not visible in the Navigator,
+  but can be viewed and edited by clicking the top entry in the navigator.
+  The editor for this data contains the following tabs:
+  General, Signing & Capabilities, Resource Tags, Info,
+  Build Settings, Build Phases, and Build Rules.
+  The General tab configures the app display name, version of iOS,
+  targets (iPhone, iPad, or Mac), status bar style, and more.
+
+To add a particular kind of provided UI View in a `.swift` file,
+manually enter code or click where it should go in the code
+and click the "+" in the upper-right of the Code Editor.
+Clicking the "+" displays the Object Library dialog
+that contains a list provided view types.
+Selecting one displays related documentation and code examples.
+Double-click a view type to insert code for it at the cursor
+or drag a view type to the desired code location.
 
 To change the device being simulated,
 click the device drop-down after the app name near the top
@@ -81,52 +127,6 @@ To change the name displayed below the app icon,
 click the app name at the top of the Navigator,
 select the app target, and
 modify the value of "Display Name".
-
-A new "App" project begins with the following files.
-
-- `{app-name}.swift`
-
-  This defines the main struct which implements the `App` protocol.
-  It is preceded by the `@main` attribute
-  which marks the entry point of the app.
-  It has computed property named `body`
-  whose value implements the `Scene` protocol.
-  The actual value is an instance of `WindowGroup`.
-  This renders an instance of `ContentView` which is defined in the next file.
-  Apps for macOS and iPadOS can specify more than one window
-  in the `WindowGroup`, but iOS and watchOS apps cannot.
-  iOS will render all the windows as if they were in a `VStack`.
-
-- `ContentView.swift`
-
-  This defines the `ContentView` struct which implements the `View` protocol
-  and is the top of the user interface.
-  It also defines the `ContentView_Previews` struct
-  which describes the Previews that should display in the Canvas area.
-  This can be one or more views that are each displayed in a separate Preview.
-
-- `Assets.xcassets`
-
-  This associates names with assets such as images, audio files, and video files.
-
-- `{app-name}.xcodeproj`
-
-  This file is not visible in the Navigator,
-  but can be viewed and edited by clicking the top entry in the navigator.
-  The editor for this data has the following tabs:
-  General, Signing & Capabilities, Resource Tags, Info,
-  Build Settings, Build Phases, and Build Rules.
-  The General tab configures the app display name, version of iOS,
-  targets (iPhone, iPad, or Mac), status bar style, and more.
-
-To add a particular kind of provided UI View in a `.swift` file,
-manually enter code or click where it should go in the code
-and click the "+" in the upper-right of the Code Editor.
-Clicking the "+" displays the Object Library dialog
-that contains a list provided view types.
-Selecting one displays related documentation and code examples.
-Double-click a view type to insert code for it at the cursor
-or drag a view type to the desired code location.
 
 ### Canvas / Preview
 
@@ -302,77 +302,25 @@ See the {% aTargetBlank
 "https://github.com/mvolkmann/SFSymbolsDemo/tree/main", "SFSymbolsDemo" %}
 app in GitHub.
 
-### Bars
+## Views
 
-- {% aTargetBlank
-    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/navigation-bars/",
-    "Navigation Bar" %}
+Views in SwiftUI are structs that conform to the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view", "View" %} protocol.
+The only requirement this imposes is that conforming types
+must define a `body` computed property whose type is `some View`.
+The `some` keyword describes an "opaque type".
+In this case it means that `body` an return
+an instance of any type that conforms to the `View` protocol.
 
-  - appears at top of screen below status bar
-  - enables navigation through hierarchical screens
-  - provides a leading back button
-  - can have trailing buttons like "Edit" and "Done"
-  - can have a tint color
-  - can have an inline or large title
-  - can use a "Segmented Control" in place of title
-  - SwiftUI creates this with `NavigationView`
+A `body` definition can contain any number of top-level views.
+These are automatically wrapped in a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/tupleview", "TupleView" %}
+which becomes the single view that is returned.
+By default this positions its child views vertically like a `VStack`.
 
-- {% aTargetBlank
-    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/search-bars/",
-    "Search Bar" %}
+The following sections describe the views defined by SwiftUI.
 
-  - a text input for entering search text
-  - has magnifier glass icon
-  - can display in a Navigation Bar
-  - can include clear and confirm buttons
-  - SwiftUI creates this with the `searchable` view modifier
-    can be applied to a view that is inside a `NavigationView`.
-    See an example in the "Search" section.
-
-- {% aTargetBlank
-    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/",
-    "Sidebar" %}
-
-  - provides app-level navigation to top-level collections of content
-  - for example, the Mail app displays a list of mailboxes in a sidebar
-  - selecting an item in the sidebar changes what is displayed
-    in the pane that follows
-  - SwiftUI creates this by applying the `.listStyle(.sidebar)` view modifier
-    to a `List` view. See an example in the "Sidebar" section.
-
-- {% aTargetBlank
-    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/",
-    "Status Bar" %}
-
-  - appears at top of screen above Navigation Bar
-  - the system provided Status Bar displays the time on the left and indicators
-    for cell strength, WiFi strength, and battery remaining on the right
-  - can style to light or dark mode and customize colors
-  - should not replace with a custom status bar
-  - can temporarily hide it, but should never permanently hide it
-  - to hide the system status bar, apply the `.statusBar(hidden: true)`
-    view modifier to the top `NavigationView`
-  - SwiftUI needs nothing to support this because the system provides it
-
-- {% aTargetBlank
-    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/tab-bars/",
-    "Tab Bar" %}
-
-  - used to navigate to top-level app sections (groups of related pages)
-  - appears at bottom of screen
-  - SwiftUI creates this with `TabView`
-
-- {% aTargetBlank
-    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/toolbars/",
-    "Toolbar" %}
-
-  - contains buttons that perform page-specific actions
-  - appears at bottom of screen
-  - SwiftUI creates this with the `toolbar` view modifier
-    and `ToolbarItemGroup` or `ToolbarItem` views.
-    See an example in the "Toolbars" section.
-
-### Views
+### Container Views
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/action-sheets/",
@@ -720,6 +668,76 @@ Select FontAwesomeSwiftUI and press the "Add Package" button.
 To render a FontAwesome icon, call `FontAwesome.register()`
 and pass icons to the `Text` view.
 For example, `Text(AwesomeIcon.aws.rawValue)`.
+
+### Bars
+
+- {% aTargetBlank
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/navigation-bars/",
+    "Navigation Bar" %}
+
+  - appears at top of screen below status bar
+  - enables navigation through hierarchical screens
+  - provides a leading back button
+  - can have trailing buttons like "Edit" and "Done"
+  - can have a tint color
+  - can have an inline or large title
+  - can use a "Segmented Control" in place of title
+  - SwiftUI creates this with `NavigationView`
+
+- {% aTargetBlank
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/search-bars/",
+    "Search Bar" %}
+
+  - a text input for entering search text
+  - has magnifier glass icon
+  - can display in a Navigation Bar
+  - can include clear and confirm buttons
+  - SwiftUI creates this with the `searchable` view modifier
+    can be applied to a view that is inside a `NavigationView`.
+    See an example in the "Search" section.
+
+- {% aTargetBlank
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/",
+    "Sidebar" %}
+
+  - provides app-level navigation to top-level collections of content
+  - for example, the Mail app displays a list of mailboxes in a sidebar
+  - selecting an item in the sidebar changes what is displayed
+    in the pane that follows
+  - SwiftUI creates this by applying the `.listStyle(.sidebar)` view modifier
+    to a `List` view. See an example in the "Sidebar" section.
+
+- {% aTargetBlank
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/",
+    "Status Bar" %}
+
+  - appears at top of screen above Navigation Bar
+  - the system provided Status Bar displays the time on the left and indicators
+    for cell strength, WiFi strength, and battery remaining on the right
+  - can style to light or dark mode and customize colors
+  - should not replace with a custom status bar
+  - can temporarily hide it, but should never permanently hide it
+  - to hide the system status bar, apply the `.statusBar(hidden: true)`
+    view modifier to the top `NavigationView`
+  - SwiftUI needs nothing to support this because the system provides it
+
+- {% aTargetBlank
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/tab-bars/",
+    "Tab Bar" %}
+
+  - used to navigate to top-level app sections (groups of related pages)
+  - appears at bottom of screen
+  - SwiftUI creates this with `TabView`
+
+- {% aTargetBlank
+    "https://developer.apple.com/design/human-interface-guidelines/ios/bars/toolbars/",
+    "Toolbar" %}
+
+  - contains buttons that perform page-specific actions
+  - appears at bottom of screen
+  - SwiftUI creates this with the `toolbar` view modifier
+    and `ToolbarItemGroup` or `ToolbarItem` views.
+    See an example in the "Toolbars" section.
 
 ## Core Graphics (CG)
 
@@ -2387,14 +2405,17 @@ struct ContentView: View {
 
 This view iterates of the elements of a `RandomAccessCollection`
 (includes `Array` and `Range` types)
-and renders the view specified in its `ViewBuilder`.
+and renders the view specified a provided `ViewBuilder`.
 
 The elements in the `RandomAccessCollection` must either conform to
 the `Identifiable` protocol (which requires them to have an `id` property)
-OR the `id:` argument must be set.
-This is important! If the elements are not `Identifiable`
+OR the `id:` argument must be supplied.
+If the elements are not `Identifiable`
 and no `id:` argument is supplied, the view
 may not update property when the collection changes.
+
+If the elements are not `Identifiable` and you wish to use
+the elements values as their id, specify `id: \.self`.
 
 Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`)
 unless the `id` argument key path `\.self` is specified.
@@ -2816,9 +2837,9 @@ Here is an example of correct usage.
 ```swift
 Image("some-name")
     .resizable()
-    .scaledToFill()
     .frame(width: 300, height: 300)
     .clipShape(Circle())
+    .overlay(Circle().stroke(Color.red, lineWidth: 10))
 ```
 
 ### AsyncImage
@@ -2909,9 +2930,13 @@ It uses the largest size that will fit that is between
 If the text doesn't fit at 75% of the requested font size,
 it will be elided (truncated with ... at the end).
 
-The `lineLimit(n)` view modifier can be applied to a `Text` view.
-It limits the number of lines on which the text can be wrapped.
-If more lines are needed, the text is elided.
+The `lineLimit(n)` view modifier can be applied to a `Text` view
+to limit the number of lines on which the text can be wrapped.
+If more lines are needed, the text is elided
+(truncated with an ellipsis at the end).
+To change where the ellipsis appears, apply the `truncationMode` view modifier
+with the value `.head`, `.middle` or `.tail` (default).
+The ellipsis always appears in the last line of multi-line text.
 
 Both view modifiers described above can be applied to the same `Text` view
 to achieve both effects.
@@ -3634,23 +3659,23 @@ Text("Hello").font(.system(size: 24, weight: .bold))
 Image(systemName: "cloud.snow").font(.system(size: 64))
 ```
 
-Another option is to use dynamic fonts whose size changes
-based on user preferences.
+Another option is to use "Dynamic Type" font names
+whose size changes based on user preferences.
 The dynamic font names are listed below in order from largest to smallest size.
 Each is followed by the corresponding fixed size
 when the user has not changed their text size preference.
 
-- largeTitle (35)
-- title (28)
-- title2 (23)
-- title3 (20)
-- headline (17) // same size as .body but bold
-- body (17)
-- callout (16)
-- subheadline (15)
-- footnote (13)
-- caption (12)
-- caption2 (11)
+- `largeTitle` (35)
+- `title` (28)
+- `title2` (23)
+- `title3` (20)
+- `headline` (17) // same size as .body but bold
+- `body` (17)
+- `callout` (16)
+- `subheadline` (15)
+- `footnote` (13)
+- `caption` (12)
+- `caption2` (11)
 
 Users can scale the dynamic fonts used in all apps from
 Settings ... Display & Brightness ... Text Size.
