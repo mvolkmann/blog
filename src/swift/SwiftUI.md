@@ -1119,6 +1119,15 @@ Commonly used view modifiers include:
 - `overlay(ShapeStyle)`
 - `padding(CGFloat)`
 
+The `background` view modifier name doesn't end in `Color`
+like `foregroundColor` because it can specify
+background content that is any `View`
+and is not restricted to being only a color.
+
+The `multilineTextAlignment` view modifier specifies how text that
+wraps across multiple lines should be horizontally aligned.
+It can be passed `.leading` (default), `.center`, or `.trailing`.
+
 The following view modifiers change the styling
 of specific kinds of predefined views.
 
@@ -2949,6 +2958,88 @@ Text("Red").foregroundColor(.red) +
 Text("Green").foregroundColor(.green) +
 Text("Blue").foregroundColor(.blue)
 ```
+
+The `Text` initializer can be passed a `Date`
+if a `style` argument is also passed.
+For example:
+
+```swift
+Text(Date(), style: .date) // December 3, 2022
+Text(Date(), style: .time) // 11:20 AM
+
+// Each of these update automatically every second.
+Text(Date(), style: .offset) // +41 seconds
+Text(Date(), style: .relative) // 41 sec
+Text(Date(), style: .timer) // 0.41
+```
+
+The `Text` initializer can be passed a type other than `String`
+if a `format` argument with a compatible value is also passed.
+For example:
+
+```swift
+// These the current date.
+Text(Date(), format: .dateTime) // 12/3/2022, 11:17 AM
+Text(Date(), format: .iso8601) // 2022-12-03T17:17:56Z
+
+// These format an array of strings by placing a comma between each
+// and including the word "and" or "or" before the last value.
+let stooges = ["Moe", "Larry", "Curly"]
+Text(stooges, format: .list(type: .and)) // Moe, Larry, and Curly
+Text(stooges, format: .list(type: .or)) // Moe, Larry, or Curly
+```
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/measurement",
+"Measurement" %} struct is used to specify a quantity (`Double`)
+with a unit of measure.
+The supported quantity types include `UnitAcceleration`, `UnitAngle`,
+`UnitArea`, `UnitDispersion`, `UnitDuration`, `UnitElectricalCharge`,
+`UnitElectricalCurrent`, `UnitEnergy`, `UnitFrequency`, `UnitFuelEfficiency`,
+`UnitIlluminance`, `UnitLength`, `UnitMass`, `UnitPoint`, `UnitPower`,
+`UnitPressure`, `UnitSpeed`, `UnitTemperature`, and `UnitVolume`.
+Each of these define a set of class properties that specify the supported units.
+For example, `UnitLength` defines the metric system class properties
+`millimeters`, `centimeters`, `meters`, and `kilometers`,
+the imperial system class properties `inches`, `feet`, `yards`, and `miles`,
+and many more.
+
+For example:
+
+```swift
+// A `Measurement` has a `value` and a `unit`.
+let metricLength = Measurement(value: 10, unit: UnitLength.centimeters)
+Text("metric length value is \(metricLength.value)") // 10.000000
+Text("metric length unit is \(metricLength.unit.symbol)") // cm
+
+let imperialWidth = Measurement(value: 7, unit: UnitLength.inches)
+
+// The output shown in the comments below assumes
+// the app is run in the United States where
+// the Imperial system is used rather the Metric system.
+Text(metricLength, format: .measurement(width: .wide)) // 3.9 inches
+Text(imperialWidth, format: .measurement(width: .wide)) // 7 inches
+
+// Measurements support many operators including +, -, *, /.
+// These return a new `Measurement` instances.
+// Only one operand can be a `Measurement`.
+// The other must be a number.
+
+// Measurements support comparison operators like ==, <, and >.
+
+// Measurements can be converted to compatible units.
+let metricWidth = imperialWidth.converted(to: metricLength.unit)
+Text("\(metricWidth.value)") // 17.78 cm
+
+let metricArea = Measurement(
+    value: metricLength.value * metricWidth.value,
+    unit: UnitArea.squareCentimeters
+) // 177.8 square centimeters
+Text(metricArea, format: .measurement(width: .wide)) // 28 square inches
+```
+
+Also see the "AttributedString" section for applying
+different formatting to substrings of a string.
 
 ### TextField
 
