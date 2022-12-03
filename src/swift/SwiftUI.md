@@ -10,21 +10,36 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://developer.apple.com/xcode/swiftui/", "SwiftUI" %}
 is a Swift library for building macOS, iOS, and Apple Watch apps.
-It is an alternative to its predecessor UIKit.
+It is an alternative to its predecessor
+{% aTargetBlank "https://developer.apple.com/documentation/uikit", "UIKit" %}.
 
 By comparison SwiftUI ...
 
-- is currently missing some features of UIKit
-  (but UIKit can be used within SwiftUI apps)
 - is declarative in nature than imperative
 - emphasizes use of structs over classes (UIKit uses classes)
 - requires far less code to do the same things
+- has somewhat better performance
 - only runs on iOS 13 and above
+- is currently missing some features of UIKit
+  (ex. SwiftUI `Text` is less powerful than UIKit `UITextView`.)
 - doesn't use Storyboard to build views
 - doesn't use `AppDelegate` or `SceneDelegate`
   (read about these {% aTargetBlank
   "https://learnappmaking.com/scene-delegate-app-delegate-xcode-11-ios-13/",
   "here" %})
+
+Much of the same code can be used to build apps across all Apple platforms.
+However, there are platform differences that require different code.
+
+Many SwiftUI views are built on UIKit components,
+but knowing their relationships is not necessary.
+
+It is possible to use UIKit components in a SwiftUI app
+by wrapping them in a struct that conforms to the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/uiviewrepresentable",
+"UIViewRepresentable" %} protocol.
+However, there is enough functionality in SwiftUI
+that this is typically not necessary.
 
 ## Getting Started
 
@@ -1620,6 +1635,33 @@ UIKit uses `UIColor` instead of `Color`.
 To create a `UIColor` from a `Color`,
 pass the `Color` to a `UIColor` initializer.
 For example, `let redUIColor = UIColor(Color.red)`.
+
+## Mapping from UIKit to SwiftUI
+
+The name of the SwiftUI view that corresponds to a UIKit class
+is often the same without the "UI" prefix.
+The table below lists the corresponding names.
+
+| UIKit Class               | SwiftUI View                 |
+| ------------------------- | ---------------------------- |
+| `NSAttributedString`      | `Text`                       |
+| `UIActivityIndicatorView` | `ProgressView` without value |
+| `UIAlertController`       | `Alert` or `ActionSheet`     |
+| `UIButton`                | `Button`                     |
+| `UICollectionView`        | `LazyHGrid` or `LazyVGrid`   |
+| `UIDatePicker`            | `DatePicker`                 |
+| `UIImageView`             | `Image`                      |
+| `UILabel`                 | `Text`                       |
+| `UINavigationController`  | `NavigationView`             |
+| `UIProgressView`          | `ProgressView` with value    |
+| `UISegmentedControl`      | `Picker`                     |
+| `UISlider`                | `Slider`                     |
+| `UIStackView`             | `HStack` or `VStack`         |
+| `UIStepper`               | `Stepper`                    |
+| `UISwitch`                | `Toggle`                     |
+| `UITableView`             | `List`                       |
+| `UITextField`             | `TextField` or `SecureField` |
+| `UITextView`              | `TextEditor`                 |
 
 ## Container Views
 
