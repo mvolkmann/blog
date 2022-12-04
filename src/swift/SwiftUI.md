@@ -3982,6 +3982,23 @@ accessibility size.
 In apps that use dynamic fonts, test all screens at various font size
 preferences to verify that the resulting layout is acceptable.
 
+## HierarchicalShapeStyle
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/hierarchicalshapestyle",
+"HierarchicalShapeStyle" %} struct defines the static properties
+`primary`, `secondary`, `tertiary`, and `quaternary`.
+These are defined by the OS and cannot be modified.
+They can be used to style many kinds of views.
+For example:
+
+```swift
+Text("Primary").foregroundStyle(.primary)
+Text("Secondary").foregroundStyle(.secondary)
+Text("Tertiary").foregroundStyle(.tertiary)
+Text("Quaternary").foregroundStyle(.quaternary)
+```
+
 ## Safe Area
 
 The {% aTargetBlank
