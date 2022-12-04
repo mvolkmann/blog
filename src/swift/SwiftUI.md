@@ -256,21 +256,26 @@ SF Symbols is a macOS app from Apple that provides over 4,000 icons.
 These can be rendered in custom app using the `Image` view
 with the `systemName` argument.
 
-Some symbols support multiple rendering modes
+Some symbols support multiple symbol rendering modes
 that enable using different colors for parts of the icon.
 To see the available rendering modes for a given icon,
 select the icon and click the paint brush tab in the Inspector on the right.
 Each icon has a preferred rendering mode,
-but a different rendering mode can be selected.
+but a different rendering mode can be selected by applying the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/image/renderingmode(_:)",
+"renderingMode" %} view modifier.
 
-The rendering modes include:
+To specify a symbol rendering mode, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/symbolrenderingmode(_:)",
+"symbolRenderingMode" %}. The supported symbol rendering modes include:
 
-- Monochrome - single color; seems the same as hierarchical
-- Hierarchical - single color with multiple opacity levels
-- Palette - two or three colors
-- Multicolor - seems the same as hierarchical
-- Automatic - preferred rendering mode of the icon of is used;
-  corresponds to not specifying a mode, not a real mode
+- `.monochrome` - single color; seems the same as hierarchical
+- `.hierarchical` - single color with multiple opacity levels
+- `.palette` - two or three colors
+- `.multicolor` - seems the same as hierarchical
+
+When the symbol rendering mode is not specified,
+the preferred rendering mode of the icon of is used.
 
 Icons that support variable colors are grouped in the "Variable" category.
 These display additional parts of the icon as a percentage value increases.
@@ -301,6 +306,22 @@ Button("Increase") {
 See the {% aTargetBlank
 "https://github.com/mvolkmann/SFSymbolsDemo/tree/main", "SFSymbolsDemo" %}
 app in GitHub.
+
+To ignore the colors in a multicolor SF Symbol icon
+and just use it as a template for applying a single specified color,
+apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/image/renderingmode(_:)",
+"renderingMode" %} view modifier with the argument value `.template`.
+For example:
+
+```swift
+Image(systemName: "doc.fill.badge.plus")
+    .renderingMode(.template)
+    .resizable()
+    .foregroundColor(.pink)
+    .scaledToFit()
+    .frame(width: 100, height: 100)
+```
 
 ## Views
 
@@ -2825,10 +2846,15 @@ their name as the `systemName` argument.
 For example, `Image(systemName: "cloud.snow")`.
 
 `Image` views are not resizable by default.
-To make them resizable, apply the `resizable` view modifier.
+To make them resizable, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/image/resizable(capinsets:resizingmode:)",
+"resizable" %} view modifier.
+To tile the image across the space given to it,
+apply the view modifier `.resizable(resizingMode: .tile)`.
 
-To maintain the original aspect ratio,
-apply the `aspectRatio` view modifier.
+To maintain the original aspect ratio, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/aspectratio(_:contentmode:)-771ow",
+"aspectRatio" %} view modifier.
 This takes a `contentMode` argument which can
 have the values `.fill` and `.fit`.
 These are equivalent: `.aspectRatio(contentMode: .fill)` and `.scaledToFill()`.
@@ -2838,7 +2864,9 @@ To change an `Image` to have a size different from its default,
 apply the `frame` view modifier.
 
 A new size can cause the image to skew.
-To clip an image to a given shape, apply the `clipShape` view modifier.
+To clip an image to a given shape, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/clipshape(_:style:)",
+"clipShape" %} view modifier.
 
 The order in which these view modifiers are applied is important.
 Here is an example of correct usage.
@@ -2928,9 +2956,31 @@ extension Text {
 }
 ```
 
-The `minimumScaleFactor(percent)` view modifier can be applied to a `Text` view.
-It causes the font size to be scaled down in order to get the text
-to fit within its frame.
+There are many view modifiers that can be applied to `Text` views.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/environmentvalues/linelimit",
+"lineLimit" %} view modifier limits the number of lines
+on which the text can be wrapped, specified by the argument value.
+If more lines are needed, the text is elided
+(truncated with an ellipsis at the end).
+To change where the ellipsis appears, apply the `truncationMode` view modifier
+with the value `.head`, `.middle` or `.tail` (default).
+The ellipsis always appears in the last line of multi-line text.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/kerning(_:)",
+"kerning" %} and {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/lazyvstack/tracking(_:)",
+"tracking" %} view modifiers both add space between letters.
+The difference is that the former even adds space between ligatures
+whereas the later does not.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/minimumscalefactor(_:)",
+"minimumScaleFactor" %} view modifier causes the font size
+to be scaled down in order to get the text to fit within its frame.
+Its argument is a percent value between 0 and 1.
 For example, `Text(myTitle).font(.title).minimumScaleFactor(0.75)`
 will use the `title` font size if the text will fit,
 but will scale as low as 75% of that font size.
@@ -2939,16 +2989,33 @@ It uses the largest size that will fit that is between
 If the text doesn't fit at 75% of the requested font size,
 it will be elided (truncated with ... at the end).
 
-The `lineLimit(n)` view modifier can be applied to a `Text` view
-to limit the number of lines on which the text can be wrapped.
-If more lines are needed, the text is elided
-(truncated with an ellipsis at the end).
-To change where the ellipsis appears, apply the `truncationMode` view modifier
-with the value `.head`, `.middle` or `.tail` (default).
-The ellipsis always appears in the last line of multi-line text.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/textcase(_:)",
+"textCase" %} view modifier transforms the case of the text.
+The supported argument values are:
 
-Both view modifiers described above can be applied to the same `Text` view
-to achieve both effects.
+- `.lowercase`: changes all characters to lowercase
+- `.uppercase`: changes all characters to uppercase
+- `none`: makes no changes
+
+The `Text` view automatically recognizes and honors Markdown syntax.
+For example:
+
+```swift
+Text("plain *italic* **bold** ~strike~ `code`")
+Text("[link](https://apple.com)")
+```
+
+By default users cannot select the text rendered by `Text` views.
+To enable this, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/textselection(_:)",
+"textSelection" %} view modifier with the argument value `.enabled`.
+To copy the text, press until a popup containing
+"Copy" and "Share" buttons appears.
+The entire text is copied, not individual characters or words.
+
+Applying the `textSelection` view modifier to a `List` view
+makes each `Text` view inside it selectable.
 
 To render text with multiple styles and no space between them,
 use the "+" operator between `Text` views. For example:
@@ -3670,17 +3737,27 @@ ColorPicker(
 
 ### Label
 
-This is a combination of an icon and text
-where the icon appears before the text.
-It takes a String for the text and an `systemImage` string
-that is the name of an icon in SF Symbols.
-By default both the icon and the text are displayed.
-To render only the text, add the modifier `.labelStyle(TitleOnlyLabelStyle)`.
-To render only the icon, add the modifier `.labelStyle(IconOnlyLabelStyle)`.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/label",
+"Label" %} view renders an icon and text where the icon appears first.
+`Label` supports many initializers but the most commonly used
+take the text as a `String` followed by the icon
+as either a `systemName` `String` (for an SF Symbol)
+or a `image` `String` (for an image asset name).
+
+For example:
 
 ```swift
 Label("Rain", systemImage: "cloud.rain")
 ```
+
+Applying the `font` view modifier scales both the text and the icon.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/labelstyle", "labelStyle" %}
+view modifier changes which parts are rendered.
+The default argument value is `.titleAndIcon` which renders both parts.
+To render only the text, pass `.titleOnly`.
+To render only the icon, pass `.iconOnly`.
 
 ### ProgressView
 
