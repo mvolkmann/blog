@@ -42,7 +42,6 @@ class GameScene: SKScene {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let size = CGSize(width: boxSize, height: boxSize)
-        // let box = SKSpriteNode(color: .red, size: size)
         let box = SKSpriteNode(color: randomColor(), size: size)
         box.position = location
         box.physicsBody = SKPhysicsBody(rectangleOf: size)
@@ -70,3 +69,8 @@ struct ContentView: View {
     }
 }
 ```
+
+## Game Projects
+
+One way to begin creating a game is to create a new project in Xcode
+using the "Game" template. This uses UIKit rather than SwiftUI.
