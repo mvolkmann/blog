@@ -2904,7 +2904,9 @@ Image("some-name")
 
 ### AsyncImage
 
-This asynchronously loads and displays an image.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/asyncimage",
+"AsyncImage" %} view asynchronously loads and displays an image.
 A specified placeholder image is displayed
 while the specified image is being downloaded.
 It works in the Simulator, but not in Preview.
@@ -2932,6 +2934,7 @@ struct ContentView: View {
                 },
                 placeholder: { ProgressView() } // spinner
             )
+            .frame(width: 100, height: 100)
         }
     }
 }
@@ -3910,6 +3913,26 @@ accessibility size.
 In apps that use dynamic fonts, test all screens at various font size
 preferences to verify that the resulting layout is acceptable.
 
+## Safe Area
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/ignoressafearea(_:edges:)",
+"ignoresSafeArea" %} view modifier expands a view so it can
+extend outside of the safe area which is the area of the screen
+that excludes the top navigation bar and the bottom toolbar.
+
+This is often used to provide a background color.
+For example:
+
+```swift
+ZStack {
+    Rectangle().fill(.blue.gradient).ignoresSafeArea()
+    VStack {
+        Text("Hello").font(.largeTitle)
+    }
+}
+```
+
 ## Floating Action Button
 
 SwiftUI does not provide a floating action button view.
@@ -4275,7 +4298,9 @@ Other drawing views are less obvious from their name, including:
 
 ### GeometryReader
 
-This is a view that takes all the space offered to it, wraps other views,
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/geometryreader",
+"GeometryReader" %} view takes all the space offered to it, wraps other views,
 and provides its size which can be used in calculations.
 The size is passed to a trailing closure and has the type `GeometryProxy`
 which has a `size` property whose type is `CGSize`.
