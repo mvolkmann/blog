@@ -1140,12 +1140,17 @@ Commonly used view modifiers include:
 - `overlay(ShapeStyle)`
 - `padding(CGFloat)`
 
-The `background` view modifier name doesn't end in `Color`
-like `foregroundColor` because it can specify
-background content that is any `View`
-and is not restricted to being only a color.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
+"background" %} view modifier name doesn't end in `Color`
+like {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/list/foregroundcolor(_:)",
+"foregroundColor" %} because it can specify background content that is
+any `View` and is not restricted to being only a color.
 
-The `multilineTextAlignment` view modifier specifies how text that
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/multilinetextalignment(_:)",
+"multilineTextAlignment" %} view modifier specifies how text that
 wraps across multiple lines should be horizontally aligned.
 It can be passed `.leading` (default), `.center`, or `.trailing`.
 
@@ -1310,6 +1315,7 @@ struct Collapsible: ViewModifier {
                             .degrees(showContent ? 180 : 0)
                         )
                         .offset(x: 0, y: -2)
+                        // Use a view as a background.
                         .background(halfCircle)
                 }
                 Spacer()
@@ -1798,6 +1804,7 @@ struct ContentView: View {
             ZStack { rect; Text(text) }
             Text(text)
                 .padding(10)
+                // Use a view as a background.
                 .background(Rectangle().foregroundColor(bgColor))
             rect.overlay(Text(text))
         }
@@ -4025,6 +4032,7 @@ The following example code draws several shapes:
 ```swift
 struct ContentView: View {
     let linearGradient = LinearGradient(
+        // Any number of colors can be specified.
         gradient: Gradient(colors: [.red, .yellow]),
         startPoint: .leading, // other values are .top and .bottom
         endPoint: .trailing
@@ -4083,7 +4091,8 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .foregroundColor(.purple)
             }
-        }.padding()
+        }
+        .padding()
     }
 }
 ```
