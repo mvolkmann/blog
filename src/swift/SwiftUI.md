@@ -4145,6 +4145,46 @@ struct ContentView: View {
 }
 ```
 
+To render a fraction of a shape, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/shape/trim(from:to:)",
+"trim" %} view modifier. This takes `from` and `to` arguments
+that are both percentages between 0 and 1.
+For example:
+
+```swift
+// In a Circle, 0 is at 0 degrees (right)
+// and it is drawn clockwise.
+// Percentage values are a percentage along the perimeter.
+// 0.25 is at 270 degrees (bottom),
+// 0.5 is at 180 degrees (left), and
+// 0.75 is at 90 degrees (top).
+Circle()
+    .trim(from: from, to: to)
+    .stroke(.red, lineWidth: 10)
+    .frame(width: 100, height: 100)
+
+// In a Rectangle, zero is at the upper right
+// and it is drawn clockwise.
+// Percentage values are a percentage along the perimeter.
+Rectangle()
+    .trim(from: from, to: to)
+    .stroke(.blue, lineWidth: 10)
+    .frame(width: 200, height: 100)
+```
+
+To modify the zero location of the trim,
+rotate the shape. For example:
+
+```swift
+Circle()
+    .trim(from: from, to: to)
+    .stroke(.red, lineWidth: 10)
+    .frame(width: 100, height: 100)
+    .rotationEffect(.degrees(90))
+```
+
+Trimming filled shapes doesn't typically produce a desired result.
+
 ### Angle
 
 This is a struct that does not implement the `View` protocol,
