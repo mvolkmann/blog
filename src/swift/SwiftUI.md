@@ -84,8 +84,8 @@ The group contains the following files:
 
 - `Assets.xcassets`
 
-  This associates names with assets such as
-  colors, images, audio files, and video files.
+  This associates names with assets such as colors, images, and data files.
+  It is not used for audio and video files.
 
 - `Preview Content` group
 
