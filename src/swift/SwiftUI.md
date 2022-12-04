@@ -2524,9 +2524,10 @@ struct ContentView: View {
 
 ### ForEach
 
-This view iterates of the elements of a `RandomAccessCollection`
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/foreach",
+"ForEach" %} struct iterates of the elements of a `RandomAccessCollection`
 (includes `Array` and `Range` types)
-and renders the view specified a provided `ViewBuilder`.
+and renders the view specified by a provided `ViewBuilder`.
 
 The elements in the `RandomAccessCollection` must either conform to
 the `Identifiable` protocol (which requires them to have an `id` property)
