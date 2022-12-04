@@ -5041,12 +5041,23 @@ TODO: Add more detail on using this package.
 
 ## Audio
 
-The `AVAudioPlayer` class in the `AVKit` package
-can be used to play audio from files with formats like MP3.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/avfaudio/avaudioplayer",
+"AVAudioPlayer" %} class in the {% aTargetBlank
+"https://developer.apple.com/documentation/avkit", "AVKit" %} framework
+enables playing audio in several formats such as MP3.
 
 A good source of free audio files is
 {% aTargetBlank "https://freesoundslibrary.com", "Free Sounds Library" %}.
 Download audio files and copy them into an Xcode project next to `.swift` files.
+
+To add an audio file to the project:
+
+- Do not add the video file to `Assets.xcassets`.
+- Drag an audio file into the Navigator. A dialog will appear.
+- In the "Destination" section, check the "Copy items if needed" checkbox.
+- In the "Add to target" section, check the app target checkbox.
+- Click the "Finish" button.
 
 The following example creates buttons
 that each play a different sound when tapped.
@@ -5057,37 +5068,40 @@ copied into the project.
 import AVKit
 import SwiftUI
 
-class SoundManager {
-    static let instance = SoundManager()
-
-    var player: AVAudioPlayer?
-
-    func play(name: String) {
-        guard let url =
-            Bundle.main.url(forResource: name, withExtension: ".mp3") else {
-                print("failed to load audio file \(name)")
-                return
-            }
-        do {
-            // Declaring player here does not work.  Why?
-            //let player = try AVAudioPlayer(contentsOf: url)
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
-        } catch {
-            print("error playing audio: \(error.localizedDescription)")
-        }
-    }
-}
+// This makes player a "retained" variable which is necessary
+// so the player is retained while the sound is playing.
+private var player: AVAudioPlayer?
 
 struct ContentView: View {
+    @State private var message: String?
+
+    private func play(_ name: String) {
+        let url = Bundle.main.url(forResource: name, withExtension: ".mp3")
+        guard let url else {
+            message = "\(name).mp3 not found"
+            return
+        }
+
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+            message = nil
+        } catch {
+            message = "error playing sound: \(error)"
+        }
+    }
+
     var body: some View {
         VStack {
-            Button("Click") {
-                SoundManager.instance.play(name: "click")
-            }.buttonStyle(.bordered)
-            Button("Ding") {
-                SoundManager.instance.play(name: "ding")
-            }.buttonStyle(.bordered)
+            HStack {
+                Button("Click") { play("click") }
+                Button("Ding") { play("ding") }
+            }
+            .buttonStyle(.bordered)
+            if let message {
+                Text(message)
+            }
+            Spacer()
         }
     }
 }
@@ -5096,26 +5110,38 @@ struct ContentView: View {
 ## Video
 
 The {% aTargetBlank
+"https://developer.apple.com/documentation/avfoundation/avplayer", "AVPlayer" %}
+class from the {% aTargetBlank
+"https://developer.apple.com/documentation/avkit", "AVKit" %} framework
+enables playing videos in several formats such as MP4.
+To render this player in SwiftUI, wrap it in a {% aTargetBlank
 "https://developer.apple.com/documentation/avkit/videoplayer", "VideoPlayer" %}
-view from the {% aTargetBlank "https://developer.apple.com/documentation/avkit",
-"AVKit" %} framework enables playing videos in several formats.
+view.
+
+To add a video file to the project:
+
+- Do not add the video file to `Assets.xcassets`.
+- Drag a video file into the Navigator. A dialog will appear.
+- In the "Destination" section, check the "Copy items if needed" checkbox.
+- In the "Add to target" section, check the app target checkbox.
+- Click the "Finish" button.
+
+The video can be played in Xcode by selecting the newly added file in
+the Navigator and clicking the play button at the bottom of the editor.
 
 ```swift
 import AVKit
 import SwiftUI
 
 struct ContentView: View {
-    // Use this approach to get video from the web.
+    // Use this approach to play video from the web.
     /*
      let url = URL(
          string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
      )
      */
 
-    // Use this approach to get video from a file in the project.
-    // Drag the video into the project.  A dialog will appear.
-    // Check the checkbox in "Add to targets" for the project.
-    // Do not put the video in Assets.xcassets!
+    // Use this approach to play video from a file in the project.
     let url = Bundle.main.url(forResource: "BigBuckBunny", withExtension: "mp4")
 
     var body: some View {
