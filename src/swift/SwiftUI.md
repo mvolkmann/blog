@@ -1867,10 +1867,12 @@ To change this, add the `alignment` attribute which can be set to
 
 ### ZStack
 
-This stacks views from bottom to top.
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/zstack",
+"ZStack" %} is a container view that, by default,
+stacks views from bottom to top.
 It is ideal for adding a background to a set of views.
 
-Here are three approaches to rendering text with a colored background,
+Here are three approaches to render text with a colored background,
 one of which uses a `ZStack`.
 
 ```swift
@@ -1883,17 +1885,53 @@ struct ContentView: View {
             let rect = Rectangle()
                 .fill(bgColor)
                 .frame(width: 50, height: 40)
+
+            // Approach #1: Use a ZStack.
             // Semicolons must separate multiple statements
             // on the same line.
             ZStack { rect; Text(text) }
+
+            // Approach #2: Use the background view modifier.
             Text(text)
                 .padding(10)
                 // Use a view as a background.
                 .background(Rectangle().foregroundColor(bgColor))
+
+            // Approach #3: Use the overlay view modifier.
             rect.overlay(Text(text))
         }
     }
 }
+```
+
+By default, all child views of a `ZStack` have a z-index of zero
+and they are stacked in the order in which they are specified.
+To change the display order without changing the order in which
+the child views are specified, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/zindex(_:)",
+"zIndex" %} view modifier to child views
+that should have a z-index other than zero.
+Pass the desired z-index, which can be positive or negative,
+to this view modifier.
+
+For example:
+
+<img alt="SwiftUI ZStack zIndex" style="width: 40%"
+      src="/blog/assets/SwiftUI-ZStack-zIndex.png?v={{pkg.version}}"
+      title="SwiftUI ZStack zIndex">
+
+```swift
+let size = 100.0
+ZStack(alignment: .topLeading) {
+    Color.red
+        .frame(width: size, height: size)
+    Color.green
+        .frame(width: size, height: size)
+        .padding(20.0)
+        .zIndex(1)
+    Color.blue
+        .frame(width: size, height: size)
+        .padding(40.0)
 ```
 
 ### LazyHStack
