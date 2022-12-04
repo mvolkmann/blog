@@ -1073,11 +1073,21 @@ struct ContentView: View {
 
 ## ViewBuilders
 
-Container views can be passed a special kind of closure
-as their last argument called a `ViewBuilder`.
-This uses list-oriented syntax to describe a list of
+A {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/viewbuilder",
+"ViewBuilder" %} is a parameter type that is function
+that takes no arguments and returns a `View`.
+It uses list-oriented syntax to describe a list of
 one to ten other views that are combined into a single view.
 Note that a `ForEach` view counts as a single view.
+
+A `ViewBuilder` is a kind of result builder.
+For more information on these, see the {% aTargetBlank
+"https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
+"Result builders proposal" %}.
+
+The last argument of container view initializers has the type `ViewBuilder`.
+This allows a list of child views to be supplied using a trailing closure.
 
 `ViewBuilder` blocks are parsed differently by the compiler
 than ordinary closures.
@@ -1101,10 +1111,68 @@ The list of views can match one of the following types:
   to render one of a set of possible views
   (The underscore indicates that this is a not a public API.)
 
-A `ViewBuilder` is a kind of result builder.
-For more information on these, see the {% aTargetBlank
-"https://github.com/apple/swift-evolution/blob/main/proposals/0289-result-builders.md",
-"Result builders proposal" %}.
+Functions that have a return type of `some View`
+must always return the same kind of view.
+When conditional logic is used inside a function
+to decide which kind of `View` to return,
+there are a few ways to satisfy this requirement, shown below.
+It is usually best to avoid writing functions
+that can can return multiple kinds of views.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    /*
+     // This doesn't compile because it can return two kinds of Views.
+     private func doesNotCompile(_ condition: Bool) -> some View {
+         if condition {
+             Text("Hello, World!")
+         } else {
+             Color.red.frame(width: 100, height: 100)
+         }
+     }
+     */
+
+    private func useGroup(_ condition: Bool) -> some View {
+        Group {
+            if condition {
+                Text("Hello, World!")
+            } else {
+                Color.red.frame(width: 100, height: 100)
+            }
+        }
+    }
+
+    private func useAnyView(_ condition: Bool) -> some View {
+        if condition {
+            return AnyView(Text("Hello, World!"))
+        } else {
+            return AnyView(Color.red.frame(width: 100, height: 100))
+        }
+    }
+
+    @ViewBuilder
+    private func useViewBuilder(_ condition: Bool) -> some View {
+        if condition {
+            Text("Hello, World!")
+        } else {
+            Color.red.frame(width: 100, height: 100)
+        }
+    }
+
+    var body: some View {
+        VStack {
+            useGroup(true)
+            useGroup(false)
+            useAnyView(true)
+            useAnyView(false)
+            useViewBuilder(true)
+            useViewBuilder(false)
+        }
+    }
+}
+```
 
 ## View Modifiers
 
