@@ -3988,9 +3988,13 @@ The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/hierarchicalshapestyle",
 "HierarchicalShapeStyle" %} struct defines the static properties
 `primary`, `secondary`, `tertiary`, and `quaternary`.
-These are defined by the OS and cannot be modified.
-They can be used to style many kinds of views.
-For example:
+They can be used to style text and shapes.
+They are defined by the OS and cannot be modified.
+The only difference I see between them is that
+they vary from dark gray to light gray.
+They are typically passed to the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)",
+"foregroundStyle" %} view modifier as shown below:
 
 ```swift
 Text("Primary").foregroundStyle(.primary)
