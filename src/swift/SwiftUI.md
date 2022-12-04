@@ -3982,7 +3982,30 @@ accessibility size.
 In apps that use dynamic fonts, test all screens at various font size
 preferences to verify that the resulting layout is acceptable.
 
-## HierarchicalShapeStyle
+## foregroundStyle
+
+They {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)",
+"foregroundStyle" %} view modifier is used style any kind of `View`
+that supports styling with a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/shapestyle", "ShapeStyle" %}.
+This includes `Text` and views that conform to the `Shape` protocol.
+For example, it can be used to add gradient color to text.
+
+<img alt="SwiftUI foregroundStyle gradient" style="width: 30%"
+  src="/blog/assets/SwiftUI-foregroundStyle-gradient.png?v={{pkg.version}}"
+  title="SwiftUI foregroundStyle gradient">
+
+```swift
+Text("Hello, World!")
+    .foregroundStyle(
+        .linearGradient(
+            colors: [.blue, .red],
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+    )
+```
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/hierarchicalshapestyle",
@@ -3995,6 +4018,13 @@ they vary from dark gray to light gray.
 They are typically passed to the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)",
 "foregroundStyle" %} view modifier as shown below:
+
+These are typically passed to the `foregroundStyle` view modifier
+as shown below:
+
+<img alt="SwiftUI foregroundStyle HierarchicalShapeStyle" style="width: 30%"
+  src="/blog/assets/SwiftUI-foregroundStyle-HierarchicalShapeStyle.png?v={{pkg.version}}"
+  title="SwiftUI foregroundStyle HierarchicalShapeStyle">
 
 ```swift
 Text("Primary").foregroundStyle(.primary)
