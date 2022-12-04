@@ -843,6 +843,17 @@ Resume Preview to see the change.
 This does not affect `Toggle` views which required using the view modifier
 `.toggleStyle(SwitchToggleStyle(tint: someColor))`.
 
+### Frames
+
+To specify the width, height, and alignment of a view, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/frame(width:height:alignment:)",
+"frame" %} view modifier.
+The frame of a view is only considered for determining layout.
+To clip a view so any content outside its frame is hidden,
+apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/clipped(antialiased:)",
+"clipped" %} view modifier.
+
 ### Constants
 
 Custom views often make use of constants.
@@ -1139,6 +1150,11 @@ Commonly used view modifiers include:
 - `opacity(Double)`
 - `overlay(ShapeStyle)`
 - `padding(CGFloat)`
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
+"background" %} view modifier `content` argument is a `ViewBuilder` function
+that can return any kind of `View` including a `Color`, `Shape`, or `Image`.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
@@ -4003,9 +4019,13 @@ rather than creating views whose code is long and deeply nested.
 
 ## Drawing Views
 
-The `Shape` protocol inherits from the `View` protocol
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/shape",
+"Shape" %} protocol inherits from the `View` protocol
 and there are many provided views that inherit from `Shape`.
-Examples include `Circle` and `Rectangle`.
+Examples include {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/circle", "Circle" %} and
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/rectangle",
+"Rectangle" %}.
 
 By default, all views that inherit from `Shape` are
 filled with the foreground color of their parent view.
