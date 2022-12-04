@@ -4034,14 +4034,42 @@ It takes an object of a type that implements the `ShapeStyle` protocol.
 Examples include `Color`, `AngularGradient`, `LinearGradient`,
 `RadialGradient`, and `ImagePaint`.
 
-An outline can be added to any `Shape` with the `.stroke` view modifier.
-
-Many of these views support both the `border` and `strokeBorder` view modifiers.
+An outline can be added to any `Shape` with the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/shape/stroke(linewidth:)",
+"stroke" %} and {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/insettableshape/strokeborder(_:style:antialiased:)",
+"strokeBorder" %} view modifiers.
 The difference between these becomes apparent
 when the border width is greater than one.
-`border` is drawn so it is centered on the edge of the shape
+`stroke` is drawn so it is centered on the edge of the shape
 with half inside and half outside.
-`strokeBorder` is drawn so none of the border is outside of the shape.
+`strokeBorder` is inset so none of the stroke is outside of the shape.
+
+To fill a shape apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/shape/fill(style:)",
+"fill" %} view modifier.
+
+It is not possible to apply both the `fill` view modifier
+and either the `stroke` or `strokeBorder` view modifier.
+One way to render a shape is filled AND has a border
+is to render it twice in a `ZStack` where
+the bottom shape is filled and the top shape has a stroke.
+Another way is to render the shape once with a stroke
+and add a background version of the shape that is filled.
+Examples of both approaches follow:
+
+```swift
+ZStack {
+    Circle().fill(Color.yellow)
+    Circle().stroke(.red, lineWidth: 10)
+}
+.frame(width: 100, height: 100)
+
+Circle()
+    .stroke(.red, lineWidth: 10)
+    .background(Circle().fill(.yellow))
+    .frame(width: 100, height: 100)
+```
 
 The following example code draws several shapes:
 
