@@ -5093,6 +5093,49 @@ struct ContentView: View {
 }
 ```
 
+## Video
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/avkit/videoplayer", "VideoPlayer" %}
+view from the {% aTargetBlank "https://developer.apple.com/documentation/avkit",
+"AVKit" %} framework enables playing videos in several formats.
+
+```swift
+import AVKit
+import SwiftUI
+
+struct ContentView: View {
+    // Use this approach to get video from the web.
+    /*
+     let url = URL(
+         string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+     )
+     */
+
+    // Use this approach to get video from a file in the project.
+    // Drag the video into the project.  A dialog will appear.
+    // Check the checkbox in "Add to targets" for the project.
+    // Do not put the video in Assets.xcassets!
+    let url = Bundle.main.url(forResource: "BigBuckBunny", withExtension: "mp4")
+
+    var body: some View {
+        VStack {
+            Text("Big Buck Bunny").font(.largeTitle)
+            if let url {
+                VideoPlayer(player: AVPlayer(url: url))
+                    .frame(height: 300)
+            } else {
+                Text("video not found")
+            }
+        }
+        .padding()
+        .onAppear {
+            print("url =", url)
+        }
+    }
+}
+```
+
 ## Dialing Phone
 
 To initiate making a phone call using the Phone app,
