@@ -74,3 +74,10 @@ struct ContentView: View {
 
 One way to begin creating a game is to create a new project in Xcode
 using the "Game" template. This uses UIKit rather than SwiftUI.
+
+## Resources
+
+- {% aTargetBlank "https://www.youtube.com/watch?v=TJfh8wXbfEw",
+  "Building a SpriteKit game with physics, particles, and shaders" %}
+- {% aTargetBlank "https://www.youtube.com/watch?v=0-lM51yI-PA",
+  "Building a space shooter with SpriteKit and Codable" %}
