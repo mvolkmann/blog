@@ -6479,7 +6479,7 @@ can be used to get a rough idea of
 the amount of screen space available in those directions.
 The values of these variables can change when a device
 is rotated between portrait and landscape mode.
-The values of these variables is either `.regular` or `.compact`.
+The value of these variables is either `.regular` or `.compact`.
 
 To make the values of these variables available in a custom view:
 
@@ -6504,6 +6504,44 @@ if verticalSizeClass == .compact {
     Text("Compact")
 } else {
     Text("Regular")
+}
+```
+
+## ViewThatFits
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/viewthatfits",
+"ViewThatFits" %} view takes any number of child views
+and renders only the first one that fits in its parent frame.
+This can often be used in place of evaluating size classes
+to determine the best way to layout a set of views.
+
+The example below renders ten buttons.
+If there is enough room to lay them out in a single row, it does that.
+Otherwise it lays them out vertically.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    private let labels = [
+        "One", "Two", "Three", "Four", "Five",
+        "Six", "Seven", "Eight", "Nine", "Ten"
+    ]
+
+    private func getContent() -> some View {
+        ForEach(labels, id: \.self) {
+            Button($0) { print("got tap") }
+        }
+    }
+
+    var body: some View {
+        ViewThatFits {
+            HStack(content: getContent)
+            VStack(content: getContent)
+        }
+        .buttonStyle(.bordered)
+    }
 }
 ```
 
