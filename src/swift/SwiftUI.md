@@ -2287,14 +2287,20 @@ ControlGroup {
 
 ### ScrollView
 
-This creates a scrollable view that is vertical by default,
-but can be changed to horizontal.
-It occupies all the space offered to it.
-Scrolling reveals additional child views when all of them do not fit.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scrollview",
+"ScrollView" %} view creates a scrollable view where
+scrolling reveals additional child views when they do not all fit.
 
-To hide the scroll bars (scroll indicators),
-pass the `showIndicators` argument with a value of `false`
-to the `ScrollView` initializer.
+Scrolling is vertical by default, but can be changed to horizontal
+by passing `.horizontal` to the initializer.
+To enable scrolling in both directions,
+pass the array `[.horizontal, .vertical]`.
+
+A `ScrollView` occupies all the space offered to it.
+
+To hide the scroll bars (indicators),
+pass the `showIndicators` argument with a value of `false` to the initializer.
 
 Another way to gain the ability to scroll is to use a `List` view.
 
@@ -2303,7 +2309,14 @@ descriptions of `LazyHStack` and `LazyVStack`.
 
 ### ScrollViewReader
 
-This is a view that supports programmatic scrolling.
+To scroll programmatically, use {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scrollviewreader",
+"ScrollViewReader" %} and the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scrollviewproxy/scrollto(_:anchor:)",
+"scrollTo" %} method as shown below.
+Note the use of the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/withanimation(_:_:)",
+"withAnimation" %} function to add animation to the programmatic scrolling.
 
 <img alt="SwiftUI ScrollViewReader" style="width: 40%"
     src="/blog/assets/SwiftUI-ScrollViewReader.png?v={{pkg.version}}"
@@ -2315,8 +2328,8 @@ struct ContentView: View {
     @Namespace var bottomId
 
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
+        ScrollView {
+            ScrollViewReader { proxy in
                 Button("Scroll to Bottom") {
                     withAnimation {
                         proxy.scrollTo(bottomId)

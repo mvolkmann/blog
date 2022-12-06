@@ -1546,6 +1546,17 @@ func update<T: CloudKitable>(item: T) async throws { ... }
 func update(item: some CloudKitable) async throws { ... }
 ```
 
+## some and any keywords
+
+TODO: Add more detail on these!
+
+These are equivalent:
+
+```swift
+func myFunction<S: MyProtocol>(arg: S) { ... }
+func myFunction(arg: some MyProtocol) { ... }
+```
+
 ## Built-in Collection Types
 
 Swift provides several generic collection types.
