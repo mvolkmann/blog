@@ -1546,15 +1546,127 @@ func update<T: CloudKitable>(item: T) async throws { ... }
 func update(item: some CloudKitable) async throws { ... }
 ```
 
-## some and any keywords
+## some keyword
 
-TODO: Add more detail on these!
+The `some` keyword is used to define an "opaque type"
+whose actual type will be known at compile-time.
+Opaque types are often uses for
+function return types and computed property types.
+These can choose the actual type that will be returned.
+Callers of such functions and computed properties
+do not get to make that decision.
 
-These are equivalent:
+For example, in SwiftUI every struct that conforms to the `View` protocol
+must define a computed property named `body` whose type is `some View`.
+This means that the value returned will be
+of some type that conforms to the `View` protocol.
+It must be possible to determine at compile-time
+the actual type that will be returned.
+The code cannot, for example, use conditional logic to
+sometimes return a `Button` and other times return a `Picker`.
+
+Below are three versions of the same function.
+Two of them compile and one does not.
+
+```swift
+    // This compiles because the function
+    // does return an instance of the Text struct.
+    private func getText(_ text: String) -> Text {
+        Text(text)
+    }
+
+    // This does not compile because the `border` view modifier
+    // does not return an instance of the Text struct.
+    private func getText(_ text: String) -> Text {
+        Text(text).border(.red)
+    }
+
+    // This compiles because the `border` view modifier
+    // does return some kind of View.
+    private func getText(_ text: String) -> some View {
+        Text(text).border(.red)
+    }
+```
+
+Adding the `some` keyword to a function parameter type
+is an alternative to specifying a generic type.
+It is typically preferred because it is shorter.
+For example, these are equivalent:
 
 ```swift
 func myFunction<S: MyProtocol>(arg: S) { ... }
 func myFunction(arg: some MyProtocol) { ... }
+```
+
+Generic types and opaque types are opposites.
+In a function that returns a generic type,
+the caller chooses the concrete type.
+In a function that returns an opaque type,
+the function chooses the concrete type, not the caller.
+For example:
+
+```swift
+// This function takes and returns a generic type.
+func biggest<T>(_ first: T, _ second: T) -> T where T: Comparable {
+    return first >= second ? first : second
+}
+print(biggest(3, 4)) // T type will be Int; prints 4
+print(biggest("foo", "bar")) // T type will be String; prints foo
+
+// This function returns an opaque type.
+func getView() -> some View {
+    Text("I choose Text!")
+}
+```
+
+## any keyword
+
+The `any` keyword is placed before a protocol name
+and can be used for a function parameter type or return type.
+It signals opting-in to runtime determination of the actual type
+which generates more code and is slower than compile-time determination.
+For example:
+
+```swift
+// The Int and String types both conform to the CustomStringConvertible
+// protocol which requires having a `description` property.
+private func stringLength(_ value: any CustomStringConvertible) -> Int {
+    return value.description.count
+}
+
+print("\(stringLength("test"))")
+print("\(stringLength(123))")
+
+// When a function return type uses the `any` keyword,
+// the return values can have different types.
+// This prevents knowing the concrete type at compile-time
+// and is slower.
+// The Int and String types both conform to the Comparable protocol
+// which requires implementing the operators < and == as static methods.
+private func greatOne(_ condition: Bool) -> any Comparable {
+    if condition {
+        return 99 // Int
+    } else {
+        return "Gretzky" // String
+    }
+}
+
+// When the return type uses the `some` keyword,
+// all return values must have the same type.
+// This allows knowing the concrete type at compile-time
+// and is faster.
+private func greatTwo(_ condition: Bool) -> some Comparable {
+    if condition {
+        return "99" // String
+    } else {
+        return "Gretzky" // String
+    }
+}
+
+print("\(greatOne(true))")
+print("\(greatOne(false))")
+print("\(greatTwo(true))")
+print("\(greatTwo(false))")
 ```
 
 ## Built-in Collection Types
@@ -2981,21 +3093,8 @@ This includes constant (`let`) types, variable (`var`) types,
 collection element types, function parameter types, function return types,
 and object property types.
 
-Currently protocols that have "associated type requirements"
-cannot be used in place of a type.
-For progress on removing this restriction, see the {% aTargetBlank
-"https://github.com/apple/swift-evolution/blob/main/proposals/0309-unlock-existential-types-for-all-protocols.md",
-"Unlock existentials for all protocols" %} proposal.
-
 Unlike in method implementations, methods described in protocols
 cannot specify default parameter values.
-
-Default method implementations cannot be defined in a protocol,
-but they can be defined in an `extension` of the protocol.
-When this is done for a given method, types that
-conform to the protocol are not required to implement the method.
-However, can implement the method to
-override the implementation specified in the extension.
 
 Examples of commonly used built-in protocols include `Animatable`,
 `Collection`, `Comparable`, `CustomStringConvertible`, `Equatable`, `Hashable`,
@@ -3008,8 +3107,13 @@ of the `Comparable`, `Equatable`, and `Hashable` built-in protocols.
 All that is required is to state that a type conforms to the protocol
 and only define properties with types that also conform to the protocol.
 
+Protocols can use the type name `Self` to refer to
+the actual type that conforms to the protocol.
+`Self` can also be used to refer to static properties and methods
+of a struct, class, or enum.
+
 Xcode can add stubs for a protocol to a type that claims to conform to it.
-Click the red circle to the left of the error message
+To trigger this, click the red circle to the left of the error message
 "Type does not conform to protocol" and then click the "Fix" button.
 
 The following code demonstrates defining and using a custom protocol.
@@ -3129,15 +3233,27 @@ print(demo.instanceMutatingMethod(a1: 1, a2: 2)) // 3 + 1 + 2 = 6
 print(demo.instanceSetRequired) // 6
 ```
 
-Extensions, described in detail later, can be used to add
-default method implementations to protocols.
-This is used to define methods like `filter` on the `Sequence` protocol
-that is conformed to by concrete types like
+In summary, when a type conforms to a protocol it can mean two things:
+
+1. The type may be required to implement some things.
+2. The type may be given implementations of some things through extensions.
+
+### Protocol Extensions
+
+Default method implementations cannot be defined in a protocol, but
+they can be defined in an `extension` (described later) of the protocol.
+When this is done for a given method, types that
+conform to the protocol are not required to implement the method.
+However, can implement the method to
+override the implementation specified in the extension.
+
+A protocol extension is used to define methods like `filter`
+on the `Sequence` protocol that is conformed to by concrete types like
 `Array`, `Dictionary`, `Range`, `String`, and more.
 
-For example, we can define a default implementation
-of the `Demoable` protocol `instanceMethod` method so types
-that conform to the protocol are not required to implement that method.
+We can define a default implementation of the
+`Demoable` protocol `instanceMethod` method (see code above)
+so types that conform to the protocol are not required to implement that method.
 
 ```swift
 extension Demoable {
@@ -3152,10 +3268,12 @@ extension Demoable {
 }
 ```
 
+### where Clauses
+
 The type of a function parameter can be specified to be anything
 that conforms to a list of protocols using the `where` keyword
 with the `&` operator between each protocol name.
-For example:
+For example, see the `doThis` function below.
 
 ```swift
 protocol HasSize {
@@ -3182,11 +3300,9 @@ func doThat(a p: MyType) {
 doThat(a: Drink(size: 2)) // Drink has size 2
 ```
 
-Protocols can use the type name `Self` to refer to
-the actual type that conforms to the protocol.
-This is the only place where the type `Self` can be used.
+### Protocol Associated Types
 
-Protocols that use generic types declare them in a different way
+Protocols that use generic types must declare them in a different way
 than other types do.
 Rather than following the name with type parameters in angle brackets,
 the first lines in the protocol body begin with the `associatedtype` keyword
@@ -3194,10 +3310,7 @@ followed by a type parameter name and optional constraints.
 Constraints can be written as `where TypeParamName: SomeProtocol`
 or just `: SomeProtocol`.
 
-In summary, when a type conforms to a protocol it can mean two things:
-
-1. The type may be required to implement some things.
-2. The type may be given implementations of some things through extensions.
+TODO: Add more detail!
 
 ## Extensions
 
@@ -4694,8 +4807,8 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Why do protocols use a different syntax for type parameters
   that functions, structs, and classes?
-  They use the `associatedtype` keyword
-  instead of placing type parameters in angle brackets.
+  They use the `associatedtype` keyword instead of
+  the generic syntax of placing type parameters in angle brackets.
 
 - Can the `set` part of a computed property reject a potential change?
 
