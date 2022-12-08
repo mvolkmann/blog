@@ -1599,10 +1599,17 @@ func myFunction(arg: some MyProtocol) { ... }
 ```
 
 Generic types and opaque types are opposites.
+
 In a function that returns a generic type,
 the caller chooses the concrete type.
+
 In a function that returns an opaque type,
 the function chooses the concrete type, not the caller.
+However, the concrete type is not exposed to the caller.
+This avoids exposing unnecessary details and allows the function
+to be modified to return a different concrete type later
+without requiring changes in callers.
+
 For example:
 
 ```swift
@@ -1614,6 +1621,8 @@ print(biggest(3, 4)) // T type will be Int; prints 4
 print(biggest("foo", "bar")) // T type will be String; prints foo
 
 // This function returns an opaque type.
+// Callers know that some kind of `View` will be returned,
+// but not which one.
 func getView() -> some View {
     Text("I choose Text!")
 }
@@ -1625,6 +1634,11 @@ The `any` keyword is placed before a protocol name
 and can be used for a function parameter type or return type.
 It signals opting-in to runtime determination of the actual type
 which generates more code and is slower than compile-time determination.
+Callers choose concrete types of parameters
+based on the argument types they pass.
+Callers choose concrete return types
+based on how the return value is used,
+such as assigning to a variable of a certain type.
 For example:
 
 ```swift
@@ -3302,11 +3316,15 @@ doThat(a: Drink(size: 2)) // Drink has size 2
 
 ### Protocol Associated Types
 
-Protocols that use generic types must declare them in a different way
-than other types do.
+Protocols that use generic types must declare them
+in a different way than other types do.
 Rather than following the name with type parameters in angle brackets,
 the first lines in the protocol body begin with the `associatedtype` keyword
 followed by a type parameter name and optional constraints.
+This was a syntax choice made by the Swift team.
+They could have chosen to use the same generic syntax
+that is used in structs and classes.
+
 Constraints can be written as `where TypeParamName: SomeProtocol`
 or just `: SomeProtocol`.
 
