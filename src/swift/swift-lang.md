@@ -1523,6 +1523,44 @@ print(s.pop()) // Larry
 print(s.pop()) // Moe
 ```
 
+The following code demonstrates implementing and using a generic linked list:
+
+```swift
+class Node<T> {
+    var value: T
+    var next: Node<T>? // cannot use Self
+
+    init(value: T, next: Node<T>? = nil) {
+        self.value = value
+        self.next = next
+    }
+
+    func dump() {
+        print("\(value)")
+        if let next = next {
+            next.dump()
+        }
+    }
+}
+
+typealias INode = Node<Int>
+var node1 = INode(value: 1)
+var node2 = INode(value: 2)
+node1.next = node2
+var node3 = INode(value: 3)
+node2.next = node3
+// Alternate version of the previous 5 lines.
+// var node1 = INode(value: 1, next: INode(value: 2, next: INode(value: 3)))
+node1.dump()
+
+typealias SNode = Node<String>
+var fruitList = SNode(
+    value: "apple",
+    next: SNode(value: "banana", next: SNode(value: "cherry"))
+)
+fruitList.dump()
+```
+
 The type of a type parameter can be constrained to only types
 that conform to given protocols using the `where` keyword.
 For example:
@@ -1546,7 +1584,20 @@ func update<T: CloudKitable>(item: T) async throws { ... }
 func update(item: some CloudKitable) async throws { ... }
 ```
 
-## some keyword
+## Opaque and Existential Types
+
+Opaque types are defined with the `some` keyword.
+
+Existential types are defined with the `any` keyword.
+
+|                      | `some`                                                           | `any`                                                                 |
+| -------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------- |
+| variable type        |                                                                  |                                                                       |
+| property type        |                                                                  |                                                                       |
+| parameter type       |                                                                  |                                                                       |
+| function return type | function chooses type; every call returns the same concrete type | caller chooses type; can every call return a different concrete type? |
+
+### Opaque Types (some keyword)
 
 The `some` keyword is used to define an "opaque type"
 whose actual type will be known at compile-time.
@@ -1628,7 +1679,7 @@ func getView() -> some View {
 }
 ```
 
-## any keyword
+### Existential Types (any keyword)
 
 The `any` keyword is placed before a protocol name
 and can be used for a function parameter type or return type.
@@ -3258,7 +3309,7 @@ Default method implementations cannot be defined in a protocol, but
 they can be defined in an `extension` (described later) of the protocol.
 When this is done for a given method, types that
 conform to the protocol are not required to implement the method.
-However, can implement the method to
+However, they can implement the method to
 override the implementation specified in the extension.
 
 A protocol extension is used to define methods like `filter`
