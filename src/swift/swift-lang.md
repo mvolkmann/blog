@@ -3316,8 +3316,8 @@ doThat(a: Drink(size: 2)) // Drink has size 2
 
 ### Protocol Associated Types
 
-Protocols that use generic types must declare them
-in a different way than other types do.
+Associated types are generic types for protocols.
+Protocols must declare generic types in a different way than other types do.
 Rather than following the name with type parameters in angle brackets,
 the first lines in the protocol body begin with the `associatedtype` keyword
 followed by a type parameter name and optional constraints.
