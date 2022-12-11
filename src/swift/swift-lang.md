@@ -1600,8 +1600,12 @@ Existential types are defined with the `any` keyword.
 
 ### Opaque Types (some keyword)
 
-The `some` keyword is used to define an "opaque type"
+The `some` keyword precedes the name of a protocol
+and is used to define an "opaque type"
 whose actual type will be known at compile-time.
+The syntax `some MyProtocol` means
+"some specific type that conforms to `MyProtocol`".
+
 Opaque types are often uses for
 function return types and computed property types.
 These can choose the actual type that will be returned.
@@ -3518,15 +3522,15 @@ they can be defined in an `extension` of the protocol.
 When this is done for a given method, types that
 conform to the protocol are not required to implement the method.
 However, they can implement the method to
-override the implementation specified in the extension.
+override the implementation defined in the extension.
 
-A protocol extension is used to define methods like `filter`
-on the `Sequence` protocol that is conformed to by concrete types like
-`Array`, `Dictionary`, `Range`, `String`, and more.
+In the `Sequence` protocol that is conformed to by concrete types like
+`Array`, `Dictionary`, `Range`, and `String`,
+a protocol extension is used to define methods like `filter`.
 
 We can define a default implementation of the
 `Demoable` protocol `instanceMethod` method (see code above)
-so types that conform to the protocol are not required to implement that method.
+so types that conform to the protocol are not required to implement it.
 
 ```swift
 extension Demoable {
@@ -3575,22 +3579,25 @@ doThat(a: Drink(size: 2)) // Drink has size 2
 
 ### Protocol Associated Types
 
-Many other programming languages support "abstract types" where some of
+Many programming languages support "abstract types" where some of
 their methods are only described by a signature with no implementation.
 Abstract types cannot be instantiated.
 Other types inherit from abstract types and these
 these define implementations for the abstract methods.
 
-Swift does not support abstract types, but protocols can play that role.
+A Swift `struct` or `class` cannot omit the implementation of its
+computed properties and methods, and so cannot be abstract.
+However, protocols can play the role of abstract types.
 
 Swift protocols do not support generic parameters using the
 angle bracket syntax that is supported for structs and classes.
-Instead, associated types take the place of generics in protocols.
-These are defined in the first lines within a protocol body
+Instead, "associated types" take the place of generics in protocols.
+These are defined in the beginning of a protocol body
 using the `associatedtype` keyword followed by a type parameter name.
 These type parameter names can be used within the protocol body
 to describe computed property types, method parameter types,
 and method return types.
+In summary, a protocol is generic if it has any associated types.
 
 Using the `associatedtype` keyword in protocols instead of
 the generic syntax used by structs and classes
@@ -3628,14 +3635,54 @@ for tree nodes that can hold values of any type.
 protocol TreeNode {
     associatedtype Item
 
-    var left: TreeNode<Item>? { get set }
-    var right: TreeNode<Item>? { get set }
+    var value: Item { get set }
+    var left: Self? { get set }
+    var right: Self? { get set }
 
-    TODO: FINISH THIS EXAMPLE! See playground.
+    func printDepthFirst(level: Int)
 }
+
+extension TreeNode {
+    func printDepthFirst(level: Int = 0) {
+        let indent = String(repeating: " ", count: level * 2)
+        print("\(indent)\(value)")
+        if let left { left.printDepthFirst(level: level + 1) }
+        if let right { right.printDepthFirst(level: level + 1) }
+    }
+}
+
+// Must be "final" in order to use own type for properties.
+final class ITreeNode: TreeNode {
+    var value: Int // determines type of "Item" in TreeNode
+    var left: ITreeNode?
+    var right: ITreeNode?
+
+    init(
+        _ value: Item,
+        left: ITreeNode? = nil,
+        right: ITreeNode? = nil
+    ) {
+        self.value = value
+        self.left = left
+        self.right = right
+    }
+}
+
+var node1 = ITreeNode(1)
+var node2 = ITreeNode(2, left: ITreeNode(3), right: ITreeNode(4))
+var node3 = ITreeNode(5, left: nil, right: ITreeNode(6))
+node1.left = node2
+node1.right = node3
+node1.printDepthFirst()
+// 1
+//   2
+//     3
+//     4
+//   5
+//     6
 ```
 
-Constraints can be written as `where TypeParamName: SomeProtocol`
+Type constraints can be written as `where TypeParamName: SomeProtocol`
 or just `: SomeProtocol`.
 
 TODO: Add more detail!
