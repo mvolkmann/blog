@@ -2082,9 +2082,20 @@ struct ContentView: View {
 
   // Describe the characteristics of each grid.
   private static let gridItem = GridItem(
-      // This specifies the grid height in LazyHGrid
-      // or the grid width in LazyVGrid.
+      // This specifies the grid width in LazyVGrid.
+      // or the grid height in LazyHGrid.
       .fixed(40),
+
+      // This specifies that the width of each column
+      // should be based on the total size available
+      // AND the width of the views in each column.
+      // Minimum and maximum widths can be specified.
+      // .flexible()
+
+      // This is similar to `flexible`, but allows
+      // multiple views to be placed in the same column.
+      // .adaptive(minimum: 100)
+
       // This specifies the vertical spacing in LazyHGrid
       // or horizontal spacing in LazyVGrid.
       spacing: 10,
