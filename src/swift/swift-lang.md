@@ -3608,6 +3608,12 @@ that they wish to return.
 In all other cases where protocol types are used,
 the `any` keyword should be used.
 
+In many apps the `any` keyword is not needed and the `some` keyword
+is only used in context of SwiftUI custom views because:
+
+- Many apps do not require writing and using custom protocols.
+- Many custom protocols do not have associated types.
+
 ### Opaque Types (some keyword)
 
 The `some` keyword precedes the name of a protocol
