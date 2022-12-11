@@ -1092,7 +1092,8 @@ let name = "Mark"
 print(name[name.index(name.startIndex, offsetBy: 2)]) // "r"
 ```
 
-Fortunately we can override the subscript operator to make this easier.
+Fortunately we can override the subscript operator in an `extension`
+to make this easier.
 
 ```swift
 extension String: BidirectionalCollection {
@@ -3138,302 +3139,6 @@ clean up after actions taken in an initializer.
 It can perform cleanup of actions taken by any method.
 A better name would have been "cleanup" or "onDestroy".
 
-## Protocols
-
-A protocol is like an interface in other programming languages.
-It can describe type properties, instance properties,
-type method signatures, and instance method signatures.
-Properties can be constant (`let`) or variable (`var`).
-
-Other types (structs, classes, and enums)
-can declare that they conform to protocols by following their name
-with a colon and a comma-separated list of protocol names.
-The same syntax can be used by a protocol
-to inherit the requirements of other protocols.
-
-A protocol defines a type that can be used in many places
-where concrete types can appear to state that any value
-whose concrete type conforms to the protocol is acceptable.
-This includes constant (`let`) types, variable (`var`) types,
-collection element types, function parameter types, function return types,
-and object property types.
-
-Unlike in method implementations, methods described in protocols
-cannot specify default parameter values.
-
-Examples of commonly used built-in protocols include `Animatable`,
-`Collection`, `Comparable`, `CustomStringConvertible`, `Equatable`, `Hashable`,
-`Identifiable`, `Numeric`, `ObservedObject`, `Sequence`, and `View`.
-Other built-in protocols that may be encountered include
-`App`, `Scene`, `Shape`, and `ViewModifier`.
-
-For many custom types Swift can provide a "synthesized implementation"
-of the `Comparable`, `Equatable`, and `Hashable` built-in protocols.
-All that is required is to state that a type conforms to the protocol
-and only define properties with types that also conform to the protocol.
-
-Protocols can use the type name `Self` to refer to
-the actual type that conforms to the protocol.
-`Self` can also be used to refer to static properties and methods
-of a struct, class, or enum.
-
-Xcode can add stubs for a protocol to a type that claims to conform to it.
-To trigger this, click the red circle to the left of the error message
-"Type does not conform to protocol" and then click the "Fix" button.
-
-The following code demonstrates defining and using a custom protocol.
-
-```swift
-protocol Shape {
-    var area: Double { get } // a computed property
-}
-
-// Structs can conform to protocols,
-// but cannot inherit from other structs or classes.
-struct Triangle: Shape {
-    var base: Double
-    var height: Double
-
-    init(base: Double, height: Double) {
-        self.base = base
-        self.height = height
-    }
-
-    var getArea: Double { base * height * 0.5 }
-}
-
-// Classes can inherit from another class and
-// they can conform to any number of protocols.
-class Rectangle: Shape {
-    var height: Double
-    var width: Double
-
-    init(width: Double, height: Double) {
-        self.width = width
-        self.height = height
-    }
-
-    var area: Double { width * height }
-}
-
-// Any object that conforms to the Shape protocol
-// can be passed to this function.
-// Calling getArea on a Shape demonstrates polymorphism because
-// what the call does is determined by the receiver type.
-func logShape(_ shape: Shape) {
-    print("area = \(shape.area)")
-}
-
-let t = Triangle(base: 3, height: 4)
-let r = Rectangle(width: 4, height: 5)
-logShape(t) // area = 6.0
-logShape(r) // area = 20.0
-
-let shapes: [Shape] = [c, r]
-let totalArea = shapes.reduce(0) { acc, shape in acc + shape.area }
-print("\(totalArea)") // 26.0
-```
-
-The following contrived example demonstrates many of the features of protocols.
-
-```swift
-protocol Demoable {
-    static var typeSetOptional: Int { get }
-    static var typeSetRequired: Int { get set }
-
-    static func typeMethod(a1 p1: Int, a2 p2: Int) -> Int
-
-    var instanceSetOptional: Int { get }
-    var instanceSetRequired: Int { get set }
-
-    init(a1 p1: Int, a2 p2: Int)
-
-    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int
-    mutating func instanceMutatingMethod(a1 p1: Int, a2 p2: Int) -> Int
-}
-
-struct Demo: Demoable {
-    // This property can be a constant since "set" is optional.
-    static let typeSetOptional: Int = 1
-
-    // This property cannot be a constant since "set" is required.
-    static var typeSetRequired: Int = 2
-
-    static func typeMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        return p1 + p2
-    }
-
-    // This property can be a constant since "set" is optional.
-    let instanceSetOptional: Int = 3
-
-    // This property cannot be a constant since "set" is required.
-    var instanceSetRequired: Int
-
-    init(a1 p1: Int, a2 p2: Int) {
-        // Don't need to initialize instanceSetOptional
-        // because it is a constant.
-        instanceSetRequired = p1 + p2
-    }
-
-    // This method cannot mutate properties of this object.
-    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        // The next line is not allowed because
-        // this is not a "mutating" method.
-        //instanceSetRequired = p1 + p2
-        return instanceSetOptional + instanceSetRequired + p1 + p2
-    }
-
-    // This method can mutate properties of this object.
-    mutating func instanceMutatingMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        instanceSetRequired = instanceSetOptional + p1 + p2
-        return instanceSetRequired
-    }
-}
-
-var demo = Demo(a1: 7, a2: 8)
-print(Demo.typeSetOptional) // 1
-print(Demo.typeSetRequired) // 2
-print(demo.instanceSetOptional) // 3
-print(demo.instanceSetRequired) // 7 + 8 = 15
-print(demo.instanceMethod(a1: 1, a2: 2)) // 3 + 15 + 1 + 2 = 21
-print(demo.instanceMutatingMethod(a1: 1, a2: 2)) // 3 + 1 + 2 = 6
-print(demo.instanceSetRequired) // 6
-```
-
-In summary, when a type conforms to a protocol it can mean two things:
-
-1. The type may be required to implement some things.
-2. The type may be given implementations of some things through extensions.
-
-### Protocol Extensions
-
-Default method implementations cannot be defined in a protocol, but
-they can be defined in an `extension` (described later) of the protocol.
-When this is done for a given method, types that
-conform to the protocol are not required to implement the method.
-However, they can implement the method to
-override the implementation specified in the extension.
-
-A protocol extension is used to define methods like `filter`
-on the `Sequence` protocol that is conformed to by concrete types like
-`Array`, `Dictionary`, `Range`, `String`, and more.
-
-We can define a default implementation of the
-`Demoable` protocol `instanceMethod` method (see code above)
-so types that conform to the protocol are not required to implement that method.
-
-```swift
-extension Demoable {
-    // This property now has a default implementation
-    // that is a computed property.
-    var instanceSetOptional: Int { instanceSetRequired * 2 }
-
-    // This instance method now has a default implementation.
-    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
-        return instanceSetOptional + instanceSetRequired + p1 + p2
-    }
-}
-```
-
-### where Clauses
-
-The type of a function parameter can be specified to be anything
-that conforms to a list of protocols using the `where` keyword
-with the `&` operator between each protocol name.
-For example, see the `doThis` function below.
-
-```swift
-protocol HasSize {
-    var size: Int { get }
-}
-
-struct Drink: CustomStringConvertible, HasSize {
-    var description: String { "Drink has size \(size)"}
-    var size: Int;
-}
-
-// T can be any type that conforms to the
-// CustomStringConvertible and HasSize protocols.
-func doThis<T>(a p: T) where T: CustomStringConvertible & HasSize {
-    print(p)
-}
-doThis(a: Drink(size: 1)) // Drink has size 1
-
-// Alternate way to implement the code above is to use a typealias.
-typealias MyType = CustomStringConvertible & HasSize
-func doThat(a p: MyType) {
-    print(p)
-}
-doThat(a: Drink(size: 2)) // Drink has size 2
-```
-
-### Protocol Associated Types
-
-Many other programming languages support "abstract types" where some of
-their methods are only described by a signature with no implementation.
-Abstract types cannot be instantiated.
-Other types inherit from abstract types and these
-these define implementations for the abstract methods.
-
-Swift does not support abstract types, but protocols can play that role.
-
-Swift protocols do not support generic parameters using the
-angle bracket syntax that is supported for structs and classes.
-Instead, associated types take the place of generics in protocols.
-These are defined in the first lines within a protocol body
-using the `associatedtype` keyword followed by a type parameter name.
-These type parameter names can be used within the protocol body
-to describe computed property types, method parameter types,
-and method return types.
-
-Using the `associatedtype` keyword in protocols instead of
-the generic syntax used by structs and classes
-was a syntax choice made by the Swift team.
-They could have chosen to use the same generic syntax.
-
-Associated types are often used in protocols that describe kinds of collections.
-The Swift Standard Library collection hierarchy is described in the
-<a href="#built-in-collection-types">Built-in Collection Types</a>
-section above.
-It defines many collections types such as `Array`, `Dictionary`, and `Set`.
-Each of these conform to the `Collection` protocol
-which has the following associated types:
-
-- `Element`: type of the elements within the collection
-- `Index`: type that describes the position of an element
-- `Indices`: type used to find an element
-- `Iterator`: type used to iterate over the elements
-- `SubSequence`: type that represents a subsequence of elements
-
-In the `Array` struct, `Element` is a generic parameter type
-and the remaining four associated types are defined as follows:
-
-```swift
-public typealias Index = Int
-public typealias Indices = Range<Int>
-public typealias Iterator = IndexingIterator<[Element]>
-public typealias SubSequence = ArraySlice<Element>
-```
-
-The following code demonstrates defining a protocol
-for tree nodes that can hold values of any type.
-
-```swift
-protocol TreeNode {
-    associatedtype Item
-
-    var left: TreeNode<Item>? { get set }
-    var right: TreeNode<Item>? { get set }
-
-    TODO: FINISH THIS EXAMPLE! See playground.
-}
-```
-
-Constraints can be written as `where TypeParamName: SomeProtocol`
-or just `: SomeProtocol`.
-
-TODO: Add more detail!
-
 ## Extensions
 
 Extensions add functionality to existing types,
@@ -3621,6 +3326,319 @@ assert(text == "Meet")
 text[..<2] = "Goa"
 assert(text == "Goat")
 ```
+
+## Protocols
+
+A protocol is like an interface in other programming languages.
+It can describe type properties, instance properties,
+type method signatures, and instance method signatures.
+Properties can be read-only (`let`) or read/write (`var`).
+
+Other types (structs, classes, and enums)
+can declare that they conform to protocols by following their name
+with a colon and a comma-separated list of protocol names.
+The same syntax can be used by a protocol
+to inherit the requirements of other protocols.
+
+A protocol defines a type that can be used in many places
+where concrete types can appear in order to state that any value
+whose concrete type conforms to the protocol is acceptable.
+This includes constant (`let`) types, variable (`var`) types,
+object property types, collection element types,
+function parameter types, and function return types,
+
+Unlike in method implementations, methods described in protocols
+cannot specify default parameter values.
+
+Examples of commonly used built-in protocols include `Animatable`,
+`Collection`, `Comparable`, `CustomStringConvertible`, `Equatable`, `Hashable`,
+`Identifiable`, `Numeric`, `ObservedObject`, `Sequence`, and `View`.
+Other built-in protocols that may be encountered include
+`App`, `Scene`, `Shape`, and `ViewModifier`.
+
+Swift can provide a "synthesized implementation" of the
+`Comparable`, `Equatable`, and `Hashable` built-in protocols
+for many custom types.
+All that is required is to state that a type conforms to the protocol
+and only define properties with types that also conform to the protocol.
+
+Protocols can use the type name `Self` to refer to
+the actual type that conforms to the protocol.
+In a `struct`, `class`, or `enum` definition,
+`Self` can also be used to refer to static properties and methods.
+
+Xcode can add stubs for a protocol to a type that claims to conform to it.
+To trigger this, click the red circle to the left of the error message
+"Type does not conform to protocol" and then click the "Fix" button.
+
+The following code demonstrates defining and using a custom protocol.
+
+```swift
+protocol Shape {
+    var area: Double { get } // a computed property
+
+    mutating func scale(_ factor: Double)
+}
+
+// Structs can conform to protocols,
+// but cannot inherit from other structs or classes.
+struct Triangle: Shape {
+    var base: Double
+    var height: Double
+
+    init(base: Double, height: Double) {
+        self.base = base
+        self.height = height
+    }
+
+    var area: Double { base * height * 0.5 }
+
+    mutating func scale(_ factor: Double) {
+        base *= factor
+        height *= factor
+    }
+}
+
+// Classes can inherit from another class and
+// they can conform to any number of protocols.
+class Rectangle: Shape {
+    var height: Double
+    var width: Double
+
+    init(width: Double, height: Double) {
+        self.width = width
+        self.height = height
+    }
+
+    var area: Double { width * height }
+
+    func scale(_ factor: Double) {
+        height *= factor
+        width *= factor
+    }
+}
+
+// Any object that conforms to the Shape protocol
+// can be passed to this function.
+// Calling getArea on a Shape demonstrates polymorphism because
+// what the call does is determined by the receiver type.
+func logShape(_ shape: Shape) {
+    print("area = \(shape.area)")
+}
+
+var t = Triangle(base: 3, height: 4)
+let r = Rectangle(width: 4, height: 5)
+logShape(t) // area = 6.0
+logShape(r) // area = 20.0
+
+let shapes: [Shape] = [t, r]
+let totalArea = shapes.reduce(0) { acc, shape in acc + shape.area }
+print("\(totalArea)") // 26.0
+
+t.scale(1.5)
+print("scaled area = \(t.area)")
+```
+
+The following contrived example demonstrates many of the features of protocols.
+
+```swift
+protocol Demoable {
+    static var typeSetOptional: Int { get } // read-only
+    static var typeSetRequired: Int { get set } // read/write
+
+    static func typeMethod(a1 p1: Int, a2 p2: Int) -> Int
+
+    var instanceSetOptional: Int { get } // read-only
+    var instanceSetRequired: Int { get set } // read/write
+
+    init(a1 p1: Int, a2 p2: Int)
+
+    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int
+    mutating func instanceMutatingMethod(a1 p1: Int, a2 p2: Int) -> Int
+}
+
+struct Demo: Demoable {
+    // This property can be a constant since "set" is optional.
+    static let typeSetOptional: Int = 1
+
+    // This property cannot be a constant since "set" is required.
+    static var typeSetRequired: Int = 2
+
+    static func typeMethod(a1 p1: Int, a2 p2: Int) -> Int {
+        return p1 + p2
+    }
+
+    // This property can be a constant since "set" is optional.
+    let instanceSetOptional: Int = 3
+
+    // This property cannot be a constant since "set" is required.
+    var instanceSetRequired: Int
+
+    init(a1 p1: Int, a2 p2: Int) {
+        // Don't need to initialize instanceSetOptional
+        // because it is a constant.
+        instanceSetRequired = p1 + p2
+    }
+
+    // This method cannot mutate properties of this object.
+    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
+        // The next line is not allowed because
+        // this is not a "mutating" method.
+        //instanceSetRequired = p1 + p2
+        return instanceSetOptional + instanceSetRequired + p1 + p2
+    }
+
+    // This method can mutate properties of this object.
+    mutating func instanceMutatingMethod(a1 p1: Int, a2 p2: Int) -> Int {
+        instanceSetRequired = instanceSetOptional + p1 + p2
+        return instanceSetRequired
+    }
+}
+
+var demo = Demo(a1: 7, a2: 8)
+print(Demo.typeSetOptional) // 1
+print(Demo.typeSetRequired) // 2
+print(demo.instanceSetOptional) // 3
+print(demo.instanceSetRequired) // 7 + 8 = 15
+print(demo.instanceMethod(a1: 1, a2: 2)) // 3 + 15 + 1 + 2 = 21
+print(demo.instanceMutatingMethod(a1: 1, a2: 2)) // 3 + 1 + 2 = 6
+print(demo.instanceSetRequired) // 6
+```
+
+In summary, when a type conforms to a protocol it can mean two things:
+
+1. The type may be required to implement some things.
+2. The type may be given implementations of some things through extensions
+   (described below).
+
+### Protocol Extensions
+
+Default method implementations cannot be defined in a protocol, but
+they can be defined in an `extension` of the protocol.
+When this is done for a given method, types that
+conform to the protocol are not required to implement the method.
+However, they can implement the method to
+override the implementation specified in the extension.
+
+A protocol extension is used to define methods like `filter`
+on the `Sequence` protocol that is conformed to by concrete types like
+`Array`, `Dictionary`, `Range`, `String`, and more.
+
+We can define a default implementation of the
+`Demoable` protocol `instanceMethod` method (see code above)
+so types that conform to the protocol are not required to implement that method.
+
+```swift
+extension Demoable {
+    // This property now has a default implementation
+    // that is a computed property.
+    var instanceSetOptional: Int { instanceSetRequired * 2 }
+
+    // This instance method now has a default implementation.
+    func instanceMethod(a1 p1: Int, a2 p2: Int) -> Int {
+        return instanceSetOptional + instanceSetRequired + p1 + p2
+    }
+}
+```
+
+### where Clauses
+
+The type of a function parameter can be specified to be anything
+that conforms to a list of protocols using the `where` keyword
+with the `&` operator between each protocol name.
+For example, see the `doThis` function below.
+
+```swift
+protocol HasSize {
+    var size: Int { get }
+}
+
+struct Drink: CustomStringConvertible, HasSize {
+    var description: String { "Drink has size \(size)"}
+    var size: Int;
+}
+
+// T can be any type that conforms to the
+// CustomStringConvertible and HasSize protocols.
+func doThis<T>(a p: T) where T: CustomStringConvertible & HasSize {
+    print(p)
+}
+doThis(a: Drink(size: 1)) // Drink has size 1
+
+// Alternate way to implement the code above is to use a typealias.
+typealias MyType = CustomStringConvertible & HasSize
+func doThat(a p: MyType) {
+    print(p)
+}
+doThat(a: Drink(size: 2)) // Drink has size 2
+```
+
+### Protocol Associated Types
+
+Many other programming languages support "abstract types" where some of
+their methods are only described by a signature with no implementation.
+Abstract types cannot be instantiated.
+Other types inherit from abstract types and these
+these define implementations for the abstract methods.
+
+Swift does not support abstract types, but protocols can play that role.
+
+Swift protocols do not support generic parameters using the
+angle bracket syntax that is supported for structs and classes.
+Instead, associated types take the place of generics in protocols.
+These are defined in the first lines within a protocol body
+using the `associatedtype` keyword followed by a type parameter name.
+These type parameter names can be used within the protocol body
+to describe computed property types, method parameter types,
+and method return types.
+
+Using the `associatedtype` keyword in protocols instead of
+the generic syntax used by structs and classes
+was a syntax choice made by the Swift team.
+They could have chosen to use the same generic syntax.
+
+Associated types are often used in protocols that describe kinds of collections.
+The Swift Standard Library collection hierarchy is described in the
+<a href="#built-in-collection-types">Built-in Collection Types</a>
+section above.
+It defines many collections types such as `Array`, `Dictionary`, and `Set`.
+Each of these conform to the `Collection` protocol
+which has the following associated types:
+
+- `Element`: type of the elements within the collection
+- `Index`: type that describes the position of an element
+- `Indices`: type used to find an element
+- `Iterator`: type used to iterate over the elements
+- `SubSequence`: type that represents a subsequence of elements
+
+In the `Array` struct, `Element` is a generic parameter type
+and the remaining four associated types are defined as follows:
+
+```swift
+public typealias Index = Int
+public typealias Indices = Range<Int>
+public typealias Iterator = IndexingIterator<[Element]>
+public typealias SubSequence = ArraySlice<Element>
+```
+
+The following code demonstrates defining a protocol
+for tree nodes that can hold values of any type.
+
+```swift
+protocol TreeNode {
+    associatedtype Item
+
+    var left: TreeNode<Item>? { get set }
+    var right: TreeNode<Item>? { get set }
+
+    TODO: FINISH THIS EXAMPLE! See playground.
+}
+```
+
+Constraints can be written as `where TypeParamName: SomeProtocol`
+or just `: SomeProtocol`.
+
+TODO: Add more detail!
 
 ## `some` Keyword
 
