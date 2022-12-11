@@ -2563,18 +2563,21 @@ dog.age = 2 // This change doesn't affect dog2.
 print(dog.age, dog2.age) // 2 1
 ```
 
-Properties of a struct, class, or enum can be computed
-based on the values of other properties.
+### Properties
+
+Properties of a struct, class, or enum can be "stored" or "computed".
+Computed properties are like methods that take no arguments
+and compute their value based on the values of other properties.
+
 Computed properties must be declared with `var` rather than `let`.
 A type must be specified and is followed by
 a code block with no equal sign preceding it.
 
-Computed properties are like methods that take no arguments.
-They always define a `get` function
+Computed properties always define a `get` function
 that computes the value every time it is referenced.
 They can optionally define a `set` function
 whose purpose is the change the values of properties used to
-compute the value so the result will be a given value.
+compute their value so the result will be a given value.
 If there is no `set` function then a surrounding `get` block is not needed.
 Often there is no need for a `set` function.
 
@@ -2610,6 +2613,8 @@ This is ideal for expensive computations that may not be accessed.
 It must be declared with `var` and
 can be mutated after its initial value is computed.
 Lazy properties are not thread safe and will be computed again in each thread.
+
+### Methods
 
 Methods are defined with the `func` keyword.
 They can use the `self` keyword to refer the instance on which they are invoked.
