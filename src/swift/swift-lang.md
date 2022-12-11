@@ -1606,11 +1606,112 @@ whose actual type will be known at compile-time.
 The syntax `some MyProtocol` means
 "some specific type that conforms to `MyProtocol`".
 
+The following function definitions are equivalent:
+
+```swift
+func demo<T: MyProtocol>(param: T) { ... }
+
+func demo<T>(param: T) where T: MyProtocol { ... }
+
+// This form is preferred because it is shorter.
+func demo(param: some MyProtocol) { ... }
+```
+
+The following code demonstrates these three forms:
+
+```swift
+protocol Loggable {
+    associatedtype Value
+
+    // Protocols can define computed properties, but not stored properties,
+    // so we must use `var` instead of `let` on the next line.
+    var value: Value { get }
+
+    func log()
+}
+
+struct MyStruct: Loggable {
+    let value: Int
+
+    func log() {
+        print("MyStruct \(value)")
+    }
+}
+
+class MyClass: Loggable {
+    let value: Int
+
+    init(value: Int) {
+        self.value = value
+    }
+
+    func log() {
+        print("MyClass \(value)")
+    }
+}
+
+func logIt1<T: Loggable>(_ value: T) {
+    value.log()
+}
+
+func logIt2<T>(_ value: T) where T: Loggable {
+    value.log()
+}
+
+func logIt3(_ value: some Loggable) {
+    value.log()
+}
+
+// Using "any" in place of "some" for a parameter type
+// seems to make no difference.
+func logIt4(_ value: any Loggable) {
+    value.log()
+}
+
+logIt1(MyStruct(value: 1)) // MyStruct 1
+logIt2(MyStruct(value: 2)) // MyStruct 2
+logIt3(MyStruct(value: 3)) // MyStruct 3
+logIt4(MyStruct(value: 4)) // MyStruct 4
+
+logIt1(MyClass(value: 1)) // MyClass 1
+logIt2(MyClass(value: 2)) // MyClass 2
+logIt3(MyClass(value: 3)) // MyClass 3
+logIt4(MyClass(value: 4)) // MyClass 4
+```
+
+Generic types and opaque types are opposites.
+
 Opaque types are often uses for
 function return types and computed property types.
 These can choose the actual type that will be returned.
 Callers of such functions and computed properties
 do not get to make that decision.
+However, the concrete type is not exposed to the caller.
+This avoids exposing unnecessary details and allows the function
+to be modified in the future to return a different concrete type
+without requiring changes in callers.
+
+In a function that returns a generic type rather than an opaque type,
+the caller chooses the concrete type.
+
+For example:
+
+```swift
+// This function takes and returns a generic type.
+func biggest<T: Comparable>(_ first: T, _ second: T) -> T {
+    return first >= second ? first : second
+}
+print(biggest(3, 4)) // T type will be Int; prints 4
+print(biggest("foo", "bar")) // T type will be String; prints foo
+// TODO: Try writing biggest to return an opaque type!
+
+// This function returns an opaque type.
+// Callers know that some kind of `View` will be returned,
+// but not which one.
+func getView() -> some View {
+    Text("I choose Text!")
+}
+```
 
 For example, in SwiftUI every struct that conforms to the `View` protocol
 must define a computed property named `body` whose type is `some View`.
@@ -1621,67 +1722,51 @@ the actual type that will be returned.
 The code cannot, for example, use conditional logic to
 sometimes return a `Button` and other times return a `Picker`.
 
-Below are three versions of the same function.
-Two of them compile and one does not.
+Below are three versions of the same function,
+two of which compile and one that does not.
 
 ```swift
     // This compiles because the function
-    // does return an instance of the Text struct.
+    // does return an instance of the `Text` struct.
     private func getText(_ text: String) -> Text {
         Text(text)
     }
 
     // This does not compile because the `border` view modifier
-    // does not return an instance of the Text struct.
+    // does not return an instance of the `Text` struct.
     private func getText(_ text: String) -> Text {
         Text(text).border(.red)
     }
 
     // This compiles because the `border` view modifier
-    // does return some kind of View.
+    // does return some kind of `View`.
     private func getText(_ text: String) -> some View {
         Text(text).border(.red)
     }
 ```
 
-Adding the `some` keyword to a function parameter type
-is an alternative to specifying a generic type.
-It is typically preferred because it is shorter.
-For example, these are equivalent:
+Using opaque types (`some`) for variable types is not useful,
+but using existential types (`any`) is useful.
+The following example demonstrates this using
+the `Loggable` protocol that was defined earlier.
 
 ```swift
-func myFunction<S: MyProtocol>(arg: S) { ... }
-func myFunction(arg: some MyProtocol) { ... }
-```
+var obj1: some Loggable = MyStruct(value: 1)
 
-Generic types and opaque types are opposites.
+// The next line gives the error
+// "Cannot assign value of type 'MyStruct' to type 'some Loggable'".
+// obj1 = MyStruct(value: 2)
 
-In a function that returns a generic type,
-the caller chooses the concrete type.
+// The next line gives the error
+// "Cannot assign value of type 'MyClass' to type 'some Loggable'".
+// obj1 = MyClass(value: 3)
 
-In a function that returns an opaque type,
-the function chooses the concrete type, not the caller.
-However, the concrete type is not exposed to the caller.
-This avoids exposing unnecessary details and allows the function
-to be modified to return a different concrete type later
-without requiring changes in callers.
-
-For example:
-
-```swift
-// This function takes and returns a generic type.
-func biggest<T>(_ first: T, _ second: T) -> T where T: Comparable {
-    return first >= second ? first : second
-}
-print(biggest(3, 4)) // T type will be Int; prints 4
-print(biggest("foo", "bar")) // T type will be String; prints foo
-
-// This function returns an opaque type.
-// Callers know that some kind of `View` will be returned,
-// but not which one.
-func getView() -> some View {
-    Text("I choose Text!")
-}
+var obj2: any Loggable = MyStruct(value: 1)
+obj2.log() // MyStruct 1
+obj2 = MyStruct(value: 2) // works!
+obj2.log() // MyStruct 2
+obj2 = MyClass(value: 3) // works!
+obj2.log() // MyClass 3
 ```
 
 ### Existential Types (any keyword)
@@ -3653,7 +3738,9 @@ extension TreeNode {
 
 // Must be "final" in order to use own type for properties.
 final class ITreeNode: TreeNode {
-    var value: Int // determines type of "Item" in TreeNode
+    // The type of "Item" in TreeNode is determine
+    // using type inference here.
+    var value: Int
     var left: ITreeNode?
     var right: ITreeNode?
 
