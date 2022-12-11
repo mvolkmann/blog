@@ -3271,6 +3271,10 @@ and only define properties with types that also conform to the protocol.
 
 Protocols can use the type name `Self` to refer to
 the actual type that conforms to the protocol.
+Swift considers protocols that use `Self` to have a "Self requirement".
+Such protocols are incomplete and cannot be used as a type unless
+they are preceded by the `some` or `any` keyword (described later).
+
 In a `struct`, `class`, or `enum` definition,
 `Self` can also be used to refer to static properties and methods.
 
@@ -3591,8 +3595,12 @@ node1.printDepthFirst()
 
 Opaque types are defined by applying the `some` keyword to a protocol name.
 Existential types are defined by applying the `any` keyword to a protocol name.
-These keywords must only precede the names protocols
-that have one or more associated types (described later).
+These keywords must only precede protocol names
+that have one or more associated types.
+Swift considers protocols that have associated types
+to have "associated type requirements".
+Such protocols are incomplete and cannot be used as a type unless
+they are preceded by the `some` or `any` keyword.
 
 |                        | `some`                                           | `any`                                                       |
 | ---------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
