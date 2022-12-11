@@ -1592,19 +1592,20 @@ Existential types are defined by applying the `any` keyword to a protocol name.
 One of these keywords must precede the name of a protocol when used as a type
 if the protocol has any associated types (described later).
 
-|                      | `some`                                           | `any`                                                       |
-| -------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
-| variable type        | not useful; must initialize and can never change | useful because value can be changed to any conforming value |
-| property type        | not useful; cannot infer type                    | useful because any conforming value can be used             |
-| parameter type       | can pass any conforming type                     | can also pass any conforming type                           |
-| function return type | every call returns the same concrete type        | every call can return a different concrete type             |
+|                        | `some`                                           | `any`                                                       |
+| ---------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
+| variable type          | not useful; must initialize and can never change | useful because value can be changed to any conforming value |
+| stored property type   | not useful; cannot infer type                    | useful because any conforming value can be used             |
+| computed property type | every access returns the same concrete type      | every access can return a different concrete type           |
+| parameter type         | can pass any conforming type                     | can also pass any conforming type                           |
+| function return type   | every call returns the same concrete type        | every call can return a different concrete type             |
 
-TODO: What is the difference between using the the "some" and "any" keywords
-TODO: on a function parameter type that accepts a value of any type that
-TODO: conforms to a given protocol? They seem to work the same in that context.
+Regardless of whether `some` of `any` is applied to a function return type,
+callers are not aware of the specific concrete type that is returned.
 
-It seems the `some` keyword is only useful for the return types
-of functions that choose the concrete type of a given protocol
+It seems the `some` keyword is only useful for
+computed property types and function return types
+where they choose the concrete type of a given protocol
 that they wish to return.
 In all other cases where protocol types are used,
 the `any` keyword should be used.
@@ -1618,29 +1619,7 @@ The syntax `some MyProtocol` means
 "some specific type that conforms to `MyProtocol`".
 It is most useful in function return types.
 
-Generic types and opaque types are opposites.
-In a function that returns a generic type, the caller chooses the concrete type.
-When an opaque type is returned, the function chooses the concrete type.
-
-Opaque types are typically used for
-function return types and computed property types.
-This avoids exposing the concrete type to callers which.
-avoids exposing unnecessary details.
-It allows the function to be modified in the future to
-return a different concrete type without requiring changes caller code.
-
-For example:
-
-```swift
-// This function returns an opaque type.
-// Callers know that some kind of `View` will be returned,
-// but not which one.
-func getView() -> some View {
-    Text("I choose Text!")
-}
-```
-
-For example, in SwiftUI every struct that conforms to the `View` protocol
+In SwiftUI every struct that conforms to the `View` protocol
 must define a computed property named `body` whose type is `some View`.
 This means that the value returned will be
 of some specific type that conforms to the `View` protocol.
@@ -1656,6 +1635,40 @@ Here is the definition of the `View` protocol.
 public protocol View {
     associatedtype Body: View
     var body: Body { get }
+}
+```
+
+Generic types and opaque types are opposites.
+In a function that returns a generic type, the caller chooses the concrete type.
+When an opaque type is returned, the function chooses the concrete type.
+
+Opaque types are typically used for
+function return types and computed property types.
+This avoids exposing the concrete type to callers which.
+avoids exposing unnecessary details.
+It allows the function or computed property to be modified in the future
+to return a different concrete type without requiring
+a change to the function signature or caller code.
+
+For example:
+
+```swift
+// This function returns an opaque type.
+// Callers know that some specific kind of `View` will be returned,
+// but not which one.
+func getView() -> some View {
+    Text("I choose Text!")
+}
+```
+
+Callers of functions that return an opaque type should
+only depend on the returned value conforming to a protocol.
+However, they can conditionally cast the returned value
+to a specific concrete type using the following syntax:
+
+```swift
+if let specificValue = returnedValue as? MyConcreteType {
+    ...
 }
 ```
 
@@ -1686,7 +1699,8 @@ Using opaque types (`some`) for variable types is not useful
 because it requires the variable to be
 initialized to a value with a specific concrete type
 and does not allow a new value to be assigned later.
-Using existential types (`any`) for variable types does not have these restrictions.
+Using existential types (`any`) for variable types
+does not have these restrictions.
 The following example demonstrates this using
 the `Loggable` protocol that was defined earlier.
 
