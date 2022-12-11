@@ -3587,8 +3587,8 @@ node1.printDepthFirst()
 
 Opaque types are defined by applying the `some` keyword to a protocol name.
 Existential types are defined by applying the `any` keyword to a protocol name.
-One of these keywords must precede the name of a protocol when used as a type
-if the protocol has any associated types (described later).
+These keywords must only precede the names protocols
+that have one or more associated types (described later).
 
 |                        | `some`                                           | `any`                                                       |
 | ---------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
