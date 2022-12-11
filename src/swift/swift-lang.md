@@ -1587,13 +1587,14 @@ func update(item: some CloudKitable) async throws { ... }
 
 ## Opaque and Existential Types
 
-Opaque types are defined with the `some` keyword.
+Opaque types are defined by applying the `some` keyword to a protocol name.
+Existential types are defined by applying the `any` keyword to a protocol name.
 
-Existential types are defined with the `any` keyword.
+TODO: FINISH THIS TABLE!
 
 |                      | `some`                                                           | `any`                                                                 |
 | -------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------- |
-| variable type        |                                                                  |                                                                       |
+| variable type        | not useful; must initialize and can never change                 | useful because value can be changed to any conforming value           |
 | property type        |                                                                  |                                                                       |
 | parameter type       |                                                                  |                                                                       |
 | function return type | function chooses type; every call returns the same concrete type | caller chooses type; can every call return a different concrete type? |
@@ -1697,13 +1698,26 @@ the caller chooses the concrete type.
 For example:
 
 ```swift
+// This does not compile because we cannot compare
+// any Comparable to any other Comparable.
+// They must have the same concrete type.
+/*
+func biggest(
+    _ first: any Comparable,
+    _ second: any Comparable
+) -> any Comparable {
+    return first >= second ? first : second
+}
+*/
+
+// Using a generic type enables enforcing that
+// `first` and `second` have the same concrete type.
 // This function takes and returns a generic type.
 func biggest<T: Comparable>(_ first: T, _ second: T) -> T {
     return first >= second ? first : second
 }
 print(biggest(3, 4)) // T type will be Int; prints 4
 print(biggest("foo", "bar")) // T type will be String; prints foo
-// TODO: Try writing biggest to return an opaque type!
 
 // This function returns an opaque type.
 // Callers know that some kind of `View` will be returned,
@@ -1745,8 +1759,11 @@ two of which compile and one that does not.
     }
 ```
 
-Using opaque types (`some`) for variable types is not useful,
-but using existential types (`any`) is useful.
+Using opaque types (`some`) for variable types is not useful
+because it requires the variable to be
+initialized to a value with a specific concrete type
+and does not allow a new value to be assigned later.
+Using existential types (`any`) for variable types does not have these restrictions.
 The following example demonstrates this using
 the `Loggable` protocol that was defined earlier.
 
@@ -1771,15 +1788,12 @@ obj2.log() // MyClass 3
 
 ### Existential Types (any keyword)
 
-The `any` keyword is placed before a protocol name
-and can be used for a function parameter type or return type.
-It signals opting-in to runtime determination of the actual type
+The `any` keyword is placed before a protocol name.
+When used for a function parameter type or return type,
+it signals opting-in to runtime determination of the actual type
 which generates more code and is slower than compile-time determination.
-Callers choose concrete types of parameters
-based on the argument types they pass.
-Callers choose concrete return types
-based on how the return value is used,
-such as assigning to a variable of a certain type.
+Callers choose the concrete type of such parameters
+based on the concrete argument types they pass.
 For example:
 
 ```swift
@@ -1793,7 +1807,7 @@ print("\(stringLength("test"))")
 print("\(stringLength(123))")
 
 // When a function return type uses the `any` keyword,
-// the return values can have different types.
+// the return value of each call can have a different type.
 // This prevents knowing the concrete type at compile-time
 // and is slower.
 // The Int and String types both conform to the Comparable protocol
@@ -1818,10 +1832,17 @@ private func greatTwo(_ condition: Bool) -> some Comparable {
     }
 }
 
-print("\(greatOne(true))")
-print("\(greatOne(false))")
-print("\(greatTwo(true))")
-print("\(greatTwo(false))")
+print("\(greatOne(true))") // 99
+print("\(greatOne(false))") // Gretzky
+print("\(greatTwo(true))") // 99
+print("\(greatTwo(false))") // Gretzky
+```
+
+Two values of an existential type cannot be compared using the `==` operator.
+For example, the following will not compile:
+
+```swift
+let same = greatOne(true) == greatOne(false)
 ```
 
 ## <a name="built-in-collection-types">Built-in Collection Types</a>
