@@ -1589,6 +1589,8 @@ func update(item: some CloudKitable) async throws { ... }
 
 Opaque types are defined by applying the `some` keyword to a protocol name.
 Existential types are defined by applying the `any` keyword to a protocol name.
+One of these keywords must precede the name of a protocol when used as a type
+if the protocol has any associated types (described later).
 
 |                      | `some`                                           | `any`                                                       |
 | -------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
@@ -1617,19 +1619,15 @@ The syntax `some MyProtocol` means
 It is most useful in function return types.
 
 Generic types and opaque types are opposites.
+In a function that returns a generic type, the caller chooses the concrete type.
+When an opaque type is returned, the function chooses the concrete type.
 
-Opaque types are often uses for
+Opaque types are typically used for
 function return types and computed property types.
-These can choose the actual type that will be returned.
-Callers of such functions and computed properties
-do not get to make that decision.
-However, the concrete type is not exposed to the caller.
-This avoids exposing unnecessary details and allows the function
-to be modified in the future to return a different concrete type
-without requiring changes in callers.
-
-In a function that returns a generic type rather than an opaque type,
-the caller chooses the concrete type.
+This avoids exposing the concrete type to callers which.
+avoids exposing unnecessary details.
+It allows the function to be modified in the future to
+return a different concrete type without requiring changes caller code.
 
 For example:
 
@@ -1645,33 +1643,43 @@ func getView() -> some View {
 For example, in SwiftUI every struct that conforms to the `View` protocol
 must define a computed property named `body` whose type is `some View`.
 This means that the value returned will be
-of some type that conforms to the `View` protocol.
+of some specific type that conforms to the `View` protocol.
 It must be possible to determine at compile-time
 the actual type that will be returned.
 The code cannot, for example, use conditional logic to
 sometimes return a `Button` and other times return a `Picker`.
+All code paths in the function must return the same concrete type.
+
+Here is the definition of the `View` protocol.
+
+```swift
+public protocol View {
+    associatedtype Body: View
+    var body: Body { get }
+}
+```
 
 Below are three versions of the same function,
 two of which compile and one that does not.
 
 ```swift
-    // This compiles because the function
-    // does return an instance of the `Text` struct.
-    private func getText(_ text: String) -> Text {
-        Text(text)
-    }
+// This compiles because the function
+// does return an instance of the `Text` struct.
+private func getText(_ text: String) -> Text {
+    Text(text)
+}
 
-    // This does not compile because the `border` view modifier
-    // does not return an instance of the `Text` struct.
-    private func getText(_ text: String) -> Text {
-        Text(text).border(.red)
-    }
+// This does not compile because the `border` view modifier
+// does not return an instance of the `Text` struct.
+private func getText(_ text: String) -> Text {
+    Text(text).border(.red)
+}
 
-    // This compiles because the `border` view modifier
-    // does return some kind of `View`.
-    private func getText(_ text: String) -> some View {
-        Text(text).border(.red)
-    }
+// This compiles because the `border` view modifier
+// does return some kind of `View`.
+private func getText(_ text: String) -> some View {
+    Text(text).border(.red)
+}
 ```
 
 Using opaque types (`some`) for variable types is not useful
@@ -1791,6 +1799,8 @@ The following code demonstrates these three forms:
 
 ```swift
 protocol Loggable {
+    // To constrain the type to one that conforms to a list of protocols,
+    // add a colon and a comma-separated list of protocols after the type name.
     associatedtype Value
 
     // Protocols can define computed properties, but not stored properties,
@@ -1828,6 +1838,8 @@ func logIt2<T>(_ value: T) where T: Loggable {
     value.log()
 }
 
+// The keyword `any` is required here because
+// the `Loggable` protocol has associated types.
 func logIt3(_ value: any Loggable) {
     value.log()
 }
@@ -3819,26 +3831,6 @@ node1.printDepthFirst()
 //   5
 //     6
 ```
-
-Type constraints can be written as `where TypeParamName: SomeProtocol`
-or just `: SomeProtocol`.
-
-TODO: Add more detail!
-
-## `some` Keyword
-
-The `some` keyword proceeds the name of a protocol to specify that a type
-(called an "opaque type") will be some type that conforms to the protocol.
-In a way this is the opposite of using a generic type.
-Generic types allow calling code to specify the type that
-will be used by a function, struct, class, or enum.
-Opaque types allow a function, struct, class, or enum
-to select the type to be used.
-
-A common place whether the `some` keyword is used is in SwiftUI views.
-Their `body` property has the type `some View`.
-The value of this property is a function that returns
-any kind of object that conforms to the View protocol.
 
 ## Implementing Operators
 
