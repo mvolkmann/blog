@@ -168,17 +168,64 @@ The most commonly used commands are described in the table below.
 | `:exit` | exits the interpreter            |
 | `:help` | prints help on all REPL commands |
 
-## Global `print` Function
+## Debugging Output
 
-The global {% aTargetBlank
+The global functions {% aTargetBlank
 "https://developer.apple.com/documentation/swift/print(_:separator:terminator:)",
-"print" %} function takes any number of arguments and prints them to stdout.
+"print" %} and {% aTargetBlank
+"https://developer.apple.com/documentation/swift/dump(_:name:indent:maxdepth:maxitems:)",
+"dump" %} functions are useful for debugging Swift code.
+
+The `print` function takes any number of arguments and prints them to stdout.
 
 The literal expressions `#file`, `#fileID`, `#function`, `#line`, and `#column`
 can be used to provide context. For example:
 
 ```swift
 print("\(#fileID) \(#function) score =", score)
+```
+
+The `dump` function takes one value to print and
+prints each property of the object on a separate line.
+To takes the optional arguments `indent`, `maxDepth`, and `maxItems`
+to customized the output.
+
+The following code prints a subset of the data in an array.
+
+```swift
+struct Dog {
+    let name: String
+    let breed: String
+    let owner: Person
+}
+
+struct Person {
+    let name: String
+}
+
+let tami = Person(name: "Tami")
+let amanda = Person(name: "Amanda")
+let dogs = [
+    Dog(name: "Oscar", breed: "GSP", owner: amanda),
+    Dog(name: "Comet", breed: "Whippet", owner: tami)
+]
+dump(dogs)
+```
+
+The output from the `dump` function is:
+
+```text
+▿ 2 elements
+  ▿ __lldb_expr_136.Dog
+    - name: "Oscar"
+    - breed: "GSP"
+    ▿ owner: __lldb_expr_136.Person
+      - name: "Amanda"
+  ▿ __lldb_expr_136.Dog
+    - name: "Comet"
+    - breed: "Whippet"
+    ▿ owner: __lldb_expr_136.Person
+      - name: "Tami"
 ```
 
 ## Packages
@@ -1536,10 +1583,10 @@ class Node<T> {
         self.next = next
     }
 
-    func dump() {
+    func log() {
         print("\(value)")
         if let next = next {
-            next.dump()
+            next.log()
         }
     }
 }
@@ -1552,14 +1599,14 @@ var node3 = INode(value: 3)
 node2.next = node3
 // Alternate version of the previous 5 lines.
 // var node1 = INode(value: 1, next: INode(value: 2, next: INode(value: 3)))
-node1.dump()
+node1.log()
 
 typealias SNode = Node<String>
 var fruitList = SNode(
     value: "apple",
     next: SNode(value: "banana", next: SNode(value: "cherry"))
 )
-fruitList.dump()
+fruitList.log()
 ```
 
 The type of a type parameter can be constrained to only types
