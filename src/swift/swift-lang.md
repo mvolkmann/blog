@@ -386,10 +386,14 @@ let orderNumber = order(item: item, quantity: quantity)
 ```
 
 When an argument label is underscore, it is a positional argument.
-The function must be called with only a value for that parameter.
+The function must be called with only a value and no name for that parameter.
 Otherwise calls must include the argument label.
 A function can have a mixture of parameters with argument labels
 and positional parameters.
+
+Typically positional arguments are only used for the first argument
+and only when the function name implies the meaning of the first argument.
+The following code demonstrates using multiple positional arguments.
 
 ```swift
 func add(_ n1: Int, _ n2: Int) -> Int {
