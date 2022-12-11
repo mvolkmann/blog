@@ -1590,14 +1590,22 @@ func update(item: some CloudKitable) async throws { ... }
 Opaque types are defined by applying the `some` keyword to a protocol name.
 Existential types are defined by applying the `any` keyword to a protocol name.
 
-TODO: FINISH THIS TABLE!
+|                      | `some`                                           | `any`                                                       |
+| -------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
+| variable type        | not useful; must initialize and can never change | useful because value can be changed to any conforming value |
+| property type        | not useful; cannot infer type                    | useful because any conforming value can be used             |
+| parameter type       | can pass any conforming type                     | can also pass any conforming type                           |
+| function return type | every call returns the same concrete type        | every call can return a different concrete type             |
 
-|                      | `some`                                                           | `any`                                                                 |
-| -------------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------- |
-| variable type        | not useful; must initialize and can never change                 | useful because value can be changed to any conforming value           |
-| property type        |                                                                  |                                                                       |
-| parameter type       |                                                                  |                                                                       |
-| function return type | function chooses type; every call returns the same concrete type | caller chooses type; can every call return a different concrete type? |
+TODO: What is the difference between using the the "some" and "any" keywords
+TODO: on a function parameter type that accepts a value of any type that
+TODO: conforms to a given protocol? They seem to work the same in that context.
+
+It seems the `some` keyword is only useful for the return types
+of functions that choose the concrete type of a given protocol
+that they wish to return.
+In all other cases where protocol types are used,
+the `any` keyword should be used.
 
 ### Opaque Types (some keyword)
 
