@@ -1614,79 +1614,7 @@ and is used to define an "opaque type"
 whose actual type will be known at compile-time.
 The syntax `some MyProtocol` means
 "some specific type that conforms to `MyProtocol`".
-
-The following function definitions are equivalent:
-
-```swift
-func demo<T: MyProtocol>(param: T) { ... }
-
-func demo<T>(param: T) where T: MyProtocol { ... }
-
-// This form is preferred because it is shorter.
-func demo(param: some MyProtocol) { ... }
-```
-
-The following code demonstrates these three forms:
-
-```swift
-protocol Loggable {
-    associatedtype Value
-
-    // Protocols can define computed properties, but not stored properties,
-    // so we must use `var` instead of `let` on the next line.
-    var value: Value { get }
-
-    func log()
-}
-
-struct MyStruct: Loggable {
-    let value: Int
-
-    func log() {
-        print("MyStruct \(value)")
-    }
-}
-
-class MyClass: Loggable {
-    let value: Int
-
-    init(value: Int) {
-        self.value = value
-    }
-
-    func log() {
-        print("MyClass \(value)")
-    }
-}
-
-func logIt1<T: Loggable>(_ value: T) {
-    value.log()
-}
-
-func logIt2<T>(_ value: T) where T: Loggable {
-    value.log()
-}
-
-func logIt3(_ value: some Loggable) {
-    value.log()
-}
-
-// Using "any" in place of "some" for a parameter type
-// seems to make no difference.
-func logIt4(_ value: any Loggable) {
-    value.log()
-}
-
-logIt1(MyStruct(value: 1)) // MyStruct 1
-logIt2(MyStruct(value: 2)) // MyStruct 2
-logIt3(MyStruct(value: 3)) // MyStruct 3
-logIt4(MyStruct(value: 4)) // MyStruct 4
-
-logIt1(MyClass(value: 1)) // MyClass 1
-logIt2(MyClass(value: 2)) // MyClass 2
-logIt3(MyClass(value: 3)) // MyClass 3
-logIt4(MyClass(value: 4)) // MyClass 4
-```
+It is most useful in function return types.
 
 Generic types and opaque types are opposites.
 
@@ -1706,27 +1634,6 @@ the caller chooses the concrete type.
 For example:
 
 ```swift
-// This does not compile because we cannot compare
-// any Comparable to any other Comparable.
-// They must have the same concrete type.
-/*
-func biggest(
-    _ first: any Comparable,
-    _ second: any Comparable
-) -> any Comparable {
-    return first >= second ? first : second
-}
-*/
-
-// Using a generic type enables enforcing that
-// `first` and `second` have the same concrete type.
-// This function takes and returns a generic type.
-func biggest<T: Comparable>(_ first: T, _ second: T) -> T {
-    return first >= second ? first : second
-}
-print(biggest(3, 4)) // T type will be Int; prints 4
-print(biggest("foo", "bar")) // T type will be String; prints foo
-
 // This function returns an opaque type.
 // Callers know that some kind of `View` will be returned,
 // but not which one.
@@ -1797,12 +1704,13 @@ obj2.log() // MyClass 3
 ### Existential Types (any keyword)
 
 The `any` keyword is placed before a protocol name.
-When used for a function parameter type or return type,
-it signals opting-in to runtime determination of the actual type
-which generates more code and is slower than compile-time determination.
-Callers choose the concrete type of such parameters
-based on the concrete argument types they pass.
-For example:
+In Swift 6+ this will be required when protocols are used for
+the type of a variable, property, or function parameter.
+In Swift 5.7 adding the `any` keyword before an protocol name
+is optional, but omitting it generates a warning.
+
+The following example demonstrates a function that accepts
+a parameter of any concrete type that conforms to a given protocol.
 
 ```swift
 // The Int and String types both conform to the CustomStringConvertible
@@ -1811,9 +1719,16 @@ private func stringLength(_ value: any CustomStringConvertible) -> Int {
     return value.description.count
 }
 
-print("\(stringLength("test"))")
-print("\(stringLength(123))")
+print("\(stringLength("test"))") // 4
+print("\(stringLength(123))") // 3
+```
 
+When the `any` keyword is applied to a function return type,
+it signals opting-in to runtime determination of the concrete type
+which generates more code and is slower than compile-time determination.
+For example:
+
+```swift
 // When a function return type uses the `any` keyword,
 // the return value of each call can have a different type.
 // This prevents knowing the concrete type at compile-time
@@ -1851,6 +1766,113 @@ For example, the following will not compile:
 
 ```swift
 let same = greatOne(true) == greatOne(false)
+```
+
+The following function definitions are equivalent:
+
+```swift
+// In this form the concrete type of `param` is determined at compile-time.
+// This results in more efficient code because it can use "static dispatch"
+// to call methods on `param` inside the function.
+func demo<T: MyProtocol>(param: T) { ... }
+
+// This form has the same characteristics as the previous form.
+func demo<T>(param: T) where T: MyProtocol { ... }
+
+// In this form the concrete type of `param` must be determined at run-time.
+// This results in less efficient code because
+// the call cannot be inlined and it must use "dynamic dispatch"
+// to call methods on `param` inside the function.
+// The `any` keyword signals opting into worse performance.
+func demo(param: any MyProtocol) { ... }
+```
+
+The following code demonstrates these three forms:
+
+```swift
+protocol Loggable {
+    associatedtype Value
+
+    // Protocols can define computed properties, but not stored properties,
+    // so we must use `var` instead of `let` on the next line.
+    var value: Value { get }
+
+    func log()
+}
+
+struct MyStruct: Loggable {
+    let value: Int
+
+    func log() {
+        print("MyStruct \(value)")
+    }
+}
+
+class MyClass: Loggable {
+    let value: Int
+
+    init(value: Int) {
+        self.value = value
+    }
+
+    func log() {
+        print("MyClass \(value)")
+    }
+}
+
+func logIt1<T: Loggable>(_ value: T) {
+    value.log()
+}
+
+func logIt2<T>(_ value: T) where T: Loggable {
+    value.log()
+}
+
+func logIt3(_ value: any Loggable) {
+    value.log()
+}
+
+// Using "some" in place of "any" for a parameter type
+// seems to make no difference.
+func logIt4(_ value: some Loggable) {
+    value.log()
+}
+
+logIt1(MyStruct(value: 1)) // MyStruct 1
+logIt2(MyStruct(value: 2)) // MyStruct 2
+logIt3(MyStruct(value: 3)) // MyStruct 3
+logIt4(MyStruct(value: 4)) // MyStruct 4
+
+logIt1(MyClass(value: 1)) // MyClass 1
+logIt2(MyClass(value: 2)) // MyClass 2
+logIt3(MyClass(value: 3)) // MyClass 3
+logIt4(MyClass(value: 4)) // MyClass 4
+```
+
+There are cases where a generic return type is preferred
+over an existential return type. For example:
+
+```swift
+// This does not compile because we cannot compare
+// any Comparable to any other Comparable.
+// They must have the same concrete type.
+/*
+func biggest(
+    _ first: any Comparable,
+    _ second: any Comparable
+) -> any Comparable {
+    return first >= second ? first : second
+}
+*/
+
+// Using a generic type enables enforcing that
+// `first` and `second` have the same concrete type.
+// This function takes and returns a generic type.
+func biggest<T: Comparable>(_ first: T, _ second: T) -> T {
+    return first >= second ? first : second
+}
+print(biggest(3, 4)) // T type will be Int; prints 4
+print(biggest("foo", "bar")) // T type will be String; prints foo
 ```
 
 ## <a name="built-in-collection-types">Built-in Collection Types</a>
