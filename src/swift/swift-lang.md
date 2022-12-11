@@ -2569,7 +2569,8 @@ Computed properties must be declared with `var` rather than `let`.
 A type must be specified and is followed by
 a code block with no equal sign preceding it.
 
-Computed properties always define a `get` function
+Computed properties are like methods that take no arguments.
+They always define a `get` function
 that computes the value every time it is referenced.
 They can optionally define a `set` function
 whose purpose is the change the values of properties used to
