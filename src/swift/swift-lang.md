@@ -1734,7 +1734,7 @@ print("\(greatTwo(true))")
 print("\(greatTwo(false))")
 ```
 
-## Built-in Collection Types
+## <a name="built-in-collection-types">Built-in Collection Types</a>
 
 Swift provides several generic collection types.
 
@@ -3185,7 +3185,7 @@ The following code demonstrates defining and using a custom protocol.
 
 ```swift
 protocol Shape {
-    func getArea() -> Double
+    var area: Double { get } // a computed property
 }
 
 // Structs can conform to protocols,
@@ -3199,9 +3199,7 @@ struct Triangle: Shape {
         self.height = height
     }
 
-    func getArea() -> Double {
-        base * height * 0.5
-    }
+    var getArea: Double { base * height * 0.5 }
 }
 
 // Classes can inherit from another class and
@@ -3215,9 +3213,7 @@ class Rectangle: Shape {
         self.height = height
     }
 
-    func getArea() -> Double {
-        width * height
-    }
+    var area: Double { width * height }
 }
 
 // Any object that conforms to the Shape protocol
@@ -3225,11 +3221,17 @@ class Rectangle: Shape {
 // Calling getArea on a Shape demonstrates polymorphism because
 // what the call does is determined by the receiver type.
 func logShape(_ shape: Shape) {
-    print("area = \(shape.getArea())")
+    print("area = \(shape.area)")
 }
 
-logShape(Triangle(base: 3, height: 4)) // area = 6
-logShape(Rectangle(width: 4, height: 5)) // area = 20
+let t = Triangle(base: 3, height: 4)
+let r = Rectangle(width: 4, height: 5)
+logShape(t) // area = 6.0
+logShape(r) // area = 20.0
+
+let shapes: [Shape] = [c, r]
+let totalArea = shapes.reduce(0) { acc, shape in acc + shape.area }
+print("\(totalArea)") // 26.0
 ```
 
 The following contrived example demonstrates many of the features of protocols.
@@ -3367,14 +3369,65 @@ doThat(a: Drink(size: 2)) // Drink has size 2
 
 ### Protocol Associated Types
 
-Associated types are generic types for protocols.
-Protocols must declare generic types in a different way than other types do.
-Rather than following the name with type parameters in angle brackets,
-the first lines in the protocol body begin with the `associatedtype` keyword
-followed by a type parameter name and optional constraints.
-This was a syntax choice made by the Swift team.
-They could have chosen to use the same generic syntax
-that is used in structs and classes.
+Many other programming languages support "abstract types" where some of
+their methods are only described by a signature with no implementation.
+Abstract types cannot be instantiated.
+Other types inherit from abstract types and these
+these define implementations for the abstract methods.
+
+Swift does not support abstract types, but protocols can play that role.
+
+Swift protocols do not support generic parameters using the
+angle bracket syntax that is supported for structs and classes.
+Instead, associated types take the place of generics in protocols.
+These are defined in the first lines within a protocol body
+using the `associatedtype` keyword followed by a type parameter name.
+These type parameter names can be used within the protocol body
+to describe computed property types, method parameter types,
+and method return types.
+
+Using the `associatedtype` keyword in protocols instead of
+the generic syntax used by structs and classes
+was a syntax choice made by the Swift team.
+They could have chosen to use the same generic syntax.
+
+Associated types are often used in protocols that describe kinds of collections.
+The Swift Standard Library collection hierarchy is described in the
+<a href="#built-in-collection-types">Built-in Collection Types</a>
+section above.
+It defines many collections types such as `Array`, `Dictionary`, and `Set`.
+Each of these conform to the `Collection` protocol
+which has the following associated types:
+
+- `Element`: type of the elements within the collection
+- `Index`: type that describes the position of an element
+- `Indices`: type used to find an element
+- `Iterator`: type used to iterate over the elements
+- `SubSequence`: type that represents a subsequence of elements
+
+In the `Array` struct, `Element` is a generic parameter type
+and the remaining four associated types are defined as follows:
+
+```swift
+public typealias Index = Int
+public typealias Indices = Range<Int>
+public typealias Iterator = IndexingIterator<[Element]>
+public typealias SubSequence = ArraySlice<Element>
+```
+
+The following code demonstrates defining a protocol
+for tree nodes that can hold values of any type.
+
+```swift
+protocol TreeNode {
+    associatedtype Item
+
+    var left: TreeNode<Item>? { get set }
+    var right: TreeNode<Item>? { get set }
+
+    TODO: FINISH THIS EXAMPLE! See playground.
+}
+```
 
 Constraints can be written as `where TypeParamName: SomeProtocol`
 or just `: SomeProtocol`.
