@@ -2020,6 +2020,8 @@ ZStack(alignment: .topLeading) {
 
 This is similar to `HStack`, but only
 builds and renders child views when they are visible.
+The rendered child views are retained in memory
+after scrolling out of view so rendering them again later is efficient.
 `LazyHStack` is commonly used inside a `ScrollView`
 with `axes` set to `.horizontal`.
 
