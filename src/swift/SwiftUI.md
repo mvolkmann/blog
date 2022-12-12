@@ -512,7 +512,7 @@ The following sections describe the views defined by SwiftUI.
   - predefined styles include plain, gray, tinted,
     and filled (used for most likely action)
   - can include an SF Symbol icon
-  - can have a role of normal, primary, cancel, or destructive
+  - can have a `role` of `normal`, `primary`, `cancel`, or `destructive`
   - can be a close button (x in a circle) that closes the parent view
   - can be an info button (i in a circle) that displays
     information about the parent view
@@ -3363,7 +3363,8 @@ different formatting to substrings of a string.
 
 ### TextField
 
-This provides single-line text entry.
+A {% aTargetBlank "https://developer.apple.com/documentation/swiftui/textfield",
+"TextField" %} provides single-line text entry.
 It also works with non-String types using a `FormatStyle` object
 to convert between `String` values and the type.
 It takes label text, a binding to a variable, and an optional prompt.
