@@ -1032,9 +1032,16 @@ including their value and unit.
 
 ### String and Character Type
 
-The `String` type is a `struct` that represents a sequence of Unicode characters.
-Literal `Character` and single-line `String` values
-are both delimited by double-quotes.
+The {% aTargetBlank "https://developer.apple.com/documentation/swift/string",
+"String" %} type is a `struct` that represents a sequence of Unicode characters.
+Literal {% aTargetBlank
+"https://developer.apple.com/documentation/swift/character", "Character" %}
+and single-line `String` values are both delimited by double-quotes.
+
+The type {% aTargetBlank
+"https://developer.apple.com/documentation/swift/staticstring",
+"StaticString" %} represents text that is known at compile-time
+which means it is not formed using string interpolation.
 
 Multi-line `String` values are delimited by triple double-quotes
 that are on their own lines.
