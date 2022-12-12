@@ -3399,10 +3399,21 @@ TextField(text: $lastName, prompt: Text("Required")) {
 }
 .textFieldStyle(.roundedBorder)
 .padding()
+```
 
-// Using a non-String value (Int)
+`TextField` supports a `format` argument that can be set to `.number`.
+However, this doesn't prevent users from entering non-numeric characters.
+It only causes it to attempt to convert what is entered to a number
+after the user taps the "return" key.
+A better way to only accept numeric characters is to
+use the `numberPad` keyboard as shown below.
+
+```swift
+// Using a non-String value, Int in this case.
 // This doesn't provide arrows to increment and decrement the value.
 TextField("Score", value: $score, format: .number)
+    // Use .decimalPad to allow floating point numbers,
+    // but this allows entering more than one decimal point.
     .keyboardType(.numberPad)
     .padding()
     .textFieldStyle(.roundedBorder)
