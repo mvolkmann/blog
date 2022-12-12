@@ -619,6 +619,27 @@ typically the closure parameter list should be preceded by `[weak self]`
 so the object that uses the escaping closure can be garbage collected
 when there are no longer references to it.
 
+## Stopping Execution
+
+Swift provides three global functions that can stop program execution.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swift/assert(_:_:file:line:)",
+"assert" %} function conditionally prints a message that
+includes the current file and line number and then stops the program.
+These calls are ignored in release builds.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swift/precondition(_:_:file:line:)",
+"precondition" %} function is the same as the `assert` function,
+but it is also honored in release builds.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swift/fatalerror(_:file:line:)",
+"fatalError" %} function unconditionally prints a message that
+includes the current file and line number and then stops the program,
+even in release builds.
+
 ## Error Handling
 
 Errors in that occur in Swift code are described by
