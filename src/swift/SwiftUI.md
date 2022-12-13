@@ -3651,27 +3651,28 @@ var body: some View {
 
 ### Toggle
 
-This enables toggling between on and off states.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/toggle",
+"Toggle" %} view enables toggling between on and off states.
 By default it renders as a switch with a circular thumb.
 
-The app accent color does not affect switch-style rendering.
-To change the color of the switch background,
-use the `toggleStyle` view modifier to specify a tint.
+The default switch background color is
+the `AccentColor` set in `Assets.xcassets`.
+To change this apply the `tint` view modifier.
 
-A `Toggle` can also render as a button whose
-color indicates whether it is off or on.
-When it is off, the button background color is clear
-and the text is the accent color.
-When it is on, the button background color is the accent color
-and the text is white.
+A `Toggle` can also render as a button whose text is the accent color
+and whose background color indicates whether it is off or on.
+When it is off, the background color is clear.
+When it is on, the background color is a lighter shade of the accent color.
 
 The `Toggle` initializer takes a `String` to render
 (either before the switch or inside the button)
 and a binding to a `Bool` value.
 
 ```swift
-Toggle("Hungry", isOn: $hungry).toggleStyle(SwitchToggleStyle(tint: .red))
+// A
+Toggle("Hungry", isOn: $hungry).tint(.red)
 
+// The default `toggleStyle` is `.switch`.
 Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
 ```
 
@@ -3681,9 +3682,16 @@ Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
 
 ### Slider
 
-This renders a horizontal track with a thumb that
-slides between minimum and maximum values.
-The current value must have the type `Float`, not `Int`.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/slider",
+"Slider" %} view renders a horizontal track with a thumb
+that slides between minimum and maximum values
+specified by the `in` argument whose value is a `ClosedRange`.
+
+The `value` argument value is a binding that holds the current value
+as a `Float`, not an `Int`.
+
+An optional `step` argument indicates the steps in which the value changes.
+
 Text and/or icons can be displayed at the leading and trailing ends.
 
 <img alt="SwiftUI Slider" style="width: 60%"
@@ -3739,9 +3747,12 @@ VStack {
 
 ### Picker
 
-This allows selecting an option from a list.
-It takes the text to display as a prompt and a `selection` argument
-which is a binding that holds something to identify the selected value.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/picker",
+"Picker" %} view supports selecting an option from a list.
+A `Picker` takes the text to display as a prompt and
+a `selection` argument which is a binding that
+holds something to identify the selected value.
+The options are specified with child `Text` views.
 
 The label text passed to the `Picker` initializer
 is only displayed if the `Picker` is inside a `Form` or `List`.
@@ -3894,7 +3905,19 @@ Picker("Owner", selection: $selectedPersonIndex) {
 
 ### DatePicker
 
-This allows selecting a date, time, or both.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/datepicker", "DatePicker" %}
+view allows selecting a date, time, or both.
+It takes the text to display as a prompt and
+a `selection` argument which is a binding that
+holds the currently selected `Date` value.
+
+The optional `displayedComponents` argument specifies
+what can be selected using a single value or an array of
+{% aTargetBlank "", "DatePickerComponent" %} values
+which include `.date` and `.hourAndMinute`.
+Note that it is not possible to request allowing
+selection of a month and day without a year.
 
 ```swift
 DatePicker(
@@ -3904,8 +3927,12 @@ DatePicker(
 )
 ```
 
-To hide the label, pass an empty string
-and call the `labelsHidden` view modifier.
+To restrict the dates that can be selected,
+add the `in` argument with a `Range` value after the `selection` argument.
+To only allow dates in the past or now, use `...Date()`.
+To only allow dates in the future or now, use `Date()...`.
+
+To hide the label, apply the `labelsHidden` view modifier.
 
 ```swift
 DatePicker("", selection: $birthday, displayedComponents: .date)
