@@ -3558,7 +3558,9 @@ SecureField("Password", text: $password)
 
 ### TextEditor
 
-This provides multi-line text entry.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/texteditor", "TextEditor" %}
+view supports multi-line text entry.
 The number of lines can be limited,
 but it seems the limit is only enforced on initial render.
 It doesn't prevent more lines from being
@@ -3745,6 +3747,11 @@ VStack {
     Text("Too Many Dogs? \(String(tooManyDogs))")
 }.padding()
 ```
+
+The optional `onIncrement` and `onDecrement` arguments take a closure
+that runs when the plus and minus buttons are tapped.
+They are typically used to modify the value
+in a way other than adding or subtracting one.
 
 ### Picker
 
@@ -3993,8 +4000,13 @@ The options that can be passed to this include:
 
 ### ColorPicker
 
-This renders a color well for displaying a currently selected color
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/colorpicker",
+"ColorPicker" %} view renders a color well
+for displaying a currently selected color
 and changing the color using the system color picker.
+It takes a label and a `selection` argument
+that is a binding to the currently selected `Color`.
 
 <figure>
   <img alt="SwiftUI ColorPicker before tap"
@@ -4042,9 +4054,16 @@ To render only the icon, pass `.iconOnly`.
 
 ### ProgressView
 
-This displays a progress indicator.
-The indeterminate style uses the standard Apple spinner.
-The determinate style uses a thin progress bar.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/progressview",
+"ProgressView" %} displays a progress indicator.
+It takes a label,
+an optional `value` argument that is a binding to the current value,
+and an optional `total` argument that is the maximum value (default is 0.0).
+If the `value` argument is supplied then the determinate style
+that displays a thin progress bar is used.
+If the `value` argument is omitted then the indeterminate style
+that uses the standard Apple spinner is used.
 
 ```swift
 struct ContentView: View {
