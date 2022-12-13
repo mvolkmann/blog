@@ -3720,7 +3720,8 @@ VStack {
 
 ### Stepper
 
-This displays "-" and "+" buttons that can be
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/stepper",
+"Stepper" %} view displays "-" and "+" buttons that can be
 tapped to decrement and increment a value.
 It takes a label to display before the buttons,
 a binding for the current value,
