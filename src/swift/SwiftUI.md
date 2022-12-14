@@ -5128,6 +5128,8 @@ An app is considered inactive when none of its scenes are active.
 One or more scenes might be visible, but none are interactive.
 This happens when the user swipes up from the bottom of the screen
 to reveal the "App Switcher".
+This also happens when in multi-tasking mode and
+the app is visible but another app is active.
 
 An app moves to the background state when another app becomes active.
 
