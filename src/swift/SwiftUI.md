@@ -3431,6 +3431,47 @@ TextField("my placeholder", text: $locationVM.searchQuery)
     .foregroundColor(.primary)
 ```
 
+By default the on-screen keyboard that appears
+when a `TextField`, `SecureField`, or `TextEditor` has focus
+contains a "submit" button labelled "return".
+This can be changed to eight other values by applying the
+`submitLabel` view modifier and passing it a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/submitlabel",
+"SubmitLabel" %} static property. These values include `.continue`,
+`.done`, `.go`, `.join`, `.next`, `.return`, `.search`, and `.send`.
+
+To run code when the user completes entering text in a `TextField`,
+`SecureField`, or `TextEditor` by pressing the "submit" button,
+apply the `onSubmit` view modifier passing it a closure.
+For example:
+
+```swift
+struct ContentView: View {
+    @State private var name = ""
+    @State private var textColor: Color = .red
+
+    var body: some View {
+        VStack {
+            TextField("Name", text: $name)
+                .textFieldStyle(.roundedBorder)
+                .onSubmit {
+                    textColor = .green
+                }
+            if !name.isEmpty {
+                Text("Hello, \(name)!")
+                    .foregroundColor(textColor)
+            }
+        }
+        .padding()
+    }
+}
+```
+
+The `onSubmit` view modifier can be attached to any view.
+The closure passed to it will run when any `TextField`,
+`SecureField`, or `TextEditor` nested inside it is submitted.
+This makes the `Form` view and good candidate.
+
 ### Controlling Focus
 
 The `@FocusState` property wrapper is used to
