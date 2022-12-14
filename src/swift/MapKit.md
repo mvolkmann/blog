@@ -296,6 +296,29 @@ Map(
 )
 ```
 
+## Tracking User
+
+To track the user location on a map, set the Info properties
+"Privacy - Location When In Use Usage Description" and
+"Privacy - Location Always and When in Use Usage Description"
+to strings that describe why permission to track location is being requested.
+
+Create a `Map` instance with the following:
+
+```swift
+@State private var region = MKCoordinateRegion(
+  center: CLLocationCoordinate2D(latitude: startLat, longitude: startLng),
+  span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+)
+
+Map(
+    coordinateRegion: $region,
+    showsUserLocation: true,
+    userTrackingMode: .constant(.follow)
+)
+.frame(width: someWidth, height: someHeight)
+```
+
 ## Simulator
 
 To simulate a drag event, simply click and drag.
