@@ -2285,6 +2285,12 @@ struct ContentView: View {
 }
 ```
 
+To run code when the user completes entering text in any `TextField`,
+`SecureField`, or `TextEditor` within the `Form`,
+apply the `onSubmit` view modifier passing it a closure.
+This can also be applied to an individual input
+as described in the [TextField](#textfield) section.
+
 Common UI components that are not built into SwiftUI include:
 
 - checkbox: alternative is Toggle
