@@ -3591,23 +3591,53 @@ It renders a button for pasting data from the system clipboard.
 
 ### Link
 
-This creates a hyperlink like an HTML `a` element.
-Clicking it opens the associated URL in Safari.
-These work in the Simulator, but Preview is not able to open Safari.
-
-When using this it may be necessary to add the key "Supports Document Browser"
-with the Boolean value "YES" in the target Info tab to remove a build warning.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/link",
+"Link" %} view creates a hyperlink like an HTML `a` element.
+It takes link text and a `destination` argument
+whose value is a {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/url", "URL" %} struct.
+Tapping a `Link` opens the associated URL in Safari.
+Links work in the Simulator but Preview is not able to open Safari.
 
 ```swift
 Link(
     "link text",
     destination: URL(string: "https://some-domain/some-path"
 )
+```
 
+To display a view instead of plain link text,
+add the `label` argument as follows:
+
+```swift
 Link(
     destination: URL(string: "https://some-domain/some-path"),
     label: SomeView
 )
+```
+
+Apply the `font` view modifier to change the font.
+
+Apply the `tint` view modifier to change the color.
+
+When using `Link` views it may be necessary to
+add the key "Supports Document Browser" with the Boolean value "YES"
+in the target Info tab to remove a build warning.
+
+To open a `URL` programmatically, get the `openURL` function
+from the environment and pass it a `URL` object.
+For example:
+
+```swift
+struct SomeView: View {
+    @Environment(\.openURL) var openURL
+
+    var body: some View {
+        Button("My Blog") {
+            openURL(URL(string: "https://mvolkmann.github.io/blog/")!)
+        }
+    }
+}
 ```
 
 ### Menu
