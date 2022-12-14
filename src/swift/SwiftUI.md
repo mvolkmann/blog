@@ -4171,6 +4171,9 @@ struct ContentView: View {
 }
 ```
 
+To change the color of a `ProgressView`
+apply the `tint` view modifier passing it a `Color`.
+
 To change the size of an indeterminate `ProgressView`
 apply the `scaleEffect` modifier. For example:
 
