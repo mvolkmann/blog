@@ -2998,7 +2998,7 @@ or `.roundedRectangle(radius: cornerRadius)`.
 This only takes effect when the `buttonStyle` view modifier is also applied.
 
 To change the text color,
-apply the `foregroundColor` view modifier passing it a `Color`.
+apply the `tint` or `foregroundColor` view modifier passing it a `Color`.
 
 When their `role` attribute is set to `.destructive`, the text is red.
 When their `role` attribute is set to `.cancel`, `.none`, or not specified,
@@ -5092,6 +5092,44 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
+
+## State Detection
+
+To detect when the app moves between the
+foreground, background, and inactive states, get the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scenephase",
+"scenePhase" %} from the environment and apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/onchange(of:perform:)",
+"onChange" %} view modifier to any view to watch for changes to the `scenePhase`.
+
+For example:
+
+```swift
+struct ContentView: View {
+    @Environment(\.scenePhase) var scenePhase
+
+    var body: some View {
+        Button("Tap Me!") {
+            print("got tap")
+        }
+        .onChange(of: scenePhase) { newPhase in
+            print("phase is now \(newPhase)")
+        }
+    }
+}
+```
+
+An app can have multiple scenes.
+
+An app is considered active if any of its scenes are active
+which means a scene is in the foreground (visible) and interactive.
+
+An app is considered inactive when none of its scenes are active.
+One or more scenes might be visible, but none are interactive.
+This happens when the user swipes up from the bottom of the screen
+to reveal the "App Switcher".
+
+An app moves to the background state when another app becomes active.
 
 ## Search
 
