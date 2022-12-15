@@ -375,7 +375,7 @@ The following sections describe the views defined by SwiftUI.
   - minimize usage to important situations
   - SwiftUI creates this with the `alert` view modifier
     that can be called on any kind of view.
-    See the "Alerts" section.
+    See the [Alerts](#alerts) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/collections/",
@@ -405,7 +405,7 @@ The following sections describe the views defined by SwiftUI.
     using either scrolling or page curl effects
   - SwiftUI provides this in `TabView` when it has a
     `tabViewStyle` view modifier with a value of `.page`.
-    See an example in the `TabView` section.
+    See an example in the [TabView](#tabview) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/popovers/",
@@ -439,7 +439,7 @@ The following sections describe the views defined by SwiftUI.
   - there are two available heights, large (default) and medium
   - modal by default
   - SwiftUI creates this with the `sheet` view modifier.
-    See an example in the "Modal Dialogs" section.
+    See an example in the [Modal Dialogs](#modal-dialogs) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/split-views/",
@@ -471,7 +471,7 @@ The following sections describe the views defined by SwiftUI.
     and cells don't need to be configured.
     Instead a `List` is composed of rows that each
     know how to arrange and display their data.
-    See the "List" section.
+    See the [List](#list) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/text-views/",
@@ -485,7 +485,7 @@ The following sections describe the views defined by SwiftUI.
     "https://developer.apple.com/documentation/uikit/uikeyboardtype",
     "UIKeyboardType enum" %}
   - SwiftUI creates this with a combination of `Text` and `AttributedString`.
-    See the `AttributedString` section.
+    See the [AttributedString](#attributedstring) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/views/web-views/",
@@ -567,7 +567,7 @@ The following sections describe the views defined by SwiftUI.
   - can customize images
   - SwiftUI provides this in `TabView` when it has a
     `tabViewStyle` view modifier with a value of `.page`.
-    See an example in the `TabView` section.
+    See an example in the [TabView](#tabview) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/",
@@ -715,7 +715,7 @@ For example, `Text(AwesomeIcon.aws.rawValue)`.
   - can include clear and confirm buttons
   - SwiftUI creates this with the `searchable` view modifier
     can be applied to a view that is inside a `NavigationView`.
-    See an example in the "Search" section.
+    See an example in the [Search](#search) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/",
@@ -726,7 +726,7 @@ For example, `Text(AwesomeIcon.aws.rawValue)`.
   - selecting an item in the sidebar changes what is displayed
     in the pane that follows
   - SwiftUI creates this by applying the `.listStyle(.sidebar)` view modifier
-    to a `List` view. See an example in the "Sidebar" section.
+    to a `List` view. See an example in the [Sidebars](#sidebars) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/",
@@ -758,7 +758,7 @@ For example, `Text(AwesomeIcon.aws.rawValue)`.
   - appears at bottom of screen
   - SwiftUI creates this with the `toolbar` view modifier
     and `ToolbarItemGroup` or `ToolbarItem` views.
-    See an example in the "Toolbars" section.
+    See an example in the [Toolbars](#toolbars) section.
 
 ## Core Graphics (CG)
 
@@ -937,150 +937,6 @@ In this case, consider moving it to its own source file.
 
 Command-click a view to get a context menu that contains the options
 "Extract to Variable", "Extract to Method", and "Extract Subview".
-
-### @State Property Wrapper
-
-All views are immutable structs.
-Typically they get data from a model object.
-They can also have associated mutable data
-by applying the `@State` property wrapper to a property.
-This essentially creates a constant pointer inside a view struct
-to non-constant data held outside the view struct.
-Changes to these properties cause the view body to be rebuilt.
-
-Properties declared with `@State` usually include the `private`
-access control keyword because the data is only used by that view.
-
-Updates to `@State` properties should occur in the main queue.
-To do this from asynchronous code, wrap the update as follows:
-
-```swift
-DispatchQueue.main.async {
-    myState = newValue
-}
-```
-
-To initialize a state property based on
-data passed to an initializer (`init` method),
-prefix the state name with an underscore
-and set it to a `State` object.
-
-The following example demonstrates using component state
-to implement a counter view:
-
-```swift
-import SwiftUI
-
-struct Counter: View {
-    @State private var count = 0
-
-    init() {} // starts with default count value
-
-    init(start: Int) {
-        _count = State(initialValue: start)
-    }
-
-    // a computed property
-    var body: some View {
-        // HStack is a container view that arranges it children horizontally.
-        HStack {
-            Button("-") { count -= 1 }
-            Text("\(count)")
-            Button("+") { count += 1 }
-        }.font(.system(size: 24))
-    }
-}
-
-struct ContentView: View {
-    var body: some View {
-        // VStack is a container view that arranges it children vertically.
-        VStack {
-            Counter()
-            Counter(start: 7)
-        }
-    }
-}
-```
-
-The following example holds the status of a stoplight
-in a state property named "status".
-Note the use of `$` before the name to
-get a two-way binding with a `TextField`.
-
-<img alt="SwiftUI Stoplight" style="width: 50%"
-  src="/blog/assets/SwiftUI-Stoplight.png?v={{pkg.version}}"
-  title="SwiftUI Stoplight">
-
-```swift
-import SwiftUI
-
-struct CircleButton: View {
-    var color: Color
-    var selected: Bool = false
-    var action: () -> Void // a function
-
-    var body: some View {
-        Button(action: action, label: {
-            ZStack {
-                Circle().fill(color)
-                // Conditional logic can be implemented with an "if" statement,
-                // but iteration cannot be implemented with a "for-in" loop.
-                // A "ForEach" View must be used instead.
-                if selected {
-                    Circle().strokeBorder(Color.black, lineWidth: 5)
-                }
-            }
-        })
-    }
-}
-
-struct Light: Identifiable {
-    let id: String
-    let color: Color
-}
-
-struct MyTextField: View {
-    var label: String
-    var text: Binding<String>
-
-    var body: some View {
-        TextField(label, text: text)
-            .autocapitalization(.none)
-            .padding()
-            .textFieldStyle(.roundedBorder)
-    }
-}
-
-// This file must define a struct named "ContentView".
-struct ContentView: View {
-    @State private var status = "stop"
-
-    let lights: [Light] = [
-        Light(id: "stop", color: .red),
-        Light(id: "yield", color: .yellow),
-        Light(id: "go", color: .green)
-    ]
-
-    var body: some View {
-        VStack {
-            // When iterating over elements that do not conform to
-            // the `Identifiable` protocol, add the "id:" argument
-            // whose value is a key path that specifies
-            // how to find something unique in the element.
-            ForEach(lights) { light in
-                CircleButton(
-                    color: light.color,
-                    selected: status == light.id
-                ) {
-                    status = light.id
-                }
-            }
-            // $ in front of status is needed for a two-way binding.
-            MyTextField(label: "status", text: $status)
-        }
-    }
-}
-```
 
 ## ViewBuilders
 
@@ -1431,7 +1287,7 @@ It wraps that view in a `VStack` containing two `HStack`s.
 The second `HStack` includes a `Button` containing a chevron icon.
 Clicking the `Button` toggles whether the first `HStack` is rendered.
 It also rotates the chevron icon using animation
-which is covered later in the "Animation" section.
+which is covered later in the [Animation](#animation) section.
 
 <img alt="SwiftUI ViewModifier" style="width: 70%"
   src="/blog/assets/SwiftUI-ViewModifier.png?v={{pkg.version}}"
@@ -1537,6 +1393,185 @@ of classes, structs, and enums.
 
 SwiftUI supports the following property wrappers:
 
+### @State
+
+Views often get data from model objects.
+They can also have associated mutable data by applying the
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/state",
+"@State" %} property wrapper to a property.
+This essentially creates a constant pointer inside a view struct
+to non-constant data held outside the view struct.
+It allows a view instance to maintain state.
+
+When the value of a normal struct property
+(declared without a property wrapper)
+is modified, a new instance of the struct is created.
+This happens because structs are value types.
+
+We don't want a new instance to be created for structs that represent views.
+Applying the `@State` property wrapper to a struct property
+prevents this because SwiftUI manages the value outside of the struct.
+When the value of this kind of property is changed,
+the view `body` is recomputed.
+
+This is somewhat like the `useState` hook in React.
+
+Properties declared with `@State` usually include the `private`
+access control keyword because the data is only used by that view.
+
+The `@State` view modifier intended for storing basic values
+with types like `Bool`, `Int`, `Double`, and `String`.
+
+An `@State` property can also store more complex types.
+However if it is used to store a class instance (a reference type)
+and a property of the class is modified,
+the associated view `body` will not be recomputed.
+A new class instance must be created to trigger an update.
+
+Note that using a `struct` instead of a `class`
+in the scenario described above does work.
+The reason is that changing the value of a struct property
+creates a new instance of the struct.
+However, this may not be desirable because
+it copies every property of the struct.
+
+Updates to `@State` properties should occur in the main queue.
+To do this from asynchronous code, wrap the update as follows:
+
+```swift
+MainActor.run {
+    myState = newValue
+}
+
+// or ...
+
+DispatchQueue.main.async {
+    myState = newValue
+}
+```
+
+To initialize a state property based on
+data passed to an initializer (`init` method),
+prefix the state property name with an underscore
+and set it to a `State` object with an `initialValue` argument.
+
+The following example demonstrates using component state
+to implement a counter view:
+
+```swift
+import SwiftUI
+
+struct Counter: View {
+    @State private var count = 0
+
+    init() {} // starts with default count value
+
+    init(start: Int) {
+        _count = State(initialValue: start)
+    }
+
+    // a computed property
+    var body: some View {
+        // HStack is a container view that arranges it children horizontally.
+        HStack {
+            Button("-") { count -= 1 }
+            Text("\(count)")
+            Button("+") { count += 1 }
+        }.font(.system(size: 24))
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        // VStack is a container view that arranges it children vertically.
+        VStack {
+            Counter()
+            Counter(start: 7)
+        }
+    }
+}
+```
+
+The following example holds the status of a stoplight
+in a state property named "status".
+Note the use of `$` before the name to
+get a two-way binding with a `TextField`.
+
+<img alt="SwiftUI Stoplight" style="width: 50%"
+  src="/blog/assets/SwiftUI-Stoplight.png?v={{pkg.version}}"
+  title="SwiftUI Stoplight">
+
+```swift
+import SwiftUI
+
+struct CircleButton: View {
+    var color: Color
+    var selected: Bool = false
+    var action: () -> Void // a function
+
+    var body: some View {
+        Button(action: action, label: {
+            ZStack {
+                Circle().fill(color)
+                // Conditional logic can be implemented with an "if" statement,
+                // but iteration cannot be implemented with a "for-in" loop.
+                // A "ForEach" View must be used instead.
+                if selected {
+                    Circle().strokeBorder(Color.black, lineWidth: 5)
+                }
+            }
+        })
+    }
+}
+
+struct Light: Identifiable {
+    let id: String
+    let color: Color
+}
+
+struct MyTextField: View {
+    var label: String
+    var text: Binding<String>
+
+    var body: some View {
+        TextField(label, text: text)
+            .autocapitalization(.none)
+            .padding()
+            .textFieldStyle(.roundedBorder)
+    }
+}
+
+// This file must define a struct named "ContentView".
+struct ContentView: View {
+    @State private var status = "stop"
+
+    let lights: [Light] = [
+        Light(id: "stop", color: .red),
+        Light(id: "yield", color: .yellow),
+        Light(id: "go", color: .green)
+    ]
+
+    var body: some View {
+        VStack {
+            // When iterating over elements that do not conform to
+            // the `Identifiable` protocol, add the "id:" argument
+            // whose value is a key path that specifies
+            // how to find something unique in the element.
+            ForEach(lights) { light in
+                CircleButton(
+                    color: light.color,
+                    selected: status == light.id
+                ) {
+                    status = light.id
+                }
+            }
+            // $ in front of status is needed for a two-way binding.
+            MyTextField(label: "status", text: $status)
+        }
+    }
+}
+```
+
 ### @Binding
 
 This property wrapper is applied to a property of a child view
@@ -1577,7 +1612,7 @@ To pass a binding to a constant value, use `.constant(value)`.
 ### @Environment
 
 This is used to access environment values.
-See the "Environment" section.
+See the [Environment](#environment) section.
 
 ### @EnvironmentObject
 
@@ -1645,40 +1680,6 @@ struct ContentView: View {
     }
 }
 ```
-
-### @State
-
-This property wrapper was described earlier
-near the end of the section on "Views".
-It enables view structs to maintain state.
-This is intended for storing basic values with types like
-`Bool`, `Int`, `Double`, and `String`.
-
-When the value of a normal struct property
-(declared without a property wrapper)
-is modified, a new instance of the struct is created.
-This happens because structs are value types.
-
-We don't want a new instance to be created for structs that represent views.
-Applying the `@State` property wrapper to a struct property
-prevents this because SwiftUI manages the value outside of the struct.
-When the value of this kind of property is changed,
-the view `body` is recomputed.
-
-This is somewhat like the `useState` hook in React.
-
-An `@State` property can also store more complex types.
-However if it is used to store a class instance (a reference type)
-and a property of the class is modified,
-the associated view `body` will not be recomputed.
-A new class instance must be created to trigger an update.
-
-Note that using a `struct` instead of a `class`
-in the scenario described above does work.
-The reason is that changing the value of a struct property
-creates a new instance of the struct.
-However, this may not be desirable because
-it copies every property of the struct.
 
 ### @StateObject
 
