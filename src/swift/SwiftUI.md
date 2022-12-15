@@ -5207,7 +5207,7 @@ An app moves to the background state when another app becomes active.
 
 SwiftUI apps, unlike UIKit apps, are not required to define
 a class to be defined that conforms to the {% aTargetBlank
-https://developer.apple.com/documentation/uikit/uiapplicationdelegate",
+"https://developer.apple.com/documentation/uikit/uiapplicationdelegate",
 "UIApplicationDelegate" %} protocol.
 This protocol defines many methods are automatically invoked
 at key points in the application lifecycle including:
@@ -5242,7 +5242,85 @@ To add use of an `AppDelegate` to a SwiftUI app:
    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
    ```
 
-## Detecting Device Rotation
+## Detecting Device Orientation
+
+The device orientation can be detected by listening for
+`orientationDidChangeNotification` notifications.
+The "Hacking With Swift" post {% aTargetBlank
+"https://www.hackingwithswift.com/quick-start/swiftui/how-to-detect-device-rotation",
+"How to detect device rotation" %} describes implementing a custom view modifier
+that simplifies doing this.
+The following is a customized version of the code in that post.
+
+```swift
+import SwiftUI
+
+struct OrientationViewModifier: ViewModifier {
+    // This is a function that will called when the orientation changes.
+    let action: (UIDeviceOrientation) -> Void
+
+    func body(content: Content) -> some View {
+        content
+            // We must have "onAppear" in order to use "onReceive",
+            // but it doesn't need to do anything.
+            .onAppear()
+            .onReceive(
+                NotificationCenter.default
+                    .publisher(
+                        for: UIDevice
+                            .orientationDidChangeNotification
+                    )
+            ) { _ in
+                action(UIDevice.current.orientation)
+            }
+    }
+}
+
+// Define a custom view modifier.
+extension View {
+    func onRotate(
+        action: @escaping (UIDeviceOrientation) -> Void
+    ) -> some View {
+        modifier(OrientationViewModifier(action: action))
+    }
+}
+
+struct ContentView: View {
+    // UIDeviceOrientation is an enum defined by UIKit.
+    @State private var orientation = UIDeviceOrientation.unknown
+
+    var description: String {
+        switch orientation {
+        case .faceDown, .faceUp:
+            return "flat"
+        case .landscapeLeft, .landscapeRight:
+            return "landscape"
+        case .portrait, .portraitUpsideDown:
+            return "portrait"
+        case .unknown:
+            return "unknown"
+        @unknown default:
+            fatalError("unknown UIDeviceOrientation value")
+        }
+    }
+
+    var body: some View {
+        Text(description)
+            .onRotate { orientation in
+                self.orientation = orientation
+            }
+    }
+}
+```
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/uikit/uideviceorientation",
+"UIDeviceOrientation" %} enum also defines the following computed properties:
+
+- `isFlat`: true for `.faceDown` and `.faceUp`
+- `isLandscape`: true for `.landscapeLeft` and `.landscapeRight`
+- `isPortrait`: true for `.portrait` and `.portraitUpsideDown`
+- `isValidInterfaceOrientation`: true if one of the portrait or landscape values
 
 ## Search
 
