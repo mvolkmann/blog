@@ -1385,6 +1385,10 @@ Text("Shadow Demo")
 ```
 
 The event handling methods like `onTapGesture` area also view modifiers.
+This takes a `count` argument with a default value of 1
+that specifies the number of consecutive taps required
+to trigger running a provided closure.
+The `onTapGesture` view modifier can be applied to any view.
 
 Several view modifiers take a `ShapeStyle` object.
 Types that conform to the `ShapeStyle` protocol include
