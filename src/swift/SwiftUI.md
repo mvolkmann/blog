@@ -5326,7 +5326,7 @@ struct OrientationViewModifier: ViewModifier {
 
 // Define a custom view modifier.
 extension View {
-    func onRotate(
+    func onOrientationChange(
         action: @escaping (UIDeviceOrientation) -> Void
     ) -> some View {
         modifier(OrientationViewModifier(action: action))
@@ -5354,7 +5354,7 @@ struct ContentView: View {
 
     var body: some View {
         Text(description)
-            .onRotate { orientation in
+            .onOrientationChange { orientation in
                 self.orientation = orientation
             }
     }
