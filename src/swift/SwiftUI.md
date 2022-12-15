@@ -292,6 +292,7 @@ To see this in action:
 Here's an example of using such an icon:
 
 ```swift
+// The @State view modifier is described later.
 @State private var percent = 0.0
 ...
 Image(systemName: "cellularbars", variableValue: percent)
@@ -881,43 +882,6 @@ struct Constants {
 Note how a nested struct is used to group related constants.
 An example reference to one of these is `Constants.Colors.primary`.
 
-### Executing Code When View Appears/Disappears
-
-There are three ways to specify code to run
-when a view is created or first appears.
-
-1. Place code in the view initializer (`init`).
-1. For synchronous code, apply the `onAppear` view modifier
-   to the outermost view returned by the `body` function,
-   passing it a closure.
-1. For asynchronous code, apply the `task` view modifier
-   to the outermost view returned by the `body` function,
-   passing it a closure.
-
-The `task` view modifier takes a closure that is run in an asynchronous content
-and the code inside it can use the `await` keyword.
-This is place to make API calls that fetch data the UI needs.
-If the user navigates away from the view before the code is run,
-certain asynchronous tasks are automatically cancelled.
-
-To rerun the code in a `task` closure every time the value of
-an observable property such as a `@State` variable changes,
-include the `id` argument.
-
-By default the task is run at the highest priority.
-To give it a lower priority, include the `priority` argument.
-
-The `onAppear` view modifier also takes a closure,
-but its code can only use the `await` keyword if it is wrapped in a `Task`.
-
-To run code when a view disappears, apply the `onDisappear` view modifier,
-passing it a closure.
-
-To run code the app launches, add an `init` method to the main struct
-that inherits from `App` and place the code there.
-This is an ideal place to set default `UsersDefaults` data
-if it has not yet been set.
-
 ### Extracting Views
 
 When the `body` of a view is longer than what can be displayed on the screen
@@ -1395,7 +1359,7 @@ SwiftUI supports the following property wrappers:
 
 ### @State
 
-Views often get data from model objects.
+Views often get data from view model objects.
 They can also have associated mutable data by applying the
 {% aTargetBlank "https://developer.apple.com/documentation/swiftui/state",
 "@State" %} property wrapper to a property.
@@ -1683,12 +1647,16 @@ struct ContentView: View {
 
 ### @StateObject
 
-The `@StateObject` property wrapper is used to
-create an instance of an `ObservableObject`
-which is an object that publishes changes to its properties
-that are annotated with the `@Published` property wrapper.
-When the values of these properties change,
-the associated view `body` will be recomputed.
+The `@StateObject` property wrapper is applied to view properties that
+hold an instance of a class that conforms to the {% aTargetBlank
+"https://developer.apple.com/documentation/combine/observableobject",
+"ObservableObject" %} protocol.
+These classes are referred to as "View Models".
+They have properties that are annotated with
+the `@Published` property wrapper.
+Changes to the values of these properties are published.
+This triggers the `body` of each view that depends on them
+to be recomputed, which updates the UI.
 The following example demonstrates this:
 
 ```swift
@@ -4836,6 +4804,43 @@ VStack {
     .background(Image("Comet").resizable().scaledToFill())
     .edgesIgnoringSafeArea(.all) // allows drawing in unsafe areas
 ```
+
+### Executing Code When View Appears/Disappears
+
+There are three ways to specify code to run
+when a view is created or first appears.
+
+1. Place code in the view initializer (`init`).
+1. For synchronous code, apply the `onAppear` view modifier
+   to the outermost view returned by the `body` function,
+   passing it a closure.
+1. For asynchronous code, apply the `task` view modifier
+   to the outermost view returned by the `body` function,
+   passing it a closure.
+
+The `task` view modifier takes a closure that is run in an asynchronous content
+and the code inside it can use the `await` keyword.
+This is place to make API calls that fetch data the UI needs.
+If the user navigates away from the view before the code is run,
+certain asynchronous tasks are automatically cancelled.
+
+To rerun the code in a `task` closure every time the value of
+an observable property such as a `@State` variable changes,
+include the `id` argument.
+
+By default the task is run at the highest priority.
+To give it a lower priority, include the `priority` argument.
+
+The `onAppear` view modifier also takes a closure,
+but its code can only use the `await` keyword if it is wrapped in a `Task`.
+
+To run code when a view disappears, apply the `onDisappear` view modifier,
+passing it a closure.
+
+To run code the app launches, add an `init` method to the main struct
+that inherits from `App` and place the code there.
+This is an ideal place to set default `UsersDefaults` data
+if it has not yet been set.
 
 ## Event Handling
 
