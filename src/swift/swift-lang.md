@@ -2697,10 +2697,40 @@ Lazy properties are not thread safe and will be computed again in each thread.
 
 Property observers are methods on a property that are invoked
 before (`willSet`) and after (`didSet`) the value changes.
-The `willSet` method is passed the new value
-and it is available in the variable `newValue`.
 
-TODO: Finish this section!
+The `willSet` method is passed the new value.
+If no parameter name is supplied, the new value will
+be available in the supplied variable `newValue`.
+The value cannot be changed in this method.
+
+The `didSet` method is passed the old value.
+If no parameter name is supplied, the old value will
+be available in the supplied variable `oldValue`.
+The value can be changed in this method.
+
+For example:
+
+```swift
+class Game: ObservableObject {
+    var score = 0 {
+        willSet {
+            print("willSet: old value = \(score)")
+            print("willSet: new value = \(newValue)")
+        }
+        didSet {
+            print("didSet: old value = \(oldValue)")
+            print("didSet: new value = \(score)")
+            if score < 5 {
+                // Notify subscribers of the change.
+                objectWillChange.send()
+            } else {
+                print("didSet: reset to old value")
+                score = oldValue
+            }
+        }
+    }
+}
+```
 
 ### Methods
 
