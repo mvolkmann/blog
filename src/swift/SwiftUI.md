@@ -1573,6 +1573,122 @@ struct ParentView: View {
 
 To pass a binding to a constant value, use `.constant(value)`.
 
+### @StateObject
+
+The `@StateObject` property wrapper is applied to view properties that
+hold ("own") an instance of a class that conforms to the {% aTargetBlank
+"https://developer.apple.com/documentation/combine/observableobject",
+"ObservableObject" %} protocol.
+These classes are referred to as "View Models".
+They have properties that are annotated with
+the `@Published` property wrapper.
+Changes to the values of these properties are published.
+This triggers the `body` of each view that depends on them
+to be recomputed, which updates the UI.
+
+The following code demonstrates defining a view model
+and subscribing to it:
+
+```swift
+class MyState: ObservableObject {
+    @Published var score: Int = 0
+    // Could declare additional published properties here.
+}
+
+struct ContentView: View {
+    @StateObject var myState = MyState()
+
+    var body: some View {
+        VStack {
+            Button("Increment") {
+                myState.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("score = \(myState.score)")
+        }
+    }
+}
+```
+
+To initialize a state variable in an `init` method,
+write code like the following:
+
+```swift
+    init() {
+        // Note the underscore prefix on the variable name.
+        _myState = StateObject(wrappedValue: someValue)
+    }
+```
+
+Classes that conform to the `ObservableObject` protocol can choose to
+manually publish changes rather than have it happen automatically.
+This can be useful when validation needs to occur before publishing.
+To do this, do not mark a property as `@Published` and
+instead call `objectWillChange.send()` before the value changes.
+For example:
+
+```swift
+class Game: ObservableObject {
+    var score = 0 {
+        willSet{
+            objectWillChange.send()
+        }
+    }
+}
+```
+
+### @ObservedObject
+
+The `@ObservedObject` property wrapper marks a property
+that receives an instance of a view model (`ObservableObject`)
+that is passed in from a parent view.
+This subscribes to changes published by an observable object,
+but it doesn't "own" the object.
+When changes occur, the view `body` is recomputed.
+
+The following code demonstrates passing a view model
+from one view to another:
+
+```swift
+class MyState: ObservableObject {
+    @Published var score: Int = 0
+    // Could declare additional published properties here.
+}
+
+struct ChildView: View {
+    @ObservedObject var share: MyState
+
+    var body: some View {
+        VStack {
+            Button("ChildView: Increment") {
+                // This also updates myState in ContentView.
+                share.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("ChildView: score = \(share.score)")
+        }
+    }
+}
+
+struct ContentView: View {
+    @StateObject var myState = MyState()
+
+    var body: some View {
+        VStack {
+            Button("ContentView: Increment") {
+                // This also updates share in ChildView.
+                myState.score += 1
+            }
+            .buttonStyle(.bordered)
+            Text("ContentView: score = \(myState.score)")
+
+            // Passing the @StateObject variable.
+            ChildView(share: myState)
+        }
+    }
+}
+```
+
 ### @Environment
 
 This is used to access environment values.
@@ -1581,7 +1697,10 @@ See the [Environment](#environment) section.
 ### @EnvironmentObject
 
 The `@EnvironmentObject` property wrapper allows multiple views
-to share access to an `ObservableObject`.
+to share access to a view model.
+It offers an alternative to passing a view model
+through multiple layers of the view hierarchy
+using the `@ObservedObject` property wrapper.
 
 The following code demonstrates this.
 It works in the Simulator, but not in Preview.
@@ -1641,100 +1760,6 @@ struct ContentView: View {
         // multiple times, but only once for each type because
         // the type is how the values are distinguished.
         .environmentObject(sharedData)
-    }
-}
-```
-
-### @StateObject
-
-The `@StateObject` property wrapper is applied to view properties that
-hold an instance of a class that conforms to the {% aTargetBlank
-"https://developer.apple.com/documentation/combine/observableobject",
-"ObservableObject" %} protocol.
-These classes are referred to as "View Models".
-They have properties that are annotated with
-the `@Published` property wrapper.
-Changes to the values of these properties are published.
-This triggers the `body` of each view that depends on them
-to be recomputed, which updates the UI.
-The following example demonstrates this:
-
-```swift
-class MyState: ObservableObject {
-    @Published var score: Int = 0
-    // Could declare additional published properties here.
-}
-
-struct ContentView: View {
-    @StateObject var myState = MyState()
-
-    var body: some View {
-        VStack {
-            Button("Increment") {
-                myState.score += 1
-            }
-            .buttonStyle(.bordered)
-            Text("score = \(myState.score)")
-        }
-    }
-}
-```
-
-To initialize a state variable in an `init` method,
-write code like the following:
-
-```swift
-    init() {
-        // Note the underscore prefix on the variable name.
-        _myState = StateObject(wrappedValue: someValue)
-    }
-```
-
-### @ObservedObject
-
-The `@ObservedObject` property wrapper marks a property
-that receives an instance of an `ObservableObject` subclass
-that is passed in from a parent view.
-This subscribes to changes published by an observable object
-and recomputes the associated view `body` when it changes.
-The following example demonstrates this:
-
-```swift
-class MyState: ObservableObject {
-    @Published var score: Int = 0
-    // Could declare additional published properties here.
-}
-
-struct ChildView: View {
-    @ObservedObject var share: MyState
-
-    var body: some View {
-        VStack {
-            Button("ChildView: Increment") {
-                // This also updates myState in ContentView.
-                share.score += 1
-            }
-            .buttonStyle(.bordered)
-            Text("ChildView: score = \(share.score)")
-        }
-    }
-}
-
-struct ContentView: View {
-    @StateObject var myState = MyState()
-
-    var body: some View {
-        VStack {
-            Button("ContentView: Increment") {
-                // This also updates share in ChildView.
-                myState.score += 1
-            }
-            .buttonStyle(.bordered)
-            Text("ContentView: score = \(myState.score)")
-
-            // Passing the @StateObject variable.
-            ChildView(share: myState)
-        }
     }
 }
 ```

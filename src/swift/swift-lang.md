@@ -2693,6 +2693,15 @@ It must be declared with `var` and
 can be mutated after its initial value is computed.
 Lazy properties are not thread safe and will be computed again in each thread.
 
+## Property Observers
+
+Property observers are methods on a property that are invoked
+before (`willSet`) and after (`didSet`) the value changes.
+The `willSet` method is passed the new value
+and it is available in the variable `newValue`.
+
+TODO: Finish this section!
+
 ### Methods
 
 Methods are defined with the `func` keyword.
