@@ -881,16 +881,18 @@ struct Constants {
 Note how a nested struct is used to group related constants.
 An example reference to one of these is `Constants.Colors.primary`.
 
-### Executing Code When View Appears
+### Executing Code When View Appears/Disappears
 
 There are three ways to specify code to run
 when a view is created or first appears.
 
 1. Place code in the view initializer (`init`).
-1. For synchronous code, attach an `onAppear` view modifier
-   to the outermost view returned by the `body` function.
-1. For asynchronous code, attach a `task` view modifier
-   to the outermost view returned by the `body` function.
+1. For synchronous code, apply the `onAppear` view modifier
+   to the outermost view returned by the `body` function,
+   passing it a closure.
+1. For asynchronous code, apply the `task` view modifier
+   to the outermost view returned by the `body` function,
+   passing it a closure.
 
 The `task` view modifier takes a closure that is run in an asynchronous content
 and the code inside it can use the `await` keyword.
@@ -906,6 +908,14 @@ To give it a lower priority, include the `priority` argument.
 
 The `onAppear` view modifier also takes a closure,
 but its code can only use the `await` keyword if it is wrapped in a `Task`.
+
+To run code when a view disappears, apply the `onDisappear` view modifier,
+passing it a closure.
+
+To run code the app launches, add an `init` method to the main struct
+that inherits from `App` and place the code there.
+This is an ideal place to set default `UsersDefaults` data
+if it has not yet been set.
 
 ### Extracting Views
 
@@ -4995,6 +5005,56 @@ extension View {
 }
 ```
 
+## Keyboard Shortcuts
+
+To defined keyboard shortcuts, apply the `keyboardShortcut` view modifier.
+Pass this a `String` that describes the key (ex. "x").
+This assumes the command key will be held down.
+
+Alternatively the `keyboardShort` view modifier can be passed a "semantic key".
+There are only two defined semantic keys.
+The value `.cancelAction` refers to the escape key.
+The value `.defaultAction` refers to the return key.
+
+For example:
+
+```swift
+struct ContentView: View {
+    @State private var message = "Tap a button."
+
+    var body: some View {
+        VStack {
+            Button("First") {
+                message = "You selected First."
+            }
+            .keyboardShortcut("f") // cmd-f
+
+            Button("Second") {
+                message = "You selected Second."
+            }
+            .keyboardShortcut(
+                .return,
+                modifiers: [.command, .shift]
+            ) // cmd-shift-return
+
+            Text(message)
+        }
+    }
+}
+```
+
+To require modifier keys other than the default command key,
+add the `modifiers` argument with a value that is
+an array of all the required {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/eventmodifiers",
+"EventModifiers" %} values. These include `.capslock`, `.command`,
+`.control`, `numericPad`, `option`, and `shift`.
+For example, to require the command key and the shift key
+add `modifiers: [.command, .shift]`.
+
+On an iPad with a physical keyboard, hold down the command key
+to see a keyboard shortcut overlay that lists the available keyboard shortcuts.
+
 ## Environment
 
 SwiftUI provides many values to all views through the "environment".
@@ -6167,6 +6227,45 @@ struct ContentView: View {
     }
 }
 ```
+
+## AppDelegate
+
+SwiftUI apps, unlike UIKit apps, are not required to define
+a class to be defined that conforms to the {% aTargetBlank
+https://developer.apple.com/documentation/uikit/uiapplicationdelegate",
+"UIApplicationDelegate" %} protocol.
+This protocol defines many methods are automatically invoked
+at key points in the application lifecycle including:
+
+- app becomes active
+- app becomes inactive
+- app is about to move to the background
+- app has moved to the background
+- app is about to move to the foreground
+- app is about to terminate
+- app is about to leave the background and become active
+- app receives a memory warning
+- app receives a request to preserve its state
+- app receives a request to restore its state
+- and many more
+
+While not required, there are situations where have such a class is useful.
+To add use of an `AppDelegate` to a SwiftUI app:
+
+1. Define a class, typically named `AppDelegate` that
+   inherits from `NSObject` and conforms to `UIApplicationDelegate`.
+
+   ```swift
+   class AppDelegate: NSObject, UIApplicationDelegate {
+       // Define lifecycle methods here.
+   }
+   ```
+
+2. Add the following inside the main struct that inherits from `App`:
+
+   ```swift
+   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+   ```
 
 ## Navigation
 
