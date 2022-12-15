@@ -896,8 +896,9 @@ when a view is created or first appears.
 
 The `task` view modifier takes a closure that is run in an asynchronous content
 and the code inside it can use the `await` keyword.
+This is place to make API calls that fetch data the UI needs.
 If the user navigates away from the view before the code is run,
-certain asynchronous tasks such as network requests are automatically cancelled.
+certain asynchronous tasks are automatically cancelled.
 
 To rerun the code in a `task` closure every time the value of
 an observable property such as a `@State` variable changes,
