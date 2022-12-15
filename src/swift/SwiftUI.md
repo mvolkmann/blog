@@ -3488,119 +3488,6 @@ The closure passed to it will run when any `TextField`,
 `SecureField`, or `TextEditor` nested inside it is submitted.
 This makes the `Form` view and good candidate.
 
-### Controlling Focus
-
-The `@FocusState` property wrapper is used to
-track and modify which input view currently has focus.
-The following code demonstrates its use:
-
-```swift
-import SwiftUI
-
-struct ContentView: View {
-    enum Field: Hashable {
-        case firstName, lastName
-    }
-
-    @FocusState private var focus: Field? // cannot initialize here
-
-    @State private var firstName = ""
-    @State private var lastName = ""
-    @State private var message = ""
-    @State private var showError = false
-    @State private var showWelcome = false
-
-    var body: some View {
-        VStack {
-            TextField("First Name", text: $firstName)
-                .focused($focus, equals: .firstName)
-            TextField("Last Name", text: $lastName)
-                .focused($focus, equals: .lastName)
-            Button("Submit", action: submit)
-                .buttonStyle(.borderedProminent)
-            Spacer()
-        }
-        .autocorrectionDisabled(true)
-        .textFieldStyle(.roundedBorder)
-        .padding()
-        .onAppear {
-            focus = .firstName // initial focus
-        }
-        .alert(
-            "Invalid Input",
-            isPresented: $showError,
-            actions: {}, // no custom buttons
-            message: { Text(message) }
-        )
-        .alert(
-            "Welcome",
-            isPresented: $showWelcome,
-            actions: {}, // no custom buttons
-            message: { Text("Hello, \(firstName) \(lastName)!") }
-        )
-    }
-
-    private func submit() {
-        if firstName.isEmpty {
-            message = "First name is required"
-            focus = .firstName
-        } else if lastName.isEmpty {
-            message = "Last name is required"
-            focus = .lastName
-        } else if lastName.count < 2 {
-            message = "Last name is too short"
-            focus = .lastName
-        } else {
-            message = ""
-            focus = nil // dismisses keyboard
-        }
-
-        showWelcome = message.isEmpty
-        showError = !showWelcome
-    }
-}
-```
-
-### Dismissing Keyboard
-
-It's good practice to provide a way for the user to dismiss the keyboard.
-One approach is to add a button at the top of the keyboard.
-The following code does this:
-
-```swift
-TextField(...)
-    .toolbar {
-        ToolbarItemGroup(placement: .keyboard) {
-            Button(action: dismissKeyboard) {
-                Image(
-                    systemName: "keyboard.chevron.compact.down"
-                )
-            }
-        }
-    }
-```
-
-The `dismissKeyboard` function above can be defined in a `View` extension
-as follows:
-
-```swift
-import SwiftUI
-
-extension View {
-    #if os(iOS) // not supported in watchOS
-        @available(iOSApplicationExtension, unavailable)
-        func dismissKeyboard() {
-            UIApplication.shared.sendAction(
-                #selector(UIResponder.resignFirstResponder),
-                to: nil,
-                from: nil,
-                for: nil
-            )
-        }
-    #endif
-}
-```
-
 ### SecureField
 
 This is like `TextField`, but obscures the characters that are typed.
@@ -5054,6 +4941,131 @@ add `modifiers: [.command, .shift]`.
 
 On an iPad with a physical keyboard, hold down the command key
 to see a keyboard shortcut overlay that lists the available keyboard shortcuts.
+
+## Controlling Focus
+
+The `@FocusState` property wrapper is used to
+track and modify which input view currently has focus.
+The following code demonstrates its use:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    enum Field: Hashable {
+        case firstName, lastName
+    }
+
+    @FocusState private var focus: Field? // cannot initialize here
+
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var message = ""
+    @State private var showError = false
+    @State private var showWelcome = false
+
+    var body: some View {
+        VStack {
+            TextField("First Name", text: $firstName)
+                .focused($focus, equals: .firstName)
+            TextField("Last Name", text: $lastName)
+                .focused($focus, equals: .lastName)
+            Button("Submit", action: submit)
+                .buttonStyle(.borderedProminent)
+            Spacer()
+        }
+        .autocorrectionDisabled(true)
+        .textFieldStyle(.roundedBorder)
+        .padding()
+        .onAppear {
+            focus = .firstName // initial focus
+        }
+        .alert(
+            "Invalid Input",
+            isPresented: $showError,
+            actions: {}, // no custom buttons
+            message: { Text(message) }
+        )
+        .alert(
+            "Welcome",
+            isPresented: $showWelcome,
+            actions: {}, // no custom buttons
+            message: { Text("Hello, \(firstName) \(lastName)!") }
+        )
+    }
+
+    private func submit() {
+        if firstName.isEmpty {
+            message = "First name is required"
+            focus = .firstName
+        } else if lastName.isEmpty {
+            message = "Last name is required"
+            focus = .lastName
+        } else if lastName.count < 2 {
+            message = "Last name is too short"
+            focus = .lastName
+        } else {
+            message = ""
+            focus = nil // dismisses keyboard
+        }
+
+        showWelcome = message.isEmpty
+        showError = !showWelcome
+    }
+}
+```
+
+## Dismissing Keyboard
+
+It's good practice to provide a way for the user to dismiss the keyboard.
+One approach is to add a button at the top of the keyboard
+using the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/toolbar(content:)-5w0tj",
+"toolbar" %} view modifier. For example:
+
+<img alt="SwiftUI Keyboard Dismiss" style="width: 33%"
+  src="/blog/assets/SwiftUI-keyboard-dismiss.png?v={{pkg.version}}"
+  title="SwiftUI Keyboard Dismiss">
+
+```swift
+import SwiftUI
+
+extension View {
+    #if os(iOS) // not supported in watchOS
+        @available(iOSApplicationExtension, unavailable)
+        func dismissKeyboard() {
+            UIApplication.shared.sendAction(
+                #selector(UIResponder.resignFirstResponder),
+                to: nil,
+                from: nil,
+                for: nil
+            )
+        }
+    #endif
+}
+
+struct ContentView: View {
+    @State private var name = ""
+
+    var body: some View {
+        VStack {
+            TextField("Name", text: $name)
+                .textFieldStyle(.roundedBorder)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Button(action: dismissKeyboard) {
+                            Image(systemName: "keyboard.chevron.compact.down")
+                        }
+                    }
+                }
+            if !name.isEmpty {
+                Text("Hello, \(name)!")
+            }
+        }
+        .padding()
+    }
+}
+```
 
 ## Environment
 
