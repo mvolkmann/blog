@@ -5169,7 +5169,8 @@ foreground, background, and inactive states, get the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/scenephase",
 "scenePhase" %} from the environment and apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/onchange(of:perform:)",
-"onChange" %} view modifier to any view to watch for changes to the `scenePhase`.
+"onChange" %} view modifier to any view
+to watch for changes to the `scenePhase`.
 
 For example:
 
@@ -5201,6 +5202,47 @@ This also happens when in multi-tasking mode and
 the app is visible but another app is active.
 
 An app moves to the background state when another app becomes active.
+
+## AppDelegate
+
+SwiftUI apps, unlike UIKit apps, are not required to define
+a class to be defined that conforms to the {% aTargetBlank
+https://developer.apple.com/documentation/uikit/uiapplicationdelegate",
+"UIApplicationDelegate" %} protocol.
+This protocol defines many methods are automatically invoked
+at key points in the application lifecycle including:
+
+- app becomes active
+- app becomes inactive
+- app is about to move to the background
+- app has moved to the background
+- app is about to move to the foreground
+- app is about to terminate
+- app is about to leave the background and become active
+- app receives a memory warning
+- app receives a request to preserve its state
+- app receives a request to restore its state
+- and many more
+
+While not required, there are situations where have such a class is useful.
+To add use of an `AppDelegate` to a SwiftUI app:
+
+1. Define a class, typically named `AppDelegate` that
+   inherits from `NSObject` and conforms to `UIApplicationDelegate`.
+
+   ```swift
+   class AppDelegate: NSObject, UIApplicationDelegate {
+       // Define lifecycle methods here.
+   }
+   ```
+
+2. Add the following inside the main struct that inherits from `App`:
+
+   ```swift
+   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+   ```
+
+## Detecting Device Rotation
 
 ## Search
 
@@ -6227,45 +6269,6 @@ struct ContentView: View {
     }
 }
 ```
-
-## AppDelegate
-
-SwiftUI apps, unlike UIKit apps, are not required to define
-a class to be defined that conforms to the {% aTargetBlank
-https://developer.apple.com/documentation/uikit/uiapplicationdelegate",
-"UIApplicationDelegate" %} protocol.
-This protocol defines many methods are automatically invoked
-at key points in the application lifecycle including:
-
-- app becomes active
-- app becomes inactive
-- app is about to move to the background
-- app has moved to the background
-- app is about to move to the foreground
-- app is about to terminate
-- app is about to leave the background and become active
-- app receives a memory warning
-- app receives a request to preserve its state
-- app receives a request to restore its state
-- and many more
-
-While not required, there are situations where have such a class is useful.
-To add use of an `AppDelegate` to a SwiftUI app:
-
-1. Define a class, typically named `AppDelegate` that
-   inherits from `NSObject` and conforms to `UIApplicationDelegate`.
-
-   ```swift
-   class AppDelegate: NSObject, UIApplicationDelegate {
-       // Define lifecycle methods here.
-   }
-   ```
-
-2. Add the following inside the main struct that inherits from `App`:
-
-   ```swift
-   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-   ```
 
 ## Navigation
 
