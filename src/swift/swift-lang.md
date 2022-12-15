@@ -2693,7 +2693,7 @@ It must be declared with `var` and
 can be mutated after its initial value is computed.
 Lazy properties are not thread safe and will be computed again in each thread.
 
-## Property Observers
+### Property Observers
 
 Property observers are methods on a property that are invoked
 before (`willSet`) and after (`didSet`) the value changes.
@@ -2708,6 +2708,7 @@ If no parameter name is supplied, the old value will
 be available in the supplied variable `oldValue`.
 The value can be changed in this method.
 
+This can be useful in "view model" classes used in a SwiftUI app.
 For example:
 
 ```swift
@@ -2722,6 +2723,8 @@ class Game: ObservableObject {
             print("didSet: new value = \(score)")
             if score < 5 {
                 // Notify subscribers of the change.
+                // This is an explicit alternative to adding the
+                // @Published property wrapper to the score property.
                 objectWillChange.send()
             } else {
                 print("didSet: reset to old value")

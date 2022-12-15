@@ -1575,13 +1575,13 @@ To pass a binding to a constant value, use `.constant(value)`.
 
 ### @StateObject
 
-The `@StateObject` property wrapper is applied to view properties that
-hold ("own") an instance of a class that conforms to the {% aTargetBlank
+The `@StateObject` property wrapper is applied to view properties
+that hold ("own") a "view model". This is an instance of a class
+that conforms to the {% aTargetBlank
 "https://developer.apple.com/documentation/combine/observableobject",
 "ObservableObject" %} protocol.
-These classes are referred to as "View Models".
-They have properties that are annotated with
-the `@Published` property wrapper.
+View models typically have properties that are
+annotated with the `@Published` property wrapper.
 Changes to the values of these properties are published.
 This triggers the `body` of each view that depends on them
 to be recomputed, which updates the UI.
@@ -1630,8 +1630,22 @@ For example:
 ```swift
 class Game: ObservableObject {
     var score = 0 {
-        willSet{
-            objectWillChange.send()
+        willSet {
+            print("willSet: old value = \(score)")
+            print("willSet: new value = \(newValue)")
+        }
+        didSet {
+            print("didSet: old value = \(oldValue)")
+            print("didSet: new value = \(score)")
+            if score < 5 {
+                // Notify subscribers of the change.
+                // This is an explicit alternative to adding the
+                // @Published property wrapper to the score property.
+                objectWillChange.send()
+            } else {
+                print("didSet: reset to old value")
+                score = oldValue
+            }
         }
     }
 }
