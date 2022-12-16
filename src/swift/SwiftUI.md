@@ -3606,7 +3606,7 @@ The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/editbutton", "EditButton" %}
 view toggles the edit mode of a `List`.
 It is typically added to a `List` using the `toolbar` view modifier.
-See the example in the "Lists" section.
+See the example in the [List](#list) section.
 
 ### PasteButton
 
@@ -3614,6 +3614,52 @@ The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/pastebutton",
 "PasteButton" %} view renders a button for
 pasting data from the system clipboard.
+
+The following example uses one `PasteButton` for pasting copied text
+and another for pasting a copied image.
+
+```swift
+struct ContentView: View {
+    @State private var copiedText = ""
+    @State private var copiedImage: Image?
+
+    let items = ["Fork", "Spoon", "Knife"]
+
+    var body: some View {
+        VStack {
+            Text("Long press an item below and select Copy.")
+                .fontWeight(.bold)
+            ForEach(items, id: \.self) { item in
+                Text(item).textSelection(.enabled)
+            }
+
+            // Why is an array passed to the closure?
+            PasteButton(payloadType: String.self) { contents in
+                guard let first = contents.first else { return }
+                copiedText = first
+            }
+            if copiedText.isEmpty {
+                Text("No text has been pasted.")
+            } else {
+                Text("You pasted \(copiedText).")
+            }
+
+            PasteButton(payloadType: Image.self) { images in
+                guard let first = images.first else { return }
+                copiedImage = first
+            }
+            if let copiedImage {
+                copiedImage
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                Text("No image has been pasted.")
+            }
+        }
+        .font(.system(size: 24))
+    }
+}
+```
 
 ### Link
 
