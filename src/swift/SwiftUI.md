@@ -4912,11 +4912,26 @@ These include:
 
 - `onChange`
 
-  This registers a closure to be invoked
+  The {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/view/onchange(of:perform:)",
+  "onChange" %} view modifier registers a closure to be invoked
   when the value of a given state property changes.
   The closure is passed the new value.
-  If the closure takes no arguments, the somewhat confusing error message
-  "Type '()' cannot conform to 'Equatable'" will appear.
+  For example:
+
+  ```swift
+  VStack {
+      ...
+  }
+  .onChange(of: someState) { newValue in
+      ...
+  }
+  ```
+
+  If the closure passed to `onChange` does not have a parameter,
+  the somewhat confusing error message
+  "Type '()' cannot conform to '{some-type}'" will appear
+  where some-type is the type of the variable being watched.
   To fix this, add a parameter to the closure
   which can be `_` if the value is not used.
 
