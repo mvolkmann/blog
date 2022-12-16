@@ -1538,7 +1538,8 @@ struct ContentView: View {
 
 ### @Binding
 
-This property wrapper is applied to a property of a child view
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/binding",
+"@Binding" %} property wrapper is applied to a property of a child view
 that is passed a binding (`$` syntax) from a parent view.
 It connects a child property to a parent property.
 This allows the child view to get and set a property that
@@ -1575,7 +1576,9 @@ To pass a binding to a constant value, use `.constant(value)`.
 
 ### @StateObject
 
-The `@StateObject` property wrapper is applied to view properties
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/stateobject",
+"@StateObject" %} property wrapper is applied to view properties
 that hold ("own") a "view model". This is an instance of a class
 that conforms to the {% aTargetBlank
 "https://developer.apple.com/documentation/combine/observableobject",
@@ -1653,7 +1656,9 @@ class Game: ObservableObject {
 
 ### @ObservedObject
 
-The `@ObservedObject` property wrapper marks a property
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/observedobject",
+"@ObservedObject" %} property wrapper marks a property
 that receives an instance of a view model (`ObservableObject`)
 that is passed in from a parent view.
 This subscribes to changes published by an observable object,
@@ -1705,12 +1710,16 @@ struct ContentView: View {
 
 ### @Environment
 
-This is used to access environment values.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/environment",
+"@Environment" %} property wrapper is used to access environment values.
 See the [Environment](#environment) section.
 
 ### @EnvironmentObject
 
-The `@EnvironmentObject` property wrapper allows multiple views
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/environmentobject",
+"@EnvironmentObject" %} property wrapper allows multiple views
 to share access to a view model.
 It offers an alternative to passing a view model
 through multiple layers of the view hierarchy
@@ -1780,7 +1789,8 @@ struct ContentView: View {
 
 ## Colors
 
-Colors are defined by the `Color` struct.
+Colors are defined by the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/color", "Color" %} struct.
 It provides many static properties for predefined colors
 and many initializers for specifying custom colors.
 
@@ -1931,7 +1941,8 @@ Here are the container views that are provided by SwiftUI.
 
 ### HStack
 
-This lays out child views horizontally.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/hstack",
+"HStack" %} view is a container that lays out its child views vertically.
 
 The child views are centered vertically by default.
 To change this, add the `alignment` attribute which can be set to
@@ -1964,7 +1975,8 @@ HStack(alignment: .lastTextBaseline, spacing: 0) {
 
 ### VStack
 
-This lays out child views vertically.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/vstack",
+"VStack" %} view is a container that lays out its child views vertically.
 
 The child views are centered horizontally by default.
 To change this, add the `alignment` attribute which can be set to
@@ -1972,9 +1984,9 @@ To change this, add the `alignment` attribute which can be set to
 
 ### ZStack
 
-{% aTargetBlank "https://developer.apple.com/documentation/swiftui/zstack",
-"ZStack" %} is a container view that, by default,
-stacks views from bottom to top.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/zstack",
+"ZStack" %} view is a container that, by default,
+stacks its child views from bottom to top.
 It is ideal for adding a background to a set of views.
 
 Here are three approaches to render text with a colored background,
@@ -2041,7 +2053,9 @@ ZStack(alignment: .topLeading) {
 
 ### LazyHStack
 
-This is similar to `HStack`, but only
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/lazyhstack", "LazyHStack" %}
+view is similar to `HStack`, but only
 builds and renders child views when they are visible.
 The rendered child views are retained in memory
 after scrolling out of view so rendering them again later is efficient.
@@ -2060,7 +2074,9 @@ ScrollView(.horizontal) {
 
 ### LazyVStack
 
-This is similar to `VStack`, but only
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/lazyvstack", "LazyVStack" %}
+view is similar to `VStack`, but only
 builds and renders child views when they are visible.
 `LazyVStack` is commonly used inside a `ScrollView`
 with `axes` set to `.vertical`,
@@ -2078,9 +2094,11 @@ ScrollView {
 
 ### LazyHGrid
 
-This specifies a number of rows and adds columns as necessary.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/lazyhgrid", "LazyHGrid" %}
+view specifies a number of rows and adds columns as necessary.
 The grids are described by an array of {% aTargetBlank
-  "https://developer.apple.com/documentation/swiftui/griditem", "GridItem" %}
+"https://developer.apple.com/documentation/swiftui/griditem", "GridItem" %}
 objects that each specify their size, spacing, and alignment.
 For example, a `GridItem` can adapt to the width of its content,
 but also have a minimum size of 25 by specifying
@@ -2090,7 +2108,9 @@ See the example in `LazyVGrid` below.
 
 ### LazyVGrid
 
-This is similar to `LazyHGrid`, but
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/lazyvgrid", "LazyVGrid" %}
+view is similar to `LazyHGrid`, but
 specifies a number of columns and adds rows as necessary.
 
 The following example demonstrates both `LazyHGrid` and `LazyVGrid`.
@@ -2199,7 +2219,8 @@ struct ContentView: View {
 
 ### Form
 
-This is a container of data input views.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/form",
+"Form" %} view a container of data input views.
 Embedding data input views in a `Form`
 instead of another container such as `VStack`
 can change the way they look and feel.
@@ -2326,7 +2347,8 @@ Common UI components that are not built into SwiftUI include:
 
 ### Section
 
-`Section` views break a view into sections that are optionally labelled.
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/section",
+"Section" %} views break a view into sections that are optionally labelled.
 They are also optionally collapsible.
 
 `Section` views are only useful inside collection views like
@@ -2338,7 +2360,8 @@ To prevent this, apply the `textCase` view modifier passing it `nil`.
 
 ### Group
 
-This collects all its child views into a single view
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/group",
+"Group" %} view collects all its child views into a single view
 without changing their layout.
 View modifiers applied to the `Group` are applied to each of the children.
 
@@ -2739,7 +2762,11 @@ ForEach(stringArray, id: \.self) { ... }
 
 ### Table
 
-This is only available in macOS 12 and above.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/table",
+"Table" %} view displays data in rows and columns.
+It isn't currently very useful in iOS.
+In macOS it is only available in version 12 and above.
+
 The following example demonstrates using a `Table`
 that supports row selection and column sorting.
 
@@ -2781,7 +2808,10 @@ struct ContentView: View {
 
 ### NavigationView
 
-This marks an area where a stack of views will be rendered one at a time.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/navigationview",
+"NavigationView" %} view marks an area where
+a stack of views will be rendered one at a time.
 It contains `NavigationLink` views that are similar to HTML anchor elements.
 Tapping them causes the associated view
 to be rendered inside the `NavigationView`.
@@ -2792,7 +2822,9 @@ This is deprecated in iOS 16. See the new approach at
 
 ### NavigationLink
 
-These are used inside a `NavigationView`.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/navigationlink",
+"NavigationLink" %} view is used inside a `NavigationView`.
 See the "Navigation" section later.
 
 This is deprecated in iOS 16. See the new approach at
@@ -2800,14 +2832,19 @@ This is deprecated in iOS 16. See the new approach at
 
 ### OutlineGroup
 
-This displays a tree of data with disclosure angle brackets.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/outlinegroup",
+"OutlineGroup" %} view displays a tree of data with disclosure angle brackets.
 See my {% aTargetBlank
 "https://github.com/mvolkmann/SwiftUI-OutlineGroup/blob/main/SwiftUI-OutlineGroup/ContentView.swift",
 "SwiftUI-OutlineGroup" %} project and the questions in it.
 
 ### DisclosureGroup
 
-This hides and shows its contents based on whether it is in an expanded state.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/disclosuregroup",
+"DisclosureGroup" %} view hides and shows its contents
+based on whether it is in an expanded state.
 By default it is not expanded.
 It can be expanded by tapping or by associating
 a `Bool` binding that is programmatically set to `true`.
@@ -2840,7 +2877,8 @@ var body: some View {
 
 ### TabView
 
-This creates a row of buttons at the bottom of the display
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/tabview",
+"TabView" %} view creates a row of buttons at the bottom of the display
 that can be tapped to navigate to associated views.
 If there are more than five buttons, the first four will render followed by
 along with a "More" button.
@@ -2972,19 +3010,26 @@ to the destination view.
 
 ### HSplitView
 
-This is a layout container that organizes its children horizontally
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/hsplitview", "HSplitView" %}
+view is a layout container that organizes its children horizontally
 and allows users to resize the children by dragging dividers between them.
 It is only supported in macOS.
 
 ### VSplitView
 
-This is a layout container that organizes its children vertically
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/vsplitview", "VSplitView" %}
+view is a layout container that organizes its children vertically
 and allows users to resize the children by dragging dividers between them.
 It is only supported in macOS.
 
 ### TimelineView
 
-This is a container that re-renders its children at scheduled times.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/timelineview",
+"TimelineView" %} view is a container that
+re-renders its children at scheduled times.
 The following example renders the date and time every second.
 For example, "Nov 8, 2021 at 5:19:47".
 
@@ -3010,7 +3055,9 @@ var body: some View {
 
 ### Button
 
-The content of a `Button` can be specified in two ways,
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/button",
+"Button" %} view renders a tappable button.
+The contents can be specified in two ways,
 passing a `String` as the first argument or using the `label` argument
 which can be specified with a trailing closure.
 
@@ -3101,8 +3148,11 @@ struct ContentView: View {
 
 ### Color
 
-This creates a rectangular view with a specific background color
-that grows to fill all the space offered to it.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/color",
+"Color" %} struct plays two roles.
+It represents a color and is also a view that
+creates a rectangular view with a specific background color
+which grows to fill all the space offered to it.
 For example, `Color.red` and `Color.clear` (transparent) are views.
 
 A `UIColor` can be converted to a `Color`.
@@ -3110,7 +3160,8 @@ For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
 
 ### Image
 
-This renders an image.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/image",
+"Image" %} view renders an image.
 Many image formats are supported including PNG, JPEG, and HEIC.
 To add images, click `Assets.xcassets` in the Navigator.
 Click the "+" in the lower-left to add an entry.
@@ -3202,7 +3253,8 @@ To cache the images, see this {% aTargetBlank
 
 ### Text
 
-This view renders text.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/text",
+"Text" %} view renders text.
 If the text is too long to fit on a single line,
 it is automatically wrapped to additional lines.
 To prevent this, apply the `lineLimit` view modifier
@@ -3513,7 +3565,10 @@ This makes the `Form` view and good candidate.
 
 ### SecureField
 
-This is like `TextField`, but obscures the characters that are typed.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/securefield",
+"SecureField" %} view is like `TextField`,
+but obscures the characters that are typed.
 It is typically used for sensitive data like
 passwords and social security numbers.
 
@@ -3547,14 +3602,18 @@ TextEditor(text: $reasonForVisit)
 
 ### EditButton
 
-This toggles the edit mode of a `List`.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/editbutton", "EditButton" %}
+view toggles the edit mode of a `List`.
 It is typically added to a `List` using the `toolbar` view modifier.
 See the example in the "Lists" section.
 
 ### PasteButton
 
-This is only available in macOS 10.15 and above.
-It renders a button for pasting data from the system clipboard.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/pastebutton",
+"PasteButton" %} view renders a button for
+pasting data from the system clipboard.
 
 ### Link
 
@@ -3609,7 +3668,8 @@ struct SomeView: View {
 
 ### Menu
 
-This renders a label containing the menu title.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/menu",
+"Menu" %} view renders a label containing the menu title.
 When clicked, a menu appears below the label
 containing a vertical stack of buttons and sub-menus.
 Include `Divider` views to separate groups of menu items.
@@ -4053,7 +4113,7 @@ To render only the icon, pass `.iconOnly`.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/progressview",
-"ProgressView" %} displays a progress indicator.
+"ProgressView" %} view displays a progress indicator.
 It takes a label,
 an optional `value` argument that is a binding to the current value,
 and an optional `total` argument that is the maximum value (default is 0.0).
@@ -4104,25 +4164,36 @@ ProgressView()
 
 ### Gauge
 
-This shows a current value in relation to minimum and maximum values.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/gauge",
+"Gauge" %} view shows a current value in relation to minimum and maximum values.
 One example is a car fuel gauge.
 This is currently only supported in watchOS.
 
 ### EmptyView
 
-This renders nothing. It is useful in cases where
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/emptyview", "EmptyView" %}
+view renders nothing. It is useful in cases where
 a view needs to be returned, but there is nothing to display.
 
 ### EquatableView
 
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/equatableview",
+"EquatableView" %} view ...
 TODO: What is this?
 
 ### AnyView
 
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/anyview",
+"AnyView" %} view ...
 TODO: What is this?
 
 ### TupleView
 
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/tupleview", "TupleView" %}
+view ...
 TODO: What is this?
 
 ## Fonts
