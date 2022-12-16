@@ -2486,20 +2486,14 @@ of `ScrollViewReader`. See the example above.
 
 ### List
 
-A `List` view displays a list of other views in a single, scrollable column.
+A {% aTargetBlank "https://developer.apple.com/documentation/swiftui/list/",
+"List" %} view displays a list of other views in a single, scrollable column.
 It is not necessary to wrap a `List` in a `ScrollView`
 to gain the ability to scroll.
 
-A `List` can act like `ForEach` for iterating over array elements.
-It is not necessary to place a `ForEach` inside a `List`
-in order to iterate over the elements of a sequence.
-
-If a `List` contains more items that can be rendered at once,
-it automatically provides scrolling.
-There is no need to wrap it in a `ScrollView`.
-
 The contents of a `List` can be any views.
 These can be grouped using `Section` views.
+For example:
 
 <img alt="SwiftUI List with Sections" style="width: 40%"
   src="/blog/assets/SwiftUI-List-Sections.png?v={{pkg.version}}"
@@ -2526,6 +2520,21 @@ List {
 //.listStyle(.grouped) // for edge-to-edge display
 ```
 
+A `List` can act like `ForEach` for iterating over array elements.
+It is not necessary to place a `ForEach` inside a `List`
+in order to iterate over the elements of a sequence.
+If the elements do not conform to the `Identifiable` protocol
+then the `id` argument must be set to a key path that
+identifies the property in the elements that uniquely identifies them.
+
+For example:
+
+```swift
+List(teams, id: \.city) { team in
+    Text("\(team.city) \(team.name)")
+}
+```
+
 To change the style of the `List`, apply the `listStyle` view modifier
 which takes the enum values `grouped`, `inset`, `insetGrouped`, `plain`,
 and `sidebar`.
@@ -2538,8 +2547,9 @@ The following example demonstrates using a `List` inside a `NavigationView`
 to enable selecting ids of the objects represented by the rows.
 To select rows, tap "Edit" in the upper-right corner.
 
-This also demonstrates implementing "pull to refresh"
-using the `refreshable` view modifier.
+This also demonstrates implementing "pull to refresh" using the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/refreshable(action:)",
+"refreshable" %} view modifier.
 Dragging the list down displays an activity indicator
 and then adds new dogs to the list.
 
