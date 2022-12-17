@@ -2480,6 +2480,7 @@ struct ContentView: View {
                 Button("Scroll to Bottom") {
                     withAnimation {
                         proxy.scrollTo(bottomId)
+                        // The optional "anchor" argument controls alignment.
                     }
                 }
                 .id(topId)
@@ -2511,10 +2512,30 @@ of `ScrollViewReader`. See the example above.
 
 A {% aTargetBlank "https://developer.apple.com/documentation/swiftui/list/",
 "List" %} view displays a list of other views in a single, scrollable column.
+The contents of a `List` describe the rows and can be any views.
+
 It is not necessary to wrap a `List` in a `ScrollView`
 to gain the ability to scroll.
 
-The contents of a `List` can be any views.
+A divider line is drawn between each row.
+To specify the color of the lines, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)",
+"listRowSeparatorTint" %}.
+
+```swift
+List { ... }
+.listRowSeparatorTint(.red)
+```
+
+To hide these, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/list/listrowseparator(_:edges:)",
+"listRowSeparator" %}.
+
+```swift
+List { ... }
+.listRowSeparator(.hidden)
+```
+
 These can be grouped using `Section` views.
 For example:
 
@@ -2704,6 +2725,7 @@ var items: [Item] = [
 struct ContentView: View {
     var body: some View {
         List(items, children: \.children) { row in
+            // Automatically creates an HStack containing these.
             Image(systemName: row.icon)
             Text(row.name)
         }
@@ -2720,8 +2742,11 @@ To select rows, tap "Edit" in the upper-right corner.
 This also demonstrates implementing "pull to refresh" using the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/refreshable(action:)",
 "refreshable" %} view modifier.
-Dragging the list down displays an activity indicator
-and then adds new dogs to the list.
+This is passed a closure that runs in an async context
+and can fetch additional data to display.
+Dragging the list down executes the closure and
+displays an activity indicator until the supplied closure completes.
+The `List` then displays the new data.
 
 <figure>
   <img alt="SwiftUI List with Selection Before" style="width: 40%"
