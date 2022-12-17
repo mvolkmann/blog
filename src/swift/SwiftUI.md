@@ -2953,6 +2953,61 @@ struct ContentView: View {
 }
 ```
 
+#### Lists Over a Binding
+
+A `List` can get its data from an array binding and
+each row can include input views that
+allow the user to modifier the current array element.
+This is efficient because it avoids rebuilding the entire view
+when one row changes.
+
+The following example demonstrates list rows where the user
+can toggle a Boolean property of objects in an array binding.
+
+<img alt="SwiftUI List over Binding" style="width: 40%"
+  src="/blog/assets/SwiftUI-List-Binding.png?v={{pkg.version}}"
+  title="SwiftUI List over Binding">
+
+```swift
+struct Person: Identifiable {
+    let name: String
+    var id: String { name }
+    var present = false
+
+    init(_ name: String) {
+        self.name = name
+    }
+}
+
+struct ContentView: View {
+    @State private var people = [
+        Person("Mark"),
+        Person("Tami"),
+        Person("Amanda"),
+        Person("Jeremy"),
+        Person("Meghan"),
+        Person("RC")
+    ]
+
+    var body: some View {
+       VStack {
+            Text("Who is present?").font(.title)
+            List($people) { $person in
+                HStack {
+                    Text(person.name)
+                    Spacer()
+                    Toggle("", isOn: $person.present)
+                }
+            }
+
+            let presentNames = people.filter { $0.present }.map { $0.name }
+            let present = presentNames.joined(separator: ", ")
+            Text("Present: \(present.isEmpty ? "nobody" : present)")
+        }
+    }
+}
+```
+
 ### ForEach
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/foreach",
