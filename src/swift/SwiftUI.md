@@ -13,6 +13,9 @@ is a Swift library for building macOS, iOS, and Apple Watch apps.
 It is an alternative to its predecessor
 {% aTargetBlank "https://developer.apple.com/documentation/uikit", "UIKit" %}.
 
+To use SwiftUI in a source file, add `import SwiftUI` at the top of the file.
+Most example code here assumes this is done and does not include it.
+
 By comparison SwiftUI ...
 
 - is declarative in nature than imperative
@@ -863,8 +866,6 @@ is to place them in the file `Constants.swift`.
 The contents of this file could be similar to the following:
 
 ```swift
-import SwiftUI
-
 struct Constants {
     static let someValue = 19
 
@@ -940,8 +941,6 @@ It is usually best to avoid writing functions
 that can can return multiple kinds of views.
 
 ```swift
-import SwiftUI
-
 struct ContentView: View {
     /*
      // This doesn't compile because it can return two kinds of Views.
@@ -1005,8 +1004,6 @@ These represent views for the front and back of a card.
 Tapping the card causes it to flip to the other side with a 3D animation.
 
 ```swift
-import SwiftUI
-
 // Since each ViewBuilder parameter can result in a different kind of View,
 // we need two generic parameters to represent their types.
 struct Card<V1, V2>: View where V1: View, V2: View {
@@ -1258,8 +1255,6 @@ which is covered later in the [Animation](#animation) section.
   title="SwiftUI ViewModifier">
 
 ```swift
-import SwiftUI
-
 struct Collapsible: ViewModifier {
     private static let diameter = CGFloat(120)
     private static var radius: CGFloat { diameter / 2 }
@@ -1423,8 +1418,6 @@ The following example demonstrates using component state
 to implement a counter view:
 
 ```swift
-import SwiftUI
-
 struct Counter: View {
     @State private var count = 0
 
@@ -1466,8 +1459,6 @@ get a two-way binding with a `TextField`.
   title="SwiftUI Stoplight">
 
 ```swift
-import SwiftUI
-
 struct CircleButton: View {
     var color: Color
     var selected: Bool = false
@@ -2688,8 +2679,6 @@ For example:
   title="SwiftUI Expandable List">
 
 ```swift
-import SwiftUI
-
 struct Item: Identifiable {
     let name: String
     let icon: String // SF Symbols name
@@ -2764,8 +2753,6 @@ which adds a heart icon after its name.
 The second button deletes the row.
 
 ```swift
-import SwiftUI
-
 struct ContentView: View {
     @State private var liked: Set<String> = []
     @State private var sports = ["Baseball", "Basketball", "Football", "Hockey"]
@@ -3511,8 +3498,6 @@ Consider extending `Text` to add initializers for other types.
 For example:
 
 ```swift
-import SwiftUI
-
 extension Text {
     init(_ number: Double) {
         self.init(String(number))
@@ -4622,8 +4607,6 @@ The following code demonstrates one way to
 implement a floating action button in SwiftUI:
 
 ```swift
-import SwiftUI
-
 struct FloatingActionButton: View {
     var label: String = "+"
     var action: () -> Void
@@ -5308,8 +5291,6 @@ The `View` method `onTapGesture` has a needlessly long name.
 To use `onTap` instead, add this extension method:
 
 ```swift
-import SwiftUI
-
 extension View {
     public func onTap(
         count: Int = 1,
@@ -5377,8 +5358,6 @@ track and modify which input view currently has focus.
 The following code demonstrates its use:
 
 ```swift
-import SwiftUI
-
 struct ContentView: View {
     enum Field: Hashable {
         case firstName, lastName
@@ -5456,8 +5435,6 @@ using the {% aTargetBlank
   title="SwiftUI Keyboard Dismiss">
 
 ```swift
-import SwiftUI
-
 extension View {
     #if os(iOS) // not supported in watchOS
         @available(iOSApplicationExtension, unavailable)
@@ -5542,8 +5519,6 @@ the custom environment value "primaryColor".
 Environment values provided by Apple are accessed and modified in the same way.
 
 ```swift
-import SwiftUI
-
 // Define a custom environment key and its default value.
 private struct PrimaryColorKey: EnvironmentKey {
     static let defaultValue = Color.red
@@ -5693,8 +5668,6 @@ that simplifies doing this.
 The following is a customized version of the code in that post.
 
 ```swift
-import SwiftUI
-
 struct OrientationViewModifier: ViewModifier {
     // This is a function that will called when the orientation changes.
     let action: (UIDeviceOrientation) -> Void
@@ -6813,8 +6786,6 @@ Page 3 contains a link to page 4.
   title="SwiftUI NavigationLink page 4">
 
 ```swift
-import SwiftUI
-
 struct Page1: View {
     var body: some View {
         VStack {
@@ -7428,8 +7399,6 @@ If there is enough room to lay them out in a single row, it does that.
 Otherwise it lays them out vertically.
 
 ```swift
-import SwiftUI
-
 struct ContentView: View {
     private let labels = [
         "One", "Two", "Three", "Four", "Five",
@@ -7946,8 +7915,6 @@ is the ability to include a clear button on the trailing end
 that is an "X" in a circle. Tapping this clears the value.
 
 ```swift
-import SwiftUI
-
 struct MyUITextField: UIViewRepresentable {
     var placeholder = ""
     @Binding var text: String
