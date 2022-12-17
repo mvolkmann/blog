@@ -2654,6 +2654,63 @@ struct ContentView: View {
 }
 ```
 
+#### Expandable Lists
+
+The `List` view can display a tree of data including
+disclosure buttons that expand and collapse parts of the tree.
+This requires passing an array of objects to the `List`
+that have a property that is an array of other objects of the same type.
+For example:
+
+<img alt="SwiftUI Expandable List" style="width: 40%"
+  src="/blog/assets/SwiftUI-List-Expandable.png?v={{pkg.version}}"
+  title="SwiftUI Expandable List">
+
+```swift
+import SwiftUI
+
+struct Item: Identifiable {
+    let name: String
+    let icon: String // SF Symbols name
+    var children: [Item]?
+    var id: String { name }
+}
+
+var items: [Item] = [
+    Item(name: "Weather", icon: "sun.max.circle", children: [
+        Item(name: "Snow", icon: "cloud.snow"),
+        Item(name: "Sun", icon: "sun.max.fill", children: [
+            Item(name: "sunrise", icon: "sunrise"),
+            Item(name: "minimum", icon: "sun.min"),
+            Item(name: "maximum", icon: "sun.max"),
+            Item(name: "sunset", icon: "sunset"),
+        ]),
+        Item(name: "Rain", icon: "cloud.rain")
+    ]),
+    Item(name: "Transportation", icon: "figure.walk.circle", children: [
+        Item(name: "Bus", icon: "bus"),
+        Item(name: "Car", icon: "car"),
+        Item(name: "Plane", icon: "airplane"),
+        Item(name: "Train", icon: "tram")
+    ]),
+    Item(name: "Sport", icon: "figure.run.circle", children: [
+        Item(name: "Baseball", icon: "figure.baseball"),
+        Item(name: "Basketball", icon: "figure.basketball"),
+        Item(name: "Football", icon: "figure.american.football"),
+        Item(name: "Hockey", icon: "figure.hockey")
+    ]),
+]
+
+struct ContentView: View {
+    var body: some View {
+        List(items, children: \.children) { row in
+            Image(systemName: row.icon)
+            Text(row.name)
+        }
+    }
+}
+```
+
 #### Selecting Rows
 
 The following example demonstrates using a `List` inside a `NavigationView`
