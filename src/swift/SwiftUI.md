@@ -2733,6 +2733,68 @@ struct ContentView: View {
 }
 ```
 
+#### Swipe Actions
+
+Swipe actions associate buttons with rows.
+To add a swipe action to a list row, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/swipeactions(edge:allowsfullswipe:content:)",
+"swipeActions" %} view modifier to the row.
+This must be applied to each row, not to the the `List`.
+
+The `swipeActions` view modifier must be passed a closure
+that describes one or more buttons to be added.
+
+By default swipe actions are added to the right side
+and are revealed by swiping left.
+To add swipe actions to the left side so they are revealed by swiping right,
+pass the `edge` argument to the `allowsSwipeView` view modifier
+with a value of `.leading`. The default value is `.trailing`.
+
+Swiping a row a short distance reveals action buttons
+and tapping one executes its action.
+Swiping a row a longer distance executes the action of the first button
+without waiting for the user to tap the button.
+To disable processing long swipes in this way,
+pass the `allowsFullSwipe` argument to the `swipeAction` view modifier
+with a value of `false`.
+
+The following example adds two swipe actions buttons to each list row.
+The first button toggles whether the row is "liked"
+which adds a heart icon after its name.
+The second button deletes the row.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var liked: Set<String> = []
+    @State private var sports = ["Baseball", "Basketball", "Football", "Hockey"]
+
+    var body: some View {
+        List(sports.indices, id: \.self) { index in
+            let sport = sports[index]
+            let like = liked.contains(sport)
+            HStack {
+                Text(sport)
+                    .swipeActions {
+                        if like {
+                            Button("Dislike") { liked.remove(sport) }
+                        } else {
+                            Button("Like") { liked.insert(sport) }
+                        }
+                        Button("Delete", role: .destructive) {
+                            sports.remove(at: index)
+                        }
+                    }
+                if like {
+                    Image(systemName: "heart")
+                }
+            }
+        }
+    }
+}
+```
+
 #### Selecting Rows
 
 The following example demonstrates using a `List` inside a `NavigationView`
