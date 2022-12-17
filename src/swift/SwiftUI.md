@@ -5738,8 +5738,15 @@ The {% aTargetBlank
 ## Search
 
 SwiftUI provides a search input containing a magnifier glass icon
-that is rendered by the `searchable` view modifier.
+that is rendered in the navigation bar by the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/searchable(text:placement:prompt:)-18a8f",
+"searchable" %} view modifier.
 This is typically applied to a `List` view.
+
+A closure can be passed to the `searchable` view modifier
+that creates suggested completions.
+These are displayed while typing in the search input.
+Tapping a suggested completion selects it.
 
 The following code demonstrates filtering a `List`
 using the `searchable` view modifier.
@@ -5769,7 +5776,6 @@ struct ContentView: View {
             people.filter { $0.lowercased().contains(lower) }
     }
 
-    // This is rebuilt when the value of query changes.
     var body: some View {
         NavigationView {
             List(matchingPeople, id: \.self) { person in
@@ -5777,11 +5783,19 @@ struct ContentView: View {
             }
             .searchable(
                 text: $query,
-                // Without this the search input will be hidden
-                // until the user drags down on the List.
-                placement: .navigationBarDrawer(displayMode: .always),
+                // Supposedly the search input should be hidden
+                // until the user drags down on the List
+                // unless the following argument is supplied.
+                // However, it seems to be always displayed even without this.
+                // placement: .navigationBarDrawer(displayMode: .always),
                 prompt: "Person Name"
-            )
+            ) {
+                // Include this closure to provide suggested completions.
+                // Tapping one selects it.
+                ForEach(matchingPeople, id: \.self) { result in
+                    Text(result).searchCompletion(result)
+                }
+            }
             .autocapitalization(.none)
             .navigationTitle("People")
         }
