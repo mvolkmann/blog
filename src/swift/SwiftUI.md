@@ -2540,7 +2540,6 @@ List {
         Text("water")
     }
 }
-//.listStyle(.grouped) // for edge-to-edge display
 ```
 
 A `List` can act like `ForEach` for iterating over array elements.
@@ -2558,13 +2557,104 @@ List(teams, id: \.city) { team in
 }
 ```
 
-To change the style of the `List`, apply the `listStyle` view modifier
-which takes the enum values `grouped`, `inset`, `insetGrouped`, `plain`,
-and `sidebar`.
+To set the background color of a list item, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/link/listrowbackground(_:)",
+"listRowBackground" %} view modifier passing it a `Color`.
+For example:
+
+```swift
+List {
+    Text("Apple")
+        .listRowBackground(Color.red)
+    Text("Banana")
+        .listRowBackground(Color.yellow)
+    Text("Blueberry")
+        .listRowBackground(Color.blue)
+}
+```
 
 To remove horizontal padding that is added to list elements by default,
 apply the `.listRowInsets(EdgeInsets())` view modifier
 to each child of the `List`.
+
+#### List Styles
+
+To change the style of the `List`, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/liststyle(_:)",
+"listStyle" %} view modifier which takes one of the following {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/liststyle",
+"ListStyle" %} values:
+
+- `bordered`: not available in iOS
+- `carousel`: not available in iOS
+- `elliptical`: not available in iOS
+- `grouped`: edge-to-edge
+- `inset`: small left and right padding
+- `insetGrouped`: large left and right padding
+- `plain`: seems the same as `inset`
+- `sidebar`: same as `insetGrouped` but adds disclosure buttons to sections
+
+The following code demonstrates various list styles.
+The user can select a style from a `Picker`.
+
+```swift
+struct ContentView: View {
+    @State private var selectedName = "plain"
+    @State private var selectedStyle: any ListStyle = .plain
+
+    let styles: [String: any ListStyle] = [
+        // "bordered": .bordered, // not in iOS
+        // "carousel": .carousel, // not in iOS
+        // "elliptical": .elliptical, // not in iOS
+        "grouped": .grouped,
+        "inset": .inset,
+        "InsetGrouped": .insetGrouped,
+        "plain": .plain,
+        "sidebar": .sidebar
+    ]
+
+    var styleNames: [String] {
+        Array(styles.keys)
+    }
+
+    var body: some View {
+        VStack { // error: "Type 'any View' cannot conform to 'View'"
+            Picker("List Style", selection: $selectedName) {
+                ForEach(styleNames, id: \.self) { name in
+                    Text(name).tag(name)
+                }
+            }
+            .onChange(of: selectedName) { _ in
+                selectedStyle = styles[selectedName]!
+            }
+
+            List {
+                Section("Breakfast") {
+                    Text("pancakes")
+                    Text("bacon")
+                    Text("orange juice")
+                }
+                Section("Lunch") {
+                    Text("sandwich")
+                    Text("chips")
+                    Text("lemonade")
+                }
+                Section("Dinner") {
+                    Text("spaghetti")
+                    Text("bread")
+                    Text("water")
+                }
+            }
+            // The real issue is here because the type of selectedStyle
+            // is "any ListStyle" instead of "ListStyle",
+            // but I don't know how to fix this.
+            .listStyle(selectedStyle)
+        }
+    }
+}
+```
+
+#### Selecting Rows
 
 The following example demonstrates using a `List` inside a `NavigationView`
 to enable selecting ids of the objects represented by the rows.
@@ -2646,6 +2736,8 @@ struct ContentView: View {
     }
 }
 ```
+
+#### Deleting and Moving Rows
 
 The following example is similar to the previous one,
 but allows rows to be deleted and moved.
