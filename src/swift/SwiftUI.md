@@ -2212,9 +2212,11 @@ struct ContentView: View {
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/form",
 "Form" %} view a container of data input views.
+
 Embedding data input views in a `Form`
 instead of another container such as `VStack`
-can change the way they look and feel.
+can change the way they look and feel and
+this can differ based on the platform (ex. iOS vs. macOS).
 One example of a data input that changes is `Picker`.
 
 The following example demonstrates many common views used in forms.
@@ -2336,24 +2338,21 @@ Common UI components that are not built into SwiftUI include:
   `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
 - toggle buttons: alternative is `Picker`
 
-### Section
-
-{% aTargetBlank "https://developer.apple.com/documentation/swiftui/section",
-"Section" %} views break a view into sections that are optionally labelled.
-They are also optionally collapsible.
-
-`Section` views are only useful inside collection views like
-`Form`, `List`, and `Picker`.
-See the examples in the `Form` section above and in the `List` section below.
-
-`Section` titles are made all uppercase by default.
-To prevent this, apply the `textCase` view modifier passing it `nil`.
-
 ### Group
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/group",
 "Group" %} view collects all its child views into a single view
 without changing their layout.
+
+Container views have a limit of ten child views.
+The `Group` view is often used to work around this limitation.
+For example, 15 child views can be divided into three `Group` views
+containing five views each.
+This allows the container to only contains these three `Group` views.
+
+Another option is to group views into `Section` views
+described in the next section.
+
 View modifiers applied to the `Group` are applied to each of the children.
 
 ```swift
@@ -2362,6 +2361,60 @@ Group {
     Text("Two")
 }.foregroundColor(.blue)
 ```
+
+### Section
+
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/section",
+"Section" %} views groups the contents of a `Form`, `List`, or `Picker`
+into sections with optional headers and footers.
+
+When `Section` views are used inside a `List` that
+has the view modifier `.listStyle(.sidebar)` applied,
+disclosure buttons are provided to allow users to collapse them.
+
+`Section` titles are made all uppercase by default.
+To prevent this, apply the `textCase` view modifier passing it `nil`.
+
+The following code displays a list of sections that
+each have header and footer, and are collapsible.
+
+```swift
+struct ContentView: View {
+    let footerText = "* curse words excluded"
+    let wordDict: [String: [String]] = [
+        "A": ["Apple", "Alligator"],
+        "B": ["Banana", "Bear"],
+        "C": ["Cherry", "Camel"]
+    ]
+
+    var body: some View {
+        List {
+            // ForEach(wordDict.sorted(by: >), id: \.key) { letter, words in
+            ForEach(Array(wordDict.keys), id: \.self) { letter in
+                Section(
+                    header: Text("Words that start with \(letter)"),
+                    footer: Text(footerText)
+                ) {
+                    ForEach(wordDict[letter]!, id: \.self) { word in
+                        Text(word)
+                    }
+                }
+                // This increases header font size, makes it bold,
+                // and does not change the case.  Without this
+                // all characters are transformed to be uppercase.
+                .headerProminence(.increased)
+                .listRowSeparatorTint(.red)
+            }
+        }
+        // When inside a List with the style "sidebar", Section views
+        // include a disclosure button which allows them to be collapsed.
+        .listStyle(.sidebar)
+    }
+}
+```
+
+See more examples of using the `Section` view
+in the [Form](#form) section above and in the [List](#list) section below.
 
 ### GroupBox
 
