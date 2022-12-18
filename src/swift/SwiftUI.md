@@ -2378,24 +2378,29 @@ To prevent this, apply the `textCase` view modifier passing it `nil`.
 The following code displays a list of sections that
 each have header and footer, and are collapsible.
 
+<img alt="SwiftUI Section" style="width: 40%"
+    src="/blog/assets/SwiftUI-Section.png?v={{pkg.version}}"
+    title="SwiftUI Section">
+
 ```swift
 struct ContentView: View {
     let footerText = "* curse words excluded"
-    let wordDict: [String: [String]] = [
+    let wordDict: Dictionary = [
         "A": ["Apple", "Alligator"],
         "B": ["Banana", "Bear"],
-        "C": ["Cherry", "Camel"]
+        "C": ["Cherry", "Camel"],
+        "D": ["Date", "Dog"],
+        "E": ["Eggplant", "Elephant"]
     ]
 
     var body: some View {
         List {
-            // ForEach(wordDict.sorted(by: >), id: \.key) { letter, words in
-            ForEach(Array(wordDict.keys), id: \.self) { letter in
+            ForEach(wordDict.keys.sorted(), id: \.self) { letter in
                 Section(
                     header: Text("Words that start with \(letter)"),
                     footer: Text(footerText)
                 ) {
-                    ForEach(wordDict[letter]!, id: \.self) { word in
+                    ForEach(wordDict[letter] ?? [], id: \.self) { word in
                         Text(word)
                     }
                 }
