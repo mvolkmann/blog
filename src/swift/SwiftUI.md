@@ -2630,7 +2630,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VStack { // error: "Type 'any View' cannot conform to 'View'"
+        VStack {
             Picker("List Style", selection: $selectedName) {
                 ForEach(styleNames, id: \.self) { name in
                     Text(name).tag(name)
@@ -2640,27 +2640,28 @@ struct ContentView: View {
                 selectedStyle = styles[selectedName]!
             }
 
-            List {
-                Section("Breakfast") {
-                    Text("pancakes")
-                    Text("bacon")
-                    Text("orange juice")
+            // This avoids the error
+            // "Type 'any View' cannot conform to 'View'".
+            AnyView(
+                List {
+                    Section("Breakfast") {
+                        Text("pancakes")
+                        Text("bacon")
+                        Text("orange juice")
+                    }
+                    Section("Lunch") {
+                        Text("sandwich")
+                        Text("chips")
+                        Text("lemonade")
+                    }
+                    Section("Dinner") {
+                        Text("spaghetti")
+                        Text("bread")
+                        Text("water")
+                    }
                 }
-                Section("Lunch") {
-                    Text("sandwich")
-                    Text("chips")
-                    Text("lemonade")
-                }
-                Section("Dinner") {
-                    Text("spaghetti")
-                    Text("bread")
-                    Text("water")
-                }
-            }
-            // The real issue is here because the type of selectedStyle
-            // is "any ListStyle" instead of "ListStyle",
-            // but I don't know how to fix this.
-            .listStyle(selectedStyle)
+                .listStyle(selectedStyle)
+            )
         }
     }
 }
