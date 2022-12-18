@@ -2370,7 +2370,8 @@ into sections with optional headers and footers.
 
 When `Section` views are used inside a `List` that
 has the view modifier `.listStyle(.sidebar)` applied,
-disclosure buttons are provided to allow users to collapse them.
+disclosure buttons are provided on the right side of each header
+to allow users to collapse them.
 
 `Section` titles are made all uppercase by default.
 To prevent this, apply the `textCase` view modifier passing it `nil`.
@@ -2411,8 +2412,7 @@ struct ContentView: View {
                 .listRowSeparatorTint(.red)
             }
         }
-        // When inside a List with the style "sidebar", Section views
-        // include a disclosure button which allows them to be collapsed.
+        // This includes disclosure buttons in each section header.
         .listStyle(.sidebar)
     }
 }
