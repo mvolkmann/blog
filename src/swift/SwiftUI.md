@@ -2610,34 +2610,56 @@ The following code demonstrates various list styles.
 The user can select a style from a `Picker`.
 
 ```swift
-struct ContentView: View {
-    @State private var selectedName = "plain"
-    @State private var selectedStyle: any ListStyle = .plain
+import SwiftUI
 
-    let styles: [String: any ListStyle] = [
+// This type enables iterating over objects that conform to the
+// ListStyle protocol and getting their names as a String.
+// The main reason this is needed is that the type [any ListStyle]
+// does not conform to Equatable and Hashable which are required by ForEach.
+struct MyListStyle: Equatable, Hashable {
+    let style: any ListStyle
+
+    var name: String {
+        // All names contain "ListStyle" and we want the part before that.
+        var name = String(describing: style)
+        let index = name.range(of: "ListStyle")?.lowerBound
+        if let index { name.removeSubrange(index...) }
+        return name
+    }
+
+    init(_ style: any ListStyle) {
+        self.style = style
+    }
+
+    static func == (lhs: MyListStyle, rhs: MyListStyle) -> Bool {
+        lhs.name == rhs.name
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
+}
+
+struct ContentView: View {
+    @State private var selectedStyle = MyListStyle(.plain)
+
+    let styles: [MyListStyle] = [
         // "bordered": .bordered, // not in iOS
         // "carousel": .carousel, // not in iOS
         // "elliptical": .elliptical, // not in iOS
-        "grouped": .grouped,
-        "inset": .inset,
-        "InsetGrouped": .insetGrouped,
-        "plain": .plain,
-        "sidebar": .sidebar
+        MyListStyle(.grouped),
+        MyListStyle(.inset),
+        MyListStyle(.insetGrouped),
+        MyListStyle(.plain),
+        MyListStyle(.sidebar)
     ]
-
-    var styleNames: [String] {
-        Array(styles.keys)
-    }
 
     var body: some View {
         VStack {
-            Picker("List Style", selection: $selectedName) {
-                ForEach(styleNames, id: \.self) { name in
-                    Text(name).tag(name)
+            Picker("List Style", selection: $selectedStyle) {
+                ForEach(styles, id: \.self) { style in
+                    Text(style.name).tag(style)
                 }
-            }
-            .onChange(of: selectedName) { _ in
-                selectedStyle = styles[selectedName]!
             }
 
             // This avoids the error
@@ -2660,7 +2682,7 @@ struct ContentView: View {
                         Text("water")
                     }
                 }
-                .listStyle(selectedStyle)
+                .listStyle(selectedStyle.style)
             )
         }
     }
