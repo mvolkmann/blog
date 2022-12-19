@@ -729,8 +729,10 @@ For example, `Text(AwesomeIcon.aws.rawValue)`.
   - for example, the Mail app displays a list of mailboxes in a sidebar
   - selecting an item in the sidebar changes what is displayed
     in the pane that follows
-  - SwiftUI creates this by applying the `.listStyle(.sidebar)` view modifier
-    to a `List` view. See an example in the [Sidebars](#sidebars) section.
+  - SwiftUI creates this by applying the {% aTargetBlank
+    "https://developer.apple.com/documentation/swiftui/view/liststyle(_:)",
+    "listStyle" %} view modifier to a `List` view, passing it `.sidebar`.
+    See an example in the [Sidebars](#sidebars) section.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/bars/status-bars/",
@@ -2373,8 +2375,9 @@ Group {
 "Section" %} views groups the contents of a `Form`, `List`, or `Picker`
 into sections with optional headers and footers.
 
-When `Section` views are used inside a `List` that
-has the view modifier `.listStyle(.sidebar)` applied,
+When `Section` views are used inside a `List` that has the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/liststyle(_:)",
+"listStyle" %} view modifier applied using `.listStyle(.sidebar)`,
 disclosure buttons are provided on the right side of each header
 to allow users to collapse them.
 
