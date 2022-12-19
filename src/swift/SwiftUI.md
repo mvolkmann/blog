@@ -3278,24 +3278,31 @@ struct Transportation: View {
     var body: some View {
         Text("Information about \(kind) transportation goes here.")
             .navigationBarTitle("\(kind) Transportation")
+            .padding()
     }
 }
 
 struct ContentView: View {
     var body: some View {
         TabView {
-            Transportation(kind: "Car").tabItem {
-                Label("Car", systemImage: "car")
-            }
-            Transportation(kind: "Bus").tabItem {
-                Label("Bus", systemImage: "bus")
-            }
-            Transportation(kind: "Train").tabItem {
-                Label("Train", systemImage: "tram")
-            }
-            Transportation(kind: "Airplane").tabItem {
-                Label("Airplane", systemImage: "airplane")
-            }
+            Transportation(kind: "Car")
+                .tabItem {
+                    Label("Car", systemImage: "car")
+                }
+                .badge(2) // number available
+            Transportation(kind: "Bus")
+                .tabItem {
+                    Label("Bus", systemImage: "bus")
+                }
+                .badge("Late") // status
+            Transportation(kind: "Train")
+                .tabItem {
+                    Label("Train", systemImage: "tram")
+                }
+            Transportation(kind: "Airplane")
+                .tabItem {
+                    Label("Airplane", systemImage: "airplane")
+                }
         }
         .onAppear() {
             UITabBar.appearance().backgroundColor = .systemGray5
@@ -5348,6 +5355,38 @@ struct ContentView: View {
                 $0.link = URL(string: "https://apple.com")
                 $0.underlineColor = .blue // doesn't work
             }
+        }
+    }
+}
+```
+
+## Badges
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/label/badge(_:)-6cyi9",
+"badge" %} view modifier adds an `Int` to an item in a `TabView` or `List`.
+To add a `String` instead, use this {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/anyview/badge(_:)-4cl47",
+"badge" %} view modifier.
+
+When applied to an item in a `TabView`, the badge is rendered as a
+red circle or oval that is positioned on the upper-right corner of the item.
+See examples in the [TabView](#tabview) section.
+
+When applied to a `List` item, the badge is render as
+gray text on the trailing edge.
+For example:
+
+<img alt="SwiftUI List Badges" style="width: 40%"
+    src="/blog/assets/SwiftUI-List-Badges.png?v={{pkg.version}}"
+    title="SwiftUI List Badges">
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        List {
+            Text("Jean Ratelle").badge(19)
+            Text("Wayne Gretzky").badge("Great One")
         }
     }
 }
