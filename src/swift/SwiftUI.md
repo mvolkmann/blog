@@ -8232,3 +8232,7 @@ whereas widgets cannot.
 
 - Why do `Picker` views appear to be disabled
   unless they are wrapped in a `NavigationView` and a `Form`?
+
+- I wish `id: \.self` was needed in fewer situations.
+  For example, why isn't that the default when using `ForEach`
+  on an array of `String` values?
