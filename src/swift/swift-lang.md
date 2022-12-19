@@ -3725,10 +3725,9 @@ let nyPeople = people.filter(\.address.state == "NY")
 
 ## Reflection
 
-Swift doesn't not have full support for reflection
-where object properties and methods can be discovered and used at run-time.
-But it does support getting the type of a value at run-time
-using the `type` function.
+Swift provides a way to get the type of a value at runtime
+using the global `type` function.
+
 For example:
 
 ```swift
@@ -3743,7 +3742,28 @@ struct Person {
 let p = Person(name: "Mark")
 let pType = type(of: p) // Person.Type
 let pTypeName = String(describing: pType) // "Person"
+```
 
+Swift also provides the {% aTargetBlank
+"https://developer.apple.com/documentation/swift/mirror", "Mirror" %} API
+for discovering the stored properties of an object at runtime.
+It does not support discovering the
+computed properties and methods of an object.
+
+```swift
+print(String(reflecting: p))
+// __lldb_expr_17.Person(name: "Mark", hungry: true)
+
+// This iterates over the stored properties of the object,
+// not computed properties or methods.
+// Stored properties discovered through reflection cannot be modified.
+let mirror = Mirror(reflecting: p)
+for child in mirror.children {
+    print("name:", child.label, "value:", child.value)
+}
+// name: Optional("name") value: Mark
+// name: Optional("hungry") value: true
+// We don't get output for "upName" because it is a computed property.
 ```
 
 ## Opaque and Existential Types
