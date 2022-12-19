@@ -6916,6 +6916,10 @@ Supported `placement` values include:
 
 Other `placement` values seem to be unable to render multiple buttons.
 
+The following code example adds
+three buttons on the trailing side of the navigation bar
+and four buttons on the leafing side of the bottom bar.
+
 <img alt="SwiftUI Toolbars" style="width: 40%"
   src="/blog/assets/SwiftUI-Toolbars.png?v={{pkg.version}}"
   title="SwiftUI Toolbars">
@@ -6973,9 +6977,29 @@ struct ContentView: View {
 The approach described here is deprecated in iOS 16. See the new approach at
 {% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
 
-The `NavigationView` view marks the spot where
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/navigationview",
+"NavigationView" %} view marks the spot where
 the views associated with `NavigationLinks` will be rendered.
-The example below renders four pages.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/navigationlink",
+"NavigationLink" %} view provides a link that
+navigates to a destination view when tapped.
+It is passed a `destination` argument and a closure
+that describes the view to be rendered as the link.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-43srq",
+"navigationTitle" %} view modifier provides the title
+to be displayed in the navigation bar of the target screen.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/sharelink/navigationbartitledisplaymode(_:)",
+"navigationBarTitleModeDisplay" %} view modifier specifies the title size.
+It defaults to `.large` and can be changed to `.inline` which is smaller.
+
+The following example code renders four pages.
 Page 1 contains links to pages 2 and 3.
 Page 3 contains a link to page 4.
 
