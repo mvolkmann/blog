@@ -3253,6 +3253,9 @@ or an image followed by text. Passing any other type of view
 results in a visible but empty tab item."
 A good size for these images is 32x32.
 
+When using SF Symbols, do not request filled version of the icons because
+the operating system will decide whether filled versions should be used.
+
 To use `TabView` in conjunction with `NavigationView`,
 wrap each page in its own `NavigationView`
 rather than placing the `TabView` inside a `NavigationView`.
@@ -3315,8 +3318,7 @@ TabView(selection: $selection) {
 }
 ```
 
-Here's another example that displays a set of pages
-the user can swipe through.
+Here's another example that displays a set of pages the user can swipe through.
 Page controls with a dot representing each page are displayed at the bottom.
 
 <img alt="SwiftUI TabView Pages" style="width: 40%"
