@@ -742,8 +742,9 @@ For example, `Text(AwesomeIcon.aws.rawValue)`.
   - can style to light or dark mode and customize colors
   - should not replace with a custom status bar
   - can temporarily hide it, but should never permanently hide it
-  - to hide the system status bar, apply the `.statusBar(hidden: true)`
-    view modifier to the top `NavigationView`
+  - to hide the system status bar, apply the {% aTargetBlank
+    "https://developer.apple.com/documentation/swiftui/view/statusbarhidden(_:)",
+    "statusBarHidden" %} view modifier to the top `NavigationView`
   - SwiftUI needs nothing to support this because the system provides it
 
 - {% aTargetBlank
@@ -7322,7 +7323,7 @@ struct ContentView: View {
                     }.foregroundColor(.white)
             )
         }
-        .statusBar(hidden: fullScreen)
+        .statusBarHidden(fullScreen)
 
         // This makes an @ObservedObject available
         // to all linked views as an @EnvironmentObject.
