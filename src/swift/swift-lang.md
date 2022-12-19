@@ -3666,10 +3666,12 @@ node1.printDepthFirst()
 ## KeyPaths
 
 KeyPaths provide a path to a particular property in objects.
-KeyPaths can be passed to the `Array` `map` and `filter` methods
+These can be used directly to retrieve the value of a property
+from a specific object or they can be passed to a function.
+For example, KeyPaths can be passed to the `Array` `map` and `filter` methods
 in place of a closure.
 
-The following code demonstrates using KeyPaths.
+The following code demonstrates several uses of KeyPaths.
 
 ```swift
 struct Address {
@@ -3719,6 +3721,29 @@ func == <T, V: Equatable>(lhs: KeyPath<T, V>, rhs: V) -> (T) -> Bool {
 // This uses a KeyPath equality test.
 let nyPeople = people.filter(\.address.state == "NY")
 // This gives an Array that only contains p2 ("Big Bird").
+```
+
+## Reflection
+
+Swift doesn't not have full support for reflection
+where object properties and methods can be discovered and used at run-time.
+But it does support getting the type of a value at run-time
+using the `type` function.
+For example:
+
+```swift
+let value = 19
+let myType = type(of: value) // Int.Type
+let myTypeName = String(describing: myType) // "Int"
+
+struct Person {
+    let name: String
+}
+
+let p = Person(name: "Mark")
+let pType = type(of: p) // Person.Type
+let pTypeName = String(describing: pType) // "Person"
+
 ```
 
 ## Opaque and Existential Types
