@@ -5373,6 +5373,15 @@ When applied to an item in a `TabView`, the badge is rendered as a
 red circle or oval that is positioned on the upper-right corner of the item.
 See examples in the [TabView](#tabview) section.
 
+To change the color of `TabView` item badges from red to another color,
+add the following in the struct of the surrounding view:
+
+```swift
+init() {
+    UITabBarItem.appearance().badgeColor = .blue // or some other color
+}
+```
+
 When applied to a `List` item, the badge is render as
 gray text on the trailing edge.
 For example:
