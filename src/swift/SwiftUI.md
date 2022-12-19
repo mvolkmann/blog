@@ -4334,12 +4334,11 @@ This only applies to `automatic` and `wheel` pickers,
 not `menu` or `segmented` pickers.
 
 When the options are generated using `ForEach` to iterate over an array,
-the selected value is described by the `id` property values
-of the array elements.
+the selected values are described by array items.
 This can be changed by specifying a `tag` value for each option.
 The type of the `tag` values must match the type of the `selection` argument.
 If these types differ, the compiler does not generate an error,
-but it will not be possible to select an option.
+but it will not be possible to change the selected option.
 
 ```swift
 struct ContentView: View {
@@ -4380,7 +4379,6 @@ struct ContentView: View {
                 // Text("Big").tag(ShirtSize.lg)
             }
             // .pickerStyle(.segmented)
-            .background(Color.yellow.opacity(0.3))
 
             Text("selected \(shirtSize.rawValue)")
             Text("type is \(String(describing: type(of: shirtSize)))")
