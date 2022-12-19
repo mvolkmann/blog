@@ -3363,7 +3363,14 @@ struct ContentView: View {
                 imageName: "car"
             )
         }
+        // This provides "paging dots" at the bottom of each page.
         .tabViewStyle(.page(indexDisplayMode: .always))
+
+        // This allows swiping between pages without displaying paging dots.
+        // .tabViewStyle(.page(indexDisplayMode: .never))
+
+        // This adds a background behind the paging dots
+        // so they are easier to see.
         .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
 }
