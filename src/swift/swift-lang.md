@@ -1863,6 +1863,8 @@ for (index, score) in scores.enumerated() {
 | `suffix(while: (Element) -> Bool) -> ArraySlice<Element>` | returns subsequence of last elements that match a predicate                                |
 | `swapAt(Int, Int)`                                        | swaps elements at the given indexes                                                        |
 
+Here are examples of using some of these methods.
+
 ```swift
 let data = [1, 4, 7, 10, 16]
 
@@ -3659,6 +3661,64 @@ node1.printDepthFirst()
 //     4
 //   5
 //     6
+```
+
+## KeyPaths
+
+KeyPaths provide a path to a particular property in objects.
+KeyPaths can be passed to the `Array` `map` and `filter` methods
+in place of a closure.
+
+The following code demonstrates using KeyPaths.
+
+```swift
+struct Address {
+    let street: String
+    let city: String
+    let state: String
+    let zip: String
+}
+
+struct Person {
+    let name: String
+    let address: Address
+}
+
+let p1 = Person(
+    name: "Mark Volkmann",
+    address: Address(
+        street: "123 Some Street",
+        city: "Somewhere",
+        state: "MO",
+        zip: "12345"
+    )
+)
+
+let cityPath = \Person.address.city
+let city = p1[keyPath: cityPath] // "Somewhere"
+
+let p2 = Person(
+    name: "Big Bird",
+    address: Address(
+        street: "123 Sesame Street",
+        city: "Manhattan",
+        state: "NY",
+        zip: "10001"
+    )
+)
+
+let people = [p1, p2]
+let names = people.map(\.name) // ["Mark Volkmann", "Big Bird"]
+let zips = people.map(\.address.zip) // ["12345", "10001"]
+
+// This enables KeyPath equality tests.
+func == <T, V: Equatable>(lhs: KeyPath<T, V>, rhs: V) -> (T) -> Bool {
+    return { $0[keyPath: lhs] == rhs }
+}
+
+// This uses a KeyPath equality test.
+let nyPeople = people.filter(\.address.state == "NY")
+// This gives an Array that only contains p2 ("Big Bird").
 ```
 
 ## Opaque and Existential Types
