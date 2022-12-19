@@ -2219,6 +2219,10 @@ can change the way they look and feel and
 this can differ based on the platform (ex. iOS vs. macOS).
 One example of a data input that changes is `Picker`.
 
+To control whether a data input view is disabled,
+apply the `disabled` view modifier passing it a `Boolean` value.
+Typically disabled data input views are grayed out.
+
 The following example demonstrates many common views used in forms.
 
 <img alt="SwiftUI Form" style="width: 40%"
@@ -4378,7 +4382,6 @@ struct ContentView: View {
                 //  Text("In-Between").tag(ShirtSize.md)
                 // Text("Big").tag(ShirtSize.lg)
             }
-            // .pickerStyle(.segmented)
 
             Text("selected \(shirtSize.rawValue)")
             Text("type is \(String(describing: type(of: shirtSize)))")
@@ -4387,23 +4390,40 @@ struct ContentView: View {
 }
 ```
 
-Here's a more complex example where the `Picker` begins
-with no option being selected.
-Assume that `people` is an array of `Person` objects
-that have an optional `name` property.
+The following `Picker` example saves the index of a selected item
+rather than the item itself.
+It begins with no option being selected.
 
 ```swift
-@State private var selectedPersonIndex: Int = -1 // nothing selected
-
-private var selectedPerson: Person? {
-    selectedPersonIndex == -1 ? nil : people[selectedPersonIndex]
+struct Person {
+    let name: String
 }
 
-...
+struct ContentView: View {
+    @State private var selectedPersonIndex: Int = -1 // nothing selected
 
-Picker("Owner", selection: $selectedPersonIndex) {
-    ForEach(people.indices) { index in
-        Text(people[index].name ?? "").tag(index)
+    let people = [
+        Person(name: "Mark"),
+        Person(name: "Tami"),
+        Person(name: "Amanda"),
+        Person(name: "Jeremy")
+    ]
+
+    private var selectedPerson: Person? {
+        selectedPersonIndex == -1 ? nil : people[selectedPersonIndex]
+    }
+
+    var body: some View {
+        Form {
+            Picker("Person", selection: $selectedPersonIndex) {
+                Text("").tag(-1)
+                ForEach(people.indices, id: \.self) { index in
+                    Text(people[index].name)
+                }
+            }
+
+            Text("You selected \(selectedPerson?.name ?? "nobody").")
+        }
     }
 }
 ```
