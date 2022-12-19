@@ -4217,18 +4217,26 @@ in a way other than adding or subtracting one.
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/picker",
 "Picker" %} view supports selecting an option from a list.
-A `Picker` takes the text to display as a prompt and
-a `selection` argument which is a binding that
-holds something to identify the selected value.
+It takes label text and a `selection` argument
+which is a binding that holds the selected value.
+
 The options are specified with child `Text` views.
 
-The label text passed to the `Picker` initializer
+If these are provided using `ForEach`, the `selection` value
+comes from the values over which the `ForEach` iterates,
+not from the value being displayed by the `Text` views.
+To change these, apply the `tag` view modifier to the `Text` views,
+passing it a value.
+
+The prompt text passed to the `Picker` initializer
 is only displayed if the `Picker` is inside a `Form` or `List`.
 
-The `pickerStyle` view modifier can be applied
-to change the way the options are rendered.
-The specified prompt is only rendered by some styles.
-The values that can be passed to this include:
+Apply the `pickerStyle` view modifier
+to change the way the options are rendered, passing it a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/pickerstyle",
+"PickerStyle" %}.
+The label is only rendered by some styles.
+`PickerStyle` values include:
 
 - `.automatic` (default)
 
@@ -4312,11 +4320,12 @@ The values that can be passed to this include:
     <figcaption>wheel picker</figcaption>
   </figure>
 
-The font and background colors used by a `Picker`
+The background color and font used by a `Picker`
 can be customized in limited ways.
 
 To set the background color, apply the `background` view modifier
-to the `Picker`. For example, `.background(Color.yellow.opacity(0.3))`.
+For example, `.background(Color.yellow.opacity(0.3))`.
+The `tint` view modifier does not effect `Picker` views.
 
 To set the font and foreground color, apply the `font` and `foregroundColor`
 view modifiers to the `Text` views used to render the options.
@@ -4324,29 +4333,59 @@ For example, `.font(.headline).foregroundColor(.red)`.
 This only applies to `automatic` and `wheel` pickers,
 not `menu` or `segmented` pickers.
 
-When the options are generated using `ForEach` iterating over an array,
+When the options are generated using `ForEach` to iterate over an array,
 the selected value is described by the `id` property values
 of the array elements.
 This can be changed by specifying a `tag` value for each option.
 The type of the `tag` values must match the type of the `selection` argument.
-If these types differ, it will not be possible to select an option.
+If these types differ, the compiler does not generate an error,
+but it will not be possible to select an option.
 
 ```swift
-@State private var shirtSize: ShirtSize = .sm
+struct ContentView: View {
+    enum ShirtSize: String, CaseIterable {
+        case sm = "Small"
+        case md = "Medium"
+        case lg = "Large"
+        case xl = "Extra Large"
+    }
 
-enum ShirtSize: String, CaseIterable {
-    case sm = "Small"
-    case md = "Medium"
-    case lg = "Large"
-    case xl = "Extra Large"
-}
+    @State private var shirtSize: ShirtSize = .sm
 
-var body: some View {
-    Picker("Shirt Size", selection: $shirtSize) {
-        ForEach(ShirtSize.allCases, id: \.self) { size in
-            Text("\(size.rawValue)").tag(size)
+    var body: some View {
+        Form {
+            Picker("Shirt Size", selection: $shirtSize) {
+                ForEach(ShirtSize.allCases, id: \.self) { size in
+                    Text(size.rawValue) // no need for tag view modifier
+
+                    // The text displayed here has
+                    // no effect on the value of shirtSize!
+                    // If we use the following in place of the previous line,
+                    // we can still select each of the four shirt sizes
+                    // despited each option displaying the same text.
+                    // Text("junk")
+
+                    // If we iterate over ShirtSize.allCases.indices
+                    // instead of iterating over ShirtSize.allCases
+                    // and display the index values,
+                    // we can use the tag view modifier to associate
+                    // each option with one of the ShirtSize enum cases.
+                    // Text("\(index)").tag(ShirtSize.allCases[index])
+                }
+
+                // We can hard-code alternative names of the shirt sizes
+                // and associate them with ShirtCase cases.
+                // Text("Tiny").tag(ShirtSize.sm)
+                //  Text("In-Between").tag(ShirtSize.md)
+                // Text("Big").tag(ShirtSize.lg)
+            }
+            // .pickerStyle(.segmented)
+            .background(Color.yellow.opacity(0.3))
+
+            Text("selected \(shirtSize.rawValue)")
+            Text("type is \(String(describing: type(of: shirtSize)))")
         }
-    } // .pickerStyle(.segmented)
+    }
 }
 ```
 
