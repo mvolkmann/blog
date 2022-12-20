@@ -1155,6 +1155,7 @@ The {% aTargetBlank
 The style can be specified in many ways including using a `Color` or `Gradient`.
 For more advanced borders, see the use of the `overlay` view modifier
 that uses `RoundedRectangle` in the [TextEditor](#texteditor) section.
+Also see the [Marching Ants Border](#marching-ants-border) section.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/text/multilinetextalignment(_:)",
@@ -6403,6 +6404,121 @@ struct ContentView: View {
 
 TODO: Why do the food names eventually disappear after being moved
 in both Preview and the Simulator?
+
+## Marching Ants Border
+
+We can create an animated dashed border around any view
+that resembles marching ants.
+This was inspired by the Hacking With Swift post {% aTargetBlank
+"https://www.hackingwithswift.com/example-code/calayer/how-to-create-a-marching-ants-effect-using-linedashphase",
+"How to create a marching ants effect using lineDashPhase" %}.
+
+The following code is the contents of `MarchingAnts.swift`
+which can be added to any project.
+
+```swift
+import SwiftUI
+
+// This is a custom view modifier that gets the size of its content.
+struct SizeReporter: ViewModifier {
+    @Binding var size: CGSize
+
+    private struct SizePreferenceKey: PreferenceKey {
+        static let defaultValue: CGSize = .zero
+        static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+            value = nextValue()
+        }
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .background(GeometryReader { geo in
+                Color.clear
+                    .preference(key: SizePreferenceKey.self, value: geo.size)
+            })
+            .onPreferenceChange(SizePreferenceKey.self) { value in
+                size = value
+            }
+    }
+}
+
+// This is a custom view modifier that draws an animated dashed border
+// around its content.
+struct MarchingAnts: ViewModifier {
+    @State private var phase: CGFloat = 0
+    @State private var size: CGSize = .zero
+
+    let clockwise: Bool
+    let dashLength: CGFloat
+    let dashWidth: CGFloat
+
+    func body(content: Content) -> some View {
+        ZStack {
+            content.getSize($size)
+            Rectangle()
+                .strokeBorder(style: StrokeStyle(
+                    lineWidth: dashWidth,
+                    dash: [dashLength],
+                    dashPhase: phase
+                ))
+                .onAppear {
+                    withAnimation(
+                        .linear
+                            .repeatForever(autoreverses: false)
+                    ) {
+                        // Adding goes counter-clockwise
+                        // and subtracting goes clockwise.
+                        phase = dashLength * 2 * (clockwise ? -1 : 1)
+                    }
+                }
+                // .frame(width: 250, height: 200)
+                .frame(width: size.width, height: size.height)
+        }
+    }
+}
+
+// This extension simplifies using the custom view modifiers defined above.
+extension View {
+    func getSize(_ size: Binding<CGSize>) -> some View {
+        modifier(SizeReporter(size: size))
+    }
+
+    func marchingAnts(
+        clockwise: Bool = true,
+        dashLength: CGFloat = 10,
+        dashWidth: CGFloat = 3
+    ) -> some View {
+        modifier(MarchingAnts(
+            clockwise: clockwise,
+            dashLength: dashLength,
+            dashWidth: dashWidth
+        ))
+    }
+}
+```
+
+The following code demonstrates using the `marchingAnts` view modifier
+defined above.
+
+<img alt="SwiftUI Marching Ants" style="width: 40%"
+  src="/blog/assets/SwiftUI-Marching-Ants.png?v={{pkg.version}}"
+  title="SwiftUI Marching Ants">
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Text("See them march!")
+                .padding()
+                .marchingAnts(
+                    // clockwise: false,
+                    // dashLength: 20,
+                    // dashWidth: 10
+                )
+        }
+    }
+}
+```
 
 ## Camera
 
