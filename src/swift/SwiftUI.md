@@ -548,7 +548,7 @@ The following sections describe the views defined by SwiftUI.
   - by default contains buttons for Cut, Copy, Paste, Select, Select All, Delete, Replace..., Look Up, and Share...
   - can disable any of the default buttons to remove them
   - SwiftUI provides this automatically when a long press occurs
-    in a `TextField` or `TextEditor`
+    in a `TextField` or `TextEditor`.
 
 - {% aTargetBlank
     "https://developer.apple.com/design/human-interface-guidelines/ios/controls/labels/",
@@ -649,7 +649,7 @@ The following sections describe the views defined by SwiftUI.
     "https://developer.apple.com/documentation/uikit/uikeyboardtype",
     "UIKeyboardType enum" %}
   - SwiftUI creates this with `TextField`, `SecureField`,
-    and `TextEditor` (multi-line)
+    and `TextEditor` (multi-line).
 
 ## Icons
 
@@ -1098,8 +1098,12 @@ The following example uses the `foregroundColor`, `padding`, and `stroke`
 view modifiers.
 
 ```swift
-Text("Hello, World!").foregroundColor(.red)
-RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).padding(.all)
+Text("Hello, World!")
+    .foregroundColor(.red)
+
+RoundedRectangle(cornerRadius: 20)
+    .stroke(lineWidth: 3)
+    .padding(.all)
 ```
 
 Some view modifiers can be applied to any view.
@@ -1144,6 +1148,13 @@ like {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/list/foregroundcolor(_:)",
 "foregroundColor" %} because it can specify background content that is
 any `View` and is not restricted to being only a color.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/border(_:width:)",
+"border" %} view modifier adds a border to a view with a given style and width.
+The style can be specified in many ways including using a `Color` or `Gradient`.
+For more advanced borders, see the use of the `overlay` view modifier
+that uses `RoundedRectangle` in the [TextEditor](#texteditor) section.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/text/multilinetextalignment(_:)",
@@ -3929,7 +3940,7 @@ TextField("Score", value: $score, format: .number)
     .textFieldStyle(.roundedBorder)
 ```
 
-To use good foreground and background colors in both light and dark mode
+To apply good foreground and background colors in both light and dark mode
 use the following:
 
 ```swift
@@ -4964,7 +4975,7 @@ Note how `ContentView` uses the view `MyRow`.
 It is preferred to create small views like this and compose them
 rather than creating views whose code is long and deeply nested.
 
-## Drawing Views
+## Shapes
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/shape",
 "Shape" %} protocol inherits from the `View` protocol
@@ -4991,6 +5002,9 @@ when the border width is greater than one.
 `stroke` is drawn so it is centered on the edge of the shape
 with half inside and half outside.
 `strokeBorder` is inset so none of the stroke is outside of the shape.
+
+Applying the `border` view modifier to a shape
+adds a rectangular border rather than a stroke on its perimeter.
 
 To fill a shape apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/shape/fill(style:)",
@@ -5066,7 +5080,11 @@ struct ContentView: View {
             }
             ZStack {
                 GeometryReader { geometry in
-                    Circle().fill(radialGradient(over: geometry.size))
+                    let size = geometry.size
+                    VStack {
+                        Circle().fill(radialGradient(over: size))
+                    }
+                    .frame(width: size.width, height: size.height)
                 }
                 Text("Circle\nwith\nRadialGradient")
                     .multilineTextAlignment(.center)
