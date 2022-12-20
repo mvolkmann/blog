@@ -6807,13 +6807,32 @@ struct ContentView: View {
 }
 ```
 
-## Alerts
+## Modal Dialogs
 
-Alerts are simple modal dialogs that contain
-a title, an optional message, and buttons.
-They are defined using the `alert` method
-that can be chained onto any view.
-They are displayed when a given binding is set to true.
+There are three ways to display modal dialogs.
+
+1. Apply the {% aTargetBlank
+   "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-29bp4",
+   "alert" %} view modifier.
+1. Apply the {% aTargetBlank
+   "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-9ibgk",
+   "confirmationDialog" %} view modifier.
+1. Apply the {% aTargetBlank
+   "https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)",
+   "sheet" %} view modifier.
+
+Each of these view modifiers are described in the following sections.
+
+### Alerts
+
+Alerts are simple modal dialogs that are displayed in the center of the screen.
+They display a title, an optional message, and buttons.
+Tapping any button executes its action and dismisses the dialog.
+
+To define an alert, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-29bp4",
+"alert" %} method to any view.
+It is displayed when a given `Bool` binding is set to `true`.
 
 The buttons to display are described in the `actions` argument.
 Like any button, these can have associated actions.
@@ -6896,10 +6915,55 @@ struct ContentView: View {
 }
 ```
 
-## Modal Dialogs
+### Confirmation Dialogs
 
-Basic modal dialogs can be created using the
-`alert` and `confirmationDialog` view modifiers.
+Confirmation dialogs are similar to alerts,
+but they slide up from the bottom of the screen.
+They display a title (not on iOS), an optional message,
+and a vertical stack of buttons.
+A "Cancel" button is provided automatically and is displayed at the bottom.
+Tapping any button executes its action and dismisses the dialog.
+Tapping outside all of the buttons also dismisses the dialog.
+
+To define a confirmation dialog, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-9ibgk",
+"confirmationDialog" %} view modifier to any view.
+It is displayed when a given `Bool` binding is set to `true`.
+
+<img alt="SwiftUI confirmationDialog" style="width: 60%"
+    src="/blog/assets/SwiftUI-confirmationDialog.png?v={{pkg.version}}"
+    title="SwiftUI confirmationDialog">
+
+```swift
+struct ContentView: View {
+    @State private var showingConfirmation = false
+    @State private var like = false
+
+    var body: some View {
+        VStack(spacing: 40) {
+            let assessment = like ? "do" : "do not"
+            Text("I see you \(assessment) like cheese.")
+            Button("Change") {
+                showingConfirmation = true
+            }
+            .buttonStyle(.borderedProminent)
+            .confirmationDialog(
+                "Question of the Day",
+                isPresented: $showingConfirmation,
+                actions: {
+                    Button("Yes") { like = true }
+                    Button("No") { like = false }
+                },
+                message: {
+                    Text("Do you like cheese?")
+                }
+            )
+        }
+    }
+}
+```
+
+### Custom Modal Dialogs
 
 Custom modal dialogs are implemented by displaying a "sheet".
 The sheet slides in from the bottom by default.
