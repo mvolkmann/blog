@@ -4127,19 +4127,23 @@ struct SomeView: View {
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/menu",
 "Menu" %} view renders a label containing the menu title.
-When clicked, a menu appears below the label
+When clicked, a menu appears below or above the label
 containing a vertical stack of buttons and sub-menus.
-Include `Divider` views to separate groups of menu items.
+To separate groups of menu items include `Divider` views
 
-The order of the buttons depends on the position of the menu.
-If it is near the bottom of the display,
-the button order is reversed in order to make all the buttons visible
-and keep the first button close to the label.
+The placement of the menu and the order of the buttons
+depends on the position of the menu.
+Normally the menu is displayed below the label
+and the buttons or ordered from top to bottom.
+However, if the menu is near the bottom of the display
+then the menu is displayed above the label and
+the button order is reversed in order to make all the buttons visible.
 
 ```swift
 Menu("My Menu") {
     Button("Option 1", action: {})
     Button("Option 2", action: {})
+    // This demonstrates using a nested menu.
     Menu("Option 3") {
         Button("Option 3.1", action: {})
         Button("Option 3.2", action: {})
@@ -4151,16 +4155,18 @@ The following example uses a `Menu` to
 select the color used to fill a `Rectangle`.
 
 ```swift
-@State private var color = Color.red
+struct ContentView: View {
+    @State private var color = Color.red
 
-var body: some View {
-    VStack {
-        Menu("Color") {
-            Button("Red") { color = .red }
-            Button("Green") { color = .green }
-            Button("Blue") { color = .blue }
+    var body: some View {
+        VStack {
+            Menu("Color ...") {
+                Button("Red") { color = .red }
+                Button("Green") { color = .green }
+                Button("Blue") { color = .blue }
+            }
+            Rectangle().fill(color).frame(width: 50, height: 50)
         }
-        Rectangle().fill(color).frame(width: 50, height: 50)
     }
 }
 ```
