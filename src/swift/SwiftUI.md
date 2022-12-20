@@ -1089,13 +1089,20 @@ Card(
 
 ## View Modifiers
 
-View modifiers are methods that can be called on a view.
-They don't modify the view. They create a new view
-that is like the receiver, but modified in a specific way.
-Calls to view modifiers can be chained since each returns a new view.
+A view modifier is a subtype of the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/viewmodifier",
+"ViewModifier" %} protocol.
+View modifiers do not modify the view on which they are called.
+They create and return a new view that either
+wraps the receiver (ex. `frame`) or
+is a modified version of the receiver (ex. `foregroundColor`).
 
-The following example uses the `foregroundColor`, `padding`, and `stroke`
-view modifiers.
+For most view modifiers there is a method in the `View` protocol
+that makes it easy to apply the view modifier to a view.
+
+Calls to view modifiers can be chained since each returns a view.
+The following example demonstrates using the
+`foregroundColor`, `padding`, and `stroke` view modifiers.
 
 ```swift
 Text("Hello, World!")
@@ -1111,17 +1118,12 @@ Others are specific to certain kinds of views.
 For example, the `stroke` view modifier can only be applied
 to views that implement the `Shape` protocol.
 
-The official documentation for the supplied view modifiers can be found at
-{% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/slider-view-modifiers",
-"View Modifiers" %}.
-
 Commonly used view modifiers include:
 
 - `background(alignment, content)`
 - `border(ShapeStyle, width: CGFloat = 1)`
 - `cornerRadius(CGFloat, antialiased: Bool)`
-- `disabled(Bool)` disables any form input such as a `Button`
+- `disabled(Bool)` disables a form input such as a `Button`
 - `edgesIgnoringSafeArea(Edge.Set)`
 - `font(Font?)`
 - `foregroundColor(Color?)`
@@ -1162,6 +1164,16 @@ The {% aTargetBlank
 wraps across multiple lines should be horizontally aligned.
 It can be passed `.leading` (default), `.center`, or `.trailing`.
 
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/padding(_:_:)",
+"padding" %} view modifier adds padding to view.
+It can be passed a side which can be a single value or an array of
+`.all` (default), `.leading`, `.trailing`,
+`.horizontal` (same as `.leading` and `.trailing`),
+`.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
+It can also be passed a `CGFloat` value for the length.
+The length defaults to `nil` and means to use the system default of 20.
+
 The following view modifiers change the styling
 of specific kinds of predefined views.
 
@@ -1173,35 +1185,36 @@ of specific kinds of predefined views.
 - `labelStyle(LabelStyle)`
 - `menuStyle(MenuStyle)`
 - `navigationViewStyle(NavigationViewStyle)`
-- `offset(x: CGFloat, y: CGFloat)`
 - `pickerStyle(PickerStyle)`
-- `position(x: CGFloat, y: CGFloat)`
 - `progressViewStyle(ProgressViewStyle)`
 - `presentedWindowStyle(WindowStyle)`
 - `presentedWindowToolbarStyle(WindowToolbarStyle)`
+- `tableStyle(TableStyle)`
+- `tabViewStyle(TabViewStyle)`
+- `textFieldStyle(TextFieldStyle)`
+- `toggleStyle(ToggleStyle)`
+
+The following view modifiers can change the colors used in a view.
+
+- `background(alignment, content)`
+- `foregroundColor(Color?)`
+- `foregroundStyle(ShapeStyle)`
+- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
+- `tint(Color?)`
+
+The following view modifiers change the
+size, position, or orientation of a view.
+
+- `offset(x: CGFloat, y: CGFloat)`
+- `position(x: CGFloat, y: CGFloat)`
 - `rotation3DEffect(angle, axis, anchor, anchorZ, perspective)`
 - `rotationEffect(angle: Angle, anchor: UnitPoint)`
 - `scaledToFill()`
 - `scaledToFit()`
 - `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
-- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
-- `tableStyle(TableStyle)`
-- `tabViewStyle(TabViewStyle)`
 - `textCase(Text.Case?)`
-- `textFieldStyle(TextFieldStyle)`
-- `tint(Color?)`
-- `toggleStyle(ToggleStyle)`
-
-  This can be passed a side which can be a single value or an array
-  of `.all` (default),
-  `.leading`, `.trailing`, `.horizontal` (same as `.leading` and `.trailing`),
-  `.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
-  It can also be passed a `CGFloat` value for the length.
-  The length defaults to `nil` and means to use the system default of 20.
-
 - `transformEffect(CGAffineTransform)`
 - `transition(AnyTransition)`
-- `truncationMode(Text.TruncationMode)`
 - `zIndex(Double)`
 
 The {% aTargetBlank
@@ -1218,8 +1231,7 @@ The {% aTargetBlank
 an angle that is specified in degrees or radians.
 By default the view is rotated about its center,
 but this can be changed by specifying the `anchor` argument.
-Similar to the `offset` view modifier, the `rotationEffect` view modifier
-does not affect the layout of other views.
+It does not affect the layout of other views.
 
 For example:
 
@@ -1230,9 +1242,8 @@ For example:
 ```swift
 VStack(alignment: .leading) {
     Text("Before")
-    Text("See them march!")
+    Text("I am rotated!")
         .padding()
-        // .marchingAnts()
         .border(.blue)
         .rotationEffect(.degrees(-10), anchor: .bottomLeading)
     Text("After")
@@ -1244,6 +1255,30 @@ The {% aTargetBlank
 "rotation3DEffect" %} view modifier rotates any view
 around any axes (x, y, and z) in 3D space.
 See the `Card` example in the [ViewBuilders](#viewbuilders) section.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/scaleeffect(_:anchor:)-7q7as",
+"scaleEffect" %} view modifier changes the size of any view.
+By default the view is scaled about its center,
+but this can be changed by specifying the `anchor` argument.
+It does not affect the layout of other views.
+
+For example:
+
+<img alt="SwiftUI scaleEffect" style="width: 60%"
+  src="/blog/assets/SwiftUI-scaleEffect.png?v={{pkg.version}}"
+  title="SwiftUI scaleEffect">
+
+```swift
+VStack(alignment: .leading) {
+    Text("Before")
+    Text("I am scaled!")
+        .padding()
+        .border(.blue)
+        .scaleEffect(1.7, anchor: .center) // using default anchor
+    Text("After")
+}
+```
 
 The following example adds a shadow to a `Text` view:
 
@@ -1257,6 +1292,10 @@ Text("Shadow Demo")
     .background(.yellow)
     .shadow(color: .gray, radius: 3, x: 3, y: 3)
 ```
+
+TODO: WHERE SHOULD THIS GO?
+
+- `truncationMode(Text.TruncationMode)`
 
 The event handling methods like `onTapGesture` area also view modifiers.
 This takes a `count` argument with a default value of 1
