@@ -1135,6 +1135,8 @@ Commonly used view modifiers include:
 - `opacity(Double)`
 - `overlay(ShapeStyle)`
 - `padding(CGFloat)`
+- `rotationEffect(angle: Angle, anchor: UnitPoint)`
+- `rotation3DEffect(angle, axis, anchor, anchorZ, perspective)`
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
@@ -1170,6 +1172,39 @@ without affecting the layout of other views.
 It is passed `x` and `y` arguments that
 specify horizontal and vertical offset distances.
 When applied to views inside a `ZStack` this changes how they overlap.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/rotationeffect(_:anchor:)",
+"rotationEffect" %} view modifier rotates any view by
+an angle that is specified in degrees or radians.
+By default the view is rotated about its center,
+but this can be changed by specifying the `anchor` argument.
+Similar to the `offset` view modifier, the `rotationEffect` view modifier
+does not affect the layout of other views.
+
+For example:
+
+<img alt="SwiftUI rotationEffect" style="width: 60%"
+  src="/blog/assets/SwiftUI-rotationEffect.png?v={{pkg.version}}"
+  title="SwiftUI rotationEffect">
+
+```swift
+VStack(alignment: .leading) {
+    Text("Before")
+    Text("See them march!")
+        .padding()
+        // .marchingAnts()
+        .border(.blue)
+        .rotationEffect(.degrees(-10), anchor: .bottomLeading)
+    Text("After")
+}
+```
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scrollview/rotation3deffect(_:axis:anchor:anchorz:perspective:)",
+"rotation3DEffect" %} view modifier rotates any view
+around any axes (x, y, and z) in 3D space.
+See the `Card` example in the [ViewBuilders](#viewbuilders) section.
 
 The following view modifiers change the styling
 of specific kinds of predefined views.
@@ -3623,8 +3658,8 @@ And these are equivalent: `.aspectRatio(contentMode: .fit)` and `.scaledToFit()`
 
 To change an `Image` to have a size different from its default,
 apply the `frame` view modifier.
-
 A new size can cause the image to skew.
+
 To clip an image to a given shape, apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/clipshape(_:style:)",
 "clipShape" %} view modifier.
