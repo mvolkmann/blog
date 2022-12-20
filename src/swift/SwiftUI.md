@@ -6766,6 +6766,10 @@ struct ContentView_Previews: PreviewProvider {
 
 Popovers are often used for tooltip or help text.
 
+To define a popover, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/popover(ispresented:attachmentanchor:arrowedge:content:)",
+"popOver" %} view modifier to any view.
+
 The following example displays a popover above a `Text` view
 when a `Button` is tapped.
 On an iPad popovers are rendered like speech bubbles
@@ -6794,24 +6798,24 @@ func runAfter(seconds: Int, closure: @escaping () -> Void) {
 }
 
 struct ContentView: View {
-    @State private var showHelp = false
+    @State private var showingHelp = false
 
     var body: some View {
         VStack(spacing: 30) {
             Text("Some complex text goes here.")
                 .padding()
                 .background(Color(UIColor.lightGray))
-                .popover(isPresented: $showHelp) {
+                .popover(isPresented: $showingHelp) {
                     Text("This is help text.").padding()
                 }
 
             Button("Help") {
-                // Display popover for 2 seconds.
+                // Display the popover for 2 seconds.
                 // SwiftUI doesn't support showing
                 // multiple popovers at the same time.
                 // If this is attempted, none will be displayed.
-                showHelp = true
-                runAfter(seconds: 2) { showHelp = false }
+                showingHelp = true
+                runAfter(seconds: 2) { showingHelp = false }
             }
             .buttonStyle(.bordered)
         }
@@ -7029,6 +7033,12 @@ To define a sheet, apply the {% aTargetBlank
 "sheet" %} view modifier to any view.
 It is displayed when a given `Bool` binding is set to `true`.
 
+Users can dismiss a sheet by swiping down.
+In some cases users must enter data before dismissing a sheet.
+To prevent dismissing by swiping down, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/interactivedismissdisabled(_:)",
+"interactiveDismissDisabled" %} view modifier to the top view in the sheet.
+
 The following example defines the custom view `MyModal`
 which is displayed in the sheet.
 
@@ -7091,6 +7101,7 @@ struct ContentView: View {
                     // Only need to pass this argument in approach #1.
                     //MySheetView(isPresented: $isSheetPresented)
                     MySheetView()
+                        // .interactiveDismissDisabled()
                 }
         }
     }
