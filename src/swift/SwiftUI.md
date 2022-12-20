@@ -1131,12 +1131,9 @@ Commonly used view modifiers include:
 - `border(ShapeStyle, width: CGFloat = 1)`
 - `lineLimit(Int?)`
 - `multilineTextAlignment(TextAlignment)`
-- `offset(x: CGFloat, y: CGFloat)`
 - `opacity(Double)`
 - `overlay(ShapeStyle)`
 - `padding(CGFloat)`
-- `rotationEffect(angle: Angle, anchor: UnitPoint)`
-- `rotation3DEffect(angle, axis, anchor, anchorZ, perspective)`
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
@@ -1164,6 +1161,48 @@ The {% aTargetBlank
 "multilineTextAlignment" %} view modifier specifies how text that
 wraps across multiple lines should be horizontally aligned.
 It can be passed `.leading` (default), `.center`, or `.trailing`.
+
+The following view modifiers change the styling
+of specific kinds of predefined views.
+
+- `buttonStyle(ButtonStyle)`
+- `controlGroupStyle(ControlGroupStyle)`
+- `datePickerStyle(DatePickerStyle)`
+- `gaugeStyle(GaugeStyle)`
+- `indexViewStyle(IndexViewStyle)`
+- `labelStyle(LabelStyle)`
+- `menuStyle(MenuStyle)`
+- `navigationViewStyle(NavigationViewStyle)`
+- `offset(x: CGFloat, y: CGFloat)`
+- `pickerStyle(PickerStyle)`
+- `position(x: CGFloat, y: CGFloat)`
+- `progressViewStyle(ProgressViewStyle)`
+- `presentedWindowStyle(WindowStyle)`
+- `presentedWindowToolbarStyle(WindowToolbarStyle)`
+- `rotation3DEffect(angle, axis, anchor, anchorZ, perspective)`
+- `rotationEffect(angle: Angle, anchor: UnitPoint)`
+- `scaledToFill()`
+- `scaledToFit()`
+- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
+- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
+- `tableStyle(TableStyle)`
+- `tabViewStyle(TabViewStyle)`
+- `textCase(Text.Case?)`
+- `textFieldStyle(TextFieldStyle)`
+- `tint(Color?)`
+- `toggleStyle(ToggleStyle)`
+
+  This can be passed a side which can be a single value or an array
+  of `.all` (default),
+  `.leading`, `.trailing`, `.horizontal` (same as `.leading` and `.trailing`),
+  `.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
+  It can also be passed a `CGFloat` value for the length.
+  The length defaults to `nil` and means to use the system default of 20.
+
+- `transformEffect(CGAffineTransform)`
+- `transition(AnyTransition)`
+- `truncationMode(Text.TruncationMode)`
+- `zIndex(Double)`
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/offset(x:y:)",
@@ -1205,46 +1244,6 @@ The {% aTargetBlank
 "rotation3DEffect" %} view modifier rotates any view
 around any axes (x, y, and z) in 3D space.
 See the `Card` example in the [ViewBuilders](#viewbuilders) section.
-
-The following view modifiers change the styling
-of specific kinds of predefined views.
-
-- `buttonStyle(ButtonStyle)`
-- `controlGroupStyle(ControlGroupStyle)`
-- `datePickerStyle(DatePickerStyle)`
-- `gaugeStyle(GaugeStyle)`
-- `indexViewStyle(IndexViewStyle)`
-- `labelStyle(LabelStyle)`
-- `menuStyle(MenuStyle)`
-- `navigationViewStyle(NavigationViewStyle)`
-- `pickerStyle(PickerStyle)`
-- `progressViewStyle(ProgressViewStyle)`
-- `presentedWindowStyle(WindowStyle)`
-- `presentedWindowToolbarStyle(WindowToolbarStyle)`
-- `tableStyle(TableStyle)`
-- `tabViewStyle(TabViewStyle)`
-- `textFieldStyle(TextFieldStyle)`
-- `toggleStyle(ToggleStyle)`
-
-  This can be passed a side which can be a single value or an array
-  of `.all` (default),
-  `.leading`, `.trailing`, `.horizontal` (same as `.leading` and `.trailing`),
-  `.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
-  It can also be passed a `CGFloat` value for the length.
-  The length defaults to `nil` and means to use the system default of 20.
-
-- `position(x: CGFloat, y: CGFloat)`
-- `rotationEffect(Angle, anchor: UnitPoint)`
-- `scaledToFill()`
-- `scaledToFit()`
-- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
-- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
-- `textCase(Text.Case?)`
-- `tint(Color?)`
-- `transformEffect(CGAffineTransform)`
-- `transition(AnyTransition)`
-- `truncationMode(Text.TruncationMode)`
-- `zIndex(Double)`
 
 The following example adds a shadow to a `Text` view:
 
