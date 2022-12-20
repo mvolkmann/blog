@@ -4388,9 +4388,10 @@ This only applies to `automatic` and `wheel` pickers,
 not `menu` or `segmented` pickers.
 
 When the options are generated using `ForEach` to iterate over an array,
-the selected values are described by array items.
-This can be changed by specifying a `tag` value for each option.
-The type of the `tag` values must match the type of the `selection` argument.
+the selection value will be one of the array items.
+This can be changed by applying the `tag` view modifier
+to the immediate child view of the `ForEach`.
+The type of the `tag` value must match the type of the `selection` argument.
 If these types differ, the compiler does not generate an error,
 but it will not be possible to change the selected option.
 
