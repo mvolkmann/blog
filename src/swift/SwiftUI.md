@@ -6822,8 +6822,8 @@ When there are more than two buttons,
 they are stacked vertically.
 Otherwise they are placed on one row.
 
-If no buttons are provided, a default "OK" button
-with a role of `.cancel` is provided.
+If no buttons are provided,
+an "OK" button with a role of `.cancel` is provided.
 
 <figure>
   <img alt="SwiftUI alert before taps" style="width: 60%"
@@ -6857,9 +6857,13 @@ struct ContentView: View {
                 Stepper(
                     "# of Dogs: \(dogCount)",
                     value: $dogCount,
-                    in: 0...10
-                ) { v in
-                    tooManyDogs = dogCount > 2
+                    in: 0 ... 10
+                ) { begin in
+                    // true when editing begins (value not yet changed) and
+                    // false when editing ends (value already changed)
+                    if !begin {
+                        tooManyDogs = dogCount > 2
+                    }
                 }
             }.padding()
         }
@@ -6876,10 +6880,10 @@ struct ContentView: View {
             isPresented: $tooManyDogs,
             actions: {
                 Button("OK") {
-                    print("pressed OK")
+                    dogCount = 2 // resets to maximum recommended
                 }
                 Button("Keep") {
-                    print("pressed Keep")
+                    // Allowing more than two dogs.
                 }
             },
             message: {
