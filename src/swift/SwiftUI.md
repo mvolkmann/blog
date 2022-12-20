@@ -6978,7 +6978,7 @@ struct ContentView: View {
 }
 ```
 
-### Context Menu
+### Context Menus
 
 Context menus are popups that are displayed below their associated view.
 They display a vertical stack of buttons.
@@ -7019,19 +7019,28 @@ struct ContentView: View {
 
 ```
 
-### Custom Modal Dialogs
+### Sheets
 
 Custom modal dialogs are implemented by displaying a "sheet".
 The sheet slides in from the bottom by default.
 
+To define a sheet, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)",
+"sheet" %} view modifier to any view.
+It is displayed when a given `Bool` binding is set to `true`.
+
 The following example defines the custom view `MyModal`
 which is displayed in the sheet.
+
 Custom views, like any struct, can have properties
-that are passed in when instances are created.
+whose values are passed in when instances are created.
 The `ContentView` struct declares the boolean property `showModal`
 and passes it to the `MyModal` struct as a binding.
 This allows the action of the "Close" button in `MyModal`
 to set it to `false` which hides the sheet.
+An alternative way to dismiss a sheet is to
+use the `dismiss` function from the environment.
+Both approaches are shown below.
 
 <figure>
   <img alt="SwiftUI sheet before tap" style="width: 60%"
@@ -7088,10 +7097,10 @@ struct ContentView: View {
 }
 ```
 
-To change the vertical size of a sheet,
-apply the `presentationDetents` view modifier
-to the top view passed to `.sheet` with an array of size specifiers
-which can be `.medium` or `.large`.
+To change the vertical size of a sheet, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/presentationdetents(_:)?changes=_2_1",
+"presentationDetents" %} view modifier to the top view passed to `.sheet`
+with an array of size specifiers which can be `.medium` or `.large`.
 The first value specifies the default size of the sheet.
 The optional second value specifies the size of the sheet
 if the user taps on the drag indicator or drags it up.
@@ -7101,12 +7110,15 @@ For more precise sizing, pass `.fraction` and `.height` values.
 
 When only one size is specified, the drag indicator is not displayed.
 When two sizes are specified, the drag indicator is displayed.
-To change the visibility of the drag indicator,
-apply the `presentationDragIndicator` view modifier
+To change the visibility of the drag indicator, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/list/presentationdragindicator(_:)",
+"presentationDragIndicator" %} view modifier
 to the top view passed to `.sheet` with a `Bool` value.
 
-To display full screen sheet, use the `.fullScreenCover` view modifier
-in place of the `.sheet` view modifier.
+To display full screen sheet, use the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/fullscreencover(ispresented:ondismiss:content:)",
+"fullScreenCover" %} view modifier in place of the `.sheet` view modifier.
+This removes the ability of the user to dismiss the sheet by dragging down.
 
 ## Toolbars
 
