@@ -4153,6 +4153,8 @@ Menu("My Menu") {
 
 The following example uses a `Menu` to
 select the color used to fill a `Rectangle`.
+Menus can specify a `primaryAction` closure that is executed
+if the user taps the label rather than long pressing it.
 
 ```swift
 struct ContentView: View {
@@ -4164,7 +4166,10 @@ struct ContentView: View {
                 Button("Red") { color = .red }
                 Button("Green") { color = .green }
                 Button("Blue") { color = .blue }
+            } primaryAction: {
+                color = .gray
             }
+
             Rectangle().fill(color).frame(width: 50, height: 50)
         }
     }
