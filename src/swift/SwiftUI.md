@@ -1151,6 +1151,14 @@ The {% aTargetBlank
 wraps across multiple lines should be horizontally aligned.
 It can be passed `.leading` (default), `.center`, or `.trailing`.
 
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/offset(x:y:)",
+"offset" %} view modifier moves a view relative to its "natural position"
+without affecting the layout of other views.
+It is passed `x` and `y` arguments that
+specify horizontal and vertical offset distances.
+When applied to views inside a `ZStack` this changes how they overlap.
+
 The following view modifiers change the styling
 of specific kinds of predefined views.
 
@@ -7038,6 +7046,8 @@ In some cases users must enter data before dismissing a sheet.
 To prevent dismissing by swiping down, apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/interactivedismissdisabled(_:)",
 "interactiveDismissDisabled" %} view modifier to the top view in the sheet.
+To make this conditional, perhaps based on the data entered,
+pass it a `Bool` value.
 
 The following example defines the custom view `MyModal`
 which is displayed in the sheet.
