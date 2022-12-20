@@ -6413,10 +6413,18 @@ This was inspired by the Hacking With Swift post {% aTargetBlank
 "https://www.hackingwithswift.com/example-code/calayer/how-to-create-a-marching-ants-effect-using-linedashphase",
 "How to create a marching ants effect using lineDashPhase" %}.
 
-The following code is the contents of `MarchingAnts.swift`
+The following code is the contents of the file `MarchingAnts.swift`
 which can be added to any project.
+It uses {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/preferencekey",
+"PreferenceKey" %} which "automatically combines its values for
+a given preference into a single value visible to its ancestors."
+In this case the preference is the size of the content view.
+The size is set in a `@State` property of
+the custom `MarchingAnts` view modifier.
 
 ```swift
+// MarchingAnts.swift
 import SwiftUI
 
 // This is a custom view modifier that gets the size of its content.
@@ -6432,9 +6440,14 @@ struct SizeReporter: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .background(GeometryReader { geo in
+            // This is a tricky approach to get the content size
+            // using an invisible background.
+            .background(GeometryReader { geometry in
                 Color.clear
-                    .preference(key: SizePreferenceKey.self, value: geo.size)
+                    .preference(
+                        key: SizePreferenceKey.self,
+                        value: geometry.size
+                    )
             })
             .onPreferenceChange(SizePreferenceKey.self) { value in
                 size = value
@@ -6505,6 +6518,9 @@ defined above.
   title="SwiftUI Marching Ants">
 
 ```swift
+// Content.swift
+import SwiftUI
+
 struct ContentView: View {
     var body: some View {
         VStack {
