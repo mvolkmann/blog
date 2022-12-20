@@ -2431,8 +2431,13 @@ in the [Form](#form) section above and in the [List](#list) section below.
 
 ### GroupBox
 
-This creates a logical grouping of other views
-with an optional `Label` at the top.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/groupbox", "GroupBox" %}
+view creates a grouping of other views
+with an optional `Label` at the top and a light background color.
+Nesting `GroupBox` views causes their background colors to alternate.
+
+The following code demonstrates creating nested `GroupBox` views.
 
 <img alt="SwiftUI GroupBox" style="width: 40%"
     src="/blog/assets/SwiftUI-GroupBox.png?v={{pkg.version}}"
@@ -2440,7 +2445,19 @@ with an optional `Label` at the top.
 
 ```swift
 struct ContentView: View {
-    static let text = "Known as the Great One, Wayne Gretzky holds more NHL records than any other player in history."
+    static let text = """
+    Wayne Douglas Gretzky (born January 26, 1961) is a Canadian \
+    former professional ice hockey player and former head coach. \
+    He played 20 seasons in the National Hockey League (NHL) for \
+    four teams from 1979 to 1999. Nicknamed "The Great One", \
+    he has been called the greatest hockey player ever by many \
+    sportswriters, players, The Hockey News, and by the NHL itself. \
+    Gretzky is the leading goal scorer, assist producer and \
+    point scorer in NHL history, and has more assists in his career \
+    than any other player scored total points. \
+    He is the only NHL player to total over 200 points in one season, \
+    a feat he accomplished four times.
+    """
 
     @State private var like = true
 
@@ -2455,6 +2472,19 @@ struct ContentView: View {
                 Text(ContentView.text)
             }.frame(maxWidth: .infinity, maxHeight: 130)
             Toggle("Like", isOn: $like)
+
+            GroupBox(label: Text("Edmonton Years")) {
+                Text("""
+                Wayne's time playing for the Edmonton Oilers
+                were really the best years.
+                """)
+                GroupBox(label: Text("Oilers")) {
+                    Text("""
+                    There were other great players on the Oilers team \
+                    like Mark Messier, Jari Kurri, and Paul Coffey.
+                    """)
+                }
+            }
         }.padding()
     }
 }
