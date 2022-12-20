@@ -6810,17 +6810,20 @@ struct ContentView: View {
 
 ## Modal Dialogs
 
-There are three ways to display modal dialogs.
+There are four view modifiers that display a modal dialog.
 
-1. Apply the {% aTargetBlank
+1. {% aTargetBlank
    "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-29bp4",
-   "alert" %} view modifier.
-1. Apply the {% aTargetBlank
+   "alert" %}
+1. {% aTargetBlank
    "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-9ibgk",
-   "confirmationDialog" %} view modifier.
-1. Apply the {% aTargetBlank
+   "confirmationDialog" %}
+1. {% aTargetBlank
+   "https://developer.apple.com/documentation/swiftui/view/contextmenu(menuitems:)",
+   "contextMenu" %} - This is not really a modal, but behaves like one.
+1. {% aTargetBlank
    "https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)",
-   "sheet" %} view modifier.
+   "sheet" %}
 
 Each of these view modifiers are described in the following sections.
 
@@ -6832,7 +6835,7 @@ Tapping any button executes its action and dismisses the dialog.
 
 To define an alert, apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-29bp4",
-"alert" %} method to any view.
+"alert" %} view modifier to any view.
 It is displayed when a given `Bool` binding is set to `true`.
 
 The buttons to display are described in the `actions` argument.
@@ -6962,6 +6965,47 @@ struct ContentView: View {
         }
     }
 }
+```
+
+### Context Menu
+
+Context menus are popups that are displayed below their associated view.
+They display a vertical stack of buttons.
+Tapping any button executes its action and dismisses the popup.
+
+To define a context menu, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/contextmenu(menuitems:)",
+"contextMenu" %} view modifier to any view.
+It is displayed when the user long presses on the associated view
+or right-clicks in macOS.
+
+The following example is similar to one found in the [Picker](#picker) section.
+Using a `Picker` is typically preferred because it is more obvious to a user
+that they can select a value.
+
+```swift
+struct ContentView: View {
+    enum ShirtSize: String, CaseIterable {
+        case sm = "Small"
+        case md = "Medium"
+        case lg = "Large"
+        case xl = "Extra Large"
+    }
+
+    @State private var shirtSize: ShirtSize = .sm
+
+    var body: some View {
+        Text("Shirt Size: \(shirtSize.rawValue)")
+            .contextMenu {
+                ForEach(ShirtSize.allCases, id: \.self) { size in
+                    Button(size.rawValue) {
+                        shirtSize = size
+                    }
+                }
+            }
+    }
+}
+
 ```
 
 ### Custom Modal Dialogs
