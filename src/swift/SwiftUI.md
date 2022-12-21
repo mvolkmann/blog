@@ -1093,12 +1093,38 @@ A view modifier is a subtype of the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/viewmodifier",
 "ViewModifier" %} protocol.
 View modifiers do not modify the view on which they are called.
-They create and return a new view that either
+They instead create and return a new view that either
 wraps the receiver (ex. `frame`) or
 is a modified version of the receiver (ex. `foregroundColor`).
 
+In a way, view modifiers are like Svelte components that contain slots.
+They take a view to be "modified" and return a new view
+that typically contains the view passed to them.
+
 For most view modifiers there is a method in the `View` protocol
 that makes it easy to apply the view modifier to a view.
+Without this a view modifier is applied by calling the
+{% aTargetBlank "", "modifier" %} method on the a view,
+passing it the result of initializing an instance of the `ViewModifier` subtype.
+
+For example:
+
+```swift
+Text("Marching Ants")
+    .padding()
+    /* using custom ViewModifier through a View method
+    .marchingAnts(
+        clockwise: true,
+        dashLength: 10,
+        dashWidth: 3
+    )
+    */
+    .modifier(MarchingAnts( // using custom ViewModifier directly
+        clockwise: true,
+        dashLength: 10,
+        dashWidth: 3
+    ))
+```
 
 Calls to view modifiers can be chained since each returns a view.
 The following example demonstrates using the
@@ -1118,101 +1144,98 @@ Others are specific to certain kinds of views.
 For example, the `stroke` view modifier can only be applied
 to views that implement the `Shape` protocol.
 
-Commonly used view modifiers include:
-
-- `background(alignment, content)`
-- `border(ShapeStyle, width: CGFloat = 1)`
-- `cornerRadius(CGFloat, antialiased: Bool)`
-- `disabled(Bool)` disables a form input such as a `Button`
-- `edgesIgnoringSafeArea(Edge.Set)`
-- `font(Font?)`
-- `foregroundColor(Color?)`
-- `foregroundStyle(ShapeStyle)`
-- `frame(width: CGFloat?, height: CGFloat?, alignment: Alignment)`
-- `frame(maxWidth: CGFloat?, maxHeight: CGFloat?, alignment: Alignment)`
-- `border(ShapeStyle, width: CGFloat = 1)`
-- `lineLimit(Int?)`
-- `multilineTextAlignment(TextAlignment)`
-- `opacity(Double)`
-- `overlay(ShapeStyle)`
-- `padding(CGFloat)`
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
-"background" %} view modifier `content` argument is a `ViewBuilder` function
-that can return any kind of `View` including a `Color`, `Shape`, or `Image`.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
-"background" %} view modifier name doesn't end in `Color`
-like {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/list/foregroundcolor(_:)",
-"foregroundColor" %} because it can specify background content that is
-any `View` and is not restricted to being only a color.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/border(_:width:)",
-"border" %} view modifier adds a border to a view with a given style and width.
-The style can be specified in many ways including using a `Color` or `Gradient`.
-For more advanced borders, see the use of the `overlay` view modifier
-that uses `RoundedRectangle` in the [TextEditor](#texteditor) section.
-Also see the [Marching Ants Border](#marching-ants-border) section.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/text/multilinetextalignment(_:)",
-"multilineTextAlignment" %} view modifier specifies how text that
-wraps across multiple lines should be horizontally aligned.
-It can be passed `.leading` (default), `.center`, or `.trailing`.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/padding(_:_:)",
-"padding" %} view modifier adds padding to view.
-It can be passed a side which can be a single value or an array of
-`.all` (default), `.leading`, `.trailing`,
-`.horizontal` (same as `.leading` and `.trailing`),
-`.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
-It can also be passed a `CGFloat` value for the length.
-The length defaults to `nil` and means to use the system default of 20.
-
-The following view modifiers change the styling
-of specific kinds of predefined views.
-
-- `buttonStyle(ButtonStyle)`
-- `controlGroupStyle(ControlGroupStyle)`
-- `datePickerStyle(DatePickerStyle)`
-- `gaugeStyle(GaugeStyle)`
-- `indexViewStyle(IndexViewStyle)`
-- `labelStyle(LabelStyle)`
-- `menuStyle(MenuStyle)`
-- `navigationViewStyle(NavigationViewStyle)`
-- `pickerStyle(PickerStyle)`
-- `progressViewStyle(ProgressViewStyle)`
-- `presentedWindowStyle(WindowStyle)`
-- `presentedWindowToolbarStyle(WindowToolbarStyle)`
-- `tableStyle(TableStyle)`
-- `tabViewStyle(TabViewStyle)`
-- `textFieldStyle(TextFieldStyle)`
-- `toggleStyle(ToggleStyle)`
+### Color Modifiers
 
 The following view modifiers can change the colors used in a view.
 
 - `background(alignment, content)`
 - `foregroundColor(Color?)`
 - `foregroundStyle(ShapeStyle)`
+- `opacity(Double)`
 - `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
 - `tint(Color?)`
 
-The following view modifiers change the
-size, position, or orientation of a view.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
+"background" %} view modifier takes a `content` argument whose value is
+a `ViewBuilder` function that can return any kind of `View`
+including a `Color`, `Shape`, or `Image`.
+The name of this view modifier doesn't end in `Color` like {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/list/foregroundcolor(_:)",
+"foregroundColor" %} because it can specify background content that is
+any `View` and is not restricted to only being a color.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/shadow(color:radius:x:y:)",
+"shadow" %} view modifier adds a shadow to a view.
+For example:
+
+<img alt="SwiftUI shadow" style="width: 60%"
+  src="/blog/assets/SwiftUI-shadow.png?v={{pkg.version}}"
+  title="SwiftUI shadow">
+
+```swift
+struct ContentView: View {
+    func shadowDemo(radius: CGFloat) -> some View {
+        Text("Shadow Radius \(String(format: "%.0f", radius))")
+            .font(.system(size: 40))
+            .foregroundColor(.blue)
+            .shadow(color: .gray, radius: radius, x: 10, y: 10)
+    }
+
+    var body: some View {
+        VStack {
+            shadowDemo(radius: 0)
+            shadowDemo(radius: 2)
+            shadowDemo(radius: 4)
+        }
+    }
+}
+```
+
+### Size Modifiers
+
+The following view modifiers change the size of a view:
+
+- `frame(width: CGFloat?, height: CGFloat?, alignment: Alignment)`
+- `frame(maxWidth: CGFloat?, maxHeight: CGFloat?, alignment: Alignment)`
+- `scaledToFill()`
+- `scaledToFit()`
+- `scaleEffect(_ scale: CGSize, anchor: UnitPoint)`
+- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/scaleeffect(_:anchor:)-7q7as",
+"scaleEffect" %} view modifier changes the size of any view.
+By default the view is scaled about its center,
+but this can be changed by specifying the `anchor` argument.
+It does not affect the layout of other views.
+
+For example:
+
+<img alt="SwiftUI scaleEffect" style="width: 60%"
+  src="/blog/assets/SwiftUI-scaleEffect.png?v={{pkg.version}}"
+  title="SwiftUI scaleEffect">
+
+```swift
+VStack(alignment: .leading) {
+    Text("Before")
+    Text("I am scaled!")
+        .padding()
+        .border(.blue)
+        .scaleEffect(1.7, anchor: .center) // using default anchor
+        // Can pass separate x and y scale values instead of
+        // a single scale value that is used for both.
+    Text("After")
+}
+```
+
+### Position Modifiers
+
+The following view modifiers change the position of a view:
 
 - `offset(x: CGFloat, y: CGFloat)`
 - `position(x: CGFloat, y: CGFloat)`
-- `rotation3DEffect(angle, axis, anchor, anchorZ, perspective)`
-- `rotationEffect(angle: Angle, anchor: UnitPoint)`
-- `scaledToFill()`
-- `scaledToFit()`
-- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
-- `textCase(Text.Case?)`
 - `transformEffect(CGAffineTransform)`
 - `transition(AnyTransition)`
 - `zIndex(Double)`
@@ -1224,6 +1247,46 @@ without affecting the layout of other views.
 It is passed `x` and `y` arguments that
 specify horizontal and vertical offset distances.
 When applied to views inside a `ZStack` this changes how they overlap.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/position(x:y:)",
+"position" %} view modifier positions a view
+within the coordinate space of its parent view
+without affecting the layout of other views.
+It is passed `x` and `y` arguments that specify the position.
+This is similar to `position: absolute` in CSS.
+
+For example:
+
+<img alt="SwiftUI position" style="width: 60%"
+  src="/blog/assets/SwiftUI-position.png?v={{pkg.version}}"
+  title="SwiftUI position">
+
+```swift
+struct ContentView: View {
+    func shadowDemo(radius: CGFloat) -> some View {
+        Text("Shadow Radius \(String(format: "%.0f", radius))")
+            .font(.system(size: 40))
+            .foregroundColor(.blue)
+            .shadow(color: .gray, radius: radius, x: 10, y: 10)
+    }
+
+    var body: some View {
+        VStack {
+            shadowDemo(radius: 0)
+            shadowDemo(radius: 2)
+            shadowDemo(radius: 4)
+        }
+    }
+}
+```
+
+### Orientation Modifiers
+
+The following view modifiers change the orientation of a view:
+
+- `rotationEffect(angle: Angle, anchor: UnitPoint)`
+- `rotation3DEffect(angle, axis, anchor, anchorZ, perspective)`
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/rotationeffect(_:anchor:)",
@@ -1256,29 +1319,12 @@ The {% aTargetBlank
 around any axes (x, y, and z) in 3D space.
 See the `Card` example in the [ViewBuilders](#viewbuilders) section.
 
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/scaleeffect(_:anchor:)-7q7as",
-"scaleEffect" %} view modifier changes the size of any view.
-By default the view is scaled about its center,
-but this can be changed by specifying the `anchor` argument.
-It does not affect the layout of other views.
+### Text Modifiers
 
-For example:
+The following view modifies change text:
 
-<img alt="SwiftUI scaleEffect" style="width: 60%"
-  src="/blog/assets/SwiftUI-scaleEffect.png?v={{pkg.version}}"
-  title="SwiftUI scaleEffect">
-
-```swift
-VStack(alignment: .leading) {
-    Text("Before")
-    Text("I am scaled!")
-        .padding()
-        .border(.blue)
-        .scaleEffect(1.7, anchor: .center) // using default anchor
-    Text("After")
-}
-```
+- `textCase(Text.Case?)`
+- `truncationMode(Text.TruncationMode)`
 
 The following example adds a shadow to a `Text` view:
 
@@ -1293,20 +1339,77 @@ Text("Shadow Demo")
     .shadow(color: .gray, radius: 3, x: 3, y: 3)
 ```
 
-TODO: WHERE SHOULD THIS GO?
+Other commonly used view modifiers include:
 
-- `truncationMode(Text.TruncationMode)`
+- `border(ShapeStyle, width: CGFloat = 1)`
+- `cornerRadius(CGFloat, antialiased: Bool)`
+- `disabled(Bool)` disables a form input such as a `Button`
+- `edgesIgnoringSafeArea(Edge.Set)`
+- `font(Font?)`
+- `border(ShapeStyle, width: CGFloat = 1)`
+- `lineLimit(Int?)`
+- `multilineTextAlignment(TextAlignment)`
+- `overlay(ShapeStyle)`
+- `padding(CGFloat)`
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/border(_:width:)",
+"border" %} view modifier adds a border to a view with a given style and width.
+The style can be specified in many ways including using a `Color` or `Gradient`.
+For more advanced borders, see the use of the `overlay` view modifier
+that uses `RoundedRectangle` in the [TextEditor](#texteditor) section.
+Also see the [Marching Ants Border](#marching-ants-border) section.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/multilinetextalignment(_:)",
+"multilineTextAlignment" %} view modifier specifies how text that
+wraps across multiple lines should be horizontally aligned.
+It can be passed `.leading` (default), `.center`, or `.trailing`.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/padding(_:_:)",
+"padding" %} view modifier adds padding to view.
+It can be passed a side which can be a single value or an array of
+`.all` (default), `.leading`, `.trailing`,
+`.horizontal` (same as `.leading` and `.trailing`),
+`.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
+It can also be passed a `CGFloat` value for the length.
+The length defaults to `nil` and means to use the system default of 20.
+
+### View-specific Modifiers
+
+The following view modifiers change the styling
+of specific kinds of predefined views:
+
+- `buttonStyle(ButtonStyle)`
+- `controlGroupStyle(ControlGroupStyle)`
+- `datePickerStyle(DatePickerStyle)`
+- `gaugeStyle(GaugeStyle)`
+- `indexViewStyle(IndexViewStyle)`
+- `labelStyle(LabelStyle)`
+- `menuStyle(MenuStyle)`
+- `navigationViewStyle(NavigationViewStyle)`
+- `pickerStyle(PickerStyle)`
+- `progressViewStyle(ProgressViewStyle)`
+- `presentedWindowStyle(WindowStyle)`
+- `presentedWindowToolbarStyle(WindowToolbarStyle)`
+- `tableStyle(TableStyle)`
+- `tabViewStyle(TabViewStyle)`
+- `textFieldStyle(TextFieldStyle)`
+- `toggleStyle(ToggleStyle)`
+
+Several view modifiers take a `ShapeStyle` object.
+Types that conform to the `ShapeStyle` protocol include
+`AngularGradient`, `Color`, `ForegroundStyle`, `ImagePaint`,
+`LinearGradient`, and `RadialGradient`.
+
+### Event Handling Modifiers
 
 The event handling methods like `onTapGesture` area also view modifiers.
 This takes a `count` argument with a default value of 1
 that specifies the number of consecutive taps required
 to trigger running a provided closure.
 The `onTapGesture` view modifier can be applied to any view.
-
-Several view modifiers take a `ShapeStyle` object.
-Types that conform to the `ShapeStyle` protocol include
-`AngularGradient`, `Color`, `ForegroundStyle`, `ImagePaint`,
-`LinearGradient`, and `RadialGradient`.
 
 Many view modifiers are defined in extensions to the `View` protocol.
 This makes them applicable to any kind of view.
@@ -1327,9 +1430,7 @@ VStack {
 }.foregroundColor(.red)
 ```
 
-In a way, view modifiers are like Svelte components that contain slots.
-They take a view to be "modified" and return a new view
-that typically contains the view passed to them.
+### Custom Modifiers
 
 Custom view modifiers can be created by defining
 a struct that implements the `ViewModifier` protocol.
