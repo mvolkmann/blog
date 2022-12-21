@@ -4924,6 +4924,76 @@ See the Apple documentation page on {% aTargetBlank
 
 ### Auxiliary View Modifiers
 
+- Badges
+
+  - {% aTargetBlank "", "badge" %}
+  - {% aTargetBlank "", "badge" %}
+  - {% aTargetBlank "", "badge" %}
+  - {% aTargetBlank "", "badge" %}
+
+- Context Menus
+
+  - {% aTargetBlank "", "contextMenu" %}
+  - {% aTargetBlank "", "contextMenu" %}
+  - {% aTargetBlank "", "contextMenu" %}
+
+- Help
+
+  - {% aTargetBlank "", "help" %}
+  - {% aTargetBlank "", "help" %}
+  - {% aTargetBlank "", "help" %}
+
+- Navigation
+
+  - {% aTargetBlank "", "navigationTitle" %}
+  - {% aTargetBlank "", "navigationTitle" %}
+  - {% aTargetBlank "", "navigationTitle" %}
+  - {% aTargetBlank "", "navigationTitle" %}
+  - {% aTargetBlank "", "navigationTitle" %}
+
+  - {% aTargetBlank "", "navigationSubtitle" %}
+  - {% aTargetBlank "", "navigationSubtitle" %}
+  - {% aTargetBlank "", "navigationSubtitle" %}
+
+  - {% aTargetBlank "", "navigationDocument" %}
+  - {% aTargetBlank "", "navigationDocument" %}
+  - {% aTargetBlank "", "navigationDocument" %}
+  - {% aTargetBlank "", "navigationDocument" %}
+  - {% aTargetBlank "", "navigationDocument" %}
+  - {% aTargetBlank "", "navigationDocument" %}
+
+  - {% aTargetBlank "", "navigationBarBackButtonHidden" %}
+  - {% aTargetBlank "", "navigationBarTitleDisplayMode" %}
+  - {% aTargetBlank "", "navigationDestination" %}
+  - {% aTargetBlank "", "navigationDestination" %}
+  - {% aTargetBlank "", "navigationSplitViewColumnWidth" %}
+  - {% aTargetBlank "", "navigationSplitViewColumnWidth" %}
+
+- Toolbars
+
+  - {% aTargetBlank "", "toolbar" %}
+  - {% aTargetBlank "", "toolbar" %}
+  - {% aTargetBlank "", "toolbar" %}
+  - {% aTargetBlank "", "toolbar" %}
+
+  - {% aTargetBlank "", "toolbarBackground" %}
+  - {% aTargetBlank "", "toolbarBackground" %}
+  - {% aTargetBlank "", "toolbarColorScheme" %}
+  - {% aTargetBlank "", "toolbarRole" %}
+  - {% aTargetBlank "", "toolbarTitleMenu" %}
+
+- Status Bars
+
+  - {% aTargetBlank "", "statusBarHidden" %}
+
+- Touch Bars
+
+  - {% aTargetBlank "", "touchBar" %}
+  - {% aTargetBlank "", "touchBar" %}
+  - {% aTargetBlank "", "touchBarItemPrincipal" %}
+  - {% aTargetBlank "", "touchBarCustomizationLabel" %}
+  - {% aTargetBlank "", "touchBarItemPresence" %}
+
 ### Chart View Modifiers
 
 ### Style Modifiers
