@@ -1333,6 +1333,21 @@ See the Apple documentation page on {% aTargetBlank
 
 - Fonts
 
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/allowstightening(_:)", "allowsTightening" %}
+    sets whether space between characters can be compressed
+    in order to get all of the text to fit on a single line based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/baselineoffset(_:)", "baselineOffset" %}
+    sets the vertical offset of the text from its baseline.
+    For example:
+
+    ```swift
+    HStack(spacing: 0) {
+        Text("H")
+        Text("2").baselineOffset(10)
+        Text("O")
+    }
+    ```
+
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/bold(_:)", "bold" %}
     uses a bold font for text.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-1m2tf", "dynamicTypeSize" %}
@@ -1353,6 +1368,8 @@ See the Apple documentation page on {% aTargetBlank
     `.compressed`, `.condensed`, `.expanded`, or `.standard`.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/italic(_:)", "italic" %}
     determines if the receiver font is italic based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/kerning(_:)", "kerning" %}
+    sets the spacing between characters.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/monospaced(_:)", "monospaced" %}
     determines if all characters in the receiver should be monospaced based on a `Bool`.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/monospaceddigit()", "monospacedDigit" %}
@@ -1364,12 +1381,88 @@ See the Apple documentation page on {% aTargetBlank
     and the color of the line can be specified.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textcase(_:)", "textCase" %}
     transforms the case of the receiver text to `.lowercase` or `.uppercase`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tracking(_:)", "tracking" %}
+    sets the additional space in points that should be added to each character
+    after layout determines the position of each view.
+    This seems like a rarely used feature.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/underline(_:pattern:color:)", "underline" %}
     determines if the receiver text should be underlined based on a `Bool`.
     Several line styles are supported
     and the color of the line can be specified.
 
-  - {% aTargetBlank "", "" %}
+- ScrollView
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldismisseskeyboard(_:)", "scrollDismissesKeyboard" %}
+    specifies whether the on-screen keyboard should be dismissed
+    if the user scrolls the screen while it is displayed.
+    Supported values are
+    `.automatic` (system decides; seems the same as `.never`),
+    `.immediately` (dismisses when scrolling begins),
+    `.interactively` (dismisses if user scrolls up),
+    and `.never` (on-screen keyboard remains visible)
+
+- Text
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/flipsforrighttoleftlayoutdirection(_:)", "flipsForRightToLeftLayoutDirection" %}
+    mirrors the view contents when the layout direction is right-to-left
+    based on a `Bool`
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/minimumscalefactor(_:)", "minimumScaleFactor" %}
+    sets the minimum percentage by which text can be scaled down
+    in order to fit in the space available.
+    This is ideal in cases where surrounding views sometimes grow,
+    leaving less room for certain text.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/truncationmode(_:)", "truncationMode" %}
+    enables eliding text when it does not fit in the available space.
+    Eliding replaced text with an ellipsis and
+    can occur at the beginning, middle, or end of the text
+    based on the mode that is passed which can be `.head`, `.middle`, or `.tail`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-513mb", "lineLimit" %}
+    sets the maximum number of lines onto which text can wrap.
+    Excess text is replaced by an ellipsis.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-251ko", "lineLimit" %}
+    sets the minimum number of lines onto which text will wrap.
+    If fewer lines are required, empty lines are added.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-7ufty", "lineLimit" %}
+    sets the maximum number of lines that will be visible.
+    In `Text` views, excess text is replaced by an ellipsis.
+    In `TextField` views if more lines are needed,
+    the text can be scrolled vertically to see them.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-4hzfa", "lineLimit" %}
+    sets both the minimum and maximum number of lines
+    through which text should/can wrap.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:reservesspace:)", "lineLimit" %}
+    sets the maximum number of lines that will be visible
+    and supports reserving space for that number of lines.
+    In `Text` views, excess text is replaced by an ellipsis.
+    In `TextField` views if more lines are needed,
+    the text can be scrolled vertically to see them.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linespacing(_:)", "lineSpacing" %}
+    sets the space between each wrapped line of text.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/multilinetextalignment(_:)", "multilineTextAlignment" %}
+    determines how each line in wrapped text will be aligned.
+    Supported values are `.leading` (default), `.center`, and `.trailing`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textselection(_:)", "textSelection" %}
+    specifies whether users can select the text for copying.
+    Supported values are `.disabled` default and `.enabled`.
+
+  - {% aTargetBlank "", "textInputAutocapitalization" %}
+  - {% aTargetBlank "", "textContentType" %}
+  - {% aTargetBlank "", "textContentType" %}
+  - {% aTargetBlank "", "findNavigator" %}
+  - {% aTargetBlank "", "findDisabled" %}
+  - {% aTargetBlank "", "replaceDisabled" %}
+  - {% aTargetBlank "", "symbolRenderingMode" %}
+  - {% aTargetBlank "", "symbolVariant" %}
+
+- TextField
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/autocorrectiondisabled(_:)", "autocorrectionDisabled" %}
+    conditionally disables autocorrection of entered text based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/keyboardtype(_:)", "keyboardType" %}
+    sets the keyboard type to one of `.default`, `.alphabet`, `.asciiCapable`,
+    `.asciiCapableNumberPad`, `.decimalPad`, `.emailAddress`, `.namePhonePad`,
+    `.numberPad`, `.numbersAndPunctuation`, `.phonePad`, `.twitter`,
+    `.URL`, or `.webSearch`.
 
 ### Auxiliary View Modifiers
 
