@@ -1162,15 +1162,42 @@ See the Apple documentation page on {% aTargetBlank
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/backgroundstyle(_:)", "backgroundStyle" %}
     sets background style.
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)", "background" %}
+    adds views below the receiver view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:ignoressafeareaedges:)", "background" %}
+    sets background style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(ignoressafeareaedges:)", "background" %}
+    sets background style to its default.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:in:fillstyle:)-20tq5", "background" %}
+    sets background to an "insettable" shape filled with a specified style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(in:fillstyle:)-61m9r", "background" %}
+    sets background to an "insettable" shape filled with the default style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:in:fillstyle:)-89n7j", "background" %}
+    sets background to a shape filled with a specified style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(in:fillstyle:)-96bda", "background" %}
+    sets background to a shape filled with the default style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrollcontentbackground(_:)", "scrollContentBackground" %}
+    determines whether the background is visible behind scrollable views inside the receiver view.
+
+- Borders
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/border(_:width:)", "border" %}
+    adds a border with specified style and width.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/buttonbordershape(_:)", "buttonBorderShape" %}
+    sets the border shape used by a `Button` that has
+    `.borderStyle(.bordered)` or `.borderStyle(.borderedProminent)`.
+
+- Color Scheme
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/preferredcolorscheme(_:)", "preferredColorScheme" %}
+    sets the preferred color scheme, typically based on whether the device is currently in light or dark mode.
+
+- Controls
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/controlsize(_:)", "controlSize" %}
+    sets the size for controls inside the receiver view.
+    This seems to have very little effect.
+    The code example in the documentation doesn't produce the screenshot result.
 
 - Foreground
 
@@ -1183,13 +1210,6 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)", "foregroundColor" %}
     sets foreground color.
 
-- Tint
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-93mfq", "tint" %}
-    sets tint shape.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-23xyq", "tint" %}
-    sets tint color.
-
 - Lists
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listRowSeparatorTint" %}
@@ -1200,29 +1220,55 @@ See the Apple documentation page on {% aTargetBlank
     sets list item tint color.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listitemtint(_:)-12mbh", "listItemTint" %}
     sets list item effect.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowbackground(_:)", "listRowBackground" %}
+    adds a background view to a list row.
 
-- Light/Dark Appearance
+- Menus
 
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/preferredcolorscheme(_:)", "preferredColorScheme" %}
-    sets the preferred color scheme, typically based on whether the device is currently in light or dark mode.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menuorder(_:)", "menuOrder" %}
+    sets the order of menu items.
+    The supported values are:
+    - `.automatic`: default; system decides
+    - `.fixed`: top to bottom
+    - `.priority`: first item is closest to user interaction point; can be top to bottom or bottom to top
 
-- Border
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/border(_:width:)", "border" %}
-    adds a border with specified style and width.
-
-- Overlay
+- Overlays
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(alignment:content:)", "overlay" %}
-    adds a view on top of receiver view.
+    adds a view on top of the receiver view.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:ignoressafeareaedges:)", "overlay" %}
-    adds a style on top of receiver view.
+    adds a style on top of the receiver view.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:in:fillstyle:)", "overlay" %}
-    adds a shape on top of receiver view.
+    adds a shape on top of the receiver view.
+
+- Pickers
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/defaultwheelpickeritemheight(_:)", "defaultWheelPickerItemHeight" %}
+    sets the default height of wheel picker items.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/horizontalradiogrouplayout()", "horizontalRadioGroupLayout" %}
+    changes a `Picker` with `.pickerStyle(.radioGroup)` to
+    lay out the radio buttons horizontally rather that vertically (macOS-only).
+
+- ScrollViews
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldisabled(_:)", "scrollDisabled" %}
+    disables or enabled the ability to scroll.
+
+- Sections
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/headerprominence(_:)", "headerProminence" %}
+    sets the prominence of a `Section` header.
+    The supported values are `.standard` (default) and `.increased`.
+
+- Tint
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-93mfq", "tint" %}
+    sets tint shape.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-23xyq", "tint" %}
+    sets tint color.
 
 - category
 
-  - {% aTargetBlank "", "" %}
   - {% aTargetBlank "", "" %}
   - {% aTargetBlank "", "" %}
 
