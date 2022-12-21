@@ -4586,7 +4586,7 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)", "foregroundColor" %}
     sets foreground color.
 
-- Lists
+- `List` views
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparator(_:edges:)", "listRowSeparator" %}
     determines whether the top and bottom list row separators are visible.
@@ -4609,7 +4609,7 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowbackground(_:)", "listRowBackground" %}
     adds a background view to a list row.
 
-- Menus
+- `Menu` views
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menuorder(_:)", "menuOrder" %}
     sets the order of menu items.
@@ -4631,7 +4631,7 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:in:fillstyle:)", "overlay" %}
     adds a shape on top of the receiver view.
 
-- Pickers
+- `Picker` views
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/defaultwheelpickeritemheight(_:)", "defaultWheelPickerItemHeight" %}
     sets the default height of wheel picker items.
@@ -4660,7 +4660,7 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/unredacted()", "unredacted" %}
     removes the reason for redacting text from a subview that has a reason.
 
-- ScrollViews
+- `ScrollView` views
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldisabled(_:)", "scrollDisabled" %}
     disables or enabled the ability to scroll.
@@ -4670,7 +4670,7 @@ See the Apple documentation page on {% aTargetBlank
     Typically this is only applied to hide them
     using `.scrollIndicators(.hidden)` and not specifying the edges.
 
-- Sections
+- `Section` views
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/headerprominence(_:)", "headerProminence" %}
     sets the prominence of a `Section` header.
@@ -4760,18 +4760,40 @@ See the Apple documentation page on {% aTargetBlank
     Several line styles are supported
     and the color of the line can be specified.
 
-- ScrollView
+- `ScrollView` views
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldismisseskeyboard(_:)", "scrollDismissesKeyboard" %}
     specifies whether the on-screen keyboard should be dismissed
     if the user scrolls the screen while it is displayed.
-    The supported values are
-    `.automatic` (system decides; seems the same as `.never`),
-    `.immediately` (dismisses when scrolling begins),
-    `.interactively` (dismisses if user scrolls up),
-    and `.never` (on-screen keyboard remains visible)
+    The supported values are:
 
-- Text
+    - `.automatic`: system decides; seems the same as `.never`
+    - `.immediately`: dismisses when scrolling begins
+    - `.interactively`: dismisses if user scrolls up
+    - `.never`: on-screen keyboard remains visible
+
+- Symbols
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/symbolrenderingmode(_:)", "symbolRenderingMode" %}
+    sets the rendering mode for all symbol images inside the receiver view
+    to one of the following:
+
+    - `hierarchical`: multiple layers with varying opacities applied to foreground style
+    - `monochrome`: single layer with foreground style
+    - `multicolor`: multiple layers with inherited styles
+    - `palette`: multiple layers with different styles
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/symbolvariant(_:)", "symbolVariant" %}
+    sets the variant for all symbol images inside the receiver view.
+    This removes the need to specify the desired variant
+    as part of the symbol name.
+    It only works if the requested variant exists in SF Symbols.
+    For example, the "suit.\*" icons have "fill" variants,
+    but none of the other variants.
+    The supported variants are `.none`, `.circle`, `.square`,
+    `.rectangle`, `.fill`, and `.slash`.
+
+- `Text` views
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/flipsforrighttoleftlayoutdirection(_:)", "flipsForRightToLeftLayoutDirection" %}
     mirrors the view contents when the layout direction is right-to-left
@@ -4815,7 +4837,7 @@ See the Apple documentation page on {% aTargetBlank
     specifies whether users can select the text for copying.
     The supported values are `.disabled` default and `.enabled`.
 
-- TextEditor
+- `TextEditor` views
 
   The view modifiers listed under `TextField` below
   likely also work for `TextEditor` views.
@@ -4824,9 +4846,15 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/findnavigator(ispresented:)", "findNavigator" %}
     presents a find and replace interface when a `Bool` binding is `true`.
 
-  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/finddisabled(_:)", "findDisabled" %}
+    disables the find and replace interface
+    that was enabled in an ancestor view when a `Bool` binding is `true`.
 
-- TextField
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/finddisabled(_:)", "replaceDisabled" %}
+    disables the ability to replace text using the find and replace interface
+    that was enabled in an ancestor view when a `Bool` binding is `true`.
+
+- `TextField` views
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/autocorrectiondisabled(_:)", "autocorrectionDisabled" %}
     conditionally disables autocorrection of entered text based on a `Bool`.
@@ -4893,12 +4921,6 @@ See the Apple documentation page on {% aTargetBlank
     - `.dateTime`
     - `.flightNumber`
     - `.shipmentTrackingNumber`
-
-  - {% aTargetBlank "", "findNavigator" %}
-  - {% aTargetBlank "", "findDisabled" %}
-  - {% aTargetBlank "", "replaceDisabled" %}
-  - {% aTargetBlank "", "symbolRenderingMode" %}
-  - {% aTargetBlank "", "symbolVariant" %}
 
 ### Auxiliary View Modifiers
 
