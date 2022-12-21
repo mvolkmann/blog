@@ -3438,6 +3438,10 @@ extension Text {
 }
 ```
 
+TODO: Describe the use of {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/localizedstringkey",
+"LocalizedStringKey" %} to lookup the actual text to use.
+
 There are many view modifiers that can be applied to `Text` views.
 
 The {% aTargetBlank
@@ -4926,16 +4930,24 @@ See the Apple documentation page on {% aTargetBlank
 
 - Badges
 
-  - {% aTargetBlank "", "badge" %}
-  - {% aTargetBlank "", "badge" %}
-  - {% aTargetBlank "", "badge" %}
-  - {% aTargetBlank "", "badge" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/badge(_:)-8adyq", "badge" %}
+    adds a badge described by an `Int` to an item in a `TabView` or `List`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/badge(_:)-6x46k", "badge" %}
+    adds a badge described by a `String` to an item in a `TabView` or `List`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/badge(_:)-84e43", "badge" %}
+    adds a badge described by a {% aTargetBlank
+    "https://developer.apple.com/documentation/swiftui/localizedstringkey",
+    "LocalizedStringKey" %} to an item in a `TabView` or `List`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/badge(_:)-6k2u9", "badge" %}
+    adds a badge described by a `Text` view to an item in a `TabView` or `List`.
 
 - Context Menus
 
-  - {% aTargetBlank "", "contextMenu" %}
-  - {% aTargetBlank "", "contextMenu" %}
-  - {% aTargetBlank "", "contextMenu" %}
+TODO: STOPPED HERE!
+
+- {% aTargetBlank "", "contextMenu" %}
+- {% aTargetBlank "", "contextMenu" %}
+- {% aTargetBlank "", "contextMenu" %}
 
 - Help
 
