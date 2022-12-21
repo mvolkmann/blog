@@ -1144,6 +1144,110 @@ Others are specific to certain kinds of views.
 For example, the `stroke` view modifier can only be applied
 to views that implement the `Shape` protocol.
 
+Categories of view modifiers are listed in the Apple documentation for the
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/view",
+"View" %} protocol.
+The following sub-sections describe each of the view modifiers
+using the categories described by Apple.
+
+### Accessibility Modifiers
+
+See the Apple documentation page on {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view-accessibility",
+"Accessibility modifiers" %}.
+
+### Appearance Modifiers
+
+- Background
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/backgroundstyle(_:)", "backgroundStyle" %}
+    sets background style.
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+
+- Foreground
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)", "foregroundStyle" %}
+    sets primary foreground style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:)", "foregroundStyle" %}
+    sets primary and secondary foreground styles.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:_:)", "foregroundStyle" %}
+    sets primary, secondary, and tertiary foreground styles.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)", "foregroundColor" %}
+    sets foreground color.
+
+- Tint
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-93mfq", "tint" %}
+    sets tint shape.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-23xyq", "tint" %}
+    sets tint color.
+
+- Lists
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listRowSeparatorTint" %}
+    sets list row ting color.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listSectionSeparatorTint" %}
+    sets list section ting color.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listitemtint(_:)-5ehdr", "listItemTint" %}
+    sets list item tint color.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listitemtint(_:)-12mbh", "listItemTint" %}
+    sets list item effect.
+
+- Light/Dark Appearance
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/preferredcolorscheme(_:)", "preferredColorScheme" %}
+    sets the preferred color scheme, typically based on whether the device is currently in light or dark mode.
+
+- Border
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/border(_:width:)", "border" %}
+    adds a border with specified style and width.
+
+- Overlay
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(alignment:content:)", "overlay" %}
+    adds a view on top of receiver view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:ignoressafeareaedges:)", "overlay" %}
+    adds a style on top of receiver view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:in:fillstyle:)", "overlay" %}
+    adds a shape on top of receiver view.
+
+- category
+
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "", "" %}
+
+### Text and Symbol Modifiers
+
+### Auxiliary View Modifiers
+
+### Chart View Modifiers
+
+### Style Modifiers
+
+### Layout Modifiers
+
+### Graphics and Rendering Modifiers
+
+### Input and Event Modifiers
+
+### Search Modifiers
+
+### Presentation Modifiers
+
+### State Modifiers
+
+### Deprecated Modifiers
+
 ### Color Modifiers
 
 The following view modifiers can change the colors used in a view.
