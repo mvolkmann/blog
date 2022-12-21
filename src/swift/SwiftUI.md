@@ -1087,856 +1087,6 @@ Card(
 )
 ```
 
-## View Modifiers
-
-A view modifier is a subtype of the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/viewmodifier",
-"ViewModifier" %} protocol.
-View modifiers do not modify the view on which they are called.
-They instead create and return a new view that either
-wraps the receiver (ex. `frame`) or
-is a modified version of the receiver (ex. `foregroundColor`).
-
-In a way, view modifiers are like Svelte components that contain slots.
-They take a view to be "modified" and return a new view
-that typically contains the view passed to them.
-
-For most view modifiers there is a method in the `View` protocol
-that makes it easy to apply the view modifier to a view.
-Without this a view modifier is applied by calling the
-{% aTargetBlank "", "modifier" %} method on the a view,
-passing it the result of initializing an instance of the `ViewModifier` subtype.
-
-For example:
-
-```swift
-Text("Marching Ants")
-    .padding()
-    /* using custom ViewModifier through a View method
-    .marchingAnts(
-        clockwise: true,
-        dashLength: 10,
-        dashWidth: 3
-    )
-    */
-    .modifier(MarchingAnts( // using custom ViewModifier directly
-        clockwise: true,
-        dashLength: 10,
-        dashWidth: 3
-    ))
-```
-
-Calls to view modifiers can be chained since each returns a view.
-The following example demonstrates using the
-`foregroundColor`, `padding`, and `stroke` view modifiers.
-
-```swift
-Text("Hello, World!")
-    .foregroundColor(.red)
-
-RoundedRectangle(cornerRadius: 20)
-    .stroke(lineWidth: 3)
-    .padding(.all)
-```
-
-Some view modifiers can be applied to any view.
-Others are specific to certain kinds of views.
-For example, the `stroke` view modifier can only be applied
-to views that implement the `Shape` protocol.
-
-Categories of view modifiers are listed in the Apple documentation for the
-{% aTargetBlank "https://developer.apple.com/documentation/swiftui/view",
-"View" %} protocol.
-The following sub-sections describe each of the view modifiers
-using the categories described by Apple.
-
-### Accessibility Modifiers
-
-See the Apple documentation page on {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view-accessibility",
-"Accessibility modifiers" %}.
-
-### Appearance Modifiers
-
-- Background
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/backgroundstyle(_:)", "backgroundStyle" %}
-    sets background style.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)", "background" %}
-    adds views below the receiver view.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:ignoressafeareaedges:)", "background" %}
-    sets background style.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(ignoressafeareaedges:)", "background" %}
-    sets background style to its default.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:in:fillstyle:)-20tq5", "background" %}
-    sets background to an "insettable" shape filled with a specified style.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(in:fillstyle:)-61m9r", "background" %}
-    sets background to an "insettable" shape filled with the default style.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:in:fillstyle:)-89n7j", "background" %}
-    sets background to a shape filled with a specified style.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(in:fillstyle:)-96bda", "background" %}
-    sets background to a shape filled with the default style.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrollcontentbackground(_:)", "scrollContentBackground" %}
-    determines whether the background is visible behind scrollable views inside the receiver view.
-
-- Borders
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/border(_:width:)", "border" %}
-    adds a border with specified style and width.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/buttonbordershape(_:)", "buttonBorderShape" %}
-    sets the border shape used by a `Button` that has
-    `.borderStyle(.bordered)` or `.borderStyle(.borderedProminent)`.
-
-- Color Scheme
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/preferredcolorscheme(_:)", "preferredColorScheme" %}
-    sets the preferred color scheme, typically based on whether the device is currently in light or dark mode.
-
-- Controls
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/controlsize(_:)", "controlSize" %}
-    sets the size for controls inside the receiver view.
-    This seems to have very little effect.
-    The code example in the documentation doesn't produce the screenshot result.
-
-- Dynamic Island
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamicisland(verticalplacement:)", "dynamicIsland" %}
-    specifies the vertical placement of the receiver
-    in an expanded Live Activity inside the Dynamic Island.
-
-- Foreground
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)", "foregroundStyle" %}
-    sets primary foreground style.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:)", "foregroundStyle" %}
-    sets primary and secondary foreground styles.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:_:)", "foregroundStyle" %}
-    sets primary, secondary, and tertiary foreground styles.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)", "foregroundColor" %}
-    sets foreground color.
-
-- Lists
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparator(_:edges:)", "listRowSeparator" %}
-    determines whether the top and bottom list row separators are visible.
-    Row separators are visible by default.
-    Typically this is only applied to hide them
-    using `.listRowSeparator(.hidden)` and not specifying the edges.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listRowSeparatorTint" %}
-    sets list row tint color.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listsectionseparator(_:edges:)", "listSectionSeparator" %}
-    determines whether the top and bottom section separators are visible.
-    Section separators are hidden by default.
-    Typically this is only applied to show them
-    using `.listSectionSeparator(.visible)` and not specifying the edges.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listSectionSeparatorTint" %}
-    sets list section ting color.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listitemtint(_:)-5ehdr", "listItemTint" %}
-    sets list item tint color.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listitemtint(_:)-12mbh", "listItemTint" %}
-    sets list item effect.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowbackground(_:)", "listRowBackground" %}
-    adds a background view to a list row.
-
-- Menus
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menuorder(_:)", "menuOrder" %}
-    sets the order of menu items.
-    The supported values are:
-    - `.automatic`: default; system decides
-    - `.fixed`: top to bottom
-    - `.priority`: first item is closest to user interaction point; can be top to bottom or bottom to top
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menuindicator(_:)", "menuIndicator" %}
-    determines when the "menu indicator" should be visible.
-    The supported values are `.automatic` (view decides), `.hidden`, and `.visible`.
-    Regardless of the value, I never see a menu indicator!
-
-- Overlays
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(alignment:content:)", "overlay" %}
-    adds a view on top of the receiver view.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:ignoressafeareaedges:)", "overlay" %}
-    adds a style on top of the receiver view.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:in:fillstyle:)", "overlay" %}
-    adds a shape on top of the receiver view.
-
-- Pickers
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/defaultwheelpickeritemheight(_:)", "defaultWheelPickerItemHeight" %}
-    sets the default height of wheel picker items.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/horizontalradiogrouplayout()", "horizontalRadioGroupLayout" %}
-    changes a `Picker` with `.pickerStyle(.radioGroup)` to
-    lay out the radio buttons horizontally rather that vertically (macOS-only).
-
-- Privacy
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/privacysensitive(_:)", "privacySensitive" %}
-    redacts text in the view. This is typically applied to `Text` views.
-    Text will only be redacted if an ancestor view
-    applies the `redacted` view modifier.
-    For example:
-
-    ```swift
-    VStack {
-        Text("public") // not redacted
-        Text("private").privacySensitive() // redacted
-    }
-    .redacted(reason: .privacy)
-    ```
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/redacted(reason:)", "redacted" %}
-    provides a reason why some text is redacted which is typically `.privacy`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/unredacted()", "unredacted" %}
-    removes the reason for redacting text from a subview that has a reason.
-
-- ScrollViews
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldisabled(_:)", "scrollDisabled" %}
-    disables or enabled the ability to scroll.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrollindicators(_:axes:)", "scrollIndicators" %}
-    determines when scroll indicators should be visible.
-    Scroll indicators are visible by default.
-    Typically this is only applied to hide them
-    using `.scrollIndicators(.hidden)` and not specifying the edges.
-
-- Sections
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/headerprominence(_:)", "headerProminence" %}
-    sets the prominence of a `Section` header.
-    The supported values are `.standard` (default) and `.increased`.
-
-- Tint
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-93mfq", "tint" %}
-    sets tint shape.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-23xyq", "tint" %}
-    sets tint color.
-
-- Visibility
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/hidden()", "hidden" %}
-    hides a view.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/labelshidden()", "labelsHidden" %}
-    hides all labels inside a view.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/persistentsystemoverlays(_:)", "persistentSystemOverlays" %}
-    What are "system overlays"?
-
-- Widgets
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetaccentable(_:)", "widgetAccentable" %}
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(_:)-7wguh", "widgetLabel" %}
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(_:)-8m5o1", "widgetLabel" %}
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(label:)", "widgetLabel" %}
-
-### Text and Symbol Modifiers
-
-- Fonts
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/allowstightening(_:)", "allowsTightening" %}
-    sets whether space between characters can be compressed
-    in order to get all of the text to fit on a single line based on a `Bool`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/baselineoffset(_:)", "baselineOffset" %}
-    sets the vertical offset of the text from its baseline.
-    For example:
-
-    ```swift
-    HStack(spacing: 0) {
-        Text("H")
-        Text("2").baselineOffset(10)
-        Text("O")
-    }
-    ```
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/bold(_:)", "bold" %}
-    uses a bold font for text.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-1m2tf", "dynamicTypeSize" %}
-    sets the dynamic type size of the receiver to one of `.xSmall`, `.small`,
-    `.medium`, `.large`, `.xLarge`, `.xxLarge`, or `.xxxLarge`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-26aj0", "dynamicTypeSize" %}
-    limits the dynamic type size of the receiver to a value in a given range.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/font(_:)", "font" %}
-    sets the default font of the receiver.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontdesign(_:)", "fontDesign" %}
-    sets the font design used by the receiver to one of
-    `.default`, `.monospaced`, `.rounded`, or `.serif`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontweight(_:)", "fontWeight" %}
-    sets the font weight to one of `.ultralight`, `.thin`, `.light`, `.medium`,
-    `.regular`, `.semibold`, `.bold`, `.heavy`, or `.black`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontwidth(_:)", "fontWidth" %}
-    sets the font width of the receiver to one of
-    `.compressed`, `.condensed`, `.expanded`, or `.standard`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/italic(_:)", "italic" %}
-    determines if the receiver font is italic based on a `Bool`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/kerning(_:)", "kerning" %}
-    sets the spacing between characters.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/monospaced(_:)", "monospaced" %}
-    determines if all characters in the receiver should be monospaced based on a `Bool`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/monospaceddigit()", "monospacedDigit" %}
-    determines if digit characters in the receiver should be monospaced.
-    Non-digit characters are not affected.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/strikethrough(_:pattern:color:)", "strikeThrough" %}
-    determines if the receiver text should have strike-through based on a `Bool`.
-    Several line styles are supported
-    and the color of the line can be specified.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textcase(_:)", "textCase" %}
-    transforms the case of the receiver text to `.lowercase` or `.uppercase`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tracking(_:)", "tracking" %}
-    sets the additional space in points that should be added to each character
-    after layout determines the position of each view.
-    This seems like a rarely used feature.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/underline(_:pattern:color:)", "underline" %}
-    determines if the receiver text should be underlined based on a `Bool`.
-    Several line styles are supported
-    and the color of the line can be specified.
-
-- ScrollView
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldismisseskeyboard(_:)", "scrollDismissesKeyboard" %}
-    specifies whether the on-screen keyboard should be dismissed
-    if the user scrolls the screen while it is displayed.
-    The supported values are
-    `.automatic` (system decides; seems the same as `.never`),
-    `.immediately` (dismisses when scrolling begins),
-    `.interactively` (dismisses if user scrolls up),
-    and `.never` (on-screen keyboard remains visible)
-
-- Text
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/flipsforrighttoleftlayoutdirection(_:)", "flipsForRightToLeftLayoutDirection" %}
-    mirrors the view contents when the layout direction is right-to-left
-    based on a `Bool`
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/minimumscalefactor(_:)", "minimumScaleFactor" %}
-    sets the minimum percentage by which text can be scaled down
-    in order to fit in the space available.
-    This is ideal in cases where surrounding views sometimes grow,
-    leaving less room for certain text.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/truncationmode(_:)", "truncationMode" %}
-    enables eliding text when it does not fit in the available space.
-    Eliding replaced text with an ellipsis and
-    can occur at the beginning, middle, or end of the text
-    based on the mode that is passed which can be `.head`, `.middle`, or `.tail`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-513mb", "lineLimit" %}
-    sets the maximum number of lines onto which text can wrap.
-    Excess text is replaced by an ellipsis.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-251ko", "lineLimit" %}
-    sets the minimum number of lines onto which text will wrap.
-    If fewer lines are required, empty lines are added.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-7ufty", "lineLimit" %}
-    sets the maximum number of lines that will be visible.
-    In `Text` views, excess text is replaced by an ellipsis.
-    In `TextField` views if more lines are needed,
-    the text can be scrolled vertically to see them.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-4hzfa", "lineLimit" %}
-    sets both the minimum and maximum number of lines
-    through which text should/can wrap.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:reservesspace:)", "lineLimit" %}
-    sets the maximum number of lines that will be visible
-    and supports reserving space for that number of lines.
-    In `Text` views, excess text is replaced by an ellipsis.
-    In `TextField` views if more lines are needed,
-    the text can be scrolled vertically to see them.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linespacing(_:)", "lineSpacing" %}
-    sets the space between each wrapped line of text.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/multilinetextalignment(_:)", "multilineTextAlignment" %}
-    determines how each line in wrapped text will be aligned.
-    The supported values are `.leading` (default), `.center`, and `.trailing`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textselection(_:)", "textSelection" %}
-    specifies whether users can select the text for copying.
-    The supported values are `.disabled` default and `.enabled`.
-
-- TextField
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/autocorrectiondisabled(_:)", "autocorrectionDisabled" %}
-    conditionally disables autocorrection of entered text based on a `Bool`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/keyboardtype(_:)", "keyboardType" %}
-    sets the keyboard type to one of `.default`, `.alphabet`, `.asciiCapable`,
-    `.asciiCapableNumberPad`, `.decimalPad`, `.emailAddress`, `.namePhonePad`,
-    `.numberPad`, `.numbersAndPunctuation`, `.phonePad`, `.twitter`,
-    `.URL`, or `.webSearch`.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textinputautocapitalization(_:)", "textInputAutocapitalization" %}
-    specifies when the shift key is automatically enabled.
-    The supported values are:
-    - `.characters`: capitalizes every letter
-    - `.words`: capitalizes the first letter of every word
-    - `.sentences`: capitalizes the first letter of every sentence
-    - `.never`: never automatically capitalizes anything
-  - {% aTargetBlank "", "textContentType" %}
-
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textcontenttype(_:)-ufdv", "textContentType" %}
-    sets the content type for text input
-    so the system can offer user-specific suggestions.
-    This works on real devices, but not in the Simulator.
-    The supported values, some of which are
-    only available on certain platforms, are:
-
-    - Authentication
-
-      - `.username`
-      - `.password`
-      - `.newPassword`
-      - `.oneTimeCode`
-
-    - Contact
-
-      - `.emailAddress`
-      - `.telephoneNumber`
-
-    - Names
-
-      - `.familyName`
-      - `.givenName`
-      - `.jobTitle`
-      - `.middleName`
-      - `.name`
-      - `.namePrefix`
-      - `.nameSuffix`
-      - `.nickname`
-      - `.organizationName`
-
-    - Locations
-
-      - `.addressCity`
-      - `.addressCityAndState`
-      - `.addressState`
-      - `.countryName`
-      - `.fullStreetAddress`
-      - `.location`
-      - `.postalCode`
-      - `.streetAddressLine1`
-      - `.streetAddressLine2`
-      - `.sublocality`
-
-    - Other
-    - `.creditCardNumber`: doesn't complete
-    - `.dateTime`
-    - `.flightNumber`
-    - `.shipmentTrackingNumber`
-
-  - {% aTargetBlank "", "findNavigator" %}
-  - {% aTargetBlank "", "findDisabled" %}
-  - {% aTargetBlank "", "replaceDisabled" %}
-  - {% aTargetBlank "", "symbolRenderingMode" %}
-  - {% aTargetBlank "", "symbolVariant" %}
-
-### Auxiliary View Modifiers
-
-### Chart View Modifiers
-
-### Style Modifiers
-
-### Layout Modifiers
-
-### Graphics and Rendering Modifiers
-
-### Input and Event Modifiers
-
-### Search Modifiers
-
-### Presentation Modifiers
-
-### State Modifiers
-
-### Deprecated Modifiers
-
-### Color Modifiers
-
-The following view modifiers can change the colors used in a view.
-
-- `background(alignment, content)`
-- `foregroundColor(Color?)`
-- `foregroundStyle(ShapeStyle)`
-- `opacity(Double)`
-- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
-- `tint(Color?)`
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
-"background" %} view modifier takes a `content` argument whose value is
-a `ViewBuilder` function that can return any kind of `View`
-including a `Color`, `Shape`, or `Image`.
-The name of this view modifier doesn't end in `Color` like {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/list/foregroundcolor(_:)",
-"foregroundColor" %} because it can specify background content that is
-any `View` and is not restricted to only being a color.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/shadow(color:radius:x:y:)",
-"shadow" %} view modifier adds a shadow to a view.
-For example:
-
-<img alt="SwiftUI shadow" style="width: 60%"
-  src="/blog/assets/SwiftUI-shadow.png?v={{pkg.version}}"
-  title="SwiftUI shadow">
-
-```swift
-struct ContentView: View {
-    func shadowDemo(radius: CGFloat) -> some View {
-        Text("Shadow Radius \(String(format: "%.0f", radius))")
-            .font(.system(size: 40))
-            .foregroundColor(.blue)
-            .shadow(color: .gray, radius: radius, x: 10, y: 10)
-    }
-
-    var body: some View {
-        VStack {
-            shadowDemo(radius: 0)
-            shadowDemo(radius: 2)
-            shadowDemo(radius: 4)
-        }
-    }
-}
-```
-
-### Size Modifiers
-
-The following view modifiers change the size of a view:
-
-- `frame(width: CGFloat?, height: CGFloat?, alignment: Alignment)`
-- `frame(maxWidth: CGFloat?, maxHeight: CGFloat?, alignment: Alignment)`
-- `scaledToFill()`
-- `scaledToFit()`
-- `scaleEffect(_ scale: CGSize, anchor: UnitPoint)`
-- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/scaleeffect(_:anchor:)-7q7as",
-"scaleEffect" %} view modifier changes the size of any view.
-By default the view is scaled about its center,
-but this can be changed by specifying the `anchor` argument.
-It does not affect the layout of other views.
-
-For example:
-
-<img alt="SwiftUI scaleEffect" style="width: 60%"
-  src="/blog/assets/SwiftUI-scaleEffect.png?v={{pkg.version}}"
-  title="SwiftUI scaleEffect">
-
-```swift
-VStack(alignment: .leading) {
-    Text("Before")
-    Text("I am scaled!")
-        .padding()
-        .border(.blue)
-        .scaleEffect(1.7, anchor: .center) // using default anchor
-        // Can pass separate x and y scale values instead of
-        // a single scale value that is used for both.
-    Text("After")
-}
-```
-
-### Position Modifiers
-
-The following view modifiers change the position of a view:
-
-- `offset(x: CGFloat, y: CGFloat)`
-- `position(x: CGFloat, y: CGFloat)`
-- `transformEffect(CGAffineTransform)`
-- `transition(AnyTransition)`
-- `zIndex(Double)`
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/offset(x:y:)",
-"offset" %} view modifier moves a view relative to its "natural position"
-without affecting the layout of other views.
-It is passed `x` and `y` arguments that
-specify horizontal and vertical offset distances.
-When applied to views inside a `ZStack` this changes how they overlap.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/position(x:y:)",
-"position" %} view modifier positions a view
-within the coordinate space of its parent view
-without affecting the layout of other views.
-It is passed `x` and `y` arguments that specify the position.
-This is similar to `position: absolute` in CSS.
-
-For example:
-
-<img alt="SwiftUI position" style="width: 60%"
-  src="/blog/assets/SwiftUI-position.png?v={{pkg.version}}"
-  title="SwiftUI position">
-
-```swift
-struct ContentView: View {
-    func shadowDemo(radius: CGFloat) -> some View {
-        Text("Shadow Radius \(String(format: "%.0f", radius))")
-            .font(.system(size: 40))
-            .foregroundColor(.blue)
-            .shadow(color: .gray, radius: radius, x: 10, y: 10)
-    }
-
-    var body: some View {
-        VStack {
-            shadowDemo(radius: 0)
-            shadowDemo(radius: 2)
-            shadowDemo(radius: 4)
-        }
-    }
-}
-```
-
-### Orientation Modifiers
-
-The following view modifiers change the orientation of a view:
-
-- `rotationEffect(angle: Angle, anchor: UnitPoint)`
-- `rotation3DEffect(angle, axis, anchor, anchorZ, perspective)`
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/rotationeffect(_:anchor:)",
-"rotationEffect" %} view modifier rotates any view by
-an angle that is specified in degrees or radians.
-By default the view is rotated about its center,
-but this can be changed by specifying the `anchor` argument.
-It does not affect the layout of other views.
-
-For example:
-
-<img alt="SwiftUI rotationEffect" style="width: 60%"
-  src="/blog/assets/SwiftUI-rotationEffect.png?v={{pkg.version}}"
-  title="SwiftUI rotationEffect">
-
-```swift
-VStack(alignment: .leading) {
-    Text("Before")
-    Text("I am rotated!")
-        .padding()
-        .border(.blue)
-        .rotationEffect(.degrees(-10), anchor: .bottomLeading)
-    Text("After")
-}
-```
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/scrollview/rotation3deffect(_:axis:anchor:anchorz:perspective:)",
-"rotation3DEffect" %} view modifier rotates any view
-around any axes (x, y, and z) in 3D space.
-See the `Card` example in the [ViewBuilders](#viewbuilders) section.
-
-### Text Modifiers
-
-The following view modifies change text:
-
-- `textCase(Text.Case?)`
-- `truncationMode(Text.TruncationMode)`
-
-The following example adds a shadow to a `Text` view:
-
-<img alt="SwiftUI Shadow" style="width: 60%"
-  src="/blog/assets/SwiftUI-Shadow.png?v={{pkg.version}}"
-  title="SwiftUI Shadow">
-
-```swift
-Text("Shadow Demo")
-    .padding()
-    .background(.yellow)
-    .shadow(color: .gray, radius: 3, x: 3, y: 3)
-```
-
-Other commonly used view modifiers include:
-
-- `border(ShapeStyle, width: CGFloat = 1)`
-- `cornerRadius(CGFloat, antialiased: Bool)`
-- `disabled(Bool)` disables a form input such as a `Button`
-- `edgesIgnoringSafeArea(Edge.Set)`
-- `font(Font?)`
-- `border(ShapeStyle, width: CGFloat = 1)`
-- `lineLimit(Int?)`
-- `multilineTextAlignment(TextAlignment)`
-- `overlay(ShapeStyle)`
-- `padding(CGFloat)`
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/border(_:width:)",
-"border" %} view modifier adds a border to a view with a given style and width.
-The style can be specified in many ways including using a `Color` or `Gradient`.
-For more advanced borders, see the use of the `overlay` view modifier
-that uses `RoundedRectangle` in the [TextEditor](#texteditor) section.
-Also see the [Marching Ants Border](#marching-ants-border) section.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/text/multilinetextalignment(_:)",
-"multilineTextAlignment" %} view modifier specifies how text that
-wraps across multiple lines should be horizontally aligned.
-It can be passed `.leading` (default), `.center`, or `.trailing`.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/padding(_:_:)",
-"padding" %} view modifier adds padding to view.
-It can be passed a side which can be a single value or an array of
-`.all` (default), `.leading`, `.trailing`,
-`.horizontal` (same as `.leading` and `.trailing`),
-`.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
-It can also be passed a `CGFloat` value for the length.
-The length defaults to `nil` and means to use the system default of 20.
-
-### View-specific Modifiers
-
-The following view modifiers change the styling
-of specific kinds of predefined views:
-
-- `buttonStyle(ButtonStyle)`
-- `controlGroupStyle(ControlGroupStyle)`
-- `datePickerStyle(DatePickerStyle)`
-- `gaugeStyle(GaugeStyle)`
-- `indexViewStyle(IndexViewStyle)`
-- `labelStyle(LabelStyle)`
-- `menuStyle(MenuStyle)`
-- `navigationViewStyle(NavigationViewStyle)`
-- `pickerStyle(PickerStyle)`
-- `progressViewStyle(ProgressViewStyle)`
-- `presentedWindowStyle(WindowStyle)`
-- `presentedWindowToolbarStyle(WindowToolbarStyle)`
-- `tableStyle(TableStyle)`
-- `tabViewStyle(TabViewStyle)`
-- `textFieldStyle(TextFieldStyle)`
-- `toggleStyle(ToggleStyle)`
-
-Several view modifiers take a `ShapeStyle` object.
-Types that conform to the `ShapeStyle` protocol include
-`AngularGradient`, `Color`, `ForegroundStyle`, `ImagePaint`,
-`LinearGradient`, and `RadialGradient`.
-
-### Event Handling Modifiers
-
-The event handling methods like `onTapGesture` area also view modifiers.
-This takes a `count` argument with a default value of 1
-that specifies the number of consecutive taps required
-to trigger running a provided closure.
-The `onTapGesture` view modifier can be applied to any view.
-
-Many view modifiers are defined in extensions to the `View` protocol.
-This makes them applicable to any kind of view.
-
-When view modifiers are added to container views,
-they are passed down to all descendant views.
-In the following example, all the `Text` views are red
-because the `VStack` that contains them has
-a view modifier that sets the foreground color.
-
-```swift
-VStack {
-    Text("Alpha")
-    HStack {
-        Text("Beta")
-        Text("Gamma")
-    }
-}.foregroundColor(.red)
-```
-
-### Custom Modifiers
-
-Custom view modifiers can be created by defining
-a struct that implements the `ViewModifier` protocol.
-This requires implementing `body` method that takes
-content which is a `View` to be modified,
-and returns a new `View`.
-The code in the `body` method is similar to that in any custom view.
-
-The following code defines a custom `ViewModifier`
-that allows the view on which it is called to be collapsed.
-It wraps that view in a `VStack` containing two `HStack`s.
-The second `HStack` includes a `Button` containing a chevron icon.
-Clicking the `Button` toggles whether the first `HStack` is rendered.
-It also rotates the chevron icon using animation
-which is covered later in the [Animation](#animation) section.
-
-<img alt="SwiftUI ViewModifier" style="width: 70%"
-  src="/blog/assets/SwiftUI-ViewModifier.png?v={{pkg.version}}"
-  title="SwiftUI ViewModifier">
-
-```swift
-struct Collapsible: ViewModifier {
-    private static let diameter = CGFloat(120)
-    private static var radius: CGFloat { diameter / 2 }
-
-    var bgColor: Color = .gray
-    var duration: Double = 0.5 // in seconds
-
-    @State private var showContent = true
-
-    var halfCircle: some View {
-        Circle()
-            .trim(from: 0, to: 0.5)
-            .fill(bgColor)
-            .frame(
-                width: Collapsible.diameter,
-                height: Collapsible.radius
-            )
-            .offset(x: 0, y: -16)
-    }
-
-    private func toggle() {
-        withAnimation(.easeInOut(duration: duration)) {
-            showContent.toggle()
-        }
-    }
-
-    func body(content: Content) -> some View {
-        VStack {
-            if showContent {
-                HStack {
-                    Spacer()
-                    content
-                    Spacer()
-                }
-                .background(bgColor)
-
-                //TODO: Can you scale the height of the HStack
-                //TODO: instead of using the default fade transition?
-                //.transition(.scale)
-                //.scaleEffect(showContent ? 1 : 0)
-                //.animation(.easeInOut(duration: 1))
-            }
-            HStack {
-                Spacer()
-                ZStack {
-                    Image(systemName: "chevron.down")
-                        .resizable()
-                        .frame(
-                            width: Collapsible.radius / 3,
-                            height: Collapsible.radius / 4
-                        )
-                        .onTapGesture { toggle() }
-                        .rotationEffect( // Angle type is inferred
-                            .degrees(showContent ? 180 : 0)
-                        )
-                        .offset(x: 0, y: -2)
-                        // Use a view as a background.
-                        .background(halfCircle)
-                }
-                Spacer()
-            }
-        }
-    }
-}
-
-extension View {
-    func collapsible(
-        bgColor: Color = .black,
-        duration: Double = 0.5) -> some View {
-        modifier(Collapsible(bgColor: bgColor, duration: duration))
-    }
-}
-```
-
-The following code demonstrates using the custom `ViewModifier` defined above.
-
-```swift
-VStack {
-    Text("First line of content")
-    Text("Second line of content")
-}
-.padding()
-
-// This way of applying a view modifier doesn't use the View extension.
-//.modifier(Collapsible(bgColor: ContentView.bgColor))
-
-// This way uses the View extension and is preferred.
-.collapsible(bgColor: ContentView.bgColor)
-```
-
 ## Property Wrappers
 
 Swift property wrappers attach logic to the properties
@@ -5306,6 +4456,867 @@ The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/tupleview", "TupleView" %}
 view ...
 TODO: What is this?
+
+## View Modifiers
+
+A view modifier is a subtype of the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/viewmodifier",
+"ViewModifier" %} protocol.
+View modifiers do not modify the view on which they are called.
+They instead create and return a new view that either
+wraps the receiver (ex. `frame`) or
+is a modified version of the receiver (ex. `foregroundColor`).
+
+In a way, view modifiers are like Svelte components that contain slots.
+They take a view to be "modified" and return a new view
+that typically contains the view passed to them.
+
+For most view modifiers there is a method in the `View` protocol
+that makes it easy to apply the view modifier to a view.
+Without this a view modifier is applied by calling the
+{% aTargetBlank "", "modifier" %} method on the a view,
+passing it the result of initializing an instance of the `ViewModifier` subtype.
+
+For example:
+
+```swift
+Text("Marching Ants")
+    .padding()
+    /* using custom ViewModifier through a View method
+    .marchingAnts(
+        clockwise: true,
+        dashLength: 10,
+        dashWidth: 3
+    )
+    */
+    .modifier(MarchingAnts( // using custom ViewModifier directly
+        clockwise: true,
+        dashLength: 10,
+        dashWidth: 3
+    ))
+```
+
+Calls to view modifiers can be chained since each returns a view.
+The following example demonstrates using the
+`foregroundColor`, `padding`, and `stroke` view modifiers.
+
+```swift
+Text("Hello, World!")
+    .foregroundColor(.red)
+
+RoundedRectangle(cornerRadius: 20)
+    .stroke(lineWidth: 3)
+    .padding(.all)
+```
+
+Some view modifiers can be applied to any view.
+Others are specific to certain kinds of views.
+For example, the `stroke` view modifier can only be applied
+to views that implement the `Shape` protocol.
+
+Categories of view modifiers are listed in the Apple documentation for the
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/view",
+"View" %} protocol.
+The following sub-sections describe each of the view modifiers
+using the categories described by Apple.
+
+### Accessibility Modifiers
+
+See the Apple documentation page on {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view-accessibility",
+"Accessibility modifiers" %}.
+
+### Appearance Modifiers
+
+- Background
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/backgroundstyle(_:)", "backgroundStyle" %}
+    sets background style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)", "background" %}
+    adds views below the receiver view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:ignoressafeareaedges:)", "background" %}
+    sets background style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(ignoressafeareaedges:)", "background" %}
+    sets background style to its default.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:in:fillstyle:)-20tq5", "background" %}
+    sets background to an "insettable" shape filled with a specified style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(in:fillstyle:)-61m9r", "background" %}
+    sets background to an "insettable" shape filled with the default style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(_:in:fillstyle:)-89n7j", "background" %}
+    sets background to a shape filled with a specified style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/background(in:fillstyle:)-96bda", "background" %}
+    sets background to a shape filled with the default style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrollcontentbackground(_:)", "scrollContentBackground" %}
+    determines whether the background is visible behind scrollable views inside the receiver view.
+
+- Borders
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/border(_:width:)", "border" %}
+    adds a border with specified style and width.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/buttonbordershape(_:)", "buttonBorderShape" %}
+    sets the border shape used by a `Button` that has
+    `.borderStyle(.bordered)` or `.borderStyle(.borderedProminent)`.
+
+- Color Scheme
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/preferredcolorscheme(_:)", "preferredColorScheme" %}
+    sets the preferred color scheme, typically based on whether the device is currently in light or dark mode.
+
+- Controls
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/controlsize(_:)", "controlSize" %}
+    sets the size for controls inside the receiver view.
+    This seems to have very little effect.
+    The code example in the documentation doesn't produce the screenshot result.
+
+- Dynamic Island
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamicisland(verticalplacement:)", "dynamicIsland" %}
+    specifies the vertical placement of the receiver
+    in an expanded Live Activity inside the Dynamic Island.
+
+- Foreground
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)", "foregroundStyle" %}
+    sets primary foreground style.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:)", "foregroundStyle" %}
+    sets primary and secondary foreground styles.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:_:)", "foregroundStyle" %}
+    sets primary, secondary, and tertiary foreground styles.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)", "foregroundColor" %}
+    sets foreground color.
+
+- Lists
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparator(_:edges:)", "listRowSeparator" %}
+    determines whether the top and bottom list row separators are visible.
+    Row separators are visible by default.
+    Typically this is only applied to hide them
+    using `.listRowSeparator(.hidden)` and not specifying the edges.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listRowSeparatorTint" %}
+    sets list row tint color.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listsectionseparator(_:edges:)", "listSectionSeparator" %}
+    determines whether the top and bottom section separators are visible.
+    Section separators are hidden by default.
+    Typically this is only applied to show them
+    using `.listSectionSeparator(.visible)` and not specifying the edges.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listSectionSeparatorTint" %}
+    sets list section ting color.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listitemtint(_:)-5ehdr", "listItemTint" %}
+    sets list item tint color.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listitemtint(_:)-12mbh", "listItemTint" %}
+    sets list item effect.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowbackground(_:)", "listRowBackground" %}
+    adds a background view to a list row.
+
+- Menus
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menuorder(_:)", "menuOrder" %}
+    sets the order of menu items.
+    The supported values are:
+    - `.automatic`: default; system decides
+    - `.fixed`: top to bottom
+    - `.priority`: first item is closest to user interaction point; can be top to bottom or bottom to top
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menuindicator(_:)", "menuIndicator" %}
+    determines when the "menu indicator" should be visible.
+    The supported values are `.automatic` (view decides), `.hidden`, and `.visible`.
+    Regardless of the value, I never see a menu indicator!
+
+- Overlays
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(alignment:content:)", "overlay" %}
+    adds a view on top of the receiver view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:ignoressafeareaedges:)", "overlay" %}
+    adds a style on top of the receiver view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlay(_:in:fillstyle:)", "overlay" %}
+    adds a shape on top of the receiver view.
+
+- Pickers
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/defaultwheelpickeritemheight(_:)", "defaultWheelPickerItemHeight" %}
+    sets the default height of wheel picker items.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/horizontalradiogrouplayout()", "horizontalRadioGroupLayout" %}
+    changes a `Picker` with `.pickerStyle(.radioGroup)` to
+    lay out the radio buttons horizontally rather that vertically (macOS-only).
+
+- Privacy
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/privacysensitive(_:)", "privacySensitive" %}
+    redacts text in the view. This is typically applied to `Text` views.
+    Text will only be redacted if an ancestor view
+    applies the `redacted` view modifier.
+    For example:
+
+    ```swift
+    VStack {
+        Text("public") // not redacted
+        Text("private").privacySensitive() // redacted
+    }
+    .redacted(reason: .privacy)
+    ```
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/redacted(reason:)", "redacted" %}
+    provides a reason why some text is redacted which is typically `.privacy`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/unredacted()", "unredacted" %}
+    removes the reason for redacting text from a subview that has a reason.
+
+- ScrollViews
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldisabled(_:)", "scrollDisabled" %}
+    disables or enabled the ability to scroll.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrollindicators(_:axes:)", "scrollIndicators" %}
+    determines when scroll indicators should be visible.
+    Scroll indicators are visible by default.
+    Typically this is only applied to hide them
+    using `.scrollIndicators(.hidden)` and not specifying the edges.
+
+- Sections
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/headerprominence(_:)", "headerProminence" %}
+    sets the prominence of a `Section` header.
+    The supported values are `.standard` (default) and `.increased`.
+
+- Tint
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-93mfq", "tint" %}
+    sets tint shape.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-23xyq", "tint" %}
+    sets tint color.
+
+- Visibility
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/hidden()", "hidden" %}
+    hides a view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/labelshidden()", "labelsHidden" %}
+    hides all labels inside a view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/persistentsystemoverlays(_:)", "persistentSystemOverlays" %}
+    What are "system overlays"?
+
+- Widgets
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetaccentable(_:)", "widgetAccentable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(_:)-7wguh", "widgetLabel" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(_:)-8m5o1", "widgetLabel" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(label:)", "widgetLabel" %}
+
+### Text and Symbol Modifiers
+
+- Fonts
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/allowstightening(_:)", "allowsTightening" %}
+    sets whether space between characters can be compressed
+    in order to get all of the text to fit on a single line based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/baselineoffset(_:)", "baselineOffset" %}
+    sets the vertical offset of the text from its baseline.
+    For example:
+
+    ```swift
+    HStack(spacing: 0) {
+        Text("H")
+        Text("2").baselineOffset(10)
+        Text("O")
+    }
+    ```
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/bold(_:)", "bold" %}
+    uses a bold font for text.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-1m2tf", "dynamicTypeSize" %}
+    sets the dynamic type size of the receiver to one of `.xSmall`, `.small`,
+    `.medium`, `.large`, `.xLarge`, `.xxLarge`, or `.xxxLarge`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-26aj0", "dynamicTypeSize" %}
+    limits the dynamic type size of the receiver to a value in a given range.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/font(_:)", "font" %}
+    sets the default font of the receiver.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontdesign(_:)", "fontDesign" %}
+    sets the font design used by the receiver to one of
+    `.default`, `.monospaced`, `.rounded`, or `.serif`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontweight(_:)", "fontWeight" %}
+    sets the font weight to one of `.ultralight`, `.thin`, `.light`, `.medium`,
+    `.regular`, `.semibold`, `.bold`, `.heavy`, or `.black`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontwidth(_:)", "fontWidth" %}
+    sets the font width of the receiver to one of
+    `.compressed`, `.condensed`, `.expanded`, or `.standard`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/italic(_:)", "italic" %}
+    determines if the receiver font is italic based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/kerning(_:)", "kerning" %}
+    sets the spacing between characters.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/monospaced(_:)", "monospaced" %}
+    determines if all characters in the receiver should be monospaced based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/monospaceddigit()", "monospacedDigit" %}
+    determines if digit characters in the receiver should be monospaced.
+    Non-digit characters are not affected.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/strikethrough(_:pattern:color:)", "strikeThrough" %}
+    determines if the receiver text should have strike-through based on a `Bool`.
+    Several line styles are supported
+    and the color of the line can be specified.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textcase(_:)", "textCase" %}
+    transforms the case of the receiver text to `.lowercase` or `.uppercase`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tracking(_:)", "tracking" %}
+    sets the additional space in points that should be added to each character
+    after layout determines the position of each view.
+    This seems like a rarely used feature.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/underline(_:pattern:color:)", "underline" %}
+    determines if the receiver text should be underlined based on a `Bool`.
+    Several line styles are supported
+    and the color of the line can be specified.
+
+- ScrollView
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldismisseskeyboard(_:)", "scrollDismissesKeyboard" %}
+    specifies whether the on-screen keyboard should be dismissed
+    if the user scrolls the screen while it is displayed.
+    The supported values are
+    `.automatic` (system decides; seems the same as `.never`),
+    `.immediately` (dismisses when scrolling begins),
+    `.interactively` (dismisses if user scrolls up),
+    and `.never` (on-screen keyboard remains visible)
+
+- Text
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/flipsforrighttoleftlayoutdirection(_:)", "flipsForRightToLeftLayoutDirection" %}
+    mirrors the view contents when the layout direction is right-to-left
+    based on a `Bool`
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/minimumscalefactor(_:)", "minimumScaleFactor" %}
+    sets the minimum percentage by which text can be scaled down
+    in order to fit in the space available.
+    This is ideal in cases where surrounding views sometimes grow,
+    leaving less room for certain text.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/truncationmode(_:)", "truncationMode" %}
+    enables eliding text when it does not fit in the available space.
+    Eliding replaced text with an ellipsis and
+    can occur at the beginning, middle, or end of the text
+    based on the mode that is passed which can be `.head`, `.middle`, or `.tail`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-513mb", "lineLimit" %}
+    sets the maximum number of lines onto which text can wrap.
+    Excess text is replaced by an ellipsis.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-251ko", "lineLimit" %}
+    sets the minimum number of lines onto which text will wrap.
+    If fewer lines are required, empty lines are added.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-7ufty", "lineLimit" %}
+    sets the maximum number of lines that will be visible.
+    In `Text` views, excess text is replaced by an ellipsis.
+    In `TextField` views if more lines are needed,
+    the text can be scrolled vertically to see them.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:)-4hzfa", "lineLimit" %}
+    sets both the minimum and maximum number of lines
+    through which text should/can wrap.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linelimit(_:reservesspace:)", "lineLimit" %}
+    sets the maximum number of lines that will be visible
+    and supports reserving space for that number of lines.
+    In `Text` views, excess text is replaced by an ellipsis.
+    In `TextField` views if more lines are needed,
+    the text can be scrolled vertically to see them.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/linespacing(_:)", "lineSpacing" %}
+    sets the space between each wrapped line of text.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/multilinetextalignment(_:)", "multilineTextAlignment" %}
+    determines how each line in wrapped text will be aligned.
+    The supported values are `.leading` (default), `.center`, and `.trailing`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textselection(_:)", "textSelection" %}
+    specifies whether users can select the text for copying.
+    The supported values are `.disabled` default and `.enabled`.
+
+- TextEditor
+
+  The view modifiers listed under `TextField` below
+  likely also work for `TextEditor` views.
+  In addition, the following view modifiers are specific to `TextEditor` views.
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/findnavigator(ispresented:)", "findNavigator" %}
+    presents a find and replace interface when a `Bool` binding is `true`.
+
+  - {% aTargetBlank "", "" %}
+
+- TextField
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/autocorrectiondisabled(_:)", "autocorrectionDisabled" %}
+    conditionally disables autocorrection of entered text based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/keyboardtype(_:)", "keyboardType" %}
+    sets the keyboard type to one of `.default`, `.alphabet`, `.asciiCapable`,
+    `.asciiCapableNumberPad`, `.decimalPad`, `.emailAddress`, `.namePhonePad`,
+    `.numberPad`, `.numbersAndPunctuation`, `.phonePad`, `.twitter`,
+    `.URL`, or `.webSearch`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textinputautocapitalization(_:)", "textInputAutocapitalization" %}
+    specifies when the shift key is automatically enabled.
+    The supported values are:
+    - `.characters`: capitalizes every letter
+    - `.words`: capitalizes the first letter of every word
+    - `.sentences`: capitalizes the first letter of every sentence
+    - `.never`: never automatically capitalizes anything
+  - {% aTargetBlank "", "textContentType" %}
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textcontenttype(_:)-ufdv", "textContentType" %}
+    sets the content type for text input
+    so the system can offer user-specific suggestions.
+    This works on real devices, but not in the Simulator.
+    The supported values, some of which are
+    only available on certain platforms, are:
+
+    - Authentication
+
+      - `.username`
+      - `.password`
+      - `.newPassword`
+      - `.oneTimeCode`
+
+    - Contact
+
+      - `.emailAddress`
+      - `.telephoneNumber`
+
+    - Names
+
+      - `.familyName`
+      - `.givenName`
+      - `.jobTitle`
+      - `.middleName`
+      - `.name`
+      - `.namePrefix`
+      - `.nameSuffix`
+      - `.nickname`
+      - `.organizationName`
+
+    - Locations
+
+      - `.addressCity`
+      - `.addressCityAndState`
+      - `.addressState`
+      - `.countryName`
+      - `.fullStreetAddress`
+      - `.location`
+      - `.postalCode`
+      - `.streetAddressLine1`
+      - `.streetAddressLine2`
+      - `.sublocality`
+
+    - Other
+    - `.creditCardNumber`: doesn't complete
+    - `.dateTime`
+    - `.flightNumber`
+    - `.shipmentTrackingNumber`
+
+  - {% aTargetBlank "", "findNavigator" %}
+  - {% aTargetBlank "", "findDisabled" %}
+  - {% aTargetBlank "", "replaceDisabled" %}
+  - {% aTargetBlank "", "symbolRenderingMode" %}
+  - {% aTargetBlank "", "symbolVariant" %}
+
+### Auxiliary View Modifiers
+
+### Chart View Modifiers
+
+### Style Modifiers
+
+### Layout Modifiers
+
+### Graphics and Rendering Modifiers
+
+### Input and Event Modifiers
+
+### Search Modifiers
+
+### Presentation Modifiers
+
+### State Modifiers
+
+### Deprecated Modifiers
+
+### Color Modifiers
+
+The following view modifiers can change the colors used in a view.
+
+- `background(alignment, content)`
+- `foregroundColor(Color?)`
+- `foregroundStyle(ShapeStyle)`
+- `opacity(Double)`
+- `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
+- `tint(Color?)`
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/background(alignment:content:)",
+"background" %} view modifier takes a `content` argument whose value is
+a `ViewBuilder` function that can return any kind of `View`
+including a `Color`, `Shape`, or `Image`.
+The name of this view modifier doesn't end in `Color` like {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/list/foregroundcolor(_:)",
+"foregroundColor" %} because it can specify background content that is
+any `View` and is not restricted to only being a color.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/shadow(color:radius:x:y:)",
+"shadow" %} view modifier adds a shadow to a view.
+For example:
+
+<img alt="SwiftUI shadow" style="width: 60%"
+  src="/blog/assets/SwiftUI-shadow.png?v={{pkg.version}}"
+  title="SwiftUI shadow">
+
+```swift
+struct ContentView: View {
+    func shadowDemo(radius: CGFloat) -> some View {
+        Text("Shadow Radius \(String(format: "%.0f", radius))")
+            .font(.system(size: 40))
+            .foregroundColor(.blue)
+            .shadow(color: .gray, radius: radius, x: 10, y: 10)
+    }
+
+    var body: some View {
+        VStack {
+            shadowDemo(radius: 0)
+            shadowDemo(radius: 2)
+            shadowDemo(radius: 4)
+        }
+    }
+}
+```
+
+### Size Modifiers
+
+The following view modifiers change the size of a view:
+
+- `frame(width: CGFloat?, height: CGFloat?, alignment: Alignment)`
+- `frame(maxWidth: CGFloat?, maxHeight: CGFloat?, alignment: Alignment)`
+- `scaledToFill()`
+- `scaledToFit()`
+- `scaleEffect(_ scale: CGSize, anchor: UnitPoint)`
+- `scaleEffect(x: CGFloat, y: CGFloat, anchor: UnitPoint)`
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/scaleeffect(_:anchor:)-7q7as",
+"scaleEffect" %} view modifier changes the size of any view.
+By default the view is scaled about its center,
+but this can be changed by specifying the `anchor` argument.
+It does not affect the layout of other views.
+
+For example:
+
+<img alt="SwiftUI scaleEffect" style="width: 60%"
+  src="/blog/assets/SwiftUI-scaleEffect.png?v={{pkg.version}}"
+  title="SwiftUI scaleEffect">
+
+```swift
+VStack(alignment: .leading) {
+    Text("Before")
+    Text("I am scaled!")
+        .padding()
+        .border(.blue)
+        .scaleEffect(1.7, anchor: .center) // using default anchor
+        // Can pass separate x and y scale values instead of
+        // a single scale value that is used for both.
+    Text("After")
+}
+```
+
+### Position Modifiers
+
+The following view modifiers change the position of a view:
+
+- `offset(x: CGFloat, y: CGFloat)`
+- `position(x: CGFloat, y: CGFloat)`
+- `transformEffect(CGAffineTransform)`
+- `transition(AnyTransition)`
+- `zIndex(Double)`
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/offset(x:y:)",
+"offset" %} view modifier moves a view relative to its "natural position"
+without affecting the layout of other views.
+It is passed `x` and `y` arguments that
+specify horizontal and vertical offset distances.
+When applied to views inside a `ZStack` this changes how they overlap.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/position(x:y:)",
+"position" %} view modifier positions a view
+within the coordinate space of its parent view
+without affecting the layout of other views.
+It is passed `x` and `y` arguments that specify the position.
+This is similar to `position: absolute` in CSS.
+
+For example:
+
+<img alt="SwiftUI position" style="width: 60%"
+  src="/blog/assets/SwiftUI-position.png?v={{pkg.version}}"
+  title="SwiftUI position">
+
+```swift
+struct ContentView: View {
+    func shadowDemo(radius: CGFloat) -> some View {
+        Text("Shadow Radius \(String(format: "%.0f", radius))")
+            .font(.system(size: 40))
+            .foregroundColor(.blue)
+            .shadow(color: .gray, radius: radius, x: 10, y: 10)
+    }
+
+    var body: some View {
+        VStack {
+            shadowDemo(radius: 0)
+            shadowDemo(radius: 2)
+            shadowDemo(radius: 4)
+        }
+    }
+}
+```
+
+### Orientation Modifiers
+
+The following view modifiers change the orientation of a view:
+
+- `rotationEffect(angle: Angle, anchor: UnitPoint)`
+- `rotation3DEffect(angle, axis, anchor, anchorZ, perspective)`
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/rotationeffect(_:anchor:)",
+"rotationEffect" %} view modifier rotates any view by
+an angle that is specified in degrees or radians.
+By default the view is rotated about its center,
+but this can be changed by specifying the `anchor` argument.
+It does not affect the layout of other views.
+
+For example:
+
+<img alt="SwiftUI rotationEffect" style="width: 60%"
+  src="/blog/assets/SwiftUI-rotationEffect.png?v={{pkg.version}}"
+  title="SwiftUI rotationEffect">
+
+```swift
+VStack(alignment: .leading) {
+    Text("Before")
+    Text("I am rotated!")
+        .padding()
+        .border(.blue)
+        .rotationEffect(.degrees(-10), anchor: .bottomLeading)
+    Text("After")
+}
+```
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scrollview/rotation3deffect(_:axis:anchor:anchorz:perspective:)",
+"rotation3DEffect" %} view modifier rotates any view
+around any axes (x, y, and z) in 3D space.
+See the `Card` example in the [ViewBuilders](#viewbuilders) section.
+
+### Text Modifiers
+
+The following view modifies change text:
+
+- `textCase(Text.Case?)`
+- `truncationMode(Text.TruncationMode)`
+
+The following example adds a shadow to a `Text` view:
+
+<img alt="SwiftUI Shadow" style="width: 60%"
+  src="/blog/assets/SwiftUI-Shadow.png?v={{pkg.version}}"
+  title="SwiftUI Shadow">
+
+```swift
+Text("Shadow Demo")
+    .padding()
+    .background(.yellow)
+    .shadow(color: .gray, radius: 3, x: 3, y: 3)
+```
+
+Other commonly used view modifiers include:
+
+- `border(ShapeStyle, width: CGFloat = 1)`
+- `cornerRadius(CGFloat, antialiased: Bool)`
+- `disabled(Bool)` disables a form input such as a `Button`
+- `edgesIgnoringSafeArea(Edge.Set)`
+- `font(Font?)`
+- `border(ShapeStyle, width: CGFloat = 1)`
+- `lineLimit(Int?)`
+- `multilineTextAlignment(TextAlignment)`
+- `overlay(ShapeStyle)`
+- `padding(CGFloat)`
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/border(_:width:)",
+"border" %} view modifier adds a border to a view with a given style and width.
+The style can be specified in many ways including using a `Color` or `Gradient`.
+For more advanced borders, see the use of the `overlay` view modifier
+that uses `RoundedRectangle` in the [TextEditor](#texteditor) section.
+Also see the [Marching Ants Border](#marching-ants-border) section.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/multilinetextalignment(_:)",
+"multilineTextAlignment" %} view modifier specifies how text that
+wraps across multiple lines should be horizontally aligned.
+It can be passed `.leading` (default), `.center`, or `.trailing`.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/padding(_:_:)",
+"padding" %} view modifier adds padding to view.
+It can be passed a side which can be a single value or an array of
+`.all` (default), `.leading`, `.trailing`,
+`.horizontal` (same as `.leading` and `.trailing`),
+`.top`, `.bottom`, or `.vertical` (same as `.top` and `.bottom`).
+It can also be passed a `CGFloat` value for the length.
+The length defaults to `nil` and means to use the system default of 20.
+
+### View-specific Modifiers
+
+The following view modifiers change the styling
+of specific kinds of predefined views:
+
+- `buttonStyle(ButtonStyle)`
+- `controlGroupStyle(ControlGroupStyle)`
+- `datePickerStyle(DatePickerStyle)`
+- `gaugeStyle(GaugeStyle)`
+- `indexViewStyle(IndexViewStyle)`
+- `labelStyle(LabelStyle)`
+- `menuStyle(MenuStyle)`
+- `navigationViewStyle(NavigationViewStyle)`
+- `pickerStyle(PickerStyle)`
+- `progressViewStyle(ProgressViewStyle)`
+- `presentedWindowStyle(WindowStyle)`
+- `presentedWindowToolbarStyle(WindowToolbarStyle)`
+- `tableStyle(TableStyle)`
+- `tabViewStyle(TabViewStyle)`
+- `textFieldStyle(TextFieldStyle)`
+- `toggleStyle(ToggleStyle)`
+
+Several view modifiers take a `ShapeStyle` object.
+Types that conform to the `ShapeStyle` protocol include
+`AngularGradient`, `Color`, `ForegroundStyle`, `ImagePaint`,
+`LinearGradient`, and `RadialGradient`.
+
+### Event Handling Modifiers
+
+The event handling methods like `onTapGesture` area also view modifiers.
+This takes a `count` argument with a default value of 1
+that specifies the number of consecutive taps required
+to trigger running a provided closure.
+The `onTapGesture` view modifier can be applied to any view.
+
+Many view modifiers are defined in extensions to the `View` protocol.
+This makes them applicable to any kind of view.
+
+When view modifiers are added to container views,
+they are passed down to all descendant views.
+In the following example, all the `Text` views are red
+because the `VStack` that contains them has
+a view modifier that sets the foreground color.
+
+```swift
+VStack {
+    Text("Alpha")
+    HStack {
+        Text("Beta")
+        Text("Gamma")
+    }
+}.foregroundColor(.red)
+```
+
+### Custom Modifiers
+
+Custom view modifiers can be created by defining
+a struct that implements the `ViewModifier` protocol.
+This requires implementing `body` method that takes
+content which is a `View` to be modified,
+and returns a new `View`.
+The code in the `body` method is similar to that in any custom view.
+
+The following code defines a custom `ViewModifier`
+that allows the view on which it is called to be collapsed.
+It wraps that view in a `VStack` containing two `HStack`s.
+The second `HStack` includes a `Button` containing a chevron icon.
+Clicking the `Button` toggles whether the first `HStack` is rendered.
+It also rotates the chevron icon using animation
+which is covered later in the [Animation](#animation) section.
+
+<img alt="SwiftUI ViewModifier" style="width: 70%"
+  src="/blog/assets/SwiftUI-ViewModifier.png?v={{pkg.version}}"
+  title="SwiftUI ViewModifier">
+
+```swift
+struct Collapsible: ViewModifier {
+    private static let diameter = CGFloat(120)
+    private static var radius: CGFloat { diameter / 2 }
+
+    var bgColor: Color = .gray
+    var duration: Double = 0.5 // in seconds
+
+    @State private var showContent = true
+
+    var halfCircle: some View {
+        Circle()
+            .trim(from: 0, to: 0.5)
+            .fill(bgColor)
+            .frame(
+                width: Collapsible.diameter,
+                height: Collapsible.radius
+            )
+            .offset(x: 0, y: -16)
+    }
+
+    private func toggle() {
+        withAnimation(.easeInOut(duration: duration)) {
+            showContent.toggle()
+        }
+    }
+
+    func body(content: Content) -> some View {
+        VStack {
+            if showContent {
+                HStack {
+                    Spacer()
+                    content
+                    Spacer()
+                }
+                .background(bgColor)
+
+                //TODO: Can you scale the height of the HStack
+                //TODO: instead of using the default fade transition?
+                //.transition(.scale)
+                //.scaleEffect(showContent ? 1 : 0)
+                //.animation(.easeInOut(duration: 1))
+            }
+            HStack {
+                Spacer()
+                ZStack {
+                    Image(systemName: "chevron.down")
+                        .resizable()
+                        .frame(
+                            width: Collapsible.radius / 3,
+                            height: Collapsible.radius / 4
+                        )
+                        .onTapGesture { toggle() }
+                        .rotationEffect( // Angle type is inferred
+                            .degrees(showContent ? 180 : 0)
+                        )
+                        .offset(x: 0, y: -2)
+                        // Use a view as a background.
+                        .background(halfCircle)
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+extension View {
+    func collapsible(
+        bgColor: Color = .black,
+        duration: Double = 0.5) -> some View {
+        modifier(Collapsible(bgColor: bgColor, duration: duration))
+    }
+}
+```
+
+The following code demonstrates using the custom `ViewModifier` defined above.
+
+```swift
+VStack {
+    Text("First line of content")
+    Text("Second line of content")
+}
+.padding()
+
+// This way of applying a view modifier doesn't use the View extension.
+//.modifier(Collapsible(bgColor: ContentView.bgColor))
+
+// This way uses the View extension and is preferred.
+.collapsible(bgColor: ContentView.bgColor)
+```
 
 ## Fonts
 
