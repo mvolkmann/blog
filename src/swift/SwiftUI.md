@@ -1331,6 +1331,46 @@ See the Apple documentation page on {% aTargetBlank
 
 ### Text and Symbol Modifiers
 
+- Fonts
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/bold(_:)", "bold" %}
+    uses a bold font for text.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-1m2tf", "dynamicTypeSize" %}
+    sets the dynamic type size of the receiver to one of `.xSmall`, `.small`,
+    `.medium`, `.large`, `.xLarge`, `.xxLarge`, or `.xxxLarge`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-26aj0", "dynamicTypeSize" %}
+    limits the dynamic type size of the receiver to a value in a given range.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/font(_:)", "font" %}
+    sets the default font of the receiver.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontdesign(_:)", "fontDesign" %}
+    sets the font design used by the receiver to one of
+    `.default`, `.monospaced`, `.rounded`, or `.serif`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontweight(_:)", "fontWeight" %}
+    sets the font weight to one of `.ultralight`, `.thin`, `.light`, `.medium`,
+    `.regular`, `.semibold`, `.bold`, `.heavy`, or `.black`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontwidth(_:)", "fontWidth" %}
+    sets the font width of the receiver to one of
+    `.compressed`, `.condensed`, `.expanded`, or `.standard`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/italic(_:)", "italic" %}
+    determines if the receiver font is italic based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/monospaced(_:)", "monospaced" %}
+    determines if all characters in the receiver should be monospaced based on a `Bool`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/monospaceddigit()", "monospacedDigit" %}
+    determines if digit characters in the receiver should be monospaced.
+    Non-digit characters are not affected.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/strikethrough(_:pattern:color:)", "strikeThrough" %}
+    determines if the receiver text should have strike-through based on a `Bool`.
+    Several line styles are supported
+    and the color of the line can be specified.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textcase(_:)", "textCase" %}
+    transforms the case of the receiver text to `.lowercase` or `.uppercase`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/underline(_:pattern:color:)", "underline" %}
+    determines if the receiver text should be underlined based on a `Bool`.
+    Several line styles are supported
+    and the color of the line can be specified.
+
+  - {% aTargetBlank "", "" %}
+
 ### Auxiliary View Modifiers
 
 ### Chart View Modifiers
