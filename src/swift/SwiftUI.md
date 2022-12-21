@@ -1249,6 +1249,22 @@ See the Apple documentation page on {% aTargetBlank
     changes a `Picker` with `.pickerStyle(.radioGroup)` to
     lay out the radio buttons horizontally rather that vertically (macOS-only).
 
+- Privacy
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/privacysensitive(_:)", "privacySensitive" %}
+    redacts text in the view. This is typically applied to `Text` views.
+    Text will only be redacted if an ancestor view
+    applies the `redacted` view modifier.
+    For example:
+
+    ```swift
+    VStack {
+        Text("public") // not redacted
+        Text("private").privacySensitive() // redacted
+    }
+    .redacted(reason: .privacy)
+    ```
+
 - ScrollViews
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldisabled(_:)", "scrollDisabled" %}
