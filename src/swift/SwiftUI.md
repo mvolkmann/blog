@@ -1199,6 +1199,12 @@ See the Apple documentation page on {% aTargetBlank
     This seems to have very little effect.
     The code example in the documentation doesn't produce the screenshot result.
 
+- Dynamic Island
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamicisland(verticalplacement:)", "dynamicIsland" %}
+    specifies the vertical placement of the receiver
+    in an expanded Live Activity inside the Dynamic Island.
+
 - Foreground
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)", "foregroundStyle" %}
@@ -1212,8 +1218,18 @@ See the Apple documentation page on {% aTargetBlank
 
 - Lists
 
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparator(_:edges:)", "listRowSeparator" %}
+    determines whether the top and bottom list row separators are visible.
+    Row separators are visible by default.
+    Typically this is only applied to hide them
+    using `.listRowSeparator(.hidden)` and not specifying the edges.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listRowSeparatorTint" %}
-    sets list row ting color.
+    sets list row tint color.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listsectionseparator(_:edges:)", "listSectionSeparator" %}
+    determines whether the top and bottom section separators are visible.
+    Section separators are hidden by default.
+    Typically this is only applied to show them
+    using `.listSectionSeparator(.visible)` and not specifying the edges.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowseparatortint(_:edges:)", "listSectionSeparatorTint" %}
     sets list section ting color.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listitemtint(_:)-5ehdr", "listItemTint" %}
@@ -1231,6 +1247,10 @@ See the Apple documentation page on {% aTargetBlank
     - `.automatic`: default; system decides
     - `.fixed`: top to bottom
     - `.priority`: first item is closest to user interaction point; can be top to bottom or bottom to top
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menuindicator(_:)", "menuIndicator" %}
+    determines when the "menu indicator" should be visible.
+    Supported values are `.automatic` (view decides), `.hidden`, and `.visible`.
+    Regardless of the value, I never see a menu indicator!
 
 - Overlays
 
@@ -1265,10 +1285,20 @@ See the Apple documentation page on {% aTargetBlank
     .redacted(reason: .privacy)
     ```
 
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/redacted(reason:)", "redacted" %}
+    provides a reason why some text is redacted which is typically `.privacy`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/unredacted()", "unredacted" %}
+    removes the reason for redacting text from a subview that has a reason.
+
 - ScrollViews
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldisabled(_:)", "scrollDisabled" %}
     disables or enabled the ability to scroll.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrollindicators(_:axes:)", "scrollIndicators" %}
+    determines when scroll indicators should be visible.
+    Scroll indicators are visible by default.
+    Typically this is only applied to hide them
+    using `.scrollIndicators(.hidden)` and not specifying the edges.
 
 - Sections
 
@@ -1283,10 +1313,21 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-23xyq", "tint" %}
     sets tint color.
 
-- category
+- Visibility
 
-  - {% aTargetBlank "", "" %}
-  - {% aTargetBlank "", "" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/hidden()", "hidden" %}
+    hides a view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/labelshidden()", "labelsHidden" %}
+    hides all labels inside a view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/persistentsystemoverlays(_:)", "persistentSystemOverlays" %}
+    What are "system overlays"?
+
+- Widgets
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetaccentable(_:)", "widgetAccentable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(_:)-7wguh", "widgetLabel" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(_:)-8m5o1", "widgetLabel" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(label:)", "widgetLabel" %}
 
 ### Text and Symbol Modifiers
 
