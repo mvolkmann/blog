@@ -1445,15 +1445,6 @@ See the Apple documentation page on {% aTargetBlank
     specifies whether users can select the text for copying.
     Supported values are `.disabled` default and `.enabled`.
 
-  - {% aTargetBlank "", "textInputAutocapitalization" %}
-  - {% aTargetBlank "", "textContentType" %}
-  - {% aTargetBlank "", "textContentType" %}
-  - {% aTargetBlank "", "findNavigator" %}
-  - {% aTargetBlank "", "findDisabled" %}
-  - {% aTargetBlank "", "replaceDisabled" %}
-  - {% aTargetBlank "", "symbolRenderingMode" %}
-  - {% aTargetBlank "", "symbolVariant" %}
-
 - TextField
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/autocorrectiondisabled(_:)", "autocorrectionDisabled" %}
@@ -1463,6 +1454,69 @@ See the Apple documentation page on {% aTargetBlank
     `.asciiCapableNumberPad`, `.decimalPad`, `.emailAddress`, `.namePhonePad`,
     `.numberPad`, `.numbersAndPunctuation`, `.phonePad`, `.twitter`,
     `.URL`, or `.webSearch`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textinputautocapitalization(_:)", "textInputAutocapitalization" %}
+    specifies when the shift key is automatically enabled.
+    Supported values are:
+    - `.characters`: capitalizes every letter
+    - `.words`: capitalizes the first letter of every word
+    - `.sentences`: capitalizes the first letter of every sentence
+    - `.never`: never automatically capitalizes anything
+  - {% aTargetBlank "", "textContentType" %}
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textcontenttype(_:)-ufdv", "textContentType" %}
+    sets the content type for text input
+    so the system can offer user-specific suggestions.
+    This works on real devices, but not in the Simulator.
+    Supported values are:
+
+    - Authentication
+
+      - `.username`
+      - `.password`
+      - `.newPassword`
+      - `.oneTimeCode`
+
+    - Contact
+
+      - `.emailAddress`
+      - `.telephoneNumber`
+
+    - Names
+
+      - `.familyName`
+      - `.givenName`
+      - `.jobTitle`
+      - `.middleName`
+      - `.name`
+      - `.namePrefix`
+      - `.nameSuffix`
+      - `.nickname`
+      - `.organizationName`
+
+    - Locations
+
+      - `.addressCity`
+      - `.addressCityAndState`
+      - `.addressState`
+      - `.countryName`
+      - `.fullStreetAddress`
+      - `.location`
+      - `.postalCode`
+      - `.streetAddressLine1`
+      - `.streetAddressLine2`
+      - `.sublocality`
+
+    - Other
+    - `.creditCardNumber`: doesn't complete
+    - `.dateTime`
+    - `.flightNumber`
+    - `.shipmentTrackingNumber`
+
+  - {% aTargetBlank "", "findNavigator" %}
+  - {% aTargetBlank "", "findDisabled" %}
+  - {% aTargetBlank "", "replaceDisabled" %}
+  - {% aTargetBlank "", "symbolRenderingMode" %}
+  - {% aTargetBlank "", "symbolVariant" %}
 
 ### Auxiliary View Modifiers
 
