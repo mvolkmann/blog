@@ -1249,7 +1249,7 @@ See the Apple documentation page on {% aTargetBlank
     - `.priority`: first item is closest to user interaction point; can be top to bottom or bottom to top
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menuindicator(_:)", "menuIndicator" %}
     determines when the "menu indicator" should be visible.
-    Supported values are `.automatic` (view decides), `.hidden`, and `.visible`.
+    The supported values are `.automatic` (view decides), `.hidden`, and `.visible`.
     Regardless of the value, I never see a menu indicator!
 
 - Overlays
@@ -1395,7 +1395,7 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scrolldismisseskeyboard(_:)", "scrollDismissesKeyboard" %}
     specifies whether the on-screen keyboard should be dismissed
     if the user scrolls the screen while it is displayed.
-    Supported values are
+    The supported values are
     `.automatic` (system decides; seems the same as `.never`),
     `.immediately` (dismisses when scrolling begins),
     `.interactively` (dismisses if user scrolls up),
@@ -1440,10 +1440,10 @@ See the Apple documentation page on {% aTargetBlank
     sets the space between each wrapped line of text.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/multilinetextalignment(_:)", "multilineTextAlignment" %}
     determines how each line in wrapped text will be aligned.
-    Supported values are `.leading` (default), `.center`, and `.trailing`.
+    The supported values are `.leading` (default), `.center`, and `.trailing`.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textselection(_:)", "textSelection" %}
     specifies whether users can select the text for copying.
-    Supported values are `.disabled` default and `.enabled`.
+    The supported values are `.disabled` default and `.enabled`.
 
 - TextField
 
@@ -1456,7 +1456,7 @@ See the Apple documentation page on {% aTargetBlank
     `.URL`, or `.webSearch`.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textinputautocapitalization(_:)", "textInputAutocapitalization" %}
     specifies when the shift key is automatically enabled.
-    Supported values are:
+    The supported values are:
     - `.characters`: capitalizes every letter
     - `.words`: capitalizes the first letter of every word
     - `.sentences`: capitalizes the first letter of every sentence
@@ -1467,7 +1467,8 @@ See the Apple documentation page on {% aTargetBlank
     sets the content type for text input
     so the system can offer user-specific suggestions.
     This works on real devices, but not in the Simulator.
-    Supported values are:
+    The supported values, some of which are
+    only available on certain platforms, are:
 
     - Authentication
 
