@@ -5164,20 +5164,41 @@ There are many view modifiers that change the style of specific kinds of views.
 ### Layout Modifiers
 
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/frame(width:height:alignment:)", "frame" %}
+  places the receiver view in an invisible frame with a specified size and alignment.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/frame(minwidth:idealwidth:maxwidth:minheight:idealheight:maxheight:alignment:)", "frame" %}
+  places the receiver view in an invisible frame with specified size constraints and alignment.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fixedsize()", "fixedSize" %}
+  causes the receiver view to take on its ideal size regardless of its parent view size.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fixedsize(horizontal:vertical:)", "fixedSize" %}
+  causes the receiver view to take on its ideal size in specific dimensions
+  (horizontal and/or vertical) regardless of its parent view size.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/layoutpriority(_:)", "layoutPriority" %}
+  changes the priority under which space is allocated to the receiver view
+  relative to sibling views.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/position(_:)", "position" %}
+  positions the center of the receiver view at a specific `CGPoint`
+  in coordinate space of its parent.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/position(x:y:)", "position" %}
+  positions the center of the receiver view at specific x and y coordinates
+  in coordinate space of its parent.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/offset(_:)", "offset" %}
+  offsets the receiver view by a `CGSize`.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/offset(x:y:)", "offset" %}
+  offsets the receiver view by x and y distances.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/coordinatespace(name:)", "coordinateSpace" %}
+  assigns a name to the coordinate space of the receiver view
+  that can be used in other views to
+  operate on points and sizes in that coordinate space.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alignmentguide(_:computevalue:)-9mdoh", "alignmentGuide" %}
+  sets the horizontal alignment of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alignmentguide(_:computevalue:)-6y3u2", "alignmentGuide" %}
+  sets the vertical alignment of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:)-68shk", "padding" %}
+  adds the same padding to all sizes of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:_:)", "padding" %}
+  adds the same padding to specific sides (edges) of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:)-6pgqq", "padding" %}
+  adds different amounts of padding to specific sides (edges) of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowinsets(_:)", "listRowInsets" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scenepadding(_:)", "scenePadding" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scenepadding(_:edges:)", "scenePadding" %}
