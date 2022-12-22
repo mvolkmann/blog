@@ -5108,15 +5108,20 @@ See the Apple documentation page on {% aTargetBlank
 
 - Status Bars
 
-  - {% aTargetBlank "", "statusBarHidden" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/statusbarhidden(_:)", "statusBarHidden" %}
+    conditionally hides the status bar that typically displays the
+    current time, Wi-Fi strength, and battery level
+    based on a `Bool` argument that defaults to `true`.
 
 - Touch Bars
 
-  - {% aTargetBlank "", "touchBar" %}
-  - {% aTargetBlank "", "touchBar" %}
-  - {% aTargetBlank "", "touchBarItemPrincipal" %}
-  - {% aTargetBlank "", "touchBarCustomizationLabel" %}
-  - {% aTargetBlank "", "touchBarItemPresence" %}
+  These view modifiers affect the touch bar on some MacBook models.
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/touchbar(content:)", "touchBar" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/touchbar(_:)", "touchBar" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/touchbaritemprincipal(_:)", "touchBarItemPrincipal" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/touchbarcustomizationlabel(_:)", "touchBarCustomizationLabel" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/touchbaritempresence(_:)", "touchBarItemPresence" %}
 
 ### Chart View Modifiers
 
