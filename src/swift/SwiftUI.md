@@ -5030,23 +5030,80 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdestination(ispresented:destination:)", "navigationDestination" %}
     navigates to a given destination view when a `Bool` binding becomes `true`.
 
-GRONK
-
-  - {% aTargetBlank "", "navigationSplitViewColumnWidth" %}
-  - {% aTargetBlank "", "navigationSplitViewColumnWidth" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationsplitviewcolumnwidth(_:)", "navigationSplitViewColumnWidth" %}
+    sets a fixed width for a specific column in a `NavigationSplitView`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationsplitviewcolumnwidth(min:ideal:max:)", "navigationSplitViewColumnWidth" %}
+    sets a flexible, preferred width for a specific column in a `NavigationSplitView`.
 
 - Toolbars
 
-  - {% aTargetBlank "", "toolbar" %}
-  - {% aTargetBlank "", "toolbar" %}
-  - {% aTargetBlank "", "toolbar" %}
-  - {% aTargetBlank "", "toolbar" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbar(content:)-7vdkx", "toolbar" %}
+    adds content to a navigation bar or toolbar.
+    The content can be any kind of views.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbar(content:)-5w0tj", "toolbar" %}
+    adds content to a navigation bar or toolbar.
+    The content must be instances of `ToolbarItem` or `ToolbarGroup`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbar(id:content:)", "toolbar" %}
+    adds content to a navigation bar or toolbar.
+    The content must be instances of `CustomizableToolbarContent`
+    which allows users to customize the views and their layout.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbar(_:for:)", "toolbar" %}
+    changes the visibility of specified toolbars.
 
-  - {% aTargetBlank "", "toolbarBackground" %}
-  - {% aTargetBlank "", "toolbarBackground" %}
-  - {% aTargetBlank "", "toolbarColorScheme" %}
-  - {% aTargetBlank "", "toolbarRole" %}
-  - {% aTargetBlank "", "toolbarTitleMenu" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbarbackground(_:for:)-5ybst", "toolbarBackground" %}
+    sets the background `ShapeStyle` of specified toolbars.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbarbackground(_:for:)-7lv0f", "toolbarBackground" %}
+    changes the visibility of the background for specified toolbars.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbarcolorscheme(_:for:)", "toolbarColorScheme" %}
+    changes the `ColorScheme` used by specified toolbars.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbarrole(_:)", "toolbarRole" %}
+    changes the semantic role of the content in a specific toolbar.
+    The supported roles are `.browser`, `.editor`, and `.navigationStack`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbartitlemenu(content:)", "toolbarTitleMenu" %}
+    adds a menu to a navigation bar title or a toolbar title.
+    The following code example displays the current date
+    in the navigation bar title.
+    There is a menu indicator on its right side
+    that can be tapped to reveal a menu containing a button.
+    Tapping the button opens a sheet containing a `DatePicker`
+    where the user can select a different date.
+
+    ```swift
+    struct ContentView: View {
+        @State private var selectedDate = Date.now
+        @State private var isSelecting = false
+
+        var body: some View {
+            NavigationStack {
+                VStack {
+                    Text("The selected date is")
+                    Text(selectedDate, style: .date)
+                }
+                .navigationTitle(
+                    Text(selectedDate, style: .date)
+                )
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarTitleMenu {
+                    Button("Change Date") {
+                        isSelecting = true
+                    }
+                }
+                .sheet(isPresented: $isSelecting) {
+                    DatePicker(
+                        "Select date",
+                        selection: $selectedDate,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(.graphical)
+                    .presentationDetents([.medium])
+                    .onChange(of: selectedDate) { _ in
+                        isSelecting = false
+                    }
+                }
+            }
+        }
+    }
+    ```
 
 - Status Bars
 
