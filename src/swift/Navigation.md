@@ -20,6 +20,80 @@ Also see the excellent YouTube videos from Stewart Lynch:
 - {% aTargetBlank "https://www.youtube.com/watch?v=pwP3_OX2G9A", "Back to Root and Deep Links" %}
 - {% aTargetBlank "https://www.youtube.com/watch?v=RsmMLLL8FB0", "NavigationSplitView in iOS 16" %}
 
+## Basic Example
+
+In this example the initial screen contains three navigation links
+and a `Button`. Tapping any of these navigates
+to a detail view for a selected kind of fruit.
+
+<img alt="SwiftUI Navigation Basic" style="width: 50%"
+  src="/blog/assets/SwiftUI-Navigation-Basic.png?v={{pkg.version}}"
+  title="SwiftUI Navigation Basic">
+
+```swift
+struct ContentView: View {
+    @State private var showingBanana = false
+    private let fruits = ["Apple", "Banana", "Cherry"]
+
+    var body: some View {
+        NavigationStack {
+            VStack {
+                ForEach(fruits, id: \.self) { fruit in
+                    NavigationLink(fruit, value: fruit)
+                }
+
+                Button("Go Ape!") { showingBanana.toggle() }
+                    .buttonStyle(.borderedProminent)
+            }
+            .navigationTitle("Fruits")
+            .navigationDestination(for: String.self) { item in
+                switch item {
+                case "Apple":
+                    AppleView()
+                case "Banana":
+                    BananaView()
+                case "Cherry":
+                    CherryView()
+                default:
+                    Text("unsupported fruit")
+                }
+            }
+            .navigationDestination(isPresented: $showingBanana) {
+                BananaView()
+            }
+        }
+    }
+}
+
+struct AppleView: View {
+    private let name = "Apple"
+
+    var body: some View {
+        Image(name)
+            .navigationTitle(name)
+            .navigationBarTitleDisplayMode(.automatic)
+    }
+}
+
+struct BananaView: View {
+    private let name = "Banana"
+
+    var body: some View {
+        Image(name).navigationTitle(name)
+            .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct CherryView: View {
+    private let name = "Cherry"
+
+    var body: some View {
+        Image(name).navigationTitle(name)
+            .navigationBarTitleDisplayMode(.large)
+    }
+}
+```
+
 ## Example App
 
 See {% aTargetBlank "https://github.com/mvolkmann/NavigationStackDemo",
@@ -34,7 +108,8 @@ The first tab "Fruits" is implemented in the file `FruitListView.swift`.
 It uses a `NavigationStack` to allow the user
 to select a fruit from a `List` of `NavigationLink` views.
 
-<img alt="Fruits List" src="/blog/assets/swiftui-navigation-01-fruits.png?v={{pkg.version}}">
+<img alt="Fruits List"
+  src="/blog/assets/swiftui-navigation-01-fruits.png?v={{pkg.version}}">
 
 Nested inside the `NavigationStack` are instances of `NavigationLink`.
 This struct supports many initializers, some of which take a `value` argument.
@@ -43,7 +118,8 @@ When these links are tapped, their value is placed on the stack.
 When a fruit is selected, a view that displays "You chose {fruit-emoji}."
 is pushed onto the navigation stack.
 
-<img alt="Fruits Detail" src="/blog/assets/swiftui-navigation-02-fruit.png?v={{pkg.version}}" />
+<img alt="Fruits Detail"
+  src="/blog/assets/swiftui-navigation-02-fruit.png?v={{pkg.version}}" />
 
 Click "< Fruits" in the upper-left to return to the list of fruits.
 The "Show Favorite" button at the bottom demonstrates a `NavigationList`
@@ -58,12 +134,14 @@ The second tab "Authors" is implemented in the file `AuthorListView`.
 It uses a `NavigationStack` to allow the user
 to select an `Author` from a `List` of `NavigationLink` views.
 
-<img alt="Authors List" src="/blog/assets/swiftui-navigation-03-authors.png?v={{pkg.version}}" />
+<img alt="Authors List"
+  src="/blog/assets/swiftui-navigation-03-authors.png?v={{pkg.version}}" />
 
 When an author is selected, a view that displays specific information
 about the author is pushed onto the navigation stack.
 
-<img alt="Author Detail" src="/blog/assets/swiftui-navigation-04-author.png?v={{pkg.version}}" />
+<img alt="Author Detail"
+  src="/blog/assets/swiftui-navigation-04-author.png?v={{pkg.version}}" />
 
 There are four `navigationDestination` registrations that handle the types:
 
@@ -99,12 +177,14 @@ setting the that state variable to an empty array.
 The third tab "Countries Stack" uses a `NavigationStack` to allow the user
 to select a `Country` from a `List` of `NavigationLink` views.
 
-<img alt="Countries List" src="/blog/assets/swiftui-navigation-05-stack.png?v={{pkg.version}}" />
+<img alt="Countries List"
+  src="/blog/assets/swiftui-navigation-05-stack.png?v={{pkg.version}}" />
 
 When a country is selected, a view that displays a list of
 cities in the country is pushed onto the navigation stack.
 
-<img alt="Cities List" src="/blog/assets/swiftui-navigation-06-stack.png?v={{pkg.version}}" />
+<img alt="Cities List"
+  src="/blog/assets/swiftui-navigation-06-stack.png?v={{pkg.version}}" />
 
 Each city is represented by a `NavigationLink`. Tapping one of these pushes
 a view onto the stack that displays detailed information about that city.
@@ -115,7 +195,8 @@ is displayed below the city data.
 The "Back to Countries" button demonstrates popping back to
 the initial view in this tab.
 
-<img alt="City Detail" src="/blog/assets/swiftui-navigation-07-stack.png?v={{pkg.version}}" />
+<img alt="City Detail"
+  src="/blog/assets/swiftui-navigation-07-stack.png?v={{pkg.version}}" />
 
 ### Countries Split tab
 
@@ -129,11 +210,14 @@ the second column contains a list of cities in the selected country,
 and the third column contains detail about the selected city.
 Having a "Back to Countries" button doesn't apply in this scenario.
 
-<img alt="Countries List" src="/blog/assets/swiftui-navigation-08-split.png?v={{pkg.version}}" />
+<img alt="Countries List"
+  src="/blog/assets/swiftui-navigation-08-split.png?v={{pkg.version}}" />
 
-<img alt="Cities List" src="/blog/assets/swiftui-navigation-09-split.png?v={{pkg.version}}" />
+<img alt="Cities List"
+  src="/blog/assets/swiftui-navigation-09-split.png?v={{pkg.version}}" />
 
-<img alt="City Detail" src="/blog/assets/swiftui-navigation-10-split.png?v={{pkg.version}}" />
+<img alt="City Detail"
+  src="/blog/assets/swiftui-navigation-10-split.png?v={{pkg.version}}" />
 
 ## Deep Linking
 

@@ -1269,6 +1269,16 @@ struct ContentView: View {
 }
 ```
 
+To avoid the need to specify `id: \.self` for `String` values,
+define the following extension:
+
+```swift
+// Make String instances identifiable by their value.
+extension String: Identifiable {
+    public var id: String { self }
+}
+```
+
 ### @Binding
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/binding",
@@ -4970,27 +4980,58 @@ See the Apple documentation page on {% aTargetBlank
 
 - Navigation
 
-  - {% aTargetBlank "", "navigationTitle" %}
-  - {% aTargetBlank "", "navigationTitle" %}
-  - {% aTargetBlank "", "navigationTitle" %}
-  - {% aTargetBlank "", "navigationTitle" %}
-  - {% aTargetBlank "", "navigationTitle" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-avgj", "navigationTitle" %}
+    sets the title to appear in the navigation bar from a `String`.
+    This should be applied to the top-most view in each screen.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-43srq", "navigationTitle" %}
+    sets the title to appear in the navigation bar from a `LocalizedStringKey`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-5di1u", "navigationTitle" %}
+    sets the title to appear in the navigation bar from a `Text` view.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-6jofs", "navigationTitle" %}
+    sets the title to appear in the navigation bar from
+    the return value of a function that takes no arguments.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationtitle(_:)-7onr8", "navigationTitle" %}
+    sets the title to appear in the navigation bar from a `String` binding.
 
-  - {% aTargetBlank "", "navigationSubtitle" %}
-  - {% aTargetBlank "", "navigationSubtitle" %}
-  - {% aTargetBlank "", "navigationSubtitle" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationsubtitle(_:)-262n7", "navigationSubtitle" %}
+    sets the subtitle to appear in the navigation bar from a `String`.
+    This is only available in macOS.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationsubtitle(_:)-50cfm", "navigationSubtitle" %}
+    sets the subtitle to appear in the navigation bar from a `LocalizedStringKey`.
+    This is only available in macOS.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationsubtitle(_:)-2h20t", "navigationSubtitle" %}
+    sets the subtitle to appear in the navigation bar from a `Text` view.
+    This is only available in macOS.
 
-  - {% aTargetBlank "", "navigationDocument" %}
-  - {% aTargetBlank "", "navigationDocument" %}
-  - {% aTargetBlank "", "navigationDocument" %}
-  - {% aTargetBlank "", "navigationDocument" %}
-  - {% aTargetBlank "", "navigationDocument" %}
-  - {% aTargetBlank "", "navigationDocument" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdocument(_:)-66zro", "navigationDocument" %}
+    adds a document preview. Clicking the preview navigates to the document.
+    I could not get this to display a preview!
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdocument(_:)-6ivu7", "navigationDocument" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdocument(_:preview:)-3i9fs", "navigationDocument" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdocument(_:preview:)-79zbw", "navigationDocument" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdocument(_:preview:)-il3y", "navigationDocument" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdocument(_:preview:)-lqif", "navigationDocument" %}
 
-  - {% aTargetBlank "", "navigationBarBackButtonHidden" %}
-  - {% aTargetBlank "", "navigationBarTitleDisplayMode" %}
-  - {% aTargetBlank "", "navigationDestination" %}
-  - {% aTargetBlank "", "navigationDestination" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationbarbackbuttonhidden(_:)", "navigationBarBackButtonHidden" %}
+    conditionally hides the navigation back button ("<")
+    based on a `Bool` value that defaults to `true`.
+    This should be applied to the top-most view in each screen.
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationbartitledisplaymode(_:)", "navigationBarTitleDisplayMode" %}
+    sets the title display mode to one of:
+
+    - `.automatic`: inherit from previous navigation item which defaults to `.large`; default
+    - `.inline`: navigation title on same line as back button in smaller font
+    - `.large`: navigation title on line after back button in larger font
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdestination(for:destination:)", "navigationDestination" %}
+    takes a data type and a closure that selects a destination view
+    based on the value of that data type passed to the closure.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationdestination(ispresented:destination:)", "navigationDestination" %}
+    navigates to a given destination view when a `Bool` binding becomes `true`.
+
+GRONK
+
   - {% aTargetBlank "", "navigationSplitViewColumnWidth" %}
   - {% aTargetBlank "", "navigationSplitViewColumnWidth" %}
 
