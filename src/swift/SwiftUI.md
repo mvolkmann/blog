@@ -4693,9 +4693,9 @@ See the Apple documentation page on {% aTargetBlank
 - Tint
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-93mfq", "tint" %}
-    sets tint shape.
+    sets the tint shape.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tint(_:)-23xyq", "tint" %}
-    sets tint color.
+    sets the tint color.
 
 - Visibility
 
@@ -4707,6 +4707,10 @@ See the Apple documentation page on {% aTargetBlank
     What are "system overlays"?
 
 - Widgets
+
+  These view modifiers are related to the {% aTargetBlank
+  "https://developer.apple.com/documentation/widgetkit", "WidgetKit" %}
+  framework.
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetaccentable(_:)", "widgetAccentable" %}
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgetlabel(_:)-7wguh", "widgetLabel" %}
@@ -5158,6 +5162,34 @@ There are many view modifiers that change the style of specific kinds of views.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/togglestyle(_:)", "toggleStyle" %}
 
 ### Layout Modifiers
+
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/frame(width:height:alignment:)", "frame" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/frame(minwidth:idealwidth:maxwidth:minheight:idealheight:maxheight:alignment:)", "frame" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fixedsize()", "fixedSize" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fixedsize(horizontal:vertical:)", "fixedSize" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/layoutpriority(_:)", "layoutPriority" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/position(_:)", "position" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/position(x:y:)", "position" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/offset(_:)", "offset" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/offset(x:y:)", "offset" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/coordinatespace(name:)", "coordinateSpace" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alignmentguide(_:computevalue:)-9mdoh", "alignmentGuide" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alignmentguide(_:computevalue:)-6y3u2", "alignmentGuide" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:)-68shk", "padding" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:_:)", "padding" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:)-6pgqq", "padding" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowinsets(_:)", "listRowInsets" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scenepadding(_:)", "scenePadding" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scenepadding(_:edges:)", "scenePadding" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gridcellcolumns(_:)", "gridCellColumns" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gridcellanchor(_:)", "gridCellAnchor" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gridcellunsizedaxes(_:)", "gridCellUnsizedAxes" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gridcolumnalignment(_:)", "gridColumnAlignment" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ignoressafearea(_:edges:)", "ignoresSafeArea" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/safeareainset(edge:alignment:spacing:content:)-6gwby", "safeAreaInset" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/safeareainset(edge:alignment:spacing:content:)-4s51l", "safeAreaInset" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/zindex(_:)", "zIndex" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/layoutvalue(key:value:)", "layoutValue" %}
 
 ### Graphics and Rendering Modifiers
 
