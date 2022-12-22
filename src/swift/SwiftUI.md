@@ -5200,12 +5200,32 @@ There are many view modifiers that change the style of specific kinds of views.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:)-6pgqq", "padding" %}
   adds different amounts of padding to specific sides (edges) of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/listrowinsets(_:)", "listRowInsets" %}
+  adds insets to specified sides (edges) of list rows.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scenepadding(_:)", "scenePadding" %}
+  adds scene-specific padding to the specified sides (edges)
+  of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scenepadding(_:edges:)", "scenePadding" %}
+  adds the specified kind of scene-specific padding to the
+  specified sides (edges) of the receiver view.
+  The supported kinds of padding are `.minimum` and `.navigationBar`.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gridcellcolumns(_:)", "gridCellColumns" %}
+  sets the number of columns that a grid cell should span.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gridcellanchor(_:)", "gridCellAnchor" %}
+  sets the anchor position of a grid cell using a `UnitPoint` which
+  takes `x` and `y` arguments whose values are `CGFloat` values between 0 and 1.
+  Alternatively the following static properties can be used:
+
+  - `.zero` (origin)
+  - `.topLeading`, `.top`, `.topTrailing`
+  - `.leading`, `.center`, `.trailing`
+  - `.bottomLeading`, `.bottom`, `.bottomTrailing`
+
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gridcellunsizedaxes(_:)", "gridCellUnsizedAxes" %}
+  tells a grid layout not to offer extra size in the specified axes to views.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gridcolumnalignment(_:)", "gridColumnAlignment" %}
+  overrides the default horizontal alignment of the grid column
+  in which the receiver view appears.
+
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ignoressafearea(_:edges:)", "ignoresSafeArea" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/safeareainset(edge:alignment:spacing:content:)-6gwby", "safeAreaInset" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/safeareainset(edge:alignment:spacing:content:)-4s51l", "safeAreaInset" %}
