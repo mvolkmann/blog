@@ -5125,7 +5125,37 @@ See the Apple documentation page on {% aTargetBlank
 
 ### Chart View Modifiers
 
+There are too many chart-related view modifiers to describe here.
+See {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view-chart-view",
+"Chart view modifiers" %} and my {% aTargetBlank
+"http://localhost:8080/blog/topics/#/blog/swift/SwiftCharts/?v=1.0.20",
+"Swift Charts" %} blog page.
+
 ### Style Modifiers
+
+There are many view modifiers that change the style of specific kinds of views.
+
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/buttonstyle(_:)-66fbx", "buttonStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/buttonstyle(_:)-7qx1", "buttonStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/controlgroupstyle(_:)", "controlGroupStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/datepickerstyle(_:)", "datePickerStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/disclosuregroupstyle(_:)", "disclosureGroupStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gaugestyle(_:)", "gaugeStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/groupboxstyle(_:)", "groupBoxStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/indexviewstyle(_:)", "indexViewStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/labelstyle(_:)", "labelStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/liststyle(_:)", "listStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/menustyle(_:)", "menuStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/navigationsplitviewstyle(_:)", "navigationSplitViewStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/pickerstyle(_:)", "pickerStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/presentedwindowstyle(_:)", "presentedWindowStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/presentedwindowtoolbarstyle(_:)", "presentedWindowToolbarStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/progressviewstyle(_:)", "progressViewStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tablestyle(_:)", "tableStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tabviewstyle(_:)", "tabViewStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/textfieldstyle(_:)", "textFieldStyle" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/togglestyle(_:)", "toggleStyle" %}
 
 ### Layout Modifiers
 
