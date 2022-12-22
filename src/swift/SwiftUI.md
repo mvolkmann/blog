@@ -4943,17 +4943,30 @@ See the Apple documentation page on {% aTargetBlank
 
 - Context Menus
 
-TODO: STOPPED HERE!
-
-- {% aTargetBlank "", "contextMenu" %}
-- {% aTargetBlank "", "contextMenu" %}
-- {% aTargetBlank "", "contextMenu" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/contextmenu(menuitems:)", "contextMenu" %}
+  adds a context menu to the receiver
+  that is displayed when the user long presses.
+  The context menu can contain `Button`, `Toggle`, and `Picker` views.
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/contextmenu(menuitems:preview:)", "contextMenu" %}
+  adds a context menu to the receiver that includes a preview.
+  The preview is typically an `Image` found in `Assets.xcassets`
+  that is displayed above the context menu.
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/contextmenu(forselectiontype:menu:primaryaction:)", "contextMenu" %}
+  adds a context menu to the receiver that
+  has functionality that will not be obvious to users and is best avoided.
 
 - Help
 
-  - {% aTargetBlank "", "help" %}
-  - {% aTargetBlank "", "help" %}
-  - {% aTargetBlank "", "help" %}
+  TODO: It is unclear what action users must take to cause the help text
+  described by this view modifiers to be displayed!
+  See https://forums.swift.org/t/triggering-help-in-ios/62184.
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/help(_:)-6oiyb", "help" %}
+    adds help text to the receiver view using a `String`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/help(_:)-4y7cy", "help" %}
+    adds help text to the receiver view using a `LocalizedStringKey`.
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/help(_:)-9lm7l", "help" %}
+    adds help text to the receiver view using a `Text` view.
 
 - Navigation
 
