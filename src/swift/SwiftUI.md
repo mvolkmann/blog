@@ -5061,6 +5061,7 @@ See the Apple documentation page on {% aTargetBlank
     The supported roles are `.browser`, `.editor`, and `.navigationStack`.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/toolbartitlemenu(content:)", "toolbarTitleMenu" %}
     adds a menu to a navigation bar title or a toolbar title.
+    I was able to get this to work for a navigation bar, but not for a toolbar.
     The following code example displays the current date
     in the navigation bar title.
     There is a menu indicator on its right side
