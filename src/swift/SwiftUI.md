@@ -3232,8 +3232,9 @@ In that case use the `onTapGesture` modifier instead.
 By default buttons have no border, no background color,
 and the text is the accent color.
 
-When the `buttonStyle` view modifier is passed `.bordered`,
-the background is gray.
+When the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/buttonstyle(_:)-7qx1",
+"buttonStyle" %} view modifier is passed `.bordered`, the background is gray.
 When the `buttonStyle` view modifier is passed `.borderedProminent`,
 the background is the accent color and the text is white.
 In both cases no actual border is drawn.
@@ -3304,6 +3305,53 @@ struct ContentView: View {
 
             Text("You tapped button #\(number)").padding()
         }
+    }
+}
+```
+
+#### Custom ButtonStyle
+
+When an app uses several `Button` instances
+that require the same customized styling,
+it is useful to define a custom `ButtonStyle`
+and apply that to each of the buttons.
+For example:
+
+<img alt="SwiftUI Custom Buttons" style="width: 20%"
+    src="/blog/assets/SwiftUI-Custom-Buttons.png?v={{pkg.version}}"
+    title="SwiftUI Custom Buttons">
+
+```swift
+struct MyButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: 30, weight: .bold))
+            .padding(15)
+            .foregroundColor(.white)
+            .background(.purple)
+            .clipShape(Capsule())
+            .overlay(Capsule().strokeBorder(.blue, lineWidth: 3))
+            .scaleEffect(configuration.isPressed ? 1.25 : 1)
+            .animation(
+                .linear(duration: 0.1),
+                value: configuration.isPressed
+            )
+    }
+}
+
+struct ContentView: View {
+    @State private var selection = ""
+
+    var body: some View {
+        VStack(spacing: 30) {
+            Button("First") { selection = "First" }
+            Button("Second") { selection = "Second" }
+            if !selection.isEmpty {
+                Text("You selected \(selection).")
+            }
+        }
+        .buttonStyle(MyButtonStyle())
+        .padding()
     }
 }
 ```
@@ -4443,6 +4491,63 @@ The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/gauge",
 "Gauge" %} view shows a current value in relation to minimum and maximum values.
 One example is a car fuel gauge.
 This is currently only supported in watchOS.
+
+We can build a similar view to use on other platforms.
+For example:
+
+```swift
+struct MyGauge: View {
+    var value: Double
+    var min = 0.0
+    var max = 100.0
+    let fontSize: CGFloat = 50
+    var strokeColor: Color = .blue
+    var strokeWidth = 20.0
+    var textColor: Color = .black
+
+    var body: some View {
+        ZStack {
+            let percent = (value - min) / (max - min)
+            Circle()
+                .trim(from: 0, to: percent)
+                .stroke(
+                    strokeColor,
+                    style: StrokeStyle(
+                        lineWidth: strokeWidth,
+                        lineCap: .round
+                    )
+                )
+                .rotationEffect(.degrees(-90))
+
+            Text(String(format: "%.0f", value))
+                .font(.system(size: fontSize, weight: .bold))
+                .foregroundColor(textColor)
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var value = 25.0
+
+    var body: some View {
+        VStack {
+            MyGauge(
+                value: value,
+                strokeColor: .red,
+                strokeWidth: 15,
+                textColor: .blue
+            )
+            .frame(width: 150, height: 150)
+
+            Slider(value: $value, in: 0 ... 100, step: 1) {
+                Text("Value")
+            }
+            .padding(.top)
+        }
+        .padding()
+    }
+}
+```
 
 ### EmptyView
 
@@ -6278,10 +6383,12 @@ rather than creating views whose code is long and deeply nested.
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/shape",
 "Shape" %} protocol inherits from the `View` protocol
 and there are many provided views that inherit from `Shape`.
-Examples include {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/circle", "Circle" %} and
-{% aTargetBlank "https://developer.apple.com/documentation/swiftui/rectangle",
-"Rectangle" %}.
+Examples include
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/capsule", "Capsule" %},
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/circle", "Circle" %},
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/ellipse", "Ellipse" %},
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/rectangle", "Rectangle" %}, and
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/roundedrectangle", "RoundedRectangle" %}.
 
 By default, all views that inherit from `Shape` are
 filled with the foreground color of their parent view.
