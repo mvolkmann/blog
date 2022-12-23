@@ -4081,6 +4081,7 @@ struct ContentView: View {
                 imageMessage,
                 item: image,
                 message: Text(imageMessage),
+                // The preview appears at the top of the share sheet.
                 preview: SharePreview(imageName, image: image)
             )
             .font(.system(size: linkSize))
