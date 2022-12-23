@@ -5227,22 +5227,183 @@ There are many view modifiers that change the style of specific kinds of views.
   in which the receiver view appears.
 
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ignoressafearea(_:edges:)", "ignoresSafeArea" %}
+  expands the receiver view out of its safe area.
+  The safe areas to ignore can be specified with the values `.all` (default),
+  `.container` (includes top and bottom bars),
+  and `.keyboard` (on-screen keyboard).
+  The sides (edges) to expand can be specified with the values `.all` (default),
+  `.top`, `.bottom`, `.leading`, `.trailing`, `.horizontal`, and `.vertical`.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/safeareainset(edge:alignment:spacing:content:)-6gwby", "safeAreaInset" %}
+  shows the receiver view beside the modifier view. What does this mean?
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/safeareainset(edge:alignment:spacing:content:)-4s51l", "safeAreaInset" %}
+  shows the receiver view above or below the modifier view. What does this mean?
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/zindex(_:)", "zIndex" %}
+  sets the stacking order of the receiver view.
+  One use is to make the view appear below views that were rendered before it.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/layoutvalue(key:value:)", "layoutValue" %}
+  associates a value with a custom layout property.
+  Is this use when a custom approach for laying out views has been implemented?
+  Is this related to the
+  {% aTargetBlank "/blog/topics/#/blog/swift/LayoutProtocol/", "Layout" %}
+  protocol added in iOS 16?
 
 ### Graphics and Rendering Modifiers
 
+- Masking and Clipping
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/clipped(antialiased:)", "clipped" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/clipshape(_:style:)", "clipShape" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/containershape(_:)", "containerShape" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/cornerradius(_:antialiased:)", "cornerRadius" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/mask(alignment:_:)", "mask" %}
+
+- Scaling
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/aspectratio(_:contentmode:)-6j7xz", "aspectRatio" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/aspectratio(_:contentmode:)-771ow", "aspectRatio" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/imagescale(_:)", "imageScale" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scaledtofill()", "scaledToFill" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scaledtofit()", "scaledToFit" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scaleeffect(_:anchor:)-7q7as", "scaleEffect" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scaleeffect(_:anchor:)-pmi7", "scaleEffect" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scaleeffect(x:y:anchor:)", "scaleEffect" %}
+
+- Transformations
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/projectioneffect(_:)", "projectionEffect" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/rotation3deffect(_:axis:anchor:anchorz:perspective:)", "rotation3DEffect" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/rotationeffect(_:anchor:)", "rotationEffect" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/transformeffect(_:)", "transformEffect" %}
+
+- Graphical Effects
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/blur(radius:opaque:)", "blur" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/brightness(_:)", "brightness" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/colorinvert()", "colorInvert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/colormultiply(_:)", "colorMultiply" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/contrast(_:)", "contrast" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/grayscale(_:)", "grayscale" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/huerotation(_:)", "hueRotation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/luminancetoalpha()", "luminanceToAlpha" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/opacity(_:)", "opacity" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/saturation(_:)", "saturation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/shadow(color:radius:x:y:)", "shadow" %}
+
+- Composites
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/blendmode(_:)", "blendMode" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/compositinggroup()", "compositingGroup" %}
+  - {% aTargetBlank https://developer.apple.com/documentation/swiftui/view/drawinggroup(opaque:colormode:)", "drawingGroup" %}
+
+- Animations
+
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/animation(_:)-7mq1i", "animation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/animation(_:value:)", "animation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/contenttransition(_:)", "contentTransition" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/contenttransition(_:)", "contentTransition" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/matchedgeometryeffect(id:in:properties:anchor:issource:)", "matchedGeometryEffect" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/transaction(_:)", "transition" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/transition(_:)", "transition" %}
+
 ### Input and Event Modifiers
+
+- Interactivity
+
+- List Controls
+
+- Taps and Gestures
+
+- Keyboard Shortcuts
+
+- Hover
+
+- Focus
+
+- Copy and Paste
+
+- Drag and Drop
+
+- Submission
+
+- Movement
+
+- Commands
+
+- Digital Crown
+
+- User Activities
+
+- View Life Cycle
+
+- File Renaming
+
+- URLs
+
+- Publisher Events
+
+- Hit Testing
+
+- Content Shape
+
+- Import and Export
+
+- App Intents
 
 ### Search Modifiers
 
+- Displaying a Search Interface
+
+- Searching with Tokens
+
+- Making Search Suggestions
+
+- Limiting Search Scope
+
 ### Presentation Modifiers
+
+- Alerts without a Message
+
+- Alerts with a Message
+
+- Confirmation Dialogs without a Message
+
+- Confirmation Dialogs with a Message
+
+- Sheets
+
+- Popovers
+
+- Configuration for Sheets and Popovers
+
+- File Managers
+
+- Quick Look Previews
+
+- Family Sharing
+
+- Live Activities
+
+- Apple Music
+
+- StoreKey
+
+- PhotoKit
 
 ### State Modifiers
 
+- Identity
+
+- Environment Values
+
+- Preferences
+
+- Default Storage
+
 ### Deprecated Modifiers
+
+See {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view-deprecated",
+"Deprecated Modifiers" %}.
 
 ### Color Modifiers
 
