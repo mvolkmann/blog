@@ -4530,7 +4530,7 @@ struct ContentView: View {
     @State private var value = 25.0
 
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
             MyGauge(
                 value: value,
                 strokeColor: .red,
@@ -4552,7 +4552,6 @@ struct ContentView: View {
             Slider(value: $value, in: 0 ... 100, step: 1) {
                 Text("Value")
             }
-            .padding(.top)
         }
         .padding()
     }
