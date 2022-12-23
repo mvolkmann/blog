@@ -5293,7 +5293,7 @@ There are many view modifiers that change the style of specific kinds of views.
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/blendmode(_:)", "blendMode" %}
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/compositinggroup()", "compositingGroup" %}
-  - {% aTargetBlank https://developer.apple.com/documentation/swiftui/view/drawinggroup(opaque:colormode:)", "drawingGroup" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/drawinggroup(opaque:colormode:)", "drawingGroup" %}
 
 - Animations
 
@@ -5309,95 +5309,325 @@ There are many view modifiers that change the style of specific kinds of views.
 
 - Interactivity
 
+  - {% aTargetBlank "", "disabled" %}
+  - {% aTargetBlank "", "handleExternalEvents" %}
+  - {% aTargetBlank "", "interactionActivityTrackingTag" %}
+
 - List Controls
+
+  - {% aTargetBlank "", "swipeActions" %}
+  - {% aTargetBlank "", "refreshable" %}
 
 - Taps and Gestures
 
+  - {% aTargetBlank "", "onTapGesture" %}
+  - {% aTargetBlank "", "onTapGesture" %}
+  - {% aTargetBlank "", "onLongPressGesture" %}
+  - {% aTargetBlank "", "onLongPressGesture" %}
+  - {% aTargetBlank "", "onLongTouchGesture" %}
+  - {% aTargetBlank "", "gesture" %}
+  - {% aTargetBlank "", "highPriorityGesture" %}
+  - {% aTargetBlank "", "simultaneousGesture" %}
+  - {% aTargetBlank "", "defersSystemGestures" %}
+
 - Keyboard Shortcuts
+
+  - {% aTargetBlank "", "keyboardShortCut" %}
+  - {% aTargetBlank "", "keyboardShortCut" %}
+  - {% aTargetBlank "", "keyboardShortCut" %}
+  - {% aTargetBlank "", "keyboardShortCut" %}
 
 - Hover
 
+  - {% aTargetBlank "", "onHover" %}
+  - {% aTargetBlank "", "onContinuousHover" %}
+  - {% aTargetBlank "", "hoverEffect" %}
+
 - Focus
+
+  - {% aTargetBlank "", "focused" %}
+  - {% aTargetBlank "", "focused" %}
+  - {% aTargetBlank "", "focusedValue" %}
+  - {% aTargetBlank "", "focusedValue" %}
+  - {% aTargetBlank "", "focusedSceneValue" %}
+  - {% aTargetBlank "", "focusedSceneValue" %}
+  - {% aTargetBlank "", "focusedObject" %}
+  - {% aTargetBlank "", "focusedObject" %}
+  - {% aTargetBlank "", "focusedSceneObject" %}
+  - {% aTargetBlank "", "focusedSceneObject" %}
+  - {% aTargetBlank "", "prefersDefaultFocus" %}
+  - {% aTargetBlank "", "focusShape" %}
+  - {% aTargetBlank "", "focusSection" %}
+  - {% aTargetBlank "", "focusable" %}
+  - {% aTargetBlank "", "defaultFocus" %}
 
 - Copy and Paste
 
+  - {% aTargetBlank "", "onCopyCommand" %}
+  - {% aTargetBlank "", "onCutCommand" %}
+  - {% aTargetBlank "", "onPasteCommand" %}
+  - {% aTargetBlank "", "onPasteCommand" %}
+  - {% aTargetBlank "", "copyable" %}
+  - {% aTargetBlank "", "cuttable" %}
+  - {% aTargetBlank "", "pasteDestination" %}
+
 - Drag and Drop
+
+  - {% aTargetBlank "", "onDrag" %}
+  - {% aTargetBlank "", "onDrag" %}
+  - {% aTargetBlank "", "itemProvider" %}
+  - {% aTargetBlank "", "onDrop" %}
+  - {% aTargetBlank "", "onDrop" %}
+  - {% aTargetBlank "", "onDrop" %}
+  - {% aTargetBlank "", "dropDestination" %}
+  - {% aTargetBlank "", "draggable" %}
+  - {% aTargetBlank "", "draggable" %}
 
 - Submission
 
+  - {% aTargetBlank "", "onSubmit" %}
+  - {% aTargetBlank "", "submitScope" %}
+  - {% aTargetBlank "", "submitLabel" %}
+
 - Movement
+
+  - {% aTargetBlank "", "onMoveCommand" %}
+  - {% aTargetBlank "", "moveDisabled" %}
+
+- Deletion
+
+  - {% aTargetBlank "", "onDeleteCommand" %}
+  - {% aTargetBlank "", "deleteDisabled" %}
 
 - Commands
 
+  - {% aTargetBlank "", "pageCommand" %}
+  - {% aTargetBlank "", "onExitCommand" %}
+  - {% aTargetBlank "", "onPlayPauseCommand" %}
+  - {% aTargetBlank "", "onCommand" %}
+
 - Digital Crown
+
+  - {% aTargetBlank "", "digitalCrownAccessory" %}
+  - {% aTargetBlank "", "digitalCrownAccessory" %}
+  - {% aTargetBlank "", "digitalCrownRotation" %}
+  - {% aTargetBlank "", "digitalCrownRotation" %}
+  - {% aTargetBlank "", "digitalCrownRotation" %}
+  - {% aTargetBlank "", "digitalCrownRotation" %}
+  - {% aTargetBlank "", "digitalCrownRotation" %}
+  - {% aTargetBlank "", "digitalCrownRotation" %}
 
 - User Activities
 
+  - {% aTargetBlank "", "userActivity" %}
+  - {% aTargetBlank "", "userActivity" %}
+  - {% aTargetBlank "", "onContinueUserActivity" %}
+
 - View Life Cycle
+
+  - {% aTargetBlank "", "onAppear" %}
+  - {% aTargetBlank "", "onDisappear" %}
+  - {% aTargetBlank "", "onChange" %}
+  - {% aTargetBlank "", "task" %}
+  - {% aTargetBlank "", "task" %}
 
 - File Renaming
 
+  - {% aTargetBlank "", "renameAction" %}
+  - {% aTargetBlank "", "renameAction" %}
+
 - URLs
+
+  - {% aTargetBlank "", "onOpenURL" %}
+  - {% aTargetBlank "", "widgetURL" %}
 
 - Publisher Events
 
+  - {% aTargetBlank "", "onReceive" %}
+
 - Hit Testing
+
+  - {% aTargetBlank "", "allowHitTesting" %}
 
 - Content Shape
 
+  - {% aTargetBlank "", "contentShape" %}
+  - {% aTargetBlank "", "contentShape" %}
+
 - Import and Export
 
+  - {% aTargetBlank "", "exportsItemProviders" %}
+  - {% aTargetBlank "", "exportsItemProviders" %}
+  - {% aTargetBlank "", "importsItemProviders" %}
+  - {% aTargetBlank "", "exportableToServices" %}
+  - {% aTargetBlank "", "exportableToServices" %}
+  - {% aTargetBlank "", "importableFromServices" %}
+
 - App Intents
+
+  - {% aTargetBlank "", "shortcutsLinkStyle" %}
+  - {% aTargetBlank "", "siriTipViewStyle" %}
 
 ### Search Modifiers
 
 - Displaying a Search Interface
 
+  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "", "searchable" %}
+
 - Searching with Tokens
+
+  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "", "searchable" %}
 
 - Making Search Suggestions
 
+  - {% aTargetBlank "", "searchSuggestions" %}
+  - {% aTargetBlank "", "searchSuggestions" %}
+  - {% aTargetBlank "", "searchCompletion" %}
+  - {% aTargetBlank "", "searchCompletion" %}
+  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "", "searchable" %}
+
 - Limiting Search Scope
+
+  - {% aTargetBlank "", "searchScopes" %}
 
 ### Presentation Modifiers
 
 - Alerts without a Message
 
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+
 - Alerts with a Message
+
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "", "alert" %}
 
 - Confirmation Dialogs without a Message
 
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+
 - Confirmation Dialogs with a Message
+
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "", "confirmationDialog" %}
 
 - Sheets
 
+  - {% aTargetBlank "", "sheet" %}
+  - {% aTargetBlank "", "sheet" %}
+  - {% aTargetBlank "", "fullScreenCover" %}
+  - {% aTargetBlank "", "fullScreenCover" %}
+
 - Popovers
+
+  - {% aTargetBlank "", "popover" %}
+  - {% aTargetBlank "", "popover" %}
 
 - Configuration for Sheets and Popovers
 
+  - {% aTargetBlank "", "interactiveDismissDisabled" %}
+  - {% aTargetBlank "", "presentationDetents" %}
+  - {% aTargetBlank "", "presentationDetents" %}
+  - {% aTargetBlank "", "presentationDragIndicator" %}
+
 - File Managers
+
+  - {% aTargetBlank "", "fileExporter" %}
+  - {% aTargetBlank "", "fileExporter" %}
+  - {% aTargetBlank "", "fileExporter" %}
+  - {% aTargetBlank "", "fileExporter" %}
+  - {% aTargetBlank "", "fileImporter" %}
+  - {% aTargetBlank "", "fileImporter" %}
+  - {% aTargetBlank "", "fileMover" %}
+  - {% aTargetBlank "", "fileMover" %}
 
 - Quick Look Previews
 
+  - {% aTargetBlank "", "quickLookPreview" %}
+  - {% aTargetBlank "", "quickLookPreview" %}
+
 - Family Sharing
+
+  - {% aTargetBlank "", "familyActivityPicker" %}
+  - {% aTargetBlank "", "familyActivityPicker" %}
 
 - Live Activities
 
+  - {% aTargetBlank "", "activitySystemActionForegroundColor" %}
+  - {% aTargetBlank "", "activityBackground" %}
+
 - Apple Music
 
-- StoreKey
+  - {% aTargetBlank "", "musicSubscriptionOffer" %}
+
+- StoreKit
+
+  - {% aTargetBlank "", "appStoreOverlay" %}
+  - {% aTargetBlank "", "manageSubscriptionsSheet" %}
+  - {% aTargetBlank "", "refundRequestSheet" %}
+  - {% aTargetBlank "", "offerCodeRedemption" %}
 
 - PhotoKit
+
+  - {% aTargetBlank "", "photoPicker" %}
+  - {% aTargetBlank "", "photoPicker" %}
+  - {% aTargetBlank "", "photoPicker" %}
+  - {% aTargetBlank "", "photoPicker" %}
 
 ### State Modifiers
 
 - Identity
 
+  - {% aTargetBlank "", "tag" %}
+  - {% aTargetBlank "", "id" %}
+  - {% aTargetBlank "", "equatable" %}
+
 - Environment Values
+
+  - {% aTargetBlank "", "environment" %}
+  - {% aTargetBlank "", "environmentObject" %}
+  - {% aTargetBlank "", "transformEnvironment" %}
 
 - Preferences
 
+  - {% aTargetBlank "", "preference" %}
+  - {% aTargetBlank "", "transformPreference" %}
+  - {% aTargetBlank "", "anchorPreference" %}
+  - {% aTargetBlank "", "transformAnchorPreference" %}
+  - {% aTargetBlank "", "onPreferenceChange" %}
+  - {% aTargetBlank "", "backgroundPreferenceValue" %}
+  - {% aTargetBlank "", "backgroundPreferenceValue" %}
+  - {% aTargetBlank "", "overlayPreferenceValue" %}
+  - {% aTargetBlank "", "overlayPreferenceValue" %}
+
 - Default Storage
+
+  - {% aTargetBlank "", "defaultAppStorage" %}
 
 ### Deprecated Modifiers
 
