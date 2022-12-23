@@ -4008,6 +4008,88 @@ Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
     src="/blog/assets/SwiftUI-Toggle.png?v={{pkg.version}}"
     title="SwiftUI Toggle">
 
+### ShareLink
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/sharelink", "ShareLink" %}
+view displays an icon and a label that can be tapped to open a share sheet
+for sharing specific data.
+The share sheet allows selecting the method of sharing
+which include Print, "Save to Files", AirDrop, text message, email, and many
+application-specific methods such as Facebook, Mastadon, Messenger, and Twitter.
+
+The icon and label displayed by a `ShareLink` can be customized.
+
+The data to share, referred to as the "item",
+must conform to the {% aTargetBlank
+"https://developer.apple.com/documentation/CoreTransferable/Transferable?changes=_3",
+"Transferable" %} protocol.
+The built-in types `AttributedString`, `Data`, `Image`, `String`, and `URL` do this.
+In addition, custom types can conform to `Transferable`.
+
+In addition to sharing the item, an optional message is also shared.
+
+The following code example demonstrates
+a basic `ShareLink` that shares a `URL`,
+a `ShareLink` that shares a `URL` with a customized icon and label,
+and a `ShareLink` that shares an `Image`.
+
+<img alt="SwiftUI ShareLink" style="width: 40%"
+    src="/blog/assets/SwiftUI-ShareLink.png?v={{pkg.version}}"
+    title="SwiftUI ShareLink">
+
+```swift
+struct ContentView: View {
+    private let linkColor: Color = .purple
+    private let urlDescription = "Mark Volkmann's Blog"
+    private let link = URL(string: "https://mvolkmann.github.io/blog")!
+    private let linkSize: CGFloat = 20
+
+    private let imageName = "Comet"
+    private var imageMessage: String { "\(imageName), the whippet" }
+    private var image: Image { Image(imageName) }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            // Basic sharing of a URL
+            ShareLink(
+                // Supply a first argument String to keep the default icon
+                // which is "square.and.arrow.up" and
+                // follow it with text other than the default "Share...".
+                urlDescription, // optional
+                item: link,
+                message: Text(urlDescription) // optional
+            )
+            .font(.system(size: linkSize))
+            .tint(linkColor)
+
+            // Sharing of a URL with a custom icon
+            ShareLink(
+                item: link,
+                message: Text(urlDescription)
+            ) {
+                // Supply a label closure instead of a first argument String
+                // in order to change the icon which defaults to
+                // "square.and.arrow.up" and the default text.
+                Label(urlDescription, systemImage: "heart.fill")
+                    .font(.system(size: linkSize))
+                    .tint(linkColor)
+            }
+
+            // Sharing an image
+            ShareLink(
+                imageMessage,
+                item: image,
+                message: Text(imageMessage),
+                preview: SharePreview(imageName, image: image)
+            )
+            .font(.system(size: linkSize))
+            .tint(linkColor)
+        }
+    }
+}
+```
+
 ### Slider
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/slider",
