@@ -4539,6 +4539,16 @@ struct ContentView: View {
             )
             .frame(width: 150, height: 150)
 
+            HStack {
+                Button("Decrease") {
+                    withAnimation { value = max(value - 10, 0) }
+                }
+                Button("Increase") {
+                    withAnimation { value = min(value + 10, 100) }
+                }
+            }
+            .buttonStyle(.bordered)
+
             Slider(value: $value, in: 0 ... 100, step: 1) {
                 Text("Value")
             }
