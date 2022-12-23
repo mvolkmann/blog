@@ -5249,6 +5249,8 @@ There are many view modifiers that change the style of specific kinds of views.
 
 ### Graphics and Rendering Modifiers
 
+TODO: Resume adding view modifier descriptions here!
+
 - Masking and Clipping
 
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/clipped(antialiased:)", "clipped" %}
@@ -5309,325 +5311,325 @@ There are many view modifiers that change the style of specific kinds of views.
 
 - Interactivity
 
-  - {% aTargetBlank "", "disabled" %}
-  - {% aTargetBlank "", "handleExternalEvents" %}
-  - {% aTargetBlank "", "interactionActivityTrackingTag" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/disabled(_:)", "disabled" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/handlesexternalevents(preferring:allowing:)", "handleExternalEvents" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/interactionactivitytrackingtag(_:)", "interactionActivityTrackingTag" %}
 
 - List Controls
 
-  - {% aTargetBlank "", "swipeActions" %}
-  - {% aTargetBlank "", "refreshable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/swipeactions(edge:allowsfullswipe:content:)", "swipeActions" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/refreshable(action:)", "refreshable" %}
 
 - Taps and Gestures
 
-  - {% aTargetBlank "", "onTapGesture" %}
-  - {% aTargetBlank "", "onTapGesture" %}
-  - {% aTargetBlank "", "onLongPressGesture" %}
-  - {% aTargetBlank "", "onLongPressGesture" %}
-  - {% aTargetBlank "", "onLongTouchGesture" %}
-  - {% aTargetBlank "", "gesture" %}
-  - {% aTargetBlank "", "highPriorityGesture" %}
-  - {% aTargetBlank "", "simultaneousGesture" %}
-  - {% aTargetBlank "", "defersSystemGestures" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:perform:)", "onTapGesture" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ontapgesture(count:coordinatespace:perform:)", "onTapGesture" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:maximumdistance:perform:onpressingchanged:)", "onLongPressGesture" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onlongpressgesture(minimumduration:perform:onpressingchanged:)", "onLongPressGesture" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onlongtouchgesture(minimumduration:perform:ontouchingchanged:)", "onLongTouchGesture" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/gesture(_:including:)", "gesture" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/highprioritygesture(_:including:)", "highPriorityGesture" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/simultaneousgesture(_:including:)", "simultaneousGesture" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/deferssystemgestures(on:)", "defersSystemGestures" %}
 
 - Keyboard Shortcuts
 
-  - {% aTargetBlank "", "keyboardShortCut" %}
-  - {% aTargetBlank "", "keyboardShortCut" %}
-  - {% aTargetBlank "", "keyboardShortCut" %}
-  - {% aTargetBlank "", "keyboardShortCut" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/keyboardshortcut(_:)-8liec", "keyboardShortCut" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/keyboardshortcut(_:)-3vjx6", "keyboardShortCut" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/keyboardshortcut(_:modifiers:)", "keyboardShortCut" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/keyboardshortcut(_:modifiers:localization:)", "keyboardShortCut" %}
 
 - Hover
 
-  - {% aTargetBlank "", "onHover" %}
-  - {% aTargetBlank "", "onContinuousHover" %}
-  - {% aTargetBlank "", "hoverEffect" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onhover(perform:)", "onHover" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/oncontinuoushover(coordinatespace:perform:)", "onContinuousHover" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/hovereffect(_:)", "hoverEffect" %}
 
 - Focus
 
-  - {% aTargetBlank "", "focused" %}
-  - {% aTargetBlank "", "focused" %}
-  - {% aTargetBlank "", "focusedValue" %}
-  - {% aTargetBlank "", "focusedValue" %}
-  - {% aTargetBlank "", "focusedSceneValue" %}
-  - {% aTargetBlank "", "focusedSceneValue" %}
-  - {% aTargetBlank "", "focusedObject" %}
-  - {% aTargetBlank "", "focusedObject" %}
-  - {% aTargetBlank "", "focusedSceneObject" %}
-  - {% aTargetBlank "", "focusedSceneObject" %}
-  - {% aTargetBlank "", "prefersDefaultFocus" %}
-  - {% aTargetBlank "", "focusShape" %}
-  - {% aTargetBlank "", "focusSection" %}
-  - {% aTargetBlank "", "focusable" %}
-  - {% aTargetBlank "", "defaultFocus" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focused(_:equals:)", "focused" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focused(_:)", "focused" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusedvalue(_:_:)-8079u", "focusedValue" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusedvalue(_:_:)-odf9", "focusedValue" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusedscenevalue(_:_:)-57boz", "focusedSceneValue" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusedscenevalue(_:_:)-5iugx", "focusedSceneValue" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusedobject(_:)-26zv7", "focusedObject" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusedobject(_:)-4rq6n", "focusedObject" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusedsceneobject(_:)-8ovym", "focusedSceneObject" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusedsceneobject(_:)-8td7y", "focusedSceneObject" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/prefersdefaultfocus(_:in:)", "prefersDefaultFocus" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focusscope(_:)", "focusShape" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focussection()", "focusSection" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/focussection()", "focusable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/defaultfocus(_:_:priority:)", "defaultFocus" %}
 
 - Copy and Paste
 
-  - {% aTargetBlank "", "onCopyCommand" %}
-  - {% aTargetBlank "", "onCutCommand" %}
-  - {% aTargetBlank "", "onPasteCommand" %}
-  - {% aTargetBlank "", "onPasteCommand" %}
-  - {% aTargetBlank "", "copyable" %}
-  - {% aTargetBlank "", "cuttable" %}
-  - {% aTargetBlank "", "pasteDestination" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/oncopycommand(perform:)", "onCopyCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/oncutcommand(perform:)", "onCutCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)-9s227", "onPasteCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onpastecommand(of:perform:)-9s227", "onPasteCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/copyable(_:)", "copyable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/cuttable(for:action:)", "cuttable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/pastedestination(for:action:validator:)", "pasteDestination" %}
 
 - Drag and Drop
 
-  - {% aTargetBlank "", "onDrag" %}
-  - {% aTargetBlank "", "onDrag" %}
-  - {% aTargetBlank "", "itemProvider" %}
-  - {% aTargetBlank "", "onDrop" %}
-  - {% aTargetBlank "", "onDrop" %}
-  - {% aTargetBlank "", "onDrop" %}
-  - {% aTargetBlank "", "dropDestination" %}
-  - {% aTargetBlank "", "draggable" %}
-  - {% aTargetBlank "", "draggable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ondrag(_:preview:)", "onDrag" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ondrag(_:)", "onDrag" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/itemprovider(_:)", "itemProvider" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)-f15m", "onDrop" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ondrop(of:istargeted:perform:)-982eu", "onDrop" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ondrop(of:delegate:)-6lin8", "onDrop" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dropdestination(for:action:istargeted:)", "dropDestination" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/draggable(_:)", "draggable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/draggable(_:preview:)", "draggable" %}
 
 - Submission
 
-  - {% aTargetBlank "", "onSubmit" %}
-  - {% aTargetBlank "", "submitScope" %}
-  - {% aTargetBlank "", "submitLabel" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onsubmit(of:_:)", "onSubmit" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/submitscope(_:)", "submitScope" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/submitlabel(_:)", "submitLabel" %}
 
 - Movement
 
-  - {% aTargetBlank "", "onMoveCommand" %}
-  - {% aTargetBlank "", "moveDisabled" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onmovecommand(perform:)", "onMoveCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/movedisabled(_:)", "moveDisabled" %}
 
 - Deletion
 
-  - {% aTargetBlank "", "onDeleteCommand" %}
-  - {% aTargetBlank "", "deleteDisabled" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ondeletecommand(perform:)", "onDeleteCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/deletedisabled(_:)", "deleteDisabled" %}
 
 - Commands
 
-  - {% aTargetBlank "", "pageCommand" %}
-  - {% aTargetBlank "", "onExitCommand" %}
-  - {% aTargetBlank "", "onPlayPauseCommand" %}
-  - {% aTargetBlank "", "onCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/pagecommand(value:in:step:)", "pageCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onexitcommand(perform:)", "onExitCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onexitcommand(perform:)", "onPlayPauseCommand" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/oncommand(_:perform:)", "onCommand" %}
 
 - Digital Crown
 
-  - {% aTargetBlank "", "digitalCrownAccessory" %}
-  - {% aTargetBlank "", "digitalCrownAccessory" %}
-  - {% aTargetBlank "", "digitalCrownRotation" %}
-  - {% aTargetBlank "", "digitalCrownRotation" %}
-  - {% aTargetBlank "", "digitalCrownRotation" %}
-  - {% aTargetBlank "", "digitalCrownRotation" %}
-  - {% aTargetBlank "", "digitalCrownRotation" %}
-  - {% aTargetBlank "", "digitalCrownRotation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/digitalcrownaccessory(_:)", "digitalCrownAccessory" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/digitalcrownaccessory(content:)", "digitalCrownAccessory" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/digitalcrownrotation(_:from:through:sensitivity:iscontinuous:ishapticfeedbackenabled:onchange:onidle:)", "digitalCrownRotation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/digitalcrownrotation(_:onchange:onidle:)", "digitalCrownRotation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/digitalcrownrotation(detent:from:through:by:sensitivity:iscontinuous:ishapticfeedbackenabled:onchange:onidle:)-17066", "digitalCrownRotation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/digitalcrownrotation(detent:from:through:by:sensitivity:iscontinuous:ishapticfeedbackenabled:onchange:onidle:)-9ad6y", "digitalCrownRotation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/digitalcrownrotation(_:)", "digitalCrownRotation" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/digitalcrownrotation(_:from:through:by:sensitivity:iscontinuous:ishapticfeedbackenabled:)", "digitalCrownRotation" %}
 
 - User Activities
 
-  - {% aTargetBlank "", "userActivity" %}
-  - {% aTargetBlank "", "userActivity" %}
-  - {% aTargetBlank "", "onContinueUserActivity" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/useractivity(_:element:_:)", "userActivity" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/useractivity(_:isactive:_:)", "userActivity" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/oncontinueuseractivity(_:perform:)", "onContinueUserActivity" %}
 
 - View Life Cycle
 
-  - {% aTargetBlank "", "onAppear" %}
-  - {% aTargetBlank "", "onDisappear" %}
-  - {% aTargetBlank "", "onChange" %}
-  - {% aTargetBlank "", "task" %}
-  - {% aTargetBlank "", "task" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onappear(perform:)", "onAppear" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/ondisappear(perform:)", "onDisappear" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onchange(of:perform:)", "onChange" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/task(priority:_:)", "task" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/task(id:priority:_:)", "task" %}
 
 - File Renaming
 
-  - {% aTargetBlank "", "renameAction" %}
-  - {% aTargetBlank "", "renameAction" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/renameaction(_:)-6lghl", "renameAction" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/renameaction(_:)-324yw", "renameAction" %}
 
 - URLs
 
-  - {% aTargetBlank "", "onOpenURL" %}
-  - {% aTargetBlank "", "widgetURL" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onopenurl(perform:)", "onOpenURL" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/widgeturl(_:)", "widgetURL" %}
 
 - Publisher Events
 
-  - {% aTargetBlank "", "onReceive" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onreceive(_:perform:)", "onReceive" %}
 
 - Hit Testing
 
-  - {% aTargetBlank "", "allowHitTesting" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/allowshittesting(_:)", "allowHitTesting" %}
 
 - Content Shape
 
-  - {% aTargetBlank "", "contentShape" %}
-  - {% aTargetBlank "", "contentShape" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/contentshape(_:eofill:)", "contentShape" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/contentshape(_:_:eofill:)", "contentShape" %}
 
 - Import and Export
 
-  - {% aTargetBlank "", "exportsItemProviders" %}
-  - {% aTargetBlank "", "exportsItemProviders" %}
-  - {% aTargetBlank "", "importsItemProviders" %}
-  - {% aTargetBlank "", "exportableToServices" %}
-  - {% aTargetBlank "", "exportableToServices" %}
-  - {% aTargetBlank "", "importableFromServices" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:)", "exportsItemProviders" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/exportsitemproviders(_:onexport:onedit:)", "exportsItemProviders" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/importsitemproviders(_:onimport:)", "importsItemProviders" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/exportabletoservices(_:)", "exportableToServices" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/exportabletoservices(_:onedit:)", "exportableToServices" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/importablefromservices(for:action:)", "importableFromServices" %}
 
 - App Intents
 
-  - {% aTargetBlank "", "shortcutsLinkStyle" %}
-  - {% aTargetBlank "", "siriTipViewStyle" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/shortcutslinkstyle(_:)", "shortcutsLinkStyle" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/siritipviewstyle(_:)", "siriTipViewStyle" %}
 
 ### Search Modifiers
 
 - Displaying a Search Interface
 
-  - {% aTargetBlank "", "searchable" %}
-  - {% aTargetBlank "", "searchable" %}
-  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:placement:prompt:)-18a8f", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:placement:prompt:)-1bjj3", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:placement:prompt:)-co5e", "searchable" %}
 
 - Searching with Tokens
 
-  - {% aTargetBlank "", "searchable" %}
-  - {% aTargetBlank "", "searchable" %}
-  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:tokens:placement:prompt:token:)-35t4f", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:tokens:placement:prompt:token:)-2c10v", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:tokens:placement:prompt:token:)-85ahx", "searchable" %}
 
 - Making Search Suggestions
 
-  - {% aTargetBlank "", "searchSuggestions" %}
-  - {% aTargetBlank "", "searchSuggestions" %}
-  - {% aTargetBlank "", "searchCompletion" %}
-  - {% aTargetBlank "", "searchCompletion" %}
-  - {% aTargetBlank "", "searchable" %}
-  - {% aTargetBlank "", "searchable" %}
-  - {% aTargetBlank "", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchsuggestions(_:)", "searchSuggestions" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchsuggestions(_:for:)", "searchSuggestions" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchcompletion(_:)-e0pr", "searchCompletion" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchcompletion(_:)-2uaf3", "searchCompletion" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:tokens:suggestedtokens:placement:prompt:token:)-9m40k", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:tokens:suggestedtokens:placement:prompt:token:)-9q3oc", "searchable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchable(text:tokens:suggestedtokens:placement:prompt:token:)-8xk6g", "searchable" %}
 
 - Limiting Search Scope
 
-  - {% aTargetBlank "", "searchScopes" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/searchscopes(_:scopes:)", "searchScopes" %}
 
 ### Presentation Modifiers
 
 - Alerts without a Message
 
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:actions:)-1bkka", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:actions:)-2gsoj", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:actions:)-3200l", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:)-4rhk6", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:)-78spw", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:)-9h5um", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(ispresented:error:actions:)", "alert" %}
 
 - Alerts with a Message
 
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
-  - {% aTargetBlank "", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:actions:message:)-3rabc", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:actions:message:)-6awwp", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:actions:message:)-8dvt8", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-29bp4", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-3md6l", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l", "alert" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alert(ispresented:error:actions:message:)", "alert" %}
 
 - Confirmation Dialogs without a Message
 
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:actions:)-46zbb", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:actions:)-55h6a", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:actions:)-87n66", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-51pyu", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-9ibgk", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:)-9quvm", "confirmationDialog" %}
 
 - Confirmation Dialogs with a Message
 
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
-  - {% aTargetBlank "", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:actions:message:)-1r2g1", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:actions:message:)-2s7pz", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:actions:message:)-2tbci", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-1iv4u", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-3s8wb", "confirmationDialog" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-3s8wb", "confirmationDialog" %}
 
 - Sheets
 
-  - {% aTargetBlank "", "sheet" %}
-  - {% aTargetBlank "", "sheet" %}
-  - {% aTargetBlank "", "fullScreenCover" %}
-  - {% aTargetBlank "", "fullScreenCover" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)", "sheet" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/sheet(item:ondismiss:content:)", "sheet" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fullscreencover(ispresented:ondismiss:content:)", "fullScreenCover" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fullscreencover(item:ondismiss:content:)", "fullScreenCover" %}
 
 - Popovers
 
-  - {% aTargetBlank "", "popover" %}
-  - {% aTargetBlank "", "popover" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/popover(ispresented:attachmentanchor:arrowedge:content:)", "popover" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/popover(item:attachmentanchor:arrowedge:content:)", "popover" %}
 
 - Configuration for Sheets and Popovers
 
-  - {% aTargetBlank "", "interactiveDismissDisabled" %}
-  - {% aTargetBlank "", "presentationDetents" %}
-  - {% aTargetBlank "", "presentationDetents" %}
-  - {% aTargetBlank "", "presentationDragIndicator" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/interactivedismissdisabled(_:)", "interactiveDismissDisabled" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/presentationdetents(_:)", "presentationDetents" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/presentationdetents(_:selection:)", "presentationDetents" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/presentationdragindicator(_:)", "presentationDragIndicator" %}
 
 - File Managers
 
-  - {% aTargetBlank "", "fileExporter" %}
-  - {% aTargetBlank "", "fileExporter" %}
-  - {% aTargetBlank "", "fileExporter" %}
-  - {% aTargetBlank "", "fileExporter" %}
-  - {% aTargetBlank "", "fileImporter" %}
-  - {% aTargetBlank "", "fileImporter" %}
-  - {% aTargetBlank "", "fileMover" %}
-  - {% aTargetBlank "", "fileMover" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fileexporter(ispresented:document:contenttype:defaultfilename:oncompletion:)-32vwk", "fileExporter" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fileexporter(ispresented:document:contenttype:defaultfilename:oncompletion:)-9tpsm", "fileExporter" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fileexporter(ispresented:documents:contenttype:oncompletion:)-974w2", "fileExporter" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fileexporter(ispresented:documents:contenttype:oncompletion:)-6xyj7", "fileExporter" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:allowsmultipleselection:oncompletion:)", "fileImporter" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fileimporter(ispresented:allowedcontenttypes:oncompletion:)", "fileImporter" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/filemover(ispresented:file:oncompletion:)", "fileMover" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/filemover(ispresented:files:oncompletion:)", "fileMover" %}
 
 - Quick Look Previews
 
-  - {% aTargetBlank "", "quickLookPreview" %}
-  - {% aTargetBlank "", "quickLookPreview" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/quicklookpreview(_:)", "quickLookPreview" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/quicklookpreview(_:in:)", "quickLookPreview" %}
 
 - Family Sharing
 
-  - {% aTargetBlank "", "familyActivityPicker" %}
-  - {% aTargetBlank "", "familyActivityPicker" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/familyactivitypicker(ispresented:selection:)", "familyActivityPicker" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/familyactivitypicker(headertext:footertext:ispresented:selection:)", "familyActivityPicker" %}
 
 - Live Activities
 
-  - {% aTargetBlank "", "activitySystemActionForegroundColor" %}
-  - {% aTargetBlank "", "activityBackground" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/activitysystemactionforegroundcolor(_:)", "activitySystemActionForegroundColor" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/activitybackgroundtint(_:)", "activityBackground" %}
 
 - Apple Music
 
-  - {% aTargetBlank "", "musicSubscriptionOffer" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/musicsubscriptionoffer(ispresented:options:onloadcompletion:)", "musicSubscriptionOffer" %}
 
 - StoreKit
 
-  - {% aTargetBlank "", "appStoreOverlay" %}
-  - {% aTargetBlank "", "manageSubscriptionsSheet" %}
-  - {% aTargetBlank "", "refundRequestSheet" %}
-  - {% aTargetBlank "", "offerCodeRedemption" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/appstoreoverlay(ispresented:configuration:)", "appStoreOverlay" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/managesubscriptionssheet(ispresented:)", "manageSubscriptionsSheet" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/refundrequestsheet(for:ispresented:ondismiss:)", "refundRequestSheet" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/offercoderedemption(ispresented:oncompletion:)", "offerCodeRedemption" %}
 
 - PhotoKit
 
-  - {% aTargetBlank "", "photoPicker" %}
-  - {% aTargetBlank "", "photoPicker" %}
-  - {% aTargetBlank "", "photoPicker" %}
-  - {% aTargetBlank "", "photoPicker" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/photospicker(ispresented:selection:matching:preferreditemencoding:)", "photoPicker" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/photospicker(ispresented:selection:matching:preferreditemencoding:photolibrary:)", "photoPicker" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/photospicker(ispresented:selection:maxselectioncount:selectionbehavior:matching:preferreditemencoding:)", "photoPicker" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/photospicker(ispresented:selection:maxselectioncount:selectionbehavior:matching:preferreditemencoding:photolibrary:)", "photoPicker" %}
 
 ### State Modifiers
 
 - Identity
 
-  - {% aTargetBlank "", "tag" %}
-  - {% aTargetBlank "", "id" %}
-  - {% aTargetBlank "", "equatable" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/tag(_:)", "tag" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/id(_:)", "id" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/equatable()", "equatable" %}
 
 - Environment Values
 
-  - {% aTargetBlank "", "environment" %}
-  - {% aTargetBlank "", "environmentObject" %}
-  - {% aTargetBlank "", "transformEnvironment" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/environment(_:_:)", "environment" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/environmentobject(_:)", "environmentObject" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/transformenvironment(_:transform:)", "transformEnvironment" %}
 
 - Preferences
 
-  - {% aTargetBlank "", "preference" %}
-  - {% aTargetBlank "", "transformPreference" %}
-  - {% aTargetBlank "", "anchorPreference" %}
-  - {% aTargetBlank "", "transformAnchorPreference" %}
-  - {% aTargetBlank "", "onPreferenceChange" %}
-  - {% aTargetBlank "", "backgroundPreferenceValue" %}
-  - {% aTargetBlank "", "backgroundPreferenceValue" %}
-  - {% aTargetBlank "", "overlayPreferenceValue" %}
-  - {% aTargetBlank "", "overlayPreferenceValue" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/preference(key:value:)", "preference" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/transformpreference(_:_:)", "transformPreference" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/anchorpreference(key:value:transform:)", "anchorPreference" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/transformanchorpreference(key:value:transform:)", "transformAnchorPreference" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/onpreferencechange(_:perform:)", "onPreferenceChange" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/backgroundpreferencevalue(_:_:)", "backgroundPreferenceValue" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/backgroundpreferencevalue(_:alignment:_:)", "backgroundPreferenceValue" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlaypreferencevalue(_:_:)", "overlayPreferenceValue" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/overlaypreferencevalue(_:alignment:_:)", "overlayPreferenceValue" %}
 
 - Default Storage
 
-  - {% aTargetBlank "", "defaultAppStorage" %}
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/defaultappstorage(_:)", "defaultAppStorage" %}
 
 ### Deprecated Modifiers
 
