@@ -6884,25 +6884,20 @@ use `Text(.init(myVariable))`.
 
 ```swift
 struct ContentView: View {
-    private var red: AttributedString {
-        var result = AttributedString("red")
-        result.foregroundColor = .red
-        result.font = Font.system(size: 24).bold().italic()
-        return result
-    }
+    private var colors: AttributedString {
+        var red = AttributedString("red")
+        red.foregroundColor = .red
+        red.font = Font.system(size: 24).bold().italic()
 
-    private var green: AttributedString {
-        var result = AttributedString("green")
-        result.foregroundColor = .green
-        result.font = Font.system(size: 36, design: .monospaced)
-        return result
-    }
+        var green = AttributedString("green")
+        green.foregroundColor = .green
+        green.font = Font.system(size: 36, design: .monospaced)
 
-    private var blue: AttributedString {
-        var result = AttributedString("blue")
-        result.foregroundColor = .blue
-        result.underlineStyle = .single
-        return result
+        var blue = AttributedString("blue")
+        blue.foregroundColor = .blue
+        blue.underlineStyle = .single
+
+        return red + " " + green + " " + blue
     }
 
     private var apple: AttributedString {
@@ -6925,7 +6920,7 @@ struct ContentView: View {
                 Text("!")
 
             // This uses multiple AttributedStrings in the same String.
-            Text("\(red) \(green) \(blue)")
+            Text(colors)
 
             // This renders an AttributedString that is a link.
             Text(apple)
