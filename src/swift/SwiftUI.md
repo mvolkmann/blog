@@ -3695,12 +3695,26 @@ TextField("First Name", text: $firstName)
 
 To allow entering multiple lines of text,
 set the `axis` argument to `.vertical`.
+Optionally limit the maximum number of visible lines with the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/environmentvalues/linelimit",
+"lineLimit" %} view modifier.
+More lines can be entered, but no more than this number of lines
+will be displayed.
 For example:
 
 ```swift
 TextField("Name", text: $bio, axis: .vertical)
+    .lineLimit(3)
     .textFieldStyle(.roundedBorder)
 ```
+
+Pass `reservesSpace: true` to the `lineLimit` view modifier
+to reserve enough vertical space to hold the specified number of lines
+even if the entered text isn't long enough to require them.
+
+Instead of passing a single maximum number of lines
+to the `lineLimit` view modifier, pass a range such as `3...6`
+to make the `TextField` occupy at least three lines and not more than 6.
 
 `TextField` supports a `format` argument that can be set to `.number`.
 However, this doesn't prevent users from entering non-numeric characters.
