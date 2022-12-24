@@ -3687,21 +3687,19 @@ To disable this, pass `.none` to the `autocapitalization` view modifier.
 Auto-correction is provided by default.
 To disable this, pass `true` to the `disableAutocorrection` view modifier.
 
-To allow entering multiple lines of text,
-set the `axis` argument to `.vertical`.
-
 ```swift
-// No prompt
 TextField("First Name", text: $firstName)
     .padding()
     .textFieldStyle(.roundedBorder)
+```
 
-// Prompt specified
-TextField(text: $lastName, prompt: Text("Required")) {
-    Text("Last Name")
-}
-.textFieldStyle(.roundedBorder)
-.padding()
+To allow entering multiple lines of text,
+set the `axis` argument to `.vertical`.
+For example:
+
+```swift
+TextField("Name", text: $bio, axis: .vertical)
+    .textFieldStyle(.roundedBorder)
 ```
 
 `TextField` supports a `format` argument that can be set to `.number`.
