@@ -6836,6 +6836,10 @@ It renders the formula for water ("H2O")
 where each letter is a different color and
 the "2" is rendered as a superscript.
 
+<img alt="SwiftUI AttributedString water" style="width: 20%"
+  src="/blog/assets/SwiftUI-AttributedString-water.png?v={{pkg.version}}"
+  title="SwiftUI AttributedString water">
+
 ```swift
 struct ContentView: View {
     let size = 50.0
@@ -6891,7 +6895,7 @@ struct ContentView: View {
 
         var green = AttributedString("green")
         green.foregroundColor = .green
-        green.font = Font.system(size: 36, design: .monospaced)
+        green.font = .largeTitle
 
         var blue = AttributedString("blue")
         blue.foregroundColor = .blue
