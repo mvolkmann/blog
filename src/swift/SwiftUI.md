@@ -2745,7 +2745,7 @@ row selection and also support deleting and moving rows.
 See this {% aTargetBlank "https://developer.apple.com/forums/thread/693743",
 "forum thread" %}.
 
-<img alt="SwiftUI List with Delete and Move" style="width: 40%"
+<img alt="SwiftUI List with Delete and Move" style="width: 50%"
   src="/blog/assets/SwiftUI-List-Delete-Move.png?v={{pkg.version}}"
   title="SwiftUI List with Delete and Move">
 
@@ -3822,6 +3822,66 @@ TextEditor(text: $reasonForVisit)
         RoundedRectangle(cornerRadius: 5)
             .stroke(Color(UIColor.lightGray))
     )
+```
+
+The `TextEditor` view supports find and replace, but the `TextField` view does not.
+This can be activated from a physical keyboard by pressing cmd-option-f.
+To enable this without a physical keyboard, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/emptyview/findnavigator(ispresented:)?changes=latest_major&language=objc_3",
+"findNavigator" %} view modifier as demonstrated in the code below.
+
+<img alt="SwiftUI TextEditor findNavigator toolbar" style="width: 50%"
+  src="/blog/assets/SwiftUI-TextEditor-findNavigator1.png?v={{pkg.version}}"
+  title="SwiftUI TextEditor findNavigator toolbar">
+<br />
+<br />
+<img alt="SwiftUI TextEditor findNavigator activated" style="width: 50%"
+  src="/blog/assets/SwiftUI-TextEditor-findNavigator2.png?v={{pkg.version}}"
+  title="SwiftUI TextEditor findNavigator activated">
+
+```swift
+struct ContentView: View {
+    @FocusState private var bioHasFocus: Bool
+    @State private var bio = ""
+    @State private var name = ""
+    @State private var isShowingFindReplace = false
+
+    private let bioLines = 4
+
+    var body: some View {
+        NavigationStack {
+            VStack(alignment: .leading) {
+                TextField("Name", text: $name)
+                    .textFieldStyle(.roundedBorder)
+                Text("Bio")
+                TextEditor(text: $bio)
+                    .lineLimit(bioLines)
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: CGFloat(bioLines * 24)
+                    )
+                    .focused($bioHasFocus)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.secondary)
+                            .opacity(0.2)
+                    )
+                    .findNavigator(isPresented: $isShowingFindReplace)
+
+                    .toolbar {
+                        if bioHasFocus {
+                            Button("Find/Replace") {
+                                isShowingFindReplace.toggle()
+                            }
+                        }
+                    }
+                    .navigationTitle("Edit Bio")
+                Spacer()
+            }
+            .padding()
+        }
+    }
+}
 ```
 
 ### EditButton
