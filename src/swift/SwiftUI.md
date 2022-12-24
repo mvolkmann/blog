@@ -6820,6 +6820,65 @@ The line can be customized in several ways:
 
 ## AttributedString
 
+Creating {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/attributedstring",
+"AttributedString" %} instances enables associating styling
+with a string instead of with a view such as `Text`.
+`AttributedString` instances have many properties that can be set including
+`foregroundColor`, `backgroundColor`, `underlineStyle`, `baselineOffset`,
+and more.
+If an `AttributedString` instance has these properties set
+and it is used in a view such as `Text`,
+applying corresponding view modifiers to the view has no effect.
+
+The following code example demonstrates basic usage of the
+`AttributedString` type. It renders the formula for water ("H2O")
+where each letter is a different color and
+the "2" is rendered as a superscript.
+
+```swift
+struct ContentView: View {
+    let size = 50.0
+
+    private var h: AttributedString {
+        var result = AttributedString("H")
+        result.foregroundColor = .red
+        result.backgroundColor = .yellow
+        result.underlineStyle = Text.LineStyle(pattern: .solid, color: .blue)
+        return result
+    }
+
+    private var two: AttributedString {
+        var result = AttributedString("2")
+        // This takes precedence over the font
+        // specified on the Text view below.
+        result.font = .system(size: size * 0.5)
+        result.foregroundColor = .green
+        result.baselineOffset = size * 0.4
+        return result
+    }
+
+    private var o: AttributedString {
+        var result = AttributedString("O")
+        result.foregroundColor = .blue
+        return result
+    }
+
+    var body: some View {
+        Text(h + two + o)
+            // This is ignored because the AttributedString instances
+            // specify the foreground color.
+            .foregroundColor(.purple)
+
+            // This only affects the AttributedStrings
+            // that do not specify a font ("H" and "O").
+            .font(.system(size: size))
+    }
+}
+```
+
+TODO: Review and possibly simplify the rest of this section!
+
 The `AttributedString` struct supports associating specific "attributes"
 with substrings in a `String` that it holds.
 For example, the string "Red Green Blue" can have attributes
