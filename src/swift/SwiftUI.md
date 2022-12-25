@@ -6,6 +6,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 ## Overview
 
 {% aTargetBlank "https://developer.apple.com/xcode/swiftui/", "SwiftUI" %}
