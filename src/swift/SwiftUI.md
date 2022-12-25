@@ -2245,10 +2245,18 @@ A {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/controlgroup",
 "ControlGroup" %} is a container for related controls.
 It works best when the children are Button views.
-It is particularly useful for groups of buttons in toolbars.
+
+A `ControlGroup` is particularly useful for groups of buttons in toolbars.
 The buttons are displayed horizontally if there is sufficient space.
 Otherwise a label is displayed instead and tapping the label
 displays a popup menu containing a vertical stack of the buttons.
+
+To prevent use of a popup menu and force the child views
+to be displayed horizontally, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/controlgroupstyle(_:)",
+"controlGroupStyle" %} view modifier passing it the value `.navigation`.
+This seems ill-advised because it will do so
+even if the child views do not fit in the space available.
 
 The way in which a `ControlGroup` is rendered depends on the platform.
 In iOS it looks identical to a segmented Picker,
@@ -2316,13 +2324,6 @@ struct ContentView: View {
         }
     }
 }
-```
-
-TODO: DO SOMETHING WITH THIS!
-There are two built-in styles, `automatic` (default) and `navigation`.
-
-```swift
-}.controlGroupStyle(.navigation)
 ```
 
 ### ScrollView
