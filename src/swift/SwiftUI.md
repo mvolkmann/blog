@@ -8067,6 +8067,7 @@ the custom `MarchingAnts` view modifier.
 import SwiftUI
 
 // This is a custom view modifier that gets the size of its content.
+// TODO: Could you use sizeThatFits in place of this?
 struct SizeReporter: ViewModifier {
     @Binding var size: CGSize
 
