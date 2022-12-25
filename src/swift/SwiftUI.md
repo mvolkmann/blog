@@ -2291,6 +2291,8 @@ struct ContentView: View {
                 }
                 .pickerStyle(.segmented)
 
+                // This renders poorly if the child views do not fit
+                // when laid out horizontally in the space available.
                 ControlGroup {
                     ForEach(sports.indices, id: \.self) { index in
                         Button(sports[index]) {
