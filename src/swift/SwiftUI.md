@@ -2241,30 +2241,87 @@ struct ContentView: View {
 
 ### ControlGroup
 
-This groups related controls.
-It is typically used with `Button` views.
-There are two built-in styles, `automatic` (default) and `navigation`.
+A {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/controlgroup",
+"ControlGroup" %} is a container for related controls.
+It works best when the children are Button views.
+It is particularly useful for groups of buttons in toolbars.
+The buttons are displayed horizontally if there is sufficient space.
+Otherwise a label is displayed instead and tapping the label
+displays a popup menu containing a vertical stack of the buttons.
 
-<img alt="SwiftUI ControlGroup" style="width: 40%"
-    src="/blog/assets/SwiftUI-ControlGroup.png?v={{pkg.version}}"
-    title="SwiftUI ControlGroup">
+The way in which a `ControlGroup` is rendered depends on the platform.
+In iOS it looks identical to a segmented Picker,
+but it doesn't change to indicate which child view was tapped last.
+
+The following code includes a `ControlGroup` in the main view and in a toolbar.
+It also includes a segmented `Picker` to show how it differs.
+
+<img alt="SwiftUI ControlGroup toolbar closed" style="width: 20rem"
+  src="/blog/assets/SwiftUI-ControlGroup1.png?v={{pkg.version}}"
+  title="SwiftUI ControlGroup toolbar closed">
+<br />
+<br />
+<img alt="SwiftUI ControlGroup toolbar open" style="width: 20rem"
+  src="/blog/assets/SwiftUI-ControlGroup2.png?v={{pkg.version}}"
+  title="SwiftUI ControlGroup toolbar open">
 
 ```swift
-ControlGroup {
-    Button("Cancel") {
-        print("canceling")
-    }
-    Button("Save") {
-        print("saving")
+struct ContentView: View {
+    // @State private var hungry = false
+    @State private var selectedIndex = -1
+
+    let sports = ["Baseball", "Basketball", "Football", "Golf", "Hockey"]
+
+    var body: some View {
+        NavigationStack {
+            VStack {
+                Picker("", selection: $selectedIndex) {
+                    ForEach(sports.indices, id: \.self) { index in
+                        Text(sports[index]).tag(index)
+                    }
+                }
+                .pickerStyle(.segmented)
+
+                ControlGroup {
+                    ForEach(sports.indices, id: \.self) { index in
+                        Button(sports[index]) {
+                            selectedIndex = index
+                        }
+                    }
+                    // This renders, but tapping it does nothing.
+                    // Toggle("Hungry?", isOn: $hungry)
+                }
+
+                if selectedIndex != -1 {
+                    Text("You selected \(sports[selectedIndex]).")
+                }
+
+                Spacer()
+            }
+            .padding()
+            .toolbar {
+                ControlGroup {
+                    ForEach(sports.indices, id: \.self) { index in
+                        Button(sports[index]) {
+                            selectedIndex = index
+                        }
+                    }
+                } label: {
+                    // The optional label argument is only used
+                    // when a ControlGroup appears in a toolbar.
+                    Label("Sport", systemImage: "sportscourt")
+                }
+            }
+        }
     }
 }
-ControlGroup {
-    Button("Cancel") {
-        print("canceling")
-    }
-    Button("Save") {
-        print("saving")
-    }
+```
+
+TODO: DO SOMETHING WITH THIS!
+There are two built-in styles, `automatic` (default) and `navigation`.
+
+```swift
 }.controlGroupStyle(.navigation)
 ```
 
@@ -3661,7 +3718,7 @@ let metricArea = Measurement(
 Text(metricArea, format: .measurement(width: .wide)) // 28 square inches
 ```
 
-Also see the "AttributedString" section for applying
+Also see the [AttributedString](#attributedstring) section for applying
 different formatting to substrings of a string.
 
 ### TextField
@@ -6902,6 +6959,9 @@ and more.
 If an `AttributedString` instance has these properties set
 and it is used in a view such as `Text`,
 applying corresponding view modifiers to the view has no effect.
+
+When an `AttributedString` is concatenated with a `String`,
+the result is a new `AttributedString`.
 
 The following code demonstrates basic usage of the `AttributedString` type.
 It renders the formula for water ("H2O")
