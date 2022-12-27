@@ -2000,8 +2000,8 @@ struct ContentView: View {
 
     // Typically form data would be tied to ViewModel properties
     // rather than using @State.
-    @State private var bedTime: Date = Date()
-    @State private var birthday: Date = Date()
+    @State private var bedTime = Date()
+    @State private var birthday = Date()
     @State private var favoriteColor: Color = .yellow
     @State private var dogCount = 0
     @State private var hungry = false
@@ -3798,6 +3798,128 @@ TextField("Score", value: $score, format: .number)
     .keyboardType(.numberPad)
     .padding()
     .textFieldStyle(.roundedBorder)
+```
+
+Use the keyboard type `.decimalPad`
+to allow entering digits and a decimal point.
+But this doesn't prevent entering multiple decimal points.
+Also, on iPads the keyboards for `.numberPad` and `.decimalPad`
+contain additional keys that should not be allowed in numbers.
+
+A more robust solution is to use the following custom view modifier
+inspired by the Stewart Lynch video {% aTargetBlank
+"https://www.youtube.com/watch?v=dd079CQ4Fr4&t=2s",
+"Numeric TextFields in SwiftUI" %}.
+
+```swift
+import Combine // for onReceive method
+import SwiftUI
+
+// See the Stewart Lynch video at
+// https://www.youtube.com/watch?v=dd079CQ4Fr4&t=2s.
+struct NumbersOnlyViewModifier: ViewModifier {
+    @Binding var text: String
+    var float: Bool
+
+    func body(content: Content) -> some View {
+        let decimalSeparator = Locale.current.decimalSeparator ?? "."
+        let allowed = "0123456789" + (float ? decimalSeparator : "")
+
+        content
+            // Using a keyboardType of .decimalPad or .numberPad is not enough
+            // to prevent other keys from being pressed because those keyboards
+            // contain more keys when running on an iPad.
+            .keyboardType(float ? .decimalPad : .numberPad)
+            .onReceive(Just(text)) { newValue in
+                // If there are multiple decimal separators ...
+                if newValue.count(of: decimalSeparator) > 1 {
+                    // Remove the last decimal separator.
+                    let character = decimalSeparator.first!
+                    let index = newValue.lastIndex(of: character)
+                    if let index {
+                        var filtered = newValue // makes a copy
+                        filtered.remove(at: index)
+                        self.text = filtered
+                    }
+                } else {
+                    // Remove all characters that are not allowed.
+                    // We can't just check the last character
+                    // because the user can insert characters anywhere.
+                    let filtered = newValue.filter { allowed.contains($0) }
+                    if filtered != newValue {
+                        self.text = filtered
+                    }
+                }
+            }
+    }
+}
+
+extension String {
+    func count(of string: String) -> Int {
+        let char = string.first!
+        return reduce(0) { $1 == char ? $0 + 1 : $0 }
+    }
+}
+
+extension View {
+    func numbersOnly(
+        _ text: Binding<String>,
+        float: Bool = false
+    ) -> some View {
+        modifier(NumbersOnlyViewModifier(text: text, float: float))
+    }
+}
+```
+
+Here is an example of using the `numbersOnly` view modifier:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    enum Field {
+        case caloriesBurned, cyclingMiles
+    }
+
+    @FocusState private var focusedField: Field?
+
+    @State private var caloriesBurned = 850
+    @State private var cyclingMiles = 20.0
+
+    var body: some View {
+        Form {
+            HStack {
+                Text("Cycling Miles")
+                Spacer()
+                TextField("", text: $cyclingMiles)
+                    .focused($focusedField, equals: .cyclingMiles)
+                    .numbersOnly($cyclingMiles, float: true)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(maxWidth: 90)
+            }
+            HStack {
+                Text("Calories Burned")
+                Spacer()
+                TextField("", text: $caloriesBurned)
+                    .focused($focusedField, equals: .caloriesBurned)
+                    .numbersOnly($caloriesBurned)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(maxWidth: 90)
+            }
+        }
+        // This enables dismissing the keyboard which is
+        // displayed when a TextField has focus.
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button {
+                    focusedField = nil
+                } label: {
+                    Image(systemName: "keyboard.chevron.compact.down")
+                }
+            }
+        }
+    }
+}
 ```
 
 To apply good foreground and background colors in both light and dark mode

@@ -574,6 +574,13 @@ If the query is for a sequence of data, an empty Array is returned.
 
 ## Reading Data
 
+In order to access HealthKit, add the capability
+in the "Signing & Capabilities" tab of the main target.
+
+Add the key "Privacy - Health Share Usage Description"
+in the "Info" tab of the main target
+with a description like "To read health data".
+
 The following code demonstrates retrieving data from HealthKit
 and display it.
 
@@ -730,4 +737,15 @@ class HealthManager: ObservableObject {
 
 ## Writing Data
 
-TODO: Add examples from the HealthKitDemo app.
+In order to access HealthKit, add the capability
+in the "Signing & Capabilities" tab of the main target.
+
+Add the key "Privacy - Health Update Usage Description"
+in the "Info" tab of the main target
+with a description like "To write workout data".
+
+The following code demonstrates writing data to HealthKit.
+
+```swift
+TODO: Add this!
+```
