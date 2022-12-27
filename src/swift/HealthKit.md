@@ -574,7 +574,159 @@ If the query is for a sequence of data, an empty Array is returned.
 
 ## Reading Data
 
-TODO: Add examples from the HealthKitDemo app.
+The following code demonstrates retrieving data from HealthKit
+and display it.
+
+```swift
+// ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    @StateObject private var viewModel = HealthKitViewModel()
+
+    func labelledValue(_ label: String, _ value: Double) -> some View {
+        Text("\(label): \(String(format: "%.0f", value))")
+    }
+
+    var body: some View {
+        VStack {
+            Text("Health Statistics for Past 7 Days")
+                .font(.title)
+            labelledValue("Average Heart Rate", viewModel.heartRate)
+            labelledValue(
+                "Average Resting Heart Rate",
+                viewModel.restingHeartRate
+            )
+            labelledValue("Total Steps", viewModel.steps)
+            labelledValue("Total Calories Burned", viewModel.activeEnergyBurned)
+        }
+    }
+}
+```
+
+```swift
+// HealthKitViewModel.swift
+import HealthKit
+
+@MainActor
+class HealthKitViewModel: ObservableObject {
+    @Published private(set) var activeEnergyBurned: Double = 0
+    @Published private(set) var heartRate: Double = 0
+    @Published private(set) var restingHeartRate: Double = 0
+    @Published private(set) var steps: Double = 0
+
+    init() {
+        Task {
+            let healthManager = HealthManager()
+            do {
+                try await healthManager.authorize(identifiers: [
+                    .activeEnergyBurned,
+                    .heartRate,
+                    .restingHeartRate,
+                    .stepCount
+                ])
+
+                let endDate = Date.now
+                let startDate = Calendar.current.date(
+                    byAdding: DateComponents(day: -7),
+                    to: endDate,
+                    wrappingComponents: false
+                )!
+
+                activeEnergyBurned = try await healthManager.sum(
+                    identifier: .activeEnergyBurned,
+                    unit: .kilocalorie(),
+                    startDate: startDate,
+                    endDate: endDate
+                )
+                heartRate = try await healthManager.average(
+                    identifier: .heartRate,
+                    unit: HKUnit(from: "count/min"),
+                    startDate: startDate,
+                    endDate: endDate
+                )
+                restingHeartRate = try await healthManager.average(
+                    identifier: .restingHeartRate,
+                    unit: HKUnit(from: "count/min"),
+                    startDate: startDate,
+                    endDate: endDate
+                )
+                steps = try await healthManager.sum(
+                    identifier: .stepCount,
+                    unit: .count(),
+                    startDate: startDate,
+                    endDate: endDate
+                )
+            } catch {
+                print("error getting health data: \(error)")
+            }
+        }
+    }
+}
+```
+
+```swift
+// HealthManager.swift
+import HealthKit
+
+class HealthManager: ObservableObject {
+    private let store = HKHealthStore()
+
+    func authorize(identifiers: [HKQuantityTypeIdentifier]) async throws {
+        let typeSet: Set<HKQuantityType> = Set(
+            identifiers.map { .quantityType(forIdentifier: $0)! }
+        )
+        try await store.requestAuthorization(toShare: [], read: typeSet)
+    }
+
+    func average(
+        identifier: HKQuantityTypeIdentifier,
+        unit: HKUnit,
+        startDate: Date,
+        endDate: Date
+    ) async throws -> Double {
+        let quantityType = HKSampleType.quantityType(forIdentifier: identifier)!
+        let datePredicate = HKQuery.predicateForSamples(
+            withStart: startDate,
+            end: endDate
+        )
+        let samplePredicate = HKSamplePredicate.quantitySample(
+            type: quantityType,
+            predicate: datePredicate
+        )
+        let descriptor = HKSampleQueryDescriptor(
+            predicates: [samplePredicate],
+            sortDescriptors: []
+        )
+        let samples = try await descriptor.result(for: store)
+        let sum = samples.reduce(0) { $0 + $1.quantity.doubleValue(for: unit) }
+        return sum / Double(samples.count)
+    }
+
+    func sum(
+        identifier: HKQuantityTypeIdentifier,
+        unit: HKUnit,
+        startDate: Date,
+        endDate: Date
+    ) async throws -> Double {
+        let quantityType = HKSampleType.quantityType(forIdentifier: identifier)!
+        let datePredicate = HKQuery.predicateForSamples(
+            withStart: startDate,
+            end: endDate
+        )
+        let samplePredicate = HKSamplePredicate.quantitySample(
+            type: quantityType,
+            predicate: datePredicate
+        )
+        let descriptor = HKSampleQueryDescriptor(
+            predicates: [samplePredicate],
+            sortDescriptors: []
+        )
+        let samples = try await descriptor.result(for: store)
+        return samples.reduce(0) { $0 + $1.quantity.doubleValue(for: unit) }
+    }
+}
+```
 
 ## Writing Data
 
