@@ -95,9 +95,9 @@ The group contains the following files:
 
   This associates names with assets such as colors, images, and data files.
   It is not used for audio and video files.
-
   Initially this only contains `AccentColor` and `AppIcon`
   that both have no value.
+
   To add an app icon, click `Assets.xcassets`, select `AppIcon`,
   and drag an image into its editor.
   When creating an iOS or watchOS app there are two options
@@ -106,7 +106,13 @@ The group contains the following files:
   A single size icon must have the dimensions 1024 x 1024.
   When "All Sizes" is selected, a different icon must be
   dragged into the editor for many different sizes.
-  SVG images are not supported.
+
+  SVG images are not supported for app icons.
+  To convert an SVG image to another format such as PNG, consider using
+  {% aTargetBlank "https://cloudconvert.com/svg-to-png", "cloudconvert" %}.
+
+  Avoid app icons with transparent backgrounds because the transparent areas
+  will be rendered in black.
 
 - `Preview Content` group
 
