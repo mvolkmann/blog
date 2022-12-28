@@ -9,10 +9,10 @@ layout: topic-layout.njk
 
 ## Issues
 
-Deadlocks:
-Starvation:
-Race Conditions:
-Livelocks:
+- Deadlocks:
+- Starvation:
+- Race Conditions:
+- Livelocks:
 
 ## Low-level Approaches
 
