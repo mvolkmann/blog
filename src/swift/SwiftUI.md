@@ -4846,6 +4846,15 @@ ProgressView()
     .scaleEffect(x: 3, y: 3, anchor: .center)
 ```
 
+Sometimes it is desirable to delay rendering a `ProgressView`
+by a short amount of time. For example, when making a network call it is best
+to only display a progress indicator if the call does not complete quickly.
+One way to achieve this is with `DispatchQueue.main.asyncAfter`.
+This can be wrapped in a custom view modifier to simplify the code.
+See {% aTargetBlank
+"https://www.photoroom.com/tech/improving-loading-experience-in-swiftui/",
+"Improving the Loading Experience in SwiftUI" %}.
+
 ### Gauge
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/gauge",
