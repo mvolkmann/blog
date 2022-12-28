@@ -1664,7 +1664,7 @@ func update<T: CloudKitable>(item: T) async throws { ... }
 func update(item: some CloudKitable) async throws { ... }
 ```
 
-## <a name="built-in-collection-types">Built-in Collection Types</a>
+## Collection Types
 
 Swift provides several generic collection types.
 
@@ -1682,8 +1682,8 @@ the elements in the collection can be modified.
 However, when a constant is initialized to a collection instance,
 the elements in the collection cannot be modified.
 
-The following is a partial class hierarchy of the built-in collections,
-including the protocols to which they conform:
+The following is a partial class hierarchy of the collection types
+provided by Swift, including the protocols to which they conform:
 
 - `Sequence` protocol
   - `Collection` protocol
@@ -3587,7 +3587,7 @@ They could have chosen to use the same generic syntax.
 
 Associated types are often used in protocols that describe kinds of collections.
 The Swift Standard Library collection hierarchy is described in the
-<a href="#built-in-collection-types">Built-in Collection Types</a>
+[Collection Types](#collection-types)
 section above.
 It defines many collections types such as `Array`, `Dictionary`, and `Set`.
 Each of these conform to the `Collection` protocol
