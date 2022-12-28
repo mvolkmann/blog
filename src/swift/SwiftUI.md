@@ -96,6 +96,18 @@ The group contains the following files:
   This associates names with assets such as colors, images, and data files.
   It is not used for audio and video files.
 
+  Initially this only contains `AccentColor` and `AppIcon`
+  that both have no value.
+  To add an app icon, click `Assets.xcassets`, select `AppIcon`,
+  and drag an image into its editor.
+  When creating an iOS or watchOS app there are two options
+  for adding an app icon, "All Sizes" and "Single Size".
+  Select one of these in the Inspector on the right.
+  A single size icon must have the dimensions 1024 x 1024.
+  When "All Sizes" is selected, a different icon must be
+  dragged into the editor for many different sizes.
+  SVG images are not supported.
+
 - `Preview Content` group
 
   This contains the file `Preview Assets.xcassets`
@@ -6116,6 +6128,55 @@ The name of this view modifier doesn't end in `Color` like {% aTargetBlank
 any `View` and is not restricted to only being a color.
 
 The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)",
+"foregroundStyle" %} view modifier is used style any kind of `View`
+that supports styling with a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/shapestyle", "ShapeStyle" %}.
+This includes `Text` and views that conform to the `Shape` protocol.
+For example, it can be used to add gradient color to text.
+
+<img alt="SwiftUI foregroundStyle gradient" style="width: 30%"
+  src="/blog/assets/SwiftUI-foregroundStyle-gradient.png?v={{pkg.version}}"
+  title="SwiftUI foregroundStyle gradient">
+
+```swift
+Text("Hello, World!")
+    .foregroundStyle(
+        .linearGradient(
+            colors: [.blue, .red],
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+    )
+```
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/hierarchicalshapestyle",
+"HierarchicalShapeStyle" %} struct defines the static properties
+`primary`, `secondary`, `tertiary`, and `quaternary`.
+They can be used to style text and shapes.
+They are defined by the OS and cannot be modified.
+The only difference I see between them is that
+they vary from dark gray to light gray.
+They are typically passed to the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)",
+"foregroundStyle" %} view modifier as shown below:
+
+These are typically passed to the `foregroundStyle` view modifier
+as shown below:
+
+<img alt="SwiftUI foregroundStyle HierarchicalShapeStyle" style="width: 30%"
+  src="/blog/assets/SwiftUI-foregroundStyle-HierarchicalShapeStyle.png?v={{pkg.version}}"
+  title="SwiftUI foregroundStyle HierarchicalShapeStyle">
+
+```swift
+Text("Primary").foregroundStyle(.primary)
+Text("Secondary").foregroundStyle(.secondary)
+Text("Tertiary").foregroundStyle(.tertiary)
+Text("Quaternary").foregroundStyle(.quaternary)
+```
+
+The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/shadow(color:radius:x:y:)",
 "shadow" %} view modifier adds a shadow to a view.
 For example:
@@ -6553,57 +6614,6 @@ accessibility size.
 
 In apps that use dynamic fonts, test all screens at various font size
 preferences to verify that the resulting layout is acceptable.
-
-## foregroundStyle
-
-They {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)",
-"foregroundStyle" %} view modifier is used style any kind of `View`
-that supports styling with a {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/shapestyle", "ShapeStyle" %}.
-This includes `Text` and views that conform to the `Shape` protocol.
-For example, it can be used to add gradient color to text.
-
-<img alt="SwiftUI foregroundStyle gradient" style="width: 30%"
-  src="/blog/assets/SwiftUI-foregroundStyle-gradient.png?v={{pkg.version}}"
-  title="SwiftUI foregroundStyle gradient">
-
-```swift
-Text("Hello, World!")
-    .foregroundStyle(
-        .linearGradient(
-            colors: [.blue, .red],
-            startPoint: .leading,
-            endPoint: .trailing
-        )
-    )
-```
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/hierarchicalshapestyle",
-"HierarchicalShapeStyle" %} struct defines the static properties
-`primary`, `secondary`, `tertiary`, and `quaternary`.
-They can be used to style text and shapes.
-They are defined by the OS and cannot be modified.
-The only difference I see between them is that
-they vary from dark gray to light gray.
-They are typically passed to the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)",
-"foregroundStyle" %} view modifier as shown below:
-
-These are typically passed to the `foregroundStyle` view modifier
-as shown below:
-
-<img alt="SwiftUI foregroundStyle HierarchicalShapeStyle" style="width: 30%"
-  src="/blog/assets/SwiftUI-foregroundStyle-HierarchicalShapeStyle.png?v={{pkg.version}}"
-  title="SwiftUI foregroundStyle HierarchicalShapeStyle">
-
-```swift
-Text("Primary").foregroundStyle(.primary)
-Text("Secondary").foregroundStyle(.secondary)
-Text("Tertiary").foregroundStyle(.tertiary)
-Text("Quaternary").foregroundStyle(.quaternary)
-```
 
 ## Safe Area
 
