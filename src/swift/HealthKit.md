@@ -582,7 +582,8 @@ in the "Info" tab of the main target
 with a description like "To read health data".
 
 The following code demonstrates retrieving data from HealthKit
-and display it.
+and display it. For the full iOS project, see this {% aTargetBlank
+"https://github.com/mvolkmann/Workouts", "GitHub repository" %}.
 
 ```swift
 // ContentView.swift
@@ -747,5 +748,91 @@ with a description like "To write workout data".
 The following code demonstrates writing data to HealthKit.
 
 ```swift
-TODO: Add this!
+// ContentView.swift
+import SwiftUI
+
+// Code for this struct appears in the previous section.
+struct ContentView: View {
+    ...
+
+    @State private var caloriesBurned = "850"
+    @State private var cyclingMiles = "20.0"
+    @State private var endTime = Date() // adjusted in init
+    @State private var startTime = Date() // adjusted in init
+
+    init() {
+        // Remove seconds from the end time.
+        let calendar = Calendar.current
+        let endSeconds = calendar.component(.second, from: endTime)
+        let secondsCleared = calendar.date(
+            byAdding: .second,
+            value: -endSeconds,
+            to: endTime
+        )!
+        _endTime = State(initialValue: secondsCleared)
+
+        // Set start time to one hour before the end time.
+        let oneHourBefore = calendar.date(
+            byAdding: .hour,
+            value: -1,
+            to: endTime
+        )!
+        _startTime = State(initialValue: oneHourBefore)
+    }
+
+    // Add this method and call it when a Button is tapped.
+    private func addWorkout() {
+        Task {
+            do {
+                // HealthKit seems to round down to the nearest tenth.
+                // For example, 20.39 becomes 20.3.
+                // Adding 0.05 causes it to round to the nearest tenth.
+                let distance = (cyclingMiles as NSString).doubleValue + 0.05
+                let calories = (caloriesBurned as NSString).intValue
+                try await HealthKitManager().addCyclingWorkout(
+                    startTime: startTime,
+                    endTime: endTime,
+                    distance: distance,
+                    calories: Int(calories)
+                )
+            } catch {
+                print("Error adding workout: \(error)")
+            }
+        }
+    }
+}
+```
+
+```swift
+// HealthManager.swift
+import HealthKit
+
+// Code for this class appears in the previous section.
+class HealthManager: ObservableObject {
+    ...
+
+    // Add this method.
+    func addCyclingWorkout(
+        startTime: Date,
+        endTime: Date,
+        distance: Double,
+        calories: Int
+    ) async throws {
+        let workout = HKWorkout(
+            activityType: HKWorkoutActivityType.cycling,
+            start: startTime,
+            end: endTime,
+            duration: 0, // compute from start and end data
+            totalEnergyBurned: HKQuantity(
+                unit: .kilocalorie(),
+                doubleValue: Double(calories)
+            ),
+            totalDistance: HKQuantity(unit: .mile(), doubleValue: distance),
+            metadata: nil
+        )
+        try await store.save(workout)
+    }
+}
+
+
 ```
