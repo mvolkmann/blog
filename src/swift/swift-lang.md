@@ -2637,6 +2637,8 @@ a default initializer that takes no arguments is provided.
 
 Structs are value types. This means that assigning one to a variable
 creates a copy rather than assigning a reference to the same instance.
+This uses copy-on-write so that an actual copy
+is not made until it is modified.
 
 ```swift
 var dog2 = dog // dog2 is a copy of dog.
