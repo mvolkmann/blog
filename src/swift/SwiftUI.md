@@ -1298,6 +1298,7 @@ define the following extension:
 
 ```swift
 // Make String instances identifiable by their value.
+// This assumes that no two Strings in an Array will have the same value.
 extension String: Identifiable {
     public var id: String { self }
 }
