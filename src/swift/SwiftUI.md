@@ -3778,6 +3778,16 @@ TextField("First Name", text: $firstName)
     .textFieldStyle(.roundedBorder)
 ```
 
+To add a clear button ("x" in a circle) that can be tapped
+to clear the value of `TextField` instances add the following
+to a container view that contains all of them:
+
+```swift
+.onAppear {
+    UITextField.appearance().clearButtonMode = .whileEditing
+}
+```
+
 To allow entering multiple lines of text,
 set the `axis` argument to `.vertical`.
 Optionally limit the maximum number of visible lines with the {% aTargetBlank
@@ -10473,6 +10483,8 @@ so it can be used in the SwiftUI app.
 One feature this has that is missing from the SwiftUI `TextField` view
 is the ability to include a clear button on the trailing end
 that is an "X" in a circle. Tapping this clears the value.
+An easier way to add a clear button to `TextField` instances
+is described in the [TextField](#textfield) section.
 
 ```swift
 struct MyUITextField: UIViewRepresentable {
