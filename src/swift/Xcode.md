@@ -781,3 +781,9 @@ The following table summarize the most commonly used keyboard shortcuts.
 | find and replace in project                         | cmd-option-shift-f                             |
 | git commit                                          | cmd-option-c                                   |
 | git pull                                            | cmd-option-x                                   |
+
+## Using New Swift Version
+
+See {% aTargetBlank
+"https://sarunw.com/posts/how-to-use-pre-release-swift-version-in-xcode/",
+"How to use a pre-release Swift version in Xcode" %}.
