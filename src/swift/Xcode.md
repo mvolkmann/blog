@@ -725,3 +725,59 @@ See this {% aTargetBlank
 "https://github.com/johnno1962/InjectionIII/issues/425", "issue" %}.
 In the code below, hot reload will not pick up
 a change to the value of the `name` property.
+
+## Keyboard Shortcuts
+
+Xcode supports a large number of keyboard shortcuts,
+many of which were described in the previous sections.
+The following table summarize the most commonly used keyboard shortcuts.
+
+| Action                                              | Key                                            |
+| --------------------------------------------------- | ---------------------------------------------- |
+| show file navigator                                 | cmd-1                                          |
+| show local changes navigator                        | cmd-2                                          |
+| show symbols navigator                              | cmd-3                                          |
+| show find navigator                                 | cmd-4                                          |
+| show issues navigator                               | cmd-5                                          |
+| show tests navigator                                | cmd-6                                          |
+| show debug navigator                                | cmd-7                                          |
+| show breakpoints navigator                          | cmd-8                                          |
+| show reports navigator                              | cmd-9                                          |
+| activate console                                    | cmd-shift-c                                    |
+| toggle debug area                                   | cmd-shift-y                                    |
+| toggle toolbar                                      | cmd-option-t                                   |
+| toggle full screen                                  | cmd-ctrl-f                                     |
+| toggle preview display                              | cmd-option-return                              |
+| toggle minimap                                      | cmd-ctrl-shift-m                               |
+| toggle authors (who last edited each line and when) | cmd-ctrl-shift-a                               |
+| open developer documentation                        | cmd-shift-0                                    |
+| open library                                        | cmd-shift-l                                    |
+| increase font size                                  | cmd-plus                                       |
+| decrease font size                                  | cmd-minus                                      |
+| open file                                           | cmd-o                                          |
+| fuzzy file finder (open quickly)                    | cmd-shift-o                                    |
+| restart preview                                     | cmd-option-p                                   |
+| build                                               | cmd-b                                          |
+| build and run                                       | cmd-r                                          |
+| clean                                               | cmd-shift-k                                    |
+| go to previous location                             | cmd-ctrl-left or tap "<" button in upper-left  |
+| go to next location                                 | cmd-ctrl-right or tap ">" button in upper-left |
+| switch to next file tab                             | cmd-}                                          |
+| switch to previous file tab                         | cmd-{                                          |
+| re-indent current line or selected lines            | ctrl-i                                         |
+| increase line indent                                | cmd-]                                          |
+| decrease line indent                                | cmd-[                                          |
+| fold code                                           | cmd-option-left                                |
+| unfold code                                         | cmd-option-right                               |
+| fold all functions and methods                      | cmd-option-shift-left                          |
+| unfold all functions and methods                    | cmd-option-shift-right                         |
+| find in file                                        | cmd-f                                          |
+| find next in file                                   | cmd-g                                          |
+| find previous in file                               | cmd-shift-g                                    |
+| find and replace in file                            | cmd-option-f                                   |
+| find and replace next in file                       | cmd-option-g                                   |
+| find in project                                     | cmd-shift-f                                    |
+| find next in project                                | cmd-shift-g                                    |
+| find and replace in project                         | cmd-option-shift-f                             |
+| git commit                                          | cmd-option-c                                   |
+| git pull                                            | cmd-option-x                                   |
