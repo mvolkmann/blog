@@ -376,7 +376,15 @@ There are three other similar functions that can be used.
   to ensure that `completion.resume` is called exactly once.
   This makes it slightly faster.
 
+Use of the unsafe versions is generally not recommended.
+
 ## Structured Concurrency
+
+Structured concurrency provides a way to
+execute multiple tasks at the same time AND
+write code in the order in which it is expected to run.
+The async/await system provides two ways to do this,
+`async let` and task groups.
 
 ### async let
 
