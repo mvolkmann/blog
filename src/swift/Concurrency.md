@@ -268,25 +268,33 @@ struct ContentView: View {
 ## Continuations
 
 Functions that take a completion handler (aka callback)
-can be wrapped in a new `async` function to simplify using them.
+can be wrapped in a new `async` function that does not take a callback
+in order to simplify their use.
 
-As of iOS 15 all Apple framework functions that take a callback
-also have an `async` version, so it is not necessary to wrap them.
-Functions in non-Apple frameworks may still use completion handlers
+In iOS 15 and above, all Apple provided functions that
+take a completion handler also have an `async` version.
+So it is not necessary to wrap the versions that take a completion handler.
+However, functions in non-Apple frameworks may still use completion handlers
 and these benefit from wrapping.
 
 Suppose Apple had not provided an `async` method in `URLSession`
-for retrieving data from a URL.
+for retrieving data from a `URL`.
 We could modify the code in the previous example as shown below.
-While the `fetchActivityWithContinuation` function is somewhat complicated,
+While the `fetchActivityWithContinuation` function below
+is somewhat complicated,
 calling it does not require passing a completion handler.
 This simplifies the code in callers.
 
 ```swift
+    // This custom error type is passed to
+    // `completion.resume(throwing: ...)` below.
     enum MyError: Error {
         case badResponseType, badStatus, noData
     }
 
+    // This replaces the `fetchActivity function in the previous example
+    // with one that calls the wrapping function
+    // `fetchActivityWithContinuation`.
     private func fetchActivity() async {
         fetching = true
         message = ""
@@ -304,7 +312,7 @@ This simplifies the code in callers.
         // The closure passed to `withCheckedThrowingContinuation`
         // is passed a `CheckedContinuation` object.
         // This has a `resume` method that must be called
-        // when the data is returned or when an error occurs.
+        // when data is available or when an error occurs.
         try await withCheckedThrowingContinuation { completion in
             let task = URLSession.shared.dataTask(
                 with: apiURL
