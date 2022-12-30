@@ -208,12 +208,15 @@ struct ContentView: View {
     let apiURL = URL(string: "https://www.boredapi.com/api/activity")!
 
     private func fetchActivity() async {
-        do {
-            fetching = true
-            message = ""
+        fetching = true
+        message = ""
 
-            let (data, response) = try await URLSession.shared
-                .data(from: apiURL)
+        do {
+            // The data method returns a tuple.
+            // The type of response is URLResponse.
+            // Cast it to HTTPURLResponse to get information from it.
+            let (data, response) =
+                try await URLSession.shared.data(from: apiURL)
             if let res = response as? HTTPURLResponse {
                 if res.statusCode == 200 {
                     activity = try JSONDecoder()
@@ -224,11 +227,11 @@ struct ContentView: View {
             } else {
                 message = "bad response type"
             }
-
-            fetching = false
         } catch {
-            print("error: \(error)")
+            message = "error: \(error)"
         }
+
+        fetching = false
     }
 
     var body: some View {
@@ -253,6 +256,8 @@ struct ContentView: View {
             }
         }
         .padding()
+        // This is a view modifier that is similar to onAppear,
+        // but runs the closure passed to it in an async context.
         .task {
             await fetchActivity()
         }
