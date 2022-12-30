@@ -64,7 +64,7 @@ such as mutexes and semaphores.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/foundation/nsthread",
-class is part of the Apple Foundation framework.
+"NSThread" %} class is part of the Apple Foundation framework.
 It provides another low-level approach to managing concurrency,
 but is somewhat easier to use than pthreads.
 This class can be accessed from Objective-C instead of C.
@@ -164,6 +164,98 @@ struct ContentView: View {
             actions: {},
             message: { Text(message) }
         )
+    }
+}
+```
+
+The `await` keyword can choose to suspend execution of the current function.
+This allows the thread that was executing the function to perform other work.
+The code after the function call that uses `await` (the suspension point)
+is referred to as a "continuation".
+When the function is resumed later, the continuation is executed,
+possibly in a different thread than the one in which function execution began.
+
+In iOS 15 and above, all Apple provided functions that
+take a completion handler also have an `async` version.
+This means there is no longer a need to
+pass completion handlers to Apple's APIs,
+resulting in code that is easier to write and read.
+For example, {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/urlsession",
+"URLSession" %} has many async methods.
+
+The following code demonstrates using the `async` and `await` keywords
+with the `URLSession` class.
+
+```swift
+import SwiftUI
+
+struct Activity: Decodable {
+    let activity: String
+    let type: String
+    let participants: Int
+    let price: Double
+    let link: String
+    let key: String
+    let accessibility: Double
+}
+
+struct ContentView: View {
+    @State private var activity: Activity?
+    @State private var fetching = false
+    @State private var message = ""
+
+    let apiURL = URL(string: "https://www.boredapi.com/api/activity")!
+
+    private func fetchActivity() async {
+        do {
+            fetching = true
+            message = ""
+
+            let (data, response) = try await URLSession.shared
+                .data(from: apiURL)
+            if let res = response as? HTTPURLResponse {
+                if res.statusCode == 200 {
+                    activity = try JSONDecoder()
+                        .decode(Activity.self, from: data)
+                } else {
+                    message = "bad status \(res.statusCode)"
+                }
+            } else {
+                message = "bad response type"
+            }
+
+            fetching = false
+        } catch {
+            print("error: \(error)")
+        }
+    }
+
+    var body: some View {
+        VStack {
+            Text("Are you bored?").font(.largeTitle)
+            if fetching {
+                Text("Waiting for suggestion ...")
+                ProgressView()
+            } else {
+                Button("Get Suggested Activity") {
+                    Task { await fetchActivity() }
+                }
+                .buttonStyle(.borderedProminent)
+
+                if let activity {
+                    Text(activity.activity + ".").font(.title)
+                }
+            }
+
+            if !message.isEmpty {
+                Text(message).foregroundColor(.red)
+            }
+        }
+        .padding()
+        .task {
+            await fetchActivity()
+        }
     }
 }
 ```
