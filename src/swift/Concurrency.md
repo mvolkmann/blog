@@ -7,9 +7,15 @@ layout: topic-layout.njk
 
 ## Overview
 
+Apple added the async/await system to Swift in 2021.
+This removes most needs to use low-level concurrency mechanisms
+such as mutexes and semaphores.
+It also removes the need to use completion handlers (aka callbacks)
+and some uses of the delegate pattern.
+
 ## Issues
 
-- Deadlocks:
+- Deadlocks: two processes are waiting each other to finish so neither can
 - Starvation:
 - Race Conditions:
 - Livelocks:

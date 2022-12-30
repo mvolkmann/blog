@@ -11,8 +11,10 @@ CloudKit is an Apple-provided cloud-based database solution
 that is similar to Firebase.
 It provides a generous amount of free storage.
 Developers need an Apple Developer account in order to use CloudKit in an app.
-Users of the app need an Apple ID and must configure the use of iCloud
-in the Settings app of their devices.
+
+Users of apps that use CloudKit must have an Apple ID.
+On each device that will run the app, users must open the Settings app,
+sign in to their iCloud account, and enable "iCloud Drive".
 
 CloudKit supports three kinds of databases.
 
