@@ -267,10 +267,106 @@ struct ContentView: View {
 
 ## Continuations
 
-- `withCheckedContinuation`
-- `withCheckedThrowingContinuation`
-- `withUnsafeContinuation`
-- `withUnsafeThrowingContinuation`
+Functions that take a completion handler (aka callback)
+can be wrapped in a new `async` function to simplify using them.
+
+As of iOS 15 all Apple framework functions that take a callback
+also have an `async` version, so it is not necessary to wrap them.
+Functions in non-Apple frameworks may still use completion handlers
+and these benefit from wrapping.
+
+Suppose Apple had not provided an `async` method in `URLSession`
+for retrieving data from a URL.
+We could modify the code in the previous example as shown below.
+While the `fetchActivityWithContinuation` function is somewhat complicated,
+calling it does not require passing a completion handler.
+This simplifies the code in callers.
+
+```swift
+    enum MyError: Error {
+        case badResponseType, badStatus, noData
+    }
+
+    private func fetchActivity() async {
+        fetching = true
+        message = ""
+
+        do {
+            activity = try await fetchActivityWithContinuation()
+        } catch {
+            message = error.localizedDescription
+        }
+
+        fetching = false
+    }
+
+    private func fetchActivityWithContinuation() async throws -> Activity {
+        // The closure passed to `withCheckedThrowingContinuation`
+        // is passed a `CheckedContinuation` object.
+        // This has a `resume` method that must be called
+        // when the data is returned or when an error occurs.
+        try await withCheckedThrowingContinuation { completion in
+            let task = URLSession.shared.dataTask(
+                with: apiURL
+            ) { data, response, _ in
+                // The type of response is URLResponse.
+                // Cast it to HTTPURLResponse to get information from it.
+                guard let response = response as? HTTPURLResponse else {
+                    completion.resume(throwing: MyError.badResponseType)
+                    return
+                }
+
+                guard response.statusCode == 200 else {
+                    completion.resume(throwing: MyError.badStatus)
+                    return
+                }
+
+                guard let data = data else {
+                    completion.resume(throwing: MyError.noData)
+                    return
+                }
+
+                do {
+                    let activity = try JSONDecoder().decode(
+                        Activity.self,
+                        from: data
+                    )
+                    completion.resume(returning: activity)
+                } catch {
+                    completion.resume(throwing: error)
+                }
+            }
+
+            task.resume()
+        }
+    }
+```
+
+The example above demonstrates using the {% aTargetBlank
+"https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)",
+"withCheckedThrowingContinuation" %} function.
+If `completion.resume` is never called, the runtime error
+"SWIFT TASK CONTINUATION MISUSE: ... leaked its continuation!"
+will be triggered.
+If `completion.resume` is called more than once, the runtime error
+"SWIFT TASK CONTINUATION MISUSE: ... tried to resume its continuation
+more than once" will be triggered.
+
+There are three other similar functions that can be used.
+
+- {% aTargetBlank "https://developer.apple.com/documentation/swift/withcheckedcontinuation(function:_:)", "withCheckedContinuation" %}
+  is like `withCheckedThrowingContinuation`, but does not throw and
+  the compiler will not allow calling `completion.resume(throwing: someError)`.
+
+- {% aTargetBlank "https://developer.apple.com/documentation/swift/withunsafecontinuation(_:)", "withUnsafeContinuation" %}
+  is like `withCheckedContinuation` but does not perform runtime checks
+  to ensure that `completion.resume` is called exactly once.
+  This makes it slightly faster.
+
+- {% aTargetBlank "https://developer.apple.com/documentation/swift/withunsafethrowingcontinuation(_:)", "withUnsafeThrowingContinuation" %}
+  is like `withCheckedThrowingContinuation` but does not perform runtime checks
+  to ensure that `completion.resume` is called exactly once.
+  This makes it slightly faster.
 
 ## Structured Concurrency
 
