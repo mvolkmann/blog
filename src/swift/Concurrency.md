@@ -102,6 +102,72 @@ To use this:
 
 ## async/await keywords
 
+The `async` and `await` keywords free developers from
+the low-level details of thread management.
+They allow concurrent code to be written in a manner
+similar to procedural programming,
+resulting in code that is easier to write and read.
+
+Unlike concurrent code that uses completion handlers (aka callbacks),
+using `async` and `await` does not result in deeply nested code.
+
+To use this approach, add the `async` keyword
+after the parameter list and before the return type
+of all functions that run asynchronously.
+Inside the function, add the `await` keyword
+before all calls to other asynchronous functions.
+For example:
+
+```swift
+function getCurrentCity() async throws -> String {
+    let coordinates = await getCurrentCoordinates() // implemented elsewhere
+    let address = await getAddress(of: coordinates) // implemented elsewhere
+    return address.city
+}
+```
+
+All `async` functions must be called from a concurrent context.
+All `async` functions run in a concurrent context,
+so they can call other `async` functions.
+Another way to create a concurrent context is by creating a {% aTargetBlank
+"https://developer.apple.com/documentation/swift/task", "Task" %} object.
+For example:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var city = ""
+    @State private var isShowingError = false
+    @State private var message = ""
+
+    var body: some View {
+        VStack {
+            Button("Get City") {
+                Task {
+                    do {
+                        let currentCity = try await getCurrentCity()
+                        // This updates the UI on the main thread
+                        // and will be explained more later.
+                        await MainActor.run { city = currentCity }
+                    } catch {
+                        message = "Error getting city: \(error)"
+                        isShowingError = true
+                    }
+                }
+            }
+            Text("City: \(city)")
+        }
+        .alert(
+            "Error",
+            isPresented: $isShowingAlert,
+            actions: {},
+            message: { Text(message) }
+        )
+    }
+}
+```
+
 ## Continuations
 
 - `withCheckedContinuation`
