@@ -685,6 +685,202 @@ Accesses to actor properties and methods
 must occur in an asynchronous context
 and be preceded by the `await` keyword.
 
+The following code demonstrates implementing a custom `Actor`
+that maintains an array of `User` objects and
+provides a method for adding a new `User`
+that is obtained from an API endpoint.
+The view model used by the UI asks the `Actor`
+to add a new `User` every three seconds.
+The UI also contains a `Button` that when tapped adds another `User`.
+
+```swift
+import SwiftUI
+
+enum NetworkError: Error {
+    case badResponseType
+    case badStatus(status: Int)
+    case noData
+}
+
+// The following structs describe the JSON returned by
+// the API endpoint https://randomuser.me/api/.
+
+struct Address: Decodable {
+    let title: String
+    let first: String
+    let last: String
+}
+
+struct Location: Decodable {
+    let street: Street
+    let city: String
+    let state: String
+    let country: String
+    let postcode: String
+
+    // We need to decode this struct manually because
+    // postcode can be a String or Int.
+    // Manual decoding requires defining the following enum.
+    private enum CodingKeys: String, CodingKey {
+        case street, city, state, country, postcode, coordinates, timezone
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        street = try container.decode(Street.self, forKey: .street)
+        city = try container.decode(String.self, forKey: .city)
+        state = try container.decode(String.self, forKey: .state)
+        country = try container.decode(String.self, forKey: .country)
+        do {
+            // First try decoding postcode as a String.
+            postcode = try container.decode(String.self, forKey: .postcode)
+        } catch {
+            // If it wasn't a String, try decoding postcode as an Int.
+            postcode = try String(container.decode(Int.self, forKey: .postcode))
+        }
+    }
+}
+
+struct Name: Decodable {
+    let title: String
+    let first: String
+    let last: String
+}
+
+struct Street: Decodable {
+    let number: Int
+    let name: String
+}
+
+struct User: Decodable, Identifiable {
+    let name: Name
+    let location: Location
+    let email: String
+
+    var id: String { email }
+}
+
+struct Users: Decodable {
+    let results: [User]
+}
+
+// This actor enables multiple threads to safely
+// access an array of `User` objects and
+// call the `addUser` method to add another user.
+actor UsersActor {
+    let usersURL = URL(string: "https://randomuser.me/api/")!
+
+    // Multiple threads can safely access this property concurrently.
+    var users: [User] = []
+
+    // Multiple threads can safely call this method concurrently.
+    func addUser() async throws {
+        let (data, response) = try await URLSession.shared.data(from: usersURL)
+        guard let res = response as? HTTPURLResponse else {
+            throw NetworkError.badResponseType
+        }
+        guard res.statusCode == 200 else {
+            throw NetworkError.badStatus(status: res.statusCode)
+        }
+        let decoded = try JSONDecoder().decode(Users.self, from: data)
+        if let user = decoded.results.first {
+            users.insert(user, at: 0)
+        }
+    }
+}
+
+// This view model allows the UI to access the array of `User` objects
+// held by the actor above.
+class UsersViewModel: ObservableObject {
+    @Published var running = false
+    @Published var users: [User] = []
+
+    var timer: Timer?
+    private let usersActor: UsersActor!
+
+    init(usersActor: UsersActor) {
+        self.usersActor = usersActor
+
+        // Add a new user every three seconds.
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 3,
+            repeats: true
+        ) { _ in
+            Task {
+                try await self.addUser()
+            }
+        }
+        running = true
+    }
+
+    func addUser() async throws {
+        try await usersActor.addUser()
+
+        // Get all the users from UserActor.
+        let actorUsers = await usersActor.users
+
+        // Replace the array of users here
+        // with the array in UsersActor.
+        // This must be done on the main queue.
+        await MainActor.run {
+            users = actorUsers
+        }
+    }
+
+    func cancel() {
+        if let timer {
+            timer.invalidate()
+            running = false
+        }
+    }
+}
+
+struct ContentView: View {
+    @StateObject private var viewModel =
+        UsersViewModel(usersActor: UsersActor())
+
+    func render(user: User) -> some View {
+        VStack(alignment: .leading) {
+            let name = user.name
+            let location = user.location
+            let street = location.street
+            Text("\(name.title) \(name.first) \(name.last)")
+            // Using the String initializer prevents comma separators
+            // when numbers are converted to strings.
+            Text(String(street.number) + " " + street.name)
+            Text("\(location.city), \(location.state)")
+            Text("\(location.country) \(location.postcode)")
+            Text(user.email)
+        }
+        .padding(.top)
+    }
+
+    var body: some View {
+        VStack {
+            HStack {
+                Button("Get Another User") {
+                    Task {
+                        try await viewModel.addUser()
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+
+                if viewModel.running {
+                    Button("Cancel") {
+                        viewModel.cancel()
+                    }
+                }
+            }
+
+            List(viewModel.users) { user in
+                render(user: user)
+            }
+        }
+        .padding()
+    }
+}
+```
+
 ## Sendable Types
 
 ## Main Actor
