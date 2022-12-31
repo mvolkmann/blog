@@ -4373,6 +4373,9 @@ struct Users: Decodable {
 
 ## Concurrency
 
+See my newer blog page
+{% aTargetBlank "/blog/topics/#/blog/swift/Concurrency", "Concurrency" %}.
+
 See {% aTargetBlank
 "https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
 "Swift Concurrency" %}.

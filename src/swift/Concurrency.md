@@ -389,7 +389,7 @@ The async/await system provides two ways to do this,
 ### async let
 
 An `async let` statement is a special variable declaration
-whose value is computed asynchronously.
+whose value is computed asynchronously in a new, implicit child task.
 These statements must be used inside an async context
 (either a closure passed to `Task` or an `async` function).
 
@@ -501,11 +501,14 @@ in the order in which it is expected to run.
 
 Unstructured concurrency relies on creating {% aTargetBlank
 "https://developer.apple.com/documentation/swift/task", "Task" %} objects
-which are passed a closure that runs in an asynchronous context
-and can begin running immediately.
+which are passed a closure that runs in an asynchronous context.
+The system typically runs the task immediately, but can choose to
+defer execution based on the number of tasks that are already running.
 
-When a `Task` completes successfully, it can hold a value.
-When a `Task` fails, it can hold an error.
+`Task` is a generic struct. When creating an instance,
+specify the `Success` type which is the type of the value it will hold
+and the `Error` type which is the type of error it can hold.
+If a `Task` never throws, specify `Never` for the `Error` type.
 
 The `Task` initializer can be passed the priority under which it should run.
 The available priorities from lowest to highest are:
@@ -514,20 +517,25 @@ The available priorities from lowest to highest are:
 - `.medium` or `.utility`
 - `.high` or `.userInitiated`
 
-New tasks inherit several things from the task that started them including:
-
-- running on the same actor
-- running at the same priority
-
 When a `Task` is saved in a variable:
 
 - its value can be obtained using `let taskValue = await myTask.value`
 - it can be cancelled by calling `myTask.cancel()`
 
-`Task` is a generic struct. When creating an instance,
-specify the `Success` type which is the type of the value it will return
-and the `Error` type which is the type of error it can throw.
-If a `Task` never throws, specify `Never` for the `Error` type.
+When a `Task` might be cancelled, it should check to see if it has been
+cancelled by testing the static `Bool` property `Task.isCancelled`.
+If this is `true`, the `Task` should stop the work it is doing.
+Alternatively, call `try Task.checkCancellation()`
+to throw a `CancellationError` if the `Task` has been cancelled.
+These static properties and methods on the `Task` structure
+apply to the `Task` inside which they are used.
+
+A `Task` inherits several things from the `Task` that started it including:
+
+- running on the same actor
+- running at the same priority
+- cancellation status
+- task local variables (described later)
 
 The following code demonstrates creating a `Task`
 and cancelling it if it runs for too long.
@@ -605,7 +613,13 @@ struct Users: Decodable {
             guard res.statusCode == 200 else {
                 throw MyError.badStatus(status: res.statusCode)
             }
-            guard !Task.isCancelled else { return nil }
+
+            // One option is to return nil if the task has been cancelled.
+            // guard !Task.isCancelled else { return nil }
+
+            // Another option is to throw a CancellationError
+            // if this task has been cancelled.
+            try Task.checkCancellation()
 
             let users = try JSONDecoder().decode(Users.self, from: data)
             return users.results.first
