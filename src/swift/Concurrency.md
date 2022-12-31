@@ -430,6 +430,48 @@ For example:
 
 ### Task Groups
 
+Task groups enable computing a variable number of values concurrently.
+
+In the previous example we only needed to compute two asynchronous values,
+an activity and a dog image.
+Suppose we wanted to fetch a random number of dog images.
+
+The system will decided how many of the tasks to run concurrently.
+Excess tasks will wait for running tasks to complete before they begin.
+
+The following code demonstrates using {% aTargetBlank
+"https://developer.apple.com/documentation/swift/withthrowingtaskgroup(of:returning:body:)",
+"withThrowingTaskGroup" %} to execute tasks that
+download a random number of dog images from 1 to 5.
+When the tasks cannot throw, use {% aTargetBlank
+"https://developer.apple.com/documentation/swift/withtaskgroup(of:returning:body:)",
+"withTaskGroup" %} instead.
+
+```swift
+    private func getDogImages() async throws -> [DogImage] {
+        var dogImages: [DogImage] = []
+        let count = Int.random(in: 1 ... 5)
+
+        try await withThrowingTaskGroup(of: DogImage.self) { group in
+            // Add tasks to the group.
+            for _ in 0 ..< count {
+                group.addTask(priority: .userInitiated) {
+                    let dogImage = try await getDogImage()
+                    return dogImage
+                }
+            }
+
+            // Wait for each task in the group to finish.
+            for try await dogImage in group {
+                dogImages.append(dogImage)
+            }
+        }
+
+        // Return the results of all the tasks.
+        return dogImages
+    }
+```
+
 ## Unstructured Concurrency
 
 ### Task
