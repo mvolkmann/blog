@@ -492,7 +492,44 @@ in which they were added to the group.
 
 ## Unstructured Concurrency
 
+Unstructured concurrency, like structured concurrency,
+provides a way to execute multiple tasks at the same time.
+However, it does not enable writing code
+in the order in which it is expected to run.
+
 ### Task
+
+Unstructured concurrency relies on creating {% aTargetBlank
+"https://developer.apple.com/documentation/swift/task", "Task" %} objects
+which are passed a closure that runs in an asynchronous context
+and can begin running immediately.
+
+The `Task` initializer can be passed the priority under which it should run.
+The available priorities from lowest to highest are:
+
+- `.low` or `.background`
+- `.medium` or `.utility`
+- `.high` or `.userInitiated`
+
+New tasks inherit several things from the task that started them including:
+
+- running on the same actor
+- running at the same priority
+
+When a `Task` is saved in a variable:
+
+- its value can be obtained using `let taskValue = await myTask.value`
+- it can be cancelled by calling `myTask.cancel()`
+
+`Task` is a generic struct. When creating an instance,
+specify the `Success` type which is the type of the value it will return
+and the `Error` type which is the type of error it can throw.
+If a `Task` never throws, specify `Never` for the `Error` type.
+For example:
+
+```swift
+TODO: Add several Task examples!
+```
 
 ### Task Tree
 
