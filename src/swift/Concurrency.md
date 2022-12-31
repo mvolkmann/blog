@@ -257,7 +257,9 @@ struct ContentView: View {
         }
         .padding()
         // This is a view modifier that is similar to onAppear,
-        // but runs the closure passed to it in an async context.
+        // but runs the closure passed to it in a `Task`
+        // which provides an async context.
+        // If the view is removed, the `Task` is cancelled.
         .task {
             await fetchActivity()
         }
