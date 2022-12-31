@@ -520,11 +520,12 @@ The available priorities from lowest to highest are:
 When a `Task` is saved in a variable:
 
 - its value can be obtained using `let taskValue = await myTask.value`
-- it can be cancelled by calling `myTask.cancel()`
+- it can be notified that it is intended to be cancelled
+  by calling `myTask.cancel()`
 
-When a `Task` might be cancelled, it should check to see if it has been
-cancelled by testing the static `Bool` property `Task.isCancelled`.
-If this is `true`, the `Task` should stop the work it is doing.
+When a `Task` might be cancelled, it is responsible for verifying
+whether it has been cancelled and gracefully stopping the work it is doing.
+This can be done by testing the static `Bool` property `Task.isCancelled`.
 Alternatively, call `try Task.checkCancellation()`
 to throw a `CancellationError` if the `Task` has been cancelled.
 These static properties and methods on the `Task` structure
@@ -639,6 +640,17 @@ struct Users: Decodable {
 ```
 
 ### Task Tree
+
+When a `Task` create other tasks, those are considered to be
+child tasks of their parent `Task`.
+This creates a "task tree".
+
+A parent `Task` is not considered finished
+until all of its child tasks complete.
+
+If an error is thrown by a `Task`, the `Task` ends
+and the error is propagated to the parent `Task`.
+Sibling tasks that are running or waiting to run are cancelled.
 
 ## Actors
 
