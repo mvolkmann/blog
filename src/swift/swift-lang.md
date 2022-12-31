@@ -500,12 +500,14 @@ print(getRgb("pink")) // nil
 ```
 
 By default, parameters cannot be modified in function bodies.
-Adding the keyword `inout` before their type changes this.
+Adding the keyword `inout` before a parameter type changes
+the parameter to be passed by reference instead of by value.
+Callers must precede corresponding argument values with an ampersand (`&`).
 Modifying the values of these parameters changes
 the value of the corresponding argument in the caller.
 This only works if the value passed in is a variable (`var`)
 rather than a constant (`let`).
-This seems like a feature to avoid!
+The use of `inout` parameters is not allowed in concurrently executing code.
 
 The type of a function is described by its parameter types and return type.
 For example, the type of the `displaySum` function above is

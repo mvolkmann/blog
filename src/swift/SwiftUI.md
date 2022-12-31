@@ -2565,6 +2565,7 @@ struct MyListStyle: Equatable, Hashable {
         lhs.name == rhs.name
     }
 
+    // inout allows passing by reference so a copy is not made.
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
     }
@@ -8233,6 +8234,7 @@ struct SizeReporter: ViewModifier {
 
     private struct SizePreferenceKey: PreferenceKey {
         static let defaultValue: CGSize = .zero
+        // inout allows passing by reference so a copy is not made.
         static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
             value = nextValue()
         }
