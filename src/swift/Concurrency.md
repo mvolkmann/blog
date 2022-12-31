@@ -388,6 +388,17 @@ The async/await system provides two ways to do this,
 
 ### async let
 
+An `async let` statement is a special kind of variable declaration
+whose value is computed asynchronously.
+This kind of statement must be used inside an async context
+(either a closure passed to `Task` or an `async` function).
+
+The `await` keyword must be used to get the value of the variable.
+
+```swift
+
+```
+
 ### Task Groups
 
 ## Unstructured Concurrency

@@ -3527,14 +3527,10 @@ struct ContentView: View {
         VStack {
             AsyncImage(
                 url: URL(string: imageUrl),
-                content: { image in
-                    image
-                        .resizable()
-                        .frame(width: size, height: size)
-                },
+                content: { image in image.resizable() },
                 placeholder: { ProgressView() } // spinner
             )
-            .frame(width: 100, height: 100)
+            .frame(width: size, height: size)
         }
     }
 }
