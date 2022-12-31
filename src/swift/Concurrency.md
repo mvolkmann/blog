@@ -914,4 +914,33 @@ What types are sendable?
 
 ## Main Actor
 
+TODO: Describe the relationship between the main queue and the main thread.
+
+{% aTargetBlank "https://developer.apple.com/documentation/swift/mainactor",
+"MainActor" %} is a system-provided global actor
+that performs its work on the main queue.
+
+One way to ensure that code runs in the main queue
+is to mark it with the `@MainActor` attribute.
+Most types in SwiftUI and UIKit are marked with this
+and it is recommend that all classes that inherit from `ObservableObject`
+should do the same.
+
+`@MainActor` can be applied to:
+
+- type declarations for a `class`, `struct`, or `enum`
+  which causes all of their properties to be accessed on the main queue
+  and all of their methods to execute on the main queue
+- properties of a type
+- methods of a type
+- functions
+
+Functions that are running in the context of a different actor
+can call functions that will run in the `MainActor` context,
+but they must call them asynchronously using `await` or `async let`.
+
+Async methods may run on a different queue,
+but the assignment of the result to a local variable
+will occur in the main queue.
+
 ## AsyncSequence
