@@ -390,16 +390,16 @@ The async/await system provides two ways to do this,
 
 An `async let` statement is a special variable declaration
 whose value is computed asynchronously.
-This kind of statement must be used inside an async context
+These statements must be used inside an async context
 (either a closure passed to `Task` or an `async` function).
 
-The work to computed the value of each `async let` variable
-may occur in a different thread.
-This is determined by the operating system,
-and cannot be dictated in the code.
+The work to compute the value of each `async let` variable
+begins immediately and may occur in different threads.
+The threads used are determined by the operating system
+and cannot be dictated in code.
 
-The `await` keyword must be used to get the value of the variable.
-It can be used to wait for multiple values to be computed.
+The `await` keyword must be used to get the values of these variables.
+A single `await` can be used to wait for multiple values to be computed.
 For example:
 
 ```swift
@@ -416,7 +416,11 @@ For example:
     Task {
         do {
             async let a = getActivity()
+
+            // getDogImage can begin executing before getActivity completes.
             async let d = getDogImage()
+
+            // This waits for both getActivity and getDogImage to complete.
             (activity, dogImage) = try await (a, d)
         } catch {
             message = error.localizedDescription
