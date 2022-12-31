@@ -504,6 +504,9 @@ Unstructured concurrency relies on creating {% aTargetBlank
 which are passed a closure that runs in an asynchronous context
 and can begin running immediately.
 
+When a `Task` completes successfully, it can hold a value.
+When a `Task` fails, it can hold an error.
+
 The `Task` initializer can be passed the priority under which it should run.
 The available priorities from lowest to highest are:
 

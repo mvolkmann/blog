@@ -4222,6 +4222,153 @@ To convert ISO 8601 date strings to Swift dates:
 decoder.dateDecodingStrategy = .iso8601
 ```
 
+If any properties of a type to be decoded have a data type that varies,
+decode must be performed manually.
+For example, the {% aTargetBlank "https://randomuser.me/api/", "RandomUser" %}
+API endpoint sometimes returns a `postcode` property as a `String`
+and sometimes as an `Int`.
+Here are all the required struct definitions
+followed by an API call and decoding the result.
+In particular, see the `Location` struct.
+
+```swift
+struct Address: Decodable {
+    let title: String
+    let first: String
+    let last: String
+}
+
+struct Coordinates: Decodable {
+    let latitude: String
+    let longitude: String
+}
+
+struct DateOfBirth: Decodable {
+    let date: String
+    let age: Int
+}
+
+struct ID: Decodable {
+    let name: String
+    let value: String
+}
+
+struct Info: Decodable {
+    let seed: String
+    let results: Int
+    let page: Int
+    let version: String
+}
+
+struct Location: Decodable {
+    let street: Street
+    let city: String
+    let state: String
+    let country: String
+    let postcode: String
+    let coordinates: Coordinates
+    let timezone: Timezone
+
+    // We need to decode this struct manually because
+    // postcode can be a String or Int.
+    // This requires defining the following enum.
+    private enum CodingKeys: String, CodingKey {
+        case street, city, state, country, postcode, coordinates, timezone
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        street = try container.decode(Street.self, forKey: .street)
+        city = try container.decode(String.self, forKey: .city)
+        state = try container.decode(String.self, forKey: .state)
+        country = try container.decode(String.self, forKey: .country)
+        do {
+            // First try decoding postcode as a String.
+            postcode = try container.decode(String.self, forKey: .postcode)
+        } catch {
+            // If it wasn't a String, try decoding postcode as an Int.
+            postcode = try String(container.decode(Int.self, forKey: .postcode))
+        }
+        coordinates = try container.decode(
+            Coordinates.self,
+            forKey: .coordinates
+        )
+        timezone = try container.decode(Timezone.self, forKey: .timezone)
+    }
+}
+
+struct Login: Decodable {
+    let uuid: String
+    let username: String
+    let password: String
+    let salt: String
+    let md5: String
+    let sha1: String
+    let sha256: String
+}
+
+struct Name: Decodable {
+    let title: String
+    let first: String
+    let last: String
+}
+
+struct Picture: Decodable {
+    let large: String
+    let medium: String
+    let thumbnail: String
+}
+
+struct Registered: Decodable {
+    let date: String
+    let age: Int
+}
+
+struct Street: Decodable {
+    let number: Int
+    let name: String
+}
+
+struct Timezone: Decodable {
+    let offset: String
+    let description: String
+}
+
+struct User: Decodable {
+    let gender: String
+    let name: Name
+    let location: Location
+    let email: String
+    let login: Login
+    let dob: DateOfBirth
+    let registered: Registered
+    let phone: String
+    let cell: String
+    let id: ID
+    let picture: Picture
+    let nat: String
+}
+
+struct Users: Decodable {
+    let results: [User]
+    let info: Info
+}
+
+    let usersURL = URL(string: "https://randomuser.me/api/")!
+
+    private func fetchUsers() async throws {
+        let (data, response) =
+            try await URLSession.shared.data(from: usersURL)
+        guard let res = response as? HTTPURLResponse else {
+            throw MyError.badResponseType
+        }
+        guard res.statusCode == 200 else {
+            throw MyError.badStatus(status: res.statusCode)
+        }
+        users = try JSONDecoder().decode(Users.self, from: data)
+    }
+```
+
 ## Concurrency
 
 See {% aTargetBlank
