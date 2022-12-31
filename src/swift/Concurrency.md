@@ -388,15 +388,40 @@ The async/await system provides two ways to do this,
 
 ### async let
 
-An `async let` statement is a special kind of variable declaration
+An `async let` statement is a special variable declaration
 whose value is computed asynchronously.
 This kind of statement must be used inside an async context
 (either a closure passed to `Task` or an `async` function).
 
+The work to computed the value of each `async let` variable
+may occur in a different thread.
+This is determined by the operating system,
+and cannot be dictated in the code.
+
 The `await` keyword must be used to get the value of the variable.
+It can be used to wait for multiple values to be computed.
+For example:
 
 ```swift
-
+    @State private var activity: Activity?
+    @State private var dogImage: DogImage?
+    ...
+    private func getActivity() async throws -> Activity {
+        ...
+    }
+    private func getDogImage() async throws -> DogImage {
+        ...
+    }
+    ...
+    Task {
+        do {
+            async let a = getActivity()
+            async let d = getDogImage()
+            (activity, dogImage) = try await (a, d)
+        } catch {
+            message = error.localizedDescription
+        }
+    }
 ```
 
 ### Task Groups
