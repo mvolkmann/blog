@@ -668,6 +668,23 @@ Sibling tasks that are running or waiting to run are cancelled.
 
 ## Actors
 
+Tasks can share mutable data without danger of race conditions
+by running in a common {% aTargetBlank
+"https://developer.apple.com/documentation/swift/actor", "Actor" %}.
+
+Actors:
+
+- are a reference type like classes rather than a value type like structs
+- synchronize access to their mutable state
+- are written similar to classes,
+  substituting the `actor` keyword for the `class` keyword
+- can conform to protocols
+- can obtain additional functionality from extensions
+
+Accesses to actor properties and methods
+must occur in an asynchronous context
+and be preceded by the `await` keyword.
+
 ## Sendable Types
 
 ## Main Actor
