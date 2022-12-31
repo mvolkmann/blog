@@ -432,20 +432,29 @@ For example:
 
 Task groups enable computing a variable number of values concurrently.
 
-In the previous example we only needed to compute two asynchronous values,
+In the previous example we only needed to compute two values concurrently,
 an activity and a dog image.
+
 Suppose we wanted to fetch a random number of dog images.
+We begin by calling {% aTargetBlank
+"https://developer.apple.com/documentation/swift/withtaskgroup(of:returning:body:)",
+"withTaskGroup" %} (when the tasks cannot throw)
+which creates a {% aTargetBlank
+"https://developer.apple.com/documentation/swift/taskgroup", "TaskGroup" %}
+or by calling {% aTargetBlank
+"https://developer.apple.com/documentation/swift/withthrowingtaskgroup(of:returning:body:)",
+"withThrowingTaskGroup" %} (when the tasks can throw)
+which creates a {% aTargetBlank
+"https://developer.apple.com/documentation/swift/throwingtaskgroup",
+"ThrowingTaskGroup" %}.
+Inside the closure where the group is created we call the `addTask` method
+once for each value to be computed.
 
 The system will decided how many of the tasks to run concurrently.
 Excess tasks will wait for running tasks to complete before they begin.
 
-The following code demonstrates using {% aTargetBlank
-"https://developer.apple.com/documentation/swift/withthrowingtaskgroup(of:returning:body:)",
-"withThrowingTaskGroup" %} to execute tasks that
-download a random number of dog images from 1 to 5.
-When the tasks cannot throw, use {% aTargetBlank
-"https://developer.apple.com/documentation/swift/withtaskgroup(of:returning:body:)",
-"withTaskGroup" %} instead.
+The following code demonstrates the downloading
+a random number of dog image URLs, 1 to 5.
 
 ```swift
     private func getDogImages() async throws -> [DogImage] {
@@ -455,6 +464,9 @@ When the tasks cannot throw, use {% aTargetBlank
         try await withThrowingTaskGroup(of: DogImage.self) { group in
             // Add tasks to the group.
             for _ in 0 ..< count {
+                // Each task *can* begin executing
+                // as soon is it is added to the group.
+                // .userInitiated is the highest priority.
                 group.addTask(priority: .userInitiated) {
                     let dogImage = try await getDogImage()
                     return dogImage
@@ -462,6 +474,9 @@ When the tasks cannot throw, use {% aTargetBlank
             }
 
             // Wait for each task in the group to finish.
+            // Results are delivered to this for loop
+            // in the order in which their task finished,
+            // not in the order in which the tasks were added to the group.
             for try await dogImage in group {
                 dogImages.append(dogImage)
             }
@@ -471,6 +486,9 @@ When the tasks cannot throw, use {% aTargetBlank
         return dogImages
     }
 ```
+
+Tasks are not guaranteed to run in the order
+in which they were added to the group.
 
 ## Unstructured Concurrency
 
