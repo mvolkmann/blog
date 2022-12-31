@@ -4230,6 +4230,8 @@ and sometimes as an `Int`.
 Here are all the required struct definitions
 followed by an API call and decoding the result.
 In particular, see the `Location` struct.
+Properties that are not needed can be omitted from these structs
+even though they may be present in the JSON.
 
 ```swift
 struct Address: Decodable {

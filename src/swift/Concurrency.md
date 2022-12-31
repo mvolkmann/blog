@@ -528,10 +528,100 @@ When a `Task` is saved in a variable:
 specify the `Success` type which is the type of the value it will return
 and the `Error` type which is the type of error it can throw.
 If a `Task` never throws, specify `Never` for the `Error` type.
-For example:
+
+The following code demonstrates creating a `Task`
+and cancelling it if it runs for too long.
 
 ```swift
-TODO: Add several Task examples!
+struct Address: Decodable {
+    let title: String
+    let first: String
+    let last: String
+}
+
+struct Location: Decodable {
+    let street: Street
+    let city: String
+    let state: String
+    let country: String
+    let postcode: String
+    // let coordinates: Coordinates
+    // let timezone: Timezone
+
+    // We need to decode this struct manually because
+    // postcode can be a String or Int.
+    // This requires defining the following enum.
+    private enum CodingKeys: String, CodingKey {
+        case street, city, state, country, postcode, coordinates, timezone
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        street = try container.decode(Street.self, forKey: .street)
+        city = try container.decode(String.self, forKey: .city)
+        state = try container.decode(String.self, forKey: .state)
+        country = try container.decode(String.self, forKey: .country)
+        do {
+            // First try decoding postcode as a String.
+            postcode = try container.decode(String.self, forKey: .postcode)
+        } catch {
+            // If it wasn't a String, try decoding postcode as an Int.
+            postcode = try String(container.decode(Int.self, forKey: .postcode))
+        }
+    }
+}
+
+struct Name: Decodable {
+    let title: String
+    let first: String
+    let last: String
+}
+
+struct Street: Decodable {
+    let number: Int
+    let name: String
+}
+
+struct User: Decodable {
+    let name: Name
+    let location: Location
+    let email: String
+}
+
+struct Users: Decodable {
+    let results: [User]
+}
+
+    private func fetchUser() async throws {
+        let userTask = Task<User?, Error> {
+            // If `userTask` is cancelled before the `data` method completes,
+            // it will throw a "cancelled" error.
+            let (data, response) =
+                try await URLSession.shared.data(from: usersURL)
+
+            guard let res = response as? HTTPURLResponse else {
+                throw MyError.badResponseType
+            }
+            guard res.statusCode == 200 else {
+                throw MyError.badStatus(status: res.statusCode)
+            }
+            guard !Task.isCancelled else { return nil }
+
+            let users = try JSONDecoder().decode(Users.self, from: data)
+            return users.results.first
+        }
+
+        // If `userTask` runs for more than a tenth of second, cancel it.
+        Task {
+            let seconds = 0.1
+            let nanoseconds = seconds * 1_000_000_000
+            try await Task.sleep(nanoseconds: UInt64(nanoseconds))
+            userTask.cancel()
+        }
+
+        // If `userTask` is cancelled, the value will be `nil`.
+        user = try await userTask.value
+    }
 ```
 
 ### Task Tree
