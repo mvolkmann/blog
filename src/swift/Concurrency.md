@@ -511,6 +511,7 @@ and the `Error` type which is the type of error it can hold.
 If a `Task` never throws, specify `Never` for the `Error` type.
 
 The `Task` initializer can be passed the priority under which it should run.
+When no priority is specified, the priority of the parent `Task` is used.
 The available priorities from lowest to highest are:
 
 - `.low` or `.background`
@@ -528,7 +529,14 @@ whether it has been cancelled and gracefully stopping the work it is doing.
 This can be done by testing the static `Bool` property `Task.isCancelled`.
 Alternatively, call `try Task.checkCancellation()`
 to throw a `CancellationError` if the `Task` has been cancelled.
-These static properties and methods on the `Task` structure
+If neither of these is done, cancelling the `Task` will have no effect.
+
+Many `async` methods in Apple frameworks check for cancellation
+and stop their work gracefully.
+One example is methods in the `URLSession` class.
+
+The `Task` static property `isCancelled`
+and the static method `checkCancellation`
 apply to the `Task` inside which they are used.
 
 A `Task` inherits several things from the `Task` that started it including:
@@ -537,6 +545,10 @@ A `Task` inherits several things from the `Task` that started it including:
 - running at the same priority
 - cancellation status
 - task local variables (described later)
+
+In some cases it is desirable to start a new `Task`
+that does not inherit from its parent `Task`.
+To do this, create the task by calling `Task.detached` instead of `Task`.
 
 The following code demonstrates creating a `Task`
 and cancelling it if it runs for too long.
