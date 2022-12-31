@@ -515,6 +515,7 @@
     "nocase",
     "nodeauth",
     "noindex",
+    "nonisolated",
     "nonlocal",
     "noopener",
     "noport",

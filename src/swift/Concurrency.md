@@ -678,12 +678,18 @@ Actors:
 - synchronize access to their mutable state
 - are written similar to classes,
   substituting the `actor` keyword for the `class` keyword
-- can conform to protocols
+- can conform to protocols, although it is difficult to implement
+  methods that should be called in a synchronous context
 - can obtain additional functionality from extensions
 
 Accesses to actor properties and methods
 must occur in an asynchronous context
 and be preceded by the `await` keyword.
+
+`Actor` methods that have no danger of resulting in a race condition
+can be marked with the `nonisolated` keyword.
+This removes the need to call them in an asynchronous context
+and precede calls with the `await` keyword.
 
 The following code demonstrates implementing a custom `Actor`
 that maintains an array of `User` objects and
@@ -791,6 +797,10 @@ actor UsersActor {
 
 // This view model allows the UI to access the array of `User` objects
 // held by the actor above.
+// It is not an option to make the custom actor above
+// inherit from `ObservableObject` and use that as the view model
+// because actors do not necessarily run on the main thread
+// and ObservableObject subclasses must run on the main thread.
 class UsersViewModel: ObservableObject {
     @Published var running = false
     @Published var users: [User] = []
