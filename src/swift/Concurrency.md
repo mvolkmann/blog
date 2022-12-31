@@ -893,6 +893,25 @@ struct ContentView: View {
 
 ## Sendable Types
 
+In order to pass data from one `Task` to another,
+the data must be thread-safe.
+This is achieved by using {% aTargetBlank
+"https://developer.apple.com/documentation/swift/sendable", "Sendable" %}.
+
+Passing data from one `Task` to another is not common.
+
+What types are sendable?
+
+- All `struct` and `enum` types are sendable
+  unless they have properties that are not sendable.
+- All `actor` types are sendable.
+- `class` types are sendable if they conform to `Sendable`,
+  are marked as `final` (other classes cannot inherit from it),
+  and all their properties are read-only.
+- Methods and closures can be made sendable by
+  marking them with the `@Sendable` attribute.
+  Such closures can only capture sendable types.
+
 ## Main Actor
 
 ## AsyncSequence
