@@ -22,11 +22,16 @@ or a non-blocking fashion (runs asynchronously).
 
 A queue is responsible for determining when its tasks will run
 and the threads on which they will run.
+Each queue is either "serial" or "concurrent".
+Both kinds execute their tasks in the order in which they were added.
+
 Serial queues execute one task at a time
 and each task can run on a different thread.
+
 Concurrent queues can execute multiple tasks at the same time
 which requires multiple threads.
-Both kinds of queues execute their tasks in the order in which they were added.
+The number of tasks executed simultaneously from a concurrent queue
+at any point in time can vary based on conditions in the application.
 
 Each queue collect tasks to be run at
 a given priority or quality of service (QoS).
@@ -50,6 +55,20 @@ it may have no effect or the application may crash.
 TODO: Does it sometimes work?
 The Swift compiler provides warnings when it detects
 code that attempts to update the UI outside of the main thread.
+
+There are six provided queues that correspond to the six QoS levels:
+
+- `userInteractive` - serial?
+- `userInitiated` - concurrent?
+- `default` - concurrent
+- `utility` - concurrent?
+- `background` - concurrent
+- `unspecified` - concurrent?
+
+The main queue is a serial queue and has a QoS of `userInteractive`.
+
+Additional queues using any of the QoS values can be created,
+but typically only the provided queues are used.
 
 ## Issues
 
