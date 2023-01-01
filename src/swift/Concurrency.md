@@ -65,6 +65,10 @@ There are six provided queues that correspond to the six QoS levels:
 - `background` - concurrent
 - `unspecified` - concurrent?
 
+TODO: Supposedly there are exactly four provided concurrent queues,
+TODO: default, high, low, ad background.
+TODO: Which QoS corresponds to high and low?
+
 The main queue is a serial queue and has a QoS of `userInteractive`.
 
 Additional queues using any of the QoS values can be created,
