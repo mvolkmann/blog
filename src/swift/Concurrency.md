@@ -1099,7 +1099,54 @@ struct MyStruct {
 
 ## AsyncSequence
 
-TODO: Finish this section.
+An {% aTargetBlank
+"https://developer.apple.com/documentation/swift/asyncsequence",
+"AsyncSequence" %} supports iterating over a sequence of values
+that are obtained asynchronously.
+Unlike a {% aTargetBlank
+"https://developer.apple.com/documentation/swift/sequence", "Sequence" %}
+which holds a collection of values,
+an `AsyncSequence` just provides a way to access values.
+
+A `TaskGroup` uses an `AsyncSequence` to provided its results.
+The following line of code from the [Task Groups](#task-groups) section above
+takes advantage of this:
+
+```swift
+for try await dogImage in group {
+```
+
+Instances of `AsyncSequence` support many of the same methods
+found in the `Sequence` protocol such as `map`, `filter`, and `reduce`.
+These return a new `AsyncSequence` instance
+which enables method calls to be chained.
+
+The {% aTargetBlank "https://developer.apple.com/documentation/foundation/url",
+"URL" %} struct has a {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/url/3767315-lines",
+"lines" %} property whose type is `AsyncLineSequence<URL.AsyncBytes>`.
+This enables iterating over the lines found at a URL asynchronously.
+
+The following code demonstrates
+reading the lines in a CSV file found at a URL.
+Each row of the CSV data provides information about a city.
+There are ten columns in each row.
+The last column holds a state abbreviation.
+We must use the `await` keyword to wait for each line to be delivered.
+We can filter the lines to only get data for cities in a given state.
+
+```swift
+let citiesURL = "https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv"
+let url = URL(string: citiesURL)!
+let citiesInMissouri = url.lines.filter { line in
+    let columns = line.components(separatedBy: ",")
+    let state = columns.last!.trimmingCharacters(in: .whitespaces)
+    return state == "MO"
+}
+for try await line in citiesInMissouri {
+    print(line)
+}
+```
 
 ## Thread Sanitizer
 
