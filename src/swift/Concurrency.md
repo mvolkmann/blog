@@ -1029,6 +1029,7 @@ should do the same.
 - properties of a type
 - methods of a type
 - functions
+- closures
 
 Functions that are running in the context of a different actor
 can call functions that will run in the `MainActor` context,
@@ -1037,6 +1038,31 @@ but they must call them asynchronously using `await` or `async let`.
 Async methods may run on a different thread,
 but the assignment of the result to a local variable
 will occur in the main thread.
+
+Methods in a type to which `@MainActor` is applied
+can be marked with `nonisolated` to allow it
+to be called from any concurrent context.
+However, such methods cannot return the value of a property
+in the type or a value computed from the properties.
+
+To apply `@MainActor` to a closure, add it before its parameter list.
+This is typically only done for closures that update the UI.
+For example:
+
+```swift
+Task { @MainActor p1, p2 in ... }
+
+// This closure has no parameters.
+Task { @MainActor in ... }
+
+// TODO: Is this just a longer way to write the code above?
+Task {
+    await MainActor.run { ... }
+}
+
+// Code above is an alternative to writing this.
+DispatchQueue.main.async { ... }
+```
 
 ## AsyncSequence
 

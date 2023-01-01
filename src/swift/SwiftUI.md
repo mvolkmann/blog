@@ -1164,8 +1164,10 @@ Updates to `@State` properties should occur in the main queue.
 To do this from asynchronous code, wrap the update as follows:
 
 ```swift
-MainActor.run {
-    myState = newValue
+Task {
+    await MainActor.run {
+        myState = newValue
+    }
 }
 
 // or ...
