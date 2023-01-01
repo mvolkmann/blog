@@ -23,123 +23,6 @@ In addition, the book {% aTargetBlank "https://swiftasyncbook.com",
 "Modern Concurrency on Apple Platforms" %} by Andrés Ibañez Kautsch
 is an excellent resource!
 
-## Queues and Threads
-
-Tasks represent a body of work to be performed.
-To schedule the work, a task is added to a queue
-in either a blocking fashion (runs synchronously)
-or a non-blocking fashion (runs asynchronously).
-
-A queue is responsible for determining when its tasks will run
-and the threads on which they will run.
-Each queue is either "serial" or "concurrent".
-Both kinds execute their tasks in the order in which they were added.
-
-Serial queues execute one task at a time
-and each task can run on a different thread.
-
-Concurrent queues can execute multiple tasks at the same time
-which requires multiple threads.
-The number of tasks executed simultaneously from a concurrent queue
-at any point in time can vary based on conditions in the application.
-
-Each queue collect tasks to be run at
-a given priority or quality of service (QoS).
-Applications can create any number of queues.
-There are six "global queues" that are typically used
-instead of custom queues.
-
-While it is possible to write code that
-explicitly runs a task on a specific thread,
-doing so is discouraged because it removes
-the ability of the system to manage thread usage.
-When using queues, the system can optimize the use of threads
-based of the number of CPU cores in the current device.
-The system can decide the number of threads to use
-and when each task should run.
-
-The user interface should only be updated on the main thread.
-This is achieved by adding such tasks to the main queue.
-If the UI is updated on a thread other than the main thread,
-it may have no effect or the application may crash.
-TODO: Does it sometimes work?
-The Swift compiler provides warnings when it detects
-code that attempts to update the UI outside of the main thread.
-
-There are six provided queues that correspond to the six QoS levels:
-
-- `userInteractive` - serial?
-- `userInitiated` - concurrent?
-- `default` - concurrent
-- `utility` - concurrent?
-- `background` - concurrent
-- `unspecified` - concurrent?
-
-TODO: Supposedly there are exactly four provided concurrent queues,
-TODO: default, high, low, ad background.
-TODO: Which QoS corresponds to high and low?
-
-The main queue is a serial queue and has a QoS of `userInteractive`.
-
-Additional queues using any of the QoS values can be created,
-but typically only the provided queues are used.
-
-To obtain a reference to a global queue for a given QoS
-using one of the enum cases at {% aTargetBlank
-"https://developer.apple.com/documentation/dispatch/dispatchqos/qosclass",
-"DispatchQoS.QoSClass" %}:
-
-```swift
-// If qos is omitted, it defaults to `.default`.
-let queue = DispatchQueue.global(qos)
-```
-
-To create a new queue:
-
-```swift
-let mySerialQueue = DispatchQueue(label: "my-queue-name")
-let myConcurrentQueue =
-    DispatchQueue(label: "my-queue-name", attributes: .concurrent)
-```
-
-To submit a task to a queue to run synchronously
-which waits fo the task to complete and blocks the caller until it does,
-pass a closure to the `sync` method of the queue.
-
-To submit a task to a queue to run asynchronously
-which does not wait for the task to complete and does not blocks the caller,
-pass a closure to the `async` method of the queue.
-
-## Thread Sanitizer
-
-A data race can occur when multiple concurrently running threads
-access the same memory and at least one is modifying the memory.
-This can result in unpredictable results, data corruption,
-and application crashes.
-
-Typically using actors and serial queues prevents data races.
-But they can still occur when using concurrent queues.
-The "Thread Sanitizer" (aka TSan) is a tool built into Xcode
-that aids in detecting and debugging data races.
-It is supported on all 64-bit platforms when run in the Simulator,
-not on devices.
-
-To use the Thread Sanitizer in Xcode:
-
-- Select "Edit Scheme..." from the dropdown menu to the left of the
-  device dropdown which appears at the top center of the Xcode window.
-- Select the "Run" category in the left nav.
-- Select the "Diagnostics" tab.
-- Check the "Thread Sanitizer" checkbox.
-- Click the "Close" button.
-- Rebuild the app. This will add code
-  around all memory accesses to log them.
-- Run the app in the Simulator.
-  This will decrease the performance of the app,
-  running up to 20 times slower.
-- See warnings about data races in the "Issue Navigator"
-  and on specific lines of code in code editor panels.
-
 ## Issues
 
 Common issues encountered when writing code involving concurrency include:
@@ -226,6 +109,93 @@ To use this:
   by passing it to the `addOperation` method of the `OperationQueue`.
 - Wait for all the operations to complete by calling the
   `waitUntilAllOperationsAreFinished` method of the `OperationQueue`.
+
+## Queues and Threads
+
+Tasks represent a body of work to be performed.
+To schedule the work, a task is added to a queue
+in either a blocking fashion (runs synchronously)
+or a non-blocking fashion (runs asynchronously).
+
+A queue is responsible for determining when its tasks will run
+and the threads on which they will run.
+Each queue is either "serial" or "concurrent".
+Both kinds execute their tasks in the order in which they were added.
+
+Serial queues execute one task at a time
+and each task can run on a different thread.
+
+Concurrent queues can execute multiple tasks at the same time
+which requires multiple threads.
+The number of tasks executed simultaneously from a concurrent queue
+at any point in time can vary based on conditions in the application.
+
+Each queue collect tasks to be run at
+a given priority or quality of service (QoS).
+Applications can create any number of queues.
+There are six "global queues" that are typically used
+instead of custom queues.
+
+While it is possible to write code that
+explicitly runs a task on a specific thread,
+doing so is discouraged because it removes
+the ability of the system to manage thread usage.
+When using queues, the system can optimize the use of threads
+based of the number of CPU cores in the current device.
+The system can decide the number of threads to use
+and when each task should run.
+
+The user interface should only be updated on the main thread.
+This is achieved by adding such tasks to the main queue.
+If the UI is updated on a thread other than the main thread,
+it may have no effect or the application may crash.
+TODO: Does it sometimes work?
+The Swift compiler provides warnings when it detects
+code that attempts to update the UI outside of the main thread.
+
+There are six provided queues that correspond to the six QoS levels:
+
+- `userInteractive` - serial?
+- `userInitiated` - concurrent?
+- `default` - concurrent
+- `utility` - concurrent?
+- `background` - concurrent
+- `unspecified` - concurrent?
+
+TODO: Supposedly there are exactly four provided concurrent queues,
+TODO: default, high, low, ad background.
+TODO: Which QoS corresponds to high and low?
+
+The main queue is a serial queue and has a QoS of `userInteractive`.
+
+Additional queues using any of the QoS values can be created,
+but typically only the provided queues are used.
+
+To obtain a reference to a global queue for a given QoS
+using one of the enum cases at {% aTargetBlank
+"https://developer.apple.com/documentation/dispatch/dispatchqos/qosclass",
+"DispatchQoS.QoSClass" %}:
+
+```swift
+// If qos is omitted, it defaults to `.default`.
+let queue = DispatchQueue.global(qos)
+```
+
+To create a new queue:
+
+```swift
+let mySerialQueue = DispatchQueue(label: "my-queue-name")
+let myConcurrentQueue =
+    DispatchQueue(label: "my-queue-name", attributes: .concurrent)
+```
+
+To submit a task to a queue to run synchronously
+which waits fo the task to complete and blocks the caller until it does,
+pass a closure to the `sync` method of the queue.
+
+To submit a task to a queue to run asynchronously
+which does not wait for the task to complete and does not blocks the caller,
+pass a closure to the `async` method of the queue.
 
 ## async/await keywords
 
@@ -1069,3 +1039,35 @@ but the assignment of the result to a local variable
 will occur in the main thread.
 
 ## AsyncSequence
+
+TODO: Finish this section.
+
+## Thread Sanitizer
+
+A data race can occur when multiple concurrently running threads
+access the same memory and at least one is modifying the memory.
+This can result in unpredictable results, data corruption,
+and application crashes.
+
+Typically using actors and serial queues prevents data races.
+But they can still occur when using concurrent queues.
+The "Thread Sanitizer" (aka TSan) is a tool built into Xcode
+that aids in detecting and debugging data races.
+It is supported on all 64-bit platforms when run in the Simulator,
+not on devices.
+
+To use the Thread Sanitizer in Xcode:
+
+- Select "Edit Scheme..." from the dropdown menu to the left of the
+  device dropdown which appears at the top center of the Xcode window.
+- Select the "Run" category in the left nav.
+- Select the "Diagnostics" tab.
+- Check the "Thread Sanitizer" checkbox.
+- Click the "Close" button.
+- Rebuild the app. This will add code
+  around all memory accesses to log them.
+- Run the app in the Simulator.
+  This will decrease the performance of the app,
+  running up to 20 times slower.
+- See warnings about data races in the "Issue Navigator"
+  and on specific lines of code in code editor panels.
