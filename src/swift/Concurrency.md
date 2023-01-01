@@ -1064,6 +1064,39 @@ Task {
 DispatchQueue.main.async { ... }
 ```
 
+## Custom Global Actors
+
+Recall that the purpose of an actor is to enable tasks to
+share mutable data without danger of race conditions.
+To simplify accessing a custom actor from many functions,
+define a custom global actor.
+To do so, apply the `@globalActor` attribute
+to a struct that defines an `actor` and
+makes an instance available through a `static` property named `shared.
+Then mark types and functions that should run in the context of that actor
+with an attribute that uses the global actor name.
+
+For example:
+
+```swift
+@globalActor
+struct MyGlobalActor {
+    actor MyActor {
+        ...
+    }
+
+    static let shared: MyActor = MyActor()
+}
+
+@MyGlobalActor
+struct MyStruct {
+    // All accesses to properties defined here
+    // and all calls to methods defined here
+    // will occur in the context of the `MyGlobalActor` actor.
+    ...
+}
+```
+
 ## AsyncSequence
 
 TODO: Finish this section.
