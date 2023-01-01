@@ -74,6 +74,53 @@ The main queue is a serial queue and has a QoS of `userInteractive`.
 Additional queues using any of the QoS values can be created,
 but typically only the provided queues are used.
 
+To obtain a reference to a global queue for a given QoS
+using one of the enum cases at {% aTargetBlank
+"https://developer.apple.com/documentation/dispatch/dispatchqos/qosclass",
+"DispatchQoS.QoSClass" %}:
+
+```swift
+let queue = DispatchQueue.global(qos)
+```
+
+To create a new queue:
+
+```swift
+let mySerialQueue = DispatchQueue(label: "my-queue-name")
+let myConcurrentQueue =
+    DispatchQueue(label: "my-queue-name", attributes: .concurrent)
+```
+
+## Thread Sanitizer
+
+A data race can occur when multiple concurrently running threads
+access the same memory and at least one is modifying the memory.
+This can result in unpredictable results, data corruption,
+and application crashes.
+
+Typically using actors and serial queues prevents data races.
+But they can still occur when using concurrent queues.
+The "Thread Sanitizer" (aka TSan) is a tool built into Xcode
+that aids in detecting and debugging data races.
+It is supported on all 64-bit platforms when run in the Simulator,
+not on devices.
+
+To use the Thread Sanitizer in Xcode:
+
+- Select "Edit Scheme..." from the dropdown menu to the left of the
+  device dropdown which appears at the top center of the Xcode window.
+- Select the "Run" category in the left nav.
+- Select the "Diagnostics" tab.
+- Check the "Thread Sanitizer" checkbox.
+- Click the "Close" button.
+- Rebuild the app. This will add code
+  around all memory accesses to log them.
+- Run the app in the Simulator.
+  This will decrease the performance of the app,
+  running up to 20 times slower.
+- See warnings about data races in the "Issue Navigator"
+  and on specific lines of code in code editor panels.
+
 ## Issues
 
 Common issues encountered when writing code involving concurrency include:
