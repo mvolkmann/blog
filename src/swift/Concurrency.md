@@ -13,6 +13,16 @@ such as mutexes and semaphores.
 It also removes the need to use completion handlers (aka callbacks)
 and some uses of the delegate pattern.
 
+## Resources
+
+See the Apple documentation on {% aTargetBlank
+"https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
+"Concurrency" %}.
+
+In addition, the book {% aTargetBlank "https://swiftasyncbook.com",
+"Modern Concurrency on Apple Platforms" %} by Andrés Ibañez Kautsch
+is an excellent resource!
+
 ## Queues and Threads
 
 Tasks represent a body of work to be performed.
