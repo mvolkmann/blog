@@ -90,6 +90,7 @@ using one of the enum cases at {% aTargetBlank
 "DispatchQoS.QoSClass" %}:
 
 ```swift
+// If qos is omitted, it defaults to `.default`.
 let queue = DispatchQueue.global(qos)
 ```
 
@@ -100,6 +101,14 @@ let mySerialQueue = DispatchQueue(label: "my-queue-name")
 let myConcurrentQueue =
     DispatchQueue(label: "my-queue-name", attributes: .concurrent)
 ```
+
+To submit a task to a queue to run synchronously
+which waits fo the task to complete and blocks the caller until it does,
+pass a closure to the `sync` method of the queue.
+
+To submit a task to a queue to run asynchronously
+which does not wait for the task to complete and does not blocks the caller,
+pass a closure to the `async` method of the queue.
 
 ## Thread Sanitizer
 
