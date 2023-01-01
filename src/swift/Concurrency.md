@@ -13,6 +13,44 @@ such as mutexes and semaphores.
 It also removes the need to use completion handlers (aka callbacks)
 and some uses of the delegate pattern.
 
+## Queues and Threads
+
+Tasks represent a body of work to be performed.
+To schedule the work, a task is added to a queue
+in either a blocking fashion (runs synchronously)
+or a non-blocking fashion (runs asynchronously).
+
+A queue is responsible for determining when its tasks will run
+and the threads on which they will run.
+Serial queues execute one task at a time
+and each task can run on a different thread.
+Concurrent queues can execute multiple tasks at the same time
+which requires multiple threads.
+Both kinds of queues execute their tasks in the order in which they were added.
+
+Each queue collect tasks to be run at
+a given priority or quality of service (QoS).
+Applications can create any number of queues.
+There are six "global queues" that are typically used
+instead of custom queues.
+
+While it is possible to write code that
+explicitly runs a task on a specific thread,
+doing so is discouraged because it removes
+the ability of the system to manage thread usage.
+When using queues, the system can optimize the use of threads
+based of the number of CPU cores in the current device.
+The system can decide the number of threads to use
+and when each task should run.
+
+The user interface should only be updated on the main thread.
+This is achieved by adding such tasks to the main queue.
+If the UI is updated on a thread other than the main thread,
+it may have no effect or the application may crash.
+TODO: Does it sometimes work?
+The Swift compiler provides warnings when it detects
+code that attempts to update the UI outside of the main thread.
+
 ## Issues
 
 Common issues encountered when writing code involving concurrency include:
@@ -831,7 +869,7 @@ class UsersViewModel: ObservableObject {
 
         // Replace the array of users here
         // with the array in UsersActor.
-        // This must be done on the main queue.
+        // This must be done on the main thread.
         await MainActor.run {
             users = actorUsers
         }
@@ -914,13 +952,11 @@ What types are sendable?
 
 ## Main Actor
 
-TODO: Describe the relationship between the main queue and the main thread.
-
 {% aTargetBlank "https://developer.apple.com/documentation/swift/mainactor",
 "MainActor" %} is a system-provided global actor
-that performs its work on the main queue.
+that performs its work on the main thread.
 
-One way to ensure that code runs in the main queue
+One way to ensure that code runs in the main thread
 is to mark it with the `@MainActor` attribute.
 Most types in SwiftUI and UIKit are marked with this
 and it is recommend that all classes that inherit from `ObservableObject`
@@ -929,8 +965,8 @@ should do the same.
 `@MainActor` can be applied to:
 
 - type declarations for a `class`, `struct`, or `enum`
-  which causes all of their properties to be accessed on the main queue
-  and all of their methods to execute on the main queue
+  which causes all of their properties to be accessed on the main thread
+  and all of their methods to execute on the main thread
 - properties of a type
 - methods of a type
 - functions
@@ -939,8 +975,8 @@ Functions that are running in the context of a different actor
 can call functions that will run in the `MainActor` context,
 but they must call them asynchronously using `await` or `async let`.
 
-Async methods may run on a different queue,
+Async methods may run on a different thread,
 but the assignment of the result to a local variable
-will occur in the main queue.
+will occur in the main thread.
 
 ## AsyncSequence
