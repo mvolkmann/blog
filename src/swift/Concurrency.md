@@ -670,7 +670,8 @@ and cancelling it if it runs for too long.
 ```swift
 import SwiftUI
 
-// These structs represent the JSON data returned by the random user API.
+// The following structs describe the JSON returned by
+// the API endpoint https://randomuser.me/api/.
 
 struct Location: Decodable {
     let street: Street
@@ -845,12 +846,6 @@ struct ContentView: View {
         )
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 ```
 
 ### Task Tree
@@ -863,7 +858,7 @@ A parent `Task` is not considered finished
 until all of its child tasks complete.
 
 If an error is thrown by a `Task`, the `Task` ends
-and the error is propagated to the parent `Task`.
+and the error is propagated to its parent `Task`.
 Sibling tasks that are running or waiting to run are cancelled.
 
 ## Actors
@@ -874,8 +869,8 @@ by using an {% aTargetBlank
 
 Actors:
 
-- are a reference type like classes rather than a value type like structs
 - synchronize access to their mutable state
+- are a reference type like classes rather than a value type like structs
 - are written similar to classes,
   substituting the `actor` keyword for the `class` keyword
 - can conform to protocols, although it is difficult to implement
@@ -883,12 +878,12 @@ Actors:
 - can obtain additional functionality from extensions
 
 Accesses to actor properties and methods
-must occur in an asynchronous context
+must occur in a concurrent context
 and be preceded by the `await` keyword.
 
 `Actor` methods that have no danger of resulting in a race condition
 can be marked with the `nonisolated` keyword.
-This removes the need to call them in an asynchronous context
+This removes the need to call them in a concurrent context
 and precede calls with the `await` keyword.
 
 The following code demonstrates implementing a custom `Actor`
@@ -995,12 +990,13 @@ actor UsersActor {
     }
 }
 
-// This view model allows the UI to access the array of `User` objects
-// held by the actor above.
+// This view model allows the UI to access
+// the array of `User` objects held by the actor above.
 // It is not an option to make the custom actor above
 // inherit from `ObservableObject` and use that as the view model
 // because actors do not necessarily run on the main thread
 // and ObservableObject subclasses must run on the main thread.
+@MainActor
 class UsersViewModel: ObservableObject {
     @Published var running = false
     @Published var users: [User] = []
@@ -1095,22 +1091,22 @@ struct ContentView: View {
 
 In order to pass data from one `Task` to another,
 the data must be thread-safe.
-This is achieved by using {% aTargetBlank
-"https://developer.apple.com/documentation/swift/sendable", "Sendable" %}.
+This is achieved by using data types that conform to the {% aTargetBlank
+"https://developer.apple.com/documentation/swift/sendable",
+"Sendable" %} protocol.
 
 Passing data from one `Task` to another is not common.
 
-What types are sendable?
+The following types are `Sendable`:
 
-- All `struct` and `enum` types are sendable
+- all `struct` and `enum` types
   unless they have properties that are not sendable.
-- All `actor` types are sendable.
-- `class` types are sendable if they conform to `Sendable`,
+- all `actor` types
+- `class` types that explicitly conform to `Sendable`,
   are marked as `final` (other classes cannot inherit from it),
-  and all their properties are read-only.
-- Methods and closures can be made sendable by
-  marking them with the `@Sendable` attribute.
-  Such closures can only capture sendable types.
+  and have no mutable properties
+- methods and closures that are marked with the `@Sendable` attribute
+  (Such closures can only capture sendable types.)
 
 ## Main Actor
 
@@ -1120,8 +1116,8 @@ that performs its work on the main thread.
 
 One way to ensure that code runs in the main thread
 is to mark it with the `@MainActor` attribute.
-Most types in SwiftUI and UIKit are marked with this
-and it is recommend that all classes that inherit from `ObservableObject`
+Most types in SwiftUI and UIKit are marked with this.
+It is recommend that all custom classes that inherit from `ObservableObject`
 should do the same.
 
 `@MainActor` can be applied to:
