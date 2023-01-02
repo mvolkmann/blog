@@ -487,7 +487,7 @@ The async/await system provides two ways to do this,
 
 An `async let` statement is a special variable declaration
 whose value is computed asynchronously in a new, implicit child task.
-These statements must be used inside an async context
+These statements must be used inside a concurrent context
 (either a closure passed to `Task` or an `async` function).
 
 The work to compute the value of each `async let` variable
@@ -503,9 +503,11 @@ For example:
     @State private var activity: Activity?
     @State private var dogImage: DogImage?
     ...
+    // This could use the API at https://www.boredapi.com/api/activity.
     private func getActivity() async throws -> Activity {
         ...
     }
+    // This could use the API at https://dog.ceo/api/breeds/image/random.
     private func getDogImage() async throws -> DogImage {
         ...
     }
@@ -533,25 +535,37 @@ In the previous example we only needed to compute two values concurrently,
 an activity and a dog image.
 
 Suppose we wanted to fetch a random number of dog images.
-We begin by calling {% aTargetBlank
-"https://developer.apple.com/documentation/swift/withtaskgroup(of:returning:body:)",
-"withTaskGroup" %} (when the tasks cannot throw)
-which creates a {% aTargetBlank
-"https://developer.apple.com/documentation/swift/taskgroup", "TaskGroup" %}
-or by calling {% aTargetBlank
-"https://developer.apple.com/documentation/swift/withthrowingtaskgroup(of:returning:body:)",
-"withThrowingTaskGroup" %} (when the tasks can throw)
-which creates a {% aTargetBlank
-"https://developer.apple.com/documentation/swift/throwingtaskgroup",
-"ThrowingTaskGroup" %}.
-Inside the closure where the group is created we call the `addTask` method
+We can do one of the following:
+
+- If the tasks cannot throw, call {% aTargetBlank
+  "https://developer.apple.com/documentation/swift/withtaskgroup(of:returning:body:)",
+  "withTaskGroup" %} which creates a {% aTargetBlank
+  "https://developer.apple.com/documentation/swift/taskgroup", "TaskGroup" %}.
+- If the tasks can throw, call {% aTargetBlank
+  "https://developer.apple.com/documentation/swift/withthrowingtaskgroup(of:returning:body:)",
+  "withThrowingTaskGroup" %} which creates a {% aTargetBlank
+  "https://developer.apple.com/documentation/swift/throwingtaskgroup",
+  "ThrowingTaskGroup" %}.
+
+Each these take a closure that is passed the created group.
+Inside the closure, call the `addTask` method of the group
 once for each value to be computed.
 
 The system will decided how many of the tasks to run concurrently.
 Excess tasks will wait for running tasks to complete before they begin.
 
+Tasks are not guaranteed to run in the order
+in which they were added to the group.
+
+Both the `TaskGroup` and `ThrowingTaskGroup` structs conform to the
+{% aTargetBlank "https://developer.apple.com/documentation/swift/asyncsequence",
+"AsyncSequence" %} protocol described later.
+This means that the values of the tasks added to the group
+can be obtained using a `for await` loop when the tasks cannot throw
+or a `for try await` loop when the tasks can throw.
+
 The following code demonstrates the downloading
-a random number of dog image URLs, 1 to 5.
+a random number (1 to 5) of dog image URLs.
 
 ```swift
     private func getDogImages() async throws -> [DogImage] {
@@ -564,6 +578,8 @@ a random number of dog image URLs, 1 to 5.
                 // Each task *can* begin executing
                 // as soon is it is added to the group.
                 // .userInitiated is the highest priority.
+                // If the priority argument is omitted,
+                // it uses the `default` global queue.
                 group.addTask(priority: .userInitiated) {
                     let dogImage = try await getDogImage()
                     return dogImage
@@ -583,9 +599,6 @@ a random number of dog image URLs, 1 to 5.
         return dogImages
     }
 ```
-
-Tasks are not guaranteed to run in the order
-in which they were added to the group.
 
 ## Unstructured Concurrency
 
