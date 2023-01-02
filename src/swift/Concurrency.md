@@ -282,7 +282,7 @@ import SwiftUI
 
 struct ContentView: View {
     enum MyError: Error {
-        case badResponseType, badStatus
+        case badResponseType, badStatus, noData
     }
 
     struct Joke: Decodable {
@@ -298,6 +298,7 @@ struct ContentView: View {
         URL(string: "https://official-joke-api.appspot.com/random_joke")!
 
     private func getJoke() async -> Joke? {
+        message = ""
         do {
             // The data method returns a tuple.
             // The type of response is URLResponse.
@@ -399,29 +400,18 @@ calling it does not require passing a completion handler.
 This simplifies the code in callers.
 
 ```swift
-    // This custom error type is passed to
-    // `completion.resume(throwing: ...)` below.
-    enum MyError: Error {
-        case badResponseType, badStatus, noData
-    }
-
-    // This replaces the `fetchActivity function in the previous example
-    // with one that calls the wrapping function
-    // `fetchActivityWithContinuation`.
-    private func fetchActivity() async {
-        fetching = true
+    private func getJoke() async -> Joke? {
         message = ""
-
         do {
-            activity = try await fetchActivityWithContinuation()
+            let joke = try await fetchActivityWithContinuation()
+            return joke
         } catch {
             message = error.localizedDescription
+            return nil
         }
-
-        fetching = false
     }
 
-    private func fetchActivityWithContinuation() async throws -> Activity {
+    private func fetchActivityWithContinuation() async throws -> Joke {
         // The closure passed to `withCheckedThrowingContinuation`
         // is passed a `CheckedContinuation` object.
         // This has a `resume` method that must be called
@@ -436,23 +426,17 @@ This simplifies the code in callers.
                     completion.resume(throwing: MyError.badResponseType)
                     return
                 }
-
                 guard response.statusCode == 200 else {
                     completion.resume(throwing: MyError.badStatus)
                     return
                 }
-
                 guard let data = data else {
                     completion.resume(throwing: MyError.noData)
                     return
                 }
-
                 do {
-                    let activity = try JSONDecoder().decode(
-                        Activity.self,
-                        from: data
-                    )
-                    completion.resume(returning: activity)
+                    let joke = try JSONDecoder().decode(Joke.self, from: data)
+                    completion.resume(returning: joke)
                 } catch {
                     completion.resume(throwing: error)
                 }
