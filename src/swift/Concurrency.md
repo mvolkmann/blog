@@ -1234,8 +1234,9 @@ when code begins asking for values.
 
 An `AsyncSequence` is always executed only one time
 and the results are cached.
-TODO: Does it cache all the values even if it is a very long sequence?
 If an `AsyncSequence` is iterated over again, the cached results are returned.
+TODO: Does it cache all the values even if it is a very long sequence?
+TODO: See https://github.com/AndyIbanez/modern-concurrency-on-apple-platforms-book-code/issues/2.
 
 It is not possible to ask an `AsyncSequence` for its count.
 
