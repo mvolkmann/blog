@@ -1123,8 +1123,8 @@ should do the same.
 `@MainActor` can be applied to:
 
 - type declarations for a `class`, `struct`, or `enum`
-  which causes all of their properties to be accessed on the main thread
-  and all of their methods to execute on the main thread
+  (This causes all of their properties to be accessed on the main thread
+  and all of their methods to execute on the main thread.)
 - properties of a type
 - methods of a type
 - functions
@@ -1134,7 +1134,9 @@ Functions that are running in the context of a different actor
 can call functions that will run in the `MainActor` context,
 but they must call them asynchronously using `await` or `async let`.
 
-Async methods may run on a different thread,
+When a function that is running on the main thread
+calls an `async` method that returns a value,
+it may run on a different thread,
 but the assignment of the result to a local variable
 will occur in the main thread.
 
@@ -1144,7 +1146,7 @@ to be called from any concurrent context.
 However, such methods cannot return the value of a property
 in the type or a value computed from the properties.
 
-To apply `@MainActor` to a closure, add it before its parameter list.
+To apply `@MainActor` to a closure, add it before the parameter list.
 This is typically only done for closures that update the UI.
 For example:
 
@@ -1163,6 +1165,8 @@ Task {
 DispatchQueue.main.async { ... }
 ```
 
+TODO: See https://www.hackingwithswift.com/forums/swiftui/running-code-on-the-main-queue/18411.
+
 ## Custom Global Actors
 
 Recall that the purpose of an actor is to enable tasks to
@@ -1170,9 +1174,9 @@ share mutable data without danger of race conditions.
 To simplify accessing a custom actor from many functions,
 define a custom global actor.
 To do so, apply the `@globalActor` attribute
-to a struct that defines an `actor` and
-makes an instance available through a `static` property named `shared.
-Then mark types and functions that should run in the context of that actor
+to a struct that contains an `actor` definition and
+makes an instance available through a `static` property named `shared`.
+Then mark the types and functions that should run in the context of that actor
 with an attribute that uses the global actor name.
 
 For example:
@@ -1222,16 +1226,16 @@ which enables method calls to be chained.
 Some `Sequence` methods such as `dropFirst`
 are not supported by `AsyncSequence`.
 
-The work of retrieving values from an `AsyncSequence`
-does not begin until it is use in a `for try await` loop.
+The work of retrieving values from an `AsyncSequence` does not
+begin until it is used in a `for await` or `for try await` loop.
 Chaining methods like `map`, `filter`, and `reduce`
 only configure the processing that will occur
-when code actually begins asking for values.
+when code begins asking for values.
 
 An `AsyncSequence` is always executed only one time
-and the results are cached (even if it is a very long sequence?).
-If an `AsyncSequence` is iterated over again,
-the cached results are returned.
+and the results are cached.
+TODO: Does it cache all the values even if it is a very long sequence?
+If an `AsyncSequence` is iterated over again, the cached results are returned.
 
 It is not possible to ask an `AsyncSequence` for its count.
 
