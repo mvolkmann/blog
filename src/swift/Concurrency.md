@@ -119,11 +119,11 @@ To use this:
 - Wait for all the operations to complete by calling the
   `waitUntilAllOperationsAreFinished` method of the `NSOperationQueue`.
 
-## Queues and Threads
+## Tasks, Queues, and Threads
 
 Tasks (also referred to as "work items")
 represent a body of work to be performed.
-To schedule the work, a task is added to a queue
+To schedule the work, a `Task` is added to a queue
 in either a blocking fashion (runs synchronously)
 or a non-blocking fashion (runs asynchronously).
 
@@ -134,11 +134,12 @@ Both kinds execute their tasks in the order in which they were added.
 
 Serial queues execute one task at a time
 and each task can run on a different thread.
+One use of a serial queue is to synchronize access to shared resources.
 
 Concurrent queues can execute multiple tasks at the same time
 which requires multiple threads.
-The number of tasks executed simultaneously from a concurrent queue
-at any point in time can vary based on conditions in the application
+The number of tasks executed simultaneously at any point in time
+can vary based on conditions in the application
 and the number of CPU cores in the device.
 Tasks run on concurrent queues can finish in a different order
 than they were started since each task can have a different duration.
@@ -160,13 +161,15 @@ and when each task should run.
 
 The user interface should only be updated on the main thread.
 This is achieved by adding such tasks to the main queue.
+which only runs tasks on the main thread.
 If the UI is updated on a thread other than the main thread,
 it may have no effect or the application may crash.
 TODO: Does it sometimes work?
 The Swift compiler provides warnings when it detects
 code that attempts to update the UI outside of the main thread.
 
-There are five provided queues that correspond to the six QoS levels:
+There are five provided global queues that correspond to the six QoS levels,
+listed here in order from highest to lowest priority.
 
 - `userInteractive`
 
@@ -175,7 +178,7 @@ There are five provided queues that correspond to the six QoS levels:
 
 - `userInitiated`
 
-  This is the same as the high priority queue which is a concurrent queue.
+  This is the same as the concurrent high priority queue.
 
 - `default`
 
@@ -183,7 +186,7 @@ There are five provided queues that correspond to the six QoS levels:
 
 - `utility` and `unspecified`
 
-  These are the same as the low priority queue which is a concurrent queue.
+  These are the same as the concurrent low priority queue.
 
 - `background`
 
@@ -211,11 +214,11 @@ let myConcurrentQueue =
     DispatchQueue(label: "my-queue-name", attributes: .concurrent)
 ```
 
-To submit a task to a queue to run synchronously
-which waits fo the task to complete and blocks the caller until it does,
+To submit a task to a queue to run synchronously,
+which blocks the caller until the task completes,
 pass a closure to the `sync` method of the queue.
 
-To submit a task to a queue to run asynchronously
+To submit a task to a queue to run asynchronously,
 which does not wait for the task to complete and does not blocks the caller,
 pass a closure to the `async` method of the queue.
 
@@ -230,8 +233,7 @@ resulting in code that is easier to write and read.
 Unlike concurrent code that uses completion handlers (aka callbacks),
 using `async` and `await` does not result in deeply nested code.
 
-To use this approach, add the `async` keyword
-after the parameter list and before the return type
+Add the `async` keyword after the parameter list and before the return type
 of all functions that run asynchronously.
 Inside the function, add the `await` keyword
 before all calls to other asynchronous functions.
@@ -245,10 +247,12 @@ function getCurrentCity() async throws -> String {
 }
 ```
 
-All `async` functions must be called from a concurrent context.
-All `async` functions run in a concurrent context,
-so they can call other `async` functions.
-Another way to create a concurrent context is by creating a {% aTargetBlank
+All `async` functions:
+
+- must be called from a "concurrent context" (aka asynchronous context)
+- run in a concurrent context, so they can call other `async` functions
+
+One way to create a concurrent context is it create a {% aTargetBlank
 "https://developer.apple.com/documentation/swift/task", "Task" %} object.
 For example:
 
@@ -256,30 +260,66 @@ For example:
 import SwiftUI
 
 struct ContentView: View {
-    @State private var city = ""
+    enum MyError: Error {
+        case badResponseType, badStatus
+    }
+
+    struct Joke: Decodable {
+        let setup: String
+        let punchline: String
+    }
+
     @State private var isShowingError = false
+    @State private var joke: Joke?
     @State private var message = ""
+
+    private let apiURL =
+        URL(string: "https://official-joke-api.appspot.com/random_joke")!
+
+    private func getJoke() async -> Joke? {
+        do {
+            let (data, response) =
+                try await URLSession.shared.data(from: apiURL)
+            guard let response = response as? HTTPURLResponse else {
+                throw MyError.badResponseType
+            }
+            guard response.statusCode == 200 else {
+                throw MyError.badStatus
+            }
+            let joke = try JSONDecoder().decode(
+                Joke.self,
+                from: data
+            )
+            return joke
+        } catch {
+            message = error.localizedDescription
+            isShowingError = true
+            return nil
+        }
+    }
 
     var body: some View {
         VStack {
-            Button("Get City") {
-                Task {
-                    do {
-                        let currentCity = try await getCurrentCity()
-                        // This updates the UI on the main thread
-                        // and will be explained more later.
-                        await MainActor.run { city = currentCity }
-                    } catch {
-                        message = "Error getting city: \(error)"
-                        isShowingError = true
-                    }
+            Text("Jokester").font(.largeTitle)
+            Spacer()
+            if let joke {
+                Text(joke.setup).font(.title).foregroundColor(.green)
+                Text(joke.punchline).font(.title).foregroundColor(.red)
+                    .padding(.top)
+                Spacer()
+                Button("Next") {
+                    Task { self.joke = await getJoke() }
                 }
+                .buttonStyle(.borderedProminent)
             }
-            Text("City: \(city)")
+        }
+        .padding()
+        .task {
+            joke = await getJoke()
         }
         .alert(
             "Error",
-            isPresented: $isShowingAlert,
+            isPresented: $isShowingError,
             actions: {},
             message: { Text(message) }
         )
