@@ -4991,16 +4991,6 @@ func routes(_ app: Application) throws {
 }
 ```
 
-## Instruments
-
-Instruments is an app included with Xcode for analyzing ...
-
-To launch the app, select Xcode ... Open Developer Tool ... Instruments.
-
-To analyze HTTP traffic, choose Network.
-
-TODO: Add more detail.
-
 ## Shell Commands
 
 TODO: Is it possible to execute shell commands from Swift?
@@ -5036,6 +5026,15 @@ To include code only when the app is running in the Simulator,
 surround it with `#if targetEnvironment(simulator) ... #endif`.
 
 ## Logging
+
+To log the time required to execute a section of code:
+
+```swift
+let startTime = CFAbsoluteTimeGetCurrent()
+... code to measure goes here ...
+let seconds = CFAbsoluteTimeGetCurrent() - startTime
+print("seconds to execute =", seconds)
+```
 
 Apple provides the `Logger` struct for writing log messages
 that appear in the Xcode console and in the Console app.
@@ -5171,6 +5170,16 @@ struct Log {
     }
 }
 ```
+
+## Instruments
+
+Instruments is an app included with Xcode for analyzing ...
+
+To launch the app, select Xcode ... Open Developer Tool ... Instruments.
+
+To analyze HTTP traffic, choose Network.
+
+TODO: Add more detail.
 
 ## Tools
 
@@ -5553,3 +5562,10 @@ the features of Swift that are annoying, at least in my opinion.
   I want it to only be in the new editor pane.
   It would be even better if a file could be dragged to the right edge
   to create a new editor pane like in VS Code.
+
+- I wish the syntax for the type of computed properties and
+  the return type of functions was the same rather than
+  using a colon for one and an arrow for the other.
+  The difference makes it a bit tedious to refactor a
+  computed property into a function or vice versa.
+  Maybe Xcode could add refactoring options to do this.

@@ -8,8 +8,8 @@ layout: topic-layout.njk
 ## Overview
 
 Apple added the async/await system to Swift in 2021.
-This removes most needs to use low-level concurrency mechanisms
-such as mutexes and semaphores.
+This removes most needs to use lower level concurrency mechanisms
+and Grand Central Dispatch (GCD).
 It also removes the need to use completion handlers (aka callbacks)
 and some uses of the delegate pattern.
 
@@ -39,6 +39,10 @@ Common issues encountered when writing code involving concurrency include:
   cannot do so until they acquire the lock.
 
   A semaphore is similar to mutex, but can protect access to a code path.
+  The Dispatch framework provides the {% aTargetBlank
+  "https://developer.apple.com/documentation/dispatch/dispatchsemaphore",
+  "DispatchSemaphore" %} class.
+  It does not provide a mutex implementation.
 
 - Starvation
 
@@ -59,7 +63,8 @@ Common issues encountered when writing code involving concurrency include:
 ## Other Approaches
 
 The following libraries and frameworks for managing concurrency
-predate the async/await system.
+predate the async/await system. They are now rarely needed,
+but can be useful in very specific circumstances.
 
 ### POSIX Threads (pthreads)
 
@@ -112,7 +117,8 @@ To use this:
 
 ## Queues and Threads
 
-Tasks represent a body of work to be performed.
+Tasks (also referred to as "work items")
+represent a body of work to be performed.
 To schedule the work, a task is added to a queue
 in either a blocking fashion (runs synchronously)
 or a non-blocking fashion (runs asynchronously).
@@ -128,12 +134,15 @@ and each task can run on a different thread.
 Concurrent queues can execute multiple tasks at the same time
 which requires multiple threads.
 The number of tasks executed simultaneously from a concurrent queue
-at any point in time can vary based on conditions in the application.
+at any point in time can vary based on conditions in the application
+and the number of CPU cores in the device.
+Tasks run on concurrent queues can finish in a different order
+than they were started since each task can have a different duration.
 
-Each queue collect tasks to be run at
+Each queue collects tasks to be run at
 a given priority or quality of service (QoS).
 Applications can create any number of queues.
-There are six "global queues" that are typically used
+There are five "global queues" that are typically used
 instead of custom queues.
 
 While it is possible to write code that
@@ -153,20 +162,28 @@ TODO: Does it sometimes work?
 The Swift compiler provides warnings when it detects
 code that attempts to update the UI outside of the main thread.
 
-There are six provided queues that correspond to the six QoS levels:
+There are five provided queues that correspond to the six QoS levels:
 
-- `userInteractive` - serial?
-- `userInitiated` - concurrent?
-- `default` - concurrent
-- `utility` - concurrent?
-- `background` - concurrent
-- `unspecified` - concurrent?
+- `userInteractive`
 
-TODO: Supposedly there are exactly four provided concurrent queues,
-TODO: default, high, low, ad background.
-TODO: Which QoS corresponds to high and low?
+  This is the same as the main queue which is the only provided serial queue.
+  All other provided queues are concurrent.
 
-The main queue is a serial queue and has a QoS of `userInteractive`.
+- `userInitiated`
+
+  This is the same as the high priority queue which is a concurrent queue.
+
+- `default`
+
+  This is a concurrent queue.
+
+- `utility` and `unspecified`
+
+  These are the same as the low priority queue which is a concurrent queue.
+
+- `background`
+
+  This is a concurrent queue.
 
 Additional queues using any of the QoS values can be created,
 but typically only the provided queues are used.
@@ -185,6 +202,7 @@ To create a new queue:
 
 ```swift
 let mySerialQueue = DispatchQueue(label: "my-queue-name")
+
 let myConcurrentQueue =
     DispatchQueue(label: "my-queue-name", attributes: .concurrent)
 ```
@@ -1120,6 +1138,21 @@ Instances of `AsyncSequence` support many of the same methods
 found in the `Sequence` protocol such as `map`, `filter`, and `reduce`.
 These return a new `AsyncSequence` instance
 which enables method calls to be chained.
+Some `Sequence` methods such as `dropFirst`
+are not supported by `AsyncSequence`.
+
+The work of retrieving values from an `AsyncSequence`
+does not begin until it is use in a `for try await` loop.
+Chaining methods like `map`, `filter`, and `reduce`
+only configure the processing that will occur
+when code actually begins asking for values.
+
+An `AsyncSequence` is always executed only one time
+and the results are cached (even if it is a very long sequence?).
+If an `AsyncSequence` is iterated over again,
+the cached results are returned.
+
+It is not possible to ask an `AsyncSequence` for its count.
 
 The {% aTargetBlank "https://developer.apple.com/documentation/foundation/url",
 "URL" %} struct has a {% aTargetBlank
@@ -1128,12 +1161,12 @@ The {% aTargetBlank "https://developer.apple.com/documentation/foundation/url",
 This enables iterating over the lines found at a URL asynchronously.
 
 The following code demonstrates
-reading the lines in a CSV file found at a URL.
+reading the lines in a CSV file found at a `URL`.
 Each row of the CSV data provides information about a city.
 There are ten columns in each row.
 The last column holds a state abbreviation.
-We must use the `await` keyword to wait for each line to be delivered.
-We can filter the lines to only get data for cities in a given state.
+The `await` keyword must be used to wait for each line to be delivered.
+The lines can be filtered to only get data for cities in a given state.
 
 ```swift
 let citiesURL = "https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv"
@@ -1147,6 +1180,49 @@ for try await line in citiesInMissouri {
     print(line)
 }
 ```
+
+Other standard API methods that return an `AsyncSequence` include:
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/foundation/filehandle/asyncbytes/3766668-lines",
+  "FileHandle.standardInput.bytes.lines" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/foundation/url/3767316-resourcebytes", "URL.resourceBytes" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/foundation/urlsession/3767351-bytes", "URLSession.bytes" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/foundation/notificationcenter/3813137-notifications", "NotificationCenter.notifications" %}
+
+Just like in synchronous `for` loops,
+the `continue` and `break` keywords can be used in `for try await` loops.
+
+## Task Local Variables
+
+The `@TaskLocal` attribute can be applied to
+`static` property declarations in a type definition.
+This allows data, referred to as "task local variables",
+to be shared across tasks in the task tree.
+These properties must be given a default value or have an optional type.
+
+Task local variables created in a task can be read and modified
+by any descendant task in the task tree.
+
+To read the value of a task local variable,
+precede its name with the `await` keyword.
+
+To modify the value of a task local variable, call the {% aTargetBlank
+"https://developer.apple.com/documentation/swift/tasklocal/withvalue(_:operation:file:line:)-79atg",
+"withValue" %} method on a binding to the property, passing it a new value.
+For example:
+
+```swift
+SomeClass.$someTaskLocalVariable.withValue(someNewValue) {
+    ... code to execute ...
+}
+```
+
+The new value is only available in non-detached tasks that are
+spawned by the closure passed to the `withValue` method.
+
+`SomeClass` in the example above can be replaced by `Self`
+when inside the class the defines the task local variable.
 
 ## Thread Sanitizer
 
@@ -1177,3 +1253,7 @@ To use the Thread Sanitizer in Xcode:
   running up to 20 times slower.
 - See warnings about data races in the "Issue Navigator"
   and on specific lines of code in code editor panels.
+
+```
+
+```

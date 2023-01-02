@@ -42,7 +42,7 @@ and has a single attribute `timestamp`.
 
 The generated app is fully functional.
 It displays a list of items that each have a timestamp.
-Tap an item to get to a page that displays detail about just that item.
+Tap an item to navigate to a screen that displays detail about just that item.
 To delete an item, swipe it left and click the "Delete" button that appears.
 To add an item with the current timestamp, click the "+" button at the top.
 To delete items without swiping them, click the "Edit" button at the top.
@@ -111,14 +111,12 @@ The "Type" in the Inspector can be "To One" or "To Many".
 
 The "Delete Rule" in the Inspector can be "Nullify", "Cascade", or "Deny".
 
-"Nullify" means instances can be deleted
-without also deleting related entities.
-References to deleted entities are set to `nil`.
-
-"Cascade" means instances can be deleted
-and related entities will also be deleted.
-
-"Deny" means instances with related entities cannot be deleted.
+- "Nullify" means instances can be deleted
+  without also deleting related entities.
+  References to deleted entities are set to `nil`.
+- "Cascade" means instances can be deleted
+  and related entities will also be deleted.
+- "Deny" means instances with related entities cannot be deleted.
 
 Specify inverse relationships for most relationships.
 For example, "PersonEntity" can have
