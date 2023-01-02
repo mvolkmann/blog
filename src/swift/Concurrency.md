@@ -1251,7 +1251,7 @@ Each row of the CSV data provides information about a city.
 There are ten columns in each row.
 The last column holds a state abbreviation.
 The `await` keyword must be used to wait for each line to be delivered.
-The lines can be filtered to only get data for cities in a given state.
+The lines are filtered to only get data for cities in a certain state.
 
 ```swift
 let citiesURL = "https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv"
@@ -1275,8 +1275,8 @@ Other standard API methods that return an `AsyncSequence` include:
 - {% aTargetBlank "https://developer.apple.com/documentation/foundation/urlsession/3767351-bytes", "URLSession.bytes" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/foundation/notificationcenter/3813137-notifications", "NotificationCenter.notifications" %}
 
-Just like in synchronous `for` loops,
-the `continue` and `break` keywords can be used in `for try await` loops.
+Just like in synchronous `for` loops, the `continue` and `break` keywords
+can be used in `for await` and `for try await` loops.
 
 ## Task Local Variables
 
