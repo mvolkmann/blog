@@ -1286,11 +1286,16 @@ This allows data, referred to as "task local variables",
 to be shared across tasks in the task tree.
 These properties must be given a default value or have an optional type.
 
-Task local variables created in a task can be read and modified
-by any descendant task in the task tree.
+Task local variables in type instances that are created in a task
+can be read and modified by any descendant tasks in the task tree.
 
 To read the value of a task local variable,
 precede its name with the `await` keyword.
+For example:
+
+```swift
+let value = await SomeClass.someTaskLocalVariable
+```
 
 To modify the value of a task local variable, call the {% aTargetBlank
 "https://developer.apple.com/documentation/swift/tasklocal/withvalue(_:operation:file:line:)-79atg",
@@ -1306,22 +1311,22 @@ SomeClass.$someTaskLocalVariable.withValue(someNewValue) {
 The new value is only available in non-detached tasks that are
 spawned by the closure passed to the `withValue` method.
 
-`SomeClass` in the example above can be replaced by `Self`
-when inside the class the defines the task local variable.
+`SomeClass` in the examples above can be replaced by `Self`
+when inside the same class that defines the task local variable.
 
 ## Thread Sanitizer
 
 A data race can occur when multiple concurrently running threads
 access the same memory and at least one is modifying the memory.
-This can result in unpredictable results, data corruption,
+This can cause unpredictable results, data corruption,
 and application crashes.
 
 Typically using actors and serial queues prevents data races.
 But they can still occur when using concurrent queues.
 The "Thread Sanitizer" (aka TSan) is a tool built into Xcode
 that aids in detecting and debugging data races.
-It is supported on all 64-bit platforms when run in the Simulator,
-not on devices.
+It is supported on all 64-bit platforms.
+However, the app must be run in the Simulator rather than on a device.
 
 To use the Thread Sanitizer in Xcode:
 
