@@ -51,7 +51,7 @@ Common issues encountered when writing code involving concurrency include:
 - Race Condition
 
   A race condition occurs when multiple processes update a resource at the same time.
-  This results in unpredictable results in the best case
+  This can produce unpredictable results in the best case
   and data corruption in the worst case.
 
 - Livelocks
@@ -72,8 +72,8 @@ but can be useful in very specific circumstances.
 "pthreads" %} are not specific to Apple operating systems
 and are available in many operating systems.
 They are implemented in C and have a steep learning curve.
-Using pthreads requires manual thread management and use locks
-such as mutexes and semaphores.
+Using pthreads requires manual thread management and
+use of locks such as mutexes and semaphores.
 
 ### NSThreads
 
@@ -97,7 +97,7 @@ For example:
 
 ```swift
 DispatchQueue.main.async {
-    // UI updating code goes here.
+    // Code to update the UI goes here.
 }
 ```
 
@@ -108,12 +108,16 @@ The {% aTargetBlank
 "NSOperation" %} class is part of the Apple Foundation framework.
 To use this:
 
-- Create an instance of `OperationQueue`.
-- Create one instance of `BlockOperation` for each concurrent operation.
-- Add each `BlockOperation` instance to the `OperationQueue`
-  by passing it to the `addOperation` method of the `OperationQueue`.
+- Create an instance of the {% aTargetBlank
+  "https://developer.apple.com/documentation/foundation/nsoperationqueue",
+  "NSOperationQueue" %} class.
+- Create one instance of {% aTargetBlank
+  "https://developer.apple.com/documentation/foundation/nsblockoperation",
+  "NSBlockOperation" %} for each concurrent operation.
+- Add each `NSBlockOperation` instance to the `NSOperationQueue`
+  by passing it to the `addOperation` method of the `NSOperationQueue`.
 - Wait for all the operations to complete by calling the
-  `waitUntilAllOperationsAreFinished` method of the `OperationQueue`.
+  `waitUntilAllOperationsAreFinished` method of the `NSOperationQueue`.
 
 ## Queues and Threads
 
