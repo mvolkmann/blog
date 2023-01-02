@@ -604,29 +604,29 @@ a random number (1 to 5) of dog image URLs.
 
 Unstructured concurrency, like structured concurrency,
 provides a way to execute multiple tasks at the same time.
-However, it does not enable writing code
+However, it does not emphasize writing code
 in the order in which it is expected to run.
 
 ### Task
 
 Unstructured concurrency relies on creating {% aTargetBlank
 "https://developer.apple.com/documentation/swift/task", "Task" %} objects
-which are passed a closure that runs in an asynchronous context.
-The system typically runs the task immediately, but can choose to
+which are passed a closure that runs in a concurrent context.
+The system typically runs the `Task` immediately, but can choose to
 defer execution based on the number of tasks that are already running.
 
 `Task` is a generic struct. When creating an instance,
-specify the `Success` type which is the type of the value it will hold
+specify the `Success` type which is the type of the value it can hold
 and the `Error` type which is the type of error it can hold.
 If a `Task` never throws, specify `Never` for the `Error` type.
 
 The `Task` initializer can be passed the priority under which it should run.
 When no priority is specified, the priority of the parent `Task` is used.
-The available priorities from lowest to highest are:
+The available priorities from highest to lowest are:
 
-- `.low` or `.background`
-- `.medium` or `.utility`
 - `.high` or `.userInitiated`
+- `.medium` or `.utility`
+- `.low` or `.background`
 
 When a `Task` is saved in a variable:
 
@@ -634,41 +634,43 @@ When a `Task` is saved in a variable:
 - it can be notified that it is intended to be cancelled
   by calling `myTask.cancel()`
 
-When a `Task` might be cancelled, it is responsible for verifying
-whether it has been cancelled and gracefully stopping the work it is doing.
+When a `Task` might be cancelled, it is responsible for
+verifying whether it has been cancelled.
 This can be done by testing the static `Bool` property `Task.isCancelled`.
-Alternatively, call `try Task.checkCancellation()`
-to throw a `CancellationError` if the `Task` has been cancelled.
+When this is `true` the `Task` should gracefully stop the work it is doing.
+Alternatively, a `Task` can call `try Task.checkCancellation()`
+to throw a `CancellationError` if it has been cancelled.
 If neither of these is done, cancelling the `Task` will have no effect.
-
-Many `async` methods in Apple frameworks check for cancellation
-and stop their work gracefully.
-One example is methods in the `URLSession` class.
 
 The `Task` static property `isCancelled`
 and the static method `checkCancellation`
 apply to the `Task` inside which they are used.
 
-A `Task` inherits several things from the `Task` that started it including:
+Many `async` methods in Apple frameworks check for cancellation
+and stop their work gracefully.
+One example is methods in the {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/urlsession",
+"URLSession" %} class.
+
+A `Task` inherits the following things from the `Task` that started it:
 
 - running on the same actor
 - running at the same priority
 - cancellation status
-- task local variables (described later)
+- [task local variables](#task-local-variables) (described later)
 
 In some cases it is desirable to start a new `Task`
 that does not inherit from its parent `Task`.
-To do this, create the task by calling `Task.detached` instead of `Task`.
+To do this, call the static method `Task.detached`
+instead of calling the `Task` initializer.
 
 The following code demonstrates creating a `Task`
 and cancelling it if it runs for too long.
 
 ```swift
-struct Address: Decodable {
-    let title: String
-    let first: String
-    let last: String
-}
+import SwiftUI
+
+// These structs represent the JSON data returned by the random user API.
 
 struct Location: Decodable {
     let street: Street
@@ -676,8 +678,6 @@ struct Location: Decodable {
     let state: String
     let country: String
     let postcode: String
-    // let coordinates: Coordinates
-    // let timezone: Timezone
 
     // We need to decode this struct manually because
     // postcode can be a String or Int.
@@ -723,42 +723,134 @@ struct Users: Decodable {
     let results: [User]
 }
 
-    private func fetchUser() async throws {
-        let userTask = Task<User?, Error> {
-            // If `userTask` is cancelled before the `data` method completes,
-            // it will throw a "cancelled" error.
-            let (data, response) =
-                try await URLSession.shared.data(from: usersURL)
-
-            guard let res = response as? HTTPURLResponse else {
-                throw MyError.badResponseType
-            }
-            guard res.statusCode == 200 else {
-                throw MyError.badStatus(status: res.statusCode)
-            }
-
-            // One option is to return nil if the task has been cancelled.
-            // guard !Task.isCancelled else { return nil }
-
-            // Another option is to throw a CancellationError
-            // if this task has been cancelled.
-            try Task.checkCancellation()
-
-            let users = try JSONDecoder().decode(Users.self, from: data)
-            return users.results.first
-        }
-
-        // If `userTask` runs for more than a tenth of second, cancel it.
-        Task {
-            let seconds = 0.1
-            let nanoseconds = seconds * 1_000_000_000
-            try await Task.sleep(nanoseconds: UInt64(nanoseconds))
-            userTask.cancel()
-        }
-
-        // If `userTask` is cancelled, the value will be `nil`.
-        user = try await userTask.value
+struct ContentView: View {
+    enum MyError: Error {
+        case badResponseType
+        case badStatus(status: Int)
     }
+
+    private let usersURL = URL(string: "https://randomuser.me/api/")!
+
+    typealias UserTask = Task<User?, Error>
+
+    @State private var isShowingError = false
+    @State private var message = ""
+    @State private var userTask: UserTask?
+    @State private var user: User?
+
+    private func cancel() {
+        if let userTask {
+            userTask.cancel()
+            self.userTask = nil
+        }
+    }
+
+    private func fetchUser() async {
+        user = nil
+        do {
+            userTask = UserTask {
+                // Simulate a long running task by sleeping for 1 second.
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+
+                // If `userTask` is cancelled before the `data` method
+                // completes, it will throw a "cancelled" error.
+                let (data, response) =
+                    try await URLSession.shared.data(from: usersURL)
+                guard let res = response as? HTTPURLResponse else {
+                    throw MyError.badResponseType
+                }
+                guard res.statusCode == 200 else {
+                    throw MyError.badStatus(status: res.statusCode)
+                }
+
+                // We need to check whether this task has been cancelled
+                // before doing more work.
+                // Is so, one option is to return nil.
+                // guard !Task.isCancelled else { return nil }
+
+                // Another option is to throw a CancellationError.
+                try Task.checkCancellation()
+
+                let users = try JSONDecoder().decode(Users.self, from: data)
+                return users.results.first
+            }
+
+            // This Task cancels `userTask` if runs for more than 1.2 seconds.
+            Task {
+                let seconds = 1.2
+                let nanoseconds = seconds * 1_000_000_000
+                try await Task.sleep(nanoseconds: UInt64(nanoseconds))
+                cancel()
+            }
+
+            // If `userTask` has been cancelled, the value will be `nil`.
+            user = try await userTask?.value
+            message = ""
+
+            // Once we get the value from the task, clear it
+            // as an indication that it is no longer running.
+            userTask = nil
+        } catch {
+            message = error.localizedDescription
+            isShowingError = true
+        }
+    }
+
+    private func render(user: User) -> some View {
+        VStack(alignment: .leading) {
+            let name = user.name
+            let location = user.location
+            let street = location.street
+            Text("\(name.title) \(name.first) \(name.last)")
+            // Using the String initializer prevents comma separators
+            // when numbers are converted to strings.
+            Text(String(street.number) + " " + street.name)
+            Text("\(location.city), \(location.state)")
+            Text("\(location.country) \(location.postcode)")
+            Text(user.email)
+        }
+    }
+
+    var body: some View {
+        VStack(spacing: 20) {
+            if userTask == nil {
+                Button("Get Another User") {
+                    Task { await fetchUser() }
+                }
+                .buttonStyle(.borderedProminent)
+            }
+
+            if let user {
+                render(user: user)
+            } else if userTask == nil {
+                Text("The task was cancelled.")
+            } else {
+                Button("Cancel") {
+                    cancel()
+                }
+                .buttonStyle(.bordered)
+                ProgressView()
+            }
+            Spacer()
+        }
+        .padding()
+        .task {
+            await fetchUser()
+        }
+        .alert(
+            "Error",
+            isPresented: $isShowingError,
+            actions: {},
+            message: { Text(message) }
+        )
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
 ```
 
 ### Task Tree
