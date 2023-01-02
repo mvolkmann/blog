@@ -252,9 +252,30 @@ All `async` functions:
 - must be called from a "concurrent context" (aka asynchronous context)
 - run in a concurrent context, so they can call other `async` functions
 
+The `await` keyword can choose to suspend execution of the current function.
+This allows the thread executing the function to perform other work.
+When the `await` keyword is applied to a function call,
+it creates a "suspension point".
+The code after the call is referred to as the "continuation".
+When the function is resumed later, the continuation is executed,
+possibly in a different thread than the one in which function execution began.
+
+In iOS 15 and above, all Apple provided functions that
+take a completion handler also have an `async` version.
+This means there is no longer a need to
+pass completion handlers to Apple's APIs.
+For example, {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/urlsession",
+"URLSession" %} has many async methods.
+The resulting code is easier to write and read.
+
 One way to create a concurrent context is it create a {% aTargetBlank
 "https://developer.apple.com/documentation/swift/task", "Task" %} object.
-For example:
+
+The following sample app gets random jokes from a free, public API.
+It uses the `async` and `await` keywords.
+It also creates tasks in two ways,
+using the `Task` initializer and the `task` view modifier.
 
 ```swift
 import SwiftUI
@@ -278,6 +299,9 @@ struct ContentView: View {
 
     private func getJoke() async -> Joke? {
         do {
+            // The data method returns a tuple.
+            // The type of response is URLResponse.
+            // Cast it to HTTPURLResponse to get information from it.
             let (data, response) =
                 try await URLSession.shared.data(from: apiURL)
             guard let response = response as? HTTPURLResponse else {
@@ -314,6 +338,10 @@ struct ContentView: View {
             }
         }
         .padding()
+        // This is a view modifier that is similar to onAppear,
+        // but runs the closure passed to it in a `Task`
+        // which provides an concurrent context.
+        // If the view is removed, the `Task` is cancelled.
         .task {
             joke = await getJoke()
         }
@@ -327,28 +355,18 @@ struct ContentView: View {
 }
 ```
 
-The `await` keyword can choose to suspend execution of the current function.
-This allows the thread that was executing the function to perform other work.
-The code after the function call that uses `await` (the suspension point)
-is referred to as a "continuation".
-When the function is resumed later, the continuation is executed,
-possibly in a different thread than the one in which function execution began.
+Another free, public API that can be used in the code example above
+provides a suggested activity.
+To use this API:
 
-In iOS 15 and above, all Apple provided functions that
-take a completion handler also have an `async` version.
-This means there is no longer a need to
-pass completion handlers to Apple's APIs,
-resulting in code that is easier to write and read.
-For example, {% aTargetBlank
-"https://developer.apple.com/documentation/foundation/urlsession",
-"URLSession" %} has many async methods.
-
-The following code demonstrates using the `async` and `await` keywords
-with the `URLSession` class.
+- change the API URL to `https://www.boredapi.com/api/activity`
+- replace the `Joke` struct with the `Activity` struct below
+- replace references to `Joke` with `Activity`
+- replace references to `joke` with `activity`
+- display the value of `activity.activity`
+  in place of `joke.setup` and `joke.punchline`.
 
 ```swift
-import SwiftUI
-
 struct Activity: Decodable {
     let activity: String
     let type: String
@@ -357,72 +375,6 @@ struct Activity: Decodable {
     let link: String
     let key: String
     let accessibility: Double
-}
-
-struct ContentView: View {
-    @State private var activity: Activity?
-    @State private var fetching = false
-    @State private var message = ""
-
-    let apiURL = URL(string: "https://www.boredapi.com/api/activity")!
-
-    private func fetchActivity() async {
-        fetching = true
-        message = ""
-
-        do {
-            // The data method returns a tuple.
-            // The type of response is URLResponse.
-            // Cast it to HTTPURLResponse to get information from it.
-            let (data, response) =
-                try await URLSession.shared.data(from: apiURL)
-            if let res = response as? HTTPURLResponse {
-                if res.statusCode == 200 {
-                    activity = try JSONDecoder()
-                        .decode(Activity.self, from: data)
-                } else {
-                    message = "bad status \(res.statusCode)"
-                }
-            } else {
-                message = "bad response type"
-            }
-        } catch {
-            message = "error: \(error)"
-        }
-
-        fetching = false
-    }
-
-    var body: some View {
-        VStack {
-            Text("Are you bored?").font(.largeTitle)
-            if fetching {
-                Text("Waiting for suggestion ...")
-                ProgressView()
-            } else {
-                Button("Get Suggested Activity") {
-                    Task { await fetchActivity() }
-                }
-                .buttonStyle(.borderedProminent)
-
-                if let activity {
-                    Text(activity.activity + ".").font(.title)
-                }
-            }
-
-            if !message.isEmpty {
-                Text(message).foregroundColor(.red)
-            }
-        }
-        .padding()
-        // This is a view modifier that is similar to onAppear,
-        // but runs the closure passed to it in a `Task`
-        // which provides an async context.
-        // If the view is removed, the `Task` is cancelled.
-        .task {
-            await fetchActivity()
-        }
-    }
 }
 ```
 
