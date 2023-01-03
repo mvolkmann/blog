@@ -435,6 +435,8 @@ To run an app on the device wirelessly:
 ## Previews
 
 Previews allow testing a single view outside of the Simulator or a real device.
+To restart the preview, press cmd-option-p.
+To toggle showing the preview area, press cmd-option-return.
 
 ## Files
 
