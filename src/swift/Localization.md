@@ -138,7 +138,7 @@ To specify how plural strings should be handled,
 create a file using the template "Stringsdict File".
 TODO: Add more detail!
 
-## Numbers
+## Numbers and Currency
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/foundation/numberformatter",
@@ -232,5 +232,22 @@ print(formatter.string(from: date)) // 03 January
 formatter.locale = Locale(identifier: "fr") // French
 print(formatter.string(from: date)) // 03 janvier
 ```
+
+## Images
+
+To render a localized image where
+a different image is displayed for each supported language:
+
+1. Add an "Image Set" to the `Assets.xcassets` file.
+1. Open the Inspector pane on the right side.
+1. Click the last tab which shows the "Attributes Inspector".
+1. In the "Localizations" section, check all the languages to be supported.
+   This opens a separate area in the image editor panel
+   for each language where 1x, 2x, and 3x images can be added.
+1. Add at least one image size for each language.
+1. Render the image by passing the image set name to the `Image` view
+   in the same way as for any other image.
+
+A localized image
 
 ## Exporting and Importing Localizations
