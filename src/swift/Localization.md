@@ -79,11 +79,12 @@ ContentView()
     .environment(\.locale, .init(identifier: "la"))
 ```
 
-where `la` is replaced by a language abbreviation such as `fr` for French.
+where `la` is replaced by a language abbreviation such as `en` for English
+or a combination of a language and region abbreviation such as `en-US`.
 
-## Simulator Locale
+## Simulator and Device Locale
 
-To select a locale in the Simulator:
+To select a locale in the Simulator or on a device:
 
 - Open the Settings app.
 - Select General.
@@ -99,15 +100,31 @@ To select a locale in the Simulator:
 ## User-selected Locale
 
 The `environment` view modifier can be used to
-allow the user to select a language within the app.
-For example:
+allow the user to select a locale within the app.
+This works for most views, but I haven't been able to
+get it to change a localized image.
+
+This {% aTargetBlank
+"https://developer.apple.com/forums/thread/13155?answerId=36704022#36704022",
+"Apple Forums post" %} says the following:
+
+> If the system puts up a UI component on your behalf it will do so
+> in the localization that it thinks that your app is running in.
+> If your app is 'pretending' to run in some other language,
+> you'll end up with a mixed localization, where some parts of your app
+> (the parts you control) are in one language and other parts of your app
+> (the parts controlled by the OS) are in another.
+> That's a very poor user experience.
+
+If you want to allow the user to change the locale anyway,
+the following approach works for most kinds of views:
 
 ```swift
         VStack {
-            Picker("Language", selection: $language) {
-                Text("English").tag("en")
-                Text("French").tag("fr")
-                Text("Spanish").tag("es")
+            Picker("Locale", selection: $language) {
+                Text("English in U.S.").tag("en-US")
+                Text("French in France").tag("fr-FR")
+                Text("Spanish in Spain").tag("es-ES")
             }
             .pickerStyle(.segmented)
 
@@ -248,7 +265,20 @@ a different image is displayed for each supported language:
 1. Render the image by passing the image set name to the `Image` view
    in the same way as for any other image.
 
-TODO: Why doesn't the image change when the
-TODO: environment locale value is changed from within the app?
+The image changes when the user changes the region
+specified in the Settings app. For the steps to do this, see
+[## Simulator and Device Locale](#simulator-and-device-locale).
+
+If the locale is changed within the app using the
+`environment` view modifier, localized images do not update.
+Perhaps this is a SwiftUI bug.
 
 ## Exporting and Importing Localizations
+
+Localization strings can be exported to a file that can be
+sent to a localization expert that will supply translations.
+Once the file is returned, it can be imported into the project.
+
+To export the localizations ...
+
+To import the localizations ...
