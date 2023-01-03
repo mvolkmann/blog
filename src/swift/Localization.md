@@ -7,35 +7,64 @@ layout: topic-layout.njk
 
 ## Overview
 
-To specify the languages to be supported:
+TODO: Which SwiftUI views automatically look for String translations?
+TODO: I know Text does. How about Label, Button, TextField, Link, navigation title, ...?
+TODO: When should LocalizedStringKey be used?
+
+## Specifying Supported Languages
 
 1. Select the top entry in the File Navigator.
 1. In the left nav of the project editor, select the project.
 1. Select the "Info" tab.
-1. In the "Localization" section, for each language to be added,
+1. In the "Localization" section there will already be an entry for "English".
+   For each additional language to be supported,
    click the "+" Button and select a language.
 
-To create a "Strings" file:
+## Creating a "Strings" File
+
+Translations are described in a "Strings" file.
+To create one:
 
 1. Add a file to the project by pressing cmd-n.
 1. In the Resource section, select the "Strings File" template.
 1. Click the "Next" button.
-1. Keep the default name of "Localizable.strings".
+1. Keep the default directory and the default file name "Localizable.strings".
 1. Click the "Create" button.
-
-To populate the "Strings" file:
-
 1. Select the "Localizable.strings" file in the File Navigator.
 1. Open the Inspector panel on the right.
+1. Under "Localization", click the "Localize..." button.
+1. In the dialog that appears, click the "Localize" button.
+1. Once again, select the "Localizable.strings" file in the File Navigator.
+1. Once again, open the Inspector panel on the right.
 1. Under "Localization", check all the language checkboxes.
 1. This will add one entry under "Localizable.strings" in the File Navigator
    for each selected language.
-1. For each language
+
+## Populating the "Strings" File
+
+1. In the File Navigator, expand the "Localizable.strings" entry
+   to expose an entry for each supported language.
+1. For each supported language
    1. Select its entry in the File Navigator.
    1. For each string to be translated
-      1. Enter an assignment statement of the form
-         `"english-or-key" = "translation";`
+      1. Enter an assignment statement of the form `"key" = "translation";`
          (note the semicolon at the end).
+
+For example, the key could be "greeting",
+the English translation could be "Hello",
+and the French translation could be "Bonjour".
+
+When no translation is found for a given key in the current language,
+the key itself is used.
+
+If a key is the same as its English translation then it is
+not necessary to add an entry for it in the English file.
+For example, if the key is "Hello" then
+there is no need to add `"Hello" = "Hello";"` in the English file
+and the French file could contain `"Hello" = "Bonjour";`.
+This is the recommend approach unless the English translation is long.
+
+## Preview Locale
 
 To select a locale to use in the Preview,
 apply the `environment` view modifier to the top-most view.
@@ -47,6 +76,8 @@ ContentView()
 ```
 
 where `la` is replaced by a language abbreviation such as `fr` for French.
+
+## Simulator Locale
 
 To select a locale in the Simulator:
 
@@ -61,62 +92,23 @@ To select a locale in the Simulator:
 - Tap the "Continue" button.
 - Return to the app being tested.
 
-## OLD STUFF YOU CAN PROBABLY DELETE FOLLOWS
+## User-selected Locale
 
-To generate a directory of localization files:
+The `environment` view modifier can be used to
+allow the user to select a language within the app.
+For example:
 
-1. Select Product ... Export Localizations...
-1. Select the directory where a new directory will be created.
-   Typically the project directory is used.
-1. Enter a name of the new directory such as "localizations".
-1. Click the "Export" button.
-1. Select Files ... Add Files to...
-1. Select the newly created directory.
+```swift
+        VStack {
+            Picker("Language", selection: $language) {
+                Text("English").tag("en")
+                Text("French").tag("fr")
+                Text("Spanish").tag("es")
+            }
+            .pickerStyle(.segmented)
 
-This automatically captures all the strings passed to UI views.
-TODO: Only those strings or ALL strings?
-
-The generated directory will contain one "Xcode Localization Catalog"
-for each supported language.
-Each of these will have a name of the form `{language-abbreviation}.xcloc`.
-For example, for English it will be `en.xcloc`
-and for French it will be `fr.xcloc`.
-Each of these will contain a subdirectory named "Localized Contents"
-that contains the file "{language-abbreviation}.xliff".
-These are XML files that hold mappings from source text to translated text.
-
-Rather than manually editing these XML files,
-they can be edited using a special editor within Xcode.
-However, the directory structure appears differently inside Xcode.
-Selecting a `.xcloc` file will expose
-what appears to be a file named `Localizable`.
-Selecting that file will open an editor that makes entering translations
-similar to entering values in a spreadsheet.
-
-1. Select Product ... Export Localizations...
-1. Select the directory where a new directory will be created.
-   Typically the project directory is used.
-1. Enter a name of the new directory such as "localizations".
-1. Click the "Export" button.
-1. Select Files ... Add Files to...
-1. Select the newly created directory.
-
-This automatically captures all the strings passed to UI views.
-TODO: Only those strings or ALL strings?
-
-The generated directory will contain one "Xcode Localization Catalog"
-for each supported language.
-Each of these will have a name of the form `{language-abbreviation}.xcloc`.
-For example, for English it will be `en.xcloc`
-and for French it will be `fr.xcloc`.
-Each of these will contain a subdirectory named "Localized Contents"
-that contains the file "{language-abbreviation}.xliff".
-These are XML files that hold mappings from source text to translated text.
-
-Rather than manually editing these XML files,
-they can be edited using a special editor within Xcode.
-However, the directory structure appears differently inside Xcode.
-Selecting a `.xcloc` file will expose
-what appears to be a file named `Localizable`.
-Selecting that file will open an editor that makes entering translations
-similar to entering values in a spreadsheet.
+            Text("Hello!")
+        }
+        .padding()
+        .environment(\.locale, .init(identifier: language))
+```
