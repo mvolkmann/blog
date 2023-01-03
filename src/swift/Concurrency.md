@@ -1151,21 +1151,28 @@ This is typically only done for closures that update the UI.
 For example:
 
 ```swift
-Task { @MainActor p1, p2 in ... }
-
-// This closure has no parameters.
-Task { @MainActor in ... }
-
-// TODO: Is this just a longer way to write the code above?
-Task {
-    await MainActor.run { ... }
+Task { @MainActor p1, p2 in
+    ...
 }
 
-// Code above is an alternative to writing this.
-DispatchQueue.main.async { ... }
-```
+// This closure has no parameters.
+Task { @MainActor in
+    ...
+}
 
-TODO: See https://www.hackingwithswift.com/forums/swiftui/running-code-on-the-main-queue/18411.
+// This is a longer alternative that does the same thing.
+Task {
+    await MainActor.run {
+        ...
+    }
+}
+
+// This is an even longer alternative that does the same thing.
+// that was the approach before the async/await system was introduced.
+DispatchQueue.main.async {
+    ...
+}
+```
 
 ## Custom Global Actors
 

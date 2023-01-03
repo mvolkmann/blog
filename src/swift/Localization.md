@@ -112,3 +112,16 @@ For example:
         .padding()
         .environment(\.locale, .init(identifier: language))
 ```
+
+## Localized String Placeholders
+
+Localized strings can contain placeholders represented by "%@".
+These allow values to be passed to the `LocalizedStringKey` initializer
+using string interpolation.
+For example:
+
+```swift
+let thing = "sun"
+let time = "tomorrow"
+Text(LocalizedStringKey("The \(thing) will come out \(time)."))
+```
