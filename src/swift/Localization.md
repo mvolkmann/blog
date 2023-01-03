@@ -138,6 +138,71 @@ To specify how plural strings should be handled,
 create a file using the template "Stringsdict File".
 TODO: Add more detail!
 
+## Numbers
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/numberformatter",
+"NumberFormatter" %} class will localize date formats
+when its `locale` property is set.
+
+Currency formatting requires the locale identifier
+to contain both a language code and a country code.
+
+The following code demonstrates all the supported number formatting styles:
+
+```swift
+let number = NSNumber(value: 1234.5678)
+let formatter = NumberFormatter()
+
+func demo(_ style: NumberFormatter.Style) {
+    formatter.numberStyle = style
+    formatter.locale = Locale(identifier: "en-US") // English U.S.
+    print(formatter.string(from: number) ?? "invalid")
+    formatter.locale = Locale(identifier: "fr-FR") // French France
+    print(formatter.string(from: number) ?? "invalid")
+}
+
+demo(.none)
+// 1235
+// 1235
+
+demo(.decimal)
+// 1,234.568
+// 1 234,568
+
+demo(.percent)
+// 123,457%
+// 123 457 %
+
+demo(.scientific)
+// 1.2345678E3
+// 1,2345678E3
+
+demo(.spellOut)
+// one thousand two hundred thirty-four point five six seven eight
+// mille deux cent trente-quatre virgule cinq six sept huit
+
+demo(.ordinal)
+// 1,235th
+// 1 235e
+
+demo(.currency)
+// $1,234.57
+// 1 234,57 €
+
+// From the Apple documentation,
+// "This style behaves like the .currency style,
+// except that negative numbers representations are
+// surrounded by parentheses rather than preceded by a negative symbol.
+demo(.currencyAccounting)
+// $1,234.57
+// 1 234,57 €
+
+demo(.currencyPlural)
+// 1,234.57 US dollars
+// 1 234,57 euros
+```
+
 ## Dates
 
 The {% aTargetBlank
