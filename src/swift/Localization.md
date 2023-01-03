@@ -248,6 +248,7 @@ a different image is displayed for each supported language:
 1. Render the image by passing the image set name to the `Image` view
    in the same way as for any other image.
 
-A localized image
+TODO: Why doesn't the image change when the
+TODO: environment locale value is changed from within the app?
 
 ## Exporting and Importing Localizations
