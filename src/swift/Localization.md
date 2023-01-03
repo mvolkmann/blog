@@ -64,6 +64,10 @@ there is no need to add `"Hello" = "Hello";"` in the English file
 and the French file could contain `"Hello" = "Bonjour";`.
 This is the recommend approach unless the English translation is long.
 
+Translation strings can contain Markdown syntax.
+For example, this can be used to make some of the text
+bold, italic, or underlined.
+
 ## Preview Locale
 
 To select a locale to use in the Preview,
@@ -113,10 +117,12 @@ For example:
         .environment(\.locale, .init(identifier: language))
 ```
 
-## Localized String Placeholders
+## Localized String Arguments
 
-Localized strings can contain placeholders represented by "%@".
-These allow values to be passed to the `LocalizedStringKey` initializer
+Localized strings can specific arguments accepted and
+where they should be inserted in translations.
+Arguments are represented by `%@` for string values and `%d` for numeric values.
+Arguments are passed to the `LocalizedStringKey` initializer
 using string interpolation.
 For example:
 
