@@ -131,3 +131,41 @@ let thing = "sun"
 let time = "tomorrow"
 Text(LocalizedStringKey("The \(thing) will come out \(time)."))
 ```
+
+## Plurals
+
+To specify how plural strings should be handled,
+create a file using the template "Stringsdict File".
+TODO: Add more detail!
+
+## Dates
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/dateformatter",
+"DateFormatter" %} class will localize date formats
+when its `locale` property is set.
+This works with predefined date/time styles
+and also with custom date/time templates.
+For example:
+
+```swift
+let date = Date()
+let formatter = DateFormatter()
+
+formatter.dateStyle = .short
+formatter.timeStyle = .short
+formatter.locale = Locale(identifier: "en") // English
+print(formatter.string(from: date)) // 1/3/23, 1:36 PM
+
+formatter.locale = Locale(identifier: "fr") // French
+print(formatter.string(from: date)) // 03/01/2023 13:36
+
+formatter.setLocalizedDateFormatFromTemplate("dd MMMM")
+formatter.locale = Locale(identifier: "en") // English
+print(formatter.string(from: date)) // 03 January
+
+formatter.locale = Locale(identifier: "fr") // French
+print(formatter.string(from: date)) // 03 janvier
+```
+
+## Exporting and Importing Localizations
