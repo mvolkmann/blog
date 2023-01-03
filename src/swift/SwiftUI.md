@@ -1363,6 +1363,7 @@ The following code demonstrates defining a view model
 and subscribing to it:
 
 ```swift
+@MainActor
 class MyState: ObservableObject {
     @Published var score: Int = 0
     // Could declare additional published properties here.
@@ -1401,6 +1402,7 @@ instead call `objectWillChange.send()` before the value changes.
 For example:
 
 ```swift
+@MainActor
 class Game: ObservableObject {
     var score = 0 {
         willSet {
@@ -1439,6 +1441,7 @@ The following code demonstrates passing a view model
 from one view to another:
 
 ```swift
+@MainActor
 class MyState: ObservableObject {
     @Published var score: Int = 0
     // Could declare additional published properties here.
@@ -1502,6 +1505,7 @@ It works in the Simulator, but not in Preview.
 // Environment objects must be defined by classes
 // that conform to the ObservableObject protocol
 // and they should publish at least one property.
+@MainActor
 class SharedData: ObservableObject {
     @Published var name = "Mark"
     @Published var score = 0
@@ -8782,6 +8786,7 @@ struct Dog: CustomStringConvertible, Identifiable {
 // This can be called directly before changes are made.
 // Alternatively, if the properties that can change are annotated with the
 // @Published property wrapper, changes will be published automatically.
+@MainActor
 class Model: ObservableObject {
     // The @Published property wrapper causes changes in properties
     // that are structs, not classes, to be published.
@@ -9480,6 +9485,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 import SwiftUI
 
 // This data is shared between pages as an environment object.
+@MainActor
 class SharedData: ObservableObject {
     @Published var v1 = 0
     @Published var v2 = "x"
@@ -9763,6 +9769,7 @@ struct Player: Hashable {
     }
 }
 
+@MainActor
 class Model: ObservableObject {
     var baseball = Sport(name: "Baseball")
     var football = Sport(name: "Football")

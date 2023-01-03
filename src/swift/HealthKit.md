@@ -677,6 +677,7 @@ class HealthKitViewModel: ObservableObject {
 // HealthManager.swift
 import HealthKit
 
+@MainActor
 class HealthManager: ObservableObject {
     private let store = HKHealthStore()
 
@@ -808,6 +809,7 @@ struct ContentView: View {
 import HealthKit
 
 // Code for this class appears in the previous section.
+@MainActor
 class HealthManager: ObservableObject {
     ...
 

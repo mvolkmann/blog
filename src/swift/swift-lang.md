@@ -2718,6 +2718,7 @@ This can be useful in "view model" classes used in a SwiftUI app.
 For example:
 
 ```swift
+@MainActor
 class Game: ObservableObject {
     var score = 0 {
         willSet {
@@ -4767,6 +4768,7 @@ struct NewDog: Codable, CustomStringConvertible {
     var description: String { "\(name) is a \(breed)" }
 }
 
+@MainActor
 class ViewModel: ObservableObject {
     @Published var dogs: [Dog] = []
 
