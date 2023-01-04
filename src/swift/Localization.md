@@ -441,10 +441,12 @@ To export the localizations:
 - Select Product ... Export Localizations...
 - Select the directory where a new directory will be created
   (defaults to the project directory).
-- Enter a name for the new directory (defaults to "{project-name} Localizations").
+- Enter a name for the new directory
+  (defaults to "{project-name} Localizations").
 - Click the "Export" button.
 
-The new directory will contain one `.xcloc` directory for each supported language.
+The new directory will contain one `.xcloc` directory
+for each supported language.
 These directories will contain several subdirectories and files.
 The translations can be found in the `.xliff` file
 found in the "Localized Contents" subdirectory.
