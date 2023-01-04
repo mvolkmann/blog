@@ -151,9 +151,43 @@ Text(LocalizedStringKey("The \(thing) will come out \(time)."))
 
 ## Plurals
 
-To specify how plural strings should be handled,
-create a file using the template "Stringsdict File".
-TODO: Add more detail!
+To define how specific words should be pluralized based on a count:
+
+1. Add a file to the project by pressing cmd-n.
+1. In the Resource section, select the "Stringsdict File" template.
+1. Click the "Next" button.
+1. Keep the default directory and the default file name
+   "Localizable.stringsdict".
+1. Click the "Create" button.
+1. Select the "Localizable.stringsdict" file in the File Navigator.
+1. Add rows with keys, types, and values similar to what is
+   shown in the screenshot below for each word to be pluralized.
+
+<img alt="SwiftUI plural localization" style="width: 90%"
+  src="/blog/assets/swiftui-plural-localization.png?v={{pkg.version}}"
+  title="Swift plural localization">
+
+`%lld` (long long decimal) is a string format specifier for the `Int64` type.
+
+| Key     | Used When Count Is      |
+| ------- | ----------------------- |
+| `zero`  | 0                       |
+| `one`   | 1                       |
+| `two`   | 2                       |
+| `few`   | 3                       |
+| `many`  | > 3                     |
+| `other` | any value not specified |
+
+The following code demonstrates displaying a number of apples.
+The string to be formatted must contain one string interpolation.
+The count can be hard-coded in the interpolation
+or provided by a variable.
+
+```swift
+Text("apple \(2)") // a pair of apples
+let appleCount = 7
+Text("apple \(appleCount)") // 7 apples
+```
 
 ## Numbers and Currency
 
@@ -240,7 +274,14 @@ formatter.locale = Locale(identifier: "en") // English
 print(formatter.string(from: date)) // 1/3/23, 1:36 PM
 
 formatter.locale = Locale(identifier: "fr") // French
-print(formatter.string(from: date)) // 03/01/2023 13:36
+print(formatter.string(from: date)) //                 Text("apple \(0)")
+                Text("apple \(1)")
+                Text("apple \(2)")
+                Text("apple \(3)")
+                Text("apple \(4)")
+                let appleCount = 7
+                Text("apple \(appleCount)")
+3/01/2023 13:36
 
 formatter.setLocalizedDateFormatFromTemplate("dd MMMM")
 formatter.locale = Locale(identifier: "en") // English
