@@ -169,7 +169,16 @@ To define how specific words should be pluralized based on a count:
 
 `%lld` (long long decimal) is a string format specifier for the `Int64` type.
 
-| Key     | Used When Count Is      |
+The following keys are used to define how counts should be pluralized.
+Their meaning differs based on the locale,
+especially the meaning of "few" and "many".
+For details see the Unicode Common Locale Data Repository (CLDR)
+{% aTargetBlank "https://cldr.unicode.org/index/cldr-spec/plural-rules",
+"Plural Rules" %} and {% aTargetBlank
+"https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html",
+"Language Plural Rules" %}.
+
+| Key     | English Meaning         |
 | ------- | ----------------------- |
 | `zero`  | 0                       |
 | `one`   | 1                       |
