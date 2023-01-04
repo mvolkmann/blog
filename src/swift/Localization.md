@@ -151,11 +151,16 @@ Text(LocalizedStringKey("The \(thing) will come out \(time)."))
 
 ## Plurals
 
+SwiftUI can automate displaying phrases that describe a number of things
+where the word that describes the thing varies based on the count.
+For example, "dog" vs. "dogs" or "cactus" vs. "cacti".
+
 There are two kinds of plural values to consider.
 Cardinal numbers specify a count or quantity (ex. two).
 Ordinal numbers specify a position within an ordered list (ex. second).
 
-Pluralization of cardinal numbers is supported by a `.stringsdict` file.
+Pluralization of cardinal numbers is supported by a `.stringsdict` file
+which is described in this section.
 Pluralization of ordinal numbers is supported by `NumberFormatter`
 as described in the [Numbers and Currency](#numbers-and-currency) section.
 
@@ -226,8 +231,10 @@ especially the meaning of "few" and "many".
 | `many`  | > 3                     |
 | `other` | any value not specified |
 
-Many languages such as English, French, and Spanish
+Many languages such as English, French, German, Italian, and Spanish
 only use `zero`, `one`, and `other`.
+Chinese and Japanese only use one form.
+Arabic uses all six forms.
 
 For more details see the Unicode Common Locale Data Repository (CLDR)
 {% aTargetBlank "https://cldr.unicode.org/index/cldr-spec/plural-rules",
