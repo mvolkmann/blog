@@ -162,18 +162,38 @@ TODO: Is this a bug in SwiftUI?
 
 ## Localized String Arguments
 
-Localized strings can specific arguments accepted and
+Localized strings can specify arguments accepted and
 where they should be inserted in translations.
 Arguments are represented by `%@` for string values and `%d` for numeric values.
 Arguments are passed to the `LocalizedStringKey` initializer
 using string interpolation.
-For example:
+
+For example, the following translations can be defined:
+
+```text
+// English
+"Annie %@ %@" = "The %@ will come out %@.";
+
+// French
+"Annie %@ %@" = "Le %@ sortira %@.";
+"sun" = "soleil";
+"tomorrow" = "demain";
+
+// Spanish
+"Annie %@ %@" = "El %@ saldra %@.";
+"sun" = "sol";
+"tomorrow" = "mañana";
+```
+
+The following code uses these translations:
 
 ```swift
 let thing = "sun"
 let time = "tomorrow"
-Text(LocalizedStringKey("The \(thing) will come out \(time)."))
+Text("Annie \(sun) \(tomorrow)")
 ```
+
+TODO: How can we translate the strings "sun" and "tomorrow"?
 
 ## Plurals
 

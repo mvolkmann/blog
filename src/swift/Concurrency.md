@@ -1143,6 +1143,7 @@ will occur in the main thread.
 Methods in a type to which `@MainActor` is applied
 can be marked with `nonisolated` to allow it
 to be called from any concurrent context.
+This can improve their performance.
 However, such methods cannot return the value of a property
 in the type or a value computed from the properties.
 
