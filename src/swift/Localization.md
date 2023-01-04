@@ -134,6 +134,31 @@ the following approach works for most kinds of views:
         .environment(\.locale, .init(identifier: language))
 ```
 
+Changing the locale in this way rather than in the Settings app
+works for many kinds of translations, but not all.
+
+Either of these approaches can be used to get a translation in code:
+
+```swift
+let translation = Bundle.main.localizedString(
+    forKey: key,
+    value: key, // translation defaults to the key
+    table: nil // defaults to "Localizable"
+               // which uses the file Localizable.strings
+)
+
+// This is a shortcut for the above where table is nil
+// which causes it to use `Localizable` for the table.
+let translation = NSLocalizedString(key, comment: "")
+```
+
+These get a translation based on the locale selected in the Settings app.
+However, neither of these honor the locale specified with
+the environment view modifier.
+
+The same issue exists with retrieving localized images from an "Image Set".
+Is this a bug in SwiftUI?
+
 ## Localized String Arguments
 
 Localized strings can specific arguments accepted and
