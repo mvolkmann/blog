@@ -7,10 +7,13 @@ layout: topic-layout.njk
 
 ## Overview
 
-There make facets to localization including
+There many facets to localization including
 text translation, enabling users to select a locale within an app,
 plural forms, numbers, currency, dates, and images.
-Each of these is discussed here.
+Each of these are discussed here.
+
+Many SwiftUI views automatically perform translations.
+These include `Text`, `Label`, and `Button`.
 
 ## Specifying Supported Languages
 
@@ -102,8 +105,6 @@ To select a locale in the Simulator or on a device:
 
 The `environment` view modifier can be used to
 allow the user to select a locale within the app.
-This works for most views, but I haven't been able to
-get it to change a localized image.
 
 This {% aTargetBlank
 "https://developer.apple.com/forums/thread/13155?answerId=36704022#36704022",
@@ -117,8 +118,9 @@ This {% aTargetBlank
 > (the parts controlled by the OS) are in another.
 > That's a very poor user experience.
 
-If you want to allow the user to change the locale anyway,
-the following approach works for most kinds of views:
+Despite this warning, the `environment` view modifier
+can be used to change the current locale.
+For example:
 
 ```swift
         VStack {
@@ -138,7 +140,7 @@ the following approach works for most kinds of views:
 Changing the locale in this way rather than in the Settings app
 works for many kinds of translations, but not all.
 
-Either of these approaches can be used to get a translation in code:
+Either of the following approaches can be used to get a translation in code:
 
 ```swift
 let translation = Bundle.main.localizedString(
@@ -153,7 +155,8 @@ let translation = Bundle.main.localizedString(
 let translation = NSLocalizedString(key, comment: "")
 ```
 
-These get a translation based on the locale selected in the Settings app.
+These approaches get a translation based on
+the locale selected in the Settings app.
 However, neither of these honor the locale specified with
 the environment view modifier.
 
