@@ -265,6 +265,18 @@ a different image is displayed for each supported language:
 1. Render the image by passing the image set name to the `Image` view
    in the same way as for any other image.
 
+The following code assumes that an Image Set named "landmark"
+was created in the `Assets.xcassets` file and it
+contains different images for English, French, and Spanish.
+
+```swift
+Image("landmark")
+    .resizable()
+    .aspectRatio(contentMode: .fit)
+    .frame(height: 150)
+    .id(locale) // This does not help!
+```
+
 The image changes when the user changes the region
 specified in the Settings app. For the steps to do this, see
 [## Simulator and Device Locale](#simulator-and-device-locale).
@@ -272,6 +284,20 @@ specified in the Settings app. For the steps to do this, see
 If the locale is changed within the app using the
 `environment` view modifier, localized images do not update.
 Perhaps this is a SwiftUI bug.
+
+Another approach that does work is to create a separate Image Set
+for each supported locale.
+The following code assumes that Image Sets named
+"landmark-en-US", "landmark-fr-FR", and "landmark-es-ES"
+were created in the `Assets.xcassets` file.
+It does update when the value of the `locale` variable changes.
+
+```swift
+Image("landmark-" + locale)
+    .resizable()
+    .aspectRatio(contentMode: .fit)
+    .frame(height: 150)
+```
 
 ## Exporting and Importing Localizations
 
