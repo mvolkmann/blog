@@ -35,10 +35,10 @@ To create one:
 1. Under "Localization", click the "Localize..." button.
 1. In the dialog that appears, click the "Localize" button.
 1. Once again, select the "Localizable.strings" file in the File Navigator.
-1. Once again, open the Inspector panel on the right.
-1. Under "Localization", check all the language checkboxes.
-1. This will add one entry under "Localizable.strings" in the File Navigator
-   for each selected language.
+1. In the Inspector panel on the right under "Localization",
+   check all the language checkboxes.
+   This will add one entry under "Localizable.strings"
+   in the File Navigator for each selected language.
 
 ## Populating the "Strings" File
 
@@ -151,6 +151,14 @@ Text(LocalizedStringKey("The \(thing) will come out \(time)."))
 
 ## Plurals
 
+There are two kinds of plural values to consider.
+Cardinal numbers specify a count or quantity (ex. two).
+Ordinal numbers specify a position within an ordered list (ex. second).
+
+Pluralization of cardinal numbers is supported by a `.stringsdict` file.
+Pluralization of ordinal numbers is supported by `NumberFormatter`
+as described in the [Numbers and Currency](#numbers-and-currency) section.
+
 To define how specific words should be pluralized based on a count:
 
 1. Add a file to the project by pressing cmd-n.
@@ -159,24 +167,55 @@ To define how specific words should be pluralized based on a count:
 1. Keep the default directory and the default file name
    "Localizable.stringsdict".
 1. Click the "Create" button.
-1. Select the "Localizable.stringsdict" file in the File Navigator.
-1. Add rows with keys, types, and values similar to what is
-   shown in the screenshot below for each word to be pluralized.
+1. To support multiple languages:
+   1. Select the "Localizable.stringsdict" file in the File Navigator.
+   1. Open the Inspector panel on the right.
+   1. Under "Localization", click the "Localize..." button.
+   1. In the dialog that appears, click the "Localize" button.
+   1. Once again, select the "Localizable.stringsdict" file
+      in the File Navigator.
+   1. In the Inspector panel on the right under "Localization",
+      check all the language checkboxes.
+      This will add one entry under "Localizable.stringsdict"
+      in the File Navigator for each selected language.
+1. For each supported language:
+   1. Select its entry in the File Navigator.
+   1. Add rows with keys, types, and values similar to what is
+      shown in the screenshot below for each phrase to be pluralized.
+      A row and all its descendant rows can be copied
+      from one language entry to another to save typing.
 
-<img alt="SwiftUI plural localization" style="width: 90%"
-  src="/blog/assets/swiftui-plural-localization.png?v={{pkg.version}}"
-  title="Swift plural localization">
+<figure style="width: 90%">
+  <img alt="SwiftUI English plural localization"
+    src="/blog/assets/swiftui-plural-localization-en.png?v={{pkg.version}}"
+    title="Swift English plural localization">
+  <figcaption>English plural rules</figcaption>
+</figure>
+<figure style="width: 90%">
+  <img alt="SwiftUI French plural localization"
+    src="/blog/assets/swiftui-plural-localization-fr.png?v={{pkg.version}}"
+    title="Swift French plural localization">
+  <figcaption>French plural rules</figcaption>
+</figure>
+<figure style="width: 90%">
+  <img alt="SwiftUI Spanish plural localization"
+    src="/blog/assets/swiftui-plural-localization-es.png?v={{pkg.version}}"
+    title="Swift Spanish plural localization">
+  <figcaption>Spanish plural rules</figcaption>
+</figure>
 
-`%lld` (long long decimal) is a string format specifier for the `Int64` type.
+The supported format specifiers include:
+
+- `%d` - signed integer
+- `%u` - unsigned integer
+- `%lld` - long long decimal (`Int64`)
+- `%f` - double
+
+`%lld` works for `Int` values, but it seems the `%d` and `%u` do not!
 
 The following keys are used to define how counts should be pluralized.
 Their meaning differs based on the locale,
 especially the meaning of "few" and "many".
-For details see the Unicode Common Locale Data Repository (CLDR)
-{% aTargetBlank "https://cldr.unicode.org/index/cldr-spec/plural-rules",
-"Plural Rules" %} and {% aTargetBlank
-"https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html",
-"Language Plural Rules" %}.
 
 | Key     | English Meaning         |
 | ------- | ----------------------- |
@@ -186,6 +225,15 @@ For details see the Unicode Common Locale Data Repository (CLDR)
 | `few`   | 3                       |
 | `many`  | > 3                     |
 | `other` | any value not specified |
+
+Many languages such as English, French, and Spanish
+only use `zero`, `one`, and `other`.
+
+For more details see the Unicode Common Locale Data Repository (CLDR)
+{% aTargetBlank "https://cldr.unicode.org/index/cldr-spec/plural-rules",
+"Plural Rules" %} and {% aTargetBlank
+"https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html",
+"Language Plural Rules" %}.
 
 The following code demonstrates displaying a number of apples.
 The string to be formatted must contain one string interpolation.

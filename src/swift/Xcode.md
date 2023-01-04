@@ -154,6 +154,13 @@ The Navigator has nine icon buttons at the top.
 
 ## Editor
 
+Xcode provides a specialized editor for some file types.
+Examples include project files (.xcodeproj) and Property List (PLIST) files
+(such as `Info.plist` and `Localizable.stringsdict`).
+
+For many text-based file formats such as Swift (`.swift`)
+and Objective-C files (`.m` and `.h`) a text editor is used.
+
 Code entered in an editor pane is checked for errors while typing.
 Saving is not required.
 
