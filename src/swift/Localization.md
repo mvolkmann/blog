@@ -7,9 +7,10 @@ layout: topic-layout.njk
 
 ## Overview
 
-TODO: Which SwiftUI views automatically look for String translations?
-TODO: I know Text does. How about Label, Button, TextField, Link, navigation title, ...?
-TODO: When should LocalizedStringKey be used?
+There make facets to localization including
+text translation, enabling users to select a locale within an app,
+plural forms, numbers, currency, dates, and images.
+Each of these is discussed here.
 
 ## Specifying Supported Languages
 
@@ -157,7 +158,7 @@ However, neither of these honor the locale specified with
 the environment view modifier.
 
 The same issue exists with retrieving localized images from an "Image Set".
-Is this a bug in SwiftUI?
+TODO: Is this a bug in SwiftUI?
 
 ## Localized String Arguments
 
@@ -435,6 +436,32 @@ Localization strings can be exported to a file that can be
 sent to a localization expert that will supply translations.
 Once the file is returned, it can be imported into the project.
 
-To export the localizations ...
+To export the localizations:
 
-To import the localizations ...
+- Select Product ... Export Localizations...
+- Select the directory where a new directory will be created
+  (defaults to the project directory).
+- Enter a name for the new directory (defaults to "{project-name} Localizations").
+- Click the "Export" button.
+
+The new directory will contain one `.xcloc` directory for each supported language.
+These directories will contain several subdirectories and files.
+The translations can be found in the `.xliff` file
+found in the "Localized Contents" subdirectory.
+This is an XML file that contains one `trans-unit` element for each translation.
+These elements contain the child elements `source`, `target`, and `comment`.
+People with language translation experience can edit these files,
+modifying the `target` and `comment` element contents.
+
+To import modified localizations:
+
+- Select Product ... Import Localizations...
+- Select a `.xcloc` file for a specific language.
+- Click the "Import" button.
+- Differences between the current translations and the
+  translations to be imported will be displayed side-by-side.
+  No editing can be performed here.
+- If the differences are acceptable, click the "Import" button.
+  The changes will be merged into the Strings File
+  which by default is named `Localizable.strings`.
+  However, it seems that modified comments are not merged.
