@@ -211,33 +211,54 @@ To create a GitHub repository for a new package inside Xcode:
 - Select the "README.md" file and add details.
 - Select Source Control ... New Git Repository...
 - Click the "Create" button.
-- Select the Source Control Navigator (2nd tag).
-- Select the "Repositories" tab.
-- Right-click "Remotes" and select "New {package-name} Remote...".
+- If your GitHub account has not already been associated with Xcode:
+
+  - Select Xcode ... Settings...
+  - Select the "Accounts" tab.
+  - Click the "+" button in the lower-left.
+  - In the dialog that appears, select "GitHub".
+  - Click the "Continue" button.
+  - Enter a GitHub account name.
+  - Paste in a personal access token for the account.
+  - Click the "Sign In" button.
+
+- Open the Source Control Navigator which is the second Navigator tab.
+- Click the "Repositories" tab.
+- Right-click the top entry and select "New {package-name} Remote...".
 - In the dialog that appears, verify the account, enter a description, and
   choose "Public" or "Private".
 - Click the "Create" button.
+- Select the Source Control Navigator (2nd tab).
+- Select the "Repositories" tab.
 
 Package versions are specified with Git tags that are semantic version numbers.
 To add a tag to the current commit of a Swift package:
 
 - Open the Source Control Navigator which is the second Navigator tab.
 - Click the "Repositories" tab.
-- Expand the "Tabs" section to see the existing tags.
-- Right-click the top entry and select "Tag {branch-name}...".
+- Expand the "Tags" section to see the existing tags.
+- Right-click the top entry and select "Tag {branch-name}..."
+  where branch-name is typically "main".
 - In the dialog that appears, enter a semantic version number
   that is higher than the previous tag (ex. 1.2.3).
 - Optionally enter a description in the Message input.
 - Click the Create button.
+- Select Source Control ... Push...
+- In the dialog that appears,
+  check the "Include Tags" checkbox and click the "Push" button.
 
-The new tag only exists in the local repository.
-To push it to the remote repository,
-open a terminal window and enter `git push origin --tags`.
-It seems odd that Xcode doesn't provide a way to do this!
+For each new version of the package to be published,
+commit the changes, tag the commit, and push it as described above.
+
+To view the GitHub repository in your default web browser:
+
+- Open the Source Control Navigator which is the second Navigator tab.
+- Click the "Repositories" tab.
+- Right-click the top entry and select "View on GitHub...".
 
 ## Using Packages
 
-To use a package from an application or other package:
+To use a package in an application or other package:
 
 - Open the application or package that will use the package in Xcode.
 
@@ -245,7 +266,7 @@ To use a package from an application or other package:
 
   Alternatively this longer set of steps can be used:
 
-  - Select the top entry in the Navigator.
+  - Select the top entry in the Project Navigator.
   - Select the project.
   - Click the "Package Dependencies" tab.
   - Click the "+" button at the bottom.
@@ -275,11 +296,27 @@ To use a package from an application or other package:
 - Add code that uses the public types, functions, and values
   defined in the imported package targets.
 
+To update the version of all package dependencies,
+select File ... Packages ... Update to Latest Package Versions.
+
+To update the version of a specific package dependency:
+
+- Open the Project Navigator.
+- Under "Package Dependencies", find the package and right-click it.
+- Select "Update Package".
+
+To see source code for a package dependency:
+
+- Open the Project Navigator.
+- Under "Package Dependencies", find the package and expand it.
+- Expand the "Sources" directory.
+- Click a source file to view it.
+
 ## Updating Packages
 
 To update the version of a single package dependency to the latest version
 that is compatible with the dependency rule for specified for the package,
-right-click the dependency near the bottom of the Navigator
+right-click the dependency near the bottom of the Project Navigator
 and select "Update Package".
 
 To update the version of all of the application dependencies,
