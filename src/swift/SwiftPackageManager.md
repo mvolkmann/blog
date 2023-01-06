@@ -16,7 +16,9 @@ SPM is preferred over other packaging options such as
 because it is provided by Apple and is integrated into Xcode.
 
 Packages can contain unit tests and can depend of other packages.
-Dependencies on packages are expressed using Git URLs.
+Dependencies on local packages are expressed using
+relative (preferred) or absolute file paths.
+Dependencies on remote packages are expressed using Git URLs.
 
 Packages typically reside in their own Git repository.
 These repositories can be public or private.
@@ -47,11 +49,49 @@ To create a new package in Xcode:
 - Select the directory where it will be stored.
 - Click the Create button.
 
+To create a local package inside an existing project
+for ease of testing from it:
+
+- Follow the steps above, but select the project directory
+  and select the project in the "Add to" dropdown.
+- Add the package as a dependency of the project.
+  - Select the top entry in the Project Navigator.
+  - Select the main target.
+  - Select the "General" tab.
+  - Scroll down to the "Frameworks, Libraries, and Embedded Content" section.
+  - Click the "+" button.
+  - Under "Workspace", select the local package name.
+  - Click the "Add" button.
+  - Import the package in each app source file that uses it.
+
+For all types, properties, methods, and functions to be exposed by the package,
+change any existing access specifiers to `public`
+or add `public` if there is no access specifier.
+This includes the `body` computed property in
+structs that conform to the `View` protocol.
+For structs that are taking advantage of
+the default memberwise initializer (have no `init` method),
+add a `public` `init` method that takes all the `struct` properties as arguments
+and explicitly initializes all the properties.
+
+If the package includes `.xcassets` files and
+uses image sets in them in SwiftUI `Image` views,
+add `bundle: .module` to those `Image` initializer calls.
+
+Add DocC documentation to each type and method.
+To have Xcode supply as much of this as it can,
+select the first line of a type, method, or function
+and select Editor ... Structure ... Add Documentation
+or press cmd-option-/.
+After adding this documentation, rebuild the project
+and option-click on the name of a documented item
+to see the documentation in a popup.
+
 ## Package Contents
 
 The initial package contents are:
 
-- README .md
+- README.md
 
   Enter a description of the package and usage instructions here.
   This can also include license information,
@@ -60,10 +100,8 @@ The initial package contents are:
 
 - Package.swift
 
-  This defines the package name, products, dependencies, and targets.
-  It is referred to as the "manifest file" and takes the place of
-  having a `.xcodeproj` file as is present in applications.
-  This file is similar to a `package.json` file in a Node.js project.
+  This is the package manifest file.
+  See the [Manifest File](#manifest-file) section below for details.
 
 - Sources
 
@@ -88,8 +126,18 @@ are not `public`, so it is necessary to add `public` initializers.
 ## Manifest File
 
 The file `Package.swift` is the package manifest.
-It lists all the source files to be included
-and the packages on which this package depends.
+It includes:
+
+- the package name
+- the platforms where it runs (defaults to all?)
+  (ex. `[.iOS(.v13)]`)
+- the products it defines (executables and libraries)
+- its dependencies
+- the targets it creates
+
+This file takes the place of having a `.xcodeproj` file
+as is present in applications.
+It is similar to a `package.json` file in a Node.js project.
 
 Here is an example manifest for a package that defines two targets.
 
@@ -152,6 +200,24 @@ This is alway needed when an item uses SwiftUI.
 ## Using GitHub
 
 Swift packages are frequently stored in a GitHub repository.
+To create a GitHub repository for a new package inside Xcode:
+
+- Quit Xcode.
+- If the package directory is inside a project directory that
+  has a git repository, move the package directory to a new location.
+- In the Finder, locate the `Package.swift` file of the package.
+- Double-click this file in the Finder to open an Xcode window
+  that only shows the files in the package.
+- Select the "README.md" file and add details.
+- Select Source Control ... New Git Repository...
+- Click the "Create" button.
+- Select the Source Control Navigator (2nd tag).
+- Select the "Repositories" tab.
+- Right-click "Remotes" and select "New {package-name} Remote...".
+- In the dialog that appears, verify the account, enter a description, and
+  choose "Public" or "Private".
+- Click the "Create" button.
+
 Package versions are specified with Git tags that are semantic version numbers.
 To add a tag to the current commit of a Swift package:
 
