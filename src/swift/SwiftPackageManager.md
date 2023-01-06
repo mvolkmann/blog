@@ -35,12 +35,66 @@ There are several benefits to factoring out code from a large application
 into packages that each reside in their own source control repository.
 
 - It enables sharing code with other applications and packages.
+  Each of these can select a different version to use.
+  They do not all need to upgrade to a new version at the same time.
+- It enables testing and improving the code for each package in isolation.
 - It decreases application build times since the code that
   has been moved to packages does not need to be compiled.
 - It allows developers to focus on code with a specific purpose.
 - It reduces the possibilities for source control merge conflicts.
 
+## Terminology
+
+- Module
+
+  The term "module" is somewhat of an umbrella term.
+  Libraries, frameworks, and Swift packages are all kinds of modules.
+  A new project begins as a single module.
+
+- Library
+
+  A "library" is a set of compiled types that have a common goal.
+  Examples include network utilities, database access,
+  and a specific category of business logic.
+  A library can be static or dynamic.
+
+  A static library is compiled into each app that uses it
+  which increase the executable size of each app.
+
+  A dynamic library lives outside the apps the use it
+  amd is linked into each app at runtime,
+  not impacted their executable size.
+  When a dynamic library is updated, all the apps that use
+  can automatically use the newest version.
+
+  On Apple platforms, only libraries supplied by Apple can be dynamic.
+  All libraries you create will be static.
+
+- Swift Package
+
+  A "Swift package" is similar to a "library", but is not compiled.
+  These can be easily added as a dependency of an app or another Swift package.
+
+- Framework
+
+  A "framework" is folder that holds code, resources (such as images),
+  static libraries, and references to dynamic libraries.
+  Examples of Apple-provided frameworks include AppKit (for macOS apps),
+  CloudKit, Core Data, Core Location, Dispatch, Foundation, HealthKit,
+  HomeKit, JavaScriptCore, MapKit, MusicKit, PDFKit, SceneKit, SpriteKit,
+  StoreKit, Swift Charts, SwiftUI, System, UIKit, WatchKit, WeatherKit,
+  WebKit, WidgetKit, and XCTest.
+
 ## Creating a Package
+
+To create a new package from the command line:
+
+- cd to the directory that will hold the new package.
+- Create the package directory by entering `mkdir {package-name}`.
+- Enter `swift package init`.
+
+This creates the directory structure and files described in the
+[Package Contents](#package-contents) section.
 
 To create a new package in Xcode:
 
@@ -86,6 +140,9 @@ or press cmd-option-/.
 After adding this documentation, rebuild the project
 and option-click on the name of a documented item
 to see the documentation in a popup.
+
+For an example package, see {% aTargetBlank
+"https://github.com/mvolkmann/RMVSwiftUIViews", "RMVSwiftUIViews" %}.
 
 ## Package Contents
 
