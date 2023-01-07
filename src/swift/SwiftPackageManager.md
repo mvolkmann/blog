@@ -534,6 +534,8 @@ To add assets such as color sets and image sets to a package:
   resources: [.process("{TargetName}/Resources/Media.xcassets")]
   ```
 
+  TODO: Describe how `.copy` differs from `.process`.
+
 - Build the package and verify that there are no errors.
 - Commit and push the changes to Git.
 - Tag the commit and push the new tag.

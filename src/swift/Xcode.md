@@ -743,28 +743,37 @@ The following table summarize the most commonly used keyboard shortcuts.
 
 ### Visibility of UI Parts
 
-| Action                                              | Key               |
-| --------------------------------------------------- | ----------------- |
-| show file navigator                                 | cmd-1             |
-| show local changes navigator                        | cmd-2             |
-| show symbols navigator                              | cmd-3             |
-| show find navigator                                 | cmd-4             |
-| show issues navigator                               | cmd-5             |
-| show tests navigator                                | cmd-6             |
-| show debug navigator                                | cmd-7             |
-| show breakpoints navigator                          | cmd-8             |
-| show reports navigator                              | cmd-9             |
-| toggle navigator panel                              | cmd--0            |
-| toggle inspector panel                              | cmd-option-0      |
-| toggle debug area                                   | cmd-shift-y       |
-| activate console                                    | cmd-shift-c       |
-| toggle toolbar                                      | cmd-option-t      |
-| toggle full screen                                  | cmd-ctrl-f        |
-| toggle preview display                              | cmd-option-return |
-| toggle minimap                                      | cmd-ctrl-shift-m  |
-| toggle authors (who last edited each line and when) | cmd-ctrl-shift-a  |
-| open developer documentation                        | cmd-shift-0       |
-| open library                                        | cmd-shift-l       |
+| Action                                              | Key                   |
+| --------------------------------------------------- | --------------------- |
+| show file navigator                                 | cmd-1                 |
+| show local changes navigator                        | cmd-2                 |
+| show symbols navigator                              | cmd-3                 |
+| show find navigator                                 | cmd-4                 |
+| show issues navigator                               | cmd-5                 |
+| show tests navigator                                | cmd-6                 |
+| show debug navigator                                | cmd-7                 |
+| show breakpoints navigator                          | cmd-8                 |
+| show reports navigator                              | cmd-9                 |
+| toggle navigator panel                              | cmd--0                |
+| toggle inspector panel                              | cmd-option-0          |
+| toggle debug area                                   | cmd-shift-y           |
+| activate console                                    | cmd-shift-c           |
+| toggle toolbar                                      | cmd-option-t          |
+| toggle full screen                                  | cmd-ctrl-f            |
+| toggle preview display                              | cmd-option-return     |
+| toggle minimap                                      | cmd-ctrl-shift-m      |
+| toggle authors (who last edited each line and when) | cmd-ctrl-shift-a      |
+| open developer documentation                        | cmd-shift-0           |
+| open library                                        | cmd-shift-l           |
+| toggle editor focus                                 | cmd-ctrl-shift-return |
+
+When the editor area is split, toggle focusing on just the split that has focus
+by selecting View ... Editor ... Focus and
+restore the splits by selecting View ... Editor ... Hide Focus.
+Alternatively press cmd-ctrl-shift-return to toggle focus
+or click the buttons in the upper-left of each editor split
+that contain an arrow pointing southwest and an arrow pointing northeast.
+When the button has a blue background it means editor splits are hidden.
 
 ### Build/Run
 
