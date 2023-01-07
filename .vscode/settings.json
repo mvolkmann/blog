@@ -554,6 +554,7 @@
     "popen",
     "popitem",
     "popleft",
+    "Postcondition",
     "posterize",
     "powf",
     "powi",

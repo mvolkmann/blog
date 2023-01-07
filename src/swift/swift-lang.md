@@ -3318,6 +3318,13 @@ It can describe type properties, instance properties,
 type method signatures, and instance method signatures.
 Properties can be read-only (`let`) or read/write (`var`).
 
+Protocol names have commonly used suffixes.
+Protocols that enable a set of actions end in "able" (ex. `Comparable`)
+Protocols that convert one data type to another end in "Convertible"
+(ex. `CustomStringConvertible`).
+Protocols that give responsibility to another object end in "Delegate"
+(ex. `UIApplicationDelegate`).
+
 Other types (structs, classes, and enums)
 can declare that they conform to protocols by following their name
 with a colon and a comma-separated list of protocol names.

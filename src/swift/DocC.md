@@ -40,6 +40,14 @@ any side effects, whether they perform any asynchronous actions,
 and scenarios where calling them is expensive.
 The first paragraph is the primary description.
 All subsequent paragraphs appear in the "Discussion" section.
+Also describe their parameters, the return type, and
+errors they may throw as shown in the example below.
+
+If code examples are provided, enclose them in backtick fences (\`\`\`)
+or indent the code by four spaces.
+
+Additional named sections that can be supplied include
+`Precondition`, `Postcondition`, `SeeAlso`, `Since`, `ToDo`, and `Warning`.
 
 There are two options for documenting function and method parameters,
 one way to document return values, and
