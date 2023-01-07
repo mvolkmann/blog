@@ -202,10 +202,10 @@ The initial package contents are:
 
 - README.md
 
-  Enter a description of the package and usage instructions here.
-  This can also include license information,
+  This is a Markdown file that describes the package.
+  It can include the goals of the package, license information,
   supported operating systems, supported Swift versions,
-  contact information, and tutorials.
+  installation steps, usage information, and contact information.
 
 - Package.swift
 
@@ -306,8 +306,14 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        // Dependencies describe other packages on which this package depends.
+        // For packages in a remote repository ...
+        // .package(url: some-url, from: "some-version"),
+        // For packages in the local file system ...
+        // .package(url: some-file-path, from: "some-version"),
+        // some-file-path can be absolute or relative.
+        // Relative paths are preferred so they can
+        // remain valid in a CI/CD environment.
     ],
     targets: [
         // A target can define a module or a test suite.
@@ -361,6 +367,7 @@ This is alway needed when an item uses SwiftUI.
 ## Using GitHub
 
 Swift packages are frequently stored in a GitHub repository.
+Each package must be in its own repository.
 To create a GitHub repository for a new package inside Xcode:
 
 - Quit Xcode.
@@ -416,6 +423,14 @@ To view the GitHub repository in your default web browser:
 - Open the Source Control Navigator which is the second Navigator tab.
 - Click the "Repositories" tab.
 - Right-click the top entry and select "View on GitHub...".
+
+## Finding Packages
+
+There is no official package index similar to {% aTargetBlank
+"https://www.npmjs.com", "npmjs" %} for Node.js packages.
+{% aTargetBlank "https://swiftpackageindex.com", "Swift Package Index" %}
+is an unofficial index where you can search for open source packages.
+As of January 7, 2023 it provides information on 5,306 packages.
 
 ## Using Packages
 
