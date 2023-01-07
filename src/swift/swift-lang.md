@@ -4137,7 +4137,8 @@ The access control keywords include:
 - `public`: same as `open` except cannot be used in subclasses or overridden
 - `internal`: access from any source in the same module (default level)
 - `fileprivate`: access only from code in the same source file
-- `private`: access only within enclosing declaration (such as a struct or class)
+- `private`: access only within enclosing type
+  (`enum`, `struct`, `class`, or `actor`)
 
 The most commonly used access control keyword is `private`.
 The second most commonly used is `internal`, which is the default.

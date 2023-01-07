@@ -169,8 +169,10 @@ for ease of testing from it:
 For all types, properties, methods, and functions to be exposed by the package,
 change any existing access specifiers to `public`
 or add `public` if there is no access specifier.
-This includes the `body` computed property in
+This includes the parameter and return types of functions.
+It also includes the `body` computed property in
 structs that conform to the `View` protocol.
+
 For structs that are taking advantage of
 the default memberwise initializer (have no `init` method),
 add a `public` `init` method that takes all the `struct` properties as arguments
@@ -548,3 +550,13 @@ Here is an example of a package method that returns a SwiftUI `Image`:
             .frame(width: size, height: size)
     }
 ```
+
+## Implementing Unit Tests
+
+TODO: Add more to this section.
+
+The `@testable` attribute can be applied to an `import` statement.
+It raises the access level of the types exposed by the imported target.
+For example, imported types that have an access level of `internal`
+are treated as though they have an access level of `public`.
+This enables writing tests for them.
