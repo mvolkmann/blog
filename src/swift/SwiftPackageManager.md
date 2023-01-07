@@ -51,9 +51,20 @@ into packages that each reside in their own source control repository.
   Libraries, frameworks, and Swift packages are all kinds of modules.
   A new project begins as a single module.
 
+- Swift Package
+
+  A "Swift package" is a collection of libraries.
+  Many packages define a single library.
+  A package can be added as a dependency of an app or another package.
+  A package can be local to the project that uses it or
+  be in a remote location such as a GitHub repository
+  which allows it to be used in multiple projects.
+
 - Library
 
-  A "library" is a set of compiled types that have a common goal.
+  A "library" is a collection of targets
+  that define types that have a common goal.
+  Some libraries contain a single target.
   Examples include network utilities, database access,
   and a specific category of business logic.
   A library can be static or dynamic.
@@ -70,12 +81,10 @@ into packages that each reside in their own source control repository.
   On Apple platforms, only libraries supplied by Apple can be dynamic.
   All libraries you create will be static.
 
-- Swift Package
+- Target
 
-  A "Swift package" is similar to a "library", but is not compiled.
-  These can be easily added as a dependency of an app or another Swift package.
-  A Swift package can be local to the project that uses it or
-  be in a remote location such as a GitHub repository.
+  A "target" can be an executable or a set of closely related types.
+  Swift code imports non-executable targets by name.
 
 - Framework
 
@@ -86,6 +95,15 @@ into packages that each reside in their own source control repository.
   HomeKit, JavaScriptCore, MapKit, MusicKit, PDFKit, SceneKit, SpriteKit,
   StoreKit, Swift Charts, SwiftUI, System, UIKit, WatchKit, WeatherKit,
   WebKit, WidgetKit, and XCTest.
+
+It is common for the names of packages, libraries, and targets
+to have UpperCamelCase names.
+It is common for git repositories that hold the code for a package
+to have a kebab-case name.
+
+The package names used by an app must be unique within that app.
+One way to avoid name conflicts it to add a two or three letter prefix
+to package names that identifiers the company or developer that created it.
 
 ## Dependencies
 
@@ -218,14 +236,32 @@ The file `Package.swift` is the package manifest.
 It contains Swift code the creates a `Package` object.
 The `Package` initializer is passed the following arguments:
 
-- `name`: the package name
-- `platforms`: an optional array of platforms identifiers that describe
-  the operating systems and versions where the package can run.
-  If this is omitted, does it default to running on all platforms?
-  (ex. `[.iOS(.v13)]`)
-- `products`: an array of executables`and`libraries` that the package produces
-- `dependencies`: an array of packages on which this package depends
-- `targets`: an array of targets this package produces
+- `name` is a `String` that specifies the package name.
+- `defaultLocalization` is a `String` that specifies the default language.
+- `platforms` is an optional array of {% aTargetBlank
+  "https://developer.apple.com/documentation/packagedescription/supportedplatform",
+  "SupportedPlatform" %} instances that describe the
+  operating systems and versions where the package can run.
+  Versions can be specified using predefined constants or strings.
+  For example, `[.iOS(.v14), .watchOS("7.0.0")]`.
+  Other platforms include `.macOS`, `.tvOS`, and `.linux`.
+
+  Packages can be used on all platforms even if they are not listed here.
+  When a platform is omitted from this array,
+  the first version of the platform that supports Swift
+  is assumed to be the minimum supported platform version.
+
+- `products` is an array of {% aTargetBlank
+  "https://developer.apple.com/documentation/packagedescription/product",
+  "Product" %} objects that describe the
+  executables, libraries, and plugins that the package produces.
+- `dependencies` is an array of {% aTargetBlank
+  "https://developer.apple.com/documentation/packagedescription/package/dependency",
+  "Package.Dependency" %} objects that describe
+  the packages on which this package depends.
+- `targets` is an array of {% aTargetBlank
+  "https://developer.apple.com/documentation/packagedescription/target",
+  "Target" %} objects that describe the targets this package produces.
 
 This file takes the place of having a `.xcodeproj` file
 as is present in applications.
@@ -235,6 +271,11 @@ Here is an example manifest for a package that defines two targets.
 
 ```swift
 import PackageDescription
+
+// This specifies the version of Swift Tools the `Package` object assumes and
+// by association the minimum version of Swift needed to build this package.
+// Even though it is a comment, Swift Package Manager uses it.
+// swift-tools-version: 5.7
 
 let package = Package(
     name: "RMVGeometry",
@@ -403,6 +444,13 @@ To see source code for a package dependency:
 - Under "Package Dependencies", find the package and expand it.
 - Expand the "Sources" directory.
 - Click a source file to view it.
+
+In source files that wish to use a package,
+import one or more targets defined by the package.
+Often a package defines a single target
+whose name is the same as that of the package.
+But the names do not always match,
+especially when a package defines multiple targets.
 
 ## Updating Packages
 
