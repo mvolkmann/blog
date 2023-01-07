@@ -119,15 +119,17 @@ and the dependencies of those recursively.
 Swift Package Manager honors many kinds of version constraints
 in order to select the Git commit of a package that:
 
-TODO: Add examples of each of these.
-
-- has a given commit identifier
-- is tagged with a given semantic version (ex. `.exact("1.2.3")`)
 - is tagged with the highest semantic version that has a given major version
+  (ex. `from: "2.0.0"`)
 - is tagged with the highest semantic version
   that has a given major and minor version
+  (ex. `from: "2.3.0"`)
+- is the latest on a given branch (ex. `.branch("branch-name")`)
+- is tagged with a given semantic version (ex. `.exact("1.2.3")`; rarely used)
 - is tagged with the highest semantic version in a range of semantic versions
-- is the latest on a given branch
+  (ex. `"2.1.4"..."3.5.1"`; rarely used)
+- has a given commit identifier
+  (ex. `.revision("9c0445321380e97fb8f3d3f000c22a495f13b4d6")`; rarely used)
 
 ## Creating a Package
 
