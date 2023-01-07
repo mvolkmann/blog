@@ -653,10 +653,12 @@ to the right of the function name.
 To run all the tests in an `XCTestCase` subclass, click the diamond icon
 to the right of the class name.
 
-To run all of the tests in a package from the command-line,
-enter `swift test`.
-This only works for packages that contain work that works in macOS or Linux.
-It does not work for packages that target other platforms such as iOS.
+For packages that target macOS or Linux (not other platforms like iOS),
+the following commands can be run from the command-line.
+To list all of the tests in a package,
+enter `swift test --list-tests` or `swift test -l`.
+To run all of the tests in a package, enter `swift test`.
+To run the tests in parallel, add the `--parallel` option.
 
 To run tests in a specific iOS or watchOS Simulator,
 create a shell script containing the following command.
