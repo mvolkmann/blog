@@ -216,8 +216,11 @@ The initial package contents are:
   - {package-name}
 
     This directory holds all the package source files
-    and resources such as `.xcassets` files
-    for the main target.
+    and resources for the main target.
+    Resources include `.xcassets` files that hold images,
+    `.strings` and `.stringsdict` files for localization,
+    Core Data model files, and more.
+
     If the package defines multiple targets,
     there will be a separate directory under `Sources for each.
 
@@ -231,6 +234,7 @@ The initial package contents are:
 
     This directory holds unit test and integration test source files
     for the main target that use the XCTest framework.
+
     If the package defines multiple targets,
     there will be a separate directory under `Tests` for each.
 
@@ -681,3 +685,64 @@ an array of strings that are the names of the test methods to run.
 This array must be updated whenever new test methods are added.
 It is possible to automate this by running the command
 `swift test --generate-linuxmain`.
+
+## Resources
+
+A package can include resources that are files other that Swift source files.
+These include `.xcassets` files that hold images,
+`.strings` and `.stringsdict` files for localization,
+Core Data model files, and more.
+
+The following `package.swift` manifest file from the {% aTargetBlank
+"https://github.com/mvolkmann/RMVSwiftUIViews", "RMVSwiftUIViews" %} package
+demonstrates including the file `Assets.xcassets`
+which contains several Image Sets.
+Note the line that begins with "resources:".
+
+```swift
+// swift-tools-version: 5.7
+import PackageDescription
+
+let package = Package(
+    name: "RMVSwiftUIViews",
+    platforms: [.iOS(.v13)],
+    products: [
+        // This package defines a single library that defines a single target.
+        .library(
+            name: "RMVSwiftUIViews",
+            targets: ["RMVSwiftUIViews"]
+        ),
+    ],
+    dependencies: [], // This package doesn't depend on any others.
+    targets: [
+        // This target will be imported by apps.
+        .target(
+            name: "RMVSwiftUIViews",
+            dependencies: [],
+            resources: [.process("Assets.xcassets")]
+        ),
+        // This target contains unit tests for the target above.
+        .testTarget(
+            name: "RMVSwiftUIViewsTests",
+            dependencies: ["RMVSwiftUIViews"]
+        ),
+    ]
+)
+```
+
+The following method from the `Icon` `enum` defined in this package
+demonstrates getting images from both the package bundle
+and the bundle of an app that uses this package.
+
+```swift
+func image(fill: Bool) -> Image {
+    let suffix = fill ? ".fill" : ""
+    if rawValue.prefix(3) == "sf-" {
+        let systemName = String(rawValue.dropFirst(3)) + suffix
+        return Image(systemName: systemName) // gets from SF Symbols
+    }
+    return rawValue == "custom" ?
+        Image(rawValue + suffix) : // gets from the app bundle
+        Image(rawValue + suffix, bundle: .module) // gets from this bundle
+}
+```
