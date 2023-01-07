@@ -15,10 +15,14 @@ SPM is preferred over other packaging options such as
 {% aTargetBlank "https://github.com/Carthage/Carthage", "Carthage" %}
 because it is provided by Apple and is integrated into Xcode.
 
-Packages can contain unit tests and can depend of other packages.
+Packages can be local to a specific project or remote.
+
+Packages can depend of other packages.
 Dependencies on local packages are expressed using
 relative (preferred) or absolute file paths.
 Dependencies on remote packages are expressed using Git URLs.
+
+Packages can contain unit and integration tests.
 
 Packages typically reside in their own Git repository.
 These repositories can be public or private.
@@ -115,8 +119,10 @@ and the dependencies of those recursively.
 Swift Package Manager honors many kinds of version constraints
 in order to select the Git commit of a package that:
 
+TODO: Add examples of each of these.
+
 - has a given commit identifier
-- is tagged with a given semantic version
+- is tagged with a given semantic version (ex. `.exact("1.2.3")`)
 - is tagged with the highest semantic version that has a given major version
 - is tagged with the highest semantic version
   that has a given major and minor version
@@ -136,25 +142,29 @@ This creates the directory structure and files described in the
 
 To create a new package in Xcode:
 
-- Select File ... New ... Package... .
-- Enter a name for the package.
+- Select File ... New ... Package...
+- In the dialog that appears, enter a name for the package.
 - Select the directory where it will be stored.
 - Click the Create button.
 
 To create a local package inside an existing project
 for ease of testing from it:
 
-- Follow the steps above, but select the project directory
+- Follow the steps above, but in the dialog select the project directory
   and select the project in the "Add to" dropdown.
+  This creates a new scheme for the library inside the package
+  that is used to build and test the library.
 - Add the package as a dependency of the project.
   - Select the top entry in the Project Navigator.
   - Select the main target.
   - Select the "General" tab.
   - Scroll down to the "Frameworks, Libraries, and Embedded Content" section.
   - Click the "+" button.
-  - Under "Workspace", select the local package name.
+  - Locate a package to be added and select one of its libraries.
+    Often a package only contains a single library.
   - Click the "Add" button.
-  - Import the package in each app source file that uses it.
+    This provides access to all the targets defined in the library.
+  - Import targets from the library in each app source file that will use them.
 
 For all types, properties, methods, and functions to be exposed by the package,
 change any existing access specifiers to `public`
@@ -257,8 +267,8 @@ The `Package` initializer is passed the following arguments:
   executables, libraries, and plugins that the package produces.
 - `dependencies` is an array of {% aTargetBlank
   "https://developer.apple.com/documentation/packagedescription/package/dependency",
-  "Package.Dependency" %} objects that describe
-  the packages on which this package depends.
+  "Package.Dependency" %} objects that describe the packages,
+  including version constraints, on which this package depends.
 - `targets` is an array of {% aTargetBlank
   "https://developer.apple.com/documentation/packagedescription/target",
   "Target" %} objects that describe the targets this package produces.
@@ -307,6 +317,16 @@ let package = Package(
 )
 ```
 
+## Building a Package
+
+Building a package begins by downloading all of its remote dependencies
+recursively.
+
+To build a package from the command-line, enter `swift build`.
+
+To build a package inside Xcode,
+select Product ... Build or press cmd-b.
+
 ## Unit Tests
 
 Xcode does not provide a way to run code in a package project,
@@ -314,7 +334,11 @@ so it is important to include unit tests.
 This enables verifying the functionality of a package
 before deploying the initial version or changes to it.
 
-To run all of the tests in a package, select Product ... Test or press cmd-u.
+To run all of the tests in a package from the command-line,
+enter `swift test`.
+
+To run all of the tests in a package inside Xcode,
+select Product ... Test or press cmd-u.
 
 ## Documentation
 
