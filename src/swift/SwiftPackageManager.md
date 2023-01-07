@@ -74,6 +74,8 @@ into packages that each reside in their own source control repository.
 
   A "Swift package" is similar to a "library", but is not compiled.
   These can be easily added as a dependency of an app or another Swift package.
+  A Swift package can be local to the project that uses it or
+  be in a remote location such as a GitHub repository.
 
 - Framework
 
@@ -84,6 +86,24 @@ into packages that each reside in their own source control repository.
   HomeKit, JavaScriptCore, MapKit, MusicKit, PDFKit, SceneKit, SpriteKit,
   StoreKit, Swift Charts, SwiftUI, System, UIKit, WatchKit, WeatherKit,
   WebKit, WidgetKit, and XCTest.
+
+## Dependencies
+
+Every Swift app and package can have dependencies on other Swift packages.
+Swift Package Manager manages these dependencies.
+It can install directly specified dependencies
+and the dependencies of those recursively.
+
+Swift Package Manager honors many kinds of version constraints
+in order to select the Git commit of a package that:
+
+- has a given commit identifier
+- is tagged with a given semantic version
+- is tagged with the highest semantic version that has a given major version
+- is tagged with the highest semantic version
+  that has a given major and minor version
+- is tagged with the highest semantic version in a range of semantic versions
+- is the latest on a given branch
 
 ## Creating a Package
 
@@ -162,35 +182,50 @@ The initial package contents are:
 
 - Sources
 
-  - {PackageName}
+  - {package-name}
 
-    - {PackageName}.swift
+    This directory holds all the package source files
+    and resources such as `.xcassets` files
+    for the main target.
+    If the package defines multiple targets,
+    there will be a separate directory under `Sources for each.
+
+    - {package-name}.swift
 
       This is the starting point of the code.
 
 - Tests
 
-  - {PackageName}Tests
+  - {package-name}Tests
 
-    - {PackageName}Tests.swift
+    This directory holds unit test and integration test source files
+    for the main target that use the XCTest framework.
+    If the package defines multiple targets,
+    there will be a separate directory under `Tests` for each.
 
-      This contains unit test code that uses XCTest.
+    - {package-name}Tests.swift
 
-Items that should be accessible must be marked as `public`.
-Note that default memberwise initializers in structs
-are not `public`, so it is necessary to add `public` initializers.
+      This is an example unit test file.
+
+Items such as classes, structs, enums, properties, methods, and functions
+that should be accessible outside of the package must be marked as `public`.
+Default memberwise initializers in structs are not `public`,
+so it is necessary to add `public` initializers.
 
 ## Manifest File
 
 The file `Package.swift` is the package manifest.
-It includes:
+It contains Swift code the creates a `Package` object.
+The `Package` initializer is passed the following arguments:
 
-- the package name
-- the platforms where it runs (defaults to all?)
+- `name`: the package name
+- `platforms`: an optional array of platforms identifiers that describe
+  the operating systems and versions where the package can run.
+  If this is omitted, does it default to running on all platforms?
   (ex. `[.iOS(.v13)]`)
-- the products it defines (executables and libraries)
-- its dependencies
-- the targets it creates
+- `products`: an array of executables`and`libraries` that the package produces
+- `dependencies`: an array of packages on which this package depends
+- `targets`: an array of targets this package produces
 
 This file takes the place of having a `.xcodeproj` file
 as is present in applications.
