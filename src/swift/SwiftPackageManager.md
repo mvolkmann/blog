@@ -30,8 +30,10 @@ For details on using private Git repositories see {% aTargetBlank
 "https://developer.apple.com/documentation/xcode/building-swift-packages-or-apps-that-use-them-in-continuous-integration-workflows",
 "Building Swift Packages or Apps that Use Them in Continuous Integration Workflows" %}
 
-For a simple package example, see {% aTargetBlank
-"https://github.com/mvolkmann/RMVGeometry", "RMVGeometry" %}.
+For example packages, see
+{% aTargetBlank "https://github.com/mvolkmann/RMVGeometry", "RMVGeometry" %} and
+{% aTargetBlank "https://github.com/mvolkmann/RMVSwiftUIViews",
+"RMVSwiftUIViews" %}.
 
 ## Benefits
 
@@ -192,9 +194,6 @@ or press cmd-option-/.
 After adding this documentation, rebuild the project
 and option-click on the name of a documented item
 to see the documentation in a popup.
-
-For an example package, see {% aTargetBlank
-"https://github.com/mvolkmann/RMVSwiftUIViews", "RMVSwiftUIViews" %}.
 
 ## Package Contents
 
@@ -572,6 +571,7 @@ Here is an example of a package method that returns a SwiftUI `Image`:
 
 ## Implementing Unit Tests
 
+Unit tests for a package reside in the `Tests/{package-name}Tests` directory
 TODO: Add more to this section.
 
 The `@testable` attribute can be applied to an `import` statement.
@@ -579,3 +579,63 @@ It raises the access level of the types exposed by the imported target.
 For example, imported types that have an access level of `internal`
 are treated as though they have an access level of `public`.
 This enables writing tests for them.
+
+For example, the file `IconTests.swift` below
+comes from the package GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/RMVSwiftUIViews",
+"RMVSwiftUIViews" %}.
+
+```swift
+@testable import RMVSwiftUIViews
+import XCTest
+
+final class IconTests: XCTestCase {
+    func testEnumCases() throws {
+        XCTAssertEqual(Icon.baseball.rawValue, "baseball")
+        XCTAssertEqual(Icon.bell.rawValue, "sf-bell")
+        XCTAssertEqual(Icon.thumbsUp.rawValue, "sf-hand.thumbsup")
+    }
+}
+```
+
+The file `IconToggleTests.swift` below
+comes from the same package GitHub repository.
+It demonstrates creating an instance of a custom `View` in a test,
+including passing it a `Binding`.
+
+```swift
+@testable import RMVSwiftUIViews
+import SwiftUI
+import XCTest
+
+final class RMVSwiftUIViewsTests: XCTestCase {
+    func testDefaultParameters() throws {
+        var bindingValue = false
+        let binding = Binding(
+            get: { bindingValue },
+            set: { bindingValue = $0 }
+        )
+        let view = IconToggle(icon: .football, isOn: binding)
+        XCTAssertEqual(view.color, Color.black)
+        XCTAssertEqual(view.size, 20)
+    }
+
+    func testSuppliedParameters() throws {
+        var bindingValue = false
+        let binding = Binding(
+            get: { bindingValue },
+            set: { bindingValue = $0 }
+        )
+        let color: Color = .red
+        let size = 50.0
+        let view = IconToggle(
+            icon: .football,
+            color: color,
+            size: size,
+            isOn: binding
+        )
+        XCTAssertEqual(view.color, color)
+        XCTAssertEqual(view.size, size)
+    }
+}
+```
