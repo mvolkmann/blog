@@ -571,8 +571,7 @@ Here is an example of a package method that returns a SwiftUI `Image`:
 
 ## Implementing Unit Tests
 
-Unit tests for a package reside in the `Tests/{package-name}Tests` directory
-TODO: Add more to this section.
+Unit tests for a package reside in the `Tests/{package-name}Tests` directory.
 
 The `@testable` attribute can be applied to an `import` statement.
 It raises the access level of the types exposed by the imported target.
@@ -639,3 +638,13 @@ final class RMVSwiftUIViewsTests: XCTestCase {
     }
 }
 ```
+
+To run a specific test function, click the diamond icon
+to the left of the first line in the function definition
+(in the left gutter where line numbers typically appear).
+If no diamond icons appear, close the test source file and open it again.
+If the test passes, the diamond will turn green with a white checkmark inside.
+If the test fails, the diamond will turn red with a white "X" inside.
+
+To run all the tests in an `XCTestCase` subclass, click the diamond icon
+to the left of the first line in the class definition.
