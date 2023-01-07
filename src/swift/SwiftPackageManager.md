@@ -336,19 +336,6 @@ To build a package from the command-line, enter `swift build`.
 To build a package inside Xcode,
 select Product ... Build or press cmd-b.
 
-## Unit Tests
-
-Xcode does not provide a way to run code in a package project,
-so it is important to include unit tests.
-This enables verifying the functionality of a package
-before deploying the initial version or changes to it.
-
-To run all of the tests in a package from the command-line,
-enter `swift test`.
-
-To run all of the tests in a package inside Xcode,
-select Product ... Test or press cmd-u.
-
 ## Documentation
 
 Package documentation is provided by the README .md file and by
@@ -569,7 +556,10 @@ Here is an example of a package method that returns a SwiftUI `Image`:
     }
 ```
 
-## Implementing Unit Tests
+## Unit Tests
+
+Unit tests enables verifying the functionality of a package
+before deploying the initial version or changes to it.
 
 Unit tests for a package reside in the `Tests/{package-name}Tests` directory.
 
@@ -578,6 +568,11 @@ It raises the access level of the types exposed by the imported target.
 For example, imported types that have an access level of `internal`
 are treated as though they have an access level of `public`.
 This enables writing tests for them.
+
+Tests must be implemented as methods inside a `class` that inherits from
+{% aTargetBlank "https://developer.apple.com/documentation/xctest/xctestcase",
+"XCTestCase" %}.
+The methods must have names that begin with "test".
 
 For example, the file `IconTests.swift` below
 comes from the package GitHub repository {% aTargetBlank
@@ -639,12 +634,48 @@ final class RMVSwiftUIViewsTests: XCTestCase {
 }
 ```
 
+To run all of the tests in a package inside Xcode,
+select Product ... Test or press cmd-u.
+
 To run a specific test function, click the diamond icon
 to the left of the first line in the function definition
-(in the left gutter where line numbers typically appear).
+These can be found in the left gutter where line numbers typically appear.
 If no diamond icons appear, close the test source file and open it again.
 If the test passes, the diamond will turn green with a white checkmark inside.
 If the test fails, the diamond will turn red with a white "X" inside.
 
 To run all the tests in an `XCTestCase` subclass, click the diamond icon
 to the left of the first line in the class definition.
+
+Tests can also be run from the Test Navigator which is the sixth navigator tab.
+To run a specific test function, click the diamond icon
+to the right of the function name.
+To run all the tests in an `XCTestCase` subclass, click the diamond icon
+to the right of the class name.
+
+To run all of the tests in a package from the command-line,
+enter `swift test`.
+This only works for packages that contain work that works in macOS or Linux.
+It does not work for packages that target other platforms such as iOS.
+
+To run tests in a specific iOS or watchOS Simulator,
+create a shell script containing the following command.
+TODO: Can this script can be used to run the tests in a headless fashion in a CI/CD server?
+
+```bash
+xcodebuild \
+  -scheme RMVSwiftUIViews \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.2' \
+  test
+```
+
+The XCTest framework relies on the Objective-C runtime
+to find the test methods to be run.
+When running in Linux, this is not available.
+In a Linux environment it is necessary to
+define a static variable named `allTests` that is set to
+an array of strings that are the names of the test methods to run.
+This array must be updated whenever new test methods are added.
+It is possible to automate this by running the command
+`swift test --generate-linuxmain`.
