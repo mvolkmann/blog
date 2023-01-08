@@ -871,7 +871,7 @@ To set this, select the `Assets.xcassets` file in the Navigator,
 select "AccentColor", click the "Universal" swatch,
 and click the "Color" dropdown in the Inspector.
 Resume Preview to see the change.
-This does not affect `Toggle` views which required using the view modifier
+This does not affect `Toggle` views which require using the view modifier
 `.toggleStyle(SwitchToggleStyle(tint: someColor))`.
 
 ### Frames
@@ -5002,7 +5002,6 @@ The `Toggle` initializer takes a `String` to render
 and a binding to a `Bool` value.
 
 ```swift
-// A
 Toggle("Hungry", isOn: $hungry).tint(.red)
 
 // The default `toggleStyle` is `.switch`.
