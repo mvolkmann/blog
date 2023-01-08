@@ -2335,7 +2335,7 @@ containing five views each.
 This allows the container to only contains these three `Group` views.
 
 Another option is to group views into `Section` views
-described in the next section.
+described in [Section](#section).
 
 View modifiers applied to the `Group` are applied to each of the children.
 
@@ -3031,7 +3031,7 @@ struct ContentView: View {
 ```
 
 See more examples of using the `Section` view
-in the [Form](#form) section above and in the [List](#list) section below.
+in the [Form](#form) section and in the [List](#list) section.
 
 ### ScrollView
 
@@ -10158,7 +10158,8 @@ if let uuid = UIDevice.current.identifierForVendor?.uuidString {
 
 ## Network Requests
 
-See the "HTTP" section in my blog page on Swift.
+See the {% aTargetBlank "/blog/topics/#/blog/swift/swift-lang/#http", "HTTP" %}
+section in my blog page on Swift.
 
 TODO: Watch this {% aTargetBlank
 "https://www.youtube.com/watch?v=2NowSN4qJUY&t=729s", "video" %}.
