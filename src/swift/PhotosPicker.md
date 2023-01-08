@@ -43,6 +43,16 @@ See the code for {% aTargetBlank
 "https://github.com/mvolkmann/PhotosPickerDemo/blob/main/PhotosPickerDemo/Views/SingleImagePicker.swift",
 "SingleImagePicker" %}.
 
+The `matching` argument to `PhotosPicker` accepts many values.
+Examples from {% aTargetBlank
+"https://www.hackingwithswift.com/quick-start/swiftui/how-to-let-users-select-pictures-using-photospicker",
+"How to let users select pictures using PhotosPicker" %} by Paul Hudson include:
+
+- `.screenshots` to only accept screenshots.
+- `.any(of: [.panoramas, .screenshots])`
+- `.not(.videos)` to accept anything that is not a video
+- `.any(of: [.images, .not(.screenshots)]))`
+
 ### Multiple Images tab
 
 The second tab "Multiple Images" allows the user
