@@ -799,3 +799,23 @@ if let filePath {
     // Do something with contents.
 }
 ```
+
+## Excluding Resources
+
+Some files that are part of the package project
+do not need to be included in the bundle that is produced.
+These include documentation files, code examples, and shell scripts,
+but not files used in unit tests.
+
+To exclude specific files from the bundle,
+add an `exclude` argument to the `target` method
+whose value is an array of relative file path strings.
+For example:
+
+```swift
+        .target(
+            ...
+            exclude: ["notes.md"],
+            ...
+        ),
+```
