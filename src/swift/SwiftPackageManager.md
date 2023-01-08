@@ -15,6 +15,9 @@ SPM is preferred over other packaging options such as
 {% aTargetBlank "https://github.com/Carthage/Carthage", "Carthage" %}
 because it is provided by Apple and is integrated into Xcode.
 
+Packages can contain source code written in Swift, Objective-C, or C/C++,
+but these cannot be mixed within the same package.
+
 Packages can be local to a specific project or remote.
 
 Packages can depend of other packages.
@@ -744,5 +747,28 @@ func image(fill: Bool) -> Image {
     return rawValue == "custom" ?
         Image(rawValue + suffix) : // gets from the app bundle
         Image(rawValue + suffix, bundle: .module) // gets from this bundle
+}
+```
+
+To add a text file to the package as a resource, modify the `resources` array
+passed to the first target in `package.swift` as follows:
+
+```swift
+            resources: [
+                .process("Assets.xcassets"),
+                .copy("demo.csv") // a text file
+            ]
+```
+
+To read the resource text file from code in the package:
+
+```swift
+let filePath = Bundle.module.path(
+    forResource: "myFileName",
+    ofType: "csv"
+)
+if let filePath {
+    let contents = try String(contentsOfFile: filePath)
+    // Do something with contents.
 }
 ```
