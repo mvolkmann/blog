@@ -820,7 +820,7 @@ For example:
         ),
 ```
 
-## Localized Versions of Resources
+## Localized Resources
 
 To include a resource that requires a
 different file for each supported language,
@@ -828,6 +828,71 @@ add one directory inside the `Sources/{package-name}` directory
 for each language with the name `{language-code}.lproj`.
 For example, `en.lproj` for English and `fr.lproj` for French.
 Then add files in these directories where
-the corresponding files have the same name (ex. `data.csv`).
+the corresponding files have the same name (ex. `message.txt`).
 
-TODO: Try this in your RMVSwiftUIViews package!
+<figure style="width: 40%">
+  <img alt="SwiftUI Package Localized Resources"
+    src="/blog/assets/swiftui-package-localized-resources.png?v={{pkg.version}}"
+    title="Swift Package Localized Resources">
+  <figcaption>Swift Package Localized Resources</figcaption>
+</figure>
+
+Note that there is a `message.txt` file for each supported language.
+The file in the `en.lproj` directory contains "Hello".
+The file in the `es.lproj` directory contains "Hola".
+The file in the `fr.lproj` directory contains "Bonjour".
+
+The `package.swift` manifest file is required to
+specify `defaultLocalization` when there are localized resources.
+For example, `defaultLocalization: "en",`.
+
+It seems there is no way to change the locale used by a test
+inside the test code.
+To change the locale that will be used when tests are run:
+
+- Click the scheme dropdown to the left of the device dropdown
+  at the top of the Xcode window.
+- Select "Edit Scheme..."
+- In the left nav, select "Test".
+- Select the "Options" tab.
+- Select a language in the "App Language" dropdown.
+
+The following code defines a function to be tested.
+It reads and returns the contents of a localized resource file.
+
+```swift
+import Foundation
+
+extension String: LocalizedError {
+    // Allows String values to be thrown.
+    public var errorDescription: String? { self }
+}
+
+public func message() throws -> String {
+    let filePath = Bundle.module.path(forResource: "message", ofType: "txt")
+    guard let filePath else { throw "file not found" }
+    let line = try String(contentsOfFile: filePath)
+    return line.trimmingCharacters(in: .whitespacesAndNewlines)
+}
+```
+
+The following test code demonstrates detecting the current language
+and using it to determine the expected value.
+Run this test once for each supported language
+by following the steps above to select the language to use.
+
+```swift
+final class LocalizeTests: XCTestCase {
+    func testMessage() throws {
+        let lang = Locale.preferredLanguages.first
+        guard let lang else { throw "language not set" }
+        let actual = try message()
+        let expected =
+            lang == "en" ? "Hello" :
+            lang == "es" ? "Hola" :
+            lang == "fr" ? "Bonjour" :
+            "unsupported language \(lang)"
+        XCTAssertEqual(actual, expected)
+    }
+}
+```
