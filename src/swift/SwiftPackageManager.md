@@ -819,3 +819,15 @@ For example:
             ...
         ),
 ```
+
+## Localized Versions of Resources
+
+To include a resource that requires a
+different file for each supported language,
+add one directory inside the `Sources/{package-name}` directory
+for each language with the name `{language-code}.lproj`.
+For example, `en.lproj` for English and `fr.lproj` for French.
+Then add files in these directories where
+the corresponding files have the same name (ex. `data.csv`).
+
+TODO: Try this in your RMVSwiftUIViews package!
