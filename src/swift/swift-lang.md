@@ -4475,7 +4475,10 @@ func getDataAsync() async -> SomeData {
 
 ## File I/O
 
-To write and read files, use the `FileManager` class.
+One way to write and read files is to use the {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/filemanager",
+"FileManager" %} class.
+For example:
 
 ```swift
 import Foundation
@@ -4514,6 +4517,73 @@ do {
 } catch {
     print(error.localizedDescription)
 }
+```
+
+Another way to read files is to get them from the `Bundle`.
+For example:
+
+```swift
+let filePath = Bundle.module.path(
+    forResource: "accounting",
+    ofType: "csv"
+)
+if let filePath {
+    let contents = try String(contentsOfFile: filePath)
+    // Use contents here.
+}
+```
+
+## CSV
+
+Comma Separated Value (CSV) files are text files where each line contains values separated by commas.
+This is a common format for exporting spreadsheets.
+While there are Swift packages for parsing CSV data such as {% aTargetBlank
+"https://github.com/swiftcsv/SwiftCSV", "SwiftCSV" %},
+writing the code yourself (minus certain features and error handling)
+is relatively easy.
+
+The following code provides functions for reading CSV data:
+
+```swift
+import Foundation
+
+extension String: LocalizedError {
+    // Allows String values to be thrown.
+    public var errorDescription: String? { self }
+}
+
+/// Parses a CSV string into an Array of Arrays of Strings.
+/// - Parameter csv: a String of CSV data containing newline characters and commas
+/// - Returns: an Array of Arrays of Strings
+private func parseCSV(csv: String) -> [[String]] {
+    csv.split(separator: "\n").map { line in
+        line.split(separator: ",").map { String($0) }
+    }
+}
+
+/// Parses a CSV file into an Array of Arrays of Strings.
+/// - Parameter fileName: a file name that can be found in the app bundle such as "data.csv"
+/// - Throws: if the provided file name does not contain a single period or the file cannot be found
+/// - Returns: an Array of Arrays of Strings
+public func parseCSV(fileName: String) throws -> [[String]] {
+    let parts = fileName.split(separator: ".")
+    guard parts.count == 2 else { throw "invalid fileName" }
+    // When in a Swift package instead of an app,
+    // use `Bundle.module` instead of `Bundle.main`.
+    let filePath = Bundle.main.path(
+        forResource: String(parts[0]),
+        ofType: String(parts[1])
+    )
+    guard let filePath else { throw "file not found" }
+    let contents = try String(contentsOfFile: filePath)
+    return parseCSV(csv: contents)
+}
+```
+
+To use this:
+
+```swift
+let csv = try parseCSV(fileName: "data.csv")
 ```
 
 ## Threads
