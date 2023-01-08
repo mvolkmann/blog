@@ -1713,7 +1713,9 @@ and "Embed..." (for embedding in an arbitrary container).
 
 Here are the container views that are provided by SwiftUI.
 
-### HStack
+### Stack Containers
+
+#### HStack
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/hstack",
 "HStack" %} view is a container that lays out its child views vertically.
@@ -1747,7 +1749,7 @@ HStack(alignment: .lastTextBaseline, spacing: 0) {
 }.border(.blue)
 ```
 
-### VStack
+#### VStack
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/vstack",
 "VStack" %} view is a container that lays out its child views vertically.
@@ -1756,7 +1758,7 @@ The child views are centered horizontally by default.
 To change this, add the `alignment` attribute which can be set to
 `.leading`, `.center`, or `.trailing`.
 
-### ZStack
+#### ZStack
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/zstack",
 "ZStack" %} view is a container that, by default,
@@ -1825,7 +1827,7 @@ ZStack(alignment: .topLeading) {
         .padding(40.0)
 ```
 
-### LazyHStack
+#### LazyHStack
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/lazyhstack", "LazyHStack" %}
@@ -1846,7 +1848,7 @@ ScrollView(.horizontal) {
 }
 ```
 
-### LazyVStack
+#### LazyVStack
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/lazyvstack", "LazyVStack" %}
@@ -1866,7 +1868,9 @@ ScrollView {
 }
 ```
 
-### LazyHGrid
+### Grid Containers
+
+#### LazyHGrid
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/lazyhgrid", "LazyHGrid" %}
@@ -1880,7 +1884,7 @@ but also have a minimum size of 25 by specifying
 
 See the example in `LazyVGrid` below.
 
-### LazyVGrid
+#### LazyVGrid
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/lazyvgrid", "LazyVGrid" %}
@@ -1991,7 +1995,9 @@ struct ContentView: View {
 }
 ```
 
-### HSplitView
+### Split Containers
+
+#### HSplitView
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/hsplitview", "HSplitView" %}
@@ -1999,7 +2005,7 @@ view is a layout container that organizes its children horizontally
 and allows users to resize the children by dragging dividers between them.
 It is only supported in macOS.
 
-### VSplitView
+#### VSplitView
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/vsplitview", "VSplitView" %}
@@ -2007,7 +2013,9 @@ view is a layout container that organizes its children vertically
 and allows users to resize the children by dragging dividers between them.
 It is only supported in macOS.
 
-### ControlGroup
+### Other Containers
+
+#### ControlGroup
 
 A {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/controlgroup",
@@ -2096,7 +2104,7 @@ struct ContentView: View {
 }
 ```
 
-### DisclosureGroup
+#### DisclosureGroup
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/disclosuregroup",
@@ -2132,7 +2140,7 @@ var body: some View {
 }
 ```
 
-### ForEach
+#### ForEach
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/foreach",
 "ForEach" %} struct iterates of the elements of a `RandomAccessCollection`
@@ -2162,7 +2170,7 @@ To iterate over an array of `String` values:
 ForEach(stringArray, id: \.self) { ... }
 ```
 
-### Form
+#### Form
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/form",
 "Form" %} view a container of data input views.
@@ -2333,7 +2341,7 @@ Common UI components that are not built into SwiftUI include:
   `Picker` and `.pickerStyle(RadioGroupPickerStyle())`
 - toggle buttons: alternative is `Picker`
 
-### Group
+#### Group
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/group",
 "Group" %} view collects all its child views into a single view
@@ -2357,7 +2365,7 @@ Group {
 }.foregroundColor(.blue)
 ```
 
-### GroupBox
+#### GroupBox
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/groupbox", "GroupBox" %}
@@ -2418,7 +2426,7 @@ struct ContentView: View {
 }
 ```
 
-### List
+#### List
 
 A {% aTargetBlank "https://developer.apple.com/documentation/swiftui/list/",
 "List" %} view displays a list of other views in a single, scrollable column.
@@ -2519,7 +2527,7 @@ To remove horizontal padding that is added to list elements by default,
 apply the `.listRowInsets(EdgeInsets())` view modifier
 to each child of the `List`.
 
-#### List Styles
+##### List Styles
 
 To change the style of the `List`, apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/liststyle(_:)",
@@ -2620,7 +2628,7 @@ struct ContentView: View {
 }
 ```
 
-#### Expandable Lists
+##### Expandable Lists
 
 The `List` view can display a tree of data including
 disclosure buttons that expand and collapse parts of the tree.
@@ -2676,7 +2684,7 @@ struct ContentView: View {
 }
 ```
 
-#### Swipe Actions
+##### Swipe Actions
 
 Swipe actions associate buttons with rows.
 To add a swipe action to a list row, apply the {% aTargetBlank
@@ -2736,7 +2744,7 @@ struct ContentView: View {
 }
 ```
 
-#### Selecting Rows
+##### Selecting Rows
 
 The following example demonstrates using a `List` inside a `NavigationView`
 to enable selecting ids of the objects represented by the rows.
@@ -2822,7 +2830,7 @@ struct ContentView: View {
 }
 ```
 
-#### Deleting and Moving Rows
+##### Deleting and Moving Rows
 
 The following example is similar to the previous one,
 but allows rows to be deleted and moved.
@@ -2924,7 +2932,7 @@ struct ContentView: View {
 }
 ```
 
-#### Lists Over a Binding
+##### Lists Over a Binding
 
 A `List` can get its data from an array binding and
 each row can include input views that
@@ -2979,31 +2987,7 @@ struct ContentView: View {
 }
 ```
 
-### NavigationLink
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/navigationlink",
-"NavigationLink" %} view is used inside a `NavigationView`.
-See the [Navigation](#navigation) section.
-
-This is deprecated in iOS 16. See the new approach at
-{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
-
-### NavigationView
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/navigationview",
-"NavigationView" %} view marks an area where
-a stack of views will be rendered one at a time.
-It contains `NavigationLink` views that are similar to HTML anchor elements.
-Tapping them causes the associated view
-to be rendered inside the `NavigationView`.
-See the [Navigation](#navigation) section.
-
-This is deprecated in iOS 16. See the new approach at
-{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
-
-### OutlineGroup
+#### OutlineGroup
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/outlinegroup",
@@ -3012,7 +2996,7 @@ See my {% aTargetBlank
 "https://github.com/mvolkmann/SwiftUI-OutlineGroup/blob/main/SwiftUI-OutlineGroup/ContentView.swift",
 "SwiftUI-OutlineGroup" %} project and the questions in it.
 
-### Section
+#### Section
 
 {% aTargetBlank "https://developer.apple.com/documentation/swiftui/section",
 "Section" %} views groups the contents of a `Form`, `List`, or `Picker`
@@ -3072,7 +3056,7 @@ struct ContentView: View {
 See more examples of using the `Section` view
 in the [Form](#form) section and in the [List](#list) section.
 
-### ScrollView
+#### ScrollView
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/scrollview",
@@ -3094,12 +3078,12 @@ Another way to gain the ability to scroll is to use a `List` view.
 See examples of using `ScrollView` in the
 descriptions of `LazyHStack` and `LazyVStack`.
 
-### ScrollViewProxy
+##### ScrollViewProxy
 
 An instance of this type is passed to the trailing closure
 of `ScrollViewReader`. See the example below.
 
-### ScrollViewReader
+##### ScrollViewReader
 
 To scroll programmatically, use {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/scrollviewreader",
@@ -3148,7 +3132,7 @@ struct ContentView: View {
 }
 ```
 
-### Table
+#### Table
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/table",
 "Table" %} view displays data in rows and columns.
@@ -3194,7 +3178,7 @@ struct ContentView: View {
 }
 ```
 
-### TabView
+#### TabView
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/tabview",
 "TabView" %} view creates a row of buttons at the bottom of the display
@@ -3343,7 +3327,7 @@ Specific tab bar destinations can hide the tab bar by applying
 the view modifier `.toolbar(.hidden, for: .tabBar)` view modifier
 to the destination view.
 
-### TimelineView
+#### TimelineView
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/timelineview",
@@ -3967,6 +3951,30 @@ struct ContentView: View {
     }
 }
 ```
+
+### NavigationLink
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/navigationlink",
+"NavigationLink" %} view is used inside a `NavigationView`.
+See the [Navigation](#navigation) section.
+
+This is deprecated in iOS 16. See the new approach at
+{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
+
+### NavigationView
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/navigationview",
+"NavigationView" %} view marks an area where
+a stack of views will be rendered one at a time.
+It contains `NavigationLink` views that are similar to HTML anchor elements.
+Tapping them causes the associated view
+to be rendered inside the `NavigationView`.
+See the [Navigation](#navigation) section.
+
+This is deprecated in iOS 16. See the new approach at
+{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
 
 ### PasteButton
 
