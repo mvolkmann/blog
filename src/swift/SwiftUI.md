@@ -2035,12 +2035,35 @@ struct ContentView: View {
     @State private var rating = 0.0
     @State private var shirtSize: ShirtSize = .large
 
-    var isEditing = false
+    private var isEditing = false
+
+    private var sales = 1_234_567.0
+
+    private var formattedSales: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        return formatter.string(from: NSNumber(value: sales))!
+    }
 
     var body: some View {
         NavigationView { // deprecated in iOS 16
             Form {
                 Section(header: Text("Profile")) {
+                    // When LabeledContent is used inside a Form
+                    // its label is placed on the leading edge and
+                    // its value is placed on the trailing edge.
+                    LabeledContent("Score", value: String(19))
+                    // If the label has multiple views,
+                    // they are stacked vertically with each
+                    // subsequent view being a bit smaller and lighter.
+                    LabeledContent {
+                        Text(formattedSales)
+                    } label: {
+                        Text("Sales")
+                        Text("2023")
+                        Text("January")
+                        Button("Foo") { print("got tap") }
+                    }
                     TextField("Name", text: $name)
                     DatePicker(
                         "Birthday",
@@ -2100,11 +2123,14 @@ struct ContentView: View {
             .accentColor(.red)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    // The saveUser function is not shown here.
                     Button("Save", action: saveUser)
                 }
             }
         }
+    }
+
+    private func saveUser() {
+        print("saveUser was called.")
     }
 }
 ```
@@ -4806,6 +4832,14 @@ view modifier changes which parts are rendered.
 The default argument value is `.titleAndIcon` which renders both parts.
 To render only the text, pass `.titleOnly`.
 To render only the icon, pass `.iconOnly`.
+
+### LabeledContent
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/labeledcontent/",
+"LabeledContent" %} view displays a label and a value.
+It is most often used inside a `Form`.
+See examples of using this in the [Form](#form) section.
 
 ### ProgressView
 
@@ -9034,6 +9068,59 @@ struct ContentView: View {
                 Text("You have too many dogs!")
             }
         )
+    }
+}
+```
+
+Alerts can also accept inputs.
+The following code demonstrates using an alert
+to prompt for a username and password.
+
+<img alt="SwiftUI alert login" style="width: 40%"
+  src="/blog/assets/SwiftUI-alert-login.png?v={{pkg.version}}"
+  title="SwiftUI alert login">
+
+```swift
+struct ContentView: View {
+    @State private var isShowingAlert = false
+    @State private var password = ""
+    @State private var username = ""
+
+    private var authenticated: Bool {
+        username == "test" && password == "pass"
+    }
+
+    var body: some View {
+        VStack {
+            if authenticated {
+                VStack {
+                    Text("Welcome!").font(.largeTitle)
+                    Button("Logout") {
+                        username = ""
+                        password = ""
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            } else {
+                if !username.isEmpty || !password.isEmpty {
+                    Text("Invalid Credentials").foregroundColor(.red)
+                }
+                Button("Login") {
+                    isShowingAlert = true
+                }
+                .buttonStyle(.borderedProminent)
+            }
+        }
+        .alert("Login", isPresented: $isShowingAlert) {
+            Group {
+                TextField("Username", text: $username)
+                SecureField("Password", text: $password)
+            }
+            .autocapitalization(.none)
+            .disableAutocorrection(true)
+        } message: {
+            Text("Enter your credentials.")
+        }
     }
 }
 ```
