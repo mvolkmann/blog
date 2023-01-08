@@ -3333,6 +3333,52 @@ var body: some View {
 
 ## Component Views
 
+### AnyView
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/anyview",
+"AnyView" %} view ...
+TODO: What is this?
+
+### AsyncImage
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/asyncimage",
+"AsyncImage" %} view asynchronously loads and displays an image.
+A specified placeholder image is displayed
+while the specified image is being downloaded.
+It works in the Simulator, but not in Preview.
+
+The following example renders the Swift logo:
+
+<img alt="SwiftUI AsyncImage" style="width: 40%"
+    src="/blog/assets/SwiftUI-AsyncImage.png?v={{pkg.version}}"
+    title="SwiftUI AsyncImage">
+
+```swift
+struct ContentView: View {
+    private let imageUrl =
+        "https://developer.apple.com/swift/images/swift-og.png"
+    private let size = 100.0
+
+    var body: some View {
+        VStack {
+            AsyncImage(
+                url: URL(string: imageUrl),
+                content: { image in image.resizable() },
+                placeholder: { ProgressView() } // spinner
+            )
+            .frame(width: size, height: size)
+        }
+    }
+}
+```
+
+`AsyncImage` does not cache downloaded images,
+so they can be downloaded multiple times.
+To cache the images, see this {% aTargetBlank
+"https://stackoverflow.com/questions/69214543/how-can-i-add-caching-to-asyncimage",
+"Stack Overflow post" %}.
+
 ### Button
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/button",
@@ -3486,6 +3532,218 @@ For example, `Color.red` and `Color.clear` (transparent) are views.
 A `UIColor` can be converted to a `Color`.
 For example, `UIColor.blue` can be converted with `Color(.systemBlue)`.
 
+### ColorPicker
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/colorpicker",
+"ColorPicker" %} view renders a color well
+for displaying a currently selected color
+and changing the color using the system color picker.
+It takes a label and a `selection` argument
+that is a binding to the currently selected `Color`.
+
+<figure>
+  <img alt="SwiftUI ColorPicker before tap"
+    src="/blog/assets/SwiftUI-ColorPicker1.png?v={{pkg.version}}"
+    title="SwiftUI ColorPicker before tap">
+  <figcaption>ColorPicker before tap</figcaption>
+</figure>
+<figure>
+  <img alt="SwiftUI ColorPicker after tap"
+    src="/blog/assets/SwiftUI-ColorPicker2.png?v={{pkg.version}}"
+    title="SwiftUI ColorPicker after tap">
+  <figcaption>ColorPicker after tap</figcaption>
+</figure>
+
+```swift
+ColorPicker(
+    "Favorite Color",
+    selection: $favoriteColor // a binding
+)
+```
+
+### DatePicker
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/datepicker", "DatePicker" %}
+view allows selecting a date, time, or both.
+It takes the text to display as a prompt and
+a `selection` argument which is a binding that
+holds the currently selected `Date` value.
+
+The optional `displayedComponents` argument specifies
+what can be selected using a single value or an array of
+{% aTargetBlank "", "DatePickerComponent" %} values
+which include `.date` and `.hourAndMinute`.
+Note that it is not possible to request allowing
+selection of a month and day without a year.
+
+```swift
+DatePicker(
+    "Birthday",
+    selection: $birthday, // a binding
+    displayedComponents: [.date, .hourAndMinute] // array or single value
+)
+```
+
+To restrict the dates that can be selected,
+add the `in` argument with a `Range` value after the `selection` argument.
+To only allow dates in the past or now, use `...Date()`.
+To only allow dates in the future or now, use `Date()...`.
+
+To hide the label, apply the `labelsHidden` view modifier.
+
+```swift
+DatePicker("", selection: $birthday, displayedComponents: .date)
+    .labelsHidden()
+```
+
+Apply the `datePickerStyle` view modifier to choose a style.
+The options that can be passed to this include:
+
+- `.automatic` - This is the default and is the same as `.compact` in iOS.
+
+- `.compact` - This renders date in a button that can be tapped
+  to render the `.graphical` controls (see below) for changing the date.
+
+  <figure>
+    <img alt="SwiftUI DatePicker compact style"
+      src="/blog/assets/SwiftUI-DatePicker-compact1.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker compact style">
+    <figcaption>DatePicker compact style</figcaption>
+  </figure>
+  <figure>
+    <img alt="SwiftUI DatePicker compact style after tapping"
+      src="/blog/assets/SwiftUI-DatePicker-compact2.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker compact style after tapping">
+    <figcaption>DatePicker compact style after tapping</figcaption>
+  </figure>
+  <figure>
+    <img alt="SwiftUI DatePicker compact style after tapping month-year"
+      src="/blog/assets/SwiftUI-DatePicker-compact3.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker compact style after tapping month-year">
+    <figcaption>DatePicker compact style after tapping </figcaption>
+  </figure>
+
+- `.field` - This not available in iOS.
+
+- `.graphical` - The renders a calendar view that contains controls for
+  picking a month and year, going to the previous or next month,
+  and selecting a day of the month.
+
+  <figure>
+    <img alt="SwiftUI DatePicker graphical style"
+      src="/blog/assets/SwiftUI-DatePicker-graphical.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker graphical style">
+    <figcaption>DatePicker graphical style</figcaption>
+  </figure>
+
+- `.stepperField` - This not available in iOS.
+
+- `.wheel` - This provides separate wheel pickers for month, day, and year.
+
+  <figure>
+    <img alt="SwiftUI DatePicker wheel style"
+      src="/blog/assets/SwiftUI-DatePicker-wheel.png?v={{pkg.version}}"
+      title="SwiftUI DatePicker wheel style">
+    <figcaption>DatePicker wheel style</figcaption>
+  </figure>
+
+### EditButton
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/editbutton", "EditButton" %}
+view toggles the edit mode of a `List`.
+It is typically added to a `List` using the `toolbar` view modifier.
+See the example in the [List](#list) section.
+
+### Gauge
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/gauge",
+"Gauge" %} view shows a current value in relation to minimum and maximum values.
+One example is a car fuel gauge.
+This is currently only supported in watchOS.
+
+We can build a similar view to use on other platforms.
+For example:
+
+```swift
+struct MyGauge: View {
+    var value: Double
+    var min = 0.0
+    var max = 100.0
+    let fontSize: CGFloat = 50
+    var strokeColor: Color = .blue
+    var strokeWidth = 20.0
+    var textColor: Color = .black
+
+    var body: some View {
+        ZStack {
+            let percent = (value - min) / (max - min)
+            Circle()
+                .trim(from: 0, to: percent)
+                .stroke(
+                    strokeColor,
+                    style: StrokeStyle(
+                        lineWidth: strokeWidth,
+                        lineCap: .round
+                    )
+                )
+                .rotationEffect(.degrees(-90))
+
+            Text(String(format: "%.0f", value))
+                .font(.system(size: fontSize, weight: .bold))
+                .foregroundColor(textColor)
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var value = 25.0
+
+    var body: some View {
+        VStack(spacing: 20) {
+            MyGauge(
+                value: value,
+                strokeColor: .red,
+                strokeWidth: 15,
+                textColor: .blue
+            )
+            .frame(width: 150, height: 150)
+
+            HStack {
+                Button("Decrease") {
+                    withAnimation { value = max(value - 10, 0) }
+                }
+                Button("Increase") {
+                    withAnimation { value = min(value + 10, 100) }
+                }
+            }
+            .buttonStyle(.bordered)
+
+            Slider(value: $value, in: 0 ... 100, step: 1) {
+                Text("Value")
+            }
+        }
+        .padding()
+    }
+}
+```
+
+### EmptyView
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/emptyview", "EmptyView" %}
+view renders nothing. It is useful in cases where
+a view needs to be returned, but there is nothing to display.
+
+### EquatableView
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/equatableview",
+"EquatableView" %} view ...
+TODO: What is this?
+
 ### Image
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/image",
@@ -3535,45 +3793,637 @@ Image("some-name")
     .overlay(Circle().stroke(Color.red, lineWidth: 10))
 ```
 
-### AsyncImage
+### Label
 
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/asyncimage",
-"AsyncImage" %} view asynchronously loads and displays an image.
-A specified placeholder image is displayed
-while the specified image is being downloaded.
-It works in the Simulator, but not in Preview.
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/label",
+"Label" %} view renders an icon and text where the icon appears first.
+`Label` supports many initializers but the most commonly used
+take the text as a `String` followed by the icon
+as either a `systemName` `String` (for an SF Symbol)
+or a `image` `String` (for an image asset name).
 
-The following example renders the Swift logo:
-
-<img alt="SwiftUI AsyncImage" style="width: 40%"
-    src="/blog/assets/SwiftUI-AsyncImage.png?v={{pkg.version}}"
-    title="SwiftUI AsyncImage">
+For example:
 
 ```swift
-struct ContentView: View {
-    private let imageUrl =
-        "https://developer.apple.com/swift/images/swift-og.png"
-    private let size = 100.0
+Label("Rain", systemImage: "cloud.rain")
+```
+
+Applying the `font` view modifier scales both the text and the icon.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/labelstyle", "labelStyle" %}
+view modifier changes which parts are rendered.
+The default argument value is `.titleAndIcon` which renders both parts.
+To render only the text, pass `.titleOnly`.
+To render only the icon, pass `.iconOnly`.
+
+### LabeledContent
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/labeledcontent/",
+"LabeledContent" %} view displays a label and a value.
+It is most often used inside a `Form`.
+See examples of using this in the [Form](#form) section.
+
+### Link
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/link",
+"Link" %} view creates a hyperlink like an HTML `a` element.
+It takes link text and a `destination` argument
+whose value is a {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/url", "URL" %} struct.
+Tapping a `Link` opens the associated URL in Safari.
+Links work in the Simulator but Preview is not able to open Safari.
+
+```swift
+Link(
+    "link text",
+    destination: URL(string: "https://some-domain/some-path"
+)
+```
+
+To display a view instead of plain link text,
+add the `label` argument as follows:
+
+```swift
+Link(
+    destination: URL(string: "https://some-domain/some-path"),
+    label: SomeView
+)
+```
+
+Apply the `font` view modifier to change the font.
+
+Apply the `tint` view modifier to change the color.
+
+When using `Link` views it may be necessary to
+add the key "Supports Document Browser" with the Boolean value "YES"
+in the target Info tab to remove a build warning.
+
+To open a `URL` programmatically, get the `openURL` function
+from the environment and pass it a `URL` object.
+For example:
+
+```swift
+struct SomeView: View {
+    @Environment(\.openURL) var openURL
 
     var body: some View {
-        VStack {
-            AsyncImage(
-                url: URL(string: imageUrl),
-                content: { image in image.resizable() },
-                placeholder: { ProgressView() } // spinner
-            )
-            .frame(width: size, height: size)
+        Button("My Blog") {
+            openURL(URL(string: "https://mvolkmann.github.io/blog/")!)
         }
     }
 }
 ```
 
-`AsyncImage` does not cache downloaded images,
-so they can be downloaded multiple times.
-To cache the images, see this {% aTargetBlank
-"https://stackoverflow.com/questions/69214543/how-can-i-add-caching-to-asyncimage",
-"Stack Overflow post" %}.
+### Menu
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/menu",
+"Menu" %} view renders a label containing the menu title.
+When clicked, a menu appears below or above the label
+containing a vertical stack of buttons and sub-menus.
+To separate groups of menu items include `Divider` views
+
+The placement of the menu and the order of the buttons
+depends on the position of the menu.
+Normally the menu is displayed below the label
+and the buttons or ordered from top to bottom.
+However, if the menu is near the bottom of the display
+then the menu is displayed above the label and
+the button order is reversed in order to make all the buttons visible.
+
+```swift
+Menu("My Menu") {
+    Button("Option 1", action: {})
+    Button("Option 2", action: {})
+    // This demonstrates using a nested menu.
+    Menu("Option 3") {
+        Button("Option 3.1", action: {})
+        Button("Option 3.2", action: {})
+    }
+}
+```
+
+The following example uses a `Menu` to
+select the color used to fill a `Rectangle`.
+Menus can specify a `primaryAction` closure that is executed
+if the user taps the label rather than long pressing it.
+
+```swift
+struct ContentView: View {
+    @State private var color = Color.red
+
+    var body: some View {
+        VStack {
+            Menu("Color ...") {
+                Button("Red") { color = .red }
+                Button("Green") { color = .green }
+                Button("Blue") { color = .blue }
+            } primaryAction: {
+                color = .gray
+            }
+
+            Rectangle().fill(color).frame(width: 50, height: 50)
+        }
+    }
+}
+```
+
+### PasteButton
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/pastebutton",
+"PasteButton" %} view renders a button for
+pasting data from the system clipboard.
+
+The following example uses one `PasteButton` for pasting copied text
+and another for pasting a copied image.
+
+```swift
+struct ContentView: View {
+    @State private var copiedText = ""
+    @State private var copiedImage: Image?
+
+    let items = ["Fork", "Spoon", "Knife"]
+
+    var body: some View {
+        VStack {
+            Text("Long press an item below and select Copy.")
+                .fontWeight(.bold)
+            ForEach(items, id: \.self) { item in
+                Text(item).textSelection(.enabled)
+            }
+
+            // Why is an array passed to the closure?
+            PasteButton(payloadType: String.self) { contents in
+                guard let first = contents.first else { return }
+                copiedText = first
+            }
+            if copiedText.isEmpty {
+                Text("No text has been pasted.")
+            } else {
+                Text("You pasted \(copiedText).")
+            }
+
+            PasteButton(payloadType: Image.self) { images in
+                guard let first = images.first else { return }
+                copiedImage = first
+            }
+            if let copiedImage {
+                copiedImage
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                Text("No image has been pasted.")
+            }
+        }
+        .font(.system(size: 24))
+    }
+}
+```
+
+### Picker
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/picker",
+"Picker" %} view supports selecting an option from a list.
+It takes label text and a `selection` argument
+which is a binding that holds the selected value.
+
+The options are specified with child `Text` views.
+
+If these are provided using `ForEach`, the `selection` value
+comes from the values over which the `ForEach` iterates,
+not from the value being displayed by the `Text` views.
+To change these, apply the `tag` view modifier to the `Text` views,
+passing it a value.
+
+The prompt text passed to the `Picker` initializer
+is only displayed if the `Picker` is inside a `Form` or `List`.
+
+Apply the `pickerStyle` view modifier
+to change the way the options are rendered, passing it a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/pickerstyle",
+"PickerStyle" %}.
+The label is only rendered by some styles.
+`PickerStyle` values include:
+
+- `.automatic` (default)
+
+  This selects a style based on the context in which the `Picker` is used.
+  It is typically either `.menu` or `.wheel`.
+  When the `Picker` is inside a `Form` which is inside a `NavigationView`
+  and no `pickerStyle` is specified,
+  clicking the `Picker` displays the options on a separate page.
+
+  <figure>
+    <img alt="SwiftUI Picker"
+      src="/blog/assets/SwiftUI-Picker1.png?v={{pkg.version}}"
+      title="SwiftUI Picker automatic before clicking">
+    <figcaption>automatic picker before clicking</figcaption>
+  </figure>
+  <figure>
+    <img alt="SwiftUI Picker"
+      src="/blog/assets/SwiftUI-Picker2.png?v={{pkg.version}}"
+      title="SwiftUI Picker automatic after clicking">
+    <figcaption>automatic picker new page after clicking</figcaption>
+  </figure>
+
+- `.inline`
+
+  This displays the prompt and all the options (visible simultaneously)
+  in the current sheet.
+  The selected option is indicated by a check mark.
+  This works when the `Picker` is inside a `Form`.
+  Otherwise it uses the `.wheel` style.
+
+- `.menu`
+
+  This does not display the prompt and
+  only displays the currently selected value.
+  When the current value is tapped, all the options are
+  rendered in a dropdown menu inside the current sheet.
+  There is no limit to the number of options that can appear in the menu
+  and it will scroll vertically if they do not all fit on the screen.
+
+  <figure>
+    <img alt="SwiftUI Picker"
+      src="/blog/assets/SwiftUI-Picker-menu1.png?v={{pkg.version}}"
+      title="SwiftUI Picker menu before clicking">
+    <figcaption>menu picker before clicking</figcaption>
+  </figure>
+  <figure>
+    <img alt="SwiftUI Picker"
+      src="/blog/assets/SwiftUI-Picker-menu2.png?v={{pkg.version}}"
+      title="SwiftUI Picker menu after clicking">
+    <figcaption>menu picker after clicking</figcaption>
+  </figure>
+
+- `.radioGroup` - not available in iOS
+
+- `.segmented`
+
+  This does not display the prompt,
+  and renders the options as a "Segmented Control"
+  which is a horizontal row of buttons.
+  There is no limit to the number of options,
+  but their text will be elided if it doesn't fit inside the buttons.
+
+  <figure>
+    <img alt="SwiftUI Picker segmented"
+      src="/blog/assets/SwiftUI-Picker-segmented.png?v={{pkg.version}}"
+      title="SwiftUI Picker segmented">
+    <figcaption>segmented picker</figcaption>
+  </figure>
+
+- `.wheel`
+
+  This does not display the prompt,
+  and renders all the options as a scrollable wheel.
+  It requires sufficient vertical space to render properly.
+  A height of 300 works well.
+
+  <figure>
+    <img alt="SwiftUI Picker wheel"
+      src="/blog/assets/SwiftUI-Picker-wheel.png?v={{pkg.version}}"
+      title="SwiftUI Picker wheel">
+    <figcaption>wheel picker</figcaption>
+  </figure>
+
+The background color and font used by a `Picker`
+can be customized in limited ways.
+
+To set the background color, apply the `background` view modifier
+For example, `.background(Color.yellow.opacity(0.3))`.
+The `tint` view modifier does not effect `Picker` views.
+
+To set the font and foreground color, apply the `font` and `foregroundColor`
+view modifiers to the `Text` views used to render the options.
+For example, `.font(.headline).foregroundColor(.red)`.
+This only applies to `automatic` and `wheel` pickers,
+not `menu` or `segmented` pickers.
+
+When the options are generated using `ForEach` to iterate over an array,
+the selection value will be one of the array items.
+This can be changed by applying the `tag` view modifier
+to the immediate child view of the `ForEach`.
+The type of the `tag` value must match the type of the `selection` argument.
+If these types differ, the compiler does not generate an error,
+but it will not be possible to change the selected option.
+
+```swift
+struct ContentView: View {
+    enum ShirtSize: String, CaseIterable {
+        case sm = "Small"
+        case md = "Medium"
+        case lg = "Large"
+        case xl = "Extra Large"
+    }
+
+    @State private var shirtSize: ShirtSize = .sm
+
+    var body: some View {
+        Form {
+            Picker("Shirt Size", selection: $shirtSize) {
+                ForEach(ShirtSize.allCases, id: \.self) { size in
+                    Text(size.rawValue) // no need for tag view modifier
+
+                    // The text displayed here has
+                    // no effect on the value of shirtSize!
+                    // If we use the following in place of the previous line,
+                    // we can still select each of the four shirt sizes
+                    // despited each option displaying the same text.
+                    // Text("junk")
+
+                    // If we iterate over ShirtSize.allCases.indices
+                    // instead of iterating over ShirtSize.allCases
+                    // and display the index values,
+                    // we can use the tag view modifier to associate
+                    // each option with one of the ShirtSize enum cases.
+                    // Text("\(index)").tag(ShirtSize.allCases[index])
+                }
+
+                // We can hard-code alternative names of the shirt sizes
+                // and associate them with ShirtCase cases.
+                // Text("Tiny").tag(ShirtSize.sm)
+                //  Text("In-Between").tag(ShirtSize.md)
+                // Text("Big").tag(ShirtSize.lg)
+            }
+
+            Text("selected \(shirtSize.rawValue)")
+            Text("type is \(String(describing: type(of: shirtSize)))")
+        }
+    }
+}
+```
+
+The following `Picker` example saves the index of a selected item
+rather than the item itself.
+It begins with no option being selected.
+
+```swift
+struct Person {
+    let name: String
+}
+
+struct ContentView: View {
+    @State private var selectedPersonIndex: Int = -1 // nothing selected
+
+    let people = [
+        Person(name: "Mark"),
+        Person(name: "Tami"),
+        Person(name: "Amanda"),
+        Person(name: "Jeremy")
+    ]
+
+    private var selectedPerson: Person? {
+        selectedPersonIndex == -1 ? nil : people[selectedPersonIndex]
+    }
+
+    var body: some View {
+        Form {
+            Picker("Person", selection: $selectedPersonIndex) {
+                Text("").tag(-1)
+                ForEach(people.indices, id: \.self) { index in
+                    Text(people[index].name)
+                }
+            }
+
+            Text("You selected \(selectedPerson?.name ?? "nobody").")
+        }
+    }
+}
+```
+
+### ProgressView
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/progressview",
+"ProgressView" %} view displays a progress indicator.
+It takes a label,
+an optional `value` argument that is a binding to the current value,
+and an optional `total` argument that is the maximum value (default is 0.0).
+If the `value` argument is supplied then the determinate style
+that displays a thin progress bar is used.
+If the `value` argument is omitted then the indeterminate style
+that uses the standard Apple spinner is used.
+
+```swift
+struct ContentView: View {
+    @State private var progress = 0.0
+
+    func startTimer() {
+        // Run every 3 hundredths of a second.
+        // When "repeats" is false, this is like setTimeout in JavaScript.
+        // When "repeats" is true, this is like setInterval in JavaScript.
+        Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
+            progress += 0.01
+            if (progress >= 1) {
+                timer.invalidate() // stops Timer
+                progress = 0
+            }
+        }
+    }
+
+    var body: some View {
+        VStack {
+            if progress > 0 {
+                ProgressView() // indeterminate
+                ProgressView(value: progress).padding() // determinate
+            }
+        }
+        .onAppear { startTimer() }
+    }
+}
+```
+
+To change the color of a `ProgressView`
+apply the `tint` view modifier passing it a `Color`.
+
+To change the size of an indeterminate `ProgressView`
+apply the `scaleEffect` modifier. For example:
+
+```swift
+ProgressView()
+    .scaleEffect(x: 3, y: 3, anchor: .center)
+```
+
+Sometimes it is desirable to delay rendering a `ProgressView`
+by a short amount of time. For example, when making a network call it is best
+to only display a progress indicator if the call does not complete quickly.
+One way to achieve this is with `DispatchQueue.main.asyncAfter`.
+This can be wrapped in a custom view modifier to simplify the code.
+See {% aTargetBlank
+"https://www.photoroom.com/tech/improving-loading-experience-in-swiftui/",
+"Improving the Loading Experience in SwiftUI" %}.
+
+### SecureField
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/securefield",
+"SecureField" %} view is like `TextField`,
+but obscures the characters that are typed.
+It is typically used for sensitive data like
+passwords and social security numbers.
+
+```swift
+SecureField("Password", text: $password)
+    .autocapitalization(.none)
+    .disableAutocorrection(true)
+```
+
+### ShareLink
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/sharelink", "ShareLink" %}
+view displays an icon and a label that can be tapped to open a share sheet
+for sharing specific data.
+The share sheet allows selecting the method of sharing
+which include Print, "Save to Files", AirDrop, text message, email, and many
+application-specific methods such as Facebook, Mastadon, Messenger, and Twitter.
+
+The icon and label displayed by a `ShareLink` can be customized.
+
+The data to share, referred to as the "item",
+must conform to the {% aTargetBlank
+"https://developer.apple.com/documentation/CoreTransferable/Transferable?changes=_3",
+"Transferable" %} protocol.
+The built-in types `AttributedString`, `Data`, `Image`, `String`, and `URL` do this.
+In addition, custom types can conform to `Transferable`.
+
+In addition to sharing the item, an optional message is also shared.
+
+The following code example demonstrates
+a basic `ShareLink` that shares a `URL`,
+a `ShareLink` that shares a `URL` with a customized icon and label,
+and a `ShareLink` that shares an `Image`.
+
+<img alt="SwiftUI ShareLink" style="width: 40%"
+    src="/blog/assets/SwiftUI-ShareLink.png?v={{pkg.version}}"
+    title="SwiftUI ShareLink">
+
+```swift
+struct ContentView: View {
+    private let linkColor: Color = .purple
+    private let urlDescription = "Mark Volkmann's Blog"
+    private let link = URL(string: "https://mvolkmann.github.io/blog")!
+    private let linkSize: CGFloat = 20
+
+    private let imageName = "Comet"
+    private var imageMessage: String { "\(imageName), the whippet" }
+    private var image: Image { Image(imageName) }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            // Basic sharing of a URL
+            ShareLink(
+                // Supply a first argument String to keep the default icon
+                // which is "square.and.arrow.up" and
+                // follow it with text other than the default "Share...".
+                urlDescription, // optional
+                item: link,
+                message: Text(urlDescription) // optional
+            )
+            .font(.system(size: linkSize))
+            .tint(linkColor)
+
+            // Sharing of a URL with a custom icon
+            ShareLink(
+                item: link,
+                message: Text(urlDescription)
+            ) {
+                // Supply a label closure instead of a first argument String
+                // in order to change the icon which defaults to
+                // "square.and.arrow.up" and the default text.
+                Label(urlDescription, systemImage: "heart.fill")
+                    .font(.system(size: linkSize))
+                    .tint(linkColor)
+            }
+
+            // Sharing an image
+            ShareLink(
+                imageMessage,
+                item: image,
+                message: Text(imageMessage),
+                // The preview appears at the top of the share sheet.
+                preview: SharePreview(imageName, image: image)
+            )
+            .font(.system(size: linkSize))
+            .tint(linkColor)
+        }
+    }
+}
+```
+
+### Slider
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/slider",
+"Slider" %} view renders a horizontal track with a thumb
+that slides between minimum and maximum values
+specified by the `in` argument whose value is a `ClosedRange`.
+
+The `value` argument value is a binding that holds the current value
+as a `Float`, not an `Int`.
+
+An optional `step` argument indicates the steps in which the value changes.
+
+Text and/or icons can be displayed at the leading and trailing ends.
+
+<img alt="SwiftUI Slider" style="width: 60%"
+    src="/blog/assets/SwiftUI-Slider.png?v={{pkg.version}}"
+    title="SwiftUI Slider">
+
+```swift
+// No text or icons at ends.
+Slider(value: $rating, in: 0...10, step: 1)
+
+// Has text at ends and displays current value below.
+VStack {
+    Slider(
+        value: $rating,
+        in: 0...10,
+        step: 1,
+        label: { Text("Rating") }, // not rendered
+        // The next two attributes must be closures that return the
+        // same kind of view.  Image and Text are common choices.
+        minimumValueLabel: { Image(systemName: "hand.thumbsdown") },
+        maximumValueLabel: { Image(systemName: "hand.thumbsup") }
+    ).padding()
+    Text("rating = \(Int(rating))")
+}
+```
+
+### Stepper
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/stepper",
+"Stepper" %} view displays "-" and "+" buttons that can be
+tapped to decrement and increment a value.
+It takes a label to display before the buttons,
+a binding for the current value,
+an optional range the value must remain inside, and
+a closure to execute every time the `Stepper` changes the value.
+
+<img alt="SwiftUI Stepper" style="width: 60%"
+    src="/blog/assets/SwiftUI-Stepper.png?v={{pkg.version}}"
+    title="SwiftUI Stepper">
+
+```swift
+VStack {
+    Stepper(
+        "# of Dogs: \(dogCount)",
+        value: $dogCount,
+        in: 0...10
+    ) { v in
+        tooManyDogs = dogCount > 2
+    }
+
+    Text("Too Many Dogs? \(String(tooManyDogs))")
+}.padding()
+```
+
+The optional `onIncrement` and `onDecrement` arguments take a closure
+that runs when the plus and minus buttons are tapped.
+They are typically used to modify the value
+in a way other than adding or subtracting one.
 
 ### Text
 
@@ -4033,21 +4883,6 @@ The closure passed to it will run when any `TextField`,
 `SecureField`, or `TextEditor` nested inside it is submitted.
 This makes the `Form` view and good candidate.
 
-### SecureField
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/securefield",
-"SecureField" %} view is like `TextField`,
-but obscures the characters that are typed.
-It is typically used for sensitive data like
-passwords and social security numbers.
-
-```swift
-SecureField("Password", text: $password)
-    .autocapitalization(.none)
-    .disableAutocorrection(true)
-```
-
 ### TextEditor
 
 The {% aTargetBlank
@@ -4130,171 +4965,6 @@ struct ContentView: View {
 }
 ```
 
-### EditButton
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/editbutton", "EditButton" %}
-view toggles the edit mode of a `List`.
-It is typically added to a `List` using the `toolbar` view modifier.
-See the example in the [List](#list) section.
-
-### PasteButton
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/pastebutton",
-"PasteButton" %} view renders a button for
-pasting data from the system clipboard.
-
-The following example uses one `PasteButton` for pasting copied text
-and another for pasting a copied image.
-
-```swift
-struct ContentView: View {
-    @State private var copiedText = ""
-    @State private var copiedImage: Image?
-
-    let items = ["Fork", "Spoon", "Knife"]
-
-    var body: some View {
-        VStack {
-            Text("Long press an item below and select Copy.")
-                .fontWeight(.bold)
-            ForEach(items, id: \.self) { item in
-                Text(item).textSelection(.enabled)
-            }
-
-            // Why is an array passed to the closure?
-            PasteButton(payloadType: String.self) { contents in
-                guard let first = contents.first else { return }
-                copiedText = first
-            }
-            if copiedText.isEmpty {
-                Text("No text has been pasted.")
-            } else {
-                Text("You pasted \(copiedText).")
-            }
-
-            PasteButton(payloadType: Image.self) { images in
-                guard let first = images.first else { return }
-                copiedImage = first
-            }
-            if let copiedImage {
-                copiedImage
-                    .resizable()
-                    .scaledToFit()
-            } else {
-                Text("No image has been pasted.")
-            }
-        }
-        .font(.system(size: 24))
-    }
-}
-```
-
-### Link
-
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/link",
-"Link" %} view creates a hyperlink like an HTML `a` element.
-It takes link text and a `destination` argument
-whose value is a {% aTargetBlank
-"https://developer.apple.com/documentation/foundation/url", "URL" %} struct.
-Tapping a `Link` opens the associated URL in Safari.
-Links work in the Simulator but Preview is not able to open Safari.
-
-```swift
-Link(
-    "link text",
-    destination: URL(string: "https://some-domain/some-path"
-)
-```
-
-To display a view instead of plain link text,
-add the `label` argument as follows:
-
-```swift
-Link(
-    destination: URL(string: "https://some-domain/some-path"),
-    label: SomeView
-)
-```
-
-Apply the `font` view modifier to change the font.
-
-Apply the `tint` view modifier to change the color.
-
-When using `Link` views it may be necessary to
-add the key "Supports Document Browser" with the Boolean value "YES"
-in the target Info tab to remove a build warning.
-
-To open a `URL` programmatically, get the `openURL` function
-from the environment and pass it a `URL` object.
-For example:
-
-```swift
-struct SomeView: View {
-    @Environment(\.openURL) var openURL
-
-    var body: some View {
-        Button("My Blog") {
-            openURL(URL(string: "https://mvolkmann.github.io/blog/")!)
-        }
-    }
-}
-```
-
-### Menu
-
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/menu",
-"Menu" %} view renders a label containing the menu title.
-When clicked, a menu appears below or above the label
-containing a vertical stack of buttons and sub-menus.
-To separate groups of menu items include `Divider` views
-
-The placement of the menu and the order of the buttons
-depends on the position of the menu.
-Normally the menu is displayed below the label
-and the buttons or ordered from top to bottom.
-However, if the menu is near the bottom of the display
-then the menu is displayed above the label and
-the button order is reversed in order to make all the buttons visible.
-
-```swift
-Menu("My Menu") {
-    Button("Option 1", action: {})
-    Button("Option 2", action: {})
-    // This demonstrates using a nested menu.
-    Menu("Option 3") {
-        Button("Option 3.1", action: {})
-        Button("Option 3.2", action: {})
-    }
-}
-```
-
-The following example uses a `Menu` to
-select the color used to fill a `Rectangle`.
-Menus can specify a `primaryAction` closure that is executed
-if the user taps the label rather than long pressing it.
-
-```swift
-struct ContentView: View {
-    @State private var color = Color.red
-
-    var body: some View {
-        VStack {
-            Menu("Color ...") {
-                Button("Red") { color = .red }
-                Button("Green") { color = .green }
-                Button("Blue") { color = .blue }
-            } primaryAction: {
-                color = .gray
-            }
-
-            Rectangle().fill(color).frame(width: 50, height: 50)
-        }
-    }
-}
-```
-
 ### Toggle
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/toggle",
@@ -4325,676 +4995,6 @@ Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
 <img alt="SwiftUI Toggle" style="width: 60%"
     src="/blog/assets/SwiftUI-Toggle.png?v={{pkg.version}}"
     title="SwiftUI Toggle">
-
-### ShareLink
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/sharelink", "ShareLink" %}
-view displays an icon and a label that can be tapped to open a share sheet
-for sharing specific data.
-The share sheet allows selecting the method of sharing
-which include Print, "Save to Files", AirDrop, text message, email, and many
-application-specific methods such as Facebook, Mastadon, Messenger, and Twitter.
-
-The icon and label displayed by a `ShareLink` can be customized.
-
-The data to share, referred to as the "item",
-must conform to the {% aTargetBlank
-"https://developer.apple.com/documentation/CoreTransferable/Transferable?changes=_3",
-"Transferable" %} protocol.
-The built-in types `AttributedString`, `Data`, `Image`, `String`, and `URL` do this.
-In addition, custom types can conform to `Transferable`.
-
-In addition to sharing the item, an optional message is also shared.
-
-The following code example demonstrates
-a basic `ShareLink` that shares a `URL`,
-a `ShareLink` that shares a `URL` with a customized icon and label,
-and a `ShareLink` that shares an `Image`.
-
-<img alt="SwiftUI ShareLink" style="width: 40%"
-    src="/blog/assets/SwiftUI-ShareLink.png?v={{pkg.version}}"
-    title="SwiftUI ShareLink">
-
-```swift
-struct ContentView: View {
-    private let linkColor: Color = .purple
-    private let urlDescription = "Mark Volkmann's Blog"
-    private let link = URL(string: "https://mvolkmann.github.io/blog")!
-    private let linkSize: CGFloat = 20
-
-    private let imageName = "Comet"
-    private var imageMessage: String { "\(imageName), the whippet" }
-    private var image: Image { Image(imageName) }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            // Basic sharing of a URL
-            ShareLink(
-                // Supply a first argument String to keep the default icon
-                // which is "square.and.arrow.up" and
-                // follow it with text other than the default "Share...".
-                urlDescription, // optional
-                item: link,
-                message: Text(urlDescription) // optional
-            )
-            .font(.system(size: linkSize))
-            .tint(linkColor)
-
-            // Sharing of a URL with a custom icon
-            ShareLink(
-                item: link,
-                message: Text(urlDescription)
-            ) {
-                // Supply a label closure instead of a first argument String
-                // in order to change the icon which defaults to
-                // "square.and.arrow.up" and the default text.
-                Label(urlDescription, systemImage: "heart.fill")
-                    .font(.system(size: linkSize))
-                    .tint(linkColor)
-            }
-
-            // Sharing an image
-            ShareLink(
-                imageMessage,
-                item: image,
-                message: Text(imageMessage),
-                // The preview appears at the top of the share sheet.
-                preview: SharePreview(imageName, image: image)
-            )
-            .font(.system(size: linkSize))
-            .tint(linkColor)
-        }
-    }
-}
-```
-
-### Slider
-
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/slider",
-"Slider" %} view renders a horizontal track with a thumb
-that slides between minimum and maximum values
-specified by the `in` argument whose value is a `ClosedRange`.
-
-The `value` argument value is a binding that holds the current value
-as a `Float`, not an `Int`.
-
-An optional `step` argument indicates the steps in which the value changes.
-
-Text and/or icons can be displayed at the leading and trailing ends.
-
-<img alt="SwiftUI Slider" style="width: 60%"
-    src="/blog/assets/SwiftUI-Slider.png?v={{pkg.version}}"
-    title="SwiftUI Slider">
-
-```swift
-// No text or icons at ends.
-Slider(value: $rating, in: 0...10, step: 1)
-
-// Has text at ends and displays current value below.
-VStack {
-    Slider(
-        value: $rating,
-        in: 0...10,
-        step: 1,
-        label: { Text("Rating") }, // not rendered
-        // The next two attributes must be closures that return the
-        // same kind of view.  Image and Text are common choices.
-        minimumValueLabel: { Image(systemName: "hand.thumbsdown") },
-        maximumValueLabel: { Image(systemName: "hand.thumbsup") }
-    ).padding()
-    Text("rating = \(Int(rating))")
-}
-```
-
-### Stepper
-
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/stepper",
-"Stepper" %} view displays "-" and "+" buttons that can be
-tapped to decrement and increment a value.
-It takes a label to display before the buttons,
-a binding for the current value,
-an optional range the value must remain inside, and
-a closure to execute every time the `Stepper` changes the value.
-
-<img alt="SwiftUI Stepper" style="width: 60%"
-    src="/blog/assets/SwiftUI-Stepper.png?v={{pkg.version}}"
-    title="SwiftUI Stepper">
-
-```swift
-VStack {
-    Stepper(
-        "# of Dogs: \(dogCount)",
-        value: $dogCount,
-        in: 0...10
-    ) { v in
-        tooManyDogs = dogCount > 2
-    }
-
-    Text("Too Many Dogs? \(String(tooManyDogs))")
-}.padding()
-```
-
-The optional `onIncrement` and `onDecrement` arguments take a closure
-that runs when the plus and minus buttons are tapped.
-They are typically used to modify the value
-in a way other than adding or subtracting one.
-
-### Picker
-
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/picker",
-"Picker" %} view supports selecting an option from a list.
-It takes label text and a `selection` argument
-which is a binding that holds the selected value.
-
-The options are specified with child `Text` views.
-
-If these are provided using `ForEach`, the `selection` value
-comes from the values over which the `ForEach` iterates,
-not from the value being displayed by the `Text` views.
-To change these, apply the `tag` view modifier to the `Text` views,
-passing it a value.
-
-The prompt text passed to the `Picker` initializer
-is only displayed if the `Picker` is inside a `Form` or `List`.
-
-Apply the `pickerStyle` view modifier
-to change the way the options are rendered, passing it a {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/pickerstyle",
-"PickerStyle" %}.
-The label is only rendered by some styles.
-`PickerStyle` values include:
-
-- `.automatic` (default)
-
-  This selects a style based on the context in which the `Picker` is used.
-  It is typically either `.menu` or `.wheel`.
-  When the `Picker` is inside a `Form` which is inside a `NavigationView`
-  and no `pickerStyle` is specified,
-  clicking the `Picker` displays the options on a separate page.
-
-  <figure>
-    <img alt="SwiftUI Picker"
-      src="/blog/assets/SwiftUI-Picker1.png?v={{pkg.version}}"
-      title="SwiftUI Picker automatic before clicking">
-    <figcaption>automatic picker before clicking</figcaption>
-  </figure>
-  <figure>
-    <img alt="SwiftUI Picker"
-      src="/blog/assets/SwiftUI-Picker2.png?v={{pkg.version}}"
-      title="SwiftUI Picker automatic after clicking">
-    <figcaption>automatic picker new page after clicking</figcaption>
-  </figure>
-
-- `.inline`
-
-  This displays the prompt and all the options (visible simultaneously)
-  in the current sheet.
-  The selected option is indicated by a check mark.
-  This works when the `Picker` is inside a `Form`.
-  Otherwise it uses the `.wheel` style.
-
-- `.menu`
-
-  This does not display the prompt and
-  only displays the currently selected value.
-  When the current value is tapped, all the options are
-  rendered in a dropdown menu inside the current sheet.
-  There is no limit to the number of options that can appear in the menu
-  and it will scroll vertically if they do not all fit on the screen.
-
-  <figure>
-    <img alt="SwiftUI Picker"
-      src="/blog/assets/SwiftUI-Picker-menu1.png?v={{pkg.version}}"
-      title="SwiftUI Picker menu before clicking">
-    <figcaption>menu picker before clicking</figcaption>
-  </figure>
-  <figure>
-    <img alt="SwiftUI Picker"
-      src="/blog/assets/SwiftUI-Picker-menu2.png?v={{pkg.version}}"
-      title="SwiftUI Picker menu after clicking">
-    <figcaption>menu picker after clicking</figcaption>
-  </figure>
-
-- `.radioGroup` - not available in iOS
-
-- `.segmented`
-
-  This does not display the prompt,
-  and renders the options as a "Segmented Control"
-  which is a horizontal row of buttons.
-  There is no limit to the number of options,
-  but their text will be elided if it doesn't fit inside the buttons.
-
-  <figure>
-    <img alt="SwiftUI Picker segmented"
-      src="/blog/assets/SwiftUI-Picker-segmented.png?v={{pkg.version}}"
-      title="SwiftUI Picker segmented">
-    <figcaption>segmented picker</figcaption>
-  </figure>
-
-- `.wheel`
-
-  This does not display the prompt,
-  and renders all the options as a scrollable wheel.
-  It requires sufficient vertical space to render properly.
-  A height of 300 works well.
-
-  <figure>
-    <img alt="SwiftUI Picker wheel"
-      src="/blog/assets/SwiftUI-Picker-wheel.png?v={{pkg.version}}"
-      title="SwiftUI Picker wheel">
-    <figcaption>wheel picker</figcaption>
-  </figure>
-
-The background color and font used by a `Picker`
-can be customized in limited ways.
-
-To set the background color, apply the `background` view modifier
-For example, `.background(Color.yellow.opacity(0.3))`.
-The `tint` view modifier does not effect `Picker` views.
-
-To set the font and foreground color, apply the `font` and `foregroundColor`
-view modifiers to the `Text` views used to render the options.
-For example, `.font(.headline).foregroundColor(.red)`.
-This only applies to `automatic` and `wheel` pickers,
-not `menu` or `segmented` pickers.
-
-When the options are generated using `ForEach` to iterate over an array,
-the selection value will be one of the array items.
-This can be changed by applying the `tag` view modifier
-to the immediate child view of the `ForEach`.
-The type of the `tag` value must match the type of the `selection` argument.
-If these types differ, the compiler does not generate an error,
-but it will not be possible to change the selected option.
-
-```swift
-struct ContentView: View {
-    enum ShirtSize: String, CaseIterable {
-        case sm = "Small"
-        case md = "Medium"
-        case lg = "Large"
-        case xl = "Extra Large"
-    }
-
-    @State private var shirtSize: ShirtSize = .sm
-
-    var body: some View {
-        Form {
-            Picker("Shirt Size", selection: $shirtSize) {
-                ForEach(ShirtSize.allCases, id: \.self) { size in
-                    Text(size.rawValue) // no need for tag view modifier
-
-                    // The text displayed here has
-                    // no effect on the value of shirtSize!
-                    // If we use the following in place of the previous line,
-                    // we can still select each of the four shirt sizes
-                    // despited each option displaying the same text.
-                    // Text("junk")
-
-                    // If we iterate over ShirtSize.allCases.indices
-                    // instead of iterating over ShirtSize.allCases
-                    // and display the index values,
-                    // we can use the tag view modifier to associate
-                    // each option with one of the ShirtSize enum cases.
-                    // Text("\(index)").tag(ShirtSize.allCases[index])
-                }
-
-                // We can hard-code alternative names of the shirt sizes
-                // and associate them with ShirtCase cases.
-                // Text("Tiny").tag(ShirtSize.sm)
-                //  Text("In-Between").tag(ShirtSize.md)
-                // Text("Big").tag(ShirtSize.lg)
-            }
-
-            Text("selected \(shirtSize.rawValue)")
-            Text("type is \(String(describing: type(of: shirtSize)))")
-        }
-    }
-}
-```
-
-The following `Picker` example saves the index of a selected item
-rather than the item itself.
-It begins with no option being selected.
-
-```swift
-struct Person {
-    let name: String
-}
-
-struct ContentView: View {
-    @State private var selectedPersonIndex: Int = -1 // nothing selected
-
-    let people = [
-        Person(name: "Mark"),
-        Person(name: "Tami"),
-        Person(name: "Amanda"),
-        Person(name: "Jeremy")
-    ]
-
-    private var selectedPerson: Person? {
-        selectedPersonIndex == -1 ? nil : people[selectedPersonIndex]
-    }
-
-    var body: some View {
-        Form {
-            Picker("Person", selection: $selectedPersonIndex) {
-                Text("").tag(-1)
-                ForEach(people.indices, id: \.self) { index in
-                    Text(people[index].name)
-                }
-            }
-
-            Text("You selected \(selectedPerson?.name ?? "nobody").")
-        }
-    }
-}
-```
-
-### DatePicker
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/datepicker", "DatePicker" %}
-view allows selecting a date, time, or both.
-It takes the text to display as a prompt and
-a `selection` argument which is a binding that
-holds the currently selected `Date` value.
-
-The optional `displayedComponents` argument specifies
-what can be selected using a single value or an array of
-{% aTargetBlank "", "DatePickerComponent" %} values
-which include `.date` and `.hourAndMinute`.
-Note that it is not possible to request allowing
-selection of a month and day without a year.
-
-```swift
-DatePicker(
-    "Birthday",
-    selection: $birthday, // a binding
-    displayedComponents: [.date, .hourAndMinute] // array or single value
-)
-```
-
-To restrict the dates that can be selected,
-add the `in` argument with a `Range` value after the `selection` argument.
-To only allow dates in the past or now, use `...Date()`.
-To only allow dates in the future or now, use `Date()...`.
-
-To hide the label, apply the `labelsHidden` view modifier.
-
-```swift
-DatePicker("", selection: $birthday, displayedComponents: .date)
-    .labelsHidden()
-```
-
-Apply the `datePickerStyle` view modifier to choose a style.
-The options that can be passed to this include:
-
-- `.automatic` - This is the default and is the same as `.compact` in iOS.
-
-- `.compact` - This renders date in a button that can be tapped
-  to render the `.graphical` controls (see below) for changing the date.
-
-  <figure>
-    <img alt="SwiftUI DatePicker compact style"
-      src="/blog/assets/SwiftUI-DatePicker-compact1.png?v={{pkg.version}}"
-      title="SwiftUI DatePicker compact style">
-    <figcaption>DatePicker compact style</figcaption>
-  </figure>
-  <figure>
-    <img alt="SwiftUI DatePicker compact style after tapping"
-      src="/blog/assets/SwiftUI-DatePicker-compact2.png?v={{pkg.version}}"
-      title="SwiftUI DatePicker compact style after tapping">
-    <figcaption>DatePicker compact style after tapping</figcaption>
-  </figure>
-  <figure>
-    <img alt="SwiftUI DatePicker compact style after tapping month-year"
-      src="/blog/assets/SwiftUI-DatePicker-compact3.png?v={{pkg.version}}"
-      title="SwiftUI DatePicker compact style after tapping month-year">
-    <figcaption>DatePicker compact style after tapping </figcaption>
-  </figure>
-
-- `.field` - This not available in iOS.
-
-- `.graphical` - The renders a calendar view that contains controls for
-  picking a month and year, going to the previous or next month,
-  and selecting a day of the month.
-
-  <figure>
-    <img alt="SwiftUI DatePicker graphical style"
-      src="/blog/assets/SwiftUI-DatePicker-graphical.png?v={{pkg.version}}"
-      title="SwiftUI DatePicker graphical style">
-    <figcaption>DatePicker graphical style</figcaption>
-  </figure>
-
-- `.stepperField` - This not available in iOS.
-
-- `.wheel` - This provides separate wheel pickers for month, day, and year.
-
-  <figure>
-    <img alt="SwiftUI DatePicker wheel style"
-      src="/blog/assets/SwiftUI-DatePicker-wheel.png?v={{pkg.version}}"
-      title="SwiftUI DatePicker wheel style">
-    <figcaption>DatePicker wheel style</figcaption>
-  </figure>
-
-### ColorPicker
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/colorpicker",
-"ColorPicker" %} view renders a color well
-for displaying a currently selected color
-and changing the color using the system color picker.
-It takes a label and a `selection` argument
-that is a binding to the currently selected `Color`.
-
-<figure>
-  <img alt="SwiftUI ColorPicker before tap"
-    src="/blog/assets/SwiftUI-ColorPicker1.png?v={{pkg.version}}"
-    title="SwiftUI ColorPicker before tap">
-  <figcaption>ColorPicker before tap</figcaption>
-</figure>
-<figure>
-  <img alt="SwiftUI ColorPicker after tap"
-    src="/blog/assets/SwiftUI-ColorPicker2.png?v={{pkg.version}}"
-    title="SwiftUI ColorPicker after tap">
-  <figcaption>ColorPicker after tap</figcaption>
-</figure>
-
-```swift
-ColorPicker(
-    "Favorite Color",
-    selection: $favoriteColor // a binding
-)
-```
-
-### Label
-
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/label",
-"Label" %} view renders an icon and text where the icon appears first.
-`Label` supports many initializers but the most commonly used
-take the text as a `String` followed by the icon
-as either a `systemName` `String` (for an SF Symbol)
-or a `image` `String` (for an image asset name).
-
-For example:
-
-```swift
-Label("Rain", systemImage: "cloud.rain")
-```
-
-Applying the `font` view modifier scales both the text and the icon.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/labelstyle", "labelStyle" %}
-view modifier changes which parts are rendered.
-The default argument value is `.titleAndIcon` which renders both parts.
-To render only the text, pass `.titleOnly`.
-To render only the icon, pass `.iconOnly`.
-
-### LabeledContent
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/labeledcontent/",
-"LabeledContent" %} view displays a label and a value.
-It is most often used inside a `Form`.
-See examples of using this in the [Form](#form) section.
-
-### ProgressView
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/progressview",
-"ProgressView" %} view displays a progress indicator.
-It takes a label,
-an optional `value` argument that is a binding to the current value,
-and an optional `total` argument that is the maximum value (default is 0.0).
-If the `value` argument is supplied then the determinate style
-that displays a thin progress bar is used.
-If the `value` argument is omitted then the indeterminate style
-that uses the standard Apple spinner is used.
-
-```swift
-struct ContentView: View {
-    @State private var progress = 0.0
-
-    func startTimer() {
-        // Run every 3 hundredths of a second.
-        // When "repeats" is false, this is like setTimeout in JavaScript.
-        // When "repeats" is true, this is like setInterval in JavaScript.
-        Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { timer in
-            progress += 0.01
-            if (progress >= 1) {
-                timer.invalidate() // stops Timer
-                progress = 0
-            }
-        }
-    }
-
-    var body: some View {
-        VStack {
-            if progress > 0 {
-                ProgressView() // indeterminate
-                ProgressView(value: progress).padding() // determinate
-            }
-        }
-        .onAppear { startTimer() }
-    }
-}
-```
-
-To change the color of a `ProgressView`
-apply the `tint` view modifier passing it a `Color`.
-
-To change the size of an indeterminate `ProgressView`
-apply the `scaleEffect` modifier. For example:
-
-```swift
-ProgressView()
-    .scaleEffect(x: 3, y: 3, anchor: .center)
-```
-
-Sometimes it is desirable to delay rendering a `ProgressView`
-by a short amount of time. For example, when making a network call it is best
-to only display a progress indicator if the call does not complete quickly.
-One way to achieve this is with `DispatchQueue.main.asyncAfter`.
-This can be wrapped in a custom view modifier to simplify the code.
-See {% aTargetBlank
-"https://www.photoroom.com/tech/improving-loading-experience-in-swiftui/",
-"Improving the Loading Experience in SwiftUI" %}.
-
-### Gauge
-
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/gauge",
-"Gauge" %} view shows a current value in relation to minimum and maximum values.
-One example is a car fuel gauge.
-This is currently only supported in watchOS.
-
-We can build a similar view to use on other platforms.
-For example:
-
-```swift
-struct MyGauge: View {
-    var value: Double
-    var min = 0.0
-    var max = 100.0
-    let fontSize: CGFloat = 50
-    var strokeColor: Color = .blue
-    var strokeWidth = 20.0
-    var textColor: Color = .black
-
-    var body: some View {
-        ZStack {
-            let percent = (value - min) / (max - min)
-            Circle()
-                .trim(from: 0, to: percent)
-                .stroke(
-                    strokeColor,
-                    style: StrokeStyle(
-                        lineWidth: strokeWidth,
-                        lineCap: .round
-                    )
-                )
-                .rotationEffect(.degrees(-90))
-
-            Text(String(format: "%.0f", value))
-                .font(.system(size: fontSize, weight: .bold))
-                .foregroundColor(textColor)
-        }
-    }
-}
-
-struct ContentView: View {
-    @State private var value = 25.0
-
-    var body: some View {
-        VStack(spacing: 20) {
-            MyGauge(
-                value: value,
-                strokeColor: .red,
-                strokeWidth: 15,
-                textColor: .blue
-            )
-            .frame(width: 150, height: 150)
-
-            HStack {
-                Button("Decrease") {
-                    withAnimation { value = max(value - 10, 0) }
-                }
-                Button("Increase") {
-                    withAnimation { value = min(value + 10, 100) }
-                }
-            }
-            .buttonStyle(.bordered)
-
-            Slider(value: $value, in: 0 ... 100, step: 1) {
-                Text("Value")
-            }
-        }
-        .padding()
-    }
-}
-```
-
-### EmptyView
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/emptyview", "EmptyView" %}
-view renders nothing. It is useful in cases where
-a view needs to be returned, but there is nothing to display.
-
-### EquatableView
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/equatableview",
-"EquatableView" %} view ...
-TODO: What is this?
-
-### AnyView
-
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/anyview",
-"AnyView" %} view ...
-TODO: What is this?
 
 ### TupleView
 
