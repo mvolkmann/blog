@@ -522,7 +522,7 @@ Other options in the File ... Packages menu include:
   to be the version specified in the `Package.resolved` file.
   It is useful when another team member has updated that file.
 
-## Adding Assets to a Package
+## Adding Assets
 
 To add assets such as color sets and image sets to a package:
 
@@ -541,10 +541,20 @@ To add assets such as color sets and image sets to a package:
 - Add an argument like the following to the `.target` call for the target:
 
   ```swift
-  resources: [.process("{TargetName}/Resources/Media.xcassets")]
+  resources: [
+      .process("{TargetName}/Resources/Media.xcassets")
+  ]
   ```
 
-  TODO: Describe how `.copy` differs from `.process`.
+  The `process` method optimizes resources when possible.
+  If it is passed a directory name, it process flattens the folder structure
+  so all files in and below the directory appear to be in its parent directory.
+
+  The `copy` method can be used in place of the `process` method.
+  It does not optimize the resource at the path passed to it
+  and copies the resource as-is in the bundle.
+  If it is passed a directory name,
+  it retains the file structure of that directory.
 
 - Build the package and verify that there are no errors.
 - Commit and push the changes to Git.
@@ -759,6 +769,23 @@ passed to the first target in `package.swift` as follows:
                 .copy("demo.csv") // a text file
             ]
 ```
+
+Alternatively, place all the resource files in a subdirectory of the package
+named `Resources` and make the following change to the `resources` array.
+With this change, additional resource files can be added
+in the `Resources` directory and it will not be necessary
+to add a reference to each one in `package.swift`.
+
+```swift
+            resources: [
+                .process("Assets.xcassets"),
+                .process("Resources")
+            ]
+
+```
+
+See the discussion about the differences between the
+`process` and `copy` methods in the [Adding Assets](#adding-assets) section.
 
 To read the resource text file from code in the package:
 
