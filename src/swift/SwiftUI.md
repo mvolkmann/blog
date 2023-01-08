@@ -2306,6 +2306,17 @@ struct ContentView: View {
 }
 ```
 
+`Form` views have default background color.
+Changing this requires two view modifiers.
+
+```swift
+Form {
+    ...
+}
+.scrollContentBackground(.hidden) // hides default background
+.background(.red) // adds custom background
+```
+
 To run code when the user completes entering text in any `TextField`,
 `SecureField`, or `TextEditor` within the `Form`,
 apply the `onSubmit` view modifier passing it a closure.
@@ -2435,7 +2446,7 @@ List { ... }
 .listRowSeparator(.hidden)
 ```
 
-These can be grouped using `Section` views.
+Child views in a `List` can be grouped using `Section` views.
 For example:
 
 <img alt="SwiftUI List with Sections" style="width: 40%"
@@ -2491,6 +2502,17 @@ List {
     Text("Blueberry")
         .listRowBackground(Color.blue)
 }
+```
+
+`List` views have default background color.
+Changing this requires two view modifiers.
+
+```swift
+List {
+    ...
+}
+.scrollContentBackground(.hidden) // hides default background
+.background(.red) // adds custom background
 ```
 
 To remove horizontal padding that is added to list elements by default,
@@ -4920,6 +4942,15 @@ TextEditor(text: $reasonForVisit)
         RoundedRectangle(cornerRadius: 5)
             .stroke(Color(UIColor.lightGray))
     )
+```
+
+`TextEditor` views have default background color.
+Changing this requires two view modifiers.
+
+```swift
+TextEditor(...)
+    .scrollContentBackground(.hidden) // hides default background
+    .background(.red) // adds custom background
 ```
 
 The `TextEditor` view supports find and replace, but the `TextField` view does not.
