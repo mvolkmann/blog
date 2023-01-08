@@ -2856,6 +2856,9 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                // This is the older approach that provides more control
+                // over what happens when a row is deleted or moved.
+                /*
                 List {
                     // A nested ForEach is required in order to
                     // enable swipe to delete/move.
@@ -2868,17 +2871,31 @@ struct ContentView: View {
                     .onMove(perform: moveDog)
                 }
                 .listStyle(.grouped)
-                .toolbar {
-                    EditButton()
+                .toolbar { EditButton() }
+                */
+
+                // This is a newer approach that provides less control
+                // over what happens when a row is deleted or moved,
+                // but requires less code.
+                // `editActions` can be set to:
+                // `.delete` to allow deleting rows, but not moving them.
+                // `.move` to allow moving rows, but not deleting them.
+                // `.all` to allow users to delete and move rows.
+                List($dogs, id: \.name, editActions: .all) { $dog in
+                    DogRow(dog: dog)
                 }
+                .listStyle(.grouped)
+                .toolbar { EditButton() }
             }
         }
     }
 
+    // This function is only used by the older approach.
     private func deleteDog(at offsets: IndexSet) {
         dogs.remove(atOffsets: offsets)
     }
 
+    // This function is only used by the older approach.
     private func moveDog(source: IndexSet, destination: Int) {
         dogs.move(fromOffsets: source, toOffset: destination)
     }
