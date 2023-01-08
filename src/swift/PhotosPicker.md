@@ -39,6 +39,10 @@ Tap the icon in the upper-right corner to view the photo library.
 <img alt="PhotosPicker Single" style="border: 1px solid gray; width: 50%"
   src="/blog/assets/swiftui-photospicker-single.png?v={{pkg.version}}">
 
+See the code for {% aTargetBlank
+"https://github.com/mvolkmann/PhotosPickerDemo/blob/main/PhotosPickerDemo/Views/SingleImagePicker.swift",
+"SingleImagePicker" %}.
+
 ### Multiple Images tab
 
 The second tab "Multiple Images" allows the user
@@ -47,3 +51,7 @@ Tap the icon in the upper-right corner to view the photo library.
 
 <img alt="PhotosPicker Multiple" style="border: 1px solid gray; width: 50%"
   src="/blog/assets/swiftui-photospicker-multiple.png?v={{pkg.version}}">
+
+See the code for {% aTargetBlank
+"https://github.com/mvolkmann/PhotosPickerDemo/blob/main/PhotosPickerDemo/Views/MultipleImagePicker.swift",
+"MultipleImagePicker" %}.
