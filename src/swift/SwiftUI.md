@@ -1991,6 +1991,177 @@ struct ContentView: View {
 }
 ```
 
+### HSplitView
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/hsplitview", "HSplitView" %}
+view is a layout container that organizes its children horizontally
+and allows users to resize the children by dragging dividers between them.
+It is only supported in macOS.
+
+### VSplitView
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/vsplitview", "VSplitView" %}
+view is a layout container that organizes its children vertically
+and allows users to resize the children by dragging dividers between them.
+It is only supported in macOS.
+
+### ControlGroup
+
+A {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/controlgroup",
+"ControlGroup" %} is a container for related controls.
+It works best when the children are Button views.
+
+A `ControlGroup` is particularly useful for groups of buttons in toolbars.
+The buttons are displayed horizontally if there is sufficient space.
+Otherwise a label is displayed instead and tapping the label
+displays a popup menu containing a vertical stack of the buttons.
+
+To prevent use of a popup menu and force the child views
+to be displayed horizontally, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/controlgroupstyle(_:)",
+"controlGroupStyle" %} view modifier passing it the value `.navigation`.
+This seems ill-advised because it will do so
+even if the child views do not fit in the space available.
+
+The way in which a `ControlGroup` is rendered depends on the platform.
+In iOS it looks identical to a segmented Picker,
+but it doesn't change to indicate which child view was tapped last.
+
+The following code includes a `ControlGroup` in the main view and in a toolbar.
+It also includes a segmented `Picker` to show how it differs.
+
+<img alt="SwiftUI ControlGroup toolbar closed" style="width: 20rem"
+  src="/blog/assets/SwiftUI-ControlGroup1.png?v={{pkg.version}}"
+  title="SwiftUI ControlGroup toolbar closed">
+<br />
+<br />
+<img alt="SwiftUI ControlGroup toolbar open" style="width: 20rem"
+  src="/blog/assets/SwiftUI-ControlGroup2.png?v={{pkg.version}}"
+  title="SwiftUI ControlGroup toolbar open">
+
+```swift
+struct ContentView: View {
+    // @State private var hungry = false
+    @State private var selectedIndex = -1
+
+    let sports = ["Baseball", "Basketball", "Football", "Golf", "Hockey"]
+
+    var body: some View {
+        NavigationStack {
+            VStack {
+                Picker("", selection: $selectedIndex) {
+                    ForEach(sports.indices, id: \.self) { index in
+                        Text(sports[index]).tag(index)
+                    }
+                }
+                .pickerStyle(.segmented)
+
+                // This renders poorly if the child views do not fit
+                // when laid out horizontally in the space available.
+                ControlGroup {
+                    ForEach(sports.indices, id: \.self) { index in
+                        Button(sports[index]) {
+                            selectedIndex = index
+                        }
+                    }
+                    // This renders, but tapping it does nothing.
+                    // Toggle("Hungry?", isOn: $hungry)
+                }
+
+                if selectedIndex != -1 {
+                    Text("You selected \(sports[selectedIndex]).")
+                }
+
+                Spacer()
+            }
+            .padding()
+            .toolbar {
+                ControlGroup {
+                    ForEach(sports.indices, id: \.self) { index in
+                        Button(sports[index]) {
+                            selectedIndex = index
+                        }
+                    }
+                } label: {
+                    // The optional label argument is only used
+                    // when a ControlGroup appears in a toolbar.
+                    Label("Sport", systemImage: "sportscourt")
+                }
+            }
+        }
+    }
+}
+```
+
+### DisclosureGroup
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/disclosuregroup",
+"DisclosureGroup" %} view hides and shows its contents
+based on whether it is in an expanded state.
+By default it is not expanded.
+It can be expanded by tapping or by associating
+a `Bool` binding that is programmatically set to `true`.
+
+<img alt="SwiftUI DisclosureGroup" style="width: 40%"
+  src="/blog/assets/SwiftUI-DisclosureGroup.png?v={{pkg.version}}"
+  title="SwiftUI DisclosureGroup">
+
+```swift
+@State private var cyclist = false
+@State private var firstName = ""
+@State private var lastName = ""
+@State private var personalExpanded = true
+@State private var runner = false
+
+var body: some View {
+    Form {
+        DisclosureGroup("Personal", isExpanded: $personalExpanded) {
+            TextField("First Name", text: $firstName)
+            TextField("Last Name", text: $lastName)
+        }
+
+        DisclosureGroup("Preferences") {
+            Toggle("Runner", isOn: $runner)
+            Toggle("Cyclist", isOn: $cyclist)
+        }
+    }
+}
+```
+
+### ForEach
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/foreach",
+"ForEach" %} struct iterates of the elements of a `RandomAccessCollection`
+(includes `Array` and `Range` types)
+and renders the view specified by a provided `ViewBuilder`.
+
+The elements in the `RandomAccessCollection` must either conform to
+the `Identifiable` protocol (which requires them to have an `id` property)
+OR the `id:` argument must be supplied.
+If the elements are not `Identifiable`
+and no `id:` argument is supplied, the view
+may not update property when the collection changes.
+
+If the elements are not `Identifiable` and you wish to use
+the elements values as their id, specify `id: \.self`.
+
+Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`)
+unless the `id` argument key path `\.self` is specified.
+
+The value of the `id` argument is a key path that specifies
+how to find a unique value in the element.
+For example, the `String` type does not implement `Identifiable`.
+To iterate over an array of `String` values:
+
+```swift
+// \.self is a key path that refers to the entire object.
+ForEach(stringArray, id: \.self) { ... }
+```
+
 ### Form
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/form",
@@ -2175,66 +2346,6 @@ Group {
 }.foregroundColor(.blue)
 ```
 
-### Section
-
-{% aTargetBlank "https://developer.apple.com/documentation/swiftui/section",
-"Section" %} views groups the contents of a `Form`, `List`, or `Picker`
-into sections with optional headers and footers.
-
-When `Section` views are used inside a `List` that has the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/liststyle(_:)",
-"listStyle" %} view modifier applied using `.listStyle(.sidebar)`,
-disclosure buttons are provided on the right side of each header
-to allow users to collapse them.
-
-`Section` titles are made all uppercase by default.
-To prevent this, apply the `textCase` view modifier passing it `nil`.
-
-The following code displays a list of sections that
-each have header and footer, and are collapsible.
-
-<img alt="SwiftUI Section" style="width: 40%"
-    src="/blog/assets/SwiftUI-Section.png?v={{pkg.version}}"
-    title="SwiftUI Section">
-
-```swift
-struct ContentView: View {
-    let footerText = "* curse words excluded"
-    let wordDict: Dictionary = [
-        "A": ["Apple", "Alligator"],
-        "B": ["Banana", "Bear"],
-        "C": ["Cherry", "Camel"],
-        "D": ["Date", "Dog"],
-        "E": ["Eggplant", "Elephant"]
-    ]
-
-    var body: some View {
-        List {
-            ForEach(wordDict.keys.sorted(), id: \.self) { letter in
-                Section(
-                    header: Text("Words that start with \(letter)"),
-                    footer: Text(footerText)
-                ) {
-                    ForEach(wordDict[letter] ?? [], id: \.self) { word in
-                        Text(word)
-                    }
-                }
-                // This increases header font size, makes it bold,
-                // and does not change the case.  Without this
-                // all characters are transformed to be uppercase.
-                .headerProminence(.increased)
-                .listRowSeparatorTint(.red)
-            }
-        }
-        // This includes disclosure buttons in each section header.
-        .listStyle(.sidebar)
-    }
-}
-```
-
-See more examples of using the `Section` view
-in the [Form](#form) section above and in the [List](#list) section below.
-
 ### GroupBox
 
 The {% aTargetBlank
@@ -2295,171 +2406,6 @@ struct ContentView: View {
     }
 }
 ```
-
-### ControlGroup
-
-A {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/controlgroup",
-"ControlGroup" %} is a container for related controls.
-It works best when the children are Button views.
-
-A `ControlGroup` is particularly useful for groups of buttons in toolbars.
-The buttons are displayed horizontally if there is sufficient space.
-Otherwise a label is displayed instead and tapping the label
-displays a popup menu containing a vertical stack of the buttons.
-
-To prevent use of a popup menu and force the child views
-to be displayed horizontally, apply the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/controlgroupstyle(_:)",
-"controlGroupStyle" %} view modifier passing it the value `.navigation`.
-This seems ill-advised because it will do so
-even if the child views do not fit in the space available.
-
-The way in which a `ControlGroup` is rendered depends on the platform.
-In iOS it looks identical to a segmented Picker,
-but it doesn't change to indicate which child view was tapped last.
-
-The following code includes a `ControlGroup` in the main view and in a toolbar.
-It also includes a segmented `Picker` to show how it differs.
-
-<img alt="SwiftUI ControlGroup toolbar closed" style="width: 20rem"
-  src="/blog/assets/SwiftUI-ControlGroup1.png?v={{pkg.version}}"
-  title="SwiftUI ControlGroup toolbar closed">
-<br />
-<br />
-<img alt="SwiftUI ControlGroup toolbar open" style="width: 20rem"
-  src="/blog/assets/SwiftUI-ControlGroup2.png?v={{pkg.version}}"
-  title="SwiftUI ControlGroup toolbar open">
-
-```swift
-struct ContentView: View {
-    // @State private var hungry = false
-    @State private var selectedIndex = -1
-
-    let sports = ["Baseball", "Basketball", "Football", "Golf", "Hockey"]
-
-    var body: some View {
-        NavigationStack {
-            VStack {
-                Picker("", selection: $selectedIndex) {
-                    ForEach(sports.indices, id: \.self) { index in
-                        Text(sports[index]).tag(index)
-                    }
-                }
-                .pickerStyle(.segmented)
-
-                // This renders poorly if the child views do not fit
-                // when laid out horizontally in the space available.
-                ControlGroup {
-                    ForEach(sports.indices, id: \.self) { index in
-                        Button(sports[index]) {
-                            selectedIndex = index
-                        }
-                    }
-                    // This renders, but tapping it does nothing.
-                    // Toggle("Hungry?", isOn: $hungry)
-                }
-
-                if selectedIndex != -1 {
-                    Text("You selected \(sports[selectedIndex]).")
-                }
-
-                Spacer()
-            }
-            .padding()
-            .toolbar {
-                ControlGroup {
-                    ForEach(sports.indices, id: \.self) { index in
-                        Button(sports[index]) {
-                            selectedIndex = index
-                        }
-                    }
-                } label: {
-                    // The optional label argument is only used
-                    // when a ControlGroup appears in a toolbar.
-                    Label("Sport", systemImage: "sportscourt")
-                }
-            }
-        }
-    }
-}
-```
-
-### ScrollView
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/scrollview",
-"ScrollView" %} view creates a scrollable view where
-scrolling reveals additional child views when they do not all fit.
-
-Scrolling is vertical by default, but can be changed to horizontal
-by passing `.horizontal` to the initializer.
-To enable scrolling in both directions,
-pass the array `[.horizontal, .vertical]`.
-
-A `ScrollView` occupies all the space offered to it.
-
-To hide the scroll bars (indicators),
-pass the `showIndicators` argument with a value of `false` to the initializer.
-
-Another way to gain the ability to scroll is to use a `List` view.
-
-See examples of using `ScrollView` in the
-descriptions of `LazyHStack` and `LazyVStack`.
-
-### ScrollViewReader
-
-To scroll programmatically, use {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/scrollviewreader",
-"ScrollViewReader" %} and the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/scrollviewproxy/scrollto(_:anchor:)",
-"scrollTo" %} method as shown below.
-Note the use of the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/withanimation(_:_:)",
-"withAnimation" %} function to add animation to the programmatic scrolling.
-
-<img alt="SwiftUI ScrollViewReader" style="width: 40%"
-    src="/blog/assets/SwiftUI-ScrollViewReader.png?v={{pkg.version}}"
-    title="SwiftUI ScrollViewReader">
-
-```swift
-struct ContentView: View {
-    @Namespace var topId
-    @Namespace var bottomId
-
-    var body: some View {
-        ScrollView {
-            ScrollViewReader { proxy in
-                Button("Scroll to Bottom") {
-                    withAnimation {
-                        proxy.scrollTo(bottomId)
-                        // The optional "anchor" argument controls alignment.
-                    }
-                }
-                .id(topId)
-
-                VStack(spacing: 0) {
-                    ForEach(1 ..< 101) { i in
-                        Text(String(i))
-                    }
-                }
-
-                Button("Scroll to Top") {
-                    withAnimation {
-                        proxy.scrollTo(topId)
-                    }
-                }
-                .id(bottomId)
-            }
-        }
-    }
-}
-```
-
-### ScrollViewProxy
-
-An instance of this type is passed to the trailing closure
-of `ScrollViewReader`. See the example above.
 
 ### List
 
@@ -2994,34 +2940,173 @@ struct ContentView: View {
 }
 ```
 
-### ForEach
+### NavigationLink
 
-The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/foreach",
-"ForEach" %} struct iterates of the elements of a `RandomAccessCollection`
-(includes `Array` and `Range` types)
-and renders the view specified by a provided `ViewBuilder`.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/navigationlink",
+"NavigationLink" %} view is used inside a `NavigationView`.
+See the [Navigation](#navigation) section.
 
-The elements in the `RandomAccessCollection` must either conform to
-the `Identifiable` protocol (which requires them to have an `id` property)
-OR the `id:` argument must be supplied.
-If the elements are not `Identifiable`
-and no `id:` argument is supplied, the view
-may not update property when the collection changes.
+This is deprecated in iOS 16. See the new approach at
+{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
 
-If the elements are not `Identifiable` and you wish to use
-the elements values as their id, specify `id: \.self`.
+### NavigationView
 
-Only constant ranges are allowed (ex. `0..<5`, but not `begin..<end`)
-unless the `id` argument key path `\.self` is specified.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/navigationview",
+"NavigationView" %} view marks an area where
+a stack of views will be rendered one at a time.
+It contains `NavigationLink` views that are similar to HTML anchor elements.
+Tapping them causes the associated view
+to be rendered inside the `NavigationView`.
+See the [Navigation](#navigation) section.
 
-The value of the `id` argument is a key path that specifies
-how to find a unique value in the element.
-For example, the `String` type does not implement `Identifiable`.
-To iterate over an array of `String` values:
+This is deprecated in iOS 16. See the new approach at
+{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
+
+### OutlineGroup
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/outlinegroup",
+"OutlineGroup" %} view displays a tree of data with disclosure angle brackets.
+See my {% aTargetBlank
+"https://github.com/mvolkmann/SwiftUI-OutlineGroup/blob/main/SwiftUI-OutlineGroup/ContentView.swift",
+"SwiftUI-OutlineGroup" %} project and the questions in it.
+
+### Section
+
+{% aTargetBlank "https://developer.apple.com/documentation/swiftui/section",
+"Section" %} views groups the contents of a `Form`, `List`, or `Picker`
+into sections with optional headers and footers.
+
+When `Section` views are used inside a `List` that has the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/liststyle(_:)",
+"listStyle" %} view modifier applied using `.listStyle(.sidebar)`,
+disclosure buttons are provided on the right side of each header
+to allow users to collapse them.
+
+`Section` titles are made all uppercase by default.
+To prevent this, apply the `textCase` view modifier passing it `nil`.
+
+The following code displays a list of sections that
+each have header and footer, and are collapsible.
+
+<img alt="SwiftUI Section" style="width: 40%"
+    src="/blog/assets/SwiftUI-Section.png?v={{pkg.version}}"
+    title="SwiftUI Section">
 
 ```swift
-// \.self is a key path that refers to the entire object.
-ForEach(stringArray, id: \.self) { ... }
+struct ContentView: View {
+    let footerText = "* curse words excluded"
+    let wordDict: Dictionary = [
+        "A": ["Apple", "Alligator"],
+        "B": ["Banana", "Bear"],
+        "C": ["Cherry", "Camel"],
+        "D": ["Date", "Dog"],
+        "E": ["Eggplant", "Elephant"]
+    ]
+
+    var body: some View {
+        List {
+            ForEach(wordDict.keys.sorted(), id: \.self) { letter in
+                Section(
+                    header: Text("Words that start with \(letter)"),
+                    footer: Text(footerText)
+                ) {
+                    ForEach(wordDict[letter] ?? [], id: \.self) { word in
+                        Text(word)
+                    }
+                }
+                // This increases header font size, makes it bold,
+                // and does not change the case.  Without this
+                // all characters are transformed to be uppercase.
+                .headerProminence(.increased)
+                .listRowSeparatorTint(.red)
+            }
+        }
+        // This includes disclosure buttons in each section header.
+        .listStyle(.sidebar)
+    }
+}
+```
+
+See more examples of using the `Section` view
+in the [Form](#form) section above and in the [List](#list) section below.
+
+### ScrollView
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scrollview",
+"ScrollView" %} view creates a scrollable view where
+scrolling reveals additional child views when they do not all fit.
+
+Scrolling is vertical by default, but can be changed to horizontal
+by passing `.horizontal` to the initializer.
+To enable scrolling in both directions,
+pass the array `[.horizontal, .vertical]`.
+
+A `ScrollView` occupies all the space offered to it.
+
+To hide the scroll bars (indicators),
+pass the `showIndicators` argument with a value of `false` to the initializer.
+
+Another way to gain the ability to scroll is to use a `List` view.
+
+See examples of using `ScrollView` in the
+descriptions of `LazyHStack` and `LazyVStack`.
+
+### ScrollViewProxy
+
+An instance of this type is passed to the trailing closure
+of `ScrollViewReader`. See the example below.
+
+### ScrollViewReader
+
+To scroll programmatically, use {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scrollviewreader",
+"ScrollViewReader" %} and the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scrollviewproxy/scrollto(_:anchor:)",
+"scrollTo" %} method as shown below.
+Note the use of the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/withanimation(_:_:)",
+"withAnimation" %} function to add animation to the programmatic scrolling.
+
+<img alt="SwiftUI ScrollViewReader" style="width: 40%"
+    src="/blog/assets/SwiftUI-ScrollViewReader.png?v={{pkg.version}}"
+    title="SwiftUI ScrollViewReader">
+
+```swift
+struct ContentView: View {
+    @Namespace var topId
+    @Namespace var bottomId
+
+    var body: some View {
+        ScrollView {
+            ScrollViewReader { proxy in
+                Button("Scroll to Bottom") {
+                    withAnimation {
+                        proxy.scrollTo(bottomId)
+                        // The optional "anchor" argument controls alignment.
+                    }
+                }
+                .id(topId)
+
+                VStack(spacing: 0) {
+                    ForEach(1 ..< 101) { i in
+                        Text(String(i))
+                    }
+                }
+
+                Button("Scroll to Top") {
+                    withAnimation {
+                        proxy.scrollTo(topId)
+                    }
+                }
+                .id(bottomId)
+            }
+        }
+    }
+}
 ```
 
 ### Table
@@ -3066,75 +3151,6 @@ struct ContentView: View {
         // Why does the first click on a table heading do nothing?
         .onChange(of: sortOrder) { dogs.sort(using: $0) }
         Text("\(selectedDogs.count) dogs selected")
-    }
-}
-```
-
-### NavigationView
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/navigationview",
-"NavigationView" %} view marks an area where
-a stack of views will be rendered one at a time.
-It contains `NavigationLink` views that are similar to HTML anchor elements.
-Tapping them causes the associated view
-to be rendered inside the `NavigationView`.
-See the "Navigation" section later.
-
-This is deprecated in iOS 16. See the new approach at
-{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
-
-### NavigationLink
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/navigationlink",
-"NavigationLink" %} view is used inside a `NavigationView`.
-See the "Navigation" section later.
-
-This is deprecated in iOS 16. See the new approach at
-{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
-
-### OutlineGroup
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/outlinegroup",
-"OutlineGroup" %} view displays a tree of data with disclosure angle brackets.
-See my {% aTargetBlank
-"https://github.com/mvolkmann/SwiftUI-OutlineGroup/blob/main/SwiftUI-OutlineGroup/ContentView.swift",
-"SwiftUI-OutlineGroup" %} project and the questions in it.
-
-### DisclosureGroup
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/disclosuregroup",
-"DisclosureGroup" %} view hides and shows its contents
-based on whether it is in an expanded state.
-By default it is not expanded.
-It can be expanded by tapping or by associating
-a `Bool` binding that is programmatically set to `true`.
-
-<img alt="SwiftUI DisclosureGroup" style="width: 40%"
-  src="/blog/assets/SwiftUI-DisclosureGroup.png?v={{pkg.version}}"
-  title="SwiftUI DisclosureGroup">
-
-```swift
-@State private var cyclist = false
-@State private var firstName = ""
-@State private var lastName = ""
-@State private var personalExpanded = true
-@State private var runner = false
-
-var body: some View {
-    Form {
-        DisclosureGroup("Personal", isExpanded: $personalExpanded) {
-            TextField("First Name", text: $firstName)
-            TextField("Last Name", text: $lastName)
-        }
-
-        DisclosureGroup("Preferences") {
-            Toggle("Runner", isOn: $runner)
-            Toggle("Cyclist", isOn: $cyclist)
-        }
     }
 }
 ```
@@ -3287,22 +3303,6 @@ struct ContentView: View {
 Specific tab bar destinations can hide the tab bar by applying
 the view modifier `.toolbar(.hidden, for: .tabBar)` view modifier
 to the destination view.
-
-### HSplitView
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/hsplitview", "HSplitView" %}
-view is a layout container that organizes its children horizontally
-and allows users to resize the children by dragging dividers between them.
-It is only supported in macOS.
-
-### VSplitView
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/vsplitview", "VSplitView" %}
-view is a layout container that organizes its children vertically
-and allows users to resize the children by dragging dividers between them.
-It is only supported in macOS.
 
 ### TimelineView
 
