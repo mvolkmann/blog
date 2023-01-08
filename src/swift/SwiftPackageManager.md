@@ -842,6 +842,8 @@ The file in the `en.lproj` directory contains "Hello".
 The file in the `es.lproj` directory contains "Hola".
 The file in the `fr.lproj` directory contains "Bonjour".
 
+The `.lproj` directories cannot contain subdirectories.
+
 The `package.swift` manifest file is required to
 specify `defaultLocalization` when there are localized resources.
 For example, `defaultLocalization: "en",`.
