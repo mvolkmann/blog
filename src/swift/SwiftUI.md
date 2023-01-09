@@ -8187,11 +8187,13 @@ This is implemented by using an `if` or `switch` statement inside a parent view.
 
 By default an `opacity` transition (fade) is used.
 This can be changed by applying the `transition` view modifier
-which is passed the kind of transition to perform.
-Transitions are defined as methods on the `AnyTransition` struct.
+which is passed the kind of {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/anytransition",
+"AnyTransition" %} to perform.
 
-Typically the provided `opacity`, `scale`, and `slide` transitions are used.
-The `identity` transition is used to specify that no transition should occur.
+Transitions are defined as static properties on the `AnyTransition` struct.
+These include `move`, `opacity`, `scale`, and `slide`.
+The `identity` constant is used to specify that no transition should occur.
 Custom transitions can also be implemented.
 
 By default the transition is reversed when the view is removed.
@@ -8261,6 +8263,17 @@ struct ContentView: View {
         }
     }
 }
+```
+
+Transitions can be combined. For example, we can create a variable
+that holds a description of a combined transition as follows
+and pass it to the `transition` view modifier.
+
+```swift
+    private let transition: AnyTransition =
+        .move(edge: .bottom)
+        .combined(with: .scale)
+        .combined(with: .opacity)
 ```
 
 ### Binding Change Animations
