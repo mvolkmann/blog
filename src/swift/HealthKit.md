@@ -545,7 +545,7 @@ If the query is for a sequence of data, an empty Array is returned.
     "A query to access the location data stored in a workout route."
 
 - {% aTargetBlank
-  "https://developer.apple.com/documentation/healthkit/hkquerydescriptor?changes=_5",
+  "https://developer.apple.com/documentation/healthkit/hkquerydescriptor",
   "HKQueryDescriptor" %}
 
   "A descriptor that specifies a set of samples

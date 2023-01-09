@@ -4332,7 +4332,7 @@ The icon and label displayed by a `ShareLink` can be customized.
 
 The data to share, referred to as the "item",
 must conform to the {% aTargetBlank
-"https://developer.apple.com/documentation/CoreTransferable/Transferable?changes=_3",
+"https://developer.apple.com/documentation/CoreTransferable/Transferable",
 "Transferable" %} protocol.
 The built-in types `AttributedString`, `Data`, `Image`, `String`, and `URL` do this.
 In addition, custom types can conform to `Transferable`.
@@ -4964,7 +4964,7 @@ TextEditor(...)
 The `TextEditor` view supports find and replace, but the `TextField` view does not.
 This can be activated from a physical keyboard by pressing cmd-option-f.
 To enable this without a physical keyboard, apply the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/emptyview/findnavigator(ispresented:)?changes=latest_major&language=objc_3",
+"https://developer.apple.com/documentation/swiftui/emptyview/findnavigator(ispresented:)",
 "findNavigator" %} view modifier as demonstrated in the code below.
 
 <img alt="SwiftUI TextEditor findNavigator toolbar" style="width: 50%"
@@ -8513,9 +8513,9 @@ struct ContentView: View {
 ## Drag and Drop
 
 iOS 16 added the view modifiers {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/draggable(_:)?changes=_3",
+"https://developer.apple.com/documentation/swiftui/view/draggable(_:)",
 "draggable" %} and {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/dropdestination(for:action:istargeted:)?changes=_3",
+"https://developer.apple.com/documentation/swiftui/view/dropdestination(for:action:istargeted:)",
 "dropDestination" %}.
 These make it relatively easy to implement drag and drop.
 
@@ -9434,7 +9434,7 @@ struct ContentView: View {
 ```
 
 To change the vertical size of a sheet, apply the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/presentationdetents(_:)?changes=_2_1",
+"https://developer.apple.com/documentation/swiftui/view/presentationdetents(_:)",
 "presentationDetents" %} view modifier to the top view passed to `.sheet`
 with an array of size specifiers which can be `.medium` or `.large`.
 The first value specifies the default size of the sheet.

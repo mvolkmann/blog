@@ -26,9 +26,119 @@ shared in the Steward Lynch video linked above.
 ## Layout Protocol
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/layout",
-"Layout" %} protocol ...
+"Layout" %} protocol "defines the geometry of a collection of views".
+It is useful in apps that need view layouts that cannot be easily achieved
+using standard container views like `HStack` and `VStack`.
 
-TODO: Add detail.
+SwiftUI provides three structs that conform to the `Layout` protocol.
+These take `alignment` and `spacing` arguments that customize the layout.
+
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/hstacklayout", "HStackLayout" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/vstacklayout", "VStackLayout" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/swiftui/zstacklayout", "ZStackLayout" %}
+
+Custom layouts that conform to the `Layout` protocol can also be created.
+The following code provides a heavily commented example
+derived from the Stewart Lynch video:
+
+```swift
+import SwiftUI
+
+/**
+  This is a custom layout that is a variation on VStackLayout.
+  Child views are referred to as "subviews".
+  Subviews that have even indexes (0, 2, ...) are left-aligned.
+  Subviews that have odd indexes (1, 3, ...) are also left-aligned,
+  but are indented in by the width of the widest even subview.
+ */
+struct AlternateStackLayout: Layout {
+    // This is used to share data between methods in the `Layout` protocol.
+    struct Cache {
+        let maxEvenWidth: CGFloat
+        let maxOddWidth: CGFloat
+        let sizes: [CGSize]
+    }
+
+    // This is called first in order to computed data
+    // that can be used by the other methods.
+    func makeCache(subviews: Subviews) -> Cache {
+        // Get the size of each subview.
+        // The type is `[CGSize]`.
+        // `CGSize` has `width` and `height` properties.
+        let sizes = subviews.map { $0.sizeThatFits(.unspecified) }
+
+        // Get the maximum width of the even subviews
+        // and the maximum width of the odd subviews.
+        var maxEvenWidth = 0.0
+        var maxOddWidth = 0.0
+        var isEven = true
+        for size in sizes {
+            let width = size.width
+            if isEven {
+                if width > maxEvenWidth { maxEvenWidth = width }
+            } else {
+                if width > maxOddWidth { maxOddWidth = width }
+            }
+            isEven.toggle()
+        }
+
+        return Cache(
+            maxEvenWidth: maxEvenWidth,
+            maxOddWidth: maxOddWidth,
+            sizes: sizes
+        )
+    }
+
+    // This is called before `placeSubviews`.
+    // It determines the container width and height required to
+    // hold all the subviews in their computed locations.
+    func sizeThatFits(
+        proposal: ProposedViewSize, // seems to be the entire screen size
+        subviews: Subviews,
+        cache: inout Cache
+    ) -> CGSize {
+        subviews.isEmpty ? .zero : CGSize(
+            width: cache.maxEvenWidth + cache.maxOddWidth,
+            height: cache.sizes.map { $0.height }.reduce(0, +)
+        )
+    }
+
+    // This is called after `sizeThatFits`.
+    // It places each subview at a computed x, y location with a proposed size.
+    func placeSubviews(
+        in bounds: CGRect,
+        proposal: ProposedViewSize, // seems to be the entire screen size
+        subviews: Subviews,
+        cache: inout Cache
+    ) {
+        // If there are no subviews then there is no work to be done.
+        // guard !subviews.isEmpty else { return }
+
+        // Determine the `x` values for even and odd subviews.
+        let evenX = bounds.minX
+        let oddX = bounds.minX + cache.maxEvenWidth
+
+        // Determine the `y` value of the first subview.
+        var y = bounds.minY
+
+        var x = evenX
+        for (subview, size) in zip(subviews, cache.sizes) {
+            subview.place(
+                at: CGPoint(x: x, y: y),
+                anchor: .topLeading,
+                proposal: ProposedViewSize(size)
+            )
+
+            // The next subview will use the other x value.
+            x = x == evenX ? oddX : evenX
+
+            // The y value for the next subview will greater than
+            // the y value of this subview by the height of this subview.
+            y += size.height
+        }
+    }
+}
+```
 
 ## AnyLayout Struct
 
@@ -37,7 +147,83 @@ The {% aTargetBlank
 struct is a type-erased instance of the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/layout", "Layout" %}
 protocol.
-TODO: Add detail.
+It is used as the type of a variable that can hold
+an instance of any type that conforms to the `Layout` protocol.
+
+The following code uses the `AnyLayout` type.
+It displays a series of rectangles and
+allows the user to toggle between the three provided layouts
+and the custom layout implemented above.
+This code is also derived from the Stewart Lynch video.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var layoutType = LayoutType.h
+
+    enum LayoutType: Int, CaseIterable {
+        case h, v, z, alt
+
+        var index: Int {
+            Self.allCases.firstIndex(where: { $0 == self })!
+        }
+
+        var layout: any Layout {
+            switch self {
+            case .h: return HStackLayout(alignment: .top, spacing: 0)
+            case .v: return VStackLayout(alignment: .leading, spacing: 0)
+            case .z: return ZStackLayout(alignment: .topLeading)
+            case .alt: return AlternateStackLayout()
+            }
+        }
+    }
+
+    struct Box {
+        let color: Color
+        let width: CGFloat
+        let height: CGFloat
+    }
+
+    private let boxes = [
+        Box(color: .indigo, width: 100, height: 100),
+        Box(color: .teal, width: 80, height: 80),
+        Box(color: .purple, width: 60, height: 60),
+        Box(color: .red, width: 40, height: 40)
+    ]
+
+    var body: some View {
+        NavigationStack {
+            AnyLayout(layoutType.layout) {
+                ForEach(boxes, id: \.color) { box in
+                    box.color.frame(
+                        width: box.width,
+                        height: box.height
+                    )
+                }
+            }
+            .padding()
+            .navigationTitle("AnyLayout Demo")
+            .animation(.default, value: layoutType)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(
+                        action: {
+                            let cases = LayoutType.allCases
+                            layoutType =
+                                cases[(layoutType.index + 1) % cases.count]
+                        },
+                        label: {
+                            Image(systemName: "circle.grid.3x3.circle.fill")
+                                .imageScale(.large)
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
+```
 
 ## Radial Layout
 
