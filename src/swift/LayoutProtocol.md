@@ -147,13 +147,12 @@ The {% aTargetBlank
 struct is a type-erased instance of the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/layout", "Layout" %}
 protocol.
-It is used as the type of a variable that can hold
-an instance of any type that conforms to the `Layout` protocol.
+`AnyLayout` is used "to enable dynamically changing the type of
+a layout container without destroying the state of the subviews".
 
-The following code uses the `AnyLayout` type.
-It displays a series of rectangles and
-allows the user to toggle between the three provided layouts
-and the custom layout implemented above.
+The following code displays a series of rectangles and
+uses `AnyLayout` to allows the user to toggle between
+the three provided layouts and the custom layout implemented above.
 This code is also derived from the Stewart Lynch video.
 
 ```swift
