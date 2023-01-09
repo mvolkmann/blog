@@ -155,6 +155,19 @@ uses `AnyLayout` to allows the user to toggle between
 the three provided layouts and the custom layout implemented above.
 This code is also derived from the Stewart Lynch video.
 
+<img alt="SwiftUI AnyLayout HStack" style="border: 1px solid gray; width: 24%"
+  src="/blog/assets/SwiftUI-AnyLayout-H.png?v={{pkg.version}}"
+  title="Swift AnyLayout HStack">
+<img alt="SwiftUI AnyLayout VStack" style="border: 1px solid gray; width: 24%"
+  src="/blog/assets/SwiftUI-AnyLayout-V.png?v={{pkg.version}}"
+  title="Swift AnyLayout VStack">
+<img alt="SwiftUI AnyLayout ZStack" style="border: 1px solid gray; width: 24%"
+  src="/blog/assets/SwiftUI-AnyLayout-H.png?v={{pkg.version}}"
+  title="Swift AnyLayout ZStack">
+<img alt="SwiftUI AnyLayout Alternate" style="border: 1px solid gray; width: 24%"
+  src="/blog/assets/SwiftUI-AnyLayout-Alternate.png?v={{pkg.version}}"
+  title="Swift AnyLayout Alternate">
+
 ```swift
 import SwiftUI
 
