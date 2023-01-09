@@ -8080,6 +8080,27 @@ Custom easing functions can be defined with the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/animation/timingcurve(_:_:_:_:duration:)",
 "timingCurve" %} function.
 
+To begin an {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/animation", "Animation" %},
+apply the `onAppear` view modifier to the view,
+passing it a closure that calls `withAnimation`.
+This is demonstrated in the [Marching Ants Border](#marching-ants-border)
+section below.
+
+To delay the start of an {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/animation", "Animation" %},
+chain a call to its {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/animation/delay(_:)",
+"delay" %} method .
+For example:
+
+```swift
+let duration = 1.5 // seconds
+withAnimation(.linear(duration: duration).delay(duration)) {
+    ...
+}
+```
+
 ### Basic Examples
 
 The following example provides form elements
@@ -8230,7 +8251,6 @@ struct ContentView: View {
                     //Toggle("Include Optional Text?", isOn: $include)
 
                     Button("Toggle Optional Text") {
-                        //withAnimation {
                         withAnimation(easeFn) {
                             include.toggle()
                         }
@@ -8251,45 +8271,90 @@ For example, a `Bool` binding can be used to
 determine whether a view should be shown or hidden.
 The following code demonstrates this:
 
+<img alt="SwiftUI Binding Animation" style="width: 50%"
+  src="/blog/assets/SwiftUI-Binding-Animation.png?v={{pkg.version}}"
+  title="SwiftUI Binding Animation">
+
 ```swift
 struct ContentView: View {
     @State private var isShowing = false
+    @State private var transitionName = "opacity"
     private let duration = 0.5
+    private let transitionNames = ["move", "opacity", "scale", "slide"]
+
+    private var transition: AnyTransition {
+        switch transitionName {
+        case "move": return .move(edge: .trailing)
+        case "scale": return .scale
+        case "slide": return .slide
+        default: return .opacity
+        }
+    }
 
     var body: some View {
         VStack {
             Toggle(
                 "Show Greeting?",
-                // Approach #1: basic animation
-                // isOn: $isShowing.animation(.easeInOut(duration: 1))
+                isOn: $isShowing.animation(.easeInOut(duration: 1))
+            )
 
-                // Approach #2: easy spring animation
-                // isOn: $isShowing.animation(.spring())
+            LabeledContent("Transition") {
+                Picker("Transition", selection: $transitionName) {
+                    ForEach(transitionNames, id: \.self) { name in
+                        Text(name).tag(name)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
 
-                // Approach #3: detailed spring animation
+            if isShowing {
+                Text("Hello, Animation!")
+                    .font(.largeTitle)
+                    .frame(maxWidth: .infinity)
+                    .transition(transition)
+            }
+
+            // This stops the Toggle above from bouncing when the
+            // animation is applied, which may or may not be desirable.
+            Spacer()
+        }
+        .padding()
+    }
+}
+```
+
+The line above what uses the `.easeInOut` transition
+could be replaced by one of these:
+
+```swift
+                // Default spring animation
+                // (doesn't bounce at all with the default parameter values!)
+                isOn: $isShowing.animation(.spring())
+
+                // Customized spring animation using the spring method
                 isOn: $isShowing.animation(
-                    // Approach #3.1: using the spring method
                     .spring(
                         response: duration, // defaults to 0.55
                         dampingFraction: 0.2, // defaults to 0.825
                         blendDuration: duration // defaults to 0
                     )
+                )
 
-                    // Approach #3.2: using the interactiveSpring method
-                    // Same as .spring(), but
-                    // parameters have different default values.
-                    /*
+                // Customized spring animation using the
+                // interactiveSpring method which is the same as .spring(),
+                // but whose parameters have different default values
+                isOn: $isShowing.animation(
                     .interactiveSpring(
                         response: duration, // defaults to 0.15
                         dampingFraction: 0.2, // defaults to 0.86
                         blendDuration: duration // defaults to 0.25
                     )
-                    */
+                )
 
-                    // Approach #3.3: using the interpolatingSpring method
-                    // This handles overlapping animations
-                    // better than .spring() and .interactiveSpring().
-                    /*
+                // Customized spring animation using the
+                // interpolatingSpring method which handles overlapping
+                // animations better than .spring() and .interactiveSpring()
+                isOn: $isShowing.animation(
                     .interpolatingSpring(
                         // mass: 1, // defaults to 1
                         stiffness: 100,
@@ -8297,27 +8362,15 @@ struct ContentView: View {
                         damping: 3 // required; lower values bounce more
                         // initialVelocity: 0 // defaults to 0; must be in [0, 1]
                     )
-                    */
                 )
-            )
-
-            if isShowing {
-                Text("Hello, Animation!").font(.largeTitle)
-            }
-
-            // This stops the Toggle above from bouncing when the
-            // animation is applied, which may or may not be desirable.
-            // Spacer()
-        }
-        .padding()
-    }
-}
 ```
 
 ### matchedGeometryEffect
 
-The `matchedGeometryEffect` view modifier is used
-to smoothly move views between container views.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/matchedgeometryeffect(id:in:properties:anchor:issource:)",
+"matchedGeometryEffect" %} view modifier is used to
+smoothly move views between container views.
 For example, this can be used to move `Text` views that describe food items
 between lists of foods that available and those that have been selected.
 Each food item must have a unique id.
