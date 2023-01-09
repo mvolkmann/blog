@@ -8080,6 +8080,8 @@ Custom easing functions can be defined with the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/animation/timingcurve(_:_:_:_:duration:)",
 "timingCurve" %} function.
 
+### Basic Examples
+
 The following example provides form elements
 for experimenting with different kinds of animations.
 
@@ -8105,7 +8107,7 @@ struct ContentView: View {
         switch easingType {
         case .linear: return Animation.linear(duration: 1)
         case .forever: return Animation
-            .linear(duration: duration)
+            .linear(duration: 2)
             .repeatForever(autoreverses: false)
         case .easeIn: return Animation.easeIn(duration: 2)
         case .easeOut: return Animation.easeOut(duration: 2)
@@ -8154,6 +8156,8 @@ struct ContentView: View {
     }
 }
 ```
+
+### Transitions
 
 Transitions can be applied to any kind of view including container views.
 They are specified when a view is defined,
@@ -8239,6 +8243,79 @@ struct ContentView: View {
 }
 ```
 
+### Binding Change Animations
+
+An animation can be attached to a binding so the animation occurs
+when views change as a result of the binding value.
+For example, a `Bool` binding can be used to
+determine whether a view should be shown or hidden.
+The following code demonstrates this:
+
+```swift
+struct ContentView: View {
+    @State private var isShowing = false
+    private let duration = 0.5
+
+    var body: some View {
+        VStack {
+            Toggle(
+                "Show Greeting?",
+                // Approach #1: basic animation
+                // isOn: $isShowing.animation(.easeInOut(duration: 1))
+
+                // Approach #2: easy spring animation
+                // isOn: $isShowing.animation(.spring())
+
+                // Approach #3: detailed spring animation
+                isOn: $isShowing.animation(
+                    // Approach #3.1: using the spring method
+                    .spring(
+                        response: duration, // defaults to 0.55
+                        dampingFraction: 0.2, // defaults to 0.825
+                        blendDuration: duration // defaults to 0
+                    )
+
+                    // Approach #3.2: using the interactiveSpring method
+                    // Same as .spring(), but
+                    // parameters have different default values.
+                    /*
+                    .interactiveSpring(
+                        response: duration, // defaults to 0.15
+                        dampingFraction: 0.2, // defaults to 0.86
+                        blendDuration: duration // defaults to 0.25
+                    )
+                    */
+
+                    // Approach #3.3: using the interpolatingSpring method
+                    // This handles overlapping animations
+                    // better than .spring() and .interactiveSpring().
+                    /*
+                    .interpolatingSpring(
+                        // mass: 1, // defaults to 1
+                        stiffness: 100,
+                        // required; lower values are more stiff
+                        damping: 3 // required; lower values bounce more
+                        // initialVelocity: 0 // defaults to 0; must be in [0, 1]
+                    )
+                    */
+                )
+            )
+
+            if isShowing {
+                Text("Hello, Animation!").font(.largeTitle)
+            }
+
+            // This stops the Toggle above from bouncing when the
+            // animation is applied, which may or may not be desirable.
+            // Spacer()
+        }
+        .padding()
+    }
+}
+```
+
+### matchedGeometryEffect
+
 The `matchedGeometryEffect` view modifier is used
 to smoothly move views between container views.
 For example, this can be used to move `Text` views that describe food items
@@ -8300,7 +8377,7 @@ struct ContentView: View {
 TODO: Why do the food names eventually disappear after being moved
 in both Preview and the Simulator?
 
-## Marching Ants Border
+### Marching Ants Border
 
 We can create an animated dashed border around any view
 that resembles marching ants.
