@@ -4651,6 +4651,43 @@ struct ContentView: View {
 }
 ```
 
+#### Embedding Images
+
+It is possible to embed images in `Text` views
+and concatenate them with other `Text` views.
+This works best when the images come from SF Symbols
+because those can be automatically sized to match the text size.
+The concatenated `Text` views will wrap as expected.
+For example:
+
+<img alt="SwiftUI Text Images" style="border: 1px solid gray; width: 50%"
+  src="/blog/assets/SwiftUI-Text-Images.png?v={{pkg.version}}"
+  title="SwiftUI Text Images">
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Text("I like to go for a long ") +
+                Text(Image(systemName: "figure.run")).foregroundColor(.red) +
+                Text(" in the morning before work.") +
+                Text(" If the weather is bad, I might opt for a ") +
+                Text(Image(systemName: "figure.indoor.cycle"))
+                .foregroundColor(.blue) +
+                Text(".")
+        }
+        .font(.system(size: 28))
+        .padding()
+    }
+}
+```
+
+If a custom image (not from SF Symbols) is passed to the `Text` initializer
+then the size of the image cannot be specified using the `frame` view modifier
+because the value passed to the `Text` initializer
+must conform to `StringProtocol` and the return value
+of the `frame` view modifier does not do that.
+
 #### Measurements
 
 The {% aTargetBlank
