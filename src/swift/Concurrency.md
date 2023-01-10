@@ -763,7 +763,7 @@ struct ContentView: View {
         }
         .padding()
         .task(id: zipCode) {
-            await getInfo()
+            await getInfo() // uses zipCode
         }
         .alert(
             "Error",
