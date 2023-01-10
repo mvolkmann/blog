@@ -641,12 +641,139 @@ is executed before the view on which is applied appears.
 A second {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/task(id:priority:_:)",
 "task" %} view modifier also takes an `id` argument
-which is a value of any type.
+which is a value of any type that conforms to the `Equatable` protocol.
 Like the other `task` view modifier, the closure passed to it
 is executed before the view on which is applied appears.
-It is re-executed every time the `id` value changes.
+Every time the value of the `id` argument changes,
+the `Task` is cancelled (if still running)
+and the closure is executed again in a new `Task`.
 This can be useful in scenarios where the `id` represents a
 query to be performed which provides new data to be displayed.
+
+The following code demonstrates using the `task` view modifier
+with the `id` argument:
+
+<img alt="SwiftUI task view modifier" style="border: 1px solid gray; width: 50%"
+  src="/blog/assets/SwiftUI-task-with-id.png?v={{pkg.version}}"
+  title="SwiftUI task view modifier">
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    enum MyError: Error {
+        case badResponseType, badStatus
+    }
+
+    // This struct is needed to decode JSON from an API service.
+    struct Place: Decodable {
+        let latitude: String
+        let longitude: String
+        var placeName: String
+        let state: String
+
+        // We need this because the API returns JSON
+        // with a key of "place name" which is not a valid
+        // Swift property name due to containing a space.
+        private enum CodingKeys: String, CodingKey {
+            case latitude
+            case longitude
+            case placeName = "place name"
+            case state
+        }
+    }
+
+    // This struct is needed to decode JSON from an API service.
+    struct ZIPInfo: Decodable {
+        let country: String
+        let places: [Place]
+    }
+
+    @State private var errorMessage = ""
+    @State private var isShowingError = false
+    @State private var message = ""
+    @State private var zipCode = ""
+    // This will hold data from an API service.
+    @State private var zipInfo: ZIPInfo?
+
+    // The API at this URL returns data about a given U.S. ZIP code.
+    private var apiURL: URL {
+        URL(string: "https://api.zippopotam.us/us/\(zipCode)")!
+    }
+
+    private func getInfo() async {
+        errorMessage = ""
+        message = ""
+        zipInfo = nil
+
+        // All U.S. ZIP codes consist of 5 digits.
+        guard zipCode.count == 5 else { return }
+
+        do {
+            // The data method returns a tuple.
+            // The type of response is URLResponse.
+            // Cast it to HTTPURLResponse to get information from it.
+            let (data, response) =
+                try await URLSession.shared.data(from: apiURL)
+            guard let response = response as? HTTPURLResponse else {
+                throw MyError.badResponseType
+            }
+            if response.statusCode == 404 {
+                message = "No match was found."
+                return
+            }
+            guard response.statusCode == 200 else {
+                throw MyError.badStatus
+            }
+            zipInfo = try JSONDecoder().decode(ZIPInfo.self, from: data)
+        } catch {
+            // If the zip code is changes while an API call
+            // is running, the task will be cancelled.
+            // We don't want to report that as an error.
+            if error.localizedDescription != "cancelled" {
+                errorMessage = error.localizedDescription
+                isShowingError = true
+            }
+        }
+    }
+
+    var body: some View {
+        VStack {
+            Text("U.S. ZIP Code Information").font(.title)
+
+            TextField("ZIP Code", text: $zipCode)
+                .keyboardType(.numberPad)
+                .textFieldStyle(.roundedBorder)
+                .frame(width: 85)
+                .onChange(of: zipCode) { _ in
+                    if zipCode.count > 5 {
+                        zipCode = String(zipCode.prefix(5))
+                    }
+                }
+
+            if message.isEmpty {
+                if let zipInfo, let place = zipInfo.places.first {
+                    Text("\(place.placeName), \(place.state)").font(.title3)
+                }
+            } else {
+                Text(message)
+            }
+
+            Spacer()
+        }
+        .padding()
+        .task(id: zipCode) {
+            await getInfo()
+        }
+        .alert(
+            "Error",
+            isPresented: $isShowingError,
+            actions: {},
+            message: { Text(errorMessage) }
+        )
+    }
+}
+```
 
 When a `Task` is saved in a variable:
 
