@@ -4666,14 +4666,14 @@ For example:
 
 ```swift
 struct ContentView: View {
+    private let run = Text(Image(systemName: "figure.run")).foregroundColor(.red)
+    private let cycle = Text(Image(systemName: "figure.indoor.cycle"))
+
     var body: some View {
         VStack {
-            Text("I like to go for a long ") +
-                Text(Image(systemName: "figure.run")).foregroundColor(.red) +
+            Text("I like to go for a long ") + run +
                 Text(" in the morning before work.") +
-                Text(" If the weather is bad, I might opt for a ") +
-                Text(Image(systemName: "figure.indoor.cycle"))
-                .foregroundColor(.blue) +
+                Text(" If the weather is bad, I might opt for a ") + cycle +
                 Text(".")
         }
         .font(.system(size: 28))
