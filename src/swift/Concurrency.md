@@ -628,6 +628,26 @@ The available priorities from highest to lowest are:
 - `.medium` or `.utility`
 - `.low` or `.background`
 
+Another way to create a `Task` is to apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/task(priority:_:)",
+"task" %} view modifier which takes
+an optional priority (defaults to `userInitiated`)
+and a closure to execute inside a new `Task`.
+This is similar to the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/onappear(perform:)",
+"onAppear" %} view modifier in that the closure passed to it
+is executed before the view on which is applied appears.
+
+A second {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/task(id:priority:_:)",
+"task" %} view modifier also takes an `id` argument
+which is a value of any type.
+Like the other `task` view modifier, the closure passed to it
+is executed before the view on which is applied appears.
+It is re-executed every time the `id` value changes.
+This can be useful in scenarios where the `id` represents a
+query to be performed which provides new data to be displayed.
+
 When a `Task` is saved in a variable:
 
 - its value can be obtained using `let taskValue = await myTask.value`

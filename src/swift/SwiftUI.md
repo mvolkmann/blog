@@ -6559,7 +6559,7 @@ VStack {
 }.foregroundColor(.red)
 ```
 
-### Custom Modifiers
+### Custom View Modifiers
 
 Custom view modifiers can be created by defining
 a struct that implements the `ViewModifier` protocol.
@@ -6570,7 +6570,7 @@ The code in the `body` method is similar to that in any custom view.
 
 The following code defines a custom `ViewModifier`
 that allows the view on which it is called to be collapsed.
-It wraps that view in a `VStack` containing two `HStack`s.
+It wraps that view in a `VStack` containing two instances of `HStack`.
 The second `HStack` includes a `Button` containing a chevron icon.
 Clicking the `Button` toggles whether the first `HStack` is rendered.
 It also rotates the chevron icon using animation
@@ -6618,7 +6618,7 @@ struct Collapsible: ViewModifier {
                 .background(bgColor)
 
                 //TODO: Can you scale the height of the HStack
-                //TODO: instead of using the default fade transition?
+                //TODO: instead of using the default opacity transition?
                 //.transition(.scale)
                 //.scaleEffect(showContent ? 1 : 0)
                 //.animation(.easeInOut(duration: 1))
