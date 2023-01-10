@@ -4507,9 +4507,21 @@ extension Text {
 }
 ```
 
+To render text with multiple styles and no space between them,
+use the "+" operator between `Text` views. For example:
+
+```swift
+Text("Red").foregroundColor(.red) +
+Text("Green").foregroundColor(.green) +
+Text("Blue").foregroundColor(.blue)
+```
+
 TODO: Describe the use of {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/localizedstringkey",
 "LocalizedStringKey" %} to lookup the actual text to use.
+TODO: See the description in the Localization page.
+
+#### View Modifiers
 
 There are many view modifiers that can be applied to `Text` views.
 
@@ -4572,14 +4584,7 @@ The entire text is copied, not individual characters or words.
 Applying the `textSelection` view modifier to a `List` view
 makes each `Text` view inside it selectable.
 
-To render text with multiple styles and no space between them,
-use the "+" operator between `Text` views. For example:
-
-```swift
-Text("Red").foregroundColor(.red) +
-Text("Green").foregroundColor(.green) +
-Text("Blue").foregroundColor(.blue)
-```
+#### style Argument
 
 The `Text` initializer can be passed a `Date`
 if a `style` argument is also passed.
@@ -4594,6 +4599,8 @@ Text(Date(), style: .offset) // +41 seconds
 Text(Date(), style: .relative) // 41 sec
 Text(Date(), style: .timer) // 0.41
 ```
+
+#### format Argument
 
 The `Text` initializer can be passed a type other than `String`
 if a `format` argument with a compatible value is also passed.
@@ -4615,6 +4622,36 @@ let stooges = ["Moe", "Larry", "Curly"]
 Text(stooges, format: .list(type: .and)) // Moe, Larry, and Curly
 Text(stooges, format: .list(type: .or)) // Moe, Larry, or Curly
 ```
+
+Also see the [AttributedString](#attributedstring) section for applying
+different formatting to substrings of a string.
+
+#### Gradients
+
+A gradient can be used to supply text color.
+For example:
+
+<img alt="SwiftUI Text gradient" style="border: 1px solid gray; width: 50%"
+  src="/blog/assets/SwiftUI-Text-gradient.png?v={{pkg.version}}"
+  title="SwiftUI Text gradient">
+
+```swift
+struct ContentView: View {
+    let gradient = LinearGradient(
+        colors: [.red, .orange, .yellow, .green, .blue, .purple],
+        startPoint: .leading,
+        endPoint: .trailing
+    )
+    var body: some View {
+        Text("Colors of the rainbow\nfound in one sentence.")
+            .font(Font.system(size: 30, weight: .bold))
+            .multilineTextAlignment(.center)
+            .foregroundStyle(gradient)
+    }
+}
+```
+
+#### Measurements
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/foundation/measurement",
@@ -4671,9 +4708,6 @@ let metricArea = Measurement(
 ) // 177.8 square centimeters
 Text(metricArea, format: .measurement(width: .wide)) // 28 square inches
 ```
-
-Also see the [AttributedString](#attributedstring) section for applying
-different formatting to substrings of a string.
 
 ### TextField
 
