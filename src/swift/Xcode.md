@@ -473,6 +473,7 @@ To allow Xcode to access your GitHub account:
   - In the dialog that appears, select "GitHub" and click the "Continue" button.
   - Enter your account name and paste your personal access token (PAT).
   - Click the "Sign In" button.
+  - Close the Settings dialog.
 
 ### Repositories
 
@@ -489,10 +490,33 @@ Xcode can create a local Git repository later.
 With the project open in Xcode,
 select Source Control ... New Git Repository...
 In the dialog that appears, click the "Create" button.
+This automatically creates the first commit containing all the existing files
+on a branch named "main".
 
 To delete a local repository:
 
 - TODO: Is this possible?
+
+#### .gitignore
+
+All Swift project Git repositories should have a `.gitignore` file
+in their root directory that specifies files
+that should be committed to the repository.
+This file is not automatically created.
+This file can be obtained from {% aTargetBlank "https://gitignore.io", "gitignore.io" %}.
+
+- Browse {% aTargetBlank "https://gitignore.io", "gitignore.io" %}.
+- Enter "Swift" in the search input.
+- Click the "Create" button.
+- Select File ... Save As...
+- Save the file in the root project directory and name it `.gitignore`.
+- If this adds a file extension of `.txt`, rename the file to remove that.
+- This file will not be visible inside Xcode, but can be
+  edited outside of Xcode using another editor such a TextEdit.
+- Optionally delete lines from this file that do not apply to your project
+  such as lines that apply to older versions of Xcode and
+  lines that apply to tools you are not using
+  such as Carthage, CocoaPods, and Accio.
 
 #### Remote Repositories
 
@@ -517,11 +541,16 @@ To create a remote GitHub repository from a local Git repository:
 - Right-click "Remotes".
 - Select "New {project-name} Remote...".
 - In the dialog that appears:
-  - Verify the values for Account, Owner, Repository, and Remote Name.
+  - Verify the values for Account, Owner, Repository,
+    and Remote Name (defaults to "origin").
     Typically no changes are required.
   - Enter a Description.
   - Choose whether the repository should be Public or Private.
   - Click the "Create" button.
+- This creates the remote repository and
+  pushes the local repository with only the current branch.
+  to push other branches, switch to them one at a time and
+  select Source Control ... Push...
 
 To view a remote Git repository that is known to Xcode:
 
@@ -588,7 +617,7 @@ To delete a branch:
 
 - Right-click the branch name.
 - Select "Delete...".
-- In the dialog that appears, click the "Delete" button.
+- In the confirmation dialog that appears, click the "Delete" button.
 
 ## Commits
 
@@ -598,8 +627,9 @@ for the file in the current text editor pane:
 Approach #1:
 
 - Select Editor ... Side By Side Comparison or
-  click the button in the upper-right containing left and right arrows.
-  Toggles to blue
+  click the button in the upper-right containing right and left arrows.
+  The double arrow button toggles the diff display and
+  its background changes between transparent and blue.
 
 Approach #2:
 
