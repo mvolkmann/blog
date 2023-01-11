@@ -476,21 +476,6 @@ To allow Xcode to access your GitHub account:
 
 ### Repositories
 
-#### Cloning a Remote Repository
-
-If a GitHub repository as a `.xcodeproj` file in its root directory,
-it can be cloned and opened in Xcode in one step. To do this:
-
-- Browse the repository in GitHub.
-- Click the green "Code" button.
-- In the popup that appears, click "Open with Xcode".
-- In the dialog that appears, click "Allow".
-- In the Xcode dialog that appears,
-  select the directory where the cloned repository should be saved
-  and click the "Clone" button.
-- In the dialog that appears, click the "Trust and Open" button.
-- The cloned repository will be opened in Xcode.
-
 #### Local Repositories
 
 When a new Xcode project is created,
@@ -511,6 +496,19 @@ To delete a local repository:
 
 #### Remote Repositories
 
+To cloning a remote GitHub repository:
+
+- Browse the repository in GitHub.
+- Verify that there is a `.xcodeproj` file in the root directory.
+- Click the green "Code" button.
+- In the popup that appears, click "Open with Xcode".
+- In the dialog that appears, click "Allow".
+- In the Xcode dialog that appears,
+  select the directory where the cloned repository should be saved
+  and click the "Clone" button.
+- In the dialog that appears, click the "Trust and Open" button.
+- The cloned repository will be opened in Xcode.
+
 To create a remote GitHub repository from a local Git repository:
 
 - Ensure that GitHub access is configure in Xcode Settings as described above.
@@ -525,7 +523,7 @@ To create a remote GitHub repository from a local Git repository:
   - Choose whether the repository should be Public or Private.
   - Click the "Create" button.
 
-To view a remote Git repository:
+To view a remote Git repository that is known to Xcode:
 
 - Open the Source Control Navigator.
 - Select the Repositories tab.
@@ -534,7 +532,7 @@ To view a remote Git repository:
   This will open a browser tab in the default web browser
   and display the remote repository.
 
-To delete a remote Git repository:
+To delete a remote Git repository that is known to Xcode:
 
 - Open the Source Control Navigator.
 - Select the Repositories tab.
@@ -599,7 +597,9 @@ for the file in the current text editor pane:
 
 Approach #1:
 
-- Select Editor ... Side By Side Comparsion
+- Select Editor ... Side By Side Comparison or
+  click the button in the upper-right containing left and right arrows.
+  Toggles to blue
 
 Approach #2:
 
@@ -610,8 +610,15 @@ Approach #2:
   - "Hide Change" removes the display of the original line.
   - "Discard Changes" undoes the changes.
 
+To discard uncommitted changes in the current source file:
+
+- Select Source Control ... Discard Changes in {file-name}...
+- In the confirmation dialog that is displayed,
+  click the "Discard Changes" button.
+
 To discard all uncommitted changes:
 
+- In the Project Navigator, select the top entry.
 - Select Source Control ... Discard All Changes...
 - In the confirmation dialog that is displayed, click the "Discard" button.
 
