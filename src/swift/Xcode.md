@@ -652,6 +652,25 @@ To merge one branch to another:
 - Right-click the source branch name.
 - Select "Merge {source-branch} into {target-branch}...".
 - In the dialog that appears, click the "Merge" button.
+- If there are any conflicts:
+
+  - A dialog will open that displays
+    a list of files with conflicts in the left nav.
+  - Selecting a file displays a side-by-side diff
+    with red conflict buttons in the center gutter.
+  - Clicking a conflict button displays a popup
+    with four options for resolving the conflict:
+
+    - "Choose Left"
+    - "Choose Right"
+    - "Choose Left Then Right"
+    - "Choose Right Then Left"
+
+    The last two options attempt combine both changes,
+    which can result in an undesirable change.
+
+  - After resolving all the conflicts,
+    click the "Merge" button in the lower-left.
 
 To delete a branch:
 
