@@ -458,16 +458,128 @@ It even works with framework types.
 ## Source Control (aka Version Control)
 
 Xcode has excellent builtin support for version control using Git.
+There are two main places where Git operations are initiated,
+the "Source Control" menu and the "Source Control Navigator".
+To access the "Source Control Navigator",
+select the second navigator tab or press cmd-2.
 
-The final dialog that is displayed when creating a new project
-where the parent directory is selected contains
-the checkbox to "Create Git repository on my Mac".
-Check this to start with a local repository.
+To allow Xcode to access your GitHub account:
 
-The most common Git actions are summarized in below.
+- Select Xcode ... Settings...
+- Select the Accounts tab.
+- If no account for GitHub is present:
+
+  - Click the "+" in the lower-right.
+  - In the dialog that appears, select "GitHub" and click the "Continue" button.
+  - Enter your account name and paste your personal access token (PAT).
+  - Click the "Sign In" button.
+
+### Repositories
+
+#### Local Repositories
+
+When a new Xcode project is created,
+there is an option to create a local Git repository for it.
+In the final dialog that is displayed when creating a new project
+(where the parent directory is selected),
+check the checkbox to "Create Git repository on my Mac".
+
+If this is not done when the project is created,
+Xcode can create a local Git repository later.
+With the project open in Xcode,
+select Source Control ... New Git Repository...
+In the dialog that appears, click the "Create" button.
+
+To delete a local repository:
+
+- TODO: Is this possible?
+
+#### Remote Repositories
+
+To create a remote GitHub repository from a local Git repository:
+
+- Ensure that GitHub access is configure in Xcode Settings as described above.
+- Open the Source Control Navigator.
+- Select the Repositories tab.
+- Right-click "Remotes".
+- Select "New {project-name} Remote...".
+- In the dialog that appears:
+  - Verify the values for Account, Owner, Repository, and Remote Name.
+    Typically no changes are required.
+  - Enter a Description.
+  - Choose whether the repository should be Public or Private.
+  - Click the "Create" button.
+
+To view a remote Git repository:
+
+- Open the Source Control Navigator.
+- Select the Repositories tab.
+- Right-click a remote name such as "origin".
+- Select "View on GitHub...".
+  This will open a browser tab in the default web browser
+  and display the remote repository.
+
+To delete a remote Git repository:
+
+- Open the Source Control Navigator.
+- Select the Repositories tab.
+- Right-click a remote name such as "origin".
+- Select "Delete...".
+- In the confirmation dialog that appears, click the "Delete" button.
+  This removes the reference to the remote repository from the Xcode project,
+  but it does not delete the remote repository!
+  To actually delete it, go the GitHub web page of the repository,
+  click "Settings" in the upper-right,
+  scroll to the bottom of the page,
+  click the "Delete this repository" button,
+  enter the repository name in the dialog that appears,
+  press the "I understand ..." button.
+  Sometimes a confirmation dialog appears.
+  If it does, click the "Send SMS" button,
+  enter the code received on your phone,
+  and click the "?" button.
+
+### Branches
 
 The current branch is displayed in the Xcode title bar
 on the left side below the project name.
+
+To see a list of all existing branches:
+
+- Open the Source Control Navigator.
+- Select the Repositories tab.
+- Expand the "Branches" section.
+
+To create a new branch:
+
+- Right-click the name of an existing branch.
+- Select "New branch from {branch-name}...".
+- In the dialog that appears,
+  enter the new branch name and click the "Create" button.
+- The new branch automatically becomes the current branch.
+
+To switch to a different branch:
+
+- Right-click the name of an existing branch.
+- Select "Switch...".
+- In the dialog that appears, click the "Switch" button.
+
+To merge one branch to another:
+
+- Switch to the target branch, making it the current branch.
+- Right-click the source branch name.
+- Select "Merge {source-branch} into {target-branch}...".
+- In the dialog that appears, click the "Merge" button.
+
+To delete a branch:
+
+- Right-click the branch name.
+- Select "Delete...".
+- In the dialog that appears, click the "Delete" button.
+
+### Other
+
+The most common Git actions are summarized in below.
 
 To create a new branch:
 
