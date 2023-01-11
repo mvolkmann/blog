@@ -476,6 +476,21 @@ To allow Xcode to access your GitHub account:
 
 ### Repositories
 
+#### Cloning a Remote Repository
+
+If a GitHub repository as a `.xcodeproj` file in its root directory,
+it can be cloned and opened in Xcode in one step. To do this:
+
+- Browse the repository in GitHub.
+- Click the green "Code" button.
+- In the popup that appears, click "Open with Xcode".
+- In the dialog that appears, click "Allow".
+- In the Xcode dialog that appears,
+  select the directory where the cloned repository should be saved
+  and click the "Clone" button.
+- In the dialog that appears, click the "Trust and Open" button.
+- The cloned repository will be opened in Xcode.
+
 #### Local Repositories
 
 When a new Xcode project is created,
@@ -577,6 +592,59 @@ To delete a branch:
 - Select "Delete...".
 - In the dialog that appears, click the "Delete" button.
 
+## Commits
+
+There are two ways to see uncommitted changes
+for the file in the current text editor pane:
+
+Approach #1:
+
+- Select Editor ... Side By Side Comparsion
+
+Approach #2:
+
+- Look for blue vertical bars to left of line numbers.
+- Click a blue vertical bar to get a popup menu
+  with the following possible options:
+  - "Show Change" displays the original line above the modified line.
+  - "Hide Change" removes the display of the original line.
+  - "Discard Changes" undoes the changes.
+
+To discard all uncommitted changes:
+
+- Select Source Control ... Discard All Changes...
+- In the confirmation dialog that is displayed, click the "Discard" button.
+
+To commit changes:
+
+- Select Source Control ... Commit... or press cmd-option-c
+  to open a dialog that lists the files that can be committed.
+- A letter will appear after files that will be affected by the commit,
+  "A" for added, "C" for merge conflict, "D" for deleted, "M" for modified,
+  and "?" for files unknown to the local Git repository.
+- In the left, make sure the checkboxes to the left
+  of each filename to be committed are checked.
+- One at a time click the name of each file to be committed
+  to see a side-by-side diff where you can verify all the changes.
+  Undesired changes can be discarded by clicking a numbered blue button
+  in the gutter between the old and new versions of the file
+  and selecting "Discard Changes" from the popup.
+- Enter a comment for the commit in the text area at the bottom.
+- Optionally check the "Push to remote" checkbox.
+- Click the "Commit" button.
+
+To see the changes in a previous commit:
+
+- Open the Source Control Navigator.
+- Select the Repositories tab.
+- Expand the Branches section.
+- Select a branch.
+- A list of all the commits on that branch will be displayed in the editor area.
+- Double-click a commit to see the files that were added, modified, and deleted
+  in that commit.
+- Click the "<" button in the upper-left of the editor area
+  to return to the list of commits.
+
 ### Other
 
 The most common Git actions are summarized in below.
@@ -606,38 +674,6 @@ To switch to a different, existing branch:
 To see the Git status of all files in the project,
 open the Project Navigator and look for the letters
 "A" (added) and "M" (modified) after file names.
-
-To see uncommitted changes for the file in the current text editor pane:
-
-- Look for blue vertical bars to left of line numbers.
-- Click a blue vertical bar to get a popup menu with the options
-  "Show/Hide Change" (for modified lines) and "Discard Changes".
-- Select "Show Change" to display the original line above the modified line.
-- Select "Hide Change" to remove the display of the original line.
-- Select "Discard Changes" to undo the changes.
-
-To commit changes:
-
-- Select Source Control ... Commit... or press cmd-option-c
-  to open a dialog that lists the files that can be committed.
-- A letter will appear after files that will be affected by the commit,
-  "A" for added, "D" for deleted, "M" for modified,
-  and "?" for files unknown to the local Git repository.
-- In the left, make sure the checkboxes to the left
-  of each filename to be committed are checked.
-- One at a time click the name of each file to be committed
-  to see a side-by-side diff where you can verify all the changes.
-  Undesired changes can be discarded by clicking a numbered blue button
-  in the gutter between the old and new versions of the file
-  and selecting "Discard Changes" from the popup.
-- Enter a comment for the commit in the text area at the bottom.
-- Optionally check the "Push to remote" checkbox.
-- Click the "Commit" button.
-
-To discard all uncommitted changes,
-select Source Control ... Discard All Changes...
-This displays a dialog to confirm this action.
-Click the "Discard" button to proceed.
 
 To fetch new branches from the remote repository,
 select Source Control ... Fetch Changes.
