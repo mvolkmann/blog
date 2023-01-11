@@ -733,16 +733,14 @@ To create a pull request:
 
 To view a pull request in the GitHub web UI:
 
-- Open the "Source Control Navigator" by
-  clicking the second navigator tab or pressing cmd-2.
+- Open the Source Control Navigator.
 - Click the "Changes" tab.
 - In the "Pull Request" section, right-click the title of a pull request
   and select "View Pull Request on GitHub".
 
 To merge a pull request:
 
-- Open the "Source Control Navigator" by
-  clicking the second navigator tab or pressing cmd-2.
+- Open the Source Control Navigator.
 - Click the "Changes" tab.
 - In the "Pull Request" section, select the title of a pull request.
 - Click the "Merge..." button in the upper-right corner of the
@@ -753,8 +751,7 @@ To merge a pull request:
 
 To close a pull request without merge it:
 
-- Open the "Source Control Navigator" by
-  clicking the second navigator tab or pressing cmd-2.
+- Open the Source Control Navigator.
 - Click the "Changes" tab.
 - In the "Pull Request" section, select the title of a pull request.
 - Click the downward chevron on the right side of the "Merge..." button
@@ -764,7 +761,23 @@ To close a pull request without merge it:
 
 To tag a commit:
 
-- TODO: FINISH THIS!
+- Open the Source Control Navigator.
+- Click the "Repositories" tab.
+- To tag the latest commit on a branch,
+  right-click the branch name and select "Tag {branch-name}...".
+- To tag a specific commit, select a branch name to display a list of commits on the branch,
+  right-click a commit, and select "Tag {commit-prefix}...".
+- In the dialog that appears, enter at tag name and message.
+- Click the "Create" button.
+
+To push tags to a remote repository:
+
+- Select Source Control ... Push...
+- In the dialog that appears,
+  select the remote repository to which to push
+  (defaults to "origin/main" which is usually the desired value).
+- Check the "Include Tags" checkbox.
+- Click the "Push" button.
 
 ## Themes
 
