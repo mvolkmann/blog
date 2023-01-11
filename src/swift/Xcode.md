@@ -455,6 +455,144 @@ This also works with any kind of name including
 types, variables, functions, structs, classes, properties, and methods.
 It even works with framework types.
 
+## Source Control (aka Version Control)
+
+Xcode has excellent builtin support for version control using Git.
+
+The final dialog that is displayed when creating a new project
+where the parent directory is selected contains
+the checkbox to "Create Git repository on my Mac".
+Check this to start with a local repository.
+
+The most common Git actions are summarized in below.
+
+The current branch is displayed in the Xcode title bar
+on the left side below the project name.
+
+To create a new branch:
+
+- Open the "Source Control Navigator" by
+  clicking the second navigator tab or pressing cmd-2.
+- Click the "Repositories" tab.
+- Expand the "Branches" section.
+- Right-click the branch from which the new branch should be created (ex. main).
+- Select "New Branch from {branch-name}...".
+- Enter a name for the new branch in the "To" input.
+- Click the "Create" button.
+
+To switch to a different, existing branch:
+
+- Open the "Source Control Navigator" by
+  clicking the second navigator tab or pressing cmd-2.
+- Click the "Repositories" tab.
+- Expand the "Branches" section.
+- Right-click a branch name and select "Switch...".
+- In the dialog that appears, click the "Switch" button.
+- To get changes made to the branch in the remote repository,
+  do a pull (described below).
+
+To see the Git status of all files in the project,
+open the Project Navigator and look for the letters
+"A" (added) and "M" (modified) after file names.
+
+To see uncommitted changes for the file in the current text editor pane:
+
+- Look for blue vertical bars to left of line numbers.
+- Click a blue vertical bar to get a popup menu with the options
+  "Show/Hide Change" (for modified lines) and "Discard Changes".
+- Select "Show Change" to display the original line above the modified line.
+- Select "Hide Change" to remove the display of the original line.
+- Select "Discard Changes" to undo the changes.
+
+To commit changes:
+
+- Select Source Control ... Commit... or press cmd-option-c
+  to open a dialog that lists the files that can be committed.
+- A letter will appear after files that will be affected by the commit,
+  "A" for added, "D" for deleted, "M" for modified,
+  and "?" for files unknown to the local Git repository.
+- In the left, make sure the checkboxes to the left
+  of each filename to be committed are checked.
+- One at a time click the name of each file to be committed
+  to see a side-by-side diff where you can verify all the changes.
+  Undesired changes can be discarded by clicking a numbered blue button
+  in the gutter between the old and new versions of the file
+  and selecting "Discard Changes" from the popup.
+- Enter a comment for the commit in the text area at the bottom.
+- Optionally check the "Push to remote" checkbox.
+- Click the "Commit" button.
+
+To discard all uncommitted changes,
+select Source Control ... Discard All Changes...
+This displays a dialog to confirm this action.
+Click the "Discard" button to proceed.
+
+To fetch new branches from the remote repository,
+select Source Control ... Fetch Changes.
+
+To pull changes from the remote repository,
+select Source Control ... Pull.... or press cmd-option-x.
+This displays a dialog where the remote repository can be selected.
+It defaults to "origin/main" which is typically the only remote repository.
+There is also a "Rebase local changes onto upstream changes" checkbox
+for the brave.
+
+To tag a commit:
+
+- TODO: FINISH THIS!
+
+To push changes to the remote repository,
+select Source Control ... Push....
+This displays a dialog where the remote repository can be selected.
+It defaults to "origin/main" which is typically the only remote repository.
+There is also a "Include Tags" checkbox that should be checked
+when new tags have been applied.
+
+To refresh the Git status shown for files in the Project Navigator
+because their status has been changed outside of Xcode,
+select Source Control ... Refresh File Status.
+
+To create a pull request:
+
+- Select Source Control ... Create Pull Request... or
+  click the current branch in the Xcode title bar
+  on the left side below the project name
+  and select "Create Pull Request...".
+- Replace "Untitled Pull Request" with a title.
+- Enter a description.
+- Click the "Publish" button.
+- In the dialog that appears, confirm creating a new pull request
+  by clicking the "Publish" button.
+
+To view a pull request in the GitHub web UI:
+
+- Open the "Source Control Navigator" by
+  clicking the second navigator tab or pressing cmd-2.
+- Click the "Changes" tab.
+- In the "Pull Request" section, right-click the title of a pull request
+  and select "View Pull Request on GitHub".
+
+To merge a pull request:
+
+- Open the "Source Control Navigator" by
+  clicking the second navigator tab or pressing cmd-2.
+- Click the "Changes" tab.
+- In the "Pull Request" section, select the title of a pull request.
+- Click the "Merge..." button in the upper-right corner of the
+  editor panel that displays information about the pull request.
+- Enter a commit message.
+- Optionally check the "Delete source branch after merging" checkbox.
+- Click the "Merge" button.
+
+To close a pull request without merge it:
+
+- Open the "Source Control Navigator" by
+  clicking the second navigator tab or pressing cmd-2.
+- Click the "Changes" tab.
+- In the "Pull Request" section, select the title of a pull request.
+- Click the downward chevron on the right side of the "Merge..." button
+  and select "Close".
+
 ## Themes
 
 To choose a different theme, select Xcode ... Preferences ... Themes.
@@ -843,7 +981,7 @@ by following the direction at {% aTargetBlank
 | open file                        | cmd-o       |
 | fuzzy file finder (open quickly) | cmd-shift-o |
 
-## Using New Swift Version
+## Using a New Swift Version
 
 See {% aTargetBlank
 "https://sarunw.com/posts/how-to-use-pre-release-swift-version-in-xcode/",
