@@ -523,7 +523,20 @@ This file can be obtained from {% aTargetBlank "https://gitignore.io", "gitignor
 
 ### Remote Repositories
 
-To cloning a remote GitHub repository:
+To clone a remote GitHub repository:
+
+Approach #1:
+
+- Select Source Control ... Clone...
+- In the dialog that appears, paste a GitHub URL or
+  select a remote repository from the provided list
+  of your remote GitHub repositories.
+- Click the "Clone" button.
+- In the dialog that appears, select the directory where the clone should be saved.
+- Click the "Clone" button.
+- The cloned repository will be opened in Xcode.
+
+Approach #2:
 
 - Browse the repository in GitHub.
 - Verify that there is a `.xcodeproj` file in the root directory.
@@ -685,6 +698,38 @@ To discard all uncommitted changes:
 - Select Source Control ... Discard All Changes...
 - In the confirmation dialog that is displayed, click the "Discard" button.
 
+### Stashes
+
+To stash uncommitted changes:
+
+- Select Source Control ... Stash Changes...
+- In the dialog that appears, enter a description and click the "Stash" button.
+
+To see a list of existing stashes:
+
+- Open the Source Control Navigator.
+- Click the Repositories tab.
+- Expand the "Stashed Changes" section.
+- Click a stash description to see the names of the files that were modified.
+- Click a file name to see a side-by-side diff of the changes.
+
+To apply stashed changes to the current branch:
+
+- Open the Source Control Navigator.
+- Click the Repositories tab.
+- Ensure that the target branch is the current branch.
+- Right-click a stash description and select "Apply Stashed Changes...".
+- Optionally uncheck the "Keep stash after applying" checkbox.
+- Click the "Apply Stash" button.
+
+To delete a stash:
+
+- Open the Source Control Navigator.
+- Click the Repositories tab.
+- Expand the "Stashed Changes" section.
+- Right-click a stash description and select "Delete...".
+- In the confirmation dialog that appears, click the "Delete" button.
+
 ### Commits
 
 To commit changes:
@@ -778,6 +823,12 @@ To push tags to a remote repository:
   (defaults to "origin/main" which is usually the desired value).
 - Check the "Include Tags" checkbox.
 - Click the "Push" button.
+
+### Reset
+
+There is no option in Xcode to perform a `git reset`
+in order to remove some commits from the history.
+This must be done from the command-line or in another Git-aware tool.
 
 ## Themes
 
