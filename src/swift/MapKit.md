@@ -36,6 +36,163 @@ See the demo app at {% aTargetBlank
   src="/blog/assets/mapkit-browse-place.jpg?v={{pkg.version}}"
   title="MapKit Browse Place">
 
+## Basic Map Display
+
+To enable use of MapKit in a SwiftUI app:
+
+- Open the Project Navigator by selecting
+  the first navigator tap or pressing cmd-1.
+- Select the top entry.
+- Select the main target.
+- Select the "Signing & Capabilities" tab.
+- Click the "+ Capability" button in the upper-left.
+- Double-click "Maps".
+- To access route data, check all the checkboxes for the desired route types
+  such as "Bike", "Bus", "Car", "Pedestrian", and "Train".
+
+The following class defines a view model that is
+used to get the current location of the user.
+
+```swift
+import CoreLocation
+import SwiftUI
+
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var error: Error?
+    @Published var location: CLLocationCoordinate2D?
+    let manager = CLLocationManager()
+
+    override init() {
+        super.init()
+        manager.delegate = self
+    }
+
+    func requestLocation() {
+        manager.requestLocation()
+    }
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]
+    ) {
+        location = locations.first?.coordinate
+    }
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didFailWithError error: Error
+    ) {
+        self.error = error
+    }
+}
+```
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/corelocation/cllocationcoordinate2d",
+"CLLocationCoordinate2D" %} struct from the Core Location framework
+does not conform to the `Equatable` protocol.
+We need it to do that in order to listen for changes to a location
+using the `onChange` view modifier.
+The following extension fixes this.
+
+```swift
+extension CLLocationCoordinate2D: Equatable {
+    public static func == (
+        lhs: CLLocationCoordinate2D,
+        rhs: CLLocationCoordinate2D
+    ) -> Bool {
+        lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+}
+```
+
+The following view displays a {% aTargetBlank
+"https://developer.apple.com/documentation/mapkit/map", "Map" %}
+that begins by showing Apple Park.
+The user can tap "Current Location" button
+to obtain their latitude and longitude.
+The map then updates to centered on that location.
+From there the user can pan and zoom the map.
+To reset the map to be centered on their current location,
+the user can tap the "Return" button.
+
+```swift
+struct ContentView: View {
+    private static let appleParkLatitude = 37.334_900
+    private static let appleParkLongitude = -122.009_020
+    private static let meters = 750.0
+
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(
+            latitude: Self.appleParkLatitude,
+            longitude: Self.appleParkLongitude
+        ),
+        latitudinalMeters: Self.meters,
+        longitudinalMeters: Self.meters
+    )
+
+    @StateObject var locationManager = LocationManager()
+
+    init() {
+        // This has no effect.
+        MKMapView.appearance().mapType = .hybrid
+    }
+
+    func panToCurrentLocation() {
+        guard let location = locationManager.location else { return }
+        Task { @MainActor in
+            region.center = location
+        }
+    }
+
+    var body: some View {
+        VStack {
+            HStack {
+                LocationButton {
+                    locationManager.requestLocation()
+                }
+                .foregroundColor(.white) // defaults to black
+                Spacer()
+                if locationManager.location != nil {
+                    Button("Return") {
+                        panToCurrentLocation()
+                    }
+                    .buttonStyle(.bordered)
+                }
+            }
+
+            // Display the current location.
+            // This updates if the user pans the map.
+            let center = region.center
+            Text("Lat: \(center.latitude), Lng: \(center.longitude)")
+
+            // A binding must be passed so it can be
+            // modified if the user pans or zooms the map.
+            Map(coordinateRegion: $region, showsUserLocation: true)
+
+            Spacer()
+        }
+        .padding()
+        .onChange(of: locationManager.location) { _ in
+            panToCurrentLocation()
+        }
+    }
+}
+```
+
+The `Map` view currently lacks many features found in {% aTargetBlank
+"https://developer.apple.com/documentation/mapkit/mkmapview", "MKMapView" %}.
+One example is the ability to display a satellite view.
+Until `Map` becomes more full-featured,
+it is useful to wrap `MKMapView` in `UIViewRepresentable`
+to enable it to be used with SwiftUI in place of `Map`.
+
+The following code demonstrates creating such a wrapper.
+
+```swift
+
+```
+
 ## Distance vs. Angle
 
 Some MapKit methods require passing distances in meters and others require

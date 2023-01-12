@@ -19,6 +19,11 @@ is a Swift library for building macOS, iOS, and Apple Watch apps.
 It is an alternative to its predecessor
 {% aTargetBlank "https://developer.apple.com/documentation/uikit", "UIKit" %}.
 
+While much code can be reused between apps that target different platforms,
+SwiftUI is not intended to be used for
+creating single apps that run on multiple platforms.
+Some features of SwiftUI are only available on specific platforms.
+
 To use SwiftUI in a source file, add `import SwiftUI` at the top of the file.
 Most example code here assumes this is done and does not include it.
 
