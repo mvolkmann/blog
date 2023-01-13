@@ -1590,6 +1590,8 @@ Typically `Color.primary` is used for text because it
 automatically switches between black for light mode and white for dark mode.
 This is the default `foregroundColor` of `Text` views.
 
+### Terminology
+
 SwiftUI uses the following color terminology:
 
 - Accent Color
@@ -1619,17 +1621,9 @@ SwiftUI uses the following color terminology:
   It is typically only applied to text-based views.
   To set it, call the `foregroundColor` view modifier on a specific view.
 
-There are several ways to switch between light and dark mode in the simulator.
+### Custom Colors
 
-1. Press cmd-shift-a (easiest).
-2. Open the Settings app, select Developer,
-   and change the "Dark Appearance" toggle.
-3. Apply the following view modifier to the top-most view:
-   `.preferredColorScheme(.dark)` or `.light`
-4. Apply the following view modifier to the top-most view:
-   `.environment(\.colorScheme, .light)` or `.dark`
-
-To define a custom named color pair, one for light mode and one for dark:
+To define a custom named color:
 
 - In the Navigator, select the `Assets.xcassets` file.
 - Right-click in the list of assets and select "New Color Set".
@@ -1637,12 +1631,13 @@ To define a custom named color pair, one for light mode and one for dark:
 - Click the "Any Appearance" swatch (used for light mode).
 - Click the "Attributes" tab in the Inspector (4th tab with sliders icon).
 - In the Inspector, select a color.
-- Click the "Dark" swatch.
-- In the Inspector, select a color.
-  Consider selecting the same color used for "Any Appearance".
-  Then click the "Show Color Panel" button,
-  change the slider type drop-down to "HSB Sliders",
-  and reduce the value for Brightness (perhaps to 50%).
+- To use a different color for dark mode:
+  - Click the "Dark" swatch.
+  - In the Inspector, select a color.
+    Consider selecting the same color used for "Any Appearance".
+    Then click the "Show Color Panel" button,
+    change the slider type drop-down to "HSB Sliders",
+    and reduce the value for Brightness (perhaps to 50%).
 
 To use a custom color in code, enter `Color("some-name")`.
 To avoid typos when using these named colors, consider defining a
@@ -1668,6 +1663,20 @@ extension Color {
     static let background = Color(hex: 0xf1faff)
 }
 ```
+
+### Simulator Light/Dark Mode
+
+There are several ways to switch between light and dark mode in the simulator.
+
+1. Press cmd-shift-a (easiest).
+2. Open the Settings app, select Developer,
+   and change the "Dark Appearance" toggle.
+3. Apply the following view modifier to the top-most view:
+   `.preferredColorScheme(.dark)` or `.light`
+4. Apply the following view modifier to the top-most view:
+   `.environment(\.colorScheme, .light)` or `.dark`
+
+### UIColor
 
 UIKit uses `UIColor` instead of `Color`.
 To create a `UIColor` from a `Color`,
