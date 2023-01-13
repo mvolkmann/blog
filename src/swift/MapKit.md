@@ -186,12 +186,8 @@ One example is the ability to display a satellite view.
 Until `Map` becomes more full-featured,
 it is useful to wrap `MKMapView` in `UIViewRepresentable`
 to enable it to be used with SwiftUI in place of `Map`.
-
-The following code demonstrates creating such a wrapper.
-
-```swift
-
-```
+Code to do this can be found in my
+[UIKit blog page](/blog/swift/uikit/#using-a-view-model).
 
 ## Distance vs. Angle
 
