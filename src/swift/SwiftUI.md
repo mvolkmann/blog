@@ -1146,7 +1146,7 @@ the view `body` is recomputed.
 
 This is somewhat like the `useState` hook in React.
 
-Properties declared with `@State` usually include the `private`
+Properties declared with `@State` should specify `private`
 access control keyword because the data is only used by that view.
 
 The `@State` view modifier intended for storing basic values
@@ -3971,10 +3971,9 @@ struct ContentView: View {
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/navigationlink",
 "NavigationLink" %} view is used inside a `NavigationView`.
-See the [Navigation](#navigation) section.
 
-This is deprecated in iOS 16. See the new approach at
-{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
+This is deprecated in iOS 16.
+See the new approach at [Navigation](/blog/swift/Navigation/).
 
 ### NavigationView
 
@@ -3985,10 +3984,10 @@ a stack of views will be rendered one at a time.
 It contains `NavigationLink` views that are similar to HTML anchor elements.
 Tapping them causes the associated view
 to be rendered inside the `NavigationView`.
-See the [Navigation](#navigation) section.
+See the [Navigation](/blog/swift/Navigation/) section.
 
-This is deprecated in iOS 16. See the new approach at
-{% aTargetBlank "/blog/topics/#/blog/swift/Navigation/", "Navigation" %}.
+This is deprecated in iOS 16.
+See the new approach at [Navigation](/blog/swift/navigation).
 
 ### PasteButton
 
