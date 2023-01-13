@@ -295,76 +295,78 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
 ```swift
 // MapView.swift
-import CoreLocation
+import MapKit
 import SwiftUI
 
-private let appleParkLatitude = 37.334_900
-private let appleParkLongitude = -122.009_020
+/**
+ For now we have to wrap an MKMapView in a UIViewRepresentable
+ in order to use some MapKit features in SwiftUI
+ such as displaying satellite images.
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var error: Error?
+ I was getting the error "The following Metal object is being
+ destroyed while still required to be alive by the command buffer".
+ This thread provided a solution:
+ https://developer.apple.com/forums/thread/699119
+ I had to edit the current Xcode scheme, click "Run" in the left nav,
+ and uncheck the "API Validation" checkbox
+ in the Diagnostics ... Metal section.
+ */
+struct MapView: UIViewRepresentable {
+    typealias UIViewType = MKMapView
 
-    // This is the requested map center.
-    @Published var initialCenter = CLLocationCoordinate2D(
-        latitude: appleParkLatitude,
-        longitude: appleParkLongitude
-    )
+    let initialCenter: CLLocationCoordinate2D
 
-    // This is the current map center which differs
-    // from initialCenter if the user drags the map.
-    @Published var mapCenter: CLLocationCoordinate2D?
+    // This method is required to conform to UIViewRepresentable.
+    func makeUIView(context: Context) -> UIViewType {
+        // Other `mapType` options are `.standard` and `.satellite`.
+        MKMapView.appearance().mapType = .hybrid
 
-    // This is the device location.
-    // It is not updated if the device moves.
-    @Published var userLocation: CLLocationCoordinate2D?
+        let mapView = UIViewType()
+        mapView.delegate = context.coordinator
 
-    let manager = CLLocationManager()
+        let meters = 750.0
+        mapView.region = MKCoordinateRegion(
+            center: initialCenter,
+            latitudinalMeters: meters,
+            longitudinalMeters: meters
+        )
 
-    static var shared = LocationManager()
+        // Add a blue circle over the current user location.
+        mapView.showsUserLocation = true
 
-    override private init() {
-        super.init()
-        manager.delegate = self
+        return mapView
     }
 
-    // This is called when the device location is determined.
-    // An attempt to determine the location is triggered by
-    // the `requestLocation` method below.
-    func locationManager(
-        _ manager: CLLocationManager,
-        didUpdateLocations locations: [CLLocation]
-    ) {
-        userLocation = locations.first?.coordinate
-        initialCenter = userLocation!
+    // This is called initially and again every time
+    // ContentView passes a new value for `initialCenter`.
+    @MainActor
+    func updateUIView(_ mapView: UIViewType, context: Context) {
+        mapView.centerCoordinate = initialCenter
     }
 
-    // This is called if there is an error determining the device location.
-    func locationManager(
-        _ manager: CLLocationManager,
-        didFailWithError error: Error
-    ) {
-        print("LocationManager error:")
-        self.error = error
+    // This is required to conform to UIViewRepresentable.
+    func makeCoordinator() -> Coordinator {
+        // Use this if `Coordinator` needs access to its parent.
+        // Coordinator(self)
+        Coordinator()
     }
 
-    // This sets the map center to the device location.
-    func panToDeviceLocation() {
-        guard let userLocation else { return }
+    class Coordinator: NSObject, MKMapViewDelegate {
+        // Use this if access to the parent is needed.
+        /*
+         private var parent: MapView
 
-        // Hack alert!
-        // If the initial map center is already at the user location ...
-        if initialCenter == userLocation {
-            // Change it slightly to try `MapView` to re-render.
-            initialCenter.longitude += 0.0000001
-        } else {
-            // Go to the user location.
-            initialCenter = userLocation
+         init(_ parent: MapView) {
+             self.parent = parent
+         }
+         */
+
+        // This is called when the user drags the map.
+        func mapViewDidChangeVisibleRegion(_ mapView: UIViewType) {
+            Task { @MainActor in
+                LocationManager.shared.mapCenter = mapView.centerCoordinate
+            }
         }
-    }
-
-    // This is called by `ContentView`.
-    func requestLocation() {
-        manager.requestLocation()
     }
 }
 ```
