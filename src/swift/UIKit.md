@@ -154,8 +154,84 @@ Changing the binding will cause the view that owns the binding to update.
 The following code demonstrates this approach.
 
 ```swift
-TODO: Add MapView example where a starting location is passed in
-TODO: and the current map center is passed back when the user pans the map.
+// ContentView.swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var isOn = false
+    var body: some View {
+        VStack {
+            MySwitch(isOn: $isOn)
+            Text(isOn ? "ON" : "OFF")
+        }
+        .padding()
+    }
+}
+```
+
+```swift
+// MySwitch.swift
+import SwiftUI
+import UIKit
+
+// Because SwiftUI provides the `Toggle` view, we don't need to
+// to wrap a UIKit UISwitch view in a UIViewRepresentable.
+// This just demonstrates how a binding can be used to
+// share data from a `UIViewRepresentable` subtype
+// with a SwiftUI view that uses it.
+struct MySwitch: UIViewRepresentable {
+    typealias UIViewType = UISwitch
+
+    @Binding var isOn: Bool
+
+    init(isOn: Binding<Bool>) {
+        // The underscore here indicates that we are setting
+        // the wrapped value of the binding property above.
+        _isOn = isOn
+    }
+
+    // This method is required to conform to UIViewRepresentable,
+    func makeUIView(context: Context) -> UIViewType {
+        let view = UISwitch()
+
+        // In order to listen for changes in the value of the UISwitch,
+        // we need to register a listener that is an object
+        // with a method that is accessible to Objective-C.
+        // We can use a Coordinator object for that.
+        view.addTarget(
+            context.coordinator,
+            action: #selector(context.coordinator.onValueChanged(_:)),
+            for: .valueChanged
+        )
+
+        return view
+    }
+
+    func makeCoordinator() -> Coordinator {
+        // Passing `self` to the `Coordinator`
+        // allows it to access the `isOn` binding.
+        Coordinator(self)
+    }
+
+    // This method is required to conform to UIViewRepresentable,
+    // but it doesn't need to do anything.
+    func updateUIView(_ uiView: UISwitch, context: Context) {
+        // do nothing
+    }
+
+    class Coordinator: NSObject {
+        private var parent: MySwitch
+
+        init(_ parent: MySwitch) {
+            self.parent = parent
+        }
+
+        @objc
+        func onValueChanged(_ view: UISwitch) {
+            parent.isOn = view.isOn
+        }
+    }
+}
 ```
 
 Another approach for updating a view based on changes in a
@@ -344,7 +420,6 @@ struct MapView: UIViewRepresentable {
         mapView.centerCoordinate = initialCenter
     }
 
-    // This is required to conform to UIViewRepresentable.
     func makeCoordinator() -> Coordinator {
         // Use this if `Coordinator` needs access to its parent.
         // Coordinator(self)
