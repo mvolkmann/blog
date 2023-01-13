@@ -6764,6 +6764,24 @@ VStack {
 }
 ```
 
+Paul Hudson recommends defining view modifiers that can be used
+to apply other platform-specific view modifiers.
+Here is the code for a macOS view modifier.
+Others for iOS, watchOS, and tvOS would be similar.
+
+```swift
+// TODO: TRY THIS!
+extension View {
+    func macOS<Content: View>(_ modifier: (Self) -> Content) -> some View {
+        #if os(macOS)
+        return modifier(self)
+        #else
+        return self
+        #endif
+    }
+}
+```
+
 ## Fonts
 
 The `font` view modifier specifies the font, size, and weight

@@ -49,6 +49,8 @@ struct ContentView: View {
             .navigationDestination(for: String.self) { item in
                 switch item {
                 case "Apple":
+                    // During development destinations can be simple
+                    // `Text` views until real views are developed.
                     AppleView()
                 case "Banana":
                     BananaView()
