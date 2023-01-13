@@ -148,6 +148,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HStack {
+                // To change the text displayed in a `LocationButton`
+                // pass it one of the following enum values:
+                // `.currentLocation` - "Current Location" (default)
+                // `.sendCurrentLocation` - "Send Current Location"
+                // `.sendMyCurrentLocation` - "Send My Current Location"
+                // `.shareCurrentLocation` - "Share Current Location"
+                // `.shareMyCurrentLocation` - "Share My Current Location"
                 LocationButton {
                     locationManager.requestLocation()
                 }
