@@ -5,16 +5,18 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-## StoreKit
+## Overview
 
 {% aTargetBlank "https://developer.apple.com/documentation/storekit",
 "StoreKit" %} is an Apple framework that supports
 in-app purchases, ad network attribution, Apple Music integration,
 and enabling app ratings and reviews.
 
+## Usage
+
 To use StoreKit in an app:
 
-1. Create a new file.
+1. Select File ... New ... File... or press cmd-n.
 1. Scroll the "Other" category.
 1. Select "StoreKit Configuration File".
 1. A file name can be entered, but the default name
