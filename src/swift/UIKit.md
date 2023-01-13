@@ -146,8 +146,240 @@ In example above, SwiftUI sends data to the `UIViewRepresentable`
 using the `text` parameter, but no data comes back.
 
 Let's look at an example where data also needs to come back.
+There are many approaches for doing this.
+One approach is to pass a binding to the `UIViewRepresentable` subtype
+that it can update.
+Changing the binding will cause the view that owns the binding to update.
+
+The following code demonstrates this approach.
 
 ```swift
 TODO: Add MapView example where a starting location is passed in
 TODO: and the current map center is passed back when the user pans the map.
+```
+
+Another approach for updating a view based on changes in a
+`UIViewRepresentable` subtype is to store the changeable data in a view model
+The following code demonstrates this approach.
+It renders a map using the UIKit `MKMapView` class.
+Initially the map is centered on Apple Park.
+Tapping the "Current Location" button uses Core Location
+to get the current device location and centers the map there.
+The user can drag the map to a new location.
+The latitude and longitude of the map center is displayed above the map
+and updates during dragging.
+The user can re-center the map on the device location
+by tapping the "Reset" button.
+
+```swift
+// ContentView.swift
+import CoreLocation
+import CoreLocationUI
+import MapKit
+import SwiftUI
+
+struct ContentView: View {
+    @StateObject private var locationManager = LocationManager.shared
+
+    var body: some View {
+        VStack {
+            if locationManager.userLocation == nil {
+                // Tap this to get the device location and pan the map to it.
+                LocationButton {
+                    locationManager.requestLocation()
+                }
+                .foregroundColor(.white) // defaults to black
+            } else {
+                // Tap this to reset the map to the device location.
+                Button("Reset") {
+                    locationManager.panToDeviceLocation()
+                }
+                .buttonStyle(.bordered)
+            }
+
+            // This updates if the user drags the map.
+            if let c = locationManager.mapCenter {
+                Text("Lat: \(c.latitude), Lng: \(c.longitude)")
+            }
+
+            MapView(initialCenter: locationManager.initialCenter)
+
+            Spacer()
+        }
+        .padding()
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+```swift
+// LocationManager.swift
+import CoreLocation
+import SwiftUI
+
+private let appleParkLatitude = 37.334_900
+private let appleParkLongitude = -122.009_020
+
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var error: Error?
+
+    // This is the requested map center.
+    @Published var initialCenter = CLLocationCoordinate2D(
+        latitude: appleParkLatitude,
+        longitude: appleParkLongitude
+    )
+
+    // This is the current map center which differs
+    // from initialCenter if the user drags the map.
+    @Published var mapCenter: CLLocationCoordinate2D?
+
+    // This is the device location.
+    // It is not updated if the device moves.
+    @Published var userLocation: CLLocationCoordinate2D?
+
+    let manager = CLLocationManager()
+
+    static var shared = LocationManager()
+
+    override private init() {
+        super.init()
+        manager.delegate = self
+    }
+
+    // This is called when the device location is determined.
+    // An attempt to determine the location is triggered by
+    // the `requestLocation` method below.
+    func locationManager(
+        _ manager: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]
+    ) {
+        userLocation = locations.first?.coordinate
+        initialCenter = userLocation!
+    }
+
+    // This is called if there is an error determining the device location.
+    func locationManager(
+        _ manager: CLLocationManager,
+        didFailWithError error: Error
+    ) {
+        print("LocationManager error:")
+        self.error = error
+    }
+
+    // This sets the map center to the device location.
+    func panToDeviceLocation() {
+        guard let userLocation else { return }
+
+        // Hack alert!
+        // If the initial map center is already at the user location ...
+        if initialCenter == userLocation {
+            // Change it slightly to try `MapView` to re-render.
+            initialCenter.longitude += 0.0000001
+        } else {
+            // Go to the user location.
+            initialCenter = userLocation
+        }
+    }
+
+    // This is called by `ContentView`.
+    func requestLocation() {
+        manager.requestLocation()
+    }
+}
+```
+
+```swift
+// MapView.swift
+import CoreLocation
+import SwiftUI
+
+private let appleParkLatitude = 37.334_900
+private let appleParkLongitude = -122.009_020
+
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var error: Error?
+
+    // This is the requested map center.
+    @Published var initialCenter = CLLocationCoordinate2D(
+        latitude: appleParkLatitude,
+        longitude: appleParkLongitude
+    )
+
+    // This is the current map center which differs
+    // from initialCenter if the user drags the map.
+    @Published var mapCenter: CLLocationCoordinate2D?
+
+    // This is the device location.
+    // It is not updated if the device moves.
+    @Published var userLocation: CLLocationCoordinate2D?
+
+    let manager = CLLocationManager()
+
+    static var shared = LocationManager()
+
+    override private init() {
+        super.init()
+        manager.delegate = self
+    }
+
+    // This is called when the device location is determined.
+    // An attempt to determine the location is triggered by
+    // the `requestLocation` method below.
+    func locationManager(
+        _ manager: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]
+    ) {
+        userLocation = locations.first?.coordinate
+        initialCenter = userLocation!
+    }
+
+    // This is called if there is an error determining the device location.
+    func locationManager(
+        _ manager: CLLocationManager,
+        didFailWithError error: Error
+    ) {
+        print("LocationManager error:")
+        self.error = error
+    }
+
+    // This sets the map center to the device location.
+    func panToDeviceLocation() {
+        guard let userLocation else { return }
+
+        // Hack alert!
+        // If the initial map center is already at the user location ...
+        if initialCenter == userLocation {
+            // Change it slightly to try `MapView` to re-render.
+            initialCenter.longitude += 0.0000001
+        } else {
+            // Go to the user location.
+            initialCenter = userLocation
+        }
+    }
+
+    // This is called by `ContentView`.
+    func requestLocation() {
+        manager.requestLocation()
+    }
+}
+```
+
+```swift
+// CLLocationCoordinate2DExtension.swift
+import MapKit
+
+extension CLLocationCoordinate2D: Equatable {
+    // This is need in order to compare instances of this type.
+    public static func == (
+        lhs: CLLocationCoordinate2D,
+        rhs: CLLocationCoordinate2D
+    ) -> Bool {
+        lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+}
 ```
