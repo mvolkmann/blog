@@ -152,6 +152,16 @@ The Navigator has nine icon buttons at the top.
   including error messages.
   Click a build to see details.
 
+## Files
+
+To open a file within a project in an editor pane,
+select File ... Open Quickly... (or press cmd-shift-o),
+enter part of the file name (at least three characters),
+and click the file within the list that appears.
+This also works with any kind of name including
+types, variables, functions, structs, classes, properties, and methods.
+It even works with framework types.
+
 ## Editor
 
 Xcode provides a specialized editor for some file types.
@@ -394,6 +404,65 @@ select File ... Open, navigate to the project directory, and click "Open".
 Another way to open an existing Xcode project
 is to double-click its `.xcodeproj` file.
 
+## Code Formatting
+
+To fix Swift code indentation in Xcode,
+select the lines to be fixed (cmd-a for all)
+and press ctrl-i which is the keyboard shortcut
+for Editor ... Structure ... Re-Indent.
+The default code indentation is four spaces.
+Chained method calls that appear on separate lines are indented,
+but those chained onto trailing closures are not.
+
+Other options for Swift code formatting include
+{% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
+and {% aTargetBlank "https://github.com/apple/swift-format", "swift-format" %}.
+
+SwiftFormat can be run as a command-line tool or an Xcode extension
+
+To install SwiftFormat for command-line usage, enter `brew install swiftformat`.
+To format a `.swift` file, enter `swiftformat file-name.swift`.
+To format all the `.swift` files in the current directory,
+enter `swiftformat *.swift`.
+
+To install SwiftFormat as an Xcode extension:
+
+- enter `brew install --cask swiftformat-for-xcode`
+- open the Finder and navigate to the Applications directory
+- double-click the SwiftFormat app
+- follow the displayed instructions
+- The SwiftFormat app can also be used to customize the rules.
+- restart Xcode
+- add a keyboard shortcut
+  - select Xcode ... Preferences ... Key Bindings
+  - enter "SwiftFormat" in the Filter input
+  - double-click in the Key column for "SwiftFormat - Format File"
+  - press a key combination to assign like option-f
+
+To format all the lines in the current file,
+press the assigned keyboard shortcut or
+select Editor ... SwiftFormat ... Format File.
+
+There is currently no way within Xcode to format files on save.
+However, this can be configured using an Automator script
+and a System Preferences keyboard shortcut.
+The steps to configure this are described at {% aTargetBlank
+"https://luisramos.dev/xcode-format-and-save", "Xcode Format and Save" %}.
+
+## Pragma Marks
+
+Each section of a source file can be preceded by a special comment
+called a "pragma mark".
+The syntax is `// MARK: - SectionName` where SectionName is typically something
+like `Nested Types`, `Constants`, `Properties`, `Initializers`, or `Methods`.
+Xcode will display these section names in the Minimap and
+in the dropdown of source file elements at the top of the Editor pane.
+The `-` in the comment is optional and causes a
+horizontal line to be drawn above the section name.
+
+To toggle display of the Minimap, select Editor ... Minimap
+or press cmd-ctrl-M.
+
 ## Building
 
 To build a project, select Product ... Build or press cmd-b.
@@ -423,21 +492,37 @@ To run an app:
 - Select a simulator device or real device from the dropdown in the top center.
 - Select Product ... Run or press cmd-r.
 
-Devices must be connected to the computer via a cable
-unless they have been configured to run wirelessly.
+To run the current app on a real iOS device:
+
+- Attach the device with a USB cable.
+- Wait for the computer to recognize the device.
+  It will appear in the left nav. of the Finder under "Locations".
+- Select the device from the dropdown at the top
+  that includes the names of available simulators.
+  It will have a name like "iPhone 14 Pro".
+- Press the play button or cmd-r.
+- Enter the computer password.
+- Look for a new app icon to appear on the device.
+- One-time setup on the device:
+  - Open the Settings app.
+  - Select General ... VPN & Device Management.
+  - Tap the new app.
+  - Tap the "Trust" button.
+
 To configure a device to run apps wirelessly:
 
+- The device must be on the same WiFi network as the computer.
 - Attach the device to the computer with a cable.
 - Select Window ... Devices and Simulators.
-- In the window that appears, select the device.
-- Check the "Connect via network" checkbox.
-- Ensure that the device is on the same Wi-Fi network as the computer.
-
-To run an app on the device wirelessly:
-
+- In the dialog that appears, select the device in the left nav.
+- Check the "Connect vis network" checkbox.
+- In the Finder, eject the device.
 - Disconnect the device from the computer.
-- Select the device from the dropdown in the top center.
-- Run the app.
+
+To run the current app on a device wirelessly:
+
+- Select the device from the device dropdown at the top.
+- Press the play button or cmd-r.
 
 ## Previews
 
@@ -445,15 +530,23 @@ Previews allow testing a single view outside of the Simulator or a real device.
 To restart the preview, press cmd-option-p.
 To toggle showing the preview area, press cmd-option-return.
 
-## Files
+## App Icons
 
-To open a file within a project in an editor pane,
-select File ... Open Quickly... (or press cmd-shift-o),
-enter part of the file name (at least three characters),
-and click the file within the list that appears.
-This also works with any kind of name including
-types, variables, functions, structs, classes, properties, and methods.
-It even works with framework types.
+To add app icons:
+
+- browse <https://appicon.co>
+- drag an image file into the drag area
+- check the checkboxes for the target devices
+- click the Generate button
+- open the Finder and go to the Downloads directory
+- double-click the `AppIcons.zip` file to expand it
+- open the `AppIcons` folder
+- open the `Assets.xcassets` folder to expose the `AppIcon.appiconset` folder
+- open an Xcode project
+- right-click `Assets.xcassets` in the Navigator and select "Show in Finder"
+- drag the `AppIcon.appiconset` folder from the Finder
+  into the directory opened by the previous command
+  and click the "Replace" button
 
 ## Source Control
 
@@ -717,6 +810,43 @@ To discard all uncommitted changes:
 - Select Source Control ... Discard All Changes...
 - In the confirmation dialog that is displayed, click the "Discard" button.
 
+### Commits
+
+To commit changes:
+
+- Select Source Control ... Commit... or press cmd-option-c
+  to open a dialog that lists the files that can be committed.
+  By default the checkbox for each file is checked.
+  Uncheck any that should not be committed.
+- A letter will appear after files that will be affected by the commit,
+  "A" for added, "C" for merge conflict, "D" for deleted, "M" for modified,
+  and "?" for files unknown to the local Git repository.
+- In the left, make sure the checkboxes to the left
+  of each filename to be committed are checked.
+- One at a time click the name of each file to be committed
+  to see a side-by-side diff where you can verify all the changes.
+  By default the new version is displayed on the left.
+  To switch this, select Preferences ... Source Control ... Comparison View
+  ... Local Revision on Right Side.
+- Undesired changes can be discarded by clicking a numbered blue button
+  in the gutter between the old and new versions of the file
+  and selecting "Discard Changes" from the popup.
+- Enter a comment for the commit in the text area at the bottom.
+- Optionally check the "Push to remote" checkbox.
+- Click the "Commit" button.
+
+To see the changes in a previous commit:
+
+- Open the Source Control Navigator.
+- Select the Repositories tab.
+- Expand the Branches section.
+- Select a branch.
+- A list of all the commits on that branch will be displayed in the editor area.
+- Double-click a commit to see the files that were added, modified, and deleted
+  in that commit.
+- Click the "<" button in the upper-left of the editor area
+  to return to the list of commits.
+
 ### Stashes
 
 To stash uncommitted changes:
@@ -748,38 +878,6 @@ To delete a stash:
 - Expand the "Stashed Changes" section.
 - Right-click a stash description and select "Delete...".
 - In the confirmation dialog that appears, click the "Delete" button.
-
-### Commits
-
-To commit changes:
-
-- Select Source Control ... Commit... or press cmd-option-c
-  to open a dialog that lists the files that can be committed.
-- A letter will appear after files that will be affected by the commit,
-  "A" for added, "C" for merge conflict, "D" for deleted, "M" for modified,
-  and "?" for files unknown to the local Git repository.
-- In the left, make sure the checkboxes to the left
-  of each filename to be committed are checked.
-- One at a time click the name of each file to be committed
-  to see a side-by-side diff where you can verify all the changes.
-  Undesired changes can be discarded by clicking a numbered blue button
-  in the gutter between the old and new versions of the file
-  and selecting "Discard Changes" from the popup.
-- Enter a comment for the commit in the text area at the bottom.
-- Optionally check the "Push to remote" checkbox.
-- Click the "Commit" button.
-
-To see the changes in a previous commit:
-
-- Open the Source Control Navigator.
-- Select the Repositories tab.
-- Expand the Branches section.
-- Select a branch.
-- A list of all the commits on that branch will be displayed in the editor area.
-- Double-click a commit to see the files that were added, modified, and deleted
-  in that commit.
-- Click the "<" button in the upper-left of the editor area
-  to return to the list of commits.
 
 ### Pull Requests
 
@@ -1242,3 +1340,109 @@ by following the direction at {% aTargetBlank
 See {% aTargetBlank
 "https://sarunw.com/posts/how-to-use-pre-release-swift-version-in-xcode/",
 "How to use a pre-release Swift version in Xcode" %}.
+
+## Instruments
+
+{% aTargetBlank "https://developer.apple.com/xcode/features/", "Instruments" %}
+is an app included with Xcode for analyzing things like:
+
+- How many views were created?
+- How often are the views redrawn?
+- How long did it take create them?
+- How many times was the evaluation of a view body slow?
+- What properties do the views have?
+- How did the view properties changed over time?
+- How has the state of a view changed over time?
+- How long did each function execution take to complete?
+- How many core animation commits occurred?
+
+While profiling can be performed in the Simulator,
+running on a device will provide more realistic results.
+
+There are three ways to launch the app using Instruments:
+
+- press cmd-i
+- Select Product ... Profile
+- Select Xcode ... Open Developer Tool ... Instruments.
+
+The Instruments app will open a dialog for choosing at profiling template.
+A commonly used profiling template is "SwiftUI",
+but there are over 20 templates to try including "Core Data",
+"Leaks", "Logging", "Network" (ex. HTTP traffic), and "Swift Concurrency".
+
+Select the "SwiftUI" category and click the "Choose" button.
+A new window will open where profiling data will be displayed.
+
+Click the record button in the upper-left to
+launch the app (in release mode) and begin analyzing its performance.
+Exercise the app in the Simulator to trigger the functionality to be analyzed.
+
+Click the pause or stop buttons in the upper-left
+to stop execution so the results so far can be examined.
+Select a category row in the top half to see
+detail on that category displayed in the bottom half.
+Categories include:
+
+- View Body
+
+  This category measures the number and duration of view body evaluations
+  divided into provided SwiftUI views and custom views.
+
+- View Properties
+
+  This category shows the current and previous values of all view properties.
+  Unfortunately it does not show the names of the properties.
+  I wasn't able to get this category to show ANY data!
+
+- Core Animation Commit
+
+  This category shows the number and duration of
+  Core Animation transaction commits.
+
+- Time Profiler
+
+  This category shows time spent in each part of the code.
+
+The bottom half displays a table of statistics for the selected category.
+The columns "Count" and "Average Duration" are particularly interesting.
+For example, when the "View Body" category is selected,
+we can see how many times a `Button` view was evaluated
+and the average number of milliseconds or microseconds required each time.
+
+For the "View Body" category, the "Timing Summary" in the bottom half
+of the window divides the data into two categories, the app and SwiftUI.
+Expand those sections to get detail on each.
+The views in each section are sorted by their "Count" from largest to smallest.
+
+To zoom in and out on the bars in the top half of the window,
+press cmd-plus and cmd-minus.
+
+To see data summarized over a particular time interval of the run,
+identify the time interval of interest by
+dragging across any bar in the top half of the window.
+
+## Xcode Issues
+
+While using Xcode is generally fine, it does have a few issues.
+
+- Xcode is slow.
+
+  After saving code changes it can take a few seconds
+  for it to identify syntax errors.
+  This may be caused by the Swift compiler being slow.
+
+- Xcode only supports limited Vim keybindings.
+
+  To enable this, select Editor ... Vim Mode.
+
+  The Vim support is very basic.
+  No colon commands are supported.
+  This means changes cannot be saved with ":w"
+  and find/replace cannot be performed with ":s/foo/bar".
+  Pressing the "/" key invokes Xcode find,
+  but it does not support regular expressions.
+  It does not support repeating commands with the period key,
+  defining macros, and other more advanced Vim features.
+  For a list of supported Vim commands, see this {% aTargetBlank
+  "https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022",
+  "Apple Developer Forum post" %}.
