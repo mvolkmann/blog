@@ -13,11 +13,13 @@ layout: topic-layout.njk
 
 ## Overview
 
+## UIKit Integration
+
 The {% aTargetBlank "https://developer.apple.com/documentation/uikit",
 "UIKit" %} framework predates SwiftUI which is now the preferred framework
 for building iOS, watchOS, macOS, and tvOS apps.
 
-UIKIt has features not present in SwiftUI.
+UIKIt still has features not present in SwiftUI.
 When those features are needed, UIKit views can be used inside a SwiftUI app.
 This is accomplished by wrapping a UIKit view in a struct
 that conforms to the {% aTargetBlank
@@ -259,6 +261,61 @@ struct MySwitch: UIViewRepresentable {
         }
     }
 }
+```
+
+The following code provides a similar example where `UITextField`
+is wrapped in a `UIViewRepresentable`.
+One feature this has that is missing from the SwiftUI `TextField` view
+is the ability to include a clear button on the trailing end
+that is an "X" in a circle. Tapping this clears the value.
+An easier way to add a clear button to `TextField` instances is
+described in the [SwiftUI TextField](/blog/swift/SwiftUI/#textfield) section.
+
+```swift
+struct MyUITextField: UIViewRepresentable {
+    var placeholder = ""
+    @Binding var text: String
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(text: $text)
+    }
+
+    func makeUIView(context: Context) -> UITextField {
+        let textField = UITextField()
+
+        textField.borderStyle = .roundedRect
+        textField.clearButtonMode = .whileEditing
+        textField.delegate = context.coordinator
+        textField.placeholder = placeholder
+
+        return textField
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = text
+    }
+
+    class Coordinator: NSObject, UITextFieldDelegate {
+        @Binding var text: String
+
+        init(text: Binding<String>) {
+            self._text = text
+        }
+
+        func textFieldDidChangeSelection(_ textField: UITextField) {
+            text = textField.text ?? ""
+        }
+    }
+}
+```
+
+To use this inside a SwiftUI view, add code like the following:
+
+```swift
+@State private var firstName = "Mark"
+...
+MyUITextField(placeholder: "First Name", text: $firstName)
+    .frame(height: 31)
 ```
 
 ### Using a View Model
