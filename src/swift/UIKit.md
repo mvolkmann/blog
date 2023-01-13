@@ -7,7 +7,6 @@ layout: topic-layout.njk
 
 ## Overview
 
-TODO: Add detail here.
 The {% aTargetBlank "https://developer.apple.com/documentation/uikit",
 "UIKit" %} framework predates SwiftUI which is now the preferred framework
 for building iOS, watchOS, macOS, and tvOS apps.
@@ -30,7 +29,7 @@ For example, the {% aTargetBlank
 "https://developer.apple.com/documentation/uikit/uibutton", "UIButton" %}
 class inherits from {% aTargetBlank
 "https://developer.apple.com/documentation/uikit/uicontrol", "UIControl" %}
-class which inherits from `UIView` class.
+class which inherits `UIView`.
 
 UIKit views typically have properties that are set after an instance is created.
 The following code creates a {% aTargetBlank
@@ -44,10 +43,17 @@ label.textColor = .red
 label.text = "Hello, World!"
 ```
 
-UIKit views that need to report on changes or user interactions
-do so using a "delegate".
+UIKit views that need to report on changes to their state
+or user interactions sometimes do so using a "delegate".
 This is an object that conforms to a specific protocol
 and is assigned to a `UIView` instance.
+For example, {% aTargetBlank
+"https://developer.apple.com/documentation/uikit/uitextview", "UITextView" %}
+has a `delegate` property whose type is the {% aTargetBlank
+"https://developer.apple.com/documentation/uikit/uitextviewdelegate",
+"UITextViewDelegate" %} protocol.
+That protocol defines several methods that are invoked when
+the user interacts with the `UITextView` such as `textViewDidChange`.
 
 ## Relationship to SwiftUI
 
@@ -78,19 +84,30 @@ that correspond to UIKit concepts:
 | `UITextField` with `isSecureTextEntry` true   | `SecureField`                  |
 | `UITextView`                                  | `TextEditor` for plain strings |
 
-It is possible to use UIKit components in a SwiftUI app
-by wrapping them in a struct that conforms to the {% aTargetBlank
+## UIViewRepresentable
+
+UIKit views can be used in a SwiftUI app by wrapping them
+in a struct that conforms to the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/uiviewrepresentable",
 "UIViewRepresentable" %} protocol.
 However, there is enough functionality in SwiftUI
 that this is typically not necessary.
 
-## UIViewRepresentable
+For cases when it is needed,j
+
+### Display-only
+
+When a SwiftUI app needs to use a UIKit view for display purposes
+and no state changes or user interactions need to be captured,
+the following approach can be used.
 
 There is no need to wrap a `UILabel` in a `UIViewRepresentable`
 because SwiftUI provides the `Text` view which can be used instead.
-However, doing so provides a simple example of using `UIViewRepresentable`
-and this is demonstrated in the following code.
+However, doing so provides a simple example of using `UIViewRepresentable`.
+
+<img alt="UIViewRepresentable with display-only" style="border: 1px solid gray; width: 40%"
+  src="/blog/assets/SwiftUI-UIViewRepresentable-DisplayOnly.png?v={{pkg.version}}"
+  title="UIViewRepresentable with display-only">
 
 ```swift
 import SwiftUI
@@ -118,7 +135,8 @@ struct MyLabel: UIViewRepresentable {
 
     // Updates the state of the UIView created in `makeUIView`
     // with new data provided by a SwiftUI View.
-    // This called after makeUIView and again every time a parameter changes.
+    // This called after makeUIView and again every time
+    // a parameter changes (ex. text).
     func updateUIView(_ uiView: UILabel, context: Context) {
         uiView.text = text
     }
@@ -142,16 +160,18 @@ struct ContentView: View {
 }
 ```
 
-In example above, SwiftUI sends data to the `UIViewRepresentable`
-using the `text` parameter, but no data comes back.
+### Using a Binding
 
-Let's look at an example where data also needs to come back.
-There are many approaches for doing this.
+There are many approaches for getting data back
+from a `UIViewRepresentable` subtype.
 One approach is to pass a binding to the `UIViewRepresentable` subtype
 that it can update.
 Changing the binding will cause the view that owns the binding to update.
-
 The following code demonstrates this approach.
+
+<img alt="UIViewRepresentable with Binding" style="border: 1px solid gray; width: 40%"
+  src="/blog/assets/SwiftUI-UIViewRepresentable-Binding.png?v={{pkg.version}}"
+  title="UIViewRepresentable with Binding">
 
 ```swift
 // ContentView.swift
@@ -159,6 +179,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isOn = false
+
     var body: some View {
         VStack {
             MySwitch(isOn: $isOn)
@@ -234,18 +255,25 @@ struct MySwitch: UIViewRepresentable {
 }
 ```
 
-Another approach for updating a view based on changes in a
-`UIViewRepresentable` subtype is to store the changeable data in a view model
+### Using a View Model
+
+Another approach for getting data back from a `UIViewRepresentable` subtype
+is to store the changeable data in a view model.
 The following code demonstrates this approach.
-It renders a map using the UIKit `MKMapView` class.
-Initially the map is centered on Apple Park.
+
+This code renders a map using the UIKit `MKMapView` class.
+Initially the map is centered on Apple Park in Cupertino, California.
 Tapping the "Current Location" button uses Core Location
 to get the current device location and centers the map there.
 The user can drag the map to a new location.
-The latitude and longitude of the map center is displayed above the map
-and updates during dragging.
-The user can re-center the map on the device location
+The latitude and longitude of the map center is
+displayed above the map and updates during dragging.
+The user can center the map on the device location
 by tapping the "Reset" button.
+
+<img alt="UIViewRepresentable with ViewModel" style="border: 1px solid gray; width: 40%"
+  src="/blog/assets/SwiftUI-UIViewRepresentable-ViewModel.png?v={{pkg.version}}"
+  title="UIViewRepresentable with ViewModel">
 
 ```swift
 // ContentView.swift
