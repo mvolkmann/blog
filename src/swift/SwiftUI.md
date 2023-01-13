@@ -4645,7 +4645,7 @@ different formatting to substrings of a string.
 A gradient can be used to supply text color.
 For example:
 
-<img alt="SwiftUI Text gradient" style="border: 1px solid gray; width: 50%"
+<img alt="SwiftUI Text gradient" style="width: 50%"
   src="/blog/assets/SwiftUI-Text-gradient.png?v={{pkg.version}}"
   title="SwiftUI Text gradient">
 
@@ -4674,7 +4674,7 @@ because those can be automatically sized to match the text size.
 The concatenated `Text` views will wrap as expected.
 For example:
 
-<img alt="SwiftUI Text Images" style="border: 1px solid gray; width: 50%"
+<img alt="SwiftUI Text Images" style="width: 50%"
   src="/blog/assets/SwiftUI-Text-Images.png?v={{pkg.version}}"
   title="SwiftUI Text Images">
 
@@ -6661,7 +6661,7 @@ Clicking the `Button` toggles whether the first `HStack` is rendered.
 It also rotates the chevron icon using animation
 which is covered later in the [Animation](#animation) section.
 
-<img alt="SwiftUI ViewModifier" style="width: 70%"
+<img alt="SwiftUI ViewModifier" style="width: 50%"
   src="/blog/assets/SwiftUI-ViewModifier.png?v={{pkg.version}}"
   title="SwiftUI ViewModifier">
 
@@ -6732,6 +6732,11 @@ struct Collapsible: ViewModifier {
 }
 
 extension View {
+    // This attribute triggers the compile-time warning "Use of 'collapsible'
+    // treated as a reference to instance method in protocol 'View'"
+    // if this method is not called on a view with `.collapsible(...)`.
+    // It's too bad that the Apple-supplied view modifiers don't use this.
+    @warn_unqualified_access
     func collapsible(
         bgColor: Color = .black,
         duration: Double = 0.5) -> some View {
@@ -6744,16 +6749,20 @@ The following code demonstrates using the custom `ViewModifier` defined above.
 
 ```swift
 VStack {
-    Text("First line of content")
-    Text("Second line of content")
+    VStack {
+        Text("First line of content")
+        Text("Second line of content")
+    }
+    .padding()
+
+    // This way of applying a view modifier doesn't use the View extension.
+    //.modifier(Collapsible(bgColor: .yellow))
+
+    // This way uses the View extension and is preferred.
+    .collapsible(bgColor: .yellow)
+
+    Spacer()
 }
-.padding()
-
-// This way of applying a view modifier doesn't use the View extension.
-//.modifier(Collapsible(bgColor: ContentView.bgColor))
-
-// This way uses the View extension and is preferred.
-.collapsible(bgColor: ContentView.bgColor)
 ```
 
 ## Fonts

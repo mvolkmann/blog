@@ -5,6 +5,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 ## Overview
 
 The {% aTargetBlank "https://developer.apple.com/documentation/uikit",
@@ -105,7 +111,7 @@ There is no need to wrap a `UILabel` in a `UIViewRepresentable`
 because SwiftUI provides the `Text` view which can be used instead.
 However, doing so provides a simple example of using `UIViewRepresentable`.
 
-<img alt="UIViewRepresentable with display-only" style="border: 1px solid gray; width: 40%"
+<img alt="UIViewRepresentable with display-only" style="width: 40%"
   src="/blog/assets/SwiftUI-UIViewRepresentable-DisplayOnly.png?v={{pkg.version}}"
   title="UIViewRepresentable with display-only">
 
@@ -169,7 +175,7 @@ that it can update.
 Changing the binding will cause the view that owns the binding to update.
 The following code demonstrates this approach.
 
-<img alt="UIViewRepresentable with Binding" style="border: 1px solid gray; width: 40%"
+<img alt="UIViewRepresentable with Binding" style="width: 40%"
   src="/blog/assets/SwiftUI-UIViewRepresentable-Binding.png?v={{pkg.version}}"
   title="UIViewRepresentable with Binding">
 
@@ -271,7 +277,7 @@ displayed above the map and updates during dragging.
 The user can center the map on the device location
 by tapping the "Reset" button.
 
-<img alt="UIViewRepresentable with ViewModel" style="border: 1px solid gray; width: 40%"
+<img alt="UIViewRepresentable with ViewModel" style="width: 40%"
   src="/blog/assets/SwiftUI-UIViewRepresentable-ViewModel.png?v={{pkg.version}}"
   title="UIViewRepresentable with ViewModel">
 

@@ -5,6 +5,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 ## Overview
 
 Apple added the async/await system to Swift in 2021.
@@ -653,7 +659,7 @@ query to be performed which provides new data to be displayed.
 The following code demonstrates using the `task` view modifier
 with the `id` argument:
 
-<img alt="SwiftUI task view modifier" style="border: 1px solid gray; width: 50%"
+<img alt="SwiftUI task view modifier" style="width: 50%"
   src="/blog/assets/SwiftUI-task-with-id.png?v={{pkg.version}}"
   title="SwiftUI task view modifier">
 

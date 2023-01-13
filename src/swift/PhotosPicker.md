@@ -5,6 +5,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 ## Overview
 
 iOS 16 introduced the {% aTargetBlank
@@ -27,7 +33,7 @@ shared in the Steward Lynch video linked above.
 
 The app has two tabs.
 
-<img alt="PhotosPicker Initial" style="border: 1px solid gray; width: 50%"
+<img alt="PhotosPicker Initial" style="width: 50%"
   src="/blog/assets/swiftui-photospicker-initial.png?v={{pkg.version}}">
 
 ### Single Image tab
@@ -36,7 +42,7 @@ The first tab "Single Image" allows the user
 to select a single image from their photo library.
 Tap the icon in the upper-right corner to view the photo library.
 
-<img alt="PhotosPicker Single" style="border: 1px solid gray; width: 50%"
+<img alt="PhotosPicker Single" style="width: 50%"
   src="/blog/assets/swiftui-photospicker-single.png?v={{pkg.version}}">
 
 See the code for {% aTargetBlank
@@ -59,7 +65,7 @@ The second tab "Multiple Images" allows the user
 to select multiple images from their photo library.
 Tap the icon in the upper-right corner to view the photo library.
 
-<img alt="PhotosPicker Multiple" style="border: 1px solid gray; width: 50%"
+<img alt="PhotosPicker Multiple" style="width: 50%"
   src="/blog/assets/swiftui-photospicker-multiple.png?v={{pkg.version}}">
 
 See the code for {% aTargetBlank
