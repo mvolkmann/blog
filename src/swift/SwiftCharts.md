@@ -136,7 +136,9 @@ The `Chart` initializer also supports the `id` argument.
 
 ### `BarMark`
 
-Instances of the `BarMark` struct describe individual bars in a bar charts.
+Instances of the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/barmark", "BarMark" %}
+struct describe individual bars in a bar charts.
 
 Negative quantitative values cause the bar to be rendered
 below the typical x-axis..
@@ -196,7 +198,9 @@ BarMark(x: value1, y: value2)
 
 ### `LineMark`
 
-These are used to display line charts.
+Instances of the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/linemark", "LineMark" %}
+struct are used to display line charts.
 
 To assign a different color to each corresponding `LineMark`,
 apply the `foregroundStyle` view modifier
@@ -232,7 +236,9 @@ LineMark(x: ageCategory, y: male)
 
 ### `PointMark`
 
-These are used to display scatter plots or to add points to line charts.
+Instances of the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/pointmark", "PointMark" %}
+struct are used to display scatter plots or to add points to line charts.
 
 To assign a different color to each corresponding `PointMark`,
 apply the `foregroundStyle` view modifier
@@ -258,8 +264,10 @@ These values could come of the data objects rather than being literal values.
 
 ### `AreaMark`
 
-These are used to display area charts which shade the
-area below single values in a data series
+Instances of the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/areamark", "AreaMark" %}
+struct are used to display area charts which
+shade the area below single values in a data series
 (by specifying the `y` argument) or
 between two values in a data series
 (by specifying the `yStart` and `yEnd` arguments).
@@ -278,13 +286,195 @@ due to this restriction.
 
 ### `RectangleMark`
 
-These are used to display heat maps.
+Instances of the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/rectanglemark", "RectangleMark" %}
+struct are used to display heat maps.
 
-TODO: Add more detail here on how to create a heat map.
+The following code demonstrates using this to display a heat map
+that represents hourly temperature forecasts over the 5-day period.
+For a full implementation that uses [WeatherKit](/blog/swift/weatherkit)
+to get real temperature forecasts, see {% aTargetBlank
+"https://github.com/mvolkmann/WeatherKitDemo", "WeatherKitDemo" %}.
+
+<img alt="Swift Charts heat map" style="width: 45%"
+  src="/blog/assets/swift-charts-heat-map.png?v={{pkg.version}}"
+  title="Swift Charts heat map">
+
+```swift
+import Charts
+import SwiftUI
+
+extension Date {
+    // Returns an abbreviated day of the week (ex. Sun).
+    var dayOfWeek: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        return dateFormatter.string(from: self)
+    }
+
+    // Returns 1 for Sunday and 7 for Saturday.
+    var dayOfWeekNumber: Int {
+        Calendar.current.dateComponents([.weekday], from: self).weekday!
+    }
+
+    // Returns the hour of a `Date`.
+    var hour: Int {
+        Calendar.current.component(.hour, from: self)
+    }
+}
+
+// This holds a subset of the properties
+// in the WeatherKit `HourWeather` struct.
+struct HourWeather {
+    let date: Date
+    let temperature: Measurement<UnitTemperature>
+}
+
+struct ContentView: View {
+    private static let daysOfWeek =
+        ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+    private static let days = 5
+
+    private static let gradientColors: [Color] =
+        [.blue, .green, .yellow, .orange, .red]
+
+    @State private var hourlyForecast: [HourWeather] = []
+
+    // This is displayed on the left side of the heat map.
+    private var dayLabels: some View {
+        VStack(spacing: 21) {
+            let startIndex = Date().dayOfWeekNumber - 1
+            let range =
+                startIndex ..< startIndex + Self.days
+            ForEach(range, id: \.self) { index in
+                dayLabel(Self.daysOfWeek[index % 7])
+            }
+        }
+        .padding(.top, 11)
+    }
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 0) {
+            dayLabels
+            ScrollView(.horizontal) {
+                heatMap()
+            }
+        }
+        .onAppear {
+            generateData()
+        }
+    }
+
+    // This displays an abbreviated day of the week (ex. Sun)
+    // rotated to read from the right.
+    private func dayLabel(_ day: String) -> some View {
+        Text(day)
+            .font(.subheadline)
+            .rotationEffect(Angle.degrees(-90))
+            .frame(height: 55)
+    }
+
+    // We could use WeatherKit to get real temperature forecasts
+    // as is done in https://github.com/mvolkmann/WeatherKitDemo.
+    // To keep things simple this generates random temperatures.
+    private func generateData() {
+        var date = Date() // current date and time
+        let calendar = Calendar.current
+        date = calendar.date(bySetting: .hour, value: 0, of: date)!
+
+        var temperature = 50.0
+
+        var data: [HourWeather] = []
+        for _ in 1 ... Self.days { // days
+            for _ in 0 ... 23 { // hours
+                // Change the temperature by a random amount
+                // of not more than two degrees.
+                temperature += Double.random(in: -2 ... 2)
+                data.append(HourWeather(
+                    date: date,
+                    temperature: Measurement(
+                        value: temperature,
+                        unit: UnitTemperature.fahrenheit
+                    )
+                ))
+
+                // Advance to the next hour.
+                date = calendar.date(byAdding: .hour, value: 1, to: date)!
+            }
+        }
+
+        hourlyForecast = data
+    }
+
+    private func heatMap() -> some View {
+        Chart {
+            ForEach(hourlyForecast.indices, id: \.self) { index in
+                let forecast = hourlyForecast[index]
+                mark(forecast: forecast)
+            }
+        }
+
+        // Set the range of background colors to be used for
+        // each `RectangleMark` created in the `mark` method.
+        .chartForegroundStyleScale(
+            range: Gradient(colors: Self.gradientColors)
+        )
+
+        // Add hour labels on the x-axis.
+        .chartXAxis {
+            AxisMarks(position: .bottom, values: .automatic) { axisValue in
+                AxisTick()
+                AxisValueLabel(centered: true) {
+                    let index = axisValue.index
+                    let mod = index % 12
+                    let hour = mod == 0 ? 12 : mod
+                    Text("\(hour)\n\(index < 12 ? "AM" : "PM")")
+                        .multilineTextAlignment(.center)
+                }
+            }
+        }
+
+        // The y-axis labels generated by Swift Charts appear
+        // at the top of each row rather that centered on the row.
+        // So this hides them and `dayLabels` provides custom y-axis labels.
+        .chartYAxis(.hidden)
+
+        .frame(width: 800, height: Double(Self.days * 90))
+    }
+
+    // This creates an individual cell in the heat map.
+    private func mark(forecast: HourWeather) -> some ChartContent {
+        let date = forecast.date
+        let fahrenheit = forecast.temperature.converted(to: .fahrenheit).value
+
+        return Plot {
+            RectangleMark(
+                // Why do String values work, but Int values do not?
+                x: .value("Time", "\(date.hour)"),
+                y: .value("Day", date.dayOfWeek),
+                width: .ratio(1),
+                height: .ratio(1)
+            )
+            // Choose a cell color based on the temperature.
+            .foregroundStyle(by: .value("Temperature", fahrenheit))
+            // Display the temperature on top of the cell.
+            .annotation(position: .overlay) {
+                Text("\(String(format: "%.0f", fahrenheit))℉")
+                    .rotationEffect(.degrees(-90))
+                    .font(.body)
+                    .frame(width: 55)
+            }
+        }
+    }
+}
+```
 
 ### `RuleMark`
 
-These add a vertical line (when only the `x` value is set)
+Instances of the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/rulemark", "RuleMark" %}
+struct are used to add a vertical line (when only the `x` value is set)
 or a horizontal line (when only the `y` value is set).
 
 To add an text annotation to a `RuleMark`,
@@ -576,8 +766,10 @@ Chart {
 
 By default, a legend is displayed below each chart.
 
-To hide the legend, apply the `chartLegend` view modifier to the `Chart`,
-passing a value of `.hidden`. For example:
+To hide the legend, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/chart/chartlegend(_:)",
+"chartLegend" %} view modifier to the `Chart`, passing a value of `.hidden`.
+For example:
 
 ```swift
 Chart {
@@ -599,8 +791,11 @@ Chart { ... }.chartLegend(position: .top)
 Swift Charts automatically determines the minimum and maximum
 quantitative values to be plotted and
 selects appropriate x-axis and y-axis scales.
-The default axis scales can be overridden by applying
-the `chartYScale` and `chartXScale` view modifiers to the `Chart`.
+The default axis scales can be overridden by applying the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/chartxscale(domain:range:type:)",
+"chartXScale" %} and {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/chartyscale(domain:range:type:)",
+"chartYScale" %} view modifiers to the `Chart`.
 For example:
 
 ```swift
@@ -647,7 +842,9 @@ and set the `ScrollView` height instead of the width.
 
 ## Background and Overlay
 
-The `chartBackground` view modifier can be applied to a `Chart`
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/chartbackground(alignment:content:)?changes=latest_minor",
+"chartBackground" %} view modifier can be applied to a `Chart`
 to specify any view that should be rendered behind the chart marks.
 
 The `chartOverlay` view modifier can be applied to a `Chart`
@@ -668,8 +865,9 @@ Chart {
 
 ## Event Handling
 
-To listen for tap and drag gestures on a chart,
-apply the `chartOverlay` view modifier to the `Chart`.
+To listen for tap and drag gestures on a chart, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/chartoverlay(alignment:content:)?changes=latest_minor",
+"chartOverlay" %} view modifier to the `Chart`.
 Note that drag gestures will not be captured
 if the `Chart` is inside a `ScrollView`.
 
