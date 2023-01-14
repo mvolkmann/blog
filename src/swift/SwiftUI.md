@@ -6765,19 +6765,39 @@ VStack {
 ```
 
 Paul Hudson recommends defining view modifiers that can be used
-to apply other platform-specific view modifiers.
-Here is the code for a macOS view modifier.
-Others for iOS, watchOS, and tvOS would be similar.
+to conditionally apply other platform-specific view modifiers.
+The following code displays a border around `Text` views
+only if running on a given platform.
 
 ```swift
-// TODO: TRY THIS!
 extension View {
+    func iOS<Content: View>(_ modifier: (Self) -> Content) -> some View {
+        #if os(iOS)
+            return modifier(self)
+        #else
+            return self
+        #endif
+    }
+
     func macOS<Content: View>(_ modifier: (Self) -> Content) -> some View {
         #if os(macOS)
-        return modifier(self)
+            return modifier(self)
         #else
-        return self
+            return self
         #endif
+    }
+
+    // Methods for watchOS and tvOS would be similar.
+}
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            Text("iOS")
+                .iOS { $0.padding().border(.red) }
+            Text("macOS")
+                .macOS { $0.padding().border(.blue) }
+        }
     }
 }
 ```
