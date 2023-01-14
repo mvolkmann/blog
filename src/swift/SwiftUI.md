@@ -1573,6 +1573,30 @@ Colors are defined by the {% aTargetBlank
 It provides many static properties for predefined colors
 and many initializers for specifying custom colors.
 
+The `Color` struct includes static properties for three "semantic colors".
+The table below shows their default colors in light and dark mode.
+
+| Semantic Color | Light | Dark  |
+| -------------- | ----- | ----- |
+| `accentColor`  | blue  | blue  |
+| `primary`      | black | white |
+| `secondary`    | gray  | gray  |
+
+Changing `AccentColor` in `Assets.xcassets` changes `Color.accentColor`.
+
+The change `Color.primary` and `Color.secondary` override them in an extension as follows:
+
+```swift
+extension Color {
+    static var primary: Color = .green
+    static var secondary: Color = .orange
+}
+```
+
+TODO: How can you determine the default screen background color?
+Is `UIColor.systemBackground` the only way?
+TODO: Can you define a color scheme?
+
 A "color literal" displays a color swatch in source code.
 To create one, enter `Color(#colorLiteral())`.
 The part passed to `Color` will be replaced by a color swatch.
@@ -7859,6 +7883,10 @@ Highlights of environment data include:
 - `font: Font?`
 
   This describes the default font.
+
+For a full list of the provided environment values, see {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/environmentvalues",
+"EnvironmentValues" %}.
 
 It is also possible to add custom data to the environment.
 Any view below the view where the environment data is added can access it.
