@@ -5902,8 +5902,14 @@ There are many view modifiers that change the style of specific kinds of views.
   sets the horizontal alignment of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/alignmentguide(_:computevalue:)-6y3u2", "alignmentGuide" %}
   sets the vertical alignment of the receiver view.
+
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:)-68shk", "padding" %}
   adds the same padding to all sizes of the receiver view.
+  This is often called with no arguments in order to use "adaptive padding".
+  This selects the amount of padding to apply based on
+  the content of the view to which it is applied
+  and the environment in which the app is running.
+
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:_:)", "padding" %}
   adds the same padding to specific sides (edges) of the receiver view.
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:)-6pgqq", "padding" %}
