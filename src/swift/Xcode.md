@@ -11,6 +11,18 @@ layout: topic-layout.njk
 is an IDE from Apple for creating apps for
 iPhone, iPad, macOS, Apple Watch, and Apple TV.
 
+Starting in Xcode 14, the SDKs for every OS
+are no longer automatically downloaded when Xcode is installed.
+Only the iOS and macOS SDKs are downloaded, not watchOS or tvOS.
+This makes it faster to install Xcode.
+Additionally SDKs can be downloaded after Xcode is installed.
+
+## Resources
+
+Paul Hudson provided an excellent summary of the new features added in Xcode 14
+at {% aTargetBlank "https://www.youtube.com/watch?v=V2TDGeevDWo",
+"What's New in Xcode 14?" %}.
+
 ## Panels
 
 The Xcode user interface contains many panels that are described below:
@@ -226,6 +238,12 @@ only appear a preview is displayed and a view name is command-clicked.
 In the past there was a "Rename..." option in this menu.
 It was moved to Editor ... Refactor ... Rename.
 
+### Sticky Headers
+
+When scrolling down through code, the first line of each
+type and function definition that encloses the code being viewed
+sticks at the top of the editor window to provide context.
+
 ### Multiple Editor Panes
 
 To open a file in a new split pane,
@@ -414,6 +432,10 @@ The default code indentation is four spaces.
 Chained method calls that appear on separate lines are indented,
 but those chained onto trailing closures are not.
 
+Surrounding existing code with a new block
+automatically indents the surrounded code
+when the closing brace is typed.
+
 Other options for Swift code formatting include
 {% aTargetBlank "https://github.com/nicklockwood/SwiftFormat", "SwiftFormat" %}
 and {% aTargetBlank "https://github.com/apple/swift-format", "swift-format" %}.
@@ -448,6 +470,56 @@ However, this can be configured using an Automator script
 and a System Preferences keyboard shortcut.
 The steps to configure this are described at {% aTargetBlank
 "https://luisramos.dev/xcode-format-and-save", "Xcode Format and Save" %}.
+
+## Code Generation
+
+Xcode offers code completion of function/method calls.
+Optional arguments appear dimmed.
+Navigate to a proposed completion with the up and down arrow keys
+and press the return key to select it.
+When a completion with optional arguments is selected,
+those will not be included by default.
+To include them, hold down the option before pressing return.
+
+Xcode will hide some code completions and indicate this
+with the text "+n more" at the end of a suggested completions.
+To reveal them, press the right arrow key.
+
+To include them, hold down the option key before selecting the completion.
+Xcode can generate code for the memberwise initializer
+of a `struct` or `class`.
+Just type `init` and accept the completion.
+Then customize the provided code as needed.
+
+Some code completions generate code that processes arrays.
+For example, type "lplay" and choose the `List(players) { player...` completion.
+This generates the following code, perhaps choosing to
+use some existing `String` property such as `name`:
+
+```swift
+List(players) { player in
+    Text(player.name)
+}
+```
+
+Xcode can generate implementations of protocol implementations.
+For example, in a `struct` that conforms to the `Codable` protocol,
+type `encode` and accept the completion.
+Then customize the provided code as needed.
+
+## Documentation Generation
+
+To generate DocC documentation for the current project
+select Product ... Build Documentation.
+This can take a couple of minutes to complete.
+When it does, a dialog will open that contains lists of all the
+classes, structs, functions, and enums defined by the project.
+Click a name to see details about it.
+Use the filter input at the top to filter the documentation
+to values containing specific text.
+
+Supposedly the generated documentation can be exported to GitHub
+for viewing outside of Xcode, but it's not clear how to do that.
 
 ## Pragma Marks
 
@@ -490,6 +562,10 @@ To do this, select Product ... Clean Build Folder or press cmd-shift-k.
 To run an app:
 
 - Select a simulator device or real device from the dropdown in the top center.
+  The device dropdown shows a list of device types
+  that have been used to run the app in the Simulator.
+  This makes it easier to select frequently used device types.
+
 - Select Product ... Run or press cmd-r.
 
 To run the current app on a real iOS device:
@@ -527,8 +603,29 @@ To run the current app on a device wirelessly:
 ## Previews
 
 Previews allow testing a single view outside of the Simulator or a real device.
-To restart the preview, press cmd-option-p.
-To toggle showing the preview area, press cmd-option-return.
+
+Previews are always live meaning they
+update automatically when code changes are saved.
+However, previews still sometimes need to be resumed
+by either clicking the "Resume" button or pressing cmd-option-p.
+
+To toggle between showing and hiding the preview area, press cmd-option-return.
+
+Calls to the `print` function are ignored when running a preview.
+To enable this, right-click on the play button in the canvas
+and select "Debug Preview".
+TODO: This must have moved in Xcode 14 and I can't find it!
+
+A new "variants" button appears as the third button
+at the bottom of the preview area.
+Clicking this offers the options to show one of
+"Color Scheme Variants" (Light and Dark),
+"Orientation Variants" (Portrait, Landscape left, and Landscape right),
+and "Dynamic Text Variants" (X Small through XXX Large and AX 1 through AX 5)
+
+If a preview defines multiple views,
+they are presented in separate tabs in the preview area.
+TODO: How are the tab titles specified?
 
 ## App Icons
 
@@ -547,6 +644,17 @@ To add app icons:
 - drag the `AppIcon.appiconset` folder from the Finder
   into the directory opened by the previous command
   and click the "Replace" button
+
+## SF Symbols
+
+Access to SF Symbols is now built into Xcode.
+To access it, press cmd-shift-l or
+click the "+" in the upper-left and click the circled star.
+Type part of a symbol name in the input at the top
+to filter the list of symbols.
+Click a symbol name to see the symbol
+and a list of OSes where it is supported.
+Double-click a symbol name to insert it.
 
 ## Source Control
 
