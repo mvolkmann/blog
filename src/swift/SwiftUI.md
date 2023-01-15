@@ -1264,6 +1264,11 @@ struct MyTextField: View {
     var body: some View {
         TextField(label, text: text)
             .autocapitalization(.none)
+            // When the `padding` view modifier is applied with no arguments,
+            // it uses "adaptive padding" and adds the same padding to all sides.
+            // The amount is determined by the content of the view
+            // and the environment in which the app is running.
+            // It iOS the amount is typically 20.
             .padding()
             .textFieldStyle(.roundedBorder)
     }
@@ -5904,7 +5909,7 @@ There are many view modifiers that change the style of specific kinds of views.
   sets the vertical alignment of the receiver view.
 
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:)-68shk", "padding" %}
-  adds the same padding to all sizes of the receiver view.
+  adds the same padding to all sides of the receiver view.
   This is often called with no arguments in order to use "adaptive padding".
   This selects the amount of padding to apply based on
   the content of the view to which it is applied
