@@ -1573,46 +1573,60 @@ Colors are defined by the {% aTargetBlank
 It provides many static properties for predefined colors
 and many initializers for specifying custom colors.
 
-The `Color` struct includes static properties for three "semantic colors".
+### System Colors
+
+It is recommended to use the "system colors" defined by
+`UIColor` static properties because they are dynamic,
+meaning that the actual color used automatically changes
+based on whether the device is in light or dark mode.
+To use these in code, enter `Color(UIColor.system`
+and select a system color from the code completion popup.
+
+### Semantic Colors
+
+Three of the `Color` struct static properties are "semantic colors".
 The table below shows their default colors in light and dark mode.
 
-| Semantic Color | Light | Dark  |
-| -------------- | ----- | ----- |
-| `accentColor`  | blue  | blue  |
-| `primary`      | black | white |
-| `secondary`    | gray  | gray  |
+| Semantic Color | Light          | Dark                           |
+| -------------- | -------------- | ------------------------------ |
+| `accentColor`  | blue (007aff)  | slightly lighter blue (0a84ff) |
+| `primary`      | black (000000) | white (ffffff)                 |
+| `secondary`    | gray (8a8a8e)  | slightly lighter gray (8d8d93) |
 
-Changing `AccentColor` in `Assets.xcassets` changes `Color.accentColor`.
+`Color.primary` defaults to the same colors as `UIColor.label`.
+and it is the default `foregroundColor` of `Text` views.
+`Color.primary` is typically used for text because it automatically
+switches based on whether the device is in light or dark mode.
 
-The change `Color.primary` and `Color.secondary` override them in an extension as follows:
+SwiftUI doesn't provide its own way to access the background color,
+but it can be obtained from `UIColor.systemBackground`.
+
+To change the semantic colors, override them in an extension as follows:
 
 ```swift
 extension Color {
+    static var accentColor: Color = .red
     static var primary: Color = .green
     static var secondary: Color = .orange
 }
 ```
 
-TODO: How can you determine the default screen background color?
-Is `UIColor.systemBackground` the only way?
-TODO: Can you define a color scheme?
+`Color.accentColor` can also be changed by
+selecting a color for `AccentColor` in `Assets.xcassets`,
+but overriding it in an extension takes precedence.
+
+### Color Literals
 
 A "color literal" displays a color swatch in source code.
-To create one, enter `Color(#colorLiteral())`.
-The part passed to `Color` will be replaced by a color swatch.
-Double-click the swatch to select a different color.
+
+To create one, enter `#colorLiteral(`.
+That will be replaced by a swatch icon
+indicating that no color has been selected yet.
+This works in a variable declaration, but not in a parameter value.
+
+Double-click the swatch to select a color from a popup color panel.
 Click the "Other..." button to open the system color picker
 which provides many more ways to select a color.
-
-It is recommended to use the predefined system colors
-because they are dynamic, meaning that the actual color used
-automatically changes when switching between light and dark mode.
-To use these in code, enter `Color(UIColor.system)`
-and select a system color from the code completion popup.
-
-Typically `Color.primary` is used for text because it
-automatically switches between black for light mode and white for dark mode.
-This is the default `foregroundColor` of `Text` views.
 
 ### Terminology
 
