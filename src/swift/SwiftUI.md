@@ -1356,6 +1356,8 @@ struct ParentView: View {
 ```
 
 To pass a binding to a constant value, use `.constant(value)`.
+This is typically only used during initial development of an app feature
+when the intended value is not yet available.
 
 ### @StateObject
 
