@@ -1657,16 +1657,22 @@ extension Color {
 selecting a color for `AccentColor` in `Assets.xcassets`,
 but overriding it in an extension takes precedence.
 
-To override the accent color for a specific view, apply the {% aTargetBlank
+To override the accent color for a specific control view,
+apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/path/tint(_:)", "tint" %}
 view modifier.
+For non-control views, apply the `foregroundColor` view modifier.
 For example:
 
 ```swift
-Button(
-    action: { love.toggle() },
-    label: { Image(systemName: "heart.fill").tint(.red) }
-)
+@State private var love = false
+...
+Button("Love") {
+    love.toggle()
+}
+.tint(.red)
+
+Image(systemName: love ? "heart.fill" : "heart").foregroundColor(.red)
 ```
 
 The {% aTargetBlank
@@ -9887,6 +9893,7 @@ if the user taps on the drag indicator or drags it up.
 For example, `.presentationDetents([.medium, .large])`.
 
 For more precise sizing, pass `.fraction` and `.height` values.
+For example, `.presentationDetents([.height(200)])`.
 
 When only one size is specified, the drag indicator is not displayed.
 When two sizes are specified, the drag indicator is displayed.

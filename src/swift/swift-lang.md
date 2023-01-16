@@ -4154,6 +4154,159 @@ Specifying `private(set)` on a property means that
 the property can be accessed as if it were `public`,
 but can only be modified as if it were `private`.
 
+## Concurrency
+
+See my newer blog page
+{% aTargetBlank "/blog/topics/#/blog/swift/Concurrency", "Concurrency" %}.
+
+See {% aTargetBlank
+"https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
+"Swift Concurrency" %}.
+
+Swift 5.5 added support for the `async` and `await` keywords.
+This was announced at the WWDC 2021 event.
+It offers an alternative to
+passing escaping closures (a.k.a. completion handlers)
+or using the Combine framework.
+Using async/await allows the compiler to provide more and better error messages
+than with other approaches.
+
+Functions that use the `await` keyword must include the `async` keyword
+after their parameter list.
+
+For example:
+
+```swift
+func getPets() async -> Pets? {
+  do {
+    let dogs = await getDogs()
+    let cats = await getCats()
+    return Pets(dogs: dogs, cats: cats)
+  } catch {
+    print("error: \(error)")
+    return nil
+  }
+}
+```
+
+Async functions must be called from an asynchronous context.
+This can be another `async` function.
+Another option is to embed the calls in a `Task`.
+For example:
+
+```swift
+Task {
+    do {
+        let photo = try await getPhoto("some-name")
+        // Do something with photo.
+    } catch {
+        print("error getting photo: \(error.localizedDescription)")
+    }
+}
+```
+
+The code in a `Task` runs asynchronously.
+For example, when the following function is called
+the output will be 1, 3, 2.
+
+```
+func taskDemo() {
+    print("1")
+    Task {
+        print("2")
+    }
+    print("3")
+}
+```
+
+To bridge between functions that take callback functions,
+referred to as "completion handlers", use the {% aTargetBlank
+"https://developer.apple.com/documentation/swift/withcheckedcontinuation(function:_:)",
+"withCheckedContinuation" %} or the {% aTargetBlank
+"https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)",
+"withCheckedThrowingContinuation" %} function.
+See this post from {% aTargetBlank
+"https://www.hackingwithswift.com/quick-start/concurrency/how-to-use-continuations-to-convert-completion-handlers-into-async-functions",
+"Hacking with Swift" %}.
+
+Suppose `getData` is a function that takes a completion handler.
+To call this function inside an `async` function
+so callers can use the `await` keyword:
+
+```swift
+func getDataAsync() async -> SomeData {
+  return try await withCheckedThrowingContinuation { continuation in
+    getData(completion: { result, error in
+      if let error {
+        continuation.resume(throwing: error)
+      } else {
+        continuation.resume(returning: result)
+      }
+    })
+  }
+}
+```
+
+## File I/O
+
+One way to write and read files is to use the {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/filemanager",
+"FileManager" %} class.
+For example:
+
+```swift
+import Foundation
+
+let dirUrl = FileManager.default.homeDirectoryForCurrentUser
+// file:///Users/mark/
+
+// For iOS, use this instead:
+// let dirUrl = FileManager.default.urls(
+//     for: .documentDirectory, in: .userDomainMask).first!
+
+var filePath = dirUrl.appendingPathComponent("demo.txt")
+// file:///Users/mark/demo.txt
+
+// Write to the file.
+let text = "Hello, World!"
+do {
+    // Setting atomically to true means that it will
+    // write to an auxillary file first and then
+    // rename that file to the target file to guarantee that the file
+    // won't be partially written if the app crashes while writing.
+    try text.write(to: filePath, atomically: true, encoding: .utf8)
+    print("wrote file")
+} catch {
+    print(error.localizedDescription)
+}
+
+// Read from the file.
+do {
+    let data = try Data(contentsOf: filePath)
+    if let text = String(data: data, encoding: .utf8) {
+        print(text) // Hello, World!
+    } else {
+        print("failed to read from file");
+    }
+} catch {
+    print(error.localizedDescription)
+}
+```
+
+Another way to read files is to get them from the `Bundle`.
+For example:
+
+```swift
+let filePath = Bundle.module.path(
+    forResource: "accounting",
+    ofType: "csv"
+)
+if let filePath {
+    let contents = try String(contentsOfFile: filePath)
+    // Use contents here.
+}
+```
+
 ## JSON
 
 Serializing Swift types to JSON and deserializing JSON back to Swift types
@@ -4378,159 +4531,6 @@ struct Users: Decodable {
         }
         users = try JSONDecoder().decode(Users.self, from: data)
     }
-```
-
-## Concurrency
-
-See my newer blog page
-{% aTargetBlank "/blog/topics/#/blog/swift/Concurrency", "Concurrency" %}.
-
-See {% aTargetBlank
-"https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
-"Swift Concurrency" %}.
-
-Swift 5.5 added support for the `async` and `await` keywords.
-This was announced at the WWDC 2021 event.
-It offers an alternative to
-passing escaping closures (a.k.a. completion handlers)
-or using the Combine framework.
-Using async/await allows the compiler to provide more and better error messages
-than with other approaches.
-
-Functions that use the `await` keyword must include the `async` keyword
-after their parameter list.
-
-For example:
-
-```swift
-func getPets() async -> Pets? {
-  do {
-    let dogs = await getDogs()
-    let cats = await getCats()
-    return Pets(dogs: dogs, cats: cats)
-  } catch {
-    print("error: \(error)")
-    return nil
-  }
-}
-```
-
-Async functions must be called from an asynchronous context.
-This can be another `async` function.
-Another option is to embed the calls in a `Task`.
-For example:
-
-```swift
-Task {
-    do {
-        let photo = try await getPhoto("some-name")
-        // Do something with photo.
-    } catch {
-        print("error getting photo: \(error.localizedDescription)")
-    }
-}
-```
-
-The code in a `Task` runs asynchronously.
-For example, when the following function is called
-the output will be 1, 3, 2.
-
-```
-func taskDemo() {
-    print("1")
-    Task {
-        print("2")
-    }
-    print("3")
-}
-```
-
-To bridge between functions that take callback functions,
-referred to as "completion handlers", use the {% aTargetBlank
-"https://developer.apple.com/documentation/swift/withcheckedcontinuation(function:_:)",
-"withCheckedContinuation" %} or the {% aTargetBlank
-"https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)",
-"withCheckedThrowingContinuation" %} function.
-See this post from {% aTargetBlank
-"https://www.hackingwithswift.com/quick-start/concurrency/how-to-use-continuations-to-convert-completion-handlers-into-async-functions",
-"Hacking with Swift" %}.
-
-Suppose `getData` is a function that takes a completion handler.
-To call this function inside an `async` function
-so callers can use the `await` keyword:
-
-```swift
-func getDataAsync() async -> SomeData {
-  return try await withCheckedThrowingContinuation { continuation in
-    getData(completion: { result, error in
-      if let error {
-        continuation.resume(throwing: error)
-      } else {
-        continuation.resume(returning: result)
-      }
-    })
-  }
-}
-```
-
-## File I/O
-
-One way to write and read files is to use the {% aTargetBlank
-"https://developer.apple.com/documentation/foundation/filemanager",
-"FileManager" %} class.
-For example:
-
-```swift
-import Foundation
-
-let dirUrl = FileManager.default.homeDirectoryForCurrentUser
-// file:///Users/mark/
-
-// For iOS, use this instead:
-// let dirUrl = FileManager.default.urls(
-//     for: .documentDirectory, in: .userDomainMask)[0]
-
-var filePath = dirUrl.appendingPathComponent("demo.txt")
-// file:///Users/mark/demo.txt
-
-// Write to the file.
-let text = "Hello, World!"
-do {
-    // Setting atomically to true means that it will
-    // write to an auxillary file first and then
-    // rename that file to the target file to guarantee that the file
-    // won't be partially written if the app crashes while writing.
-    try text.write(to: filePath, atomically: true, encoding: .utf8)
-    print("wrote file")
-} catch {
-    print(error.localizedDescription)
-}
-
-// Read from the file.
-do {
-    let data = try Data(contentsOf: filePath)
-    if let text = String(data: data, encoding: .utf8) {
-        print(text) // Hello, World!
-    } else {
-        print("failed to read from file");
-    }
-} catch {
-    print(error.localizedDescription)
-}
-```
-
-Another way to read files is to get them from the `Bundle`.
-For example:
-
-```swift
-let filePath = Bundle.module.path(
-    forResource: "accounting",
-    ofType: "csv"
-)
-if let filePath {
-    let contents = try String(contentsOfFile: filePath)
-    // Use contents here.
-}
 ```
 
 ## CSV
