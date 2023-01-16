@@ -3835,6 +3835,21 @@ Give the entry a name and drag images into the 1x, 2x, and 3x boxes.
 Pass the name to the `Image` view as an unlabelled argument.
 For example, `Image("Comet")`.
 
+Newer devices use 3x images, slightly older devices use 2x images,
+and really old devices use 1x images. See {% aTargetBlank
+"https://developer.apple.com/library/archive/documentation/DeviceInformation/Reference/iOSDeviceCompatibility/Displays/Displays.html",
+"Displays" %}.
+
+Smaller sizes are automatically scaled up
+for use in devices that prefer larger sizes.
+For example, if only a 1x image is provided,
+it will be scaled for use in devices that prefer 2x and 3x images.
+
+TODO: Are larger sizes are automatically scaled down
+for use in older devices?
+For example, if only a 3x image is provided,
+it will be scaled down for use in devices that prefer 2x and 1x images?
+
 Icons from SF Symbols can be used by specifying
 their name as the `systemName` argument.
 For example, `Image(systemName: "cloud.snow")`.
@@ -5319,8 +5334,14 @@ See the Apple documentation page on {% aTargetBlank
 
 - Color Scheme
 
+  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/colorscheme(_:)", "colorScheme" %}
+    sets the color scheme of a receiver view.
+    This is now deprecated and replaced by `preferredColorScheme`,
+    but that doesn't seem to work on individual views.
+
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/preferredcolorscheme(_:)", "preferredColorScheme" %}
-    sets the preferred color scheme, typically based on whether the device is currently in light or dark mode.
+    sets the preferred color scheme which by default is based on
+    whether the device is currently in light or dark mode.
 
 - Controls
 
