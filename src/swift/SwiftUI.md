@@ -325,6 +325,7 @@ Here's an example of using such an icon:
 
 ```swift
 // The @State view modifier is described later.
+// It allows a view instance to maintain state.
 @State private var percent = 0.0
 ...
 Image(systemName: "cellularbars", variableValue: percent)
@@ -1324,6 +1325,10 @@ that is passed a binding (`$` syntax) from a parent view.
 It connects a child property to a parent property.
 This allows the child view to get and set a property that
 is owned by a parent view and si passed in as an argument.
+
+There are other property wrappers that contain the word "State" in their names.
+Each of these own data rather than having it
+be owned by another view that passes it in.
 
 ```swift
 struct ChildView: View {
@@ -10758,6 +10763,7 @@ TODO: Watch this {% aTargetBlank
 The `UserDefaults` class is "an interface to the user's defaults database,
 where you store key-value pairs persistently across launches of your app."
 When an app is deleted, it's `UserDefaults` data is also deleted.
+This is intended for storing small amounts of non-sensitive data.
 
 The `@AppStorage` property wrapper makes it easier to work with `UserDefaults`,
 but it is limited to the following types:
@@ -10765,6 +10771,12 @@ but it is limited to the following types:
 It can't be used in the example below because
 it stores an array of struct instances.
 TODO: Can you store an array objects directly without encoding as JSON?
+
+For macOS and iPad apps that have multiple scenes (aka windows),
+consider using {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scenestorage",
+"SceneStorage" %} instead of `AppStorage`
+in order to store different data for each scene.
 
 The code below demonstrates using this to persist data about dogs as JSON.
 
