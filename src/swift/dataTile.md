@@ -57,8 +57,13 @@ In code that wishes to display debugging data in a tile:
    a string in one of the following formats:
 
    - "Name: value"
-   - "Name 'value'"
-   - "Name = value"
+   - "Name 'value'" (not supported in the Mini version)
+   - "Name = value" (not supported in the Mini version)
 
 The logged values will be displayed in a tile
 and will also be written to the debug console.
+
+The first tile always displays "Activity"
+which is the total number of updates that have occurred.
+This means that in the Mini version only two tiles are available
+for displaying values.

@@ -3858,6 +3858,11 @@ To supply a single image for a given Image Set in `Assets.xcassets`:
 - Change the value for "Scales" to "Single Scale".
 - Paste an image into the All - Universal box.
 
+For vector images such as those described by SVG and PDF files:
+
+- Change the value for "Scales" to "Single Scale" as described above.
+- After the "Resizing" option, check the "Preserve Vector Data" checkbox.
+
 Icons from SF Symbols can be used by specifying
 their name as the `systemName` argument.
 For example, `Image(systemName: "cloud.snow")`.
