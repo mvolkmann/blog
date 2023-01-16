@@ -3850,6 +3850,14 @@ for use in older devices?
 For example, if only a 3x image is provided,
 it will be scaled down for use in devices that prefer 2x and 1x images?
 
+To supply a single image for a given Image Set in `Assets.xcassets`:
+
+- Select the image set.
+- Open the Inspector panel on the right.
+- Select the Attributes tab (4th).
+- Change the value for "Scales" to "Single Scale".
+- Paste an image into the All - Universal box.
+
 Icons from SF Symbols can be used by specifying
 their name as the `systemName` argument.
 For example, `Image(systemName: "cloud.snow")`.
