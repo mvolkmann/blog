@@ -7118,6 +7118,30 @@ accessibility size.
 In apps that use dynamic fonts, test all screens at various font size
 preferences to verify that the resulting layout is acceptable.
 
+To scale views based on the dynamic font size
+selected by a user for their device, use the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/scaledmetric",
+"ScaledMetric" %} property wrapper.
+
+The following code demonstrates this:
+
+```swift
+struct ContentView: View {
+    // The actual width used can be less than or greater that this
+    // depending on changes the user makes in the Settings app.
+    @ScaledMetric var size = 200.0
+
+    var body: some View {
+        VStack {
+            Image("Checkmark")
+                .resizable()
+                .scaledToFit()
+                .frame(width: size)
+        }
+    }
+}
+```
+
 ## Safe Area
 
 The {% aTargetBlank
