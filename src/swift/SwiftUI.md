@@ -1578,6 +1578,37 @@ Colors are defined by the {% aTargetBlank
 It provides many static properties for predefined colors
 and many initializers for specifying custom colors.
 
+### Terminology
+
+SwiftUI uses the following color terminology:
+
+- Accent Color
+
+  This is the primary theme color of controls in an app
+  such as `Button` and `TextField`.
+  It is typically be specified by setting `AccentColor` in `Assets.xcassets`.
+  This is preferred over calling the `accentColor` view modifier in code.
+  Different colors can be specified for light and dark mode.
+  Controls use the accent color for their default tint color.
+
+  Accent color is not automatically applied to
+  text-based views like `Text` and `Label`.
+  To apply the accent color to text-based views,
+  call `.foregroundColor(.accentColor)` on them.
+
+- Tint
+
+  This overrides the default accent color of controls.
+  It is not applied to text-based views.
+  It is set by calling the `tint` view modifier on a specific view.
+  User preferences cannot override this.
+
+- Foreground Color
+
+  This takes precedence over both the tint and accent color of a view.
+  It is typically only applied to text-based views.
+  To set it, call the `foregroundColor` view modifier on a specific view.
+
 ### System Colors
 
 It is recommended to use the "system colors" defined by
@@ -1645,6 +1676,60 @@ The {% aTargetBlank
 
 `Color.accentColor` is the equivalent of `tintColor` in UIKit.
 
+### Screen Background
+
+The screen background can be modified to fill with a color or an image.
+It defaults to using:
+
+```swift
+Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all)
+```
+
+To fill the screen background with a color:
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        ZStack {
+            Color("BGColor") // name of a Color Set
+            VStack {
+                Text("Hello").font(.largeTitle)
+                Text("World").font(.largeTitle)
+            }
+        }
+    }
+}
+```
+
+The Color Set "BGColor" used above can be configured to
+use different colors for light and dark mode.
+
+It is not necessary to apply the view modifier
+`.edgesIgnoringSafeArea(.all)` to the `Color`
+in order to fill the entire screen.
+
+The following code fills the screen background with an image:
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        ZStack {
+            Image("Background") // name of an Image Set
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("Hello").font(.largeTitle)
+                Text("World").font(.largeTitle)
+            }
+        }
+    }
+}
+```
+
+The Image Set "Background" used above can be configured to
+use different images for light and dark mode.
+
 ### Color Literals
 
 A "color literal" displays a color swatch in source code.
@@ -1657,37 +1742,6 @@ This works in a variable declaration, but not in a parameter value.
 Double-click the swatch to select a color from a popup color panel.
 Click the "Other..." button to open the system color picker
 which provides many more ways to select a color.
-
-### Terminology
-
-SwiftUI uses the following color terminology:
-
-- Accent Color
-
-  This is the primary theme color of controls in an app
-  such as `Button` and `TextField`.
-  It is typically be specified by setting `AccentColor` in `Assets.xcassets`.
-  This is preferred over calling the `accentColor` view modifier in code.
-  Different colors can be specified for light and dark mode.
-  Controls use the accent color for their default tint color.
-
-  Accent color is not automatically applied to
-  text-based views like `Text` and `Label`.
-  To apply the accent color to text-based views,
-  call `.foregroundColor(.accentColor)` on them.
-
-- Tint
-
-  This overrides the default accent color of controls.
-  It is not applied to text-based views.
-  It is set by calling the `tint` view modifier on a specific view.
-  User preferences cannot override this.
-
-- Foreground Color
-
-  This takes precedence over both the tint and accent color of a view.
-  It is typically only applied to text-based views.
-  To set it, call the `foregroundColor` view modifier on a specific view.
 
 ### Custom Colors
 
