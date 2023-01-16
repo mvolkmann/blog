@@ -9654,6 +9654,12 @@ struct ContentView: View {
 }
 ```
 
+Chaining multiple calls to the `alert` method onto the same view
+sometimes results on only the last one working properly.
+It is recommended to only chain one call to `alert` to a view.
+This seems to only be an issue when each `alert` method
+is passed a closure that returns an `Alert` instance.
+
 Alerts can also accept inputs.
 The following code demonstrates using an alert
 to prompt for a username and password.
