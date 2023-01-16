@@ -3901,6 +3901,14 @@ Image("some-name")
     .overlay(Circle().stroke(Color.red, lineWidth: 10))
 ```
 
+Single-color SF Symbol icons and images in template mode use the accent color.
+To render an image in template mode, apply the `renderingMode` view modifier
+as follows:
+
+```swift
+Image("someName").renderingMode(.template)
+```
+
 ### Label
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/label",
