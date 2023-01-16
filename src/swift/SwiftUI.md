@@ -4577,9 +4577,30 @@ TODO: Describe the use of {% aTargetBlank
 "LocalizedStringKey" %} to lookup the actual text to use.
 TODO: See the description in the Localization page.
 
-#### View Modifiers
+#### Text Modifiers
 
 There are many view modifiers that can be applied to `Text` views.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/bold()", "bold" %}
+view modifier changes the font used by a `Text` view to bold.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/foregroundcolor(_:)",
+"foregroundColor" %} view modifier changes the text color of a `Text` view
+to a given `Color`.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/italic()", "italic" %}
+view modifier changes the font used by a `Text` view to italic.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/kerning(_:)",
+"kerning" %} and {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/lazyvstack/tracking(_:)",
+"tracking" %} view modifiers both add space between letters.
+The difference is that the former even adds space between ligatures
+whereas the later does not.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/environmentvalues/linelimit",
@@ -4590,14 +4611,6 @@ If more lines are needed, the text is elided
 To change where the ellipsis appears, apply the `truncationMode` view modifier
 with the value `.head`, `.middle` or `.tail` (default).
 The ellipsis always appears in the last line of multi-line text.
-
-The {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/text/kerning(_:)",
-"kerning" %} and {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/lazyvstack/tracking(_:)",
-"tracking" %} view modifiers both add space between letters.
-The difference is that the former even adds space between ligatures
-whereas the later does not.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/text/minimumscalefactor(_:)",
@@ -4611,6 +4624,11 @@ It uses the largest size that will fit that is between
 100% and 75% of the requested font size.
 If the text doesn't fit at 75% of the requested font size,
 it will be elided (truncated with ... at the end).
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/strikethrough(_:color:)",
+"strikethrough" %} view modifier a `Text` view
+to have a horizontal line drawn through it.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/text/textcase(_:)",
@@ -4639,6 +4657,20 @@ The entire text is copied, not individual characters or words.
 
 Applying the `textSelection` view modifier to a `List` view
 makes each `Text` view inside it selectable.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/text/underline(_:color:)",
+"underline" %} view modifier changes the text in a `Text` view
+to be underlined.
+The color of the underline defaults to the text color, but can be specified.
+
+Text modifiers can be combined.
+For example, the following code renders text
+that is bold, italic, and underlined.
+
+```swift
+Text("Hello, World!").bold().italic().underline()
+```
 
 #### style Argument
 
