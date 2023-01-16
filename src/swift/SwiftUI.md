@@ -1711,6 +1711,11 @@ To define a custom named color:
   - Select a color using one of the many supported
     "Content" and "Input Method" options.
 
+In general darker colors should be used in light mode
+(because they look nicer on a light background)
+and lighter colors should be used in dark mode
+(because they look nicer on a dark background).
+
 When specifying a dark mode color,
 consider selecting the same color used for "Any Appearance".
 Then click the "Show Color Panel" button,
@@ -3935,6 +3940,15 @@ Image("some-name")
     .clipShape(Circle())
     .overlay(Circle().stroke(Color.red, lineWidth: 10))
 ```
+
+When an Image Set in `Assets.xcassets` is configured to use template mode,
+it renders with a single color.
+To change an Image Set to always render in template mode:
+
+- Select the image set.
+- Open the Inspector panel on the right.
+- Select the Attributes tab (4th).
+- Change the value for "Render As" to "Template Image".
 
 Single-color SF Symbol icons and images in template mode use the accent color.
 To render an image in template mode, apply the `renderingMode` view modifier
