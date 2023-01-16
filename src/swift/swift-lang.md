@@ -4533,6 +4533,20 @@ struct Users: Decodable {
     }
 ```
 
+One option for an app to persist data is to write it to a local JSON file.
+This may be appropriate for relatively small amounts of data
+where rewriting all the data after every change has acceptable performance.
+When this is not the case, consider using Core Data, CloudKit, or Realm.
+
+For an example of an app that writes JSON data to a file
+and restores the data from that file every time the app is launched,
+see {% aTargetBlank
+"https://github.com/mvolkmann/JSONFileIODemo/tree/main/JSONFileIODemo",
+"JSONFileIODemo" %}.
+This is inspired by the Stewart Lynch video {% aTargetBlank
+"https://www.youtube.com/watch?v=8D8pb3ycdqw&list=RDCMUCOWdR4sFkmolWkU2fg669Gg&start_radio=1",
+"Persisting to JSON or MarkDown in SwiftUI" %}.
+
 ## CSV
 
 Comma Separated Value (CSV) files are text files where each line contains values separated by commas.
