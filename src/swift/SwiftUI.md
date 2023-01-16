@@ -1587,6 +1587,12 @@ based on whether the device is in light or dark mode.
 To use these in code, enter `Color(UIColor.system`
 and select a system color from the code completion popup.
 
+To see the exact values of the system colors in light and dark mode,
+see the "Specifications" section in the
+Apple Human Interface Guidelines (HIG) page {% aTargetBlank
+"https://developer.apple.com/design/human-interface-guidelines/foundations/color/",
+"Color" %}.
+
 ### Semantic Colors
 
 Three of the `Color` struct static properties are "semantic colors".
@@ -1690,16 +1696,26 @@ To define a custom named color:
 - In the Navigator, select the `Assets.xcassets` file.
 - Right-click in the list of assets and select "New Color Set".
 - Change the default name "Color" to the name that will be specified in code.
-- Click the "Any Appearance" swatch (used for light mode).
-- Click the "Attributes" tab in the Inspector (4th tab with sliders icon).
-- In the Inspector, select a color.
-- To use a different color for dark mode:
-  - Click the "Dark" swatch.
-  - In the Inspector, select a color.
-    Consider selecting the same color used for "Any Appearance".
-    Then click the "Show Color Panel" button,
-    change the slider type drop-down to "HSB Sliders",
-    and reduce the value for Brightness (perhaps to 50%).
+- In the Inspector panel on the right, select the Attributes tab (4th).
+  The value for "Appearances" defaults to "Any, Dark".
+  "Any" refers to all devices running iOS 12 and earlier
+  (which do not support dark mode) and
+  devices running iOS 13 or later that are in light mode.
+  Change "Appearances" to "None" to select a single color
+  to be used in both light and dark mode.
+  This will replace the "Any Appearance" and "Dark" boxes
+  with a "Universal" box.
+- For each color box:
+  - Click the box.
+  - Click the "Attributes" tab in the Inspector (4th).
+  - Select a color using one of the many supported
+    "Content" and "Input Method" options.
+
+When specifying a dark mode color,
+consider selecting the same color used for "Any Appearance".
+Then click the "Show Color Panel" button,
+change the slider type drop-down to "HSB Sliders",
+and reduce the value for Brightness (perhaps to 50%).
 
 To use a custom color in code, enter `Color("some-name")`.
 To avoid typos when using these named colors, consider defining a
@@ -3927,6 +3943,21 @@ as follows:
 ```swift
 Image("someName").renderingMode(.template)
 ```
+
+To supply different images for use when the devices is in light or dark mode:
+
+- Select the image set.
+- Open the Inspector panel on the right.
+- Select the Attributes tab (4th).
+- Change the value for "Appearances" to "Any, Dark".
+  "Any" refers to all devices running iOS 12 and earlier
+  (which do not support dark mode) and
+  devices running iOS 13 or later that are in light mode.
+- Paste an images to be used in light mode into the "Any Appearance" boxes.
+- Paste an images to be used in dark mode into the "Dark" boxes.
+
+Generally lighter images should be used in light mode
+and darker images should be used in dark mode.
 
 ### Label
 
