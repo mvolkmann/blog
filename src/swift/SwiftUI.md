@@ -1620,6 +1620,19 @@ extension Color {
 selecting a color for `AccentColor` in `Assets.xcassets`,
 but overriding it in an extension takes precedence.
 
+To override the accent color for a specific view,
+apply the {% aTargetBlank "", "accentColor" %} view modifier.
+For example:
+
+```swift
+Button(
+    action: { love.toggle() },
+    label: { Image(systemName: "heart.fill").accentColor(.red) }
+)
+```
+
+`Color.accentColor` is the equivalent of `tintColor` in UIKit.
+
 ### Color Literals
 
 A "color literal" displays a color swatch in source code.
