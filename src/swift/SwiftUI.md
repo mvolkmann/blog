@@ -1170,10 +1170,8 @@ Updates to `@State` properties should occur in the main queue.
 To do this from asynchronous code, wrap the update as follows:
 
 ```swift
-Task {
-    await MainActor.run {
-        myState = newValue
-    }
+Task { @MainActor in
+    myState = newValue
 }
 
 // or ...
@@ -1368,8 +1366,12 @@ that hold ("own") a "view model". This is an instance of a class
 that conforms to the {% aTargetBlank
 "https://developer.apple.com/documentation/combine/observableobject",
 "ObservableObject" %} protocol.
-View models typically have properties that are
-annotated with the `@Published` property wrapper.
+Such classes should be annotated with the `@MainActor` attribute
+so changes to the properties occur in the main queue.
+
+View models typically have properties that are annotated with the
+{% aTargetBlank "https://developer.apple.com/documentation/combine/published",
+"Published" %} property wrapper.
 Changes to the values of these properties are published.
 This triggers the `body` of each view that depends on them
 to be recomputed, which updates the UI.
@@ -1448,7 +1450,8 @@ The {% aTargetBlank
 "@ObservedObject" %} property wrapper marks a property
 that receives an instance of a view model (`ObservableObject`)
 that is passed in from a parent view.
-This subscribes to changes published by an observable object,
+This subscribes to changes published by an observable object (indicated by
+applying the `@Published` property wrapper to specific properties),
 but it doesn't "own" the object.
 When changes occur, the view `body` is recomputed.
 
@@ -3252,6 +3255,11 @@ To scroll programmatically, use {% aTargetBlank
 "ScrollViewReader" %} and the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/scrollviewproxy/scrollto(_:anchor:)",
 "scrollTo" %} method as shown below.
+This also requires using the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/namespace",
+"Namespace" %} property wrapper which defines a "persistent identity"
+for an object to which it is applied (typically a `View`).
+
 Note the use of the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/withanimation(_:_:)",
 "withAnimation" %} function to add animation to the programmatic scrolling.
