@@ -3951,8 +3951,10 @@ To change an Image Set to always render in template mode:
 - Change the value for "Render As" to "Template Image".
 
 Single-color SF Symbol icons and images in template mode use the accent color.
-To render an image in template mode, apply the `renderingMode` view modifier
-as follows:
+To render an image in template mode, apply the `renderingMode` view modifier.
+Using this approach rather than configuring the Image Set "Render As" property
+allows the Image Set to be rendered using its actual colors elsewhere
+and render in template mode here.
 
 ```swift
 Image("someName").renderingMode(.template)
