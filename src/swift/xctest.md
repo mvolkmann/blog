@@ -13,14 +13,15 @@ is a unit testing framework for SwiftUI.
 
 ## Unit Test Configuration
 
-1. Select the topmost entry in the Navigator.
+1. Select the topmost entry in the Project Navigator.
 1. Select the main target.
 1. Click the "+" button at the bottom of the left nav to create a new target.
+1. Enter "test" to filter the set of templates displayed.
 1. Select "Unit Testing Bundle".
 1. Click the "Next" button.
 1. Click the "Finish" button.
 
-   This creates a new folder that appears in the Navigator
+   This creates a new folder that appears in the Project Navigator
    whose name is the project name followed by "Tests".
    The new folder contains a `.swift` file with the same name
    containing starter test code.
@@ -29,13 +30,14 @@ is a unit testing framework for SwiftUI.
 
 ## UI Test Configuration
 
-1. Select the topmost entry in the Navigator.
+1. Select the topmost entry in the Project Navigator.
 1. Click the "+" button at the bottom of the left nav to create another target.
+1. Enter "test" to filter the set of templates displayed.
 1. Select "UI Testing Bundle".
 1. Click the "Next" button.
 1. Click the "Finish" button.
 
-   This creates a new folder that appears in the Navigator
+   This creates a new folder that appears in the Project Navigator
    whose name is the project name followed by "UITests".
    The new folder contains a `.swift` file with the same name
    containing starter test code.
@@ -46,15 +48,26 @@ is a unit testing framework for SwiftUI.
 
 For each set of related test methods:
 
-1. Create a test file.
+1. Create a test file or use the provided example test file.
 
-   - Create a file in the {project-name}Tests directory
-     whose name ends with `Tests.swift`.
-   - Make the class inherit from {% aTargetBlank
-     "https://developer.apple.com/documentation/xctest/xctestcase",
-     "XCTestCase" %}.
-   - Add the line `@testable import {project-name}` before the class definition.
-   - Replace hyphens in the project name, if any, with underscores.
+   - Create a file in the appropriate directory
+     with a name that ends in `Tests.swift`.
+
+     1. Select File ... New ... File... or press cmd-n.
+     1. For non-UI tests, select "Unit Test Case Class"
+        or for UI tests, select "UI Test Case Class".
+     1. Enter a name that ends in "Tests".
+     1. Click the "Next" button.
+     1. Select the appropriate test directory.
+     1. Click the "Create" button.
+
+        The generated class will inherit from {% aTargetBlank
+        "https://developer.apple.com/documentation/xctest/xctestcase",
+        "XCTestCase" %}.
+
+     1. Add the line `@testable import {project-name}` before the class definition.
+
+        Replace hyphens in the project name, if any, with underscores.
 
 1. Define setup steps.
 
@@ -117,6 +130,170 @@ For each set of related test methods:
    }
    ```
 
+## Example Unit Test
+
+The following code defines a `struct` with a simple `static` function:
+
+```swift
+import Foundation
+
+struct Math {
+    static func add(n1: Double, n2: Double) -> Double {
+        n1 + n2
+    }
+}
+```
+
+The following code defines unit tests for the `struct` defined above:
+
+```swift
+import XCTest
+
+@testable import XCTestDemo
+final class MathTests: XCTestCase {
+    override func setUpWithError() throws {
+        // Put setup code here. This method is called before
+        // the invocation of each test method in the class.
+    }
+
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after
+        // the invocation of each test method in the class.
+    }
+
+    func testAdd() throws {
+        let actual = Math.add(n1: 1, n2: 2)
+        let expected = 3.0
+        XCTAssertEqual(actual, expected)
+    }
+}
+```
+
+## UI Test Utility Methods
+
+Add utility methods in an extension of the `XCTestCase` class
+to simplify writing tests. For example:
+
+```swift
+import XCTest
+
+extension XCTestCase {
+    static var app = XCUIApplication()
+
+    // Verifies that a `Button` with a given label exists.
+    func buttonExists(_ label: String) throws {
+        XCTAssertTrue(XCTestCase.app.buttons[label].exists)
+    }
+
+    // Enters text in a `SecureField` with a given label.
+    func enterSecureText(label: String, text: String) {
+        XCTestCase.app.secureTextFields[label].tap()
+        for char in text {
+            XCTestCase.app.keys[String(char)].tap()
+        }
+
+        /* Tests fail with this approach.
+         let field = XCTestCase.app.secureTextFields[label]
+         field.tap()
+         field.typeText(text)
+         */
+    }
+
+    // Enters text in a `TextField` with a given label.
+    func enterText(label: String, text: String) {
+        XCTestCase.app.textFields[label].tap()
+        for char in text {
+            let key = XCTestCase.app.keys[String(char)]
+            key.tap()
+        }
+
+        /* Tests fail with this approach.
+         let field = XCTestCase.app.textFields[label]
+         field.tap()
+         field.typeText(text)
+         */
+    }
+
+    // Taps a `Button` with a given label.
+    func tapButton(label: String) {
+        XCTestCase.app.buttons[label].tap()
+    }
+
+    // Searches for text anywhere on the screen.
+    func textExists(_ text: String) throws {
+        XCTAssertTrue(XCTestCase.app.staticTexts[text].exists)
+    }
+
+    // Searches for text in a view with a specific `accessibilityIdentifier`.
+    func textExists(identifier: String, text: String) throws {
+        let actual = XCTestCase.app.staticTexts[identifier].label
+        XCTAssertEqual(text, actual)
+    }
+}
+```
+
+In the `setUpWithError` method of test files, add the following:
+
+```swift
+XCTestCase.app.launch()
+```
+
+## Example UI Test
+
+The following code defines a custom `View`:
+
+```swift
+import SwiftUI
+
+struct Counter: View {
+    @State private var count = 0
+
+    var body: some View {
+        HStack {
+            Button("+") { count += 1 }
+            Text("\(count)")
+                .accessibilityIdentifier("count")
+            Button("-") { count += 1 }
+        }
+    }
+}
+```
+
+The following code defines UI tests for the `View` defined above:
+
+```swift
+import XCTest
+
+final class CounterTests: XCTestCase {
+    override func setUpWithError() throws {
+        // Put setup code here. This method is called before
+        // the invocation of each test method in the class.
+
+        // In UI tests it is usually best to
+        // stop immediately when a failure occurs.
+        continueAfterFailure = false
+
+        // In UI tests it’s important to set the initial state, such as
+        // interface orientation, that is required for before your tests run.
+    }
+
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after
+        // the invocation of each test method in the class.
+    }
+
+    func testIncrement() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+
+        tapButton(label: "+")
+        tapButton(label: "+")
+        try textExists(identifier: "count", text: "2")
+    }
+}
+```
+
 ## Running Tests in Xcode
 
 1. To run a single test method, click the diamond where the
@@ -125,7 +302,7 @@ For each set of related test methods:
    and they click back on the test file.
 1. To run all the test methods in the file, click the diamond where the
    line number of the first line of the class would normally appear.
-1. To run all the tests in Navigator folder,
+1. To run all the tests in Project Navigator folder,
    click the diamond to the right of the folder name.
 1. To run all the tests, select Product ... Test or press cmd-u.
 
@@ -139,7 +316,7 @@ and unselect "Connect Hardware Keyboard".
 To see a report on test results:
 
 1. Click the "Show Report Navigator" button,
-   which is the last button at the top of the Navigator,
+   which is the last button at the top of the Project Navigator,
    and then click a test run with a specific time.
 1. In the editor panel where test results are displayed,
    click a category of test results to view
@@ -186,64 +363,6 @@ To generate test code by recording user interactions:
    and selecting items from pickers.
 1. Optionally manually improve the generated test code.
 1. Add assertions about what should be in the UI.
-
-## Add Utility Methods
-
-Add utility methods in an extension of the `XCTestCase` class
-to simplify writing tests. For example:
-
-```swift
-import XCTest
-
-extension XCTestCase {
-    static var app = XCUIApplication()
-
-    func buttonExists(_ label: String) throws {
-        XCTAssertTrue(XCTestCase.app.buttons[label].exists)
-    }
-
-    func enterSecureText(label: String, text: String) {
-        XCTestCase.app.secureTextFields[label].tap()
-        for char in text {
-            XCTestCase.app.keys[String(char)].tap()
-        }
-
-        /* Tests fail with this approach.
-        let field = XCTestCase.app.secureTextFields[label]
-        field.tap()
-        field.typeText(text)
-        */
-    }
-
-    func enterText(label: String, text: String) {
-        XCTestCase.app.textFields[label].tap()
-        for char in text {
-            let key = XCTestCase.app.keys[String(char)]
-            key.tap()
-        }
-
-        /* Tests fail with this approach.
-        let field = XCTestCase.app.textFields[label]
-        field.tap()
-        field.typeText(text)
-        */
-    }
-
-    func tapButton(label: String) {
-        XCTestCase.app.buttons[label].tap()
-    }
-
-    func textExists(_ text: String) throws {
-        XCTAssertTrue(XCTestCase.app.staticTexts[text].exists)
-    }
-}
-```
-
-In the `setUpWithError` method of test files, add the following:
-
-```swift
-XCTestCase.app.launch()
-```
 
 ## Run from Command Line
 
