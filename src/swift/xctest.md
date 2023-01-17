@@ -44,10 +44,17 @@ is a unit testing framework for SwiftUI.
 
 ## Implementing Tests
 
-1. To make all the source files in the project available to the test,
-   add the line `@testable import {project-name}`
-   before each test class definition.
-   Replace hyphens with underscores.
+For each set of related test methods:
+
+1. Create a test file.
+
+   - Create a file in the {project-name}Tests directory
+     whose name ends with `Tests.swift`.
+   - Make the class inherit from {% aTargetBlank
+     "https://developer.apple.com/documentation/xctest/xctestcase",
+     "XCTestCase" %}.
+   - Add the line `@testable import {project-name}` before the class definition.
+   - Replace hyphens in the project name, if any, with underscores.
 
 1. Define setup steps.
 
@@ -60,6 +67,17 @@ is a unit testing framework for SwiftUI.
    For tear down that can throw, override the `tearDownWithError` method.
 
 1. Add test methods whose names begin with "test".
+
+   A new instance of the `XCTestCase` subtype is created
+   before running each of these methods,
+   so it is not possible for them to share state.
+   This is good because it prevents a test method from being effected
+   by previous runs of other test methods.
+
+   A good pattern to follow in test methods is "given, when, then".
+   The "given" part establish the conditions to be tested.
+   The "when" part takes some action to be tested.
+   The "then" part makes assertions that should not be true.
 
 1. Make assertions by calling the `XCTAssert{kind}` functions.
 
@@ -148,6 +166,13 @@ To enable collecting code coverage data:
    of each source file.
 
 ## UI View Testing
+
+In a test method, to wait for a specific view to be created:
+
+```swift
+let viewExists = someView.waitForExistence(timeout: seconds)
+XCTAssertTrue(viewExists)
+```
 
 To generate test code by recording user interactions:
 

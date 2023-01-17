@@ -228,6 +228,12 @@ The output from the `dump` function is:
       - name: "Tami"
 ```
 
+To print the unique id of an object:
+
+```swift
+print("id = \(ObjectIdentifier(myObject))")
+```
+
 ## Packages
 
 The {% aTargetBlank "https://www.swift.org/package-manager/",
