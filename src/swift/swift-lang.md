@@ -622,10 +622,12 @@ TODO: Why is this required?
 TODO: Are non-escaping closures handled in an optimized way
 that discards their context after the function returns?
 
-When an escaping closure reference `self`,
-typically the closure parameter list should be preceded by `[weak self]`
-so the object that uses the escaping closure can be garbage collected
+When an escaping closure references `self`,
+typically the closure parameter list should be preceded by `[weak self]`.
+This enables the object that uses the escaping closure can be garbage collected
 when there are no longer references to it.
+The type of `self` will be optional inside the closure, so all references
+to it will have to account for the possibility of it being `nil`.
 
 ## Stopping Execution
 
@@ -4927,6 +4929,7 @@ class ViewModel: ObservableObject {
                 }
 
                 // Update the published property dogs in the main thread.
+                // See the description of `[weak self]` earlier.
                 DispatchQueue.main.async { [weak self] in
                     self?.dogs = fetchedDogs
                 }

@@ -293,6 +293,7 @@ simplify writing tests.
 import XCTest
 
 extension XCTestCase {
+    // This is static because extensions cannot define stored properties.
     static var app = XCUIApplication()
 
     // Verifies that a `Button` with a given label exists.
@@ -360,6 +361,8 @@ struct Counter: View {
     var body: some View {
         HStack {
             Button("+") { count += 1 }
+            // Applying the `accessibilityIdentifier` view modifier
+            // to a view makes it easy to find it in a UI test.
             Text("\(count)")
                 .accessibilityIdentifier("count")
             Button("-") { count += 1 }
@@ -398,6 +401,11 @@ final class CounterTests: XCTestCase {
 
         tapButton(label: "+")
         tapButton(label: "+")
+        // "count" is the accessibility identifier that
+        // was associated with the `Text` view that
+        // holds the count in the `Counter` view above.
+        // This approach is less brittle than relying on other properties
+        // of a view that might change such as the label of a `Button`.
         try textExists(identifier: "count", text: "2")
     }
 }
@@ -408,6 +416,22 @@ In the `setUpWithError` method of test files, add the following:
 ```swift
 XCTestCase.app.launch()
 ```
+
+## Screen Navigation
+
+When implementing test methods that need to navigate to a common set of screens,
+consider implementing a separate function that navigates to each screen
+and call those from tests that require the navigation.
+This avoids repeating the navigation code and makes it easier to update if the screen hierarchy changes.
+
+These navigation functions can call each other.
+For example, if the app begins at screen A, and the user must
+navigate to screen B, then screen C, then screen D,
+the following functions can be written:
+
+- `goToB`: navigates from A to B
+- `goToC`: navigates from A to C by first calling `goToB`
+- `goToD`: navigates from A to D by first calling `goToC`
 
 ## Running Tests in Xcode
 
