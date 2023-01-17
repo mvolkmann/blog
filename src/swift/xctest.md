@@ -8,8 +8,13 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://developer.apple.com/documentation/xctest", "XCTest" %}
-is a unit testing framework for SwiftUI.
+is a unit testing and UI testing framework for Swift and SwiftUI.
 "XC" is an abbreviation for "Xcode".
+
+Unit tests are for testing non-UI logic such as data services and view models.
+
+UI Tests are for testing user interface interactions like
+entering text in `TextField` views and tapping `Button` views.
 
 ## Unit Test Configuration
 

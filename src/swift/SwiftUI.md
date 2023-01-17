@@ -1893,8 +1893,8 @@ The child views are centered vertically by default.
 To change this, add the `alignment` attribute which can be set to
 `.top`, `.center`, `.bottom`, `.firstTextBaseline`, or `.lastTextBaseline`.
 
-A default amount of space is added between each child
-which seems to be 8 pixels (can't find this documented).
+A default amount of space is added between each child determined by the system.
+In iOS this seems to be 8, but I cannot find a documented value.
 To change the space between child views, add the `spacing` attribute.
 
 The following example shows the effect of
@@ -1926,6 +1926,10 @@ The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/vstack",
 The child views are centered horizontally by default.
 To change this, add the `alignment` attribute which can be set to
 `.leading`, `.center`, or `.trailing`.
+
+A default amount of space is added between each child determined by the system.
+In iOS this seems to be 12, but I cannot find a documented value.
+To change the space between child views, add the `spacing` attribute.
 
 #### ZStack
 
