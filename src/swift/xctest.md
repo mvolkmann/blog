@@ -169,20 +169,21 @@ final class MathTests: XCTestCase {
 }
 ```
 
-## Finding Views
+## Finding and Testing Views
 
 UI test cases create an instance of {% aTargetBlank
 "https://developer.apple.com/documentation/xctest/xcuiapplication",
-"XCUIApplication" %} and typically story it in a variable named `app`.
+"XCUIApplication" %} and typically store it in a variable named `app`.
 
 A call to `app.launch()` is required to launch the app.
 
 `XCUIApplication` inherits from {% aTargetBlank
 "https://developer.apple.com/documentation/xctest/xcuielement",
 "XCUIElement" %}.
+This enables finding all the `View` elements within the application.
 
 The following table highlights properties in the `XCUIElement` class.
-Some of these properties are only available when running on a specific platform.
+Some of these are only available when running on a specific platform.
 For example, window elements are available in macOS, but not in iOS.
 
 Some of these properties are defined by the following protocols
@@ -228,6 +229,7 @@ to which `XCUIElement` conforms: {% aTargetBlank
 | `secureTextFields: XCUIElementQuery`   | query that matches secure text field elements                                                                                            |
 | `sheets: XCUIElementQuery`             | query that matches sheet elements                                                                                                        |
 | `sliders: XCUIElementQuery`            | query that matches slider elements                                                                                                       |
+| `staticTexts: XCUIElementQuery`        | query that matches label elements                                                                                                        |
 | `switches: XCUIElementQuery`           | query that matches switch elements                                                                                                       |
 | `textFields: XCUIElementQuery`         | query that matches text field elements                                                                                                   |
 | `textViews: XCUIElementQuery`          | query that matches text elements                                                                                                         |
@@ -262,10 +264,30 @@ The following table highlights methods in the `XCUIElement` class.
 | `typeText(String)`                          | types text into an element that accepts input like a `TextField`, `SecureField`, or `TextEditor` |
 | `waitForExistence(timeout) -> Bool`         | waits as long as the timeout and returns a `Bool` indicating if the element exists               |
 
+The following table highlights properties in the {% aTargetBlank
+"https://developer.apple.com/documentation/xctest/xcuielementquery",
+"XCUIElementQuery" %} class.
+
+| Property                                 | Description                                                |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| `allElementsBoundByIndex: [XCUIElement]` | array of matching elements                                 |
+| `count: Int`                             | number of matching elements                                |
+| `element: XCUIElement`                   | the single matching element; test fails if not exactly one |
+| `firstMatch: XCUIElement`                | first matching element                                     |
+
+The following table highlights methods in the {% aTargetBlank
+"https://developer.apple.com/documentation/xctest/xcuielementquery",
+"XCUIElementQuery" %} class.
+
+| Method                                 | Description                                                                              |
+| -------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `element(boundBy: Int) -> XCUIElement` | matching element at a given index                                                        |
+| `subscript(String) -> XCUIElement`     | returns the descendant element with a given accessibility identifier using `[id]` syntax |
+
 ## UI Test Utility Methods
 
-Add utility methods in an extension of the `XCTestCase` class
-to simplify writing tests. For example:
+The following utility methods defined in an extension of the `XCTestCase` class
+simplify writing tests.
 
 ```swift
 import XCTest
