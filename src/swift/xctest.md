@@ -181,13 +181,63 @@ A call to `app.launch()` is required to launch the app.
 "https://developer.apple.com/documentation/xctest/xcuielement",
 "XCUIElement" %}.
 
-The following table describes the properties in the `XCUIElement` class.
+The following table highlights properties in the `XCUIElement` class.
+Some of these properties are only available when running on a specific platform.
+For example, window elements are available in macOS, but not in iOS.
 
-| Property                   | Description                                           |
-| -------------------------- | ----------------------------------------------------- |
-| `debugDescription: String` | debugging information                                 |
-| `exists: Bool`             | indicates if the element exists on the screen         |
-| `isHittable: Bool`         | indicates if a hit point can be determined (visible?) |
+Some of these properties are defined by the following protocols
+to which `XCUIElement` conforms: {% aTargetBlank
+"https://developer.apple.com/documentation/xctest/xcuielementattributes",
+"XCUIElementAttributes" %} and {% aTargetBlank
+"https://developer.apple.com/documentation/xctest/xcuielementtypequeryprovider",
+"XCUIElementTypeQueryProvider" %}.
+
+| Property                               | Description                                                                                                                              |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `alerts: XCUIElementQuery`             | query that matches alert elements                                                                                                        |
+| `buttons: XCUIElementQuery`            | query that matches button elements                                                                                                       |
+| `checkBoxes: XCUIElementQuery`         | query that matches checkbox elements                                                                                                     |
+| `comboBoxes: XCUIElementQuery`         | query that matches combo box elements                                                                                                    |
+| `datePickers: XCUIElementQuery`        | query that matches date picker elements                                                                                                  |
+| `debugDescription: String`             | debugging information                                                                                                                    |
+| `dialogs: XCUIElementQuery`            | query that matches dialog elements                                                                                                       |
+| `elementType: XCUIElement.ElementType` | enum value from {% aTargetBlank "https://developer.apple.com/documentation/xctest/xcuielement/elementtype", "XCUIElement.ElementType" %} |
+| `exists: Bool`                         | indicates if the element exists on the screen                                                                                            |
+| `firstMatch: XCUIElement`              | first element that matches                                                                                                               |
+| `hasFocus: Bool`                       | indicates whether the element has focus                                                                                                  |
+| `identifier: String`                   | associated with the element using the `.accessibilityIdentifier("id")` view modifier                                                     |
+| `images: XCUIElementQuery`             | query that matches image elements                                                                                                        |
+| `isEnabled: Bool`                      | indicates whether the element is enabled                                                                                                 |
+| `isHittable: Bool`                     | indicates if a hit point can be determined (visible?)                                                                                    |
+| `isSelected: Bool`                     | indicates whether the element is selected                                                                                                |
+| `label: String`                        | label value of the element                                                                                                               |
+| `links: XCUIElementQuery`              | query that matches link elements                                                                                                         |
+| `maps: XCUIElementQuery`               | query that matches map elements                                                                                                          |
+| `menuBarItems: XCUIElementQuery`       | query that matches menu bar item elements                                                                                                |
+| `menuBars: XCUIElementQuery`           | query that matches menu bar elements                                                                                                     |
+| `menuItems: XCUIElementQuery`          | query that matches menu item elements                                                                                                    |
+| `menus: XCUIElementQuery`              | query that matches menu elements                                                                                                         |
+| `navigationBars: XCUIElementQuery`     | query that matches navigation bar elements                                                                                               |
+| `pickers: XCUIElementQuery`            | query that matches picker elements                                                                                                       |
+| `placeholderValue: String?`            | placeholder value of the element (ex. in a `TextField`)                                                                                  |
+| `progressIndicators: XCUIElementQuery` | query that matches progress indicator elements                                                                                           |
+| `radioButtons: XCUIElementQuery`       | query that matches radio button elements                                                                                                 |
+| `radioGroups: XCUIElementQuery`        | query that matches radio group elements                                                                                                  |
+| `scrollBars: XCUIElementQuery`         | query that matches scroll bar elements                                                                                                   |
+| `scrollViews: XCUIElementQuery`        | query that matches scroll view elements                                                                                                  |
+| `secureTextFields: XCUIElementQuery`   | query that matches secure text field elements                                                                                            |
+| `sheets: XCUIElementQuery`             | query that matches sheet elements                                                                                                        |
+| `sliders: XCUIElementQuery`            | query that matches slider elements                                                                                                       |
+| `switches: XCUIElementQuery`           | query that matches switch elements                                                                                                       |
+| `textFields: XCUIElementQuery`         | query that matches text field elements                                                                                                   |
+| `textViews: XCUIElementQuery`          | query that matches text elements                                                                                                         |
+| `title: String`                        | title value of the element                                                                                                               |
+| `toggles: XCUIElementQuery`            | query that matches toggle elements                                                                                                       |
+| `toolbarButtons: XCUIElementQuery`     | query that matches toolbar button elements                                                                                               |
+| `toolbars: XCUIElementQuery`           | query that matches toolbar elements                                                                                                      |
+| `value: Any?`                          | raw value of the element                                                                                                                 |
+| `webViews: XCUIElementQuery`           | query that matches web view elements                                                                                                     |
+| `windows: XCUIElementQuery`            | query that matches window elements                                                                                                       |
 
 The following table highlights methods in the `XCUIElement` class.
 
