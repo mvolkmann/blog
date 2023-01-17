@@ -347,12 +347,6 @@ extension XCTestCase {
 }
 ```
 
-In the `setUpWithError` method of test files, add the following:
-
-```swift
-XCTestCase.app.launch()
-```
-
 ## Example UI Test
 
 The following code defines a custom `View`:
@@ -407,6 +401,12 @@ final class CounterTests: XCTestCase {
         try textExists(identifier: "count", text: "2")
     }
 }
+```
+
+In the `setUpWithError` method of test files, add the following:
+
+```swift
+XCTestCase.app.launch()
 ```
 
 ## Running Tests in Xcode
