@@ -169,6 +169,49 @@ final class MathTests: XCTestCase {
 }
 ```
 
+## Finding Views
+
+UI test cases create an instance of {% aTargetBlank
+"https://developer.apple.com/documentation/xctest/xcuiapplication",
+"XCUIApplication" %} and typically story it in a variable named `app`.
+
+A call to `app.launch()` is required to launch the app.
+
+`XCUIApplication` inherits from {% aTargetBlank
+"https://developer.apple.com/documentation/xctest/xcuielement",
+"XCUIElement" %}.
+
+The following table describes the properties in the `XCUIElement` class.
+
+| Property                   | Description                                           |
+| -------------------------- | ----------------------------------------------------- |
+| `debugDescription: String` | debugging information                                 |
+| `exists: Bool`             | indicates if the element exists on the screen         |
+| `isHittable: Bool`         | indicates if a hit point can be determined (visible?) |
+
+The following table highlights methods in the `XCUIElement` class.
+
+| Method                                      | Description                                                                                      |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `children(matching) -> XCUIElementQuery`    | gets all the child elements of a given type                                                      |
+| `click()`                                   | clicks the element in a macOS app                                                                |
+| `descendants(matching) -> XCUIElementQuery` | gets all the descendant elements of a given type                                                 |
+| `doubleClick()`                             | double-clicks the element in a macOS app                                                         |
+| `doubleTap()`                               | double-taps the element in an iOS app                                                            |
+| `hover()`                                   | moves the pointer over the element in an iPad or macOS app                                       |
+| `pinch(withScale, velocity)`                | pinches with two touches                                                                         |
+| `press(forDuration)`                        | long-presses an element in an iOS app                                                            |
+| `rightClick()`                              | right-clicks the element in a macOS app                                                          |
+| `rotate(angle, withVelocity)`               | rotates with two touches                                                                         |
+| `scroll(byDeltaX, deltaY)`                  | scrolls the view in an iPad or macOS app                                                         |
+| `swipeDown()`                               | swipes down                                                                                      |
+| `swipeLeft()`                               | swipes left                                                                                      |
+| `swipeRight()`                              | swipes right                                                                                     |
+| `swipeUp()`                                 | swipes up                                                                                        |
+| `tap()`                                     | tap the element in an iOS app                                                                    |
+| `typeText(String)`                          | types text into an element that accepts input like a `TextField`, `SecureField`, or `TextEditor` |
+| `waitForExistence(timeout) -> Bool`         | waits as long as the timeout and returns a `Bool` indicating if the element exists               |
+
 ## UI Test Utility Methods
 
 Add utility methods in an extension of the `XCTestCase` class
@@ -182,18 +225,18 @@ extension XCTestCase {
 
     // Verifies that a `Button` with a given label exists.
     func buttonExists(_ label: String) throws {
-        XCTAssertTrue(XCTestCase.app.buttons[label].exists)
+        XCTAssertTrue(Self.app.buttons[label].exists)
     }
 
     // Enters text in a `SecureField` with a given label.
     func enterSecureText(label: String, text: String) {
-        XCTestCase.app.secureTextFields[label].tap()
+        Self.app.secureTextFields[label].tap()
         for char in text {
-            XCTestCase.app.keys[String(char)].tap()
+            Self.app.keys[String(char)].tap()
         }
 
         /* Tests fail with this approach.
-         let field = XCTestCase.app.secureTextFields[label]
+         let field = Self.app.secureTextFields[label]
          field.tap()
          field.typeText(text)
          */
@@ -201,14 +244,14 @@ extension XCTestCase {
 
     // Enters text in a `TextField` with a given label.
     func enterText(label: String, text: String) {
-        XCTestCase.app.textFields[label].tap()
+        Self.app.textFields[label].tap()
         for char in text {
-            let key = XCTestCase.app.keys[String(char)]
+            let key = Self.app.keys[String(char)]
             key.tap()
         }
 
         /* Tests fail with this approach.
-         let field = XCTestCase.app.textFields[label]
+         let field = Self.app.textFields[label]
          field.tap()
          field.typeText(text)
          */
@@ -216,17 +259,17 @@ extension XCTestCase {
 
     // Taps a `Button` with a given label.
     func tapButton(label: String) {
-        XCTestCase.app.buttons[label].tap()
+        Self.app.buttons[label].tap()
     }
 
     // Searches for text anywhere on the screen.
     func textExists(_ text: String) throws {
-        XCTAssertTrue(XCTestCase.app.staticTexts[text].exists)
+        XCTAssertTrue(Self.app.staticTexts[text].exists)
     }
 
     // Searches for text in a view with a specific `accessibilityIdentifier`.
     func textExists(identifier: String, text: String) throws {
-        let actual = XCTestCase.app.staticTexts[identifier].label
+        let actual = Self.app.staticTexts[identifier].label
         XCTAssertEqual(text, actual)
     }
 }

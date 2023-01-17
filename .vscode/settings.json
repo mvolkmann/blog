@@ -859,6 +859,7 @@
     "xcdatamodeld",
     "xcodebuild",
     "xcodeproj",
+    "XCUI",
     "xcworkspace",
     "xelatex",
     "xfail",
