@@ -1533,6 +1533,9 @@ class SharedData: ObservableObject {
 
 struct ChildView: View {
     // This value will be received from the environment.
+    // There will be a fatal error of no object of type `SharedData`
+    // is found in the environment.  This is added by
+    // calling the `environmentObject` view modifier.
     @EnvironmentObject var sharedData: SharedData
 
     var body: some View {
@@ -1547,7 +1550,6 @@ struct ChildView: View {
             .buttonStyle(.bordered)
             GrandchildView()
         }
-        .environmentObject(sharedData)
     }
 }
 
@@ -7990,7 +7992,9 @@ to see a keyboard shortcut overlay that lists the available keyboard shortcuts.
 
 ## Controlling Focus
 
-The `@FocusState` property wrapper is used to
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/focusstate",
+"FocusState" %} property wrapper is used to
 track and modify which input view currently has focus.
 The following code demonstrates its use:
 
