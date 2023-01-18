@@ -1496,6 +1496,14 @@ When the button has a blue background it means editor splits are hidden.
 | go back to previously viewed file    | cmd-ctrl-left-arrow                            |
 | go forward to previously viewed file | cmd-ctrl-right-arrow                           |
 | move focus to next pane              | cmd-option-`                                   |
+| open jump menu                       | ctrl-6                                         |
+
+The jump menu displays a list of all the types, properties, and methods
+defined in the current source file.
+If the file contains pragma mark comments (`// MARK: - {section-name}`)
+then the list will be divided into sections with those names.
+Clicking a name scrolls to that definition and highlights it.
+To make it easier to find a particular item in the list, type part of its name.
 
 ### Find/Replace
 
