@@ -844,6 +844,17 @@ To **allow Xcode to access your GitHub account**:
   - Click the "Sign In" button.
   - Close the Settings dialog.
 
+## Project Navigator
+
+When a project has a Git repository, the list of files in the Project Navigator
+indicates their source control status with the following letters
+on the trailing edge of the file names:
+
+- A for added files
+- D for delete files
+- M for modified files
+- R for renamed files
+
 ### Local Repositories
 
 When a new Xcode project is created,
