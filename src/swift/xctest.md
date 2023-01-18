@@ -145,9 +145,19 @@ The following code defines a `struct` with a simple `static` function:
 ```swift
 import Foundation
 
+// This enables throwing a `String`.
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
+
 struct Math {
     static func add(n1: Double, n2: Double) -> Double {
         n1 + n2
+    }
+
+    static func divide(n1: Double, n2: Double) throws -> Double {
+        if n2 == 0 { throw "divide by zero" }
+        return n1 / n2 // returns Double.infinity if n2 is zero
     }
 }
 ```
@@ -173,6 +183,19 @@ final class MathTests: XCTestCase {
         let actual = Math.add(n1: 1, n2: 2)
         let expected = 3.0
         XCTAssertEqual(actual, expected)
+    }
+
+    func testDivide() throws {
+        let actual = try Math.divide(n1: 10, n2: 4)
+        let expected = 2.5
+        XCTAssertEqual(actual, expected)
+    }
+
+    func testDivideByZero() throws {
+        XCTAssertThrowsError(try Math.divide(n1: 10, n2: 0)) { error in
+            let string = error as? String
+            XCTAssertEqual(string, "divide by zero")
+        }
     }
 }
 ```
