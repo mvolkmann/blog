@@ -920,12 +920,14 @@ An example reference to one of these is `Constants.Colors.primary`.
 
 When the `body` of a view is longer than what can be displayed on the screen
 it is a good idea to extract some of the content.
-There are three options for doing this.
+There are four ways to move some content from a view to another location:
 
-1. Move some of the content to a computed property.
-2. Move some of the content to a method.
-3. Move some of the content to a new struct that
-   inherits from `View` and has its own `body` property.
+1. Move it to a constant property (`let`) if it never changes.
+1. Move it to a computed property (`var`) if it can change.
+1. Move it to a method (`func`) if the current location
+   needs to supply data (by passing arguments).
+1. Move it to a new `struct` that inherits from `View`
+   and has its own `body` property.
 
 Creating a computed property is useful for cases where the extracted code
 is only useful in the current view and no arguments need to be provided.
