@@ -10816,6 +10816,12 @@ It can't be used in the example below because
 it stores an array of struct instances.
 TODO: Can you store an array objects directly without encoding as JSON?
 
+For small amounts of basic data, using `@AppStorage` can be
+seen as an alternative to defining a view model
+(with `ObservableObject` and `@Published`) and using the view model
+(with `@StateObject`, `@ObservableObject`, or `@EnvironmentObject`).
+It has the advantage of also persisting the data.
+
 For macOS and iPad apps that have multiple scenes (aka windows),
 consider using {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/scenestorage",

@@ -48,7 +48,7 @@ or tapping the following button on the left side of the title bar:
 
 The Navigator panel displays the following nine icon buttons at the top:
 
-- folder icon (first)
+- 1st tab - Project Navigator (folder icon)
 
   This displays the "Project Navigator" which shows
   a tree view of files in the project.
@@ -84,7 +84,7 @@ The Navigator panel displays the following nine icon buttons at the top:
   <img alt="Xcode Project Navigator buttons" class="keep-size"
     src="/blog/assets/Xcode-Project-Navigator-buttons.png?v={{pkg.version}}">
 
-- "x" in square icon (second)
+- 2nd tab - Source Control Navigator ("x" in square icon)
 
   This displays a list of files that have been modified (M)
   or added (A).
@@ -109,7 +109,7 @@ The Navigator panel displays the following nine icon buttons at the top:
   Oddly it seems the only way to commit multiple files at once
   is to select "Commit..." from the "Source Control" menu.
 
-- tree diagram icon (third)
+- 3rd tab - Symbol Navigator (tree diagram icon)
 
   This displays an alphabetized list of files.
   Click a file to expand it to a list of the properties and methods it defines.
@@ -117,7 +117,7 @@ The Navigator panel displays the following nine icon buttons at the top:
   The "Hierarchical" and "Flat" options at the top of the list
   seem identical.
 
-- magnifier glass icon (fourth)
+- 4th tab - Find Navigator (magnifier glass icon)
 
   This is used to find and replace text in the project.
 
@@ -156,27 +156,27 @@ The Navigator panel displays the following nine icon buttons at the top:
   <img alt="Xcode Find" class="keep-size"
     src="/blog/assets/xcode-find-navigator-dropdown5.png?v={{pkg.version}}">
 
-- warning icon (triangle icon containing exclamation point; fifth)
+- 5th tab - Test Navigator (warning icon - triangle containing !)
 
   This displays "Buildtime" and "Runtime" issues.
 
-- diamond containing minus (sixth)
+- 6th tab - Test Navigator (diamond containing checkmark icon)
 
   This displays a list of tests.
   TODO: Can they be run individually from here?
 
-- spray can icon (seventh)
+- 7th tab - Debug Navigator (spray can icon)
 
   This displays information about CPU, Memory, Disk, and Network usage.
   Click each of these to see detailed information.
   For example, clicking "CPU" displays information about thread usage.
 
-- tag icon (eighth)
+- 8th tab - Breakpoint Navigator (tag icon)
 
   This displays debugging breakpoints.
   TODO: Can they be disabled and/or deleted here?
 
-- document icon (ninth)
+- 9th tab - Report Navigator (document icon)
 
   This displays historical information on recent project builds,
   including error messages.
@@ -344,9 +344,9 @@ sticks at the top of the editor window to provide context.
 ### Multiple Editor Panes
 
 To open a file in a new split pane,
-hold down the option key and click the file in the Navigator.
-If the file is already open,
-to open another view of the file in a new split pane
+hold down the option key and click the file in the Project Navigator.
+If the file is already open, to open another view of the file
+in a new split pane press cmd-ctrl-t or
 hold down the option key and click the existing editor tab.
 
 To choose editor window where the file will be opened,
@@ -1548,12 +1548,13 @@ by following the direction at {% aTargetBlank
 
 ### Miscellaneous
 
-| Action                           | Key         |
-| -------------------------------- | ----------- |
-| increase font size               | cmd-plus    |
-| decrease font size               | cmd-minus   |
-| open file                        | cmd-o       |
-| fuzzy file finder (open quickly) | cmd-shift-o |
+| Action                                         | Key         |
+| ---------------------------------------------- | ----------- |
+| increase font size                             | cmd-plus    |
+| decrease font size                             | cmd-minus   |
+| open file                                      | cmd-o       |
+| open new split pane for file in focused editor | cmd-ctrl-t  |
+| fuzzy file finder (open quickly)               | cmd-shift-o |
 
 ## Using a New Swift Version
 
