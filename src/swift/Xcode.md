@@ -448,6 +448,60 @@ Another approach is to use "Edit All in Scope" as follows:
 - Make the change in the current instance and all instances will change.
 - Press the return key or click outside the change.
 
+### Refactoring
+
+To **rename** all occurrences of a variable:
+
+- Right-click one occurrence.
+- Select Refactor ... Rename...
+- Enter the new name.
+- Press the return key.
+
+To move an expression into a **new variable**:
+
+- Select the expression to be extracted.
+- Select Refactor ... Extract to Variable.
+- If using Vim Mode:
+  - Press the escape key.
+  - Press the return key.
+  - Sadly you must manually rename the new variable and the reference to it.
+- If not using Vim Mode:
+  - Enter a name for the new variable.
+  - Press the return key.
+
+This will move the expression to become the value of a new variable
+and replace the extracted expression with a reference to the variable.
+The new variable will be a `let` constant,
+but this can be changed to a `var` manually.
+
+To extract multiple lines of code to a **new method**:
+
+- Select the lines to be extracted.
+- Select Refactor ... Extract to Method.
+- If using Vim Mode:
+  - Press the escape key.
+  - Type "ciw" for "change inner word".
+- Enter a name for the new method.
+- Press the return key.
+
+This will move the selected code to a new method with the given name
+and replace the selected code with a call to the method.
+The new method will have an access level of `fileprivate`,
+but this can be changed manually.
+If the extracted code needs data present at the call site,
+the new method will have parameters for it
+and the supplied call will pass the required data.
+
+To generate a **memberwise initializer** for a `struct` or `class`,
+right-click the its name and select Refactor ... Generate Memberwise Initializer.
+The new initializer will be preceded by the `internal` keyword
+which can be removed manually if desired.
+
+To change a type to **conform to the `Equatable` protocol**,
+right-click the its name and select Refactor ... Add Equatable Conformance.
+This changes the type to inherit from `Equatable` and
+adds a static `==` method that returns `true` if all the properties are equal.
+
 ## Console
 
 The bottom section is not visible by default.
