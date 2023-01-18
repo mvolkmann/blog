@@ -16,6 +16,9 @@ Unit tests are for testing non-UI logic such as data services and view models.
 UI Tests are for testing user interface interactions like
 entering text in `TextField` views and tapping `Button` views.
 
+Each type of test requires creating a new target in the app.
+The steps for doing this are described in the following sections.
+
 ## Unit Test Configuration
 
 1. Select the topmost entry in the Project Navigator.
@@ -365,12 +368,14 @@ struct Counter: View {
 
     var body: some View {
         HStack {
-            Button("+") { count += 1 }
+            Button("-") { count -= 1 }
+
             // Applying the `accessibilityIdentifier` view modifier
             // to a view makes it easy to find it in a UI test.
             Text("\(count)")
                 .accessibilityIdentifier("count")
-            Button("-") { count += 1 }
+
+            Button("+") { count += 1 }
         }
     }
 }
@@ -388,6 +393,7 @@ final class CounterTests: XCTestCase {
 
         // In UI tests it is usually best to
         // stop immediately when a failure occurs.
+        // This defaults to true, so tests continue after a failure.
         continueAfterFailure = false
 
         // In UI tests it’s important to set the initial state, such as
@@ -449,6 +455,9 @@ the following functions can be written:
 1. To run all the tests in Project Navigator folder,
    click the diamond to the right of the folder name.
 1. To run all the tests, select Product ... Test or press cmd-u.
+
+UI tests launch the app on the selected device
+which can be in the Simulator or on a real device.
 
 In UI tests, the on-screen keyboard doesn't always appear.
 If it doesn't, tests that require typing in text fields will fail.

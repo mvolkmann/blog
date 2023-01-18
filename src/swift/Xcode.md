@@ -38,7 +38,15 @@ The Xcode user interface contains many panels that are described below:
 
 ## Navigator
 
-The Navigator has nine icon buttons at the top.
+The Navigator panel is used to navigate between specific kinds of resources.
+It appears on the left side of the Xcode window.
+This can be toggled between showing and hiding by pressing cmd-0
+or tapping the following button on the left side of the title bar:
+
+<img alt="Xcode toggle Navigator panel" class="keep-size"
+  src="/blog/assets/Xcode-toggle-panel.png?v={{pkg.version}}">
+
+The Navigator panel displays the follwoing nine icon buttons at the top:
 
 - folder icon (first)
 
@@ -163,6 +171,16 @@ The Navigator has nine icon buttons at the top.
   This displays historical information on recent project builds,
   including error messages.
   Click a build to see details.
+
+## Inspector
+
+The Inspector panel is used to modify properties of the selected item.
+It appears on the right side of the Xcode window.
+This can be toggled between showing and hiding by pressing cmd-option-0
+or tapping the following button on the right side of the title bar:
+
+<img alt="Xcode toggle Inspector panel" class="keep-size"
+  src="/blog/assets/Xcode-toggle-panel.png?v={{pkg.version}}">
 
 ## Files
 
@@ -1133,6 +1151,9 @@ and delete the line `//___FILEHEADER__` and the blank line that follows.
 
 ## Mapping Files to Targets
 
+Targets in an Xcode project are things that can be executed
+such as an iOS app, a watchOS app, unit tests, and UI tests.
+
 By default files are only accessible from their associated target.
 If an app has multiple targets and a source file should be shared between them,
 select the file in the Navigator, open the Inspector on the right,
@@ -1354,7 +1375,7 @@ The following table summarize the most commonly used keyboard shortcuts.
 | show debug navigator                                | cmd-7                 |
 | show breakpoints navigator                          | cmd-8                 |
 | show reports navigator                              | cmd-9                 |
-| toggle navigator panel                              | cmd--0                |
+| toggle navigator panel                              | cmd-0                 |
 | toggle inspector panel                              | cmd-option-0          |
 | toggle debug area                                   | cmd-shift-y           |
 | activate console                                    | cmd-shift-c           |
