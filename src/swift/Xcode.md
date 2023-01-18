@@ -63,9 +63,19 @@ The Navigator panel displays the following nine icon buttons at the top:
   right-click one of them, and select "New Group From Selection".
 
   To open a file, click its name.
+
+  To open a file in a new editor split, option-click its name.
+
+  To open a file in a specific existing editor split,
+  shift-option-click its name.
+  This highlights an editor pane with a blue overlay.
+  Moving the cursor to a different editor pane moves the overlay.
+  Click when the desired editor pane is highlighted.
+
   To "quickly open" a file by typing part of its name,
   select File ... Open Quickly..." or press cmd-shift-o.
-  Both of these open a temporary view of the file,
+
+  All of the options above open a temporary view of the file,
   indicated by the file name in the tab being in italic.
   If there is already a temporary view tab and another file is opened, the
   temporary view content will be replaced by the new file content.
