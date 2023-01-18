@@ -46,11 +46,12 @@ or tapping the following button on the left side of the title bar:
 <img alt="Xcode toggle Navigator panel" class="keep-size"
   src="/blog/assets/Xcode-toggle-panel.png?v={{pkg.version}}">
 
-The Navigator panel displays the follwoing nine icon buttons at the top:
+The Navigator panel displays the following nine icon buttons at the top:
 
 - folder icon (first)
 
-  This displays a tree view of files in the project.
+  This displays the "Project Navigator" which shows
+  a tree view of files in the project.
 
   Files can be organized into groups.
   To create a new group, right-click on an
@@ -73,6 +74,15 @@ The Navigator panel displays the follwoing nine icon buttons at the top:
 
   To sort the files displayed in a directory shown in the Navigator,
   right-click the directory and select "Sort by Name" or "Sort by Type".
+
+  The following buttons appear at the bottom of the Project Navigator.o
+  The clock button toggles showing only files
+  that have been viewed recently.
+  The "+-" button toggles showing only files
+  whose source control status has changed (ex. modified files).
+
+  <img alt="Xcode Project Navigator buttons" class="keep-size"
+    src="/blog/assets/Xcode-Project-Navigator-buttons.png?v={{pkg.version}}">
 
 - "x" in square icon (second)
 
@@ -1404,15 +1414,19 @@ When the button has a blue background it means editor splits are hidden.
 | build           | cmd-b        |
 | build and run   | cmd-r        |
 | clean           | cmd-shift-k  |
+| clear console   | cmd-k        |
 
 ### Navigate
 
-| Action                      | Key                                            |
-| --------------------------- | ---------------------------------------------- |
-| go to previous location     | cmd-ctrl-left or tap "<" button in upper-left  |
-| go to next location         | cmd-ctrl-right or tap ">" button in upper-left |
-| switch to next file tab     | cmd-}                                          |
-| switch to previous file tab | cmd-{                                          |
+| Action                               | Key                                            |
+| ------------------------------------ | ---------------------------------------------- |
+| go to previous location              | cmd-ctrl-left or tap "<" button in upper-left  |
+| go to next location                  | cmd-ctrl-right or tap ">" button in upper-left |
+| switch to next file tab              | cmd-}                                          |
+| switch to previous file tab          | cmd-{                                          |
+| go back to previously viewed file    | cmd-ctrl-left-arrow                            |
+| go forward to previously viewed file | cmd-ctrl-right-arrow                           |
+| move focus to next pane              | cmd-option-`                                   |
 
 ### Find/Replace
 
