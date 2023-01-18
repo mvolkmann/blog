@@ -4822,6 +4822,10 @@ struct HttpUtil {
             throw HttpError.badStatus(status: res.statusCode)
         }
         return try JSONDecoder().decode(type, from: data)
+
+        // To convert a `Data` object to a `String
+        // instead of decoding it from JSON:
+        // let string = String(decoding: data, as: UTF8.self)
     }
 
     static func post<T, U>(
@@ -4829,7 +4833,12 @@ struct HttpUtil {
         with data: T,
         type: U.Type
     ) async throws -> U where T: Encodable, U: Decodable {
-        return try await httpWithBody(to: url, method: "POST", with: data, type: type)
+        return try await httpWithBody(
+            to: url,
+            method: "POST",
+            with: data,
+            type: type
+        )
     }
 
     static func put<T, U>(
@@ -4837,7 +4846,12 @@ struct HttpUtil {
         with data: T,
         type: U.Type
     ) async throws -> U where T: Encodable, U: Decodable {
-        return try await httpWithBody(to: url, method: "PUT", with: data, type: type)
+        return try await httpWithBody(
+            to: url,
+            method: "PUT",
+            with: data,
+            type: type
+        )
     }
 
     private static func httpWithBody<T, U>(
@@ -4856,9 +4870,15 @@ struct HttpUtil {
 
         var request = URLRequest(url: url)
         request.httpMethod = method
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(
+            "application/json",
+            forHTTPHeaderField: "Content-Type"
+        )
 
-        let (data, res) = try await URLSession.shared.upload(for: request, from: json)
+        let (data, res) = try await URLSession.shared.upload(
+            for: request,
+            from: json
+        )
 
         if let res = res as? HTTPURLResponse, res.statusCode != 200 {
             throw HttpError.badStatus(status: res.statusCode)

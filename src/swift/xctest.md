@@ -431,6 +431,7 @@ The following code defines UI tests for the `View` defined above:
 ```swift
 import XCTest
 
+@testable import XCTestDemo
 final class CounterTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before
@@ -498,8 +499,8 @@ the following functions can be written:
 
 1. To run a single test method, click the diamond where the
    line number of the first line of the method would normally appear.
-   If the diamonds don't appear, click a different source file
-   and they click back on the test file.
+   WARNING: If the diamonds don't appear, click a different source file
+   and they click back on the test file. This is frequently needed!
 1. To run all the test methods in the file, click the diamond where the
    line number of the first line of the class would normally appear.
 1. To run all the tests in Project Navigator folder,
