@@ -655,12 +655,38 @@ even in release builds.
 Errors in that occur in Swift code are described by
 objects that conform to the `Error` protocol.
 A protocol is like an interface in other programming languages.
-These are described in detail later in the "Protocol" section.
+These are described in detail later in the [Protocols](#protocols) section.
+
 The `Error` protocol is merely a marker protocol,
 not requiring any properties or methods.
-Often errors are described by an `enum` that conforms to the `Error` protocol.
+There are a small number of provided types that conform to this protocol,
+summarized below.
+Perhaps only `DecodingError` and `EncodingError` are suitable
+for throwing from your own functions.
+
+- {% aTargetBlank "https://developer.apple.com/documentation/swift/cancellationerror", "CancellationError" %} is thrown when a `Task` is cancelled.
+- {% aTargetBlank "https://developer.apple.com/documentation/swift/decodingerror", "DecodingError" %} is thrown when a value cannot be decoded.
+- {% aTargetBlank "https://developer.apple.com/documentation/distributed/distributedactorcodingerror", "DistributedActorCodingError" %} is thrown when a distributed actor cannot encode or decode a value.
+- {% aTargetBlank "https://developer.apple.com/documentation/swift/encodingerror", "EncodingError" %} is thrown when a value cannot be encoded
+- {% aTargetBlank "https://developer.apple.com/documentation/distributed/executedistributedtargeterror", "ExecuteDistributedGTargetError" %} is thrown by the `executeDistributedTargetError` method
+- {% aTargetBlank "https://developer.apple.com/documentation/distributed/localtestingdistributedactorsystemerror", "LocalTestingDistributedActorSystemError" %} is not described in the Apple documentation.
+- {% aTargetBlank "https://developer.apple.com/documentation/swift/never", "Never" %} is the return type of functions that should never return. It's not clear why this conforms to the `Error` protocol.
+
+Typically custom error types are defined in used.
+Often these are define as an `enum` that conforms to the `Error` protocol.
 Each `enum` `case` represents a variation of the error
 and specific cases are thrown.
+
+An alternative is to allow any `String` to be thrown by defining
+an `extension` that makes the `String` type conform to the
+`LocalizedError` protocol which inherits from the `Error` protocol
+as follows:
+
+```swift
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
+```
 
 To throw an error, use the `throw` keyword followed by an
 instance of any type that conforms to the `Error` protocol.
