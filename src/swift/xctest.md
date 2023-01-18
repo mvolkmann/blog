@@ -200,7 +200,7 @@ final class MathTests: XCTestCase {
 }
 ```
 
-## Finding and Testing Views
+## UI Tests
 
 UI test cases create an instance of {% aTargetBlank
 "https://developer.apple.com/documentation/xctest/xcuiapplication",
@@ -295,6 +295,13 @@ The following table highlights methods in the `XCUIElement` class.
 | `typeText(String)`                          | types text into an element that accepts input like a `TextField`, `SecureField`, or `TextEditor` |
 | `waitForExistence(timeout) -> Bool`         | waits as long as the timeout and returns a `Bool` indicating if the element exists               |
 
+In a test method, to wait for a specific view to be created:
+
+```swift
+let viewExists = someView.waitForExistence(timeout: seconds)
+XCTAssertTrue(viewExists)
+```
+
 The following table highlights properties in the {% aTargetBlank
 "https://developer.apple.com/documentation/xctest/xcuielementquery",
 "XCUIElementQuery" %} class.
@@ -314,6 +321,21 @@ The following table highlights methods in the {% aTargetBlank
 | -------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `element(boundBy: Int) -> XCUIElement` | matching element at a given index                                                        |
 | `subscript(String) -> XCUIElement`     | returns the descendant element with a given accessibility identifier using `[id]` syntax |
+
+## Recording UI Test Steps
+
+To generate test code by recording user interactions:
+
+1. Click inside a test function where code should be inserted.
+1. Click the red "record" circle at the bottom of the editor pane
+   of the test source file.
+1. Wait for the app to begin running in the Simulator.
+1. Interact with the UI to navigation to the point within the app
+   where assertions should be made. This includes tapping text fields
+   to move focus into them, typing text, tapping buttons,
+   and selecting items from pickers.
+1. Optionally manually improve the generated test code.
+1. Add assertions about what should be in the UI.
 
 ## UI Test Utility Methods
 
@@ -434,6 +456,12 @@ final class CounterTests: XCTestCase {
     func testIncrement() throws {
         tapButton(label: "+")
         tapButton(label: "+")
+
+        // To look for text anywhere on the page ...
+        // try textExists("2")
+
+        // To look for text inside a specific view
+        // using a method in XCTestCaseExtension.swift ...
         // "count" is the accessibility identifier that
         // was associated with the `Text` view that
         // holds the count in the `Counter` view above.
@@ -516,28 +544,6 @@ To enable collecting code coverage data:
 1. Click "Coverage" under the new test run.
 1. Expand the test folder displayed to see the coverage percentage
    of each source file.
-
-## UI View Testing
-
-In a test method, to wait for a specific view to be created:
-
-```swift
-let viewExists = someView.waitForExistence(timeout: seconds)
-XCTAssertTrue(viewExists)
-```
-
-To generate test code by recording user interactions:
-
-1. Click inside a test function where code should be inserted.
-1. Click the red "record" circle at the bottom of the editor pane
-   of the test source file.
-1. Wait for the app to begin running in the Simulator.
-1. Interact with the UI to navigation to the point within the app
-   where assertions should be made. This includes tapping text fields
-   to move focus into them, typing text, tapping buttons,
-   and selecting items from pickers.
-1. Optionally manually improve the generated test code.
-1. Add assertions about what should be in the UI.
 
 ## Run from Command Line
 
