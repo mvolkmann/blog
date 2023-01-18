@@ -502,6 +502,9 @@ right-click the its name and select Refactor ... Add Equatable Conformance.
 This changes the type to inherit from `Equatable` and
 adds a static `==` method that returns `true` if all the properties are equal.
 
+There are more context-sensitive Refactor menu options
+that are less frequently used.
+
 ## Console
 
 The bottom section is not visible by default.
@@ -826,7 +829,7 @@ the "Source Control" menu and the "Source Control Navigator".
 To access the "Source Control Navigator",
 select the second navigator tab or press cmd-2.
 
-To allow Xcode to access your GitHub account:
+To **allow Xcode to access your GitHub account**:
 
 - Select Xcode ... Settings...
 - Select the Accounts tab.
@@ -847,18 +850,18 @@ In the final dialog that is displayed when creating a new project
 check the checkbox to "Create Git repository on my Mac".
 
 If this is not done when the project is created,
-Xcode can create a local Git repository later.
+Xcode can **create a local Git repository** later.
 With the project open in Xcode,
 select Source Control ... New Git Repository...
 In the dialog that appears, click the "Create" button.
 This automatically creates the first commit containing all the existing files
 on a branch named "main".
 
-To refresh the Git status shown for files in the Project Navigator,
+To **refresh the Git status** shown for files in the Project Navigator,
 perhaps because their status has been changed outside of Xcode,
 select Source Control ... Refresh File Status.
 
-To delete a local repository:
+To **delete a local repository**:
 
 - TODO: Is this possible?
 
@@ -885,7 +888,7 @@ This file can be obtained from {% aTargetBlank "https://gitignore.io", "gitignor
 
 ### Remote Repositories
 
-To clone a remote GitHub repository:
+To **clone a remote GitHub repository**:
 
 Approach #1:
 
@@ -911,7 +914,7 @@ Approach #2:
 - In the dialog that appears, click the "Trust and Open" button.
 - The cloned repository will be opened in Xcode.
 
-To create a remote GitHub repository from a local Git repository:
+To **create a remote GitHub repository** from a local Git repository:
 
 - Ensure that GitHub access is configure in Xcode Settings as described above.
 - Open the Source Control Navigator.
@@ -930,10 +933,10 @@ To create a remote GitHub repository from a local Git repository:
   to push other branches, switch to them one at a time and
   select Source Control ... Push...
 
-To fetch new branches from the remote repository,
+To **fetch new branches** from the remote repository,
 select Source Control ... Fetch Changes.
 
-To pull changes in a remote repository into the local repository:
+To **pull changes** in a remote repository into the local repository:
 
 - Select Source Control ... Pull... or press cmd-option-x.
 - In the dialog that appears,
@@ -943,7 +946,7 @@ To pull changes in a remote repository into the local repository:
   for the brave.
 - Click the "Pull" button.
 
-To push changes committed in the local repository to the remote repository:
+To **push changes** committed in the local repository to the remote repository:
 
 - Select Source Control ... Push....
 - In the dialog that appears,
@@ -953,7 +956,7 @@ To push changes committed in the local repository to the remote repository:
   when new tags have been applied.
 - Click the "Push" button.
 
-To view a remote Git repository that is known to Xcode:
+To **view a remote Git repository** that is known to Xcode:
 
 - Open the Source Control Navigator.
 - Select the Repositories tab.
@@ -962,7 +965,7 @@ To view a remote Git repository that is known to Xcode:
   This will open a browser tab in the default web browser
   and display the remote repository.
 
-To delete a remote Git repository that is known to Xcode:
+To **delete a remote Git repository** that is known to Xcode:
 
 - Open the Source Control Navigator.
 - Select the Repositories tab.
@@ -987,13 +990,13 @@ To delete a remote Git repository that is known to Xcode:
 The current branch is displayed in the Xcode title bar
 on the left side below the project name.
 
-To see a list of all existing branches:
+To **see a list of all existing branches**:
 
 - Open the Source Control Navigator.
 - Select the Repositories tab.
 - Expand the "Branches" section.
 
-To create a new branch:
+To **create a new branch**:
 
 - Right-click the name of an existing branch.
 - Select "New branch from {branch-name}...".
@@ -1002,13 +1005,13 @@ To create a new branch:
   and click the "Create" button.
 - The new branch automatically becomes the current branch.
 
-To switch to a different branch:
+To **switch to a different branch**:
 
 - Right-click the name of an existing branch.
 - Select "Switch...".
 - In the dialog that appears, click the "Switch" button.
 
-To merge one branch to another:
+To **merge one branch to another**:
 
 - Switch to the target branch, making it the current branch.
 - Right-click the source branch name.
@@ -1034,7 +1037,7 @@ To merge one branch to another:
   - After resolving all the conflicts,
     click the "Merge" button in the lower-left.
 
-To delete a branch:
+To **delete a branch**:
 
 - Right-click the branch name.
 - Select "Delete...".
@@ -1042,7 +1045,7 @@ To delete a branch:
 
 ### Uncommitted Changes
 
-To see the Git status of all files in the project:
+To **see the Git status of all files in the project**:
 
 - Open the Project Navigator.
 - Look for the following letters after the file names:
@@ -1067,13 +1070,13 @@ Approach #2:
   - "Hide Change" removes the display of the original line.
   - "Discard Changes" undoes the changes.
 
-To discard uncommitted changes in the current source file:
+To **discard uncommitted changes in the current source file**:
 
 - Select Source Control ... Discard Changes in {file-name}...
 - In the confirmation dialog that is displayed,
   click the "Discard Changes" button.
 
-To discard all uncommitted changes:
+To **discard all uncommitted changes**:
 
 - In the Project Navigator, select the top entry.
 - Select Source Control ... Discard All Changes...
@@ -1081,7 +1084,7 @@ To discard all uncommitted changes:
 
 ### Commits
 
-To commit changes:
+To **commit changes**:
 
 - Select Source Control ... Commit... or press cmd-option-c
   to open a dialog that lists the files that can be committed.
@@ -1104,7 +1107,7 @@ To commit changes:
 - Optionally check the "Push to remote" checkbox.
 - Click the "Commit" button.
 
-To see the changes in a previous commit:
+To **see the changes in a previous commit**:
 
 - Open the Source Control Navigator.
 - Select the Repositories tab.
@@ -1118,12 +1121,12 @@ To see the changes in a previous commit:
 
 ### Stashes
 
-To stash uncommitted changes:
+To **stash uncommitted changes**:
 
 - Select Source Control ... Stash Changes...
 - In the dialog that appears, enter a description and click the "Stash" button.
 
-To see a list of existing stashes:
+To **see a list of existing stashes**:
 
 - Open the Source Control Navigator.
 - Click the Repositories tab.
@@ -1131,7 +1134,7 @@ To see a list of existing stashes:
 - Click a stash description to see the names of the files that were modified.
 - Click a file name to see a side-by-side diff of the changes.
 
-To apply stashed changes to the current branch:
+To **apply stashed changes to the current branch**:
 
 - Open the Source Control Navigator.
 - Click the Repositories tab.
@@ -1140,7 +1143,7 @@ To apply stashed changes to the current branch:
 - Optionally uncheck the "Keep stash after applying" checkbox.
 - Click the "Apply Stash" button.
 
-To delete a stash:
+To **delete a stash**:
 
 - Open the Source Control Navigator.
 - Click the Repositories tab.
@@ -1150,7 +1153,7 @@ To delete a stash:
 
 ### Pull Requests
 
-To create a pull request:
+To **create a pull request**:
 
 - Select Source Control ... Create Pull Request... or
   click the current branch in the Xcode title bar
@@ -1162,14 +1165,14 @@ To create a pull request:
 - In the dialog that appears, confirm creating a new pull request
   by clicking the "Publish" button.
 
-To view a pull request in the GitHub web UI:
+To **view a pull request in the GitHub web UI**:
 
 - Open the Source Control Navigator.
 - Click the "Changes" tab.
 - In the "Pull Request" section, right-click the title of a pull request
   and select "View Pull Request on GitHub".
 
-To merge a pull request:
+To **merge a pull request**:
 
 - Open the Source Control Navigator.
 - Click the "Changes" tab.
@@ -1180,7 +1183,7 @@ To merge a pull request:
 - Optionally check the "Delete source branch after merging" checkbox.
 - Click the "Merge" button.
 
-To close a pull request without merge it:
+To **close a pull request without merging it**:
 
 - Open the Source Control Navigator.
 - Click the "Changes" tab.
@@ -1190,7 +1193,7 @@ To close a pull request without merge it:
 
 ### Tags
 
-To tag a commit:
+To **tag a commit**:
 
 - Open the Source Control Navigator.
 - Click the "Repositories" tab.
@@ -1201,7 +1204,7 @@ To tag a commit:
 - In the dialog that appears, enter at tag name and message.
 - Click the "Create" button.
 
-To push tags to a remote repository:
+To **push tags to a remote repository**:
 
 - Select Source Control ... Push...
 - In the dialog that appears,
