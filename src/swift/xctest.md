@@ -414,6 +414,9 @@ final class CounterTests: XCTestCase {
         // Put setup code here. This method is called before
         // the invocation of each test method in the class.
 
+        // UI tests must launch the application that they test.
+        XCUIApplication().launch()
+
         // In UI tests it is usually best to
         // stop immediately when a failure occurs.
         // This defaults to true, so tests continue after a failure.
@@ -429,10 +432,6 @@ final class CounterTests: XCTestCase {
     }
 
     func testIncrement() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
         tapButton(label: "+")
         tapButton(label: "+")
         // "count" is the accessibility identifier that
