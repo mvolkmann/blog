@@ -260,6 +260,17 @@ The typical contents include:
 
   This directory should not be saved in a source control repository.
 
+When files are added to a project directory from outside of Xcode
+(such as in the Finder or a Terminal window)
+it is necessary to select File ... Add Files... in Xcode
+in order to add entries in the `.xcodeproj` file
+so they are seen as belonging to the project.
+
+When deleting files under a project directory, it is best to
+do so from Xcode rather than the Finder or a Terminal window.
+This updates the `.xcodeproj` file so the files
+are no longer seen as belonging to the project.
+
 ## Editor
 
 Xcode provides a specialized editor for some file types.
