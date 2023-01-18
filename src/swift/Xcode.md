@@ -202,10 +202,68 @@ This also works with any kind of name including
 types, variables, functions, structs, classes, properties, and methods.
 It even works with framework types.
 
+## Project Files
+
+Xcode projects are described by a file with the
+`.xcodeproj` file extension which is short for "Xcode Project".
+These are actually "packages" (rather than files)
+that contain directories and files.
+To see this, right-click on a `.xcodeproj` file in the Finder
+and select "Show Package Contents".
+The typical contents include:
+
+- `project.pbxproj` file
+
+  This is a text file that contains information about the project
+  which includes everything displayed when
+  the top entry in the Project Navigator is selected.
+  Highlights include:
+
+  - a list of groups (directories) and files in the project in the\
+    order in which they should appear in the Project Navigator
+  - the deployment target (ex. iOS 16.2)
+  - localization languages (ex. English and French)
+  - project build settings
+  - package dependencies
+  - targets with the following information for each:
+
+    - display name
+    - bundle identifier
+    - version
+    - build number
+    - app icon
+    - launch screen
+    - frameworks used
+    - capabilities (ex. HealthKit, iCloud, Maps, and WeatherKit)
+    - `Info.plist` contents
+    - build settings
+    - build phases
+    - build rules
+
+  The file extension stands for "Project Builder Xcode Project".
+
+  This file uses the syntax from Next plist files
+  that looks a bit like JavaScript object literals
+  rather than a standard format such as JSON or XML.
+
+  This file should be saved in a source control repository.
+
+- `project.xcworkspace` directory
+
+  This directory typically should not be saved in a source control repository.
+
+- `xcshareddata` directory for data not associated with a specific user
+
+  This directory should be saved in a source control repository.
+
+- `xcuserdata` directory for data associated with the current user
+
+  This directory should not be saved in a source control repository.
+
 ## Editor
 
 Xcode provides a specialized editor for some file types.
-Examples include project files (.xcodeproj) and Property List (PLIST) files
+Examples include project files (`.xcodeproj`) and Property List (PLIST) files
 (such as `Info.plist` and `Localizable.stringsdict`).
 
 For many text-based file formats such as Swift (`.swift`)
