@@ -82,8 +82,11 @@ The Navigator panel displays the following nine icon buttons at the top:
   To change the temporary view to a permanent view,
   double click its tab or edit its contents.
 
-  To sort the files displayed in a directory shown in the Navigator,
-  right-click the directory and select "Sort by Name" or "Sort by Type".
+  The order of the groups and files in the Project Navigator
+  can be customized by dragging them up and down
+  and their order is persisted as part of the project.
+  To sort the files displayed in a group,
+  right-click its name and select "Sort by Name" or "Sort by Type".
 
   The following buttons appear at the bottom of the Project Navigator.o
   The clock button toggles showing only files
