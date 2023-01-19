@@ -3973,8 +3973,8 @@ but this provides an interesting example of using {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/dynamicproperty",
 "DynamicProperty" %} and defining a `projectValue` computed property.
 
-Conforming to `DynamicProperty` makes it so any time the state of
-this property wrapper changes, all views that are watching it update.
+Conforming to the `DynamicProperty` protocol makes it so any time the state
+of this property wrapper changes, all views that are watching it update.
 Unfortunately the view is not updated until
 something else triggers the `body` to be reevaluated.
 
