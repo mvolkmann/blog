@@ -3967,6 +3967,20 @@ struct DoubleTriple {
 }
 ```
 
+The following code demonstrates using the `DoubleTriple` property wrapper
+in a SwiftUI app:
+
+```swift
+struct ContentView: View {
+    @DoubleTriple private var number = 3
+
+    var body: some View {
+        Text("double = \(number)") // 6
+        Text("triple = \($number)") // 9
+    }
+}
+```
+
 The following code demonstrates an attempt to implement our own version
 of the `State` property wrapper. We can of course just use that,
 but this provides an interesting example of using {% aTargetBlank
