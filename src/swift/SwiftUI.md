@@ -324,8 +324,8 @@ To see this in action:
 Here's an example of using such an icon:
 
 ```swift
-// The @State view modifier is described later.
-// It allows a view instance to maintain state.
+// The @State property wrapper is described later.
+// It allows a view instance to maintain state inside the property wrapper.
 @State private var percent = 0.0
 ...
 Image(systemName: "cellularbars", variableValue: percent)
@@ -1135,18 +1135,19 @@ Views often get data from view model objects.
 They can also have associated mutable data by applying the
 {% aTargetBlank "https://developer.apple.com/documentation/swiftui/state",
 "@State" %} property wrapper to a property.
-This essentially creates a constant pointer inside a view struct
-to non-constant data held outside the view struct.
+This essentially creates a constant pointer inside a view `struct`
+to non-constant data held in the property wrapper.
 It allows a view instance to maintain state.
 
-When the value of a normal struct property
+When the value of a normal `struct` property
 (declared without a property wrapper)
-is modified, a new instance of the struct is created.
+is modified, a new instance of the `struct` is created.
 This happens because structs are value types.
 
 We don't want a new instance to be created for structs that represent views.
-Applying the `@State` property wrapper to a struct property
-prevents this because SwiftUI manages the value outside of the struct.
+Applying the `@State` property wrapper to a `struct` property
+prevents this because SwiftUI manages the value inside the property wrapper
+rather than in the view `struct`.
 When the value of this kind of property is changed,
 the view `body` is recomputed.
 
@@ -1159,17 +1160,17 @@ The `@State` view modifier intended for storing basic values
 with types like `Bool`, `Int`, `Double`, and `String`.
 
 An `@State` property can also store more complex types.
-However if it is used to store a class instance (a reference type)
+However if it is used to store a `class` instance (a reference type)
 and a property of the class is modified,
 the associated view `body` will not be recomputed.
 A new class instance must be created to trigger an update.
 
 Note that using a `struct` instead of a `class`
 in the scenario described above does work.
-The reason is that changing the value of a struct property
-creates a new instance of the struct.
+The reason is that changing the value of a `struct` property
+creates a new instance of the `struct`.
 However, this may not be desirable because
-it copies every property of the struct.
+it copies every property of the `struct`.
 
 Updates to `@State` properties should occur in the main queue.
 To do this from asynchronous code, wrap the update as follows:
@@ -5407,9 +5408,11 @@ TODO: What is this?
 
 ## View Modifiers
 
-A view modifier is a subtype of the {% aTargetBlank
+A view modifier modifies some aspect of the view on which it is applied.
+Each view modifier conforms to the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/viewmodifier",
 "ViewModifier" %} protocol.
+
 View modifiers do not modify the view on which they are called.
 They instead create and return a new view that either
 wraps the receiver (ex. `frame`) or
@@ -5418,6 +5421,12 @@ is a modified version of the receiver (ex. `foregroundColor`).
 In a way, view modifiers are like Svelte components that contain slots.
 They take a view to be "modified" and return a new view
 that typically contains the view passed to them.
+
+When a view modifier only modifies one aspect of a view,
+it is similar to a CSS property.
+For example, there is a `bold` view modifier that makes text bold.
+Custom view modifiers can modify multiple aspects of a view.
+In this case they are similar to a CSS class.
 
 For most view modifiers there is a method in the `View` protocol
 that makes it easy to apply the view modifier to a view.

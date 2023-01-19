@@ -3715,6 +3715,68 @@ node1.printDepthFirst()
 //     6
 ```
 
+## Attributes
+
+Swift provides many {% aTargetBlank
+"https://docs.swift.org/swift-book/ReferenceManual/Attributes.html",
+"attributes" %} that can be applied either to
+types or declarations (such as properties and functions).
+
+Attributes are applied by preceding a type definition or a declaration
+with `@` following by an attribute name.
+
+Attribute names typically begin with a lowercase letter.
+This distinguishes them from property wrappers (described next)
+whose names typically begin with an uppercase letter.
+
+Attributes can take arguments that passed by following the attribute name
+with an open parenthesis, a comma-separated argument list,
+and a close parenthesis.
+
+The only commonly used attributes are `main` and `objc`.
+In a SwiftUI app, the `main` attribute is applied to a `struct` that
+inherits from `App` to indicate that it is the entry point of the app.
+The `objc` attribute informs the compiler that a declaration
+can be accessed from Objective-C code.
+
+The type attributes supported in Swift 5.7 are:
+
+- `autoclosure`
+- `convention`
+- `escaping`
+- `Sendable`
+
+The declaration attributes supported in Swift 5.7 are:
+
+- `available`
+- `discardableResult`
+- `dynamicCallable`
+- `dynamicMemberLookup`
+- `frozen`
+- `GKInspectable`
+- `inlinable`
+- `main`
+- `nonobjc`
+- `NSApplicationMain`
+- `NSCopying`
+- `NSManaged`
+- `objc`
+- `objcMembers`
+- `propertyWrapper`
+- `resultBuilder`
+- `requires_stored_property_inits`
+- `UIApplicationMain`
+- `unchecked`
+- `usableFromInline`
+- `warn_unqualified_access`
+
+The `unknown` attribute can only be applied to a `case` in a `switch` statement.
+
+Currently Swift does not support defining custom attributes.
+However, adding support for this has been {% aTargetBlank
+"https://forums.swift.org/t/pitch-introduce-custom-attributes/21335",
+"proposed" %}.
+
 ## Property Wrappers
 
 A property wrapper implements behavior for the
@@ -3739,6 +3801,14 @@ the value of a number falls in a given range.
 A property wrapper can take arguments that affect its behavior.
 Continuing with the numeric range example,
 the arguments could be the bounds of the range.
+
+For a great video demonstrating how to define custom property wrappers,
+see {% aTargetBlank "https://www.youtube.com/watch?v=AXfSE2ET8c8&t=1092s",
+"Custom Swift Property Wrappers" %} from Stewart Lynch.
+
+Most property wrappers are defined using a `struct`
+in order to use value semantics.
+A `class` can be used when reference semantics are desired.
 
 The following code demonstrates defining two custom property wrappers:
 
@@ -3814,11 +3884,56 @@ struct ContentView: View {
 }
 ```
 
-A property wrapper can have a "projected value"
-which is an additional value that is obtained by
+A property wrapper can have a computed property named `projectedValue`
+that provides an additional value obtained by
 prefixing the property name with a dollar sign.
+This can have a different type than `wrappedValue`.
 For example, the provided `@State` property wrapper has a projected value
 that is used to obtain a binding to the wrapped value.
+
+While it might be seen as a misuse of projected values,
+we could defined a property wrapper for numbers
+where accessing the property with its name returns double the number
+and accessing it with a dollar sign returns triple the number.
+This would of course be confusing for readers of the code.
+
+The following code demonstrates an attempt to implement our own version
+of the `State` property wrapper. We can of course just use that,
+but this provides an interesting example of using {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/dynamicproperty",
+"DynamicProperty" %} and defining a `projectValue` computed property.
+
+Conforming to `DynamicProperty` makes it so any time the state of
+this property wrapper changes, all views that are watching it update.
+Unfortunately the view is not updated until
+something else triggers the `body` to be reevaluated.
+
+This property wrapper must be defined with a class instead of a struct
+so the `set` method in the `Binding` returned by `projectedValue`
+can modify the `value` property.
+
+```swift
+@propertyWrapper
+class MyState<T>: DynamicProperty {
+    private var value: T
+
+    var wrappedValue: T {
+        get { value }
+        set { value = newValue }
+    }
+
+    var projectedValue: Binding<T> {
+        Binding(
+            get: { self.value },
+            set: { self.value = $0 }
+        )
+    }
+
+    init(wrappedValue: T) {
+        value = wrappedValue
+    }
+}
+```
 
 ## KeyPaths
 
