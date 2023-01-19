@@ -12,9 +12,14 @@ is a unit testing and UI testing framework for Swift and SwiftUI.
 "XC" is an abbreviation for "Xcode".
 
 Unit tests are for testing non-UI logic such as data services and view models.
+They can also serve as a kind of API documentation.
 
 UI Tests are for testing user interface interactions like
 entering text in `TextField` views and tapping `Button` views.
+
+Every time a bug is discovered in an app, it is a good idea to
+add a test that fails due to the bug
+and passes when the bug is fixed.
 
 Each type of test requires creating a new target in the app.
 The steps for doing this are described in the following sections.
@@ -582,6 +587,11 @@ xcodebuild \
 Add `-quiet` to reduce the output and only show errors.
 
 If
+
+## Mocking
+
+One library to consider for adding mocking to XCTest tests is
+{% aTargetBlank "https://github.com/Brightify/Cuckoo", "Cuckoo" %}.
 
 ## GitHub Actions
 

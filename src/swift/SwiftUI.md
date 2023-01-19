@@ -3977,6 +3977,15 @@ for use in older devices?
 For example, if only a 3x image is provided,
 it will be scaled down for use in devices that prefer 2x and 1x images?
 
+One way to create a new "Image Set" is to:
+
+- Select `Assets.xcassets` in the Project Navigator.
+- Drag an image from the Finder into in the editor area.
+
+This creates a new "Image Set" whose name matches
+the name of the image file without its file extension.
+The image will appear in the 1x box and will be used for all devices.
+
 To supply a single image for a given Image Set in `Assets.xcassets`:
 
 - Select the image set.
@@ -9993,7 +10002,7 @@ in the `ToolbarItem` and `ToolbarItemGroup` views.
 Supported `placement` values include:
 
 - `.navigationBarLeading`: top, left-justified
-- `.navigationBarTrailing`: top, right-justified
+- `.navigationBarTrailing`: top, right-justified; default
 - `.bottomBar`: bottom, centered
 
 Other `placement` values seem to be unable to render multiple buttons.
