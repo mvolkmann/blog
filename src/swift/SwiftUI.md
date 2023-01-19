@@ -361,22 +361,37 @@ SVG images are not supported for app icons.
 To convert an SVG image to another format such as PNG, consider using
 {% aTargetBlank "https://cloudconvert.com/svg-to-png", "cloudconvert" %}.
 
-Avoid app icons with transparent backgrounds because the transparent areas
+Avoid app icons with transparent backgrounds because the transparent area
 will be rendered in black.
 
 {% aTargetBlank
 "https://apps.apple.com/nl/app/bakery-simple-icon-maker/id1575220747",
-"Bakery" %} from Jordi Bruin is a useful tool for creating app icons.
-It supports selecting a background color and an SF Symbol or emoji.
-The size and rotation of the image inside the icon can be adjusted.
-The tool can then generate an icon set containing various icon sizes
-ready for dragging in `Assets.xcassets`.
+"Bakery" %} from Jordi Bruin is an excellent macOS app for creating app icons.
+It supports specifying the following aspects of an icon:
+
+- background color with optional gradient (selected from a provided palette
+  or custom colors selected from the system color picker)
+- one or two layers where each displays an SF Symbol, emoji, or custom image
+- location of each image inside the icon (by dragging)
+- size of each image inside the icon (by adjusting a slider)
+- rotation of each image inside the icon (by adjusting a slider)
+- color of each SF Symbol used (selected from a provided palette
+  or custom colors selected from the system color picker)
+- thickness of each SF Symbol used (selected from a dropdown menu)
 
 Bakery displays the warning message
 "Note that these icons should only be used for development purposes, not
 for submissions to the App store due to the license on SF Symbols and Emoji."
 Fortunately any image, including SVG images, can be dragged onto the
-preview icon to use instead of an SF Symbol or emoji.
+preview icon to use in place of SF Symbols and emoji.
+
+Once an app icon has been designed, Bakery can generate an icon set
+containing various icon sizes ready for dragging in `Assets.xcassets`.
+This displays the icon on the screen outside the app with instructions
+to drag it onto the `Assets.xcassets` editor in Xcode.
+
+Additional features can be unlocked by upgrading to "Pastry Chef"
+which has four suggested prices, all of which unlock all the features.
 
 ## Views
 
