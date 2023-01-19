@@ -103,22 +103,6 @@ The group contains the following files:
   Initially this only contains `AccentColor` and `AppIcon`
   that both have no value.
 
-  To add an app icon, click `Assets.xcassets`, select `AppIcon`,
-  and drag an image into its editor.
-  When creating an iOS or watchOS app there are two options
-  for adding an app icon, "All Sizes" and "Single Size".
-  Select one of these in the Inspector on the right.
-  A single size icon must have the dimensions 1024 x 1024.
-  When "All Sizes" is selected, a different icon must be
-  dragged into the editor for many different sizes.
-
-  SVG images are not supported for app icons.
-  To convert an SVG image to another format such as PNG, consider using
-  {% aTargetBlank "https://cloudconvert.com/svg-to-png", "cloudconvert" %}.
-
-  Avoid app icons with transparent backgrounds because the transparent areas
-  will be rendered in black.
-
 - `Preview Content` group
 
   This contains the file `Preview Assets.xcassets`
@@ -356,6 +340,43 @@ Image(systemName: "doc.fill.badge.plus")
     .scaledToFit()
     .frame(width: 100, height: 100)
 ```
+
+## App Icons
+
+Each app can have an app icon that is uploaded into the `Assets.xcassets` file
+using the provided "Image Set" name "AppIcon"
+which initial has no associated image.
+
+To add an app icon, click `Assets.xcassets` in the Project Navigator,
+select `AppIcon`, and drag an image into its editor.
+
+When creating an iOS or watchOS app there are two options
+for adding an app icon, "All Sizes" and "Single Size".
+Select one of these in the Inspector on the right.
+A single size icon must have the dimensions 1024 x 1024.
+When "All Sizes" is selected, a different icon must be
+dragged into the editor for many different sizes.
+
+SVG images are not supported for app icons.
+To convert an SVG image to another format such as PNG, consider using
+{% aTargetBlank "https://cloudconvert.com/svg-to-png", "cloudconvert" %}.
+
+Avoid app icons with transparent backgrounds because the transparent areas
+will be rendered in black.
+
+{% aTargetBlank
+"https://apps.apple.com/nl/app/bakery-simple-icon-maker/id1575220747",
+"Bakery" %} from Jordi Bruin is a useful tool for creating app icons.
+It supports selecting a background color and an SF Symbol or emoji.
+The size and rotation of the image inside the icon can be adjusted.
+The tool can then generate an icon set containing various icon sizes
+ready for dragging in `Assets.xcassets`.
+
+Bakery displays the warning message
+"Note that these icons should only be used for development purposes, not
+for submissions to the App store due to the license on SF Symbols and Emoji."
+Fortunately any image, including SVG images, can be dragged onto the
+preview icon to use instead of an SF Symbol or emoji.
 
 ## Views
 
