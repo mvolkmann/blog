@@ -6,6 +6,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 <img alt="Swift logo" style="width: 30%"
   src="/blog/assets/swift-logo.png?v={{pkg.version}}"
   title="Swift logo">
@@ -3708,6 +3714,111 @@ node1.printDepthFirst()
 //   5
 //     6
 ```
+
+## Property Wrappers
+
+A property wrapper implements behavior for the
+`get` and `set` methods of all properties to which it is applied.
+It can change the value used when the property is accessed.
+For example, a property wrapper on a `String` property
+could change the case or trim whitespace.
+
+SwiftUI provides many property wrappers such as `@State` and `@Binding`.
+However, property wrappers can be used in any Swift code
+and are not only for use in SwiftUI.
+Custom property wrappers can be defined.
+
+A property wrapper is defined by applying the `@propertyWrapper` attribute
+to a `struct`, `class`, or `enum`
+that has a computed property named `wrappedValue`.
+It simplest case it changes the perceived value of a property
+by applying a transformation to the actual value.
+For example, it could guarantee that
+the value of a number falls in a given range.
+
+A property wrapper can take arguments that affect its behavior.
+Continuing with the numeric range example,
+the arguments could be the bounds of the range.
+
+The following code demonstrates defining two custom property wrappers:
+
+```swift
+@propertyWrapper
+struct Uppercase {
+    private var text: String
+
+    var wrappedValue: String {
+        get { text.uppercased() }
+        set { text = newValue }
+    }
+
+    init(wrappedValue: String) {
+        text = wrappedValue
+    }
+}
+
+// The property type can be any type that conforms to
+// Numeric and Comparable which includes Int and Double.
+@propertyWrapper
+struct InRange<T: Numeric & Comparable> {
+    private var value: T
+    private var minimum: T
+    private var maximum: T
+
+    var wrappedValue: T {
+        get { min(max(minimum, value), maximum) }
+        set { value = newValue }
+    }
+
+    init(wrappedValue: T, minimum: T = 0, maximum: T = 10) {
+        value = wrappedValue
+        self.minimum = minimum
+        self.maximum = maximum
+    }
+}
+```
+
+The following code demonstrates using the
+custom property wrappers defined above in a SwiftUI app.
+Note how multiple property wrappers can be applied to the same property,
+in this case `@State` and `@InRange`.
+
+<img alt="Swift Property Wrappers" style="width: 30%"
+  src="/blog/assets/Swift-Property-Wrappers.png?v={{pkg.version}}"
+  title="Swift Property Wrappers">
+
+```swift
+struct ContentView: View {
+    @Uppercase private var name = "world"
+    @State @InRange(minimum: 10, maximum: 21) var score = 0
+
+    var body: some View {
+        VStack {
+            Text("Hello, \(name)!").padding(.bottom)
+
+            VStack {
+                Text("Score")
+                HStack {
+                    Button("-") { score -= 1 }
+                        .buttonStyle(.bordered)
+                    Text("\(score)")
+                    Button("+") { score += 1 }
+                        .buttonStyle(.bordered)
+                }
+            }
+            .padding()
+            .border(.blue)
+        }
+        .padding()
+    }
+}
+```
+
+A property wrapper can have a "projected value"
+which is an additional value that is obtained by
+prefixing the property name with a dollar sign.
+For example, the provided `@State` property wrapper has a projected value
+that is used to obtain a binding to the wrapped value.
 
 ## KeyPaths
 

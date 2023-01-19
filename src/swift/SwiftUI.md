@@ -1124,7 +1124,10 @@ Card(
 Swift property wrappers attach logic to the properties
 of classes, structs, and enums.
 
-SwiftUI supports the following property wrappers:
+SwiftUI supports the property wrappers described below
+and custom property wrappers can be defined.
+See [Property Wrappers](/blog/swift/swift-lang#property-wrappers)
+in the Swift blog page.
 
 ### @State
 
