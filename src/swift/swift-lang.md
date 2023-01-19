@@ -1136,6 +1136,30 @@ print("item \(item) costs \(price * (1 + taxRate))") // single string
 print("item", item, "costs", price * (1 + taxRate)) // alternative
 ```
 
+There are two approaches that can be used to included double quotes in a string.
+The first is to escape them by preceding them with a backslash.
+The second is to use a {% aTargetBlank
+"https://www.hackingwithswift.com/articles/162/how-to-use-raw-strings-in-swift",
+"raw string" %} which surrounds a string literal with `#` characters.
+
+**Raw strings** differ in the following ways from normal strings:
+
+- A double quote character doesn't terminate the string
+  unless it is followed by a `#` character.
+- A backslash is treated as a literal character
+  rather than as an escape character.
+- String interpolation requires the syntax `\#(expression)`
+  rather than `\(expression)`.
+
+The following code demonstrates both approaches:
+
+```swift
+{% raw %}
+let s1 = "She said \"goodbye for now\" and turned to leave."
+let s2 = #"She said "goodbye for now" and turned to leave."#
+{% endraw %}
+```
+
 A new string can be created by concatenating existing strings
 using the `+` operator.
 
@@ -3801,6 +3825,9 @@ the value of a number falls in a given range.
 A property wrapper can take arguments that affect its behavior.
 Continuing with the numeric range example,
 the arguments could be the bounds of the range.
+
+The functionality of a property wrapper is triggered when
+a property to which it is applied is initialized, accessed, or modified.
 
 For a great video demonstrating how to define custom property wrappers,
 see {% aTargetBlank "https://www.youtube.com/watch?v=AXfSE2ET8c8&t=1092s",
