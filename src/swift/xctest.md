@@ -586,8 +586,6 @@ xcodebuild \
 
 Add `-quiet` to reduce the output and only show errors.
 
-If
-
 ## Mocking
 
 One library to consider for adding mocking to XCTest tests is
