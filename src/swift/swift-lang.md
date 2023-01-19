@@ -3803,8 +3803,8 @@ However, adding support for this has been {% aTargetBlank
 
 ## Property Wrappers
 
-A property wrapper implements behavior for the
-`get` and `set` methods of all properties to which it is applied.
+A property wrapper implements behavior for the `get` and `set` methods
+on all the properties and variables to which it is applied.
 It can change the value used when the property is accessed.
 For example, a property wrapper on a `String` property
 could change the case or trim whitespace.
@@ -3812,11 +3812,20 @@ could change the case or trim whitespace.
 SwiftUI provides many property wrappers such as `@State` and `@Binding`.
 However, property wrappers can be used in any Swift code
 and are not only for use in SwiftUI.
-Custom property wrappers can be defined.
+Custom property wrappers can also be defined.
 
-A property wrapper is defined by applying the `@propertyWrapper` attribute
-to a `struct`, `class`, or `enum`
-that has a computed property named `wrappedValue`.
+A property wrapper is defined by applying the {% aTargetBlank
+"https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID621",
+"propertyWrapper" %} attribute to a
+`struct` (most common), `class`, or `enum` (least common).
+
+The type must define a property named `wrappedValue`.
+Typically this is a computed property.
+
+The compiler synthesizes storage for instances of the property wrapper,
+giving them names that begin with an underscore and are followed by
+the name of the property or variable to which the property wrapper was applied.
+
 It simplest case it changes the perceived value of a property
 by applying a transformation to the actual value.
 For example, it could guarantee that
@@ -3911,6 +3920,14 @@ struct ContentView: View {
 }
 ```
 
+There are two ways to pass the initial value of a property
+to its property wrapper.
+
+```swift
+@Uppercase private var name = "world" // preferred; used above
+@Uppercase(wrappedValue: "world") private var name // more verbose
+```
+
 A property wrapper can have a computed property named `projectedValue`
 that provides an additional value obtained by
 prefixing the property name with a dollar sign.
@@ -3918,11 +3935,37 @@ This can have a different type than `wrappedValue`.
 For example, the provided `@State` property wrapper has a projected value
 that is used to obtain a binding to the wrapped value.
 
+The compiler synthesizes an identifier for the projected value
+by prefixing the name of the wrapped property with a dollar sign.
+For example, a `$` is placed before the name of a property
+that is wrapped with the `@State` property value
+to obtain a `Binding` to the property.
+
 While it might be seen as a misuse of projected values,
 we could defined a property wrapper for numbers
 where accessing the property with its name returns double the number
 and accessing it with a dollar sign returns triple the number.
 This would of course be confusing for readers of the code.
+
+The following code implements the property wrapper described above:
+
+```swift
+@propertyWrapper
+struct DoubleTriple {
+    private var value: Int
+
+    var wrappedValue: Int {
+        get { value * 2 }
+        set { value = newValue }
+    }
+
+    var projectedValue: Int { value * 3 }
+
+    init(wrappedValue: Int) {
+        value = wrappedValue
+    }
+}
+```
 
 The following code demonstrates an attempt to implement our own version
 of the `State` property wrapper. We can of course just use that,
