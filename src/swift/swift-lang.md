@@ -2639,10 +2639,26 @@ Structs cannot inherit from another struct or class,
 but they can conform to any number of protocols which
 are similar to interfaces in other languages.
 
-Properties are declared with the `let` (immutable) and
+Instance properties are declared with the `let` (immutable) and
 `var` (mutable) keywords, just like variables.
 Mutable properties can only be modified if the instance is also mutable
 (assigned to a `var`).
+
+Static properties are declared in the same way as instance properties,
+but they are preceded by the `static` keyword.
+When a property is declared elsewhere with a type of this struct,
+type inference can be used to refer to static properties.
+For example:
+
+```swift
+struct ColorCode {
+    static let red = "F00"
+    static let green = "0F0"
+    static let blue = "00F"
+}
+...
+let colorCode: ColorCode = .blue
+```
 
 Changing a mutable struct property creates a new instance of the struct
 rather than modifying the single property of the existing instance.
@@ -2809,7 +2825,11 @@ class Game: ObservableObject {
 ### Methods
 
 Methods are defined with the `func` keyword.
-They can use the `self` keyword to refer the instance on which they are invoked.
+Instance methods can use the `self` keyword
+to refer the instance on which they are invoked.
+Static methods are declared by adding
+the `static` keyword before the `func` keyword.
+
 Definitions of `struct` methods that modify properties of the receiver must
 begin with the `mutating` keyword to explicitly indicate that they do this.
 
