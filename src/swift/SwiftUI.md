@@ -4828,7 +4828,8 @@ The supported argument values are:
 - `.uppercase`: changes all characters to uppercase
 - `none`: makes no changes
 
-The `Text` view automatically recognizes and honors Markdown syntax.
+Several views such as `Text`, `Label`, and `Button`
+automatically recognize and honor Markdown syntax.
 For example:
 
 ```swift
@@ -7706,8 +7707,8 @@ struct ContentView: View {
 ```
 
 For basic styling such as making parts of a string bold or italic,
-it is not necessary to use `AttributedString` because
-the `Text` view supports a subset of Markdown syntax.
+it is not necessary to use `AttributedString` because views like
+`Text`, `Label`, and `Button` view supports a subset of Markdown syntax.
 However, this only works when a literal `String` is passed.
 To pass a variable of type `String` that contains Markdown syntax,
 use `Text(.init(myVariable))`.
