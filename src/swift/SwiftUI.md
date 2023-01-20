@@ -1167,10 +1167,11 @@ in the Swift blog page.
 
 ### @State
 
-Views often get data from view model objects.
-They can also have associated mutable data by applying the
-{% aTargetBlank "https://developer.apple.com/documentation/swiftui/state",
-"@State" %} property wrapper to a property.
+Views often get data from view model objects,
+especially when the data is used by multiple views.
+When data is only used by a single view, the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/state", "@State" %}
+property wrapper can be applied to a property of the view.
 This essentially creates a constant pointer inside a view `struct`
 to non-constant data held in the property wrapper.
 It allows a view instance to maintain state.
@@ -1189,10 +1190,10 @@ the view `body` is recomputed.
 
 This is somewhat like the `useState` hook in React.
 
-Properties declared with `@State` should specify `private`
+Properties declared with `@State` should include the `private`
 access control keyword because the data is only used by that view.
 
-The `@State` view modifier intended for storing basic values
+The `@State` view modifier is intended for storing basic values
 with types like `Bool`, `Int`, `Double`, and `String`.
 
 An `@State` property can also store more complex types.
@@ -1201,24 +1202,17 @@ and a property of the class is modified,
 the associated view `body` will not be recomputed.
 A new class instance must be created to trigger an update.
 
-Note that using a `struct` instead of a `class`
+Using a `struct` instead of a `class`
 in the scenario described above does work.
 The reason is that changing the value of a `struct` property
 creates a new instance of the `struct`.
-However, this may not be desirable because
-it copies every property of the `struct`.
+However, this may not be desirable because it makes a copy of the `struct`.
 
 Updates to `@State` properties should occur in the main queue.
 To do this from asynchronous code, wrap the update as follows:
 
 ```swift
 Task { @MainActor in
-    myState = newValue
-}
-
-// or ...
-
-DispatchQueue.main.async {
     myState = newValue
 }
 ```
@@ -1354,6 +1348,33 @@ define the following extension:
 // This assumes that no two Strings in an Array will have the same value.
 extension String: Identifiable {
     public var id: String { self }
+}
+```
+
+One way to cause a view that uses a binding to a `@State` property
+to animate when the state changes is to apply the `animation method
+to the binding.
+
+The following code demonstrates using a `Toggle` view
+to trigger a `Text` view to fade in an out.
+
+```swift
+struct ContentView: View {
+    @State private var showingWelcome = false
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Toggle(
+                "Toggle",
+                isOn: $showingWelcome.animation(.easeInOut(duration: 1))
+            )
+            if showingWelcome {
+                Text("Hello World")
+            }
+            Spacer()
+        }
+        .padding()
+    }
 }
 ```
 
