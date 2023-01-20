@@ -5440,7 +5440,8 @@ struct ContentView: View {
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/toggle",
 "Toggle" %} view enables toggling between on and off states.
-By default it renders as a switch with a circular thumb.
+By default it renders as a switch with a circular thumb
+with a label on the leading side.
 
 The default switch background color is
 the `AccentColor` set in `Assets.xcassets`.
@@ -5454,6 +5455,8 @@ When it is on, the background color is a lighter shade of the accent color.
 The `Toggle` initializer takes a `String` to render
 (either before the switch or inside the button)
 and a binding to a `Bool` value.
+
+To omit the label, apply the `labelsHidden` view modifier.
 
 ```swift
 Toggle("Hungry", isOn: $hungry).tint(.red)
@@ -7162,6 +7165,34 @@ struct ContentView: View {
                 .iOS { $0.padding().border(.red) }
             Text("macOS")
                 .macOS { $0.padding().border(.blue) }
+        }
+    }
+}
+```
+
+### Conditionally Applying View Modifiers
+
+To enable conditionally applying view modifiers,
+define the following extension to the `View` protocol:
+
+```swift
+import SwiftUI
+
+extension View {
+    /// Supports conditional view modifiers.
+    /// For example, .if(price > 100) { view in view.background(.orange) }
+    /// The concrete type of Content can be any type
+    /// that conforms to the View protocol.
+    @ViewBuilder
+    func `if`<Content: View>(
+        _ condition: Bool,
+        transform: (Self) -> Content
+    ) -> some View {
+        // This cannot be replaced by a ternary expression.
+        if condition {
+            transform(self)
+        } else {
+            self
         }
     }
 }
