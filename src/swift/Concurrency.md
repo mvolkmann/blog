@@ -1506,6 +1506,15 @@ To use the Thread Sanitizer in Xcode:
 - See warnings about data races in the "Issue Navigator"
   and on specific lines of code in code editor panels.
 
-```
+## Swift Async Algorithms
 
-```
+The Apple open source package {% aTargetBlank
+"https://github.com/apple/swift-async-algorithms", "swift-async-algorithms" %}
+provides types and functions for operating on asynchronous sequences
+that provide values over time.
+Examples include `debounce` and `throttle`.
+
+In many cases this package can be used in place of the {% aTargetBlank
+"https://developer.apple.com/documentation/combine", "Combine" %} framework.
+
+To use this, add `AsyncAlgorithms` as a package dependency.

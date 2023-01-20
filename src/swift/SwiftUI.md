@@ -6835,9 +6835,23 @@ The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/rotationeffect(_:anchor:)",
 "rotationEffect" %} view modifier rotates any view by
 an angle that is specified in degrees or radians.
+
 By default the view is rotated about its center,
-but this can be changed by specifying the `anchor` argument.
-It does not affect the layout of other views.
+but this can be changed by specifying the `anchor` argument
+which has the type {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/unitpoint", "UnitPoint" %}.
+A `UnitPoint` represents a pair of x and y values
+where each is a `CGFloat` value between zero and one.
+It also defines the following static values for commonly used points:
+`zero` (origin; same as `topLeading`?),
+`topLeading`, `top`, `topTrailing`,
+`leading`, `center`, `trailing`,
+`bottomLeading`, `bottom`, and `bottomTrailing`.
+`UnitPoint` values can also be used to specify a screen location
+in a device-independent way.
+
+Applying the `rotationEffect` view modifier to a view
+does not affect the layout of other views.
 
 For example:
 
