@@ -5697,7 +5697,7 @@ Benefits include:
 
   This is used to summit and manage apps on the App Store.
 
-- access to TestFlight
+- access to [TestFlight](/blog/swift/TestFlight)
 
   This enables up to 10,000 users to download and test
   beta versions of your apps.

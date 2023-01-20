@@ -1,9 +1,8 @@
---
+---
 eleventyNavigation:
-key: TestFlight
-parent: Swift
+  key: TestFlight
+  parent: Swift
 layout: topic-layout.njk
-
 ---
 
 ## Overview
