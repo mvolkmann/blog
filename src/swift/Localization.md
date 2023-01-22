@@ -166,6 +166,33 @@ the environment view modifier.
 The same issue exists with retrieving localized images from an "Image Set".
 TODO: Is this a bug in SwiftUI?
 
+## Localizing Strings
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/nslocalizedstring",
+"macro" %} returns a localized string.
+To simplify use of this, define the following `String` extension:
+
+```swift
+import Foundation
+
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+}
+```
+
+To use this, add references to this new computed property to any string.
+For example:
+
+```swift
+print("Hello".localized)
+
+let greeting = "Hello"
+print(greeting.localized)
+```
+
 ## Localized String Arguments
 
 Localized strings can specify arguments accepted and
