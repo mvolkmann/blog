@@ -17,7 +17,7 @@ These include `Text`, `Label`, and `Button`.
 
 ## Specifying Supported Languages
 
-1. Select the top entry in the File Navigator.
+1. Select the top entry in the Project Navigator.
 1. In the left nav of the project editor, select the project.
 1. Select the "Info" tab.
 1. In the "Localization" section there will already be an entry for "English".
@@ -34,22 +34,22 @@ To create one:
 1. Click the "Next" button.
 1. Keep the default directory and the default file name "Localizable.strings".
 1. Click the "Create" button.
-1. Select the "Localizable.strings" file in the File Navigator.
+1. Select the "Localizable.strings" file in the Project Navigator.
 1. Open the Inspector panel on the right.
 1. Under "Localization", click the "Localize..." button.
 1. In the dialog that appears, click the "Localize" button.
-1. Once again, select the "Localizable.strings" file in the File Navigator.
+1. Once again, select the "Localizable.strings" file in the Project Navigator.
 1. In the Inspector panel on the right under "Localization",
    check all the language checkboxes.
    This will add one entry under "Localizable.strings"
-   in the File Navigator for each selected language.
+   in the Project Navigator for each selected language.
 
 ## Populating the "Strings" File
 
-1. In the File Navigator, expand the "Localizable.strings" entry
+1. In the Project Navigator, expand the "Localizable.strings" entry
    to expose an entry for each supported language.
 1. For each supported language
-   1. Select its entry in the File Navigator.
+   1. Select its entry in the Project Navigator.
    1. For each string to be translated
       1. Enter an assignment statement of the form `"key" = "translation";`
          (note the semicolon at the end).
@@ -222,18 +222,18 @@ To define how specific words should be pluralized based on a count:
    "Localizable.stringsdict".
 1. Click the "Create" button.
 1. To support multiple languages:
-   1. Select the "Localizable.stringsdict" file in the File Navigator.
+   1. Select the "Localizable.stringsdict" file in the Project Navigator.
    1. Open the Inspector panel on the right.
    1. Under "Localization", click the "Localize..." button.
    1. In the dialog that appears, click the "Localize" button.
    1. Once again, select the "Localizable.stringsdict" file
-      in the File Navigator.
+      in the Project Navigator.
    1. In the Inspector panel on the right under "Localization",
       check all the language checkboxes.
       This will add one entry under "Localizable.stringsdict"
-      in the File Navigator for each selected language.
+      in the Project Navigator for each selected language.
 1. For each supported language:
-   1. Select its entry in the File Navigator.
+   1. Select its entry in the Project Navigator.
    1. Add rows with keys, types, and values similar to what is
       shown in the screenshot below for each phrase to be pluralized.
       A row and all its descendant rows can be copied
