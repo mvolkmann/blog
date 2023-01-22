@@ -52,6 +52,10 @@ Key facts about Swift include the following:
 
 ## Resources
 
+- {% aTargetBlank "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj1j7TH39v8AhXokWoFHetHB5MQFnoECB0QAQ&url=https%3A%2F%2Fapps.apple.com%2Fus%2Fapp%2Fapple-developer%2Fid640199958&usg=AOvVaw1XTEKhdrdFXQO_UAzQj_N3", "Apple Developer" %} app in the macOS and iOS App Stores
+  This is a large collection of developer resources from Apple
+  include all WWDC videos.
+
 - Swift home page - {% aTargetBlank "https://swift.org", "https://swift.org" %}
 
 - {% aTargetBlank "https://docs.swift.org/swift-book/",
