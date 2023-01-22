@@ -508,6 +508,27 @@ adds a static `==` method that returns `true` if all the properties are equal.
 There are more context-sensitive Refactor menu options
 that are less frequently used.
 
+### Sorting
+
+By default Xcode does not have the ability to sort selected lines.
+
+WARNING! The following does not work in Xcode 14!
+
+The ability to sort selected lines can be added
+using the extension {% aTargetBlank "", "xcsort" %}.
+
+Once installed:
+
+- Open the System Settings app.
+- In the left nav, click "Privacy & Security".
+- Scroll to the bottom and click "Extensions".
+- Click "Xcode Source Editor".
+- Check the checkbox for "xcsort".
+- Click the "Done" button.
+
+Back in Xcode, select a range of lines to sort and select
+Editor ... xcsort ... Sort Lines.
+
 ## Console
 
 The bottom section is not visible by default.

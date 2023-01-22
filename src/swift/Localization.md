@@ -49,10 +49,13 @@ To create one:
 1. In the Project Navigator, expand the "Localizable.strings" entry
    to expose an entry for each supported language.
 1. For each supported language
+
    1. Select its entry in the Project Navigator.
    1. For each string to be translated
+
       1. Enter an assignment statement of the form `"key" = "translation";`
-         (note the semicolon at the end).
+
+         **Note the semicolon at the end.**
 
 For example, the key could be "greeting",
 the English translation could be "Hello",
@@ -452,6 +455,36 @@ Image("landmark-" + locale)
     .aspectRatio(contentMode: .fit)
     .frame(height: 150)
 ```
+
+## Device Testing
+
+To change the default language on an iOS device:
+
+1. Open the Settings app.
+1. Tap "General".
+1. Tap "Language & Region".
+1. To add a language to the list of "PREFERRED LANGUAGES":
+   1. Tap "Add Language..."
+   1. Tap a language in the list.
+   1. Tap a button to either use that language now or continue using the current language.
+1. To change the current language, drag it to the top of the list
+   using the drag handles on the trailing edge of the list rows.
+1. To delete a language, swipe its row to the left,
+   tap the "Delete" button, and tap the "Continue" button.
+
+It can be important to also select a specific region.
+For example, an iOS device in the United States will typically have
+the language set to "English" and the region set to "United States".
+If the language is changed to "Français",
+but the region remains set to "United States"
+then dates will not be formatted in the expected way for French.
+Changing the region to "France" corrects this.
+
+To also change the default region on an iOS device:
+
+1. Tap "Region"
+1. Tap the name of a region.
+1. Tap the "Change to {region-name}" button.
 
 ## Exporting and Importing Localizations
 
