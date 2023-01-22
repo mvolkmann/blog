@@ -48,8 +48,8 @@ See the WWDC 2022 video {% aTargetBlank
       the upper-right corner of the developer.apple.com web page.
    1. Find WeatherKit and double-click it.
 
-It may be necessary to wait around 30 minutes
-for the WeatherKit service to be enabled for your app.
+**It may be necessary to wait around 30 minutes
+for the WeatherKit service to be enabled for your app.**
 
 ## Sample Code
 

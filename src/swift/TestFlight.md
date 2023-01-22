@@ -13,6 +13,19 @@ that does not require a full app review.
 New versions can be deployed without a followup review.
 Each version remains available for download for 90 days.
 
+After all issues identified by testers have been resolved,
+you are ready to submit the app for a full review
+before it is added to the App Store.
+TODO: Add documentation on the steps to submit to the App Store.
+
+It is possible to get an app featured by Apple on the App Store.
+See {% aTargetBlank "https://developer.apple.com/app-store/getting-featured/",
+"Getting Featured on the App Store" %}.
+In order to be featured you must tell Apple about your app
+by completing the form at {% aTargetBlank
+"https://developer.apple.com/contact/app-store/promote/",
+"Tell us about your app or game" %}.
+
 ## Steps
 
 ### Part 1 - Creating an Identifier
@@ -20,8 +33,7 @@ Each version remains available for download for 90 days.
 1. Browse {% aTargetBlank "https://developer.apple.com",
    "developer.apple.com" %} and sign in.
 1. In the top nav bar, click "Account".
-1. Click the large "Certificates, Identifiers & Profiles" button.
-1. In the left nav, click "Identifiers".
+1. In the "Certificates, Identifiers & Profiles" section, click "Identifiers".
 1. To create a new identifier, click the "+" after "Identifiers".
 1. Select "App IDs".
 1. Click the "Continue" button.
@@ -52,7 +64,6 @@ Each version remains available for download for 90 days.
 1. Enter a SKU with no spaces that is unique among your apps.
 1. Choose between limited (restricted set of test users)
    and full access (any user can access).
-   "Limited Access" is disabled. Why?
 1. Click the "Create" button.
 1. If a spinner is displayed for a long time, refresh the browser.
 1. The "App Store" tab is selected by default and all the fields
@@ -62,7 +73,7 @@ Each version remains available for download for 90 days.
 ### Part 3 - Creating a Build
 
 1. Open the app in Xcode.
-1. Select the top entry in the Navigator.
+1. Select the top entry in the Project Navigator.
 1. Select the first entry under TARGETS.
 1. Click the General tab.
 1. Set "Version" to "0.1.0" for the initial build
