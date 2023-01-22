@@ -390,14 +390,15 @@ formatter.locale = Locale(identifier: "en") // English
 print(formatter.string(from: date)) // 1/3/23, 1:36 PM
 
 formatter.locale = Locale(identifier: "fr") // French
-print(formatter.string(from: date)) //                 Text("apple \(0)")
-                Text("apple \(1)")
-                Text("apple \(2)")
-                Text("apple \(3)")
-                Text("apple \(4)")
-                let appleCount = 7
-                Text("apple \(appleCount)")
-3/01/2023 13:36
+print(formatter.string(from: date)) // 3/01/2023 13:36
+
+Text("apple \(0)")
+Text("apple \(1)")
+Text("apple \(2)")
+Text("apple \(3)")
+Text("apple \(4)")
+let appleCount = 7
+Text("apple \(appleCount)")
 
 formatter.setLocalizedDateFormatFromTemplate("dd MMMM")
 formatter.locale = Locale(identifier: "en") // English
@@ -406,6 +407,10 @@ print(formatter.string(from: date)) // 03 January
 formatter.locale = Locale(identifier: "fr") // French
 print(formatter.string(from: date)) // 03 janvier
 ```
+
+For a summary of patterns for formatting dates and times see {% aTargetBlank
+"https://www.datetimeformatter.com/how-to-format-date-time-in-swift/",
+"How To Format Date Time In Swift" %}.
 
 ## Images
 
