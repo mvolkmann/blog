@@ -888,6 +888,17 @@ do {
 }
 ```
 
+Converting an instance of `Data` to a UTF8 `String` is a common task.
+Consider implementing the following extension to simplify the code.
+
+```swift
+extension Data {
+    var utf8: String {
+        String(data: self, encoding: .utf8)
+    }
+}
+```
+
 ## Primitive Types
 
 In Swift, values of these types are objects with properties and methods.
