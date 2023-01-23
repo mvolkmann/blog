@@ -4661,8 +4661,18 @@ do {
 }
 ```
 
-Another way to read files is to get them from the `Bundle`.
-For example:
+Another way to read files is to get them from the app `Bundle`.
+To add files to the app `Bundle`:
+
+- Select the top entry in the Project Navigator.
+- Select the main target.
+- Select the "Build Phases" tab.
+- Expand the "Copy Bundle Resources" section.
+- Click the "+" button.
+- Select the file to be added.
+- Click the "Add" button.
+
+To read a file from the app `Bundle`:
 
 ```swift
 let filePath = Bundle.module.path(
@@ -4970,9 +4980,41 @@ extension Bundle {
 }
 ```
 
-The `decode` method defined above can be used to decode a JSON file that
-is bundled in an app to any type that conforms to the `Decodable` protocol.
-For example, if we have the type `Dog` that is `Decodable`,
+Another way to read files is to get them from the app `Bundle`.
+To add files to the app `Bundle`:
+
+- Select the top entry in the Project Navigator.
+- Select the main target.
+- Select the "Build Phases" tab.
+- Expand the "Copy Bundle Resources" section.
+- Click the "+" button.
+- Select the file to be added.
+- Click the "Add" button.
+
+Here is an example JSON file named `dogs.json`:
+
+```json
+[
+  {"name": "Maisey", "breed": "Treeing Walker Coonhound"},
+  {"name": "Ramsay", "breed": "Native American Indian Dog"},
+  {"name": "Oscar", "breed": "German Shorthaired Pointer"},
+  {"name": "Comet", "breed": "Whippet"}
+]
+```
+
+Here is a type that represents a single dog:
+
+```swift
+struct Dog: Codable {
+    let name: String
+    let breed: String
+}
+```
+
+The `decode` method defined in the `Bundle` extension above
+can be used to decode a JSON file that is bundled in an app
+to any type that conforms to the `Decodable` protocol.
+For example, given the type `Dog` above that is `Decodable`,
 we can decode an array of them from a JSON file as follows:
 
 ```swift
