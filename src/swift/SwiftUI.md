@@ -2513,7 +2513,7 @@ struct ContentView: View {
                     )
                     Picker("Shirt Size", selection: $shirtSize) {
                         ForEach(ShirtSize.allCases, id: \.self) { size in
-                            Text("\(size.rawValue)").tag(size)
+                            Text(size.rawValue).tag(size)
                         }
                     }
                     HStack {
