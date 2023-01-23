@@ -4915,6 +4915,70 @@ This is inspired by the Stewart Lynch video {% aTargetBlank
 "https://www.youtube.com/watch?v=8D8pb3ycdqw&list=RDCMUCOWdR4sFkmolWkU2fg669Gg&start_radio=1",
 "Persisting to JSON or MarkDown in SwiftUI" %}.
 
+The following extension from Paul Hudson at {% aTargetBlank
+"https://www.hackingwithswift.com/example-code/system/how-to-decode-json-from-your-app-bundle-the-easy-way",
+"How to decode JSON from you app bundle the easy way" %}
+simplifies decoding UTF-8 data:
+
+```swift
+import Foundation
+
+extension Bundle {
+    func decode<T: Decodable>(
+        _ type: T.Type,
+        from file: String,
+        dateDecodingStrategy: JSONDecoder
+            .DateDecodingStrategy = .deferredToDate,
+        keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys
+    ) -> T {
+        guard let url = url(forResource: file, withExtension: nil) else {
+            fatalError("Failed to locate \(file) in bundle.")
+        }
+
+        guard let data = try? Data(contentsOf: url) else {
+            fatalError("Failed to load \(file) from bundle.")
+        }
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = dateDecodingStrategy
+        decoder.keyDecodingStrategy = keyDecodingStrategy
+
+        do {
+            return try decoder.decode(T.self, from: data)
+        } catch let DecodingError.keyNotFound(key, context) {
+            fatalError(
+                "Failed to decode \(file) from bundle due to missing key '\(key.stringValue)' not found – \(context.debugDescription)"
+            )
+        } catch let DecodingError.typeMismatch(_, context) {
+            fatalError(
+                "Failed to decode \(file) from bundle due to type mismatch – \(context.debugDescription)"
+            )
+        } catch let DecodingError.valueNotFound(type, context) {
+            fatalError(
+                "Failed to decode \(file) from bundle due to missing \(type) value – \(context.debugDescription)"
+            )
+        } catch DecodingError.dataCorrupted(_) {
+            fatalError(
+                "Failed to decode \(file) from bundle because it appears to be invalid JSON"
+            )
+        } catch {
+            fatalError(
+                "Failed to decode \(file) from bundle: \(error.localizedDescription)"
+            )
+        }
+    }
+}
+```
+
+The `decode` method defined above can be used to decode a JSON file that
+is bundled in an app to any type that conforms to the `Decodable` protocol.
+For example, if we have the type `Dog` that is `Decodable`,
+we can decode an array of them from a JSON file as follows:
+
+```swift
+let dogs = Bundle.main.decode([Dog].self, from: "dogs.json")
+```
+
 ## CSV
 
 Comma Separated Value (CSV) files are text files where each line contains values separated by commas.
