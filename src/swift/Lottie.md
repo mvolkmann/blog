@@ -97,6 +97,8 @@ struct LottieView: UIViewRepresentable {
     }
 
     func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: .zero)
+
         animationView.contentMode = contentMode
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.heightAnchor.constraint(equalTo: view.heightAnchor)
@@ -106,7 +108,6 @@ struct LottieView: UIViewRepresentable {
         animationView.loopMode = loopMode
         animationView.animationSpeed = speed
 
-        let view = UIView(frame: .zero)
         view.addSubview(animationView)
         return view
     }
