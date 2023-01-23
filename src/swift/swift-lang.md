@@ -2195,6 +2195,30 @@ let (b, s, i, d) = myTuple
 
 Swift only supports destructuring of tuples, not arrays or objects.
 
+To sort an array of objects based on multiple properties,
+use tuples. For example:
+
+```swift
+struct Person {
+    let firstName: String
+    let lastName: String
+    let country: String
+}
+
+let people = [
+    Person(firstName: "Mark", lastName: "Volkmann", country: "USA"),
+    Person(firstName: "Tami", lastName: "Volkmann", country: "USA"),
+    Person(firstName: "Stewart", lastName: "Lynch", country: "Canada"),
+    Person(firstName: "Paul", lastName: "Hudson", country: "England"),
+]
+
+// Sorts on country first, then lastName, then firstName.
+let sortedPeople = people.sorted {
+    ($0.country, $0.lastName, $0.firstName) <
+        ($1.country, $1.lastName, $1.firstName)
+}
+```
+
 ## Variables
 
 Mutable variables are declared with the `var` keyword.

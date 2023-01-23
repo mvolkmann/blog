@@ -57,17 +57,6 @@ Add each animation JSON file to the project with the following steps:
 - In the dialog that appears, select the file to be added.
 - Click the "Add" button.
 
-Add each animation JSON file to the app `Bundle`
-with the following steps:
-
-- Select the top entry in the Project Navigator.
-- Select the main target.
-- Select the "Build Phases" tab.
-- Expand the "Copy Bundle Resources" section.
-- Click the "+" button.
-- Select a file to be added.
-- Click the "Add" button.
-
 ## Stewart Lynch Solution
 
 There is a fair amount of complexity in setting this up.
