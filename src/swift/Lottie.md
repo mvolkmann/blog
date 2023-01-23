@@ -50,6 +50,13 @@ This is easier than clicking the "Download" button at the top of the dialog
 because that places the file in a "workspace" associated with your account
 rather than directly downloading the file.
 
+Add each animation JSON file to the project with the following steps:
+
+- Move the JSON file into a directory within the project.
+- Select File ... Add Files to "{project-name}"...
+- In the dialog that appears, select the file to be added.
+- Click the "Add" button.
+
 Add each animation JSON file to the app `Bundle`
 with the following steps:
 
@@ -98,6 +105,7 @@ struct LottieView: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: .zero)
+        view.addSubview(animationView)
 
         animationView.contentMode = contentMode
         animationView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,7 +116,6 @@ struct LottieView: UIViewRepresentable {
         animationView.loopMode = loopMode
         animationView.animationSpeed = speed
 
-        view.addSubview(animationView)
         return view
     }
 
@@ -119,3 +126,34 @@ struct LottieView: UIViewRepresentable {
     }
 }
 ```
+
+To display a Lottie animation, write code like the following:
+
+```swift
+struct ContentView: View {
+    @State private var playConfetti = false
+
+    var body: some View {
+        ZStack {
+            LottieView(
+                name: "confetti", // required file name without .json
+                speed: 2, // defaults to 1
+                contentMode: .scaleAspectFill, // defaults to .scaleAspectFit
+                // `play` defaults to true to play immediately just one time.
+                play: $playConfetti
+            )
+            // If UI views that support user interaction will be
+            // behind this animation, disable hit testing.
+            // .allowsHitTesting(false)
+
+            Button("Confetti") {
+                playConfetti = true
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .ignoresSafeArea() // so confetti can cover the entire screen
+    }
+}
+```
+
+This works in the Preview area, in the Simulator, and on real devices.
