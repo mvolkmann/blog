@@ -4925,10 +4925,12 @@ This is inspired by the Stewart Lynch video {% aTargetBlank
 "https://www.youtube.com/watch?v=8D8pb3ycdqw&list=RDCMUCOWdR4sFkmolWkU2fg669Gg&start_radio=1",
 "Persisting to JSON or MarkDown in SwiftUI" %}.
 
+### Bundle Decoding
+
 The following extension from Paul Hudson at {% aTargetBlank
 "https://www.hackingwithswift.com/example-code/system/how-to-decode-json-from-your-app-bundle-the-easy-way",
 "How to decode JSON from you app bundle the easy way" %}
-simplifies decoding UTF-8 data:
+simplifies decoding UTF-8 data from a file in the app `Bundle`:
 
 ```swift
 import Foundation
@@ -4980,7 +4982,6 @@ extension Bundle {
 }
 ```
 
-Another way to read files is to get them from the app `Bundle`.
 To add files to the app `Bundle`:
 
 - Select the top entry in the Project Navigator.
@@ -5020,6 +5021,16 @@ we can decode an array of them from a JSON file as follows:
 ```swift
 let dogs = Bundle.main.decode([Dog].self, from: "dogs.json")
 ```
+
+### Mock Data
+
+{% aTargetBlank "https://mockaroo.com", "Mockaroo" %} is a great site
+for generating test data.
+It is great for generating data in JSON, CSV, XML, SQL, and other formats.
+A common use is to generate a JSON array of objects
+that have specified property names and types.
+
+Using this service requires signing up for a free account.
 
 ## CSV
 
