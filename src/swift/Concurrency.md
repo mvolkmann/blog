@@ -94,8 +94,9 @@ This class can be accessed from Objective-C instead of C.
 
 The {% aTargetBlank "https://developer.apple.com/documentation/DISPATCH",
 "Dispatch" %} framework (aka Grand Central Dispatch)
-is specific to Apple operating systems.
-It offers a higher level API than NSThreads and pthreads.
+provides a higher level API than NSThreads and pthreads.
+It was originally specific to Apple operating systems,
+but since Swift has been open sourced it is now cross-platform.
 
 While GCD has many features, the most common use is to
 run code that updates the UI on the main thread.
