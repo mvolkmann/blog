@@ -21,13 +21,16 @@ and some uses of the delegate pattern.
 
 ## Resources
 
-See the Apple documentation on {% aTargetBlank
-"https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
-"Concurrency" %}.
+- Apple documentation on {% aTargetBlank
+  "https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html",
+  "Concurrency" %}.
 
-In addition, the book {% aTargetBlank "https://swiftasyncbook.com",
-"Modern Concurrency on Apple Platforms" %} by Andrés Ibañez Kautsch
-is an excellent resource!
+- book {% aTargetBlank "https://swiftasyncbook.com",
+  "Modern Concurrency on Apple Platforms" %} by Andrés Ibañez Kautsch
+
+- iOS Conf SG 2022 talk from Daniel H. Steinberg,
+  {% aTargetBlank "https://www.youtube.com/watch?v=FEqmYi-FaB8",
+  "Willing Suspension of Disbelief" %}.
 
 ## Issues
 
