@@ -34,11 +34,14 @@ To install Lottie in an Xcode project:
 
 Many Lottie animations are available at {% aTargetBlank
 "https://lottiefiles.com", "LottieFiles" %}.
-This requires creating a free account.
+Downloading them requires creating a free account.
 
-There are many free animations and also some that require a paid account.
+Many of the animations are free, but some require a paid account.
 To see the free animations, select Discover ... Free Ready-to-use Animations.
+
 A search input in the upper-right enables filtering the list of animations.
+For example, enter "progress" to see a large number of animations
+that can be used in place of a SwiftUI `ProgressView`.
 
 To download an animation, click it.
 This opens a dialog that can offer customization options.

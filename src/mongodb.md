@@ -233,6 +233,11 @@ db.dropDatabase()
 show dbs
 ```
 
+## Joins
+
+The `$lookup` operator can be used to join collections in a query.
+I have yet to find a good example of using this.
+
 ## MongoDB Compass
 
 TODO: Add more detail.
