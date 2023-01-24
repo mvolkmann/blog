@@ -6,11 +6,11 @@ layout: topic-layout.njk
 
 ## Overview
 
-This page will contain a collection of tips related to PDF files.
+This page contains a collection of tips related to PDF files.
 
 ## Extracting Images
 
-One way to extract images from a PDF file is to use
+One way to extract images from a PDF file is to use the browser-based tool
 {% aTargetBlank "https://pdfcandy.com", "PDFCandy" %}.
 The free tier has a limit of one download per hour.
 
