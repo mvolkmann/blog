@@ -124,3 +124,52 @@ To use StoreKit in an app:
 1. Change the value of "StoreKit Configuration"
    from "None" to "Configuration.storekit".
 1. Click the "Close" button.
+
+## Testing from Xcode
+
+See the YouTube video {% aTargetBlank
+"https://www.youtube.com/watch?v=o_YMsmmkfFc&feature=youtu.be",
+"How to easily test InApp Purchases in an iOS app" %} with Josh Holtz.
+
+1. Select File ... New ... File...
+1. Select "StoreKit Configuration File" and click the "Next" button.
+1. Enter a name like "Test". The file will have an extension of `.storekit`.
+1. If you have already described the products in AppStoreConnect,
+   check the "Sync this file with an app in App Store Connect" checkbox.
+1. Click the "Next" button.
+1. Select the top project directory that contains the main `.swift` file.
+1. Click the "Create" button.
+1. In the special editor that opens for this file,
+   for each product to be offered by the app:
+
+   1. Click the "+" in the lower-left and select a kind of product to add
+      such as "Add Non-Consumable In-App Purchase".
+   1. Enter a "Reference Name" that describes the product.
+   1. Enter a product ID that is unique among all of your apps.
+      It could be the app bundle ID followed by a product-specific identifier.
+   1. Enter a price.
+   1. Optionally select "On" for "Family Sharing".
+   1. Expand the "Localizations" section.
+   1. For each language to be supported,
+      enter a "Display Name" and "Description" for the product.
+
+To tell the Simulator to use this new `.storekit` configuration file:
+
+1. Click the dropdown to the left of the device dropdown
+   at the top of the Xcode window.
+1. Select "Edit Scheme..."
+1. In the left nav, select "Run".
+1. Select the "Options" tab.
+1. Change the value selected in the "StoreKit Configuration" dropdown
+   to the name of the new `.storekit` configuration file.
+1. Click the "Close" button.
+
+To test an in-app purchase:
+
+1. Run the app in the Simulator and make an in-app purchase.
+1. In Xcode, select Debug ... StoreKit ... Manage Transactions...
+   to see a history of all the in-app purchase transactions.
+1. Right-click a transaction to get a menu with the options
+   "Approve Transaction", "Decline Transaction", "Refund Purchase",
+   "Resolve Issue", "Request Price Increase Consent",
+   and "Delete Transaction".
