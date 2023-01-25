@@ -255,6 +255,10 @@ in order to download test builds of the app and provide feedback.
 
 1. Return to the App Store Connect web page and the "App Store" tab.
 1. Click the large button for the app.
+   It seems that having the app in TestFlight
+   is not enough to cause its icon to be displayed here.
+   The app may need to be submitted to the App Store
+   in order to display its icon on this web page.
 1. In the left nav, click "App Review".
 1. If the "REVIEW STATUS" column shows "Rejected",
    click the "Resolve" link at the end of the row.
