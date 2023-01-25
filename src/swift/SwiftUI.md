@@ -1227,22 +1227,20 @@ to implement a counter view:
 
 ```swift
 struct Counter: View {
-    @State private var count = 0
+    @State private var count: Int
 
-    init() {} // starts with default count value
-
-    init(start: Int) {
-        _count = State(initialValue: start)
+    init(start: Int = 0) {
+        // _count = State(initialValue: start) // old way
+        count = start // new way
     }
 
-    // a computed property
     var body: some View {
         // HStack is a container view that arranges it children horizontally.
         HStack {
             Button("-") { count -= 1 }
             Text("\(count)")
             Button("+") { count += 1 }
-        }.font(.system(size: 24))
+        }.font(.largeTitle)
     }
 }
 
@@ -1950,7 +1948,7 @@ Here are the container views that are provided by SwiftUI.
 #### HStack
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swiftui/hstack",
-"HStack" %} view is a container that lays out its child views vertically.
+"HStack" %} view is a container that lays out its child views horizontally.
 
 The child views are centered vertically by default.
 To change this, add the `alignment` attribute which can be set to
